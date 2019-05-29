@@ -22,13 +22,13 @@ public class Initializer {
 	 * @param args
 	 */
 	public static void main(String[] args) {
-		try {
-			UIManager.setLookAndFeel(new org.pushingpixels.substance.api.skin.SubstanceTwilightLookAndFeel());
+		/*try {
+//			UIManager.setLookAndFeel(new org.pushingpixels.substance.api.skin.SubstanceTwilightLookAndFeel());
 			JFrame.setDefaultLookAndFeelDecorated(true);
 		} catch (UnsupportedLookAndFeelException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
-		}
+		}*/
 
 		EventQueue.invokeLater(new Runnable() {
 			@Override
