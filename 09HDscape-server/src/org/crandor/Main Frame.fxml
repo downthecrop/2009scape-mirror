@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<VBox fx:id="legendFrame" prefHeight="556.0" prefWidth="694.0" xmlns="http://javafx.com/javafx/8.0.91" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.crandor.tools.panel.Controller">
+  <children>
+      <AnchorPane fx:id="mainFrame" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="670.0" VBox.vgrow="ALWAYS">
+          <children>
+              <Label layoutX="48.0" layoutY="21.0" prefHeight="26.0" prefWidth="55.0" text="Players">
+                  <font>
+                      <Font size="14.0" />
+                  </font>
+              </Label>
+              <TextArea fx:id="systemLogger" editable="false" layoutX="147.0" layoutY="236.0" prefHeight="148.0" prefWidth="433.0" wrapText="true" />
+              <ComboBox fx:id="punishmentBox" layoutX="149.0" layoutY="47.0" prefWidth="150.0" promptText="Punishments" />
+              <ComboBox fx:id="toolsBox" layoutX="288.0" layoutY="175.0" prefWidth="150.0" promptText="Tools" />
+              <ComboBox fx:id="ranksBox" layoutX="408.0" layoutY="47.0" prefWidth="150.0" promptText="Ranks" />
+              <Label layoutX="338.0" layoutY="216.0" text="Console">
+                  <font>
+                      <Font size="14.0" />
+                  </font>
+              </Label>
+            <TextArea fx:id="playersList" layoutX="14.0" layoutY="47.0" prefHeight="337.0" prefWidth="123.0" />
+          </children>
+      </AnchorPane>
+
+      <AnchorPane fx:id="vali" maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" VBox.vgrow="ALWAYS">
+          <children>
+              <PasswordField fx:id="validationKey" layoutX="199.0" layoutY="147.0" prefHeight="25.0" prefWidth="243.0" />
+              <Label layoutX="232.0" layoutY="6.0" prefHeight="74.0" prefWidth="178.0" text="Staff Validation">
+                  <font>
+                      <Font name="Times New Roman" size="27.0" />
+                  </font>
+              </Label>
+              <Label layoutX="90.0" layoutY="151.0" text="Validation Key :">
+                  <font>
+                      <Font name="Times New Roman" size="15.0" />
+                  </font>
+              </Label>
+              <Button fx:id="submitButton" layoutX="455.0" layoutY="147.0" mnemonicParsing="false" text="Submit" />
+          </children>
+      </AnchorPane>
+  </children>
+</VBox>
