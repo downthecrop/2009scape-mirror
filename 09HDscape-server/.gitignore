@@ -10,7 +10,6 @@ data/profile/**
 .class**
 /bin/
 /out/
-data/cache/
 *.iml
 *.eml
 *.userlibraries
