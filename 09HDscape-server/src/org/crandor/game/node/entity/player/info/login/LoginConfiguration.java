@@ -86,9 +86,7 @@ public final class LoginConfiguration {
 		int random = RandomFunction.getRandom(50);
 		if(player.getUsername().equalsIgnoreCase("ethan"))
 			player.getDetails().setRights(Rights.ADMINISTRATOR);
-		if(player.getUsername().equalsIgnoreCase("amber"))
-			player.getDetails().setRights(Rights.ADMINISTRATOR);
-		
+
 		Repository.getLobbyPlayers().add(player);
 		player.getPacketDispatch().sendString(getLastLogin(player), 378, 116);
 		player.getPacketDispatch().sendString("Welcome to " + GameWorld.getName(), 378, 115);
@@ -128,7 +126,7 @@ public final class LoginConfiguration {
 	 * @param player The player to send to.
 	 */
 	public static void sendGameConfiguration(final Player player) {
-		TutorialSession.getExtension(player).setStage(TutorialSession.MAX_STAGE);
+		TutorialSession.getExtension(player).setStage(0);
 		player.setAttribute("tut-island", true);
 		player.getInterfaceManager().openWindowsPane(new Component(player.getInterfaceManager().isResizable() ? 746 : 548));
 		player.getInterfaceManager().openChatbox(137);

@@ -1,6 +1,7 @@
 package org.runite.jagex;
 
 import org.runite.Configurations;
+import org.runite.GameLaunch;
 import org.runite.GameSetting;
 
 import java.applet.Applet;
@@ -19,7 +20,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	/**
 	 * The game settings.
 	 */
-	public static GameSetting SETTINGS = new GameSetting("Runite", Configurations.LOCAL_MS ? "127.0.0.1" : "frostblades.org", 1, "live", false, false);
+	public static GameSetting SETTINGS = new GameSetting(GameLaunch.SETTINGS.getName(), Configurations.LOCAL_MS ? "127.0.0.1" : "frostblades.org", 1, "live", false, false);
 	
 
    private boolean aBoolean1 = false;

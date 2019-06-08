@@ -2,8 +2,15 @@ package plugin.quest.learningtheropes;
 
 import org.crandor.game.content.activity.ActivityPlugin;
 import org.crandor.game.content.activity.CutscenePlugin;
+import org.crandor.game.content.global.tutorial.TutorialSession;
+import org.crandor.game.content.global.tutorial.TutorialStage;
+import org.crandor.game.content.skill.Skills;
+import org.crandor.game.node.entity.combat.ImpactHandler;
+import org.crandor.game.node.entity.combat.equipment.FireType;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
+import org.crandor.game.node.entity.player.link.audio.Audio;
+import org.crandor.game.node.entity.state.EntityState;
 import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.map.Direction;
@@ -11,6 +18,10 @@ import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.build.DynamicRegion;
 import org.crandor.game.world.map.path.Path;
 import org.crandor.game.world.map.path.Pathfinder;
+import org.crandor.game.world.map.zone.Zone;
+import org.crandor.game.world.map.zone.ZoneBuilder;
+import org.crandor.game.world.update.flag.context.Animation;
+import org.crandor.game.world.update.flag.context.Graphics;
 import org.crandor.net.packet.PacketRepository;
 import org.crandor.net.packet.context.CameraContext;
 import org.crandor.net.packet.out.CameraViewPacket;
@@ -28,9 +39,33 @@ public class LTRDragonFightCutscene extends CutscenePlugin {
             NPC.create(7943, Location.create(2524, 5015, 0), Direction.SOUTH),
             /** sir vant */
             NPC.create(7938, Location.create(2524, 5005, 0), Direction.NORTH),
-           };
+            /** goblin*/
+            NPC.create(7964, Location.create(2522, 5000, 0), Direction.NORTH),
+    };
+
+    private static final Animation SIR_VANT_BLOCK = Animation.create(9941);
+    private static final Animation SIR_VANT_STAB = Animation.create(9938);
+    private static final Animation SIR_VANT_SLASH = Animation.create(9939);
+    private static final Animation SIR_VANT_BLOCK_FIRE = Animation.create(9942);
+    private static final Animation SIR_VANT_BIG_SLASH = Animation.create(9943);
+    private static final Animation DRAGON_ATTACK = Animation.create(9922);
+    private static final Animation DRAGON_BLOCK = Animation.create(9923);
+    private static final Animation DRAGON_FIRE_BREATH = Animation.create(9919);
+    private static final Graphics DRAGON_FIRE_BREATH_GFX = new Graphics(1, 64);
+    private static final Animation DRAGON_SLASHED = Animation.create(9921);
+    private static final Animation DRAGON_STANDING_UNCUT = Animation.create(9914);
+    private static final Animation DRAGON_STANDING_CUT = Animation.create(9915);
+    private static final Animation DRAGON_STANDING_WOBBLING = Animation.create(9916);
+    private static final Animation DRAGON_STANDING_CUTTING = Animation.create(9917);
+    private static final Animation DRAGON_FLYING = Animation.create(9913);
+    private static final Animation GOBLIN_FALLING = Animation.create(9965);
+    private static final Animation GOBLIN_PLUNDERING = Animation.create(9963);
+    private static final Animation GOBLIN_HIT_ON_HEAD= Animation.create(9964);
+
+
 
     private final FightPulse fightPulse = new FightPulse();
+
 
     public LTRDragonFightCutscene() {
         this(null);
@@ -63,13 +98,13 @@ public class LTRDragonFightCutscene extends CutscenePlugin {
 
     @Override
     public void open() {
+        ZoneBuilder.configure(CellarMapZone.get());
         setNpcs();
         GameWorld.submit(fightPulse);
         player.lock();
         player.getLocks().lockMovement(1000000);
         camera(31, 12, -45, 0, 300, 95);
     }
-
 
 
     public final class FightPulse extends Pulse {
@@ -91,6 +126,12 @@ public class LTRDragonFightCutscene extends CutscenePlugin {
             switch (counter++) {
                 case 1:
                     System.out.println("Fight begin");
+                    getSirVant().getSkills().setStaticLevel(Skills.HITPOINTS, 99);
+                    getSirVant().getSkills().setLifepoints(99);
+                    getDragon().getSkills().setStaticLevel(Skills.HITPOINTS, 99);
+                    getDragon().getSkills().setLifepoints(99);
+                    System.out.println("getGoblin().getLocation().getLocalX() = " + getGoblin().getLocation().getLocalX());
+                    System.out.println("getGoblin().getLocation().getLocalY() = " + getGoblin().getLocation().getLocalY());
                     break;
 
                 case 4:
@@ -104,13 +145,108 @@ public class LTRDragonFightCutscene extends CutscenePlugin {
                     break;
 
                 case 13:
-                    camera(32, 10, -3, 5, 450, 100);
+                    camera(32, 10, -4, 5, 450, 100);
                     break;
 
-                case 20:
+                case 15:
+                    getDragon().animate(DRAGON_ATTACK);//attack
+                    getSirVant().animate(SIR_VANT_BLOCK);//block
+                    getSirVant().getImpactHandler().manualHit(getDragon(), 12, ImpactHandler.HitsplatType.NORMAL);
+                    break;
+
+                case 17:
+                    getDragon().animate(DRAGON_BLOCK);
+                    getSirVant().animate(SIR_VANT_STAB);
+                    getDragon().getImpactHandler().manualHit(getSirVant(), 11, ImpactHandler.HitsplatType.NORMAL);
+                    break;
+
+                case 19:
+                    getDragon().animate(DRAGON_BLOCK);
+                    getSirVant().animate(SIR_VANT_SLASH);
+                    getDragon().getImpactHandler().manualHit(getSirVant(), 8, ImpactHandler.HitsplatType.NORMAL);
+                    break;
+
+                case 21:
+                    getDragon().animate(DRAGON_FIRE_BREATH);
+                    getDragon().graphics(DRAGON_FIRE_BREATH_GFX);
+                    getSirVant().animate(SIR_VANT_BLOCK_FIRE);
+                    getSirVant().getImpactHandler().manualHit(getDragon(), 18, ImpactHandler.HitsplatType.NORMAL);
+                    break;
+
+                case 23:
+                    getSirVant().sendChat("Look out behind you!");
+                    break;
+
+                case 25:
+                    camera(32, 13, -5, -5, 300, 100);
+                    getGoblin().animate(GOBLIN_FALLING);
+                    break;
+                case 26:
+                    camera(31, 9, -3, -3, 250, 75);
+                    break;
+                case 27:
+                    path = Pathfinder.find(getGoblin(), getGoblin().getLocation().transform(2, -3, 0), true, Pathfinder.DUMB, (a, b, c) -> 0);
+                    path.walk(getGoblin());
+                    break;
+
+                case 30:
+                    getGoblin().sendChat("What can I steal in here?");
+                    getGoblin().animate(GOBLIN_PLUNDERING);
+                    break;
+
+                case 34:
+                    camera(32, 10, -3, 5, 500, 100);
+                    break;
+
+                case 35:
+                    getDragon().animate(DRAGON_FLYING);
+                    break;
+
+                case 39:
+                    getDragon().animate(DRAGON_STANDING_UNCUT);
+                    break;
+                case 40:
+                    getDragon().animate(DRAGON_STANDING_CUT);
+                    getSirVant().animate(SIR_VANT_BIG_SLASH);
+                    getDragon().getImpactHandler().manualHit(getSirVant(), 30, ImpactHandler.HitsplatType.NORMAL);
+                    break;
+                case 42:
+                    getDragon().animate(DRAGON_STANDING_WOBBLING);
+                    break;
+
+                case 45:
+                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.SHAKE, 4, 4, 1200, 4, 4));
+                    camera(31, 9, -3, -3, 250, 45);
+                    break;
+                case 46:
+                    getGoblin().face(player);
+                    break;
+                case 47:
+                    getGoblin().animate(GOBLIN_HIT_ON_HEAD);
+                    break;
+                case 50:
+                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.SHAKE, 3, 2, 2, 2, 2));
+                    getGoblin().getStateManager().set(EntityState.STUNNED, 4);
+                    player.face(getGoblin());
+                    break;
+                case 53:
+                    PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.RESET, 5, 2, 450, 100, 0));
+                    break;
+                case 54:
+                    camera(28, 5, 2, 6, 450, 100);
+                    break;
+                case 55:
+                    path = Pathfinder.find(getDragon(), getDragon().getLocation().transform(0, 9, 0), true, Pathfinder.DUMB, (a, b, c) -> 0);
+                    path.walk(getDragon());
+                    break;
+                case 60:
                     System.out.println("Fight end");
                     LTRDragonFightCutscene.this.stop(true);
+                    TutorialStage.load(player, 3, false);
+                    CellarMapZone.get().create(player);
                     return true;
+                case 61:
+                    break;
             }
             return !player.isActive();
         }
@@ -171,6 +307,7 @@ public class LTRDragonFightCutscene extends CutscenePlugin {
     public void stop(boolean fade) {
         super.stop(false);
         player.teleport(Location.create(2524, 5004, 0));
+        PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.RESET, 0, 0, 0, 0, 0));
     }
 
     /**
@@ -204,10 +341,19 @@ public class LTRDragonFightCutscene extends CutscenePlugin {
         return null;
     }
 
+    private void walk(NPC npc, final Location location) {
+        Pathfinder.find(npc, location, true, Pathfinder.DUMB).walk(npc);
+    }
+
     public NPC getDragon() {
         return getNpc(7943);
     }
     public NPC getSirVant() {
         return getNpc(7938);
     }
+    public NPC getGoblin() {
+        return getNpc(7964);
+    }
+
+
 }

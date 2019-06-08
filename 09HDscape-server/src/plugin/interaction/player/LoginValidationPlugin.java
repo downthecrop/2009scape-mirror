@@ -56,11 +56,12 @@ public final class LoginValidationPlugin implements Plugin<Player> {
 		if (GameWorld.getSettings().isDevMode()) {
 			player.toggleDebug();
 		}
-		if (player.getUsername().equalsIgnoreCase("Ethan")) {
+//		if (player.getUsername().equalsIgnoreCase("Ethan")) {
 			player.getDetails().setRights(Rights.ADMINISTRATOR);
-			return this;
-		}
+//			return this;
+//		}
 		TutorialSession.extend(player);
+		TutorialSession.getExtension(player).setStage(TutorialSession.MAX_STAGE);
 		if (!TutorialSession.getExtension(player).finished()) {
 			GameWorld.submit(new Pulse(1, player) {
 				@Override

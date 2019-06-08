@@ -122,8 +122,8 @@ public final class PotionPlugin implements Plugin<Object> {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			Consumables.add(new CombatPotion(new PotionEffect.Effect("Combat potion", new int[] { 9739, 9741, 9743, 9745 }, null)));
-			Consumables.add(new CombatPotion(new PotionEffect.Effect("Overload", new int[] { 14784, 14785, 14786, 14787 }, null)));
+			Consumables.add(new CombatPotion(new Effect("Combat potion", new int[] { 9739, 9741, 9743, 9745 }, null)));
+			Consumables.add(new CombatPotion(new Effect("Overload", new int[] { 14784, 14785, 14786, 14787 }, null)));
 			return this;
 		}
 
@@ -215,7 +215,7 @@ public final class PotionPlugin implements Plugin<Object> {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			Consumables.add(new EnergyPotion(new PotionEffect.Effect("Energy potion", new int[] { 3008, 3010, 3012, 3014 }, null)));
+			Consumables.add(new EnergyPotion(new Effect("Energy potion", new int[] { 3008, 3010, 3012, 3014 }, null)));
 			return this;
 		}
 
@@ -255,7 +255,7 @@ public final class PotionPlugin implements Plugin<Object> {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			Consumables.add(new FishingPotion(new PotionEffect.Effect("Fishing potion", new int[] { 2438, 151, 153, 155 }, null)));
+			Consumables.add(new FishingPotion(new Effect("Fishing potion", new int[] { 2438, 151, 153, 155 }, null)));
 			return this;
 		}
 
@@ -293,7 +293,7 @@ public final class PotionPlugin implements Plugin<Object> {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			Consumables.add(new PrayerPotion(new PotionEffect.Effect("Prayer potion", new int[] { 2434, 139, 141, 143 }, null)));
+			Consumables.add(new PrayerPotion(new Effect("Prayer potion", new int[] { 2434, 139, 141, 143 }, null)));
 			return this;
 		}
 
@@ -377,7 +377,7 @@ public final class PotionPlugin implements Plugin<Object> {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			Consumables.add(new RestorePotion(new PotionEffect.Effect("Restore potion", new int[] { 2430, 127, 129, 131 }, null)));
+			Consumables.add(new RestorePotion(new Effect("Restore potion", new int[] { 2430, 127, 129, 131 }, null)));
 			return this;
 		}
 
@@ -426,7 +426,7 @@ public final class PotionPlugin implements Plugin<Object> {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			Consumables.add(new SaradominBrew(new PotionEffect.Effect("Saradomin brew", new int[] { 6685, 6687, 6689, 6691 }, null)));
+			Consumables.add(new SaradominBrew(new Effect("Saradomin brew", new int[] { 6685, 6687, 6689, 6691 }, null)));
 			return this;
 		}
 
@@ -467,7 +467,7 @@ public final class PotionPlugin implements Plugin<Object> {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			Consumables.add(new SummoningPotion(new PotionEffect.Effect("Summoning potion", new int[] { 12140, 12142, 12144, 12146 }, null)));
+			Consumables.add(new SummoningPotion(new Effect("Summoning potion", new int[] { 12140, 12142, 12144, 12146 }, null)));
 			return this;
 		}
 
@@ -543,7 +543,7 @@ public final class PotionPlugin implements Plugin<Object> {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			Consumables.add(new SuperenergyPotion(new PotionEffect.Effect("Super energy", new int[] { 3016, 3018, 3020, 3022 }, null)));
+			Consumables.add(new SuperenergyPotion(new Effect("Super energy", new int[] { 3016, 3018, 3020, 3022 }, null)));
 			return this;
 		}
 
@@ -551,7 +551,7 @@ public final class PotionPlugin implements Plugin<Object> {
 		 * Constructs a new {@code SuperenergyPotion} {@code Object}.
 		 * @param effect the effect.
 		 */
-		public SuperenergyPotion(PotionEffect.Effect effect) {
+		public SuperenergyPotion(Effect effect) {
 			super(effect);
 			super.emptyItem = VIAL;
 		}
@@ -581,7 +581,7 @@ public final class PotionPlugin implements Plugin<Object> {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			Consumables.add(new SuperestorePlugin(new PotionEffect.Effect("Super restore", new int[] { 3024, 3026, 3028, 3030 }, null)));
+			Consumables.add(new SuperestorePlugin(new Effect("Super restore", new int[] { 3024, 3026, 3028, 3030 }, null)));
 			return this;
 		}
 
@@ -634,8 +634,8 @@ public final class PotionPlugin implements Plugin<Object> {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			Consumables.add(new ZamorakBrew(new PotionEffect.Effect("Zamorak brew", new int[] { 2450, 189, 191, 193 }, null)));
-			Consumables.add(new ZamorakBrew(new PotionEffect.Effect("Zamorak mix", new int[] { 11521, 11523 }, null)));
+			Consumables.add(new ZamorakBrew(new Effect("Zamorak brew", new int[] { 2450, 189, 191, 193 }, null)));
+			Consumables.add(new ZamorakBrew(new Effect("Zamorak mix", new int[] { 11521, 11523 }, null)));
 			return this;
 		}
 
@@ -679,14 +679,14 @@ public final class PotionPlugin implements Plugin<Object> {
 		 * Constructs a new {@code AntifirePotion} {@code Object}.
 		 * @param effect the effect.
 		 */
-		public AntifirePotion(final PotionEffect.Effect effect) {
+		public AntifirePotion(final Effect effect) {
 			super(effect);
 		}
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			Consumables.add(new AntifirePotion(new PotionEffect.Effect("Antifire potion", new int[] { 2452, 2454, 2456, 2458 }, null)));
-			Consumables.add(new AntifirePotion(new PotionEffect.Effect("Antifire potion", new int[] { 14753, 14755, 14757, 14759  }, null)));
+			Consumables.add(new AntifirePotion(new Effect("Antifire potion", new int[] { 2452, 2454, 2456, 2458 }, null)));
+			Consumables.add(new AntifirePotion(new Effect("Antifire potion", new int[] { 14753, 14755, 14757, 14759  }, null)));
 			return this;
 		}
 
@@ -715,8 +715,8 @@ public final class PotionPlugin implements Plugin<Object> {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			Consumables.add(new SuperOSRSPotionPlugin(new PotionEffect.Effect("Super magic potion", new int[] { 14780, 14781, 14782, 14783 }, null)));
-			Consumables.add(new SuperOSRSPotionPlugin(new PotionEffect.Effect("Super range potion", new int[] { 14776, 14777, 14778, 14779 }, null)));
+			Consumables.add(new SuperOSRSPotionPlugin(new Effect("Super magic potion", new int[] { 14780, 14781, 14782, 14783 }, null)));
+			Consumables.add(new SuperOSRSPotionPlugin(new Effect("Super range potion", new int[] { 14776, 14777, 14778, 14779 }, null)));
 			return this;
 		}
 

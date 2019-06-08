@@ -174,7 +174,7 @@ public class URLParser {
 	 */
 	public Map<String, List<String>> getData() {
 		if (!finished) {
-			throw new IllegalStateException("Parser has not finished!");
+			throw new IllegalStateException("Reader has not finished!");
 		}
 		return data;
 	}

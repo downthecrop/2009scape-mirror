@@ -182,7 +182,7 @@ public final class GardenObjectsPlugin extends OptionHandler {
      * @param object the object.
      * @param herbDef the herbdef.
      */
-    private void handleElementalGarden(final Player player, GameObject object, final GardenObjectsPlugin.HerbDefinition herbDef) {
+    private void handleElementalGarden(final Player player, GameObject object, final HerbDefinition herbDef) {
 	player.lock();
 	player.addExtension(LogoutTask.class, new LocationLogoutTask(99, herbDef.getRespawn()));
 	player.animate(ANIMATION);
@@ -563,7 +563,7 @@ public final class GardenObjectsPlugin extends OptionHandler {
 			Item item = event.getUsedItem();
 			Item with = event.getBaseItem();
 			Player player = event.getPlayer();
-			GardenObjectsPlugin.SeasonDefinitions def = GardenObjectsPlugin.SeasonDefinitions.forFruitId(item.getId());
+			SeasonDefinitions def = SeasonDefinitions.forFruitId(item.getId());
 			if (item == null || with == null || player == null || def == null)
 				return true;
 			int amt = player.getInventory().getAmount(item);
@@ -1213,7 +1213,7 @@ public final class GardenObjectsPlugin extends OptionHandler {
 		public double getExperience() {
 			double total = 0;
 			for (int juiceId : JUICES) {
-				GardenObjectsPlugin.SeasonDefinitions def = GardenObjectsPlugin.SeasonDefinitions.forJuiceId(juiceId);
+				SeasonDefinitions def = SeasonDefinitions.forJuiceId(juiceId);
 				if (def == null) {
 					continue;
 				}
@@ -1273,7 +1273,7 @@ public final class GardenObjectsPlugin extends OptionHandler {
 
 		private int dialogueId;
 
-		private GardenObjectsPlugin.SeasonDefinitions definition;
+		private SeasonDefinitions definition;
 
 		/**
 		 * Constructs a new {@code SqirkMakingDialogue.java} {@code Object}.
@@ -1329,7 +1329,7 @@ public final class GardenObjectsPlugin extends OptionHandler {
 				interpreter.sendDialogues(player, FacialExpression.ANNOYED, "I should get an empty beer glass to", "hold the juice before I squeeze the fruit.");
 				break;
 			case 1:
-				definition = GardenObjectsPlugin.SeasonDefinitions.forFruitId((int) args[1]);
+				definition = SeasonDefinitions.forFruitId((int) args[1]);
 				if (definition == null)
 					end();
 				interpreter.sendDialogues(player, FacialExpression.ANNOYED, "I think I should wait till I have", "enough fruits to make a full glass.");

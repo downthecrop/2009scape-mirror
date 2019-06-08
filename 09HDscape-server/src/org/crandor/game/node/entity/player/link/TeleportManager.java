@@ -363,7 +363,7 @@ public class TeleportManager {
 						    stop();
 						    return;
 						}
-						if (player.getSavedData().getGlobalData().getHomeTeleportDelay() > System.currentTimeMillis() && !player.isDonator()) {
+						/*if (player.getSavedData().getGlobalData().getHomeTeleportDelay() > System.currentTimeMillis() && !player.isDonator()) {
 						    long milliseconds = player.getSavedData().getGlobalData().getHomeTeleportDelay() - System.currentTimeMillis();
 						    int minutes = (int) Math.round(milliseconds / 120000);
 						    if (minutes > 15) {
@@ -376,7 +376,7 @@ public class TeleportManager {
 						    	stop();
 						    	return;
 						    }
-						}
+						}*/
 						super.start();
 					}
 

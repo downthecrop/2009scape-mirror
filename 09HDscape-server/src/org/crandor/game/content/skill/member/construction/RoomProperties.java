@@ -376,12 +376,12 @@ public enum RoomProperties {
 	/**
 	 * Study.
 	 */
-	Menagerie(30000, 37, 0, 7, 2, Room.LAND,
+/*	Menagerie(30000, 37, 0, 7, 2, Room.LAND,
 			new Hotspot(BuildHotspot.PET_HOUSE, 1, 1),
 			new Hotspot(BuildHotspot.PET_FEEDER, 5, 1),
 			new Hotspot(BuildHotspot.OBELISK, 5, 5),
 			new Hotspot(BuildHotspot.HABITAT_2, 1, 5),
-			new Hotspot(BuildHotspot.HABITAT_1, 6, 6)),
+			new Hotspot(BuildHotspot.HABITAT_1, 6, 6)),*/
 
 	/**
 	 * Study.
@@ -514,13 +514,18 @@ public enum RoomProperties {
 			new Hotspot(BuildHotspot.SMALL_PLANT2, 1, 2),
 			new Hotspot(BuildHotspot.SMALL_PLANT2, 5, 6),
 			new Hotspot(BuildHotspot.SMALL_PLANT2, 6, 5),
+			new Hotspot(BuildHotspot.SMALL_PLANT2, 2, 6),
+			new Hotspot(BuildHotspot.SMALL_PLANT2, 1, 5),
 			new Hotspot(BuildHotspot.BIG_PLANT2, 1, 1),
 			new Hotspot(BuildHotspot.BIG_PLANT2, 6, 6),
+			new Hotspot(BuildHotspot.BIG_PLANT2, 1, 6),
 			new Hotspot(BuildHotspot.SMALL_PLANT1, 5, 1),
 			new Hotspot(BuildHotspot.SMALL_PLANT1, 6, 2),
 			new Hotspot(BuildHotspot.SMALL_PLANT1, 1, 5),
+			new Hotspot(BuildHotspot.SMALL_PLANT1, 2, 1),
 			new Hotspot(BuildHotspot.SMALL_PLANT1, 2, 6),
 			new Hotspot(BuildHotspot.BIG_PLANT1, 1, 6),
+			new Hotspot(BuildHotspot.BIG_PLANT1, 1, 1),
 			new Hotspot(BuildHotspot.BIG_PLANT1, 6, 1)),
 
 	/**

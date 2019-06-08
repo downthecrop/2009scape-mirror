@@ -119,6 +119,16 @@ public final class InterfaceManager {
 		return windowsPane;
 	}
 
+	public void openWindowsPane(Component windowsPane, int type) {
+		this.windowsPane = windowsPane;
+		if (windowsPane.getDefinition().getType() != InterfaceType.WINDOW_PANE) {
+			System.err.println("Set interface type to WINDOW_PANE for component " + windowsPane.getId() + ", definition requires updating!");
+			windowsPane.getDefinition().setType(InterfaceType.SINGLE_TAB);
+		}
+		PacketRepository.send(WindowsPane.class, new WindowsPaneContext(player, windowsPane.getId(), type));
+		windowsPane.open(player);
+	}
+
 	/**
 	 * Opens a component.
 	 * 

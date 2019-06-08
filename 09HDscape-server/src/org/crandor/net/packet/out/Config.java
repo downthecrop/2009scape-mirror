@@ -1,8 +1,8 @@
 package org.crandor.net.packet.out;
 
+import org.crandor.net.packet.context.ConfigContext;
 import org.crandor.net.packet.IoBuffer;
 import org.crandor.net.packet.OutgoingPacket;
-import org.crandor.net.packet.context.ConfigContext;
 
 /**
  * The config outgoing packet.

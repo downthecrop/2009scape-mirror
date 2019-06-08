@@ -31,7 +31,7 @@ public final class ShopViewer {
 	/**
 	 * Represents the shop being viewed.
 	 */
-	private final Shop shop;
+	private Shop shop;
 
 	/**
 	 * Represents the tab index.
@@ -146,6 +146,7 @@ public final class ShopViewer {
 			player.removeExtension(ShopViewer.class);
 			viewer.getShop().getViewers().remove(viewer);
 			player.getInterfaceManager().closeSingleTab();
+			player.removeAttribute("spawning_items");
 			return true;
 		}
 

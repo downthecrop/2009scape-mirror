@@ -77,6 +77,8 @@ import org.crandor.net.packet.out.SkillLevel;
 import org.crandor.net.packet.out.UpdateSceneGraph;
 import org.crandor.plugin.Plugin;
 import org.crandor.tools.StringUtils;
+import org.crandor.tools.panel.Controller;
+import org.crandor.tools.panel.PlayerListPulse;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -248,6 +250,7 @@ public class Player extends Entity {
 	 */
 	private final HunterManager hunterManager = new HunterManager(this);
 
+	private final PlayerListPulse playerListPulse = new PlayerListPulse(this);
 
 	/**
 	 * The treasure trail manager.
@@ -274,6 +277,7 @@ public class Player extends Entity {
 	 */
 	private final IronmanManager ironmanManager = new IronmanManager(this);
 
+	private final Controller controller = new Controller(this);
 
 	/**
 	 * The logout plugins.
@@ -1257,6 +1261,13 @@ public class Player extends Entity {
 		this.skillTasks = skillTasks;
 	}
 
+	public Controller getController() {
+		return controller;
+	}
+
+	public PlayerListPulse getPlayerListPulse() {
+		return playerListPulse;
+	}
 
 
 	@Override

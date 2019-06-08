@@ -30,7 +30,22 @@ public final class ShoppingPlugin extends ComponentPlugin {
 	@Override
 	public boolean handle(Player player, Component component, int opcode, int button, int slot, int itemId) {
 		final ShopViewer viewer = player.getExtension(ShopViewer.class);
+		if (player.getAttributes().containsKey("spawning_items")) {
+			switch (opcode) {
+				case 155:
+					switch (button) {
+						case 23:
+						case 24:
+						case 0:
+							viewer.getShop().give(player, slot, 1, viewer.getTabIndex());
+							break;
+					}
+					break;
+			}
+			return true;
+		}
 		if (viewer == null) {
+			System.out.println("shop is null");
 			return true;
 		}
 		final Container container = button == 0 ? player.getInventory() : viewer.getShop().getContainer(viewer.getTabIndex());
@@ -104,6 +119,7 @@ public final class ShoppingPlugin extends ComponentPlugin {
 			public boolean handle() {
 				switch (componentId){
 				case 620:
+					System.out.println("hmmm");
 					viewer.getShop().buy(viewer.getPlayer(), slot, (int) getValue(), viewer.getTabIndex());
 					break;
 				case 621:

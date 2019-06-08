@@ -267,8 +267,8 @@ public final class FlourMakingPlugin extends OptionHandler {
 		@Override
 		public boolean handle(NodeUsageEvent event) {
 			final Player player = event.getPlayer();
-			FlourMakingPlugin.FlourExtension.extend(player);
-			final FlourMakingPlugin.FlourExtension extension = player.getExtension(FlourMakingPlugin.FlourExtension.class);
+			FlourExtension.extend(player);
+			final FlourExtension extension = player.getExtension(FlourExtension.class);
 			if (extension.getSemiCharges() > 0) {
 				player.getPacketDispatch().sendMessage("There is already grain in the hopper.");
 				return true;

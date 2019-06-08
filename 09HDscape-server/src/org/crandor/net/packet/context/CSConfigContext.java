@@ -23,18 +23,24 @@ public class CSConfigContext implements Context {
 	 * The id.
 	 */
 	private int id;
+	private final Object[] parameters;
+	private final String types;
 	
 
 	/**
 	 * Constructs a new {@Code CSConfigContext} {@Code Object}
 	 * @param player The player.
-	 * @param value The config value.
 	 * @param id The id.
+	 * @param value The config value.
+	 * @param parameters
+	 * @param types
 	 */
-	public CSConfigContext(Player player, int id, int value) {
+	public CSConfigContext(Player player, int id, int value, String types, Object[] parameters) {
 		this.player = player;
 		this.value = value;
 		this.id = id;
+		this.parameters = parameters;
+		this.types = types;
 	}
 
 	@Override
@@ -68,4 +74,11 @@ public class CSConfigContext implements Context {
 		return id;
 	}
 
+	public String getTypes() {
+		return types;
+	}
+
+	public Object[] getParameters() {
+		return parameters;
+	}
 }

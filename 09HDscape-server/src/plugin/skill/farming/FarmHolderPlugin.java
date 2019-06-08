@@ -121,7 +121,7 @@ public final class FarmHolderPlugin implements Plugin<Object> {
 			final FarmingItemHolder holder = FarmingItemHolder.forHolder(item);
 			switch (option) {
 			case "fill":
-				final boolean sack = holder != null && holder.ordinal() < 3 ? true : (item.getId() == SACK.getId() ? true : false);
+				final boolean sack = holder != null && holder.ordinal() < 3 || (item.getId() == SACK.getId());
 				final Item base = getRemoveItem(player, item, sack);
 				if (base == null) {
 					player.getPacketDispatch().sendMessage(sack ? "You don't have any potatoes, onions, or cabbages." : "You don't have any fruit to fill the basket with.");

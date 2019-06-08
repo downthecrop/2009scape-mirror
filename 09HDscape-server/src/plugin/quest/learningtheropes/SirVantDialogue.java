@@ -1,9 +1,12 @@
 package plugin.quest.learningtheropes;
 
+import org.crandor.game.container.impl.EquipmentContainer;
 import org.crandor.game.content.dialogue.DialoguePlugin;
 import org.crandor.game.content.dialogue.FacialExpression;
+import org.crandor.game.content.global.tutorial.TutorialSession;
 import org.crandor.game.content.global.tutorial.TutorialStage;
 import org.crandor.game.node.entity.player.Player;
+import org.crandor.game.node.item.Item;
 import org.crandor.plugin.InitializablePlugin;
 
 /**
@@ -12,6 +15,7 @@ import org.crandor.plugin.InitializablePlugin;
  */
 @InitializablePlugin
 public class SirVantDialogue extends DialoguePlugin {
+
 
     /**
      * Default Constructor
@@ -33,8 +37,23 @@ public class SirVantDialogue extends DialoguePlugin {
 
     @Override
     public boolean open(Object... args) {
-        npc(FacialExpression.HAPPY, "My Word! You scared me there, friend. I have no idea", "where you came from, but you have fantastic timing.", "You see, I have come across a dragon.");
-        setStage(1);
+        int tut_stage = TutorialSession.getExtension(player).getStage();
+        System.out.println("tut_stage = " + tut_stage);
+        switch (tut_stage) {
+            case 0:
+            case 1:
+            case 2:
+            case 72:
+                npc(FacialExpression.HAPPY, "My Word! You scared me there, friend. I have no idea", "where you came from, but you have fantastic timing.", "You see, I have come across a dragon.");
+                setStage(1);
+                break;
+            case 3:
+                player.getEquipment().replace(new Item(9703), EquipmentContainer.SLOT_WEAPON);
+                player.getEquipment().replace(new Item(9704), EquipmentContainer.SLOT_SHIELD);
+                npc("I think we have found a job for you, whoever you are.", "Here, take this sword and shield.");
+                setStage(10);
+                break;
+        }
         return true;
     }
 
@@ -68,6 +87,34 @@ public class SirVantDialogue extends DialoguePlugin {
             case 7:
                 end();
                 TutorialStage.load(player, 2, false);
+                break;
+            case 10:
+                npc("I think the value of this property has slumped a little.");
+                next();
+                break;
+            case 11:
+                player(FacialExpression.ASKING, "A little? It's got a huge dragon on it!");
+                next();
+                break;
+            case 12:
+                npc(FacialExpression.HAPPY, "I'm sure the owners has no idea when they bought it.", "It would take and interesting individual to deliberately","build a cellar in a dragon's den.");
+                next();
+                break;
+            case 13:
+                npc("I believe this dragon has been asleep for a while - at", "least as long as it has taken Lumbridge, the town above","us, to be established. Something must have roused the","dragon - a large noise, tail cramp, the smell of damsels.");
+                next();
+                break;
+            case 14:
+                npc("Don't worry, the goblin is stunned, so it can't hurt you", "at the moment. You should know something about","basic combat before tackling it.");
+                next();
+                break;
+            case 15:
+                npc("Now, I have to keep watch for the dragon.");
+                next();
+                break;
+            case 16:
+                end();
+                TutorialStage.load(player, 4, false);
                 break;
         }
         return true;

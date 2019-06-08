@@ -55,7 +55,7 @@ public final class GrandExchangeZone extends MapZone implements Plugin<Object> {
 
 	@Override
 	public void configure() {
-		addObjects();
+//		addObjects();
 		PluginManager.definePlugin(new TeleporterDialogue(), new GnomeTravellerPlugin(), new RewardTraderDialogue());
 		ShopSQLHandler.getUidShops().put(1485756, CREDIT_STORE);
 		super.register(new ZoneBorders(3146, 3472, 3183, 3508));
@@ -408,7 +408,7 @@ public final class GrandExchangeZone extends MapZone implements Plugin<Object> {
 					ShopSQLHandler.openUid(player, 200);
 					break;
 				case 2:
-					if (player.getSavedData().getGlobalData().getGlobalTeleporterDelay() > System.currentTimeMillis()) {
+					/*if (player.getSavedData().getGlobalData().getGlobalTeleporterDelay() > System.currentTimeMillis()) {
 						long millis = player.getSavedData().getGlobalData().getGlobalTeleporterDelay() - System.currentTimeMillis();
 						int minutes = (int) TimeUnit.MILLISECONDS.toMinutes(millis);
 						if (minutes < 1) {
@@ -417,7 +417,7 @@ public final class GrandExchangeZone extends MapZone implements Plugin<Object> {
 						interpreter.sendDialogue("You need to wait " + minutes + " more minute" + (minutes > 1 ? "s" : "") + " in order to use the free", "teleportation system again.");
 						stage = -10;
 						return true;
-					}
+					}*/
 					player.removeAttribute("global_teleporter");
 					String[] options = new String[TELEPORTS.length];
 					for (int i = 0; i < TELEPORTS.length; i++) {
