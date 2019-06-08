@@ -10,6 +10,7 @@ import org.crandor.game.system.SystemShutdownHook;
 import org.crandor.game.system.mysql.SQLManager;
 import org.crandor.game.world.GameSettings;
 import org.crandor.game.world.GameWorld;
+import org.crandor.gui.ConsoleFrame;
 import org.crandor.net.NioReactor;
 import org.crandor.net.amsc.WorldCommunicator;
 import org.crandor.tools.TimeStamp;
@@ -21,7 +22,7 @@ import org.crandor.tools.backup.AutoBackup;
  * @author Vexia
  * 
  */
-public final class Main {
+public final class Main extends Application {
 
 	/**
 	 * The time stamp of when the server started running.
@@ -45,9 +46,9 @@ public final class Main {
 		if (args.length > 0) {
 			GameWorld.setSettings(GameSettings.parse(args));
 		}
-//		if (GameWorld.getSettings().isGui()) {
-//			KeldagrimFrame.getInstance().init();
-//		}
+		if (GameWorld.getSettings().isGui()) {
+			ConsoleFrame.getInstance().init();
+		}
 		startTime = System.currentTimeMillis();
 		final TimeStamp t = new TimeStamp();
 //		backup = new AutoBackup();
@@ -78,4 +79,12 @@ public final class Main {
 	public static void setStartTime(long startTime) {
 		Main.startTime = startTime;
 	}
+
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        Parent root = FXMLLoader.load(getClass().getResource("Main Frame.fxml"));
+        primaryStage.setTitle("Management Panel");
+        primaryStage.setScene(new Scene(root, 600, 450));
+        primaryStage.show();
+    }
 }

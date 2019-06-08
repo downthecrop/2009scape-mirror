@@ -36,7 +36,7 @@ public final class JewelleryInterface extends ComponentPlugin {
 	@Override
 	public boolean handle(Player player, Component component, int opcode, int button, int slot, int itemId) {
 		int amount = 0;
-		JewelleryCrafting.JewelleryItem data = null;
+		JewelleryItem data = null;
 		switch(button){
 		case 20:
 			data = JewelleryItem.GOLD_RING;

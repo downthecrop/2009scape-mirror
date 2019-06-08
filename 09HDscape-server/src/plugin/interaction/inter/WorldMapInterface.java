@@ -25,10 +25,7 @@ public final class WorldMapInterface extends ComponentPlugin {
 	public boolean handle(Player player, Component component, int opcode, int button, int slot, int itemId) {
 		switch (button) {
 		case 3:
-			player.getInterfaceManager().openWindowsPane(new Component(player.getInterfaceManager().isResizable() ? 746 : 548));
-			int posHash = player.getLocation().getX() << 14 | player.getLocation().getY();
-			player.getPacketDispatch().sendScriptConfig(622, posHash);
-			player.getPacketDispatch().sendScriptConfig(674, posHash);
+//			player.getInterfaceManager().openWindowsPane(new Component(player.getInterfaceManager().isResizable() ? 746 : 548), 2);
 			return true;
 		}
 		return false;

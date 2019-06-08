@@ -81,7 +81,7 @@ public final class AlchemySpell extends MagicSpell {
 		boolean alchZone = p.getZoneMonitor().isInZone("Alchemists' Playground");
 		AlchemistItem alch = null;
 		if (alchZone) {
-			alch = AlchemistZone.AlchemistItem.forItem(item.getId());
+			alch = AlchemistItem.forItem(item.getId());
 			if (alch == null) {
 				p.getDialogueInterpreter().sendDialogue("You can only convert the items you find in the cupboards.");
 				return false;

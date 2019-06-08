@@ -238,7 +238,8 @@ public final class VisualCommand extends CommandPlugin {
 
 				@Override
 				public boolean pulse() {
-					PacketRepository.send(Interface.class, new InterfaceContext(player, 548, 77, id, false));
+//					PacketRepository.send(Interface.class, new InterfaceContext(player, 548, 77, id, false));
+					player.getInterfaceManager().openComponent(id);
 					player.debug("Interface id: " + id);
 					return ++id >= en;
 				}

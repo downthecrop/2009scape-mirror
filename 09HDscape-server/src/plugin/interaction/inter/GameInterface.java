@@ -31,6 +31,7 @@ public final class GameInterface extends ComponentPlugin {
 		ComponentDefinition.put(750, this);
 		ComponentDefinition.put(751, this);
 		ComponentDefinition.put(740, this);
+		ComponentDefinition.put(746, this);
 		return this;
 	}
 
@@ -41,6 +42,13 @@ public final class GameInterface extends ComponentPlugin {
 			switch (button){
 			case 3:
 				player.getInterfaceManager().closeChatbox();
+				break;
+			}
+			return true;
+		case 746:
+			switch (button){
+			case 110:
+				configureWorldMap(player);
 				break;
 			}
 			return true;
@@ -202,11 +210,22 @@ public final class GameInterface extends ComponentPlugin {
 			player.getPacketDispatch().sendMessage("It wouldn't be very wise opening the world map during combat.");
 			return;
 		}
-		player.getPacketDispatch().sendWindowsPane(755, 0);
+//		player.getInterfaceManager().openWindowsPane(new Component(755), 1);
+//		player.getPacketDispatch().sendScriptConfig(1187, 0, "ii", 0);
+		int position = player.getLocation().getX() << 14 | player.getLocation().getY() | player.getLocation().getZ() << 28;
+
+//		player.getPacketDispatch().sendScriptConfig(622, position, "ii");
+//		player.getPacketDispatch().sendScriptConfig(674, position, "ii");
+//		player.getPacketDispatch().sendScriptConfig(622, position);
+//		player.getPacketDispatch().sendScriptConfig(674, position);
+		System.out.println(position);
+
+
+		/*player.getPacketDispatch().sendWindowsPane(755, 1);
 		int hash = player.getLocation().getX() << 14 | player.getLocation().getY();
-//		player.getPacketDispatch().sendRunScript(622, "",  hash);
-//		player.getPacketDispatch().sendRunScript(674, "", hash);
+		player.getPacketDispatch().sendRunScript(622, "",  hash);
+		player.getPacketDispatch().sendRunScript(674, "", hash);
 		PacketRepository.send(InterfaceConfig.class, new InterfaceConfigContext(player, 371, 25, true));
-		player.setAttribute("worldMap:viewing", true);
+		player.setAttribute("worldMap:viewing", true);*/
 	}
 }

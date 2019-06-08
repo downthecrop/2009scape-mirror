@@ -12,7 +12,6 @@ import org.crandor.game.system.command.CommandPlugin;
 import org.crandor.game.system.command.CommandSet;
 import org.crandor.game.system.mysql.impl.ItemConfigSQLHandler;
 import org.crandor.game.world.repository.Repository;
-import org.crandor.gui.KeldagrimFrame;
 import org.crandor.net.amsc.WorldCommunicator;
 import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
@@ -46,9 +45,6 @@ public final class SystemCommand extends CommandPlugin {
 			}
 			WorldCommunicator.terminate();
 			WorldCommunicator.connect();
-			return true;
-		case "showgui":
-			KeldagrimFrame.INSTANCE.setVisible(true);
 			return true;
 		case "update":
 			if (args.length > 1) {

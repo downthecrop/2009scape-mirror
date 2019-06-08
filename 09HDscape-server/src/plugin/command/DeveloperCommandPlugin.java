@@ -1,12 +1,16 @@
 package plugin.command;
 
+import com.sun.xml.internal.ws.util.StringUtils;
 import org.crandor.ServerConstants;
 import org.crandor.cache.Cache;
 import org.crandor.cache.def.impl.ItemDefinition;
 import org.crandor.cache.def.impl.NPCDefinition;
+import org.crandor.game.component.Component;
 import org.crandor.game.container.Container;
 import org.crandor.game.container.impl.EquipmentContainer;
 import org.crandor.game.content.eco.EconomyManagement;
+import org.crandor.game.content.global.shop.Shop;
+import org.crandor.game.content.global.shop.ShopViewer;
 import org.crandor.game.content.global.tutorial.TutorialSession;
 import org.crandor.game.content.holiday.HolidayItem;
 import org.crandor.game.content.holiday.ItemLimitation;
@@ -46,6 +50,9 @@ import org.crandor.game.world.map.zone.RegionZone;
 import org.crandor.game.world.repository.Repository;
 import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.game.world.update.flag.context.Graphics;
+import org.crandor.net.packet.PacketRepository;
+import org.crandor.net.packet.context.ContainerContext;
+import org.crandor.net.packet.out.ContainerPacket;
 import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
 import org.crandor.plugin.PluginManager;
@@ -56,10 +63,8 @@ import java.awt.*;
 import java.awt.datatransfer.Clipboard;
 import java.awt.datatransfer.StringSelection;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 import java.util.Map.Entry;
 
 /**
@@ -76,12 +81,33 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
         return this;
     }
 
+    public static class SpawnSearch extends Shop {
+
+        public SpawnSearch() {
+            super("Spawn Search", false);
+        }
+
+        @Override
+        public void open(Player player) {
+            super.open(player);
+            player.getPacketDispatch().sendInterfaceConfig(620, 29, true);
+            player.getPacketDispatch().sendInterfaceConfig(620, 26, true);
+        }
+
+        @Override
+        public boolean canSell(Player player, Item item, ItemDefinition def) {
+            player.sendMessage("You cannot sell items to this store.");
+            return false;
+        }
+    }
+
     @SuppressWarnings("deprecation")
     @Override
     public boolean parse(final Player player, String name, String[] args) {
         switch (name) {
-           /* case "itemn":
+            case "find":
                 try {
+                    player.getAttributes().put("spawning_items", true);
                     String itemName = "";
                     for (int i = 1; i < args.length; i++)
                         itemName += args[i] + ((i == args.length - 1) ? "" : " ");
@@ -89,7 +115,6 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
                     player.getAttributes().computeIfAbsent("found_items", k -> new HashMap<Integer, Integer>());
                     player.getAttributes().remove("found_items");
                     Container storeItems = new Container(1200);
-//                    ItemsContainer<Item> storeItems = new ItemsContainer<Item>(1200, false);
                     for (int i = 0; i < ItemDefinition.getDefinitions().size(); i++) {
                         ItemDefinition definition = ItemDefinition.forId(i);
                         itemName = itemName.toLowerCase();
@@ -99,24 +124,19 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
                         int itemId = definition.getId();
                         if (output.contains(itemName)) {
                             storeItems.add(new Item(itemId, 1));
-                            player.spawns.put(count, itemId);
+                            player.getAttributes().put("" + count, itemId);
                             count++;
                         }
                     }
-                    player.getPacketDispatch().sendItems(-1, 0, 91, storeItems);
-                    player.getPacketDispatch().sendUnlockIComponentOptionSlots(860, 23, 0, count, 0, 1, 2, 3, 4, 5, 6);
-                    player.getPackets().sendInterSetItemsOptionsScript(860, 23, 91, 8, 150, "Take-1", "Take-10", "Take-1000", "Take-10000", "Take-X");
-                    player.getPackets().sendHideIComponent(860, 20, true);
-                    player.getPackets().sendHideIComponent(860, 26, true);
-                    player.getPackets().sendHideIComponent(860, 21, true);
-                    player.getPackets().sendIComponentText(860, 18, "Found " + count + " results for item " + StringUtils.capitalize(itemName));
-                    player.getPackets().sendIComponentText(860, 19, "Click items to spawn them to your inventory.");
-                    player.getInterfaceManager().openComponent(860);
-                    player.getPacketDispatch().sendMessage("<col=FF0000>Found " + count + " results for the item " + StringUtils.capitalize(itemName) + ".");
+
+                    SpawnSearch shop = new SpawnSearch();
+                    shop.getContainer(0).copy(storeItems);
+                    shop.open(player);
+
                 } catch (NumberFormatException e) {
                     return true;
                 }
-                break;*/
+                break;
             case "tut":
                 if (player.getInventory().isEmpty()) {
                     player.getPacketDispatch().sendMessage("You have nothing to deposit.");

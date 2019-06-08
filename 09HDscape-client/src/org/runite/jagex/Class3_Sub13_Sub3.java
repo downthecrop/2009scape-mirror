@@ -1,4 +1,6 @@
 package org.runite.jagex;
+import org.runite.GameLaunch;
+
 import java.io.IOException;
 
 final class Class3_Sub13_Sub3 extends Class3_Sub13 {
@@ -42,10 +44,10 @@ final class Class3_Sub13_Sub3 extends Class3_Sub13 {
             }
          }
          if (var4.toString().contains("RuneScape")) {
-        	 var4 = RSString.createRSString(var4.toString().replace("RuneScape", "Runite"));
+        	 var4 = RSString.createRSString(var4.toString().replace("RuneScape", GameLaunch.SETTINGS.getName()));
          }
          if (var4.toString().contains("Jagex")) {
-        	 var4 = RSString.createRSString(var4.toString().replace("Jagex", "Runite"));
+        	 var4 = RSString.createRSString(var4.toString().replace("Jagex", GameLaunch.SETTINGS.getName()));
          }
          return var4;
       } catch (RuntimeException var6) {

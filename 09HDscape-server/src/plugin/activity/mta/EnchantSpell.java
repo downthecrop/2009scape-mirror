@@ -89,7 +89,7 @@ public final class EnchantSpell extends MagicSpell {
 			if (item.getId() == 6903) {
 				pizazz = (getSpellId() == 5 ? 1 : getSpellId() == 16 ? 2 : getSpellId() == 28 ? 3 : getSpellId() == 36 ? 4 : getSpellId() == 51 ? 5 : 6) * 2;
 			} else {
-				Shapes shape = EnchantingZone.Shapes.forItem(item);
+				Shapes shape = Shapes.forItem(item);
 				if (shape != null) {
 					int convert = p.getAttribute("mta-convert", 0);
 					convert += 1;

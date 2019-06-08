@@ -25,7 +25,7 @@ public class PriestInPerilUsePlugin extends UseWithHandler {
 
 	/**
 	 * (non-Javadoc)
-	 * @see Plugin#newInstance(java.lang.Object)
+	 * @see Plugin#newInstance(Object)
 	 */
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {

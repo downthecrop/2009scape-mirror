@@ -8,8 +8,7 @@ import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.object.GameObject;
 import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
-
-import java.util.Calendar;
+import org.joda.time.DateTime;
 
 /**
  * ClockPlugin.java
@@ -30,8 +29,8 @@ public class ClockPlugin extends OptionHandler {
 	@Override
 	public boolean handle(Player player, Node node, String option) {
 		GameObject object = node.asObject();
-		Calendar now = Calendar.getInstance();
-		int minuteDisplay = ((int) (now.get(Calendar.MINUTE) / 5)) * 5;
+		DateTime now = new DateTime();
+		int minuteDisplay = ((int) (now.getMinuteOfHour() / 5)) * 5;
 		StringBuilder sb = new StringBuilder("It's ");
 		if (minuteDisplay == 0) {
 			sb.append("Rune o'clock.");

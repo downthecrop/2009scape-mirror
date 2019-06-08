@@ -14,6 +14,7 @@ import org.crandor.game.system.command.CommandSet;
 import org.crandor.game.system.communication.ClanRepository;
 import org.crandor.game.system.communication.CommunicationInfo;
 import org.crandor.game.world.GameWorld;
+import org.crandor.game.world.map.Location;
 import org.crandor.game.world.repository.Repository;
 import org.crandor.net.amsc.WorldCommunicator;
 import org.crandor.plugin.InitializablePlugin;

@@ -209,6 +209,13 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 	public Component player(final String... messages) {
 		return interpreter.sendDialogues(player, null, messages);
 	}
+	/**
+	 * Method wrapper to send a player dial.
+	 * @return the component.
+	 */
+	public Component player(FacialExpression expression, final String... messages) {
+		return interpreter.sendDialogues(player, expression, messages);
+	}
 
 	/**
 	 * Method used to send options.

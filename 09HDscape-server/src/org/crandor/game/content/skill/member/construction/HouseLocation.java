@@ -1,7 +1,10 @@
 package org.crandor.game.content.skill.member.construction;
 
 
+import org.crandor.game.content.skill.Skills;
+import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.world.map.Location;
+import org.crandor.tools.StringUtils;
 
 /**
  * The house locations.
@@ -91,6 +94,16 @@ public enum HouseLocation {
 			HOUSE_OPTIONS.addPage(new Page(pageActions));
 		}*/
 	}
+
+	/**
+	 * Checks if the player has the level.
+	 *
+	 * @param player the player.
+	 * @return {@code True} if so.
+	 */
+	public boolean hasLevel(Player player) {
+		return player.getSkills().getStaticLevel(Skills.CONSTRUCTION) >= levelRequirement;
+	}
 	
 	/**
 	 * Constructs a new {@code HouseLocation} {@code Object}
@@ -103,6 +116,15 @@ public enum HouseLocation {
 		this.cost = cost;
 		this.levelRequirement = levelRequirement;
 	}
+	/**
+	 * Gets the name formatted.
+	 *
+	 * @return the formatted name.
+	 */
+	public String getName() {
+		return StringUtils.formatDisplayName(name().toLowerCase());
+	}
+
 
 	/**
 	 * Gets the portalId.

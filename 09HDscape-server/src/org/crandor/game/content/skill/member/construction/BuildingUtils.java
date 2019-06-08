@@ -1,9 +1,9 @@
 package org.crandor.game.content.skill.member.construction;
 
-
 import org.crandor.cache.def.impl.ItemDefinition;
 import org.crandor.game.component.Component;
 import org.crandor.game.content.skill.Skills;
+import org.crandor.game.content.skill.member.construction.*;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.item.Item;
 import org.crandor.game.node.object.GameObject;
@@ -34,26 +34,26 @@ public final class BuildingUtils {
 			Direction.NORTH, Direction.EAST, Direction.SOUTH, Direction.WEST
 	};
 
-	/** 
+	/**
 	 * The building a decoration animation.
 	 */
 	public static final Animation BUILD_LOW_ANIM = Animation.create(3683);
-	
+
 	/**
 	 * The building a decoration animation.
 	 */
 	public static final Animation BUILD_MID_ANIM = Animation.create(3676);
-	
+
 	/**
 	 * The building a decoration animation.
 	 */
 	public static final Animation BUILD_HIGH_ANIM = Animation.create(3684);
-	
+
 	/**
 	 * The planting animation.
 	 */
 	public static final Animation PLANT_ANIM = Animation.create(3691);
-	
+
 	/**
 	 * The removing a decoration animation.
 	 */
@@ -78,29 +78,33 @@ public final class BuildingUtils {
 	 */
 	public static void openBuildInterface(Player player, BuildHotspot hotspot) {
 		player.getInterfaceManager().open(new Component(396));
-		player.getPacketDispatch().sendInterSetItemsOptionsScript(396, 11, 8, 2, 4, "Build");
-		player.getPacketDispatch().sendAccessMask(1278, 11, 396, 0, 7);
 		Item[] items = new Item[7];
+
+		int c261Value = 0;
+
 		for (int i = 0; i < 7; i++) {
-			int offset = i * 5;
+			int itemsStringOffset = 97 + (i * 5);
+
+			//97 +
 			if (i >= hotspot.getDecorations().length || (hotspot.getDecorations()[i] != null && hotspot.getDecorations()[i].isInvisibleNode())) {
-				for (int j = 14; j < 19; j++) {
-					player.getPacketDispatch().sendString("", 396, j + offset);
+				for (int j = 0; j < 5; j++) {
+					player.getPacketDispatch().sendString("", 396, itemsStringOffset + j);
 				}
-				player.getPacketDispatch().sendString("", 396, 56 + i);
-				player.getPacketDispatch().sendInterfaceConfig(396, 49 + i, true);
+				player.getPacketDispatch().sendString("", 396, 140 + i);
+				c261Value += (1 << (i + 1));
 				continue;
 			}
+
 			Decoration decoration = hotspot.getDecorations()[i];
 			items[BUILD_INDEXES[i]] = new Item(decoration.getInterfaceItem());
-			player.getPacketDispatch().sendString(ItemDefinition.forId(decoration.getInterfaceItem()).getName(), 396, 14 + offset);
+			player.getPacketDispatch().sendString(ItemDefinition.forId(decoration.getInterfaceItem()).getName(), 396, itemsStringOffset);
 			boolean hasRequirements = player.getSkills().getLevel(Skills.CONSTRUCTION) >= decoration.getLevel();
 			for (int j = 0; j < 4; j++) {
 				if (j >= decoration.getItems().length) {
 					if (j == decoration.getItems().length && decoration.getNailAmount() > 0) {
-						player.getPacketDispatch().sendString("Nails: " + decoration.getNailAmount(), 396, 15 + offset + j);
+						player.getPacketDispatch().sendString("Nails: " + decoration.getNailAmount(), 396, (itemsStringOffset + 1) + j);
 					} else {
-						player.getPacketDispatch().sendString("", 396, 15 + offset + j);
+						player.getPacketDispatch().sendString("", 396, (itemsStringOffset + 1) + j);
 					}
 				} else {
 					Item item = decoration.getItems()[j];
@@ -108,25 +112,28 @@ public final class BuildingUtils {
 						hasRequirements = false;
 					}
 					String s = item.getName() + ": " + item.getAmount();
-					if (j > 1 && (decoration == Decoration.RUNE_CASE1 || decoration == Decoration.RUNE_CASE2)) {
-						if (j == 3) {
-							offset--;
-							item = decoration.getItems()[++j];
-							s = item.getName() + ": " + item.getAmount();
-						}
-						item = decoration.getItems()[j + 1];
-						s += ", " + item.getName() + ": " + item.getAmount();
-						player.getPacketDispatch().sendString(s, 396, 15 + offset + j);
-						continue;
-					}
-					player.getPacketDispatch().sendString(s, 396, 15 + offset + j);
+                    /*if (j > 1 && (decoration == Decoration.RUNE_CASE1 || decoration == Decoration.RUNE_CASE2)) {
+                        if (j == 3) {
+                            offset--;
+                            item = decoration.getItems()[++j];
+                            s = item.getName() + ": " + item.getAmount();
+                        }
+                        item = decoration.getItems()[j + 1];
+                        s += ", " + item.getName() + ": " + item.getAmount();
+                        player.getPacketDispatch().sendString(s, 396, 15 + offset + j);
+                        continue;
+                    }*/
+					player.getPacketDispatch().sendString(s, 396, (itemsStringOffset + 1) + j);
+					if (hasRequirements)
+						c261Value += (1 << (i + 1));
 				}
 			}
 			player.getConfigManager().set(1485 + i, hasRequirements || player.isStaff() ? 1 : 0);
-			player.getPacketDispatch().sendString("Lvl " + decoration.getLevel(), 396, 56 + i);
+			player.getPacketDispatch().sendString("Lvl " + decoration.getLevel(), 396, 140 + i);
 			//player.getPacketDispatch().sendItemZoomOnInterface(items[i].protocol(), 50000, 396, 49 + i);
 		}
-		PacketRepository.send(ContainerPacket.class, new ContainerContext(player, -1, -2, 8, items, false));
+		player.getConfigManager().set(261, c261Value);
+		PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 396, 132, 8, items, false));
 	}
 
 	/**
@@ -143,7 +150,7 @@ public final class BuildingUtils {
 	 * @param player The player.
 	 * @param deco The decoration.
 	 * @param object The object.
-	 */ 
+	 */
 	public static void buildDecoration(final Player player, final Hotspot hotspot, final Decoration deco, final GameObject object) {
 		final int nailAmount = deco.getNailAmount();
 		final NailType type = nailAmount > 0 ? NailType.get(player, nailAmount) : null;
@@ -205,7 +212,7 @@ public final class BuildingUtils {
 			}
 		});
 	}
-	
+
 	/**
 	 * Sets a decoration for the given hotspot.
 	 * @param player The player.
@@ -220,91 +227,91 @@ public final class BuildingUtils {
 		HousingStyle style = player.getHouseManager().getStyle();
 		int decIndex = hotspot.getHotspot().getDecorationIndex(deco);
 		switch(hotspot.getHotspot().getType()) {
-		case STAIRCASE:
-			int z = l.getZ();
-			if (region == player.getHouseManager().getDungeonRegion()) {
-				z = 3;
-			}
-			for (int i = -1; i <= 1; i++) {
-				int plane = (z + (i == -1 ? 3 : i)) % 4;
-				Room r = player.getHouseManager().getRooms()[plane][l.getChunkX()][l.getChunkY()];
-				if (r != null && r.getRotation() == room.getRotation() && !r.getProperties().isLand()) {
-					Hotspot h = r.getStairs();
-					if (h != null) {
-						h.setDecorationIndex(decIndex);
-						Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getRegion();
-						if (reg == null) {
-							continue;
-						}
-						BuildRegionChunk chunk = (BuildRegionChunk) reg.getPlanes()[plane % 3].getChunks()[l.getChunkX()][l.getChunkY()];
-						GameObject[] objects = chunk.getObjects(h.getCurrentX(), h.getCurrentY());
-						for (GameObject o : objects) {
-							if (o != null && o.getType() == object.getType()) {
-								ObjectBuilder.replace(o, o.transform(h.getHotspot().getDecorations()[decIndex].getObjectId(style)));
-								System.err.println("Found stairs!");
-								if (plane == 1) {
-									if (r.getProperties() == RoomProperties.SKILL_HALL) {
-										r.updateProperties(player, RoomProperties.SKILL_HALL_2);
-									} else if (r.getProperties() == RoomProperties.QUEST_HALL) {
-										r.updateProperties(player, RoomProperties.QUEST_HALL_2);
-									}
-									else {
-										break;
-									}
-									player.getHouseManager().reload(player, true);
-								}
-								break;
-							}
-						}
-					} else {
-						System.err.println("Couldn't find stairs! " + plane);
-					}
+			case STAIRCASE:
+				int z = l.getZ();
+				if (region == player.getHouseManager().getDungeonRegion()) {
+					z = 3;
 				}
-			}
-			break;
-		case CREST:
-			ObjectBuilder.replace(object, object.transform(deco.getObjectId(style) + player.getHouseManager().getCrest().ordinal()));							
-			hotspot.setDecorationIndex(decIndex);			
-			break;
-		case INDIVIDUAL:
-			ObjectBuilder.replace(object, object.transform(deco.getObjectId(style)));							
-			hotspot.setDecorationIndex(decIndex);			
-			break;					
-		case RECURSIVE:
-			BuildRegionChunk chunk = (BuildRegionChunk) region.getPlanes()[l.getZ()].getChunks()[l.getChunkX()][l.getChunkY()];			
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
-					Hotspot h = room.getHotspot(hotspot.getHotspot(), x, y);
-					if (h != null) {
-						h.setDecorationIndex(decIndex);
-						int objectId = hotspot.getHotspot().getObjectId(style);
-						GameObject o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
-						if (o != null && objectId == o.getId()) {
-							ObjectBuilder.replace(o, o.transform(hotspot.getHotspot().getDecorations()[decIndex].getObjectId(style)));
-						}
-					}
-				}
-			}
-			break;
-		case LINKED:
-			BuildHotspot[] linkedHotspots = BuildHotspot.getLinkedHotspots(hotspot.getHotspot());
-			chunk = (BuildRegionChunk) region.getPlanes()[l.getZ()].getChunks()[l.getChunkX()][l.getChunkY()];			
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
-					for (BuildHotspot bh : linkedHotspots) {
-						Hotspot h = room.getHotspot(bh, x, y);
+				for (int i = -1; i <= 1; i++) {
+					int plane = (z + (i == -1 ? 3 : i)) % 4;
+					Room r = player.getHouseManager().getRooms()[plane][l.getChunkX()][l.getChunkY()];
+					if (r != null && r.getRotation() == room.getRotation() && !r.getProperties().isLand()) {
+						Hotspot h = r.getStairs();
 						if (h != null) {
 							h.setDecorationIndex(decIndex);
-							int objectId = bh.getObjectId(style);
+							Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getRegion();
+							if (reg == null) {
+								continue;
+							}
+							BuildRegionChunk chunk = (BuildRegionChunk) reg.getPlanes()[plane % 3].getChunks()[l.getChunkX()][l.getChunkY()];
+							GameObject[] objects = chunk.getObjects(h.getCurrentX(), h.getCurrentY());
+							for (GameObject o : objects) {
+								if (o != null && o.getType() == object.getType()) {
+									ObjectBuilder.replace(o, o.transform(h.getHotspot().getDecorations()[decIndex].getObjectId(style)));
+									System.err.println("Found stairs!");
+									if (plane == 1) {
+										if (r.getProperties() == RoomProperties.SKILL_HALL) {
+											r.updateProperties(player, RoomProperties.SKILL_HALL_2);
+										} else if (r.getProperties() == RoomProperties.QUEST_HALL) {
+											r.updateProperties(player, RoomProperties.QUEST_HALL_2);
+										}
+										else {
+											break;
+										}
+										player.getHouseManager().reload(player, true);
+									}
+									break;
+								}
+							}
+						} else {
+							System.err.println("Couldn't find stairs! " + plane);
+						}
+					}
+				}
+				break;
+			case CREST:
+				ObjectBuilder.replace(object, object.transform(deco.getObjectId(style) + player.getHouseManager().getCrest().ordinal()));
+				hotspot.setDecorationIndex(decIndex);
+				break;
+			case INDIVIDUAL:
+				ObjectBuilder.replace(object, object.transform(deco.getObjectId(style)));
+				hotspot.setDecorationIndex(decIndex);
+				break;
+			case RECURSIVE:
+				BuildRegionChunk chunk = (BuildRegionChunk) region.getPlanes()[l.getZ()].getChunks()[l.getChunkX()][l.getChunkY()];
+				for (int x = 0; x < 8; x++) {
+					for (int y = 0; y < 8; y++) {
+						Hotspot h = room.getHotspot(hotspot.getHotspot(), x, y);
+						if (h != null) {
+							h.setDecorationIndex(decIndex);
+							int objectId = hotspot.getHotspot().getObjectId(style);
 							GameObject o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
 							if (o != null && objectId == o.getId()) {
-								ObjectBuilder.replace(o, o.transform(bh.getDecorations()[decIndex].getObjectId(style)));
+								ObjectBuilder.replace(o, o.transform(hotspot.getHotspot().getDecorations()[decIndex].getObjectId(style)));
 							}
 						}
 					}
 				}
-			}
-			break;
+				break;
+			case LINKED:
+				BuildHotspot[] linkedHotspots = BuildHotspot.getLinkedHotspots(hotspot.getHotspot());
+				chunk = (BuildRegionChunk) region.getPlanes()[l.getZ()].getChunks()[l.getChunkX()][l.getChunkY()];
+				for (int x = 0; x < 8; x++) {
+					for (int y = 0; y < 8; y++) {
+						for (BuildHotspot bh : linkedHotspots) {
+							Hotspot h = room.getHotspot(bh, x, y);
+							if (h != null) {
+								h.setDecorationIndex(decIndex);
+								int objectId = bh.getObjectId(style);
+								GameObject o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
+								if (o != null && objectId == o.getId()) {
+									ObjectBuilder.replace(o, o.transform(bh.getDecorations()[decIndex].getObjectId(style)));
+								}
+							}
+						}
+					}
+				}
+				break;
 		}
 	}
 
@@ -352,112 +359,111 @@ public final class BuildingUtils {
 	private static void removeDecoration(Player player, Region region, Room room, Hotspot hotspot, GameObject object, HousingStyle style) {
 		Location l = object.getLocation();
 		switch (hotspot.getHotspot().getType()) {
-		case STAIRCASE:
-			int z = l.getZ();
-			if (region == player.getHouseManager().getDungeonRegion()) {
-				z = 3;
-			}
-			for (int i = -1; i <= 1; i++) {
-				int plane = (z + (i == -1 ? 3 : i)) % 4;
-				Room r = player.getHouseManager().getRooms()[plane][l.getChunkX()][l.getChunkY()];
-				if (r != null && r.getRotation() == room.getRotation()) {
-					Hotspot h = r.getStairs();
-					if (h != null) {
-						h.setDecorationIndex(-1);
-						Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getRegion();
-						if (reg == null) {
-							continue;
-						}
-						BuildRegionChunk chunk = (BuildRegionChunk) reg.getPlanes()[plane % 3].getChunks()[l.getChunkX()][l.getChunkY()];
-						GameObject[] objects = chunk.getObjects(h.getCurrentX(), h.getCurrentY());
-						for (GameObject o : objects) {
-							if (o != null && o.getType() == object.getType()) {
-								ObjectBuilder.replace(o, o.transform(h.getHotspot().getObjectId(style)));
-								break;
-							}
-						}
-					} else {
-						System.err.println("Couldn't find stairs! " + plane);
-					}
+			case STAIRCASE:
+				int z = l.getZ();
+				if (region == player.getHouseManager().getDungeonRegion()) {
+					z = 3;
 				}
-			}
-			if (l.getZ() == 1) {
-				if (room.getProperties() == RoomProperties.SKILL_HALL_2) {
-					room.updateProperties(player, RoomProperties.SKILL_HALL);
-				}
-				else if (room.getProperties() == RoomProperties.QUEST_HALL_2) {
-					room.updateProperties(player, RoomProperties.QUEST_HALL);
-				}
-				else {
-					break;
-				}
-				player.getHouseManager().reload(player, true);
-			}
-			break;
-		case INDIVIDUAL:
-		case CREST:
-			ObjectBuilder.replace(object, object.transform(hotspot.getHotspot().getObjectId(style)));
-			hotspot.setDecorationIndex(-1);					
-			break;
-		case RECURSIVE:
-			BuildRegionChunk chunk = (BuildRegionChunk) region.getPlanes()[l.getZ()].getChunks()[l.getChunkX()][l.getChunkY()];			
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
-					Hotspot h = room.getHotspot(hotspot.getHotspot(), x, y);
-					if (h != null) {
-						int objectId = hotspot.getHotspot().getDecorations()[h.getDecorationIndex()].getObjectId(style);
-						GameObject o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
-						h.setDecorationIndex(-1);
-						if (o != null && objectId == o.getId()) {
-							ObjectBuilder.replace(o, o.transform(hotspot.getHotspot().getObjectId(style)));
-						}
-					}
-				}
-			}
-			break;
-		case LINKED:
-			BuildHotspot[] linkedHotspots = BuildHotspot.getLinkedHotspots(hotspot.getHotspot());
-			chunk = (BuildRegionChunk) region.getPlanes()[l.getZ()].getChunks()[l.getChunkX()][l.getChunkY()];			
-			for (int x = 0; x < 8; x++) {
-				for (int y = 0; y < 8; y++) {
-					for (BuildHotspot bh : linkedHotspots) {
-						Hotspot h = room.getHotspot(bh, x, y);
+				for (int i = -1; i <= 1; i++) {
+					int plane = (z + (i == -1 ? 3 : i)) % 4;
+					Room r = player.getHouseManager().getRooms()[plane][l.getChunkX()][l.getChunkY()];
+					if (r != null && r.getRotation() == room.getRotation()) {
+						Hotspot h = r.getStairs();
 						if (h != null) {
-							int objectId = bh.getDecorations()[h.getDecorationIndex()].getObjectId(style);
+							h.setDecorationIndex(-1);
+							Region reg = plane == 3 ? player.getHouseManager().getDungeonRegion() : player.getHouseManager().getRegion();
+							if (reg == null) {
+								continue;
+							}
+							BuildRegionChunk chunk = (BuildRegionChunk) reg.getPlanes()[plane % 3].getChunks()[l.getChunkX()][l.getChunkY()];
+							GameObject[] objects = chunk.getObjects(h.getCurrentX(), h.getCurrentY());
+							for (GameObject o : objects) {
+								if (o != null && o.getType() == object.getType()) {
+									ObjectBuilder.replace(o, o.transform(h.getHotspot().getObjectId(style)));
+									break;
+								}
+							}
+						} else {
+							System.err.println("Couldn't find stairs! " + plane);
+						}
+					}
+				}
+				if (l.getZ() == 1) {
+					if (room.getProperties() == RoomProperties.SKILL_HALL_2) {
+						room.updateProperties(player, RoomProperties.SKILL_HALL);
+					}
+					else if (room.getProperties() == RoomProperties.QUEST_HALL_2) {
+						room.updateProperties(player, RoomProperties.QUEST_HALL);
+					}
+					else {
+						break;
+					}
+					player.getHouseManager().reload(player, true);
+				}
+				break;
+			case INDIVIDUAL:
+			case CREST:
+				ObjectBuilder.replace(object, object.transform(hotspot.getHotspot().getObjectId(style)));
+				hotspot.setDecorationIndex(-1);
+				break;
+			case RECURSIVE:
+				BuildRegionChunk chunk = (BuildRegionChunk) region.getPlanes()[l.getZ()].getChunks()[l.getChunkX()][l.getChunkY()];
+				for (int x = 0; x < 8; x++) {
+					for (int y = 0; y < 8; y++) {
+						Hotspot h = room.getHotspot(hotspot.getHotspot(), x, y);
+						if (h != null) {
+							int objectId = hotspot.getHotspot().getDecorations()[h.getDecorationIndex()].getObjectId(style);
 							GameObject o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
 							h.setDecorationIndex(-1);
 							if (o != null && objectId == o.getId()) {
-								ObjectBuilder.replace(o, o.transform(bh.getObjectId(style)));
+								ObjectBuilder.replace(o, o.transform(hotspot.getHotspot().getObjectId(style)));
 							}
 						}
 					}
 				}
-			}
-			break;
+				break;
+			case LINKED:
+				BuildHotspot[] linkedHotspots = BuildHotspot.getLinkedHotspots(hotspot.getHotspot());
+				chunk = (BuildRegionChunk) region.getPlanes()[l.getZ()].getChunks()[l.getChunkX()][l.getChunkY()];
+				for (int x = 0; x < 8; x++) {
+					for (int y = 0; y < 8; y++) {
+						for (BuildHotspot bh : linkedHotspots) {
+							Hotspot h = room.getHotspot(bh, x, y);
+							if (h != null) {
+								int objectId = bh.getDecorations()[h.getDecorationIndex()].getObjectId(style);
+								GameObject o = chunk.get(x, y, chunk.getIndex(x, y, objectId));
+								h.setDecorationIndex(-1);
+								if (o != null && objectId == o.getId()) {
+									ObjectBuilder.replace(o, o.transform(bh.getObjectId(style)));
+								}
+							}
+						}
+					}
+				}
+				break;
 		}
 	}
 
 	/**
 	 * Checks if the decoration can be built.
 	 * @param player The player.
-	 * @param hotspot The hotspot.
 	 * @param deco The decoration.
 	 * @param object The object.
 	 * @return {@code True} if so.
 	 */
 	private static boolean canBuildDecoration(Player player, Room room, Decoration deco, GameObject object) {
 		switch (deco) {
-		case TENTACLE_MID:
-		case TENTACLE_SIDE:
-		case TENTACLE_CORNER:
-		case TENTACLE_FL:
-			if (!room.isBuilt(BuildHotspot.PRISON)) {
-				player.getPacketDispatch().sendMessage("You can't build a tentacle pool without a cage.");
-				return false;
-			}
-			return true;
-		default:
-			return true;
+			case TENTACLE_MID:
+			case TENTACLE_SIDE:
+			case TENTACLE_CORNER:
+			case TENTACLE_FL:
+				if (!room.isBuilt(BuildHotspot.PRISON)) {
+					player.getPacketDispatch().sendMessage("You can't build a tentacle pool without a cage.");
+					return false;
+				}
+				return true;
+			default:
+				return true;
 		}
 	}
 
@@ -465,7 +471,6 @@ public final class BuildingUtils {
 	 * Checks if the decoration can be built.
 	 * @param player The player.
 	 * @param hotspot The hotspot.
-	 * @param deco The decoration.
 	 * @param object The object.
 	 * @return {@code True} if so.
 	 */
@@ -474,27 +479,27 @@ public final class BuildingUtils {
 		Location l = object.getLocation();
 		int z = l.getZ();
 		switch (hotspot.getHotspot()) {
-		case STAIRWAYS:
-		case QUEST_STAIRWAYS:
-		case STAIRWAYS_DUNGEON:
-			BuildHotspot[] stairs = { BuildHotspot.STAIRS_DOWN, BuildHotspot.STAIRS_DOWN2, BuildHotspot.STAIRWAYS, BuildHotspot.QUEST_STAIRWAYS, BuildHotspot.STAIRWAYS_DUNGEON };
-			for (int i = 0; i < 2; i++) {
-				int plane = (z + 1 + (i * 2)) % 4;
-				Room r = player.getHouseManager().getRooms()[plane][l.getChunkX()][l.getChunkY()];
-				if (r != null) {
-					for (BuildHotspot h : stairs) {
-						Hotspot hs = r.getHotspot(h, hotspot.getCurrentX(), hotspot.getCurrentY());
-						if (hs != null) {
-							hs.setDecorationIndex(decorationIndex);
-							ObjectBuilder.replace(object, object.transform(h.getDecorations()[decorationIndex].getObjectId(player.getHouseManager().getStyle())));	
-							break;
+			case STAIRWAYS:
+			case QUEST_STAIRWAYS:
+			case STAIRWAYS_DUNGEON:
+				BuildHotspot[] stairs = { BuildHotspot.STAIRS_DOWN, BuildHotspot.STAIRS_DOWN2, BuildHotspot.STAIRWAYS, BuildHotspot.QUEST_STAIRWAYS, BuildHotspot.STAIRWAYS_DUNGEON };
+				for (int i = 0; i < 2; i++) {
+					int plane = (z + 1 + (i * 2)) % 4;
+					Room r = player.getHouseManager().getRooms()[plane][l.getChunkX()][l.getChunkY()];
+					if (r != null) {
+						for (BuildHotspot h : stairs) {
+							Hotspot hs = r.getHotspot(h, hotspot.getCurrentX(), hotspot.getCurrentY());
+							if (hs != null) {
+								hs.setDecorationIndex(decorationIndex);
+								ObjectBuilder.replace(object, object.transform(h.getDecorations()[decorationIndex].getObjectId(player.getHouseManager().getStyle())));
+								break;
+							}
 						}
 					}
 				}
-			}
-			return true;
-		default:
-			return true;
+				return true;
+			default:
+				return true;
 		}
 	}
 
@@ -502,8 +507,7 @@ public final class BuildingUtils {
 	 * Builds a room.
 	 * @param player The player.
 	 * @param room The room to build.
-	 * @param reload 
-	 * @param door The door hotspot.
+	 * @param reload
 	 */
 	public static void buildRoom(Player player, Room room, int z, int x, int y, boolean[] exits, boolean reload) {
 		player.getHouseManager().getRooms()[z][x][y] = room;
@@ -574,19 +578,19 @@ public final class BuildingUtils {
 	public static int[] getRoomPosition(Player player, GameObject door) {
 		Location l = door.getLocation();
 		int rotation = door.getRotation();
-		if (player.getLocation().getChunkX() != l.getLocation().getChunkX() 
+		if (player.getLocation().getChunkX() != l.getLocation().getChunkX()
 				|| player.getLocation().getChunkY() != l.getLocation().getChunkY()) {
 			return new int[] { l.getChunkX(), l.getChunkY() };
 		}
 		switch (rotation) {
-		case 0: //West
-			return new int[] { l.getChunkX() - 1, l.getChunkY() };
-		case 1: //North
-			return new int[] { l.getChunkX(), l.getChunkY() + 1};
-		case 2: //East
-			return new int[] { l.getChunkX() + 1, l.getChunkY() };
-		case 3: //South
-			return new int[] { l.getChunkX(), l.getChunkY() - 1};
+			case 0: //West
+				return new int[] { l.getChunkX() - 1, l.getChunkY() };
+			case 1: //North
+				return new int[] { l.getChunkX(), l.getChunkY() + 1};
+			case 2: //East
+				return new int[] { l.getChunkX() + 1, l.getChunkY() };
+			case 3: //South
+				return new int[] { l.getChunkX(), l.getChunkY() - 1};
 		}
 		return null;
 	}

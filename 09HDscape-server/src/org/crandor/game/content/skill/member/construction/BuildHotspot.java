@@ -395,6 +395,7 @@ public enum BuildHotspot {
 		linkedHotspots.add(new BuildHotspot[] { DUNGEON_DOOR_LEFT, DUNGEON_DOOR_RIGHT });
 		linkedHotspots.add(new BuildHotspot[] { DUNGEON_DOOR_LEFT2, DUNGEON_DOOR_RIGHT2 });
 		linkedHotspots.add(new BuildHotspot[] { HABITAT_1, HABITAT_2 });
+		linkedHotspots.add(new BuildHotspot[] { SMALL_PLANT_1, SMALL_PLANT1 });
 	}
 	
 	/**

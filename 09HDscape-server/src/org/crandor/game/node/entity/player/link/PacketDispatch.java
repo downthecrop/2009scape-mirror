@@ -136,8 +136,8 @@ public final class PacketDispatch {
 	 * @param id The id to set.
 	 * @param value The value of the config.
 	 */
-	public void sendScriptConfig(int id, int value) {
-		PacketRepository.send(CSConfigPacket.class, new CSConfigContext(player, id, value));
+	public void sendScriptConfig(int id, int value, String types, Object... parameters) {
+		PacketRepository.send(CSConfigPacket.class, new CSConfigContext(player, id, value, types, parameters));
 	}
 
 	/**
@@ -370,6 +370,10 @@ public final class PacketDispatch {
 	public void sendGraphic(int id, int height) {
 		player.getUpdateMasks().register(new GraphicFlag(new Graphics(id, height)));
 	}
+	public void sendVarClient(int id, int value, boolean cs2) {
+		PacketRepository.send(Config.class, new ConfigContext(player, id, value, cs2));
+	}
+
 
 	/**
 	 * Gets the player.

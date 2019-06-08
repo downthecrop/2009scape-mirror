@@ -182,7 +182,7 @@ public final class FruitCuttingPlugin extends UseWithHandler {
 
 		@Override
 		public boolean open(Object... args) {
-			fruit = ((FruitCuttingPlugin.Fruit) args[0]);
+			fruit = ((Fruit) args[0]);
 			player.getPacketDispatch().sendString("Would you like to...", 140, 4);
 			player.getPacketDispatch().sendItemOnInterface(fruit.getSliced().getId(), 1, 140, 5);
 			player.getPacketDispatch().sendItemOnInterface(fruit.getDiced().getId(), 1, 140, 6);
@@ -256,7 +256,7 @@ public final class FruitCuttingPlugin extends UseWithHandler {
 				return;
 			}
 			if (player.getInventory().remove(remove)) {
-				player.getPacketDispatch().sendMessage("You cut the " + fruit.name().toLowerCase() + " into " + (slice ? fruit == FruitCuttingPlugin.Fruit.PINEAPPLE ? "rings" : "slices" : "chunks") + ".");
+				player.getPacketDispatch().sendMessage("You cut the " + fruit.name().toLowerCase() + " into " + (slice ? fruit == Fruit.PINEAPPLE ? "rings" : "slices" : "chunks") + ".");
 				for (int i = 0; i < amount; i++) {
 					player.getInventory().add(slice ? fruit.getSliced() : fruit.getDiced());
 				}

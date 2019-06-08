@@ -1,4 +1,6 @@
 package org.runite.jagex;
+import org.runite.GameLaunch;
+
 import java.applet.Applet;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
@@ -1578,7 +1580,7 @@ final class RSString implements Interface3 {
 
 static final RSString createRSString(String string) {
 	if (string != null) {
-		string = string.replace("RuneScape", "Runite");
+		string = string.replace("RuneScape", GameLaunch.SETTINGS.getName());
 	}
 	try {
 		byte[] var2 = string.getBytes(); 

@@ -16,7 +16,7 @@ public final class ServerConstants {
 	 * The administrators.
 	 */
 	public static final String[] ADMINISTRATORS = {
-		"torv",
+		"ethan",
 		"austin",
 	};
 	
