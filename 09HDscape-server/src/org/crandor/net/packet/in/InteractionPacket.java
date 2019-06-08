@@ -186,7 +186,7 @@ public final class InteractionPacket implements IncomingPacket {
 	 * @param y The y-coordinate of the object.
 	 * @param objectId The object id.
 	 */
-	private static void handleObjectInteraction(final Player player, int optionIndex, int x, int y, int objectId) {
+	public static void handleObjectInteraction(final Player player, int optionIndex, int x, int y, int objectId) {
 		GameObject object = RegionManager.getObject(player.getLocation().getZ(), x, y, objectId);
 		if (objectId == 29735) {//player safety.
 			player.getPulseManager().run(new MovementPulse(player, Location.create(x, y, player .getLocation().getZ())) {

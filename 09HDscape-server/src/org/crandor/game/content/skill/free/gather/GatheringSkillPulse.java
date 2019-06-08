@@ -59,7 +59,8 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 
 	@Override
 	public void start() {
-		resource = SkillingResource.forId(node.getId());
+		resource = SkillingResource.forId(
+		        node.getId());
 		if (SkillingResource.isEmpty(node.getId())) {
 			player.getPacketDispatch().sendMessage("This rock contains no ore.");
 			return;

@@ -8,6 +8,7 @@ import org.crandor.game.node.object.GameObject;
 import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.map.Location;
+import org.crandor.game.world.map.RegionManager;
 import org.crandor.game.world.map.path.Pathfinder;
 
 import java.util.List;
@@ -39,7 +40,7 @@ public class ResourceAIPActions {
 						resource_players.remove(bot);
 						return true;
 					}
-					chopTree(bot, new GameObject(1278, new Location(3212, 3232, 0)));
+					chopTree(bot, RegionManager.getObject(Location.create(3234,3231,0)));
 					return false;
 				}
 			});
@@ -47,10 +48,10 @@ public class ResourceAIPActions {
 	}
 	
 	private static void chopTree(final AIPlayer bot, final GameObject node) {
-		//bot.sendChat("WE CHOPPIN");
-		Pathfinder.find(bot, node);
-		Pulse pulse = new GatheringSkillPulse(bot, node);
-		bot.getPulseManager().run(pulse);
-		pulse.start();
+		bot.sendChat("WE CHOPPIN");
+//		Pathfinder.find(bot, node);
+//		Pulse pulse = new GatheringSkillPulse(bot, node);
+        bot.getPulseManager().run(new GatheringSkillPulse(bot, node));
+//		pulse.start();
 	}	
 }
