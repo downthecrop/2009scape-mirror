@@ -17,7 +17,7 @@ import org.crandor.tools.backup.AutoBackup;
  * @author Vexia
  * 
  */
-public final class Main extends Application {
+public final class Main{
 
 	/**
 	 * The time stamp of when the server started running.
@@ -75,11 +75,4 @@ public final class Main extends Application {
 		Main.startTime = startTime;
 	}
 
-    @Override
-    public void start(Stage primaryStage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("Main Frame.fxml"));
-        primaryStage.setTitle("Management Panel");
-        primaryStage.setScene(new Scene(root, 600, 450));
-        primaryStage.show();
-    }
 }
