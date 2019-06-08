@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <module type="JAVA_MODULE" version="4">
-  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8">
-    <output url="file:///production/09HDscape" />
-    <output-test url="file:///test/09HDscape" />
+  <component name="NewModuleRootManager" LANGUAGE_LEVEL="JDK_1_8" inherit-compiler-output="true">
     <exclude-output />
     <content url="file://$MODULE_DIR$/09HDscape-client">
       <sourceFolder url="file://$MODULE_DIR$/09HDscape-client/src" isTestSource="false" />
@@ -18,16 +16,7 @@
     <orderEntry type="module-library">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/09HDscape-client/lib/gluegen-rt.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/09HDscape-client/lib/jogl.jar!/" />
+          <root url="jar://$MODULE_DIR$/09HDscape-client/clientlibs.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />
