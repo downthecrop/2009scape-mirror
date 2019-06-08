@@ -1,10 +1,5 @@
 package org.crandor;
 
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import org.crandor.game.system.SystemLogger;
 import org.crandor.game.system.SystemShutdownHook;
 import org.crandor.game.system.mysql.SQLManager;

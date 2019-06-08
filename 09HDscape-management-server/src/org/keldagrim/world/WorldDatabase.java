@@ -8,8 +8,6 @@ import org.keldagrim.net.packet.IoBuffer;
 import org.keldagrim.world.info.CountryFlag;
 import org.keldagrim.world.info.WorldInfo;
 
-import com.sun.xml.internal.ws.util.StringUtils;
-
 /**
  * Holds all the world servers.
  * @author Emperor
@@ -84,7 +82,19 @@ public class WorldDatabase {
 	private static void putCountryInfo(IoBuffer buffer) {
 		for (CountryFlag country : CountryFlag.values()) {
 			buffer.putSmart(country.getId());
-			buffer.putJagString(StringUtils.capitalize(country.name().toLowerCase()));
+			buffer.putJagString(capitalize(country.name().toLowerCase()));
+		}
+	}
+	/*
+     * Stole this from a library so we don't need the dependency
+	 */
+	private static String capitalize(String name) {
+		if (name != null && name.length() != 0) {
+			char[] chars = name.toCharArray();
+			chars[0] = Character.toUpperCase(chars[0]);
+			return new String(chars);
+		} else {
+			return name;
 		}
 	}
 
