@@ -8,6 +8,9 @@ public class ManThiever extends Script {
     public void runLoop() {
         Node man = scriptAPI.getNearestEntity(me, "Man");
 
-        man.getInteraction().handle(me, man.getInteraction().get(2));
+        if (man != null)
+        {
+            man.getInteraction().handle(me, man.getInteraction().get(2));
+        }
     }
 }

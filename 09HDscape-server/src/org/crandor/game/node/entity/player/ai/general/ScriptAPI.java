@@ -26,14 +26,13 @@ public class ScriptAPI {
         double minDistance = Double.MAX_VALUE;
         for (Node e : RegionManager.forId(me.getLocation().getRegionId()).getPlanes()[me.getLocation().getZ()].getEntities())
         {
-            if (e != null && e.getName().equals(entityName) && distance(me, e) < minDistance && Pathfinder.find(me, e, false, Pathfinder.SMART).isSuccessful())
+            if (e != null && e.getName().equals(entityName) && distance(me, e) < minDistance && !Pathfinder.find(me, e).isMoveNear())
             {
                 entity = e;
                 minDistance = distance(me, e);
             }
         }
 
-        System.out.println("Start: " + me.getLocation() + ". End: " + entity.getLocation());
         return entity;
     }
 
