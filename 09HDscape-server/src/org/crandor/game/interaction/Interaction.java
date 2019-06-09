@@ -61,30 +61,23 @@ public final class Interaction {
 	 * @param option The option used.
 	 */
 	public void handle(final Player player, final Option option) {
-		System.out.println("In handle");
 		if (player.getLocks().isInteractionLocked()) {
-			System.out.println("Locked!");
 			return;
 		}
 		boolean hasHandler = option.getHandler() != null;
 		String pulseType = "interaction:" + option.getName() + ":" + node.hashCode();
 		boolean walk = hasHandler && option.getHandler().isWalk();
-		System.out.println("Which one will he take?");
 		if (!walk && hasHandler && option.getHandler().isWalk(player, node)) {
 			walk = true;
 		}
 		if (!hasHandler || walk) {
 			handleWalkOption(player, option, pulseType);
-			System.out.println("A");
 		} else if (hasHandler) {
 			player.debug("Option handler being used=" + option.getHandler().getClass().getSimpleName());
 			handleDefaultOption(player, option, pulseType);
-			System.out.println("D");
 		} else {
 			player.getPulseManager().runUnhandledAction(player, pulseType);
-			System.out.println("C");
 		}
-		System.out.println("Done");
 	}
 
 	/**

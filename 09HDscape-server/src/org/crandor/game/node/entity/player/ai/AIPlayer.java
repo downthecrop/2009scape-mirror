@@ -58,11 +58,6 @@ public class AIPlayer extends Player {
 	private Player controler;
 
 	/**
-	 * The scriptAPI the bot will perform
-	 */
-	private ScriptAPI scriptAPI;
-
-	/**
 	 * Constructs a new {@code AIPlayer} {@code Object}.
 	 * @param name The name of the AIP.
 	 * @param l The location.
@@ -75,7 +70,6 @@ public class AIPlayer extends Player {
 		super.getDetails().setSession(ArtificialSession.getSingleton());
 		this.username = StringUtils.formatDisplayName(name);
 		this.uid = currentUID++;
-		this.scriptAPI = new ScriptAPI();
 	}
 
 	@Override

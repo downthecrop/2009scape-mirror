@@ -20,7 +20,7 @@ public class ScriptAPI {
         return Math.sqrt(Math.pow(n1.getLocation().getX() - n2.getLocation().getX(), 2) + Math.pow(n2.getLocation().getY() - n1.getLocation().getY(), 2));
     }
 
-    public Node getNearestEntity(Player me, String entityName)
+    public Node getNearestNode(Player me, String entityName)
     {
         Node entity = null;
         double minDistance = Double.MAX_VALUE;

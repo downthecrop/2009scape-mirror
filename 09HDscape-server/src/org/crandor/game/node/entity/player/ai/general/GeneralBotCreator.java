@@ -3,6 +3,7 @@ package org.crandor.game.node.entity.player.ai.general;
 import org.crandor.game.node.entity.player.ai.AIPBuilder;
 import org.crandor.game.node.entity.player.ai.AIPlayer;
 import org.crandor.game.node.entity.player.ai.general.scriptrepository.Script;
+import org.crandor.game.node.item.Item;
 import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.map.Location;
@@ -17,6 +18,16 @@ public class GeneralBotCreator {
         Repository.getPlayers().add(bot);
         bot.init();
         botScript.setPlayer(bot);
+
+        // Initialize inventory
+        for (Item i : botScript.inventory)
+        {
+            bot.getInventory().add(i);
+        }
+        for (Item i : botScript.equipment)
+        {
+            bot.getEquipment().add(i, true, false);
+        }
 
         GameWorld.submit(new Pulse(1, bot) {
             int ticks = 0;
