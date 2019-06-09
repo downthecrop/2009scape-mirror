@@ -80,7 +80,7 @@ public final class CS2Mapping {
 			if (mapping.map == null) {
 				continue;
 			}
-			bw.append("Script - " + i + " [");
+			bw.append("ScriptAPI - " + i + " [");
 			for (int index : mapping.map.keySet()) {
 				bw.append(mapping.map.get(index) + ": " + index + " ");
 			}

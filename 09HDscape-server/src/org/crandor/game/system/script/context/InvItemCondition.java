@@ -7,7 +7,7 @@ import org.crandor.game.system.script.ScriptContext;
 import java.util.Arrays;
 
 /**
- * Script condition for checking if a player has an item in the inventory.
+ * ScriptAPI condition for checking if a player has an item in the inventory.
  * @author Emperor
  */
 public final class InvItemCondition extends ScriptContext {
