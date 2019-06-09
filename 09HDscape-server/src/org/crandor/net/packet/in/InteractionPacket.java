@@ -234,7 +234,7 @@ public final class InteractionPacket implements IncomingPacket {
 
 	/**
 	 * Handles player interaction.
-	 * @param playerThe player interacting.
+	 * @param player The player interacting.
 	 * @param optionIndex The option index.
 	 * @param index The target index.
 	 */
@@ -262,7 +262,7 @@ public final class InteractionPacket implements IncomingPacket {
 	 * @param player The player.
 	 * @param index The index of the reward.
 	 * @param itemId The item id.
-	 * @param locationThe location of the item.
+	 * @param location The location of the item.
 	 */
 	private static void handleGroundItemInteraction(final Player player, int index, int itemId, Location location) {
 		final GroundItem item = GroundItemManager.get(itemId, location, player);
