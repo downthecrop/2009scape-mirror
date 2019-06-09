@@ -5,9 +5,13 @@ import org.crandor.game.interaction.DestinationFlag;
 import org.crandor.game.interaction.MovementPulse;
 import org.crandor.game.node.entity.Entity;
 import org.crandor.game.node.entity.player.Player;
+import org.crandor.game.node.entity.player.ai.general.ScriptAPI;
+import org.crandor.game.node.entity.player.ai.general.scriptrepository.Script;
 import org.crandor.game.node.entity.player.info.PlayerDetails;
+import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.map.Location;
 import org.crandor.tools.StringUtils;
+import plugin.skill.thieving.ThievingOptionPlugin;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +56,12 @@ public class AIPlayer extends Player {
 	 * The player controlling this AIP.
 	 */
 	private Player controler;
-	
+
+	/**
+	 * The scriptAPI the bot will perform
+	 */
+	private ScriptAPI scriptAPI;
+
 	/**
 	 * Constructs a new {@code AIPlayer} {@code Object}.
 	 * @param name The name of the AIP.
@@ -66,6 +75,7 @@ public class AIPlayer extends Player {
 		super.getDetails().setSession(ArtificialSession.getSingleton());
 		this.username = StringUtils.formatDisplayName(name);
 		this.uid = currentUID++;
+		this.scriptAPI = new ScriptAPI();
 	}
 
 	@Override
@@ -133,6 +143,26 @@ public class AIPlayer extends Player {
 		this.setAttribute("dead", true);
 	}
 
+	public void runScript(Script script)
+	{
+		if (!this.getPulseManager().hasPulseRunning())
+		{
+			getPulseManager().run(new Pulse() {
+				@Override
+				public boolean pulse() {
+					return false;
+				}
+
+				@Override
+				public boolean update() {
+				    super.update();
+				    script.runLoop();
+				    return true;
+				}
+			});
+		}
+	}
+
 	/**
 	 * Gets the UID.
 	 * @return the UID.
@@ -192,5 +222,4 @@ public class AIPlayer extends Player {
 	public void setControler(Player controler) {
 		this.controler = controler;
 	}
-	
 }

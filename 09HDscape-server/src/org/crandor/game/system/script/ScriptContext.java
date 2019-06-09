@@ -1,7 +1,7 @@
 package org.crandor.game.system.script;
 
 /**
- * Script context, this can be a condition or an instruction.
+ * ScriptAPI context, this can be a condition or an instruction.
  * @author Emperor
  */
 public abstract class ScriptContext {
