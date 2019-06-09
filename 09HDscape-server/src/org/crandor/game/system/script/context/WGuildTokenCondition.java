@@ -4,7 +4,7 @@ import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.system.script.ScriptContext;
 
 /**
- * Script condition for checking if a player has warrior guild tokens.
+ * ScriptAPI condition for checking if a player has warrior guild tokens.
  * @author 'Vexia
  */
 public final class WGuildTokenCondition extends ScriptContext {

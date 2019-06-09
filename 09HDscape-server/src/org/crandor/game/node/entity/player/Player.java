@@ -248,7 +248,6 @@ public class Player extends Entity {
 	 */
 	private final HunterManager hunterManager = new HunterManager(this);
 
-
 	/**
 	 * The treasure trail manager.
 	 */
@@ -273,7 +272,6 @@ public class Player extends Entity {
 	 * The Ironman manager.
 	 */
 	private final IronmanManager ironmanManager = new IronmanManager(this);
-
 
 	/**
 	 * The logout plugins.

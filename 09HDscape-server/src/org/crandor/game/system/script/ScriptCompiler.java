@@ -137,7 +137,7 @@ public final class ScriptCompiler {
 			line = rawScript.poll();
 			if (line == null) {
 				br.close();
-				throw new ScriptException("Script " + file.getName() + " is empty!", -1);
+				throw new ScriptException("ScriptAPI " + file.getName() + " is empty!", -1);
 			}
 			br.close();
 			ScriptContext context = parseScript(line, rawScript, new ScriptEntry(null, null, null, false), null);

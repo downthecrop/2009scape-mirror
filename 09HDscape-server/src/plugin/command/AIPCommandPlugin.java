@@ -4,6 +4,8 @@ import org.crandor.game.interaction.Interaction;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.ai.AIPBuilder;
 import org.crandor.game.node.entity.player.ai.AIPlayer;
+import org.crandor.game.node.entity.player.ai.general.GeneralBotCreator;
+import org.crandor.game.node.entity.player.ai.general.scriptrepository.ManThiever;
 import org.crandor.game.node.entity.player.ai.pvp.PVPAIPActions;
 import org.crandor.game.node.entity.player.ai.pvp.PVPAIPBuilderUtils;
 import org.crandor.game.node.entity.player.ai.resource.ResourceAIPActions;
@@ -25,6 +27,7 @@ import java.util.List;
 
 /**
  * Handles the AIPlayer commands.
+ * These commands are for bots
  * @author Emperor
  */
 @InitializablePlugin
@@ -176,6 +179,14 @@ public final class AIPCommandPlugin extends CommandPlugin {
 		case "pvpfight":
 			PVPAIPActions.syncBotThread(player);
 			return true;
+
+		/*
+		    Start regular bots
+		 */
+    	case "manthiev":
+    		new GeneralBotCreator("Bot", player.getLocation(), new ManThiever());
+    		break;
+
 		}
 		return false;
 	}

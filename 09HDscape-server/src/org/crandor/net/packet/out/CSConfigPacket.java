@@ -1,6 +1,5 @@
 package org.crandor.net.packet.out;
 
-import com.oracle.jrockit.jfr.DataType;
 import org.crandor.net.packet.IoBuffer;
 import org.crandor.net.packet.OutgoingPacket;
 import org.crandor.net.packet.context.CSConfigContext;
