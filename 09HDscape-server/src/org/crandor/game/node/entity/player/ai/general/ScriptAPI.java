@@ -1,34 +1,39 @@
 package org.crandor.game.node.entity.player.ai.general;
 
-import org.crandor.game.node.entity.npc.NPC;
+import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.object.GameObject;
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.RegionManager;
-import org.crandor.game.world.map.RegionPlane;
 import org.crandor.game.world.map.path.Pathfinder;
 
 public class ScriptAPI {
 
-    public double distance(Location l1, Location l2) {
-        return Pathfinder.find(l1, l2).getPoints().size();
+    private Player bot;
+
+    public ScriptAPI(Player bot) {
+        this.bot = bot;
     }
 
-    public NPC getNearestNPC(Location loc, String npcName) {
-        NPC npc = null;
+    public double distance(Node n1, Node n2)
+    {
+        return Math.sqrt(Math.pow(n1.getLocation().getX() - n2.getLocation().getX(), 2) + Math.pow(n2.getLocation().getY() - n1.getLocation().getY(), 2));
+    }
+
+    public Node getNearestNode(String entityName)
+    {
+        Node entity = null;
         double minDistance = Double.MAX_VALUE;
-        for (RegionPlane p : RegionManager.forId(loc.getRegionId()).getPlanes()) {
-            for (NPC n : p.getNpcs()) {
-                if (n != null) {
-                    if (n.getName().equals(npcName) && distance(loc, n.getLocation()) < minDistance) {
-                        npc = n;
-                    }
-                }
+        for (Node e : RegionManager.forId(bot.getLocation().getRegionId()).getPlanes()[bot.getLocation().getZ()].getEntities())
+        {
+            if (e != null && e.getName().equals(entityName) && distance(bot, e) < minDistance && !Pathfinder.find(bot, e).isMoveNear())
+            {
+                entity = e;
+                minDistance = distance(bot, e);
             }
         }
 
-        System.out.println("Returning " + npc.getName());
-        return npc;
+        return entity;
     }
 
     public GameObject getNearestGameObject(Location loc, int objectId) {
@@ -37,7 +42,7 @@ public class ScriptAPI {
         for (GameObject[] o : RegionManager.forId(loc.getRegionId()).getPlanes()[0].getObjects()) {
             for (GameObject obj : o) {
                 if (obj != null) {
-                    if (distance(loc, obj.getLocation()) < minDistance) {
+                    if (distance(loc, obj) < minDistance) {
                         nearestObject = obj;
                     }
                 }

@@ -50,14 +50,14 @@ public class PlayerExamineInterfacePlugin extends ComponentPlugin {
         player.getPacketDispatch().sendInterfaceConfig(component.getId(), 13, true);
         player.getInterfaceManager().open(component);
         player.getPacketDispatch().sendString("<col=" + examined.getSavedData().getSpawnData().getTitle().getTitleColor() + ">" + examined.getSavedData().getSpawnData().getTitle().getName() + "</col> " + StringUtils.formatDisplayName(examined.getName()) + " - Combat Level: " + player.getProperties().getCurrentCombatLevel(), 31, 3);
-        player.getPacketDispatch().sendString("KDR -> ", 31, 9);
-        player.getPacketDispatch().sendString("Total Kills -> ", 31, 10);
-        player.getPacketDispatch().sendString("Total Deaths -> ", 31, 16);
-        player.getPacketDispatch().sendString("Killstreak -> ", 31, 19);
-        player.getPacketDispatch().sendString("" + examined.getSavedData().getSpawnData().getKdr(), 31, 11);
-        player.getPacketDispatch().sendString("" + examined.getSavedData().getSpawnData().getKills(), 31, 12);
-        player.getPacketDispatch().sendString("" + examined.getSavedData().getSpawnData().getDeaths(), 31, 17);
-        player.getPacketDispatch().sendString("" + examined.getSavedData().getSpawnData().getKillStreak(), 31, 20);
+        player.getPacketDispatch().sendString("Total Level -> ", 31, 9);
+        player.getPacketDispatch().sendString("Inventory items -> ", 31, 10);
+        player.getPacketDispatch().sendString("Inventory value -> ", 31, 16);
+        player.getPacketDispatch().sendString("Bank value-> ", 31, 19);
+        player.getPacketDispatch().sendString("" + examined.getSkills().getTotalLevel(), 31, 11);
+        player.getPacketDispatch().sendString("" + examined.getInventory().itemCount(), 31, 12);
+        player.getPacketDispatch().sendString("" + examined.getInventory().getWealth(), 31, 17);
+        player.getPacketDispatch().sendString("" + examined.getBank().getWealth(), 31, 20);
         player.getPacketDispatch().sendString("Close", 31, 5);
     }
 }
