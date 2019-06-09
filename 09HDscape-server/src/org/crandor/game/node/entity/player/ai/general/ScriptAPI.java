@@ -26,12 +26,8 @@ public class ScriptAPI {
         double minDistance = Double.MAX_VALUE;
         for (Node e : RegionManager.forId(me.getLocation().getRegionId()).getPlanes()[me.getLocation().getZ()].getEntities())
         {
-            if (e != null && e.getName().equals(entityName) && distance(me, e) < minDistance && Pathfinder.find(me, e).isSuccessful())
+            if (e != null && e.getName().equals(entityName) && distance(me, e) < minDistance && Pathfinder.find(me, e, false, Pathfinder.SMART).isSuccessful())
             {
-                /*if (entity != null)
-                {
-                    System.out.println("I'm at " + me.getLocation() + ". " + e.getLocation() + distance(me, e) + " is closer to me than " + entity.getLocation() + distance(me, entity));
-                }*/
                 entity = e;
                 minDistance = distance(me, e);
             }

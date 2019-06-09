@@ -143,26 +143,6 @@ public class AIPlayer extends Player {
 		this.setAttribute("dead", true);
 	}
 
-	public void runScript(Script script)
-	{
-		if (!this.getPulseManager().hasPulseRunning())
-		{
-			getPulseManager().run(new Pulse() {
-				@Override
-				public boolean pulse() {
-					return false;
-				}
-
-				@Override
-				public boolean update() {
-				    super.update();
-				    script.runLoop();
-				    return true;
-				}
-			});
-		}
-	}
-
 	/**
 	 * Gets the UID.
 	 * @return the UID.

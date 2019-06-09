@@ -27,8 +27,11 @@ public class GeneralBotCreator {
                     AIPlayer.deregister(bot.getUid());
                     return true;
                 }
-
-                bot.runScript(botScript);
+                System.out.println("Running script");
+                if (!bot.getPulseManager().hasPulseRunning())
+                {
+                    botScript.runLoop();
+                }
                 return false;
             }
         });
