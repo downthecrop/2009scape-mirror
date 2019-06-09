@@ -1,5 +1,7 @@
 package org.crandor.game.world.map;
 
+import org.crandor.game.node.Node;
+import org.crandor.game.node.entity.Entity;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.item.GroundItem;
@@ -13,6 +15,8 @@ import org.crandor.net.packet.context.BuildItemContext;
 import org.crandor.net.packet.out.ClearGroundItem;
 import org.crandor.net.packet.out.ConstructGroundItem;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
@@ -318,6 +322,17 @@ public final class RegionPlane {
 	 */
 	public List<NPC> getNpcs() {
 		return npcs;
+	}
+
+	public List<Node> getEntities()
+	{
+	    List<Node> entities = new ArrayList<>(npcs);
+	    for (GameObject[] o : getObjects())
+		{
+			entities.addAll(Arrays.asList(o));
+		}
+
+	    return  entities;
 	}
 
 	/**

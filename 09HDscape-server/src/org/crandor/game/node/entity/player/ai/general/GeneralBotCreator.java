@@ -10,6 +10,7 @@ import org.crandor.game.world.repository.Repository;
 
 public class GeneralBotCreator {
 
+    //org/crandor/net/packet/in/InteractionPacket.java <<< This is a very useful class for learning to code bots
     public GeneralBotCreator(String botName, Location loc, Script botScript)
     {
         AIPlayer bot = AIPBuilder.create(botName, loc);

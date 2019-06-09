@@ -2,6 +2,7 @@ package org.crandor.game.world.map.path;
 
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.Point;
+import org.crandor.game.world.map.RegionManager;
 
 public final class SmartPathfinder extends Pathfinder {
 
