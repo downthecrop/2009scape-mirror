@@ -13,11 +13,11 @@ public class ManThiever extends Script {
 
     @Override
     public void runLoop() {
-        Node man = scriptAPI.getNearestNode(me, "Man");
+        Node man = scriptAPI.getNearestNode("Man");
 
         if (man != null)
         {
-            man.getInteraction().handle(me, man.getInteraction().get(2));
+            man.getInteraction().handle(bot, man.getInteraction().get(2));
         }
     }
 }

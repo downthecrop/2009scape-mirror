@@ -14,32 +14,21 @@ public class GeneralBotCreator {
     //org/crandor/net/packet/in/InteractionPacket.java <<< This is a very useful class for learning to code bots
     public GeneralBotCreator(String botName, Location loc, Script botScript)
     {
-        AIPlayer bot = AIPBuilder.create(botName, loc);
-        Repository.getPlayers().add(bot);
-        bot.init();
-        botScript.setPlayer(bot);
+        botScript.bot = AIPBuilder.create(botName, loc);
+        Repository.getPlayers().add(botScript.bot);
+        botScript.init();
 
-        // Initialize inventory
-        for (Item i : botScript.inventory)
-        {
-            bot.getInventory().add(i);
-        }
-        for (Item i : botScript.equipment)
-        {
-            bot.getEquipment().add(i, true, false);
-        }
-
-        GameWorld.submit(new Pulse(1, bot) {
+        GameWorld.submit(new Pulse(1, botScript.bot) {
             int ticks = 0;
             @Override
             public boolean pulse() {
                 if (ticks ++ == 5000)
                 {
-                    AIPlayer.deregister(bot.getUid());
+                    AIPlayer.deregister(botScript.bot.getUid());
                     return true;
                 }
 
-                if (!bot.getPulseManager().hasPulseRunning())
+                if (!botScript.bot.getPulseManager().hasPulseRunning())
                 {
                     botScript.runLoop();
                 }
