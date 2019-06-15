@@ -1,8 +1,8 @@
 package org.crandor.game.node.entity.player.ai;
 
-import org.crandor.net.IoSession;
-
 import java.nio.ByteBuffer;
+
+import org.crandor.net.IoSession;
 
 /**
  * Represents an artificial networking session.

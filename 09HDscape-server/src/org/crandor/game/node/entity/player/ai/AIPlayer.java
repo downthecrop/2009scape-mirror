@@ -1,20 +1,29 @@
 package org.crandor.game.node.entity.player.ai;
 
-import org.crandor.ServerConstants;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.crandor.game.content.dialogue.DialoguePlugin;
+import org.crandor.game.content.global.tutorial.CharacterDesign;
 import org.crandor.game.interaction.DestinationFlag;
 import org.crandor.game.interaction.MovementPulse;
+import org.crandor.game.interaction.Option;
+import org.crandor.game.interaction.OptionHandler;
+import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.Entity;
+import org.crandor.game.node.entity.combat.CombatStyle;
+import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
-import org.crandor.game.node.entity.player.ai.general.ScriptAPI;
-import org.crandor.game.node.entity.player.ai.general.scriptrepository.Script;
 import org.crandor.game.node.entity.player.info.PlayerDetails;
-import org.crandor.game.system.task.Pulse;
+import org.crandor.game.node.item.Item;
 import org.crandor.game.world.map.Location;
+import org.crandor.game.world.map.RegionManager;
+import org.crandor.game.world.map.path.Pathfinder;
+import org.crandor.plugin.Plugin;
+import org.crandor.tools.RandomFunction;
 import org.crandor.tools.StringUtils;
-import plugin.skill.thieving.ThievingOptionPlugin;
-
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * Represents an <b>A</b>rtificial <b>I</b>ntelligent <b>P</b>layer.
@@ -56,6 +65,8 @@ public class AIPlayer extends Player {
 	 * The player controlling this AIP.
 	 */
 	private Player controler;
+	
+
 
 	/**
 	 * Constructs a new {@code AIPlayer} {@code Object}.
@@ -64,23 +75,24 @@ public class AIPlayer extends Player {
 	 */
 	@SuppressWarnings("deprecation")
 	public AIPlayer(String name, Location l) {
-		super(new PlayerDetails(/*"/aip" + (currentUID + 1) + ":" + */name));
+		super(new PlayerDetails("/aip" + (currentUID + 1) + ":" + name));
 		super.setLocation(startLocation = l);
 		super.artificial = true;
 		super.getDetails().setSession(ArtificialSession.getSingleton());
-		this.username = StringUtils.formatDisplayName(name);
+		this.username = StringUtils.formatDisplayName(name + (currentUID + 1));
 		this.uid = currentUID++;
 	}
 
 	@Override
 	public void init() {
-		getProperties().setSpawnLocation(/*startLocation*/ ServerConstants.HOME_LOCATION);
+		getProperties().setSpawnLocation(startLocation);
 		getInterfaceManager().openDefaultTabs();
 		getSession().setObject(this);
 		botMapping.put(uid, this);
 		super.init();
 		getSettings().setRunToggled(true);
-		/*getInteraction().set(new Option("Control", 7).setHandler(new OptionHandler() {
+        CharacterDesign.randomize(this, false);
+		getInteraction().set(new Option("Control", 7).setHandler(new OptionHandler() {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
 				return null;
@@ -100,7 +112,8 @@ public class AIPlayer extends Player {
 				return false;
 			}
 
-		}));*/
+		}));
+
 	}
 
 	/**
@@ -116,6 +129,191 @@ public class AIPlayer extends Player {
 			}
 		}, "movement");
 	}
+	
+	public void randomWalk(int radiusX, int radiusY)
+	{
+		Pathfinder.find(this, this.getLocation().transform(RandomFunction.random(radiusX, (radiusX * -1)), RandomFunction.random(radiusY, (radiusY * -1)), 0), false, Pathfinder.SMART).walk(this);
+	}
+	
+	public void walkPos(int x, int y)
+	{
+		Pathfinder.find(this, new Location(x, y));
+	}
+	
+	public boolean checkVictimIsPlayer()
+	{
+		if (this.getProperties().getCombatPulse().getVictim() != null)
+			if (this.getProperties().getCombatPulse().getVictim().isPlayer())
+				return true;
+		return false;
+	}
+	
+	public Item getItemById(int id)  
+	{
+		for (int i = 0; i < 28; i++)
+		{
+			Item item = this.getInventory().get(i);
+			if (item != null)
+			{
+				if (item.getId() == id)
+					return item;
+			}
+		}
+		return null;
+	}
+	
+	private ArrayList<Node> getNodeInRange(int range, int entry)
+	{
+		int meX = this.getLocation().getX();
+		int meY = this.getLocation().getY();
+		//int meX2 = this.getLocation().getX();
+		//System.out.println("local " + meX + " real x? " + meX2 );
+		ArrayList<Node> nodes = new ArrayList<Node>();
+		for (int x = 0; x < range; x++)
+		{
+			for (int y = 0; y < range - x; y++)
+			{
+				Node node = RegionManager.getObject(0, meX + x, meY + y);
+				if (node != null)
+					if (node.getId() == entry)
+						nodes.add(node); 
+				Node node2 = RegionManager.getObject(0, meX + x, meY - y);
+				if (node2 != null)
+					if (node2.getId() == entry)
+						nodes.add(node2); 
+				Node node3 = RegionManager.getObject(0, meX - x, meY + y);
+				if (node3 != null)
+					if (node3.getId() == entry)
+						nodes.add(node3); 
+				Node node4 = RegionManager.getObject(0, meX - x, meY - y);
+				if (node4 != null)
+					if (node4.getId() == entry)
+						nodes.add(node4); 
+			}
+		}
+		return nodes;
+	}
+	
+	private ArrayList<Node> getNodeInRange(int range, ArrayList<Integer> entrys)
+	{
+		int meX = this.getLocation().getX();
+		int meY = this.getLocation().getY();
+		//int meX2 = this.getLocation().getX();
+		//System.out.println("local " + meX + " real x? " + meX2 );
+		ArrayList<Node> nodes = new ArrayList<Node>();
+		for (int x = 0; x < range; x++)
+		{
+			for (int y = 0; y < range - x; y++)
+			{
+				Node node = RegionManager.getObject(0, meX + x, meY + y);
+				if (node != null)
+					if (entrys.contains(node.getId()))
+						nodes.add(node); 
+				Node node2 = RegionManager.getObject(0, meX + x, meY - y);
+				if (node2 != null)
+					if (entrys.contains(node2.getId()))
+						nodes.add(node2); 
+				Node node3 = RegionManager.getObject(0, meX - x, meY + y);
+				if (node3 != null)
+					if (entrys.contains(node3.getId()))
+						nodes.add(node3); 
+				Node node4 = RegionManager.getObject(0, meX - x, meY - y);
+				if (node4 != null)
+					if (entrys.contains(node4.getId()))
+						nodes.add(node4); 
+			}
+		}
+		return nodes;
+	}
+	
+	public Node getClosestNodeWithEntry(int range, int entry)
+	{
+		ArrayList<Node> nodeList = getNodeInRange(range, entry);
+		if (nodeList.isEmpty())
+		{
+			System.out.println("nodelist empty");
+			return null;
+		}
+		Node node = getClosestNodeinNodeList(nodeList);
+		return node;
+	}
+	
+	public Node getClosestNodeWithEntry(int range, ArrayList<Integer> entrys)
+	{
+		ArrayList<Node> nodeList = getNodeInRange(range, entrys);
+		if (nodeList.isEmpty())
+		{
+			System.out.println("nodelist empty");
+			return null;
+		}
+		Node node = getClosestNodeinNodeList(nodeList);
+		return node;
+	}
+	
+	public Node getClosesCreature(int radius) {
+		int distance = radius + 1;
+		Node npcReturn = null;
+		for (NPC npc : RegionManager.getLocalNpcs(this, radius)) {
+			double distanceToNpc = npc.getLocation().getDistance(this.getLocation());
+			if ((distanceToNpc) < distance) {
+				distance = (int) distanceToNpc;
+				npcReturn = npc;
+			}
+		}
+		return npcReturn;
+	}
+	
+	public Node getClosesCreature(int radius, int entry) {
+		int distance = radius + 1;
+		Node npcReturn = null;
+		for (NPC npc : RegionManager.getLocalNpcs(this, radius)) {
+			double distanceToNpc = npc.getLocation().getDistance(this.getLocation());
+			if (npc.getId() == entry) {
+				if ((distanceToNpc) < distance) {
+					distance = (int) distanceToNpc;
+					npcReturn = npc;
+				}
+			}
+		}
+		return npcReturn;
+	}
+	
+	public Node getClosesCreature(int radius, ArrayList<Integer> entrys) {
+		int distance = radius + 1;
+		Node npcReturn = null;
+		for (NPC npc : RegionManager.getLocalNpcs(this, radius)) {
+			double distanceToNpc = npc.getLocation().getDistance(this.getLocation());
+			if (entrys.contains(npc.getId())) {
+				if ((distanceToNpc) < distance) {
+					distance = (int) distanceToNpc;
+					npcReturn = npc;
+				}
+			}
+		}
+		return npcReturn;
+	}
+	
+	private Node getClosestNodeinNodeList(ArrayList<Node> nodes)
+	{
+		if (nodes.isEmpty())
+		{
+			System.out.println("nodelist empty");
+			return null;
+		}
+		
+		double distance = 0;
+		Node nodeReturn = null;
+		for (Node node : nodes)
+		{
+			double nodeDistance = this.getLocation().getDistance(node.getLocation());
+			if (nodeReturn == null || nodeDistance < distance)
+			{
+				distance = nodeDistance;
+				nodeReturn = node;
+			}
+		}
+		return nodeReturn;
+	}
 
 	@Override
 	public void clear() {
@@ -129,12 +327,6 @@ public class AIPlayer extends Player {
 			getPlayerFlags().setLastSceneGraph(getLocation());
 		}
 		super.reset();
-	}
-	
-	@Override
-	public void finalizeDeath(Entity killer) {
-		super.finalizeDeath(killer);
-		this.setAttribute("dead", true);
 	}
 
 	/**
@@ -196,4 +388,5 @@ public class AIPlayer extends Player {
 	public void setControler(Player controler) {
 		this.controler = controler;
 	}
+
 }

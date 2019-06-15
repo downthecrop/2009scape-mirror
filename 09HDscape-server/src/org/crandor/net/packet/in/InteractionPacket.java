@@ -149,7 +149,7 @@ public final class InteractionPacket implements IncomingPacket {
 	 * @param optionIndexthe option index.
 	 * @param index the index.
 	 */
-	private static void handleNPCInteraction(Player player, int optionIndex, final int index) {
+	public static void handleNPCInteraction(Player player, int optionIndex, final int index) {
 		if (index < 1 || index > ServerConstants.MAX_NPCS) {
 			PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
 			return;

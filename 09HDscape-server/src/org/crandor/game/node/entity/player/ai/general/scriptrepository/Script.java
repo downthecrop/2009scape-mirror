@@ -5,11 +5,16 @@ import org.crandor.game.node.entity.player.ai.general.ScriptAPI;
 import org.crandor.game.node.item.Item;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class Script {
+
     public ScriptAPI scriptAPI;
     public ArrayList<Item> inventory = new ArrayList<>();
     public ArrayList<Item> equipment = new ArrayList<>();
+    public Map<Integer, Integer> skills = new HashMap<>();
+
 
     public AIPlayer bot;
 
@@ -26,7 +31,18 @@ public abstract class Script {
         {
             bot.getEquipment().add(i, true, false);
         }
+        for (Map.Entry<Integer, Integer> skill : skills.entrySet())
+        {
+            setLevel(skill.getKey(), skill.getValue());
+        }
     }
 
     public abstract void runLoop();
+
+    public void setLevel(int skill, int level) {
+        bot.getSkills().setLevel(skill, level);
+        bot.getSkills().setStaticLevel(skill, level);
+        bot.getSkills().updateCombatLevel();
+        bot.getAppearance().sync();
+    }
 }
