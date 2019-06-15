@@ -24,9 +24,25 @@ public class ScriptAPI {
     {
         Node entity = null;
         double minDistance = Double.MAX_VALUE;
+        for (Node node : RegionManager.forId(bot.getLocation().getRegionId()).getPlanes()[bot.getLocation().getZ()].getEntities())
+        {
+            if (node != null && node.getName().equals(entityName) && distance(bot, node) < minDistance && !Pathfinder.find(bot, node).isMoveNear())
+            {
+                entity = node;
+                minDistance = distance(bot, node);
+            }
+        }
+
+        return entity;
+    }
+
+    public Node getNearestNode(int id)
+    {
+        Node entity = null;
+        double minDistance = Double.MAX_VALUE;
         for (Node e : RegionManager.forId(bot.getLocation().getRegionId()).getPlanes()[bot.getLocation().getZ()].getEntities())
         {
-            if (e != null && e.getName().equals(entityName) && distance(bot, e) < minDistance && !Pathfinder.find(bot, e).isMoveNear())
+            if (e != null && e.getId() == id && distance(bot, e) < minDistance && !Pathfinder.find(bot, e).isMoveNear())
             {
                 entity = e;
                 minDistance = distance(bot, e);

@@ -1,20 +1,15 @@
 package org.crandor.game.node.entity.player.ai.resource;
 
-import org.crandor.game.content.skill.free.gather.GatheringSkillPulse;
 import org.crandor.game.content.skill.free.gather.SkillingResource;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.ai.AIPlayer;
-import org.crandor.game.node.object.GameObject;
 import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
-import org.crandor.game.world.map.Location;
-import org.crandor.game.world.map.RegionManager;
-import org.crandor.game.world.map.path.Pathfinder;
+import org.crandor.game.world.repository.Repository;
 
 import java.util.List;
 
 public class ResourceAIPActions {
-	
 
 	public static List<AIPlayer> resource_players = null;
 
@@ -28,6 +23,7 @@ public class ResourceAIPActions {
 			final AIPlayer bot = resource_players.get(aip_index);
 			GameWorld.submit(new Pulse(1, bot) {
 				int ticks;
+				int ov;
 				@Override
 				public boolean pulse() {
 					/*if (bot.getInventory().freeSlots() < 1) {
@@ -40,18 +36,36 @@ public class ResourceAIPActions {
 						resource_players.remove(bot);
 						return true;
 					}
-					chopTree(bot, RegionManager.getObject(Location.create(3234,3231,0)));
+					if (ov++ >= 3) {
+                        chopTree(bot);
+                        ov = 0;
+                    }
+//					ov = 0;
+                    System.out.println(ov);
 					return false;
 				}
 			});
 		}
 	}
 	
-	private static void chopTree(final AIPlayer bot, final GameObject node) {
-		bot.sendChat("WE CHOPPIN");
-//		Pathfinder.find(bot, node);
+	private static boolean chopTree(final AIPlayer bot) {
+        /*for (GameObject[] o : RegionManager.forId(bot.getLocation().getRegionId()).getPlanes()[0].getObjects()) {
+            for (GameObject obj : o) {
+                if (obj != null) {
+                    for (SkillingResource r : SkillingResource.values()) {
+                        if (obj.getId() == r.getId()) {
+                            Pathfinder.find(bot, obj).walk(bot);
+                            bot.sendChat("WE CHOPPIN");
+                        }
+                    }
+                }
+            }
+        }*/
+        bot.attack(Repository.getNpcs().get(106));
+
 //		Pulse pulse = new GatheringSkillPulse(bot, node);
-        bot.getPulseManager().run(new GatheringSkillPulse(bot, node));
+//        bot.getPulseManager().run(new GatheringSkillPulse(bot, node));
 //		pulse.start();
+        return true;
 	}	
 }

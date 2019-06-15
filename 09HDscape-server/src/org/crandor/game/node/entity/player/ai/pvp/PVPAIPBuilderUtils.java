@@ -27,12 +27,17 @@ public class PVPAIPBuilderUtils {
 			buildWizardStats(p);
 			buildWizardEquipment(p);
 			break;
+		case 3:
+			//max rune
+			buildMaxMeleeStats(p);
+			buildMaxMeleeEquipment(p);
+			break;
 		}
 		p.getInventory().add(new Item(385, 20));
-		p.getProperties().setCombatLevel(100);
+		p.getProperties().setCombatLevel(126);
 
-		p.getSkills().setLevel(Skills.PRAYER, 99);
-		p.getSkills().setStaticLevel(Skills.PRAYER, 99);
+		p.getSkills().setLevel(Skills.PRAYER, 98);
+		p.getSkills().setStaticLevel(Skills.PRAYER, 98);
 		p.getSkills().updateCombatLevel();
 		p.getAppearance().sync();
 		correctHitpointsStat(p);
@@ -40,7 +45,8 @@ public class PVPAIPBuilderUtils {
 
 	private static void buildWizardEquipment(AIPlayer p) {
 		int[] weapons = {
-				1381
+				1381,
+				4675,
 		};
 		int hat = -1;
 		int platebody = -1;
@@ -73,6 +79,13 @@ public class PVPAIPBuilderUtils {
 			gloves = RandomFunction.getRandom(10) == 1 ? generateGloves() : 4115;
 			boots = RandomFunction.getRandom(10) == 1 ? generateBoots() : 4117;
 			break;
+		case 3:
+			hat = 4708;
+			platebody = 4712;
+			platelegs = 44714;
+			gloves = RandomFunction.getRandom(10) == 1 ? generateGloves() : 4095;
+			boots = RandomFunction.getRandom(10) == 1 ? generateBoots() : 4097;
+			break;
 		}
 		p.getEquipment().replace(new Item(hat), EquipmentContainer.SLOT_HAT);
 		p.getEquipment().replace(new Item(platebody), EquipmentContainer.SLOT_CHEST);
@@ -86,8 +99,8 @@ public class PVPAIPBuilderUtils {
 	}
 
 	private static void setupWizard(AIPlayer p) {
-		final int SPELL_IDS[] = new int[] {1, 4, 6, 8, 10, 14, 17, 20, 24, 27, 33, 38, 45, 48, 52, 55 };
-		p.getProperties().setAutocastSpell(((CombatSpell) SpellBookManager.SpellBook.MODERN.getSpell(SPELL_IDS[RandomFunction.random(SPELL_IDS.length)])));
+		//final int SPELL_IDS[] = new int[] {1, 4, 6, 8, 10, 14, 17, 20, 24, 27, 33, 38, 45, 48, 52, 55 };
+		p.getProperties().setAutocastSpell(((CombatSpell) SpellBookManager.SpellBook.MODERN.getSpell(55)));
 		p.getInventory().add(new Item(554, 1000)); //Fire runes
 		p.getInventory().add(new Item(555, 1000)); //Water runes
 		p.getInventory().add(new Item(556, 1000)); //Air runes
@@ -101,8 +114,8 @@ public class PVPAIPBuilderUtils {
 	}
 
 	private static void buildWizardStats(AIPlayer p) {
-		int magicLevel = RandomFunction.random(60, 99);
-		int defenceLevel = RandomFunction.random(40, 99);
+		int magicLevel = RandomFunction.random(80, 98);
+		int defenceLevel = RandomFunction.random(80, 98);
 
 		p.getSkills().setLevel(Skills.MAGIC, magicLevel);
 		p.getSkills().setStaticLevel(Skills.MAGIC, magicLevel);
@@ -116,9 +129,9 @@ public class PVPAIPBuilderUtils {
 
 
 	private static void buildMeleeStats(AIPlayer p) {
-		int attackLevel = RandomFunction.random(60, 99);
+		int attackLevel = RandomFunction.random(80, 98);
 		int strengthLevel = RandomFunction.random(attackLevel - 10, attackLevel + 10);
-		int defenceLevel = RandomFunction.random(40, 99);
+		int defenceLevel = RandomFunction.random(60, 98);
 
 		p.getSkills().setLevel(Skills.ATTACK, attackLevel);
 		p.getSkills().setStaticLevel(Skills.ATTACK, attackLevel);
@@ -137,6 +150,9 @@ public class PVPAIPBuilderUtils {
 				1163, //Rune Full Helm
 				3751, //Berserker Helm
 				3753, //Warrior Helm
+				10828,
+				1038,
+				4753,
 				//TODO: No helm
 		};
 		int[] shield = {
@@ -144,13 +160,22 @@ public class PVPAIPBuilderUtils {
 				1201, //Rune kiteshield
 				6524, //Obsidian shield
 				8850, //Rune defender
+				11283, //dragonfire shield
+				14767, //dragon defender
 		};
 		int[] platebody = {
 				1113, //Rune chainmail.
 				1127, //Rune platebody.
+				10551,
+				4757,
+				11724,
+				4720,
 		};
 		int[] platelegs = {
 				1079, //Rune platelegs.
+				4759,
+				11726,
+				1075,
 		};
 		p.getEquipment().replace(new Item(helms[RandomFunction.random(helms.length)]), EquipmentContainer.SLOT_HAT);
 		p.getEquipment().replace(new Item(shield[RandomFunction.random(shield.length)]), EquipmentContainer.SLOT_SHIELD);
@@ -164,17 +189,69 @@ public class PVPAIPBuilderUtils {
 	}
 
 	public static final int[] weapons = {
-			1303, //Rune long sword
-			1305, //Dragon longsword
-			1434, //Dragon mace
-			1215, //Dragon dagger
-			5698, //DDS
+			4151, //Whip
+			4587, //Dragon Scimitar
+			
+	};
+
+
+		private static void buildMaxMeleeStats(AIPlayer p) {
+
+		p.getSkills().setLevel(Skills.ATTACK, 99);
+		p.getSkills().setStaticLevel(Skills.ATTACK, 99);
+		p.getSkills().setLevel(Skills.STRENGTH, 99);
+		p.getSkills().setStaticLevel(Skills.STRENGTH, 99);
+		p.getSkills().setLevel(Skills.DEFENCE, 99);
+		p.getSkills().setStaticLevel(Skills.DEFENCE, 99);
+
+		p.getSkills().updateCombatLevel();
+		p.getAppearance().sync();
+		correctHitpointsStat(p);
+	}
+
+	private static void buildMaxMeleeEquipment(AIPlayer p) {
+		int[] helms = {
+				3751, //Berserker Helm
+		};
+		int[] shield = {
+				14767, //Dragon defender
+		};
+		int[] platebody = {
+				11724, //Bandos chainmail.
+		};
+		int[] platelegs = {
+				11726, //Bandos Tassets.
+		};
+		int[] amulets = {
+				6585, //fury
+		};
+		int[] boots = {
+				3105, //Climbing boots.
+		};
+		int[] cape = {
+				6570, //Fire cape.
+		};
+		int[] gloves = {
+				7462, //Barrows Gloves.
+		};
+		p.getEquipment().replace(new Item(helms[RandomFunction.random(helms.length)]), EquipmentContainer.SLOT_HAT);
+		p.getEquipment().replace(new Item(shield[RandomFunction.random(shield.length)]), EquipmentContainer.SLOT_SHIELD);
+		p.getEquipment().replace(new Item(platebody[RandomFunction.random(platebody.length)]), EquipmentContainer.SLOT_CHEST);
+		p.getEquipment().replace(new Item(platelegs[RandomFunction.random(platelegs.length)]), EquipmentContainer.SLOT_LEGS);
+		p.getEquipment().replace(new Item(weapons2[RandomFunction.random(weapons2.length)]), EquipmentContainer.SLOT_WEAPON);
+		p.getEquipment().replace(new Item(amulets[RandomFunction.random(amulets.length)]), EquipmentContainer.SLOT_AMULET);
+		p.getEquipment().replace(new Item(boots[RandomFunction.random(boots.length)]), EquipmentContainer.SLOT_FEET);
+		p.getEquipment().replace(new Item(cape[RandomFunction.random(cape.length)]), EquipmentContainer.SLOT_CAPE);
+		p.getEquipment().replace(new Item(gloves[RandomFunction.random(gloves.length)]), EquipmentContainer.SLOT_HANDS);
+	}
+
+	public static final int[] weapons2 = {
 			4151, //Whip
 	};
 
 	private static void buildArcherStats(AIPlayer p) {
-		int rangedLevel = RandomFunction.random(60, 99);
-		int defenceLevel = RandomFunction.random(40, 99);
+		int rangedLevel = RandomFunction.random(80, 98);
+		int defenceLevel = RandomFunction.random(60, 98);
 
 		p.getSkills().setLevel(Skills.RANGE, rangedLevel);
 		p.getSkills().setStaticLevel(Skills.RANGE, rangedLevel);
@@ -189,15 +266,19 @@ public class PVPAIPBuilderUtils {
 	private static void buildArcherEquipment(AIPlayer p) {
 		int[] helms = {
 				3749, //Archer helm
+				2581,
+				10828,
 		};
 		int[] weapons = {
 				857, //Yew shortbow
 				855, //Yew longbow
 				861, //Magic shortbow
 				859, //Magic longbow
+				11235,
 		};
 		int[] arrows = {
 				892, //Rune arrow
+				11212,
 		};
 		int platebody = -1;
 		int platelegs = -1;
@@ -245,6 +326,7 @@ public class PVPAIPBuilderUtils {
 				2412, //Saradomin Cape
 				2413, //Guthix Cape
 				2414, //Zamorak Cape
+				6570,
 		};
 		return capes[RandomFunction.random(capes.length)];
 	}
@@ -256,13 +338,15 @@ public class PVPAIPBuilderUtils {
 				1727, //Amulet of magic
 				1729, //Amulet of defence
 				1478, //Amulet of accuracy
+				6585,
 		};
 		return amulets[RandomFunction.random(amulets.length)];
 	}
 
 	private static int generateGloves() {
 		int[] gloves = {
-			1059
+			1059,
+			7462
 		};
 		return gloves[RandomFunction.random(gloves.length)];
 	}
@@ -273,6 +357,7 @@ public class PVPAIPBuilderUtils {
 				1837, //Desert boots.
 				3105, //Climbing boots.
 				3791, //Fremmy boots.
+				11732,
 		};
 		return boots[RandomFunction.random(boots.length)];
 	}
@@ -280,16 +365,17 @@ public class PVPAIPBuilderUtils {
 	private static void correctHitpointsStat(AIPlayer player) {
 		player.getSkills().setLevel(Skills.HITPOINTS, 10);
 		player.getSkills().setStaticLevel(Skills.HITPOINTS, 10);
-		double total_exp =
-				player.getSkills().getExperience(Skills.ATTACK) +
-						player.getSkills().getExperience(Skills.STRENGTH) +
-						player.getSkills().getExperience(Skills.DEFENCE) +
-						player.getSkills().getExperience(Skills.RANGE)+
-						player.getSkills().getExperience(Skills.MAGIC);
-		double hp_exp = Math.floor(total_exp / 3.0) + 1154;
-		player.getSkills().addExperience(Skills.HITPOINTS, hp_exp);
 		player.getSkills().updateCombatLevel();
-		player.getAppearance().sync();
+			int rangedLevel = RandomFunction.random(80, 98);
+			int defenceLevel = RandomFunction.random(80, 98);
+
+			player.getSkills().setLevel(Skills.HITPOINTS, rangedLevel);
+			player.getSkills().setStaticLevel(Skills.HITPOINTS, rangedLevel);
+			player.getSkills().setLevel(Skills.HITPOINTS, defenceLevel);
+			player.getSkills().setStaticLevel(Skills.HITPOINTS, defenceLevel);
+
+			player.getSkills().updateCombatLevel();
+			player.getAppearance().sync();
 	}
 
 	public static final String[] names = {
@@ -420,6 +506,7 @@ public class PVPAIPBuilderUtils {
 			"k4eo9ssi7",
 			"juxikeederast",
 			"d_man_5567",
+			"mod_richard",
 			"q1w2e1r2",
 			"be_kingless",
 			"hardflip",
@@ -437,6 +524,10 @@ public class PVPAIPBuilderUtils {
 			"giantpenis3959737",
 			"dragonoid798",
 			"qwerty798",
+			"dylansuxnutz",
+			"2016",
+			"nigbittiesbro",
+			"pk4lifefoo",
 			"logieboi",
 			"wichking",
 			"kyros60r0bl33mfzo",

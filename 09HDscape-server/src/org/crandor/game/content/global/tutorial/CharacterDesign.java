@@ -269,7 +269,7 @@ public final class CharacterDesign {
 	 * Randomizes the player's look.
 	 * @param player the player.
 	 */
-	private static void randomize(Player player, boolean head) {
+	public static void randomize(Player player, boolean head) {
 		if (head) {
 			changeLook(player, 0, RandomFunction.random(2) == 1);
 			changeLook(player, 1, RandomFunction.random(2) == 1);
