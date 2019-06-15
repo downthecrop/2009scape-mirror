@@ -12,6 +12,8 @@ import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.RegionPlane;
 import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.tools.RandomFunction;
+import plugin.activity.pestcontrol.monsters.PCRavagerNPC;
+import plugin.activity.pestcontrol.monsters.PCSpinnerNPC;
 
 /**
  * Handles the portal NPC.

@@ -231,7 +231,7 @@ public class AIPlayer extends Player {
 		ArrayList<Node> nodeList = getNodeInRange(range, entry);
 		if (nodeList.isEmpty())
 		{
-			System.out.println("nodelist empty");
+			//System.out.println("nodelist empty");
 			return null;
 		}
 		Node node = getClosestNodeinNodeList(nodeList);
@@ -243,7 +243,7 @@ public class AIPlayer extends Player {
 		ArrayList<Node> nodeList = getNodeInRange(range, entrys);
 		if (nodeList.isEmpty())
 		{
-			System.out.println("nodelist empty");
+			//System.out.println("nodelist empty");
 			return null;
 		}
 		Node node = getClosestNodeinNodeList(nodeList);
@@ -297,7 +297,7 @@ public class AIPlayer extends Player {
 	{
 		if (nodes.isEmpty())
 		{
-			System.out.println("nodelist empty");
+			//System.out.println("nodelist empty");
 			return null;
 		}
 		

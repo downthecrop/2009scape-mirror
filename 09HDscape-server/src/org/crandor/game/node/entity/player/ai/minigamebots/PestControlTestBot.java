@@ -1,38 +1,41 @@
-package org.crandor.game.node.entity.player.ai.pvmbots;
+package org.crandor.game.node.entity.player.ai.minigamebots;
 
 import java.util.ArrayList;
 
 import org.crandor.game.content.skill.Skills;
 import org.crandor.game.node.Node;
-import org.crandor.game.node.entity.player.ai.AIPlayer;
-import org.crandor.game.node.entity.player.link.TeleportManager.TeleportType;
+import org.crandor.game.node.entity.player.ai.pvmbots.PvMBots;
 import org.crandor.game.node.entity.player.link.prayer.*;
-import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.map.Location;
-import org.crandor.game.world.map.zone.impl.WildernessZone;
 import org.crandor.net.packet.in.InteractionPacket;
-import org.crandor.tools.RandomFunction;
+import plugin.activity.pestcontrol.PCLanderZone;
 
-public class PestControlTestBot extends PvMBots{
+import static plugin.activity.pestcontrol.PestControlHelper.*;
+
+public class PestControlTestBot extends PvMBots {
 
 	private int tick = 0;
 	private int movetimer = 0;
 	
 	public PestControlTestBot(String name, Location l) {
-		super(name, l);
+		super(name, legitimizeLocation(l));
 		// TODO Auto-generated constructor stub
 	}
-	
+
+	private static Location legitimizeLocation(Location l) {
+		return PCLanderZone.landerContainsLoc(l) ? new Location(2657, 2639, 0) : l;
+	}
+
 	@Override
 	public void tick()
 	{
 		super.tick();
 		
-		Node test = getClosestNodeWithEntry(15, 14315);
+		Node test = getClosestNodeWithEntry(15, NOVICE_GANGPLANK);
 		if (test != null) {
 			int x = test.getLocation().getX();
 			int y = test.getLocation().getY();
-			if (this.getLocation() != new Location(2660, 2638))
+			if (!this.getLocation().equals(new Location(2660, 2638)))
 				InteractionPacket.handleObjectInteraction(this, 0, x, y, test.getId());
 		}
 		

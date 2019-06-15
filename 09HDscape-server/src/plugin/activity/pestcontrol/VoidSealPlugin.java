@@ -11,6 +11,7 @@ import org.crandor.game.world.map.RegionManager;
 import org.crandor.game.world.update.flag.context.Graphics;
 import org.crandor.plugin.Plugin;
 import org.crandor.tools.RandomFunction;
+import plugin.activity.pestcontrol.monsters.*;
 
 /**
  * Handles the void knight seal.

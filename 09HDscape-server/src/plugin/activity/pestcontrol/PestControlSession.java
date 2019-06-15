@@ -18,6 +18,8 @@ import org.crandor.game.world.map.RegionPlane;
 import org.crandor.game.world.map.build.DynamicRegion;
 import org.crandor.tools.RandomFunction;
 
+import static plugin.activity.pestcontrol.PestControlActivityPlugin.MAX_TEAM_SIZE;
+
 /**
  * Represents a pest control session.
  * @author Emperor
@@ -219,7 +221,7 @@ public final class PestControlSession {
 		for (Iterator<Player> it = waitingPlayers.iterator(); it.hasNext();) {
 			Player p = it.next();
 			if (p.getSession().isActive()) {
-				if (++count > 25) {
+				if (++count > MAX_TEAM_SIZE) {
 					int priority = p.getAttribute("pc_prior", 0) + 1;
 					p.getPacketDispatch().sendMessage("You have been given priority level " + priority + " over other players in joining the next");
 					p.getPacketDispatch().sendMessage("game.");

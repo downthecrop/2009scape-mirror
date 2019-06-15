@@ -1,39 +1,32 @@
-package plugin.activity.pestcontrol;
+package plugin.activity.pestcontrol.monsters;
 
 import org.crandor.game.node.entity.Entity;
 import org.crandor.game.node.entity.combat.BattleState;
-import org.crandor.game.node.entity.combat.CombatSpell;
 import org.crandor.game.node.entity.combat.CombatStyle;
 import org.crandor.game.node.entity.combat.CombatSwingHandler;
 import org.crandor.game.node.entity.combat.InteractionType;
-import org.crandor.game.node.entity.combat.equipment.SpellType;
-import org.crandor.game.node.entity.combat.handlers.MagicSwingHandler;
-import org.crandor.game.node.entity.impl.Projectile;
-import org.crandor.game.node.entity.impl.Animator.Priority;
+import org.crandor.game.node.entity.combat.handlers.RangeSwingHandler;
 import org.crandor.game.node.entity.npc.AbstractNPC;
 import org.crandor.game.node.entity.player.Player;
-import org.crandor.game.node.entity.player.link.SpellBookManager.SpellBook;
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.MapDistance;
-import org.crandor.game.world.update.flag.context.Animation;
-import org.crandor.game.world.update.flag.context.Graphics;
-import org.crandor.plugin.Plugin;
+import plugin.activity.pestcontrol.PestControlSession;
 
 /**
- * Handles the torcher pest control NPC.
+ * Handles the Defiler NPCs.
  * @author Emperor
  */
-public final class PCTorcherNPC extends AbstractNPC {
+public final class PCDefilerNPC extends AbstractNPC {
 
 	/**
-	 * The torcher spell.
+	 * The pest control session.
 	 */
-	private static final TorcherSpell SPELL = new TorcherSpell();
+	private PestControlSession session;
 
 	/**
 	 * The combat swing handler.
 	 */
-	private static final CombatSwingHandler SWING_HANDLER = new MagicSwingHandler() {
+	private static final CombatSwingHandler SWING_HANDLER = new RangeSwingHandler() {
 
 		@Override
 		public InteractionType canSwing(Entity entity, Entity victim) {
@@ -51,23 +44,18 @@ public final class PCTorcherNPC extends AbstractNPC {
 	};
 
 	/**
-	 * The pest control session.
+	 * Constructs a new {@code PCDefilerNPC} {@code Object}.
 	 */
-	private PestControlSession session;
-
-	/**
-	 * Constructs a new {@code PCTorcherNPC} {@code Object}.
-	 */
-	public PCTorcherNPC() {
-		super(3752, null);
+	public PCDefilerNPC() {
+		super(3762, null);
 	}
 
 	/**
-	 * Constructs a new {@code PCTorcherNPC} {@code Object}.
+	 * Constructs a new {@code PCDefilerNPC} {@code Object}.
 	 * @param id The NPC id.
 	 * @param location The location.
 	 */
-	public PCTorcherNPC(int id, Location location) {
+	public PCDefilerNPC(int id, Location location) {
 		super(id, location);
 	}
 
@@ -77,8 +65,7 @@ public final class PCTorcherNPC extends AbstractNPC {
 		super.init();
 		super.getDefinition().setCombatDistance(15);
 		super.walkRadius = 64;
-		getProperties().getCombatPulse().setStyle(CombatStyle.MAGIC);
-		super.getProperties().setAutocastSpell(SPELL);
+		getProperties().getCombatPulse().setStyle(CombatStyle.RANGE);
 		session = getExtension(PestControlSession.class);
 	}
 
@@ -112,33 +99,12 @@ public final class PCTorcherNPC extends AbstractNPC {
 
 	@Override
 	public AbstractNPC construct(int id, Location location, Object... objects) {
-		return new PCTorcherNPC(id, location);
+		return new PCDefilerNPC(id, location);
 	}
 
 	@Override
 	public int[] getIds() {
-		return new int[] { 3752, 3753, 3754, 3755, 3756, 3757, 3758, 3759, 3760, 3761 };
-	}
-
-}
-
-class TorcherSpell extends CombatSpell {
-
-	/**
-	 * Constructs a new {@code TorcherSpell} {@code Object}.
-	 */
-	public TorcherSpell() {
-		super(SpellType.STRIKE, SpellBook.MODERN, 0, 0.0, -1, -1, new Animation(3882, Priority.HIGH), Graphics.create(646), Projectile.create((Entity) null, null, 647, 40, 36, 52, 75, 15, 11), new Graphics(648, 96));
-	}
-
-	@Override
-	public int getMaximumImpact(Entity entity, Entity victim, BattleState state) {
-		return entity.getProperties().getCurrentCombatLevel() / 7;
-	}
-
-	@Override
-	public Plugin<SpellType> newInstance(SpellType arg) throws Throwable {
-		return this;
+		return new int[] { 3762, 3763, 3764, 3765, 3766, 3767, 3768, 3769, 3770, 3771 };
 	}
 
 }
