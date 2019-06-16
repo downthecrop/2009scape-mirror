@@ -240,7 +240,7 @@ public final class Client extends GameShell {
 			}
 
 			Class3_Sub13_Sub1.method167(0);
-			Class149.method2090(8);
+			MouseListeningClass.method2090(8);
 			Class38.aClass146_668 = null;
 			if(null != WorldListEntry.aClass155_2627) {
 				WorldListEntry.aClass155_2627.method2163(false);
@@ -545,8 +545,8 @@ public final class Client extends GameShell {
 			Class140_Sub1_Sub1.method1915();
 			ItemDefinition.method1111(3327);
 			Class140_Sub1_Sub2.method1948();
-			Class148.method2085(118);
-			Class149.method2088(true);
+			KeyboardListener.method2085(118);
+			MouseListeningClass.method2088(true);
 			Class23.method937(0);
 			Class83.method1414(90);
 			Class31.method987();
@@ -1780,7 +1780,7 @@ public final class Client extends GameShell {
 							Class3_Sub26.aClass3_Sub24_Sub2_2563 = new Class3_Sub24_Sub2();
 							Class3_Sub21.aClass155_2491.method2154(-128, Class3_Sub26.aClass3_Sub24_Sub2_2563);
 							Class27.aClass157_524 = new Class157(22050, Class21.anInt443);
-							Class148.anInt1912 = Class75_Sub2.aClass153_2645.getArchiveForName(Class1.aClass94_53, (byte)-30);
+							KeyboardListener.anInt1912 = Class75_Sub2.aClass153_2645.getArchiveForName(Class1.aClass94_53, (byte)-30);
 							Class3_Sub28_Sub15.anInt3684 = 30;
 							Class96.anInt1354 = 50;
 							Class3_Sub17.aClass94_2464 = Class131.aClass94_1731;

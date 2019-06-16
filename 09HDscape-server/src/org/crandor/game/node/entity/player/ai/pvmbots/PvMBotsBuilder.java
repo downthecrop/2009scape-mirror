@@ -211,12 +211,17 @@ public final class PvMBotsBuilder{
 		int[] weapons2 = {
 				4151, //Whip
 		};
-		
+
+		int[] arrows = {
+			892, //Rune arrow
+		};
+
 		p.getEquipment().replace(new Item(helms[RandomFunction.random(helms.length)]), EquipmentContainer.SLOT_HAT);
 		p.getEquipment().replace(new Item(shield[RandomFunction.random(shield.length)]), EquipmentContainer.SLOT_SHIELD);
 		p.getEquipment().replace(new Item(platebody[RandomFunction.random(platebody.length)]), EquipmentContainer.SLOT_CHEST);
 		p.getEquipment().replace(new Item(platelegs[RandomFunction.random(platelegs.length)]), EquipmentContainer.SLOT_LEGS);
 		p.getEquipment().replace(new Item(weapons2[RandomFunction.random(weapons2.length)]), EquipmentContainer.SLOT_WEAPON);
+		p.getEquipment().replace(new Item(weapons2[RandomFunction.random(arrows.length)], 99999), EquipmentContainer.SLOT_ARROWS);
 		p.getEquipment().replace(new Item(amulets[RandomFunction.random(amulets.length)]), EquipmentContainer.SLOT_AMULET);
 		p.getEquipment().replace(new Item(boots[RandomFunction.random(boots.length)]), EquipmentContainer.SLOT_FEET);
 		p.getEquipment().replace(new Item(cape[RandomFunction.random(cape.length)]), EquipmentContainer.SLOT_CAPE);

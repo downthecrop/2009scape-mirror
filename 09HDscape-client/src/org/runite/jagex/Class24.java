@@ -139,7 +139,7 @@ final class Class24 {
                   int var14 = buffer.getByte((byte)-94) >> 2;
                   if(~var15 < -1 && var16 > 0 && 103 > var15 && 103 > var16) {
                      ObjectDefinition var17 = Class162.getObjectDefinition(4, var7);
-                     if(var14 != 22 || Class148.aBoolean1905 || 0 != var17.anInt1529 || ~var17.actionCount == -2 || var17.aBoolean1483) {
+                     if(var14 != 22 || KeyboardListener.aBoolean1905 || 0 != var17.anInt1529 || ~var17.actionCount == -2 || var17.aBoolean1483) {
                         var10 = true;
                         if(!var17.hasModels(false)) {
                            var5 = false;

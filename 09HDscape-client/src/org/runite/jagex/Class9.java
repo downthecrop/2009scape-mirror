@@ -134,7 +134,7 @@ final class Class9 {
          Class3_Sub28_Sub11.aClass94_3645 = Class65.aClass94_989;
          Class128.aClass94_1688 = Class143.aClass94_1878;
          Class24.aClass94_461 = Class53.aClass94_868;
-         Class3_Sub13_Sub36.aClass94_3426 = Class148.aClass94_1907;
+         Class3_Sub13_Sub36.aClass94_3426 = KeyboardListener.aClass94_1907;
          Class23.aClass94_459 = Class3_Sub28_Sub5.aClass94_3585;
          Node.aClass94_2576 = Class144.aClass94_1882;
          Class3_Sub2.aClass94_2216 = Class86.aClass94_1179;

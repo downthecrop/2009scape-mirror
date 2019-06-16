@@ -444,7 +444,7 @@ final class Class3_Sub13_Sub13 extends Class3_Sub13 {
 
                Class163_Sub1_Sub1.method2214(0);
                if(Class143.loadingStage == 30) {
-                  Class149.method2087((byte)-82);
+                  MouseListeningClass.method2087((byte)-82);
                   Class115.method1713((byte)-91);
                   Class3_Sub8.method132((byte)-92);
                   ++Class3_Sub28_Sub16.anInt3699;
@@ -804,7 +804,7 @@ final class Class3_Sub13_Sub13 extends Class3_Sub13 {
                                        }
 
                                        if(Class133.anInt1753 == 1) {
-                                          Class148.method2086((byte)68);
+                                          KeyboardListener.method2086((byte)68);
                                        } else if(~Class133.anInt1753 == -3) {
                                           CS2Script.method379(1024);
                                        } else {

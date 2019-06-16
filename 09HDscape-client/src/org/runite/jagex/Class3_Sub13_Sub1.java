@@ -22,7 +22,7 @@ final class Class3_Sub13_Sub1 extends Class3_Sub13 {
 	static final void method167(int var0) {
 		try {
 			if(Class3_Sub13_Sub3.aClass148_3049 != null) {
-				Class148 var1 = Class3_Sub13_Sub3.aClass148_3049;
+				KeyboardListener var1 = Class3_Sub13_Sub3.aClass148_3049;
 				synchronized(var1) {
 					Class3_Sub13_Sub3.aClass148_3049 = null;
 				}

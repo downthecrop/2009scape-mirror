@@ -81,7 +81,7 @@ final class Class3_Sub13_Sub16 extends Class3_Sub13 {
 
             for(int var15 = 0; var15 < Class113.anInt1559; ++var15) {
                Class3_Sub13_Sub36.anInt3422 = Integer.MAX_VALUE;
-               Class148.anInt1914 = Integer.MAX_VALUE;
+               KeyboardListener.anInt1914 = Integer.MAX_VALUE;
                Class69.anInt1042 = Integer.MAX_VALUE;
                Class3_Sub28_Sub5.anInt3589 = Integer.MAX_VALUE;
                int var16 = this.anInt3203 * Class102.anIntArray2125[var15] + 2048;
@@ -123,20 +123,20 @@ final class Class3_Sub13_Sub16 extends Class3_Sub13 {
 
                      if(var12 >= Class3_Sub28_Sub5.anInt3589) {
                         if(~var12 > ~Class69.anInt1042) {
-                           Class3_Sub13_Sub36.anInt3422 = Class148.anInt1914;
-                           Class148.anInt1914 = Class69.anInt1042;
+                           Class3_Sub13_Sub36.anInt3422 = KeyboardListener.anInt1914;
+                           KeyboardListener.anInt1914 = Class69.anInt1042;
                            Class69.anInt1042 = var12;
-                        } else if(Class148.anInt1914 <= var12) {
+                        } else if(KeyboardListener.anInt1914 <= var12) {
                            if(var12 < Class3_Sub13_Sub36.anInt3422) {
                               Class3_Sub13_Sub36.anInt3422 = var12;
                            }
                         } else {
-                           Class3_Sub13_Sub36.anInt3422 = Class148.anInt1914;
-                           Class148.anInt1914 = var12;
+                           Class3_Sub13_Sub36.anInt3422 = KeyboardListener.anInt1914;
+                           KeyboardListener.anInt1914 = var12;
                         }
                      } else {
-                        Class3_Sub13_Sub36.anInt3422 = Class148.anInt1914;
-                        Class148.anInt1914 = Class69.anInt1042;
+                        Class3_Sub13_Sub36.anInt3422 = KeyboardListener.anInt1914;
+                        KeyboardListener.anInt1914 = Class69.anInt1042;
                         Class69.anInt1042 = Class3_Sub28_Sub5.anInt3589;
                         Class3_Sub28_Sub5.anInt3589 = var12;
                      }
@@ -148,7 +148,7 @@ final class Class3_Sub13_Sub16 extends Class3_Sub13 {
                   var3[var15] = Class3_Sub28_Sub5.anInt3589;
                } else if(var19 != 1) {
                   if(-4 == ~var19) {
-                     var3[var15] = Class148.anInt1914;
+                     var3[var15] = KeyboardListener.anInt1914;
                   } else if(var19 == 4) {
                      var3[var15] = Class3_Sub13_Sub36.anInt3422;
                   } else if(-3 == ~var19) {

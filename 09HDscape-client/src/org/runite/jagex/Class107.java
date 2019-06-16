@@ -10,7 +10,7 @@ final class Class107 {
 
    static final void method1645(CacheIndex var0, CacheIndex var1, byte var2) {
       try {
-         Class148.aClass153_1916 = var1;
+         KeyboardListener.aClass153_1916 = var1;
          int var4 = (int)(21.0D * Math.random()) - 10;
          Class54.aClass153_878 = var0;
          int var5 = (int)(21.0D * Math.random()) - 10;

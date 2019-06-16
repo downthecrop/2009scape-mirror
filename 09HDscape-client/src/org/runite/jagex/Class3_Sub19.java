@@ -62,7 +62,7 @@ final class Class3_Sub19 extends Class3 {
                }
             }
 
-            Class149.anInt1924 = 0;
+            MouseListeningClass.anInt1924 = 0;
 
             for(var6 = 0; 104 > var6; ++var6) {
                for(var7 = 0; 104 > var7; ++var7) {
@@ -109,10 +109,10 @@ final class Class3_Sub19 extends Class3 {
                            }
                         }
 
-                        Class3_Sub28_Sub15.anIntArray3693[Class149.anInt1924] = var10.objectId;
-                        Class84.anIntArray1163[Class149.anInt1924] = -var2 + var12;
-                        Class3_Sub28_Sub7_Sub1.anIntArray4050[Class149.anInt1924] = var21 + -var3;
-                        ++Class149.anInt1924;
+                        Class3_Sub28_Sub15.anIntArray3693[MouseListeningClass.anInt1924] = var10.objectId;
+                        Class84.anIntArray1163[MouseListeningClass.anInt1924] = -var2 + var12;
+                        Class3_Sub28_Sub7_Sub1.anIntArray4050[MouseListeningClass.anInt1924] = var21 + -var3;
+                        ++MouseListeningClass.anInt1924;
                      }
                   }
                }

@@ -502,7 +502,7 @@ final class Class110 {
                      }
 
                   }
-               } else if(Class148.aBoolean1905 || ~def.anInt1529 != -1 || -2 == ~def.actionCount || def.aBoolean1483) {
+               } else if(KeyboardListener.aBoolean1905 || ~def.anInt1529 != -1 || -2 == ~def.actionCount || def.aBoolean1483) {
                   if(0 == ~def.animationId && def.anIntArray1524 == null && !def.aBoolean1510) {
                      var28 = def.method1696(var10, var20, var18, 22, var19, var23, var1, (LDIndexedSprite)null, (byte)-126, var26, var21);
                      if(HDToolKit.highDetail && var26) {

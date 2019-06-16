@@ -246,12 +246,17 @@ public final class AIPCommandPlugin extends CommandPlugin {
                     player.sendMessage("You have canceled your current task.");
                     return true;
                 }
+            case "testpest":
+            case "pcbots":
+            case "pestcontrolbots":
+            case "pest-test":
+            case "test-pest":
             case "pesttest":
                 int arg2;
                 try {
                     arg2 = Integer.parseInt(args[1]);
                 } catch (Exception e) {
-                    arg2 = 1;
+                    arg2 = 123;
                 }
                 for (int pestBotsAmount = 0; pestBotsAmount < arg2; pestBotsAmount++) {
                     PvMBotsBuilder.spawnPestControlTestBot(player.getLocation());

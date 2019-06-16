@@ -265,9 +265,9 @@ final class ISAACCipher {
             var8 = (-var7 + Class3_Sub13_Sub34.anInt3415 - 1) * 15 + var2 + 35;
             if(var1 < var5 && var5 < var1 - -var3 && ~var6 < ~(-13 + var8) && ~var6 > ~(var8 + 3)) {
                if(HDToolKit.highDetail) {
-                  Class22.method930(var1, var8 + -13, var3, 16, Class149.anInt1926, -Class136.anInt1771 + 256);
+                  Class22.method930(var1, var8 + -13, var3, 16, MouseListeningClass.anInt1926, -Class136.anInt1771 + 256);
                } else {
-                  Class74.method1312(var1, var8 + -13, var3, 16, Class149.anInt1926, -Class136.anInt1771 + 256);
+                  Class74.method1312(var1, var8 + -13, var3, 16, MouseListeningClass.anInt1926, -Class136.anInt1771 + 256);
                }
             }
          }

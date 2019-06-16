@@ -99,7 +99,7 @@ final class Class52 {
 
          this.aLong860 = var4[(int)(((long)(this.aBoolean864?1:0) ^ this.aLong860) & 255L)] ^ this.aLong860 >>> 8;
          if(-1L != ~var2 && this.aLong860 != var2) {
-            Class148.aClass93_1911.method1518(var2, (byte)-124);
+            KeyboardListener.aClass93_1911.method1518(var2, (byte)-124);
          }
 
       } catch (RuntimeException var6) {
@@ -242,7 +242,7 @@ final class Class52 {
                }
             }
 
-            Model var37 = (Model)Class148.aClass93_1911.get(var13, (byte)121);
+            Model var37 = (Model) KeyboardListener.aClass93_1911.get(var13, (byte)121);
             boolean var17;
             int var23;
             int var22;
@@ -272,7 +272,7 @@ final class Class52 {
 
                if(var17) {
                   if(this.aLong855 != -1L) {
-                     var37 = (Model)Class148.aClass93_1911.get(this.aLong855, (byte)121);
+                     var37 = (Model) KeyboardListener.aClass93_1911.get(this.aLong855, (byte)121);
                   }
 
                   if(null == var37) {
@@ -384,7 +384,7 @@ final class Class52 {
                   }
 
                   if(var9) {
-                     Class148.aClass93_1911.put((byte)-115, var37, var13);
+                     KeyboardListener.aClass93_1911.put((byte)-115, var37, var13);
                      this.aLong855 = var13;
                   }
                }

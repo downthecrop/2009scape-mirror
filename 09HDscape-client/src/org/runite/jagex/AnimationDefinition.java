@@ -524,14 +524,14 @@ final class AnimationDefinition {
 			Class3_Sub13_Sub37.anInt3439 = 0;
 			Class40.anInt674 = 0;
 			Class167.anInt2085 = 0;
-			Class148.anInt1910 = 0;
+			KeyboardListener.anInt1910 = 0;
 			Class3_Sub13_Sub12.anInt3144 = 0;
 			Canvas_Sub1.anInt17 = 0;
 			Class120.anInt1633 = 0;
 			Class15.anInt342 = 0;
 			Class143.anInt1873 = 0;
 			Class75_Sub3.anInt2651 = 0;
-			Class148.anInt1909 = 0;
+			KeyboardListener.anInt1909 = 0;
 			Class136.anInt1776 = 0;
 			Class23.anInt456 = 0;
 			Class3_Sub6.anInt2290 = 0;
@@ -541,7 +541,7 @@ final class AnimationDefinition {
 			Class61.anInt938 = 0;
 			Class19.anInt421 = 0;
 			ItemDefinition.anInt763 = 0;
-			Class148.anInt1906 = 0;
+			KeyboardListener.anInt1906 = 0;
 			Class15.anInt348 = 0;
 			Class54.anInt876 = 0;
 			Class56.anInt889 = 0;
@@ -683,7 +683,7 @@ final class AnimationDefinition {
 			Class146.anInt1904 = 0;
 			Canvas_Sub2.anInt30 = 0;
 			GraphicDefinition.anInt529 = 0;
-			Class149.anInt1923 = 0;
+			MouseListeningClass.anInt1923 = 0;
 			Class3_Sub28_Sub10.anInt3631 = 0;
 			Class163_Sub2_Sub1.anInt4021 = 0;
 

@@ -359,8 +359,8 @@ final class PacketParser {
 														}
 
 													if(!var63 && 0 == WorldListEntry.anInt2622) {
-														Class163_Sub2_Sub1.aLongArray4017[Class149.anInt1921] = var55;
-														Class149.anInt1921 = (1 + Class149.anInt1921) % 100;
+														Class163_Sub2_Sub1.aLongArray4017[MouseListeningClass.anInt1921] = var55;
+														MouseListeningClass.anInt1921 = (1 + MouseListeningClass.anInt1921) % 100;
 														RSString var61 = Class3_Sub29.method733(12345678, var11).method555(28021, GraphicDefinition.incomingBuffer);
 														if(-3 != ~clanChatIcon && 3 != clanChatIcon) {
 															if(~clanChatIcon != -2) {
@@ -892,8 +892,8 @@ final class PacketParser {
 																												}
 
 																											if(!var49 && ~WorldListEntry.anInt2622 == -1) {
-																												Class163_Sub2_Sub1.aLongArray4017[Class149.anInt1921] = var51;
-																												Class149.anInt1921 = (1 + Class149.anInt1921) % 100;
+																												Class163_Sub2_Sub1.aLongArray4017[MouseListeningClass.anInt1921] = var51;
+																												MouseListeningClass.anInt1921 = (1 + MouseListeningClass.anInt1921) % 100;
 																												var64 = Class3_Sub29.method733(12345678, var33).method555(28021, GraphicDefinition.incomingBuffer);
 																												if(-3 == ~chatIcon) {
 																													Class3_Sub28_Sub12.sendGameMessage(var33, 18, var64, (RSString)null, (byte)50, RenderAnimationDefinition.method903(new RSString[]{Class21.aClass94_444, Class41.method1052(-29664, var2).method1545((byte)-50)}, (byte)-105));
@@ -1158,8 +1158,8 @@ final class PacketParser {
 																																		}
 
 																																	if(!var42 && -1 == ~WorldListEntry.anInt2622) {
-																																		Class163_Sub2_Sub1.aLongArray4017[Class149.anInt1921] = var35;
-																																		Class149.anInt1921 = (Class149.anInt1921 - -1) % 100;
+																																		Class163_Sub2_Sub1.aLongArray4017[MouseListeningClass.anInt1921] = var35;
+																																		MouseListeningClass.anInt1921 = (MouseListeningClass.anInt1921 - -1) % 100;
 																																		RSString var52 = Class3_Sub28_Sub17.method686(Class32.method992(GraphicDefinition.incomingBuffer, var0 ^ -29539).method1536(96));
 																																		if(-3 != ~chatIcon && ~chatIcon != -4) {
 																																			if(chatIcon != 1) {
@@ -1593,8 +1593,8 @@ final class PacketParser {
 																																		}
 
 																																	if(!var13 && 0 == WorldListEntry.anInt2622) {
-																																		Class163_Sub2_Sub1.aLongArray4017[Class149.anInt1921] = var44;
-																																		Class149.anInt1921 = (Class149.anInt1921 + 1) % 100;
+																																		Class163_Sub2_Sub1.aLongArray4017[MouseListeningClass.anInt1921] = var44;
+																																		MouseListeningClass.anInt1921 = (MouseListeningClass.anInt1921 + 1) % 100;
 																																		var57 = Class3_Sub28_Sub17.method686(Class32.method992(GraphicDefinition.incomingBuffer, 29488).method1536(116));
 																																		if(-3 != ~clanChatIcon && -4 != ~clanChatIcon) {
 																																			if(~clanChatIcon == -2) {
@@ -1633,7 +1633,7 @@ final class PacketParser {
 																															}
 																														} else {
 																															Class3_Sub30_Sub1.method819(false);
-																															Class149.anInt1925 = GraphicDefinition.incomingBuffer.getShort((byte)59);
+																															MouseListeningClass.anInt1925 = GraphicDefinition.incomingBuffer.getShort((byte)59);
 																															Class140_Sub6.anInt2905 = Class3_Sub13_Sub17.anInt3213;
 																															RSString.incomingOpcode = -1;
 																															return true;

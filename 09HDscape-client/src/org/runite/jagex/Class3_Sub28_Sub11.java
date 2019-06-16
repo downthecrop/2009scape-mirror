@@ -305,7 +305,7 @@ final class Class3_Sub28_Sub11 extends Node {
          Class163_Sub2_Sub1.aClass94_4024 = Class39.aClass94_669;
          Class95.aClass94_1335 = Class3_Sub13_Sub27.aClass94_3344;
          Class12.aClass94_327 = Class3_Sub4.aClass94_2255;
-         Class3_Sub1.aClass94_2210 = Class149.aClass94_1922;
+         Class3_Sub1.aClass94_2210 = MouseListeningClass.aClass94_1922;
          Class140_Sub3.aClass94_2744 = Class129_Sub1.aClass94_2687;
          Class3_Sub28_Sub10_Sub1.aClass94_4058 = Class3_Sub13_Sub26.aClass94_3324;
          Class3_Sub22.aClass94_2526 = Class96.aClass94_1348;

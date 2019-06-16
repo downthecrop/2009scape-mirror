@@ -134,7 +134,7 @@ final class Class115 {
 
    static final void method1714(byte var0) {
       try {
-         Class148.aClass93_1911.method1523((byte)-112);
+         KeyboardListener.aClass93_1911.method1523((byte)-112);
          if(var0 != -6) {
             method1712(-114);
          }

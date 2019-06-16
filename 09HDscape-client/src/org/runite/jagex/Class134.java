@@ -41,9 +41,9 @@ final class Class134 {
                method1806(-79);
             }
 
-            if(~var1 == -5001 && Class149.anInt1927 > 0) {
-               var2 = Class9.aByteArrayArray125[--Class149.anInt1927];
-               Class9.aByteArrayArray125[Class149.anInt1927] = null;
+            if(~var1 == -5001 && MouseListeningClass.anInt1927 > 0) {
+               var2 = Class9.aByteArrayArray125[--MouseListeningClass.anInt1927];
+               Class9.aByteArrayArray125[MouseListeningClass.anInt1927] = null;
                return var2;
             } else if(-30001 == ~var1 && 0 < Class3_Sub28_Sub18.anInt3766) {
                var2 = Class140_Sub3.aByteArrayArray2747[--Class3_Sub28_Sub18.anInt3766];

@@ -51,9 +51,9 @@ final class Class117 {
             boolean var3 = var1 == Class143.loadingStage || ~Class143.loadingStage == -11 || -29 == ~Class143.loadingStage;
             if(var3 == !var2) {
                if(var2) {
-                  Class129.anInt1691 = Class148.anInt1912;
+                  Class129.anInt1691 = KeyboardListener.anInt1912;
                   if(Class9.anInt120 != 0) {
-                     Class151.method2099(true, Class148.anInt1912, 0, Class75_Sub2.aClass153_2645, false, 255, 2);
+                     Class151.method2099(true, KeyboardListener.anInt1912, 0, Class75_Sub2.aClass153_2645, false, 255, 2);
                   } else {
                      NodeList.method882(-1, 2);
                   }
@@ -81,7 +81,7 @@ final class Class117 {
          Class129.anIntArray1695 = new int[104];
          Class80.anIntArray1138 = new int[104];
          Class85.anInt1174 = 99;
-         Class149.anIntArray1920 = new int[104];
+         MouseListeningClass.anIntArray1920 = new int[104];
          byte var2;
          if(var0) {
             var2 = 1;

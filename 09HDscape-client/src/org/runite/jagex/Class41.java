@@ -79,10 +79,10 @@ final class Class41 {
 
             Class20.method910(-96, var4, var1, var2, var7, var8, Class86.aClass91Array1182[var2]);
             if(0 <= var0) {
-               boolean var9 = Class148.aBoolean1905;
-               Class148.aBoolean1905 = true;
+               boolean var9 = KeyboardListener.aBoolean1905;
+               KeyboardListener.aBoolean1905 = true;
                Class110.method1683(var8, false, var2, false, Class86.aClass91Array1182[var2], var0, var6, var1, (byte)50, var4, var3);
-               Class148.aBoolean1905 = var9;
+               KeyboardListener.aBoolean1905 = var9;
             }
          }
 
