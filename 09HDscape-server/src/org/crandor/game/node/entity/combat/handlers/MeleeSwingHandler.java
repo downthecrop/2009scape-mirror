@@ -36,7 +36,35 @@ public class MeleeSwingHandler extends CombatSwingHandler {
 
 	@Override
 	public InteractionType canSwing(Entity entity, Entity victim) {
-		if (victim == null || entity == null) {
+		//Credits wolfenzi, https://www.rune-server.ee/runescape-development/rs2-server/snippets/608720-arios-hybridding-improve.html
+		int distance = usingHalberd(entity) ? 2 : 1;
+		InteractionType type = InteractionType.STILL_INTERACT;
+		boolean goodRange = canMelee(entity, victim, distance);
+		if (!goodRange && victim.getProperties().getCombatPulse().getVictim() != entity
+				&& victim.getWalkingQueue().isMoving() && entity.size() == 1) {
+			type = InteractionType.MOVE_INTERACT;
+			distance += entity.getWalkingQueue().isRunningBoth() ? 2 : 1;
+			goodRange = canMelee(entity, victim, distance);
+		}
+		if (!isProjectileClipped(entity, victim, true)) {
+			return InteractionType.NO_INTERACT;
+		}
+		boolean isRunning = entity.getWalkingQueue().getRunDir() != -1;
+		boolean enemyRunning = victim.getWalkingQueue().getRunDir() != -1;
+		// THX 4 fix tom <333.
+		if (super.canSwing(entity, victim) != InteractionType.NO_INTERACT) {
+			int maxDistance = isRunning ? (enemyRunning ? 3 : 4) : 2;
+			if (entity.getWalkingQueue().isMoving()
+					&& entity.getLocation().getDistance(victim.getLocation()) <= maxDistance) {
+				return type;
+			} else if (goodRange) {
+				if (type == InteractionType.STILL_INTERACT)
+					entity.getWalkingQueue().reset();
+				return type;
+			}
+		}
+		return InteractionType.NO_INTERACT;
+		/*if (victim == null || entity == null) {
 			return InteractionType.NO_INTERACT;
 		}
 		int distance = usingHalberd(entity) ? 2 : 1;
@@ -56,7 +84,7 @@ public class MeleeSwingHandler extends CombatSwingHandler {
 			}
 			return type;
 		}
-		return InteractionType.NO_INTERACT;
+		return InteractionType.NO_INTERACT;*/
 	}
 
 	/**
