@@ -20,6 +20,7 @@ public class PestControlTestBot extends PvMBots {
 	public int movetimer = 0;
 
 	public int randomType;
+	public boolean openedGate;
 	private BoatInfo myBoat = BoatInfo.NOVICE;
 
 	private CombatState combathandler = new CombatState(this);
@@ -113,6 +114,7 @@ public class PestControlTestBot extends PvMBots {
 	private int insideBoatWalks = 3;
 	private void idleInBoat() {
 		justStartedGame = true;
+		openedGate = false;
 		if (randomType < 35) //He's the type of guy to walk around the boat
 		{
 			if (new Random().nextInt(insideBoatWalks) <= 1)

@@ -11,6 +11,7 @@ import static plugin.activity.pestcontrol.PestControlHelper.*;
 
 public class CombatState {
     private PestControlTestBot bot;
+    private Random Random = new Random(); //Ya idc if that's bad java, it's killing me right now lmfao
 
     public CombatState(PestControlTestBot pestControlTestBot) {
         this.bot = pestControlTestBot;
@@ -20,24 +21,41 @@ public class CombatState {
         bot.setCustomState("I'm at portals.");
         Node gate = bot.getClosestNodeWithEntry(75, GATE_ENTRIES);
         Node portal = bot.getClosestNodeWithEntry(75, PORTAL_ENTRIES);
+        if (bot.justStartedGame && new Random().nextInt(2) == 0)
+        {
+            return;
+        }
         if (bot.justStartedGame || gate == null && portal == null)
         {
             bot.setCustomState("Walking randomly");
             bot.justStartedGame = false;
             bot.randomWalkAroundPoint(getMyPestControlSession(bot).getSquire().getLocation(), 15);
-            bot.movetimer = new Random().nextInt(5) + 1;
+            bot.movetimer = new Random().nextInt(7) + 6;
             return;
         }
-        if (gate != null)
+        if (gate != null && bot.randomType < 40 && (!bot.openedGate || new Random().nextInt(3) == 1))
         {
             bot.setCustomState("Interacting gate ID " + gate.getId());
             bot.interact(gate);
+            bot.openedGate = true;
+            bot.movetimer = new Random().nextInt(2) + 4;
+            return;
+        } else if (gate != null) {
+            bot.setCustomState("Waiting for someone to open gate");
+            bot.movetimer = new Random().nextInt(2) + 1;
+            if (new Random().nextInt(2) == 0)
+            {
+                bot.randomWalkAroundPoint(gate.getLocation(), 5);
+            }
             return;
         }
-
-        bot.setCustomState("Walking to portals");
-        bot.randomWalkAroundPoint(portal.getLocation(), 5);
-        bot.movetimer = new Random().nextInt(5) + 5;
+        if (portal.getLocation() != null)
+        {
+            bot.setCustomState("Walking to portals");
+            bot.randomWalkAroundPoint(portal.getLocation(), 5);
+            bot.movetimer = new Random().nextInt(5) + 5;
+        }
+        bot.setCustomState("Absolutely nothing. Everything is dead");
     }
 
     public void fightNPCs() {
