@@ -1,7 +1,6 @@
 package plugin.activity.pestcontrol;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.crandor.ServerConstants;
@@ -29,6 +28,7 @@ import org.crandor.plugin.PluginManager;
 import org.crandor.tools.RandomFunction;
 import org.crandor.plugin.InitializablePlugin;
 import org.crandor.tools.StringUtils;
+import plugin.activity.pestcontrol.monsters.*;
 
 /**
  * Handles the Pest Control activity.
@@ -40,7 +40,7 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 	/**
 	 * The minimum team size.
 	 */
-	protected static final int MIN_TEAM_SIZE = GameWorld.getSettings().isDevMode() ? 1 : 5;
+	protected static final int MIN_TEAM_SIZE = 5; //GameWorld.getSettings().isDevMode() ? 1 : 5;
 
 	/**
 	 * The maximum team size.
@@ -74,22 +74,22 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 
 		@Override
 		public boolean pulse() {
-			for (Iterator<PestControlSession> it = sessions.iterator(); it.hasNext();) {
-				PestControlSession session = it.next();
-				if (session != null && session.update()) {
-					it.remove();
+			sessions.removeIf(session -> session != null && session.update());
+			ticks++;
+			if (waitingPlayers.size() >= MAX_TEAM_SIZE && ticks < 475)
+			{
+				ticks = 485;
+			}
+			if ((ticks < 450 && ticks % 100 == 0) || (ticks % 50 == 0) || ticks == 485) {
+				for (Player p : waitingPlayers) {
+					updateTime(p);
 				}
 			}
-			if (++ticks >= 500) { // 500
+			if (ticks >= 500) {
 				if (waitingPlayers.size() >= MIN_TEAM_SIZE) {
 					PestControlActivityPlugin.this.start();
 				} else {
 					ticks = 400;
-				}
-			}
-			if ((ticks < 450 && ticks % 100 == 0) || (ticks % 50 == 0)) {
-				for (Player p : waitingPlayers) {
-					updateTime(p);
 				}
 			}
 			return false;
@@ -105,6 +105,7 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 		session.getRegion().getRegionZones().add(new RegionZone(this, session.getRegion().getBorders()));
 		sessions.add(session);
 		ticks = 0;
+		updatePlayerCount();
 	}
 
 	/**

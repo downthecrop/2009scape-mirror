@@ -5,6 +5,7 @@ import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.Entity;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.object.GameObject;
+import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.zone.MapZone;
 import org.crandor.game.world.map.zone.ZoneBorders;
 import org.crandor.game.world.map.zone.ZoneRestriction;
@@ -91,9 +92,13 @@ public final class PCLanderZone extends MapZone {
 
 	@Override
 	public void configure() {
-		register(new ZoneBorders(2659, 2637, 2664, 2664));
-		register(new ZoneBorders(2637, 2641, 2642, 2648));
-		register(new ZoneBorders(2631, 2648, 2636, 2655));
+		ZoneBorders boatA = new ZoneBorders(2659, 2637, 2664, 2664);
+		ZoneBorders boatB = new ZoneBorders(2637, 2641, 2642, 2648);
+		ZoneBorders boatC = new ZoneBorders(2631, 2648, 2636, 2655);
+
+		register(boatA);
+		register(boatB);
+		register(boatC);
 	}
 
 }

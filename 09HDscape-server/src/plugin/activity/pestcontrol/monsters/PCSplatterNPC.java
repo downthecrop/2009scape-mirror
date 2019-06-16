@@ -1,4 +1,4 @@
-package plugin.activity.pestcontrol;
+package plugin.activity.pestcontrol.monsters;
 
 import java.util.ArrayList;
 
@@ -17,6 +17,7 @@ import org.crandor.game.world.map.RegionManager;
 import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.game.world.update.flag.context.Graphics;
 import org.crandor.tools.RandomFunction;
+import plugin.activity.pestcontrol.PestControlSession;
 
 /**
  * Handles the pest control splatter NPC.

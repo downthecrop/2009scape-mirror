@@ -2,9 +2,11 @@ package org.crandor.game.world.map.zone;
 
 import org.crandor.game.node.Node;
 import org.crandor.game.world.map.Location;
+import org.crandor.tools.RandomFunction;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Represents the borders of a zone.
@@ -208,6 +210,20 @@ public final class ZoneBorders {
 	 */
 	public List<ZoneBorders> getExceptions() {
 		return exceptions;
+	}
+
+	public Location getWeightedRandomLoc(int intensity)
+	{
+		int x = northEastX - southWestX == 0 ? southWestX : RandomFunction.normalRandDist(northEastX - southWestX, intensity) + southWestX;
+		int y = northEastY - southWestY == 0 ? southWestY : RandomFunction.normalRandDist(northEastY - southWestY, intensity) + southWestY;
+		return new Location(x, y);
+	}
+
+	public Location getRandomLoc() {
+	    int x = northEastX - southWestX == 0 ? southWestX : new Random().nextInt(northEastX - southWestX) + southWestX;
+	    int y = northEastY - southWestY == 0 ? southWestY : new Random().nextInt(northEastY - southWestY) + southWestY;
+	    //System.out.println("Generated x,y " + x + ", " + y);
+		return new Location(x, y);
 	}
 
 	/**

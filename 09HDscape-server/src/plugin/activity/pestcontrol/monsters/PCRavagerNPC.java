@@ -1,4 +1,4 @@
-package plugin.activity.pestcontrol;
+package plugin.activity.pestcontrol.monsters;
 
 import org.crandor.game.interaction.MovementPulse;
 import org.crandor.game.node.Node;
@@ -15,6 +15,7 @@ import org.crandor.game.world.map.MapDistance;
 import org.crandor.game.world.map.path.Pathfinder;
 import org.crandor.game.world.map.zone.ZoneBorders;
 import org.crandor.tools.RandomFunction;
+import plugin.activity.pestcontrol.PestControlSession;
 
 /**
  * Handles the Ravager pest control NPC.

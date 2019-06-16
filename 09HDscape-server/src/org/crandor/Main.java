@@ -11,6 +11,8 @@ import org.crandor.net.amsc.WorldCommunicator;
 import org.crandor.tools.TimeStamp;
 import org.crandor.tools.backup.AutoBackup;
 
+import java.net.BindException;
+
 /**
  * The main class, for those that are unable to read the class' name.
  * @author Emperor
@@ -51,7 +53,14 @@ public final class Main{
 		SQLManager.init();
 		Runtime.getRuntime().addShutdownHook(new Thread(new SystemShutdownHook()));
 		SystemLogger.log("Starting NIO reactor...");
-		reactor = NioReactor.configure(43594 + GameWorld.getSettings().getWorldId());
+
+		try {
+			reactor = NioReactor.configure(43594 + GameWorld.getSettings().getWorldId());
+		} catch (BindException e) {
+			System.out.println("Port " + 43594 + GameWorld.getSettings().getWorldId() + " is already in use!");
+			throw e;
+		}
+
 		WorldCommunicator.connect();
 		reactor.start();
 		SystemLogger.log(GameWorld.getName() + " flags " + GameWorld.getSettings().toString());
