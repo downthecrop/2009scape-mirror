@@ -56,21 +56,35 @@ public class PvMBots extends AIPlayer {
         return true;
     }
 
-    public void AttackNpcsInRadius(Player bot, int radius) {
+    public boolean AttackNpcsInRadius(int radius)
+    {
+        return AttackNpcsInRadius(this, radius);
+    }
+
+    /**
+     * Attacks NPCs in radius of bot
+     * @param bot
+     * @param radius
+     * @return true if bot will be fighting
+     */
+    public boolean AttackNpcsInRadius(Player bot, int radius) {
         if (bot.inCombat())
-            return;
+            return true;
         List<Entity> creatures = FindTargets(bot, radius);
         if (creatures == null) {
-            return;
+            return false;
         }
         if (!(creatures.isEmpty())) {
             bot.attack(creatures.get(RandomFunction.getRandom((creatures.size() - 1))));
-            return;
+            return true;
         } else {
             creatures = FindTargets(bot, radius);
             if (!creatures.isEmpty())
+            {
                 bot.attack(creatures.get(RandomFunction.getRandom((creatures.size() - 1))));
-            return;
+                return true;
+            }
+            return false;
         }
     }
 

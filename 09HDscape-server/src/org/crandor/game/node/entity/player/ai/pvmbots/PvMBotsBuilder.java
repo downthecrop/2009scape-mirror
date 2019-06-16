@@ -6,7 +6,7 @@ import org.crandor.game.container.impl.EquipmentContainer;
 import org.crandor.game.content.skill.Skills;
 import org.crandor.game.node.entity.combat.CombatSpell;
 import org.crandor.game.node.entity.player.ai.AIPlayer;
-import org.crandor.game.node.entity.player.ai.minigamebots.PestControlTestBot;
+import org.crandor.game.node.entity.player.ai.minigamebots.pestcontrol.PestControlTestBot;
 import org.crandor.game.node.entity.player.link.SpellBookManager;
 import org.crandor.game.node.entity.player.link.appearance.Gender;
 import org.crandor.game.node.item.Item;

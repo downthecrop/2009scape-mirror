@@ -28,6 +28,7 @@ public class PestControlHelper {
     }
 
     public static List<Integer> GATE_ENTRIES = Arrays.asList(14233, 14235);
+    public static List<Integer> PORTAL_ENTRIES = Arrays.asList(PCPortalNPC.portalIds);
 
     public static final Location PestControlIslandLocation = Location.create(2659, 2649, 0);
 
@@ -48,6 +49,10 @@ public class PestControlHelper {
             if (i.outsideBoatBorder.insideBorder(l))
                 return true;
         return false;
+    }
+    public static PestControlSession getMyPestControlSession(Player p)
+    {
+        return p.getExtension(PestControlSession.class);
     }
 
 

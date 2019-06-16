@@ -38,153 +38,153 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 	public boolean parse(Player player, String name, String[] arguments) {
 		switch (name) {
 
-		case "shutdowninterface":
-			player.getInterfaceManager().close();
-			break;
+			case "shutdowninterface":
+				player.getInterfaceManager().close();
+				break;
 
 			case "tut":
 				int stage = Integer.parseInt(arguments[1]);
 				TutorialStage.load(player, stage, false);
 				break;
-			
-		case "resettabs":
-			for (int i = 0; i < player.getBank().getTabStartSlot().length; i++) {
-				player.getBank().getTabStartSlot()[i] = 0;
-			}
-			player.getBank().setTabIndex(10);
-			if (player.getBank().isOpen()) {
-				player.getInterfaceManager().close();
-			}
-			player.getPacketDispatch().sendMessage("Bank tabs are reset!");
-			return true;
-		case "resetpin":
-			if (arguments.length < 2) {
-				player.sendMessage("Syntax error: ::resetpin oldpin");
-				return true;
-			}
-			String oldPin = arguments[1];
-			if (oldPin == null) {
-				return true;
-			}
-			if (!player.getBankPinManager().hasPin()) {
-				player.sendMessage("You don't have a pin.");
-				return true;
-			}
-			if (!oldPin.equals(player.getBankPinManager().getPin())) {
-				player.sendMessage("Your old pin doesn't match your current pin.");
-				return true;
-			}
-			player.getBankPinManager().setPin(null);
-			player.sendMessage("Your pin has been reset.");
-			return true;
-		case "bank":// The players want OSRS content, let's give it to em
-			if (!player.isAdmin()) {
-				player.sendChat("Hey, everyone, I just tried to do something very silly!");
-			}
-			break;
-		case "players":
-			int count = Repository.getPlayers().size();
-			int ironCount = 1;
-			int ultIronCount = 0;
-			for (Player p : Repository.getPlayers()) {
-				if (p.getIronmanManager().checkRestriction(IronmanMode.ULTIMATE)) {
-					ultIronCount++;
+
+			case "resettabs":
+				for (int i = 0; i < player.getBank().getTabStartSlot().length; i++) {
+					player.getBank().getTabStartSlot()[i] = 0;
 				}
-				if (p.getIronmanManager().checkRestriction(IronmanMode.STANDARD)) {
-					ironCount++;
+				player.getBank().setTabIndex(10);
+				if (player.getBank().isOpen()) {
+					player.getInterfaceManager().close();
 				}
-			}
-			int regular = count - ironCount - ultIronCount;
-			if (count == 1) {
-				player.getPacketDispatch().sendMessage("There is 1 active player in this world.");
-			} else {
-				player.getPacketDispatch().sendMessage("There are " + count + " active players in this world: " + regular + " regular, " + ironCount + " iron, and " + ultIronCount + " ultimate iron.");
-			}
-			return player.getRights() == Rights.REGULAR_PLAYER;
-		case "yell":
-			if (!player.isDonator() && !player.isAdmin()) {
-				player.getPacketDispatch().sendMessages("Join clan chat \"" + GameWorld.getName() + "\" to talk globally, or become a donator to have access to", "this benefit.");
+				player.getPacketDispatch().sendMessage("Bank tabs are reset!");
 				return true;
-			}
-			if (player.getDetails().isMuted()) {
-				player.getPacketDispatch().sendMessage("You have been " + (player.getDetails().isPermMute() ? "permanently" : "temporarily") + " muted due to breaking a rule.");
-				return true;
-			}
-			if(WorldCommunicator.isEnabled()){
-				if(ClanRepository.getDefault().isBanned(player.getName())){
-					player.sendMessages("You are temporarily unable to yell as you are banned from the main clan chat.", "Don't be annoying!");
+			case "resetpin":
+				if (arguments.length < 2) {
+					player.sendMessage("Syntax error: ::resetpin oldpin");
 					return true;
 				}
-			}
-			if (player.getAttribute("yell-delay", 0.0) > GameWorld.getTicks()) {
-				player.sendMessages("You have yelled in the last " + player.getDonatorType().getCooldown() + " seconds. Upgrade to an extreme donator to have", "unlimited yelling abilities.");
-				return true;
-			}
-			String text = getArgumentLine(arguments);
-		    if(text.contains("<img=") || text.contains("<br>") || text.contains("<col=") || text.contains("<shad=")){
-				player.sendMessage("Bad! No images/text effects allowed in yell chat.");
-				return true;
-			}
-		    if(text.contains("aq p")){
-				return true;
-			}
-			int length = text.length();
-			if (length > 100) {
-				length = 100;
-			}
-			if (text.length() >= 2) {
-				if (Character.isLowerCase(text.charAt(0))) {
-					text = Character.toUpperCase(text.charAt(0)) + text.substring(1, length);
+				String oldPin = arguments[1];
+				if (oldPin == null) {
+					return true;
 				}
-				text = getYellPrefix(player) + text + "</col>";
+				if (!player.getBankPinManager().hasPin()) {
+					player.sendMessage("You don't have a pin.");
+					return true;
+				}
+				if (!oldPin.equals(player.getBankPinManager().getPin())) {
+					player.sendMessage("Your old pin doesn't match your current pin.");
+					return true;
+				}
+				player.getBankPinManager().setPin(null);
+				player.sendMessage("Your pin has been reset.");
+				return true;
+			case "bank":// The players want OSRS content, let's give it to em
+				if (!player.isAdmin()) {
+					player.sendChat("Hey, everyone, I just tried to do something very silly!");
+				}
+				break;
+			case "players":
+				int count = Repository.getPlayers().size();
+				int ironCount = 1;
+				int ultIronCount = 0;
 				for (Player p : Repository.getPlayers()) {
-					if (p.isActive()) {
-						p.getPacketDispatch().sendMessage(text);
+					if (p.getIronmanManager().checkRestriction(IronmanMode.ULTIMATE)) {
+						ultIronCount++;
+					}
+					if (p.getIronmanManager().checkRestriction(IronmanMode.STANDARD)) {
+						ironCount++;
 					}
 				}
-				if (player.getDonatorType().getCooldown() > 0 && !player.isStaff()) {
-					player.setAttribute("yell-delay", (int) GameWorld.getTicks() + (player.getDonatorType().getCooldown() / 0.6));
+				int regular = count - ironCount - ultIronCount;
+				if (count == 1) {
+					player.getPacketDispatch().sendMessage("There is 1 active player in this world.");
+				} else {
+					player.getPacketDispatch().sendMessage("There are " + count + " active players in this world: " + regular + " regular, " + ironCount + " iron, and " + ultIronCount + " ultimate iron.");
 				}
-			} else {
-				player.getPacketDispatch().sendMessage("Your message was too short.");
-			}
-			return true;
-		case "togglenews":
-			player.getSavedData().getGlobalData().setDisableNews(!player.getSavedData().getGlobalData().isDisableNews());
-			player.sendMessage("<col=FF0000>" + (player.getSavedData().getGlobalData().isDisableNews() ? "You will no longer see news notifications." : "You will now see news notifications."));
-			return true;
-		case "commands":
-		case "command":
-		case "commandlist":
-			sendCommands(player);
-			return true;
-		case "quests":
-			sendQuests(player);
-			return true;
-		case "donate":
-			sendDonationInfo(player);
-			return true;
-		case "reply":
-			if(player.getInterfaceManager().isOpened()){
-				player.sendMessage("Please finish what you're doing first.");
-				return true;
-			}
-			if (player.getAttributes().containsKey("replyTo")) {
-				player.setAttribute("keepDialogueAlive", true);
-				final String replyTo = (String) player.getAttribute("replyTo", "").replaceAll("_", " ");
-				player.setAttribute("runscript", new RunScript() {
-					@Override
-					public boolean handle() {
-						CommunicationInfo.sendMessage(player, replyTo.toLowerCase(), (String) getValue());
-						player.removeAttribute("keepDialogueAlive");
+				return player.getRights() == Rights.REGULAR_PLAYER;
+			case "yell":
+				if (!player.isDonator() && !player.isAdmin()) {
+					player.getPacketDispatch().sendMessages("Join clan chat \"" + GameWorld.getName() + "\" to talk globally, or become a donator to have access to", "this benefit.");
+					return true;
+				}
+				if (player.getDetails().isMuted()) {
+					player.getPacketDispatch().sendMessage("You have been " + (player.getDetails().isPermMute() ? "permanently" : "temporarily") + " muted due to breaking a rule.");
+					return true;
+				}
+				if(WorldCommunicator.isEnabled()){
+					if(ClanRepository.getDefault().isBanned(player.getName())){
+						player.sendMessages("You are temporarily unable to yell as you are banned from the main clan chat.", "Don't be annoying!");
 						return true;
 					}
-				});	
-				player.getDialogueInterpreter().sendMessageInput(StringUtils.formatDisplayName(replyTo));
-			} else {
-				player.getPacketDispatch().sendMessage("You have not recieved any recent messages to which you can reply.");
-			}
-			return true;
+				}
+				if (player.getAttribute("yell-delay", 0.0) > GameWorld.getTicks()) {
+					player.sendMessages("You have yelled in the last " + player.getDonatorType().getCooldown() + " seconds. Upgrade to an extreme donator to have", "unlimited yelling abilities.");
+					return true;
+				}
+				String text = getArgumentLine(arguments);
+				if(text.contains("<img=") || text.contains("<br>") || text.contains("<col=") || text.contains("<shad=")){
+					player.sendMessage("Bad! No images/text effects allowed in yell chat.");
+					return true;
+				}
+				if(text.contains("aq p")){
+					return true;
+				}
+				int length = text.length();
+				if (length > 100) {
+					length = 100;
+				}
+				if (text.length() >= 2) {
+					if (Character.isLowerCase(text.charAt(0))) {
+						text = Character.toUpperCase(text.charAt(0)) + text.substring(1, length);
+					}
+					text = getYellPrefix(player) + text + "</col>";
+					for (Player p : Repository.getPlayers()) {
+						if (p.isActive()) {
+							p.getPacketDispatch().sendMessage(text);
+						}
+					}
+					if (player.getDonatorType().getCooldown() > 0 && !player.isStaff()) {
+						player.setAttribute("yell-delay", (int) GameWorld.getTicks() + (player.getDonatorType().getCooldown() / 0.6));
+					}
+				} else {
+					player.getPacketDispatch().sendMessage("Your message was too short.");
+				}
+				return true;
+			case "togglenews":
+				player.getSavedData().getGlobalData().setDisableNews(!player.getSavedData().getGlobalData().isDisableNews());
+				player.sendMessage("<col=FF0000>" + (player.getSavedData().getGlobalData().isDisableNews() ? "You will no longer see news notifications." : "You will now see news notifications."));
+				return true;
+			case "commands":
+			case "command":
+			case "commandlist":
+				sendCommands(player);
+				return true;
+			case "quests":
+				sendQuests(player);
+				return true;
+			case "donate":
+				sendDonationInfo(player);
+				return true;
+			case "reply":
+				if(player.getInterfaceManager().isOpened()){
+					player.sendMessage("Please finish what you're doing first.");
+					return true;
+				}
+				if (player.getAttributes().containsKey("replyTo")) {
+					player.setAttribute("keepDialogueAlive", true);
+					final String replyTo = (String) player.getAttribute("replyTo", "").replaceAll("_", " ");
+					player.setAttribute("runscript", new RunScript() {
+						@Override
+						public boolean handle() {
+							CommunicationInfo.sendMessage(player, replyTo.toLowerCase(), (String) getValue());
+							player.removeAttribute("keepDialogueAlive");
+							return true;
+						}
+					});
+					player.getDialogueInterpreter().sendMessageInput(StringUtils.formatDisplayName(replyTo));
+				} else {
+					player.getPacketDispatch().sendMessage("You have not recieved any recent messages to which you can reply.");
+				}
+				return true;
 		}
 		return false;
 	}
@@ -250,14 +250,14 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 		if (player.getDetails().getRights().isVisible(player)) {
 			Rights right = player.getAttribute("visible_rank", player.getDetails().getRights());
 			switch (right) {
-			case ADMINISTRATOR:
-				color = "<col=009999>";
-				break;
-			case PLAYER_MODERATOR:
-				color = "<col=81819B>";
-				break;
-			default:
-				break;
+				case ADMINISTRATOR:
+					color = "<col=009999>";
+					break;
+				case PLAYER_MODERATOR:
+					color = "<col=81819B>";
+					break;
+				default:
+					break;
 			}
 		}
 		if (player.isDonator() && !player.isStaff()) {

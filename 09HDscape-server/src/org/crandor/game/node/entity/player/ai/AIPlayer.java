@@ -17,9 +17,11 @@ import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.info.PlayerDetails;
 import org.crandor.game.node.item.Item;
+import org.crandor.game.world.map.Direction;
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.RegionManager;
 import org.crandor.game.world.map.path.Pathfinder;
+import org.crandor.net.packet.in.InteractionPacket;
 import org.crandor.plugin.Plugin;
 import org.crandor.tools.RandomFunction;
 import org.crandor.tools.StringUtils;
@@ -128,13 +130,23 @@ public class AIPlayer extends Player {
 			}
 		}, "movement");
 	}
-	
+
+	public void randomWalkAroundPoint(Location point, int radius)
+	{
+		Pathfinder.find(this, point.transform(RandomFunction.random(radius, (radius * -1)), RandomFunction.random(radius, (radius * -1)), 0), true, Pathfinder.SMART).walk(this);
+	}
+
 	public void randomWalk(int radiusX, int radiusY)
 	{
 		Pathfinder.find(this, this.getLocation().transform(RandomFunction.random(radiusX, (radiusX * -1)), RandomFunction.random(radiusY, (radiusY * -1)), 0), false, Pathfinder.SMART).walk(this);
 	}
 
-	protected void walkToPosSmart(Location loc) {
+	public void walkToPosSmart(int x, int y)
+	{
+		walkToPosSmart(new Location(x, y));
+	}
+
+	public void walkToPosSmart(Location loc) {
 		Pathfinder.find(this, loc, true, Pathfinder.SMART).walk(this);
 	}
 
@@ -172,6 +184,10 @@ public class AIPlayer extends Player {
 		//int meX2 = this.getLocation().getX();
 		//System.out.println("local " + meX + " real x? " + meX2 );
 		ArrayList<Node> nodes = new ArrayList<Node>();
+		for (NPC npc : RegionManager.getLocalNpcs(this, range)) {
+			if (npc.getId() == entry)
+				nodes.add(npc);
+		}
 		for (int x = 0; x < range; x++)
 		{
 			for (int y = 0; y < range - x; y++)
@@ -204,6 +220,10 @@ public class AIPlayer extends Player {
 		//int meX2 = this.getLocation().getX();
 		//System.out.println("local " + meX + " real x? " + meX2 );
 		ArrayList<Node> nodes = new ArrayList<Node>();
+		for (NPC npc : RegionManager.getLocalNpcs(this, range)) {
+		    if (entrys.contains(npc.getId()))
+		    	nodes.add(npc);
+		}
 		for (int x = 0; x < range; x++)
 		{
 			for (int y = 0; y < range - x; y++)
@@ -227,6 +247,18 @@ public class AIPlayer extends Player {
 			}
 		}
 		return nodes;
+	}
+
+	public Node getClosestNodeWithEntryAndDirection(int range, int entry, Direction direction)
+	{
+		ArrayList<Node> nodeList = getNodeInRange(range, entry);
+		if (nodeList.isEmpty())
+		{
+			//System.out.println("nodelist empty");
+			return null;
+		}
+		Node node = getClosestNodeinNodeListWithDirection(nodeList, direction);
+		return node;
 	}
 
 	public Node getClosestNodeWithEntry(int range, int entry)
@@ -294,6 +326,28 @@ public class AIPlayer extends Player {
 			}
 		}
 		return npcReturn;
+	}
+
+	private Node getClosestNodeinNodeListWithDirection(ArrayList<Node> nodes, Direction direction)
+	{
+		if (nodes.isEmpty())
+		{
+			//System.out.println("nodelist empty");
+			return null;
+		}
+
+		double distance = 0;
+		Node nodeReturn = null;
+		for (Node node : nodes)
+		{
+			double nodeDistance = this.getLocation().getDistance(node.getLocation());
+			if ((nodeReturn == null || nodeDistance < distance) && node.getDirection() == direction)
+			{
+				distance = nodeDistance;
+				nodeReturn = node;
+			}
+		}
+		return nodeReturn;
 	}
 
 	private Node getClosestNodeinNodeList(ArrayList<Node> nodes)
@@ -390,5 +444,11 @@ public class AIPlayer extends Player {
 	 */
 	public void setControler(Player controler) {
 		this.controler = controler;
+	}
+
+
+	public void interact(Node n)
+	{
+		InteractionPacket.handleObjectInteraction(this, 0, n.getLocation(), n.getId());
 	}
 }

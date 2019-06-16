@@ -97,6 +97,16 @@ public final class PCPortalNPC extends AbstractNPC {
 	 */
 	private NPC[] brawlers = new NPC[2];
 
+
+	/**
+	 * The portal ids?
+	 */
+	final static Integer[] portalIds = new Integer[] { 6142, 6143, 6144, 6145, 6146, 6147, 6148, 6149,
+
+			6150, 6151, 6152, 6153, 6154, 6155, 6156, 6157,
+
+			7551, 7552, 7553, 7554, 7555, 7556, 7557, 7558 };
+
 	/**
 	 * Constructs a new {@code PCPortalNPC} {@code Object}.
 	 */
@@ -282,9 +292,9 @@ public final class PCPortalNPC extends AbstractNPC {
 	public int[] getIds() {
 		return new int[] { 6142, 6143, 6144, 6145, 6146, 6147, 6148, 6149,
 
-		6150, 6151, 6152, 6153, 6154, 6155, 6156, 6157,
+                6150, 6151, 6152, 6153, 6154, 6155, 6156, 6157,
 
-		7551, 7552, 7553, 7554, 7555, 7556, 7557, 7558 };
+                7551, 7552, 7553, 7554, 7555, 7556, 7557, 7558 };
 	}
 
 	/**
@@ -314,5 +324,4 @@ public final class PCPortalNPC extends AbstractNPC {
 		}
 		return (getId() - 6142) % 4;
 	}
-
 }
