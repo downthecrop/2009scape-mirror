@@ -1,6 +1,7 @@
 package org.crandor.game.world.map.zone;
 
 import org.crandor.game.node.Node;
+import org.crandor.game.node.entity.player.ai.minigamebots.pestcontrol.PestControlTestBot;
 import org.crandor.game.world.map.Location;
 import org.crandor.tools.RandomFunction;
 
@@ -256,5 +257,9 @@ public final class ZoneBorders {
 	 */
 	public void setPlane(int plane) {
 		this.plane = plane;
+	}
+
+	public boolean insideRegion(Node n) {
+		return insideBorder(n.getLocation().getRegionX(), n.getLocation().getRegionY());
 	}
 }

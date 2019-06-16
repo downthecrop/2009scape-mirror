@@ -34,7 +34,7 @@ public final class PestControlSession {
 	/**
 	 * The object ids of non-attackable barricades/gates.
 	 */
-	public static final int[] INVALID_OBJECT_IDS = { 14230, 14231, 14232, // Barricades
+	public static final int[] INVALID_OBJECT_IDS = {14230, 14231, 14232, // Barricades
 			14245, 14246, 14247, 14248, // Gates
 	};
 

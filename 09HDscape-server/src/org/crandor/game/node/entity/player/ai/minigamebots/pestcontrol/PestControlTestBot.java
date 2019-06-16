@@ -1,30 +1,34 @@
-package org.crandor.game.node.entity.player.ai.minigamebots;
+package org.crandor.game.node.entity.player.ai.minigamebots.pestcontrol;
 
-import org.crandor.game.content.skill.Skills;
 import org.crandor.game.node.Node;
+import org.crandor.game.node.entity.Entity;
 import org.crandor.game.node.entity.player.ai.pvmbots.PvMBots;
-import org.crandor.game.node.entity.player.link.prayer.*;
 import org.crandor.game.world.map.Location;
 import org.crandor.net.packet.in.InteractionPacket;
 import org.crandor.tools.RandomFunction;
 
+import java.util.List;
 import java.util.Random;
 
 import static plugin.activity.pestcontrol.PestControlHelper.*;
 
 public class PestControlTestBot extends PvMBots {
 
-	private int tick = 0;
-	private int combatMoveTimer = 0;
-	private int movetimer = 0;
+	public int tick = 0;
+	public int combatMoveTimer = 0;
+	public boolean justStartedGame = true;
+	public int movetimer = 0;
 
-	private int randomType;
+	public int randomType;
+	public boolean openedGate;
 	private BoatInfo myBoat = BoatInfo.NOVICE;
+
+	private CombatState combathandler = new CombatState(this);
 
 	enum State {
 		OUTSIDE_GANGPLANK,
 		WAITING_IN_BOAT,
-		NPC_COMBAT,
+		PLAY_GAME,
 		GET_TO_PC
 	}
 
@@ -47,7 +51,7 @@ public class PestControlTestBot extends PvMBots {
 		{
 		    movetimer = 0;
 			State state = getState();
-			this.setCustomState(String.valueOf(state));
+			this.setCustomState(String.valueOf(state) + movetimer);
 
 			switch (state)
 			{
@@ -60,7 +64,7 @@ public class PestControlTestBot extends PvMBots {
 				case WAITING_IN_BOAT:
 					idleInBoat();
 					break;
-				case NPC_COMBAT:
+				case PLAY_GAME:
 					attackNPCs();
 					break;
 			}
@@ -74,7 +78,7 @@ public class PestControlTestBot extends PvMBots {
 		}
 		if (isInPestControlInstance(this))
 		{
-			return State.NPC_COMBAT;
+			return State.PLAY_GAME;
 		}
 		if (outsideGangplankContainsLoc(this.getLocation()))
 		{
@@ -84,41 +88,46 @@ public class PestControlTestBot extends PvMBots {
 	}
 
 	private void attackNPCs() {
+		List<Entity> creatures = FindTargets(this, 15);
+		if (creatures == null || creatures.isEmpty())
+		{
+			if (randomType > 15)
+			{
+				this.setCustomState("Going to portals");
+				combathandler.goToPortals();
+			} else {
+				randomWalkAroundPoint(getMyPestControlSession(this).getSquire().getLocation(), 3);
+				movetimer = new Random().nextInt(15) + 6;
+			}
+		} else {
+			if (randomType < 15 && new Random().nextInt(5) == 0)
+			{
+				randomWalkAroundPoint(getMyPestControlSession(this).getSquire().getLocation(), 3);
+				movetimer = new Random().nextInt(15) + 6;
+			} else {
+				this.setCustomState("Fighting NPCs");
+				combathandler.fightNPCs();
+			}
+		}
+
+		/*
+		if (randomType < 20)
+		{
+			this.getUpdateMasks().register(new ChatFlag(new ChatMessage(this, "Meee", 0, 0)));
+		}
 		Node test = getClosestNodeWithEntry(5, GATE_ENTRIES);
 		if (!this.inCombat() && test != null) {
 			InteractionPacket.handleObjectInteraction(this, 0, test.getLocation(), test.getId());
 		}
 
-		//Npc Combat
-		if (tick == 0)
-		{
-			if (!this.inCombat())
-				AttackNpcsInRadius(this, 15);
-			this.tick = 10;
-		}
-		else
-			this.tick--;
-
-		this.eat(379);
-		this.getSkills().setLevel(Skills.PRAYER, 99);
-		this.getSkills().setStaticLevel(Skills.PRAYER, 99);
-		if (!(this.getPrayer().getActive().contains(PrayerType.PROTECT_FROM_MELEE)))
-			this.getPrayer().toggle(PrayerType.PROTECT_FROM_MELEE);
-
-		if (!this.inCombat())
-		{
-			if (combatMoveTimer <= 0)
-			{
-				if (this.FindTargets(this, 5) == null)
-					this.randomWalk(5, 5);
-				this.combatMoveTimer = 5;
-			}
-		}
+		*/
 	}
 
 	private int insideBoatWalks = 3;
 	private void idleInBoat() {
-		if (randomType < 15) //He's the type of guy to walk around the boat
+		justStartedGame = true;
+		openedGate = false;
+		if (randomType < 35) //He's the type of guy to walk around the boat
 		{
 			if (new Random().nextInt(insideBoatWalks) <= 1)
 			{
@@ -142,22 +151,19 @@ public class PestControlTestBot extends PvMBots {
 		{
 			return;
 		}
-		if (randomType > 20 && new Random().nextInt(4) == 0) //Idle outside ladder
+		if (new Random().nextInt(5) == 1) //Missclick the ladder
+		{
+			movetimer = new Random().nextInt(2);
+			this.walkToPosSmart(myBoat.outsideBoatBorder.getWeightedRandomLoc(2));
+		}
+		if (randomType > 20 && new Random().nextInt(6) == 0) //Idle outside ladder
 		{
 			if (new Random().nextInt(16) == 0)
 			{
 				this.walkToPosSmart(myBoat.outsideBoatBorder.getRandomLoc());
 				movetimer += RandomFunction.normalPlusWeightRandDist(400, 200);
-				//System.out.println("Rare movetimer set on " + this.getName());
 			}
 			movetimer = RandomFunction.normalPlusWeightRandDist(100, 50);
-			//System.out.println("Set movetimer to " + movetimer + " on " + this.getName());
-			return;
-		}
-		if (randomType < 60 && new Random().nextInt(6) == 1) //Missclick the ladder
-		{
-			movetimer = new Random().nextInt(2);
-			this.walkToPosSmart(myBoat.outsideBoatBorder.getWeightedRandomLoc(3));
 			return;
 		}
 		Node test = getClosestNodeWithEntry(15, myBoat.ladderId);
