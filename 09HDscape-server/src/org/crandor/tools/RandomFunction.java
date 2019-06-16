@@ -88,6 +88,29 @@ public class RandomFunction {
 		return RANDOM.nextInt(maxValue);
 	}
 
+	public static int nextInt(int val)
+	{
+		return RANDOM.nextInt(val);
+	}
+
+	public static int normalRandDist(int i, int intensity) {
+		int sum = 0;
+		for (int j = 0; j < intensity; j++) {
+			sum += RANDOM.nextInt(i);
+		}
+		return sum/intensity;
+	}
+
+	public static int normalRandDist(int i) {
+		return (RANDOM.nextInt(i) + RANDOM.nextInt(i))/2;
+	}
+
+	public static int normalPlusWeightRandDist(int val, int weight)
+	{
+		int normalDistRand = (RANDOM.nextInt(val) + RANDOM.nextInt(val))/2;
+		return normalDistRand/2 + weight < val ? normalDistRand/2 + weight : normalPlusWeightRandDist(val, weight - 1);
+	}
+
 	/**
 	 * Gets a chance item.
 	 * @param items the items.

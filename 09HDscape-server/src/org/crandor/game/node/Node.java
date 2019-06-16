@@ -266,5 +266,4 @@ public abstract class Node {
 	public void setRenderable(boolean renderable) {
 		this.renderable = renderable;
 	}
-
 }

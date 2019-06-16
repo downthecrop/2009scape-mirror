@@ -6,13 +6,20 @@ import org.crandor.game.node.entity.player.ai.pvmbots.PvMBots;
 import org.crandor.game.node.entity.player.link.prayer.*;
 import org.crandor.game.world.map.Location;
 import org.crandor.net.packet.in.InteractionPacket;
+import org.crandor.tools.RandomFunction;
+
+import java.util.Random;
 
 import static plugin.activity.pestcontrol.PestControlHelper.*;
 
 public class PestControlTestBot extends PvMBots {
 
 	private int tick = 0;
+	private int combatMoveTimer = 0;
 	private int movetimer = 0;
+
+	private int randomType;
+	private BoatInfo myBoat = BoatInfo.NOVICE;
 
 	enum State {
 		OUTSIDE_GANGPLANK,
@@ -23,7 +30,7 @@ public class PestControlTestBot extends PvMBots {
 
 	public PestControlTestBot(String name, Location l) {
 		super(name, legitimizeLocation(l));
-		// TODO Auto-generated constructor stub
+		randomType = new Random().nextInt(100);
 	}
 
 	private static Location legitimizeLocation(Location l) {
@@ -34,24 +41,29 @@ public class PestControlTestBot extends PvMBots {
 	public void tick()
 	{
 		super.tick();
+		movetimer --;
 
-		State state = getState();
-		this.setCustomState(String.valueOf(state));
-
-		switch (state)
+		if (movetimer <= 0)
 		{
-			case GET_TO_PC:
-				getToPC();
-				break;
-			case OUTSIDE_GANGPLANK:
-				enterBoat();
-				break;
-			case WAITING_IN_BOAT:
-				idleInBoat();
-				break;
-			case NPC_COMBAT:
-				attackNPCs();
-				break;
+		    movetimer = 0;
+			State state = getState();
+			this.setCustomState(String.valueOf(state));
+
+			switch (state)
+			{
+				case GET_TO_PC:
+					getToPC();
+					break;
+				case OUTSIDE_GANGPLANK:
+					enterBoat();
+					break;
+				case WAITING_IN_BOAT:
+					idleInBoat();
+					break;
+				case NPC_COMBAT:
+					attackNPCs();
+					break;
+			}
 		}
 	}
 
@@ -95,32 +107,66 @@ public class PestControlTestBot extends PvMBots {
 
 		if (!this.inCombat())
 		{
-			if (movetimer == 0)
+			if (combatMoveTimer <= 0)
 			{
 				if (this.FindTargets(this, 5) == null)
 					this.randomWalk(5, 5);
-				this.movetimer = 5;
+				this.combatMoveTimer = 5;
 			}
-			else
-				movetimer --;
 		}
 	}
 
+	private int insideBoatWalks = 3;
 	private void idleInBoat() {
+		if (randomType < 15) //He's the type of guy to walk around the boat
+		{
+			if (new Random().nextInt(insideBoatWalks) <= 1)
+			{
+				insideBoatWalks *= 1.5;
+				if (new Random().nextInt(7) == 1)
+				{
+					this.walkToPosSmart(new Location(2660, 2638));
+				} else {
+					this.walkToPosSmart(myBoat.boatBorder.getRandomLoc());
+				}
+			}
+			if (new Random().nextInt(3) == 1)
+			{
+				insideBoatWalks += 2;
+			}
+		}
 	}
 
 	private void enterBoat() {
-		Node test = getClosestNodeWithEntry(15, NOVICE_GANGPLANK);
-		if (test != null) {
-			if (!this.getLocation().equals(new Location(2660, 2638)))
-				InteractionPacket.handleObjectInteraction(this, 0, test.getLocation(), test.getId());
-		} else {
-			System.out.println("Warning: " + this.getName() + " can't find the gangplank!");
+		if (new Random().nextInt(3) <= 1) //Don't join instantly
+		{
+			return;
 		}
+		if (randomType > 20 && new Random().nextInt(4) == 0) //Idle outside ladder
+		{
+			if (new Random().nextInt(16) == 0)
+			{
+				this.walkToPosSmart(myBoat.outsideBoatBorder.getRandomLoc());
+				movetimer += RandomFunction.normalPlusWeightRandDist(400, 200);
+				//System.out.println("Rare movetimer set on " + this.getName());
+			}
+			movetimer = RandomFunction.normalPlusWeightRandDist(100, 50);
+			//System.out.println("Set movetimer to " + movetimer + " on " + this.getName());
+			return;
+		}
+		if (randomType < 60 && new Random().nextInt(6) == 1) //Missclick the ladder
+		{
+			movetimer = new Random().nextInt(2);
+			this.walkToPosSmart(myBoat.outsideBoatBorder.getWeightedRandomLoc(3));
+			return;
+		}
+		Node test = getClosestNodeWithEntry(15, myBoat.ladderId);
+		InteractionPacket.handleObjectInteraction(this, 0, test.getLocation(), test.getId());
+		insideBoatWalks = 3;
 	}
 
 	private void getToPC() {
-		Node test = getClosestNodeWithEntry(15, NOVICE_GANGPLANK);
+		Node test = getClosestNodeWithEntry(25, myBoat.ladderId);
 		if (test == null)
 		{
 			this.teleport(PestControlIslandLocation);

@@ -11,16 +11,12 @@ import org.crandor.game.content.global.consumable.Food;
 import org.crandor.game.content.skill.Skills;
 import org.crandor.game.interaction.Option;
 import org.crandor.game.node.entity.Entity;
-import org.crandor.game.node.entity.combat.equipment.Weapon;
-import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.ai.AIPlayer;
 import org.crandor.game.node.entity.player.link.prayer.PrayerType;
 import org.crandor.game.node.item.Item;
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.RegionManager;
-import org.crandor.game.world.update.flag.context.ChatMessage;
-import org.crandor.game.world.update.flag.player.ChatFlag;
 import org.crandor.tools.RandomFunction;
 
 public class WildernessBot extends AIPlayer {

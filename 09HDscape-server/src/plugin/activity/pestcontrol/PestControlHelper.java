@@ -11,21 +11,22 @@ public class PestControlHelper {
 
     public enum BoatInfo
     {
-        NOVICE(new ZoneBorders(2660, 2638, 2663, 2643), new ZoneBorders(2657, 2638, 2657, 2641)),
-        INTERMEDIATE(new ZoneBorders(2638, 2642, 2641, 2647), new ZoneBorders(2644, 2642, 2644, 2646)),
-        VERTERAN(new ZoneBorders(2632, 2649, 2635, 2654), new ZoneBorders(2639, 2652, 2638, 2655));
+        NOVICE(new ZoneBorders(2660, 2638, 2664, 2644), new ZoneBorders(2657, 2637, 2657, 2643), 14315),
+        INTERMEDIATE(new ZoneBorders(2638, 2642, 2641, 2647), new ZoneBorders(2644, 2642, 2644, 2646), 25629),
+        VERTERAN(new ZoneBorders(2632, 2649, 2635, 2654), new ZoneBorders(2639, 2652, 2638, 2655), 25632);
 
-        BoatInfo(ZoneBorders boatBorder, ZoneBorders outsideBoatBorder)
+        BoatInfo(ZoneBorders boatBorder, ZoneBorders outsideBoatBorder, int ladderId)
         {
             this.boatBorder = boatBorder;
             this.outsideBoatBorder = outsideBoatBorder;
+            this.ladderId = ladderId;
         }
 
         public ZoneBorders boatBorder;
         public ZoneBorders outsideBoatBorder;
+        public int ladderId;
     }
 
-    public static final int NOVICE_GANGPLANK = 14315;
     public static List<Integer> GATE_ENTRIES = Arrays.asList(14233, 14235);
 
     public static final Location PestControlIslandLocation = Location.create(2659, 2649, 0);

@@ -76,7 +76,7 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 		public boolean pulse() {
 			sessions.removeIf(session -> session != null && session.update());
 			ticks++;
-			if (waitingPlayers.size() >= MAX_TEAM_SIZE && ticks < 475);
+			if (waitingPlayers.size() >= MAX_TEAM_SIZE && ticks < 475)
 			{
 				ticks = 485;
 			}
@@ -85,7 +85,7 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 					updateTime(p);
 				}
 			}
-			if (ticks >= 500) { // 500
+			if (ticks >= 500) {
 				if (waitingPlayers.size() >= MIN_TEAM_SIZE) {
 					PestControlActivityPlugin.this.start();
 				} else {

@@ -133,12 +133,16 @@ public class AIPlayer extends Player {
 	{
 		Pathfinder.find(this, this.getLocation().transform(RandomFunction.random(radiusX, (radiusX * -1)), RandomFunction.random(radiusY, (radiusY * -1)), 0), false, Pathfinder.SMART).walk(this);
 	}
-	
+
+	protected void walkToPosSmart(Location loc) {
+		Pathfinder.find(this, loc, true, Pathfinder.SMART).walk(this);
+	}
+
 	public void walkPos(int x, int y)
 	{
 		Pathfinder.find(this, new Location(x, y));
 	}
-	
+
 	public boolean checkVictimIsPlayer()
 	{
 		if (this.getProperties().getCombatPulse().getVictim() != null)
@@ -146,8 +150,8 @@ public class AIPlayer extends Player {
 				return true;
 		return false;
 	}
-	
-	public Item getItemById(int id)  
+
+	public Item getItemById(int id)
 	{
 		for (int i = 0; i < 28; i++)
 		{
@@ -160,7 +164,7 @@ public class AIPlayer extends Player {
 		}
 		return null;
 	}
-	
+
 	private ArrayList<Node> getNodeInRange(int range, int entry)
 	{
 		int meX = this.getLocation().getX();
@@ -175,24 +179,24 @@ public class AIPlayer extends Player {
 				Node node = RegionManager.getObject(0, meX + x, meY + y);
 				if (node != null)
 					if (node.getId() == entry)
-						nodes.add(node); 
+						nodes.add(node);
 				Node node2 = RegionManager.getObject(0, meX + x, meY - y);
 				if (node2 != null)
 					if (node2.getId() == entry)
-						nodes.add(node2); 
+						nodes.add(node2);
 				Node node3 = RegionManager.getObject(0, meX - x, meY + y);
 				if (node3 != null)
 					if (node3.getId() == entry)
-						nodes.add(node3); 
+						nodes.add(node3);
 				Node node4 = RegionManager.getObject(0, meX - x, meY - y);
 				if (node4 != null)
 					if (node4.getId() == entry)
-						nodes.add(node4); 
+						nodes.add(node4);
 			}
 		}
 		return nodes;
 	}
-	
+
 	private ArrayList<Node> getNodeInRange(int range, List<Integer> entrys)
 	{
 		int meX = this.getLocation().getX();
@@ -207,24 +211,24 @@ public class AIPlayer extends Player {
 				Node node = RegionManager.getObject(0, meX + x, meY + y);
 				if (node != null)
 					if (entrys.contains(node.getId()))
-						nodes.add(node); 
+						nodes.add(node);
 				Node node2 = RegionManager.getObject(0, meX + x, meY - y);
 				if (node2 != null)
 					if (entrys.contains(node2.getId()))
-						nodes.add(node2); 
+						nodes.add(node2);
 				Node node3 = RegionManager.getObject(0, meX - x, meY + y);
 				if (node3 != null)
 					if (entrys.contains(node3.getId()))
-						nodes.add(node3); 
+						nodes.add(node3);
 				Node node4 = RegionManager.getObject(0, meX - x, meY - y);
 				if (node4 != null)
 					if (entrys.contains(node4.getId()))
-						nodes.add(node4); 
+						nodes.add(node4);
 			}
 		}
 		return nodes;
 	}
-	
+
 	public Node getClosestNodeWithEntry(int range, int entry)
 	{
 		ArrayList<Node> nodeList = getNodeInRange(range, entry);
@@ -236,7 +240,7 @@ public class AIPlayer extends Player {
 		Node node = getClosestNodeinNodeList(nodeList);
 		return node;
 	}
-	
+
 	public Node getClosestNodeWithEntry(int range, List<Integer> entrys)
 	{
 		ArrayList<Node> nodeList = getNodeInRange(range, entrys);
@@ -248,7 +252,7 @@ public class AIPlayer extends Player {
 		Node node = getClosestNodeinNodeList(nodeList);
 		return node;
 	}
-	
+
 	public Node getClosesCreature(int radius) {
 		int distance = radius + 1;
 		Node npcReturn = null;
@@ -261,7 +265,7 @@ public class AIPlayer extends Player {
 		}
 		return npcReturn;
 	}
-	
+
 	public Node getClosesCreature(int radius, int entry) {
 		int distance = radius + 1;
 		Node npcReturn = null;
@@ -276,7 +280,7 @@ public class AIPlayer extends Player {
 		}
 		return npcReturn;
 	}
-	
+
 	public Node getClosesCreature(int radius, ArrayList<Integer> entrys) {
 		int distance = radius + 1;
 		Node npcReturn = null;
@@ -291,7 +295,7 @@ public class AIPlayer extends Player {
 		}
 		return npcReturn;
 	}
-	
+
 	private Node getClosestNodeinNodeList(ArrayList<Node> nodes)
 	{
 		if (nodes.isEmpty())
@@ -299,7 +303,7 @@ public class AIPlayer extends Player {
 			//System.out.println("nodelist empty");
 			return null;
 		}
-		
+
 		double distance = 0;
 		Node nodeReturn = null;
 		for (Node node : nodes)
@@ -387,5 +391,4 @@ public class AIPlayer extends Player {
 	public void setControler(Player controler) {
 		this.controler = controler;
 	}
-
 }
