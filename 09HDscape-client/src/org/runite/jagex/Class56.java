@@ -119,7 +119,7 @@ static RSString aClass94_891 = aClass94_894;
 
    static final void method1188(int var0) {
       try {
-         Class149.anIntArray1920 = null;
+         MouseListeningClass.anIntArray1920 = null;
          Class38_Sub1.anIntArrayArrayArray2609 = (int[][][])null;
          Class3_Sub18.anIntArray2469 = null;
          Class93.aByteArrayArrayArray1328 = (byte[][][])null;

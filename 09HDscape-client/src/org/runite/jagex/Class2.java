@@ -325,9 +325,9 @@ final class Class2 {
 			if(var3 != null) {
 				return var3;
 			} else {
-				Class148.aClass153_1916.method2144(0, this.anInt64);
+				KeyboardListener.aClass153_1916.method2144(0, this.anInt64);
 				int var4 = 125 % ((var2 - -21) / 50);
-				var3 = RSString.method1539(0, true, this.anInt64, Class148.aClass153_1916);
+				var3 = RSString.method1539(0, true, this.anInt64, KeyboardListener.aClass153_1916);
 				if(var3 != null) {
 					var3.method1668(Class102.anInt2136, Class46.anInt740, Class158.anInt2015);
 					var3.anInt1469 = var3.anInt1461;

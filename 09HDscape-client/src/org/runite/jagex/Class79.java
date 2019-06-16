@@ -138,7 +138,7 @@ final class Class79 {
 
                   Class25.method957(var1 + 97, 1 == var0.getByte((byte)-40));
                   Class3_Sub28_Sub7.aBoolean3604 = var0.getByte((byte)-44) == 1;
-                  Class148.aBoolean1905 = 1 == var0.getByte((byte)-39);
+                  KeyboardListener.aBoolean1905 = 1 == var0.getByte((byte)-39);
                   Class25.aBoolean488 = 1 == var0.getByte((byte)-85);
                   RSInterface.aBoolean236 = var0.getByte((byte)-126) == 1;
                   WorldListEntry.aBoolean2623 = ~var0.getByte((byte)-107) == -2;

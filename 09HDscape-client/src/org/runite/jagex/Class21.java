@@ -166,7 +166,7 @@ final class Class21 {
          }
 
          try {
-            return (Class146)Class.forName(Configurations.PACKAGE_JAGEX + ".Class146_Sub1").newInstance();
+            return (Class146)Class.forName(Configurations.PACKAGE_JAGEX + ".MouseWheel").newInstance();
          } catch (Throwable var2) {
             return null;
          }

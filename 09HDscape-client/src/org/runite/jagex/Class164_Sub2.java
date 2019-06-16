@@ -188,7 +188,7 @@ class Class164_Sub2 extends Class164 {
                   }
 
                   if(12 == var8) {
-                     var9 = Class149.anInt1925;
+                     var9 = MouseListeningClass.anInt1925;
                   }
 
                   if(-14 == ~var8) {

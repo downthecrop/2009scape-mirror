@@ -43,9 +43,9 @@ abstract class Class129 {
 
    static final void method1768(int var0, int var1, int var2) {
       try {
-         if(-1 > ~Class148.anInt1908) {
-            Class159.method2195(Class148.anInt1908, 0);
-            Class148.anInt1908 = 0;
+         if(-1 > ~KeyboardListener.anInt1908) {
+            Class159.method2195(KeyboardListener.anInt1908, 0);
+            KeyboardListener.anInt1908 = 0;
          }
 
          short var3 = 256;

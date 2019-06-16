@@ -1090,7 +1090,7 @@ final class ItemDefinition {
 													}
 													if(-3323 == ~j1)
 													{
-														Class140_Sub7.anIntArray2929[k++] = Class149.anInt1925;
+														Class140_Sub7.anIntArray2929[k++] = MouseListeningClass.anInt1925;
 														continue;
 													}
 													if(3323 == j1)
@@ -2171,7 +2171,7 @@ final class ItemDefinition {
 																	}
 																	if(5060 == j1)
 																	{
-																		Class148.anInt1906++;
+																		KeyboardListener.anInt1906++;
 																		RSString class94_21 = Class3.aClass94Array75[--l];
 																		Class3_Sub13_Sub1.outgoingBuffer.putOpcode(178);
 																		Class3_Sub13_Sub1.outgoingBuffer.putByte((byte)-108, 0);
@@ -2747,7 +2747,7 @@ final class ItemDefinition {
 																		k -= 11;
 																		Class3_Sub28_Sub6.anInt3600 = Class140_Sub7.anIntArray2929[k];
 																		Class62.anInt963 = Class140_Sub7.anIntArray2929[k - -1];
-																		Class149.anInt1926 = Class140_Sub7.anIntArray2929[k + 2];
+																		MouseListeningClass.anInt1926 = Class140_Sub7.anIntArray2929[k + 2];
 																		Class136.anInt1771 = Class140_Sub7.anIntArray2929[3 + k];
 																		WorldListCountry.anInt502 = Class140_Sub7.anIntArray2929[4 + k];
 																		Class99.anInt1400 = Class140_Sub7.anIntArray2929[5 + k];
@@ -2911,7 +2911,7 @@ final class ItemDefinition {
 																		}
 																		if(~j1 == -6006)
 																		{
-																			Class148.aBoolean1905 = -2 == ~Class140_Sub7.anIntArray2929[--k];
+																			KeyboardListener.aBoolean1905 = -2 == ~Class140_Sub7.anIntArray2929[--k];
 																			Class84.method1417(112);
 																			Class119.method1730(Class38.aClass87_665, (byte)14);
 																			Class140_Sub2.aBoolean2705 = false;
@@ -3134,7 +3134,7 @@ final class ItemDefinition {
 																		}
 																		if(-6106 == ~j1)
 																		{
-																			Class140_Sub7.anIntArray2929[k++] = Class148.aBoolean1905 ? 1 : 0;
+																			Class140_Sub7.anIntArray2929[k++] = KeyboardListener.aBoolean1905 ? 1 : 0;
 																			continue;
 																		}
 																		if(-6107 == ~j1)
@@ -4277,7 +4277,7 @@ final class ItemDefinition {
 							int k65 = Class140_Sub7.anIntArray2929[k];
 							if(-1 == class11_15.anInt191)
 							{
-								Class149.method2092(class11_15.anInt279, (byte)-47);
+								MouseListeningClass.method2092(class11_15.anInt279, (byte)-47);
 								Class3_Sub13_Sub19.method265((byte)-42, class11_15.anInt279);
 								Class107.method1649(class11_15.anInt279, -101);
 							}

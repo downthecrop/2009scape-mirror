@@ -103,7 +103,7 @@ final class Class3_Sub8 extends Class3 {
                }
             }
 
-            for(var9 = 0; Class149.anInt1924 > var9; ++var9) {
+            for(var9 = 0; MouseListeningClass.anInt1924 > var9; ++var9) {
                var10 = -(Class102.player.anInt2819 / 32) + 2 + 4 * Class84.anIntArray1163[var9] + 0;
                var11 = -(Class102.player.anInt2829 / 32) + 2 + (Class3_Sub28_Sub7_Sub1.anIntArray4050[var9] * 4 - 0);
                ObjectDefinition var20 = Class162.getObjectDefinition(4, Class3_Sub28_Sub15.anIntArray3693[var9]);

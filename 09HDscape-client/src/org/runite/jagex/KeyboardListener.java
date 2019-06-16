@@ -4,7 +4,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-final class Class148 implements KeyListener, FocusListener {
+final class KeyboardListener implements KeyListener, FocusListener {
 
    static boolean aBoolean1905 = true;
    static int anInt1906;
@@ -24,6 +24,15 @@ final class Class148 implements KeyListener, FocusListener {
 
    public final synchronized void keyPressed(KeyEvent var1) {
       try {
+         switch (var1.getKeyCode())
+         {
+            case 16:
+               MouseWheel.shiftDown = true;
+               break;
+            case 17:
+               MouseWheel.ctrlDown = true;
+               break;
+         }
          if(null != Class3_Sub13_Sub3.aClass148_3049) {
             Class3_Sub13_Sub33.anInt3398 = 0;
             int var2 = var1.getKeyCode();
@@ -55,25 +64,16 @@ final class Class148 implements KeyListener, FocusListener {
             }
             
             /**
-             * Hold Shift + scroll with mousewheel to zoom camera
-             */
-            if(Class146_Sub1.isMoved && var1.getKeyCode() == 16){
-        		if((Client.ZOOM > 1200 && Class146_Sub1.moveAmt >= 0) || (Client.ZOOM < 100 && Class146_Sub1.moveAmt <= 0)){
-            		Class3_Sub28_Sub12.sendMessage("<col=CC0000>You cannot zoom any further than this.");
-        			return;
-        		}
-            	Client.ZOOM += Class146_Sub1.moveAmt >= 0 ? 300 : -300;
-            	if(Client.ZOOM == 600){
-            		Class3_Sub28_Sub12.sendMessage("<col=CC0000>Game client is back to default zoom.");
-            	}
-            }
-            
-            /**
              * Tab to reply
              */
 			if (var1.getKeyCode() == KeyEvent.VK_TAB) {
 				Class73.method1308(RSString.createRSString("::reply"), false);	
 			}
+
+			if (var1.getKeyCode() == KeyEvent.VK_ESCAPE)
+            {
+               Class73.method1308(RSString.createRSString("::shutdowninterface"), false);
+            }
             
             /**
              * Controls arrow key mouse movement
@@ -139,6 +139,15 @@ final class Class148 implements KeyListener, FocusListener {
    }
 
    public final synchronized void keyReleased(KeyEvent var1) {
+      switch (var1.getKeyCode())
+      {
+         case 16:
+            MouseWheel.shiftDown = false;
+            break;
+         case 17:
+            MouseWheel.ctrlDown = false;
+            break;
+      }
       try {
          if(null != Class3_Sub13_Sub3.aClass148_3049) {
             Class3_Sub13_Sub33.anInt3398 = 0;

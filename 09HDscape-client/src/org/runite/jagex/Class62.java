@@ -105,7 +105,7 @@ final class Class62 {
 
    static final void method1225(int var0) {
       try {
-         Class149 var1 = Class3_Sub28_Sub7_Sub1.aClass149_4047;
+         MouseListeningClass var1 = Class3_Sub28_Sub7_Sub1.aClass149_4047;
          synchronized(var1) {
             if(var0 != 18074) {
                aClass94_946 = (RSString)null;

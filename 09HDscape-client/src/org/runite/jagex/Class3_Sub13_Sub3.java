@@ -7,7 +7,7 @@ final class Class3_Sub13_Sub3 extends Class3_Sub13 {
 
    private int anInt3047 = 4096;
    private static RSString aClass94_3048 = RSString.createRSString("Hidden");
-   static Class148 aClass148_3049 = new Class148();
+   static KeyboardListener aClass148_3049 = new KeyboardListener();
    private boolean aBoolean3050 = true;
    static RSString aClass94_3051 = aClass94_3048;
    static short aShort3052 = 205;
@@ -186,7 +186,7 @@ final class Class3_Sub13_Sub3 extends Class3_Sub13 {
    static final void method183(int var0) {
       try {
          if(var0 > -91) {
-            aClass148_3049 = (Class148)null;
+            aClass148_3049 = (KeyboardListener)null;
          }
 
          Class41.aClass93_684.method1524(3);

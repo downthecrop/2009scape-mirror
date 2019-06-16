@@ -141,7 +141,7 @@ final class CS2Script extends Class3 {
          }
 
          var2 = Class157.anInt1996 * 128 - -64;
-         var1 = Class149.anInt1923 * 128 + 64;
+         var1 = MouseListeningClass.anInt1923 * 128 + 64;
          var3 = Class121.method1736(WorldListCountry.localPlane, 1, var1, var2) + -GraphicDefinition.anInt529;
          int var5 = var3 + -Class7.anInt2162;
          int var6 = -Class77.anInt1111 + var2;

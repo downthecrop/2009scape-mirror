@@ -639,7 +639,7 @@ final class Class39 {
 			Class3_Sub13_Sub4.anInt3061 = var1.getArchiveForName(Class3_Sub13_Sub38.aClass94_3452, (byte)-30);
 			Class75_Sub1.anInt2633 = var1.getArchiveForName(Class3_Sub13_Sub14.aClass94_3168, (byte)-30);
 			Class40.anInt678 = var1.getArchiveForName(Class113.aClass94_1567, (byte)-30);
-			Class3_Sub15.anInt2436 = var1.getArchiveForName(Class148.aClass94_1913, (byte)-30);
+			Class3_Sub15.anInt2436 = var1.getArchiveForName(KeyboardListener.aClass94_1913, (byte)-30);
 			Class3_Sub28_Sub18.anInt3757 = var1.getArchiveForName(Class3_Sub28_Sub4.aClass94_3576, (byte)-30);
 			Class45.anInt735 = var1.getArchiveForName(Class140_Sub2.aClass94_2702, (byte)-30);
 			Class93.anInt1325 = var1.getArchiveForName(Class168.aClass94_2089, (byte)-30);

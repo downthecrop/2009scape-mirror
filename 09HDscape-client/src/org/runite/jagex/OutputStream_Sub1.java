@@ -75,7 +75,7 @@ final class OutputStream_Sub1 extends OutputStream {
                         Class3_Sub13_Sub1.outgoingBuffer.putOpcode(199);
                         Class3_Sub13_Sub1.outgoingBuffer.putInt(-126, var4);
                         Class3_Sub13_Sub1.outgoingBuffer.putShort(var1);
-                        ++Class148.anInt1909;
+                        ++KeyboardListener.anInt1909;
                      }
 
                      if(~var2 == -6) {

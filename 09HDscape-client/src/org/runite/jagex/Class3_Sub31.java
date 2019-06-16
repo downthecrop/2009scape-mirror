@@ -13,7 +13,7 @@ final class Class3_Sub31 extends Class3 {
 
    static final void method820(int var0, int var1) {
       try {
-         Class148.aClass93_1911.method1522(-127, var0);
+         KeyboardListener.aClass93_1911.method1522(-127, var0);
          if(var1 == 64) {
             Class80.aClass93_1131.method1522(-126, var0);
          }

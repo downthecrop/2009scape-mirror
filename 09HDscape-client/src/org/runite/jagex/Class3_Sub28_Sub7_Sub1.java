@@ -6,7 +6,7 @@ final class Class3_Sub28_Sub7_Sub1 extends Class3_Sub28_Sub7 {
    private Object anObject4044;
    static volatile int anInt4045 = 0;
    static Class130 aClass130_4046 = new Class130(16);
-   static Class149 aClass149_4047 = new Class149();
+   static MouseListeningClass aClass149_4047 = new MouseListeningClass();
    static CacheIndex aClass153_4048;
    static RSString aClass94_4049 = RSString.createRSString("");
    static int[] anIntArray4050 = new int[1000];

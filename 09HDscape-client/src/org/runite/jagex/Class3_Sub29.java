@@ -18,7 +18,7 @@ final class Class3_Sub29 extends Class3 {
 
    static final void method727(int var0) {
       try {
-         Class148.aClass93_1911.method1524(3);
+         KeyboardListener.aClass93_1911.method1524(3);
          int var1 = 56 / ((var0 - 7) / 54);
          Class80.aClass93_1131.method1524(3);
       } catch (RuntimeException var2) {

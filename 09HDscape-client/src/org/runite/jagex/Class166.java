@@ -97,7 +97,7 @@ final class Class166 {
                      ++IOHandler.anInt1240;
                   }
                } else {
-                  ++Class148.anInt1910;
+                  ++KeyboardListener.anInt1910;
                   Class3_Sub13_Sub1.outgoingBuffer.putOpcode(180);
                   Class3_Sub13_Sub1.outgoingBuffer.putLEShortA(Class56.localPlayerIndexes[var5]);
                }

@@ -33,7 +33,7 @@ final class Class3_Sub28_Sub10_Sub1 extends Class3_Sub28_Sub10 {
 
    static final boolean method591(int var0) {
       try {
-         Class148 var1 = Class3_Sub13_Sub3.aClass148_3049;
+         KeyboardListener var1 = Class3_Sub13_Sub3.aClass148_3049;
          synchronized(var1) {
             if(~Class134.anInt1762 != ~Class3_Sub28_Sub9.anInt3620) {
                Class3_Sub28_Sub9.anInt3624 = Class129.anIntArray1693[Class3_Sub28_Sub9.anInt3620];

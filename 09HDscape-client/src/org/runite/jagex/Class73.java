@@ -176,7 +176,7 @@ static boolean aBoolean1080 = false;
                NPC.anInt3995 -= 128 * var9;
                Class77.anInt1111 -= var10 * 128;
                Class146.anInt1904 -= var10;
-               Class149.anInt1923 -= var9;
+               MouseListeningClass.anInt1923 -= var9;
                Class157.anInt1996 -= var10;
                Canvas_Sub2.anInt30 -= var9;
             } else {

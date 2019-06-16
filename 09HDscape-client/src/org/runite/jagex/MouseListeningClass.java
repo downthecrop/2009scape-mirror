@@ -8,7 +8,7 @@ import java.awt.event.MouseMotionListener;
 
 import javax.swing.SwingUtilities;
 
-final class Class149 implements MouseListener, MouseMotionListener, FocusListener
+final class MouseListeningClass implements MouseListener, MouseMotionListener, FocusListener
 {
 	public int mouseWheelX;
 	  public int mouseWheelY;
@@ -204,7 +204,7 @@ final class Class149 implements MouseListener, MouseMotionListener, FocusListene
 	    {
 	      if (Class3_Sub28_Sub7_Sub1.aClass149_4047 != null)
 	      {
-	       Class149 var1 = Class3_Sub28_Sub7_Sub1.aClass149_4047;
+	       MouseListeningClass var1 = Class3_Sub28_Sub7_Sub1.aClass149_4047;
 	        synchronized (var1)
 	        {
 	          Class3_Sub28_Sub7_Sub1.aClass149_4047 = null;

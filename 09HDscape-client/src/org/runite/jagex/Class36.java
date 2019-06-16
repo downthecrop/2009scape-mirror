@@ -41,7 +41,7 @@ final class Class36 {
                var2 = RenderAnimationDefinition.method903(new RSString[]{var2.method1557(var3, 0, 0), Class3_Sub13_Sub22.aClass94_3268, var2.method1556(var3, (byte)-74)}, (byte)-62);
             }
 
-            return var2.length(-50) > 9?RenderAnimationDefinition.method903(new RSString[]{Class148.aClass94_1917, var2.method1557(-8 + var2.length(-50), 0, 0), Class3_Sub13_Sub10.aClass94_3124, Class72.LEFT_PARENTHESES, var2, Class66.aClass94_995}, (byte)-113):(6 < var2.length(-63)?RenderAnimationDefinition.method903(new RSString[]{Class3_Sub13_Sub17.aClass94_3211, var2.method1557(-4 + var2.length(-65), 0, 0), Class3_Sub28_Sub5.aClass94_3586, Class72.LEFT_PARENTHESES, var2, Class66.aClass94_995}, (byte)-112):RenderAnimationDefinition.method903(new RSString[]{Class167.aClass94_2082, var2, Class3_Sub29.aClass94_2584}, (byte)-82));
+            return var2.length(-50) > 9?RenderAnimationDefinition.method903(new RSString[]{KeyboardListener.aClass94_1917, var2.method1557(-8 + var2.length(-50), 0, 0), Class3_Sub13_Sub10.aClass94_3124, Class72.LEFT_PARENTHESES, var2, Class66.aClass94_995}, (byte)-113):(6 < var2.length(-63)?RenderAnimationDefinition.method903(new RSString[]{Class3_Sub13_Sub17.aClass94_3211, var2.method1557(-4 + var2.length(-65), 0, 0), Class3_Sub28_Sub5.aClass94_3586, Class72.LEFT_PARENTHESES, var2, Class66.aClass94_995}, (byte)-112):RenderAnimationDefinition.method903(new RSString[]{Class167.aClass94_2082, var2, Class3_Sub29.aClass94_2584}, (byte)-82));
          }
       } catch (RuntimeException var4) {
          throw Class44.method1067(var4, "fi.D(" + var0 + ',' + var1 + ')');

@@ -625,7 +625,7 @@ final class Class47 {
                                                    Class20.method909(-81, var51);
                                                 }
                                              }
-                                          } else if(var11 == Class151.aClass11_1933 && var20 == Class148.anInt1918) {
+                                          } else if(var11 == Class151.aClass11_1933 && var20 == KeyboardListener.anInt1918) {
                                              var54.method637(var23, var24, 128);
                                           } else {
                                              var54.method643(var23, var24);

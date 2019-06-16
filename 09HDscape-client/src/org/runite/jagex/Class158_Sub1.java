@@ -220,7 +220,7 @@ final class Class158_Sub1 extends Class158 implements ImageProducer, ImageObserv
                Class129.anIntArray1695[var10] = 0;
                Class80.anIntArray1138[var10] = 0;
                Class3_Sub31.anIntArray2606[var10] = 0;
-               Class149.anIntArray1920[var10] = 0;
+               MouseListeningClass.anIntArray1920[var10] = 0;
                Class3_Sub18.anIntArray2469[var10] = 0;
             }
 
@@ -234,7 +234,7 @@ final class Class158_Sub1 extends Class158 implements ImageProducer, ImageObserv
                         Class129.anIntArray1695[var11] += var39.anInt1408;
                         Class80.anIntArray1138[var11] += var39.anInt1406;
                         Class3_Sub31.anIntArray2606[var11] += var39.anInt1417;
-                        Class149.anIntArray1920[var11] += var39.anInt1418;
+                        MouseListeningClass.anIntArray1920[var11] += var39.anInt1418;
                         ++Class3_Sub18.anIntArray2469[var11];
                      }
                   }
@@ -247,7 +247,7 @@ final class Class158_Sub1 extends Class158 implements ImageProducer, ImageObserv
                         Class129.anIntArray1695[var11] -= var42.anInt1408;
                         Class80.anIntArray1138[var11] -= var42.anInt1406;
                         Class3_Sub31.anIntArray2606[var11] -= var42.anInt1417;
-                        Class149.anIntArray1920[var11] -= var42.anInt1418;
+                        MouseListeningClass.anIntArray1920[var11] -= var42.anInt1418;
                         --Class3_Sub18.anIntArray2469[var11];
                      }
                   }
@@ -266,14 +266,14 @@ final class Class158_Sub1 extends Class158 implements ImageProducer, ImageObserv
                         var37 += Class80.anIntArray1138[var44];
                         var15 += Class3_Sub18.anIntArray2469[var44];
                         var11 += Class129.anIntArray1695[var44];
-                        var14 += Class149.anIntArray1920[var44];
+                        var14 += MouseListeningClass.anIntArray1920[var44];
                         var13 += Class3_Sub31.anIntArray2606[var44];
                      }
 
                      var18 = var16 + -5;
                      if(~var18 <= -1) {
                         var37 -= Class80.anIntArray1138[var18];
-                        var14 -= Class149.anIntArray1920[var18];
+                        var14 -= MouseListeningClass.anIntArray1920[var18];
                         var11 -= Class129.anIntArray1695[var18];
                         var15 -= Class3_Sub18.anIntArray2469[var18];
                         var13 -= Class3_Sub31.anIntArray2606[var18];

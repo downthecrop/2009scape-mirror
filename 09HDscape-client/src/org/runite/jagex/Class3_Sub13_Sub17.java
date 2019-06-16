@@ -38,7 +38,7 @@ final class Class3_Sub13_Sub17 extends Class3_Sub13 {
          Class115.method1714((byte)-6);
          Class3_Sub28_Sub6.h((byte)3);
          Class107.method1650(21);
-         Class149.method2089((byte)115);
+         MouseListeningClass.method2089((byte)115);
          Class3_Sub13_Sub11.aClass93_3130.method1523((byte)-103);
          Class80.aClass93_1135.method1523((byte)-122);
       } catch (RuntimeException var2) {

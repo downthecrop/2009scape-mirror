@@ -31,14 +31,14 @@ class Class164_Sub1 extends Class164 {
          Class75.anInt1105 = var2;
          Class157.anInt1996 = var1;
          Class163_Sub2_Sub1.anInt4014 = var5;
-         Class149.anInt1923 = var3;
+         MouseListeningClass.anInt1923 = var3;
          GraphicDefinition.anInt529 = var0;
          if(var4 != -21) {
             aClass94_3013 = (RSString)null;
          }
 
          if(-101 >= ~Class163_Sub2_Sub1.anInt4014) {
-            int var6 = 64 + 128 * Class149.anInt1923;
+            int var6 = 64 + 128 * MouseListeningClass.anInt1923;
             int var7 = 64 + Class157.anInt1996 * 128;
             int var8 = Class121.method1736(WorldListCountry.localPlane, 1, var6, var7) - GraphicDefinition.anInt529;
             int var10 = var8 + -Class7.anInt2162;

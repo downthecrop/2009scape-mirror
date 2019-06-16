@@ -45,7 +45,7 @@ abstract class Class3_Sub28_Sub7 extends Node {
          Class128.aBoolean1685 = true;
          Class3_Sub28_Sub9.anInt3622 = 0;
          Class3_Sub13_Sub5.anInt3071 = 0;
-         Class148.aBoolean1905 = true;
+         KeyboardListener.aBoolean1905 = true;
          WorldListEntry.aBoolean2623 = true;
          RSInterface.aBoolean236 = true;
          Class14.anInt340 = 127;

@@ -49,7 +49,7 @@ final class Class23 {
          var1.putByte((byte)-42, Class3_Sub28_Sub10.anInt3625);
          var1.putByte((byte)-81, !Class3_Sub28_Sub13.aBoolean3665?0:1);
          var1.putByte((byte)-57, Class3_Sub28_Sub7.aBoolean3604?1:0);
-         var1.putByte((byte)-12, Class148.aBoolean1905?1:0);
+         var1.putByte((byte)-12, KeyboardListener.aBoolean1905?1:0);
          var1.putByte((byte)-29, Class25.aBoolean488?1:0);
          var1.putByte((byte)-60, !RSInterface.aBoolean236?0:1);
          var1.putByte((byte)-78, !WorldListEntry.aBoolean2623?0:1);
@@ -83,7 +83,7 @@ final class Class23 {
    static final void method940(int var0, int var1) {
       try {
          if(var0 >= 101) {
-            Class149 var2 = Class3_Sub28_Sub7_Sub1.aClass149_4047;
+            MouseListeningClass var2 = Class3_Sub28_Sub7_Sub1.aClass149_4047;
             synchronized(var2) {
                Class3_Sub28_Sub7_Sub1.anInt4045 = var1;
             }

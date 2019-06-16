@@ -133,7 +133,7 @@ class RSByteBuffer extends Class3 {
 				method784(-10, -32, -21);
 			}
 
-			++Class148.anInt1908;
+			++KeyboardListener.anInt1908;
 		} catch (RuntimeException var2) {
 			throw Class44.method1067(var2, "wa.HA(" + var0 + ')');
 		}
