@@ -78,9 +78,9 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 			ticks++;
 			if (waitingPlayers.size() >= MAX_TEAM_SIZE && ticks < 475)
 			{
-				ticks = 485;
+				ticks = 495;
 			}
-			if ((ticks < 450 && ticks % 100 == 0) || (ticks % 50 == 0) || ticks == 485) {
+			if ((ticks < 450 && ticks % 100 == 0) || (ticks % 50 == 0) || ticks == 495) {
 				for (Player p : waitingPlayers) {
 					updateTime(p);
 				}

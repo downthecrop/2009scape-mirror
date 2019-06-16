@@ -91,11 +91,23 @@ public class PestControlTestBot extends PvMBots {
 		List<Entity> creatures = FindTargets(this, 15);
 		if (creatures == null || creatures.isEmpty())
 		{
-			this.setCustomState("Going to portals");
-			combathandler.goToPortals();
+			if (randomType > 15)
+			{
+				this.setCustomState("Going to portals");
+				combathandler.goToPortals();
+			} else {
+				randomWalkAroundPoint(getMyPestControlSession(this).getSquire().getLocation(), 3);
+				movetimer = new Random().nextInt(15) + 6;
+			}
 		} else {
-			this.setCustomState("Fighting NPCs");
-			combathandler.fightNPCs();
+			if (randomType < 15 && new Random().nextInt(5) == 0)
+			{
+				randomWalkAroundPoint(getMyPestControlSession(this).getSquire().getLocation(), 3);
+				movetimer = new Random().nextInt(15) + 6;
+			} else {
+				this.setCustomState("Fighting NPCs");
+				combathandler.fightNPCs();
+			}
 		}
 
 		/*
@@ -139,7 +151,12 @@ public class PestControlTestBot extends PvMBots {
 		{
 			return;
 		}
-		if (randomType > 20 && new Random().nextInt(4) == 0) //Idle outside ladder
+		if (new Random().nextInt(5) == 1) //Missclick the ladder
+		{
+			movetimer = new Random().nextInt(2);
+			this.walkToPosSmart(myBoat.outsideBoatBorder.getWeightedRandomLoc(2));
+		}
+		if (randomType > 20 && new Random().nextInt(6) == 0) //Idle outside ladder
 		{
 			if (new Random().nextInt(16) == 0)
 			{
@@ -147,12 +164,6 @@ public class PestControlTestBot extends PvMBots {
 				movetimer += RandomFunction.normalPlusWeightRandDist(400, 200);
 			}
 			movetimer = RandomFunction.normalPlusWeightRandDist(100, 50);
-			return;
-		}
-		if (randomType < 60 && new Random().nextInt(6) == 1) //Missclick the ladder
-		{
-			movetimer = new Random().nextInt(2);
-			this.walkToPosSmart(myBoat.outsideBoatBorder.getWeightedRandomLoc(2));
 			return;
 		}
 		Node test = getClosestNodeWithEntry(15, myBoat.ladderId);

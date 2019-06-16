@@ -33,23 +33,18 @@ public class CombatState {
             bot.movetimer = new Random().nextInt(7) + 6;
             return;
         }
-        if (gate != null && bot.randomType < 40 && (!bot.openedGate || new Random().nextInt(3) == 1))
+        if (gate != null)
         {
             bot.setCustomState("Interacting gate ID " + gate.getId());
             bot.interact(gate);
             bot.openedGate = true;
-            bot.movetimer = new Random().nextInt(2) + 4;
-            return;
-        } else if (gate != null) {
-            bot.setCustomState("Waiting for someone to open gate");
-            bot.movetimer = new Random().nextInt(2) + 1;
-            if (new Random().nextInt(2) == 0)
+            if (Random.nextInt(4) == 1 && bot.randomType < 40)
             {
-                bot.randomWalkAroundPoint(gate.getLocation(), 5);
+                bot.movetimer = Random.nextInt(2) + 1;
             }
             return;
         }
-        if (portal.getLocation() != null)
+        if (portal != null)
         {
             bot.setCustomState("Walking to portals");
             bot.randomWalkAroundPoint(portal.getLocation(), 5);
