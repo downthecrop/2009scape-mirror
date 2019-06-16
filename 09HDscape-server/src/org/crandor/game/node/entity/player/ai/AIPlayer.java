@@ -13,7 +13,6 @@ import org.crandor.game.interaction.Option;
 import org.crandor.game.interaction.OptionHandler;
 import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.Entity;
-import org.crandor.game.node.entity.combat.CombatStyle;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.info.PlayerDetails;
@@ -194,7 +193,7 @@ public class AIPlayer extends Player {
 		return nodes;
 	}
 	
-	private ArrayList<Node> getNodeInRange(int range, ArrayList<Integer> entrys)
+	private ArrayList<Node> getNodeInRange(int range, List<Integer> entrys)
 	{
 		int meX = this.getLocation().getX();
 		int meY = this.getLocation().getY();
@@ -238,7 +237,7 @@ public class AIPlayer extends Player {
 		return node;
 	}
 	
-	public Node getClosestNodeWithEntry(int range, ArrayList<Integer> entrys)
+	public Node getClosestNodeWithEntry(int range, List<Integer> entrys)
 	{
 		ArrayList<Node> nodeList = getNodeInRange(range, entrys);
 		if (nodeList.isEmpty())

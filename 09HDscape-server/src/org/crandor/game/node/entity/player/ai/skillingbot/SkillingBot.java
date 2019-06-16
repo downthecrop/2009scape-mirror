@@ -4,22 +4,12 @@ import org.crandor.game.world.map.Location;
 
 import java.util.ArrayList;
 
-import org.crandor.cache.def.impl.ObjectDefinition;
 import org.crandor.game.content.skill.Skills;
-import org.crandor.game.content.skill.free.gather.*;
-import org.crandor.game.interaction.Interaction;
 import org.crandor.game.interaction.Option;
-import org.crandor.game.interaction.OptionHandler;
 import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.player.ai.AIPlayer;
 import org.crandor.game.node.item.Item;
-import org.crandor.game.node.object.GameObject;
-import org.crandor.game.world.map.RegionManager;
-import org.crandor.game.world.map.path.Pathfinder;
 import org.crandor.net.packet.in.InteractionPacket;
-import org.crandor.tools.RandomFunction;
-
-import plugin.skill.gather.*;
 
 public class SkillingBot extends AIPlayer{
 

@@ -4,6 +4,7 @@ import org.crandor.ServerConstants;
 import org.crandor.game.interaction.Interaction;
 import org.crandor.game.interaction.MovementPulse;
 import org.crandor.game.interaction.Option;
+import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.ai.AIPlayer;
@@ -176,6 +177,27 @@ public final class InteractionPacket implements IncomingPacket {
 		player.debug("spawn=" + npc.getProperties().getSpawnLocation() + ".");
 		handleAIPLegion(player, 0, optionIndex, index);
 		npc.getInteraction().handle(player, option);
+	}
+
+	/**
+	 * Handles Node interaction with the first index
+	 * @param player The interacting player.
+	 * @param n The node to interact with.
+	 */
+	public static void handleObjectInteraction(final Player player, Node n)
+	{
+		handleObjectInteraction(player, 0, n.getLocation(), n.getId());
+	}
+
+	/**
+	 * Handles object interaction
+	 * @param player The interacting player.
+	 * @param optionIndex The option index.
+	 * @param l The (x,y) location of the object.
+	 * @param objectId The object id.
+	 */
+	public static void handleObjectInteraction(final Player player, int optionIndex, Location l, int objectId) {
+		handleObjectInteraction(player, optionIndex, l.getX(), l.getY(), objectId);
 	}
 
 	/**

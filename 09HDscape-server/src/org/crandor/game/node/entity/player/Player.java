@@ -299,6 +299,11 @@ public class Player extends Entity {
 	protected SkillerTasks skillTasks = new SkillerTasks();
 
 	/**
+	 * A custom state for bot debugging
+	 */
+	private String customState = "";
+
+	/**
 	 * Constructs a new {@code Player} {@code Object}.
 	 * @param details The player's details.
 	 */
@@ -1261,5 +1266,12 @@ public class Player extends Entity {
 	}
 
 
+    public String getCustomState() {
+    	return customState;
+    }
 
+    public void setCustomState(String state)
+	{
+		this.customState = state;
+	}
 }

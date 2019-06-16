@@ -40,7 +40,7 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 	/**
 	 * The minimum team size.
 	 */
-	protected static final int MIN_TEAM_SIZE = GameWorld.getSettings().isDevMode() ? 1 : 5;
+	protected static final int MIN_TEAM_SIZE = 5; //GameWorld.getSettings().isDevMode() ? 1 : 5;
 
 	/**
 	 * The maximum team size.
@@ -76,11 +76,11 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 		public boolean pulse() {
 			sessions.removeIf(session -> session != null && session.update());
 			ticks++;
-			if (waitingPlayers.size() >= MAX_TEAM_SIZE && ticks < 575)
+			if (waitingPlayers.size() >= MAX_TEAM_SIZE && ticks < 475);
 			{
-				ticks = 585;
+				ticks = 485;
 			}
-			if ((ticks < 450 && ticks % 100 == 0) || (ticks % 50 == 0) || ticks == 596) {
+			if ((ticks < 450 && ticks % 100 == 0) || (ticks % 50 == 0) || ticks == 485) {
 				for (Player p : waitingPlayers) {
 					updateTime(p);
 				}

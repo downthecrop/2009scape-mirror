@@ -160,8 +160,7 @@ public final class PestControlSession {
 
 	/**
 	 * Sends a string on the interface to all players in the region.
-	 * @param message The message to send.
-	 * @param child The child id.
+	 * @param value The message value to send.
 	 */
 	public void sendConfig(int value) {
 		for (Player p : region.getPlanes()[0].getPlayers()) {

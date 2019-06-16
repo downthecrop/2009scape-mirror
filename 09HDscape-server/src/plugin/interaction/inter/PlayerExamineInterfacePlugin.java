@@ -53,11 +53,11 @@ public class PlayerExamineInterfacePlugin extends ComponentPlugin {
         player.getPacketDispatch().sendString("Total Level -> ", 31, 9);
         player.getPacketDispatch().sendString("Inventory items -> ", 31, 10);
         player.getPacketDispatch().sendString("Inventory value -> ", 31, 16);
-        player.getPacketDispatch().sendString("Bank value-> ", 31, 19);
+        player.getPacketDispatch().sendString("Custom state-> ", 31, 19);
         player.getPacketDispatch().sendString("" + examined.getSkills().getTotalLevel(), 31, 11);
         player.getPacketDispatch().sendString("" + examined.getInventory().itemCount(), 31, 12);
         player.getPacketDispatch().sendString("" + examined.getInventory().getWealth(), 31, 17);
-        player.getPacketDispatch().sendString("" + examined.getBank().getWealth(), 31, 20);
+        player.getPacketDispatch().sendString("" + examined.getCustomState(), 31, 20);
         player.getPacketDispatch().sendString("Close", 31, 5);
     }
 }
