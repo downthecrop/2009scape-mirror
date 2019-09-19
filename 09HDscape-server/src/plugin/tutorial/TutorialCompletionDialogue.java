@@ -27,7 +27,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 	/**
 	 * The starter pack of items.
 	 */
-	private static final Item[] STARTER_PACK = new Item[] { new Item(6099, 1), new Item(995, 25000), new Item(590, 1), new Item(303, 1), new Item(380, 20), new Item(1925, 1), new Item(1931, 1), new Item(8007, 3), new Item(8010, 3), new Item(4447, 1), new Item(2741, 1), new Item(14775, 1) };
+	private static final Item[] STARTER_PACK = new Item[] { new Item(995, 25000), new Item(590, 1), new Item(303, 1), new Item(380, 20), new Item(1925, 1), new Item(1931, 1), new Item(8007, 3), new Item(4447, 1), new Item(2741, 1), new Item(14775, 1) };
 
 	/**
 	 * Represents the rune items.
