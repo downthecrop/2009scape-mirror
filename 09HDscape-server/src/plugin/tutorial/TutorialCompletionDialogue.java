@@ -282,7 +282,6 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 				player.getInventory().add(STARTER_PACK);
 				interpreter.sendDialogue("Welcome to " + GameWorld.getName() + "!", "If you require any assistance, please don't hesitate to contact our", "friendly staff members and players for advice.");
 				player.getPacketDispatch().sendMessage("Welcome to " + GameWorld.getName() + "!");
-				player.sendMessage("<col=6495ED>If you're looking to get around, why not speak to Bill Teach?");
 				player.unlock();
 				TutorialSession.getExtension(player).setStage(TutorialSession.MAX_STAGE + 1);
 				stage = 7;
