@@ -266,7 +266,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 				stage = 501;
 				break;
 			case 1200:
-				npc("Keep in mind: our server has more content than any other", "server ever released. There's hundreds of hours of", "exciting and flawless gameplay awaiting you, "+player.getUsername()+".", "Enjoy your time playing "+GameWorld.getName()+"!");
+				npc("Enjoy your time playing on "+GameWorld.getName()+"!");
 				stage = 520;
 				break;
 			case 520:
