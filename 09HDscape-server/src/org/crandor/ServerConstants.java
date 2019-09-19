@@ -16,8 +16,7 @@ public final class ServerConstants {
 	 * The administrators.
 	 */
 	public static final String[] ADMINISTRATORS = {
-		"ethan",
-		"austin",
+		"RedSparr0w",
 	};
 	
 	/**
@@ -68,15 +67,15 @@ public final class ServerConstants {
 	/**
 	 * The string of donation messages displayed on an interface.
 	 */
-	public static final String[] MESSAGES = new String[] {"Donations on Keldagrim are different than those elsewhere.", "Here we use a perk system.", "There are many different type of perks that can be bought to", "speed up efficiency, but nothing game breaking. By doing this", "we provide players with ways to support Keldagrim, in a manner" , "that doesn't ruin the economy or provide substantial advantages.", "If you would like to check out our perks please visit", "keldagrim.com/donate/." };
+	public static final String[] MESSAGES = new String[] {"Welcome!" };
 	
 	public static final String[] DATABASE_NAMES = {
-			"keldagr1_server", "keldagr1_global"
+			"server", "global"
 	};
 	
 	public static final Database[] DATABASES = {
-			new Database((SQLManager.LOCAL ? "localhost" : "keldagrim.org"), (SQLManager.LOCAL ? "server" : DATABASE_NAMES[0]), (SQLManager.LOCAL ? "root" : "keldagr1_user"), (SQLManager.LOCAL ? "" : "2jf4wkz$")),
-			new Database((SQLManager.LOCAL ? "localhost" : "keldagrim.org"), (SQLManager.LOCAL ? "global" : DATABASE_NAMES[1]), (SQLManager.LOCAL ? "root" : "keldagr1_user"), (SQLManager.LOCAL ? "" : "2jf4wkz$"))
+			new Database((SQLManager.LOCAL ? "localhost" : "redsparr0w.com"), (SQLManager.LOCAL ? "server" : DATABASE_NAMES[0]), (SQLManager.LOCAL ? "root" : "username"), (SQLManager.LOCAL ? "" : "password")),
+			new Database((SQLManager.LOCAL ? "localhost" : "redsparr0w.com"), (SQLManager.LOCAL ? "global" : DATABASE_NAMES[1]), (SQLManager.LOCAL ? "root" : "username"), (SQLManager.LOCAL ? "" : "password"))
 	};
 	
 	/**
