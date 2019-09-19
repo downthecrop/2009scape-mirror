@@ -467,7 +467,7 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
                 return true;
             case "special":
             case "spec":
-                amount = args.length > 1 ? Integer.parseInt(args[1]) : 100;
+                int amount = args.length > 1 ? Integer.parseInt(args[1]) : 100;
                 player.getSettings().setSpecialEnergy(amount);
                 return true;
             case "god":
