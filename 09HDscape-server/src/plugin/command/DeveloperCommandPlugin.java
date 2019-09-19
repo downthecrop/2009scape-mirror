@@ -157,10 +157,6 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
                     }
                 });
                 break;
-            case "item":
-                int itemId = Integer.parseInt(args[1]), amount = Integer.parseInt(args[2]);
-                player.getInventory().add(new Item(itemId, amount));
-                break;
             case "eventlocator":
                 player.getDialogueInterpreter().open(175869, GlobalEventManager.get().getCurrentEvent());
                 break;
