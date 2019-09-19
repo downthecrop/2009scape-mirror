@@ -12,7 +12,7 @@ public class GameLaunch {
 	/**
 	 * The game settings.
 	 */
-	public static GameSetting SETTINGS = new GameSetting("Fat Cunt", Configurations.LOCAL_SERVER ? "127.0.0.1" : "frostblades.org", 1, "live", false, false);
+	public static GameSetting SETTINGS = new GameSetting("RuneScape", Configurations.LOCAL_SERVER ? "127.0.0.1" : "localhost", 1, "live", false, false);
 	
 	/**
 	 * The main method.
