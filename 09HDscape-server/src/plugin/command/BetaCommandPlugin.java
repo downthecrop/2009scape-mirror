@@ -322,10 +322,10 @@ public final class BetaCommandPlugin extends CommandPlugin {
                 }
                 Location destination = null;
                 String place = getArgumentLine(args);
-                for (Object[] data : ServerConstants.TELEPORT_DESTINATIONS) {
-                    for (int i = 1; i < data.length; i++) {
-                        if (place.equals(data[i])) {
-                            destination = (Location) data[0];
+                for (Object[] destinations : ServerConstants.TELEPORT_DESTINATIONS) {
+                    for (int i = 1; i < destinations.length; i++) {
+                        if (place.equals(destinations[i])) {
+                            destination = (Location) destinations[0];
                             break;
                         }
                     }
