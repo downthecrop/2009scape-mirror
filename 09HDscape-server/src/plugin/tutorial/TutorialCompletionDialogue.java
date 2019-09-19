@@ -272,7 +272,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 			case 520:
 				player.removeAttribute("tut-island");
 				player.getConfigManager().set(1021, 0);
-				player.getProperties().setTeleportLocation(new Location(2674, 3144, 0));
+				player.getProperties().setTeleportLocation(new Location(3222, 3218, 0));
 				TutorialSession.getExtension(player).setStage(72);
 				player.getInterfaceManager().closeOverlay();
 				player.getInventory().clear();
