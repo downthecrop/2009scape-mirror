@@ -28,7 +28,7 @@ public final class Skills {
 	/**
 	 * Represents the constant modifier of experience.
 	 */
-	public static final double EXPERIENCE_MULTIPLIER = 35.3;
+	public static final double EXPERIENCE_MULTIPLIER = 25;
 
 	/**
 	 * The maximum experience multiplier.
@@ -267,12 +267,13 @@ public final class Skills {
 		}
 		//A boost for combat skills that are under level 65.
 		if(entity instanceof Player && !this.hasLevel(slot, 65) && isCombat(slot)){
-			mod *= 2.0;
+			mod *= 1.5;
 		}
 		//Grand Exchange region XP boost.
 		if(entity.getViewport().getRegion().getRegionId() == 12598){
 			mod += 1.5;
 		}
+		// Pest control, XP halved during the game
 		if (entity.getViewport().getRegion().getRegionId() == 10536) {
 			mod *= .5;
 		}
