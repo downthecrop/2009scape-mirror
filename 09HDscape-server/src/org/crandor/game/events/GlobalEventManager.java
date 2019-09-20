@@ -37,7 +37,7 @@ public class GlobalEventManager implements CallBack {
 			getEvents().put("Thieves jackpot", 0L);
 			getEvents().put("Golden essence", 0L);
 			getEvents().put("Clone Fest", 0L);
-			getEvents().put("XPFever", 0L);
+			getEvents().put("XP Fever", 0L);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -258,7 +258,7 @@ public class GlobalEventManager implements CallBack {
 					case "Clone Fest":
 						player.getPacketDispatch().sendMessages("This event means 20 clones have been spawned in the wilderness", "near the mage bank.");
 						break;
-					case "XPFever":
+					case "XP Fever":
 						player.getPacketDispatch().sendMessages("This event means you'll receive x2 XP");
 						break;
 
