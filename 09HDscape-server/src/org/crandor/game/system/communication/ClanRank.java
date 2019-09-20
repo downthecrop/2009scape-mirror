@@ -5,7 +5,7 @@ package org.crandor.game.system.communication;
  * @author Emperor
  */
 public enum ClanRank {
-	NONE(-1, "Anyone"), FRIEND(0, "Any friends"), RECRUIT(1, "Recruit+"), CORPORAL(2, "Corporal+"), SERGEANT(3, "Sergeant+"), LIEUTENANT(4, "Lieutenant+"), CAPTAIN(5, "Captain+"), GENERAL(6, "General+"), OWNER(7, "Only me");
+	NONE(-1, "Anyone"), FRIEND(0, "Any friends"), RECRUIT(1, "Recruit+"), CORPORAL(2, "Corporal+"), SERGEANT(3, "Sergeant+"), LIEUTENANT(4, "Lieutenant+"), CAPTAIN(5, "Captain+"), GENERAL(6, "General+"), OWNER(7, "Only me"), KELDAGRIM_MOD(127, "No-one");
 
 	/**
 	 * The value of the rank.

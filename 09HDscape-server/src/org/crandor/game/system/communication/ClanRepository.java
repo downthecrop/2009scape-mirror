@@ -61,7 +61,7 @@ public final class ClanRepository {
 	/**
 	 * The rank required for loot-share.
 	 */
-	private ClanRank lootRequirement = ClanRank.CAPTAIN;
+	private ClanRank lootRequirement = ClanRank.KELDAGRIM_MOD;
 
 	/**
 	 * The members mapping.
@@ -312,6 +312,9 @@ public final class ClanRepository {
 	 */
 	public ClanRank getRank(Player player) {
 		ClanRank rank = ranks.get(player.getName());
+		if (player.getDetails().getRights() == Rights.ADMINISTRATOR && !player.getName().equals(owner)) {
+			return ClanRank.KELDAGRIM_MOD;
+		}
 		if (rank == null) {
 			if (player.getName().equals(owner)) {
 				return ClanRank.OWNER;
