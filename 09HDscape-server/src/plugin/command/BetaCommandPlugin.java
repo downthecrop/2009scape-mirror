@@ -73,6 +73,7 @@ public final class BetaCommandPlugin extends CommandPlugin {
                 player.getQuestRepository().getQuest(name).setStage(player, 0);
                 player.getQuestRepository().syncronizeTab(player);
                 return true;
+
             case "allquest":
                 for (Quest quest : QuestRepository.getQuests().values()) {
                     quest.finish(player);
@@ -98,6 +99,7 @@ public final class BetaCommandPlugin extends CommandPlugin {
             case "dz":
                 DonatorZone.getInstance().invite(player, null);
                 return true;
+
             case "setquest":
             case "setoquest":
                 if (args.length < 2) {
@@ -129,6 +131,7 @@ public final class BetaCommandPlugin extends CommandPlugin {
                 m.getPacketDispatch().sendMessage("quest=" + name + ", new stage=" + stage);
                 m.getQuestRepository().syncronizeTab(player);
                 break;
+
             case "empty":
                 player.getInventory().clear();
                 return true;
