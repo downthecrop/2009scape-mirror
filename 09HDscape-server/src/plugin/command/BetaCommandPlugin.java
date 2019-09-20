@@ -78,6 +78,7 @@ public final class BetaCommandPlugin extends CommandPlugin {
                     quest.finish(player);
                 }
                 return true;
+
             case "pos":
             case "position":
             case "loc":
@@ -94,22 +95,6 @@ public final class BetaCommandPlugin extends CommandPlugin {
                 clpbrd.setContents(stringSelection, null);
                 return true;
 
-            case "npc":
-                if (args.length < 2) {
-                    player.debug("syntax error: id (optional) direction");
-                    return true;
-                }
-                NPC npc = NPC.create(toInteger(args[1]), player.getLocation());
-                npc.setAttribute("spawned:npc", true);
-                npc.setRespawn(false);
-                npc.setDirection(player.getDirection());
-                npc.init();
-                npc.setWalks(args.length > 2 ? true : false);
-                String npcString = "{" + npc.getLocation().getX() + "," + npc.getLocation().getY() + "," + npc.getLocation().getZ() + "," + (npc.isWalks() ? "1" : "0") + "," + npc.getDirection().ordinal() + "}";
-                clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
-                clpbrd.setContents(new StringSelection(npcString), null);
-                System.out.println(npcString);
-                return true;
             case "dz":
                 DonatorZone.getInstance().invite(player, null);
                 return true;
@@ -148,6 +133,36 @@ public final class BetaCommandPlugin extends CommandPlugin {
                 player.getInventory().clear();
                 return true;
 
+            case "setvalue":
+                int itemId = toInteger(args[1]);
+                int value = toInteger(args[2]);
+                Item item = new Item(itemId);
+                GrandExchangeEntry entry = GrandExchangeDatabase.getDatabase().get(itemId);
+                if (entry == null) {
+                    player.getPacketDispatch().sendMessage("Could not find G.E entry for item [id=" + itemId + ", name=" + item.getName() + "]!");
+                    break;
+                }
+                entry.setValue(value);
+                player.getPacketDispatch().sendMessage("Set Grand Exchange value for item [id=" + itemId + ", name=" + item.getName() + "] to " + value + "gp!");
+                break;
+
+            case "npc":
+                if (args.length < 2) {
+                    player.debug("syntax error: id (optional) direction");
+                    return true;
+                }
+                NPC npc = NPC.create(toInteger(args[1]), player.getLocation());
+                npc.setAttribute("spawned:npc", true);
+                npc.setRespawn(false);
+                npc.setDirection(player.getDirection());
+                npc.init();
+                npc.setWalks(args.length > 2 ? true : false);
+                String npcString = "{" + npc.getLocation().getX() + "," + npc.getLocation().getY() + "," + npc.getLocation().getZ() + "," + (npc.isWalks() ? "1" : "0") + "," + npc.getDirection().ordinal() + "}";
+                clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+                clpbrd.setContents(new StringSelection(npcString), null);
+                System.out.println(npcString);
+                return true;
+
             case "npcn":
                 if (args.length < 2) {
                     player.debug("syntax error: npc-name (optional) amount");
@@ -173,19 +188,6 @@ public final class BetaCommandPlugin extends CommandPlugin {
                     }
                 }
                 return true;
-                
-            case "setvalue":
-                int itemId = toInteger(args[1]);
-                int value = toInteger(args[2]);
-                Item item = new Item(itemId);
-                GrandExchangeEntry entry = GrandExchangeDatabase.getDatabase().get(itemId);
-                if (entry == null) {
-                    player.getPacketDispatch().sendMessage("Could not find G.E entry for item [id=" + itemId + ", name=" + item.getName() + "]!");
-                    break;
-                }
-                entry.setValue(value);
-                player.getPacketDispatch().sendMessage("Set Grand Exchange value for item [id=" + itemId + ", name=" + item.getName() + "] to " + value + "gp!");
-                break;
 
             // Get item by id
             case "item":
