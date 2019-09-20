@@ -305,8 +305,8 @@ public final class WorldPacketRepository {
 		String macAddress = buffer.getString();
 		String compName = buffer.getString();
 		String serial = buffer.getString();
-		int rights = server.getInfo().getRevision() == 498 ? 0 : buffer.getInt();
-		int chatIcon = server.getInfo().getRevision() == 498 ? 0 : buffer.get();
+		int rights = buffer.getInt();
+		int chatIcon = buffer.get();
 		UIDInfo uid = new UIDInfo(ipAddress, compName, macAddress, serial);
 		PlayerSession player = new PlayerSession(username, password, new UIDInfo(ipAddress, compName, macAddress, serial));
 		if (WorldDatabase.isActivePlayer(username)) {
