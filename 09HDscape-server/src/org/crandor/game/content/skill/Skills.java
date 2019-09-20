@@ -258,7 +258,7 @@ public final class Skills {
 		if (!(entity instanceof Player)) {
 			return 1.0;
 		}
-		double mod = multiplyer ? (GlobalEventManager.get().isActive("XPFever") ? EXPERIENCE_MULTIPLIER * 2 : EXPERIENCE_MULTIPLIER) : 1;
+		double mod = multiplyer ? (GlobalEventManager.get().isActive("XP Fever") ? EXPERIENCE_MULTIPLIER * 2 : EXPERIENCE_MULTIPLIER) : 1;
 		Player p = (Player) entity;
 		if (p.getIronmanManager().getMode() == IronmanMode.ULTIMATE) {
 			mod /= 4;

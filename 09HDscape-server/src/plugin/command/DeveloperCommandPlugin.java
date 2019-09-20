@@ -182,9 +182,9 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
                 for (int i = 1; i < args.length; i++)
                     target += args[i] + ((i == args.length - 1) ? "" : " ");
                 if (args.length > 1)
-                    GlobalEventManager.get().activate("XPFever", target);
+                    GlobalEventManager.get().activate("XP Fever", target);
                 else
-                    GlobalEventManager.get().activate("XPFever", target);
+                    GlobalEventManager.get().activate("XP Fever", target);
                 break;
             case "poison":
                 player.getStateManager().set(EntityState.POISONED, 200, player);

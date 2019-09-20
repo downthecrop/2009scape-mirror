@@ -37,6 +37,7 @@ public class GlobalEventManager implements CallBack {
 			getEvents().put("Thieves jackpot", 0L);
 			getEvents().put("Golden essence", 0L);
 			getEvents().put("Clone Fest", 0L);
+			getEvents().put("XPFever", 0L);
 
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -158,16 +159,6 @@ public class GlobalEventManager implements CallBack {
 		return message(message, tag, "<col=800000>");
 	}
 
-
-
-	/*
-	 * getEvents().put("Alchemy hellenistic", 0L);
-			getEvents().put("Golden retriever", 0L);
-			getEvents().put("Harvesting doubles", 0L);
-			getEvents().put("Thieves jackpot", 0L);
-			getEvents().put("Golden essence", 0L);
-			
-	 */
 	public GlobalEventManager message(String message, boolean tag, String color) {
 		/*if (WorldCommunicator.isEnabled()) {
 			MSPacketRepository.sendWorldMessage((tag ? "<col=027fc7>[Event Manager] - " : "")+ message);
@@ -234,16 +225,6 @@ public class GlobalEventManager implements CallBack {
 		return this;
 	}
 	
-	
-	/*
-	 * getEvents().put("Alchemy hellenistic", 0L);
-			getEvents().put("Golden retriever", 0L);
-			getEvents().put("Harvesting doubles", 0L);
-			getEvents().put("Thieves jackpot", 0L);
-			getEvents().put("Golden essence", 0L);
-			
-	 */
-	
 	public GlobalEventManager activateHourly(String eventName) {
 		
 		if (getEvents().get(eventName) == null) {
@@ -276,6 +257,9 @@ public class GlobalEventManager implements CallBack {
 						break;
 					case "Clone Fest":
 						player.getPacketDispatch().sendMessages("This event means 20 clones have been spawned in the wilderness", "near the mage bank.");
+						break;
+					case "XPFever":
+						player.getPacketDispatch().sendMessages("This event means you'll receive x2 XP");
 						break;
 
 				}

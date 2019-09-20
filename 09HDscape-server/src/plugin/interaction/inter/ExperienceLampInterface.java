@@ -87,7 +87,7 @@ public final class ExperienceLampInterface extends ComponentPlugin {
 					experience /= 2;	
 				}
 			} else {
-				player.getDialogueInterpreter().open(70099, new Object[] { "The lamp gives you " + (experience * (Skills.EXPERIENCE_MULTIPLIER * (GlobalEventManager.get().isActive("XPFever") ? 2 : 1))) + " " + Skills.SKILL_NAME[skillType.skill] + " experience." });
+				player.getDialogueInterpreter().open(70099, new Object[] { "The lamp gives you " + (experience * (Skills.EXPERIENCE_MULTIPLIER * (GlobalEventManager.get().isActive("XP Fever") ? 2 : 1))) + " " + Skills.SKILL_NAME[skillType.skill] + " experience." });
 			}
 			player.getSkills().addExperience(skillType.skill, experience, false);
 		}
