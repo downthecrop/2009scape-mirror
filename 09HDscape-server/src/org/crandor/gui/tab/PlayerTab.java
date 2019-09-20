@@ -151,8 +151,8 @@ public class PlayerTab extends ConsoleTab {
         }
         System.out.println(getPlayerNames().toString());
         for (File file : Objects.requireNonNull(f.listFiles())) {
-            playerNames.add(file.getName().replace(".keldagrim", "").trim());
-            model.addElement(file.getName().replace(".keldagrim", "").trim());
+            playerNames.add(file.getName().replace(".save", "").trim());
+            model.addElement(file.getName().replace(".save", "").trim());
         }
     }
 

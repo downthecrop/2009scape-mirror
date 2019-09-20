@@ -91,7 +91,7 @@ public final class LoginConfiguration {
 		player.getPacketDispatch().sendString(getLastLogin(player), 378, 116);
 		player.getPacketDispatch().sendString("Welcome to " + GameWorld.getName(), 378, 115);
 		player.getPacketDispatch().sendString("" + player.getDetails().getShop().getCredits(), 378, 96);
-		player.getPacketDispatch().sendString(player.getDetails().getShop().getCredits() + " Keldagrim credits", 378, 94);
+		player.getPacketDispatch().sendString(player.getDetails().getShop().getCredits() + " credits", 378, 94);
 		player.getPacketDispatch().sendString(SystemManager.getSystemConfig().getConfig("weeklyMessage", "Welcome to RuneScape!"), SystemManager.getSystemConfig().getConfig("messageInterface", 18), getMessageChild(SystemManager.getSystemConfig().getConfig("messageInterface", 18)));
 		player.getPacketDispatch().sendString("You can gain more credits by voting, reporting bugs and various other methods of contribution.", 378, 93);
 		player.getInterfaceManager().openWindowsPane(LOBBY_PANE);
@@ -163,7 +163,7 @@ public final class LoginConfiguration {
 		}
 		GlobalEventManager.get().alert(player);
 		if(player.getSkills().getTotalLevel() < 300){
-			Repository.sendNews("<col=BA55D3>As a new player, you are receiving boosted combat skill experience.</col>", "<col=BA55D3>In addition, you may speak to the Keldagrim Guide for game information.");
+			Repository.sendNews("<col=BA55D3>As a new player, you are receiving boosted combat skill experience.</col>", "<col=BA55D3>In addition, you may speak to the Guide for game information.");
 		}
 		player.setAttribute("startTime", System.currentTimeMillis());
 //		ResourceAIPManager.get().load(player);
