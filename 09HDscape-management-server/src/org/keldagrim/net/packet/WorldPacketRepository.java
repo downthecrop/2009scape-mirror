@@ -430,7 +430,7 @@ public final class WorldPacketRepository {
 		}
 		ClanRepository clan = ClanRepository.get(server, clanName);
 		if (clan == null) {
-			sendPlayerMessage(player, "The channel you tried to join does not exist. Try joining the main clan named 'Keldagrim'.:clan:");
+			sendPlayerMessage(player, "The channel you tried to join does not exist (" + clanName + ").<br/>Try joining the main clan named 'Sparr0w'.:clan:");
 			return;
 		}
 		clan.enter(player);
