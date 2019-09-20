@@ -93,9 +93,6 @@ public class GraveManager implements SavingModule {
 	 * @return {@code True} if so.
 	 */
 	public boolean generateable() {
-		if (player.getDetails().getRights() == Rights.ADMINISTRATOR && GameWorld.getSettings().isHosted()) {
-			return false;
-		}
 		if (player.getSkullManager().isWilderness()) {
 			return false;
 		}

@@ -72,7 +72,7 @@ public final class CommunicationInfo {
 	/**
 	 * The rank required for loot-share.
 	 */
-	private ClanRank lootRequirement = ClanRank.KELDAGRIM_MOD;
+	private ClanRank lootRequirement = ClanRank.CAPTAIN;
 
 	/**
 	 * If lootshare is enabled.

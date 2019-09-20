@@ -72,7 +72,7 @@ public final class ClanInterfacePlugin extends ComponentPlugin {
 				break;
 			case 26:
 				if (opcode == 230) {
-					clan.setLootRequirement(ClanRank.KELDAGRIM_MOD);
+					clan.setLootRequirement(ClanRank.CAPTAIN);
 				} else {
 					clan.setLootRequirement(getRank(opcode));
 				}
