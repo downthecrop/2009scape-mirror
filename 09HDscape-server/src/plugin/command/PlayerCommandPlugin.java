@@ -37,7 +37,8 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 	@Override
 	public boolean parse(Player player, String name, String[] arguments) {
 		switch (name) {
-
+			/*
+			 * Disabled commands
 			case "shutdowninterface":
 				player.getInterfaceManager().close();
 				break;
@@ -46,8 +47,9 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 				int stage = Integer.parseInt(arguments[1]);
 				TutorialStage.load(player, stage, false);
 				break;
+			*/
 
-			case "resettabs":
+			case "bankresettabs":
 				for (int i = 0; i < player.getBank().getTabStartSlot().length; i++) {
 					player.getBank().getTabStartSlot()[i] = 0;
 				}
@@ -57,7 +59,8 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 				}
 				player.getPacketDispatch().sendMessage("Bank tabs are reset!");
 				return true;
-			case "resetpin":
+				
+			case "bankresetpin":
 				if (arguments.length < 2) {
 					player.sendMessage("Syntax error: ::resetpin oldpin");
 					return true;
@@ -123,9 +126,6 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 				String text = getArgumentLine(arguments);
 				if(text.contains("<img=") || text.contains("<br>") || text.contains("<col=") || text.contains("<shad=")){
 					player.sendMessage("Bad! No images/text effects allowed in yell chat.");
-					return true;
-				}
-				if(text.contains("aq p")){
 					return true;
 				}
 				int length = text.length();
