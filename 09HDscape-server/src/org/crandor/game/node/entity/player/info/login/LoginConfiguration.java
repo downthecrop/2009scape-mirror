@@ -126,8 +126,6 @@ public final class LoginConfiguration {
 	 * @param player The player to send to.
 	 */
 	public static void sendGameConfiguration(final Player player) {
-		TutorialSession.getExtension(player).setStage(0);
-		player.setAttribute("tut-island", true);
 		player.getInterfaceManager().openWindowsPane(new Component(player.getInterfaceManager().isResizable() ? 746 : 548));
 		player.getInterfaceManager().openChatbox(137);
 		player.getInterfaceManager().openDefaultTabs();
