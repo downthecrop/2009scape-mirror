@@ -147,24 +147,6 @@ public final class BetaCommandPlugin extends CommandPlugin {
             case "empty":
                 player.getInventory().clear();
                 return true;
-            case "itemn":
-                if (args.length < 2) {
-                    player.debug("syntax error: item-name (optional) amount");
-                    return true;
-                }
-                String params = "";
-                for (int i = 1; i < args.length; i++) {
-                    params += i == args.length - 1 ? args[i] : args[i] + " ";
-                }
-                for (int i = 0; i < ItemDefinition.getDefinitions().size(); i++) {
-                    ItemDefinition def1 = ItemDefinition.forId(i);
-                    if (def1 != null && def1.getName().equalsIgnoreCase(params.toLowerCase())) {
-                        player.getInventory().add(new Item(i, 1));
-                        player.getPacketDispatch().sendMessage("[item=" + def1.getId() + ", " + def1.getName() + "].");
-                        break;
-                    }
-                }
-                return true;
 
             case "npcn":
                 if (args.length < 2) {
@@ -191,6 +173,7 @@ public final class BetaCommandPlugin extends CommandPlugin {
                     }
                 }
                 return true;
+                
             case "setvalue":
                 int itemId = toInteger(args[1]);
                 int value = toInteger(args[2]);
@@ -204,26 +187,16 @@ public final class BetaCommandPlugin extends CommandPlugin {
                 player.getPacketDispatch().sendMessage("Set Grand Exchange value for item [id=" + itemId + ", name=" + item.getName() + "] to " + value + "gp!");
                 break;
 
+            // Get item by id
             case "item":
+            	if (args.length < 2) {
+            		player.sendMessage("You must specify an item ID");
+            		return false;
+            	}
+                id = toInteger(args[1]);
                 amount = args.length > 2 ? toInteger(args[2]) : 1;
-                if (args[1].contains("-")) {
-                    String[] data = args[1].split("-");
-                    for (id = toInteger(data[0]); id < toInteger(data[1]); id++) {
-                        if (id > Cache.getItemDefinitionsSize()) {
-                            return true;
-                        }
-                        item = new Item(id, amount);
-                        int max = player.getInventory().getMaximumAdd(item);
-                        if (amount > max) {
-                            amount = max;
-                        }
-                        item.setAmount(amount);
-                        player.getInventory().add(item);
-                    }
-                    return true;
-                }
-                id = args.length > 1 ? toInteger(args[1]) : 0;
                 if (id > Cache.getItemDefinitionsSize()) {
+            		player.sendMessage("Item ID '" + id + "' out of range.");
                     return true;
                 }
                 item = new Item(id, amount);
@@ -233,6 +206,31 @@ public final class BetaCommandPlugin extends CommandPlugin {
                 }
                 item.setAmount(amount);
                 player.getInventory().add(item);
+                return true;
+                
+            // Get item by name
+            case "itemn":
+                if (args.length < 2) {
+                    player.sendMessage("You must specify an item name");
+                    return true;
+                }
+                String itemName = "";
+                for (int i = 1; i < args.length; i++) {
+                	itemName += i == args.length - 1 ? args[i] : args[i] + " ";
+                }
+                Boolean foundItem = false;
+                for (int i = 0; i < ItemDefinition.getDefinitions().size(); i++) {
+                    ItemDefinition def1 = ItemDefinition.forId(i);
+                    if (def1 != null && def1.getName().equalsIgnoreCase(itemName.toLowerCase())) {
+                        player.getInventory().add(new Item(i, 1));
+                        player.sendMessage("Added " + def1.getName() + "[" + def1.getId() + "] to inventory");
+                        foundItem = true;
+                        break;
+                    }
+                }
+                if (!foundItem) {
+                	player.sendMessage("@red@Unable to find item: " + itemName + "");
+                }
                 return true;
             case "task":
                 ResourceAIPManager.get().runTask(player, "Willow Logs");
