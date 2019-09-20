@@ -24,7 +24,7 @@ public final class BankContainer extends Container {
 	/**
 	 * The bank container size.
 	 */
-	public static final int SIZE = 496;
+	public static final int SIZE = 800;
 	
 	/**
 	 * The maximum amount of bank tabs
