@@ -160,7 +160,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 					reward += value << 1;
 					player.getSkills().addExperience(resource.getSkillId(), value * 10, true);
 				}
-				player.getInventory().add(new Item(reward, (GlobalEventManager.get().isActive("Lumberjack") && ItemDefinition.forId(reward).getName().toLowerCase().contains("logs") ? 2 : 1)));
+				player.getInventory().add(new Item(reward, (GlobalEventManager.get().isActive("Harvesting doubles") ? 2 : 1)));
 				if (reward == SkillingResource.CLAY_0.getReward()) {
 					if (player.getEquipment().contains(11074, 1)) {
 						player.getSavedData().getGlobalData().incrementBraceletOfClay();
