@@ -57,8 +57,12 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 			*/
 
 			case "shop":
-			case "credits":
 				CREDIT_STORE.open(player);
+				break;
+
+			case "credits":
+				int credits = CREDIT_STORE.getPoints(player);
+				player.sendMessage("<col=CC0000>You currently have " + credits + " credits to spend.");
 				break;
 				
 			case "bankresettabs":
