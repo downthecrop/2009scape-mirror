@@ -2,6 +2,7 @@ package org.crandor.game.content.skill.free.gather;
 
 import org.crandor.ServerConstants;
 import org.crandor.game.content.skill.Skills;
+import org.crandor.game.events.GlobalEventManager;
 import org.crandor.game.world.repository.Repository;
 import org.crandor.game.world.update.flag.context.Animation;
 
@@ -498,7 +499,7 @@ public enum SkillingResource {
 	 * @return The rewardAmount.
 	 */
 	public int getRewardAmount() {
-		return rewardAmount;
+		return GlobalEventManager.get().isActive("Harvesting doubles") ? rewardAmount * 2 : rewardAmount;
 	}
 
 	/**
