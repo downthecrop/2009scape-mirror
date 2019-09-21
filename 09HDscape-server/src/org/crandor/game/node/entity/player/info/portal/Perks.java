@@ -8,37 +8,37 @@ import org.crandor.tools.StringUtils;
 /**
  * Represents a perk.
  * @author Vexia
- * 
+ *
  */
 public enum Perks {
 	STAMINA_BOOST(2, 0.40),
-	GREEN_THUMB(4, 0.25), 
-	BIRD_MAN(5, .25), 
-	STONER(6, .25), 
-	UNBREAKABLE_FORGE(11), 
-	OUT_OF_GRAVE_DANGER(12), 
-	SLEIGHT_OF_HAND(13), 
-	MASTER_CHEF(14), 
+	GREEN_THUMB(4, 0.25),
+	BIRD_MAN(5, .25),
+	STONER(6, .25),
+	UNBREAKABLE_FORGE(11),
+	OUT_OF_GRAVE_DANGER(12),
+	SLEIGHT_OF_HAND(13),
+	MASTER_CHEF(14),
 	DIVINE_INTERVENTION(16),
-	FAMILIAR_WHISPERER(17), 
-	BARROWS_BEFRIENDER(18), 
-	ABYSS_BEFRIENDER(19), 
-	CHARGE_BEFRIENDER(21), 
-	GOLDEN_NEEDLE(22), 
+	FAMILIAR_WHISPERER(17),
+	BARROWS_BEFRIENDER(18),
+	ABYSS_BEFRIENDER(19),
+	CHARGE_BEFRIENDER(21),
+	GOLDEN_NEEDLE(22),
 	SLAYER_BETRAYER(24),
-	THIRST_QUENCHER(26), 
-	DOUBLE_TROUBLE(27), 
-	GWD_BEFRIENDER(29, 30), 
-	PRAYER_BETRAYER(30, 50), 
+	THIRST_QUENCHER(26),
+	DOUBLE_TROUBLE(27),
+	GWD_BEFRIENDER(29, 30),
+	PRAYER_BETRAYER(30, 50),
 	SPELL_SWAP(31, 3),
-	DWARF_BEFRIENDER(32), 
-	POWERPOINT(33), 
+	DWARF_BEFRIENDER(32),
+	POWERPOINT(33),
 	CHARM_COLLECTOR(35),
 	REGULAR_DONATOR(1000),
-	EXTREME_DONATOR(1001), 
-	DETECTIVE(36), 
+	EXTREME_DONATOR(1001),
+	DETECTIVE(36),
 	OVERCHARGE(40),
-	UNBREAKABLE_CRYSTAL(41), 
+	UNBREAKABLE_CRYSTAL(41),
 	CRUSADER(42),
 	PET_BEFRIENDER(43),
 	BONECRUSHER(60),
@@ -46,7 +46,7 @@ public enum Perks {
 	COIN_MACHINE(71),
 	FIGHT_CAVE_FANATIC(72),
 	DECANTER(73),
-	
+
 	;
 
 	/**
@@ -99,22 +99,18 @@ public enum Perks {
 	 * @param maxRand the maximum rand value.
 	 * @return the item.
 	 */
-	public static boolean addDouble(Player player, Item original, boolean ground, int maxRand) {
-		boolean addOriginal = !player.hasPerk(DOUBLE_TROUBLE);
-		if (!addOriginal) {
-			addOriginal = RandomFunction.random(maxRand) > 10;
-		}
-		if (addOriginal) {
-			if (ground) {
-				player.getInventory().add(original, player);
-			} else {
-				player.getInventory().add(original);
-			}
+	public static boolean addDouble(Player player, Item item, boolean ground, int maxRand) {
+		// 10 % chance to give an extra item
+		if (!player.hasPerk(DOUBLE_TROUBLE) || RandomFunction.random(maxRand) > 10) {
 			return false;
 		}
-		Item doubleI = new Item(original.getId(), original.getAmount() * 2);
-		player.getInventory().add(doubleI);
-		player.sendMessage("<col=FF0000>You get 2x " + original.getName().toLowerCase() + ".");
+		// Give the player an extra item!
+		if (ground) {
+			player.getInventory().add(item, player);
+		} else {
+			player.getInventory().add(item);
+		}
+		player.sendMessage("<col=3498db>You receive an extra " + item.getName().toLowerCase() + " from the Double Trouble perk!");
 		return true;
 	}
 
