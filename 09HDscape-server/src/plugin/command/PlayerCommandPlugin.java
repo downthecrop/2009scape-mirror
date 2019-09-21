@@ -55,7 +55,9 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 				TutorialStage.load(player, stage, false);
 				break;
 			*/
+
 			case "shop":
+			case "credits":
 				CREDIT_STORE.open(player);
 				break;
 				
