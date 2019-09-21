@@ -217,13 +217,20 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 			player.sendMessage("Finish what you're currently doing.");
 			return;
 		}
-		player.getInterfaceManager().close();
-		player.getPacketDispatch().sendString("<u>" + GameWorld.getName() + " commands</u>", 239, 1);
-		player.getPacketDispatch().sendString("::filter (completely toggles game messages)<br>::players (shows player count)<br>::doublexp (claims double xp)<br>::shop opens up a dialogue so you can use credits<br>::togglenews toggles the news broadcasts.<br>::help shows a small help dialogue<br>::toggleatk toggles left-click attack option mode<br>Shift+Scroll wheel zooms the client in/out", 239, 2);
-		player.getPacketDispatch().sendString("", 239, 3);
-		player.getPacketDispatch().sendString("", 239, 4);
-		player.getPacketDispatch().sendString("", 239, 5);
-		player.getInterfaceManager().openComponent(239);
+		player.getInterfaceManager().open(new Component(275));
+		for (int i = 0; i < 311; i++) {
+			player.getPacketDispatch().sendString("", 275, i);
+		}
+		int lineId = 11;
+		player.getPacketDispatch().sendString("<col=ecf0f1>" + GameWorld.getName() + " commands</col>", 275, 2);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::players", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Shows online player count.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::shop", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Open the reward credits shop.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::togglenews", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Toggles the news broadcasts.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::toggleatk", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Toggles left-click attack option mode.", 275, lineId++);
 	}
 
 	/**
@@ -232,13 +239,13 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 	 */
 	private void sendDonationInfo(Player player) {
 		player.getInterfaceManager().open(new Component(275));
-		for (int i = 0; i < 257; i++) {
+		for (int i = 0; i < 311; i++) {
 			player.getPacketDispatch().sendString("", 275, i);
 		}
 		int lineId = 11;
-		player.getPacketDispatch().sendString("<col=8A0808>" + "Donation Information" + "</col>", 275, 2);
+		player.getPacketDispatch().sendString("<col=ecf0f1>" + "Donation Information" + "</col>", 275, 2);
 		for (String s : ServerConstants.MESSAGES) {
-			player.getPacketDispatch().sendString("<col=8A0808>" + s + "<br><br></col>", 275, lineId++);
+			player.getPacketDispatch().sendString("<col=2c3e50>" + s + "<br><br></col>", 275, lineId++);
 		}
 	}
 	/**
@@ -247,14 +254,14 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 	 */
 	private void sendQuests(Player player) {
 		player.getInterfaceManager().open(new Component(275));
-		for (int i = 0; i < 257; i++) {
+		for (int i = 0; i < 311; i++) {
 			player.getPacketDispatch().sendString("", 275, i);
 		}
-		String red = "<col=8A0808>";
 		int lineId = 11;
-		player.getPacketDispatch().sendString("<col=8A0808>" + "Available Quests" + "</col>", 275, 2);
+		player.getPacketDispatch().sendString("<col=ecf0f1>" + "Available Quests" + "</col>", 275, 2);
 		for (Quest q : QuestRepository.getQuests().values()) {
-			player.getPacketDispatch().sendString(q.isCompleted(player) ? red + "<str> " + q.getName() + " <br><br>" : red + " " + q.getName() + " <br><br>", 275, lineId++);
+			// Add a space to beginning and end of string for the strikethrough
+			player.getPacketDispatch().sendString("<col=ecf0f1>" + (q.isCompleted(player) ? "<str> " : "") + q.getName() + " ", 275, lineId++);
 		}
 	}
 
