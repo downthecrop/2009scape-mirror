@@ -129,7 +129,7 @@ public final class GrandExchangeZone extends MapZone implements Plugin<Object> {
 					if (player.getDetails().getShop().syncCredits()) {
 						CreditStore.super.open(player);
 						int credits = player.getDetails().getShop().getCredits();
-						player.sendMessage("<col=CC0000>You currently have " + credits + (credits == 1 ? " credit" : " credits") + " to spend.");
+						player.sendMessage("<col=3498db>You currently have " + credits + (credits == 1 ? " credit" : " credits") + " to spend.");
 					}
 				}
 
