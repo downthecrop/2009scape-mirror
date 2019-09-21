@@ -30,7 +30,6 @@ public class GlobalEventManager implements CallBack {
 	private String currentEvent;
 	
 	public final GlobalEventManager init() {
-		
 		try {
 			getEvents().put("Alchemy hellenistic", 0L);
 			getEvents().put("Golden retriever", 0L);
@@ -39,7 +38,6 @@ public class GlobalEventManager implements CallBack {
 			getEvents().put("Golden essence", 0L);
 			getEvents().put("Clone Fest", 0L);
 			getEvents().put("XP Fever", 0L);
-
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

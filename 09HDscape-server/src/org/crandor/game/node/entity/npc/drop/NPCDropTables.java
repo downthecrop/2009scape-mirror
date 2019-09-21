@@ -184,7 +184,7 @@ public final class NPCDropTables {
 		if (item.getId() == 995 && player.hasPerk(Perks.COIN_MACHINE) && player.getGlobalData().isEnableCoinMachine() && player.getBank().hasSpaceFor(item)) {
 			item = new Item(995, (int) (item.getAmount() + (item.getAmount() * 0.25)));
 			player.getBank().add(item);
-			player.sendMessage("<col=005F00> " + item.getAmount() + " X Coins were sent to your bank.");
+			player.sendMessage("<col=3498db> " + item.getAmount() + " coins were sent to your bank.");
 			return;
 		}
 		if (item.hasItemPlugin() && player != null) {
