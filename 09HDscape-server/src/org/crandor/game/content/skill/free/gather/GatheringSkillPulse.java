@@ -152,15 +152,24 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 		}
 		int reward = resource.getReward();
 		if (reward > 0) {
+			// Convert to pure essence if the player is above level 30 mining
+			if (isMiningEssence && player.getSkills().getLevel(Skills.MINING) >= 30) {
+				reward = 7936;
+			}
 			applyAchievementTask(reward);
+			// 3239: Hollow tree (bark)
 			if (reward != 3239 || RandomFunction.random(100) < 10) {
-				// Hollow tree (bark)
+				
 				if (resource == SkillingResource.SANDSTONE || resource == SkillingResource.GRANITE) {
 					int value = RandomFunction.randomize(resource == SkillingResource.GRANITE ? 3 : 4);
 					reward += value << 1;
 					player.getSkills().addExperience(resource.getSkillId(), value * 10, true);
 				}
-				player.getInventory().add(new Item(reward, (GlobalEventManager.get().isActive("Harvesting doubles") ? 2 : 1)));
+				int amount = 1;
+				if (GlobalEventManager.get().isActive("Harvesting doubles")) {
+					amount *= 2;
+				}
+				player.getInventory().add(new Item(reward, amount));
 				if (reward == SkillingResource.CLAY_0.getReward()) {
 					if (player.getEquipment().contains(11074, 1)) {
 						player.getSavedData().getGlobalData().incrementBraceletOfClay();
@@ -197,18 +206,18 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 					}
 				}
 				if (isMining && player.getSavedData().getGlobalData().getStarSpriteDelay() > System.currentTimeMillis() && TimeUnit.MILLISECONDS.toMinutes(player.getSavedData().getGlobalData().getStarSpriteDelay() - System.currentTimeMillis()) >= 1425) {
-					player.getInventory().add(new Item(reward, 2));
-				} else if (isMining && player.getInventory().freeSlots() != 0 && player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).getLevel() != -1 && player.getAchievementDiaryManager().checkMiningReward(reward) && RandomFunction.random(100) <= 10) {
-					player.getInventory().add(new Item(reward, 2));
-					player.sendMessage("Through the power of the varrock armour you receive double the reward.");
-				} else {
-					if (SkillcapePerks.hasSkillcapePerk(player, SkillcapePerks.MINING) && isMining) {
-						if (RandomFunction.getRandom(100) <= 10) {
-							player.getSkills().addExperience(resource.getSkillId(), resource.getExperience(), true);
-							player.getInventory().add(new Item(reward, 1), player);
-							player.sendNotificationMessage("Your " + player.getEquipment().get(EquipmentContainer.SLOT_CAPE).getName() + " allows you to obtain two ores from this rock!");
-						}
+					player.getInventory().add(new Item(reward, 1));
+				} else if (isMining && !isMiningEssence && player.getInventory().freeSlots() != 0 && player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).getLevel() != -1 && player.getAchievementDiaryManager().checkMiningReward(reward) && RandomFunction.random(100) <= 10) {
+					player.getInventory().add(new Item(reward, 1));
+					player.sendMessage("Through the power of the varrock armour you receive an extra ore.");
+				} else if (isMining && !isMiningEssence && SkillcapePerks.hasSkillcapePerk(player, SkillcapePerks.MINING)) {
+					// If the player has a skillcape, 10% chance of finding extra
+					if (RandomFunction.getRandom(100) <= 10) {
+						player.getSkills().addExperience(resource.getSkillId(), resource.getExperience(), true);
+						player.getInventory().add(new Item(reward, 1), player);
+						player.sendNotificationMessage("Your " + player.getEquipment().get(EquipmentContainer.SLOT_CAPE).getName() + " allows you to obtain two ores from this rock!");
 					}
+				} else {
 					SkillingPets.checkPetDrop(player, isMining ? SkillingPets.GOLEM : SkillingPets.BEAVER);
 					Perks.addDouble(player, new Item(reward, 1));
 				}
@@ -245,11 +254,6 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 					if (!player.getInventory().add(gem, player)) {
 						player.getPacketDispatch().sendMessage("You do not have enough space in your inventory, so you drop the gem on the floor.");
 					}
-				}
-			}
-			if (isMining && resource.getReward() == 444 && !player.getAchievementDiaryManager().hasCompletedTask(DiaryType.KARAMJA, 0, 2)) {
-				if (player.getLocation().getRegionId() == 10801 || player.getLocation().getRegionId() == 10802) {
-					player.getAchievementDiaryManager().updateTask(player, DiaryType.KARAMJA, 0, 2, true);
 				}
 			}
 		}
@@ -304,9 +308,6 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 		if (reward == 440 && player.getLocation().withinDistance(new Location(3285, 3363, 0)) && !player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).isComplete(0, 2)) {
 			player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).updateTask(player, 0, 2, true);
 		}
-		if (isMiningEssence && player.getSkills().getLevel(Skills.MINING) > 29) {
-			reward = 7936;
-		}
 		if (node.getId() == 24168 && !player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).isComplete(0, 6)) {
 			player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).updateTask(player, 0, 6, true);
 		}
@@ -315,6 +316,11 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 		}
 		if (reward == 1519 && player.getViewport().getRegion().getId() == 12338 && !player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).isComplete(1, 5)) {
 			player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).updateTask(player, 1, 5, true);
+		}
+		if (reward == 444 && !player.getAchievementDiaryManager().hasCompletedTask(DiaryType.KARAMJA, 0, 2)) {
+			if (player.getLocation().getRegionId() == 10801 || player.getLocation().getRegionId() == 10802) {
+				player.getAchievementDiaryManager().updateTask(player, DiaryType.KARAMJA, 0, 2, true);
+			}
 		}
 	}
 
