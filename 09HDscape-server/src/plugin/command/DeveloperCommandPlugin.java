@@ -177,22 +177,22 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
             case "taskamount":
                 player.sendMessage("You have " + player.getSkillTasks().getTaskAmount() + " more to go!");
                 break;
-            case "activatexp":
-                String target = "";
-                for (int i = 1; i < args.length; i++)
-                    target += args[i] + ((i == args.length - 1) ? "" : " ");
-                if (args.length > 1)
-                    GlobalEventManager.get().activate("XP Fever", target);
-                else
-                    GlobalEventManager.get().activate("XP Fever", target);
+
+            case "eventactivate":
+                String[] eventNameArr = Arrays.copyOfRange(args, 1, args.length);
+                String eventName = String.join(" ", eventNameArr);
+                player.sendMessage("You have activated the " + eventName + " event!");
+                GlobalEventManager.get().activate(eventName, null);
                 break;
+
             case "poison":
                 player.getStateManager().set(EntityState.POISONED, 200, player);
                 player.getConfigManager().set(102, 1);
                 player.sendMessage("Poisoned...");
                 break;
+
             case "activatecf":
-                target = "Developers";
+                String target = "";
                 for (int i = 1; i < args.length; i++)
                     target += args[i] + ((i == args.length - 1) ? "" : " ");
                 GlobalEventManager.get().activate("Clone Fest", null);

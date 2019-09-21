@@ -5,6 +5,8 @@ import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.callback.CallBack;
 import org.crandor.game.world.repository.Repository;
+import org.crandor.net.amsc.MSPacketRepository;
+import org.crandor.net.amsc.WorldCommunicator;
 import org.crandor.tools.mysql.Results;
 
 import java.util.HashMap;
@@ -30,7 +32,6 @@ public class GlobalEventManager implements CallBack {
 	public final GlobalEventManager init() {
 		
 		try {
-			
 			getEvents().put("Alchemy hellenistic", 0L);
 			getEvents().put("Golden retriever", 0L);
 			getEvents().put("Harvesting doubles", 0L);
@@ -144,29 +145,25 @@ public class GlobalEventManager implements CallBack {
 	}
 	
 	public GlobalEventManager message(String message) {
-		return message(message, true, "<col=027fc7>");
+		return message(message, true, "<col=3498db>");
 	}
 
 	public GlobalEventManager message(String message, boolean tag) {
-		return message(message, tag, "<col=027fc7>");
+		return message(message, tag, "<col=3498db>");
 	}
 
 	public GlobalEventManager notify(String message) {
-		return message(message, true, "<col=800000>");
+		return message(message, true, "<col=c0392b>");
 	}
 
 	public GlobalEventManager notify(String message, boolean tag) {
-		return message(message, tag, "<col=800000>");
+		return message(message, tag, "<col=c0392b>");
 	}
 
 	public GlobalEventManager message(String message, boolean tag, String color) {
-		/*if (WorldCommunicator.isEnabled()) {
-			MSPacketRepository.sendWorldMessage((tag ? "<col=027fc7>[Event Manager] - " : "")+ message);
-		} else {*/
-			for (Player player : Repository.getPlayers()) {
-				player.getPacketDispatch().sendMessage(color + (tag ? "[Event Manager] - " : "") + message);
-			}
-	//}
+		for (Player player : Repository.getPlayers()) {
+			player.getPacketDispatch().sendMessage(color + (tag ? "[Event Manager] " : "") + message);
+		}
 		return this;
 		
 	}
@@ -193,15 +190,8 @@ public class GlobalEventManager implements CallBack {
 	
 	public GlobalEventManager activate(String eventName, String name) {
 		
-		Player p = Repository.getPlayerByDisplay(name);
-		if (getEvents().get(eventName) == null) {
-			System.out.println("Failed to activate event " + eventName + ".");
-			return this;
-		}
-		if (p == null && !eventName.equalsIgnoreCase("clone fest")) {
-			System.out.println("Couldnt activate event; " + name + " couldnt be found.");
-			return this;
-		}
+		Player player = Repository.getPlayerByDisplay(name);
+		Boolean eventStarted = false;
 
 		Iterator<Entry<String, Long>> iterator = EVENTS.entrySet().iterator();
 
@@ -213,14 +203,17 @@ public class GlobalEventManager implements CallBack {
 					notify("bank on world " + GameWorld.getSettings().getWorldId() + ".", false);
 				} else {
 					if (entry.getValue() != 0) {
-						message("The event " + eventName + " has been extended for another hour by " + (p == null ? " " : p.getUsername() + " "));
-						message("on world " + GameWorld.getSettings().getWorldId() + ".", false);
+						message("The event " + eventName + " has been extended for another hour" + (player == null ? "" : " by " + player.getUsername()) + ".");
 					} else {
-						message("The event " + eventName + " has been activated by " + (p == null ? " " : p.getUsername() + " ") + "on world " + GameWorld.getSettings().getWorldId() + ".");
+						message("The event " + eventName + " has been activated" + (player == null ? "" : " by " + player.getUsername()) + " on world " + GameWorld.getSettings().getWorldId() + ".");
 					}
 				}
 				entry.setValue(entry.getValue() + 6000);
+				eventStarted = true;
 			}
+		}
+		if (!eventStarted) {
+			player.sendMessage("Failed to activate event " + eventName + ".");
 		}
 		return this;
 	}
@@ -250,7 +243,7 @@ public class GlobalEventManager implements CallBack {
 						player.getPacketDispatch().sendMessages("This event means you'll receive x2 items when harvesting with woodcutting, mining", "or fishing.");
 						break;
 					case "Thieves jackpot":
-						player.getPacketDispatch().sendMessages("This event means you'll receive 300% more coins when thieving.");
+						player.getPacketDispatch().sendMessages("This event means you'll receive 3x more coins when thieving.");
 						break;
 					case "Golden essence":
 						player.getPacketDispatch().sendMessages("This event means you'll receive x3 more runes than normal when runecrafting.");
@@ -294,14 +287,17 @@ public class GlobalEventManager implements CallBack {
 					active = true;
 			}
 		}
-		if (active)
-			player.sendMessage("<col=027fc7>The following events are active:");
+		if (!active) {
+			player.sendMessage("<col=3498db>No events are currently active.");
+			return this;
+		}
+		player.sendMessage("<col=3498db>The following events are active:");
 		Iterator<Entry<String, Long>> iterator = EVENTS.entrySet().iterator();
 		
 		while(iterator.hasNext()) {
 			Map.Entry<String, Long> entry = (Map.Entry<String, Long>) iterator.next();
 				if (entry.getValue() > 0) {
-					player.sendMessage("<col=027fc7> [-] " + entry.getKey() + ".");
+					player.sendMessage("<col=3498db> [-] " + entry.getKey() + ".");
 			}
 		}
 		return this;
