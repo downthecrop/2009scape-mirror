@@ -181,7 +181,7 @@ public final class NPCDropTables {
 		if (handleBoneCrusher(player, item)) {
 			return;
 		}
-		if (item.getId() == 995 && player.hasPerk(Perks.COIN_MACHINE) && player.getGlobalData().isEnableCoinMachine() && player.getBank().hasSpaceFor(item)) {
+		if (item.getId() == 995 && player.getBank().hasSpaceFor(item) && ( player.getGlobalData().isEnableCoinMachine() || GlobalEventManager.get().isActive("Golden retriever") )) {
 			item = new Item(995, (int) (item.getAmount() + (item.getAmount() * 0.25)));
 			player.getBank().add(item);
 			player.sendMessage("<col=3498db> " + item.getAmount() + " coins were sent to your bank.");
