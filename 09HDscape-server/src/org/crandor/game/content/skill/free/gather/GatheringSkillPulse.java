@@ -39,9 +39,20 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 	private static final Item[] GEM_REWARDS = { new Item(1623), new Item(1621), new Item(1619), new Item(1617) };
 
 	/**
-	 * If the player is mining.
+	 * Is the player is mining.
 	 */
-	private boolean mining;
+	private boolean isMining;
+
+
+	/**
+	 * Is the player is mining essence.
+	 */
+	private boolean isMiningEssence;
+
+	/**
+	 * Is the player is woodcutting.
+	 */
+	private boolean isWoodcutting;
 
 	/**
 	 * The amount of ticks it takes to get a log.
@@ -71,18 +82,20 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 		if (TutorialSession.getExtension(player).getStage() == 35) {
 			TutorialStage.load(player, 36, false);
 		}
-		mining = resource.getSkillId() == Skills.MINING;
+		isMining = resource.getSkillId() == Skills.MINING;
+		isMiningEssence = resource == SkillingResource.RUNE_ESSENCE;
+		isWoodcutting = resource.getSkillId() == Skills.WOODCUTTING;
 		super.start();
 	}
 
 	@Override
 	public boolean checkRequirements() {
 		if (player.getSkills().getLevel(resource.getSkillId()) < resource.getLevel()) {
-			player.getPacketDispatch().sendMessage("You need a " + Skills.SKILL_NAME[resource.getSkillId()] + " level of " + resource.getLevel() + " to " + (mining ? "mine this rock." : "cut this tree."));
+			player.getPacketDispatch().sendMessage("You need a " + Skills.SKILL_NAME[resource.getSkillId()] + " level of " + resource.getLevel() + " to " + (isMining ? "mine this rock." : "cut this tree."));
 			return false;
 		}
 		if (setTool() == null) {
-			player.getPacketDispatch().sendMessage("You do not have a" + (mining ? " pickaxe" : "n axe") + " to use.");
+			player.getPacketDispatch().sendMessage("You do not have a" + (isMining ? " pickaxe" : "n axe") + " to use.");
 			return false;
 		}
 		if (player.getInventory().freeSlots() < 1) {
@@ -103,7 +116,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 
 	@Override
 	public boolean reward() {
-		if (++ticks % (resource == SkillingResource.RUNE_ESSENCE ? 3 : 4) != 0) {
+		if (++ticks % (isMiningEssence ? 3 : 4) != 0) {
 			return false;
 		}
 		if (node.getId() == 10041) {
@@ -124,42 +137,24 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 		} else if (tutorialStage == 37 && node.getId() == 3042) {
 			TutorialStage.load(player, 39, false);
 		}
-		if (resource.getSkillId() == Skills.WOODCUTTING && player.getLocation().getRegionId() == 12102) {
+		// If player is in donator zone
+		if (isWoodcutting && player.getLocation().getRegionId() == 12102) {
 			player.getAntiMacroHandler().fireEvent("tree spirit");
 			return true;
 		}
-		if (resource.getSkillId() == Skills.WOODCUTTING && tool.getId() == 13661 && RandomFunction.random(100) < 30){
+		// 20% chance to auto burn logs when using "inferno adze" item
+		if (isWoodcutting && tool.getId() == 13661 && RandomFunction.random(100) < 20){
 			player.sendMessage("Your chop some logs. The heat of the inferno adze incinerates them.");
 			Projectile.create(player, null, 1776, 35, 30, 20, 25).transform(player, new Location(player.getLocation().getX() + 2, player.getLocation().getY()), true, 25, 25).send();
 			player.getSkills().addExperience(Skills.WOODCUTTING, resource.getExperience());
 			player.getSkills().addExperience(Skills.FIREMAKING, resource.getExperience());
 			return false;
 		}
-		if (resource.getReward() > 0) {
-			int reward = resource.getReward();
-			if (reward == 6333 && !player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).isComplete(1, 4)) {
-				player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).updateTask(player, 1, 4, true);
-			} else if (reward == 6332 && !player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).isComplete(1, 5)) {
-				player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).updateTask(player, 1, 5, true);
-			}
-			if (reward == 440 && player.getLocation().withinDistance(new Location(3285, 3363, 0)) && !player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).isComplete(0, 2)) {
-				player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).updateTask(player, 0, 2, true);
-			}
-			if (resource == SkillingResource.RUNE_ESSENCE && player.getSkills().getLevel(Skills.MINING) > 29) {
-				reward = 7936;
-			}
-			if (node.getId() == 24168 && !player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).isComplete(0, 6)) {
-				player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).updateTask(player, 0, 6, true);
-			}
-			if (reward == 440 && player.getViewport().getRegion().getId() == 13107 && !player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).isComplete(0, 8)) {
-				player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).updateTask(player, 0, 8, true);
-			}
-			if (reward == 1519 && player.getViewport().getRegion().getId() == 12338 && !player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).isComplete(1, 5)) {
-				player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).updateTask(player, 1, 5, true);
-			}
-			if (reward != 3239 || RandomFunction.random(100) < 10) { // Hollow
-				// tree
-				// (bark)
+		int reward = resource.getReward();
+		if (reward > 0) {
+			applyAchievementTask(reward);
+			if (reward != 3239 || RandomFunction.random(100) < 10) {
+				// Hollow tree (bark)
 				if (resource == SkillingResource.SANDSTONE || resource == SkillingResource.GRANITE) {
 					int value = RandomFunction.randomize(resource == SkillingResource.GRANITE ? 3 : 4);
 					reward += value << 1;
@@ -201,20 +196,20 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 						}
 					}
 				}
-				if (mining && player.getSavedData().getGlobalData().getStarSpriteDelay() > System.currentTimeMillis() && TimeUnit.MILLISECONDS.toMinutes(player.getSavedData().getGlobalData().getStarSpriteDelay() - System.currentTimeMillis()) >= 1425) {
+				if (isMining && player.getSavedData().getGlobalData().getStarSpriteDelay() > System.currentTimeMillis() && TimeUnit.MILLISECONDS.toMinutes(player.getSavedData().getGlobalData().getStarSpriteDelay() - System.currentTimeMillis()) >= 1425) {
 					player.getInventory().add(new Item(reward, 2));
-				} else if (mining && player.getInventory().freeSlots() != 0 && player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).getLevel() != -1 && player.getAchievementDiaryManager().checkMiningReward(reward) && RandomFunction.random(100) <= 10) {
+				} else if (isMining && player.getInventory().freeSlots() != 0 && player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).getLevel() != -1 && player.getAchievementDiaryManager().checkMiningReward(reward) && RandomFunction.random(100) <= 10) {
 					player.getInventory().add(new Item(reward, 2));
 					player.sendMessage("Through the power of the varrock armour you receive double the reward.");
 				} else {
-					if (SkillcapePerks.hasSkillcapePerk(player, SkillcapePerks.MINING) && mining) {
+					if (SkillcapePerks.hasSkillcapePerk(player, SkillcapePerks.MINING) && isMining) {
 						if (RandomFunction.getRandom(100) <= 10) {
 							player.getSkills().addExperience(resource.getSkillId(), resource.getExperience(), true);
 							player.getInventory().add(new Item(reward, 1), player);
 							player.sendNotificationMessage("Your " + player.getEquipment().get(EquipmentContainer.SLOT_CAPE).getName() + " allows you to obtain two ores from this rock!");
 						}
 					}
-					SkillingPets.checkPetDrop(player, mining ? SkillingPets.GOLEM : SkillingPets.BEAVER);
+					SkillingPets.checkPetDrop(player, isMining ? SkillingPets.GOLEM : SkillingPets.BEAVER);
 					Perks.addDouble(player, new Item(reward, 1));
 				}
 				if (gem) {
@@ -229,7 +224,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 					player.getSkills().addExperience(resource.getSkillId(), 275.2, true);
 				}
 			}
-			if (resource != SkillingResource.RUNE_ESSENCE && mining) {
+			if (!isMiningEssence && isMining) {
 				int chance = 282;
 				boolean altered = false;
 				if (player.getEquipment().getNew(EquipmentContainer.SLOT_RING).getId() == 2572) {
@@ -252,7 +247,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 					}
 				}
 			}
-			if (mining && resource.getReward() == 444 && !player.getAchievementDiaryManager().hasCompletedTask(DiaryType.KARAMJA, 0, 2)) {
+			if (isMining && resource.getReward() == 444 && !player.getAchievementDiaryManager().hasCompletedTask(DiaryType.KARAMJA, 0, 2)) {
 				if (player.getLocation().getRegionId() == 10801 || player.getLocation().getRegionId() == 10802) {
 					player.getAchievementDiaryManager().updateTask(player, DiaryType.KARAMJA, 0, 2, true);
 				}
@@ -261,7 +256,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 		if (tutorialStage == 7) {
 			TutorialStage.load(player, 8, false);
 		}
-		if (!mining) {
+		if (!isMining) {
 			int chance = 282;
 			if (player.getDetails().getShop().hasPerk(Perks.BIRD_MAN)) {
 				chance /= 1.5;
@@ -298,11 +293,37 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 	}
 
 	/**
+	 * Checks if the has completed any achievements from their diary
+	 */
+	private void applyAchievementTask(int reward) {
+		if (reward == 6333 && !player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).isComplete(1, 4)) {
+			player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).updateTask(player, 1, 4, true);
+		} else if (reward == 6332 && !player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).isComplete(1, 5)) {
+			player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).updateTask(player, 1, 5, true);
+		}
+		if (reward == 440 && player.getLocation().withinDistance(new Location(3285, 3363, 0)) && !player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).isComplete(0, 2)) {
+			player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).updateTask(player, 0, 2, true);
+		}
+		if (isMiningEssence && player.getSkills().getLevel(Skills.MINING) > 29) {
+			reward = 7936;
+		}
+		if (node.getId() == 24168 && !player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).isComplete(0, 6)) {
+			player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).updateTask(player, 0, 6, true);
+		}
+		if (reward == 440 && player.getViewport().getRegion().getId() == 13107 && !player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).isComplete(0, 8)) {
+			player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).updateTask(player, 0, 8, true);
+		}
+		if (reward == 1519 && player.getViewport().getRegion().getId() == 12338 && !player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).isComplete(1, 5)) {
+			player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).updateTask(player, 1, 5, true);
+		}
+	}
+
+	/**
 	 * Checks if the player gets rewarded.
 	 * @return {@code True} if so.
 	 */
 	private boolean checkReward() {
-		int skill = mining ? Skills.MINING : Skills.WOODCUTTING;
+		int skill = isMining ? Skills.MINING : Skills.WOODCUTTING;
 		int level = 1 + player.getSkills().getLevel(skill) + player.getFamiliarManager().getBoost(skill);
 		double hostRatio = Math.random() * (100.0 * resource.getRate());
 		double clientRatio = Math.random() * ((level - resource.getLevel()) * (1.0 + tool.getRatio()));
@@ -313,7 +334,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 	public void message(int type) {
 		switch (type) {
 		case 0:
-			player.getPacketDispatch().sendMessage("You swing your " + (mining ? "pickaxe at the rock..." : "axe at the tree..."));
+			player.getPacketDispatch().sendMessage("You swing your " + (isMining ? "pickaxe at the rock..." : "axe at the tree..."));
 			if (TutorialSession.getExtension(player).getStage() == 6) {
 				player.lock(7);
 				TutorialStage.load(player, 7, false);
@@ -326,7 +347,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 	 * Sets the tool used.
 	 */
 	private SkillingTool setTool() {
-		if (!mining) {
+		if (!isMining) {
 			tool = SkillingTool.getHatchet(player);
 		} else {
 			tool = SkillingTool.getPickaxe(player);
