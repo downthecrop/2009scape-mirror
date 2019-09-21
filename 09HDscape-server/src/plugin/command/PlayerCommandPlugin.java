@@ -168,21 +168,26 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 					player.sendMessage("<col=e74c3c>Your message was too short.");
 				}
 				return true;
+
 			case "togglenews":
 				player.getSavedData().getGlobalData().setDisableNews(!player.getSavedData().getGlobalData().isDisableNews());
 				player.sendMessage("<col=3498db>" + (player.getSavedData().getGlobalData().isDisableNews() ? "You will no longer see news notifications." : "You will now see news notifications."));
 				return true;
+
 			case "commands":
 			case "command":
 			case "commandlist":
 				sendCommands(player);
 				return true;
+
 			case "quests":
 				sendQuests(player);
 				return true;
+
 			case "donate":
 				sendDonationInfo(player);
 				return true;
+
 			case "reply":
 				if(player.getInterfaceManager().isOpened()){
 					player.sendMessage("<col=e74c3c>Please finish what you're doing first.");
@@ -218,19 +223,33 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 			return;
 		}
 		player.getInterfaceManager().open(new Component(275));
+		//CLear old data
 		for (int i = 0; i < 311; i++) {
 			player.getPacketDispatch().sendString("", 275, i);
 		}
-		int lineId = 11;
+		// Title
 		player.getPacketDispatch().sendString("<col=ecf0f1>" + GameWorld.getName() + " commands</col>", 275, 2);
+
+		// Content
+		int lineId = 11;
+		player.getPacketDispatch().sendString("<col=ecf0f1>::commands", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Shows this list.", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=ecf0f1>::players", 275, lineId++);
-		player.getPacketDispatch().sendString("<col=2c3e50>Shows online player count.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Get online player count.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::quests", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Shows a list of all available quests.", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=ecf0f1>::shop", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=2c3e50>Open the reward credits shop.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::credits", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Get your reward credits balance.", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=ecf0f1>::togglenews", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=2c3e50>Toggles the news broadcasts.", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=ecf0f1>::toggleatk", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=2c3e50>Toggles left-click attack option mode.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::bankresetpin [pin]", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Remove your bank pin.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::bankresettabs", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Reset all of your bank tabs.", 275, lineId++);
 	}
 
 	/**
