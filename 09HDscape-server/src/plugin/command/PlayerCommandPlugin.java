@@ -21,12 +21,19 @@ import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
 import org.crandor.tools.StringUtils;
 
+import plugin.zone.GrandExchangeZone.CreditStore;
+
 /**
  * Handles a player command.
  * @author Vexia
  */
 @InitializablePlugin
 public final class PlayerCommandPlugin extends CommandPlugin {
+
+	/**
+	 * The store that sells items in exchange for credits.
+	 */
+	private static final CreditStore CREDIT_STORE = new CreditStore();
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
@@ -48,7 +55,10 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 				TutorialStage.load(player, stage, false);
 				break;
 			*/
-
+			case "shop":
+				CREDIT_STORE.open(player);
+				break;
+				
 			case "bankresettabs":
 				for (int i = 0; i < player.getBank().getTabStartSlot().length; i++) {
 					player.getBank().getTabStartSlot()[i] = 0;
