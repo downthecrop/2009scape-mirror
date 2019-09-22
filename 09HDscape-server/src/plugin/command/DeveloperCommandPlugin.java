@@ -101,7 +101,7 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
     public boolean parse(final Player player, String name, String[] args) {
         String[] eventNameArr;
         String eventName;
-        GlobalEvent event;
+        GlobalEvent event = GlobalEvent.ALCHEMY_HELLENISTIC;
         switch (name) {
             case "find":
                 try {
