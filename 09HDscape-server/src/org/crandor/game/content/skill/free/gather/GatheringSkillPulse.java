@@ -11,7 +11,7 @@ import org.crandor.game.content.global.tutorial.TutorialStage;
 import org.crandor.game.content.skill.SkillPulse;
 import org.crandor.game.content.skill.Skills;
 import org.crandor.game.content.skill.member.farming.wrapper.PatchWrapper;
-import org.crandor.game.events.GlobalEventManager;
+import org.crandor.game.events.GlobalEvent;
 import org.crandor.game.node.entity.impl.Projectile;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.info.portal.Perks;
@@ -344,7 +344,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 	private int calculateRewardAmount(int reward) {
 		int amount = 1;
 		// Event doubles resources
-		if (GlobalEventManager.get().isActive("Harvesting doubles")) {
+		if (GlobalEvent.HARVESTING_DOUBLES.isActive()) {
 			amount *= 2;
 		}
 		
@@ -358,7 +358,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 				amount += 1;
 				player.sendMessage("Through the power of the varrock armour you receive an extra ore.");
 			}
-			// If the player has a skillcape, 10% chance of finding an extra item
+			// If the player has a skill cape, 10% chance of finding an extra item
 			else if (isMining && !isMiningEssence && SkillcapePerks.hasSkillcapePerk(player, SkillcapePerks.MINING) && RandomFunction.getRandom(100) <= 10) {
 				amount += 1;
 				player.sendNotificationMessage("Your " + player.getEquipment().get(EquipmentContainer.SLOT_CAPE).getName() + " allows you to obtain two ores from this rock!");

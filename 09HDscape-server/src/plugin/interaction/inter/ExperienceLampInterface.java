@@ -76,9 +76,9 @@ public final class ExperienceLampInterface extends ComponentPlugin {
 			player.getAudioManager().send(SOUND);
 			player.getInventory().remove(lamp);
 			player.getInterfaceManager().close();
-			int x = player.getSkills().getStaticLevel(skillType.skill);
+			int skillLevel = player.getSkills().getStaticLevel(skillType.skill);
 			int modifier = 10;
-			double experience = x * modifier;
+			double experience = skillLevel * modifier;
 			if (type != null && type != Lamps.GENIE_LAMP) {
 				player.getDialogueInterpreter().open(70099, new Object[] { "The lamp gives you " + (int) type.getExp() + " " + Skills.SKILL_NAME[skillType.skill] + " experience." });
 				experience =  type.getExp() / Skills.EXPERIENCE_MULTIPLIER;
@@ -99,7 +99,29 @@ public final class ExperienceLampInterface extends ComponentPlugin {
 	 * @author 'Vexia
 	 */
 	public enum SkillInterface {
-		ATTACK(29, Skills.ATTACK), STRENGTH(30, Skills.STRENGTH), RANGE(32, Skills.RANGE), MAGIC(35, Skills.MAGIC), DEFENCE(31, Skills.DEFENCE), CRAFTING(39, Skills.CRAFTING), HITPOINTS(34, Skills.HITPOINTS), PRAYER(33, Skills.PRAYER), AGILITY(36, Skills.AGILITY), HERBLORE(37, Skills.HERBLORE), THIEVING(38, Skills.THIEVING), FISHING(43, Skills.FISHING), RUNECRAFTING(47, Skills.RUNECRAFTING), SLAYER(48, Skills.SLAYER), FARMING(50, Skills.FARMING), MINING(41, Skills.MINING), SMITHING(42, Skills.SMITHING), HUNTER(49, Skills.HUNTER), SUMMONING(52, Skills.SUMMONING), COOKING(45, Skills.COOKING), FIREMAKING(44, Skills.FIREMAKING), WOODCUTTING(46, Skills.WOODCUTTING), FLETCHING(40, Skills.FLETCHING);
+		ATTACK(29, Skills.ATTACK),
+		STRENGTH(30, Skills.STRENGTH),
+		RANGE(32, Skills.RANGE),
+		MAGIC(35, Skills.MAGIC),
+		DEFENCE(31, Skills.DEFENCE),
+		CRAFTING(39, Skills.CRAFTING),
+		HITPOINTS(34, Skills.HITPOINTS),
+		PRAYER(33, Skills.PRAYER),
+		AGILITY(36, Skills.AGILITY),
+		HERBLORE(37, Skills.HERBLORE),
+		THIEVING(38, Skills.THIEVING),
+		FISHING(43, Skills.FISHING),
+		RUNECRAFTING(47, Skills.RUNECRAFTING),
+		SLAYER(48, Skills.SLAYER),
+		FARMING(50, Skills.FARMING),
+		MINING(41, Skills.MINING),
+		SMITHING(42, Skills.SMITHING),
+		HUNTER(49, Skills.HUNTER),
+		SUMMONING(52, Skills.SUMMONING),
+		COOKING(45, Skills.COOKING),
+		FIREMAKING(44, Skills.FIREMAKING),
+		WOODCUTTING(46, Skills.WOODCUTTING),
+		FLETCHING(40, Skills.FLETCHING);
 
 		/**
 		 * Constructs a new {@code ExperienceLampInterface} {@code Object}.

@@ -154,7 +154,7 @@ public final class LoginConfiguration {
 			return;
 		}
 		player.getPacketDispatch().sendMessage("Welcome to " + GameWorld.getName() + ".");
-		player.getPacketDispatch().sendMessage("You are currently playing in beta version 1.2");
+		//player.getPacketDispatch().sendMessage("You are currently playing in beta version 1.2");
 		if (player.getDetails().isMuted()) {
 			player.getPacketDispatch().sendMessage("You are muted.");
 			player.getPacketDispatch().sendMessage("To prevent further mutes please read the rules.");

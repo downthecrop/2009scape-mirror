@@ -2,7 +2,7 @@ package org.crandor.game.content.skill.member.thieving;
 
 import org.crandor.game.content.global.ttrail.ClueLevel;
 import org.crandor.game.content.global.ttrail.ClueScrollPlugin;
-import org.crandor.game.events.GlobalEventManager;
+import org.crandor.game.events.GlobalEvent;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.npc.drop.DropFrequency;
 import org.crandor.game.node.entity.player.Player;
@@ -175,7 +175,7 @@ public enum Pickpocket {
 		// Calculate any bonus multipliers
 		int bonusMultiplier = 1;
 		if (loot[0] == 995) {
-			if(GlobalEventManager.get().isActive("Thieves jackpot")) {
+			if(GlobalEvent.THIEVES_JACKPOT.isActive()) {
 				bonusMultiplier *= 3;
 			}
 		}
