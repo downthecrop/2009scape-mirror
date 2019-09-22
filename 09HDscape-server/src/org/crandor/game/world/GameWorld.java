@@ -139,7 +139,7 @@ public final class GameWorld {
         switch(cfTicks) {
             case 100:
                 if (checkDay()) {
-                    GlobalEventManager.get().activate("Clone Fest", null);
+                    GlobalEventManager.get().activate("Clone Fest", null, 2000);
                     if (GlobalEventManager.get().isActive("Clone Fest")) {
                         int size = 20;
                         if (PVPAIPActions.pvp_players == null) {
@@ -162,15 +162,7 @@ public final class GameWorld {
                     }
                 }
                 break;
-            case 1100:
-                if (PVPAIPActions.pvp_players == null) {
-                    GlobalEventManager.get().deactivate("Clone Fest");
-                }
-                break;
-            case 1500:
-                GlobalEventManager.get().deactivate("Clone Fest");
-                break;
-            case 1900:
+            case 2100:
                 cfTicks = 0;
                 break;
         }

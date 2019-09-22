@@ -58,18 +58,20 @@ public class GlobalEventManager implements CallBack {
 				
 				while(iterator.hasNext()) {
 					Map.Entry<String, Long> entry = iterator.next();
+					Long ticksRemaining = entry.getValue();
 					if (entry.getValue() > 0) {
-						entry.setValue(entry.getValue() - 1);
-						if (entry.getValue() == 3000)
+						entry.setValue(--ticksRemaining);
+						if (ticksRemaining == 3000)
 							message("You have 30 minutes before the " + entry.getKey() + " event ends on world " + GameWorld.getSettings().getWorldId() + ".");
 							
-						if (entry.getValue() <= 0) {
+						if (ticksRemaining <= 0) {
 							message("The " + entry.getKey() + " event has now ended on world " + GameWorld.getSettings().getWorldId() + ".");
 						}
+						System.out.println("The " + entry.getKey() + " event has " + ticksRemaining + " ticks remaining");
 					}
 				}
 				
-				if (tick == 50) {
+				if (tick == 100) {
 					tick = 0;
 					save();
 				}
