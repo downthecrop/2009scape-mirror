@@ -100,7 +100,7 @@ public class GlobalEventManager implements CallBack {
 
 			StringBuilder query = new StringBuilder();
 
-			query.append("INSERT INTO `globalevents` ");
+			query.append("INSERT INTO `global_events` ");
 			query.append("(`eventName`,`eventTime`,`worldId`)");
 			query.append(" VALUES(");
 			
@@ -123,7 +123,7 @@ public class GlobalEventManager implements CallBack {
 		try {
 			Results result = null;
 			
-			result = new Results(GameWorld.getDatabaseManager().query("server", "SELECT * FROM `globalevents` WHERE worldid='" + GameWorld.getSettings().getWorldId() + "'"));
+			result = new Results(GameWorld.getDatabaseManager().query("server", "SELECT * FROM `global_events` WHERE worldid='" + GameWorld.getSettings().getWorldId() + "'"));
 
 			while (!result.empty()) {
 				String eventName = result.string("eventName");
