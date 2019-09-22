@@ -5,8 +5,6 @@ import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.callback.CallBack;
 import org.crandor.game.world.repository.Repository;
-import org.crandor.net.amsc.MSPacketRepository;
-import org.crandor.net.amsc.WorldCommunicator;
 import org.crandor.tools.mysql.Results;
 
 import java.util.HashMap;
