@@ -104,7 +104,7 @@ public enum Perks {
 		if (!player.hasPerk(DOUBLE_TROUBLE) || RandomFunction.random(maxRand) > 10) {
 			return false;
 		}
-		// Give the player an extra item!
+		// Give the player the extra item(s)!
 		if (ground) {
 			player.getInventory().add(item, player);
 		} else {

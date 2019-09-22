@@ -43,11 +43,15 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 	 */
 	private boolean isMining;
 
-
 	/**
 	 * Is the player is mining essence.
 	 */
 	private boolean isMiningEssence;
+
+	/**
+	 * Is the player is mining gems.
+	 */
+	private boolean isMiningGems;
 
 	/**
 	 * Is the player is woodcutting.
@@ -84,6 +88,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 		}
 		isMining = resource.getSkillId() == Skills.MINING;
 		isMiningEssence = resource == SkillingResource.RUNE_ESSENCE;
+		isMiningGems = resource.getReward() == SkillingResource.GEM_ROCK_0.getReward();
 		isWoodcutting = resource.getSkillId() == Skills.WOODCUTTING;
 		super.start();
 	}
@@ -152,87 +157,24 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 		}
 		int reward = resource.getReward();
 		if (reward > 0) {
-			// Convert to pure essence if the player is above level 30 mining
-			if (isMiningEssence && player.getSkills().getLevel(Skills.MINING) >= 30) {
-				reward = 7936;
-			}
+			reward = calculateReward(reward);
 			applyAchievementTask(reward);
-			// 3239: Hollow tree (bark)
-			if (reward != 3239 || RandomFunction.random(100) < 10) {
-				
-				if (resource == SkillingResource.SANDSTONE || resource == SkillingResource.GRANITE) {
-					int value = RandomFunction.randomize(resource == SkillingResource.GRANITE ? 3 : 4);
-					reward += value << 1;
-					player.getSkills().addExperience(resource.getSkillId(), value * 10, true);
-				}
-				int amount = 1;
-				if (GlobalEventManager.get().isActive("Harvesting doubles")) {
-					amount *= 2;
-				}
-				player.getInventory().add(new Item(reward, amount));
-				if (reward == SkillingResource.CLAY_0.getReward()) {
-					if (player.getEquipment().contains(11074, 1)) {
-						player.getSavedData().getGlobalData().incrementBraceletOfClay();
-						if (player.getSavedData().getGlobalData().getBraceletClayUses() >= 28) {
-							player.getSavedData().getGlobalData().setBraceletClayUses(0);
-							player.getEquipment().remove(new Item(11074));
-							player.sendMessage("Your bracelet of clay has disinegrated.");
-						}
-						reward = 1761;
-					}
-				}
-				boolean gem = false;
-				if (reward == SkillingResource.GEM_ROCK_0.getReward()) {
-					gem = true;
-					int random = RandomFunction.random(100);
-					List<Integer> gems = new ArrayList<>();
-					if (random < 2) {
-						gems.add(1617);
-					} else if (random < 25) {
-						gems.add(1619);
-						gems.add(1623);
-						gems.add(1621);
-					} else if (random < 40) {
-						gems.add(1629);
-					} else {
-						gems.add(1627);
-						gems.add(1625);
-					}
-					reward = gems.get(RandomFunction.random(gems.size()));
-					if (reward == 1629) {
-						if (!player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).isComplete(1, 11)) {
-							player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).updateTask(player, 1, 11, true);
-						}
-					}
-				}
-				if (isMining && player.getSavedData().getGlobalData().getStarSpriteDelay() > System.currentTimeMillis() && TimeUnit.MILLISECONDS.toMinutes(player.getSavedData().getGlobalData().getStarSpriteDelay() - System.currentTimeMillis()) >= 1425) {
-					player.getInventory().add(new Item(reward, 1));
-				} else if (isMining && !isMiningEssence && player.getInventory().freeSlots() != 0 && player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).getLevel() != -1 && player.getAchievementDiaryManager().checkMiningReward(reward) && RandomFunction.random(100) <= 10) {
-					player.getInventory().add(new Item(reward, 1));
-					player.sendMessage("Through the power of the varrock armour you receive an extra ore.");
-				} else if (isMining && !isMiningEssence && SkillcapePerks.hasSkillcapePerk(player, SkillcapePerks.MINING)) {
-					// If the player has a skillcape, 10% chance of finding extra
-					if (RandomFunction.getRandom(100) <= 10) {
-						player.getSkills().addExperience(resource.getSkillId(), resource.getExperience(), true);
-						player.getInventory().add(new Item(reward, 1), player);
-						player.sendNotificationMessage("Your " + player.getEquipment().get(EquipmentContainer.SLOT_CAPE).getName() + " allows you to obtain two ores from this rock!");
-					}
-				} else {
-					SkillingPets.checkPetDrop(player, isMining ? SkillingPets.GOLEM : SkillingPets.BEAVER);
-					Perks.addDouble(player, new Item(reward, 1));
-				}
-				if (gem) {
-					String gemName = ItemDefinition.forId(reward).getName().toLowerCase();
-					player.sendMessage("You get " + (StringUtils.isPlusN(gemName) ? "an" : "a") + " " + gemName + ".");
-				} else if (resource == SkillingResource.DRAMEN_TREE) {
-					player.getPacketDispatch().sendMessage("You cut a branch from the Dramen tree.");
-				} else {
-					player.getPacketDispatch().sendMessage("You get some " + ItemDefinition.forId(reward).getName().toLowerCase() + ".");
-				}
-				if (reward == 3239) {
-					player.getSkills().addExperience(resource.getSkillId(), 275.2, true);
-				}
+			// Give the player the items
+			int rewardAmount = calculateRewardAmount(reward);
+			player.getInventory().add(new Item(reward, rewardAmount));
+			// Apply the experience points
+			double experience = calculateExperience(reward, rewardAmount);
+			player.getSkills().addExperience(resource.getSkillId(), experience, true);
+			// Send a message to the player
+			if (isMiningGems) {
+				String gemName = ItemDefinition.forId(reward).getName().toLowerCase();
+				player.sendMessage("You get " + (StringUtils.isPlusN(gemName) ? "an" : "a") + " " + gemName + ".");
+			} else if (resource == SkillingResource.DRAMEN_TREE) {
+				player.getPacketDispatch().sendMessage("You cut a branch from the Dramen tree.");
+			} else {
+				player.getPacketDispatch().sendMessage("You get some " + ItemDefinition.forId(reward).getName().toLowerCase() + ".");
 			}
+			// Calculate if the player should receive a bonus gem
 			if (!isMiningEssence && isMining) {
 				int chance = 282;
 				boolean altered = false;
@@ -256,23 +198,25 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 					}
 				}
 			}
+			// Calculate if the player should receive a bonus birds nest
+			if (isWoodcutting) {
+				int chance = 282;
+				if (player.getDetails().getShop().hasPerk(Perks.BIRD_MAN)) {
+					chance /= 1.5;
+				}
+				if (SkillcapePerks.hasSkillcapePerk(player, SkillcapePerks.WOODCUTTING)) {
+					chance /= 1.88;
+				}
+				if (RandomFunction.random(chance) == 0) {
+					BirdNest.drop(player);
+				}
+			}
 		}
+		// Tutorial stuff, maybe?
 		if (tutorialStage == 7) {
 			TutorialStage.load(player, 8, false);
 		}
-		if (!isMining) {
-			int chance = 282;
-			if (player.getDetails().getShop().hasPerk(Perks.BIRD_MAN)) {
-				chance /= 1.5;
-			}
-			if (SkillcapePerks.hasSkillcapePerk(player, SkillcapePerks.WOODCUTTING)) {
-				chance /= 1.88;
-			}
-			if (RandomFunction.random(chance) == 0) {
-				BirdNest.drop(player);
-			}
-		}
-		player.getSkills().addExperience(resource.getSkillId(), resource.getExperience(), true);
+		// not sure what this is exactly
 		if (resource.getRespawnRate() != 0) {
 			int charge = 1000 / resource.getRewardAmount();
 			node.setCharge(node.getCharge() - RandomFunction.random(charge, charge << 2));
@@ -322,6 +266,11 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 				player.getAchievementDiaryManager().updateTask(player, DiaryType.KARAMJA, 0, 2, true);
 			}
 		}
+		if (reward == 1629) {
+			if (!player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).isComplete(1, 11)) {
+				player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).updateTask(player, 1, 11, true);
+			}
+		}
 	}
 
 	/**
@@ -335,6 +284,116 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 		double clientRatio = Math.random() * ((level - resource.getLevel()) * (1.0 + tool.getRatio()));
 		return hostRatio < clientRatio;
 	}
+	
+	private int calculateReward(int reward) {
+		// If the player is mining sandstone or granite, then i'm not sure what this does?
+		if (resource == SkillingResource.SANDSTONE || resource == SkillingResource.GRANITE) {
+			int value = RandomFunction.randomize(resource == SkillingResource.GRANITE ? 3 : 4);
+			reward += value << 1;
+			player.getSkills().addExperience(resource.getSkillId(), value * 10, true);
+		}
+		
+		// If the player is mining clay
+		else if (reward == SkillingResource.CLAY_0.getReward()) {
+			// Check if they have a bracelet of clay equiped
+			if (player.getEquipment().contains(11074, 1)) {
+				player.getSavedData().getGlobalData().incrementBraceletOfClay();
+				if (player.getSavedData().getGlobalData().getBraceletClayUses() >= 28) {
+					player.getSavedData().getGlobalData().setBraceletClayUses(0);
+					player.getEquipment().remove(new Item(11074));
+					player.sendMessage("Your bracelet of clay has disinegrated.");
+				}
+				// Give soft clay
+				reward = 1761;
+			}
+		}
+		
+		// Convert rune essence to pure essence if the player is above level 30 mining
+		else if (isMiningEssence && player.getSkills().getLevel(Skills.MINING) >= 30) {
+			reward = 7936;
+		}
+		
+		// Calculate a random gem for the player
+		else if (isMiningGems) {
+			int random = RandomFunction.random(100);
+			List<Integer> gems = new ArrayList<>();
+			if (random < 2) {
+				gems.add(1617);
+			} else if (random < 25) {
+				gems.add(1619);
+				gems.add(1623);
+				gems.add(1621);
+			} else if (random < 40) {
+				gems.add(1629);
+			} else {
+				gems.add(1627);
+				gems.add(1625);
+			}
+			reward = gems.get(RandomFunction.random(gems.size()));
+		}
+		
+		return reward;
+	}
+
+	/**
+	 * Calculate the total amount of items the player should receive
+	 * @return amount of items
+	 */
+	private int calculateRewardAmount(int reward) {
+		int amount = 1;
+		// Event doubles resources
+		if (GlobalEventManager.get().isActive("Harvesting doubles")) {
+			amount *= 2;
+		}
+		
+		if (isMining && !isMiningEssence) {
+			// Not sure what this bonus is for
+			if (isMining && player.getSavedData().getGlobalData().getStarSpriteDelay() > System.currentTimeMillis() && TimeUnit.MILLISECONDS.toMinutes(player.getSavedData().getGlobalData().getStarSpriteDelay() - System.currentTimeMillis()) >= 1425) {
+				amount += 1;
+			}
+			// Not sure what this bonus is for
+			else if (isMining && !isMiningEssence && player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).getLevel() != -1 && player.getAchievementDiaryManager().checkMiningReward(reward) && RandomFunction.random(100) <= 10) {
+				amount += 1;
+				player.sendMessage("Through the power of the varrock armour you receive an extra ore.");
+			}
+			// If the player has a skillcape, 10% chance of finding an extra item
+			else if (isMining && !isMiningEssence && SkillcapePerks.hasSkillcapePerk(player, SkillcapePerks.MINING) && RandomFunction.getRandom(100) <= 10) {
+				amount += 1;
+				player.sendNotificationMessage("Your " + player.getEquipment().get(EquipmentContainer.SLOT_CAPE).getName() + " allows you to obtain two ores from this rock!");
+			}
+		}
+		
+		// 3239: Hollow tree (bark) 10% chance of obtaining
+		if (reward == 3239 && RandomFunction.random(100) >= 10) {
+			amount = 0;
+		}
+		
+		SkillingPets.checkPetDrop(player, isMining ? SkillingPets.GOLEM : SkillingPets.BEAVER);
+		Perks.addDouble(player, new Item(reward, 1));
+		
+		return amount;
+	}
+
+	/**
+	 * Calculate the total experience the player should receive
+	 * @return amount of experience
+	 */
+	private double calculateExperience(int reward, int amount) {
+		double experience = resource.getExperience();
+		
+		// Bark
+		if (reward == 3239) {
+			// If we receive the item, give the full experience points otherwise give the base amount
+			if (amount >= 1) {
+				experience = 275.2;
+			} else {
+				amount = 1;
+			}
+		}
+		
+		return experience * amount;
+	}
+	
 
 	@Override
 	public void message(int type) {
