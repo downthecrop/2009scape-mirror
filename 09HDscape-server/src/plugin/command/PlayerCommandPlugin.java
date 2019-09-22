@@ -2,7 +2,7 @@ package plugin.command;
 
 import org.crandor.ServerConstants;
 import org.crandor.game.component.Component;
-import org.crandor.game.content.global.tutorial.TutorialStage;
+import org.crandor.game.events.GlobalEvent;
 import org.crandor.game.events.GlobalEventManager;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.info.Rights;
@@ -15,7 +15,6 @@ import org.crandor.game.system.command.CommandSet;
 import org.crandor.game.system.communication.ClanRepository;
 import org.crandor.game.system.communication.CommunicationInfo;
 import org.crandor.game.world.GameWorld;
-import org.crandor.game.world.map.Location;
 import org.crandor.game.world.repository.Repository;
 import org.crandor.net.amsc.WorldCommunicator;
 import org.crandor.plugin.InitializablePlugin;
@@ -298,6 +297,22 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 		if (player.getInterfaceManager().isOpened()) {
 			player.sendMessage("Finish what you're currently doing.");
 			return;
+		}
+		player.getInterfaceManager().open(new Component(275));
+		//CLear old data
+		for (int i = 0; i < 311; i++) {
+			player.getPacketDispatch().sendString("", 275, i);
+		}
+		// Title
+		player.getPacketDispatch().sendString("<col=ecf0f1>" + GameWorld.getName() + " Events</col>", 275, 2);
+
+		// Content
+		int lineId = 11;
+		for(GlobalEvent event : GlobalEvent.values()){
+			player.getPacketDispatch().sendString("<col=ecf0f1>" + event.getName(), 275, lineId++);
+			if (event.isActive())
+				player.getPacketDispatch().sendString("<col=8e44ad>(active)", 275, lineId++);
+			player.getPacketDispatch().sendString("<col=2c3e50>" +  event.getDescription(), 275, lineId++);
 		}
 	}
 
