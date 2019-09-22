@@ -161,7 +161,7 @@ public class GlobalEventManager implements CallBack {
 		// start the event after building the string
 		event.start(timeToAdd);
 		message(message.toString());
-		player.getPacketDispatch().sendMessage(event.getDescription());
+		player.sendMessage(event.getDescription());
 
 		return this;
 	}
@@ -170,7 +170,7 @@ public class GlobalEventManager implements CallBack {
 		event.start(6000);
 		message(event.getName() + " event is now active, and will run for an hour!");
 		for (Player player : Repository.getPlayers()) {
-			player.getPacketDispatch().sendMessage(event.getDescription());
+			player.sendMessage(event.getDescription());
 		}
 		return this;
 	}
