@@ -110,17 +110,9 @@ public class GlobalEventManager implements CallBack {
 		return message(message, tag, "<col=3498db>");
 	}
 
-	public GlobalEventManager notify(String message) {
-		return message(message, true, "<col=3498db>");
-	}
-
-	public GlobalEventManager notify(String message, boolean tag) {
-		return message(message, tag, "<col=3498db>");
-	}
-
 	public GlobalEventManager message(String message, boolean tag, String color) {
 		for (Player player : Repository.getPlayers()) {
-			player.getPacketDispatch().sendMessage(color + (tag ? "[Event Manager] " : "") + message);
+			player.sendMessage(color + (tag ? "[Event Manager] " : "") + message);
 		}
 		return this;
 	}
@@ -161,7 +153,7 @@ public class GlobalEventManager implements CallBack {
 		// start the event after building the string
 		event.start(timeToAdd);
 		message(message.toString());
-		player.sendMessage(event.getDescription());
+		message(event.getDescription(), false, "ecf0f1");
 
 		return this;
 	}
@@ -169,9 +161,7 @@ public class GlobalEventManager implements CallBack {
 	public GlobalEventManager activateHourly(GlobalEvent event) {
 		event.start(6000);
 		message(event.getName() + " event is now active, and will run for an hour!");
-		for (Player player : Repository.getPlayers()) {
-			player.sendMessage(event.getDescription());
-		}
+		message(event.getDescription(), false, "ecf0f1");
 		return this;
 	}
 	
