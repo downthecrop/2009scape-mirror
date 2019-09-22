@@ -62,12 +62,11 @@ public class GlobalEventManager implements CallBack {
 					if (entry.getValue() > 0) {
 						entry.setValue(--ticksRemaining);
 						if (ticksRemaining == 3000)
-							message("You have 30 minutes before the " + entry.getKey() + " event ends on world " + GameWorld.getSettings().getWorldId() + ".");
+							message("You have 30 minutes before the " + entry.getKey() + " event ends.");
 							
 						if (ticksRemaining <= 0) {
-							message("The " + entry.getKey() + " event has now ended on world " + GameWorld.getSettings().getWorldId() + ".");
+							message("The " + entry.getKey() + " event has now ended.");
 						}
-						System.out.println("The " + entry.getKey() + " event has " + ticksRemaining + " ticks remaining");
 					}
 				}
 				
@@ -213,9 +212,9 @@ public class GlobalEventManager implements CallBack {
 					notify("The " + eventName + " event is live, clones are located near the mage arena.");
 				} else {
 					if (entry.getValue() == 0) {
-						message("The " + eventName + " event has been activated" + (player == null ? "" : " by " + player.getUsername()) + ".");
+						message("The " + eventName + " event has been activated for " + Math.round(timeToAdd / 100) + " minutes" + (player == null ? "" : " by " + player.getUsername()) + ".");
 					} else {
-						message("The " + eventName + " event has been extended for another hour" + (player == null ? "" : " by " + player.getUsername()) + ".");
+						message("The " + eventName + " event has been extended by " + Math.round(timeToAdd / 100) + " minutes" + (player == null ? "" : " by " + player.getUsername()) + ".");
 					}
 				}
 				entry.setValue(entry.getValue() + timeToAdd);
