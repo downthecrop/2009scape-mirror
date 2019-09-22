@@ -37,11 +37,11 @@ public class GlobalEventManager implements CallBack {
 					if (ticksRemaining > 0) {
 						event.tick();
 						--ticksRemaining;
-						if (ticksRemaining % 3000 == 0)
-							message("You have " + Math.round(ticksRemaining / 100) + " minutes before the " + event.getName() + " event ends.");
-							
 						if (ticksRemaining <= 0)
 							message("The " + event.getName() + " event has now ended.");
+						else if (ticksRemaining % 3000 == 0)
+							message("You have " + Math.round(ticksRemaining / 100) + " minutes before the " + event.getName() + " event ends.");
+							
 					}
 				}
 				
