@@ -5,7 +5,7 @@ import org.crandor.game.component.ComponentDefinition;
 import org.crandor.game.component.ComponentPlugin;
 import org.crandor.game.content.global.Lamps;
 import org.crandor.game.content.skill.Skills;
-import org.crandor.game.events.GlobalEventManager;
+import org.crandor.game.events.GlobalEvent;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.link.audio.Audio;
 import org.crandor.game.node.item.Item;
@@ -87,7 +87,7 @@ public final class ExperienceLampInterface extends ComponentPlugin {
 					experience /= 2;	
 				}
 			} else {
-				player.getDialogueInterpreter().open(70099, new Object[] { "The lamp gives you " + (experience * (Skills.EXPERIENCE_MULTIPLIER * (GlobalEventManager.get().isActive("XP Fever") ? 2 : 1))) + " " + Skills.SKILL_NAME[skillType.skill] + " experience." });
+				player.getDialogueInterpreter().open(70099, new Object[] { "The lamp gives you " + (experience * (Skills.EXPERIENCE_MULTIPLIER * (GlobalEvent.XP_FEVER.isActive() ? 2 : 1))) + " " + Skills.SKILL_NAME[skillType.skill] + " experience." });
 			}
 			player.getSkills().addExperience(skillType.skill, experience, false);
 		}

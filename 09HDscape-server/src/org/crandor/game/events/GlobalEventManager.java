@@ -8,11 +8,6 @@ import org.crandor.game.world.callback.CallBack;
 import org.crandor.game.world.repository.Repository;
 import org.crandor.tools.mysql.Results;
 
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-
 /**
  * Class to handle donated events.
  * 
