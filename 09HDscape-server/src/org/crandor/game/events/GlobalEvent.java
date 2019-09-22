@@ -7,7 +7,7 @@ public enum GlobalEvent {
 	GOLDEN_RETRIEVER("All gold dropped by monsters will be automatically banked for you"), // Not implemented
 	THIEVES_JACKPOT("Receive 3 x more coins when thieving"),
 	GOLDEN_ESSENCE("Receive 3 x more runes when runecrafting"),
-	CLONE_FEST("20 x PVP clones have been spawned in the wilderness near the mage bank."), // Not implemented
+	CLONE_FEST("20 clones are been spawned in the wilderness near the mage arena."), // Not implemented
 	TRY_YOUR_LUCK("Mobs will drop 40% more items when killed"),
 	CRAZY_SEEDS("Mobs will drop 2 x more seeds when killed"),
 	CHARMED("Mobs will drop 2 x more charms when killed"),
