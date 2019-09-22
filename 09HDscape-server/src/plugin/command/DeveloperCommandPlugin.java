@@ -104,6 +104,8 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
     @SuppressWarnings("deprecation")
     @Override
     public boolean parse(final Player player, String name, String[] args) {
+        String[] eventNameArr;
+        String eventName;
         switch (name) {
             case "find":
                 try {
@@ -179,9 +181,26 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
                 break;
 
             case "eventactivate":
-                String[] eventNameArr = Arrays.copyOfRange(args, 1, args.length);
-                String eventName = String.join(" ", eventNameArr);
+            case "eventstart":
+            case "eventbegin":
+            case "activateevent":
+            case "startevent":
+            case "beginevent":
+                eventNameArr = Arrays.copyOfRange(args, 1, args.length);
+                eventName = String.join(" ", eventNameArr);
                 player.sendMessage("You have activated the " + eventName + " event!");
+                GlobalEventManager.get().activate(eventName, null);
+                break;
+
+            case "eventdeactivate":
+            case "eventend":
+            case "eventfinish":
+            case "deactivateevent":
+            case "endevent":
+            case "finishevent":
+                eventNameArr = Arrays.copyOfRange(args, 1, args.length);
+                eventName = String.join(" ", eventNameArr);
+                player.sendMessage("You have deactivated the " + eventName + " event!");
                 GlobalEventManager.get().activate(eventName, null);
                 break;
 
@@ -217,12 +236,6 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
                     }
                     PVPAIPActions.syncBotThread(player);
                 }
-                break;
-            case "deactivatexp":
-                GlobalEventManager.get().deactivate("XPFever");
-                break;
-            case "deactivatecf":
-                GlobalEventManager.get().deactivate("Clone Fest");
                 break;
             case "reloaddb":
                 SQLManager.init();
