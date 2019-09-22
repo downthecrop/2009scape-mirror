@@ -61,10 +61,10 @@ public class GlobalEventManager implements CallBack {
 					if (entry.getValue() > 0) {
 						entry.setValue(entry.getValue() - 1);
 						if (entry.getValue() == 3000)
-							message("You have 30 minutes before " + entry.getKey() + " ends on world " + GameWorld.getSettings().getWorldId() + ".");
+							message("You have 30 minutes before the " + entry.getKey() + " event ends on world " + GameWorld.getSettings().getWorldId() + ".");
 							
 						if (entry.getValue() <= 0) {
-							message("The event " + entry.getKey() + " has now ended on world " + GameWorld.getSettings().getWorldId() + ".");
+							message("The " + entry.getKey() + " event has now ended on world " + GameWorld.getSettings().getWorldId() + ".");
 						}
 					}
 				}
@@ -166,11 +166,13 @@ public class GlobalEventManager implements CallBack {
 		
 	}
 	
-	
 	public GlobalEventManager deactivate(String eventName) {
-		
-		if (getEvents().get(eventName) == null) {
-			System.out.println("Failed to deactivate event " + eventName + ".");
+		return deactivate(eventName, false);
+	}
+	
+	public GlobalEventManager deactivate(String eventName, boolean forceMessage) {
+		// Only deactivate event if already active
+		if (!isActive(eventName) && !forceMessage) {
 			return this;
 		}
 		
@@ -179,14 +181,23 @@ public class GlobalEventManager implements CallBack {
 		while(iterator.hasNext()) {
 			Map.Entry<String, Long> entry = (Map.Entry<String, Long>) iterator.next();
 			if (entry.getKey().equalsIgnoreCase(eventName)) {
-				message(eventName + " has ended. A new event will begin soon.");
+				message(eventName + " event has ended.");
 				entry.setValue(0L);
 			}
 		}
 		return this;
 	}
 	
+	public GlobalEventManager activate(String eventName) {
+		return activate(eventName, null, 6000);
+	}
+	
 	public GlobalEventManager activate(String eventName, String name) {
+		return activate(eventName, name, 6000);
+	}
+	
+	public GlobalEventManager activate(String eventName, String name, int timeToAdd) {
+		if (timeToAdd <= 0) timeToAdd = 6000;
 		
 		Player player = Repository.getPlayerByDisplay(name);
 		Boolean eventStarted = false;
@@ -197,16 +208,15 @@ public class GlobalEventManager implements CallBack {
 			Map.Entry<String, Long> entry = (Map.Entry<String, Long>) iterator.next();
 			if (entry.getKey().equalsIgnoreCase(eventName)) {
 				if (eventName.equalsIgnoreCase("clone fest")) {
-					notify("The event " + eventName + " is live, clones are located near the mage");
-					notify("bank on world " + GameWorld.getSettings().getWorldId() + ".", false);
+					notify("The " + eventName + " event is live, clones are located near the mage arena.");
 				} else {
-					if (entry.getValue() != 0) {
-						message("The event " + eventName + " has been extended for another hour" + (player == null ? "" : " by " + player.getUsername()) + ".");
+					if (entry.getValue() == 0) {
+						message("The " + eventName + " event has been activated" + (player == null ? "" : " by " + player.getUsername()) + ".");
 					} else {
-						message("The event " + eventName + " has been activated" + (player == null ? "" : " by " + player.getUsername()) + " on world " + GameWorld.getSettings().getWorldId() + ".");
+						message("The " + eventName + " event has been extended for another hour" + (player == null ? "" : " by " + player.getUsername()) + ".");
 					}
 				}
-				entry.setValue(entry.getValue() + 6000);
+				entry.setValue(entry.getValue() + timeToAdd);
 				eventStarted = true;
 			}
 		}
