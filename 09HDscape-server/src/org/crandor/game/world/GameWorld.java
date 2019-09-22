@@ -135,10 +135,9 @@ public final class GameWorld {
         pulses.clear();
         ticks++;
         eventTicks++;
-        int idx = new Random().nextInt(hourlyEvent.length);
-        String random = hourlyEvent[idx];
-        switch(cfTicks++) {
-            case 50:
+        cfTicks++;
+        switch(cfTicks) {
+            case 100:
                 if (checkDay()) {
                     GlobalEventManager.get().activate("Clone Fest", null);
                     if (GlobalEventManager.get().isActive("Clone Fest")) {
@@ -163,33 +162,27 @@ public final class GameWorld {
                     }
                 }
                 break;
-            case 1000:
+            case 1100:
                 if (PVPAIPActions.pvp_players == null) {
                     GlobalEventManager.get().deactivate("Clone Fest");
                 }
                 break;
             case 1500:
-                if (PVPAIPActions.pvp_players == null) {
-                    GlobalEventManager.get().deactivate("Clone Fest");
-                }
+                GlobalEventManager.get().deactivate("Clone Fest");
                 break;
             case 1900:
                 cfTicks = 0;
                 break;
         }
         switch (eventTicks) {
-            case 100:
-                if (GlobalEventManager.get().getLastEvent() == random) {
-                    random = (hourlyEvent[idx]);
-                }
-                String event = random;
+        	// 2 minute gap between events
+            case 200:
+                int randomEventId = new Random().nextInt(hourlyEvent.length);
+                String event = hourlyEvent[randomEventId];
 
                 GlobalEventManager.get().setLastEvent(event);
                 GlobalEventManager.get().setCurrentEvent(event);
                 GlobalEventManager.get().activateHourly(event);
-                break;
-            case 6100:
-                GlobalEventManager.get().deactivate(GlobalEventManager.get().getCurrentEvent());
                 break;
             case 6200:
                 eventTicks = 0;
