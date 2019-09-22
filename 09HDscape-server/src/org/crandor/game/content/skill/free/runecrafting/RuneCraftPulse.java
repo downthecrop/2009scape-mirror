@@ -310,7 +310,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
 		}
 		
 		if(GlobalEventManager.get().isActive("Golden essence")) {
-			i *= 2;
+			i *= 3;
 		}
 		return i != 0 ? i : 1;
 	}
