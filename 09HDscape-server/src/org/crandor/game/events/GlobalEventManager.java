@@ -153,7 +153,7 @@ public class GlobalEventManager implements CallBack {
 		// start the event after building the string
 		event.start(timeToAdd);
 		message(message.toString());
-		message(event.getDescription(), false, "ecf0f1");
+		message(event.getDescription(), false, "<col=ecf0f1>");
 
 		return this;
 	}
@@ -161,7 +161,7 @@ public class GlobalEventManager implements CallBack {
 	public GlobalEventManager activateHourly(GlobalEvent event) {
 		event.start(6000);
 		message(event.getName() + " event is now active, and will run for an hour!");
-		message(event.getDescription(), false, "ecf0f1");
+		message(event.getDescription(), false, "<col=ecf0f1>");
 		return this;
 	}
 	
