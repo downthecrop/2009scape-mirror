@@ -184,7 +184,9 @@ public final class FishingPulse extends SkillPulse<NPC> {
 				if (GlobalEventManager.get().isActive("Plenty of fish"))
 					player.getInventory().add(fish.getItem());
 				SkillingPets.checkPetDrop(player, SkillingPets.HERON);
-				Perks.addDouble(player, fish.getItem());
+				final Item item = fish.getItem();
+			    player.getInventory().add(item);
+				Perks.addDouble(player, item);
 				player.getSkills().addExperience(Skills.FISHING, fish.getExperience(), true);
 				message(2);
 				if (TutorialSession.getExtension(player).getStage() == 13) {

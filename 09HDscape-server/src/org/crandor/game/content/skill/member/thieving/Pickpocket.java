@@ -162,6 +162,7 @@ public enum Pickpocket {
 		if (this == MARTIN_THE_MASTER_GARDENER) {
 			return RandomFunction.getChanceItem(MARTIN_REWARDS).getRandomItem();
 		}
+		// 5/250 chance for easy clue scroll?
 		if ((this == FEMALE_HAM_MEMBER || this == MALE_HAM_MEMBER) && RandomFunction.random(250) <= 5 && !player.getTreasureTrailManager().hasClue()) {
 			return ClueScrollPlugin.getClue(ClueLevel.EASY);
 		}
@@ -169,12 +170,16 @@ public enum Pickpocket {
 		if (loot.length == 1) {
 			loot = new int[] { loot[0], 1 };
 		}
+		
+
+		// Calculate any bonus multipliers
+		int bonusMultiplier = 1;
 		if (loot[0] == 995) {
 			if(GlobalEventManager.get().isActive("Thieves jackpot")) {
-				loot[1] *= 3;
+				bonusMultiplier *= 3;
 			}
 		}
-		return new Item(loot[0], loot[1]);
+		return new Item(loot[0], loot[1] * bonusMultiplier);
 	}
 
 	/**

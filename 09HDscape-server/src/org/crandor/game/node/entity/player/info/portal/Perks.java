@@ -100,8 +100,8 @@ public enum Perks {
 	 * @return the item.
 	 */
 	public static boolean addDouble(Player player, Item item, boolean ground, int maxRand) {
-		// 10 % chance to give an extra item
-		if (!player.hasPerk(DOUBLE_TROUBLE) || RandomFunction.random(maxRand) > 10) {
+		// 5% chance to give an extra item
+		if (!player.hasPerk(DOUBLE_TROUBLE) || RandomFunction.random(maxRand) > 5) {
 			return false;
 		}
 		// Give the player the extra item(s)!

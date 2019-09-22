@@ -161,7 +161,9 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 			applyAchievementTask(reward);
 			// Give the player the items
 			int rewardAmount = calculateRewardAmount(reward);
-			player.getInventory().add(new Item(reward, rewardAmount));
+			Item item = new Item(reward, rewardAmount);
+			player.getInventory().add(item);
+			Perks.addDouble(player, item);
 			// Apply the experience points
 			double experience = calculateExperience(reward, rewardAmount);
 			player.getSkills().addExperience(resource.getSkillId(), experience, true);
@@ -369,7 +371,6 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 		}
 		
 		SkillingPets.checkPetDrop(player, isMining ? SkillingPets.GOLEM : SkillingPets.BEAVER);
-		Perks.addDouble(player, new Item(reward, 1));
 		
 		return amount;
 	}

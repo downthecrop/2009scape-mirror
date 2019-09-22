@@ -81,7 +81,9 @@ public final class PotteryPulse extends SkillPulse<Item> {
 			if (pottery == PotteryItem.BOWL && player.getLocation().getX() == 3086) {
 				player.setAttribute("spun-bowl", true);
 			}
-			Perks.addDouble(player, pottery.getUnfinished());
+			final Item item = pottery.getUnfinished();
+		    player.getInventory().add(item);
+			Perks.addDouble(player, item);
 			player.getSkills().addExperience(Skills.CRAFTING, pottery.getExp(), true);
 			player.getPacketDispatch().sendMessage("You make the soft clay into " + (StringUtils.isPlusN(pottery.getUnfinished().getName()) ? "an" : "a") + " " + pottery.getUnfinished().getName().toLowerCase() + ".");
 		}

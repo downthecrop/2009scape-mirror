@@ -175,6 +175,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
 				if (altar == Altar.COSMIC && i.getAmount() == 56 && !player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).isComplete(2, 1)) {
 					player.getAchievementDiaryManager().updateTask(player, DiaryType.LUMBRIDGE, 2, 1, true);
 				}
+			    player.getInventory().add(i);
 				Perks.addDouble(player, i);
 				player.getSkills().addExperience(Skills.RUNECRAFTING, rune.getExperience() * amount, true);
 			}
@@ -193,7 +194,9 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
 						}
 					}
 					player.getSkills().addExperience(Skills.RUNECRAFTING, rune.getExperience() * 2, true);
-					Perks.addDouble(player, rune.getRune());
+					Item runeItem = rune.getRune();
+					player.getInventory().add(runeItem);
+					Perks.addDouble(player, runeItem);
 				}
 			}
 		}
@@ -300,6 +303,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
 				i++;
 			}
 		}
+		
 		if (player.hasPerk(Perks.RUNESTONE_KNOWLEDGE) && (altar == Altar.DEATH || altar == Altar.LAW || altar == Altar.COSMIC || altar == Altar.BLOOD || altar == Altar.NATURE)) {
 			i *= 2;
 		}

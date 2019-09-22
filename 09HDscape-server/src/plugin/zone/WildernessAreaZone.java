@@ -235,7 +235,9 @@ public class WildernessAreaZone extends MapZone implements Plugin<Object> {
 			}
 			node.transform(8667);
 			node.setAttribute("reward-tick", GameWorld.getTicks() + resource.getRespawnDuration());
-			Perks.addDouble(player, new Item(resource.getReward()));
+			final Item item = new Item(resource.getReward());
+		    player.getInventory().add(item);
+			Perks.addDouble(player, item);
 			player.getSkills().addExperience(resource.getSkillId(), resource.getExperience(), true);
 			return true;
 		}
