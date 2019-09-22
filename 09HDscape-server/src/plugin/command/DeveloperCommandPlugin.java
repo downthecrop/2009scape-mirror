@@ -188,7 +188,7 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
                 if (event == null)
                 	break;
 				GlobalEventManager.get().activate(event);
-                player.sendMessage("You have activated the " + eventName + " event!");
+                player.sendMessage("You have activated the " + event.getName() + " event!");
                 break;
 
             case "eventdeactivate":
@@ -203,7 +203,7 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
                 if (event == null)
                 	break;
 				GlobalEventManager.get().deactivate(event);
-                player.sendMessage("You have deactivated the " + eventName + " event!");
+                player.sendMessage("You have deactivated the " + event.getName() + " event!");
                 break;
 
             case "poison":

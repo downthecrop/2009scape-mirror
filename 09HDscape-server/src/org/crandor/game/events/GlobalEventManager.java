@@ -1,5 +1,6 @@
 package org.crandor.game.events;
 
+import org.crandor.Util;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
@@ -150,7 +151,6 @@ public class GlobalEventManager implements CallBack {
 	
 	public GlobalEventManager activate(GlobalEvent event, String name, int timeToAdd) {
 		if (timeToAdd <= 0) timeToAdd = 6000;
-		event.start(timeToAdd);
 
 		Player player = Repository.getPlayerByDisplay(name);
 		
@@ -162,7 +162,9 @@ public class GlobalEventManager implements CallBack {
 			message.append(" by " + player.getUsername());
 		}
 		message.append(".");
-		
+
+		// start the event after building the string
+		event.start(timeToAdd);
 		message(message.toString());
 		player.getPacketDispatch().sendMessage(event.getDescription());
 
@@ -171,7 +173,7 @@ public class GlobalEventManager implements CallBack {
 	
 	public GlobalEventManager activateHourly(GlobalEvent event) {
 		event.start(6000);
-		message(event.getName() + " is now active, and will run for an hour!");
+		message(event.getName() + " event is now active, and will run for an hour!");
 		for (Player player : Repository.getPlayers()) {
 			player.getPacketDispatch().sendMessage(event.getDescription());
 		}
@@ -221,7 +223,7 @@ public class GlobalEventManager implements CallBack {
 	
 	public static GlobalEvent getEvent(String name) {
 		for(GlobalEvent event : GlobalEvent.values()){
-			if (event.getName().equalsIgnoreCase(name))
+			if (event.getName().equalsIgnoreCase(name) || event.name().equalsIgnoreCase(Util.strToEnum(name)))
 				return event;
 		}
 		return null;

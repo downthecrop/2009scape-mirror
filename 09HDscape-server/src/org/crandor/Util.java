@@ -18,8 +18,7 @@ public class Util {
 	
 	public static String strToEnum(String name) {
 		name = name.toUpperCase();
-		name = name.replaceAll(" ", "_");
-		return capitalize(name);
+		return name.replaceAll(" ", "_");
 	}
 	
 	public static String enumToString(String name) {
