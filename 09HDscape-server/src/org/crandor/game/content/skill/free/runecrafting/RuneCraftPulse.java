@@ -3,6 +3,7 @@ package org.crandor.game.content.skill.free.runecrafting;
 import org.crandor.game.container.impl.EquipmentContainer;
 import org.crandor.game.content.skill.SkillPulse;
 import org.crandor.game.content.skill.Skills;
+import org.crandor.game.events.GlobalEventManager;
 import org.crandor.game.node.entity.impl.Animator.Priority;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.info.portal.Perks;
@@ -305,6 +306,10 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
 		}
 		
 		if (player.hasPerk(Perks.RUNESTONE_KNOWLEDGE) && (altar == Altar.DEATH || altar == Altar.LAW || altar == Altar.COSMIC || altar == Altar.BLOOD || altar == Altar.NATURE)) {
+			i *= 2;
+		}
+		
+		if(GlobalEventManager.get().isActive("Golden essence")) {
 			i *= 2;
 		}
 		return i != 0 ? i : 1;
