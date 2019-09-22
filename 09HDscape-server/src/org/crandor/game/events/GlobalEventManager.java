@@ -92,18 +92,12 @@ public class GlobalEventManager implements CallBack {
 	}
 	
 	public GlobalEventManager save() {
-		if (GameWorld.getDatabaseManager().update("server", "DELETE FROM `globalevents` WHERE worldid='" + GameWorld.getSettings().getWorldId() + "'") < 0)
-			return this;
-
 		Iterator<Entry<String, Long>> iterator = EVENTS.entrySet().iterator();
 		
 		while(iterator.hasNext()) {
 			
 			Map.Entry<String, Long> entry = iterator.next();
-			
-			if (entry.getValue() <= 0)
-				continue;
-			
+
 			StringBuilder query = new StringBuilder();
 
 			query.append("INSERT INTO `globalevents` ");
@@ -115,6 +109,9 @@ public class GlobalEventManager implements CallBack {
 			query.append("'" + GameWorld.getSettings().getWorldId() + "'");
 			
 			query.append(")");
+
+			query.append(" ON DUPLICATE KEY UPDATE ");
+			query.append("eventTime='" + entry.getValue() + "'");
 
 			GameWorld.getDatabaseManager().update("server", query.toString());
 
