@@ -78,7 +78,8 @@ public final class MajorUpdateWorker implements Runnable {
 	 * @throws InterruptedException When the thread is interrupted.
 	 */
 	private void sleep() throws InterruptedException {
-		StatisticsTab.reportPerformance((int) ((System.currentTimeMillis() - start) - 600));
+		// How many ticks off we are
+		StatisticsTab.reportPerformance((int) (System.currentTimeMillis() - start));
 		long duration = 600 - ((System.currentTimeMillis() - start) % 600);
 		if (duration > 0) {
 			Thread.sleep(duration);

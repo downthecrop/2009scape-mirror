@@ -439,7 +439,7 @@ public class StatisticsTab extends ConsoleTab {
         int space = (y / 2 - 10) / 4;
         g.setFont(new Font(null, Font.PLAIN, 9));
         for (int i = 0; i < 5; i++) {
-            g.setColor(Color.GRAY);
+            g.setColor(i == 0 ? Color.BLACK : Color.GRAY);
             g.drawLine(x, (int) zero.getY() - (space * i), c.getWidth() - 5, (int) zero.getY() - (space * i));
             g.drawLine(x, (int) zero.getY() + (space * i), c.getWidth() - 5, (int) zero.getY() + (space * i));
             g.setColor(Color.BLACK);
@@ -460,18 +460,17 @@ public class StatisticsTab extends ConsoleTab {
             int toPoint = index == 0 ? 0 : performanceQueue[index - 1];
             int toX = (count - i - 1) * statisticsZoom;
             int toY = (int) (-toPoint / (600D / (space * 4)));
+            System.out.println(fromY + " -> " + toY);
             if (fromY < 0) {
                 g.setColor(Color.RED);
             }
             g.drawLine((int) (zero.getX() + fromX), (int) (zero.getY() + fromY),
                     (int) (zero.getX() + toX), (int) (zero.getY() + toY));
-            if (fromY < 0) {
+            if (fromY >= 0) {
                 g.setColor(Color.GREEN);
             }
         }
         g.setColor(Color.BLACK);
-        //Draw horizontal line.
-        g.drawLine(x - 4, (int) zero.getY(), c.getWidth() - 2, (int) zero.getY());
         //Draw vertical line.
         g.drawLine(x, y + 4, x, 1);
         Point p = ((StatisticsTab) c).statisticMousePoint;
