@@ -83,10 +83,11 @@ public class PlayerTab extends ConsoleTab {
             public void actionPerformed(ActionEvent e) {
                 model.clear();
                 if (textField.getText() == null || textField.getText().length() < 1) {
+                	populatePlayerSearch();
                     return;
                 }
                 for (String name : playerNames) {
-                    if (name.toLowerCase().startsWith(textField.getText())) {
+                    if (name.toLowerCase().contains(textField.getText())) {
                         model.addElement(name);
                     }
                 }
@@ -151,8 +152,11 @@ public class PlayerTab extends ConsoleTab {
         }
         System.out.println(getPlayerNames().toString());
         for (File file : Objects.requireNonNull(f.listFiles())) {
-            playerNames.add(file.getName().replace(".save", "").trim());
-            model.addElement(file.getName().replace(".save", "").trim());
+        	String fileName = file.getName();
+        	if (!fileName.contains(".save")) continue;
+        	String playerName = fileName.replace(".save", "").trim();
+            playerNames.add(playerName);
+            model.addElement(playerName);
         }
     }
 
