@@ -460,7 +460,6 @@ public class StatisticsTab extends ConsoleTab {
             int toPoint = index == 0 ? 0 : performanceQueue[index - 1];
             int toX = (count - i - 1) * statisticsZoom;
             int toY = (int) (-toPoint / (600D / (space * 4)));
-            System.out.println(fromY + " -> " + toY);
             if (fromY < 0) {
                 g.setColor(Color.RED);
             }
