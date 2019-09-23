@@ -64,10 +64,10 @@ public final class Main {
 				System.out.println("Player [name=" + name + ", world=" + player.getWorldId() + ", active=" + player.isActive() + "].");
 			}
 		},
-		new Command("-update", "Calls an update on all the game servers (-update -1 to cancel).") {
+		new Command("-update", "[ticks]? Calls an update on all the game servers (-update -1 to cancel).") {
 			@Override
 			public void run(String...args) {
-				int ticks = Integer.parseInt(args[1]);
+				int ticks = args.length > 1 ? Integer.parseInt(args[1]) : 500;
 				for (GameServer server : WorldDatabase.getWorlds()) {
 					if (server != null && server.isActive()) {
 						WorldPacketRepository.sendUpdate(server, ticks);
