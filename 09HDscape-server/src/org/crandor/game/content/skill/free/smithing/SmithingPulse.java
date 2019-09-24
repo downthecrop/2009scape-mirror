@@ -62,7 +62,7 @@ public class SmithingPulse extends SkillPulse<Item> {
 			player.getDialogueInterpreter().sendDialogue("You need a hammer to work the metal with.");
 			return false;
 		}
-		if (TutorialSession.getExtension(player).getStage() <= TutorialSession.MAX_STAGE && node.getId() != Bars.BRONZE_DAGGER.getProduct()) {
+		if (TutorialSession.getExtension(player).getStage() < TutorialSession.MAX_STAGE && node.getId() != Bars.BRONZE_DAGGER.getProduct()) {
 			return false;
 		}
 		return true;
