@@ -74,8 +74,8 @@ public class PvMBots extends AIPlayer {
         if (creatures == null) {
             return false;
         }
-        if (!(creatures.isEmpty())) {
             bot.attack(creatures.get(RandomFunction.getRandom((creatures.size() - 1))));
+        if (!creatures.isEmpty()) {
             return true;
         } else {
             creatures = FindTargets(bot, radius);

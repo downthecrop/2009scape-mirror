@@ -189,7 +189,6 @@ public final class AIPCommandPlugin extends CommandPlugin {
                 PVPAIPActions.syncBotThread(player);
                 return true;
 
-
             case "bot":
                 PvMBotsBuilder.spawnLowest(player.getLocation());
                 return true;

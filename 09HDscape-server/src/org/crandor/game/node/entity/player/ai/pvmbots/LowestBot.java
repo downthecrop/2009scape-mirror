@@ -13,8 +13,7 @@ public class LowestBot extends PvMBots{
 	private int tick = 0;
 	
 	@Override
-	public void tick()
-	{
+	public void tick(){
 		super.tick();
 		
 		//Despawn
