@@ -83,11 +83,7 @@ public final class PhantuwtiFantstuwiFarSight extends DialoguePlugin {
 			break;
 		case 20:
 			interpreter.sendDialogues(npc, FacialExpression.NORMAL, "A lot of our time is spent adressing everyday sorts of", "things, plus we meditate a lot and ehhance our", "powers of mystical foresight.");
-			stage = 21;
-			break;
-		case 21:
-			interpreter.sendDialogues(npc, FacialExpression.NORMAL, "A lot of our time is spent adressing everyday sorts of", "things, plus we meditate a lot and ehhance our", "powers of mystical foresight.");
-			stage = 21;
+			stage = 31;
 			break;
 		case 30:
 			interpreter.sendDialogues(npc, FacialExpression.NORMAL, "Unfortunately no, sorry, but if adventure is what you", "seek, try checking through your quest list!");

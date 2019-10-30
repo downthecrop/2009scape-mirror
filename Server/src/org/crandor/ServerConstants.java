@@ -48,12 +48,12 @@ public final class ServerConstants {
 	/**
 	 * The start location for a fresh account.
 	 */
-	public static final Location START_LOCATION = Location.create(3088, 3491, 0);
+	public static final Location START_LOCATION = Location.create(3232, 3231, 0);
 	
 	/**
 	 * The main home teleport location.
 	 */
-	public static final Location HOME_LOCATION = Location.create(3088, 3491, 0);
+	public static final Location HOME_LOCATION = Location.create(3221, 3218, 0);
 	
 	/**
 	 * The teleport destinations.
