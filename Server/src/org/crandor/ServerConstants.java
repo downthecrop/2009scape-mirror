@@ -75,10 +75,14 @@ public final class ServerConstants {
 	};
 	
 	public static final Database[] DATABASES = {
-			new Database((SQLManager.LOCAL ? "localhost" : "keldagrim.org"), (SQLManager.LOCAL ? "server" : DATABASE_NAMES[0]), (SQLManager.LOCAL ? "root" : "keldagr1_user"), (SQLManager.LOCAL ? "" : "2jf4wkz$")),
-			new Database((SQLManager.LOCAL ? "localhost" : "keldagrim.org"), (SQLManager.LOCAL ? "global" : DATABASE_NAMES[1]), (SQLManager.LOCAL ? "root" : "keldagr1_user"), (SQLManager.LOCAL ? "" : "2jf4wkz$"))
+			new Database((SQLManager.LOCAL ? "localhost" : "keldagrim.org"), (SQLManager.LOCAL ? "server" : DATABASE_NAMES[0]), (SQLManager.LOCAL ? "root" : "keldagr1_user"), (SQLManager.LOCAL ? getDatabasePassword() : "2jf4wkz$")),
+			new Database((SQLManager.LOCAL ? "localhost" : "keldagrim.org"), (SQLManager.LOCAL ? "global" : DATABASE_NAMES[1]), (SQLManager.LOCAL ? "root" : "keldagr1_user"), (SQLManager.LOCAL ? getDatabasePassword() : "2jf4wkz$"))
 	};
-	
+
+	private static String getDatabasePassword() {
+		return "password123";
+	}
+
 	/**
 	 * If MySQL is enabled.
 	 */
