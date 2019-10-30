@@ -28,8 +28,8 @@ At any point, if you need help, you are free to join our Discord server at: http
 Since this portion of the guide is operating-system specific, you will either need basic database knowledge or a bit of help. Below are the things that need to be configured.
 ### General:
 - Configure root@localhost to have the password "password123"
-- Create a table in root named `server` and another named `global`
-- Import `09HDscape-server/server.sql` and `09HDscape-server/global.sql` into their respective tables
+- Create databases in root named `server` and another named `global`
+- Import `Server/server.sql` and `Server/global.sql` into their respective databases
 - Start the database
 
 ### Windows:
@@ -38,7 +38,7 @@ Since this portion of the guide is operating-system specific, you will either ne
 - Start the `Apache` and `MySQL` modules
 - Navigate to http://localhost/phpmyadmin/
 - Create 2 new tables named `server` and `global`
-- Import `09HDscape-server/server.sql` and `09HDscape-server/global.sql` into their respective tables
+- Import `Server/server.sql` and `Server/global.sql` into their respective databases
   - _Refer [here](https://www.thecodedeveloper.com/import-large-sql-files-xampp/) for help importing the `.sql` files_
 
 ## Step 4: Running the Server & Client
