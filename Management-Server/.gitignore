@@ -16,3 +16,4 @@ data/cache/
 *.userlibraries
 *.class
 data/players/**
+org/

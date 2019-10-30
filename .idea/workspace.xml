@@ -2,17 +2,75 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0dbfe935-8085-4dde-9815-06f8b3761458" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Client/src/org/runite/Client.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/world/GameSettings.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/world/GameSettings.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/runManagement.sh" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/runManagement.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/runServer.sh" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/runServer.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/Management-Server/.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/Main$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/Main$2.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/Main$3.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/Main$4.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/Main$5.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/Main$6.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/Main$7.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/Main$8.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/Main.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/ServerConstants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/classloader/ClassLoadServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/classloader/WorkerThread.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/launcher/Constants.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/launcher/Initializer$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/launcher/Initializer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/launcher/SplashFrame$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/launcher/SplashFrame.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/launcher/screen/InteractiveOverlay.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/launcher/screen/SplashScreen$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/launcher/screen/SplashScreen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/launcher/screen/impl/LoadingBar.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/EventProducer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/IoEventHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/IoReadEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/IoSession.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/IoWriteEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/NioReactor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/event/HSReadEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/event/HSWriteEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/event/PacketReadEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/event/PacketWriteEvent$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/event/PacketWriteEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/event/RegistryReadEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/event/RegistryWriteEvent.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/packet/IoBuffer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/packet/PacketHeader.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/packet/WorldPacketRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/producer/HSEventProducer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/producer/PacketEventProducer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/net/producer/RegistryEventProducer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/OperatingSystem.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/PunishmentStorage.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/ShutdownSequence.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/communication/ClanRank.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/communication/ClanRepository.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/communication/CommunicationInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/mysql/SQLColumn.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/mysql/SQLEntryHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/mysql/SQLManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/mysql/SQLTable.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/mysql/WorldListSQLHandler.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/util/ByteBufferUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/util/Command.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/util/EncryptionManager$BCrypt.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/util/EncryptionManager.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/util/PlayerDatabaseGen.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/util/StringUtils.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/system/util/TaskExecutor.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/world/GameServer.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/world/PlayerSession.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/world/WorldDatabase.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/world/info/CountryFlag.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/world/info/Response.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/world/info/UIDInfo.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/Management-Server/org/keldagrim/world/info/WorldInfo.class" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Management-Server/runManagement.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Management-Server/runManagement.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/runServer.sh" beforeDir="false" afterPath="$PROJECT_DIR$/Server/runServer.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/org/crandor/ServerConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/org/crandor/ServerConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/org/crandor/game/world/GameSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/org/crandor/game/world/GameSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/org/crandor/Server.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/org/crandor/Server.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -54,7 +112,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.Server">
+  <component name="RunManager" selected="Application.Management">
     <configuration name="Client" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.runite.Client" />
       <module name="09Scape" />
