@@ -80,7 +80,7 @@ public final class ServerConstants {
 	};
 
 	private static String getDatabasePassword() {
-		return "password123";
+		return "";
 	}
 
 	/**

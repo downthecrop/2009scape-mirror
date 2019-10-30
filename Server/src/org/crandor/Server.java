@@ -47,7 +47,7 @@ public final class Server {
 		if (GameWorld.getSettings().isGui()) {
 			try {
 				ConsoleFrame.getInstance().init();
-			} catch (HeadlessException e) {
+			} catch (Exception e) {
 				System.out.println("X11 server missing - launching server with no GUI!");
 			}
 		}
