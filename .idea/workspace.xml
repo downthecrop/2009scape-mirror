@@ -2,17 +2,153 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0dbfe935-8085-4dde-9815-06f8b3761458" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/.settings/org.eclipse.jdt.core.prefs" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/.settings/org.eclipse.jdt.core.prefs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/Crandor Server - 530 - World 1.bat" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/Crandor Server - 530 - World 1.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/Crandor Server - 530 - World 2.bat" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/Crandor Server - 530 - World 2.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/Crandor Server - 530 - World 3.bat" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/Crandor Server - 530 - World 3.bat" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/eco/grand_exchange_db.emp" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/eco/grand_exchange_db.emp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/global.sql" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/global.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/key.cfg" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/ServerConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/ServerConstants.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/container/impl/BankContainer.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/container/impl/BankContainer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/dialogue/DialogueInterpreter.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/dialogue/DialogueInterpreter.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/global/action/DropItemHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/global/action/DropItemHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/global/consumable/CookingProperties.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/global/consumable/CookingProperties.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/Skills.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/Skills.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/armour/DragonCraftPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/armour/DragonCraftPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/armour/HardCraftPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/armour/HardCraftPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/armour/SnakeSkinPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/armour/SnakeSkinPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/armour/SoftCraftPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/armour/SoftCraftPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/gem/GemCutPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/gem/GemCutPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/jewellery/JewelleryPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/jewellery/JewelleryPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/pottery/FirePotteryPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/pottery/FirePotteryPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/pottery/PotteryPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/pottery/PotteryPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/spinning/SpinningPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/crafting/spinning/SpinningPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/fishing/FishingPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/fishing/FishingPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/gather/GatheringSkillPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/gather/GatheringSkillPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/gather/SkillingResource.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/gather/SkillingResource.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/runecrafting/RuneCraftPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/runecrafting/RuneCraftPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/smithing/SmithingPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/free/smithing/SmithingPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/farming/tool/SpadePulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/farming/tool/SpadePulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/fletching/FletchingPulse$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/fletching/FletchingPulse$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/fletching/FletchingPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/fletching/FletchingPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/herblore/HerbTarPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/herblore/HerbTarPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/herblore/HerblorePulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/herblore/HerblorePulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/hunter/bnet/BNetNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/hunter/bnet/BNetNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/summoning/SummoningCreator$CreatePulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/summoning/SummoningCreator$CreatePulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/summoning/SummoningCreator$SummoningNode.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/summoning/SummoningCreator$SummoningNode.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/thieving/Pickpocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/thieving/Pickpocket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/thieving/PickpocketPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/thieving/PickpocketPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/thieving/Stall.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/thieving/Stall.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/thieving/StallThiefPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/content/skill/member/thieving/StallThiefPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/events/GlobalEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/events/GlobalEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/events/GlobalEventManager$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/events/GlobalEventManager$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/events/GlobalEventManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/events/GlobalEventManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/combat/ImpactHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/combat/ImpactHandler$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/npc/drop/NPCDropTables.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/npc/drop/NPCDropTables.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/ai/AIPlayer.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/ai/AIPlayer.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/ai/pvmbots/LowestBot.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/ai/pvmbots/LowestBot.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/ai/pvmbots/PvMBots.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/ai/pvmbots/PvMBots.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/info/login/LoginConfiguration$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/info/login/LoginConfiguration$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/info/login/LoginConfiguration.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/info/login/LoginConfiguration.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/info/login/PlayerParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/info/login/PlayerParser.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/info/portal/Perks.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/info/portal/Perks.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/GlobalData.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/GlobalData.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$10$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$10$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$11$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$11$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$12$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$12$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$13$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$13$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$2$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$3$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$3$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$4$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$4$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$5$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$5$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$6$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$6$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$7$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$7$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$8$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$8$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$9$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/entity/player/link/TeleportManager$TeleportType$9$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/item/GroundItemManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/node/item/GroundItemManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/system/communication/CommunicationInfo.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/system/communication/CommunicationInfo.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/system/mysql/impl/GroundSpawnSQLHandler$GroundSpawn$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/system/mysql/impl/GroundSpawnSQLHandler$GroundSpawn$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/system/mysql/impl/ShopSQLHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/system/mysql/impl/ShopSQLHandler$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/system/script/ScriptCompiler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/system/script/ScriptCompiler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/world/GameWorld.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/world/GameWorld.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/world/callback/CallbackHub.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/game/world/callback/CallbackHub.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/gui/tab/PlayerTab$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/gui/tab/PlayerTab$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/gui/tab/PlayerTab.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/gui/tab/PlayerTab.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/gui/tab/StatisticsTab$StatsTextPane.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/gui/tab/StatisticsTab$StatsTextPane.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/gui/tab/StatisticsTab.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/gui/tab/StatisticsTab.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/net/event/LoginReadEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/net/event/LoginReadEvent.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/net/packet/in/InteractionPacket$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/net/packet/in/InteractionPacket$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/net/packet/in/InterfaceUseOnPacket$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/net/packet/in/InterfaceUseOnPacket$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/net/packet/in/ReportAbusePacket.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/net/packet/in/ReportAbusePacket.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/worker/MajorUpdateWorker.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/org/crandor/worker/MajorUpdateWorker.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/activity/duel/DuelArea$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/activity/duel/DuelArea$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/activity/pestcontrol/PestControlActivityPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/activity/pestcontrol/PestControlActivityPlugin$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/activity/pestcontrol/PestControlActivityPlugin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/activity/pestcontrol/PestControlActivityPlugin$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/activity/pestcontrol/reward/PCRewardInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/activity/pestcontrol/reward/PCRewardInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/AIPCommandPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/AIPCommandPlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/BetaCommandPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/BetaCommandPlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/DeveloperCommandPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/DeveloperCommandPlugin$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/DeveloperCommandPlugin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/DeveloperCommandPlugin$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/DeveloperCommandPlugin$SpawnSearch.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/DeveloperCommandPlugin$SpawnSearch.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/DeveloperCommandPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/DeveloperCommandPlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/PerkCommandPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/PerkCommandPlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/PlayerCommandPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/PlayerCommandPlugin$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/PlayerCommandPlugin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/PlayerCommandPlugin$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/PlayerCommandPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/command/PlayerCommandPlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$10.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$5.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$6.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$7.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$9.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$DarkPortalHandler$DarkPortalDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$DarkPortalHandler$DarkPortalDialogue$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$GrimReaperDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$GrimReaperDialogue$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$MuncherDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$MuncherDialogue$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$MuncherDialogue$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$MuncherDialogue$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$MuncherDialogue$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/holiday/halloween/DeathMansionEvent$MuncherDialogue$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/inter/ExperienceLampInterface$SkillInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/inter/ExperienceLampInterface$SkillInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/inter/ExperienceLampInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/inter/ExperienceLampInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/inter/OrbViewingInterface$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/inter/OrbViewingInterface$2.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/item/KeldagrimVotingBond$keldagrimVotingBondDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/item/KeldagrimVotingBond$keldagrimVotingBondDialogue.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/item/KeldagrimVotingBond.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/item/KeldagrimVotingBond.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/object/ThievingGuidePlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/object/ThievingGuidePlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/player/LoginValidationPlugin$1.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/player/LoginValidationPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/interaction/player/LoginValidationPlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/random/eviltwin/EvilTwinRandomEvent$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/random/eviltwin/EvilTwinRandomEvent$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/random/eviltwin/EvilTwinRandomEvent$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/random/eviltwin/EvilTwinRandomEvent$3.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/random/eviltwin/EvilTwinRandomEvent$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/random/eviltwin/EvilTwinRandomEvent$4.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/random/lostandfound/LostFoundRandomEvent$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/random/lostandfound/LostFoundRandomEvent$1$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/tutorial/TutorialCompletionDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/tutorial/TutorialCompletionDialogue.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/GrandExchangeZone$CreditStore$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/GrandExchangeZone$CreditStore$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/GrandExchangeZone$CreditStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/GrandExchangeZone$CreditStore.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/GrandExchangeZone$RewardTraderDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/GrandExchangeZone$RewardTraderDialogue.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/GrandExchangeZone$TeleporterDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/GrandExchangeZone$TeleporterDialogue.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/WildernessAreaZone$MandrithDialoguePlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/WildernessAreaZone$MandrithDialoguePlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/WildernessAreaZone$PilesDialoguePlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/WildernessAreaZone$PilesDialoguePlugin.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/WildernessAreaZone$PilesItemHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/WildernessAreaZone$PilesItemHandler.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/WildernessAreaZone$RuniteGolemMinePulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/WildernessAreaZone$RuniteGolemMinePulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/WildernessAreaZone$RuniteGolemNPC.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/WildernessAreaZone$RuniteGolemNPC.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/neitiznot/YakArmourPlugin$YakArmourPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/plugin/zone/neitiznot/YakArmourPlugin$YakArmourPulse.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/rebel.xml" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/rebel.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/replay_pid2760.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/replay_pid3824.log" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/runServer.sh" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/runServer.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/server.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/server.sql" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/server.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/server1.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/server1.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/server2.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/server2.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/server3.properties" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/server3.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/updates.txt" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/Server/data/eco/grand_exchange_db.emp" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/eco/grand_exchange_db.emp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/org/crandor/ServerConstants.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/org/crandor/ServerConstants.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/org/crandor/net/event/LoginReadEvent.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/org/crandor/net/event/LoginReadEvent.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/plugin/dialogue/PhantuwtiFantstuwiFarSight.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/plugin/dialogue/PhantuwtiFantstuwiFarSight.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/server.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Server/server.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/server1.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Server/server1.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/server2.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Server/server2.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/server3.properties" beforeDir="false" afterPath="$PROJECT_DIR$/Server/server3.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/org/crandor/game/system/script/ScriptCompiler.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/org/crandor/game/system/script/ScriptCompiler.java" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -22,112 +158,6 @@
   </component>
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
-  </component>
-  <component name="FileEditorManager">
-    <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/node/entity/player/info/PlayerDetails.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="561">
-              <caret line="385" column="19" selection-start-line="385" selection-start-column="19" selection-end-line="385" selection-end-column="19" />
-              <folding>
-                <element signature="e#6796#6797#0" expanded="true" />
-                <element signature="e#6819#6820#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/node/entity/player/info/portal/PlayerSQLManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="329">
-              <caret line="91" selection-start-line="91" selection-end-line="91" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/plugin/tutorial/BasicStarter.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="527">
-              <caret line="31" column="70" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
-              <folding>
-                <element signature="imports" expanded="true" />
-                <element signature="e#591#592#0" expanded="true" />
-                <element signature="e#618#619#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/content/global/tutorial/TutorialSession.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="452">
-              <caret line="71" column="50" selection-start-line="71" selection-start-column="50" selection-end-line="71" selection-end-column="50" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/ServerConstants.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="422">
-              <caret line="57" column="7" lean-forward="true" selection-start-line="57" selection-start-column="7" selection-end-line="57" selection-end-column="7" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Server/src/plugin/dialogue/PhantuwtiFantstuwiFarSight.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="540">
-              <caret line="85" column="22" selection-start-line="85" selection-start-column="22" selection-end-line="85" selection-end-column="22" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/node/entity/player/link/TeleportManager.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="270">
-              <caret line="63" column="83" selection-start-line="63" selection-start-column="83" selection-end-line="63" selection-end-column="83" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/plugin/interaction/item/StarterPackPlugin.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="442">
-              <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/plugin/activity/guild/RangingGuildPlugin.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="40">
-              <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/plugin/interaction/player/LoginValidationPlugin.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="321">
-              <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -153,54 +183,7 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/Server/src/org/crandor/game/node/entity/player/info/login/LoginConfiguration.java" />
-        <option value="$PROJECT_DIR$/Server/src/org/crandor/net/event/LoginReadEvent.java" />
-        <option value="$PROJECT_DIR$/Server/src/plugin/tutorial/BasicStarter.java" />
-        <option value="$PROJECT_DIR$/Server/src/org/crandor/ServerConstants.java" />
-        <option value="$PROJECT_DIR$/Server/src/plugin/dialogue/PhantuwtiFantstuwiFarSight.java" />
-      </list>
-    </option>
-  </component>
-  <component name="ProjectFrameBounds" extendedState="6">
-    <option name="x" value="-7" />
-    <option name="width" value="1294" />
-    <option name="height" value="1407" />
-  </component>
   <component name="ProjectId" id="1SoCmFrlg0BRp0t2EAHW2CVwxLb" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="rs2009" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rs2009" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rs2009" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rs2009" type="462c0819:PsiDirectoryNode" />
-              <item name="Server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="rs2009" type="b2602c69:ProjectViewProjectNode" />
-              <item name="rs2009" type="462c0819:PsiDirectoryNode" />
-              <item name="Server" type="462c0819:PsiDirectoryNode" />
-              <item name="tutorial" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
@@ -254,6 +237,7 @@
       </method>
     </configuration>
     <configuration name="Server" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
       <option name="MAIN_CLASS_NAME" value="org.crandor.Server" />
       <module name="09Scape" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Server" />
@@ -275,8 +259,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.Server" />
-        <item itemvalue="Application.GameLaunch" />
         <item itemvalue="Application.Management" />
+        <item itemvalue="Application.GameLaunch" />
       </list>
     </recent_temporary>
   </component>
@@ -293,50 +277,12 @@
     </task>
     <servers />
   </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="2576" height="1416" extended-state="6" />
-    <editor active="true" />
-    <layout>
-      <window_info id="Image Layers" />
-      <window_info id="Designer" />
-      <window_info id="UI Designer" />
-      <window_info id="Capture Tool" />
-      <window_info id="Favorites" side_tool="true" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.18004769" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info anchor="bottom" id="Version Control" weight="0.32969603" />
-      <window_info anchor="bottom" id="Terminal" weight="0.32969603" />
-      <window_info anchor="bottom" id="Event Log" side_tool="true" />
-      <window_info anchor="bottom" id="Messages" weight="0.32967034" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info active="true" anchor="bottom" id="Find" order="1" visible="true" weight="0.32969603" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.3289166" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3998441" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="right" id="Palette" />
-      <window_info anchor="right" id="Theme Preview" />
-      <window_info anchor="right" id="Maven" />
-      <window_info anchor="right" id="Capture Analysis" />
-      <window_info anchor="right" id="Palette&#9;" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-    </layout>
-  </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -357,248 +303,6 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/system/mysql/SQLManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/system/script/ScriptCompiler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="302">
-          <caret line="86" column="37" lean-forward="true" selection-start-line="86" selection-start-column="37" selection-end-line="86" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/Server.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="419">
-          <caret line="40" column="7" lean-forward="true" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/content/global/travel/glider/Gliders.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-292">
-          <caret line="30" column="7" lean-forward="true" selection-start-line="30" selection-start-column="7" selection-end-line="30" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/content/global/travel/glider/GliderPulse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="79">
-          <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/content/skill/free/cooking/CookingPulse.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="453">
-          <caret line="52" column="60" lean-forward="true" selection-start-line="52" selection-start-column="60" selection-end-line="52" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/interaction/inter/LoginInterfacePlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="495">
-          <caret line="37" column="39" selection-start-line="37" selection-start-column="39" selection-end-line="37" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/node/entity/state/StateManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-708">
-          <caret line="21" column="35" lean-forward="true" selection-start-line="21" selection-start-column="35" selection-end-line="21" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/node/entity/player/info/login/LoginConfiguration.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="71" column="31" selection-start-line="71" selection-start-column="31" selection-end-line="71" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/tutorial/TutorialCompletionDialogue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="44" column="26" selection-start-line="44" selection-start-column="26" selection-end-line="44" selection-end-column="26" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/tutorial/TutorialIslandPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="46" column="65" lean-forward="true" selection-start-line="46" selection-start-column="65" selection-end-line="46" selection-end-column="65" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/node/entity/player/Player.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="93" column="18" lean-forward="true" selection-start-line="93" selection-start-column="18" selection-end-line="93" selection-end-column="18" />
-          <folding>
-            <element signature="e#27874#27875#0" expanded="true" />
-            <element signature="e#27898#27899#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/net/event/LoginReadEvent.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2159">
-          <caret line="149" column="7" lean-forward="true" selection-start-line="149" selection-start-column="7" selection-end-line="149" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/tools/PlayerLoader.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/tools/firewatch/Firewatch.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="4" column="13" selection-start-line="4" selection-start-column="13" selection-end-line="4" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/tutorial/BrotherBraceDialogue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/interaction/object/ShootingStarPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="228" column="41" selection-start-line="228" selection-start-column="41" selection-end-line="228" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/plugin/PluginManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="278">
-          <caret line="161" column="53" selection-start-line="161" selection-start-column="53" selection-end-line="161" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/interaction/npc/DoomsayerTogglePlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="17" selection-start-line="17" selection-end-line="17" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/consumable/PotionPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="28" column="31" selection-start-line="28" selection-start-column="31" selection-end-line="28" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/plugin/InitializablePlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="15" column="33" selection-start-line="15" selection-start-column="33" selection-end-line="15" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/activity/barrows/BarrowsActivityPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="136">
-          <caret line="40" selection-start-line="40" selection-end-line="40" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/activity/guild/RangingGuildPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="40">
-          <caret line="30" column="14" selection-start-line="30" selection-start-column="14" selection-end-line="30" selection-end-column="14" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/interaction/item/StarterPackPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="442">
-          <caret line="32" column="25" selection-start-line="32" selection-start-column="25" selection-end-line="32" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/node/entity/player/info/portal/PlayerSQLManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="329">
-          <caret line="91" selection-start-line="91" selection-end-line="91" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/node/entity/player/info/PlayerDetails.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="561">
-          <caret line="385" column="19" selection-start-line="385" selection-start-column="19" selection-end-line="385" selection-end-column="19" />
-          <folding>
-            <element signature="e#6796#6797#0" expanded="true" />
-            <element signature="e#6819#6820#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/interaction/player/LoginValidationPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="321">
-          <caret line="38" column="11" selection-start-line="38" selection-start-column="11" selection-end-line="38" selection-end-column="11" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/tutorial/BasicStarter.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="31" column="70" selection-start-line="31" selection-start-column="70" selection-end-line="31" selection-end-column="70" />
-          <folding>
-            <element signature="imports" expanded="true" />
-            <element signature="e#591#592#0" expanded="true" />
-            <element signature="e#618#619#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/content/global/tutorial/TutorialSession.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="452">
-          <caret line="71" column="50" selection-start-line="71" selection-start-column="50" selection-end-line="71" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/node/entity/player/link/TeleportManager.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="63" column="83" selection-start-line="63" selection-start-column="83" selection-end-line="63" selection-end-column="83" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/ServerConstants.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="422">
-          <caret line="57" column="7" lean-forward="true" selection-start-line="57" selection-start-column="7" selection-end-line="57" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/dialogue/PhantuwtiFantstuwiFarSight.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="540">
-          <caret line="85" column="22" selection-start-line="85" selection-start-column="22" selection-end-line="85" selection-end-column="22" />
-        </state>
-      </provider>
-    </entry>
   </component>
   <component name="masterDetails">
     <states>
