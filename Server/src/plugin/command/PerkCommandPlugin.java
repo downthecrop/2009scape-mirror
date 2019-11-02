@@ -53,7 +53,7 @@ public class PerkCommandPlugin extends CommandPlugin {
 		case "charmcollector":
 		case "charm":
 			if (!player.hasPerk(Perks.CHARM_COLLECTOR) && !player.isAdmin()) {
-				player.sendMessage("You do not own the charm collector perk.");
+				player.sendMessage("You do not own the coin machine perk.");
 				return false;
 			}
 			boolean charm = player.getGlobalData().isEnableCoinMachine();

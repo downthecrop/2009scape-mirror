@@ -115,9 +115,7 @@ public final class HerblorePulse extends SkillPulse<Item> {
 			player.animate(ANIMATION);
 		}
 		if ((player.getInventory().containsItem(potion.getBase()) && player.getInventory().containsItem(potion.getIngredient())) && player.getInventory().remove(potion.getBase(), potion.getIngredient())) {
-			final Item item = potion.getProduct();
-		    player.getInventory().add(item);
-			Perks.addDouble(player, item);
+			Perks.addDouble(player, potion.getProduct());
 			player.getPacketDispatch().sendMessage("You put the" + StringUtils.formatDisplayName(potion.getIngredient().getName().replace("Clean", "")) + " Leaf into the vial of water.");
 			if (cycles++ == 3) {
 				player.animate(ANIMATION);
@@ -131,9 +129,7 @@ public final class HerblorePulse extends SkillPulse<Item> {
 	 */
 	public void handleFinished() {
 		if ((player.getInventory().containsItem(potion.getBase()) && player.getInventory().containsItem(potion.getIngredient())) && player.getInventory().remove(potion.getBase(), potion.getIngredient())) {
-			final Item item = potion.getProduct();
-		    player.getInventory().add(item);
-			Perks.addDouble(player, item);
+			Perks.addDouble(player, potion.getProduct());
 			player.getSkills().addExperience(Skills.HERBLORE, potion.getExperience(), true);
 			player.getPacketDispatch().sendMessage("You mix the " + potion.getIngredient().getName().toLowerCase() + " into your potion.");
 			player.animate(ANIMATION);

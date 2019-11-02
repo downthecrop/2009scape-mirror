@@ -66,9 +66,7 @@ public final class JewelleryPulse extends SkillPulse<Item> {
 			return false;
 		}
 		if (player.getInventory().remove(getItems())) {
-			final Item item = new Item(type.getSendItem());
-		    player.getInventory().add(item);
-			Perks.addDouble(player, item);
+			Perks.addDouble(player, new Item(type.getSendItem()));
 			player.getSkills().addExperience(Skills.CRAFTING, type.getExperience(), true);
 		}
 		amount--;

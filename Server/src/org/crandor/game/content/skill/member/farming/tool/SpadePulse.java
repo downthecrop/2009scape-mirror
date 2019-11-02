@@ -178,9 +178,7 @@ public final class SpadePulse extends ToolAction {
 	 * @return {@code True} if harvested.
 	 */
 	private boolean harvestPatch() {
-		final Item item = wrapper.getNode().getProduct();
-	    player.getInventory().add(item);
-		Perks.addDouble(player, item);
+		Perks.addDouble(player, wrapper.getNode().getProduct());
 		player.getSkills().addExperience(Skills.FARMING, wrapper.getNode().getExperiences()[1], true);
 		wrapper.getCycle().setHarvestAmount(wrapper.getCycle().getHarvestAmount() - 1);
 		if (wrapper.getCycle().getHarvestAmount() < 1) {

@@ -168,7 +168,6 @@ public class ThievingGuidePlugin extends OptionHandler {
 			}
 			tries++;
 		}
-	    player.getInventory().add(item);
 		Perks.addDouble(player, item);
 	}
 

@@ -74,9 +74,7 @@ public class BNetNode {
 	public void reward(Player player, NPC npc) {
 		if (!isBareHand(player)) {
 			if (player.getInventory().remove(getJar())) {
-				final Item item = getReward();
-			    player.getInventory().add(item);
-				Perks.addDouble(player, item);
+				Perks.addDouble(player, getReward());
 				player.getSkills().addExperience(Skills.HUNTER, getExperience(player), true);
 			}
 		} else {

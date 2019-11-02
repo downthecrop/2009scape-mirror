@@ -117,7 +117,7 @@ public final class GrandExchangeZone extends MapZone implements Plugin<Object> {
 		 * Constructs a new {@Code CreditStore} {@Code Object}
 		 */
 		public CreditStore() {
-			super(GameWorld.getName() + " Credit Shop", new Item[] {new Item(6199, 100), new Item(14810, 100), new Item(14807, 100), new Item(14674, 100), new Item(13661, 10)}, false);
+			super(GameWorld.getName()+"RSPS.org  <col=FF0000>Voting</col> Credit Shop", new Item[] {new Item(6199, 100), new Item(14810, 100), new Item(14807, 100), new Item(14674, 100), new Item(13661, 10)}, false);
 			setPointShop(true);
 		}
 
@@ -129,7 +129,7 @@ public final class GrandExchangeZone extends MapZone implements Plugin<Object> {
 					if (player.getDetails().getShop().syncCredits()) {
 						CreditStore.super.open(player);
 						int credits = player.getDetails().getShop().getCredits();
-						player.sendMessage("<col=3498db>You currently have " + credits + (credits == 1 ? " credit" : " credits") + " to spend.");
+						player.sendMessage("<col=CC0000>You currently have " + credits + (credits == 1 ? " credit" : " credits") + " to spend.");
 					}
 				}
 
@@ -301,7 +301,7 @@ public final class GrandExchangeZone extends MapZone implements Plugin<Object> {
 				}
 				break;
 			case 3:
-				interpreter.sendDialogues(8631, FacialExpression.OSRS_NORMAL, "You receive 1 credit for every 10 levels gained");
+				interpreter.sendDialogues(8631, FacialExpression.OSRS_NORMAL, "Visit our website by heading to www.keldagrim.org.", "Log-in to the website with your in-game details", "and then simply vote via the account panel in order", "to obtain your credits.");
 				stage = 4;
 				break;
 			case 4:
@@ -384,7 +384,7 @@ public final class GrandExchangeZone extends MapZone implements Plugin<Object> {
 			if (minutes < 1) {
 				minutes = 1;
 			}
-			interpreter.sendItemMessage(563, "This is the " + GameWorld.getName() + " teleporter. You may use it every","five minutes to freely teleport to many places.", (player.getSavedData().getGlobalData().getGlobalTeleporterDelay() > System.currentTimeMillis() ? "<col=CC4000>You are on cooldown for the next "+ (minutes)+" minute(s)." : ""));
+			interpreter.sendItemMessage(563, "This is the Keldagrim teleporter. You may use it every","five minutes to freely teleport to many places.", (player.getSavedData().getGlobalData().getGlobalTeleporterDelay() > System.currentTimeMillis() ? "<col=CC4000>You are on cooldown for the next "+ (minutes)+" minute(s)." : ""));
 			stage = -5;
 			return true;
 		}

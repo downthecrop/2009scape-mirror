@@ -271,19 +271,19 @@ public final class GlobalData implements SavingModule {
 	private long lowAlchemyDelay;
 	
 	/**
-	 * Is the bone crusher perk enabled.
+	 * The bone crusher perk.
 	 */
-	private boolean enableBoneCrusher = false;
+	private boolean enableBoneCrusher = true;
 	
 	/**
-	 * Is the coin machine perk enabled.
+	 * IF the coin machine perk is enabled.
 	 */
-	private boolean enableCoinMachine = false;
+	private boolean enableCoinMachine = true;
 	
 	/**
-	 * Is the charm collector perk enabled.
+	 * If the charm collector was enabled.
 	 */
-	private boolean enableCharmCollector = false;
+	private boolean enableCharmCollector = true;
 	
 	/**
 	 * The magic skill cape delay.

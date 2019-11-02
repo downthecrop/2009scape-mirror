@@ -87,9 +87,7 @@ public final class SnakeSkinPulse extends SkillPulse<Item> {
 			}
 		}
 		if (player.getInventory().remove(new Item(6289, skin.getRequiredAmount()))) {
-			Item item = skin.getProduct();
-		    player.getInventory().add(item);
-			Perks.addDouble(player, item);
+			Perks.addDouble(player, skin.getProduct());
 			if (player.getDetails().getShop().hasPerk(Perks.GOLDEN_NEEDLE) && RandomFunction.random(100) <= 10) {
 				player.getSkills().addExperience(Skills.CRAFTING, (skin.getExperience() * 0.35), true);
 				player.sendMessage("Your golden needle rewards you with some extra XP!");

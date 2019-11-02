@@ -80,9 +80,7 @@ public final class HardCraftPulse extends SkillPulse<Item> {
 			}
 		}
 		if (player.getInventory().remove(new Item(LeatherCrafting.HARD_LEATHER))) {
-			Item item = new Item(1131);
-		    player.getInventory().add(item);
-			Perks.addDouble(player, item);
+			Perks.addDouble(player, new Item(1131));
 			if (player.getDetails().getShop().hasPerk(Perks.GOLDEN_NEEDLE) && RandomFunction.random(100) <= 10) {
 				player.getSkills().addExperience(Skills.CRAFTING, (35 * 0.35), true);
 				player.sendMessage("Your golden needle rewards you with some extra XP!");

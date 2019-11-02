@@ -3,7 +3,7 @@ package org.crandor.game.content.skill;
 import org.crandor.game.content.global.SkillcapePerks;
 import org.crandor.game.content.global.tutorial.TutorialSession;
 import org.crandor.game.content.holiday.HolidayEvent;
-import org.crandor.game.events.GlobalEvent;
+import org.crandor.game.events.GlobalEventManager;
 import org.crandor.game.node.entity.Entity;
 import org.crandor.game.node.entity.combat.ImpactHandler;
 import org.crandor.game.node.entity.npc.NPC;
@@ -28,7 +28,7 @@ public final class Skills {
 	/**
 	 * Represents the constant modifier of experience.
 	 */
-	public static final double EXPERIENCE_MULTIPLIER = 20;
+	public static final double EXPERIENCE_MULTIPLIER = 35.3;
 
 	/**
 	 * The maximum experience multiplier.
@@ -258,7 +258,7 @@ public final class Skills {
 		if (!(entity instanceof Player)) {
 			return 1.0;
 		}
-		double mod = multiplyer ? (GlobalEvent.XP_FEVER.isActive() ? EXPERIENCE_MULTIPLIER * 2 : EXPERIENCE_MULTIPLIER) : 1;
+		double mod = multiplyer ? (GlobalEventManager.get().isActive("XPFever") ? EXPERIENCE_MULTIPLIER * 2 : EXPERIENCE_MULTIPLIER) : 1;
 		Player p = (Player) entity;
 		if (p.getIronmanManager().getMode() == IronmanMode.ULTIMATE) {
 			mod /= 4;
@@ -267,13 +267,12 @@ public final class Skills {
 		}
 		//A boost for combat skills that are under level 65.
 		if(entity instanceof Player && !this.hasLevel(slot, 65) && isCombat(slot)){
-			mod *= 1.5;
+			mod *= 2.0;
 		}
 		//Grand Exchange region XP boost.
 		if(entity.getViewport().getRegion().getRegionId() == 12598){
 			mod += 1.5;
 		}
-		// Pest control, XP halved during the game
 		if (entity.getViewport().getRegion().getRegionId() == 10536) {
 			mod *= .5;
 		}

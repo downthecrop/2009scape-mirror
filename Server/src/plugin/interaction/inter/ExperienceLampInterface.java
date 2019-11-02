@@ -5,7 +5,7 @@ import org.crandor.game.component.ComponentDefinition;
 import org.crandor.game.component.ComponentPlugin;
 import org.crandor.game.content.global.Lamps;
 import org.crandor.game.content.skill.Skills;
-import org.crandor.game.events.GlobalEvent;
+import org.crandor.game.events.GlobalEventManager;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.link.audio.Audio;
 import org.crandor.game.node.item.Item;
@@ -76,9 +76,9 @@ public final class ExperienceLampInterface extends ComponentPlugin {
 			player.getAudioManager().send(SOUND);
 			player.getInventory().remove(lamp);
 			player.getInterfaceManager().close();
-			int skillLevel = player.getSkills().getStaticLevel(skillType.skill);
+			int x = player.getSkills().getStaticLevel(skillType.skill);
 			int modifier = 10;
-			double experience = skillLevel * modifier;
+			double experience = x * modifier;
 			if (type != null && type != Lamps.GENIE_LAMP) {
 				player.getDialogueInterpreter().open(70099, new Object[] { "The lamp gives you " + (int) type.getExp() + " " + Skills.SKILL_NAME[skillType.skill] + " experience." });
 				experience =  type.getExp() / Skills.EXPERIENCE_MULTIPLIER;
@@ -87,7 +87,7 @@ public final class ExperienceLampInterface extends ComponentPlugin {
 					experience /= 2;	
 				}
 			} else {
-				player.getDialogueInterpreter().open(70099, new Object[] { "The lamp gives you " + (experience * (Skills.EXPERIENCE_MULTIPLIER * (GlobalEvent.XP_FEVER.isActive() ? 2 : 1))) + " " + Skills.SKILL_NAME[skillType.skill] + " experience." });
+				player.getDialogueInterpreter().open(70099, new Object[] { "The lamp gives you " + (experience * (Skills.EXPERIENCE_MULTIPLIER * (GlobalEventManager.get().isActive("XPFever") ? 2 : 1))) + " " + Skills.SKILL_NAME[skillType.skill] + " experience." });
 			}
 			player.getSkills().addExperience(skillType.skill, experience, false);
 		}
@@ -99,29 +99,7 @@ public final class ExperienceLampInterface extends ComponentPlugin {
 	 * @author 'Vexia
 	 */
 	public enum SkillInterface {
-		ATTACK(29, Skills.ATTACK),
-		STRENGTH(30, Skills.STRENGTH),
-		RANGE(32, Skills.RANGE),
-		MAGIC(35, Skills.MAGIC),
-		DEFENCE(31, Skills.DEFENCE),
-		CRAFTING(39, Skills.CRAFTING),
-		HITPOINTS(34, Skills.HITPOINTS),
-		PRAYER(33, Skills.PRAYER),
-		AGILITY(36, Skills.AGILITY),
-		HERBLORE(37, Skills.HERBLORE),
-		THIEVING(38, Skills.THIEVING),
-		FISHING(43, Skills.FISHING),
-		RUNECRAFTING(47, Skills.RUNECRAFTING),
-		SLAYER(48, Skills.SLAYER),
-		FARMING(50, Skills.FARMING),
-		MINING(41, Skills.MINING),
-		SMITHING(42, Skills.SMITHING),
-		HUNTER(49, Skills.HUNTER),
-		SUMMONING(52, Skills.SUMMONING),
-		COOKING(45, Skills.COOKING),
-		FIREMAKING(44, Skills.FIREMAKING),
-		WOODCUTTING(46, Skills.WOODCUTTING),
-		FLETCHING(40, Skills.FLETCHING);
+		ATTACK(29, Skills.ATTACK), STRENGTH(30, Skills.STRENGTH), RANGE(32, Skills.RANGE), MAGIC(35, Skills.MAGIC), DEFENCE(31, Skills.DEFENCE), CRAFTING(39, Skills.CRAFTING), HITPOINTS(34, Skills.HITPOINTS), PRAYER(33, Skills.PRAYER), AGILITY(36, Skills.AGILITY), HERBLORE(37, Skills.HERBLORE), THIEVING(38, Skills.THIEVING), FISHING(43, Skills.FISHING), RUNECRAFTING(47, Skills.RUNECRAFTING), SLAYER(48, Skills.SLAYER), FARMING(50, Skills.FARMING), MINING(41, Skills.MINING), SMITHING(42, Skills.SMITHING), HUNTER(49, Skills.HUNTER), SUMMONING(52, Skills.SUMMONING), COOKING(45, Skills.COOKING), FIREMAKING(44, Skills.FIREMAKING), WOODCUTTING(46, Skills.WOODCUTTING), FLETCHING(40, Skills.FLETCHING);
 
 		/**
 		 * Constructs a new {@code ExperienceLampInterface} {@code Object}.

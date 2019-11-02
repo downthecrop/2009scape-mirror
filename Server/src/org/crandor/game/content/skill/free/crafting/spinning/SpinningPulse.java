@@ -72,9 +72,7 @@ public final class SpinningPulse extends SkillPulse<Item> {
 	    return false;
 	}
 	if (player.getInventory().remove(new Item(type.getNeed(), 1))) {
-		final Item item = new Item(type.getProduct(), 1);
-	    player.getInventory().add(item);
-		Perks.addDouble(player, item);
+	    Perks.addDouble(player, new Item(type.getProduct(), 1));
 	    player.getSkills().addExperience(Skills.CRAFTING, type.getExp(), true);
 	}
 		ammount--;

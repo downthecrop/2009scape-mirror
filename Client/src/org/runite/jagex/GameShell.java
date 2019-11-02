@@ -20,7 +20,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 	/**
 	 * The game settings.
 	 */
-	public static GameSetting SETTINGS = new GameSetting(GameLaunch.SETTINGS.getName(), Configurations.MS_IP, 1, "live", false, false);
+	public static GameSetting SETTINGS = new GameSetting(GameLaunch.SETTINGS.getName(), Configurations.LOCAL_MS ? "127.0.0.1" : "frostblades.org", 1, "live", false, false);
 	
 
    private boolean aBoolean1 = false;
@@ -560,6 +560,10 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
    final void launch(Frame frame) {
       try {
+         if(-8057 != -8057) {
+            this.method38(12);
+         }
+
          try {
             Class140_Sub7.anInt2934 = 768;
             Class70.anInt1047 = 768;
