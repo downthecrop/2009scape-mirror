@@ -1,7 +1,7 @@
 package org.crandor.gui.tab;
 
 
-import org.crandor.Main;
+import org.crandor.Server;
 import org.crandor.game.node.item.GroundItemManager;
 import org.crandor.game.system.SystemManager;
 import org.crandor.game.system.SystemState;
@@ -382,7 +382,7 @@ public class StatisticsTab extends ConsoleTab {
      */
     public void updateThreadText() {
         StringBuilder sb = new StringBuilder();
-        long runtime = System.currentTimeMillis() - Main.startTime;
+        long runtime = System.currentTimeMillis() - Server.startTime;
         double percentage = workingTime / (runtime * 0.01);
         long hours = runtime / 3600000;
         runtime -= hours * 3600000;
