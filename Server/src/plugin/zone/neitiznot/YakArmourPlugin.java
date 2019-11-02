@@ -139,6 +139,7 @@ public class YakArmourPlugin extends UseWithHandler {
 			}
 			int reqAmount = index == 1 ? 1 : 2;
 			if (player.getInventory().remove(new Item(10820, reqAmount))) {
+			    player.getInventory().add(node);
 				Perks.addDouble(player, node);
 				if (player.getDetails().getShop().hasPerk(Perks.GOLDEN_NEEDLE) && RandomFunction.random(100) <= 10) {
 					player.getSkills().addExperience(Skills.CRAFTING, (32 * 0.35), true);

@@ -98,7 +98,9 @@ public final class SoftCraftPulse extends SkillPulse<Item> {
 			} else {
 				player.getPacketDispatch().sendMessage("You make " + (StringUtils.isPlusN(soft.getProduct().getName()) ? "an" : "a") + " " + soft.getProduct().getName().toLowerCase() + ".");
 			}
-			Perks.addDouble(player, soft.getProduct());
+			Item item = soft.getProduct();
+		    player.getInventory().add(item);
+			Perks.addDouble(player, item);
 			if (player.getDetails().getShop().hasPerk(Perks.GOLDEN_NEEDLE) && RandomFunction.random(100) <= 10) {
 				player.getSkills().addExperience(Skills.CRAFTING, (soft.getExperience() * 0.35), true);
 				player.sendMessage("Your golden needle rewards you with some extra XP!");
