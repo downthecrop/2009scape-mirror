@@ -21,7 +21,7 @@ public class ReportAbusePacket implements IncomingPacket {
 		String target = StringUtils.longToString(buffer.getLong());
 		Rule rule = Rule.forId(buffer.get());
 		boolean mute = buffer.get() == 1;
-		File file = new File(ServerConstants.PLAYER_SAVE_PATH + target + ".save");
+		File file = new File(ServerConstants.PLAYER_SAVE_PATH + target + ".keldagrim");
 		if (!file.exists()) {
 			player.getPacketDispatch().sendMessage("Invalid player name.");
 			return;

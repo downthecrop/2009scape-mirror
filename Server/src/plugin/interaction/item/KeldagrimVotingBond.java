@@ -59,7 +59,7 @@ public class KeldagrimVotingBond extends OptionHandler {
 			}
 			if (player.getInventory().remove(item)) {
 				player.getBank().add(item);
-				player.sendMessage("You deposit your Reward bond into your bank.");
+				player.sendMessage("You deposit your Keldagrim voting bond into your bank.");
 			}
 			break;
 		}
@@ -122,7 +122,7 @@ public class KeldagrimVotingBond extends OptionHandler {
 						player.getSavedData().getGlobalData().setDoubleExp(System.currentTimeMillis() + TimeUnit.HOURS.toMillis(1));
 						player.getStateManager().set(EntityState.DOUBLE_EXPERIENCE, 6000, 0);
 						interpreter.sendItemMessage(14807, "You redeemed an <col=FF0000>hour</col> of double EXP!");
-						Repository.sendNews("" + player.getUsername() + " redeemed an hour of double EXP from a Reward bond!", 15, "<col=FF0000>");
+						Repository.sendNews("" + player.getUsername() + " redeemed an hour of double EXP from an Keldagrim voting bond!", 15, "<col=FF0000>");
 					}
 					break;
 				case 2:
@@ -133,7 +133,7 @@ public class KeldagrimVotingBond extends OptionHandler {
 					if (player.getInventory().remove(BOND)) {
 						player.getInventory().add(ULTRA_LAMP);
 						interpreter.sendItemMessage(14807, "You redeem an <col=FF0000>ultra lamp</col>.");
-						Repository.sendNews("" + player.getUsername() + " redeemed an ultra lamp from a Reward bond!", 15, "<col=FF0000>");
+						Repository.sendNews("" + player.getUsername() + " redeemed an ultra lamp from an Keldagrim voting bond!", 15, "<col=FF0000>");
 						return true;
 					}
 					break;
@@ -147,7 +147,7 @@ public class KeldagrimVotingBond extends OptionHandler {
 						DecimalFormat formatter = new DecimalFormat("#,###");
 						player.getInventory().add(coins);
 						interpreter.sendItemMessage(14807, "You redeem <col=FF0000>" + formatter.format(coins.getAmount()) + "</col> gold coins.");
-						Repository.sendNews("" + player.getUsername() + " redeemed " + formatter.format(coins.getAmount()) + " gold coins from a Reward bond!", 15, "<col=FF0000>");
+						Repository.sendNews("" + player.getUsername() + " redeemed " + formatter.format(coins.getAmount()) + " gold coins from an Keldagrim voting bond!", 15, "<col=FF0000>");
 					}
 					break;
 				case 4:
@@ -166,7 +166,7 @@ public class KeldagrimVotingBond extends OptionHandler {
 					if (player.getInventory().remove(BOND)) {
 						player.getInventory().add(clue);
 						interpreter.sendItemMessage(14807, "You redeem a <col=FF0000>clue scroll</col>.");
-						Repository.sendNews("" + player.getUsername() + " redeemed a clue scroll from a Reward bond!", 15, "<col=FF0000>");
+						Repository.sendNews("" + player.getUsername() + " redeemed a clue scroll from an Keldagrim voting bond!", 15, "<col=FF0000>");
 					}
 					break;
 				}

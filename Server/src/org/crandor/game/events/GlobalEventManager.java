@@ -1,12 +1,16 @@
 package org.crandor.game.events;
 
-import org.crandor.Util;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.callback.CallBack;
 import org.crandor.game.world.repository.Repository;
 import org.crandor.tools.mysql.Results;
+
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+import java.util.Map.Entry;
 
 /**
  * Class to handle donated events.
@@ -16,12 +20,27 @@ import org.crandor.tools.mysql.Results;
  */
 public class GlobalEventManager implements CallBack {
 	
+	private static Map<String, Long> EVENTS = new HashMap<String, Long>();
+	
 	private long tick = 0;
 
-	private GlobalEvent lastEvent;
-	private GlobalEvent currentEvent;
+	private String lastEvent;
+	private String currentEvent;
 	
 	public final GlobalEventManager init() {
+		
+		try {
+			
+			getEvents().put("Alchemy hellenistic", 0L);
+			getEvents().put("Golden retriever", 0L);
+			getEvents().put("Harvesting doubles", 0L);
+			getEvents().put("Thieves jackpot", 0L);
+			getEvents().put("Golden essence", 0L);
+			getEvents().put("Clone Fest", 0L);
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return this;
 	}
 	
@@ -31,21 +50,26 @@ public class GlobalEventManager implements CallBack {
 			
 			@Override
 			public boolean pulse() {
+				
+				
 				tick++;
-				for(GlobalEvent event : GlobalEvent.values()){
-					Long ticksRemaining = event.getRemainingTicks();
-					if (ticksRemaining > 0) {
-						event.tick();
-						--ticksRemaining;
-						if (ticksRemaining <= 0)
-							message("The " + event.getName() + " event has now ended.");
-						else if (ticksRemaining % 3000 == 0)
-							message("You have " + Math.round(ticksRemaining / 100) + " minutes before the " + event.getName() + " event ends.");
+
+				Iterator<Entry<String, Long>> iterator = EVENTS.entrySet().iterator();
+				
+				while(iterator.hasNext()) {
+					Map.Entry<String, Long> entry = iterator.next();
+					if (entry.getValue() > 0) {
+						entry.setValue(entry.getValue() - 1);
+						if (entry.getValue() == 3000)
+							message("You have 30 minutes before " + entry.getKey() + " ends on world " + GameWorld.getSettings().getWorldId() + ".");
 							
+						if (entry.getValue() <= 0) {
+							message("The event " + entry.getKey() + " has now ended on world " + GameWorld.getSettings().getWorldId() + ".");
+						}
 					}
 				}
 				
-				if (tick == 100) {
+				if (tick == 50) {
 					tick = 0;
 					save();
 				}
@@ -57,27 +81,41 @@ public class GlobalEventManager implements CallBack {
 		
 	}
 	
-	public void reActivate(GlobalEvent event, long time) {
-		event.setRemainingTicks(time);
+	public void reActivate(String name, long time) {
+		Iterator<Entry<String, Long>> iterator = EVENTS.entrySet().iterator();
+		
+		while(iterator.hasNext()) {
+			Map.Entry<String, Long> entry = iterator.next();
+			if (entry.getKey().equalsIgnoreCase(name)) {
+				entry.setValue(time);
+			}
+		}
 	}
 	
 	public GlobalEventManager save() {
-		for(GlobalEvent event : GlobalEvent.values()){
+		if (GameWorld.getDatabaseManager().update("server", "DELETE FROM `globalevents` WHERE worldid='" + GameWorld.getSettings().getWorldId() + "'") < 0)
+			return this;
 
+		Iterator<Entry<String, Long>> iterator = EVENTS.entrySet().iterator();
+		
+		while(iterator.hasNext()) {
+			
+			Map.Entry<String, Long> entry = iterator.next();
+			
+			if (entry.getValue() <= 0)
+				continue;
+			
 			StringBuilder query = new StringBuilder();
 
-			query.append("INSERT INTO `global_events` ");
+			query.append("INSERT INTO `globalevents` ");
 			query.append("(`eventName`,`eventTime`,`worldId`)");
 			query.append(" VALUES(");
 			
-			query.append("'" + event.getName() + "'").append(",");
-			query.append("'" + event.getRemainingTicks() + "'").append(",");
+			query.append("'" + entry.getKey() + "'").append(",");
+			query.append("'" + entry.getValue() + "'").append(",");
 			query.append("'" + GameWorld.getSettings().getWorldId() + "'");
 			
 			query.append(")");
-
-			query.append(" ON DUPLICATE KEY UPDATE ");
-			query.append("eventTime='" + event.getRemainingTicks() + "'");
 
 			GameWorld.getDatabaseManager().update("server", query.toString());
 
@@ -87,14 +125,16 @@ public class GlobalEventManager implements CallBack {
 	
 	public GlobalEventManager load() {
 		try {
-			Results result = new Results(GameWorld.getDatabaseManager().query("server", "SELECT * FROM `global_events` WHERE worldid='" + GameWorld.getSettings().getWorldId() + "'"));
+			Results result = null;
+			
+			result = new Results(GameWorld.getDatabaseManager().query("server", "SELECT * FROM `globalevents` WHERE worldid='" + GameWorld.getSettings().getWorldId() + "'"));
 
 			while (!result.empty()) {
 				String eventName = result.string("eventName");
 				String eventTime = result.string("eventTime");
-				GlobalEvent event = getEvent(eventName);
-				reActivate(event, Long.valueOf(eventTime));
+				reActivate(eventName, Long.valueOf(eventTime));
 			}
+			
 			
 		} catch(Exception  e) {
 			e.printStackTrace();
@@ -103,94 +143,183 @@ public class GlobalEventManager implements CallBack {
 	}
 	
 	public GlobalEventManager message(String message) {
-		return message(message, true, "<col=3498db>");
+		return message(message, true, "<col=027fc7>");
 	}
 
 	public GlobalEventManager message(String message, boolean tag) {
-		return message(message, tag, "<col=3498db>");
+		return message(message, tag, "<col=027fc7>");
 	}
 
+	public GlobalEventManager notify(String message) {
+		return message(message, true, "<col=800000>");
+	}
+
+	public GlobalEventManager notify(String message, boolean tag) {
+		return message(message, tag, "<col=800000>");
+	}
+
+
+
+	/*
+	 * getEvents().put("Alchemy hellenistic", 0L);
+			getEvents().put("Golden retriever", 0L);
+			getEvents().put("Harvesting doubles", 0L);
+			getEvents().put("Thieves jackpot", 0L);
+			getEvents().put("Golden essence", 0L);
+			
+	 */
 	public GlobalEventManager message(String message, boolean tag, String color) {
-		for (Player player : Repository.getPlayers()) {
-			player.sendMessage(color + (tag ? "[Event Manager] " : "") + message);
+		/*if (WorldCommunicator.isEnabled()) {
+			MSPacketRepository.sendWorldMessage((tag ? "<col=027fc7>[Event Manager] - " : "")+ message);
+		} else {*/
+			for (Player player : Repository.getPlayers()) {
+				player.getPacketDispatch().sendMessage(color + (tag ? "[Event Manager] - " : "") + message);
+			}
+	//}
+		return this;
+		
+	}
+	
+	
+	public GlobalEventManager deactivate(String eventName) {
+		
+		if (getEvents().get(eventName) == null) {
+			System.out.println("Failed to deactivate event " + eventName + ".");
+			return this;
+		}
+		
+		Iterator<Entry<String, Long>> iterator = EVENTS.entrySet().iterator();
+		
+		while(iterator.hasNext()) {
+			Map.Entry<String, Long> entry = (Map.Entry<String, Long>) iterator.next();
+			if (entry.getKey().equalsIgnoreCase(eventName)) {
+				message(eventName + " has ended. A new event will begin soon.");
+				entry.setValue(0L);
+			}
 		}
 		return this;
 	}
 	
-	public GlobalEventManager deactivate(GlobalEvent event) {
-		// Only deactivate event if already active
-		if (!event.isActive()) {
+	public GlobalEventManager activate(String eventName, String name) {
+		
+		Player p = Repository.getPlayerByDisplay(name);
+		if (getEvents().get(eventName) == null) {
+			System.out.println("Failed to activate event " + eventName + ".");
+			return this;
+		}
+		if (p == null && !eventName.equalsIgnoreCase("clone fest")) {
+			System.out.println("Couldnt activate event; " + name + " couldnt be found.");
 			return this;
 		}
 
-		// Event will end in 2 ticks
-		event.setRemainingTicks(2L);
-		return this;
-	}
-	
-	public GlobalEventManager activate(GlobalEvent event) {
-		return activate(event, null, 6000);
-	}
-	
-	public GlobalEventManager activate(GlobalEvent event, String name) {
-		return activate(event, name, 6000);
-	}
-	
-	public GlobalEventManager activate(GlobalEvent event, String name, int timeToAdd) {
-		if (timeToAdd <= 0) timeToAdd = 6000;
+		Iterator<Entry<String, Long>> iterator = EVENTS.entrySet().iterator();
 
-		Player player = Repository.getPlayerByDisplay(name);
-		
-		StringBuilder message = new StringBuilder();
-		message.append("The " + event.getName() + " event has been ");
-		message.append(event.isActive() ? "extended by" : "activated for");
-		message.append(" " + Math.round(timeToAdd / 100) + " minutes");
-		if (player != null) {
-			message.append(" by " + player.getUsername());
+		while(iterator.hasNext()) {
+			Map.Entry<String, Long> entry = (Map.Entry<String, Long>) iterator.next();
+			if (entry.getKey().equalsIgnoreCase(eventName)) {
+				if (eventName.equalsIgnoreCase("clone fest")) {
+					notify("The event " + eventName + " is live, clones are located near the mage");
+					notify("bank on world " + GameWorld.getSettings().getWorldId() + ".", false);
+				} else {
+					if (entry.getValue() != 0) {
+						message("The event " + eventName + " has been extended for another hour by " + (p == null ? " " : p.getUsername() + " "));
+						message("on world " + GameWorld.getSettings().getWorldId() + ".", false);
+					} else {
+						message("The event " + eventName + " has been activated by " + (p == null ? " " : p.getUsername() + " ") + "on world " + GameWorld.getSettings().getWorldId() + ".");
+					}
+				}
+				entry.setValue(entry.getValue() + 6000);
+			}
 		}
-		message.append(".");
-
-		// start the event after building the string
-		event.start(timeToAdd);
-		message(message.toString());
-		message(event.getDescription(), false, "<col=ecf0f1>");
-
 		return this;
 	}
 	
-	public GlobalEventManager activateHourly(GlobalEvent event) {
-		event.start(6000);
-		message(event.getName() + " event is now active, and will run for an hour!");
-		message(event.getDescription(), false, "<col=ecf0f1>");
+	
+	/*
+	 * getEvents().put("Alchemy hellenistic", 0L);
+			getEvents().put("Golden retriever", 0L);
+			getEvents().put("Harvesting doubles", 0L);
+			getEvents().put("Thieves jackpot", 0L);
+			getEvents().put("Golden essence", 0L);
+			
+	 */
+	
+	public GlobalEventManager activateHourly(String eventName) {
+		
+		if (getEvents().get(eventName) == null) {
+			System.out.println("Failed to activate event " + eventName + ".");
+			return this;
+		}
+		
+		Iterator<Entry<String, Long>> iterator = EVENTS.entrySet().iterator();
+		
+		while(iterator.hasNext()) {
+			Map.Entry<String, Long> entry = iterator.next();
+			if (entry.getKey().equalsIgnoreCase(eventName)) {
+				message(eventName + " is now active, and will run for an hour!");
+				for (Player player : Repository.getPlayers()) {
+				switch(getCurrentEvent()) {
+					case "Alchemy hellenistic":
+						player.getPacketDispatch().sendMessage("This event means you'll receive x2 coins when using high alchemy.");
+						break;
+					case "Golden retriever":
+						player.getPacketDispatch().sendMessage("This event means you'll have all gold dropped by monsters banked for you.");
+						break;
+					case "Harvesting doubles":
+						player.getPacketDispatch().sendMessages("This event means you'll receive x2 items when harvesting with woodcutting, mining", "or fishing.");
+						break;
+					case "Thieves jackpot":
+						player.getPacketDispatch().sendMessages("This event means you'll receive 300% more coins when thieving.");
+						break;
+					case "Golden essence":
+						player.getPacketDispatch().sendMessages("This event means you'll receive x3 more runes than normal when runecrafting.");
+						break;
+					case "Clone Fest":
+						player.getPacketDispatch().sendMessages("This event means 20 clones have been spawned in the wilderness", "near the mage bank.");
+						break;
+
+				}
+				}
+				entry.setValue(entry.getValue() + 6000);
+			}
+		}
 		return this;
 	}
 	
-	public boolean isActive(GlobalEvent event) {
-		return event.isActive();
+	public boolean isActive(String eventName) {
+		Iterator<Entry<String, Long>> iterator = EVENTS.entrySet().iterator();
+		
+		while(iterator.hasNext()) {
+			Map.Entry<String, Long> entry = (Map.Entry<String, Long>) iterator.next();
+			if (entry.getKey().equalsIgnoreCase(eventName)) {
+				if (entry.getValue() > 0)
+					return true;
+			}
+		}
+		
+		return false;
 	}
 
 	public GlobalEventManager alert(Player player) {
 		boolean active = false;
-
-		for(GlobalEvent event : GlobalEvent.values()){
-			if (event.isActive()) {
-				active = true;
+		Iterator<Entry<String, Long>> i = EVENTS.entrySet().iterator();
+		
+		while(i.hasNext()) {
+			Map.Entry<String, Long> entry = (Map.Entry<String, Long>) i.next();
+				if (entry.getValue() > 0) {
+					active = true;
 			}
 		}
+		if (active)
+			player.sendMessage("<col=027fc7>The following events are active:");
+		Iterator<Entry<String, Long>> iterator = EVENTS.entrySet().iterator();
 		
-		if (!active) {
-			player.sendMessage("<col=3498db>No events are currently active.");
-			return this;
-		}
-		
-		player.sendMessage("<col=3498db>The following events are active:");
-
-		for(GlobalEvent event : GlobalEvent.values()){
-			if (event.isActive()) {
-				player.sendMessage("<col=3498db> [-] " + event.getName() + ".");
+		while(iterator.hasNext()) {
+			Map.Entry<String, Long> entry = (Map.Entry<String, Long>) iterator.next();
+				if (entry.getValue() > 0) {
+					player.sendMessage("<col=027fc7> [-] " + entry.getKey() + ".");
 			}
 		}
-		
 		return this;
 	}
 
@@ -206,28 +335,24 @@ public class GlobalEventManager implements CallBack {
 		return true;
 	}
 	
-	public static GlobalEvent getEvent(String name) {
-		for(GlobalEvent event : GlobalEvent.values()){
-			if (event.getName().equalsIgnoreCase(name) || event.name().equalsIgnoreCase(Util.strToEnum(name)))
-				return event;
-		}
-		return null;
+	public static Map<String, Long> getEvents() {
+		return EVENTS;
 	}
 
-	public GlobalEvent getLastEvent() {
+	public String getLastEvent() {
 		return lastEvent;
 	}
 
-	public void setLastEvent(GlobalEvent event) {
-		this.lastEvent = event;
+	public void setLastEvent(String lastEvent) {
+		this.lastEvent = lastEvent;
 	}
 
-	public GlobalEvent getCurrentEvent() {
+	public String getCurrentEvent() {
 		return currentEvent;
 	}
 
-	public void setCurrentEvent(GlobalEvent event) {
-		this.currentEvent = event;
+	public void setCurrentEvent(String currentEvent) {
+		this.currentEvent = currentEvent;
 	}
 
 	

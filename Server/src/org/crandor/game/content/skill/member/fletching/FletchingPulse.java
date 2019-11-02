@@ -64,9 +64,7 @@ public final class FletchingPulse extends SkillPulse<Item> {
 			return false;
 		}
 		if (player.getInventory().remove(fletch.getType().getLog())) {
-			final Item item = fletch.getProduct();
-		    player.getInventory().add(item);
-			Perks.addDouble(player, item);
+			Perks.addDouble(player, fletch.getProduct());
 			player.getSkills().addExperience(Skills.FLETCHING, fletch.getExperience(), true);
 			String message = getMessage();
 			player.getPacketDispatch().sendMessage(message);

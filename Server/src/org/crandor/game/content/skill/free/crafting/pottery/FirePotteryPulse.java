@@ -75,9 +75,7 @@ public final class FirePotteryPulse extends SkillPulse<Item> {
 			if (player.getLocation().getY() == 3408 && player.getAttribute("spun-bowl", false) && !player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).isComplete(0, 9)) {
 				player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).updateTask(player, 0, 9, true);
 			}
-			final Item item = pottery.getProduct();
-		    player.getInventory().add(item);
-			Perks.addDouble(player, item);
+			Perks.addDouble(player, pottery.getProduct());
 			player.getSkills().addExperience(Skills.CRAFTING, pottery.getFireExp(), true);
 			player.getPacketDispatch().sendMessage("You put the " + pottery.getUnfinished().getName().toLowerCase() + " in the oven.");
 			player.getPacketDispatch().sendMessage("You remove a " + pottery.getProduct().getName().toLowerCase() + "  from the oven.");

@@ -100,9 +100,7 @@ public final class DragonCraftPulse extends SkillPulse<Item> {
 			} else {
 				player.getPacketDispatch().sendMessage("You make " + (StringUtils.isPlusN(ItemDefinition.forId(hide.getProduct()).getName().toLowerCase()) ? "an" : "a") + " " + ItemDefinition.forId(hide.getProduct()).getName().toLowerCase() + ".");
 			}
-			Item item = new Item(hide.getProduct());
-			player.getInventory().add(item);
-			Perks.addDouble(player, item);
+			Perks.addDouble(player, new Item(hide.getProduct()));
 
 			if (player.getDetails().getShop().hasPerk(Perks.GOLDEN_NEEDLE) && RandomFunction.random(100) <= 10) {
 				player.getSkills().addExperience(Skills.CRAFTING, (hide.getExperience() * 0.35), true);

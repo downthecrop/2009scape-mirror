@@ -73,13 +73,11 @@ public final class BetaCommandPlugin extends CommandPlugin {
                 player.getQuestRepository().getQuest(name).setStage(player, 0);
                 player.getQuestRepository().syncronizeTab(player);
                 return true;
-
             case "allquest":
                 for (Quest quest : QuestRepository.getQuests().values()) {
                     quest.finish(player);
                 }
                 return true;
-
             case "pos":
             case "position":
             case "loc":
@@ -96,10 +94,25 @@ public final class BetaCommandPlugin extends CommandPlugin {
                 clpbrd.setContents(stringSelection, null);
                 return true;
 
+            case "npc":
+                if (args.length < 2) {
+                    player.debug("syntax error: id (optional) direction");
+                    return true;
+                }
+                NPC npc = NPC.create(toInteger(args[1]), player.getLocation());
+                npc.setAttribute("spawned:npc", true);
+                npc.setRespawn(false);
+                npc.setDirection(player.getDirection());
+                npc.init();
+                npc.setWalks(args.length > 2 ? true : false);
+                String npcString = "{" + npc.getLocation().getX() + "," + npc.getLocation().getY() + "," + npc.getLocation().getZ() + "," + (npc.isWalks() ? "1" : "0") + "," + npc.getDirection().ordinal() + "}";
+                clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
+                clpbrd.setContents(new StringSelection(npcString), null);
+                System.out.println(npcString);
+                return true;
             case "dz":
                 DonatorZone.getInstance().invite(player, null);
                 return true;
-
             case "setquest":
             case "setoquest":
                 if (args.length < 2) {
@@ -131,39 +144,26 @@ public final class BetaCommandPlugin extends CommandPlugin {
                 m.getPacketDispatch().sendMessage("quest=" + name + ", new stage=" + stage);
                 m.getQuestRepository().syncronizeTab(player);
                 break;
-
             case "empty":
                 player.getInventory().clear();
                 return true;
-
-            case "setvalue":
-                int itemId = toInteger(args[1]);
-                int value = toInteger(args[2]);
-                Item item = new Item(itemId);
-                GrandExchangeEntry entry = GrandExchangeDatabase.getDatabase().get(itemId);
-                if (entry == null) {
-                    player.getPacketDispatch().sendMessage("Could not find G.E entry for item [id=" + itemId + ", name=" + item.getName() + "]!");
-                    break;
-                }
-                entry.setValue(value);
-                player.getPacketDispatch().sendMessage("Set Grand Exchange value for item [id=" + itemId + ", name=" + item.getName() + "] to " + value + "gp!");
-                break;
-
-            case "npc":
+            case "itemn":
                 if (args.length < 2) {
-                    player.debug("syntax error: id (optional) direction");
+                    player.debug("syntax error: item-name (optional) amount");
                     return true;
                 }
-                NPC npc = NPC.create(toInteger(args[1]), player.getLocation());
-                npc.setAttribute("spawned:npc", true);
-                npc.setRespawn(false);
-                npc.setDirection(player.getDirection());
-                npc.init();
-                npc.setWalks(args.length > 2 ? true : false);
-                String npcString = "{" + npc.getLocation().getX() + "," + npc.getLocation().getY() + "," + npc.getLocation().getZ() + "," + (npc.isWalks() ? "1" : "0") + "," + npc.getDirection().ordinal() + "}";
-                clpbrd = Toolkit.getDefaultToolkit().getSystemClipboard();
-                clpbrd.setContents(new StringSelection(npcString), null);
-                System.out.println(npcString);
+                String params = "";
+                for (int i = 1; i < args.length; i++) {
+                    params += i == args.length - 1 ? args[i] : args[i] + " ";
+                }
+                for (int i = 0; i < ItemDefinition.getDefinitions().size(); i++) {
+                    ItemDefinition def1 = ItemDefinition.forId(i);
+                    if (def1 != null && def1.getName().equalsIgnoreCase(params.toLowerCase())) {
+                        player.getInventory().add(new Item(i, 1));
+                        player.getPacketDispatch().sendMessage("[item=" + def1.getId() + ", " + def1.getName() + "].");
+                        break;
+                    }
+                }
                 return true;
 
             case "npcn":
@@ -191,17 +191,39 @@ public final class BetaCommandPlugin extends CommandPlugin {
                     }
                 }
                 return true;
+            case "setvalue":
+                int itemId = toInteger(args[1]);
+                int value = toInteger(args[2]);
+                Item item = new Item(itemId);
+                GrandExchangeEntry entry = GrandExchangeDatabase.getDatabase().get(itemId);
+                if (entry == null) {
+                    player.getPacketDispatch().sendMessage("Could not find G.E entry for item [id=" + itemId + ", name=" + item.getName() + "]!");
+                    break;
+                }
+                entry.setValue(value);
+                player.getPacketDispatch().sendMessage("Set Grand Exchange value for item [id=" + itemId + ", name=" + item.getName() + "] to " + value + "gp!");
+                break;
 
-            // Get item by id
             case "item":
-            	if (args.length < 2) {
-            		player.sendMessage("You must specify an item ID");
-            		return false;
-            	}
-                id = toInteger(args[1]);
                 amount = args.length > 2 ? toInteger(args[2]) : 1;
+                if (args[1].contains("-")) {
+                    String[] data = args[1].split("-");
+                    for (id = toInteger(data[0]); id < toInteger(data[1]); id++) {
+                        if (id > Cache.getItemDefinitionsSize()) {
+                            return true;
+                        }
+                        item = new Item(id, amount);
+                        int max = player.getInventory().getMaximumAdd(item);
+                        if (amount > max) {
+                            amount = max;
+                        }
+                        item.setAmount(amount);
+                        player.getInventory().add(item);
+                    }
+                    return true;
+                }
+                id = args.length > 1 ? toInteger(args[1]) : 0;
                 if (id > Cache.getItemDefinitionsSize()) {
-            		player.sendMessage("Item ID '" + id + "' out of range.");
                     return true;
                 }
                 item = new Item(id, amount);
@@ -211,31 +233,6 @@ public final class BetaCommandPlugin extends CommandPlugin {
                 }
                 item.setAmount(amount);
                 player.getInventory().add(item);
-                return true;
-                
-            // Get item by name
-            case "itemn":
-                if (args.length < 2) {
-                    player.sendMessage("You must specify an item name");
-                    return true;
-                }
-                String itemName = "";
-                for (int i = 1; i < args.length; i++) {
-                	itemName += i == args.length - 1 ? args[i] : args[i] + " ";
-                }
-                Boolean foundItem = false;
-                for (int i = 0; i < ItemDefinition.getDefinitions().size(); i++) {
-                    ItemDefinition def1 = ItemDefinition.forId(i);
-                    if (def1 != null && def1.getName().equalsIgnoreCase(itemName.toLowerCase())) {
-                        player.getInventory().add(new Item(i, 1));
-                        player.sendMessage("Added " + def1.getName() + "[" + def1.getId() + "] to inventory");
-                        foundItem = true;
-                        break;
-                    }
-                }
-                if (!foundItem) {
-                	player.sendMessage("@red@Unable to find item: " + itemName + "");
-                }
                 return true;
             case "task":
                 ResourceAIPManager.get().runTask(player, "Willow Logs");
@@ -325,10 +322,10 @@ public final class BetaCommandPlugin extends CommandPlugin {
                 }
                 Location destination = null;
                 String place = getArgumentLine(args);
-                for (Object[] destinations : ServerConstants.TELEPORT_DESTINATIONS) {
-                    for (int i = 1; i < destinations.length; i++) {
-                        if (place.equals(destinations[i])) {
-                            destination = (Location) destinations[0];
+                for (Object[] data : ServerConstants.TELEPORT_DESTINATIONS) {
+                    for (int i = 1; i < data.length; i++) {
+                        if (place.equals(data[i])) {
+                            destination = (Location) data[0];
                             break;
                         }
                     }

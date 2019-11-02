@@ -181,6 +181,8 @@ public class AIPlayer extends Player {
 	{
 		int meX = this.getLocation().getX();
 		int meY = this.getLocation().getY();
+		//int meX2 = this.getLocation().getX();
+		//System.out.println("local " + meX + " real x? " + meX2 );
 		ArrayList<Node> nodes = new ArrayList<Node>();
 		for (NPC npc : RegionManager.getLocalNpcs(this, range)) {
 			if (npc.getId() == entry)
@@ -397,12 +399,14 @@ public class AIPlayer extends Player {
 	 * @param uid The player's UID.
 	 */
 	public static void deregister(int uid) {
+		if (!botMapping.containsKey(uid)) {
+			System.err.println("Could not deregister AIP#" + uid + ": UID not added to the mapping!");
+			return;
+		}
 		AIPlayer player = botMapping.get(uid);
 		if (player != null) {
 			player.clear();
-			return;
 		}
-		System.err.println("Could not deregister AIP#" + uid + ": UID not added to the mapping!");
 	}
 
 	@Override

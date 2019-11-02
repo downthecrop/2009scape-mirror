@@ -12,7 +12,6 @@ import org.crandor.game.node.entity.player.info.portal.Perks;
 import org.crandor.game.node.entity.player.link.audio.Audio;
 import org.crandor.game.node.entity.player.link.diary.DiaryType;
 import org.crandor.game.node.entity.state.EntityState;
-import org.crandor.game.node.item.Item;
 import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.tools.RandomFunction;
@@ -102,9 +101,7 @@ public final class PickpocketPulse extends SkillPulse<NPC> {
 				player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).updateTask(player, 1, 6, true);
 			}
 		    player.getSkills().addExperience(Skills.THIEVING, type.getExperience(), true);
-		    Item loot = type.getRandomLoot(player);
-		    player.getInventory().add(loot);
-		    Perks.addDouble(player, loot, true);
+		    Perks.addDouble(player, type.getRandomLoot(player), true);
 		    player.getPacketDispatch().sendMessage(type.getRewardMessage().replace("@name", node.getName().toLowerCase()));
 		} else {
 			node.animate(NPC_ANIM);

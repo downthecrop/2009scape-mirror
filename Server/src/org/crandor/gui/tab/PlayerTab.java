@@ -3,10 +3,13 @@ package org.crandor.gui.tab;
 
 import org.crandor.gui.ConsoleTab;
 import org.crandor.gui.component.PlayerViewer;
+import org.crandor.net.Constants;
 
 import javax.swing.*;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.SoftBevelBorder;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -80,11 +83,10 @@ public class PlayerTab extends ConsoleTab {
             public void actionPerformed(ActionEvent e) {
                 model.clear();
                 if (textField.getText() == null || textField.getText().length() < 1) {
-                	populatePlayerSearch();
                     return;
                 }
                 for (String name : playerNames) {
-                    if (name.toLowerCase().contains(textField.getText())) {
+                    if (name.toLowerCase().startsWith(textField.getText())) {
                         model.addElement(name);
                     }
                 }
@@ -147,12 +149,10 @@ public class PlayerTab extends ConsoleTab {
             System.out.println("Player directory was null!");
             return;
         }
+        System.out.println(getPlayerNames().toString());
         for (File file : Objects.requireNonNull(f.listFiles())) {
-        	String fileName = file.getName();
-        	if (!fileName.contains(".save")) continue;
-        	String playerName = fileName.replace(".save", "").trim();
-            playerNames.add(playerName);
-            model.addElement(playerName);
+            playerNames.add(file.getName().replace(".keldagrim", "").trim());
+            model.addElement(file.getName().replace(".keldagrim", "").trim());
         }
     }
 

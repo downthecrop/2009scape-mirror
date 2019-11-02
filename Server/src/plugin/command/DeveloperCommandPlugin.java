@@ -1,13 +1,16 @@
 package plugin.command;
 
+import com.sun.xml.internal.ws.util.StringUtils;
 import org.crandor.ServerConstants;
 import org.crandor.cache.Cache;
 import org.crandor.cache.def.impl.ItemDefinition;
 import org.crandor.cache.def.impl.NPCDefinition;
+import org.crandor.game.component.Component;
 import org.crandor.game.container.Container;
 import org.crandor.game.container.impl.EquipmentContainer;
 import org.crandor.game.content.eco.EconomyManagement;
 import org.crandor.game.content.global.shop.Shop;
+import org.crandor.game.content.global.shop.ShopViewer;
 import org.crandor.game.content.global.tutorial.TutorialSession;
 import org.crandor.game.content.holiday.HolidayItem;
 import org.crandor.game.content.holiday.ItemLimitation;
@@ -15,7 +18,6 @@ import org.crandor.game.content.skill.Skills;
 import org.crandor.game.content.skill.free.smithing.smelting.Bar;
 import org.crandor.game.content.skill.member.construction.HouseLocation;
 import org.crandor.game.content.skill.member.summoning.pet.Pets;
-import org.crandor.game.events.GlobalEvent;
 import org.crandor.game.events.GlobalEventManager;
 import org.crandor.game.node.entity.combat.ImpactHandler.HitsplatType;
 import org.crandor.game.node.entity.npc.NPC;
@@ -48,6 +50,9 @@ import org.crandor.game.world.map.zone.RegionZone;
 import org.crandor.game.world.repository.Repository;
 import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.game.world.update.flag.context.Graphics;
+import org.crandor.net.packet.PacketRepository;
+import org.crandor.net.packet.context.ContainerContext;
+import org.crandor.net.packet.out.ContainerPacket;
 import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
 import org.crandor.plugin.PluginManager;
@@ -99,9 +104,6 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
     @SuppressWarnings("deprecation")
     @Override
     public boolean parse(final Player player, String name, String[] args) {
-        String[] eventNameArr;
-        String eventName;
-        GlobalEvent event = GlobalEvent.ALCHEMY_HELLENISTIC;
         switch (name) {
             case "find":
                 try {
@@ -155,6 +157,10 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
                     }
                 });
                 break;
+            case "item":
+                int itemId = Integer.parseInt(args[1]), amount = Integer.parseInt(args[2]);
+                player.getInventory().add(new Item(itemId, amount));
+                break;
             case "eventlocator":
                 player.getDialogueInterpreter().open(175869, GlobalEventManager.get().getCurrentEvent());
                 break;
@@ -175,46 +181,26 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
             case "taskamount":
                 player.sendMessage("You have " + player.getSkillTasks().getTaskAmount() + " more to go!");
                 break;
-
-            case "eventactivate":
-            case "eventstart":
-            case "eventbegin":
-            case "activateevent":
-            case "startevent":
-            case "beginevent":
-                eventNameArr = Arrays.copyOfRange(args, 1, args.length);
-                eventName = String.join(" ", eventNameArr);
-                event = GlobalEventManager.getEvent(eventName);
-                if (event == null)
-                	break;
-				GlobalEventManager.get().activate(event);
-                player.sendMessage("You have activated the " + event.getName() + " event!");
+            case "activatexp":
+                String target = "";
+                for (int i = 1; i < args.length; i++)
+                    target += args[i] + ((i == args.length - 1) ? "" : " ");
+                if (args.length > 1)
+                    GlobalEventManager.get().activate("XPFever", target);
+                else
+                    GlobalEventManager.get().activate("XPFever", target);
                 break;
-
-            case "eventdeactivate":
-            case "eventend":
-            case "eventfinish":
-            case "deactivateevent":
-            case "endevent":
-            case "finishevent":
-                eventNameArr = Arrays.copyOfRange(args, 1, args.length);
-                eventName = String.join(" ", eventNameArr);
-                event = GlobalEventManager.getEvent(eventName);
-                if (event == null)
-                	break;
-				GlobalEventManager.get().deactivate(event);
-                player.sendMessage("You have deactivated the " + event.getName() + " event!");
-                break;
-
             case "poison":
                 player.getStateManager().set(EntityState.POISONED, 200, player);
                 player.getConfigManager().set(102, 1);
                 player.sendMessage("Poisoned...");
                 break;
-
             case "activatecf":
-                GlobalEventManager.get().activate(GlobalEvent.CLONE_FEST);
-                if (GlobalEvent.CLONE_FEST.isActive()) {
+                target = "Developers";
+                for (int i = 1; i < args.length; i++)
+                    target += args[i] + ((i == args.length - 1) ? "" : " ");
+                GlobalEventManager.get().activate("Clone Fest", null);
+                if (GlobalEventManager.get().isActive("Clone Fest")) {
                     int size = 20;
                     if (PVPAIPActions.pvp_players == null) {
                         player.setAttribute("aip_legion", PVPAIPActions.pvp_players = new ArrayList<>());
@@ -235,6 +221,12 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
                     }
                     PVPAIPActions.syncBotThread(player);
                 }
+                break;
+            case "deactivatexp":
+                GlobalEventManager.get().deactivate("XPFever");
+                break;
+            case "deactivatecf":
+                GlobalEventManager.get().deactivate("Clone Fest");
                 break;
             case "reloaddb":
                 SQLManager.init();
@@ -479,7 +471,7 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
                 return true;
             case "special":
             case "spec":
-                int amount = args.length > 1 ? Integer.parseInt(args[1]) : 100;
+                amount = args.length > 1 ? Integer.parseInt(args[1]) : 100;
                 player.getSettings().setSpecialEnergy(amount);
                 return true;
             case "god":
