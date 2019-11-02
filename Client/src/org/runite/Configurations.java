@@ -12,7 +12,7 @@ public final class Configurations {
 	/**
 	 * The website.
 	 */
-	public static final String WEBSITE = "http://www.os.frostblades.org";
+	public static final String WEBSITE = "http://localhost";
 	
 	/**
 	 * The client build.
@@ -63,7 +63,7 @@ public final class Configurations {
 	/**
 	 * The MS IP.
 	 */
-	public static final String MS_IP = (Configurations.LOCAL_MS ? "127.0.0.1" : "frostblades.org");
+	public static final String MS_IP = (Configurations.LOCAL_MS ? "127.0.0.1" : "localhost");
 	
 	/**
 	 * The operation system name.

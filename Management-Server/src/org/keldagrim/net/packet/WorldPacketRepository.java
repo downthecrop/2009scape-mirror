@@ -305,8 +305,8 @@ public final class WorldPacketRepository {
 		String macAddress = buffer.getString();
 		String compName = buffer.getString();
 		String serial = buffer.getString();
-		int rights = server.getInfo().getRevision() == 498 ? 0 : buffer.getInt();
-		int chatIcon = server.getInfo().getRevision() == 498 ? 0 : buffer.get();
+		int rights = buffer.getInt();
+		int chatIcon = buffer.get();
 		UIDInfo uid = new UIDInfo(ipAddress, compName, macAddress, serial);
 		PlayerSession player = new PlayerSession(username, password, new UIDInfo(ipAddress, compName, macAddress, serial));
 		if (WorldDatabase.isActivePlayer(username)) {
@@ -430,7 +430,7 @@ public final class WorldPacketRepository {
 		}
 		ClanRepository clan = ClanRepository.get(server, clanName);
 		if (clan == null) {
-			sendPlayerMessage(player, "The channel you tried to join does not exist. Try joining the main clan named 'Keldagrim'.:clan:");
+			sendPlayerMessage(player, "The channel you tried to join does not exist (" + clanName + ").<br/>Try joining the main clan named 'Sparr0w'.:clan:");
 			return;
 		}
 		clan.enter(player);

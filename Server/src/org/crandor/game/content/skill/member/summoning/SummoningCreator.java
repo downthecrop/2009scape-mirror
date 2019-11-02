@@ -168,7 +168,9 @@ public final class SummoningCreator {
 					}
 				}
 				if (player.getInventory().remove(type.getRequired())) {
-					Perks.addDouble(player, type.getProduct());
+					final Item item = type.getProduct();
+				    player.getInventory().add(item);
+					Perks.addDouble(player, item);
 					player.getSkills().addExperience(Skills.SUMMONING, type.getExperience(), true);
 				}
 			}

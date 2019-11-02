@@ -62,7 +62,7 @@ public class SmithingPulse extends SkillPulse<Item> {
 			player.getDialogueInterpreter().sendDialogue("You need a hammer to work the metal with.");
 			return false;
 		}
-		if (TutorialSession.getExtension(player).getStage() <= TutorialSession.MAX_STAGE && node.getId() != Bars.BRONZE_DAGGER.getProduct()) {
+		if (TutorialSession.getExtension(player).getStage() < TutorialSession.MAX_STAGE && node.getId() != Bars.BRONZE_DAGGER.getProduct()) {
 			return false;
 		}
 		return true;
@@ -80,7 +80,9 @@ public class SmithingPulse extends SkillPulse<Item> {
 			return false;
 		}
 		player.getInventory().remove(new Item(bar.getBarType().getBarType(), bar.getSmithingType().getRequired()));
-		Perks.addDouble(player, (new Item(node.getId(), bar.getSmithingType().getProductAmount())));
+		final Item item = new Item(node.getId(), bar.getSmithingType().getProductAmount());
+	    player.getInventory().add(item);
+		Perks.addDouble(player, item);
 		player.getSkills().addExperience(Skills.SMITHING, bar.getBarType().getExperience() * bar.getSmithingType().getRequired(), true);
 		String message = StringUtils.isPlusN(ItemDefinition.forId(bar.getProduct()).getName().toLowerCase()) == true ? "an" : "a";
 		player.getPacketDispatch().sendMessage("You hammer the " + bar.getBarType().getBarName().toLowerCase().replace("smithing", "") + "and make " + message + " " + ItemDefinition.forId(bar.getProduct()).getName().toLowerCase() + ".");
