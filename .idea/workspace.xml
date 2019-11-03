@@ -68,7 +68,7 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Application.GameLaunch">
+  <component name="RunManager" selected="Application.Server">
     <configuration name="GameLaunch" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="org.runite.GameLaunch" />
       <module name="09Scape" />
@@ -99,6 +99,7 @@
       <option name="ALTERNATIVE_JRE_PATH" value="1.8" />
       <option name="MAIN_CLASS_NAME" value="org.crandor.Server" />
       <module name="09Scape" />
+      <option name="VM_PARAMETERS" value="-Xmx1024m" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/Server" />
       <extension name="coverage">
         <pattern>
@@ -117,8 +118,8 @@
     </list>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.GameLaunch" />
         <item itemvalue="Application.Server" />
+        <item itemvalue="Application.GameLaunch" />
         <item itemvalue="Application.Management" />
       </list>
     </recent_temporary>
