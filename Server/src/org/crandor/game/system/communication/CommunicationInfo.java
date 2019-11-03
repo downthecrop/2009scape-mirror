@@ -52,7 +52,7 @@ public final class CommunicationInfo {
 	/**
 	 * The current clan this player is in.
 	 */
-	private String currentClan = "keldagrim";
+	private String currentClan = "";
 
 	/**
 	 * The rank required for joining.

@@ -74,8 +74,8 @@ public class PvMBots extends AIPlayer {
         if (creatures == null) {
             return false;
         }
-        if (!(creatures.isEmpty())) {
             bot.attack(creatures.get(RandomFunction.getRandom((creatures.size() - 1))));
+        if (!creatures.isEmpty()) {
             return true;
         } else {
             creatures = FindTargets(bot, radius);
@@ -90,7 +90,9 @@ public class PvMBots extends AIPlayer {
 
     @Override
     public void tick() {
-        super.tick();
+		super.tick();
+
+		this.tick++;
 
         //Despawn
         if (this.getSkills().getLifepoints() == 0)
@@ -99,12 +101,12 @@ public class PvMBots extends AIPlayer {
             AIPlayer.deregister(this.getUid());
 
         //Npc Combat
-        if (tick == 0) {
-            if (!this.inCombat())
-                AttackNpcsInRadius(this, 5);
-            this.tick = 10;
-        } else
-            this.tick--;
+		if (this.tick % 10 == 0) {
+			if (!this.inCombat())
+				AttackNpcsInRadius(this, 5);
+		}
+
+		if (this.tick == 100) this.tick = 0;
 
         //this.eat();
         //this.getPrayer().toggle()

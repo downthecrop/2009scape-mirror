@@ -50,10 +50,8 @@ public final class DropItemHandler {
 			if (player.getInventory().replace(null, item.getSlot()) == item) {
 				item = item.getDropItem();
 				player.getAudioManager().send(new Audio(item.getId() == 995 ? 10 : 2739, 1, 0));
-				if (!player.getDetails().getRights().equals(Rights.ADMINISTRATOR) || !player.getAttribute("tut-island", false)) {
-					GroundItemManager.create(item, player.getLocation(), player);
-					PlayerParser.dump(player);
-				}
+				GroundItemManager.create(item, player.getLocation(), player);
+				PlayerParser.dump(player);
 			} else {
 				GroundItemManager.create(item, player.getLocation(), player).setDecayTime(99);
 				PlayerParser.dump(player);

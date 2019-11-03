@@ -173,7 +173,9 @@ public class CookingProperties {
 	public boolean cook(final Food food, final Player player, final GameObject object, final boolean burned) {
 		if (player.getInventory().remove(food.getRaw())) {
 			if (!burned) {
-				Perks.addDouble(player, food.getItem());
+				Item item = food.getItem();
+				player.getInventory().add(item);
+				Perks.addDouble(player, item);
 			} else {
 				player.getInventory().add(food.getBurnt());
 			}

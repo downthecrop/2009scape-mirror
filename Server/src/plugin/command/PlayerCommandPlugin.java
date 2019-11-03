@@ -2,7 +2,8 @@ package plugin.command;
 
 import org.crandor.ServerConstants;
 import org.crandor.game.component.Component;
-import org.crandor.game.content.global.tutorial.TutorialStage;
+import org.crandor.game.events.GlobalEvent;
+import org.crandor.game.events.GlobalEventManager;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.info.Rights;
 import org.crandor.game.node.entity.player.link.IronmanMode;
@@ -14,12 +15,13 @@ import org.crandor.game.system.command.CommandSet;
 import org.crandor.game.system.communication.ClanRepository;
 import org.crandor.game.system.communication.CommunicationInfo;
 import org.crandor.game.world.GameWorld;
-import org.crandor.game.world.map.Location;
 import org.crandor.game.world.repository.Repository;
 import org.crandor.net.amsc.WorldCommunicator;
 import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
 import org.crandor.tools.StringUtils;
+
+import plugin.zone.GrandExchangeZone.CreditStore;
 
 /**
  * Handles a player command.
@@ -27,6 +29,11 @@ import org.crandor.tools.StringUtils;
  */
 @InitializablePlugin
 public final class PlayerCommandPlugin extends CommandPlugin {
+
+	/**
+	 * The store that sells items in exchange for credits.
+	 */
+	private static final CreditStore CREDIT_STORE = new CreditStore();
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
@@ -37,7 +44,8 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 	@Override
 	public boolean parse(Player player, String name, String[] arguments) {
 		switch (name) {
-
+			/*
+			 * Disabled commands
 			case "shutdowninterface":
 				player.getInterfaceManager().close();
 				break;
@@ -46,8 +54,24 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 				int stage = Integer.parseInt(arguments[1]);
 				TutorialStage.load(player, stage, false);
 				break;
+			*/
 
-			case "resettabs":
+			case "shop":
+				CREDIT_STORE.open(player);
+				break;
+
+			case "credits":
+				int credits = CREDIT_STORE.getPoints(player);
+				player.sendMessage("<col=3498db>You currently have " + credits + " credits to spend.");
+				break;
+
+			case "bank":
+				if (!player.isAdmin()) {
+					player.sendChat("Hey, everyone, I just tried to do something very silly!");
+				}
+				break;
+				
+			case "bankresettabs":
 				for (int i = 0; i < player.getBank().getTabStartSlot().length; i++) {
 					player.getBank().getTabStartSlot()[i] = 0;
 				}
@@ -55,11 +79,12 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 				if (player.getBank().isOpen()) {
 					player.getInterfaceManager().close();
 				}
-				player.getPacketDispatch().sendMessage("Bank tabs are reset!");
+				player.sendMessage("<col=3498db>Your bank tabs have been reset!");
 				return true;
-			case "resetpin":
+				
+			case "bankresetpin":
 				if (arguments.length < 2) {
-					player.sendMessage("Syntax error: ::resetpin oldpin");
+					player.sendMessage("<col=e74c3c>You must specify your current pin!");
 					return true;
 				}
 				String oldPin = arguments[1];
@@ -67,24 +92,20 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 					return true;
 				}
 				if (!player.getBankPinManager().hasPin()) {
-					player.sendMessage("You don't have a pin.");
+					player.sendMessage("<col=e74c3c>You don't currently have a pin set.");
 					return true;
 				}
 				if (!oldPin.equals(player.getBankPinManager().getPin())) {
-					player.sendMessage("Your old pin doesn't match your current pin.");
+					player.sendMessage("<col=e74c3c>" + oldPin + " doesn't match your current pin.");
 					return true;
 				}
 				player.getBankPinManager().setPin(null);
-				player.sendMessage("Your pin has been reset.");
+				player.sendMessage("<col=3498db>Your pin has been reset.");
 				return true;
-			case "bank":// The players want OSRS content, let's give it to em
-				if (!player.isAdmin()) {
-					player.sendChat("Hey, everyone, I just tried to do something very silly!");
-				}
-				break;
+
 			case "players":
 				int count = Repository.getPlayers().size();
-				int ironCount = 1;
+				int ironCount = 0;
 				int ultIronCount = 0;
 				for (Player p : Repository.getPlayers()) {
 					if (p.getIronmanManager().checkRestriction(IronmanMode.ULTIMATE)) {
@@ -96,36 +117,34 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 				}
 				int regular = count - ironCount - ultIronCount;
 				if (count == 1) {
-					player.getPacketDispatch().sendMessage("There is 1 active player in this world.");
+					player.sendMessage("<col=3498db>There is 1 active player in this world.");
 				} else {
-					player.getPacketDispatch().sendMessage("There are " + count + " active players in this world: " + regular + " regular, " + ironCount + " iron, and " + ultIronCount + " ultimate iron.");
+					player.sendMessage("<col=3498db>There are " + count + " active players in this world: " + regular + " regular, " + ironCount + " iron, and " + ultIronCount + " ultimate iron.");
 				}
 				return player.getRights() == Rights.REGULAR_PLAYER;
+
 			case "yell":
 				if (!player.isDonator() && !player.isAdmin()) {
-					player.getPacketDispatch().sendMessages("Join clan chat \"" + GameWorld.getName() + "\" to talk globally, or become a donator to have access to", "this benefit.");
+					player.sendMessages("Join clan chat \"" + GameWorld.getName() + "\" to talk globally, or become a donator to have access to", "this benefit.");
 					return true;
 				}
 				if (player.getDetails().isMuted()) {
-					player.getPacketDispatch().sendMessage("You have been " + (player.getDetails().isPermMute() ? "permanently" : "temporarily") + " muted due to breaking a rule.");
+					player.sendMessage("<col=e74c3c>You have been " + (player.getDetails().isPermMute() ? "permanently" : "temporarily") + " muted due to breaking a rule.");
 					return true;
 				}
 				if(WorldCommunicator.isEnabled()){
 					if(ClanRepository.getDefault().isBanned(player.getName())){
-						player.sendMessages("You are temporarily unable to yell as you are banned from the main clan chat.", "Don't be annoying!");
+						player.sendMessages("<col=e74c3c>You are temporarily unable to yell as you are banned from the main clan chat.", "Don't be annoying!");
 						return true;
 					}
 				}
 				if (player.getAttribute("yell-delay", 0.0) > GameWorld.getTicks()) {
-					player.sendMessages("You have yelled in the last " + player.getDonatorType().getCooldown() + " seconds. Upgrade to an extreme donator to have", "unlimited yelling abilities.");
+					player.sendMessages("<col=e74c3c>You have yelled in the last " + player.getDonatorType().getCooldown() + " seconds. Upgrade to an extreme donator to have", "unlimited yelling abilities.");
 					return true;
 				}
 				String text = getArgumentLine(arguments);
 				if(text.contains("<img=") || text.contains("<br>") || text.contains("<col=") || text.contains("<shad=")){
-					player.sendMessage("Bad! No images/text effects allowed in yell chat.");
-					return true;
-				}
-				if(text.contains("aq p")){
+					player.sendMessage("<col=e74c3c>Bad! No images/text effects allowed in yell chat.");
 					return true;
 				}
 				int length = text.length();
@@ -146,27 +165,37 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 						player.setAttribute("yell-delay", (int) GameWorld.getTicks() + (player.getDonatorType().getCooldown() / 0.6));
 					}
 				} else {
-					player.getPacketDispatch().sendMessage("Your message was too short.");
+					player.sendMessage("<col=e74c3c>Your message was too short.");
 				}
 				return true;
+
 			case "togglenews":
 				player.getSavedData().getGlobalData().setDisableNews(!player.getSavedData().getGlobalData().isDisableNews());
-				player.sendMessage("<col=FF0000>" + (player.getSavedData().getGlobalData().isDisableNews() ? "You will no longer see news notifications." : "You will now see news notifications."));
+				player.sendMessage("<col=3498db>" + (player.getSavedData().getGlobalData().isDisableNews() ? "You will no longer see news notifications." : "You will now see news notifications."));
 				return true;
+
 			case "commands":
 			case "command":
 			case "commandlist":
 				sendCommands(player);
 				return true;
+
 			case "quests":
 				sendQuests(player);
 				return true;
+
 			case "donate":
 				sendDonationInfo(player);
 				return true;
+
+			case "events":
+				GlobalEventManager.get().alert(player);
+				sendEvents(player);
+				return true;
+
 			case "reply":
 				if(player.getInterfaceManager().isOpened()){
-					player.sendMessage("Please finish what you're doing first.");
+					player.sendMessage("<col=e74c3c>Please finish what you're doing first.");
 					return true;
 				}
 				if (player.getAttributes().containsKey("replyTo")) {
@@ -182,7 +211,7 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 					});
 					player.getDialogueInterpreter().sendMessageInput(StringUtils.formatDisplayName(replyTo));
 				} else {
-					player.getPacketDispatch().sendMessage("You have not recieved any recent messages to which you can reply.");
+					player.getPacketDispatch().sendMessage("<col=3498db>You have not recieved any recent messages to which you can reply.");
 				}
 				return true;
 		}
@@ -198,13 +227,34 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 			player.sendMessage("Finish what you're currently doing.");
 			return;
 		}
-		player.getInterfaceManager().close();
-		player.getPacketDispatch().sendString("<u>" + GameWorld.getName() + " commands</u>", 239, 1);
-		player.getPacketDispatch().sendString("::filter (completely toggles game messages)<br>::players (shows player count)<br>::doublexp (claims double xp)<br>::shop opens up a dialogue so you can use credits<br>::togglenews toggles the news broadcasts.<br>::help shows a small help dialogue<br>::toggleatk toggles left-click attack option mode<br>Shift+Scroll wheel zooms the client in/out", 239, 2);
-		player.getPacketDispatch().sendString("", 239, 3);
-		player.getPacketDispatch().sendString("", 239, 4);
-		player.getPacketDispatch().sendString("", 239, 5);
-		player.getInterfaceManager().openComponent(239);
+		player.getInterfaceManager().open(new Component(275));
+		//CLear old data
+		for (int i = 0; i < 311; i++) {
+			player.getPacketDispatch().sendString("", 275, i);
+		}
+		// Title
+		player.getPacketDispatch().sendString("<col=ecf0f1>" + GameWorld.getName() + " commands</col>", 275, 2);
+
+		// Content
+		int lineId = 11;
+		player.getPacketDispatch().sendString("<col=ecf0f1>::commands", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Shows this list.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::players", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Get online player count.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::quests", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Shows a list of all available quests.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::shop", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Open the reward credits shop.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::credits", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Get your reward credits balance.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::togglenews", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Toggles the news broadcasts.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::toggleatk", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Toggles left-click attack option mode.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::bankresetpin [pin]", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Remove your bank pin.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::bankresettabs", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Reset all of your bank tabs.", 275, lineId++);
 	}
 
 	/**
@@ -213,13 +263,13 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 	 */
 	private void sendDonationInfo(Player player) {
 		player.getInterfaceManager().open(new Component(275));
-		for (int i = 0; i < 257; i++) {
+		for (int i = 0; i < 311; i++) {
 			player.getPacketDispatch().sendString("", 275, i);
 		}
 		int lineId = 11;
-		player.getPacketDispatch().sendString("<col=8A0808>" + "Donation Information" + "</col>", 275, 2);
+		player.getPacketDispatch().sendString("<col=ecf0f1>" + "Donation Information" + "</col>", 275, 2);
 		for (String s : ServerConstants.MESSAGES) {
-			player.getPacketDispatch().sendString("<col=8A0808>" + s + "<br><br></col>", 275, lineId++);
+			player.getPacketDispatch().sendString("<col=2c3e50>" + s + "<br><br></col>", 275, lineId++);
 		}
 	}
 	/**
@@ -228,14 +278,41 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 	 */
 	private void sendQuests(Player player) {
 		player.getInterfaceManager().open(new Component(275));
-		for (int i = 0; i < 257; i++) {
+		for (int i = 0; i < 311; i++) {
 			player.getPacketDispatch().sendString("", 275, i);
 		}
-		String red = "<col=8A0808>";
 		int lineId = 11;
-		player.getPacketDispatch().sendString("<col=8A0808>" + "Available Quests" + "</col>", 275, 2);
+		player.getPacketDispatch().sendString("<col=ecf0f1>" + "Available Quests" + "</col>", 275, 2);
 		for (Quest q : QuestRepository.getQuests().values()) {
-			player.getPacketDispatch().sendString(q.isCompleted(player) ? red + "<str> " + q.getName() + " <br><br>" : red + " " + q.getName() + " <br><br>", 275, lineId++);
+			// Add a space to beginning and end of string for the strikethrough
+			player.getPacketDispatch().sendString("<col=ecf0f1>" + (q.isCompleted(player) ? "<str> " : "") + q.getName() + " ", 275, lineId++);
+		}
+	}
+
+	/**
+	 * Sends events list.
+	 * @param player the player.
+	 */
+	private void sendEvents(Player player) {
+		if (player.getInterfaceManager().isOpened()) {
+			player.sendMessage("Finish what you're currently doing.");
+			return;
+		}
+		player.getInterfaceManager().open(new Component(275));
+		//CLear old data
+		for (int i = 0; i < 311; i++) {
+			player.getPacketDispatch().sendString("", 275, i);
+		}
+		// Title
+		player.getPacketDispatch().sendString("<col=ecf0f1>" + GameWorld.getName() + " Events</col>", 275, 2);
+
+		// Content
+		int lineId = 11;
+		for(GlobalEvent event : GlobalEvent.values()){
+			player.getPacketDispatch().sendString("<col=ecf0f1>" + event.getName(), 275, lineId++);
+			if (event.isActive())
+				player.getPacketDispatch().sendString("<col=8e44ad>(active)", 275, lineId++);
+			player.getPacketDispatch().sendString("<col=2c3e50>" +  event.getDescription(), 275, lineId++);
 		}
 	}
 

@@ -73,7 +73,9 @@ public final class GemCutPulse extends SkillPulse<Item> {
 			return false;
 		}
 		if (player.getInventory().remove(gem.getUncut())) {
-			Perks.addDouble(player, gem.getGem());
+			final Item item = gem.getGem();
+		    player.getInventory().add(item);
+			Perks.addDouble(player, item);
 			player.getSkills().addExperience(Skills.CRAFTING, gem.getExp(), true);
 		}
 		amount--;

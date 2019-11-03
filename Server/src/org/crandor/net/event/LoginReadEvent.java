@@ -127,7 +127,8 @@ public final class LoginReadEvent extends IoReadEvent {
 
 	/**
 	 * Handles the login procedure after we check an acc is registered & certified.
-	 * @param details the player details.
+	 * @param username the username.
+	 * @param password the password.
 	 * @param session the session.
 	 * @param buffer the byte buffer.
 	 * @param opcode the opcode.
