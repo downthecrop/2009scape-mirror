@@ -390,7 +390,7 @@ public final class Client extends GameShell {
 					Class3_Sub28_Sub19.anInt3773 = 40000 + ObjectDefinition.worldId;
 				} else if(Class44.anInt718 == 2) {
 					RuntimeException_Sub1.worldListHost = "127.0.0.1";
-					System.out.println("port = " + Class53.anInt867);
+					System.out.println("Setting worldListHost to 127.0.0.1, port = " + Class53.anInt867);
 					Class53.anInt867 = ObjectDefinition.worldId + '\uc350';
 					Class3_Sub28_Sub19.anInt3773 = ObjectDefinition.worldId + '\u9c40';
 				}

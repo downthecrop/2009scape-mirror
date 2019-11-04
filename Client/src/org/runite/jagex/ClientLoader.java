@@ -88,7 +88,7 @@ public class ClientLoader extends Applet {
 	public void launch() {
 		try {
 			ClientLoader.world = "" + GameLaunch.SETTINGS.getWorld();
-			System.out.println(GameLaunch.SETTINGS.getWorld());
+			//System.out.println(GameLaunch.SETTINGS.getWorld());
 			this.frame = new JFrame(GameLaunch.SETTINGS.getName());
 			this.frame.setLayout(new BorderLayout());
 			this.frame.setBackground(Color.BLACK);

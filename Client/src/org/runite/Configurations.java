@@ -27,8 +27,8 @@ public final class Configurations {
 	/**
 	 * If the client is local.
 	 */
-	public static final boolean LOCAL_MS = true;
-	public static final boolean LOCAL_SERVER = true;
+	public static boolean LOCAL_MS = true;
+	public static boolean LOCAL_SERVER = true;
 
 	/**
 	 * Packaging.
@@ -63,8 +63,8 @@ public final class Configurations {
 	/**
 	 * The MS IP.
 	 */
-	public static final String MS_IP = (Configurations.LOCAL_MS ? "127.0.0.1" : "frostblades.org");
-	
+	public static String MS_IP = Configurations.LOCAL_MS ? "127.0.0.1" : "34.68.75.237";
+
 	/**
 	 * The operation system name.
 	 */
