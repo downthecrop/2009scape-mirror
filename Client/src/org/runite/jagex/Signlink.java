@@ -153,6 +153,7 @@ public class Signlink implements Runnable {
    }
 
    public final Class64 method1441(byte var1, String address, int port) {
+      //System.out.println("var1: " + var1 + ", add: " + address + ":" + port);
       return var1 != 8?null:this.method1435(1, 0, address, port, -17);
    }
 
