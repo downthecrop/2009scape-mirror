@@ -13,5 +13,4 @@ data/profile/**
 *.iml
 *.eml
 *.userlibraries
-*.class
 data/players/**
