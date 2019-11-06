@@ -152,7 +152,7 @@ public final class CommunicationInfo {
 		statement.setString(3, contacts);
 		statement.setString(4, blocked);
 		statement.setString(5, clanName);
-		statement.setString(6, currentClan == null ? "grim" : currentClan);
+		statement.setString(6, currentClan);
 		statement.setString(7, joinRequirement.ordinal() + "," + messageRequirement.ordinal() + "," + kickRequirement.ordinal() + "," + lootRequirement.ordinal());
 		statement.setString(8, publicChatSetting + "," + privateChatSetting + "," + tradeSetting);
 	}
