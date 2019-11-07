@@ -107,11 +107,11 @@ final class Class86 {
 
    public Class86() {
       try {
-         this.anInt1177 = Class92.anInt1322;
+         this.anInt1177 = Class92.defaultScreenColorRgb;
          this.aFloat1189 = 1.2F;
          this.anInt1178 = -50;
          this.aFloat1187 = 1.1523438F;
-         this.anInt1175 = Class92.anInt1316;
+         this.anInt1175 = Class92.defaulFogColorRgb;
          this.anInt1181 = -60;
          this.aFloat1190 = 0.69921875F;
          this.anInt1184 = 0;
@@ -125,7 +125,7 @@ final class Class86 {
       try {
          int var2 = var1.getByte((byte)-92);
          if(~(var2 & 1) == -1) {
-            this.anInt1177 = Class92.anInt1322;
+            this.anInt1177 = Class92.defaultScreenColorRgb;
          } else {
             this.anInt1177 = var1.getInt();
          }
@@ -159,7 +159,7 @@ final class Class86 {
          }
 
          if((32 & var2) == 0) {
-            this.anInt1175 = Class92.anInt1316;
+            this.anInt1175 = Class92.defaulFogColorRgb;
          } else {
             this.anInt1175 = var1.getInt();
          }

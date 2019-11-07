@@ -11,6 +11,7 @@ import org.crandor.net.amsc.WorldCommunicator;
 import org.crandor.tools.TimeStamp;
 import org.crandor.tools.backup.AutoBackup;
 
+import java.awt.*;
 import java.net.BindException;
 
 /**
@@ -44,7 +45,11 @@ public final class Server {
 			GameWorld.setSettings(GameSettings.parse(args));
 		}
 		if (GameWorld.getSettings().isGui()) {
-			ConsoleFrame.getInstance().init();
+			try {
+				ConsoleFrame.getInstance().init();
+			} catch (Exception e) {
+				System.out.println("X11 server missing - launching server with no GUI!");
+			}
 		}
 		startTime = System.currentTimeMillis();
 		final TimeStamp t = new TimeStamp();

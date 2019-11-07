@@ -26,7 +26,7 @@ public final class PlayerParser {
 	 */
 	@SuppressWarnings("deprecation")
 	public static void parse(Player player) {
-		final File file = new File(("data/players/" + player.getName() + ".keldagrim"));
+		final File file = new File(("data/players/" + player.getName() + ".save"));
 		if (!file.exists()) {
 			dump(player);
 		}
@@ -300,7 +300,7 @@ public final class PlayerParser {
 		
 		buffer.put((byte) 0); // EOF opcode
 		buffer.flip();
-		File file = new File(directory + "players/" + player.getName() + ".keldagrim");
+		File file = new File(directory + "players/" + player.getName() + ".save");
 		try (RandomAccessFile raf = new RandomAccessFile(file, "rw"); FileChannel channel = raf.getChannel()) {
 			channel.write(buffer);
 			raf.close();

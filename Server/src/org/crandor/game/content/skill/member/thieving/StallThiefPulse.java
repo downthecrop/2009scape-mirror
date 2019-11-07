@@ -96,7 +96,6 @@ public final class StallThiefPulse extends SkillPulse<GameObject> {
 		}
 		final boolean success = success();
 		if (success) {
-			final Item item = stall.getRandomLoot();
 			if (stall == Stall.SILK_STALL) {
 				player.getSavedData().getGlobalData().setSilkSteal(System.currentTimeMillis() + 1800000);
 			}
@@ -106,6 +105,8 @@ public final class StallThiefPulse extends SkillPulse<GameObject> {
 			if (node.isActive()) {
 				ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(stall.getTemporary()), stall.getDelay());
 			}
+			final Item item = stall.getRandomLoot();
+		    player.getInventory().add(item);
 			Perks.addDouble(player, item, true);
 			player.getSkills().addExperience(Skills.THIEVING, stall.getExperience(), true);
 			if (item.getId() == 1987) {

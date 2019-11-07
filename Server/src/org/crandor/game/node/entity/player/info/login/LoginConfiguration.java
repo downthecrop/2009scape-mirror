@@ -84,14 +84,12 @@ public final class LoginConfiguration {
 	 */
 	public static void sendLobbyScreen(Player player) {
 		int random = RandomFunction.getRandom(50);
-		if(player.getUsername().equalsIgnoreCase("ethan"))
-			player.getDetails().setRights(Rights.ADMINISTRATOR);
 
 		Repository.getLobbyPlayers().add(player);
 		player.getPacketDispatch().sendString(getLastLogin(player), 378, 116);
 		player.getPacketDispatch().sendString("Welcome to " + GameWorld.getName(), 378, 115);
 		player.getPacketDispatch().sendString("" + player.getDetails().getShop().getCredits(), 378, 96);
-		player.getPacketDispatch().sendString(player.getDetails().getShop().getCredits() + " Keldagrim credits", 378, 94);
+		player.getPacketDispatch().sendString(player.getDetails().getShop().getCredits() + " credits", 378, 94);
 		player.getPacketDispatch().sendString(SystemManager.getSystemConfig().getConfig("weeklyMessage", "Welcome to RuneScape!"), SystemManager.getSystemConfig().getConfig("messageInterface", 18), getMessageChild(SystemManager.getSystemConfig().getConfig("messageInterface", 18)));
 		player.getPacketDispatch().sendString("You can gain more credits by voting, reporting bugs and various other methods of contribution.", 378, 93);
 		player.getInterfaceManager().openWindowsPane(LOBBY_PANE);
@@ -126,8 +124,6 @@ public final class LoginConfiguration {
 	 * @param player The player to send to.
 	 */
 	public static void sendGameConfiguration(final Player player) {
-		TutorialSession.getExtension(player).setStage(0);
-		player.setAttribute("tut-island", true);
 		player.getInterfaceManager().openWindowsPane(new Component(player.getInterfaceManager().isResizable() ? 746 : 548));
 		player.getInterfaceManager().openChatbox(137);
 		player.getInterfaceManager().openDefaultTabs();
@@ -158,14 +154,14 @@ public final class LoginConfiguration {
 			return;
 		}
 		player.getPacketDispatch().sendMessage("Welcome to " + GameWorld.getName() + ".");
-		player.getPacketDispatch().sendMessage("You are currently playing in beta version 1.2");
+		//player.getPacketDispatch().sendMessage("You are currently playing in beta version 1.2");
 		if (player.getDetails().isMuted()) {
 			player.getPacketDispatch().sendMessage("You are muted.");
 			player.getPacketDispatch().sendMessage("To prevent further mutes please read the rules.");
 		}
 		GlobalEventManager.get().alert(player);
 		if(player.getSkills().getTotalLevel() < 300){
-			Repository.sendNews("<col=BA55D3>As a new player, you are receiving boosted combat skill experience.</col>", "<col=BA55D3>In addition, you may speak to the Keldagrim Guide for game information.");
+			Repository.sendNews("<col=BA55D3>As a new player, you are receiving boosted combat skill experience.</col>", "<col=BA55D3>In addition, you may speak to the Guide for game information.");
 		}
 		player.setAttribute("startTime", System.currentTimeMillis());
 //		ResourceAIPManager.get().load(player);

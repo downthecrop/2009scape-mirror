@@ -167,9 +167,9 @@ final class Class158_Sub1 extends Class158 implements ImageProducer, ImageObserv
             int var24;
             if(HDToolKit.highDetail) {
                if(!Class106.aBoolean1441) {
-                  var10 = (int)Class92.aFloatArray1312[0];
-                  var11 = (int)Class92.aFloatArray1312[1];
-                  var37 = (int)Class92.aFloatArray1312[2];
+                  var10 = (int)Class92.light0Position[0];
+                  var11 = (int)Class92.light0Position[1];
+                  var37 = (int)Class92.light0Position[2];
                   var13 = (int)Math.sqrt((double)(var11 * var11 + (var10 * var10 - -(var37 * var37))));
                   var14 = 1024 * var13 >> 8;
 

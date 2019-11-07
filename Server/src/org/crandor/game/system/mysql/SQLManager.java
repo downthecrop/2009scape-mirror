@@ -21,21 +21,23 @@ public final class SQLManager {
 	 */
 	public static final boolean LOCAL = true;
 
+	public static final String SQL_SERVER_ADDRESS = LOCAL ? "127.0.0.1" : "mywebsite.com";
+
+	/**
+	 * The username of the user.
+	 */
+	private static final String USERNAME = LOCAL ? "root" : "username";
+
+	/**
+	 * The password of the user.
+	 */
+	private static final String PASSWORD = LOCAL ? "" : "password";
+
     /**
      * The database URL.
      */
-    public static final String DATABASE_URL = (LOCAL ? "127.0.0.1" : "keldagrim.org") + ":3306/"+ (LOCAL ? "global" : ServerConstants.DATABASE_NAMES[1]);
-    public static final String DATABASE_URL_SERVER = (LOCAL ? "127.0.0.1" : "keldagrim.org") + ":3306/"+ (LOCAL ? "server" : ServerConstants.DATABASE_NAMES[0]);
-
-    /**
-     * The username of the user.
-     */
-    private static final String USERNAME = (LOCAL ? "root" : "keldagr1_ethan");
-
-    /**
-     * The password of the user.
-     */
-    private static final String PASSWORD = (LOCAL ? "" : "2jf4wkz$");
+    public static final String DATABASE_URL = SQL_SERVER_ADDRESS + ":3306/" + ServerConstants.DATABASE_NAMES[1];
+    public static final String DATABASE_URL_SERVER = SQL_SERVER_ADDRESS + ":3306/" + ServerConstants.DATABASE_NAMES[0];
 
 	/**
 	 * IF the sql manager is initialized.

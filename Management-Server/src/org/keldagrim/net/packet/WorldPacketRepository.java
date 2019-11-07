@@ -3,6 +3,7 @@ package org.keldagrim.net.packet;
 import java.nio.ByteBuffer;
 import java.util.List;
 
+import org.crandor.game.world.GameWorld;
 import org.keldagrim.ServerConstants;
 import org.keldagrim.net.IoSession;
 import org.keldagrim.system.PunishmentStorage;
@@ -14,6 +15,7 @@ import org.keldagrim.world.PlayerSession;
 import org.keldagrim.world.WorldDatabase;
 import org.keldagrim.world.info.Response;
 import org.keldagrim.world.info.UIDInfo;
+import org.keldagrim.world.info.WorldInfo;
 
 /**
  * Repository class for world packets.
@@ -52,6 +54,14 @@ public final class WorldPacketRepository {
 		buffer.putString(player.getUsername());
 		buffer.putString(message);
 		player.getWorld().getSession().write(buffer);
+	}
+
+	public static void sendPlayerMessage(PlayerSession player, String[] messages) {
+		if (player == null) {
+			return;
+		}
+		for (String message : messages)
+			sendPlayerMessage(player, message);
 	}
 
 	/**
@@ -430,7 +440,7 @@ public final class WorldPacketRepository {
 		}
 		ClanRepository clan = ClanRepository.get(server, clanName);
 		if (clan == null) {
-			sendPlayerMessage(player, "The channel you tried to join does not exist. Try joining the main clan named 'Keldagrim'.:clan:");
+			sendPlayerMessage(player, new String[]{ "The channel you tried to join does not exist.", "Try joining the main clan named '" + ServerConstants.SERVER_NAME + "'.:clan:" });
 			return;
 		}
 		clan.enter(player);

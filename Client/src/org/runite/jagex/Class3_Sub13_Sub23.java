@@ -70,7 +70,7 @@ static RSString aClass94_3282 = aClass94_3286;
          } else {
             RSByteBuffer buffer = new RSByteBuffer(buf);
             int opcode = buffer.getByte((byte)-67);
-            System.out.println(opcode);
+            //System.out.println(opcode);
             if(1 != opcode) {
                return false;
             } else {

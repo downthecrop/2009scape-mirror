@@ -236,8 +236,8 @@ final class Class72 {
 
    static final float[] method1297(byte var0) {
       try {
-         float var1 = Class92.method1514() + Class92.method1505();
-         int var2 = Class92.method1510();
+         float var1 = Class92.method1514() + Class92.getLightingModelAmbient();
+         int var2 = Class92.screenColorRgb();
          float var3 = (float)(255 & var2 >> 16) / 255.0F;
          MouseListeningClass.aFloatArray1919[3] = 1.0F;
          if(var0 != -50) {

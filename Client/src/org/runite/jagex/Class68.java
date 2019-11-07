@@ -460,7 +460,7 @@ final class Class68 {
          var3.glTexEnvi(8960, '\u8590', 768);
          var3.glBlendFunc(770, 771);
          var3.glDepthMask(true);
-         var3.glFogfv(2918, Class92.aFloatArray1319, 0);
+         var3.glFogfv(2918, Class92.fogColor, 0);
          var3.glEnableClientState('\u8078');
          HDToolKit.method1846();
       }

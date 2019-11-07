@@ -4,6 +4,7 @@ import org.crandor.ServerConstants;
 import org.crandor.cache.Cache;
 import org.crandor.cache.ServerStore;
 import org.crandor.game.content.eco.ge.GrandExchangeDatabase;
+import org.crandor.game.events.GlobalEvent;
 import org.crandor.game.events.GlobalEventManager;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
@@ -105,7 +106,18 @@ public final class GameWorld {
             getEvents().put("Thieves jackpot", 0L);
             getEvents().put("Golden essence", 0L);
      */
-    public static String[] hourlyEvent = {"Alchemy hellenistic", "Golden retriever", "Harvesting doubles", "Thieves jackpot", "Golden essence"};
+    public static GlobalEvent[] hourlyEvents = {
+    		GlobalEvent.ALCHEMY_HELLENISTIC,
+    		GlobalEvent.GOLDEN_RETRIEVER,
+    		GlobalEvent.THIEVES_JACKPOT,
+    		GlobalEvent.GOLDEN_ESSENCE,
+    		GlobalEvent.TRY_YOUR_LUCK,
+    		GlobalEvent.CRAZY_SEEDS,
+    		GlobalEvent.CHARMED,
+    		GlobalEvent.XP_FEVER,
+    		GlobalEvent.PLENTY_OF_FISH,
+    		GlobalEvent.HARVESTING_DOUBLES,
+		};
 
     /**
      * Pulses all current pulses.
@@ -135,13 +147,13 @@ public final class GameWorld {
         pulses.clear();
         ticks++;
         eventTicks++;
-        int idx = new Random().nextInt(hourlyEvent.length);
-        String random = hourlyEvent[idx];
-        switch(cfTicks++) {
-            case 50:
+        cfTicks++;
+        switch(cfTicks) {
+            case 100:
                 if (checkDay()) {
-                    GlobalEventManager.get().activate("Clone Fest", null);
-                    if (GlobalEventManager.get().isActive("Clone Fest")) {
+                	// Activate clone fest for 15 minutes
+                    GlobalEventManager.get().activate(GlobalEvent.CLONE_FEST, null, 1500);
+                    if (GlobalEvent.CLONE_FEST.isActive()) {
                         int size = 20;
                         if (PVPAIPActions.pvp_players == null) {
                             PVPAIPActions.pvp_players = new ArrayList<>();
@@ -163,33 +175,19 @@ public final class GameWorld {
                     }
                 }
                 break;
-            case 1000:
-                if (PVPAIPActions.pvp_players == null) {
-                    GlobalEventManager.get().deactivate("Clone Fest");
-                }
-                break;
-            case 1500:
-                if (PVPAIPActions.pvp_players == null) {
-                    GlobalEventManager.get().deactivate("Clone Fest");
-                }
-                break;
-            case 1900:
+            case 2100:
                 cfTicks = 0;
                 break;
         }
         switch (eventTicks) {
-            case 100:
-                if (GlobalEventManager.get().getLastEvent() == random) {
-                    random = (hourlyEvent[idx]);
-                }
-                String event = random;
+        	// 2 minute gap between events
+            case 200:
+                int randomEventId = new Random().nextInt(hourlyEvents.length);
+                GlobalEvent event = hourlyEvents[randomEventId];
 
                 GlobalEventManager.get().setLastEvent(event);
                 GlobalEventManager.get().setCurrentEvent(event);
                 GlobalEventManager.get().activateHourly(event);
-                break;
-            case 6100:
-                GlobalEventManager.get().deactivate(GlobalEventManager.get().getCurrentEvent());
                 break;
             case 6200:
                 eventTicks = 0;

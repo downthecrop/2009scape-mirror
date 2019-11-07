@@ -12,7 +12,12 @@ public class GameLaunch {
 	/**
 	 * The game settings.
 	 */
-	public static GameSetting SETTINGS = new GameSetting("2009Scape", Configurations.LOCAL_SERVER ? "127.0.0.1" : "frostblades.org", 1, "live", false, false);
+	/*
+
+	NOTICE: IF YOU'RE A DEVELOPER, THE EASIEST WAY TO CONNECT TO THE LIVESERVER IS WITH CLIENT.JAVA. THIS CLASS IS FOR LOCAL SERVER CONNECTING!
+
+	 */
+	public static GameSetting SETTINGS = new GameSetting("2009Scape", Configurations.LOCAL_SERVER ? "127.0.0.1" : "34.68.75.237"/*"34.68.75.237"*/, 1, "live", false, false);
 	
 	/**
 	 * The main method.

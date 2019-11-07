@@ -104,9 +104,9 @@ static RSString aClass94_3397 = aClass94_3400;
 
    static final void method324(int var0, boolean var1) {
       try {
-         Class92.method1506(Class92.anInt1322, (0.7F + (float)var0 * 0.1F) * 1.1523438F, 0.69921875F, 0.69921875F);
-         Class92.method1509(-50.0F, -60.0F, -50.0F);
-         Class92.method1508(Class92.anInt1316, 0);
+         Class92.setLightParams(Class92.defaultScreenColorRgb, (0.7F + (float)var0 * 0.1F) * 1.1523438F, 0.69921875F, 0.69921875F);
+         Class92.setLightPosition(-50.0F, -60.0F, -50.0F);
+         Class92.setFogValues(Class92.defaulFogColorRgb, 0);
          Class92.method1504();
          if(var1) {
             aByteArrayArrayArray3390 = (byte[][][])((byte[][][])null);

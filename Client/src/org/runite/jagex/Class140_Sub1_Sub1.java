@@ -1879,9 +1879,9 @@ final class Class140_Sub1_Sub1 extends Model {
 
          if(var3) {
             if(!Class106.aBoolean1441) {
-               var7 = (int)Class92.aFloatArray1312[0];
-               var8 = (int)Class92.aFloatArray1312[1];
-               var9 = (int)Class92.aFloatArray1312[2];
+               var7 = (int)Class92.light0Position[0];
+               var8 = (int)Class92.light0Position[1];
+               var9 = (int)Class92.light0Position[2];
                var10 = (int)Math.sqrt((double)(var7 * var7 + var8 * var8 + var9 * var9));
                var11 = (int)((float)this.aShort3849 * 1.3F);
                var12 = this.aShort3819 * var10 >> 8;
@@ -3113,22 +3113,22 @@ final class Class140_Sub1_Sub1 extends Model {
 
          int var2;
          int var3;
-         if(Class92.anInt1314 > 0) {
-            var2 = this.aClass6_3835.aShort95 - (this.aClass6_3835.aShort92 * Class92.anInt1314 >> 8) >> 3;
-            var3 = this.aClass6_3835.aShort94 - (this.aClass6_3835.aShort91 * Class92.anInt1314 >> 8) >> 3;
+         if(Class92.lightX > 0) {
+            var2 = this.aClass6_3835.aShort95 - (this.aClass6_3835.aShort92 * Class92.lightX >> 8) >> 3;
+            var3 = this.aClass6_3835.aShort94 - (this.aClass6_3835.aShort91 * Class92.lightX >> 8) >> 3;
          } else {
-            var2 = this.aClass6_3835.aShort95 - (this.aClass6_3835.aShort91 * Class92.anInt1314 >> 8) >> 3;
-            var3 = this.aClass6_3835.aShort94 - (this.aClass6_3835.aShort92 * Class92.anInt1314 >> 8) >> 3;
+            var2 = this.aClass6_3835.aShort95 - (this.aClass6_3835.aShort91 * Class92.lightX >> 8) >> 3;
+            var3 = this.aClass6_3835.aShort94 - (this.aClass6_3835.aShort92 * Class92.lightX >> 8) >> 3;
          }
 
          int var4;
          int var5;
-         if(Class92.anInt1315 > 0) {
-            var4 = this.aClass6_3835.aShort97 - (this.aClass6_3835.aShort92 * Class92.anInt1315 >> 8) >> 3;
-            var5 = this.aClass6_3835.aShort96 - (this.aClass6_3835.aShort91 * Class92.anInt1315 >> 8) >> 3;
+         if(Class92.lightY > 0) {
+            var4 = this.aClass6_3835.aShort97 - (this.aClass6_3835.aShort92 * Class92.lightY >> 8) >> 3;
+            var5 = this.aClass6_3835.aShort96 - (this.aClass6_3835.aShort91 * Class92.lightY >> 8) >> 3;
          } else {
-            var4 = this.aClass6_3835.aShort97 - (this.aClass6_3835.aShort91 * Class92.anInt1315 >> 8) >> 3;
-            var5 = this.aClass6_3835.aShort96 - (this.aClass6_3835.aShort92 * Class92.anInt1315 >> 8) >> 3;
+            var4 = this.aClass6_3835.aShort97 - (this.aClass6_3835.aShort91 * Class92.lightY >> 8) >> 3;
+            var5 = this.aClass6_3835.aShort96 - (this.aClass6_3835.aShort92 * Class92.lightY >> 8) >> 3;
          }
 
          int var6 = var3 - var2 + 1;
@@ -3156,8 +3156,8 @@ final class Class140_Sub1_Sub1 extends Model {
          int var14;
          int var15;
          while(var9 < this.anInt3823) {
-            int var10 = (this.anIntArray3822[var9] - (this.anIntArray3845[var9] * Class92.anInt1314 >> 8) >> 3) - var2;
-            int var11 = (this.anIntArray3848[var9] - (this.anIntArray3845[var9] * Class92.anInt1315 >> 8) >> 3) - var4;
+            int var10 = (this.anIntArray3822[var9] - (this.anIntArray3845[var9] * Class92.lightX >> 8) >> 3) - var2;
+            int var11 = (this.anIntArray3848[var9] - (this.anIntArray3845[var9] * Class92.lightY >> 8) >> 3) - var4;
             int var12 = this.anIntArray3838[var9];
             var13 = this.anIntArray3838[var9 + 1];
             var14 = var12;

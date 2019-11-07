@@ -107,8 +107,8 @@ final class Class141 {
                int var10 = var4 << 7;
                int var11 = var6 + var7 + var8 + var9 >> 2;
                int var12 = var5 << 7;
-               int var13 = var10 - (var11 * Class92.anInt1314 >> 8) >> 3;
-               int var14 = var12 - (var11 * Class92.anInt1315 >> 8) >> 3;
+               int var13 = var10 - (var11 * Class92.lightX >> 8) >> 3;
+               int var14 = var12 - (var11 * Class92.lightY >> 8) >> 3;
                if(var0 != 0 && var0 != 1 && (var2 || var3)) {
                   method2050(aClass109_Sub1Array1843[var0], aClass109_Sub1_1840, var13 + 1, var14 + 1, var1, var2);
                } else {
@@ -373,8 +373,8 @@ final class Class141 {
 
    static final void method2047(LDIndexedSprite var0, int var1, int var2, int var3) {
       if(var0 != null) {
-         int var4 = var1 - (var2 * Class92.anInt1314 >> 8) >> 3;
-         int var5 = var3 - (var2 * Class92.anInt1315 >> 8) >> 3;
+         int var4 = var1 - (var2 * Class92.lightX >> 8) >> 3;
+         int var5 = var3 - (var2 * Class92.lightY >> 8) >> 3;
          method2042(var0, aClass109_Sub1_1840, var4 + 1, var5 + 1);
       }
    }
@@ -406,8 +406,8 @@ final class Class141 {
       if(var0 == null) {
          return false;
       } else {
-         int var4 = var1 - (var2 * Class92.anInt1314 >> 8) >> 3;
-         int var5 = var3 - (var2 * Class92.anInt1315 >> 8) >> 3;
+         int var4 = var1 - (var2 * Class92.lightX >> 8) >> 3;
+         int var5 = var3 - (var2 * Class92.lightY >> 8) >> 3;
          return method2040(var0, aClass109_Sub1_1840, var4 + 1, var5 + 1);
       }
    }
@@ -449,8 +449,8 @@ final class Class141 {
 
    static final void method2051(LDIndexedSprite var0, int var1, int var2, int var3) {
       if(var0 != null) {
-         int var4 = var1 - (var2 * Class92.anInt1314 >> 8) >> 3;
-         int var5 = var3 - (var2 * Class92.anInt1315 >> 8) >> 3;
+         int var4 = var1 - (var2 * Class92.lightX >> 8) >> 3;
+         int var5 = var3 - (var2 * Class92.lightY >> 8) >> 3;
          method2034(var0, aClass109_Sub1_1840, var4 + 1, var5 + 1);
       }
    }
