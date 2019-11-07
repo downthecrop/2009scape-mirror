@@ -35,7 +35,7 @@ Since this portion of the guide is operating-system specific, you will either ne
 - Import `Server/server.sql` and `Server/global.sql` into their respective databases
   - _Refer [here](https://www.thecodedeveloper.com/import-large-sql-files-xampp/) for help importing the `.sql` files_
 
-# Linux Command Line
+### Linux Command Line
 - Instructions for various Linux distros can be found [here](https://github.com/dginovker/RS-2009/tree/master/CompiledServer/Guides)
 
 
