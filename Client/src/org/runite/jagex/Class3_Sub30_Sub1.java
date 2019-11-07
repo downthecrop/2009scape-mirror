@@ -942,13 +942,13 @@ final class Class3_Sub30_Sub1 extends RSByteBuffer {
 				Class41.anInt689 = var13 * Class132.anInt1736 + var12 * Class100.anInt1407 >> 8;
 			}
 
-			Class92.method1506(CacheIndex.anInt1950, Class30.aFloat578, Class3_Sub13_Sub36.aFloat3424, Class12.aFloat319);
-			Class92.method1508(Class3_Sub28_Sub12.anInt3652, Class41.anInt689);
+			Class92.setLightParams(CacheIndex.anInt1950, Class30.aFloat578, Class3_Sub13_Sub36.aFloat3424, Class12.aFloat319);
+			Class92.setFogValues(Class3_Sub28_Sub12.anInt3652, Class41.anInt689);
 			if(var4 != 1) {
 				aClass94_3807 = (RSString)null;
 			}
 
-			Class92.method1509((float)Class46.anInt741, (float)Class3_Sub13_Sub22.anInt3274, (float)Class86.anInt1191);
+			Class92.setLightPosition((float)Class46.anInt741, (float)Class3_Sub13_Sub22.anInt3274, (float)Class86.anInt1191);
 			Class92.method1504();
 			return Class3_Sub28_Sub12.anInt3652;
 		} catch (RuntimeException var16) {

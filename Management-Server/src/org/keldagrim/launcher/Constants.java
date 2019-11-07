@@ -25,11 +25,6 @@ public class Constants {
 	public static final String CACHE_NAME = File.separator + ".keldagrim_530";
 	
 	/**
-	 * Management Server
-	 */
-	public static final String MANAGEMENT_SERVER = "management.keldagrim.com";
-	
-	/**
 	 * Gets the screen coordinates to place panels in the center
 	 * @param {Dimension} the panel size, null to use default frame size
 	 * @return {Point} the center dimension

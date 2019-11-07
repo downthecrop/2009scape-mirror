@@ -304,7 +304,7 @@ public final class DialogueInterpreter {
             player.getPacketDispatch().sendString(messages[i], 372, i + 1);
         }
         player.getInterfaceManager().openChatbox(372);
-        if (player.getAttributes().containsKey("tut-island") || TutorialSession.getExtension(player).getStage() <= TutorialSession.MAX_STAGE) {
+        if (player.getAttributes().containsKey("tut-island") || TutorialSession.getExtension(player).getStage() < TutorialSession.MAX_STAGE) {
         }
         return player.getInterfaceManager().getChatbox();
     }
@@ -497,7 +497,7 @@ public final class DialogueInterpreter {
             player.getPacketDispatch().sendString(messages[i].toString().replace("@name", player.getUsername()), interfaceId, (i + 4));
         }
         player.getInterfaceManager().openChatbox(interfaceId);
-        if (player.getAttributes().containsKey("tut-island") || TutorialSession.getExtension(player).getStage() <= TutorialSession.MAX_STAGE) {
+        if (player.getAttributes().containsKey("tut-island") || TutorialSession.getExtension(player).getStage() < TutorialSession.MAX_STAGE) {
         }
         player.getPacketDispatch().sendInterfaceConfig(player.getInterfaceManager().getChatbox().getId(), 3, false);
         return player.getInterfaceManager().getChatbox();

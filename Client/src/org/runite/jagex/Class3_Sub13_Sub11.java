@@ -140,7 +140,7 @@ final class Class3_Sub13_Sub11 extends Class3_Sub13 {
          }
 
          Class86.anInt1191 = Class115.aClass86ArrayArray1581[var2][var1].anInt1178;
-         Class92.method1509((float)Class46.anInt741, (float)Class3_Sub13_Sub22.anInt3274, (float)Class86.anInt1191);
+         Class92.setLightPosition((float)Class46.anInt741, (float)Class3_Sub13_Sub22.anInt3274, (float)Class86.anInt1191);
       } catch (RuntimeException var4) {
          throw Class44.method1067(var4, "fm.C(" + var0 + ',' + var1 + ',' + var2 + ')');
       }

@@ -84,7 +84,9 @@ public final class HerbTarPulse extends SkillPulse<Item> {
 			return false;
 		}
 		if (player.getInventory().containsItem(SWAMP_TAR) && player.getInventory().containsItem(tar.getIngredient()) && player.getInventory().remove(SWAMP_TAR) && player.getInventory().remove(tar.getIngredient())) {
-			Perks.addDouble(player, new Item(tar.getTar().getId(), 15));
+			final Item item = new Item(tar.getTar().getId(), 15);
+		    player.getInventory().add(item);
+			Perks.addDouble(player, item);
 			player.getSkills().addExperience(Skills.HERBLORE, tar.getExperience(), true);
 			player.getPacketDispatch().sendMessage("You add the " + tar.getIngredient().getName().toLowerCase().replace("clean", "").trim() + " to the swamp tar.");
 		} else {

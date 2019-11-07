@@ -144,6 +144,7 @@ public final class GameSettings {
 			file = new FileInputStream(path);
 			properties.load(file);
 		} catch (IOException e) {
+			System.out.println("Warning: Could not find file in " + System.getProperty("user.dir") + path);
 			e.printStackTrace();
 		}
 		return properties;

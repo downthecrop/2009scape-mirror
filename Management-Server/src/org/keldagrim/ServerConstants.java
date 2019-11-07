@@ -13,6 +13,11 @@ public final class ServerConstants {
 	/**
 	 * The port to be used for communications.
 	 */
+	public static final String SERVER_NAME = "RS 2009";
+
+	/**
+	 * The port to be used for communications.
+	 */
 	public static final int PORT = 5555;
 	
 	/**
@@ -49,12 +54,14 @@ public final class ServerConstants {
 	 * The administrators.
 	 */
 	public static final String[] ADMINISTRATORS = {
-		"ethan",
-		"austin",
+			"ethan",
+			"austin",
+			"redsparr0w",
 	};
 	
 	public static final String[] DATABASE_NAMES = {
-			"keldagr1_server", "keldagr1_global"
+			"server",
+			"global",
 	};
 	
 	/**

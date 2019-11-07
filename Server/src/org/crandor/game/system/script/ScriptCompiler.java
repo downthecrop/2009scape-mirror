@@ -82,7 +82,7 @@ public final class ScriptCompiler {
 			return;
 		}
 		instructions = new HashMap<>();
-		for (File file : new File("bin/org/crandor/game/system/script/context/").listFiles()) {
+		for (File file : new File("./org/crandor/game/system/script/context/").listFiles()) {
 			String name = file.getName();
 			if (name.contains("$")) {
 				continue;

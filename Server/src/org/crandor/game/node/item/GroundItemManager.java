@@ -71,7 +71,7 @@ public final class GroundItemManager {
 	 * @return The ground item.
 	 */
 	public static GroundItem create(GroundItem item) {
-		if (!item.getDefinition().isTradeable() || (item.getDropper() != null && item.getDropper().getDetails().getRights() == Rights.ADMINISTRATOR)) {
+		if (!item.getDefinition().isTradeable()) {
 			item.setRemainPrivate(true);
 		}
 		if (item.getDropper() != null && item.hasItemPlugin()) {

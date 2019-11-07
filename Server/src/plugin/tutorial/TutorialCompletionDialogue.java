@@ -27,7 +27,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 	/**
 	 * The starter pack of items.
 	 */
-	private static final Item[] STARTER_PACK = new Item[] { new Item(6099, 1), new Item(995, 25000), new Item(590, 1), new Item(303, 1), new Item(380, 20), new Item(1925, 1), new Item(1931, 1), new Item(8007, 3), new Item(8010, 3), new Item(4447, 1), new Item(2741, 1), new Item(14775, 1) };
+	private static final Item[] STARTER_PACK = new Item[] { new Item(995, 25000), new Item(590, 1), new Item(303, 1), new Item(380, 20), new Item(1925, 1), new Item(1931, 1), new Item(8007, 3), new Item(4447, 1), new Item(2741, 1), new Item(14775, 1) };
 
 	/**
 	 * Represents the rune items.
@@ -266,13 +266,13 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 				stage = 501;
 				break;
 			case 1200:
-				npc("Keep in mind: our server has more content than any other", "server ever released. There's hundreds of hours of", "exciting and flawless gameplay awaiting you, "+player.getUsername()+".", "Enjoy your time playing "+GameWorld.getName()+"!");
+				npc("Enjoy your time playing on "+GameWorld.getName()+"!");
 				stage = 520;
 				break;
 			case 520:
 				player.removeAttribute("tut-island");
 				player.getConfigManager().set(1021, 0);
-				player.getProperties().setTeleportLocation(new Location(2674, 3144, 0));
+				player.getProperties().setTeleportLocation(new Location(3222, 3218, 0));
 				TutorialSession.getExtension(player).setStage(72);
 				player.getInterfaceManager().closeOverlay();
 				player.getInventory().clear();
@@ -282,7 +282,6 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 				player.getInventory().add(STARTER_PACK);
 				interpreter.sendDialogue("Welcome to " + GameWorld.getName() + "!", "If you require any assistance, please don't hesitate to contact our", "friendly staff members and players for advice.");
 				player.getPacketDispatch().sendMessage("Welcome to " + GameWorld.getName() + "!");
-				player.sendMessage("<col=6495ED>If you're looking to get around, why not speak to Bill Teach?");
 				player.unlock();
 				TutorialSession.getExtension(player).setStage(TutorialSession.MAX_STAGE + 1);
 				stage = 7;
