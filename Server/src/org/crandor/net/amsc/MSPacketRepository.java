@@ -379,8 +379,6 @@ public final class MSPacketRepository {
 		if (buffer.get() == 1) {
 			String name = buffer.getString();
 			sendJoinClan(player, name);
-		} else {
-			sendJoinClan(player, "keldagrim");
 		}
 	}
 

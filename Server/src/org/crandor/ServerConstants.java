@@ -13,13 +13,6 @@ import org.crandor.tools.mysql.Database;
 public final class ServerConstants {
 	
 	/**
-	 * The administrators.
-	 */
-	public static final String[] ADMINISTRATORS = {
-		"RedSparr0w",
-	};
-	
-	/**
 	 * The cache path.
 	 */
 	public static final String CACHE_PATH = "data/cache/";
@@ -150,15 +143,16 @@ public final class ServerConstants {
 	/**
 	 * The string of donation messages displayed on an interface.
 	 */
-	public static final String[] MESSAGES = new String[] {"Welcome!" };
+	public static final String[] MESSAGES = new String[] { "Welcome!" };
 	
 	public static final String[] DATABASE_NAMES = {
-			"server", "global"
+			"server",
+			"global",
 	};
-	
+
 	public static final Database[] DATABASES = {
-			new Database((SQLManager.LOCAL ? "localhost" : "redsparr0w.com"), (SQLManager.LOCAL ? "server" : DATABASE_NAMES[0]), (SQLManager.LOCAL ? "root" : "username"), (SQLManager.LOCAL ? "" : "password")),
-			new Database((SQLManager.LOCAL ? "localhost" : "redsparr0w.com"), (SQLManager.LOCAL ? "global" : DATABASE_NAMES[1]), (SQLManager.LOCAL ? "root" : "username"), (SQLManager.LOCAL ? "" : "password"))
+			new Database(SQLManager.SQL_SERVER_ADDRESS, DATABASE_NAMES[0], (SQLManager.LOCAL ? "root" : "username"), (SQLManager.LOCAL ? "" : "password")),
+			new Database(SQLManager.SQL_SERVER_ADDRESS, DATABASE_NAMES[1], (SQLManager.LOCAL ? "root" : "username"), (SQLManager.LOCAL ? "" : "password"))
 	};
 	
 	/**

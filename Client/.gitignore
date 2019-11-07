@@ -14,5 +14,4 @@ data/cache/
 *.iml
 *.eml
 *.userlibraries
-*.class
 data/players/**

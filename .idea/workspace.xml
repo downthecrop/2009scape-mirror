@@ -120,20 +120,6 @@
       </list>
     </option>
   </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>tutorial</find>
-      <find>login</find>
-      <find>starter</find>
-      <find>setlastlogin</find>
-      <find>HOME</find>
-      <find>home teleport</find>
-      <find>mystical foresig</find>
-    </findStrings>
-    <dirStrings>
-      <dir>C:\Users\Michael\Desktop\rsps_trash\rs2009\Server\src\plugin\interaction\item</dir>
-    </dirStrings>
-  </component>
   <component name="Git.Settings">
     <option name="UPDATE_TYPE" value="REBASE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -394,6 +380,7 @@
       </map>
     </option>
   </component>
+<<<<<<< HEAD
   <component name="VcsManagerConfiguration">
     <MESSAGE value="cache bs" />
     <option name="LAST_COMMIT_MESSAGE" value="cache bs" />
@@ -470,4 +457,6 @@
       </state>
     </states>
   </component>
+=======
+>>>>>>> 73347127e9ca3b48af329267c6d2afbd6b334553
 </project>
