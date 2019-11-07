@@ -151,8 +151,8 @@ public final class ServerConstants {
 	};
 
 	public static final Database[] DATABASES = {
-			new Database(SQLManager.SQL_SERVER_ADDRESS, DATABASE_NAMES[0], (SQLManager.LOCAL ? "dark" : "username"), (SQLManager.LOCAL ? "Pikmin123:)" : "password")),
-			new Database(SQLManager.SQL_SERVER_ADDRESS, DATABASE_NAMES[1], (SQLManager.LOCAL ? "dark" : "username"), (SQLManager.LOCAL ? "Pikmin123:)" : "password"))
+			new Database(SQLManager.SQL_SERVER_ADDRESS, DATABASE_NAMES[0], (SQLManager.LOCAL ? "root" : "username"), (SQLManager.LOCAL ? "" : "password")),
+			new Database(SQLManager.SQL_SERVER_ADDRESS, DATABASE_NAMES[1], (SQLManager.LOCAL ? "root" : "username"), (SQLManager.LOCAL ? "" : "password"))
 	};
 	
 	/**
