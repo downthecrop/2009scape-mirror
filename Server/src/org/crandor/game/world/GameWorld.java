@@ -186,11 +186,11 @@ public final class GameWorld {
         ScriptManager.load();
         PluginManager.init();
         ResourceAIPManager.get().init();
+        ResourceAIPManager.get().immerseWorld();
         SQLManager.postPlugin();
         parseObjects();
         CallbackHub.call();
 
-//        ResourceAIPManager.get().init();
         if (run) {
             SystemManager.flag(GameWorld.getSettings().isDevMode() ? SystemState.PRIVATE : SystemState.ACTIVE);
         }
