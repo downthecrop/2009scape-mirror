@@ -99,7 +99,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 			}
 		} else {
 			interpreter.sendDialogues(npc, FacialExpression.NORMAL, "*psst.* Hey, do you want to skip the tutorial?", "I can send you straight to the mainland, easy.");
-			stage = 0;
+			stage = 1;
 		}
 		return true;
 	}
@@ -124,56 +124,32 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 					break;
 				}
 				break;
-			case 0:
-				interpreter.sendDialogues(npc, FacialExpression.NORMAL, "If I do, you won't be able to come back here", "afterwards. It's a one-way trip. What do you say?");
-				stage = 1;
-				break;
 			case 1:
-				interpreter.sendOptions("What would you like to say?", "Leave Tutorial Island.", "Can I decide later?", "I'll stay here for the Tutorial.");
+				interpreter.sendOptions("What would you like to say?", "Leave Tutorial Island.", "I'll stay here for the Tutorial.");
 				stage = 2;
 				break;
 			case 2:
 				switch (buttonId) {
 				case 1:
-					interpreter.sendDialogues(player, FacialExpression.NORMAL, "Send me to the mainland now.");
-					stage = 15;
+					npc("One more thing: Would you like to", "be an Ironman account?");
+					stage = 501;
+					if (!IRONMAN) {
+						stage = 1200;
+					}
 					break;
 				case 2:
-					interpreter.sendDialogues(player, FacialExpression.NORMAL, "Can I decide later?");
-					stage = 30;
-					break;
-				case 3:
 					interpreter.sendDialogues(player, FacialExpression.NORMAL, "I'll stay here for the Tutorial.");
 					stage = 40;
 					break;
 				}
 				break;
-			case 30:
-				interpreter.sendDialogues(npc, FacialExpression.NORMAL, "Sure. You'll find me all over this land.", "Ask me again any time you like.");
-				stage = 31;
-				break;
-			case 31:
-				interpreter.sendOptions("What would you like to say?", "Send me to the mainland now.", "Can I decide later?", "I'll stay here for the Tutorial.");
-				stage = 2;
-				break;
 			case 40:
-				interpreter.sendDialogues(npc, FacialExpression.NORMAL, "Good choice. Let me know if you change your mind.");
+				interpreter.sendDialogues(npc, FacialExpression.NORMAL, "Very well. Have fun, adventurer.");
 				stage = 99;
 				break;
 			case 22:
 				interpreter.sendOptions("What would you like to say?", "Send me to the mainland now.", "Who are you?", "Can I decide later?", "I'll stay here for the Tutorial.");
 				stage = 2;
-				break;
-			case 15:
-				interpreter.sendDialogues(npc, FacialExpression.NORMAL, "I can do that for ye. But first I must ask a few", "questions.");
-				stage = 500;
-				if (!IRONMAN) {
-					stage = 1200;
-				}
-				break;
-			case 500:
-				npc("The first thing for you to do is to decide", "if you would like an Ironman account.");
-				stage++;
 				break;
 			case 501:
 				player.removeAttribute("ironMode");
@@ -193,21 +169,9 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 					break;
 				case 3:
 					player("No, thanks.");
-					stage++;
+					stage = 1200;
 					break;
 				}
-				break;
-			case 503:
-				npc("Are you sure you don't want an Ironman", "account?");
-				stage++;
-				break;
-			case 504:
-				options("Yes I am sure.", "No, let me decide.");
-				stage++;
-				break;
-			case 505:
-				player(buttonId == 1 ? "Yes I am sure." : "No, let me decide.");
-				stage = buttonId == 1 ? 1200 : 500;
 				break;
 			case 506:
 				interpreter.sendOptions("Select a Mode", "Standard", "<col=CC0000>Ultimate</col>", "Go back.");
@@ -217,35 +181,17 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 				switch (buttonId) {
 				case 1:
 				case 2:
-					npc("You have chosen the: " + (buttonId == 1 ? "Standard" : "<col=CC0000>Ultimate</col>") + " mode.");
-					stage = 508;
+					npc("You have chosen the " + (buttonId == 1 ? "Standard" : "<col=CC0000>Ultimate</col>") + " mode.");
 					player.setAttribute("ironMode", IronmanMode.values()[buttonId]);
+					stage = 516;
 					break;
 				case 3:
-					npc("The last thing for you to do is to decide", "if you would like an Ironman account mode.");
-					stage = 501;
+					player.removeAttribute("ironMode");
+					player.removeAttribute("ironPermanent");
+					options("Yes, please.", "What is an Ironman account?", "No, thanks.");
+					stage = 502;
 					break;
 				}
-				break;
-			case 508:
-				interpreter.sendOptions("Are you sure?", "Yes.", "No.");
-				stage++;
-				break;
-			case 509:
-				switch (buttonId) {
-				case 1:
-					player("Yes, I am sure.");
-					stage++;
-					break;
-				case 2:
-					player("No, I want to change it.");
-					stage = 506;
-					break;
-				}
-				break;
-			case 510:
-				npc("You have the ability to remove the Ironman restrictions", "once you get to the mainland, however, you can only", "do this once.");
-				stage = 516;
 				break;
 			case 516:
 				player.getIronmanManager().setMode(player.getAttribute("ironMode", IronmanMode.NONE));
