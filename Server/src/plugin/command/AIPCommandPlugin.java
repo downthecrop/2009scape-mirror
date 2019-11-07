@@ -13,6 +13,7 @@ import org.crandor.game.node.entity.player.ai.pvmbots.PvMBotsBuilder;
 import org.crandor.game.node.entity.player.ai.pvp.PVPAIPActions;
 import org.crandor.game.node.entity.player.ai.pvp.PVPAIPBuilderUtils;
 import org.crandor.game.node.entity.player.ai.resource.ResourceAIPActions;
+import org.crandor.game.node.entity.player.ai.resource.ResourceAIPManager;
 import org.crandor.game.node.entity.player.ai.skillingbot.SkillingBotsBuilder;
 import org.crandor.game.node.entity.player.ai.wilderness.PvPBotsBuilder;
 import org.crandor.game.node.entity.player.link.appearance.Gender;
@@ -214,10 +215,10 @@ public final class AIPCommandPlugin extends CommandPlugin {
             case "noobbot":
                 PvMBotsBuilder.spawnNoob(player.getLocation());
                 return true;
+            case "immerse":
+            case "immersiveworld":
             case "immersive":
-                PvMBotsBuilder.immersiveSpawns();
-                AIPBuilder.immersiveSpawns();
-                SkillingBotsBuilder.immersiveSpawnsSkillingBots();
+                ResourceAIPManager.get().immerseWorld();
                 return true;
             case "fishtest":
                 SkillingBotsBuilder.spawnTroutLumbridge("Bot", new Location(3241, 3242));
