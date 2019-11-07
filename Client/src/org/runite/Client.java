@@ -1,7 +1,5 @@
 package org.runite;
 
-import org.crandor.game.node.entity.player.link.ConfigurationManager;
-import org.crandor.net.packet.out.Config;
 import org.runite.jagex.GameShell;
 
 /**

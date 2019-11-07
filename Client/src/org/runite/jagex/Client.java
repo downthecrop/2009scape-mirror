@@ -406,8 +406,8 @@ public final class Client extends GameShell {
 				Class3_Sub25.aShortArray2548 = Class164_Sub1.aShortArray3011;
 			} else {
 				Class101.aBoolean1419 = true;
-				Class92.anInt1322 = 16777215;
-				Class92.anInt1316 = 0;
+				Class92.defaultScreenColorRgb = 16777215;
+				Class92.defaulFogColorRgb = 0;
 				Class15.aShortArrayArray344 = Class118.aShortArrayArray1619;
 				Class101.aShortArrayArray1429 = Class75_Sub1.aShortArrayArray2634;
 				Class3_Sub25.aShortArray2548 = Class2.aShortArray63;
