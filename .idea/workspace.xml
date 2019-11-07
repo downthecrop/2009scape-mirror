@@ -2,7 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0dbfe935-8085-4dde-9815-06f8b3761458" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/cache begin.zip" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/cache begin.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/cache.zip" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/cache.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/cache/main_file_cache.dat2" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/cache/main_file_cache.dat2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/cacheback up.rar" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/cacheback up.rar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/kratoscache.zip" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/kratoscache.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/kratoscache/cache/main_file_cache.dat2" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/09Scape/data/kratoscache/cache/main_file_cache.dat2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/data/cache begin.zip" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/cache begin.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/data/cache.zip" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/cache.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/data/cache/main_file_cache.dat2" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/cache/main_file_cache.dat2" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/data/cacheback up.rar" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/cacheback up.rar" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/data/kratoscache.zip" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/kratoscache.zip" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/data/kratoscache/cache/main_file_cache.dat2" beforeDir="false" afterPath="$PROJECT_DIR$/Server/data/kratoscache/cache/main_file_cache.dat2" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -13,106 +26,6 @@
   <component name="DefaultGradleProjectSettings">
     <option name="isMigrated" value="true" />
   </component>
-  <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/Server.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="35" selection-start-line="35" selection-end-line="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/org/runite/GameLaunch.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="289">
-              <caret line="17" selection-start-line="17" selection-end-line="17" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/org/runite/jagex/Class3_Sub13_Sub36.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="319">
-              <caret line="322" column="19" selection-start-line="322" selection-start-column="19" selection-end-line="322" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/org/runite/jagex/Class3_Sub13_Sub33.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1557">
-              <caret line="112" column="10" selection-start-line="112" selection-start-column="10" selection-end-line="112" selection-end-column="10" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/org/runite/jagex/Class3_Sub22.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="237" column="28" selection-start-line="237" selection-start-column="28" selection-end-line="237" selection-end-column="28" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/Client/lib/clientlibs.jar!/javax/media/opengl/GL.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="166">
-              <caret line="89" column="15" selection-start-line="89" selection-start-column="15" selection-end-line="89" selection-end-column="15" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/org/runite/jagex/Class68.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="203">
-              <caret line="392" column="14" selection-start-line="392" selection-start-column="14" selection-end-line="392" selection-end-column="14" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Client/src/org/runite/Client.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" selection-start-line="16" selection-end-line="16" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/Client/src/org/runite/jagex/Class92.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="510">
-              <caret line="51" column="28" selection-start-line="51" selection-start-column="28" selection-end-line="52" selection-end-column="28" />
-              <folding>
-                <element signature="e#832#833#0" expanded="true" />
-                <element signature="e#869#870#0" expanded="true" />
-                <element signature="e#3868#3869#0" expanded="true" />
-                <element signature="e#4920#4921#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Management-Server/src/org/keldagrim/Management.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="33" column="12" selection-start-line="33" selection-start-column="12" selection-end-line="33" selection-end-column="12" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
-  </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
@@ -120,46 +33,24 @@
       </list>
     </option>
   </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>tutorial</find>
+      <find>login</find>
+      <find>starter</find>
+      <find>setlastlogin</find>
+      <find>HOME</find>
+      <find>home teleport</find>
+      <find>mystical foresig</find>
+    </findStrings>
+    <dirStrings>
+      <dir>C:\Users\Michael\Desktop\rsps_trash\rs2009\Server\src\plugin\interaction\item</dir>
+    </dirStrings>
+  </component>
   <component name="Git.Settings">
-    <option name="UPDATE_TYPE" value="REBASE" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
-    <option name="x" value="953" />
-    <option name="width" value="974" />
-    <option name="height" value="1057" />
-  </component>
   <component name="ProjectId" id="1SoCmFrlg0BRp0t2EAHW2CVwxLb" />
-  <component name="ProjectView">
-    <navigator proportions="" version="1">
-      <foldersAlwaysOnTop value="true" />
-    </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <expand>
-            <path>
-              <item name="2009Rebotted" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2009Rebotted" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="2009Rebotted" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2009Rebotted" type="462c0819:PsiDirectoryNode" />
-              <item name="Client" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="2009Rebotted" type="b2602c69:ProjectViewProjectNode" />
-              <item name="2009Rebotted" type="462c0819:PsiDirectoryNode" />
-              <item name="Server" type="462c0819:PsiDirectoryNode" />
-            </path>
-          </expand>
-          <select />
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
-    </panes>
-  </component>
   <component name="PropertiesComponent">
     <property name="Downloaded.Files.Path.Enabled" value="false" />
     <property name="Repository.Attach.Annotations" value="false" />
@@ -228,53 +119,6 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration default="true" type="JetRunConfigurationType" factoryName="Kotlin">
-      <module name="09Scape" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType" factoryName="Kotlin script">
-      <module name="09Scape" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <option name="filePath" />
-      <option name="vmParameters" />
-      <option name="alternativeJrePath" />
-      <option name="programParameters" />
-      <option name="passParentEnvs" value="true" />
-      <option name="workingDirectory" />
-      <option name="isAlternativeJrePathEnabled" value="false" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="PASS_PARENT_ENVS" value="true" />
-      <option name="MAIN_CLASS_NAME" />
-      <option name="WORKING_DIRECTORY" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
     <list>
       <item itemvalue="Application.Management" />
       <item itemvalue="Application.Server" />
@@ -299,53 +143,7 @@
       <option name="presentableId" value="Default" />
       <updated>1572220718424</updated>
     </task>
-    <task id="LOCAL-00001" summary="caxhe">
-      <created>1573086714259</created>
-      <option name="number" value="00001" />
-      <option name="presentableId" value="LOCAL-00001" />
-      <option name="project" value="LOCAL" />
-      <updated>1573086714259</updated>
-    </task>
-    <task id="LOCAL-00002" summary="cache bs">
-      <created>1573086754104</created>
-      <option name="number" value="00002" />
-      <option name="presentableId" value="LOCAL-00002" />
-      <option name="project" value="LOCAL" />
-      <updated>1573086754104</updated>
-    </task>
-    <option name="localTasksCounter" value="3" />
     <servers />
-  </component>
-  <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1066" extended-state="7" />
-    <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.20682302" />
-      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
-      <window_info id="Capture Tool" order="2" />
-      <window_info id="Image Layers" order="3" />
-      <window_info id="Designer" order="4" />
-      <window_info id="UI Designer" order="5" />
-      <window_info id="Favorites" order="6" side_tool="true" />
-      <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32969603" />
-      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.49946696" weight="0.3301179" />
-      <window_info anchor="bottom" id="Debug" order="3" weight="0.3998441" />
-      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info anchor="bottom" id="TODO" order="6" />
-      <window_info anchor="bottom" id="Terminal" order="7" weight="0.3290461" />
-      <window_info anchor="bottom" id="Event Log" order="8" sideWeight="0.50053304" side_tool="true" visible="true" weight="0.32583067" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="9" sideWeight="0.49946696" visible="true" weight="0.32583067" />
-      <window_info anchor="bottom" id="Messages" order="10" sideWeight="0.49946696" weight="0.32690248" />
-      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
-      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="right" id="Palette" order="3" />
-      <window_info anchor="right" id="Maven" order="4" />
-      <window_info anchor="right" id="Theme Preview" order="5" />
-      <window_info anchor="right" id="Capture Analysis" order="6" />
-      <window_info anchor="right" id="Palette&#9;" order="7" />
-    </layout>
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
@@ -353,12 +151,6 @@
         <entry key="MAIN">
           <value>
             <State>
-              <option name="RECENTLY_FILTERED_USER_GROUPS">
-                <collection />
-              </option>
-              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
-                <collection />
-              </option>
               <option name="COLUMN_ORDER" />
             </State>
           </value>
@@ -379,11 +171,6 @@
         </entry>
       </map>
     </option>
-  </component>
-<<<<<<< HEAD
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="cache bs" />
-    <option name="LAST_COMMIT_MESSAGE" value="cache bs" />
   </component>
   <component name="masterDetails">
     <states>
@@ -457,6 +244,4 @@
       </state>
     </states>
   </component>
-=======
->>>>>>> 73347127e9ca3b48af329267c6d2afbd6b334553
 </project>
