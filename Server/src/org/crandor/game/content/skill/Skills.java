@@ -3,7 +3,6 @@ package org.crandor.game.content.skill;
 import org.crandor.game.content.global.SkillcapePerks;
 import org.crandor.game.content.global.tutorial.TutorialSession;
 import org.crandor.game.content.holiday.HolidayEvent;
-import org.crandor.game.events.GlobalEvent;
 import org.crandor.game.node.entity.Entity;
 import org.crandor.game.node.entity.combat.ImpactHandler;
 import org.crandor.game.node.entity.npc.NPC;
@@ -258,7 +257,7 @@ public final class Skills {
 		if (!(entity instanceof Player)) {
 			return 1.0;
 		}
-		double mod = multiplyer ? (GlobalEvent.XP_FEVER.isActive() ? EXPERIENCE_MULTIPLIER * 2 : EXPERIENCE_MULTIPLIER) : 1;
+		double mod = multiplyer ? (EXPERIENCE_MULTIPLIER) : 1;
 		Player p = (Player) entity;
 		if (p.getIronmanManager().getMode() == IronmanMode.ULTIMATE) {
 			mod /= 4;
@@ -859,7 +858,7 @@ public int getCombatMilestone() {
 
 /**
  * Sets the combatMilestones value.
- * @param combatMilestones The combatMilestones to set.
+ * @param combatMilestone The combatMilestones to set.
  */
 public void setCombatMilestone(int combatMilestone) {
 	this.combatMilestone = combatMilestone;
