@@ -24,8 +24,8 @@ public class PvMBots extends AIPlayer {
     //Used so the bot doesn't spam actions
     private int tick = 0;
 
-    public PvMBots(String name, Location l) {
-        super(name, l);
+    public PvMBots(Location l) {
+        super(l);
         // TODO Auto-generated constructor stub
     }
 

@@ -19,17 +19,17 @@ public class SkillingBot extends AIPlayer{
 	private int skill;
 	private int interactionRange;
 	
-	public SkillingBot(String name, Location l) 
+	public SkillingBot(Location l)
 	{
-		super(name, l);
+		super(l);
 		this.fromWhereDoIdrop = 0;
 		this.interactionRange = 15;
 		// TODO Auto-generated constructor stub
 	}
 
-	public SkillingBot(String name, Location l, int skill, ArrayList<Integer> entrys) 
+	public SkillingBot(Location l, int skill, ArrayList<Integer> entrys)
 	{
-		super(name, l);
+		super(l);
 		this.skill = skill;
 		this.fromWhereDoIdrop = 0;
 		this.interactNodeIds = entrys;
@@ -75,7 +75,7 @@ public class SkillingBot extends AIPlayer{
 			}
 			
 			if (node == null) {
-				System.out.println("Object not found " + this.skill);
+				System.out.println("SkillingBot.java: Object not found " + this.skill);
 				return;
 			}
 			

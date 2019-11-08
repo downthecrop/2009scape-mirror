@@ -16,34 +16,34 @@ import org.crandor.tools.RandomFunction;
 
 public final class PvMBotsBuilder{
 	
-	public static PestControlTestBot createPestControlTestBot(String name, Location l)
+	public static PestControlTestBot createPestControlTestBot(Location l)
 	{
-		return new PestControlTestBot(name, l);
+		return new PestControlTestBot(l);
 	}
 	
-	public static PvMBots create(String name, Location l) 
+	public static PvMBots create(Location l)
 	{
-		return new PvMBots(name, l);
+		return new PvMBots(l);
 	}
 	
-	public static LowestBot createLowest(String name, Location l)
+	public static LowestBot createLowest(Location l)
 	{
-		return new LowestBot(name, l);
+		return new LowestBot(l);
 	}
 	
-	public static NoobBot createNoob(String name, Location l)
+	public static NoobBot createNoob(Location l)
 	{
-		return new NoobBot(name, l);
+		return new NoobBot(l);
 	}
 	
-	public static DragonKiller createDragonKiller(String name, Location l) 
+	public static DragonKiller createDragonKiller(Location l)
 	{
-		return new DragonKiller(name, l);
+		return new DragonKiller(l);
 	}
 	
-	public static GiantMoleBot createGiantMoleBot(String name, Location l)
+	public static GiantMoleBot createGiantMoleBot(Location l)
 	{
-		return new GiantMoleBot(name, l);
+		return new GiantMoleBot(l);
 	}
 	
 	public static void generateGiantMoleBot(PvMBots p)
@@ -467,7 +467,7 @@ public final class PvMBotsBuilder{
 	
 	public static void spawn(Location loc)
 	{
-		final PvMBots bot = PvMBotsBuilder.create("bottest", loc);
+		final PvMBots bot = PvMBotsBuilder.create(loc);
 		bot.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
 		Repository.getPlayers().add(bot);
 		bot.init();
@@ -475,7 +475,7 @@ public final class PvMBotsBuilder{
 	
 	public static void spawnPestControlTestBot(Location loc)
 	{
-		final PestControlTestBot bot = PvMBotsBuilder.createPestControlTestBot("PestBot", loc);
+		final PestControlTestBot bot = PvMBotsBuilder.createPestControlTestBot(loc);
 		bot.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
 		Repository.getPlayers().add(bot);
 		bot.init();
@@ -485,7 +485,7 @@ public final class PvMBotsBuilder{
 	
 	public static void spawnLowest(Location loc)
 	{
-		final LowestBot bot = PvMBotsBuilder.createLowest("bottest", loc);
+		final LowestBot bot = PvMBotsBuilder.createLowest(loc);
 		bot.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
 		Repository.getPlayers().add(bot);
 		bot.init();
@@ -495,7 +495,7 @@ public final class PvMBotsBuilder{
 	
 	public static void spawnNoob(Location loc)
 	{
-		final NoobBot  bot = PvMBotsBuilder.createNoob("bottest", loc);
+		final NoobBot  bot = PvMBotsBuilder.createNoob(loc);
 		bot.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
 		Repository.getPlayers().add(bot);
 		bot.init();
@@ -505,7 +505,7 @@ public final class PvMBotsBuilder{
 	
 	public static void spawnDragonKiller(Location loc)
 	{
-		final DragonKiller bot = PvMBotsBuilder.createDragonKiller("bottest", loc);
+		final DragonKiller bot = PvMBotsBuilder.createDragonKiller(loc);
 		bot.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
 		Repository.getPlayers().add(bot);
 		bot.init();
@@ -515,7 +515,7 @@ public final class PvMBotsBuilder{
 	
 	public static void spawnGiantMoleBot(Location loc)
 	{
-		final GiantMoleBot bot = PvMBotsBuilder.createGiantMoleBot("bottest", new Location(0, 0));
+		final GiantMoleBot bot = PvMBotsBuilder.createGiantMoleBot(new Location(0, 0));
 		bot.teleport(loc);
 		bot.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
 		Repository.getPlayers().add(bot);

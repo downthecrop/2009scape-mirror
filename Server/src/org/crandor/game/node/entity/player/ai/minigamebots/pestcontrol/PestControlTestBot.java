@@ -32,8 +32,8 @@ public class PestControlTestBot extends PvMBots {
 		GET_TO_PC
 	}
 
-	public PestControlTestBot(String name, Location l) {
-		super(name, legitimizeLocation(l));
+	public PestControlTestBot(Location l) {
+		super(legitimizeLocation(l));
 		randomType = new Random().nextInt(100);
 	}
 
