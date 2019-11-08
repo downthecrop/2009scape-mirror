@@ -5,8 +5,8 @@ import org.crandor.game.world.map.Location;
 
 public class LowestBot extends PvMBots{
 
-	public LowestBot(String name, Location l) {
-		super(name, l);
+	public LowestBot(Location l) {
+		super(l);
 		// TODO Auto-generated constructor stub
 	}
 

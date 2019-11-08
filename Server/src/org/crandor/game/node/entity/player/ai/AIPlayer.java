@@ -1,9 +1,8 @@
 package org.crandor.game.node.entity.player.ai;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.util.*;
 
 import org.crandor.game.content.dialogue.DialoguePlugin;
 import org.crandor.game.content.global.tutorial.CharacterDesign;
@@ -66,22 +65,46 @@ public class AIPlayer extends Player {
 	 * The player controlling this AIP.
 	 */
 	private Player controler;
-	
+
 
 
 	/**
 	 * Constructs a new {@code AIPlayer} {@code Object}.
-	 * @param name The name of the AIP.
 	 * @param l The location.
 	 */
+	public AIPlayer(Location l) {
+	    this(retrieveRandomName(), l);
+	}
+
 	@SuppressWarnings("deprecation")
-	public AIPlayer(String name, Location l) {
+	private AIPlayer(String name, Location l) {
 		super(new PlayerDetails("/aip" + (currentUID + 1) + ":" + name));
 		super.setLocation(startLocation = l);
 		super.artificial = true;
 		super.getDetails().setSession(ArtificialSession.getSingleton());
 		this.username = StringUtils.formatDisplayName(name + (currentUID + 1));
 		this.uid = currentUID++;
+	}
+
+	public static String retrieveRandomName() //Reads a random line from the file O_O
+	{
+		String result = null;
+		Random rand = new Random();
+		int n = 0;
+		try {
+			for(Scanner sc = new Scanner(new File("./data/botdata/botnames.txt")); sc.hasNext(); )
+			{
+				++n;
+				String line = sc.nextLine();
+				if(rand.nextInt(n) == 0)
+					result = line;
+			}
+		} catch (FileNotFoundException e) {
+		    System.out.println("Missing botname.txt!");
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 
 	@Override
