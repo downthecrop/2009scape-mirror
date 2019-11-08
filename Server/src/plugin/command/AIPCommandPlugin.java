@@ -91,7 +91,7 @@ public final class AIPCommandPlugin extends CommandPlugin {
             case "aip":
                 name = args.length < 2 ? player.getName() : args[1];
                 AIPlayer p = AIPBuilder.copy(player, player.getLocation().transform(0, 1, 0));
-                Repository.getPlayers().add(p);
+
                 p.init();
 
                 Interaction.sendOption(player, 7, "Control");
@@ -110,7 +110,7 @@ public final class AIPCommandPlugin extends CommandPlugin {
                 // message
                 for (int i = 0; i < size; i++) {
                     final AIPlayer aip = AIPBuilder.copy(player, last.getLocation().transform(0, 1, 0));
-                    Repository.getPlayers().add(aip);
+
                     aip.init();
                     if (legion.isEmpty()) {
                         aip.setAttribute("aip_legion", legion);
@@ -148,7 +148,7 @@ public final class AIPCommandPlugin extends CommandPlugin {
                     final AIPlayer aip = AIPBuilder.create( generateLocation(player));
                     aip.setControler(player);
                     aip.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
-                    Repository.getPlayers().add(aip);
+
                     aip.init();
                     PVPAIPBuilderUtils.generateClass(aip);
 
@@ -170,7 +170,7 @@ public final class AIPCommandPlugin extends CommandPlugin {
                     final AIPlayer aip = AIPBuilder.create(generateLocation(player));
                     aip.setControler(player);
                     aip.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
-                    Repository.getPlayers().add(aip);
+
                     aip.init();
                     PVPAIPBuilderUtils.generateClass(aip);
 

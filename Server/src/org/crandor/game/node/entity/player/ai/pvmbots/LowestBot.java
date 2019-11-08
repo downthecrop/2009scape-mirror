@@ -7,7 +7,6 @@ public class LowestBot extends PvMBots{
 
 	public LowestBot(Location l) {
 		super(l);
-		// TODO Auto-generated constructor stub
 	}
 
 	private int tick = 0;

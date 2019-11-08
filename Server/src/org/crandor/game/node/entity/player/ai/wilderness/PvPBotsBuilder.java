@@ -518,9 +518,9 @@ public final class PvPBotsBuilder{
 		final WildernessBot bot = PvPBotsBuilder.create(new Location(0, 0));
 		bot.teleport(loc);
 		bot.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
-		Repository.getPlayers().add(bot);
+
 		generateClass(bot);
-		bot.init();
+
 	}
 	
 	private static void correctHitpointsStat(AIPlayer player) {

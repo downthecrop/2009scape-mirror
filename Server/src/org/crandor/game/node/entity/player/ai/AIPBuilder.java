@@ -59,8 +59,8 @@ public final class AIPBuilder {
 	{
 		final AIPlayer bot = new AIPlayer(loc);
 		bot.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
-		Repository.getPlayers().add(bot);
-		bot.init();
+
+
 		
 		bot.getSkills().setStaticLevel(Skills.MAGIC, RandomFunction.getRandom(99));
 		bot.getSkills().setStaticLevel(Skills.DEFENCE, RandomFunction.getRandom(99));

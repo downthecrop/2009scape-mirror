@@ -153,7 +153,7 @@ public class WildernessBot extends AIPlayer {
 	
 	private void checkBarrowsSwitch()
 	{
-		System.out.println(this.getSkills().getLifepoints());
+		System.out.println("WildernessBot: " + this.getSkills().getLifepoints());
 		Entity target = getTarget();
 		if (target == null)
 			return;

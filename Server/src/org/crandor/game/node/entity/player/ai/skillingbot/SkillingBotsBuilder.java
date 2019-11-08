@@ -23,8 +23,8 @@ public final class SkillingBotsBuilder extends AIPlayer {
 	{
 		SkillingBot bot = new SkillingBot(loc, Skills.MINING, entrys);
 		bot.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
-		Repository.getPlayers().add(bot);
-		bot.init();
+
+
 		bot.getEquipment().replace(new Item(1265), EquipmentContainer.SLOT_WEAPON);
 		return bot;
 	}
@@ -33,8 +33,8 @@ public final class SkillingBotsBuilder extends AIPlayer {
 	{
 		SkillingBot bot = new SkillingBot(loc, Skills.WOODCUTTING, entrys);
 		bot.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
-		Repository.getPlayers().add(bot);
-		bot.init();
+
+
 		bot.getEquipment().replace(new Item(1351), EquipmentContainer.SLOT_WEAPON);
 		return bot;
 	}
@@ -44,8 +44,8 @@ public final class SkillingBotsBuilder extends AIPlayer {
 		SkillingBot bot = new SkillingBot(loc, Skills.FISHING, entrys);
 		bot.getAppearance().setGender(RandomFunction.random(3) == 1 ? Gender.FEMALE : Gender.MALE);
         CharacterDesign.randomize(bot, false);
-		Repository.getPlayers().add(bot);
-		bot.init();
+
+
 		return bot;
 	}
 	
