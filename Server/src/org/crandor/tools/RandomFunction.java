@@ -93,19 +93,48 @@ public class RandomFunction {
 		return RANDOM.nextInt(val);
 	}
 
-	/*
-	 * Generates a random number likely closer to the middle of i
+	/**
+	 * Generates a random number with a distrobution like:
+     * Where intensity is how intense the peak is (higher = more steep)
+	 * 		      *
+	 *          *   *
+	 *         *      *
+	 *     * *          * *
+	 * * *                  * * *
 	 */
-	public static int normalRandDist(int i, int intensity) {
+	public static int normalRandDist(int max, int intensity) {
 		int sum = 0;
 		for (int j = 0; j < intensity; j++) {
-			sum += RANDOM.nextInt(i);
+			sum += RANDOM.nextInt(max);
 		}
 		return sum/intensity;
 	}
 
-	public static int normalRandDist(int i) {
-		return (RANDOM.nextInt(i) + RANDOM.nextInt(i))/2;
+	/**
+	 * Generates a random number with a distribution like:
+	 * 		      *
+	 *          *   *
+	 *         *      *
+	 *     * *          * *
+	 * * *                  * * *
+	 */
+	public static int normalRandDist(int max) {
+		return (RANDOM.nextInt(max) + RANDOM.nextInt(max))/2;
+	}
+
+	/**
+	 * Generates a random number with a distribution like:
+	 *
+	 * *
+	 *    *
+	 *       *
+	 *          *
+	 * See some results: https://www.desmos.com/calculator/clzv66l7hk
+	 */
+	public static int linearDecreaseRand(int max) {
+		double seed = RANDOM.nextDouble();
+		double modifier = RANDOM.nextDouble();
+		return (int) (seed*modifier*max);
 	}
 
 	/*

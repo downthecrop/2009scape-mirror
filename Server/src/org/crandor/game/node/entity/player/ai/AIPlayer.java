@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.*;
 
+import org.crandor.game.container.impl.EquipmentContainer;
 import org.crandor.game.content.dialogue.DialoguePlugin;
 import org.crandor.game.content.global.tutorial.CharacterDesign;
 import org.crandor.game.content.skill.Skills;
@@ -50,6 +51,13 @@ public class AIPlayer extends Player {
 	private static final AIPControlDialogue CONTROL_DIAL = new AIPControlDialogue();
 
 	/**
+	 * A line of data from namesandarmor.txt that will be used to generate the appearance
+	 * Data in format:
+	 * //name:cblevel:helmet:cape:neck:weapon:chest:shield:unknown:legs:unknown:gloves:boots:
+	 */
+	private static String OSRScopyLine;
+
+	/**
 	 * The AIP's UID.
 	 */
 	private final int uid;
@@ -88,42 +96,82 @@ public class AIPlayer extends Player {
 		Repository.getPlayers().add(this);
 		this.username = StringUtils.formatDisplayName(name + (currentUID + 1));
 		this.uid = currentUID++;
-		this.generateRandomValues();
+		this.updateRandomValues();
 		this.init();
 	}
 
-	private void generateRandomValues() {
+	/**
+	 * Generates bot stats/equipment/etc based on OSRScopyLine
+	 */
+	public void updateRandomValues() {
 		this.getAppearance().setGender(RandomFunction.random(5) == 1 ? Gender.FEMALE : Gender.MALE);
 
+		//Create realistic player stats
+		int maxLevel = RandomFunction.random((int) (Integer.parseInt(OSRScopyLine.split(":")[1])*0.78));
 		for (int i = 0; i < Skills.NUM_SKILLS; i++) {
-			this.getSkills().setLevel(i, RandomFunction.random(99));
-			this.getSkills().setStaticLevel(i, RandomFunction.random(99));
+			this.getSkills().setLevel(i, RandomFunction.linearDecreaseRand(maxLevel));
+			this.getSkills().setStaticLevel(i, RandomFunction.linearDecreaseRand(maxLevel));
         }
+		this.getSkills().setLevel(Skills.HITPOINTS, 10);
+		this.getSkills().setStaticLevel(Skills.HITPOINTS, 10);
+
+		//Create armor as fetched from OSRS
+		giveArmor();
 
 		this.setDirection(Direction.values()[new Random().nextInt(Direction.values().length)]); //Random facing dir
 		this.getSkills().updateCombatLevel();
 		this.getAppearance().sync();
 	}
 
-	public static String retrieveRandomName() //Reads a random line from the file O_O
+	private void giveArmor() {
+	 	//name:cblevel:helmet2:cape3:neck4:weapon5:chest6:shield7:unknown8:legs9:unknown10:gloves11:boots12:
+		//sicriona:103:1163:   1023: 1725 :1333:   1127  :1201    :0:      1079 :0:        2922:    1061:0:
+		equipIfExists(new Item(parseOSRS(2)), EquipmentContainer.SLOT_HAT);
+		equipIfExists(new Item(parseOSRS(3)), EquipmentContainer.SLOT_CAPE);
+		equipIfExists(new Item(parseOSRS(4)), EquipmentContainer.SLOT_AMULET);
+		equipIfExists(new Item(parseOSRS(5)), EquipmentContainer.SLOT_WEAPON);
+		equipIfExists(new Item(parseOSRS(6)), EquipmentContainer.SLOT_CHEST);
+		equipIfExists(new Item(parseOSRS(7)), EquipmentContainer.SLOT_SHIELD);
+		equipIfExists(new Item(parseOSRS(9)), EquipmentContainer.SLOT_LEGS);
+		equipIfExists(new Item(parseOSRS(11)), EquipmentContainer.SLOT_HANDS);
+		equipIfExists(new Item(parseOSRS(12)), EquipmentContainer.SLOT_FEET);
+	}
+
+	private int parseOSRS(int index)
 	{
-		String result = null;
+		return Integer.parseInt(OSRScopyLine.split(":")[index]);
+	}
+	private void equipIfExists(Item e, int slot)
+	{
+	    if (e.getId() != 0)
+			getEquipment().replace(e, slot);
+	}
+
+	/**
+	 * Get a bot name and read other stats while you're at it
+	 */
+	public static String retrieveRandomName()
+	{
+		String name = null;
 		Random rand = new Random();
 		int n = 0;
 		try {
-			for(Scanner sc = new Scanner(new File("./data/botdata/botnames.txt")); sc.hasNext(); )
+			for(Scanner sc = new Scanner(new File("./data/botdata/namesandarmor.txt")); sc.hasNext(); )
 			{
 				++n;
 				String line = sc.nextLine();
 				if(rand.nextInt(n) == 0)
-					result = line;
+				{
+					name = line.split(":")[0];
+					OSRScopyLine = line;
+				}
 			}
 		} catch (FileNotFoundException e) {
-		    System.out.println("Missing botname.txt!");
+		    System.out.println("Missing namesandarmor.txt!");
 			e.printStackTrace();
 		}
 
-		return result;
+		return name;
 	}
 
 	@Override
