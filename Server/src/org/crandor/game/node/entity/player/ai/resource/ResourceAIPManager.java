@@ -1,8 +1,11 @@
 package org.crandor.game.node.entity.player.ai.resource;
 
 import org.crandor.game.node.entity.player.Player;
+import org.crandor.game.node.entity.player.ai.AIPBuilder;
+import org.crandor.game.node.entity.player.ai.pvmbots.PvMBotsBuilder;
 import org.crandor.game.node.entity.player.ai.resource.task.ResourceTask;
 import org.crandor.game.node.entity.player.ai.resource.task.ResourceTasks;
+import org.crandor.game.node.entity.player.ai.skillingbot.SkillingBotsBuilder;
 import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
 
@@ -30,6 +33,13 @@ public class ResourceAIPManager {
     public ResourceAIPManager init() {
         getTasks().put(ResourceTasks.WOODCUTTING.getResourceTask(), 0L);
         return this;
+    }
+
+    public void immerseWorld() { //There's probably a better place for this (it adds bot at bootup)
+        PvMBotsBuilder.immersiveSpawns();
+        AIPBuilder.immersiveSpawns();
+        SkillingBotsBuilder.immersiveSpawnsSkillingBots();
+        System.out.println("Loaded immerseWorld");
     }
 
     public ResourceAIPManager runTask(Player player, String taskName) {

@@ -125,21 +125,6 @@ public final class GameWorld {
         pulses.clear();
         ticks++;
 
-        for (Player p : Repository.getPlayers()) {
-            if (p.isPlaying()) {
-                switch (RandomFunction.getRandom(1000)) {
-                    case 1:
-                        p.sendMessage("<col=BA55D3>Tip: You can earn some extra gold by looting the stalls in Ardougne.");
-                        break;
-                    case 2:
-                        p.sendMessage("<col=BA55D3>Tip: You can begin slayer by speaking to Turael at home.");
-                        break;
-                    case 3:
-                        p.sendMessage("<col=BA55D3>Tip: Speak to Bill Reach to get to popular areas.");
-                        break;
-                }
-            }
-        }
         if (ticks % 50 == 0) {
             TaskExecutor.execute(() -> {
                 try {
@@ -201,10 +186,11 @@ public final class GameWorld {
         ScriptManager.load();
         PluginManager.init();
         ResourceAIPManager.get().init();
+        ResourceAIPManager.get().immerseWorld();
         SQLManager.postPlugin();
         parseObjects();
         CallbackHub.call();
-//        ResourceAIPManager.get().init();
+
         if (run) {
             SystemManager.flag(GameWorld.getSettings().isDevMode() ? SystemState.PRIVATE : SystemState.ACTIVE);
         }
