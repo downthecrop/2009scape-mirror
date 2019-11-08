@@ -6,6 +6,7 @@ import java.util.*;
 
 import org.crandor.game.content.dialogue.DialoguePlugin;
 import org.crandor.game.content.global.tutorial.CharacterDesign;
+import org.crandor.game.content.skill.Skills;
 import org.crandor.game.interaction.DestinationFlag;
 import org.crandor.game.interaction.MovementPulse;
 import org.crandor.game.interaction.Option;
@@ -15,11 +16,13 @@ import org.crandor.game.node.entity.Entity;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.info.PlayerDetails;
+import org.crandor.game.node.entity.player.link.appearance.Gender;
 import org.crandor.game.node.item.Item;
 import org.crandor.game.world.map.Direction;
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.RegionManager;
 import org.crandor.game.world.map.path.Pathfinder;
+import org.crandor.game.world.repository.Repository;
 import org.crandor.net.packet.in.InteractionPacket;
 import org.crandor.plugin.Plugin;
 import org.crandor.tools.RandomFunction;
@@ -82,8 +85,24 @@ public class AIPlayer extends Player {
 		super.setLocation(startLocation = l);
 		super.artificial = true;
 		super.getDetails().setSession(ArtificialSession.getSingleton());
+		Repository.getPlayers().add(this);
 		this.username = StringUtils.formatDisplayName(name + (currentUID + 1));
 		this.uid = currentUID++;
+		this.generateRandomValues();
+		this.init();
+	}
+
+	private void generateRandomValues() {
+		this.getAppearance().setGender(RandomFunction.random(5) == 1 ? Gender.FEMALE : Gender.MALE);
+
+		for (int i = 0; i < Skills.NUM_SKILLS; i++) {
+			this.getSkills().setLevel(i, RandomFunction.random(99));
+			this.getSkills().setStaticLevel(i, RandomFunction.random(99));
+        }
+
+		this.setDirection(Direction.values()[new Random().nextInt(Direction.values().length)]); //Random facing dir
+		this.getSkills().updateCombatLevel();
+		this.getAppearance().sync();
 	}
 
 	public static String retrieveRandomName() //Reads a random line from the file O_O
@@ -396,7 +415,7 @@ public class AIPlayer extends Player {
 	@Override
 	public void clear() {
 		botMapping.remove(uid);
-		super.clear();
+		super.clear(true);
 	}
 
 	@Override
@@ -423,6 +442,7 @@ public class AIPlayer extends Player {
 		AIPlayer player = botMapping.get(uid);
 		if (player != null) {
 			player.clear();
+			Repository.getPlayers().remove(player);
 			return;
 		}
 		System.err.println("Could not deregister AIP#" + uid + ": UID not added to the mapping!");

@@ -11,7 +11,7 @@ import org.crandor.game.node.entity.player.ai.AIPlayer;
 import org.crandor.game.node.item.Item;
 import org.crandor.net.packet.in.InteractionPacket;
 
-public class SkillingBot extends AIPlayer{
+public class SkillingBot extends AIPlayer {
 
 	private int tick = 5;
 	private ArrayList<Integer> interactNodeIds;
@@ -24,7 +24,6 @@ public class SkillingBot extends AIPlayer{
 		super(l);
 		this.fromWhereDoIdrop = 0;
 		this.interactionRange = 15;
-		// TODO Auto-generated constructor stub
 	}
 
 	public SkillingBot(Location l, int skill, ArrayList<Integer> entrys)

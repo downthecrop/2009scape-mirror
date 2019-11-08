@@ -15,7 +15,7 @@ public class GeneralBotCreator {
     public GeneralBotCreator(Location loc, Script botScript)
     {
         botScript.bot = AIPBuilder.create(loc);
-        Repository.getPlayers().add(botScript.bot);
+
         botScript.init();
 
         GameWorld.submit(new Pulse(1, botScript.bot) {

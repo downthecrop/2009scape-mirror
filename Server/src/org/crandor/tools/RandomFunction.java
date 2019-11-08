@@ -93,6 +93,9 @@ public class RandomFunction {
 		return RANDOM.nextInt(val);
 	}
 
+	/*
+	 * Generates a random number likely closer to the middle of i
+	 */
 	public static int normalRandDist(int i, int intensity) {
 		int sum = 0;
 		for (int j = 0; j < intensity; j++) {
@@ -105,6 +108,9 @@ public class RandomFunction {
 		return (RANDOM.nextInt(i) + RANDOM.nextInt(i))/2;
 	}
 
+	/*
+	 * Generates a random number likely in the area above val (I think)
+	 */
 	public static int normalPlusWeightRandDist(int val, int weight)
 	{
 		int normalDistRand = (RANDOM.nextInt(val) + RANDOM.nextInt(val))/2;
