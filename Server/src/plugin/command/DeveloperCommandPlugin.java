@@ -131,6 +131,7 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
                 }
                 break;
             case "tut":
+                System.out.println("TUT");
                 if (player.getInventory().isEmpty()) {
                     player.getPacketDispatch().sendMessage("You have nothing to deposit.");
                 } else {
