@@ -7,8 +7,10 @@ data/profile/**
 .DS_Store**
 .project**
 .classpath**
+.class**
 /bin/
 /out/
+data/cache/
 *.iml
 *.eml
 *.userlibraries
