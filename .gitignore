@@ -1,7 +1,7 @@
-production/*
 .idea/*
 .idea/
 .idea/workspace.xml
 **/.idea/workspace.xml
 **/.idea/tasks.xml
-CompiledServer/
+Server/**/*.class
+CompiledServer/**/*.jar

@@ -6,12 +6,7 @@ data/profile/**
 /bin
 .DS_Store**
 .project**
-.classpath**
-.class**
-/bin/
 /out/
-data/cache/
 *.iml
 *.eml
 *.userlibraries
-data/players/**
