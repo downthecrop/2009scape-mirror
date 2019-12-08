@@ -1,6 +1,7 @@
 # RS 2009
 Open source 2009 Runescape Remake
 
+Join our Discord server: https://discord.gg/4zrA2Wy
 
 # Setting up the project
 Requirements:
@@ -9,8 +10,6 @@ Requirements:
 - Intellij
 
 Be sure to check the debugging section when something goes wrong.
-
-At any point, if you need help, you are free to join our Discord server at: https://discord.gg/4zrA2Wy
 
 ## Step 1:
 - Fork this repository to your repo
