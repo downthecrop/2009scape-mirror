@@ -1,5 +1,4 @@
-# RS 2009
-Open source 2009 Runescape Remake
+# RS 2009 - The most complete Runescape Emulation server. Pull requests welcome!
 
 Join our Discord server: https://discord.gg/4zrA2Wy
 
