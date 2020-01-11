@@ -207,7 +207,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 				stage++;
 				break;
 			case 531:
-				npc("A standard Ironman does not receieve items or", "assistance from other players. They cannot trade, stake,", "receieve PK loot, scavenge dropped items, nor player", "certain minigames.");
+				npc("A standard Ironman does not receive items or", "assistance from other players. They cannot trade, stake,", "receieve PK loot, scavenge dropped items, nor player", "certain minigames.");
 				stage++;
 				break;
 			case 532:
@@ -216,9 +216,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 				break;
 			case 1200:
 				npc("Keep in mind: our server has more content than any other", "server ever released. There's hundreds of hours of", "exciting and flawless gameplay awaiting you, "+player.getUsername()+".", "Enjoy your time playing "+GameWorld.getName()+"!");
-				stage = 520;
-				break;
-			case 520:
+				stage = 7; //HOW DO WE CLOSE THIS DIALOGUE
 				player.removeAttribute("tut-island");
 				player.getConfigManager().set(1021, 0);
 				player.getProperties().setTeleportLocation(new Location(3233, 3230));
@@ -233,7 +231,6 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 				player.getBank().add(new Item(121, 15), new Item(115, 15), new Item(133, 15), new Item(373, 50), new Item(2289, 25), new Item(7056, 25));
 				player.unlock();
 				TutorialSession.getExtension(player).setStage(TutorialSession.MAX_STAGE + 1);
-				stage = 7;
 				if (player.getIronmanManager().isIronman() && player.getSettings().isAcceptAid()) {
 					player.getSettings().toggleAcceptAid();
 				}
@@ -248,6 +245,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 				player.removeAttribute("tut-island:hi_slot");
 				HintIconManager.removeHintIcon(player, slot);
 				HintIconManager.registerHintIcon(player, Repository.findNPC(Location.create(3168, 3481, 0)));
+				end();
 				break;
 			case 7:
 				end();
