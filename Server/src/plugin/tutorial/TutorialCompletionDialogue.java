@@ -244,7 +244,6 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 				player.getInterfaceManager().setViewedTab(3);
 				player.removeAttribute("tut-island:hi_slot");
 				HintIconManager.removeHintIcon(player, slot);
-				HintIconManager.registerHintIcon(player, Repository.findNPC(Location.create(3168, 3481, 0)));
 				end();
 				break;
 			case 7:
