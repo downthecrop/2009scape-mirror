@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.crandor.ServerConstants;
 import org.crandor.cache.misc.buffer.ByteBufferUtils;
 import org.crandor.game.node.entity.player.info.portal.PlayerSQLManager;
 import org.crandor.game.system.SystemManager;
@@ -173,6 +174,7 @@ public class AccountRegister extends SQLEntryHandler<RegistryDetails> {
 		}else{
 			statement.setString(7,null);
 		}
+		
 		statement.executeUpdate();
 		SQLManager.close(statement.getConnection());
 	}
