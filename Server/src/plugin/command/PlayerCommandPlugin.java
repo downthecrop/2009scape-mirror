@@ -114,7 +114,7 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 					else if (p.getIronmanManager().getMode().equals(IronmanMode.HARDCORE)) {
 						hardcoreIronmanCount++;
 					}
-					else if (p.getIronmanManager().getMode().equals(IronmanMode.STANDARD) ||p.getIronmanManager().getMode().equals(IronmanMode.HARDCORE_DEAD)) {
+					else if (p.getIronmanManager().getMode().equals(IronmanMode.STANDARD)) {
 						ironmanCount++;
 					}
 					if (p.isArtificial()){
