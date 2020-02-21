@@ -183,7 +183,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 							break;
 						}
 					case 3: // What is Iron Man Mode?
-						player("What is an Iron Man?");
+						interpreter.sendDialogues(player, FacialExpression.ASKING,"What is an Iron Man?");
 						stage = 120;
 						break;
 					case 4: //Go back.
@@ -217,19 +217,19 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 
 			//What is an Iron Man?
 			case 120:
-				npc("An Iron Man account is a style of playing where players", "are completely self-sufficient.");
+				interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"An Iron Man account is a style of playing where players", "are completely self-sufficient.");
 				stage++;
 				break;
 			case 121:
-				npc("A Standard Ironman does not receive items or", "assistance from other players. They cannot trade, stake,", "receive PK loot, scavenge dropped items, nor play", "certain minigames.");
+				interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"A Standard Ironman does not receive items or", "assistance from other players. They cannot trade, stake,", "receive PK loot, scavenge dropped items, nor play", "certain minigames.");
 				stage++;
 				break;
 			case 122:
-				npc("In addition to Standard Ironman restrictions,", "<col=8A0808>Hardcore</col> Ironmen only have one life. In the event of","a dangerous death, a player will be downgraded to a", "Standard Ironman, and their stats frozen on the hiscores.");
+				interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"In addition to Standard Ironman restrictions,", "<col=8A0808>Hardcore</col> Ironmen only have one life. In the event of","a dangerous death, a player will be downgraded to a", "Standard Ironman, and their stats frozen on the hiscores.");
 				stage++;
 				break;
 			case 123:
-				npc("For the ultimate challenge, players who choose the", "<col=ECEBEB>Ultimate</col> Ironman mode cannot use banks, nor", "retain any items on death in dangerous areas.");
+				interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"For the ultimate challenge, players who choose the", "<col=ECEBEB>Ultimate</col> Ironman mode cannot use banks, nor", "retain any items on death in dangerous areas.");
 				stage++;
 				break;
 			case 124:
@@ -247,7 +247,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 				switch(buttonId){
 					case 1:
 					case 2:
-						npc("I have changed your Iron Man mode to: ","" + (buttonId == 1 ? "Standard" : "<col=8A0808>Hardcore</col>" + " Ironman mode."));
+						interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"I have changed your Iron Man mode to: ","" + (buttonId == 1 ? "Standard" : "<col=8A0808>Hardcore</col>" + " Ironman mode."));
 						player.getIronmanManager().setMode(IronmanMode.values()[buttonId]);
 						player.sendMessage("Your Iron Man status has been changed.");
 						stage = 50;
@@ -259,7 +259,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 							stage = 50;
 							break;
 						} else{
-							npc("I have changed your Iron Man mode to:","<col=ECEBEB>Ultimate</col> Ironman mode.");
+							interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"I have changed your Iron Man mode to:","<col=ECEBEB>Ultimate</col> Ironman mode.");
 							player.getIronmanManager().setMode(IronmanMode.ULTIMATE);
 							player.sendMessage("Your Iron Man status has been changed.");
 							stage = 50;
@@ -286,7 +286,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 			case 201:
 				switch (buttonId) {
 					case 1:
-						interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "Tada! Your experience rate is now 10x.", "Happy Scaping!");
+						interpreter.sendDialogues(npc, FacialExpression.FRIENDLY, "Tada! Your experience rate is now 10x.", "Happy Scaping!");
 						player.getSkills().experienceMutiplier = 10.0;
 						stage = 50;
 						break;
