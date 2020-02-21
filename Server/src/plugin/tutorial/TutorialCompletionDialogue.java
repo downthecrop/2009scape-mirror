@@ -201,7 +201,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 						case 3:
 							npc("You have chosen the " + (buttonId == 1 ? "Standard" : (buttonId == 2 ? "<col=8A0808>Hardcore</col>" : "<col=ECEBEB>Ultimate</col>")) + " Ironman mode.");
 							player.setAttribute("ironMode", IronmanMode.values()[buttonId]);
-							player.getSavedData().getActivityData().setHardcoreDeath(0);
+							player.getSavedData().getActivityData().setHardcoreDeath(0); //might not be necessary?
 							stage = 516;
 							break;
 						case 4:
