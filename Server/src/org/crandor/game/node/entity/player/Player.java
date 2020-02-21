@@ -202,7 +202,7 @@ public class Player extends Entity {
 	 * The saved data.
 	 */
 	private final SavedData savedData = new SavedData(this);
-	
+
 	/**
 	 * The request manager.
 	 */
@@ -282,17 +282,17 @@ public class Player extends Entity {
 	 * The boolean for the player playing.
 	 */
 	private boolean playing;
-	
-	 /**
-     * If the player is invisible.
-     */
-    private boolean invisible;
+
+	/**
+	 * If the player is invisible.
+	 */
+	private boolean invisible;
 
 	/**
 	 * If the player is artificial.
 	 */
 	protected boolean artificial;
-	
+
 	/**
 	 * The skiller tasks.
 	 */
@@ -325,12 +325,12 @@ public class Player extends Entity {
 		super.init();
 		LoginConfiguration.configureLobby(this);
 	}
-	
+
 	@Override
 	public void clear() {
 		clear(false);
 	}
-	
+
 	/**
 	 * Clears the player from the game.
 	 * @param force If we should force removal, a player engaged in combat will otherwise remain active until out of combat.
@@ -445,7 +445,7 @@ public class Player extends Entity {
 	public CombatSwingHandler getSwingHandler(boolean swing) {
 		CombatStyle style = getProperties().getCombatPulse().getStyle();
 		if (swing) {
-			int weaponId = equipment.getNew(3).getId();	
+			int weaponId = equipment.getNew(3).getId();
 			if (getProperties().getSpell() != null || getProperties().getAutocastSpell() != null) {
 				return CombatStyle.MAGIC.getSwingHandler();
 			}
@@ -497,9 +497,15 @@ public class Player extends Entity {
 			return;
 		}
 		getPacketDispatch().sendMessage("Oh dear, you are dead!");
-		if (this.getIronmanManager().checkRestriction(IronmanMode.ULTIMATE)){
-			Repository.sendNews("Ultimate ironman "+this.getUsername()+" has just perished.");
+
+		//If player was a Hardcore Ironman, announce that they died
+		if (this.getIronmanManager().getMode().equals(IronmanMode.HARDCORE)){ //if this was checkRestriction, ultimate irons would be moved to HARDCORE_DEAD as well
+			String gender = this.isMale() ? "Man " : "Woman ";
+			Repository.sendNews("Hardcore Iron " + gender + " " + this.getUsername() +" has fallen. Total Level: " + this.getSkills().getTotalLevel()); // Not enough room for XP
+			this.getIronmanManager().setMode(IronmanMode.HARDCORE_DEAD);
+			this.sendMessage("You have fallen as a Hardcore Iron Man, your Hardcore status has been revoked.");
 		}
+
 		packetDispatch.sendTempMusic(90);
 		if (!getZoneMonitor().handleDeath(killer) && (!getProperties().isSafeZone() && getZoneMonitor().getType() != ZoneType.SAFE.getId()) && getDetails().getRights() != Rights.ADMINISTRATOR) {
 			GroundItemManager.create(new Item(526), getLocation(), k);
@@ -536,10 +542,10 @@ public class Player extends Entity {
 			inventory.addAll(c[0]);
 			if (gravestone) {
 				graveManager.create(ticks, items);
-			    sendMessages("<col=990000>Because of your current gavestone, you have "+graveManager.getType().getDecay()+" minutes to get your items and", "<col=990000>equipment back after dying in combat.");	
+				sendMessages("<col=990000>Because of your current gavestone, you have "+graveManager.getType().getDecay()+" minutes to get your items and", "<col=990000>equipment back after dying in combat.");
 			}
 			familiarManager.dismiss();
-			
+
 		}
 		skullManager.setSkulled(false);
 		removeAttribute("combat-time");
@@ -694,7 +700,7 @@ public class Player extends Entity {
 	public void sendMessage(String message) {
 		sendMessages(message);
 	}
-	
+
 	/**
 	 * Sends a notification message.
 	 * @param message The message.
@@ -711,12 +717,12 @@ public class Player extends Entity {
 	public boolean hasPerk(Perks perk) {
 		return details.getShop().hasPerk(perk);
 	}
-	
+
 	public boolean spawnZone() {
 		return (getLocation().getX() > 3090 && getLocation().getY() < 3500
-		&& getLocation().getX() < 3099 && getLocation().getY() > 3487);
+				&& getLocation().getX() < 3099 && getLocation().getY() > 3487);
 	}
-	
+
 	/**
 	 * Checks if the player can spawn.
 	 * @return {@code True} if so.
@@ -751,7 +757,7 @@ public class Player extends Entity {
 			packetDispatch.sendMessage(string);
 		}
 	}
-	
+
 	/**
 	 * Grabs a players gender, using shorter amount of code
 	 */
@@ -762,7 +768,7 @@ public class Player extends Entity {
 		else
 			return false;
 	}
-	
+
 	/**
 	 * Sets the player details.
 	 * @param details The player details.
@@ -857,7 +863,7 @@ public class Player extends Entity {
 	public PlayerDetails getDetails() {
 		return details;
 	}
-	
+
 	/**
 	 * Gets the name.
 	 * @param display the display.
@@ -1120,7 +1126,7 @@ public class Player extends Entity {
 	 * Gets the houseManager.
 	 * @return The houseManager.
 	 */
-	public HouseManager getHouseManager() { 
+	public HouseManager getHouseManager() {
 		return houseManager;
 	}
 
@@ -1230,23 +1236,23 @@ public class Player extends Entity {
 	public EmoteManager getEmoteManager() {
 		return emoteManager;
 	}
-	
-    /**
-     * Gets the invisible.
-     * @return the invisible
-     */
-    public boolean isInvisible() {
-    	return invisible;
-    }
- 
-    /**
-     * Sets the invisible.
-     * @param invisible the invisible to set.
-     */
-    public void setInvisible(boolean invisible) {
-    	this.invisible = invisible;
-    }   
- 
+
+	/**
+	 * Gets the invisible.
+	 * @return the invisible
+	 */
+	public boolean isInvisible() {
+		return invisible;
+	}
+
+	/**
+	 * Sets the invisible.
+	 * @param invisible the invisible to set.
+	 */
+	public void setInvisible(boolean invisible) {
+		this.invisible = invisible;
+	}
+
 	@Override
 	public String getUsername() {
 		return StringUtils.formatDisplayName(getName());
@@ -1266,11 +1272,11 @@ public class Player extends Entity {
 	}
 
 
-    public String getCustomState() {
-    	return customState;
-    }
+	public String getCustomState() {
+		return customState;
+	}
 
-    public void setCustomState(String state)
+	public void setCustomState(String state)
 	{
 		this.customState = state;
 	}
