@@ -106,6 +106,11 @@ public final class ActivityData implements SavingModule {
 	private int fogRating;
 
 	/**
+	 * The death status of a Hardcore Iron Man
+	 */
+	private int hardcoreDeath;
+
+	/**
 	 * Constructs a new {@code ActivityInfo} {@code Object}.
 	 */
 	public ActivityData() {
@@ -154,6 +159,7 @@ public final class ActivityData implements SavingModule {
 		SavedData.save(buffer, solvedMazes, 18);
 		SavedData.save(buffer, fogRating, 19);
 		SavedData.save(buffer, borkKills, 20);
+		SavedData.save(buffer, hardcoreDeath, 21);
 		buffer.put((byte) 0);
 
 	}
@@ -230,6 +236,8 @@ public final class ActivityData implements SavingModule {
 			case 20:
 				borkKills = buffer.get();
 				break;
+			case 21:
+				hardcoreDeath = buffer.getInt();
 			}
 		}
 	}
@@ -627,5 +635,17 @@ public final class ActivityData implements SavingModule {
 	 */
 	public void setBorkKills(byte borkKills) {
 		this.borkKills = borkKills;
+	}
+
+	/**
+	 * gets the current value of an Hardcore Iron Man's death status
+	 * @return the value of a Hardcore Iron Man's death status
+	 */
+	public int getHardcoreDeath() {
+		return hardcoreDeath;
+	}
+
+	public void setHardcoreDeath(int hardcoreDeath) {
+		this.hardcoreDeath = hardcoreDeath;
 	}
 }
