@@ -74,11 +74,11 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 		if (npc.getId() == 946) {
 			switch (TutorialSession.getExtension(player).getStage()) {
 				case 67:
-					interpreter.sendDialogues(player, null, "Hello.");
+					interpreter.sendDialogues(player, FacialExpression.FRIENDLY, "Hello.");
 					stage = 0;
 					return true;
 				case 69:
-					interpreter.sendDialogues(946, null, "Good. This is a list of your spells. Currently you can", "only cast one offensive spell called Wind Strike. Let's", "try it out on one of those chickens.");
+					interpreter.sendDialogues(946, FacialExpression.NEUTRAL, "Good. This is a list of your spells. Currently you can", "only cast one offensive spell called Wind Strike. Let's", "try it out on one of those chickens.");
 					stage = 0;
 					return true;
 				case 70:
@@ -97,7 +97,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 					}
 					return true;
 				case 71:
-					interpreter.sendDialogues(946, null, "Well you're all finished here now. I'll give you a", "reasonable number of runes when you leave.");
+					interpreter.sendDialogues(946, FacialExpression.NEUTRAL, "Well you're all finished here now. I'll give you a", "reasonable number of runes when you leave.");
 					stage = -2;
 					return true;
 			}
@@ -105,7 +105,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 
 		//Skippy Dialogue used whenever the Player talks to Skippy during the tutorial
 		else {
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "*psst.* Hey, do you want to skip the tutorial?", "I can send you straight to the mainland, easy.");
+			interpreter.sendDialogues(npc, FacialExpression.SUSPICIOUS, "*psst.* Hey, do you want to skip the tutorial?", "I can send you straight to the mainland, easy.");
 			stage = 1;
 		}
 		return true;
@@ -124,7 +124,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 				case -1:
 					switch (buttonId) {
 						case 1:
-							npc("One more thing: Would you like to", "be an Ironman account?");
+							interpreter.sendDialogues(npc, FacialExpression.ASKING,"One more thing: Would you like to", "be an Ironman account?");
 							stage = 501;
 							break;
 						case 2:
@@ -142,28 +142,28 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 				case 2:
 					switch (buttonId) {
 						case 1:
-							npc("One more thing: Would you like to", "be an Ironman account?");
+							interpreter.sendDialogues(npc, FacialExpression.ASKING,"One more thing: Would you like to", "be an Ironman account?");
 							stage = 501;
 							if (!IRONMAN) {
 								stage = 1205;
 							}
 							break;
 						case 2:
-							interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Can I decide later?.");
+							interpreter.sendDialogues(player, FacialExpression.THINKING, "Can I decide later?.");
 							stage = 39;
 							break;
 						case 3:
-							interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I'll stay here for the Tutorial.");
+							interpreter.sendDialogues(player, FacialExpression.NEUTRAL, "I'll stay here for the Tutorial.");
 							stage = 40;
 							break;
 					}
 					break;
 				case 39:
-					interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Yes. Talk to me at any point during this tutorial", "if you change your mind.");
+					interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "Yes. Talk to me at any point during this tutorial", "if you change your mind.");
 					stage = 99;
 					break;
 				case 40:
-					interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Very well. Have fun, adventurer.");
+					interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "Very well. Have fun, adventurer.");
 					stage = 99;
 					break;
 
@@ -177,15 +177,15 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 				case 502:
 					switch (buttonId) {
 						case 1:
-							player("Yes, please.");
+							interpreter.sendDialogues(npc, FacialExpression.HAPPY,"Yes, please.");
 							stage = 506;
 							break;
 						case 2:
-							player("What is an Ironman account?");
+							interpreter.sendDialogues(npc, FacialExpression.ASKING,"What is an Ironman account?");
 							stage = 530;
 							break;
 						case 3:
-							player("No, thanks.");
+							interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"No, thanks.");
 							stage = 534;
 							break;
 					}
@@ -218,30 +218,30 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 
 					//Split Dialogue depending on if the Player is talking to the Magic Instructor or Skippy.
 					if (npc.getId() == 946) {
-						npc("Congratulations, you have setup your Ironman account.", "Let's continue.");
+						interpreter.sendDialogues(npc, FacialExpression.HAPPY,"Congratulations, you have setup your Ironman account.", "Let's continue.");
 						stage = 1199;
 						break;
 					} else {
-						npc("Congratulations, you have setup your Ironman account.", "You will travel to the mainland in a moment.");
+						interpreter.sendDialogues(npc, FacialExpression.FRIENDLY,"Congratulations, you have setup your Ironman account.", "You will travel to the mainland in a moment.");
 						stage = 1204;
 						break;
 					}
 
 					//About Ironman mode
 				case 530:
-					npc("An Iron Man account is a style of playing where players", "are completely self-sufficient.");
+					interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"An Iron Man account is a style of playing where players", "are completely self-sufficient.");
 					stage++;
 					break;
 				case 531:
-					npc("A Standard Ironman does not receive items or", "assistance from other players. They cannot trade, stake,", "receive PK loot, scavenge dropped items, nor play", "certain minigames.");
+					interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"A Standard Ironman does not receive items or", "assistance from other players. They cannot trade, stake,", "receive PK loot, scavenge dropped items, nor play", "certain minigames.");
 					stage++;
 					break;
 				case 532:
-					npc("In addition to Standard Ironman restrictions,", "<col=8A0808>Hardcore</col> Ironmen only have one life. In the event of","a dangerous death, a player will be downgraded to a", "Standard Ironman, and their stats frozen on the hiscores.");
+					interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"In addition to Standard Ironman restrictions,", "<col=8A0808>Hardcore</col> Ironmen only have one life. In the event of","a dangerous death, a player will be downgraded to a", "Standard Ironman, and their stats frozen on the hiscores.");
 					stage++;
 					break;
 				case 533:
-					npc("For the ultimate challenge, players who choose the", "<col=ECEBEB>Ultimate</col> Ironman mode cannot use banks, nor", "retain any items on death in dangerous areas.");
+					interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"For the ultimate challenge, players who choose the", "<col=ECEBEB>Ultimate</col> Ironman mode cannot use banks, nor", "retain any items on death in dangerous areas.");
 					stage = 501;
 					break;
 
@@ -249,11 +249,11 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 					// From saying no thanks to being an ironman.
 					//Split Dialogue depending on if the Player is talking to the Magic Instructor or Skippy.
 					if (npc.getId() == 946) {
-						npc("Very well.", "Let's continue.");
+						interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"Very well.", "Let's continue.");
 						stage = 1199;
 						break;
 					} else {
-						npc("Very well.", "You will travel to the mainland in a moment.");
+						interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"Very well.", "You will travel to the mainland in a moment.");
 						stage = 1204;
 						break;
 					}
@@ -266,16 +266,16 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 					interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "a question mark on the end. He also has a white beard","and carries a rucksack full of scrolls. There are also","many tutors willing to teach you about the many skills","you could learn.");
 					stage++;
 					break;
-				case 1201: //Needs to be the Lumbridge Guide Icon... Not sure of the ID or interface.
+				case 1201: //TODO: Needs to be the Lumbridge Guide Icon... Not sure of the ID or interface.
 					interpreter.sendItemMessage(RUNES[1], "When you get to Lumbridge, look for this icon on you","mini-map. The Lumbridge Guide or one of the other","tutors should be near there. The Lumbridge","Guide should be standing slightly to the north-east of");
 					stage++;
 					break;
-				case 1202: //Needs to be the Lumbridge Guide Icon... Not sure of the ID or interface.
+				case 1202: //TODO: Needs to be the Lumbridge Guide Icon... Not sure of the ID or interface.
 					interpreter.sendItemMessage(RUNES[1], "the castle's courtyard and the others you will find","scattered around Lumbridge.");
 					stage++;
 					break;
 				case 1203:
-					interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "If all else fails, visit the "+ GameWorld.getName()+ " website for a whole","chestload of information on quests, skills, and minigames","as well as a very good starter's guide.");
+					interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "If all else fails, visit the "+ GameWorld.getName()+ " website for a whole","chestload of information on quests, skills, and minigames","as well as a very good starter's guide.");
 					stage++;
 					break;
 
@@ -348,7 +348,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 			case 67:
 				switch (stage) {
 					case 0:
-						interpreter.sendDialogues(946, null, "Good day, newcomer. My name is Terrova. I'm here", "to tell you about Magic. Let's start by opening your", "spell list.");
+						interpreter.sendDialogues(946, FacialExpression.NEUTRAL, "Good day, newcomer. My name is Terrova. I'm here", "to tell you about Magic. Let's start by opening your", "spell list.");
 						stage = 1;
 						break;
 					case 1:
