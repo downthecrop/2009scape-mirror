@@ -6,8 +6,8 @@ package org.crandor.game.node.entity.player.link;
  */
 public enum IronmanMode {
 	//TODO: add HCIM logo to cache/wherever else it needs to go
-	// HARDCORE_DEAD has to be before Ultimate so that it does not adopt it's restrictions (on the basis of >= in IronmanManager.java)
-	NONE(-1), STANDARD(14), HARDCORE(16), HARDCORE_DEAD (14), ULTIMATE(15);
+	// HARDCORE_DEAD has to be before Ultimate so that it does not adopt it's restrictions (on the basis of >= in IronmanManager.java?)
+	NONE(-1), STANDARD(14), HARDCORE(16), ULTIMATE(15);
 
 	/**
 	 * The icon id.
