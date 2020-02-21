@@ -68,7 +68,7 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 					player.sendChat("Hey, everyone, I just tried to do something very silly!");
 				}
 				break;
-				
+
 			case "bankresettabs":
 				for (int i = 0; i < player.getBank().getTabStartSlot().length; i++) {
 					player.getBank().getTabStartSlot()[i] = 0;
@@ -79,7 +79,7 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 				}
 				player.sendMessage("<col=3498db>Your bank tabs have been reset!");
 				return true;
-				
+
 			case "bankresetpin":
 				if (arguments.length < 2) {
 					player.sendMessage("<col=e74c3c>You must specify your current pin!");
@@ -104,25 +104,29 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 			case "players":
 				int totalCount = Repository.getPlayers().size();
 				int ironmanCount = 0;
+				int hardcoreIronmanCount = 0;
 				int ultIronmanCount = 0;
 				int botCount = 0;
 				for (Player p : Repository.getPlayers()) {
-					if (p.getIronmanManager().checkRestriction(IronmanMode.ULTIMATE)) {
-						ultIronmanCount++;
+					if (p.getIronmanManager().getMode().equals(IronmanMode.ULTIMATE)) { //If this was check restriction, ultimate irons would be counted as all
+						ultIronmanCount++;												//three modes, affecting the player count
 					}
-					if (p.getIronmanManager().checkRestriction(IronmanMode.STANDARD)) {
+					else if (p.getIronmanManager().getMode().equals(IronmanMode.HARDCORE)) {
+						hardcoreIronmanCount++;
+					}
+					else if (p.getIronmanManager().getMode().equals(IronmanMode.STANDARD) ||p.getIronmanManager().getMode().equals(IronmanMode.HARDCORE_DEAD)) {
 						ironmanCount++;
 					}
 					if (p.isArtificial()){
 						botCount++;
 					}
 				}
-				int regular = totalCount - ironmanCount - ultIronmanCount - botCount;
+				int regular = totalCount - ironmanCount - hardcoreIronmanCount - ultIronmanCount - botCount;
 				int playerCount = totalCount-botCount;
 				if (totalCount == 1) {
 					player.sendMessage("<col=3498db>There is 1 active player in this world.");
 				} else {
-					player.sendMessage("<col=3498db>There are " + playerCount + " active players in this world: " + regular + " regular, " + ironmanCount + " iron, and " + ultIronmanCount + " ultimate iron.");
+					player.sendMessage("<col=3498db>There are " + playerCount + " active players in this world: " + regular + " regular, " + ironmanCount + " IM, " + hardcoreIronmanCount + " HCIM, " + ultIronmanCount + " UIM.");
 				}
 				return player.getRights() == Rights.REGULAR_PLAYER;
 
