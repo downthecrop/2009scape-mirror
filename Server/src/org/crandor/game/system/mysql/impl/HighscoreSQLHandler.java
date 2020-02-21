@@ -4,6 +4,7 @@ import org.crandor.ServerConstants;
 import org.crandor.game.content.skill.Skills;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.info.Rights;
+import org.crandor.game.node.entity.player.link.IronmanMode;
 import org.crandor.game.system.mysql.SQLEntryHandler;
 import org.crandor.game.system.mysql.SQLManager;
 import org.crandor.game.world.GameWorld;
@@ -56,6 +57,15 @@ public final class HighscoreSQLHandler extends SQLEntryHandler<Player> {
 		super.read();
 		if (result == null || !result.next()) {
 			create();
+			return;
+		}
+		if (entry.getIronmanManager().checkRestriction(IronmanMode.HARDCORE_DEAD))
+		{
+			//Update the SQL table to indicate the player was a Hardcore ironman that died, do not update hiscores
+			StringBuilder b = new StringBuilder("UPDATE highscores SET ironManMode='" + entry.getIronmanManager().getMode().name() + "' WHERE username ='" + value +"'");
+			PreparedStatement statement = connection.prepareStatement(b.toString());
+			statement.executeUpdate();
+			SQLManager.close(statement.getConnection());
 			return;
 		}
 		StringBuilder b = new StringBuilder("UPDATE highscores SET overall_xp='" + getTotalXp() + "', total_level='" + entry.getSkills().getTotalLevel() + "', ironManMode='" + entry.getIronmanManager().getMode().name() + "', ");
