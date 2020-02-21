@@ -151,7 +151,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 			case 100:
 				switch (buttonId) {
 					case 1: //no longer want to be iron
-						if (player.getIronmanManager().checkRestriction(IronmanMode.HARDCORE_DEAD)) {
+						if (player.getSavedData().getActivityData().getHardcoreDeath() == 1) {
 							interpreter.sendDialogues(npc, FacialExpression.GUILTY, "Sorry, but you've fallen as a Hardcore Iron Man", "already. It would be unfair for those with other", " restrictions if your status were to be removed!");
 							stage = 50;
 							break;
@@ -168,7 +168,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 							break;
 						}
 					case 2: //change ironman mode
-						if (player.getIronmanManager().checkRestriction(IronmanMode.HARDCORE_DEAD)) {
+						if (player.getSavedData().getActivityData().getHardcoreDeath() == 1) {
 							interpreter.sendDialogues(npc, FacialExpression.GUILTY, "Sorry, but you've fallen as a Hardcore Iron Man", "already. It would be unfair for those with other", " restrictions if your status were to be changed!");
 							stage = 50;
 							break;
