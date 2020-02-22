@@ -59,7 +59,7 @@ public final class HighscoreSQLHandler extends SQLEntryHandler<Player> {
 			create();
 			return;
 		}
-		if (entry.getSavedData().getActivityData().getHardcoreDeath() == 1){
+		if (entry.getSavedData().getActivityData().getHardcoreDeath() == true){
 			//Update the SQL table to indicate the player was a Hardcore ironman that died, do not update hiscores
 			StringBuilder b = new StringBuilder("UPDATE highscores SET ironManMode='HARDCORE_DEAD' WHERE username ='" + value + "'");
 			PreparedStatement statement = connection.prepareStatement(b.toString());
