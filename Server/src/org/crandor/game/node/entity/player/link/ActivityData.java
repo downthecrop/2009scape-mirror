@@ -108,7 +108,7 @@ public final class ActivityData implements SavingModule {
 	/**
 	 * The death status of a Hardcore Iron Man
 	 */
-	private int hardcoreDeath;
+	private boolean hardcoreDeath;
 
 	/**
 	 * Constructs a new {@code ActivityInfo} {@code Object}.
@@ -237,7 +237,8 @@ public final class ActivityData implements SavingModule {
 				borkKills = buffer.get();
 				break;
 			case 21:
-				hardcoreDeath = buffer.getInt();
+				hardcoreDeath = SavedData.getBoolean(buffer);
+				break;
 			}
 		}
 	}
@@ -641,11 +642,11 @@ public final class ActivityData implements SavingModule {
 	 * gets the current value of an Hardcore Iron Man's death status
 	 * @return the value of a Hardcore Iron Man's death status
 	 */
-	public int getHardcoreDeath() {
+	public boolean getHardcoreDeath() {
 		return hardcoreDeath;
 	}
 
-	public void setHardcoreDeath(int hardcoreDeath) {
+	public void setHardcoreDeath(boolean hardcoreDeath) {
 		this.hardcoreDeath = hardcoreDeath;
 	}
 }
