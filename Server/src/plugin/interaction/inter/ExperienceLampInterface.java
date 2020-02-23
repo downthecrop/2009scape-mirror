@@ -75,6 +75,7 @@ public final class ExperienceLampInterface extends ComponentPlugin {
 			player.getAudioManager().send(SOUND);
 			player.getInventory().remove(lamp);
 			player.getInterfaceManager().close();
+			
 			int skillLevel = player.getSkills().getStaticLevel(skillType.skill);
 			int modifier = 10;
 			double experience = skillLevel * modifier;
@@ -89,6 +90,7 @@ public final class ExperienceLampInterface extends ComponentPlugin {
 				player.getDialogueInterpreter().open(70099, new Object[] { "The lamp gives you " + (experience * (player.getSkills().experienceMutiplier)) + " " + Skills.SKILL_NAME[skillType.skill] + " experience." });
 			}
 			player.getSkills().addExperience(skillType.skill, experience, false);
+			player.getInterfaceManager().restoreTabs();
 		}
 		return true;
 	}

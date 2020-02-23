@@ -19,7 +19,6 @@ import org.crandor.game.system.task.TaskExecutor;
 import org.crandor.net.Constants;
 import org.crandor.net.IoSession;
 import org.crandor.net.event.LoginReadEvent;
-import org.keldagrim.ServerConstants;
 
 /**
  * Handles the registry of new accounts.

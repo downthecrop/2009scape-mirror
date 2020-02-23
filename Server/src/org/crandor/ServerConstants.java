@@ -171,4 +171,7 @@ public final class ServerConstants {
 		 */
 	}
 	
+	public static final Boolean NEW_PLAYER_DEFAULT_CLAN = true;
+	public static final String SERVER_NAME = "2009Scape";
+	
 }
