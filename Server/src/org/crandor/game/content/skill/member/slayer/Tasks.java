@@ -43,7 +43,7 @@ public enum Tasks {
 	DUST_DEVILS(new Task(new int[] { 1624 }, new String[] { "Dust Devils use clouds of dust, sand, ash and whatever", "else they can inhale to blind and disorientate", "their victims." }, 65, new Master[] { Master.VANNAKA, Master.CHAELDAR, Master.DURADEL, Master.NIEVE }, false)),
 	DWARF(new Task(new int[] { 118, 120, 121, 382, 3219, 3220, 3221, 3268, 3269, 3270, 3271, 3272, 3273, 3274, 3275, 3294, 3295, 4316, 5880, 5881, 5882, 5883, 5884, 5885, 2130, 2131, 2132, 2133, 3276, 3277, 3278, 3279, 119, 2423 }, new String[] { "They are slightly resistant to Magic attacks, and", "are not recommended for low levels." }, 1, new Master[] { Master.TURAEL }, false)),
 	EARTH_WARRIORS(new Task(new int[] { 124 }, new String[] { "An Earth warrior is a monster made of earth which fights using melee." }, 1, new Master[] { Master.VANNAKA }, false)),
-	ELVES(new Task(new int[] { 1184, 1183, 1185 }, new String[] { "Elves are quick, agile and vicious fighters which", "often favour bows and polearms." }, 1, new Master[] { Master.VANNAKA, Master.CHAELDAR, Master.NIEVE }, false) {
+	/*ELVES(new Task(new int[] { 1184, 1183, 1185 }, new String[] { "Elves are quick, agile and vicious fighters which", "often favour bows and polearms." }, 1, new Master[] { Master.VANNAKA, Master.CHAELDAR, Master.NIEVE }, false) {
 		@Override
 		public boolean isDisabled() {
 			return true;
@@ -54,7 +54,7 @@ public enum Tasks {
 		public boolean isDisabled() {
 			return true;
 		}
-	}),
+	}),*/
 	FIRE_GIANTS(new Task(new int[] { 110, 1582, 1583, 1584, 1585, 1586, 7003, 7004 }, new String[] { "Like other giants, Fire Giants often wield large weapons", "learn to recognise what kind of weapon it is, and act accordingly." }, 1, new Master[] { Master.CHAELDAR, Master.DURADEL, Master.NIEVE }, false)),
 	FLESH_CRAWLERS(new Task(new int[] { 4389, 4390, 4391 }, new String[] { "Flesh crawlers are medium level monsters found on", "level 2 of the Stronghold of Security." }, 1, new Master[] { Master.MAZCHNA }, false)),
 	GARGOYLES(new Task(new int[] { 1610, 1611, 6389 }, new String[] { "Gargoyles are winged creatures of stone. You'll need to fight them to", "near death before breaking them apart with a rock hammer." }, 75, new Master[] { Master.CHAELDAR, Master.DURADEL, Master.NIEVE }, false, Equipment.ROCK_HAMMER)),
@@ -76,23 +76,23 @@ public enum Tasks {
 	JELLIES(new Task(new int[] { 1637, 1638, 1639, 1640, 1641, 1642 }, new String[] { "Jellies are nasty cube-like gelatinous creatures which", "absorb everything they come across into themselves." }, 52, new Master[] { Master.VANNAKA, Master.CHAELDAR }, false)),
 	JUNGLE_HORRORS(new Task(new int[] { 4348, 4349, 4350, 4351, 4352 }, new String[] { "Jungle Horrors can be found all over Mos Le'Harmless.", "They are strong and aggressive, so watch out!" }, 1, new Master[] { Master.VANNAKA, Master.CHAELDAR }, false)),
 	KALPHITES(new Task(new int[] { 1153, 1154, 1155, 1156, 1157, 1158, 1159, 1160, 1161 }, new String[] { "Kalaphite are large insects which live in great hives under the desert sands." }, 1, new Master[] { Master.MAZCHNA, Master.CHAELDAR, Master.NIEVE }, false)),
-	KILLERWATTS(new Task(new int[] { 3201, 3202 }, new String[] { "Vexia halfassed this... (this was shadow knight text)" }, 37, new Master[] { Master.VANNAKA }, false) {
+	/*KILLERWATTS(new Task(new int[] { 3201, 3202 }, new String[] { "Vexia halfassed this... (this was shadow knight text)" }, 37, new Master[] { Master.VANNAKA }, false) {
 		@Override
 		public boolean isDisabled() {
 			return true;
 		}
-	}),
+	}),*/
 	KURASKS(new Task(new int[] { 1608, 1609, 4229 }, new String[] { "A kurask is a very quick creature." }, 70, new Master[] { Master.CHAELDAR, Master.NIEVE }, false)),
 	LESSER_DEMONS(new Task(new int[] { 82, 3064, 4694, 4695, 6208, 6204, 6206, 3064, 4696, 4697, 6101 }, new String[] { "Lesser Demons are magic creatures so they are weak to magical attacks." }, 1, new Master[] { Master.VANNAKA, Master.CHAELDAR }, false)),
 	MITHRIL_DRAGON(new Task(new int[] { 5363 }, new String[] { "Mithril dragons aren't as strong as other dragons but they're still", "very powerful, watch out for their firey breath." }, 1, new Master[] { Master.DURADEL, Master.NIEVE }, false, 5 | 9 << 16)),
 	MINOTAURS(new Task(new int[] { 4404, 4405, 4406 }, new String[] { "Minotaurs are large manlike creatures but you'll", "want to be careful of their horns." }, 1, new Master[] { Master.TURAEL }, false)),
-	MOGRES(new Task(new int[] { 114 }, new String[] { "Mogres are Slayer monsters and require level 32 Slayer to kill. " }, 32, new Master[] { Master.MAZCHNA, Master.VANNAKA }, false)),
-	MOLANISKS(new Task(new int[] { 5751 }, new String[] { "Molanisks are found attached to cave walls and must be lured", "off with a Slayer bell" }, 39, new Master[] { Master.VANNAKA }, false) {
+	//MOGRES(new Task(new int[] { 114 }, new String[] { "Mogres are Slayer monsters and require level 32 Slayer to kill. " }, 32, new Master[] { Master.MAZCHNA, Master.VANNAKA }, false)),
+	/*MOLANISKS(new Task(new int[] { 5751 }, new String[] { "Molanisks are found attached to cave walls and must be lured", "off with a Slayer bell" }, 39, new Master[] { Master.VANNAKA }, false) {
 		@Override
 		public boolean isDisabled() {
 			return true;
 		}
-	}),
+	}),*/
 	MONKEYS(new Task(new int[] { 132, 1463, 1464, 2301, 4344, 4363, 6943, 7211, 7213, 7215, 7217, 7219, 7221, 7223, 7225, 7227, 1455, 1459, 1460, 1456, 1457, 1458 }, new String[] { "Small agile creatures, watch out they pinch!" }, 1, new Master[] { Master.TURAEL }, false)),
 	MOSS_GIANTS(new Task(new int[] { 112, 1587, 1588, 1681, 4534, 4688, 4706 }, new String[] { "They are known to carry large sticks." }, 1, new Master[] { Master.VANNAKA }, false)),
 	NECHRYAELS(new Task(new int[] { 1613 }, new String[] { "Nechryael are demons of decay which summon small winged beings which", "help them fight their victems." }, 80, new Master[] { Master.CHAELDAR, Master.DURADEL, Master.NIEVE }, false)),
@@ -101,40 +101,40 @@ public enum Tasks {
 	PYREFIENDS(new Task(new int[] { 1633, 1634, 1635, 1636, 6216, 6631, 6641, 6660, 6668, 6683, 6709, 6721, }, new String[] { "A scorching hot creature, watch out!" }, 30, new Master[] { Master.MAZCHNA, Master.VANNAKA }, false)),
 	RATS(new Task(new int[] { 2682, 2980, 2981, 3007, 88, 224, 4928, 4929, 4936, 4937, 3008, 3009, 3010, 3011, 3012, 3013, 3014, 3015, 3016, 3017, 3018, 4396, 4415, 7202, 7204, 7417, 7461, 87, 446, 950, 4395, 4922, 4923, 4924, 4925, 4926, 4927, 4942, 4943, 4944, 4945, 86, 87, 446, 950, 4395, 4922, 4923, 4924, 4925, 4926, 4927, 4942, 4943, 4944, 4945 }, new String[] { "Quick little rodents!" }, 1, new Master[] { Master.TURAEL }, false)),
 
-	RED_DRAGONS(new Task(new int[] { 53, 4669, 4670, 4671, 4672, 1589, 3588, 4667, 4668, }, new String[] { "Red dragons aren't as strong as other dragons but they're still", "very powerful, watch out for their firey breath." }, 1, new Master[] { Master.DURADEL }, false) {
+	/*RED_DRAGONS(new Task(new int[] { 53, 4669, 4670, 4671, 4672, 1589, 3588, 4667, 4668, }, new String[] { "Red dragons aren't as strong as other dragons but they're still", "very powerful, watch out for their firey breath." }, 1, new Master[] { Master.DURADEL }, false) {
 		@Override
 		public boolean isDisabled() {
 			return true;
 		}
-	}),
+	}),*/
 	ROCK_SLUGS(new Task(new int[] { 1631, 1632 }, new String[] { "A rock slug can leave behind a trail of his presence.." }, 20, new Master[] { Master.MAZCHNA }, false)),
-	SCABARITES(new Task(new int[] { 2009 }, new String[] { "The Scabarites are fairly strong monsters, and can hit pretty hard." }, 1, new Master[] { Master.CHAELDAR }, false) {
+	/*SCABARITES(new Task(new int[] { 2009 }, new String[] { "The Scabarites are fairly strong monsters, and can hit pretty hard." }, 1, new Master[] { Master.CHAELDAR }, false) {
 		@Override
 		public boolean isDisabled() {
 			return true;
 		}
-	}),
+	}),*/
 	SCORPIONS(new Task(new int[] { 107, 1477, 4402, 4403, 144 }, new String[] { "A scorpion makes a piercing sound, watch out for it's", " long sharp tail." }, 1, new Master[] { Master.TURAEL }, false)),
-	SEA_SNAKES(new Task(new int[] { 3943, 3939, }, new String[] { "They are quick, make sure you don't let your", "eye off of them for 1 second." }, 1, new Master[] { Master.VANNAKA }, false) {
+	/*SEA_SNAKES(new Task(new int[] { 3943, 3939, }, new String[] { "They are quick, make sure you don't let your", "eye off of them for 1 second." }, 1, new Master[] { Master.VANNAKA }, false) {
 		@Override
 		public boolean isDisabled() {
 			return true;
 		}
-	}),
+	}),*/
 	SHADE(new Task(new int[] { 3617, 1250, 1241, 1246, 1248, 1250, 428 }, new String[] { "Shades are dark and mysterious, they hide in the shadows so be wary of ambushes." }, 1, new Master[] { Master.VANNAKA }, true)),
-	SHADOW_WARRIORS(new Task(new int[] { 158 }, new String[] { "Shadow warriors are dark and mysterious, they hide in the shadows so be wary of ambushes." }, 1, new Master[] { Master.VANNAKA, Master.CHAELDAR }, false) {
+	/*SHADOW_WARRIORS(new Task(new int[] { 158 }, new String[] { "Shadow warriors are dark and mysterious, they hide in the shadows so be wary of ambushes." }, 1, new Master[] { Master.VANNAKA, Master.CHAELDAR }, false) {
 		@Override
 		public boolean isDisabled() {
 			return true;
 		}
-	}),
+	}),*/
 	SKELETONS(new Task(new int[] { 90, 91, 92, 93, 94, 459, 1471, 1575, 1973, 2036, 2037, 2715, 2717, 3065, 3151, 3291, 3581, 3697, 3698, 3699, 3700, 3701, 3702, 3703, 3704, 3705, 3844, 3850, 3851, 4384, 4385, 4386, 5332, 5333, 5334, 5335, 5336, 5337, 5338, 5339, 5340, 5341, 5359, 5365, 5366, 5367, 5368, 5381, 5384, 5385, 5386, 5387, 5388, 5389, 5390, 5391, 5392, 5411, 5412, 5422, 6091, 6092, 6093, 6103, 6104, 6105, 6106, 6107, 6764, 6765, 6766, 6767, 6768 }, new String[] { "Skeletons are undead monsters found in various locations." }, 1, new Master[] { Master.TURAEL, Master.MAZCHNA }, true)),
 	SPIDERS(new Task(new int[] { 61, 1004, 1221, 1473, 1474, 63, 4401, 2034, 977, 7207, 134, 1009, 59, 60, 4400, 58, 62, 1478, 2491, 2492, 6376, 6377, }, new String[] { "Level 24 spiders are aggressive and can hit up to 60 life points." }, 1, new Master[] { Master.TURAEL }, false)),
 	SPIRTUAL_MAGES(new Task(new int[] { 6221, 6231, 6257, 6278 }, new String[] { "They are dangerous, they hit with mage." }, 83, new Master[] { Master.CHAELDAR, Master.DURADEL }, false)),
 	SPIRTUAL_RANGERS(new Task(new int[] { 6220, 6230, 6256, 6276 }, new String[] { "They are dangerous, they hit with range." }, 63, new Master[] { Master.CHAELDAR, Master.DURADEL }, false)),
 	SPIRTUAL_WARRIORS(new Task(new int[] { 6219, 6229, 6255, 6277, }, new String[] { "They are dangerous, they hit with melee." }, 68, new Master[] { Master.CHAELDAR, Master.DURADEL }, false)),
 	STEEL_DRAGONS(new Task(new int[] { 1592, 3590 }, new String[] { "Steel dragons aren't as strong as other dragons but they're still", "very powerful, watch out for their firey breath." }, 1, new Master[] { Master.DURADEL, Master.NIEVE }, false, 10 | 20 << 16)),
-	SUQAHS(new Task(new int[] { 4527, 4528, 4529, 4530, 4531, 4532, 4533 }, new String[] {}, 1, new Master[] { Master.DURADEL }, false) {
+	/*SUQAHS(new Task(new int[] { 4527, 4528, 4529, 4530, 4531, 4532, 4533 }, new String[] {}, 1, new Master[] { Master.DURADEL }, false) {
 		@Override
 		public boolean isDisabled() {
 			return true;
@@ -145,12 +145,12 @@ public enum Tasks {
 		public boolean isDisabled() {
 			return true;
 		}
-	}),
+	}),*/
 	TROLLS(new Task(new int[] { 72, 3584, 1106, 1107, 1108, 1109, 1110, 1111, 1112, 1138, 1560, 1561, 1562, 1563, 1564, 1565, 1566, 1935, 1936, 1937, 1938, 1939, 1940, 1941, 1942, 3840, 3841, 3842, 3843, 3845, 1933, 1934, }, new String[] { "Trolls have a crushing attack, it's bets to wear a high crushing defence." }, 1, new Master[] { Master.CHAELDAR, Master.DURADEL, Master.NIEVE }, false)),
 	TUROTHS(new Task(new int[] { 1626, 1627, 1628, 1629, 1630 }, new String[] { "Turoths are Slayer monsters that require a Slayer level of 55 to kill" }, 55, new Master[] { Master.CHAELDAR, Master.CHAELDAR, Master.NIEVE }, false)),
 	TZHAAR(new Task(new int[] { 2591, 2592, 2593, 2745, 2594, 2595, 2596, 2597, 2604, 2605, 2606, 2607, 2608, 2609, 7755, 7753, 2598, 2599, 2600, 2601, 2610, 2611, 2612, 2613, 2614, 2615, 2616, 2624, 2617, 2618, 2625, 2602, 2603, 7754, 7767, 2610, 2611, 2612, 2613, 2614, 2615, 2616, 2624, 2625, 2627, 2628, 2629, 2630, 2631, 2632, 7746, 7747, 7748, 7749, 7750, 7751, 7752, 7753, 7754, 7755, 7756, 7757, 7758, 7759, 7760, 7761, 7762, 7763, 7764, 7765, 7766, 7767, 7768, 7769, 7770, 7771, 7747, 7747, 7748, 7749, 7750, 7751, 7752, 7753, 7757, 7765, 7769, 7768 }, new String[] { "Young Tzhaar's of the century are furious with your kind." }, 1, new Master[] { Master.DURADEL }, false)),
 	VAMPIRES(new Task(new int[] { 1023, 1220, 1223, 1225, 6214 }, new String[] { "Vampies arr equiped with large fangs", "they can do serious damage." }, 1, new Master[] { Master.MAZCHNA, Master.VANNAKA }, false)),
-	WALL_BEASTS(new Task(new int[] { 7823 }, new String[] { "A spiny helmet or equivalent is required to start fighting one " }, 35, new Master[] { Master.MAZCHNA }, false, Equipment.SPINY_HELMET) {
+	/*WALL_BEASTS(new Task(new int[] { 7823 }, new String[] { "A spiny helmet or equivalent is required to start fighting one " }, 35, new Master[] { Master.MAZCHNA }, false, Equipment.SPINY_HELMET) {
 		@Override
 		public boolean isDisabled() {
 			return true;
@@ -167,17 +167,17 @@ public enum Tasks {
 		public boolean isDisabled() {
 			return true;
 		}
-	}),
+	}),*/
 	WATERFIENDS(new Task(new int[] { 5361 }, new String[] { "A waterfiend takes no damage from fire!" }, 1, new Master[] { Master.MAZCHNA }, false)),
 	WEREWOLFS(new Task(new int[] { 1665, 6006, 6007, 6008, 6009, 6010, 6011, 6012, 6013, 6014, 6015, 6016, 6017, 6018, 6019, 6020, 6021, 6022, 6023, 6024, 6025, 6212, 6213, 6607, 6609, 6614, 6617, 6625, 6632, 6644, 6663, 6675, 6686, 6701, 6712, 6724, 6728, }, new String[] { "There temper is alot more nasty then a regular wolf!" }, 1, new Master[] { Master.VANNAKA }, false)),
 	WOLVES(new Task(new int[] { 95, 96, 97, 141, 142, 143, 839, 1198, 1330, 1558, 1559, 1951, 1952, 1953, 1954, 1955, 1956, 4413, 4414, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6829, 6830, 7005 }, new String[] { "Wolves are more agressive then dog's." }, 1, new Master[] { Master.TURAEL, Master.MAZCHNA }, false)),
 	ZOMBIES(new Task(new int[] { 73, 74, 75, 76, 2058, 2714, 2863, 2866, 2869, 2878, 3622, 4392, 4393, 4394, 5293, 5294, 5295, 5296, 5297, 5298, 5299, 5300, 5301, 5302, 5303, 5304, 5305, 5306, 5307, 5308, 5309, 5310, 5311, 5312, 5313, 5314, 5315, 5316, 5317, 5318, 5319, 5320, 5321, 5322, 5323, 5324, 5325, 5326, 5327, 5328, 5329, 5330, 5331, 5375, 5376, 5377, 5378, 5379, 5380, 5393, 5394, 5395, 5396, 5397, 5398, 5399, 5400, 5401, 5402, 5403, 5404, 5405, 5406, 5407, 5408, 5409, 5410, 6099, 6100, 6131, }, new String[] { "Zombies are creatures with no brain, they do hit farley", "high though." }, 1, new Master[] { Master.TURAEL, Master.MAZCHNA }, true)),
-	ZYGOMITES(new Task(new int[] { 3346, 3347 }, new String[] { "Mutated zygomites are monsters that appear as Fungi until provoked." }, 57, new Master[] { Master.CHAELDAR }, false) {
+	/*ZYGOMITES(new Task(new int[] { 3346, 3347 }, new String[] { "Mutated zygomites are monsters that appear as Fungi until provoked." }, 57, new Master[] { Master.CHAELDAR }, false) {
 		@Override
 		public boolean isDisabled() {
 			return true;
 		}
-	}),
+	}),*/
 	JAD(new Task(new int[] { }, new String[] { "TzTok-Jad is the king of the Fight Caves." }, 1, new Master[] { Master.WISE_OLD_MAN }, false, 1 | 1 << 16)),
 	CHAOS_ELEMENTAL(new Task(new int[] { 3200 }, new String[] { "The Chaos Elemental is located in the deep Wilderness." }, 1, new Master[] { Master.WISE_OLD_MAN }, false, 5 | 25 << 16)),
 	GIANT_MOLE(new Task(new int[] { 3340 }, new String[] { "Fighting the Giant Mole will require a light source." }, 1, new Master[] { Master.WISE_OLD_MAN }, false, 5 | 25 << 16)),
@@ -189,12 +189,12 @@ public enum Tasks {
 
 	}),
 	SKELETAL_WYVERN(new Task(new int[] { 3068, 3069, 3070, 3071 }, new String[] { "A skeletal wyvern requires an elemental, mirror", "or dragonfire shield." }, 72, new Master[] { Master.DURADEL, Master.CHAELDAR, Master.NIEVE }, false, 24 | 39 << 16)),
-	CERBERUS(new Task(new int[] {8632, 8634}, new String[] {"Cerberus is about the best guard dog there is!"}, 91, new Master[] {Master.VANNAKA, Master.CHAELDAR, Master.NIEVE, Master.DURADEL}, false, 20 | 25 << 16) {
+	/*CERBERUS(new Task(new int[] {8632, 8634}, new String[] {"Cerberus is about the best guard dog there is!"}, 91, new Master[] {Master.VANNAKA, Master.CHAELDAR, Master.NIEVE, Master.DURADEL}, false, 20 | 25 << 16) {
 		@Override
 		public boolean isDisabled() {
 			return true;
 		}
-	})
+	})*/
 	;
 
 	/**
