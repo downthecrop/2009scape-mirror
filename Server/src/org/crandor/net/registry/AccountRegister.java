@@ -9,6 +9,7 @@ import java.sql.Timestamp;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import org.crandor.ServerConstants;
 import org.crandor.cache.misc.buffer.ByteBufferUtils;
 import org.crandor.game.node.entity.player.info.portal.PlayerSQLManager;
 import org.crandor.game.system.SystemManager;
@@ -18,7 +19,6 @@ import org.crandor.game.system.task.TaskExecutor;
 import org.crandor.net.Constants;
 import org.crandor.net.IoSession;
 import org.crandor.net.event.LoginReadEvent;
-import org.keldagrim.ServerConstants;
 
 /**
  * Handles the registry of new accounts.
@@ -173,6 +173,8 @@ public class AccountRegister extends SQLEntryHandler<RegistryDetails> {
 		}else{
 			statement.setString(7,null);
 		}
+		
+		statement.setString(7, "2009scape");
 		statement.executeUpdate();
 		SQLManager.close(statement.getConnection());
 	}

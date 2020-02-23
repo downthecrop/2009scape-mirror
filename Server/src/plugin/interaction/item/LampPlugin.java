@@ -28,6 +28,7 @@ public final class LampPlugin extends OptionHandler {
 	public boolean handle(Player player, Node node, String option) {
 		player.setAttribute("lamp", node);
 		player.getInterfaceManager().open(new Component(134));
+		player.getInterfaceManager().hideTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13);
 		return true;
 	}
 
