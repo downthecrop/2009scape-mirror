@@ -86,7 +86,7 @@ public enum Tasks {
 	LESSER_DEMONS(new Task(new int[] { 82, 3064, 4694, 4695, 6208, 6204, 6206, 3064, 4696, 4697, 6101 }, new String[] { "Lesser Demons are magic creatures so they are weak to magical attacks." }, 1, new Master[] { Master.VANNAKA, Master.CHAELDAR }, false)),
 	MITHRIL_DRAGON(new Task(new int[] { 5363 }, new String[] { "Mithril dragons aren't as strong as other dragons but they're still", "very powerful, watch out for their firey breath." }, 1, new Master[] { Master.DURADEL, Master.NIEVE }, false, 5 | 9 << 16)),
 	MINOTAURS(new Task(new int[] { 4404, 4405, 4406 }, new String[] { "Minotaurs are large manlike creatures but you'll", "want to be careful of their horns." }, 1, new Master[] { Master.TURAEL }, false)),
-	MOGRES(new Task(new int[] { 114 }, new String[] { "Mogres are Slayer monsters and require level 32 Slayer to kill. " }, 32, new Master[] { Master.MAZCHNA, Master.VANNAKA }, false)),
+	//MOGRES(new Task(new int[] { 114 }, new String[] { "Mogres are Slayer monsters and require level 32 Slayer to kill. " }, 32, new Master[] { Master.MAZCHNA, Master.VANNAKA }, false)),
 	/*MOLANISKS(new Task(new int[] { 5751 }, new String[] { "Molanisks are found attached to cave walls and must be lured", "off with a Slayer bell" }, 39, new Master[] { Master.VANNAKA }, false) {
 		@Override
 		public boolean isDisabled() {
