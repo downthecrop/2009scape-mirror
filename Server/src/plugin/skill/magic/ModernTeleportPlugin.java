@@ -87,10 +87,10 @@ public final class ModernTeleportPlugin extends MagicSpell {
 		SpellBook.MODERN.register(18, new ModernTeleportPlugin(31, 41, Location.create(3221, 3219, 0), new Item(Runes.EARTH_RUNE.getId()), new Item(Runes.AIR_RUNE.getId(), 3), new Item(Runes.LAW_RUNE.getId(), 1)));
 		// fally
 		SpellBook.MODERN.register(21, new ModernTeleportPlugin(37, 47, Location.create(2965, 3378, 0), new Item(Runes.WATER_RUNE.getId()), new Item(Runes.AIR_RUNE.getId(), 3), new Item(Runes.LAW_RUNE.getId(), 1)));
-		// house
-		SpellBook.MODERN.register(23, new ModernTeleportPlugin(40, 50, ServerConstants.HOME_LOCATION, new Item(Runes.LAW_RUNE.getId()), new Item(Runes.AIR_RUNE.getId(), 1), new Item(Runes.EARTH_RUNE.getId(), 1)));
 		// camelot
 		SpellBook.MODERN.register(26, new ModernTeleportPlugin(45, 55.5, Location.create(2758, 3478, 0), new Item(Runes.AIR_RUNE.getId(), 5), new Item(Runes.LAW_RUNE.getId(), 1)));
+		// house
+		SpellBook.MODERN.register(23, new HouseTeleportPlugin(40, 50, new Item(Runes.LAW_RUNE.getId()), new Item(Runes.AIR_RUNE.getId(), 1), new Item(Runes.EARTH_RUNE.getId(), 1)));
 		// ardougne
 		SpellBook.MODERN.register(32, new ModernTeleportPlugin(51, 61, Location.create(2662, 3307, 0), new Item(Runes.WATER_RUNE.getId(), 2), new Item(Runes.LAW_RUNE.getId(), 2)));
 		// watchtower
