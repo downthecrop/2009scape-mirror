@@ -113,7 +113,8 @@ public final class PlayerSQLManager {
 		table.getColumn("netWorth").updateValue(player.getMonitor().getNetworth());
 		table.getColumn("lastGameIp").updateValue(player.getDetails().getIpAddress());
 		table.getColumn("ironManMode").updateValue(player.getIronmanManager().getMode().name());
-		table.getColumn("timePlayed").updateValue((long) table.getColumn("timePlayed").getValue() + (System.currentTimeMillis() - player.getAttribute("startTime", System.currentTimeMillis())));	table.getColumn("ip").updateValue(getAddressLog((String) table.getColumn("ip").getValue(), details.getInfo().getIp()));
+		table.getColumn("timePlayed").updateValue((long) table.getColumn("timePlayed").getValue() + (System.currentTimeMillis() - player.getDetails().getLastLogin()));
+		table.getColumn("ip").updateValue(getAddressLog((String) table.getColumn("ip").getValue(), details.getInfo().getIp()));
 		table.getColumn("mac").updateValue(getAddressLog((String) table.getColumn("mac").getValue(), details.getInfo().getMac()));
 		table.getColumn("serial").updateValue(getAddressLog((String) table.getColumn("serial").getValue(), details.getInfo().getSerial()));
 		table.getColumn("computerName").updateValue(getAddressLog((String) table.getColumn("computerName").getValue(), details.getInfo().getCompName()));
