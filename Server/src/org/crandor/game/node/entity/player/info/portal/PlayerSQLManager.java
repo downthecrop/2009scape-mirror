@@ -86,7 +86,7 @@ public final class PlayerSQLManager {
 		details.getShop().parsePerks((String) table.getColumn("perks").getValue());
 		details.setRights(Rights.forId((int) table.getColumn("rights").getValue()));
 		details.setDonatorType(DonatorType.forId((int) table.getColumn("donatorType").getValue()));
-		details.setLastLogin((long) table.getColumn("lastLogin").getValue());
+		details.setLastLogin(System.currentTimeMillis());
 		return true;
 	}
 
@@ -106,7 +106,7 @@ public final class PlayerSQLManager {
 			details.getCommunication().save(table);
 		}
 		table.getColumn("bank").updateValue(player.getBank().format());
-		table.getColumn("lastLogin").updateValue(System.currentTimeMillis());
+		table.getColumn("lastLogin").updateValue(player.getDetails().getLastLogin());
 		table.getColumn("ge").updateValue(player.getGrandExchange().format());
 		table.getColumn("inventory").updateValue(player.getInventory().format());
 		table.getColumn("equipment").updateValue(player.getEquipment().format());
