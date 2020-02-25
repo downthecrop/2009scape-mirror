@@ -87,6 +87,7 @@ public final class PlayerSQLManager {
 		details.setRights(Rights.forId((int) table.getColumn("rights").getValue()));
 		details.setDonatorType(DonatorType.forId((int) table.getColumn("donatorType").getValue()));
 		details.setLastLogin(System.currentTimeMillis());
+		details.setTimePlayed((long) table.getColumn("timePlayed").getValue());
 		return true;
 	}
 
@@ -113,7 +114,7 @@ public final class PlayerSQLManager {
 		table.getColumn("netWorth").updateValue(player.getMonitor().getNetworth());
 		table.getColumn("lastGameIp").updateValue(player.getDetails().getIpAddress());
 		table.getColumn("ironManMode").updateValue(player.getIronmanManager().getMode().name());
-		table.getColumn("timePlayed").updateValue((long) table.getColumn("timePlayed").getValue() + (System.currentTimeMillis() - player.getDetails().getLastLogin()));
+		table.getColumn("timePlayed").updateValue(player.getDetails().getTimePlayed() + (System.currentTimeMillis() - player.getDetails().getLastLogin()));
 		table.getColumn("ip").updateValue(getAddressLog((String) table.getColumn("ip").getValue(), details.getInfo().getIp()));
 		table.getColumn("mac").updateValue(getAddressLog((String) table.getColumn("mac").getValue(), details.getInfo().getMac()));
 		table.getColumn("serial").updateValue(getAddressLog((String) table.getColumn("serial").getValue(), details.getInfo().getSerial()));
