@@ -191,10 +191,11 @@ public final class PlayerSession {
 		}
 		PreparedStatement statement;
 		try {
-			statement = connection.prepareStatement("UPDATE members SET online = ? AND lastWorld = ? WHERE username = ?");
+			statement = connection.prepareStatement("UPDATE members SET online = ?, lastWorld = ?, lastLogin = ? WHERE username = ?");
 			statement.setBoolean(1, true);
 			statement.setInt(2, worldId);
-			statement.setString(3, username);
+			statement.setLong(3, System.currentTimeMillis());
+			statement.setString(4, username);
 			statement.execute();
 			SQLManager.close(connection);
 		} catch (SQLException e) {

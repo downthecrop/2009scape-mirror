@@ -50,11 +50,16 @@ public class PlayerDetails {
 	 * The unique id of the account.
 	 */
 	private int uid;
-	
+
 	/**
 	 * The account's last game login.
 	 */
 	private long lastLogin = -1;
+
+	/**
+	 * The account's last game login.
+	 */
+	private long timePlayed = 0;
 	
 	/**
 	 * The time the player is muted for.
@@ -370,7 +375,7 @@ public class PlayerDetails {
 	public void setIcon(Icon icon) {
 		this.icon = icon;
 	}
-	
+
 	/**
 	 * Gets the lastLogin.
 	 * @return the lastLogin.
@@ -385,6 +390,22 @@ public class PlayerDetails {
 	 */
 	public void setLastLogin(long lastLogin) {
 		this.lastLogin = lastLogin;
+	}
+
+	/**
+	 * Gets the timePlayed.
+	 * @return the timePlayed.
+	 */
+	public long getTimePlayed() {
+		return timePlayed;
+	}
+
+	/**
+	 * Sets the timePlayed.
+	 * @param timePlayed the timePlayed to set
+	 */
+	public void setTimePlayed(long timePlayed) {
+		this.timePlayed = timePlayed;
 	}
 	
 	/**
