@@ -506,7 +506,10 @@ public class ShootingStarPlugin extends OptionHandler {
 			} else {
 				star.incrementStardust();
 			}
-			player.getInventory().add(new Item(STAR_DUST, 1));
+			
+			if (ShootingStarPlugin.getStarDust(player) < 200) { 
+				player.getInventory().add(new Item(STAR_DUST, 1));
+			}
 			player.getSkills().addExperience(Skills.MINING, star.getExp());
 			if (star.getMinedStardust() >= star.getTotalStardust()) {
 				Location loc = object.getLocation();
