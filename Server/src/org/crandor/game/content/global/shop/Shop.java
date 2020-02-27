@@ -17,6 +17,7 @@ import java.util.List;
  * A class representing a shop.
  *
  * @author 'Vexia
+ * @author Jamix77
  */
 public class Shop {
 
@@ -32,6 +33,12 @@ public class Shop {
      * Represents the tokkul item id.
      */
     private static final int TOKKUL = 6529;
+    
+    /**
+     * Represents the archery ticket item id
+     */
+    private static final int ARCHERY_TICKET = 1464;
+    
     /**
      * Represents the shop containers.
      */
@@ -633,6 +640,12 @@ public class Shop {
             if (player.getAchievementDiaryManager().getKaramjaGlove() != -1) {
                 price *= 0.86666666667;
             }
+        }
+        if (getCurrency() == ARCHERY_TICKET) {
+        	int tickets = item.getDefinition().getConfiguration(ItemConfigSQLHandler.ARCHERY_TICKET_PRICE,-1);
+        	if (tickets > 0) {
+        		price = tickets;
+        	}
         }
         return (getSellAllFor() > 0 ? getSellAllFor() : price);
     }

@@ -321,7 +321,8 @@ public class NPC extends Entity {
 		shop.open(player);
 		
 		//Fix for issue #11 for shops keeping dialogue open.
-		player.getDialogueInterpreter().getDialogue().end();
+		if (!player.getDialogueInterpreter().getDialogue().isFinished())
+			player.getDialogueInterpreter().getDialogue().end();
 		
 		return true;
 	}
