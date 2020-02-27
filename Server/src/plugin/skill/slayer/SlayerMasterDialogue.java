@@ -467,7 +467,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
 				} else if (Tasks.forValue(player.getSlayer().getTask()) == Tasks.CAVE_KRAKEN) {
 					interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill ", "" + player.getSlayer().getAmount() + " cave krakens.");					
 				} else {
-				interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill", "" + player.getSlayer().getAmount() + " " + player.getSlayer().getTaskName() + "'s.");
+				interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to kill", "" + player.getSlayer().getAmount() + " " + player.getSlayer().getTaskName() + "s.");
 				}
 				stage = 844;
 				break;
