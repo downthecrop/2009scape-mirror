@@ -210,6 +210,11 @@ public class ItemConfigSQLHandler extends SQLEntryHandler<Object> {
 	 * The render animation id of an item.
 	 */
 	public static final String RENDER_ANIM_ID = "render_anim";
+	
+	/**
+	 * the archery ticket price of an item.
+	 */
+	public static final String ARCHERY_TICKET_PRICE = "archery_ticket_price";
 
 	/**
 	 * Constructs a new {@Code ItemConfigSQLHandler} {@Code Object}

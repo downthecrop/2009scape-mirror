@@ -302,6 +302,13 @@ public class Player extends Entity {
 	 * A custom state for bot debugging
 	 */
 	private String customState = "";
+	
+	/**
+	 * The amount of targets that the player can shoot left for the archery minigame.
+	 */
+	private int archeryTargets = 0;
+	
+	private int archeryTotal = 0;
 
 	/**
 	 * Constructs a new {@code Player} {@code Object}.
@@ -1280,5 +1287,21 @@ public class Player extends Entity {
 	public void setCustomState(String state)
 	{
 		this.customState = state;
+	}
+
+	public int getArcheryTargets() {
+		return archeryTargets;
+	}
+
+	public void setArcheryTargets(int archeryTargets) {
+		this.archeryTargets = archeryTargets;
+	}
+
+	public int getArcheryTotal() {
+		return archeryTotal;
+	}
+
+	public void setArcheryTotal(int archeryTotal) {
+		this.archeryTotal = archeryTotal;
 	}
 }

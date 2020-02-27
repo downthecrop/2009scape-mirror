@@ -15,11 +15,18 @@ import org.crandor.game.content.skill.Skills;
 import org.crandor.game.content.skill.free.crafting.TanningProduct;
 import org.crandor.game.interaction.OptionHandler;
 import org.crandor.game.node.Node;
+import org.crandor.game.node.entity.Entity;
+import org.crandor.game.node.entity.combat.equipment.Ammunition;
+import org.crandor.game.node.entity.combat.equipment.WeaponInterface;
+import org.crandor.game.node.entity.impl.Projectile;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
+import org.crandor.game.node.item.Item;
 import org.crandor.game.node.object.GameObject;
+import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.RegionManager;
+import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
 
@@ -36,6 +43,7 @@ public final class RangingGuildPlugin extends OptionHandler {
 		ObjectDefinition.forId(2514).getConfigurations().put("option:open", this);
 		ObjectDefinition.forId(2511).getConfigurations().put("option:climb-up", this);
 		ObjectDefinition.forId(2512).getConfigurations().put("option:climb-down", this);
+		ObjectDefinition.forId(2513).getConfigurations().put("option:fire-at", this);
 		new RangingGuildDoorman().init();
 		new GuardDialogue().init();
 		new LeatherWorkerDialogue().init();
@@ -51,6 +59,17 @@ public final class RangingGuildPlugin extends OptionHandler {
 	public boolean handle(Player player, Node node, String option) {
 		final int id = node instanceof GameObject ? ((GameObject) node).getId() : 0;
 		switch (option) {
+		case "fire-at":
+			if (player.getArcheryTargets() <= 0) {
+				player.sendMessage("Speak to the competition judge before doing that.");
+				return true;
+			}
+			if (!player.getEquipment().containsItem(new Item(882)) || (!player.getEquipment().get(player.getEquipment().SLOT_WEAPON).getDefinition().getName().toLowerCase().contains("shortbow") && !player.getEquipment().get(player.getEquipment().SLOT_WEAPON).getDefinition().getName().toLowerCase().contains("longbow"))) {
+				player.sendMessage("You must have bronze arrows and a bow equipped.");
+				return true;
+			}
+			player.getPulseManager().run(new ArcheryTargetPulse(player, (GameObject) node));
+			break;
 		case "open":
 			switch (id) {
 			case 2514:
@@ -96,6 +115,8 @@ public final class RangingGuildPlugin extends OptionHandler {
 				}
 				return DoorActionHandler.getDestination((Player) node, (GameObject) n);
 			}
+			if (((GameObject)n).getId() == 2513)
+				return Location.create(2673, 3420, 0);
 		}
 		return null;
 	}
@@ -620,6 +641,7 @@ public final class RangingGuildPlugin extends OptionHandler {
 				case 1:
 					end();
 					npc.openShop(player);
+					
 					break;
 				case 2:
 					end();
@@ -703,7 +725,7 @@ public final class RangingGuildPlugin extends OptionHandler {
 
 		@Override
 		public boolean open(Object... args) {
-			player("Hello there, what do you do here?");
+			player("Hello.");
 			stage = 0;
 			return true;
 		}
@@ -712,19 +734,52 @@ public final class RangingGuildPlugin extends OptionHandler {
 		public boolean handle(int interfaceId, int buttonId) {
 			switch (stage) {
 			case 0:
-				npc("Hi. We are in charge of the practice area.");
-				stage = 1;
+				if (player.getArcheryTargets() >= 1) {
+					npc("You still have " + player.getArcheryTargets() + " shot" + (player.getArcheryTargets() > 1 ? "s" : "") + " left.");
+					stage = 5;
+				} else {
+					npc("Hello there, would you like to participate in the","archery competition?");
+					stage = 1;
+				}
 				break;
 			case 1:
-				player("This is a practice area?");
+				interpreter.sendOptions("Select an Option", "Yes", "No");
 				stage = 2;
 				break;
 			case 2:
-				npc("Surrounding us are four towers. Each tower contains", "trained archers of a different level. You'll notice it's", "quite a distance, so you'll need a longbow.");
-				stage = 3;
+				switch (buttonId) {
+				case 1:
+					player("Yes please.");
+					stage = 560;
+					break;
+				case 2:
+					end();
+					break;
+				}stage = 3;
 				break;
 			case 3:
+				npc("That will be 200 coins please.");
+				stage=4;
+				break;
+			case 4:
+				if (player.getInventory().getAmount(995) < 200) {
+					player("Ah, I don't have 200 coins.");
+					stage = 5;
+				} else {
+					player("Sure, here you go.");
+					player.getInventory().remove(new Item(995,200));
+					player.getInventory().add(new Item(882,10));
+					player.setArcheryTargets(10);
+					player.setArcheryTotal(0);
+					stage = 6;
+				}
+				break;
+			case 5:
 				end();
+				break;
+			case 6:
+				npc("You get ten shots to hit the target.", "Your winnings depend on your accuracy.", "Goodluck!");
+				stage = 5;
 				break;
 			}
 			return true;
@@ -736,4 +791,84 @@ public final class RangingGuildPlugin extends OptionHandler {
 		}
 
 	}
+	
+	
+	
+	/**
+	 * Represents the archery target pulse.
+	 * @author Jamix77
+	 */
+	public static final class ArcheryTargetPulse extends Pulse {
+
+		/**
+		 * Represents the player instance.
+		 */
+		private final Player player;
+
+		/**
+		 * Represents the game object.
+		 */
+		private final GameObject object;
+
+		/**
+		 * Constructs a new {@code ArcheryTargetPulse} {@code Object}.
+		 * @param player the player.
+		 * @param object the object.
+		 */
+		public ArcheryTargetPulse(final Player player, final GameObject object) {
+			super(1, player, object);
+			this.player = player;
+			this.object = object;
+		}
+
+		@Override
+		public boolean pulse() {
+			
+			if (player.getArcheryTargets() <= 0) {
+				return true;
+			}
+			if (getDelay() == 1) {
+				setDelay(player.getProperties().getAttackSpeed());
+			}
+			if (player.getEquipment().remove(new Item(882, 1))) {
+				Projectile p = Ammunition.get(882).getProjectile().transform(player, object.getLocation());
+				p.setEndLocation(object.getLocation());
+				p.setEndHeight(25);
+				p.send();
+				player.animate(new Animation(426));
+				Entity entity = player;
+				int level = entity.getSkills().getLevel(Skills.RANGE);
+				int bonus = entity.getProperties().getBonuses()[14];
+				double prayer = 1.0;
+				if (entity instanceof Player) {
+					prayer += ((Player) entity).getPrayer().getSkillBonus(Skills.RANGE);
+				}
+				double cumulativeStr = Math.floor(level * prayer);
+				if (entity.getProperties().getAttackStyle().getStyle() == WeaponInterface.STYLE_RANGE_ACCURATE) {
+					cumulativeStr += 3;
+				} else if (entity.getProperties().getAttackStyle().getStyle() == WeaponInterface.STYLE_LONG_RANGE) {
+					cumulativeStr += 1;
+				}
+				cumulativeStr *= 1.0;
+				int hit = (int) ((14 + cumulativeStr + (bonus / 8) + ((cumulativeStr * bonus) * 0.016865)) * 1.0) / 10 + 1;
+				player.getSkills().addExperience(Skills.RANGE, ((hit * 1.33) / 10));
+				player.setArcheryTotal(player.getArcheryTotal() + hit);
+				player.setArcheryTargets(player.getArcheryTargets()-1);
+				if (player.getArcheryTargets() <= 0) {
+					player.sendMessage("Congratulations, you win " + player.getArcheryTotal() + " tickets!");
+					if (!player.getInventory().add(new Item(1464,player.getArcheryTotal()))) {
+						player.getBank().add(new Item(1464,player.getArcheryTotal()));
+						player.sendMessage("Your reward was sent to your bank.");
+					}
+				}
+				player.debug("You have " + player.getArcheryTargets() + " targets left.");
+				player.debug("You have " + player.getArcheryTotal() + " score.");
+				return player.getArcheryTargets() <= 0;
+			} else {
+				return true;
+			}
+		}
+
+	}
+	
 }
