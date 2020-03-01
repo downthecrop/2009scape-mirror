@@ -1531,7 +1531,7 @@ public final class WizardTowerPlugin extends OptionHandler {
 			npc = (NPC) args[0];
 			final Quest quest = player.getQuestRepository().getQuest("Rune Mysteries");
 			if (quest.getStage(player) == 40) {
-				interpreter.sendDialogues(npc, null, "My gratitude to you adventurer for bringing me these", "research notes. I notice that you brought the head", "wizard a speical talisman that was the key to our finally", "unlocking the puzzle.");
+				interpreter.sendDialogues(npc, null, "My gratitude to you adventurer for bringing me these", "research notes. I notice that you brought the head", "wizard a special talisman that was the key to our finally", "unlocking the puzzle.");
 				stage = 900;
 				return true;
 			}
