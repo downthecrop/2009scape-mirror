@@ -151,7 +151,7 @@ public final class MagicTutorDialogue extends DialoguePlugin {
 			stage = 12;
 			break;
 		case 12:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Nemarti, the Ranged Combat tutor and I both give out", "items every 30 minutes, however you must choose", "wether you want runes or ranged equipment. To", "claim runes, right-click on me and choose Claim, to claim");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Nemarti, the Ranged Combat tutor and I both give out", "items every 30 minutes, however you must choose", "whether you want runes or ranged equipment. To", "claim runes, right-click on me and choose Claim, to claim");
 			stage = 13;
 			break;
 		case 13:
@@ -159,7 +159,7 @@ public final class MagicTutorDialogue extends DialoguePlugin {
 			stage = 14;
 			break;
 		case 14:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "When you have the sepll available, click on it once, then", "click on your target. A good target would be a monster", "that is below your combat level.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "When you have the spell available, click on it once, then", "click on your target. A good target would be a monster", "that is below your combat level.");
 			stage = 15;
 			break;
 		case 15:
