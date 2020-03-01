@@ -102,6 +102,14 @@ public final class CookingDialoguePlugin extends DialoguePlugin {
 					}
 				});
 				player.getDialogueInterpreter().sendInput(false, "Enter the amount:");
+			} else if (amount == 28) {
+				player.setAttribute("runscript", new RunScript() {
+					@Override
+					public boolean handle() {
+						food.cook(player, object, amount);
+						return false;
+					}
+				});
 			}
 			food.cook(player, object, amount);
 			break;
@@ -150,6 +158,8 @@ public final class CookingDialoguePlugin extends DialoguePlugin {
 			return 5;
 		case 3:
 			return -1;
+		case 2:
+			return 28;
 		}
 		return -1;
 	}
