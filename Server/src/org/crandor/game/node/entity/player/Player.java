@@ -550,7 +550,7 @@ public class Player extends Entity {
 			inventory.addAll(c[0]);
 			if (gravestone) {
 				graveManager.create(ticks, items);
-				sendMessages("<col=990000>Because of your current gavestone, you have "+graveManager.getType().getDecay()+" minutes to get your items and", "<col=990000>equipment back after dying in combat.");
+				sendMessages("<col=990000>Because of your current gravestone, you have "+graveManager.getType().getDecay()+" minutes to get your items and", "<col=990000>equipment back after dying in combat.");
 			}
 			familiarManager.dismiss();
 

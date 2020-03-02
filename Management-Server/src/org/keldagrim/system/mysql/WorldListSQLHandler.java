@@ -60,10 +60,14 @@ public final class WorldListSQLHandler extends SQLEntryHandler<GameServer> {
 			return;
 		}
 		int players = entry.getPlayerAmount();
+		WorldInfo info = entry.getInfo();
 		if (!entry.isActive()) {
 			players = -1;
 		}
-		WorldInfo info = entry.getInfo();
+		if (players <= 0) {
+			PreparedStatement statement = connection.prepareStatement("UPDATE members SET online='0' WHERE lastWorld='" + value + "'");
+			statement.executeUpdate();
+		}
 		PreparedStatement statement = connection.prepareStatement("UPDATE " + table + " SET players='" + players + "', ip='" + info.getAddress() + "', country='" + info.getCountry().getId() + "', member='" + (info.isMembers() ? 1 : 0) + "', revision='" + info.getRevision() + "' WHERE world='" + value + "'");
 		statement.executeUpdate();
 		SQLManager.close(statement.getConnection());
