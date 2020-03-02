@@ -536,11 +536,13 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	/**
 	 * Calls the familiar.
 	 */
+	//int spamTimer = 0;
 	public boolean call() {
 		Location destination = getSpawnLocation();
 		if (destination == null) {
-			owner.getPacketDispatch().sendMessage("Your familiar is too big to fit here. Try calling it again when you are standing");
-			owner.getPacketDispatch().sendMessage("somewhere with more space.");
+			//owner.getPacketDispatch().sendMessage("Your familiar is too big to fit here. Try calling it again when you are standing");
+			//owner.getPacketDispatch().sendMessage("somewhere with more space.");
+			//spamTimer = 50;
 			return false;
 		}
 		setInvisible(getZoneMonitor().isRestricted(ZoneRestriction.FOLLOWERS) && !owner.getLocks().isLocked("enable_summoning"));
