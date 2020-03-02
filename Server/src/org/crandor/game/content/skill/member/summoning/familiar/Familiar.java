@@ -539,7 +539,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	//int spamTimer = 0;
 	public boolean call() {
 		Location destination = getSpawnLocation();
-		if (destination == null && spamTimer == 0) {
+		if (destination == null) {
 			//owner.getPacketDispatch().sendMessage("Your familiar is too big to fit here. Try calling it again when you are standing");
 			//owner.getPacketDispatch().sendMessage("somewhere with more space.");
 			//spamTimer = 50;
