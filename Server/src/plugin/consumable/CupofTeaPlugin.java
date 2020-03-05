@@ -18,7 +18,7 @@ import org.crandor.game.node.item.Item;
 public final class CupofTeaPlugin extends Drink {
 
 	/**
-	 * Represents the skill bonuses for each beer.
+	 * Represents the skill bonuses.
 	 */
 	private SkillBonus[] bonuses;
 
