@@ -15,6 +15,8 @@ import org.crandor.net.packet.out.ContainerPacket;
 import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
 
+import java.util.AbstractMap;
+
 /**
  * Represents the plugin related to the custom fur clothing interface.
  * @author 'Vexia
@@ -68,16 +70,17 @@ public final class FurClothingInterface extends ComponentPlugin {
 	 * Method used to open the fur clothing interface.
 	 * @param player the player.
 	 */
-	public static void open(final Player player) {
-		player.getInterfaceManager().open(new Component(477));
-		PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 477, 75, 91, new Container(21, ITEMS), true));
-	}
+	//public static void open(final Player player) {
+	//	player.getInterfaceManager().open(new Component(477));
+	//	PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 477, 75, 91, new Container(21, ITEMS), true));
+	//}
 
 	/**
 	 * Represents fur clothing.
 	 * @author 'Vexia
 	 * @version 1.0
 	 */
+
 	public enum FurClothing {
 		POLAR(new Item[][] { { new Item(10117, 2), new Item(10065), new Item(995, 20) }, { new Item(10117, 2), new Item(10067), new Item(995, 20) } }, 0, 1), COMMON(new Item[][] { { new Item(10121, 2), new Item(10053), new Item(995, 20) }, { new Item(10121, 2), new Item(10055), new Item(995, 20) } }, 2, 3), FELDIP(new Item[][] { { new Item(10119, 2), new Item(10057), new Item(995, 20) }, { new Item(10119, 2), new Item(10059), new Item(995, 20) } }, 4, 5), DESERT(new Item[][] { { new Item(10123, 2), new Item(10061), new Item(995, 20) }, { new Item(10123, 2), new Item(10063), new Item(995, 20) } }, 6, 7), LARUPIA(new Item[][] { { new Item(10095), new Item(10045), new Item(995, 500) }, { new Item(10095), new Item(10043), new Item(995, 100) }, { new Item(10095), new Item(10041), new Item(995, 100) } }, 10, 11, 12), GRAAHK(new Item[][] { { new Item(10099), new Item(10051), new Item(995, 750) }, { new Item(10099), new Item(10049), new Item(995, 150) }, { new Item(10099), new Item(10047), new Item(995, 150) } }, 13, 14, 15), KYATT(new Item[][] { { new Item(10103), new Item(10039), new Item(995, 1000) }, { new Item(10103), new Item(10037), new Item(995, 250) }, { new Item(10103), new Item(10035), new Item(995, 250) } }, 16, 17, 18), DARK_KEBBIT(new Item[][] { { new Item(10115, 2), new Item(10075), new Item(995, 600) } }, 8), SPOTTED_KEBBIT(new Item[][] { { new Item(10125, 2), new Item(10069), new Item(995, 400) } }, 9), DASHING_KEBBIT(new Item[][] { { new Item(10127, 2), new Item(10071), new Item(995, 800) } }, 19);
 
@@ -309,15 +312,18 @@ public final class FurClothingInterface extends ComponentPlugin {
 				end();
 				break;
 			case 30:
-				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Certainly. Take a look at my range of made-to-oder", "items. If you can supply the furs, I'll gladly make any of", "these for you.");
+				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Certainly. Take a look at my range of made-to-order", "items. If you can supply the furs, I'll gladly make any of", "these for you.");
 				stage = 31;
 				break;
 			case 31:
-				end();
-				FurClothingInterface.open(player);
+				interpreter.sendOptions("Select a type of gear:","Polar Camouflage","Wood Camouflage","Jungle Camouflage","Desert Camouflage","More...");
+				stage = 45;
 				break;
+				//end();
+				//FurClothingInterface.open(player);
+				//break;
 			case 41:
-				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, soem more colourful feathers might be useful. For", "some surreal reason, all I normally seem to get offered", "are large quantities of rather beaten-up looking chicken", "feathers.");
+				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, some more colourful feathers might be useful. For", "some surreal reason, all I normally seem to get offered", "are large quantities of rather beaten-up looking chicken", "feathers.");
 				stage = 42;
 				break;
 			case 42:
@@ -333,10 +339,177 @@ public final class FurClothingInterface extends ComponentPlugin {
 				end();
 				npc.openShop(player);
 				break;
+			case 45:
+				switch(buttonId){
+					case 1:
+						interpreter.sendOptions("Select one.","Polar camo top","Polar camo bottom");
+						stage = 451;
+						break;
+					case 2:
+						interpreter.sendOptions("Select one.", "Wood camo top","Wood camo bottom");
+						stage = 452;
+						break;
+					case 3:
+						interpreter.sendOptions("Select one.","Jungle camo top","Jungle camo bottom");
+						stage = 453;
+						break;
+					case 4:
+						interpreter.sendOptions("Select one.","Desert camo top","Desert camo bottom");
+						stage = 454;
+						break;
+					case 5:
+						interpreter.sendOptions("Select a type of gear:","Larupia","Graahk","Kyatt","Other");
+						stage = 46;
+						break;
+				}
+				break;
+			case 46:
+				switch(buttonId){
+					case 1:
+						interpreter.sendOptions("Select one.", "Larupia hat", "Larupia top", "Larupia legs");
+						stage = 461;
+						break;
+					case 2:
+						interpreter.sendOptions("Select one.", "Graahk headdress", "Graahk top", "Graahk legs");
+						stage = 462;
+						break;
+					case 3:
+						interpreter.sendOptions("Select one.", "Kyatt hat", "Kyatt top", "Kyatt legs");
+						stage = 463;
+						break;
+					case 4:
+						interpreter.sendOptions("Select one.", "Gloves of silence", "Spotted cape", "Spottier cape");
+						stage = 464;
+						break;
+				}
+				break;
+			case 451: {
+				FurClothing clothing = FurClothing.POLAR;
+				switch (buttonId) {
+					case 1:
+						clothing.buy(player, 0, 1);
+						break;
+					case 2:
+						clothing.buy(player, 1, 1);
+						break;
+				}
+				end();
+				break;
 			}
+			case 452: {
+				FurClothing clothing = FurClothing.COMMON;
+				switch (buttonId) {
+					case 1:
+						clothing.buy(player, 0,1);
+						break;
+					case 2:
+						clothing.buy(player,1,1);
+						break;
+				}
+				end();
+				break;
+			}
+			case 453: {
+				FurClothing clothing = FurClothing.FELDIP;
+				switch (buttonId) {
+					case 1:
+						clothing.buy(player,0,1);
+						break;
+					case 2:
+						clothing.buy(player,1,1);
+						break;
+				}
+				end();
+				break;
+			}
+				case 454: {
+					FurClothing clothing = FurClothing.DESERT;
+					switch (buttonId){
+						case 1:
+							clothing.buy(player,0,1);
+							break;
+						case 2:
+							clothing.buy(player,1,1);
+							break;
+					}
+					end();
+					break;
+				}
+				case 461: {
+					FurClothing clothing = FurClothing.LARUPIA;
+					switch(buttonId){
+						case 1:
+							clothing.buy(player,0,1);
+							break;
+						case 2:
+							clothing.buy(player,1,1);
+							break;
+						case 3:
+							clothing.buy(player,2,1);
+							break;
+					}
+					end();
+					break;
+				}
+				case 462: {
+					FurClothing clothing = FurClothing.GRAAHK;
+					switch(buttonId){
+						case 1:
+							clothing.buy(player,0,1);
+							break;
+						case 2:
+							clothing.buy(player,1,1);
+							break;
+						case 3:
+							clothing.buy(player,2,1);
+							break;
+					}
+					end();
+					break;
+				}
+				case 463: {
+					FurClothing clothing = FurClothing.KYATT;
+					switch(buttonId){
+						case 1:
+							clothing.buy(player,0,1);
+							break;
+						case 2:
+							clothing.buy(player,1,1);
+							break;
+						case 3:
+							clothing.buy(player,2,1);
+							break;
+					}
+					end();
+					break;
+				}
+				case 464:{
+					switch(buttonId){
+						case 1:{
+							FurClothing clothing = FurClothing.DARK_KEBBIT;
+							clothing.buy(player, 0, 1);
+							break;
+						}
+						case 2:{
+							FurClothing clothing = FurClothing.SPOTTED_KEBBIT;
+							clothing.buy(player,0,1);
+							break;
+						}
+						case 3:{
+							FurClothing clothing = FurClothing.DASHING_KEBBIT;
+							clothing.buy(player,0,1);
+							break;
+						}
+					}
+					end();
+					break;
+				}
+			}
+
 			return true;
 
 		}
+
 
 		@Override
 		public int[] getIds() {
