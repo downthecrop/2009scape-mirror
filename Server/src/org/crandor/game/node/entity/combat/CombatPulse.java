@@ -7,6 +7,7 @@ import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.Entity;
 import org.crandor.game.node.entity.combat.equipment.ArmourSet;
 import org.crandor.game.node.entity.combat.equipment.WeaponInterface;
+import org.crandor.game.node.entity.impl.Animator;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.link.audio.Audio;
@@ -14,6 +15,7 @@ import org.crandor.game.node.entity.state.EntityState;
 import org.crandor.game.node.item.Item;
 import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
+import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.tools.RandomFunction;
 
 /**
@@ -101,6 +103,7 @@ public final class CombatPulse extends Pulse {
 		if (!entity.getViewport().getRegion().isActive() || !victim.getViewport().getRegion().isActive()) {
 			return true;
 		}
+
 		if (!interactable()) {
 			if (entity.getWalkingQueue().isMoving()) {
 				return false;
@@ -373,8 +376,14 @@ public final class CombatPulse extends Pulse {
 		}
 		if (victim instanceof NPC) {
 			if (entity instanceof Player && victim != this.victim && victim != lastVictim) {
+				// Loar Shade Transformation Animation
+				Animation shade = new Animation(1288, 0, Animator.Priority.VERY_HIGH);
 				Player player = (Player) entity;
 				Item mask = player.getEquipment().get(EquipmentContainer.SLOT_HAT);
+				if(victim.getId() == 1240){
+					((NPC) victim).animate(shade);
+					((NPC) victim).transform(1241);
+				}
 				if (mask != null && mask.getId() >= 8901 && mask.getId() < 8920 && RandomFunction.random(50) == 0) {
 					player.getPacketDispatch().sendMessage("Your black mask startles your enemy, you have " + 
 							(mask.getId() == 8919 ? "no" : Integer.toString((8920 - mask.getId()) / 2)) + " charges left.");
