@@ -12,6 +12,7 @@ import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.tools.RandomFunction;
 import org.crandor.tools.StringUtils;
+import plugin.activity.puropuro.PuroPuroPlugin;
 
 import java.util.Random;
 
@@ -40,6 +41,21 @@ public final class BNetPulse extends SkillPulse<NPC> {
 	 * The ticks passed.
 	 */
 	private int ticks;
+
+	/**
+	 * Update lumbridge impling task, makes sure we're in puro puro and checks diary entry completion
+	 * @returns false if not in puro puro, true and updates diary if in puro puro
+	 */
+	public boolean updateLumbridgeImplingTask(Player player) {
+		if(!player.getZoneMonitor().isInZone("puro puro")){
+			return false;
+		} else {
+			if(!player.getAchievementDiaryManager().hasCompletedTask(DiaryType.LUMBRIDGE,1,8)){
+				player.getAchievementDiaryManager().updateTask(player,DiaryType.LUMBRIDGE,1,8,true);
+			}
+		}
+		return true;
+	}
 
 	/**
 	 * Constructs a new {@code BNetPulse} {@code Object}.
@@ -100,8 +116,8 @@ public final class BNetPulse extends SkillPulse<NPC> {
 			node.finalizeDeath(player);
 			type.reward(player, node);
 			node.setAttribute("dead", GameWorld.getTicks() + 10);
-			if (type == BNetTypes.ECLECTIC_IMPLING.getNode() && player.getZoneMonitor().isInZone("puro puro") && !player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).isComplete(1, 8)) {
-				player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).updateTask(player, 1, 8, true);
+			if (type == BNetTypes.ECLECTIC_IMPLING.getNode() || type == BNetTypes.ESSENCE_IMPLING.getNode() ) {
+				updateLumbridgeImplingTask(player);
 			}
 		} else {
 			node.moveStep();
