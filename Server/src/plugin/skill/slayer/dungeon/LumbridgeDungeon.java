@@ -172,7 +172,9 @@ public final class LumbridgeDungeon extends MapZone implements Plugin<Object> {
 
 		@Override
 		public int[] getIds() {
-			return Tasks.WALL_BEASTS.getTask().getNpcs();
+			//return Tasks.WALL_BEASTS.getTask().getNpcs();
+			int[] empty = {};
+			return empty;
 		}
 
 	}

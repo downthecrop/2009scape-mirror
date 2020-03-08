@@ -217,7 +217,28 @@ public final class BetaCommandPlugin extends CommandPlugin {
                 item.setAmount(amount);
                 player.getInventory().add(item);
                 return true;
-                
+
+            case "give":
+            case "giveitem":
+                if (args.length < 3) {
+                    player.sendMessage("Syntax: ::give id amt playername");
+                }
+                String n = "";
+                for (int i = 1; i < args.length; i++) {
+                    if (i == 1) {
+                        n += args[i];
+                        continue;
+                    }
+                    n += " " + args[i];
+                }
+                Player recipient = Repository.getPlayer(n);
+                if (recipient == null) {
+                    player.debug("syntax error: name");
+                    return true;
+                }
+                recipient.getInventory().add(new Item(toInteger(args[1]), toInteger(args[2])));
+                return true;
+
             // Get item by name
             case "itemn":
                 if (args.length < 2) {
