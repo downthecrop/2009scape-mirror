@@ -35,7 +35,6 @@ public class HouseTeleportPlugin extends MagicSpell {
 
 	@Override
 	public boolean cast(Entity entity, Node target) {
-		System.out.println("Casting house tele");
 		if (((Player)entity).getHouseManager().getLocation().getExitLocation() == null) {
 			((Player)entity).sendMessage("You must have a house to teleport to before attempting that.");
 			return false;
@@ -45,9 +44,9 @@ public class HouseTeleportPlugin extends MagicSpell {
 			return false;
 		}
 		if (entity.getTeleporter().send(location.transform(0, RandomFunction.random(3), 0), TeleportType.NORMAL)) {
-			
 			entity.setAttribute("teleport:items", super.runes);
 			entity.setAttribute("magic-delay", GameWorld.getTicks() + 5);
+			((Player) entity).getInventory().remove(super.runes);
 			return true;
 		}
 		return false;
