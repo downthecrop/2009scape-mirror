@@ -63,7 +63,7 @@ public final class WildernessCourse extends AgilityCourse {
 		case 2283:
 			handleRopeSwing(player, object);
 			break;
-		case 2311:
+		case 37704:
 			handleSteppingStones(player, object);
 			break;
 		case 2297:
