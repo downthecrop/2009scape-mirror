@@ -232,7 +232,7 @@ public final class OziachDialogue extends DialoguePlugin {
 			case 0:
 				if (!player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD)) {
 					player("Nope, not yet.");
-					stage = 1;
+					stage = -1;
 					return true;
 				}
 				player("Yes, I have!");
@@ -247,7 +247,7 @@ public final class OziachDialogue extends DialoguePlugin {
 				stage = 4;
 				break;
 			case 4:
-				npc("I underestimated ye, adventurer. I apoligize.");
+				npc("I underestimated ye, adventurer. I apologize.");
 				stage = 5;
 				break;
 			case 5:
@@ -256,7 +256,7 @@ public final class OziachDialogue extends DialoguePlugin {
 				break;
 			case 6:
 				end();
-				if (player.getInventory().remove(DragonSlayer.ELVARG_HEAD)) {
+				if (player.getInventory().remove(DragonSlayer.ELVARG_HEAD) && !player.getQuestRepository().getQuest("Dragon Slayer").isCompleted(player)) {
 					quest.finish(player);
 				}
 				break;
