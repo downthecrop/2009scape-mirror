@@ -1,4 +1,4 @@
-# RS 2009 - The most complete Runescape Emulation server. Pull requests welcome!
+# 2009Scape - The most complete Runescape Emulation server. Pull requests welcome!
 
 Join our Discord server: https://discord.gg/4zrA2Wy
 
