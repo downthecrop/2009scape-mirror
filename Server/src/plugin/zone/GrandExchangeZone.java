@@ -127,6 +127,8 @@ public final class GrandExchangeZone extends MapZone implements Plugin<Object> {
 							new Item(1959, 100), // Pumpkin
 							new Item(1961, 100), // Easter egg
 							new Item(4566, 100), // Rubber chicken
+							new Item(1037, 100), // Bunny ears
+							new Item(7927, 100), // Easter ring
 					},
 			false);
 			setPointShop(true);
