@@ -117,7 +117,18 @@ public final class GrandExchangeZone extends MapZone implements Plugin<Object> {
 		 * Constructs a new {@Code CreditStore} {@Code Object}
 		 */
 		public CreditStore() {
-			super(GameWorld.getName() + " Credit Shop", new Item[] {new Item(6199, 100), new Item(14810, 100), new Item(14807, 100), new Item(14674, 100), new Item(13661, 10)}, false);
+			super(GameWorld.getName() + " Credit Shop",
+					new Item[]{
+							new Item(962, 100), // Christmas cracker
+							new Item(1050, 100), // Santa hat
+							new Item(1053, 100), // Green h'ween mask
+							new Item(1055, 100), // Blue h'ween mask
+							new Item(1057, 100), // Red h'ween mask
+							new Item(1959, 100), // Pumpkin
+							new Item(1961, 100), // Easter egg
+							new Item(4566, 100), // Rubber chicken
+					},
+			false);
 			setPointShop(true);
 		}
 
