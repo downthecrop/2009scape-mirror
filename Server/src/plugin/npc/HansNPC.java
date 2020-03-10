@@ -9,8 +9,7 @@ import org.crandor.plugin.Plugin;
  * Handles the Hans NPC.
  * @author Emperor
  */
-//REMOVING INITIALIZABLE PLUGIN, DO NOT LET THIS RUN, IT PREVENTS HANS FROM HAVING ANY DIALOGUE. -Ceikry
-//@InitializablePlugin
+@InitializablePlugin
 public final class HansNPC extends AbstractNPC {
 
 	/**
