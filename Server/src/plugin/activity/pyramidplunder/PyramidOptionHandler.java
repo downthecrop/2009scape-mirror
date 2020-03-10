@@ -8,7 +8,10 @@ import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.object.GameObject;
+import org.crandor.game.system.task.Pulse;
+import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.map.Location;
+import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.plugin.Plugin;
 import org.crandor.tools.RandomFunction;
 
@@ -51,6 +54,7 @@ public final class PyramidOptionHandler extends OptionHandler {
 		ObjectDefinition.forId(16458).getConfigurations().put("option:leave tomb", this);
 		ObjectDefinition.forId(16459).getConfigurations().put("option:leave tomb", this);
 		NPCDefinition.forId(4476).getConfigurations().put("option:start-minigame", this);
+		NPCDefinition.forId(4476).getConfigurations().put("option:talk-to",this);
 		return null;
 	}
 
@@ -59,6 +63,7 @@ public final class PyramidOptionHandler extends OptionHandler {
 		if (node instanceof GameObject) {
 			Location destination = EMPTY_ROOM;
 			GameObject object = (GameObject) node;
+			boolean willBePushed = (RandomFunction.random(10) > 3);
 			if (object.getId() == 16458 || object.getId() == 16459) {
 				ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, Location.create(3288, 2801, 0));
 				return true;
@@ -75,9 +80,28 @@ public final class PyramidOptionHandler extends OptionHandler {
 			}
 			player.getConfigManager().set(704, value);
 			player.getPacketDispatch().sendMessage("You use your thieving skills to search the stone panel.");
-			ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, destination, "You find a door! You open it.");
+			if(entrance == currentEntrance && willBePushed){
+				player.lock();
+				player.animate(new Animation(7299));
+				player.getImpactHandler().setDisabledTicks(4);
+				GameWorld.submit(new Pulse(4, player) {
+					@Override
+					public boolean pulse() {
+						player.unlock();
+						player.getAnimator().reset();
+						return true;
+					}
+				});
+			} else {
+				ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, destination, "You find a door! You open it.");
+			}
+			//ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, destination, "You find a door! You open it.");
 		} else if (node instanceof NPC) {
-			player.getDialogueInterpreter().open(node.getId(), node, 1);
+			if (option.equals("talk-to")) {
+				player.getDialogueInterpreter().open(node.getId(), node, 0);
+			} else {
+				player.getDialogueInterpreter().open(node.getId(), node, 1);
+			}
 		}
 		return true;
 	}

@@ -5,18 +5,16 @@ import org.crandor.game.content.global.action.ClimbActionHandler;
 import org.crandor.game.content.skill.Skills;
 import org.crandor.game.interaction.OptionHandler;
 import org.crandor.game.node.Node;
-import org.crandor.game.node.entity.Entity;
 import org.crandor.game.node.entity.combat.ImpactHandler;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.item.Item;
 import org.crandor.game.node.object.GameObject;
-import org.crandor.game.world.map.Direction;
+import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
-import org.crandor.plugin.PluginManager;
 import org.crandor.tools.RandomFunction;
 
 import java.util.Random;
@@ -43,8 +41,14 @@ public final class PyramidPlunderOptions extends OptionHandler {
         return this;
     }
     public void rollSceptre(Player player){
-        if(RandomFunction.random(1000) == 4){
-            player.getInventory().add(new Item(9050));
+        if(RandomFunction.random(1000) == 451){
+            if(!player.getInventory().isFull()) {
+                player.getInventory().add(new Item(9044));
+                player.getPacketDispatch().sendMessage("<col=7f03ff>You find a strange object.");
+            } else {
+                player.getBank().add(new Item(9044));
+                player.getPacketDispatch().sendMessage("<col=7f03ff>You sense that something has appeared in your bank.");
+            }
         }
     }
     public final boolean success(final Player player, final int skill) {
@@ -59,6 +63,7 @@ public final class PyramidPlunderOptions extends OptionHandler {
     }
     @Override
     public boolean handle(Player player, Node node, String option) {
+        int NPCDeathTime = GameWorld.getTicks() + (1000 / 6);
         Location room_entrance[] = {new Location(1927,4477), new Location(1927,4453), new Location(1943,4421), new Location(1954,4477), new Location(1974,4420), new Location(1977,4471), new Location(1927, 4424)};
         int currentX = player.getLocation().getX();
         int currentY = player.getLocation().getY();
@@ -151,6 +156,7 @@ public final class PyramidPlunderOptions extends OptionHandler {
                 break;
             case 16473:
                 if(option.equals("search") || option.equals("Search")) {
+                    boolean willSpawnSwarm = (RandomFunction.random(1,20) == 10);
                     if (reqLevel > level){
                         player.getPacketDispatch().sendMessage("You need to be at least level " + reqLevel + " thieving.");
                         break;
@@ -158,10 +164,18 @@ public final class PyramidPlunderOptions extends OptionHandler {
                     player.getPacketDispatch().sendMessage("You search the chest...");
                     player.animate(animations[1]);
                     player.lock(2);
-                    player.getInventory().add(ARTIFACTS[RandomFunction.random(1,3)][RandomFunction.random(3)]);
-                    rollSceptre(player);
-                    player.getPacketDispatch().sendMessage("And you find an artifact!");
-                    player.getSkills().addExperience(Skills.THIEVING,40 + (room * 20));
+                    if(willSpawnSwarm) {
+                        player.getPacketDispatch().sendMessage("A swarm flies out!");
+                        PyramidPlunderSwarmNPC swarm = new PyramidPlunderSwarmNPC(2001,player.getLocation(),player);
+                        swarm.setRespawn(false);
+                        swarm.setAggressive(true);
+                        swarm.init();
+                    } else {
+                        player.getInventory().add(ARTIFACTS[RandomFunction.random(1, 3)][RandomFunction.random(3)]);
+                        rollSceptre(player);
+                        player.getPacketDispatch().sendMessage("And you find an artifact!");
+                        player.getSkills().addExperience(Skills.THIEVING, 40 + (room * 20));
+                    }
                 }
                 break;
             case 16495:
@@ -175,7 +189,7 @@ public final class PyramidPlunderOptions extends OptionHandler {
                     player.getPacketDispatch().sendMessage("You open the sarcophagus and....");
                     if(willSpawnMummy) {
                         player.getPacketDispatch().sendMessage("A mummy crawls out!");
-                        NPC mummy = NPC.create(1958, player.getLocation());
+                        PyramidPlunderMummyNPC mummy = new PyramidPlunderMummyNPC(1958, player.getLocation(),player);
                         mummy.setRespawn(false);
                         mummy.setAggressive(true);
                         mummy.init();
@@ -199,6 +213,7 @@ public final class PyramidPlunderOptions extends OptionHandler {
                     if (doesOpen) {
                         player.getPacketDispatch().sendMessage("The door opens!");
                         player.getProperties().setTeleportLocation(room_entrance[room]);
+                        player.getPacketDispatch().sendMessage("<col=7f03ff>Room: " + (room + 1) + " Level required: " + (reqLevel + 10));
                     } else {
                         player.getPacketDispatch().sendMessage("You fail to unlock the door.");
                     }
