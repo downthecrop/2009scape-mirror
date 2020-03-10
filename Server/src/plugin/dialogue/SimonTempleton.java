@@ -102,6 +102,7 @@ public final class SimonTempleton extends DialoguePlugin{
             case 20:
                 switch(buttonId){
                     case 1:
+                        end();
                         for(int j = 0; j < 28; j++){
                             switch(player.getInventory().getId(j)){
                                 case 9032:
@@ -121,6 +122,7 @@ public final class SimonTempleton extends DialoguePlugin{
                         stage = 999;
                         break;
                     case 2:
+                        end();
                         for(int j = 0; j < 28; j++){
                             switch(player.getInventory().getId(j)){
                                 case 9042:
@@ -140,6 +142,7 @@ public final class SimonTempleton extends DialoguePlugin{
                         stage = 999;
                         break;
                     case 3:
+                        end();
                         for(int j = 0; j < 28; j++){
                             switch(player.getInventory().getId(j)){
                                 case 9040:
@@ -159,6 +162,7 @@ public final class SimonTempleton extends DialoguePlugin{
                         stage = 999;
                         break;
                     case 4:
+                        end();
                         for(int j = 0; j < 28; j++){
                             switch(player.getInventory().getId(j)){
                                 case 9040:
@@ -202,6 +206,7 @@ public final class SimonTempleton extends DialoguePlugin{
                         stage = 999;
                         break;
                 }
+                break;
             case 30:
                 player("What! This is a genuine pharaoh's scepter - made out of"," solid gold and finely jewelled with precious gems"," by the finest craftsmen in the area.");
                 stage = 31;
