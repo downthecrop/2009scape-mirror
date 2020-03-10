@@ -121,7 +121,7 @@ public enum Tasks {
 			return true;
 		}
 	}),*/
-	SHADE(new Task(new int[] { 3617, 1250, 1241, 1246, 1248, 1250, 428 }, new String[] { "Shades are dark and mysterious, they hide in the shadows so be wary of ambushes." }, 1, new Master[] { Master.VANNAKA }, true)),
+	SHADE(new Task(new int[] { 3617, 1250, 1241, 1246, 1248, 1250, 428, 1240 }, new String[] { "Shades are dark and mysterious, they hide in the shadows so be wary of ambushes." }, 1, new Master[] { Master.VANNAKA }, true)),
 	/*SHADOW_WARRIORS(new Task(new int[] { 158 }, new String[] { "Shadow warriors are dark and mysterious, they hide in the shadows so be wary of ambushes." }, 1, new Master[] { Master.VANNAKA, Master.CHAELDAR }, false) {
 		@Override
 		public boolean isDisabled() {
