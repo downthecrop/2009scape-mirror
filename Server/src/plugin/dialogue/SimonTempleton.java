@@ -106,15 +106,15 @@ public final class SimonTempleton extends DialoguePlugin{
                         for(int j = 0; j < 28; j++){
                             switch(player.getInventory().getId(j)){
                                 case 9032:
-                                    player.getInventory().remove(new Item(9032),j,true));
+                                    player.getInventory().remove(new Item(9032),j,true);
                                     player.getInventory().add(new Item(995, 75));
                                     break;
                                 case 9036:
-                                    player.getInventory().remove(new Item(9036),j,true));
+                                    player.getInventory().remove(new Item(9036),j,true);
                                     player.getInventory().add(new Item(995, 100));
                                     break;
                                 case 9026:
-                                    player.getInventory().remove(new Item(9026),j,true));
+                                    player.getInventory().remove(new Item(9026),j,true);
                                     player.getInventory().add(new Item(995, 50));
                                     break;
                             }
@@ -126,15 +126,15 @@ public final class SimonTempleton extends DialoguePlugin{
                         for(int j = 0; j < 28; j++){
                             switch(player.getInventory().getId(j)){
                                 case 9042:
-                                    player.getInventory().remove(new Item(9042),j,true));
+                                    player.getInventory().remove(new Item(9042),j,true);
                                     player.getInventory().add(new Item(995, 150));
                                     break;
                                 case 9030:
-                                    player.getInventory().remove(new Item(9030),j,true));
+                                    player.getInventory().remove(new Item(9030),j,true);
                                     player.getInventory().add(new Item(995, 175));
                                     break;
                                 case 9038:
-                                    player.getInventory().remove(new Item(9038),j,true));
+                                    player.getInventory().remove(new Item(9038),j,true);
                                     player.getInventory().add(new Item(995, 200));
                                     break;
                             }
@@ -146,15 +146,15 @@ public final class SimonTempleton extends DialoguePlugin{
                         for(int j = 0; j < 28; j++){
                             switch(player.getInventory().getId(j)){
                                 case 9040:
-                                    player.getInventory().remove(new Item(9040),j,true));
+                                    player.getInventory().remove(new Item(9040),j,true);
                                     player.getInventory().add(new Item(995, 750));
                                     break;
                                 case 9028:
-                                    player.getInventory().remove(new Item(9028),j,true));
+                                    player.getInventory().remove(new Item(9028),j,true);
                                     player.getInventory().add(new Item(995, 1000));
                                     break;
                                 case 9034:
-                                    player.getInventory().remove(new Item(9034),j,true));
+                                    player.getInventory().remove(new Item(9034),j,true);
                                     player.getInventory().add(new Item(995, 1250));
                                     break;
                             }
@@ -166,39 +166,39 @@ public final class SimonTempleton extends DialoguePlugin{
                         for(int j = 0; j < 28; j++){
                             switch(player.getInventory().getId(j)){
                                 case 9040:
-                                    player.getInventory().remove(new Item(9040),j,true));
+                                    player.getInventory().remove(new Item(9040),j,true);
                                     player.getInventory().add(new Item(995, 750));
                                     break;
                                 case 9028:
-                                    player.getInventory().remove(new Item(9028),j,true));
+                                    player.getInventory().remove(new Item(9028),j,true);
                                     player.getInventory().add(new Item(995, 1000));
                                     break;
                                 case 9034:
-                                    player.getInventory().remove(new Item(9034),j,true));
+                                    player.getInventory().remove(new Item(9034),j,true);
                                     player.getInventory().add(new Item(995, 1250));
                                     break;
                                 case 9042:
-                                    player.getInventory().remove(new Item(9042),j,true));
+                                    player.getInventory().remove(new Item(9042),j,true);
                                     player.getInventory().add(new Item(995, 150));
                                     break;
                                 case 9030:
-                                    player.getInventory().remove(new Item(9030),j,true));
+                                    player.getInventory().remove(new Item(9030),j,true);
                                     player.getInventory().add(new Item(995, 175));
                                     break;
                                 case 9038:
-                                    player.getInventory().remove(new Item(9038),j,true));
+                                    player.getInventory().remove(new Item(9038),j,true);
                                     player.getInventory().add(new Item(995, 200));
                                     break;
                                 case 9032:
-                                    player.getInventory().remove(new Item(9032),j,true));
+                                    player.getInventory().remove(new Item(9032),j,true);
                                     player.getInventory().add(new Item(995, 75));
                                     break;
                                 case 9036:
-                                    player.getInventory().remove(new Item(9036),j,true));
+                                    player.getInventory().remove(new Item(9036),j,true);
                                     player.getInventory().add(new Item(995, 100));
                                     break;
                                 case 9026:
-                                    player.getInventory().remove(new Item(9026),j,true));
+                                    player.getInventory().remove(new Item(9026),j,true);
                                     player.getInventory().add(new Item(995, 50));
                                     break;
                             }
