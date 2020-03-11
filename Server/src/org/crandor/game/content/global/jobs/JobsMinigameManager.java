@@ -2,6 +2,8 @@ package org.crandor.game.content.global.jobs;
 
 import java.nio.ByteBuffer;
 
+import org.crandor.game.content.global.jobs.impl.GatheringJob;
+import org.crandor.game.content.global.jobs.impl.SlayingJob;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.entity.player.info.login.SavingModule;
 
@@ -20,6 +22,11 @@ public final class JobsMinigameManager implements SavingModule {
 	 * The player.
 	 */
 	private final Player player;
+	
+	/**
+	 * The amount of jobs the player has completed.
+	 */
+	private int jobsDone = 0;
 
 
 	/**
@@ -38,7 +45,14 @@ public final class JobsMinigameManager implements SavingModule {
 
 	@Override
 	public void parse(ByteBuffer buffer) {
-		
+
+	}
+	
+	/**
+	 * Increments the jobsDone variable by 1.
+	 */
+	public void incrementJobs() {
+		jobsDone++;
 	}
 
 
@@ -58,6 +72,14 @@ public final class JobsMinigameManager implements SavingModule {
 		this.job = job;
 	}
 
-	public static final int WILFRED_ID = 4906;
+	public int getJobsDone() {
+		return jobsDone;
+	}
+
+	public void setJobsDone(int jobsDone) {
+		this.jobsDone = jobsDone;
+	}
+
+
 
 }
