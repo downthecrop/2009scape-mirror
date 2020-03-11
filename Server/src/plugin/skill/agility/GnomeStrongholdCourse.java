@@ -43,7 +43,7 @@ public final class GnomeStrongholdCourse extends AgilityCourse {
 	 * @param player The player.
 	 */
 	public GnomeStrongholdCourse(Player player) {
-		super(player, 5, 39.0);
+		super(player, 7, 39.0);
 	}
 
 	@Override

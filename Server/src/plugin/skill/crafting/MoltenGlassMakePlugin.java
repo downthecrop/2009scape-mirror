@@ -28,8 +28,9 @@ public final class MoltenGlassMakePlugin extends UseWithHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		addHandler(4304, OBJECT_TYPE, this);
-		addHandler(6189, OBJECT_TYPE, this);
+		addHandler(4304,  OBJECT_TYPE, this);
+		addHandler(6189,  OBJECT_TYPE, this);
+		addHandler(9390,  OBJECT_TYPE, this);
 		addHandler(11010, OBJECT_TYPE, this);
 		addHandler(11666, OBJECT_TYPE, this);
 		addHandler(12100, OBJECT_TYPE, this);
