@@ -9,7 +9,7 @@ import org.crandor.plugin.Plugin;
  * Handles the Hans NPC.
  * @author Emperor
  */
-@InitializablePlugin
+//@InitializablePlugin
 public final class HansNPC extends AbstractNPC {
 
 	/**
