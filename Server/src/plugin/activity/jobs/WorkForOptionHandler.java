@@ -17,7 +17,7 @@ import org.crandor.tools.StringUtils;
  
 /**
  * Handles the work-for actions for the NPCs
- * @author ceik
+ * @author jamix77
  */
 @InitializablePlugin
 public final class WorkForOptionHandler extends OptionHandler {
@@ -26,6 +26,16 @@ public final class WorkForOptionHandler extends OptionHandler {
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         NPCDefinition.forId(4906).getConfigurations().put("option:work-for",this);
         NPCDefinition.forId(4707).getConfigurations().put("option:work-for", this);
+        NPCDefinition.forId(4904).getConfigurations().put("option:work-for", this);
+        NPCDefinition.forId(4903).getConfigurations().put("option:work-for", this);
+        NPCDefinition.forId(4902).getConfigurations().put("option:work-for", this);
+        NPCDefinition.forId(4901).getConfigurations().put("option:work-for", this);
+        NPCDefinition.forId(4899).getConfigurations().put("option:work-for", this);
+        NPCDefinition.forId(3807).getConfigurations().put("option:work-for", this);
+        NPCDefinition.forId(1861).getConfigurations().put("option:work-for", this);
+        NPCDefinition.forId(922).getConfigurations().put("option:work-for", this);
+        NPCDefinition.forId(705).getConfigurations().put("option:work-for", this);
+        NPCDefinition.forId(0).getConfigurations().put("option:work-for", this);
         return this;
     }
    
