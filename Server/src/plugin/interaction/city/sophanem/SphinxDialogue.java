@@ -7,6 +7,10 @@ import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.plugin.InitializablePlugin;
 
+/**
+ * Handles Sphinx dialogue
+ * @author ceik 
+ */
 @InitializablePlugin
 public final class SphinxDialogue extends DialoguePlugin {
     public SphinxDialogue() {
