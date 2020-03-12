@@ -81,7 +81,7 @@ public final class SphinxDialogue extends DialoguePlugin {
                 end();
                 break;
             case 50:
-                npc(FacialExpression.ANNOYED,"*ignores you*");
+                player.getDialogueInterpreter().sendDialogue("The Sphinx ignores you.");
                 stage = 51;
                 break;
             case 51:
