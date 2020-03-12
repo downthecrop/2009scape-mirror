@@ -63,6 +63,7 @@ public final class GrandExchange implements SavingModule {
 
 	/**
 	 * Opens the Grand Exchange menu.
+	 * @NOTICE: The amount of GE boxes is limited at LoginWriteEvent.java (2 or 6 GE boxes, set it 0 for 2, 1 for 6)
 	 */
 	public void open() {
 		if (player.getIronmanManager().checkRestriction()) {
