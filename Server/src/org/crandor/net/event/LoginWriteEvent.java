@@ -39,9 +39,8 @@ public final class LoginWriteEvent extends IoWriteEvent {
 				buffer.put(getWorldResponse(session));
 				session.setProducer(GAME_PRODUCER);
 				break;
-			case 8: //if the login server is offline?
-				//TODO: auto restart code?
-				break;
+			//Could add a case here to auto-restart the server in case the login server goes offline (case 8)
+			//Possibly a risk for malicious attacks though
 			case 21: //Moving world
 				buffer.put((byte) session.getServerKey());
 				break;
