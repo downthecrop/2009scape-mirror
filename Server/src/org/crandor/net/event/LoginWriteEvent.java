@@ -35,13 +35,15 @@ public final class LoginWriteEvent extends IoWriteEvent {
 		ByteBuffer buffer = ByteBuffer.allocate(500);
 		buffer.put((byte) response.opcode());
 		switch (response.opcode()) {
-		case 2:
-			buffer.put(getWorldResponse(session));
-			session.setProducer(GAME_PRODUCER);
-			break;
-		case 21:
-			buffer.put((byte) session.getServerKey());
-			break;
+			case 2: //successful login
+				buffer.put(getWorldResponse(session));
+				session.setProducer(GAME_PRODUCER);
+				break;
+			//Could add a case here to auto-restart the server in case the login server goes offline (case 8)
+			//Possibly a risk for malicious attacks though
+			case 21: //Moving world
+				buffer.put((byte) session.getServerKey());
+				break;
 		}
 		buffer.flip();
 		session.queue(buffer);
@@ -63,7 +65,7 @@ public final class LoginWriteEvent extends IoWriteEvent {
 		buffer.put((byte) 0);
 		buffer.put((byte) 0);
 		buffer.putShort((short) player.getIndex());
-		buffer.put((byte) (player.isDonator() ? 1 : 0)); // Enable all G.E boxes
+		buffer.put((byte) (1)); // Enable all G.E boxes
 		buffer.put((byte) 1);
 		buffer.flip();
 		return buffer;
