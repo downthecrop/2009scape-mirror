@@ -16,12 +16,6 @@ import org.crandor.tools.StringUtils;
  */
 public abstract class Node {
 
-	public Node(){
-		/**
-		 * Empty
-		 */
-	}
-
 	/**
 	 * The name of the node;
 	 */
