@@ -66,6 +66,7 @@ public final class PyramidOptionHandler extends OptionHandler {
 			boolean willBePushed = (RandomFunction.random(10) > 3);
 			if (object.getId() == 16458 || object.getId() == 16459) {
 				ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, Location.create(3288, 2801, 0));
+				player.getPlunderObjectManager().resetObjectsFor(player);
 				return true;
 			}
 			if (System.currentTimeMillis() - lastEntranceSwitch > 15 * 60 * 1000) {

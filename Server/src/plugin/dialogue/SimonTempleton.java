@@ -47,6 +47,7 @@ public final class SimonTempleton extends DialoguePlugin{
     @Override
     public boolean handle(int interfaceId, int buttonId){
         boolean hasArtefacts = false;
+        boolean hasPyramidTopper = false;
         switch(stage){
             case 0:
                 for(int i = 0; i < ARTIFACTS.length; i++){
@@ -57,7 +58,13 @@ public final class SimonTempleton extends DialoguePlugin{
                         }
                     }
                 }
-                if(hasArtefacts){
+                hasPyramidTopper = player.getInventory().containsItem(new Item(6970));
+                if(hasPyramidTopper){
+                    player("Yes, actually. The top of that pyramid.");
+                    stage = 6;
+                    break;
+                }
+                if(hasArtefacts && !hasPyramidTopper){
                     player("Why, yes I do!");
                     stage = 1;
                     break;
@@ -84,6 +91,36 @@ public final class SimonTempleton extends DialoguePlugin{
             case 5:
                 npc("Bye, mate.");
                 stage = 999;
+                break;
+            case 6:
+                npc("Hmmm, very nice. I'll buy them for 10k each.");
+                stage = 7;
+                break;
+            case 7:
+                interpreter.sendOptions("Select an option.","Sounds good!", "No thanks.");
+                stage = 8;
+                break;
+            case 8:
+                switch(buttonId){
+                    case 1:
+                        for(int j = 0; j < 28; j++){
+                            switch(player.getInventory().getId(j)){
+                                case 6970:
+                                    player.getInventory().remove(new Item(6970),j,true);
+                                    player.getInventory().add(new Item(995, 10000));
+                                    break;
+                            }
+                        }
+                        end();
+                        break;
+                    case 2:
+                        npc("Have it your way.");
+                        stage = 9;
+                        break;
+                }
+                break;
+            case 9:
+                end();
                 break;
             case 10:
                 switch(buttonId){

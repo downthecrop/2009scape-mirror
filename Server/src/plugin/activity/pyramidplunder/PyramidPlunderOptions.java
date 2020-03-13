@@ -29,6 +29,7 @@ public final class PyramidPlunderOptions extends OptionHandler {
     Item[][] ARTIFACTS = { {new Item(9032),new Item(9036), new Item(9026)}, {new Item(9042), new Item(9030), new Item(9038)}, {new Item(9040), new Item(9028), new Item(9034)} };
     private static final Animation[] animations = new Animation[] { new Animation(2247), new Animation(2248), new Animation(1113), new Animation(2244) };
     int reqLevel;
+    //Player player;
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         ObjectDefinition.forId(16517).getConfigurations().put("option:pass",this);
@@ -63,6 +64,7 @@ public final class PyramidPlunderOptions extends OptionHandler {
     }
     @Override
     public boolean handle(Player player, Node node, String option) {
+        PlunderObjectManager manager = player.getPlunderObjectManager();
         int NPCDeathTime = GameWorld.getTicks() + (1000 / 6);
         Location room_entrance[] = {new Location(1927,4477), new Location(1927,4453), new Location(1943,4421), new Location(1954,4477), new Location(1974,4420), new Location(1977,4471), new Location(1927, 4424)};
         int currentX = player.getLocation().getX();
@@ -109,7 +111,7 @@ public final class PyramidPlunderOptions extends OptionHandler {
             spearX = 0;
             spearY = 2;
         }
-        GameObject object = node.asObject();
+        PlunderObject object = new PlunderObject(node.asObject().getId(),node.asObject().getLocation(),player);
         droom = (double) room;
         switch (object.getId()) {
             case 16517:
@@ -141,6 +143,10 @@ public final class PyramidPlunderOptions extends OptionHandler {
                         player.getPacketDispatch().sendMessage("You need to be at least level " + reqLevel + " thieving.");
                         break;
                     }
+                    if (manager.ObjectList.contains(object) ? manager.ObjectList.get(manager.ObjectList.indexOf(object)).playerOpened : false){
+                        player.getPacketDispatch().sendMessage("You've already looted this.");
+                        break;
+                    }
                     boolean success = success(player, Skills.THIEVING);
                     player.animate(animations[success ? 1 : 0]);
                     player.lock(2);
@@ -149,6 +155,12 @@ public final class PyramidPlunderOptions extends OptionHandler {
                         player.getSkills().addExperience(Skills.THIEVING, 25 + (room * 20), true);
                         player.getInventory().add(ARTIFACTS[((int)Math.floor(droom / 3))][RandomFunction.random(3)]);
                         rollSceptre(player);
+                        if(!manager.ObjectList.contains(object)) {
+                            object.playerOpened = true;
+                            manager.register(object);
+                        } else {
+                            manager.ObjectList.get(manager.ObjectList.indexOf(object)).playerOpened = true;
+                        }
                     } else {
                         player.getPacketDispatch().sendMessage("You failed and got bit by a snake.");
                     }
@@ -159,6 +171,10 @@ public final class PyramidPlunderOptions extends OptionHandler {
                     boolean willSpawnSwarm = (RandomFunction.random(1,20) == 10);
                     if (reqLevel > level){
                         player.getPacketDispatch().sendMessage("You need to be at least level " + reqLevel + " thieving.");
+                        break;
+                    }
+                    if (manager.ObjectList.contains(object) ? manager.ObjectList.get(manager.ObjectList.indexOf(object)).playerOpened : false){
+                        player.getPacketDispatch().sendMessage("You've already looted this.");
                         break;
                     }
                     player.getPacketDispatch().sendMessage("You search the chest...");
@@ -176,12 +192,22 @@ public final class PyramidPlunderOptions extends OptionHandler {
                         player.getPacketDispatch().sendMessage("And you find an artifact!");
                         player.getSkills().addExperience(Skills.THIEVING, 40 + (room * 20));
                     }
+                    if(!manager.ObjectList.contains(object)) {
+                        object.playerOpened = true;
+                        manager.register(object);
+                    } else {
+                        manager.ObjectList.get(manager.ObjectList.indexOf(object)).playerOpened = true;
+                    }
                 }
                 break;
             case 16495:
                 if(option.equals("open") || option.equals("Open")) {
                     if (reqLevel > level){
                         player.getPacketDispatch().sendMessage("You need to be at least level " + reqLevel + " thieving.");
+                        break;
+                    }
+                    if (manager.ObjectList.contains(object) ? manager.ObjectList.get(manager.ObjectList.indexOf(object)).playerOpened : false){
+                        player.getPacketDispatch().sendMessage("You've already looted this.");
                         break;
                     }
                     boolean willSpawnMummy = (RandomFunction.random(1,5) == 3);
@@ -199,6 +225,12 @@ public final class PyramidPlunderOptions extends OptionHandler {
                         rollSceptre(player);
                         player.getSkills().addExperience(Skills.STRENGTH,50 + (room * 20));
                     }
+                    if(!manager.ObjectList.contains(object)) {
+                        object.playerOpened = true;
+                        manager.register(object);
+                    } else {
+                        manager.ObjectList.get(manager.ObjectList.indexOf(object)).playerOpened = true;
+                    }
                 }
                 break;
             case 16475:
@@ -214,12 +246,15 @@ public final class PyramidPlunderOptions extends OptionHandler {
                         player.getPacketDispatch().sendMessage("The door opens!");
                         player.getProperties().setTeleportLocation(room_entrance[room]);
                         player.getPacketDispatch().sendMessage("<col=7f03ff>Room: " + (room + 1) + " Level required: " + (reqLevel + 10));
+                        player.getPlunderObjectManager().resetObjectsFor(player);
                     } else {
                         player.getPacketDispatch().sendMessage("You fail to unlock the door.");
                     }
                 } else if(room == 8) {
                     ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, Location.create(3288, 2801, 0));
+                    player.getPlunderObjectManager().resetObjectsFor(player);
                 }
+                manager.resetObjectsFor(player);
                 break;
         }
         return true;

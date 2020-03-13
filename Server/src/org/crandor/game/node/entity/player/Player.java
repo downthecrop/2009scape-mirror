@@ -99,6 +99,7 @@ import org.crandor.net.packet.out.SkillLevel;
 import org.crandor.net.packet.out.UpdateSceneGraph;
 import org.crandor.plugin.Plugin;
 import org.crandor.tools.StringUtils;
+import plugin.activity.pyramidplunder.PlunderObjectManager;
 
 /**
  * Represents a player entity.
@@ -211,6 +212,11 @@ public class Player extends Entity {
 	 * The familiar manager.
 	 */
 	private final FamiliarManager familiarManager = new FamiliarManager(this);
+
+	/**
+	 * Pyramid Plunder Object Manager
+	 */
+	private final PlunderObjectManager plunderObjectManager = new PlunderObjectManager(this);
 
 	/**
 	 * The config manager.
@@ -1260,6 +1266,8 @@ public class Player extends Entity {
 	public IronmanManager getIronmanManager() {
 		return ironmanManager;
 	}
+
+	public PlunderObjectManager getPlunderObjectManager() {return plunderObjectManager;}
 
 	/**
 	 * Gets the emoteManager.
