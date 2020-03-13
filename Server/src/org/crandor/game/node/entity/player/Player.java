@@ -1,5 +1,8 @@
 package org.crandor.game.node.entity.player;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.crandor.ServerConstants;
 import org.crandor.game.component.Component;
 import org.crandor.game.container.Container;
@@ -9,6 +12,7 @@ import org.crandor.game.container.impl.InventoryListener;
 import org.crandor.game.content.ame.AntiMacroHandler;
 import org.crandor.game.content.dialogue.DialogueInterpreter;
 import org.crandor.game.content.eco.ge.GrandExchange;
+import org.crandor.game.content.global.jobs.JobsMinigameManager;
 import org.crandor.game.content.global.ttrail.TreasureTrailManager;
 import org.crandor.game.content.skill.Skills;
 import org.crandor.game.content.skill.member.construction.HouseManager;
@@ -36,7 +40,20 @@ import org.crandor.game.node.entity.player.info.UIDInfo;
 import org.crandor.game.node.entity.player.info.login.LoginConfiguration;
 import org.crandor.game.node.entity.player.info.portal.DonatorType;
 import org.crandor.game.node.entity.player.info.portal.Perks;
-import org.crandor.game.node.entity.player.link.*;
+import org.crandor.game.node.entity.player.link.BankPinManager;
+import org.crandor.game.node.entity.player.link.BarcrawlManager;
+import org.crandor.game.node.entity.player.link.ConfigurationManager;
+import org.crandor.game.node.entity.player.link.GlobalData;
+import org.crandor.game.node.entity.player.link.HintIconManager;
+import org.crandor.game.node.entity.player.link.InterfaceManager;
+import org.crandor.game.node.entity.player.link.IronmanManager;
+import org.crandor.game.node.entity.player.link.IronmanMode;
+import org.crandor.game.node.entity.player.link.PacketDispatch;
+import org.crandor.game.node.entity.player.link.SavedData;
+import org.crandor.game.node.entity.player.link.Settings;
+import org.crandor.game.node.entity.player.link.SkullManager;
+import org.crandor.game.node.entity.player.link.SpellBookManager;
+import org.crandor.game.node.entity.player.link.WarningMessages;
 import org.crandor.game.node.entity.player.link.appearance.Appearance;
 import org.crandor.game.node.entity.player.link.audio.AudioManager;
 import org.crandor.game.node.entity.player.link.diary.AchievementDiaryManager;
@@ -55,7 +72,12 @@ import org.crandor.game.system.communication.CommunicationInfo;
 import org.crandor.game.system.monitor.PlayerMonitor;
 import org.crandor.game.system.task.LogoutTask;
 import org.crandor.game.world.GameWorld;
-import org.crandor.game.world.map.*;
+import org.crandor.game.world.map.Direction;
+import org.crandor.game.world.map.Location;
+import org.crandor.game.world.map.Region;
+import org.crandor.game.world.map.RegionChunk;
+import org.crandor.game.world.map.RegionManager;
+import org.crandor.game.world.map.Viewport;
 import org.crandor.game.world.map.build.DynamicRegion;
 import org.crandor.game.world.map.zone.ZoneType;
 import org.crandor.game.world.repository.Repository;
@@ -78,9 +100,6 @@ import org.crandor.net.packet.out.UpdateSceneGraph;
 import org.crandor.plugin.Plugin;
 import org.crandor.tools.StringUtils;
 import plugin.activity.pyramidplunder.PlunderObjectManager;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Represents a player entity.
@@ -278,6 +297,11 @@ public class Player extends Entity {
 	 * The Ironman manager.
 	 */
 	private final IronmanManager ironmanManager = new IronmanManager(this);
+	
+	/**
+	 * The jobs minigame manager.
+	 */
+	private final JobsMinigameManager jobsManager = new JobsMinigameManager(this);
 
 	/**
 	 * The logout plugins.
@@ -1311,5 +1335,9 @@ public class Player extends Entity {
 
 	public void setArcheryTotal(int archeryTotal) {
 		this.archeryTotal = archeryTotal;
+	}
+
+	public JobsMinigameManager getJobsManager() {
+		return jobsManager;
 	}
 }
