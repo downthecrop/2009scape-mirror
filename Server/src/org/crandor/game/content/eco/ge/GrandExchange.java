@@ -457,10 +457,6 @@ public final class GrandExchange implements SavingModule {
 	 * @param index The offer index.
 	 */
 	public void openBuy(int index) {
-		if (index > 3 && !player.isDonator()) {
-			player.getPacketDispatch().sendMessage("You have to be a member to unlock this slot.");
-			return;
-		}
 		this.openedIndex = index;
 		sendConfiguration(offers[index], false);
 		openSearch();
@@ -470,10 +466,6 @@ public final class GrandExchange implements SavingModule {
 	 * Opens the selling screen.
 	 */
 	public void openSell(int index) {
-		if (index > 3 && !player.isDonator()) {
-			player.getPacketDispatch().sendMessage("You have to be a member to unlock this slot.");
-			return;
-		}
 		this.openedIndex = index;
 		sendConfiguration(offers[index], true);
 		player.getInterfaceManager().openSingleTab(new Component(107)).open(player);
