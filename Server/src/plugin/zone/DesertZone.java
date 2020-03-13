@@ -165,6 +165,7 @@ public final class DesertZone extends MapZone implements Plugin<Object> {
 		borders.addException(new ZoneBorders(3147, 3019, 3185, 3059));// Bedabin
 		borders.addException(new ZoneBorders(3217, 2881, 3248, 2914));// pyramid
 		borders.addException(new ZoneBorders(3264, 2752, 3323, 2810));// Sophanem
+		borders.addException(new ZoneBorders(3326,2942,3371,3006)); //Pollnivneach
 		borders.addException(new ZoneBorders(3007, 4672, 3071, 4735));// agility-pyramid
 		// top(region12105)
 		borders.addException(new ZoneBorders(3274, 3014, 3305, 3041));// Mining
