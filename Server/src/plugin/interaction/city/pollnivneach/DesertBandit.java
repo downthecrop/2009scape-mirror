@@ -6,8 +6,15 @@ import org.crandor.game.interaction.OptionHandler;
 import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
+import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
 
+/**
+ * Stand-in for bandit dialogue until blackjacking is implemented
+ * @author ceik
+ */
+
+@InitializablePlugin
 public class DesertBandit extends OptionHandler {
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         new BanditDialogue().init();
