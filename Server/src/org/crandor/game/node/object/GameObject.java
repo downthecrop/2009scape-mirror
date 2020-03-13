@@ -17,25 +17,30 @@ import org.crandor.game.world.map.Location;
  */
 public class GameObject extends Node {
 
+	public GameObject(){
+		/**
+		 * Empty
+		 */
+	}
 	/**
 	 * The object id.
 	 */
-	private final int id;
+	private int id = 0;
 
 	/**
 	 * Object's type.
 	 */
-	private final int type;
+	private int type;
 	
 	/**
 	 * The rotation.
 	 */
-	private final int rotation;
+	private int rotation;
 
 	/**
 	 * The object's definition.
 	 */
-	private final ObjectDefinition definition;
+	private ObjectDefinition definition;
 	
 	/**
 	 * The restore pulse.
@@ -60,7 +65,7 @@ public class GameObject extends Node {
 	/**
 	 * The child objects.
 	 */
-	private final GameObject[] childs;
+	private GameObject[] childs;
 	
 	/**
 	 * The game object wrapper (used for object configurations).
