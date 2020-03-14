@@ -6,18 +6,15 @@ import org.crandor.game.content.skill.Skills;
 import org.crandor.game.interaction.OptionHandler;
 import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.combat.ImpactHandler;
-import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.item.Item;
-import org.crandor.game.node.object.GameObject;
+import org.crandor.game.node.object.ObjectBuilder;
 import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
 import org.crandor.tools.RandomFunction;
-
-import java.util.Random;
 
 /**
  * Handle pyramid plunder object interactions
@@ -36,9 +33,17 @@ public final class PyramidPlunderOptions extends OptionHandler {
         ObjectDefinition.forId(16503).getConfigurations().put("option:search",this);
         ObjectDefinition.forId(16502).getConfigurations().put("option:search",this);
         ObjectDefinition.forId(16501).getConfigurations().put("option:search",this);
+        ObjectDefinition.forId(16501).getConfigurations().put("option:check for snakes",this);
+        ObjectDefinition.forId(16502).getConfigurations().put("option:check for snakes",this);
+        ObjectDefinition.forId(16503).getConfigurations().put("option:check for snakes",this);
         ObjectDefinition.forId(16473).getConfigurations().put("option:search",this);
         ObjectDefinition.forId(16495).getConfigurations().put("option:open",this);
         ObjectDefinition.forId(16475).getConfigurations().put("option:pick-lock",this);
+        ObjectDefinition.forId(16509).getConfigurations().put("option:search",this);
+        ObjectDefinition.forId(16510).getConfigurations().put("option:search",this);
+        ObjectDefinition.forId(16511).getConfigurations().put("option:search",this);
+
+
         return this;
     }
     public void rollSceptre(Player player){
@@ -59,7 +64,6 @@ public final class PyramidPlunderOptions extends OptionHandler {
         if (successChance >= roll) {
             return true;
         }
-        player.getImpactHandler().manualHit(player,RandomFunction.random(4), ImpactHandler.HitsplatType.NORMAL);
         return false;
     }
     @Override
@@ -150,7 +154,7 @@ public final class PyramidPlunderOptions extends OptionHandler {
                     boolean success = success(player, Skills.THIEVING);
                     player.animate(animations[success ? 1 : 0]);
                     player.lock(2);
-                    if (success) {
+                    if (success || manager.ObjectList.contains(object) ? manager.ObjectList.get(manager.ObjectList.indexOf(object)).snakeCharmed : false) {
                         player.getPacketDispatch().sendMessage("You successfully search the urn...");
                         player.getSkills().addExperience(Skills.THIEVING, 25 + (room * 20), true);
                         player.getInventory().add(ARTIFACTS[((int)Math.floor(droom / 3))][RandomFunction.random(3)]);
@@ -161,9 +165,59 @@ public final class PyramidPlunderOptions extends OptionHandler {
                         } else {
                             manager.ObjectList.get(manager.ObjectList.indexOf(object)).playerOpened = true;
                         }
+                        switch(object.getId()){
+                            case 16501:
+                                ObjectBuilder.replace(node.asObject(), node.asObject().transform(16505), 5);
+                                break;
+                            case 16502:
+                                ObjectBuilder.replace(node.asObject(), node.asObject().transform(16506), 5);
+                                break;
+                            case 16503:
+                                ObjectBuilder.replace(node.asObject(), node.asObject().transform(16507), 5);
+                                break;
+                        }
                     } else {
                         player.getPacketDispatch().sendMessage("You failed and got bit by a snake.");
+                        player.getImpactHandler().manualHit(player,RandomFunction.random(2,8), ImpactHandler.HitsplatType.NORMAL);
                     }
+                } else if(option.equals("check for snakes")){
+                    if(manager.ObjectList.contains(object) && manager.ObjectList.get(manager.ObjectList.indexOf(object)).snakeCharmed){
+                        player.getPacketDispatch().sendMessage("You already checked for snakes.");
+                    } else {
+                        player.getPacketDispatch().sendMessage("You check the urn for snakes...");
+                        if (!manager.ObjectList.contains(object)) {
+                            manager.register(object);
+                        }
+                        manager.originalIndex = manager.ObjectList.indexOf(object);
+                        switch(object.getId()){
+                            case 16501:
+                                ObjectBuilder.replace(node.asObject(), node.asObject().transform(16509), 5);
+                                break;
+                            case 16502:
+                                ObjectBuilder.replace(node.asObject(), node.asObject().transform(16510), 5);
+                                break;
+                            case 16503:
+                                ObjectBuilder.replace(node.asObject(), node.asObject().transform(16511), 5);
+                                break;
+                        }
+                    }
+                }
+                break;
+            case 16509:
+            case 16510:
+            case 16511:
+                if(option.equals("search") && player.getInventory().containsItem(new Item(4605))){
+                    player.animate(new Animation(1877));
+                    player.getPacketDispatch().sendMessage("You charm the snake into docility.");
+                    if(!manager.ObjectList.contains(manager.ObjectList.get(manager.originalIndex))) {
+                        object.snakeCharmed = true;
+                        manager.register(object);
+                    } else {
+                        manager.ObjectList.get(manager.originalIndex).snakeCharmed = true;
+                    }
+                } else {
+                    player.getImpactHandler().manualHit(player, RandomFunction.random(2, 8), ImpactHandler.HitsplatType.NORMAL);
+                    player.getPacketDispatch().sendMessage("The snake bites you.");
                 }
                 break;
             case 16473:
@@ -192,6 +246,7 @@ public final class PyramidPlunderOptions extends OptionHandler {
                         player.getPacketDispatch().sendMessage("And you find an artifact!");
                         player.getSkills().addExperience(Skills.THIEVING, 40 + (room * 20));
                     }
+                    ObjectBuilder.replace(node.asObject(), node.asObject().transform(16474), 5);
                     if(!manager.ObjectList.contains(object)) {
                         object.playerOpened = true;
                         manager.register(object);
@@ -225,6 +280,7 @@ public final class PyramidPlunderOptions extends OptionHandler {
                         rollSceptre(player);
                         player.getSkills().addExperience(Skills.STRENGTH,50 + (room * 20));
                     }
+                    ObjectBuilder.replace(node.asObject(), node.asObject().transform(16496), 5);
                     if(!manager.ObjectList.contains(object)) {
                         object.playerOpened = true;
                         manager.register(object);

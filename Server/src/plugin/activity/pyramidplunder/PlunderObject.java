@@ -11,6 +11,7 @@ import org.crandor.game.world.map.Location;
 
 public class PlunderObject extends GameObject {
     public boolean playerOpened;
+    public boolean snakeCharmed;
     private transient Player player;
     private int thisId;
 
@@ -18,11 +19,6 @@ public class PlunderObject extends GameObject {
     public PlunderObject(int id, Location location, Player player) {
         super(id, location);
         this.player = player;
-    }
-    public PlunderObject(){
-        /**
-         * Empty.
-         */
     }
 
 
