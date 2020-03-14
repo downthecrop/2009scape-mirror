@@ -206,7 +206,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 */
 	private void handleLowWall(final Player player, final GameObject object) {
 		Direction d = Direction.getDirection(player.getLocation(), object.getLocation());
-		final boolean fail = hasFailed(player);
+		final boolean fail = player.getSkills().getLevel(Skills.AGILITY) >= 75 ? false : hasFailed(player) ;
 		if (player.getLocation().equals(Location.create(3355, 2848, 1)) || player.getLocation().equals(Location.create(3359, 2838, 3))) {
 			d = Direction.NORTH;
 		} else if (player.getLocation().equals(Location.create(3355, 2850, 1)) || player.getLocation().equals(Location.create(3359, 2840, 3))) {
@@ -238,7 +238,8 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 		Direction d = Direction.getLogicalDirection(player.getLocation(), getLedgeLocation(player, object));
 		final Direction dir = d;
 		final int diff = object.getRotation() == 3 && dir == Direction.EAST ? 1 : object.getRotation() == 3 && dir == Direction.WEST ? 0 : d == Direction.EAST || (d == Direction.SOUTH && object.getRotation() != 0) || d == Direction.NORTH ? 0 : 1;
-		final boolean fail = hasFailed(player);
+		final boolean fail = player.getSkills().getLevel(Skills.AGILITY) >= 75 ? false : hasFailed(player) ;
+		player.getSkills().getLevel(Skills.AGILITY);
 		final Location end = player.getLocation().transform(dir.getStepX() * (fail ? 3 : 5), dir.getStepY() * (fail ? 3 : 5), 0);
 		player.getPacketDispatch().sendMessage("You put your foot on the ledge and try to edge across...");
 		if (fail) {
@@ -286,7 +287,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	private void handlePlank(final Player player, final GameObject object) {
 		final boolean custom = object.getLocation().equals(new Location(3365, 2835, 3)) || object.getLocation().equals(new Location(3370, 2835, 3));
 		final Direction dir = custom ? Direction.EAST : Direction.getLogicalDirection(player.getLocation(), object.getLocation());
-		final boolean fail = hasFailed(player);
+		final boolean fail = player.getSkills().getLevel(Skills.AGILITY) >= 75 ? false : hasFailed(player) ;
 		final Location end = object.getLocation().transform(object.getId() != 10868 ? dir : dir.getOpposite(), fail ? 2 : 5);
 		AgilityHandler.walk(player, fail ? -1 : 1, player.getLocation(), end, Animation.create(155), fail ? 0.0 : 56.4, fail ? null : "You walk carefully across the slippery plank...");
 		if (fail) {
@@ -308,7 +309,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 */
 	private void handleJumpGap(Player player, GameObject object) {
 		final Direction dir = Direction.getDirection(player.getLocation(), getGapLocation(player, object));
-		final boolean fail = hasFailed(player);
+		final boolean fail = player.getSkills().getLevel(Skills.AGILITY) >= 75 ? false : hasFailed(player) ;
 		player.getPacketDispatch().sendMessage("You jump the gap...");
 		if (fail) {
 			final boolean regular = object.getRotation() == 0 || object.getRotation() == 3;
@@ -336,7 +337,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 */
 	private void handleGapCross(final Player player, final GameObject object) {
 		final Direction dir = Direction.getLogicalDirection(player.getLocation(), getGapCrossLocation(player, object));
-		final boolean fail = hasFailed(player);
+		final boolean fail = player.getSkills().getLevel(Skills.AGILITY) >= 75 ? false : hasFailed(player) ;
 		final Location end = player.getLocation().transform(dir, fail ? 4 : 5);
 		final int rot = object.getRotation();
 		int mod = player.getLocation().equals(new Location(3359, 2849, 2)) ? 0 : player.getLocation().equals(new Location(3357, 2841, 2)) ? 1 : player.getLocation().equals(new Location(3367, 2832, 1)) ? 1 : player.getLocation().equals(new Location(3372, 2832, 1)) ? 0 : object.getLocation().equals(new Location(3370, 2831, 1)) ? 0 : rot == 1 && dir == Direction.EAST ? 0 : rot == 3 && (dir == Direction.WEST || dir == Direction.EAST) ? 1 : rot == 0 && dir == Direction.SOUTH ? 1 : dir == Direction.WEST && rot != 3 || dir == Direction.EAST ? 1 : 0;
