@@ -252,7 +252,7 @@ public final class WildernessCourse extends AgilityCourse {
 		switch (n.getId()) {
 		case 2283:
 			return Location.create(3005, 3953, 0);
-		case 2311:
+		case 37704:
 			return Location.create(3002, 3960, 0);
 		case 2297:
 			return Location.create(3002, 3945, 0);
@@ -269,7 +269,7 @@ public final class WildernessCourse extends AgilityCourse {
 		ObjectDefinition.forId(2307).getConfigurations().put("option:open", this);
 		ObjectDefinition.forId(2288).getConfigurations().put("option:squeeze-through", this);
 		ObjectDefinition.forId(2283).getConfigurations().put("option:swing-on", this);
-		ObjectDefinition.forId(2311).getConfigurations().put("option:cross", this);
+		ObjectDefinition.forId(37704).getConfigurations().put("option:cross", this);
 		ObjectDefinition.forId(2297).getConfigurations().put("option:walk-across", this);
 		ObjectDefinition.forId(2328).getConfigurations().put("option:climb", this);
 	}
