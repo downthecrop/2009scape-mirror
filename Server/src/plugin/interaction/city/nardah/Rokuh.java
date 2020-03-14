@@ -2,14 +2,17 @@ package plugin.interaction.city.nardah;
 
 import org.crandor.cache.def.impl.NPCDefinition;
 import org.crandor.game.content.dialogue.DialoguePlugin;
-import org.crandor.game.content.global.shop.Shop;
 import org.crandor.game.interaction.OptionHandler;
 import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
-import org.crandor.game.system.script.context.ShopInstruction;
 import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
+
+/**
+ * Handles Rokuh, who runs the Nardah chocolate stall
+ * @author ceik
+ */
 
 @InitializablePlugin
 public class Rokuh extends OptionHandler {
