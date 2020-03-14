@@ -154,7 +154,7 @@ public final class PyramidPlunderOptions extends OptionHandler {
                     boolean success = success(player, Skills.THIEVING);
                     player.animate(animations[success ? 1 : 0]);
                     player.lock(2);
-                    if (success || manager.ObjectList.contains(object) ? manager.ObjectList.get(manager.ObjectList.indexOf(object)).snakeCharmed : false) {
+                    if (manager.ObjectList.contains(object) ? manager.ObjectList.get(manager.ObjectList.indexOf(object)).snakeCharmed : success) {
                         player.getPacketDispatch().sendMessage("You successfully search the urn...");
                         player.getSkills().addExperience(Skills.THIEVING, 25 + (room * 20), true);
                         player.getInventory().add(ARTIFACTS[((int)Math.floor(droom / 3))][RandomFunction.random(3)]);
