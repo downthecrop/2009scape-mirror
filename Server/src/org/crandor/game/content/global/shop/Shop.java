@@ -613,6 +613,9 @@ public class Shop {
         }
         double mod = (maxMod + minMod) / 2;
         int value = (int) (item.getDefinition().getAlchemyValue(highAlch) * mod * item.getAmount());
+        if(item.getId() == 12183){
+            value = 25 * item.getAmount();
+        }
         return value;
     }
 
