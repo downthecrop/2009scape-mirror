@@ -33,7 +33,7 @@ public abstract class CombatSwingHandler {
 	/**
 	 * The amount of experience to get per hit.
 	 */
-	public static final double EXPERIENCE_MOD = 4;
+	public static double EXPERIENCE_MOD = 4;
 
 	/**
 	 * The mapping of the special attack handlers.
@@ -368,12 +368,20 @@ public abstract class CombatSwingHandler {
 	 * @param state The battle state.
 	 */
 	public void adjustBattleState(Entity entity, Entity victim, BattleState state) {
+		this.EXPERIENCE_MOD = 4;
 		int totalHit = 0;
 		if (entity instanceof Player) {
 			((Player) entity).getFamiliarManager().adjustBattleState(state);
 		}
 		entity.sendImpact(state);
 		victim.checkImpact(state);
+		//Prevents lumbridge dummies from dying (true to how rs3 / runescape in 2009 does it)
+		if((victim.getId() == 4474 && this.type == CombatStyle.MAGIC) || (victim.getId() == 7891 && this.type == CombatStyle.MELEE)) {
+			this.EXPERIENCE_MOD = 0.1;
+			victim.fullRestore();
+			if(state.getEstimatedHit() >= 15){state.setEstimatedHit(14);};
+			if(state.getSecondaryHit() >= 15){state.setSecondaryHit(14);}
+		}
 		if (state.getEstimatedHit() > 0) {
 			state.setEstimatedHit(getFormatedHit(entity, victim, state, state.getEstimatedHit()));
 			totalHit += state.getEstimatedHit();
