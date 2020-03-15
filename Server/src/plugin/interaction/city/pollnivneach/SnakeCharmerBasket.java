@@ -22,15 +22,15 @@ public class SnakeCharmerBasket extends UseWithHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        addHandler(6230, OBJECT_TYPE, this);
         new AliTheSnakeCharmer().init();
+        addHandler(6230, OBJECT_TYPE, this);
         return this;
     }
 
     @Override
     public boolean handle(NodeUsageEvent event) {
         final Player player = event.getPlayer();
-        if (player.getInventory().containsItem(new Item(995,3))) {
+        if (player.getInventory().containsItem(new Item(995, 3))) {
             player.getInventory().remove(new Item(995, 3));
             player.getDialogueInterpreter().open(1872, true);
         }
@@ -56,11 +56,12 @@ public class SnakeCharmerBasket extends UseWithHandler {
         @Override
         public boolean open(Object... args) {
             if (args.length > 0) {
-                stage = 5;
-            } else {
                 player("Wow a snake charmer. Can I have a go? Please?");
-                stage = 0;
+                stage = 5;
+                return true;
             }
+            player("Wow a snake charmer. Can I have a go? Please?");
+            stage = 0;
             return true;
         }
 
@@ -91,7 +92,7 @@ public class SnakeCharmerBasket extends UseWithHandler {
                             GroundItemManager.create(new Item(4605), player.getLocation());
                             GroundItemManager.create(new Item(4606), player.getLocation());
                         }
-                        npc(FacialExpression.ANNOYED, "If it means that you'll leave me alone, I would give you"," my snake harming super starter kit complete","with flute and basket.");
+                        npc(FacialExpression.ANNOYED, "If it means that you'll leave me alone, I would give you"," my snake charming super starter kit complete","with flute and basket.");
                     } else {
                         npc(FacialExpression.ANGRY,"I already gave you one!");
                     }
