@@ -97,6 +97,7 @@ public final class CombatPulse extends Pulse {
 
 	@Override
 	public boolean pulse() {
+
 		if (victim == null || DeathTask.isDead(entity) || DeathTask.isDead(victim)) {
 			return true;
 		}
@@ -372,6 +373,10 @@ public final class CombatPulse extends Pulse {
 			return;
 		}
 		if (victim == this.victim && isAttacking()) {
+			return;
+		}
+		//makes sure lumbridge dummies can't attack back (lol)
+		if (victim instanceof Player && (this.entity.getId() == 4474 || this.entity.getId() == 7891)){
 			return;
 		}
 		if (victim instanceof NPC) {

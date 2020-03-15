@@ -1,14 +1,17 @@
 package plugin.interaction.city;
 
 import org.crandor.cache.def.impl.ObjectDefinition;
+import org.crandor.game.content.skill.Skills;
 import org.crandor.game.content.skill.member.agility.AgilityHandler;
 import org.crandor.game.interaction.OptionHandler;
 import org.crandor.game.node.Node;
+import org.crandor.game.node.entity.impl.ForceMovement;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.object.GameObject;
 import org.crandor.game.node.object.ObjectBuilder;
 import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
+import org.crandor.game.world.map.Direction;
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.plugin.InitializablePlugin;
@@ -26,6 +29,8 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
 		ObjectDefinition.forId(190).getConfigurations().put("option:open", this);
 		ObjectDefinition.forId(1967).getConfigurations().put("option:open", this);
 		ObjectDefinition.forId(1968).getConfigurations().put("option:open", this);
+		ObjectDefinition.forId(9316).getConfigurations().put("option:climb",this);
+		ObjectDefinition.forId(9317).getConfigurations().put("option:climb",this);
 		return this;
 	}
 
@@ -33,6 +38,20 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
 	public boolean handle(Player player, Node node, String option) {
 		GameObject object = (GameObject) node;
 		switch (object.getId()) {
+		case 9316:
+		case 9317:
+			final boolean scale = player.getLocation().getY() <= object.getLocation().getY();
+			final Location end = object.getLocation().transform(scale ? 3 : -3, scale ? 6 : -6, 0);
+			if (player.getSkills().getStaticLevel(Skills.AGILITY) < 50) {
+				player.getPacketDispatch().sendMessage("You must be level 50 agility or higher to climb down the rocks.");
+				break;
+			}
+			if (!scale) {
+				ForceMovement.run(player, player.getLocation(), end, Animation.create(740), Animation.create(740), Direction.SOUTH, 13).setEndAnimation(Animation.RESET);
+			} else {
+				ForceMovement.run(player, player.getLocation(), end, Animation.create(1148), Animation.create(1148), Direction.SOUTH, 13).setEndAnimation(Animation.RESET);
+			}
+			break;
 		case 1967:
 		case 1968:
 			openTreeDoor(player, object);
