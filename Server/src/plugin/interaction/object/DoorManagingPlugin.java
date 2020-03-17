@@ -6,6 +6,7 @@ import org.crandor.game.interaction.OptionHandler;
 import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.object.GameObject;
+import org.crandor.game.node.object.ObjectBuilder;
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.RegionManager;
 import org.crandor.plugin.InitializablePlugin;
@@ -23,6 +24,7 @@ public final class DoorManagingPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ObjectDefinition.setOptionHandler("open", this);
 		ObjectDefinition.setOptionHandler("close", this);
+		ObjectDefinition.setOptionHandler("shut", this);
 		return this;
 	}
 
@@ -33,6 +35,20 @@ public final class DoorManagingPlugin extends OptionHandler {
 			return true;
 		}
 		String name = object.getName().toLowerCase();
+		if (name.contains("drawers") || name.contains("wardrobe") || name.contains("cupboard")) {
+			switch(option) {
+				case "open":
+					if (object.isActive()) {
+						ObjectBuilder.replace(object, object.transform(object.getId() + 1), 80);
+					}
+					return true;
+				case "close":
+				case "shut":
+					ObjectBuilder.replace(object, object.transform(object.getId() - 1));
+					return true;
+			}
+			return true;
+		}
 		if (name.contains("trapdoor") || name.contains("trap door")) {
 			Location destination = object.getLocation().transform(0, 6400, 0);
 			if (!RegionManager.isTeleportPermitted(destination)) {
