@@ -10,6 +10,7 @@ import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.map.Direction;
 import org.crandor.game.world.map.Location;
+import org.crandor.game.world.map.path.Pathfinder;
 import org.crandor.game.world.map.path.SmartPathfinder;
 import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.game.world.update.flag.context.Graphics;
@@ -87,6 +88,7 @@ public final class NoraTHaggNPC extends AbstractNPC {
         return 50;
     }
 
+
     @Override
     public void tick() {
         super.tick();
@@ -99,9 +101,9 @@ public final class NoraTHaggNPC extends AbstractNPC {
             sendTeleport(player);
         }
         if (getLocation().equals(Location.create(2904, 3463, 0))) {
-            SmartPathfinder.find(this, Location.create(2930, 3463, 0)).walk(this);
+            Pathfinder.find(this, Location.create(2930, 3463, 0)).walk(this);
         } else if (getLocation().equals(Location.create(2930, 3463, 0))) {
-            SmartPathfinder.find(this, Location.create(2904, 3463, 0)).walk(this);
+            Pathfinder.find(this, Location.create(2904, 3463, 0)).walk(this);
         }
     }
 

@@ -2,341 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dfca1f7e-8542-4720-8cd4-dc28d3685749" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/Server/src/plugin/quest/witchs_house/BoyDialoguePlugin.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/plugin/quest/witchs_house/MouseNPC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/plugin/quest/witchs_house/NoraTHaggNPC.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/plugin/quest/witchs_house/WitchsHouse.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Server/src/plugin/quest/witchs_house/WitchsHousePlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/ServerConstants.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/ServerConstants.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/container/Container.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/container/Container.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/ame/AntiMacroDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/ame/AntiMacroDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/dialogue/DialoguePlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/dialogue/DialoguePlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/eco/ge/GrandExchange$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/eco/ge/GrandExchange$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/eco/ge/GrandExchange$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/eco/ge/GrandExchange$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/eco/ge/GrandExchange$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/eco/ge/GrandExchange$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/eco/ge/GrandExchange$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/eco/ge/GrandExchange$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/eco/ge/GrandExchange.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/eco/ge/GrandExchange.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/global/action/ClimbActionHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/global/action/ClimbActionHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/global/action/ClimbActionHandler$ClimbDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/global/action/ClimbActionHandler$ClimbDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/global/action/ClimbActionHandler$ClimbDialogue$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/global/action/ClimbActionHandler$ClimbDialogue$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/global/consumable/Consumables.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/global/consumable/Consumables.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/global/shop/Shop.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/global/shop/Shop.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/Skills.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/Skills.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/free/magic/MagicSpell.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/free/magic/MagicSpell.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/farming/patch/Bushes$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/farming/patch/Bushes$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/farming/patch/FruitTrees$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/farming/patch/FruitTrees$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/hunter/bnet/BNetPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/hunter/bnet/BNetPulse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$10.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$11.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$12.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$13.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$14.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$15.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$16.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks$9.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/slayer/Tasks.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/summoning/familiar/Familiar.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/summoning/familiar/Familiar.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/thieving/Pickpocket.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/content/skill/member/thieving/Pickpocket.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/Entity$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/Entity$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/Entity$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/Entity$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/Entity$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/Entity$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/Entity$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/Entity$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/Entity$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/Entity$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/Entity.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/Entity.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/CombatPulse$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/CombatPulse$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/CombatPulse$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/CombatPulse$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/CombatPulse$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/CombatPulse$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/CombatPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/CombatPulse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/CombatSwingHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/CombatSwingHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/handlers/MagicSwingHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/handlers/MagicSwingHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/handlers/MeleeSwingHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/handlers/MeleeSwingHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/handlers/RangeSwingHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/handlers/RangeSwingHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/handlers/RangeSwingHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/combat/handlers/RangeSwingHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/npc/NPC$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/npc/NPC$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/npc/NPC.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/npc/NPC.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/player/Player.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/player/Player.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/player/ai/AIPlayer$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/player/ai/AIPlayer$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/player/info/login/PlayerParser.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/player/info/login/PlayerParser.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/player/link/ActivityData.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/player/link/ActivityData.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/player/link/IronmanMode.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/node/entity/player/link/IronmanMode.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/system/mysql/impl/HighscoreSQLHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/system/mysql/impl/HighscoreSQLHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/system/mysql/impl/ItemConfigSQLHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/system/mysql/impl/ItemConfigSQLHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/system/script/ScriptManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/system/script/ScriptManager.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/world/GameWorld.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/game/world/GameWorld.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/net/event/LoginWriteEvent.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/net/event/LoginWriteEvent.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/net/packet/in/ActionButtonPacket$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/net/packet/in/ActionButtonPacket$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/net/packet/in/InterfaceUseOnPacket$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/net/packet/in/InterfaceUseOnPacket$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/net/registry/AccountRegister.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/crandor/net/registry/AccountRegister.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/keldagrim/Main$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/keldagrim/Main$2.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/keldagrim/Main$3.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/keldagrim/Main$4.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/keldagrim/Main$5.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/keldagrim/Main$6.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/keldagrim/Main$7.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/keldagrim/Main$8.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/keldagrim/Main.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/runite/jagex/KeyboardListener.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/runite/jagex/KeyboardListener.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/runite/jagex/MouseListeningClass.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/org/runite/jagex/MouseListeningClass.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/bountyhunter/BountyLocateSpell$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/bountyhunter/BountyLocateSpell$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$ArmourSalesman.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$ArmourSalesman.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$BowArrowSalesman.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$BowArrowSalesman.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$GuardDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$GuardDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$LeatherWorkerDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$LeatherWorkerDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$RangingGuildDoorman.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$RangingGuildDoorman.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$TownAdvisor.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$TownAdvisor.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$TribalWeaponSalesman.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$TribalWeaponSalesman.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$WarningInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin$WarningInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/guild/RangingGuildPlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/magearena/KolodionNPC$KolodionType$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/magearena/KolodionNPC$KolodionType$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/magearena/KolodionSession$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/magearena/KolodionSession$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/magearena/MageArenaPlugin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/magearena/MageArenaPlugin$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/magearena/MageArenaPlugin$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/magearena/MageArenaPlugin$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/magearena/MageArenaPlugin$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/magearena/MageArenaPlugin$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/magearena/MageArenaZone$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/magearena/MageArenaZone$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/mta/TelekineticGrabSpell$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/mta/TelekineticGrabSpell$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/mta/impl/GraveyardZone$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/mta/impl/GraveyardZone$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/pestcontrol/PestControlActivityPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/pestcontrol/PestControlActivityPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/pestcontrol/PestControlActivityPlugin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/pestcontrol/PestControlActivityPlugin$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/pestcontrol/monsters/PCShifterNPC$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/pestcontrol/monsters/PCShifterNPC$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/pestcontrol/reward/PCRewardInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/pestcontrol/reward/PCRewardInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/pyramidplunder/GuardMummyDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/pyramidplunder/GuardMummyDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/pyramidplunder/PyramidOptionHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/pyramidplunder/PyramidOptionHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/stronghold/StrongHoldSecurityPlugin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/stronghold/StrongHoldSecurityPlugin$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/stronghold/playersafety/GuardDialoguePlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/stronghold/playersafety/GuardDialoguePlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/tzhaar/TzhaarFightCaveNPC$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/tzhaar/TzhaarFightCaveNPC$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/tzhaar/TzhaarFightCavesPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/tzhaar/TzhaarFightCavesPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/tzhaar/TzhaarFightCavesPlugin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/tzhaar/TzhaarFightCavesPlugin$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/tzhaar/TzhaarFightCavesPlugin$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/tzhaar/TzhaarFightCavesPlugin$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/wguild/cyclopes/CyclopesRoom$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/wguild/cyclopes/CyclopesRoom$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/wguild/shot/ShotPutRoom$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/wguild/shot/ShotPutRoom$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/wguild/shot/ShotPutRoom$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/activity/wguild/shot/ShotPutRoom$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/combat/special/ChainhitSpecialHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/combat/special/ChainhitSpecialHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/combat/special/ChainhitSpecialHandler$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/combat/special/ChainhitSpecialHandler$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/combat/special/ChainhitSpecialHandler$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/combat/special/ChainhitSpecialHandler$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/combat/special/SnapshotSpecialHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/combat/special/SnapshotSpecialHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/command/BetaCommandPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/command/BetaCommandPlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/command/PlayerCommandPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/command/PlayerCommandPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/command/PlayerCommandPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/command/PlayerCommandPlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/cutscene/DBRCutscenePlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/cutscene/DBRCutscenePlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/cutscene/GECutscenePlugin$BrugsenBursenDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/cutscene/GECutscenePlugin$BrugsenBursenDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/cutscene/JulietDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/cutscene/JulietDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/cutscene/JulietDialogue$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/cutscene/JulietDialogue$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/cutscene/RJCutscenePlugin$RomeoDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/cutscene/RJCutscenePlugin$RomeoDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/cutscene/RJCutscenePlugin$RomeoDialogue$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/cutscene/RJCutscenePlugin$RomeoDialogue$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/AablaDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/AablaDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/CaptainBentleyDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/CaptainBentleyDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/CookingDialoguePlugin$MeatPlugin$MeatProperty.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/CookingDialoguePlugin$MeatPlugin$MeatProperty.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/CookingDialoguePlugin$MeatPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/CookingDialoguePlugin$MeatPlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/CookingDialoguePlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/CookingDialoguePlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/GertrudesCatDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/GertrudesCatDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/GertrudesCatDialogue$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/GertrudesCatDialogue$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/GertrudesCatDialogue$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/GertrudesCatDialogue$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/GnomeSpiritTreeDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/GnomeSpiritTreeDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/GrillieGroatsDialogue.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/HairdresserDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/HairdresserDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/HansDialoguePlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/HansDialoguePlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/KittenInteractDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/KittenInteractDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/LokarSearunnerDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/LokarSearunnerDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/MagicTutorDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/MagicTutorDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/MithrilSeedsDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/MithrilSeedsDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/PrinceAliDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/PrinceAliDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/PrinceAliDialogue$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/PrinceAliDialogue$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/ProfessorOddensteinPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/ProfessorOddensteinPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/RugMerchantDialogue$RugDestination$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/RugMerchantDialogue$RugDestination$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/ShantayDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/ShantayDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/ShantayGuard$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/ShantayGuard$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/SilkMerchantPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/SilkMerchantPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/SorcceresDialouge$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/SorcceresDialouge$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/ThessaliaDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/ThessaliaDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/TownCrierDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/TownCrierDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/TraibornDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/dialogue/TraibornDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/christmas/ChristmasEvent$ChristmasEventOptionPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/christmas/ChristmasEvent$ChristmasEventOptionPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/christmas/ChristmasEvent$PeltOptionHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/christmas/ChristmasEvent$PeltOptionHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/christmas/ChristmasEvent$SnowmanItemHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/christmas/ChristmasEvent$SnowmanItemHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/easter/BasketofEggsEvent$EasterBunnyDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/easter/BasketofEggsEvent$EasterBunnyDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/easter/BasketofEggsEvent$EasterBunnyDialogue$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/easter/BasketofEggsEvent$EasterBunnyDialogue$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$10.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$10.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$7.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$7.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$9.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$9.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$DarkPortalHandler$DarkPortalDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$DarkPortalHandler$DarkPortalDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$GrimReaperDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$GrimReaperDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$MuncherDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$MuncherDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$MuncherDialogue$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$MuncherDialogue$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$MuncherDialogue$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/holiday/halloween/DeathMansionEvent$MuncherDialogue$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/DraynorNodePlugin$TelescopeCutscene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/DraynorNodePlugin$TelescopeCutscene$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/GnomeStrongholdPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/GnomeStrongholdPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/GnomeStrongholdPlugin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/GnomeStrongholdPlugin$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/GnomeStrongholdPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/GnomeStrongholdPlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/TrollheimPlugin$WarningCutscene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/TrollheimPlugin$WarningCutscene$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/VarrockNodePlugin$KnockatDoorDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/VarrockNodePlugin$KnockatDoorDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/WizardTowerPlugin$AuburyDialoguePlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/WizardTowerPlugin$AuburyDialoguePlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/WizardTowerPlugin$SedridorDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/WizardTowerPlugin$SedridorDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/WizardTowerPlugin$WizardMisgogDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/city/WizardTowerPlugin$WizardMisgogDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/ExperienceLampInterface$SkillInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/ExperienceLampInterface$SkillInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/ExperienceLampInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/ExperienceLampInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/FurClothingInterface$FancyDressOwnerDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/FurClothingInterface$FancyDressOwnerDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/FurClothingInterface$FurClothing.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/FurClothingInterface$FurClothing.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/FurClothingInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/FurClothingInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/HairInterfacePlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/HairInterfacePlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/ThessaliaInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/inter/ThessaliaInterface.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/item/DragonfireShieldPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/item/DragonfireShieldPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/item/GodBookPlugin$GodBookDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/item/GodBookPlugin$GodBookDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/item/LampPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/item/LampPlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/item/withobject/WaterSourcePlugin$WaterRecipient.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/item/withobject/WaterSourcePlugin$WaterRecipient.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/npc/BarcrawlPlugin$BarcrawlDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/npc/BarcrawlPlugin$BarcrawlDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/npc/BarcrawlPlugin$BarcrawlType$9$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/npc/BarcrawlPlugin$BarcrawlType$9$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/npc/ProbitaNPC$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/npc/ProbitaNPC$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/npc/sorceress_app/SorceressApprenticeDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/npc/sorceress_app/SorceressApprenticeDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/BankingPlugin$BankDepositInterface$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/BankingPlugin$BankDepositInterface$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/BankingPlugin$BankingInterface$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/BankingPlugin$BankingInterface$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/DoorManagingPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/DoorManagingPlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/LumbridgeBasementPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/LumbridgeBasementPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/ShootingStarPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/ShootingStarPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/ShootingStarPlugin$ShootingStarMiningPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/ShootingStarPlugin$ShootingStarMiningPulse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/ShootingStarPlugin$StarSpriteDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/ShootingStarPlugin$StarSpriteDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/WildernessLeverPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/WildernessLeverPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/sorceress/GardenObjectsPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/sorceress/GardenObjectsPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/sorceress/GardenObjectsPlugin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/sorceress/GardenObjectsPlugin$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/sorceress/GardenObjectsPlugin$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/object/sorceress/GardenObjectsPlugin$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/player/AttackOptionPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/interaction/player/AttackOptionPlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/BorkNPC$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/BorkNPC$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/BorkNPC$2$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/BorkNPC$2$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/BorkNPC$2$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/BorkNPC$2$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/BorkNPC$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/BorkNPC$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/BorkNPC$BorkCutscene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/BorkNPC$BorkCutscene$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/ChaosElementalNPC$ChaosCombatHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/ChaosElementalNPC$ChaosCombatHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/ChaosElementalNPC$ChaosCombatHandler$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/ChaosElementalNPC$ChaosCombatHandler$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/ElementalWizardNPC$MaligniusMortifer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/ElementalWizardNPC$MaligniusMortifer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/HansNPC.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/HansNPC.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/KalphiteQueenNPC$KQCombatSwingHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/KalphiteQueenNPC$KQCombatSwingHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/corp/CorporealBeastNPC$CombatHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/corp/CorporealBeastNPC$CombatHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/corp/CorporealBeastNPC$CombatHandler$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/corp/CorporealBeastNPC$CombatHandler$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/familiar/DreadfowlNPC$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/familiar/DreadfowlNPC$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/familiar/MacawNPC$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/familiar/MacawNPC$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/familiar/SpiritWolfNPC$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/npc/familiar/SpiritWolfNPC$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/animal_mag/AliceHusbandDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/animal_mag/AliceHusbandDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/animal_mag/AliceHusbandDialogue$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/animal_mag/AliceHusbandDialogue$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/animal_mag/AliceHusbandDialogue$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/animal_mag/AliceHusbandDialogue$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/animal_mag/AliceHusbandDialogue$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/animal_mag/AliceHusbandDialogue$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/animal_mag/AliceHusbandDialogue$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/animal_mag/AliceHusbandDialogue$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/demonslayer/DemonSlayerCutscene$DelrithDialoguePlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/demonslayer/DemonSlayerCutscene$DelrithDialoguePlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/demonslayer/DemonSlayerCutscene$DenathDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/demonslayer/DemonSlayerCutscene$DenathDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/demonslayer/GypsyArisDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/demonslayer/GypsyArisDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/demonslayer/GypsyArisDialogue$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/demonslayer/GypsyArisDialogue$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/demonslayer/SirPyrsinDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/demonslayer/SirPyrsinDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/demonslayer/TraibornDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/demonslayer/TraibornDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayer$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayer$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$DSNedDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$DSNedDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$DSNedDialogue$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$DSNedDialogue$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$DSNedDialogue$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$DSNedDialogue$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$DSNedDialogue$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$DSNedDialogue$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$DSNedDialogue$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$DSNedDialogue$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$DSNedDialogue$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/DragonSlayerCutscene$DSNedDialogue$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/ElvargNPC$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/ElvargNPC$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/ElvargNPC$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/ElvargNPC$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/OziachDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/dragonslayer/OziachDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/gdiplomacy/GDiplomacyCutscene$GoblinGeneralDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/gdiplomacy/GDiplomacyCutscene$GoblinGeneralDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/merlincrystal/MerlinCrystalPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/merlincrystal/MerlinCrystalPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/AnaDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/AnaDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/DesertGuardDialogue$DesertGuardNPC$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/DesertGuardDialogue$DesertGuardNPC$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/MaleSlaveDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/MaleSlaveDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$AnnaCartHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$AnnaCartHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$AnnaCartHandler$AnnaCartCutscene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$AnnaCartHandler$AnnaCartCutscene$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$BarrelDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$BarrelDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$CartDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$CartDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$MineCartDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$MineCartDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$MineCartDialogue$MiningCartCutscene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$MineCartDialogue$MiningCartCutscene$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$WinchCutscene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/touristrap/TouristTrapPlugin$WinchCutscene$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/AlmeraDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/AlmeraDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/GolrieDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/GolrieDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin$WaterfallUseWithHandler.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallPlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallTreeDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/waterfall/WaterfallTreeDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/wlbelow/WLBelowCutscene$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/wlbelow/WLBelowCutscene$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/wlbelow/WLBelowCutscene$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/wlbelow/WLBelowCutscene$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/wlbelow/WLBelowCutscene$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/wlbelow/WLBelowCutscene$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/wlbelow/WLBelowCutscene$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/wlbelow/WLBelowCutscene$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/wlbelow/WLBelowCutscene$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/wlbelow/WLBelowCutscene$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/wlbelow/WLBelowCutscene$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/wlbelow/WLBelowCutscene$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/BarbarianOutpostCourse$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/BarbarianOutpostCourse$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/BarbarianOutpostCourse$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/BarbarianOutpostCourse$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/GnomeStrongholdCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/GnomeStrongholdCourse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/WildernessCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/WildernessCourse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/pyramid/AgilityPyramidCourse$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/pyramid/AgilityPyramidCourse$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/pyramid/AgilityPyramidCourse$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/pyramid/AgilityPyramidCourse$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/pyramid/AgilityPyramidCourse$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/pyramid/AgilityPyramidCourse$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/pyramid/AgilityPyramidCourse$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/pyramid/AgilityPyramidCourse$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/pyramid/AgilityPyramidCourse$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/pyramid/AgilityPyramidCourse$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/pyramid/AgilityPyramidCourse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/agility/pyramid/AgilityPyramidCourse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/construction/decoration/StaircasePlugin$ClimbPohLadder$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/construction/decoration/StaircasePlugin$ClimbPohLadder$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/construction/decoration/StaircasePlugin$ClimbPohLadder$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/construction/decoration/StaircasePlugin$ClimbPohLadder$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/construction/npc/HouseServantDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/construction/npc/HouseServantDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/construction/npc/HouseServantDialogue$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/construction/npc/HouseServantDialogue$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/construction/npc/HouseServantDialogue$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/construction/npc/HouseServantDialogue$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/cooking/CookingDialoguePlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/cooking/CookingDialoguePlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/cooking/CookingPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/cooking/CookingPlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/crafting/MoltenGlassMakePlugin$MoltenGlassPulse.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/crafting/MoltenGlassMakePlugin$MoltenGlassPulse.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/crafting/MoltenGlassMakePlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/crafting/MoltenGlassMakePlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/magic/ModernTeleportPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/magic/ModernTeleportPlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/magic/lunar/DreamSpell$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/magic/lunar/DreamSpell$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/magic/lunar/DreamSpell$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/magic/lunar/DreamSpell$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/magic/lunar/SpellbookSwapSpell$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/magic/lunar/SpellbookSwapSpell$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/slayer/SlayerMasterDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/slayer/SlayerMasterDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/slayer/dungeon/LumbridgeDungeon$WallBeastNPC.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/slayer/dungeon/LumbridgeDungeon$WallBeastNPC.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/summoning/SummoningTrainingRoom$FluffyCutscene$FluffyDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/summoning/SummoningTrainingRoom$FluffyCutscene$FluffyDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/summoning/SummoningTrainingRoom$FluffyCutscene$FluffyDialogue$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/summoning/SummoningTrainingRoom$FluffyCutscene$FluffyDialogue$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/summoning/SummoningTrainingRoom$FluffyCutscene$FluffyDialogue$3.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/summoning/SummoningTrainingRoom$FluffyCutscene$FluffyDialogue$3.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/summoning/SummoningTrainingRoom$FluffyCutscene$FluffyDialogue$4.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/summoning/SummoningTrainingRoom$FluffyCutscene$FluffyDialogue$4.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/summoning/SummoningTrainingRoom$FluffyCutscene$FluffyDialogue$5.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/summoning/SummoningTrainingRoom$FluffyCutscene$FluffyDialogue$5.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/summoning/SummoningTrainingRoom$FluffyCutscene$FluffyDialogue$6.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/skill/summoning/SummoningTrainingRoom$FluffyCutscene$FluffyDialogue$6.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/tutorial/MasterChefDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/tutorial/MasterChefDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/tutorial/TutorialCompletionDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/tutorial/TutorialCompletionDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/DesertZone.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/DesertZone.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$CreditStore$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$CreditStore$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$CreditStore$2.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$CreditStore$2.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$CreditStore.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$CreditStore.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$GnomeTravellerPlugin$GnomeDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$GnomeTravellerPlugin$GnomeDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$GnomeTravellerPlugin.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$GnomeTravellerPlugin.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$RewardTraderDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$RewardTraderDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$TeleporterDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$TeleporterDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$TeleporterDialogue.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/GrandExchangeZone$TeleporterDialogue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/rellekka/JarvaldDialogue$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/rellekka/JarvaldDialogue$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/wbisland/WaterBirthDungeonZone$1$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/wbisland/WaterBirthDungeonZone$1$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/wbisland/WaterBirthDungeonZone$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/zone/wbisland/WaterBirthDungeonZone$1.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/RS-2009.iml" beforeDir="false" afterPath="$PROJECT_DIR$/RS-2009.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/org/crandor/game/container/Container.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/org/crandor/game/container/Container.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/org/crandor/game/content/dialogue/DialoguePlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/org/crandor/game/content/dialogue/DialoguePlugin.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Server/src/plugin/interaction/object/DoorManagingPlugin.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/plugin/interaction/object/DoorManagingPlugin.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/witchs_house/NoraTHaggNPC$1.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/witchs_house/NoraTHaggNPC$1.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/witchs_house/NoraTHaggNPC.class" beforeDir="false" afterPath="$PROJECT_DIR$/CompiledServer/production/RS-2009/plugin/quest/witchs_house/NoraTHaggNPC.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Server/src/plugin/quest/witchs_house/NoraTHaggNPC.java" beforeDir="false" afterPath="$PROJECT_DIR$/Server/src/plugin/quest/witchs_house/NoraTHaggNPC.java" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -358,18 +26,6 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="-142">
               <caret line="20" column="3" selection-start-line="20" selection-start-column="3" selection-end-line="20" selection-end-column="3" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/Server/src/plugin/quest/witchs_house/BoyDialoguePlugin.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="848">
-              <caret line="117" column="25" selection-start-line="117" selection-start-column="25" selection-end-line="117" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -406,17 +62,72 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Server/src/plugin/quest/witchs_house/NoraTHaggNPC.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="43" column="45" lean-forward="true" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
+            <state relative-caret-position="1088">
+              <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#2470#2471#0" expanded="true" />
-                <element signature="e#2567#2568#0" expanded="true" />
-                <element signature="e#2634#2635#0" expanded="true" />
+                <element signature="e#2521#2522#0" expanded="true" />
+                <element signature="e#2618#2619#0" expanded="true" />
+                <element signature="e#2652#2653#0" expanded="true" />
+                <element signature="e#2685#2686#0" expanded="true" />
                 <element signature="e#2680#2681#0" expanded="true" />
                 <element signature="e#2724#2725#0" expanded="true" />
-                <element signature="e#4957#4958#0" expanded="true" />
+                <element signature="e#4754#4755#0" expanded="true" />
+                <element signature="e#4798#4799#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/world/map/path/Path.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="151">
+              <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/node/entity/Entity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="151">
+              <caret line="744" column="29" selection-start-line="744" selection-start-column="29" selection-end-line="744" selection-end-column="29" />
+              <folding>
+                <element signature="e#18113#18114#0" expanded="true" />
+                <element signature="e#18139#18140#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/src/plugin/cutscene/DBRCutscenePlugin.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="135">
+              <caret line="629" column="96" lean-forward="true" selection-start-line="628" selection-start-column="16" selection-end-line="629" selection-end-column="96" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/world/map/path/Pathfinder.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="144">
+              <caret line="88" column="24" selection-start-line="88" selection-start-column="24" selection-end-line="88" selection-end-column="24" />
+              <folding>
+                <element signature="e#2329#2330#0" expanded="true" />
+                <element signature="e#2380#2381#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Server/src/plugin/quest/animal_mag/AliceHusbandDialogue.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="327">
+              <caret line="705" column="12" selection-start-line="705" selection-start-column="12" selection-end-line="705" selection-end-column="12" />
             </state>
           </provider>
         </entry>
@@ -485,7 +196,7 @@
   <component name="JRebelWorkspace">
     <option name="jrebelEnabledAutocompile" value="true" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="width" value="977" />
     <option name="height" value="1050" />
@@ -636,8 +347,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="848" extended-state="6" />
-    <editor active="true" />
+    <frame x="-7" y="-7" width="1550" height="848" extended-state="7" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25167784" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -658,9 +368,9 @@
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
-      <window_info active="true" anchor="bottom" id="JRebel Executor" order="10" sideWeight="0.47516778" visible="true" weight="0.325419" />
-      <window_info anchor="bottom" id="Messages" order="11" sideWeight="0.47449663" weight="0.3282123" />
-      <window_info anchor="bottom" id="JRebel Console" order="12" sideWeight="0.5248322" side_tool="true" visible="true" weight="0.325419" />
+      <window_info anchor="bottom" id="JRebel Executor" order="10" sideWeight="0.47315437" weight="0.325419" />
+      <window_info active="true" anchor="bottom" id="Messages" order="11" sideWeight="0.46979865" visible="true" weight="0.3282123" />
+      <window_info anchor="bottom" id="JRebel Console" order="12" sideWeight="0.5302013" side_tool="true" visible="true" weight="0.3282123" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -672,41 +382,6 @@
     </layout>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/quest/lostcity/DramenStaffPlugin.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-224">
-          <caret line="12" column="19" selection-start-line="12" selection-start-column="19" selection-end-line="12" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/quest/lostcity/ShamusDialogue.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1696">
-          <caret line="10" column="19" selection-start-line="10" selection-start-column="19" selection-end-line="10" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/quest/dragonslayer/WormbrainNPC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-78">
-          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/quest/dragonslayer/DSNedNPC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="400">
-          <caret line="50" lean-forward="true" selection-start-line="11" selection-start-column="28" selection-end-line="50" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/plugin/quest/dragonslayer/MazeGhostNPC.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-64">
-          <caret line="14" column="19" selection-start-line="14" selection-start-column="19" selection-end-line="14" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/src/plugin/skill/farming/ToolLeprachaunPlugin.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="151">
@@ -1014,13 +689,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/world/map/path/Pathfinder.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="10736">
-          <caret line="680" column="13" selection-start-line="680" selection-start-column="13" selection-end-line="680" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Server/src/plugin/quest/witchs_house/BoyDialoguePlugin.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="848">
@@ -1074,18 +742,70 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/world/map/path/Pathfinder.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="144">
+          <caret line="88" column="24" selection-start-line="88" selection-start-column="24" selection-end-line="88" selection-end-column="24" />
+          <folding>
+            <element signature="e#2329#2330#0" expanded="true" />
+            <element signature="e#2380#2381#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/plugin/quest/animal_mag/AliceHusbandDialogue.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="327">
+          <caret line="705" column="12" selection-start-line="705" selection-start-column="12" selection-end-line="705" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/node/entity/Entity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="744" column="29" selection-start-line="744" selection-start-column="29" selection-end-line="744" selection-end-column="29" />
+          <folding>
+            <element signature="e#18113#18114#0" expanded="true" />
+            <element signature="e#18139#18140#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/plugin/cutscene/DBRCutscenePlugin.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="135">
+          <caret line="629" column="96" lean-forward="true" selection-start-line="628" selection-start-column="16" selection-end-line="629" selection-end-column="96" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/org/crandor/game/world/map/path/Path.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="42" column="16" selection-start-line="42" selection-start-column="16" selection-end-line="42" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Server/src/plugin/npc/familiar/SpiritWolfNPC.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="151">
+          <caret line="88" column="16" selection-start-line="88" selection-start-column="16" selection-end-line="88" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Server/src/plugin/quest/witchs_house/NoraTHaggNPC.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="43" column="45" lean-forward="true" selection-start-line="43" selection-start-column="45" selection-end-line="43" selection-end-column="45" />
+        <state relative-caret-position="1088">
+          <caret line="90" lean-forward="true" selection-start-line="90" selection-end-line="90" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#2470#2471#0" expanded="true" />
-            <element signature="e#2567#2568#0" expanded="true" />
-            <element signature="e#2634#2635#0" expanded="true" />
+            <element signature="e#2521#2522#0" expanded="true" />
+            <element signature="e#2618#2619#0" expanded="true" />
+            <element signature="e#2652#2653#0" expanded="true" />
+            <element signature="e#2685#2686#0" expanded="true" />
             <element signature="e#2680#2681#0" expanded="true" />
             <element signature="e#2724#2725#0" expanded="true" />
-            <element signature="e#4957#4958#0" expanded="true" />
+            <element signature="e#4754#4755#0" expanded="true" />
+            <element signature="e#4798#4799#0" expanded="true" />
           </folding>
         </state>
       </provider>
