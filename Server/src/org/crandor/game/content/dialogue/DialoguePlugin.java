@@ -144,6 +144,10 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 		}
 	}
 
+	public void finish() {
+		setStage(-1);
+	}
+
 	@Override
 	public Object fireEvent(String identifier, Object... args) {
 		return null;
@@ -189,6 +193,10 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 	 */
 	public Component npc(int id, final String... messages) {
 		return interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, messages);
+	}
+
+	public Component sendDialogue(String... messages) {
+		return interpreter.sendDialogue(messages);
 	}
 	
 	/**
