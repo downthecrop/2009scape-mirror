@@ -7,11 +7,11 @@ import org.crandor.net.packet.context.RunScriptContext;
 
 /**
  * The run script outgoing packet.
- * @author Emperor
+ * @author Snickerize
  */
 public class RunScriptPacket implements OutgoingPacket<RunScriptContext> {
 
-	@Override
+	/*@Override
 	public void send(RunScriptContext context) {
 		String string = context.getString();
 		Object[] objects = context.getObjects();
@@ -27,6 +27,27 @@ public class RunScriptPacket implements OutgoingPacket<RunScriptContext> {
 			}
 			j++;
 		}
+		buffer.putInt(context.getId());
+		context.getPlayer().getDetails().getSession().write(buffer);
+	}*/
+	@Override
+	public void send(RunScriptContext context) {
+		String types = context.getString();
+		Object[] objects = context.getObjects();
+		IoBuffer buffer = new IoBuffer(115, PacketHeader.SHORT);
+		buffer.putShort(context.getPlayer().getInterfaceManager().getPacketCount(1));
+
+		buffer.putString(types);
+		int j = 0;
+		for (int i = (types.length() - 1); i >= 0; i--) {
+			if (types.charAt(i) == 's') {
+				buffer.putString((String) objects[j]);
+			} else {
+				buffer.putInt((Integer) objects[j]);
+			}
+			j++;
+		}
+
 		buffer.putInt(context.getId());
 		context.getPlayer().getDetails().getSession().write(buffer);
 	}
