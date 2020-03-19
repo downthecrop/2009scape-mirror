@@ -48,7 +48,7 @@ public final class MysteryBoxPlugin extends OptionHandler {
     	new ChanceItem(390, 18, 26, DropFrequency.UNCOMMON),//raw manta ray
     	new ChanceItem(396, 20, 28, DropFrequency.UNCOMMON),//raw sea turtle
     	new ChanceItem(5297, 4, 11, DropFrequency.UNCOMMON),//irit seed
-    	new ChanceItem(12183, 2000, 9999, DropFrequency.UNCOMMON),//spirit shard
+    	new ChanceItem(12183, 25, 200, DropFrequency.UNCOMMON),//spirit shard
     	new ChanceItem(11255, 1, 3, DropFrequency.UNCOMMON),//ninja impling jar
     	new ChanceItem(2358, 15, 28, DropFrequency.UNCOMMON),//noted gold bar
     	new ChanceItem(450, 16, 27, DropFrequency.UNCOMMON),//addy ore
