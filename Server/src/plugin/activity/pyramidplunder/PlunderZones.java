@@ -1,6 +1,9 @@
 package plugin.activity.pyramidplunder;
 import org.crandor.game.node.entity.Entity;
 import org.crandor.game.node.entity.player.Player;
+import org.crandor.game.system.task.LocationLogoutTask;
+import org.crandor.game.system.task.LogoutTask;
+import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.zone.MapZone;
 import org.crandor.game.world.map.zone.ZoneBorders;
 import org.crandor.game.world.map.zone.ZoneBuilder;
@@ -63,6 +66,7 @@ public class PlunderZones implements Plugin<Object> {
             if(e instanceof Player) {
                 e.asPlayer().getPacketDispatch().sendMessage("<col=7f03ff>Room: " + (roomnum) + " Level required: " + (21 + ((roomnum - 1) * 10)));
                 e.asPlayer().getPlunderObjectManager().resetObjectsFor(e.asPlayer());
+                e.asPlayer().addExtension(LogoutTask.class, new LocationLogoutTask(12, Location.create(3288, 2801, 0)));
             }
             return true;
         }
