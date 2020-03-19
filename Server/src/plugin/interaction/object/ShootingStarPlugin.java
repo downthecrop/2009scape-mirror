@@ -742,7 +742,7 @@ public class ShootingStarPlugin extends OptionHandler {
 					int cosmicRunes = (int) (Math.ceil(0.76 * dust) * AMPLIFIER);
 					int astralRunes = (int) (Math.ceil(0.26 * dust) * AMPLIFIER);
 					int goldOre = (int) (Math.ceil(0.1 * dust) * AMPLIFIER);
-					int coins = (int) (Math.ceil(50.1 * dust) * AMPLIFIER);
+					int coins = (int) (Math.ceil((dust * 40) > 90000 ? 90000 : 40.0 * dust) * AMPLIFIER); // limits the amount of gp per turn-in to 90k, same as 2009 rs, and minimum from all stardust from a level 1 star works out to 50k, same as rs in 2009
 					player.getInventory().add(new Item(COSMIC_RUNE, cosmicRunes), player);
 					player.getInventory().add(new Item(ASTRAL_RUNE, astralRunes), player);
 					player.getInventory().add(new Item(GOLD_ORE, goldOre), player);
