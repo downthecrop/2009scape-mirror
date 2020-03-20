@@ -391,4 +391,7 @@ public final class PacketDispatch {
 		return context;
 	}
 
+	public void sendScriptConfigs(int id, int value, String type, Object... params) {
+		PacketRepository.send(CSConfigPacket.class, new CSConfigContext(player, id, value, type, params));
+	}
 }
