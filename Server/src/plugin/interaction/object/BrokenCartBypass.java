@@ -42,9 +42,9 @@ public class BrokenCartBypass extends OptionHandler {
         Location location = new Location(0,0);
         Location playerloc = new Location(player.getLocation().getX(),player.getLocation().getY());
         if(options.equals("look-at")) {
-            if (playerloc.getX() == 2880 && playerloc.getY() >= 2951 && playerloc.getY() <= 2953) {
+            if (playerloc.getX() > 2878) {
                 location = new Location(2876, 2952);
-            } else if (playerloc.getX() == 2876 && playerloc.getY() >= 2951 && playerloc.getY() <= 2953) {
+            } else if (playerloc.getX() < 2879) {
                 location = new Location(2880, 2952);
             }
         }

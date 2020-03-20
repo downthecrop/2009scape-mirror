@@ -182,6 +182,21 @@ public final class GameInterface extends ComponentPlugin {
 	}
 
 	/**
+	 * World map
+	 * Thanks, Snickerize!
+	 */
+	private void configureWorldMap(Player player) {
+		if (player.inCombat()) {
+			player.getPacketDispatch().sendMessage("It wouldn't be very wise opening the world map during combat.");
+			return;
+		}
+		player.getInterfaceManager().openWindowsPane(new Component(755), 2);
+		int posHash = (player.getLocation().getZ() << 28) | (player.getLocation().getX() << 14) | player.getLocation().getY();
+		player.getPacketDispatch().sendScriptConfigs(622, posHash, "", 0);
+		player.getPacketDispatch().sendScriptConfigs(674, posHash, "", 0);
+	}
+
+	/**
 	 * Method used to open the report interface.
 	 * @param player the player.
 	 */
@@ -216,27 +231,4 @@ public final class GameInterface extends ComponentPlugin {
 	 * Configures the world map for a player.
 	 * @param player The player.
 	 */
-	private void configureWorldMap(Player player) {
-		if (player.inCombat()) {
-			player.getPacketDispatch().sendMessage("It wouldn't be very wise opening the world map during combat.");
-			return;
-		}
-//		player.getInterfaceManager().openWindowsPane(new Component(755), 1);
-//		player.getPacketDispatch().sendScriptConfig(1187, 0, "ii", 0);
-		int position = player.getLocation().getX() << 14 | player.getLocation().getY() | player.getLocation().getZ() << 28;
-
-//		player.getPacketDispatch().sendScriptConfig(622, position, "ii");
-//		player.getPacketDispatch().sendScriptConfig(674, position, "ii");
-//		player.getPacketDispatch().sendScriptConfig(622, position);
-//		player.getPacketDispatch().sendScriptConfig(674, position);
-		System.out.println(position);
-
-
-		/*player.getPacketDispatch().sendWindowsPane(755, 1);
-		int hash = player.getLocation().getX() << 14 | player.getLocation().getY();
-		player.getPacketDispatch().sendRunScript(622, "",  hash);
-		player.getPacketDispatch().sendRunScript(674, "", hash);
-		PacketRepository.send(InterfaceConfig.class, new InterfaceConfigContext(player, 371, 25, true));
-		player.setAttribute("worldMap:viewing", true);*/
-	}
 }

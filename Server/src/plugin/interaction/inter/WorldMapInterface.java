@@ -21,14 +21,19 @@ public final class WorldMapInterface extends ComponentPlugin {
 		return this;
 	}
 
+	//Thanks snicker!
 	@Override
 	public boolean handle(Player player, Component component, int opcode, int button, int slot, int itemId) {
 		switch (button) {
-		case 3:
-//			player.getInterfaceManager().openWindowsPane(new Component(player.getInterfaceManager().isResizable() ? 746 : 548), 2);
-			return true;
+			case 3:
+				player.getInterfaceManager().openWindowsPane(new Component(player.getInterfaceManager().isResizable() ? 746 : 548), 2);
+				player.getPacketDispatch().sendRunScript(1187, "ii", 0, 0);
+				player.updateSceneGraph(true);
+				return true;
+			default:
+				System.err.println("World map: buttonid: " + button + ", opcode: " + opcode + ", slot: " + slot);
+				return true;
 		}
-		return false;
 	}
 
 }

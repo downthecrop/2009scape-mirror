@@ -73,6 +73,6 @@ public final class HouseZone extends MapZone {
                 return true;
             }
         }
-        return false;
+        return true;
     }
 }
