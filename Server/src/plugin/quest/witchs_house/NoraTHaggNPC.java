@@ -11,7 +11,6 @@ import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.map.Direction;
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.path.Pathfinder;
-import org.crandor.game.world.map.path.SmartPathfinder;
 import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.game.world.update.flag.context.Graphics;
 import org.crandor.net.packet.PacketRepository;
@@ -31,17 +30,18 @@ import java.util.List;
 @InitializablePlugin
 public final class NoraTHaggNPC extends AbstractNPC {
 
+    private static final Location[] MOVEMENT_PATH = {Location.create(2904, 3463, 0), Location.create(2908, 3463, 0), Location.create(2912, 3463, 0), Location.create(2916, 3463, 0), Location.create(2920, 3463, 0), Location.create(2924, 3463, 0), Location.create(2930, 3463, 0)};
     private int tilesIndex = 0;
 
     public NoraTHaggNPC() {
         super(896, Location.create(2904, 3463, 0));
     }
 
-    public NoraTHaggNPC(int id, Location location) {
+    private NoraTHaggNPC(int id, Location location) {
         super(id, location);
     }
 
-    public boolean canTeleport(Entity t) {
+    private boolean canTeleport(Entity t) {
         int playerX = t.getLocation().getX();
         int npcX = getLocation().getX();
         int[] sectors = { 2904, 2907, 2910, 2914, 2918, 2922, 2926, 2928 };
@@ -61,7 +61,9 @@ public final class NoraTHaggNPC extends AbstractNPC {
     @Override
     public void configure() {
         super.configure();
-//        configureMovementPath(Location.create(2904, 3463, 0), Location.create(2930, 3463, 0));
+//        if (isWalks()) {
+//            configureMovementPath(MOVEMENT_PATH);
+//        }
 //        setWalks(true);
     }
 
@@ -75,12 +77,8 @@ public final class NoraTHaggNPC extends AbstractNPC {
         return new int[] { 896 };
     }
 
-    public Location getRespawnLocation() {
+    private Location getRespawnLocation() {
         return Location.create(2901, 3466, 0);
-    }
-
-    public int getTilesIndex() {
-        return tilesIndex;
     }
 
     @Override
@@ -112,7 +110,7 @@ public final class NoraTHaggNPC extends AbstractNPC {
         return super.newInstance(arg);
     }
 
-    public void sendTeleport(final Player player) {
+    private void sendTeleport(final Player player) {
         player.lock();
         GameWorld.submit(new Pulse(1) {
             int delay = 0;
@@ -139,11 +137,6 @@ public final class NoraTHaggNPC extends AbstractNPC {
             }
         });
     }
-
-    public void setTilesIndex(int tilesIndex) {
-        this.tilesIndex = tilesIndex;
-    }
-
 
 }
 
