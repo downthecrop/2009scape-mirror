@@ -18,8 +18,9 @@ public class PlunderObjectManager{
     public List<PlunderObject> ObjectList = new ArrayList<PlunderObject>();
     int originalIndex;
     public boolean resetObjectsFor(Player player){
-        //loadList("plunder.tmp");
-        ListIterator oliter = ObjectList.listIterator();
+        //Completely clear the list
+        ObjectList.clear();
+        /*ListIterator oliter = ObjectList.listIterator();
         int i = 0;
         while(oliter.hasNext()){
             PlunderObject current = (PlunderObject) oliter.next();
@@ -29,7 +30,7 @@ public class PlunderObjectManager{
             if(current.snakeCharmed){
                 current.snakeCharmed = false;
             }
-        }
+        }*/
         return true;
     }
 
