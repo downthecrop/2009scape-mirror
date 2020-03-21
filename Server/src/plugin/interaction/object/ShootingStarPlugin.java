@@ -9,8 +9,11 @@ import org.crandor.game.content.skill.Skills;
 import org.crandor.game.content.skill.free.gather.SkillingTool;
 import org.crandor.game.interaction.OptionHandler;
 import org.crandor.game.node.Node;
+import org.crandor.game.node.entity.impl.PulseManager;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
+import org.crandor.game.node.entity.state.StatePulse;
+import org.crandor.game.node.entity.state.impl.DoubleOrePulse;
 import org.crandor.game.node.item.Item;
 import org.crandor.game.node.object.GameObject;
 import org.crandor.game.node.object.ObjectBuilder;
@@ -70,6 +73,11 @@ public class ShootingStarPlugin extends OptionHandler {
 	};
 
 	/**
+	 * Checks whether or not a discovery/first mine award has been given
+	 */
+	public static boolean isDiscovered = false;
+
+	/**
 	 * The star dust item id.
 	 */
 	private static final int STAR_DUST = 13727;
@@ -107,6 +115,7 @@ public class ShootingStarPlugin extends OptionHandler {
 	/**
 	 * The star updating pulse.
 	 */
+
 	private static final Pulse pulse = new Pulse(1) {
 
 		@Override
@@ -343,6 +352,7 @@ public class ShootingStarPlugin extends OptionHandler {
 				object = null;
 				crashSite = null;
 				ticks = 0;
+				isDiscovered = false;
 			}
 		}
 
@@ -469,14 +479,25 @@ public class ShootingStarPlugin extends OptionHandler {
 
 		@Override
 		public boolean checkRequirements() {
+			tool = SkillingTool.getPickaxe(player);
 			if (star == null || object == null || !object.isActive()) {
 				return false;
+			}
+			//checks if the star has been discovered and if not, awards the bonus xp. Xp can be awarded regardless of mining level as per the wiki.
+			if(!isDiscovered) {
+				player.getSkills().addExperience(Skills.MINING, 75 * player.getSkills().getStaticLevel(Skills.MINING));
+				Repository.sendNews(player.getUsername() + " is the discoverer of the crashed star near " + crashSite + "!");
+				isDiscovered = true;
+				if (player.getSkills().getLevel(Skills.MINING) < star.getMiningLevel()) {
+					return false;
+				} else {
+					return true;
+				}
 			}
 			if (player.getSkills().getLevel(Skills.MINING) < star.getMiningLevel()) {
 				player.getDialogueInterpreter().sendDialogue("You need a Mining level of at least " + star.getMiningLevel() + " in order to mine this layer.");
 				return false;
 			}
-			tool = SkillingTool.getPickaxe(player);
 			if (tool == null) {
 				player.getPacketDispatch().sendMessage("You do not have a pickaxe to use.");
 				return false;
@@ -737,7 +758,7 @@ public class ShootingStarPlugin extends OptionHandler {
 				end();
 				break;
 			case 50:
-				int dust = player.getInventory().getAmount(STAR_DUST);
+				int dust = player.getInventory().getAmount(STAR_DUST) > 200 ? 200 : player.getInventory().getAmount(STAR_DUST);
 				if (player.getInventory().remove(new Item(STAR_DUST, dust))) {
 					int cosmicRunes = (int) (Math.ceil(0.76 * dust) * AMPLIFIER);
 					int astralRunes = (int) (Math.ceil(0.26 * dust) * AMPLIFIER);
@@ -748,7 +769,12 @@ public class ShootingStarPlugin extends OptionHandler {
 					player.getInventory().add(new Item(GOLD_ORE, goldOre), player);
 					player.getInventory().add(new Item(COINS, coins), player);
 					npc("I have rewarded you by making it so you can mine", "extra ore for the next 15 minutes. Also, have " + cosmicRunes, "cosmic runes, " + astralRunes + " astral runes, " + goldOre + " gold ore and " + coins, "coins.");
+					player.setAttribute("SS Mining Bonus",System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(15));
 					player.getSavedData().getGlobalData().setStarSpriteDelay(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1));
+					int endTick = GameWorld.getTicks() + 1500;
+					player.setAttribute("SS Mining Bonus",endTick);
+					DoubleOrePulse orePulse = new DoubleOrePulse(player,endTick,GameWorld.getTicks());
+					orePulse.run();
 				}
 				stage = 52;
 				break;

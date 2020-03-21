@@ -18,12 +18,14 @@ import org.crandor.game.node.entity.player.link.diary.DiaryType;
 import org.crandor.game.node.item.Item;
 import org.crandor.game.node.object.GameObject;
 import org.crandor.game.node.object.ObjectBuilder;
+import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.map.Location;
 import org.crandor.tools.RandomFunction;
 import org.crandor.tools.StringUtils;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -175,8 +177,15 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 			} else {
 				player.getPacketDispatch().sendMessage("You get some " + ItemDefinition.forId(reward).getName().toLowerCase() + ".");
 			}
-			// Calculate if the player should receive a bonus gem
+			// Calculate if the player should receive a bonus gem or bonus ore or both
 			if (!isMiningEssence && isMining) {
+				//check for bonus ore from shooting star buff
+				if(isMining && (player.getAttribute("SS Mining Bonus", GameWorld.getTicks()) > GameWorld.getTicks())){
+					if(RandomFunction.getRandom(7) == 5) {
+						player.getPacketDispatch().sendMessage("...you manage to mine a second ore thanks to the Star Sprite.");
+						player.getInventory().add(item);
+					}
+				}
 				int chance = 282;
 				boolean altered = false;
 				if (player.getEquipment().getNew(EquipmentContainer.SLOT_RING).getId() == 2572) {
