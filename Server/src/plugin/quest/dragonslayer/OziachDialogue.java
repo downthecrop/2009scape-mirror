@@ -44,6 +44,7 @@ public final class OziachDialogue extends DialoguePlugin {
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
 		quest = player.getQuestRepository().getQuest("Dragon Slayer");
+		player.debug("" + quest.getStage(player));
 		switch (quest.getStage(player)) {
 		case 100:
 			npc("Aye, 'tis a fair day, my mighty dragon-slaying friend.");
@@ -94,6 +95,9 @@ public final class OziachDialogue extends DialoguePlugin {
 		case 20:
 			if (stage == -1) {
 				end();
+			} else {
+				end();
+				break;
 			}
 			break;
 		case 100:
