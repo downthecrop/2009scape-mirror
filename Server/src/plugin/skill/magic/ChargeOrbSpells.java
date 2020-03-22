@@ -76,8 +76,8 @@ public final class ChargeOrbSpells extends MagicSpell {
 	@Override
 	public Plugin<SpellType> newInstance(SpellType arg) throws Throwable {
 		SpellBook.MODERN.register(35, new ChargeOrbSpells(56, 2151, 571, 35, new Graphics(149, 96), Runes.WATER_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
-		SpellBook.MODERN.register(39, new ChargeOrbSpells(60, 42322, 575, 39, new Graphics(151, 96), Runes.EARTH_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
-		SpellBook.MODERN.register(46, new ChargeOrbSpells(63, 2153, 569, 46, new Graphics(152, 96), Runes.FIRE_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
+		SpellBook.MODERN.register(39, new ChargeOrbSpells(60, 29415, 575, 39, new Graphics(151, 96), Runes.EARTH_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
+		SpellBook.MODERN.register(46, new ChargeOrbSpells(63, 42322, 569, 46, new Graphics(152, 96), Runes.FIRE_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
 		SpellBook.MODERN.register(49, new ChargeOrbSpells(66, 2152, 573, 49, new Graphics(150, 96), Runes.AIR_RUNE.getItem(30), Runes.COSMIC_RUNE.getItem(3), UNPOWERED_ORB));
 		return this;
 	}
