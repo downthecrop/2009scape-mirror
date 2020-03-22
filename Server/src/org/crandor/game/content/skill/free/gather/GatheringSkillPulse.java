@@ -354,11 +354,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 		
 		if (isMining && !isMiningEssence) {
 			// Not sure what this bonus is for
-			if (isMining && player.getSavedData().getGlobalData().getStarSpriteDelay() > System.currentTimeMillis() && TimeUnit.MILLISECONDS.toMinutes(player.getSavedData().getGlobalData().getStarSpriteDelay() - System.currentTimeMillis()) >= 1425) {
-				amount += 1;
-			}
-			// Not sure what this bonus is for
-			else if (isMining && !isMiningEssence && player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).getLevel() != -1 && player.getAchievementDiaryManager().checkMiningReward(reward) && RandomFunction.random(100) <= 10) {
+			if (isMining && !isMiningEssence && player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).getLevel() != -1 && player.getAchievementDiaryManager().checkMiningReward(reward) && RandomFunction.random(100) <= 10) {
 				amount += 1;
 				player.sendMessage("Through the power of the varrock armour you receive an extra ore.");
 			}
