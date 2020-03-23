@@ -1,5 +1,6 @@
 package org.crandor;
 
+import org.crandor.game.content.eco.ge.GEAutoStock;
 import org.crandor.game.system.SystemLogger;
 import org.crandor.game.system.SystemShutdownHook;
 import org.crandor.game.system.mysql.SQLManager;
@@ -70,6 +71,7 @@ public final class Server {
 		reactor.start();
 		SystemLogger.log(GameWorld.getName() + " flags " + GameWorld.getSettings().toString());
 		SystemLogger.log(GameWorld.getName() + " started in " + t.duration(false, "") + " milliseconds.");
+		GEAutoStock.stock();
 
 	}
 

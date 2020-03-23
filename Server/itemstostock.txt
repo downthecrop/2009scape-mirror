@@ -1,0 +1,4 @@
+#ooh hash comment system uwu!
+#format is:
+#itemId:amount:percentage (as decimal)
+2349:5000:1.50

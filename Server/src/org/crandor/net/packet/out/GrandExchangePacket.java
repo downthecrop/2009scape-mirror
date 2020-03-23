@@ -29,7 +29,10 @@ public class GrandExchangePacket implements OutgoingPacket<GrandExchangeContext>
 		} else {
 			buffer.put(0).putShort(0).putInt(0).putInt(0).putInt(0).putInt(0);
 		}
+		try {
 		context.getPlayer().getSession().write(buffer);
+		} catch (Exception e) {
+		}
 	}
 
 }
