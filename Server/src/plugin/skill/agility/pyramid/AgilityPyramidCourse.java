@@ -371,6 +371,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 		GameWorld.submit(new Pulse(3, player) {
 			@Override
 			public boolean pulse() {
+				player.getSkills().addExperience(Skills.AGILITY,1000);
 				if (player.getConfigManager().get(640) == 505 || player.getConfigManager().get(640) == 515) {
 					player.getPacketDispatch().sendMessage("You find nothing on top of the pyramid.");
 					return true;
