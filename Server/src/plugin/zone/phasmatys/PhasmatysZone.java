@@ -4,16 +4,20 @@ import org.crandor.game.content.global.Bones;
 import org.crandor.game.content.global.action.ClimbActionHandler;
 import org.crandor.game.content.skill.Skills;
 import org.crandor.game.content.skill.member.agility.AgilityHandler;
+import org.crandor.game.interaction.MovementPulse;
 import org.crandor.game.interaction.NodeUsageEvent;
 import org.crandor.game.interaction.Option;
 import org.crandor.game.interaction.UseWithHandler;
 import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.Entity;
+import org.crandor.game.node.entity.lock.Lock;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
 import org.crandor.game.node.item.Item;
 import org.crandor.game.node.object.GameObject;
 import org.crandor.game.node.object.ObjectBuilder;
+import org.crandor.game.system.task.Pulse;
+import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.map.Direction;
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.map.zone.MapZone;
@@ -24,12 +28,21 @@ import org.crandor.plugin.Plugin;
 import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.PluginManager;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Handles the phasmatyz zone area.
  * @author Vexia
  */
 @InitializablePlugin
 public final class PhasmatysZone extends MapZone implements Plugin<Object> {
+	int b;
+	Bones[] bones;
+	Player player;
+	Bones bone;
+	boolean notFirst;
+
+
 
 	/**
 	 * Constructs a new {@code PhasmatysZone} {@code Object}.
@@ -56,7 +69,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
 	@Override
 	public boolean interact(Entity e, Node target, Option option) {
 		if (e.isPlayer()) {
-			Player player = e.asPlayer();
+			player = e.asPlayer();
 			if (target instanceof NPC) {
 				NPC npc = (NPC) target;
 				if ((npc.getName().toLowerCase().contains("ghost") || npc.getName().equalsIgnoreCase("velorina") || npc.getName().contains("husband")) && !hasAmulet(player)) {
@@ -103,21 +116,24 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
 			case 5244:
 				player.getDialogueInterpreter().open(1686, null, true);
 				return true;
+			case 11162:
 			case 11163:
 			case 11164:
 				GameObject obj = (GameObject) target;
 				switch (option.getName().toLowerCase()) {
-				case "wind":
-					wind(player, obj);
-					return true;
-				case "empty":
-					empty(player, obj);
-					return true;
-				case "status":
-					checkStatus(player, obj);
-					return true;
+					case "fill":
+						player.getPulseManager().run(fillPulse);
+						return true;
+					case "wind":
+						wind(player, obj);
+						return true;
+					case "empty":
+						empty(player, obj);
+						return true;
+					case "status":
+						checkStatus(player, obj);
+						return true;
 				}
-				break;
 			case 5282:
 				worship(player);
 				return true;
@@ -125,6 +141,76 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
 		}
 		return super.interact(e, target, option);
 	}
+	public Pulse emptyPulse = new Pulse(2){
+		//the bin
+		GameObject emptyobj = new GameObject(11164,3658,3525,1);
+		@Override
+		public boolean pulse(){
+			try {
+				sleep(1800L);
+			}catch(Exception e){
+				System.out.println(e);
+			}
+			//player.getProperties().setTeleportLocation(new Location(3658,3524,1));
+			player.faceLocation(new Location(3658,3525,1));
+			empty(player,emptyobj);
+			player.getWalkingQueue().reset();
+			player.getWalkingQueue().addPath(3660,3524,true);
+			player.setAttribute("bgfirst?",false);
+			player.getPulseManager().run(fillPulse);
+			return true;}
+	};
+	public Pulse windPulse = new Pulse(2) {
+		//the crank
+		GameObject windobj = new GameObject(11163,3659,3525,1);
+		@Override
+		public boolean pulse() {
+			try {
+				sleep(1800L);
+			}catch(Exception e){
+				System.out.println(e);
+			}
+			//player.getProperties().setTeleportLocation(new Location(3659,3524,1));
+			player.faceLocation(new Location(3659,3525,1));
+			wind(player,windobj);
+			player.getWalkingQueue().reset();
+			player.getWalkingQueue().addPath(3658,3524,true);
+			player.getPulseManager().run(emptyPulse);
+			return true;}
+	};
+	public Pulse fillPulse = new Pulse(2) {
+		//the hopper
+		@Override
+		public boolean pulse() {
+			if((boolean)player.getAttribute("bgfirst?",true) == false) {
+				try {
+					sleep(3000L);
+				} catch (Exception e) {
+					System.out.println(e);
+				}
+			}
+			if(hasBoneInInventory(player)){
+				bone = getBone(player);
+			}  else {
+				player.debug("No bones in inventory, or bones not in bones array.");
+				player.setAttribute("bgfirst?",true);
+				return true;
+			}
+
+			player.faceLocation(new Location(3660,3525,1));
+			if (player.getInventory().remove(new Item(bone.getItemId()))) {
+				player.getLocks().lockInteractions(2);
+				player.debug("Using bone " + bone.getItemId() + " on grinder.. bone info:" + b);
+				player.animate(Animation.create(1649));
+				player.getConfigManager().set(408, bone.getConfigValue(true), true);
+				player.sendMessage("You put some bones in the grinder's hopper.", 1);
+				player.getWalkingQueue().reset();
+				player.getWalkingQueue().addPath(3659,3524,true);
+				player.getPulseManager().run(windPulse);
+			}
+			return true;
+		}
+	};
 
 	/**
 	 * Checks if the player has the amulet equipped.
@@ -169,7 +255,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
 			return;
 		}
 		final Bones bone = Bones.forConfigValue(player.getConfigManager().get(408), false);
-		player.lock(2);
+		player.getLocks().lockInteractions(2);
 		player.animate(Animation.create(1650));
 		player.getConfigManager().set(408, 0, true);
 		player.sendMessage("You fill a pot with crushed bones.");
@@ -183,7 +269,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
 	 */
 	private void wind(Player player, GameObject object) {
 		final Bones bone = Bones.forConfigValue(player.getConfigManager().get(408), true);
-		player.lock(3);
+		player.getLocks().lockInteractions(3);
 		player.animate(Animation.create(1648));
 		player.sendMessage("You wind the grinder handle.");
 		if (hasBones(player, object, true)) {
@@ -207,6 +293,30 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
 			}
 		}
 		return false;
+	}
+
+	public static boolean hasBoneInInventory(Player player){
+		Bones[] bones = Bones.values();
+		for (int c = 0; c < bones.length; c++) {
+			Bones bone = bones[c];
+			int boneId = bone.getItemId();
+			if(player.getInventory().containsItem(new Item(boneId))){
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public static Bones getBone(Player player){
+		Bones[] bones = Bones.values();
+		for (int b = 0; b < bones.length; b++) {
+			Bones bone = bones[b];
+			int boneId = bone.getItemId();
+			if(player.getInventory().containsItem(new Item(boneId))){
+				return bone;
+			}
+		}
+		return null;
 	}
 
 	/**
