@@ -49,6 +49,7 @@ public final class BurnMeatPlugin extends UseWithHandler {
 		for (int id : OBJECTS) {
 			addHandler(id, OBJECT_TYPE, this);
 		}
+		System.out.println("Burned meat plugin successfully initialized");
 		return this;
 	}
 
@@ -62,6 +63,7 @@ public final class BurnMeatPlugin extends UseWithHandler {
 			player.getPacketDispatch().sendMessage("You can't burn this piece of food.");
 			return true;
 		}
+		player.debug("Used Item: " + usedItem + " In inventory? " + player.getInventory().containsItem(usedItem));
 		if (player.getInventory().containsItem(usedItem)) {
 			player.getInventory().remove(usedItem);
 			player.lock(3);
