@@ -214,6 +214,7 @@ public final class Skills {
 		boolean hadMax = this.experience[slot] != 200000000;
 		final double experienceAdd = (int) (experience * mod);
 		this.experience[slot] += experienceAdd;
+		player.getAntiMacroHandler().monitors[slot].setExperienceAmount((int)experienceAdd);
 		if (this.experience[slot] > 200000000) {
 			if(hadMax && !player.isArtificial()){
 				Repository.sendNews(entity.asPlayer().getUsername()+" has just reached 200m experience in " + SKILL_NAME[slot] + "!");
@@ -236,6 +237,9 @@ public final class Skills {
 				lifepoints += amount;
 			}
 			staticLevels[slot] = newLevel;
+			if(newLevel == 99 && !player.isArtificial()){
+				Repository.sendNews(entity.asPlayer().getUsername() + " has just achieved level 99 " + SKILL_NAME[slot]);
+			}
 			if (entity instanceof Player) {
 				if (updateCombatLevel()) {
 					player.getUpdateMasks().register(new AppearanceFlag(player));
