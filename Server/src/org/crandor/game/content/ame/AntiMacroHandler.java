@@ -125,7 +125,7 @@ public final class AntiMacroHandler implements SavingModule {
 		}
 		if (!player.getLocks().isInteractionLocked() && !player.getLocks().isTeleportLocked() && !player.getLocks().isMovementLocked()) {
 			for (int i = 0; i < monitors.length; i++) {
-				FIRE_RATIO = 1;
+				FIRE_RATIO = 250;
 				if (chanceRatio[i] > FIRE_RATIO && !isDisabled) {
 					fireEvent(i);
 				}
