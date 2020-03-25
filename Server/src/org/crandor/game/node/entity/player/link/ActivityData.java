@@ -111,6 +111,11 @@ public final class ActivityData implements SavingModule {
 	private boolean hardcoreDeath;
 
 	/**
+	 * Pyramid plunder top (is it grabbed?)
+	 */
+	boolean topGrabbed;
+
+	/**
 	 * Constructs a new {@code ActivityInfo} {@code Object}.
 	 */
 	public ActivityData() {
@@ -160,6 +165,7 @@ public final class ActivityData implements SavingModule {
 		SavedData.save(buffer, fogRating, 19);
 		SavedData.save(buffer, borkKills, 20);
 		SavedData.save(buffer, hardcoreDeath, 21);
+		SavedData.save(buffer, topGrabbed, 22);
 		buffer.put((byte) 0);
 
 	}
@@ -238,6 +244,9 @@ public final class ActivityData implements SavingModule {
 				break;
 			case 21:
 				hardcoreDeath = SavedData.getBoolean(buffer);
+				break;
+			case 22:
+				topGrabbed = SavedData.getBoolean(buffer);
 				break;
 			}
 		}
@@ -649,4 +658,8 @@ public final class ActivityData implements SavingModule {
 	public void setHardcoreDeath(boolean hardcoreDeath) {
 		this.hardcoreDeath = hardcoreDeath;
 	}
+	public void setTopGrabbed(boolean topGrabbed){
+		this.topGrabbed = topGrabbed;
+	}
+	public boolean isTopGrabbed(){return topGrabbed;}
 }
