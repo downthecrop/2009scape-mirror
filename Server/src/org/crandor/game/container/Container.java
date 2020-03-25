@@ -162,6 +162,15 @@ public class Container {
 		return true;
 	}
 
+	public boolean addIfDoesntHave(final Item item) {
+		if(containsItem(item)) {
+			return false;
+		} else {
+			return add(item);
+
+		}
+	}
+
 	/**
 	 * Adds an item to this container.
 	 * @param item The item.

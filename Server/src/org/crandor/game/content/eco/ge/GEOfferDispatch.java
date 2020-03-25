@@ -174,13 +174,16 @@ public final class GEOfferDispatch extends Pulse implements CallBack {
 	public static boolean dispatch(Player player, GrandExchangeOffer offer) {
 		if (offer.getAmount() < 1) {
 			player.getPacketDispatch().sendMessage("You must choose the quantity you wish to buy!");
+			System.out.println("amountthing");
 			return false;
 		}
 		if (offer.getOfferedValue() < 1) {
 			player.getPacketDispatch().sendMessage("You must choose the price you wish to buy for!");
+			System.out.println("pricethng");
 			return false;
 		}
 		if (offer.getState() != OfferState.PENDING || offer.getUid() != 0) {
+			System.out.println("pendingthing");
 			return false;
 		}
 		offer.setPlayerUID(player.getDetails().getUid());
@@ -311,7 +314,7 @@ public final class GEOfferDispatch extends Pulse implements CallBack {
 	 * Gets the next UID.
 	 * @return The UID.
 	 */
-	private static long nextUID() {
+	static long nextUID() {
 		long id = offsetUID++;
 		if (id == 0) {
 			return nextUID();

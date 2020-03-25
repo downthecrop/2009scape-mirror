@@ -348,7 +348,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
 			return;
 		}
 		if (player.getInventory().remove(bone.getBoneMeal(), new Item(4286, 1))) {
-			player.lock(5);
+			player.lock(1);
 			player.animate(Animation.create(1651));
 			player.getInventory().add(new Item(1925), new Item(1931));
 			player.getSkills().addExperience(Skills.PRAYER, bone.getExperience() * 4, true);

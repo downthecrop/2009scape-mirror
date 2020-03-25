@@ -128,7 +128,7 @@ public final class BKFortressPlugin extends OptionHandler {
 			DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
 			return true;
 		case 2338:
-			if (player.getLocation().getY() >= 3515) {
+			if (player.getLocation().getX() > 3019) {
 				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
 				return true;
 			}
