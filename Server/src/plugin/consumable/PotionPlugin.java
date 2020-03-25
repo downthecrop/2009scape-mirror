@@ -31,6 +31,7 @@ public final class PotionPlugin implements Plugin<Object> {
 		new EnergyPotion().newInstance(arg);
 		new FishingPotion().newInstance(arg);
 		new PrayerPotion().newInstance(arg);
+		new PrayerMix().newInstance(arg);
 		new RelicymsBalm().newInstance(arg);
 		new RestorePotion().newInstance(arg);
 		new SaradominBrew().newInstance(arg);
@@ -313,6 +314,46 @@ public final class PotionPlugin implements Plugin<Object> {
 			player.getSkills().incrementPrayerPoints(amt);
 
 		}
+	}
+
+	/**
+	 * Represents the barbarian prayer potion mix
+	 * @author ceik
+	 */
+	public class PrayerMix extends Potion {
+
+		public PrayerMix() {
+			/**
+			 * empty.
+			 */
+		}
+
+		public PrayerMix(Effect effect) {
+			super(effect);
+			super.emptyItem = VIAL;
+		}
+
+		@Override
+		public Plugin<Object> newInstance(Object arg) throws Throwable {
+			Consumables.add(new PrayerMix(new Effect("Prayer mix", new int[] { 11465, 11467 }, null)));
+			return this;
+		}
+
+		@Override
+		public void effect(final Player player, final Item item) {
+			int level = player.getSkills().getStaticLevel(Skills.PRAYER);
+			int amt = 7 + (level / 4);
+			player.getSkills().incrementPrayerPoints(amt);
+			int hpDeficit = player.getSkills().getLifepoints() - player.getSkills().getMaximumLifepoints();
+			if(hpDeficit <= -6){
+				player.getSkills().setLifepoints(player.getSkills().getLifepoints() + 6);
+				return;
+			} else if (hpDeficit <= 0){
+				player.getSkills().setLifepoints(player.getSkills().getMaximumLifepoints());
+				return;
+			}
+		}
+
 	}
 
 	/**
