@@ -89,6 +89,9 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 			player.removeAttribute("remove-log");
 			if (player.getInventory().remove(node)) {
 				GroundItemManager.create(groundItem);
+				if (groundItem.getId() == 1521 && !player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).isComplete(0, 4)) {
+					player.getAchievementDiaryManager().updateTask(player, DiaryType.LUMBRIDGE, 0, 4, true);
+				}
 			}
 		}
 		return true;
@@ -115,9 +118,6 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 		}
 		if (!success()) {
 			return false;
-		}
-		if (player.getViewport().getRegion().getId() == 12850 && !player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).isComplete(0, 4)) {
-			player.getAchievementDiaryManager().updateTask(player, DiaryType.LUMBRIDGE, 0, 4, true);
 		}
 		createFire();
 		return true;
