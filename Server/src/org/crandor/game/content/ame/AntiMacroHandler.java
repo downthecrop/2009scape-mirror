@@ -25,6 +25,11 @@ public final class AntiMacroHandler implements SavingModule {
 	private static final int UPDATE_FREQUENCY = 50;
 
 	/**
+	 * Whether randoms are disabled for this player
+	 */
+	public boolean isDisabled;
+
+	/**
 	 * The ratio of firing events, the higher the less frequent.
 	 */
 	public static int FIRE_RATIO = 250;
@@ -52,7 +57,7 @@ public final class AntiMacroHandler implements SavingModule {
 	/**
 	 * The experience monitors.
 	 */
-	private ExperienceMonitor[] monitors = new ExperienceMonitor[Skills.SKILL_NAME.length];
+	public ExperienceMonitor[] monitors = new ExperienceMonitor[Skills.SKILL_NAME.length];
 
 	/**
 	 * The chance ratio of firing random events.
@@ -120,8 +125,8 @@ public final class AntiMacroHandler implements SavingModule {
 		}
 		if (!player.getLocks().isInteractionLocked() && !player.getLocks().isTeleportLocked() && !player.getLocks().isMovementLocked()) {
 			for (int i = 0; i < monitors.length; i++) {
-				FIRE_RATIO = 250;
-				if (chanceRatio[i] > FIRE_RATIO) {
+				FIRE_RATIO = 1;
+				if (chanceRatio[i] > FIRE_RATIO && !isDisabled) {
 					fireEvent(i);
 				}
 				ExperienceMonitor monitor = monitors[i];
@@ -162,9 +167,16 @@ public final class AntiMacroHandler implements SavingModule {
 		for (int i = 0; i < monitors.length; i++) {
 			monitors[i] = new ExperienceMonitor(i);
 		}
-		nextPulse = GameWorld.getTicks() + UPDATE_FREQUENCY;
+		if(isDisabled){
+			nextPulse = -1;
+		} else {
+			nextPulse = GameWorld.getTicks() + UPDATE_FREQUENCY;
+		}
 		if (event != null) {
 			event.start(player, true);
+		}
+		if(!player.isArtificial() && !isDisabled) {
+			System.out.println("Anti-Macro: Initialized anti-macro handler for " + player.getUsername());
 		}
 	}
 
@@ -249,6 +261,7 @@ public final class AntiMacroHandler implements SavingModule {
 		event = getRandomEvent(skillId);
 		if (event != null) {
 			if ((event = event.create(player)).start(player, false, args)) {
+				System.out.println("Anti-Macro: Firing event " + event.getName() + " for player: " + player.getUsername());
 				resetTrigger();
 				return true;
 			}

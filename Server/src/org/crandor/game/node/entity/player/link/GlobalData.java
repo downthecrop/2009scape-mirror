@@ -301,7 +301,11 @@ public final class GlobalData implements SavingModule {
 	private int hunterCapeCharges;
 
 	private long minigameTeleportDelay;
-	
+
+	/**
+	 * Whether or not randoms are enabled
+	 */
+	private boolean macroDisabled = false;
 
 	@Override
 	public void save(ByteBuffer buffer) {
@@ -392,6 +396,7 @@ public final class GlobalData implements SavingModule {
 		SavedData.save(buffer, getSavedH(), 63);
 		SavedData.save(buffer, getTaskAmount(), 64);
 		SavedData.save(buffer, getTaskPoints(), 65);
+		SavedData.save(buffer, macroDisabled,66);
 		buffer.put((byte) 0);
 	}
 
@@ -623,6 +628,9 @@ public final class GlobalData implements SavingModule {
 				break;
 			case 65:
 				setTaskPoints(buffer.getInt());
+				break;
+			case 66:
+				macroDisabled = SavedData.getBoolean(buffer);
 				break;
 			}
 		}
@@ -1628,4 +1636,8 @@ public final class GlobalData implements SavingModule {
 	public void setTaskPoints(int taskPoints) {
 		this.taskPoints = taskPoints;
 	}
+
+	public void setMacroDisabled(boolean disabled){this.macroDisabled = disabled;}
+
+	public boolean getMacroDisabled() {return this.macroDisabled;}
 }

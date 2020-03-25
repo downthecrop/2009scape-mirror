@@ -382,6 +382,9 @@ public abstract class CombatSwingHandler {
 			if(state.getEstimatedHit() >= 15){state.setEstimatedHit(14);};
 			if(state.getSecondaryHit() >= 15){state.setSecondaryHit(14);}
 		}
+		if(victim.getId() == 757){
+			this.EXPERIENCE_MOD = 0.01;
+		}
 		if (state.getEstimatedHit() > 0) {
 			state.setEstimatedHit(getFormatedHit(entity, victim, state, state.getEstimatedHit()));
 			totalHit += state.getEstimatedHit();
