@@ -160,6 +160,7 @@ public final class HettyDialogue extends DialoguePlugin {
 			stage = 35;
 			break;
 		case 35:
+			quest.start(player);
 			quest.setStage(player, 20);
 			end();
 			break;
