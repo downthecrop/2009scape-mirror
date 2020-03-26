@@ -10,7 +10,6 @@ import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.map.Direction;
 import org.crandor.game.world.map.Location;
-import org.crandor.game.world.map.path.Pathfinder;
 import org.crandor.game.world.update.flag.context.Animation;
 import org.crandor.game.world.update.flag.context.Graphics;
 import org.crandor.net.packet.PacketRepository;
@@ -22,23 +21,35 @@ import org.crandor.plugin.Plugin;
 import java.util.List;
 
 /**
- * Created for 2009Scape
- * User: Ethan Kyle Millard
- * Date: March 15, 2020
- * Time: 1:14 PM
+ * Nora T Hagg NPC
+ * @author Ethan, cleaned up by ceik
+ * @date y'know
  */
+
 @InitializablePlugin
-public final class NoraTHaggNPC extends AbstractNPC {
-
-    private static final Location[] MOVEMENT_PATH = {Location.create(2904, 3463, 0), Location.create(2908, 3463, 0), Location.create(2912, 3463, 0), Location.create(2916, 3463, 0), Location.create(2920, 3463, 0), Location.create(2924, 3463, 0), Location.create(2930, 3463, 0)};
-    private int tilesIndex = 0;
-
+public class NoraTHaggNPC extends AbstractNPC {
+    boolean walkdir;
     public NoraTHaggNPC() {
         super(896, Location.create(2904, 3463, 0));
+    }
+    private Location getRespawnLocation() {
+        return Location.create(2901, 3466, 0);
+    }
+
+    @Override
+    public int[] getIds() {
+        return new int[] { 896 };
     }
 
     private NoraTHaggNPC(int id, Location location) {
         super(id, location);
+    }
+
+    @Override
+    public Plugin<Object> newInstance(Object arg) throws Throwable {
+        this.configure();
+        init();
+        return super.newInstance(arg);
     }
 
     private boolean canTeleport(Entity t) {
@@ -59,55 +70,16 @@ public final class NoraTHaggNPC extends AbstractNPC {
     }
 
     @Override
-    public void configure() {
-        super.configure();
-//        if (isWalks()) {
-//            configureMovementPath(MOVEMENT_PATH);
-//        }
-//        setWalks(true);
-    }
-
-    @Override
     public AbstractNPC construct(int id, Location location, Object... objects) {
         return new NoraTHaggNPC(id, location);
     }
 
     @Override
-    public int[] getIds() {
-        return new int[] { 896 };
-    }
+    public void configure() {
+        super.configure();
+        setWalks(false);
+        setPathBoundMovement(true);
 
-    private Location getRespawnLocation() {
-        return Location.create(2901, 3466, 0);
-    }
-
-    @Override
-    public int getWalkRadius() {
-        return 50;
-    }
-
-
-    @Override
-    public void tick() {
-        super.tick();
-        List<Player> players = getViewport().getCurrentPlane().getPlayers();
-        for (Player player : players) {
-            if (player == null || !player.isActive() || player.getLocks().isInteractionLocked() || DeathTask.isDead(player) || !canTeleport(player) || !CombatSwingHandler.isProjectileClipped(this, player, false)) {
-                continue;
-            }
-            animate(new Animation(5803));
-            sendTeleport(player);
-        }
-        if (getLocation().equals(Location.create(2904, 3463, 0))) {
-            Pathfinder.find(this, Location.create(2930, 3463, 0)).walk(this);
-        } else if (getLocation().equals(Location.create(2930, 3463, 0))) {
-            Pathfinder.find(this, Location.create(2904, 3463, 0)).walk(this);
-        }
-    }
-
-    @Override
-    public Plugin<Object> newInstance(Object arg) throws Throwable {
-        return super.newInstance(arg);
     }
 
     private void sendTeleport(final Player player) {
@@ -138,5 +110,30 @@ public final class NoraTHaggNPC extends AbstractNPC {
         });
     }
 
-}
+    @Override
+    public void tick() {
+        super.tick();
+        List<Player> players = getViewport().getCurrentPlane().getPlayers();
+        if(getLocation().getX() == 2930){
+            walkdir = false;
+        } else if(getLocation().getX() == 2904){
+            walkdir = true;
+        }
+        for (Player player : players) {
+            if (player == null || !player.isActive() || player.getLocks().isInteractionLocked() || DeathTask.isDead(player) || !canTeleport(player) || !CombatSwingHandler.isProjectileClipped(this, player, false)) {
+                continue;
+            }
+            animate(new Animation(5803));
+            sendTeleport(player);
+            player.getPacketDispatch().sendMessage("" + getLocation() + " matches? " + (getLocation().getX() == 2904));
+        }
+        if (location.getX() != 2930 && walkdir) {
+            this.getWalkingQueue().reset();
+            this.getWalkingQueue().addPath(location.getX() + 1,3463,true);
+        } else if (location.getX() != 2904 && !walkdir) {
+            this.getWalkingQueue().reset();
+            this.getWalkingQueue().addPath(location.getX() - 1,3463,true);
+        }
+    }
 
+}
