@@ -137,7 +137,7 @@ public final class WaterfallPlugin extends OptionHandler {
 			player.getPulseManager().run(new Pulse(2, player) {
 				@Override
 				public boolean pulse() {
-					if (player.getEquipment().containsOneItem(295) || player.getInventory().contains(295, 1)) {
+					if ((player.getEquipment().containsOneItem(295) || player.getInventory().contains(295, 1)) || player.getQuestRepository().isComplete("Waterfall")) {
 						player.getPacketDispatch().sendMessage("You walk through the door.");
 						player.teleport(new Location(2575, 9861));
 					} else {
