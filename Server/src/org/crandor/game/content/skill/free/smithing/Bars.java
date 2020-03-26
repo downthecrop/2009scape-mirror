@@ -300,7 +300,7 @@ public enum Bars {
 	/**
 	 * Steel Dart Tips
 	 */
-	STEEL_DART_TIPS(BarType.STEEL, SmithingType.TYPE_DART_TIP, 808, 34),
+	STEEL_DART_TIPS(BarType.STEEL, SmithingType.TYPE_DART_TIP, 821, 34),
 
 	/**
 	 * Steel Nails
