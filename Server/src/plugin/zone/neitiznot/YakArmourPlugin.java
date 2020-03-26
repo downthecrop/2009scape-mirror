@@ -50,7 +50,7 @@ public class YakArmourPlugin extends UseWithHandler {
 
 			@Override
 			public void create(final int amount, int index) {
-				player.getPulseManager().run(new YakArmourPulse(player, index == 1 ? LEGS : BODY, index, amount));
+				player.getPulseManager().run(new YakArmourPulse(player, index == 1 ? BODY : LEGS, index, amount));
 			}
 
 			@Override
