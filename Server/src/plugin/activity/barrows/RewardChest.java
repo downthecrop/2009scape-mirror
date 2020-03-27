@@ -5,6 +5,8 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Random;
 
+import org.crandor.game.component.Component;
+import org.crandor.game.container.access.InterfaceContainer;
 import org.crandor.game.content.global.BossKillCounter;
 import org.crandor.game.node.entity.npc.drop.DropFrequency;
 import org.crandor.game.node.entity.player.Player;
@@ -30,7 +32,7 @@ public final class RewardChest {
 	 */
 	public static void reward(Player player) {
 		for (boolean killed : player.getSavedData().getActivityData().getBarrowBrothers()) {
-			if (!killed && !player.getName().equals("vexia")) {
+			if (!killed && !player.getName().equals("test")) {
 				player.sendMessage("You can't loot the chest until you kill all 6 barrows brothers.");
 				player.removeAttribute("barrow:looted");// Because they haven't
 														// actually looted the
@@ -48,6 +50,7 @@ public final class RewardChest {
 		if (mod > 80) {
 			mod = 80;
 		}
+		Item[] rewards = new Item[5];
 		for (int i = 0; i < 2 + RandomFunction.random(3); i++) {
 			mod = RandomFunction.random(mod);
 			ChanceItem reward = null;
@@ -79,11 +82,15 @@ public final class RewardChest {
 			} else {
 				item = new Item(reward.getId(), reward.getMinimumAmount());
 			}
+			rewards[i] = item;
 			player.getInventory().add(item, player);
+			player.getPacketDispatch().sendItemOnInterface(item.getId(),item.getAmount(),364,0);
 			if (item.getDefinition().getName().contains("harok") || item.getDefinition().getName().contains("uthan") || item.getDefinition().getName().contains("aril") || item.getDefinition().getName().contains("orag") || item.getDefinition().getName().contains("erac") || item.getDefinition().getName().contains("hrim")) {
 				Repository.sendNews(player.getUsername() + " has just received: " + item.getAmount() + " x " + item.getName() + " from Barrows.");
 			}
 		}
+		InterfaceContainer.generateItems(player,rewards,new String[]{ "examine" },364,4);
+		player.getInterfaceManager().open(new Component(364));
 		BossKillCounter.addtoBarrowsCount(player);
 	}
 
