@@ -26,6 +26,7 @@ import org.crandor.game.node.entity.player.ai.resource.ResourceAIPManager;
 import org.crandor.game.node.entity.player.info.login.PlayerParser;
 import org.crandor.game.node.entity.player.link.IronmanMode;
 import org.crandor.game.node.entity.player.link.appearance.Gender;
+import org.crandor.game.node.entity.player.link.music.MusicEntry;
 import org.crandor.game.node.entity.player.link.quest.Quest;
 import org.crandor.game.node.entity.player.link.skillertasks.Difficulty;
 import org.crandor.game.node.entity.state.EntityState;
@@ -100,6 +101,17 @@ public final class DeveloperCommandPlugin extends CommandPlugin {
     @Override
     public boolean parse(final Player player, String name, String[] args) {
         switch (name) {
+        	case "unlockmusic":
+        		for (MusicEntry me : MusicEntry.getSongs().values()) {
+        			player.getMusicPlayer().unlock(me.getId());
+        		}
+        		
+        	break;
+        	
+        	case "playsong":
+        		player.getMusicPlayer().play(MusicEntry.getSongs().get(Integer.parseInt(args[1])));
+        		player.sendMessage("Playing song: " + MusicEntry.getSongs().get(Integer.parseInt(args[1])).getName());
+        		break;
             case "find":
                 try {
                     player.getAttributes().put("spawning_items", true);

@@ -211,6 +211,10 @@ public abstract class Entity extends Node {
 	 * @param killer The killer of this entity.
 	 */
 	public void finalizeDeath(Entity killer) {
+		if (killer.isPlayer()) {
+			if (!((Player)killer).isArtificial())
+			((Player)killer).getStatisticsManager().getENTITIES_KILLED().incrementAmount();
+		}
 		skills.restore();
 		skills.rechargePrayerPoints();
 		impactHandler.getImpactQueue().clear();
