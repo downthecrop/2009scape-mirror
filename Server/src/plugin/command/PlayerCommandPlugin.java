@@ -57,7 +57,6 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 				TutorialStage.load(player, stage, false);
 				break;
 			*/
-		
 		case "stats":
 				
 				
@@ -292,7 +291,10 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 			player.getPacketDispatch().sendString("", 275, i);
 		}
 		// Title
-		player.getPacketDispatch().sendString("<col=ae1515>" + target.getUsername() + "</col>'s stats.", 275, 2);
+		//14 Ult IM
+		//13 IM
+		//15 HCIM
+		player.getPacketDispatch().sendString("" + (target.getRights() == Rights.ADMINISTRATOR ? "<img=1>" : (target.getRights() == Rights.PLAYER_MODERATOR ? "<img=0>" : (target.getIronmanManager().getMode() == IronmanMode.STANDARD ? "<img=13>" : (target.getIronmanManager().getMode() == IronmanMode.ULTIMATE ? "<img=14>" : (target.getIronmanManager().getMode() == IronmanMode.HARDCORE ? "<img=15>" : ""))))) + "<col=ae1515>" + target.getUsername() + "</col>'s stats.", 275, 2);
 
 		// Content
 		int lineId = 11;
