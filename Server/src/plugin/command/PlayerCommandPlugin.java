@@ -301,7 +301,7 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 		player.getPacketDispatch().sendString("Total level: " + target.getSkills().getTotalLevel(), 275, lineId++);
 		player.getPacketDispatch().sendString("Total xp: " + StringUtils.getFormattedNumber(target.getSkills().getTotalXp()), 275, lineId++);
 		for (int i = 0; i < Skills.SKILL_NAME.length; i++) {
-			player.getPacketDispatch().sendString("" + Skills.SKILL_NAME[i] + ": " + target.getSkills().getLevel(i) + "  (" + StringUtils.getFormattedNumber((int) Math.round(target.getSkills().getExperience(i))) + ")", 275, lineId++);
+			player.getPacketDispatch().sendString("" + Skills.SKILL_NAME[i] + ": " + target.getSkills().getStaticLevel(i) + "  (" + StringUtils.getFormattedNumber((int) Math.round(target.getSkills().getExperience(i))) + ")", 275, lineId++);
 		}
 		
 		//stats
