@@ -296,8 +296,13 @@ public final class DoorActionHandler {
 			secondDir = (secondDir + 2) % 4;
 		}
 		Location secondLoc = firstLoc.transform((int) p.getX(), (int) p.getY(), 0);
-		ObjectBuilder.replace(object, object.transform(replaceId, firstDir, firstLoc), restoreTicks, clip);
-		ObjectBuilder.replace(second, second.transform(secondReplaceId, secondDir, secondLoc), restoreTicks, clip);
+		if(object.getId() == 36917 || object.getId() == 36919){
+			ObjectBuilder.replace(object, object.transform(36919, firstDir, firstLoc), restoreTicks, true);
+			ObjectBuilder.replace(second, second.transform(36917, secondDir, secondLoc), restoreTicks, true);
+		} else {
+			ObjectBuilder.replace(object, object.transform(replaceId, firstDir, firstLoc), restoreTicks, clip);
+			ObjectBuilder.replace(second, second.transform(secondReplaceId, secondDir, secondLoc), restoreTicks, clip);
+		}
 	}
 
 	/**

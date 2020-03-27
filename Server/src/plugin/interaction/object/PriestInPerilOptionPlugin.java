@@ -99,23 +99,43 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 			int item = 0;
 			String message = "";
 			if (id == 3496) {
-				item = 2949;
+				if (!player.getGameAttributes().getAttribute("priest_in_peril:hammer", false)) {
+					item = 2949;
+				} else {
+					item = 2347;
+				}
 				message = "Saradomin is the hammer that crushes evil everywhere.";
 			}
 			if (id == 3498) {
-				item = 2951;
+				if (!player.getGameAttributes().getAttribute("priest_in_peril:needle", false)) {
+					item = 2951;
+				} else {
+					item = 1733;
+				}
 				message = "Saradomin is the needle that binds our lives together.";
 			}
 			if (id == 3495) {
-				item = 2948;
+				if (!player.getGameAttributes().getAttribute("priest_in_peril:pot", false)) {
+					item = 2948;
+				} else {
+					item = 1931;
+				}
 				message = "Saradomin is the vessle that keeps our lives from harm.";
 			}
 			if (id == 3497) {
-				item = 2950;
+				if (!player.getGameAttributes().getAttribute("priest_in_peril:feather", false)) {
+					item = 2950;
+				} else {
+					item = 314;
+				}
 				message = "Saradomin is the delicate touch that brushes us with love.";
 			}
 			if (id == 3494) {
-				item = 2947;
+				if (!player.getGameAttributes().getAttribute("priest_in_peril:candle", false)) {
+					item = 2947;
+				} else {
+					item = 36;
+				}
 				message = "Saradomin is the light that shines throughout our lives.";
 			}
 			if (id == 3499) {
@@ -127,7 +147,11 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				message = "Saradomin is the key that unlocks the mysteries of life.";
 			}
 			if (id == 3493) {
-				item = 2946;
+				if (!player.getGameAttributes().getAttribute("priest_in_peril:tinderbox", false)) {
+					item = 2946;
+				} else {
+					item = 590;
+				}
 				message = "Saradomin is the spark that lights the fire in our hearts.";
 			}
 			player.getPacketDispatch().sendString(message, 272, 17);
