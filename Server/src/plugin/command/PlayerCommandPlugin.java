@@ -9,6 +9,7 @@ import org.crandor.game.node.entity.player.info.Rights;
 import org.crandor.game.node.entity.player.info.login.PlayerParser;
 import org.crandor.game.node.entity.player.link.IronmanMode;
 import org.crandor.game.node.entity.player.link.RunScript;
+import org.crandor.game.node.entity.player.link.music.MusicEntry;
 import org.crandor.game.node.entity.player.link.quest.Quest;
 import org.crandor.game.node.entity.player.link.quest.QuestRepository;
 import org.crandor.game.system.command.CommandPlugin;
@@ -58,15 +59,25 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 			*/
 		
 		case "stats":
-			if (arguments.length < 2) {
-				player.sendMessage("You must enter a name to search!");
-			}
-			try {
-			Player target = new Player(PlayerDetails.getDetails(arguments[1]));
-			PlayerParser.parse(target);
-			if (!target.getDetails().parse()) break;
-			sendHiscore(player,target);
-			} catch (Exception e) {}
+				
+				
+				player.setAttribute("runscript", new RunScript() {
+					@Override
+					public boolean handle() {
+						try {
+						Player target = new Player(PlayerDetails.getDetails((String)value));
+						PlayerParser.parse(target);
+						if (!target.getDetails().parse()) return true;
+						sendHiscore(player,target);
+						}
+						catch (Exception e) {player.getDialogueInterpreter().sendPlainMessage(false, "That isn't a valid name.");}
+						return true;
+					}
+				});
+				player.getDialogueInterpreter().sendInput(true, "Enter a username:");
+				
+			
+			
 			break;
 
 			case "shop":
@@ -290,12 +301,24 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 		for (int i = 0; i < Skills.SKILL_NAME.length; i++) {
 			player.getPacketDispatch().sendString("" + Skills.SKILL_NAME[i] + ": " + target.getSkills().getLevel(i) + "  (" + StringUtils.getFormattedNumber((int) Math.round(target.getSkills().getExperience(i))) + ")", 275, lineId++);
 		}
+		
+		//stats
 		player.getPacketDispatch().sendString("<col=ecf0f1>(Since 27/03/2020)</col> Al kharid passes: " + target.getStatisticsManager().getAL_KHARID_GATE_PASSES().getStatisticalAmount(), 275, lineId++);
 		player.getPacketDispatch().sendString("<col=ecf0f1>(Since 27/03/2020)</col> Logs chopped: " +  target.getStatisticsManager().getLOGS_OBTAINED().getStatisticalAmount(), 275, lineId++);
 		player.getPacketDispatch().sendString("<col=ecf0f1>(Since 27/03/2020)</col> Flax picked: " +  target.getStatisticsManager().getFLAX_PICKED().getStatisticalAmount(), 275, lineId++);
 		player.getPacketDispatch().sendString("<col=ecf0f1>(Since 27/03/2020)</col> Clue scrolls completed: " +  target.getStatisticsManager().getCLUES_COMPLETED().getStatisticalAmount(), 275, lineId++);
 		player.getPacketDispatch().sendString("<col=ecf0f1>(Since 27/03/2020)</col> Enemies killed: " +  target.getStatisticsManager().getENTITIES_KILLED().getStatisticalAmount(), 275, lineId++);
 		player.getPacketDispatch().sendString("<col=ecf0f1>(Since 27/03/2020)</col> Deaths: " +  target.getStatisticsManager().getDEATHS().getStatisticalAmount(), 275, lineId++);
+		player.getPacketDispatch().sendString("Music tracks unlocked: " +  target.getMusicPlayer().getUnlocked().size() + "/" + MusicEntry.getSongs().size(), 275, lineId++);
+		
+		
+		//quests
+		player.getPacketDispatch().sendString("", 275, lineId++);
+		player.getPacketDispatch().sendString("<u><col=0000FF>Quests Completed:", 275, lineId++);
+		for (Quest q : QuestRepository.getQuests().values()) {
+			player.getPacketDispatch().sendString("" + (q.isCompleted(target) ? "<col=00FF00>" : "<col=ae1515>") + q.getName() + " ", 275, lineId++);
+		}
+	
 	}
 
 	/**
