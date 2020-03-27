@@ -65,6 +65,7 @@ import org.crandor.game.node.entity.player.link.prayer.PrayerType;
 import org.crandor.game.node.entity.player.link.quest.QuestRepository;
 import org.crandor.game.node.entity.player.link.request.RequestManager;
 import org.crandor.game.node.entity.player.link.skillertasks.SkillerTasks;
+import org.crandor.game.node.entity.player.link.statistics.PlayerStatisticsManager;
 import org.crandor.game.node.item.GroundItem;
 import org.crandor.game.node.item.GroundItemManager;
 import org.crandor.game.node.item.Item;
@@ -99,6 +100,7 @@ import org.crandor.net.packet.out.SkillLevel;
 import org.crandor.net.packet.out.UpdateSceneGraph;
 import org.crandor.plugin.Plugin;
 import org.crandor.tools.StringUtils;
+
 import plugin.activity.pyramidplunder.PlunderObjectManager;
 
 /**
@@ -302,6 +304,11 @@ public class Player extends Entity {
 	 * The jobs minigame manager.
 	 */
 	private final JobsMinigameManager jobsManager = new JobsMinigameManager(this);
+	
+	/**
+	 * The statistics manager.
+	 */
+	private final PlayerStatisticsManager statisticsManager = new PlayerStatisticsManager(this);
 
 	/**
 	 * The logout plugins.
@@ -534,6 +541,10 @@ public class Player extends Entity {
 			return;
 		}
 		getPacketDispatch().sendMessage("Oh dear, you are dead!");
+		
+		if (!isArtificial()) {
+			getStatisticsManager().getDEATHS().incrementAmount();
+		}
 
 		//If player was a Hardcore Ironman, announce that they died
 		if (this.getIronmanManager().getMode().equals(IronmanMode.HARDCORE)){ //if this was checkRestriction, ultimate irons would be moved to HARDCORE_DEAD as well
@@ -1339,5 +1350,9 @@ public class Player extends Entity {
 
 	public JobsMinigameManager getJobsManager() {
 		return jobsManager;
+	}
+
+	public PlayerStatisticsManager getStatisticsManager() {
+		return statisticsManager;
 	}
 }

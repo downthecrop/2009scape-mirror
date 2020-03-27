@@ -25,6 +25,7 @@ public class TollGateOptionPlugin extends OptionHandler {
 					player.getInventory().remove(new Item(995, 10));
 					player.getPacketDispatch().sendMessage("You quickly pay the 10 gold toll and go through the gates.");
 					DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+					player.getStatisticsManager().getAL_KHARID_GATE_PASSES().incrementAmount();
 					return true;
 				} else {
 					player.getPacketDispatch().sendMessage("You need 10 gold to pass through the gates.");

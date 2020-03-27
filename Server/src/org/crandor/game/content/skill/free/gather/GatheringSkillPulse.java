@@ -154,6 +154,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 			Projectile.create(player, null, 1776, 35, 30, 20, 25).transform(player, new Location(player.getLocation().getX() + 2, player.getLocation().getY()), true, 25, 25).send();
 			player.getSkills().addExperience(Skills.WOODCUTTING, resource.getExperience());
 			player.getSkills().addExperience(Skills.FIREMAKING, resource.getExperience());
+			player.getStatisticsManager().getLOGS_OBTAINED().incrementAmount();
 			return false;
 		}
 		int reward = resource.getReward();
@@ -176,6 +177,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 				player.getPacketDispatch().sendMessage("You cut a branch from the Dramen tree.");
 			} else {
 				player.getPacketDispatch().sendMessage("You get some " + ItemDefinition.forId(reward).getName().toLowerCase() + ".");
+				player.getStatisticsManager().getLOGS_OBTAINED().incrementAmount();
 			}
 			// Calculate if the player should receive a bonus gem or bonus ore or both
 			if (!isMiningEssence && isMining) {

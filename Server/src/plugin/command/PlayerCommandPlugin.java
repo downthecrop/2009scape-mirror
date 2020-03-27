@@ -2,8 +2,11 @@ package plugin.command;
 
 import org.crandor.ServerConstants;
 import org.crandor.game.component.Component;
+import org.crandor.game.content.skill.Skills;
 import org.crandor.game.node.entity.player.Player;
+import org.crandor.game.node.entity.player.info.PlayerDetails;
 import org.crandor.game.node.entity.player.info.Rights;
+import org.crandor.game.node.entity.player.info.login.PlayerParser;
 import org.crandor.game.node.entity.player.link.IronmanMode;
 import org.crandor.game.node.entity.player.link.RunScript;
 import org.crandor.game.node.entity.player.link.quest.Quest;
@@ -53,6 +56,18 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 				TutorialStage.load(player, stage, false);
 				break;
 			*/
+		
+		case "stats":
+			if (arguments.length < 2) {
+				player.sendMessage("You must enter a name to search!");
+			}
+			try {
+			Player target = new Player(PlayerDetails.getDetails(arguments[1]));
+			PlayerParser.parse(target);
+			if (!target.getDetails().parse()) break;
+			sendHiscore(player,target);
+			} catch (Exception e) {}
+			break;
 
 			case "shop":
 				CREDIT_STORE.open(player);
@@ -253,6 +268,34 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 		player.getPacketDispatch().sendString("<col=2c3e50>Remove your bank pin.", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=ecf0f1>::bankresettabs", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=2c3e50>Reset all of your bank tabs.", 275, lineId++);
+	}
+	
+	private void sendHiscore(Player player, Player target) {
+		if (player.getInterfaceManager().isOpened()) {
+			player.sendMessage("Finish what you're currently doing.");
+			return;
+		}
+		player.getInterfaceManager().open(new Component(275));
+		//CLear old data
+		for (int i = 0; i < 311; i++) {
+			player.getPacketDispatch().sendString("", 275, i);
+		}
+		// Title
+		player.getPacketDispatch().sendString("<col=ae1515>" + target.getUsername() + "</col>'s stats.", 275, 2);
+
+		// Content
+		int lineId = 11;
+		player.getPacketDispatch().sendString("Total level: " + target.getSkills().getTotalLevel(), 275, lineId++);
+		player.getPacketDispatch().sendString("Total xp: " + StringUtils.getFormattedNumber(target.getSkills().getTotalXp()), 275, lineId++);
+		for (int i = 0; i < Skills.SKILL_NAME.length; i++) {
+			player.getPacketDispatch().sendString("" + Skills.SKILL_NAME[i] + ": " + target.getSkills().getLevel(i) + "  (" + StringUtils.getFormattedNumber((int) Math.round(target.getSkills().getExperience(i))) + ")", 275, lineId++);
+		}
+		player.getPacketDispatch().sendString("<col=ecf0f1>(Since 27/03/2020)</col> Al kharid passes: " + target.getStatisticsManager().getAL_KHARID_GATE_PASSES().getStatisticalAmount(), 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>(Since 27/03/2020)</col> Logs chopped: " +  target.getStatisticsManager().getLOGS_OBTAINED().getStatisticalAmount(), 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>(Since 27/03/2020)</col> Flax picked: " +  target.getStatisticsManager().getFLAX_PICKED().getStatisticalAmount(), 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>(Since 27/03/2020)</col> Clue scrolls completed: " +  target.getStatisticsManager().getCLUES_COMPLETED().getStatisticalAmount(), 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>(Since 27/03/2020)</col> Enemies killed: " +  target.getStatisticsManager().getENTITIES_KILLED().getStatisticalAmount(), 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>(Since 27/03/2020)</col> Deaths: " +  target.getStatisticsManager().getDEATHS().getStatisticalAmount(), 275, lineId++);
 	}
 
 	/**
