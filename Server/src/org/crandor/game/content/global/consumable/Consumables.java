@@ -12,7 +12,7 @@ import java.util.List;
  */
 public enum Consumables {
 	/** meats */
-	CHICKEN(new Food(2140, 2138, 2144, new ConsumableProperties(3), new CookingProperties(1, 30, 30))), UGTHANKI(new Food(1861, 1859, 2146, new ConsumableProperties(2), new CookingProperties(1, 40, 40))), RABBIT(new Food(3228, 3226, 7222, new ConsumableProperties(5), new CookingProperties(1, 30, 30))), YAK(new Food(2142, 10816, 2146, new ConsumableProperties(2), new CookingProperties(1, 30, 30))),
+	CHICKEN(new Food(2140, 2138, 2144, new ConsumableProperties(3), new CookingProperties(1, 30, 30))), UGTHANKI(new Food(1861, 1859, 2146, new ConsumableProperties(2), new CookingProperties(1, 40, 40))), RABBIT(new Food(3228, 3226, 7222, new ConsumableProperties(5), new CookingProperties(1, 30, 30))),
 	DARK_CRAB(new Food(14939, 14937, 14941, new ConsumableProperties(22), new CookingProperties(90, 215, 100))),
 	CRAB(new Food(7521, 7518, 7520, new ConsumableProperties(10), new CookingProperties(21, 100, 100))),
 	/** fish */

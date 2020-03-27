@@ -72,6 +72,7 @@ public final class FlourMakingPlugin extends OptionHandler {
 				extension.emptyChute();
 				player.getPacketDispatch().sendMessage("You operate the hopper. The grain slides down the chute.");
 				player.getConfigManager().set(CONFIG, 1);
+				player.setAttribute("/save:milling:grain",player.getAttribute("milling:grain",0) + 1);
 			}
 			break;
 		case "empty":
@@ -98,6 +99,7 @@ public final class FlourMakingPlugin extends OptionHandler {
 			player.getInventory().add(FLOUR);
 			extension.decrement(1);
 			player.getPacketDispatch().sendMessage(!extension.isEmpty() ? "You fill a pot with flour from the bin." : "You fill a pot with the last of the flour in the bin.");
+
 			if (extension.getCharges() < 1) {
 				player.getConfigManager().set(CONFIG, 0);
 			}
@@ -150,10 +152,13 @@ public final class FlourMakingPlugin extends OptionHandler {
 		 * @param increment the increment.
 		 */
 		public final void increment(final int increment, boolean semi) {
-			if (semi) {
-				semiCharges += increment;
-			} else {
-				charges += increment;
+			if(player.getAttribute("milling:grain",0) < 30) {
+				if (semi) {
+					semiCharges += increment;
+				} else {
+					charges += increment;
+				}
+				player.setAttribute("/save:milling:grain",player.getAttribute("milling:grain",0) + 1);
 			}
 		}
 
@@ -163,6 +168,9 @@ public final class FlourMakingPlugin extends OptionHandler {
 		 */
 		public final void decrement(final int increment) {
 			charges -= increment;
+			if(!(player.getAttribute("milling:grain",0) <= 0)){
+				player.setAttribute("/save:milling:grain",player.getAttribute("milling:grain",0) + 1);
+			}
 		}
 
 		/**

@@ -757,6 +757,7 @@ public final class RJCutscenePlugin extends CutscenePlugin {
 			case 751:
 				end();
 				cutscene.stop(true);
+				quest.finish(player);
 				break;
 			}
 			return true;

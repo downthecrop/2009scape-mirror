@@ -113,6 +113,10 @@ public final class JulietDialogue extends DialoguePlugin {
 			interpreter.sendDialogues(npc, null, "Quickly! Go and tell Romeo the plan!");
 			stage = 1002;
 			break;
+			default:
+				npc(FacialExpression.ANGRY,"Oh, Romeo, that no good scoundrel!");
+				stage = 22;
+				break;
 		}
 		return true;
 	}

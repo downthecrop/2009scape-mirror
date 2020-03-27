@@ -105,7 +105,6 @@ public class ReadSignPostPlugin extends OptionHandler {
 		ObjectDefinition.forId(30039).getConfigurations().put("option:read", this);
 		ObjectDefinition.forId(30040).getConfigurations().put("option:read", this);
 		ObjectDefinition.forId(31296).getConfigurations().put("option:read", this);
-		ObjectDefinition.forId(31297).getConfigurations().put("option:read", this);
 		ObjectDefinition.forId(31298).getConfigurations().put("option:read", this);
 		ObjectDefinition.forId(31299).getConfigurations().put("option:read", this);
 		ObjectDefinition.forId(31300).getConfigurations().put("option:read", this);

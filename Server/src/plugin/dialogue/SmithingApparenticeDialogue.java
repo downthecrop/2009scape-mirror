@@ -51,6 +51,6 @@ public class SmithingApparenticeDialogue extends DialoguePlugin {
 
 	@Override
 	public int[] getIds() {
-		return new int[] { 4904 };
+		return new int[] { 7959,4904 };
 	}
 }
