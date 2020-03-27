@@ -57,7 +57,7 @@ public final class AvaDialogue extends DialoguePlugin {
 		quest = player.getQuestRepository().getQuest(AnimalMagnetism.NAME);
 		if (!quest.hasRequirements(player)) {
 			player.getPacketDispatch().sendMessage("She doesn't seem interested in talking to you.");
-			return true;
+			return false;
 		}
 		switch (quest.getStage(player)) {
 		case 0:

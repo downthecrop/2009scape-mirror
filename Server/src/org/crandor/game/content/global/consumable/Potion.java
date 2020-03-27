@@ -103,7 +103,12 @@ public class Potion extends Drink {
 	 */
 	public void remove(final Player player, final Item item, final int doses, boolean message) {
 		int dose = getDose(item) - (doses == 1 ? 0 : doses - 1);
-		int replaceId = (int) (dose == 1 ? VIAL.getId() : effect.getItemIds()[(4 - dose) + 1]);
+		int replaceId;
+		if(item.getId() == 11465 || item.getId() == 11467){
+			replaceId = (int) (dose == 1 ? VIAL.getId() : effect.getItemIds()[(2 - dose) + 1]);
+		} else {
+			replaceId = (int) (dose == 1 ? VIAL.getId() : effect.getItemIds()[(4 - dose) + 1]);
+		}
 		if (replaceId != -1) {
 			dose--;
 			player.getInventory().replace(new Item(replaceId), item.getSlot());

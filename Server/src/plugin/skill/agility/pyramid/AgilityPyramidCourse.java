@@ -152,6 +152,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 			}
 			player.getDialogueInterpreter().sendDialogue("You climb down the steep passage. It leads to the base of the", "pyramid.");
 			player.getProperties().setTeleportLocation(Location.create(3364, 2830, 0));
+			player.getSavedData().getActivityData().setTopGrabbed(false);
 			break;
 		}
 		return true;
@@ -367,21 +368,27 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param object the object.
 	 */
 	private void handlePyramidTop(final Player player, final GameObject object) {
-		player.animate(Animation.create(3063));
-		GameWorld.submit(new Pulse(3, player) {
-			@Override
-			public boolean pulse() {
-				player.getSkills().addExperience(Skills.AGILITY,1000);
-				if (player.getConfigManager().get(640) == 505 || player.getConfigManager().get(640) == 515) {
-					player.getPacketDispatch().sendMessage("You find nothing on top of the pyramid.");
+		if(player.getSavedData().getActivityData().isTopGrabbed() == true){
+			player.getPacketDispatch().sendMessage("You've already claimed this!");
+			return;
+		} else {
+			player.animate(Animation.create(3063));
+			GameWorld.submit(new Pulse(3, player) {
+				@Override
+				public boolean pulse() {
+					player.getSkills().addExperience(Skills.AGILITY, 1000);
+					if (player.getConfigManager().get(640) == 505 || player.getConfigManager().get(640) == 515) {
+						player.getPacketDispatch().sendMessage("You find nothing on top of the pyramid.");
+						return true;
+					}
+					addConfig(player, 10869, 1, true);
+					player.getSavedData().getActivityData().setTopGrabbed(true);
+					player.getInventory().add(PYRAMID_TOP, player);
+					player.getDialogueInterpreter().sendItemMessage(PYRAMID_TOP, "You find a golden pyramid!");
 					return true;
 				}
-				addConfig(player, 10869, 1, true);
-				player.getInventory().add(PYRAMID_TOP, player);
-				player.getDialogueInterpreter().sendItemMessage(PYRAMID_TOP, "You find a golden pyramid!");
-				return true;
-			}
-		});
+			});
+		}
 	}
 
 	/**

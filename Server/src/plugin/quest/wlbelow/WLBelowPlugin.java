@@ -185,10 +185,10 @@ public class WLBelowPlugin extends OptionHandler {
 				player.sendMessage("You need 15 chaos runes.");
 				return true;
 			}
-			if (!player.getInventory().containsItem(CHAOS_TALISMAN) && !player.getInventory().containsItem(CHAOS_TIARA)) {
+			/*if (!player.getInventory().containsItem(CHAOS_TALISMAN) && !player.getInventory().containsItem(CHAOS_TIARA)) {
 				player.sendMessage("You need a chaos talisman or chaos tiara.");
 				return true;
-			}
+			}*/
 			Item chaosItem = player.getInventory().containsItem(CHAOS_TALISMAN) ? CHAOS_TALISMAN : CHAOS_TIARA;
 			if (chaosItem != null && player.getInventory().remove(CHAOS_RUNES)) {
 				player.lock(5);

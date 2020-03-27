@@ -361,10 +361,12 @@ public class Player extends Entity {
 
 	@Override
 	public void init() {
-		if (!isArtificial()) {
+		antiMacroHandler.isDisabled = savedData.getGlobalData().getMacroDisabled();
+		if (!artificial) {
 			getProperties().setSpawnLocation(ServerConstants.HOME_LOCATION);
 			getDetails().getSession().setObject(this);
 			getDetails().getSession().setLastPing(System.currentTimeMillis() + 10_000L);
+			antiMacroHandler.init();
 		}
 		super.init();
 		LoginConfiguration.configureLobby(this);

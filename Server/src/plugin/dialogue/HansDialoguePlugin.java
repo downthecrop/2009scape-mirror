@@ -73,7 +73,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 						stage = 50;
 						break;
 					case 4:
-						interpreter.sendOptions("Select an Option", "Have you been here as long as me?", "I'd like to learn faster!", "About Iron Man mode...", "Go Back...");
+						interpreter.sendOptions("Select an Option", "Have you been here as long as me?", "I'd like to learn faster!", "About Iron Man mode...","About random events...", "Go Back...");
 						stage = 10;
 						break;
 				}
@@ -106,7 +106,17 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 							stage = 110;
 						}
 						break;
-					case 4: // Go back
+					case 4:
+						if(player.getAntiMacroHandler().isDisabled == true){
+							interpreter.sendOptions("Select an Option","I want to enable random events.","Nevermind.");
+							stage = 130;
+							break;
+						} else {
+							interpreter.sendOptions("Select an Option","I want to disable random events.","Nevermind.");
+							stage = 135;
+							break;
+						}
+					case 5: // Go back
 						interpreter.sendOptions("Select an Option", "I'm looking for whoever is in charge of this place.", "I have come to kill everyone in this castle!", "I don't know. I'm lost. Where am I?", "More Options...");
 						stage = 1;
 						break;
@@ -242,6 +252,38 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 				}
 				break;
 
+			case 130:
+				switch(buttonId){
+					case 1:
+						npc("Voila, you should now get random events!");
+						player.getGlobalData().setMacroDisabled(false);
+						player.getAntiMacroHandler().isDisabled = false;
+						player.getAntiMacroHandler().init();
+						stage = 131;
+						break;
+					case 2:
+						player("Never mind.");
+						stage = 131;
+						break;
+				}
+				break;
+			case 131:
+				end();
+				break;
+			case 135:
+				switch(buttonId){
+					case 1:
+						npc("Voila, you shouldn't get random events now!");
+						player.getGlobalData().setMacroDisabled(true);
+						player.getAntiMacroHandler().isDisabled = true;
+						stage = 131;
+						break;
+					case 2:
+						player("Never mind.");
+						stage = 131;
+						break;
+				}
+				break;
 			//Change Iron man mode dialogue/code
 			case 150:
 				switch(buttonId){
