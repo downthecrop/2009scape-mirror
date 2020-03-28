@@ -86,6 +86,7 @@ public abstract class ClueScrollPlugin extends MapZone implements Plugin<Object>
 		}
 		nextStage(player, clue);
 		if (casket) {
+			player.getStatisticsManager().getCLUES_COMPLETED().incrementAmount();
 			player.getInventory().replace(level.getCasket(), clue.getSlot());
 		} else {
 			player.getInventory().remove(clue);

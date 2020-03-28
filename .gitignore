@@ -10,3 +10,4 @@ CompiledServer/**/*.jar
 **/.idea/workspace.xml
 **/.idea/*
 *.class
+CompiledServer/

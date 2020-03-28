@@ -103,6 +103,7 @@ public final class BorderGuardDialogue extends DialoguePlugin {
 				}
 				if (player.getInventory().remove(COINS)) {
 					DoorActionHandler.handleAutowalkDoor(player, door);
+					player.getStatisticsManager().getAL_KHARID_GATE_PASSES().incrementAmount();
 				} else {
 					player.getPacketDispatch().sendMessage("You need 10 gold coins to pay the toll.");
 				}

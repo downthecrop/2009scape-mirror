@@ -149,6 +149,9 @@ public final class PlayerParser {
 				case 46:
 					player.getSkills().parseExpRate(buffer);
 					break;
+				case 47:
+					player.getStatisticsManager().parse(buffer);
+					break;
 				default:
 					System.err.println("[Player parsing] Unhandled opcode: " + opcode + " for " + player.getName() + " - [log=" + Arrays.toString(opcodeLog) + "].");
 					break;
@@ -302,6 +305,8 @@ public final class PlayerParser {
 		}
 
 		player.getSkills().saveExpRate(buffer.put((byte) 46));
+		
+		player.getStatisticsManager().save(buffer.put((byte)47));
 
 		buffer.put((byte) 0); // EOF opcode
 		buffer.flip();
