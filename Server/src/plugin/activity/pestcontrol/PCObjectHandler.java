@@ -95,6 +95,7 @@ public final class PCObjectHandler extends OptionHandler {
 			switch (object.getId()) {
 			case 14315: // Novice
                 if (!pcbotsSpawned) {
+                	pcbotsSpawned = true;
 					for (int pestBotsAmount = 0; pestBotsAmount < 20; pestBotsAmount++) {
 						PvMBotsBuilder.createPestControlTestBot(new Location(2657, 2640));
 					}
