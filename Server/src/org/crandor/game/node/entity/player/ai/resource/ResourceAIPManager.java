@@ -9,6 +9,7 @@ import org.crandor.game.node.entity.player.ai.resource.task.ResourceTasks;
 import org.crandor.game.node.entity.player.ai.skillingbot.SkillingBotsBuilder;
 import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
+import org.crandor.game.world.map.Location;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -39,7 +40,9 @@ public class ResourceAIPManager {
     public void immerseWorld() { //There's probably a better place for this (it adds bot at bootup)
         PvMBotsBuilder.immersiveSpawns();
         LumbridgeBotHandler.immersiveLumbridge();
-        //AIPBuilder.immersiveSpawns();
+        for (int pestBotsAmount = 0; pestBotsAmount < 20; pestBotsAmount++) {
+            PvMBotsBuilder.createPestControlTestBot(new Location(2657, 2640));
+        }
         //SkillingBotsBuilder.immersiveSpawnsSkillingBots();
         System.out.println("Loaded immerseWorld");
     }

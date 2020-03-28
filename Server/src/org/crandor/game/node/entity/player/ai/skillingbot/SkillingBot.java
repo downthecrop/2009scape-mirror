@@ -40,8 +40,6 @@ public class SkillingBot extends AIPlayer {
 		default:
 			break;
 		}
-			
-		// TODO Auto-generated constructor stub
 	}
 	
 	@Override
