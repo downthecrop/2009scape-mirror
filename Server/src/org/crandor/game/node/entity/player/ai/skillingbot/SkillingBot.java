@@ -36,9 +36,9 @@ public class SkillingBot extends AIPlayer {
 
 		switch (this.skill)
 		{
-		case Skills.MINING:
-		default:
-			break;
+			case Skills.MINING:
+			default:
+				break;
 		}
 	}
 	
