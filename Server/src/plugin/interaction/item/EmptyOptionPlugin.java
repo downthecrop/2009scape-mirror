@@ -26,6 +26,11 @@ public final class EmptyOptionPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
+		if(node.getId() == 2329){
+			player.getInventory().remove(new Item(2329));
+			player.getInventory().add(new Item(2313));
+		}
+
 		Consumable consumable = Consumables.forConsumable(((Item) node));
 		if (consumable == null) {
 			String name = node.getName().toLowerCase();
