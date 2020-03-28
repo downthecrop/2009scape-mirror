@@ -356,6 +356,10 @@ public final class PlayerCommandPlugin extends CommandPlugin {
 		player.getPacketDispatch().sendString("<col=2c3e50>Shows this list.", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=ecf0f1>::players", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=2c3e50>Get online player count.", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::npcs", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Lists all NPCs in your areas and their IDs", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=ecf0f1>::drops id", 275, lineId++);
+		player.getPacketDispatch().sendString("<col=2c3e50>Lists drops for a given NPC id", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=ecf0f1>::quests", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=2c3e50>Shows a list of all available quests.", 275, lineId++);
 		player.getPacketDispatch().sendString("<col=ecf0f1>::togglenews", 275, lineId++);
