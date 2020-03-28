@@ -184,12 +184,11 @@ public class AIPlayer extends Player {
                 ++n;
                 String line = sc.nextLine();
                 if (rand.nextInt(n) == 0) { //Chance of overwriting line is lower and lower
-                    OSRScopyLine = line;
-                    if (line.length() < 3) //probably an empty line
+                    if (line.length() < 3 || line.startsWith("#")) //probably an empty line
                     {
-                        System.out.println("Something went wrong reading line [" + line + "] from /data/botdata/" + fileName);
-                        updateRandomOSRScopyLine(fileName);
+                        continue;
                     }
+                    OSRScopyLine = line;
                 }
             }
         } catch (FileNotFoundException e) {
@@ -199,7 +198,9 @@ public class AIPlayer extends Player {
     }
 
     private static String retrieveRandomName(String fileName) {
-        updateRandomOSRScopyLine(fileName);
+        do {
+            updateRandomOSRScopyLine(fileName);
+        } while (OSRScopyLine.startsWith("#")); //Comment
         return OSRScopyLine.split(":")[0];
     }
 
