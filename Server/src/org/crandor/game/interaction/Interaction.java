@@ -17,7 +17,7 @@ import org.crandor.net.packet.out.InteractionOption;
  * Handles interaction between nodes.
  * @author Emperor
  */
-public class Interaction {
+public final class Interaction {
 
 	/**
 	 * The current options.

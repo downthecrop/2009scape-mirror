@@ -3,7 +3,6 @@ package org.crandor.game.world;
 import org.crandor.ServerConstants;
 import org.crandor.cache.Cache;
 import org.crandor.cache.ServerStore;
-import org.crandor.game.content.ame.AntiMacroHandler;
 import org.crandor.game.content.eco.ge.GrandExchangeDatabase;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
@@ -191,6 +190,7 @@ public final class GameWorld {
         SQLManager.postPlugin();
         parseObjects();
         CallbackHub.call();
+
         if (run) {
             SystemManager.flag(GameWorld.getSettings().isDevMode() ? SystemState.PRIVATE : SystemState.ACTIVE);
         }

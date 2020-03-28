@@ -97,7 +97,6 @@ public class AIPlayer extends Player {
         super(new PlayerDetails("/aip" + (currentUID + 1) + ":" + name));
         super.setLocation(startLocation = l);
         super.artificial = true;
-        this.artificial = true;
         super.getDetails().setSession(ArtificialSession.getSingleton());
         Repository.getPlayers().add(this);
         this.username = StringUtils.formatDisplayName(name + (currentUID + 1));
