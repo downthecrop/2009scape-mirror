@@ -31,7 +31,7 @@ public class RasoloNPC extends OptionHandler {
 
     /**
      * Rasolo npc
-     * @author ceik 
+     * @author ceik
      */
 
     public class RosaloDialouge extends DialoguePlugin{

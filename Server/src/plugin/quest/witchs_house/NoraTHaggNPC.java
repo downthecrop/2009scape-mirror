@@ -22,7 +22,7 @@ import java.util.List;
 
 /**
  * Nora T Hagg NPC
- * @author Ethan, cleaned up by ceik
+ * @author Ethan, cleaned up/fixed by ceik
  * @date y'know
  */
 

@@ -140,6 +140,7 @@ public final class GroundItemManager {
 			if (item.isAutoSpawn()) {
 				continue;
 			}
+			if(item.getDecayTime() - GameWorld.getTicks() == 1000)
 			if (!item.isActive()) {
 				it.remove();
 				if (!item.isRemoved()) {

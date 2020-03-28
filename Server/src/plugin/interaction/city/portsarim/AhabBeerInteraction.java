@@ -15,6 +15,7 @@ import org.crandor.game.node.item.Item;
 import org.crandor.game.system.mysql.impl.GroundSpawnSQLHandler;
 import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.map.Location;
+import org.crandor.game.world.map.path.Pathfinder;
 import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
 
@@ -31,6 +32,7 @@ public class AhabBeerInteraction extends SpecialGroundInteraction {
     public void handle(final Player player, final Option option){
         configure();
         if(option.getName() == "take"){
+            player.getWalkingQueue().addPath(SpecialGroundItems.AHAB_BEER.getLocation().getX(),SpecialGroundItems.AHAB_BEER.getLocation().getY(),false);
             player.faceLocation(SpecialGroundItems.AHAB_BEER.getLocation());
             player.getDialogueInterpreter().open(DIALOGUE_KEY, new NPC(2692), false);
         } else {
