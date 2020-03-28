@@ -40,9 +40,6 @@ public class ResourceAIPManager {
     public void immerseWorld() { //There's probably a better place for this (it adds bot at bootup)
         PvMBotsBuilder.immersiveSpawns();
         LumbridgeBotHandler.immersiveLumbridge();
-        for (int pestBotsAmount = 0; pestBotsAmount < 20; pestBotsAmount++) {
-            PvMBotsBuilder.createPestControlTestBot(new Location(2657, 2640));
-        }
         //SkillingBotsBuilder.immersiveSpawnsSkillingBots();
         System.out.println("Loaded immerseWorld");
     }

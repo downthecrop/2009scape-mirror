@@ -5,6 +5,7 @@ import org.crandor.game.content.activity.ActivityManager;
 import org.crandor.game.interaction.OptionHandler;
 import org.crandor.game.node.Node;
 import org.crandor.game.node.entity.player.Player;
+import org.crandor.game.node.entity.player.ai.pvmbots.PvMBotsBuilder;
 import org.crandor.game.node.entity.player.info.Rights;
 import org.crandor.game.node.item.Item;
 import org.crandor.game.node.object.GameObject;
@@ -20,6 +21,8 @@ import org.crandor.plugin.Plugin;
  * @author Emperor
  */
 public final class PCObjectHandler extends OptionHandler {
+
+	public boolean pcbotsSpawned = false;
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
@@ -91,6 +94,11 @@ public final class PCObjectHandler extends OptionHandler {
 			}
 			switch (object.getId()) {
 			case 14315: // Novice
+                if (!pcbotsSpawned) {
+					for (int pestBotsAmount = 0; pestBotsAmount < 20; pestBotsAmount++) {
+						PvMBotsBuilder.createPestControlTestBot(new Location(2657, 2640));
+					}
+				}
 				startActivity(player, "pest control novice", Location.create(2661, 2639, 0));
 				return true;
 			case 25631: // Intermediate
