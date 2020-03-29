@@ -22,7 +22,6 @@ public final class GuardNPC extends AbstractNPC {
 	 */
 	public GuardNPC() {
 		super(0, null, true);
-		this.setAggressive(false);
 	}
 
 	/**
@@ -32,7 +31,6 @@ public final class GuardNPC extends AbstractNPC {
 	 */
 	private GuardNPC(int id, Location location) {
 		super(id, location, true);
-		this.setAggressive(false);
 	}
 
 	@Override
