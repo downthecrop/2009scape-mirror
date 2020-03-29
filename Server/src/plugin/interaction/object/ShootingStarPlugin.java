@@ -9,10 +9,8 @@ import org.crandor.game.content.skill.Skills;
 import org.crandor.game.content.skill.free.gather.SkillingTool;
 import org.crandor.game.interaction.OptionHandler;
 import org.crandor.game.node.Node;
-import org.crandor.game.node.entity.impl.PulseManager;
 import org.crandor.game.node.entity.npc.NPC;
 import org.crandor.game.node.entity.player.Player;
-import org.crandor.game.node.entity.state.StatePulse;
 import org.crandor.game.node.entity.state.impl.DoubleOrePulse;
 import org.crandor.game.node.item.Item;
 import org.crandor.game.node.object.GameObject;
@@ -23,11 +21,11 @@ import org.crandor.game.system.task.Pulse;
 import org.crandor.game.world.GameWorld;
 import org.crandor.game.world.map.Location;
 import org.crandor.game.world.repository.Repository;
+import org.crandor.plugin.InitializablePlugin;
 import org.crandor.plugin.Plugin;
 import org.crandor.plugin.PluginManager;
 import org.crandor.plugin.PluginManifest;
 import org.crandor.plugin.PluginType;
-import org.crandor.plugin.InitializablePlugin;
 import org.crandor.tools.RandomFunction;
 
 /**
@@ -46,7 +44,7 @@ public class ShootingStarPlugin extends OptionHandler {
 		{"Crafting Guild", Location.create(2940, 3280, 0)},
 		{"Falador East Bank", Location.create(3030, 3349, 0)},
 		{"Rimmington mining site", Location.create(2975, 3237, 0)},
-		{"Falador mining site", Location.create(2975, 3240, 0)},
+		{"Rimmington mine", Location.create(2975, 3240, 0)},
 		{"Karamja mining site", Location.create(2737, 3223, 0)},
 		{"Brimhaven mining site", Location.create(2743, 3143, 0)},
 		{"South Crandor mining site", Location.create(2822, 3239, 0)},
