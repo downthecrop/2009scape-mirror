@@ -112,13 +112,6 @@ public class RevenantNPC extends AbstractNPC {
 		if (killer instanceof Player) {
 			killer.asPlayer().getAudioManager().send(4063, true);
 		}
-		int chance = RandomFunction.getRandom(120);
-		if (chance == 1) {
-			int item = RandomFunction.getRandom(PVP_DROPS.length - 1);
-			Item i = new Item(PVP_DROPS[item]);
-			GroundItemManager.create(i, itemLoc, killer.asPlayer());
-			Repository.sendNews(killer.getUsername() + " has just received a " + i.getName() + " from a " + getName() + ".");
-		}
 	}
 
 	@Override
