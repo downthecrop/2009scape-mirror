@@ -30,7 +30,7 @@ public class RevenantPlugin implements Plugin<Object> {
 	/**
 	 * The maximum amount of revenants spawned.
 	 */
-	private static final int MAX = 50;
+	private static final int MAX = 20;
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
