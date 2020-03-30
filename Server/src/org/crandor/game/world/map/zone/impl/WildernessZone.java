@@ -94,8 +94,8 @@ public final class WildernessZone extends MapZone {
 					return true;
 				}
 			}
+			e.asNpc().getDefinition().getDropTables().drop(e.asNpc(),killer);
 		}
-		e.asNpc().getDefinition().getDropTables().drop(e.asNpc(),killer);
 		return true;
 	}
 
