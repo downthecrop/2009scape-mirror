@@ -172,6 +172,7 @@ class ToolLeprechaunInterface : ComponentPlugin() {
                     }
                     player.inventory.remove(Item(item,amt))
                     updateQuantityMethod.invoke(player,amt)
+                    player.varpManager.get(varp).send(player)
                     return true
                 }
             })
@@ -210,7 +211,8 @@ class ToolLeprechaunInterface : ComponentPlugin() {
                             player.dialogueInterpreter.sendDialogue("You don't have enough inventory space for that.")
                         } else {
                             player.inventory.add(Item(item, amt))
-                            updateQuantityMethod.invoke(player, amt)
+                            updateQuantityMethod.invoke(player, -amt)
+                            player.varpManager.get(varp).send(player)
                         }
                         return true
                     }
