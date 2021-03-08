@@ -6,10 +6,12 @@ import ms.net.packet.WorldPacketRepository;
 import ms.system.ShutdownSequence;
 import ms.system.mysql.SQLManager;
 import ms.system.util.Command;
+import ms.system.util.ManagementConfigParser;
 import ms.world.GameServer;
 import ms.world.PlayerSession;
 import ms.world.WorldDatabase;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -128,6 +130,7 @@ public final class Management {
 		}
 		System.out.println("-------- 530 Management server --------");
 		System.out.println("Starting up...");
+        new ManagementConfigParser("managementprops" + File.separator + "properties.json");
 		SQLManager.init();
 		//NioReactor.configure(ServerConstants.PORT).start();
 		NioReactor.configure(5555).start();
