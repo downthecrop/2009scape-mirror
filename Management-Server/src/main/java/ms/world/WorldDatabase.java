@@ -47,13 +47,13 @@ public class WorldDatabase {
 		buf.putShort((short) 0);
 		buf.put((byte) 1);
 		IoBuffer buffer = new IoBuffer();
-		if (updateStamp != (int) WorldDatabase.updateStamp) {
+		if (updateStamp == (int) WorldDatabase.updateStamp) {
+			buf.put((byte) 0);
+		} else {
 			buf.put((byte) 1); // Indicates an update occured.
 			putWorldListinfo(buffer);
-		} else {
-			buf.put((byte) 0);
 		}
-		putPlayerInfo(buffer);
+        putPlayerInfo(buffer);
 		if (buffer.toByteBuffer().position() > 0) {
 			buf.put((ByteBuffer) buffer.toByteBuffer().flip());
 		}
@@ -85,18 +85,21 @@ public class WorldDatabase {
 			buffer.putJagString(capitalize(country.name().toLowerCase()));
 		}
 	}
-	/*
-     * Stole this from a library so we don't need the dependency
-	 */
+
+    /**
+     * Converts a string to a capitalized string
+     * @param name
+     * @return
+     */
 	private static String capitalize(String name) {
-		if (name != null && name.length() != 0) {
+		if (name == null || name.length() == 0) {
+			return name;
+		} else {
 			char[] chars = name.toCharArray();
 			chars[0] = Character.toUpperCase(chars[0]);
 			return new String(chars);
-		} else {
-			return name;
 		}
-	}
+    }
 
 	/**
 	 * Adds the world configuration on the packet.
