@@ -26,8 +26,8 @@ class ToolLeprechaunInterface : ComponentPlugin() {
         component ?: return
         super.open(player, component)
         player?.varpManager?.flagSave(varp)
-        if(component.id == 125) {
-            player?.interfaceManager?.openSingleTab(Component(126))
+        if(component.id == Components.farming_tools_125) {
+            player?.interfaceManager?.openSingleTab(Component(Components.farming_tools_side_126))
             component.setCloseEvent { pl, _ ->
                 pl?.interfaceManager?.closeSingleTab()
                 true
@@ -41,7 +41,7 @@ class ToolLeprechaunInterface : ComponentPlugin() {
 
         when(component.id){
 
-            125 -> {
+            Components.farming_tools_125 -> {
                 when(button){
 
                     33 -> {
@@ -131,7 +131,7 @@ class ToolLeprechaunInterface : ComponentPlugin() {
                 }
             }
 
-            126 -> {
+            Components.farming_tools_side_126 -> {
 
                 when(button){
 
