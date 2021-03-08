@@ -158,7 +158,12 @@ class ToolLeprechaunInterface : ComponentPlugin() {
         player ?: return
         val hasAmount = player.inventory.getAmount(item)
         var finalAmount = amount
-        val spaceLeft = 255 - quantityCheckMethod.invoke(player)
+        val spaceLeft = (if(item == Items.BUCKET_1925) 31 else 255) - quantityCheckMethod.invoke(player)
+
+        if(hasAmount == 0){
+            player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
+            return
+        }
 
         if(amount == -2){
             player.setAttribute("runscript", object : RunScript() {
@@ -169,6 +174,10 @@ class ToolLeprechaunInterface : ComponentPlugin() {
                     }
                     if(amt > spaceLeft){
                         amt = spaceLeft
+                    }
+                    if(amt == 0){
+                        player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
+                        return true
                     }
                     player.inventory.remove(Item(item,amt))
                     updateQuantityMethod.invoke(player,amt)
@@ -184,6 +193,10 @@ class ToolLeprechaunInterface : ComponentPlugin() {
             if(finalAmount > spaceLeft){
                 finalAmount = spaceLeft
             }
+        }
+
+        if(!player.inventory.contains(item,finalAmount)){
+            player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
         }
 
         player.inventory.remove(Item(item,finalAmount))
