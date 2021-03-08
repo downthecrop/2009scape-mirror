@@ -14,3 +14,9 @@ data/profile/**
 *.userlibraries
 data/players/**
 data/eco/offer_dispatch_db.emp
+/build/
+/build/kotlin/
+/build/classes/
+/build/generated/
+/build/tmp/
+/build/libs/
