@@ -1,0 +1,2755 @@
+anim 3 - Look side to side
+anim 5 - Cooking on range
+anim 13 - Old ghost walk
+anim 15 - Old ghost stand
+anim 37 - Hammering object
+anim 38 - Mending Burst Pipe (Artisanâ€™s Workshop)
+anim 39 - Hammering object (advanced)
+anim 40 - Hammering ground
+anim 41 - Standing with hammer
+anim 42 - Hammering object
+anim 45 - Joining bonfire, then leaving.
+anim 70 - Walking with right arm down and leaning slightly.
+anim 71 - Holding onto something, pushing, or leaning on something while breathing hard.
+anim 72 - Mining with Gilded Rune Pickaxe
+anim 74 - Mining with Gilded Bronze Pickaxe
+anim 75 - Mining with Gilded Steel Pickaxe
+anim 76 - Mining with Gilded Iron Pickaxe
+anim 77 - Mining with Gilded Mithril Pickaxe
+anim 78 - Mining with Gilded Adamant Pickaxe
+anim 87 - Border Guard Holding Axe
+anim 88 - Border Guard Lifts Axe
+anim 108 - Mining and struggling with Gilded Dragon Pickaxe
+anim 111 - Mining and struggling with Gilded Rune Pickaxe
+animGFX 122 1471 - Classic Cape (emote) (e)
+anim 132 - Mining and struggling with Gilded Bronze Pickaxe
+anim 133 - Mining and struggling with Gilded Steel Pickaxe
+anim 134 - Mining and struggling with Gilded Iron Pickaxe
+anim 135 - Mining and struggling with Gilded Mithril Pickaxe
+anim 148 - Mining and struggling with Gilded Rune Pickaxe
+anim 151 - Pulling Christmas Cracker
+anim 157 - Mining and struggling with Gilded Dragon Pickaxe
+anim 158 - One Hammer hit
+anim 159 - One Hammer hit
+anim 160 - One Sacred Clay hammer hit
+anim 161 - One Sacred Clay hammer hit
+anim 173 - Use Bull-Roarer (Legendâ€™s Quest)
+anim 210 - One Sacred Clay Hammer hit
+anim 226 - On floor holding legs as if hurt
+anim 227 - Limping (DR-1622)
+anim 228 - Limping walk (DR-1622)
+anim 230 - One Sacred Clay hammer hit
+anim 231 - One Golden hammer hit
+anim 233 - One Golden hammer hit
+anim 234 - Rock Mining and struggling with Gilded Bronze Pickaxe
+anim 235 - Rock Mining and struggling with Gilded Steel Pickaxe
+anim 236 - Rock Mining and struggling with Gilded Iron Pickaxe
+anim 237 - Rock Mining and struggling with Gilded Adamant Pickaxe
+anim 238 - Rock Mining and struggling with Gilded Mithril Pickaxe
+anim 249 - Rock Mining and struggling with Gilded Rune Pickaxe
+anim 250 - Rock Mining and struggling with Gilded Dragon Pickaxe
+anim 251 - Rock Mining and struggling with Gilded Bronze Pickaxe
+anim 252 - Rock Mining and struggling with Gilded Steel Pickaxe
+anim 253 - Rock Mining and struggling with Gilded Iron Pickaxe
+anim 269 - Rock Mining and struggling with Gilded Mithril Pickaxe
+anim 270 - Rock Mining and struggling with Gilded Adamant Pickaxe
+anim 271 - Rock Mining and struggling with Gilded Rune Pickaxe
+anim 272 - Rock Mining and struggling with Gilded Dragon Pickaxe
+anim 273 - Mining and struggling with Gilded Rune Pickaxe
+anim 282 - Mining and struggling with Gilded Bronze Pickaxe
+anim 294 - Mining and struggling with Gilded Steel Pickaxe
+anim 295 - Mining and struggling with Gilded Iron Pickaxe
+anim 297 - Mining and struggling with Gilded Adamant Pickaxe
+anim 308 - Mining and struggling with Gilded Mithril Pickaxe
+anim 316 - Idle Animation (DR-2025)
+anim 317 - Duellist Cap Brag (Version One) (T1)
+anim 318 - Duellist Cap Brag (Version Two) (T2)
+anim 329 - Salty Claws Hat Dance (e)
+anim 330 - Magic Carpet flight
+anim 331 - Magic Carpet landing
+anim 346 - Sitting with hands behind back
+anim 347 - Sitting while casting a spell
+animGFX 352 1446 - Veteranâ€™s Cape Emote (5 Years)
+animGFX 356 307 - Completionist Cape (Begin) (Turn into Dragon) (NPC-ID: 1830)
+animGFX 361 122 - Wildstalker Helmet Brag (Version Three)
+anim 363 - Mix potion
+anim 364 - Pestle mortar
+anim 365 - Potion explosion (Glitched on RS3)
+anim 376 - Attack
+anim 377 - Attack
+anim 378 - Defend
+anim 380 - Attack
+anim 381 - Stab Attack
+anim 382 - Stab Attack
+anim 383 - Defend
+anim 385 - Tramp Throw Rotten Tomato (Projectile GFX 29) (Tile GFX 31)
+anim 386 - Stab attack
+anim 387 - Defend
+anim 388 - Defend
+anim 389 - Ice Warrior Defend
+anim 390 - Attack
+anim 391 - Ice Warrior Attack (transparent)
+anim 393 - Auto Attack with Claws (Legacy)
+anim 394 - Attack transparent
+anim 395 - Attack
+anim 396 - Dagger attack
+anim 397 - Defend With Claws (Legacy)
+anim 398 - Defend
+anim 399 - Defend transparent
+anim 400 - Attack
+anim 401 - Mace Auto Attack (Legacy)
+anim 403 - Defend with Mace (Legacy)
+anim 404 - Defend with Mace and Shield
+anim 406 - Attack with 2H Sword
+anim 409 - Marion Polishing Her Trophy at the Bar
+anim 410 - Attack with 2H Sword
+animGFX 412 121 - Wildstalker Helmet Brag (Version Two)
+anim 413 - Moving arms to the side while holding staff?
+anim 414 - Attack with Staff (IE Mourner in West Ardy)
+anim 415 - Defend Holding Staff (IE Mourner in West Ardy)
+anim 416 - Sticking arm out, as if holding a staff for a few seconds
+anim 419 - Attack with staff?
+anim 420 - Defend
+anim 421 - Lunge attack (or rolling a ball?)
+anim 422 - Punch
+anim 423 - Kick
+anim 424 - Defend unarmed
+anim 425 - Defend
+anim 426 - Fire bow
+anim 428 - Attack with Spear
+anim 429 - Attack melee with Spear
+anim 430 - Defend with 2H Spear
+anim 431 - Defend with Spear
+anim 433 - Attack
+anim 434 - Defend
+anim 435 - Defend
+anim 436 - Candle Seller Idle (NPC-ID 1834) (DR-1978)
+anim 437 - Attack
+anim 438 - Attack
+anim 440 - Attack
+animGFX 442 23 - Climbing Falador Wall With Grapple
+animGFX 445 56 - Spread ashes
+anim 451 - Pick something off ground
+anim 471 - Holding arm out (Border guard?)
+anim 473 - Finish Monkey bars
+anim 482 - Climb onto monkey bar
+anim 483 - Climb across monkey bar
+anim 484 - Fire crossbow
+anim 487 - Fletch something?
+animGFX 507 91 - Duellist Cap Brag (Version Two) (T1)
+animGFX 508 91 - Duellist Cap Brag (Version Two) (T2)
+animGFX 509 91 - Duellist Cap Brag (Version Two) (T3)
+animGFX 510 91 - Duellist Cap Brag (Version Two) (T4)
+animGFX 511 91 - Duellist Cap Brag (Version Two) (T5)
+animGFX 512 92 - Duellist Cap Brag (Version Three) (T1)
+animGFX 513 92 - Duellist Cap Brag (Version Three) (T2)
+anim 528 - Whirlpool
+anim 529 - Cover head with hands
+animGFX 530 92 - Duellist Cap Brag (Version Three) (T3)
+animGFX 531 92 - Duellist Cap Brag (Version Three) (T4)
+animGFX 532 92 - Duellist Cap Brag (Version Three) (T5)
+animGFX 533 92 - Duellist Cap Brag (Version Three) (T6)
+anim 534 - Wildstalker Helmet Brag (Version One)
+anim 535 - Open PoH Wardrobe
+anim 536 - Open Chest
+anim 537 - Putting Object on Table
+anim 538 - Take something from chest
+anim 539 - Close chest
+anim 540 - Crawl into Lumbridge Swamp Dungeon Tree
+anim 541 - Close Wardrobe
+anim 542 - Open Wardrobe
+anim 545 - Open Wardrobe
+anim 546 - Estocada Idle (DR-683) (NPC-ID 3670)
+anim 547 - Dagger attack?
+anim 550 - Dagger attack?
+anim 551 - Dagger attack?
+anim 552 - Mr. Ex Idle (DR-689) (NPC-ID 3709)
+anim 553 - Swipe attack
+anim 582 - Throw dart
+anim 618 - Harpoon fishing
+anim 619 - Lobster cage fishing
+anim 620 - Net fishing
+anim 621 - Net fishing
+anim 622 - Rod Fishing
+anim 623 - Rod fishing
+anim 624 - Mining with Rune Pickaxe
+anim 625 - Mining with Bronze Pickaxe
+anim 626 - Mining with Iron Pickaxe
+anim 627 - Mining with Steel Pickaxe
+anim 628 - Mining with Adamant Pickaxe
+anim 629 - Mining with Mithril Pickaxe
+anim 642 - Step back startled
+anim 645 - Praying at altar/gravestone
+anim 654 - Getting on magic carpet
+anim 661 - Hands Together [Banker Idle (DR-2026) (NPC-ID 4456)]
+anim 691 - Banker Idle (DR-2026) (NPC-ID 4456)
+anim 692 - Banker Idle (DR-2028) (NPC-ID 4458)
+anim 707 - Cast Spell?
+anim 708 - Iban staff
+anim 709 - Hands Together
+anim 710 - Cast Spell (Wise Old Man uses it)
+anim 711 - Cast Spell
+animGFX 711 108 - Casting Spell
+anim 712 - Old Low Alchemy
+anim 713 - Old High Alchemy
+animGFX 716 102 - Casting Weaken
+anim 717 - Cast Spell
+anim 718 - Cast Spell
+anim 719 - Raise one hand in air, raise other to the side (Enchant Jewelry?)
+anim 720 - Raise one hand in air, raise other to the side (Enchant Jewelry?)
+anim 721 - Raise one hand in air, raise other to the side (Enchant Jewelry?)
+anim 722 - Raise one hand in air, raise other to the side (Enchant Jewelry?)
+anim 723 - Stick both arms in air, pointing upwards
+anim 724 - Cast spell/push
+anim 727 - Idle (Brushing knees)
+anim 728 - Cast a spell
+anim 729 - Cast a spell
+anim 733 - Tinderbox
+anim 734 - Thrown back (Like with the Fire Wall in Legends Quest)
+anim 735 - In air while being thrown back (Like with the Fire Wall in Legends Quest)
+anim 736 - Land on bottom (Like with the Fire Wall in Legends Quest)
+anim 737 - Climbing wall
+anim 738 - Climbing wall
+anim 739 - Climbing down wall
+anim 740 - Climbing down wall
+anim 741 - Jump short gap (Has sound effect)
+anim 742 - Jump up to grab monkey bars
+anim 743 - Finish crossing monkey bars
+anim 744 - Crossing monkey bars
+anim 745 - Holding on to monkey bar
+anim 746 - Idle
+anim 748 - Run
+anim 749 - Walk
+anim 751 - Rope Swing
+anim 752 - Move to cross wall obstacle
+anim 753 - Move to cross wall obstacle
+anim 754 - Crossing wall obstacle
+anim 755 - On wall obstacle
+anim 756 - Crossing wall obstacle
+anim 757 - On wall obstacle
+anim 758 - Finish crossing wall obstacle
+anim 759 - Finish crossing wall obstacle
+anim 760 - Fall onto floor face down
+anim 761 - Fall onto floor face down
+anim 762 - Crossing log obstacle
+anim 763 - Standing on log obstacle
+anim 764 - Falling off log
+anim 765 - Drowning
+anim 766 - Falling
+anim 767 - Landing on stomach
+anim 768 - Falling After Failing Plank Obstacle (Brimhaven Agility)
+anim 769 - Jump Bridge
+anim 770 - Lose Balance and Fall
+anim 771 - Lose Balance and Fall
+anim 772 - Swim (DR-188)
+anim 773 - Swim Idle (DR-188)
+anim 774 - Idle (leaning forward)
+anim 775 - Summon rope swing
+anim 776 - Crossing low water
+anim 777 - Standing in low water
+anim 778 - Tackle Gnomeballer
+anim 779 - Hurt foot/knee
+anim 780 - Bend forward
+anim 782 - Cheer and then move hands together
+anim 783 - Throw Gnome Ball
+anim 784 - Nod head, twirl, dance
+anim 787 - Plop on belly and fade away
+anim 789 - Throw Bolas?
+anim 791 - Old runecrafting
+anim 792 - Standing holding something with both hands while boat rocks?
+anim 794 - Stomp on balloon?
+anim 795 - Start to fall but then catch self
+anim 796 - one frame of catching self?
+anim 797 - Holding on to edge, then going into a crawl
+anim 798 - Pull lever?
+anim 799 - Stab with cattle prod
+anim 800 - On knees, playing game?
+anim 802 - Flappy cheer
+anim 803 - Grow from nothing
+anim 804 - Shrink into nothing
+anim 805 - Move hand as if opening slidey door lock
+anim 806 - Idle standing, looking and limping
+anim 807 - Jump obstacle (in air for several frames)
+anim 808 - Standard Idle (Used in Many Default Renders)
+anim 809 - Idle (looks tense)
+anim 810 - Push open Compost Bin
+anim 811 - Cast Spell (Nature Spirit)
+anim 812 - Walk
+anim 813 - Idle
+anim 814 - Invisible
+anim 815 - Crawling (tiny)
+anim 816 - Crawling pose idle (tiny)
+anim 817 - Fill bucket
+anim 818 - Old Dance Emote
+anim 819 - Standard Walk (Used in Many Default Renders)
+anim 820 - Standard Walking Backwards (Used in Many Default Renders)
+anim 821 - Standard Side Step A (Used in Many Default Renders)
+anim 822 - Standard Side Step B (Used in Many Default Renders)
+anim 823 - Standard Turning (Used in Many Default Renders)
+anim 824 - Standard Run (Used in Many Default Renders)
+anim 825 - Holding weapon
+anim 826 - Walking with weapon
+anim 827 - Multi-Use â€œBend Overâ€
+anim 828 - Use ladder
+anim 829 - Eat (old)
+anim 830 - Dig with spade
+anim 831 - Dig with spade (loop)
+anim 832 - Multi-Use â€œTakeâ€
+anim 833 - Multi-Use â€œPutâ€
+anim 834 - Move forward and grab something?
+anim 835 - Move forward and grab something?
+anim 836 - Death
+anim 837 - Fall on Back and Die
+anim 838 - On Back Dead
+anim 839 - Climb Over Object
+anim 840 - Reading map
+anim 841 - Transparent walking
+anim 842 - Transparent standing
+anim 843 - Ice Warrior Death
+anim 844 - Crawling
+anim 845 - Crawl to enter Plain of Mud cave
+anim 846 - Startled step back
+anim 847 - Stand holding weapon
+anim 848 - Mind controlled/dizzy
+anim 854 - Alternate looking at both hands in confused manner, looped
+anim 855 - Nod head
+anim 856 - Shake head no
+anim 857 - Think
+anim 858 - Bow
+anim 859 - Angry
+anim 860 - Cry
+anim 861 - Laugh
+anim 862 - Cheer
+anim 863 - Wave Emote
+anim 864 - Beckon
+anim 865 - Clap
+anim 866 - Dance
+anim 867 - Woodcutting with Rune hatchet
+anim 869 - Woodcutting with Adamant hatchet
+anim 870 - Woodcutting with Dragon hatchet
+anim 871 - Woodcutting with Mithril hatchet
+anim 872 - Woodcutting with Rune hatchet
+anim 873 - Woodcutting with Black hatchet
+anim 874 - Woodcutting with Adamant hatchet
+anim 875 - Woodcutting with Steel hatchet
+anim 876 - Woodcutting with Mithril hatchet
+anim 877 - Woodcutting with Iron hatchet
+anim 878 - Woodcutting with Black hatchet
+anim 879 - Woodcutting with Bronze hatchet
+anim 880 - Woodcutting with Steel hatchet
+anim 881 - Pick pocket
+anim 883 - Spin Potter's Wheel
+anim 884 - Glass blowing
+anim 885 - Cut Dragonstone
+anim 886 - Cut Diamond
+anim 887 - Cut Ruby
+anim 888 - Cut Sapphire
+anim 889 - Cut Emerald
+anim 890 - Cut Opal
+anim 891 - Cut Jade
+anim 892 - Cut Topaz
+anim 893 - Shearing sheep
+anim 894 - NPC standing at bar drinking and turning around
+anim 895 - Fill bucket with sand
+anim 896 - Old cooking on range animation
+anim 897 - Old cooking on fire
+anim 898 - Smithing with Hammer
+anim 899 - Old Furnace animation
+anim 902 - Sidestep with weapon
+anim 903 - Sidestep with weapon
+anim 904 - Walking backwards with weapon
+anim 908 - Use bullroarer (Legends Quest)
+anim 909 - Write something
+anim 910 - Machete
+anim 911 - Cut Spider Web
+anim 915 - Look over duel arena
+anim 916 - Overlooking duel arena
+anim 918 - Brown Toy Horse
+anim 919 - White Toy Horse
+anim 920 - Black Toy Horse
+anim 921 - Grey Toy Horse
+anim 923 - Big attack
+anim 929 - Throw something (slowly)
+anim 931 - Holding something (shakes hand like a salt shaker?)
+anim 1017 - Stuck in mud
+anim 1024 - Ogre bellows
+anim 1025 - On back dead
+anim 1032 - Idle
+anim 1033 - Walk
+anim 1034 - Pull Lever (Elemental Workshop III)
+anim 1035 - Pull Lever (Elemental Workshop III)
+anim 1036 - Pull lever
+anim 1037 - Pull lever
+anim 1056 - Dragon Battleaxe special attack?
+anim 1057 - Old excalibur
+anim 1058 - Walk backwards
+anim 1059 - Walk with weapon
+animGFX 1060 251 - Dragon Mace Special Attack
+animGFX 1062 252 H92 - Dragon Dagger Special [EoC]
+anim 1064 - Tiptoe
+anim 1065 - Walk
+anim 1067 - Big lunge attack
+anim 1074 - Fire bow (sound effect sounds like two arrows are being fired)
+anim 1077 - Use Bucket on Coffin (Priest in Peril)
+anim 1078 - Tiptoe backwards
+anim 1079 - Tiptoe run
+anim 1080 - Idle
+anim 1081 - Walk slowly
+anim 1082 - Walk slowly (backwards)
+anim 1083 - Run slowly
+animGFX 1084 1009 H30 - Surok Casts Spell
+anim 1100 - Silver sickle
+anim 1105 - Fail agility obstacle and fall
+anim 1106 - Try to climb wall obstacle but fail
+anim 1110 - Brimhaven Agility Course Darts â€œMatrixâ€
+anim 1115 - Pressure Pads Brimhaven Agility
+anim 1117 - Handholds
+anim 1118 - Handholds
+anim 1119 - Fail handholds
+anim 1120 - Finish handholds
+anim 1121 - Crossing handholds
+anim 1122 - Crossing handholds
+anim 1123 - Fail handholds
+anim 1124 - Finish handholds
+anim 1125 - Step forward, then step back
+anim 1128 - Glass wall (emote) (e)
+anim 1129 - Lean (emote) (e)
+anim 1130 - Climb Rope (emote) (e)
+anim 1131 - Glass box (emote) (e)
+anim 1133 - Jump belly first to cross obstacle
+anim 1137 - Standing (facing other way)
+anim 1138 - Walking backwards
+anim 1142 - Idle
+anim 1144 - Standing (below ground)
+anim 1145 - Shake fist (below ground)
+anim 1146 - Walk (choppy)
+anim 1147 - Lean back (below ground)
+anim 1148 - Walk backwards then climb down wall
+anim 1156 - Defend While Holding 1H Weapon and Shield (Legacy)
+anim 1157 - Electrocute?
+anim 1161 - Cast spell
+anim 1162 - Walk
+anim 1163 - Cast spell
+anim 1164 - Cast spell
+anim 1165 - Cast spell
+anim 1166 - Cast spell
+anim 1167 - Cast spell
+anim 1168 - Cast spell
+anim 1169 - Cast spell
+animGFX 1174 1443 - Completionist Cape Emote (Middle) (As Dragon) (NPC-ID: 1830)
+anim 1175 - Completionist Cape Emote (End) (Turn Back From Being Dragon)
+anim 1177 - Walk backwards
+anim 1179 - Max Cape Emote (Step One)
+anim 1180 - Max Cape Emote (Step Two) (Inferno adze and Saw)
+anim 1181 - Max Cape Emote (Step Three) (Crystal Pick)
+anim 1182 - Max Cape Emote (Step Four) (Hatchet and Watering Can)
+anim 1191 - Running
+anim 1192 - Slice banana
+anim 1193 - Fishing with Karambwan Vessel
+anim 1194 - Drink Karamja Rum
+anim 1195 - Use Banana with Karamja Rum
+anim 1196 - Cough repeating
+anim 1198 - Side step
+anim 1201 - Side step
+anim 1203 - Attack with weapon
+anim 1205 - Walk
+anim 1206 - Walk backwards
+anim 1207 - Side step
+anim 1208 - Side step
+anim 1209 - Shake hips cutely
+anim 1210 - Running
+anim 1217 - Idle with hands together in front of hips, standing in one square ahead
+anim 1233 - Scratch hips (part of same idle as 1217)
+anim 1236 - Cross tripwire?
+anim 1237 - Walk, the turn to dodge something, then continue walking
+anim 1238 - Mining with gilded rune pickaxe
+anim 1239 - Mining with gilded bronze pickaxe
+anim 1240 - Step back and wave arm
+anim 1241 - Invisible
+anim 1248 - Fletch logs
+anim 1249 - Craft leather
+anim 1250 - Max Cape Emote (Step Five) (Smithing and Crafting)
+animGFX 1251 4253 - Max Cape Emote (Step Six) (Prepare For Battle)
+anim 1252 - Climb Over obstacle
+anim 1254 - Mining with gilded iron pickaxe
+anim 1256 - Mining with gilded steel pickaxe
+anim 1258 - Plop on belly, get on knees (choppy)
+anim 1259 - Mining with gilded adamant pickaxe
+anim 1263 - Try to push open lock?
+anim 1264 - Throw something forward?
+anim 1267 - Cover head with hands irritated?
+anim 1275 - Two frames of limping stance
+anim 1280 - Craft something?
+animGFX 1291 1505 1686 - Max Cape Emote (Step Seven) (Fighting)
+anim 1306 - Walking with both hands out forward
+anim 1307 - Bend back slightly
+anim 1309 - Craft something
+anim 1316 - Mining with gilded mithril pickaxe
+anim 1318 - Hold lyre
+anim 1319 - Hold lyre
+anim 1320 - Play lyre
+anim 1321 - Play lyre
+anim 1322 - Hold tankard of beer
+anim 1323 - Walk with tankard of beer
+anim 1324 - Walk backwards with tankard of beer
+anim 1325 - Side step with tankard of beer
+anim 1326 - Side step with tankard of beer
+anim 1327 - Drink beer
+anim 1328 - Mining with gilded dragon pickaxe
+anim 1329 - Sitting on ground, pretzel position
+anim 1330 - Drink keg of beer
+anim 1331 - Get on knees as if showing respect
+anim 1332 - Getting off knees
+anim 1333 - Petting rock
+anim 1334 - Idle, hand on hip,
+anim 1335 - Preach White book
+anim 1336 - Preach Red book
+anim 1337 - Preach Green book
+anim 1350 - Read book
+anim 1351 - Sit on stool
+anim 1352 - Scratch head on stool
+anim 1353 - Cover mouth on stool
+anim 1354 - Move hand sitting on stool
+anim 1363 - Eat
+anim 1364 - Sitting (no chair or stool appears)
+anim 1365 - Daemonheim Wilderness Guard
+anim 1366 - Daemonheim Wilderness Guard Letting Player Pass
+anim 1367 - Craft Dramen Staff
+anim 1368 - Running with weapon
+animGFX 1374 1702 - Blow Kiss (emote) (e)
+anim 1376 - Linza Smithing?
+anim 1379 - Electrocute, then go on knees?
+anim 1406 - Bucket
+anim 1407 - On knees in dead position
+anim 1408 - Lying dead stretched out
+anim 1409 - Getting up from  Lying dead stretched out
+anim 1421 - Idle
+anim 1422 - Walk
+anim 1423 - Walk backwards
+anim 1424 - Side step
+anim 1425 - Side step
+anim 1426 - Walk
+anim 1427 - Run
+anim 1428 - Attack
+anim 1429 - Defend
+anim 1441 - Startled step back
+anim 1457 - Yo-yo
+anim 1458 - Yo-yo
+anim 1459 - Yo-yo
+anim 1460 - Yo-yo
+anim 1461 - Sitting on sled
+anim 1462 - Riding sled
+anim 1463 - Riding sled
+anim 1464 - Crash on sled?
+anim 1465 - Get off sled?
+anim 1466 - Defend on sled?
+anim 1467 - Riding sled
+anim 1468 - Walking on sled
+anim 1469 - Eat on sled
+anim 1470 - Wax sled
+anim 1479 - Walk, looking side to side
+anim 1481 - Shake fist on sled
+anim 1482 - Cheer on sled
+anim 1483 - Wave on sled
+anim 1484 - Beckon on sled
+anim 1485 - Clap on sled
+anim 1486 - Pick Trollweiss Flower (A)
+anim 1487 - Pick Trollweiss Flower (B)
+anim 1493 - Sweep broom?
+anim 1494 - Walk sweeping broom?
+anim 1504 - Blood Runs Deep Wedding Kiss (A)
+anim 1505 - Blood Runs Deep Wedding Kiss (B)
+anim 1506 - Floating (glitched)
+anim 1507 - Lunar Floating
+anim 1508 - Lunar Floating
+anim 1509 - Lunar Floating Eat?
+anim 1510 - Lunar Floating Attack?
+anim 1511 - Mining with Bronze Pickaxe
+anim 1514 - Headache on floor
+anim 1531 - Barbarian Cheering (Gunnarâ€™s Ground)
+anim 1544 - Lunar Floating Climb Rope?
+anim 1548 - Pull Lever on Wall
+anim 1551 - Idle
+anim 1552 - Climb out of ground
+anim 1560 - Climb Stile
+anim 1563 - Use Spinning Wheel
+anim 1565 - Drunk?
+anim 1567 - Idle (turned around)
+anim 1572 - Bend knees and cover ears
+anim 1575 - Stick arm out
+anim 1601 - Werewolf Agility Zipline
+anim 1602 - Zipline
+anim 1603 - Jump obstacle (Werewolf Agility)
+anim 1604 - Jump short obstacle (Werewolf Agility)
+anim 1605 - Cheering
+anim 1606 - Kick skull ball
+anim 1633 - Use extended brush (Creature of Fenkenstrain)
+anim 1638 - Bend over to use something?
+anim 1648 - Turning Wheel (Ectofuntus)
+anim 1649 - Fill Hopper with Bones (Ectofuntus)
+anim 1650 - Fill Pot With Bonemeal
+anim 1651 - Ectofuntus Praying
+animGFX 1652 2685 - Electrocute (Elemental Workshop III)
+anim 1653 - Spasms
+anim 1658 - Throw weapon?
+anim 1659 - Defend (spazzy)
+anim 1660 - Walk
+anim 1661 - Run
+anim 1662 - Hold weapon
+anim 1663 - Walk with weapon
+anim 1664 - Run with weapon
+animGFX 1665 340 - Maul Swipe Attack
+anim 1666 - Defend with Maul
+anim 1667 - Attack with Maul
+anim 1669 - Idle
+anim 1670 - Old Angry Emote
+anim 1671 - Old Cheer Emote
+anim 1672 - Old Beckon Emote
+anim 1673 - Walk
+anim 1705 - Idle (Turned Around)
+anim 1722 - Old Home Teleport Start
+anim 1723 - Old Home Teleport Half-Turn
+anim 1724 - Old Home Teleport Next Half-Turn
+anim 1728 - Digging with rock pick
+anim 1735 - Tower of Life â€œThe Gunsâ€ lifting weight
+anim 1736 - Sitting in seat with hands in lap
+anim 1739 - Walking with arms behind back
+anim 1740 - Standing with arms behind back
+anim 1743 - Angry
+anim 1744 - Angry
+anim 1745 - Angry stomping
+anim 1746 - Angry fists in air then kicking
+anim 1755 - Hit with hammer
+anim 1765 - Look to the side
+anim 1766 - Pole jumping (Mountain Daughter)
+anim 1767 - Pick something off ground
+anim 1768 - Doing something to object on ground
+anim 1772 - Looking to the side
+anim 1774 - Looking to the side and pointing
+anim 1775 - Idle
+anim 1776 - Idle
+anim 1777 - On floor on back
+anim 1778 - Place hand on pocket and then realize youâ€™ve been pickpocketed
+anim 1779 - Look behind you (has a sound effect that sounds like photo being taken)
+anim 1780 - Looking at map in hand (item in hand canâ€™t be seen) (same sound effect as above)
+anim 1787 - Smithing then showing off weapon
+anim 1809 - hands out bend (glitchy)
+anim 1810 - Head being held by swamp monster?
+anim 1811 - Single frame (glitchy)
+anim 1816 - Old shrink and rise up teleport
+anim 1818 - Clap and raise fist in air
+animGFX 1819 108 H92 - Zaff Seals Varrock Palace Library (What Lies Below)
+anim 1820 - Looks same as above
+anim 1823 - Festive Mistletoe Kiss
+anim 1830 - Walking
+anim 1831 - Balancing
+anim 1832 - Standing
+anim 1833 - Rubber chicken
+anim 1834 - Rubber chicken
+anim 1835 - Chicken dance
+anim 1836 - Skipping (DR-594)
+anim 1837 - Idle (DR-594)
+anim 1850 - Stand
+anim 1851 - Superman flying
+anim 1852 - Flying land
+anim 1871 - Defend?
+anim 1872 - Give a dog a bone
+anim 1873 - Linza Idle (DR-2111) (Looks like checking to see if wrist is broken)
+anim 1877 - Snake charm
+anim 1878 - Snake charm
+anim 1879 - Snake charm (below ground)
+anim 1880 - Hold weapon?
+anim 1882 - Attack
+anim 1884 - Attack
+anim 1894 - Look side to side while looking at lectern?
+anim 1895 - Look side to side while looking at lectern?
+anim 1897 - Crawling position
+anim 1902 - Spinning plate
+anim 1903 - Net fishing
+anim 1904 - Plate
+anim 1905 - Woodcutting with Sacred Clay hatchet
+anim 1906 - Drop Plate
+anim 1907 - Woodcutting with Volatile Clay hatchet
+anim 1910 - Walk with 2H weapon
+anim 1911 - Walk backwards with 2H weapon
+anim 1914 - Desert Treasure Vampire
+anim 1917 - Sidestep with 2H weapon
+anim 1919 - Walk
+anim 1920 - Sidestep with 2H weapon
+anim 1925 - Run with 2h weapon
+anim 1926 - Defend with 2H weapon
+anim 1936 - Ozan Idle (DR-2114)
+anim 1950 - Fall down trapdoor
+anim 1952 - Facing sideways
+anim 1953 - Facing the other way
+anim 1954 - Facing sideways
+anim 1955 - Holding knee
+anim 1968 - Ozan Walk (DR-2114)
+anim 1978 - Cast spell?
+anim 1979 - Cast spell?
+anim 1988 - Running
+anim 1989 - Cutting chocolate bar
+anim 1992 - Jump down something
+anim 1993 - Climb up something
+anim 1994 - Jump down and fading away
+anim 1995 - Running (OSRS Style)
+anim 1996 - Come out portal? Face first on stomach
+anim 2009 - Bucket and knife (Tree wax?)
+anim 2010 - Bucket
+anim 2033 - Sitting
+anim 2034 - Sitting
+anim 2036 - Get up from sitting on floor
+anim 2037 - Standing
+anim 2040 - Hold bowl
+anim 2041 - Walk with ToG Bowl
+anim 2043 - Fill ToG bowl
+anim 2044 - Finish filling from ToG
+anim 2045 - Drink from bowl
+anim 2046 - Light Creature
+anim 2047 - End Light Creature
+anim 2049 - Climb up wall
+anim 2050 - Climb down wall
+anim 2060 - Walk
+anim 2061 - Idle
+anim 2062 - Attack
+anim 2063 - Defend
+anim 2064 - Walk with Weapon
+anim 2065 - Idle with Weapon
+anim 2066 - Attack with Two Handed Axe
+anim 2067 - Attack
+anim 2068 - Attack with both hands alternating
+anim 2074 - Stand holding weapon
+anim 2076 - Walk holding weapon
+anim 2077 - Run holding weapon
+anim 2078 - Attack?
+anim 2079 - Defend?
+anim 2080 - Attack?
+anim 2081 - Attack?
+anim 2082 - Attack
+anim 2094 - Search for Snake Weed (Jungle Potion)
+anim 2096 - Arms out
+anim 2097 - Arms out as if trying to solve puzzle?
+anim 2098 - Open Cell Door (Fight Arena)
+anim 2105 - Panic
+anim 2106 - Jig Emote
+anim 2107 - Twirl
+anim 2108 - Headbang Emote
+anim 2109 - Jump for joy
+anim 2110 - Raspberry
+anim 2111 - Yawn
+anim 2112 - Salute
+anim 2113 - Shrug
+anim 2118 - Climb stairs
+anim 2119 - Turn valve
+anim 2120 - Turn valve
+anim 2127 - Goblin Bow (emote) (e)
+anim 2128 - Goblin Salute (emote) (e)
+anim 2136 - Put something in pocket?
+anim 2139 - Pull Up Lever
+anim 2140 - Pull Down Lever
+anim 2141 - Pull Lever
+anim 2142 - Bend and pick something on ground?
+anim 2143 - Bend and pick something on ground?
+anim 2144 - Dwarven Battle-Axe
+anim 2145 - Dwarven Battle-Axe
+anim 2146 - Climb up something then climb down?
+anim 2148 - Ride Minecart
+anim 2149 - Chanting spell?
+anim 2161 - Pet Red Pet Rock
+anim 2162 - Pet Green Pet Rock
+anim 2163 - Walk then stand holding broom thing? (glitchy)
+anim 2164 - Walk
+anim 2171 - Look Through Telescope in WoMâ€™s House
+anim 2206 - Pet Blue Pet Rock
+anim 2213 - Pet Yellow Pet Rock
+anim 2214 - Pet Rock Fetch
+anim 2215 - Green Pet Rock Fetch
+anim 2216 - Blue Pet Rock Fetch
+anim 2217 - Yellow Pet Rock Fetch
+animGFX 2231 370 - Activate Aura
+animGFX 2238 358 - Breathe Fire (emote) (e) (LP)
+anim 2239 - Jump up high teleport
+anim 2240 - Duck under obstacle?
+anim 2241 - Fall on ground and die
+anim 2242 - Thrown back and fall on back
+anim 2243 - Clap (glitchy)
+anim 2244 - Clean something on ground?
+anim 2246 - Trying to open door?
+anim 2247 - Cracking safe?
+anim 2248 - Cracking safe?
+anim 2249 - Pickpocket safe?
+anim 2251 - Running one arm out
+anim 2252 - Cat Fight (emote) (e) (LP)
+anim 2253 - Standing one arm out
+anim 2254 - Face-Palm (emote) (e) (LP)
+anim 2255 - Sitting in chair
+anim 2256 - Standing Arms Crossed
+anim 2257 - Standing one arm out
+anim 2258 - Walking one arm out
+anim 2259 - Pour vial
+anim 2261 - Death
+anim 2262 - Walking and looking back and forth
+anim 2267 - Touch something up high?
+anim 2269 - Cut Watermelon
+anim 2270 - Pulling rope?
+anim 2271 - Trowel (loop)
+anim 2272 - Gardening trowel
+anim 2273 - Rake
+anim 2274 - Secutars
+anim 2275 - Secutars
+anim 2276 - Secutars
+anim 2277 - Secutars
+anim 2278 - Secutars
+anim 2279 - Secutars
+anim 2280 - Pick from fruit tree
+anim 2281 - Pick from fruit tree
+anim 2282 - Pick something up from ground
+anim 2283 - Pour bucket over ground
+anim 2284 - Fill Calquat Keg
+anim 2285 - Fill Beer Glass
+anim 2286 - Bend on ground and pick something
+anim 2288 - Pour Plant Cure
+anim 2289 - Drink From Calquat Keg
+anim 2290 - Carve Calquat Keg
+anim 2291 - Seed Dibber
+anim 2292 - Bend and pick something
+anim 2293 - Watering Can
+anim 2295 - Pick something up high
+anim 2303 - Shake Hands (emote) (e) (LP)
+anim 2304 - Death
+anim 2305 - Milking Cow
+anim 2306 - Jumping on Apple Mush
+anim 2311 - Fall into trapdoor
+anim 2312 - High Five (emote) (e) (LP)
+anim 2313 - Trying to open door?
+anim 2316 - Holding something with both hands?
+anim 2317 - Walk holding something with both hands
+anim 2318 - Walk backwards something with both hands
+anim 2319 - Side step
+anim 2320 - Side step
+anim 2321 - Walk
+anim 2322 - Run holding one arm up
+anim 2323 - Attack holding thing (kick)
+anim 2324 - Defend
+anim 2326 - Lose balance holding thing?
+anim 2327 - Levitate (emote) (e) (LP)
+anim 2332 - Tickling with feather
+anim 2333 - Ghost Walk
+anim 2334 - Ghost Idle
+anim 2338 - On Knees
+anim 2339 - Sitting on Stool with Beer Glass
+anim 2340 - Fall backwards on stool
+anim 2343 - Raise beer glass
+anim 2347 - ROFL (Male) (emote) (e) (LP)
+anim 2359 - ROFL (Female) (emote) (e) (LP)
+anim 2360 - Surrender (emote) (e) (LP)
+anim 2376 - About to jump
+anim 2377 - Get into frog position
+anim 2378 - Sitting in Therapist Chair (from Random Event)
+anim 2382 - Swipe with machete  (Tai Bwo Wannai Cleanup)
+anim 2383 - Accidentally disturb jungle  (Tai Bwo Wannai Cleanup)
+anim 2384 - Repairing fence (Tai Bwo Wannai Cleanup)
+anim 2385 - Repairing fence (Tai Bwo Wannai Cleanup)
+anim 2386 - Finish repairing fence (Tai Bwo Wannai Cleanup)
+anim 2387 - Successfully cut dense jungle (Tai Bwo Wannai Cleanup)
+anim 2388 - Exhausted (Tai Bwo Wannai Cleanup)
+anim 2389 - Make skewer (Tai Bwo Wannai Cleanup)
+anim 2390 - Knocked back from disturbing jungle (Tai Bwo Wannai Cleanup)
+anim 2394 - Stab
+anim 2400 - Broodoo Victim Cheering
+anim 2401 - Idle
+anim 2403 - Defend
+anim 2406 - Chillinâ€™ (Teplin Macagan Idle (DR-2406)) [NPC ID-3404]
+anim 2407 - Teplin Macagan Walk (DR-2406) [NPC ID-3404]
+anim 2409 - Craft Broodoo Shield (White)
+anim 2410 - Craft Broodoo Shield (Green)
+anim 2411 - Craft Broodoo Shield (Orange)
+anim 2413 - Climb out of ladder in Draynor Sewer
+animGFX 2414 1537 - Original Air Guitar (emote) (e)
+anim 2416 - Talk to the Hand (emote) (e) (LP)
+animGFX 2417 364 - Snow (emote) (e) (LP)
+anim 2420 - Using Thatch Spar Medium with Opal Machete
+anim 2421 - Opal Machete Tai Bwo Wannai Cleanup
+anim 2422 - Opal Machete Tai Bwo Wannai Cleanup End
+anim 2423 - Jade Machete Tai Bwo Wannai Cleanup End
+anim 2424 - Jade Machete
+anim 2425 - Jade Machete
+anim 2426 - Red Topaz Machete
+anim 2427 - Red Topaz Machete
+anim 2428 - End Red Topaz Machete
+anim 2429 - Opal Machete
+anim 2430 - Jade Machete
+anim 2431 - Red Topaz Machete
+anim 2432 - Pulling Machine (Blast Furnace)
+anim 2433 - Using Bike Machine (Blast Furnace)
+anim 2441 - Use Spade (Blast Furnace)
+anim 2442 - Use Spadeful of Coke (Blast Furnace)
+anim 2443 - Use Spade (Blast Furnace)
+anim 2450 - Use Bucket
+animGFX 2553 432 - Elemental Wizard Death
+anim 2554 - Elemental Wizard Death GFX
+anim 2556 - Thrown Back, land on knees
+anim 2557 - On knees
+anim 2561 - Hold Weapon
+anim 2562 - Walk with Weapon
+animGFX 2563 365 - Storm (emote) (e) (LP)
+anim 2566 - Muscle-man Pose (emote) (e) (LP)
+anim 2569 - Using Compost Potion on Compost Bin
+anim 2570 - Use Secuatars
+anim 2572 - Push
+anim 2573 - Laugh
+anim 2574 - Pushing something
+anim 2577 - Head to side, using something
+anim 2578 - Hands Together Idle
+anim 2579 - Grab something
+anim 2580 - Gesture head backwards
+anim 2581 - Fall off log
+anim 2582 - Fall off log
+anim 2583 - Jump forward and land on stomach
+anim 2584 - Alison Elmshaper Idle (Taverly Fletching Tutor)
+anim 2585 - Climb up something
+anim 2586 - Jump off ledge (begin)
+anim 2588 - Jump off ledge (end)
+anim 2589 - Crawl under wall (a)
+anim 2590 - Crawl under wall (b)
+anim 2591 - Crawl under wall (c)
+anim 2592 - Get stuck Start
+anim 2593 - Get stuck
+anim 2594 - Balancing ledge disappear (begin)
+anim 2595 - Balancing ledge disappear (end)
+anim 2607 - look to the side, thrown back and die
+anim 2608 - Arm to the side, (looks like youâ€™re cutting your wrist)
+anim 2609 - Put arm in front of yourself
+anim 2610 - Rub the ground
+anim 2612 - Jump back scared
+anim 2613 - Pestle and Mortar
+anim 2614 - Attack
+anim 2616 - Doing an â€œA-OKâ€ pose?
+anim 2617 - Ozan Playing Guitar (DR-2113) (NPC-ID-13962)
+anim 2624 - Push something
+anim 2625 - Pull something back
+anim 2633 - Floating
+anim 2637 - Going insane then floating
+anim 2638 - Floating
+anim 2639 - Being thrown around like a puppet
+anim 2644 - Throw something
+anim 2645 - Death falling on back
+anim 2646 - Death idle on back
+anim 2647 - Standing then being pulled up into air
+anim 2648 - Ozan Walk Animation (DR-2113) (NPC-ID-13962)
+anim 2649 - Ozan Idle Animation (DR-2115) (NPC-ID 13967)
+anim 2651 - Floating and almost landing, but floating again
+anim 2654 - Jump up and attack, then walk down stairs
+anim 2658 - On knees fiddling with something/looking through telescope?
+anim 2659 - Get up off knees
+anim 2661 - Attack
+anim 2664 - Floating
+anim 2665 - Fall on knees about to die
+anim 2673 - On knees about to die
+anim 2692 - Very slowly bending to pick something
+anim 2693 - Fall on knees
+anim 2694 - On knees
+anim 2695 - Clip with shears
+anim 2696 - Old Death Emote
+anim 2697 - Pick something up
+anim 2700 - bending backwards (glitched)
+anim 2701 - Old Beckon Emote
+anim 2702 - Old Cry Emote
+anim 2709 - On knees
+anim 2710 - Roll ball/attack?
+anim 2712 - Standing
+anim 2713 - Stand (below ground)
+anim 2716 - Sit down, legs out
+anim 2717 - Chisel onyx
+anim 2720 - Stick arm up and out
+anim 2721 - Commorb Scan
+anim 2724 - Get on knees to grovel
+anim 2726 - Get on knees to grovel
+anim 2727 - Old Teletab Teleport
+anim 2728 - Hands out
+anim 2735 - Push something
+anim 2741 - Attack
+anim 2745 - Attack
+anim 2749 - Up in air in scarecrow pose
+anim 2755 - Disappear
+anim 2757 - Appear
+anim 2762 - Push Ups from Drill Demon Event
+anim 2763 - Sit Ups from Drill Demon Event
+anim 2764 - Running in Place from Drill Demon Event
+anim 2765 - Stand
+anim 2766 - Normal Walk
+anim 2769 - Dizzy Walk
+anim 2770 - Dizzy
+anim 2771 - Pour Bucket
+anim 2773 - Normal Run
+anim 2779 - Attack
+anim 2780 - Play with fishbowl
+anim 2781 - Feeding fishbowl
+anim 2782 - Nodding at fishbowl
+anim 2783 - Play with fishbowl
+anim 2784 - Feed pet fish
+anim 2785 - Fish bowl
+anim 2786 - Fish bowl
+anim 2787 - Fish bowl
+anim 2788 - Talk to Fish
+anim 2789 - Dwarven Army Axe
+anim 2790 - Bend on ground
+animGFX 2791 2728 - Cast Fire Spell
+anim 2793 - Churn butter
+anim 2794 - Dwarven army axe
+anim 2795 - The Raptor Attack with Flail
+anim 2796 - Crawling
+anim 2797 - Stand
+anim 2798 - Cast Old Home Teleport
+anim 2799 - Cast Old Home Teleport
+anim 2800 - Cast Old Home Teleport
+anim 2810 - Holy Wrench
+anim 2811 - Holy Wrench
+anim 2813 - Catch Karamthulhu (Pirate Quest)
+anim 2815 - Walk (below ground)
+anim 2816 - Glitched frame (below ground)
+anim 2817 - Slash
+anim 2818 - Walking (below ground)
+anim 2819 - Flatten disappear (below ground)
+anim 2820 - Raptor Attack
+anim 2821 - Combo Attack
+anim 2822 - Sir Owen Idle?
+anim 2828 - Defend
+anim 2829 - Floating
+anim 2830 - Look around
+anim 2831 - Dwarven Army Axe
+anim 2832 - Walk
+anim 2833 - Dwarven Army Axe
+anim 2834 - Idle
+anim 2835 - Put hands next to head
+anim 2836 - Scared (emote) (e)
+anim 2837 - Dwarven Army Axe
+anim 2838 - Dwarven Army Axe
+anim 2839 - Dwarven Army Axe
+anim 2840 - Zombie Head â€œAlas!â€
+anim 2844 - Zombie Head
+anim 2845 - Take something and look at it?
+anim 2846 - Dragon Hatchet
+anim 2847 - Iron Hatchet
+anim 2875 - Walk
+animGFX 2876 479 - Dragon Hatchet Special Attack (c-SA)
+anim 2879 - Demonic Sigil (i) (e) (Shadow of the Storm)
+anim 2880 - Demonic Sigil (i) (e) (Shadow of the Storm)
+anim 2888 - Old Shrink Teleport
+animGFX 2890 483 - Darklight Special
+anim 2891 - Stick hand out
+anim 2902 - Smouldering Pot
+anim 2903 - Snake Charm
+anim 2909 - Walking, bent back
+anim 2910 - Wrangling rope
+anim 2911 - Idle
+anim 2912 - Walk
+anim 2913 - Fix Torn Robe Top (Spirits of The Elid)
+anim 2914 - Fix Torn Robe Bottom (Spirits of The Elid)
+anim 2920 - On floor listening to music
+anim 2921 - Getting up off the floor
+anim 2922 - Running Across the Board Obstacle on the Advanced Gnome Agility Course
+anim 2923 - Jumping over Barrier Obstacle on the Advanced Gnome Agility Course
+anim 2924 - Come out Other End of the Barrier Pipe from Advanced Gnome Course
+anim 2925 - Kick
+anim 2926 - Shake Snowglobe
+anim 2927 - On knees
+anim 2928 - Pushed back
+anim 2929 - Running Across the Signpost from Advanced Gnome Course
+anim 2930 - Silverlight attack?
+anim 2934 - Standing
+anim 2936 - Use Magnifying Glass Emote
+anim 2937 - Throw thing?
+anim 2938 - Defend
+anim 2939 - Sitting
+anim 2940 - Sitting (faced other way)
+anim 2944 - Walking
+anim 2953 - Put hands in front of face
+anim 2967 - Throw thing?
+anim 2968 - Throw thing?
+anim 2972 - Open thing?
+anim 2984 - Holding weapon?
+anim 2985 - Standing
+anim 2986 - Defend
+anim 2987 - Walking
+anim 2988 - Bend onto ground
+anim 2991 - Pushing Open Count Draynorâ€™s Coffin
+anim 2992 - Missing the Stake in Count Draynor
+anim 2993 - Idle Holding Crate?
+anim 2994 - Walking Holding Crate?
+anim 2999 - Mithril 2H Sword
+anim 3000 - Standing leaned against wall
+anim 3001 - Run with Bolas
+anim 3002 - Walk with Bolas
+animGFX 3003 507 - Red Marionette Jump
+animGFX 3003 511 - Blue Marionette Jump
+animGFX 3003 515 - Green Marionette Jump
+animGFX 3004 508 - Red Marionette Walk
+animGFX 3004 512 - Blue Marionette Walk
+animGFX 3004 516 - Green Marionette Walk
+animGFX 3005 509 - Red Marionette Bow
+animGFX 3005 513 - Blue Marionette Bow
+animGFX 3005 517 - Green Marionette Bow
+animGFX 3006 510 - Red Marionette Dance
+animGFX 3006 514 - Blue Marionette Dance  no
+animGFX 3006 518 - Green Marionette Dance
+anim 3007 - Cutting Hardened Straight Root
+anim 3032 - Attack something on table?
+anim 3036 - Looking around with hand shielding face from sun (Turned around)
+anim 3039 - Drunk Walk While Holding Beer (DR-290)
+anim 3040 - Drunk stand While Holding Beer (DR-290)
+anim 3041 - Old Shrink Teleport
+anim 3042 - Walking holding something
+anim 3043 -  Holding something idle
+anim 3044 - Finish reading scroll
+anim 3045 - Attack with dagger?
+anim 3053 - Climbing right and hanging (begin)
+anim 3054 - Covering head and shaking in fear, as if about to be hit,
+anim 3055 - Climbing right and hanging (fail)
+anim 3056 - Climbing left and hanging (fail)
+anim 3057 - Climbing left and hanging (begin)
+anim 3058 - Climbing left and hanging (end)
+anim 3059 - Climbing right, moving
+anim 3060 - Climbing left, moving
+anim 3061 - Scrubbing something on side?
+anim 3062 - Scrubbing something on side?
+anim 3063 - Climbing Up Something then Climb Down
+anim 3064 - Falling and flailing on butt
+anim 3067 - Jumping over something
+anim 3068 - Jumping over something and failing, then falling
+anim 3069 - Falling off beam
+anim 3071 - Stick arms out and put them together
+anim 3079 - Look down and check wrist held close to body
+anim 3080 - Checking wrist held close to body
+anim 3081 - Lowering arm as if lowering sword
+anim 3082 - lift arm as if holding sword
+anim 3083 - Walk looking side to side
+anim 3084 - Idle, hold hips and look around
+anim 3085 - seated, arms in lap
+anim 3086 - looking down, touching head, cape blown back idle
+anim 3087 - lift arm up as if holding sword
+anim 3090 - raise fists in air
+anim 3091 - flap
+anim 3094 - lean forward and begin to fall forward (into rabbit hole?)
+anim 3097 - walking
+anim 3102 - on knees using chisel upward
+anim 3103 - on ground, get up, rub wrist
+anim 3108 - Count Draynor Knocking you Back
+anim 3109 - On Floor After Being Knocked Down
+anim 3110 - get up while holding stomach
+anim 3113 - take something out of pocket and use/enchant it
+anim 3114 - bending down to squat then getting up
+anim 3115 - idle
+anim 3116 - run
+anim 3119 - walk
+anim 3128 - throw
+anim 3130 - swing across obstacle?
+anim 3131 - swing across zipine thing?
+anim 3132 - lean forward and hands up grabbing thing
+anim 3133 - Canister (Cabin Fever)
+anim 3134 - Cannonball (Cabin Fever)
+anim 3135 - Grab thing
+anim 3136 - Use Ramrod
+anim 3137 - hit with repair plank
+anim 3140 - Read book
+anim 3141 - Turn page in book
+anim 3150 - lift hand
+anim 3151 - hands out grabbing something (or using furnace)
+anim 3153 - Linza Smithing?
+anim 3158 - Linza Smithing?
+anim 3170 - flicker fade in combat stance
+anim 3171 - electrocute
+anim 3175 - idle
+anim 3176 - defend
+anim 3177 - walk
+anim 3178 - run
+anim 3181 - bend forward, do thing
+anim 3182 - bend, do thing
+anim 3184 - sit then look to side
+anim 3185 - do thing with hands
+anim 3186 - bend back and shake thing with hands
+anim 3187 - Removing Sewer Grate (Plague City)
+anim 3191 - Tie Rope to Sewer Grate (Plague City)
+anim 3192 - Attempt to Remove Sewer Grate (Plague City)
+anim 3195 - sitting legs crossed with stick
+anim 3218 - linza smithing?
+anim 3219 - Ancient teleport?
+anim 3235 - Wiggle straight jadinko root
+anim 3236 - throw attack
+anim 3238 - defend
+anim 3239 - defend
+anim 3240 - Barbarian Defend
+anim 3243 - use furnace?
+anim 3248 - teleport
+animGFX 3254 2670 - Fairy Ring Leave
+animGFX 3255 2671 - Fairy Ring Arrive
+anim 3256 - one knee forward hand on it, other knee bend backwards, then get up
+anim 3257 - idle, lift hands up to cast spell?
+anim 3260 - Woodcutting dragon hatchet
+anim 3261 - woodcutting rune hatchet
+anim 3262 - woodcutting adamant hatchet
+anim 3263 - woodcutting mithril hatchet
+anim 3265 - stand then ghostly fade
+anim 3266 - ghostly appear fade
+anim 3269 - idle holding weapon
+anim 3270 - walk holding weapon
+anim 3271 - sidestep
+anim 3272 - sidestep
+anim 3274 - finish agility obstacle?
+anim 3275 - finish agility obstacle?
+anim 3276 - start agility obstacle?
+anim 3277 - start agility obstacle?
+anim 3278 - start agility obstacle?
+anim 3279 - start agility obstacle?
+anim 3280 - on knees face down
+anim 3281 - lying back reclined idle?
+anim 3283 - mix potion on hand
+anim 3284 - woodcutting with black hatchet
+anim 3292 - woodcutting with steel hatchet
+anim 3296 - woodcutting?
+anim 3297 - noose wand
+anim 3301 - hands forward do something
+anim 3303 - climb obstacle
+anim 3307 - juju hunter potion
+anim 3323 - woodcutting with iron hatchet
+anim 3324 - woodcutting with bronze hatchet
+anim 3325 - Woodcutting with inferno adze
+anim 3326 - Woodcutting with sacred clay hatchet
+anim 3327 - Dr. Harlow Hitting his Head with Hand
+anim 3334 - Opening Chest
+anim 3335 - Closing Chest
+anim 3337 - Pruning with Magic Secuatars
+anim 3338 - Pruning with Magic Secuatars
+anim 3339 - Pruning with Magic Secuatars
+anim 3340 - Pruning with Magic Secuatars
+anim 3341 - Pruning with Magic Secuatars
+anim 3342 - Pruning with Magic Secuatars
+anim 3345 - Grab thing?
+anim 3348 - Brulee
+anim 3353 - Do thing with hands?
+anim 3361 - Seated shrug clap
+anim 3362 - Frozen seated arms shrug
+anim 3364 - Jump out of ground into air  in t pose with one knee bent
+anim 3365 - In air in t pose 1 knee bent
+anim 3366 - land on ground
+anim 3367 - seated getting up jump stuck in air
+anim 3370 - Get out of seated place hands on hip
+anim 3371 - Freeze frame hand on hip
+anim 3373 - seated, collapse on chair
+anim 3374 - seated, collapse on chair
+anim 3377 - climb up over thing
+anim 3378 - climb up onto thing
+anim 3381 - climb up onto thing
+anim 3382 - climb up over thing jump down
+anim 3386 - climb, jump to next thing, climb more
+anim 3389 - climb over thing, jump  down
+anim 3393 - punch climb thing
+anim 3394 - Woodcutting sacred clay hatchet
+anim 3396 - seated
+anim 3399 - Touching Dwarven Rock Cake, itâ€™s so hot to handle
+anim 3414 - Climb into Vine (Jadinko Habitat)
+anim 3415 - Swimming underwater Diving
+anim 3416 - Land from swimming
+anim 3417 - Float back up swimming diving
+anim 3418 - Swimming underwater
+anim 3419 - float up swimming underwater
+anim 3420 - grab underwater rock (RFD)
+anim 3421 - Ascend from swimming underwater
+anim 3422 - Descend swimming under water
+anim 3423 - Jump
+anim 3439 - Lunar teleport squeezing
+anim 3450 - Squat, get up, do brag poses?
+anim 3451 - Squat, get up do bragging strongman poses
+anim 3452 - Squat, get up, do brag poses?
+anim 3461 - Idle holding heavy weapon
+anim 3463 - Climb up thing
+anim 3464 - Climb down thing
+anim 3465 - Climb under obstacle
+anim 3466 - Climb under obstacle
+anim 3471 - step back swirl crank?
+anim 3475 - Teleport
+anim 3480 - Lunar Floating
+anim 3482 - Sad Lunar Floating
+anim 3526 - Teleport
+anim 3527 - Jump into hole (Jadino Habitat)
+anim 3533 - Begin to climb Vine (Jadinko Habitat)
+anim 3536 - Hardened straight root
+anim 3543 - Zombie Dance (emote) (e)
+anim 3544 - Zombie Walk (emote) (e)
+anim 3547 - twirling
+anim 3550 - twitching
+anim 3551 - flailing as if arms been grabbed
+anim 3552 - stop flailing
+anim 3553 - lift hand up
+anim 3554 - NPC teleport
+anim 3555 - Teleport
+anim 3557 - idle
+anim 3563 - fall over into push up pose
+anim 3564 - use empty pot
+animGFX 3566 609 - Silvthril Rod Enchant
+anim 3572 - touch thing
+anim 3589 - limping hurt walk
+anim 3592 - get up from underground
+anim 3593 - idle hands to side holding thing
+anim 3594 - standing up holding thing
+anim 3595 - attack standing above ground
+anim 3596 - defend standing above ground
+anim 3597 - fall down on butt, legs out
+anim 3598 - standing up, jumping
+anim 3599 - climbing up on
+anim 3600 - standing up
+anim 3602 - hoop
+anim 3603 - hand out
+anim 3605 - defend/idle
+anim 3606 - walk holding thing
+anim 3607 - Will (Lumberyard Worker)
+anim 3610 - Lunar floating spell attack
+anim 3611 - Pull Lever (PoH)
+anim 3614 - Lunar floating attack
+anim 3622 - Grab and holding onto something big?
+anim 3623 - Let go of something big?
+anim 3624 - Climb past obstacle (GWD Rock?)
+anim 3625 - Kettle
+anim 3626 - Spell/defend?
+anim 3627 - Jump something
+anim 3630 - MWAH hands up then cry
+anim 3634 - Hands out wide shrug
+anim 3635 - Jittery laugh
+anim 3636 - Jittery laugh loop
+anim 3639 - Walk and then fall on butt and get up
+anim 3640 - Fall down from sky on butt
+anim 3641 - Fall down from sky into water
+anim 3645 - Hands up then together
+anim 3649 - Telescope (PoH)
+anim 3651 - Lunar floating attack
+anim 3652 - Read Lectern (PoH)
+anim 3653 - Thinking hmmm
+anim 3654 - Churn? (Pluming stand?)
+anim 3655 - Red Paintbrush
+anim 3657 - Rusty sword
+anim 3658 - Tinderbox
+anim 3659 - Using object in Poh*?
+anim 3660 - Filling beer glass from tap
+anim 3661 - Filling beer mug from tap
+anim 3662 - Filling Asgarnian Ale
+anim 3663 - Filling Greenman's ale
+anim 3664 - Filling Dragonâ€™s Bitter
+anim 3665 - Filling Moonlight Mead
+anim 3666 - Filling Cider
+anim 3667 - Take something drunk?
+anim 3668 - Take something drunk?
+animGFX 3669 530 - Sir Owen Teleports Away
+anim 3670 - Preen option to check self in mirror (PoH)
+anim 3671 - Lunar Sad Floating Down
+anim 3672 - Lunar Sad Floating Up
+anim 3674 - Play Instrument in Chapel (PoH)
+anim 3675 - Play Bells in Chapel (PoH)
+anim 3676 - Build with hammer
+anim 3677 - Boxing Stance (PoH) (DR-1386)
+anim 3678 - Boxing Punch
+anim 3679 - Boxing Defend
+anim 3680 - Boxing Walk (DR-1386)
+anim 3683 - Hit floor with hammer
+anim 3684 - Build with hammer fast
+anim 3685 - Remove Furniture (PoH)
+anim 3686 - Sit in chair and raise fist
+anim 3687 - Use tinderbox
+anim 3688 - Jump over boxing ring fence
+anim 3689 - Jump over boxing ring fence with red gloves
+anim 3690  - Jump over boxing ring fence with blue gloves
+animGFX 3691 531 - Lunar Teleport
+anim 3692 - Trying to open lock?
+anim 3693 - Trying to open lock by banging fist?
+anim 3694 - Swimming, trying to open lock
+anim 3695 - Swimming, trying to open lock by banging
+anim 3696 - Get on knees and lift hands up, (emote ends short)
+anim 3697 - One frame of standing
+anim 3702 - Drinking tea from yellow cup
+anim 3703 - Drinking tea from white cup
+anim 3704 - Drinking tea from Porcelain cup
+anim 3705 - Making tele tab?
+anim 3715 - Getting seated in citadel chair
+anim 3719 - Sitting in seat sideways
+anim 3725 - Lifting GWD Rock
+anim 3734 - Poking swamp with branch (Temple Trekking)
+anim 3735 - Falling into swamp
+anim 3739 - Wrangling rope (Temple Trekking)
+anim 3740 - Checking rope (Temple Trekking)
+anim 3741 - Cutting tree branches temple trekking?
+anim 3745 - Pulling rope thing?
+anim 3747 - Cut with knife
+animGFX 3804 630 - Get Angry In Tolnaâ€™s Rift
+anim 3807 - Tolna Awakens From Nightmare
+anim 3838 - Crawl Into Tolnaâ€™s Rift
+anim 3844 - Side Step to Crawl Through McGruborâ€™s Woods Fence
+anim 3845 - Fiddling with thing sideways, slightly below ground
+anim 3846 - Holding swamp lizard? (Frozen frame)
+anim 3855 - Turning into bunny? (Easter)
+anim 3857 - Growing from being small/tiny
+anim 3859 - Chicken Suit Flap (emote) (e)
+anim 3860 - Roll Blue easter egg
+anim 3861 - Roll Yellow easter egg
+anim 3862 - Roll Green easter egg
+anim 3863 - Roll Red easter egg
+anim 3864 - Take item from table
+anim 3865 - Running wide holding something
+anim 3866 - Standing shaking head holding something idle
+anim 3868 - Walking holding something
+anim 3869 - Running holding something?
+anim 3870 - Attack
+anim 3873 - Attack then cheer?
+anim 3875 - Defend?
+anim 3876 - Attack?
+anim 3877 - Hit with hammer
+anim 3896 - Sidestep
+anim 3900 - Sidestep
+anim 3923 - Hit with sacred clay hammer
+anim 3931 - hit with hammer
+anim 3934 - Climb Up Obstacle (Clan Battlefield)
+anim 3940 - Attack
+anim 3943 - Smithing with Volatile Clay Hammer
+anim 3945 - Climb Down Obstacle (Clan Battlefield)
+anim 3950 - Milkmaid Idle?
+anim 3970 - One frame dead
+anim 3971 - Hitting with hammer up high and down low
+anim 3972 - Trying to lift open something on ground (like a grate?)
+anim 3973 - Doing something on ground (like washing laundry?)
+anim 3979 - Clan Battlefield Frame Bar Obstacle (A)
+anim 3980 - Clan Battlefield Frame Bar Obstacle (B)
+anim 3981 - Clan Battlefield Frame Swing Obstacle (A)
+anim 3982 - Clan Battlefield Frame Swing Obstacle (B)
+anim 3985 - Slipping backwards
+anim 3986 - Smash wall with elbow?
+anim 3988 - Big Kick
+anim 3996 - Standing
+anim 3997 - Milkmaid walk?
+anim 3999 - Evil Twin being held by claw?
+animGFX 4001 666 - Claw Picks You Up (Old Random Event)
+animGFX 4003 667 - Claw Drops You
+anim 4004 - move forward to grab?
+anim 4008 - hit with Dragon hatchet
+anim 4011 - hit with Rune Hatchet
+anim 4012 - Hit with Adamant Hatchet
+anim 4017 - Hit with Mithril hatchet
+anim 4018 - Restless Ghost Ascends
+anim 4019 - Restless Ghost Awakens
+anim 4023 - Rise up from below ground
+anim 4024 - Sink below ground
+anim 4028 - Look down, cape goes up
+anim 4029 - Trying to run on treadmill but fall down?
+anim 4030 - Hit with golden hammer
+anim 4031 - Hit with Steel Hatchet
+anim 4036 - Hit with Iron Hatchet
+anim 4043 - Staff of Air
+anim 4044 - Staff of Air
+anim 4045 - Staff of Earth
+anim 4046 - Staff of Earth
+anim 4047 - Staff of Water
+anim 4048 - Staff of Water
+anim 4049 - Staff of Fire
+anim 4050 - Staff of FIre
+anim 4051 - Air Battlestaff
+anim 4052 - Air Battlestaff
+anim 4053 - Earth Battlestaff
+anim 4054 - Earth Battlestaff
+anim 4055 - Water Battlestaff
+anim 4056 - Water Battlestaff
+anim 4057 - Fire Battlestaff
+anim 4058 - Fire Battlestaff
+anim 4059 - Mystic Air Staff
+anim 4060 - Mystic Air Staff
+anim 4061 - Mystic Earth Staff
+anim 4062 - Mystic Earth Staff
+anim 4063 - Mystic Water Staff
+anim 4064 - Mystic Water Staff
+anim 4065 - Mystic Fire Staff
+anim 4066 - Mystic Fire Staff
+anim 4067 - Investigate Ancient Effigy Without Proper Skills
+anim 4068 - Investigate Ancient Effigy
+anim 4069 - Break Spell  Tablet (a)
+anim 4070 - Break Spell Tablet (b)
+anim 4071 - Teletab
+anim 4073 - Sitting in crude chair
+anim 4074 - Sitting in crude chair
+anim 4075 - Sitting in chair
+anim 4076 - Sitting in chair
+anim 4077 - Hit with Bronze hatchet
+anim 4078 - Hit with Sacred clay hatchet
+anim 4079 - Rocking chair
+anim 4080 - Rocking chair
+anim 4081 - Oak chair
+anim 4082 - Oak chair
+anim 4083 - Oak chair
+anim 4084 - Oak chair
+anim 4085 - Teak Chair
+anim 4086 - Teak Chair
+anim 4087 - Mahogany Chair
+anim 4088 - Mahogany chair
+anim 4089 - Bench
+anim 4090 - Shake fist sitting on bench
+anim 4091 - Oak bench
+anim 4092 - Shake fist sitting on oak bench
+anim 4093 - Sit on Carved Oak Bench
+anim 4094 - Shake fist sitting on Carved Oak Bench
+anim 4095 - Sitting on Teak Bench
+anim 4096 - Shake fist sitting on Teak Bench
+anim 4097 - Sitting on Carved Teak Bench
+anim 4098 - Shake fist sitting on Carved Teak Bench
+anim 4099 - Sitting on Mahogany Bench
+anim 4100 - Shake fist sitting on Mahogany Bench
+anim 4101 - SItting on Gilded Mahogany Bench
+anim 4102 - Shake Fist Sitting on Gilded Mahogany Bench
+anim 4103 - Sitting Down on PoH Workbench
+anim 4104 - Sitting down?
+anim 4105 - Getting out of seat
+anim 4106 - Sitting down?
+anim 4107 - Sitting at PoH workbench
+anim 4108 - Sitting at PoH Workbench Oak Stool
+anim 4109 - Crafting at PoH Workbench
+anim 4110 - Crafting at PoH Workbench Oak Stool
+anim 4111 - Sitting in Throne
+anim 4112 - Sitting in Throne (B)
+anim 4113 - Sitting in Throne (C)
+anim 4114 - SItting in Throne (D)
+anim 4115 - Sitting in Skeleton Throne
+anim 4116 - Sitting in Crystal Throne
+anim 4117 - Sitting in Demonic Throne
+anim 4136 - Pouch Repair?
+anim 4137 - Hit with Volatile Clay Hatchet
+anim 4141 - Shake fist in crude chair
+anim 4142 - Shake fist in crude chair (angle)
+anim 4143 - Shake fist in chair
+anim 4144 - Shake fist in chair (angle)
+anim 4145 - Shake fist in rocking chair
+anim 4146 - Shake fist in rocking chair (angle)
+anim 4147 - Shake fist in oak chair
+anim 4148 - Shake fist in oak chair (angle)
+anim 4149 - Shake fist in nice oak chair
+anim 4150 - Shake fist in nice oak chair (angle)
+anim 4151 - Shake fist in teak chair
+anim 4152 - Shake fist in teak chair (angle)
+anim 4153 - Shake fist in mahogany chair
+anim 4154 - Shake fist in mahogany chair (angle)
+anim 4158 - Thinking leaning forward
+anim 4159 - Sitting sideways
+anim 4160 - Sitting sideways, looking head right and left
+anim 4162 - Sitting sideways, lifting hand
+anim 4166 - Dead face down, then getting up
+anim 4167 - Dying (pretend)
+anim 4168 - Move head to listen on door?
+anim 4169 - bend down on knees, hand in front of face
+anim 4170 - Stretching, knee forward
+anim 4171 - Covering head with hands
+anim 4172 - Fall back on butt
+anim 4173 - Fall down on back, knees bent
+anim 4174 - Bending/bowing in pain?
+anim 4175 - Bending on knees in pain?
+anim 4176 - Hitting ground with sacred clay hammer
+anim 4177 - Fist out punch?
+anim 4178 - Walking drunk
+anim 4179 - Drunk idle
+anim 4180 - Slowly bending on knees arms flap
+anim 4181 - hit with Dragon Pickaxe
+anim 4182 - Hit with rune pickaxe
+anim 4183 - hit with adamant pickaxe
+anim 4184 - Bend and cover face with hands
+anim 4185 - Pulling rope?
+anim 4188 - Trying to open door with elbows?
+anim 4189 - Fire Spring Device (Barbarian Advanced)
+anim 4190 - Hammering (Repairing Fence Dwarf Cannon Quest)
+anim 4191 - Get Up From Being Face Down on Floor (Dragon Slayer)
+anim 4192 - Duck under obstacle to cross?
+anim 4193 - Holding crate
+anim 4194 - Walking with crate
+anim 4195 - On ground listening to door?
+anim 4197 - Get up from listening to door?
+anim 4199 - Fire crossbow
+anim 4200 - Death
+anim 4208 - Idle holding?
+anim 4209 - Thing holding?
+anim 4223 - Spider climb on ceiling?
+anim 4226 - Walk
+anim 4227 - Walk backwards
+anim 4228 - Run
+anim 4230 - Fire crossbow
+anim 4238 - Touch something
+anim 4243 - Hit with Mithril Pickaxe
+anim 4250 - Pull lever?
+anim 4254 - Pull something (loop)
+anim 4255 - Use bucket
+anim 4256 - Walk shaking head
+anim 4257 - Idle
+anim 4258 - Poke with torch
+anim 4275 - Slap Head (emote) (e)
+animGFX 4276 712 - Idea (emote) (e)
+animGFX 4278 713 - Stomp (emote) (e)
+anim 4280 - Flap (emote) (e)
+anim 4285 - Wizard Mizgog Collects Beads (Imp Catcher)
+anim 4292 - Teleport Impious Urn
+anim 4293 - Stand arms like chicken then do stretches and thing (idle?)
+anim 4316 - Grab something off ground?
+anim 4321 - hit with steel pickaxe
+anim 4326 - Balance
+anim 4327 - Balance walk
+anim 4329 - hit with iron pickaxe
+anim 4330 - hit with bronze pickaxe
+anim 4340 - bend to get something (lift leg up)
+anim 4341 - Jump up and hit
+anim 4342 - bend forward, then lift hand up in victory
+anim 4343 - Mining Strike Gilded Dragon Pickaxe
+anim 4344 - Pushing
+anim 4345 - Pushing
+anim 4348 - Combining Dye Colors
+anim 4349 - Combining Dye Colors
+anim 4350 - Combining Dye Colors
+anim 4352 - Aggie Mixing Dye in Cauldron
+anim 4362 - Mining Strike Gilded Rune Pickaxe
+anim 4365 - Float thrown up in air
+anim 4366 - Fall down in floor
+anim 4367 - Fall down face down
+anim 4368 - Emerald Lantern
+anim 4369 - Using Emerald Lantern (Lunar Diplomacy)
+anim 4370 - Mining Strike Gilded Adamant Pickaxe
+anim 4371 - Lunar Floating Watering Plants
+anim 4373 - Mining Strike Gilded Mithril Pickaxe
+anim 4376 - Mining Strike Gilded Steel Pickaxe
+anim 4378 - Mining Strike Gilded Iron Pickaxe
+anim 4379 - Mining Strike Gilded Bronze Pickaxe
+anim 4380 - Jump up float over obstacle
+anim 4381 - Jump up over obstacle but get electrocuted
+anim 4382 - Lunar Diplomacy Electrocute
+anim 4400 - Mining Strike Sacred Clay Pickaxe
+anim 4401 - Mining Strike Volatile Clay Pickaxe
+anim 4402 - Mining Strike Inferno Adze
+anim 4405 - Mining Strike Dwarven Army Axe
+anim 4406 - Hit with Dramen Staff
+anim 4409 - Heal Group
+animGFX 4410 726 - Vengeance Self
+anim 4411 - Vengeance Other
+anim 4412 - Superglass Make
+anim 4413 - Fertile Soil
+anim 4424 - Lunar Floating
+anim 4426 - Lunar Floating
+anim 4427 - Lunar Floating
+anim 4428 - Lunar Floating
+anim 4429 - Lunar Floating
+anim 4430 - Panic
+anim 4432 - Cure Plant
+anim 4433 - Fletch Logs
+anim 4434 - Banshee without earmuffs?
+anim 4435 - Scaling Cliff Wall
+anim 4436 - Bronze Crossbow Limbs
+anim 4437 - Blurite Crossbow limbs
+anim 4438 - Iron Crossbow Limbs
+anim 4439 - Steel Crossbow Limbs
+anim 4440 - Mithril Crossbow Limbs
+anim 4441 - Adamant Crossbow Limbs
+anim 4442 - Rune Crossbow Limbs
+animGFX 4454 761 - Ardougne Cloak Farm Teleport (leave)
+anim 4455 - Fire Steel Crossbow to Climb Wall
+anim 4460 - Fire Crossbow
+anim 4462 - Craft and enchant a thing?
+anim 4464 - Pull self through water
+anim 4465 - Pull self through water
+anim 4466 - Pull self through water
+anim 4467 - Pull self through water
+anim 4468 - Pull self through water
+anim 4470 - Chisel Oyster Pearl
+anim 4471 - Fill bucket
+anim 4479 - Low Alch on Chair
+anim 4480 - High Alch on Chair
+anim 4481 - Low Alch on Chair (angle)
+anim 4482 - High Alch on Chair (angle)
+anim 4483 - Low Alch on Chair
+anim 4484 - High Alch on Chair
+anim 4485 - Low Alch on Chair (angle)
+anim 4486 - High Alch on Chair (angle)
+anim 4487 - Low Alch on Chair
+anim 4488 - High Alch on Chair
+anim 4489 - Low Alch on Chair (angle)
+anim 4490 - High Alch on Chair (angle)
+anim 4491 - Low Alch on Oak Chair
+anim 4492  - High Alch on Oak Chair
+anim 4493 - Low Alch on Oak Chair (angle)
+anim 4494 - High Alch on Oak Chair (angle)
+anim 4495 - Low Alch on Oak Chair
+anim 4496 - High Alch on Oak Chair
+anim 4497 - Low Alch on Oak Chair (angle)
+anim 4498 - High Alch on Oak Chair (angle)
+anim 4499 - Low Alch on Teak Chair
+anim 4500 - High Alch on Teak Chair
+anim 4501 - Low Alch on Teak Chair (angle)
+anim 4502 - High Alch on Teak Chair (angle)
+anim 4503 - Alch Workbench Stool
+anim 4504 - Alch on Teak Chair
+anim 4505 - Alch on Teak Chair (Angle)
+anim 4506 - Alch on Teak Chair (Angle)
+anim 4507 - Alch on Bench
+anim 4508 - Alch on Bench
+anim 4509 - Alch on Bench
+anim 4510 - Alch on Bench
+anim 4511 - Alch on Bench
+anim 4512 - Alch on Bench
+anim 4513 - Alch on Bench
+anim 4514 - Alch on Bench
+anim 4515 - Alch on Bench
+anim 4516 - Alch on Bench
+anim 4517 - Alch on Bench
+anim 4518 - Alch on Bench
+anim 4519 - Alch on Bench
+anim 4520 - Alch on Bench
+anim 4521 - Alch in throne
+anim 4522 - Alch in throne
+anim 4523 - Alch in throne
+anim 4524 - Alch in throne
+anim 4525 - Alch in throne
+anim 4526 - Alch in throne
+anim 4527 - Alch in throne
+anim 4528 - Alch in throne
+anim 4529 - Low Alch in Skeleton throne
+anim 4530 - High Alch in Skeleton Throne
+anim 4531 - Low Alch in Crystal Throne
+anim 4532 - High Alch in Crystal throne
+anim 4533 - Low Alch in Demonic Throne
+anim 4534 - High Alch in Demonic Throne
+anim 4540 - Take thing out of pocket and give it
+anim 4541 - Teleport Accursed Urn
+anim 4542 - Teleport Infernal Urn
+anim 4544 - Look down then get tense/agitated
+anim 4546 - Tense/agitated
+anim 4547 - Use Grand Seed Pod
+anim 4549 - Read note while shaking head
+anim 4551 - Burn note
+anim 4552 - Crouched hiding position
+anim 4553 - Put hand out
+anim 4558 - Swirl Crystal Bowl?
+anim 4567 - Put rune on Impious Urn
+anim 4569 - Put rune on Accursed urn
+anim 4578 - Put rune on Infernal prayer urn
+anim 4580 - Teleport Cracked Smelting Urn
+anim 4581 - Bend forward touch
+anim 4586 - Hazelmere Memory Meld?
+anim 4591 - Idle
+anim 4592 - Hit floor with rock pick
+anim 4593 - Panning tray
+anim 4594 - Look at tray river
+anim 4597 - Lift Open Varrock Sewer Manhole
+anim 4602 - Lift big thing, cast epll with it?
+anim 4603 - Three combo attack
+anim 4611 - Grab take thing with left hand
+anim 4612 - Look down to the left
+anim 4613 - Look back forward
+anim 4614 - Look down to the right
+anim 4615 - Look back forward
+anim 4617 - Cast praying spell thing
+anim 4622 - Ozan idle?
+anim 4634 - Sideways take thing
+anim 4636 - Sideways arm out (border guard?)
+anim 4640 - Sideways move are back (border guard?)
+anim 4641 - Idle like thing?
+anim 4643 - Old home teleport read book
+anim 4644 - Seated
+anim 4645 - Old home teleport piece
+anim 4646 - Old home teleport piece
+anim 4647 - Get out of seat
+anim 4648 - Idle
+anim 4709 - Weak attack/woodcutting?
+anim 4712 - Huddling in fetal position
+anim 4713 - Look up to the sky with hand shield eyes
+anim 4718 - Jump up and fall onto back (a bit blocky)
+anim 4719 - On back, getting up (a bit blocky)
+anim 4721 - Jump obstacle
+anim 4722 - Jump up and climb thing
+anim 4723 - Climb thing, turn to look back
+anim 4724 - Bend backwards and jump obstacle?
+anim 4725 - Look up, then look down and do â€œmotorboatâ€ with face?
+anim 4727 - Climb two things
+anim 4728 - Jump obstacle and slide down
+anim 4731 - Teletab teleport?
+anim 4733 - Teleport?
+anim 4750 - Stamp twice (with cracking/breaking sound effect)
+anim 4757 - Use hammer to repair thing?
+anim 4760 - Mining with rune pickaxe
+anim 4761 - Mining with bronze pickaxe
+anim 4762 - Mining with iron pickaxe
+anim 4763 - Mining with steel pickaxe
+anim 4764 - Mining with adamant pickaxe
+anim 4765 - Mining with mithril pickaxe
+anim 4766 - Mining with dragon pickaxe
+anim 4771 - Getting slightly irritated
+anim 4772 - walking balancing
+anim 4779 - walking dizzy/drunk
+anim 4780 - stand moving leg back and forth on ground (slightly below ground)
+anim 4785 - Climb up ladder but fail and fall down
+anim 4786 - On knees looking/stretching, then turn around
+anim 4787 - bend onto knees
+anim 4788 - On one knee (turned around)
+anim 4790 - On one knee, get up
+anim 4791 - Holding unlit torch, looking side to side
+anim 4793 - Poke ground with torch
+anim 4794 - Using volatile clay hammer
+anim 4795 - bend slightly forward and look around
+anim 4797 - fiddle with door like thing?
+anim 4804 - kick
+anim 4807 - lift hand up then throw something on ground and step on it
+anim 4809 - take something and put it on ground, then turn wheel, then pick it off ground
+anim 4823 - Hands on ears like doing telekinetic attack, bending forward
+anim 4824 - walking with slight limp
+anim 4825 - looking up slightly dizzy/drunk
+anim 4826 - hurt knee
+anim 4834 - take thing out of pocket and use it with something in front of you
+anim 4835 - step back startled
+anim 4838 - hammer floor with volatile clay hammer
+anim 4839 - Commorb v2 Scan
+anim 4841 - Look behind you, jump up and spin
+anim 4847 - sitting on floor
+anim 4848 - sitting on floor
+anim 4849 - Sitting legs pretzel
+anim 4850 - Sitting legs pretzel
+anim 4851 - sit on floor disappearing (A)
+anim 4852 - sit on floor disappearing (B)
+anim 4853 - Crawl over Low Wall
+anim 4855 - Go into Obstacle Pipe
+anim 4857 - idle
+anim 4858 - walk
+anim 4859 - idle, with glassblowing?
+anim 4861 - Turn Water Wheel (Elemental Workshop)
+anim 4862 - Using a Stone Bowl With Lava Trough (Elemental Workshop)
+anim 4863 - Fixing Bellows With Needle (Elemental Workshop)
+anim 4873 - take thing
+anim 4874 - throw flare (Castle Wars?)
+animGFX 4884 807 - Using Extractor Hat Chair (Elemental Workshop II) (GFX on delay)
+animGFX 4885 808 - Improperly Using Extractor Hat Electric Chair (Elemental Workshop II)
+anim 4905 - Pull Corkscrew Lever (Elemental Workshop II)
+anim 4909 - Pull Lever (Elemental Workshop II)
+animGFX 4937 812 - Fletching Cape Emote
+animGFX 4939 813 - Magic Cape Emote
+animGFX 4941 814 - Mining Cape Emote
+animGFX 4943 815 - Smithing Cape Emote
+animGFX 4945 816 - Quest Cape Emote
+animGFX 4947 817 - RuneCrafting Cape Emote
+animGFX 4949 818 - Crafting Cape Emote
+animGFX 4951 819 - Fishing Cape Emote
+animGFX 4953 820 - Construction Cape Emote
+animGFX 4955 821 - Cooking Cape Emote
+animGFX 4957 822 - Woodcutting Cape Emote
+animGFX 4959 823 - Attack Cape Emote
+animGFX 4961 824 - Defence Cape Emote
+animGFX 4963 825 - Farming Cape Emote
+animGFX 4965 826 - Thieving Cape Emote
+animGFX 4967 1656 - Slayer Cape Emote
+animGFX 4969 835 - Herblore Cape Emote
+animGFX 4973 832 - Ranged Cape Emote
+animGFX 4975 831 - Firemaking Cape Emote
+animGFX 4977 830 - Agility Cape Emote
+animGFX 4979 829 - Prayer Cape Emote
+animGFX 4981 828 - Strength Cape Emote
+anim 5006 - Place object on table?
+anim 5015 - Move forward and do thing with wall up and down
+anim 5037 - Try to pull open door?
+anim 5038 - Climb over thing
+anim 5039 - Jump on hang things and climb up
+anim 5040 - Climb down
+anim 5043 - Jump on hanging over thing
+anim 5046 - Jump obstacle, hurt leg
+anim 5047 - Jump on obstacle, but lose balance and fall back
+anim 5048 - Try to jump but hit head?
+anim 5049 - Jump
+anim 5050 - Holding barrel
+anim 5052 - Put
+anim 5054 - Untying thing?
+anim 5056 - On back, get up, brush self
+anim 5059 - Reindeer Hat emote?
+anim 5063 - Throw Snowball
+anim 5067 - Create snowball
+anim 5074 - Agile Pickpocket
+anim 5075 - Agile Pickpocket
+anim 5078 - Agile Pickpocket
+anim 5080 - Catch Barehanded Butterfly and Release
+anim 5083 - Try to catch Barehanded Butterfly
+anim 5088 - Writing/crafting thing?
+anim 5108 - Fishing with barb tail harpoon
+anim 5140 - Crafting Bongos (Cold War)
+anim 5142 - Letting Origami Balloon Fly
+anim 5146 - Cheering with one fist?
+anim 5147 - Cheering with one fist?
+anim 5148 - Cheering with one fist?
+anim 5149 - Angry mob?
+anim 5150 - Angry mob walk?
+anim 5151 - Angry mob walk?
+anim 5152 - Angry mob walk?
+anim 5153 - Angry mob walk?
+anim 5155 - Using sandbag (Enlightened Journey)
+animGFX 5158 907 - Hunter Cape Emote
+anim 5160 - Idle
+anim 5161 - Walk
+anim 5162 - Attack?
+anim 5163 - Defend
+anim 5164 - Walk
+anim 5165 - Walk backwards
+anim 5166 - Sidestep
+anim 5167 - Sidestep
+anim 5168 - Running
+anim 5206 - Step back
+anim 5207 - Step forward and do thing
+anim 5208 - Set up hunter trap
+anim 5210 - Wrangling Eagle with Rope
+anim 5211 - Flying Behind Eagle (Cutscene)
+anim 5212 - Dismantle hunter trap
+anim 5213 - Release butterfly from jar
+anim 5215 - Setting up net trap?
+anim 5216 - Inspect Burrow
+anim 5236 - Poke with teasing stick
+anim 5243 - Craft with needle
+anim 5244 - Craft with knife
+anim 5245 - Walk holding salamander?
+anim 5246 - Idle holding salamander
+anim 5247 - Attack with salamander
+anim 5249 - Mix with mortar and pestle
+anim 5250 - Walk
+anim 5251 - walk backwards
+anim 5252 - walk
+anim 5253 - run
+anim 5254 - Idle
+anim 5255 - Use noose wand
+anim 5256 - Catch Polar Kebbit with Noose Wand
+anim 5257 - Catch Kebbit with Noose Wand
+anim 5258 - Catch Kebbit with Noose Wand
+anim 5259 -  Catch Kebbit with Noose Wand
+anim 5293 - Walk backwards then fall
+anim 5298 - Fall onto butt and get up
+anim 5299 - Fall onto butt and get up
+anim 5311 - Walk pushing something forward
+anim 5312 - Pantaloons Bow (emote) (e)
+animGFX 5313 967 - Sleeping Cap Yawn (emote) (e)
+anim 5315 - Powdered Wig Angry (emote) (e)
+anim 5316 - Flared Trousers Dance (emote) (e)
+anim 5349 - Barbed Kebbit Noose wand
+anim 5352 - Climb jump up
+anim 5354 - Reading scroll (displaced) (Watch Tower)
+anim 5355 - Jump obstacle
+anim 5361 - Pouring Magic Ogre Potion (Watch Tower)
+anim 5362 - Get up off knees
+anim 5363 - Holding Undead Chicken
+anim 5364 - Walking with Undead Chicken
+anim 5365 - Making Iron Magnet (Animal Magnetism)
+anim 5366 - Blessed Mithril Hatchet Bounces Off Draynor Manor Tree (Animal Magnetism)
+anim 5367 - Adamant Hatchet Bounces Off Draynor Manor Tree
+anim 5368 - Rune Hatchet Bounces Off Draynor Manor Tree
+anim 5369 - Dragon Hatchet Bounces Off Draynor Manor Tree
+anim 5370 - Aliceâ€™s Husband Idle
+anim 5371 - Aliceâ€™s Husband Idle (Chasing Chicken)
+anim 5372 - Aliceâ€™s Husband Walk (Chasing Chicken)
+anim 5373 - Aliceâ€™s Husband Walk
+animGFX 5376 973 - Aliceâ€™s Husband Catches Chicken
+anim 5377 - Aliceâ€™s Husband Tries to Catch Chicken (Animal Magnetism)
+anim 5378 - Aliceâ€™s Husband Tries to Catch Chicken (Animal Magnetism)
+anim 5383 - Blessed Mithril Hatchet
+anim 5384 - Blessed Mithril Hatchet
+anim 5400 - Filling Healing Vial (Barbarian Assault)
+anim 5407 - Pick stuff off ground
+anim 5416 - Hammer ground
+anim 5417 - Hammer medium height
+anim 5418 - Kick, smash attack, smash attack kick
+anim 5419 - Take thing, bend down, use it
+anim 5428 - Push thing downwards
+anim 5429 - Idle
+anim 5436 - Listen/hold on to thing?
+anim 5438 - Walk with chicken bag
+anim 5439 - hit with chicken bag
+anim 5441 - defend
+anim 5474 - bend forward touch knees
+anim 5562 - Clan Citadel Loom
+anim 5602 - walk
+anim 5606 - walk dejected (below ground)
+anim 5607 - stand dejected/scratch head (below ground)
+anim 5608 - bend backwards, then throw something or hit?
+anim 5609 - Lift hands up
+anim 5611 - Tarn grow big to turn into monster?
+anim 5620 - appear on knees, cock head, and get it
+animGFX 5633 1006 - Zaff Saves the King (What Lies Below)
+anim 5637 - Lift hands up (enchant salve amulet e?)
+anim 5713 - Sit down into resting legs crossed pretzel
+animGFX 5714 1015 - Shrunk into Penguin Suit
+animGFX 5716 1016 - Exit Penguin Suit
+anim 5718 - Scared
+anim 5732 - Sitting/resting knees crossed pretzel
+anim 5739 - Walking
+anim 5746 - Building Hide-Out (Cold War)
+anim 5748 - Get up from resting knees crossed
+anim 5749 - seated, looking sideways
+anim 5752 - one frame sitting down legs out
+anim 5754 - Hammer thing in hand
+anim 5756 - cut thing with knife in hand
+animGFX 5759 1020 - Juggling (Fremennik Isles)
+anim 5760 - Dance a jolly jig
+anim 5761 - Skipping
+anim 5762 - Jester Staff
+anim 5763 - Pie self in face
+anim 5776 - bend down on ground
+anim 5777 - Troll king head?
+anim 5778 - Troll king head?
+anim 5783 - Cast spell and throw it
+anim 5796 - Drink water from fountain? (Sorcererâ€™s Garden)
+anim 5798 - Collapse and die
+anim 5799 - Walk holding broom?
+anim 5800 - Clan Citadel Obelisk? (this animation keeps showing up everywhere)
+anim 5805 - Defend
+anim 5812 - Attack with severed leg (Shadow of Khazard)
+anim 5814 - â€˜Bonafideâ€™ Resting on ground (Tower of Life)
+anim 5815 - â€˜No Fingersâ€™ Leaning against building (Tower of Life)
+anim 5816 - â€˜Gummyâ€™ Paddycake (Tower of Life)
+anim 5817 - â€˜Black Eyeâ€™ Paddycake (Tower of Life)
+anim 5818 - â€˜The Gunsâ€™ Military Press with Log (Tower of Life)
+anim 5819 - Hands drooping doing thing
+anim 5822 - Walk
+anim 5823 - Stamp, scratch head
+anim 5827 - Tea Flask (Tower of Life)
+anim 5836 - Stand with back leaning backwards
+anim 5845 - Builder Outfit Beckon (Tower of Life)
+anim 5846 - Building (Tower of Life)
+anim 5860 - Trying to pull something (statue?) that is really heavy
+anim 5862 - Choking on Toxic Gas and Collapse (Great Brain Robbery)
+anim 5863 - Blowing Wolf Whistle (i) (Great Brain Robbery)
+anim 5864 - Saradomin Prayer Book Cure Poison (i) (e) (Great Brain Robbery)
+anim 5865 - Swinging Barrelchest Anchor
+anim 5866 - Defend with anchor
+anim 5867 - walk with anchor
+anim 5868 - Running with anchor
+anim 5869 - Idle holding anchor
+animGFX 5870 1027 - Barrelchest Anchor Special Attack (c-SA)
+anim 5907 - Hammering
+anim 5968 - Walking slowly dejectedly
+animGFX 6064 1034 - Moving Over Distance Sphere Goblin Teleport
+anim 6067 - Swing with crossbow (Bandos Throne Room?)
+anim 6068 - Use Crossbow to cross obstacle
+anim 6075 - Shaking thing in hand
+anim 6076 - Walking holding thing
+anim 6083 - Ring Molanisk Slayer Bell
+anim 6085 - Swing with opal machete
+anim 6086 - Swing with Jade Machete
+anim 6087 - Swing with Red Topaz Machete
+anim 6095 - Stab attack
+animGFX 6096 1037 H5 - Surok Destroys Letter (What Lies Below)
+anim 6098 - Surok is Defeated
+animGFX 6099 1008 H30 - Evil King Roald is Defeated
+anim 6100 - Evil King Roald Defend
+anim 6101 - Evil King Roald Attack
+anim 6102 - Excavating Saradomin Statue (What Lies Below)
+anim 6103 - bend on ground, arms out
+animGFX 6104 1038 - Enchant Runecrafting Wand (What Lies Below)
+anim 6106 - Sitting (rotates sideway)
+anim 6109 - Look behind you twice then sit down
+anim 6111 - Bunny Hop (emote) (e)
+anim 6112 - limp walk
+anim 6113 - limp idle
+anim 6122 - Scratch head as if itchy
+anim 6124 - Fall off bridge (Olafâ€™s Quest?)
+anim 6128 - Attack
+anim 6129 - Defend
+anim 6130 - Slide thing with hands (like door?)
+anim 6131 - Push cheer walk thing?
+anim 6132 - Jump over obstacle
+anim 6133 - Throw Wood Chips Into Furnace (Clan Citadel)
+anim 6134 - Throw Wood Chips Into Furnace (Clan Citadel)
+anim 6135 -  Throw Wood Chips Into Furnace (Clan Citadel)
+anim 6143 - Firing Bow?
+animGFX 6147 1052 - Bandos Mace Special Attack
+anim 6194 - Throw Wood Chips Into Furnace (Clan Citadel)
+anim 6197 - Sit and turn around?
+anim 6198 - Get up from sit and turn around
+anim 6217 - Clean specimen with brush?
+anim 6281 - Cyrisus on Ground
+anim 6282 - Cyrisus on Ground
+anim 6283 - Cyrisus on Ground
+anim 6285 - Touch something
+anim 6287 - Checking yourself (Cyrisus Dream Mentor)
+anim 6289 - Helping Cyrisus on the ground?
+anim 6290 - Helping Cyrisus when heâ€™s on the ground
+anim 6291 S30 - Getting/Giving Item To/From NPC
+animGFX 6292 2964 - Anniversary Cake
+animGFX 6293 1060 - Stat Spy
+animGFX 6294 1061 - Humidify
+animGFX 6294 3298 - Humidify (Summer Storm)
+anim 6295 - Dream Spell
+anim 6296 - Sleeping (Dream Spell)
+anim 6297 - Get up from Sleeping (Dream Spell)
+animGFX 6298 1063 - Plank Make
+animGFX 6299 1062 - Spellbook Swap
+anim 6300 - bend to touch something on ground
+animGFX 6303 1074  - Make Hunter Kit
+anim 6304 - Land from T pose
+anim 6305 - Lift hand up and out
+anim 6362 - Cooling Molten Bar (Clan Citadel)
+anim 6364 - Chop Log black axe
+anim 6367 - Bars Into Hatch (Clan Citadel)
+anim 6380 - Teleport Fragile Smelting Urn
+anim 6381 - Teleport Smelting Urn
+anim 6382 - Teleport Strong Smelting Urn
+anim 6383 - hands on hips looking at ground
+anim 6384 - Put Rune on Cracked Smelting Urn
+anim 6385 - Put Rune on Fragile Smelting Urn
+anim 6386 - Put Rune on Smelting Urn
+anim 6387 - Put Rune on Strong Smelting Urn
+anim 6388 - walking with hands behind back
+anim 6389 - hands behind back
+anim 6390 - hands behind back, facing sideways
+anim 6391 - hands behind back sideways, do a motion
+anim 6392 - hands behind back sideways, do a motion
+anim 6393 - hands on hip
+anim 6394 - Teleport Cracked Fishing Urn
+anim 6395 - Spunky walk
+anim 6396 - bird pose jumping jacks thing?
+anim 6397 - weird jump side to side?
+anim 6398 - bury head in sand and flail?
+anim 6399 - weird animal dance?
+anim 6400 - Turkey dance
+anim 6401 - slither on ground like snake
+anim 6402 - weird animal dance?
+anim 6403 - downward dog yoga?
+anim 6404 - Birdman pose
+anim 6405 - Get on ground and slither like a snake
+anim 6406 - Get on ground and slither like a snake
+anim 6408 - head twist yoga?
+anim 6409 - woodpecker dance?
+anim 6424 - Digsite Workman Picking up and Throwing Rocks
+anim 6425 - Digsite Workman Idle (DR-537)
+anim 6446 - Clan Citadel Cooled Bars Into Hatch
+anim 6459 - Digsite Cleaning Varrock Museum
+anim 6462 - Pushing Button in Varrock Natural History Museum
+anim 6463 - Teleport Fragile Fishing Urn
+anim 6464 - Hands behind back
+anim 6465 - Hands behind back, shake head
+anim 6468 - Walk
+anim 6469 - Stand
+anim 6471 - Teleport Fishing Urn
+anim 6472 - Teleport Strong Fishing Urn
+anim 6473 - Teleport Decorated Fishing Urn
+anim 6474 - Put Rune on Cracked Fishing Urn
+anim 6475 - Put Rune on Fragile Fishing Urn
+anim 6478 - Rocking in chair
+anim 6480 - Clan Citadel Cooled Bars Into Hatch
+anim 6483 - Clan Citadel Cooled Bars Into Hatch
+anim 6486 - Walk
+anim 6487 - Holding thing
+anim 6488 - Defend
+anim 6489 - Attack
+anim 6490 - Death
+anim 6525 - Drinking Shrink Me Quick at wrong time
+anim 6526 - Cheering Thing?
+anim 6527 - Open door
+anim 6528 - Kick
+anim 6529 - Shrink Me Quick
+anim 6530 - Regrowing
+anim 6531 - walk
+anim 6532 - walk
+anim 6554 - Canifis NPC turning into Werewolf
+anim 6584 - Seed dibber
+anim 6587 - Shoveling Gold Into Furnace (Clan Citadel)
+animGFX 6592 1117 - Jar Generator (i) (e)
+anim 6593 - Walk through the grass impetuous impulses
+anim 6594 - Walk through the grass
+anim 6595 - Walk through the grass
+anim 6600 - Throw dart
+animGFX 6601 1118 - Puro Puro Crop Circle
+anim 6603 - Swimming
+anim 6605 - Swing butterfly net
+anim 6606 - Catch impling
+anim 6608 - Catch impling
+anim 6609 - Sidestep
+anim 6610 - Sidestep
+anim 6611 - Sidestep
+anim 6616 - Put on statue piece
+anim 6631 - Shoveling Gold Ore Into Furnace (Clan Citadel)
+anim 6632 - Shoveling Silver Ore Into Furnace (Clan Citadel)l
+anim 6633 - Shoveling Ore Into Furnace (Clan Citadel)
+anim 6642 - Lift hand up in air
+anim 6649 - Cabin Boy Jenkins Panic
+anim 6650 - Melzar the Mad Crazy
+anim 6651 - Melzar the Mad Stumble
+anim 6654 - Taking off Elvargâ€™s Head
+anim 6655 - Elvargâ€™s head
+anim 6657 - hold thing?
+anim 6658 - walk while hold thing?
+anim 6659 - walk backwards holding thing?
+anim 6660 - run
+anim 6661 - step step
+anim 6662 - side step
+anim 6663 - side step
+anim 6664 - Pet rock fetch
+anim 6671 - Fletch bow
+anim 6672 - Fletch bow
+anim 6673 - Fletch bow
+anim 6674 - Fletch bow
+anim 6675 - Fletch bow
+anim 6676 - Fletch bow
+anim 6677 - Fletch bow
+anim 6678 - Fletch Shortbow
+anim 6679 - Fletch Oak Shortbow
+anim 6680 - Fletch Willow Shortbow
+anim 6681 - Fletch Maple Shortbow
+anim 6682 - Fletch Yew Shortbow
+anim 6683 - Fletch Magic Shortbow
+anim 6684 - Fletch Shieldbow
+anim 6685 - Fletch Oak Shieldbow
+anim 6686 - Fletch Willow Shieldbow
+anim 6687 - Fletch Maple Shieldbow
+anim 6688 - Fletch Yew Shieldbow
+anim 6689 - Fletch Magic Shieldbow
+anim 6700 - Dragonfire Shield
+anim 6702 - Cut thing
+anim 6703 - Jump Over Wilderness Wall
+anim 6704 - Clan Citadel Chopping Board
+anim 6705 - Bare Hand Shark
+anim 6706 - Bare Hand Shark
+anim 6707 - Bare Hand Swordfish
+anim 6708 - Bare Hand Swordfish
+anim 6709 - Reassuring Dororan While Listening In On Longhall (Gunnarâ€™s Ground)
+anim 6710 - Bare Hand Tuna
+anim 6711 - Bare Hand Tuna
+anim 6712 - Hammer
+anim 6713 - Light fire with bow
+anim 6714 - Light fire with bow
+anim 6715 - light fire with bow
+anim 6716 - light fire with bow
+anim 6717 - light fire with bow
+anim 6718 - light fire with bow
+anim 6719 - light fire with magic bow
+anim 6720 - light fire with bow
+anim 6723 - Jump into Ancient Cavern Whirlpool
+anim 6724 - Ghost spirit ascending?
+anim 6738 - Rune hatchet
+anim 6739 - Adamant hatchet
+anim 6740 - Mithril hatchet
+anim 6741 - Black Hatchet
+anim 6742 - Steel hatchet
+anim 6743 - Iron Hatchet
+anim 6744 - Bronze Hatchet
+anim 6745 - Dragon Hatchet
+anim 6746 - Rune Pickaxe
+anim 6747 - Bronze Pickaxe
+anim 6748 - Iron Pickaxe
+anim 6749 - Steel Pickaxe
+anim 6750 - Adamant Pickaxe
+anim 6751 - Mithril Pickaxe
+anim 6752 - Rune Pickaxe
+anim 6753 - Mine With Bronze Pickaxe
+anim 6754 - Iron Pickaxe
+anim 6755 - Steel Pickaxe
+anim 6756 - Adamant Pickaxe
+anim 6757 - Mithril Pickaxe
+anim 6758 - Dragon Pickaxe
+anim 6769 - Put Rune on Fishing Urn
+anim 6770 - Put Rune on Strong Fishing Urn
+anim 6784 - Clan Citadel Grill with Spatula
+anim 6786 - Clan Citadel Stew
+anim 6788 - Seated
+anim 6789 - Put Rune on Decorated Fishing Urn
+anim 6794 - Teleport Cracked Cooking Urn
+anim 6795 - Teleport Fragile Cooking Urn
+anim 6814 - slide off seat
+anim 6816 - Sit down
+anim 6820 - Sitting
+anim 6838 - attack
+anim 6840 - Searching Crates
+anim 6841 - Observatory Assistant Idle
+anim 6842 - Get up from sitting
+anim 6843 - Grab a Seat
+anim 6844 - Observatory Professor Scratches Head
+anim 6845 - Observatory Professor Fixes Telescope
+anim 6846 - Sitting
+anim 6847 - Observatory Professor Fixes Telescope
+anim 6848 - Observatory Professor Fixes Telescope
+anim 6849 - Looking Through Observatory Telescope
+anim 6863 - Town Crier Scratches Head
+anim 6864 - Stand
+anim 6865 - Town Crier Ring Bell
+animGFX 6866 1178 - Town Crier Gives Player a Book
+anim 6867 - Walk
+anim 6887 - Holding chest in pain
+anim 6896 - Throw something
+anim 6897 - Collapse on ground
+anim 6912 - Lean against wall
+anim 6913 - Lean against wall, arms crossed
+anim 6914 - Lean against wall
+anim 6915 - Hands out and up, as if banging on door
+anim 6918 - Banging on door?
+anim 6919 - Walking arms tied behind back
+anim 6922 - About to teleport, lift hand up in protest?
+anim 6923 - Shield self with elbow
+anim 6926 - Walk hand covering head
+anim 6927 - Stand breathing heavily
+anim 6928 - Walking heavily
+anim 6929 - Defend
+anim 6933 - Pull switch?
+anim 6935 - Mining
+anim 6939 - Disappear
+anim 6941 - Appear
+anim 6978 - Lift really heavy rock
+anim 6979 - Lift really heavy rock
+anim 6988 - Swimming
+anim 6999 - Dive jump
+anim 7002 - Hit with hammer
+anim 7003 - Sitting on floor in pain
+anim 7023 - Crawling
+anim 7039 - Run Holding 2H Sword (Legacy) (DR-124)
+anim 7040 - Turning Holding 2H Sword (Legacy) (DR-124)
+anim 7041 - Auto-Attack with 2H Sword
+anim 7042 - Attack with weapon
+anim 7043 - Side Step Holding 2H Sword (Legacy) (DR-124)
+anim 7044 - Side Step Holding 2H Sword (Legacy) (DR-124)
+anim 7045 - Back Step Holding 2H Sword (Legacy) (DR-124)
+anim 7046 - Walk Holding 2H Sword (Legacy) (DR-124)
+anim 7047 - Idle Holding 2H Sword (Legacy) (DR-124)
+anim 7048 - Attack with 2H Sword
+anim 7049 - Attack
+anim 7050 - Defend with 2H Sword (Legacy)
+anim 7056 - Get up from seat
+anim 7057 - Sitting
+animGFX 7070 1221 - Zamorak Godsword Special (Ice Cleave) [gfx 2104 on Target]
+anim 7071 - Clan Citadel Dance
+anim 7076 - Rope swing
+animGFX 7078 1225 - Dragon 2H Sword Special (Power Stab)
+anim 7081 - Swing Across Crossbow
+anim 7082 - Old Spirit Tree Teleport (Leave)
+anim 7084 - Old Spirit tree Teleport Arrive)
+anim 7095 - Flailing around
+anim 7096 - Covering face with elbow
+anim 7126 - Teleport Cooking urn
+anim 7133 - Teleport Strong Cooking urn
+anim 7139 - Glouphrie Bowl
+anim 7151 - Hammering Ground
+anim 7152 - Stomp on balloon
+anim 7159 - Clan Citadel Dance
+anim 7161 - Clan Citadel Dance Walk
+anim 7162 - Clan Citadel Dance Run
+anim 7181 - Attack
+anim 7182 - Pirate Attack With Hook Arm
+anim 7183 - Punch
+anim 7185 - Death
+anim 7186 - Defend
+anim 7187 - Defend
+anim 7188 - Hands on hip, shake head
+anim 7189 - limpy walk
+anim 7190 - limpy walk
+anim 7191 - walk
+anim 7192 - back step
+anim 7193 - side step
+anim 7194 - side step
+anim 7197 - Death
+anim 7198 - Defend
+anim 7199 - Idle
+anim 7200 - Walk
+anim 7201 - Back step
+anim 7202 - Side step
+anim 7203 - Side step
+anim 7211 - Cut magic logs
+anim 7212 - Pull something back with secateurs?
+anim 7227 - Secutars
+anim 7228 - Magic Secateurs
+anim 7230 - Defend (snake sounds)
+anim 7232 - Do weird thing
+anim 7253 - Bend over backwards getting bitten by Snake Tree
+anim 7255 - Climb up something then teleport (Clan Portal HW event 2011?)
+anim 7261 - Fishing?
+anim 7264 - Attack
+anim 7265 - Stand idle
+anim 7266 - Swimming (under ground)
+anim 7267 - Wading through water (under ground)
+anim 7268 - Jump over
+anim 7269 - Jump into water
+anim 7270 - Pick something off ground
+anim 7271 - Step forward, then jump back
+anim 7272 - Zombie Hand (emote) (e)
+anim 7273 - Climb up out of water?
+anim 7274 - Slide
+anim 7275 - Walk through Spider Web
+anim 7277 - Crazy (or shake some bowl?)
+animGFX 7299 1247 - Request Assistance
+anim 7301 - Defend with hands together above head
+anim 7302 - Lower hands from above emote
+anim 7307 - Twist something
+animGFX 7312 538 - Clan Vexillum Teleport (arrive)
+animGFX 7312 1767 - World Window Teleport (arrive)
+anim 7321 - Open Strange Box on Yubuisk
+anim 7363 - Look over wall?
+anim 7364 - Fiddling with thing idle?
+anim 7365 - Hands crossed shaking head idle
+anim 7366 - Idle
+anim 7368 - Idle
+anim 7369 - Idle
+anim 7376 - Walk and disappear
+anim 7377 - Walk and appear
+anim 7383 - Inferno Adze
+animGFX 7389 537 - Clan Vexillum Teleport (leave)
+animGFX 7389 1767 - World Window Teleport (leave)
+anim 7392 - Lift hand and thing (electric sounds)
+anim 7425 - Stand idle, then do thing put sideways
+anim 7477 - Grab thing then roll it to other side
+anim 7491 - Take thing pull back (or climb rope)
+anim 7493 - Climb up rope
+anim 7525 - Walk on Clan Citadel Dance Floor
+anim 7526 - Run on Clan Citadel Dance Floor
+animGFX 7528 1284 - Snowglobe (e) (item)
+anim 7529 - Collect snow
+anim 7530 - Throw Snowball
+anim 7531 - Snowman Dance (emote) (e)
+anim 7532 - Do thing
+anim 7533 - Do thing pull
+anim 7534 - Defend laugh then teleport
+anim 7578 - Sitting on ground
+anim 7579 - Sitting on knees
+anim 7597 - Balance walk
+anim 7599 - Get up brush self
+anim 7628 - Pull switch?
+anim 7629 - Hand up dizzy
+anim 7633 - Step forward, open thing with hands (like window shades?)
+anim 7640 - Climb up over obstacle
+anim 7641 - Hands up casting spell (like Dungeoneering RuneCrafting)
+anim 7643 - Walk
+anim 7644 - Stand
+anim 7645 - Antsy
+anim 7650 - Walk
+anim 7651 - Stand
+anim 7652 - â€œFAIRY GOD PARENTS!â€
+anim 7660 - Cast familiar scroll
+anim 7664 - Clan Citadel Guard Lowers Axe to Block Entry
+anim 7665 - Clan Citadel Guard Lowers Axe to Block Entry
+anim 7666 - Clan Citadel Guard Idle
+anim 7672 - Clan Citadel Guard Lifts Axe to Allow Player Entry
+anim 7700 - Raise fist high in pride
+anim 7717 - Clan Citadel Guard Lifts Axe to Allow Player Entry
+anim 7731 - Clan Citadel Guard Idle
+anim 7745 - Take thing throw it up in air?
+anim 7756 - Pouch Repair
+anim 7774 - Bucket
+anim 7823 - Disruption Shield
+anim 7892 - Glitchy bucket
+anim 7898 - Make Lunar Lumber
+anim 7918 - Reading big open book lectern?
+anim 7959 - Pick box up?
+anim 8055 - Teleport lunar npc
+anim 8107 - Lunar Farm Npc Defend
+animGFX 8137 2006 - Exit Portal from Bandos Throne Room
+anim 8165 - Lunar Floating Kick
+anim 8170 - Stab lunge attack?
+anim 8177 - Pull switch thing?
+anim 8178 - Pull lever?
+anim 8227 - Run
+anim 8232 - Walk
+anim 8239 - Walk
+anim 8242 - Sidestep
+anim 8263 - Sidestep
+anim 8264 - Stand
+anim 8289 - Pull lever?
+anim 8323 - Pull lever up
+anim 8371 - Force palm?
+anim 8407 - Make speech (loop)
+anim 8408 - Sit and nod
+anim 8409 - Sit and cheer
+anim 8410 - Sit and whistle
+anim 8495 - Sit and point
+anim 8496 - Walk
+anim 8497 - Stand looking at the ground
+anim 8499 - Shiver in fear (Wolf Whistle)
+anim 8500 - Infuse Summoning Pouch
+anim 8501 - Do something on knees?
+animGFX 8502 1517 - Recharge Summoning Points (Old)
+anim 8503 - â€œACK!â€â€
+animGFX 8525 1515 - Summoning Skillcape Emote
+anim 8528 - Using Some machine?
+anim 8562 - stand idle
+anim 8591 - attack
+anim 8592 - walk
+anim 8593 - stand idle
+anim 8594 - Some sort of teleport?
+anim 8595 - Same as above
+anim 8629 - Teleport Decorated Cooking Urn
+anim 8649 - Put Rune on Cracked Cooking Urn
+anim 8651 - Put Rune on Fragile Cooking Urn
+anim 8652 - Put Rune on Cooking Urn
+anim 8654 - Put Rune on Strong Cooking Urn
+anim 8681 - Walk holding hand in air
+anim 8682 - Stand holding hand in air
+anim 8683 - Stand
+anim 8684 - Walk
+anim 8685 - Run
+anim 8686 - Lift hands up
+anim 8687 - Get on knees
+anim 8688 - Do something on knees
+anim 8690 - Run hand in air
+anim 8691 - Put Rune on Decorated Cooking Urn
+anim 8694 - Get out of water
+anim 8695 - In water
+anim 8698 - Jump in water
+anim 8699 - In water
+anim 8701 - Turn crank around and around?
+anim 8702 - Lift Big boulder?
+anim 8704 - Hammer L shaped block
+anim 8705 - Zombie dazed?
+anim 8707 - Wipe head and do excercise
+animGFX 8709 1543 - Digging in Vinesweeper
+anim 8710 - Investigating ground (Dungeoneering Spike puzzle room)
+animGFX 8711 1541 - VineSweeper Place Flag
+anim 8713 - Teleport Cracked Woodcutting Urn
+anim 8727 - Teleport Fragile Woodcutting Urn
+anim 8729 - Teleport Woodcutting Urn
+anim 8730 - Teleport Strong woodcutting Urn
+anim 8736 - Flash and shrink from being large
+anim 8758 - Stand
+anim 8765 - Kick
+animGFX 8767 1546 - Dagonâ€™Hai Monk Magic Attack
+anim 8768 - Look back scared
+animGFX 8770 1553 - Safety First (emote) (e)
+anim 8804 - Pull door thing?
+anim 8805 - Push door thing?
+anim 8820 - â€œNo no no no noâ€
+anim 8821 - â€œNo no no, of course not...â€
+anim 8829 - Combat pose?
+anim 8830 - Defend/pull lever?
+anim 8831 - Run
+anim 8832 - Crouch
+anim 8833 - Crouch sit
+anim 8834 - Lift hands up and arrange shelf?
+anim 8835 - Lean forward and look to see if coast is clear
+anim 8836 - Mining with Bronze Pickaxe
+anim 8837 - Mining with Iron Pickaxe
+anim 8838 - Mining with Steel Pickaxe
+anim 8839 - Mining with Adamant Pickaxe
+anim 8840 - Mining with Mithril Pickaxe
+anim 8841 - Mining with Rune Pickaxe
+anim 8842 - Walking backwards
+animGFX 8847 1557  - Electrocution
+animGFX 8848 1557  - Electrocution
+anim 8849 - Throw snowball?
+anim 8858 - Walk and fade
+anim 8859 - Fade and walk
+anim 8860 - Idle hands behind back
+anim 8861 - Hammer ground
+anim 8862 - Walking drunk
+anim 8863 - Stand drunk
+anim 8864 - Sacred clay hammer ground
+anim 8865 - Sacred clay hammer
+anim 8866 - Wipe head, drunk collapse onto knees
+anim 8868 - Drunk banging head
+anim 8869 - Drunk, trying to keep balance
+anim 8870 - Drunk reaching arm out
+anim 8871 - Drunk reaching arm out
+anim 8872 - Drunk fall over on knees and catch balance
+anim 8873 - Stand up get drunk
+anim 8874 - Drunk attack
+anim 8875 - Walking holding anchor?
+anim 8877 - On knees
+anim 8878 - Standing holding anchor?
+anim 8887 - Golden hammer
+anim 8888 - Golden hammer
+anim 8889 - Sacred Clay hammer
+anim 8890 - Sacred Clay hammer
+anim 8891 - Golden hammer
+anim 8893 - Regular hammer
+animGFX 8901 1567 - Turn into Rabbit (Easter Event)
+anim 8902 - Turn back from rabbit
+animGFX 8903 1566 - Chocatrice Cape Emote
+anim 8904 - Reach up to something on high shelf?
+anim 8905 - Bucket
+anim 8906 - Chocatrice egg
+anim 8907 - Shake chocatrice egg
+anim 8908 - Bend over to ground
+anim 8909 - Bucket
+animGFX 8939 1864 - Drakanâ€™s Medallion Teleport (t-L)
+animGFX 8941 1864 - Drakanâ€™s Medallion Teleport (t-A)
+animGFX 8939 1678 - Ectofuntus Green Teleport (t-L)
+animGFX 8941 1679 - Ectofuntus Green Teleport (t-A)
+animGFX 8939 1576 - Standard Teleport (t-L)
+animGFX 8941 1577 - Standard Teleport (t-A)
+anim 8943 - Sacred clay hammer up high
+anim 8950 - Volatile clay hammer up high
+anim 8953 - Invisible, appear as if teleport
+anim 8973 - Raise hand in air
+anim 8975 - Raise hand in air
+anim 8976 - Raise hand in air
+anim 8977 - Idle
+anim 8979 - Walk
+anim 8980 - Idle
+anim 8981 - Idle
+anim 8982 - Walk
+anim 8983 - Side step
+anim 8984 - Side step
+anim 8985 - Back step
+anim 8986 - Run
+anim 8987 - Balance slightly
+anim 8988 - Defend
+anim 8989 - Punch
+anim 8990 - Fly Kite
+anim 8991 - Kick
+anim 8996 - Strong pose
+anim 8997 - Walk holding FoG bowl?
+anim 8998 - Idle holding FoG bowl
+anim 8999 - Defend holding FoG bowl
+anim 9000 - Balance holding Fog bowl
+anim 9001 - Back step holding FoG bowl
+anim 9002 - Side step holding FoG bowl
+anim 9003 - Side step holding FoG bowl
+anim 9004 - Run holding FoG bowl
+anim 9012 - Throw teleorb on ground (Fist of Guthix)
+anim 9013 - Appear
+anim 9016 - Disappear holding FoG bowl
+anim 9018 - Appear holding FoG bowl
+anim 9021 - Emerald sickle bloom (Legacy of Seergaze)
+anim 9022 - Hammer up high Golden Hammer
+anim 9024 - Shake head spazzy and get off knees
+anim 9025 - Get on knees
+anim 9031 - Use saw to open door?
+anim 9039 - Walk dejected
+anim 9040 - Dejected idle
+anim 9044 - Dejected pull rope?
+anim 9046 - Lean forward and touch thing
+anim 9047 - Attack with Ivandis Flail
+anim 9049 - Idle
+anim 9050 - Run
+anim 9051 - Walk
+anim 9052 - back walk
+anim 9053 - Side step
+anim 9054 - Side step
+anim 9055 - Throw thing
+anim 9057 - Throw thing
+anim 9058 - hands on hip nodding
+anim 9059 - Touch things then moves arms back
+anim 9060 - Turn to side and cock head
+anim 9061 - Opening thing with hand sideways?
+anim 9062 - Finish opening thing
+anim 9063 - hands out
+anim 9064 - put sickle on ground
+anim 9065 - emerald sickle on ground
+anim 9067 - hands out
+anim 9069 - leaning sideways with hands on stomach
+anim 9070 - walking dejected
+anim 9072 - get hit with hands on stomach
+anim 9075 - lift into air and BLECK
+anim 9076 - in air BLECK
+anim 9077 - Bleck then relax
+anim 9078 - Take damage from failing Gnome Course Board
+anim 9085 - Get off ground
+anim 9086 - Pull rope on knees?
+anim 9087 - Pull rope on knees
+anim 9091 - move to the side to duck obstacle?
+anim 9092 - move to the side to duck obstacle?
+anim 9096 - Keg Cannon
+anim 9097 - Use Ivandis Flail
+anim 9098 - Lift arms up (bloom?)
+anim 9099 - In pain
+anim 9100 - Bend in pain
+anim 9104 - Enchant silver sickle
+anim 9105 - Knock on Door (Priest in Peril)
+anim 9107 - Fall plop down on belly
+anim 9109 - Idle, thinking
+anim 9110 - Idle nodding head
+anim 9111 - Idle clapping
+anim 9116 - Keg Cannon
+anim 9119 - shaking head
+anim 9121 - Defend
+anim 9136 - Move forward to climb up ladder
+anim 9141 - attack
+anim 9151 - Saw
+anim 9164 - leaning forward
+anim 9174 - Listen to Glimmering Shell
+anim 9176 - Listen to Shimmering shell
+anim 9195 - Trying to open door/chest
+anim 9204 - Trying to open thing
+anim 9211 - Trying to open thing, snap off lever
+anim 9214 - Gertrude Shaking Playerâ€™s Hand
+anim 9215 - Getting Hand Shaked By Gertrude
+anim 9218 - Will (Lumber Yard Employee)
+anim 9220 - Enter Lumber Yard
+anim 9221 - Enter Lumber Yard
+anim 9224 - Stroking Kitten
+anim 9227 - Tapping toe and dance
+anim 9304 - Put up planks
+anim 9305 - Put plank
+anim 9306 - Jolly run
+anim 9307 - Defend/attack
+anim 9308 - barge attack
+anim 9309 - Step forward do pose
+anim 9310 - Jump over obstacle
+anim 9350 - Hammer thing
+anim 9359 - Fall onto back
+anim 9360 - Hit With Bronze Pickaxe
+anim 9361 - hit with Iron Pickaxe
+anim 9362 - Hit with steel pickaxe
+anim 9363 - hit with mithril Pickaxe
+anim 9364 - Hit with adamant pickaxe
+anim 9365 - Hit with rune pickaxe
+anim 9367 - walk then shrink and disappear
+anim 9429 - Opening Drawers
+anim 9497 - Pull open
+anim 9499 - Defend/do whittle diddle
+animGFX 9502 327 - Salt Shaker on Rock Slugs
+anim 9504 - Using charcoal
+anim 9516 - Walk, bending back
+anim 9519 - Collapse
+anim 9523 - Look around you as if thereâ€™s bugs or stuff bothering you
+anim 9526 - Crazy thing blowing into hands
+anim 9534 - Sitting laid back in chair
+anim 9536 - Idle
+anim 9537 - Limp walk
+anim 9542 - Tin Cup
+anim 9544 - Attack
+anim 9547 - rub ground
+anim 9549 - Lever
+anim 9551 - Walk holding thing
+anim 9552 - back walk
+anim 9553 - Hold thing
+anim 9554 - Side step hold thing
+anim 9555 - Side step hold thing
+anim 9557 - Dive off Prison Island Pier (Rocking Out)
+anim 9558 - Lift hands up then down
+anim 9561 - Rub thing on knees
+anim 9562 - hitting thing
+anim 9564 - On ground collapsed
+anim 9565 - Playing accordion (Rocking Out)
+anim 9566 - Accordion (Rocking Out)
+animGFX 9568 1668  - Resurrect Ex-Ex Parrot
+anim 9570 - walk
+anim 9571 - idle
+anim 9573 - uproot/pull thing
+anim 9575 - Fall on back
+anim 9579 - Fiddling with Accordion (Rocking Out) (June 2008)
+anim 9591 - crouched on knees
+anim 9595 - Get in seat
+anim 9596 - Teleport
+animGFX 9597 1680 - Tele Tab
+anim 9598 - Arrive from teleport
+animGFX 9599 1681  - Ancient Teleport
+animGFX 9600 1682 - Lyre teleport
+animGFX 9601 1683 - Skull Scepter Teleport
+animGFX 9602 1690 - Wilderness Obelisk Teleport
+animGFX 9603 1684 - Jewelry Teleport
+anim 9604 - Blue Rum bottle
+anim 9605 - Red rum bottle
+anim 9606 - Lunar tele
+anim 9607 - Zamorak Mage Teleports You to Abyss
+animGFX 9609 1688 - Ectophial Teleport
+anim 9610 - Teleport
+anim 9633 - Alch with staff
+anim 9640 - Look
+anim 9648 - Pick cabbage
+anim 9649 - Push rock
+anim 9663 - Shy
+anim 9664 - Shy
+anim 9668 - Shy
+anim 9676 - walking
+anim 9677 - idle, pull up
+anim 9678 - limping walk
+anim 9679 - Standing arms out fiddling hitting something
+anim 9680 - hunched limp walk
+anim 9705 - throw something
+anim 9709 - take/touch something
+anim 9710 - arms out looking through something?
+anim 9711 - take/touch something
+anim 9712 - looking at something, questioning it, then look again
+anim 9713 - teleport
+anim 9714 - take something out of pocket and put it on ground
+anim 9715 - throw something on ground?
+anim 9716 - Death
+anim 9717 - On floor
+anim 9718 - Get off floor

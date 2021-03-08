@@ -1,0 +1,152 @@
+package core.game.node.entity.skill.farming
+
+import core.game.interaction.NodeUsageEvent
+import core.game.node.entity.skill.Skills
+import core.game.node.item.Item
+import core.game.system.task.Pulse
+import core.game.world.update.flag.context.Animation
+import core.tools.Items
+
+object UseWithPatchHandler{
+    val RAKE = Items.RAKE_5341
+    val SEED_DIBBER = Items.SEED_DIBBER_5343
+    val SPADE = Items.SPADE_952
+    val SECATEURS = Items.SECATEURS_5329
+    val TROWEL = Items.GARDENING_TROWEL_5325
+    val pourBucketAnim = Animation(2283)
+    val wateringCanAnim = Animation(2293)
+    val plantCureAnim = Animation(2288)
+
+    @JvmField
+    val allowedNodes = ArrayList<Int>()
+
+    init {
+        loadNodes()
+    }
+
+    @JvmStatic
+    fun loadNodes(){
+        for(p in Plantable.values()){
+            allowedNodes.add(p.itemID)
+        }
+        allowedNodes.addAll(arrayListOf(RAKE,SEED_DIBBER,SPADE,SECATEURS,TROWEL,Items.SUPERCOMPOST_6034,Items.COMPOST_6032,Items.PLANT_CURE_6036,Items.WATERING_CAN1_5333,Items.WATERING_CAN2_5334,Items.WATERING_CAN3_5335,Items.WATERING_CAN4_5336,Items.WATERING_CAN5_5337,Items.WATERING_CAN6_5338,Items.WATERING_CAN7_5339,Items.WATERING_CAN8_5340))
+    }
+
+    @JvmStatic
+    fun handle(event: NodeUsageEvent?): Boolean {
+        event ?: return false
+        val player = event.player
+        val usedItem = event.usedItem
+        val patch = FarmingPatch.forObject(event.usedWith.asObject())
+        patch ?: return false
+
+        player.faceLocation(event.usedWith.location)
+        when(usedItem.id){
+            RAKE -> PatchRaker.rake(player,patch)
+            SEED_DIBBER -> player.sendMessage("I should plant a seed, not the seed dibber.")
+            SPADE -> player.dialogueInterpreter.open(67984003,patch.getPatchFor(player)) //DigUpPatchDialogue.kt
+            SECATEURS -> TODO()
+            TROWEL -> TODO()
+            Items.PLANT_CURE_6036 -> {
+                val p = patch.getPatchFor(player)
+                if(p.isDiseased && !p.isDead){
+                    player.pulseManager.run(object: Pulse(){
+                        override fun pulse(): Boolean {
+                            player.animator.animate(plantCureAnim)
+                            if(player.inventory.remove(event.usedItem)){
+                                player.inventory.add(Item(Items.VIAL_229))
+                                p.cureDisease()
+                            }
+                            return true
+                        }
+                    })
+                } else {
+                    player.sendMessage("I have no reason to do this right now.")
+                }
+            }
+            Items.WATERING_CAN1_5333,Items.WATERING_CAN2_5334,Items.WATERING_CAN3_5335,Items.WATERING_CAN4_5336,Items.WATERING_CAN5_5337,Items.WATERING_CAN6_5338,Items.WATERING_CAN7_5339,Items.WATERING_CAN8_5340 -> {
+                val p = patch.getPatchFor(player)
+                if(!p.isWatered){
+                    player.pulseManager.run(object : Pulse(){
+                        override fun pulse(): Boolean {
+                            player.animator.animate(wateringCanAnim)
+                            if(player.inventory.remove(event.usedItem)){
+                                player.inventory.add(Item(usedItem.id.getNext()))
+                                p.water()
+                            }
+                            return true
+                        }
+                    })
+                }
+            }
+            Items.SUPERCOMPOST_6034, Items.COMPOST_6032 -> {
+                val p = patch.getPatchFor(player)
+                if(p.compost == CompostType.NONE) {
+                    player.animator.animate(pourBucketAnim)
+                    player.pulseManager.run(object : Pulse(){
+                        override fun pulse(): Boolean {
+                            if(player.inventory.remove(event.usedItem)){
+                                p.compost = if(usedItem.id == Items.SUPERCOMPOST_6034) CompostType.SUPER else CompostType.NORMAL
+                                player.inventory.add(Item(Items.BUCKET_1925))
+                            }
+                            return true
+                        }
+                    })
+                } else {
+                    player.sendMessage("This patch has already been treated with compost.")
+                }
+            }
+            else -> {
+                val plantable = Plantable.forItemID(usedItem.id)
+                if(plantable == null) return false
+
+                if(plantable.applicablePatch != patch.type){
+                    player.sendMessage("You can't plant that seed in this patch.")
+                    return true
+                }
+
+                if(plantable.requiredLevel > player.skills.getLevel(Skills.FARMING)){
+                    player.sendMessage("You need a Farming level of ${plantable.requiredLevel} to plant this.")
+                    return true
+                }
+
+                val p = patch.getPatchFor(player)
+                if(p.getCurrentState() < 3 && p.isWeedy()){
+                    player.sendMessage("You must weed your patch before you can plant a seed in it.")
+                    return true
+                } else if(p.getCurrentState() > 3){
+                    player.sendMessage("There is already something growing in this patch.")
+                    return true
+                }
+
+                val plantItem = if(patch.type == PatchType.ALLOTMENT) Item(plantable.itemID,3) else Item(plantable.itemID,1)
+
+                if(patch.type == PatchType.ALLOTMENT){
+                    if(!player.inventory.containsItem(plantItem)){
+                        player.sendMessage("You need 3 seeds to plant an allotment patch.")
+                        return true
+                    }
+                }
+
+                if(player.inventory.remove(plantItem)) {
+                    player.animator.animate(Animation(2291))
+                    player.pulseManager.run(object : Pulse(3) {
+                        override fun pulse(): Boolean {
+                            p.plant(plantable)
+                            player.skills.addExperience(Skills.FARMING, plantable.plantingXP)
+                            p.setNewHarvestAmount()
+                            return true
+                        }
+                    })
+                }
+            }
+        }
+
+        return true
+    }
+
+    private fun Int.getNext(): Int {
+        if(this == Items.WATERING_CAN1_5333) return Items.WATERING_CAN_5331
+        else return this - 1
+    }
+}

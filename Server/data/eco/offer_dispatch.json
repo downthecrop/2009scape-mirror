@@ -1,0 +1,44 @@
+{
+  "offers": [
+    {
+      "completedAmount": "0",
+      "timeStamp": "1613860415435",
+      "uid": "261",
+      "itemId": "9140",
+      "sale": true,
+      "amount": "2",
+      "withdrawItems": [],
+      "offeredValue": "2",
+      "playerUID": "3556498",
+      "offerState": "1",
+      "totalCoinExchange": "0"
+    },
+    {
+      "completedAmount": "0",
+      "timeStamp": "1613860473644",
+      "uid": "262",
+      "itemId": "807",
+      "sale": true,
+      "amount": "1",
+      "withdrawItems": [],
+      "offeredValue": "2",
+      "playerUID": "3556498",
+      "offerState": "1",
+      "totalCoinExchange": "0"
+    },
+    {
+      "completedAmount": "0",
+      "timeStamp": "1613860649519",
+      "uid": "269",
+      "itemId": "436",
+      "sale": true,
+      "amount": "1",
+      "withdrawItems": [],
+      "offeredValue": "20",
+      "playerUID": "3556498",
+      "offerState": "1",
+      "totalCoinExchange": "0"
+    }
+  ],
+  "offsetUID": "1043"
+}
