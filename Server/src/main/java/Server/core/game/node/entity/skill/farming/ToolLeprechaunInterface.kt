@@ -10,14 +10,15 @@ import core.game.node.item.Item
 import core.game.system.SystemLogger
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.Components
 import core.tools.Items
 
 private const val varp = 615
 @Initializable
 class ToolLeprechaunInterface : ComponentPlugin() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ComponentDefinition.put(125,this)
-        ComponentDefinition.put(126,this)
+        ComponentDefinition.put(Components.farming_tools_125,this)
+        ComponentDefinition.put(Components.farming_tools_side_126,this)
         return this
     }
 
