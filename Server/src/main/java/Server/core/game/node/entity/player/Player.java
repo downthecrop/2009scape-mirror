@@ -607,17 +607,16 @@ public class Player extends Entity {
 		getPacketDispatch().sendMessage("Oh dear, you are dead!");
 		incrementAttribute("/save:"+STATS_BASE+":"+STATS_DEATHS);
 
-		//If player was a Hardcore Ironman, announce that they died
-		if (this.getIronmanManager().getMode().equals(IronmanMode.HARDCORE)){ //if this was checkRestriction, ultimate irons would be moved to HARDCORE_DEAD as well
-			String gender = this.isMale() ? "Man " : "Woman ";
-			Repository.sendNews("Hardcore Iron " + gender + " " + this.getUsername() +" has fallen. Total Level: " + this.getSkills().getTotalLevel()); // Not enough room for XP
-			this.getIronmanManager().setMode(IronmanMode.STANDARD);
-			asPlayer().getSavedData().getActivityData().setHardcoreDeath(true);
-			this.sendMessage("You have fallen as a Hardcore Iron Man, your Hardcore status has been revoked.");
-		}
-
 		packetDispatch.sendTempMusic(90);
 		if (!getZoneMonitor().handleDeath(killer) && (!getProperties().isSafeZone() && getZoneMonitor().getType() != ZoneType.SAFE.getId()) && getDetails().getRights() != Rights.ADMINISTRATOR) {
+			//If player was a Hardcore Ironman, announce that they died
+			if (this.getIronmanManager().getMode().equals(IronmanMode.HARDCORE)){ //if this was checkRestriction, ultimate irons would be moved to HARDCORE_DEAD as well
+				String gender = this.isMale() ? "Man " : "Woman ";
+				Repository.sendNews("Hardcore Iron " + gender + " " + this.getUsername() +" has fallen. Total Level: " + this.getSkills().getTotalLevel()); // Not enough room for XP
+				this.getIronmanManager().setMode(IronmanMode.STANDARD);
+				asPlayer().getSavedData().getActivityData().setHardcoreDeath(true);
+				this.sendMessage("You have fallen as a Hardcore Iron Man, your Hardcore status has been revoked.");
+			}
 			GroundItemManager.create(new Item(526), getLocation(), k);
 			final Container[] c = DeathTask.getContainers(this);
 			boolean gravestone = graveManager.generateable() && getIronmanManager().getMode() != IronmanMode.ULTIMATE;
