@@ -24,7 +24,6 @@ object PatchRaker {
                 } else {
                     patch.getPatchFor(player).currentGrowthStage++
                     patch.getPatchFor(player).setCurrentState(++patchStage)
-                    SystemLogger.logErr("UHHHHH " + patch.getPatchFor(player).getCurrentState())
                     player.inventory.add(Item(Items.WEEDS_6055))
                     player.skills.addExperience(Skills.FARMING,4.0)
                 }

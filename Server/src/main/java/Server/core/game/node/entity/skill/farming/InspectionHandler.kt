@@ -35,7 +35,6 @@ class InspectionHandler : OptionHandler() {
             player.sendMessage("$status1 $status2")
             player.sendMessage(status3)
             val varpValue = player.varpManager.get(patch.varpIndex).getBitRangeValue(patch.varpOffset,patch.varpOffset + 7)
-            player.sendMessage("E" + varpValue)
         }
         return true
     }
