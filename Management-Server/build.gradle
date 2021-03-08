@@ -1,0 +1,17 @@
+apply plugin: 'application'
+
+archivesBaseName = 'managementserver'
+
+mainClassName = 'ms.Management'
+
+dependencies {
+    implementation 'com.google.guava:guava:29.0-jre'
+    implementation 'mysql:mysql-connector-java:8.0.21'
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'ms.Management'
+    }
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+}

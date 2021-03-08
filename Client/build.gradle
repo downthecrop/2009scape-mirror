@@ -1,0 +1,24 @@
+apply plugin: 'application'
+
+archivesBaseName = 'client'
+
+mainClassName = 'org.rs09.client.GameLaunch'
+
+repositories {
+    maven { url "https://dl.bintray.com/jetbrains/markdown" }
+}
+
+dependencies {
+    implementation 'com.github.Vatuu:discord-rpc:1.6.2'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation("com.github.ajalt.mordant:mordant:2.0.0-alpha2")
+    implementation "org.jetbrains:markdown-jvm:0.2.0.pre-55"
+    implementation files('libs/clientlibs.jar')
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'org.rs09.client.GameLaunch'
+    }
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+}

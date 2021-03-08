@@ -1,0 +1,17 @@
+bin/**
+out/**
+data/logs/**
+data/profile/**
+.idea/**
+/bin
+.DS_Store**
+.project**
+.classpath**
+.class**
+/bin/
+/out/
+data/cache/
+*.iml
+*.eml
+*.userlibraries
+data/players/**

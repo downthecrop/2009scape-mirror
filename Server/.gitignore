@@ -1,0 +1,16 @@
+bin/**
+out/**
+data/logs/**
+data/profile/**
+.idea/**
+/bin
+.DS_Store**
+.project**
+.classpath**
+/bin/
+/out/
+*.iml
+*.eml
+*.userlibraries
+data/players/**
+data/eco/offer_dispatch_db.emp

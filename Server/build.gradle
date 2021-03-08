@@ -1,0 +1,44 @@
+apply plugin: 'application'
+
+
+archivesBaseName = 'server'
+
+mainClassName = 'core.Server'
+
+compileJava {
+    options.encoding = "UTF-8"
+}
+
+compileKotlin {
+    kotlinOptions {
+        jvmTarget = JavaVersion.VERSION_1_8
+        freeCompilerArgs = ['-Xjsr305=strict', '-XXLanguage:-NewInference','-Xms2560m','-Xmx4096m', '-XX:MaxPermSize=350m','-XX:ReservedCodeCacheSize=225m','-XX:+UseCompressedOops']
+    }
+}
+
+repositories {
+    maven { url "https://dl.bintray.com/jetbrains/markdown" }
+}
+
+dependencies {
+    implementation("com.github.ajalt.mordant:mordant:2.0.0-alpha2")
+    implementation "org.jetbrains:markdown-jvm:0.2.0.pre-55"
+    implementation 'com.google.guava:guava:29.0-jre'
+    implementation 'mysql:mysql-connector-java:8.0.21'
+    implementation 'com.googlecode.json-simple:json-simple:1.1.1'
+    implementation 'io.github.classgraph:classgraph:4.8.98'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
+}
+
+sourceSets {
+    main.java.srcDirs = ['src/main/java/Server']
+    main.kotlin.srcDirs = ['src/main/java/Server']
+}
+
+jar {
+    manifest {
+        attributes 'Main-Class': 'core.Server'
+    }
+    from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
+}
