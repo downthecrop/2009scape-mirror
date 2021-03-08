@@ -50,6 +50,7 @@ class FarmingState(player: Player? = null) : State(player) {
             p.put("patch-harvestAmt",patch.harvestAmt)
             p.put("patch-checkHealth",patch.isCheckHealth)
             p.put("patch-compost",patch.compost.ordinal)
+            p.put("patch-paidprot",patch.protectionPaid)
             patches.add(p)
         }
         val bins = JSONArray()
@@ -93,11 +94,13 @@ class FarmingState(player: Player? = null) : State(player) {
                 val checkHealth = p["patch-checkHealth"] as Boolean
                 val savedState = p["patch-state"].toString().toInt()
                 val compostOrdinal = p["patch-compost"].toString().toInt()
+                val protectionPaid = p["patch-paidprot"] as Boolean
                 val fPatch = FarmingPatch.values()[patchOrdinal]
                 val plantable = if(patchPlantableOrdinal != -1) Plantable.values()[patchPlantableOrdinal] else null
                 val patch = Patch(player,fPatch,plantable,patchStage,patchDiseased,patchDead,patchWatered,nextGrowth,harvestAmt,checkHealth)
 
                 patch.compost = CompostType.values()[compostOrdinal]
+                patch.protectionPaid = protectionPaid
                 if(patch.currentGrowthStage < patch.plantable?.stages ?: 0 && !patch.isWeedy()){
                     val startTime = (patch.nextGrowth - TimeUnit.MINUTES.toMillis(patch.patch.type.stageGrowthTime * (patch.currentGrowthStage + 1).toLong()))
                     var expectedStage = Math.floor((System.currentTimeMillis() - startTime.toDouble()) / TimeUnit.MINUTES.toMillis(patch.patch.type.stageGrowthTime.toLong())).toInt()

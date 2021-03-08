@@ -10,6 +10,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
 
     var diseaseMod = 0
     var compost = CompostType.NONE
+    var protectionPaid = false
 
     fun setNewHarvestAmount() {
         if(patch.type == PatchType.ALLOTMENT){
@@ -126,7 +127,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             CompostType.SUPER -> 13
         }
 
-        if(RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown()){
+        if(RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid){
             //bush, tree, fruit tree can not disease on stage 1(0) of growth.
             if(!((patch.type == PatchType.BUSH || patch.type == PatchType.TREE || patch.type == PatchType.FRUIT_TREE) && currentGrowthStage == 0)) {
                 isDiseased = true

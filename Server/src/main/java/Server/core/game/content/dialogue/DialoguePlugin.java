@@ -183,7 +183,7 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 		if (npc == null) {
 			return interpreter.sendDialogues(getIds()[0], getIds()[0] > 8591 ? FacialExpression.OLD_NORMAL : FacialExpression.FRIENDLY, messages);
 		}
-		return interpreter.sendDialogues(npc, getIds()[0] > 8591 ? FacialExpression.OLD_NORMAL : FacialExpression.FRIENDLY, messages);
+		return interpreter.sendDialogues(npc, npc.getId() > 8591 ? FacialExpression.OLD_NORMAL : FacialExpression.FRIENDLY, messages);
 	}
 
 	/**
