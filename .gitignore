@@ -35,3 +35,4 @@ docker
 .gradle
 gradle
 .idea
+.idea/
