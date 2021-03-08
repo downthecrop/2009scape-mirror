@@ -8,16 +8,6 @@ import ms.system.OperatingSystem;
  *
  */
 public final class ServerConstants {
-
-	/**
-	 * The port to be used for communications.
-	 */
-	public static final String SERVER_NAME = "2009Scape";
-
-	/**
-	 * The port to be used for communications.
-	 */
-	public static final int PORT = 5555;
 	
 	/**
 	 * The maximum amount of worlds.
@@ -27,22 +17,12 @@ public final class ServerConstants {
 	/**
 	 * The world switching delay in milliseconds.
 	 */
-	public static final long WORLD_SWITCH_DELAY = 20_000l;
+	public static final long WORLD_SWITCH_DELAY = 20_000L;
 	
 	/**
 	 * The address of the Management server.
 	 */
 	public static final String HOST_ADDRESS = "127.0.0.1";
-
-	/**
-	 * The store path.
-	 */
-	public static final String STORE_PATH = "./store/";
-	
-	/**
-	 * The maximum amount of players per world.
-	 */
-	public static final int MAX_PLAYERS = (1 << 11) - 1;
 	
 	/**
 	 * The operating system of the management server

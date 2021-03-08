@@ -476,11 +476,6 @@ public final class CommunicationInfo {
 	 * @return The rank.
 	 */
 	public ClanRank getRank(String contact) {
-		for (String name : ServerConstants.ADMINISTRATORS) {
-			if (contact.equals(name)) {
-				return ClanRank.ADMINISTRATOR;
-			}
-		}
 		return contacts.get(contact);
 	}
 
