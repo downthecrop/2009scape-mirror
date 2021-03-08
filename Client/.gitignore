@@ -15,3 +15,10 @@ data/cache/
 *.eml
 *.userlibraries
 data/players/**
+/build/
+/build/classes/
+/build/resources/
+/build/tmp/
+/build/generated/
+/build/libs/
+/build/kotlin/

@@ -43,45 +43,15 @@ class ToolLeprechaunInterface : ComponentPlugin() {
 
             Components.farming_tools_125 -> {
                 when(button){
+                    33 -> doWithdrawal(player,Items.RAKE_5341,::setHasRake,::hasRake)
 
-                    33 -> {
-                        if(!hasRake(player)){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
-                        } else {
-                            player.inventory.add(Item(Items.RAKE_5341))
-                            setHasRake(player,false)
-                        }
-                    }
+                    34 -> doWithdrawal(player,Items.SEED_DIBBER_5343,::setHasDibber,::hasDibber)
 
-                    34 -> {
-                        if(!hasDibber(player)){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
-                        } else {
-                            player.inventory.add(Item(Items.SEED_DIBBER_5343))
-                            setHasDibber(player,false)
-                        }
-                    }
-
-                    35 -> {
-                        if(!hasSpade(player)){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
-                        } else {
-                            player.inventory.add(Item(Items.SPADE_952))
-                            setHasSpade(player,false)
-                        }
-                    }
+                    35 -> doWithdrawal(player,Items.SPADE_952,::setHasSpade,::hasSpade)
 
                     36 -> {
-                        if(!hasSecateurs(player)){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
-                        } else {
-                            if(hasMagicSecateurs(player)){
-                                player.inventory.add(Item(Items.MAGIC_SECATEURS_7409))
-                            } else {
-                                player.inventory.add(Item(Items.SECATEURS_5329))
-                            }
-                            setHasSecateurs(player,false)
-                        }
+                        val sec = if(hasMagicSecateurs(player)) Items.MAGIC_SECATEURS_7409 else Items.SECATEURS_5329
+                        doWithdrawal(player,sec,::setHasSecateurs,::hasSecateurs)
                     }
 
                     37 -> {
@@ -93,41 +63,13 @@ class ToolLeprechaunInterface : ComponentPlugin() {
                         }
                     }
 
-                    38 -> {
-                        if(!hasGardeningTrowel(player)){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
-                        } else {
-                            player.inventory.add(Item(Items.GARDENING_TROWEL_5325))
-                            setHasGardeningTrowel(player,false)
-                        }
-                    }
+                    38 -> doWithdrawal(player,Items.GARDENING_TROWEL_5325,::setHasGardeningTrowel,::hasGardeningTrowel)
 
-                    39 -> {
-                        if(getNumBuckets(player) == 0){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
-                        } else {
-                            player.inventory.add(Item(Items.BUCKET_1925))
-                            updateBuckets(player,-1)
-                        }
-                    }
+                    39 -> doStackedWithdrawal(player,Items.BUCKET_1925,getAmount(opcode),::updateBuckets,::getNumBuckets)
 
-                    40 -> {
-                        if(getNumCompost(player) == 0){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
-                        } else {
-                            player.inventory.add(Item(Items.COMPOST_6032))
-                            updateCompost(player,-1)
-                        }
-                    }
+                    40 -> doStackedWithdrawal(player,Items.COMPOST_6032,getAmount(opcode),::updateCompost,::getNumCompost)
 
-                    41 -> {
-                        if(getNumSuperCompost(player) == 0){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
-                        } else {
-                            player.inventory.add(Item(Items.SUPERCOMPOST_6034))
-                            updateSuperCompost(player,-1)
-                        }
-                    }
+                    41 -> doStackedWithdrawal(player,Items.SUPERCOMPOST_6034,getAmount(opcode),::updateSuperCompost,::getNumSuperCompost)
                 }
             }
 
@@ -135,36 +77,11 @@ class ToolLeprechaunInterface : ComponentPlugin() {
 
                 when(button){
 
-                    18 -> {
-                        if(!player.inventory.containsItem(Item(Items.RAKE_5341))){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
-                        } else if(!hasRake(player)) {
-                            player.inventory.remove(Item(Items.RAKE_5341))
-                            setHasRake(player,true)
-                        } else {
-                            player.dialogueInterpreter.sendDialogue("You already have one of those stored.")
-                        }
-                    }
+                    18 -> doDeposit(player,Items.RAKE_5341,::setHasRake,::hasRake)
 
-                    19 -> {
-                        if(!player.inventory.containsItem(Item(Items.SEED_DIBBER_5343))){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
-                        } else if(!hasDibber(player)){
-                            player.inventory.remove(Item(Items.SEED_DIBBER_5343))
-                            setHasDibber(player,true)
-                        } else {
-                            player.dialogueInterpreter.sendDialogue("You already have one of those stored.")
-                        }
-                    }
+                    19 -> doDeposit(player,Items.SEED_DIBBER_5343,::setHasDibber,::hasDibber)
 
-                    20 -> {
-                        if(!player.inventory.containsItem(Item(Items.SPADE_952))){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
-                        } else if(!hasSpade(player)){
-                            player.inventory.remove(Item(Items.SPADE_952))
-                            setHasSpade(player,true)
-                        }
-                    }
+                    20 -> doDeposit(player,Items.SPADE_952,::setHasSpade,::hasSpade)
 
                     21 -> {
                         if(!player.inventory.contains(Items.SECATEURS_5329,1) && !player.inventory.contains(Items.MAGIC_SECATEURS_7409,1)){
@@ -176,7 +93,7 @@ class ToolLeprechaunInterface : ComponentPlugin() {
                                 setHasMagicSecateurs(player,true)
                             } else {
                                 player.inventory.remove(Item(Items.SECATEURS_5329))
-                                setHasDibber(player,true)
+                                setHasSecateurs(player,true)
                                 setHasMagicSecateurs(player,false)
                             }
                         } else {
@@ -196,77 +113,13 @@ class ToolLeprechaunInterface : ComponentPlugin() {
                         }
                     }
 
-                    23 -> {
-                        if(!player.inventory.contains(Items.GARDENING_TROWEL_5325,1)){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
-                        } else if (!hasGardeningTrowel(player)){
-                            player.inventory.remove(Item(Items.GARDENING_TROWEL_5325))
-                            setHasGardeningTrowel(player,true)
-                        } else {
-                            player.dialogueInterpreter.sendDialogue("You already have one of those stored.")
-                        }
-                    }
+                    23 -> doDeposit(player,Items.GARDENING_TROWEL_5325,::setHasGardeningTrowel,::hasGardeningTrowel)
 
-                    24 -> {
-                        if(!player.inventory.contains(Items.BUCKET_1925,1)){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
-                        } else if(getNumBuckets(player) < 31){
-                            player.inventory.remove(Item(Items.BUCKET_1925))
-                            updateBuckets(player,1)
-                        } else {
-                            player.dialogueInterpreter.sendDialogue("You already have enough of those stored.")
-                        }
-                    }
+                    24 -> doStackedDeposit(player,Items.BUCKET_1925,getAmount(opcode),::updateBuckets,::getNumBuckets)
 
-                    25 -> {
-                        if(!player.inventory.contains(Items.COMPOST_6032,1)){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
-                        } else if(getNumCompost(player) < 255){
-                            player.inventory.remove(Item(Items.COMPOST_6032))
-                            updateCompost(player,1)
-                        } else {
-                            player.dialogueInterpreter.sendDialogue("You already have enough of those stored.")
-                        }
-                    }
+                    25 -> doStackedDeposit(player,Items.COMPOST_6032,getAmount(opcode),::updateCompost,::getNumCompost)
 
-                    26 -> {
-                        if(!player.inventory.contains(Items.SUPERCOMPOST_6034,1)){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
-                        } else if(getNumSuperCompost(player) < 255){
-                            var amount = when(opcode) {
-                                155 -> 1
-                                196 -> 5
-                                124 -> -1
-                                199 -> -2
-                                else -> 0
-                            }
-                            if(amount == -2) {
-                                player.setAttribute("runscript", object : RunScript() {
-                                    override fun handle(): Boolean {
-                                        var amt = getValue().toString().toInt()
-                                        if(amt > player.inventory.getAmount(Items.SUPERCOMPOST_6034)){
-                                            amt = player.inventory.getAmount(Items.SUPERCOMPOST_6034)
-                                        }
-                                        if(amt > (255 - getNumSuperCompost(player))){
-                                            amt = 255 - getNumSuperCompost(player)
-                                        }
-                                        player.inventory.remove(Item(Items.SUPERCOMPOST_6034,amt))
-                                        updateSuperCompost(player,amt)
-                                        return true
-                                    }
-                                })
-                                player.dialogueInterpreter.sendInput(false, "Enter amount:")
-                                return true
-                            } else if(amount == -1) {
-                                amount = player.inventory.getAmount(Item(Items.SUPERCOMPOST_6034))
-                                if (amount > (255 - getNumSuperCompost(player))) amount = 255 - getNumSuperCompost(player)
-                            }
-                            player.inventory.remove(Item(Items.SUPERCOMPOST_6034))
-                            updateSuperCompost(player, 1)
-                        } else {
-                            player.dialogueInterpreter.sendDialogue("You already have enough of those stored.")
-                        }
-                    }
+                    26 -> doStackedDeposit(player,Items.SUPERCOMPOST_6034,getAmount(opcode),::updateSuperCompost,::getNumSuperCompost)
 
                 }
 
@@ -276,6 +129,114 @@ class ToolLeprechaunInterface : ComponentPlugin() {
 
         player.varpManager.get(varp).send(player)
         return true
+    }
+
+    private fun doWithdrawal(player: Player?, item: Int, withdrawMethod: (Player?,Boolean) -> Unit, checkMethod: (Player?) -> Boolean){
+        player ?: return
+        if(!checkMethod.invoke(player)){
+            player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
+        } else {
+            withdrawMethod.invoke(player,false)
+            player.inventory.add(Item(item))
+        }
+    }
+
+    private fun doDeposit(player: Player?, item: Int, depositMethod: (Player?,Boolean) -> Unit, checkMethod: (Player?) -> Boolean){
+        player ?: return
+        if(!player.inventory.contains(item,1)){
+            player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
+        }
+        if(!checkMethod.invoke(player)){
+            depositMethod.invoke(player,true)
+            player.inventory.remove(Item(item))
+        } else {
+            player.dialogueInterpreter.sendDialogue("You already have one of those stored.")
+        }
+    }
+
+    private fun doStackedDeposit(player: Player?, item: Int, amount: Int, updateQuantityMethod: (Player?, Int) -> Unit, quantityCheckMethod: (Player?) -> Int){
+        player ?: return
+        val hasAmount = player.inventory.getAmount(item)
+        var finalAmount = amount
+        val spaceLeft = 255 - quantityCheckMethod.invoke(player)
+
+        if(amount == -2){
+            player.setAttribute("runscript", object : RunScript() {
+                override fun handle(): Boolean {
+                    var amt = getValue().toString().toInt()
+                    if(amt > hasAmount){
+                        amt = hasAmount
+                    }
+                    if(amt > spaceLeft){
+                        amt = spaceLeft
+                    }
+                    player.inventory.remove(Item(item,amt))
+                    updateQuantityMethod.invoke(player,amt)
+                    return true
+                }
+            })
+            player.dialogueInterpreter.sendInput(false, "Enter amount:")
+            return
+        }
+        if(amount == -1){
+            finalAmount = hasAmount
+            if(finalAmount > spaceLeft){
+                finalAmount = spaceLeft
+            }
+        }
+
+        player.inventory.remove(Item(item,finalAmount))
+        updateQuantityMethod.invoke(player,finalAmount)
+    }
+
+    private fun doStackedWithdrawal(player: Player?,item: Int, amount: Int,updateQuantityMethod: (Player?,Int) -> Unit, quantityCheckMethod: (Player?) -> Int){
+        player ?: return
+        val hasAmount = quantityCheckMethod.invoke(player)
+        var finalAmount = amount
+        if(hasAmount == 0){
+            player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
+        } else {
+            if(amount == -2){
+                player.setAttribute("runscript", object : RunScript() {
+                    override fun handle(): Boolean {
+                        var amt = getValue().toString().toInt()
+                        if(amt > hasAmount){
+                            amt = hasAmount
+                        }
+                        if(amt > player.inventory.freeSlots()){
+                            amt = player.inventory.freeSlots()
+                        }
+                        if(amt <= 0){
+                            player.dialogueInterpreter.sendDialogue("You don't have enough inventory space for that.")
+                        } else {
+                            player.inventory.add(Item(item, amt))
+                            updateQuantityMethod.invoke(player, amt)
+                        }
+                        return true
+                    }
+                })
+                player.dialogueInterpreter.sendInput(false, "Enter amount:")
+                return
+            }
+            if(amount == -1){
+                finalAmount = player.inventory.freeSlots()
+            }
+            if(finalAmount > hasAmount){
+                finalAmount = hasAmount
+            }
+            player.inventory.add(Item(item,finalAmount))
+            updateQuantityMethod.invoke(player,-finalAmount)
+        }
+    }
+
+    fun getAmount(opcode: Int): Int{
+        return when(opcode) {
+            155 -> 1
+            196 -> 5
+            124 -> -1
+            199 -> -2
+            else -> 0
+        }
     }
 
     private fun hasRake(player: Player?): Boolean{
