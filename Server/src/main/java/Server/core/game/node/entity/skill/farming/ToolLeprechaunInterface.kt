@@ -136,6 +136,10 @@ class ToolLeprechaunInterface : ComponentPlugin() {
         if(!checkMethod.invoke(player)){
             player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
         } else {
+            if(!player.inventory.hasSpaceFor(Item(item))){
+                player.dialogueInterpreter.sendDialogue("You don't have enough space for that.")
+                return
+            }
             withdrawMethod.invoke(player,false)
             player.inventory.add(Item(item))
         }
@@ -238,6 +242,10 @@ class ToolLeprechaunInterface : ComponentPlugin() {
             }
             if(finalAmount > hasAmount){
                 finalAmount = hasAmount
+            }
+            if(!player.inventory.hasSpaceFor(Item(item,finalAmount)) || finalAmount == 0){
+                player.dialogueInterpreter.sendDialogue("You don't have enough inventory space for that.")
+                return
             }
             player.inventory.add(Item(item,finalAmount))
             updateQuantityMethod.invoke(player,-finalAmount)
