@@ -127,7 +127,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             CompostType.SUPER -> 13
         }
 
-        if(RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid){
+        if(RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid && !isFlowerProtected()){
             //bush, tree, fruit tree can not disease on stage 1(0) of growth.
             if(!((patch.type == PatchType.BUSH || patch.type == PatchType.TREE || patch.type == PatchType.FRUIT_TREE) && currentGrowthStage == 0)) {
                 isDiseased = true
@@ -180,5 +180,19 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     fun getFruitOrBerryCount() : Int {
         plantable ?: return 0
         return getCurrentState() - plantable!!.value - plantable!!.stages
+    }
+
+    fun isFlowerProtected(): Boolean{
+        if(patch.type != PatchType.ALLOTMENT) return false
+
+        val fpatch = when(patch){
+            FarmingPatch.S_FALADOR_ALLOTMENT_SE,FarmingPatch.S_FALADOR_ALLOTMENT_NW -> FarmingPatch.S_FALADOR_FLOWER_C
+            FarmingPatch.ARDOUGNE_ALLOTMENT_S,FarmingPatch.ARDOUGNE_ALLOTMENT_N -> FarmingPatch.ARDOUGNE_FLOWER_C
+            FarmingPatch.CATHERBY_ALLOTMENT_S,FarmingPatch.CATHERBY_ALLOTMENT_N -> FarmingPatch.CATHERBY_FLOWER_C
+            FarmingPatch.PORT_PHAS_ALLOTMENT_SE,FarmingPatch.PORT_PHAS_ALLOTMENT_NW -> FarmingPatch.PORT_PHAS_FLOWER_C
+            else -> return false
+        }.getPatchFor(player)
+
+        return (fpatch.plantable != null && fpatch.plantable == plantable?.protectionFlower && fpatch.isGrown())
     }
 }
