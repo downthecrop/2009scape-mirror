@@ -30,6 +30,7 @@ enum class FarmingPatch(val varpIndex: Int, val varpOffset: Int, val type: Patch
     CATHERBY_FLOWER_C(508,8,PatchType.FLOWER),
     ARDOUGNE_FLOWER_C(508,16,PatchType.FLOWER),
     PORT_PHAS_FLOWER_C(508,24,PatchType.FLOWER),
+    WILDERNESS_FLOWER(1183,12,PatchType.FLOWER),
 
     //Tree
     N_FALADOR_TREE(502,8,PatchType.TREE),
