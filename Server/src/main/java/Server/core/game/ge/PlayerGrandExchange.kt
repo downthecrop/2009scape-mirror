@@ -31,6 +31,7 @@ import java.util.*
 import core.game.component.InterfaceType
 import core.game.container.access.BitregisterAssembler
 import core.game.system.SystemLogger
+import core.tools.Components
 
 
 /**
@@ -63,7 +64,7 @@ class PlayerGrandExchange(private val player: Player) : SavingModule {
             player.bankPinManager.openType(4)
             return
         }
-        player.interfaceManager.open(Component(105)).closeEvent =
+        player.interfaceManager.open(Component(Components.stockmarket_105)).closeEvent =
             CloseEvent { player, _ ->
                 temporaryOffer = null
                 player.packetDispatch.sendRunScript(571, "")
@@ -85,7 +86,7 @@ class PlayerGrandExchange(private val player: Player) : SavingModule {
             player.bankPinManager.openType(3)
             return
         }
-        player.interfaceManager.openComponent(109)
+        player.interfaceManager.openComponent(Components.stockcollect_109)
         player.packetDispatch.sendAccessMask(6, 18, 109, 0, 2)
         player.packetDispatch.sendAccessMask(6, 23, 109, 0, 2)
         player.packetDispatch.sendAccessMask(6, 28, 109, 0, 2)
@@ -183,14 +184,14 @@ class PlayerGrandExchange(private val player: Player) : SavingModule {
                 )
             }
         })
-        player.interfaceManager.open(Component(645)).closeEvent =
+        player.interfaceManager.open(Component(Components.exchange_itemsets_645)).closeEvent =
             CloseEvent { player, _ ->
                 player.inventory.listeners.removeAt(1)
                 player.interfaceManager.closeSingleTab()
                 player.removeAttribute("container-key")
                 true
             }
-        player.interfaceManager.openSingleTab(Component(644)).open(player)
+        player.interfaceManager.openSingleTab(Component(Components.exchange_sets_side_644)).open(player)
         player.setAttribute(
             "container-key",
             InterfaceContainer.generateItems(
@@ -638,7 +639,7 @@ class PlayerGrandExchange(private val player: Player) : SavingModule {
     fun openSell(index: Int) {
         openedIndex = index
         sendConfiguration(offers[index], true)
-        player.interfaceManager.openSingleTab(Component(107)).open(player)
+        player.interfaceManager.openSingleTab(Component(Components.stockside_107)).open(player)
         player.packetDispatch.sendRunScript(
             149, "IviiiIsssss", "", "", "", "Examine", "Offer",
             -1, 0, 7, 4, 93, 7012370

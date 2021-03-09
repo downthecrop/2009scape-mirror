@@ -12,6 +12,7 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.Items
 import core.game.content.dialogue.FacialExpression
+import core.tools.Components
 
 private val BOOK = Item(Items.GOBLIN_SYMBOL_BOOK_5009)
 @Initializable
@@ -36,8 +37,8 @@ class LostTribeOptionHandler : OptionHandler(){
         player ?: return false
         node ?: return false
         when(node.id){
-            5008 -> player.interfaceManager.open(Component(50))
-            5009 -> player.interfaceManager.open(Component(183))
+            5008 -> player.interfaceManager.open(Component(Components._brooch_050))
+            5009 -> player.interfaceManager.open(Component(Components.history_of_the_goblin_race_183))
             6916 -> {
                 if(!player.inventory.containsItem(BOOK) && !player.bank.containsItem(BOOK) && player.questRepository.getQuest("Lost Tribe").getStage(player) >= 41){
                     player.dialogueInterpreter.sendDialogue("'A History of the Goblin Race.' This must be it.")

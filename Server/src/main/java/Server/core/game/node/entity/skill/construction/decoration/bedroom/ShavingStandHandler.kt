@@ -7,6 +7,7 @@ import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.Components
 
 @Initializable
 class ShavingStandHandler : OptionHandler() {
@@ -21,9 +22,9 @@ class ShavingStandHandler : OptionHandler() {
         player ?: return false
         node ?: return false
         if(player.appearance.isMale){
-            player.interfaceManager.open(Component(596))
+            player.interfaceManager.open(Component(Components.Hairdressers_salon_596))
         } else {
-            player.interfaceManager.open(Component(592))
+            player.interfaceManager.open(Component(Components.Hairdressers_salon_592))
         }
         return true
     }

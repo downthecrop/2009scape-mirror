@@ -18,6 +18,7 @@ import core.plugin.PluginManager.definePlugin
 import core.game.interaction.item.TeleTabsOptionPlugin
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.construction.Decoration
+import core.tools.Components
 
 /**
  * Handles the lectern
@@ -132,7 +133,7 @@ class LecternPlugin : OptionHandler() {
             override fun pulse(): Boolean {
                 when(counter++){
                     0 -> player.animator.animate(Animation(3649)).also { player.lock() }
-                    8 -> player.interfaceManager.open(Component(400)).also { player.unlock(); return true }
+                    8 -> player.interfaceManager.open(Component(Components.poh_magic_tablets_400)).also { player.unlock(); return true }
                 }
                 return false
             }

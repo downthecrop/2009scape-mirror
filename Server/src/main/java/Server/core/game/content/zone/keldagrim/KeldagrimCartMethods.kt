@@ -7,6 +7,7 @@ import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Direction
 import core.game.world.map.Location
+import core.tools.Components
 
 object KeldagrimCartMethods {
     @JvmStatic
@@ -25,7 +26,7 @@ class TravelFromKeldagrimPulse(val player: Player, val dest: Location): Pulse(){
     var counter = 0
     override fun pulse(): Boolean {
         when(counter++){
-            0 -> player.lock().also { player.interfaceManager.open(Component(115)) }
+            0 -> player.lock().also { player.interfaceManager.open(Component(Components.fade_to_black_115)) }
             4 -> {
                 player.properties.teleportLocation = Location.create(2911, 10171, 0)
                 player.appearance.rideCart(true)
@@ -35,11 +36,11 @@ class TravelFromKeldagrimPulse(val player: Player, val dest: Location): Pulse(){
                 player.walkingQueue.addPath(2936, 10171)
             }
             6 -> {
-                player.interfaceManager.close(Component(115))
-                player.interfaceManager.open(Component(170))
+                player.interfaceManager.close(Component(Components.fade_to_black_115))
+                player.interfaceManager.open(Component(Components.fade_from_black_170))
             }
             14 -> {
-                player.interfaceManager.open(Component(115))
+                player.interfaceManager.open(Component(Components.fade_to_black_115))
             }
             21 -> {
                 player.walkingQueue.reset()
@@ -47,12 +48,12 @@ class TravelFromKeldagrimPulse(val player: Player, val dest: Location): Pulse(){
                 player.appearance.rideCart(false)
             }
             23 -> {
-                player.interfaceManager.close(Component(115))
-                player.interfaceManager.open(Component(170))
+                player.interfaceManager.close(Component(Components.fade_to_black_115))
+                player.interfaceManager.open(Component(Components.fade_from_black_170))
             }
             25 -> {
                 player.unlock()
-                player.interfaceManager.close(Component(170))
+                player.interfaceManager.close(Component(Components.fade_from_black_170))
                 return true
             }
         }

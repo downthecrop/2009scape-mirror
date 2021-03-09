@@ -5,6 +5,7 @@ import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.world.map.Location
+import core.tools.Components
 import core.tools.RandomFunction
 
 class PlunderSession(val player: Player) {
@@ -24,7 +25,7 @@ class PlunderSession(val player: Player) {
     fun init(){
         player.setAttribute("plunder-session",this)
         GameWorld.Pulser.submit(PlunderPulse(player))
-        player.interfaceManager.openOverlay(Component(428))
+        player.interfaceManager.openOverlay(Component(Components.ntk_overlay_428))
         isActive = true
     }
 

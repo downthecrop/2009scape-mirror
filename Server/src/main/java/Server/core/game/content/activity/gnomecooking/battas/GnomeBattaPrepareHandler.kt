@@ -8,6 +8,7 @@ import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.Components
 
 /**
  * Handles the prepare option for gnome battas
@@ -22,7 +23,7 @@ class GnomeBattaPrepareHandler : OptionHandler() {
 
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         player ?: return false
-        player.interfaceManager.open(Component(434))
+        player.interfaceManager.open(Component(Components.gnome_battas_434))
         return true
     }
 

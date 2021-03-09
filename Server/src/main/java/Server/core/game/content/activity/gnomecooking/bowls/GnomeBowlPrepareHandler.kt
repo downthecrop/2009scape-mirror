@@ -8,6 +8,7 @@ import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.Components
 
 @Initializable
 class GnomeBowlPrepareHandler : OptionHandler() {
@@ -18,7 +19,7 @@ class GnomeBowlPrepareHandler : OptionHandler() {
 
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         player ?: return false
-        player.interfaceManager.open(Component(435))
+        player.interfaceManager.open(Component(Components.gnome_bowls_435))
         return true
     }
 

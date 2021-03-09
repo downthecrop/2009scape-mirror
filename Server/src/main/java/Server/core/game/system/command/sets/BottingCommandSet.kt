@@ -7,6 +7,7 @@ import plugin.ai.general.scriptrepository.PlayerScripts
 import plugin.ai.general.scriptrepository.Script
 import core.game.system.command.Command
 import core.game.world.GameWorld
+import core.tools.Components
 import core.tools.stringtools.colorize
 
 @Initializable
@@ -35,7 +36,7 @@ class BottingCommandSet : CommandSet(Command.Privilege.STANDARD) {
                 player.packetDispatch.sendString("<img=3> ::script ${script.identifier}",275,lineid++)
                 player.packetDispatch.sendString("<str>                                 </str>",275,lineid++)
             }
-            player.interfaceManager.open(Component(275))
+            player.interfaceManager.open(Component(Components.questjournal_scroll_275))
         }
         define("script"){player,args ->
             if(GameWorld.settings?.enabled_botting != true){

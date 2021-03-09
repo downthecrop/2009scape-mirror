@@ -471,7 +471,7 @@ object Components {
     const val salamander_attack_options_474 = 474
     const val chins_again_475 = 475
     const val salamanders_again_476 = 476
-    const val custom_fur_clothingclothin_477 = 477
+    const val custom_fur_clothing_477 = 477
     const val imp_release_negotiation_form_478 = 478
     const val weird_tubes_bro_479 = 479
     const val anma_rgb_480 = 480
@@ -706,6 +706,9 @@ object Components {
     const val carpet_draughts_727 = 727
     const val carpet_main_728 = 728
     const val carpet_ticket_729 = 729
+    const val fog_reward_732 = 732
+    const val fr_travel_log_735 = 735
+    const val fr_rings_734 = 734
     const val graphics_options_742 = 742
     const val sound_options_743 = 743
     const val loginscreen_744 = 744

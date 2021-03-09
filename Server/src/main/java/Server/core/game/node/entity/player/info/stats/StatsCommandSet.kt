@@ -7,6 +7,7 @@ import core.game.world.repository.Repository
 import core.plugin.Initializable
 import core.game.system.command.Command
 import core.game.system.command.sets.CommandSet
+import core.tools.Components
 
 @Initializable
 class StatsCommandSet : CommandSet(Command.Privilege.STANDARD) {
@@ -74,11 +75,11 @@ class StatsCommandSet : CommandSet(Command.Privilege.STANDARD) {
                 else -> sendLine(player,"",i)
             }
         }
-        player.interfaceManager.open(Component(26))
+        player.interfaceManager.open(Component(Components.fancy_book_026))
     }
 
     fun sendLine(player: Player, line: String, child: Int){
-        player.packetDispatch.sendString(line,26,child)
+        player.packetDispatch.sendString(line,Components.fancy_book_026,child)
     }
 
     fun prepareInterface(player: Player,other: Player){

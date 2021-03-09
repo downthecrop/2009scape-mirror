@@ -6,6 +6,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.plugin.Initializable
+import core.tools.Components
 
 /**
  * Thormac
@@ -27,7 +28,7 @@ class ThormacDialogue(player: Player? = null) : DialoguePlugin(player) {
         Items.SCORPION_CAGE_463
     )
 
-    val COMPONENT = Component(332)
+    val COMPONENT = Component(Components.staff_enchanting_332)
 
     override fun open(vararg args: Any?): Boolean {
         val scorpionStage = try {

@@ -16,10 +16,7 @@ import core.game.world.map.Location
 import core.game.world.map.build.DynamicRegion
 import core.game.world.update.flag.context.Animation
 import core.plugin.Plugin
-import core.tools.Items
-import core.tools.RandomFunction
-import core.tools.secondsToTicks
-import core.tools.ticksToSeconds
+import core.tools.*
 import java.util.concurrent.TimeUnit
 import kotlin.random.Random
 
@@ -28,8 +25,8 @@ import kotlin.random.Random
  * Handles a fishing trawler session
  * @author Ceikry
  */
-private const val OVERLAY_ID = 366
-private const val TUTORIAL_ID = 368
+private const val OVERLAY_ID = Components.trawler_overlay_366
+private const val TUTORIAL_ID = Components.trawler_start_368
 private val HOLE_X_COORDS = intArrayOf(29,30,31,32,33,34,35,36)
 private const val HOLE_NORTH_Y = 26
 private const val HOLE_SOUTH_Y = 23

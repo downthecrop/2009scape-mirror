@@ -8,6 +8,7 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
+import core.tools.Components
 
 @Initializable
 class DwarvenBoatmanDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -55,13 +56,13 @@ class travelPulse(val player: Player): Pulse(1){
     var counter = 0
     override fun pulse(): Boolean {
         when(counter++){
-            0 -> player.lock().also { player.interfaceManager.open(Component(115)) }
+            0 -> player.lock().also { player.interfaceManager.open(Component(Components.fade_to_black_115)) }
             3 -> player.properties.teleportLocation = Location.create(2888, 10225, 0)
             4 -> {
-                player.interfaceManager.close(Component(115))
-                player.interfaceManager.open(Component(170))
+                player.interfaceManager.close(Component(Components.fade_to_black_115))
+                player.interfaceManager.open(Component(Components.fade_from_black_170))
             }
-            6 -> player.unlock().also { player.interfaceManager.close(Component(170)); player.setAttribute("/save:keldagrim-visited",true);  return true }
+            6 -> player.unlock().also { player.interfaceManager.close(Component(Components.fade_from_black_170)); player.setAttribute("/save:keldagrim-visited",true);  return true }
         }
         return false
     }

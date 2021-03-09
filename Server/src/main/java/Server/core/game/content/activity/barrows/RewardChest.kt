@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.node.item.WeightedChanceItem
+import core.tools.Components
 import core.tools.Items
 import core.tools.RandomFunction
 import java.util.*
@@ -89,7 +90,7 @@ object RewardChest {
             rewards.add(RandomFunction.rollWeightedChanceTable(*DROP_TABLE))
         }
         InterfaceContainer.generateItems(player, rewards.toTypedArray(), arrayOf("Pog!","Examine"), 364, 4,3,4)
-        player.interfaceManager.open(Component(364))
+        player.interfaceManager.open(Component(Components.trail_reward_364))
         BossKillCounter.addtoBarrowsCount(player)
         for(item in rewards){
             if(!player.inventory.add(item)){

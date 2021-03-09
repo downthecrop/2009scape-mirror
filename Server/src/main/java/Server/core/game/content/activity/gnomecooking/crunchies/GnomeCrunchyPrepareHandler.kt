@@ -7,9 +7,10 @@ import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.Components
 
 private const val HALF_BAKED_CRUNCHY = 2201
-private const val CRUNCHY_INTERFACE = 437
+private const val CRUNCHY_INTERFACE = Components.gnome_crunchies_437
 
 /**
  * Opens the gnome crunchy interface
