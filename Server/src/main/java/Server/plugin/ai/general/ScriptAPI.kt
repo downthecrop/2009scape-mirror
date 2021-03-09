@@ -31,6 +31,7 @@ import core.game.content.consumable.effects.HealingEffect
 import core.game.ge.GrandExchangeOffer
 import core.game.ge.OfferManager
 import core.game.node.entity.skill.Skills
+import core.tools.Components
 import core.tools.stringtools.colorize
 import java.util.*
 import java.util.concurrent.CountDownLatch
@@ -640,8 +641,8 @@ class ScriptAPI(private val bot: Player) {
 
     class BottingOverlay(val player: Player){
         fun init(){
-            player.interfaceManager.openOverlay(Component(195))
-            player.packetDispatch.sendInterfaceConfig(195,5,true)
+            player.interfaceManager.openOverlay(Component(Components.enchantment_pizazz_points_195))
+            player.packetDispatch.sendInterfaceConfig(Components.enchantment_pizazz_points_195,5,true)
         }
         fun setTitle(title: String){
             player.packetDispatch.sendString(colorize("%B$title"),195,7)

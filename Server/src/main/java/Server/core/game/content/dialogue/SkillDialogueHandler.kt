@@ -5,6 +5,7 @@ import core.game.node.item.Item
 import core.net.packet.PacketRepository
 import core.net.packet.context.ChildPositionContext
 import core.net.packet.out.RepositionChild
+import core.tools.Components
 import core.tools.StringUtils
 
 /**
@@ -126,7 +127,7 @@ open class SkillDialogueHandler(
         TWO_OPTION(303, 7, 2) {
             override fun display(player: Player, handler: SkillDialogueHandler) {
                 var item: Item
-                player.interfaceManager.openChatbox(306)
+                player.interfaceManager.openChatbox(Components.same_306)
                 for (i in handler.data.indices) {
                     item = handler.data[i] as Item
                     player.packetDispatch.sendString("<br><br><br><br>" + handler.getName(item), 303, 7 + i)
@@ -218,7 +219,7 @@ open class SkillDialogueHandler(
             private val positions = arrayOf(intArrayOf(10, 30), intArrayOf(117, 10), intArrayOf(217, 20), intArrayOf(317, 15), intArrayOf(408, 15))
             override fun display(player: Player, handler: SkillDialogueHandler) {
                 var item: Item
-                player.interfaceManager.openChatbox(306)
+                player.interfaceManager.openChatbox(Components.same_306)
                 for (i in handler.data.indices) {
                     item = handler.data[i] as Item
                     player.packetDispatch.sendString("<br><br><br><br>" + handler.getName(item), 306, 10 + 4 * i)

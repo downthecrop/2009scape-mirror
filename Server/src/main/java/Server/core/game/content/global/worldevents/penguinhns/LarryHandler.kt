@@ -6,6 +6,7 @@ import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.GameWorld
 import core.game.content.dialogue.DialoguePlugin
+import core.tools.Components
 
 class LarryHandler(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
@@ -46,7 +47,7 @@ class LarryHandler(player: Player? = null) : DialoguePlugin(player){
                 1 -> player.inventory.add(Item(995, 6500 * player.getAttribute("phns:points",0))).also { player("Thanks!"); player.removeAttribute("phns:points");stage = 1000 }
                 2 -> {
                     player.setAttribute("caller",this)
-                    player.interfaceManager.open(Component(134).setCloseEvent { player1: Player?, c: Component? ->
+                    player.interfaceManager.open(Component(Components.stat_advancement_interface_134).setCloseEvent { player1: Player?, c: Component? ->
                         player.interfaceManager.openDefaultTabs()
                         player.removeAttribute("lamp")
                         player.unlock()

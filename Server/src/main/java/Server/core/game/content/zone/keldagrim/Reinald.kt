@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.game.content.dialogue.DialoguePlugin
+import core.tools.Components
 
 const val REINALD = 2194
 
@@ -21,7 +22,7 @@ class ReinaldDialogue(player: Player? = null) : DialoguePlugin(player){
         when(stage++){
             0 -> options("Yes, please!", "No, thanks.")
             1 -> when(buttonId){
-                1 -> end().also { player.interfaceManager.open(Component(REINALD_COMPONENT_ID)) }
+                1 -> end().also { player.interfaceManager.open(Component(Components.Reinalds_Smithing_Emporium_593)) }
                 2 -> end()
             }
         }
@@ -47,7 +48,7 @@ class ReinaldDialogue(player: Player? = null) : DialoguePlugin(player){
 @Initializable
 class ReinaldOptionHandler : OptionHandler(){
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
-        player?.interfaceManager?.open(Component(REINALD_COMPONENT_ID))
+        player?.interfaceManager?.open(Component(Components.Reinalds_Smithing_Emporium_593))
         return true
     }
 
