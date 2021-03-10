@@ -10,6 +10,7 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.Items
 
 @Initializable
 class CropHarvester : OptionHandler() {
@@ -18,6 +19,7 @@ class CropHarvester : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         ObjectDefinition.setOptionHandler("harvest",this)
+        ObjectDefinition.setOptionHandler("pick",this)
         return this
     }
 
@@ -38,9 +40,29 @@ class CropHarvester : OptionHandler() {
         player.pulseManager.run(object : Pulse(0){
             override fun pulse(): Boolean {
                 if(!player.inventory.hasSpaceFor(Item(plantable.harvestItem,1))){
+                    player.sendMessage("You don't have enough inventory space for that.")
                     return true
                 }
-                player.animator.animate(spadeAnim)
+                var requiredItem = when(fPatch.type){
+                    PatchType.HERB -> Items.SECATEURS_5329
+                    else -> Items.SPADE_952
+                }
+                if(requiredItem == Items.SECATEURS_5329){
+                    if(player.inventory.contains(Items.MAGIC_SECATEURS_7409,1)){
+                        requiredItem = Items.MAGIC_SECATEURS_7409
+                    }
+                }
+                val anim = when(requiredItem){
+                    Items.SPADE_952 -> Animation(830)
+                    Items.SECATEURS_5329 -> Animation(7227)
+                    Items.MAGIC_SECATEURS_7409 -> Animation(7228)
+                    else -> Animation(0)
+                }
+                if(!player.inventory.containsItem(Item(requiredItem))){
+                    player.sendMessage("You lack the needed tool to harvest these crops.")
+                    return true
+                }
+                player.animator.animate(anim)
                 delay = 2
                 player.inventory.add(Item(plantable.harvestItem,1))
                 player.skills.addExperience(Skills.FARMING,plantable.harvestXP)

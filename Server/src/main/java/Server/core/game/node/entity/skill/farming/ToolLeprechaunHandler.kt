@@ -9,8 +9,9 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.Components
+import core.tools.NPCs
 
-val TL_IDS = arrayOf(3021,8000,4965)
+val TL_IDS = arrayOf(NPCs.TOOL_LEPRECHAUN_3021,NPCs.GOTH_LEPRECHAUN_8000,NPCs.TOOL_LEPRECHAUN_4965)
 @Initializable
 class ToolLeprechaunHandler : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {

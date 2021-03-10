@@ -6,13 +6,14 @@ import core.game.interaction.UseWithHandler
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
+import core.tools.NPCs
 
 @Initializable
 class LeprechaunNoter : UseWithHandler(*Plantable.values().map{ it.harvestItem }.toIntArray()) {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        addHandler(3021, NPC_TYPE,this)
-        addHandler(8000, NPC_TYPE,this)
-        addHandler(4965, NPC_TYPE,this)
+        addHandler(NPCs.TOOL_LEPRECHAUN_3021, NPC_TYPE,this)
+        addHandler(NPCs.GOTH_LEPRECHAUN_8000, NPC_TYPE,this)
+        addHandler(NPCs.TOOL_LEPRECHAUN_4965, NPC_TYPE,this)
         return this
     }
 

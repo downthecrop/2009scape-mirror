@@ -122,7 +122,7 @@ public final class VarbitDefinition {
 	 */
 	public int getValue(Player player) {
 		int size = BITS[bitSize - bitShift];
-		int bitValue = player.varpManager.get(getConfigId()).getBitRangeValue(getBitShift(), getBitShift() + (bitSize - bitShift) + 1);
+		int bitValue = player.varpManager.get(getConfigId()).getBitRangeValue(getBitShift(), getBitShift() + (bitSize - bitShift));
 		if(bitValue != 0){
 			return bitValue >>> bitShift;
 		}
