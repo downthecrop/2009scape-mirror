@@ -15,6 +15,11 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     fun setNewHarvestAmount() {
         if(patch.type == PatchType.ALLOTMENT){
             harvestAmt = RandomFunction.random(4,17)
+        } else if(patch.type == PatchType.FLOWER) {
+            harvestAmt = when (plantable) {
+                Plantable.LIMPWURT_SEED, Plantable.WOAD_SEED -> 3
+                else -> 1
+            }
         } else {
             harvestAmt = RandomFunction.random(1,4)
         }

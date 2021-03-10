@@ -45,8 +45,37 @@ object UseWithPatchHandler{
             RAKE -> PatchRaker.rake(player,patch)
             SEED_DIBBER -> player.sendMessage("I should plant a seed, not the seed dibber.")
             SPADE -> player.dialogueInterpreter.open(67984003,patch.getPatchFor(player)) //DigUpPatchDialogue.kt
-            SECATEURS -> TODO()
-            TROWEL -> TODO()
+            SECATEURS -> {}
+            TROWEL -> {
+                val p = patch.getPatchFor(player)
+                if(!p.isWeedy()){
+                    player.sendMessage("This patch has something growing in it.")
+                    return true
+                } else if (p.currentGrowthStage != 3){
+                    player.sendMessage("I should clear this of weeds before trying to take some dirt.")
+                    return true
+                }
+
+                val potAmount = player.inventory.getAmount(Items.PLANT_POT_5356)
+
+                if(potAmount == 0){
+                    player.sendMessage("You have no plant pots to fill.")
+                    return true
+                }
+
+                val anim = Animation(2272)
+
+                player.pulseManager.run(object : Pulse(anim.duration){
+                    override fun pulse(): Boolean {
+                        if(player.inventory.remove(Item(Items.PLANT_POT_5356))){
+                            player.animator.animate(anim)
+                            player.inventory.add(Item(Items.PLANT_POT_5354))
+                        } else return true
+                        return false
+                    }
+                })
+            }
+
             Items.PLANT_CURE_6036 -> {
                 val p = patch.getPatchFor(player)
                 if(p.isDiseased && !p.isDead){
@@ -64,9 +93,11 @@ object UseWithPatchHandler{
                     player.sendMessage("I have no reason to do this right now.")
                 }
             }
+
             Items.WATERING_CAN1_5333,Items.WATERING_CAN2_5334,Items.WATERING_CAN3_5335,Items.WATERING_CAN4_5336,Items.WATERING_CAN5_5337,Items.WATERING_CAN6_5338,Items.WATERING_CAN7_5339,Items.WATERING_CAN8_5340 -> {
                 val p = patch.getPatchFor(player)
-                if(!p.isWatered){
+                val t = p.patch.type
+                if(!p.isWatered && (t == PatchType.ALLOTMENT || t == PatchType.FLOWER || t == PatchType.HOPS) && !p.isGrown()){
                     player.pulseManager.run(object : Pulse(){
                         override fun pulse(): Boolean {
                             player.animator.animate(wateringCanAnim)
@@ -79,13 +110,14 @@ object UseWithPatchHandler{
                     })
                 }
             }
+
             Items.SUPERCOMPOST_6034, Items.COMPOST_6032 -> {
                 val p = patch.getPatchFor(player)
                 if(p.compost == CompostType.NONE) {
                     player.animator.animate(pourBucketAnim)
                     player.pulseManager.run(object : Pulse(){
                         override fun pulse(): Boolean {
-                            if(player.inventory.remove(event.usedItem)){
+                            if(player.inventory.remove(event.usedItem,false)){
                                 p.compost = if(usedItem.id == Items.SUPERCOMPOST_6034) CompostType.SUPER else CompostType.NORMAL
                                 player.inventory.add(Item(Items.BUCKET_1925))
                             }
@@ -96,6 +128,7 @@ object UseWithPatchHandler{
                     player.sendMessage("This patch has already been treated with compost.")
                 }
             }
+
             else -> {
                 val plantable = Plantable.forItemID(usedItem.id)
                 if(plantable == null) return false

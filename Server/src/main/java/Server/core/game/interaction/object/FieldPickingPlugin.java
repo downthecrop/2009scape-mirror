@@ -33,7 +33,9 @@ public final class FieldPickingPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.setOptionHandler("pick", this);
+		for(PickingPlant p : PickingPlant.values()){
+			ObjectDefinition.forId(p.objectId).getHandlers().put("option:pick",this);
+		}
 		return this;
 	}
 
