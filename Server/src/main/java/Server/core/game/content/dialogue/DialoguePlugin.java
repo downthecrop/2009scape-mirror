@@ -35,6 +35,8 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 	 */
 	protected DialogueInterpreter interpreter;
 
+	public DialogueFile file;
+
 	/**
 	 * Two options interface.
 	 */
@@ -259,6 +261,11 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 
 	public void next() {
 		this.stage += 1;
+	}
+
+	public void loadFile(DialogueFile file){
+		this.file = file.load(player,npc,interpreter);
+		stage = 0;
 	}
 
 }
