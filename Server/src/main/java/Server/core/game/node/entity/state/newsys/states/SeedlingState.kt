@@ -67,7 +67,8 @@ class SeedlingState(player: Player? = null) : State(player) {
                                 val inBank = player.bank.get(Item(seed.id))
                                 if(inBank == null) removeList.add(seed)
                                 else {
-                                    player.bank.replace(Item(seed.sapling), inBank.slot)
+                                    player.bank.remove(Item(inBank.id,1))
+                                    player.bank.add(Item(seed.sapling))
                                     removeList.add(seed)
                                 }
                             }
