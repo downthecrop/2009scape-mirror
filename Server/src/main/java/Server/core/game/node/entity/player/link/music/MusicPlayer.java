@@ -1,7 +1,7 @@
 package core.game.node.entity.player.link.music;
 
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.node.entity.player.link.emote.Emotes;
 import core.game.world.GameWorld;
 import core.net.packet.PacketRepository;
@@ -19,7 +19,7 @@ import java.util.Random;
  * Handles a music playing for a player.
  * @author Emperor
  */
-public final class MusicPlayer implements SavingModule {
+public final class MusicPlayer {
 
 	/**
 	 * The tutorial island music.
@@ -68,37 +68,6 @@ public final class MusicPlayer implements SavingModule {
 	public MusicPlayer(Player player) {
 		this.player = player;
 		this.unlocked = new HashMap<>();
-	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		if (!unlocked.isEmpty()) {
-			buffer.put((byte) 1);
-			buffer.putShort((short) unlocked.size());
-			for (MusicEntry entry : unlocked.values()) {
-				buffer.putShort((short) entry.getId());
-			}
-		}
-		buffer.put((byte) 0); // EOF
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get()) != 0) {
-			switch (opcode) {
-			case 1:
-				int size = buffer.getShort() & 0xFFFF;
-				for (int i = 0; i < size; i++) {
-					int musicId = buffer.getShort() & 0xFFFF;
-					MusicEntry entry = MusicEntry.forId(musicId);
-					if (entry != null) {
-						unlocked.put(entry.getIndex(), entry);
-					}
-				}
-				break;
-			}
-		}
 	}
 
 	/**

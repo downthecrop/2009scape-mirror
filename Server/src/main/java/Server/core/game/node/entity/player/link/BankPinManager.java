@@ -4,7 +4,7 @@ import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.world.GameWorld;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ChildPositionContext;
@@ -26,7 +26,7 @@ import java.util.concurrent.TimeUnit;
  * @author Vexia
  * @author Emperor
  */
-public class BankPinManager implements SavingModule {
+public class BankPinManager {
 
 	/**
 	 * THe setting messages to display on default.
@@ -113,24 +113,6 @@ public class BankPinManager implements SavingModule {
 		}
 	}
 
-	@Override
-	public void save(ByteBuffer buffer) {
-		if (hasPin()) {
-			ByteBufferUtils.putString(pin, buffer.put((byte) 1));
-		}
-		buffer.put((byte) 2).put((byte) (longRecovery ? 1 : 0));
-		if (status.ordinal() != 0) {
-			buffer.put((byte) 3).put(((byte) status.ordinal()));
-		}
-		if (pendingDelay != -1 && pendingDelay > System.currentTimeMillis()) {
-			buffer.put((byte) 4).putLong(pendingDelay);
-		}
-		if (tryDelay > System.currentTimeMillis()) {
-			buffer.put((byte) 5).putLong(tryDelay);
-		}
-		buffer.put((byte) 0);
-	}
-
 	public void parse(JSONObject data){
 		if(data.containsKey("pin")) {
 			pin = data.get("pin").toString();
@@ -146,30 +128,6 @@ public class BankPinManager implements SavingModule {
 			this.tryDelay = Long.parseLong(data.get("tryDelay").toString());
 		}
 		longRecovery = (boolean) data.get("longRecovery");
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get()) != 0) {
-			switch (opcode) {
-			case 1:
-				pin = ByteBufferUtils.getString(buffer);
-				break;
-			case 2:
-				longRecovery = buffer.get() == 1;
-				break;
-			case 3:
-				status = PinStatus.values()[buffer.get()];
-				break;
-			case 4:
-				pendingDelay = buffer.getLong();
-				break;
-			case 5:
-				tryDelay = buffer.getLong();
-				break;
-			}
-		}
 	}
 
 	/**

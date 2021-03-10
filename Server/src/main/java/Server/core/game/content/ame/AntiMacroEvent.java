@@ -2,7 +2,7 @@ package core.game.content.ame;
 
 import core.game.content.activity.ActivityPlugin;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.game.world.map.zone.ZoneRestriction;
@@ -12,7 +12,7 @@ import core.tools.RandomFunction;
  * Handles an anti-macro event.
  * @author Emperor
  */
-public abstract class AntiMacroEvent extends ActivityPlugin implements SavingModule {
+public abstract class AntiMacroEvent extends ActivityPlugin {
 
 	/**
 	 * The random locations to teleport to if unresponsive.

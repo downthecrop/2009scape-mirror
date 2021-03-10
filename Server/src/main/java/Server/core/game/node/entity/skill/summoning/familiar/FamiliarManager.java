@@ -13,7 +13,7 @@ import core.game.node.entity.skill.summoning.pet.PetDetails;
 import core.game.node.entity.skill.summoning.pet.Pets;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.game.world.map.zone.ZoneRestriction;
@@ -30,7 +30,7 @@ import java.util.Map.Entry;
  * Handles a player's familiar.
  * @author Emperor
  */
-public final class FamiliarManager implements SavingModule {
+public final class FamiliarManager {
 
 	/**
 	 * The familiars mapping.
@@ -75,36 +75,6 @@ public final class FamiliarManager implements SavingModule {
 		this.player = player;
 	}
 
-	@Override
-	public void save(ByteBuffer buffer) {
-		for (Entry<Integer, PetDetails> entry : petDetails.entrySet()) {
-			buffer.put((byte) 3);
-			buffer.putInt(entry.getKey());
-			entry.getValue().save(buffer);
-		}
-		if (hasPet()) {
-			buffer.put((byte) 4);
-			buffer.putInt(((Pet) familiar).getPet().getBabyItemId());
-		} else if (hasFamiliar()) {
-			buffer.put((byte) 1);
-			buffer.putShort((short) familiar.getOriginalId());
-			buffer.putShort((short) familiar.ticks);
-			buffer.put((byte) familiar.specialPoints);
-			if (familiar.isBurdenBeast() && !((BurdenBeast) familiar).getContainer().isEmpty()) {
-				((BurdenBeast) familiar).getContainer().save(buffer.put((byte) 2));
-			}
-			buffer.put((byte) 5).putInt(familiar.getSkills().getLifepoints());
-		}
-		if (insuredPets.size() > 0) {
-			buffer.put((byte) 6);
-			buffer.put((byte) insuredPets.size());
-			for (Pets pet : insuredPets) {
-				buffer.putInt(pet.getBabyItemId());
-			}
-		}
-		buffer.put((byte) 0);
-	}
-
 	public final void parse(JSONObject familiarData){
 		JSONArray petDetails = (JSONArray) familiarData.get("petDetails");
 		for(int i = 0 ; i < petDetails.size(); i++){
@@ -136,62 +106,6 @@ public final class FamiliarManager implements SavingModule {
 				((BurdenBeast) familiar).container.parse(famInv);
 			}
 			familiar.setAttribute("hp",Integer.parseInt( currentFamiliar.get("lifepoints").toString()));
-		}
-	}
-
-	@Override
-	public final void parse(ByteBuffer buffer) {
-		int opcode;
-		PetDetails details;
-		while ((opcode = buffer.get() & 0xFF) != 0) {
-			switch (opcode) {
-			case 1:
-				int npcId = buffer.getShort() & 0xFFFF;
-				familiar = FAMILIARS.get(npcId).construct(player, npcId);
-				familiar.ticks = buffer.getShort() & 0xFFFF;
-				familiar.specialPoints = buffer.get() & 0xFF;
-				break;
-			case 2:
-				if (familiar == null || !familiar.isBurdenBeast()) {
-					SystemLogger.logErr("Error parsing BoB container!");
-					new Container(30).parse(buffer);
-					continue;
-				}
-				((BurdenBeast) familiar).getContainer().parse(buffer);
-				break;
-			case 3:
-				int baseItem = buffer.getInt();
-				details = new PetDetails(0);
-				details.parse(buffer);
-				petDetails.put(baseItem, details);
-				break;
-			case 4:
-				int itemId = buffer.getInt();
-				details = petDetails.get(itemId);
-				Pets pets = Pets.forId(itemId);
-				if (details == null) {
-					details = new PetDetails(pets.getGrowthRate() == 0.0 ? 100.0 : 0.0);
-					petDetails.put(itemId, details);
-				}
-				familiar = new Pet(player, details, itemId, pets.getNpcId(details.getStage()));
-				break;
-			case 5:
-				int hp = buffer.getInt();
-				if (familiar != null) {
-					familiar.setAttribute("hp", hp);
-				}
-				break;
-			case 6:
-				int size = buffer.get();
-				Pets pet;
-				for (int i = 0; i < size; i++) {
-					pet = Pets.forId(buffer.getInt());
-					if (pet != null) {
-						insuredPets.add(pet);
-					}
-				}
-				break;
-			}
 		}
 	}
 

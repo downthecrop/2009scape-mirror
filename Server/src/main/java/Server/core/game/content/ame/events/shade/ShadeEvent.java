@@ -23,16 +23,6 @@ public final class ShadeEvent extends AntiMacroEvent {
 	}
 
 	@Override
-	public void save(ByteBuffer buffer) {
-
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-
-	}
-
-	@Override
 	public boolean start(Player player, boolean login, Object... args) {
 		final ShadeNPC shade = new ShadeNPC(getId(player), player.getLocation(), this, player);
 		shade.init();

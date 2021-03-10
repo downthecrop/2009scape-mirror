@@ -46,34 +46,6 @@ public final class QuizMasterEvent extends AntiMacroEvent {
 	}
 
 	@Override
-	public void save(ByteBuffer buffer) {
-		SavedData.save(buffer, score, 1);
-		SavedData.save(buffer, startedQuiz, 2);
-		buffer.put((byte) 3);
-		Location l = player.getAttribute("ame:location", ServerConstants.HOME_LOCATION);
-		l.save(buffer);
-		buffer.put((byte) 0);
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get()) != 0) {
-			switch (opcode) {
-			case 1:
-				score = buffer.get();
-				break;
-			case 2:
-				startedQuiz = SavedData.getBoolean(buffer.get());
-				break;
-			case 3:
-				player.setAttribute("ame:location", Location.parse(buffer));
-				break;
-			}
-		}
-	}
-
-	@Override
 	public boolean enter(Entity entity) {
 		/*
 		 * if (player.getName().equals("vexia")) { return false; } if (entity

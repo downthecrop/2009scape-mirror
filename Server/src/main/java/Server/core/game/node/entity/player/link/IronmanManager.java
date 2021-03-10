@@ -1,7 +1,7 @@
 package core.game.node.entity.player.link;
 
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 
 import java.nio.ByteBuffer;
 
@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
  * @author Vexia
  * 
  */
-public class IronmanManager implements SavingModule {
+public class IronmanManager {
 
 	/**
 	 * The player instance.
@@ -28,29 +28,6 @@ public class IronmanManager implements SavingModule {
 	 */
 	public IronmanManager(Player player) {
 		this.player = player;
-	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		if (mode != IronmanMode.NONE) {
-			buffer.put((byte) 1);
-			buffer.put((byte) mode.ordinal());
-		}
-		buffer.put((byte) 0);
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get()) != 0) {
-			switch (opcode) {
-			case 1:
-				mode = IronmanMode.values()[buffer.get()];
-				break;
-			case 2: //Indicates permanent.
-				break;
-			}
-		}
 	}
 
 	/**

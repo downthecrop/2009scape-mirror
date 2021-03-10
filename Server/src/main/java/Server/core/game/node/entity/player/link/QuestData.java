@@ -1,6 +1,6 @@
 package core.game.node.entity.player.link;
 
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.node.item.Item;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -12,7 +12,7 @@ import java.util.Arrays;
  * Represents the quest data to save.
  * @author 'Vexia
  */
-public final class QuestData implements SavingModule {
+public final class QuestData {
 
 	/**
 	 * Represents the cooks assist attribute array.
@@ -68,21 +68,6 @@ public final class QuestData implements SavingModule {
 		populateDesertTreasureNode();
 	}
 
-	@Override
-	public void save(ByteBuffer buffer) {
-		SavedData.save(buffer, draynorLever, 1);
-		SavedData.save(buffer, dragonSlayer, 2);
-		SavedData.save(buffer, (byte) dragonSlayerPlanks, 3);
-		SavedData.save(buffer, demonSlayer, 4);
-		SavedData.save(buffer, cooksAssistant, 5);
-		SavedData.save(buffer, gardenerAttack, 6);
-		SavedData.save(buffer, talkedDrezel, 7);
-		saveDesertTreasureNode(buffer);
-		SavedData.save(buffer, witchsExperimentStage, 9);
-		SavedData.save(buffer, witchsExperimentKilled, 10);
-		buffer.put((byte) 0);
-	}
-
 	public void parse(JSONObject data){
 		JSONArray dl = (JSONArray) data.get("draynorLever");
 		for(int i = 0; i < dl.size(); i++){
@@ -110,55 +95,6 @@ public final class QuestData implements SavingModule {
 		}
 		witchsExperimentKilled = (boolean) data.get("witchsExperimentKilled");
 		witchsExperimentStage = Integer.parseInt( data.get("witchsExperimentStage").toString());
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get()) != 0) {
-			switch (opcode) {
-			case 1:
-				for (int i = 0; i < draynorLever.length; i++) {
-					draynorLever[i] = SavedData.getBoolean(buffer.get());
-				}
-				break;
-			case 2:
-				for (int i = 0; i < dragonSlayer.length; i++) {
-					dragonSlayer[i] = SavedData.getBoolean(buffer.get());
-				}
-				break;
-			case 3:
-				dragonSlayerPlanks = buffer.get();
-				break;
-			case 4:
-				for (int i = 0; i < demonSlayer.length; i++) {
-					demonSlayer[i] = SavedData.getBoolean(buffer.get());
-				}
-				break;
-			case 5:
-				for (int i = 0; i < cooksAssistant.length; i++) {
-					cooksAssistant[i] = SavedData.getBoolean(buffer.get());
-				}
-				break;
-			case 6:
-				gardenerAttack = SavedData.getBoolean(buffer.get());
-				break;
-			case 7:
-				talkedDrezel = SavedData.getBoolean(buffer.get());
-				break;
-			case 8:
-				for (int i = 0; i < desertTreasure.length; i++) {
-					desertTreasure[i] = new Item(buffer.getShort(), buffer.get());
-				}
-				break;
-			case 9:
-				witchsExperimentStage = buffer.getInt();
-				break;
-			case 10:
-				witchsExperimentKilled = SavedData.getBoolean(buffer.get());
-				break;
-			}
-		}
 	}
 
 	/**

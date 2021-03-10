@@ -1,7 +1,7 @@
 package core.game.node.entity.state;
 
 import core.game.node.entity.Entity;
-import core.game.node.entity.player.info.login.SavingModule;
+
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -11,7 +11,7 @@ import java.util.Map;
  * Handles an entity's status (eg. poisoned, stunned, frozen, skulled, ...)
  * @author Emperor
  */
-public final class StateManager implements SavingModule {
+public final class StateManager {
 
 	/**
 	 * The entity.
@@ -29,35 +29,6 @@ public final class StateManager implements SavingModule {
 	 */
 	public StateManager(Entity entity) {
 		this.entity = entity;
-	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		for (EntityState state : states.keySet()) {
-			StatePulse pulse = states.get(state);
-			if (pulse == null) {
-				System.out.println("Pulse for state " + state + " is null!");
-				continue;
-			}
-			if (pulse.isSaveRequired()) {
-				buffer.put((byte) state.ordinal());
-				pulse.save(buffer);
-			}
-		}
-		buffer.put((byte) -1);
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int ordinal = 0;
-		while ((ordinal = buffer.get()) != -1) {
-			EntityState state = EntityState.values()[ordinal];
-			StatePulse pulse = state.getPulse().parse(entity, buffer);
-			if (pulse == null) {
-				System.out.println("Pulse for state " + state + " is null!");
-			}
-			states.put(state, pulse);
-		}
 	}
 
 	/**

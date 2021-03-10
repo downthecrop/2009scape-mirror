@@ -7,7 +7,7 @@ import org.json.simple.JSONObject;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.tools.RandomFunction;
 
@@ -21,7 +21,7 @@ import java.util.List;
  * @author Vexia
  *
  */
-public final class SlayerManager implements SavingModule {
+public final class SlayerManager {
 
 	/**
 	 * The player instance.
@@ -105,105 +105,6 @@ public final class SlayerManager implements SavingModule {
 		}
 		taskTotal = Integer.parseInt( slayerData.get("totalTasks").toString());
 		canEarnPoints = (boolean) slayerData.get("canEarnPoints");
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get() & 0xFF) != 0) {
-			switch (opcode) {
-			case 1:
-				master = Master.forId(buffer.getInt());
-				break;
-			case 2:
-				int taskId = buffer.getInt();
-				if (taskId > Tasks.values().length -1) {
-					SystemLogger.logErr("Invalid task i for " + player.getUsername() + " taskId = " + taskId);
-					break;
-				}
-				task = Tasks.values()[taskId];
-				break;
-			case 3:
-				amount = buffer.getInt();
-				break;
-			case 4:
-				slayerPoints = buffer.getInt();
-				break;
-			case 5:
-				taskCount = buffer.getInt();
-				break;
-			case 6:
-				int size = buffer.get();
-				for (int i = 0; i < size; i++) {
-					learned[i] = buffer.get() == 1;
-				}
-				break;
-			case 7:
-				size = buffer.get();
-				for (int i = 0; i < size; i++) {
-					removed.add(Tasks.values()[buffer.getInt()]);
-				}
-				break;
-			case 8:
-				taskTotal = buffer.getInt();
-				break;
-			case 9:
-				int pointsEarnable = buffer.getInt();
-				if(pointsEarnable == 1){
-					canEarnPoints = true;
-				}
-				break;
-			default:
-				SystemLogger.logErr("Error parsing Slayer Manager opcode = " + opcode);
-				break;
-			}
-		}
-	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		if (master != null) {
-			buffer.put((byte) 1);
-			buffer.putInt(master.getNpc());
-		}
-		if (task != null) {
-			buffer.put((byte) 2);
-			buffer.putInt(task.ordinal());
-		}
-		if (task != null) {
-			buffer.put((byte) 3);
-			buffer.putInt(getAmount());
-		}
-		if (slayerPoints != 0) {
-			buffer.put((byte) 4).putInt(slayerPoints);
-		}
-		if (taskCount != 0) {
-			buffer.put((byte) 5).putInt(taskCount);
-		}
-		for (int i = 0; i < learned.length; i++) {
-			if (learned[i] != false) {
-				buffer.put((byte) 6).put((byte) learned.length);
-				for (int k = 0; k < learned.length; k++) {
-					buffer.put((byte) (learned[k] ? 1 : 0));
-				}
-				break;
-			}
-		}
-		if (!removed.isEmpty()) {
-			buffer.put((byte) 7).put((byte) removed.size());
-			for (Tasks task : removed)  {
-				buffer.putInt(task.ordinal());
-			}
-		}
-		if (taskTotal != 0){
-			buffer.put((byte) 8);
-			buffer.putInt(taskTotal);
-		}
-		if(canEarnPoints){
-			buffer.put((byte) 9);
-			buffer.putInt(1);
-		}
-		buffer.put((byte) 0);
 	}
 
 	/**

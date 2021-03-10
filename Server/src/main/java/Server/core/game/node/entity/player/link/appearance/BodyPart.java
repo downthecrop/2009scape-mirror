@@ -1,6 +1,6 @@
 package core.game.node.entity.player.link.appearance;
 
-import core.game.node.entity.player.info.login.SavingModule;
+
 import org.json.simple.JSONObject;
 
 import java.nio.ByteBuffer;
@@ -9,7 +9,7 @@ import java.nio.ByteBuffer;
  * Represents a body part of a player encapsulating the type and color.
  * @author 'Vexia
  */
-public final class BodyPart implements SavingModule {
+public final class BodyPart {
 
 	/**
 	 * Represents the look value of the part.
@@ -48,21 +48,9 @@ public final class BodyPart implements SavingModule {
 		this(look, 0);
 	}
 
-	@Override
-	public void save(ByteBuffer buffer) {
-		buffer.putInt(look);
-		buffer.putInt(color);
-	}
-
 	public void parse(JSONObject part){
 		changeLook(Integer.parseInt( part.get("look").toString()));
 		changeColor(Integer.parseInt( part.get("color").toString()));
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		changeLook(buffer.getInt());
-		changeColor(buffer.getInt());
 	}
 
 	/**

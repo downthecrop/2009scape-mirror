@@ -7,7 +7,7 @@ import core.plugin.Initializable
 import core.game.content.dialogue.DialoguePlugin
 
 @Initializable
-class CouncilWorkerDialogue(player: Player? = Player(PlayerDetails("",""))) : DialoguePlugin(player){
+class CouncilWorkerDialogue(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
         if(args.size > 1){
             npc("Ta very much like. That'll hit the spot nicely.. Here,","You can have this. I picked it up as a souvenir on me","last holz")

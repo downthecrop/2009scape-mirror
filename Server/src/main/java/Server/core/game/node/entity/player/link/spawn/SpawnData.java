@@ -3,7 +3,7 @@ package core.game.node.entity.player.link.spawn;
 import core.game.component.Component;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.node.entity.player.link.SavedData;
 import core.game.node.entity.player.link.SpellBookManager;
 import core.game.world.GameWorld;
@@ -20,7 +20,7 @@ import java.text.DecimalFormat;
  * @author Vexia
  *
  */
-public class SpawnData implements SavingModule {
+public class SpawnData {
 
 	/**
 	 * The kill streak messages.
@@ -66,51 +66,6 @@ public class SpawnData implements SavingModule {
 		/**
 		 * empty.
 		 */
-	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		SavedData.save(buffer, tutorialStage, 1);
-		SavedData.save(buffer, pkPoints, 2);
-		SavedData.save(buffer, kills, 3);
-		SavedData.save(buffer, deaths, 4);
-		SavedData.save(buffer, killStreak, 5);
-		SavedData.save(buffer, title.ordinal(), 6);
-		SavedData.save(buffer, purchased, 7);
-		buffer.put((byte) 0);
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get()) != 0) {
-			switch(opcode) {
-				case 1:
-					tutorialStage = buffer.getInt();
-					break;
-				case 2:
-					pkPoints = buffer.getInt();
-					break;
-				case 3:
-					kills = buffer.getInt();
-					break;
-				case 4:
-					deaths = buffer.getInt();
-					break;
-				case 5:
-					killStreak = buffer.getInt();
-					break;
-				case 6:
-					title = PKTitle.values()[buffer.getInt()];
-					break;
-				case 7:
-					for (int i = 0; i < PKPackage.values().length; i++) {
-						purchased = PKPackage.values()[i].ordinal();
-						System.out.println("SpawnData: " + PKPackage.values()[i].ordinal());
-					}
-					break;
-			}
-		}
 	}
 
 	/**

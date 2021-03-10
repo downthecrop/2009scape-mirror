@@ -3,7 +3,7 @@ package core.game.node.entity.player.link;
 import core.game.component.Component;
 import core.game.node.entity.skill.magic.MagicSpell;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -13,7 +13,7 @@ import java.util.Map;
  * Represents a managing class of a players spell book.
  * @author Vexia
  */
-public final class SpellBookManager implements SavingModule {
+public final class SpellBookManager {
 
 	/**
 	 * Represents the current interface if of the spellbook.
@@ -27,18 +27,6 @@ public final class SpellBookManager implements SavingModule {
 		/**
 		 * empty.
 		 */
-	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		buffer.putInt(spellBook);
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		if (buffer.hasRemaining()) {
-			setSpellBook(SpellBook.forInterface(buffer.getInt()));
-		}
 	}
 
 	/**

@@ -4,7 +4,7 @@ import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.node.entity.player.link.HintIconManager;
 import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.node.item.GroundItem;
@@ -19,7 +19,7 @@ import java.util.Map;
  * Manages the players grave stone.
  * @author Vexia
  */
-public class GraveManager implements SavingModule {
+public class GraveManager {
 
 	/**
 	 * The current grave stones in the world.
@@ -47,18 +47,6 @@ public class GraveManager implements SavingModule {
 	 */
 	public GraveManager(Player player) {
 		this.player = player;
-	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		buffer.putInt(type.ordinal());
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		if (buffer.hasRemaining()) {
-			type = GraveType.values()[buffer.getInt()];
-		}
 	}
 
 	/**

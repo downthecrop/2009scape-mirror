@@ -7,7 +7,7 @@ import core.plugin.Initializable
 import core.game.content.dialogue.DialoguePlugin
 
 @Initializable
-class SigliTheHuntsman(player: Player? = Player(PlayerDetails("",""))) : DialoguePlugin(player){
+class SigliTheHuntsman(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
         if(player?.getAttribute("fremtrials:sigli-vote",false)!!){
             npc("You have my vote!")
