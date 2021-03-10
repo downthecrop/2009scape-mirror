@@ -10,7 +10,7 @@ import core.tools.START_DIALOGUE
 class DukeHoracioDSDialogue(val questStage: Int) : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
 
-        if(questStage >= 20 && !hasShield(player!!)){
+        if(questStage in 20..99 && !hasShield(player!!)){
 
             when(stage){
                 START_DIALOGUE -> player("I seek a shield that will protect me from dragonbreath.").also { stage++ }

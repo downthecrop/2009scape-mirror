@@ -11,6 +11,8 @@ abstract class DialogueFile {
     var npc: NPC? = null
     var interpreter: DialogueInterpreter? = null
     open var stage = START_DIALOGUE
+    var dialoguePlugin: DialoguePlugin? = null
+
     abstract fun handle(componentID: Int, buttonID: Int)
     fun load(player: Player, npc: NPC, interpreter: DialogueInterpreter): DialogueFile{
         this.player = player
@@ -72,6 +74,16 @@ abstract class DialogueFile {
     }
 
     /**
+     * Return to the default dialogue plugin at the given stage.
+     * Should be used in place of setting a new stage. I.E. instead of "stage = END_DIALOGUE" use "returnAtStage(whatever stage)"
+     * @param stage The stage to return to.
+     */
+    fun returnAtStage(toStage: Int){
+        dialoguePlugin!!.file = null
+        dialoguePlugin!!.stage = toStage
+    }
+
+    /**
      * Use when you've entered a DialogueFile but current state does not match any possible conditionals.
      * Sort-of a fail-safe in a sense.
      */
@@ -82,6 +94,10 @@ abstract class DialogueFile {
 
     open fun getCurrentStage(): Int{
         return stage
+    }
+
+    fun Int.substage(stage: Int): Int{
+        return this + stage
     }
 
 }
