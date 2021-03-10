@@ -806,6 +806,7 @@ public class Container {
 
     public Item get(Item item){
         for(Item i : items){
+            if(i == null) continue;
             if(item.getId() == i.getId()) return i;
         }
         return null;
