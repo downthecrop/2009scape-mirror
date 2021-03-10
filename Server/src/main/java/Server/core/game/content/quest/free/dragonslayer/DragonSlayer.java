@@ -1,6 +1,7 @@
 package core.game.content.quest.free.dragonslayer;
 
 import core.game.component.Component;
+import core.game.content.dialogue.DukeHoracioDialogue;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.agility.AgilityHandler;

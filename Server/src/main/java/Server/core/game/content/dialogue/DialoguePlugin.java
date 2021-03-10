@@ -8,6 +8,11 @@ import core.plugin.Plugin;
 import core.plugin.PluginManifest;
 import core.plugin.PluginType;
 
+import java.util.ArrayList;
+
+import static core.tools.DialogueConstKt.DIALOGUE_INITIAL_OPTIONS_HANDLE;
+import static core.tools.DialogueConstKt.START_DIALOGUE;
+
 /**
  * Represents a dialogue plugin.
  * @author Emperor
@@ -36,6 +41,9 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 	protected DialogueInterpreter interpreter;
 
 	public DialogueFile file;
+	
+	protected ArrayList<String> optionNames = new ArrayList<String>();
+	protected ArrayList<DialogueFile> optionFiles = new ArrayList<DialogueFile>();
 
 	/**
 	 * Two options interface.
@@ -263,9 +271,41 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 		this.stage += 1;
 	}
 
+	/**
+	 * Loads a DialogueFile and sets its stage to START_DIALOGUE, and diverts all further handling for the conversation to the file.
+	 * @param file the DialogueFile to load.
+	 */
 	public void loadFile(DialogueFile file){
 		this.file = file.load(player,npc,interpreter);
-		stage = 0;
+		stage = START_DIALOGUE;
+	}
+
+	/**
+	 * Add an option to the list of possible choices a player can pick from. Helps build the options interface for sendChoices()
+	 * @param name the name of the quest/activity to talk about. Turns into "Talk about $name" on the option interface.
+	 * @param file the DialogueFile that the option loads when selected.
+	 */
+	public void addOption(String name, DialogueFile file){
+		optionNames.add("Talk about " + name);
+		optionFiles.add(file);
+	}
+
+	/**
+	 * Send the player a list of conversation options if there's more than one choice. I.E. multiple quest lines.
+	 * @return true if an options interface was sent, false if not.
+	 */
+	public boolean sendChoices(){
+		if(optionNames.size() == 1){
+			loadFile(optionFiles.get(0));
+			return false;
+		} else if(optionNames.isEmpty()) {
+			stage = START_DIALOGUE;
+			return false;
+		} else {
+			options(optionNames.toArray(new String[0]));
+			stage = DIALOGUE_INITIAL_OPTIONS_HANDLE;
+			return true;
+		}
 	}
 
 }

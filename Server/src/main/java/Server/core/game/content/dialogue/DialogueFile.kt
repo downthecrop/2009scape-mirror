@@ -1,21 +1,22 @@
 package core.game.content.dialogue
 
 import core.game.component.Component
+import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.tools.START_DIALOGUE
 
 abstract class DialogueFile {
     var player: Player? = null
     var npc: NPC? = null
     var interpreter: DialogueInterpreter? = null
-    var stage = 0
+    var stage = START_DIALOGUE
     abstract fun handle(componentID: Int, buttonID: Int)
     fun load(player: Player, npc: NPC, interpreter: DialogueInterpreter): DialogueFile{
-        val newFile = this::class.java.newInstance()
-        newFile.player = player
-        newFile.npc = npc
-        newFile.interpreter = interpreter
-        return newFile
+        this.player = player
+        this.npc = npc
+        this.interpreter = interpreter
+        return this
     }
 
     open fun npc(vararg messages: String?): Component? {
@@ -53,4 +54,30 @@ abstract class DialogueFile {
     fun end(){
         if(interpreter != null) interpreter!!.close()
     }
+
+    open fun sendNormalDialogue(entity: Entity?, expression: FacialExpression?, vararg messages: String?) {
+        interpreter!!.sendDialogues(entity, expression, *messages)
+    }
+
+    open fun options(vararg options: String?) {
+        interpreter!!.sendOptions("Select an Option", *options)
+    }
+
+    /**
+     * Use in place of setting the stage to END_DIALOGUE when you want to return to the default dialogue plugin at START_DIALOGUE
+     */
+    fun endFile(){
+        interpreter!!.dialogue.file = null
+
+    }
+
+    /**
+     * Use when you've entered a DialogueFile but current state does not match any possible conditionals.
+     * Sort-of a fail-safe in a sense.
+     */
+    fun abandonFile(){
+        interpreter!!.dialogue.file = null
+        player("Huh. Nevermind.")
+    }
+
 }
