@@ -172,6 +172,10 @@ public final class DialogueInterpreter {
             return;
         }
         player.setAttribute("chatbox-buttonid",buttonId);
+        if(player.getDialogueInterpreter().getDialogue().file != null){
+            player.getDialogueInterpreter().getDialogue().file.handle(componentId,buttonId - 1);
+            return;
+        }
         player.getDialogueInterpreter().getDialogue().handle(componentId, buttonId - 1);//here
     }
 
