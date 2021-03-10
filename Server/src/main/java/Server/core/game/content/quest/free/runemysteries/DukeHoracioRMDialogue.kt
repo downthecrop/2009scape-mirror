@@ -46,7 +46,7 @@ class DukeHoracioRMDialogue(val questStage: Int) : DialogueFile() {
 
             when(stage){
                 START_DIALOGUE -> npc("The only task remotely approaching a quest is the", "delivery of the talisman I gave you to the head wizard", "of the Wizards' Tower,").also { stage++ }
-                2 -> npc("south-west of here. I suggest you deliver it to him as", "soon as possible. I have the oddest feeling that is", "important...").also { stage = END_DIALOGUE }
+                1 -> npc("south-west of here. I suggest you deliver it to him as", "soon as possible. I have the oddest feeling that is", "important...").also { stage = END_DIALOGUE }
             }
 
         }

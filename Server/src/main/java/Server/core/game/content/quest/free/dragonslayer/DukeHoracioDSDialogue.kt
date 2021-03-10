@@ -13,7 +13,7 @@ class DukeHoracioDSDialogue(val questStage: Int) : DialogueFile() {
         if(questStage >= 20 && !hasShield(player!!)){
 
             when(stage){
-                START_DIALOGUE -> player("I seek a shield that will protect me from dragonbreath.")
+                START_DIALOGUE -> player("I seek a shield that will protect me from dragonbreath.").also { stage++ }
                 1 -> npc("A knight going on a dragon quest, hmm? What", "dragon do you intend to slay?").also{ stage++ }
                 2 -> player("Elvarg, the dragon of Crandor island!").also { stage++ }
                 3 -> npc("Elvarg? Are you sure?").also { stage++ }
