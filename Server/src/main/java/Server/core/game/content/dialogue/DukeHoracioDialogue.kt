@@ -12,6 +12,7 @@ import core.game.content.dialogue.DukeHoracioDialogue
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.tools.DIALOGUE_INITIAL_OPTIONS_HANDLE
 import core.tools.END_DIALOGUE
 
 /**
@@ -42,8 +43,13 @@ class DukeHoracioDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        val quest = player.questRepository.getQuest("Rune Mysteries")
         when (stage) {
+
+            DIALOGUE_INITIAL_OPTIONS_HANDLE -> {
+                npc("Greetings. Welcome to my castle.")
+                loadFile(optionFiles[buttonId - 1])
+            }
+
             0 -> {
                 interpreter.sendOptions("Select an Option", "Have you any quests for me?", "Where can I find money?")
                 stage = 1
