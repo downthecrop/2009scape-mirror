@@ -6,7 +6,7 @@ import core.game.world.map.zone.impl.WildernessZone;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.world.GameWorld;
 import core.game.world.map.zone.ZoneRestriction;
 import core.tools.RandomFunction;
@@ -20,7 +20,7 @@ import java.util.Map;
  * @author Emperor
  * @author ceik
  */
-public final class AntiMacroHandler implements SavingModule {
+public final class AntiMacroHandler {
 
 	/**
 	 * The delay between periods in which it attempts to spawn a random event.
@@ -74,42 +74,6 @@ public final class AntiMacroHandler implements SavingModule {
 	 */
 	public boolean isSaveRequired() {
 		return hasEvent() && event.isSaveRequired();
-	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		if (hasEvent()) {
-			buffer.put((byte) 1);
-			ByteBufferUtils.putString(event.getName(), buffer);
-			buffer.put((byte) 0);
-			int index = buffer.position();
-			event.save(buffer);
-			buffer.put(index - 1, (byte) (buffer.position() - index));
-		}
-		buffer.put((byte) 0);
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		event = null;
-		while (true) {
-			switch (buffer.get() & 0xFF) {
-			case 0:
-				return;
-			case 1:
-				event = EVENTS.get(ByteBufferUtils.getString(buffer));
-				int length = buffer.get() & 0xFF;
-				ByteBuffer buf = ByteBuffer.allocate(length);
-				for (int i = 0; i < length; i++) {
-					buf.put(buffer.get());
-				}
-				buf.flip();
-				if (event != null) {
-					(event = event.create(player)).parse(buf);
-				}
-				break;
-			}
-		}
 	}
 
 	/**

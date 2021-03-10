@@ -1,7 +1,7 @@
 package core.game.node.entity.player.link;
 
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.system.task.Pulse;
 import core.game.world.GameWorld;
 import core.net.packet.PacketRepository;
@@ -15,7 +15,7 @@ import java.nio.ByteBuffer;
  * @author Emperor
  */
 @Deprecated
-public final class ConfigurationManager implements SavingModule {
+public final class ConfigurationManager {
 
 	/**
 	 * The amount of configurations.
@@ -43,26 +43,6 @@ public final class ConfigurationManager implements SavingModule {
 	 */
 	public ConfigurationManager(Player player) {
 		this.player = player;
-	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		for (int index = 0; index < savedConfigurations.length; index++) {
-			int value = savedConfigurations[index];
-			if (value != 0) {
-				buffer.putShort((short) index);
-				buffer.putInt(value);
-			}
-		}
-		buffer.putShort((short) -1);
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int index = 0;
-		while ((index = buffer.getShort()) != -1) {
-			savedConfigurations[index] = buffer.getInt();
-		}
 	}
 
 	/**

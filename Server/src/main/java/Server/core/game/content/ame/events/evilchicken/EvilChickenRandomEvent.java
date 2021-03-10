@@ -76,14 +76,4 @@ public final class EvilChickenRandomEvent extends AntiMacroEvent {
 		PluginManager.definePlugin(new EvilChickenNPC());
 	}
 
-	@Override
-	public void save(ByteBuffer buffer) {
-
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-
-	}
-
 }

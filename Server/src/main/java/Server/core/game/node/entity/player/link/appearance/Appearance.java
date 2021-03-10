@@ -6,7 +6,7 @@ import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.node.item.Item;
 import core.game.system.config.ItemConfigParser;
 import core.game.world.update.flag.context.Animation;
@@ -21,7 +21,7 @@ import java.nio.ByteBuffer;
  * @author Emperor
  * @author Vexia
  */
-public final class Appearance implements SavingModule {
+public final class Appearance {
 
 	/**
 	 * Represents the player instance.
@@ -76,27 +76,11 @@ public final class Appearance implements SavingModule {
 		this.player = player;
 	}
 
-	@Override
-	public void save(ByteBuffer buffer) {
-		buffer.put(gender.toByte());
-		for (int i = 0; i < appearanceCache.length; i++) {
-			appearanceCache[i].save(buffer);
-		}
-	}
-
 	public void parse(JSONObject appearance){
 		gender = gender.asByte(Byte.parseByte(appearance.get("gender").toString()));
 		JSONArray appCache = (JSONArray) appearance.get("appearance_cache");
 		for(int i = 0; i < appearanceCache.length; i++){
 			(appearanceCache[i]).parse((JSONObject) appCache.get(i));
-		}
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		gender = gender.asByte(buffer.get());
-		for (int i = 0; i < appearanceCache.length; i++) {
-			appearanceCache[i].parse(buffer);
 		}
 	}
 

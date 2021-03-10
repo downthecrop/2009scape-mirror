@@ -10,7 +10,7 @@ import org.json.simple.JSONObject;
 import core.game.content.dialogue.FacialExpression;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.object.GameObject;
 import core.game.system.task.Pulse;
@@ -29,7 +29,7 @@ import java.nio.ByteBuffer;
  * @author Emperor
  *
  */
-public final class HouseManager implements SavingModule {
+public final class HouseManager {
 
 	/**
 	 * The current region.

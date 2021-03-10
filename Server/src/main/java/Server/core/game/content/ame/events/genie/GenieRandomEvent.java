@@ -31,14 +31,6 @@ public final class GenieRandomEvent extends AntiMacroEvent {
 	}
 
 	@Override
-	public void save(ByteBuffer buffer) {
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-	}
-
-	@Override
 	public boolean start(Player player, boolean login, Object... args) {
 		if (player.hasItem(new Item(2528))) {
 			return false;

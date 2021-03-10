@@ -182,29 +182,4 @@ public final class LostFoundRandomEvent extends AntiMacroEvent {
 			}
 		});
 	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		Location l = player.getAttribute("l&f_dest", player.getLocation());
-		buffer.putShort((short) l.getX()).putShort((short) l.getY()).put((byte) l.getZ());
-		Item[] runes = player.getAttribute("teleport:items", new Item[0]);
-		buffer.put((byte) runes.length);
-		for (int i = 0; i < runes.length; i++) {
-			buffer.putShort((short) runes[i].getId());
-			buffer.put((byte) runes[i].getAmount());
-		}
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		player.setAttribute("l&f_dest", Location.create(buffer.getShort(), buffer.getShort(), buffer.get()));
-		Item[] runes = new Item[buffer.get() & 0xFF];
-		for (int i = 0; i < runes.length; i++) {
-			runes[i] = new Item(buffer.getShort() & 0xFFFF, buffer.get() & 0xFF);
-		}
-		if (runes.length > 0) {
-			player.setAttribute("teleport:items", runes);
-		}
-	}
-
 }

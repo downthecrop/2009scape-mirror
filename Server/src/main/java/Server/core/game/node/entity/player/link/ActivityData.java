@@ -1,6 +1,6 @@
 package core.game.node.entity.player.link;
 
-import core.game.node.entity.player.info.login.SavingModule;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
  * Represents a managing class of activity related information.
  * @author 'Vexia
  */
-public final class ActivityData implements SavingModule {
+public final class ActivityData {
 
 	/**
 	 * Represents the pest points gained from pest control.
@@ -126,52 +126,6 @@ public final class ActivityData implements SavingModule {
 		 */
 	}
 
-	@Override
-	public void save(ByteBuffer buffer) {
-		if (pestPoints > 0) {
-			SavedData.save(buffer, pestPoints, 1);
-		}
-		if (warriorGuildTokens > 0) {
-			SavedData.save(buffer, warriorGuildTokens, 2);
-		}
-		if (bountyHunterRate > 0) {
-			SavedData.save(buffer, bountyHunterRate, 3);
-		}
-		if (bountyRogueRate > 0) {
-			SavedData.save(buffer, bountyRogueRate, 4);
-		}
-		if (barrowKills > 0) {
-			SavedData.save(buffer, (short) barrowKills, 5);
-		}
-		SavedData.save(buffer, barrowBrothers, 6);
-		if (barrowTunnelIndex > 0) {
-			SavedData.save(buffer, (byte) barrowTunnelIndex, 7);
-		}
-		SavedData.save(buffer, kolodionStage, 9);
-		buffer.put((byte) 10);
-		for (int i = 0; i < godCasts.length; i++) {
-			buffer.putInt(godCasts[i]);
-		}
-		SavedData.save(buffer, kolodionBoss, 11);
-		SavedData.save(buffer, elnockSupplies, 12);
-		SavedData.save(buffer, getLastBorkBattle(), 13);
-		SavedData.save(buffer, startedMta, 14);
-		SavedData.save(buffer, lostCannon, 15);
-		buffer.put((byte) 16);
-		buffer.put((byte) pizazzPoints.length);
-		for (int i = 0; i < pizazzPoints.length; i++) {
-			buffer.putInt(pizazzPoints[i]);
-		}
-		SavedData.save(buffer, bonesToPeaches, 17);
-		SavedData.save(buffer, solvedMazes, 18);
-		SavedData.save(buffer, fogRating, 19);
-		SavedData.save(buffer, borkKills, 20);
-		SavedData.save(buffer, hardcoreDeath, 21);
-		SavedData.save(buffer, topGrabbed, 22);
-		buffer.put((byte) 0);
-
-	}
-
 	public void parse(JSONObject data){
 		pestPoints = Integer.parseInt( data.get("pestPoints").toString());
 		warriorGuildTokens = Integer.parseInt( data.get("warriorGuildTokens").toString());
@@ -203,88 +157,6 @@ public final class ActivityData implements SavingModule {
 		borkKills = Byte.parseByte(data.get("borkKills").toString());
 		hardcoreDeath = (boolean) data.get("hardcoreDeath");
 		topGrabbed = (boolean) data.get("topGrabbed");
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get()) != 0) {
-			switch (opcode) {
-			case 1:
-				pestPoints = buffer.getInt();
-				break;
-			case 2:
-				warriorGuildTokens = buffer.getInt();
-				break;
-			case 3:
-				bountyHunterRate = buffer.getInt();
-				break;
-			case 4:
-				bountyRogueRate = buffer.getInt();
-				break;
-			case 5:
-				barrowKills = buffer.getShort() & 0xFFFF;
-				break;
-			case 6:
-				for (int i = 0; i < barrowBrothers.length; i++) {
-					barrowBrothers[i] = SavedData.getBoolean(buffer.get());
-				}
-				break;
-			case 7:
-				barrowTunnelIndex = buffer.get() & 0xFF;
-				break;
-			case 8:
-				buffer.get(); // Barrow config index.
-				break;
-			case 9:
-				kolodionStage = buffer.getInt();
-				break;
-			case 10:
-				for (int i = 0; i < godCasts.length; i++) {
-					godCasts[i] = buffer.getInt();
-				}
-				break;
-			case 11:
-				kolodionBoss = buffer.getInt();
-				break;
-			case 12:
-				elnockSupplies = SavedData.getBoolean(buffer);
-				break;
-			case 13:
-				setLastBorkBattle(buffer.getLong());
-				break;
-			case 14:
-				startedMta = SavedData.getBoolean(buffer);
-				break;
-			case 15:
-				lostCannon = SavedData.getBoolean(buffer);
-				break;
-			case 16:
-				int size = buffer.get();
-				for (int i = 0; i < size; i++) {
-					pizazzPoints[i] = buffer.getInt();
-				}
-				break;
-			case 17:
-				bonesToPeaches = SavedData.getBoolean(buffer);
-				break;
-			case 18:
-				solvedMazes = buffer.getInt();
-				break;
-			case 19:
-				fogRating = buffer.getInt();
-				break;
-			case 20:
-				borkKills = buffer.get();
-				break;
-			case 21:
-				hardcoreDeath = SavedData.getBoolean(buffer);
-				break;
-			case 22:
-				topGrabbed = SavedData.getBoolean(buffer);
-				break;
-			}
-		}
 	}
 
 	/**

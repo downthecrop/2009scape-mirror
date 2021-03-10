@@ -3,10 +3,10 @@ package core.game.content.quest.fremtrials
 
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
-import core.plugin.InitializablePlugin
 import core.game.node.entity.skill.Skills
+import core.plugin.Initializable
 
-@InitializablePlugin
+@Initializable
 class FremennikTrials : Quest("Fremennik Trials",64,63,3,347,0,1,10){
 
     class SkillRequirement(val skill: Int?, val level: Int?)

@@ -2,7 +2,7 @@ package core.game.node.entity.player.link;
 
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.List;
  * Handles the warning messages of a player.
  * @author Vexia
  */
-public final class WarningMessages implements SavingModule {
+public final class WarningMessages {
 
 	/**
 	 * Represents the config id.
@@ -23,16 +23,6 @@ public final class WarningMessages implements SavingModule {
 	 * Represents the warning messages.
 	 */
 	private final List<WarningMessage> messages = new ArrayList<>();
-
-	@Override
-	public void save(ByteBuffer buffer) {
-
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-
-	}
 
 	/**
 	 * Method used to open the warning messages.
@@ -79,7 +69,7 @@ public final class WarningMessages implements SavingModule {
 	 * Represents a warning message.
 	 * @author 'Vexia
 	 */
-	public final class WarningMessage implements SavingModule {
+	public final class WarningMessage {
 
 		/**
 		 * Represents the button index.
@@ -92,16 +82,6 @@ public final class WarningMessages implements SavingModule {
 		 */
 		public WarningMessage(final int index) {
 			this.index = index;
-		}
-
-		@Override
-		public void save(ByteBuffer buffer) {
-
-		}
-
-		@Override
-		public void parse(ByteBuffer buffer) {
-
 		}
 
 		/**

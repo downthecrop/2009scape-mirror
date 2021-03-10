@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.summoning.pet;
 
-import core.game.node.entity.player.info.login.SavingModule;
+
 
 import java.nio.ByteBuffer;
 
@@ -8,7 +8,7 @@ import java.nio.ByteBuffer;
  * A class containing pet details for a certain pet.
  * @author Emperor
  */
-public final class PetDetails implements SavingModule {
+public final class PetDetails {
 
 	/**
 	 * The hunger rate.
@@ -31,20 +31,6 @@ public final class PetDetails implements SavingModule {
 	 */
 	public PetDetails(double growth) {
 		this.growth = growth;
-	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		buffer.putDouble(hunger);
-		buffer.putDouble(growth);
-		buffer.put((byte) stage);
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		hunger = buffer.getDouble();
-		growth = buffer.getDouble();
-		stage = buffer.get();
 	}
 
 	/**

@@ -2,7 +2,7 @@ package core.game.content.quest.miniquest.barcrawl;
 
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.node.item.Item;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -13,7 +13,7 @@ import java.nio.ByteBuffer;
  * Manages the players barcrawl quest.
  * @author 'Vexia
  */
-public final class BarcrawlManager implements SavingModule {
+public final class BarcrawlManager {
 
 	/**
 	 * The barcrawl card.
@@ -53,40 +53,11 @@ public final class BarcrawlManager implements SavingModule {
 		this.player = player;
 	}
 
-	@Override
-	public void save(ByteBuffer buffer) {
-		if (started) {
-			buffer.put((byte) 1);
-		}
-		for (int i = 0; i < bars.length; i++) {
-			if (bars[i]) {
-				buffer.put((byte) 2);
-				buffer.put((byte) i);
-			}
-		}
-		buffer.put((byte) 0);
-	}
-
 	public void parse(JSONObject data){
 		started = (boolean) data.get("started");
 		JSONArray barsVisisted = (JSONArray) data.get("bars");
 		for(int i = 0; i < barsVisisted.size(); i++){
 			bars[i] = (boolean) barsVisisted.get(i);
-		}
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get() & 0xFF) != 0) {
-			switch (opcode) {
-			case 1:
-				started = true;
-				break;
-			case 2:
-				bars[buffer.get()] = true;
-				break;
-			}
 		}
 	}
 

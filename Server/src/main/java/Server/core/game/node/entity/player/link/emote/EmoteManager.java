@@ -1,7 +1,7 @@
 package core.game.node.entity.player.link.emote;
 
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -12,7 +12,7 @@ import java.util.List;
  * @author Vexia
  *
  */
-public class EmoteManager implements SavingModule {
+public class EmoteManager {
 
 	/**
 	 * The list of unlocked emotes.
@@ -32,26 +32,6 @@ public class EmoteManager implements SavingModule {
 		this.player = player;
 		for (int i = 0; i < 22; i++) {
 			emotes.add(Emotes.values()[i]);
-		}
-	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		buffer.put((byte) emotes.size()); 
-		for (int i = 0; i < emotes.size(); i++) {
-			buffer.put((byte) emotes.get(i).ordinal());
-		}
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int size = buffer.get();
-		Emotes emote = null;
-		for (int i = 0; i < size; i++) {
-			emote = Emotes.values()[buffer.get()];
-			if (!emotes.contains(emote)) {
-				emotes.add(emote);
-			}
 		}
 	}
 

@@ -2,7 +2,7 @@ package core.game.system.monitor;
 
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 
 import java.nio.ByteBuffer;
 
@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
  * Handles the player monitoring.
  * @author Emperor
  */
-public final class PlayerMonitor implements SavingModule {
+public final class PlayerMonitor {
 
 	/**
 	 * The public chat log.
@@ -94,44 +94,6 @@ public final class PlayerMonitor implements SavingModule {
 		logs[TRADE_LOG] = new MessageLog(200);
 		logs[GRAND_EXCHANGE_LOG] = new MessageLog(500);
 		logs[DUEL_LOG] = new MessageLog(200);
-	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		if (duplicationLog != null && duplicationLog.getFlag() != 0) {
-			buffer.put((byte) 1).put((byte) duplicationLog.getFlag());
-		}
-		if (macroFlag != 0) {
-			buffer.put((byte) 2).put((byte) macroFlag);
-		}
-		if (duplicationLog != null && duplicationLog.isLoggingFlagged()) {
-			buffer.put((byte) 4).putLong(duplicationLog.getLastIncreaseFlag());
-		}
-		buffer.put((byte) 0); // EOF
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get() & 0xFF) != 0) {
-			switch (opcode) {
-			case 1:
-				getDuplicationLog().flag(buffer.get() & 0xFF);
-				break;
-			case 2:
-				macroFlag = buffer.get() & 0xFF;
-				break;
-			case 3:
-				int size = buffer.get() & 0xFF;
-				for (int i = 0; i < size; i++) {
-					ByteBufferUtils.getString(buffer);
-				}
-				break;
-			case 4:
-				getDuplicationLog().setLastIncreaseFlag(buffer.getLong());
-				break;
-			}
-		}
 	}
 
 	/**

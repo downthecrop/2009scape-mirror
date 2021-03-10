@@ -23,16 +23,6 @@ public final class RiverTrollEvent extends AntiMacroEvent {
 	}
 
 	@Override
-	public void save(ByteBuffer buffer) {
-
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-
-	}
-
-	@Override
 	public boolean start(Player player, boolean login, Object... args) {
 		final RiverTrollNPC troll = new RiverTrollNPC(getId(player), player.getLocation(), this, player);
 		troll.init();

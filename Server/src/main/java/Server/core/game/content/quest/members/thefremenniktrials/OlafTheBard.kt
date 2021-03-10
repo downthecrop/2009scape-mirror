@@ -6,7 +6,7 @@ import core.plugin.Initializable
 import core.game.content.dialogue.DialoguePlugin
 
 @Initializable
-class OlafTheBard(player: Player? = Player(PlayerDetails("",""))) : DialoguePlugin(player){
+class OlafTheBard(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
         if(player?.getAttribute("fremtrials:olaf-accepted",false)!!){
             npc("I can't wait to see your performance.")

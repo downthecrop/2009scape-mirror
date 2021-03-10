@@ -3,7 +3,7 @@ package core.game.node.entity.player.link.diary;
 import core.cache.def.impl.NPCDefinition;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -14,7 +14,7 @@ import java.util.ArrayList;
  * Represents an achievement diary.
  * @author Vexia
  */
-public class AchievementDiary implements SavingModule {
+public class AchievementDiary {
 
 	/**
 	 * The component id of the diary.
@@ -132,26 +132,6 @@ public class AchievementDiary implements SavingModule {
 		}
 	}
 
-	@Override
-	public void save(ByteBuffer buffer) {
-		buffer.put((byte) 1);
-		for (int i = 0; i < 3; i++) {
-			buffer.put((byte) (levelStarted[i] ? 1 : 0));
-		}
-		buffer.put((byte) 2).put((byte) taskCompleted.length);
-		for (int i = 0; i < taskCompleted.length; i++) {
-			buffer.put((byte) type.getAchievements(i).length);
-			for (int x = 0; x < type.getAchievements(i).length; x++) {
-				buffer.put((byte) (taskCompleted[i][x] ? 1 : 0));
-			}
-		}
-		buffer.put((byte) 3).put((byte) levelRewarded.length);
-		for (int i = 0; i < levelRewarded.length; i++) {
-			buffer.put((byte) (levelRewarded[i] ? 1 : 0));
-		}
-		buffer.put((byte) 0);
-	}
-
 	public void parse(JSONObject data){
 		JSONArray startedArray = (JSONArray) data.get("startedLevels");
 		for(int i = 0; i < startedArray.size(); i++){
@@ -170,35 +150,6 @@ public class AchievementDiary implements SavingModule {
 		JSONArray rewardedArray = (JSONArray) data.get("rewardedLevels");
 		for(int i = 0; i < rewardedArray.size(); i++){
 			levelRewarded[i] = (boolean) rewardedArray.get(i);
-		}
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode, size;
-		while ((opcode = buffer.get()) != 0) {
-			switch (opcode) {
-			case 1:
-				for (int i = 0; i < 3; i++) {
-					levelStarted[i] = buffer.get() == 1;
-				}
-				break;
-			case 2:
-				size = buffer.get() & 0xFF;
-				for (int i = 0; i < size; i++) {
-					int size_ = buffer.get() & 0xFF;
-					for (int x = 0; x < size_; x++) {
-						taskCompleted[i][x] = buffer.get() == 1;
-					}
-				}
-				break;
-			case 3:
-				size = buffer.get() & 0xFF;
-				for (int i = 0; i < size; i++) {
-					levelRewarded[i] = buffer.get() == 1;
-				}
-				break;
-			}
 		}
 	}
 

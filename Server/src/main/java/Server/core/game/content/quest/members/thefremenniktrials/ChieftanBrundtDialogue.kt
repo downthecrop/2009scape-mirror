@@ -6,7 +6,7 @@ import core.plugin.Initializable
 import core.game.content.dialogue.DialoguePlugin
 
 @Initializable
-class ChieftanBrundt(player: Player? = Player(PlayerDetails("",""))) : DialoguePlugin(player){
+class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
         if(player?.questRepository?.getStage("Fremennik Trials")!! == 0) {
             npc("Greetings outlander!")

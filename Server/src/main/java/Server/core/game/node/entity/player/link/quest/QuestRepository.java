@@ -1,7 +1,7 @@
 package core.game.node.entity.player.link.quest;
 
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.system.SystemLogger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,7 +16,7 @@ import java.util.Map.Entry;
  *
  * @author Vexia
  */
-public final class QuestRepository implements SavingModule {
+public final class QuestRepository {
 
     /**
      * The static mapping of instanced quests.
@@ -50,23 +50,6 @@ public final class QuestRepository implements SavingModule {
         }
     }
 
-    @Override
-    public void save(ByteBuffer buffer) {
-        if (points != 0) {
-            buffer.put((byte) 1).putInt(points);
-        }
-        for (Entry<Integer, Integer> entry : quests.entrySet()) {
-            buffer.put((byte) 4).putInt(entry.getKey()).put((byte) ((int) entry.getValue()));
-        }
-        Map<Integer, Integer> backup = player.getAttribute("quest-backup", null);
-        if (backup != null) {
-            for (Entry<Integer, Integer> entry : backup.entrySet()) {
-                buffer.put((byte) 4).putInt(entry.getKey()).put((byte) ((int) entry.getValue()));
-            }
-        }
-        buffer.put((byte) 0);
-    }
-
     public void parse(JSONObject questData){
         points = Integer.parseInt( questData.get("points").toString());
         JSONArray questArray = (JSONArray) questData.get("questStages");
@@ -74,46 +57,6 @@ public final class QuestRepository implements SavingModule {
             JSONObject q = (JSONObject) quest;
             quests.put(Integer.parseInt( q.get("questId").toString()),Integer.parseInt(q.get("questStage").toString()));
         });
-        syncPoints();
-    }
-
-    @Override
-    public void parse(ByteBuffer buffer) {
-        int opcode;
-        int stage = 0;
-        int index = 0;
-        while ((opcode = buffer.get() & 0xFF) != 0) {
-            switch (opcode) {
-                case 1:
-                    points = buffer.getInt();
-                    break;
-                case 3:
-                    index = buffer.getInt();
-                    stage = buffer.getInt();
-                    buffer.getInt();//state
-                    if (forIndex(index) == null) {
-                        //SystemLogger.error("[Quest Repository] parsed quest index -> " + index + " no quest found!");
-                        break;
-                    }
-                    quests.put(index, stage);
-                    break;
-                case 4://new parsing.
-                    index = buffer.getInt();
-                    stage = buffer.get();
-                    if (forIndex(index) == null) {
-                        Map<Integer, Integer> backup = player.getAttribute("quest-backup", new HashMap<Integer, Integer>());
-                        backup.put(index, stage);
-                        player.setAttribute("quest-backup", backup);
-                       // SystemLogger.error("[Quest Repository] parsed quest index -> " + index + " no quest found! Stored in quest data backup for reparse.");
-                        break;
-                    }
-                    if (!quests.containsKey(index)) {//YOU FORGOT YOUR ! DAMMIT
-                        break;
-                    }
-                    quests.put(index, stage);
-                    break;
-            }
-        }
         syncPoints();
     }
 

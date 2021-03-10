@@ -8,7 +8,6 @@ import core.game.container.ContainerEvent
 import core.game.container.ContainerListener
 import core.game.container.access.InterfaceContainer
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.info.login.SavingModule
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.Item
 import core.game.system.monitor.PlayerMonitor
@@ -41,7 +40,7 @@ import core.tools.Components
  * @author Angle
  */
 
-class PlayerGrandExchange(private val player: Player) : SavingModule {
+class PlayerGrandExchange(private val player: Player) {
 
     var history = arrayOfNulls<GrandExchangeOffer>(5)
 
@@ -227,11 +226,6 @@ class PlayerGrandExchange(private val player: Player) : SavingModule {
         openedIndex = -1
     }
 
-
-    override fun save(buffer: ByteBuffer?) {
-        TODO("Not yet implemented. NOT Ever implemented. Saving a bytebuffer is dumb")
-    }
-
     fun parse(geData: JSONObject) {
         val offersRaw = geData["offers"]
 
@@ -263,26 +257,6 @@ class PlayerGrandExchange(private val player: Player) : SavingModule {
                 o.completedAmount = (offer["completedAmount"].toString().toInt())
                 history[i] = o
             }
-        }
-    }
-
-    override fun parse(buffer: ByteBuffer) {
-        var index = -1
-        while (buffer.get().also { index = it.toInt() }.toInt() != -1) {
-            val key = buffer.long
-            OfferManager.setIndex(key, index)
-        }
-        for (i in history.indices) {
-            val s = buffer.get().toInt()
-            if (s == -1) {
-                continue
-            }
-            var o = GrandExchangeOffer()
-            o.itemID = buffer.short.toInt()
-            o.sell = true
-            o.totalCoinExchange = buffer.int
-            o.completedAmount = buffer.int
-            history[i] = o
         }
     }
 

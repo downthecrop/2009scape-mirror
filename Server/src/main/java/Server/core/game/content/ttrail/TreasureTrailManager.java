@@ -1,7 +1,7 @@
 package core.game.content.ttrail;
 
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.tools.RandomFunction;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -12,7 +12,7 @@ import java.nio.ByteBuffer;
  * Handles the treasure trail of a player.
  * @author Vexia
  */
-public final class TreasureTrailManager implements SavingModule {
+public final class TreasureTrailManager {
 
 	/**
 	 * The ids of the clues.
@@ -58,23 +58,6 @@ public final class TreasureTrailManager implements SavingModule {
 		this.player = player;
 	}
 
-	@Override
-	public void save(ByteBuffer buffer) {
-		if (hasTrail()) {
-			buffer.put((byte) 1);
-			buffer.putInt(clueId << 16 | trailLength);
-			buffer.put((byte) 2);
-			buffer.putInt(trailStage);
-		}
-		if (completedClues[0] != 0 || completedClues[1] != 0 || completedClues[2] != 0) {
-			buffer.put((byte) 4);
-			for (int i = 0; i < completedClues.length; i++) {
-				buffer.putInt(completedClues[i]);
-			}
-		}
-		buffer.put((byte) 0);
-	}
-
 	public void parse(JSONObject data){
 		JSONArray cc = (JSONArray) data.get("completedClues");
 		for(int i = 0; i < cc.size(); i++){
@@ -86,35 +69,6 @@ public final class TreasureTrailManager implements SavingModule {
 			clueId = Integer.parseInt(trail.get("clueId").toString());
 			trailLength = Integer.parseInt(trail.get("length").toString());
 			trailStage = Integer.parseInt(trail.get("stage").toString());
-		}
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get() & 0xFFFF) != 0) {
-			switch (opcode) {
-			case 1:
-				int hash = buffer.getInt();
-				clueId = hash >> 16 & 0xFFFF;
-				trailLength = hash & 0xFFFF;
-				ClueScrollPlugin p = ClueScrollPlugin.getClueScrolls().get(clueId);
-				if (p != null) {
-					level = p.getLevel();
-				}
-				break;
-			case 2:
-				trailStage = buffer.getInt();
-				break;
-			case 3:
-				buffer.getInt();// old
-				break;
-			case 4:
-				for (int i = 0; i < completedClues.length; i++) {
-					completedClues[i] = buffer.getInt();
-				}
-				break;
-			}
 		}
 	}
 

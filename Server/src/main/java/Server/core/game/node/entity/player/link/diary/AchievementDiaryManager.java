@@ -7,7 +7,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import core.game.node.entity.skill.smithing.smelting.Bar;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.node.item.Item;
 
 import java.nio.ByteBuffer;
@@ -16,7 +16,7 @@ import java.nio.ByteBuffer;
  * Manages the achievement diary of a player.
  * @author Vexia
  */
-public class AchievementDiaryManager implements SavingModule {
+public class AchievementDiaryManager {
 
     /**
      * The achievement diarys.
@@ -43,15 +43,6 @@ public class AchievementDiaryManager implements SavingModule {
 		this.player = player;
 	}
 
-	@Override
-	public void save(ByteBuffer buffer) {
-		buffer.put((byte) 1).put(((byte) diarys.length));
-		for (AchievementDiary diary : diarys) {
-			diary.save(buffer);
-		}
-		buffer.put((byte) 0);
-	}
-
 	public void parse(JSONArray data){
 		for(int i = 0; i < data.size(); i++){
 			JSONObject diary = (JSONObject) data.get(i);
@@ -61,21 +52,6 @@ public class AchievementDiaryManager implements SavingModule {
 				if (diarys[ii].getType().getName().equalsIgnoreCase(name)) {
 					diarys[ii].parse((JSONObject) diary.get(name.replace("' ","_")));
 				}
-			}
-		}
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get()) != 0) {
-			switch (opcode) {
-			case 1:
-				int length = buffer.get() & 0xFF;
-				for (int i = 0; i < length; i++) {
-					diarys[i].parse(buffer);
-				}
-				break;
 			}
 		}
 	}

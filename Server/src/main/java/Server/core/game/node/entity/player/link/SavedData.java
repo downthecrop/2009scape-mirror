@@ -1,7 +1,7 @@
 package core.game.node.entity.player.link;
 
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.node.entity.player.link.spawn.SpawnData;
 import core.game.system.SystemLogger;
 
@@ -12,7 +12,7 @@ import java.nio.ByteBuffer;
  * such as questing data, npc talking data, etc.
  * @author 'Vexia
  */
-public class SavedData implements SavingModule {
+public class SavedData {
 
 	/**
 	 * Represents the global data to save.
@@ -45,67 +45,6 @@ public class SavedData implements SavingModule {
 	 */
 	public SavedData(Player player) {
 		this.player = player;
-	}
-
-	@Override
-	public void save(ByteBuffer buffer) {
-		buffer.put((byte) 1);
-		activityData.save(buffer);
-		buffer.put((byte) 2);
-		questData.save(buffer);
-		buffer.put((byte) 3);
-		globalData.save(buffer);
-		buffer.put((byte) 5);
-		spawnData.save(buffer);
-		buffer.put((byte) 0);
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		int opcode;
-		while ((opcode = buffer.get()) != 0) {
-			switch (opcode) {
-			case 1:
-				activityData.parse(buffer);
-				break;
-			case 2:
-				questData.parse(buffer);
-				break;
-			case 3:
-				globalData.parse(buffer);
-				break;
-			case 4:
-				int opcode1;
-				while ((opcode1 = buffer.get()) != 0) {
-					switch (opcode1) {
-					case 1:
-						buffer.getInt();
-						break;
-					case 2:
-						buffer.getInt();
-						break;
-					case 3:
-						buffer.getInt();
-						break;
-					case 4:
-						buffer.getInt();
-						break;
-					case 5:
-						buffer.getInt();
-						break;
-					case 6:
-						buffer.getInt();
-						break;
-					}
-				}
-				break;
-			case 5:
-				spawnData.parse(buffer);
-				break;
-			default:
-				break;
-			}
-		}
 	}
 
 	/**

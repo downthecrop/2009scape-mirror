@@ -2,7 +2,7 @@ package core.game.interaction.item.brawling_gloves;
 
 import core.cache.def.impl.ItemDefinition;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.info.login.SavingModule;
+
 import core.game.node.item.Item;
 
 import java.nio.ByteBuffer;
@@ -13,7 +13,7 @@ import java.util.Objects;
  * Manages brawling gloves for a player
  * @author ceik
  */
-public class BrawlingGlovesManager implements SavingModule {
+public class BrawlingGlovesManager {
 
     final Player player;
     public HashMap<Integer, Integer> GloveCharges = new HashMap<Integer,Integer>();
@@ -27,27 +27,6 @@ public class BrawlingGlovesManager implements SavingModule {
     public void registerGlove(int id, int charges) {GloveCharges.putIfAbsent(id,charges);}
 
     public BrawlingGlovesManager(Player player){this.player = player;}
-
-    @Override
-    public void save(ByteBuffer buffer) {
-        if(!GloveCharges.isEmpty()){
-            GloveCharges.forEach((key,value) -> {
-                buffer.putInt(BrawlingGloves.forId(key).getIndicator());
-                buffer.putInt(value);
-            });
-        }
-        buffer.put((byte) 0);
-    }
-
-    @Override
-    public void parse(ByteBuffer buffer) {
-        int opcode;
-        int charges;
-        while ((opcode = buffer.get() & 0xFF) != 0){
-            charges = buffer.getInt();
-            registerGlove(BrawlingGloves.forIndicator((byte)opcode).getId(),charges);
-        }
-    }
 
     public boolean updateCharges(int glove, int charges){
         if(GloveCharges.get(glove) != null){

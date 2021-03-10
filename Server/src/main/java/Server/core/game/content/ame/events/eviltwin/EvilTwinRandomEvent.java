@@ -462,31 +462,6 @@ public final class EvilTwinRandomEvent extends AntiMacroEvent {
 	}
 
 	@Override
-	public void save(ByteBuffer buffer) {
-		int offset = player.getAttribute("ame:evil_twin", 0);
-		buffer.put((byte) (offset & 0xFF));
-		buffer.put((byte) ((offset >> 16) & 0xFF));
-		buffer.put((byte) (player.getLocation().getX() - region.getBaseLocation().getX()));
-		buffer.put((byte) (player.getLocation().getY() - region.getBaseLocation().getY()));
-		buffer.put((byte) tries);
-		Location loc = player.getAttribute("ame:location", ServerConstants.HOME_LOCATION);
-		buffer.putShort((short) loc.getX());
-		buffer.putShort((short) loc.getY());
-		buffer.put((byte) loc.getZ());
-		buffer.put((byte) (success ? 1 : 0));
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-		player.setAttribute("ame:evil_twin", (buffer.get() & 0xFF) | ((buffer.get() & 0xFF) << 16));
-		offsetX = buffer.get() & 0xFF;
-		offsetY = buffer.get() & 0xFF;
-		tries = buffer.get() & 0xFF;
-		player.setAttribute("ame:location", Location.create(buffer.getShort(), buffer.getShort(), buffer.get()));
-		success = (buffer.get() & 0xFF) == 1;
-	}
-
-	@Override
 	public AntiMacroEvent create(Player player) {
 		return new EvilTwinRandomEvent(player);
 	}

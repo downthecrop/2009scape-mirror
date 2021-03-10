@@ -14,7 +14,7 @@ import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 
 @Initializable
-class ManniDialogue(player: Player? = Player(PlayerDetails("",""))) : DialoguePlugin(player){
+class ManniDialogue(player: Player? = null) : DialoguePlugin(player){
     var curNPC: NPC? = NPC(0,Location(0,0,0))
     override fun open(vararg args: Any?): Boolean {
         curNPC = args[0] as? NPC

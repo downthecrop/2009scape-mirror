@@ -6,7 +6,7 @@ import core.plugin.Initializable
 import core.game.content.dialogue.DialoguePlugin
 
 @Initializable
-class SwensenTheNavigator(player: Player? = Player(PlayerDetails("",""))) : DialoguePlugin(player){
+class SwensenTheNavigator(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
         if(player?.getAttribute("fremtrials:maze-complete",false) == true){
             npc("Outerlander! You have finished my maze!","I am genuinely impressed!")

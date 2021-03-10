@@ -36,3 +36,5 @@ docker
 gradle
 .idea
 .idea/
+Server/worldprops/
+Management-Server/managementprops/

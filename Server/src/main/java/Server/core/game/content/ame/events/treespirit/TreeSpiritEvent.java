@@ -23,16 +23,6 @@ public final class TreeSpiritEvent extends AntiMacroEvent {
 	}
 
 	@Override
-	public void save(ByteBuffer buffer) {
-
-	}
-
-	@Override
-	public void parse(ByteBuffer buffer) {
-
-	}
-
-	@Override
 	public boolean start(Player player, boolean login, Object... args) {
 		final TreeSpiritRandomNPC spirit = new TreeSpiritRandomNPC(getId(player), player.getLocation(), this, player);
 		spirit.init();
