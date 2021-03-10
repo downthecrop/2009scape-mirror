@@ -168,6 +168,9 @@ object UseWithPatchHandler{
                             p.plant(plantable)
                             player.skills.addExperience(Skills.FARMING, plantable.plantingXP)
                             p.setNewHarvestAmount()
+                            if(p.patch.type == PatchType.TREE || p.patch.type == PatchType.FRUIT_TREE){
+                                player.inventory.add(Item(Items.PLANT_POT_5356))
+                            }
                             return true
                         }
                     })

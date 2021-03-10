@@ -804,6 +804,13 @@ public class Container {
         return get(getSlot(item));
     }
 
+    public Item get(Item item){
+        for(Item i : items){
+            if(item.getId() == i.getId()) return i;
+        }
+        return null;
+    }
+
     /**
      * Gets the next free slot.
      *
