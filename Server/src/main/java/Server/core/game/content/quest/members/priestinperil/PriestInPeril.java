@@ -1,4 +1,4 @@
-package core.game.content.quest.members;
+package core.game.content.quest.members.priestinperil;
 
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;

@@ -24,6 +24,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static core.tools.DialogueConstKt.END_DIALOGUE;
+
 /**
  * Handles the dialogues.
  * @author Emperor
@@ -172,6 +174,11 @@ public final class DialogueInterpreter {
             return;
         }
         player.setAttribute("chatbox-buttonid",buttonId);
+        if(player.getDialogueInterpreter().getDialogue().stage == END_DIALOGUE){
+            dialogue.close();
+            close();
+            return;
+        }
         if(player.getDialogueInterpreter().getDialogue().file != null){
             player.getDialogueInterpreter().getDialogue().file.handle(componentId,buttonId - 1);
             return;

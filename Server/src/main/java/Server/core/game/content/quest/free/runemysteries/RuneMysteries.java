@@ -1,4 +1,4 @@
-package core.game.content.quest.free;
+package core.game.content.quest.free.runemysteries;
 
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
