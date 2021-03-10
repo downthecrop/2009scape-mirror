@@ -174,8 +174,10 @@ public final class DialogueInterpreter {
             return;
         }
         player.setAttribute("chatbox-buttonid",buttonId);
-        if(player.getDialogueInterpreter().getDialogue().stage == END_DIALOGUE){
-            dialogue.close();
+        if((player.getDialogueInterpreter().getDialogue().file != null && player.getDialogueInterpreter().getDialogue().file.getCurrentStage() == END_DIALOGUE) || player.getDialogueInterpreter().getDialogue().stage == END_DIALOGUE){
+            player.getInterfaceManager().closeChatbox();
+            player.getInterfaceManager().openChatbox(137);
+            player.getDialogueInterpreter().dialogue.finished = true;
             close();
             return;
         }

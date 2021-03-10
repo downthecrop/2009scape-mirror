@@ -10,7 +10,7 @@ abstract class DialogueFile {
     var player: Player? = null
     var npc: NPC? = null
     var interpreter: DialogueInterpreter? = null
-    var stage = START_DIALOGUE
+    open var stage = START_DIALOGUE
     abstract fun handle(componentID: Int, buttonID: Int)
     fun load(player: Player, npc: NPC, interpreter: DialogueInterpreter): DialogueFile{
         this.player = player
@@ -78,6 +78,10 @@ abstract class DialogueFile {
     fun abandonFile(){
         interpreter!!.dialogue.file = null
         player("Huh. Nevermind.")
+    }
+
+    open fun getCurrentStage(): Int{
+        return stage
     }
 
 }

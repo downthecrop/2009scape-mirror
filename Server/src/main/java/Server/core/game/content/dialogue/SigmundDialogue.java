@@ -27,6 +27,18 @@ public class SigmundDialogue extends DialoguePlugin {
 	}
 
 	@Override
+	public boolean open(Object... args) {
+		npc = (NPC) args[0];
+		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Can I help you?");
+		if(player.getQuestRepository().getQuest("Lost Tribe").getStage(player) > 0 && player.getQuestRepository().getQuest("Lost Tribe").getStage(player) < 100){
+			npc("Have you found out what it was?");
+			stage = 34;
+		}
+		stage = 0;
+		return true;
+	}
+
+	@Override
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
@@ -107,17 +119,5 @@ public class SigmundDialogue extends DialoguePlugin {
 	public DialoguePlugin newInstance(Player player) {
 
 		return new SigmundDialogue(player);
-	}
-
-	@Override
-	public boolean open(Object... args) {
-		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Can I help you?");
-		if(player.getQuestRepository().getQuest("Lost Tribe").getStage(player) > 0 && player.getQuestRepository().getQuest("Lost Tribe").getStage(player) < 100){
-			npc("Have you found out what it was?");
-			stage = 34;
-		}
-		stage = 0;
-		return true;
 	}
 }
