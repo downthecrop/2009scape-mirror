@@ -185,6 +185,9 @@ public final class InteractionPacket implements IncomingPacket {
 		player.debug("spawn=" + npc.getProperties().getSpawnLocation() + ".");
 		player.debug("Varp ID= " + npc.getDefinition().getConfigId() + " Offset=" + npc.getDefinition().getVarbitOffset() + " Size=" + npc.getDefinition().getVarbitSize());
 		handleAIPLegion(player, 0, optionIndex, index);
+		if(Listeners.run(shown.getId(),2, option.getName(),player,shown)){
+			return;
+		}
 		if(PluginInteractionManager.handle(player,shown,option)){
 			return;
 		}
@@ -266,18 +269,7 @@ public final class InteractionPacket implements IncomingPacket {
 		}
 		handleAIPLegion(player, 1, optionIndex, x, y, objectId);
 
-		if(Listeners.get(object.getId(),1, option.getName()) != null){
-			GameObject finalObject = object;
-			player.getPulseManager().run(new MovementPulse(player, finalObject,DestinationFlag.OBJECT) {
-				@Override
-				public boolean pulse() {
-					player.faceLocation(finalObject.getLocation());
-					if(!Listeners.get(finalObject.getId(),1,option.getName()).invoke(player, finalObject)){
-						player.sendMessage("Nothing interesting happens.");
-					}
-					return true;
-				}
-			});
+		if(Listeners.run(object.getId(),1, option.getName(),player,object)){
 			return;
 		}
 		if(PluginInteractionManager.handle(player,object)){

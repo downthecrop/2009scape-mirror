@@ -105,6 +105,9 @@ public class Interaction {
 					if (player.getLocks().isInteractionLocked() || player.getZoneMonitor().interact(node, option)) {
 						return true;
 					}
+					if(Listeners.run(node.getId(),0,option.getName(),player,node)){
+						return true;
+					}
 					if (option.getHandler() == null || !option.getHandler().handle(player, node, option.getName().toLowerCase())) {
 						player.getPacketDispatch().sendMessage("Nothing interesting happens.");
 					}
