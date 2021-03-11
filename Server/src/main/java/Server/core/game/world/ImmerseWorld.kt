@@ -26,8 +26,7 @@ object ImmerseWorld {
     }
     fun immerseAdventurer(){
         val lumbridge = Location.create(3221, 3219, 0)
-        //100 for HEALTHY GE :: 50 for ULTRA LightWeight
-        for(i in (0..100)){
+        for(i in (0..(GameWorld.settings?.max_adv_bots ?: 50))){
             GeneralBotCreator(Adventurer(CombatStyle.MELEE), assembler.MeleeAdventurer(CombatBotAssembler.Tier.LOW,lumbridge))
             GeneralBotCreator(Adventurer(CombatStyle.MELEE), assembler.MeleeAdventurer(CombatBotAssembler.Tier.MED,lumbridge))
             GeneralBotCreator(Adventurer(CombatStyle.RANGE), assembler.RangeAdventurer(CombatBotAssembler.Tier.MED,lumbridge))
