@@ -225,6 +225,10 @@ public final class AgilityHandler {
 		});
 	}
 
+	public static void walk(final Player player, final int courseIndex, final Location start, final Location end, final Animation animation, final double experience, final String message){
+		walk(player,courseIndex,start,end,animation,experience,message,false);
+	}
+
 	/**
 	 * Uses the walking queue to walk across an obstacle.
 	 * @param player The player.
@@ -236,19 +240,19 @@ public final class AgilityHandler {
 	 * @param experience The agility experience.
 	 * @param message The message to send upon completion.
 	 */
-	public static void walk(final Player player, final int courseIndex, final Location start, final Location end, final Animation animation, final double experience, final String message) {
+	public static void walk(final Player player, final int courseIndex, final Location start, final Location end, final Animation animation, final double experience, final String message, final boolean infiniteRun) {
 		if (!player.getLocation().equals(start)) {
 			player.getPulseManager().run(new MovementPulse(player, start) {
 				@Override
 				public boolean pulse() {
-					walk(player, courseIndex, start, end, animation, experience, message);
+					walk(player, courseIndex, start, end, animation, experience, message, infiniteRun);
 					return true;
 				}
 			}, "movement");
 			return;
 		}
 		player.getWalkingQueue().reset();
-		player.getWalkingQueue().addPath(end.getX(), end.getY(), true);
+		player.getWalkingQueue().addPath(end.getX(), end.getY(), !infiniteRun);
 		int ticks = player.getWalkingQueue().getQueue().size();
 		player.getImpactHandler().setDisabledTicks(ticks);
 		player.lock(1 + ticks);
@@ -259,6 +263,7 @@ public final class AgilityHandler {
 		if (animation != null) {
 			player.getAppearance().setAnimations(animation);
 		}
+		player.getSettings().setRunEnergy(100.0);
 		GameWorld.getPulser().submit(new Pulse(ticks, player) {
 			@Override
 			public boolean pulse() {

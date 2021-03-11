@@ -1,6 +1,7 @@
 package core.game.content.dialogue;
 
 import core.cache.def.impl.NPCDefinition;
+import core.game.container.impl.EquipmentContainer;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.interaction.OptionHandler;
@@ -14,6 +15,9 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.PluginManager;
+import core.tools.Items;
+
+import static core.tools.stringtools.StringToolsKt.colorize;
 
 /**
  * The dialogue plugin used for the rug merchant.
@@ -147,8 +151,12 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 				return;
 			}
 			destination = options.length == 1 ? options[0] : options[buttonId - 1];
-			if (player.getInventory().remove(new Item(995, 200))) {
-				destination.travel(current, player);
+			if(player.getEquipment().get(EquipmentContainer.SLOT_WEAPON) != null){
+				player.sendMessage(colorize("%RYou must unequip all your weapons before you can fly on a carpet."));
+			} else {
+				if (player.getInventory().remove(new Item(995, 200))) {
+					destination.travel(current, player);
+				}
 			}
 			end();
 			break;
@@ -272,6 +280,9 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 			player.lock();
 			player.getConfigManager().set(499, 0);
 			player.getImpactHandler().setDisabledTicks(GameWorld.getTicks() + 200);
+			player.getInterfaceManager().hideTabs(0,1,2,3,4,5,6,7,8,9,10,11,12,13);
+			player.getEquipment().replace(new Item(Items.MAGIC_CARPET_5614),EquipmentContainer.SLOT_WEAPON);
+			player.getPacketDispatch().sendInterfaceConfig(548,69,true);
 			GameWorld.getPulser().submit(new Pulse(1, player) {
 				int count;
 				int index;
@@ -300,11 +311,13 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 						break;
 					case 4:
 						player.getConfigManager().set(499, 1);
-						player.animate(FLOATING_ANIMATION);
 						break;
 					case 200:
 						break;
 					case 901:
+						player.getEquipment().replace(null,EquipmentContainer.SLOT_WEAPON);
+						player.getInterfaceManager().restoreTabs();
+						player.getPacketDispatch().sendInterfaceConfig(548,69,false);
 						player.getImpactHandler().setDisabledTicks(0);
 						player.unlock();
 						player.animate(new Animation(-1));
@@ -319,7 +332,7 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 							break;
 						}
 						if (index == 0 || player.getLocation().equals(locs[index - 1])) {
-							AgilityHandler.forceWalk(player, -1, player.getLocation(), locs[index++], FLOATING_ANIMATION, 40, 0.0, null);
+							AgilityHandler.walk(player,-1,player.getLocation(),locs[index++],null,0.0,null,true);
 						}
 						return false;
 					}
