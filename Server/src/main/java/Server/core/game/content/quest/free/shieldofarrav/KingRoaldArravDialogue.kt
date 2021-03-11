@@ -38,14 +38,14 @@ class KingRoaldArravDialogue() : DialogueFile() {
                 2 -> npc("My goodness! This claim is for the reward offered by", "my father many years ago!").also { stage++ }
                 3 -> npc("I never thought I would live to see the day when", "someone came forward to claim this reward!").also { stage++ }
                 4 -> npc("I heard that you found half the shield, so I will give", "you half of the bounty. That comes to exactly 600 gp!").also { stage++ }
-                5 -> interpreter!!.sendItemMessage(CERTIFICATE.id, "You hand over a certificate. The king gives you 600 gp.").also { stage = END_DIALOGUE }
-                END_DIALOGUE -> {
+                5 -> {
+                    interpreter!!.sendItemMessage(CERTIFICATE.id, "You hand over a certificate. The king gives you 600 gp.")
                     if (player!!.inventory.remove(CERTIFICATE)) {
                         if (!player!!.inventory.add(Item(995, 600))) {
                             GroundItemManager.create(Item(995, 600), player)
                         }
                         player!!.questRepository.getQuest("Shield of Arrav").finish(player)
-                        end()
+                        stage = END_DIALOGUE
                     }
                 }
             }

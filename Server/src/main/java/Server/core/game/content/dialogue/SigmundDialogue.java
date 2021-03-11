@@ -4,6 +4,8 @@ import core.game.node.entity.npc.NPC;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 
+import static core.tools.DialogueConstKt.END_DIALOGUE;
+
 /**
  * Handles the SigmundDialogue dialogue.
  * @author 'Vexia
@@ -101,16 +103,13 @@ public class SigmundDialogue extends DialoguePlugin {
 			break;
 		case 31:
 			npc("You should ask other people around the town if they","saw anything.");
-			stage++;
+			stage = END_DIALOGUE;
 			player.getQuestRepository().getQuest("Lost Tribe").start(player);
 			player.setAttribute("/save:tlt-witness", TLTNPCS[0]);
 			break;
-		case 32:
-			end();
-			break;
 		case 34:
 			player("No...");
-			stage = 32;
+			stage = END_DIALOGUE;
 			break;
 		}
 		return true;
