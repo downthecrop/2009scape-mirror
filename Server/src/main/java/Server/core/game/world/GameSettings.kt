@@ -78,6 +78,7 @@ class GameSettings
         var skillcape_perks: Boolean,
         var increased_door_time: Boolean,
         var enabled_botting : Boolean,
+        var max_adv_bots: Int,
 
         /**"Lobby" interface
          * The message of the week models to display
@@ -128,6 +129,7 @@ class GameSettings
             val skillcape_perks = if(data.containsKey("skillcape_perks")) data["skillcape_perks"] as Boolean else false
             val increased_door_time = if(data.containsKey("increased_door_time")) data["increased_door_time"] as Boolean else false
             val enable_botting = if(data.containsKey("botting_enabled")) data["botting_enabled"] as Boolean else false
+            val max_adv_bots = if(data.containsKey("max_adv_bots")) data["max_adv_bots"].toString().toInt() else 100
             val allow_token_purchase = data["allow_token_purchase"] as Boolean
             val message_of_the_week_identifier = data["message_of_the_week_identifier"].toString().toInt()
             val message_of_the_week_text = data["message_of_the_week_text"].toString()
@@ -153,6 +155,7 @@ class GameSettings
                     skillcape_perks,
                     increased_door_time,
                     enable_botting,
+                    max_adv_bots,
                     message_of_the_week_identifier,
                     message_of_the_week_text
             )
