@@ -65,8 +65,6 @@ public final class Location extends Node {
 		this(x + RandomFunction.getRandom(randomizer), y + RandomFunction.getRandom(randomizer), z);
 	}
 
-
-
 	/**
 	 * Construct a new Location.
 	 * @param x The x-coordinate.
@@ -218,7 +216,11 @@ public final class Location extends Node {
      * @param dist The amount of distance.
      * @return If you're within the other distance.
      */
-	public boolean withinDistance(Location other, int dist){
+	public boolean withinDistance(Location other, int dist) {
+	    if (other.z != z) {
+	        return false;
+        }
+
 		int a = (other.x - x);
 		int b = (other.y - y);
 		double product = Math.sqrt((a*a) + (b*b));
