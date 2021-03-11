@@ -92,7 +92,7 @@ abstract class HunterTracking : OptionHandler(){
             val possibleTrails = ArrayList<TrailDefinition>()
             for(trail in linkingTrails){
                 val invTrail = getTrailInverse(trail,false)
-                if(invTrail.type == TrailType.TUNNEL && previousTrail.endLocation.withinDistanceProper(invTrail.startLocation,5) && !previousTrail.endLocation.equals(invTrail.startLocation) && previousTrail.offset != trail.offset){
+                if(invTrail.type == TrailType.TUNNEL && previousTrail.endLocation.withinDistance(invTrail.startLocation,5) && !previousTrail.endLocation.equals(invTrail.startLocation) && previousTrail.offset != trail.offset){
                     possibleTrails.add(trail)
                 }
             }

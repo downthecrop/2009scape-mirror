@@ -6,8 +6,6 @@ import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
 import core.tools.RandomFunction;
 
-import java.nio.ByteBuffer;
-
 /**
  * Represents a location on the world map.
  * @author Emperor
@@ -133,24 +131,6 @@ public final class Location extends Node {
 	}
 
 	/**
-	 * Saves the location to a buffer.
-	 * @param buffer the buffer.
-	 * @return the buffer.
-	 */
-	public ByteBuffer save(ByteBuffer buffer) {
-		return buffer.putShort((short) getX()).putShort((short) getY()).put((byte) getZ());
-	}
-
-	/**
-	 * Parses a location from the buffer.
-	 * @param buffer the buffer.
-	 * @return the location.
-	 */
-	public static Location parse(ByteBuffer buffer) {
-		return Location.create(buffer.getShort(), buffer.getShort(), buffer.get());
-	}
-
-	/**
 	 * Checks if this location is right next to the node (assuming the node is
 	 * size 1x1).
 	 * @param node The node to check.
@@ -175,6 +155,14 @@ public final class Location extends Node {
 	public int getRegionId() {
 		return (x >> 6) << 8 | (y >> 6);
 	}
+
+    /**
+     * Compares the users region with the one given
+     * @return True if user is in given region
+     */
+	public boolean isInRegion(int region) {
+        return getRegionId() == region;
+    }
 
 	/**
 	 * Gets the location incremented by the given coordinates.
@@ -224,21 +212,13 @@ public final class Location extends Node {
 		return withinDistance(other, MapDistance.RENDERING.getDistance());
 	}
 
-	/**
-	 * Returns if a player is within a specified distance.
-	 * @param other The other location.
-	 * @param dist The amount of distance.
-	 * @return If you're within the other distance.
-	 */
-	public boolean withinDistance(Location other, int dist) {
-		if (other.z != z) {
-			return false;
-		}
-		int deltaX = other.x - x, deltaY = other.y - y;
-		return deltaX <= dist && deltaX >= -dist && deltaY <= dist && deltaY >= -dist;
-	}
-
-	public boolean withinDistanceProper(Location other, int dist){
+    /**
+     * Returns if a player is within a specified distance.
+     * @param other The other location.
+     * @param dist The amount of distance.
+     * @return If you're within the other distance.
+     */
+	public boolean withinDistance(Location other, int dist){
 		int a = (other.x - x);
 		int b = (other.y - y);
 		double product = Math.sqrt((a*a) + (b*b));
