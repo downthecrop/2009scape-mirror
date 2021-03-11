@@ -5,6 +5,7 @@ import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.ObjectDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
+import core.game.container.impl.EquipmentContainer
 import core.game.node.`object`.GameObject
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.link.RunScript
@@ -26,6 +27,7 @@ import core.game.ge.OfferState
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.state.newsys.states.FarmingState
 import core.tools.Components
+import core.tools.Items
 import core.tools.stringtools.colorize
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
