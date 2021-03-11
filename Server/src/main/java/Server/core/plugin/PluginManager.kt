@@ -10,6 +10,7 @@ import core.game.content.activity.ActivityManager
 import core.game.content.activity.ActivityPlugin
 import core.game.system.command.Command
 import core.game.content.dialogue.DialoguePlugin
+import core.game.interaction.OptionListener
 import java.lang.Exception
 import java.util.*
 import java.util.function.Consumer
@@ -65,10 +66,12 @@ object PluginManager {
             }
         })
         result.getSubclasses("core.game.system.command.Command").forEach {
-            System.out.println("E")
             try {
                 definePlugin(it.loadClass().newInstance() as Plugin<Command>).also { System.out.println("Initializing $it") }
             } catch (e: Exception) {e.printStackTrace()}
+        }
+        result.getSubclasses("core.game.interaction.OptionListener").forEach {
+            (it.loadClass().newInstance() as OptionListener).defineListeners()
         }
     }
 
