@@ -15,9 +15,10 @@ object Discord {
     var initialized = false
 
     @JvmStatic
+    //Removed support for Linux due to the outlined issue on line 37. TODO: Revisit this when the RPC library updates. There's a PR there that *should* fix it.
     fun checkInitializable() : Boolean{
         val OS = System.getProperty("os.name")
-        if(OS.toLowerCase().startsWith("windows") || OS.toLowerCase().contains("nux")){
+        if(OS.toLowerCase().startsWith("windows")){
             val arch = System.getProperty("os.arch")
             return arch != "aarch64" && !initialized
         }
@@ -33,7 +34,9 @@ object Discord {
             DiscordRPC.discordShutdown()
         }.build()
 
-        DiscordRPC.discordInitialize(APP_ID,handlers,true)
+        //On Linux, when the discord library initializes, it can crash any other client loading the same library.
+        //Not sure what causes this, likely a JVM bug to be honest.
+        DiscordRPC.discordInitialize(APP_ID, handlers, true)
         initialized = true
     }
 
