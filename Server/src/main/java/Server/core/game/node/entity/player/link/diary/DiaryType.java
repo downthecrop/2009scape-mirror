@@ -97,7 +97,7 @@ public enum DiaryType {
                             "Give a stray dog a bone",
                             "Spin a bowl on the pottery wheel and fire it in the oven in<br><br>Barbarian Village",
                             "Enter Edgeville Dungeon using the entrance to the south of<br><br>Edgeville",
-                            "Move our player-owned house portal to a different location<br><br>using the Varrock estate agent",
+                            "Move your player-owned house portal to a different location<br><br>using the Varrock estate agent",
                             "Speak to Haig Halen after obtaining at least 50 kudos", //TODO need to implement kudos
                             "Enter the Earth Altar using an earth tiara or talisman",
                             "Have Elsie tell you a story",
@@ -137,7 +137,7 @@ public enum DiaryType {
                             "Speak to Orlando Smith when you have achieved 153 kudos", // TODO need to implement kudos
                             "Talk to Romily Weaklax and give him a wild pie",
                             "Craft an air battlestaff",
-                            "Give your player-owned house a fancy stone or tropical wood<br><br>finish at the Varrock estate agent's",
+                            "Give your player-owned house a tropical wood or fancy stone<br><br>finish at the Varrock estate agent's",
                             "Make a Varrock teleport tablet on a mahogany lectern",
                             "Obtain a new set of Family Crest gauntlets from Dimintheis",  // TODO need family crest
                             "Make a Waka Canoe near Edgeville",

@@ -1,5 +1,8 @@
 package core.game.node.entity.skill.construction;
 
+import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
+
 /**
  * The styles of houses.
  * @author Emperor
@@ -17,7 +20,7 @@ public enum HousingStyle {
 	/**
 	 * The level required.
 	 */
-	private final int level;
+	private final int levelRequirement;
 	
 	/**
 	 * The cost.
@@ -53,7 +56,17 @@ public enum HousingStyle {
 	 * The window style
 	 */
 	private final Decoration window;
-	
+
+    /**
+     * Checks if the player has the level.
+     *
+     * @param player the player.
+     * @return {@code True} if so.
+     */
+    public boolean hasLevel(Player player) {
+        return player.getSkills().getStaticLevel(Skills.CONSTRUCTION) >= levelRequirement;
+    }
+
 	/**
 	 * Constructs a new {@code HousingStyle} {@code Object}
 	 * @param level The level required.
@@ -63,7 +76,7 @@ public enum HousingStyle {
 	 * @param doorId The door object id used in this style.
 	 */
 	private HousingStyle(int level, int cost, int regionId, int plane, int doorId, int secondDoorId, int wallId, Decoration window) {
-		this.level = level;
+		this.levelRequirement = level;
 		this.cost = cost;
 		this.regionId = regionId;
 		this.plane = plane;
@@ -78,7 +91,7 @@ public enum HousingStyle {
 	 * @return the level
 	 */
 	public int getLevel() {
-		return level;
+		return levelRequirement;
 	}
 
 	/**
