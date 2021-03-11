@@ -2,20 +2,37 @@ package core.game.interaction
 
 import core.game.node.Node
 import core.game.node.entity.player.Player
-import core.tools.StringUtils
 
 object Listeners {
-    private val listeners = HashMap<Long,(Player, Node) -> Boolean>()
+    private val listeners = HashMap<String,(Player, Node) -> Boolean>()
 
     @JvmStatic
     fun add(id: Int, type: Int, option: String, method: (Player,Node) -> Boolean){
-        val key = (StringUtils.stringToLong(option.toLowerCase()) + id) shl type
+        val key = "$id:$type:${option.toLowerCase()}"
+        listeners[key] = method
+    }
+
+    @JvmStatic
+    fun add(ids: IntArray, type: Int, option: String, method: (Player,Node) -> Boolean){
+        for(id in ids){
+            add(id,type,option,method)
+        }
+    }
+
+    @JvmStatic
+    fun add(option: String,type: Int, method: (Player,Node) -> Boolean){
+        val key = "$type:${option.toLowerCase()}"
         listeners[key] = method
     }
 
     @JvmStatic
     fun get(id: Int, type: Int, option: String): ((Player,Node) -> Boolean)?{
-        return listeners[(StringUtils.stringToLong(option.toLowerCase()) + id) shl type]
+        return listeners["$id:$type:${option.toLowerCase()}"]
+    }
+
+    @JvmStatic
+    fun get(option: String,type: Int): ((Player,Node) -> Boolean)?{
+        return listeners["$type:${option.toLowerCase()}"]
     }
 
     @JvmStatic
@@ -26,11 +43,12 @@ object Listeners {
             else -> DestinationFlag.OBJECT
         }
 
-        val method = get(id,type,option) ?: return false
+        val method = get(id,type,option) ?: get(option,type) ?: return false
 
         if(type != 0) {
             player.pulseManager.run(object : MovementPulse(player, node, flag) {
                 override fun pulse(): Boolean {
+                    player.faceLocation(node.location)
                     method.invoke(player,node)
                     return true
                 }
