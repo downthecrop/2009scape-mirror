@@ -33,6 +33,7 @@ public class SigmundDialogue extends DialoguePlugin {
 		if(player.getQuestRepository().getQuest("Lost Tribe").getStage(player) > 0 && player.getQuestRepository().getQuest("Lost Tribe").getStage(player) < 100){
 			npc("Have you found out what it was?");
 			stage = 34;
+			return true;
 		}
 		stage = 0;
 		return true;
