@@ -30,6 +30,9 @@ public final class PlayerParser {
 			if (JSON.exists()) { //parse the new JSON type.
 				new PlayerSaveParser(player).parse();
 			} else { //Create new save
+				if(!(new File(ServerConstants.PLAYER_SAVE_PATH + "template/template.json")).exists()){
+					return true;
+				}
 				makeFromTemplate(player);
 				new PlayerSaveParser(player).parse();
 			}
