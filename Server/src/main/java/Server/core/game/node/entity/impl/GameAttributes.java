@@ -159,6 +159,7 @@ public final class GameAttributes {
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T getAttribute(String string, T fail) {
+		string = string.replace("/save:","");
 		Object object = attributes.get(string);
 		if (object != null) {
 			return (T) object;

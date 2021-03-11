@@ -3,14 +3,12 @@ package core.net.packet.in;
 import core.ServerConstants;
 import core.cache.def.impl.ObjectDefinition;
 import core.cache.def.impl.VarbitDefinition;
-import core.game.interaction.Interaction;
-import core.game.interaction.MovementPulse;
-import core.game.interaction.Option;
-import core.game.interaction.SpecialGroundItems;
+import core.game.interaction.*;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.SystemLogger;
+import core.game.system.task.Pulse;
 import plugin.ai.AIPlayer;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
@@ -267,6 +265,21 @@ public final class InteractionPacket implements IncomingPacket {
 			player.debug("Object handler: " + option.getHandler().getClass().getSimpleName());
 		}
 		handleAIPLegion(player, 1, optionIndex, x, y, objectId);
+
+		if(Listeners.get(object.getId(),1, option.getName()) != null){
+			GameObject finalObject = object;
+			player.getPulseManager().run(new MovementPulse(player, finalObject,DestinationFlag.OBJECT) {
+				@Override
+				public boolean pulse() {
+					player.faceLocation(finalObject.getLocation());
+					if(!Listeners.get(finalObject.getId(),1,option.getName()).invoke(player, finalObject)){
+						player.sendMessage("Nothing interesting happens.");
+					}
+					return true;
+				}
+			});
+			return;
+		}
 		if(PluginInteractionManager.handle(player,object)){
 			return;
 		}
