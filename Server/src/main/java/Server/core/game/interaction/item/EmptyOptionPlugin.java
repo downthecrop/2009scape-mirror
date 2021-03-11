@@ -21,7 +21,7 @@ public final class EmptyOptionPlugin extends OptionHandler {
 	public static final String BUCKET_EMPTY_MSG = "You empty the contents of the bucket onto the floor.";
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-	    if (node.getName().contains("potion")) {
+	    if (node.getName().contains("potion") || node.getName().toLowerCase().contains("antipoison")) {
             player.getInventory().remove(node.asItem());
             player.getInventory().add(EmptyItem.getEmpty(91));
             return true;
