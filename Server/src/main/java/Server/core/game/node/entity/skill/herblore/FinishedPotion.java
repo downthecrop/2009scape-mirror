@@ -12,7 +12,7 @@ public enum FinishedPotion {
 	STRENGTH_POTION(UnfinishedPotion.TARROMIN, new Item(225), 12, 50, new Item(115)),
 	RESTORE_POTION(UnfinishedPotion.HARRALANDER, new Item(223), 22, 62.5, new Item(127)),
 	ENERGY_POTION(UnfinishedPotion.HARRALANDER, new Item(1975), 26, 67.5, new Item(3010)),
-	DEFENCE_POTION(UnfinishedPotion.MARRENTILL, new Item(6814), 30, 45, new Item(133)),
+	DEFENCE_POTION(UnfinishedPotion.RANARR, new Item(6814), 30, 45, new Item(133)),
 	AGILITY_POTION(UnfinishedPotion.TOADFLAX, new Item(2152), 34, 80, new Item(3034)),
 	COMBAT_POTION(UnfinishedPotion.HARRALANDER, new Item(9736), 36, 84, new Item(9741)),
 	PRAYER_POTION(UnfinishedPotion.RANARR, new Item(231), 38, 87.5, new Item(139)),
