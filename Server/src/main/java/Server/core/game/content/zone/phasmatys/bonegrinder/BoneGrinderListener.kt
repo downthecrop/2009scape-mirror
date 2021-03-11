@@ -20,7 +20,7 @@ private val FILL_ANIM = Animation(1649)
 private val WIND_ANIM = Animation(1648)
 private val SCOOP_ANIM = Animation(1650)
 
-class BoneGrinderOptionHandler : OptionListener() {
+class BoneGrinderListener : OptionListener() {
 
     override fun defineListeners() {
 
