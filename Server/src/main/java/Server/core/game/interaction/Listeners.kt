@@ -7,13 +7,15 @@ object Listeners {
     private val listeners = HashMap<String,(Player, Node) -> Boolean>()
 
     @JvmStatic
-    fun add(id: Int, type: Int, option: String, method: (Player,Node) -> Boolean){
-        val key = "$id:$type:${option.toLowerCase()}"
-        listeners[key] = method
+    fun add(id: Int, type: Int, option: Array<out String>, method: (Player,Node) -> Boolean){
+        for(opt in option) {
+            val key = "$id:$type:${opt.toLowerCase()}"
+            listeners[key] = method
+        }
     }
 
     @JvmStatic
-    fun add(ids: IntArray, type: Int, option: String, method: (Player,Node) -> Boolean){
+    fun add(ids: IntArray, type: Int, option: Array<out String>, method: (Player,Node) -> Boolean){
         for(id in ids){
             add(id,type,option,method)
         }
