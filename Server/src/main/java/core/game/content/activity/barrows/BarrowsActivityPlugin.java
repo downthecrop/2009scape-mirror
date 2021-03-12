@@ -4,8 +4,6 @@ import core.game.component.Component;
 import core.game.content.activity.ActivityPlugin;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DoorActionHandler;
-import core.plugin.Initializable;
-import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.interaction.Option;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -17,21 +15,24 @@ import core.game.node.entity.npc.agg.AggressiveBehavior;
 import core.game.node.entity.npc.agg.AggressiveHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.ActivityData;
+import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.node.object.GameObject;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.update.flag.context.Graphics;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.CameraContext;
-import core.net.packet.context.MinimapStateContext;
 import core.net.packet.context.CameraContext.CameraType;
+import core.net.packet.context.MinimapStateContext;
 import core.net.packet.out.CameraViewPacket;
 import core.net.packet.out.MinimapState;
-import core.plugin.PluginManager;
+import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import rs09.game.content.activity.barrows.RewardChest;
+import rs09.game.world.GameWorld;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the barrows activity plugin.

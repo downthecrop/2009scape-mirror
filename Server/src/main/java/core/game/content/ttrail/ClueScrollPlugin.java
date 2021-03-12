@@ -3,7 +3,7 @@ package core.game.content.ttrail;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;

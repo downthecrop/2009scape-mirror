@@ -1,13 +1,13 @@
 package core.game.node.entity.skill.gather;
 
 import core.cache.def.impl.ObjectDefinition;
-import core.game.node.entity.skill.gather.mining.MiningSkillPulse;
-import core.game.node.entity.skill.gather.woodcutting.WoodcuttingSkillPulse;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.gather.woodcutting.WoodcuttingSkillPulse;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.node.entity.skill.gather.mining.MiningSkillPulse;
 
 /**
  * Handles the gathering skill option handler plugin.

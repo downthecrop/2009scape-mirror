@@ -16,7 +16,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 import core.tools.RandomFunction;
 
 /**

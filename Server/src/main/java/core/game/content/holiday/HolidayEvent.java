@@ -2,7 +2,7 @@ package core.game.content.holiday;
 
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.map.zone.ZoneRestriction;

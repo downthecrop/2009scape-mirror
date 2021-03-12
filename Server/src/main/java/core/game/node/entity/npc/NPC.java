@@ -1,21 +1,14 @@
 package core.game.node.entity.npc;
 
 import core.cache.def.impl.NPCDefinition;
-import core.game.system.config.NPCConfigParser;
-import core.game.system.config.ShopParser;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.global.shop.Shop;
-import core.game.content.jobs.JobManager;
-import core.game.node.entity.skill.Skills;
-import core.game.node.entity.skill.slayer.Tasks;
-import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.interaction.Interaction;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatSpell;
 import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.equipment.DefaultCombatSpell;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.npc.agg.AggressiveBehavior;
@@ -23,21 +16,29 @@ import core.game.node.entity.npc.agg.AggressiveHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager;
 import core.game.node.entity.player.link.audio.Audio;
-import core.game.world.GameWorld;
+import core.game.node.entity.skill.Skills;
+import core.game.node.entity.skill.slayer.Tasks;
+import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.path.Pathfinder;
-import core.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.npc.NPCFaceEntity;
 import core.game.world.update.flag.npc.NPCFaceLocation;
 import core.game.world.update.flag.npc.NPCForceChat;
 import core.game.world.update.flag.npc.NPCSwitchId;
 import core.tools.RandomFunction;
+import rs09.game.content.jobs.JobManager;
+import rs09.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.system.config.NPCConfigParser;
+import rs09.game.system.config.ShopParser;
+import rs09.game.world.GameWorld;
+import rs09.game.world.repository.Repository;
 
-import static core.game.node.entity.player.info.stats.StatAttributeKeysKt.*;
+import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
+import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_ENEMIES_KILLED;
 
 /**
  * Represents a non-player character.

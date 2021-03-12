@@ -6,8 +6,8 @@ import core.game.node.entity.player.Player;
 
 import core.game.node.entity.player.link.SavedData;
 import core.game.node.entity.player.link.SpellBookManager;
-import core.game.world.GameWorld;
-import core.game.world.repository.Repository;
+import rs09.game.world.GameWorld;
+import rs09.game.world.repository.Repository;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ChildPositionContext;
 import core.net.packet.out.RepositionChild;

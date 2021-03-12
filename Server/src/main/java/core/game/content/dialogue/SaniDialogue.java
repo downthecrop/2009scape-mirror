@@ -1,10 +1,10 @@
 package core.game.content.dialogue;
 
-import core.game.system.config.ShopParser;
-import core.plugin.Initializable;
-import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
+import core.plugin.Initializable;
+import rs09.game.system.config.ShopParser;
 
 /**
  * Handles the SaniDialogue dialogue.

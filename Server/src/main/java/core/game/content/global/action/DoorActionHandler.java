@@ -8,16 +8,15 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.object.Constructed;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
-import core.game.system.SystemLogger;
-import core.game.system.config.DoorConfigLoader;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.path.Pathfinder;
+import rs09.game.system.config.DoorConfigLoader;
+import rs09.game.world.GameWorld;
 
 import java.awt.*;
 

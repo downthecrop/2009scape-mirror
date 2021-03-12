@@ -1,8 +1,8 @@
 package core.game.world.objectparser;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.node.object.GameObject;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.build.LandscapeParser;
 import core.plugin.Initializable;
 import core.plugin.Plugin;

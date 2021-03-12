@@ -1,6 +1,6 @@
 package core.game.node.entity.npc.familiar;
 
-import core.game.system.config.ItemConfigParser;
+import rs09.game.system.config.ItemConfigParser;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.summoning.SummoningScroll;
 import core.game.node.entity.skill.summoning.familiar.BurdenBeast;

@@ -1,7 +1,7 @@
 package core.game.node.entity.lock;
 
 import core.game.node.Node;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 import java.util.HashMap;
 import java.util.Map;

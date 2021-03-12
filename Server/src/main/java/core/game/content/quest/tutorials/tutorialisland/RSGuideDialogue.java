@@ -5,7 +5,7 @@ import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.plugin.Initializable;
 
 /**

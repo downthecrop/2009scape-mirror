@@ -1,12 +1,12 @@
 package core.game.system.mysql.impl;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
 import core.game.system.mysql.SQLEntryHandler;
 import core.game.system.mysql.SQLManager;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

@@ -4,7 +4,7 @@ import core.game.interaction.DestinationFlag;
 import core.game.interaction.MovementPulse;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.game.content.dialogue.FacialExpression;

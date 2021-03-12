@@ -16,7 +16,7 @@ import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
@@ -27,7 +27,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.MinimapStateContext;
 import core.net.packet.out.MinimapState;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 import core.tools.RandomFunction;
 
 /**

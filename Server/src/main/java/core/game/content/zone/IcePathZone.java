@@ -5,7 +5,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;

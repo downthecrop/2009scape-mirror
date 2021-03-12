@@ -1,6 +1,6 @@
 package core.plugin.CorePluginTypes;
 
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 
 import java.util.ArrayList;
 import java.util.List;

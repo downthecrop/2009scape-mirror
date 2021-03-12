@@ -2,7 +2,7 @@ package core.game.node.entity.skill.hunter;
 
 import core.game.node.entity.skill.hunter.bnet.BNetTypes;
 import core.game.node.entity.skill.hunter.bnet.ImplingNode;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.callback.CallBack;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;

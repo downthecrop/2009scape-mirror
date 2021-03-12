@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.fletching;
 
-import core.game.content.dialogue.SkillDialogueHandler;
+import rs09.game.content.dialogue.SkillDialogueHandler;
 import core.game.node.entity.skill.fletching.items.crossbow.LimbPulse;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;

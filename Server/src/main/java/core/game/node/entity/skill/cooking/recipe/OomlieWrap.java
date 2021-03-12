@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.cooking.recipe;
 
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.NodeUsageEvent;
 import core.game.node.entity.player.Player;

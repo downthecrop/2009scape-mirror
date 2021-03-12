@@ -9,7 +9,7 @@ import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager;
 import core.game.node.item.Item;
-import core.game.system.config.ItemConfigParser;
+import rs09.game.system.config.ItemConfigParser;
 import core.game.world.update.flag.context.Animation;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.InterfaceConfigContext;
@@ -19,7 +19,8 @@ import core.net.packet.out.Interface;
 import core.net.packet.out.InterfaceConfig;
 import core.net.packet.out.StringPacket;
 
-import static core.tools.Interfaces.*;
+import static rs09.tools.Interfaces.*;
+
 
 /**
  * Represents the weapon interface component.

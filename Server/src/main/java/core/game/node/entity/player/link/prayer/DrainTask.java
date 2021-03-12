@@ -6,7 +6,7 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.system.task.NodeTask;
 import core.game.world.map.zone.ZoneBorders;
 import core.tools.RandomFunction;
-import core.game.node.entity.skill.skillcapeperks.SkillcapePerks;
+import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
 
 /**
  * Represents an event used to drain prayer points.

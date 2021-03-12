@@ -2,12 +2,12 @@ package core.game.system.communication;
 
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.node.entity.player.Player;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.game.system.monitor.PlayerMonitor;
 import core.game.system.mysql.SQLTable;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
-import core.game.world.repository.Repository;
+import rs09.game.world.GameWorld;
+import rs09.game.world.repository.Repository;
 import core.net.amsc.MSPacketRepository;
 import core.net.amsc.WorldCommunicator;
 import core.net.packet.PacketRepository;

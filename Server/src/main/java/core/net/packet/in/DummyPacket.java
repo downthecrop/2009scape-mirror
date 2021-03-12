@@ -1,7 +1,7 @@
 package core.net.packet.in;
 
 import core.game.node.entity.player.Player;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 

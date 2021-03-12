@@ -8,7 +8,7 @@ import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBuilder;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the neitiznot zone.

@@ -1,9 +1,9 @@
 package core.game.node.entity.npc.other;
 
 import core.game.node.entity.npc.AbstractNPC;
-import core.game.system.config.NPCConfigParser;
-import core.plugin.Initializable;
 import core.game.world.map.Location;
+import core.plugin.Initializable;
+import rs09.game.system.config.NPCConfigParser;
 
 /**
  * Represents the tribesamn npc.

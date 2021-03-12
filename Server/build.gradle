@@ -3,7 +3,7 @@ apply plugin: 'application'
 
 archivesBaseName = 'server'
 
-mainClassName = 'core.Server'
+mainClassName = 'rs09.Server'
 
 compileJava {
     options.encoding = "UTF-8"
@@ -30,10 +30,10 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
 }
 
-sourceSets {
-    main.java.srcDirs = ['src/main/java/Server']
-    main.kotlin.srcDirs = ['src/main/java/Server']
-}
+/*sourceSets {
+    main.java.srcDirs = ['src/main/java']
+    main.kotlin.srcDirs = ['src/main/kotlin']
+}*/
 
 jar {
     manifest {

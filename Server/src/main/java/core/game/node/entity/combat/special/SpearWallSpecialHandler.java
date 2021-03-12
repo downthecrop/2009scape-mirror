@@ -6,7 +6,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.InteractionType;
-import core.game.node.entity.combat.handlers.MeleeSwingHandler;
+import rs09.game.node.entity.combat.handlers.MeleeSwingHandler;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;

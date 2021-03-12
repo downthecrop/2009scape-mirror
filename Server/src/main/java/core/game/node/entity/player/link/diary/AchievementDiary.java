@@ -3,11 +3,10 @@ package core.game.node.entity.player.link.diary;
 import core.cache.def.impl.NPCDefinition;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import rs09.game.node.entity.player.link.diary.DiaryLevel;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 
 /**

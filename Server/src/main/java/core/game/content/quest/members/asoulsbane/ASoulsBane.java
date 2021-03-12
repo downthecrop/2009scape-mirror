@@ -3,7 +3,8 @@ package core.game.content.quest.members.asoulsbane;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
-import core.plugin.PluginManager;
+import rs09.game.content.quest.members.asoulsbane.SoulsBaneLaunaDialogue;
+import rs09.plugin.PluginManager;
 
 /**
  * Author: afaroutdude

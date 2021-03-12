@@ -10,7 +10,7 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;

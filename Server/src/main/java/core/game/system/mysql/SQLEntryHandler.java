@@ -1,6 +1,6 @@
 package core.game.system.mysql;
 
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;

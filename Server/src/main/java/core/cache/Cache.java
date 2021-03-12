@@ -4,13 +4,13 @@ import java.io.File;
 import java.io.RandomAccessFile;
 import java.nio.ByteBuffer;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.cache.def.impl.AnimationDefinition;
 import core.cache.def.impl.GraphicDefinition;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.ObjectDefinition;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 
 /**
  * A cache reader.

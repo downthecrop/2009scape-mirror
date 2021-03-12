@@ -33,14 +33,14 @@ import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 import core.tools.RandomFunction;
 
 /**

@@ -13,7 +13,7 @@ import core.game.node.entity.state.EntityState;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Represents the Unicorn Stallion familiar.

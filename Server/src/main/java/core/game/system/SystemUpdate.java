@@ -1,10 +1,10 @@
 package core.game.system;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
-import core.game.world.repository.Repository;
+import rs09.game.world.GameWorld;
+import rs09.game.world.repository.Repository;
 
 import java.util.Iterator;
 import java.util.concurrent.Executors;

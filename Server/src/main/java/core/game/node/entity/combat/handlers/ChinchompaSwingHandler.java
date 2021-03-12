@@ -1,6 +1,5 @@
 package core.game.node.entity.combat.handlers;
 
-import core.game.node.entity.skill.Skills;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
@@ -11,9 +10,11 @@ import core.game.node.entity.combat.equipment.Weapon;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.combat.handlers.RangeSwingHandler;
 
 import java.util.List;
 

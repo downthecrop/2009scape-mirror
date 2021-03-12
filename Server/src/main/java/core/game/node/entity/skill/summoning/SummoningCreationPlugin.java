@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Represents a component plugin used to handle the summoning creation of a

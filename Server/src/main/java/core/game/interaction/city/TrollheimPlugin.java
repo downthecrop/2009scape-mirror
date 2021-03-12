@@ -20,13 +20,13 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.CameraContext;
@@ -34,7 +34,7 @@ import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Represents the plugin used to handle all trollheim node interations.

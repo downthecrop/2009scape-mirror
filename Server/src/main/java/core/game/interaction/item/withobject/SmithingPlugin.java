@@ -13,7 +13,7 @@ import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Represents the option handler used for smithing.

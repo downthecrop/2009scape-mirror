@@ -2,11 +2,11 @@ package core.game.node.entity.impl;
 
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
-import core.game.node.entity.combat.CombatPulse;
 import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.node.entity.combat.CombatPulse;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents an entity's pulse manager.

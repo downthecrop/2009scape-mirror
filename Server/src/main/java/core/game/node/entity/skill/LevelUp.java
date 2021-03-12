@@ -5,7 +5,7 @@ import core.game.content.global.Skillcape;
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.MusicContext;
 import core.net.packet.out.MusicPacket;

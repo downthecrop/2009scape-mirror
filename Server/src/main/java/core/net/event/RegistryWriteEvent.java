@@ -1,7 +1,7 @@
 package core.net.event;
 
 import core.cache.misc.buffer.ByteBufferUtils;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.net.Constants;
 import core.net.IoSession;
 import core.net.IoWriteEvent;

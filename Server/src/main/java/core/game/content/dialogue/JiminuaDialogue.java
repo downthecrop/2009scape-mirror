@@ -1,14 +1,14 @@
 package core.game.content.dialogue;
 
 import core.plugin.Initializable;
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.npc.NPC;
 import core.game.node.item.Item;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Represents the jiminua dialogue plugin.

@@ -2,9 +2,9 @@ package core.game.node.object;
 
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.LandscapeParser;

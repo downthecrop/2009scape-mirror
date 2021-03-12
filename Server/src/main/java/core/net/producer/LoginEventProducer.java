@@ -4,8 +4,8 @@ import core.net.EventProducer;
 import core.net.IoReadEvent;
 import core.net.IoSession;
 import core.net.IoWriteEvent;
-import core.net.event.LoginReadEvent;
 import core.net.event.LoginWriteEvent;
+import rs09.net.event.LoginReadEvent;
 
 import java.nio.ByteBuffer;
 

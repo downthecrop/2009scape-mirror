@@ -1,7 +1,7 @@
 package core.game.system;
 
 import core.game.system.security.EncryptionManager;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 /**
  * Manages the "game system" states, such as updating or terminating.

@@ -1,7 +1,7 @@
 package core.game.content.activity.bountyhunter;
 
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 /**
  * Holds a player's bounty hunter data.

@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.slayer;
 
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
 import core.game.content.global.Skillcape;

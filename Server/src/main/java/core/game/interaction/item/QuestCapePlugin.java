@@ -1,12 +1,12 @@
 package core.game.interaction.item;
 
 import core.cache.def.impl.ItemDefinition;
-import core.game.content.global.action.EquipHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.interaction.Listeners;
 
 /**
  * Represents the plugin used for the quest cape and hood item.
@@ -29,7 +29,7 @@ public final class QuestCapePlugin extends OptionHandler {
 			player.getPacketDispatch().sendMessage("You cannot wear this " + node.getName().toLowerCase() + " yet.");
 			return true;
 		}
-		return EquipHandler.SINGLETON.handle(player, node, option);
+		return Listeners.run(node.getId(),0,"equip",player,node);
 	}
 
 	@Override

@@ -6,7 +6,7 @@ import core.game.interaction.NodeUsageEvent;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.object.GameObject;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;

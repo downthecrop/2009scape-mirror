@@ -4,9 +4,9 @@ import core.cache.def.impl.ObjectDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.system.config.ShopParser;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.system.config.ShopParser;
 
 /**
  * Represents the buy crate option plugin for the seers village city.

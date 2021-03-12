@@ -3,8 +3,10 @@ package core.game.content.global;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 
-import static core.tools.Interfaces.*;
-import static core.tools.Items.*;
+import static rs09.tools.Interfaces.DARKNESS_LIGHT_97;
+import static rs09.tools.Interfaces.DARKNESS_MEDIUM_98;
+import static rs09.tools.Items.*;
+
 
 /**
  * Represents a light source.

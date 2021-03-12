@@ -3,7 +3,7 @@ package core.game.node.entity.skill.summoning.familiar;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.tools.RandomFunction;
 
 /**

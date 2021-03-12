@@ -4,7 +4,7 @@ import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.container.Container;
 import core.game.container.access.InterfaceContainer;
-import core.game.system.config.ItemConfigParser;
+import rs09.game.system.config.ItemConfigParser;
 import core.game.node.entity.skill.summoning.SummoningPouch;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;

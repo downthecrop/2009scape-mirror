@@ -3,7 +3,7 @@ package core.game.content.holiday.halloween;
 import java.util.ArrayList;
 import java.util.List;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.component.Component;
 import core.plugin.Initializable;
@@ -37,14 +37,14 @@ import core.game.node.object.GameObject;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.net.packet.PacketRepository;
@@ -52,7 +52,7 @@ import core.net.packet.context.CameraContext;
 import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 import core.tools.RandomFunction;
 
 /**

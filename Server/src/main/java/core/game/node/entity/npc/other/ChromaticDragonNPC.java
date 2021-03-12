@@ -1,16 +1,16 @@
 package core.game.node.entity.npc.other;
 
 import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.equipment.SwitchAttack;
 import core.game.node.entity.combat.handlers.DragonfireSwingHandler;
-import core.game.node.entity.combat.handlers.MultiSwingHandler;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
-import core.plugin.Initializable;
 import core.game.world.update.flag.context.Graphics;
+import core.plugin.Initializable;
+import rs09.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.node.entity.combat.handlers.MultiSwingHandler;
 
 /**
  * Handles a chromatic dragon (green, blue, red, ..).

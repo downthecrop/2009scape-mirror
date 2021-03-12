@@ -12,7 +12,7 @@ import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * @author Tyler Telis

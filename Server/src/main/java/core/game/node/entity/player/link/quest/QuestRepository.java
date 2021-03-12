@@ -2,7 +2,7 @@ package core.game.node.entity.player.link.quest;
 
 import core.game.node.entity.player.Player;
 
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 

@@ -1,8 +1,8 @@
 package core.game.node.entity.skill.herblore;
 
 import core.plugin.Initializable;
-import core.game.content.dialogue.SkillDialogueHandler;
-import core.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
+import rs09.game.content.dialogue.SkillDialogueHandler;
+import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;

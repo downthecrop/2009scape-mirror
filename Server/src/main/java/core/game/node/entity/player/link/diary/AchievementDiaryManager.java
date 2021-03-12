@@ -2,15 +2,11 @@ package core.game.node.entity.player.link.diary;
 
 import core.game.component.Component;
 import core.game.container.impl.EquipmentContainer;
-import core.game.system.SystemLogger;
+import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.smithing.smelting.Bar;
+import core.game.node.item.Item;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-import core.game.node.entity.skill.smithing.smelting.Bar;
-import core.game.node.entity.player.Player;
-
-import core.game.node.item.Item;
-
-import java.nio.ByteBuffer;
 
 /**
  * Manages the achievement diary of a player.

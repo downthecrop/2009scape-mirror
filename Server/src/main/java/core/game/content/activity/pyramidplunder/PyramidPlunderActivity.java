@@ -6,7 +6,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
-import core.plugin.PluginManager;
+import rs09.game.content.activity.pyramidplunder.PlunderSession;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the Pyramid plunder activity.

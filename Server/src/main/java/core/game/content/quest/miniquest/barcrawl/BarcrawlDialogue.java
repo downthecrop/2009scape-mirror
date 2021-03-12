@@ -2,7 +2,7 @@ package core.game.content.quest.miniquest.barcrawl;
 
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
 

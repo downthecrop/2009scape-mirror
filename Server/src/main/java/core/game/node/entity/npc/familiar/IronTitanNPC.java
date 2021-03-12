@@ -1,18 +1,18 @@
 package core.game.node.entity.npc.familiar;
 
-import core.game.node.entity.skill.summoning.familiar.Familiar;
-import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.equipment.SwitchAttack;
 import core.game.node.entity.combat.equipment.WeaponInterface;
-import core.game.node.entity.combat.handlers.MultiSwingHandler;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.summoning.familiar.Familiar;
+import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.combat.handlers.MultiSwingHandler;
 
 /**
  * Represents the Iron Titan familiar.

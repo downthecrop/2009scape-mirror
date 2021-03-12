@@ -6,13 +6,14 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
-import core.game.system.SystemLogger;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
 import core.game.world.update.flag.player.FaceLocationFlag;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.InteractionOptionContext;
 import core.net.packet.out.InteractionOption;
+import rs09.game.interaction.Listeners;
+import rs09.game.system.SystemLogger;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles interaction between nodes.

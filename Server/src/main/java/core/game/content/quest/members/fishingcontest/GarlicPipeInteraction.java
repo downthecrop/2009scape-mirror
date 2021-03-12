@@ -9,7 +9,7 @@ import core.game.node.object.GameObject;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.content.quest.PluginInteraction;
 import core.game.content.quest.PluginInteractionManager;
 

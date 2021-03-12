@@ -3,7 +3,7 @@ package core.game.content.quest.witchs_house;
 
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 
 public final class ExperimentSession {

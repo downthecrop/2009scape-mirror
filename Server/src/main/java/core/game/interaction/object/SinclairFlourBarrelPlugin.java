@@ -1,7 +1,7 @@
 package core.game.interaction.object;
 
 import core.cache.def.impl.ObjectDefinition;
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -12,7 +12,7 @@ import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 
 /**

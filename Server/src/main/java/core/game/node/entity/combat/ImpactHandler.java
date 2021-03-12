@@ -1,6 +1,6 @@
 package core.game.node.entity.combat;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.container.impl.EquipmentContainer;
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.skill.Skills;
@@ -12,7 +12,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.zone.ZoneType;
 
 import java.util.HashMap;

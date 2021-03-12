@@ -1,6 +1,6 @@
 package core.game.content.activity.mta;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.interaction.Option;
 import core.game.node.Node;
 import core.game.node.entity.Entity;

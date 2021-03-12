@@ -9,7 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the shelves in the kitchen room.

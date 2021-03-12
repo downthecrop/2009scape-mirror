@@ -1,7 +1,7 @@
 package core.net.lobby;
 
-import core.game.world.GameWorld;
-import core.game.world.repository.Repository;
+import rs09.game.world.GameWorld;
+import rs09.game.world.repository.Repository;
 
 /**
  * Represents a world's definition.

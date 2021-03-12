@@ -2,7 +2,7 @@ package core.game.node.entity.player.link.request;
 
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents a managing class for requests of a player.

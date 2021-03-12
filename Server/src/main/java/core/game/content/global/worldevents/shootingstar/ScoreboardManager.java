@@ -1,8 +1,8 @@
 package core.game.content.global.worldevents.shootingstar;
 
 import core.game.node.entity.player.Player;
-import core.game.system.SystemLogger;
-import core.game.world.GameWorld;
+import rs09.game.system.SystemLogger;
+import rs09.game.world.GameWorld;
 
 import java.util.ArrayList;
 import java.util.List;

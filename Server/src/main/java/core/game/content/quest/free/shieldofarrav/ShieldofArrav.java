@@ -1,11 +1,11 @@
 package core.game.content.quest.free.shieldofarrav;
 
-import core.game.content.dialogue.KingRoaldDialogue;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
-import core.plugin.PluginManager;
+import rs09.game.content.dialogue.KingRoaldDialogue;
+import rs09.plugin.PluginManager;
 
 /**
  * Represents the shield of arrav quest.

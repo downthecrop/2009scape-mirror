@@ -10,20 +10,20 @@ import core.game.container.ContainerListener;
 import core.game.container.access.BitregisterAssembler;
 import core.game.container.access.InterfaceContainer;
 import core.game.container.impl.EquipmentContainer;
-import core.game.content.global.action.EquipHandler;
-import core.game.interaction.Listeners;
 import core.game.interaction.OptionHandler;
 import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.content.global.action.EquipHandler;
+import rs09.game.interaction.Listeners;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents the equipment interface.

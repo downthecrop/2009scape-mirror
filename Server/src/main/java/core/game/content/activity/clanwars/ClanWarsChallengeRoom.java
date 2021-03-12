@@ -12,7 +12,7 @@ import core.game.world.map.zone.ZoneRestriction;
 import core.game.world.map.zone.impl.WildernessZone;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the clan wars challenge room.

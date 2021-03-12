@@ -22,7 +22,7 @@ import core.game.node.item.ItemPlugin;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -35,7 +35,7 @@ import core.net.packet.context.CameraContext;
 import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Represents the draynor bank robbery cutscene plugin.

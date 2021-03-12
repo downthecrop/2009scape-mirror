@@ -11,7 +11,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.object.GameObject;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.plugin.Plugin;
 
 /**

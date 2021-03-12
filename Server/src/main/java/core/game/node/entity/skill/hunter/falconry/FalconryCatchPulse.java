@@ -9,9 +9,9 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.HintIconManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.tools.RandomFunction;
 
 /**

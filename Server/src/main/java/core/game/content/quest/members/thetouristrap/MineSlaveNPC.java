@@ -1,7 +1,7 @@
 package core.game.content.quest.members.thetouristrap;
 
 import core.game.node.entity.npc.AbstractNPC;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
 

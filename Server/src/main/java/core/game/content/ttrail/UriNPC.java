@@ -9,7 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 import core.tools.RandomFunction;
 
 /**

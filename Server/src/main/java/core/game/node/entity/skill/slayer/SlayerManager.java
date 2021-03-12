@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.slayer;
 
 import core.cache.def.impl.NPCDefinition;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import core.game.node.entity.skill.Skills;

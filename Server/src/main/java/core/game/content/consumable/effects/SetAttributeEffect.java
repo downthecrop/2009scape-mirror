@@ -1,7 +1,7 @@
 package core.game.content.consumable.effects;
 
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.content.consumable.ConsumableEffect;
 
 public class SetAttributeEffect extends ConsumableEffect {

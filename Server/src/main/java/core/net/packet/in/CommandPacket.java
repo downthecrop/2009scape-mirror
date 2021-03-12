@@ -1,9 +1,9 @@
 package core.net.packet.in;
 
 import core.game.node.entity.player.Player;
-import core.game.system.command.CommandSystem;
+import rs09.game.system.command.CommandSystem;
 import core.game.system.monitor.PlayerMonitor;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 

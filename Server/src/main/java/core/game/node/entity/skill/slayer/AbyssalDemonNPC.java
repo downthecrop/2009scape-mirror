@@ -2,8 +2,8 @@ package core.game.node.entity.skill.slayer;
 
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
-import core.game.node.entity.combat.CombatSwingHandler;
-import core.game.node.entity.combat.handlers.MeleeSwingHandler;
+import rs09.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.node.entity.combat.handlers.MeleeSwingHandler;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Direction;

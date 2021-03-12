@@ -3,8 +3,8 @@ package core.game.node.entity.skill;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.prayer.PrayerType;
-import core.game.world.GameWorld;
-import core.game.node.entity.skill.skillcapeperks.SkillcapePerks;
+import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the skill restoration data.

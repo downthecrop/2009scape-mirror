@@ -2,7 +2,8 @@ package core.game.system.command;
 
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
-import core.game.world.GameWorld;
+import rs09.game.system.command.CommandPlugin;
+import rs09.game.world.GameWorld;
 
 import java.util.ArrayList;
 import java.util.List;

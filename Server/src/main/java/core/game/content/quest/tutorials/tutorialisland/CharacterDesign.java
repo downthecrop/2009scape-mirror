@@ -7,7 +7,7 @@ import core.game.node.entity.player.link.appearance.Gender;
 import core.game.node.entity.player.link.music.MusicEntry;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.net.amsc.MSPacketRepository;
 import core.net.amsc.WorldCommunicator;
 import core.tools.RandomFunction;

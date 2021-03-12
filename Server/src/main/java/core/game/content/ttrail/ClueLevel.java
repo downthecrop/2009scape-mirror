@@ -8,7 +8,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.ChanceItem;
 import core.game.node.item.Item;
 import core.game.node.item.WeightedChanceItem;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.tools.RandomFunction;
 
 import java.text.NumberFormat;

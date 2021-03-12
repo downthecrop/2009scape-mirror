@@ -1,6 +1,6 @@
 package core.net.lobby;
 
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.net.IoSession;
 import core.net.packet.IoBuffer;
 

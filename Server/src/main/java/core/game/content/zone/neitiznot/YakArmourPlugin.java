@@ -1,7 +1,7 @@
 package core.game.content.zone.neitiznot;
 
-import core.game.content.dialogue.SkillDialogueHandler;
-import core.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
+import rs09.game.content.dialogue.SkillDialogueHandler;
+import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
 import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.crafting.armour.LeatherCrafting;

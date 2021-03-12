@@ -1,6 +1,7 @@
 package core.game.component;
 
-import static core.tools.Interfaces.*;
+
+import static rs09.tools.Interfaces.*;
 
 /**
  * Represents an interface type.

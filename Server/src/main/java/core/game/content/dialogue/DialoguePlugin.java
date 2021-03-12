@@ -7,11 +7,12 @@ import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
 import core.plugin.PluginManifest;
 import core.plugin.PluginType;
+import rs09.game.content.dialogue.DialogueFile;
 
 import java.util.ArrayList;
 
-import static core.tools.DialogueConstKt.DIALOGUE_INITIAL_OPTIONS_HANDLE;
-import static core.tools.DialogueConstKt.START_DIALOGUE;
+import static rs09.tools.DialogueConstKt.DIALOGUE_INITIAL_OPTIONS_HANDLE;
+import static rs09.tools.DialogueConstKt.START_DIALOGUE;
 
 /**
  * Represents a dialogue plugin.
@@ -73,7 +74,7 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 	/**
 	 * The current dialogue stage.
 	 */
-	protected int stage;
+	public int stage;
 
 	/**
 	 * If the dialogue is finished.

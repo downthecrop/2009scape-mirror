@@ -3,7 +3,7 @@ package core.game.node.entity.player.link.music;
 import core.game.node.entity.player.Player;
 
 import core.game.node.entity.player.link.emote.Emotes;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.MusicContext;
 import core.net.packet.context.StringContext;

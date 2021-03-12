@@ -1,8 +1,9 @@
 package core.game.content.dialogue;
 
 import core.game.node.entity.player.Player;
-import core.plugin.Initializable;
 import core.game.node.entity.player.link.RunScript;
+import core.plugin.Initializable;
+import rs09.game.content.dialogue.SkillDialogueHandler;
 
 /**
  * Represents the dialogue plugin used to automatically handle skill dialogues  with creation amounts.

@@ -1,8 +1,8 @@
 package core.game.node.entity.skill.gather.mining;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.node.item.WeightedChanceItem;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -449,7 +449,7 @@ public enum MiningNode{
         }
         int full,empty,respawnRate,reward,level;
         double rate,experience;
-        byte identifier;
+        public byte identifier;
 
         MiningNode(int full, int empty, byte identifier){
             this.full = full;

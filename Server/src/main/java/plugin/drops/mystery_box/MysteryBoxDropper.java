@@ -4,7 +4,7 @@ import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.plugin.PluginManifest;
-import core.tools.Items;
+import rs09.tools.Items;
 import core.tools.RandomFunction;
 import plugin.drops.DropPlugin;
 import plugin.drops.DropPlugins;

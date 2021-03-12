@@ -3,15 +3,15 @@ package core.game.content.ttrail;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.CombatSpell;
 import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.equipment.SwitchAttack;
-import core.game.node.entity.combat.handlers.MultiSwingHandler;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Plugin;
+import rs09.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.node.entity.combat.handlers.MultiSwingHandler;
 
 /**
  * Handles saradomin npc.

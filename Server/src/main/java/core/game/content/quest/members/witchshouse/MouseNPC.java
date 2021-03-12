@@ -2,7 +2,7 @@ package core.game.content.quest.members.witchshouse;
 
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 
 /**

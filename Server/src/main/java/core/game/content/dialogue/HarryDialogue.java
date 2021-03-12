@@ -1,6 +1,6 @@
 package core.game.content.dialogue;
 
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.node.entity.npc.NPC;
 import core.game.node.item.Item;
 import core.plugin.Initializable;

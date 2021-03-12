@@ -5,7 +5,7 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.game.world.map.Location;
 

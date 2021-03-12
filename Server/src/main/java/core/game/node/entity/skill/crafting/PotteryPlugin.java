@@ -2,8 +2,8 @@ package core.game.node.entity.skill.crafting;
 
 import core.cache.def.impl.ObjectDefinition;
 import core.plugin.Initializable;
-import core.game.content.dialogue.SkillDialogueHandler;
-import core.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
+import rs09.game.content.dialogue.SkillDialogueHandler;
+import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
 import core.game.node.entity.skill.crafting.pottery.FirePotteryPulse;
 import core.game.node.entity.skill.crafting.pottery.PotteryItem;
 import core.game.node.entity.skill.crafting.pottery.PotteryPulse;

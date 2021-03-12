@@ -1,7 +1,7 @@
 package core.net.event;
 
-import core.game.system.SystemLogger;
-import core.game.world.GameWorld;
+import rs09.game.system.SystemLogger;
+import rs09.game.world.GameWorld;
 import core.net.IoReadEvent;
 import core.net.IoSession;
 import core.net.packet.IncomingPacket;

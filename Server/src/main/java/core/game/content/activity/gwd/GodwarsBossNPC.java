@@ -3,9 +3,7 @@ package core.game.content.activity.gwd;
 import core.game.content.global.BossKillCounter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
-import core.game.node.entity.combat.CombatPulse;
 import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
@@ -13,11 +11,13 @@ import core.game.node.entity.npc.agg.AggressiveBehavior;
 import core.game.node.entity.npc.agg.AggressiveHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.prayer.PrayerType;
-import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.zone.ZoneBorders;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.combat.CombatPulse;
+import rs09.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles a god wars boss NPC.

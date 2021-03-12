@@ -9,7 +9,7 @@ import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.player.link.TeleportManager.TeleportType;
 import core.game.node.item.Item;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;

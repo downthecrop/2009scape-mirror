@@ -4,7 +4,7 @@ import core.game.content.ame.AntiMacroEvent;
 import core.game.content.ame.AntiMacroNPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 
 /**
  * Handles the quiz master npc.

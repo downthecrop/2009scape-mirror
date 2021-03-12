@@ -1,7 +1,7 @@
 package core.gui.tab;
 
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.gui.ConsoleTab;
 import core.gui.component.PlayerViewer;
 

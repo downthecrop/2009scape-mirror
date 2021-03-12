@@ -2,7 +2,7 @@ package core.game.content.ame.events.quizmaster;
 
 import java.nio.ByteBuffer;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.content.ame.AntiMacroEvent;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
@@ -14,7 +14,7 @@ import core.net.packet.context.CameraContext;
 import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.Initializable;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the quiz master random event.

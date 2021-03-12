@@ -3,8 +3,6 @@ package core.game.content.ame.events.evilchicken;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.CombatSwingHandler;
-import core.game.node.entity.combat.handlers.MagicSwingHandler;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
@@ -13,6 +11,8 @@ import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.node.entity.combat.handlers.MagicSwingHandler;
 
 /**
  * Handles the evil chicken NPC.

@@ -5,7 +5,7 @@ import core.game.content.activity.CutscenePlugin;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.CameraContext;
 import core.net.packet.context.CameraContext.CameraType;

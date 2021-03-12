@@ -12,7 +12,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * The level 84 Moss Giant in Glarial's tomb.

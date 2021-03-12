@@ -4,7 +4,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
-import plugin.ai.general.GeneralBotCreator;
+import rs09.game.ai.general.GeneralBotCreator;
 
 /**
  * Handles the idle packet handler.

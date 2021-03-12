@@ -3,7 +3,7 @@ package core.game.content.activity.duel;
 import java.util.ArrayList;
 import java.util.List;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.container.Container;
 import core.game.container.impl.EquipmentContainer;
@@ -23,7 +23,7 @@ import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.zone.MapZone;

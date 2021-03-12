@@ -5,9 +5,9 @@ import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 /**
  * @author Tyler Telis

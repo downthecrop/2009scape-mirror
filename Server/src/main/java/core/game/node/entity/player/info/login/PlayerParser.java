@@ -1,18 +1,12 @@
 package core.game.node.entity.player.info.login;
 
-import core.ServerConstants;
-import core.game.node.entity.combat.CombatSpell;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.SpellBookManager;
-import core.game.node.entity.player.link.emote.Emotes;
-import core.game.system.SystemLogger;
-import core.game.world.map.Location;
+import rs09.ServerConstants;
+import rs09.game.node.entity.player.info.login.PlayerSaveParser;
+import rs09.game.node.entity.player.info.login.PlayerSaver;
+import rs09.game.system.SystemLogger;
 
 import java.io.*;
-import java.nio.ByteBuffer;
-import java.nio.channels.FileChannel;
-import java.nio.channels.FileChannel.MapMode;
-import java.util.Arrays;
 
 /**
  * Class used to abstract the process of loading a player save.

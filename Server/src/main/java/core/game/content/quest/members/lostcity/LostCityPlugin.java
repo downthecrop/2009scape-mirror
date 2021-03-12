@@ -4,21 +4,21 @@ import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.content.dialogue.FacialExpression;
 import core.game.content.global.action.DoorActionHandler;
-import core.game.content.global.action.EquipHandler;
-import core.game.node.entity.skill.gather.GatheringSkillPulse;
-import core.game.node.entity.skill.gather.SkillingTool;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.TeleportManager.TeleportType;
 import core.game.node.entity.player.link.quest.Quest;
+import core.game.node.entity.skill.gather.GatheringSkillPulse;
+import core.game.node.entity.skill.gather.SkillingTool;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
+import rs09.game.interaction.Listeners;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the lost city quest.
@@ -94,7 +94,7 @@ public final class LostCityPlugin extends OptionHandler {
 				player.getPacketDispatch().sendMessage("You need to have completed the Lost City quest in order to wield that weapon.");
 				return true;
 			}
-			return EquipHandler.SINGLETON.handle(player, node, option);
+			return Listeners.run(node.getId(),0,"equip",player,node);
 		}
 		return true;
 	}

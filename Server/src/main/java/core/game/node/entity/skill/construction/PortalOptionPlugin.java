@@ -9,8 +9,12 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
 import core.game.node.object.GameObject;
-import core.game.world.repository.Repository;
-import core.plugin.*;
+import core.plugin.Initializable;
+import core.plugin.Plugin;
+import core.plugin.PluginManifest;
+import core.plugin.PluginType;
+import rs09.game.world.repository.Repository;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the house portal options.

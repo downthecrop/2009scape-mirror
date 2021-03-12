@@ -4,7 +4,7 @@ import core.game.node.entity.player.Player;
 import core.game.system.communication.ClanRank;
 import core.game.system.communication.ClanRepository;
 import core.game.system.communication.CommunicationInfo;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.net.amsc.MSPacketRepository;
 import core.net.amsc.WorldCommunicator;
 import core.net.packet.IncomingPacket;

@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.ClientInfo;
 import core.game.node.entity.player.info.login.Response;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.net.producer.HSEventProducer;
 import core.net.producer.LoginEventProducer;
 

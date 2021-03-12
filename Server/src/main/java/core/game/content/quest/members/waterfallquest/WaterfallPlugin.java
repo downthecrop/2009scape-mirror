@@ -27,7 +27,7 @@ import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Master plugin file for the Waterfall quest.

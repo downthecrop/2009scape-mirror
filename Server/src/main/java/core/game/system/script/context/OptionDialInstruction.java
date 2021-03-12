@@ -1,7 +1,7 @@
 package core.game.system.script.context;
 
 import core.game.node.entity.player.Player;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.game.system.script.ParamCall;
 import core.game.system.script.ScriptCompiler;
 import core.game.system.script.ScriptContext;

@@ -5,20 +5,20 @@ import core.cache.def.impl.ObjectDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
-import core.game.system.config.NPCConfigParser;
-import core.plugin.Initializable;
-import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.node.item.GroundItem;
 import core.game.node.item.Item;
 import core.game.node.item.ItemPlugin;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
+import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.game.system.config.NPCConfigParser;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the clue scroll options.

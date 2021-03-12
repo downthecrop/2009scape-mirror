@@ -1,8 +1,8 @@
 package core.cache.def.impl;
 
 import core.cache.Cache;
-import core.game.system.SystemLogger;
-import core.game.world.GameWorld;
+import rs09.game.system.SystemLogger;
+import rs09.game.world.GameWorld;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;

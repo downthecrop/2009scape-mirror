@@ -1,13 +1,10 @@
 package core.game.content.quest.free.shieldofarrav;
 
-import java.util.List;
-
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.component.Component;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DoorActionHandler;
-import core.game.content.global.action.PickupHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -20,9 +17,12 @@ import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
-import core.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
+import rs09.game.content.global.action.PickupHandler;
+import rs09.game.world.repository.Repository;
+
+import java.util.List;
 
 /**
  * Represents the shield of arrav plugin.

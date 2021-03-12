@@ -1,7 +1,7 @@
 package core.game.system.communication;
 
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents a player in a clan chat.

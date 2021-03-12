@@ -9,7 +9,7 @@ import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.update.flag.context.Animation;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 

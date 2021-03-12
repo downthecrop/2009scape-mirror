@@ -1,7 +1,7 @@
 package core.game.node.item;
 
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 
 /**

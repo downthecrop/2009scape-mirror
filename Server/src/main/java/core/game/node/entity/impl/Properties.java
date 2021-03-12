@@ -3,7 +3,6 @@ package core.game.node.entity.impl;
 import core.game.container.Container;
 import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.Entity;
-import core.game.node.entity.combat.CombatPulse;
 import core.game.node.entity.combat.CombatSpell;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.equipment.ArmourSet;
@@ -11,10 +10,11 @@ import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.system.config.ItemConfigParser;
-import core.game.system.config.NPCConfigParser;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
+import rs09.game.node.entity.combat.CombatPulse;
+import rs09.game.system.config.ItemConfigParser;
+import rs09.game.system.config.NPCConfigParser;
 
 /**
  * Holds an entity's properties.

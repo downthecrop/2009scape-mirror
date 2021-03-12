@@ -12,7 +12,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -2,18 +2,20 @@ package core.game.node.entity.player.link;
 
 import core.game.component.Component;
 import core.game.component.InterfaceType;
+import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
-import core.game.system.SystemLogger;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.InterfaceContext;
 import core.net.packet.context.WindowsPaneContext;
 import core.net.packet.out.CloseInterface;
 import core.net.packet.out.Interface;
 import core.net.packet.out.WindowsPane;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
+import rs09.game.system.SystemLogger;
+import rs09.tools.Components;
 
-import static core.tools.Interfaces.*;
+import static rs09.tools.Interfaces.*;
+
 
 /**
  * Manages a player's interfaces.
@@ -772,7 +774,7 @@ public final class InterfaceManager {
 	 */
 	public int getWindowPaneId() {
 		if (windowsPane == null) {
-			return TOPLEVEL_548;
+			return Components.toplevel_548;
 		}
 		return windowsPane.getId();
 	}

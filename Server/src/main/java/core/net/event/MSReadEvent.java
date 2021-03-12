@@ -1,6 +1,6 @@
 package core.net.event;
 
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.net.IoReadEvent;
 import core.net.IoSession;
 import core.net.amsc.MSPacketRepository;

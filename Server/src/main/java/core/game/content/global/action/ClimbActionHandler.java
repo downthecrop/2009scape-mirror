@@ -1,14 +1,14 @@
 package core.game.content.global.action;
 
 import core.game.container.impl.EquipmentContainer;
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.object.GameObject;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;

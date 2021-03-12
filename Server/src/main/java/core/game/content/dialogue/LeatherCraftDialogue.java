@@ -2,7 +2,7 @@ package core.game.content.dialogue;
 
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.game.node.entity.skill.crafting.armour.DragonCraftPulse;
 import core.game.node.entity.skill.crafting.armour.HardCraftPulse;
 import core.game.node.entity.skill.crafting.armour.LeatherCrafting;

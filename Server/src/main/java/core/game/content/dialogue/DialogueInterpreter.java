@@ -3,8 +3,6 @@ package core.game.content.dialogue;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
 import core.game.component.Component;
-import core.game.system.SystemLogger;
-import core.game.system.config.ItemConfigParser;
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
@@ -18,13 +16,17 @@ import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 import core.plugin.PluginManifest;
 import core.plugin.PluginType;
+import rs09.game.content.dialogue.DialogueFile;
+import rs09.game.content.dialogue.EmptyPlugin;
+import rs09.game.system.config.ItemConfigParser;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static core.tools.DialogueConstKt.END_DIALOGUE;
+import static rs09.tools.DialogueConstKt.END_DIALOGUE;
+
 
 /**
  * Handles the dialogues.
@@ -137,7 +139,7 @@ public final class DialogueInterpreter {
         return true;
     }
 
-    public void open(DialogueFile file,Object... args){
+    public void open(DialogueFile file, Object... args){
         this.dialogue = new EmptyPlugin(player,file);
         this.dialogue.open(args);
     }

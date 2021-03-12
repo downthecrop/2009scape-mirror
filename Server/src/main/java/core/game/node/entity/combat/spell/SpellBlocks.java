@@ -1,7 +1,7 @@
 package core.game.node.entity.combat.spell;
 
 import core.game.node.Node;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -6,7 +6,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the VarrockEastBartenderDialogue dialogue.

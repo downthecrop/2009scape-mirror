@@ -1,29 +1,28 @@
 package core.cache.def.impl;
 
-import java.nio.ByteBuffer;
-import java.text.DecimalFormat;
-import java.util.HashMap;
-import java.util.Map;
-
-import core.game.system.SystemLogger;
-import core.game.system.config.ItemConfigParser;
-import core.plugin.Plugin;
-import core.tools.StringUtils;
 import core.cache.Cache;
 import core.cache.def.Definition;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.container.Container;
-import core.game.ge.GrandExchangeDatabase;
 import core.game.content.global.action.DropItemHandler;
-import core.game.content.global.action.EquipHandler;
-import core.game.node.entity.skill.Skills;
+import core.game.ge.GrandExchangeDatabase;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.item.ItemPlugin;
 import core.net.packet.PacketRepository;
 import core.net.packet.out.WeightUpdate;
+import core.plugin.Plugin;
+import core.tools.StringUtils;
+import rs09.game.system.SystemLogger;
+import rs09.game.system.config.ItemConfigParser;
+
+import java.nio.ByteBuffer;
+import java.text.DecimalFormat;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Represents an item's definitions.
@@ -279,10 +278,6 @@ public class ItemDefinition extends Definition<Item> {
 		setOptionHandler("destroy", handler);
 		setOptionHandler("dissolve", handler);
 		setOptionHandler("drop", handler);
-		final EquipHandler equipHandler = EquipHandler.SINGLETON;
-		setOptionHandler("wear", equipHandler);
-		setOptionHandler("wield", equipHandler);
-		setOptionHandler("equip", equipHandler);
 	}
 	
 	/**

@@ -2,7 +2,7 @@ package core.game.content.dialogue;
 
 import core.Util;
 import core.plugin.Initializable;
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;

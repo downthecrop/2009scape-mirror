@@ -7,7 +7,7 @@ import core.net.packet.context.ChildPositionContext;
 import core.net.packet.out.RepositionChild;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.game.content.dialogue.SkillDialogueHandler;
+import rs09.game.content.dialogue.SkillDialogueHandler;
 
 /**
  * Represents the plugin used to create a herb tar.

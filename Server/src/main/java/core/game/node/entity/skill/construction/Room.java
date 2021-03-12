@@ -5,6 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.world.map.*;
+import rs09.game.node.entity.skill.construction.Hotspot;
 
 /**
  * Represents a room.

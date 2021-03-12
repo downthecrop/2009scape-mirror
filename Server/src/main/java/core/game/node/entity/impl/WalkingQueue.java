@@ -1,13 +1,13 @@
 package core.game.node.entity.impl;
 
-import core.game.node.entity.skill.Skills;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.Point;
 import core.game.world.map.RegionManager;
-import core.game.node.entity.skill.skillcapeperks.SkillcapePerks;
+import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
 
 import java.util.Deque;
 import java.util.LinkedList;

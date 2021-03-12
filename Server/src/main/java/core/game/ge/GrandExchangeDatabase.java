@@ -1,8 +1,8 @@
 package core.game.ge;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.cache.def.impl.ItemDefinition;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;

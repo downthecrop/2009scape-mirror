@@ -6,6 +6,7 @@ import core.game.node.item.GroundItem;
 import core.game.node.object.GameObject;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
+import rs09.game.world.map.path.SmartPathfinder;
 
 public abstract class Pathfinder {
 
@@ -27,42 +28,42 @@ public abstract class Pathfinder {
 	/**
 	 * The south direction flag.
 	 */
-	static final int SOUTH_FLAG = 0x1;
+	public static final int SOUTH_FLAG = 0x1;
 
 	/**
 	 * The west direction flag.
 	 */
-	static final int WEST_FLAG = 0x2;
+	public static final int WEST_FLAG = 0x2;
 
 	/**
 	 * The north direction flag.
 	 */
-	static final int NORTH_FLAG = 0x4;
+	public static final int NORTH_FLAG = 0x4;
 
 	/**
 	 * The east direction flag.
 	 */
-	static final int EAST_FLAG = 0x8;
+	public static final int EAST_FLAG = 0x8;
 
 	/**
 	 * The south-west direction flag.
 	 */
-	static final int SOUTH_WEST_FLAG = SOUTH_FLAG | WEST_FLAG;
+	public static final int SOUTH_WEST_FLAG = SOUTH_FLAG | WEST_FLAG;
 
 	/**
 	 * The north-west direction flag.
 	 */
-	static final int NORTH_WEST_FLAG = NORTH_FLAG | WEST_FLAG;
+	public static final int NORTH_WEST_FLAG = NORTH_FLAG | WEST_FLAG;
 
 	/**
 	 * The south-east direction flag.
 	 */
-	static final int SOUTH_EAST_FLAG = SOUTH_FLAG | EAST_FLAG;
+	public static final int SOUTH_EAST_FLAG = SOUTH_FLAG | EAST_FLAG;
 
 	/**
 	 * The north-east direction flag.
 	 */
-	static final int NORTH_EAST_FLAG = NORTH_FLAG | EAST_FLAG;
+	public static final int NORTH_EAST_FLAG = NORTH_FLAG | EAST_FLAG;
 
 	/**
 	 * Finds a path from the location to the end location.

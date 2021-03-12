@@ -1,7 +1,7 @@
 package core.game.ge;
 
 import core.cache.def.impl.ItemDefinition;
-import core.game.system.config.ItemConfigParser;
+import rs09.game.system.config.ItemConfigParser;
 
 import java.util.HashMap;
 import java.util.Map;
