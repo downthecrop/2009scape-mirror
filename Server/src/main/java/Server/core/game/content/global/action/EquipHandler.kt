@@ -1,136 +1,121 @@
-package core.game.content.global.action;
+package core.game.content.global.action
 
-import core.game.container.impl.EquipmentContainer;
-import core.tools.Items;
-import core.game.interaction.OptionHandler;
-import core.game.node.Node;
-import core.game.node.entity.combat.equipment.WeaponInterface;
-import core.game.node.entity.lock.Lock;
-import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.audio.Audio;
-import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.node.item.Item;
-import core.game.system.config.ItemConfigParser;
-import core.game.world.GameWorld;
-import core.game.world.map.zone.ZoneBorders;
-import core.plugin.Plugin;
+import core.game.world.GameWorld.ticks
+import core.game.interaction.OptionHandler
+import core.plugin.Plugin
+import core.game.world.GameWorld
+import core.game.world.map.zone.ZoneBorders
+import core.game.node.entity.player.link.diary.DiaryType
+import core.game.system.config.ItemConfigParser
+import core.game.node.entity.combat.equipment.WeaponInterface
+import core.game.content.global.action.EquipHandler
+import core.game.node.entity.player.link.audio.Audio
+import core.game.container.impl.EquipmentContainer
+import core.game.interaction.OptionListener
+import core.game.node.Node
+import core.game.node.entity.player.Player
+import core.game.node.item.Item
+import core.tools.Items
 
 /**
  * Represents the equipment equipping handler plugin.
  * @author Ceikry
  * @author Woah
- * 
  */
-public class EquipHandler extends OptionHandler {
+class EquipHandler : OptionListener() {
 
-	/**
-	 * Represents the singleton.
-	 */
-	public static final EquipHandler SINGLETON = new EquipHandler();
+    override fun defineListeners() {
 
-	/**
-	 * The sound to send.
-	 */
-	private static final Audio DEFAULT = new Audio(2242, 1, 0);
+        on("equip",ITEM){player,node ->
+            val item = node.asItem()
 
-	/**
-	 * Constructs a new {@code EquipHandler} {@code Object}.
-	 */
-	public EquipHandler() {
-		super();
-	}
+            if(item == null || player.inventory[item.slot] != item){
+                return@on true
+            }
 
-	@Override
-	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		return this;
-	}
+            val equipStateListener = item.definition.getConfiguration<Plugin<Any>>("equipment", null)
+            if(equipStateListener != null){
+                val bool = equipStateListener.fireEvent("equip",player,item)
+                if(bool != true){
+                    return@on true
+                }
+            }
 
-	@Override
-	public boolean handle(final Player player, Node node, String option) {
-		final Item item = ((Item) node);
-		if (item == null || player.getInventory().get(item.getSlot()) != item) {
-			return true;
-		}
-		Plugin<Object> plugin = item.getDefinition().getConfiguration("equipment", null);
-		if (plugin != null) {
-			Boolean bool = (Boolean) plugin.fireEvent("equip", player, item);
-			if (bool != null && !bool) {
-				return true;
-			}
-		}
-		Lock lock = player.getLocks().getEquipmentLock();
-		if (lock != null && lock.isLocked()) {
-			if (lock.getMessage() != null) {
-				player.getPacketDispatch().sendMessage(lock.getMessage());
-			}
-			return true;
-		}
-		player.setAttribute("equipLock:" + item.getId(), GameWorld.getTicks() + 2);
-		if (player.getEquipment().add(item, item.getSlot(), true, true)) {
-			//check if a brawling glove is being equipped and register it
-			if(item.getId() >= 13845 && item.getId() <= 13857) {
-				player.debug("Registering gloves... ID: " + item.getId());
-				player.getBrawlingGlovesManager().registerGlove(item.getId());
-			}
+            val lock = player.locks.equipmentLock
+            if (lock != null && lock.isLocked) {
+                if (lock.message != null) {
+                    player.packetDispatch.sendMessage(lock.message)
+                }
+                return@on true
+            }
+            player.setAttribute("equipLock:" + item.id, ticks + 2)
 
-			if (item.getId() == Items.BLACK_CHAINBODY_1107
-					&& player.getAttribute("diary:falador:black-chain-bought", false)
-					&& new ZoneBorders(2969, 3310, 2975, 3314, 0).insideBorder(player)) {
-				player.getAchievementDiaryManager().finishTask(player,DiaryType.FALADOR, 0, 2);
-			}
+            if (player.equipment.add(item, item.slot, true, true)) {
+                //check if a brawling glove is being equipped and register it
+                if (item.id in 13845..13857) {
+                    player.debug("Registering gloves... ID: " + item.id)
+                    player.brawlingGlovesManager.registerGlove(item.id)
+                }
+                if (item.id == Items.BLACK_CHAINBODY_1107 && player.getAttribute("diary:falador:black-chain-bought", false)
+                    && ZoneBorders(2969, 3310, 2975, 3314, 0).insideBorder(player)
+                ) {
+                    player.achievementDiaryManager.finishTask(player, DiaryType.FALADOR, 0, 2)
+                }
+                player.dialogueInterpreter.close()
+                player.audioManager.send(item.definition.getConfiguration(ItemConfigParser.EQUIP_AUDIO, 2244))
+                if (player.properties.autocastSpell != null) {
+                    player.properties.autocastSpell = null
+                    val wif = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
+                    wif.selectAutoSpell(-1, true)
+                    wif.openAutocastSelect()
+                }
+            }
+            return@on true
+        }
 
 
-			player.getDialogueInterpreter().close();
-			player.getAudioManager().send(item.getDefinition().getConfiguration(ItemConfigParser.EQUIP_AUDIO, 2244));
-			if(player.getProperties().getAutocastSpell() != null) {
-				player.getProperties().setAutocastSpell(null);
-				WeaponInterface wif = player.getExtension(WeaponInterface.class);
-				wif.selectAutoSpell(-1, true);
-				wif.openAutocastSelect();
-			}
-		}
-		return true;
-	}
 
-	/**
-	 * Unequips an item.
-	 * @param player the player.
-	 * @param slot the slot.
-	 * @param itemId the item id.
-	 */
-	public static void unequip(Player player, int slot, int itemId) {
-		if (slot < 0 || slot > 13) {
-			return;
-		}
-		Item item = player.getEquipment().get(slot);
-		if (item == null) {
-			return;
-		}
-		Lock lock = player.getLocks().getEquipmentLock();
-		if (lock != null && lock.isLocked()) {
-			if (lock.getMessage() != null) {
-				player.getPacketDispatch().sendMessage(lock.getMessage());
-			}
-			return;
-		}
-		if (slot == EquipmentContainer.SLOT_WEAPON) {
-			player.getPacketDispatch().sendString("", 92, 0);
-		}
-		int maximumAdd = player.getInventory().getMaximumAdd(item);
-		if (maximumAdd < item.getAmount()) {
-			player.getPacketDispatch().sendMessage("Not enough free space in your inventory.");
-			return;
-		}
-		Plugin<Object> plugin = item.getDefinition().getConfiguration("equipment", null);
-		if (plugin != null) {
-			if (!(boolean) plugin.fireEvent("unequip", player, item)) {
-				return;
-			}
-		}
-		if (player.getEquipment().remove(item)) {
-			player.getAudioManager().send(new Audio(2238, 10, 1));
-			player.getDialogueInterpreter().close();
-			player.getInventory().add(item);
-		}
-	}
+    }
+
+    companion object {
+        /**
+         * Unequips an item.
+         * @param player the player.
+         * @param slot the slot.
+         * @param itemId the item id.
+         */
+        @JvmStatic
+        fun unequip(player: Player, slot: Int, itemId: Int) {
+            if (slot < 0 || slot > 13) {
+                return
+            }
+            val item = player.equipment[slot] ?: return
+            val lock = player.locks.equipmentLock
+            if (lock != null && lock.isLocked) {
+                if (lock.message != null) {
+                    player.packetDispatch.sendMessage(lock.message)
+                }
+                return
+            }
+            if (slot == EquipmentContainer.SLOT_WEAPON) {
+                player.packetDispatch.sendString("", 92, 0)
+            }
+            val maximumAdd = player.inventory.getMaximumAdd(item)
+            if (maximumAdd < item.amount) {
+                player.packetDispatch.sendMessage("Not enough free space in your inventory.")
+                return
+            }
+            val plugin = item.definition.getConfiguration<Plugin<Any>>("equipment", null)
+            if (plugin != null) {
+                if (!(plugin.fireEvent("unequip", player, item) as Boolean)) {
+                    return
+                }
+            }
+            if (player.equipment.remove(item)) {
+                player.audioManager.send(Audio(2238, 10, 1))
+                player.dialogueInterpreter.close()
+                player.inventory.add(item)
+            }
+        }
+    }
 }

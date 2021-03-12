@@ -14,4 +14,7 @@ abstract class OptionListener {
     fun on(ids: IntArray, type: Int, vararg option: String, handler: (Player, Node) -> Boolean){
         Listeners.add(ids,type,option,handler)
     }
+    fun on(option: String, type: Int, handler: (Player, Node) -> Boolean){
+        Listeners.add(option,type,handler)
+    }
 }
