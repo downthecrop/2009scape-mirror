@@ -1,17 +1,14 @@
 package core.game.node.entity.npc.revenant;
 
-import core.game.system.config.NPCConfigParser;
-import core.game.node.entity.skill.Skills;
-import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
-import core.game.world.GameWorld;
+import core.game.node.entity.skill.Skills;
+import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.path.Pathfinder;
@@ -19,6 +16,9 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.impl.WildernessZone;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.system.config.NPCConfigParser;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles a revenant NPC.

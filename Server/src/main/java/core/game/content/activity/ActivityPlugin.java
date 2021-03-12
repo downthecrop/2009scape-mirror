@@ -1,6 +1,6 @@
 package core.game.content.activity;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;

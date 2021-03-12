@@ -2,7 +2,7 @@ package core.game.node.entity.skill.agility.shortcuts;
 
 import core.cache.def.impl.ObjectDefinition;
 import core.game.component.Component;
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -11,7 +11,7 @@ import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;

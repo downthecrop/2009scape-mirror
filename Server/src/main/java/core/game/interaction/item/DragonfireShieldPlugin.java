@@ -1,14 +1,11 @@
 package core.game.interaction.item;
 
-import java.util.concurrent.TimeUnit;
-
 import core.cache.def.impl.ItemDefinition;
 import core.game.container.impl.EquipmentContainer;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
-import core.game.node.entity.combat.CombatPulse;
 import core.game.node.entity.combat.InteractionType;
 import core.game.node.entity.combat.equipment.SwitchAttack;
 import core.game.node.entity.combat.handlers.DragonfireSwingHandler;
@@ -16,12 +13,15 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.item.ItemPlugin;
-import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.game.node.entity.combat.CombatPulse;
+import rs09.game.world.GameWorld;
+import rs09.plugin.PluginManager;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Handles the dragonfire shield options.

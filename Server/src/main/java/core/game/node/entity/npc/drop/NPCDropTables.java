@@ -2,20 +2,19 @@ package core.game.node.entity.npc.drop;
 
 import core.cache.def.impl.NPCDefinition;
 import core.game.node.item.*;
-import core.game.system.config.ItemConfigParser;
-import plugin.ai.AIPlayer;
-import plugin.ai.AIRepository;
-import plugin.ai.general.GeneralBotCreator;
+import rs09.game.system.config.ItemConfigParser;
+import rs09.game.ai.AIPlayer;
+import rs09.game.ai.AIRepository;
+import rs09.game.ai.general.GeneralBotCreator;
 import core.game.ge.GrandExchangeDatabase;
 import core.game.content.global.Bones;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.system.SystemLogger;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 

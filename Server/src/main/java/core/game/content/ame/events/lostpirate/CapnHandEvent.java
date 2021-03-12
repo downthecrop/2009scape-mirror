@@ -2,7 +2,7 @@ package core.game.content.ame.events.lostpirate;
 
 import java.nio.ByteBuffer;
 
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.content.ame.AntiMacroDialogue;
 import core.game.content.ame.AntiMacroEvent;
 import core.game.content.dialogue.DialoguePlugin;
@@ -11,7 +11,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.ChanceItem;
 import core.game.node.item.Item;
 import core.game.world.map.Location;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 

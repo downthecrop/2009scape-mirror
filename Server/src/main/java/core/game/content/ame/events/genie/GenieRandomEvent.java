@@ -9,7 +9,7 @@ import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.map.Location;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the genie random event.

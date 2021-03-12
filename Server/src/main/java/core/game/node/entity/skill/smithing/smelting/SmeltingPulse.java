@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.smithing.smelting;
 
 import core.game.container.impl.EquipmentContainer;
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.world.map.Location;
 import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;

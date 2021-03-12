@@ -3,7 +3,7 @@ package core.game.node.entity.skill.slayer;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
-import core.game.node.entity.combat.handlers.MeleeSwingHandler;
+import rs09.game.node.entity.combat.handlers.MeleeSwingHandler;
 import core.game.node.entity.player.Player;
 
 /**

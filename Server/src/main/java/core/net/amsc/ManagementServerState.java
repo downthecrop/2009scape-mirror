@@ -1,7 +1,7 @@
 package core.net.amsc;
 
 import core.game.node.entity.player.Player;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ContactContext;
 import core.net.packet.out.ContactPackets;

@@ -1,8 +1,8 @@
 package core.game.system.script;
 
-import core.ServerConstants;
-import core.game.system.SystemLogger;
-import core.game.world.GameWorld;
+import rs09.ServerConstants;
+import rs09.game.system.SystemLogger;
+import rs09.game.world.GameWorld;
 
 import java.io.File;
 

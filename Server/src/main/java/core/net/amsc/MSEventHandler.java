@@ -1,6 +1,6 @@
 package core.net.amsc;
 
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.net.IoEventHandler;
 import core.net.IoSession;
 

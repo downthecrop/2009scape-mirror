@@ -1,14 +1,12 @@
 package core.cache.def.impl;
 
+import core.cache.Cache;
+import core.game.node.entity.player.Player;
+import rs09.game.world.GameWorld;
+
 import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
-
-import core.cache.Cache;
-import core.game.Varbit;
-import core.game.node.entity.player.Player;
-import core.game.system.SystemLogger;
-import core.game.world.GameWorld;
 
 /**
  * Handles config definition reading.

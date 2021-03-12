@@ -4,7 +4,7 @@ import core.game.component.Component;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents the strong hold of security book.

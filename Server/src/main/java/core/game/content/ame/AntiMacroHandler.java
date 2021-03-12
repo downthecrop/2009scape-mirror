@@ -1,13 +1,13 @@
 package core.game.content.ame;
 
 import core.cache.misc.buffer.ByteBufferUtils;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.game.world.map.zone.impl.WildernessZone;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.zone.ZoneRestriction;
 import core.tools.RandomFunction;
 

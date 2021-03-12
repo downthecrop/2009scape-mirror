@@ -15,7 +15,7 @@ import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.system.task.MovementHook;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.*;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBuilder;

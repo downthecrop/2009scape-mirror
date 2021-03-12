@@ -8,7 +8,7 @@ import core.game.node.entity.player.info.Rights;
 import core.game.node.entity.player.link.HintIconManager;
 import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.node.item.GroundItem;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;

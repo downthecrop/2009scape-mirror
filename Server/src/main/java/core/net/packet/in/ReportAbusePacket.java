@@ -1,6 +1,6 @@
 package core.net.packet.in;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.content.global.report.AbuseReport;
 import core.game.content.global.report.Rule;
 import core.game.node.entity.player.Player;

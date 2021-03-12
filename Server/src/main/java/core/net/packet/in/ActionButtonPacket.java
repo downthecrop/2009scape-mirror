@@ -10,7 +10,7 @@ import core.game.node.entity.player.info.login.LoginConfiguration;
 import core.game.node.entity.player.link.request.assist.AssistSession;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 

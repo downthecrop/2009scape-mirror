@@ -3,7 +3,7 @@ package core.game.node.entity.skill.summoning.familiar;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import core.game.container.Container;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import core.game.node.entity.skill.Skills;

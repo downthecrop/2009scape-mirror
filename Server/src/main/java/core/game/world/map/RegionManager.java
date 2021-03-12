@@ -5,7 +5,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.object.GameObject;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.game.world.map.zone.ZoneBorders;
 import core.tools.RandomFunction;
 

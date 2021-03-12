@@ -1,13 +1,10 @@
 package core.game.content.quest.free.dragonslayer;
 
-import java.util.List;
-
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DoorActionHandler;
-import core.game.content.global.action.EquipHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -24,6 +21,9 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
+import rs09.game.interaction.Listeners;
+
+import java.util.List;
 
 /**
  * Represents the plugin used to handle node interactions related to dragon slayer.
@@ -147,7 +147,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 				player.getPacketDispatch().sendMessage("You need to complete the Dragon Slayer Quest in order to wear this.");
 				return true;
 			}
-			EquipHandler.SINGLETON.handle(player, node, option);
+			Listeners.run(node.getId(),0,"equip",player,node);
 			break;
 		case 742:
 			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD) || player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {

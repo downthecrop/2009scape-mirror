@@ -7,7 +7,7 @@ import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;

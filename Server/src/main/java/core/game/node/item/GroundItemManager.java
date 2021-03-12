@@ -1,14 +1,14 @@
 package core.game.node.item;
 
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.chunk.ItemUpdateFlag;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.BuildItemContext;
 import core.net.packet.out.UpdateGroundItemAmount;
-import plugin.ai.AIRepository;
+import rs09.game.ai.AIRepository;
 
 import java.util.ArrayList;
 import java.util.List;

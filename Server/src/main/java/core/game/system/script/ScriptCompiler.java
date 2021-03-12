@@ -1,14 +1,14 @@
 package core.game.system.script;
 
-import core.ServerConstants;
-import core.game.system.SystemLogger;
-import plugin.ai.AIPBuilder;
-import plugin.ai.AIPlayer;
+import rs09.ServerConstants;
+import rs09.game.system.SystemLogger;
+import rs09.game.ai.AIPBuilder;
+import rs09.game.ai.AIPlayer;
 import core.game.system.script.exc.InvalidGOTOException;
 import core.game.system.script.exc.InvalidInstructionException;
 import core.game.system.script.exc.InvalidInterpreterException;
 import core.game.system.script.exc.ScriptException;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 import java.io.BufferedReader;
 import java.io.File;

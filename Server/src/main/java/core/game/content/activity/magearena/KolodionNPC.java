@@ -4,16 +4,16 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatSpell;
 import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.CombatSwingHandler;
-import core.game.node.entity.combat.handlers.MagicSwingHandler;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.node.entity.combat.handlers.MagicSwingHandler;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the kolodion npc.

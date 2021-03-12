@@ -1,8 +1,8 @@
 package core.game.node.entity.skill.crafting;
 
 import core.plugin.Initializable;
-import core.game.content.dialogue.SkillDialogueHandler;
-import core.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
+import rs09.game.content.dialogue.SkillDialogueHandler;
+import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
 import core.game.node.entity.skill.crafting.armour.SnakeSkin;
 import core.game.node.entity.skill.crafting.armour.SnakeSkinPulse;
 import core.game.interaction.NodeUsageEvent;

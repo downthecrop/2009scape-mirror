@@ -5,12 +5,13 @@ import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
-import core.game.system.SystemLogger;
-import core.plugin.Initializable;
-import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
 import core.game.node.object.GameObject;
+import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.node.entity.skill.construction.Hotspot;
+import rs09.game.system.SystemLogger;
 
 /**
  * Handles the creating of a decoration object.

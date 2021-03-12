@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.gather.woodcutting;
 
-import core.ServerConstants;
-import core.game.world.repository.Repository;
+import rs09.ServerConstants;
+import rs09.game.world.repository.Repository;
 
 import java.util.HashMap;
 

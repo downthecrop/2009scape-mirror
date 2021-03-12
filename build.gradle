@@ -9,7 +9,7 @@ allprojects {
     apply plugin: 'org.jetbrains.kotlin.jvm'
     apply plugin: 'com.github.johnrengelman.shadow'
 
-    group = 'org.2009scape'
+    group = 'org.rs09'
     version = '1.0.0'
 
     sourceCompatibility = 1.8

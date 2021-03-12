@@ -1,6 +1,6 @@
 package core.game.system.monitor;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 
 /**
  * Handles duplication-related logging.

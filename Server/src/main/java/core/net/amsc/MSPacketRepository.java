@@ -3,14 +3,10 @@ package core.net.amsc;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.PlayerDetails;
 import core.game.node.entity.player.info.Rights;
-import core.game.node.entity.player.info.login.LoginParser;
 import core.game.node.entity.player.info.login.Response;
-import core.game.system.SystemLogger;
 import core.game.system.SystemManager;
 import core.game.system.SystemState;
 import core.game.system.communication.*;
-import core.game.world.GameWorld;
-import core.game.world.repository.Repository;
 import core.net.packet.IoBuffer;
 import core.net.packet.PacketHeader;
 import core.net.packet.PacketRepository;
@@ -20,6 +16,10 @@ import core.net.packet.context.MessageContext;
 import core.net.packet.out.CommunicationMessage;
 import core.net.packet.out.ContactPackets;
 import core.net.packet.out.UpdateClanChat;
+import rs09.game.node.entity.player.info.login.LoginParser;
+import rs09.game.system.SystemLogger;
+import rs09.game.world.GameWorld;
+import rs09.game.world.repository.Repository;
 
 import java.nio.ByteBuffer;
 

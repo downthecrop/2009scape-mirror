@@ -12,7 +12,7 @@ import core.game.world.map.Location;
 import core.game.world.map.path.Pathfinder;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the interactions of a rock slug.

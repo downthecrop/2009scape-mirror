@@ -2,38 +2,39 @@ package core.game.world.map.zone.impl;
 
 import core.game.component.Component;
 import core.game.container.Container;
-import core.game.node.entity.combat.DeathTask;
-import core.game.node.entity.player.link.IronmanMode;
-import core.game.node.item.GroundItem;
-import core.game.system.config.NPCConfigParser;
 import core.game.content.ame.AntiMacroNPC;
-import core.game.node.entity.skill.summoning.familiar.Familiar;
+import core.game.content.ttrail.UriNPC;
 import core.game.interaction.Option;
+import core.game.interaction.item.brawling_gloves.BrawlingGloves;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.CombatStyle;
+import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.npc.agg.AggressiveBehavior;
 import core.game.node.entity.npc.agg.AggressiveHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
+import core.game.node.entity.player.link.IronmanMode;
+import core.game.node.entity.skill.summoning.familiar.Familiar;
+import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.RegionZone;
 import core.game.world.map.zone.ZoneBorders;
-import core.game.world.repository.Repository;
 import core.tools.RandomFunction;
-import core.game.interaction.item.brawling_gloves.BrawlingGloves;
-import core.game.content.ttrail.UriNPC;
+import rs09.game.system.config.NPCConfigParser;
+import rs09.game.world.GameWorld;
+import rs09.game.world.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static core.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
-import static core.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_DEATHS;
+import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
+import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_DEATHS;
+
 
 /**
  * Handles the wilderness zone.

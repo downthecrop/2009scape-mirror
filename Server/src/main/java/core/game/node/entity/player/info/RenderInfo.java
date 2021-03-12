@@ -1,6 +1,6 @@
 package core.game.node.entity.player.info;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;

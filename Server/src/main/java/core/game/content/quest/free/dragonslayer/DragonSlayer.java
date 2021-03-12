@@ -1,20 +1,21 @@
 package core.game.content.quest.free.dragonslayer;
 
 import core.game.component.Component;
-import core.game.content.dialogue.DukeHoracioDialogue;
-import core.plugin.Initializable;
-import core.game.node.entity.skill.Skills;
-import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
+import core.game.node.entity.skill.Skills;
+import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
-import core.plugin.PluginManager;
+import core.plugin.Initializable;
+import rs09.game.content.dialogue.DukeHoracioDialogue;
+import rs09.game.content.quest.free.dragonslayer.NedDialogue;
+import rs09.game.world.GameWorld;
+import rs09.plugin.PluginManager;
 
 /**
  * Represents the dragon slayer quest.

@@ -6,7 +6,7 @@ import core.game.content.activity.ActivityManager;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.SystemManager;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.plugin.Plugin;
 import core.plugin.PluginManifest;
 import core.plugin.Initializable;

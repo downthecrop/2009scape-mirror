@@ -4,7 +4,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.DegradableEquipment;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the degrading of PVP armour.

@@ -5,8 +5,8 @@ import java.util.concurrent.Executor;
 import java.util.concurrent.Executors;
 
 import core.game.system.SystemManager;
-import core.game.world.GameWorld;
-import core.game.world.repository.Repository;
+import rs09.game.world.GameWorld;
+import rs09.game.world.repository.Repository;
 import core.game.world.update.UpdateSequence;
 import core.gui.tab.StatisticsTab;
 import core.plugin.CorePluginTypes.Managers;

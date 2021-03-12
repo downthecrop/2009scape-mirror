@@ -4,7 +4,7 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 import core.game.content.quest.members.animalmagnetism.AnimalMagnetismPlugin.ContainerHandler;
 import core.game.content.quest.members.animalmagnetism.AnimalMagnetismPlugin.HammerMagnetPlugin;

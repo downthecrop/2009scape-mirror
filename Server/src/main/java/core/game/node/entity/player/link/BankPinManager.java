@@ -5,7 +5,7 @@ import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ChildPositionContext;
 import core.net.packet.context.StringContext;

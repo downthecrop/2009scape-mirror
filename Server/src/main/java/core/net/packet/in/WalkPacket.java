@@ -3,7 +3,7 @@ package core.net.packet.in;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import plugin.ai.AIPlayer;
+import rs09.game.ai.AIPlayer;
 import core.game.world.map.Location;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;

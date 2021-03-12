@@ -4,7 +4,7 @@ import core.cache.def.impl.ObjectDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.plugin.Plugin;
 
 public class ScoreboardHandler extends OptionHandler {

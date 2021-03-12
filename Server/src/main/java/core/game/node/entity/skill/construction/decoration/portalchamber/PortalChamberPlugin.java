@@ -4,18 +4,18 @@ package core.game.node.entity.skill.construction.decoration.portalchamber;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
-import core.game.node.entity.skill.runecrafting.Rune;
-import core.game.node.entity.skill.construction.Decoration;
-import core.game.node.entity.skill.construction.Hotspot;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.construction.Decoration;
+import core.game.node.entity.skill.runecrafting.Rune;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.game.node.entity.skill.construction.Hotspot;
+import rs09.plugin.PluginManager;
 
 /**
  * PortalChamberPlugin

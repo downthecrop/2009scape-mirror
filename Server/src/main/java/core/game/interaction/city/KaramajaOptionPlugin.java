@@ -4,9 +4,9 @@ import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.component.Component;
 import core.plugin.Initializable;
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.content.dialogue.FacialExpression;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DoorActionHandler;
@@ -19,7 +19,7 @@ import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.world.map.Location;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.plugin.Plugin;
 
 /**

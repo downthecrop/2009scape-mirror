@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.fletching.items.bolts;
 
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.fletching.Fletching;

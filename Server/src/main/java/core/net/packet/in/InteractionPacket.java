@@ -1,29 +1,30 @@
 package core.net.packet.in;
 
-import core.ServerConstants;
 import core.cache.def.impl.ObjectDefinition;
 import core.cache.def.impl.VarbitDefinition;
-import core.game.interaction.*;
+import core.game.content.quest.PluginInteractionManager;
+import core.game.interaction.Interaction;
+import core.game.interaction.MovementPulse;
+import core.game.interaction.Option;
+import core.game.interaction.SpecialGroundItems;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.system.SystemLogger;
-import core.game.system.task.Pulse;
-import plugin.ai.AIPlayer;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.object.GameObject;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
-import core.game.world.repository.Repository;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.PlayerContext;
 import core.net.packet.out.ClearMinimapFlag;
-import core.game.content.quest.PluginInteractionManager;
+import rs09.ServerConstants;
+import rs09.game.ai.AIPlayer;
+import rs09.game.interaction.Listeners;
+import rs09.game.world.repository.Repository;
 
-import java.util.Arrays;
 import java.util.List;
 
 /**

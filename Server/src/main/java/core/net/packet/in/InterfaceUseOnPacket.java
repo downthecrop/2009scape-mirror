@@ -1,20 +1,20 @@
 package core.net.packet.in;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.node.entity.skill.magic.MagicSpell;
 import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
 import core.game.interaction.MovementPulse;
-import core.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 import core.net.packet.PacketRepository;

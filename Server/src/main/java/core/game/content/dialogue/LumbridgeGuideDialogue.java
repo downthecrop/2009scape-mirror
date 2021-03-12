@@ -8,7 +8,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
 import core.game.node.entity.player.link.IronmanMode;
 import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.zone.impl.ModeratorZone;
 import core.plugin.Initializable;
 import core.net.amsc.MSPacketRepository;

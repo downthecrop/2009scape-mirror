@@ -1,7 +1,7 @@
 package core.game.system.task;
 
 import core.game.node.Node;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents "Node pulse", which is used to execute methods with node

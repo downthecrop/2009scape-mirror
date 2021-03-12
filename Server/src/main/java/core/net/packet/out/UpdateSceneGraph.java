@@ -1,11 +1,11 @@
 package core.net.packet.out;
 
 import core.game.node.entity.player.Player;
-import core.game.system.config.XteaParser;
 import core.net.packet.IoBuffer;
 import core.net.packet.OutgoingPacket;
 import core.net.packet.PacketHeader;
 import core.net.packet.context.SceneGraphContext;
+import rs09.game.system.config.XteaParser;
 
 /**
  * The update scene graph outgoing packet.

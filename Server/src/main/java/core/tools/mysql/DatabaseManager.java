@@ -8,8 +8,8 @@ import java.sql.Statement;
 import java.util.HashMap;
 import java.util.Map;
 
-import core.ServerConstants;
-import core.game.system.SystemLogger;
+import rs09.ServerConstants;
+import rs09.game.system.SystemLogger;
 
 public class DatabaseManager {
 

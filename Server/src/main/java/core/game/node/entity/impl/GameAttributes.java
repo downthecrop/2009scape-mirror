@@ -1,6 +1,6 @@
 package core.game.node.entity.impl;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import org.w3c.dom.*;
 
 import javax.xml.parsers.DocumentBuilder;

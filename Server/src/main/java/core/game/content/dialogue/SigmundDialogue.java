@@ -4,7 +4,8 @@ import core.game.node.entity.npc.NPC;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 
-import static core.tools.DialogueConstKt.END_DIALOGUE;
+import static rs09.tools.DialogueConstKt.END_DIALOGUE;
+
 
 /**
  * Handles the SigmundDialogue dialogue.

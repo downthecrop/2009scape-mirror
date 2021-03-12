@@ -1,7 +1,7 @@
 package core.game.node.entity.player.link.spawn;
 
 import core.game.node.entity.player.Player;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.tools.StringUtils;
 
 import java.util.ArrayList;

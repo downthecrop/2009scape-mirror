@@ -5,7 +5,7 @@ import core.game.content.ame.AntiMacroNPC;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 
 /**

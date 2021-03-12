@@ -1,6 +1,7 @@
 package core.game.interaction.npc;
 
 import core.cache.def.impl.NPCDefinition;
+import core.game.content.dialogue.FacialExpression;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -9,12 +10,11 @@ import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.game.content.activity.gnomecooking.GnomeCookingJob;
-import core.game.content.activity.gnomecooking.GnomeTipper;
-import core.game.content.dialogue.FacialExpression;
+import rs09.game.content.activity.gnomecooking.GnomeCookingJob;
+import rs09.game.content.activity.gnomecooking.GnomeTipper;
 
-import static core.game.content.activity.gnomecooking.GnomeCookingConstantsKt.*;
-import static core.tools.stringtools.StringToolsKt.colorize;
+import static rs09.game.content.activity.gnomecooking.GnomeCookingConstantsKt.*;
+import static rs09.tools.stringtools.StringToolsKt.colorize;
 
 /**
  * Handles the NPC talk-to option.

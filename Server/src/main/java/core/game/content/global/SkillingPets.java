@@ -3,7 +3,7 @@ package core.game.content.global;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 
 /**
  * Represents the skilling pets obtained randomly.

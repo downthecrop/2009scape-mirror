@@ -8,7 +8,7 @@ import core.game.node.item.Item;
 import core.game.node.item.WeightedChanceItem;
 import core.plugin.Plugin;
 import core.plugin.PluginManifest;
-import core.tools.Items;
+import rs09.tools.Items;
 import core.tools.RandomFunction;
 import core.plugin.Initializable;
 import core.tools.StringUtils;

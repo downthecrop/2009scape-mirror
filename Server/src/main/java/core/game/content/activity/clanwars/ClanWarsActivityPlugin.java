@@ -21,7 +21,7 @@ import core.game.node.object.ObjectBuilder;
 import core.game.system.communication.ClanEntry;
 import core.game.system.communication.ClanRepository;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;

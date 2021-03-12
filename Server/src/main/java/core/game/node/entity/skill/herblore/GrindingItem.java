@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.herblore;
 
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.node.item.Item;
 
 /**

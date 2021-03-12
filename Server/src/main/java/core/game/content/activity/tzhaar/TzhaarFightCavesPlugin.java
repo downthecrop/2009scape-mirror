@@ -18,11 +18,11 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.zone.ZoneRestriction;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 

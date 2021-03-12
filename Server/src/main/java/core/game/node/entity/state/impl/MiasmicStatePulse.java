@@ -3,7 +3,7 @@ package core.game.node.entity.state.impl;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.state.StatePulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 import java.nio.ByteBuffer;
 

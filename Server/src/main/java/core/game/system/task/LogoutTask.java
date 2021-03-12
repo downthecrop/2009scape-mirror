@@ -1,7 +1,7 @@
 package core.game.system.task;
 
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 /**
  * A task called upon when a player disconnects from the game.

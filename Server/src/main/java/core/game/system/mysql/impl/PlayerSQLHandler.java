@@ -1,6 +1,6 @@
 package core.game.system.mysql.impl;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.node.entity.player.info.PlayerDetails;
 import core.game.system.mysql.SQLColumn;
 import core.game.system.mysql.SQLEntryHandler;

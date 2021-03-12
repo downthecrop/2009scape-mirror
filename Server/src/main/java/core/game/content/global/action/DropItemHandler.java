@@ -6,8 +6,8 @@ import core.game.node.entity.player.info.login.PlayerParser;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.system.SystemLogger;
-import core.game.world.GameWorld;
+import rs09.game.system.SystemLogger;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the dropping of an item.

@@ -4,8 +4,8 @@ package core.gui.tab;
 import core.game.node.entity.player.Player;
 import core.gui.ConsoleFrame;
 import core.gui.ConsoleTab;
-import core.game.ge.GrandExchangeOffer;
-import core.game.ge.OfferManager;
+import rs09.game.ge.GrandExchangeOffer;
+import rs09.game.ge.OfferManager;
 
 import javax.swing.*;
 import java.awt.*;

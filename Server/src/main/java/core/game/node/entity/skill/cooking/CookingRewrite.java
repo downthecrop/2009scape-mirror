@@ -7,7 +7,7 @@ import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.tools.Items;
+import rs09.tools.Items;
 
 //author: Ceik
 @Initializable

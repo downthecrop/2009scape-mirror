@@ -2,7 +2,7 @@ package core.game.content.dialogue;
 
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.game.world.update.flag.context.Animation;
 

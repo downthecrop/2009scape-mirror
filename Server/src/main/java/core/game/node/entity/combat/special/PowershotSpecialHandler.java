@@ -3,13 +3,13 @@ package core.game.node.entity.combat.special;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.handlers.RangeSwingHandler;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.combat.handlers.RangeSwingHandler;
 
 /**
  * Handles the Magic longbow special attack "Powershot".

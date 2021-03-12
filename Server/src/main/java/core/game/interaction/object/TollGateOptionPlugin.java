@@ -7,12 +7,12 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
-import static core.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
-import static core.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_ALKHARID_GATE;
+import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_ALKHARID_GATE;
+import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 
 @Initializable
 public class TollGateOptionPlugin extends OptionHandler {

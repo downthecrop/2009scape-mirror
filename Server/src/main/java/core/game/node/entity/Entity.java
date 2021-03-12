@@ -1,28 +1,32 @@
 package core.game.node.entity;
 
 import core.game.content.holiday.HolidayEvent;
-import core.game.node.entity.skill.Skills;
 import core.game.interaction.DestinationFlag;
 import core.game.node.Node;
-import core.game.node.entity.combat.*;
+import core.game.node.entity.combat.BattleState;
+import core.game.node.entity.combat.CombatStyle;
+import core.game.node.entity.combat.DeathTask;
+import core.game.node.entity.combat.ImpactHandler;
 import core.game.node.entity.combat.equipment.ArmourSet;
 import core.game.node.entity.impl.*;
 import core.game.node.entity.lock.ActionLocks;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.TeleportManager;
+import core.game.node.entity.skill.Skills;
 import core.game.node.entity.state.EntityState;
 import core.game.node.entity.state.StateManager;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.Viewport;
 import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.map.zone.ZoneMonitor;
-import core.game.world.update.UpdateMasks;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+import rs09.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.world.update.UpdateMasks;
 
 import java.util.HashMap;
 import java.util.Map;

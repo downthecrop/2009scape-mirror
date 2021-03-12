@@ -3,7 +3,7 @@ package core.game.node.entity.player.link;
 import core.game.node.entity.player.Player;
 
 import core.game.node.entity.player.link.spawn.SpawnData;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 
 import java.nio.ByteBuffer;
 

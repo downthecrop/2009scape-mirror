@@ -1,6 +1,6 @@
 package core.game.interaction.inter;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
@@ -13,7 +13,7 @@ import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles an orb viewing interface.

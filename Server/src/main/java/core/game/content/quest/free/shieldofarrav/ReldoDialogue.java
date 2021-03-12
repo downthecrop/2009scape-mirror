@@ -1,6 +1,6 @@
 package core.game.content.quest.free.shieldofarrav;
 
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;

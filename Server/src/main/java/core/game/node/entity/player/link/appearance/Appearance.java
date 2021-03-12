@@ -8,7 +8,7 @@ import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
 
 import core.game.node.item.Item;
-import core.game.system.config.ItemConfigParser;
+import rs09.game.system.config.ItemConfigParser;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.player.AppearanceFlag;
 import org.json.simple.JSONArray;

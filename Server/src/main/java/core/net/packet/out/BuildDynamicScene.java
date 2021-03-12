@@ -1,7 +1,6 @@
 package core.net.packet.out;
 
 import core.game.node.entity.player.Player;
-import core.game.system.config.XteaParser;
 import core.game.world.map.Region;
 import core.game.world.map.RegionChunk;
 import core.game.world.map.RegionManager;
@@ -10,6 +9,7 @@ import core.net.packet.IoBuffer;
 import core.net.packet.OutgoingPacket;
 import core.net.packet.PacketHeader;
 import core.net.packet.context.DynamicSceneContext;
+import rs09.game.system.config.XteaParser;
 
 import java.util.ArrayList;
 import java.util.List;

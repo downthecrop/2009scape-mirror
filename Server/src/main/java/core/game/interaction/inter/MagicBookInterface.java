@@ -7,7 +7,7 @@ import core.plugin.Initializable;
 import core.game.node.entity.skill.magic.MagicSpell;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.plugin.Plugin;
 
 /**

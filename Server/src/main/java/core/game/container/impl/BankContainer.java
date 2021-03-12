@@ -1,14 +1,14 @@
 package core.game.container.impl;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.component.Component;
 import core.game.container.*;
 import core.game.container.access.BitregisterAssembler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.IronmanMode;
 import core.game.node.item.Item;
-import core.game.system.config.ItemConfigParser;
-import core.game.world.GameWorld;
+import rs09.game.system.config.ItemConfigParser;
+import rs09.game.world.GameWorld;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;

@@ -1,8 +1,8 @@
 package core.game.node.entity.skill.fletching;
 
 import core.plugin.Initializable;
-import core.game.content.dialogue.SkillDialogueHandler;
-import core.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
+import rs09.game.content.dialogue.SkillDialogueHandler;
+import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
 import core.game.node.entity.skill.fletching.items.arrow.ArrowHeadPulse;
 import core.game.node.entity.skill.fletching.items.arrow.HeadlessArrowPulse;
 import core.game.interaction.NodeUsageEvent;

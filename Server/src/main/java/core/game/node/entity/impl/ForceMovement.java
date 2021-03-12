@@ -2,7 +2,7 @@ package core.game.node.entity.impl;
 
 import core.game.node.entity.Entity;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;

@@ -1,6 +1,6 @@
 package core.game.content.global;
 
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.node.entity.npc.drop.NPCDropTables;
 import core.game.node.entity.player.Player;
 import core.game.node.item.ChanceItem;

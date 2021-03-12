@@ -2,7 +2,7 @@ package core.game.content.activity.mta;
 
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the entrance guardian dialogue.

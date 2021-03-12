@@ -4,13 +4,10 @@ import core.cache.def.impl.ItemDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.state.EntityState;
-import core.game.node.entity.state.newsys.State;
-import core.game.node.entity.state.newsys.StateRepository;
-import core.game.node.entity.state.newsys.states.AvaDeviceState;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.game.node.entity.state.newsys.states.AvaDeviceState;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the equippage event of an ava device.

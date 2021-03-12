@@ -15,14 +15,14 @@ import core.game.node.entity.player.link.HintIconManager;
 import core.game.node.entity.player.link.grave.GraveManager;
 import core.game.node.entity.player.link.grave.GraveType;
 import core.game.node.item.GroundItem;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
-import core.game.world.repository.Repository;
+import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles a gravestone npc.

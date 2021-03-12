@@ -1,9 +1,9 @@
 package core.game.node.entity.npc.drop;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.node.item.Item;
 import core.game.node.item.WeightedChanceItem;
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.tools.RandomFunction;
 import org.w3c.dom.Document;
 import org.w3c.dom.Element;

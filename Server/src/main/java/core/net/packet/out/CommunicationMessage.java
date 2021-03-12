@@ -7,7 +7,7 @@ import core.net.packet.OutgoingPacket;
 import core.net.packet.PacketHeader;
 import core.net.packet.context.MessageContext;
 import core.tools.StringUtils;
-import plugin.ai.AIPlayer;
+import rs09.game.ai.AIPlayer;
 
 import java.util.Random;
 

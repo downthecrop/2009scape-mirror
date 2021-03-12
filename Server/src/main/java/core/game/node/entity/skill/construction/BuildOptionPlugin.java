@@ -9,10 +9,11 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.object.GameObject;
-import core.game.system.SystemLogger;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.game.node.entity.skill.construction.Hotspot;
+import rs09.game.system.SystemLogger;
+import rs09.plugin.PluginManager;
 
 /**
  * The build option handling plugin.

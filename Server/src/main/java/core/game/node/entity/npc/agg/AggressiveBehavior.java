@@ -4,7 +4,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.RegionManager;
 
 import java.util.ArrayList;

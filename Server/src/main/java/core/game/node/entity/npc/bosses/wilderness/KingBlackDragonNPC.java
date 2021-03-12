@@ -4,7 +4,7 @@ import core.game.content.global.BossKillCounter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.InteractionType;
 import core.game.node.entity.combat.equipment.ArmourSet;
 import core.game.node.entity.combat.equipment.FireType;

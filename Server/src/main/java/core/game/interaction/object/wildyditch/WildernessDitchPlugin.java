@@ -9,7 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.object.GameObject;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Represents the plugin to handle the crossing.

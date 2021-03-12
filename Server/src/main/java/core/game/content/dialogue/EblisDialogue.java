@@ -4,7 +4,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
-import core.tools.Items;
+import rs09.tools.Items;
 
 /**
  * Handles Eblis's dialogue.

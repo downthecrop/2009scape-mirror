@@ -10,14 +10,15 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
-import core.tools.Items;
+import rs09.plugin.PluginManager;
+import rs09.tools.Items;
 
-import static core.tools.stringtools.StringToolsKt.colorize;
+import static rs09.tools.stringtools.StringToolsKt.colorize;
+
 
 /**
  * The dialogue plugin used for the rug merchant.

@@ -4,7 +4,6 @@ import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.magic.MagicSpell;
 import core.game.node.entity.skill.magic.Runes;
-import core.game.node.entity.skill.farming.FarmingPatch;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.SpellType;

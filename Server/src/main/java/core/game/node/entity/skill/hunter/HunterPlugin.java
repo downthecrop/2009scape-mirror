@@ -21,7 +21,7 @@ import core.game.node.object.GameObject;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 import java.util.ArrayList;
 import java.util.List;

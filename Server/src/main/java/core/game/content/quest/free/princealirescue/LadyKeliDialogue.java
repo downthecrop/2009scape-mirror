@@ -8,7 +8,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.RegionManager;
 
 /**

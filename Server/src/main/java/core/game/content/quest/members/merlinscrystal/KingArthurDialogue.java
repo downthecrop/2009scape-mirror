@@ -1,6 +1,6 @@
 package core.game.content.quest.members.merlinscrystal;
 
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.content.dialogue.DialoguePlugin;

@@ -1,21 +1,19 @@
 package core.game.interaction.item.withobject;
 
 import core.cache.def.impl.ObjectDefinition;
-import core.game.node.entity.skill.Skills;
-import core.game.node.entity.skill.summoning.pet.IncubatorEgg;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.state.EntityState;
-import core.game.node.entity.state.newsys.StateRepository;
-import core.game.node.entity.state.newsys.states.IncubatorState;
+import core.game.node.entity.skill.Skills;
+import core.game.node.entity.skill.summoning.pet.IncubatorEgg;
 import core.game.node.item.GroundItemManager;
-import core.plugin.Plugin;
-import core.plugin.PluginManager;
 import core.plugin.Initializable;
+import core.plugin.Plugin;
 import core.tools.StringUtils;
+import rs09.game.node.entity.state.newsys.states.IncubatorState;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the incubator.

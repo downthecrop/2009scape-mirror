@@ -4,23 +4,23 @@ import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.content.dialogue.DialogueAction;
 import core.game.content.global.GodType;
-import core.game.content.global.action.PickupHandler;
-import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
-import core.plugin.Plugin;
 import core.plugin.Initializable;
-import core.plugin.PluginManager;
+import core.plugin.Plugin;
+import rs09.game.content.global.action.PickupHandler;
+import rs09.game.world.GameWorld;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the mage arena activity.

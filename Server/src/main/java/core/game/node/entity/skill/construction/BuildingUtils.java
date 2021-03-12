@@ -7,7 +7,6 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
-import core.game.system.SystemLogger;
 import core.game.system.task.Pulse;
 import core.game.world.map.BuildRegionChunk;
 import core.game.world.map.Direction;
@@ -18,6 +17,8 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 import org.jetbrains.annotations.NotNull;
+import rs09.game.node.entity.skill.construction.Hotspot;
+import rs09.game.system.SystemLogger;
 
 import java.util.ArrayList;
 import java.util.Arrays;

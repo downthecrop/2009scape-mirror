@@ -1,9 +1,10 @@
 package core.game.node.entity.combat;
 
-import core.game.node.entity.combat.handlers.MagicSwingHandler;
-import core.game.node.entity.combat.handlers.MeleeSwingHandler;
-import core.game.node.entity.combat.handlers.RangeSwingHandler;
 import core.game.node.entity.player.link.prayer.PrayerType;
+import rs09.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.node.entity.combat.handlers.MagicSwingHandler;
+import rs09.game.node.entity.combat.handlers.MeleeSwingHandler;
+import rs09.game.node.entity.combat.handlers.RangeSwingHandler;
 
 /**
  * Represents the different styles of combat.

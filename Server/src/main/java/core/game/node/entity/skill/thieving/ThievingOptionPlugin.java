@@ -9,6 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.object.GameObject;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.node.entity.skill.thieving.Pickpocket;
 
 /**
  * Represents the plugin used to handle thieving options.

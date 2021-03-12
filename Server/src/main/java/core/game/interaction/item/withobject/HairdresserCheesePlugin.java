@@ -1,14 +1,14 @@
 package core.game.interaction.item.withobject;
 
 import core.plugin.Initializable;
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.plugin.Plugin;
 
 /**

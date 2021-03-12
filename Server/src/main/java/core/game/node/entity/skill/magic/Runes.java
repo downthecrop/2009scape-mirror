@@ -2,7 +2,7 @@ package core.game.node.entity.skill.magic;
 
 import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.item.Item;
-import core.tools.Items;
+import rs09.tools.Items;
 
 /**
  * Represents the <b>Constants</b> of runes.

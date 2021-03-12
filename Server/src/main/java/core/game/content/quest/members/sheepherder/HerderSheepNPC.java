@@ -3,7 +3,7 @@ package core.game.content.quest.members.sheepherder;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.path.Pathfinder;
 

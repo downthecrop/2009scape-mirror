@@ -6,7 +6,7 @@ import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.game.world.map.Location;
 

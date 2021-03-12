@@ -1,7 +1,7 @@
 package core.game.system.mysql;
 
-import core.ServerConstants;
-import core.game.system.SystemLogger;
+import rs09.ServerConstants;
+import rs09.game.system.SystemLogger;
 import core.game.system.SystemManager;
 
 import java.sql.Connection;

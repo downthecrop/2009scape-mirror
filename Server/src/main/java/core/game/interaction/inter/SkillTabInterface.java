@@ -7,7 +7,7 @@ import core.game.node.entity.skill.LevelUp;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 

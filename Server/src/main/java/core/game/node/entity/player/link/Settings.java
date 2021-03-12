@@ -1,12 +1,12 @@
 package core.game.node.entity.player.link;
 
-import core.game.system.config.ItemConfigParser;
+import rs09.game.system.config.ItemConfigParser;
 import org.json.simple.JSONObject;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.communication.CommunicationInfo;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.net.packet.IoBuffer;
 
 import java.nio.ByteBuffer;

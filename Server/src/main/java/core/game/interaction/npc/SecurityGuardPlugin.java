@@ -8,8 +8,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
-import core.tools.Items;
+import rs09.plugin.PluginManager;
+import rs09.tools.Items;
 
 @Initializable
 public final class SecurityGuardPlugin extends OptionHandler {

@@ -1,8 +1,8 @@
 /*
 package core.game.node.entity.skill.fletching;
 
-import core.game.content.dialogue.SkillDialogueHandler;
-import core.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
+import rs09.game.content.dialogue.SkillDialogueHandler;
+import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
 import core.game.node.entity.skill.fletching.items.bolts.Bolt;
 import core.game.node.entity.skill.fletching.items.bolts.BoltPulse;
 import org.crandor.game.interaction.NodeUsageEvent;

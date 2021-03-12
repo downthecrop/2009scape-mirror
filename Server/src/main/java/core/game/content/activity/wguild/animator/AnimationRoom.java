@@ -11,7 +11,7 @@ import core.game.node.object.GameObject;
 import core.game.system.task.ItemLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;

@@ -1,7 +1,6 @@
 package core.game.content.quest.members.merlinscrystal;
 
 import core.cache.def.impl.NPCDefinition;
-import core.game.system.config.ShopParser;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -10,7 +9,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.game.system.config.ShopParser;
+import rs09.plugin.PluginManager;
 
 /**
  * Represents the dialogue plugin used to handle the candle maker npc.

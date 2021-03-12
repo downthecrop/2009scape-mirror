@@ -3,7 +3,7 @@ package core.game.content.dialogue;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.RegionManager;
 import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;

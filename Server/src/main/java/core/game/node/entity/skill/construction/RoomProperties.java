@@ -5,6 +5,7 @@ import core.game.node.object.GameObject;
 import core.game.world.map.Region;
 import core.game.world.map.RegionChunk;
 import core.game.world.map.RegionManager;
+import rs09.game.node.entity.skill.construction.Hotspot;
 
 /**
  * Represents the room properties.

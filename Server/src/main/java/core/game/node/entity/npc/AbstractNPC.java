@@ -1,6 +1,6 @@
 package core.game.node.entity.npc;
 
-import core.game.system.SystemLogger;
+import rs09.game.system.SystemLogger;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 

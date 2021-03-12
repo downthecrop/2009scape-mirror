@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.crafting;
 
-import core.game.content.dialogue.SkillDialogueHandler;
-import core.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
+import rs09.game.content.dialogue.SkillDialogueHandler;
+import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
 import core.game.node.entity.skill.crafting.gem.GemCutPulse;
 import core.game.node.entity.skill.crafting.gem.Gems;
 import core.game.interaction.NodeUsageEvent;

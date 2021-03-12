@@ -1,7 +1,5 @@
 package core.game.content.activity.duel;
 
-import java.text.DecimalFormat;
-
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -10,16 +8,18 @@ import core.game.container.Container;
 import core.game.container.ContainerType;
 import core.game.container.access.InterfaceContainer;
 import core.game.container.impl.EquipmentContainer;
-import core.game.content.global.action.EquipHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.login.PlayerParser;
 import core.game.node.entity.player.link.RunScript;
 import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
-import core.game.system.config.ItemConfigParser;
 import core.game.system.monitor.PlayerMonitor;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import rs09.game.content.global.action.EquipHandler;
+import rs09.game.system.config.ItemConfigParser;
+
+import java.text.DecimalFormat;
 
 /**
  * Represents a duel session.

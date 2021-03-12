@@ -4,15 +4,15 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.equipment.SwitchAttack;
-import core.game.node.entity.combat.handlers.MultiSwingHandler;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.node.entity.state.EntityState;
-import core.game.world.GameWorld;
 import core.game.world.map.zone.impl.WildernessZone;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+import rs09.game.node.entity.combat.handlers.MultiSwingHandler;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the multi swing combat handler for revenants.

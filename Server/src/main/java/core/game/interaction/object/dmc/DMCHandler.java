@@ -2,7 +2,7 @@ package core.game.interaction.object.dmc;
 
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.NPC;
@@ -12,7 +12,7 @@ import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;

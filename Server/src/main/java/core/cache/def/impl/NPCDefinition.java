@@ -7,11 +7,11 @@ import core.game.interaction.OptionHandler;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.npc.drop.NPCDropTables;
 import core.game.node.entity.player.Player;
-import core.game.system.config.NPCConfigParser;
-import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.StringUtils;
+import rs09.game.system.config.NPCConfigParser;
+import rs09.game.world.GameWorld;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;

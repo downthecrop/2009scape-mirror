@@ -5,6 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.world.map.Location;
+import rs09.game.node.entity.skill.construction.Hotspot;
 
 /**
  * Represents the decorations.

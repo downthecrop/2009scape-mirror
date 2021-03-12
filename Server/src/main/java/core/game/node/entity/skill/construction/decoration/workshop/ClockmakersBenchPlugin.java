@@ -15,7 +15,7 @@ import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the clockmakers bench in the workshop

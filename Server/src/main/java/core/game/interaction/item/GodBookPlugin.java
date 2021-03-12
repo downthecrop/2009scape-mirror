@@ -14,11 +14,11 @@ import core.game.node.item.GroundItem;
 import core.game.node.item.Item;
 import core.game.node.item.ItemPlugin;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the god books.

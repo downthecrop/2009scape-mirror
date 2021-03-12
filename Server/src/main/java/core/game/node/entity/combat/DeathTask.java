@@ -15,7 +15,7 @@ import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.node.item.Item;
 import core.game.system.task.NodeTask;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 
 /**

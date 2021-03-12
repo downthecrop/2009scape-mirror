@@ -3,7 +3,7 @@ package core.game.content.dialogue;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents the dialogue plugin for the new Researcher NPC that sells unobtainable items.

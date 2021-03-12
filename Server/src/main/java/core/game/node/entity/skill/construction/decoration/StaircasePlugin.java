@@ -1,21 +1,25 @@
 package core.game.node.entity.skill.construction.decoration;
 
 import core.cache.def.impl.ObjectDefinition;
-import core.plugin.Initializable;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
-import core.game.node.entity.skill.construction.*;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.construction.BuildingUtils;
+import core.game.node.entity.skill.construction.HouseManager;
+import core.game.node.entity.skill.construction.Room;
+import core.game.node.entity.skill.construction.RoomProperties;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
+import core.plugin.Initializable;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.game.node.entity.skill.construction.Hotspot;
+import rs09.game.world.GameWorld;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles construction staircases.

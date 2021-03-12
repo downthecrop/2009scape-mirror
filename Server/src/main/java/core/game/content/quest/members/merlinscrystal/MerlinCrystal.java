@@ -3,7 +3,7 @@ package core.game.content.quest.members.merlinscrystal;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Represents the merlin's crystal quest.

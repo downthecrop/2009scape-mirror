@@ -13,9 +13,9 @@
 //import core.game.node.entity.player.Player;
 //import core.game.node.entity.state.EntityState;
 //import core.game.node.item.Item;
-//import core.game.world.repository.Repository;
+//import rs09.game.world.repository.Repository;
 //import core.plugin.Plugin;
-//import core.plugin.PluginManager;
+//import rs09.plugin.PluginManager;
 //import core.plugin.InitializablePlugin;
 //import core.tools.RandomFunction;
 //

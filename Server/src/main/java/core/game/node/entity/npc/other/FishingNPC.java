@@ -2,7 +2,7 @@ package core.game.node.entity.npc.other;
 
 import core.game.node.entity.skill.fishing.FishSpots;
 import core.game.node.entity.npc.AbstractNPC;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Initializable;

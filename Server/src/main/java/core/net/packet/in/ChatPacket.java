@@ -3,7 +3,7 @@ package core.net.packet.in;
 import core.game.node.entity.player.Player;
 import core.game.system.monitor.PlayerMonitor;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.ChatMessage;
 import core.game.world.update.flag.player.ChatFlag;
 import core.net.amsc.MSPacketRepository;

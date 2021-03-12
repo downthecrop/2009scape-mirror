@@ -2,7 +2,7 @@ package core.game.content.ame.events.eviltwin;
 
 import java.nio.ByteBuffer;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.content.ame.AntiMacroEvent;
@@ -15,7 +15,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
@@ -25,7 +25,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.CameraContext;
 import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 import core.tools.RandomFunction;
 
 /**

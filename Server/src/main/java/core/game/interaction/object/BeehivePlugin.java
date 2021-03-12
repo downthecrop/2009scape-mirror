@@ -1,14 +1,14 @@
 package core.game.interaction.object;
 
 import core.cache.def.impl.ObjectDefinition;
-import core.tools.Items;
+import rs09.tools.Items;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.combat.ImpactHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.plugin.Initializable;

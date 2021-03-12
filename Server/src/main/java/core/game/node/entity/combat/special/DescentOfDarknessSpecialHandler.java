@@ -8,7 +8,6 @@ import core.game.node.entity.combat.equipment.Ammunition;
 import core.game.node.entity.combat.equipment.RangeWeapon;
 import core.game.node.entity.combat.equipment.Weapon;
 import core.game.node.entity.combat.equipment.Weapon.WeaponType;
-import core.game.node.entity.combat.handlers.RangeSwingHandler;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
@@ -16,6 +15,7 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.combat.handlers.RangeSwingHandler;
 
 /**
  * Represents the descent of darkness sepcial handler.

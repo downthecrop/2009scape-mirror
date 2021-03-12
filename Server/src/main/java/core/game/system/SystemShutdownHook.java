@@ -1,5 +1,7 @@
 package core.game.system;
 
+import rs09.game.system.SystemLogger;
+
 /**
  * Handles the shutdown hook.
  * @author Emperor

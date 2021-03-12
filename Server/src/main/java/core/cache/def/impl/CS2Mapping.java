@@ -8,7 +8,7 @@ import java.util.Map;
 
 import core.cache.Cache;
 import core.cache.misc.buffer.ByteBufferUtils;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 /**
  * The CS2 mapping.

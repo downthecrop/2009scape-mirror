@@ -1,6 +1,6 @@
 package core.game.system.mysql.impl;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.system.monitor.MessageLog;
 import core.game.system.monitor.PlayerMonitor;
 import core.game.system.mysql.SQLEntryHandler;

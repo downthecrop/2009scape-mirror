@@ -14,7 +14,7 @@ import core.game.node.object.GameObject;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 /**
  * Handles the warrior guild options.

@@ -1,7 +1,6 @@
 package core.game.interaction.item;
 
 import core.cache.def.impl.ItemDefinition;
-import core.game.content.global.action.PickupHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -9,6 +8,7 @@ import core.game.node.item.GroundItem;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.content.global.action.PickupHandler;
 
 /**
  * Represents the option handler used for ground items.

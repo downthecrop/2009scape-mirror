@@ -3,17 +3,17 @@ package core.game.node.entity.combat.special;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
-import core.game.node.entity.combat.handlers.RangeSwingHandler;
-import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.impl.Animator.Priority;
+import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
-import core.plugin.Plugin;
 import core.plugin.Initializable;
+import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.combat.handlers.RangeSwingHandler;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the magic shortbow special attack "Snapshot".

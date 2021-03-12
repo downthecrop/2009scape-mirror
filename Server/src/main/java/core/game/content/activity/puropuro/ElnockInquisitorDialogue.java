@@ -9,7 +9,7 @@ import core.game.node.entity.skill.hunter.bnet.ImplingNode;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
-import core.plugin.PluginManager;
+import rs09.plugin.PluginManager;
 
 import core.game.content.activity.puropuro.ElnockInquisitorDialogue.ElnockExchangeInterfaceHandler.ElnockExchange;
 

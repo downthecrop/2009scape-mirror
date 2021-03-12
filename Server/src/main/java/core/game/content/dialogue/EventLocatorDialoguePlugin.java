@@ -1,6 +1,6 @@
 package core.game.content.dialogue;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;

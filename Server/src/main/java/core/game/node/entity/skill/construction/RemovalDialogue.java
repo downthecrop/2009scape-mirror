@@ -5,6 +5,7 @@ import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
+import rs09.game.node.entity.skill.construction.Hotspot;
 
 /**
  * Removal dialogue for room & decorations in construction

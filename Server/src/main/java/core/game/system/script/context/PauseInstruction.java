@@ -3,7 +3,7 @@ package core.game.system.script.context;
 import core.game.system.script.ScriptContext;
 import core.game.system.script.ScriptManager;
 import core.game.system.task.Pulse;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 
 /**
  * Used for pausing the script.

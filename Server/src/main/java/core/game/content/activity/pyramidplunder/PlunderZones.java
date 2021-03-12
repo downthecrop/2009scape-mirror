@@ -1,13 +1,13 @@
 package core.game.content.activity.pyramidplunder;
-import core.game.Varp;
+
 import core.game.content.global.action.ClimbActionHandler;
-import core.game.node.entity.skill.Skills;
 import core.game.interaction.Option;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
-import core.game.node.entity.npc.NPC;
 import core.game.node.entity.combat.ImpactHandler;
+import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.object.ObjectBuilder;
 import core.game.system.task.LocationLogoutTask;
@@ -20,6 +20,8 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import rs09.game.Varp;
+import rs09.game.content.activity.pyramidplunder.PlunderSession;
 
 /**
  * Defines the zones for the pyramid plunder rooms and their interactions

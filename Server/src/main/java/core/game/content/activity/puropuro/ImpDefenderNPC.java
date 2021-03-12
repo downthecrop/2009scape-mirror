@@ -9,7 +9,7 @@ import core.game.node.entity.skill.hunter.bnet.ImplingNode;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.world.GameWorld;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.tools.RandomFunction;

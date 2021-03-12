@@ -1,9 +1,9 @@
 package core.game.node.entity.skill.gather;
 
-import core.ServerConstants;
+import rs09.ServerConstants;
 import core.game.node.entity.skill.Skills;
-import core.game.system.SystemLogger;
-import core.game.world.repository.Repository;
+import rs09.game.system.SystemLogger;
+import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
 
 import java.util.HashMap;

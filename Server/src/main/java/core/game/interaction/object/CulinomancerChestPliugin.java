@@ -6,11 +6,11 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
-import core.game.system.config.ShopParser;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.system.config.ShopParser;
 
 /**
  * Handles the culinomancer chest.
