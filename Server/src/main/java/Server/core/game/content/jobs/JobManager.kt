@@ -6,6 +6,7 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
+import core.game.system.SystemLogger
 
 object JobManager {
     @JvmStatic
@@ -55,7 +56,8 @@ object JobManager {
             var amount = player.inventory.getAmount(it)
             val needed = player.getAttribute("jobs:amount",0)
             if(amount == 0){
-                player.dialogueInterpreter.open(9987215,npc)
+                player.dialogueInterpreter.open(CancelJobDialogueFile(),npc)
+                SystemLogger.logAlert("Opening CancelJob")
                 return
             }
             if(amount < needed){

@@ -137,6 +137,11 @@ public final class DialogueInterpreter {
         return true;
     }
 
+    public void open(DialogueFile file,Object... args){
+        this.dialogue = new EmptyPlugin(player,file);
+        this.dialogue.open(args);
+    }
+
     /**
      * Starts a dialogue script.
      * @param script The script.

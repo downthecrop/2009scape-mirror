@@ -276,6 +276,7 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 	 * @param file the DialogueFile to load.
 	 */
 	public void loadFile(DialogueFile file){
+		if(file == null) return;
 		this.file = file.load(player,npc,interpreter);
 		this.file.setDialoguePlugin(this);
 		stage = START_DIALOGUE;

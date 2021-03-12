@@ -11,6 +11,7 @@ import core.game.container.access.BitregisterAssembler;
 import core.game.container.access.InterfaceContainer;
 import core.game.container.impl.EquipmentContainer;
 import core.game.content.global.action.EquipHandler;
+import core.game.interaction.Listeners;
 import core.game.interaction.OptionHandler;
 import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.player.Player;
@@ -188,6 +189,9 @@ public final class EquipmentInterface extends ComponentPlugin {
 		}
 		Item item = player.getEquipment().get(slot);
 		if (item == null) {
+			return;
+		}
+		if(Listeners.run(item.getId(),0,"operate",player,item)){
 			return;
 		}
 		OptionHandler handler = item.getOperateHandler();

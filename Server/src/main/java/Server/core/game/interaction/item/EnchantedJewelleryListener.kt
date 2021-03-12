@@ -1,131 +1,47 @@
-package core.game.interaction.item;
+package core.game.interaction.item
 
-import core.cache.def.impl.ItemDefinition;
-import core.game.content.dialogue.DialoguePlugin;
-import core.game.content.global.EnchantedJewellery;
-import core.game.interaction.OptionHandler;
-import core.game.node.Node;
-import core.game.node.entity.player.Player;
-import core.game.node.item.Item;
-import core.plugin.Initializable;
-import core.plugin.Plugin;
+import core.game.interaction.OptionListener
+import core.game.content.global.EnchantedJewellery
+import core.game.content.global.EnchantedJewelleryDialogueFile
+import java.util.ArrayList
 
 /**
- * Represents the plugin used to handle enchanted jewellery transportation.
- * @author 'Vexia
- * @version 1.0
+ * Listener for enchanted jewellery options
+ * @author Ceikry
  */
-@Initializable
-public final class EnchantedJewelleryPlugin extends OptionHandler {
+class EnchantedJewelleryListener : OptionListener() {
+    val IDs: IntArray
 
-	@Override
-	public Plugin<Object> newInstance(Object arg) throws Throwable {
+    init {
+        val idsList = ArrayList<Int>()
+        for (j in EnchantedJewellery.values()) {
+            for (id in j.ids) {
+                idsList.add(id)
+            }
+        }
+        IDs = idsList.toIntArray()
+    }
 
-		new JewelleryDialogue().init();
-		for (EnchantedJewellery jewellery : EnchantedJewellery.values()) {
-			for (int id : jewellery.getIds()) {
-				ItemDefinition.forId(id).getHandlers().put("option:rub", this);
-				ItemDefinition.forId(id).getHandlers().put("option:operate", this);
-			}
-		}
-		return this;
-	}
+    override fun defineListeners() {
 
-	@Override
-	public boolean handle(Player player, Node node, String option) {
-		final EnchantedJewellery jewellery = EnchantedJewellery.forItem((Item) node);
-		if (jewellery.isLast(jewellery.getItemIndex((Item) node))) {
-			player.getPacketDispatch().sendMessage("The " + jewellery.getNameType((Item) node) + " has lost its charge.");
-			player.getPacketDispatch().sendMessage("It will need to be recharged before you can use it again.");
-			return true;
-		}
-		player.getPacketDispatch().sendMessage("You rub the " + jewellery.getNameType((Item) node) + "...");
-		player.getDialogueInterpreter().open(JewelleryDialogue.ID, node, jewellery, option.equals("operate"));
-		return true;
-	}
+        on(IDs,ITEM,"rub","operate"){player,node ->
+            val item = node.asItem()
+            val jewellery = EnchantedJewellery.forItem(item)
+            if (jewellery.isLast(jewellery.getItemIndex(item))) {
+                player.packetDispatch.sendMessage("The " + jewellery.getNameType(item) + " has lost its charge.")
+                player.packetDispatch.sendMessage("It will need to be recharged before you can use it again.")
+                return@on true
+            }
+            player.packetDispatch.sendMessage("You rub the " + jewellery.getNameType(item) + "...")
 
-	@Override
-	public boolean isWalk() {
-		return false;
-	}
+            if (jewellery == EnchantedJewellery.DIGSITE_PENDANT) {
+                jewellery.use(player, item, 0, player.equipment.containsItem(item))
+                return@on true
+            } else {
+                player.dialogueInterpreter.open(EnchantedJewelleryDialogueFile(jewellery,item))
+            }
+            return@on true
+        }
 
-	/**
-	 * Represents the jewellery dialogue plugin.
-	 * @author 'Vexia
-	 * @version 1.0
-	 */
-	public final class JewelleryDialogue extends DialoguePlugin {
-
-		/**
-		 * Represents the id to use.
-		 */
-		public static final int ID = 329128389;
-
-		/**
-		 * Represents the enchanted jewellery.
-		 */
-		private EnchantedJewellery jewellery;
-
-		/**
-		 * If the operate option is used.
-		 */
-		private boolean operate;
-
-		/**
-		 * Represents the item instance.
-		 */
-		private Item item;
-
-		/**
-		 * Constructs a new {@code EnchantedJewelleryPlugin} {@code Object}.
-		 */
-		public JewelleryDialogue() {
-			/**
-			 * empty.
-			 */
-		}
-
-		/**
-		 * Constructs a new {@code EnchantedJewelleryPlugin} {@code Object}.
-		 * @param player the player.
-		 */
-		public JewelleryDialogue(final Player player) {
-			super(player);
-		}
-
-		@Override
-		public DialoguePlugin newInstance(Player player) {
-			return new JewelleryDialogue(player);
-		}
-
-		@Override
-		public boolean open(Object... args) {
-			item = (Item) args[0];
-			jewellery = (EnchantedJewellery) args[1];
-			operate = args.length > 2 && (Boolean) args[2];
-			if (jewellery == EnchantedJewellery.DIGSITE_PENDANT) {
-				jewellery.use(player, item, 0, operate);
-				return true;
-			}
-			interpreter.sendOptions("Where would you like to go?", jewellery.getOptions());
-			return true;
-		}
-
-		@Override
-		public boolean handle(int interfaceId, int buttonId) {
-			if (player.getInterfaceManager().isOpened()) {
-				end();
-				return true;
-			}
-			end();
-			jewellery.use(player, item, (buttonId - 1), operate);
-			return true;
-		}
-
-		@Override
-		public int[] getIds() {
-			return new int[] { ID };
-		}
-
-	}
+    }
 }
