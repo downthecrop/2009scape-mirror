@@ -58,7 +58,7 @@ public enum Traps {
 	/**
 	 * The location hooks for this node.
 	 */
-	private final List<TrapHook> hooks = new ArrayList<>();
+	private final List<TrapHook> hooks = new ArrayList<>(5);
 
 	/**
 	 * The trap settings.

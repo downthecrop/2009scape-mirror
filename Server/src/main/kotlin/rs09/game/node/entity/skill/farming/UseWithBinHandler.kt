@@ -8,7 +8,7 @@ import org.rs09.consts.Items
 
 object UseWithBinHandler {
     @JvmField
-    val allowedNodes = ArrayList<Int>()
+    val allowedNodes = ArrayList<Int>(100)
     val fillAnim = Animation(832)
     val compostPotionAnimation = Animation(2259)
     val scoopAnimation = Animation(8905)

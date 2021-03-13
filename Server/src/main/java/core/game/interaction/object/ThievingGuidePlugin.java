@@ -1,26 +1,26 @@
 package core.game.interaction.object;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import core.cache.def.impl.ObjectDefinition;
-import core.plugin.Initializable;
-import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.ChanceItem;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
+import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import rs09.game.world.GameWorld;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Represents the thieving guide plugin.
@@ -143,7 +143,7 @@ public class ThievingGuidePlugin extends OptionHandler {
 	 */
 	private void addItem(Player player) {
 		ChanceItem[] l = RandomFunction.random(2) == 1 ? GEMS : COINS;
-		List<ChanceItem> chances = new ArrayList<>();
+		List<ChanceItem> chances = new ArrayList<>(20);
 		for (ChanceItem c : l) {
 			chances.add(c);
 		}

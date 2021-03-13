@@ -1,17 +1,17 @@
 package core.game.content.dialogue;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
 import core.game.node.entity.player.link.IronmanMode;
 import core.game.node.entity.player.link.diary.DiaryType;
-import rs09.game.world.GameWorld;
 import core.game.world.map.zone.impl.ModeratorZone;
-import core.plugin.Initializable;
 import core.net.amsc.MSPacketRepository;
+import core.plugin.Initializable;
+import rs09.game.world.GameWorld;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents the lumbridge guide dialogue plugin.
@@ -65,7 +65,7 @@ public final class LumbridgeGuideDialogue extends DialoguePlugin {
 				stage = 103;
 				return true;
 			}
-			options = new ArrayList<>();
+			options = new ArrayList<>(5);
 			options.add("Yes please.");
 			if (player.getRights() == Rights.PLAYER_MODERATOR && ModeratorZone.isOpen() || player.isAdmin()) {
 				options.add("I would like to access the P-Mod room.");

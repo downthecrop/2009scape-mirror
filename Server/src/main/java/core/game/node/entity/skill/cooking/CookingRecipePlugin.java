@@ -80,7 +80,7 @@ public final class CookingRecipePlugin extends UseWithHandler {
 	 * @return the allowed nodes.
 	 */
 	private final static int[] getAllowedNodes() {
-		List<Integer> bases = new ArrayList<>();
+		List<Integer> bases = new ArrayList<>(10);
 		for (Recipe recipe : Recipe.RECIPES) {
 			for (Item base : recipe.getParts()) {
 				if (bases.contains(base.getId())) {

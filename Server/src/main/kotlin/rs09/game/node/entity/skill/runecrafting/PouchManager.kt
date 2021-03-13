@@ -16,7 +16,7 @@ import rs09.tools.stringtools.colorize
  */
 class PouchManager(val player: Player) {
 
-    val pouches = hashMapOf(
+    val pouches = mapOf(
             Items.SMALL_POUCH_5509 to RCPouch(3,1),
             Items.MEDIUM_POUCH_5510 to RCPouch(6,25),
             Items.LARGE_POUCH_5512 to RCPouch(9,50),

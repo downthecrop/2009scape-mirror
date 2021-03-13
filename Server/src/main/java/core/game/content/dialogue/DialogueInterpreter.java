@@ -48,7 +48,7 @@ public final class DialogueInterpreter {
     /**
      * a List of dialogue actions.
      */
-    private final List<DialogueAction> actions = new ArrayList<>();
+    private final List<DialogueAction> actions = new ArrayList<>(10);
 
     /**
      * The currently opened dialogue.

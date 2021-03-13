@@ -25,7 +25,7 @@ public final class GameAttributes {
 	/**
 	 * The list of attributes to save.
 	 */
-	private final List<String> savedAttributes = new ArrayList<>();
+	private final List<String> savedAttributes = new ArrayList<>(250);
 
 	/**
 	 * Constructs a new {@code GameAttributes} {@code Object}.

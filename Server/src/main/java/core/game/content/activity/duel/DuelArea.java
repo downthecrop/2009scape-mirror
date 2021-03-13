@@ -1,14 +1,9 @@
 package core.game.content.activity.duel;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import rs09.ServerConstants;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.container.Container;
 import core.game.container.impl.EquipmentContainer;
 import core.game.content.dialogue.DialogueAction;
-import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.interaction.Option;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -19,11 +14,11 @@ import core.game.node.entity.impl.PulseManager;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.HintIconManager;
 import core.game.node.entity.player.link.prayer.PrayerType;
+import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.zone.MapZone;
@@ -32,6 +27,11 @@ import core.game.world.map.zone.ZoneRestriction;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
+import rs09.ServerConstants;
+import rs09.game.world.GameWorld;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a dueling area.
@@ -122,8 +122,8 @@ public class DuelArea extends MapZone {
 		session.getOther().getInterfaceManager().restoreTabs();
 		session.getPlayer().setAttribute("duel:icon", HintIconManager.registerHintIcon(session.getPlayer(), session.getOther()));
 		session.getOther().setAttribute("duel:icon", HintIconManager.registerHintIcon(session.getOther(), session.getPlayer()));
-		session.getPlayer().setAttribute("duel:ammo", new ArrayList<GroundItem>());
-		session.getOther().setAttribute("duel:ammo", new ArrayList<GroundItem>());
+		session.getPlayer().setAttribute("duel:ammo", new ArrayList<GroundItem>(100));
+		session.getOther().setAttribute("duel:ammo", new ArrayList<GroundItem>(100));
 		session.getPlayer().setAttribute("vengeance", false);
 		session.getOther().setAttribute("vengeance", false);
 		GameWorld.getPulser().submit(new Pulse(4, session.getPlayer(), session.getOther()) {

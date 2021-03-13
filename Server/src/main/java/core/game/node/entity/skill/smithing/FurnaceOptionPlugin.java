@@ -150,7 +150,7 @@ public final class FurnaceOptionPlugin extends OptionHandler {
 		 * @return the ids.
 		 */
 		public static final int[] getIds() {
-			List<Integer> ids = new ArrayList<>();
+			List<Integer> ids = new ArrayList<>(10);
 			for (Bar bar : Bar.values()) {
 				for (Item i : bar.getOres()) {
 					ids.add(i.getId());

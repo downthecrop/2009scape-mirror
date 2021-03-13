@@ -21,7 +21,7 @@ public final class TrapWrapper {
 	/**
 	 * The items to be recieved on trap clearing.
 	 */
-	private final List<Item> items = new ArrayList<>();
+	private final List<Item> items = new ArrayList<>(10);
 
 	/**
 	 * The player instance.

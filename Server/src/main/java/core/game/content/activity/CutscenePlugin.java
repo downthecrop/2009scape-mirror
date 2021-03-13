@@ -33,7 +33,7 @@ public abstract class CutscenePlugin extends ActivityPlugin {
 	/**
 	 * The npcs in our cutscene.
 	 */
-	protected final List<NPC> npcs = new ArrayList<>();
+	protected final List<NPC> npcs = new ArrayList<>(100);
 
 	/**
 	 * The start pulse used for effect.

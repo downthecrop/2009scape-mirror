@@ -1,17 +1,17 @@
 package core.game.interaction.item;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import core.cache.def.impl.ItemDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.ChanceItem;
 import core.game.node.item.Item;
-import core.plugin.Plugin;
 import core.plugin.Initializable;
+import core.plugin.Plugin;
 import core.tools.RandomFunction;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles the herb box item.
@@ -49,7 +49,7 @@ public class HerbBoxPlugin extends OptionHandler {
 				player.sendMessage("You don't have enough bank space to bank all those herbs.");
 				break;
 			}
-			List<ChanceItem> herbList = new ArrayList<>();
+			List<ChanceItem> herbList = new ArrayList<>(5);
 			for (int i = 0; i < herbs; i++) {
 				herbList.add(RandomFunction.getChanceItem(HERBS));
 			}
