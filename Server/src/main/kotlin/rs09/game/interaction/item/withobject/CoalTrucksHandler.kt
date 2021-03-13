@@ -12,6 +12,7 @@ import core.game.world.map.zone.ZoneBorders
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs09.consts.Items
+import rs09.game.interaction.OptionListener
 import rs09.plugin.PluginManager.definePlugin
 import java.util.*
 
@@ -19,51 +20,49 @@ import java.util.*
  * Handles coal truck interactions
  * @author ceik
  */
-@Initializable
-class CoalTrucksHandler : OptionHandler() {
+class CoalTrucksHandler : OptionListener() {
 
+    val SEERS_VILLAGE_COAL_TRUCK_2114 = 2114
     val seersVillageTrucks = ZoneBorders(2690,3502,2699,3508)
 
-    override fun newInstance(arg: Any?): Plugin<Any>? {
-        definePlugin(useCoalWithTruck())
-        val def = ObjectDefinition.forId(2114)
-        def.handlers["option:remove-coal"] = this
-        def.handlers["option:investigate"] = this
-        return this
-    }
+    override fun defineListeners() {
+        on(SEERS_VILLAGE_COAL_TRUCK_2114, OBJECT, "remove-coal") { player, node ->
 
-    override fun handle(player: Player, node: Node, option: String): Boolean {
-        var coalInTruck = player.getAttribute("coal-truck-inventory", 0)
-        var freeSpace = player.inventory.freeSlots()
-        val toAdd: MutableList<Item> = ArrayList()
-        when (option) {
-            "remove-coal" -> {
-                if (coalInTruck == 0) {
-                    player.dialogueInterpreter.sendDialogue("The coal truck is empty.")
-                    return true
-                }
-                var toRemove = player.inventory.freeSlots()
+            var coalInTruck = player.getAttribute("coal-truck-inventory", 0)
+            var freeSpace = player.inventory.freeSlots()
+            val toAdd: MutableList<Item> = ArrayList()
 
-                if(toRemove > coalInTruck) toRemove = coalInTruck
-
-                player.inventory.add(Item(Items.COAL_453,toRemove))
-
-                coalInTruck -= toRemove
-                player.setAttribute("/save:coal-truck-inventory", coalInTruck)
-
-
-                if (!player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE, 1, 2)
-                        && seersVillageTrucks.insideBorder(player)
-                        && player.getAttribute("diary:seers:coal-truck-full", false)) {
-                    player.removeAttribute("diary:seers:coal-truck-full")
-                    player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 1, 2)
-                }
+            if (coalInTruck == 0) {
+                player.dialogueInterpreter.sendDialogue("The coal truck is empty.")
+                return@on true
             }
-            "investigate" -> player.dialogueInterpreter.sendDialogue("There is currently $coalInTruck coal in the truck.", "The truck has space for " + (120 - coalInTruck) + " more coal.")
+
+            var toRemove = player.inventory.freeSlots()
+
+            if(toRemove > coalInTruck) toRemove = coalInTruck
+
+            player.inventory.add(Item(Items.COAL_453,toRemove))
+
+            coalInTruck -= toRemove
+            player.setAttribute("/save:coal-truck-inventory", coalInTruck)
+
+            if (!player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE, 1, 2)
+                && seersVillageTrucks.insideBorder(player)
+                && player.getAttribute("diary:seers:coal-truck-full", false)) {
+                player.removeAttribute("diary:seers:coal-truck-full")
+                player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 1, 2)
+            }
+            return@on true
         }
-        return true
+
+        on(SEERS_VILLAGE_COAL_TRUCK_2114, OBJECT, "investigate") { player, node ->
+            var coalInTruck = player.getAttribute("coal-truck-inventory", 0)
+            player.dialogueInterpreter.sendDialogue("There is currently $coalInTruck coal in the truck.", "The truck has space for " + (120 - coalInTruck) + " more coal.")
+            return@on true
+        }
     }
 
+    //TODO:
     inner class useCoalWithTruck : UseWithHandler(Items.COAL_453) {
         override fun newInstance(arg: Any?): Plugin<Any>? {
             addHandler(2114, OBJECT_TYPE, this)
