@@ -115,4 +115,12 @@ object Listeners {
         }
         return true
     }
+
+    fun add(type: Int, used: IntArray, with: IntArray, handler: (Player, Node, Node) -> Boolean) {
+        for(u in used){
+            for (w in with){
+                useWithListeners["$u:$w:$type"] = handler
+            }
+        }
+    }
 }
