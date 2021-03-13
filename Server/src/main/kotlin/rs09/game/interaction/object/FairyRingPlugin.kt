@@ -1,14 +1,10 @@
 package rs09.game.interaction.`object`
 
-import core.cache.def.impl.ObjectDefinition
 import core.game.component.Component
-import core.game.interaction.OptionHandler
-import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager.TeleportType
 import core.game.world.map.Location
-import core.plugin.Initializable
-import core.plugin.Plugin
+import rs09.game.interaction.OptionListener
 
 /**
  * Handles interactions with fairy rings
@@ -19,30 +15,28 @@ private val RINGS = intArrayOf(12003, 12094, 12095, 14058, 14061, 14064, 14067, 
 private const val MAIN_RING = 12128
 
 
-@Initializable
-class FairyRingPlugin : OptionHandler() {
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        for (i in RINGS) {
-            ObjectDefinition.forId(i).handlers["option:use"] = this
-        }
-        ObjectDefinition.forId(MAIN_RING).handlers["option:use"] = this
-        return this
-    }
+class FairyRingPlugin : OptionListener() {
 
-    override fun handle(player: Player, node: Node, option: String): Boolean {
-        when (option) {
-            "use" -> {
-                if (!player.equipment.contains(772, 1) && !player.equipment.contains(9084, 1)) {
-                    player.sendMessage("The fairy ring only works for those who wield fairy magic.")
-                    return true
-                }
-                when (node.id) {
-                    MAIN_RING -> openFairyRing(player)
-                    else -> player.teleporter.send(Location.create(2412, 4434, 0), TeleportType.FAIRY_RING)
-                }
+    override fun defineListeners() {
+
+        on(RINGS,OBJECT,"use"){player,_ ->
+            if (!player.equipment.contains(772, 1) && !player.equipment.contains(9084, 1)) {
+                player.sendMessage("The fairy ring only works for those who wield fairy magic.")
+                return@on true
             }
+            player.teleporter.send(Location.create(2412, 4434, 0), TeleportType.FAIRY_RING)
+            return@on true
         }
-        return true
+
+        on(MAIN_RING,OBJECT,"use"){player,_ ->
+            if (!player.equipment.contains(772, 1) && !player.equipment.contains(9084, 1)) {
+                player.sendMessage("The fairy ring only works for those who wield fairy magic.")
+                return@on true
+            }
+            openFairyRing(player)
+            return@on true
+        }
+
     }
 
     private fun reset(player: Player) {
