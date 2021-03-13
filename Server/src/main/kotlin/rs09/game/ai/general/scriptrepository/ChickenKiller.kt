@@ -1,7 +1,7 @@
 package rs09.game.ai.general.scriptrepository
 
 import core.game.world.map.Location
-import rs09.tools.Items
+import org.rs09.consts.Items
 import rs09.game.ai.general.ScriptAPI
 
 @PlayerCompatible

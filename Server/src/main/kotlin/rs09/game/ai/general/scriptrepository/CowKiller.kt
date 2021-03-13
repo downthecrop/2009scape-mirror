@@ -5,7 +5,7 @@ import core.game.interaction.MovementPulse
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
-import rs09.tools.Items
+import org.rs09.consts.Items
 import rs09.game.ai.pvmbots.CombatBotAssembler
 
 class CowKiller : Script() {

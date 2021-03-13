@@ -1,7 +1,7 @@
 package core.game.content.global.action;
 
 import core.game.container.impl.EquipmentContainer;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.node.entity.player.link.diary.DiaryType;
 import rs09.game.system.SystemLogger;
 import core.game.content.dialogue.DialoguePlugin;

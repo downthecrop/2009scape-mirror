@@ -1,6 +1,6 @@
 package core.game.node.entity.npc.drop;
 
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.node.item.WeightedChanceItem;
 
 public enum SharedTables {

@@ -3,11 +3,10 @@ package rs09.game.node.entity.player.info.stats
 import core.game.component.Component
 import core.game.content.global.BossKillCounter
 import core.game.node.entity.player.Player
+import core.plugin.Initializable
 import rs09.game.system.command.Command
 import rs09.game.system.command.sets.CommandSet
 import rs09.game.world.repository.Repository
-import core.plugin.Initializable
-import rs09.tools.Components
 
 @Initializable
 class StatsCommandSet : CommandSet(Command.Privilege.STANDARD) {
@@ -75,11 +74,11 @@ class StatsCommandSet : CommandSet(Command.Privilege.STANDARD) {
                 else -> sendLine(player,"",i)
             }
         }
-        player.interfaceManager.open(Component(Components.fancy_book_026))
+        player.interfaceManager.open(Component(26))
     }
 
     fun sendLine(player: Player, line: String, child: Int){
-        player.packetDispatch.sendString(line,Components.fancy_book_026,child)
+        player.packetDispatch.sendString(line,26,child)
     }
 
     fun prepareInterface(player: Player,other: Player){

@@ -13,8 +13,8 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs09.consts.Items
 import rs09.game.world.GameWorld
-import rs09.tools.Items
 import rs09.tools.stringtools.colorize
 
 val snowball = Item(Items.SNOWBALL_11951)

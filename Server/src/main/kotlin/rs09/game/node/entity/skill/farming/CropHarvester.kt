@@ -10,7 +10,7 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 @Initializable
 class CropHarvester : OptionHandler() {

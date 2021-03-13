@@ -9,7 +9,6 @@ import core.game.node.entity.player.link.TeleportManager.TeleportType
 import core.game.world.map.Location
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.Components
 
 /**
  * Handles interactions with fairy rings
@@ -56,7 +55,7 @@ class FairyRingPlugin : OptionHandler() {
 
     private fun openFairyRing(player: Player) {
         reset(player)
-        player.interfaceManager.openSingleTab(Component(Components.fr_travel_log_735))
-        player.interfaceManager.open(Component(Components.fr_rings_734))
+        player.interfaceManager.openSingleTab(Component(735))
+        player.interfaceManager.open(Component(734))
   }
 }

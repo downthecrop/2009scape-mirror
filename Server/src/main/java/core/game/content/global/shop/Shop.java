@@ -3,7 +3,7 @@ package core.game.content.global.shop;
 import core.cache.def.impl.ItemDefinition;
 import core.game.container.Container;
 import core.game.container.ContainerType;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;

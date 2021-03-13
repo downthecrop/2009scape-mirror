@@ -9,7 +9,7 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.Components
+import org.rs09.consts.Components
 
 @Initializable
 /**
@@ -37,7 +37,7 @@ class CaveRockHandler : OptionHandler() {
 
 
     fun showRock(player: Player, model: Int){
-        player.interfaceManager.open(Component(Components.cave_goblin_markers_062))
+        player.interfaceManager.open(Component(Components.CAVE_GOBLIN_MARKERS_62))
         player.packetDispatch.sendModelOnInterface(model,62,1,1)
     }
 

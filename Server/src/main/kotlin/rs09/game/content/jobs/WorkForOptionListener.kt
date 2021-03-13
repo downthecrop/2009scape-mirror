@@ -6,8 +6,8 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
+import org.rs09.consts.Items
 import rs09.game.interaction.OptionListener
-import rs09.tools.Items
 
 /**
  * Handles the work-for actions for the NPCs

@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.cooking;
 
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.node.item.Item;
 
 import java.util.HashMap;

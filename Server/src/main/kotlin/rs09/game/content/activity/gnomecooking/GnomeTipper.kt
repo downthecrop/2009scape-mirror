@@ -1,9 +1,9 @@
 package rs09.game.content.activity.gnomecooking
 
-import rs09.tools.Items
 import core.game.node.item.Item
 import core.game.node.item.WeightedChanceItem
 import core.tools.RandomFunction
+import org.rs09.consts.Items
 
 object GnomeTipper {
     private val easyTips = arrayListOf(

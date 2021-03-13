@@ -14,8 +14,8 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs09.consts.Items
 import rs09.game.world.GameWorld
-import rs09.tools.Items
 
 private const val SQUASH_GRAPHICS_BEGIN = 767
 private const val SQUASH_GRAPHICS_END = 769

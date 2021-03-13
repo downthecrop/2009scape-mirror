@@ -6,7 +6,7 @@ import core.game.interaction.UseWithHandler
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.NPCs
+import org.rs09.consts.NPCs
 
 @Initializable
 class LeprechaunNoter : UseWithHandler(*Plantable.values().map{ it.harvestItem }.toIntArray()) {

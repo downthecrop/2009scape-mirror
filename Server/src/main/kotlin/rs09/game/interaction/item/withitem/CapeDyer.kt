@@ -6,7 +6,7 @@ import core.game.interaction.UseWithHandler
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 private val CAPES = arrayOf(1019,1007,1021,1023,1027,1029,1031,6959)
 private val DYES = Dyes.values().map { it -> it.item.id }.toIntArray()

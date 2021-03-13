@@ -6,7 +6,6 @@ import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
-import rs09.tools.Components
 
 /**
  * Dialogue for Asyff, the fancy dress shop owner
@@ -31,7 +30,7 @@ class AsyffDialogue(player: Player? = null) : DialoguePlugin(player){
             10 -> end().also { npc.openShop(player) }
 
             //Can you make clothing suitable for hunting
-            20 -> end().also { player.interfaceManager.open(Component(Components.custom_fur_clothing_477)) }//Open custom fur clothing interface
+            20 -> end().also { player.interfaceManager.open(Component(477)) }//Open custom fur clothing interface
 
             //I think I might just leave the perusing for now, thanks.
             30 -> end()

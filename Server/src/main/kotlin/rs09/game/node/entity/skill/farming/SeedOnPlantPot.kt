@@ -5,10 +5,11 @@ import core.game.interaction.UseWithHandler
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 @Initializable
-class SeedOnPlantPot : UseWithHandler(Items.ACORN_5312,Items.WILLOW_SEED_5313,Items.MAPLE_SEED_5314,Items.YEW_SEED_5315,Items.MAGIC_SEED_5316,Items.APPLE_TREE_SEED_5283,Items.BANANA_TREE_SEED_5284,Items.ORANGE_TREE_SEED_5285,Items.CURRY_TREE_SEED_5286,Items.PINEAPPLE_SEED_5287,Items.PAPAYA_TREE_SEED_5288,Items.PALM_TREE_SEED_5289) {
+class SeedOnPlantPot : UseWithHandler(Items.ACORN_5312,
+    Items.WILLOW_SEED_5313,Items.MAPLE_SEED_5314,Items.YEW_SEED_5315,Items.MAGIC_SEED_5316,Items.APPLE_TREE_SEED_5283,Items.BANANA_TREE_SEED_5284,Items.ORANGE_TREE_SEED_5285,Items.CURRY_TREE_SEED_5286,Items.PINEAPPLE_SEED_5287,Items.PAPAYA_TREE_SEED_5288,Items.PALM_TREE_SEED_5289) {
     override fun newInstance(arg: Any?): Plugin<Any> {
         addHandler(Items.PLANT_POT_5354, ITEM_TYPE,this)
         return this

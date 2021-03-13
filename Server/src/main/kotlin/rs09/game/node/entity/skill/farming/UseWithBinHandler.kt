@@ -4,7 +4,7 @@ import core.game.interaction.NodeUsageEvent
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 object UseWithBinHandler {
     @JvmField
@@ -41,7 +41,7 @@ object UseWithBinHandler {
         val bin = cBin.getBinForPlayer(player)
 
         when(used){
-            Items.COMPOST_POTION1_6476,Items.COMPOST_POTION2_6474,Items.COMPOST_POTION3_6472,Items.COMPOST_POTION4_6470 -> {
+            Items.COMPOST_POTION1_6476,Items.COMPOST_POTION2_6474, Items.COMPOST_POTION3_6472,Items.COMPOST_POTION4_6470 -> {
                 if(!bin.isSuperCompost && bin.isFinished && !bin.isClosed){
                     player.animator.animate(compostPotionAnimation)
                     player.pulseManager.run(object : Pulse(compostPotionAnimation.duration){

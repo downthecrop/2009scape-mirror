@@ -3,9 +3,9 @@ package rs09.game.content.quest.members.thelosttribe
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
+import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.tools.END_DIALOGUE
-import rs09.tools.Items
 import rs09.tools.START_DIALOGUE
 
 class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {

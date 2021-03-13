@@ -3,8 +3,8 @@ package rs09.game.interaction.`object`
 import core.game.node.`object`.ObjectBuilder
 import core.game.node.item.Item
 import core.tools.RandomFunction
+import org.rs09.consts.Items
 import rs09.game.interaction.OptionListener
-import rs09.tools.Items
 
 /**
  * @author Woah, with love

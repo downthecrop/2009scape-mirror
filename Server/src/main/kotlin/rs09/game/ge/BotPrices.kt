@@ -1,7 +1,7 @@
 package rs09.game.ge
 
 import core.cache.def.impl.ItemDefinition
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 class BotPrices {
 

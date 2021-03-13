@@ -1,11 +1,11 @@
 package rs09.game.content.activity.gnomecooking.bowls
 
-import core.game.interaction.UseWithHandler
-import rs09.tools.Items
 import core.game.interaction.NodeUsageEvent
+import core.game.interaction.UseWithHandler
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs09.consts.Items
 
 /**
  * Handles garnishing of gnomebowls

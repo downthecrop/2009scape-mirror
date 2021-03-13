@@ -2,7 +2,7 @@ package core.game.content.ame.events.lostpirate;
 
 import java.nio.ByteBuffer;
 
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.content.ame.AntiMacroDialogue;
 import core.game.content.ame.AntiMacroEvent;
 import core.game.content.dialogue.DialoguePlugin;

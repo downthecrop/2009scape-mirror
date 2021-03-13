@@ -1,7 +1,7 @@
 package core.game.interaction.item.withobject;
 
 import core.plugin.Initializable;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;

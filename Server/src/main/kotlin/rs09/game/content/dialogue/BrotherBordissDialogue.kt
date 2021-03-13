@@ -6,7 +6,7 @@ import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 @Initializable
 /**

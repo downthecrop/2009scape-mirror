@@ -7,7 +7,6 @@ import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.Components
 
 @Initializable
 class WardrobeHandler : OptionHandler() {
@@ -22,9 +21,9 @@ class WardrobeHandler : OptionHandler() {
         player ?: return false
         node ?: return false
         if(player.appearance.isMale){
-            player.interfaceManager.open(Component(Components.Thessalias_Makeovers_591))
+            player.interfaceManager.open(Component(591))
         } else {
-            player.interfaceManager.open(Component(Components.Thessalias_Makeovers_594))
+            player.interfaceManager.open(Component(594))
         }
         return true;
     }

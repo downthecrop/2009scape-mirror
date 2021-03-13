@@ -9,10 +9,10 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.task.Pulse
 import core.game.world.map.zone.ZoneBorders
 import core.plugin.Plugin
+import org.rs09.consts.Items
 import rs09.game.interaction.OptionListener
 import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.GameWorld
-import rs09.tools.Items
 
 /**
  * Represents the equipment equipping handler plugin.

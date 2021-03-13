@@ -2,7 +2,7 @@ package core.game.content.dialogue;
 
 import core.game.component.Component;
 import core.plugin.Initializable;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.node.entity.skill.cooking.dairy.DairyChurnPulse;
 import core.game.node.entity.skill.cooking.dairy.DairyProduct;
 import core.game.node.entity.player.Player;

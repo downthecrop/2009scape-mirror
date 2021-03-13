@@ -2,8 +2,8 @@ package rs09.game.content.activity.fishingtrawler
 
 import core.game.node.item.Item
 import core.game.node.item.WeightedChanceItem
-import rs09.tools.Items
 import core.tools.RandomFunction
+import org.rs09.consts.Items
 
 /**
  * Rolls/stores the loot table for fishing trawler

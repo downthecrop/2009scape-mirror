@@ -4,7 +4,7 @@ import core.cache.def.impl.ObjectDefinition;
 import core.game.container.Container;
 import core.game.container.impl.EquipmentContainer;
 import core.plugin.Initializable;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.combat.equipment.WeaponInterface;

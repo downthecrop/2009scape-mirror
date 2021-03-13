@@ -11,8 +11,8 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs09.consts.Items
 import rs09.game.world.GameWorld
-import rs09.tools.Items
 
 /**
  * Handles the chopping down of dense jungle, mainly to grant access to the Kharazi Jungle.

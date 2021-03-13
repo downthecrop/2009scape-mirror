@@ -7,7 +7,6 @@ import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.Components
 
 /**
  * Handles the mix-cocktail option for the cocktail shaker
@@ -23,7 +22,7 @@ class CocktailShakerHandler : OptionHandler() {
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         player ?: return false
         node ?: return false
-        player.interfaceManager.open(Component(Components.gnome_cocktails_436)) //Gnome cocktail interface
+        player.interfaceManager.open(Component(436)) //Gnome cocktail interface
         return true
     }
 

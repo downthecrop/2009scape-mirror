@@ -1,7 +1,7 @@
 package core.game.component;
 
 
-import static rs09.tools.Interfaces.*;
+import org.rs09.consts.Components;
 
 /**
  * Represents an interface type.
@@ -13,47 +13,47 @@ public enum InterfaceType {
 	/**
 	 * Default interface.
 	 */
-	DEFAULT(TOPLEVEL_548, TOPLEVEL_FULLSCREEN_746, 11, 6),
+	DEFAULT(Components.TOPLEVEL_548, Components.TOPLEVEL_FULLSCREEN_746, 11, 6),
 
 	/**
 	 * Walkable interface.
 	 */
-	OVERLAY(TOPLEVEL_548, TOPLEVEL_FULLSCREEN_746, 4, 5),
+	OVERLAY(Components.TOPLEVEL_548, Components.TOPLEVEL_FULLSCREEN_746, 4, 5),
 
 	/**
 	 * A tab interface.
 	 */
-	TAB(TOPLEVEL_548, TOPLEVEL_FULLSCREEN_746, 83, 93),
+	TAB(Components.TOPLEVEL_548, Components.TOPLEVEL_FULLSCREEN_746, 83, 93),
 
 	/**
 	 * The only tab to be shown (when this type is opened).
 	 */
-	SINGLE_TAB(TOPLEVEL_548, TOPLEVEL_FULLSCREEN_746, 80, 76),
+	SINGLE_TAB(Components.TOPLEVEL_548, Components.TOPLEVEL_FULLSCREEN_746, 80, 76),
 
 	/**
 	 * Chatbox dialogue interface.
 	 */
-	DIALOGUE(CHATTOP_752, CHATTOP_752, 12, 12),
+	DIALOGUE(Components.CHATTOP_752, Components.CHATTOP_752, 12, 12),
 
 	/**
 	 * A window pane.
 	 */
-	WINDOW_PANE(TOPLEVEL_548, TOPLEVEL_FULLSCREEN_746, 0, 0),
+	WINDOW_PANE(Components.TOPLEVEL_548, Components.TOPLEVEL_FULLSCREEN_746, 0, 0),
 
 	/**
 	 * Client script chatbox interface.
 	 */
-	CS_CHATBOX(CHATTOP_752, CHATTOP_752, 6, 6),
+	CS_CHATBOX(Components.CHATTOP_752, Components.CHATTOP_752, 6, 6),
 
 	/**
 	 * Chatbox interface.
 	 */
-	CHATBOX(CHATTOP_752, CHATTOP_752, 8, 8),
+	CHATBOX(Components.CHATTOP_752, Components.CHATTOP_752, 8, 8),
 
     /**
      * Wilderness overlay
      */
-    WILDERNESS_OVERLAY(TOPLEVEL_548, TOPLEVEL_FULLSCREEN_746, 11, 3);
+    WILDERNESS_OVERLAY(Components.TOPLEVEL_548, Components.TOPLEVEL_FULLSCREEN_746, 11, 3);
 
 	/**
 	 * The fixed window pane id.

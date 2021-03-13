@@ -4,7 +4,7 @@ import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
-import rs09.tools.Items
+import org.rs09.consts.Items
 import rs09.game.ai.skillingbot.SkillingBotAssembler
 
 @PlayerCompatible

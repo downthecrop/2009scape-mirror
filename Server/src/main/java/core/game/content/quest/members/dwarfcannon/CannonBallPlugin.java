@@ -1,6 +1,6 @@
 package core.game.content.quest.members.dwarfcannon;
 
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import rs09.game.content.dialogue.SkillDialogueHandler;
 import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
 import core.game.node.entity.skill.SkillPulse;

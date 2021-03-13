@@ -5,7 +5,7 @@ import core.game.node.entity.player.info.Rights;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.player.Player;

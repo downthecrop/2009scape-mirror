@@ -8,15 +8,15 @@ import core.game.node.entity.player.link.RunScript
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.Components
-import rs09.tools.Items
+import org.rs09.consts.Components
+import org.rs09.consts.Items
 
 private const val varp = 615
 @Initializable
 class ToolLeprechaunInterface : ComponentPlugin() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ComponentDefinition.put(Components.farming_tools_125,this)
-        ComponentDefinition.put(Components.farming_tools_side_126,this)
+        ComponentDefinition.put(Components.FARMING_TOOLS_125,this)
+        ComponentDefinition.put(Components.FARMING_TOOLS_SIDE_126,this)
         return this
     }
 
@@ -24,8 +24,8 @@ class ToolLeprechaunInterface : ComponentPlugin() {
         component ?: return
         super.open(player, component)
         player?.varpManager?.flagSave(varp)
-        if(component.id == Components.farming_tools_125) {
-            player?.interfaceManager?.openSingleTab(Component(Components.farming_tools_side_126))
+        if(component.id == Components.FARMING_TOOLS_125) {
+            player?.interfaceManager?.openSingleTab(Component(Components.FARMING_TOOLS_SIDE_126))
             component.setCloseEvent { pl, _ ->
                 pl?.interfaceManager?.closeSingleTab()
                 true
@@ -39,9 +39,9 @@ class ToolLeprechaunInterface : ComponentPlugin() {
 
         when(component.id){
 
-            Components.farming_tools_125 -> {
+            Components.FARMING_TOOLS_125 -> {
                 when(button){
-                    33 -> doWithdrawal(player,Items.RAKE_5341,::setHasRake,::hasRake)
+                    33 -> doWithdrawal(player, Items.RAKE_5341,::setHasRake,::hasRake)
 
                     34 -> doWithdrawal(player,Items.SEED_DIBBER_5343,::setHasDibber,::hasDibber)
 
@@ -71,7 +71,7 @@ class ToolLeprechaunInterface : ComponentPlugin() {
                 }
             }
 
-            Components.farming_tools_side_126 -> {
+            Components.FARMING_TOOLS_SIDE_126 -> {
 
                 when(button){
 

@@ -8,7 +8,7 @@ import core.game.node.item.GroundItemManager
 import core.game.world.map.Location
 import core.net.packet.IncomingPacket
 import core.net.packet.IoBuffer
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 /**
  * Handles the Item -> Ground Item packet

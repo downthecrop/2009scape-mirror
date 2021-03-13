@@ -8,8 +8,8 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import core.tools.RandomFunction
+import org.rs09.consts.Items
 import rs09.game.ai.AIRepository
-import rs09.tools.Items
 
 /**
  * A bot that does various random slayer tasks throughout the game and sells the loot on the GE.
@@ -143,7 +143,7 @@ class GenericSlayerBot : Script() {
                         bot.inventory.clear()
                         for(item in inventory)
                             bot.inventory.add(item)
-                        scriptAPI.withdraw(rs09.tools.Items.LOBSTER_379,10)
+                        scriptAPI.withdraw(org.rs09.consts.Items.LOBSTER_379,10)
                         bot.fullRestore()
 
                         if(assignment.amount <= 0){

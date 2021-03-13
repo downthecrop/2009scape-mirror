@@ -9,7 +9,7 @@ import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.plugin.PluginManager;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 
 @Initializable
 public final class SecurityGuardPlugin extends OptionHandler {

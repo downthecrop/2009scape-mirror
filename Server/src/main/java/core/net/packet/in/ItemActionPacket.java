@@ -23,7 +23,7 @@ import rs09.game.node.entity.skill.farming.UseWithPatchHandler;
 import rs09.game.system.SystemLogger;
 import rs09.game.system.command.rottenpotato.RottenPotatoUseWithHandler;
 import rs09.game.world.repository.Repository;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 
 /**
  * The incoming item reward packet.

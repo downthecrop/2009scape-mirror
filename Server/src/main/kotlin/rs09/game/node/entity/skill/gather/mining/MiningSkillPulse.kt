@@ -25,10 +25,10 @@ import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import core.tools.StringUtils
+import org.rs09.consts.Items
 import rs09.game.node.entity.player.info.stats.STATS_BASE
 import rs09.game.node.entity.player.info.stats.STATS_ROCKS
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks
-import rs09.tools.Items
 import rs09.tools.stringtools.colorize
 
 /**

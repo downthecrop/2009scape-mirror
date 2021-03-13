@@ -1,13 +1,13 @@
 package rs09.game.content.activity.gnomecooking.cocktails
 
 import core.cache.def.impl.ItemDefinition
-import rs09.tools.Items
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs09.consts.Items
 
 private const val UNF_CHOC_SAT = 9573
 private const val UNF_DRUN_DRA = 9575

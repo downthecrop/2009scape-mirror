@@ -15,13 +15,13 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.impl.WildernessZone
+import org.rs09.consts.Items
 import rs09.game.ai.AIRepository
 import rs09.game.ai.pvmbots.CombatBotAssembler
 import rs09.game.node.entity.combat.CombatSwingHandler
 import rs09.game.node.entity.combat.handlers.MagicSwingHandler
 import rs09.game.node.entity.combat.handlers.MeleeSwingHandler
 import rs09.game.node.entity.combat.handlers.RangeSwingHandler
-import rs09.tools.Items
 import kotlin.random.Random
 
 /**

@@ -2,11 +2,10 @@ package rs09.game.content.activity.allfiredup
 
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import rs09.game.system.SystemLogger
 import core.game.system.task.Pulse
 import rs09.game.world.GameWorld
 import core.plugin.Plugin
-import rs09.tools.Items
+import org.rs09.consts.Items
 import rs09.tools.stringtools.colorize
 
 /**

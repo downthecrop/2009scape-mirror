@@ -6,9 +6,9 @@ import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
+import org.rs09.consts.Items
 import rs09.game.interaction.OptionListener
 import rs09.game.world.GameWorld.Pulser
-import rs09.tools.Items
 
 private const val LOADER = 11162
 private const val BONE_GRINDER = 11163

@@ -16,9 +16,9 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs09.consts.Items
 import rs09.game.node.entity.player.info.stats.FISHING_TRAWLER_LEAKS_PATCHED
 import rs09.game.node.entity.player.info.stats.STATS_BASE
-import rs09.tools.Items
 import rs09.tools.stringtools.colorize
 import kotlin.math.ceil
 

@@ -5,7 +5,7 @@ import core.game.interaction.UseWithHandler
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 private const val GNOME_BOWL_MOLD = 2166
 private const val GIANNE_DOUGH = 2171

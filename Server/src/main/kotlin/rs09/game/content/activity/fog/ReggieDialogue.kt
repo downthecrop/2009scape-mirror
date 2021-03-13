@@ -6,8 +6,8 @@ import core.game.node.item.Item
 import rs09.game.world.GameWorld
 import core.plugin.Initializable
 import core.game.content.dialogue.DialoguePlugin
+import org.rs09.consts.Components
 import rs09.game.interaction.FOGRewardsInterface
-import rs09.tools.Components
 
 @Initializable
 class ReggieDialogue(player: Player? = null) : DialoguePlugin(player){
@@ -34,7 +34,7 @@ class ReggieDialogue(player: Player? = null) : DialoguePlugin(player){
                 2 -> end()
                 3 -> npc("Sure thing. My tokens are 1000 coins","each.").also { stage = 10 }
             }
-            1 -> end().also { player.interfaceManager.open(Component(Components.fog_reward_732)) }
+            1 -> end().also { player.interfaceManager.open(Component(732)) }
 
             //Buying tokens with config option set to true
             10 -> player?.dialogueInterpreter?.sendOptions("How many?","50","100","250","500").also { stage++ }

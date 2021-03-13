@@ -13,12 +13,11 @@ import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.construction.Decoration
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
+import rs09.game.world.GameWorld
 import rs09.plugin.PluginManager.definePlugin
-import rs09.tools.Components
 
 /**
  * Handles the lectern
@@ -133,7 +132,7 @@ class LecternPlugin : OptionHandler() {
             override fun pulse(): Boolean {
                 when(counter++){
                     0 -> player.animator.animate(Animation(3649)).also { player.lock() }
-                    8 -> player.interfaceManager.open(Component(Components.poh_magic_tablets_400)).also { player.unlock(); return true }
+                    8 -> player.interfaceManager.open(Component(400)).also { player.unlock(); return true }
                 }
                 return false
             }

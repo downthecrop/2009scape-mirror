@@ -1,9 +1,9 @@
 package rs09.game.system.command.sets
 
 import core.game.node.item.Item
-import rs09.game.system.command.Command
 import core.plugin.Initializable
-import rs09.tools.Items
+import org.rs09.consts.Items
+import rs09.game.system.command.Command
 
 @Initializable
 class DevelopmentCommandSet : CommandSet(Command.Privilege.ADMIN) {

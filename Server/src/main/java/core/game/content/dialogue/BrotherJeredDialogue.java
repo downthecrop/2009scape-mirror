@@ -2,7 +2,7 @@ package core.game.content.dialogue;
 
 import core.game.content.global.Skillcape;
 import core.game.node.item.Item;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
 import core.plugin.Initializable;

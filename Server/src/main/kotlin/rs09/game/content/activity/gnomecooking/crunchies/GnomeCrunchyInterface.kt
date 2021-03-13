@@ -4,11 +4,11 @@ import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
 import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.Items
-import core.game.node.entity.skill.Skills
+import org.rs09.consts.Items
 
 private const val TOAD_CRUNCHIES = 9538
 private const val SPICE_CRUNCHIES = 9540

@@ -8,7 +8,7 @@ import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 const val HOLY_ELIXER = 13754
 const val SPIRIT_SHIELD = 13734

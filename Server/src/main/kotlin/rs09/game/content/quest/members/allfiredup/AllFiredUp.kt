@@ -5,8 +5,8 @@ import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
+import org.rs09.consts.Items
 import rs09.game.content.activity.allfiredup.AFUBeacon
-import rs09.tools.Items
 
 /**
  * Represents the "All Fired Up" quest.

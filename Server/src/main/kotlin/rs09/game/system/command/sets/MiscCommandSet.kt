@@ -15,6 +15,7 @@ import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
 import core.plugin.Initializable
 import core.tools.StringUtils
+import org.rs09.consts.Components
 import rs09.ServerConstants
 import rs09.game.content.activity.fishingtrawler.TrawlerLoot
 import rs09.game.ge.OfferManager
@@ -24,7 +25,6 @@ import rs09.game.system.command.Command
 import rs09.game.system.command.CommandMapping
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
-import rs09.tools.Components
 import rs09.tools.stringtools.colorize
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
@@ -96,11 +96,11 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
          */
         define("players", Command.Privilege.STANDARD){ player, _ ->
             val rights = player.rights.ordinal
-            if (player!!.interfaceManager.isOpened && player.interfaceManager.opened.id != Components.questjournal_scroll_275 || player.locks.isMovementLocked || player.locks.isTeleportLocked) {
+            if (player!!.interfaceManager.isOpened && player.interfaceManager.opened.id != Components.QUESTJOURNAL_SCROLL_275 || player.locks.isMovementLocked || player.locks.isTeleportLocked) {
                 player.sendMessage("Please finish what you're doing first.")
                 return@define
             }
-            player.interfaceManager.open(Component(Components.questjournal_scroll_275))
+            player.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
             var i = 0
             while (i < 257) {
                 player.packetDispatch.sendString("", 275, i)
@@ -173,7 +173,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 else
                     player.packetDispatch.sendString("", 275, lineId++)
             }
-            player.interfaceManager.open(Component(Components.questjournal_scroll_275))
+            player.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
         }
         /**
          * ==================================================================================
@@ -185,13 +185,13 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
          */
         define("commands"){player,_ ->
             for (i in 0..310) {
-                player.packetDispatch.sendString("", Components.questjournal_scroll_275, i)
+                player.packetDispatch.sendString("", Components.QUESTJOURNAL_SCROLL_275, i)
             }
             var lineid = 11
-            player.packetDispatch.sendString("Commands",Components.questjournal_scroll_275,2)
+            player.packetDispatch.sendString("Commands",Components.QUESTJOURNAL_SCROLL_275,2)
             for(line in CommandMapping.getNames())
-                player.packetDispatch.sendString(line,Components.questjournal_scroll_275,lineid++)
-            player.interfaceManager.open(Component(Components.questjournal_scroll_275))
+                player.packetDispatch.sendString(line,Components.QUESTJOURNAL_SCROLL_275,lineid++)
+            player.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
         }
 
         /**

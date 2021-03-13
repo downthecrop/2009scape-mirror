@@ -2,7 +2,7 @@ package core.game.content.activity.mta;
 
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.world.map.zone.ZoneBorders;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.node.entity.skill.magic.MagicSpell;
 import core.game.node.entity.skill.magic.Runes;
 import core.game.node.Node;
