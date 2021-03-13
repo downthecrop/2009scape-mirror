@@ -54,7 +54,7 @@ class CoalTruckInteractionListeners : InteractionListener() {
             return@on true
         }
 
-        on(COAL,COAL_TRUCK_2114,OBJECT){player,_,_ ->
+        onUseWith(OBJECT,COAL,COAL_TRUCK_2114){ player, _, _ ->
             var coalInTruck = player.getAttribute("coal-truck-inventory", 0)
 
             var coalInInventory = player.inventory.getAmount(Items.COAL_453)
@@ -74,7 +74,7 @@ class CoalTruckInteractionListeners : InteractionListener() {
             coalInTruck += coalInInventory
 
             player.setAttribute("/save:coal-truck-inventory",coalInTruck)
-            return@on true
+            return@onUseWith true
         }
     }
 }

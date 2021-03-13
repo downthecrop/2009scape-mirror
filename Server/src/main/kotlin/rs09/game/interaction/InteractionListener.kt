@@ -19,10 +19,10 @@ abstract class InteractionListener : Listener{
     fun on(type: Int, vararg option: String, handler: (Player, Node) -> Boolean){
         Listeners.add(option,type,handler)
     }
-    fun on(used: Int, with: Int, type: Int, handler: (Player, Node, Node) -> Boolean){
-        Listeners.add(used,with,type,handler)
+    fun onUseWith(type: Int, used: Int, vararg with: Int, handler: (Player, Node, Node) -> Boolean){
+        Listeners.add(type,used,with,handler)
     }
-    fun on(type: Int,used: Int,vararg with: Int, handler: (Player, Node, Node) -> Boolean){
+    fun onUseWith(type: Int, used: IntArray, vararg with: Int, handler: (Player, Node, Node) -> Boolean){
         Listeners.add(type,used,with,handler)
     }
 }

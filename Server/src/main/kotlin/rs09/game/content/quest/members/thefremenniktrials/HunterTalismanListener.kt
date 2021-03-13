@@ -4,7 +4,6 @@ import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.map.Location
-import core.plugin.Initializable
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 import rs09.game.world.GameWorld.Pulser
@@ -18,10 +17,10 @@ class HunterTalismanListener : InteractionListener() {
     override fun defineListeners() {
 
         on(TALISMAN,ITEM,"locate"){player,_ ->
-            var locationString = player?.getAttribute("fremtrials:draugen-loc","none")
+            var locationString = player.getAttribute("fremtrials:draugen-loc","none")
             if(locationString == "none"){
                 val newLoc = possibleLocations.random()
-                player?.setAttribute("/save:fremtrials:draugen-loc","${newLoc.x},${newLoc.y}")
+                player.setAttribute("/save:fremtrials:draugen-loc","${newLoc.x},${newLoc.y}")
                 locationString = "${newLoc.x},${newLoc.y}"
             }
             val locationComponents = locationString?.split(",")

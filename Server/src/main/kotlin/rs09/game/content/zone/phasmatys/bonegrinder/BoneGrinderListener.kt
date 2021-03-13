@@ -57,9 +57,9 @@ class BoneGrinderListener : InteractionListener() {
         /**
          * Handle Bone -> Hopper
          */
-        on(OBJECT,LOADER,*boneIDs){player,_,_ ->
+        onUseWith(OBJECT,LOADER,*boneIDs){ player, _, _ ->
             handleFill(player)
-            return@on true
+            return@onUseWith true
         }
 
     }

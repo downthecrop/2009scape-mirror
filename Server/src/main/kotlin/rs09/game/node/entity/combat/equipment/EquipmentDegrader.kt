@@ -2,6 +2,10 @@ package rs09.game.node.entity.combat.equipment
 
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import org.rs09.primextends.getNext
+import org.rs09.primextends.isLast
+import org.rs09.primextends.isNextLast
+
 /**
  * Handles equipment degrading
  * @author ceik
@@ -80,18 +84,5 @@ class EquipmentDegrader{
                 return set
         }
         return null
-    }
-
-    private fun <T> ArrayList<T>.getNext(any: Any?): T{ //gets the next member from a list
-        val indexOfCurrent = this.indexOf(any)
-        return get(indexOfCurrent + 1)
-    }
-
-    private fun <T> ArrayList<T>.isNextLast(current: Int): Boolean{ //checks if the next member in a list is last.
-        return current  + 1 >= size - 1
-    }
-
-    private fun <T> ArrayList<T>.isLast(current: Int): Boolean{
-        return current + 1 > size - 1
     }
 }
