@@ -166,7 +166,7 @@ public final class HunterPlugin extends OptionHandler {
 		 * @return the ids.
 		 */
 		public static int[] getIds() {
-			List<Integer> list = new ArrayList<>();
+			List<Integer> list = new ArrayList<>(10);
 			for (Traps trap : Traps.values()) {
 				for (int id : trap.getSettings().getBaitIds()) {
 					list.add(id);

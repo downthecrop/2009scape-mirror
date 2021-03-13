@@ -1,8 +1,5 @@
 package core.game.content.activity.mta;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.component.ComponentPlugin;
@@ -12,8 +9,11 @@ import core.game.container.access.InterfaceContainer;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
 import core.plugin.Plugin;
+import rs09.game.world.GameWorld;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents the mage training arena shop.
@@ -44,7 +44,7 @@ public class MTAShop {
 	/**
 	 * The viewers.
 	 */
-	private final List<Player> viewers = new ArrayList<>();
+	private final List<Player> viewers = new ArrayList<>(100);
 
 	/**
 	 * The shop component.

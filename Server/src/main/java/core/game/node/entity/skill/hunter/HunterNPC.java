@@ -84,7 +84,7 @@ public final class HunterNPC extends AbstractNPC {
 
 	@Override
 	public int[] getIds() {
-		List<Integer> ids = new ArrayList<>();
+		List<Integer> ids = new ArrayList<>(10);
 		for (Traps t : Traps.values()) {
 			for (TrapNode node : t.getNodes()) {
 				for (int id : node.getNpcIds()) {

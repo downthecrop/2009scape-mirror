@@ -692,7 +692,7 @@ class Adventurer(val style: CombatStyle): Script() {
     var citygroupA = listOf(falador, varrock, draynor, rimmington, lumbridge, edgeville)
     var citygroupB = listOf(yanille, ardougne, seers, catherby)
 
-    var bankMap = hashMapOf<Location, ZoneBorders>(
+    var bankMap = mapOf<Location, ZoneBorders>(
             falador to ZoneBorders(2950, 3374, 2943, 3368),
             varrock to ZoneBorders(3182, 3435, 3189, 3446),
             draynor to ZoneBorders(3092, 3240, 3095, 3246),

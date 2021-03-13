@@ -12,7 +12,7 @@ import rs09.game.world.repository.Repository
  * @author Ceikry
  */
 class ShootingStar(var level: ShootingStarType = ShootingStarType.values().random()){
-    val crash_locations = hashMapOf(
+    val crash_locations = mapOf(
             "Canifis Bank" to Location.create(3504, 3487, 0),
             "Crafting Guild" to Location.create(2940, 3280, 0),
             "Falador East Bank" to Location.create(3030, 3349, 0),

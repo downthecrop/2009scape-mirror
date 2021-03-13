@@ -24,7 +24,7 @@ import java.nio.ByteBuffer
 //TODO: I've done the groundwork, Please someone else take up the task of rearranging these menus
 object QCRepository {
 
-    val skillIDs = hashMapOf(
+    val skillIDs = mapOf(
             0 to "Agility",
             1 to "Attack",
             2 to "Construction",

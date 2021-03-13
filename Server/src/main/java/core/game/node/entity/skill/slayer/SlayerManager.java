@@ -1,17 +1,14 @@
 package core.game.node.entity.skill.slayer;
 
 import core.cache.def.impl.NPCDefinition;
-import rs09.game.system.SystemLogger;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
-import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-
 import core.game.node.entity.player.link.diary.DiaryType;
+import core.game.node.entity.skill.Skills;
 import core.tools.RandomFunction;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -165,7 +162,7 @@ public final class SlayerManager {
 	 * @param master the master to give the task.
 	 */
 	public void generate(Master master) {
-		final List<Master.Task> tasks = new ArrayList<>();
+		final List<Master.Task> tasks = new ArrayList<>(10);
 		final int[] taskWeightSum = {0};
 		master.tasks.stream().filter(task -> canBeAssigned(task.task) && task.task.combatCheck <= player.getProperties().getCurrentCombatLevel()).forEach(task -> {
 					taskWeightSum[0] += task.weight;

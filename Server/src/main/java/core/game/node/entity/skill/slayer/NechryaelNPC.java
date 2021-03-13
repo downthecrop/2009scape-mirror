@@ -29,7 +29,7 @@ public final class NechryaelNPC extends AbstractNPC {
 	/**
 	 * The death spawn npcs.
 	 */
-	private List<DeathSpawnNPC> spawns = new ArrayList<>();
+	private List<DeathSpawnNPC> spawns = new ArrayList<>(10);
 
 	/**
 	 * The next spawn time.

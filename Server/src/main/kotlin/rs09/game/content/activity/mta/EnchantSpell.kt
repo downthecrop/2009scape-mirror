@@ -25,7 +25,7 @@ class EnchantSpell : MagicSpell {
     /**
      * The enchantable jewellery array.
      */
-    private val jewellery: HashMap<Int,Item>?
+    private val jewellery: Map<Int,Item>?
 
     /**
      * Constructs a new `EnchantSpell` `Object`.
@@ -40,7 +40,7 @@ class EnchantSpell : MagicSpell {
      * @param jewellery The jewellery this spell is able to echant.
      * @param runes The runes required.
      */
-    constructor(level: Int, experience: Double, jewellery: HashMap<Int,Item>, runes: Array<Item>?) : super(SpellBook.MODERN, level, experience, ANIMATION, GRAPHIC, Audio(115, 1, 0), runes) {
+    constructor(level: Int, experience: Double, jewellery: Map<Int,Item>, runes: Array<Item>?) : super(SpellBook.MODERN, level, experience, ANIMATION, GRAPHIC, Audio(115, 1, 0), runes) {
         this.jewellery = jewellery
     }
 
@@ -109,7 +109,7 @@ class EnchantSpell : MagicSpell {
          * Enchant Sapphire Jewelry (Lvl-1 Enchant)
          */
         SpellBook.MODERN.register(5, EnchantSpell(7, 17.5,
-                hashMapOf(
+                mapOf(
                         //Begin Jewelry Enchantments
                         Items.SAPPHIRE_RING_1637 to Item(Items.RING_OF_RECOIL_2550),
                         Items.SAPPHIRE_NECKLACE_1656 to Item(Items.GAMES_NECKLACE8_3853),
@@ -128,7 +128,7 @@ class EnchantSpell : MagicSpell {
          * Enchant Emerald Jewelry (Lvl-2 Enchant)
          */
         SpellBook.MODERN.register(16, EnchantSpell(27, 37.0,
-                hashMapOf(
+                mapOf(
                         //Begin Jewelry Enchantments
                         Items.EMERALD_RING_1639 to Item(Items.RING_OF_DUELLING8_2552),
                         Items.EMERALD_NECKLACE_1658 to Item(Items.BINDING_NECKLACE_5521),
@@ -147,7 +147,7 @@ class EnchantSpell : MagicSpell {
          * Enchant Ruby Jewelry (Lvl-3 Enchant)
          */
         SpellBook.MODERN.register(28, EnchantSpell(49, 59.0,
-                hashMapOf(
+                mapOf(
                         //Begin Jewelry Enchantments
                         Items.RUBY_RING_1641 to Item(Items.RING_OF_FORGING_2568),
                         Items.RUBY_NECKLACE_1660 to Item(Items.DIGSITE_PENDANT_5_11194),
@@ -166,7 +166,7 @@ class EnchantSpell : MagicSpell {
          * Enchant Diamond Jewelry (Lvl-4 Enchant)
          */
         SpellBook.MODERN.register(36, EnchantSpell(57, 67.0,
-                hashMapOf(
+                mapOf(
                         Items.DIAMOND_RING_1643 to Item(Items.RING_OF_LIFE_2570),
                         Items.DIAMOND_NECKLACE_1662 to Item(Items.PHOENIX_NECKLACE_11090),
                         Items.DIAMOND_AMULET_1700 to Item(Items.AMULET_OF_POWER_1731),
@@ -184,7 +184,7 @@ class EnchantSpell : MagicSpell {
          * Enchant Dragonstone Jewelry (Lvl-5 Enchant)
          */
         SpellBook.MODERN.register(51, EnchantSpell(68, 78.0,
-                hashMapOf(
+                mapOf(
                         //Begin Jewelry Enchantment
                         Items.DRAGONSTONE_RING_1645 to Item(14646),
                         Items.DRAGON_NECKLACE_1664 to Item(Items.SKILLS_NECKLACE4_11105),
@@ -203,7 +203,7 @@ class EnchantSpell : MagicSpell {
          * Enchant Onyx Jewelry (Lvl-6 Enchant)
          */
         SpellBook.MODERN.register(61, EnchantSpell(87, 97.0,
-                hashMapOf(
+                mapOf(
                         //Begin Jewelry Enchantments
                         Items.ONYX_RING_6575 to Item(Items.RING_OF_STONE_6583),
                         Items.ONYX_NECKLACE_6577 to Item(Items.BERSERKER_NECKLACE_11128),

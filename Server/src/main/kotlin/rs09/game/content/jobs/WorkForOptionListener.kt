@@ -22,7 +22,7 @@ class WorkForOptionListener : OptionListener() {
         Items.MITHRIL_WARHAMMER_1343
     )
 
-    val gatheringMap = hashMapOf<Int,List<GatheringJobs>>(
+    val gatheringMap = mapOf<Int,List<GatheringJobs>>(
         0 to listOf(GatheringJobs.AIR_RUNE,GatheringJobs.COWHIDES,GatheringJobs.WATER_RUNE),
         922 to listOf(GatheringJobs.ASHES,GatheringJobs.AIR_RUNE,GatheringJobs.WATER_RUNE),
         3807 to listOf(GatheringJobs.COWHIDES),
@@ -34,7 +34,7 @@ class WorkForOptionListener : OptionListener() {
         4906 to listOf(GatheringJobs.LOG,GatheringJobs.OAK,GatheringJobs.WILLOW)
     )
 
-    val typeMap = hashMapOf(
+    val typeMap = mapOf(
         0 to 0,
         705 to 1,
         922 to 0,

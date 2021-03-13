@@ -21,7 +21,7 @@ public abstract class HolidayEvent extends MapZone implements Plugin<Object> {
 	/**
 	 * The list of holiday events.
 	 */
-	private static final List<HolidayEvent> EVENTS = new ArrayList<>();
+	private static final List<HolidayEvent> EVENTS = new ArrayList<>(5);
 
 	/**
 	 * The current holiday event.

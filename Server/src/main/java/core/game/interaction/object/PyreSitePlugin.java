@@ -1,13 +1,6 @@
 package core.game.interaction.object;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import core.cache.def.impl.ObjectDefinition;
-import core.plugin.Initializable;
-import core.game.node.entity.skill.Skills;
-import core.game.node.entity.skill.firemaking.Log;
-import core.game.node.entity.skill.gather.SkillingTool;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -16,18 +9,25 @@ import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.npc.drop.DropFrequency;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
+import core.game.node.entity.skill.firemaking.Log;
+import core.game.node.entity.skill.gather.SkillingTool;
 import core.game.node.item.ChanceItem;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
-import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
+import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
 import core.tools.RandomFunction;
+import rs09.game.world.GameWorld;
+import rs09.game.world.repository.Repository;
+import rs09.plugin.PluginManager;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles the pyre site plugin.
@@ -59,7 +59,7 @@ public final class PyreSitePlugin extends OptionHandler {
 	/**
 	 * The list of used pyre ship locations. 
 	 */
-	private static final List<Location> USED_LOCATIONS = new ArrayList<>();
+	private static final List<Location> USED_LOCATIONS = new ArrayList<>(20);
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {

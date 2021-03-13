@@ -1,13 +1,13 @@
 package core.game.content.dialogue;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import core.game.content.global.GodBook;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.plugin.Initializable;
 import core.game.node.item.Item;
+import core.plugin.Initializable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Handles the dialogue for jossik.
@@ -86,7 +86,7 @@ public class JossikDialogue extends DialoguePlugin {
 				stage = 23;
 				return true;
 			}
-			uncompleted = new ArrayList<>();
+			uncompleted = new ArrayList<>(5);
 			for (GodBook book : GodBook.values()) {
 				if (!player.getSavedData().getGlobalData().hasCompletedGodBook(book)) {
 					uncompleted.add(book);

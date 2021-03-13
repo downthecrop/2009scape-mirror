@@ -227,7 +227,7 @@ public final class NetTrapSetting extends TrapSetting {
 		 * @return the array.
 		 */
 		public static int[] getIds() {
-			List<Integer> ids = new ArrayList<>();
+			List<Integer> ids = new ArrayList<>(10);
 			for (NetTrap trap : NetTrap.values()) {
 				ids.add(trap.getBent());
 				ids.add(trap.getCaught());

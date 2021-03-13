@@ -43,8 +43,8 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 
 	public DialogueFile file;
 	
-	protected ArrayList<String> optionNames = new ArrayList<String>();
-	protected ArrayList<DialogueFile> optionFiles = new ArrayList<DialogueFile>();
+	protected ArrayList<String> optionNames = new ArrayList<String>(10);
+	protected ArrayList<DialogueFile> optionFiles = new ArrayList<DialogueFile>(10);
 
 	/**
 	 * Two options interface.
