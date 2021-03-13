@@ -1,4 +1,4 @@
-package core.plugin.quest.fremtrials
+package rs09.game.content.quest.members.thefremenniktrials
 
 import core.game.content.dialogue.FacialExpression
 import core.game.content.quest.PluginInteraction

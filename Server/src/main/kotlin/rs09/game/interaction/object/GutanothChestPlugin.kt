@@ -1,8 +1,5 @@
 package rs09.game.interaction.`object`
 
-import core.cache.def.impl.ObjectDefinition
-import core.game.interaction.OptionHandler
-import core.game.node.Node
 import core.game.node.`object`.GameObject
 import core.game.node.`object`.ObjectBuilder
 import core.game.node.entity.npc.NPC
@@ -11,24 +8,22 @@ import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
-import core.plugin.Initializable
-import core.plugin.Plugin
 import org.rs09.consts.Items
+import rs09.game.interaction.OptionListener
 import rs09.game.world.GameWorld
 import java.util.concurrent.TimeUnit
 
-@Initializable
-class GutanothChestOptionHandler : OptionHandler(){
-    override fun handle(player: Player?, node: Node?, option: String?): Boolean {
-        player ?: return false
-        val delay = player.getAttribute("gutanoth-chest-delay", 0L)
-        GameWorld.Pulser.submit(ChestPulse(player,System.currentTimeMillis() > delay, node as GameObject))
-        return true
-    }
+private const val CHEST = 2827
+class GutanothChestOptionHandler : OptionListener(){
 
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        ObjectDefinition.forId(2827).handlers["option:open"] = this
-        return this
+    override fun defineListeners() {
+
+        on(CHEST,OBJECT,"open"){player,node ->
+            val delay = player.getAttribute("gutanoth-chest-delay", 0L)
+            GameWorld.Pulser.submit(ChestPulse(player,System.currentTimeMillis() > delay, node as GameObject))
+            return@on true
+        }
+
     }
 
     class ChestPulse(val player: Player, val isLoot: Boolean, val chest: GameObject): Pulse(){
