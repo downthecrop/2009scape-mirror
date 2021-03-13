@@ -1,22 +1,17 @@
 package rs09.game.content.activity.allfiredup
 
-import core.cache.def.impl.ObjectDefinition
 import core.game.content.dialogue.FacialExpression
-import core.game.interaction.OptionHandler
-import core.game.node.Node
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
-import core.plugin.Initializable
-import core.plugin.Plugin
 import org.rs09.consts.Items
+import rs09.game.interaction.OptionListener
 import rs09.game.world.GameWorld
 
-private val VALID_LOGS = arrayOf(Items.LOGS_1511,
-    Items.OAK_LOGS_1521,Items.WILLOW_LOGS_1519,Items.MAPLE_LOGS_1517,Items.YEW_LOGS_1515,Items.MAGIC_LOGS_1513)
+private val VALID_LOGS = intArrayOf(Items.LOGS_1511, Items.OAK_LOGS_1521,Items.WILLOW_LOGS_1519,Items.MAPLE_LOGS_1517,Items.YEW_LOGS_1515,Items.MAGIC_LOGS_1513)
 private val FILL_ANIM = Animation(9136)
 private val LIGHT_ANIM = Animation(7307)
 
@@ -24,44 +19,35 @@ private val LIGHT_ANIM = Animation(7307)
  * Handles interactions for beacons
  * @author Ceikry
  */
-@Initializable
-class AFUBeaconHandler : OptionHandler(){
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        for(i in 38448..38461)
-        ObjectDefinition.forId(i).childrenIds.forEach {
-            ObjectDefinition.forId(it).handlers["option:add-logs"] = this
-            ObjectDefinition.forId(it).handlers["option:light"] = this
-        }
-        return this
-    }
+class AFUBeaconListeners : OptionListener(){
 
-    override fun handle(player: Player?, node: Node?, option: String?): Boolean {
-        player ?: return false
-        node ?: return false
-        val beacon = AFUBeacon.forLocation(node.location)
-        val questComplete = player.questRepository.isComplete("All Fired Up")
-        val questStage = player.questRepository.getStage("All Fired Up")
+    override fun defineListeners() {
+        on(OBJECT,"add-logs","light"){player,node ->
+            val beacon = AFUBeacon.forLocation(node.location)
+            val questComplete = player.questRepository.isComplete("All Fired Up")
+            val questStage = player.questRepository.getStage("All Fired Up")
 
-        if ((beacon != AFUBeacon.RIVER_SALVE && beacon != AFUBeacon.RAG_AND_BONE && !questComplete)
+            if ((beacon != AFUBeacon.RIVER_SALVE && beacon != AFUBeacon.RAG_AND_BONE && !questComplete)
                 || (beacon == AFUBeacon.RIVER_SALVE && questStage < 20 && !questComplete)
                 || (beacon == AFUBeacon.RAG_AND_BONE && questStage < 50 && !questComplete)) {
-            player.dialogueInterpreter.sendDialogues(player, FacialExpression.THINKING, "I probably shouldn't mess with this.")
-            return true
-        }
-        player.debug(beacon.getState(player).name)
-
-        when (beacon.getState(player)) {
-            BeaconState.EMPTY -> fillBeacon(player, beacon, questComplete)
-
-            BeaconState.DYING -> restoreBeacon(player, beacon, questComplete)
-
-            BeaconState.FILLED -> lightBeacon(player, beacon, questComplete)
-
-            BeaconState.LIT, BeaconState.WARNING -> {
-                player.debug("INVALID BEACON STATE")
+                player.dialogueInterpreter.sendDialogues(player, FacialExpression.THINKING, "I probably shouldn't mess with this.")
+                return@on true
             }
+            player.debug(beacon.getState(player).name)
+
+            when (beacon.getState(player)) {
+                BeaconState.EMPTY -> fillBeacon(player, beacon, questComplete)
+
+                BeaconState.DYING -> restoreBeacon(player, beacon, questComplete)
+
+                BeaconState.FILLED -> lightBeacon(player, beacon, questComplete)
+
+                BeaconState.LIT, BeaconState.WARNING -> {
+                    player.debug("INVALID BEACON STATE")
+                }
+            }
+            return@on true
         }
-        return true
     }
 
     fun fillBeacon(player: Player, beacon: AFUBeacon, questComplete: Boolean){
