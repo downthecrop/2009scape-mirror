@@ -2,15 +2,13 @@ package core.game.content.zone.phasmatys;
 
 import core.game.content.global.Bones;
 import core.game.content.global.action.ClimbActionHandler;
-import core.game.node.entity.skill.Skills;
-import core.game.node.entity.skill.agility.AgilityHandler;
-import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.Option;
-import core.game.interaction.UseWithHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
+import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
@@ -21,11 +19,9 @@ import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
-import core.plugin.Plugin;
 import core.plugin.Initializable;
+import core.plugin.Plugin;
 import rs09.plugin.PluginManager;
-
-import static java.lang.Thread.sleep;
 
 /**
  * Handles the phasmatyz zone area.
@@ -52,7 +48,6 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         ZoneBuilder.configure(this);
         PluginManager.definePlugin(new GravingasNPC());
-        PluginManager.definePlugin(new BoneLoaderHandler());
         PluginManager.definePlugin(new NecrovarusDialogue());
         PluginManager.definePlugin(new GhostSailorDialogue());
         PluginManager.definePlugin(new EctoplasmFillPlugin());
@@ -381,49 +376,6 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
             }
             AgilityHandler.walk(player, -1, player.getLocation(), end, null, 0.0, null);
         }
-    }
-
-    /**
-     * Handles the bone loader.
-     *
-     * @author Vexia
-     */
-    public static final class BoneLoaderHandler extends UseWithHandler {
-
-        /**
-         * Constructs a new {@code BoneLoaderHandler} {@code Object}.
-         */
-        public BoneLoaderHandler() {
-            super(Bones.getArray());
-        }
-
-        @Override
-        public Plugin<Object> newInstance(Object arg) throws Throwable {
-            addHandler(11162, OBJECT_TYPE, this);
-            return this;
-        }
-
-        @Override
-        public boolean handle(NodeUsageEvent event) {
-            final Player player = event.getPlayer();
-            final GameObject object = (GameObject) event.getUsedWith();
-            final Bones bone = Bones.forId(event.getUsedItem().getId());
-            if (hasBones(player, object, true)) {
-                player.sendMessage("There are already some bones in the grinder's hopper.");
-                return true;
-            } else if (hasBones(player, object, false)) {
-                player.sendMessage("You need to empty the grinder's bin before you put more bones in it.");
-                return true;
-            }
-            if (player.getInventory().remove(event.getUsedItem())) {
-                player.lock(2);
-                player.animate(Animation.create(1649));
-                player.getConfigManager().set(408, bone.getConfigValue(true), true);
-                player.sendMessage("You put some bones in the grinder's hopper.", 1);
-            }
-            return true;
-        }
-
     }
 
     @Override

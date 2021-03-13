@@ -45,7 +45,7 @@ object Listeners {
     @JvmStatic
     fun add(type: Int, used: Int, with: IntArray, method: (Player, Node, Node) -> Boolean){
         for(id in with){
-            useWithListeners["$used:$with:$type"] = method
+            useWithListeners["$used:$id:$type"] = method
         }
     }
 
