@@ -8,8 +8,8 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.plugin.Initializable
+import org.rs09.consts.Items
 import rs09.game.node.entity.player.link.diary.DiaryLevel
-import rs09.tools.Items
 
 /**
  * Represents the Wyson the gardener dialogue.

@@ -2,7 +2,7 @@ package core.game.interaction.item.withitem;
 
 import core.game.component.Component;
 import core.plugin.Initializable;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;

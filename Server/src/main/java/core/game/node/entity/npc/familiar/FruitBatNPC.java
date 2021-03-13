@@ -13,7 +13,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;

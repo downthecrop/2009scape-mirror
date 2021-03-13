@@ -1,12 +1,12 @@
 package rs09.game.content.activity.allfiredup
 
+import core.game.content.dialogue.DialoguePlugin
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
-import rs09.tools.Items
-import core.game.content.dialogue.DialoguePlugin
-import core.game.node.entity.skill.Skills
+import org.rs09.consts.Items
 
 private val VALID_LOGS = arrayOf(Items.LOGS_1511, Items.OAK_LOGS_1521, Items.WILLOW_LOGS_1519, Items.MAPLE_LOGS_1517, Items.YEW_LOGS_1515, Items.MAGIC_LOGS_1513)
 

@@ -8,7 +8,7 @@ import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
 import core.game.container.impl.EquipmentContainer;
 import core.plugin.Initializable;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.link.diary.DiaryType;

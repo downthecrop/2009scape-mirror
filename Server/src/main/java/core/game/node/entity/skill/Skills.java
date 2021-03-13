@@ -19,7 +19,7 @@ import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 import rs09.plugin.CorePluginTypes.XPGainPlugins;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 
 import java.nio.ByteBuffer;
 

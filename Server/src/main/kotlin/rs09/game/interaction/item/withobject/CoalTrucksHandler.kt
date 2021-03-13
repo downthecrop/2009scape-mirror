@@ -11,8 +11,8 @@ import core.game.node.item.Item
 import core.game.world.map.zone.ZoneBorders
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs09.consts.Items
 import rs09.plugin.PluginManager.definePlugin
-import rs09.tools.Items
 import java.util.*
 
 /**

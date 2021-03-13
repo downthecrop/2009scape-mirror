@@ -1,7 +1,7 @@
 package core.game.content.dialogue;
 
 import core.plugin.Initializable;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.content.global.travel.ship.Ships;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;

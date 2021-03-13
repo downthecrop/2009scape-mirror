@@ -14,11 +14,11 @@ import core.game.world.map.build.DynamicRegion
 import core.game.world.update.flag.context.Animation
 import core.plugin.Plugin
 import core.tools.*
+import org.rs09.consts.Components
+import org.rs09.consts.Items
 import rs09.game.node.entity.player.info.stats.FISHING_TRAWLER_GAMES_WON
 import rs09.game.node.entity.player.info.stats.FISHING_TRAWLER_SHIPS_SANK
 import rs09.game.node.entity.player.info.stats.STATS_BASE
-import rs09.tools.Components
-import rs09.tools.Items
 import rs09.tools.secondsToTicks
 import rs09.tools.ticksToSeconds
 import java.util.concurrent.TimeUnit
@@ -29,8 +29,8 @@ import kotlin.random.Random
  * Handles a fishing trawler session
  * @author Ceikry
  */
-private const val OVERLAY_ID = Components.trawler_overlay_366
-private const val TUTORIAL_ID = Components.trawler_start_368
+private const val OVERLAY_ID = Components.TRAWLER_OVERLAY_366
+private const val TUTORIAL_ID = Components.TRAWLER_START_368
 private val HOLE_X_COORDS = intArrayOf(29,30,31,32,33,34,35,36)
 private const val HOLE_NORTH_Y = 26
 private const val HOLE_SOUTH_Y = 23

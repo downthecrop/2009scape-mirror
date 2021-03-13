@@ -3,10 +3,10 @@ package rs09.game.content.activity.pyramidplunder
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
 import core.game.world.map.Location
-import rs09.tools.Components
 import core.tools.RandomFunction
+import org.rs09.consts.Components
+import rs09.game.world.GameWorld
 
 class PlunderSession(val player: Player) {
     var door1Open: Boolean = false
@@ -25,7 +25,7 @@ class PlunderSession(val player: Player) {
     fun init(){
         player.setAttribute("plunder-session",this)
         GameWorld.Pulser.submit(PlunderPulse(player))
-        player.interfaceManager.openOverlay(Component(Components.ntk_overlay_428))
+        player.interfaceManager.openOverlay(Component(Components.NTK_OVERLAY_428))
         isActive = true
     }
 

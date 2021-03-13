@@ -13,7 +13,7 @@ import core.plugin.Plugin;
 import rs09.game.content.dialogue.SkillDialogueHandler;
 import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
 import rs09.game.node.entity.skill.fletching.items.gem.GemBoltCutPulse;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 
 /**
  * Represents the gem bolt creating plugin.

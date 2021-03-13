@@ -9,7 +9,7 @@ import core.game.node.entity.player.link.appearance.Gender
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 //child IDs for components of interest on the interface
 private const val MALE_CHILD_ID = 90

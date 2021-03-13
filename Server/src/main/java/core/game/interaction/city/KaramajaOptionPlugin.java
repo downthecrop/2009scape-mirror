@@ -4,7 +4,7 @@ import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.component.Component;
 import core.plugin.Initializable;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.content.dialogue.FacialExpression;

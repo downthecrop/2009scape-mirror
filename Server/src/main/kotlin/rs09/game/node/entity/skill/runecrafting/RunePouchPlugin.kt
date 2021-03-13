@@ -6,7 +6,7 @@ import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Plugin
-import rs09.tools.Items
+import org.rs09.consts.Items
 import rs09.tools.stringtools.colorize
 
 /**

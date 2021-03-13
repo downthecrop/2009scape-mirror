@@ -6,7 +6,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.plugin.Initializable
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 @Initializable
 /**

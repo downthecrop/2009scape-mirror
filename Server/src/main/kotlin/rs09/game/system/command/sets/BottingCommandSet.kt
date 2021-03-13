@@ -2,12 +2,12 @@ package rs09.game.system.command.sets
 
 import core.game.component.Component
 import core.plugin.Initializable
+import org.rs09.consts.Components
 import rs09.game.ai.general.GeneralBotCreator
 import rs09.game.ai.general.scriptrepository.PlayerScripts
 import rs09.game.ai.general.scriptrepository.Script
 import rs09.game.system.command.Command
 import rs09.game.world.GameWorld
-import rs09.tools.Components
 import rs09.tools.stringtools.colorize
 
 @Initializable
@@ -36,7 +36,7 @@ class BottingCommandSet : CommandSet(Command.Privilege.STANDARD) {
                 player.packetDispatch.sendString("<img=3> ::script ${script.identifier}",275,lineid++)
                 player.packetDispatch.sendString("<str>                                 </str>",275,lineid++)
             }
-            player.interfaceManager.open(Component(Components.questjournal_scroll_275))
+            player.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
         }
         define("script"){player,args ->
             if(GameWorld.settings?.enabled_botting != true){

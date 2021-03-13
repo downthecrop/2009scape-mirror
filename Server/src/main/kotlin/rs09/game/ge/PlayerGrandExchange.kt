@@ -26,10 +26,10 @@ import core.net.packet.out.ContainerPacket
 import core.net.packet.out.GrandExchangePacket
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
+import org.rs09.consts.Components
 import rs09.game.ge.OfferManager.Companion.dispatch
 import rs09.game.ge.OfferManager.Companion.updateOffer
 import rs09.game.system.SystemLogger
-import rs09.tools.Components
 import java.text.DecimalFormat
 import java.text.NumberFormat
 import java.util.*
@@ -65,7 +65,7 @@ class PlayerGrandExchange(private val player: Player) {
             player.bankPinManager.openType(4)
             return
         }
-        player.interfaceManager.open(Component(Components.stockmarket_105)).closeEvent =
+        player.interfaceManager.open(Component(Components.STOCKMARKET_105)).closeEvent =
             CloseEvent { player, _ ->
                 temporaryOffer = null
                 player.packetDispatch.sendRunScript(571, "")
@@ -87,7 +87,7 @@ class PlayerGrandExchange(private val player: Player) {
             player.bankPinManager.openType(3)
             return
         }
-        player.interfaceManager.openComponent(Components.stockcollect_109)
+        player.interfaceManager.openComponent(Components.STOCKCOLLECT_109)
         player.packetDispatch.sendAccessMask(6, 18, 109, 0, 2)
         player.packetDispatch.sendAccessMask(6, 23, 109, 0, 2)
         player.packetDispatch.sendAccessMask(6, 28, 109, 0, 2)
@@ -185,14 +185,14 @@ class PlayerGrandExchange(private val player: Player) {
                 )
             }
         })
-        player.interfaceManager.open(Component(Components.exchange_itemsets_645)).closeEvent =
+        player.interfaceManager.open(Component(Components.EXCHANGE_ITEMSETS_645)).closeEvent =
             CloseEvent { player, _ ->
                 player.inventory.listeners.removeAt(1)
                 player.interfaceManager.closeSingleTab()
                 player.removeAttribute("container-key")
                 true
             }
-        player.interfaceManager.openSingleTab(Component(Components.exchange_sets_side_644)).open(player)
+        player.interfaceManager.openSingleTab(Component(Components.EXCHANGE_SETS_SIDE_644)).open(player)
         player.setAttribute(
             "container-key",
             InterfaceContainer.generateItems(
@@ -615,7 +615,7 @@ class PlayerGrandExchange(private val player: Player) {
     fun openSell(index: Int) {
         openedIndex = index
         sendConfiguration(offers[index], true)
-        player.interfaceManager.openSingleTab(Component(Components.stockside_107)).open(player)
+        player.interfaceManager.openSingleTab(Component(Components.STOCKSIDE_107)).open(player)
         player.packetDispatch.sendRunScript(
             149, "IviiiIsssss", "", "", "", "Examine", "Offer",
             -1, 0, 7, 4, 93, 7012370

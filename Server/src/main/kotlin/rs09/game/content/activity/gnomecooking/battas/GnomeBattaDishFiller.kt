@@ -1,11 +1,11 @@
 package rs09.game.content.activity.gnomecooking.battas
 
-import rs09.tools.Items
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs09.consts.Items
 
 private const val GIANNE_DOUGH = 2171
 private const val BATTA_MOULD = 2164

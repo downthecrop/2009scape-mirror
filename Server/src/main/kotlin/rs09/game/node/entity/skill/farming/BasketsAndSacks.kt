@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 /**
  * I don't want to do it this way but jagex has forced my hand

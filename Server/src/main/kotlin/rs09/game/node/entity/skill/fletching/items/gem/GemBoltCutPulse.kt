@@ -6,7 +6,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.fletching.Fletching.GemBolts
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 /**
  * Represents the gem cutting pulse(gem to bolt).

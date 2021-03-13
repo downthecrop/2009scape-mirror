@@ -7,7 +7,7 @@ import core.game.node.item.Item;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 
 import java.util.HashMap;
 

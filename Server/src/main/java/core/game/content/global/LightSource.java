@@ -2,10 +2,9 @@ package core.game.content.global;
 
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import org.rs09.consts.Components;
 
-import static rs09.tools.Interfaces.DARKNESS_LIGHT_97;
-import static rs09.tools.Interfaces.DARKNESS_MEDIUM_98;
-import static rs09.tools.Items.*;
+import static org.rs09.consts.Items.*;
 
 
 /**
@@ -14,16 +13,16 @@ import static rs09.tools.Items.*;
  * @author Emperor
  */
 public enum LightSource {
-	CANDLE(1, new Item(CANDLE_36, 1), new Item(LIT_CANDLE_33, 1), true, DARKNESS_MEDIUM_98),
-	BLACK_CANDLE(1, new Item(BLACK_CANDLE_38, 1), new Item(LIT_BLACK_CANDLE_32, 1), true, DARKNESS_MEDIUM_98),
-	TORCH(1, new Item(UNLIT_TORCH_596, 1), new Item(LIT_TORCH_594, 1), true, DARKNESS_MEDIUM_98),
-	CANDLE_LANTERN(4, new Item(CANDLE_LANTERN_4527, 1), new Item(CANDLE_LANTERN_4531, 1), false, DARKNESS_MEDIUM_98),
-	OIL_LAMP(12, new Item(OIL_LAMP_4522, 1), new Item(OIL_LAMP_4524, 1), true, DARKNESS_LIGHT_97),
-	OIL_LANTERN(26, new Item(OIL_LANTERN_4535, 1), new Item(OIL_LANTERN_4539, 1), false, DARKNESS_LIGHT_97),
+	CANDLE(1, new Item(CANDLE_36, 1), new Item(LIT_CANDLE_33, 1), true, Components.DARKNESS_MEDIUM_98),
+	BLACK_CANDLE(1, new Item(BLACK_CANDLE_38, 1), new Item(LIT_BLACK_CANDLE_32, 1), true, Components.DARKNESS_MEDIUM_98),
+	TORCH(1, new Item(UNLIT_TORCH_596, 1), new Item(LIT_TORCH_594, 1), true, Components.DARKNESS_MEDIUM_98),
+	CANDLE_LANTERN(4, new Item(CANDLE_LANTERN_4527, 1), new Item(CANDLE_LANTERN_4531, 1), false, Components.DARKNESS_MEDIUM_98),
+	OIL_LAMP(12, new Item(OIL_LAMP_4522, 1), new Item(OIL_LAMP_4524, 1), true, Components.DARKNESS_LIGHT_97),
+	OIL_LANTERN(26, new Item(OIL_LANTERN_4535, 1), new Item(OIL_LANTERN_4539, 1), false, Components.DARKNESS_LIGHT_97),
 	BULLSEYE_LANTERN(49, new Item(BULLSEYE_LANTERN_4548, 1), new Item(BULLSEYE_LANTERN_4550, 1), false, -1),
 	SAPPHIRE_LANTERN(49, new Item(SAPPHIRE_LANTERN_4701, 1), new Item(SAPPHIRE_LANTERN_4702, 1), false, -1),
 	EMERALD_LANTERN(49, new Item(EMERALD_LANTERN_9064, 1), new Item(EMERALD_LANTERN_9065, 1), false, -1),
-	MINING_HELMET(65, new Item(MINING_HELMET_5014, 1), new Item(MINING_HELMET_5013, 1), false, DARKNESS_LIGHT_97);
+	MINING_HELMET(65, new Item(MINING_HELMET_5014, 1), new Item(MINING_HELMET_5013, 1), false, Components.DARKNESS_LIGHT_97);
 
 	/**
 	 * Represents the level required.
@@ -130,9 +129,9 @@ public enum LightSource {
 	 */
 	public int getStrength() {
 		switch (interfaceId) {
-		case DARKNESS_LIGHT_97:
+		case Components.DARKNESS_LIGHT_97:
 			return 1;
-		case DARKNESS_MEDIUM_98:
+		case Components.DARKNESS_MEDIUM_98:
 			return 2;
 		case -1:
 			return 3;

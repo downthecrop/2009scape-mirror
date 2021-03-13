@@ -6,10 +6,10 @@ import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.tools.RandomFunction
 import org.json.simple.JSONObject
+import org.rs09.consts.Items
 import rs09.game.node.entity.state.newsys.PlayerState
 import rs09.game.node.entity.state.newsys.State
 import rs09.game.system.config.ItemConfigParser
-import rs09.tools.Items
 import kotlin.math.ceil
 
 @PlayerState("avadevice")
@@ -17,7 +17,8 @@ class AvaDeviceState(player: Player? = null) : State(player) {
     val TICKS = ceil(180 / 0.6).toInt()
     var device = 0
 
-    private val ATTRACTOR_REWARDS = arrayOf(Items.IRON_BAR_2351,Items.IRON_KNIFE_863,Items.IRON_DART_807,Items.IRON_DAGGER_1203,Items.IRON_BOLTS_9140,Items.IRON_ARROW_884,Items.IRON_ORE_440,Items.COPPER_ORE_436,Items.IRON_FULL_HELM_1153,Items.IRON_2H_SWORD_1309,Items.STEEL_BAR_2353)
+    private val ATTRACTOR_REWARDS = arrayOf(Items.IRON_BAR_2351,
+        Items.IRON_KNIFE_863,Items.IRON_DART_807,Items.IRON_DAGGER_1203,Items.IRON_BOLTS_9140,Items.IRON_ARROW_884,Items.IRON_ORE_440,Items.COPPER_ORE_436,Items.IRON_FULL_HELM_1153,Items.IRON_2H_SWORD_1309,Items.STEEL_BAR_2353)
     private val ACCUMULATOR_REWARDS = arrayOf(Items.STEEL_BAR_2353,Items.STEEL_2H_SWORD_1311,Items.STEEL_KNIFE_865,Items.STEEL_DAGGER_1207,Items.STEEL_MED_HELM_1141,Items.STEEL_DART_808,Items.STEEL_BOLTS_9141,Items.STEEL_ARROW_886,Items.IRON_BAR_2351)
 
     override fun save(root: JSONObject) {

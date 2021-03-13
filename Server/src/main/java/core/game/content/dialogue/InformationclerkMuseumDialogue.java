@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import rs09.game.world.GameWorld;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 
 /**
  * Represents the information clerk museum dialogue plugin

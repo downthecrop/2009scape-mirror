@@ -163,17 +163,17 @@ public class Fletching {
             }
         }
     public enum GemBolts {
-        OPAL(877, rs09.tools.Items.OPAL_1609, 45, 879, 11, 1.5),
-        PEARL(9140, rs09.tools.Items.OYSTER_PEARL_411, 46, 880, 41, 3.2),
-        PEARLS(9140, rs09.tools.Items.OYSTER_PEARLS_413, 46, 880, 41, 3.2),
-        JADE(9139, rs09.tools.Items.JADE_1611, 9187, 9335, 26, 2.4),
-        RED_TOPAZ(9141, rs09.tools.Items.RED_TOPAZ_1613, 9188, 9336, 48, 3.9),
-        SAPPHIRE(9142, rs09.tools.Items.SAPPHIRE_1607, 9189, 9337, 56, 4),
-        EMERALD(9142, rs09.tools.Items.EMERALD_1605, 9190, 9338, 58, 5.5),
-        RUBY(9143, rs09.tools.Items.RUBY_1603, 9191, 9339, 63, 6.3),
-        DIAMOND(9143, rs09.tools.Items.DIAMOND_1601, 9192, 9340, 65, 7),
-        DRAGONSTONE(9144, rs09.tools.Items.DRAGONSTONE_1615, 9193, 9341, 71, 8.2),
-        ONYX(9144, rs09.tools.Items.ONYX_6573, 9194, 9342, 73, 9.4);
+        OPAL(877, org.rs09.consts.Items.OPAL_1609, 45, 879, 11, 1.5),
+        PEARL(9140, org.rs09.consts.Items.OYSTER_PEARL_411, 46, 880, 41, 3.2),
+        PEARLS(9140, org.rs09.consts.Items.OYSTER_PEARLS_413, 46, 880, 41, 3.2),
+        JADE(9139, org.rs09.consts.Items.JADE_1611, 9187, 9335, 26, 2.4),
+        RED_TOPAZ(9141, org.rs09.consts.Items.RED_TOPAZ_1613, 9188, 9336, 48, 3.9),
+        SAPPHIRE(9142, org.rs09.consts.Items.SAPPHIRE_1607, 9189, 9337, 56, 4),
+        EMERALD(9142, org.rs09.consts.Items.EMERALD_1605, 9190, 9338, 58, 5.5),
+        RUBY(9143, org.rs09.consts.Items.RUBY_1603, 9191, 9339, 63, 6.3),
+        DIAMOND(9143, org.rs09.consts.Items.DIAMOND_1601, 9192, 9340, 65, 7),
+        DRAGONSTONE(9144, org.rs09.consts.Items.DRAGONSTONE_1615, 9193, 9341, 71, 8.2),
+        ONYX(9144, org.rs09.consts.Items.ONYX_6573, 9194, 9342, 73, 9.4);
 
         public int gem,tip,base,product,level;
         public double experience;

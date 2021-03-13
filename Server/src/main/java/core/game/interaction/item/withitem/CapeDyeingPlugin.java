@@ -1,7 +1,7 @@
 /*
 package core.game.interaction.item.withitem;
 
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.content.global.Dyes;
 import core.game.content.global.action.SpecialLadders;
 import core.game.interaction.NodeUsageEvent;

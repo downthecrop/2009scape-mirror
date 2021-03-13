@@ -10,8 +10,8 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
+import org.rs09.consts.Items
 import rs09.game.system.SystemLogger
-import rs09.tools.Items
 
 private val LVL_1_ENCHANT = hashMapOf(
         Items.SAPPHIRE_RING_1637 to Item(Items.RING_OF_RECOIL_2550),

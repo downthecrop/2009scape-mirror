@@ -2,10 +2,10 @@ package rs09.game.node.entity.skill.farming
 
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import rs09.tools.Items
 import core.tools.RandomFunction
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
+import org.rs09.consts.Items
 import java.util.concurrent.TimeUnit
 
 class CompostBin(val player: Player, val bin: CompostBins) {

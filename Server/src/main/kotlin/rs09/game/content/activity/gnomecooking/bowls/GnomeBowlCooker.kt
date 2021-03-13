@@ -1,16 +1,16 @@
 package rs09.game.content.activity.gnomecooking.bowls
 
-import rs09.tools.Items
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
 import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
-import core.game.node.entity.skill.Skills
+import org.rs09.consts.Items
+import rs09.game.world.GameWorld
 
 @Initializable
 class GnomeBowlCooker : UseWithHandler(Items.RAW_GNOMEBOWL_2178,9558,9559,9561,9563) {

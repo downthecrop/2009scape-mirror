@@ -15,7 +15,7 @@ import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Plugin
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 /**
  * Represents the enchant spells.

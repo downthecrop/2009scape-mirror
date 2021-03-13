@@ -13,7 +13,7 @@ import core.game.world.map.Location;
 import rs09.plugin.PluginManager;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 
 /**
  * Handles the rick turpentine anti macro event.

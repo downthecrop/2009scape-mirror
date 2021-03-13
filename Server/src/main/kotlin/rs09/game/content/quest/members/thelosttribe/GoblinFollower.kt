@@ -3,9 +3,9 @@ package rs09.game.content.quest.members.thelosttribe
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
 import core.game.world.map.Location
-import rs09.tools.Components
+import org.rs09.consts.Components
+import rs09.game.world.GameWorld
 
 /**
  * Small object for the goblin follow options
@@ -24,11 +24,11 @@ object GoblinFollower {
             var counter = 0
             override fun pulse(): Boolean {
                 when(counter++){
-                    0 -> player.lock().also { player.interfaceManager.open(Component(Components.fade_to_black_115)) }
+                    0 -> player.lock().also { player.interfaceManager.open(Component(Components.FADE_TO_BLACK_120)) }
                     3 -> player.properties.teleportLocation = location
                     4 -> {
-                        player.interfaceManager.close(Component(Components.fade_to_black_115))
-                        player.interfaceManager.open(Component(Components.fade_from_black_170))
+                        player.interfaceManager.close(Component(Components.FADE_TO_BLACK_120))
+                        player.interfaceManager.open(Component(Components.FADE_FROM_BLACK_170))
                     }
                     6 -> player.unlock().also { player.interfaceManager.close(Component(170));  return true }
                 }

@@ -23,7 +23,7 @@ import core.tools.RandomFunction;
 import rs09.game.node.entity.skill.farming.FarmingPatch;
 import rs09.game.node.entity.skill.farming.Patch;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_LOGS;

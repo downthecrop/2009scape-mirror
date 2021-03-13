@@ -8,8 +8,8 @@ import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.tools.Components
-import rs09.tools.NPCs
+import org.rs09.consts.Components
+import org.rs09.consts.NPCs
 
 val TL_IDS = arrayOf(NPCs.TOOL_LEPRECHAUN_3021,NPCs.GOTH_LEPRECHAUN_8000,NPCs.TOOL_LEPRECHAUN_4965)
 @Initializable
@@ -26,7 +26,7 @@ class ToolLeprechaunHandler : OptionHandler() {
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         node ?: return false
         when(option){
-            "exchange" -> player?.interfaceManager?.open(Component(Components.farming_tools_125))
+            "exchange" -> player?.interfaceManager?.open(Component(Components.FARMING_TOOLS_125))
             "teleport" -> player?.dialogueInterpreter?.sendDialogues(node.id,if(node.id == 4965) FacialExpression.FRIENDLY else FacialExpression.OLD_NORMAL, "I forgot how to do that it seems.")
         }
         return true

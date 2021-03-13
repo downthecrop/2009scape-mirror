@@ -1,6 +1,6 @@
 package core.game.content.consumable;
 
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.state.EntityState;
 import core.game.world.update.flag.context.Animation;

@@ -1,7 +1,7 @@
 package core.game.content.quest.members.asoulsbane;
 
 import core.cache.def.impl.ObjectDefinition;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.interaction.MovementPulse;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;

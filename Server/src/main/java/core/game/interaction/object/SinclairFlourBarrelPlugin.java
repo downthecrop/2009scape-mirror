@@ -1,7 +1,7 @@
 package core.game.interaction.object;
 
 import core.cache.def.impl.ObjectDefinition;
-import rs09.tools.Items;
+import org.rs09.consts.Items;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;

@@ -4,10 +4,10 @@ import core.game.content.dialogue.DialoguePlugin
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
+import org.rs09.consts.Items
 import rs09.game.content.activity.gnomecooking.GC_BASE_ATTRIBUTE
 import rs09.game.content.activity.gnomecooking.GC_TUT_FIN
 import rs09.game.content.activity.gnomecooking.GC_TUT_PROG
-import rs09.tools.Items
 
 @Initializable
 class BlurberryDialogue(player: Player? = null): DialoguePlugin(player) {

@@ -6,8 +6,8 @@ import core.game.node.item.Item
 import core.game.system.SystemManager
 import core.game.system.SystemState
 import core.plugin.Initializable
+import org.rs09.consts.Items
 import rs09.game.system.command.Command
-import rs09.tools.Items
 
 @Initializable
 class SystemCommandSet : CommandSet(Command.Privilege.ADMIN){

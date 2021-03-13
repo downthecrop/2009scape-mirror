@@ -6,7 +6,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.plugin.Initializable
-import rs09.tools.Items
+import org.rs09.consts.Items
 
 @Initializable
 class GeoffreyDialogue(player: Player? = null) : DialoguePlugin(player) {
