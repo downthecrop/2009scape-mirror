@@ -1,57 +1,49 @@
 package rs09.game.interaction.`object`
 
-import core.cache.def.impl.ObjectDefinition
-import core.game.interaction.OptionHandler
-import core.game.node.Node
 import core.game.node.`object`.GameObject
 import core.game.node.`object`.ObjectBuilder
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
-import core.plugin.Initializable
-import core.plugin.Plugin
 import org.rs09.consts.Items
+import rs09.game.interaction.OptionListener
 import rs09.game.world.GameWorld
 
 /**
  * Handles the chopping down of dense jungle, mainly to grant access to the Kharazi Jungle.
  * @author Ceikry
  */
-@Initializable
-class JungleBushHandler : OptionHandler(){
+class JungleBushHandler : OptionListener(){
     val chopped_bush = 2895
     val chop_a  = Animation(910)
     val chop_b  = Animation(2382)
+    val ids = intArrayOf(2892,2893)
 
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        ObjectDefinition.forId(2892).handlers["option:chop-down"] = this
-        ObjectDefinition.forId(2893).handlers["option:chop-down"] = this
-        return this
-    }
+    override fun defineListeners() {
 
-    override fun handle(player: Player?, node: Node?, option: String?): Boolean {
-        player ?: return false
-        node ?: return false
-        val toChop = node.asObject()
-        if(checkRequirement(player)){
-            GameWorld.Pulser.submit(object : Pulse(0){
-                var ticks = 0
-                override fun pulse(): Boolean {
-                    when(ticks++){
-                        0 -> player.animator.animate(chop_a).also { player.lock() }
-                        1 -> player.animator.animate(chop_b)
-                        2 -> ObjectBuilder.replace(toChop, GameObject(chopped_bush, toChop.location, toChop.rotation),20)
-                        3 -> {player.walkingQueue.reset(); player.walkingQueue.addPath(toChop.location.x, toChop.location.y,true)}
-                        4 -> player.unlock().also { return true }
+        on(ids,OBJECT,"chop-down"){player,node ->
+            val toChop = node.asObject()
+            if(checkRequirement(player)){
+                GameWorld.Pulser.submit(object : Pulse(0){
+                    var ticks = 0
+                    override fun pulse(): Boolean {
+                        when(ticks++){
+                            0 -> player.animator.animate(chop_a).also { player.lock() }
+                            1 -> player.animator.animate(chop_b)
+                            2 -> ObjectBuilder.replace(toChop, GameObject(chopped_bush, toChop.location, toChop.rotation),20)
+                            3 -> {player.walkingQueue.reset(); player.walkingQueue.addPath(toChop.location.x, toChop.location.y,true)}
+                            4 -> player.unlock().also { return true }
+                        }
+                        return false
                     }
-                    return false
-                }
-            })
-        } else {
-            player.sendMessage("You need a machete to get through this dense jungle.")
+                })
+            } else {
+                player.sendMessage("You need a machete to get through this dense jungle.")
+            }
+            return@on true
         }
-        return true
+
     }
 
     fun checkRequirement(player: Player): Boolean{
