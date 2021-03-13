@@ -4,7 +4,7 @@ import core.game.node.`object`.ObjectBuilder
 import core.game.node.item.Item
 import core.tools.RandomFunction
 import org.rs09.consts.Items
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 
 /**
  * @author Woah, with love
@@ -15,7 +15,7 @@ import rs09.game.interaction.OptionListener
  * Option(s):
  *  "Take-from"
  */
-class TarBarrelListener : OptionListener() {
+class TarBarrelListener : InteractionListener() {
 
     val FULL_TAR_BARREL_16860 = 16860
     val EMPTY_TAR_BARREL_16688 = 16688

@@ -3,14 +3,14 @@ package rs09.game.interaction.`object`
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.world.map.RegionManager
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 
 /**
  * Handles taunting of the demon in the wizard's tower
  * @author afaroutdude / Ceikry
  */
 private const val BARS = 37668
-class DemonTauntHandler : OptionListener(){
+class DemonTauntHandler : InteractionListener(){
 
     override fun defineListeners() {
         on(BARS,OBJECT,"taunt-through"){player,_ ->

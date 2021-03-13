@@ -11,8 +11,7 @@ import core.plugin.PluginManifest
 import core.plugin.PluginType
 import io.github.classgraph.ClassGraph
 import io.github.classgraph.ClassInfo
-import rs09.game.interaction.OptionListener
-import rs09.game.interaction.UseWithListener
+import rs09.game.interaction.InteractionListener
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Command
 import java.util.*
@@ -73,11 +72,8 @@ object PluginManager {
                 definePlugin(it.loadClass().newInstance() as Plugin<Command>).also { System.out.println("Initializing $it") }
             } catch (e: Exception) {e.printStackTrace()}
         }
-        result.getSubclasses("rs09.game.interaction.OptionListener").forEach {
-            (it.loadClass().newInstance() as OptionListener).defineListeners()
-        }
-        result.getSubclasses("rs09.game.interaction.UseWithListener").forEach {
-            (it.loadClass().newInstance() as UseWithListener).defineListeners()
+        result.getSubclasses("rs09.game.interaction.InteractionListener").forEach {
+            (it.loadClass().newInstance() as InteractionListener).defineListeners()
         }
     }
 

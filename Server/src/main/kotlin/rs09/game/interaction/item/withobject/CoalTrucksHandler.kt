@@ -4,18 +4,19 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
-import rs09.game.interaction.OptionListener
-import rs09.game.interaction.UseWithListener
+import rs09.game.interaction.InteractionListener
 import java.util.*
 
 /**
  * Handles coal truck interactions
  * @author ceik
  */
-class CoalTrucksHandler : OptionListener() {
+class CoalTruckInteractionListeners : InteractionListener() {
 
     val SEERS_VILLAGE_COAL_TRUCK_2114 = 2114
     val seersVillageTrucks = ZoneBorders(2690,3502,2699,3508)
+    val COAL_TRUCK_2114 = 2114
+    val COAL = Items.COAL_453
 
     override fun defineListeners() {
         on(SEERS_VILLAGE_COAL_TRUCK_2114, OBJECT, "remove-coal") { player, node ->
@@ -52,38 +53,28 @@ class CoalTrucksHandler : OptionListener() {
             player.dialogueInterpreter.sendDialogue("There is currently $coalInTruck coal in the truck.", "The truck has space for " + (120 - coalInTruck) + " more coal.")
             return@on true
         }
-    }
 
-    //TODO:
-    class CoalTruckListener : UseWithListener() {
-        val COAL_TRUCK_2114 = 2114
-        val COAL = Items.COAL_453
+        on(COAL,COAL_TRUCK_2114,OBJECT){player,_,_ ->
+            var coalInTruck = player.getAttribute("coal-truck-inventory", 0)
 
-        override fun defineListeners() {
+            var coalInInventory = player.inventory.getAmount(Items.COAL_453)
 
-            on(COAL,COAL_TRUCK_2114,OBJECT){player,_,_ ->
-                var coalInTruck = player.getAttribute("coal-truck-inventory", 0)
+            if(coalInInventory + coalInTruck >= 120){
+                coalInInventory = 120 - coalInTruck
+                player.packetDispatch.sendMessage("You have filled up the coal truck.")
 
-                var coalInInventory = player.inventory.getAmount(Items.COAL_453)
-
-                if(coalInInventory + coalInTruck >= 120){
-                    coalInInventory = 120 - coalInTruck
-                    player.packetDispatch.sendMessage("You have filled up the coal truck.")
-
-                    //handle coal truck task for seer's village
-                    if (!player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE).isComplete(1, 2)
-                        && player.viewport.region.id == 10294) { // region 10294 is at coal truck mine, region 10806 is in seers village
-                        player.setAttribute("/save:diary:seers:coal-truck-full", true)
-                    }
+                //handle coal truck task for seer's village
+                if (!player.achievementDiaryManager.getDiary(DiaryType.SEERS_VILLAGE).isComplete(1, 2)
+                    && player.viewport.region.id == 10294) { // region 10294 is at coal truck mine, region 10806 is in seers village
+                    player.setAttribute("/save:diary:seers:coal-truck-full", true)
                 }
-
-                player.inventory.remove(Item(Items.COAL_453,coalInInventory))
-                coalInTruck += coalInInventory
-
-                player.setAttribute("/save:coal-truck-inventory",coalInTruck)
-                return@on true
             }
 
+            player.inventory.remove(Item(Items.COAL_453,coalInInventory))
+            coalInTruck += coalInInventory
+
+            player.setAttribute("/save:coal-truck-inventory",coalInTruck)
+            return@on true
         }
     }
 }

@@ -10,7 +10,7 @@ import core.game.system.task.Pulse
 import core.game.world.map.zone.ZoneBorders
 import core.plugin.Plugin
 import org.rs09.consts.Items
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.GameWorld
 
@@ -19,7 +19,7 @@ import rs09.game.world.GameWorld
  * @author Ceikry
  * @author Woah
  */
-class EquipHandler : OptionListener() {
+class EquipHandler : InteractionListener() {
 
     override fun defineListeners() {
 

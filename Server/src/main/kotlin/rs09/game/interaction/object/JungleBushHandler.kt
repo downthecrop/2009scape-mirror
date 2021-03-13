@@ -7,14 +7,14 @@ import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 import rs09.game.world.GameWorld
 
 /**
  * Handles the chopping down of dense jungle, mainly to grant access to the Kharazi Jungle.
  * @author Ceikry
  */
-class JungleBushHandler : OptionListener(){
+class JungleBushHandler : InteractionListener(){
     val chopped_bush = 2895
     val chop_a  = Animation(910)
     val chop_b  = Animation(2382)
