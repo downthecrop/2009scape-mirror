@@ -11,7 +11,6 @@ import rs09.game.world.GameWorld.Pulser
 import kotlin.math.abs
 import kotlin.math.atan2
 
-@Initializable
 class HunterTalismanListener : InteractionListener() {
 
     val TALISMAN = Items.HUNTERS_TALISMAN_3696
