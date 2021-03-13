@@ -22,7 +22,6 @@ import kotlin.math.ceil
  * Option handler for fishing trawler
  * @author Ceikry
  */
-@Initializable
 class FishingTrawlerOptionHandler : OptionListener() {
     val ENTRANCE_PLANK = 2178
     val EXIT_PLANK = 2179

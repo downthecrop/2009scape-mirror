@@ -1,7 +1,6 @@
 package rs09.game.interaction.city
 
 import core.game.world.map.Location
-import core.plugin.Initializable
 import rs09.game.interaction.OptionListener
 
 /**
@@ -10,7 +9,6 @@ import rs09.game.interaction.OptionListener
  * @author Sir Kermit
  */
 
-@Initializable
 class IsafdarListeners : OptionListener() {
 
     val CAVE_ENTRANCE = 4006

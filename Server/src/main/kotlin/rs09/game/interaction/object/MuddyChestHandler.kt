@@ -5,11 +5,9 @@ import core.game.node.`object`.ObjectBuilder
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
-import core.plugin.Initializable
 import org.rs09.consts.Items
 import rs09.game.interaction.OptionListener
 
-@Initializable
 /**
  * Handles the muddy chest
  * @author Ceikry
