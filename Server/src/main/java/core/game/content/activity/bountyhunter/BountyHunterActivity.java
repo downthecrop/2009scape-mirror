@@ -78,7 +78,7 @@ public final class BountyHunterActivity extends ActivityPlugin {
 	/**
 	 * The waiting room.
 	 */
-	private final List<Player> waitingRoom = new ArrayList<>();
+	private final List<Player> waitingRoom = new ArrayList<>(20);
 
 	/**
 	 * The crater type.

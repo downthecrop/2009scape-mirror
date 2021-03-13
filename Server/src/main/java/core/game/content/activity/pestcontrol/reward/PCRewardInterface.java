@@ -671,7 +671,7 @@ public final class PCRewardInterface extends ComponentPlugin {
 		public Item[] constructPack() {
 			final int build = this == SEED_PACK || this == HERB_PACK ? RandomFunction.random(MIN_BUILD, MAX_BUILD) : RandomFunction.random(38, 43);
 			int left = build;
-			List<Item> pack = new ArrayList<>();
+			List<Item> pack = new ArrayList<>(20);
 			int amt = 0;
 			for (Item i : getReward()) {
 				amt = this == SEED_PACK || this == HERB_PACK ? RandomFunction.random(1, 5) : RandomFunction.random(16, 25);

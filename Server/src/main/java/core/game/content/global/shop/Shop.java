@@ -59,7 +59,7 @@ public class Shop {
     /**
      * Represents the list of shop viewers.
      */
-    private final List<ShopViewer> viewers = new ArrayList<>();
+    private final List<ShopViewer> viewers = new ArrayList<>(20);
 
     /**
      * Represents the title of the shop.

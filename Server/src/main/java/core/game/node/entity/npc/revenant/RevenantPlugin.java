@@ -20,7 +20,7 @@ public class RevenantPlugin implements Plugin<Object> {
 	/**
 	 * The revenants npc.
 	 */
-	private static final List<NPC> REVENANTS = new ArrayList<>();
+	private static final List<NPC> REVENANTS = new ArrayList<>(20);
 
 	/**
 	 * The spawning locations.
@@ -47,7 +47,7 @@ public class RevenantPlugin implements Plugin<Object> {
 	public static void spawn() {
 		int size = REVENANTS.size();
 		int left = MAX - size;
-		List<Location> taken = new ArrayList<>();
+		List<Location> taken = new ArrayList<>(20);
 		for (NPC n : REVENANTS) {
 			taken.add(n.getProperties().getSpawnLocation());
 		}

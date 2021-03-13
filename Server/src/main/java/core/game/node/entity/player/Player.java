@@ -604,7 +604,7 @@ public class Player extends Entity {
 			boolean gravestone = graveManager.generateable() && getIronmanManager().getMode() != IronmanMode.ULTIMATE;
 			int seconds = graveManager.getType().getDecay() * 60;
 			int ticks = (1000 * seconds) / 600;
-			List<GroundItem> items = new ArrayList<>();
+			List<GroundItem> items = new ArrayList<>(20);
 			for (Item item : c[1].toArray()) {
 				if (item != null) {
 					GroundItem ground;
@@ -1234,7 +1234,7 @@ public class Player extends Entity {
 	 */
 	public List<Plugin<Player>> getLogoutPlugins() {
 		if (logoutPlugins == null) {
-			logoutPlugins = new ArrayList<>();
+			logoutPlugins = new ArrayList<>(20);
 		}
 		return logoutPlugins;
 	}

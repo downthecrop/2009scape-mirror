@@ -83,7 +83,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 		if (e instanceof Player) {
 			final Player p = (e.asPlayer());
 			if (p.getLocation().equals(new Location(2545, 10144, 0)) || p.getLocation().equals(new Location(2545, 10142, 0))) {
-				final List<NPC> eggs = new ArrayList<>();
+				final List<NPC> eggs = new ArrayList<>(20);
 				NPC n = Repository.findNPC(new Location(2546, 10142, 0));
 				if (n != null && n.getId() == 2449) {
 					eggs.add(n);
@@ -113,7 +113,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 							}
 							break;
 						case 3:
-							final List<NPC> spawns = new ArrayList<>();
+							final List<NPC> spawns = new ArrayList<>(20);
 							for (NPC n : eggs) {
 								n.transform(n.getId() + 1);
 								NPC spawn = NPC.create(2454, n.getLocation().transform(-1, 0, 0));

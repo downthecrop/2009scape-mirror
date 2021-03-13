@@ -46,7 +46,7 @@ public final class DesertZone extends MapZone implements Plugin<Object> {
     /**
      * The players list.
      */
-    private static final List<Player> PLAYERS = new ArrayList<>();
+    private static final List<Player> PLAYERS = new ArrayList<>(20);
 
     /**
      * The water draining pulse.

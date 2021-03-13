@@ -44,7 +44,7 @@ public class AlchemistZone extends MTAZone {
 	/**
 	 * The players in the zone.
 	 */
-	private static final List<Player> PLAYERS = new ArrayList<>();
+	private static final List<Player> PLAYERS = new ArrayList<>(20);
 
 	/**
 	 * The guardian.

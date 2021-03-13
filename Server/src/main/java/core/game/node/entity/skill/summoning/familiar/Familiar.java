@@ -105,7 +105,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	/**
 	 * The invisible familiar boosts.
 	 */
-	protected List<SkillBonus> boosts = new ArrayList<>();
+	protected List<SkillBonus> boosts = new ArrayList<>(20);
 
 	/**
 	 * The attack style.

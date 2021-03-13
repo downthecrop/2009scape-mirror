@@ -36,7 +36,7 @@ public final class BarrelRoom extends MapZone implements Plugin<Object> {
 	/**
 	 * The players list.
 	 */
-	private static List<Player> players = new ArrayList<>();
+	private static List<Player> players = new ArrayList<>(20);
 
 	/**
 	 * The pulse.

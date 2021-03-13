@@ -46,7 +46,7 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 	/**
 	 * The currently active NPCs.
 	 */
-	public List<NPC> activeNPCs = new ArrayList<>();
+	public List<NPC> activeNPCs = new ArrayList<>(20);
 
 	/**
 	 * Constructs a new {@code TzhaarFightCavesPlugin} {@code Object}.

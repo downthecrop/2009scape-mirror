@@ -46,7 +46,7 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 	/**
 	 * The players in the room.
 	 */
-	private static final List<Player> PLAYERS = new ArrayList<>();
+	private static final List<Player> PLAYERS = new ArrayList<>(20);
 
 	/**
 	 * The pulse.

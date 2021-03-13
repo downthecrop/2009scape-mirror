@@ -17,7 +17,7 @@ public final class WorldStatistics {
 	/**
 	 * The list of players connected to this world.
 	 */
-	private final List<String> players = new ArrayList<>();
+	private final List<String> players = new ArrayList<>(20);
 
 	/**
 	 * Constructs a new {@code WorldStatistics} {@Code Object}

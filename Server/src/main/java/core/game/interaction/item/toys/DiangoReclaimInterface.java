@@ -23,7 +23,7 @@ import java.util.Objects;
 @Initializable
 public class DiangoReclaimInterface extends ComponentPlugin {
     private static final int COMPONENT_ID = 468;
-    public static final List<Item> ITEMS = new ArrayList<>();
+    public static final List<Item> ITEMS = new ArrayList<>(20);
     public static final Item[] HOLIDAY_ITEMS = {YoyoPlugin.YOYO, ReindeerHatPlugin.ReindeerHat, BasketofEggsEvent.RUBBER_CHICKEN,ZombieHeadPlugin.ZOMBIE_HEAD, new Item(6857), new Item(6856), new Item(6858), new Item(6859), new Item(6860), new Item(6861), new Item(6862), new Item(6863), new Item(9920), new Item(9921),new Item(9922), new Item(9923), new Item(9924), new Item(9925), new Item(11019), new Item(11020), new Item(11021), new Item(11022), new Item(11789), new Item(11949), new Item(12634), new Item(14076), new Item(14077), new Item(14081),new Item(14595), new Item(14602), new Item(14603), new Item(14605)};
 
     //initialize the plugin, add lists of items to the ITEMS list...

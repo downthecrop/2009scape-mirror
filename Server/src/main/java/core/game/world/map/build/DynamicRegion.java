@@ -27,7 +27,7 @@ public final class DynamicRegion extends Region {
 	/**
 	 * The reserved areas.
 	 */
-	private static final List<ZoneBorders> RESERVED_AREAS = new ArrayList<>();
+	private static final List<ZoneBorders> RESERVED_AREAS = new ArrayList<>(20);
 
 	/**
 	 * The region id of the copied region.
@@ -113,7 +113,7 @@ public final class DynamicRegion extends Region {
 		ZoneBorders border = findZoneBorders((copy.getNorthEastX() - copy.getSouthWestX()) >> 3, (copy.getNorthEastY() - copy.getSouthWestY()) >> 3);
 		RESERVED_AREAS.add(border);
 		Location l = Location.create(border.getSouthWestX(), border.getSouthWestY(), 0);
-		List<DynamicRegion> regions = new ArrayList<>();
+		List<DynamicRegion> regions = new ArrayList<>(20);
 		for (int x = copy.getSouthWestX() >> 6; x < copy.getNorthEastX() >> 6; x++) {
 			for (int y = copy.getSouthWestY() >> 6; y < copy.getNorthEastY() >> 6; y++) {
 				int regionId = x << 8 | y;

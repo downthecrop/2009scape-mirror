@@ -552,11 +552,11 @@ public enum ClueLevel {
 	 * @return the rewar
 	 */
 	public List<Item> getLoot(Player player) {
-		List<ChanceItem> items = new ArrayList<>();
-		List<Integer> ids = new ArrayList<>();
+		List<ChanceItem> items = new ArrayList<>(20);
+		List<Integer> ids = new ArrayList<>(20);
 		items.addAll(Arrays.asList(DEFAULT_REWARDS));
 		items.addAll(Arrays.asList(this.getRewards()));
-		List<Item> rewards = new ArrayList<>();
+		List<Item> rewards = new ArrayList<>(20);
 		int size = RandomFunction.random(1, 6);
 		if (this == HARD) {
 			size = RandomFunction.random(4, 6);

@@ -143,7 +143,7 @@ public abstract class ClueScrollPlugin extends MapZone implements Plugin<Object>
 		}
 		List<ClueScrollPlugin> organized = (List<ClueScrollPlugin>) ORGANIZED.get(clue.getLevel());
 		if (organized == null) {
-			organized = new ArrayList<>();
+			organized = new ArrayList<>(20);
 		}
 		organized.add(clue);
 		ZoneBuilder.configure(clue);

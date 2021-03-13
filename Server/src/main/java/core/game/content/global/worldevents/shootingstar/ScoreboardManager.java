@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ScoreboardManager {
-    public static List<ScoreboardEntry> entries = new ArrayList<>();
+    public static List<ScoreboardEntry> entries = new ArrayList<>(20);
 
     public static void submit(Player player){
         if(entries.size() == 5){

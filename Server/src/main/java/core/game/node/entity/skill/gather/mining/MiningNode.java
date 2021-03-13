@@ -437,7 +437,7 @@ public enum MiningNode{
 
 
 
-        public static List<WeightedChanceItem> gemRockGems = new ArrayList<>();
+        public static List<WeightedChanceItem> gemRockGems = new ArrayList<>(20);
         static {
                 gemRockGems.add(new WeightedChanceItem(1625, 1, 60)); //uncut Opal
                 gemRockGems.add(new WeightedChanceItem(1627, 1, 30)); //uncut Jade

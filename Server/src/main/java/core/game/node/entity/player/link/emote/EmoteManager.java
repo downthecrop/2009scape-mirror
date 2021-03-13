@@ -17,7 +17,7 @@ public class EmoteManager {
 	/**
 	 * The list of unlocked emotes.
 	 */
-	private final List<Emotes> emotes = new ArrayList<>();
+	private final List<Emotes> emotes = new ArrayList<>(20);
 
 	/**
 	 * The player.

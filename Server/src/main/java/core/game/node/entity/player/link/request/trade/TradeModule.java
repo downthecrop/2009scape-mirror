@@ -443,7 +443,7 @@ public final class TradeModule implements RequestModule {
 	 * @return the split item array.
 	 */
 	private Item[] splitList(Item[] items, int min, int max) {
-		List<Item> list = new ArrayList<>();
+		List<Item> list = new ArrayList<>(20);
 		for (int i = min; i < max; i++) {
 			if (items[i] == null) {
 				continue;

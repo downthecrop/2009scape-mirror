@@ -45,7 +45,7 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 	/**
 	 * The moving wheat.
 	 */
-	private static final List<WheatSet> WHEAT = new ArrayList<>();
+	private static final List<WheatSet> WHEAT = new ArrayList<>(20);
 
 	/**
 	 * The pulse.

@@ -47,12 +47,12 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 	/**
 	 * The lobby list.
 	 */
-	private static final List<Player> LOBBY_PLAYERS = new ArrayList<>();
+	private static final List<Player> LOBBY_PLAYERS = new ArrayList<>(20);
 
 	/**
 	 * The players in battle list.
 	 */
-	private static final List<Player> WAR_PLAYERS = new ArrayList<>();
+	private static final List<Player> WAR_PLAYERS = new ArrayList<>(20);
 
 	/**
 	 * The interface id.

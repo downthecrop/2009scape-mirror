@@ -30,7 +30,7 @@ public class PickableDoorHandler extends OptionHandler {
      */
     private static final Item LOCK_PICK = new Item(1523);
 
-    private static final List<PickableDoor> pickableDoors = new ArrayList<>();
+    private static final List<PickableDoor> pickableDoors = new ArrayList<>(20);
 
     private static final int[] DOORS = new int[]{42028, 2550, 2551, 2554, 2555, 2556, 2557, 2558, 2559, 5501, 7246, 9565, 13314, 13317, 13320, 13323, 13326, 13344, 13345, 13346, 13347, 13348, 13349, 15759, 34005, 34805, 34806, 34812};
 

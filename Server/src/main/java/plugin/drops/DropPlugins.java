@@ -9,9 +9,9 @@ import java.util.List;
 
 public class DropPlugins {
     public static HashMap<Integer,List<DropPlugin>> plugins = new HashMap<>();
-    public static List<DropPlugin> globalPlugins = new ArrayList<>();
+    public static List<DropPlugin> globalPlugins = new ArrayList<>(20);
     public static List<Item> getDrops(int npc_id){
-        List<Item> drops = new ArrayList<>();
+        List<Item> drops = new ArrayList<>(20);
         List<DropPlugin> toHandle = plugins.get(npc_id);
         if(toHandle != null) {
             for (DropPlugin plugin : toHandle) {
@@ -30,7 +30,7 @@ public class DropPlugins {
         if(plugin.accepted_npcs.length > 0) {
             Arrays.stream(plugin.accepted_npcs).forEach(id -> {
                 if (plugins.get(id) == null) {
-                    List<DropPlugin> newlist = new ArrayList<>();
+                    List<DropPlugin> newlist = new ArrayList<>(20);
                     plugins.putIfAbsent(id, newlist);
                 }
                 plugins.get(id).add(plugin);

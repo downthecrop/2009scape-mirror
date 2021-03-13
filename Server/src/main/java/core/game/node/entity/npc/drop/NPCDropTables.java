@@ -40,17 +40,17 @@ public final class NPCDropTables {
 	/**
 	 * The default drop table (holding the 100% drops).
 	 */
-	private final List<WeightedChanceItem> defaultTable = new ArrayList<>();
+	private final List<WeightedChanceItem> defaultTable = new ArrayList<>(20);
 
 	/**
 	 * The charms drop table (holding the charm drops).
 	 */
-	private final List<WeightedChanceItem> charmTable = new ArrayList<>();
+	private final List<WeightedChanceItem> charmTable = new ArrayList<>(20);
 
 	/**
 	 * The main drop table (holding the main drops).
 	 */
-	private final List<WeightedChanceItem> mainTable = new ArrayList<>();
+	private final List<WeightedChanceItem> mainTable = new ArrayList<>(20);
 
 	/**
 	 * The NPC definitions.
@@ -175,7 +175,7 @@ public final class NPCDropTables {
 		if (player != null && npc.getProperties().isMultiZone() && (GrandExchangeDatabase.getDatabase().get(itemId) != null || item.getName().endsWith("charm")) && player.getCommunication().getClan() != null && player.getCommunication().isLootShare() && player.getCommunication().getLootRequirement().ordinal() >= player.getCommunication().getClan().getLootRequirement().ordinal() && !player.getIronmanManager().isIronman()) {
 			Player looter = player;
 			List<Player> players = RegionManager.getLocalPlayers(npc, 16);
-			List<Player> looters = new ArrayList<>();
+			List<Player> looters = new ArrayList<>(20);
 			for (Player p : players) {
 				if (p != null && p.getCommunication().getClan() != null && p.getCommunication().getClan() == player.getCommunication().getClan() && p.getCommunication().isLootShare() && p.getCommunication().getLootRequirement().ordinal() >= p.getCommunication().getClan().getLootRequirement().ordinal() && npc.getImpactHandler().getImpactLog().containsKey(p)) {
 					looters.add(p);

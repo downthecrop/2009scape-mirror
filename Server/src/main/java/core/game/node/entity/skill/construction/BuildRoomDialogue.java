@@ -48,7 +48,7 @@ public final class BuildRoomDialogue extends DialoguePlugin {
 	/**
 	 * The boundaries of the room to build.
 	 */
-	private List<GameObject> boundaries = new ArrayList<>();
+	private List<GameObject> boundaries = new ArrayList<>(20);
 
 	/**
 	 * The room we're building.

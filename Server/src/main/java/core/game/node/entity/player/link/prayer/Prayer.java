@@ -26,7 +26,7 @@ public final class Prayer {
 	/**
 	 * Represents the list of active prayers.
 	 */
-	private final List<PrayerType> active = new ArrayList<>();
+	private final List<PrayerType> active = new ArrayList<>(20);
 
 	/**
 	 * Represents the current draining task.

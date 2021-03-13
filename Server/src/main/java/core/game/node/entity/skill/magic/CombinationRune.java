@@ -20,7 +20,7 @@ public enum CombinationRune {
     }
 
     public static List<CombinationRune> eligibleFor(Runes rune){
-        List<CombinationRune> runes = new ArrayList<>();
+        List<CombinationRune> runes = new ArrayList<>(20);
         for(CombinationRune r : CombinationRune.values()){
             for(Runes ru : r.types){
                 if(ru == rune){

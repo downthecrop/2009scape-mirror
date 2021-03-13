@@ -229,7 +229,7 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 			if (runes == null) {
 				return true;
 			}
-			List<Item> toRemove = new ArrayList<>();
+			List<Item> toRemove = new ArrayList<>(20);
 			for (Item item : runes) {
 				if (!hasRune(p, item, toRemove, message)) {
 					return false;

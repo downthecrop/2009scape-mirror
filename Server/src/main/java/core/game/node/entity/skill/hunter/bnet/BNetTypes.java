@@ -37,7 +37,7 @@ public enum BNetTypes {
 	/**
 	 * The implings.
 	 */
-	private static final List<ImplingNode> IMPLINGS = new ArrayList<>();
+	private static final List<ImplingNode> IMPLINGS = new ArrayList<>(20);
 
 	/**
 	 * The node.

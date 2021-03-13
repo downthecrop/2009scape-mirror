@@ -49,7 +49,7 @@ public final class CasketPlugin extends OptionHandler {
 	 */
 	private ChanceItem getChanceItem(ChanceItem[] items) {
 		final int chance = RandomFunction.random(100);
-		final List<ChanceItem> chances = new ArrayList<>();
+		final List<ChanceItem> chances = new ArrayList<>(20);
 		for (ChanceItem c : items) {
 			if (chance > c.getChanceRate()) {
 				chances.add(c);

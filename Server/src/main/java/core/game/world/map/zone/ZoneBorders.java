@@ -168,7 +168,7 @@ public final class ZoneBorders {
 	 * @return The region ids.
 	 */
 	public List<Integer> getRegionIds() {
-		List<Integer> regionIds = new ArrayList<>();
+		List<Integer> regionIds = new ArrayList<>(20);
 		int neX = (northEastX >> 6) + 1;
 		int neY = (northEastY >> 6) + 1;
 		for (int x = southWestX >> 6; x < neX; x++) {
@@ -239,7 +239,7 @@ public final class ZoneBorders {
 	 */
 	public void addException(ZoneBorders exception) {
 		if (exceptions == null) {
-			this.exceptions = new ArrayList<>();
+			this.exceptions = new ArrayList<>(20);
 		}
 		exceptions.add(exception);
 	}

@@ -21,7 +21,7 @@ public class SystemConfig {
 	/**
 	 * The list of beta user names.
 	 */
-	private final List<String> betaUsers = new ArrayList<>();
+	private final List<String> betaUsers = new ArrayList<>(20);
 
 	/**
 	 * Constructs a new {@Code SystemConfig} {@Code Object}
@@ -102,11 +102,11 @@ public class SystemConfig {
 	 */
 	public List<String> split(String data, String regex) {
 		if (!data.contains(regex)) {
-			List<String> split = new ArrayList<>();
+			List<String> split = new ArrayList<>(20);
 			split.add(data);
 			return split;
 		}
-		List<String> split = new ArrayList<>();
+		List<String> split = new ArrayList<>(20);
 		String[] tokens = data.trim().split(regex);
 		for (String s : tokens) {
 			split.add(s);

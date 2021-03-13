@@ -53,12 +53,12 @@ public class Region {
 	/**
 	 * The region zones lying in this region.
 	 */
-	private final List<RegionZone> regionZones = new ArrayList<>();
+	private final List<RegionZone> regionZones = new ArrayList<>(20);
 
 	/**
 	 * The music zones lying in this region.
 	 */
-	private final List<MusicZone> musicZones = new ArrayList<>();
+	private final List<MusicZone> musicZones = new ArrayList<>(20);
 
 	/**
 	 * If the region is active.

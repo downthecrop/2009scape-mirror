@@ -42,7 +42,7 @@ public enum CommandSet {
 	/**
 	 * Represents the list of linked plugins with this command set.
 	 */
-	private final List<CommandPlugin> plugins = new ArrayList<>();
+	private final List<CommandPlugin> plugins = new ArrayList<>(20);
 
 	/**
 	 * Constructs a new {@code CommandSet} {@code Object}.

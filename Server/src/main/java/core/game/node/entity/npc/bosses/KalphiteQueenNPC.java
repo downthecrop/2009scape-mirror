@@ -210,7 +210,7 @@ public final class KalphiteQueenNPC extends AbstractNPC {
 		 * @return The targets array.
 		 */
 		private BattleState[] getRangeTargets(Entity e, Entity victim) {
-			List<BattleState> list = new ArrayList<>();
+			List<BattleState> list = new ArrayList<>(20);
 			for (Entity t : RegionManager.getLocalPlayers(victim, -1 + (int) e.getCenterLocation().getDistance(victim.getLocation()))) {
 				if (t.isAttackable(e, CombatStyle.RANGE)) {
 					list.add(new BattleState(e, t));

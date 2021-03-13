@@ -101,7 +101,7 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 	/**
 	 * The players in the catapult room.
 	 */
-	private static List<Player> players = new ArrayList<>();
+	private static List<Player> players = new ArrayList<>(20);
 
 	/**
 	 * The current attack.

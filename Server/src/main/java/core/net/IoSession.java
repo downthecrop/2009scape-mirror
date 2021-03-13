@@ -51,7 +51,7 @@ public class IoSession {
 	/**
 	 * The currently queued writing data.
 	 */
-	private List<ByteBuffer> writingQueue = new ArrayList<>();
+	private List<ByteBuffer> writingQueue = new ArrayList<>(20);
 
 	/**
 	 * The currently queued reading data.

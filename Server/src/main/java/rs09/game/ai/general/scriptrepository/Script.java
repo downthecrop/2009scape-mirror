@@ -11,8 +11,8 @@ import java.util.Map;
 public abstract class Script {
 
     public ScriptAPI scriptAPI;
-    public ArrayList<Item> inventory = new ArrayList<>();
-    public ArrayList<Item> equipment = new ArrayList<>();
+    public ArrayList<Item> inventory = new ArrayList<>(20);
+    public ArrayList<Item> equipment = new ArrayList<>(20);
     public Map<Integer, Integer> skills = new HashMap<>();
 
 

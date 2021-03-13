@@ -884,7 +884,7 @@ public class DeathMansionEvent extends HolidayEvent {
 		public static List<GrimItem> getGrimItems(Player player) {
 			List<GrimItem> items = player.getAttribute("grim-items", null);
 			if (items == null) {
-				items = new ArrayList<>();
+				items = new ArrayList<>(20);
 			}
 			player.setAttribute("grim-items", items);
 			return items;

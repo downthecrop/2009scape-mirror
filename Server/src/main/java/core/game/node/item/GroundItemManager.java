@@ -21,7 +21,7 @@ public final class GroundItemManager {
 	/**
 	 * The list of ground items.
 	 */
-	private static final List<GroundItem> GROUND_ITEMS = new ArrayList<>();
+	private static final List<GroundItem> GROUND_ITEMS = new ArrayList<>(20);
 
 	/**
 	 * Creates a ground item.

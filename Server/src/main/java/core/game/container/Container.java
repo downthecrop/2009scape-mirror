@@ -46,7 +46,7 @@ public class Container {
     /**
      * The container listeners.
      */
-    private final List<ContainerListener> listeners = new ArrayList<>();
+    private final List<ContainerListener> listeners = new ArrayList<>(20);
 
     /**
      * Constructs a new {@code Container} {@code Object}.

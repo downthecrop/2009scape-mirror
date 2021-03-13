@@ -110,7 +110,7 @@ public final class PCShifterNPC extends AbstractNPC {
 	 * @return The destination.
 	 */
 	private Location getDestination(Entity victim) {
-		List<Location> locations = new ArrayList<>();
+		List<Location> locations = new ArrayList<>(20);
 		int radius = 2;
 		for (int x = -radius; x < radius + 1; x++) {
 			for (int y = -radius; y < radius + 1; y++) {

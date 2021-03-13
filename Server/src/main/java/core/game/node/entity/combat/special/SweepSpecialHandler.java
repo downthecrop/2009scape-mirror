@@ -92,7 +92,7 @@ public final class SweepSpecialHandler extends MeleeSwingHandler implements Plug
 		int x = vl.getX();
 		int y = vl.getY();
 		Direction dir = Direction.getDirection(x - entity.getLocation().getX(), y - entity.getLocation().getY());
-		List<BattleState> l = new ArrayList<>();
+		List<BattleState> l = new ArrayList<>(20);
 		l.add(new BattleState(entity, victim));
 		for (Entity n : victim instanceof NPC ? RegionManager.getSurroundingNPCs(victim, 9, entity, victim) : RegionManager.getSurroundingPlayers(victim, 9, entity, victim)) {
 			if (n instanceof Familiar) {

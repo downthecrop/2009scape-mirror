@@ -38,7 +38,7 @@ public final class CommunicationInfo {
 	/**
 	 * The list of blocked players.
 	 */
-	private final List<String> blocked = new ArrayList<>();
+	private final List<String> blocked = new ArrayList<>(20);
 
 	/**
 	 * The player's clan name.
@@ -105,7 +105,7 @@ public final class CommunicationInfo {
 		if (privateChatSetting != 2) {
 			for (GameServer server : WorldDatabase.getWorlds()) {
 				if (server != null && server.isActive()) {
-					List<String> names = new ArrayList<>();
+					List<String> names = new ArrayList<>(20);
 					for (PlayerSession p : server.getPlayers().values()) {
 						if (p.isActive() && p.getCommunication().contacts.containsKey(player.getUsername())) {
 							if (privateChatSetting == 0 || contacts.containsKey(p.getUsername())) {

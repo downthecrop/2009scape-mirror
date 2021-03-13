@@ -122,7 +122,7 @@ public abstract class DegradableEquipment implements Plugin<Object> {
 	public DegradableEquipment newInstance(Object arg) {
 		List<DegradableEquipment> equipment = EQUIPMENT[slot];
 		if (equipment == null) {
-			equipment = EQUIPMENT[slot] = new ArrayList<>();
+			equipment = EQUIPMENT[slot] = new ArrayList<>(20);
 		}
 		equipment.add(this);
 		return this;

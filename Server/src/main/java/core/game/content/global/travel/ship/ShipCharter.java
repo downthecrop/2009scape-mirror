@@ -97,7 +97,7 @@ public final class ShipCharter {
 																*/
 		Destination.OO_GLOG, Destination.SHIPYARD, /* Destination.PORT_TYRAS, */
 		Destination.CRANDOR };
-		List<Integer> childs = new ArrayList<>();
+		List<Integer> childs = new ArrayList<>(20);
 		for (Destination destination : restrictions) {
 			childs.add(destination.getXChild());
 			childs.add(destination.getNameChild());

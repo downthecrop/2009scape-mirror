@@ -121,7 +121,7 @@ public final class WildernessZone extends MapZone {
 					boolean gravestone = player.getGraveManager().generateable() && player.getIronmanManager().getMode() != IronmanMode.ULTIMATE && !(killer instanceof Player);
 					int seconds = player.getGraveManager().getType().getDecay() * 60;
 					int ticks = (1000 * seconds) / 600;
-					List<GroundItem> items = new ArrayList<>();
+					List<GroundItem> items = new ArrayList<>(20);
 					for (Item item : c[1].toArray()) {
 						if (item != null) {
 							GroundItem ground;

@@ -51,7 +51,7 @@ public final class PestControlSession {
 	/**
 	 * The barricade & gate objects.
 	 */
-	private final List<GameObject> barricades = new ArrayList<>();
+	private final List<GameObject> barricades = new ArrayList<>(20);
 
 	/**
 	 * The amount of ticks.
@@ -66,7 +66,7 @@ public final class PestControlSession {
 	/**
 	 * List of attackable portals
 	 */
-	private final List<NPC> aportals = new ArrayList<>();
+	private final List<NPC> aportals = new ArrayList<>(20);
 	/**
 	 * The portals.
 	 */
@@ -215,7 +215,7 @@ public final class PestControlSession {
 	public void startGame(List<Player> waitingPlayers) {
 		region.flagActive();
 		initBarricadesList();
-		List<Integer> list = new ArrayList<>();
+		List<Integer> list = new ArrayList<>(20);
 		for (int i = 0; i < 4; i++) {
 			list.add(i);
 		}

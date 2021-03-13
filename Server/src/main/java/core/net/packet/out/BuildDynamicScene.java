@@ -22,7 +22,7 @@ public final class BuildDynamicScene implements OutgoingPacket<DynamicSceneConte
 	@Override
 	public void send(DynamicSceneContext context) {
 		IoBuffer buffer = new IoBuffer(214, PacketHeader.SHORT);
-		List<Integer> regionIds = new ArrayList<>();
+		List<Integer> regionIds = new ArrayList<>(20);
 		Player player = context.getPlayer();
 		buffer.putLEShortA(player.getLocation().getSceneX());
 		buffer.putLEShortA(player.getLocation().getRegionX());

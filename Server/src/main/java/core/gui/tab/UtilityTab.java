@@ -46,7 +46,7 @@ public final class UtilityTab extends ConsoleTab {
     /**
      * The list of players.
      */
-    private final List<Player> players = new ArrayList<>();
+    private final List<Player> players = new ArrayList<>(20);
 
     /**
      * The mapping of ips & their users.
@@ -280,7 +280,7 @@ public final class UtilityTab extends ConsoleTab {
                 }
             }
         }
-        List<String> formats = new ArrayList<>();
+        List<String> formats = new ArrayList<>(20);
         for (int i = mostWealthy.length - 1; i >= 0; i--) {
             Object[] info = mostWealthy[i];
             if (info != null && info[0] != null) {
@@ -331,7 +331,7 @@ public final class UtilityTab extends ConsoleTab {
         Map<String, Integer> map = new HashMap<>();
         for (Player p : players) {
             p.getAnimator();
-            List<core.game.container.Container> containers = new ArrayList<>();
+            List<core.game.container.Container> containers = new ArrayList<>(20);
             containers.add(p.getInventory());
             containers.add(p.getBank());
             containers.add(p.getEquipment());
@@ -346,7 +346,7 @@ public final class UtilityTab extends ConsoleTab {
                 map.put(p.getName(), amount);
             }
         }
-        List<String> formats = new ArrayList<>();
+        List<String> formats = new ArrayList<>(20);
         for (Map.Entry<String, Integer> entry : map.entrySet()) {
             formats.add("Player name=" + entry.getKey() + ", contained a total of " + entry.getValue() + " " + item.getName() + ".");
         }
@@ -443,7 +443,7 @@ public final class UtilityTab extends ConsoleTab {
      * Checks the staff.
      */
     public void staffScanner() {
-        List<String> staff = new ArrayList<>();
+        List<String> staff = new ArrayList<>(20);
         for (Player player : players) {
             if (player.getDetails().getRights() != Rights.REGULAR_PLAYER) {
                 staff.add(player.getName() + " - " + StringUtils.formatDisplayName(player.getDetails().getRights().toString()));

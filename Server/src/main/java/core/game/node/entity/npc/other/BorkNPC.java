@@ -64,7 +64,7 @@ public class BorkNPC extends AbstractNPC {
 	/**
 	 * The list of the legion npc.
 	 */
-	private final List<NPC> legions = new ArrayList<>();
+	private final List<NPC> legions = new ArrayList<>(20);
 
 	/**
 	 * If the legion is spawned.
