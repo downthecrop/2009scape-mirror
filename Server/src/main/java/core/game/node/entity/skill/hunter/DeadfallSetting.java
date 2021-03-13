@@ -137,7 +137,7 @@ public final class DeadfallSetting extends TrapSetting {
 	 * @return the locations.
 	 */
 	private List<Location> getLocations(GameObject object) {
-		List<Location> locs = new ArrayList<>();
+		List<Location> locs = new ArrayList<>(20);
 		if (object.getDirection() == Direction.NORTH) {
 			locs.add(object.getLocation().transform(1, -1, 0));
 			locs.add(object.getLocation().transform(1, 1, 0));

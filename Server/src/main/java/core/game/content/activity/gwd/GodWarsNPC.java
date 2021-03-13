@@ -49,7 +49,7 @@ public final class GodWarsNPC extends AbstractNPC {
 
 		@Override
 		public List<Entity> getPossibleTargets(Entity entity, int radius) {
-			List<Entity> targets = new ArrayList<>();
+			List<Entity> targets = new ArrayList<>(20);
 			for (Player player : RegionManager.getLocalPlayers(entity, radius)) {
 				if (canSelectTarget(entity, player)) {
 					targets.add(player);

@@ -15,7 +15,7 @@ public class SpellBlocks {
         if(blocks.get(spellId) != null){
             blocks.get(spellId).add(toBlock);
         } else {
-            List<Node> blockslist = new ArrayList<>();
+            List<Node> blockslist = new ArrayList<>(20);
             blockslist.add(toBlock);
             blocks.put(spellId,blockslist);
         }

@@ -166,7 +166,7 @@ public final class QuizMasterDialogue extends DialoguePlugin {
 	private void display(QuizSet[] quiz) {
 		QuizSet correct = quiz[0];
 		QuizSet wrong = quiz[1];
-		List<Integer> childs = new ArrayList<>();
+		List<Integer> childs = new ArrayList<>(20);
 		childs.add(1);
 		childs.add(2);
 		childs.add(3);
@@ -231,7 +231,7 @@ public final class QuizMasterDialogue extends DialoguePlugin {
 		 * @return the set.
 		 */
 		public static QuizSet[] getQuizSet() {
-			List<QuizSet> sets = new ArrayList<>();
+			List<QuizSet> sets = new ArrayList<>(20);
 			for (QuizSet s : values()) {
 				sets.add(s);
 			}

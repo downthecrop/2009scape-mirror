@@ -44,7 +44,7 @@ public class WildernessAreaZone extends MapZone implements Plugin<Object> {
 	/**
 	 * The list of players in the arena.
 	 */
-	private final List<Player> players = new ArrayList<>();
+	private final List<Player> players = new ArrayList<>(20);
 
 	/**
 	 * Constructs a new {@code WildernessAreaZone} {@code Object}

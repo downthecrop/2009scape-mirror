@@ -69,7 +69,7 @@ public abstract class OptionHandler implements Plugin<Object> {
 	 */
 	public int[] getValidChildren(int wrapper) {
 		final ObjectDefinition definition = ObjectDefinition.forId(wrapper);
-		final List<Integer> list = new ArrayList<>();
+		final List<Integer> list = new ArrayList<>(20);
 		if (definition.getChildrenIds() == null) {
 			SystemLogger.logErr("Null child wrapper in option handler wrapperId=" + wrapper);
 			return new int[] { wrapper };

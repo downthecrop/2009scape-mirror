@@ -28,7 +28,7 @@ public final class PCObjectHandler extends OptionHandler {
 	//public boolean pcbotsSpawned = false;
 	public boolean PCnBotsSpawned = false;
 	public boolean PCiBotsSpawned = false;
-	public ArrayList<String> playersJoined = new ArrayList<>();
+	public ArrayList<String> playersJoined = new ArrayList<>(20);
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {

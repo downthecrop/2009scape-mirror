@@ -54,17 +54,17 @@ public final class ClanWarsActivityPlugin extends ActivityPlugin {
 	/**
 	 * The first clan's players.
 	 */
-	private List<Player> firstClanPlayers = new ArrayList<>();
+	private List<Player> firstClanPlayers = new ArrayList<>(20);
 
 	/**
 	 * The second clan's players.
 	 */
-	private List<Player> secondClanPlayers = new ArrayList<>();
+	private List<Player> secondClanPlayers = new ArrayList<>(20);
 
 	/**
 	 * The list of viewing players.
 	 */
-	private List<Player> viewingPlayers = new ArrayList<>();
+	private List<Player> viewingPlayers = new ArrayList<>(20);
 
 	/**
 	 * The amount of ticks.

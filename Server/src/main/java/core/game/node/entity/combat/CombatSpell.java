@@ -110,7 +110,7 @@ public abstract class CombatSpell extends MagicSpell {
 	 * @return The list of targets.
 	 */
 	public List<Entity> getMultihitTargets(Entity entity, Entity target, int max) {
-		List<Entity> list = new ArrayList<>();
+		List<Entity> list = new ArrayList<>(20);
 		list.add(target);
 		boolean npc = target instanceof NPC;
 		for (Entity e : npc ? RegionManager.getLocalNpcs(target, 1) : RegionManager.getLocalPlayers(target, 1)) {

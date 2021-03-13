@@ -132,7 +132,7 @@ public final class DesertWyrmNPC extends Forager {
 			 * @return the object.
 			 */
 			public GameObject getClosestRock(Player player) {
-				List<GameObject> rocks = new ArrayList<>();
+				List<GameObject> rocks = new ArrayList<>(20);
 				for (int k = 0; k < 7; k++) {
 					for (int i = 0; i < 4; i++) {
 						Direction dir = Direction.get(i);

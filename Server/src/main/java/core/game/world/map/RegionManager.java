@@ -412,7 +412,7 @@ public final class RegionManager {
 	 * @return the list.
 	 */
 	public static List<Entity> getLocalEntitys(Location location, int distance){
-		List<Entity> entitys = new ArrayList<>();
+		List<Entity> entitys = new ArrayList<>(20);
 		entitys.addAll(getLocalNpcs(location, distance));
 		entitys.addAll(getLocalPlayers(location, distance));
 		return entitys;
@@ -626,7 +626,7 @@ public final class RegionManager {
 	 */
 	public static List<Player> getRegionPlayers(int regionId) {
 		Region r = forId(regionId);
-		List<Player> players = new ArrayList<>();
+		List<Player> players = new ArrayList<>(20);
 		for (RegionPlane plane : r.getPlanes()) {
 			players.addAll(plane.getPlayers());
 		}

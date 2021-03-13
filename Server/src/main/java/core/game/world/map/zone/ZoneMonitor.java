@@ -27,12 +27,12 @@ public final class ZoneMonitor {
 	/**
 	 * The currently entered zones.
 	 */
-	private final List<RegionZone> zones = new ArrayList<>();
+	private final List<RegionZone> zones = new ArrayList<>(20);
 
 	/**
 	 * The currently entered music zones.
 	 */
-	private final List<MusicZone> musicZones = new ArrayList<>();
+	private final List<MusicZone> musicZones = new ArrayList<>(20);
 
 	/**
 	 * Constructs a new {@code ZoneMonitor} {@code Object}.

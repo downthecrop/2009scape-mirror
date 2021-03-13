@@ -43,7 +43,7 @@ public final class CommunicationInfo {
 	/**
 	 * The list of blocked players.
 	 */
-	private final List<String> blocked = new ArrayList<>();
+	private final List<String> blocked = new ArrayList<>(20);
 
 	/**
 	 * The player's clan name.

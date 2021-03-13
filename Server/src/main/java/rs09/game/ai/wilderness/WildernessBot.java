@@ -53,7 +53,7 @@ public class WildernessBot extends AIPlayer {
 
 	
 	public List<Entity> FindTargets(Entity entity, int radius) {
-		List<Entity> targets = new ArrayList<>();
+		List<Entity> targets = new ArrayList<>(20);
 		for (Player player : RegionManager.getLocalPlayers(entity, radius)) { {
 			if (checkValidTargets(player))
 					targets.add(player);

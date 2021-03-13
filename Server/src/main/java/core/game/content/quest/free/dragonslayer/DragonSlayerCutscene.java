@@ -257,7 +257,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
 		/**
 		 * Represents the active fires.
 		 */
-		private List<Location> fires = new ArrayList<>();
+		private List<Location> fires = new ArrayList<>(20);
 
 		/**
 		 * Represents if the fires are done burning.

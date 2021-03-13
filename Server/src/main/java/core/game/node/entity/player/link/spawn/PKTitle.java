@@ -83,7 +83,7 @@ public enum PKTitle {
 	 */
 	public static PKTitle[] getTitles(Player player) {
 		int kills = player.getSavedData().getSpawnData().getKills();
-		List<PKTitle> titles = new ArrayList<>();
+		List<PKTitle> titles = new ArrayList<>(20);
 		for (PKTitle t : values()) {
 			if (kills >= t.getKills()) {
 				titles.add(t);

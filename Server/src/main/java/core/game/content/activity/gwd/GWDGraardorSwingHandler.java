@@ -65,7 +65,7 @@ public final class GWDGraardorSwingHandler extends CombatSwingHandler {
 		} else {
 			ticks += (int) Math.ceil(entity.getLocation().getDistance(victim.getLocation()) * 0.3);
 			NPC npc = (NPC) entity;
-			List<BattleState> list = new ArrayList<>();
+			List<BattleState> list = new ArrayList<>(20);
 			for (Entity t : RegionManager.getLocalPlayers(npc, 28)) {
 				if (!CHAMBER.insideBorder(t.getLocation())) {
 					continue;

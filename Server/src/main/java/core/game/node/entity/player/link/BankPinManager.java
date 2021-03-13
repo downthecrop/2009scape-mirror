@@ -46,7 +46,7 @@ public class BankPinManager {
 	/**
 	 * The digits.
 	 */
-	private final List<Integer> digits = new ArrayList<>();
+	private final List<Integer> digits = new ArrayList<>(20);
 
 	/**
 	 * The bank pin.

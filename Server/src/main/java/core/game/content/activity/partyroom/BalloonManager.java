@@ -31,7 +31,7 @@ public final class BalloonManager extends OptionHandler {
 	/**
 	 * The list of dropped balloons.
 	 */
-	private static final List<GameObject> balloons = new ArrayList<>();
+	private static final List<GameObject> balloons = new ArrayList<>(20);
 
 	/**
 	 * The count down time until droping.

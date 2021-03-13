@@ -741,7 +741,7 @@ public final class AvaDialogue extends DialoguePlugin {
 	 * @param remove the remove item.
 	 */
 	private void removeAll(Player player, Item add, Item remove) {
-		List<Container> containers = new ArrayList<>();
+		List<Container> containers = new ArrayList<>(20);
 		containers.add(player.getInventory());
 		containers.add(player.getEquipment());
 		containers.add(player.getBank());

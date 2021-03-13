@@ -62,7 +62,7 @@ public class MessageLog {
 	 */
 	public MessageLog(int capacity, boolean uniqueLogging) {
 		this.capacity = capacity;
-		this.messages = new ArrayList<>();
+		this.messages = new ArrayList<>(20);
 		this.uniqueLogging = uniqueLogging;
 	}
 

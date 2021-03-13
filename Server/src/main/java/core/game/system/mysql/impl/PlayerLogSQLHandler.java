@@ -46,7 +46,7 @@ public class PlayerLogSQLHandler extends SQLEntryHandler<PlayerMonitor> {
 		if (connection.prepareStatement("SELECT * FROM " + table + " WHERE username='" + value + "' LIMIT 1").executeQuery().next()) {
 			String b = "SET ";
 			int size = 0;
-			List<Integer> columns = new ArrayList<>();
+			List<Integer> columns = new ArrayList<>(20);
 			for (int i = 0; i < MESSAGE_COLUMNS.length; i++) {
 				if (!entry.getLogs()[i].getMessages().isEmpty()) {
 					b += MESSAGE_COLUMNS[i] + " = CONCAT(" + MESSAGE_COLUMNS[i] + ", ?)" + (i == MESSAGE_COLUMNS.length - 1 ? "" : ",");

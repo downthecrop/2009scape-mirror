@@ -18,7 +18,7 @@ public final class HunterManager {
 	/**
 	 * The list of active traps.
 	 */
-	private final List<TrapWrapper> traps = new ArrayList<>();
+	private final List<TrapWrapper> traps = new ArrayList<>(20);
 
 	/**
 	 * The player instance.

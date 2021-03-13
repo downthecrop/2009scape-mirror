@@ -152,7 +152,7 @@ public class RandomFunction {
 		}
 		final int random = random((int) total);
 		double subTotal = 0;
-		List<ChanceItem> choices = new ArrayList<>();
+		List<ChanceItem> choices = new ArrayList<>(20);
 		for (ChanceItem item : items) {
 			choices.add(item);
 		}
@@ -167,8 +167,8 @@ public class RandomFunction {
 	}
 
 	public static List<Item> rollChanceTable(boolean atLeastOne,List<ChanceItem> table){
-		final List<Item> rewards = new ArrayList<>();
-		final List<Item> always_rewards = new ArrayList<>();
+		final List<Item> rewards = new ArrayList<>(20);
+		final List<Item> always_rewards = new ArrayList<>(20);
 		final List<ChanceItem> chanceTable = new ArrayList<ChanceItem>(table);
 		boolean isAllAlways = false;
 		if(table.stream().filter(item -> item.getChanceRate() == 1).count() == table.size()){

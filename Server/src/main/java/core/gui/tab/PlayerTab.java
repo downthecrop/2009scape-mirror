@@ -28,7 +28,7 @@ public class PlayerTab extends ConsoleTab {
     /**
      * The list of player names to search through.
      */
-    private final List<String> playerNames = new ArrayList<>();
+    private final List<String> playerNames = new ArrayList<>(20);
 
     /**
      * The player name text field.

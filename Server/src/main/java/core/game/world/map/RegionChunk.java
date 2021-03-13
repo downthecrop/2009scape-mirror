@@ -62,7 +62,7 @@ public class RegionChunk {
 	/**
 	 * The update flags.
 	 */
-	private List<UpdateFlag<?>> flags = new ArrayList<>();
+	private List<UpdateFlag<?>> flags = new ArrayList<>(20);
 	
 	/**
 	 * Constructs a new {@code RegionChunk} {@code Object}.

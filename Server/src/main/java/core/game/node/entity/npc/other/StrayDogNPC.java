@@ -39,7 +39,7 @@ public class StrayDogNPC extends AbstractNPC {
 	/**
 	 * Represents the array list of players.
 	 */
-	private List<Player> players = new ArrayList<>();
+	private List<Player> players = new ArrayList<>(20);
 
 	/**
 	 * Constructs a new {@code AlKharidWarriorPlugin} {@code Object}.

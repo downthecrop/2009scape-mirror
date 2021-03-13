@@ -38,7 +38,7 @@ public class GraveyardZone extends MTAZone {
 	/**
 	 * The players in the zone.
 	 */
-	private static final List<Player> PLAYERS = new ArrayList<>();
+	private static final List<Player> PLAYERS = new ArrayList<>(20);
 
 	/**
 	 * The runes rewarded by a chance.
@@ -69,7 +69,7 @@ public class GraveyardZone extends MTAZone {
 			if (PLAYERS.isEmpty()) {
 				return true;
 			}
-			List<Location> locs = new ArrayList<>();
+			List<Location> locs = new ArrayList<>(20);
 			for (Location l : GFX_POS) {
 				if (RandomFunction.random(12) >= 8) {
 					continue;

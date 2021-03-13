@@ -216,7 +216,7 @@ public final class DuelArenaActivity extends ActivityPlugin {
 	 * @return {@code DuelArea} the area.
 	 */
 	public static DuelArea getDuelArea(boolean obstacles) {
-		List<DuelArea> options = new ArrayList<>();
+		List<DuelArea> options = new ArrayList<>(20);
 		for (DuelArea area : DUEL_AREAS) {
 			if (!obstacles && area.isObstacles() || obstacles && !area.isObstacles()) {
 				continue;

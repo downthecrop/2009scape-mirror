@@ -152,7 +152,7 @@ public class DemonSlayer extends Quest {
 	 * @return the incantation.
 	 */
 	private final static String generateIncantation() {
-		List<String> incantations = new ArrayList<>();
+		List<String> incantations = new ArrayList<>(20);
 		for (String s : INCANTATIONS) {
 			incantations.add(s);
 		}

@@ -22,7 +22,7 @@ public final class WarningMessages {
 	/**
 	 * Represents the warning messages.
 	 */
-	private final List<WarningMessage> messages = new ArrayList<>();
+	private final List<WarningMessage> messages = new ArrayList<>(20);
 
 	/**
 	 * Method used to open the warning messages.

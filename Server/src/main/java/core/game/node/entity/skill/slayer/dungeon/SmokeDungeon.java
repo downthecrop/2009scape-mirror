@@ -37,7 +37,7 @@ public final class SmokeDungeon extends MapZone implements Plugin<Object> {
 	/**
 	 * The players list.
 	 */
-	private static final List<Player> PLAYERS = new ArrayList<>();
+	private static final List<Player> PLAYERS = new ArrayList<>(20);
 
 	/**
 	 * The tick delay until the next effect.

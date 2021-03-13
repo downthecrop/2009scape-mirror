@@ -32,7 +32,7 @@ public final class RareDropTable {
 	/**
 	 * The rare drop table.
 	 */
-	private static final List<WeightedChanceItem> TABLE = new ArrayList<>();
+	private static final List<WeightedChanceItem> TABLE = new ArrayList<>(20);
 
 
 	/**

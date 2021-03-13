@@ -121,7 +121,7 @@ public enum Bones {
 	 * @return the ids.
 	 */
 	public static int[] getArray() {
-		List<Integer> list = new ArrayList<>();
+		List<Integer> list = new ArrayList<>(20);
 		for (int i : bones.keySet()) {
 			list.add(i);
 		}

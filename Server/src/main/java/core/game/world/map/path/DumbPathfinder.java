@@ -41,7 +41,7 @@ public final class DumbPathfinder extends Pathfinder {
 		z = start.getZ();
 		x = start.getX();
 		y = start.getY();
-		List<Point> points = new ArrayList<>();
+		List<Point> points = new ArrayList<>(20);
 		path.setSuccesful(true);
 		while (x != end.getX() || y != end.getY()) {
 			Direction[] directions = getDirection(x, y, end);

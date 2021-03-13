@@ -65,7 +65,7 @@ public final class FamiliarManager {
 	/**
 	 * The list of insured pets.
 	 */
-	private List<Pets> insuredPets = new ArrayList<>();
+	private List<Pets> insuredPets = new ArrayList<>(20);
 
 	/**
 	 * Constructs a new {@code FamiliarManager} {@code Object}.

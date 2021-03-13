@@ -60,12 +60,12 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 	/**
 	 * The waiting players.
 	 */
-	private final List<Player> waitingPlayers = new ArrayList<>();
+	private final List<Player> waitingPlayers = new ArrayList<>(20);
 
 	/**
 	 * The active game sessions.
 	 */
-	private final List<PestControlSession> sessions = new ArrayList<>();
+	private final List<PestControlSession> sessions = new ArrayList<>(20);
 
 	/**
 	 * The game updating pulse.

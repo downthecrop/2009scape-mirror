@@ -92,12 +92,12 @@ public final class WaterfallPlugin extends OptionHandler {
 	/**
 	 * The swimmer swimming.
 	 */
-	private static final List<Player> SWIMMERS = new ArrayList<>();
+	private static final List<Player> SWIMMERS = new ArrayList<>(20);
 
 	/**
 	 * The ropes.
 	 */
-	private static final List<GameObject> ROPES = new ArrayList<>();
+	private static final List<GameObject> ROPES = new ArrayList<>(20);
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {

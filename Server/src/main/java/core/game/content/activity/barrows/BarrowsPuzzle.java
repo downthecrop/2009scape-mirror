@@ -74,7 +74,7 @@ public final class BarrowsPuzzle extends ComponentPlugin {
 	 */
 	public BarrowsPuzzle create() {
 		int[] answers = Arrays.copyOf(answerModels, answerModels.length);
-		List<Integer> list = new ArrayList<>();
+		List<Integer> list = new ArrayList<>(20);
 		for (int answer : answers) {
 			list.add(answer);
 		}

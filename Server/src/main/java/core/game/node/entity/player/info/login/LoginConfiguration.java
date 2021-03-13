@@ -35,7 +35,7 @@ public final class LoginConfiguration {
     /**
      * The login plugins.
      */
-    private static final List<Plugin<Object>> LOGIN_PLUGINS = new ArrayList<>();
+    private static final List<Plugin<Object>> LOGIN_PLUGINS = new ArrayList<>(20);
 
     /**
      * The lobby pane component.

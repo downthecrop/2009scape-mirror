@@ -42,7 +42,7 @@ public final class SQLTable {
 	 * @return The columns.
 	 */
 	public List<SQLColumn> getChanged() {
-		List<SQLColumn> updated = new ArrayList<>();
+		List<SQLColumn> updated = new ArrayList<>(20);
 		for (int i = 0; i < columns.length; i++) {
 			SQLColumn column = columns[i];
 			if (column.isChanged()) {

@@ -49,7 +49,7 @@ public class TelekineticZone extends MTAZone {
 	/**
 	 * The mazes to choose from.
 	 */
-	private final List<Maze> mazes = new ArrayList<>();
+	private final List<Maze> mazes = new ArrayList<>(20);
 
 	/**
 	 * The dynamic region.

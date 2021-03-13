@@ -284,7 +284,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 		// Calculate a random gem for the player
 		else if (isMiningGems) {
 			int random = RandomFunction.random(100);
-			List<Integer> gems = new ArrayList<>();
+			List<Integer> gems = new ArrayList<>(20);
 			if (random < 2) {
 				gems.add(1617);
 			} else if (random < 25) {

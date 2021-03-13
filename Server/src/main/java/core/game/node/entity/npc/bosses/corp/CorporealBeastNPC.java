@@ -268,7 +268,7 @@ public final class CorporealBeastNPC extends AbstractNPC {
 				Location p = player.getLocation();
 				if (p.getX() >= l.getX() && p.getY() >= l.getY() && p.getX() < l.getX() + entity.size() && p.getY() < l.getY() + entity.size()) {
 					if (stompTargets == null) {
-						stompTargets = new ArrayList<>();
+						stompTargets = new ArrayList<>(20);
 					}
 					stompTargets.add(player);
 				}
