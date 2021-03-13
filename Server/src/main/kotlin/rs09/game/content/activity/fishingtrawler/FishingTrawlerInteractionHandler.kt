@@ -12,7 +12,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import org.rs09.consts.Items
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 import rs09.game.node.entity.player.info.stats.FISHING_TRAWLER_LEAKS_PATCHED
 import rs09.game.node.entity.player.info.stats.STATS_BASE
 import rs09.tools.stringtools.colorize
@@ -22,7 +22,7 @@ import kotlin.math.ceil
  * Option handler for fishing trawler
  * @author Ceikry
  */
-class FishingTrawlerOptionHandler : OptionListener() {
+class FishingTrawlerInteractionHandler : InteractionListener() {
     val ENTRANCE_PLANK = 2178
     val EXIT_PLANK = 2179
     val HOLE = 2167

@@ -1,12 +1,12 @@
 package rs09.game.interaction.item
 
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 
 /**
  * Handles the bracelet of clay operate option.
  * @author Ceikry
  */
-class BraceletOfClayPlugin : OptionListener() {
+class BraceletOfClayPlugin : InteractionListener() {
 
     val BRACELET = 11074
 

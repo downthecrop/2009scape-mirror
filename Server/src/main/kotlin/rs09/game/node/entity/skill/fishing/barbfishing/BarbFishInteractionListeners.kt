@@ -1,9 +1,9 @@
 package rs09.game.node.entity.skill.fishing.barbfishing
 
 import core.game.node.item.Item
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 
-class BarbFishOptionListeners : OptionListener() {
+class BarbFishInteractionListeners : InteractionListener() {
     override fun defineListeners() {
 
         on(25268,OBJECT,"search"){player,_ ->

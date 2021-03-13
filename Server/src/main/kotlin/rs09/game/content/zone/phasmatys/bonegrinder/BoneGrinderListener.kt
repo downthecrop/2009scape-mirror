@@ -7,7 +7,7 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 import rs09.game.world.GameWorld.Pulser
 
 private const val LOADER = 11162
@@ -20,7 +20,7 @@ private val FILL_ANIM = Animation(1649)
 private val WIND_ANIM = Animation(1648)
 private val SCOOP_ANIM = Animation(1650)
 
-class BoneGrinderListener : OptionListener() {
+class BoneGrinderListener : InteractionListener() {
 
     override fun defineListeners() {
 

@@ -4,7 +4,7 @@ import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager.TeleportType
 import core.game.world.map.Location
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 
 /**
  * Handles interactions with fairy rings
@@ -15,7 +15,7 @@ private val RINGS = intArrayOf(12003, 12094, 12095, 14058, 14061, 14064, 14067, 
 private const val MAIN_RING = 12128
 
 
-class FairyRingPlugin : OptionListener() {
+class FairyRingPlugin : InteractionListener() {
 
     override fun defineListeners() {
 

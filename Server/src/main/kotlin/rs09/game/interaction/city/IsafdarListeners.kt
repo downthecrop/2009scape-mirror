@@ -1,7 +1,7 @@
 package rs09.game.interaction.city
 
 import core.game.world.map.Location
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 
 /**
  * File to be used for anything Isafdar related.
@@ -9,7 +9,7 @@ import rs09.game.interaction.OptionListener
  * @author Sir Kermit
  */
 
-class IsafdarListeners : OptionListener() {
+class IsafdarListeners : InteractionListener() {
 
     val CAVE_ENTRANCE = 4006
     val CAVE_EXIT = 4007

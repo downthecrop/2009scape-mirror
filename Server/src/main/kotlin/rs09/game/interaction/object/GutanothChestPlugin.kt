@@ -9,12 +9,12 @@ import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 import rs09.game.world.GameWorld
 import java.util.concurrent.TimeUnit
 
 private const val CHEST = 2827
-class GutanothChestOptionHandler : OptionListener(){
+class GutanothChestInteractionHandler : InteractionListener(){
 
     override fun defineListeners() {
 

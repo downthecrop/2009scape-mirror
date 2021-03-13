@@ -6,13 +6,13 @@ import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 
 /**
  * Handles the muddy chest
  * @author Ceikry
  */
-class MuddyChestHandler : OptionListener() {
+class MuddyChestHandler : InteractionListener() {
 
     private val CHEST = 170
 

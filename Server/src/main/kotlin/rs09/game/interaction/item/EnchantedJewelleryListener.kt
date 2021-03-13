@@ -2,14 +2,14 @@ package rs09.game.interaction.item
 
 import core.game.content.global.EnchantedJewellery
 import rs09.game.content.global.EnchantedJewelleryDialogueFile
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 import java.util.*
 
 /**
  * Listener for enchanted jewellery options
  * @author Ceikry
  */
-class EnchantedJewelleryListener : OptionListener() {
+class EnchantedJewelleryListener : InteractionListener() {
     val IDs: IntArray
 
     init {

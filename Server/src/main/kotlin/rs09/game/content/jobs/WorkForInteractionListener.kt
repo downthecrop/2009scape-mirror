@@ -7,13 +7,13 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import org.rs09.consts.Items
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 
 /**
  * Handles the work-for actions for the NPCs
  * @author Ceikry
  */
-class WorkForOptionListener : OptionListener() {
+class WorkForInteractionListener : InteractionListener() {
     val possibleWeaponLooks = arrayListOf(
         Items.BRONZE_SCIMITAR_1321,
         Items.STEEL_SCIMITAR_1325,

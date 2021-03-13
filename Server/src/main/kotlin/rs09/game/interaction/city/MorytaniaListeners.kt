@@ -4,7 +4,7 @@ import core.game.node.entity.impl.ForceMovement
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import rs09.game.interaction.OptionListener
+import rs09.game.interaction.InteractionListener
 
 /**
  * File to be used for anything Morytania related.
@@ -12,7 +12,7 @@ import rs09.game.interaction.OptionListener
  * @author Sir Kermit
  */
 
-class MorytaniaListeners : OptionListener() {
+class MorytaniaListeners : InteractionListener() {
 
     val GROTTO_ENTRANCE = 3516
     val GROTTO_EXIT = 3526
