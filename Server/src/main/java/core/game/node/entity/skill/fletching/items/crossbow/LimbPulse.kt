@@ -1,79 +1,52 @@
-package core.game.node.entity.skill.fletching.items.crossbow;
+package core.game.node.entity.skill.fletching.items.crossbow
 
-import core.game.node.entity.skill.SkillPulse;
-import core.game.node.entity.skill.Skills;
-import core.game.node.entity.skill.fletching.Fletching;
-import core.game.node.entity.player.Player;
-import core.game.node.item.Item;
+import core.game.node.entity.player.Player
+import core.game.node.entity.skill.SkillPulse
+import core.game.node.entity.skill.Skills
+import core.game.node.entity.skill.fletching.Fletching
+import core.game.node.item.Item
 
 /**
  * Represents the skill pulse of attaching limbs.
  * @author Ceikry
  */
-public class LimbPulse extends SkillPulse<Item> {
+class LimbPulse(player: Player?, node: Item, private val limb: Fletching.Limb ,private var amount: Int) : SkillPulse<Item?>(player, node) {
+    override fun checkRequirements(): Boolean {
+        if (player.skills.getLevel(Skills.FLETCHING) < limb.level) {
+            player.dialogueInterpreter.sendDialogue("You need a fletching level of " + limb.level + " to attach these limbs.")
+            return false
+        }
+        if (!player.inventory.containsItem(Item(limb.limb))) {
+            player.dialogueInterpreter.sendDialogue("That's not the correct limb to attach.")
+            return false
+        }
+        if(!player.inventory.containsItem(Item(limb.stock))){
+            player.dialogueInterpreter.sendDialogue("That's not the correct stock for that limb.")
+            return false
+        }
+        return player.inventory.containsItem(Item(limb.stock))
+    }
 
-	/**
-	 * Represents the limbs.
-	 */
-	private final Fletching.Limb limb;
+    override fun animate() {
+        player.animate(limb.animation)
+    }
 
-	/**
-	 * Represents the amount.
-	 */
-	private int amount;
+    override fun reward(): Boolean {
+        if (delay == 1) {
+            super.setDelay(6)
+            return false
+        }
+        if (player.inventory.remove(Item(limb.stock), Item(limb.limb))) {
+            player.inventory.add(Item(limb.product))
+            player.skills.addExperience(Skills.FLETCHING, limb.experience, true)
+            player.packetDispatch.sendMessage("You attach the metal limbs to the stock.")
+        }
+        if (!player.inventory.containsItem(Item(limb.limb))) {
+            return true
+        }
+        amount--
+        return amount == 0
+    }
 
-	/**
-	 * Constructs a new {@code StringcrossbowPlugin.java} {@code Object}.
-	 * @param player the player.
-	 * @param node the node.
-	 */
-	public LimbPulse(Player player, Item node, final Fletching.Limb limb, int amount) {
-		super(player, node);
-		this.limb = limb;
-		this.amount = amount;
-	}
-
-	@Override
-	public boolean checkRequirements() {
-		if (player.getSkills().getLevel(Skills.FLETCHING) < limb.level) {
-			player.getDialogueInterpreter().sendDialogue("You need a fletching level of " + limb.level + " to attach these limbs.");
-			return false;
-		}
-		if (!player.getInventory().containsItem(new Item(limb.limb))) {
-			player.getDialogueInterpreter().sendDialogue("That's not the correct limb to attach.");
-			return false;
-		}
-		if (!player.getInventory().containsItem(new Item(limb.stock))) {
-			return false;
-		}
-		return true;
-	}
-
-	@Override
-	public void animate() {
-		player.animate(limb.animation);
-	}
-
-	@Override
-	public boolean reward() {
-		if (getDelay() == 1) {
-			super.setDelay(6);
-			return false;
-		}
-		if (player.getInventory().remove(new Item(limb.stock), new Item(limb.limb))) {
-			player.getInventory().add(new Item(limb.product));
-			player.getSkills().addExperience(Skills.FLETCHING, limb.experience, true);
-			player.getPacketDispatch().sendMessage("You attach the metal limbs to the stock.");
-		}
-		if (!player.getInventory().containsItem(new Item(limb.limb))) {
-			return true;
-		}
-		amount--;
-		return amount == 0;
-	}
-
-	@Override
-	public void message(int type) {
-	}
-
+    override fun message(type: Int) {}
 }

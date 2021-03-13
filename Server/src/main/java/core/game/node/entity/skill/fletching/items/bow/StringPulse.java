@@ -33,7 +33,6 @@ public class StringPulse extends SkillPulse<Item> {
      */
     public StringPulse(Player player, Item node, final Fletching.String bow, int amount) {
         super(player, node);
-        setDelay(bow.string == 1777 ? 9 : 7);
         this.bow = bow;
         this.amount = amount;
     }
