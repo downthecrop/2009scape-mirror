@@ -15,7 +15,9 @@ import core.net.packet.IoBuffer;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.PlayerContext;
 import core.net.packet.out.ClearMinimapFlag;
+import org.rs09.consts.Items;
 import rs09.game.interaction.ItemOnBankBooth;
+import rs09.game.interaction.Listeners;
 import rs09.game.node.entity.skill.farming.CompostBins;
 import rs09.game.node.entity.skill.farming.FarmingPatch;
 import rs09.game.node.entity.skill.farming.UseWithBinHandler;
@@ -23,7 +25,6 @@ import rs09.game.node.entity.skill.farming.UseWithPatchHandler;
 import rs09.game.system.SystemLogger;
 import rs09.game.system.command.rottenpotato.RottenPotatoUseWithHandler;
 import rs09.game.world.repository.Repository;
-import org.rs09.consts.Items;
 
 /**
  * The incoming item reward packet.
@@ -66,6 +67,9 @@ public class ItemActionPacket implements IncomingPacket {
 			}
 			event = new NodeUsageEvent(player, interfaceId, item, npc);
 			if(PluginInteractionManager.handle(player,event)){
+				return;
+			}
+			if(Listeners.run(item,npc,2,player)){
 				return;
 			}
 			event = new NodeUsageEvent(player, interfaceId, item, npc);
@@ -124,6 +128,9 @@ public class ItemActionPacket implements IncomingPacket {
 				RottenPotatoUseWithHandler.handle(used,player);
 				return;
 			}
+			if(Listeners.run(used,with,0,player)){
+				return;
+			}
 			if (usedItemId < usedWithItemId) {
 				item = used;
 				used = with;
@@ -170,6 +177,9 @@ public class ItemActionPacket implements IncomingPacket {
 			}
 			if(used.getId() == Items.ROTTEN_POTATO_5733){
 				RottenPotatoUseWithHandler.handle(object,player);
+				return;
+			}
+			if(Listeners.run(used,object,1,player)){
 				return;
 			}
 			event = new NodeUsageEvent(player, 0, used, object);

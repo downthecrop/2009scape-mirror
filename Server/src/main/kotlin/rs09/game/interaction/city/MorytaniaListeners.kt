@@ -4,7 +4,6 @@ import core.game.node.entity.impl.ForceMovement
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import core.plugin.Initializable
 import rs09.game.interaction.OptionListener
 
 /**
@@ -13,7 +12,6 @@ import rs09.game.interaction.OptionListener
  * @author Sir Kermit
  */
 
-@Initializable
 class MorytaniaListeners : OptionListener() {
 
     val GROTTO_ENTRANCE = 3516

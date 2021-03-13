@@ -8,7 +8,6 @@ import core.game.node.item.Item
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import core.plugin.Initializable
 import org.rs09.consts.Items
 import rs09.game.interaction.OptionListener
 import java.util.*
@@ -17,7 +16,6 @@ import java.util.*
  * Handles repairing and climbing of the 3 beacon shortcuts needed to access them
  * @author Ceikry
  */
-@Initializable
 class AFURepairClimbHandler : OptionListener() {
 
     val repairIDs = intArrayOf(38480,38470,38494)
