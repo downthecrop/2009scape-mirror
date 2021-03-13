@@ -22,6 +22,8 @@ private val SCOOP_ANIM = Animation(1650)
 
 class BoneGrinderListener : InteractionListener() {
 
+    val boneIDs = Bones.values().map { it.itemId }.toIntArray()
+
     override fun defineListeners() {
 
         /**
@@ -50,6 +52,14 @@ class BoneGrinderListener : InteractionListener() {
          */
         on(BIN,OBJECT,"empty"){player,_ ->
             handleEmpty(player)
+        }
+
+        /**
+         * Handle Bone -> Hopper
+         */
+        on(OBJECT,LOADER,*boneIDs){player,_,_ ->
+            handleFill(player)
+            return@on true
         }
 
     }
