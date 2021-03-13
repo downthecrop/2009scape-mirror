@@ -1,32 +1,23 @@
 package rs09.game.interaction.item
 
-import core.cache.def.impl.ItemDefinition
-import core.game.interaction.OptionHandler
-import core.game.node.Node
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
-import core.plugin.Plugin
+import rs09.game.interaction.OptionListener
 
 /**
  * Handles the bracelet of clay operate option.
  * @author Ceikry
  */
-@Initializable
-class BraceletOfClayPlugin : OptionHandler() {
+class BraceletOfClayPlugin : OptionListener() {
 
-    override fun newInstance(arg: Any?): Plugin<Any>? {
-        ItemDefinition.forId(11074).handlers["option:operate"] = this
-        return this
-    }
+    val BRACELET = 11074
 
-    override fun handle(player: Player, node: Node, option: String): Boolean {
-        var charge = node.asItem().charge
-        if (charge > 28) charge = 28
-        player.sendMessage("You have $charge uses left.")
-        return true
-    }
+    override fun defineListeners() {
 
-    override fun isWalk(): Boolean {
-        return false
+        on(BRACELET,ITEM,"operate"){player,node ->
+            var charge = node.asItem().charge
+            if (charge > 28) charge = 28
+            player.sendMessage("You have $charge uses left.")
+            return@on true
+        }
+
     }
 }

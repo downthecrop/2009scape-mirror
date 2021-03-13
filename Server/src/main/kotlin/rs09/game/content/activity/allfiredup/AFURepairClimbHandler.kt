@@ -1,8 +1,5 @@
 package rs09.game.content.activity.allfiredup
 
-import core.cache.def.impl.ObjectDefinition
-import core.game.interaction.OptionHandler
-import core.game.node.Node
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
@@ -12,8 +9,8 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
-import core.plugin.Plugin
 import org.rs09.consts.Items
+import rs09.game.interaction.OptionListener
 import java.util.*
 
 /**
@@ -21,27 +18,27 @@ import java.util.*
  * @author Ceikry
  */
 @Initializable
-class AFURepairClimbHandler : OptionHandler() {
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        ObjectDefinition.forId(38480).handlers["option:repair"] = this
-        ObjectDefinition.forId(38470).handlers["option:repair"] = this
-        ObjectDefinition.forId(38494).handlers["option:repair"] = this
-        ObjectDefinition.forId(38469).handlers["option:climb"] = this
-        ObjectDefinition.forId(38471).handlers["option:climb"] = this
-        ObjectDefinition.forId(38486).handlers["option:climb"] = this
-        ObjectDefinition.forId(38481).handlers["option:climb"] = this
-        ObjectDefinition.forId(38469).handlers["option:climb"] = this
-        return this
-    }
+class AFURepairClimbHandler : OptionListener() {
 
-    override fun handle(player: Player?, node: Node?, option: String?): Boolean {
-        player ?: return false
-        node ?: return false
-        var rco: RepairClimbObject = RepairClimbObject.GWD
-        for(ent in RepairClimbObject.values()) if(ent.destinationDown?.withinDistance(player.location,2) == true || ent.destinationUp?.withinDistance(player.location,2) == true) rco = ent
+    val repairIDs = intArrayOf(38480,38470,38494)
+    val climbIDs = intArrayOf(38469,38471,38486,38481,38469)
 
-        if(option.equals("repair")) repair(player,rco) else climb(player,rco,node.location)
-        return true
+    override fun defineListeners() {
+
+        on(repairIDs,OBJECT,"repair"){player,_ ->
+            var rco: RepairClimbObject = RepairClimbObject.GWD
+            for(ent in RepairClimbObject.values()) if(ent.destinationDown?.withinDistance(player.location,2) == true || ent.destinationUp?.withinDistance(player.location,2) == true) rco = ent
+            repair(player,rco)
+            return@on true
+        }
+
+        on(climbIDs,OBJECT,"climb"){player,node ->
+            var rco: RepairClimbObject = RepairClimbObject.GWD
+            for(ent in RepairClimbObject.values()) if(ent.destinationDown?.withinDistance(player.location,2) == true || ent.destinationUp?.withinDistance(player.location,2) == true) rco = ent
+            climb(player,rco,node.location)
+            return@on true
+        }
+
     }
 
     private fun repair(player: Player,rco: RepairClimbObject){
