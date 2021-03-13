@@ -1,13 +1,13 @@
 package rs09.game.system.config
 
-import rs09.ServerConstants
 import core.game.content.global.shop.Shop
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import rs09.game.system.SystemLogger
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
+import rs09.ServerConstants
+import rs09.game.system.SystemLogger
 import java.io.FileReader
 
 class ShopParser{
@@ -29,7 +29,7 @@ class ShopParser{
         reader = FileReader(ServerConstants.CONFIG_PATH + "shops.json")
         val configlist = parser.parse(reader) as JSONArray
         for(config in configlist){
-            var shop: Shop? = null
+            var shop: Shop?
             val e = config as JSONObject
             val id = e["id"].toString().toInt()
             val title = e["title"].toString()

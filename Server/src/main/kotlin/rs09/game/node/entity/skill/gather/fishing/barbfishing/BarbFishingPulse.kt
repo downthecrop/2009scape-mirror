@@ -1,4 +1,4 @@
-package rs09.game.node.entity.skill.fishing.barbfishing
+package rs09.game.node.entity.skill.gather.fishing.barbfishing
 
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player

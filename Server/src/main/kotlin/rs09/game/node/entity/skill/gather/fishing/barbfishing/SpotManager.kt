@@ -1,4 +1,4 @@
-package rs09.game.node.entity.skill.fishing.barbfishing
+package rs09.game.node.entity.skill.gather.fishing.barbfishing
 
 import core.game.node.entity.npc.NPC
 import core.game.world.map.Location
@@ -7,8 +7,8 @@ import core.plugin.CorePluginTypes.Managers
 import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.RandomFunction
-import rs09.game.node.entity.skill.fishing.barbfishing.SpotManager.Companion.locations
-import rs09.game.node.entity.skill.fishing.barbfishing.SpotManager.Companion.usedLocations
+import rs09.game.node.entity.skill.gather.fishing.barbfishing.SpotManager.Companion.locations
+import rs09.game.node.entity.skill.gather.fishing.barbfishing.SpotManager.Companion.usedLocations
 
 @Initializable
 /**

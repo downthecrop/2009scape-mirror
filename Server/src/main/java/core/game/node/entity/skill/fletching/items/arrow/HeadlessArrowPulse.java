@@ -94,7 +94,7 @@ public final class HeadlessArrowPulse extends SkillPulse<Item> {
 			ARROW_SHAFT.setAmount(15);
 			player.getPacketDispatch().sendMessage("You attach feathers to 15 arrow shafts.");
 		} else {
-			int amount = featherAmount > shaftAmount ? shaftAmount : featherAmount;
+			int amount = Math.min(featherAmount, shaftAmount);
 			feather.setAmount(amount);
 			ARROW_SHAFT.setAmount(amount);
 			player.getPacketDispatch().sendMessage(amount == 1
