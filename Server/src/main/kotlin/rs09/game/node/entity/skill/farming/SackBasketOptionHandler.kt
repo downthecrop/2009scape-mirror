@@ -114,13 +114,23 @@ class SackBasketOptionHandler : OptionHandler() {
         val container = BasketsAndSacks.forId(containerID)
         val produce = if(container == null){
             var selected = 0
-            for(i in (fruit + produce)){
-                if(player.inventory.contains(i,1)){
-                    selected = i
-                    break
+            if(containerID == Items.EMPTY_SACK_5418) {
+                for (i in (produce)) {
+                    if (player.inventory.contains(i, 1)) {
+                        selected = i
+                        break
+                    }
                 }
+                selected
+            } else {
+                for (i in (fruit)) {
+                    if (player.inventory.contains(i, 1)) {
+                        selected = i
+                        break
+                    }
+                }
+                selected
             }
-            selected
         } else {
             container.produceID
         }

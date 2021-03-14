@@ -9,6 +9,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
 import core.plugin.Plugin
+import org.rs09.consts.Items
 
 @Initializable
 class FarmerPayOptionHandler : OptionHandler() {
@@ -76,10 +77,24 @@ class FarmerPayOptionHandler : OptionHandler() {
                 return true
             } else {
                 item = patch?.plantable?.protectionItem
+                val protectionText = when(item?.id){
+                    Items.COMPOST_6032 -> if(item?.amount == 1) "bucket of compost" else "buckets of compost"
+                    Items.POTATOES10_5438 -> if(item?.amount == 1) "sack of potatoes" else "sacks of potatoes"
+                    Items.ONIONS10_5458 -> if(item?.amount == 1) "sack of onions" else "sacks of onions"
+                    Items.CABBAGES10_5478 -> if(item?.amount == 1) "sack of cabbages" else "sacks of cabbages"
+                    Items.JUTE_FIBRE_5931 -> "jute fibres"
+                    Items.APPLES5_5386 -> if(item?.amount == 1) "basket of apples" else "baskets of apples"
+                    Items.MARIGOLDS_6010 -> "harvest of marigold"
+                    Items.TOMATOES5_5968 -> if(item?.amount == 1) "basket of tomatoes" else "baskets of tomatoes"
+                    Items.ORANGES5_5396 -> if(item?.amount == 1) "basket of oranges" else "baskets of oranges"
+                    Items.COCONUT_5974 -> "coconuts"
+                    Items.STRAWBERRIES5_5406 -> if(item?.amount == 1) "basket of strawberries" else "baskets of strawberries"
+                    Items.BANANAS5_5416 -> if(item?.amount == 1) "basket of bananas" else "baskets of bananas"
+                    else -> item?.name?.toLowerCase()
+                }
                 if(item == null) npc("Sorry, I won't protect that.").also { stage = 1000 }
                 else{
-                    val name = item?.name?.toLowerCase()
-                    npc("I would like ${item?.amount} $name","to protect that patch.")
+                    npc("I would like ${item?.amount} $protectionText","to protect that patch.")
                     stage = 0
                 }
             }

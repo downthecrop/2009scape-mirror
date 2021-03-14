@@ -6,15 +6,12 @@ import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
-
 import core.game.node.item.Item;
-import rs09.game.system.config.ItemConfigParser;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.player.AppearanceFlag;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
-
-import java.nio.ByteBuffer;
+import rs09.game.system.config.ItemConfigParser;
 
 /**
  * Represents an appearance managing class of a player.
@@ -237,6 +234,10 @@ public final class Appearance {
 		this.bodyParts[part] = 0;
 	}
 
+	public void flagHatClipping() {
+		this.bodyParts[8] = 0x100;
+	}
+
 	/**
 	 * Prepares the data used for the appearance update mask.
 	 * @param player The player.
@@ -302,7 +303,7 @@ public final class Appearance {
 			drawClothes(7, getLegs().getLook());
 		}
 		if ((hat != null && hat.getDefinition().getConfiguration(ItemConfigParser.REMOVE_HEAD, false)) || castleWarsHood) {
-			clearBodyPart(8);
+			flagHatClipping();
 		} else {
 			drawClothes(8, getHair().getLook());
 		}
