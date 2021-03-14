@@ -15,6 +15,7 @@ import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import rs09.ServerConstants
+import rs09.game.node.entity.skill.farming.FarmingPatch
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import java.io.FileReader
@@ -30,6 +31,9 @@ class PlayerSaveParser(val player: Player) {
     var reader: FileReader? = FileReader(ServerConstants.PLAYER_SAVE_PATH + player.name + ".json")
     var saveFile: JSONObject? = null
     var read = true
+
+    val patch_varps = FarmingPatch.values().map { it.varpIndex }.toIntArray()
+    val bin_varps = FarmingPatch.values().map { it.varpIndex }.toIntArray()
 
     init {
         reader
@@ -246,6 +250,8 @@ class PlayerSaveParser(val player: Player) {
             val c = config as JSONObject
             val index = (c.get("index") as String).toInt()
             if(index == 1048) continue
+            if(patch_varps.contains(index)) continue
+            if(bin_varps.contains(index)) continue
             val value = (c.get("value") as String).toInt()
             player.configManager.savedConfigurations[index] = value
         }

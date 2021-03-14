@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import rs09.game.system.SystemLogger
+import java.util.concurrent.TimeUnit
 
 object JobManager {
     @JvmStatic
@@ -51,6 +52,11 @@ object JobManager {
         val amt = player.getAttribute("jobs:original_amount",0)
         val type = player.getAttribute("jobs:type",0)
         val jobId = player.getAttribute("jobs:id",0)
+        val dailyDone = player.getAttribute("jobs:dailyAmt",0)
+        if(dailyDone == 3){
+            player.dialogueInterpreter.sendDialogue("You can only complete 3 jobs per day.")
+            return
+        }
         if(type == 0){
             val it = Item(GatheringJobs.values()[jobId].itemId)
             var amount = player.inventory.getAmount(it)
@@ -82,5 +88,9 @@ object JobManager {
         player.removeAttribute("jobs:amount")
         player.removeAttribute("jobs:original_amount")
         player.removeAttribute("jobs:type")
+        player.incrementAttribute("/save:jobs:dailyAmt",1)
+        if(player.getAttribute("jobs:dailyAmt",0) == 3){
+            player.setAttribute("/save:jobs:reset_time",System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24))
+        }
     }
 }

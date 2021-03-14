@@ -4,6 +4,7 @@ import core.cache.def.impl.VarbitDefinition
 import core.game.node.entity.player.Player
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
+import rs09.game.node.entity.skill.farming.FarmingPatch
 
 /**
  * Manages the collection of a player's varps.
@@ -74,9 +75,13 @@ class VarpManager(val player: Player) {
     }
 
     fun parse(data: JSONArray){
+        val patch_varps = FarmingPatch.values().map { it.varpIndex }.toIntArray()
+        val bin_varps = FarmingPatch.values().map { it.varpIndex }.toIntArray()
         for(varpobj in data){
             val vobj = varpobj as JSONObject
             val index = vobj["index"].toString().toInt()
+            if(patch_varps.contains(index)) continue
+            if(bin_varps.contains(index)) continue
             val varp = get(index)
             val bits = vobj["bitArray"] as JSONArray
             for(vbit in bits){
