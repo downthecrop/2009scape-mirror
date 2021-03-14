@@ -10,7 +10,14 @@ import core.game.node.item.Item
 import core.net.packet.PacketRepository
 import core.net.packet.context.ChildPositionContext
 import core.net.packet.out.RepositionChild
+import org.rs09.consts.Components
 import org.rs09.consts.Items
+import org.rs09.consts.Items.BLUE_FEATHER_10089
+import org.rs09.consts.Items.FEATHER_314
+import org.rs09.consts.Items.ORANGE_FEATHER_10091
+import org.rs09.consts.Items.RED_FEATHER_10088
+import org.rs09.consts.Items.STRIPY_FEATHER_10087
+import org.rs09.consts.Items.YELLOW_FEATHER_10090
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.interaction.InteractionListener
 
@@ -26,7 +33,7 @@ class FletchingListeners : InteractionListener() {
     val ARROW_SHAFT = Items.ARROW_SHAFT_52
     val FLETCHED_SHAFT = Items.HEADLESS_ARROW_53
     val UNFINISHED_ARROWS = Fletching.ArrowHeads.values().map(Fletching.ArrowHeads::unfinished).toIntArray()
-    val FEATHERS = intArrayOf(314,10087,10088,10089,10090,10091)
+    val FEATHERS = intArrayOf(FEATHER_314,STRIPY_FEATHER_10087,RED_FEATHER_10088,BLUE_FEATHER_10089,YELLOW_FEATHER_10090,ORANGE_FEATHER_10091)
     val UNSTRUNG_BOWS = Fletching.String.values().map(Fletching.String::unfinished).toIntArray()
     val STRINGS = intArrayOf(Items.BOW_STRING_1777,Items.SINEW_9436)
 
@@ -49,7 +56,7 @@ class FletchingListeners : InteractionListener() {
                     }
                 }
             handler.open()
-            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 309, 2, 215, 10))
+            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, Components.SKILL_MULTI1_309, 2, 215, 10))
             return@onUseWith true
         }
 
@@ -65,7 +72,7 @@ class FletchingListeners : InteractionListener() {
                     }
                 }
             handler.open()
-            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 309, 2, 210, 10))
+            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, Components.SKILL_MULTI1_309, 2, 210, 10))
             return@onUseWith true
         }
 
@@ -82,7 +89,7 @@ class FletchingListeners : InteractionListener() {
                     }
                 }
             handler.open()
-            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 309, 2, 210, 10))
+            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, Components.SKILL_MULTI1_309, 2, 210, 10))
             return@onUseWith true
         }
 
@@ -124,7 +131,7 @@ class FletchingListeners : InteractionListener() {
                 }
             }
             handler.open()
-            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 309, 2, 210, 10))
+            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, Components.SKILL_MULTI1_309, 2, 210, 10))
             return@onUseWith true
         }
 
