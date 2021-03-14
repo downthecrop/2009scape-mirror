@@ -87,7 +87,13 @@ class CompostBin(val player: Player, val bin: CompostBins) {
     }
 
     fun addItem(item: Item){
-        addItem(item.id)
+        val remaining = 15 - items.size
+        val amount = if(item.amount > remaining){
+            remaining
+        } else item.amount
+        for(i in 0 until amount) {
+            addItem(item.id)
+        }
     }
 
     fun updateBit(){
