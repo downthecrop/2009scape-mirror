@@ -13,6 +13,7 @@ import core.game.world.map.path.Pathfinder;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.PlayerContext;
 import core.net.packet.out.ClearMinimapFlag;
+import kotlin.jvm.functions.Function1;
 
 import java.util.Deque;
 
@@ -72,6 +73,8 @@ public abstract class MovementPulse extends Pulse {
      * If the path couldn't be fully found.
      */
     private boolean near;
+
+    private Function1<Node,Location> overrideMethod;
 
     /**
      * Constructs a new {@code MovementPulse} {@code Object}.
@@ -139,6 +142,12 @@ public abstract class MovementPulse extends Pulse {
     public MovementPulse(Entity mover, Node destination, DestinationFlag destinationFlag) {
         this(mover, destination, null, false);
         this.destinationFlag = destinationFlag;
+    }
+
+    public MovementPulse(Entity mover, Node destination, DestinationFlag destinationFlag, Function1<Node,Location> method){
+        this(mover,destination,null,false);
+        this.destinationFlag = destinationFlag;
+        this.overrideMethod = method;
     }
 
     /**
@@ -221,8 +230,12 @@ public abstract class MovementPulse extends Pulse {
             return;
         }
         Location loc = null;
-        if (destinationFlag != null) {
+        if (destinationFlag != null && overrideMethod == null) {
             loc = destinationFlag.getDestination(mover, destination);
+        }
+        if(overrideMethod != null){
+            loc = overrideMethod.invoke(destination);
+            if(loc == destination.getLocation()) loc = destinationFlag.getDestination(mover,destination);
         }
         if (loc == null && optionHandler != null) {
             loc = optionHandler.getDestination(mover, destination);

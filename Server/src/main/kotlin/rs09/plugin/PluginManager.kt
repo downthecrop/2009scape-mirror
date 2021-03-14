@@ -73,7 +73,9 @@ object PluginManager {
             } catch (e: Exception) {e.printStackTrace()}
         }
         result.getSubclasses("rs09.game.interaction.InteractionListener").forEach {
-            (it.loadClass().newInstance() as InteractionListener).defineListeners()
+            val clazz = it.loadClass().newInstance() as InteractionListener
+            clazz.defineListeners()
+            clazz.defineDestinationOverrides()
         }
     }
 
