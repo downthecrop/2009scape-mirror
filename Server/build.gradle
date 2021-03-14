@@ -40,7 +40,7 @@ dependencies {
 
 jar {
     manifest {
-        attributes 'Main-Class': 'core.Server'
+        attributes 'Main-Class': 'rs09.Server'
     }
     from { configurations.compileClasspath.collect { it.isDirectory() ? it : zipTree(it) } }
 }

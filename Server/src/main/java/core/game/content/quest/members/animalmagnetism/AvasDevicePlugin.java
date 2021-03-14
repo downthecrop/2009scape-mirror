@@ -44,7 +44,7 @@ public final class AvasDevicePlugin implements Plugin<Object> {
 					break;
 				}
 			}
-			if(player.hasActiveState("avadevice")) player.states.get("avadevice").getPulse().stop();
+			if(player.hasActiveState("avadevice")) player.clearState("avadevice");
 			break;
 		}
 		return true;

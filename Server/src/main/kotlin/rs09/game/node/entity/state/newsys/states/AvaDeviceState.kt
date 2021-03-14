@@ -22,7 +22,8 @@ class AvaDeviceState(player: Player? = null) : State(player) {
     private val ACCUMULATOR_REWARDS = arrayOf(Items.STEEL_BAR_2353,Items.STEEL_2H_SWORD_1311,Items.STEEL_KNIFE_865,Items.STEEL_DAGGER_1207,Items.STEEL_MED_HELM_1141,Items.STEEL_DART_808,Items.STEEL_BOLTS_9141,Items.STEEL_ARROW_886,Items.IRON_BAR_2351)
 
     override fun save(root: JSONObject) {
-        root.put("device-id",device)
+        if(pulse == null || !pulse!!.isRunning)
+            root.put("device-id",device)
     }
 
     override fun parse(_data: JSONObject) {

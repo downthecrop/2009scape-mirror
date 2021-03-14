@@ -1,15 +1,15 @@
 package rs09.game.node.entity.state.newsys.states
 
 import core.game.node.entity.player.Player
-import rs09.game.node.entity.skill.farming.*
-import rs09.game.node.entity.state.newsys.PlayerState
-import rs09.game.node.entity.state.newsys.State
-import rs09.game.system.SystemLogger
 import core.game.system.task.Pulse
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
+import rs09.game.node.entity.skill.farming.*
+import rs09.game.node.entity.state.newsys.PlayerState
+import rs09.game.node.entity.state.newsys.State
+import rs09.game.system.SystemLogger
 import java.util.concurrent.TimeUnit
 
 @PlayerState("farming")
@@ -70,11 +70,8 @@ class FarmingState(player: Player? = null) : State(player) {
                 val bin = it as JSONObject
                 val binOrdinal = bin["bin-ordinal"].toString().toInt()
                 val cBin = CompostBins.values()[binOrdinal]
-                val b = CompostBin(player,cBin)
+                val b = cBin.getBinForPlayer(player)
                 b.parse(bin["binData"] as JSONObject)
-                if(binMap[cBin] == null) {
-                    binMap[cBin] = b
-                }
                 SystemLogger.logErr("bin size " + binMap.size)
             }
         }
@@ -133,35 +130,33 @@ class FarmingState(player: Player? = null) : State(player) {
     }
 
     override fun createPulse() {
-        if(patchMap.isNotEmpty() || binMap.isNotEmpty()){
-            pulse = object : Pulse(3){
-                override fun pulse(): Boolean {
+        pulse = object : Pulse(3){
+            override fun pulse(): Boolean {
 
-                    GlobalScope.launch {
-                        var removeList = ArrayList<FarmingPatch>()
-                        for((_,patch) in patchMap){
+                GlobalScope.launch {
+                    var removeList = ArrayList<FarmingPatch>()
+                    for((_,patch) in patchMap){
 
-                            if(patch.getCurrentState() in 1..3 && patch.nextGrowth == 0L){
-                                patch.nextGrowth = System.currentTimeMillis() + 60000
-                                continue
-                            }
-
-                            if(patch.nextGrowth < System.currentTimeMillis() && !patch.isDead){
-                                patch.update()
-                                patch.nextGrowth = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(patch.patch.type.stageGrowthTime.toLong())
-                            }
-
+                        if(patch.getCurrentState() in 1..3 && patch.nextGrowth == 0L){
+                            patch.nextGrowth = System.currentTimeMillis() + 60000
+                            continue
                         }
 
-                        for((_,bin) in binMap){
-                            if(bin.isReady() && !bin.isFinished){
-                                bin.finish()
-                            }
+                        if(patch.nextGrowth < System.currentTimeMillis() && !patch.isDead){
+                            patch.update()
+                            patch.nextGrowth = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(patch.patch.type.stageGrowthTime.toLong())
                         }
+
                     }
 
-                    return false
+                    for((_,bin) in binMap){
+                        if(bin.isReady() && !bin.isFinished){
+                            bin.finish()
+                        }
+                    }
                 }
+
+                return false
             }
         }
     }

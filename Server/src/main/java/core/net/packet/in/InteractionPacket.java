@@ -186,7 +186,7 @@ public final class InteractionPacket implements IncomingPacket {
 		player.debug("spawn=" + npc.getProperties().getSpawnLocation() + ".");
 		player.debug("Varp ID= " + npc.getDefinition().getConfigId() + " Offset=" + npc.getDefinition().getVarbitOffset() + " Size=" + npc.getDefinition().getVarbitSize());
 		handleAIPLegion(player, 0, optionIndex, index);
-		if(Listeners.run(shown.getId(),2, option.getName(),player,shown)){
+		if(Listeners.run(npc.getId(),2, option.getName(),player,npc)){
 			return;
 		}
 		if(PluginInteractionManager.handle(player,shown,option)){

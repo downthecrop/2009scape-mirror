@@ -100,6 +100,10 @@ object UseWithPatchHandler{
                 if(!p.isWatered && (t == PatchType.ALLOTMENT || t == PatchType.FLOWER || t == PatchType.HOPS) && !p.isGrown()){
                     player.pulseManager.run(object : Pulse(){
                         override fun pulse(): Boolean {
+                            if(p.isWeedy()){
+                                player.sendMessage("You should grow something first.")
+                                return true
+                            }
                             player.animator.animate(wateringCanAnim)
                             if(player.inventory.remove(event.usedItem)){
                                 player.inventory.add(Item(usedItem.id.getNext()))

@@ -6,6 +6,7 @@ import core.tools.RandomFunction
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.rs09.consts.Items
+import rs09.game.system.SystemLogger
 import java.util.concurrent.TimeUnit
 
 class CompostBin(val player: Player, val bin: CompostBins) {
@@ -102,6 +103,7 @@ class CompostBin(val player: Player, val bin: CompostBins) {
             }
             if (isClosed) player.varpManager.get(bin.varpIndex).setVarbit(bin.varpOffest + 6, 1)
         }
+        SystemLogger.logAlert("Sending " + player.varpManager.get(bin.varpIndex).getValue())
         player.varpManager.get(bin.varpIndex).send(player)
     }
 

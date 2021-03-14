@@ -163,13 +163,15 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             for (i in 0..310) {
                 player!!.packetDispatch.sendString("", 275, i)
             }
+            val offerList = offers.keys.map { "${ItemDefinition.forId(it).name} - ${offers[it]}" }.sorted()
+
             var lineId = 11
             player!!.packetDispatch.sendString("Active Sell Offers", 275, 2)
             var counter = 0
             for(i in 0..299) {
-                val offer = offers.entries.elementAtOrNull(i)
+                val offer = offerList.elementAtOrNull(i)
                 if (offer != null)
-                    player.packetDispatch.sendString("${ItemDefinition.forId(offer.key).name} x${offer.value}", 275, lineId++)
+                    player.packetDispatch.sendString(offer, 275, lineId++)
                 else
                     player.packetDispatch.sendString("", 275, lineId++)
             }
