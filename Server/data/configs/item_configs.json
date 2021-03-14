@@ -28530,7 +28530,8 @@
       "equipment_slot": "0",
       "ge_buy_limit": "2",
       "archery_ticket_price": "0",
-      "durability": null
+      "durability": null,
+      "remove_head": true
     },
     {
       "id": "2634",
@@ -28553,7 +28554,8 @@
       "equipment_slot": "0",
       "ge_buy_limit": "2",
       "archery_ticket_price": "0",
-      "durability": null
+      "durability": null,
+      "remove_head": true
     },
     {
       "id": "2636",
@@ -28576,7 +28578,8 @@
       "equipment_slot": "0",
       "ge_buy_limit": "2",
       "archery_ticket_price": "0",
-      "durability": null
+      "durability": null,
+      "remove_head": true
     },
     {
       "id": "2638",
@@ -97038,7 +97041,8 @@
       "grand_exchange_price": "64066",
       "equipment_slot": "0",
       "archery_ticket_price": "0",
-      "durability": null
+      "durability": null,
+      "remove_head": true
     },
     {
       "id": "10694",
@@ -97051,7 +97055,8 @@
       "grand_exchange_price": "158274",
       "equipment_slot": "0",
       "archery_ticket_price": "0",
-      "durability": null
+      "durability": null,
+      "remove_head": true
     },
     {
       "id": "10695",
@@ -97064,7 +97069,8 @@
       "grand_exchange_price": "281900",
       "equipment_slot": "0",
       "archery_ticket_price": "0",
-      "durability": null
+      "durability": null,
+      "remove_head": true
     },
     {
       "id": "10696",
@@ -128305,7 +128311,8 @@
       "absorb": "0,0,0",
       "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
       "archery_ticket_price": "0",
-      "durability": null
+      "durability": null,
+      "remove_head": true
     },
     {
       "id": "13812",
@@ -128321,7 +128328,8 @@
       "absorb": "0,0,0",
       "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
       "archery_ticket_price": "0",
-      "durability": null
+      "durability": null,
+      "remove_head": true
     },
     {
       "id": "13813",
@@ -128337,7 +128345,8 @@
       "absorb": "0,0,0",
       "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
       "archery_ticket_price": "0",
-      "durability": null
+      "durability": null,
+      "remove_head": true
     },
     {
       "id": "13814",
