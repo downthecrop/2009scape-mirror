@@ -1,18 +1,21 @@
 package core.game.node.entity.skill.magic.lunar;
 
-import core.game.node.entity.skill.magic.MagicSpell;
-import core.game.node.entity.skill.magic.Runes;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
+import core.game.node.entity.skill.magic.MagicSpell;
+import core.game.node.entity.skill.magic.Runes;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.node.entity.skill.farming.CompostType;
+import rs09.game.node.entity.skill.farming.FarmingPatch;
+import rs09.game.node.entity.skill.farming.Patch;
 
 /**
  * Represents the fertile soil spell plugin.
@@ -49,17 +52,20 @@ public final class FertileSoilSpell extends MagicSpell {
 	public boolean cast(Entity entity, Node target) {
 		final Player player = ((Player) entity);
 		final GameObject object = (GameObject) target;
-		/*if (FarmingPatch.forObject(object.getWrapper().getId()) == null) {
+		final FarmingPatch fPatch = FarmingPatch.forObject(object);
+		if(fPatch == null){
 			return false;
-		}*/
-		/*final PatchWrapper wrapper = player.getFarmingManager().getPatchWrapper(object.getWrapper().getId());
-		if (!wrapper.isEmpty() && !wrapper.getCycle().getGrowthHandler().isGrowing()) {
-			player.getPacketDispatch().sendMessage("You can't fertilize the patch.");
+		}
+		final Patch patch = fPatch.getPatchFor(player);
+		if(patch.getCompost() != CompostType.NONE){
+			player.sendMessage("This patch has already been composted.");
 			return false;
-		}*/
+		}
 		if (!super.meetsRequirements(player, true, true)) {
 			return false;
 		}
+		patch.setCompost(CompostType.SUPER);
+		player.sendMessage("You fertilize the soil.");
 		player.graphics(GRAPHIC);
 		player.animate(ANIMATION);
 		return true;

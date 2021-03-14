@@ -46,26 +46,17 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
     SEED_ATTRACTION("cape_perks:seed_attract",{player ->
         val time = player.getAttribute("cape_perks:seed_attract_timer",0L)
         if(System.currentTimeMillis() > time){
-            /*for(i in 0 until 10) {
-                when (core.tools.RandomFunction.random(100) % 4) {
-                    0 -> {
-                        val seedID = core.game.node.entity.skill.farming.patch.Allotments.values().random().farmingNode.seed.id
-                        player.inventory.add(core.game.node.item.Item(seedID,1))
-                    }
-                    1 -> {
-                        val seedID = core.game.node.entity.skill.farming.patch.Herbs.values().random().farmingNode.seed.id
-                        player.inventory.add(core.game.node.item.Item(seedID, 1))
-                    }
-                    2 -> {
-                        val seedID = core.game.node.entity.skill.farming.patch.Hops.values().random().farmingNode.seed.id
-                        player.inventory.add(core.game.node.item.Item(seedID, 1))
-                    }
-                    3 -> {
-                        val seedID = core.game.node.entity.skill.farming.patch.Flowers.values().random().farmingNode.seed.id
-                        player.inventory.add(core.game.node.item.Item(seedID, 1))
-                    }
+            val possibleSeeds = rs09.game.node.entity.skill.farming.Plantable.values()
+            for(i in 0 until 10){
+                var seed = possibleSeeds.random()
+                while(seed == rs09.game.node.entity.skill.farming.Plantable.SCARECROW || seed.applicablePatch == rs09.game.node.entity.skill.farming.PatchType.FRUIT_TREE || seed.applicablePatch == rs09.game.node.entity.skill.farming.PatchType.TREE || seed.applicablePatch == rs09.game.node.entity.skill.farming.PatchType.SPIRIT_TREE){
+                    seed = possibleSeeds.random()
                 }
-            }*/
+                val reward = core.game.node.item.Item(seed.itemID)
+                if(!player.inventory.add(reward)){
+                    core.game.node.item.GroundItemManager.create(reward,player)
+                }
+            }
             player.dialogueInterpreter.sendDialogue("You pluck off the seeds that were stuck to your cape.")
             player.setAttribute("/save:cape_perks:seed_attract_timer",System.currentTimeMillis() + java.util.concurrent.TimeUnit.DAYS.toMillis(1))
         } else {

@@ -14,6 +14,8 @@ import core.game.node.object.GameObject;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+import rs09.game.node.entity.skill.farming.FarmingPatch;
+import rs09.game.node.entity.skill.farming.Patch;
 
 /**
  * Cures a diseased plant.
@@ -53,36 +55,28 @@ public final class CurePlantSpell extends MagicSpell {
 			return false;
 		}
 		final GameObject object = ((GameObject) target);
-		/*if (FarmingPatch.forObject(object.getWrapper().getId()) == null) {
-			return false;
-		}*/
-		/*final PatchWrapper wrapper = player.getFarmingManager().getPatchWrapper(object.getWrapper().getId());
-		if (wrapper == null) {
-			player.getPacketDispatch().sendMessage("Umm... this spell won't cure that!");
+		FarmingPatch fPatch = FarmingPatch.forObject(object);
+		if(fPatch == null){
+			player.sendMessage("This spell is for plants... not whatever the heckies that is.");
 			return false;
 		}
-		if (!wrapper.getCycle().getDiseaseHandler().isDiseased() && (wrapper.getCycle().getGrowthHandler().isGrowing() || wrapper.getCycle().getWaterHandler().isWatered())) {
-			player.getPacketDispatch().sendMessage("It is growing just fine.");
+		Patch patch = fPatch.getPatchFor(player);
+		if(!patch.isDiseased() && !patch.isWeedy()){
+			player.sendMessage("It seems to be growing fine already, lad.");
 			return false;
 		}
-		if (wrapper.isWeedy()) {
-			player.getPacketDispatch().sendMessage("The weeds are healthy enough already.");
+		if(patch.isWeedy()){
+			player.sendMessage("Trust me lad, the weeds are healthy enough as is.");
 			return false;
-		}*/
-		/*if (wrapper.isEmpty()) {
-			player.getPacketDispatch().sendMessage("There's nothing there to cure.");
+		}
+		if(patch.isDead()){
+			player.sendMessage("It says 'Cure' not 'Resurrect'. Although death may arise from disease, it is not in itself a disease and hence cannot be cured. So there.");
 			return false;
-		}*/
-		/*if (wrapper.getCycle().getDeathHandler().isDead()) {
-			player.getPacketDispatch().sendMessage("It says 'Cure' not 'Resurrect'. Although death may arise from disease, it is not in itself a disease and hence cannot be cured. So there.");
-			return false;
-		}*/
+		}
 		if (!super.meetsRequirements(player, true, true)) {
 			return false;
 		}
-/*
-		wrapper.getCycle().getDiseaseHandler().cure(player, true);
-*/
+		patch.cureDisease();
 		player.animate(ANIMATION);
 		player.graphics(GRAPHIC);
 		player.getSkills().addExperience(Skills.FARMING, 91.5, true);

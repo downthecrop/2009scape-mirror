@@ -1,24 +1,27 @@
 package core.game.node.entity.npc.familiar;
 
-import core.plugin.Initializable;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
-import core.game.node.entity.skill.Skills;
-import core.game.node.entity.skill.summoning.familiar.Familiar;
-import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
-import core.game.node.entity.skill.summoning.familiar.Forager;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
+import core.game.node.entity.skill.summoning.familiar.Familiar;
+import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
+import core.game.node.entity.skill.summoning.familiar.Forager;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
+import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
 import core.tools.RandomFunction;
+import org.rs09.consts.Items;
+import rs09.game.node.entity.skill.farming.CompostBin;
+import rs09.game.node.entity.skill.farming.CompostBins;
+import rs09.plugin.PluginManager;
 
 /**
  * Represents the Compost Mound familiar.
@@ -74,15 +77,20 @@ public class CompostMoundNPC extends Forager {
 			owner.getPacketDispatch().sendMessage("This scroll can only be used on an empty compost bin.");
 			return false;
 		}
-		/*final CompostBin bin = owner.getFarmingManager().getCompostManager().getBin(object);
-		if (bin.getState(owner) != 0) {
-			owner.getPacketDispatch().sendMessage("This scroll can only be used on an empty compost bin.");
+		CompostBins cbin = CompostBins.forObject(special.getNode().asObject());
+		if(cbin == null){
 			return false;
-		}*/
+		}
+		CompostBin bin = cbin.getBinForPlayer(owner);
+		if(bin.isFinished() || bin.isFull() || bin.isClosed()){
+			return false;
+		}
 		final boolean superCompost = RandomFunction.random(10) == 1;
 		faceLocation(object.getLocation());
-		/*bin.getContainer().add(new Item(superCompost ? 6034 : 6032, 15));
-		bin.addConfigValue(owner, 31 << bin.getBitShift());*/
+		Item toAdd = new Item(superCompost ? Items.PINEAPPLE_2114 : Items.POTATO_1942);
+		toAdd.setAmount(15);
+		bin.addItem(toAdd);
+		bin.close();
 		animate(Animation.create(7775));
 		graphics(Graphics.create(1424));
 		return true;
