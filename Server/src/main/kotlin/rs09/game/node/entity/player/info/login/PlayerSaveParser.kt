@@ -15,6 +15,7 @@ import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import rs09.ServerConstants
+import rs09.game.node.entity.skill.farming.CompostBins
 import rs09.game.node.entity.skill.farming.FarmingPatch
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
@@ -33,7 +34,7 @@ class PlayerSaveParser(val player: Player) {
     var read = true
 
     val patch_varps = FarmingPatch.values().map { it.varpIndex }.toIntArray()
-    val bin_varps = FarmingPatch.values().map { it.varpIndex }.toIntArray()
+    val bin_varps = CompostBins.values().map { it.varpIndex }.toIntArray()
 
     init {
         reader

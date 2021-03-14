@@ -8,9 +8,9 @@ object StateRepository {
 
     @JvmStatic
     fun init() {
-        val result = ClassGraph().enableClassInfo().enableAnnotationInfo().acceptPackages("core.game.node.entity.state").scan()
-        result.getClassesWithAnnotation("core.game.node.entity.state.newsys.PlayerState").forEach{
-            val key = it.getAnnotationInfo("core.game.node.entity.state.newsys.PlayerState").parameterValues[0].value as String
+        val result = ClassGraph().enableClassInfo().enableAnnotationInfo().acceptPackages("rs09.game.node.entity.state").scan()
+        result.getClassesWithAnnotation("rs09.game.node.entity.state.newsys.PlayerState").forEach{
+            val key = it.getAnnotationInfo("rs09.game.node.entity.state.newsys.PlayerState").parameterValues[0].value as String
             val clazz = it.loadClass().newInstance()
             if(clazz is State) {
                 states.put(key, clazz)

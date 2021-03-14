@@ -14,6 +14,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.PlayerContext;
 import core.net.packet.out.ClearMinimapFlag;
 import kotlin.jvm.functions.Function1;
+import rs09.game.system.SystemLogger;
 
 import java.util.Deque;
 
@@ -223,6 +224,12 @@ public abstract class MovementPulse extends Pulse {
      */
     public void findPath() {
         if (mover instanceof NPC && mover.asNpc().isNeverWalks()) {
+            return;
+        }
+        if(destination.getLocation() == null){
+            SystemLogger.logAlert(destination.getId() + " < ID");
+            SystemLogger.logAlert(destination.getName() + " < NAME");
+            SystemLogger.logAlert("ASDAD");
             return;
         }
         boolean inside = isInsideEntity(mover.getLocation());

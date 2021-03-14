@@ -1354,9 +1354,7 @@ public class Player extends Entity {
 	}
 
 	public State registerState(String key){
-		State state = StateRepository.forKey(key,this);
-		if(state != null) return state;
-		return null;
+		return StateRepository.forKey(key, this);
 	}
 
 	public void clearState(String key){
