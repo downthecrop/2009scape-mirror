@@ -54,6 +54,7 @@ public final class FertileSoilSpell extends MagicSpell {
 		final GameObject object = (GameObject) target;
 		final FarmingPatch fPatch = FarmingPatch.forObject(object);
 		if(fPatch == null){
+			player.sendMessage("Um... I don't want to fertilize that!");
 			return false;
 		}
 		final Patch patch = fPatch.getPatchFor(player);
