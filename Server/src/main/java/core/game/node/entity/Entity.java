@@ -728,7 +728,7 @@ public abstract class Entity extends Node {
 	 * @param key The attribute name.
 	 */
 	public void incrementAttribute(String key, int amount) {
-		attributes.setAttribute(key, attributes.getAttribute(key.replace("/save:",""), 0) + amount);
+		attributes.setAttribute(key, attributes.getAttribute(key, 0) + amount);
 	}
 
 	/**

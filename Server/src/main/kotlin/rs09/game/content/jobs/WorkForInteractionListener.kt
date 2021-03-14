@@ -57,6 +57,10 @@ class WorkForInteractionListener : InteractionListener() {
             var amount = 0
             var jobId = 0
 
+            if(player.getAttribute("jobs:reset_time",0L) < System.currentTimeMillis()){
+                player.setAttribute("/save:jobs:dailyAmt",0)
+            }
+
             if(player.getAttribute("jobs:id",-1) != -1){
                 JobManager.rewardPlayer(player,node.asNpc())
                 return@on true
