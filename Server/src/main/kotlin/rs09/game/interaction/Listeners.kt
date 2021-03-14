@@ -4,10 +4,12 @@ import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.game.world.map.Location
 
 object Listeners {
     private val listeners = HashMap<String,(Player, Node) -> Boolean>(1000)
     private val useWithListeners = HashMap<String,(Player,Node,Node) -> Boolean>(1000)
+    private val destinationOverrides = HashMap<String,(Node) -> Location>(100)
 
     @JvmStatic
     fun add(id: Int, type: Int, option: Array<out String>, method: (Player,Node) -> Boolean){
@@ -65,6 +67,28 @@ object Listeners {
     }
 
     @JvmStatic
+    fun addDestOverride(type: Int, id: Int, method: (Node) -> Location){
+        destinationOverrides["$type:$id"] = method
+    }
+
+    @JvmStatic
+    fun addDestOverrides(type: Int,options: Array<out String>, method: (Node) -> Location){
+        for(opt in options){
+            destinationOverrides["$type:${opt.toLowerCase()}"] = method
+        }
+    }
+
+    @JvmStatic
+    fun getOverride(type: Int,id: Int): ((Node) -> Location)?{
+        return destinationOverrides["$type:$id"]
+    }
+
+    @JvmStatic
+    fun getOverride(type: Int,option: String): ((Node) -> Location)?{
+        return destinationOverrides["$type:$option"]
+    }
+
+    @JvmStatic
     fun run(used: Node, with: Node, type: Int,player: Player): Boolean{
         val flag = when(type){
             2 -> DestinationFlag.ENTITY
@@ -72,11 +96,14 @@ object Listeners {
             else -> DestinationFlag.OBJECT
         }
 
+        if(player.locks.isInteractionLocked) return false
+
         var flipped = false
 
         val method = get(used.id,with.id,type) ?: get(with.id,used.id,type).also { flipped = true } ?: return false
 
         if(type != 0) {
+            if(player.locks.isMovementLocked) return false
             player.pulseManager.run(object : MovementPulse(player, with, flag) {
                 override fun pulse(): Boolean {
                     player.faceLocation(with.location)
@@ -100,10 +127,14 @@ object Listeners {
             else -> DestinationFlag.OBJECT
         }
 
+        if(player.locks.isInteractionLocked) return false
+
         val method = get(id,type,option) ?: get(option,type) ?: return false
+        val destOverride = getOverride(type,node.id) ?: getOverride(type,option.toLowerCase())
 
         if(type != 0) {
-            player.pulseManager.run(object : MovementPulse(player, node, flag) {
+            if(player.locks.isMovementLocked) return false
+            player.pulseManager.run(object : MovementPulse(player, node, flag, destOverride) {
                 override fun pulse(): Boolean {
                     player.faceLocation(node.location)
                     method.invoke(player,node)
