@@ -22,31 +22,29 @@ object MapChunkRenderer {
         val last = player.playerFlags.lastViewport
         val updated: MutableList<RegionChunk> = ArrayList()
         val current = v.chunks
-        if (!Arrays.equals(current, last)) { //don't update if the viewport hasn't changed
-            var sizeX = last.size
-            for (x in 0 until sizeX) {
-                val sizeY: Int = last[x].size
-                for (y in 0 until sizeY) {
-                    val previous = last[x][y] ?: continue
-                    if (!containsChunk(current, previous)) {
-                        PacketRepository.send(ClearRegionChunk::class.java, ClearChunkContext(player, previous))
-                    } else {
-                        updated.add(previous)
-                    }
+        var sizeX = last.size
+        for (x in 0 until sizeX) {
+            val sizeY: Int = last[x].size
+            for (y in 0 until sizeY) {
+                val previous = last[x][y] ?: continue
+                if (!containsChunk(current, previous)) {
+                    PacketRepository.send(ClearRegionChunk::class.java, ClearChunkContext(player, previous))
+                } else {
+                    updated.add(previous)
                 }
             }
-            sizeX = current.size
-            for (x in 0 until sizeX) {
-                val sizeY: Int = current[x].size
-                for (y in 0 until sizeY) {
-                    val chunk = current[x][y]
-                    if (!updated.contains(chunk)) {
-                        chunk.synchronize(player)
-                    } else {
-                        chunk.update(player)
-                    }
-                    last[x][y] = current[x][y]
+        }
+        sizeX = current.size
+        for (x in 0 until sizeX) {
+            val sizeY: Int = current[x].size
+            for (y in 0 until sizeY) {
+                val chunk = current[x][y]
+                if (!updated.contains(chunk)) {
+                    chunk.synchronize(player)
+                } else {
+                    chunk.update(player)
                 }
+                last[x][y] = current[x][y]
             }
         }
     }
