@@ -330,7 +330,6 @@ public final class SummoningTrainingRoom extends OptionHandler {
 
 			@Override
 			public boolean handle(int interfaceId, int buttonId) {
-				player.sendMessage("ButtonId=" + buttonId + ", stage=" + stage);
 				switch (quest.getStage(player)) {
 				case 10:
 					switch (stage) {
