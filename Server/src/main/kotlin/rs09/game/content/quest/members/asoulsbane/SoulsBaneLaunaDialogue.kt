@@ -1,3 +1,4 @@
+/*
 package rs09.game.content.quest.members.asoulsbane
 
 import core.game.content.dialogue.DialoguePlugin
@@ -6,10 +7,12 @@ import core.game.content.quest.members.asoulsbane.ASoulsBane
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 
+*/
 /**
  * Launa
  * @author afaroutdude
- */
+ *//*
+
 class SoulsBaneLaunaDialogue(player: Player? = null) : DialoguePlugin(player) {
     lateinit var quest: Quest
 
@@ -79,4 +82,4 @@ class SoulsBaneLaunaDialogue(player: Player? = null) : DialoguePlugin(player) {
     override fun getIds(): IntArray {
         return intArrayOf(3638, 3639, 3640)
     }
-}
+}*/
