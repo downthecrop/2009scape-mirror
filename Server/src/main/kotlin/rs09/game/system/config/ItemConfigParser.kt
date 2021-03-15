@@ -1,14 +1,14 @@
 package rs09.game.system.config
 
-import rs09.ServerConstants
 import core.cache.def.impl.ItemDefinition
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.player.link.audio.Audio
-import rs09.game.system.SystemLogger
 import core.game.world.update.flag.context.Animation
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
+import rs09.ServerConstants
+import rs09.game.system.SystemLogger
 import java.io.FileReader
 
 class ItemConfigParser {
@@ -92,6 +92,8 @@ class ItemConfigParser {
          * The remove hair item configuration key.
          */
         const val REMOVE_HEAD = "remove_head"
+
+        const val IS_HAT = "hat"
 
         /**
          * The remove beard item configuration key.
@@ -256,6 +258,7 @@ class ItemConfigParser {
                         "remove_sleeves",
                         "remove_beard",
                         "remove_head",
+                        "hat",
                         "destroy",
                         "lendable",
                         "tradeable" -> configs.put(it.key.toString(),it.value.toString().toBoolean())

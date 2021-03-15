@@ -28531,7 +28531,7 @@
       "ge_buy_limit": "2",
       "archery_ticket_price": "0",
       "durability": null,
-      "remove_head": true
+      "hat": true
     },
     {
       "id": "2634",
@@ -28555,7 +28555,7 @@
       "ge_buy_limit": "2",
       "archery_ticket_price": "0",
       "durability": null,
-      "remove_head": true
+      "hat": true
     },
     {
       "id": "2636",
@@ -28579,7 +28579,7 @@
       "ge_buy_limit": "2",
       "archery_ticket_price": "0",
       "durability": null,
-      "remove_head": true
+      "hat": true
     },
     {
       "id": "2638",
@@ -28603,7 +28603,7 @@
       "ge_buy_limit": "2",
       "archery_ticket_price": "0",
       "durability": null,
-      "remove_head": true
+      "hat": true
     },
     {
       "id": "2640",
@@ -28627,7 +28627,7 @@
       "ge_buy_limit": "2",
       "archery_ticket_price": "0",
       "durability": null,
-      "remove_head": true
+      "hat": true
     },
     {
       "id": "2642",
@@ -28651,7 +28651,7 @@
       "ge_buy_limit": "2",
       "archery_ticket_price": "0",
       "durability": null,
-      "remove_head": true
+      "hat": true
     },
     {
       "id": "2644",
@@ -61923,7 +61923,7 @@
       "ge_buy_limit": "100",
       "archery_ticket_price": "0",
       "durability": null,
-      "remove_head": true
+      "hat": true
     },
     {
       "id": "6383",
@@ -97042,7 +97042,7 @@
       "equipment_slot": "0",
       "archery_ticket_price": "0",
       "durability": null,
-      "remove_head": true
+      "hat": true
     },
     {
       "id": "10694",
@@ -97056,7 +97056,7 @@
       "equipment_slot": "0",
       "archery_ticket_price": "0",
       "durability": null,
-      "remove_head": true
+      "hat": true
     },
     {
       "id": "10695",
@@ -97070,7 +97070,7 @@
       "equipment_slot": "0",
       "archery_ticket_price": "0",
       "durability": null,
-      "remove_head": true
+      "hat": true
     },
     {
       "id": "10696",
@@ -128312,7 +128312,7 @@
       "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
       "archery_ticket_price": "0",
       "durability": null,
-      "remove_head": true
+      "hat": true
     },
     {
       "id": "13812",
@@ -128329,7 +128329,7 @@
       "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
       "archery_ticket_price": "0",
       "durability": null,
-      "remove_head": true
+      "hat": true
     },
     {
       "id": "13813",
@@ -128346,7 +128346,7 @@
       "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
       "archery_ticket_price": "0",
       "durability": null,
-      "remove_head": true
+      "hat": true
     },
     {
       "id": "13814",

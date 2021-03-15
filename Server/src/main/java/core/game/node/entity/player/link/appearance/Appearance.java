@@ -303,9 +303,12 @@ public final class Appearance {
 			drawClothes(7, getLegs().getLook());
 		}
 		if ((hat != null && hat.getDefinition().getConfiguration(ItemConfigParser.REMOVE_HEAD, false)) || castleWarsHood) {
-			flagHatClipping();
+			clearBodyPart(8);
 		} else {
 			drawClothes(8, getHair().getLook());
+		}
+		if((hat != null && hat.getDefinition().getConfiguration(ItemConfigParser.IS_HAT,false))){
+			flagHatClipping();
 		}
 		if (hands != null) {
 			drawItem(9, hands);
