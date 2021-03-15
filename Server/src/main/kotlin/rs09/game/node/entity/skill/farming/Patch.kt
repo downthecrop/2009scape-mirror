@@ -1,8 +1,8 @@
 package rs09.game.node.entity.skill.farming
 
 import core.game.node.entity.player.Player
-import rs09.game.system.SystemLogger
 import core.tools.RandomFunction
+import rs09.game.system.SystemLogger
 import java.util.concurrent.TimeUnit
 
 class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantable?, var currentGrowthStage: Int, var isDiseased: Boolean, var isDead: Boolean, var isWatered: Boolean, var nextGrowth: Long, var harvestAmt: Int, var isCheckHealth: Boolean) {
@@ -180,6 +180,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         currentGrowthStage = 3
         setCurrentState(3)
         compost = CompostType.NONE
+        protectionPaid = false
     }
 
     fun getFruitOrBerryCount() : Int {

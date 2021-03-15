@@ -97,7 +97,8 @@ class FarmingState(player: Player? = null) : State(player) {
 
                 patch.compost = CompostType.values()[compostOrdinal]
                 patch.protectionPaid = protectionPaid
-                if(patch.currentGrowthStage < patch.plantable?.stages ?: 0 && !patch.isWeedy()){
+                patch.setCurrentState(savedState)
+                if((patch.currentGrowthStage < patch.plantable?.stages ?: 0) && !patch.isWeedy()){
                     val startTime = (patch.nextGrowth - TimeUnit.MINUTES.toMillis(patch.patch.type.stageGrowthTime * (patch.currentGrowthStage + 1).toLong()))
                     var expectedStage = Math.floor((System.currentTimeMillis() - startTime.toDouble()) / TimeUnit.MINUTES.toMillis(patch.patch.type.stageGrowthTime.toLong())).toInt()
                     SystemLogger.logErr("$expectedStage $startTime ${System.currentTimeMillis()}")
@@ -112,7 +113,7 @@ class FarmingState(player: Player? = null) : State(player) {
                     }
                 }
 
-                if(savedState > patch.plantable?.value ?: 0 + patch.currentGrowthStage){
+                if((savedState - (patch?.plantable?.value ?: 0)) > patch.plantable?.value ?: 0 + patch.currentGrowthStage){
                     patch.setCurrentState(savedState)
                 } else {
                     patch.setCurrentState((patch.plantable?.value ?: 0) + patch.currentGrowthStage)
