@@ -2,7 +2,7 @@ package rs09.game.interaction.item
 
 import core.game.node.entity.player.link.quest.QuestRepository
 import rs09.game.interaction.InteractionListener
-import rs09.game.interaction.Listeners.run
+import rs09.game.interaction.InteractionListeners.run
 
 class QuestCapeListener : InteractionListener() {
 

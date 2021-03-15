@@ -12,6 +12,7 @@ import core.plugin.PluginType
 import io.github.classgraph.ClassGraph
 import io.github.classgraph.ClassInfo
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.InterfaceListener
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Command
 import java.util.*
@@ -76,6 +77,10 @@ object PluginManager {
             val clazz = it.loadClass().newInstance() as InteractionListener
             clazz.defineListeners()
             clazz.defineDestinationOverrides()
+        }
+        result.getSubclasses("rs09.game.interaction.InterfaceListener").forEach {
+            val clazz = it.loadClass().newInstance() as InterfaceListener
+            clazz.defineListeners()
         }
     }
 

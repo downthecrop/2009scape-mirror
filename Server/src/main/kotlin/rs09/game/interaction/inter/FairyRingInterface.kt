@@ -1,16 +1,13 @@
 package rs09.game.interaction.inter
 
 import core.game.component.Component
-import core.game.component.ComponentDefinition
-import core.game.component.ComponentPlugin
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
-import core.plugin.Initializable
-import core.plugin.Plugin
 import core.tools.RandomFunction
+import rs09.game.interaction.InterfaceListener
 import rs09.game.world.GameWorld
 
 val RING_1 = arrayOf('a','d','c','b')
@@ -21,51 +18,57 @@ val RING_3 = arrayOf('p','s','r','q')
  * Handles the fairy ring interface
  * @author Ceikry
  */
-@Initializable
-class FairyRingInterface : ComponentPlugin(){
-    override fun open(player: Player?, component: Component?) {
-        player ?: return
-        super.open(player, component)
-        if(component?.id == 734) {
+class FairyRingInterface : InterfaceListener(){
+
+    val RINGS = 734
+    val TRAVEL_LOG = 735
+
+    override fun defineListeners() {
+
+        onOpen(RINGS){player, _ ->
+            player.interfaceManager.openSingleTab(Component(TRAVEL_LOG))
             player.setAttribute("fr:ring1", 0)
             player.setAttribute("fr:ring2", 0)
             player.setAttribute("fr:ring3", 0)
             FairyRing.drawLog(player)
+            return@onOpen true
+        }
 
-            component.setCloseEvent { pl, _ ->
-                pl.removeAttribute("fr:ring1")
-                pl.removeAttribute("fr:ring2")
-                pl.removeAttribute("fr:ring3")
-                pl.configManager.forceSet(816,0,false)
-                pl.interfaceManager.closeSingleTab()
-                true
+        onClose(RINGS){player, _ ->
+            player.interfaceManager.closeSingleTab()
+            player.removeAttribute("fr:ring1")
+            player.removeAttribute("fr:ring2")
+            player.removeAttribute("fr:ring3")
+            player.varpManager.get(816).clearBitRange(0,31)
+            player.varpManager.get(816).send(player)
+            player.interfaceManager.closeSingleTab()
+            return@onClose true
+        }
+
+        on(RINGS){player, _, _, buttonID, _, _ ->
+            if(player.getAttribute("fr:time",0L) > System.currentTimeMillis()) return@on true
+            var delayIncrementer = 1750L
+            when(buttonID){
+                23 -> delayIncrementer += increment(player,1)
+                25 -> delayIncrementer += increment(player,2)
+                27 -> delayIncrementer += increment(player,3)
+                24 -> decrement(player,1)
+                26 -> decrement(player,2)
+                28 -> decrement(player,3)
+                21 -> confirm(player)
             }
+            player.setAttribute("fr:time",System.currentTimeMillis() + delayIncrementer)
+            return@on true
         }
+
+        on(TRAVEL_LOG,12){player, _, _, _, _, _ ->
+            toggleSortOrder(player)
+            return@on true
+        }
+
     }
 
-    override fun handle(player: Player?, component: Component?, opcode: Int, button: Int, slot: Int, itemId: Int): Boolean {
-        player ?: return false
-        val delay = player.getAttribute("fr:time",0L)
-        if(delay > System.currentTimeMillis()){
-            return true
-        }
-
-        var delayIncrementer = 1750L
-        when(button){
-            23 -> delayIncrementer += increment(player,1)
-            25 -> delayIncrementer += increment(player,2)
-            27 -> delayIncrementer += increment(player,3)
-            24 -> decrement(player,1)
-            26 -> decrement(player,2)
-            28 -> decrement(player,3)
-            21 -> confirm(player)
-            12 -> delayIncrementer += toggleSortOrder(player)
-        }
-        player.setAttribute("fr:time",System.currentTimeMillis() + delayIncrementer)
-        return true
-    }
-
-    fun toggleSortOrder(player: Player): Long{
+    private fun toggleSortOrder(player: Player): Long{
         val ring1index = player.getAttribute("fr:ring1",0)
         var toSet = player.getAttribute("fr:sortorder",true)
         toSet = !toSet
@@ -97,7 +100,7 @@ class FairyRingInterface : ComponentPlugin(){
         player.setAttribute("fr:ring$ring",nextIndex)
     }
 
-    fun confirm(player: Player){
+    private fun confirm(player: Player){
         val ring1index = player.getAttribute("fr:ring1",0)
         val ring2index = player.getAttribute("fr:ring2",0)
         val ring3index = player.getAttribute("fr:ring3",0)
@@ -131,13 +134,6 @@ class FairyRingInterface : ComponentPlugin(){
         player.interfaceManager.close()
         player.teleporter.send(tile,TeleportManager.TeleportType.FAIRY_RING)
     }
-
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        ComponentDefinition.put(734,this)
-        ComponentDefinition.put(735,this)
-        return this
-    }
-
 }
 
 enum class FairyRing(val tile: Location?, val tip: String = "", val childId: Int = -1) {

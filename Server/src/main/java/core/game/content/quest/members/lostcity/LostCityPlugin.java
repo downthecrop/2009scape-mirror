@@ -17,7 +17,7 @@ import core.game.node.object.GameObject;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
-import rs09.game.interaction.Listeners;
+import rs09.game.interaction.InteractionListeners;
 import rs09.game.world.GameWorld;
 
 /**
@@ -94,7 +94,7 @@ public final class LostCityPlugin extends OptionHandler {
 				player.getPacketDispatch().sendMessage("You need to have completed the Lost City quest in order to wield that weapon.");
 				return true;
 			}
-			return Listeners.run(node.getId(),0,"equip",player,node);
+			return InteractionListeners.run(node.getId(),0,"equip",player,node);
 		}
 		return true;
 	}

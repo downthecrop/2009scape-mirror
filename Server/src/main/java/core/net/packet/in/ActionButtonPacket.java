@@ -10,9 +10,10 @@ import core.game.node.entity.player.info.login.LoginConfiguration;
 import core.game.node.entity.player.link.request.assist.AssistSession;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
+import rs09.game.interaction.InterfaceListeners;
+import rs09.game.world.GameWorld;
 
 import java.util.List;
 
@@ -58,10 +59,15 @@ public class ActionButtonPacket implements IncomingPacket {
 			player.debug("Component " + c + " wasn't opened in interface manager.");
 			return;
 		}
+		int cOpcode = buffer.opcode();
 		ComponentPlugin plugin = c.getPlugin();
 		if (plugin != null) {
 			player.debug("Component plugin = " + plugin.getClass().getSimpleName());
-			plugin.handle(player, c, buffer.opcode(), buttonId, slot, itemId);
+			plugin.handle(player, c, cOpcode, buttonId, slot, itemId);
+		} else {
+			if(InterfaceListeners.run(player,c,cOpcode,buttonId,slot,itemId)){
+				return;
+			}
 		}
 	}
 

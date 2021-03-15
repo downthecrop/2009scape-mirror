@@ -1,132 +1,99 @@
 package rs09.game.node.entity.skill.farming
 
 import core.game.component.Component
-import core.game.component.ComponentDefinition
-import core.game.component.ComponentPlugin
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.RunScript
 import core.game.node.item.Item
-import core.plugin.Initializable
-import core.plugin.Plugin
 import org.rs09.consts.Components
 import org.rs09.consts.Items
+import rs09.game.interaction.InterfaceListener
 
 private const val varp = 615
-@Initializable
-class ToolLeprechaunInterface : ComponentPlugin() {
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        ComponentDefinition.put(Components.FARMING_TOOLS_125,this)
-        ComponentDefinition.put(Components.FARMING_TOOLS_SIDE_126,this)
-        return this
-    }
+class ToolLeprechaunInterface : InterfaceListener() {
 
-    override fun open(player: Player?, component: Component?) {
-        component ?: return
-        super.open(player, component)
-        player?.varpManager?.flagSave(varp)
-        if(component.id == Components.FARMING_TOOLS_125) {
-            player?.interfaceManager?.openSingleTab(Component(Components.FARMING_TOOLS_SIDE_126))
-            component.setCloseEvent { pl, _ ->
-                pl?.interfaceManager?.closeSingleTab()
-                true
-            }
-        }
-    }
+    private val FARMING_TOOLS = Components.FARMING_TOOLS_125
+    private val TOOLS_SIDE = Components.FARMING_TOOLS_SIDE_126
 
-    override fun handle(player: Player?, component: Component?, opcode: Int, button: Int, slot: Int, itemId: Int): Boolean {
-        player ?: return false
-        component ?: return false
+    override fun defineListeners() {
 
-        when(component.id){
-
-            Components.FARMING_TOOLS_125 -> {
-                when(button){
-                    33 -> doWithdrawal(player, Items.RAKE_5341,::setHasRake,::hasRake)
-
-                    34 -> doWithdrawal(player,Items.SEED_DIBBER_5343,::setHasDibber,::hasDibber)
-
-                    35 -> doWithdrawal(player,Items.SPADE_952,::setHasSpade,::hasSpade)
-
-                    36 -> {
-                        val sec = if(hasMagicSecateurs(player)) Items.MAGIC_SECATEURS_7409 else Items.SECATEURS_5329
-                        doWithdrawal(player,sec,::setHasSecateurs,::hasSecateurs)
-                    }
-
-                    37 -> {
-                        if(!hasWateringCan(player)){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
-                        } else {
-                            player.inventory.add(Item(getWateringCan(player)))
-                            setNoWateringCan(player)
-                        }
-                    }
-
-                    38 -> doWithdrawal(player,Items.GARDENING_TROWEL_5325,::setHasGardeningTrowel,::hasGardeningTrowel)
-
-                    39 -> doStackedWithdrawal(player,Items.BUCKET_1925,getAmount(opcode),::updateBuckets,::getNumBuckets)
-
-                    40 -> doStackedWithdrawal(player,Items.COMPOST_6032,getAmount(opcode),::updateCompost,::getNumCompost)
-
-                    41 -> doStackedWithdrawal(player,Items.SUPERCOMPOST_6034,getAmount(opcode),::updateSuperCompost,::getNumSuperCompost)
-                }
-            }
-
-            Components.FARMING_TOOLS_SIDE_126 -> {
-
-                when(button){
-
-                    18 -> doDeposit(player,Items.RAKE_5341,::setHasRake,::hasRake)
-
-                    19 -> doDeposit(player,Items.SEED_DIBBER_5343,::setHasDibber,::hasDibber)
-
-                    20 -> doDeposit(player,Items.SPADE_952,::setHasSpade,::hasSpade)
-
-                    21 -> {
-                        if(!player.inventory.contains(Items.SECATEURS_5329,1) && !player.inventory.contains(Items.MAGIC_SECATEURS_7409,1)){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
-                        } else if (!hasSecateurs(player)){
-                            if(player.inventory.contains(Items.MAGIC_SECATEURS_7409,1)){
-                                player.inventory.remove(Item(Items.MAGIC_SECATEURS_7409))
-                                setHasSecateurs(player,true)
-                                setHasMagicSecateurs(player,true)
-                            } else {
-                                player.inventory.remove(Item(Items.SECATEURS_5329))
-                                setHasSecateurs(player,true)
-                                setHasMagicSecateurs(player,false)
-                            }
-                        } else {
-                            player.dialogueInterpreter.sendDialogue("You already have one of those stored.")
-                        }
-                    }
-
-                    22 -> {
-                        val can = getHighestCan(player)
-                        if(can == null){
-                            player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
-                        } else if(!hasWateringCan(player)){
-                            player.inventory.remove(can)
-                            setWateringCan(player,can)
-                        } else {
-                            player.dialogueInterpreter.sendDialogue("You already have one of those stored.")
-                        }
-                    }
-
-                    23 -> doDeposit(player,Items.GARDENING_TROWEL_5325,::setHasGardeningTrowel,::hasGardeningTrowel)
-
-                    24 -> doStackedDeposit(player,Items.BUCKET_1925,getAmount(opcode),::updateBuckets,::getNumBuckets)
-
-                    25 -> doStackedDeposit(player,Items.COMPOST_6032,getAmount(opcode),::updateCompost,::getNumCompost)
-
-                    26 -> doStackedDeposit(player,Items.SUPERCOMPOST_6034,getAmount(opcode),::updateSuperCompost,::getNumSuperCompost)
-
-                }
-
-            }
-
+        onOpen(FARMING_TOOLS){player, component ->
+            player.varpManager?.flagSave(varp)
+            player.interfaceManager.openSingleTab(Component(TOOLS_SIDE))
+            return@onOpen true
         }
 
-        player.varpManager.get(varp).send(player)
-        return true
+        onClose(FARMING_TOOLS){player, _ ->
+            player.interfaceManager.closeSingleTab()
+        }
+
+        on(FARMING_TOOLS){player, _, opcode, buttonID, _, _ ->
+            when(buttonID){
+                33 -> doWithdrawal(player, Items.RAKE_5341,::setHasRake,::hasRake)
+                34 -> doWithdrawal(player,Items.SEED_DIBBER_5343,::setHasDibber,::hasDibber)
+                35 -> doWithdrawal(player,Items.SPADE_952,::setHasSpade,::hasSpade)
+                36 -> {
+                    val sec = if(hasMagicSecateurs(player)) Items.MAGIC_SECATEURS_7409 else Items.SECATEURS_5329
+                    doWithdrawal(player,sec,::setHasSecateurs,::hasSecateurs)
+                }
+                37 -> {
+                    if(!hasWateringCan(player)){
+                        player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
+                    } else {
+                        player.inventory.add(Item(getWateringCan(player)))
+                        setNoWateringCan(player)
+                    }
+                }
+                38 -> doWithdrawal(player,Items.GARDENING_TROWEL_5325,::setHasGardeningTrowel,::hasGardeningTrowel)
+                39 -> doStackedWithdrawal(player,Items.BUCKET_1925,getAmount(opcode),::updateBuckets,::getNumBuckets)
+                40 -> doStackedWithdrawal(player,Items.COMPOST_6032,getAmount(opcode),::updateCompost,::getNumCompost)
+                41 -> doStackedWithdrawal(player,Items.SUPERCOMPOST_6034,getAmount(opcode),::updateSuperCompost,::getNumSuperCompost)
+            }
+            player.varpManager.get(varp).send(player)
+            return@on true
+        }
+
+        on(TOOLS_SIDE){player, _, opcode, buttonID, _, _ ->
+            when(buttonID){
+                18 -> doDeposit(player,Items.RAKE_5341,::setHasRake,::hasRake)
+                19 -> doDeposit(player,Items.SEED_DIBBER_5343,::setHasDibber,::hasDibber)
+                20 -> doDeposit(player,Items.SPADE_952,::setHasSpade,::hasSpade)
+                21 -> {
+                    if(!player.inventory.contains(Items.SECATEURS_5329,1) && !player.inventory.contains(Items.MAGIC_SECATEURS_7409,1)){
+                        player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
+                    } else if (!hasSecateurs(player)){
+                        if(player.inventory.contains(Items.MAGIC_SECATEURS_7409,1)){
+                            player.inventory.remove(Item(Items.MAGIC_SECATEURS_7409))
+                            setHasSecateurs(player,true)
+                            setHasMagicSecateurs(player,true)
+                        } else {
+                            player.inventory.remove(Item(Items.SECATEURS_5329))
+                            setHasSecateurs(player,true)
+                            setHasMagicSecateurs(player,false)
+                        }
+                    } else {
+                        player.dialogueInterpreter.sendDialogue("You already have one of those stored.")
+                    }
+                }
+                22 -> {
+                    val can = getHighestCan(player)
+                    if(can == null){
+                        player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
+                    } else if(!hasWateringCan(player)){
+                        player.inventory.remove(can)
+                        setWateringCan(player,can)
+                    } else {
+                        player.dialogueInterpreter.sendDialogue("You already have one of those stored.")
+                    }
+                }
+                23 -> doDeposit(player,Items.GARDENING_TROWEL_5325,::setHasGardeningTrowel,::hasGardeningTrowel)
+                24 -> doStackedDeposit(player,Items.BUCKET_1925,getAmount(opcode),::updateBuckets,::getNumBuckets)
+                25 -> doStackedDeposit(player,Items.COMPOST_6032,getAmount(opcode),::updateCompost,::getNumCompost)
+                26 -> doStackedDeposit(player,Items.SUPERCOMPOST_6034,getAmount(opcode),::updateSuperCompost,::getNumSuperCompost)
+            }
+            player.varpManager.get(varp).send(player)
+            return@on true
+        }
+
     }
 
     private fun doWithdrawal(player: Player?, item: Int, withdrawMethod: (Player?,Boolean) -> Unit, checkMethod: (Player?) -> Boolean){

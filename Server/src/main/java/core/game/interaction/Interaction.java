@@ -11,7 +11,7 @@ import core.game.world.update.flag.player.FaceLocationFlag;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.InteractionOptionContext;
 import core.net.packet.out.InteractionOption;
-import rs09.game.interaction.Listeners;
+import rs09.game.interaction.InteractionListeners;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 
@@ -106,7 +106,7 @@ public class Interaction {
 					if (player.getLocks().isInteractionLocked() || player.getZoneMonitor().interact(node, option)) {
 						return true;
 					}
-					if(Listeners.run(node.getId(),0,option.getName(),player,node)){
+					if(InteractionListeners.run(node.getId(),0,option.getName(),player,node)){
 						return true;
 					}
 					if (option.getHandler() == null || !option.getHandler().handle(player, node, option.getName().toLowerCase())) {
