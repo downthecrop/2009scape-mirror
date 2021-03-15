@@ -1,8 +1,8 @@
 package org.runite.client;
-import javax.swing.*;
-
 import org.rs09.client.config.GameConfig;
 
+import javax.imageio.ImageIO;
+import javax.swing.*;
 import java.applet.Applet;
 import java.awt.*;
 import java.net.MalformedURLException;
@@ -77,6 +77,7 @@ public class ClientLoader extends Applet {
 			ClientLoader.world = "" + GameConfig.SERVER_NAME;
 			//System.out.println(GameLaunch.SETTINGS.getWorld());
 			this.frame = new JFrame(GameConfig.SERVER_NAME);
+			this.frame.setIconImage(ImageIO.read(getClass().getClassLoader().getResource("09logo.png")));
 			this.frame.setLayout(new BorderLayout());
 			this.frame.setSize(300,500);
 			this.frame.setBackground(Color.BLACK);
