@@ -197,6 +197,11 @@ class ToolLeprechaunInterface : ComponentPlugin() {
             }
         }
 
+        if(finalAmount > hasAmount){
+            finalAmount = hasAmount
+        }
+        if(finalAmount > spaceLeft) finalAmount = spaceLeft
+
         if(!player.inventory.contains(item,finalAmount)){
             player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
             return

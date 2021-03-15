@@ -43,7 +43,6 @@ class DigUpPatchDialogue(player: Player? = null) : DialoguePlugin(player) {
                                     }
                                 }
                             }
-                            player.sendMessage("${patch?.getCurrentState()}")
                             patch?.clear()
                             return true
                         }
