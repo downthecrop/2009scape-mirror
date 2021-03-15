@@ -22,7 +22,7 @@ import core.net.packet.out.ContainerPacket;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.content.global.action.EquipHandler;
-import rs09.game.interaction.Listeners;
+import rs09.game.interaction.InteractionListeners;
 import rs09.game.world.GameWorld;
 
 /**
@@ -81,7 +81,7 @@ public final class EquipmentInterface extends ComponentPlugin {
 				GameWorld.getPulser().submit(new Pulse(1, p) {
 					@Override
 					public boolean pulse() {
-						Listeners.run(item.getId(),0,"equip",p, item);
+						InteractionListeners.run(item.getId(),0,"equip",p, item);
 						return true;
 					}
 				});
@@ -191,7 +191,7 @@ public final class EquipmentInterface extends ComponentPlugin {
 		if (item == null) {
 			return;
 		}
-		if(Listeners.run(item.getId(),0,"operate",player,item)){
+		if(InteractionListeners.run(item.getId(),0,"operate",player,item)){
 			return;
 		}
 		OptionHandler handler = item.getOperateHandler();

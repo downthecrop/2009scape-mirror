@@ -22,7 +22,7 @@ import core.net.packet.context.PlayerContext;
 import core.net.packet.out.ClearMinimapFlag;
 import rs09.ServerConstants;
 import rs09.game.ai.AIPlayer;
-import rs09.game.interaction.Listeners;
+import rs09.game.interaction.InteractionListeners;
 import rs09.game.world.repository.Repository;
 
 import java.util.List;
@@ -186,7 +186,7 @@ public final class InteractionPacket implements IncomingPacket {
 		player.debug("spawn=" + npc.getProperties().getSpawnLocation() + ".");
 		player.debug("Varp ID= " + npc.getDefinition().getConfigId() + " Offset=" + npc.getDefinition().getVarbitOffset() + " Size=" + npc.getDefinition().getVarbitSize());
 		handleAIPLegion(player, 0, optionIndex, index);
-		if(Listeners.run(npc.getId(),2, option.getName(),player,npc)){
+		if(InteractionListeners.run(npc.getId(),2, option.getName(),player,npc)){
 			return;
 		}
 		if(PluginInteractionManager.handle(player,shown,option)){
@@ -270,7 +270,7 @@ public final class InteractionPacket implements IncomingPacket {
 		}
 		handleAIPLegion(player, 1, optionIndex, x, y, objectId);
 
-		if(Listeners.run(object.getId(),1, option.getName(),player,object)){
+		if(InteractionListeners.run(object.getId(),1, option.getName(),player,object)){
 			return;
 		}
 		if(PluginInteractionManager.handle(player,object)){

@@ -21,7 +21,7 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.game.interaction.Listeners;
+import rs09.game.interaction.InteractionListeners;
 
 import java.util.List;
 
@@ -147,7 +147,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 				player.getPacketDispatch().sendMessage("You need to complete the Dragon Slayer Quest in order to wear this.");
 				return true;
 			}
-			Listeners.run(node.getId(),0,"equip",player,node);
+			InteractionListeners.run(node.getId(),0,"equip",player,node);
 			break;
 		case 742:
 			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD) || player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {

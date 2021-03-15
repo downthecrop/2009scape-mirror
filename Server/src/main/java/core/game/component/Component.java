@@ -5,6 +5,7 @@ import core.game.node.entity.player.link.InterfaceManager;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.InterfaceContext;
 import core.net.packet.out.Interface;
+import rs09.game.interaction.InterfaceListeners;
 
 /**
  * Represents a component.
@@ -53,6 +54,7 @@ public class Component {
 	 */
 	public void open(Player player) {
 		InterfaceManager manager = player.getInterfaceManager();
+		InterfaceListeners.runOpen(player,this);
 		if (definition == null) {
 			PacketRepository.send(Interface.class, new InterfaceContext(player, manager.getWindowPaneId(), manager.getDefaultChildId(), getId(), false));
 			if (plugin != null) {
@@ -82,6 +84,7 @@ public class Component {
 	 * @return {@code True} if the component can be closed.
 	 */
 	public boolean close(Player player) {
+		InterfaceListeners.runClose(player,this);
 		if (closeEvent != null && !closeEvent.close(player, this)) {
 			return false;
 		}

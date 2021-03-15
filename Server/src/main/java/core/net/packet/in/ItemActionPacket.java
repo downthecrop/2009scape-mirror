@@ -17,7 +17,7 @@ import core.net.packet.context.PlayerContext;
 import core.net.packet.out.ClearMinimapFlag;
 import org.rs09.consts.Items;
 import rs09.game.interaction.ItemOnBankBooth;
-import rs09.game.interaction.Listeners;
+import rs09.game.interaction.InteractionListeners;
 import rs09.game.node.entity.skill.farming.CompostBins;
 import rs09.game.node.entity.skill.farming.FarmingPatch;
 import rs09.game.node.entity.skill.farming.UseWithBinHandler;
@@ -69,7 +69,7 @@ public class ItemActionPacket implements IncomingPacket {
 			if(PluginInteractionManager.handle(player,event)){
 				return;
 			}
-			if(Listeners.run(item,npc,2,player)){
+			if(InteractionListeners.run(item,npc,2,player)){
 				return;
 			}
 			event = new NodeUsageEvent(player, interfaceId, item, npc);
@@ -128,7 +128,7 @@ public class ItemActionPacket implements IncomingPacket {
 				RottenPotatoUseWithHandler.handle(used,player);
 				return;
 			}
-			if(Listeners.run(used,with,0,player)){
+			if(InteractionListeners.run(used,with,0,player)){
 				return;
 			}
 			if (usedItemId < usedWithItemId) {
@@ -179,7 +179,7 @@ public class ItemActionPacket implements IncomingPacket {
 				RottenPotatoUseWithHandler.handle(object,player);
 				return;
 			}
-			if(Listeners.run(used,object,1,player)){
+			if(InteractionListeners.run(used,object,1,player)){
 				return;
 			}
 			event = new NodeUsageEvent(player, 0, used, object);
