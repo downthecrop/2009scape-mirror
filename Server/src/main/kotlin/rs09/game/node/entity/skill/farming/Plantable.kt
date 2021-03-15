@@ -11,7 +11,7 @@ enum class Plantable(val itemID: Int, val value: Int, val stages: Int, val plant
     NASTURTIUM_SEED(5098,18,4,19.5,111.0,0.0,24,PatchType.FLOWER,Items.NASTURTIUMS_6012),
     WOAD_SEED(5099,23,4,20.5,115.5,0.0,25,PatchType.FLOWER,Items.WOAD_LEAF_1793),
     LIMPWURT_SEED(5100,28,4,21.5,120.0,0.0,26,PatchType.FLOWER,Items.LIMPWURT_ROOT_225),
-    WHITE_LILY_SEED(14589,37,4,42.0,250.0,0.0,58,PatchType.FLOWER,Items.WHITE_LILY_14583),
+    WHITE_LILY_SEED(14589,37,4,42.0,250.0,0.0,52,PatchType.FLOWER,Items.WHITE_LILY_14583),
 
     //Flower(Technically)
     SCARECROW(6059,33,3,0.0,0.0,0.0,23,PatchType.FLOWER,Items.SCARECROW_6059),

@@ -15,7 +15,7 @@ object PatchRaker {
         player.pulseManager.run(object : Pulse(){
             override fun pulse(): Boolean {
                 var patchStage = patch.getPatchFor(player).getCurrentState()
-                if(patchStage < 2){
+                if(patchStage <= 2){
                     player.animator.animate(RAKE_ANIM)
                 }
                 if(delay < 5) {

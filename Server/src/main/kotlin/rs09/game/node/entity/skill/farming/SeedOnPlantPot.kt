@@ -34,7 +34,7 @@ class SeedOnPlantPot : UseWithHandler(Items.ACORN_5312,
             else -> return false
         }
 
-        if(player.inventory.remove(pot) && player.inventory.remove(seed)){
+        if(player.inventory.remove(pot) && player.inventory.remove(Item(seed.id,1))){
             player.inventory.add(Item(seedling))
         }
 
