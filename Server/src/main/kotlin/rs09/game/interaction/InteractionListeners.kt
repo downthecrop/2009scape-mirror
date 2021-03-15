@@ -79,6 +79,20 @@ object InteractionListeners {
     }
 
     @JvmStatic
+    fun addDestOverrides(type: Int, ids: IntArray,options: Array<out String>, method: (Node) -> Location){
+        for(id in ids){
+            for(opt in options){
+                destinationOverrides["$type:$id:${opt.toLowerCase()}"] = method
+            }
+        }
+    }
+
+    @JvmStatic
+    fun getOverride(type: Int, id:Int, option: String): ((Node) -> Location)?{
+        return destinationOverrides["$type:$id:${option.toLowerCase()}"]
+    }
+
+    @JvmStatic
     fun getOverride(type: Int,id: Int): ((Node) -> Location)?{
         return destinationOverrides["$type:$id"]
     }
@@ -130,7 +144,7 @@ object InteractionListeners {
         if(player.locks.isInteractionLocked) return false
 
         val method = get(id,type,option) ?: get(option,type) ?: return false
-        val destOverride = getOverride(type,node.id) ?: getOverride(type,option.toLowerCase())
+        val destOverride = getOverride(type, id, option) ?: getOverride(type,node.id) ?: getOverride(type,option.toLowerCase())
 
         if(type != 0) {
             if(player.locks.isMovementLocked) return false
