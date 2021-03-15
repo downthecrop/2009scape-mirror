@@ -59,4 +59,32 @@ object CanoeUtils {
         }
     }
 
+    fun getFaceLocation(location: Location): Location{
+        return when(getStationIndex(location)){
+            1 -> location.transform(0,-1,0)
+            0,2,3 -> location.transform(-1,0,0)
+            else -> location
+        }
+    }
+
+    fun getChopLocation(location: Location): Location{
+        return when(getStationIndex(location)){
+            0 -> Location.create(3243, 3235, 0)
+            1 -> Location.create(3204, 3343, 0)
+            2 -> Location.create(3112, 3409, 0)
+            3 -> Location.create(3132, 3508, 0)
+            else -> Location.create(0,0)
+        }
+    }
+
+    fun getCraftFloatLocation(location: Location): Location{
+        return when(getStationIndex(location)){
+            0 -> Location.create(3243, 3237, 0)
+            1 -> Location.create(3202, 3343, 0)
+            2 -> Location.create(3112, 3411, 0)
+            3 -> Location.create(3132, 3510, 0)
+            else -> Location.create(0,0)
+        }
+    }
+
 }

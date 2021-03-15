@@ -10,22 +10,27 @@ import rs09.game.interaction.InteractionListener
 
 class CanoeStationListener : InteractionListener() {
 
-    val STATION_IDs = intArrayOf(12140, 12141, 12142, 12143, 12145, 12146, 12147, 12148, 12151, 12152, 12153, 12154, 12155, 12156, 12157, 12158, 12144, 12146, 12149, 12150, 12157)
-    val CHOP_STATION = intArrayOf(12144)
-    val STAGE_TREE_NONINTERACTABLE = 9
-    val STAGE_LOG_CHOPPED = 10
+    private val STATION_IDs = intArrayOf(12140, 12141, 12142, 12143, 12144, 12145, 12146, 12147, 12148, 12151, 12152, 12153, 12154, 12155, 12156, 12157, 12158, 12144, 12146, 12149, 12150, 12157)
+    private val STAGE_TREE_NONINTERACTABLE = 9
+    private val STAGE_LOG_CHOPPED = 10
     private val SHAPING_INTERFACE = Components.CANOE_52
     private val PUSH = Animation(3301)
-    private val ROW = Animation(3302)
     private val FALL = Animation(3303)
     private val FLOAT = Animation(3304)
-    private val SINK = Animation(3305)
+
+    override fun defineDestinationOverrides() {
+        setDest(OBJECT,STATION_IDs,"chop-down"){node ->
+            return@setDest CanoeUtils.getChopLocation(node.location)
+        }
+        setDest(OBJECT,STATION_IDs,"shape-canoe","float canoe","float log","float waka"){node ->
+            return@setDest CanoeUtils.getCraftFloatLocation(node.location)
+        }
+    }
 
     override fun defineListeners() {
-        on(CHOP_STATION,OBJECT,"chop-down"){player, node ->
+        on(STATION_IDs,OBJECT,"chop-down"){player, node ->
             val axe: SkillingTool? = SkillingTool.getHatchet(player)
             val varbit = node.asObject().definition.configFile
-
             if(varbit.getValue(player) != 0){
                 player.varpManager.setVarbit(varbit,0)
             }
@@ -39,6 +44,8 @@ class CanoeStationListener : InteractionListener() {
                 return@on true
             }
             player.lock()
+            player.varpManager.get(varbit.configId).clearBitRange(0,31)
+            player.faceLocation(CanoeUtils.getFaceLocation(player.location))
             player.animate(axe.animation)
             player.varpManager.setVarbit(varbit,STAGE_TREE_NONINTERACTABLE)
             player.pulseManager.run(object : Pulse(4){
@@ -59,6 +66,7 @@ class CanoeStationListener : InteractionListener() {
                 player.varpManager.setVarbit(varbit,0)
                 return@on true
             }
+            player.faceLocation(CanoeUtils.getFaceLocation(player.location))
             player.interfaceManager.open(Component(SHAPING_INTERFACE))
             player.setAttribute("canoe-varbit",varbit)
             return@on true
@@ -69,6 +77,7 @@ class CanoeStationListener : InteractionListener() {
             val canoe = CanoeUtils.getCanoeFromVarbit(player,varbit)
             player.animator.animate(PUSH)
             player.lock()
+            player.faceLocation(CanoeUtils.getFaceLocation(player.location))
             player.pulseManager.run(object : Pulse(){
                 override fun pulse(): Boolean {
                     player.varpManager.setVarbit(varbit,CanoeUtils.getCraftValue(canoe,true))

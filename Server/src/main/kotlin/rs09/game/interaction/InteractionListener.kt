@@ -35,4 +35,8 @@ abstract class InteractionListener : Listener{
     fun setDest(type:Int, vararg options: String, handler: (Node) -> Location){
         InteractionListeners.addDestOverrides(type,options,handler)
     }
+
+    fun setDest(type: Int, ids: IntArray, vararg options: String, handler: (Node) -> Location){
+        InteractionListeners.addDestOverrides(type,ids,options,handler)
+    }
 }
