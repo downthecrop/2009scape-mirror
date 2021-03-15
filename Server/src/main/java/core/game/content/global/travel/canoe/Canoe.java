@@ -6,10 +6,10 @@ package core.game.content.global.travel.canoe;
  * @date 09/11/2013
  */
 public enum Canoe {
-    LOG(12, 30, 30),
-    DUGOUT(27, 60, 31),
-    STABLE_DUGOUT(42, 90, 32),
-    WAKA(57, 150, 33);
+    LOG(12, 30, 30,0,0),
+    DUGOUT(27, 60, 31,9,3),
+    STABLE_DUGOUT(42, 90, 32,10,2),
+    WAKA(57, 150, 33,8,5);
 
     /**
      * Constructs a new {@code Canoe.java} {@code Object}.
@@ -17,11 +17,18 @@ public enum Canoe {
      * @param experience the experience.
      * @param child the child.
      */
-    Canoe(final int level, final double experience, final int child) {
+    Canoe(final int level, final double experience, final int child, final int silhouetteChild, final int textChild) {
         this.level = level;
         this.experience = experience;
         this.child = child;
+        this.silhouetteChild = silhouetteChild;
+        this.textChild = textChild;
+        this.maxDist = ordinal() + 1;
     }
+
+    public int silhouetteChild;
+    public int textChild;
+    public int maxDist;
 
     /**
      * Represents the woodcutting level requirement to craft the canoe.

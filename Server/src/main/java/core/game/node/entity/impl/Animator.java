@@ -132,6 +132,10 @@ public final class Animator {
 		return true;
 	}
 
+	public void stop(){
+		animate(RESET_A);
+	}
+
 	/**
 	 * Forces an animation.
 	 * @param animation The animation to display.
