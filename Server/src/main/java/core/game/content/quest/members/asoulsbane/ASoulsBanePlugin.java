@@ -1,3 +1,4 @@
+/*
 package core.game.content.quest.members.asoulsbane;
 
 import core.cache.def.impl.ObjectDefinition;
@@ -19,9 +20,11 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import rs09.plugin.PluginManager;
 
+*/
 /**
  * Author: afaroutdude
- */
+ *//*
+
 
 public class ASoulsBanePlugin extends OptionHandler {
     private static final int[] RIFT_IDS = {13967,13968,13969,13970,13971,13972,13973,13974,13975,13976,13977,13978,13979,13980,13981,13982,13983,13984,13985,13986,13987,13988,13989,13990,13991,13992,13993};
@@ -157,3 +160,4 @@ public class ASoulsBanePlugin extends OptionHandler {
         }
     }
 }
+*/

@@ -1,3 +1,4 @@
+/*
 package core.game.content.quest.members.asoulsbane;
 
 import core.game.node.entity.player.Player;
@@ -6,9 +7,11 @@ import core.plugin.Initializable;
 import rs09.game.content.quest.members.asoulsbane.SoulsBaneLaunaDialogue;
 import rs09.plugin.PluginManager;
 
+*/
 /**
  * Author: afaroutdude
- */
+ *//*
+
 @Initializable
 public class ASoulsBane extends Quest {
     public static final String NAME = "A Soul's Bane";
@@ -99,3 +102,4 @@ public class ASoulsBane extends Quest {
         }
     }
 }
+*/

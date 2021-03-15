@@ -88,6 +88,7 @@ public final class MerlinCrystal extends Quest {
 				new SirLucan(),
 				new SirMordredNPC(),
 				new SirPalomedes(),
+				new SirGawainDialogue(),
 				new TheLadyOfTheLake(),
 				new ThrantaxDialogue(),
 				new RenegadeKnightDialogue());
