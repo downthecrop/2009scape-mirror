@@ -30,6 +30,11 @@ class FarmerPayOptionHandler : InteractionListener() {
             return true
         }
 
+        if(patch.isGrown()){
+            player.dialogueInterpreter.sendDialogue("This patch is already fully grown!")
+            return true
+        }
+
         player.dialogueInterpreter.open(FarmerPayOptionDialogue(patch),node.asNpc())
         return true
     }

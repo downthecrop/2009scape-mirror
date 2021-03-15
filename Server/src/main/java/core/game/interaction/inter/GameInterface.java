@@ -24,11 +24,7 @@ public final class GameInterface extends ComponentPlugin {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ComponentDefinition.put(548, this);
-		ComponentDefinition.put(750, this);
-		ComponentDefinition.put(751, this);
 		ComponentDefinition.put(740, this);
-		ComponentDefinition.put(746, this);
 		return this;
 	}
 
