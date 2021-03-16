@@ -21,6 +21,7 @@ import core.game.world.update.flag.player.ChatFlag
 import core.tools.RandomFunction
 import rs09.game.ai.AIRepository
 import rs09.game.ai.pvmbots.CombatBotAssembler
+import rs09.game.interaction.InteractionListeners
 import java.time.LocalDateTime
 import java.time.format.DateTimeFormatter
 import kotlin.random.Random
@@ -816,9 +817,10 @@ class Adventurer(val style: CombatStyle): Script() {
                         "Maple tree","Yew","Magic tree",
                         "Teak","Mahogany")
                 val resource = scriptAPI.getNearestNodeFromList(resources,true)
-                try {
-                    resource?.interaction?.handle(bot, resource.interaction[0])
-                } catch (e: Exception){}
+                    if(resource != null){
+                            if(resource.name.contains("ocks")) InteractionListeners.run(resource.id,1,"mine",bot,resource)
+                            else InteractionListeners.run(resource.id,1,"chop down",bot,resource)
+                    }
             }
         }
         return
@@ -917,15 +919,18 @@ class Adventurer(val style: CombatStyle): Script() {
                 }
 
                 if (RandomFunction.random(1000) <= 50 && poi){
-                    val roamDistancePoi = if(poiloc == teakfarm || poiloc == crawlinghands) 5
-                    else if (poiloc == treegnome) 50
-                    else if (poiloc == isafdar) 40
-                    else if (poiloc == eaglespeek) 40
-                    else if (poiloc == keldagrimout) 40
-                    else if (poiloc == teak1) 30
-                    else if (poiloc == miningguild) 6
-                    else if (poiloc == magics || poiloc == coal) 8
-                    else if (poiloc == gemrocks || poiloc == chaosnpc) 1 else 60
+                    val roamDistancePoi = when(poiloc){
+                            teakfarm,crawlinghands -> 5
+                            treegnome -> 50
+                            isafdar -> 40
+                            eaglespeek -> 40
+                            keldagrimout -> 40
+                            teak1 -> 30
+                            miningguild -> 6
+                            magics,coal -> 8
+                            gemrocks,chaosnpc -> 1
+                            else -> 60
+                    }
                     scriptAPI.randomWalkTo(poiloc,roamDistancePoi)
                     return
                 }
