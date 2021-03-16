@@ -35,7 +35,7 @@ object InteractionListeners {
     @JvmStatic
     fun add(options: Array<out String>,type: Int,method: (Player, Node) -> Boolean){
         for(opt in options){
-            add(opt,type,method)
+            add(opt.toLowerCase(),type,method)
         }
     }
 
