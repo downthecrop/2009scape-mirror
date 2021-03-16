@@ -1,13 +1,14 @@
 package core.tools;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
-
 import core.game.node.entity.npc.drop.DropFrequency;
 import core.game.node.item.ChanceItem;
 import core.game.node.item.Item;
 import core.game.node.item.WeightedChanceItem;
+
+import java.util.*;
+import java.util.concurrent.ThreadLocalRandom;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 /**
  * Represents a class used for random methods.
@@ -42,6 +43,20 @@ public class RandomFunction {
 		final int n = Math.abs(b - a);
 		return Math.min(a, b) + (n == 0 ? 0 : random(n));
 	}
+
+	/**
+	 * Calculates the chance of succeeding at a skilling event
+	 * @param low - Success chance at level 1
+	 * @param high - Success chance at level 99
+	 * @param level - Level required
+	 * @return percent chance of success
+	 */
+	public static double getSkillSuccessChance(double low, double high, int level) {
+		// 99 & 98 numbers should *not* be adjusted for level cap > 99
+		int value = (int)(Math.floor(low*( (99-level)/98.0 ) ) + Math.floor(high*((level-1)/98.0)) + 1);
+		return Math.min(Math.max(value / 256D, 0), 1) * 100.0;
+	}
+
 
 	/**
 	 * Returns either the supplied integer, or -1 times the supplied integer.
@@ -80,6 +95,10 @@ public class RandomFunction {
 			return 0;
 		}
 		return RANDOM.nextInt(maxValue);
+	}
+
+	public static final double randomDouble(double min, double max){
+		return ThreadLocalRandom.current().nextDouble(min,max);
 	}
 
 	public static int nextInt(int val)
