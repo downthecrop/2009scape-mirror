@@ -235,7 +235,9 @@ public final class Appearance {
 	}
 
 	public void flagHatClipping() {
-		this.bodyParts[8] = 0x100;
+		boolean isBald = getHair().getLook() == (isMale() ? 0 : 45);
+		int hairLook = isBald ? getHair().getLook() : (isMale() ? 5 : 51);
+		this.bodyParts[8] = hairLook + 0x100;
 	}
 
 	/**
