@@ -138,6 +138,10 @@ public enum WoodcuttingNode {
     double experience,rate;
     byte identifier;
     boolean farming;
+    double baseLow = 64;
+    double baseHigh = 200;
+    double tierModLow = 32;
+    double tierModHigh = 100;
     WoodcuttingNode(int full, int empty,byte identifier){
         this.full = full;
         this.empty = empty;
@@ -177,6 +181,10 @@ public enum WoodcuttingNode {
                 experience = 37.5;
                 level = 15;
                 rewardAmount = 10;
+                baseLow = 32;
+                baseHigh = 100;
+                tierModLow = 16;
+                tierModHigh = 50;
                 break;
             case 8:
                 reward = 1519;
@@ -185,6 +193,10 @@ public enum WoodcuttingNode {
                 experience = 67.8;
                 level = 30;
                 rewardAmount = 20;
+                baseLow = 16;
+                baseHigh = 50;
+                tierModLow = 8;
+                tierModHigh = 25;
                 break;
             case 9:
                 reward = 6333;
@@ -193,6 +205,10 @@ public enum WoodcuttingNode {
                 experience = 85.0;
                 level = 35;
                 rewardAmount = 25;
+                baseLow = 15;
+                baseHigh = 46;
+                tierModLow = 8;
+                tierModHigh = 23.5;
                 break;
             case 10:
                 reward = 1517;
@@ -201,6 +217,10 @@ public enum WoodcuttingNode {
                 experience = 100.0;
                 level = 45;
                 rewardAmount = 30;
+                baseLow = 8;
+                baseHigh = 25;
+                tierModLow = 4;
+                tierModHigh = 12.5;
                 break;
             case 11:
                 reward = 3239;
@@ -209,6 +229,10 @@ public enum WoodcuttingNode {
                 experience = 82.5;
                 level = 45;
                 rewardAmount = 30;
+                baseLow = 18;
+                baseHigh = 26;
+                tierModLow = 10;
+                tierModHigh = 14;
                 break;
             case 12:
                 reward = 6332;
@@ -217,6 +241,10 @@ public enum WoodcuttingNode {
                 experience = 125.0;
                 level = 50;
                 rewardAmount = 35;
+                baseLow = 8;
+                baseHigh = 25;
+                tierModLow = 4;
+                tierModHigh = 12.5;
                 break;
             case 13:
                 reward = 10810;
@@ -225,6 +253,10 @@ public enum WoodcuttingNode {
                 experience = 140.2;
                 level = 54;
                 rewardAmount = 35;
+                baseLow = 6;
+                baseHigh = 30;
+                tierModLow = 3;
+                tierModHigh = 13.5;
                 break;
             case 14:
                 reward = 12581;
@@ -249,6 +281,10 @@ public enum WoodcuttingNode {
                 experience = 250.0;
                 level = 75;
                 rewardAmount = 50;
+                baseLow = 2;
+                baseHigh = 6;
+                tierModLow = 1;
+                tierModHigh = 3;
                 break;
             case 17:
                 reward = 1513;
