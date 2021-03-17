@@ -1,46 +1,23 @@
 package rs09.game.content.ame.events
 
 import core.game.component.Component
-import core.game.content.quest.PluginInteraction
-import core.game.content.quest.PluginInteractionManager
-import core.game.interaction.DestinationFlag
-import core.game.interaction.MovementPulse
-import core.game.interaction.Option
-import core.game.node.entity.npc.NPC
-import core.game.node.entity.player.Player
-import rs09.game.world.GameWorld
 import core.plugin.Initializable
-import core.plugin.Plugin
+import org.rs09.consts.NPCs
+import rs09.game.interaction.InteractionListener
 
-@Initializable
-class SandwichLadyHandler : PluginInteraction(3117){
-    override fun handle(player: Player?, npc: NPC?, option: Option?): Boolean {
-        class MoveTo : MovementPulse(player,DestinationFlag.ENTITY.getDestination(player,npc)){
-            override fun pulse(): Boolean {
-                if(player?.antiMacroHandler?.hasEvent()!! && player.antiMacroHandler.event.name == "Sandwich Lady") {
-                    player.interfaceManager?.open(Component(297))
-                    npc?.clear()
-                } else {
-                    player.sendMessage("She isn't interested in you.")
-                }
-                return true
+class SandwichLadyHandler : InteractionListener(){
+
+    val SANDWICH_LADY = NPCs.SANDWICH_LADY_3117
+    override fun defineListeners() {
+
+        on(NPC,SANDWICH_LADY,"talk-to"){player, node ->
+            if(player.antiMacroHandler?.hasEvent()!! && player.antiMacroHandler.event.name == "Sandwich Lady") {
+                player.interfaceManager?.open(Component(297))
+                node.asNpc().clear()
+            } else {
+                player.sendMessage("She isn't interested in you.")
             }
+            return@on true
         }
-
-        if(option?.name?.toLowerCase() == "talk-to"){
-            GameWorld.submit(MoveTo())
-            return true
-        }
-        return false
     }
-
-    override fun fireEvent(identifier: String?, vararg args: Any?): Any {
-        return Unit
-    }
-
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        PluginInteractionManager.register(this,PluginInteractionManager.InteractionType.NPC)
-        return this
-    }
-
 }

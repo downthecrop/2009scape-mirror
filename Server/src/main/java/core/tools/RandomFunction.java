@@ -97,6 +97,10 @@ public class RandomFunction {
 		return RANDOM.nextInt(maxValue);
 	}
 
+	public static final double randomDouble(double maxValue) {
+		return ThreadLocalRandom.current().nextDouble(0.0,maxValue);
+	}
+
 	public static final double randomDouble(double min, double max){
 		return ThreadLocalRandom.current().nextDouble(min,max);
 	}

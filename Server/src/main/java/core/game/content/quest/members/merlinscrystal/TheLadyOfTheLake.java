@@ -9,6 +9,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 
+import static rs09.tools.DialogueConstKt.END_DIALOGUE;
+
 /**
  * Handles the LadyOfTheLake dialogue.
  *
@@ -52,7 +54,7 @@ public class TheLadyOfTheLake extends DialoguePlugin {
     public boolean handle(int interfaceId, int buttonId) {
         final Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
         switch (stage) {
-			case 999:
+			case END_DIALOGUE:
 				end();
 				break;
             case 0:
@@ -75,13 +77,13 @@ public class TheLadyOfTheLake extends DialoguePlugin {
                         break;
                     case 3:
                         player("Good day.");
-                        stage = 999;
+                        stage = END_DIALOGUE;
                         break;
                 }
                 break;
             case 250:
                 npc("I am afraid I do not know what you are talking about.");
-                stage = 171;
+                stage = END_DIALOGUE;
                 break;
             case 100:
                 npc("I am the Lady of the Lake.");
@@ -131,7 +133,7 @@ public class TheLadyOfTheLake extends DialoguePlugin {
                 break;
             case 117:
                 player("Thanks!");
-                stage = 999;
+                stage = END_DIALOGUE;
                 break;
             case 145:
                 options("I seek the sword Excalibur.", "Good day.");
@@ -145,7 +147,7 @@ public class TheLadyOfTheLake extends DialoguePlugin {
                         break;
                     case 2:
                         player("Good day.");
-                        stage = 999;
+                        stage = END_DIALOGUE;
                         break;
                 }
                 break;
@@ -181,12 +183,12 @@ public class TheLadyOfTheLake extends DialoguePlugin {
                 break;
             case 167:
                 npc("Well, come back when you do.");
-                stage = 999;
+                stage = END_DIALOGUE;
                 break;
             case 168:
                 if (player.getInventory().freeSlots() == 0) {
                     player("Sorry, I don't seem to have enough inventory space.");
-                    stage = 999;
+                    stage = END_DIALOGUE;
                 } else if (player.getInventory().contains(995, 500)) {
                     player.getInventory().remove(new Item(995, 500));
                     player.getInventory().add(new Item(35, 1));
@@ -199,7 +201,7 @@ public class TheLadyOfTheLake extends DialoguePlugin {
                 break;
             case 170:
                 interpreter.sendDialogue("The lady of the Lake hands you Excalibur.");
-                stage = 999;
+                stage = END_DIALOGUE;
                 break;
             case 300:
                 npc("'Tis very valuable, and not an artefact to be given", "away lightly.");
@@ -224,7 +226,7 @@ public class TheLadyOfTheLake extends DialoguePlugin {
             case 305:
                 player("Ok. That seems easy enough.");
                 quest.setStage(player, 60);
-                stage = 171;
+                stage = END_DIALOGUE;
                 break;
             case 699:
                 options("Who are you?", "Good day.");
@@ -238,13 +240,13 @@ public class TheLadyOfTheLake extends DialoguePlugin {
                         break;
                     case 2:
                         player("Good day.");
-                        stage = 999;
+                        stage = END_DIALOGUE;
                         break;
                 }
                 break;
             case 720:
                 npc("I am the Lady of the Lake.");
-                stage = 999;
+                stage = END_DIALOGUE;
                 break;
         }
         return true;

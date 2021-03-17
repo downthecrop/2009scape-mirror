@@ -113,7 +113,7 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
             }
         }
 
-        else if(stage == 44){
+        else if(questStage == 44){
             when(stage){
                 START_DIALOGUE -> player(
                     "I spoke to the goblin generals in the goblin village. They",
