@@ -2,8 +2,9 @@ package rs09.game.content.global
 
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.tools.RandomFunction
 
-class WeightBasedTable : ArrayList<WeightedItem>() {
+open class WeightBasedTable : ArrayList<WeightedItem>() {
     var totalWeight = 0.0
     val guaranteedItems = ArrayList<WeightedItem>(5)
 
@@ -13,9 +14,9 @@ class WeightBasedTable : ArrayList<WeightedItem>() {
         else super.add(element)
     }
 
-    fun roll(player: Player): ArrayList<Item>{
+    open fun roll(player: Player): ArrayList<Item>{
         val items= ArrayList<Item>(3)
-        var tempWeight = totalWeight
+        var tempWeight = RandomFunction.randomDouble(totalWeight)
         items.addAll(guaranteedItems.map { it.getItem() }.toList())
 
         if(player.inventory.isFull){
@@ -34,7 +35,7 @@ class WeightBasedTable : ArrayList<WeightedItem>() {
         return items
     }
 
-    fun canRoll(player: Player): Boolean{
+    open fun canRoll(player: Player): Boolean{
         val guaranteed = guaranteedItems.map { it.getItem() }.toTypedArray()
         return (player.inventory.hasSpaceFor(*guaranteed) && guaranteed.isNotEmpty()) || !player.inventory.isFull
     }

@@ -35,7 +35,7 @@ class FletchingListeners : InteractionListener() {
     val UNFINISHED_ARROWS = Fletching.ArrowHeads.values().map(Fletching.ArrowHeads::unfinished).toIntArray()
     val FEATHERS = intArrayOf(FEATHER_314,STRIPY_FEATHER_10087,RED_FEATHER_10088,BLUE_FEATHER_10089,YELLOW_FEATHER_10090,ORANGE_FEATHER_10091)
     val UNSTRUNG_BOWS = Fletching.String.values().map(Fletching.String::unfinished).toIntArray()
-    val STRINGS = intArrayOf(Items.BOW_STRING_1777,Items.SINEW_9436)
+    val STRINGS = intArrayOf(Items.BOW_STRING_1777,Items.CROSSBOW_STRING_9438)
 
     override fun defineListeners() {
 

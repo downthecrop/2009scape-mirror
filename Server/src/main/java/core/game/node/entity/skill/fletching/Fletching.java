@@ -154,10 +154,10 @@ public class Fletching {
                 this.animation = animation;
                 switch(indicator & 0xFF){
                     case 1:
-                        this.string = 1777;
+                        this.string = org.rs09.consts.Items.BOW_STRING_1777;
                         break;
                     case 2:
-                        this.string = 9438;
+                        this.string = org.rs09.consts.Items.CROSSBOW_STRING_9438;
                         break;
                 }
             }
