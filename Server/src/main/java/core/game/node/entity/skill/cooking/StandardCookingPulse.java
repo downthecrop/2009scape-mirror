@@ -1,23 +1,21 @@
 package core.game.node.entity.skill.cooking;
 
 import core.game.container.impl.EquipmentContainer;
-import org.rs09.consts.Items;
-import core.game.world.map.Location;
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
-import core.game.node.entity.skill.Skills;
 import core.game.node.entity.impl.Animator;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.diary.DiaryType;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.system.task.Pulse;
+import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
-
-import static core.tools.RandomFunction.RANDOM;
+import org.rs09.consts.Items;
 
 public class StandardCookingPulse extends Pulse {
     //range animation
@@ -118,21 +116,19 @@ public class StandardCookingPulse extends Pulse {
     public boolean isBurned(final Player player, final GameObject object, int food) {
         boolean hasGauntlets = player.getEquipment().containsItem(new Item(Items.COOKING_GAUNTLETS_775));
         double burn_stop = (double) CookableItems.getBurnLevel(food);
+        CookableItems item = CookableItems.forId(food);
         if (hasGauntlets && (food == Items.RAW_SWORDFISH_371 || food == Items.RAW_LOBSTER_377 || food == Items.RAW_SHARK_383)) {
             burn_stop -= 6;
         }
         if (player.getSkills().getLevel(Skills.COOKING) > burn_stop) {
             return false;
         }
-        double burn_chance = 60.0 + (object.getName().equals("fire") ? 1.00 : 0) - (object.getId() == 114 ? 1.00 : 0);
-        double cook_level = (double) player.getSkills().getLevel(Skills.COOKING);
-        double lev_needed = (double) CookableItems.forId(food).level;
-        double multi_a = (burn_stop - lev_needed);
-        double burn_dec = (burn_chance / multi_a);
-        double multi_b = (cook_level - lev_needed);
-        burn_chance -= (multi_b * burn_dec);
-        double randNum = RANDOM.nextDouble() * 100.0;
-        return !(burn_chance <= randNum);
+        int cook_level = player.getSkills().getLevel(Skills.COOKING);
+        double host_ratio = RandomFunction.randomDouble(100.0);
+        double low = item.low + (object.getName().contains("fire") ? 0 : (0.1 * item.low));
+        double high = item.high + (object.getName().contains("fire") ? 0 : (0.1 * item.high));
+        double client_ratio = RandomFunction.getSkillSuccessChance(low,high,cook_level);
+        return host_ratio > client_ratio;
     }
 
     public boolean cook(final Player player, final GameObject object, final boolean burned, final int initial, final int product) {

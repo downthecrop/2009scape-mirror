@@ -65,15 +65,12 @@ public final class SuperheatSpell extends MagicSpell {
 			player.sendMessage("You need a Smithing level of at least " + bar.getLevel() + " to do this.");
 			return false;
 		}
-		boolean hasOres = true;
 		for (Item items : bar.getOres()) {
-			if (!player.getInventory().contains(items.getId(), item.getAmount())) {
+			if (!player.getInventory().contains(items.getId(), items.getAmount())) {
 				player.getPacketDispatch().sendMessage("You do not have the required ores to make this bar.");
-				hasOres = false;
-				break;
+				return false;
 			}
 		}
-		if(!hasOres) return false;
 		if (!super.meetsRequirements(entity, true, true)) {
 			return false;
 		}
