@@ -19,8 +19,8 @@ class WorldEventInitializer : Plugin<Any>{
          * a list. It also prevents unnecessary plugins from being loaded if an event isn't currently active.
          */
 
-        val result = ClassGraph().enableClassInfo().whitelistPackages("core.game.content.global.worldevents").scan()
-        result.getSubclasses("core.game.content.global.worldevents.WorldEvent").forEach(Consumer { p: ClassInfo ->
+        val result = ClassGraph().enableClassInfo().whitelistPackages("rs09.game.content.global.worldevents").scan()
+        result.getSubclasses("rs09.game.content.global.worldevents.WorldEvent").forEach(Consumer { p: ClassInfo ->
             val c = p.loadClass().newInstance() as WorldEvent
             if(c.checkActive()) c.initialize().also { WorldEvents.add(c) }
         })
