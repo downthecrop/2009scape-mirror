@@ -116,7 +116,7 @@ public class WoodcuttingSkillPulse extends Pulse {
             player.getDialogueInterpreter().sendDialogues(2574, FacialExpression.FURIOUS, RandomFunction.random(2) == 1 ? "You'll blow my cover! I'm meant to be hidden!" : "Will you stop that?");
             return true;
         }
-        if (!checkReward()) {
+        if (!checkReward(SkillingTool.getHatchet(player))) {
             return false;
         }
 
@@ -316,11 +316,15 @@ public class WoodcuttingSkillPulse extends Pulse {
      *
      * @return {@code True} if so.
      */
-    private boolean checkReward() {
+    private boolean checkReward(SkillingTool tool) {
         int skill = Skills.WOODCUTTING;
-        int level = 1 + player.getSkills().getLevel(skill) + player.getFamiliarManager().getBoost(skill);
-        double hostRatio = Math.random() * (100.0 * resource.getRate());
-        double clientRatio = Math.random() * ((level - resource.getLevel()) * (1.0 + SkillingTool.getHatchet(player).getRatio()));
+        int level = player.getSkills().getLevel(skill) + player.getFamiliarManager().getBoost(skill);
+        double hostRatio = RandomFunction.randomDouble(100.0);
+        double lowMod = tool == SkillingTool.BLACK_AXE ? resource.tierModLow / 2 : resource.tierModLow;
+        double low = resource.baseLow + (tool.ordinal() * lowMod);
+        double highMod = tool == SkillingTool.BLACK_AXE ? resource.tierModHigh / 2 : resource.tierModHigh;
+        double high = resource.baseHigh + (tool.ordinal() * highMod);
+        double clientRatio = RandomFunction.getSkillSuccessChance(low,high,level);
         return hostRatio < clientRatio;
     }
 }
