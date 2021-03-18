@@ -24,7 +24,7 @@ class DukeHoracioDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
-        if (player.questRepository.getQuest("Dragon Slayer").getStage(player) == 100 && !player.inventory.containsItem(DragonSlayer.SHIELD) && !player.bank.containsItem(DragonSlayer.SHIELD) || !player.questRepository.getQuest("Dragon Slayer").isStarted(player) && !player.questRepository.getQuest("Dragon Slayer").isCompleted(player)) {
+        if ((player.questRepository.getQuest("Dragon Slayer").getStage(player) == 100 && !player.inventory.containsItem(DragonSlayer.SHIELD) && !player.bank.containsItem(DragonSlayer.SHIELD) )|| (player.questRepository.getQuest("Dragon Slayer").isStarted(player) && !player.questRepository.getQuest("Dragon Slayer").isCompleted(player))) {
             addOption("Dragon Slayer", DukeHoracioDSDialogue(player.questRepository.getStage("Dragon Slayer")))
         }
         if (!player.questRepository.isComplete("Lost Tribe") && player.questRepository.getQuest("Lost Tribe").isStarted(player)) {
