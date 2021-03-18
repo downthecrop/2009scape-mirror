@@ -53,7 +53,6 @@ public abstract class AntiMacroDialogue extends DialoguePlugin {
 			asAme().getProperties().getCombatPulse().stop();
 		}
 
-		setEvent(player.getAntiMacroHandler().getEvent());
 		return true;
 	}
 

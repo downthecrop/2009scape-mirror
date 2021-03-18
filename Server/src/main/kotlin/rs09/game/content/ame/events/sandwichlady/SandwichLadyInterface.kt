@@ -1,6 +1,5 @@
-package rs09.game.content.ame.events
+package rs09.game.content.ame.events.sandwichlady
 
-import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import org.rs09.consts.Items
 import rs09.game.interaction.InterfaceListener
@@ -30,12 +29,9 @@ class SandwichLadyInterface  : InterfaceListener(){
                 else -> {Item(baguette)}
             }
 
-            if(!player.inventory.add(item)){
-                GroundItemManager.create(item,player)
-            }
-
+            player.setAttribute("sandwich-lady:choice",item.id)
             player.interfaceManager.close()
-            player.antiMacroHandler.event.terminate()
+            player.dialogueInterpreter.open(SandwichLadyDialogue(true),player.antiMacroHandler.event)
             return@on true
         }
     }

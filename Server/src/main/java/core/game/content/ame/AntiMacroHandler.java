@@ -1,17 +1,15 @@
 package core.game.content.ame;
 
-import core.cache.misc.buffer.ByteBufferUtils;
-import rs09.game.system.SystemLogger;
-import core.game.world.map.zone.impl.WildernessZone;
-import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-
-import rs09.game.world.GameWorld;
+import core.game.node.entity.skill.Skills;
 import core.game.world.map.zone.ZoneRestriction;
+import core.game.world.map.zone.impl.WildernessZone;
 import core.tools.RandomFunction;
+import rs09.game.content.ame.RandomEventNPC;
+import rs09.game.system.SystemLogger;
+import rs09.game.world.GameWorld;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -56,7 +54,7 @@ public final class AntiMacroHandler {
 	/**
 	 * The current event.
 	 */
-	private AntiMacroEvent event;
+	private RandomEventNPC event;
 
 	public ExperienceMonitor[] monitors = new ExperienceMonitor[Skills.SKILL_NAME.length];
 
@@ -66,14 +64,6 @@ public final class AntiMacroHandler {
 	 */
 	public AntiMacroHandler(Player player) {
 		this.player = player;
-	}
-
-	/**
-	 * Checks if saving is required.
-	 * @return {@code True} if so.
-	 */
-	public boolean isSaveRequired() {
-		return hasEvent() && event.isSaveRequired();
 	}
 
 	/**
@@ -116,9 +106,6 @@ public final class AntiMacroHandler {
 		} else {
 			nextPulse = GameWorld.getTicks() + DELAY;
 		}
-		if (event != null) {
-			event.start(player, true);
-		}
 		if(!player.isArtificial() && !isDisabled) {
 			SystemLogger.logInfo("Anti-Macro: Initialized anti-macro handler for " + player.getUsername());
 		}
@@ -147,12 +134,12 @@ public final class AntiMacroHandler {
 			return false;
 		}
 		AntiMacroNPC n = (AntiMacroNPC) npc;
-		if (n.getEvent() != event) {
+		/*if (n.getEvent() != event) {
 			if (message) {
 				player.getPacketDispatch().sendMessage("They don't seem interested in talking to you.");
 			}
 			return false;
-		}
+		}*/
 		return true;
 	}
 
@@ -183,7 +170,7 @@ public final class AntiMacroHandler {
 			return false;
 		}
 		//resetTrigger();
-		this.event = event;
+		//this.event = event;
 		return true;
 	}
 
@@ -194,7 +181,7 @@ public final class AntiMacroHandler {
 	 * @return {@code True} if the event has been fired.
 	 */
 	public boolean fireEvent(int skillId, Object... args) {
-		nextPulse = DELAY + GameWorld.getTicks();
+		/*nextPulse = DELAY + GameWorld.getTicks();
 		if (hasEvent() || EVENTS.isEmpty() || player.getZoneMonitor().isRestricted(ZoneRestriction.RANDOM_EVENTS) || player.isArtificial()) {
 			return false;
 		}
@@ -207,7 +194,7 @@ public final class AntiMacroHandler {
 				return true;
 			}
 			event = null;
-		}
+		}*/
 		return false;
 	}
 
@@ -236,7 +223,7 @@ public final class AntiMacroHandler {
 	 * @return {@code True} if so.
 	 */
 	public boolean hasEvent() {
-		return event != null && !event.isTerminated();
+		return event != null;
 	}
 
 	/**
@@ -251,7 +238,7 @@ public final class AntiMacroHandler {
 	 * Gets the event.
 	 * @return The event.
 	 */
-	public AntiMacroEvent getEvent() {
+	public RandomEventNPC getEvent() {
 		return event;
 	}
 
@@ -259,7 +246,7 @@ public final class AntiMacroHandler {
 	 * Sets the event.
 	 * @param event The event to set.
 	 */
-	public void setEvent(AntiMacroEvent event) {
+	public void setEvent(RandomEventNPC event) {
 		this.event = event;
 	}
 }

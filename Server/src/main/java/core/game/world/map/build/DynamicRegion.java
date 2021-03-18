@@ -64,6 +64,8 @@ public final class DynamicRegion extends Region {
 	 */
 	private DynamicRegion parentRegion;
 
+	public ArrayList<NPC> NPCs = new ArrayList<>(10);
+
 	/**
 	 * Constructs a new {@code DynamicRegion} {@code Object}.
 	 * @param regionId The region id of the region to copy.
@@ -466,5 +468,12 @@ public final class DynamicRegion extends Region {
 	 */
 	public DynamicRegion getParent() {
 		return parentRegion;
+	}
+
+	public void clear(){
+		for(NPC n : NPCs){
+			n.clear();
+		}
+		NPCs.clear();
 	}
 }
