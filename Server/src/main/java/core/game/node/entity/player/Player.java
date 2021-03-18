@@ -6,7 +6,6 @@ import core.game.container.impl.BankContainer;
 import core.game.container.impl.EquipmentContainer;
 import core.game.container.impl.InventoryListener;
 import core.game.content.activity.pyramidplunder.PlunderObjectManager;
-import core.game.content.ame.AntiMacroHandler;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.quest.miniquest.barcrawl.BarcrawlManager;
 import core.game.content.ttrail.TreasureTrailManager;
@@ -73,6 +72,7 @@ import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import rs09.ServerConstants;
 import rs09.game.VarpManager;
+import rs09.game.content.ame.RandomEventManager;
 import rs09.game.ge.PlayerGrandExchange;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
@@ -277,7 +277,7 @@ public class Player extends Entity {
 	/**
 	 * The anti macro handler.
 	 */
-	private final AntiMacroHandler antiMacroHandler = new AntiMacroHandler(this);
+	private final RandomEventManager antiMacroHandler = new RandomEventManager(this);
 
 	/**
 	 * The hunter manager.
@@ -365,7 +365,6 @@ public class Player extends Entity {
 
 	@Override
 	public void init() {
-		antiMacroHandler.isDisabled = getAttribute("randoms:disabled",false);
 		if (!artificial) {
 			getProperties().setSpawnLocation(ServerConstants.HOME_LOCATION);
 			getDetails().getSession().setObject(this);
@@ -467,7 +466,7 @@ public class Player extends Entity {
 	@Override
 	public void tick() {
 		super.tick();
-		antiMacroHandler.pulse();
+		antiMacroHandler.tick();
 		hunterManager.pulse();
 		musicPlayer.tick();
 		if(getAttribute("fire:immune",0) > 0){
@@ -1199,7 +1198,7 @@ public class Player extends Entity {
 	 * Gets the antiMacroHandler.
 	 * @return The antiMacroHandler.
 	 */
-	public AntiMacroHandler getAntiMacroHandler() {
+	public RandomEventManager getAntiMacroHandler() {
 		return antiMacroHandler;
 	}
 

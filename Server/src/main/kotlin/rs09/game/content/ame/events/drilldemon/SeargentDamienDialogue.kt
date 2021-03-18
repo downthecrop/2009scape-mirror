@@ -39,11 +39,11 @@ class SeargentDamienDialogue(val isCorrect: Boolean = false) : DialogueFile() {
                     1 -> {
                         end()
                         DrillDemonUtils.teleport(player!!)
-                        player!!.antiMacroHandler.event.terminate()
+                        player!!.antiMacroHandler.event?.terminate()
                         stage = END_DIALOGUE
                     }
                     2 -> {
-                        player!!.antiMacroHandler.event.terminate()
+                        player!!.antiMacroHandler.event?.terminate()
                         stage = END_DIALOGUE
                     }
                 }

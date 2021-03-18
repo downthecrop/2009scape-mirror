@@ -25,7 +25,7 @@ class CerterEventInterface : InterfaceListener() {
             val correctAnswer = player.getAttribute("certer:correctIndex",0)
             player.setAttribute("certer:correct",correctAnswer == answer)
             player.interfaceManager.close()
-            player.dialogueInterpreter.open(CerterDialogue(false),player.antiMacroHandler.event.asNpc())
+            player.dialogueInterpreter.open(CerterDialogue(false),player.antiMacroHandler.event?.asNpc())
             return@on true
         }
 

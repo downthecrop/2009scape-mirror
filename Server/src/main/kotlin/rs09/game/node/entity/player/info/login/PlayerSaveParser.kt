@@ -1,6 +1,5 @@
 package rs09.game.node.entity.player.info.login
 
-import core.game.content.ame.AntiMacroHandler
 import core.game.interaction.item.brawling_gloves.BrawlingGloves
 import core.game.node.entity.combat.CombatSpell
 import core.game.node.entity.player.Player
@@ -186,11 +185,6 @@ class PlayerSaveParser(val player: Player) {
     }
 
     fun parseAntiMacro() {
-        if (saveFile!!.containsKey("antiMacroEvent")) {
-            val event: JSONObject = saveFile!!["antiMacroEvent"] as JSONObject
-            val ame = AntiMacroHandler.EVENTS.get(event.get("eventName") as String)
-            ame?.create(player)
-        }
     }
 
     fun parseStates() {

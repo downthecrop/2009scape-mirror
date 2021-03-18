@@ -124,11 +124,11 @@ public class WoodcuttingSkillPulse extends Pulse {
 
 
         // If player is in donator zone
-        if (player.getLocation().getRegionId() == 12102) {
+       /* if (player.getLocation().getRegionId() == 12102) {
             player.getAntiMacroHandler().fireEvent("tree spirit");
             return true;
         }
-
+*/
         // 20% chance to auto burn logs when using "inferno adze" item
         if (SkillingTool.getHatchet(player).getId() == 13661 && RandomFunction.random(100) < 25) {
             player.sendMessage("You chop some logs. The heat of the inferno adze incinerates them.");

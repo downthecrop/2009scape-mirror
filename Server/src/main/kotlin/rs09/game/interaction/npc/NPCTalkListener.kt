@@ -16,10 +16,10 @@ class NPCTalkListener : InteractionListener() {
         on(NPC,"talk-to","talk"){player,node ->
             val npc = node.asNpc()
             if(RandomEvents.randomIDs.contains(node.id)){
-                if(player.antiMacroHandler.event == null || player.antiMacroHandler.event.id != node.id){
+                if(player.antiMacroHandler.event == null || player.antiMacroHandler.event!!.id != node.id){
                     player.sendMessage("They aren't interested in talking to you.")
                 } else {
-                    player.antiMacroHandler.event.talkTo(node.asNpc())
+                    player.antiMacroHandler.event!!.talkTo(node.asNpc())
                 }
                 return@on true
             }
