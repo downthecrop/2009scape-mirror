@@ -1,6 +1,7 @@
 package rs09.game.content.ame
 
 import org.rs09.consts.Items
+import rs09.game.content.ame.events.MysteriousOldManNPC
 import rs09.game.content.ame.events.certer.CerterNPC
 import rs09.game.content.ame.events.drilldemon.SeargentDamienNPC
 import rs09.game.content.ame.events.sandwichlady.SandwichLadyRENPC
@@ -26,7 +27,14 @@ enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = n
         WeightedItem(Items.TOOTH_HALF_OF_A_KEY_985,1,1,1.0),
         WeightedItem(Items.LOOP_HALF_OF_A_KEY_987,1,1,1.0)
     )),
-    DRILL_DEMON(SeargentDamienNPC());
+    DRILL_DEMON(SeargentDamienNPC()),
+    SURPRISE_EXAM(MysteriousOldManNPC(),"sexam");
+
+    var type: String = ""
+
+    constructor(npc: RandomEventNPC, type: String) : this(npc,null){
+        this.type = type
+    }
 
     companion object {
         @JvmField

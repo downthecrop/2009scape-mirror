@@ -103,4 +103,8 @@ abstract class DialogueFile {
         return this + stage
     }
 
+    fun dialogue(vararg messages: String){
+        player?.dialogueInterpreter?.sendDialogue(*messages)
+    }
+
 }
