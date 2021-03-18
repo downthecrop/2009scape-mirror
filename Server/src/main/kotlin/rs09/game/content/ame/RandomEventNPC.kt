@@ -9,6 +9,7 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Graphics
+import rs09.game.content.ame.events.MysteriousOldManNPC
 import rs09.game.content.global.WeightBasedTable
 import rs09.game.world.GameWorld.Pulser
 import rs09.tools.secondsToTicks
@@ -23,8 +24,9 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     var initialized = false
     var ticksLeft = secondsToTicks(600)
 
-    open fun create(player: Player, loot: WeightBasedTable? = null): RandomEventNPC{
+    open fun create(player: Player, loot: WeightBasedTable? = null, type: String = ""): RandomEventNPC{
         val event = this::class.createInstance()
+        if(event is MysteriousOldManNPC) event.type = type
         event.loot = loot
         event.player = player
         event.spawnLocation = RegionManager.getSpawnLocation(player,this)
@@ -53,7 +55,6 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
         pulseManager.run(object : MovementPulse(this,player, Pathfinder.DUMB){
             override fun pulse(): Boolean {
                 face(player)
-                7
                 return false
             }
         })

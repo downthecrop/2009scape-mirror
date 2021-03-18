@@ -16,7 +16,7 @@ class RandomEventManager(val player: Player) {
 
     fun fireEvent(){
         val ame = RandomEvents.values().random()
-        event = ame.npc.create(player,ame.loot)
+        event = ame.npc.create(player,ame.loot,ame.type)
         event!!.init()
         nextSpawn = GameWorld.ticks + DELAY_TICKS
         SystemLogger.logRE("Fired ${event!!.name} for ${player.username}")
