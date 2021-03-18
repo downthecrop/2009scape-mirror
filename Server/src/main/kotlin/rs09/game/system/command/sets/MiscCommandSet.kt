@@ -18,6 +18,7 @@ import core.tools.StringUtils
 import org.rs09.consts.Components
 import rs09.ServerConstants
 import rs09.game.content.activity.fishingtrawler.TrawlerLoot
+import rs09.game.content.ame.RandomEvents
 import rs09.game.ge.OfferManager
 import rs09.game.node.entity.state.newsys.states.FarmingState
 import rs09.game.system.SystemLogger
@@ -453,6 +454,11 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             for(bin in state.getBins()){
                 bin.finishedTime = System.currentTimeMillis()
             }
+        }
+
+        define("testlady",Command.Privilege.ADMIN){player,_ ->
+            player.antiMacroHandler.event = RandomEvents.DRILL_DEMON.npc.create(player,null)
+            player.antiMacroHandler.event.init()
         }
     }
 }

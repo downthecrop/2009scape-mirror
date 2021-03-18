@@ -52,10 +52,6 @@ import core.game.world.map.*;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.map.zone.ZoneType;
-import rs09.game.world.update.MapChunkRenderer;
-import rs09.game.world.update.NPCRenderer;
-import rs09.game.world.update.PlayerRenderer;
-import rs09.game.world.update.UpdateSequence;
 import core.game.world.update.flag.PlayerFlags;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
@@ -73,6 +69,8 @@ import core.net.packet.out.UpdateSceneGraph;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 import rs09.ServerConstants;
 import rs09.game.VarpManager;
 import rs09.game.ge.PlayerGrandExchange;
@@ -83,6 +81,10 @@ import rs09.game.node.entity.state.newsys.State;
 import rs09.game.node.entity.state.newsys.StateRepository;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
+import rs09.game.world.update.MapChunkRenderer;
+import rs09.game.world.update.NPCRenderer;
+import rs09.game.world.update.PlayerRenderer;
+import rs09.game.world.update.UpdateSequence;
 import rs09.tools.TickUtilsKt;
 
 import java.util.*;
@@ -120,6 +122,8 @@ public class Player extends Entity {
 	public VarpManager varpManager = new VarpManager(this);
 
 	public HashMap<String,State> states = new HashMap<>();
+
+	public HashMap<String,Function1<Player, Unit>> logoutListeners = new HashMap<>();
 
 	/**
 	 * The inventory.
@@ -403,6 +407,9 @@ public class Player extends Entity {
 					throwable.printStackTrace();
 				}
 			});
+		}
+		if(!logoutListeners.isEmpty()){
+			logoutListeners.forEach((key,method) -> method.invoke(this));
 		}
 		if (familiarManager.hasFamiliar()) {
 			familiarManager.getFamiliar().clear();
@@ -1362,5 +1369,13 @@ public class Player extends Entity {
 		if(state == null) return;
 		state.getPulse().stop();
 		states.remove(key);
+	}
+
+	public void addLogoutListener(String key, Function1<Player,Unit> listener){
+		logoutListeners.put(key,listener);
+	}
+
+	public void removeLogoutListener(String key){
+		logoutListeners.remove(key);
 	}
 }

@@ -1,14 +1,12 @@
 package core.game.content.ame.events.genie;
 
-import java.nio.ByteBuffer;
-
 import core.game.content.ame.AntiMacroDialogue;
 import core.game.content.ame.AntiMacroEvent;
-import core.plugin.Initializable;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.map.Location;
+import core.plugin.Initializable;
 import rs09.plugin.PluginManager;
 
 /**
@@ -98,7 +96,6 @@ public final class GenieRandomEvent extends AntiMacroEvent {
 		@Override
 		public boolean open(Object... args) {
 			if (super.open(args)) {
-				npc("Ah, so you are there " + player.getAntiMacroHandler().getEvent().getGenderPrefix().toLowerCase() + ". I'm so glad you", "summoned me. Please take this lamp and make your", "wish!");
 			}
 			return true;
 		}

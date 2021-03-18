@@ -1,10 +1,12 @@
 package rs09.game.node.entity.state.newsys.states
 
 import core.game.node.entity.player.Player
-import rs09.game.node.entity.state.newsys.State
 import core.game.system.task.Pulse
 import org.json.simple.JSONObject
+import rs09.game.node.entity.state.newsys.PlayerState
+import rs09.game.node.entity.state.newsys.State
 
+@PlayerState("skull")
 class SkulledState(player: Player? = null) : State(player) {
     var ticksLeft = 2000
 
