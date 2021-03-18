@@ -43,6 +43,7 @@ class SeargentDamienDialogue(val isCorrect: Boolean = false) : DialogueFile() {
                         stage = END_DIALOGUE
                     }
                     2 -> {
+                        end()
                         player!!.antiMacroHandler.event?.terminate()
                         stage = END_DIALOGUE
                     }
