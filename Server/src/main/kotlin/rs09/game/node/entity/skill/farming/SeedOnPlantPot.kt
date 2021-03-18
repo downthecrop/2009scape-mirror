@@ -31,6 +31,13 @@ class SeedOnPlantPot : UseWithHandler(Items.ACORN_5312,
             Items.MAPLE_SEED_5314 -> Items.MAPLE_SEEDLING_5360
             Items.YEW_SEED_5315 -> Items.YEW_SEEDLING_5361
             Items.MAGIC_SEED_5316 -> Items.MAGIC_SEEDLING_5362
+            Items.APPLE_TREE_SEED_5283 -> Items.APPLE_SEEDLING_5480
+            Items.BANANA_TREE_SEED_5284 -> Items.BANANA_SEEDLING_5481
+            Items.ORANGE_TREE_SEED_5285 -> Items.ORANGE_SEEDLING_5482
+            Items.CURRY_TREE_SEED_5286 -> Items.CURRY_SEEDLING_5483
+            Items.PINEAPPLE_SEED_5287 -> Items.PINEAPPLE_SEEDLING_5484
+            Items.PAPAYA_TREE_SEED_5288 -> Items.PAPAYA_SEEDLING_5485
+            Items.PALM_TREE_SEED_5289 -> Items.PALM_SEEDLING_5486
             else -> return false
         }
 
