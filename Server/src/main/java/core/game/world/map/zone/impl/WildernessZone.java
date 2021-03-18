@@ -2,7 +2,6 @@ package core.game.world.map.zone.impl;
 
 import core.game.component.Component;
 import core.game.container.Container;
-import core.game.content.ame.AntiMacroNPC;
 import core.game.content.ttrail.UriNPC;
 import core.game.interaction.Option;
 import core.game.interaction.item.brawling_gloves.BrawlingGloves;
@@ -196,7 +195,7 @@ public final class WildernessZone extends MapZone {
 
 			}
 
-			if (e instanceof NPC || e instanceof AntiMacroNPC) {
+			if (e instanceof NPC) {
 				e.asNpc().setRespawnTick(GameWorld.getTicks() + e.asNpc().getDefinition().getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));
 				if (!e.asNpc().isRespawn()) {
 					e.asNpc().clear();
@@ -238,7 +237,6 @@ public final class WildernessZone extends MapZone {
 				p.getSkullManager().setWilderness(true);
 				p.getSkullManager().setLevel(getWilderness(p));
 			}
-			p.getAntiMacroHandler().isDisabled = true;
 			for (int i = 0; i < 7; i++) {
 				if (i == 5 || i == 3) {
 					continue;
@@ -270,7 +268,6 @@ public final class WildernessZone extends MapZone {
 		if (!logout && e instanceof Player) {
 			Player p = (Player) e;
 			leave(p);
-			p.getAntiMacroHandler().isDisabled = p.getAttribute("randoms:disabled",false);
 			if (p.getFamiliarManager().hasFamiliar() && !p.getFamiliarManager().hasPet()) {
 				Familiar familiar = p.getFamiliarManager().getFamiliar();
 				if (familiar.isCombatFamiliar()) {

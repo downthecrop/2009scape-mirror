@@ -26,13 +26,13 @@ class SandwichLadyDialogue(val isChoice: Boolean) : DialogueFile() {
                 0 -> if(choice != assigned){
                     npc!!.sendChat("That's not what I said you could have!")
                     player!!.impactHandler.manualHit(npc,3,ImpactHandler.HitsplatType.NORMAL)
-                    player!!.antiMacroHandler.event.terminate()
+                    player!!.antiMacroHandler.event?.terminate()
                 } else {
                     npc("Here you are, dear. I hope you enjoy it!")
                     if(!player!!.inventory.add(Item(assigned))){
                         GroundItemManager.create(Item(assigned),player)
                     }
-                    player!!.antiMacroHandler.event.terminate()
+                    player!!.antiMacroHandler.event?.terminate()
                     stage = END_DIALOGUE
                 }
             }

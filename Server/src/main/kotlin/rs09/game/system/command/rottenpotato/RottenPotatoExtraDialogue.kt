@@ -96,7 +96,7 @@ class RottenPotatoExtraDialogue(player: Player? = null) : DialoguePlugin(player)
                             return true
                         }
 
-                        other?.antiMacroHandler?.fireEvent(AMEs[buttonId - 1])
+                        //other?.antiMacroHandler?.fireEvent(AMEs[buttonId - 1])
 
                         return true
                     }

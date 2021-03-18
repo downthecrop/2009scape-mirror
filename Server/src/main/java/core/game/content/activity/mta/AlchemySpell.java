@@ -65,10 +65,6 @@ public final class AlchemySpell extends MagicSpell {
 		Item item = (Item) target;
 		Player p = (Player) entity;
 		p.getInterfaceManager().setViewedTab(6);
-		if (p.getAntiMacroHandler().hasEvent()) {
-			p.getPacketDispatch().sendMessage("You can't do that right now.");
-			return false;
-		}
 		if (item == null || p.getInventory().get(item.getSlot()) != item) {
 			p.sendMessage("Error! Report to admin.");
 			return false;

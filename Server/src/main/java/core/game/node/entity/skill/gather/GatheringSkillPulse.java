@@ -7,21 +7,20 @@ import core.game.content.global.BirdNest;
 import core.game.content.global.SkillingPets;
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
-import core.game.node.entity.skill.SkillPulse;
-import core.game.node.entity.skill.Skills;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.SkillPulse;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.node.object.ObjectBuilder;
-import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
+import rs09.game.world.GameWorld;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
 /**
  * Handles a gathering skill, such as woodcutting, mining, ...
@@ -137,11 +136,6 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 			TutorialStage.load(player, 39, false);
 		} else if (tutorialStage == 37 && node.getId() == 3042) {
 			TutorialStage.load(player, 39, false);
-		}
-		// If player is in donator zone
-		if (isWoodcutting && player.getLocation().getRegionId() == 12102) {
-			player.getAntiMacroHandler().fireEvent("tree spirit");
-			return true;
 		}
 		// 20% chance to auto burn logs when using "inferno adze" item
 		if (isWoodcutting && tool.getId() == 13661 && RandomFunction.random(100) < 20){

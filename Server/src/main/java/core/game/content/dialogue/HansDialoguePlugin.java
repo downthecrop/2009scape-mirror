@@ -6,6 +6,8 @@ import core.game.world.map.zone.ZoneBorders;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
 
+import static rs09.tools.DialogueConstKt.END_DIALOGUE;
+
 
 /**
  * Represents the dialogue plugin used for the hans npc.
@@ -112,15 +114,9 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 						}
 						break;
 					case 4:
-						if(player.getAntiMacroHandler().isDisabled){
-							interpreter.sendOptions("Select an Option","I want to enable random events.","Nevermind.");
-							stage = 130;
-							break;
-						} else {
-							interpreter.sendOptions("Select an Option","I want to disable random events.","Nevermind.");
-							stage = 135;
-							break;
-						}
+						interpreter.sendDialogue("Randoms are now permanently enabled. This option to be removed","at a later date.");
+						stage = END_DIALOGUE;
+						break;
 					case 5: // Go back
 						interpreter.sendOptions("Select an Option", "I'm looking for whoever is in charge of this place.", "I have come to kill everyone in this castle!", "I don't know. I'm lost. Where am I?", "More Options...");
 						stage = 1;
@@ -322,37 +318,8 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 				}
 				break;
 
-			case 130:
-				switch(buttonId){
-					case 1:
-						npc("Voila, you should now get random events!");
-						player.getAntiMacroHandler().isDisabled = false;
-						player.setAttribute("/save:randoms:disabled",false);
-						player.getAntiMacroHandler().init();
-						stage = 131;
-						break;
-					case 2:
-						player("Never mind.");
-						stage = 131;
-						break;
-				}
-				break;
 			case 131:
 				end();
-				break;
-			case 135:
-				switch(buttonId){
-					case 1:
-						npc("Voila, you shouldn't get random events now!");
-						player.getAntiMacroHandler().isDisabled = true;
-						player.setAttribute("/save:randoms:disabled",true);
-						stage = 131;
-						break;
-					case 2:
-						player("Never mind.");
-						stage = 131;
-						break;
-				}
 				break;
 			//Change Iron man mode dialogue/code
 			case 150:

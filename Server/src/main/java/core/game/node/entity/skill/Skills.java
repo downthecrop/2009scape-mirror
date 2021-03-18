@@ -1,6 +1,5 @@
 package core.game.node.entity.skill;
 
-import core.game.content.ame.ExperienceMonitor;
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.interaction.item.brawling_gloves.BrawlingGloves;
 import core.game.node.entity.Entity;
@@ -238,12 +237,6 @@ public final class Skills {
 			}
 		}
 		this.experience[slot] += experienceAdd;
-		try {
-			player.getAntiMacroHandler().monitors[slot].setExperienceAmount((int) experienceAdd);
-		} catch (Exception e){
-			player.getAntiMacroHandler().monitors[slot] = new ExperienceMonitor(slot);
-			player.getAntiMacroHandler().monitors[slot].setExperienceAmount((int) experienceAdd);
-		}
 		if (this.experience[slot] >= 200000000) {
 			if(!already200m && !player.isArtificial()){
 				Repository.sendNews(entity.asPlayer().getUsername()+" has just reached 200m experience in " + SKILL_NAME[slot] + "!");

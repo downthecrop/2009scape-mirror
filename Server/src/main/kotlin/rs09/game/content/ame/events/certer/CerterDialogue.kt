@@ -18,11 +18,11 @@ class CerterDialogue(val initial: Boolean) : DialogueFile() {
         } else {
             val isCorrect = player!!.getAttribute("certer:correct",false)
             when(stage){
-                0 -> if(!isCorrect) npc("Sorry, I don't think so.").also { stage = END_DIALOGUE; player!!.antiMacroHandler.event.terminate() } else npc("Oh yes! That's right.").also { stage++ }
+                0 -> if(!isCorrect) npc("Sorry, I don't think so.").also { stage = END_DIALOGUE; player!!.antiMacroHandler.event?.terminate() } else npc("Oh yes! That's right.").also { stage++ }
                 1 -> {
                     npc("Please, take this as a thanks.")
-                    player!!.antiMacroHandler.event.loot!!.roll(player!!).forEach { player!!.inventory.add(it) }
-                    player!!.antiMacroHandler.event.terminate()
+                    player!!.antiMacroHandler.event?.loot!!.roll(player!!).forEach { player!!.inventory.add(it) }
+                    player!!.antiMacroHandler.event?.terminate()
                     stage = END_DIALOGUE
                 }
             }
