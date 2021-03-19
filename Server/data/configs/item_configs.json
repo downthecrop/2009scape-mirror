@@ -138650,5 +138650,23 @@
       "ge_buy_limit": "100",
       "archery_ticket_price": "0",
       "durability": null
+    },
+    {
+      "id": "14648",
+      "name": "Jangles the Monkey Backpack",
+      "examine": "A totally alive monkey friend for your back!",
+      "tradeable": "false",
+      "low_alchemy": "0",
+      "high_alchemy": "1",
+      "destroy": "true",
+      "shop_price": "0",
+      "grand_exchange_price": "0",
+      "equipment_slot": "1",
+      "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+      "weight": "0.0",
+      "ge_buy_limit": "0",
+      "archery_ticket_price": "0",
+      "durability": null
     }
+
 ]
