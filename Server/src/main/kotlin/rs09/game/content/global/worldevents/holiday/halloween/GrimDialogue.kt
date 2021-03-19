@@ -1,10 +1,10 @@
-package rs09.game.content.global.worldevents.holiday
+package rs09.game.content.global.worldevents.holiday.halloween
 
+import core.game.content.dialogue.DialoguePlugin
+import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.game.content.dialogue.DialoguePlugin
-import core.game.content.dialogue.FacialExpression
 
 class GrimDialogue(player: Player? = null) : DialoguePlugin(player){
     var firstSpeak = true
