@@ -132,9 +132,9 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         /**
          * Opens the credit/voting shop
          */
-        /*define("shop", Command.Privilege.STANDARD){ player, _ ->
-            CreditShop().open(player)
-        }*/
+        define("shop", Command.Privilege.STANDARD){ player, _ ->
+            player.interfaceManager.open(Component(Components.CREDIT_SHOP))
+        }
 
         /**
          * Shows the player a list of currently active GE sell offers
@@ -459,6 +459,10 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         define("testlady",Command.Privilege.ADMIN){player,_ ->
             player.antiMacroHandler.event = RandomEvents.SURPRISE_EXAM.npc.create(player,null,"sexam")
             player.antiMacroHandler.event!!.init()
+        }
+
+        define("addcredits",Command.Privilege.ADMIN){player,_ ->
+            player.details.credits += 100
         }
     }
 }

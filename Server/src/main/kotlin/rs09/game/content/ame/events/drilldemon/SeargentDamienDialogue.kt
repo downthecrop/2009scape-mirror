@@ -14,6 +14,7 @@ class SeargentDamienDialogue(val isCorrect: Boolean = false) : DialogueFile() {
                 0 -> npc(FacialExpression.OLD_NORMAL,"My god you actually did it, you limp","wristed worm-bodied MAGGOT! Take this","and get out of my sight.").also { stage++ }
                 1 -> {
                     end()
+                    player!!.unlock()
                     DrillDemonUtils.cleanup(player!!)
                     player!!.pulseManager.run(object : Pulse(){
                         override fun pulse(): Boolean {

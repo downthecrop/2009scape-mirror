@@ -38,7 +38,7 @@ class SupriseExamListeners : InteractionListener() {
             return@on true
         }
 
-        on(BOOK_OF_KNOWLEDGE,ITEM,"read"){player, node ->
+        on(BOOK_OF_KNOWLEDGE,ITEM,"read"){player, _ ->
             player.setAttribute("caller"){skill: Int,p: Player ->
                 if(p.inventory.remove(Item(BOOK_OF_KNOWLEDGE))) {
                     val level = p.skills.getStaticLevel(skill)
