@@ -1,4 +1,4 @@
-package rs09.game.interaction.city
+package rs09.game.interaction.region
 
 import core.game.world.map.Location
 import rs09.game.interaction.InteractionListener
