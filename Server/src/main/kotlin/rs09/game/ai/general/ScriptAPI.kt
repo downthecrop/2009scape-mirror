@@ -24,6 +24,8 @@ import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.rs09.consts.Items
 import rs09.game.ai.AIRepository
 import rs09.game.ge.GrandExchangeOffer
@@ -324,7 +326,7 @@ class ScriptAPI(private val bot: Player) {
 
     fun randomWalkTo(loc: Location, radius: Int) {
         if(!bot.walkingQueue.isMoving) {
-            Executors.newSingleThreadExecutor().execute {
+            GlobalScope.launch {
                 var newloc = loc.transform(RandomFunction.random(radius,-radius),
                         RandomFunction.random(radius,-radius), 0)
                 walkToIterator(newloc)

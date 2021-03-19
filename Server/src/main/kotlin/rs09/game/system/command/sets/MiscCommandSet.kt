@@ -457,7 +457,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         }
 
         define("testlady",Command.Privilege.ADMIN){player,_ ->
-            player.antiMacroHandler.event = RandomEvents.DRILL_DEMON.npc.create(player,null)
+            player.antiMacroHandler.event = RandomEvents.SURPRISE_EXAM.npc.create(player,null,"sexam")
             player.antiMacroHandler.event!!.init()
         }
     }
