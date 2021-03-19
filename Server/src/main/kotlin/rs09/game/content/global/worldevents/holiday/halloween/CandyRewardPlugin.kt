@@ -1,4 +1,4 @@
-package rs09.game.content.global.worldevents.holiday
+package rs09.game.content.global.worldevents.holiday.halloween
 
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
