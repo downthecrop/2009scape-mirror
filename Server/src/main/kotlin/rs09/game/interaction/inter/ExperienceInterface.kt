@@ -5,10 +5,10 @@ import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
-import rs09.game.system.SystemLogger
+import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
 import core.plugin.Plugin
-import core.game.node.entity.skill.Skills
+import rs09.game.system.SystemLogger
 
 /**
  * Represents the experience interface.
@@ -16,9 +16,10 @@ import core.game.node.entity.skill.Skills
  */
 @Initializable
 class ExperienceInterface() : ComponentPlugin() {
+
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any?> {
-        ComponentDefinition.put(134, this)
+        ComponentDefinition.put(COMPONENT_ID, this)
         return this
     }
 
@@ -36,7 +37,9 @@ class ExperienceInterface() : ComponentPlugin() {
                 }
                 val caller = player.attributes["caller"]
                 caller ?: return true
-                (caller as Plugin<*>).handleSelectionCallback(confirmedSkill, player)
+                if(caller is Plugin<*>)
+                    caller.handleSelectionCallback(confirmedSkill, player)
+                else (caller as (Int,Player) -> Unit).invoke(confirmedSkill,player)
                 player.audioManager.send(SOUND)
                 player.interfaceManager.close()
             }
@@ -91,5 +94,7 @@ class ExperienceInterface() : ComponentPlugin() {
          * Represents the sound to send.
          */
         private val SOUND = Audio(1270, 12, 1)
+        @JvmField
+        public val COMPONENT_ID = 134
     }
 }
