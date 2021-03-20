@@ -1,14 +1,14 @@
 package rs09.game.system.config
 
-import rs09.ServerConstants
 import core.cache.def.impl.NPCDefinition
-import core.game.node.item.WeightedChanceItem
-import rs09.game.system.SystemLogger
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
+import rs09.ServerConstants
+import rs09.game.content.global.WeightBasedTable
+import rs09.game.content.global.WeightedItem
+import rs09.game.system.SystemLogger
 import java.io.FileReader
-import java.util.*
 
 class DropTableParser {
     val parser = JSONParser()
@@ -23,28 +23,24 @@ class DropTableParser {
             for(n in ids){
                 val def = NPCDefinition.forId(n.toInt()).dropTables
                 def ?: continue
-                val mainTable: List<WeightedChanceItem> = parseTable(tab["main"] as JSONArray)
-                val charmTable: List<WeightedChanceItem> = parseTable(tab["charm"] as JSONArray)
-                val defaultTable: List<WeightedChanceItem> = parseTable(tab["default"] as JSONArray)
-                def.mainTable.addAll(mainTable)
-                def.charmTable.addAll(charmTable)
-                def.defaultTable.addAll(defaultTable)
+                parseTable(tab["main"] as JSONArray, def.table, false)
+                parseTable(tab["charm"] as JSONArray, def.table, false)
+                parseTable(tab["default"] as JSONArray,def.table,true)
+                count++
             }
         }
         SystemLogger.logInfo("Parsed $count drop tables.")
     }
 
-    private fun parseTable(data: JSONArray): List<WeightedChanceItem> {
-        val table: MutableList<WeightedChanceItem> = ArrayList()
+    private fun parseTable(data: JSONArray, destTable: WeightBasedTable, isAlways: Boolean) {
         for(it in data){
             val item = it as JSONObject
             val id = item["id"].toString().toInt()
             val minAmount = item["minAmount"].toString().toInt()
             val maxAmount = item["maxAmount"].toString().toInt()
             val weight = item["weight"].toString().toInt()
-            val newItem = WeightedChanceItem(id,minAmount,maxAmount,weight)
-            table.add(newItem)
+            val newItem = WeightedItem(id,minAmount,maxAmount,weight.toDouble(),isAlways)
+            destTable.add(newItem)
         }
-        return table
     }
 }

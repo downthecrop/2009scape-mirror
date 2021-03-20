@@ -23,7 +23,6 @@ class ShootingStarEvent : WorldEvent("shooting-stars") {
     override fun initialize() {
         plugins = PluginSet(
                 ScoreboardHandler(),
-                ShootingStarOptionHandler(),
                 ShootingStarScoreboard(),
                 StarChartPlugin(),
                 ShootingStarCommands(),
