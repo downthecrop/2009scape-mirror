@@ -1,22 +1,26 @@
 package core.game.node.entity.npc.drop;
 
 import core.cache.def.impl.NPCDefinition;
-import core.game.node.item.*;
-import rs09.game.system.config.ItemConfigParser;
-import rs09.game.ai.AIPlayer;
-import rs09.game.ai.AIRepository;
-import rs09.game.ai.general.GeneralBotCreator;
-import core.game.ge.GrandExchangeDatabase;
 import core.game.content.global.Bones;
-import core.game.node.entity.skill.Skills;
+import core.game.ge.GrandExchangeDatabase;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
+import core.game.node.item.GroundItem;
+import core.game.node.item.GroundItemManager;
+import core.game.node.item.Item;
+import core.game.node.item.WeightedChanceItem;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
-import rs09.game.world.repository.Repository;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
+import rs09.game.ai.AIPlayer;
+import rs09.game.ai.AIRepository;
+import rs09.game.ai.general.GeneralBotCreator;
+import rs09.game.content.global.NPCDropTable;
+import rs09.game.system.config.ItemConfigParser;
+import rs09.game.world.repository.Repository;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -52,6 +56,8 @@ public final class NPCDropTables {
 	 */
 	private final List<WeightedChanceItem> mainTable = new ArrayList<>(20);
 
+	public final NPCDropTable table = new NPCDropTable();
+
 	/**
 	 * The NPC definitions.
 	 */
@@ -82,26 +88,7 @@ public final class NPCDropTables {
 	 */
 	public void drop(NPC npc, Entity looter) {
 		Player p = looter instanceof Player ? (Player) looter : null;
-		if (!charmTable.isEmpty()) {
-			boolean rollCharms = RandomFunction.random(5) == 3;
-			if(rollCharms) {
-				createDrop(RandomFunction.rollWeightedChanceTable(charmTable),p,npc,npc.getDropLocation());
-			}
-		}
-		defaultTable.forEach(drop -> {
-			createDrop(drop.getItem(),p,npc,npc.getDropLocation());
-		});
-		Item item = RandomFunction.rollWeightedChanceTable(mainTable);
-			//boolean hasWealthRing = p != null && p.getEquipment().getNew(EquipmentContainer.SLOT_RING).getId() == 2572;
-		if(item != null) {
-			boolean isRDTSlot = item.getId() == RareDropTable.SLOT_ITEM_ID;
-			if (isRDTSlot) {
-				item = RareDropTable.retrieve();
-			}
-			if (item != null && p != null && npc != null) {
-				createDrop(item, p, npc, npc.getDropLocation());
-			}
-		}
+		table.roll().forEach(item -> createDrop(item,p,npc,npc.getDropLocation()));
 	}
 
 	/**
