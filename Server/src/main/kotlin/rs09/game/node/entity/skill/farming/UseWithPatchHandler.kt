@@ -164,7 +164,7 @@ object UseWithPatchHandler{
                         return true
                     }
                 }
-
+                player.lock()
                 if(player.inventory.remove(plantItem)) {
                     player.animator.animate(Animation(2291))
                     player.pulseManager.run(object : Pulse(3) {
@@ -175,6 +175,7 @@ object UseWithPatchHandler{
                             if(p.patch.type == PatchType.TREE || p.patch.type == PatchType.FRUIT_TREE){
                                 player.inventory.add(Item(Items.PLANT_POT_5356))
                             }
+                            player.unlock()
                             return true
                         }
                     })
