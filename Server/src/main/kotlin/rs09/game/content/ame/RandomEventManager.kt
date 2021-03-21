@@ -1,6 +1,7 @@
 package rs09.game.content.ame
 
 import core.game.node.entity.player.Player
+import core.game.world.map.zone.ZoneRestriction
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 
@@ -15,6 +16,9 @@ class RandomEventManager(val player: Player) {
     }
 
     fun fireEvent(){
+        if(player.zoneMonitor.isRestricted(ZoneRestriction.RANDOM_EVENTS)){
+            return
+        }
         val ame = RandomEvents.values().random()
         event = ame.npc.create(player,ame.loot,ame.type)
         event!!.init()

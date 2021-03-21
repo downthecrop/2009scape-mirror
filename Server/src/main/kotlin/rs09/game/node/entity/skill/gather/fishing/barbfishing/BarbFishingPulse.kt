@@ -51,16 +51,16 @@ class BarbFishingPulse(player: Player) : SkillPulse<NPC>(player,NPC(1176)) {
         val stragiXP = arrayOf(5,6,7)
         val fishXP = arrayOf(50,70,80)
         val reward = getRandomFish()
-        val success = rollSuccess(when(reward){
-            Item(11328) -> 48
-            Item(11330) -> 58
-            Item(11332) -> 70
+        val success = rollSuccess(when(reward.id){
+            11328 -> 48
+            11330 -> 58
+            11332 -> 70
             else -> 99
         })
-        val index = (when(reward){
-            Item(11328) -> 0
-            Item(11330) -> 1
-            Item(11332) -> 2
+        val index = (when(reward.id){
+            11328 -> 0
+            11330 -> 1
+            11332 -> 2
             else -> 0
         })
         if(success){
