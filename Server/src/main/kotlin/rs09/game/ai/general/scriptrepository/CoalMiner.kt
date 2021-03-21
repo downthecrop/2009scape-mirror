@@ -9,6 +9,8 @@ import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import rs09.game.ai.general.ScriptAPI
 import rs09.game.ai.skillingbot.SkillingBotAssembler
+import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.InteractionListeners
 
 @PlayerCompatible
 @ScriptName("Falador Coal Miner")
@@ -52,7 +54,7 @@ class CoalMiner() : Script() {
                     scriptAPI.walkTo(mine.randomLoc)
                 } else {
                     val rock = scriptAPI.getNearestNode("rocks",true)
-                    rock?.interaction?.handle(bot,rock.interaction[0])
+                    rock?.let { InteractionListeners.run(rock.id, InteractionListener.OBJECT,"mine",bot,rock) }
                 }
                 overlay!!.setAmount(bot.inventory.getAmount(Items.COAL_453) + coalAmount)
             }

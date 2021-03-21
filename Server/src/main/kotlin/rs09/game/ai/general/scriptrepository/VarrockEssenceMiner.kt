@@ -6,6 +6,8 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import rs09.game.ai.skillingbot.SkillingBotAssembler
+import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.InteractionListeners
 
 @PlayerCompatible
 @ScriptDescription("Start in varrock bank with rune mysteries complete and a pickaxe equipped/in inventory")
@@ -47,7 +49,7 @@ class VarrockEssenceMiner : Script(){
 
             State.MINING -> {
                 val essence = scriptAPI.getNearestNode(2491,true)
-                essence?.interaction?.handle(bot,essence.interaction[0])
+                essence?.let { InteractionListeners.run(essence.id, InteractionListener.OBJECT,"mine",bot,essence) }
                 if(bot.inventory.isFull)
                     state = State.TO_BANK
             }

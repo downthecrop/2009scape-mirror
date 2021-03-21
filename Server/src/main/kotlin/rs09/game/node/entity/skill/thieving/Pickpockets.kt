@@ -41,7 +41,8 @@ enum class Pickpockets(val ids: IntArray, val requiredLevel: Int, val low: Doubl
         WeightedItem(Items.RUSTY_SWORD_686,1,1,3.5),
         WeightedItem(Items.BROKEN_ARMOUR_698,1,1,3.5),
         WeightedItem(Items.BROKEN_STAFF_689,1,1,3.2),
-        WeightedItem(Items.BROKEN_ARROW_687,1,1,3.1)
+        WeightedItem(Items.BROKEN_ARROW_687,1,1,3.1),
+        WeightedItem(Items.BUTTONS_688,1,1,3.0)
     ).insertEasyClue(1.0)),
     FEMALE_HAM_MEMBER(intArrayOf(1715), 15, 135.0, 240.0, 18.5, 1,3,4, WeightBasedTable.create(
         WeightedItem(Items.COINS_995,1,21,5.5),
@@ -67,7 +68,8 @@ enum class Pickpockets(val ids: IntArray, val requiredLevel: Int, val low: Doubl
         WeightedItem(Items.RUSTY_SWORD_686,1,1,3.5),
         WeightedItem(Items.BROKEN_ARMOUR_698,1,1,3.5),
         WeightedItem(Items.BROKEN_STAFF_689,1,1,3.2),
-        WeightedItem(Items.BROKEN_ARROW_687,1,1,3.1)
+        WeightedItem(Items.BROKEN_ARROW_687,1,1,3.1),
+        WeightedItem(Items.BUTTONS_688,1,1,3.0)
     ).insertEasyClue(1.0)),
     WARRIOR(intArrayOf(15, 18), 25, 84.0, 240.0, 26.0, 2, 2, 5, WeightBasedTable.create(
         WeightedItem(Items.COINS_995,18,18,1.0,true)

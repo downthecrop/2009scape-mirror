@@ -5,9 +5,11 @@ import core.game.node.entity.player.Player
 import core.game.world.map.Location
 
 abstract class InteractionListener : Listener{
-    val ITEM = 0
-    val OBJECT = 1
-    val NPC = 2
+    companion object {
+        val ITEM = 0
+        val OBJECT = 1
+        val NPC = 2
+    }
     fun on(id: Int, type: Int, vararg option: String,handler: (player: Player, node: Node) -> Boolean){
         InteractionListeners.add(id,type,option,handler)
     }
