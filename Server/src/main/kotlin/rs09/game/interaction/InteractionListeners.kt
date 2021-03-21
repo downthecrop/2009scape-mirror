@@ -10,6 +10,7 @@ object InteractionListeners {
     private val listeners = HashMap<String,(Player, Node) -> Boolean>(1000)
     private val useWithListeners = HashMap<String,(Player,Node,Node) -> Boolean>(1000)
     private val destinationOverrides = HashMap<String,(Node) -> Location>(100)
+    private val equipListeners = HashMap<String,(Player,Node) -> Unit>(10)
 
     @JvmStatic
     fun add(id: Int, type: Int, option: Array<out String>, method: (Player,Node) -> Boolean){
@@ -49,6 +50,26 @@ object InteractionListeners {
         for(id in with){
             useWithListeners["$used:$id:$type"] = method
         }
+    }
+
+    @JvmStatic
+    fun addEquip(id: Int,method: (Player, Node) -> Unit){
+        equipListeners["equip:$id"] = method
+    }
+
+    @JvmStatic
+    fun addUnequip(id: Int, method: (Player,Node) -> Unit){
+        equipListeners["unequip:$id"] = method
+    }
+
+    @JvmStatic
+    fun getEquip(id: Int): ((Player,Node) -> Unit)? {
+        return equipListeners["equip:$id"]
+    }
+
+    @JvmStatic
+    fun getUnequip(id: Int): ((Player,Node) -> Unit)? {
+        return equipListeners["unequip:$id"]
     }
 
     @JvmStatic
@@ -100,6 +121,15 @@ object InteractionListeners {
     @JvmStatic
     fun getOverride(type: Int,option: String): ((Node) -> Location)?{
         return destinationOverrides["$type:$option"]
+    }
+
+    @JvmStatic
+    fun run(id: Int, player: Player, node: Node, isEquip: Boolean){
+        if(isEquip){
+            equipListeners["equip:$id"]?.invoke(player,node)
+        } else {
+            equipListeners["unequip:$id"]?.invoke(player,node)
+        }
     }
 
     @JvmStatic
