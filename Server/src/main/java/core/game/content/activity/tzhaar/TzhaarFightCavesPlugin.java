@@ -1,30 +1,30 @@
 package core.game.content.activity.tzhaar;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-
 import core.game.content.activity.ActivityPlugin;
 import core.game.content.global.BossKillCounter;
-import core.game.node.entity.skill.Skills;
-import core.game.node.entity.skill.slayer.Tasks;
 import core.game.interaction.Option;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
+import core.game.node.entity.skill.Skills;
+import core.game.node.entity.skill.slayer.Tasks;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.zone.ZoneRestriction;
-import rs09.game.world.repository.Repository;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import rs09.game.world.GameWorld;
+import rs09.game.world.repository.Repository;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Handles the Tzhaar Fight caves plugin.
@@ -60,7 +60,7 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 	 * @param player The player.
 	 */
 	public TzhaarFightCavesPlugin(Player player) {
-		super("fight caves", true, true, true, ZoneRestriction.CANNON);
+		super("fight caves", true, true, true, ZoneRestriction.CANNON, ZoneRestriction.RANDOM_EVENTS);
 		super.player = player;
 	}
 

@@ -7,6 +7,8 @@ import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
+import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.InteractionListeners
 import rs09.tools.stringtools.colorize
 
 @PlayerCompatible
@@ -39,7 +41,8 @@ class DraynorWillows : Script(){
                     scriptAPI.walkTo(willowZone.randomLoc)
                 else {
                     val willowtree = scriptAPI.getNearestNode("willow", true)
-                    willowtree?.interaction?.handle(bot, willowtree.interaction[0])
+                    willowtree?.let { InteractionListeners.run(willowtree.id,
+                        InteractionListener.OBJECT,"chop",bot,willowtree) }
                     if (bot.inventory.isFull)
                         state = State.BANKING
                 }
