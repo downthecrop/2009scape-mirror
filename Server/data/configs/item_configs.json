@@ -138667,6 +138667,34 @@
       "ge_buy_limit": "0",
       "archery_ticket_price": "0",
       "durability": null
+    },
+    {
+      "id": "14649",
+      "name": "Zanik ring",
+      "examine": "A ring for only the truest of cave goblins. And Logg too.",
+      "tradeable": "false",
+      "low_alchemy": "0",
+      "high_alchemy": "1",
+      "grand_exchange_price": "0",
+      "equipment_slot": "12",
+      "ge_buy_limit": "0",
+      "archery_ticket_price": "0",
+      "durability": null
+    },
+    {
+      "id": "14650",
+      "name": "Wizard hat",
+      "examine": "A standard issue wizard hat.",
+      "tradeable": "false",
+      "low_alchemy": "0",
+      "high_alchemy": "1",
+      "grand_exchange_price": "0",
+      "equipment_slot": "0",
+      "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+      "weight": "0.1",
+      "ge_buy_limit": "0",
+      "archery_ticket_price": "0",
+      "durability": null
     }
 
 ]
