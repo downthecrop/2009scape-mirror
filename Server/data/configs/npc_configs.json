@@ -73040,5 +73040,10 @@
   {
     "id": "6529",
     "examine": "There to help me make my bids."
+  },
+  {
+    "id": "14",
+    "name":  "Druid",
+    "examine": "He likes Guthix a bit."
   }
 ]

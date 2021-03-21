@@ -296,6 +296,11 @@
       "durability": null
     },
     {
+      "id": "31",
+      "name": "RDT Slot",
+      "examine": "You shouldn't have this."
+    },
+    {
       "id": "32",
       "name": "Lit black candle",
       "examine": "A spooky candle.",

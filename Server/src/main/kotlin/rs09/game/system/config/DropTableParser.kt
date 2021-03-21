@@ -38,7 +38,7 @@ class DropTableParser {
             val id = item["id"].toString().toInt()
             val minAmount = item["minAmount"].toString().toInt()
             val maxAmount = item["maxAmount"].toString().toInt()
-            val weight = item["weight"].toString().toInt()
+            val weight = item["weight"].toString().toDouble()
             val newItem = WeightedItem(id,minAmount,maxAmount,weight.toDouble(),isAlways)
             destTable.add(newItem)
         }
