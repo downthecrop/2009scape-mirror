@@ -37,6 +37,9 @@ public class ShantayPassPlugin extends OptionHandler {
 			ObjectDefinition.forId(i).getHandlers().put("option:go-through", this);
 			ObjectDefinition.forId(i).getHandlers().put("option:quick-pass", this);
 		}
+		ObjectDefinition.forId(35400).getHandlers().put("option:look-at", this);
+		ObjectDefinition.forId(35400).getHandlers().put("option:go-through", this);
+		ObjectDefinition.forId(35400).getHandlers().put("option:quick-pass", this);
 		NPCDefinition.forId(838).getHandlers().put("option:bribe", this);
 		ObjectDefinition.forId(35401).getHandlers().put("option:open", this);
 		ObjectDefinition.forId(2693).getHandlers().put("option:open", this);
