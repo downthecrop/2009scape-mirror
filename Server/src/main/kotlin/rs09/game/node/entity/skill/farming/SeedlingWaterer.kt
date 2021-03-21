@@ -9,7 +9,7 @@ import org.rs09.consts.Items
 import rs09.game.node.entity.state.newsys.states.SeedlingState
 
 private val cans = arrayListOf(Items.WATERING_CAN8_5340,Items.WATERING_CAN7_5339,Items.WATERING_CAN6_5338,Items.WATERING_CAN5_5337,Items.WATERING_CAN4_5336,Items.WATERING_CAN3_5335,Items.WATERING_CAN2_5334,Items.WATERING_CAN1_5333)
-private val seedlings = arrayListOf(Items.OAK_SEEDLING_5358,Items.WILLOW_SEEDLING_5359,Items.MAPLE_SEEDLING_5360,Items.YEW_SEEDLING_5361,Items.MAGIC_SEEDLING_5362)
+private val seedlings = arrayListOf(Items.OAK_SEEDLING_5358,Items.WILLOW_SEEDLING_5359,Items.MAPLE_SEEDLING_5360,Items.YEW_SEEDLING_5361,Items.MAGIC_SEEDLING_5362,Items.APPLE_TREE_SEED_5283,Items.BANANA_TREE_SEED_5284,Items.ORANGE_TREE_SEED_5285,Items.CURRY_TREE_SEED_5286,Items.PINEAPPLE_SEED_5287,Items.PAPAYA_TREE_SEED_5288,Items.PALM_TREE_SEED_5289)
 
 @Initializable
 class SeedlingWaterer : UseWithHandler(*cans.toIntArray()) {

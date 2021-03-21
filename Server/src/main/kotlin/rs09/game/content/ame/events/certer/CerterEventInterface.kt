@@ -11,14 +11,14 @@ class CerterEventInterface : InterfaceListener() {
     val OPTION_C_CHILD = 3
     val ITEM_CHILD = 7
     val items = mapOf(
-        Items.BRONZE_SCIMITAR_1321 to "a sword",
+        Items.BLACK_SWORD_1283 to "a sword",
         Items.BRONZE_SWORD_1277 to "a sword",
-        Items.BRONZE_MED_HELM_1139 to "a helmet",
-        Items.BRONZE_FULL_HELM_1155 to "a helmet",
+        Items.BRONZE_CHAINBODY_1103 to "a platebody",
+        Items.BLACK_CHAINBODY_1107 to "a platebody",
         Items.WOODEN_SHIELD_1171 to "a shield",
         Items.BRONZE_KITESHIELD_1189 to "a shield",
     )
-    val falseOptions = arrayOf("a ring","a dragon","a cat","a chestplate","a pair of boots","a fish","a gun","a staff","a cannon","a dwarf","a bow","an arrow","a chinchompa","a chicken","a feather","a ninja","a bot")
+    val falseOptions = arrayOf("a ring","a dragon","a cat","a helmet","a pair of boots","a fish","a gun","a staff","a cannon","a dwarf","a bow","an arrow","a chinchompa","a chicken","a feather","a ninja","a bot")
     override fun defineListeners() {
         on(CERTER_INTERFACE){player, _, _, buttonID, _, _ ->
             val answer = buttonID - 7
