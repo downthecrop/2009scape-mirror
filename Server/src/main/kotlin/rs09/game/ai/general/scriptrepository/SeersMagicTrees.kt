@@ -10,6 +10,8 @@ import core.tools.RandomFunction
 import org.rs09.consts.Items
 import rs09.game.ai.general.ScriptAPI
 import rs09.game.ai.skillingbot.SkillingBotAssembler
+import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.InteractionListeners
 
 @PlayerCompatible
 @ScriptName("Seers Magics")
@@ -37,7 +39,7 @@ class SeersMagicTrees : Script(){
 
             State.CHOPPING -> {
                 val tree = scriptAPI.getNearestNode(1306,true)
-                tree?.interaction?.handle(bot,tree.interaction[0])
+                tree?.let { InteractionListeners.run(tree.id, InteractionListener.OBJECT,"chop",bot,tree) }
                 if(bot.inventory.isFull){
                     state = State.FIND_BANK
                 }
