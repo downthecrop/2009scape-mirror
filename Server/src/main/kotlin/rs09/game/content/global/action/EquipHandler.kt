@@ -11,6 +11,7 @@ import core.game.world.map.zone.ZoneBorders
 import core.plugin.Plugin
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.InteractionListeners
 import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.GameWorld
 
@@ -51,6 +52,7 @@ class EquipHandler : InteractionListener() {
                 return
             }
         }
+        InteractionListeners.run(node.id,player,node,true)
 
         val lock = player.locks.equipmentLock
         if (lock != null && lock.isLocked) {
@@ -116,6 +118,7 @@ class EquipHandler : InteractionListener() {
                     return
                 }
             }
+            InteractionListeners.run(itemId,player,item,false)
             if (player.equipment.remove(item)) {
                 player.audioManager.send(Audio(2238, 10, 1))
                 player.dialogueInterpreter.close()
