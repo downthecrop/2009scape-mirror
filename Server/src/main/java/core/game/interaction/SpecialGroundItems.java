@@ -1,10 +1,9 @@
 package core.game.interaction;
 
+import core.game.interaction.city.portsarim.AhabBeerInteraction;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.world.map.Location;
-import rs09.game.interaction.region.falador.WineOfZamorakInteraction;
-import core.game.interaction.city.portsarim.AhabBeerInteraction;
 
 /**
  * Handles interactions for special ground items
@@ -12,8 +11,7 @@ import core.game.interaction.city.portsarim.AhabBeerInteraction;
  */
 public enum SpecialGroundItems {
     //Ahab's beer
-    AHAB_BEER(1917,new Location(3049,3257,0), new AhabBeerInteraction()),
-    WINE_OF_ZAMORAK(245, Location.create(2931, 3515, 0), new WineOfZamorakInteraction());
+    AHAB_BEER(1917,new Location(3049,3257,0), new AhabBeerInteraction());
 
     private int itemid;
     private Location location;
