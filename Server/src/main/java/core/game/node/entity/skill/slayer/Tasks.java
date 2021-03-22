@@ -65,7 +65,7 @@ public enum Tasks {
     JUNGLE_HORRORS(65, new int[] { 4348, 4349, 4350, 4351, 4352 }, new String[] { "Jungle Horrors can be found all over Mos Le'Harmless.", "They are strong and aggressive, so watch out!" }, 1,  false, Equipment.NONE),
     KALPHITES(15, new int[] { 1153, 1154, 1155, 1156, 1157, 1158, 1159, 1160, 1161 }, new String[] { "Kalaphite are large insects which live in great hives under the desert sands." }, 1,  false, Equipment.NONE),
     KURASKS(65, new int[] { 1608, 1609, 4229 }, new String[] { "A kurask is a very quick creature." }, 70,  false, Equipment.NONE),
-    LESSER_DEMONS(60, new int[] { 82, 3064, 4694, 4695, 6208, 6204, 6206, 3064, 4696, 4697, 6101 }, new String[] { "Lesser Demons are magic creatures so they are weak to magical attacks." }, 1,  false, Equipment.NONE),
+    LESSER_DEMONS(60, new int[] { 6203, 82, 3064, 4694, 4695, 6208, 6204, 6206, 3064, 4696, 4697, 6101 }, new String[] { "Lesser Demons are magic creatures so they are weak to magical attacks." }, 1,  false, Equipment.NONE),
     MITHRIL_DRAGON(60, new int[] { 5363 }, new String[] { "Mithril dragons aren't as strong as other dragons but they're still", "very powerful, watch out for their firey breath." }, 1,  false, 5 | 9 << 16, Equipment.NONE),
     MINOTAURS(7, new int[] { 4404, 4405, 4406 }, new String[] { "Minotaurs are large manlike creatures but you'll", "want to be careful of their horns." }, 1,  false, Equipment.NONE),
     MONKEYS(1, new int[] { 132, 1463, 1464, 2301, 4344, 4363, 6943, 7211, 7213, 7215, 7217, 7219, 7221, 7223, 7225, 7227, 1455, 1459, 1460, 1456, 1457, 1458 }, new String[] { "Small agile creatures, watch out they pinch!" }, 1,  false, Equipment.NONE),
