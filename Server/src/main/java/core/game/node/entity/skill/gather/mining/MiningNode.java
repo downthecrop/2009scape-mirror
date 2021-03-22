@@ -422,6 +422,10 @@ public enum MiningNode{
         GEM_ROCK_0(23567,21297, (byte) 13),
         GEM_ROCK_1(23566,21296, (byte) 13),
         GEM_ROCK_2(23568,21298, (byte) 13),
+        GEM_ROCK_3(23560,25371, (byte) 13),// good??
+        GEM_ROCK_4(23561,25372, (byte) 13),//good ??
+        GEM_ROCK_5(23562,21298, (byte) 13),//good
+
 
         //Rune essence
         RUNE_ESSENCE(2491, -1, (byte) 14),
