@@ -21057,12 +21057,6 @@
         "maxAmount": "7"
       },
       {
-        "minAmount": "14",
-        "weight": "50.0",
-        "id": "386",
-        "maxAmount": "142"
-      },
-      {
         "minAmount": "1",
         "weight": "10.0",
         "id": "12070",
