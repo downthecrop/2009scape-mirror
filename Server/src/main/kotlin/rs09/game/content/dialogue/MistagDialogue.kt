@@ -1,11 +1,11 @@
 package rs09.game.content.dialogue
 
 import core.game.component.Component
-import core.game.node.entity.player.Player
-import core.plugin.Initializable
-import core.game.content.activity.ActivityManager
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
+import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
+import core.plugin.Initializable
 import rs09.game.content.quest.members.thelosttribe.GoblinFollower
 import rs09.game.content.quest.members.thelosttribe.MistagLTDialogue
 import rs09.tools.END_DIALOGUE
@@ -22,9 +22,10 @@ class MistagDialogue (player: Player? = null) : DialoguePlugin(player){
     }
 
     override fun open(vararg args: Any?): Boolean {
+        npc = args[0] as NPC
         val ltStage = player.questRepository.getStage("Lost Tribe")
 
-        if(args.size > 0 && args[0] == "greeting"){
+        if(args.size > 1 && args[1] == "greeting"){
             npc("A human knows ancient greeting?")
             loadFile(MistagLTDialogue(true,ltStage))
             return true
