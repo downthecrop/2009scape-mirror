@@ -115,7 +115,7 @@ public enum Consumables {
 	CHILLI_POTATO(new Food(new int[] {7054}, new HealingEffect(14))),
 	FRIED_ONIONS(new Food(new int[] {7084, 1923}, new HealingEffect(5))),
 	FRIED_MUSHROOMS(new Food(new int[] {7082, 1923}, new HealingEffect(5))),
-	POTATO_WITH_CHEESE(new Food(new int[] {6705}, new HealingEffect(9))),
+	POTATO_WITH_CHEESE(new Food(new int[] {6705}, new HealingEffect(16))),
 	EGG_POTATO(new Food(new int[] {7056}, new HealingEffect(11))),
 	MUSHROOMS_AND_ONIONS(new Food(new int[] {7066, 1923}, new HealingEffect(11))),
 	MUSHROOM_POTATO(new Food(new int[] {7058}, new HealingEffect(20))),
