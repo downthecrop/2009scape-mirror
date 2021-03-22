@@ -3,7 +3,7 @@ package core.game.interaction;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.world.map.Location;
-import core.game.interaction.city.falador.WineOfZamorakInteraction;
+import rs09.game.interaction.region.falador.WineOfZamorakInteraction;
 import core.game.interaction.city.portsarim.AhabBeerInteraction;
 
 /**
