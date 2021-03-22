@@ -718,8 +718,9 @@ class Adventurer(val style: CombatStyle): Script() {
     val magics = Location.create(2285,3146,0)
     val coal = Location.create(2581,3481,0)
     val crawlinghands = Location.create(3422,3548,0)
-    val gemrocks = Location.create(2825, 2997, 0)
-    val chaosnpc = Location.create(2612, 9484, 0)
+    val gemrocks = Location.create(2825,2997,0)
+    val chaosnpc = Location.create(2612,9484,0)
+    val chaosnpc2 = Location.create(2580,9501,0)
 
     var PoiList = listOf(karamja,alkharid,feldiphills,isafdar,
             eaglespeek,canafis,treegnome,teak1,teakfarm)
@@ -776,7 +777,8 @@ class Adventurer(val style: CombatStyle): Script() {
                 canafis,treegnome,treegnome,
                 teak1,teakfarm,keldagrimout,
                 miningguild,coal,crawlinghands,
-                magics,gemrocks,chaosnpc).random()
+                magics,gemrocks,chaosnpc,chaosnpc,
+                chaosnpc2).random()
     }
 
         //TODO: Optimise and adjust how bots handle picking up ground items further.
@@ -893,7 +895,7 @@ class Adventurer(val style: CombatStyle): Script() {
             }
 
             State.EXPLORE -> {
-                if (counter++ == 300) {
+                if (counter++ == 350) {
                     state = State.TELEPORTING
                 }
 
@@ -928,14 +930,14 @@ class Adventurer(val style: CombatStyle): Script() {
                             teak1 -> 30
                             miningguild -> 5
                             magics,coal -> 7
-                            gemrocks,chaosnpc -> 1
+                            gemrocks,chaosnpc,chaosnpc2 -> 1
                             else -> 60
                     }
                     scriptAPI.randomWalkTo(poiloc,roamDistancePoi)
                     return
                 }
 
-                if (RandomFunction.random(1000) <= 65) {
+                if (RandomFunction.random(1000) <= 75) {
                     if (city != ge && city != ge2) {
                         immerse()
                         return
@@ -944,7 +946,7 @@ class Adventurer(val style: CombatStyle): Script() {
                     }
                 }
 
-                if (RandomFunction.random(20000) <= 50 && !poi) {
+                if (RandomFunction.random(20000) <= 60 && !poi) {
                         poiloc = getRandomPoi()
                         city = teak1
                         poi = true
