@@ -25,6 +25,7 @@ class EnchantedJewelleryListener : InteractionListener() {
     override fun defineListeners() {
 
         on(IDs,ITEM,"rub","operate"){player,node ->
+            player.pulseManager.current.stop()
             val item = node.asItem()
             val jewellery = EnchantedJewellery.forItem(item)
             if (jewellery.isLast(jewellery.getItemIndex(item))) {
