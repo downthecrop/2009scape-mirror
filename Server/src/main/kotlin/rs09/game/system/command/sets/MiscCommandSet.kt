@@ -464,5 +464,10 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         define("addcredits",Command.Privilege.ADMIN){player,_ ->
             player.details.credits += 100
         }
+
+        define("resetgwdropes",Command.Privilege.STANDARD){player,_ ->
+            player.varpManager.get(1048).clearBitRange(0,31)
+            player.varpManager.get(1048).send(player)
+        }
     }
 }

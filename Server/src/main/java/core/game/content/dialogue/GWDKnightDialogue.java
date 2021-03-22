@@ -109,6 +109,6 @@ public final class GWDKnightDialogue extends DialoguePlugin {
 
 	@Override
 	public int[] getIds() {
-		return new int[] { 6201 };
+		return new int[] { 6202 };
 	}
 }

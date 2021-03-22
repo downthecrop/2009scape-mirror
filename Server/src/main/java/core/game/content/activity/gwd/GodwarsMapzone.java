@@ -85,8 +85,7 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 	 * @param setting The setting.
 	 */
 	public void setRopeSetting(Player player, int setting) {
-		int value = player.getConfigManager().get(1048) | setting;
-		player.getConfigManager().set(1048, value, true);
+		player.varpManager.get(1048).setVarbit(setting,1).send(player);
 	}
 
 	/**
@@ -167,7 +166,7 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 				return true;
 			}
 			if (object.getId() == 26296) {
-				handleRopeTie((Player) e, 0x2);
+				handleRopeTie((Player) e, 1);
 				return true;
 			}
 			if (object.getId() == 26297) {
@@ -183,7 +182,7 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 				return true;
 			}
 			if (object.getId() == 26300) {
-				handleRopeTie((Player) e, 0x4);
+				handleRopeTie((Player) e, 2);
 				return true;
 			}
 			if (object.getId() == 26286) {
