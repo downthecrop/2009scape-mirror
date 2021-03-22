@@ -935,7 +935,7 @@ class Adventurer(val style: CombatStyle): Script() {
                     return
                 }
 
-                if (RandomFunction.random(1000) <= 55) {
+                if (RandomFunction.random(1000) <= 65) {
                     if (city != ge && city != ge2) {
                         immerse()
                         return
@@ -944,7 +944,7 @@ class Adventurer(val style: CombatStyle): Script() {
                     }
                 }
 
-                if (RandomFunction.random(20000) <= 10 && !poi) {
+                if (RandomFunction.random(20000) <= 50 && !poi) {
                         poiloc = getRandomPoi()
                         city = teak1
                         poi = true
