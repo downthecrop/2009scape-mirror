@@ -924,10 +924,10 @@ class Adventurer(val style: CombatStyle): Script() {
                             treegnome -> 50
                             isafdar -> 40
                             eaglespeek -> 40
-                            keldagrimout -> 40
+                            keldagrimout -> 30
                             teak1 -> 30
-                            miningguild -> 6
-                            magics,coal -> 8
+                            miningguild -> 5
+                            magics,coal -> 7
                             gemrocks,chaosnpc -> 1
                             else -> 60
                     }
@@ -935,7 +935,7 @@ class Adventurer(val style: CombatStyle): Script() {
                     return
                 }
 
-                if (RandomFunction.random(1000) <= 55) {
+                if (RandomFunction.random(1000) <= 65) {
                     if (city != ge && city != ge2) {
                         immerse()
                         return
@@ -944,7 +944,7 @@ class Adventurer(val style: CombatStyle): Script() {
                     }
                 }
 
-                if (RandomFunction.random(20000) <= 10 && !poi) {
+                if (RandomFunction.random(20000) <= 50 && !poi) {
                         poiloc = getRandomPoi()
                         city = teak1
                         poi = true
