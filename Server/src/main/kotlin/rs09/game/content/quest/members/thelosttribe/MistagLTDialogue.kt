@@ -1,6 +1,8 @@
 package rs09.game.content.quest.members.thelosttribe
 
+import core.game.component.Component
 import core.game.content.activity.ActivityManager
+import core.game.content.dialogue.FacialExpression
 import rs09.game.content.dialogue.DialogueFile
 import rs09.tools.END_DIALOGUE
 import rs09.tools.START_DIALOGUE
@@ -48,5 +50,9 @@ class MistagLTDialogue(val isGreeting: Boolean, val questStage: Int) : DialogueF
                 }
             }
         }
+    }
+
+    override fun npc(vararg messages: String?): Component? {
+        return npc(FacialExpression.OLD_NORMAL,*messages)
     }
 }
