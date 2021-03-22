@@ -924,10 +924,10 @@ class Adventurer(val style: CombatStyle): Script() {
                             treegnome -> 50
                             isafdar -> 40
                             eaglespeek -> 40
-                            keldagrimout -> 40
+                            keldagrimout -> 30
                             teak1 -> 30
-                            miningguild -> 6
-                            magics,coal -> 8
+                            miningguild -> 5
+                            magics,coal -> 7
                             gemrocks,chaosnpc -> 1
                             else -> 60
                     }
