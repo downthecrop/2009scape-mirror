@@ -469,5 +469,9 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             player.varpManager.get(1048).clearBitRange(0,31)
             player.varpManager.get(1048).send(player)
         }
+
+        define("resetmistag",Command.Privilege.STANDARD){player,_ ->
+            player.removeAttribute("mistag-greeted")
+        }
     }
 }

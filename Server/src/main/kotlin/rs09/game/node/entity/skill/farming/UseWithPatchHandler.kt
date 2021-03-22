@@ -156,7 +156,12 @@ object UseWithPatchHandler{
                     return true
                 }
 
-                val plantItem = if(patch.type == PatchType.ALLOTMENT) Item(plantable.itemID,3) else Item(plantable.itemID,1)
+                val plantItem =
+                    if(patch.type == PatchType.ALLOTMENT) Item(plantable.itemID,3) else if(patch.type == PatchType.HOPS){
+                    if(plantable == Plantable.JUTE_SEED) Item(plantable.itemID,3) else Item(plantable.itemID,4)
+                } else {
+                    Item(plantable.itemID,1)
+                }
 
                 if(patch.type == PatchType.ALLOTMENT){
                     if(!player.inventory.containsItem(plantItem)){
