@@ -123,7 +123,7 @@ class FishingTrawlerInteractionHandler : InteractionListener() {
             if(!session.isActive){
                 return@on false
             }
-            if(player.location.y > 0){
+            if(player.location.z > 0){
                 player.sendMessage("You can't scoop water out up here.")
                 return@on true
             }

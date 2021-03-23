@@ -153,20 +153,20 @@ class DukeHoracioTLTDialogue(val questStage: Int) : DialogueFile() {
                     "mistake."
                 ).also { stage++ }
 
-                2 -> sendNormalDialogue(
+                1 -> sendNormalDialogue(
                     Sigmund,
                     FacialExpression.ANGRY,
                     "And I suppose you believe them, goblin lover?"
                 ).also { stage++ }
 
-                3 -> player("Well, they seemed friendlier than most goblins, and", "nothing was taken from the cellar.").also { stage++ }
-                4 -> npc(
+                2 -> player("Well, they seemed friendlier than most goblins, and", "nothing was taken from the cellar.").also { stage++ }
+                3 -> npc(
                     "Actually, something was taken. Sigmund has informed",
                     "me that some of the castle silverware is missing from",
                     "the cellar."
                 ).also { stage++ }
 
-                5 -> {
+                4 -> {
                     npc("Unless it is returned, I am afraid I will have no option", "but war.")
                     player!!.questRepository.getQuest("Lost Tribe").setStage(player, 47)
                     stage = END_DIALOGUE
