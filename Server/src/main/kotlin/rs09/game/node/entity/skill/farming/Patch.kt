@@ -20,6 +20,8 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 Plantable.LIMPWURT_SEED, Plantable.WOAD_SEED -> 3
                 else -> 1
             }
+        } else if(patch.type == PatchType.HOPS){
+            harvestAmt = RandomFunction.random(3,35)
         } else {
             harvestAmt = RandomFunction.random(1,4)
         }
