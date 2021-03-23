@@ -2120,12 +2120,6 @@
         "weight": "100.0",
         "id": "2138",
         "maxAmount": "1"
-      },
-      {
-        "minAmount": "11",
-        "weight": "50.0",
-        "id": "314",
-        "maxAmount": "30"
       }
     ],
     "charm": [],
@@ -2134,9 +2128,15 @@
     "main": [
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "50.0",
         "id": "0",
         "maxAmount": "1"
+      },
+      {
+        "minAmount": "11",
+        "weight": "50.0",
+        "id": "314",
+        "maxAmount": "30"
       }
     ]
   },
