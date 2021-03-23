@@ -2131,7 +2131,14 @@
     "charm": [],
     "ids": "41,288,951,1017,1401,1402,2313,2314,2315",
     "description": "",
-    "main": []
+    "main": [
+      {
+        "minAmount": "1",
+        "weight": "100.0",
+        "id": "0",
+        "maxAmount": "1"
+      }
+    ]
   },
   {
     "default": [
