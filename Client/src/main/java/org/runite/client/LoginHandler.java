@@ -41,7 +41,7 @@ class LoginHandler {
                   ++Class166.anInt2079;
                }
                if(loginStage == 1) {
-                  Class3_Sub9.aClass64_2318 = Class38.aClass87_665.method1441((byte)8, Class38_Sub1.accRegistryIp, GameConfig.SERVER_PORT + GameConfig.WORLD);//Class140_Sub6.accRegistryPort);
+                  Class3_Sub9.aClass64_2318 = Class38.signlink.method1441((byte)8, Class38_Sub1.accRegistryIp, GameConfig.SERVER_PORT + GameConfig.WORLD);//Class140_Sub6.accRegistryPort);
                   loginStage = 2;
                }
 
@@ -54,7 +54,7 @@ class LoginHandler {
                      return;
                   }
 
-                  Class3_Sub15.activeConnection = new Connection((Socket)Class3_Sub9.aClass64_2318.anObject974, Class38.aClass87_665);
+                  Class3_Sub15.activeConnection = new Connection((Socket)Class3_Sub9.aClass64_2318.anObject974, Class38.signlink);
                   Class3_Sub9.aClass64_2318 = null;
                   long var1 = PacketParser.aLong3202 = Class131.username.toLong();
                   Class3_Sub13_Sub1.outgoingBuffer.index = 0;
@@ -120,18 +120,18 @@ class LoginHandler {
                      Unsorted.aClass3_Sub30_Sub1_2942.writeByte(16);
                   }
 
-                  Unsorted.aClass3_Sub30_Sub1_2942.writeShort(Class3_Sub13_Sub1.outgoingBuffer.index + 163 - -Class3_Sub13_Sub33.method326((byte)111, Class163_Sub2.aClass94_2996));
+                  Unsorted.aClass3_Sub30_Sub1_2942.writeShort(Class3_Sub13_Sub1.outgoingBuffer.index + 163 - -Class3_Sub13_Sub33.method326((byte)111, Class163_Sub2.paramSettings));
                   Unsorted.aClass3_Sub30_Sub1_2942.writeInt(GameConfig.CLIENT_BUILD);
                   Unsorted.aClass3_Sub30_Sub1_2942.writeByte(Class7.anInt2161);
-                  Unsorted.aClass3_Sub30_Sub1_2942.writeByte(!Client.aBoolean3779?0:1);
+                  Unsorted.aClass3_Sub30_Sub1_2942.writeByte(!Client.paramAdvertisementSuppressed ?0:1);
                   Unsorted.aClass3_Sub30_Sub1_2942.writeByte(1);
                   Unsorted.aClass3_Sub30_Sub1_2942.writeByte(Class83.method1411(0));
-                  Unsorted.aClass3_Sub30_Sub1_2942.writeShort(Class23.anInt454);
-                  Unsorted.aClass3_Sub30_Sub1_2942.writeShort(Class140_Sub7.anInt2934);
+                  Unsorted.aClass3_Sub30_Sub1_2942.writeShort(Class23.canvasWidth);
+                  Unsorted.aClass3_Sub30_Sub1_2942.writeShort(Class140_Sub7.canvasHeight);
                   Unsorted.aClass3_Sub30_Sub1_2942.writeByte(Unsorted.anInt3671);
                   Class81.putRandomDataFile(Unsorted.aClass3_Sub30_Sub1_2942, true);
-                  Unsorted.aClass3_Sub30_Sub1_2942.writeString(Class163_Sub2.aClass94_2996);
-                  Unsorted.aClass3_Sub30_Sub1_2942.writeInt(Class3_Sub26.anInt2554);
+                  Unsorted.aClass3_Sub30_Sub1_2942.writeString(Class163_Sub2.paramSettings);
+                  Unsorted.aClass3_Sub30_Sub1_2942.writeInt(Class3_Sub26.paramAffid);
                   Unsorted.aClass3_Sub30_Sub1_2942.writeInt(Class84.method1421());
                   CS2Script.aBoolean2705 = true;
                   Unsorted.aClass3_Sub30_Sub1_2942.writeShort(Class113.interfacePacketCounter);
@@ -278,15 +278,15 @@ class LoginHandler {
                   Unsorted.isMember = GraphicDefinition.incomingBuffer.readUnsignedByte() == 1;
                   Class113.method1702(Unsorted.isMember);
                   Class8.method845(Unsorted.isMember);
-                  if(!Client.aBoolean3779) {
+                  if(!Client.paramAdvertisementSuppressed) {
                      if((!Class3_Sub15.aBoolean2433 || Unsorted.aBoolean4063) && !Class3_Sub13_Sub29.disableGEBoxes) {
                         try {
-                           TextCore.aClass94_516.method1577(Class38.aClass87_665.applet);
+                           TextCore.aClass94_516.method1577(Class38.signlink.gameApplet);
                         } catch (Throwable var5) {
                         }
                      } else {
                         try {
-                           Class97.aClass94_1374.method1577(Class38.aClass87_665.applet);
+                           Class97.aClass94_1374.method1577(Class38.signlink.gameApplet);
                         } catch (Throwable var6) {
                         }
                      }

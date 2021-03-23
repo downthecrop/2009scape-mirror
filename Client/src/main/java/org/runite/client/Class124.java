@@ -27,7 +27,7 @@ final class Class124 {
             aClass153_1661 = (CacheIndex)null;
          }
 
-         Class75_Sub4.method1352(Class140_Sub7.anInt2934, var0, Class3_Sub28_Sub12.anInt3655, Class23.anInt454);
+         Class75_Sub4.method1352(Class140_Sub7.canvasHeight, var0, Class3_Sub28_Sub12.anInt3655, Class23.canvasWidth);
       } catch (RuntimeException var3) {
          throw ClientErrorException.clientError(var3, "rb.C(" + var0 + ',' + var1 + ')');
       }

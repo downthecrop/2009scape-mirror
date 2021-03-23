@@ -13,14 +13,14 @@ public final class Class3_Sub13_Sub3 extends Class3_Sub13 {
    private boolean aBoolean3050 = true;
 
 
-   static RSString method178(byte[] var0, int var2, int var3) {
+   static RSString bufferToString(byte[] bytes, int length, int offset) {
       try {
          RSString var4 = new RSString();
-         var4.buffer = new byte[var2];
+         var4.buffer = new byte[length];
          var4.length = 0;
-         for (int var5 = var3; var5 < var2 + var3; ++var5) {
-            if (var0[var5] != 0) {
-               var4.buffer[var4.length++] = var0[var5];
+         for (int var5 = offset; var5 < length + offset; ++var5) {
+            if (bytes[var5] != 0) {
+               var4.buffer[var4.length++] = bytes[var5];
             }
          }
          if (var4.toString().contains("RuneScape")) {
@@ -37,7 +37,7 @@ public final class Class3_Sub13_Sub3 extends Class3_Sub13 {
          }
          return var4;
       } catch (RuntimeException var6) {
-         throw ClientErrorException.clientError(var6, "an.B(" + (var0 != null ? "{...}" : "null") + ',' + -4114 + ',' + var2 + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var6, "an.B(" + (bytes != null ? "{...}" : "null") + ',' + -4114 + ',' + length + ',' + offset + ')');
       }
    }
 
@@ -142,7 +142,7 @@ public final class Class3_Sub13_Sub3 extends Class3_Sub13 {
             var2 = var2 + GraphicDefinition.incomingBuffer.buffer[var3] + ",";
          }
 
-         Class49.method1125(var2, var5, (byte) 108);
+         Class49.reportError(var2, var5, (byte) 108);
          Class167.method2269((byte) 46);
          return true;
       }

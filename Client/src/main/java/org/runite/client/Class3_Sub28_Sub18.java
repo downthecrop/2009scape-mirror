@@ -86,24 +86,6 @@ final class Class3_Sub28_Sub18 extends Node {
       }
    }
 
-   static void method713() {
-      try {
-         try {
-            Method var1 = Runtime.class.getMethod("maxMemory", new Class[0]);
-            try {
-               Runtime var2 = Runtime.getRuntime();
-               Long var3 = (Long)var1.invoke(var2, (Object[])null);
-               Class3_Sub24_Sub3.anInt3492 = (int)(var3.longValue() / 1048576L) - -1;
-            } catch (Throwable var4) {
-            }
-         } catch (Exception var5) {
-         }
-
-      } catch (RuntimeException var6) {
-         throw ClientErrorException.clientError(var6, "sd.A(" + 0 + ')');
-      }
-   }
-
    Class3_Sub28_Sub18(int var1) {
       try {
          GL var2 = HDToolKit.gl;

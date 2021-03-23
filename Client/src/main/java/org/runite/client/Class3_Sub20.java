@@ -11,7 +11,7 @@ final class Class3_Sub20 extends Linkable {
 
     int anInt2483;
    static int wlPacketIndex = 0;
-   static int language = 0;
+   static int paramLanguage = 0;
    static int anInt2487;
    static int anInt2488 = 0;
    int anInt2489;

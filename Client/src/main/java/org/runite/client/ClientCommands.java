@@ -81,7 +81,7 @@ public class ClientCommands {
             }
 
             if (command.equalsStringIgnoreCase(TextCore.COMMAND_BREAK_CONNECTION)) {
-                Class38.aClass87_665.method1431();
+                Class38.signlink.method1431();
                 Class3_Sub15.activeConnection.applyDummyStreams();
                 Class58.aJs5Worker_917.applyDummyStreams();
             }
@@ -109,7 +109,7 @@ public class ClientCommands {
             }
 
             if(command.equalsStringIgnoreCase(TextCore.COMMAND_HISCORES) || command.equalsStringIgnoreCase(TextCore.COMMAND_HIGHSCORES)){
-                int world = ObjectDefinition.worldId;
+                int world = ObjectDefinition.paramWorldID;
                 String link = world == 1 ? "https://2009scape.org/services/m%3dhiscore/hiscores.html" : "https://2009scape.org/services/m=hiscore/hiscores.html?world=2";
                 if (Desktop.isDesktopSupported() && Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
                     try {
@@ -158,11 +158,11 @@ public class ClientCommands {
 
             if (command.startsWith(TextCore.COMMAND_SET_PARTICLES)) {
                 Class127_Sub1.method1758(command.substring(15).parseInt());
-                Class119.method1730(Class38.aClass87_665);
+                Class119.method1730(Class38.signlink);
                 CS2Script.aBoolean2705 = false;
             }
 
-            if (command.startsWith(TextCore.COMMAND_FPS) && Class44.anInt718 != 0) {
+            if (command.startsWith(TextCore.COMMAND_FPS) && Class44.paramModeWhere != 0) {
                 Class65.method1237(command.substring(6).parseInt());
             }
 

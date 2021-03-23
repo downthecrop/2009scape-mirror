@@ -8,7 +8,7 @@ final class Class106 {
    int anInt1447;
    int anInt1449;
    int anInt1450;
-   static boolean hasInternetExplorer6 = false;
+   static boolean paramUserUsingInternetExplorer = false;
 
 
    static void method1642(RSString var1) {

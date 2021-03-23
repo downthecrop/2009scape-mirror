@@ -175,7 +175,7 @@ final class Class3_Sub28_Sub1 extends Node {
             aFontMetrics1822 = GameShell.canvas.getFontMetrics(TextCore.Helvetica);
             if(var2) {
                var5.setColor(Color.black);
-               var5.fillRect(0, 0, Class23.anInt454, Class140_Sub7.anInt2934);
+               var5.fillRect(0, 0, Class23.canvasWidth, Class140_Sub7.canvasHeight);
             }
 
             if(null == var0) {
@@ -197,10 +197,10 @@ final class Class3_Sub28_Sub1 extends Node {
                var6.setFont(TextCore.Helvetica);
                var6.setColor(Color.white);
                var3.drawString(var6, 22, (-var3.method1575(aFontMetrics1822) + 304) / 2);
-               var5.drawImage(anImage2695, Class23.anInt454 / 2 - 152, -18 + Class140_Sub7.anInt2934 / 2, (ImageObserver)null);
+               var5.drawImage(anImage2695, Class23.canvasWidth / 2 - 152, -18 + Class140_Sub7.canvasHeight / 2, (ImageObserver)null);
             } catch (Exception var9) {
-               int var7 = -152 + Class23.anInt454 / 2;
-               int var8 = -18 + Class140_Sub7.anInt2934 / 2;
+               int var7 = -152 + Class23.canvasWidth / 2;
+               int var8 = -18 + Class140_Sub7.canvasHeight / 2;
                var5.setColor(var0);
                var5.drawRect(var7, var8, 303, 33);
                var5.fillRect(var7 + 2, 2 + var8, 3 * var4, 30);
@@ -215,7 +215,7 @@ final class Class3_Sub28_Sub1 extends Node {
             if(Class167.aClass94_2083 != null) {
                var5.setFont(TextCore.Helvetica);
                var5.setColor(Color.white);
-               Class167.aClass94_2083.drawString(var5, Class140_Sub7.anInt2934 / 2 - 26, Class23.anInt454 / 2 - Class167.aClass94_2083.method1575(aFontMetrics1822) / 2);
+               Class167.aClass94_2083.drawString(var5, Class140_Sub7.canvasHeight / 2 - 26, Class23.canvasWidth / 2 - Class167.aClass94_2083.method1575(aFontMetrics1822) / 2);
             }
          } catch (Exception var10) {
             GameShell.canvas.repaint();

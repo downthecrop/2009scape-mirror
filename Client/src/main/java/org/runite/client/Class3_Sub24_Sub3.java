@@ -7,7 +7,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
    Class61 aClass61_3489 = new Class61();
    static CacheIndex aClass153_3490;
    static int[] anIntArray3491 = new int[]{0, -1, 0, 1};
-   static int anInt3492 = 64;
+   static int maxClientMemory = 64;
    private final Class3_Sub24_Sub4 aClass3_Sub24_Sub4_3493;
    static int[] anIntArray3494;
    Class3_Sub24_Sub2 aClass3_Sub24_Sub2_3495 = new Class3_Sub24_Sub2();

@@ -9,7 +9,7 @@ final class Class3_Sub31 extends Linkable {
    int anInt2603;
    static ReferenceCache aReferenceCache_2604 = new ReferenceCache(64);
    static int[] anIntArray2606;
-   static int countryId;
+   static int paramCountryID;
 
 
    static void method820(int var0, int var1) {

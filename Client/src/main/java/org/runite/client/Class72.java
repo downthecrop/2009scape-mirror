@@ -18,9 +18,9 @@ final class Class72 {
 
    static void method1293() {
       try {
-         if(!Client.aBoolean3779 && Class44.anInt718 != 2) {
+         if(!Client.paramAdvertisementSuppressed && Class44.paramModeWhere != 2) {
             try {
-               TextCore.aClass94_38.method1577(Class126.aClient1671);
+               TextCore.aClass94_38.method1577(Client.clientInstance);
             } catch (Throwable var2) {
             }
 

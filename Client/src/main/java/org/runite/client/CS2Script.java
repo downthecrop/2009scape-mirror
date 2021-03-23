@@ -1127,7 +1127,7 @@ final class CS2Script extends Linkable {
                                                       continue;
                                                    }
                                                    if (3335 == opcode) {
-                                                      ItemDefinition.intsStack[iStackCounter++] = Class3_Sub20.language;
+                                                      ItemDefinition.intsStack[iStackCounter++] = Class3_Sub20.paramLanguage;
                                                       continue;
                                                    }
                                                    if (opcode == 3336) {
@@ -1144,7 +1144,7 @@ final class CS2Script extends Linkable {
                                                    }
                                                    if (opcode != 3337)
                                                       break;
-                                                   ItemDefinition.intsStack[iStackCounter++] = Class3_Sub26.anInt2554;
+                                                   ItemDefinition.intsStack[iStackCounter++] = Class3_Sub26.paramAffid;
                                                    continue;
                                                 }
                                                 if (opcode < 3500) {
@@ -1399,7 +1399,7 @@ final class CS2Script extends Linkable {
                                                    }
                                                    if (opcode != 3629)
                                                       break;
-                                                   ItemDefinition.intsStack[iStackCounter++] = Class3_Sub31.countryId;
+                                                   ItemDefinition.intsStack[iStackCounter++] = Class3_Sub31.paramCountryID;
                                                    continue;
                                                 }
                                                 if (opcode < 4000) {
@@ -1710,7 +1710,7 @@ final class CS2Script extends Linkable {
                                                                            } else if (class94_47.startsWith(TextCore.TextGlowThree)) {
                                                                               class94_18 = class94_18.substring(TextCore.TextGlowThree.length());
                                                                               byte3 = 11;
-                                                                           } else if (0 != Class3_Sub20.language)
+                                                                           } else if (0 != Class3_Sub20.paramLanguage)
                                                                               if (class94_47.startsWith(TextCore.TextColorYellow)) {
                                                                                     byte3 = 0;
                                                                                     class94_18 = class94_18.substring(TextCore.TextColorYellow.length());
@@ -1765,7 +1765,7 @@ final class CS2Script extends Linkable {
                                                                            } else if (class94_47.startsWith(TextCore.TextSlide)) {
                                                                               byte4 = 5;
                                                                               class94_18 = class94_18.substring(TextCore.TextSlide.length());
-                                                                           } else if (0 != Class3_Sub20.language)
+                                                                           } else if (0 != Class3_Sub20.paramLanguage)
                                                                               if (class94_47.startsWith(TextCore.TextWave)) {
                                                                                     class94_18 = class94_18.substring(TextCore.TextWave.length());
                                                                                     byte4 = 1;
@@ -2081,7 +2081,7 @@ final class CS2Script extends Linkable {
                                                                         continue;
                                                                   }
                                                                   if (5204 == opcode) {
-                                                                        ItemDefinition.stringsStack[sStackCounter - 1] = GameShell.method27(ItemDefinition.stringsStack[sStackCounter - 1]);
+                                                                        ItemDefinition.stringsStack[sStackCounter - 1] = CS2Methods.method27(ItemDefinition.stringsStack[sStackCounter - 1]);
                                                                         continue;
                                                                   }
                                                                   if (5205 == opcode) {
@@ -2289,7 +2289,7 @@ final class CS2Script extends Linkable {
                                                                   if (l32 < 0 || l32 > 2)
                                                                         l32 = 0;
                                                                   Unsorted.anInt2577 = l32;
-                                                                  Class119.method1730(Class38.aClass87_665);
+                                                                  Class119.method1730(Class38.signlink);
                                                                   continue;
                                                                }
                                                                if (5500 > opcode) {
@@ -2308,7 +2308,7 @@ final class CS2Script extends Linkable {
                                                                   if (opcode == 5401) {
                                                                         iStackCounter -= 2;
                                                                         Class3_Sub13_Sub38.aShortArray3455[ItemDefinition.intsStack[iStackCounter]] = (short) Class56.method1186(ItemDefinition.intsStack[iStackCounter + 1]);
-                                                                        GameShell.method28();
+                                                                        CS2Methods.method28();
                                                                         Unsorted.method746((byte) -29);
                                                                         Class167.method2265();
                                                                         WorldListEntry.method1076();
@@ -2364,7 +2364,7 @@ final class CS2Script extends Linkable {
                                                                            if (Class136.aClass64_1778.anObject974 != null) {
                                                                               byte[] abyte0 = null;
                                                                               abyte0 = ((String) Class136.aClass64_1778.anObject974).getBytes(StandardCharsets.ISO_8859_1);
-                                                                              class94_24 = Class3_Sub13_Sub3.method178(abyte0, abyte0.length, 0);
+                                                                              class94_24 = Class3_Sub13_Sub3.bufferToString(abyte0, abyte0.length, 0);
                                                                            }
                                                                         }
                                                                         ItemDefinition.stringsStack[sStackCounter++] = class94_24;
@@ -2382,12 +2382,12 @@ final class CS2Script extends Linkable {
                                                                         RSString class94_64 = RSString.stringCombiner(new RSString[]{
                                                                               RSInterface.method856(), class94_25
                                                                         });
-                                                                        if (null == GameShell.frame && (!flag5 || Signlink.anInt1214 == 3 || !Signlink.osName.startsWith("win") || Class106.hasInternetExplorer6)) {
+                                                                        if (null == GameShell.frame && (!flag5 || Signlink.anInt1214 == 3 || !Signlink.osName.startsWith("win") || Class106.paramUserUsingInternetExplorer)) {
                                                                            Class99.method1596(class94_64, (byte) 127, flag5);
                                                                         } else {
                                                                            Unsorted.aBoolean2154 = flag5;
                                                                            Class3_Sub13_Sub24.aClass94_3295 = class94_64;
-                                                                           Class15.aClass64_351 = Class38.aClass87_665.method1452(new String(class94_64.method1568(), StandardCharsets.ISO_8859_1), true);
+                                                                           Class15.aClass64_351 = Class38.signlink.method1452(new String(class94_64.method1568(), StandardCharsets.ISO_8859_1), true);
                                                                         }
                                                                         continue;
                                                                   }
@@ -2398,12 +2398,12 @@ final class CS2Script extends Linkable {
                                                                         RSString class94_26 = ItemDefinition.stringsStack[sStackCounter];
                                                                         if (class94_26.length() > 0) {
                                                                            if (null == Class3_Sub30_Sub1.aClass94Array3802)
-                                                                              Class3_Sub30_Sub1.aClass94Array3802 = new RSString[Class3_Sub13_Sub18.anIntArray3218[Class158.anInt2014]];
+                                                                              Class3_Sub30_Sub1.aClass94Array3802 = new RSString[Class3_Sub13_Sub18.anIntArray3218[Class158.paramGameTypeID]];
                                                                            Class3_Sub30_Sub1.aClass94Array3802[i72] = class94_26;
                                                                         }
                                                                         if (class94_55.length() > 0) {
                                                                            if (Unsorted.aClass94Array45 == null)
-                                                                              Unsorted.aClass94Array45 = new RSString[Class3_Sub13_Sub18.anIntArray3218[Class158.anInt2014]];
+                                                                              Unsorted.aClass94Array45 = new RSString[Class3_Sub13_Sub18.anIntArray3218[Class158.paramGameTypeID]];
                                                                            Unsorted.aClass94Array45[i72] = class94_55;
                                                                         }
                                                                         continue;
@@ -2540,7 +2540,7 @@ final class CS2Script extends Linkable {
                                                                                     Class84.method1417();
                                                                            }
                                                                            Unsorted.method746((byte) -29);
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
@@ -2549,52 +2549,52 @@ final class CS2Script extends Linkable {
                                                                            Class3_Sub10.method139(66);
                                                                            Class84.method1417();
                                                                            Unsorted.method792();
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
                                                                         if (opcode == 6003) {
                                                                            Unsorted.aBoolean3604 = ItemDefinition.intsStack[--iStackCounter] == 1;
                                                                            Unsorted.method792();
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
                                                                         if (opcode == 6005) {
                                                                            KeyboardListener.aBoolean1905 = ItemDefinition.intsStack[--iStackCounter] == 1;
                                                                            Class84.method1417();
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
                                                                         if (opcode == 6006) {
                                                                            Class25.aBoolean488 = ItemDefinition.intsStack[--iStackCounter] == 1;
                                                                            ((Class102) Class51.anInterface2_838).method1616(!Class25.aBoolean488);
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
                                                                         if (opcode == 6007) {
                                                                            RSInterface.aBoolean236 = ItemDefinition.intsStack[--iStackCounter] == 1;
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
                                                                         if (opcode == 6008) {
                                                                            WorldListEntry.aBoolean2623 = ItemDefinition.intsStack[--iStackCounter] == 1;
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
                                                                         if (opcode == 6009) {
                                                                            Class3_Sub13_Sub22.aBoolean3275 = ItemDefinition.intsStack[--iStackCounter] == 1;
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
                                                                         if (opcode == 6010) {
                                                                            Class140_Sub6.aBoolean2910 = 1 == ItemDefinition.intsStack[--iStackCounter];
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
@@ -2603,7 +2603,7 @@ final class CS2Script extends Linkable {
                                                                            if (l34 < 0 || l34 > 2)
                                                                               l34 = 0;
                                                                            Unsorted.anInt1137 = l34;
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
@@ -2624,7 +2624,7 @@ final class CS2Script extends Linkable {
                                                                                     Class51.method1137(0.6F);
                                                                            }
                                                                            Class84.method1417();
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
@@ -2632,7 +2632,7 @@ final class CS2Script extends Linkable {
                                                                            Class128.aBoolean1685 = ItemDefinition.intsStack[--iStackCounter] == 1;
                                                                            if (HDToolKit.highDetail)
                                                                               Class84.method1417();
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
@@ -2640,7 +2640,7 @@ final class CS2Script extends Linkable {
                                                                            Class38.aBoolean661 = ItemDefinition.intsStack[--iStackCounter] == 1;
                                                                            if (HDToolKit.highDetail)
                                                                               Class3_Sub13_Sub14.method236();
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
@@ -2656,7 +2656,7 @@ final class CS2Script extends Linkable {
                                                                         if (opcode == 6017) {
                                                                            Class3_Sub13_Sub15.aBoolean3184 = ItemDefinition.intsStack[--iStackCounter] == 1;
                                                                            GameShell.method34();
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
@@ -2667,7 +2667,7 @@ final class CS2Script extends Linkable {
                                                                            if (j35 > 127)
                                                                               j35 = 127;
                                                                            anInt2453 = j35;
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
@@ -2689,7 +2689,7 @@ final class CS2Script extends Linkable {
                                                                               }
                                                                               Unsorted.anInt120 = k35;
                                                                            }
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
@@ -2700,7 +2700,7 @@ final class CS2Script extends Linkable {
                                                                            if (127 < l35)
                                                                               l35 = 127;
                                                                            Sprites.anInt340 = l35;
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            continue;
                                                                         }
@@ -2716,12 +2716,12 @@ final class CS2Script extends Linkable {
                                                                            if (i36 > 2)
                                                                               i36 = 2;
                                                                            boolean flag6 = false;
-                                                                           if (96 > Class3_Sub24_Sub3.anInt3492) {
+                                                                           if (96 > Class3_Sub24_Sub3.maxClientMemory) {
                                                                               flag6 = true;
                                                                               i36 = 0;
                                                                            }
                                                                            Class127_Sub1.method1758(i36);
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            aBoolean2705 = false;
                                                                            ItemDefinition.intsStack[iStackCounter++] = flag6 ? 0 : 1;
                                                                            continue;
@@ -2731,13 +2731,13 @@ final class CS2Script extends Linkable {
                                                                            if (j36 < 0 || 2 < j36)
                                                                               j36 = 0;
                                                                            Class3_Sub28_Sub9.anInt3622 = j36;
-                                                                           Class119.method1730(Class38.aClass87_665);
+                                                                           Class119.method1730(Class38.signlink);
                                                                            continue;
                                                                         }
                                                                         if (opcode != 6028)
                                                                            break;
                                                                         Class163_Sub3.aBoolean3004 = ItemDefinition.intsStack[--iStackCounter] != 0;
-                                                                        Class119.method1730(Class38.aClass87_665);
+                                                                        Class119.method1730(Class38.signlink);
                                                                         continue;
                                                                   }
                                                                   if (opcode < 6200) {
@@ -2942,7 +2942,7 @@ final class CS2Script extends Linkable {
                                                                               }
                                                                               if (opcode == 6504) {
                                                                                     Unsorted.anInt2148 = ItemDefinition.intsStack[--iStackCounter];
-                                                                                    Class119.method1730(Class38.aClass87_665);
+                                                                                    Class119.method1730(Class38.signlink);
                                                                                     continue;
                                                                               }
                                                                               if (6505 == opcode) {
@@ -2982,7 +2982,7 @@ final class CS2Script extends Linkable {
                                                                               break;
                                                                            if (6600 == opcode) {
                                                                               Class15.aBoolean346 = ItemDefinition.intsStack[--iStackCounter] == 1;
-                                                                              Class119.method1730(Class38.aClass87_665);
+                                                                              Class119.method1730(Class38.signlink);
                                                                               continue;
                                                                            }
                                                                            if (opcode != 6601)
@@ -3429,7 +3429,7 @@ final class CS2Script extends Linkable {
                                                    break;
                                                 boolean flag1 = ItemDefinition.intsStack[--iStackCounter] != 0;
                                                 int k64 = ItemDefinition.intsStack[--iStackCounter];
-                                                ItemDefinition.stringsStack[sStackCounter++] = Class3_Sub23.method407(Class3_Sub20.language, flag1, 0, k64);
+                                                ItemDefinition.stringsStack[sStackCounter++] = Class3_Sub23.method407(Class3_Sub20.paramLanguage, flag1, 0, k64);
                                                 continue;
                                           }
                                           RSInterface class11_8 = Class7.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);

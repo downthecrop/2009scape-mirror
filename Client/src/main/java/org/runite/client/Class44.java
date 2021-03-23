@@ -10,7 +10,7 @@ import java.io.InputStreamReader;
 
 public abstract class Class44 {
 
-	static int anInt718 = 0;
+	static int paramModeWhere = 0;
 	static int anInt719 = 0;
 	static int[][][] anIntArrayArrayArray720;
 	int countryIndex;

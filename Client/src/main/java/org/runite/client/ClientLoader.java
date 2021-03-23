@@ -106,7 +106,7 @@ public class ClientLoader extends Applet {
 			props.put("lowmem", "0");
 			props.put("settings", "kKmok3kJqOeN6D3mDdihco3oPeYN2KFy6W5--vZUbNA");
 			Signlink sn = new Signlink(this, 32, "runescape", 29);
-			Client.providesignlink(sn);
+			Client.provideSignlink(sn);
 			game = new Client();
 			game.init();
 		} catch (Exception localException) {

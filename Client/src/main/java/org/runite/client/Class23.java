@@ -3,7 +3,7 @@ package org.runite.client;
 public final class Class23 {
 
    static int anInt453 = 0;
-   public static int anInt454;
+   public static int canvasWidth;
    static int anInt455;
    static boolean[][] aBooleanArrayArray457;
 

@@ -284,7 +284,7 @@ public class TextCore {
     static RSString worldmapOverlay2 = RSString.parse("overlay2");
     static RSString aClass94_3133 = RSString.parse(")2");
     static RSString aClass94_422 = RSString.parse("loc");
-    static RSString aClass94_3672 = RSString.parse("");
+    static RSString emptyJagexString = RSString.parse("");
     static RSString clientDebugNotifier = RSString.parse("<img=2>Client debug notifier");
     static RSString aClass94_3209 = RSString.parse("showingVideoAd");
     static RSString aClass94_592 = RSString.parse("<img=0>");

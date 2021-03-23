@@ -11,7 +11,6 @@ public final class Class126 {
    int anInt1667;
    public static Class3_Sub28_Sub17 aClass3_Sub28_Sub17_1669;
    int anInt1670;
-   static Client aClient1671;
    int anInt1673;
    boolean aBoolean1674;
    int anInt1675;

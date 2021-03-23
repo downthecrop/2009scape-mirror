@@ -205,7 +205,7 @@ public class DataBuffer extends Linkable {
                 while (Objects.requireNonNull(this.buffer)[this.index++] != 0) {
                 }
 
-                return Class3_Sub13_Sub3.method178(this.buffer, this.index - (var3 - -1), var3);
+                return Class3_Sub13_Sub3.bufferToString(this.buffer, this.index - (var3 - -1), var3);
             } else {
                 throw new IllegalStateException("Bad version number in gjstr2");
             }
@@ -358,7 +358,7 @@ public class DataBuffer extends Linkable {
 
         while (this.buffer[this.index++] != 0) ;
 
-        return Class3_Sub13_Sub3.method178(this.buffer, (this.index - 1) - startIndex, startIndex);
+        return Class3_Sub13_Sub3.bufferToString(this.buffer, (this.index - 1) - startIndex, startIndex);
     }
 
     final int getSmart() {

@@ -630,7 +630,7 @@ final class Class1 {
                 int var15 = var0 + var2 * Class60.anInt930 / Class23.anInt455;
                 int var7 = var2 * Class49.anInt817 / Class23.anInt455;
                 int var9 = 16711680;
-                if (Class158.anInt2014 == 1) {
+                if (Class158.paramGameTypeID == 1) {
                     var9 = 16777215;
                 }
                 Toolkit.getActiveToolkit().drawRect(var15, var6, var7, var8, var9, 255);

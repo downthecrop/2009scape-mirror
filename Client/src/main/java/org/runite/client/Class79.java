@@ -158,7 +158,7 @@ final class Class79 {
 
                   if(var2 >= 4) {
                      int var4 = var0.readUnsignedByte();
-                     if(Class3_Sub24_Sub3.anInt3492 < 96) {
+                     if(Class3_Sub24_Sub3.maxClientMemory < 96) {
                         var4 = 0;
                      }
 

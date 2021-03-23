@@ -226,12 +226,12 @@ final class Player extends Class140_Sub4 {
             SequenceDefinition var14 = this.anInt2764 != -1 && !this.aBoolean3968 && (this.method1965().anInt368 != this.anInt2764 || var13 == null)? SequenceDefinition.getAnimationDefinition(this.anInt2764):null;
             Model var15 = this.class52.method1165(this.aClass145Array2809, this.anInt2776, var14, var13, this.anInt2802, this.anInt2793, -120, this.anInt2760, this.anInt2832, this.anInt2813);
             int var16 = Unsorted.method1727((byte)123);
-            if(HDToolKit.highDetail && Class3_Sub24_Sub3.anInt3492 < 96 && var16 > 50) {
+            if(HDToolKit.highDetail && Class3_Sub24_Sub3.maxClientMemory < 96 && var16 > 50) {
                Class3_Sub1.method90(1);
             }
 
             int var17;
-            if(0 != Class3_Sub13_Sub13.anInt3148 && var16 < 50) {
+            if(0 != Class3_Sub13_Sub13.paramModeWhat && var16 < 50) {
                for(var17 = 50 - var16; Class56.anInt893 < var17; ++Class56.anInt893) {
                   Class3_Sub6.aByteArrayArray2287[Class56.anInt893] = new byte[102400];
                }

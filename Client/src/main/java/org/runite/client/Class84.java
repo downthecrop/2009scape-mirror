@@ -83,25 +83,6 @@ final class Class84 {
             Toolkit.getActiveToolkit().drawRect(1 + x, y + 18, width + -2, -19 + height, GameConfig.RCM_BORDER_COLOR, GameConfig.RCM_BORDER_OPACITY);
          }
 
-         /**
-          * Old toolkit stuff, updated with new and improved toolkit (thanks Techdaan <3)
-          *
-         if(HDToolKit.highDetail) {
-            OpenGlToolkit.OPENGL_TOOLKIT.fillRect(var1, var2, var3, var4, var5, 45);
-            OpenGlToolkit.OPENGL_TOOLKIT.fillRect(1 + var1, 1 + var2, var3 + -2, 16, 0, 255);
-            OpenGlToolkit.OPENGL_TOOLKIT.drawRect(1 + var1, var2 + 18, var3 + -2, -19 + var4, 11119017, 120);
-            //            Class22.method934(var1, var2, var3, var4, var5); Old "toolkit"
-            //System.out.println("Class84: rightClickContextMenuDraw debug: Context (choose option) menu: Passing values method934(" + var1 + ", " + var2 + ", " + var3 + ", " + var4 + ", " + var5 + ")");
-            //            Class22.method934(1 + var1, 1 + var2, var3 + -2, 16, 0);
-            //System.out.println("Class84: rightClickContextMenuDraw debug: Context (choose option) menu: Passing values method934(" + (1 + var1) +"," + (1 + var2) + ", " + (var3 + -2) + ", " + "16, " + "0)");
-            //            Class22.drawRect(1 + var1, var2 + 18, var3 + -2, -19 + var4, 0);//Outer Rectangle choose option Box (contains options)
-            //System.out.println("Class84: rightClickContextMenuDraw debug: Context (choose option) menu: Passing values drawRect(" + (1 + var1) + ", " + (var2 + 18) + ", " + (var3 + -2) + ", " + (-19 + var4) + ", " + "0)");
-         } else {
-            Class74.method934(var1, var2, var3, var4, var5);
-            Class74.method934(1 + var1, 1 + var2, var3 + -2, 16, 0);
-            Class74.drawRect(1 + var1, var2 + 18, -2 + var3, -19 + var4, 0);
-         }
-          */
          Class168.aClass3_Sub28_Sub17_2096.method681(RSString.parse(GameConfig.RCM_TITLE), x - -3, y + 14, contextMenuColor, -1);
          int var7 = Unsorted.anInt1709;
          int var6 = Class126.anInt1676;

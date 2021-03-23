@@ -12,6 +12,7 @@ abstract class Class146 {
    static int anInt1901 = 2;
    static int[][][] anIntArrayArrayArray1903;
    static int anInt1904;
+   static int anInt3 = 0;
 
 
    abstract int method2078();
@@ -42,7 +43,7 @@ abstract class Class146 {
 
    static void method2083(int var0, int var1, int var2, byte[][][] var3, int var4, byte var5, int var6, int var7) {
       ++Class3_Sub28_Sub1.anInt3539;
-      GameShell.anInt3 = 0;
+      anInt3 = 0;
       int var8 = var6 - 16;
       int var9 = var6 + 16;
       int var10 = var7 - 16;
@@ -63,7 +64,7 @@ abstract class Class146 {
                      var16.aBoolean2225 = true;
                      var16.aBoolean2236 = var16.anInt2223 > 0;
 
-                     ++GameShell.anInt3;
+                     ++anInt3;
                   } else {
                      var16.aBoolean2222 = false;
                      var16.aBoolean2225 = false;
@@ -202,7 +203,7 @@ abstract class Class146 {
                      }
                   }
 
-                  if(GameShell.anInt3 == 0) {
+                  if(anInt3 == 0) {
                      if(!var22) {
                         Class3_Sub13_Sub21.aBoolean3261 = false;
                      }
@@ -256,7 +257,7 @@ abstract class Class146 {
                      }
                   }
 
-                  if(GameShell.anInt3 == 0) {
+                  if(anInt3 == 0) {
                      if(!var22) {
                         Class3_Sub13_Sub21.aBoolean3261 = false;
                      }

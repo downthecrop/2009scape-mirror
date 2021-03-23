@@ -2,7 +2,7 @@ package org.runite.client;
 
 class Class163_Sub2 extends Class163 {
 
-   static RSString aClass94_2996 = null;
+   static RSString paramSettings = null;
    static Class30[] aClass30Array2998 = new Class30[29]; //TODO
 
 

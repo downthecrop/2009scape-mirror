@@ -614,7 +614,7 @@ final class Class145 {
                }
 
                var2.aBoolean2225 = false;
-               --GameShell.anInt3;
+               --Class146.anInt3;
                Class72 var29 = var2.aClass72_2245;
                if(var29 != null && var29.anInt1077 != 0) {
                   if(HDToolKit.highDetail) {

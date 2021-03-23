@@ -76,7 +76,7 @@ final class Class3_Sub13_Sub21 extends Class3_Sub13 {
 
                if(Unsorted.registryStage == 1) {
             	   //Ip & Port
-                  Class3_Sub9.aClass64_2318 = Class38.aClass87_665.method1441((byte)8, Class38_Sub1.accRegistryIp, Class140_Sub6.accRegistryPort);
+                  Class3_Sub9.aClass64_2318 = Class38.signlink.method1441((byte)8, Class38_Sub1.accRegistryIp, Class140_Sub6.accRegistryPort);
                   Unsorted.registryStage = 2;
                }
 
@@ -88,7 +88,7 @@ final class Class3_Sub13_Sub21 extends Class3_Sub13 {
                   if(1 != Class3_Sub9.aClass64_2318.anInt978) {
                      return;
                   }
-                  Class3_Sub15.activeConnection = new Connection((Socket)Class3_Sub9.aClass64_2318.anObject974, Class38.aClass87_665);
+                  Class3_Sub15.activeConnection = new Connection((Socket)Class3_Sub9.aClass64_2318.anObject974, Class38.signlink);
                   Class3_Sub9.aClass64_2318 = null;
                   Class3_Sub15.activeConnection.sendBytes(Class3_Sub13_Sub1.outgoingBuffer.buffer, Class3_Sub13_Sub1.outgoingBuffer.index);
                    if(WorldListEntry.aClass155_2627 != null) {

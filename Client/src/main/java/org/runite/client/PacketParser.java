@@ -154,20 +154,20 @@ public final class PacketParser {
                         }
 
                         if (!isIgnored && inTutorialIsland == 0) {
-                            Class3_Sub30_Sub1.addChatMessage(playerName, 10, TextCore.aClass94_3672, -1);
+                            Class3_Sub30_Sub1.addChatMessage(playerName, 10, TextCore.emptyJagexString, -1);
                         }
                     } else if (message.endsWith(TextCore.HasClan)) {
                         playerName = message.substring(0, message.indexOf(TextCore.HasClan, (byte) -83 ^ -50), 0);
-                        Class3_Sub30_Sub1.addChatMessage(TextCore.aClass94_3672, 11, playerName, -1);
+                        Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 11, playerName, -1);
                     } else if (message.endsWith(TextCore.HasTrade)) {
                         playerName = message.substring(0, message.indexOf(TextCore.HasTrade, 102), 0);
                         if (0 == inTutorialIsland) {
-                            Class3_Sub30_Sub1.addChatMessage(TextCore.aClass94_3672, 12, playerName, -1);
+                            Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 12, playerName, -1);
                         }
                     } else if (message.endsWith(TextCore.HasAssist)) {
                         playerName = message.substring(0, message.indexOf(TextCore.HasAssist, 121), 0);
                         if (inTutorialIsland == 0) {
-                            Class3_Sub30_Sub1.addChatMessage(TextCore.aClass94_3672, 13, playerName, -1);
+                            Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 13, playerName, -1);
                         }
                     } else if (message.endsWith(TextCore.HasDuelStake)) {
                         isIgnored = false;
@@ -182,7 +182,7 @@ public final class PacketParser {
                         }
 
                         if (!isIgnored && inTutorialIsland == 0) {
-                            Class3_Sub30_Sub1.addChatMessage(playerName, 14, TextCore.aClass94_3672, -1);
+                            Class3_Sub30_Sub1.addChatMessage(playerName, 14, TextCore.emptyJagexString, -1);
                         }
                     } else if (message.endsWith(TextCore.HasDuelFriend)) {
                         playerName = message.substring(0, message.indexOf(TextCore.char_colon, 118), 0);
@@ -197,7 +197,7 @@ public final class PacketParser {
                         }
 
                         if (!isIgnored && 0 == inTutorialIsland) {
-                            Class3_Sub30_Sub1.addChatMessage(playerName, 15, TextCore.aClass94_3672, -1);
+                            Class3_Sub30_Sub1.addChatMessage(playerName, 15, TextCore.emptyJagexString, -1);
                         }
                     } else if (message.endsWith(TextCore.HasClanRequest)) {
                         playerName = message.substring(0, message.indexOf(TextCore.char_colon, (byte) -83 + 138), 0);
@@ -212,7 +212,7 @@ public final class PacketParser {
                         }
 
                         if (!isIgnored && inTutorialIsland == 0) {
-                            Class3_Sub30_Sub1.addChatMessage(playerName, 16, TextCore.aClass94_3672, -1);
+                            Class3_Sub30_Sub1.addChatMessage(playerName, 16, TextCore.emptyJagexString, -1);
                         }
                     } else if (message.endsWith(TextCore.HasAllyReq)) {
                         playerName = message.substring(0, message.indexOf(TextCore.char_colon, (byte) -83 + 189), (byte) -83 + 83);
@@ -231,7 +231,7 @@ public final class PacketParser {
                             Class3_Sub30_Sub1.addChatMessage(playerName, 21, var41, -1);
                         }
                     } else {
-                        Class3_Sub30_Sub1.addChatMessage(TextCore.aClass94_3672, 0, message, (byte) -83 + 82);
+                        Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, message, (byte) -83 + 82);
                     }
 
                     Unsorted.incomingOpcode = -1;
@@ -394,7 +394,7 @@ public final class PacketParser {
                                     }
                                 } else if (Unsorted.incomingOpcode == 164) {
                                     nodeModelId = GraphicDefinition.incomingBuffer.readIntV1();
-                                    Class136.aClass64_1778 = Class38.aClass87_665.method1449((byte) -83 ^ -82, nodeModelId);
+                                    Class136.aClass64_1778 = Class38.signlink.method1449((byte) -83 ^ -82, nodeModelId);
                                     Unsorted.incomingOpcode = -1;
                                     return true;
                                 } else if (Unsorted.incomingOpcode == 225) {
@@ -814,7 +814,7 @@ public final class PacketParser {
                                                         isIgnored = false;
                                                     }
 
-                                                    var41 = TextCore.aClass94_3672;
+                                                    var41 = TextCore.emptyJagexString;
                                                     if (modelId > 0) {
                                                         var41 = GraphicDefinition.incomingBuffer.readString();
                                                     }
@@ -826,11 +826,11 @@ public final class PacketParser {
                                                             if (Unsorted.anIntArray882[var33] != modelId) {
                                                                 Unsorted.anIntArray882[var33] = modelId;
                                                                 if (0 < modelId) {
-                                                                    Class3_Sub30_Sub1.addChatMessage(TextCore.aClass94_3672, 5, RSString.stringCombiner(new RSString[]{var46, TextCore.HasLoggedIn}), -1);
+                                                                    Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 5, RSString.stringCombiner(new RSString[]{var46, TextCore.HasLoggedIn}), -1);
                                                                 }
 
                                                                 if (modelId == 0) {
-                                                                    Class3_Sub30_Sub1.addChatMessage(TextCore.aClass94_3672, 5, RSString.stringCombiner(new RSString[]{var46, TextCore.HasLoggedOut}), -1);
+                                                                    Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 5, RSString.stringCombiner(new RSString[]{var46, TextCore.HasLoggedOut}), -1);
                                                                 }
                                                             }
 
@@ -1037,7 +1037,7 @@ public final class PacketParser {
                                                         Class140_Sub6.anInt2905 = anInt3213;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 114) {
-                                                        Class3_Sub13_Sub29.method305(Class38.aClass87_665, GraphicDefinition.incomingBuffer, Unsorted.incomingPacketLength);
+                                                        Class3_Sub13_Sub29.method305(Class38.signlink, GraphicDefinition.incomingBuffer, Unsorted.incomingPacketLength);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (65 == Unsorted.incomingOpcode) {
@@ -1098,13 +1098,13 @@ public final class PacketParser {
 
                                                         byte[] var22 = new byte[Unsorted.incomingPacketLength];
                                                         GraphicDefinition.incomingBuffer.method811((byte) 30, 0, var22, Unsorted.incomingPacketLength);
-                                                        playerName = Class3_Sub13_Sub3.method178(var22, Unsorted.incomingPacketLength, 0);
-                                                        if (null == GameShell.frame && (3 == Signlink.anInt1214 || !Signlink.osName.startsWith("win") || Class106.hasInternetExplorer6)) {
+                                                        playerName = Class3_Sub13_Sub3.bufferToString(var22, Unsorted.incomingPacketLength, 0);
+                                                        if (null == GameShell.frame && (3 == Signlink.anInt1214 || !Signlink.osName.startsWith("win") || Class106.paramUserUsingInternetExplorer)) {
                                                             Class99.method1596(playerName, (byte) 127, true);
                                                         } else {
                                                             Class3_Sub13_Sub24.aClass94_3295 = playerName;
                                                             Unsorted.aBoolean2154 = true;
-                                                            Class15.aClass64_351 = Class38.aClass87_665.method1452(new String(playerName.method1568(), StandardCharsets.ISO_8859_1), true);
+                                                            Class15.aClass64_351 = Class38.signlink.method1452(new String(playerName.method1568(), StandardCharsets.ISO_8859_1), true);
                                                         }
 
                                                         Unsorted.incomingOpcode = -1;
@@ -1711,7 +1711,7 @@ public final class PacketParser {
                                                             Unsorted.incomingOpcode = -1;
                                                             return true;
                                                         } else {
-                                                            Class49.method1125("T1 - " + Unsorted.incomingOpcode + "," + Class7.anInt2166 + "," + Class24.anInt469 + " - " + Unsorted.incomingPacketLength, null, (byte) 117);
+                                                            Class49.reportError("T1 - " + Unsorted.incomingOpcode + "," + Class7.anInt2166 + "," + Class24.anInt469 + " - " + Unsorted.incomingPacketLength, null, (byte) 117);
                                                             Class167.method2269((byte) 46);
                                                             return true;
                                                         }

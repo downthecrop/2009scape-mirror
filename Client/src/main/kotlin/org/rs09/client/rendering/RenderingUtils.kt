@@ -14,11 +14,11 @@ object RenderingUtils {
 
     // TODO Is this actually the width?
     val width: Int
-        get() = Class23.anInt454
+        get() = Class23.canvasWidth
 
     // TODO Is this actually the height?
     val height: Int
-        get() = Class140_Sub7.anInt2934
+        get() = Class140_Sub7.canvasHeight
 
     @JvmStatic
     @Deprecated("Please use the Toolkit methods instead of this delegating method", ReplaceWith("Toolkit.getActiveToolkit().fillRect(x, y, w, h, rgb, alpha)"))

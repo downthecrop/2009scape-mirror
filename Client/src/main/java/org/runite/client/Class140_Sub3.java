@@ -309,7 +309,7 @@ final class Class140_Sub3 extends GameObject {
             return null;
          } else {
             int var6;
-            if(Class158.anInt2014 != 0 && this.aBoolean2721 && (null == this.aClass142_2722 || var4.animationId != this.aClass142_2722.animId)) {
+            if(Class158.paramGameTypeID != 0 && this.aBoolean2721 && (null == this.aClass142_2722 || var4.animationId != this.aClass142_2722.animId)) {
                var6 = var4.animationId;
                if(var4.animationId == -1) {
                   var6 = var5;

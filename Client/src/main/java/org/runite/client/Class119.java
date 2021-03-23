@@ -14,7 +14,7 @@ final class Class119 {
          Object var1;
          if(null == Class3_Sub13_Sub10.aFrame3121) {
             if(GameShell.frame == null) {
-               var1 = Class38.aClass87_665.applet;
+               var1 = Class38.signlink.gameApplet;
             } else {
                var1 = GameShell.frame;
             }
@@ -32,22 +32,22 @@ final class Class119 {
          }
 
          if(Class83.method1411(0) >= 2) {
-            Class23.anInt454 = Unsorted.anInt2334;
+            Class23.canvasWidth = Unsorted.anInt2334;
             Class84.anInt1164 = 0;
             Class106.anInt1442 = 0;
-            Class140_Sub7.anInt2934 = Class70.anInt1047;
+            Class140_Sub7.canvasHeight = Class70.anInt1047;
          } else {
             Class106.anInt1442 = 0;
             Class84.anInt1164 = (-765 + Unsorted.anInt2334) / 2;
-            Class140_Sub7.anInt2934 = 503;
-            Class23.anInt454 = 765;
+            Class140_Sub7.canvasHeight = 503;
+            Class23.canvasWidth = 765;
          }
 
          if(HDToolKit.highDetail) {
-            HDToolKit.method1854(Class23.anInt454, Class140_Sub7.anInt2934);
+            HDToolKit.method1854(Class23.canvasWidth, Class140_Sub7.canvasHeight);
          }
 
-         GameShell.canvas.setSize(Class23.anInt454, Class140_Sub7.anInt2934);
+         GameShell.canvas.setSize(Class23.canvasWidth, Class140_Sub7.canvasHeight);
          if(var1 == GameShell.frame) {
             var2 = GameShell.frame.getInsets();
             GameShell.canvas.setLocation(var2.left + Class84.anInt1164, Class106.anInt1442 + var2.top);

@@ -159,7 +159,7 @@ public final class Class3_Sub30_Sub1 extends DataBuffer {
 
 				boolean var14;
 				if(18 == var4) {
-					if(Class158.anInt2014 == 1) {
+					if(Class158.paramGameTypeID == 1) {
 						Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
 					} else {
 						var14 = Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, false, 0, 2597 ^ 2599, var2, 0, 0, 2, var3, Class102.player.anIntArray2767[0]);
@@ -199,7 +199,7 @@ public final class Class3_Sub30_Sub1 extends DataBuffer {
 				if(var4 == 1006) {
 					var13 = Class7.getRSInterface(var3);
 					if(null != var13 && var13.itemIds[var2] >= 100000) {
-						addChatMessage(TextCore.aClass94_3672, 0, RSString.stringCombiner(new RSString[]{RSString.stringAnimator(var13.itemIds[var2]), TextCore.aClass94_3777, ItemDefinition.getItemDefinition(var5).name}), -1);
+						addChatMessage(TextCore.emptyJagexString, 0, RSString.stringCombiner(new RSString[]{RSString.stringAnimator(var13.itemIds[var2]), TextCore.aClass94_3777, ItemDefinition.getItemDefinition(var5).name}), -1);
 					} else {
 						Class3_Sub13_Sub1.outgoingBuffer.putOpcode(92);
 						Class3_Sub13_Sub1.outgoingBuffer.writeShort128LE(var5);
@@ -372,7 +372,7 @@ public final class Class3_Sub30_Sub1 extends DataBuffer {
 				}
 
 				if(var4 == 21) {
-					if(Class158.anInt2014 == 1) {
+					if(Class158.paramGameTypeID == 1) {
 						Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2597 + -2595, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
 					} else {
 						var14 = Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, false, 0, 2597 + -2595, var2, 0, 0, 2, var3, Class102.player.anIntArray2767[0]);
@@ -463,7 +463,7 @@ public final class Class3_Sub30_Sub1 extends DataBuffer {
 					}
 
 					if(34 == var4) {
-						if(Class158.anInt2014 == 1) {
+						if(Class158.paramGameTypeID == 1) {
 							Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
 						} else {
 							var14 = Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, false, 0, 2597 ^ 2599, var2, 0, 0, 2, var3, Class102.player.anIntArray2767[0]);
@@ -628,7 +628,7 @@ public final class Class3_Sub30_Sub1 extends DataBuffer {
 					}
 
 					if(var4 == 24) {
-						if(Class158.anInt2014 == 1) {
+						if(Class158.paramGameTypeID == 1) {
 							Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2597 + -2595, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
 						} else {
 							var14 = Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, false, 0, 2, var2, 0, 0, 2, var3, Class102.player.anIntArray2767[0]);
@@ -800,7 +800,7 @@ public final class Class3_Sub30_Sub1 extends DataBuffer {
 						}
 
 						if(var4 == 20) {
-							if(1 == Class158.anInt2014) {
+							if(1 == Class158.paramGameTypeID) {
 								Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
 							} else {
 								var14 = Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, false, 0, 2, var2, 0, 0, 2, var3, Class102.player.anIntArray2767[0]);

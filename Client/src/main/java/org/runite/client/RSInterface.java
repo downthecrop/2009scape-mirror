@@ -2,6 +2,7 @@ package org.runite.client;
 
 public final class RSInterface {
 
+    static boolean aBoolean6 = false;
     boolean hidden = false;
     Object[] anObjectArray156;
     boolean aBoolean157;
@@ -246,16 +247,16 @@ public final class RSInterface {
         try {
 
             RSString var1 = TextCore.aClass94_4052;
-            RSString var2 = TextCore.aClass94_3672;
-            if (Class44.anInt718 != 0) {
+            RSString var2 = TextCore.emptyJagexString;
+            if (Class44.paramModeWhere != 0) {
                 var1 = RSString.parse("www)2wtqa");
             }
 
-            if (null != Class163_Sub2.aClass94_2996) {
-                var2 = RSString.stringCombiner(new RSString[]{TextCore.aClass94_3637, Class163_Sub2.aClass94_2996});
+            if (null != Class163_Sub2.paramSettings) {
+                var2 = RSString.stringCombiner(new RSString[]{TextCore.aClass94_3637, Class163_Sub2.paramSettings});
             }
 
-            return RSString.stringCombiner(new RSString[]{TextCore.aClass94_577, var1, TextCore.aClass94_3601, RSString.stringAnimator(Class3_Sub20.language), TextCore.aClass94_1932, RSString.stringAnimator(Class3_Sub26.anInt2554), var2, TextCore.aClass94_2735});
+            return RSString.stringCombiner(new RSString[]{TextCore.aClass94_577, var1, TextCore.aClass94_3601, RSString.stringAnimator(Class3_Sub20.paramLanguage), TextCore.aClass94_1932, RSString.stringAnimator(Class3_Sub26.paramAffid), var2, TextCore.aClass94_2735});
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "be.N(" + true + ')');
         }
@@ -541,7 +542,7 @@ public final class RSInterface {
 
     final AbstractSprite method859(int var2) {
         try {
-            GameShell.aBoolean6 = false;
+            aBoolean6 = false;
             if (var2 >= 0 && var2 < this.anIntArray197.length) {
                 int var3 = this.anIntArray197[var2];
                 if (var3 == -1) {
@@ -551,7 +552,7 @@ public final class RSInterface {
                     if (var4 == null) {
                         var4 = Unsorted.method602(var3, Class12.aClass153_323);
                         if (null == var4) {
-                            GameShell.aBoolean6 = true;
+                            aBoolean6 = true;
                         } else {
                             Class114.aReferenceCache_1569.put(var4, (long) var3);
                         }
@@ -631,7 +632,7 @@ public final class RSInterface {
 
     final Model method865(int var1, SequenceDefinition var2, int var3, int var4, int var5, boolean var6, Class52 var7) {
         try {
-            GameShell.aBoolean6 = false;
+            aBoolean6 = false;
             int var8;
             int var9;
             if (var6) {
@@ -655,7 +656,7 @@ public final class RSInterface {
                     if (var10 == null) {
                         Model_Sub1 var18 = Model_Sub1.method2015(Class119.aClass153_1628, var9);
                         if (var18 == null) {
-                            GameShell.aBoolean6 = true;
+                            aBoolean6 = true;
                             return null;
                         }
 
@@ -671,7 +672,7 @@ public final class RSInterface {
                 } else if (var8 == 2) {
                     var10 = NPCDefinition.getNPCDefinition(var9).getChatModel(var2, var5, var1, 27, var3);
                     if (null == var10) {
-                        GameShell.aBoolean6 = true;
+                        aBoolean6 = true;
                         return null;
                     } else {
                         return var10;
@@ -681,7 +682,7 @@ public final class RSInterface {
                         ItemDefinition var16 = ItemDefinition.getItemDefinition(var9);
                         Model var17 = var16.method1110(var1, var5, var2, 10, var3);
                         if (var17 == null) {
-                            GameShell.aBoolean6 = true;
+                            aBoolean6 = true;
                             return null;
                         } else {
                             return var17;
@@ -689,7 +690,7 @@ public final class RSInterface {
                     } else if (var8 == 6) {
                         var10 = NPCDefinition.getNPCDefinition(var9).method1476((Class145[]) null, 0, (byte) -120, 0, var1, var5, var3, (SequenceDefinition) null, 0, var2);
                         if (null == var10) {
-                            GameShell.aBoolean6 = true;
+                            aBoolean6 = true;
                             return null;
                         } else {
                             return var10;
@@ -704,7 +705,7 @@ public final class RSInterface {
                         int var12 = this.anInt265;
                         Model var13 = var7.method1157(var1, var12, var15, var5, var2, var3, var11);
                         if (var13 == null) {
-                            GameShell.aBoolean6 = true;
+                            aBoolean6 = true;
                             return null;
                         } else {
                             return var13;
@@ -715,7 +716,7 @@ public final class RSInterface {
                 } else {
                     var10 = var7.method1167(var5, var2, var3, var1);
                     if (null == var10) {
-                        GameShell.aBoolean6 = true;
+                        aBoolean6 = true;
                         return null;
                     } else {
                         return var10;
@@ -729,7 +730,7 @@ public final class RSInterface {
 
     final AbstractSprite method866(boolean var2) {
         try {
-            GameShell.aBoolean6 = false;
+            aBoolean6 = false;
             int archiveId;
             if (var2) {
                 archiveId = this.anInt296;
@@ -750,7 +751,7 @@ public final class RSInterface {
                     }
 
                     if (null == var7) {
-                        GameShell.aBoolean6 = true;
+                        aBoolean6 = true;
                         return null;
                     } else {
                         if (this.aBoolean178) {
@@ -1007,7 +1008,7 @@ public final class RSInterface {
 
     final Class3_Sub28_Sub17 method868(AbstractIndexedSprite[] var1) {
         try {
-            GameShell.aBoolean6 = false;
+            aBoolean6 = false;
             if (this.anInt270 == -1) {
                 return null;
             } else {
@@ -1015,7 +1016,7 @@ public final class RSInterface {
                 if (null == var3) {
                     var3 = Unsorted.method1300(this.anInt270, Class12.aClass153_323, Class97.aClass153_1378);
                     if (null == var3) {
-                        GameShell.aBoolean6 = true;
+                        aBoolean6 = true;
                     } else {
                         var3.method697(var1, null);
                         Unsorted.aReferenceCache_743.put(var3, this.anInt270);

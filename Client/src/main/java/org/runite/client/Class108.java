@@ -48,11 +48,11 @@ final class Class108 {
             }
 
             Class40.aAbstractSprite_680 = Class75_Sub2.method1344(var0, Class154.anInt1966);
-            int var2 = Class140_Sub7.anInt2934;
+            int var2 = Class140_Sub7.canvasHeight;
             int var3 = var2 * 956 / 503;
-            Objects.requireNonNull(Class40.aAbstractSprite_680).method639((Class23.anInt454 + -var3) / 2, 0, var3, var2);
+            Objects.requireNonNull(Class40.aAbstractSprite_680).method639((Class23.canvasWidth + -var3) / 2, 0, var3, var2);
             SequenceDefinition.aClass109_1856 = InterfaceWidget.a(Class79.anInt1124, var0);
-            Objects.requireNonNull(SequenceDefinition.aClass109_1856).method1667(Class23.anInt454 / 2 + -(SequenceDefinition.aClass109_1856.width / 2), 18);
+            Objects.requireNonNull(SequenceDefinition.aClass109_1856).method1667(Class23.canvasWidth / 2 + -(SequenceDefinition.aClass109_1856.width / 2), 18);
             Class140_Sub2.aBoolean2713 = true;
             if(var1 > -50) {
                Class140_Sub4.aReferenceCache_2792.clearSoftReferences();

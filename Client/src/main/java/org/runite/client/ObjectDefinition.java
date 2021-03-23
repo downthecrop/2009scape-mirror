@@ -49,7 +49,7 @@ final class ObjectDefinition {
    private int anInt1511;
    int anInt1512;
    private byte[] aByteArray1513;
-   static int worldId = 1;
+   static int paramWorldID = 1;
    int anInt1515;
    int anInt1516;
    int anInt1517;

@@ -128,7 +128,7 @@ final class Class49 {
       }
    }
 
-   static void method1125(String var0, Throwable var1, byte var2) {
+   static void reportError(String var0, Throwable var1, byte var2) {
       if(var2 <= 100) {
          aClass47_818 = (NodeCache)null;
       }
@@ -152,11 +152,11 @@ final class Class49 {
          var3 = InterfaceWidget.a("@", "%40", var3);
          var3 = InterfaceWidget.a("&", "%26", var3);
          var3 = InterfaceWidget.a("#", "%23", var3);
-         if(Class3_Sub13_Sub10.aClass87_3125.applet == null) {
+         if(Class3_Sub13_Sub10.aClass87_3125.gameApplet == null) {
             return;
          }
 
-         Class64 var4 = Class3_Sub13_Sub10.aClass87_3125.method1439(false, new URL(Class3_Sub13_Sub10.aClass87_3125.applet.getCodeBase(), "clienterror.ws?c=" + GameShell.anInt4033 + "&u=" + PacketParser.aLong3202 + "&v1=" + Signlink.javaVendor + "&v2=" + Signlink.javaVersion + "&e=" + var3));
+         Class64 var4 = Class3_Sub13_Sub10.aClass87_3125.method1439(false, new URL(Class3_Sub13_Sub10.aClass87_3125.gameApplet.getCodeBase(), "clienterror.ws?c=&u=" + PacketParser.aLong3202 + "&v1=" + Signlink.javaVendor + "&v2=" + Signlink.javaVersion + "&e=" + var3));
 
          while(var4.anInt978 == 0) {
             TimeUtils.sleep(1L);
@@ -197,7 +197,7 @@ final class Class49 {
 
             Unsorted.menuOptionCount = 1;
             Class140_Sub7.aClass94Array2935[0] = TextCore.HasCancel;
-            Class163_Sub2_Sub1.aClass94Array4016[0] = TextCore.aClass94_3672;
+            Class163_Sub2_Sub1.aClass94Array4016[0] = TextCore.emptyJagexString;
             Class3_Sub13_Sub7.aShortArray3095[0] = 1005;
             Class114.anIntArray1578[0] = Class3_Sub28_Sub5.anInt3590;
          }

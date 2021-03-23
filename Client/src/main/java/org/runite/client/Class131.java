@@ -5,8 +5,8 @@ import org.rs09.client.config.GameConfig;
 final class Class131 {
 
    static int anInt1716;
-    static RSString password = TextCore.aClass94_3672;
-    static RSString username = TextCore.aClass94_3672;
+    static RSString password = TextCore.emptyJagexString;
+    static RSString username = TextCore.emptyJagexString;
     short[] aShortArray1718;
    static int anInt1719 = -1;
    int anInt1720;
@@ -128,7 +128,7 @@ final class Class131 {
          password = var1;
          Class7.anInt2161 = var2;
          username = var0;
-         if(username.equalsString(TextCore.aClass94_3672) || password.equalsString(TextCore.aClass94_3672)) {
+         if(username.equalsString(TextCore.emptyJagexString) || password.equalsString(TextCore.emptyJagexString)) {
             Class158.anInt2005 = 3;
          } else if (CS2Script.anInt2451 == -1) {
             Class163_Sub1_Sub1.anInt2246 = 0;

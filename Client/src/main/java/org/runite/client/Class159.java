@@ -28,9 +28,9 @@ final class Class159 {
 
    static boolean method2194() {
       try {
-         if(Unsorted.aBoolean3641) {
+         if(Unsorted.paramJavaScriptEnabled) {
             try {
-               return !(Boolean) TextCore.aClass94_3209.method1577(Class38.aClass87_665.applet);
+               return !(Boolean) TextCore.aClass94_3209.method1577(Class38.signlink.gameApplet);
             } catch (Throwable var2) {
             }
          }

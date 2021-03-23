@@ -73,20 +73,20 @@ final class Class81 {
                int var5;
                for(var5 = 0; var5 < Class3_Sub28_Sub5.anInt3591; ++var5) {
                   if(Class114.ignores[var5] == var1) {
-                     Class3_Sub30_Sub1.addChatMessage(TextCore.aClass94_3672, 0, RSString.stringCombiner(new RSString[]{var4, TextCore.HasIgnoreAlready}), -1);
+                     Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, RSString.stringCombiner(new RSString[]{var4, TextCore.HasIgnoreAlready}), -1);
                      return;
                   }
                }
 
                for(var5 = 0; Class8.anInt104 > var5; ++var5) {
                   if(var1 == Class50.aLongArray826[var5]) {
-                     Class3_Sub30_Sub1.addChatMessage(TextCore.aClass94_3672, 0, RSString.stringCombiner(new RSString[]{TextCore.HasPleaseRemove, var4, TextCore.HasFriendsToIgnore}), -1);
+                     Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, RSString.stringCombiner(new RSString[]{TextCore.HasPleaseRemove, var4, TextCore.HasFriendsToIgnore}), -1);
                      return;
                   }
                }
 
                if(var4.equalsString(Class102.player.displayName)) {
-                  Class3_Sub30_Sub1.addChatMessage(TextCore.aClass94_3672, 0, TextCore.HasOnOwnIgnoreList, -1);
+                  Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, TextCore.HasOnOwnIgnoreList, -1);
                } else {
                   Class114.ignores[Class3_Sub28_Sub5.anInt3591] = var1;
                   Class3_Sub13_Sub27.aClass94Array3341[Class3_Sub28_Sub5.anInt3591++] = Unsorted.method1052(var1);
@@ -95,7 +95,7 @@ final class Class81 {
                   Class3_Sub13_Sub1.outgoingBuffer.writeLong(var1);
                }
             } else {
-               Class3_Sub30_Sub1.addChatMessage(TextCore.aClass94_3672, 0, TextCore.HasIgnoreListFull, -1);
+               Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, TextCore.HasIgnoreListFull, -1);
             }
          }
       } catch (RuntimeException var6) {

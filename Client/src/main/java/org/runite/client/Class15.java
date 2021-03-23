@@ -216,7 +216,7 @@ final class Class15 implements Runnable {
                Class81.method1400(this.aClass87_350, (Object)null, -71);
             }
          } catch (Exception var7) {
-            Class49.method1125((String)null, var7, (byte)111);
+            Class49.reportError((String)null, var7, (byte)111);
          } finally {
             this.aBoolean353 = false;
          }

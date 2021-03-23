@@ -203,11 +203,11 @@ public final class Class3_Sub13_Sub36 extends Class3_Sub13 {
                   Class3_Sub24_Sub4.method1177(Unsorted.anInt1887, 0L, (byte)-53, TextCore.aClass94_1724, var11, (short)11, Class3_Sub28_Sub9.aClass94_3621, var12);
                }
             } else {
-               if(Class158.anInt2014 == 1) {
-                  Class3_Sub24_Sub4.method1177(-1, 0L, (byte)-62, TextCore.aClass94_3672, var11, (short)36, TextCore.HasFaceHere, var12);
+               if(Class158.paramGameTypeID == 1) {
+                  Class3_Sub24_Sub4.method1177(-1, 0L, (byte)-62, TextCore.emptyJagexString, var11, (short)36, TextCore.HasFaceHere, var12);
                }
 
-               Class3_Sub24_Sub4.method1177(-1, 0L, (byte)-75, TextCore.aClass94_3672, var11, (short)60, Class3_Sub13_Sub28.aClass94_3353, var12);
+               Class3_Sub24_Sub4.method1177(-1, 0L, (byte)-75, TextCore.emptyJagexString, var11, (short)60, Class3_Sub13_Sub28.aClass94_3353, var12);
             }
          }
 

@@ -14,7 +14,7 @@ abstract class Class158 {
     static int anInt2010 = -16 + (int) (33.0D * Math.random());
     int anInt2011;
     int anInt2012;
-    static int anInt2014 = 0;
+    static int paramGameTypeID = 0;
     static int anInt2015;
 
     abstract void method2179(Graphics var3);

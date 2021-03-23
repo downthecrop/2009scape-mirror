@@ -50,8 +50,9 @@ public final class Client extends GameShell {
     static Class61 aClass61_1471 = new Class61();
     static Class30 aClass30_1572;
     static int[] anIntArray3780 = new int[32];
-    static boolean aBoolean3779 = false;
+    static boolean paramAdvertisementSuppressed = false;
     static int anInt3773;
+    static Client clientInstance;
 
     static void method631(CacheIndex var1) {
         try {
@@ -84,6 +85,15 @@ public final class Client extends GameShell {
         }
     }
 
+    static void invalidArgument(String var0) {
+       try {
+          System.out.println("Bad " + var0 + ", Usage: worldid, <live/rc/wip>, <english/german>, <game0/game1>");
+          System.exit(1);
+       } catch (RuntimeException var3) {
+          throw ClientErrorException.clientError(var3, "kd.O(" + (var0 != null?"{...}":"null") + ',' + (byte) 38 + ')');
+       }
+    }
+
 
     final void method38() {
         try {
@@ -102,7 +112,7 @@ public final class Client extends GameShell {
                 if (null == Class3_Sub13_Sub10.aFrame3121) {
                     Object var3;
                     if (GameShell.frame == null) {
-                        var3 = Class38.aClass87_665.applet;
+                        var3 = Class38.signlink.gameApplet;
                     } else {
                         var3 = GameShell.frame;
                     }
@@ -225,7 +235,7 @@ public final class Client extends GameShell {
 
                 if (Unsorted.aBoolean2146 && 10 == Class143.loadingStage && Class3_Sub28_Sub12.anInt3655 != -1) {
                     Unsorted.aBoolean2146 = false;
-                    Class119.method1730(Class38.aClass87_665);
+                    Class119.method1730(Class38.signlink);
                 }
 
                 DeveloperConsole.INSTANCE.postDraw();
@@ -263,12 +273,12 @@ public final class Client extends GameShell {
             }
 
             if (null != Class3_Sub13_Sub10.aFrame3121) {
-                Unsorted.method593(Class3_Sub13_Sub10.aFrame3121, Class38.aClass87_665);
+                Unsorted.method593(Class3_Sub13_Sub10.aFrame3121, Class38.signlink);
                 Class3_Sub13_Sub10.aFrame3121 = null;
             }
 
-            if (null != Class38.aClass87_665) {
-                Class38.aClass87_665.method1442(this.getClass(), 0);
+            if (null != Class38.signlink) {
+                Class38.signlink.method1442(this.getClass(), 0);
             }
 
             if (null != Class3_Sub13_Sub13.aClass67_1443) {
@@ -330,66 +340,66 @@ public final class Client extends GameShell {
 
     public final void init() {
         try {
-            GameConfig.WORLD = GameConfig.WORLD_OVERRIDE == -1 ? ObjectDefinition.worldId : GameConfig.WORLD_OVERRIDE;
-            ObjectDefinition.worldId = GameConfig.WORLD_OVERRIDE == -1 ? 1 : GameConfig.WORLD_OVERRIDE;
-            Class44.anInt718 = Integer.parseInt(Objects.requireNonNull(this.getParameter("modewhere")));
-            if (0 > Class44.anInt718 || 1 < Class44.anInt718) {
-                Class44.anInt718 = 0;
+            GameConfig.WORLD = GameConfig.WORLD_OVERRIDE == -1 ? ObjectDefinition.paramWorldID : GameConfig.WORLD_OVERRIDE;
+            ObjectDefinition.paramWorldID = GameConfig.WORLD_OVERRIDE == -1 ? 1 : GameConfig.WORLD_OVERRIDE;
+            Class44.paramModeWhere = Integer.parseInt(Objects.requireNonNull(this.getParameter("modewhere")));
+            if (0 > Class44.paramModeWhere || 1 < Class44.paramModeWhere) {
+                Class44.paramModeWhere = 0;
             }
 
-            Class3_Sub13_Sub13.anInt3148 = Integer.parseInt(Objects.requireNonNull(this.getParameter("modewhat")));
-            if (Class3_Sub13_Sub13.anInt3148 < 0 || Class3_Sub13_Sub13.anInt3148 > 2) {
-                Class3_Sub13_Sub13.anInt3148 = 0;
+            Class3_Sub13_Sub13.paramModeWhat = Integer.parseInt(Objects.requireNonNull(this.getParameter("modewhat")));
+            if (Class3_Sub13_Sub13.paramModeWhat < 0 || Class3_Sub13_Sub13.paramModeWhat > 2) {
+                Class3_Sub13_Sub13.paramModeWhat = 0;
             }
 
             String var1 = this.getParameter("advertsuppressed");
-            aBoolean3779 = var1 != null && var1.equals("1");
+            paramAdvertisementSuppressed = var1 != null && var1.equals("1");
 
             try {
-                Class3_Sub20.language = Integer.parseInt(Objects.requireNonNull(this.getParameter("lang")));
+                Class3_Sub20.paramLanguage = Integer.parseInt(Objects.requireNonNull(this.getParameter("lang")));
             } catch (Exception var10) {
-                Class3_Sub20.language = 0;
+                Class3_Sub20.paramLanguage = 0;
             }
-            Unsorted.method87(-31, Class3_Sub20.language);
+            Unsorted.languageSetter(Class3_Sub20.paramLanguage);
 
             String var2 = this.getParameter("objecttag");
-            Class163_Sub2_Sub1.aBoolean4018 = var2 != null && var2.equals("1");
+            Class163_Sub2_Sub1.paramObjectTagEnabled = var2 != null && var2.equals("1");
 
             String var3 = this.getParameter("js");
-            Unsorted.aBoolean3641 = null != var3 && var3.equals("1");
+            Unsorted.paramJavaScriptEnabled = null != var3 && var3.equals("1");
 
             String var4 = this.getParameter("game");
             if (var4 != null && var4.equals("1")) {
-                Class158.anInt2014 = 1;
+                Class158.paramGameTypeID = 1;
             } else {
-                Class158.anInt2014 = 0;
+                Class158.paramGameTypeID = 0;
             }
 
             try {
-                Class3_Sub26.anInt2554 = Integer.parseInt(Objects.requireNonNull(this.getParameter("affid")));
+                Class3_Sub26.paramAffid = Integer.parseInt(Objects.requireNonNull(this.getParameter("affid")));
             } catch (Exception var9) {
-                Class3_Sub26.anInt2554 = 0;
+                Class3_Sub26.paramAffid = 0;
             }
 
-            Class163_Sub2.aClass94_2996 = TextCore.aClass94_1745.getParamValue(this);
-            if (Class163_Sub2.aClass94_2996 == null) {
-                Class163_Sub2.aClass94_2996 = TextCore.aClass94_3672;
+            Class163_Sub2.paramSettings = TextCore.aClass94_1745.getParamValue(this);
+            if (Class163_Sub2.paramSettings == null) {
+                Class163_Sub2.paramSettings = TextCore.emptyJagexString;
             }
 
             String var5 = this.getParameter("country");
             if (var5 != null) {
                 try {
-                    Class3_Sub31.countryId = Integer.parseInt(var5);
+                    Class3_Sub31.paramCountryID = Integer.parseInt(var5);
                 } catch (Exception var8) {
-                    Class3_Sub31.countryId = 0;
+                    Class3_Sub31.paramCountryID = 0;
                 }
             }
 
             String var6 = this.getParameter("haveie6");
-            Class106.hasInternetExplorer6 = null != var6 && var6.equals("1");
+            Class106.paramUserUsingInternetExplorer = null != var6 && var6.equals("1");
 
-            Class126.aClient1671 = this;
-            this.method41(32 - -Class3_Sub13_Sub13.anInt3148);
+            clientInstance = this;
+            this.method41(32 - -Class3_Sub13_Sub13.paramModeWhat);
         } catch (RuntimeException var11) {
             throw ClientErrorException.clientError(var11, "client.init()");
         }
@@ -400,30 +410,30 @@ public final class Client extends GameShell {
             Class119.method1729();
             Class3_Sub13_Sub14.aCacheResourceWorker_3159 = new CacheResourceWorker();
             Class58.aJs5Worker_917 = new Js5Worker();
-            if (Class3_Sub13_Sub13.anInt3148 != 0) {
+            if (Class3_Sub13_Sub13.paramModeWhat != 0) {
                 Class3_Sub6.aByteArrayArray2287 = new byte[50][];
             }
 
-            CS2Script.anInt2451 = ObjectDefinition.worldId;
-            Unsorted.method564(Class38.aClass87_665);
+            CS2Script.anInt2451 = ObjectDefinition.paramWorldID;
+            Unsorted.method564(Class38.signlink);
             SystemLogger.logInfo("port: " + Class53.anInt867);
             SystemLogger.logInfo("MSIP: " + GameConfig.IP_MANAGEMENT);
-            if (Class44.anInt718 == 0) {
+            if (Class44.paramModeWhere == 0) {
                 ClientErrorException.worldListHost = Objects.requireNonNull(this.getCodeBase()).getHost();
-                Class53.anInt867 = GameConfig.SERVER_PORT + ObjectDefinition.worldId; //443 is secure port
+                Class53.anInt867 = GameConfig.SERVER_PORT + ObjectDefinition.paramWorldID; //443 is secure port
                 anInt3773 = '\uaa4a';
-            } else if (Class44.anInt718 == 1) {
+            } else if (Class44.paramModeWhere == 1) {
                 ClientErrorException.worldListHost = Objects.requireNonNull(this.getCodeBase()).getHost();
                 //System.out.println("port = " + Class53.anInt867);
-                Class53.anInt867 = ObjectDefinition.worldId + 50000;
-                anInt3773 = 40000 + ObjectDefinition.worldId;
-            } else if (Class44.anInt718 == 2) {
+                Class53.anInt867 = ObjectDefinition.paramWorldID + 50000;
+                anInt3773 = 40000 + ObjectDefinition.paramWorldID;
+            } else if (Class44.paramModeWhere == 2) {
                 ClientErrorException.worldListHost = "127.0.0.1";
                 System.out.println("Setting worldListHost to 127.0.0.1, port = " + Class53.anInt867);
-                Class53.anInt867 = ObjectDefinition.worldId + '\uc350';
-                anInt3773 = ObjectDefinition.worldId + '\u9c40';
+                Class53.anInt867 = ObjectDefinition.paramWorldID + '\uc350';
+                anInt3773 = ObjectDefinition.paramWorldID + '\u9c40';
             }
-            if (1 == Class158.anInt2014) {
+            if (1 == Class158.paramGameTypeID) {
                 ClientCommands.shiftClickEnabled = true;
                 Class92.defaultScreenColorRgb = 16777215;
                 Class92.defaultRegionAmbientRGB = 0;
@@ -445,8 +455,8 @@ public final class Client extends GameShell {
             Class3_Sub13_Sub38.aShortArray3455 = Class3_Sub13_Sub9.aShortArray3110 = Class136.aShortArray1779 = Class3_Sub13_Sub38.aShortArray3453 = new short[256];
 
             Class140_Sub6.accRegistryPort = Class123.anInt1658;
-            if (Signlink.anInt1214 == 3 && 2 != Class44.anInt718) {
-                CS2Script.anInt2451 = ObjectDefinition.worldId;
+            if (Signlink.anInt1214 == 3 && 2 != Class44.paramModeWhere) {
+                CS2Script.anInt2451 = ObjectDefinition.paramWorldID;
             }
 
             KeyboardListener.adjustKeyCodeMap();
@@ -458,20 +468,20 @@ public final class Client extends GameShell {
             }
 
             try {
-                if (Class38.aClass87_665.cacheDataFile != null) {
-                    Class101.aClass30_1422 = new Class30(Class38.aClass87_665.cacheDataFile, 5200);
+                if (Class38.signlink.cacheDataFile != null) {
+                    Class101.aClass30_1422 = new Class30(Class38.signlink.cacheDataFile, 5200);
 
                     for (int var2 = 0; var2 < 29; ++var2) {
-                        Class163_Sub2.aClass30Array2998[var2] = new Class30(Class38.aClass87_665.cacheIndicesFiles[var2], 6000);
+                        Class163_Sub2.aClass30Array2998[var2] = new Class30(Class38.signlink.cacheIndicesFiles[var2], 6000);
                     }
 
-                    aClass30_1572 = new Class30(Class38.aClass87_665.cacheChecksumFile, 6000);
+                    aClass30_1572 = new Class30(Class38.signlink.cacheChecksumFile, 6000);
                     AtmosphereParser.aClass41_1186 = new Class41(255, Class101.aClass30_1422, aClass30_1572, 500000);
-                    Unsorted.aClass30_1039 = new Class30(Class38.aClass87_665.randomDatFile, 24);
-                    Class38.aClass87_665.cacheIndicesFiles = null;
-                    Class38.aClass87_665.cacheChecksumFile = null;
-                    Class38.aClass87_665.randomDatFile = null;
-                    Class38.aClass87_665.cacheDataFile = null;
+                    Unsorted.aClass30_1039 = new Class30(Class38.signlink.randomDatFile, 24);
+                    Class38.signlink.cacheIndicesFiles = null;
+                    Class38.signlink.cacheChecksumFile = null;
+                    Class38.signlink.randomDatFile = null;
+                    Class38.signlink.cacheDataFile = null;
                 }
             } catch (IOException var3) {
                 Unsorted.aClass30_1039 = null;
@@ -481,7 +491,7 @@ public final class Client extends GameShell {
             }
 
             Class167.aClass94_2083 = TextCore.RSLoadingPleaseWait;
-            if (Class44.anInt718 != 0) {
+            if (Class44.paramModeWhere != 0) {
                 ClientCommands.fpsOverlayEnabled = true;
             }
             //Class3_Sub26.tweeningEnabled  = true;
@@ -521,7 +531,7 @@ public final class Client extends GameShell {
 
             ++Class106.anInt1446;
             if (-1 != Class3_Sub28_Sub12.anInt3655) {
-                GraphicDefinition.method967(0, 0, 0, Class23.anInt454, Class3_Sub28_Sub12.anInt3655, 0, Class140_Sub7.anInt2934);
+                GraphicDefinition.method967(0, 0, 0, Class23.canvasWidth, Class3_Sub28_Sub12.anInt3655, 0, Class140_Sub7.canvasHeight);
             }
 
             ++PacketParser.anInt3213;
@@ -677,24 +687,24 @@ public final class Client extends GameShell {
             }
 
             if (Class58.aJs5Worker_917.errors >= 2 && Class58.aJs5Worker_917.status == 6) {
-                this.method31("js5connect_outofdate");
+                this.errorPrint("js5connect_outofdate");
                 Class143.loadingStage = 1000;
                 return;
             }
 
             if (Class58.aJs5Worker_917.errors >= 4 && Class58.aJs5Worker_917.status == -1) {
-                this.method31("js5crc");
+                this.errorPrint("js5crc");
                 Class143.loadingStage = 1000;
                 return;
             }
 
             if (Class58.aJs5Worker_917.errors >= 4 && (Class143.loadingStage == 0 || Class143.loadingStage == 5)) {
                 if (Class58.aJs5Worker_917.status == 7 || Class58.aJs5Worker_917.status == 9) {
-                    this.method31("js5connect_full");
+                    this.errorPrint("js5connect_full");
                 } else if (Class58.aJs5Worker_917.status > 0) {
-                    this.method31("js5connect");
+                    this.errorPrint("js5connect");
                 } else {
-                    this.method31("js5io");
+                    this.errorPrint("js5io");
                 }
 
                 Class143.loadingStage = 1000;
@@ -708,7 +718,7 @@ public final class Client extends GameShell {
         } else {
             try {
                 if (PacketParser.anInt80 == 0) {
-                    Class17.aClass64_413 = Class38.aClass87_665.method1441((byte) 8, Class38_Sub1.accRegistryIp, Class140_Sub6.accRegistryPort);
+                    Class17.aClass64_413 = Class38.signlink.method1441((byte) 8, Class38_Sub1.accRegistryIp, Class140_Sub6.accRegistryPort);
                     ++PacketParser.anInt80;
                 }
 
@@ -724,7 +734,7 @@ public final class Client extends GameShell {
                 }
 
                 if (2 == PacketParser.anInt80) {
-                    Unsorted.js5Connection = new Connection((Socket) Objects.requireNonNull(Class17.aClass64_413).anObject974, Class38.aClass87_665);
+                    Unsorted.js5Connection = new Connection((Socket) Objects.requireNonNull(Class17.aClass64_413).anObject974, Class38.signlink);
                     DataBuffer var2 = new DataBuffer(9);
                     var2.writeByte(15); //JS5 handshake
                     var2.writeInt(GameConfig.CLIENT_BUILD);
@@ -765,71 +775,109 @@ public final class Client extends GameShell {
         }
     }
 
-    public static void main(String[] var0) {
+    /**
+     * Client Initialization
+     * <p>
+     * Client command line initialization (parameter modeWhere 3)
+     * NOTE: Attempting to run the client this way puts paramModeWhere into LOCAL_ENVIRONMENT mode
+     * All of these arguments can be set through "program arguments"
+     */
+    public static void main(String[] args) {
         try {
             try {
-                if (4 != var0.length) {
-                    Class3_Sub13_Sub23_Sub1.method283("argument count");
+                if (args.length != 4) {
+                    invalidArgument("argument count");
                 }
 
-                int var1 = -1;
-                ObjectDefinition.worldId = Integer.parseInt(var0[0]);
-                Class44.anInt718 = 2;
-                if (var0[1].equals("live")) {
-                    Class3_Sub13_Sub13.anInt3148 = 0;
-                } else if (var0[1].equals("rc")) {
-                    Class3_Sub13_Sub13.anInt3148 = 1;
-                } else if (var0[1].equals("wip")) {
-                    Class3_Sub13_Sub13.anInt3148 = 2;
-                } else {
-                    Class3_Sub13_Sub23_Sub1.method283("modewhat");
+                int language = -1;
+
+                ObjectDefinition.paramWorldID = Integer.parseInt(args[0]);
+
+                Class44.paramModeWhere = 2;
+
+                switch (args[1]) {
+                    case "live":
+                        Class3_Sub13_Sub13.paramModeWhat = 0;
+                        break;
+                    case "rc":
+                        Class3_Sub13_Sub13.paramModeWhat = 1;
+                        break;
+                    case "wip":
+                        Class3_Sub13_Sub13.paramModeWhat = 2;
+                        break;
+                    default:
+                        invalidArgument("modewhat");
+                        break;
                 }
 
-                aBoolean3779 = false;
+                paramAdvertisementSuppressed = false;
 
                 try {
-                    byte[] var2 = var0[2].getBytes(StandardCharsets.ISO_8859_1);
-                    var1 = Class3_Sub13_Sub16.method243(Class3_Sub13_Sub3.method178(var2, var2.length, 0));
-                } catch (Exception var3) {
+                    byte[] languageSelection = args[2].getBytes(StandardCharsets.ISO_8859_1);
+                    /*
+                        Accepts en, de, fr, pt
+                     */
+                    language = Class3_Sub13_Sub16.compareEnteredLanguageArgument(Class3_Sub13_Sub3.bufferToString(languageSelection, languageSelection.length, 0));
+                } catch (Exception ignored) {
+
                 }
 
-                if (-1 == var1) {
-                    if (var0[2].equals("english")) {
-                        Class3_Sub20.language = 0;
-                    } else if (var0[2].equals("german")) {
-                        Class3_Sub20.language = 1;
-                    } else {
-                        Class3_Sub13_Sub23_Sub1.method283("language");
+                if (language == -1) {
+                    switch (args[2]) {
+                        case "english":
+                            Class3_Sub20.paramLanguage = 0;
+                            break;
+                        case "german":
+                            Class3_Sub20.paramLanguage = 1;
+                            break;
+                        case "french":
+                            Class3_Sub20.paramLanguage = 2;
+                            break;
+                        default:
+                            invalidArgument("language");
+                            break;
                     }
                 } else {
-                    Class3_Sub20.language = var1;
+                    Class3_Sub20.paramLanguage = language;
                 }
 
-                Unsorted.method87(-78, Class3_Sub20.language);
-                Class163_Sub2_Sub1.aBoolean4018 = false;
-                Unsorted.aBoolean3641 = false;
-                if (var0[3].equals("game0")) {
-                    Class158.anInt2014 = 0;
-                } else if (var0[3].equals("game1")) {
-                    Class158.anInt2014 = 1;
-                } else {
-                    Class3_Sub13_Sub23_Sub1.method283("game");
+                Unsorted.languageSetter(Class3_Sub20.paramLanguage);
+
+                Class163_Sub2_Sub1.paramObjectTagEnabled = false;
+                Unsorted.paramJavaScriptEnabled = false;
+
+                switch (args[3]) {
+                    case "game0":
+                        Class158.paramGameTypeID = 0;
+                        break;
+                    case "game1":
+                        Class158.paramGameTypeID = 1;
+                        break;
+                    default:
+                        invalidArgument("game");
+                        break;
                 }
 
-                Class3_Sub31.countryId = 0;
-                Class106.hasInternetExplorer6 = false;
-                Class3_Sub26.anInt2554 = 0;
-                Class163_Sub2.aClass94_2996 = TextCore.aClass94_3672;
-                Client var6 = new Client();
-                Class126.aClient1671 = var6;
-                var6.launch();
+                Class3_Sub31.paramCountryID = 0;
+
+                Class106.paramUserUsingInternetExplorer = false;
+
+                Class3_Sub26.paramAffid = 0;
+
+                Class163_Sub2.paramSettings = TextCore.emptyJagexString;
+
+                Client client = new Client();
+                clientInstance = client;
+                client.launch();
+
                 GameShell.frame.setLocation(40, 40);
+
             } catch (Exception var4) {
-                Class49.method1125(null, var4, (byte) 119);
+                Class49.reportError(null, var4, (byte) 119);
             }
 
         } catch (RuntimeException var5) {
-            throw ClientErrorException.clientError(var5, "client.main(" + (var0 != null ? "{...}" : "null") + ')');
+            throw ClientErrorException.clientError(var5, "client.main(" + (args != null ? "{...}" : "null") + ')');
         }
     }
 
@@ -915,7 +963,7 @@ public final class Client extends GameShell {
                                 } else if (inter.anIntArray310 == null || Class44.anInt719 >= inter.anIntArray310[var19]) {
                                     byte var20 = inter.aByteArray231[var19];
                                     if (var20 == 0 || ((var20 & 2) == 0 || ObjectDefinition.aBooleanArray1490[86]) && ((var20 & 1) == 0 || ObjectDefinition.aBooleanArray1490[82]) && ((var20 & 4) == 0 || ObjectDefinition.aBooleanArray1490[81])) {
-                                        Unsorted.method66(TextCore.aClass94_3672, -1, var19 + 1, (byte) -29, inter.componentHash);
+                                        Unsorted.method66(TextCore.emptyJagexString, -1, var19 + 1, (byte) -29, inter.componentHash);
                                         var21 = inter.anIntArray299[var19];
                                         if (inter.anIntArray310 == null) {
                                             inter.anIntArray310 = new int[inter.aByteArray263.length];
@@ -1446,7 +1494,7 @@ public final class Client extends GameShell {
                     } else if (anInt1354 == 40) {
                         var2 = 0;
 
-                        for (var3 = 0; var3 < 29; ++var3) { //TODO
+                        for (var3 = 0; var3 < 29; ++var3) {
                             var2 += Unsorted.aClass151_Sub1Array2601[var3].method2111() * anIntArray3288[var3] / 100;
                         }
 
@@ -1468,10 +1516,10 @@ public final class Client extends GameShell {
                         Class140_Sub3.method1959(Class3_Sub13_Sub15.aBoolean3184);
                         aClass3_Sub24_Sub4_1193 = new Class3_Sub24_Sub4();
                         aClass3_Sub24_Sub4_1193.method479();
-                        WorldListEntry.aClass155_2627 = Class58.method1195(22050, Class38.aClass87_665, GameShell.canvas, 0);
+                        WorldListEntry.aClass155_2627 = Class58.method1195(22050, Class38.signlink, GameShell.canvas, 0);
                         WorldListEntry.aClass155_2627.method2154(-116, aClass3_Sub24_Sub4_1193);
                         RenderAnimationDefinition.method897(aClass3_Sub24_Sub4_1193, CacheIndex.soundFX3Index, CacheIndex.soundFX2Index, CacheIndex.soundFXIndex);
-                        Class3_Sub21.aClass155_2491 = Class58.method1195(2048, Class38.aClass87_665, GameShell.canvas, 1);
+                        Class3_Sub21.aClass155_2491 = Class58.method1195(2048, Class38.signlink, GameShell.canvas, 1);
                         Class3_Sub26.aClass3_Sub24_Sub2_2563 = new Class3_Sub24_Sub2();
                         Class3_Sub21.aClass155_2491.method2154(-128, Class3_Sub26.aClass3_Sub24_Sub2_2563);
                         Class27.aClass157_524 = new Class157(22050, Class21.anInt443);
@@ -1581,7 +1629,7 @@ public final class Client extends GameShell {
                             }
                         } else if (anInt1354 == 110) {
                             Class3_Sub13_Sub13.aClass67_1443 = new Class67();
-                            Class38.aClass87_665.method1451(10, Class3_Sub13_Sub13.aClass67_1443);
+                            Class38.signlink.method1451(10, Class3_Sub13_Sub13.aClass67_1443);
                             Class3_Sub17.aClass94_2464 = TextCore.LoadedInputHandler;
                             LoadingStageNumber = 75;
                             anInt1354 = 120;
@@ -1617,14 +1665,14 @@ public final class Client extends GameShell {
                                     LoadingStageNumber = 95;
                                     Class3_Sub17.aClass94_2464 = TextCore.LoadingWLD;
                                 } else if (var2 == 7 || var2 == 9) {
-                                    this.method31("worldlistfull");
+                                    this.errorPrint("worldlistfull");
                                     Class117.method1719(1000);
                                 } else if (Class30.loadedWorldList) {
                                     Class3_Sub17.aClass94_2464 = TextCore.LoadedWLD;
                                     anInt1354 = 140;
                                     LoadingStageNumber = 96;
                                 } else {
-                                    this.method31("worldlistio_" + var2);
+                                    this.errorPrint("worldlistio_" + var2);
                                     Class117.method1719(1000);
                                 }
                             } else if (anInt1354 == 140) {
@@ -1649,7 +1697,7 @@ public final class Client extends GameShell {
                                 }
 
                                 Unsorted.aBoolean2146 = true;
-                                Class119.method1730(Class38.aClass87_665);
+                                Class119.method1730(Class38.signlink);
                                 GameObject.graphicsSettings(false, Unsorted.anInt2577, -1, -1);
                                 LoadingStageNumber = 100;
                                 anInt1354 = 160;
@@ -1657,8 +1705,8 @@ public final class Client extends GameShell {
                             } else if (anInt1354 == 160) {
                                 Class3_Sub13_Sub11.method219(true);
                             }
-                        } else if (CacheIndex.huffmanEncodingIndex.method2125(TextCore.aClass94_3672, TextCore.HasHuffman)) {
-                            Class36 var9 = new Class36(CacheIndex.huffmanEncodingIndex.method2123(TextCore.aClass94_3672, TextCore.HasHuffman));
+                        } else if (CacheIndex.huffmanEncodingIndex.method2125(TextCore.emptyJagexString, TextCore.HasHuffman)) {
+                            Class36 var9 = new Class36(CacheIndex.huffmanEncodingIndex.method2123(TextCore.emptyJagexString, TextCore.HasHuffman));
                             Class1.method69(var9);
                             Class3_Sub17.aClass94_2464 = TextCore.LoadedWordPack;
                             anInt1354 = 130;

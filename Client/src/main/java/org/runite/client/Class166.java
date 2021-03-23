@@ -69,7 +69,7 @@ final class Class166 {
          }
 
          if(!var4) {
-            Class3_Sub30_Sub1.addChatMessage(TextCore.aClass94_3672, 0, RSString.stringCombiner(new RSString[]{TextCore.HasUnableFind, var3}), -1);
+            Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, RSString.stringCombiner(new RSString[]{TextCore.HasUnableFind, var3}), -1);
          }
 
       } catch (RuntimeException var7) {

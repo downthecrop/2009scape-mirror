@@ -212,7 +212,7 @@ final class InterfaceWidget extends Node {
          var8.writeInt((int)(Math.random() * 9.9999999E7D));
          var8.writeString(var4);
          var8.writeInt((int)(Math.random() * 9.9999999E7D));
-         var8.writeShort(Class3_Sub26.anInt2554);
+         var8.writeShort(Class3_Sub26.paramAffid);
          var8.writeByte(var0);
          var8.writeByte(var3);
          var8.writeInt((int)(Math.random() * 9.9999999E7D));

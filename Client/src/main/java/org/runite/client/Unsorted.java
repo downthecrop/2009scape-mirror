@@ -122,7 +122,7 @@ public class Unsorted {
     public static Class61 aClass61_2468 = new Class61();
     public static int[] anIntArray2469;
     public static int[] anIntArray2470 = new int[]{0, 0, 2, 0, 0, 2, 1, 1, 0};
-    public static boolean aBoolean3641 = false;
+    public static boolean paramJavaScriptEnabled = false;
     public static int anInt3642 = 0;
     public static int anInt3644 = 0;
     public static int anInt59 = 0;
@@ -167,6 +167,7 @@ public class Unsorted {
     static byte[][][] aByteArrayArrayArray1774;
     static int[][] anIntArrayArray2039 = new int[][]{{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, {12, 8, 4, 0, 13, 9, 5, 1, 14, 10, 6, 2, 15, 11, 7, 3}, {15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0}, {3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12}};
     static int menuOptionCount = 0;
+    static boolean aBoolean11 = false;
 
 
     static void method2086() {
@@ -1151,12 +1152,8 @@ public class Unsorted {
         }
     }
 
-    public static void method87(int var0, int var1) {
+    public static void languageSetter(int var1) {
         try {
-            if (var0 >= -20) {
-                method83((byte) 44);
-            }
-
             if (0 != var1) {
                 if (var1 == 1) {
                     Translation.englishToGerman();
@@ -1170,7 +1167,7 @@ public class Unsorted {
 
             }
         } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "ab.K(" + var0 + ',' + var1 + ')');
+            throw ClientErrorException.clientError(var3, "ab.K(" + ',' + var1 + ')');
         }
     }
 
@@ -1178,7 +1175,7 @@ public class Unsorted {
         try {
 
             if (Class56.aClass106Array890 == null) {
-                Class106[] var1 = method596(Class38.aClass87_665);
+                Class106[] var1 = method596(Class38.signlink);
                 Class106[] var2 = new Class106[var1.length];
                 int var3 = 0;
 
@@ -1393,15 +1390,15 @@ public class Unsorted {
         try {
             int var2 = Class106.anInt1442;
             int var1 = Class84.anInt1164;
-            int var4 = -Class140_Sub7.anInt2934 + (Class70.anInt1047 - var2);
-            int var3 = -var1 + anInt2334 - Class23.anInt454;
+            int var4 = -Class140_Sub7.canvasHeight + (Class70.anInt1047 - var2);
+            int var3 = -var1 + anInt2334 - Class23.canvasWidth;
             if (~var1 < var0 || var3 > 0 || var2 > 0 || var4 > 0) {
                 try {
                     Object var5;
                     if (null != Class3_Sub13_Sub10.aFrame3121) {
                         var5 = Class3_Sub13_Sub10.aFrame3121;
                     } else if (GameShell.frame == null) {
-                        var5 = Class38.aClass87_665.applet;
+                        var5 = Class38.signlink.gameApplet;
                     } else {
                         var5 = GameShell.frame;
                     }
@@ -1581,16 +1578,16 @@ public class Unsorted {
             }
 
             if (null != Class3_Sub13_Sub10.aFrame3121 && (3 != var1 || Class3_Sub13.anInt2378 != var5 || anInt3071 != var6)) {
-                method593(Class3_Sub13_Sub10.aFrame3121, Class38.aClass87_665);
+                method593(Class3_Sub13_Sub10.aFrame3121, Class38.signlink);
                 Class3_Sub13_Sub10.aFrame3121 = null;
             }
 
             if (3 == var1 && null == Class3_Sub13_Sub10.aFrame3121) {
-                Class3_Sub13_Sub10.aFrame3121 = Class99.method1597(0, var6, var5, Class38.aClass87_665);
+                Class3_Sub13_Sub10.aFrame3121 = Class99.method1597(0, var6, var5, Class38.signlink);
                 if (null != Class3_Sub13_Sub10.aFrame3121) {
                     anInt3071 = var6;
                     Class3_Sub13.anInt2378 = var5;
-                    Class119.method1730(Class38.aClass87_665);
+                    Class119.method1730(Class38.signlink);
                 }
             }
 
@@ -1600,7 +1597,7 @@ public class Unsorted {
                 Object var7;
                 if (null == Class3_Sub13_Sub10.aFrame3121) {
                     if (null == GameShell.frame) {
-                        var7 = Class38.aClass87_665.applet;
+                        var7 = Class38.signlink.gameApplet;
                     } else {
                         var7 = GameShell.frame;
                     }
@@ -1618,15 +1615,15 @@ public class Unsorted {
                 }
 
                 if (var1 >= 2) {
-                    Class23.anInt454 = anInt2334;
-                    Class140_Sub7.anInt2934 = Class70.anInt1047;
+                    Class23.canvasWidth = anInt2334;
+                    Class140_Sub7.canvasHeight = Class70.anInt1047;
                     Class84.anInt1164 = 0;
                     Class106.anInt1442 = 0;
                 } else {
                     Class106.anInt1442 = 0;
                     Class84.anInt1164 = (anInt2334 + -765) / 2;
-                    Class23.anInt454 = 765;
-                    Class140_Sub7.anInt2934 = 503;
+                    Class23.canvasWidth = 765;
+                    Class140_Sub7.canvasHeight = 503;
                 }
 
                 if (var0) {
@@ -1636,7 +1633,7 @@ public class Unsorted {
                         Class38.aClass146_668.method2082(GameShell.canvas);
                     }
 
-                    Class126.aClient1671.method30((byte) 97);
+                    Client.clientInstance.addCanvas();
                     Class3_Sub13_Sub4.method193((byte) 97, GameShell.canvas);
                     ItemDefinition.method1119(GameShell.canvas, var4);
                     if (Class38.aClass146_668 != null) {
@@ -1644,10 +1641,10 @@ public class Unsorted {
                     }
                 } else {
                     if (HDToolKit.highDetail) {
-                        HDToolKit.method1854(Class23.anInt454, Class140_Sub7.anInt2934);
+                        HDToolKit.method1854(Class23.canvasWidth, Class140_Sub7.canvasHeight);
                     }
 
-                    GameShell.canvas.setSize(Class23.anInt454, Class140_Sub7.anInt2934);
+                    GameShell.canvas.setSize(Class23.canvasWidth, Class140_Sub7.canvasHeight);
                     if (GameShell.frame == var7) {
                         var8 = GameShell.frame.getInsets();
                         GameShell.canvas.setLocation(var8.left - -Class84.anInt1164, var8.top + Class106.anInt1442);
@@ -1663,10 +1660,10 @@ public class Unsorted {
 
                 if (var2 && var1 > 0) {
                     GameShell.canvas.setIgnoreRepaint(true);
-                    if (!GameShell.aBoolean11) {
+                    if (!aBoolean11) {
                         Class32.method995();
                         Class164_Sub1.aClass158_3009 = null;
-                        Class164_Sub1.aClass158_3009 = Class3_Sub13_Sub23_Sub1.method285(Class140_Sub7.anInt2934, Class23.anInt454, GameShell.canvas);
+                        Class164_Sub1.aClass158_3009 = Class3_Sub13_Sub23_Sub1.method285(Class140_Sub7.canvasHeight, Class23.canvasWidth, GameShell.canvas);
                         Class74.method1320();
                         if (5 == Class143.loadingStage) {
                             Class3_Sub23.method406((byte) 122, true, Class168.aClass3_Sub28_Sub17_2096);
@@ -1687,18 +1684,18 @@ public class Unsorted {
                             Class164_Sub1.aClass158_3009 = null;
                         }
 
-                        Class64 var13 = Class38.aClass87_665.method1444(-43, Class126.aClient1671.getClass());
+                        Class64 var13 = Class38.signlink.method1444(-43, Client.clientInstance.getClass());
 
                         while (var13.anInt978 == 0) {
                             TimeUtils.sleep(100L);
                         }
 
                         if (1 == var13.anInt978) {
-                            GameShell.aBoolean11 = true;
+                            aBoolean11 = true;
                         }
                     }
 
-                    if (GameShell.aBoolean11) {
+                    if (aBoolean11) {
                         HDToolKit.method1853(GameShell.canvas, 2 * anInt3671);
                     }
                 }
@@ -2488,13 +2485,13 @@ public class Unsorted {
                                                                 return var1;
                                                             }
 
-                                                            RSString var4 = TextCore.aClass94_3672;
+                                                            RSString var4 = TextCore.emptyJagexString;
                                                             if (null != Class136.aClass64_1778) {
                                                                 var4 = Class108.method1653(Class136.aClass64_1778.anInt979);
 
                                                                 if (null != Class136.aClass64_1778.anObject974) {
                                                                     byte[] var5 = ((String) Class136.aClass64_1778.anObject974).getBytes(StandardCharsets.ISO_8859_1);
-                                                                    var4 = Class3_Sub13_Sub3.method178(var5, var5.length, 0);
+                                                                    var4 = Class3_Sub13_Sub3.bufferToString(var5, var5.length, 0);
                                                                 }
                                                             }
 
@@ -2587,7 +2584,7 @@ public class Unsorted {
                     if (var0.aBoolean1270) {
                         RSString var5 = var0.NPCName;
                         if (0 != var0.anInt1260) {
-                            RSString var6 = Class158.anInt2014 != 1 ? TextCore.HasLevel : TextCore.HasRating;
+                            RSString var6 = Class158.paramGameTypeID != 1 ? TextCore.HasLevel : TextCore.HasRating;
                             var5 = RSString.stringCombiner(new RSString[]{var5, Player.combatLevelColor(var0.anInt1260, (byte) -122, Class102.player.COMBAT_LEVEL), TextCore.LEFT_PARENTHESES, var6, RSString.stringAnimator(var0.anInt1260), TextCore.RIGHT_PARENTHESES});
                         }
 
@@ -2607,7 +2604,7 @@ public class Unsorted {
                             int var7;
                             if (var11 != null) {
                                 for (var7 = 4; var7 >= 0; --var7) {
-                                    if (var11[var7] != null && (Class158.anInt2014 != 0 || !var11[var7].equalsStringIgnoreCase(TextCore.HasAttack))) {
+                                    if (var11[var7] != null && (Class158.paramGameTypeID != 0 || !var11[var7].equalsStringIgnoreCase(TextCore.HasAttack))) {
                                         byte var8 = 0;
                                         if (var7 == 0) {
                                             var8 = 17;
@@ -2643,7 +2640,7 @@ public class Unsorted {
                                 }
                             }
 
-                            if (0 == Class158.anInt2014 && var11 != null) {
+                            if (0 == Class158.paramGameTypeID && var11 != null) {
                                 for (var7 = 4; var7 >= 0; --var7) {
                                     if (null != var11[var7] && var11[var7].equalsStringIgnoreCase(TextCore.HasAttack)) {
                                         short var14 = 0;
@@ -3765,9 +3762,9 @@ public class Unsorted {
 
     public static boolean method1088(boolean var0) {
         try {
-            if (aBoolean3641) {
+            if (paramJavaScriptEnabled) {
                 try {
-                    TextCore.aClass94_106.method1577(Class38.aClass87_665.applet);
+                    TextCore.aClass94_106.method1577(Class38.signlink.gameApplet);
                     return true;
                 } catch (Throwable var2) {
                 }
@@ -4057,11 +4054,11 @@ public class Unsorted {
                                         continue;
                                     }
 
-                                    if (Class158.anInt2014 == 1) {
-                                        Class3_Sub24_Sub4.method1177(-1, 1L, (byte) -41, TextCore.aClass94_3672, var28, (short) 36, TextCore.HasFaceHere, var29);
+                                    if (Class158.paramGameTypeID == 1) {
+                                        Class3_Sub24_Sub4.method1177(-1, 1L, (byte) -41, TextCore.emptyJagexString, var28, (short) 36, TextCore.HasFaceHere, var29);
                                     }
 
-                                    Class3_Sub24_Sub4.method1177(-1, 1L, (byte) -125, TextCore.aClass94_3672, var28, (short) 60, Class3_Sub13_Sub28.aClass94_3353, var29);
+                                    Class3_Sub24_Sub4.method1177(-1, 1L, (byte) -125, TextCore.emptyJagexString, var28, (short) 60, Class3_Sub13_Sub28.aClass94_3353, var29);
                                     continue;
                                 }
 
@@ -4210,7 +4207,7 @@ public class Unsorted {
                                     menuOptionCount = 1;
                                     Class114.anIntArray1578[0] = Class3_Sub28_Sub5.anInt3590;
                                     Class140_Sub7.aClass94Array2935[0] = TextCore.HasCancel;
-                                    Class163_Sub2_Sub1.aClass94Array4016[0] = TextCore.aClass94_3672;
+                                    Class163_Sub2_Sub1.aClass94Array4016[0] = TextCore.emptyJagexString;
                                     Class3_Sub13_Sub7.aShortArray3095[0] = 1005;
                                 }
 
@@ -4246,7 +4243,7 @@ public class Unsorted {
                                         menuOptionCount = 1;
                                         Class114.anIntArray1578[0] = Class3_Sub28_Sub5.anInt3590;
                                         Class3_Sub13_Sub7.aShortArray3095[0] = 1005;
-                                        Class163_Sub2_Sub1.aClass94Array4016[0] = TextCore.aClass94_3672;
+                                        Class163_Sub2_Sub1.aClass94Array4016[0] = TextCore.emptyJagexString;
                                     }
 
                                     Class3_Sub13_Sub1.method171(-101, var36.anInt2602, var16, var18, var13, var12, var19, var17, var14);
@@ -4284,7 +4281,7 @@ public class Unsorted {
                                                     if (null != var11.anIntArray197 && var20 < 20) {
                                                         AbstractSprite var58 = var11.method859(var20);
                                                         if (null == var58) {
-                                                            if (GameShell.aBoolean6) {
+                                                            if (RSInterface.aBoolean6) {
                                                                 Class20.method909(var11);
                                                             }
                                                         } else {
@@ -4487,7 +4484,7 @@ public class Unsorted {
                                                 }
 
                                                 var34.method676(var45, var13, var14, var11.width, var11.height, var21, !var11.aBoolean215 ? -1 : 0, var11.anInt194, var11.anInt225, var11.anInt205);
-                                            } else if (GameShell.aBoolean6) {
+                                            } else if (RSInterface.aBoolean6) {
                                                 Class20.method909(var11);
                                             }
                                         } else if (5 == var11.type) {
@@ -4500,7 +4497,7 @@ public class Unsorted {
                                                 }
 
                                                 if (var37 == null) {
-                                                    if (GameShell.aBoolean6) {
+                                                    if (RSInterface.aBoolean6) {
                                                         Class20.method909(var11);
                                                     }
                                                 } else {
@@ -4587,7 +4584,7 @@ public class Unsorted {
                                                 var37 = var11.method866(Class3_Sub28_Sub12.method609(var11, 69));
                                                 if (null != var37) {
                                                     var37.drawAt(var13, var14);
-                                                } else if (GameShell.aBoolean6) {
+                                                } else if (RSInterface.aBoolean6) {
                                                     Class20.method909(var11);
                                                 }
                                             }
@@ -4616,13 +4613,13 @@ public class Unsorted {
                                                 } else if (5 != var11.modelType) {
                                                     if (var21 == -1) {
                                                         var38 = var11.method865(-1, (SequenceDefinition) null, -1, 126, 0, var41, Class102.player.class52);
-                                                        if (null == var38 && GameShell.aBoolean6) {
+                                                        if (null == var38 && RSInterface.aBoolean6) {
                                                             Class20.method909(var11);
                                                         }
                                                     } else {
                                                         SequenceDefinition var48 = SequenceDefinition.getAnimationDefinition(var21);
                                                         var38 = var11.method865(var11.anInt260, var48, var11.anInt283, 127, var11.anInt267, var41, Class102.player.class52);
-                                                        if (null == var38 && GameShell.aBoolean6) {
+                                                        if (null == var38 && RSInterface.aBoolean6) {
                                                             Class20.method909(var11);
                                                         }
                                                     }
@@ -4709,7 +4706,7 @@ public class Unsorted {
                                                 if (var11.type == 7) {
                                                     var34 = var11.method868(Class3_Sub13_Sub22.nameIconsSpriteArray);
                                                     if (var34 == null) {
-                                                        if (GameShell.aBoolean6) {
+                                                        if (RSInterface.aBoolean6) {
                                                             Class20.method909(var11);
                                                         }
                                                         continue;
@@ -4760,7 +4757,7 @@ public class Unsorted {
                                                         var25 = var43.indexOf(TextCore.aClass94_2598, 62);
                                                         if (var25 == -1) {
                                                             var44 = var43;
-                                                            var43 = TextCore.aClass94_3672;
+                                                            var43 = TextCore.emptyJagexString;
                                                         } else {
                                                             var44 = var43.substring(0, var25, 0);
                                                             var43 = var43.substring(var25 + 4);
@@ -4799,7 +4796,7 @@ public class Unsorted {
                                                         var28 = var43.indexOf(TextCore.aClass94_2598, 86);
                                                         if (var28 == -1) {
                                                             var44 = var43;
-                                                            var43 = TextCore.aClass94_3672;
+                                                            var43 = TextCore.emptyJagexString;
                                                         } else {
                                                             var44 = var43.substring(0, var28, 0);
                                                             var43 = var43.substring(4 + var28);
@@ -5030,7 +5027,7 @@ public class Unsorted {
           anInt3671 = 0;
           RandomAccessFileWrapper var2 = null;
           CS2Script.anInt2453 = 127;
-          if(Class3_Sub24_Sub3.anInt3492 >= 96) {
+          if(Class3_Sub24_Sub3.maxClientMemory >= 96) {
              Class127_Sub1.method1758(2);
           } else {
              Class127_Sub1.method1758(0);

@@ -67,8 +67,8 @@ final class Class3_Sub13_Sub12 extends Class3_Sub13 {
         int windowWidth;
         int windowHeight;
         if (var2 == null) {
-            windowHeight = Class140_Sub7.anInt2934;
-            windowWidth = Class23.anInt454;
+            windowHeight = Class140_Sub7.canvasHeight;
+            windowWidth = Class23.canvasWidth;
         } else {
             windowHeight = var2.height;
             windowWidth = var2.width;

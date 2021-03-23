@@ -17,7 +17,7 @@ final class Class3_Sub13_Sub13 extends Class3_Sub13 {
     static boolean aBoolean2774 = true;
     static int anInt1977 = 0;
     private int anInt3147 = 4;
-   static int anInt3148 = 0;
+   static int paramModeWhat = 0;
    private int anInt3149 = 4;
    static CacheIndex aClass153_3154;
    static int anInt3156 = -1;
@@ -36,13 +36,13 @@ final class Class3_Sub13_Sub13 extends Class3_Sub13 {
                 if(image == null) {
                    cursor = -1;
                 } else {
-                   Class38.aClass87_665.method1434(image.method655(), 10000, image.anInt3697, GameShell.canvas, new Point(cursorDef.getHotspotX(), cursorDef.getHotspotY()), image.anInt3706);
+                   Class38.signlink.method1434(image.method655(), 10000, image.anInt3697, GameShell.canvas, new Point(cursorDef.getHotspotX(), cursorDef.getHotspotY()), image.anInt3706);
                    Class65.anInt991 = cursor;
                 }
              }
 
              if(cursor == -1 && Class65.anInt991 != -1) {
-                Class38.aClass87_665.method1434((int[])null, 10000, -1, GameShell.canvas, new Point(), -1);
+                Class38.signlink.method1434((int[])null, 10000, -1, GameShell.canvas, new Point(), -1);
                 Class65.anInt991 = -1;
              }
 
@@ -74,7 +74,7 @@ final class Class3_Sub13_Sub13 extends Class3_Sub13 {
     final void method157(int var1, DataBuffer var2, boolean var3) {
       try {
          if(!var3) {
-            anInt3148 = -117;
+            paramModeWhat = -117;
          }
 
          if(var1 == 0) {
@@ -659,7 +659,7 @@ final class Class3_Sub13_Sub13 extends Class3_Sub13 {
 
                      Class3_Sub28_Sub3.aClass11_3551 = null;
                      if(Class3_Sub28_Sub12.anInt3655 != -1) {
-                        GraphicDefinition.method967(0, 0, 0, Class23.anInt454, Class3_Sub28_Sub12.anInt3655, 0, Class140_Sub7.anInt2934);
+                        GraphicDefinition.method967(0, 0, 0, Class23.canvasWidth, Class3_Sub28_Sub12.anInt3655, 0, Class140_Sub7.canvasHeight);
                      }
 
                      ++PacketParser.anInt3213;

@@ -102,7 +102,7 @@ final class Class121 {
                   return 0;
                }
 
-               Class3_Sub9.aClass64_2318 = Class38.aClass87_665.method1441((byte)8, GameConfig.IP_MANAGEMENT, GameConfig.WL_PORT);//, Class123.anInt1658);
+               Class3_Sub9.aClass64_2318 = Class38.signlink.method1441((byte)8, GameConfig.IP_MANAGEMENT, GameConfig.WL_PORT);//, Class123.anInt1658);
                RSInterface.aLong261 = TimeUtils.time();
                Class43.anInt692 = 1;
             }
@@ -122,7 +122,7 @@ final class Class121 {
                   return -1;
                }
 
-               Class3_Sub15.activeConnection = new Connection((Socket)Class3_Sub9.aClass64_2318.anObject974, Class38.aClass87_665);
+               Class3_Sub15.activeConnection = new Connection((Socket)Class3_Sub9.aClass64_2318.anObject974, Class38.signlink);
                Class3_Sub13_Sub1.outgoingBuffer.index = 0;
                Class3_Sub9.aClass64_2318 = null;
                wlUpdateStamp = 0;

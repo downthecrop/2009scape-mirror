@@ -100,7 +100,7 @@ final class CacheResourceWorker implements Runnable {
                     request.data = request.cache.read((int) request.nodeKey);
                 }
             } catch (Exception var5) {
-                Class49.method1125(null, var5, (byte) 111);
+                Class49.reportError(null, var5, (byte) 111);
             }
 
             request.waiting = false;
@@ -108,7 +108,7 @@ final class CacheResourceWorker implements Runnable {
     }
 
     public CacheResourceWorker() {
-        Class64 var1 = Class38.aClass87_665.method1451(5, this);
+        Class64 var1 = Class38.signlink.method1451(5, this);
 
         while (Objects.requireNonNull(var1).anInt978 == 0) {
             TimeUtils.sleep(10L);

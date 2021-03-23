@@ -5,7 +5,7 @@ import org.rs09.client.Linkable;
 final class Class3_Sub26 extends Linkable {
 
    int anInt2553;
-   static int anInt2554 = 0;
+   static int paramAffid = 0;
    int anInt2555;
    static int anInt2556 = 0;
    static Class61 aClass61_2557 = new Class61();

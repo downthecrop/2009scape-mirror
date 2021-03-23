@@ -6,7 +6,7 @@ public final class Class140_Sub7 extends GameObject {
    static int[] anIntArray2931;
    private int anInt2932 = -32768;
    static int[] anIntArray2933 = new int[]{2, 0, 0, 2, 0, 0, 0, 4, 4};
-   public static int anInt2934;
+   public static int canvasHeight;
    static RSString[] aClass94Array2935 = new RSString[500];
    int anInt2936;
    static int anInt2938;
@@ -250,7 +250,7 @@ public final class Class140_Sub7 extends GameObject {
 
             byte[] var4 = new byte[var3];
             var0.index += Class3_Sub13_Sub9.aClass36_3112.method1017(0, var3, var4, var0.buffer, var0.index);
-            return Class3_Sub13_Sub3.method178(var4, var3, 0);
+            return Class3_Sub13_Sub3.bufferToString(var4, var3, 0);
          } catch (Exception var6) {
             return TextCore.aClass94_2018;
          }

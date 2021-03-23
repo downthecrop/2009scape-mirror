@@ -37,7 +37,7 @@ public class Signlink implements Runnable {
     public static String javaVendor;
     private Interface1 anInterface1_1217;
     public static String osArchitecture;
-    public Applet applet;
+    public Applet gameApplet;
     public static Method setFocusCycleRoot;
     static volatile long aLong1221 = 0L;
     public static Method setTraversalKeysEnabled;
@@ -90,7 +90,7 @@ public class Signlink implements Runnable {
 
     public final Class64 method1436(Frame var1, int var2) {
         if (var2 <= 78) {
-            this.applet = null;
+            this.gameApplet = null;
         }
 
         return this.method1435(7, 0, var1, 0);
@@ -538,7 +538,7 @@ public class Signlink implements Runnable {
         javaVersion = "1.1";
         this.gameName = gameName;
         this.anInt1215 = var2;
-        this.applet = applet;
+        this.gameApplet = applet;
         javaVendor = "Unknown";
 
         try {

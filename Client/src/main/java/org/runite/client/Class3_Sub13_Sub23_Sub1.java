@@ -74,15 +74,6 @@ final class Class3_Sub13_Sub23_Sub1 extends Class3_Sub13_Sub23 {
       }
    }
 
-   static void method283(String var0) {
-      try {
-         System.out.println("Bad " + var0 + ", Usage: worldid, <live/rc/wip>, <english/german>, <game0/game1>");
-         System.exit(1);
-      } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "kd.O(" + (var0 != null?"{...}":"null") + ',' + (byte) 38 + ')');
-      }
-   }
-
    static void method284(float[][] var0, int[][] var1, int var2, float[][] var3, int var4, int[] var5, Class37 var6, byte var7, Class43 var8, float[][] var9, int var10) {
       try {
          int[] var11 = new int[var5.length / 2];

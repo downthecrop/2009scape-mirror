@@ -176,7 +176,7 @@ final class Class3_Sub28_Sub4 extends Node {
             Objects.requireNonNull(var2).append(this.aClass94Array3571[0]);
 
             for(int var3 = 1; var3 < this.aClass94Array3571.length; ++var3) {
-               var2.append(GameShell.aClass94_9);
+               var2.append(RSString.parse(")3)3)3"));
                var2.append(this.aClass94Array3571[var3]);
             }
 
