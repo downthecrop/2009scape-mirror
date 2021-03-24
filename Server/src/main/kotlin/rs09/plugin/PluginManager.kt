@@ -13,6 +13,7 @@ import io.github.classgraph.ClassGraph
 import io.github.classgraph.ClassInfo
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InterfaceListener
+import rs09.game.node.entity.skill.magic.SpellListener
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Command
 import java.util.*
@@ -80,6 +81,10 @@ object PluginManager {
         }
         result.getSubclasses("rs09.game.interaction.InterfaceListener").forEach {
             val clazz = it.loadClass().newInstance() as InterfaceListener
+            clazz.defineListeners()
+        }
+        result.getSubclasses("rs09.game.node.entity.skill.magic.SpellListener").forEach {
+            val clazz = it.loadClass().newInstance() as SpellListener
             clazz.defineListeners()
         }
     }

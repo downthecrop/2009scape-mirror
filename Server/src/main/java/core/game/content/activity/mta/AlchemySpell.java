@@ -1,22 +1,20 @@
 package core.game.content.activity.mta;
 
-import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.world.map.zone.ZoneBorders;
-import org.rs09.consts.Items;
-import core.game.node.entity.skill.magic.MagicSpell;
-import core.game.node.entity.skill.magic.Runes;
+import core.game.content.activity.mta.impl.AlchemistZone;
+import core.game.content.activity.mta.impl.AlchemistZone.AlchemistItem;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
+import core.game.node.entity.player.link.diary.DiaryType;
+import core.game.node.entity.skill.magic.MagicSpell;
 import core.game.node.item.Item;
+import core.game.world.map.zone.ZoneBorders;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
-
-import core.game.content.activity.mta.impl.AlchemistZone;
-import core.game.content.activity.mta.impl.AlchemistZone.AlchemistItem;
+import org.rs09.consts.Items;
 
 /**
  * Represents the plugin for the magic spell alchemy.
@@ -55,8 +53,8 @@ public final class AlchemySpell extends MagicSpell {
 
 	@Override
 	public Plugin<SpellType> newInstance(SpellType arg) throws Throwable {
-		SpellBook.MODERN.register(13, new AlchemySpell(21, 31, Animation.create(712), new Graphics(112, 96), false, Runes.FIRE_RUNE.getItem(3), Runes.NATURE_RUNE.getItem(1)));
-		SpellBook.MODERN.register(34, new AlchemySpell(55, 65, Animation.create(713), new Graphics(113, 96), true, Runes.FIRE_RUNE.getItem(5), Runes.NATURE_RUNE.getItem(1)));
+		//SpellBook.MODERN.register(13, new AlchemySpell(21, 31, Animation.create(712), new Graphics(112, 96), false, Runes.FIRE_RUNE.getItem(3), Runes.NATURE_RUNE.getItem(1)));
+		//SpellBook.MODERN.register(34, new AlchemySpell(55, 65, Animation.create(713), new Graphics(113, 96), true, Runes.FIRE_RUNE.getItem(5), Runes.NATURE_RUNE.getItem(1)));
 		return this;
 	}
 
