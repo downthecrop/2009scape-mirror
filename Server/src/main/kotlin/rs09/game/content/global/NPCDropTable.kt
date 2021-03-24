@@ -18,9 +18,7 @@ class NPCDropTable : WeightBasedTable() {
     }
 
     override fun roll(player: Player?): ArrayList<Item> {
-        if(size == 0) return ArrayList()
         val items= ArrayList<Item>(3)
-        var tempWeight = RandomFunction.randomDouble(totalWeight)
         items.addAll(guaranteedItems.map { it.getItem() }.toList())
 
         if(RandomFunction.random(1,15) == 5){
@@ -31,6 +29,7 @@ class NPCDropTable : WeightBasedTable() {
             return items
         }
         if(isNotEmpty()) {
+            var tempWeight = RandomFunction.randomDouble(totalWeight)
             for (item in shuffled()) {
                 tempWeight -= item.weight
                 if (tempWeight <= 0) {

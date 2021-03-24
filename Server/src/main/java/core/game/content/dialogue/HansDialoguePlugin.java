@@ -271,7 +271,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 			case 110:
 				switch (buttonId) {
 					case 1: //I would like to be an Iron Man
-						if (player.getSkills().getTotalLevel() > 500 || player.getQuestRepository().getPoints() > 10){
+						if (player.getSkills().getTotalLevel() > 50 || player.getQuestRepository().getPoints() > 10){
 							interpreter.sendDialogues(npc, FacialExpression.GUILTY, "Sorry, but you are too far along your journey.", "It would be unfair for those with other", " restrictions if your status were to be changed!");
 							stage = 50;
 							break;
@@ -335,9 +335,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 					case 3: //ultimate ironman
 						if (!player.getBank().isEmpty())
 						{
-							if (!inStartDungeon) {
-								interpreter.sendDialogues(npc, FacialExpression.GUILTY, "Sorry, but your bank is has items in it.", "Please empty your bank and speak to me again.");
-							}
+							interpreter.sendDialogues(npc, FacialExpression.GUILTY, "Sorry, but your bank is has items in it.", "Please empty your bank and speak to me again.");
 							stage = 50;
 							break;
 						} else {
