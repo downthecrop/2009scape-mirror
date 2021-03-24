@@ -5,6 +5,8 @@ import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.game.world.update.flag.context.Animation
+import core.game.world.update.flag.context.Graphics
 import rs09.game.interaction.Listener
 import rs09.game.world.GameWorld
 
@@ -35,6 +37,9 @@ abstract class SpellListener(val bookName: String) : Listener {
         if(player.getAttribute("magic-delay",0) > GameWorld.ticks){
             throw IllegalStateException()
         }
+        if(player.getAttribute("tablet-spell",false)){
+            return
+        }
         if(player.skills.getLevel(Skills.MAGIC) < magicLevel){
             player.sendMessage("You need a magic level of $magicLevel to cast this spell.")
             throw IllegalStateException()
@@ -56,10 +61,20 @@ abstract class SpellListener(val bookName: String) : Listener {
     fun removeRunes(player: Player){
         player.inventory.remove(*player.getAttribute("spell:runes",ArrayList<Item>()).toTypedArray())
         player.removeAttribute("spell:runes")
+        player.removeAttribute("tablet-spell")
     }
 
     fun addXP(player: Player,amount:Double){
+        if(player.getAttribute("tablet-spell",false)) return
         player.skills.addExperience(Skills.MAGIC,amount)
+    }
+
+    fun visualizeSpell(player: Player,anim:Animation,gfx: Graphics,soundID: Int = -1){
+        if(player.getAttribute("tablet-spell",false)) return
+        player.visualize(anim,gfx)
+        if(soundID != -1){
+            player.audioManager.send(soundID)
+        }
     }
 
     fun setDelay(player: Player,isTeleport: Boolean = false){
