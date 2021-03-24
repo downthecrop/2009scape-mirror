@@ -11,6 +11,9 @@ import core.game.node.entity.player.link.SpellBookManager;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.object.GameObject;
+import rs09.game.node.entity.skill.magic.SpellListener;
+import rs09.game.node.entity.skill.magic.SpellListeners;
+import rs09.game.node.entity.skill.magic.SpellUtils;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -55,6 +58,7 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 				break;
 			}
 			if (CombatSwingHandler.isProjectileClipped(player, groundItem, false)) {
+				SpellListeners.run(spell, SpellListener.GROUND_ITEM, SpellUtils.getBookFromInterface(interfaceId),player,groundItem);
 				MagicSpell.castSpell(player, SpellBookManager.SpellBook.MODERN, spell, groundItem);
 			} else {
 				player.getPulseManager().run(new MovementPulse(player, groundItem) {
@@ -73,6 +77,7 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 
 					@Override
 					public boolean pulse() {
+						SpellListeners.run(spell, SpellListener.GROUND_ITEM,SpellUtils.getBookFromInterface(interfaceId),player,groundItem);
 						MagicSpell.castSpell(player, SpellBookManager.SpellBook.MODERN, spell, groundItem);
 						return true;
 					}
@@ -91,6 +96,9 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 			if (target == null || !player.getLocation().withinDistance(target.getLocation())) {
 				PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
 				break;
+			}
+			if(!SpellUtils.getBookFromInterface(interfaceId).equals("none")){
+				SpellListeners.run(componentId,SpellListener.PLAYER,SpellUtils.getBookFromInterface(interfaceId),player,target);
 			}
 			switch (interfaceId) {
 			case 192:
@@ -144,6 +152,9 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 				PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
 				break;
 			}
+			if(!SpellUtils.getBookFromInterface(interfaceId).equals("none")){
+				SpellListeners.run(componentId,SpellListener.OBJECT,SpellUtils.getBookFromInterface(interfaceId),player,object);
+			}
 			switch (interfaceId) {
 			case 430:
 				MagicSpell.castSpell(player, SpellBookManager.SpellBook.LUNAR, componentId, object);
@@ -178,6 +189,9 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 			}
 			if (player.getAttribute("magic:delay", -1) > GameWorld.getTicks()) {
 				break;
+			}
+			if(!SpellUtils.getBookFromInterface(interfaceId).equals("none")){
+				SpellListeners.run(componentId,SpellListener.NPC, SpellUtils.getBookFromInterface(interfaceId),player,npc);
 			}
 			switch (interfaceId) {
 			case 430:
@@ -221,6 +235,9 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 			Item item = player.getInventory().get(itemSlot);
 			if (item == null) {
 				break;
+			}
+			if(!SpellUtils.getBookFromInterface(interfaceId).equals("none")){
+				SpellListeners.run(componentId,SpellListener.ITEM,SpellUtils.getBookFromInterface(interfaceId),player,item);
 			}
 			switch (interfaceId) {
 			case 430:
