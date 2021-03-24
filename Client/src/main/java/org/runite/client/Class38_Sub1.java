@@ -1,6 +1,6 @@
 package org.runite.client;
 
-final class Class38_Sub1 extends Class38 {
+public final class Class38_Sub1 extends Class38 {
 
    static int[][][] anIntArrayArrayArray2609;
    static String accRegistryIp;
@@ -12,12 +12,12 @@ final class Class38_Sub1 extends Class38 {
    static int anInt2618;
 
 
-   static void minimapIcons(RSInterface var0, AbstractSprite var1, int var2, int var3, int var4, int var6) {
+   public static void minimapIcons(RSInterface var0, AbstractSprite var1, int var2, int var3, int var4, int var6) {
       try {
          if(null != var1) {
 
              int var9 = var3 * var3 - -(var2 * var2);
-            int var7 = 2047 & Class3_Sub13_Sub8.anInt3102 + GraphicDefinition.CAMERA_DIRECTION;//Region turns Map Icons + NPC Dots stay static
+            int var7 = 2047 & TextureOperation9.anInt3102 + GraphicDefinition.CAMERA_DIRECTION;//Region turns Map Icons + NPC Dots stay static
             int var8 = Math.max(var0.width / 2, var0.height / 2) - -10;
             if(var8 * var8 >= var9) {
                int var10 = Class51.anIntArray840[var7];

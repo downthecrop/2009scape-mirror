@@ -15,6 +15,7 @@ import java.util.Date;
 
 public final class CS2Script extends Linkable {
 
+    public static int userCurrentWorldID = -1;
     static short aShort3052 = 205;
     static int anInt3101 = 0;
     static int[] anIntArray3228 = new int[]{7, 8, 9, 10, 11, 12, 13, 15};
@@ -24,11 +25,14 @@ public final class CS2Script extends Linkable {
     static RSInterface aClass11_1749;
     static boolean aBoolean2705 = true;
     static int anInt3775 = 0;
+    static int anInt2440 = 0;
+    static ReferenceCache aReferenceCache_2442 = new ReferenceCache(50);
+    static ReferenceCache aReferenceCache_2450 = new ReferenceCache(64);
+    static byte[][][] aByteArrayArrayArray2452;
+    static int anInt2453 = 127;
     RSInterface aClass11_2438;
     RSString aClass94_2439;
-    static int anInt2440 = 0;
     int scrollbarScrollAmount;
-    static ReferenceCache aReferenceCache_2442 = new ReferenceCache(50);
     int anInt2443;
     int inputTextCode;
     int interfaceButtons;
@@ -36,21 +40,16 @@ public final class CS2Script extends Linkable {
     int worldSelectCursorPositionX;
     Object[] arguments;
     RSInterface aClass11_2449;
-    static ReferenceCache aReferenceCache_2450 = new ReferenceCache(64);
-    public static int userCurrentWorldID = -1;
-    static byte[][][] aByteArrayArrayArray2452;
-    static int anInt2453 = 127;
-
 
     static void sendRegistryRequest(int year, int country, int day, int month) {
         try {
             //  System.out.println("CS2Script year=" + year + ", country=" + country + ", day=" + day + ", month=" + month + ", stage=" + stage + ", " + System.currentTimeMillis());
-            Class3_Sub13_Sub1.outgoingBuffer.index = 0;
-            Class3_Sub13_Sub1.outgoingBuffer.writeByte(147);//Handshake opcode
-            Class3_Sub13_Sub1.outgoingBuffer.writeByte(day);
-            Class3_Sub13_Sub1.outgoingBuffer.writeByte(month);
-            Class3_Sub13_Sub1.outgoingBuffer.writeShort(year);
-            Class3_Sub13_Sub1.outgoingBuffer.writeShort(country);
+            TextureOperation12.outgoingBuffer.index = 0;
+            TextureOperation12.outgoingBuffer.writeByte(147);//Handshake opcode
+            TextureOperation12.outgoingBuffer.writeByte(day);
+            TextureOperation12.outgoingBuffer.writeByte(month);
+            TextureOperation12.outgoingBuffer.writeShort(year);
+            TextureOperation12.outgoingBuffer.writeShort(country);
             Class132.anInt1734 = 0;
             GraphicDefinition.anInt548 = 0;
             Unsorted.registryStage = 1;
@@ -65,7 +64,7 @@ public final class CS2Script extends Linkable {
             Class79 var2 = (Class79) aReferenceCache_2450.get(var0);
             if (var2 == null) {
                 if (var1 < 126) {
-                    return (Class79) null;
+                    return null;
                 } else {
                     byte[] var3 = Class101.aClass153_1420.getFile(Class140_Sub7.method2032(var0), var0 & 1023);
                     var2 = new Class79();
@@ -73,7 +72,7 @@ public final class CS2Script extends Linkable {
                         var2.method1387(new DataBuffer(var3));
                     }
 
-                    aReferenceCache_2450.put(var2, (long) var0);
+                    aReferenceCache_2450.put(var2, var0);
                     return var2;
                 }
             } else {
@@ -88,11 +87,11 @@ public final class CS2Script extends Linkable {
         try {
             int var2 = Class146.anInt1904 * 128 - -64;
             int var1 = 128 * Unsorted.anInt30 + 64;
-            int var3 = Class121.method1736(WorldListCountry.localPlane, 1, var1, var2) - Class3_Sub13_Sub34.anInt3414;
+            int var3 = Class121.method1736(WorldListCountry.localPlane, 1, var1, var2) - TextureOperation25.anInt3414;
             if (100 <= Unsorted.anInt3631) {
                 NPC.anInt3995 = 64 + Unsorted.anInt30 * 128;
                 Class77.anInt1111 = 64 + Class146.anInt1904 * 128;
-                Class7.anInt2162 = Class121.method1736(WorldListCountry.localPlane, 1024 + -1023, NPC.anInt3995, Class77.anInt1111) + -Class3_Sub13_Sub34.anInt3414;
+                Class7.anInt2162 = Class121.method1736(WorldListCountry.localPlane, 1024 + -1023, NPC.anInt3995, Class77.anInt1111) + -TextureOperation25.anInt3414;
             } else {
                 if (NPC.anInt3995 < var1) {
                     NPC.anInt3995 += Class163_Sub2_Sub1.anInt4021 + Unsorted.anInt3631 * (-NPC.anInt3995 + var1) / 1000;
@@ -144,7 +143,7 @@ public final class CS2Script extends Linkable {
             int var6 = -Class77.anInt1111 + var2;
             int var4 = -NPC.anInt3995 + var1;
             int var7 = (int) Math.sqrt(var4 * var4 + var6 * var6);
-            int var8 = (int) (325.949D * Math.atan2(var5, var7)) & 2047;
+            int var8 = (int) (325.949D * Math.atan2(var5, var7)) & 0x7FF;
             if (128 > var8) {
                 var8 = 128;
             }
@@ -153,7 +152,7 @@ public final class CS2Script extends Linkable {
                 var8 = 383;
             }
 
-            int var9 = (int) (-325.949D * Math.atan2((double) var4, (double) var6)) & 2047;
+            int var9 = (int) (-325.949D * Math.atan2(var4, var6)) & 0x7FF;
             if (var8 > Class139.anInt1823) {
                 Class139.anInt1823 += Class75.anInt1105 + Class163_Sub2_Sub1.anInt4014 * (-Class139.anInt1823 + var8) / 1000;
                 if (Class139.anInt1823 > var8) {
@@ -168,7 +167,7 @@ public final class CS2Script extends Linkable {
                 }
             }
 
-            int var10 = -Class3_Sub13_Sub25.anInt3315 + var9;
+            int var10 = -TextureOperation28.anInt3315 + var9;
             if (var10 > 1024) {
                 var10 -= 2048;
             }
@@ -178,16 +177,16 @@ public final class CS2Script extends Linkable {
             }
 
             if (var10 > 0) {
-                Class3_Sub13_Sub25.anInt3315 += var10 * Class163_Sub2_Sub1.anInt4014 / 1000 + Class75.anInt1105;
-                Class3_Sub13_Sub25.anInt3315 &= 2047;
+                TextureOperation28.anInt3315 += var10 * Class163_Sub2_Sub1.anInt4014 / 1000 + Class75.anInt1105;
+                TextureOperation28.anInt3315 &= 2047;
             }
 
             if (var10 < 0) {
-                Class3_Sub13_Sub25.anInt3315 -= Class163_Sub2_Sub1.anInt4014 * -var10 / 1000 + Class75.anInt1105;
-                Class3_Sub13_Sub25.anInt3315 &= 2047;
+                TextureOperation28.anInt3315 -= Class163_Sub2_Sub1.anInt4014 * -var10 / 1000 + Class75.anInt1105;
+                TextureOperation28.anInt3315 &= 2047;
             }
 
-            int var11 = -Class3_Sub13_Sub25.anInt3315 + var9;
+            int var11 = -TextureOperation28.anInt3315 + var9;
             if (1024 < var11) {
                 var11 -= 2048;
             }
@@ -197,7 +196,7 @@ public final class CS2Script extends Linkable {
             }
 
             if (var11 < 0 && var10 > 0 || var11 > 0 && var10 < 0) {
-                Class3_Sub13_Sub25.anInt3315 = var9;
+                TextureOperation28.anInt3315 = var9;
             }
 
         } catch (RuntimeException var12) {
@@ -364,7 +363,7 @@ public final class CS2Script extends Linkable {
                     }
                     if (opcode == 27) {
                         int k3 = instructionOperands[programCounter];
-                        Class3_Sub13_Sub29.method306(k3, ItemDefinition.intsStack[--iStackCounter]);
+                        TextureOperation3.method306(k3, ItemDefinition.intsStack[--iStackCounter]);
                         continue;
                     }
                     if (opcode == CS2AsmOpcodes.BRANCH_GREATER_OR_EQUAL.getOp()) {
@@ -614,7 +613,7 @@ public final class CS2Script extends Linkable {
                             class11_2.verticalPos = (byte) l66;
                             class11_2.horizontalPos = (byte) k44;
                             Class20.method909(class11_2);
-                            Class3_Sub13_Sub12.method225(class11_2);
+                            TextureOperation24.method225(class11_2);
                             if (class11_2.anInt191 == -1)
                                 Class168.method2280(class11_2.componentHash);
                             continue;
@@ -640,7 +639,7 @@ public final class CS2Script extends Linkable {
                                 l44 = 4;
                             class11_2.horizontalResize = (byte) l44;
                             Class20.method909(class11_2);
-                            Class3_Sub13_Sub12.method225(class11_2);
+                            TextureOperation24.method225(class11_2);
                             if (class11_2.type == 0)
                                 Unsorted.method2104(class11_2, false, 32);
                             continue;
@@ -660,7 +659,7 @@ public final class CS2Script extends Linkable {
                             class11_2.anInt216 = ItemDefinition.intsStack[iStackCounter];
                             class11_2.anInt160 = ItemDefinition.intsStack[iStackCounter - -1];
                             Class20.method909(class11_2);
-                            Class3_Sub13_Sub12.method225(class11_2);
+                            TextureOperation24.method225(class11_2);
                             if (class11_2.type == 0)
                                 Unsorted.method2104(class11_2, false, -127);
                             continue;
@@ -881,7 +880,7 @@ public final class CS2Script extends Linkable {
                                                         continue;
                                                     }
                                                     if (opcode == 3103) {
-                                                        Class3_Sub13_Sub19.method264((byte) 87);
+                                                        TextureOperation4.method264((byte) 87);
                                                         continue;
                                                     }
                                                     if (opcode == 3104) {
@@ -889,21 +888,21 @@ public final class CS2Script extends Linkable {
                                                         int i46 = 0;
                                                         if (class94_4.isInteger())
                                                             i46 = class94_4.parseInt();
-                                                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(23);
-                                                        Class3_Sub13_Sub1.outgoingBuffer.writeInt(i46);
+                                                        TextureOperation12.outgoingBuffer.putOpcode(23);
+                                                        TextureOperation12.outgoingBuffer.writeInt(i46);
                                                         continue;
                                                     }
                                                     if (opcode == 3105) {
                                                         RSString class94_5 = ItemDefinition.stringsStack[--sStackCounter];
-                                                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(244);
-                                                        Class3_Sub13_Sub1.outgoingBuffer.writeLong(class94_5.toLong());
+                                                        TextureOperation12.outgoingBuffer.putOpcode(244);
+                                                        TextureOperation12.outgoingBuffer.writeLong(class94_5.toLong());
                                                         continue;
                                                     }
                                                     if (opcode == 3106) {
                                                         RSString class94_6 = ItemDefinition.stringsStack[--sStackCounter];
-                                                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(65);
-                                                        Class3_Sub13_Sub1.outgoingBuffer.writeByte(1 + class94_6.length());
-                                                        Class3_Sub13_Sub1.outgoingBuffer.writeString(class94_6);
+                                                        TextureOperation12.outgoingBuffer.putOpcode(65);
+                                                        TextureOperation12.outgoingBuffer.writeByte(1 + class94_6.length());
+                                                        TextureOperation12.outgoingBuffer.writeString(class94_6);
                                                         continue;
                                                     }
                                                     if (opcode == 3107) {
@@ -932,14 +931,14 @@ public final class CS2Script extends Linkable {
                                                     if (opcode != 3110)
                                                         break;
                                                     int l7 = ItemDefinition.intsStack[--iStackCounter];
-                                                    Class3_Sub13_Sub1.outgoingBuffer.putOpcode(111);
-                                                    Class3_Sub13_Sub1.outgoingBuffer.writeShort(l7);
+                                                    TextureOperation12.outgoingBuffer.putOpcode(111);
+                                                    TextureOperation12.outgoingBuffer.writeShort(l7);
                                                     continue;
                                                 }
                                                 if (opcode < 3300) {
                                                     if (opcode == 3200) {
                                                         iStackCounter -= 3;
-                                                        Class3_Sub13_Sub6.method199(ItemDefinition.intsStack[iStackCounter - -1], ItemDefinition.intsStack[iStackCounter], ItemDefinition.intsStack[iStackCounter + 2]);
+                                                        TextureOperation26.method199(ItemDefinition.intsStack[iStackCounter - -1], ItemDefinition.intsStack[iStackCounter], ItemDefinition.intsStack[iStackCounter + 2]);
                                                         continue;
                                                     }
                                                     if (opcode == 3201) {
@@ -985,7 +984,7 @@ public final class CS2Script extends Linkable {
                                                     }
                                                     if (opcode == 3305) { //Skill update listener (mostly spams health value)
                                                         int i9 = ItemDefinition.intsStack[--iStackCounter];
-                                                        ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub15.anIntArray3185[i9];
+                                                        ItemDefinition.intsStack[iStackCounter++] = TextureOperation17.anIntArray3185[i9];
                                                         continue;
                                                     }
                                                     if (opcode == 3306) { //Another Skill update listener (spams 10? Possible TOTAL hp)
@@ -1001,7 +1000,7 @@ public final class CS2Script extends Linkable {
                                                     if (opcode == 3308) {
                                                         int l9 = WorldListCountry.localPlane;
                                                         int k47 = Class131.anInt1716 + (Class102.player.anInt2819 >> 7);
-                                                        int i68 = (Class102.player.anInt2829 >> 7) - -Class82.anInt1152;
+                                                        int i68 = (Class102.player.anInt2829 >> 7) - -Texture.anInt1152;
                                                         ItemDefinition.intsStack[iStackCounter++] = (l9 << 28) - (-(k47 << 14) - i68);
                                                         continue;
                                                     }
@@ -1083,7 +1082,7 @@ public final class CS2Script extends Linkable {
                                                         continue;
                                                     }
                                                     if (3325 == opcode) {
-                                                        ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub29.disableGEBoxes ? 1 : 0;
+                                                        ItemDefinition.intsStack[iStackCounter++] = TextureOperation3.disableGEBoxes ? 1 : 0;
                                                         continue;
                                                     }
                                                     if (3326 == opcode) {
@@ -1099,7 +1098,7 @@ public final class CS2Script extends Linkable {
                                                         continue;
                                                     }
                                                     if (3329 == opcode) {
-                                                        ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub14.aBoolean3166 ? 1 : 0;
+                                                        ItemDefinition.intsStack[iStackCounter++] = TextureOperation31.aBoolean3166 ? 1 : 0;
                                                         continue;
                                                     }
                                                     if (opcode == 3330) {
@@ -1248,7 +1247,7 @@ public final class CS2Script extends Linkable {
                                                     }
                                                     if (opcode == 3606) {
                                                         RSString class94_9 = ItemDefinition.stringsStack[--sStackCounter];
-                                                        Class3_Sub13_Sub27.method297(class94_9.toLong(), 1);
+                                                        TextureOperation7.method297(class94_9.toLong(), 1);
                                                         continue;
                                                     }
                                                     if (opcode == 3607) {
@@ -1258,7 +1257,7 @@ public final class CS2Script extends Linkable {
                                                     }
                                                     if (opcode == 3608) {
                                                         RSString class94_11 = ItemDefinition.stringsStack[--sStackCounter];
-                                                        Class3_Sub13_Sub10.method212(class94_11.toLong());
+                                                        TextureOperation30.method212(class94_11.toLong());
                                                         continue;
                                                     }
                                                     if (opcode == 3609) {
@@ -1404,56 +1403,56 @@ public final class CS2Script extends Linkable {
                                                 if (opcode < 4000) {
                                                     if (opcode == 3903) {
                                                         int k16 = ItemDefinition.intsStack[--iStackCounter];
-                                                        ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub33.aClass133Array3393[k16].method1805();
+                                                        ItemDefinition.intsStack[iStackCounter++] = TextureOperation29.aClass133Array3393[k16].method1805();
                                                         continue;
                                                     }
                                                     if (opcode == 3904) {
                                                         int l16 = ItemDefinition.intsStack[--iStackCounter];
-                                                        ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub33.aClass133Array3393[l16].anInt1752;
+                                                        ItemDefinition.intsStack[iStackCounter++] = TextureOperation29.aClass133Array3393[l16].anInt1752;
                                                         continue;
                                                     }
                                                     if (opcode == 3905) {
                                                         int i17 = ItemDefinition.intsStack[--iStackCounter];
-                                                        ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub33.aClass133Array3393[i17].anInt1757;
+                                                        ItemDefinition.intsStack[iStackCounter++] = TextureOperation29.aClass133Array3393[i17].anInt1757;
                                                         continue;
                                                     }
                                                     if (opcode == 3906) {
                                                         int j17 = ItemDefinition.intsStack[--iStackCounter];
-                                                        ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub33.aClass133Array3393[j17].anInt1747;
+                                                        ItemDefinition.intsStack[iStackCounter++] = TextureOperation29.aClass133Array3393[j17].anInt1747;
                                                         continue;
                                                     }
                                                     if (opcode == 3907) {
                                                         int k17 = ItemDefinition.intsStack[--iStackCounter];
-                                                        ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub33.aClass133Array3393[k17].anInt1746;
+                                                        ItemDefinition.intsStack[iStackCounter++] = TextureOperation29.aClass133Array3393[k17].anInt1746;
                                                         continue;
                                                     }
                                                     if (3908 == opcode) {
                                                         int l17 = ItemDefinition.intsStack[--iStackCounter];
-                                                        ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub33.aClass133Array3393[l17].anInt1750;
+                                                        ItemDefinition.intsStack[iStackCounter++] = TextureOperation29.aClass133Array3393[l17].anInt1750;
                                                         continue;
                                                     }
                                                     if (3910 == opcode) {
                                                         int i18 = ItemDefinition.intsStack[--iStackCounter];
-                                                        int j50 = Class3_Sub13_Sub33.aClass133Array3393[i18].method1804();
+                                                        int j50 = TextureOperation29.aClass133Array3393[i18].method1804();
                                                         ItemDefinition.intsStack[iStackCounter++] = j50 == 0 ? 1 : 0;
                                                         continue;
                                                     }
                                                     if (3911 == opcode) {
                                                         int j18 = ItemDefinition.intsStack[--iStackCounter];
-                                                        int k50 = Class3_Sub13_Sub33.aClass133Array3393[j18].method1804();
+                                                        int k50 = TextureOperation29.aClass133Array3393[j18].method1804();
                                                         ItemDefinition.intsStack[iStackCounter++] = k50 != 2 ? 0 : 1;
                                                         continue;
                                                     }
                                                     if (opcode == 3912) {
                                                         int k18 = ItemDefinition.intsStack[--iStackCounter];
-                                                        int l50 = Class3_Sub13_Sub33.aClass133Array3393[k18].method1804();
+                                                        int l50 = TextureOperation29.aClass133Array3393[k18].method1804();
                                                         ItemDefinition.intsStack[iStackCounter++] = l50 == 5 ? 1 : 0;
                                                         continue;
                                                     }
                                                     if (opcode != 3913)
                                                         break;
                                                     int l18 = ItemDefinition.intsStack[--iStackCounter];
-                                                    int i51 = Class3_Sub13_Sub33.aClass133Array3393[l18].method1804();
+                                                    int i51 = TextureOperation29.aClass133Array3393[l18].method1804();
                                                     ItemDefinition.intsStack[iStackCounter++] = 1 == i51 ? 1 : 0;
                                                     continue;
                                                 }
@@ -1517,7 +1516,7 @@ public final class CS2Script extends Linkable {
                                                         iStackCounter -= 2;
                                                         int i21 = ItemDefinition.intsStack[iStackCounter];
                                                         int k52 = ItemDefinition.intsStack[1 + iStackCounter];
-                                                        ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub29.bitwiseOr(i21, 1 << k52);
+                                                        ItemDefinition.intsStack[iStackCounter++] = TextureOperation3.bitwiseOr(i21, 1 << k52);
                                                         continue;
                                                     }
                                                     if (4009 == opcode) {
@@ -1574,7 +1573,7 @@ public final class CS2Script extends Linkable {
                                                         iStackCounter -= 2;
                                                         int l22 = ItemDefinition.intsStack[iStackCounter];
                                                         int j54 = ItemDefinition.intsStack[iStackCounter + 1];
-                                                        ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub29.bitwiseOr(l22, j54);
+                                                        ItemDefinition.intsStack[iStackCounter++] = TextureOperation3.bitwiseOr(l22, j54);
                                                         continue;
                                                     }
                                                     if (opcode == 4016) {
@@ -1627,10 +1626,10 @@ public final class CS2Script extends Linkable {
                                                                         anInt3101 = ItemDefinition.intsStack[iStackCounter];
                                                                         Class24.anInt467 = ItemDefinition.intsStack[1 + iStackCounter];
                                                                         Class45.anInt734 = ItemDefinition.intsStack[2 + iStackCounter];
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(157);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeByte(anInt3101);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeByte(Class24.anInt467);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeByte(Class45.anInt734);
+                                                                        TextureOperation12.outgoingBuffer.putOpcode(157);
+                                                                        TextureOperation12.outgoingBuffer.writeByte(anInt3101);
+                                                                        TextureOperation12.outgoingBuffer.writeByte(Class24.anInt467);
+                                                                        TextureOperation12.outgoingBuffer.writeByte(Class45.anInt734);
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5002) {
@@ -1638,10 +1637,10 @@ public final class CS2Script extends Linkable {
                                                                         iStackCounter -= 2;
                                                                         int j55 = ItemDefinition.intsStack[iStackCounter];
                                                                         int j69 = ItemDefinition.intsStack[1 + iStackCounter];
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(99);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeLong(class94_17.toLong());
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeByte(j55 - 1);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeByte(j69);
+                                                                        TextureOperation12.outgoingBuffer.putOpcode(99);
+                                                                        TextureOperation12.outgoingBuffer.writeLong(class94_17.toLong());
+                                                                        TextureOperation12.outgoingBuffer.writeByte(j55 - 1);
+                                                                        TextureOperation12.outgoingBuffer.writeByte(j69);
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5003) {
@@ -1670,7 +1669,7 @@ public final class CS2Script extends Linkable {
                                                                         RSString class94_18 = ItemDefinition.stringsStack[--sStackCounter];
                                                                         if (class94_18.startsWith(TextCore.aClass94_132) || class94_18.startsWith(RSString.parse(";;")))
                                                                             ClientCommands.ClientCommands(class94_18);
-                                                                        else if (Player.rights != 0 || (!Class3_Sub15.aBoolean2433 || Class121.aBoolean1641) && !Class3_Sub13_Sub14.aBoolean3166) {
+                                                                        else if (Player.rights != 0 || (!Class3_Sub15.aBoolean2433 || Class121.aBoolean1641) && !TextureOperation31.aBoolean3166) {
                                                                             RSString class94_47 = class94_18.toLowercase();
                                                                             byte byte3 = 0;
                                                                             if (class94_47.startsWith(TextCore.TextColorYellow)) {
@@ -1781,13 +1780,13 @@ public final class CS2Script extends Linkable {
                                                                                     class94_18 = class94_18.substring(TextCore.TextSlide.length());
                                                                                     byte4 = 5;
                                                                                 }
-                                                                            Class3_Sub13_Sub1.outgoingBuffer.putOpcode(237);
-                                                                            Class3_Sub13_Sub1.outgoingBuffer.writeByte(0);
-                                                                            int k79 = Class3_Sub13_Sub1.outgoingBuffer.index;
-                                                                            Class3_Sub13_Sub1.outgoingBuffer.writeByte(byte3);
-                                                                            Class3_Sub13_Sub1.outgoingBuffer.writeByte(byte4);
-                                                                            Class85.method1423(Class3_Sub13_Sub1.outgoingBuffer, class94_18);
-                                                                            Class3_Sub13_Sub1.outgoingBuffer.method769(-k79 + Class3_Sub13_Sub1.outgoingBuffer.index);
+                                                                            TextureOperation12.outgoingBuffer.putOpcode(237);
+                                                                            TextureOperation12.outgoingBuffer.writeByte(0);
+                                                                            int k79 = TextureOperation12.outgoingBuffer.index;
+                                                                            TextureOperation12.outgoingBuffer.writeByte(byte3);
+                                                                            TextureOperation12.outgoingBuffer.writeByte(byte4);
+                                                                            Class85.method1423(TextureOperation12.outgoingBuffer, class94_18);
+                                                                            TextureOperation12.outgoingBuffer.method769(-k79 + TextureOperation12.outgoingBuffer.index);
                                                                         }
                                                                         continue;
                                                                     }
@@ -1795,13 +1794,13 @@ public final class CS2Script extends Linkable {
                                                                         sStackCounter -= 2;
                                                                         RSString class94_48 = ItemDefinition.stringsStack[sStackCounter + 1];
                                                                         RSString class94_19 = ItemDefinition.stringsStack[sStackCounter];
-                                                                        if (Player.rights != 0 || (!Class3_Sub15.aBoolean2433 || Class121.aBoolean1641) && !Class3_Sub13_Sub14.aBoolean3166) {
-                                                                            Class3_Sub13_Sub1.outgoingBuffer.putOpcode(201);
-                                                                            Class3_Sub13_Sub1.outgoingBuffer.writeByte(0);
-                                                                            int k69 = Class3_Sub13_Sub1.outgoingBuffer.index;
-                                                                            Class3_Sub13_Sub1.outgoingBuffer.writeLong(class94_19.toLong());
-                                                                            Class85.method1423(Class3_Sub13_Sub1.outgoingBuffer, class94_48);
-                                                                            Class3_Sub13_Sub1.outgoingBuffer.method769(Class3_Sub13_Sub1.outgoingBuffer.index - k69);
+                                                                        if (Player.rights != 0 || (!Class3_Sub15.aBoolean2433 || Class121.aBoolean1641) && !TextureOperation31.aBoolean3166) {
+                                                                            TextureOperation12.outgoingBuffer.putOpcode(201);
+                                                                            TextureOperation12.outgoingBuffer.writeByte(0);
+                                                                            int k69 = TextureOperation12.outgoingBuffer.index;
+                                                                            TextureOperation12.outgoingBuffer.writeLong(class94_19.toLong());
+                                                                            Class85.method1423(TextureOperation12.outgoingBuffer, class94_48);
+                                                                            TextureOperation12.outgoingBuffer.method769(TextureOperation12.outgoingBuffer.index - k69);
                                                                         }
                                                                         continue;
                                                                     }
@@ -1847,7 +1846,7 @@ public final class CS2Script extends Linkable {
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5017) {
-                                                                        ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub9.anInt3114;
+                                                                        ItemDefinition.intsStack[iStackCounter++] = TextureOperation16.anInt3114;
                                                                         continue;
                                                                     }
                                                                     if (5050 == opcode) {
@@ -1918,34 +1917,34 @@ public final class CS2Script extends Linkable {
                                                                         continue;
                                                                     }
                                                                     if (5059 == opcode) {
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(167);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeByte(0);
-                                                                        int j27 = Class3_Sub13_Sub1.outgoingBuffer.index;
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeByte(0);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeShort(Class70.aClass10_1056.anInt149);
-                                                                        Class70.aClass10_1056.aClass3_Sub28_Sub4_151.method545(Class3_Sub13_Sub1.outgoingBuffer, Class70.aClass10_1056.anIntArray153);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.method769(-j27 + Class3_Sub13_Sub1.outgoingBuffer.index);
+                                                                        TextureOperation12.outgoingBuffer.putOpcode(167);
+                                                                        TextureOperation12.outgoingBuffer.writeByte(0);
+                                                                        int j27 = TextureOperation12.outgoingBuffer.index;
+                                                                        TextureOperation12.outgoingBuffer.writeByte(0);
+                                                                        TextureOperation12.outgoingBuffer.writeShort(Class70.aClass10_1056.anInt149);
+                                                                        Class70.aClass10_1056.aClass3_Sub28_Sub4_151.method545(TextureOperation12.outgoingBuffer, Class70.aClass10_1056.anIntArray153);
+                                                                        TextureOperation12.outgoingBuffer.method769(-j27 + TextureOperation12.outgoingBuffer.index);
                                                                         continue;
                                                                     }
                                                                     if (5060 == opcode) {
                                                                         RSString class94_21 = ItemDefinition.stringsStack[--sStackCounter];
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(178);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeByte(0);
-                                                                        int l56 = Class3_Sub13_Sub1.outgoingBuffer.index;
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeLong(class94_21.toLong());
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeShort(Class70.aClass10_1056.anInt149);
-                                                                        Class70.aClass10_1056.aClass3_Sub28_Sub4_151.method545(Class3_Sub13_Sub1.outgoingBuffer, Class70.aClass10_1056.anIntArray153);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.method769(Class3_Sub13_Sub1.outgoingBuffer.index + -l56);
+                                                                        TextureOperation12.outgoingBuffer.putOpcode(178);
+                                                                        TextureOperation12.outgoingBuffer.writeByte(0);
+                                                                        int l56 = TextureOperation12.outgoingBuffer.index;
+                                                                        TextureOperation12.outgoingBuffer.writeLong(class94_21.toLong());
+                                                                        TextureOperation12.outgoingBuffer.writeShort(Class70.aClass10_1056.anInt149);
+                                                                        Class70.aClass10_1056.aClass3_Sub28_Sub4_151.method545(TextureOperation12.outgoingBuffer, Class70.aClass10_1056.anIntArray153);
+                                                                        TextureOperation12.outgoingBuffer.method769(TextureOperation12.outgoingBuffer.index + -l56);
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5061) {
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(167);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeByte(0);
-                                                                        int k27 = Class3_Sub13_Sub1.outgoingBuffer.index;
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeByte(1);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeShort(Class70.aClass10_1056.anInt149);
-                                                                        Class70.aClass10_1056.aClass3_Sub28_Sub4_151.method545(Class3_Sub13_Sub1.outgoingBuffer, Class70.aClass10_1056.anIntArray153);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.method769(-k27 + Class3_Sub13_Sub1.outgoingBuffer.index);
+                                                                        TextureOperation12.outgoingBuffer.putOpcode(167);
+                                                                        TextureOperation12.outgoingBuffer.writeByte(0);
+                                                                        int k27 = TextureOperation12.outgoingBuffer.index;
+                                                                        TextureOperation12.outgoingBuffer.writeByte(1);
+                                                                        TextureOperation12.outgoingBuffer.writeShort(Class70.aClass10_1056.anInt149);
+                                                                        Class70.aClass10_1056.aClass3_Sub28_Sub4_151.method545(TextureOperation12.outgoingBuffer, Class70.aClass10_1056.anIntArray153);
+                                                                        TextureOperation12.outgoingBuffer.method769(-k27 + TextureOperation12.outgoingBuffer.index);
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5062) {
@@ -2110,7 +2109,7 @@ public final class CS2Script extends Linkable {
                                                                         continue;
                                                                     }
                                                                     if (5209 == opcode) {
-                                                                        ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub21.anInt3256 + Class3_Sub28_Sub1.anInt3536;
+                                                                        ItemDefinition.intsStack[iStackCounter++] = TextureOperation37.anInt3256 + Class3_Sub28_Sub1.anInt3536;
                                                                         ItemDefinition.intsStack[iStackCounter++] = Unsorted.anInt65 + -Class3_Sub4.anInt2251 + (-1 + Class108.anInt1460);
                                                                         continue;
                                                                     }
@@ -2153,7 +2152,7 @@ public final class CS2Script extends Linkable {
                                                                     }
                                                                     if (opcode == 5213) {
                                                                         int i71 = 0;
-                                                                        int k30 = Class3_Sub13_Sub17.method251();
+                                                                        int k30 = TextureOperation23.method251();
                                                                         RSString class94_52;
                                                                         if (k30 == -1) {
                                                                             class94_52 = TextCore.aClass94_2331;
@@ -2194,7 +2193,7 @@ public final class CS2Script extends Linkable {
                                                                     }
                                                                     if (opcode == 5216) {
                                                                         int j31 = ItemDefinition.intsStack[--iStackCounter];
-                                                                        Class3_Sub13_Sub36.method344(j31, 4);
+                                                                        TextureOperation36.method344(j31, 4);
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5217) {
@@ -2228,11 +2227,11 @@ public final class CS2Script extends Linkable {
                                                                         int i59 = ItemDefinition.intsStack[1 + iStackCounter];
                                                                         int l31 = ItemDefinition.intsStack[iStackCounter];
                                                                         GameObject.graphicsSettings(false, 3, l31, i59);
-                                                                        ItemDefinition.intsStack[iStackCounter++] = null != Class3_Sub13_Sub10.aFrame3121 ? 1 : 0;
+                                                                        ItemDefinition.intsStack[iStackCounter++] = null != TextureOperation30.aFrame3121 ? 1 : 0;
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5301) {
-                                                                        if (null != Class3_Sub13_Sub10.aFrame3121)
+                                                                        if (null != TextureOperation30.aFrame3121)
                                                                             GameObject.graphicsSettings(false, Unsorted.anInt2577, -1, -1);
                                                                         continue;
                                                                     }
@@ -2297,16 +2296,16 @@ public final class CS2Script extends Linkable {
                                                                         RSString class94_23 = ItemDefinition.stringsStack[sStackCounter];
                                                                         RSString class94_54 = ItemDefinition.stringsStack[sStackCounter - -1];
                                                                         int k71 = ItemDefinition.intsStack[--iStackCounter];
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(117);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeByte(Class3_Sub13_Sub33.method326((byte) 39, class94_23) - (-Class3_Sub13_Sub33.method326((byte) 102, class94_54) + -1));
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeString(class94_23);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeString(class94_54);
-                                                                        Class3_Sub13_Sub1.outgoingBuffer.writeByte(k71);
+                                                                        TextureOperation12.outgoingBuffer.putOpcode(117);
+                                                                        TextureOperation12.outgoingBuffer.writeByte(TextureOperation29.method326((byte) 39, class94_23) - (-TextureOperation29.method326((byte) 102, class94_54) + -1));
+                                                                        TextureOperation12.outgoingBuffer.writeString(class94_23);
+                                                                        TextureOperation12.outgoingBuffer.writeString(class94_54);
+                                                                        TextureOperation12.outgoingBuffer.writeByte(k71);
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5401) {
                                                                         iStackCounter -= 2;
-                                                                        Class3_Sub13_Sub38.aShortArray3455[ItemDefinition.intsStack[iStackCounter]] = (short) Class56.method1186(ItemDefinition.intsStack[iStackCounter + 1]);
+                                                                        TextureOperation38.aShortArray3455[ItemDefinition.intsStack[iStackCounter]] = (short) Class56.method1186(ItemDefinition.intsStack[iStackCounter + 1]);
                                                                         CS2Methods.method28();
                                                                         Unsorted.method746((byte) -29);
                                                                         Class167.method2265();
@@ -2347,7 +2346,7 @@ public final class CS2Script extends Linkable {
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5411) {
-                                                                        if (Class3_Sub13_Sub10.aFrame3121 != null)
+                                                                        if (TextureOperation30.aFrame3121 != null)
                                                                             GameObject.graphicsSettings(false, Unsorted.anInt2577, -1, -1);
                                                                         if (null == GameShell.frame)
                                                                             System.exit(0);
@@ -2363,7 +2362,7 @@ public final class CS2Script extends Linkable {
                                                                             if (Class136.aClass64_1778.anObject974 != null) {
                                                                                 byte[] abyte0 = null;
                                                                                 abyte0 = ((String) Class136.aClass64_1778.anObject974).getBytes(StandardCharsets.ISO_8859_1);
-                                                                                class94_24 = Class3_Sub13_Sub3.bufferToString(abyte0, abyte0.length, 0);
+                                                                                class94_24 = TextureOperation33.bufferToString(abyte0, abyte0.length, 0);
                                                                             }
                                                                         }
                                                                         ItemDefinition.stringsStack[sStackCounter++] = class94_24;
@@ -2374,7 +2373,7 @@ public final class CS2Script extends Linkable {
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5421) {
-                                                                        if (null != Class3_Sub13_Sub10.aFrame3121)
+                                                                        if (null != TextureOperation30.aFrame3121)
                                                                             GameObject.graphicsSettings(false, Unsorted.anInt2577, -1, -1);
                                                                         boolean flag5 = 1 == ItemDefinition.intsStack[--iStackCounter];
                                                                         RSString class94_25 = ItemDefinition.stringsStack[--sStackCounter];
@@ -2385,7 +2384,7 @@ public final class CS2Script extends Linkable {
                                                                             Class99.method1596(class94_64, (byte) 127, flag5);
                                                                         } else {
                                                                             Unsorted.aBoolean2154 = flag5;
-                                                                            Class3_Sub13_Sub24.aClass94_3295 = class94_64;
+                                                                            TextureOperation5.aClass94_3295 = class94_64;
                                                                             Class15.aClass64_351 = Class38.signlink.method1452(new String(class94_64.method1568(), StandardCharsets.ISO_8859_1), true);
                                                                         }
                                                                         continue;
@@ -2397,12 +2396,12 @@ public final class CS2Script extends Linkable {
                                                                         RSString class94_26 = ItemDefinition.stringsStack[sStackCounter];
                                                                         if (class94_26.length() > 0) {
                                                                             if (null == Class3_Sub30_Sub1.aClass94Array3802)
-                                                                                Class3_Sub30_Sub1.aClass94Array3802 = new RSString[Class3_Sub13_Sub18.anIntArray3218[Class158.paramGameTypeID]];
+                                                                                Class3_Sub30_Sub1.aClass94Array3802 = new RSString[TextureOperation19.anIntArray3218[Class158.paramGameTypeID]];
                                                                             Class3_Sub30_Sub1.aClass94Array3802[i72] = class94_26;
                                                                         }
                                                                         if (class94_55.length() > 0) {
                                                                             if (Unsorted.aClass94Array45 == null)
-                                                                                Unsorted.aClass94Array45 = new RSString[Class3_Sub13_Sub18.anIntArray3218[Class158.paramGameTypeID]];
+                                                                                Unsorted.aClass94Array45 = new RSString[TextureOperation19.anIntArray3218[Class158.paramGameTypeID]];
                                                                             Unsorted.aClass94Array45[i72] = class94_55;
                                                                         }
                                                                         continue;
@@ -2432,7 +2431,7 @@ public final class CS2Script extends Linkable {
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5425) {
-                                                                        TextureOperation.method165();
+                                                                        InvalidateData.method165();
                                                                         Unsorted.aBoolean1951 = false;
                                                                         continue;
                                                                     }
@@ -2454,7 +2453,7 @@ public final class CS2Script extends Linkable {
                                                                         int l77 = ItemDefinition.intsStack[iStackCounter - -3];
                                                                         int j72 = ItemDefinition.intsStack[iStackCounter - -2];
                                                                         int i60 = ItemDefinition.intsStack[iStackCounter + 1];
-                                                                        Class3_Sub20.method390(false, j72, i60, l77, (byte) -128, -Class82.anInt1152 + (0x3fff & l33), ((0xffffe30 & l33) >> 14) - Class131.anInt1716);
+                                                                        Class3_Sub20.method390(false, j72, i60, l77, (byte) -128, -Texture.anInt1152 + (0x3fff & l33), ((0xffffe30 & l33) >> 14) - Class131.anInt1716);
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5501) {
@@ -2463,7 +2462,7 @@ public final class CS2Script extends Linkable {
                                                                         int i34 = ItemDefinition.intsStack[iStackCounter];
                                                                         int i78 = ItemDefinition.intsStack[iStackCounter - -3];
                                                                         int k72 = ItemDefinition.intsStack[iStackCounter + 2];
-                                                                        Class164_Sub1.method2238(j60, (0x3fff & i34) - Class82.anInt1152, k72, -Class131.anInt1716 + ((0xffff221 & i34) >> 14), i78);
+                                                                        Class164_Sub1.method2238(j60, (0x3fff & i34) - Texture.anInt1152, k72, -Class131.anInt1716 + ((0xffff221 & i34) >> 14), i78);
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5502) {
@@ -2499,7 +2498,7 @@ public final class CS2Script extends Linkable {
                                                                         Unsorted.anInt2309 = ItemDefinition.intsStack[iStackCounter];
                                                                         GraphicDefinition.CAMERA_DIRECTION = ItemDefinition.intsStack[iStackCounter + 1];
                                                                         if (Class133.anInt1753 == 2) {
-                                                                            Class3_Sub13_Sub25.anInt3315 = GraphicDefinition.CAMERA_DIRECTION;
+                                                                            TextureOperation28.anInt3315 = GraphicDefinition.CAMERA_DIRECTION;
                                                                             Class139.anInt1823 = Unsorted.anInt2309;
                                                                         }
                                                                         Unsorted.method1098((byte) -74);
@@ -2534,7 +2533,7 @@ public final class CS2Script extends Linkable {
                                                                                     Class51.method1137(0.6F);
                                                                             }
                                                                             if (HDToolKit.highDetail) {
-                                                                                Class3_Sub13_Sub14.method236();
+                                                                                TextureOperation31.method236();
                                                                                 if (!Class106.aBoolean1441)
                                                                                     Class84.method1417();
                                                                             }
@@ -2586,7 +2585,7 @@ public final class CS2Script extends Linkable {
                                                                             continue;
                                                                         }
                                                                         if (opcode == 6009) {
-                                                                            Class3_Sub13_Sub22.aBoolean3275 = ItemDefinition.intsStack[--iStackCounter] == 1;
+                                                                            TextureOperation0.aBoolean3275 = ItemDefinition.intsStack[--iStackCounter] == 1;
                                                                             Class119.method1730(Class38.signlink);
                                                                             aBoolean2705 = false;
                                                                             continue;
@@ -2638,7 +2637,7 @@ public final class CS2Script extends Linkable {
                                                                         if (opcode == 6015) {
                                                                             Class38.aBoolean661 = ItemDefinition.intsStack[--iStackCounter] == 1;
                                                                             if (HDToolKit.highDetail)
-                                                                                Class3_Sub13_Sub14.method236();
+                                                                                TextureOperation31.method236();
                                                                             Class119.method1730(Class38.signlink);
                                                                             aBoolean2705 = false;
                                                                             continue;
@@ -2653,7 +2652,7 @@ public final class CS2Script extends Linkable {
                                                                             continue;
                                                                         }
                                                                         if (opcode == 6017) {
-                                                                            Class3_Sub13_Sub15.aBoolean3184 = ItemDefinition.intsStack[--iStackCounter] == 1;
+                                                                            TextureOperation17.aBoolean3184 = ItemDefinition.intsStack[--iStackCounter] == 1;
                                                                             GameShell.method34();
                                                                             Class119.method1730(Class38.signlink);
                                                                             aBoolean2705 = false;
@@ -2769,7 +2768,7 @@ public final class CS2Script extends Linkable {
                                                                             continue;
                                                                         }
                                                                         if (6109 == opcode) {
-                                                                            ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub22.aBoolean3275 ? 1 : 0;
+                                                                            ItemDefinition.intsStack[iStackCounter++] = TextureOperation0.aBoolean3275 ? 1 : 0;
                                                                             continue;
                                                                         }
                                                                         if (opcode == 6110) {
@@ -2797,7 +2796,7 @@ public final class CS2Script extends Linkable {
                                                                             continue;
                                                                         }
                                                                         if (6117 == opcode) {
-                                                                            ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub15.aBoolean3184 ? 1 : 0;
+                                                                            ItemDefinition.intsStack[iStackCounter++] = TextureOperation17.aBoolean3184 ? 1 : 0;
                                                                             continue;
                                                                         }
                                                                         if (opcode == 6118) {
@@ -3033,12 +3032,12 @@ public final class CS2Script extends Linkable {
                                                                         ItemDefinition.aShort505 = (short) ItemDefinition.intsStack[2 + iStackCounter];
                                                                         if (ItemDefinition.aShort505 <= 0)
                                                                             ItemDefinition.aShort505 = 1;
-                                                                        Class3_Sub13_Sub23_Sub1.aShort4038 = (short) ItemDefinition.intsStack[iStackCounter - -3];
-                                                                        if (Class3_Sub13_Sub23_Sub1.aShort4038 > 0) {
-                                                                            if (ItemDefinition.aShort505 > Class3_Sub13_Sub23_Sub1.aShort4038)
-                                                                                Class3_Sub13_Sub23_Sub1.aShort4038 = ItemDefinition.aShort505;
+                                                                        TextureOperation18.aShort4038 = (short) ItemDefinition.intsStack[iStackCounter - -3];
+                                                                        if (TextureOperation18.aShort4038 > 0) {
+                                                                            if (ItemDefinition.aShort505 > TextureOperation18.aShort4038)
+                                                                                TextureOperation18.aShort4038 = ItemDefinition.aShort505;
                                                                         } else {
-                                                                            Class3_Sub13_Sub23_Sub1.aShort4038 = 32767;
+                                                                            TextureOperation18.aShort4038 = 32767;
                                                                         }
                                                                         continue;
                                                                     }
@@ -3107,7 +3106,7 @@ public final class CS2Script extends Linkable {
                                                                     continue;
                                                                 }
                                                                 if (opcode == 5608) {
-                                                                    ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub34.anInt3413;
+                                                                    ItemDefinition.intsStack[iStackCounter++] = TextureOperation25.anInt3413;
                                                                     continue;
                                                                 }
                                                                 if (5609 == opcode) {
@@ -3116,9 +3115,9 @@ public final class CS2Script extends Linkable {
                                                                 }
                                                                 if (opcode == 5610) {
                                                                     for (int l37 = 0; l37 < 5; l37++)
-                                                                        ItemDefinition.stringsStack[sStackCounter++] = Class3_Sub13_Sub33.aClass94Array3391.length <= l37 ? TextCore.aClass94_2331 : Class3_Sub13_Sub33.aClass94Array3391[l37].longToRSString();
+                                                                        ItemDefinition.stringsStack[sStackCounter++] = TextureOperation29.aClass94Array3391.length <= l37 ? TextCore.aClass94_2331 : TextureOperation29.aClass94Array3391[l37].longToRSString();
 
-                                                                    Class3_Sub13_Sub33.aClass94Array3391 = null;
+                                                                    TextureOperation29.aClass94Array3391 = null;
                                                                     continue;
                                                                 }
                                                                 if (opcode != 5611)
@@ -3416,7 +3415,7 @@ public final class CS2Script extends Linkable {
                                                 }
                                                 if (opcode == 4122) {
                                                     int j42 = ItemDefinition.intsStack[--iStackCounter];
-                                                    ItemDefinition.intsStack[iStackCounter++] = Class3_Sub13_Sub34.method332(2, j42);
+                                                    ItemDefinition.intsStack[iStackCounter++] = TextureOperation25.method332(2, j42);
                                                     continue;
                                                 }
                                                 if (opcode == 4123) {
@@ -3468,7 +3467,7 @@ public final class CS2Script extends Linkable {
                                         }
                                         if (opcode == 2702) {
                                             int l42 = ItemDefinition.intsStack[--iStackCounter];
-                                            Class3_Sub31 class3_sub31 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get(l42);
+                                            Class3_Sub31 class3_sub31 = TextureOperation23.aHashTable_3208.get(l42);
                                             if (class3_sub31 == null)
                                                 ItemDefinition.intsStack[iStackCounter++] = 0;
                                             else
@@ -3500,7 +3499,7 @@ public final class CS2Script extends Linkable {
                                         iStackCounter -= 2;
                                         int i43 = ItemDefinition.intsStack[iStackCounter];
                                         int j65 = ItemDefinition.intsStack[iStackCounter + 1];
-                                        Class3_Sub31 class3_sub31_1 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get(i43);
+                                        Class3_Sub31 class3_sub31_1 = TextureOperation23.aHashTable_3208.get(i43);
                                         if (class3_sub31_1 == null || class3_sub31_1.anInt2602 != j65)
                                             ItemDefinition.intsStack[iStackCounter++] = 0;
                                         else
@@ -3689,7 +3688,7 @@ public final class CS2Script extends Linkable {
                             int k65 = ItemDefinition.intsStack[iStackCounter];
                             if (-1 == class11_15.anInt191) {
                                 MouseListeningClass.method2092(class11_15.componentHash);
-                                Class3_Sub13_Sub19.method265(class11_15.componentHash);
+                                TextureOperation4.method265(class11_15.componentHash);
                                 Class107.method1649(class11_15.componentHash, -101);
                             }
                             if (-1 == k65) {
@@ -3822,7 +3821,7 @@ public final class CS2Script extends Linkable {
                         class11_16.anInt164 = ItemDefinition.intsStack[5 + iStackCounter];
                         Class20.method909(class11_16);
                         if (class11_16.anInt191 == -1) {
-                            Class3_Sub13_Sub19.method265(class11_16.componentHash);
+                            TextureOperation4.method265(class11_16.componentHash);
                             Class107.method1649(class11_16.componentHash, -106);
                         }
                         continue;
@@ -3919,7 +3918,7 @@ public final class CS2Script extends Linkable {
                     class11_16.anInt164 = ItemDefinition.intsStack[--iStackCounter];
                     Class20.method909(class11_16);
                     if (class11_16.anInt191 == -1)
-                        Class3_Sub13_Sub19.method265(class11_16.componentHash);
+                        TextureOperation4.method265(class11_16.componentHash);
                     continue;
                 }
                 if (opcode == 403) {
@@ -3987,17 +3986,17 @@ public final class CS2Script extends Linkable {
     static int method1643(boolean var1, int var2, int var3) {
         try {
 
-            Class3_Sub25 var4 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get((long) var2);
+            Class3_Sub25 var4 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var2);
             if (null == var4) {
                 return 0;
             } else {
                 int var5 = 0;
 
                 for (int var6 = 0; var6 < var4.anIntArray2547.length; ++var6) {
-                    if (var4.anIntArray2547[var6] >= 0 && Class3_Sub13_Sub23.itemDefinitionSize > var4.anIntArray2547[var6]) {
+                    if (var4.anIntArray2547[var6] >= 0 && TextureOperation39.itemDefinitionSize > var4.anIntArray2547[var6]) {
                         ItemDefinition var7 = ItemDefinition.getItemDefinition(var4.anIntArray2547[var6]);
                         if (null != var7.aHashTable_798) {
-                            LinkableInt var8 = (LinkableInt) var7.aHashTable_798.get((long) var3);
+                            LinkableInt var8 = (LinkableInt) var7.aHashTable_798.get(var3);
                             if (null != var8) {
                                 if (var1) {
                                     var5 += var4.anIntArray2551[var6] * var8.value;

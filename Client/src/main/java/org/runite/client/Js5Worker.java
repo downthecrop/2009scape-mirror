@@ -11,18 +11,15 @@ final class Js5Worker {
     private final Queue<Js5ResourceRequest> pendingPriorityRequests = new Queue<>();
     private final Queue<Js5ResourceRequest> normalRequests = new Queue<>();
     private final Queue<Js5ResourceRequest> pendingNormalRequests = new Queue<>();
-
+    private final DataBuffer outgoing = new DataBuffer(4);
+    private final DataBuffer incoming = new DataBuffer(8);
+    public volatile int status = 0;
+    public volatile int errors = 0;
     private long lastAttempt;
     private Connection connection;
     private int latency;
     private byte aByte1009 = 0;
     private Js5ResourceRequest current;
-
-    private final DataBuffer outgoing = new DataBuffer(4);
-    private final DataBuffer incoming = new DataBuffer(8);
-
-    public volatile int status = 0;
-    public volatile int errors = 0;
 
     public final boolean normalRequestsFull() {
         return 20 <= this.countNormalRequests();

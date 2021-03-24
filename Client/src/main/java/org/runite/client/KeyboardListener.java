@@ -78,8 +78,8 @@ final class KeyboardListener implements KeyListener, FocusListener {
             return;
          }
 
-         if(null != Class3_Sub13_Sub3.aClass148_3049) {
-            Class3_Sub13_Sub33.anInt3398 = 0;
+         if(null != TextureOperation33.aClass148_3049) {
+            TextureOperation29.anInt3398 = 0;
             int var2 = var1.getKeyCode();
 //            switch(var2) {
 //               case 112://f1
@@ -187,7 +187,7 @@ final class KeyboardListener implements KeyListener, FocusListener {
       }
       try {
     	 
-         if(Class3_Sub13_Sub3.aClass148_3049 != null) {
+         if(TextureOperation33.aClass148_3049 != null) {
             int var2 = Class79.method1386(var1);
             if(var2 >= 0) {
                int var3 = 1 + Class25.anInt491 & 127;
@@ -206,7 +206,7 @@ final class KeyboardListener implements KeyListener, FocusListener {
    }
 
    public final synchronized void focusLost(FocusEvent var1) {
-      if(Class3_Sub13_Sub3.aClass148_3049 != null) {
+      if(TextureOperation33.aClass148_3049 != null) {
          anInt2384 = -1;
       }
    }
@@ -226,8 +226,8 @@ final class KeyboardListener implements KeyListener, FocusListener {
             break;
       }
       try {
-         if(null != Class3_Sub13_Sub3.aClass148_3049) {
-            Class3_Sub13_Sub33.anInt3398 = 0;
+         if(null != TextureOperation33.aClass148_3049) {
+            TextureOperation29.anInt3398 = 0;
             int var2 = var1.getKeyCode();
             if(var2 >= 0 && var2 < KEY_CODE_MAP.length) {
                var2 = KEY_CODE_MAP[var2] & -129;

@@ -7,7 +7,6 @@ final class Class3_Sub28_Sub3 extends Node {
    int anInt3549 = 0;
    int anInt3550;
    static RSInterface aClass11_3551;
-   static int anInt3552;
    boolean aBoolean3553;
    RSString aClass94_3554;
    int anInt3555 = 12800;
@@ -69,15 +68,6 @@ final class Class3_Sub28_Sub3 extends Node {
       }
    }
 
-   static void method539() {
-      try {
-
-         Class136.aReferenceCache_1772.sweep(5);
-      } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "bn.O(" + 0 + ',' + 5 + ')');
-      }
-   }
-
    static int method540(int var0, int var2) {
       try {
          int var3;
@@ -97,7 +87,7 @@ final class Class3_Sub28_Sub3 extends Node {
          var2 = var2.toLowercase();
          int var4 = 0;
          short[] var3 = new short[16];
-         int var6 = !var1?0:'\u8000';
+         int var6 = !var1?0:32768;
          int var7 = (!var1?Class83.anInt1156:RenderAnimationDefinition.anInt377) + var6;
 
          for(int var8 = var6; var8 < var7; ++var8) {
@@ -130,7 +120,7 @@ final class Class3_Sub28_Sub3 extends Node {
             var13[var14] = LinkableRSString.method733(var3[var14]).method554();
          }
 
-         Class3_Sub13_Sub29.method307(var13, Class99.aShortArray1398, 100);
+         TextureOperation3.method307(var13, Class99.aShortArray1398, 100);
       } catch (RuntimeException var12) {
          throw ClientErrorException.clientError(var12, "bn.C(" + (byte) 123 + ',' + var1 + ',' + (var2 != null?"{...}":"null") + ')');
       }

@@ -37,7 +37,7 @@ class Class163_Sub2 extends Class163 {
             int var6 = var0.readUnsignedByte();
             int var7 = var0.readUnsignedByte();
             int var9 = -(var7 * 64) - (-Unsorted.anInt65 - Class108.anInt1460 + 1);
-            int var8 = var6 * 64 + -Class3_Sub13_Sub21.anInt3256;
+            int var8 = var6 * 64 + -TextureOperation37.anInt3256;
             byte var2;
             int var10;
             if(var8 >= 0 && (var9 - 63) >= 0 && Class23.anInt455 > (var8 + 63) && var9 < Class108.anInt1460) {

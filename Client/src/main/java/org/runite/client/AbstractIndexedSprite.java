@@ -3,7 +3,6 @@ package org.runite.client;
 abstract class AbstractIndexedSprite {
 
    int width;
-   static int anInt1462;
    int anInt1464;
    int anInt1467;
    int height;

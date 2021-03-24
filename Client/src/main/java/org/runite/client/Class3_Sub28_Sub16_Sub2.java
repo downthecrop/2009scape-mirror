@@ -177,7 +177,7 @@ public class Class3_Sub28_Sub16_Sub2 extends AbstractSprite {
       if(var6 != 0) {
          var1 -= this.anInt3701 << 4;
          var2 -= this.anInt3698 << 4;
-         double var7 = (double)(var5 & '\uffff') * 9.587379924285257E-5D;
+         double var7 = (double)(var5 & 65535) * 9.587379924285257E-5D;
          int var9 = (int)Math.floor(Math.sin(var7) * (double)var6 + 0.5D);
          int var10 = (int)Math.floor(Math.cos(var7) * (double)var6 + 0.5D);
          int var11 = -var1 * var10 + -var2 * var9;
@@ -890,7 +890,7 @@ public class Class3_Sub28_Sub16_Sub2 extends AbstractSprite {
                ++var5;
             } else {
                int var18 = var0[var5];
-               var0[var5++] = ((var2 & 16711935) * var12 + (var18 & 16711935) * var13 & -16711936) + ((var2 & '\uff00') * var12 + (var18 & '\uff00') * var13 & 16711680) >> 8;
+               var0[var5++] = ((var2 & 16711935) * var12 + (var18 & 16711935) * var13 & -16711936) + ((var2 & 65280) * var12 + (var18 & 65280) * var13 & 16711680) >> 8;
             }
 
              var3 += var9;
@@ -913,7 +913,7 @@ public class Class3_Sub28_Sub16_Sub2 extends AbstractSprite {
                ++var4;
             } else {
                int var13 = var0[var4];
-               var0[var4++] = ((var2 & 16711935) * var9 + (var13 & 16711935) * var10 & -16711936) + ((var2 & '\uff00') * var9 + (var13 & '\uff00') * var10 & 16711680) >> 8;
+               var0[var4++] = ((var2 & 16711935) * var9 + (var13 & 16711935) * var10 & -16711936) + ((var2 & 65280) * var9 + (var13 & 65280) * var10 & 16711680) >> 8;
             }
          }
 
@@ -981,7 +981,7 @@ public class Class3_Sub28_Sub16_Sub2 extends AbstractSprite {
       this.anInt3698 = this.anInt3706 - this.height - this.anInt3698;
    }
 
-   void drawMinimapRegion(int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, int[] var9, int[] var10) {
+   public void drawMinimapRegion(int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, int[] var9, int[] var10) {
       try {
          int var11 = -var3 / 2;
          int var12 = -var4 / 2;
@@ -1136,7 +1136,7 @@ public class Class3_Sub28_Sub16_Sub2 extends AbstractSprite {
       this.anInt3701 = this.anInt3698 = 0;
    }
 
-   void method667(int var1, int var2, int var3, int var4, int var5, int var6, int var7, int[] var9, int[] var10) {
+   public void method667(int var1, int var2, int var3, int var4, int var5, int var6, int var7, int[] var9, int[] var10) {
       try {
          int var11 = -var3 / 2;
          int var12 = -var4 / 2;
@@ -1255,7 +1255,7 @@ public class Class3_Sub28_Sub16_Sub2 extends AbstractSprite {
       for(int var4 = 0; var4 < this.anIntArray4081.length; ++var4) {
          int var5 = this.anIntArray4081[var4];
          if(var5 != 0) {
-            int var6 = var5 >> 16 & 255;
+            int var6 = var5 >> 16 & 0xFF;
             var6 += var1;
             if(var6 < 1) {
                var6 = 1;
@@ -1263,7 +1263,7 @@ public class Class3_Sub28_Sub16_Sub2 extends AbstractSprite {
                var6 = 255;
             }
 
-            int var7 = var5 >> 8 & 255;
+            int var7 = var5 >> 8 & 0xFF;
             var7 += var2;
             if(var7 < 1) {
                var7 = 1;
@@ -1271,7 +1271,7 @@ public class Class3_Sub28_Sub16_Sub2 extends AbstractSprite {
                var7 = 255;
             }
 
-            int var8 = var5 & 255;
+            int var8 = var5 & 0xFF;
             var8 += var3;
             if(var8 < 1) {
                var8 = 1;

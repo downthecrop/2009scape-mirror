@@ -57,7 +57,7 @@ final class InterfaceWidget extends Node {
             float[] var3 = new float[3];
             Class163_Sub2_Sub1.anInt4020 += var1;
             if(Class163_Sub2_Sub1.anInt4020 >= 65535) {
-               Class163_Sub2_Sub1.anInt4020 = '\uffff';
+               Class163_Sub2_Sub1.anInt4020 = 65535;
                Class3_Sub28_Sub1.aBoolean3531 = !aBoolean3668;
 
                aBoolean3668 = true;
@@ -66,7 +66,7 @@ final class InterfaceWidget extends Node {
                Class3_Sub28_Sub1.aBoolean3531 = false;
             }
 
-            if(var0 == '\uffff') {
+            if(var0 == 65535) {
                float var2 = (float)Class163_Sub2_Sub1.anInt4020 / 65535.0F;
                int var4 = Unsorted.anInt1081 * 2;
 
@@ -90,7 +90,7 @@ final class InterfaceWidget extends Node {
 
                Class7.anInt2162 = -1 * (int)var3[1];
                NPC.anInt3995 = (int)var3[0] + -(128 * Class131.anInt1716);
-               Class77.anInt1111 = (int)var3[2] + -(Class82.anInt1152 * 128);
+               Class77.anInt1111 = (int)var3[2] + -(Texture.anInt1152 * 128);
                float[] var16 = new float[3];
                var6 = Class39.anInt670 * 2;
 
@@ -108,11 +108,11 @@ final class InterfaceWidget extends Node {
                float var17 = -var3[0] + var16[0];
                float var19 = var16[2] - var3[2];
                float var18 = (-var3[1] + var16[1]) * -1.0F;
-               double var20 = Math.sqrt((double)(var19 * var19 + var17 * var17));
-               aFloat1169 = (float)Math.atan2((double)var18, var20);
-               Class45.aFloat730 = -((float)Math.atan2((double)var17, (double)var19));
+               double var20 = Math.sqrt(var19 * var19 + var17 * var17);
+               aFloat1169 = (float)Math.atan2(var18, var20);
+               Class45.aFloat730 = -((float)Math.atan2(var17, var19));
                Class139.anInt1823 = 2047 & (int)(325.949D * (double) aFloat1169);
-               Class3_Sub13_Sub25.anInt3315 = 2047 & (int)((double)Class45.aFloat730 * 325.949D);
+               TextureOperation28.anInt3315 = 2047 & (int)((double)Class45.aFloat730 * 325.949D);
             }
          }
       } catch (RuntimeException var15) {
@@ -155,7 +155,7 @@ final class InterfaceWidget extends Node {
 
    static Class2 c(int var0) {
       try {
-         Class2 var2 = (Class2)Class3_Sub13_Sub34.aReferenceCache_3412.get(var0);
+         Class2 var2 = (Class2) TextureOperation25.aReferenceCache_3412.get(var0);
          if(var2 == null) {
             byte[] var3 = Class107.aClass153_878.getFile(34, var0);
 
@@ -164,7 +164,7 @@ final class InterfaceWidget extends Node {
                var2.decode(new DataBuffer(var3));
             }
 
-            Class3_Sub13_Sub34.aReferenceCache_3412.put(var2, (long)var0);
+            TextureOperation25.aReferenceCache_3412.put(var2, var0);
          }
          return var2;
       } catch (RuntimeException var4) {
@@ -184,7 +184,7 @@ final class InterfaceWidget extends Node {
       try {
          if(null == Class56.aClass11_886 && !Class38_Sub1.aBoolean2615) {
             if(var2 < 61) {
-               a(19, 20, -32, (RSInterface)null);
+               a(19, 20, -32, null);
             }
 
             if(null != var3 && Class49.method1122(var3) != null) {
@@ -219,11 +219,11 @@ final class InterfaceWidget extends Node {
          var8.writeShort(var7);
          var8.writeShort(var2);
          var8.writeInt((int)(9.9999999E7D * Math.random()));
-         var8.rsaEncrypt(Class3_Sub13_Sub37.EXPONENT,Class3_Sub13_Sub14.MODULUS);
-         Class3_Sub13_Sub1.outgoingBuffer.index = 0;
-         Class3_Sub13_Sub1.outgoingBuffer.writeByte(36);
-         Class3_Sub13_Sub1.outgoingBuffer.writeByte(var8.index);
-         Class3_Sub13_Sub1.outgoingBuffer.putBytes(var8.buffer, var8.index);
+         var8.rsaEncrypt(TextureOperation10.EXPONENT, TextureOperation31.MODULUS);
+         TextureOperation12.outgoingBuffer.index = 0;
+         TextureOperation12.outgoingBuffer.writeByte(36);
+         TextureOperation12.outgoingBuffer.writeByte(var8.index);
+         TextureOperation12.outgoingBuffer.putBytes(var8.buffer, var8.index);
          Unsorted.anInt1711 = -3;
          Unsorted.registryStage = 1;
          Class132.anInt1734 = 0;

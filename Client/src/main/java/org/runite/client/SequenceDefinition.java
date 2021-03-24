@@ -34,7 +34,7 @@ public final class SequenceDefinition {
 	static SequenceDefinition getAnimationDefinition(int var0) {
 		try {
 
-			SequenceDefinition var2 = (SequenceDefinition) Class82.aReferenceCache_1146.get(var0);
+			SequenceDefinition var2 = (SequenceDefinition) Texture.aReferenceCache_1146.get(var0);
 			if (var2 == null) {
 				byte[] var3 = aClass153_1860.getFile(Class129.method1765(var0), Class67.method1262(117, var0));
 				var2 = new SequenceDefinition();
@@ -44,7 +44,7 @@ public final class SequenceDefinition {
 				}
 
 				var2.method2058();
-				Class82.aReferenceCache_1146.put(var2, var0);
+				Texture.aReferenceCache_1146.put(var2, var0);
 			}
 			return var2;
 		} catch (RuntimeException var4) {
@@ -75,7 +75,7 @@ public final class SequenceDefinition {
 			int var7 = this.duration[var2];
 			var2 = this.frames[var2];
 			Class3_Sub28_Sub5 var8 = Class3_Sub9.method133(var2 >> 16);
-			var2 &= '\uffff';
+			var2 &= 65535;
 			if(var8 == null) {
 				return var4.method1890(true, true, true);
 			} else {
@@ -85,7 +85,7 @@ public final class SequenceDefinition {
 				if((this.aBoolean1846 || ClientCommands.tweeningEnabled) && var3 != -1 && this.frames.length > var3) {
 					var3 = this.frames[var3];
 					var9 = Class3_Sub9.method133(var3 >> 16);
-					var3 &= '\uffff';
+					var3 &= 65535;
 				}
 
 				Model var10;
@@ -140,7 +140,7 @@ public final class SequenceDefinition {
 			int var7 = this.frames[var5];
 			int var6 = this.duration[var5];
 			Class3_Sub28_Sub5 var8 = Class3_Sub9.method133(var7 >> 16);
-			var7 &= '\uffff';
+			var7 &= 65535;
 			if(null == var8) {
 				return var1.method1894(true, true, true);
 			} else {
@@ -148,7 +148,7 @@ public final class SequenceDefinition {
 				if((this.aBoolean1846 || ClientCommands.tweeningEnabled) && var3 != -1 && this.frames.length > var3) {
 					var3 = this.frames[var3];
 					var9 = Class3_Sub9.method133(var3 >> 16);
-					var3 &= '\uffff';
+					var3 &= 65535;
 				}
 
 				Class3_Sub28_Sub5 var10 = null;
@@ -160,7 +160,7 @@ public final class SequenceDefinition {
 						var13 = this.baseIds[var5];
 						if(var13 != 65535) {
 							var10 = Class3_Sub9.method133(var13 >> 16);
-							var13 &= '\uffff';
+							var13 &= 65535;
 						}
 					}
 
@@ -168,7 +168,7 @@ public final class SequenceDefinition {
 						var14 = this.baseIds[var3];
 						if(var14 != 65535) {
 							var11 = Class3_Sub9.method133(var14 >> 16);
-							var14 &= '\uffff';
+							var14 &= 65535;
 						}
 					}
 				}
@@ -208,7 +208,7 @@ public final class SequenceDefinition {
 			int var7 = this.duration[var2];
 			var2 = this.frames[var2];
 			Class3_Sub28_Sub5 var8 = Class3_Sub9.method133(var2 >> 16);
-			var2 &= '\uffff';
+			var2 &= 65535;
 			if(null == var8) {
 				return var5.method1894(true, true, true);
 			} else {
@@ -217,7 +217,7 @@ public final class SequenceDefinition {
 				if((this.aBoolean1846 || ClientCommands.tweeningEnabled) && var1 != -1 && this.frames.length > var1) {
 					var1 = this.frames[var1];
 					var9 = Class3_Sub9.method133(var1 >> 16);
-					var1 &= '\uffff';
+					var1 &= 65535;
 				}
 
 				Model var10;
@@ -295,7 +295,7 @@ public final class SequenceDefinition {
 			int var6 = this.duration[var3];
 			var3 = this.frames[var3];
 			Class3_Sub28_Sub5 var7 = Class3_Sub9.method133(var3 >> 16);
-			var3 &= '\uffff';
+			var3 &= 65535;
 			if(var7 == null) {
 				return var5.method1882(true, true, true);
 			} else {
@@ -303,7 +303,7 @@ public final class SequenceDefinition {
 				if((this.aBoolean1846 || ClientCommands.tweeningEnabled) && var1 != -1 && var1 < this.frames.length) {
 					var1 = this.frames[var1];
 					var9 = Class3_Sub9.method133(var1 >> 16);
-					var1 &= '\uffff';
+					var1 &= 65535;
 				}
 
 				Model var10;
@@ -409,17 +409,17 @@ public final class SequenceDefinition {
 	static void resetAll() {
 		try {
 			Class3_Sub26.anInt2556 = 0;
-			Class3_Sub13_Sub13.aBoolean2774 = true;
-			Class3_Sub13_Sub13.aLong1465 = 0L;
-			Class3_Sub13_Sub13.aClass67_1443.anInt1018 = 0;
-			Class3_Sub13_Sub6.aBoolean3078 = true;
+			TextureOperation20.aBoolean2774 = true;
+			TextureOperation20.aLong1465 = 0L;
+			TextureOperation20.aClass67_1443.anInt1018 = 0;
+			TextureOperation26.aBoolean3078 = true;
 			TextureOperation.method153(112);
 			Class24.anInt469 = -1;
 			Class7.anInt2166 = -1;
 			Unsorted.incomingOpcode = -1;
 			Class159.anInt2023 = 0;
 			Class38_Sub1.anInt2617 = 0;
-			Class3_Sub13_Sub1.outgoingBuffer.index = 0;
+			TextureOperation12.outgoingBuffer.index = 0;
 			LinkableRSString.anInt2582 = -1;
 			AbstractSprite.anInt3699 = 0;
 			GraphicDefinition.incomingBuffer.index = 0;
@@ -438,7 +438,7 @@ public final class SequenceDefinition {
 			}
 
 			Class164_Sub1.anInt3012 = 0;
-			Class3_Sub13_Sub13.anInt3216 = (int)(Math.random() * 100.0D) + -50;
+			TextureOperation20.anInt3216 = (int)(Math.random() * 100.0D) + -50;
 			Class45.anInt733 = 0;
 			GraphicDefinition.CAMERA_DIRECTION = 2047 & (int)(Math.random() * 20.0D) - 10;
 			Class58.anInt909 = -1;
@@ -449,42 +449,42 @@ public final class SequenceDefinition {
 			Class164_Sub2.anInt3020 = -20 + (int)(30.0D * Math.random());
 			Class113.anInt1552 = 0;
 			Class65.anInt987 = 0;
-			Class3_Sub13_Sub8.anInt3102 = -60 + (int)(Math.random() * 120.0D);
-			Class3_Sub13_Sub9.anInt3114 = 0;
+			TextureOperation9.anInt3102 = -60 + (int)(Math.random() * 120.0D);
+			TextureOperation16.anInt3114 = 0;
 			LinkableRSString.anInt2589 = (int)(80.0D * Math.random()) - 40;
 			Class163.localNPCCount = 0;
 
 			for(var1 = 0; 2048 > var1; ++var1) {
-				Class3_Sub13_Sub22.players[var1] = null;
+				TextureOperation0.players[var1] = null;
 				Class65.aClass3_Sub30Array986[var1] = null;
 			}
 
-			for(var1 = 0; var1 < '\u8000'; ++var1) {
+			for(var1 = 0; var1 < 32768; ++var1) {
 				NPC.npcs[var1] = null;
 			}
 
-			Class102.player = Class3_Sub13_Sub22.players[2047] = new Player();
-			Class3_Sub13_Sub30.aClass61_3364.method1211(-112);
-			Class3_Sub13_Sub15.aClass61_3177.method1211(-58);
-			if(null != Class3_Sub13_Sub22.aClass61ArrayArrayArray3273) {
+			Class102.player = TextureOperation0.players[2047] = new Player();
+			TextureOperation13.aClass61_3364.method1211(-112);
+			TextureOperation17.aClass61_3177.method1211(-58);
+			if(null != TextureOperation0.aClass61ArrayArrayArray3273) {
 				for(var1 = 0; 4 > var1; ++var1) {
 					for(int var2 = 0; var2 < 104; ++var2) {
 						for(int var3 = 0; var3 < 104; ++var3) {
-							Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[var1][var2][var3] = null;
+							TextureOperation0.aClass61ArrayArrayArray3273[var1][var2][var3] = null;
 						}
 					}
 				}
 			}
 
-			Class3_Sub13_Sub6.aClass61_3075 = new Class61();
+			TextureOperation26.aClass61_3075 = new Class61();
 			CS2Script.anInt1357 = 0;
 			Class8.anInt104 = 0;
-			Class3_Sub13_Sub2.method176(-114);
+			TextureOperation6.method176(-114);
 			Class3_Sub2.method103();
 			Class75.anInt1105 = 0;
 			Class163_Sub2_Sub1.anInt4014 = 0;
 			Class157.anInt1996 = 0;
-			Class3_Sub13_Sub34.anInt3414 = 0;
+			TextureOperation25.anInt3414 = 0;
 			Class146.anInt1904 = 0;
 			Unsorted.anInt30 = 0;
 			GraphicDefinition.anInt529 = 0;
@@ -500,26 +500,26 @@ public final class SequenceDefinition {
 				Class60.method1208((byte)-128, Class3_Sub28_Sub12.anInt3655);
 			}
 
-			for(Class3_Sub31 var7 = (Class3_Sub31)Class3_Sub13_Sub17.aHashTable_3208.first(); var7 != null; var7 = (Class3_Sub31)Class3_Sub13_Sub17.aHashTable_3208.next()) {
-				Class3_Sub13_Sub18.method254(true, var7);
+			for(Class3_Sub31 var7 = TextureOperation23.aHashTable_3208.first(); var7 != null; var7 = TextureOperation23.aHashTable_3208.next()) {
+				TextureOperation19.method254(true, var7);
 			}
 
 			Class3_Sub28_Sub12.anInt3655 = -1;
-			Class3_Sub13_Sub17.aHashTable_3208 = new HashTable(8);
+			TextureOperation23.aHashTable_3208 = new HashTable(8);
 			Class3_Sub7.method122(-113);
-			Class3_Sub13_Sub7.aClass11_3087 = null;
+			TextureOperation27.aClass11_3087 = null;
 			Class38_Sub1.aBoolean2615 = false;
 			Unsorted.menuOptionCount = 0;
-			Unsorted.aClass52_1112.method1161(new int[]{0, 0, 0, 0, 0}, -1, false, (int[])null, -1);
+			Unsorted.aClass52_1112.method1161(new int[]{0, 0, 0, 0, 0}, -1, false, null, -1);
 
 			for(var1 = 0; 8 > var1; ++var1) {
 				Class91.aClass94Array1299[var1] = null;
 				Class1.aBooleanArray54[var1] = false;
-				Class3_Sub13_Sub26.anIntArray3328[var1] = -1;
+				TextureOperation35.anIntArray3328[var1] = -1;
 			}
 
 			Class3_Sub28_Sub9.method580((byte)80);
-			Class3_Sub13_Sub4.aBoolean3064 = true;
+			TextureOperation34.aBoolean3064 = true;
 
 			for(var1 = 0; var1 < 100; ++var1) {
 				Unsorted.aBooleanArray3674[var1] = true;
@@ -530,27 +530,27 @@ public final class SequenceDefinition {
 			RSInterface.aClass94_251 = null;
 
 			for(var1 = 0; 6 > var1; ++var1) {
-				Class3_Sub13_Sub33.aClass133Array3393[var1] = new Class133();
+				TextureOperation29.aClass133Array3393[var1] = new Class133();
 			}
 
 			for(var1 = 0; var1 < 25; ++var1) {
-				Class3_Sub13_Sub15.anIntArray3185[var1] = 0;
+				TextureOperation17.anIntArray3185[var1] = 0;
 				Class3_Sub20.anIntArray2480[var1] = 0;
 				Class133.anIntArray1743[var1] = 0;
 			}
 
 			if(HDToolKit.highDetail) {
-				Class3_Sub13_Sub14.method236();
+				TextureOperation31.method236();
 			}
 
 			Unsorted.aBoolean4068 = true;
 			Class113.interfacePacketCounter = 0;
-			Class3_Sub13_Sub28.aClass94_3353 = TextCore.HasWalkHere;
+			TextureOperation32.aClass94_3353 = TextCore.HasWalkHere;
 			Unsorted.aBoolean1084 = false;
-			Class3_Sub13_Sub38.aShortArray3455 = Class3_Sub13_Sub9.aShortArray3110 = Class136.aShortArray1779 = Class3_Sub13_Sub38.aShortArray3453 = new short[256];
-			TextureOperation.method165();
+			TextureOperation38.aShortArray3455 = TextureOperation16.aShortArray3110 = Class136.aShortArray1779 = TextureOperation38.aShortArray3453 = new short[256];
+			InvalidateData.method165();
 			Unsorted.aBoolean1951 = false;
-			Class3_Sub13_Sub8.method204(-3);
+			TextureOperation9.method204(-3);
 		} catch (RuntimeException var6) {
 			throw ClientErrorException.clientError(var6, "tk.A(" + true + ')');
 		}

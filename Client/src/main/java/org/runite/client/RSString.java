@@ -1,13 +1,11 @@
 package org.runite.client;
 
 import org.rs09.client.config.GameConfig;
-
-import org.rs09.client.util.ArrayUtils;
 import org.rs09.client.data.HashTable;
+import org.rs09.client.util.ArrayUtils;
 
 import java.applet.Applet;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
+import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -16,9 +14,9 @@ import java.util.Objects;
 public final class RSString implements Interface3 {
 
     static HashTable<LinkableRSString> interned;
-    private boolean mutable = true;
     byte[] buffer;
     int length;
+    private boolean mutable = true;
 
     /**
      * @return A RSString consisting of the actual bytes in the provided string.
@@ -51,7 +49,7 @@ public final class RSString implements Interface3 {
 
         int i = 0;
         while (length > i) {
-            int ascii = bytes[i++] & 255;
+            int ascii = bytes[i++] & 0xFF;
             if (ascii <= 45 && ascii >= 40) {
                 if (length <= i) {
                     break;
@@ -76,11 +74,11 @@ public final class RSString implements Interface3 {
     }
 
     static RSString stringAnimator(int var1) {
-       try {
-          return Unsorted.method1723((byte)-117, false, var1);
-       } catch (RuntimeException var3) {
-          throw ClientErrorException.clientError(var3, "jj.C(" + var1 + ')');
-       }
+        try {
+            return Unsorted.method1723((byte) -117, false, var1);
+        } catch (RuntimeException var3) {
+            throw ClientErrorException.clientError(var3, "jj.C(" + var1 + ')');
+        }
     }
 
     public final URL toURL() throws MalformedURLException {
@@ -242,7 +240,7 @@ public final class RSString implements Interface3 {
      * are changed to uppercase based on the following rules:
      * - The character is the first character in the string
      * - The character is the first non-whitespace character after a '.', '!' or '?' character
-     *
+     * <p>
      * Characters may be either lowercase or uppercase if the previous character is a whitespace character.
      *
      * @return A copy of this string with capitalization based on the rules above.
@@ -340,7 +338,7 @@ public final class RSString implements Interface3 {
 
                 return var2;
             } else {
-                return (RSString) null;
+                return null;
             }
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "na.FB(" + var1 + ')');
@@ -393,7 +391,7 @@ public final class RSString implements Interface3 {
             } else if (var3 == 223) {
                 var3 = 115;
             } else {
-                var3 = this.buffer[var9] & 255;
+                var3 = this.buffer[var9] & 0xFF;
                 ++var9;
             }
 
@@ -595,11 +593,11 @@ public final class RSString implements Interface3 {
             }
 
             for (int var4 = 0; var3 > var4; ++var4) {
-                if ((255 & this.buffer[var4]) < (var1.buffer[var4] & 255)) {
+                if ((255 & this.buffer[var4]) < (var1.buffer[var4] & 0xFF)) {
                     return -1;
                 }
 
-                if ((this.buffer[var4] & 255) > (var1.buffer[var4] & 255)) {
+                if ((this.buffer[var4] & 0xFF) > (var1.buffer[var4] & 0xFF)) {
                     return 1;
                 }
             }
@@ -643,7 +641,7 @@ public final class RSString implements Interface3 {
                         }
 
                         while (var6 < var8) {
-                            Objects.requireNonNull(var10).appendCharacter(this.buffer[var6++] & 255);
+                            Objects.requireNonNull(var10).appendCharacter(this.buffer[var6++] & 0xFF);
                         }
 
                         Objects.requireNonNull(var10).append(var1);
@@ -677,7 +675,7 @@ public final class RSString implements Interface3 {
         int value = 0;
 
         for (int i = 0; i < this.length; ++i) {
-            int current = this.buffer[i] & 255;
+            int current = this.buffer[i] & 0xFF;
             if (0 == i) {
                 if (current == 45) {
                     negate = true;
@@ -768,7 +766,7 @@ public final class RSString implements Interface3 {
     final RSString trim(int var1) {
         try {
             if (var1 != 1) {
-                Unsorted.method1535((WorldListEntry) null, (WorldListEntry) null, 23, 68, 126, false, false);
+                Unsorted.method1535(null, null, 23, 68, 126, false, false);
             }
 
             int var2;
@@ -924,7 +922,7 @@ public final class RSString implements Interface3 {
 
     final int charAt(int var1, byte var2) {
         try {
-            return this.buffer[var1] & 255;
+            return this.buffer[var1] & 0xFF;
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "na.SA(" + var1 + ',' + var2 + ')');
         }
@@ -1041,7 +1039,7 @@ public final class RSString implements Interface3 {
         }
     }
 
-    final long toLong() {
+    public final long toLong() {
         long var2 = 0L;
         for (int var4 = 0; var4 < this.length && var4 < 12; ++var4) {
             byte var5 = this.buffer[var4];

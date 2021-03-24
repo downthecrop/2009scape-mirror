@@ -39,7 +39,7 @@ final class Class3_Sub28_Sub5 extends Node {
             if(var5 >= Class159.anInt2020 && Class57.anInt902 >= var5) {
                var21 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var2 + var4, Class101.anInt1425);
                var22 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, -var2 + var4, Class101.anInt1425);
-               Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var5], var22, 91, var21, var0);
+               TextureOperation18.method282(Class38.anIntArrayArray663[var5], var22, 91, var21, var0);
             }
 
             for(int var20 = var15 * (-1 + var1); 0 < var7; var20 -= var15) {
@@ -71,11 +71,11 @@ final class Class3_Sub28_Sub5 extends Node {
                   int var23 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var6 + var4, Class101.anInt1425);
                   int var24 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, -var6 + var4, Class101.anInt1425);
                   if(var21 >= Class159.anInt2020) {
-                     Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var21], var24, 121, var23, var0);
+                     TextureOperation18.method282(Class38.anIntArrayArray663[var21], var24, 121, var23, var0);
                   }
 
                   if(var22 <= Class57.anInt902) {
-                     Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var22], var24, -110, var23, var0);
+                     TextureOperation18.method282(Class38.anIntArrayArray663[var22], var24, -110, var23, var0);
                   }
                }
             }
@@ -251,7 +251,7 @@ final class Class3_Sub28_Sub5 extends Node {
 
          while(Objects.requireNonNull(fileIds).length > var8) {
             byte[] var9 = cacheIndex0.getFile(frame, fileIds[var8]);
-            int skinId = 255 & var9[1] | (var9[0] & 255) << 8;
+            int skinId = 255 & var9[1] | (var9[0] & 0xFF) << 8;
             Class3_Sub17 var12 = (Class3_Sub17) var5.method1222();
             Class3_Sub17 skin = null;
 

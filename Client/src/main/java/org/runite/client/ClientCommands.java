@@ -69,7 +69,7 @@ public class ClientCommands {
             }
 
             if (command.equalsStringIgnoreCase(TextCore.COMMAND_BREAK_CLIENT_CONNECTION)) {
-                Class3_Sub13_Sub13.breakClientConnection();
+                TextureOperation20.breakClientConnection();
             }
 
             if (command.equalsStringIgnoreCase(TextCore.COMMAND_BREAK_JS5_CLIENT_CONNECTION)) {
@@ -192,9 +192,9 @@ public class ClientCommands {
             if (command.equalsStringIgnoreCase(TextCore.COMMAND_SHIFT_DROP_CLICK)) {
                 shiftClickEnabled = !shiftClickEnabled;
             }
-            Class3_Sub13_Sub1.outgoingBuffer.putOpcode(44);
-            Class3_Sub13_Sub1.outgoingBuffer.writeByte(command.length() + -1);
-            Class3_Sub13_Sub1.outgoingBuffer.writeString(command.substring(2));
+            TextureOperation12.outgoingBuffer.putOpcode(44);
+            TextureOperation12.outgoingBuffer.writeByte(command.length() + -1);
+            TextureOperation12.outgoingBuffer.writeString(command.substring(2));
 
         } catch (RuntimeException var5) {
             throw ClientErrorException.clientError(var5, "k.H(" + (command != null ? "{...}" : "null") + ',' + false + ')');
@@ -216,15 +216,15 @@ public class ClientCommands {
           Class3_Sub28_Sub4.aReferenceCache_3572.clearSoftReferences();//Originally Class3_Sub30_Sub1.method813();
           Class143.aReferenceCache_1874.clearSoftReferences();//Originally Class3_Sub30_Sub1.method813();
           Class67.aReferenceCache_1013.clearSoftReferences();//Originally Class3_Sub30_Sub1.method813();
-          Class82.aReferenceCache_1146.clearSoftReferences();//Originally Class133.method1803();
+          Texture.aReferenceCache_1146.clearSoftReferences();//Originally Class133.method1803();
           Class159.aReferenceCache_2016.clearSoftReferences();//Originally Class133.method1803();
           Class3_Sub31.aReferenceCache_2604.clearSoftReferences();//Class38.method1025();
           Class27.aReferenceCache_511.clearSoftReferences();//Class38.method1025();
           CS2Script.aReferenceCache_2450.clearSoftReferences();//Class40.method1044();
           Class136.aReferenceCache_1772.clearSoftReferences();
           RenderAnimationDefinition.aReferenceCache_1955.clearSoftReferences();//Originally: Class158_Sub1.method2192();
-          Class3_Sub13_Sub34.aReferenceCache_3412.clearSoftReferences();//Originally: Class159.method2196();
-          Class3_Sub13_Sub31.aReferenceCache_3369.clearSoftReferences();//Originally: Class159.method2196();
+          TextureOperation25.aReferenceCache_3412.clearSoftReferences();//Originally: Class159.method2196();
+          TextureOperation2.aReferenceCache_3369.clearSoftReferences();//Originally: Class159.method2196();
           Class128.aReferenceCache_1683.clearSoftReferences();
           Unsorted.aReferenceCache_684.clearSoftReferences();
           Class163_Sub1.aReferenceCache_2984.clearSoftReferences();
@@ -235,7 +235,7 @@ public class ClientCommands {
           Unsorted.aReferenceCache_743.clearSoftReferences();//Class3_Sub28_Sub6.h();
           Class61.aReferenceCache_939.clearSoftReferences();//Class107.method1650();
           Class158_Sub1.aReferenceCache_2982.clearSoftReferences();//MouseListeningClass.method2089();
-          Class3_Sub13_Sub11.aReferenceCache_3130.clearSoftReferences();
+          TextureOperation1.aReferenceCache_3130.clearSoftReferences();
           Unsorted.aReferenceCache_1135.clearSoftReferences();
        } catch (RuntimeException var2) {
           throw ClientErrorException.clientError(var2, "je.O(" + ')');

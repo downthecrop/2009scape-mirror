@@ -28,18 +28,18 @@ final class Class163_Sub3 extends Class163 {
          int var1;
          for(var1 = 0; Class139.anInt1829 > var1; ++var1) {
             int var2 = Class3_Sub7.anIntArray2292[var1];
-            if(Class44.anInt719 != Class3_Sub13_Sub22.players[var2].anInt2838) {
-               if(0 < Class3_Sub13_Sub22.players[var2].anInt3969) {
-                  Class162.method2203(Class3_Sub13_Sub22.players[var2]);
+            if(Class44.anInt719 != TextureOperation0.players[var2].anInt2838) {
+               if(0 < TextureOperation0.players[var2].anInt3969) {
+                  Class162.method2203(TextureOperation0.players[var2]);
                }
 
-               Class3_Sub13_Sub22.players[var2] = null;
+               TextureOperation0.players[var2] = null;
             }
          }
 
          if(GraphicDefinition.incomingBuffer.index == Unsorted.incomingPacketLength) {
             for(var1 = 0; var1 < Class159.localPlayerCount; ++var1) {
-               if(null == Class3_Sub13_Sub22.players[Class56.localPlayerIndexes[var1]]) {
+               if(null == TextureOperation0.players[Class56.localPlayerIndexes[var1]]) {
 //                     throw new RuntimeException("gpp2 pos:" + var1 + " size:" + Class159.anInt2022);
 //                     System.err.println("gpp2 pos:" + var1 + " size:" + Class159.anInt2022);
                   System.err.println("Local player was null - index: " + Class56.localPlayerIndexes[var1] + ", list index: " + var1 + ", list size: " + Class159.localPlayerCount);
@@ -59,7 +59,7 @@ final class Class163_Sub3 extends Class163 {
    static void method2229(long var0) {
       try {
          if(var0 != 0) {
-            if((100 > Class8.anInt104 || Class3_Sub13_Sub29.disableGEBoxes) && Class8.anInt104 < 200) {
+            if((100 > Class8.anInt104 || TextureOperation3.disableGEBoxes) && Class8.anInt104 < 200) {
                RSString var3 = Objects.requireNonNull(Unsorted.method1052(var0)).longToRSString();
 
                int var4;
@@ -88,8 +88,8 @@ final class Class163_Sub3 extends Class163 {
                   Unsorted.aBooleanArray73[Class8.anInt104] = false;
                   ++Class8.anInt104;
                   Class110.anInt1472 = PacketParser.anInt3213;
-                  Class3_Sub13_Sub1.outgoingBuffer.putOpcode(120);
-                  Class3_Sub13_Sub1.outgoingBuffer.writeLong(var0);
+                  TextureOperation12.outgoingBuffer.putOpcode(120);
+                  TextureOperation12.outgoingBuffer.writeLong(var0);
                }
             } else {
                Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, TextCore.HasFriendsListFull, -1);

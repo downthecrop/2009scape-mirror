@@ -6,65 +6,63 @@ import org.rs09.client.config.GameConfig;
 import javax.swing.*;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
-import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.EventObject;
 
 public class ModPanel extends JPanel {
-    private void sendCommand(String command){
-        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(44);
-        Class3_Sub13_Sub1.outgoingBuffer.writeByte(command.length() + -1);
-        Class3_Sub13_Sub1.outgoingBuffer.writeString(command.substring(2));
-    }
-
     ButtonListener listener = new ButtonListener();
     DebugMenu debugMenu = new DebugMenu();
     ItemMenu itemMenu = new ItemMenu();
     NPCMenu npcMenu = new NPCMenu();
     PlayerMenu playerMenu = new PlayerMenu();
     TeleMenu teleMenu = new TeleMenu();
-
     public ModPanel() {
-           setVisible(false);
-           JButton teleMenu = new JButton("Tele");
-           teleMenu.setActionCommand("tele");
-           teleMenu.addActionListener(listener);
+        setVisible(false);
+        JButton teleMenu = new JButton("Tele");
+        teleMenu.setActionCommand("tele");
+        teleMenu.addActionListener(listener);
 
-           JButton playerMenu = new JButton("Player");
-           playerMenu.setActionCommand("player");
-           playerMenu.addActionListener(listener);
+        JButton playerMenu = new JButton("Player");
+        playerMenu.setActionCommand("player");
+        playerMenu.addActionListener(listener);
 
-           JButton npcMenu = new JButton("NPC");
-           npcMenu.setActionCommand("npc");
-           npcMenu.addActionListener(listener);
+        JButton npcMenu = new JButton("NPC");
+        npcMenu.setActionCommand("npc");
+        npcMenu.addActionListener(listener);
 
-           JButton itemMenu = new JButton("Item");
-           itemMenu.setActionCommand("item");
-           itemMenu.addActionListener(listener);
+        JButton itemMenu = new JButton("Item");
+        itemMenu.setActionCommand("item");
+        itemMenu.addActionListener(listener);
 
-           JButton debugMenu = new JButton("Debug");
-           debugMenu.setActionCommand("debug");
-           debugMenu.addActionListener(listener);
+        JButton debugMenu = new JButton("Debug");
+        debugMenu.setActionCommand("debug");
+        debugMenu.addActionListener(listener);
 
-           JButton closeButton = new JButton("Close Panel");
-           closeButton.setActionCommand("close");
-           closeButton.addActionListener(listener);
+        JButton closeButton = new JButton("Close Panel");
+        closeButton.setActionCommand("close");
+        closeButton.addActionListener(listener);
 
-           add(teleMenu);
-           add(playerMenu);
-           add(npcMenu);
-           add(itemMenu);
-           add(debugMenu);
-           add(closeButton,BorderLayout.EAST);
+        add(teleMenu);
+        add(playerMenu);
+        add(npcMenu);
+        add(itemMenu);
+        add(debugMenu);
+        add(closeButton, BorderLayout.EAST);
     }
 
-    class ButtonListener implements ActionListener{
+    private void sendCommand(String command) {
+        TextureOperation12.outgoingBuffer.putOpcode(44);
+        TextureOperation12.outgoingBuffer.writeByte(command.length() + -1);
+        TextureOperation12.outgoingBuffer.writeString(command.substring(2));
+    }
+
+    class ButtonListener implements ActionListener {
 
         @Override
         public void actionPerformed(ActionEvent actionEvent) {
-            switch(actionEvent.getActionCommand()){
+            switch (actionEvent.getActionCommand()) {
                 case "close":
                     ClientLoader.setModPanelVisible(false);
                     break;
@@ -89,56 +87,56 @@ public class ModPanel extends JPanel {
 
     class TeleMenu extends JFrame {
         Object[][] rowData = {
-                {"2974,4383,2","corporeal beast"},
-                {"2659,2649,0","pest control"},
-                {"3293,3184,0","al kharid"},
-                {"3222,3217,0","lumbridge"},
-                {"3110,3168,0","wizard's tower"},
-                {"3083,3249,0","draynor village"},
-                {"3019,3244,0","port sarim"},
-                {"2956,3209,0","rimmington"},
-                {"2965,3380,0","falador"},
-                {"2895,3436,0","taverly"},
-                {"3080,3423,0","barbarian village"},
-                {"3213,3428,0","varrock"},
-                {"3164,3485,0","grand exchange"},
-                {"2917,3175,0","karamja"},
-                {"2450,5165,0","tzhaar"},
-                {"2795,3177,0","brimhaven"},
-                {"2849,2961,0","shilo village"},
-                {"2605,3093,0","yanille"},
-                {"2663,3305,0","ardougne"},
-                {"2450,3422,0","tree gnome stronghold"},
-                {"2730,3485,0","camelot"},
-                {"2730,3485,0","seer's village"},
-                {"2805,3435,0","catherby"},
-                {"2658,3657,0","relleka"},
-                {"2890,3676,0","trollheim"},
-                {"2914,3746,0","god wars dungeon"},
-                {"3180,3684,0","bounty hunter"},
-                {"3272,3687,0","clan wars"},
-                {"3090,3957,0","mage arena"},
-                {"3069,10257,0","king black dragon"},
-                {"3359,3416,0","digsite"},
-                {"3488,3489,0","canifis"},
-                {"3428,3526,0","slayer tower"},
-                {"3502,9483,0","kalphite queen"},
-                {"3233,2913,0","pyramid"},
-                {"3419,2917,0","nardah"},
-                {"3482,3090,0","uzer"},
-                {"3358,2970,0","pollnivneach"},
-                {"3305,2788,0","sophanem"},
-                {"2898,3544,0","burthorpe"},
-                {"3088,3491,0","edgeville"},
-                {"3169,3034,0","bedabin"},
-                {"3565,3289,0","barrows"},
-                {"3016,3513,0","black knight's fortress"},
-                {"3052,3481,0","monastery"}
+                {"2974,4383,2", "corporeal beast"},
+                {"2659,2649,0", "pest control"},
+                {"3293,3184,0", "al kharid"},
+                {"3222,3217,0", "lumbridge"},
+                {"3110,3168,0", "wizard's tower"},
+                {"3083,3249,0", "draynor village"},
+                {"3019,3244,0", "port sarim"},
+                {"2956,3209,0", "rimmington"},
+                {"2965,3380,0", "falador"},
+                {"2895,3436,0", "taverly"},
+                {"3080,3423,0", "barbarian village"},
+                {"3213,3428,0", "varrock"},
+                {"3164,3485,0", "grand exchange"},
+                {"2917,3175,0", "karamja"},
+                {"2450,5165,0", "tzhaar"},
+                {"2795,3177,0", "brimhaven"},
+                {"2849,2961,0", "shilo village"},
+                {"2605,3093,0", "yanille"},
+                {"2663,3305,0", "ardougne"},
+                {"2450,3422,0", "tree gnome stronghold"},
+                {"2730,3485,0", "camelot"},
+                {"2730,3485,0", "seer's village"},
+                {"2805,3435,0", "catherby"},
+                {"2658,3657,0", "relleka"},
+                {"2890,3676,0", "trollheim"},
+                {"2914,3746,0", "god wars dungeon"},
+                {"3180,3684,0", "bounty hunter"},
+                {"3272,3687,0", "clan wars"},
+                {"3090,3957,0", "mage arena"},
+                {"3069,10257,0", "king black dragon"},
+                {"3359,3416,0", "digsite"},
+                {"3488,3489,0", "canifis"},
+                {"3428,3526,0", "slayer tower"},
+                {"3502,9483,0", "kalphite queen"},
+                {"3233,2913,0", "pyramid"},
+                {"3419,2917,0", "nardah"},
+                {"3482,3090,0", "uzer"},
+                {"3358,2970,0", "pollnivneach"},
+                {"3305,2788,0", "sophanem"},
+                {"2898,3544,0", "burthorpe"},
+                {"3088,3491,0", "edgeville"},
+                {"3169,3034,0", "bedabin"},
+                {"3565,3289,0", "barrows"},
+                {"3016,3513,0", "black knight's fortress"},
+                {"3052,3481,0", "monastery"}
         };
         JTextField playerNameField = new JTextField();
         JTextField coordsField = new JTextField();
         JCheckBox toMeToggle = new JCheckBox("To Me");
-        JTable table = new JTable(rowData,new Object[]{"Coords","Name"}){
+        JTable table = new JTable(rowData, new Object[]{"Coords", "Name"}) {
             @Override
             public boolean editCellAt(int i, int i1, EventObject eventObject) {
                 return false;
@@ -158,9 +156,9 @@ public class ModPanel extends JPanel {
 
         ActionListener buttonListener = actionEvent -> {
             String command = actionEvent.getActionCommand();
-            switch(command){
+            switch (command) {
                 case "telePlayer":
-                    if(toMeToggle.isSelected()){
+                    if (toMeToggle.isSelected()) {
                         sendCommand("::teletome " + playerNameField.getText());
                     } else {
                         sendCommand("::teleto " + playerNameField.getText());
@@ -168,24 +166,25 @@ public class ModPanel extends JPanel {
                     break;
                 case "teleCoords":
                     String[] coordTokens = coordsField.getText().split(",");
-                    if(coordTokens.length < 2){
+                    if (coordTokens.length < 2) {
                         coordsField.setText("");
                         break;
                     }
-                    int x,y,z = 0;
+                    int x, y, z = 0;
                     try {
                         x = Integer.parseInt(coordTokens[0]);
                         y = Integer.parseInt(coordTokens[1]);
                         if (coordTokens.length == 3) z = Integer.parseInt(coordTokens[2]);
-                    } catch (NumberFormatException e){
+                    } catch (NumberFormatException e) {
                         SystemLogger.logErr("(ModPanel.java:118) Invalid value passed to coords tele.");
                         coordsField.setText("");
                         break;
                     }
-                    sendCoordTele(x,y,z);
+                    sendCoordTele(x, y, z);
                     break;
             }
         };
+
         TeleMenu() {
             super("Teleport Menu");
             setLayout(new BorderLayout());
@@ -196,7 +195,7 @@ public class ModPanel extends JPanel {
             JButton teleButton = new JButton("Tele");
             teleButton.setActionCommand("telePlayer");
             teleButton.addActionListener(buttonListener);
-            playerNameField.setPreferredSize(new Dimension(100,20));
+            playerNameField.setPreferredSize(new Dimension(100, 20));
             playerTelePanel.add(playerNameLabel);
             playerTelePanel.add(playerNameField);
             playerTelePanel.add(toMeToggle);
@@ -207,7 +206,7 @@ public class ModPanel extends JPanel {
             teleButton = new JButton("Tele");
             teleButton.setActionCommand("teleCoords");
             teleButton.addActionListener(buttonListener);
-            coordsField.setPreferredSize(new Dimension(60,20));
+            coordsField.setPreferredSize(new Dimension(60, 20));
             coordTelePanel.add(coordsLabel);
             coordTelePanel.add(coordsField);
             coordTelePanel.add(teleButton);
@@ -215,22 +214,30 @@ public class ModPanel extends JPanel {
             table.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent mouseEvent) {
-                    if(mouseEvent.getClickCount() == 2){
+                    if (mouseEvent.getClickCount() == 2) {
                         JTable table = (JTable) mouseEvent.getSource();
                         int row = table.getSelectedRow();
-                        String coordTokens = table.getValueAt(row,0).toString();
-                        sendCommand("::tele " + coordTokens.replace(","," "));
+                        String coordTokens = table.getValueAt(row, 0).toString();
+                        sendCommand("::tele " + coordTokens.replace(",", " "));
                         SystemLogger.logInfo("Sending teleport command to " + coordTokens);
                     }
                 }
+
                 @Override
-                public void mousePressed(MouseEvent mouseEvent) { }
+                public void mousePressed(MouseEvent mouseEvent) {
+                }
+
                 @Override
-                public void mouseReleased(MouseEvent mouseEvent) { }
+                public void mouseReleased(MouseEvent mouseEvent) {
+                }
+
                 @Override
-                public void mouseEntered(MouseEvent mouseEvent) { }
+                public void mouseEntered(MouseEvent mouseEvent) {
+                }
+
                 @Override
-                public void mouseExited(MouseEvent mouseEvent) { }
+                public void mouseExited(MouseEvent mouseEvent) {
+                }
             });
             cellRenderer.setToolTipText("Double-click to teleport.");
             table.getColumnModel().getColumn(0).setMaxWidth(250);
@@ -238,26 +245,26 @@ public class ModPanel extends JPanel {
             table.getColumnModel().getColumn(1).setCellRenderer(cellRenderer);
 
             JPanel fullTele = new JPanel();
-            fullTele.setLayout(new BoxLayout(fullTele,BoxLayout.PAGE_AXIS));
+            fullTele.setLayout(new BoxLayout(fullTele, BoxLayout.PAGE_AXIS));
             JScrollPane scrollPane = new JScrollPane(table);
             fullTele.add(scrollPane);
 
-            add(playerTelePanel,BorderLayout.NORTH);
-            add(coordTelePanel,BorderLayout.CENTER);
-            add(fullTele,BorderLayout.SOUTH);
+            add(playerTelePanel, BorderLayout.NORTH);
+            add(coordTelePanel, BorderLayout.CENTER);
+            add(fullTele, BorderLayout.SOUTH);
             pack();
         }
 
-        private void open(){
+        private void open() {
             setVisible(true);
         }
 
-        private void sendCoordTele(int x, int y, int z){
+        private void sendCoordTele(int x, int y, int z) {
             sendCommand("::tele " + x + " " + y + " " + z);
         }
 
-        private void sendCoordTele(int x, int y){
-            sendCoordTele(x,y,0);
+        private void sendCoordTele(int x, int y) {
+            sendCoordTele(x, y, 0);
         }
     }
 
@@ -268,7 +275,7 @@ public class ModPanel extends JPanel {
             @Override
             public void itemStateChanged(ItemEvent itemEvent) {
                 String title = ((JCheckBox) itemEvent.getItem()).getText();
-                switch(title){
+                switch (title) {
                     case "God Mode":
                         sendCommand("::god");
                         break;
@@ -282,7 +289,7 @@ public class ModPanel extends JPanel {
             @Override
             public void actionPerformed(ActionEvent actionEvent) {
                 String actionName = actionEvent.getActionCommand();
-                switch(actionName){
+                switch (actionName) {
                     case "jail":
                         sendCommand("::jail " + durationField.getText() + " " + nameField.getText());
                         break;
@@ -292,7 +299,8 @@ public class ModPanel extends JPanel {
                 }
             }
         };
-        PlayerMenu(){
+
+        PlayerMenu() {
             super("Player Options");
             setLayout(new BorderLayout());
 
@@ -304,10 +312,10 @@ public class ModPanel extends JPanel {
 
             jailPanel.add(nameLabel);
             jailPanel.add(nameField);
-            nameField.setPreferredSize(new Dimension(100,20));
+            nameField.setPreferredSize(new Dimension(100, 20));
             jailPanel.add(durationLabel);
             jailPanel.add(durationField);
-            durationField.setPreferredSize(new Dimension(55,20));
+            durationField.setPreferredSize(new Dimension(55, 20));
             jailPanel.add(jailButton);
             jailButton.setActionCommand("jail");
             jailButton.addActionListener(listener);
@@ -329,7 +337,7 @@ public class ModPanel extends JPanel {
             selfPanel.add(instakillCheck);
             selfPanel.add(emptyButton);
 
-           add(selfPanel,BorderLayout.SOUTH);
+            add(selfPanel, BorderLayout.SOUTH);
 
             pack();
 
@@ -362,7 +370,7 @@ public class ModPanel extends JPanel {
             add(searchPanel, BorderLayout.NORTH);
             setLocationRelativeTo(null);
 
-            JTable npcTable = new JTable(model){
+            JTable npcTable = new JTable(model) {
                 @Override
                 public boolean editCellAt(int i, int i1, EventObject eventObject) {
                     return false;
@@ -379,21 +387,29 @@ public class ModPanel extends JPanel {
             npcTable.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent mouseEvent) {
-                    if(mouseEvent.getClickCount() == 2){
+                    if (mouseEvent.getClickCount() == 2) {
                         JTable table = (JTable) mouseEvent.getSource();
                         int row = table.getSelectedRow();
-                        sendCommand("::npc " + table.getValueAt(row,0) + (amountField.getText().isEmpty() ? "" : (" " + amountField.getText())));
-                        SystemLogger.logInfo("Sending spawn command for NPC: " + table.getValueAt(row,1) + " " + amountField.getText());
+                        sendCommand("::npc " + table.getValueAt(row, 0) + (amountField.getText().isEmpty() ? "" : (" " + amountField.getText())));
+                        SystemLogger.logInfo("Sending spawn command for NPC: " + table.getValueAt(row, 1) + " " + amountField.getText());
                     }
                 }
+
                 @Override
-                public void mousePressed(MouseEvent mouseEvent) { }
+                public void mousePressed(MouseEvent mouseEvent) {
+                }
+
                 @Override
-                public void mouseReleased(MouseEvent mouseEvent) { }
+                public void mouseReleased(MouseEvent mouseEvent) {
+                }
+
                 @Override
-                public void mouseEntered(MouseEvent mouseEvent) { }
+                public void mouseEntered(MouseEvent mouseEvent) {
+                }
+
                 @Override
-                public void mouseExited(MouseEvent mouseEvent) { }
+                public void mouseExited(MouseEvent mouseEvent) {
+                }
             });
 
             searchField.addKeyListener(new KeyListener() {
@@ -403,15 +419,17 @@ public class ModPanel extends JPanel {
                 }
 
                 @Override
-                public void keyPressed(KeyEvent keyEvent) {}
+                public void keyPressed(KeyEvent keyEvent) {
+                }
 
                 @Override
-                public void keyReleased(KeyEvent keyEvent) {}
+                public void keyReleased(KeyEvent keyEvent) {
+                }
             });
 
 
             JScrollPane scrollPane = new JScrollPane(npcTable);
-            add(scrollPane,BorderLayout.SOUTH);
+            add(scrollPane, BorderLayout.SOUTH);
 
             pack();
             setVisible(false);
@@ -429,7 +447,7 @@ public class ModPanel extends JPanel {
         }
 
         public void open() {
-            if(!populated) {
+            if (!populated) {
                 SwingUtilities.invokeLater(() -> {
                     for (int i = 0; i < 14649; i++) {
                         NPCDefinition def = NPCDefinition.getNPCDefinition(i);
@@ -453,7 +471,7 @@ public class ModPanel extends JPanel {
         DefaultTableCellRenderer cellRenderer = new DefaultTableCellRenderer();
         boolean populated = false;
 
-        ItemMenu(){
+        ItemMenu() {
             super("Item Spawning Menu");
             setLayout(new BorderLayout());
             cellRenderer.setToolTipText("Double-Click to spawn.");
@@ -461,16 +479,16 @@ public class ModPanel extends JPanel {
             JPanel searchPanel = new JPanel();
             JLabel searchLabel = new JLabel("Search for Item:");
             JLabel amountLabel = new JLabel("Amount: ");
-            amountField.setPreferredSize(new Dimension(45,20));
-            searchField.setPreferredSize(new Dimension(100,20));
+            amountField.setPreferredSize(new Dimension(45, 20));
+            searchField.setPreferredSize(new Dimension(100, 20));
             searchPanel.add(searchLabel);
             searchPanel.add(searchField);
             searchPanel.add(amountLabel);
             searchPanel.add(amountField);
-            add(searchPanel,BorderLayout.NORTH);
+            add(searchPanel, BorderLayout.NORTH);
             setLocationRelativeTo(null);
 
-            JTable itemTable = new JTable(model){
+            JTable itemTable = new JTable(model) {
                 @Override
                 public boolean editCellAt(int i, int i1, EventObject eventObject) {
                     return false;
@@ -486,21 +504,29 @@ public class ModPanel extends JPanel {
             itemTable.addMouseListener(new MouseListener() {
                 @Override
                 public void mouseClicked(MouseEvent mouseEvent) {
-                    if(mouseEvent.getClickCount() == 2){
+                    if (mouseEvent.getClickCount() == 2) {
                         JTable table = (JTable) mouseEvent.getSource();
                         int row = table.getSelectedRow();
-                        sendCommand("::item " + table.getValueAt(row,0) + (amountField.getText().isEmpty() ? "" : (" " + amountField.getText())));
-                        SystemLogger.logInfo("Sending spawn command for item: " + table.getValueAt(row,1) + " " + amountField.getText());
+                        sendCommand("::item " + table.getValueAt(row, 0) + (amountField.getText().isEmpty() ? "" : (" " + amountField.getText())));
+                        SystemLogger.logInfo("Sending spawn command for item: " + table.getValueAt(row, 1) + " " + amountField.getText());
                     }
                 }
+
                 @Override
-                public void mousePressed(MouseEvent mouseEvent) { }
+                public void mousePressed(MouseEvent mouseEvent) {
+                }
+
                 @Override
-                public void mouseReleased(MouseEvent mouseEvent) { }
+                public void mouseReleased(MouseEvent mouseEvent) {
+                }
+
                 @Override
-                public void mouseEntered(MouseEvent mouseEvent) { }
+                public void mouseEntered(MouseEvent mouseEvent) {
+                }
+
                 @Override
-                public void mouseExited(MouseEvent mouseEvent) { }
+                public void mouseExited(MouseEvent mouseEvent) {
+                }
             });
 
             searchField.addKeyListener(new KeyListener() {
@@ -510,15 +536,17 @@ public class ModPanel extends JPanel {
                 }
 
                 @Override
-                public void keyPressed(KeyEvent keyEvent) {}
+                public void keyPressed(KeyEvent keyEvent) {
+                }
 
                 @Override
-                public void keyReleased(KeyEvent keyEvent) {}
+                public void keyReleased(KeyEvent keyEvent) {
+                }
             });
 
 
             JScrollPane scrollPane = new JScrollPane(itemTable);
-            add(scrollPane,BorderLayout.SOUTH);
+            add(scrollPane, BorderLayout.SOUTH);
 
             pack();
             setVisible(false);
@@ -536,7 +564,7 @@ public class ModPanel extends JPanel {
         }
 
         public void open() {
-            if(!populated) {
+            if (!populated) {
                 SwingUtilities.invokeLater(() -> {
                     for (int i = 0; i < 14649; i++) {
                         ItemDefinition def = ItemDefinition.getItemDefinition(i);
@@ -552,8 +580,8 @@ public class ModPanel extends JPanel {
         }
     }
 
-    class DebugMenu extends JFrame{
-        DebugMenu(){
+    class DebugMenu extends JFrame {
+        DebugMenu() {
             super("Debug Options");
             ItemListener listener = new CheckBoxListener();
             setResizable(false);
@@ -580,7 +608,7 @@ public class ModPanel extends JPanel {
             @Override
             public void itemStateChanged(ItemEvent itemEvent) {
                 String title = ((JCheckBox) itemEvent.getItem()).getText();
-                switch(title){
+                switch (title) {
                     case "Item IDs":
                         GameConfig.ITEM_DEBUG_ENABLED = itemEvent.getStateChange() == ItemEvent.SELECTED;
                         break;

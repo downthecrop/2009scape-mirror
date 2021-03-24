@@ -2,7 +2,6 @@ package org.runite.client;
 
 class Class164_Sub1 extends Class164 {
 
-   static Class158 aClass158_3009;
    private int anInt3010;
    static short[] aShortArray3011 = new short[]{(short)6798, (short)8741, (short)25238, (short)4626, (short)4550};
    static int anInt3012 = 0;
@@ -35,9 +34,9 @@ class Class164_Sub1 extends Class164 {
             int var10 = var8 + -Class7.anInt2162;
             int var9 = var6 + -NPC.anInt3995;
             int var11 = -Class77.anInt1111 + var7;
-            int var12 = (int)Math.sqrt((double)(var11 * var11 + var9 * var9));
-            Class139.anInt1823 = 2047 & (int)(Math.atan2((double)var10, (double)var12) * 325.949D);
-            Class3_Sub13_Sub25.anInt3315 = 2047 & (int)(Math.atan2((double)var9, (double)var11) * -325.949D);
+            int var12 = (int)Math.sqrt(var11 * var11 + var9 * var9);
+            Class139.anInt1823 = 2047 & (int)(Math.atan2(var10, var12) * 325.949D);
+            TextureOperation28.anInt3315 = 2047 & (int)(Math.atan2(var9, var11) * -325.949D);
             if(128 > Class139.anInt1823) {
                Class139.anInt1823 = 128;
             }
@@ -64,118 +63,118 @@ class Class164_Sub1 extends Class164 {
          if(var3 < 16) {
             if(var3 == 1) {
                if(var4 > Class145.anInt2697) {
-                  if(!Class3_Sub13_Sub37.method349(var4, var6, var5)) {
+                  if(!TextureOperation10.method349(var4, var6, var5)) {
                      return true;
                   }
 
-                  if(!Class3_Sub13_Sub37.method349(var4, var6, var5 + 128)) {
+                  if(!TextureOperation10.method349(var4, var6, var5 + 128)) {
                      return true;
                   }
                }
 
                if(var0 > 0) {
-                  if(!Class3_Sub13_Sub37.method349(var4, var7, var5)) {
+                  if(!TextureOperation10.method349(var4, var7, var5)) {
                      return true;
                   }
 
-                  if(!Class3_Sub13_Sub37.method349(var4, var7, var5 + 128)) {
+                  if(!TextureOperation10.method349(var4, var7, var5 + 128)) {
                      return true;
                   }
                }
 
-               if(!Class3_Sub13_Sub37.method349(var4, var8, var5)) {
+               if(!TextureOperation10.method349(var4, var8, var5)) {
                   return true;
                }
 
-               return !Class3_Sub13_Sub37.method349(var4, var8, var5 + 128);
+               return !TextureOperation10.method349(var4, var8, var5 + 128);
             }
 
             if(var3 == 2) {
-               if(var5 < Class3_Sub13_Sub30.anInt3363) {
-                  if(!Class3_Sub13_Sub37.method349(var4, var6, var5 + 128)) {
+               if(var5 < TextureOperation13.anInt3363) {
+                  if(!TextureOperation10.method349(var4, var6, var5 + 128)) {
                      return true;
                   }
 
-                  if(!Class3_Sub13_Sub37.method349(var4 + 128, var6, var5 + 128)) {
+                  if(!TextureOperation10.method349(var4 + 128, var6, var5 + 128)) {
                      return true;
                   }
                }
 
                if(var0 > 0) {
-                  if(!Class3_Sub13_Sub37.method349(var4, var7, var5 + 128)) {
+                  if(!TextureOperation10.method349(var4, var7, var5 + 128)) {
                      return true;
                   }
 
-                  if(!Class3_Sub13_Sub37.method349(var4 + 128, var7, var5 + 128)) {
+                  if(!TextureOperation10.method349(var4 + 128, var7, var5 + 128)) {
                      return true;
                   }
                }
 
-               if(!Class3_Sub13_Sub37.method349(var4, var8, var5 + 128)) {
+               if(!TextureOperation10.method349(var4, var8, var5 + 128)) {
                   return true;
                }
 
-               return !Class3_Sub13_Sub37.method349(var4 + 128, var8, var5 + 128);
+               return !TextureOperation10.method349(var4 + 128, var8, var5 + 128);
             }
 
             if(var3 == 4) {
                if(var4 < Class145.anInt2697) {
-                  if(!Class3_Sub13_Sub37.method349(var4 + 128, var6, var5)) {
+                  if(!TextureOperation10.method349(var4 + 128, var6, var5)) {
                      return true;
                   }
 
-                  if(!Class3_Sub13_Sub37.method349(var4 + 128, var6, var5 + 128)) {
+                  if(!TextureOperation10.method349(var4 + 128, var6, var5 + 128)) {
                      return true;
                   }
                }
 
                if(var0 > 0) {
-                  if(!Class3_Sub13_Sub37.method349(var4 + 128, var7, var5)) {
+                  if(!TextureOperation10.method349(var4 + 128, var7, var5)) {
                      return true;
                   }
 
-                  if(!Class3_Sub13_Sub37.method349(var4 + 128, var7, var5 + 128)) {
+                  if(!TextureOperation10.method349(var4 + 128, var7, var5 + 128)) {
                      return true;
                   }
                }
 
-               if(!Class3_Sub13_Sub37.method349(var4 + 128, var8, var5)) {
+               if(!TextureOperation10.method349(var4 + 128, var8, var5)) {
                   return true;
                }
 
-               return !Class3_Sub13_Sub37.method349(var4 + 128, var8, var5 + 128);
+               return !TextureOperation10.method349(var4 + 128, var8, var5 + 128);
             }
 
             if(var3 == 8) {
-               if(var5 > Class3_Sub13_Sub30.anInt3363) {
-                  if(!Class3_Sub13_Sub37.method349(var4, var6, var5)) {
+               if(var5 > TextureOperation13.anInt3363) {
+                  if(!TextureOperation10.method349(var4, var6, var5)) {
                      return true;
                   }
 
-                  if(!Class3_Sub13_Sub37.method349(var4 + 128, var6, var5)) {
+                  if(!TextureOperation10.method349(var4 + 128, var6, var5)) {
                      return true;
                   }
                }
 
                if(var0 > 0) {
-                  if(!Class3_Sub13_Sub37.method349(var4, var7, var5)) {
+                  if(!TextureOperation10.method349(var4, var7, var5)) {
                      return true;
                   }
 
-                  if(!Class3_Sub13_Sub37.method349(var4 + 128, var7, var5)) {
+                  if(!TextureOperation10.method349(var4 + 128, var7, var5)) {
                      return true;
                   }
                }
 
-               if(!Class3_Sub13_Sub37.method349(var4, var8, var5)) {
+               if(!TextureOperation10.method349(var4, var8, var5)) {
                   return true;
                }
 
-               return !Class3_Sub13_Sub37.method349(var4 + 128, var8, var5);
+               return !TextureOperation10.method349(var4 + 128, var8, var5);
             }
          }
 
-         return !Class3_Sub13_Sub37.method349(var4 + 64, var9, var5 + 64) || (var3 == 16 ? !Class3_Sub13_Sub37.method349(var4, var8, var5 + 128) : (var3 == 32 ? !Class3_Sub13_Sub37.method349(var4 + 128, var8, var5 + 128) : (var3 == 64 ? !Class3_Sub13_Sub37.method349(var4 + 128, var8, var5) : (var3 == 128 && !Class3_Sub13_Sub37.method349(var4, var8, var5)))));
+         return !TextureOperation10.method349(var4 + 64, var9, var5 + 64) || (var3 == 16 ? !TextureOperation10.method349(var4, var8, var5 + 128) : (var3 == 32 ? !TextureOperation10.method349(var4 + 128, var8, var5 + 128) : (var3 == 64 ? !TextureOperation10.method349(var4 + 128, var8, var5) : (var3 == 128 && !TextureOperation10.method349(var4, var8, var5)))));
       } else {
          return true;
       }
@@ -239,7 +238,7 @@ class Class164_Sub1 extends Class164 {
          this.anIntArray3014 = new int[this.anInt2062];
 
          for(int var7 = 0; var7 < this.anInt2062; ++var7) {
-            this.anIntArray3014[var7] = (short)((int)(Math.pow((double) (float) 0.45, (double)var7) * 4096.0D));
+            this.anIntArray3014[var7] = (short)((int)(Math.pow((float) 0.45, var7) * 4096.0D));
          }
 
       } catch (RuntimeException var8) {

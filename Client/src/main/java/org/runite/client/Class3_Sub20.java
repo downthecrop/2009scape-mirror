@@ -34,7 +34,7 @@ final class Class3_Sub20 extends Linkable {
 	         Class32.method995();
 	         Class49.aAbstractSprite_812 = null;
 	         Class58.anInt909 = -1;
-	         Class3_Sub13_Sub30.method313((byte)55);
+	         TextureOperation13.method313((byte)55);
 	         aClass47_3801.clear();
 	         ObjectDefinition.aClass136_1413 = new Class136();
 	         ((Class102)Class51.anInterface2_838).method1618();
@@ -44,10 +44,10 @@ final class Class3_Sub20 extends Linkable {
 	         Class141.method2043();
 	         Class65.method1240();
 	         Unsorted.method1250(17, false);
-	         Class3_Sub13_Sub17.method247((byte)51);
+	         TextureOperation23.method247((byte)51);
 
 	         for(int var1 = 0; 2048 > var1; ++var1) {
-	            Player var2 = Class3_Sub13_Sub22.players[var1];
+	            Player var2 = TextureOperation0.players[var1];
 	            if(null != var2) {
 	               var2.anObject2796 = null;
 	            }
@@ -70,7 +70,7 @@ final class Class3_Sub20 extends Linkable {
 	         }
 
 	         if(10 == Class143.gameStage) {
-	            Class3_Sub13_Sub11.method219(false);
+	            TextureOperation1.method219(false);
 	         }
 
 	         if(Class143.gameStage == 30) {
@@ -85,14 +85,14 @@ final class Class3_Sub20 extends Linkable {
    static void method390(boolean var0, int var1, int var2, int var3, byte var4, int var5, int var6) {
       try {
          Unsorted.anInt3631 = var3;
-         Class3_Sub13_Sub34.anInt3414 = var2;
+         TextureOperation25.anInt3414 = var2;
          Unsorted.anInt30 = var6;
          Class163_Sub2_Sub1.anInt4021 = var1;
          Class146.anInt1904 = var5;
          if(var0 && Unsorted.anInt3631 >= 100) {
             NPC.anInt3995 = 128 * Unsorted.anInt30 + 64;
             Class77.anInt1111 = 128 * Class146.anInt1904 + 64;
-            Class7.anInt2162 = Class121.method1736(WorldListCountry.localPlane, 1, NPC.anInt3995, Class77.anInt1111) + -Class3_Sub13_Sub34.anInt3414;
+            Class7.anInt2162 = Class121.method1736(WorldListCountry.localPlane, 1, NPC.anInt3995, Class77.anInt1111) + -TextureOperation25.anInt3414;
          }
 
         // int var7 = 76 % ((-79 - var4) / 35);

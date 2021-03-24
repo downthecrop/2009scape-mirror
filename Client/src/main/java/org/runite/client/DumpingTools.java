@@ -123,7 +123,7 @@ public class DumpingTools {
             }
             ArrayList<Integer> ai = new ArrayList<>(20);
             for (int j = 0; j < a.assemblyInstructions.length; j++) {
-                if (a.assemblyInstructions[j] == CS2AsmOpcodes.CALL.getOp() && !ai.contains((Object) a.instructionOperands[j])) {
+                if (a.assemblyInstructions[j] == CS2AsmOpcodes.CALL.getOp() && !ai.contains(a.instructionOperands[j])) {
                     ai.add(a.instructionOperands[j]);
                 }
             }
@@ -203,7 +203,7 @@ public class DumpingTools {
      * Records for each method, all the methods that it calls, recursively. Used internally by other functions.
      */
     private static int treeDepth = 0;
-    private static ArrayList<Integer> tree = new ArrayList<>(20);
+    private static final ArrayList<Integer> tree = new ArrayList<>(20);
 
     private static void GetMethodDependencyGraph(FileWriter f, int methodID) throws IOException {
         AssembledMethod am = ItemDefinition.getMethodByID(methodID);

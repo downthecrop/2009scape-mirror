@@ -1,9 +1,9 @@
 package org.runite.client;
 
-final class ClientErrorException extends RuntimeException {
+public final class ClientErrorException extends RuntimeException {
 
    static int[] anIntArray2113 = new int[]{2, 2, 4, 0, 1, 8, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0};
-   static Class96[] aClass96Array2114 = new Class96[4];
+    public static Class96[] aClass96Array2114 = new Class96[4];
    static int anInt2115 = -1;
    String aString2117;
    Throwable aThrowable2118;
@@ -15,7 +15,7 @@ final class ClientErrorException extends RuntimeException {
    static void method2285(int var0, int var1, int var2, int var3, int var5) {
       try {
          LinkableRSString.anInt2587 = var1;
-         Class3_Sub13_Sub8.anInt3103 = var5;
+         TextureOperation9.anInt3103 = var5;
          Class140_Sub7.anInt2938 = var0;
          Unsorted.anInt144 = var3;
          Unsorted.anInt3695 = var2;
@@ -37,7 +37,7 @@ final class ClientErrorException extends RuntimeException {
       }
    }
 
-    static ClientErrorException clientError(Throwable var0, String var1) {
+    public static ClientErrorException clientError(Throwable var0, String var1) {
         //var0.printStackTrace();
         //var0.printStackTrace(); Uncomment to be spammed when clan chat is used cuz clanchat breaks the text script.
         ClientErrorException var2;

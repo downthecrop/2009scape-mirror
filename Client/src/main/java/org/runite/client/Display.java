@@ -1,9 +1,6 @@
 package org.runite.client;
 
-import java.awt.DisplayMode;
-import java.awt.Frame;
-import java.awt.GraphicsDevice;
-import java.awt.GraphicsEnvironment;
+import java.awt.*;
 import java.lang.reflect.Field;
 
 public class Display {
@@ -11,6 +8,23 @@ public class Display {
     private GraphicsDevice graphicsDevice;
     private DisplayMode displayMode;
 
+
+    public Display() throws Exception {
+        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
+        this.graphicsDevice = env.getDefaultScreenDevice();
+
+        if (!this.graphicsDevice.isFullScreenSupported()) {
+            for (int i = 0; env.getScreenDevices().length > i; ++i) {
+                GraphicsDevice device = env.getScreenDevices()[i];
+                if (device != null && device.isFullScreenSupported()) {
+                    this.graphicsDevice = device;
+                    return;
+                }
+            }
+
+            throw new Exception();
+        }
+    }
 
     private void method917(Frame var1) {
         boolean var3 = false;
@@ -120,22 +134,5 @@ public class Display {
         }
 
         this.method917(null);
-    }
-
-    public Display() throws Exception {
-        GraphicsEnvironment env = GraphicsEnvironment.getLocalGraphicsEnvironment();
-        this.graphicsDevice = env.getDefaultScreenDevice();
-
-        if (!this.graphicsDevice.isFullScreenSupported()) {
-            for (int i = 0; env.getScreenDevices().length > i; ++i) {
-                GraphicsDevice device = env.getScreenDevices()[i];
-                if (device != null && device.isFullScreenSupported()) {
-                    this.graphicsDevice = device;
-                    return;
-                }
-            }
-
-            throw new Exception();
-        }
     }
 }

@@ -43,9 +43,9 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
          for(Class96[] var7 = ClientErrorException.aClass96Array2114; var8 < var7.length; ++var8) {
             Class96 var9 = var7[var8];
             if(null != var9 && var9.anInt1360 == 2) {
-               Unsorted.method1724(var0 >> 1, var5, (-Class82.anInt1152 + var9.anInt1347 << 7) - -var9.anInt1350, var9.anInt1353 * 2, var2 >> 1, var9.anInt1346 + (var9.anInt1356 + -Class131.anInt1716 << 7), (byte)-114, var4);
+               Unsorted.method1724(var0 >> 1, var5, (-Texture.anInt1152 + var9.anInt1347 << 7) - -var9.anInt1350, var9.anInt1353 * 2, var2 >> 1, var9.anInt1346 + (var9.anInt1356 + -Class131.anInt1716 << 7), (byte)-114, var4);
                if(-1 < Class32.anInt590 && Class44.anInt719 % 20 < 10) {
-                  Class166.aAbstractSpriteArray2072[var9.anInt1351].drawAt(-12 + var1 + Class32.anInt590, -28 + var6 - -Class82.anInt2208);
+                  Class166.aAbstractSpriteArray2072[var9.anInt1351].drawAt(-12 + var1 + Class32.anInt590, -28 + var6 - -Texture.anInt2208);
                }
             }
          }
@@ -94,7 +94,7 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
 
                         for(int var14 = 0; Class3_Sub24_Sub3.anIntArray3494.length > var14; ++var14) {
                            if(var13 == Class3_Sub24_Sub3.anIntArray3494[var14] && var4[var14] != null) {
-                              Class3_Sub13_Sub30.parseObjectMapping(AtmosphereParser.aClass91Array1182, var5, var4[var14], var9, var10, 8 * var6, var7 * 8, var0, (var11 & 7) * 8, 8 * (7 & var12));
+                              TextureOperation13.parseObjectMapping(AtmosphereParser.aClass91Array1182, var5, var4[var14], var9, var10, 8 * var6, var7 * 8, var0, (var11 & 7) * 8, 8 * (7 & var12));
                               break;
                            }
                         }
@@ -149,7 +149,7 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
    static void method2226(Class3_Sub30_Sub1 var0, int var1, int var2) {
       try {
          if(var2 > -109) {
-            method2226((Class3_Sub30_Sub1)null, 67, 54);
+            method2226(null, 67, 54);
          }
 
          while(true) {
@@ -200,12 +200,12 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
                      int var9;
                      if(var7 == 0) {
                         var8 = (Field)var3.aClass64Array2303[var6].anObject974;
-                        var9 = var8.getInt((Object)null);
+                        var9 = var8.getInt(null);
                         var0.writeByte(0);
                         var0.writeInt(var9);
                      } else if (var7 == 1) {
                         var8 = (Field) var3.aClass64Array2303[var6].anObject974;
-                        var8.setInt((Object) null, var3.anIntArray2299[var6]);
+                        var8.setInt(null, var3.anIntArray2299[var6]);
                         var0.writeByte(0);
                      } else if (2 == var7) {
                         var8 = (Field) var3.aClass64Array2303[var6].anObject974;
@@ -225,7 +225,7 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
                            var10[var11] = var12.readObject();
                         }
 
-                        Object var28 = var26.invoke((Object)null, var10);
+                        Object var28 = var26.invoke(null, var10);
                         if(var28 == null) {
                            var0.writeByte(0);
                         } else if(var28 instanceof Number) {

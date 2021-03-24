@@ -75,7 +75,7 @@ public final class Class75_Sub4 extends Class75 {
             int var6 = this.anInt2672 * var1 >> 12;
             int var5 = var2 * this.anInt2666 >> 12;
             int var7 = this.anInt2669 * var1 >> 12;
-            Class3_Sub13_Sub5.method194(this.anInt1106, var7, this.anInt1101, this.anInt1104, var6, var5, var4);
+            TextureOperation21.method194(this.anInt1106, var7, this.anInt1101, this.anInt1104, var6, var5, var4);
          }
       } catch (RuntimeException var8) {
          throw ClientErrorException.clientError(var8, "ta.D(" + var1 + ',' + var2 + ',' + var3 + ')');
@@ -115,7 +115,7 @@ public final class Class75_Sub4 extends Class75 {
          if(var4 >= Class159.anInt2020 && var4 <= Class57.anInt902) {
             var0 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var0, Class101.anInt1425);
             var3 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var3, Class101.anInt1425);
-            Class3_Sub13_Sub32.method320(var1, var4, var3, (byte)-123, var0);
+            TextureOperation14.method320(var1, var4, var3, (byte)-123, var0);
          }
 
       } catch (RuntimeException var6) {

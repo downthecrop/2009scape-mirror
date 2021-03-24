@@ -317,7 +317,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
             }
 
             this.anInt3480 += var2;
-            if(this.anInt3470 == 256 && (this.anInt3474 & 255) == 0) {
+            if(this.anInt3470 == 256 && (this.anInt3474 & 0xFF) == 0) {
                if(Unsorted.aBoolean2150) {
                   var2 = method426(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, this.anInt3475, this.anInt3483, var6, var3, this);
                } else {
@@ -341,7 +341,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
             return var4;
          }
 
-         if(this.anInt3470 == 256 && (this.anInt3474 & 255) == 0) {
+         if(this.anInt3470 == 256 && (this.anInt3474 & 0xFF) == 0) {
             if(Unsorted.aBoolean2150) {
                return method420(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, var4, var3, this);
             }
@@ -437,7 +437,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
       for(var10 <<= 1; var5 < var10; var4 += var14) {
          var1 = var4 >> 8;
          var16 = var2[var1];
-         var0 = (var16 << 8) + (var2[var1 + 1] - var16) * (var4 & 255);
+         var0 = (var16 << 8) + (var2[var1 + 1] - var16) * (var4 & 0xFF);
          var10001 = var5++;
          var3[var10001] += var0 * var6 >> 6;
          var6 += var8;
@@ -454,7 +454,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
 
       for(var1 = var15; var5 < var10; var4 += var14) {
          var16 = var2[var4 >> 8];
-         var0 = (var16 << 8) + (var1 - var16) * (var4 & 255);
+         var0 = (var16 << 8) + (var1 - var16) * (var4 & 0xFF);
          var10001 = var5++;
          var3[var10001] += var0 * var6 >> 6;
          var6 += var8;
@@ -490,7 +490,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
          var1 = var4 >> 8;
          var14 = var2[var1];
          var10001 = var5++;
-         var3[var10001] += ((var14 << 8) + (var2[var1 + 1] - var14) * (var4 & 255)) * var6 >> 6;
+         var3[var10001] += ((var14 << 8) + (var2[var1 + 1] - var14) * (var4 & 0xFF)) * var6 >> 6;
          var6 += var7;
          var4 += var12;
       }
@@ -502,7 +502,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
       for(var1 = var13; var5 < var8; var4 += var12) {
          var14 = var2[var4 >> 8];
          var10001 = var5++;
-         var3[var10001] += ((var14 << 8) + (var1 - var14) * (var4 & 255)) * var6 >> 6;
+         var3[var10001] += ((var14 << 8) + (var1 - var14) * (var4 & 0xFF)) * var6 >> 6;
          var6 += var7;
       }
 
@@ -525,7 +525,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
          var1 = var4 >> 8;
          byte var13 = var2[var1 - 1];
          var10001 = var5++;
-         var3[var10001] += ((var13 << 8) + (var2[var1] - var13) * (var4 & 255)) * var6 >> 6;
+         var3[var10001] += ((var13 << 8) + (var2[var1] - var13) * (var4 & 0xFF)) * var6 >> 6;
          var4 += var11;
       }
 
@@ -535,7 +535,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
 
       for(var1 = var11; var5 < var7; var4 += var1) {
          var10001 = var5++;
-         var3[var10001] += ((var12 << 8) + (var2[var4 >> 8] - var12) * (var4 & 255)) * var6 >> 6;
+         var3[var10001] += ((var12 << 8) + (var2[var4 >> 8] - var12) * (var4 & 0xFF)) * var6 >> 6;
       }
 
       var10.anInt3474 = var4;
@@ -920,7 +920,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
       for(var8 <<= 1; var5 < var8; var4 += var12) {
          var1 = var4 >> 8;
          var14 = var2[var1];
-         var0 = (var14 << 8) + (var2[var1 + 1] - var14) * (var4 & 255);
+         var0 = (var14 << 8) + (var2[var1 + 1] - var14) * (var4 & 0xFF);
          var10001 = var5++;
          var3[var10001] += var0 * var6 >> 6;
          var10001 = var5++;
@@ -935,7 +935,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
 
       for(var1 = var13; var5 < var8; var4 += var12) {
          var14 = var2[var4 >> 8];
-         var0 = (var14 << 8) + (var1 - var14) * (var4 & 255);
+         var0 = (var14 << 8) + (var1 - var14) * (var4 & 0xFF);
          var10001 = var5++;
          var3[var10001] += var0 * var6 >> 6;
          var10001 = var5++;
@@ -1031,7 +1031,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
             }
 
             this.anInt3480 += var2;
-            if(this.anInt3470 == -256 && (this.anInt3474 & 255) == 0) {
+            if(this.anInt3470 == -256 && (this.anInt3474 & 0xFF) == 0) {
                if(Unsorted.aBoolean2150) {
                   var2 = method435(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, this.anInt3475, this.anInt3483, var6, var3, this);
                } else {
@@ -1055,7 +1055,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
             return var4;
          }
 
-         if(this.anInt3470 == -256 && (this.anInt3474 & 255) == 0) {
+         if(this.anInt3470 == -256 && (this.anInt3474 & 0xFF) == 0) {
             if(Unsorted.aBoolean2150) {
                return method447(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, var4, var3, this);
             }
@@ -1106,7 +1106,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
       for(var10 <<= 1; var5 < var10; var4 += var14) {
          var1 = var4 >> 8;
          byte var16 = var2[var1 - 1];
-         var0 = (var16 << 8) + (var2[var1] - var16) * (var4 & 255);
+         var0 = (var16 << 8) + (var2[var1] - var16) * (var4 & 0xFF);
          var10001 = var5++;
          var3[var10001] += var0 * var6 >> 6;
          var6 += var8;
@@ -1122,7 +1122,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
       var10 <<= 1;
 
       for(var1 = var15; var5 < var10; var4 += var14) {
-         var0 = (var1 << 8) + (var2[var4 >> 8] - var1) * (var4 & 255);
+         var0 = (var1 << 8) + (var2[var4 >> 8] - var1) * (var4 & 0xFF);
          var10001 = var5++;
          var3[var10001] += var0 * var6 >> 6;
          var6 += var8;
@@ -1259,7 +1259,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
          var1 = var4 >> 8;
          byte var14 = var2[var1 - 1];
          var10001 = var5++;
-         var3[var10001] += ((var14 << 8) + (var2[var1] - var14) * (var4 & 255)) * var6 >> 6;
+         var3[var10001] += ((var14 << 8) + (var2[var1] - var14) * (var4 & 0xFF)) * var6 >> 6;
          var6 += var7;
          var4 += var12;
       }
@@ -1270,7 +1270,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
 
       for(var1 = var12; var5 < var8; var4 += var1) {
          var10001 = var5++;
-         var3[var10001] += ((var13 << 8) + (var2[var4 >> 8] - var13) * (var4 & 255)) * var6 >> 6;
+         var3[var10001] += ((var13 << 8) + (var2[var4 >> 8] - var13) * (var4 & 0xFF)) * var6 >> 6;
          var6 += var7;
       }
 
@@ -1353,7 +1353,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
       for(var8 <<= 1; var5 < var8; var4 += var12) {
          var1 = var4 >> 8;
          byte var14 = var2[var1 - 1];
-         var0 = (var14 << 8) + (var2[var1] - var14) * (var4 & 255);
+         var0 = (var14 << 8) + (var2[var1] - var14) * (var4 & 0xFF);
          var10001 = var5++;
          var3[var10001] += var0 * var6 >> 6;
          var10001 = var5++;
@@ -1367,7 +1367,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
       var8 <<= 1;
 
       for(var1 = var13; var5 < var8; var4 += var12) {
-         var0 = (var1 << 8) + (var2[var4 >> 8] - var1) * (var4 & 255);
+         var0 = (var1 << 8) + (var2[var4 >> 8] - var1) * (var4 & 0xFF);
          var10001 = var5++;
          var3[var10001] += var0 * var6 >> 6;
          var10001 = var5++;
@@ -1423,7 +1423,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
          var1 = var4 >> 8;
          var13 = var2[var1];
          var10001 = var5++;
-         var3[var10001] += ((var13 << 8) + (var2[var1 + 1] - var13) * (var4 & 255)) * var6 >> 6;
+         var3[var10001] += ((var13 << 8) + (var2[var1 + 1] - var13) * (var4 & 0xFF)) * var6 >> 6;
          var4 += var11;
       }
 
@@ -1434,7 +1434,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
       for(var1 = var12; var5 < var7; var4 += var11) {
          var13 = var2[var4 >> 8];
          var10001 = var5++;
-         var3[var10001] += ((var13 << 8) + (var1 - var13) * (var4 & 255)) * var6 >> 6;
+         var3[var10001] += ((var13 << 8) + (var1 - var13) * (var4 & 0xFF)) * var6 >> 6;
       }
 
       var10.anInt3474 = var4;

@@ -50,7 +50,7 @@ public final class Class3_Sub10 extends Linkable {
             }
 
             def.method899();
-            RenderAnimationDefinition.aReferenceCache_1955.put(def, (long)renderAnimationId);
+            RenderAnimationDefinition.aReferenceCache_1955.put(def, renderAnimationId);
          }
          return def;
       } catch (RuntimeException var4) {

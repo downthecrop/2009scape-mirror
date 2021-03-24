@@ -35,11 +35,11 @@ final class Class140_Sub1_Sub2 extends Model {
    private byte[] aByteArray3899;
    private int anInt3900 = 0;
    private int[] anIntArray3901;
-   private static Class140_Sub1_Sub2 aClass140_Sub1_Sub2_3902 = new Class140_Sub1_Sub2();
+   private static final Class140_Sub1_Sub2 aClass140_Sub1_Sub2_3902 = new Class140_Sub1_Sub2();
    private byte[] aByteArray3903;
    private static int[] anIntArray3904 = new int[1];
    private static int[] anIntArray3905 = new int[1];
-   private static Class140_Sub1_Sub2 aClass140_Sub1_Sub2_3906 = new Class140_Sub1_Sub2();
+   private static final Class140_Sub1_Sub2 aClass140_Sub1_Sub2_3906 = new Class140_Sub1_Sub2();
    private static byte[] aByteArray3907 = new byte[1];
    private short[] aShortArray3908;
    private static int[] anIntArray3909 = new int[1];
@@ -48,42 +48,42 @@ final class Class140_Sub1_Sub2 extends Model {
    private static short[] aShortArray3912 = new short[1];
    private static int[] anIntArray3913 = new int[1];
    private static byte[] aByteArray3914 = new byte[1];
-   private static Class140_Sub1_Sub2 aClass140_Sub1_Sub2_3915 = new Class140_Sub1_Sub2();
+   private static final Class140_Sub1_Sub2 aClass140_Sub1_Sub2_3915 = new Class140_Sub1_Sub2();
    private static int[] anIntArray3916 = new int[1];
-   private static boolean[] aBooleanArray3917 = new boolean[4096];
-   private static int[] anIntArray3918 = new int[12];
-   private static int[] anIntArray3919 = new int[10];
-   private static int[] anIntArray3920 = new int[4096];
-   private static int[] anIntArray3921;
-   private static int[] anIntArray3922 = new int[4096];
+   private static final boolean[] aBooleanArray3917 = new boolean[4096];
+   private static final int[] anIntArray3918 = new int[12];
+   private static final int[] anIntArray3919 = new int[10];
+   private static final int[] anIntArray3920 = new int[4096];
+   private static final int[] anIntArray3921;
+   private static final int[] anIntArray3922 = new int[4096];
    private static int[][] anIntArrayArray3923;
    private static int[] anIntArray3924;
-   private static int[] anIntArray3925 = new int[10];
+   private static final int[] anIntArray3925 = new int[10];
    private static int[][] anIntArrayArray3926;
    private static boolean aBoolean3927 = false;
-   private static int[] anIntArray3928;
+   private static final int[] anIntArray3928;
    private static int[] anIntArray3929;
    private static int anInt3930 = 0;
    private static int[] anIntArray3931;
-   private static int[] anIntArray3932 = new int[4096];
+   private static final int[] anIntArray3932 = new int[4096];
    private static byte[] aByteArray3933 = new byte[1];
    private static int anInt3934;
    private static int[] anIntArray3935;
-   private static int[] anIntArray3936 = new int[10];
-   private static boolean[] aBooleanArray3937 = new boolean[4096];
-   private static int[][] anIntArrayArray3938;
+   private static final int[] anIntArray3936 = new int[10];
+   private static final boolean[] aBooleanArray3937 = new boolean[4096];
+   private static final int[][] anIntArrayArray3938;
    private static int[] anIntArray3939;
    private static int anInt3940;
-   private static int[] anIntArray3941 = new int[4096];
+   private static final int[] anIntArray3941 = new int[4096];
    private static boolean aBoolean3942 = false;
-   private static int[] anIntArray3943;
-   private static int[] anIntArray3944 = new int[12];
+   private static final int[] anIntArray3943;
+   private static final int[] anIntArray3944 = new int[12];
    private static int anInt3945;
    private static int[] anIntArray3946;
    private static int[] anIntArray3947 = new int[1];
-   private static int[] anIntArray3948 = new int[4096];
+   private static final int[] anIntArray3948 = new int[4096];
    private static short[] aShortArray3949;
-   private static int[] anIntArray3950;
+   private static final int[] anIntArray3950;
 
 
    private void method1934(int var1) {
@@ -97,7 +97,7 @@ final class Class140_Sub1_Sub2 extends Model {
          if(this.aByteArray3903 == null) {
             Class51.anInt850 = 0;
          } else {
-            Class51.anInt850 = this.aByteArray3903[var1] & 255;
+            Class51.anInt850 = this.aByteArray3903[var1] & 0xFF;
          }
 
          if(this.aShortArray3908 != null && this.aShortArray3908[var1] != -1) {
@@ -109,7 +109,7 @@ final class Class140_Sub1_Sub2 extends Model {
                var6 = var3;
                var7 = var4;
             } else {
-               int var8 = this.aByteArray3899[var1] & 255;
+               int var8 = this.aByteArray3899[var1] & 0xFF;
                var5 = this.anIntArray3882[var8];
                var6 = this.anIntArray3890[var8];
                var7 = this.anIntArray3881[var8];
@@ -121,9 +121,9 @@ final class Class140_Sub1_Sub2 extends Model {
                Class51.method1138(anIntArray3932[var2], anIntArray3932[var3], anIntArray3932[var4], anIntArray3943[var2], anIntArray3943[var3], anIntArray3943[var4], this.anIntArray3898[var1], this.anIntArray3874[var1], this.anIntArray3896[var1], anIntArray3948[var5], anIntArray3948[var6], anIntArray3948[var7], anIntArray3928[var5], anIntArray3928[var6], anIntArray3928[var7], anIntArray3921[var5], anIntArray3921[var6], anIntArray3921[var7], this.aShortArray3908[var1]);
             }
          } else if(this.anIntArray3896[var1] == -1) {
-            Class51.method1144(anIntArray3932[var2], anIntArray3932[var3], anIntArray3932[var4], anIntArray3943[var2], anIntArray3943[var3], anIntArray3943[var4], Class51.anIntArray834[this.anIntArray3898[var1] & '\uffff']);
+            Class51.method1144(anIntArray3932[var2], anIntArray3932[var3], anIntArray3932[var4], anIntArray3943[var2], anIntArray3943[var3], anIntArray3943[var4], Class51.anIntArray834[this.anIntArray3898[var1] & 65535]);
          } else {
-            Class51.method1154(anIntArray3932[var2], anIntArray3932[var3], anIntArray3932[var4], anIntArray3943[var2], anIntArray3943[var3], anIntArray3943[var4], this.anIntArray3898[var1] & '\uffff', this.anIntArray3874[var1] & '\uffff', this.anIntArray3896[var1] & '\uffff');
+            Class51.method1154(anIntArray3932[var2], anIntArray3932[var3], anIntArray3932[var4], anIntArray3943[var2], anIntArray3943[var3], anIntArray3943[var4], this.anIntArray3898[var1] & 65535, this.anIntArray3874[var1] & 65535, this.anIntArray3896[var1] & 65535);
          }
 
       }
@@ -143,16 +143,16 @@ final class Class140_Sub1_Sub2 extends Model {
       anIntArray3931 = new int[4096];
       anIntArray3929 = new int[4096];
       anIntArray3946 = null;
-      anIntArrayArray3926 = (int[][])null;
+      anIntArrayArray3926 = null;
       anIntArray3935 = null;
-      anIntArrayArray3923 = (int[][])null;
+      anIntArrayArray3923 = null;
    }
 
    private void method1936() {
       for(int var4 = 0; var4 < this.anInt3889; ++var4) {
          short var3 = this.aShortArray3908 != null?this.aShortArray3908[var4]:-1;
          if(var3 == -1) {
-            int var1 = this.aShortArray3869[var4] & '\uffff';
+            int var1 = this.aShortArray3869[var4] & 65535;
             int var2;
             if(this.anIntArray3896[var4] == -1) {
                var2 = this.anIntArray3898[var4] & -131072;
@@ -362,7 +362,7 @@ final class Class140_Sub1_Sub2 extends Model {
                         int var34;
                         int var32;
                         int var33;
-                        if(var9 > 0L && Class3_Sub13_Sub36.aBoolean3094 && var14 > 0) {
+                        if(var9 > 0L && TextureOperation36.aBoolean3094 && var14 > 0) {
                            if(var17 > 0) {
                               var31 = var19 / var13;
                               var33 = var18 / var14;
@@ -430,7 +430,7 @@ final class Class140_Sub1_Sub2 extends Model {
 
                               if(Unsorted.anInt3642 >= var31 && Unsorted.anInt3642 <= var33 && RenderAnimationDefinition.anInt384 >= var32 && RenderAnimationDefinition.anInt384 <= var34) {
                                  if(this.aBoolean2699) {
-                                    Class3_Sub13_Sub38.aLongArray3448[Unsorted.anInt59++] = var9;
+                                    TextureOperation38.aLongArray3448[Unsorted.anInt59++] = var9;
                                  } else {
                                     var30 = true;
                                  }
@@ -599,8 +599,8 @@ final class Class140_Sub1_Sub2 extends Model {
                   }
                }
             } else if(var1 == 3) {
-               var14 = (var2 & 255) * 4;
-               var15 = (var2 >> 8 & 255) * 4;
+               var14 = (var2 & 0xFF) * 4;
+               var15 = (var2 >> 8 & 0xFF) * 4;
                var13.method1895(var3, var5, var6, var7, var14, var15);
             } else if(var1 == 4) {
                var14 = this.aShort3892 - this.aShort3894;
@@ -702,7 +702,7 @@ final class Class140_Sub1_Sub2 extends Model {
             }
          }
 
-         this.method1945(false, false, (long) -1, this.aShort3886, this.aShort3886 << 1);
+         this.method1945(false, false, -1, this.aShort3886, this.aShort3886 << 1);
       } catch (RuntimeException var26) {
       }
 
@@ -721,7 +721,7 @@ final class Class140_Sub1_Sub2 extends Model {
       if(this.aByteArray3903 == null) {
          Class51.anInt850 = 0;
       } else {
-         Class51.anInt850 = this.aByteArray3903[var1] & 255;
+         Class51.anInt850 = this.aByteArray3903[var1] & 0xFF;
       }
 
       int var11;
@@ -731,69 +731,69 @@ final class Class140_Sub1_Sub2 extends Model {
       if(var8 >= 50) {
          anIntArray3919[var4] = anIntArray3943[var5];
          anIntArray3925[var4] = anIntArray3932[var5];
-         anIntArray3936[var4++] = this.anIntArray3898[var1] & '\uffff';
+         anIntArray3936[var4++] = this.anIntArray3898[var1] & 65535;
       } else {
          var11 = anIntArray3948[var5];
          var12 = anIntArray3928[var5];
-         var13 = this.anIntArray3898[var1] & '\uffff';
+         var13 = this.anIntArray3898[var1] & 65535;
          if(var10 >= 50) {
             var14 = (50 - var8) * Class51.anIntArray841[var10 - var8];
             anIntArray3919[var4] = var2 + (var11 + ((anIntArray3948[var7] - var11) * var14 >> 16) << 9) / 50;
             anIntArray3925[var4] = var3 + (var12 + ((anIntArray3928[var7] - var12) * var14 >> 16) << 9) / 50;
-            anIntArray3936[var4++] = var13 + (((this.anIntArray3896[var1] & '\uffff') - var13) * var14 >> 16);
+            anIntArray3936[var4++] = var13 + (((this.anIntArray3896[var1] & 65535) - var13) * var14 >> 16);
          }
 
          if(var9 >= 50) {
             var14 = (50 - var8) * Class51.anIntArray841[var9 - var8];
             anIntArray3919[var4] = var2 + (var11 + ((anIntArray3948[var6] - var11) * var14 >> 16) << 9) / 50;
             anIntArray3925[var4] = var3 + (var12 + ((anIntArray3928[var6] - var12) * var14 >> 16) << 9) / 50;
-            anIntArray3936[var4++] = var13 + (((this.anIntArray3874[var1] & '\uffff') - var13) * var14 >> 16);
+            anIntArray3936[var4++] = var13 + (((this.anIntArray3874[var1] & 65535) - var13) * var14 >> 16);
          }
       }
 
       if(var9 >= 50) {
          anIntArray3919[var4] = anIntArray3943[var6];
          anIntArray3925[var4] = anIntArray3932[var6];
-         anIntArray3936[var4++] = this.anIntArray3874[var1] & '\uffff';
+         anIntArray3936[var4++] = this.anIntArray3874[var1] & 65535;
       } else {
          var11 = anIntArray3948[var6];
          var12 = anIntArray3928[var6];
-         var13 = this.anIntArray3874[var1] & '\uffff';
+         var13 = this.anIntArray3874[var1] & 65535;
          if(var8 >= 50) {
             var14 = (50 - var9) * Class51.anIntArray841[var8 - var9];
             anIntArray3919[var4] = var2 + (var11 + ((anIntArray3948[var5] - var11) * var14 >> 16) << 9) / 50;
             anIntArray3925[var4] = var3 + (var12 + ((anIntArray3928[var5] - var12) * var14 >> 16) << 9) / 50;
-            anIntArray3936[var4++] = var13 + (((this.anIntArray3898[var1] & '\uffff') - var13) * var14 >> 16);
+            anIntArray3936[var4++] = var13 + (((this.anIntArray3898[var1] & 65535) - var13) * var14 >> 16);
          }
 
          if(var10 >= 50) {
             var14 = (50 - var9) * Class51.anIntArray841[var10 - var9];
             anIntArray3919[var4] = var2 + (var11 + ((anIntArray3948[var7] - var11) * var14 >> 16) << 9) / 50;
             anIntArray3925[var4] = var3 + (var12 + ((anIntArray3928[var7] - var12) * var14 >> 16) << 9) / 50;
-            anIntArray3936[var4++] = var13 + (((this.anIntArray3896[var1] & '\uffff') - var13) * var14 >> 16);
+            anIntArray3936[var4++] = var13 + (((this.anIntArray3896[var1] & 65535) - var13) * var14 >> 16);
          }
       }
 
       if(var10 >= 50) {
          anIntArray3919[var4] = anIntArray3943[var7];
          anIntArray3925[var4] = anIntArray3932[var7];
-         anIntArray3936[var4++] = this.anIntArray3896[var1] & '\uffff';
+         anIntArray3936[var4++] = this.anIntArray3896[var1] & 65535;
       } else {
          var11 = anIntArray3948[var7];
          var12 = anIntArray3928[var7];
-         var13 = this.anIntArray3896[var1] & '\uffff';
+         var13 = this.anIntArray3896[var1] & 65535;
          if(var9 >= 50) {
             var14 = (50 - var10) * Class51.anIntArray841[var9 - var10];
             anIntArray3919[var4] = var2 + (var11 + ((anIntArray3948[var6] - var11) * var14 >> 16) << 9) / 50;
             anIntArray3925[var4] = var3 + (var12 + ((anIntArray3928[var6] - var12) * var14 >> 16) << 9) / 50;
-            anIntArray3936[var4++] = var13 + (((this.anIntArray3874[var1] & '\uffff') - var13) * var14 >> 16);
+            anIntArray3936[var4++] = var13 + (((this.anIntArray3874[var1] & 65535) - var13) * var14 >> 16);
          }
 
          if(var8 >= 50) {
             var14 = (50 - var10) * Class51.anIntArray841[var8 - var10];
             anIntArray3919[var4] = var2 + (var11 + ((anIntArray3948[var5] - var11) * var14 >> 16) << 9) / 50;
             anIntArray3925[var4] = var3 + (var12 + ((anIntArray3928[var5] - var12) * var14 >> 16) << 9) / 50;
-            anIntArray3936[var4++] = var13 + (((this.anIntArray3898[var1] & '\uffff') - var13) * var14 >> 16);
+            anIntArray3936[var4++] = var13 + (((this.anIntArray3898[var1] & 65535) - var13) * var14 >> 16);
          }
       }
 
@@ -819,7 +819,7 @@ final class Class140_Sub1_Sub2 extends Model {
                var18 = var6;
                var19 = var7;
             } else {
-               var20 = this.aByteArray3899[var1] & 255;
+               var20 = this.aByteArray3899[var1] & 0xFF;
                var17 = this.anIntArray3882[var20];
                var18 = this.anIntArray3890[var20];
                var19 = this.anIntArray3881[var20];
@@ -831,7 +831,7 @@ final class Class140_Sub1_Sub2 extends Model {
                Class51.method1138(var14, var15, var16, var11, var12, var13, anIntArray3936[0], anIntArray3936[1], anIntArray3936[2], anIntArray3948[var17], anIntArray3948[var18], anIntArray3948[var19], anIntArray3928[var17], anIntArray3928[var18], anIntArray3928[var19], anIntArray3921[var17], anIntArray3921[var18], anIntArray3921[var19], this.aShortArray3908[var1]);
             }
          } else if(this.anIntArray3896[var1] == -1) {
-            Class51.method1144(var14, var15, var16, var11, var12, var13, Class51.anIntArray834[this.anIntArray3898[var1] & '\uffff']);
+            Class51.method1144(var14, var15, var16, var11, var12, var13, Class51.anIntArray834[this.anIntArray3898[var1] & 65535]);
          } else {
             Class51.method1154(var14, var15, var16, var11, var12, var13, anIntArray3936[0], anIntArray3936[1], anIntArray3936[2]);
          }
@@ -848,7 +848,7 @@ final class Class140_Sub1_Sub2 extends Model {
                var18 = var6;
                var19 = var7;
             } else {
-               var20 = this.aByteArray3899[var1] & 255;
+               var20 = this.aByteArray3899[var1] & 0xFF;
                var17 = this.anIntArray3882[var20];
                var18 = this.anIntArray3890[var20];
                var19 = this.anIntArray3881[var20];
@@ -863,7 +863,7 @@ final class Class140_Sub1_Sub2 extends Model {
                Class51.method1138(var14, var16, anIntArray3925[3], var11, var13, anIntArray3919[3], anIntArray3936[0], anIntArray3936[2], anIntArray3936[3], anIntArray3948[var17], anIntArray3948[var18], anIntArray3948[var19], anIntArray3928[var17], anIntArray3928[var18], anIntArray3928[var19], anIntArray3921[var17], anIntArray3921[var18], anIntArray3921[var19], var21);
             }
          } else if(this.anIntArray3896[var1] == -1) {
-            var17 = Class51.anIntArray834[this.anIntArray3898[var1] & '\uffff'];
+            var17 = Class51.anIntArray834[this.anIntArray3898[var1] & 65535];
             Class51.method1144(var14, var15, var16, var11, var12, var13, var17);
             Class51.method1144(var14, var16, anIntArray3925[3], var11, var13, anIntArray3919[3], var17);
          } else {
@@ -1079,7 +1079,7 @@ final class Class140_Sub1_Sub2 extends Model {
 
                         for(var11 = 0; var11 < var10.length; ++var11) {
                            var12 = var10[var11];
-                           var13 = (this.aByteArray3903[var12] & 255) + var3 * 8;
+                           var13 = (this.aByteArray3903[var12] & 0xFF) + var3 * 8;
                            if(var13 < 0) {
                               var13 = 0;
                            } else if(var13 > 255) {
@@ -1101,7 +1101,7 @@ final class Class140_Sub1_Sub2 extends Model {
 
                         for(var11 = 0; var11 < var10.length; ++var11) {
                            var12 = var10[var11];
-                           var13 = this.aShortArray3869[var12] & '\uffff';
+                           var13 = this.aShortArray3869[var12] & 65535;
                            var14 = var13 >> 10 & 63;
                            var15 = var13 >> 7 & 7;
                            int var16 = var13 & 127;
@@ -1231,7 +1231,7 @@ final class Class140_Sub1_Sub2 extends Model {
                   }
                } else {
                   if(var2 && this.method1944(Unsorted.anInt3642 + Class51.anInt846, RenderAnimationDefinition.anInt384 + Class51.anInt835, anIntArray3932[var11], anIntArray3932[var12], anIntArray3932[var13], var14, var15, var16)) {
-                     Class3_Sub13_Sub38.aLongArray3448[Unsorted.anInt59++] = var3;
+                     TextureOperation38.aLongArray3448[Unsorted.anInt59++] = var3;
                      var2 = false;
                   }
 
@@ -1986,7 +1986,7 @@ final class Class140_Sub1_Sub2 extends Model {
                         for(var13 = 0; var13 < var12.length; ++var13) {
                            var14 = var12[var13];
                            if(this.aShortArray3871 == null || (var7 & this.aShortArray3871[var14]) != 0) {
-                              var15 = (this.aByteArray3903[var14] & 255) + var3 * 8;
+                              var15 = (this.aByteArray3903[var14] & 0xFF) + var3 * 8;
                               if(var15 < 0) {
                                  var15 = 0;
                               } else if(var15 > 255) {
@@ -2010,7 +2010,7 @@ final class Class140_Sub1_Sub2 extends Model {
                         for(var13 = 0; var13 < var12.length; ++var13) {
                            var14 = var12[var13];
                            if(this.aShortArray3871 == null || (var7 & this.aShortArray3871[var14]) != 0) {
-                              var15 = this.aShortArray3869[var14] & '\uffff';
+                              var15 = this.aShortArray3869[var14] & 65535;
                               var16 = var15 >> 10 & 63;
                               var17 = var15 >> 7 & 7;
                               var18 = var15 & 127;
@@ -2128,7 +2128,7 @@ final class Class140_Sub1_Sub2 extends Model {
 
          } else if (var1 == 5) {
             for (var5 = 0; var5 < this.anInt3889; ++var5) {
-               var6 = (this.aByteArray3903[var5] & 255) + var2 * 8;
+               var6 = (this.aByteArray3903[var5] & 0xFF) + var2 * 8;
                if (var6 < 0) {
                   var6 = 0;
                } else if (var6 > 255) {
@@ -2140,7 +2140,7 @@ final class Class140_Sub1_Sub2 extends Model {
 
          } else if (var1 == 7) {
             for (var5 = 0; var5 < this.anInt3889; ++var5) {
-               var6 = this.aShortArray3869[var5] & '\uffff';
+               var6 = this.aShortArray3869[var5] & 65535;
                var7 = var6 >> 10 & 63;
                var8 = var6 >> 7 & 7;
                int var9 = var6 & 127;
@@ -2213,7 +2213,7 @@ final class Class140_Sub1_Sub2 extends Model {
       this.anIntArrayArray3872 = var1.anIntArrayArray2856;
       this.aShortArray3871 = var1.aShortArray2855;
       this.aShortArray3893 = var1.aShortArray2893;
-      int var7 = (int)Math.sqrt((double)(var4 * var4 + var5 * var5 + var6 * var6));
+      int var7 = (int)Math.sqrt(var4 * var4 + var5 * var5 + var6 * var6);
       int var8 = var3 * var7 >> 8;
       this.anIntArray3898 = new int[this.anInt3889];
       this.anIntArray3874 = new int[this.anInt3889];
@@ -2240,7 +2240,7 @@ final class Class140_Sub1_Sub2 extends Model {
          int var17;
          for(var17 = 0; var17 < this.anInt3889; ++var17) {
             if(var1.aByteArray2866[var17] != -1) {
-               ++var16[var1.aByteArray2866[var17] & 255];
+               ++var16[var1.aByteArray2866[var17] & 0xFF];
             }
          }
 
@@ -2260,9 +2260,9 @@ final class Class140_Sub1_Sub2 extends Model {
          int var11;
          for(var11 = 0; var11 < var1.anInt2862; ++var11) {
             if(var16[var11] > 0 && var1.aByteArray2857[var11] == 0) {
-               this.anIntArray3882[var17] = var1.aShortArray2884[var11] & '\uffff';
-               this.anIntArray3890[var17] = var1.aShortArray2846[var11] & '\uffff';
-               this.anIntArray3881[var17] = var1.aShortArray2891[var11] & '\uffff';
+               this.anIntArray3882[var17] = var1.aShortArray2884[var11] & 65535;
+               this.anIntArray3890[var17] = var1.aShortArray2846[var11] & 65535;
+               this.anIntArray3881[var17] = var1.aShortArray2891[var11] & 65535;
                var16[var11] = var17++;
             } else {
                var16[var11] = -1;
@@ -2275,7 +2275,7 @@ final class Class140_Sub1_Sub2 extends Model {
             if(var1.aByteArray2866[var11] == -1) {
                this.aByteArray3899[var11] = -1;
             } else {
-               this.aByteArray3899[var11] = (byte)var16[var1.aByteArray2866[var11] & 255];
+               this.aByteArray3899[var11] = (byte)var16[var1.aByteArray2866[var11] & 0xFF];
                if(this.aByteArray3899[var11] == -1 && this.aShortArray3908 != null) {
                   this.aShortArray3908[var11] = -1;
                }
@@ -2318,7 +2318,7 @@ final class Class140_Sub1_Sub2 extends Model {
          Class120 var20;
          if(var12 == -1) {
             if(var18 == 0) {
-               int var15 = var1.aShortArray2870[var9] & '\uffff';
+               int var15 = var1.aShortArray2870[var9] & 65535;
                if(var1.aClass50Array2883 == null || var1.aClass50Array2883[this.anIntArray3901[var9]] == null) {
                   var13 = var1.aClass50Array2872[this.anIntArray3901[var9]];
                } else {
@@ -2346,7 +2346,7 @@ final class Class140_Sub1_Sub2 extends Model {
             } else if(var18 == 1) {
                var20 = var1.aClass120Array2886[var9];
                var14 = var2 + (var4 * var20.anInt1634 + var5 * var20.anInt1635 + var6 * var20.anInt1632) / (var8 + var8 / 2) << 17;
-               this.anIntArray3898[var9] = var14 | method1940(var1.aShortArray2870[var9] & '\uffff', var14 >> 17);
+               this.anIntArray3898[var9] = var14 | method1940(var1.aShortArray2870[var9] & 65535, var14 >> 17);
                this.anIntArray3896[var9] = -1;
             } else if(var18 == 3) {
                this.anIntArray3898[var9] = 128;

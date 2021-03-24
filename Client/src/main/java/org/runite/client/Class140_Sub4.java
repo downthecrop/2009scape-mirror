@@ -2,7 +2,7 @@ package org.runite.client;
 
 import org.rs09.client.data.ReferenceCache;
 
-abstract class Class140_Sub4 extends GameObject {
+public abstract class Class140_Sub4 extends GameObject {
 
    int textEffect = 0;
    private int anInt2754 = 0;
@@ -67,7 +67,7 @@ abstract class Class140_Sub4 extends GameObject {
    int anInt2816 = 0;
    int anInt2817;
    int anInt2818;
-   int anInt2819;
+   public int anInt2819;
    int anInt2820 = -32768;
    int anInt2821 = 0;
    private int size = 1;
@@ -77,7 +77,7 @@ abstract class Class140_Sub4 extends GameObject {
    int anInt2826 = -1;
    private int anInt2827 = 0;
    int anInt2828 = 0;
-   int anInt2829;
+   public int anInt2829;
    private int anInt2830 = 0;
    int anInt2831;
    int anInt2832 = 0;
@@ -87,7 +87,7 @@ abstract class Class140_Sub4 extends GameObject {
    int[] anIntArray2836 = new int[4];
    int textColor = 0;
    int anInt2838 = 0;
-   static AbstractSprite[] aAbstractSpriteArray2839;
+   public static AbstractSprite[] aAbstractSpriteArray2839;
    int anInt2840;
    int anInt2842 = -1;
 
@@ -146,7 +146,7 @@ abstract class Class140_Sub4 extends GameObject {
          this.anInt2819 = var2 * 64 + 128 * this.anIntArray2767[0];
 
          if(HDToolKit.highDetail && Class102.player == this) {
-            Class3_Sub13_Sub14.method236();
+            TextureOperation31.method236();
          }
 
       } catch (RuntimeException var9) {
@@ -220,12 +220,12 @@ abstract class Class140_Sub4 extends GameObject {
    final void method1969(byte var1, Model var2, int var3) {
       try {
          if(var1 <= 33) {
-            this.method1971((Model)null, (byte)-26);
+            this.method1971(null, (byte)-26);
          }
 
          Class3_Sub28_Sub9.anInt3623 = 0;
-         Class3_Sub13_Sub16.anInt3198 = 0;
-         Class3_Sub13_Sub9.anInt3111 = 0;
+         TextureOperation15.anInt3198 = 0;
+         TextureOperation16.anInt3111 = 0;
          RenderAnimationDefinition var4 = this.method1965();
          int var5 = var4.anInt395;
          int var6 = var4.anInt381;
@@ -256,24 +256,24 @@ abstract class Class140_Sub4 extends GameObject {
             int var30 = var28 > var23?var23:var28;
             int var31 = var28 > var18?var18:var28;
             int var32 = var23 <= var13?var23:var13;
-            Class3_Sub13_Sub16.anInt3198 = 2047 & (int)(325.95D * Math.atan2((double)(var29 - var30), (double)var6));
-            if(Class3_Sub13_Sub16.anInt3198 != 0) {
-               var2.method1896(Class3_Sub13_Sub16.anInt3198);
+            TextureOperation15.anInt3198 = 2047 & (int)(325.95D * Math.atan2(var29 - var30, var6));
+            if(TextureOperation15.anInt3198 != 0) {
+               var2.method1896(TextureOperation15.anInt3198);
             }
 
-            Class3_Sub28_Sub9.anInt3623 = 2047 & (int)(325.95D * Math.atan2((double)(-var31 + var32), (double)var5));
+            Class3_Sub28_Sub9.anInt3623 = 2047 & (int)(325.95D * Math.atan2(-var31 + var32, var5));
             if(Class3_Sub28_Sub9.anInt3623 != 0) {
                var2.method1886(Class3_Sub28_Sub9.anInt3623);
             }
 
-            Class3_Sub13_Sub9.anInt3111 = var28 + var13;
-            if(Class3_Sub13_Sub9.anInt3111 > var23 + var18) {
-               Class3_Sub13_Sub9.anInt3111 = var23 + var18;
+            TextureOperation16.anInt3111 = var28 + var13;
+            if(TextureOperation16.anInt3111 > var23 + var18) {
+               TextureOperation16.anInt3111 = var23 + var18;
             }
 
-            Class3_Sub13_Sub9.anInt3111 = (Class3_Sub13_Sub9.anInt3111 >> 1) - this.anInt2831;
-            if(Class3_Sub13_Sub9.anInt3111 != 0) {
-               var2.method1897(0, Class3_Sub13_Sub9.anInt3111, 0);
+            TextureOperation16.anInt3111 = (TextureOperation16.anInt3111 >> 1) - this.anInt2831;
+            if(TextureOperation16.anInt3111 != 0) {
+               var2.method1897(0, TextureOperation16.anInt3111, 0);
             }
          }
 

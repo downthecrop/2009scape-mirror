@@ -18,7 +18,7 @@ final class Class3_Sub28_Sub20 extends Node {
    private final boolean aBoolean3787;
    private final int anInt3788;
    private final boolean aBoolean3789;
-   private final Class82 aClass82_3790;
+   private final Texture aTexture_3790;
    private int anInt3791;
    private int[] anIntArray3793;
    static Class118 aClass118_3794 = Class21.method913();
@@ -32,12 +32,12 @@ final class Class3_Sub28_Sub20 extends Node {
    final int[] method718(Interface2 var1, float var3, CacheIndex var4, boolean var5) {
       try {
          if(null == this.anIntArray3793 || this.aFloat3782 != var3) {
-            if(!this.aClass82_3790.method1408(var1, var4)) {
+            if(!this.aTexture_3790.method1408(var1, var4)) {
                return null;
             }
 
             int var6 = !var5?128:64;
-            this.anIntArray3793 = this.aClass82_3790.method1404(var6, this.aBoolean3800, var6, (double)var3, var4, var1, true);
+            this.anIntArray3793 = this.aTexture_3790.method1404(var6, this.aBoolean3800, var6, var3, var4, var1, true);
             this.aFloat3782 = var3;
             if(this.aBoolean3789) {
                int[] var7 = new int[var6];
@@ -57,7 +57,7 @@ final class Class3_Sub28_Sub20 extends Node {
                      --var14;
                      int var12 = this.anIntArray3793[var14];
                      var7[var11] += Unsorted.bitwiseAnd(var12, 16726965) >> 16;
-                     var8[var11] += Unsorted.bitwiseAnd('\uff72', var12) >> 8;
+                     var8[var11] += Unsorted.bitwiseAnd(65394, var12) >> 8;
                      var9[var11] += Unsorted.bitwiseAnd(var12, 255);
                   }
 
@@ -92,7 +92,7 @@ final class Class3_Sub28_Sub20 extends Node {
                      --var27;
                      var20 = var28 / 9;
                      --var25;
-                     var10[var25] = Class3_Sub13_Sub29.bitwiseOr(var22, Class3_Sub13_Sub29.bitwiseOr(var20 << 16, var21 << 8));
+                     var10[var25] = TextureOperation3.bitwiseOr(var22, TextureOperation3.bitwiseOr(var20 << 16, var21 << 8));
                      var28 += var7[var27] + -var7[var26];
                      var29 += var9[var27] - var9[var26];
                      var30 += -var8[var26] + var8[var27];
@@ -111,7 +111,7 @@ final class Class3_Sub28_Sub20 extends Node {
                      --var14;
                      int var24 = this.anIntArray3793[var14];
                      var7[var11] += (Unsorted.bitwiseAnd(var24, 16729186) >> 16) + -Unsorted.bitwiseAnd(var23 >> 16, 255);
-                     var8[var11] += (Unsorted.bitwiseAnd('\uff8b', var24) >> 8) + -Unsorted.bitwiseAnd(255, var23 >> 8);
+                     var8[var11] += (Unsorted.bitwiseAnd(65419, var24) >> 8) + -Unsorted.bitwiseAnd(255, var23 >> 8);
                      var9[var11] += -Unsorted.bitwiseAnd(var23, 255) + Unsorted.bitwiseAnd(255, var24);
                   }
 
@@ -136,7 +136,7 @@ final class Class3_Sub28_Sub20 extends Node {
 
    final boolean method719(CacheIndex var1, Interface2 var2, boolean var4) {
       try {
-         if(this.aClass82_3790.method1408(var2, var1)) {
+         if(this.aTexture_3790.method1408(var2, var1)) {
             GL var5 = HDToolKit.gl;
             int var6 = !var4?128:64;
             int var7 = Class27.method961();
@@ -147,7 +147,7 @@ final class Class3_Sub28_Sub20 extends Node {
                   this.anInt3791 = Class31.anInt582;
                   this.anInt3795 = var8[0];
                   HDToolKit.bindTexture2D(this.anInt3795);
-                  ByteBuffer var9 = ByteBuffer.wrap(this.aClass82_3790.method1407(var6, var6, this.aBoolean3800, var2, var1));
+                  ByteBuffer var9 = ByteBuffer.wrap(this.aTexture_3790.method1407(var6, var6, this.aBoolean3800, var2, var1));
                   if(2 == this.anInt3788) {
                       GLU var14 = new GLU();
                      var14.gluBuild2DMipmaps(3553, 6408, var6, var6, 6408, 5121, var9);
@@ -169,7 +169,7 @@ final class Class3_Sub28_Sub20 extends Node {
                            break;
                         }
 
-                        var9 = ByteBuffer.wrap(this.aClass82_3790.method1407(var6, var6, this.aBoolean3800, var2, var1));
+                        var9 = ByteBuffer.wrap(this.aTexture_3790.method1407(var6, var6, this.aBoolean3800, var2, var1));
                      }
                   } else {
                      var5.glTexImage2D(3553, 0, 6408, var6, var6, 0, 6408, 5121, var9);
@@ -216,9 +216,9 @@ final class Class3_Sub28_Sub20 extends Node {
    final int[] method720(boolean var2, Interface2 var3, CacheIndex var4) {
       try {
 
-         if(this.aClass82_3790.method1408(var3, var4)) {
+         if(this.aTexture_3790.method1408(var3, var4)) {
             int var5 = !var2?128:64;
-            return this.aClass82_3790.method1404(var5, this.aBoolean3800, var5, 1.0D, var4, var3, false);
+            return this.aTexture_3790.method1404(var5, this.aBoolean3800, var5, 1.0D, var4, var3, false);
          } else {
             return null;
          }
@@ -229,7 +229,7 @@ final class Class3_Sub28_Sub20 extends Node {
 
    final boolean method722(Interface2 var2, CacheIndex var3) {
       try {
-         return this.aClass82_3790.method1408(var2, var3);
+         return this.aTexture_3790.method1408(var2, var3);
       } catch (RuntimeException var5) {
          throw ClientErrorException.clientError(var5, "uh.P(" + -5 + ',' + (var2 != null?"{...}":"null") + ',' + (var3 != null?"{...}":"null") + ')');
       }
@@ -271,15 +271,6 @@ final class Class3_Sub28_Sub20 extends Node {
          throw ClientErrorException.clientError(var14, "uh.E(" + var1 + ',' + (byte) -120 + ')');
       }
    }
-
-//   static void method724() {
-//      try {
-//         Class163_Sub2_Sub1.aReferenceCache_4015.clearSoftReferences();
-//
-//      } catch (RuntimeException var2) {
-//         throw ClientErrorException.clientError(var2, "uh.B(" + -109 + ')');
-//      }
-//   }
 
    protected final void finalize() throws Throwable {
       try {
@@ -345,7 +336,7 @@ final class Class3_Sub28_Sub20 extends Node {
                      int var10;
                      int var11;
                      if(var8 > var9) {
-                        var11 = '\u8000';
+                        var11 = 32768;
                         var10 = var9 * 65536 / var8;
 
                         while(var6 != var4) {
@@ -378,7 +369,7 @@ final class Class3_Sub28_Sub20 extends Node {
                            }
                         }
                      } else {
-                        var11 = '\u8000';
+                        var11 = 32768;
                         var10 = 65536 * var8 / var9;
 
                         while(var7 != var5) {
@@ -426,7 +417,7 @@ final class Class3_Sub28_Sub20 extends Node {
 
    Class3_Sub28_Sub20(DataBuffer var1) {
       try {
-         this.aClass82_3790 = new Class82(var1);
+         this.aTexture_3790 = new Texture(var1);
          this.aBoolean3789 = var1.readUnsignedByte() == 1;
          this.aBoolean3800 = 1 == var1.readUnsignedByte();
          this.aBoolean3787 = var1.readUnsignedByte() == 1;

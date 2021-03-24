@@ -105,7 +105,7 @@ final class Class140_Sub6 extends GameObject {
             this.aDouble2913 += this.aDouble2908 * (double)var2;
          }
 
-         this.anInt2924 = 1024 + (int)(325.949D * Math.atan2(this.aDouble2895, this.aDouble2918)) & 2047;
+         this.anInt2924 = 1024 + (int)(325.949D * Math.atan2(this.aDouble2895, this.aDouble2918)) & 0x7FF;
          this.anInt2917 = 2047 & (int)(325.949D * Math.atan2(this.aDouble2913, this.aDouble2921));
 
           if(this.aClass142_2923 != null) {
@@ -140,15 +140,15 @@ final class Class140_Sub6 extends GameObject {
       try {
          double var6;
          if(!this.aBoolean2904) {
-            double var8 = (double)(-this.anInt2916 + var1);
-            var6 = (double)(-this.anInt2902 + var5);
+            double var8 = -this.anInt2916 + var1;
+            var6 = -this.anInt2902 + var5;
             double var10 = Math.sqrt(var6 * var6 + var8 * var8);
-            this.aDouble2914 = (double)this.anInt2911;
+            this.aDouble2914 = this.anInt2911;
             this.aDouble2900 = var8 * (double)this.anInt2897 / var10 + (double)this.anInt2916;
             this.aDouble2920 = (double)this.anInt2897 * var6 / var10 + (double)this.anInt2902;
          }
 
-         var6 = (double)(-var3 + 1 + this.anInt2899);
+         var6 = -var3 + 1 + this.anInt2899;
          this.aDouble2918 = ((double)var1 - this.aDouble2900) / var6;
          this.aDouble2895 = (-this.aDouble2920 + (double)var5) / var6;
          this.aDouble2921 = Math.sqrt(this.aDouble2918 * this.aDouble2918 + this.aDouble2895 * this.aDouble2895);
@@ -176,16 +176,6 @@ final class Class140_Sub6 extends GameObject {
          }
       } catch (RuntimeException var14) {
          throw ClientErrorException.clientError(var14, "ra.IA(" + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ',' + var8 + ',' + var9 + ',' + var11 + ',' + (var12 != null?"{...}":"null") + ')');
-      }
-   }
-
-   static void method2025() {
-      try {
-          Unsorted.aReferenceCache_4043.sweep(5);
-          CS2Script.aReferenceCache_2442.sweep(5);
-          Class154.aReferenceCache_1964.sweep(5);
-      } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "ra.F(" + (byte) -62 + ',' + 5 + ')');
       }
    }
 

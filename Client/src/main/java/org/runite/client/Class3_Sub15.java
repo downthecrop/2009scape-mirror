@@ -291,7 +291,7 @@ public final class Class3_Sub15 extends Linkable {
                var22 = var2.method741();
             }
 
-            this.aShortArray2434[var23] = (short)(this.aShortArray2434[var23] + Unsorted.bitwiseAnd('\u8000', -1 + var22 << 14));
+            this.aShortArray2434[var23] = (short)(this.aShortArray2434[var23] + Unsorted.bitwiseAnd(32768, -1 + var22 << 14));
             this.anIntArray2423[var23] = var22;
             --var20;
          }
@@ -464,7 +464,7 @@ public final class Class3_Sub15 extends Linkable {
                var32 = (var30 - var48) * var46 + (var30 - var48) / 2;
 
                for(var33 = var48; var30 > var33; ++var33) {
-                  var34 = Class3_Sub13_Sub32.method319(var32, -125, -var48 + var30);
+                  var34 = TextureOperation14.method319(var32, -125, -var48 + var30);
                   var32 += var31 + -var46;
                   this.aByteArray2430[var33] = (byte)(var34 * this.aByteArray2430[var33] - -32 >> 6);
                }
@@ -510,9 +510,9 @@ public final class Class3_Sub15 extends Linkable {
                var29 += 2;
 
                for(var33 = var48; var30 > var33; ++var33) {
-                  var34 = Class3_Sub13_Sub32.method319(var32, -116, -var48 + var30);
+                  var34 = TextureOperation14.method319(var32, -116, -var48 + var30);
                   var32 += -var47 + var45;
-                  int var35 = var34 + (this.aByteArray2422[var33] & 255);
+                  int var35 = var34 + (this.aByteArray2422[var33] & 0xFF);
                   if(var35 < 0) {
                      var35 = 0;
                   }

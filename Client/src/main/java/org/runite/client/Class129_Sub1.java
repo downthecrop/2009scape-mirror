@@ -62,7 +62,7 @@ final class Class129_Sub1 extends Class129 {
             if (this.anInt2691 > 1) {
                 for (var6 = 0; var6 < 10; ++var6) {
                     if (this.aLongArray2694[var6] != 0L) {
-                        this.aLongArray2694[var6] += (long) this.anInt2691;
+                        this.aLongArray2694[var6] += this.anInt2691;
                     }
                 }
             }
@@ -71,7 +71,7 @@ final class Class129_Sub1 extends Class129 {
                 this.anInt2691 = var2;
             }
 
-            TimeUtils.sleep((long) this.anInt2691);
+            TimeUtils.sleep(this.anInt2691);
 
             for (var6 = 0; 256 > this.anInt2692; ++var6) {
                 this.anInt2692 += this.anInt2688;

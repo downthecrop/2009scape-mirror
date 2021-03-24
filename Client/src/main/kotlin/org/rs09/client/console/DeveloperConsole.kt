@@ -9,7 +9,7 @@ import org.runite.client.*
 import java.awt.event.KeyEvent
 import java.text.SimpleDateFormat
 import java.util.*
-import org.runite.client.Class3_Sub13_Sub1
+import org.runite.client.TextureOperation12
 
 
 // TODO Escape characters in the string rendering - is this something we can do using RSString / the text renders?
@@ -18,7 +18,7 @@ object DeveloperConsole {
     var ENABLE_PACKETS = false
 
     private val CONSOLE_FONT
-        get() = Class126.plainFont
+        get() = FontType.plainFont
 
     private val gameWidth //Offset 5 if in-game offset 20 if on login screen
         get() = Unsorted.gameWindowWidth
@@ -185,11 +185,12 @@ object DeveloperConsole {
 //        println("<col=8888cc>[$h:$m:$s]</col> <col=ff3333>TODO!</col> Handle '$str'")
 
         if (ENABLE_PACKETS) {
-            Class3_Sub13_Sub1.outgoingBuffer.putOpcode(51)
-            Class3_Sub13_Sub1.outgoingBuffer.writeShort(0)
-            val index = Class3_Sub13_Sub1.outgoingBuffer.index
-            Class3_Sub13_Sub1.outgoingBuffer.writeString(DeveloperConsole.str)
-            Class3_Sub13_Sub1.outgoingBuffer.finishVarshortPacket(Class3_Sub13_Sub1.outgoingBuffer.index - index)
+            TextureOperation12.outgoingBuffer.putOpcode(51)
+            TextureOperation12.outgoingBuffer.writeShort(0)
+            val index = TextureOperation12.outgoingBuffer.index
+            TextureOperation12.outgoingBuffer.writeString(DeveloperConsole.str)
+            TextureOperation12.outgoingBuffer.finishVarshortPacket(
+                TextureOperation12.outgoingBuffer.index - index)
         }
 
         println(str)
@@ -384,11 +385,12 @@ object DeveloperConsole {
                 if (str.isEmpty()) return
 
                 if (ENABLE_PACKETS) {
-                    Class3_Sub13_Sub1.outgoingBuffer.putOpcode(52)
-                    Class3_Sub13_Sub1.outgoingBuffer.writeShort(0)
-                    val index = Class3_Sub13_Sub1.outgoingBuffer.index
-                    Class3_Sub13_Sub1.outgoingBuffer.writeString(str)
-                    Class3_Sub13_Sub1.outgoingBuffer.finishVarshortPacket(Class3_Sub13_Sub1.outgoingBuffer.index - index)
+                    TextureOperation12.outgoingBuffer.putOpcode(52)
+                    TextureOperation12.outgoingBuffer.writeShort(0)
+                    val index = TextureOperation12.outgoingBuffer.index
+                    TextureOperation12.outgoingBuffer.writeString(str)
+                    TextureOperation12.outgoingBuffer.finishVarshortPacket(
+                        TextureOperation12.outgoingBuffer.index - index)
                 } else if ("enableconsolepackets".startsWith(str, true)) {
                     autocompletions = AutocompletionHints(str, listOf("enableconsolepackets"), 1)
                 }
@@ -410,8 +412,8 @@ object DeveloperConsole {
 
     @JvmStatic
     fun sendCommand(command: String) {
-        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(44)
-        Class3_Sub13_Sub1.outgoingBuffer.writeByte(command.length + 2)
-        Class3_Sub13_Sub1.outgoingBuffer.writeString(command)
+        TextureOperation12.outgoingBuffer.putOpcode(44)
+        TextureOperation12.outgoingBuffer.writeByte(command.length + 2)
+        TextureOperation12.outgoingBuffer.writeString(command)
     }
 }

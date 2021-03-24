@@ -76,10 +76,10 @@ public final class WorldListEntry extends Class44 {
 
     static void buildWorldListInterface() {
         try {
-            int var1 = AbstractIndexedSprite.anInt1462;
-            int var2 = Class3_Sub13_Sub33.anInt3395;
-            int var4 = Class3_Sub28_Sub1.anInt3537;
-            int var3 = Class3_Sub28_Sub3.anInt3552;
+            int var1 = Class21.anInt1462;
+            int var2 = Class21.anInt3395;
+            int var4 = Class21.anInt3537;
+            int var3 = Class21.anInt3552;
             if (aAbstractSprite_3099 == null || null == aAbstractSprite_1457) {
                 if (CacheIndex.spritesIndex.retrieveSpriteFile(archiveID) && CacheIndex.spritesIndex.retrieveSpriteFile(anInt1400)) {
                     aAbstractSprite_3099 = Unsorted.method562(CacheIndex.spritesIndex, archiveID);
@@ -115,7 +115,7 @@ public final class WorldListEntry extends Class44 {
                 aAbstractSprite_1457.method641(-aAbstractSprite_1457.width + (var1 - -var3), var2);
             }
 
-            Class168.bold.method681(RSString.parse(GameConfig.RCM_TITLE), var1 - -3, 14 + var2, anInt3351, -1);
+            FontType.bold.method681(RSString.parse(GameConfig.RCM_TITLE), var1 - -3, 14 + var2, anInt3351, -1);
             Toolkit.getActiveToolkit().fillRect(var1, 20 + var2, var3, var4 - 20, InterfaceWidget.anInt3600, -Unsorted.anInt963 + 256);
 
             var6 = Unsorted.anInt1709;
@@ -180,10 +180,10 @@ public final class WorldListEntry extends Class44 {
                     var9 = Class154.anInt1957;
                 }
 
-                Class168.bold.method681(Unsorted.method802(var7), 3 + var1, var8, var9, 0);
+                FontType.bold.method681(Unsorted.method802(var7), 3 + var1, var8, var9, 0);
             }
 
-            Unsorted.method1282(AbstractIndexedSprite.anInt1462, (byte) 122, Class3_Sub13_Sub33.anInt3395, Class3_Sub28_Sub1.anInt3537, Class3_Sub28_Sub3.anInt3552);
+            Unsorted.method1282(Class21.anInt1462, Class21.anInt3395, Class21.anInt3537, Class21.anInt3552);
         } catch (RuntimeException var10) {
             throw ClientErrorException.clientError(var10, "ij.F(" + ')');
         }
@@ -202,7 +202,7 @@ public final class WorldListEntry extends Class44 {
             if (0 > var0) {
                 return 0;
             } else {
-                Class3_Sub25 var2 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get((long) var0);
+                Class3_Sub25 var2 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var0);
                 if (var2 == null) {
                     return Objects.requireNonNull(Unsorted.method2069(var0)).size;
                 } else {

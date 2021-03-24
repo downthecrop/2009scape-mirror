@@ -26,7 +26,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
                int var21 = Toolkit.JAVA_TOOLKIT.getBuffer()[var17];
                int var22 = var20 >>> 24;
                int var23 = 256 - var22;
-               Toolkit.JAVA_TOOLKIT.getBuffer()[var17++] = ((var20 & 16711935) * var22 + (var21 & 16711935) * var23 & -16711936) + ((var20 & '\uff00') * var22 + (var21 & '\uff00') * var23 & 16711680) >>> 8;
+               Toolkit.JAVA_TOOLKIT.getBuffer()[var17++] = ((var20 & 16711935) * var22 + (var21 & 16711935) * var23 & -16711936) + ((var20 & 65280) * var22 + (var21 & 65280) * var23 & 16711680) >>> 8;
                var18 += var13;
                var19 -= var12;
             }
@@ -139,7 +139,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
             int var18 = var0[var5];
             int var19 = (var17 >>> 24) * var12 >> 8;
             int var20 = 256 - var19;
-            var0[var5++] = ((var17 & 16711935) * var19 + (var18 & 16711935) * var20 & -16711936) + ((var17 & '\uff00') * var19 + (var18 & '\uff00') * var20 & 16711680) >>> 8;
+            var0[var5++] = ((var17 & 16711935) * var19 + (var18 & 16711935) * var20 & -16711936) + ((var17 & 65280) * var19 + (var18 & 65280) * var20 & 16711680) >>> 8;
             var3 += var9;
          }
 
@@ -154,7 +154,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
       if(var6 != 0) {
          var1 -= this.anInt3701 << 4;
          var2 -= this.anInt3698 << 4;
-         double var7 = (double)(var5 & '\uffff') * 9.587379924285257E-5D;
+         double var7 = (double)(var5 & 65535) * 9.587379924285257E-5D;
          int var9 = (int)Math.floor(Math.sin(var7) * (double)var6 + 0.5D);
          int var10 = (int)Math.floor(Math.cos(var7) * (double)var6 + 0.5D);
          int var11 = -var1 * var10 + -var2 * var9;
@@ -280,7 +280,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
                               var39 = Toolkit.JAVA_TOOLKIT.getBuffer()[var34];
                               var40 = var38 >>> 24;
                               var41 = 256 - var40;
-                              Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & '\uff00') * var40 + (var39 & '\uff00') * var41 & 16711680) >>> 8;
+                              Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & 65280) * var40 + (var39 & 65280) * var41 & 16711680) >>> 8;
                               ++var37;
                            }
                         }
@@ -310,7 +310,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
                               var39 = Toolkit.JAVA_TOOLKIT.getBuffer()[var34];
                               var40 = var38 >>> 24;
                               var41 = 256 - var40;
-                              Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & '\uff00') * var40 + (var39 & '\uff00') * var41 & 16711680) >>> 8;
+                              Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & 65280) * var40 + (var39 & 65280) * var41 & 16711680) >>> 8;
                               var36 += var26;
                               ++var37;
                            }
@@ -342,7 +342,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
                               var39 = Toolkit.JAVA_TOOLKIT.getBuffer()[var34];
                               var40 = var38 >>> 24;
                               var41 = 256 - var40;
-                              Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & '\uff00') * var40 + (var39 & '\uff00') * var41 & 16711680) >>> 8;
+                              Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & 65280) * var40 + (var39 & 65280) * var41 & 16711680) >>> 8;
                               var36 += var26;
                               ++var37;
                            }
@@ -376,7 +376,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
                               var39 = Toolkit.JAVA_TOOLKIT.getBuffer()[var34];
                               var40 = var38 >>> 24;
                               var41 = 256 - var40;
-                              Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & '\uff00') * var40 + (var39 & '\uff00') * var41 & 16711680) >>> 8;
+                              Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & 65280) * var40 + (var39 & 65280) * var41 & 16711680) >>> 8;
                               var35 += var27;
                               ++var37;
                            }
@@ -420,7 +420,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
                            var39 = Toolkit.JAVA_TOOLKIT.getBuffer()[var34];
                            var40 = var38 >>> 24;
                            var41 = 256 - var40;
-                           Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & '\uff00') * var40 + (var39 & '\uff00') * var41 & 16711680) >>> 8;
+                           Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & 65280) * var40 + (var39 & 65280) * var41 & 16711680) >>> 8;
                            var35 += var27;
                            var36 += var26;
                            ++var37;
@@ -465,7 +465,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
                            var39 = Toolkit.JAVA_TOOLKIT.getBuffer()[var34];
                            var40 = var38 >>> 24;
                            var41 = 256 - var40;
-                           Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & '\uff00') * var40 + (var39 & '\uff00') * var41 & 16711680) >>> 8;
+                           Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & 65280) * var40 + (var39 & 65280) * var41 & 16711680) >>> 8;
                            var35 += var27;
                            var36 += var26;
                            ++var37;
@@ -499,7 +499,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
                            var39 = Toolkit.JAVA_TOOLKIT.getBuffer()[var34];
                            var40 = var38 >>> 24;
                            var41 = 256 - var40;
-                           Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & '\uff00') * var40 + (var39 & '\uff00') * var41 & 16711680) >>> 8;
+                           Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & 65280) * var40 + (var39 & 65280) * var41 & 16711680) >>> 8;
                            var35 += var27;
                            ++var37;
                         }
@@ -543,7 +543,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
                         var39 = Toolkit.JAVA_TOOLKIT.getBuffer()[var34];
                         var40 = var38 >>> 24;
                         var41 = 256 - var40;
-                        Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & '\uff00') * var40 + (var39 & '\uff00') * var41 & 16711680) >>> 8;
+                        Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & 65280) * var40 + (var39 & 65280) * var41 & 16711680) >>> 8;
                         var35 += var27;
                         var36 += var26;
                         ++var37;
@@ -588,7 +588,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
                         var39 = Toolkit.JAVA_TOOLKIT.getBuffer()[var34];
                         var40 = var38 >>> 24;
                         var41 = 256 - var40;
-                        Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & '\uff00') * var40 + (var39 & '\uff00') * var41 & 16711680) >>> 8;
+                        Toolkit.JAVA_TOOLKIT.getBuffer()[var34++] = ((var38 & 16711935) * var40 + (var39 & 16711935) * var41 & -16711936) + ((var38 & 65280) * var40 + (var39 & 65280) * var41 & 16711680) >>> 8;
                         var35 += var27;
                         var36 += var26;
                         ++var37;
@@ -605,7 +605,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
       }
    }
 
-   final void drawMinimapRegion(int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, int[] var9, int[] var10) {
+   public final void drawMinimapRegion(int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, int[] var9, int[] var10) {
       try {
          int var11 = -var3 / 2;
          int var12 = -var4 / 2;
@@ -628,7 +628,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
                int var23 = Toolkit.JAVA_TOOLKIT.getBuffer()[var19];
                int var24 = var22 >>> 24;
                int var25 = 256 - var24;
-               Toolkit.JAVA_TOOLKIT.getBuffer()[var19++] = ((var22 & 16711935) * var24 + (var23 & 16711935) * var25 & -16711936) + ((var22 & '\uff00') * var24 + (var23 & '\uff00') * var25 & 16711680) >>> 8;
+               Toolkit.JAVA_TOOLKIT.getBuffer()[var19++] = ((var22 & 16711935) * var24 + (var23 & 16711935) * var25 & -16711936) + ((var22 & 65280) * var24 + (var23 & 65280) * var25 & 16711680) >>> 8;
                var20 += var14;
                var21 -= var13;
             }
@@ -642,7 +642,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
 
    }
 
-   final void method667(int var1, int var2, int var3, int var4, int var5, int var6, int var7, int[] var9, int[] var10) {
+   public final void method667(int var1, int var2, int var3, int var4, int var5, int var6, int var7, int[] var9, int[] var10) {
       try {
          int var11 = -var3 / 2;
          int var12 = -var4 / 2;
@@ -665,7 +665,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
                int var23 = Toolkit.JAVA_TOOLKIT.getBuffer()[var19];
                int var24 = var22 >>> 24;
                int var25 = 256 - var24;
-               Toolkit.JAVA_TOOLKIT.getBuffer()[var19++] = ((var22 & 16711935) * var24 + (var23 & 16711935) * var25 & -16711936) + ((var22 & '\uff00') * var24 + (var23 & '\uff00') * var25 & 16711680) >>> 8;
+               Toolkit.JAVA_TOOLKIT.getBuffer()[var19++] = ((var22 & 16711935) * var24 + (var23 & 16711935) * var25 & -16711936) + ((var22 & 65280) * var24 + (var23 & 65280) * var25 & 16711680) >>> 8;
                var20 += var14;
                var21 -= var13;
             }
@@ -758,7 +758,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
             } else {
                int var13 = 256 - var12;
                int var14 = var0[var4];
-               var0[var4++] = ((var2 & 16711935) * var12 + (var14 & 16711935) * var13 & -16711936) + ((var2 & '\uff00') * var12 + (var14 & '\uff00') * var13 & 16711680) >>> 8;
+               var0[var4++] = ((var2 & 16711935) * var12 + (var14 & 16711935) * var13 & -16711936) + ((var2 & 65280) * var12 + (var14 & 65280) * var13 & 16711680) >>> 8;
             }
          }
 
@@ -931,7 +931,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
             } else {
                int var13 = 256 - var12;
                int var14 = var0[var4];
-               var0[var4++] = ((var2 & 16711935) * var12 + (var14 & 16711935) * var13 & -16711936) + ((var2 & '\uff00') * var12 + (var14 & '\uff00') * var13 & 16711680) >>> 8;
+               var0[var4++] = ((var2 & 16711935) * var12 + (var14 & 16711935) * var13 & -16711936) + ((var2 & 65280) * var12 + (var14 & 65280) * var13 & 16711680) >>> 8;
             }
          }
 
@@ -948,7 +948,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
             int var13 = 256 - var12;
             int var14 = var1[var3++];
             int var15 = var0[var4];
-            var0[var4++] = ((var14 & 16711935) * var12 + (var15 & 16711935) * var13 & -16711936) + ((var14 & '\uff00') * var12 + (var15 & '\uff00') * var13 & 16711680) >>> 8;
+            var0[var4++] = ((var14 & 16711935) * var12 + (var15 & 16711935) * var13 & -16711936) + ((var14 & 65280) * var12 + (var15 & 65280) * var13 & 16711680) >>> 8;
          }
 
          var4 += var7;
@@ -971,7 +971,7 @@ public final class Class3_Sub28_Sub16_Sub2_Sub1 extends Class3_Sub28_Sub16_Sub2 
             } else {
                int var17 = 256 - var16;
                int var18 = var0[var5];
-               var0[var5++] = ((var2 & 16711935) * var16 + (var18 & 16711935) * var17 & -16711936) + ((var2 & '\uff00') * var16 + (var18 & '\uff00') * var17 & 16711680) >>> 8;
+               var0[var5++] = ((var2 & 16711935) * var16 + (var18 & 16711935) * var17 & -16711936) + ((var2 & 65280) * var16 + (var18 & 65280) * var17 & 16711680) >>> 8;
             }
 
              var3 += var9;

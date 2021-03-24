@@ -18,7 +18,7 @@ public final class PacketParser {
     static int anInt87 = 0;
     static RSInterface aClass11_88 = null;
     static int inTutorialIsland = 0; // could be boolean
-    static Class3_Sub19[] aClass3_Sub19Array3694;
+    public static Class3_Sub19[] aClass3_Sub19Array3694;
     static long aLong3202;
     static int anInt3213 = 1;
 
@@ -77,7 +77,7 @@ public final class PacketParser {
         if (60 == Unsorted.incomingOpcode) {
             nodeModelId = GraphicDefinition.incomingBuffer.readUnsignedShort128();
             byte var69 = GraphicDefinition.incomingBuffer.readSignedNegativeByte();
-            Class3_Sub13_Sub23.method281(var69, nodeModelId);
+            TextureOperation39.method281(var69, nodeModelId);
             Unsorted.incomingOpcode = -1;
             return true;
         } else {
@@ -271,7 +271,7 @@ public final class PacketParser {
                             var19 = GraphicDefinition.incomingBuffer.readUnsignedShortLE();
                             modelId = GraphicDefinition.incomingBuffer.readUnsignedShort();
                             Class146.updateInterfacePacketCounter(modelId);
-                            Class3_Sub13_Sub33.method327(var19, nodeModelId);
+                            TextureOperation29.method327(var19, nodeModelId);
 
                             Unsorted.incomingOpcode = -1;
                             return true;
@@ -420,7 +420,7 @@ public final class PacketParser {
                                     RSString var56;
                                     if (Unsorted.incomingOpcode == 44) {
                                         nodeModelId = GraphicDefinition.incomingBuffer.readUnsignedShortLE128();
-                                        if (nodeModelId == '\uffff') {
+                                        if (nodeModelId == 65535) {
                                             nodeModelId = -1;
                                         }
 
@@ -433,7 +433,7 @@ public final class PacketParser {
                                             }
 
                                             Class91.aClass94Array1299[-1 + modelId] = var56;
-                                            Class3_Sub13_Sub26.anIntArray3328[modelId + -1] = nodeModelId;
+                                            TextureOperation35.anIntArray3328[modelId + -1] = nodeModelId;
                                             Class1.aBooleanArray54[modelId + -1] = var19 == 0;
                                         }
 
@@ -442,7 +442,7 @@ public final class PacketParser {
                                     } else if (Unsorted.incomingOpcode == 226) {
                                         nodeModelId = GraphicDefinition.incomingBuffer.readInt();
                                         var19 = GraphicDefinition.incomingBuffer.readUnsignedShort128();
-                                        Class3_Sub13_Sub23.method281(nodeModelId, var19);
+                                        TextureOperation39.method281(nodeModelId, var19);
                                         Unsorted.incomingOpcode = -1;
                                         return true;
                                     } else if (Unsorted.incomingOpcode == 21) {
@@ -450,7 +450,7 @@ public final class PacketParser {
                                         var19 = GraphicDefinition.incomingBuffer.readUnsignedShort();
                                         modelId = GraphicDefinition.incomingBuffer.readIntLE();
                                         Class146.updateInterfacePacketCounter(var19);
-                                        Class3_Sub13_Sub19.method260(modelId, nodeModelId);
+                                        TextureOperation4.method260(modelId, nodeModelId);
 
                                         Unsorted.incomingOpcode = -1;
                                         return true;
@@ -463,9 +463,9 @@ public final class PacketParser {
                                             Class7.method834();
                                         }
                                         Class3_Sub28_Sub12.anInt3655 = nodeModelId;
-                                        Class3_Sub13_Sub13.method232(nodeModelId);
+                                        TextureOperation20.method232(nodeModelId);
                                         Class124.method1746(false, (byte) -64);
-                                        Class3_Sub13_Sub12.method226(Class3_Sub28_Sub12.anInt3655);
+                                        TextureOperation24.method226(Class3_Sub28_Sub12.anInt3655);
 
                                         for (counter = 0; counter < 100; ++counter) {
                                             Unsorted.aBooleanArray3674[counter] = true;
@@ -478,7 +478,7 @@ public final class PacketParser {
                                         var19 = GraphicDefinition.incomingBuffer.readInt();
                                         modelId = GraphicDefinition.incomingBuffer.readUnsignedShort128();
                                         Class146.updateInterfacePacketCounter(nodeModelId);
-                                        Class3_Sub13_Sub18.method255(modelId, var19, 1);
+                                        TextureOperation19.method255(modelId, var19, 1);
 
                                         Unsorted.incomingOpcode = -1;
                                         return true;
@@ -494,7 +494,7 @@ public final class PacketParser {
                                         Unsorted.incomingOpcode = -1;
                                         return true;
                                     } else if (89 == Unsorted.incomingOpcode) { //UNUSED BY SERVER
-                                        Class3_Sub13_Sub2.method176(-117);
+                                        TextureOperation6.method176(-117);
                                         Class3_Sub30_Sub1.method819();
                                         Class36.anInt641 += 32;
                                         Unsorted.incomingOpcode = -1;
@@ -565,7 +565,7 @@ public final class PacketParser {
                                                 if (modelId >> 30 == 0) {
                                                     SequenceDefinition var53;
                                                     if (modelId >> 29 != 0) {
-                                                        var6 = '\uffff' & modelId;
+                                                        var6 = 65535 & modelId;
                                                         NPC var62 = NPC.npcs[var6];
                                                         if (null != var62) {
                                                             if (counter == 65535) {
@@ -596,16 +596,16 @@ public final class PacketParser {
                                                             }
                                                         }
                                                     } else if (modelId >> 28 != 0) {
-                                                        var6 = modelId & '\uffff';
+                                                        var6 = modelId & 65535;
                                                         Player var60;
                                                         if (var6 == Class3_Sub1.localIndex) {
                                                             var60 = Class102.player;
                                                         } else {
-                                                            var60 = Class3_Sub13_Sub22.players[var6];
+                                                            var60 = TextureOperation0.players[var6];
                                                         }
 
                                                         if (null != var60) {
-                                                            if (counter == '\uffff') {
+                                                            if (counter == 65535) {
                                                                 counter = -1;
                                                             }
                                                             var32 = counter == -1 || var60.anInt2842 == -1 || SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition((byte) 42, var60.anInt2842).anInt542).forcedPriority <= SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition((byte) 42, counter).anInt542).forcedPriority;
@@ -637,12 +637,12 @@ public final class PacketParser {
                                                 } else {
                                                     var6 = 3 & modelId >> 28;
                                                     var30 = ((modelId & 268434277) >> 14) + -Class131.anInt1716;
-                                                    chatIcon = (modelId & 16383) + -Class82.anInt1152;
+                                                    chatIcon = (modelId & 16383) + -Texture.anInt1152;
                                                     if (var30 >= 0 && chatIcon >= 0 && 104 > var30 && chatIcon < 104) {
                                                         chatIcon = chatIcon * 128 - -64;
                                                         var30 = 128 * var30 + 64;
                                                         Class140_Sub2 var50 = new Class140_Sub2(counter, var6, var30, chatIcon, -var19 + Class121.method1736(var6, 1, var30, chatIcon), nodeModelId, Class44.anInt719);
-                                                        Class3_Sub13_Sub15.aClass61_3177.method1215(new Class3_Sub28_Sub2(var50));
+                                                        TextureOperation17.aClass61_3177.method1215(new Class3_Sub28_Sub2(var50));
                                                     }
                                                 }
 
@@ -667,7 +667,7 @@ public final class PacketParser {
                                                 XPGainDraw.addGain(gain,modelId);
                                                 XPGainDraw.getLastXp()[modelId] = var19;
                                                 Class133.anIntArray1743[modelId] = var19;//XP for Skill ID
-                                                Class3_Sub13_Sub15.anIntArray3185[modelId] = nodeModelId;//Level for Skill ID
+                                                TextureOperation17.anIntArray3185[modelId] = nodeModelId;//Level for Skill ID
                                                 Class3_Sub20.anIntArray2480[modelId] = 1;
 
                                                 for (counter = 0; 98 > counter; ++counter) {
@@ -702,14 +702,14 @@ public final class PacketParser {
                                                 nodeModelId = GraphicDefinition.incomingBuffer.readUnsignedShort();
                                                 var19 = GraphicDefinition.incomingBuffer.readInt();
                                                 Class146.updateInterfacePacketCounter(nodeModelId);
-                                                Class3_Sub31 var67 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get(var19);
+                                                Class3_Sub31 var67 = TextureOperation23.aHashTable_3208.get(var19);
                                                 if (null != var67) {
-                                                    Class3_Sub13_Sub18.method254(true, var67);
+                                                    TextureOperation19.method254(true, var67);
                                                 }
 
-                                                if (null != Class3_Sub13_Sub7.aClass11_3087) {
-                                                    Class20.method909(Class3_Sub13_Sub7.aClass11_3087);
-                                                    Class3_Sub13_Sub7.aClass11_3087 = null;
+                                                if (null != TextureOperation27.aClass11_3087) {
+                                                    Class20.method909(TextureOperation27.aClass11_3087);
+                                                    TextureOperation27.aClass11_3087 = null;
                                                 }
 
                                                 Unsorted.incomingOpcode = -1;
@@ -724,7 +724,7 @@ public final class PacketParser {
                                                 Unsorted.anInt2309 = modelId;
                                                 if (Class133.anInt1753 == 2) {
                                                     Class139.anInt1823 = Unsorted.anInt2309;
-                                                    Class3_Sub13_Sub25.anInt3315 = GraphicDefinition.CAMERA_DIRECTION;
+                                                    TextureOperation28.anInt3315 = GraphicDefinition.CAMERA_DIRECTION;
                                                 }
 
                                                 Unsorted.method1098((byte) -117);
@@ -748,14 +748,14 @@ public final class PacketParser {
 
                                                 for (nodeModelId = Class65.currentChunkX; nodeModelId < 8 + Class65.currentChunkX; ++nodeModelId) {
                                                     for (var19 = Class39.currentChunkY; 8 + Class39.currentChunkY > var19; ++var19) {
-                                                        if (null != Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][nodeModelId][var19]) {
-                                                            Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][nodeModelId][var19] = null;
+                                                        if (null != TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][nodeModelId][var19]) {
+                                                            TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][nodeModelId][var19] = null;
                                                             Class128.method1760(var19, nodeModelId);
                                                         }
                                                     }
                                                 }
 
-                                                for (Class3_Sub4 var68 = (Class3_Sub4) Class3_Sub13_Sub6.aClass61_3075.method1222(); null != var68; var68 = (Class3_Sub4) Class3_Sub13_Sub6.aClass61_3075.method1221()) {
+                                                for (Class3_Sub4 var68 = (Class3_Sub4) TextureOperation26.aClass61_3075.method1222(); null != var68; var68 = (Class3_Sub4) TextureOperation26.aClass61_3075.method1221()) {
                                                     if (Class65.currentChunkX <= var68.anInt2264 && 8 + Class65.currentChunkX > var68.anInt2264 && var68.anInt2248 >= Class39.currentChunkY && 8 + Class39.currentChunkY > var68.anInt2248 && var68.anInt2250 == WorldListCountry.localPlane) {
                                                         var68.anInt2259 = 0;
                                                     }
@@ -779,7 +779,7 @@ public final class PacketParser {
                                                 nodeModelId = GraphicDefinition.incomingBuffer.readIntLE();
                                                 var19 = GraphicDefinition.incomingBuffer.readUnsignedShortLE128();
                                                 modelId = GraphicDefinition.incomingBuffer.readUnsignedShort128();
-                                                if (modelId == '\uffff') {
+                                                if (modelId == 65535) {
                                                     modelId = -1;
                                                 }
 
@@ -893,9 +893,9 @@ public final class PacketParser {
                                                     return true;
                                                 } else if (Unsorted.incomingOpcode == 160) {
                                                     if (0 == Unsorted.incomingPacketLength) {
-                                                        Class3_Sub13_Sub28.aClass94_3353 = TextCore.HasWalkHere;
+                                                        TextureOperation32.aClass94_3353 = TextCore.HasWalkHere;
                                                     } else {
-                                                        Class3_Sub13_Sub28.aClass94_3353 = GraphicDefinition.incomingBuffer.readString();
+                                                        TextureOperation32.aClass94_3353 = GraphicDefinition.incomingBuffer.readString();
                                                     }
 
                                                     Unsorted.incomingOpcode = -1;
@@ -978,15 +978,15 @@ public final class PacketParser {
                                                         var19 = GraphicDefinition.incomingBuffer.readUnsignedShort128();
                                                         modelId = GraphicDefinition.incomingBuffer.readIntV1();
                                                         Class146.updateInterfacePacketCounter(var19);
-                                                        Class3_Sub31 var23 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get(nodeModelId);
-                                                        var26 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get(modelId);
+                                                        Class3_Sub31 var23 = TextureOperation23.aHashTable_3208.get(nodeModelId);
+                                                        var26 = TextureOperation23.aHashTable_3208.get(modelId);
                                                         if (null != var26) {
-                                                            Class3_Sub13_Sub18.method254(null == var23 || var26.anInt2602 != var23.anInt2602, var26);
+                                                            TextureOperation19.method254(null == var23 || var26.anInt2602 != var23.anInt2602, var26);
                                                         }
 
                                                         if (null != var23) {
                                                             var23.unlink();
-                                                            Class3_Sub13_Sub17.aHashTable_3208.put(modelId, var23);
+                                                            TextureOperation23.aHashTable_3208.put(modelId, var23);
                                                         }
 
                                                         RSInterface var27 = Class7.getRSInterface(nodeModelId);
@@ -1015,9 +1015,9 @@ public final class PacketParser {
                                                         var30 = GraphicDefinition.incomingBuffer.readUnsignedShort();
                                                         Class146.updateInterfacePacketCounter(nodeModelId);
                                                         WaterfallShader.aBooleanArray2169[var19] = true;
-                                                        Class3_Sub13_Sub32.anIntArray3383[var19] = modelId;
+                                                        TextureOperation14.anIntArray3383[var19] = modelId;
                                                         Class166.anIntArray2073[var19] = counter;
-                                                        Class3_Sub13_Sub29.anIntArray3359[var19] = var6;
+                                                        TextureOperation3.anIntArray3359[var19] = var6;
                                                         Class163_Sub1_Sub1.anIntArray4009[var19] = var30;
 
                                                         Unsorted.incomingOpcode = -1;
@@ -1037,7 +1037,7 @@ public final class PacketParser {
                                                         Class140_Sub6.anInt2905 = anInt3213;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 114) {
-                                                        Class3_Sub13_Sub29.method305(Class38.signlink, GraphicDefinition.incomingBuffer, Unsorted.incomingPacketLength);
+                                                        TextureOperation3.method305(Class38.signlink, GraphicDefinition.incomingBuffer, Unsorted.incomingPacketLength);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (65 == Unsorted.incomingOpcode) {
@@ -1045,7 +1045,7 @@ public final class PacketParser {
                                                         var19 = GraphicDefinition.incomingBuffer.readUnsignedNegativeByte();
                                                         modelId = GraphicDefinition.incomingBuffer.readUnsignedShortLE128();
                                                         Class146.updateInterfacePacketCounter(nodeModelId);
-                                                        Class3_Sub13_Sub18.method255(modelId, var19, (byte) -83 ^ -84);
+                                                        TextureOperation19.method255(modelId, var19, (byte) -83 ^ -84);
 
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
@@ -1092,17 +1092,17 @@ public final class PacketParser {
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 42) {
-                                                        if (null != Class3_Sub13_Sub10.aFrame3121) {
+                                                        if (null != TextureOperation30.aFrame3121) {
                                                             GameObject.graphicsSettings(false, Unsorted.anInt2577, -1, -1);
                                                         }
 
                                                         byte[] var22 = new byte[Unsorted.incomingPacketLength];
                                                         GraphicDefinition.incomingBuffer.method811((byte) 30, 0, var22, Unsorted.incomingPacketLength);
-                                                        playerName = Class3_Sub13_Sub3.bufferToString(var22, Unsorted.incomingPacketLength, 0);
+                                                        playerName = TextureOperation33.bufferToString(var22, Unsorted.incomingPacketLength, 0);
                                                         if (null == GameShell.frame && (3 == Signlink.anInt1214 || !Signlink.osName.startsWith("win") || Class106.paramUserUsingInternetExplorer)) {
                                                             Class99.method1596(playerName, (byte) 127, true);
                                                         } else {
-                                                            Class3_Sub13_Sub24.aClass94_3295 = playerName;
+                                                            TextureOperation5.aClass94_3295 = playerName;
                                                             Unsorted.aBoolean2154 = true;
                                                             Class15.aClass64_351 = Class38.signlink.method1452(new String(playerName.method1568(), StandardCharsets.ISO_8859_1), true);
                                                         }
@@ -1132,9 +1132,9 @@ public final class PacketParser {
                                                         modelId = GraphicDefinition.incomingBuffer.readUnsignedShort128();
                                                         counter = GraphicDefinition.incomingBuffer.readUnsignedShort();
                                                         Class146.updateInterfacePacketCounter(modelId);
-                                                        var26 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get(var19);
+                                                        var26 = TextureOperation23.aHashTable_3208.get(var19);
                                                         if (null != var26) {
-                                                            Class3_Sub13_Sub18.method254(var26.anInt2602 != counter, var26);
+                                                            TextureOperation19.method254(var26.anInt2602 != counter, var26);
                                                         }
 
                                                         Class21.method914(counter, var19, nodeModelId);
@@ -1142,9 +1142,9 @@ public final class PacketParser {
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 131) {
-                                                        for (nodeModelId = 0; nodeModelId < Class3_Sub13_Sub22.players.length; ++nodeModelId) {
-                                                            if (Class3_Sub13_Sub22.players[nodeModelId] != null) {
-                                                                Class3_Sub13_Sub22.players[nodeModelId].anInt2771 = -1;
+                                                        for (nodeModelId = 0; nodeModelId < TextureOperation0.players.length; ++nodeModelId) {
+                                                            if (TextureOperation0.players[nodeModelId] != null) {
+                                                                TextureOperation0.players[nodeModelId].anInt2771 = -1;
                                                             }
                                                         }
 
@@ -1199,7 +1199,7 @@ public final class PacketParser {
                                                             }
 
                                                             var48.anInt1355 = GraphicDefinition.incomingBuffer.readUnsignedShort();
-                                                            if (var48.anInt1355 == '\uffff') {
+                                                            if (var48.anInt1355 == 65535) {
                                                                 var48.anInt1355 = -1;
                                                             }
 
@@ -1213,14 +1213,14 @@ public final class PacketParser {
 
                                                         for (nodeModelId = 0; Class3_Sub28_Sub5.anInt3591 > nodeModelId; ++nodeModelId) {
                                                             Class114.ignores[nodeModelId] = GraphicDefinition.incomingBuffer.readLong();
-                                                            Class3_Sub13_Sub27.aClass94Array3341[nodeModelId] = Unsorted.method1052(Class114.ignores[nodeModelId]);
+                                                            TextureOperation7.aClass94Array3341[nodeModelId] = Unsorted.method1052(Class114.ignores[nodeModelId]);
                                                         }
 
                                                         Class110.anInt1472 = anInt3213;
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 32) {
-                                                        Class3_Sub13_Sub14.renderNPCs(8169);
+                                                        TextureOperation31.renderNPCs(8169);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 119) {
@@ -1241,14 +1241,14 @@ public final class PacketParser {
                                                         counter = Class75.anIntArray1107[var19];
                                                         var6 = GraphicDefinition.incomingBuffer.readUnsignedShort();
                                                         var30 = GraphicDefinition.incomingBuffer.readInt();
-                                                        if ('\uffff' == var6) {
+                                                        if (65535 == var6) {
                                                             var6 = -1;
                                                         }
 
                                                         clanChatIcon = 16383 & var30;
                                                         var33 = 16383 & var30 >> 14;
                                                         var33 -= Class131.anInt1716;
-                                                        clanChatIcon -= Class82.anInt1152;
+                                                        clanChatIcon -= Texture.anInt1152;
                                                         chatIcon = 3 & var30 >> 28;
                                                         Class50.method1131(chatIcon, 110, modelId, var19, clanChatIcon, counter, var33, var6);
                                                         Unsorted.incomingOpcode = -1;
@@ -1265,7 +1265,7 @@ public final class PacketParser {
                                                         while (true) {
                                                             if (var12 >= 100) {
                                                                 if (chatIcon <= 1) {
-                                                                    if ((!Class3_Sub15.aBoolean2433 || Class121.aBoolean1641) && !Class3_Sub13_Sub14.aBoolean3166) {
+                                                                    if ((!Class3_Sub15.aBoolean2433 || Class121.aBoolean1641) && !TextureOperation31.aBoolean3166) {
                                                                         for (var12 = 0; var12 < Class3_Sub28_Sub5.anInt3591; ++var12) {
                                                                             if (Class114.ignores[var12] == var2) {
                                                                                 var42 = true;
@@ -1317,7 +1317,7 @@ public final class PacketParser {
                                                         while (true) {
                                                             if (var14 >= 100) {
                                                                 if (1 >= clanChatIcon) {
-                                                                    if ((!Class3_Sub15.aBoolean2433 || Class121.aBoolean1641) && !Class3_Sub13_Sub14.aBoolean3166) {
+                                                                    if ((!Class3_Sub15.aBoolean2433 || Class121.aBoolean1641) && !TextureOperation31.aBoolean3166) {
                                                                         for (var14 = 0; Class3_Sub28_Sub5.anInt3591 > var14; ++var14) {
                                                                             if (Class114.ignores[var14] == var2) {
                                                                                 var13 = true;
@@ -1344,14 +1344,14 @@ public final class PacketParser {
                                                             MouseListeningClass.anInt1921 = (MouseListeningClass.anInt1921 + 1) % 100;
                                                             var57 = Font.method686(Objects.requireNonNull(Class32.method992(GraphicDefinition.incomingBuffer).properlyCapitalize()));
                                                             if (clanChatIcon == 2 || clanChatIcon == 3) {
-                                                                Class3_Sub13_Sub11.method221(-1, var57, RSString.stringCombiner(new RSString[]{TextCore.aClass94_444, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}), Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), 9);
+                                                                TextureOperation1.method221(-1, var57, RSString.stringCombiner(new RSString[]{TextCore.aClass94_444, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}), Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), 9);
                                                             } else if (clanChatIcon == 1) {
-                                                                Class3_Sub13_Sub11.method221(-1, var57, RSString.stringCombiner(new RSString[]{TextCore.aClass94_592, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}), Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), 9);
+                                                                TextureOperation1.method221(-1, var57, RSString.stringCombiner(new RSString[]{TextCore.aClass94_592, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}), Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), 9);
                                                             } else {
                                                                 if (clanChatIcon == 0)
-                                                                    Class3_Sub13_Sub11.method221(-1, var57, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString(), Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), 9);
+                                                                    TextureOperation1.method221(-1, var57, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString(), Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), 9);
                                                                 else
-                                                                    Class3_Sub13_Sub11.method221(-1, var57, RSString.stringCombiner(new RSString[]{RSString.parse("<img=" + (clanChatIcon - 1) + ">"), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}), Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), 9);
+                                                                    TextureOperation1.method221(-1, var57, RSString.stringCombiner(new RSString[]{RSString.parse("<img=" + (clanChatIcon - 1) + ">"), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}), Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), 9);
                                                             }
                                                         }
 
@@ -1369,7 +1369,7 @@ public final class PacketParser {
                                                         }
 
                                                         modelId = GraphicDefinition.incomingBuffer.readUnsignedShort();
-                                                        Class3_Sub13_Sub6.method199(var19, nodeModelId, modelId);
+                                                        TextureOperation26.method199(var19, nodeModelId, modelId);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 66) {
@@ -1406,7 +1406,7 @@ public final class PacketParser {
                                                             nodeModelId = GraphicDefinition.incomingBuffer.readInt();
                                                             var19 = GraphicDefinition.incomingBuffer.readUnsignedShort();
                                                             if (nodeModelId < -70000) {
-                                                                var19 += '\u8000';
+                                                                var19 += 32768;
                                                             }
 
                                                             if (nodeModelId < 0) {
@@ -1457,10 +1457,10 @@ public final class PacketParser {
                                                         } else if (116 == Unsorted.incomingOpcode) {
                                                             nodeModelId = GraphicDefinition.incomingBuffer.readUnsignedByte();
                                                             if (GraphicDefinition.incomingBuffer.readUnsignedByte() == 0) {
-                                                                Class3_Sub13_Sub33.aClass133Array3393[nodeModelId] = new Class133();
+                                                                TextureOperation29.aClass133Array3393[nodeModelId] = new Class133();
                                                             } else {
                                                                 --GraphicDefinition.incomingBuffer.index;
-                                                                Class3_Sub13_Sub33.aClass133Array3393[nodeModelId] = new Class133(GraphicDefinition.incomingBuffer);
+                                                                TextureOperation29.aClass133Array3393[nodeModelId] = new Class133(GraphicDefinition.incomingBuffer);
                                                             }
 
                                                             Unsorted.incomingOpcode = -1;
@@ -1486,7 +1486,7 @@ public final class PacketParser {
                                                         } else if (165 == Unsorted.incomingOpcode) {
                                                             nodeModelId = GraphicDefinition.incomingBuffer.readUnsignedShortLE();
                                                             var19 = GraphicDefinition.incomingBuffer.readUnsignedShortLE();
-                                                            if (var19 == '\uffff') {
+                                                            if (var19 == 65535) {
                                                                 var19 = -1;
                                                             }
 
@@ -1605,7 +1605,7 @@ public final class PacketParser {
                                                             nodeModelId = GraphicDefinition.incomingBuffer.readInt();
                                                             var19 = GraphicDefinition.incomingBuffer.readIntV2();
                                                             modelId = GraphicDefinition.incomingBuffer.readUnsignedShortLE128();
-                                                            if ('\uffff' == modelId) {
+                                                            if (65535 == modelId) {
                                                                 modelId = -1;
                                                             }
 
@@ -1617,7 +1617,7 @@ public final class PacketParser {
                                                                 Class140_Sub6.method2026(var19, nodeModelId, modelId);
                                                                 var43 = ItemDefinition.getItemDefinition(modelId);
                                                                 Unsorted.method2143((byte) -128, var43.anInt810, var19, var43.anInt799, var43.anInt786);
-                                                                Class84.method1420(var19, var43.anInt768, var43.anInt754, var43.anInt792, (byte) -85);
+                                                                Class84.method1420(var19, var43.anInt768, var43.anInt754, var43.anInt792);
                                                             } else {
                                                                 if (-1 == modelId) {
                                                                     var34.modelType = 0;
@@ -1640,7 +1640,7 @@ public final class PacketParser {
                                                             nodeModelId = GraphicDefinition.incomingBuffer.readInt();
                                                             var19 = GraphicDefinition.incomingBuffer.readUnsignedShort();
                                                             if (nodeModelId < -70000) {
-                                                                var19 += '\u8000';
+                                                                var19 += 32768;
                                                             }
 
                                                             if (0 <= nodeModelId) {
@@ -1693,7 +1693,7 @@ public final class PacketParser {
                                                             return true;
                                                         } else if (4 == Unsorted.incomingOpcode) {
                                                             nodeModelId = GraphicDefinition.incomingBuffer.readUnsignedShortLE128();
-                                                            if (nodeModelId == '\uffff') {
+                                                            if (nodeModelId == 65535) {
                                                                 nodeModelId = -1;
                                                             }
 
@@ -1703,7 +1703,7 @@ public final class PacketParser {
                                                         } else if (Unsorted.incomingOpcode == 208) {
                                                             nodeModelId = GraphicDefinition.incomingBuffer.getTriByte2();
                                                             var19 = GraphicDefinition.incomingBuffer.readUnsignedShortLE();
-                                                            if (var19 == '\uffff') {
+                                                            if (var19 == 65535) {
                                                                 var19 = -1;
                                                             }
 
@@ -1736,13 +1736,13 @@ public final class PacketParser {
             if (Class21.aBoolean440 && Class85.aBoolean1167) {
                 int var1 = Class126.anInt1676;
                 var1 -= Unsorted.anInt1881;
-                if (Class3_Sub13_Sub13.anInt3156 > var1) {
-                    var1 = Class3_Sub13_Sub13.anInt3156;
+                if (TextureOperation20.anInt3156 > var1) {
+                    var1 = TextureOperation20.anInt3156;
                 }
 
                 int var2 = Unsorted.anInt1709;
-                if (var1 - -Class56.aClass11_886.width > Class3_Sub13_Sub13.anInt3156 + aClass11_88.width) {
-                    var1 = -Class56.aClass11_886.width + Class3_Sub13_Sub13.anInt3156 + aClass11_88.width;
+                if (var1 - -Class56.aClass11_886.width > TextureOperation20.anInt3156 + aClass11_88.width) {
+                    var1 = -Class56.aClass11_886.width + TextureOperation20.anInt3156 + aClass11_88.width;
                 }
 
                 var2 -= Class95.anInt1336;
@@ -1756,7 +1756,7 @@ public final class PacketParser {
 
                 int var4 = var2 - Class3_Sub2.anInt2218;
                 int var3 = var1 + -Class3_Sub15.anInt2421;
-                int var6 = var1 + -Class3_Sub13_Sub13.anInt3156 + aClass11_88.anInt247;
+                int var6 = var1 + -TextureOperation20.anInt3156 + aClass11_88.anInt247;
                 int var7 = aClass11_88.anInt208 + -Class134.anInt1761 + var2;
                 int var5 = Class56.aClass11_886.anInt214;
                 if (Class56.aClass11_886.anInt179 < Class75_Sub3.anInt2658 && (var3 > var5 || var3 < -var5 || var4 > var5 || var4 < -var5)) {
@@ -1773,7 +1773,7 @@ public final class PacketParser {
                     Class43.method1065(var8);
                 }
 
-                if (0 == Class3_Sub13_Sub5.anInt3069) {
+                if (0 == TextureOperation21.anInt3069) {
                     if (NPC.aBoolean3975) {
                         if (Class56.aClass11_886.anObjectArray229 != null) {
                             var8 = new CS2Script();
@@ -1788,11 +1788,11 @@ public final class PacketParser {
                         if (withInter == null) {
                             withInter = Class56.aClass11_886;
                         }
-                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(79);
-                        Class3_Sub13_Sub1.outgoingBuffer.writeIntV2(Class56.aClass11_886.componentHash);
-                        Class3_Sub13_Sub1.outgoingBuffer.writeShortLE(withInter.anInt191);
-                        Class3_Sub13_Sub1.outgoingBuffer.writeInt(withInter.componentHash);
-                        Class3_Sub13_Sub1.outgoingBuffer.writeShortLE(Class56.aClass11_886.anInt191);
+                        TextureOperation12.outgoingBuffer.putOpcode(79);
+                        TextureOperation12.outgoingBuffer.writeIntV2(Class56.aClass11_886.componentHash);
+                        TextureOperation12.outgoingBuffer.writeShortLE(withInter.anInt191);
+                        TextureOperation12.outgoingBuffer.writeInt(withInter.componentHash);
+                        TextureOperation12.outgoingBuffer.writeShortLE(Class56.aClass11_886.anInt191);
 
                         // && client.method42(Class56.aClass11_886) != null) {
                         if (Class27.aClass11_526 == null) {
@@ -1800,10 +1800,10 @@ public final class PacketParser {
                         } else if (Client.method42(Class56.aClass11_886) != null) {
                             System.out.println("Shouldn't be sending packet, enabled to fix banking tabs though.");
                         }
-                    } else if ((Unsorted.anInt998 == 1 || Class3_Sub13_Sub39.method353(-1 + Unsorted.menuOptionCount, ~-1)) && Unsorted.menuOptionCount > 2) {
+                    } else if ((Unsorted.anInt998 == 1 || TextureOperation8.method353(-1 + Unsorted.menuOptionCount, ~-1)) && Unsorted.menuOptionCount > 2) {
                         Class132.method1801();
                     } else if (Unsorted.menuOptionCount > 0) {
-                        Class3_Sub13_Sub8.method203(96);
+                        TextureOperation9.method203(96);
                     }
 
                     Class56.aClass11_886 = null;
@@ -1831,9 +1831,9 @@ public final class PacketParser {
 
     static void method1605(RSString var1, int var2) {
         try {
-            Class3_Sub13_Sub1.outgoingBuffer.putOpcode(188);
-            Class3_Sub13_Sub1.outgoingBuffer.writeByte128(var2);
-            Class3_Sub13_Sub1.outgoingBuffer.writeLong(var1.toLong());
+            TextureOperation12.outgoingBuffer.putOpcode(188);
+            TextureOperation12.outgoingBuffer.writeByte128(var2);
+            TextureOperation12.outgoingBuffer.writeLong(var1.toLong());
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "ni.B(" + 255 + ',' + (var1 != null ? "{...}" : "null") + ',' + var2 + ')');
         }

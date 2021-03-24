@@ -2,83 +2,83 @@ package org.runite.client;
 
 final class Class101 {
 
-   static CacheIndex aClass153_1420;
-   static Class3_Sub24_Sub4 aClass3_Sub24_Sub4_1421;
-   static Class30 aClass30_1422;
-   static CacheIndex aClass153_1423;
-   static int anInt1425 = 0;
-   static int[] anIntArray1426;
-   static int anInt1427;
-   static short[][] aShortArrayArray1429;
+    static CacheIndex aClass153_1420;
+    static Class3_Sub24_Sub4 aClass3_Sub24_Sub4_1421;
+    static Class30 aClass30_1422;
+    static CacheIndex aClass153_1423;
+    static int anInt1425 = 0;
+    static int[] anIntArray1426;
+    static int anInt1427;
+    static short[][] aShortArrayArray1429;
 
 
-   static void method1607(int var0, int var1, boolean var2, int[] var3, int[] var4) {
-      try {
-         if(var2) {
-            method1608((byte)106);
-         }
-
-         if(var1 > var0) {
-            int var5 = (var1 + var0) / 2;
-            int var6 = var0;
-            int var7 = var3[var5];
-            var3[var5] = var3[var1];
-            var3[var1] = var7;
-            int var8 = var4[var5];
-            var4[var5] = var4[var1];
-            var4[var1] = var8;
-
-            for(int var9 = var0; var9 < var1; ++var9) {
-               if((var9 & 1) + var7 < var3[var9]) {
-                  int var10 = var3[var9];
-                  var3[var9] = var3[var6];
-                  var3[var6] = var10;
-                  int var11 = var4[var9];
-                  var4[var9] = var4[var6];
-                  var4[var6++] = var11;
-               }
+    static void method1607(int var0, int var1, boolean var2, int[] var3, int[] var4) {
+        try {
+            if (var2) {
+                method1608((byte) 106);
             }
 
-            var3[var1] = var3[var6];
-            var3[var6] = var7;
-            var4[var1] = var4[var6];
-            var4[var6] = var8;
-            method1607(var0, var6 - 1, var2, var3, var4);
-            method1607(var6 + 1, var1, var2, var3, var4);
-         }
+            if (var1 > var0) {
+                int var5 = (var1 + var0) / 2;
+                int var6 = var0;
+                int var7 = var3[var5];
+                var3[var5] = var3[var1];
+                var3[var1] = var7;
+                int var8 = var4[var5];
+                var4[var5] = var4[var1];
+                var4[var1] = var8;
 
-      } catch (RuntimeException var12) {
-         throw ClientErrorException.clientError(var12, "nj.C(" + var0 + ',' + var1 + ',' + var2 + ',' + (var3 != null?"{...}":"null") + ',' + (var4 != null?"{...}":"null") + ')');
-      }
-   }
+                for (int var9 = var0; var9 < var1; ++var9) {
+                    if ((var9 & 1) + var7 < var3[var9]) {
+                        int var10 = var3[var9];
+                        var3[var9] = var3[var6];
+                        var3[var6] = var10;
+                        int var11 = var4[var9];
+                        var4[var9] = var4[var6];
+                        var4[var6++] = var11;
+                    }
+                }
 
-   public static void method1608(byte var0) {
-      try {
-         CacheIndex.npcConfigIndex = null;
-         Class136.aClass61_1424 = null;
-         aShortArrayArray1429 = (short[][])null;
-         anIntArray1426 = null;
-         aClass3_Sub24_Sub4_1421 = null;
-         aClass30_1422 = null;
-         aClass153_1423 = null;
-         if(var0 != 110) {
-            method1607(46, 78, true, (int[])null, (int[])null);
-         }
+                var3[var1] = var3[var6];
+                var3[var6] = var7;
+                var4[var1] = var4[var6];
+                var4[var6] = var8;
+                method1607(var0, var6 - 1, var2, var3, var4);
+                method1607(var6 + 1, var1, var2, var3, var4);
+            }
 
-         aClass153_1420 = null;
-      } catch (RuntimeException var2) {
-         throw ClientErrorException.clientError(var2, "nj.A(" + var0 + ')');
-      }
-   }
+        } catch (RuntimeException var12) {
+            throw ClientErrorException.clientError(var12, "nj.C(" + var0 + ',' + var1 + ',' + var2 + ',' + (var3 != null ? "{...}" : "null") + ',' + (var4 != null ? "{...}" : "null") + ')');
+        }
+    }
 
-   static void method1609() {
-      try {
-         Unsorted.anShaderInterfaceArray70 = null;
+    public static void method1608(byte var0) {
+        try {
+            CacheIndex.npcConfigIndex = null;
+            Class136.aClass61_1424 = null;
+            aShortArrayArray1429 = null;
+            anIntArray1426 = null;
+            aClass3_Sub24_Sub4_1421 = null;
+            aClass30_1422 = null;
+            aClass153_1423 = null;
+            if (var0 != 110) {
+                method1607(46, 78, true, null, null);
+            }
 
-          Class88.method1455();
-      } catch (RuntimeException var2) {
-         throw ClientErrorException.clientError(var2, "nj.B(" + 90 + ')');
-      }
-   }
+            aClass153_1420 = null;
+        } catch (RuntimeException var2) {
+            throw ClientErrorException.clientError(var2, "nj.A(" + var0 + ')');
+        }
+    }
+
+    static void method1609() {
+        try {
+            Unsorted.anShaderInterfaceArray70 = null;
+
+            Class88.method1455();
+        } catch (RuntimeException var2) {
+            throw ClientErrorException.clientError(var2, "nj.B(" + 90 + ')');
+        }
+    }
 
 }

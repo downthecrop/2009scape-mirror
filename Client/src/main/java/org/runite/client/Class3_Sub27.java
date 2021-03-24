@@ -74,10 +74,10 @@ final class Class3_Sub27 extends Linkable {
                   var11 = var7 >> 16 & 127;
                   if(var11 > 0) {
                      int var12 = var2[var9];
-                     Class3_Sub6 var13 = (Class3_Sub6)this.aHashTable_2564.get((long)var12);
+                     Class3_Sub6 var13 = (Class3_Sub6)this.aHashTable_2564.get(var12);
                      if(var13 == null) {
                         var13 = new Class3_Sub6(new byte[128]);
-                        this.aHashTable_2564.put((long)var12, var13);
+                        this.aHashTable_2564.put(var12, var13);
                      }
 
                      var13.aByteArray2289[var10] = 1;
@@ -282,7 +282,7 @@ final class Class3_Sub27 extends Linkable {
          while(true) {
             int var63 = var1.method741();
             var51.method771(var63);
-            int var64 = var1.buffer[var29++] & 255;
+            int var64 = var1.buffer[var29++] & 0xFF;
             boolean var65 = var64 != var62;
             var62 = var64 & 15;
             if(var64 == 7) {

@@ -32,7 +32,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
    final Class3_Sub24 method411() {
       try {
          Class3_Sub22 var1 = (Class3_Sub22)this.aClass61_3489.method1222();
-         return (Class3_Sub24)(null != var1?(null != var1.aClass3_Sub24_Sub1_2507?var1.aClass3_Sub24_Sub1_2507:this.method414()):null);
+         return null != var1?(null != var1.aClass3_Sub24_Sub1_2507?var1.aClass3_Sub24_Sub1_2507:this.method414()):null;
       } catch (RuntimeException var2) {
          throw ClientErrorException.clientError(var2, "te.Q()");
       }
@@ -67,15 +67,6 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
       }
    }
 
-   static void method465() {
-      try {
-
-         Class140_Sub4.aReferenceCache_2792.sweep(5);
-      } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "te.O(" + 5 + ',' + true + ')');
-      }
-   }
-
    final int method409() {
       try {
          return 0;
@@ -88,7 +79,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
       try {
           if (var0 != null) {
               for (int var2 = 0; var2 < Class3_Sub28_Sub5.anInt3591; ++var2) {
-                  if (var0.equalsStringIgnoreCase(Class3_Sub13_Sub27.aClass94Array3341[var2])) {
+                  if (var0.equalsStringIgnoreCase(TextureOperation7.aClass94Array3341[var2])) {
                       return true;
                   }
               }
@@ -127,7 +118,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
                   if(var2 > var3.anInt2512) {
                      this.method464(var3, var3.anInt2512);
                      var2 -= var3.anInt2512;
-                     if(this.aClass3_Sub24_Sub4_3493.method492(var2, 0, var3, (int[]) null)) {
+                     if(this.aClass3_Sub24_Sub4_3493.method492(var2, 0, var3, null)) {
                         continue;
                      }
                      break;

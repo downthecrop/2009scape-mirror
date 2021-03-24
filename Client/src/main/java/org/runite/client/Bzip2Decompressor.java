@@ -2,12 +2,12 @@ package org.runite.client;
 
 public final class Bzip2Decompressor {
 
-   private static Bzip2Context context = new Bzip2Context();
+   private static final Bzip2Context context = new Bzip2Context();
 
 
    private static int method1633(int var0, Bzip2Context var1) {
       while(var1.anInt128 < var0) {
-         var1.anInt140 = var1.anInt140 << 8 | var1.aByteArray127[var1.anInt116] & 255;
+         var1.anInt140 = var1.anInt140 << 8 | var1.aByteArray127[var1.anInt116] & 0xFF;
          var1.anInt128 += 8;
          ++var1.anInt116;
          ++var1.anInt147;
@@ -65,7 +65,7 @@ public final class Bzip2Decompressor {
 
             var2 = (byte)var5;
             var7 = var6[var7];
-            var1 = (byte)(var7 & 255);
+            var1 = (byte)(var7 & 0xFF);
             var7 >>= 8;
             ++var4;
             if(var1 != var5) {
@@ -94,25 +94,25 @@ public final class Bzip2Decompressor {
 
          var3 = 2;
          var7 = var6[var7];
-         var1 = (byte)(var7 & 255);
+         var1 = (byte)(var7 & 0xFF);
          var7 >>= 8;
          ++var4;
          if(var4 != var12) {
             if(var1 == var5) {
                var3 = 3;
                var7 = var6[var7];
-               var1 = (byte)(var7 & 255);
+               var1 = (byte)(var7 & 0xFF);
                var7 >>= 8;
                ++var4;
                if(var4 != var12) {
                   if(var1 == var5) {
                      var7 = var6[var7];
-                     var1 = (byte)(var7 & 255);
+                     var1 = (byte)(var7 & 0xFF);
                      var7 >>= 8;
                      ++var4;
-                     var3 = (var1 & 255) + 4;
+                     var3 = (var1 & 0xFF) + 4;
                      var7 = var6[var7];
-                     var5 = (byte)(var7 & 255);
+                     var5 = (byte)(var7 & 0xFF);
                      var7 >>= 8;
                      ++var4;
                   } else {
@@ -226,11 +226,11 @@ public final class Bzip2Decompressor {
 
          var0.anInt135 = 0;
          var1 = method1637(var0);
-         var0.anInt135 = var0.anInt135 << 8 | var1 & 255;
+         var0.anInt135 = var0.anInt135 << 8 | var1 & 0xFF;
          var1 = method1637(var0);
-         var0.anInt135 = var0.anInt135 << 8 | var1 & 255;
+         var0.anInt135 = var0.anInt135 << 8 | var1 & 0xFF;
          var1 = method1637(var0);
-         var0.anInt135 = var0.anInt135 << 8 | var1 & 255;
+         var0.anInt135 = var0.anInt135 << 8 | var1 & 0xFF;
 
          int var35;
          for(var35 = 0; var35 < 16; ++var35) {
@@ -413,10 +413,10 @@ public final class Bzip2Decompressor {
                } while(var44 == 0 || var44 == 1);
 
                ++var46;
-               var1 = var0.aByteArray114[var0.aByteArray109[var0.anIntArray123[0]] & 255];
+               var1 = var0.aByteArray114[var0.aByteArray109[var0.anIntArray123[0]] & 0xFF];
 
-               for(var0.anIntArray134[var1 & 255] += var46; var46 > 0; --var46) {
-                  Class129.anIntArray1690[var47] = var1 & 255;
+               for(var0.anIntArray134[var1 & 0xFF] += var46; var46 > 0; --var46) {
+                  Class129.anIntArray1690[var47] = var1 & 0xFF;
                   ++var47;
                }
             } else {
@@ -472,8 +472,8 @@ public final class Bzip2Decompressor {
                   }
                }
 
-               ++var0.anIntArray134[var0.aByteArray114[var1 & 255] & 255];
-               Class129.anIntArray1690[var47] = var0.aByteArray114[var1 & 255] & 255;
+               ++var0.anIntArray134[var0.aByteArray114[var1 & 0xFF] & 0xFF];
+               Class129.anIntArray1690[var47] = var0.aByteArray114[var1 & 0xFF] & 0xFF;
                ++var47;
                if(var45 == 0) {
                   ++var41;
@@ -510,15 +510,15 @@ public final class Bzip2Decompressor {
          }
 
          for(var35 = 0; var35 < var47; ++var35) {
-            var1 = (byte)(Class129.anIntArray1690[var35] & 255);
-            Class129.anIntArray1690[var0.anIntArray122[var1 & 255]] |= var35 << 8;
-            ++var0.anIntArray122[var1 & 255];
+            var1 = (byte)(Class129.anIntArray1690[var35] & 0xFF);
+            Class129.anIntArray1690[var0.anIntArray122[var1 & 0xFF]] |= var35 << 8;
+            ++var0.anIntArray122[var1 & 0xFF];
          }
 
          var0.anInt133 = Class129.anIntArray1690[var0.anInt135] >> 8;
          var0.anInt131 = 0;
          var0.anInt133 = Class129.anIntArray1690[var0.anInt133];
-         var0.anInt129 = (byte)(var0.anInt133 & 255);
+         var0.anInt129 = (byte)(var0.anInt133 & 0xFF);
          var0.anInt133 >>= 8;
          ++var0.anInt131;
          var0.anInt121 = var47;

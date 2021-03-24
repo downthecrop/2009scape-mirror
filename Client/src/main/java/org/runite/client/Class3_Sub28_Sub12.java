@@ -18,7 +18,7 @@ public final class Class3_Sub28_Sub12 extends Node {
         } else {
             int var2 = 0;
             if (var1 <= 20) {
-                TextCore.COMMAND_MEMORY_MANAGEMENT = (RSString) null;
+                TextCore.COMMAND_MEMORY_MANAGEMENT = null;
             }
 
             for (; var0.anIntArray275.length > var2; ++var2) {
@@ -65,7 +65,7 @@ public final class Class3_Sub28_Sub12 extends Node {
             anIntArray1835[i] = anIntArray1835[i - 1];
         }
 
-        ++Class3_Sub13_Sub9.anInt3114;
+        ++TextureOperation16.anInt3114;
         anIntArray3082[0] = type;
         aClass94Array3226[0] = var5;
         Class24.anInt472 = PacketParser.anInt3213;
@@ -95,7 +95,7 @@ public final class Class3_Sub28_Sub12 extends Node {
     }
 
     static RSString method612(long var0) {
-        return Class3_Sub13_Sub8.method207(10, false, 116, var0);
+        return TextureOperation9.method207(10, false, 116, var0);
     }
 
     private void decode(DataBuffer buffer, int opcode) {

@@ -16,7 +16,7 @@ public final class RSInterface {
     Object[] anObjectArray165;
     int defY;
     boolean aBoolean167;
-    int width;
+    public int width;
     short aShort169 = 3000;
     Object[] anObjectArray170;
     RSString[] aClass94Array171;
@@ -41,7 +41,7 @@ public final class RSInterface {
     int parentId;
     int anInt191 = -1;
     int anInt192;
-    int height = 0;
+    public int height = 0;
     int anInt194 = 0;
     boolean aBoolean195;
     private int secondModelId;
@@ -55,7 +55,7 @@ public final class RSInterface {
     int anInt204;
     int anInt205 = 0;
     Object[] anObjectArray206;
-    int[] anIntArray207;
+    public int[] anIntArray207;
     int anInt208 = 0;
     int anInt210 = 0;
     int[] anIntArray211;
@@ -138,7 +138,7 @@ public final class RSInterface {
     int anInt288;
     RSString aClass94_289;
     int anInt290;
-    int[] anIntArray291;
+    public int[] anIntArray291;
     int anInt292;
     short aShort293;
     private int secondModelType;
@@ -442,12 +442,12 @@ public final class RSInterface {
             this.modelType = 1;
             this.itemId = buffer.readUnsignedShort();
             this.secondModelType = 1;
-            if (this.itemId == '\uffff') {
+            if (this.itemId == 65535) {
                 this.itemId = -1;
             }
 
             this.secondModelId = buffer.readUnsignedShort();
-            if (this.secondModelId == '\uffff') {
+            if (this.secondModelId == 65535) {
                 this.secondModelId = -1;
             }
 
@@ -457,7 +457,7 @@ public final class RSInterface {
             }
 
             this.secondAnimationId = buffer.readUnsignedShort();
-            if ('\uffff' == this.secondAnimationId) {
+            if (65535 == this.secondAnimationId) {
                 this.secondAnimationId = -1;
             }
 
@@ -548,13 +548,13 @@ public final class RSInterface {
                 if (var3 == -1) {
                     return null;
                 } else {
-                    AbstractSprite var4 = (AbstractSprite) Class114.aReferenceCache_1569.get((long) var3);
+                    AbstractSprite var4 = (AbstractSprite) Class114.aReferenceCache_1569.get(var3);
                     if (var4 == null) {
                         var4 = Unsorted.method602(var3, Class12.aClass153_323);
                         if (null == var4) {
                             aBoolean6 = true;
                         } else {
-                            Class114.aReferenceCache_1569.put(var4, (long) var3);
+                            Class114.aReferenceCache_1569.put(var4, var3);
                         }
 
                     }
@@ -570,7 +570,7 @@ public final class RSInterface {
 
     static int method861(int var0, int var1, int var2) {
         try {
-            Class3_Sub25 var3 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get((long) var0);
+            Class3_Sub25 var3 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var0);
             return null == var3 ? -1 : (0 <= var2 && var2 < var3.anIntArray2547.length ? (var1 < 39 ? -69 : var3.anIntArray2547[var2]) : -1);
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "be.J(" + var0 + ',' + var1 + ',' + var2 + ')');
@@ -644,7 +644,7 @@ public final class RSInterface {
             }
 
             if (var4 < 125) {
-                return (Model) null;
+                return null;
             } else if (var8 == 0) {
                 return null;
             } else if (var8 == 1 && var9 == -1) {
@@ -652,7 +652,7 @@ public final class RSInterface {
             } else {
                 Model var10;
                 if (1 == var8) {
-                    var10 = (Model) Class3_Sub15.aReferenceCache_2428.get((long) ((var8 << 16) - -var9));
+                    var10 = (Model) Class3_Sub15.aReferenceCache_2428.get((var8 << 16) - -var9);
                     if (var10 == null) {
                         Model_Sub1 var18 = Model_Sub1.method2015(Class119.aClass153_1628, var9);
                         if (var18 == null) {
@@ -661,7 +661,7 @@ public final class RSInterface {
                         }
 
                         var10 = var18.method2008(64, 768, -50, -10, -50);
-                        Class3_Sub15.aReferenceCache_2428.put(var10, (long) (var9 + (var8 << 16)));
+                        Class3_Sub15.aReferenceCache_2428.put(var10, var9 + (var8 << 16));
                     }
 
                     if (var2 != null) {
@@ -688,7 +688,7 @@ public final class RSInterface {
                             return var17;
                         }
                     } else if (var8 == 6) {
-                        var10 = NPCDefinition.getNPCDefinition(var9).method1476((Class145[]) null, 0, (byte) -120, 0, var1, var5, var3, (SequenceDefinition) null, 0, var2);
+                        var10 = NPCDefinition.getNPCDefinition(var9).method1476(null, 0, (byte) -120, 0, var1, var5, var3, null, 0, var2);
                         if (null == var10) {
                             aBoolean6 = true;
                             return null;
@@ -701,7 +701,7 @@ public final class RSInterface {
                         return null;
                     } else {
                         int var15 = this.itemId >>> 16;
-                        int var11 = this.itemId & '\uffff';
+                        int var11 = this.itemId & 65535;
                         int var12 = this.anInt265;
                         Model var13 = var7.method1157(var1, var12, var15, var5, var2, var3, var11);
                         if (var13 == null) {
@@ -728,7 +728,7 @@ public final class RSInterface {
         }
     }
 
-    final AbstractSprite method866(boolean var2) {
+    public final AbstractSprite method866(boolean var2) {
         try {
             aBoolean6 = false;
             int archiveId;
@@ -861,7 +861,7 @@ public final class RSInterface {
             this.anInt280 = buffer.readUnsignedShort();
             this.anInt164 = buffer.readUnsignedShort();
             this.animationId = buffer.readUnsignedShort();
-            if ('\uffff' == this.animationId) {
+            if (65535 == this.animationId) {
                 this.animationId = -1;
             }
 
@@ -968,12 +968,12 @@ public final class RSInterface {
                 var8 = -1;
             }
 
-            if ('\uffff' == this.anInt266) {
+            if (65535 == this.anInt266) {
                 this.anInt266 = -1;
             }
 
             this.anInt238 = buffer.readUnsignedShort();
-            if (this.anInt238 == '\uffff') {
+            if (this.anInt238 == 65535) {
                 this.anInt238 = -1;
             }
         }
@@ -1012,7 +1012,7 @@ public final class RSInterface {
             if (this.anInt270 == -1) {
                 return null;
             } else {
-                Font var3 = (Font) Unsorted.aReferenceCache_743.get((long) this.anInt270);
+                Font var3 = (Font) Unsorted.aReferenceCache_743.get(this.anInt270);
                 if (null == var3) {
                     var3 = Unsorted.method1300(this.anInt270, Class12.aClass153_323, Class97.aClass153_1378);
                     if (null == var3) {

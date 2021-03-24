@@ -10,15 +10,15 @@ final class AnimationHeader {
 	boolean aBoolean1386 = false;
 	short[] aShortArray1387;
 	short[] aShortArray1388;
-	private static byte[] aByteArray1389 = new byte[500];
-	private static short[] aShortArray1390 = new short[500];
-	private static short[] aShortArray1391 = new short[500];
-	private static short[] aShortArray1392 = new short[500];
+	private static final byte[] aByteArray1389 = new byte[500];
+	private static final short[] aShortArray1390 = new short[500];
+	private static final short[] aShortArray1391 = new short[500];
+	private static final short[] aShortArray1392 = new short[500];
 	byte[] aByteArray1393;
-	private static short[] aShortArray1394 = new short[500];
+	private static final short[] aShortArray1394 = new short[500];
 	short[] aShortArray1395;
 	short[] aShortArray1396;
-	private static short[] aShortArray1397 = new short[500];
+	private static final short[] aShortArray1397 = new short[500];
 
 
 	//	AnimationHeader(byte[] bs, Class3_Sub17 skin) {
@@ -74,9 +74,9 @@ final class AnimationHeader {
 //
 //					aByteArray1389[var6] = (byte)(var11 >>> 3 & 3);
 //					if(var10 == 2) {
-//						aShortArray1394[var6] = (short)(((aShortArray1394[var6] & 255) << 3) + (aShortArray1394[var6] >> 8 & 7));
-//						aShortArray1391[var6] = (short)(((aShortArray1391[var6] & 255) << 3) + (aShortArray1391[var6] >> 8 & 7));
-//						aShortArray1390[var6] = (short)(((aShortArray1390[var6] & 255) << 3) + (aShortArray1390[var6] >> 8 & 7));
+//						aShortArray1394[var6] = (short)(((aShortArray1394[var6] & 0xFF) << 3) + (aShortArray1394[var6] >> 8 & 7));
+//						aShortArray1391[var6] = (short)(((aShortArray1391[var6] & 0xFF) << 3) + (aShortArray1391[var6] >> 8 & 7));
+//						aShortArray1390[var6] = (short)(((aShortArray1390[var6] & 0xFF) << 3) + (aShortArray1390[var6] >> 8 & 7));
 //					}
 //					var7 = i;
 //					if(var10 != 1 && var10 != 2 && var10 != 3) {
@@ -163,9 +163,9 @@ final class AnimationHeader {
 
                      aByteArray1389[var6] = (byte)(var11 >>> 3 & 3);
 		            if(var10 == 2) {
-		               aShortArray1394[var6] = (short)(((aShortArray1394[var6] & 255) << 3) + (aShortArray1394[var6] >> 8 & 7));
-		               aShortArray1391[var6] = (short)(((aShortArray1391[var6] & 255) << 3) + (aShortArray1391[var6] >> 8 & 7));
-		               aShortArray1390[var6] = (short)(((aShortArray1390[var6] & 255) << 3) + (aShortArray1390[var6] >> 8 & 7));
+		               aShortArray1394[var6] = (short)(((aShortArray1394[var6] & 0xFF) << 3) + (aShortArray1394[var6] >> 8 & 7));
+		               aShortArray1391[var6] = (short)(((aShortArray1391[var6] & 0xFF) << 3) + (aShortArray1391[var6] >> 8 & 7));
+		               aShortArray1390[var6] = (short)(((aShortArray1390[var6] & 0xFF) << 3) + (aShortArray1390[var6] >> 8 & 7));
 		            }
 
 		            aShortArray1392[var6] = -1;

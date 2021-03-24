@@ -10,7 +10,7 @@ final class LDIndexedSprite extends AbstractIndexedSprite {
 
    final void method1668(int var1, int var2, int var3) {
       for(int var4 = 0; var4 < this.anIntArray2673.length; ++var4) {
-         int var5 = this.anIntArray2673[var4] >> 16 & 255;
+         int var5 = this.anIntArray2673[var4] >> 16 & 0xFF;
          var5 += var1;
          if(var5 < 0) {
             var5 = 0;
@@ -18,7 +18,7 @@ final class LDIndexedSprite extends AbstractIndexedSprite {
             var5 = 255;
          }
 
-         int var6 = this.anIntArray2673[var4] >> 8 & 255;
+         int var6 = this.anIntArray2673[var4] >> 8 & 0xFF;
          var6 += var2;
          if(var6 < 0) {
             var6 = 0;
@@ -26,7 +26,7 @@ final class LDIndexedSprite extends AbstractIndexedSprite {
             var6 = 255;
          }
 
-         int var7 = this.anIntArray2673[var4] & 255;
+         int var7 = this.anIntArray2673[var4] & 0xFF;
          var7 += var3;
          if(var7 < 0) {
             var7 = 0;
@@ -111,7 +111,7 @@ final class LDIndexedSprite extends AbstractIndexedSprite {
             if(var16 == 0) {
                ++var5;
             } else {
-               var0[var5++] = var2[var16 & 255];
+               var0[var5++] = var2[var16 & 0xFF];
             }
 
              var3 += var9;
@@ -155,28 +155,28 @@ final class LDIndexedSprite extends AbstractIndexedSprite {
             if(var13 == 0) {
                ++var5;
             } else {
-               var0[var5++] = var2[var13 & 255];
+               var0[var5++] = var2[var13 & 0xFF];
             }
 
              var13 = var1[var4++];
             if(var13 == 0) {
                ++var5;
             } else {
-               var0[var5++] = var2[var13 & 255];
+               var0[var5++] = var2[var13 & 0xFF];
             }
 
              var13 = var1[var4++];
             if(var13 == 0) {
                ++var5;
             } else {
-               var0[var5++] = var2[var13 & 255];
+               var0[var5++] = var2[var13 & 0xFF];
             }
 
              var13 = var1[var4++];
             if(var13 == 0) {
                ++var5;
             } else {
-               var0[var5++] = var2[var13 & 255];
+               var0[var5++] = var2[var13 & 0xFF];
             }
          }
 
@@ -185,7 +185,7 @@ final class LDIndexedSprite extends AbstractIndexedSprite {
             if(var13 == 0) {
                ++var5;
             } else {
-               var0[var5++] = var2[var13 & 255];
+               var0[var5++] = var2[var13 & 0xFF];
             }
          }
 
@@ -197,9 +197,9 @@ final class LDIndexedSprite extends AbstractIndexedSprite {
 
    private static void method1673(int[] var0, byte[] var1, int[] var2, int var3, int var4, int var5, int var6, int var7, int var8, int var9, int var10, int var11, int var12) {
       int var13 = var3;
-      int var14 = var12 >> 16 & 255;
-      int var15 = var12 >> 8 & 255;
-      int var16 = var12 & 255;
+      int var14 = var12 >> 16 & 0xFF;
+      int var15 = var12 >> 8 & 0xFF;
+      int var16 = var12 & 0xFF;
 
       for(int var17 = -var8; var17 < 0; ++var17) {
          int var18 = (var4 >> 16) * var11;
@@ -209,10 +209,10 @@ final class LDIndexedSprite extends AbstractIndexedSprite {
             if(var20 == 0) {
                ++var5;
             } else {
-               int var24 = var2[var20 & 255];
-               int var21 = var24 >> 16 & 255;
-               int var22 = var24 >> 8 & 255;
-               int var23 = var24 & 255;
+               int var24 = var2[var20 & 0xFF];
+               int var21 = var24 >> 16 & 0xFF;
+               int var22 = var24 >> 8 & 0xFF;
+               int var23 = var24 & 0xFF;
                var0[var5++] = (var21 * var14 >> 8 << 16) + (var22 * var15 >> 8 << 8) + (var23 * var16 >> 8);
             }
 
@@ -321,9 +321,9 @@ final class LDIndexedSprite extends AbstractIndexedSprite {
             if(var13 == 0) {
                ++var4;
             } else {
-               int var15 = var2[var13 & 255];
+               int var15 = var2[var13 & 0xFF];
                int var14 = var0[var4];
-               var0[var4++] = ((var15 & 16711935) * var9 + (var14 & 16711935) * var10 & -16711936) + ((var15 & '\uff00') * var9 + (var14 & '\uff00') * var10 & 16711680) >> 8;
+               var0[var4++] = ((var15 & 16711935) * var9 + (var14 & 16711935) * var10 & -16711936) + ((var15 & 65280) * var9 + (var14 & 65280) * var10 & 16711680) >> 8;
             }
          }
 

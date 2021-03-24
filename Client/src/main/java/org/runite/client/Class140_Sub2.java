@@ -91,7 +91,7 @@ final class Class140_Sub2 extends GameObject {
             var4 = var9 * var4 >> 8;
          }
 
-         var8 = -var7 + 2048 & 2047;
+         var8 = -var7 + 2048 & 0x7FF;
          var9 = 2047 & -var5 + 2048;
          int var10 = 0;
          int var12 = var4;
@@ -113,7 +113,7 @@ final class Class140_Sub2 extends GameObject {
          }
 
          Class139.anInt1823 = var7;
-         Class3_Sub13_Sub25.anInt3315 = var5;
+         TextureOperation28.anInt3315 = var5;
          Class77.anInt1111 = var6 + -var12;
          NPC.anInt3995 = var0 + -var10;
          Class7.anInt2162 = -var11 + var3;

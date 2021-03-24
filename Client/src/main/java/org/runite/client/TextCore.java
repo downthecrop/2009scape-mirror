@@ -2,9 +2,6 @@ package org.runite.client;
 
 import org.rs09.client.config.GameConfig;
 
-
-import java.awt.*;
-
 public class TextCore {
 
     /**
@@ -23,7 +20,35 @@ public class TextCore {
      * )2 = spacer )3 = period(.)
      */
 
-    /**Login Screen Text
+    public static final RSString TOGGLE_ATK = RSString.parse("::toggleatk");
+    public static final RSString TOGGLE_FK = RSString.parse("::togglefk");
+    public static RSString COMMAND_BREAK_CLIENT_CONNECTION = RSString.parse("::clientdrop");
+    public static RSString aClass94_1622 = RSString.parse("Card:");
+    public static RSString aClass94_4057 = RSString.parse("Mem:");
+    public static RSString aClass94_4052 = RSString.parse("www");
+    public static RSString aClass94_3601 = RSString.parse(")3runescape)3com)4l=");
+    public static RSString aClass94_1932 = RSString.parse(")4a=");
+    public static RSString aClass94_1885 = RSString.parse("cookiehost");
+    public static RSString aClass94_3637 = RSString.parse(")4p=");
+    /**
+     * Holiday Event Text
+     */
+    //Halloween
+    public static RSString TrickorTreat = RSString.of("Trick-or-treat");
+    public static RSString GazeInto = RSString.of("Gaze-into");
+    public static RSString aClass94_132 = RSString.parse("::");
+    public static RSString aClass94_119 = RSString.parse("runes");
+    public static RSString aClass94_37 = RSString.parse("0(U");
+    public static RSString aClass94_38 = RSString.parse("tbrefresh");
+    public static RSString aClass94_1698 = RSString.parse("(R");
+    public static RSString aClass94_1133 = RSString.parse(")4j");
+    public static RSString aClass94_4066 = RSString.parse("<br>");
+    public static RSString aClass94_2598 = RSString.parse("<br>");
+    public static RSString aClass94_1326 = RSString.parse(")2");
+    public static RSString aClass94_4049 = RSString.parse("");
+    public static RSString aClass94_1617 = RSString.parse(")1a2)1m");
+    /**
+     * Login Screen Text
      * Files that use these texts:
      */
     static RSString RSLoadingPleaseWait = RSString.parse(GameConfig.SERVER_NAME + " is loading )2 please wait)3)3)3");
@@ -60,7 +85,6 @@ public class TextCore {
     static RSString PreparedSoundEngine = RSString.parse("Prepared sound engine");
     static RSString ConxLost = RSString.parse("Connection lost)3");
     static RSString ConxUpdateServer = RSString.parse("Connected to update server");
-
     /**
      * User Login/ User Text
      */
@@ -101,14 +125,11 @@ public class TextCore {
     static RSString HasScroll = RSString.parse("scroll:");
     static RSString HasLevel = RSString.parse("level: ");
     static RSString HasRating = RSString.parse("rating: ");
-
     /**
      * Money values (K (Thousand)), (M (Million))
      */
     static RSString ThousandK = RSString.parse("K");
     static RSString MillionM = RSString.parse("M");
-
-
     static RSString HasDuelFriend = RSString.parse(":duelfriend:");
     static RSString HasDuelStake = RSString.parse(":duelstake:");
     static RSString HasTradeRequest = RSString.parse(":tradereq:");
@@ -119,18 +140,14 @@ public class TextCore {
     static RSString HasClan = RSString.parse(":clan:");
     static RSString HasAllyReq = RSString.parse(":allyreq:");
     static RSString cmdChalReq = RSString.parse(":chalreq:");
-
-
     /**
      * Archive Info for client cache lookup
      */
     static RSString HasLabels = RSString.parse("_labels");
     static RSString HasPlayerLabels = RSString.parse("_labels");
-    static RSString HasULLookUp = RSString.parse("ul");
     static RSString HasHuffman = RSString.parse("huffman");
-
-
-    /**Colored Text Commands * For Color editing use ColorCore.java
+    /**
+     * Colored Text Commands * For Color editing use ColorCore.java
      * *Note not used to actually change the color of text
      * Used as color coding commands such as:
      * red: purple: etc.
@@ -152,41 +169,33 @@ public class TextCore {
     static RSString TextWaveTwo = RSString.parse("wave2:");
     static RSString TextShake = RSString.parse("shake:");
     static RSString TextSlide = RSString.parse("slide:");
-
-
-
-
-    /**Months of the year
+    /**
+     * Months of the year
      * This was being accessed multiple times for other methods
      */
     static RSString[] MonthsOfTheYear = new RSString[]{RSString.parse("Jan"),
-                                                       RSString.parse("Feb"),
-                                                       RSString.parse("Mar"),
-                                                       RSString.parse("Apr"),
-                                                       RSString.parse("May"),
-                                                       RSString.parse("Jun"),
-                                                       RSString.parse("Jul"),
-                                                       RSString.parse("Aug"),
-                                                       RSString.parse("Sep"),
-                                                       RSString.parse("Oct"),
-                                                       RSString.parse("Nov"),
-                                                       RSString.parse("Dec")};
-
-    static RSString[] DaysOfTheWeek = new RSString[]{  RSString.parse("Sun"),
-                                                       RSString.parse("Mon"),
-                                                       RSString.parse("Tue"),
-                                                       RSString.parse("Wed"),
-                                                       RSString.parse("Thu"),
-                                                       RSString.parse("Fri"),
-                                                       RSString.parse("Sat")};
-
+            RSString.parse("Feb"),
+            RSString.parse("Mar"),
+            RSString.parse("Apr"),
+            RSString.parse("May"),
+            RSString.parse("Jun"),
+            RSString.parse("Jul"),
+            RSString.parse("Aug"),
+            RSString.parse("Sep"),
+            RSString.parse("Oct"),
+            RSString.parse("Nov"),
+            RSString.parse("Dec")};
+    static RSString[] DaysOfTheWeek = new RSString[]{RSString.parse("Sun"),
+            RSString.parse("Mon"),
+            RSString.parse("Tue"),
+            RSString.parse("Wed"),
+            RSString.parse("Thu"),
+            RSString.parse("Fri"),
+            RSString.parse("Sat")};
     /**
      * Client Commands
      */
     static RSString COMMAND_HIGHRES_GRAPHICS_RESIZE = RSString.parse("::wm2");
-    public static final RSString TOGGLE_ATK = RSString.parse("::toggleatk");
-    public static final RSString TOGGLE_FK = RSString.parse("::togglefk");
-    public static RSString COMMAND_BREAK_CLIENT_CONNECTION = RSString.parse("::clientdrop");
     static RSString COMMAND_SHIFT_DROP_CLICK = RSString.parse("::shiftclick");
     static RSString COMMAND_REPLACE_CANVAS = RSString.parse("::replacecanvas");
     static RSString COMMAND_HIGHRES_GRAPHICS_WINDOW = RSString.parse("::wm1");
@@ -214,13 +223,10 @@ public class TextCore {
     static RSString COMMAND_DISCORD = RSString.parse("::discord");
     static RSString COMMAND_HIGHSCORES = RSString.parse("::highscores");
     static RSString COMMAND_HISCORES = RSString.parse("::hiscores");
-
     /**
      * Used as text for client commands
      */
     static RSString Memoryk = RSString.parse("k");
-    public static RSString aClass94_1622 = RSString.parse("Card:");
-    public static RSString aClass94_4057 = RSString.parse("Mem:");
     static RSString aClass94_985 = RSString.parse("Fps:");
     static RSString aClass94_1630 = RSString.parse("Mem:");
     static RSString memoryBeforeCleanup = RSString.parse("Memory before cleanup=");
@@ -228,35 +234,18 @@ public class TextCore {
     static RSString aClass94_434 = RSString.parse("Shift)2click ENABLED(Q");
     static RSString forcedTweeningDisabled = RSString.parse("Forced tweening disabled)3");
     static RSString forcedTweeningEnabled = RSString.parse("Forced tweening / animation smoothing ENABLED(Q");
-
     /**
      * Website
      */
     static RSString aClass94_577 = RSString.parse("http:)4)4");
-    public static RSString aClass94_4052 = RSString.parse("www");
-    public static RSString aClass94_3601 = RSString.parse(")3runescape)3com)4l=");
-    public static RSString aClass94_1932 = RSString.parse(")4a=");
-    public static RSString aClass94_1885 = RSString.parse("cookiehost");
-    public static RSString aClass94_3637 = RSString.parse(")4p=");
-
     /**
      * Displayed if user is on a f2p world
      */
     static RSString MembersObject = RSString.parse("Members object");
-
-
     /**
      * Fonts
      */
     static java.awt.Font Helvetica = new java.awt.Font("Helvetica", java.awt.Font.BOLD, 13);
-
-    /**
-     * Holiday Event Text
-     */
-    //Halloween
-    public static RSString TrickorTreat = RSString.of("Trick-or-treat");
-    public static RSString GazeInto = RSString.of("Gaze-into");
-
     /**
      * Unsorted
      */
@@ -265,17 +254,6 @@ public class TextCore {
     static RSString aClass94_995 = RSString.parse("(Y<)4col>");
     static RSString aClass94_1645 = RSString.parse("Hidden)2");
     static RSString char_colon = RSString.parse(":");
-    public static RSString aClass94_132 = RSString.parse("::");
-    public static RSString aClass94_119 = RSString.parse("runes");
-    public static RSString aClass94_37 = RSString.parse("0(U");
-    public static RSString aClass94_38 = RSString.parse("tbrefresh");
-    public static RSString aClass94_1698 = RSString.parse("(R");
-    public static RSString aClass94_1133 = RSString.parse(")4j");
-    public static RSString aClass94_4066 = RSString.parse("<br>");
-    public static RSString aClass94_2598 = RSString.parse("<br>");
-    public static RSString aClass94_1326 = RSString.parse(")2");
-    public static RSString aClass94_4049 = RSString.parse("");
-    public static RSString aClass94_1617 = RSString.parse(")1a2)1m");
     static RSString aClass94_148 = RSString.parse("(U(Y");
     static RSString aClass94_465 = RSString.parse(" ");
     static RSString aClass94_468 = RSString.parse("(U");
@@ -297,7 +275,6 @@ public class TextCore {
     static RSString aClass94_3039 = RSString.parse("0");
     static RSString aClass94_3055 = RSString.parse("k");
     static RSString aClass94_3145 = RSString.parse(")1 ");
-    static RSString aClass94_3161 = RSString.parse("_");
     static RSString aClass94_3268 = RSString.parse(")1");
     static RSString aClass94_3339 = RSString.parse("null");
     static RSString aClass94_3357 = RSString.parse("");
@@ -309,7 +286,6 @@ public class TextCore {
     static RSString aClass94_3577 = RSString.parse(": ");
     static RSString aClass94_3703 = RSString.parse(" )2> ");
     static RSString aClass94_3777 = RSString.parse(" x ");
-    static RSString aClass94_3807 = RSString.parse("m");
     static RSString aClass94_2608 = RSString.parse(")4l=");
     static RSString aClass94_2168 = RSString.parse("<br>");
     static RSString aClass94_106 = RSString.parse("showVideoAd");
@@ -330,7 +306,6 @@ public class TextCore {
     static RSString aClass94_1076 = RSString.parse("<)4col>");
     static RSString aClass94_1151 = RSString.parse("settings=");
     static RSString aClass94_1301 = RSString.parse("(U3");
-    static RSString aClass94_1333 = RSString.parse("um");
     static RSString aClass94_1341 = RSString.parse("logo");
     static RSString aClass94_1342 = RSString.parse("details");
     static RSString aClass94_2171 = RSString.parse("");
@@ -347,7 +322,6 @@ public class TextCore {
     static RSString aClass94_2006 = RSString.parse("null");
     static RSString aClass94_2018 = RSString.parse("Cabbage");
     static RSString aClass94_2025 = RSString.parse(")2");
-    static RSString aClass94_2029 = RSString.parse("l");
     static RSString aClass94_2033 = RSString.parse("Memory after cleanup=");
     static RSString aClass94_2044 = RSString.parse("cookieprefix");
     static RSString aClass94_4007 = RSString.parse(":");

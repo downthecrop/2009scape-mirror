@@ -23,7 +23,7 @@ public final class Class2 {
      *                  by 90 degrees clockwise.
      */
     public final LDIndexedSprite getSprite(int rotations) {
-        LDIndexedSprite sprite = (LDIndexedSprite) Class3_Sub13_Sub31.aReferenceCache_3369.get(rotations << 16 | this.sprite);
+        LDIndexedSprite sprite = (LDIndexedSprite) TextureOperation2.aReferenceCache_3369.get(rotations << 16 | this.sprite);
         if (sprite != null) {
             return sprite;
         }
@@ -39,7 +39,7 @@ public final class Class2 {
                 sprite.rotateClockwise();
             }
 
-            Class3_Sub13_Sub31.aReferenceCache_3369.put(sprite, rotations << 16 | this.sprite);
+            TextureOperation2.aReferenceCache_3369.put(sprite, rotations << 16 | this.sprite);
         }
 
         return sprite;

@@ -11,18 +11,6 @@ final class Class3_Sub31 extends Linkable {
    static int[] anIntArray2606;
    static int paramCountryID;
 
-
-   static void method820(int var0, int var1) {
-      try {
-         KeyboardListener.aReferenceCache_1911.sweep(var0);
-         if(var1 == 64) {
-            Unsorted.aReferenceCache_1131.sweep(var0);
-         }
-      } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "wk.C(" + var0 + ',' + var1 + ')');
-      }
-   }
-
    static RSString[] optionsArrayStringConstructor(RSString[] var1) {
       try {
          RSString[] var2 = new RSString[5];

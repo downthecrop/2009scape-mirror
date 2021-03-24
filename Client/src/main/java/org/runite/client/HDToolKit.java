@@ -11,51 +11,47 @@ import java.nio.charset.StandardCharsets;
 
 public final class HDToolKit {
 
+    private static final float[] aFloatArray1808 = new float[16];
     /**
      * JOGL GL4bc related
      */
     public static GL gl;
+    public static boolean highDetail = false;
+    public static int viewHeight;
+    public static int viewWidth;
+    static int maxTextureUnits;
+    static boolean aBoolean1790;
+    static int anInt1791 = 0;
+    static boolean aBoolean1798 = true;
+    static boolean allows3DTextureMapping;
+    static boolean supportMultisample;
+    static int anInt1810;
+    static boolean supportVertexBufferObject;
+    static boolean aBoolean1817;
+    static boolean supportVertexProgram;
+    static boolean supportTextureCubeMap;
     private static GLContext glContext;
     private static GLDrawable glDrawable;
-
-
     private static String vendor;
     private static String renderer;
     private static float aFloat1787;
     private static boolean aBoolean1788 = false;
-    static int maxTextureUnits;
-    static boolean aBoolean1790;
-    static int anInt1791 = 0;
     private static int anInt1792 = 0;
     private static int anInt1793 = 0;
     private static float aFloat1794 = 0.0F;
     private static float aFloat1795;
     private static boolean aBoolean1796 = true;
     private static float aFloat1797 = 0.0F;
-    static boolean aBoolean1798 = true;
     private static boolean viewportSetup = false;
-    static boolean allows3DTextureMapping;
     private static int anInt1803 = -1;
     private static boolean aBoolean1805 = true;
-    public static boolean highDetail = false;
-    private static final float[] aFloatArray1808 = new float[16];
-    static boolean supportMultisample;
-    static int anInt1810;
-    public static int viewHeight;
     private static int anInt1812;
-    static boolean supportVertexBufferObject;
     private static boolean aBoolean1816 = true;
-    static boolean aBoolean1817;
-    static boolean supportVertexProgram;
-    private static final RSString aClass94_1819 = RSString.parse("radeon");
-    public static int viewWidth;
-    static boolean supportTextureCubeMap;
-
 
     private static RSString method1820(String var0) {
         byte[] var1;
         var1 = var0.getBytes(StandardCharsets.ISO_8859_1);
-        return Class3_Sub13_Sub3.bufferToString(var1, var1.length, 0);
+        return TextureOperation33.bufferToString(var1, var1.length, 0);
     }
 
     static void method1821(int offsetX, int offsetY, int ratioWidth, int ratioHeight) {
@@ -117,12 +113,8 @@ public final class HDToolKit {
         }
     }
 
-    static void bufferSwap() {
-        try {
-            glDrawable.swapBuffers();
-        } catch (Exception var1) {
-        }
-
+    public static void bufferSwap() {
+        glDrawable.swapBuffers();
     }
 
     static void method1827(boolean var0) {
@@ -355,7 +347,7 @@ public final class HDToolKit {
             supportVertexProgram = gl.isExtensionAvailable("GL_ARB_vertex_program");
             allows3DTextureMapping = gl.isExtensionAvailable("GL_EXT_texture3D");
             RSString var13 = method1820(renderer).toLowercase();
-            if (var13.indexOf(aClass94_1819, 57) != -1) {
+            if (var13.indexOf(RSString.parse("radeon"), 57) != -1) {
                 int version = 0;
                 RSString[] var7 = var13.method1565().method1567(32, (byte) -98);
 
@@ -545,7 +537,7 @@ public final class HDToolKit {
      * @param color
      */
     static void clearScreen(int color) {
-        gl.glClearColor((float) (color >> 16 & 255) / 255.0F, (float) (color >> 8 & 255) / 255.0F, (float) (color & 255) / 255.0F, 0.0F);
+        gl.glClearColor((float) (color >> 16 & 0xFF) / 255.0F, (float) (color >> 8 & 0xFF) / 255.0F, (float) (color & 0xFF) / 255.0F, 0.0F);
         gl.glClear(16640);
         gl.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
     }
@@ -593,7 +585,7 @@ public final class HDToolKit {
 //                glDrawable = glDrawableFactory.createGLDrawable(nativeWindow);
 //                glDrawable.setRealized(true);
                 GLCapabilities var2 = new GLCapabilities();
-                if(SceneMSAASamples > 0) {
+                if (SceneMSAASamples > 0) {
                     var2.setSampleBuffers(true);
                     var2.setNumSamples(SceneMSAASamples);
                 }
