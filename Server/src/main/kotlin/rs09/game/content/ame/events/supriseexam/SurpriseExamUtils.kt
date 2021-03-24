@@ -40,7 +40,7 @@ object SurpriseExamUtils {
         player.removeAttribute(SE_KEY_LOC)
         player.removeAttribute(SE_KEY_INDEX)
         player.removeAttribute(SE_KEY_CORRECT)
-        player.pulseManager.run(object : Pulse(){
+        player.pulseManager.run(object : Pulse(2){
             override fun pulse(): Boolean {
                 val reward = Item(Items.BOOK_OF_KNOWLEDGE_11640)
                 if(!player.inventory.add(reward)){

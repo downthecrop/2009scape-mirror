@@ -102,9 +102,8 @@ object DrillDemonUtils {
         } else if(!hasPants){
             Item(Items.CAMO_BOTTOMS_6655)
         } else {
-            Item(Items.COINS_995,500)
+            Item(Items.COINS_995, 500)
         }
-
         if(!player.inventory.add(reward)){
             GroundItemManager.create(reward,player)
         }
