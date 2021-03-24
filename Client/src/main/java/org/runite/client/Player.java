@@ -2,7 +2,7 @@ package org.runite.client;
 
 import java.util.Objects;
 
-final class Player extends Class140_Sub4 {
+public final class Player extends Class140_Sub4 {
 
     static int[] anIntArray3951 = new int[4];
     static int rights = 0;
@@ -11,13 +11,13 @@ final class Player extends Class140_Sub4 {
     static int[] anIntArray3959 = new int[2];
     int anInt3952 = -1;
     int headIcon = -1;
-    int teamId = 0;
+    public int teamId = 0;
     int COMBAT_LEVEL = 0;
     Class52 class52;
     int anInt3963 = -1;
     int combatLevel = 0;
     int anInt3966 = -1;
-    RSString displayName;
+    public RSString displayName;
     boolean aBoolean3968 = false;
     int anInt3969 = 0;
     int anInt3970 = -1;
@@ -141,20 +141,20 @@ final class Player extends Class140_Sub4 {
                         break;
                     }
 
-                    if ('\u8000' <= outfit) {
-                        int equipId = outfit - '\u8000';
+                    if (32768 <= outfit) {
+                        int equipId = outfit - 32768;
                         if (equipId > Class75_Sub4.anIntArray2664.length) {
-                            System.err.println("Player->parseAppearance()-> Array length = " + Class75_Sub4.anIntArray2664.length + ", equipId=" + equipId + ", item def size=" + Class3_Sub13_Sub23.itemDefinitionSize);
+                            System.err.println("Player->parseAppearance()-> Array length = " + Class75_Sub4.anIntArray2664.length + ", equipId=" + equipId + ", item def size=" + TextureOperation39.itemDefinitionSize);
                             continue;
                         }
                         outfit = Class75_Sub4.anIntArray2664[equipId];
-                        look[var10] = Class3_Sub13_Sub29.bitwiseOr(1073741824, outfit);
+                        look[var10] = TextureOperation3.bitwiseOr(1073741824, outfit);
                         var14 = ItemDefinition.getItemDefinition(outfit).teamId;
                         if (var14 != 0) {
                             this.teamId = var14;
                         }
                     } else {
-                        look[var10] = Class3_Sub13_Sub29.bitwiseOr(-256 + outfit, Integer.MIN_VALUE);
+                        look[var10] = TextureOperation3.bitwiseOr(-256 + outfit, Integer.MIN_VALUE);
                     }
                 }
             }
@@ -232,7 +232,7 @@ final class Player extends Class140_Sub4 {
                 }
 
                 int var17;
-                if (0 != Class3_Sub13_Sub13.paramModeWhat && var16 < 50) {
+                if (0 != TextureOperation20.paramModeWhat && var16 < 50) {
                     for (var17 = 50 - var16; Class56.anInt893 < var17; ++Class56.anInt893) {
                         Class3_Sub6.aByteArrayArray2287[Class56.anInt893] = new byte[102400];
                     }
@@ -278,12 +278,12 @@ final class Player extends Class140_Sub4 {
 
                                 if (var27.anInt1360 == 2) {
                                     int var29 = 4 * (-Class131.anInt1716 + var27.anInt1356) + 2 + -(Class102.player.anInt2819 / 32);
-                                    var20 = 2 + (4 * (var27.anInt1347 - Class82.anInt1152) - Class102.player.anInt2829 / 32);
+                                    var20 = 2 + (4 * (var27.anInt1347 - Texture.anInt1152) - Class102.player.anInt2829 / 32);
                                     this.method1979(null, var20, var15, var29, var6, var11, var1, var8, var5, var4, var2, var27.anInt1355, var3, var7);
                                 }
 
-                                if (var27.anInt1360 == 10 && var27.anInt1359 >= 0 && var27.anInt1359 < Class3_Sub13_Sub22.players.length) {
-                                    Player var28 = Class3_Sub13_Sub22.players[var27.anInt1359];
+                                if (var27.anInt1360 == 10 && var27.anInt1359 >= 0 && var27.anInt1359 < TextureOperation0.players.length) {
+                                    Player var28 = TextureOperation0.players[var27.anInt1359];
                                     if (null != var28) {
                                         var20 = -(Class102.player.anInt2819 / 32) + var28.anInt2819 / 32;
                                         var21 = var28.anInt2829 / 32 + -(Class102.player.anInt2829 / 32);
@@ -303,16 +303,16 @@ final class Player extends Class140_Sub4 {
                         if (var23 != null) {
                             var23.method1897(0, -this.anInt2799, 0);
                             if (var26.aBoolean536) {
-                                if (Class3_Sub13_Sub16.anInt3198 != 0) {
-                                    var23.method1896(Class3_Sub13_Sub16.anInt3198);
+                                if (TextureOperation15.anInt3198 != 0) {
+                                    var23.method1896(TextureOperation15.anInt3198);
                                 }
 
                                 if (0 != Class3_Sub28_Sub9.anInt3623) {
                                     var23.method1886(Class3_Sub28_Sub9.anInt3623);
                                 }
 
-                                if (Class3_Sub13_Sub9.anInt3111 != 0) {
-                                    var23.method1897(0, Class3_Sub13_Sub9.anInt3111, 0);
+                                if (TextureOperation16.anInt3111 != 0) {
+                                    var23.method1897(0, TextureOperation16.anInt3111, 0);
                                 }
                             }
                         }
@@ -385,7 +385,7 @@ final class Player extends Class140_Sub4 {
         try {
             int var16 = var4 * var4 - -(var2 * var2);
             if (var16 >= 16 && var16 <= 360000) {
-                int var17 = (int) (325.949D * Math.atan2(var4, var2)) & 2047;
+                int var17 = (int) (325.949D * Math.atan2(var4, var2)) & 0x7FF;
                 Model var18 = Class128.method1763(var17, this.anInt2829, var13, this.anInt2819, var3, this.anInt2831);
                 if (var18 != null) {
                     if (HDToolKit.highDetail) {
@@ -407,7 +407,7 @@ final class Player extends Class140_Sub4 {
         }
     }
 
-    final boolean hasDefinitions() {
+    public final boolean hasDefinitions() {
         try {
 
             return this.class52 != null;

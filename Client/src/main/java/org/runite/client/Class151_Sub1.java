@@ -362,12 +362,12 @@ final class Class151_Sub1 extends ResourceProvider {
                 if (var4 instanceof CacheResourceRequest) {
                     try {
                         if (var5 != null && var5.length > 2) {
-                            Class3_Sub13_Sub12.CRC32.reset();
-                            Class3_Sub13_Sub12.CRC32.update(var5, 0, -2 + var5.length);
-                            expectedCRC = (int) Class3_Sub13_Sub12.CRC32.getValue();
+                            TextureOperation24.CRC32.reset();
+                            TextureOperation24.CRC32.update(var5, 0, -2 + var5.length);
+                            expectedCRC = (int) TextureOperation24.CRC32.getValue();
                             if (this.table.archiveCRCs[archiveIndex] == expectedCRC) {
-                                int var8 = (var5[-2 + var5.length] << 8 & '\uff00') - -(255 & var5[-1 + var5.length]);
-                                if (('\uffff' & this.table.archiveRevisions[archiveIndex]) == var8) {
+                                int var8 = (var5[-2 + var5.length] << 8 & 65280) - -(255 & var5[-1 + var5.length]);
+                                if ((65535 & this.table.archiveRevisions[archiveIndex]) == var8) {
                                     if (1 != this.aByteArray2949[archiveIndex]) {
 
                                         ++this.anInt2948;
@@ -417,13 +417,13 @@ final class Class151_Sub1 extends ResourceProvider {
                             throw new RuntimeException();
                         }
 
-                        Class3_Sub13_Sub12.CRC32.reset();
-                        Class3_Sub13_Sub12.CRC32.update(var5, 0, var5.length - 2);
-                        expectedCRC = (int) Class3_Sub13_Sub12.CRC32.getValue();
+                        TextureOperation24.CRC32.reset();
+                        TextureOperation24.CRC32.update(var5, 0, var5.length - 2);
+                        expectedCRC = (int) TextureOperation24.CRC32.getValue();
                         if (expectedCRC != this.table.archiveCRCs[archiveIndex]) {
-                            Class3_Sub13_Sub12.CRC32.reset();
-                            Class3_Sub13_Sub12.CRC32.update(var5, 0, var5.length - 4);
-                            expectedCRC = (int) Class3_Sub13_Sub12.CRC32.getValue();
+                            TextureOperation24.CRC32.reset();
+                            TextureOperation24.CRC32.update(var5, 0, var5.length - 4);
+                            expectedCRC = (int) TextureOperation24.CRC32.getValue();
 
                             if (expectedCRC != this.table.archiveCRCs[archiveIndex]) {
                                 throw new RuntimeException("CRC mismatch - [found=" + this.table.archiveCRCs[archiveIndex] + ", expected=" + expectedCRC + "]!");

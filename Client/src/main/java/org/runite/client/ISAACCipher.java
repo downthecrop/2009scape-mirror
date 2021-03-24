@@ -177,7 +177,7 @@ final class ISAACCipher {
                     this.anInt972 ^= this.anInt972 >>> 6;
                 }
 
-                this.anInt972 += this.anIntArray971[128 + var2 & 255];
+                this.anInt972 += this.anIntArray971[128 + var2 & 0xFF];
                 int var4;
                 this.anIntArray971[var2] = var4 = this.anInt967 + this.anInt972 + this.anIntArray971[Unsorted.bitwiseAnd(var3, 1020) >> 2];
                 this.anIntArray970[var2] = this.anInt967 = var3 + this.anIntArray971[Unsorted.bitwiseAnd(261347, var4) >> 8 >> 2];

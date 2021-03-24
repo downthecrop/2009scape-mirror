@@ -1,6 +1,7 @@
 package org.runite.client;
 
 import org.rs09.client.config.GameConfig;
+import org.runite.client.drawcalls.LoadingBox;
 
 final class Class40 {
 
@@ -25,9 +26,9 @@ final class Class40 {
     static void method1041(long var0, RSString name) {
         try {
             // System.out.println("Class 40 " + var0 + ", " + var2 + ", " + name.toString());
-            Class3_Sub13_Sub1.outgoingBuffer.index = 0;
-            Class3_Sub13_Sub1.outgoingBuffer.writeByte(186);
-            Class3_Sub13_Sub1.outgoingBuffer.writeString(name);
+            TextureOperation12.outgoingBuffer.index = 0;
+            TextureOperation12.outgoingBuffer.writeByte(186);
+            TextureOperation12.outgoingBuffer.writeString(name);
             // Class3_Sub13_Sub1.outgoingBuffer.putLong(var0, var2 + -2037463204);
             Unsorted.registryStage = 1;
             Class132.anInt1734 = 0;
@@ -89,8 +90,8 @@ final class Class40 {
                 }
 
                 if (HDToolKit.highDetail) {
-                    if (Class3_Sub13_Sub15.anIntArray3181[var2] != -1 && aByteArrayArray3669[var2] == null) {
-                        aByteArrayArray3669[var2] = CacheIndex.landscapesIndex.getFile(Class3_Sub13_Sub15.anIntArray3181[var2], 0);
+                    if (TextureOperation17.anIntArray3181[var2] != -1 && aByteArrayArray3669[var2] == null) {
+                        aByteArrayArray3669[var2] = CacheIndex.landscapesIndex.getFile(TextureOperation17.anIntArray3181[var2], 0);
                         if (null == aByteArrayArray3669[var2]) {
                             var1 = false;
                             ++anInt3293;
@@ -106,25 +107,25 @@ final class Class40 {
                     }
                 }
 
-                if (null != NPC.npcSpawnCacheIndices && null == Class3_Sub13_Sub26.aByteArrayArray3335[var2] && NPC.npcSpawnCacheIndices[var2] != -1) {
-                    Class3_Sub13_Sub26.aByteArrayArray3335[var2] = CacheIndex.landscapesIndex.getFile(NPC.npcSpawnCacheIndices[var2], 0, Class39.regionXteaKeys[var2]);
-                    if (Class3_Sub13_Sub26.aByteArrayArray3335[var2] == null) {
+                if (null != NPC.npcSpawnCacheIndices && null == TextureOperation35.aByteArrayArray3335[var2] && NPC.npcSpawnCacheIndices[var2] != -1) {
+                    TextureOperation35.aByteArrayArray3335[var2] = CacheIndex.landscapesIndex.getFile(NPC.npcSpawnCacheIndices[var2], 0, Class39.regionXteaKeys[var2]);
+                    if (TextureOperation35.aByteArrayArray3335[var2] == null) {
                         ++anInt3293;
                         var1 = false;
                     }
                 }
             }
 
-            if (Class3_Sub13_Sub35.aClass131_3421 == null) {
-                if (null != Class3_Sub13_Sub21.aClass3_Sub28_Sub3_3264 && CacheIndex.worldmapIndex.method2135(RSString.stringCombiner(new RSString[]{Class3_Sub13_Sub21.aClass3_Sub28_Sub3_3264.aClass94_3561, TextCore.HasPlayerLabels}))) {
-                    if (CacheIndex.worldmapIndex.method2127(RSString.stringCombiner(new RSString[]{Class3_Sub13_Sub21.aClass3_Sub28_Sub3_3264.aClass94_3561, TextCore.HasPlayerLabels}))) {
-                        Class3_Sub13_Sub35.aClass131_3421 = Class81.getWorldMapArchive(RSString.stringCombiner(new RSString[]{Class3_Sub13_Sub21.aClass3_Sub28_Sub3_3264.aClass94_3561, TextCore.HasPlayerLabels}), CacheIndex.worldmapIndex);
+            if (TextureOperation22.aClass131_3421 == null) {
+                if (null != TextureOperation37.aClass3_Sub28_Sub3_3264 && CacheIndex.worldmapIndex.method2135(RSString.stringCombiner(new RSString[]{TextureOperation37.aClass3_Sub28_Sub3_3264.aClass94_3561, TextCore.HasPlayerLabels}))) {
+                    if (CacheIndex.worldmapIndex.method2127(RSString.stringCombiner(new RSString[]{TextureOperation37.aClass3_Sub28_Sub3_3264.aClass94_3561, TextCore.HasPlayerLabels}))) {
+                        TextureOperation22.aClass131_3421 = Class81.getWorldMapArchive(RSString.stringCombiner(new RSString[]{TextureOperation37.aClass3_Sub28_Sub3_3264.aClass94_3561, TextCore.HasPlayerLabels}), CacheIndex.worldmapIndex);
                     } else {
                         var1 = false;
                         ++anInt3293;
                     }
                 } else {
-                    Class3_Sub13_Sub35.aClass131_3421 = new Class131(0);
+                    TextureOperation22.aClass131_3421 = new Class131(0);
                 }
             }
 
@@ -137,7 +138,7 @@ final class Class40 {
                 for (var2 = 0; var2 < Class164_Sub2.aByteArrayArray3027.length; ++var2) {
                     byte[] var3 = Class3_Sub22.aByteArrayArray2521[var2];
                     if (null != var3) {
-                        var5 = -Class82.anInt1152 + (Class3_Sub24_Sub3.anIntArray3494[var2] & 255) * 64;
+                        var5 = -Texture.anInt1152 + (Class3_Sub24_Sub3.anIntArray3494[var2] & 0xFF) * 64;
                         var4 = -Class131.anInt1716 + (Class3_Sub24_Sub3.anIntArray3494[var2] >> 8) * 64;
                         if (LinkableRSString.isDynamicSceneGraph) {
                             var5 = 10;
@@ -151,7 +152,7 @@ final class Class40 {
                         var3 = aByteArrayArray3057[var2];
                         if (null != var3) {
                             var4 = -Class131.anInt1716 + 64 * (Class3_Sub24_Sub3.anIntArray3494[var2] >> 8);
-                            var5 = -Class82.anInt1152 + 64 * (Class3_Sub24_Sub3.anIntArray3494[var2] & 255);
+                            var5 = -Texture.anInt1152 + 64 * (Class3_Sub24_Sub3.anIntArray3494[var2] & 0xFF);
                             if (LinkableRSString.isDynamicSceneGraph) {
                                 var5 = 10;
                                 var4 = 10;
@@ -164,11 +165,11 @@ final class Class40 {
 
                 if (var1) {
                     if (Class163_Sub2_Sub1.anInt4019 != 0) {
-                        TextureOperation.method164(true, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_2707}));
+                        LoadingBox.draw(true, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_2707}));
                     }
 
                     Class58.method1194();
-                    Class3_Sub13_Sub30.method313((byte) 58);
+                    TextureOperation13.method313((byte) 58);
                     boolean var11 = false;
                     int var12;
                     if (HDToolKit.highDetail && Class128.aBoolean1685) {
@@ -223,12 +224,12 @@ final class Class40 {
                         if (HDToolKit.highDetail) {
                             var12 = Class102.player.anIntArray2767[0] >> 3;
                             var4 = Class102.player.anIntArray2755[0] >> 3;
-                            Class3_Sub13_Sub11.method220(var4, var12);
+                            TextureOperation1.method220(var4, var12);
                         }
 
-                        Class3_Sub13_Sub6.method198(false);
-                        if (null != Class3_Sub13_Sub26.aByteArrayArray3335) {
-                            Class3_Sub13_Sub21.method272((byte) -124);
+                        TextureOperation26.method198(false);
+                        if (null != TextureOperation35.aByteArrayArray3335) {
+                            TextureOperation37.method272((byte) -124);
                         }
                     }
 
@@ -238,13 +239,13 @@ final class Class40 {
                         if (HDToolKit.highDetail) {
                             var12 = Class102.player.anIntArray2767[0] >> 3;
                             var4 = Class102.player.anIntArray2755[0] >> 3;
-                            Class3_Sub13_Sub11.method220(var4, var12);
+                            TextureOperation1.method220(var4, var12);
                         }
 
                         Class163_Sub2_Sub1.method2223(false, (byte) -121);
                     }
 
-                    Class3_Sub13_Sub30.method313((byte) 90);
+                    TextureOperation13.method313((byte) 90);
                     Class163_Sub1.method2210(true);
                     Class158_Sub1.method2189(AtmosphereParser.aClass91Array1182, false, 66);
                     if (HDToolKit.highDetail) {
@@ -273,7 +274,7 @@ final class Class40 {
                         if (!LinkableRSString.isDynamicSceneGraph) {
                             Unsorted.method1091(true, -121);
                             Class163_Sub1.method2210(true);
-                            Class3_Sub13_Sub6.method198(true);
+                            TextureOperation26.method198(true);
                         }
 
                         if (LinkableRSString.isDynamicSceneGraph) {
@@ -282,7 +283,7 @@ final class Class40 {
                             Class163_Sub2_Sub1.method2223(true, (byte) -105);
                         }
 
-                        Class3_Sub13_Sub30.method313((byte) 102);
+                        TextureOperation13.method313((byte) 102);
                         Class163_Sub1.method2210(true);
                         Class158_Sub1.method2189(AtmosphereParser.aClass91Array1182, true, 112);
                         Class163_Sub1.method2210(true);
@@ -307,11 +308,11 @@ final class Class40 {
                     Unsorted.method792();
                     Class58.method1194();
                     method318();
-                    Class3_Sub13_Sub30.method313((byte) 100);
-                    Class3_Sub13_Sub34.aBoolean3416 = false;
+                    TextureOperation13.method313((byte) 100);
+                    TextureOperation25.aBoolean3416 = false;
                     if (GameShell.frame != null && null != Class3_Sub15.activeConnection && 25 == Class143.gameStage) {
-                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(20);
-                        Class3_Sub13_Sub1.outgoingBuffer.writeInt(1057001181);
+                        TextureOperation12.outgoingBuffer.putOpcode(20);
+                        TextureOperation12.outgoingBuffer.writeInt(1057001181);
                     }
 
                     if (!LinkableRSString.isDynamicSceneGraph) {
@@ -335,7 +336,7 @@ final class Class40 {
                     } else {
                         Class117.method1719(30);
                         if (null != Class3_Sub15.activeConnection) {
-                            Class3_Sub13_Sub1.outgoingBuffer.putOpcode(110);
+                            TextureOperation12.outgoingBuffer.putOpcode(110);
                         }
                     }
 
@@ -355,9 +356,9 @@ final class Class40 {
 
     static void method318() {
         try {
-            Class3_Sub4 var1 = (Class3_Sub4) Class3_Sub13_Sub6.aClass61_3075.method1222();
+            Class3_Sub4 var1 = (Class3_Sub4) TextureOperation26.aClass61_3075.method1222();
 
-            for (; null != var1; var1 = (Class3_Sub4) Class3_Sub13_Sub6.aClass61_3075.method1221()) {
+            for (; null != var1; var1 = (Class3_Sub4) TextureOperation26.aClass61_3075.method1221()) {
                 if (var1.anInt2259 == -1) {
                     var1.anInt2261 = 0;
                     Class132.method1798(56, var1);

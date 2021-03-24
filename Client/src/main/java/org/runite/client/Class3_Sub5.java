@@ -24,7 +24,7 @@ final class Class3_Sub5 extends Linkable {
             if (var0 < -47) {
                 for (int var9 = 0; var9 < Class119.aClass131_1624.anInt1720; ++var9) {
                     if (Class119.aClass131_1624.method1787(var9)) {
-                        int var10 = -Class3_Sub13_Sub21.anInt3256 + Class119.aClass131_1624.aShortArray1727[var9];
+                        int var10 = -TextureOperation37.anInt3256 + Class119.aClass131_1624.aShortArray1727[var9];
                         int var11 = Unsorted.anInt65 - (Class119.aClass131_1624.aShortArray1718[var9] - -1 - Class108.anInt1460);
                         int var12 = var1 + (-var1 + var4) * (var10 - var3) / (-var3 + var7);
                         int var14 = Class119.aClass131_1624.method1791(var9, 8);
@@ -91,7 +91,7 @@ final class Class3_Sub5 extends Linkable {
                         }
 
                         if (null != var16) {
-                            int var17 = TextureOperation.smallFont.method691(Class119.aClass131_1624.aClass94Array1721[var9], null, Class158_Sub1.aClass94Array2977);
+                            int var17 = FontType.smallFont.method691(Class119.aClass131_1624.aClass94Array1721[var9], null, Class158_Sub1.aClass94Array2977);
                             var13 -= var16.method998() * (var17 + -1) / 2;
                             var13 += var16.method1006() / 2;
 
@@ -222,7 +222,7 @@ final class Class3_Sub5 extends Linkable {
                 if (var0) {
                     var4 = Class102.player;
                 } else {
-                    var4 = Class3_Sub13_Sub22.players[Class56.localPlayerIndexes[var3]];
+                    var4 = TextureOperation0.players[Class56.localPlayerIndexes[var3]];
                 }
 
                 if (null != var4 && var4.hasDefinitions()) {
@@ -273,7 +273,7 @@ final class Class3_Sub5 extends Linkable {
                     var4 = Class102.player;
                     var16 = 8791798054912L;
                 } else {
-                    var4 = Class3_Sub13_Sub22.players[Class56.localPlayerIndexes[var3]];
+                    var4 = TextureOperation0.players[Class56.localPlayerIndexes[var3]];
                     var16 = (long) Class56.localPlayerIndexes[var3] << 32;
                 }
 
@@ -347,7 +347,7 @@ final class Class3_Sub5 extends Linkable {
                     if (null != var4.anObject2796 && var4.anInt2797 <= Class44.anInt719 && Class44.anInt719 < var4.anInt2778) {
                         var4.aBoolean3968 = false;
                         var4.anInt2831 = Class121.method1736(WorldListCountry.localPlane, 1, var4.anInt2819, var4.anInt2829);
-                        Class3_Sub13_Sub25.method292(WorldListCountry.localPlane, var4.anInt2819, var4.anInt2829, var4.anInt2831, var4, var4.anInt2785, var16, var4.anInt2788, var4.anInt2777, var4.anInt2818, var4.anInt2817);
+                        TextureOperation28.method292(WorldListCountry.localPlane, var4.anInt2819, var4.anInt2829, var4.anInt2831, var4, var4.anInt2785, var16, var4.anInt2788, var4.anInt2777, var4.anInt2818, var4.anInt2817);
                     } else {
                         var4.anInt2831 = Class121.method1736(WorldListCountry.localPlane, 1, var4.anInt2819, var4.anInt2829);
                         Class20.method907(WorldListCountry.localPlane, var4.anInt2819, var4.anInt2829, var4.anInt2831, 64 * (var7 - 1) + 60, var4, var4.anInt2785, var16, var4.aBoolean2810);
@@ -363,27 +363,27 @@ final class Class3_Sub5 extends Linkable {
     static void method117() {
         try {
             if (0 > Class3_Sub28_Sub1.anInt3536) {
-                Class3_Sub13_Sub30.anInt3362 = -1;
+                TextureOperation13.anInt3362 = -1;
                 Class3_Sub28_Sub1.anInt3536 = 0;
-                Class82.anInt1150 = -1;
+                Texture.anInt1150 = -1;
             }
 
             if (Class23.anInt455 < Class3_Sub28_Sub1.anInt3536) {
-                Class3_Sub13_Sub30.anInt3362 = -1;
+                TextureOperation13.anInt3362 = -1;
                 Class3_Sub28_Sub1.anInt3536 = Class23.anInt455;
-                Class82.anInt1150 = -1;
+                Texture.anInt1150 = -1;
             }
 
             if (Class3_Sub4.anInt2251 < 0) {
-                Class82.anInt1150 = -1;
-                Class3_Sub13_Sub30.anInt3362 = -1;
+                Texture.anInt1150 = -1;
+                TextureOperation13.anInt3362 = -1;
                 Class3_Sub4.anInt2251 = 0;
             }
 
             if (Class108.anInt1460 < Class3_Sub4.anInt2251) {
                 Class3_Sub4.anInt2251 = Class108.anInt1460;
-                Class3_Sub13_Sub30.anInt3362 = -1;
-                Class82.anInt1150 = -1;
+                TextureOperation13.anInt3362 = -1;
+                Texture.anInt1150 = -1;
             }
 
         } catch (RuntimeException var2) {

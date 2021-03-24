@@ -238,7 +238,7 @@ public abstract class Font extends Node {
 
     abstract void method679(int var1, int var2, int var3, int var4, int var5, int var6, int var7);
 
-    final int method680(RSString var1, int var2) {
+    public final int method680(RSString var1, int var2) {
         int var3 = this.method691(var1, new int[]{var2}, aClass94Array3753);
         int var4 = 0;
 
@@ -344,7 +344,7 @@ public abstract class Font extends Node {
         }
     }
 
-    final int method684(RSString var1, int var2) {
+    public final int method684(RSString var1, int var2) {
         return this.method691(var1, new int[]{var2}, aClass94Array3753);
     }
 
@@ -385,7 +385,7 @@ public abstract class Font extends Node {
     }
 
     private int method687(int var1) {
-        return this.anIntArray3736[var1 & 255];
+        return this.anIntArray3736[var1 & 0xFF];
     }
 
     final void drawStringRightAnchor(RSString var1, int var2, int var3, int var4, int var5) {
@@ -599,7 +599,7 @@ public abstract class Font extends Node {
         }
     }
 
-    final int method693(RSString var1, int var2, int var3, int var4, int var5, int var6, int var7, int var9, int var10, int var11) {
+    public final int method693(RSString var1, int var2, int var3, int var4, int var5, int var6, int var7, int var9, int var10, int var11) {
         if (var1 == null) {
             return 0;
         } else {
@@ -722,15 +722,15 @@ public abstract class Font extends Node {
         int var2;
         if (var1.length == 257) {
             for (var2 = 0; var2 < this.anIntArray3736.length; ++var2) {
-                this.anIntArray3736[var2] = var1[var2] & 255;
+                this.anIntArray3736[var2] = var1[var2] & 0xFF;
             }
 
-            this.anInt3727 = var1[256] & 255;
+            this.anInt3727 = var1[256] & 0xFF;
         } else {
             var2 = 0;
 
             for (int var3 = 0; var3 < 256; ++var3) {
-                this.anIntArray3736[var3] = var1[var2++] & 255;
+                this.anIntArray3736[var3] = var1[var2++] & 0xFF;
             }
 
             int[] var10 = new int[256];
@@ -738,11 +738,11 @@ public abstract class Font extends Node {
 
             int var5;
             for (var5 = 0; var5 < 256; ++var5) {
-                var10[var5] = var1[var2++] & 255;
+                var10[var5] = var1[var2++] & 0xFF;
             }
 
             for (var5 = 0; var5 < 256; ++var5) {
-                var4[var5] = var1[var2++] & 255;
+                var4[var5] = var1[var2++] & 0xFF;
             }
 
             byte[][] var12 = new byte[256][];

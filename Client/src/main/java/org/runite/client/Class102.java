@@ -2,12 +2,12 @@ package org.runite.client;
 
 import org.rs09.client.data.NodeCache;
 
-final class Class102 implements Interface2 {
+public final class Class102 implements Interface2 {
 
     static int[] anIntArray2125;
     static Class135[] aClass135Array2131 = new Class135[50];
     static int anInt2136;
-    static Player player;
+    public static Player player;
     private final boolean[] aBooleanArray2122;
     private final CacheIndex aClass153_2123;
     private final boolean[] aBooleanArray2124;
@@ -307,11 +307,11 @@ final class Class102 implements Interface2 {
                 if (Class159.anInt2020 > var4) {
                     var4 = Class159.anInt2020;
                 } else {
-                    Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var4++], var1, -66, var3, var0);
+                    TextureOperation18.method282(Class38.anIntArrayArray663[var4++], var1, -66, var3, var0);
                 }
 
                 if (var2 <= Class57.anInt902) {
-                    Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var2--], var1, -54, var3, var0);
+                    TextureOperation18.method282(Class38.anIntArrayArray663[var2--], var1, -54, var3, var0);
                 } else {
                     var2 = Class57.anInt902;
                 }
@@ -368,7 +368,7 @@ final class Class102 implements Interface2 {
 
     public final void method8(int var1, boolean var2) {
         try {
-            Class3_Sub28_Sub4.method551(255 & this.aByteArray2143[var1], this.aByteArray2144[var1] & 255);
+            Class3_Sub28_Sub4.method551(255 & this.aByteArray2143[var1], this.aByteArray2144[var1] & 0xFF);
             if (var2) {
                 boolean var3 = false;
                 Class3_Sub28_Sub20 var4 = this.method1613(var1);
@@ -431,7 +431,7 @@ final class Class102 implements Interface2 {
 
     public final int method10(int var1, int var2) {
         try {
-            return this.aByteArray2126[var2] & 255;
+            return this.aByteArray2126[var2] & 0xFF;
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "nk.C(" + var1 + ',' + var2 + ')');
         }
@@ -453,7 +453,7 @@ final class Class102 implements Interface2 {
         try {
             Class3_Sub28_Sub18 var4 = (Class3_Sub28_Sub18) this.aClass47_2138.get(var2);
             if (null == var4) {
-                var4 = new Class3_Sub28_Sub18(this.aShortArray2137[var2] & '\uffff');
+                var4 = new Class3_Sub28_Sub18(this.aShortArray2137[var2] & 65535);
                 this.aClass47_2138.put(var2, var4);
             }
             return var4;
@@ -518,11 +518,11 @@ final class Class102 implements Interface2 {
 
     public final int method15(int var1, int var2) {
         try {
-            if (var2 != '\uffff') {
+            if (var2 != 65535) {
                 this.method11(-82, -17);
             }
 
-            return '\uffff' & this.aShortArray2137[var1];
+            return 65535 & this.aShortArray2137[var1];
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "nk.E(" + var1 + ',' + var2 + ')');
         }

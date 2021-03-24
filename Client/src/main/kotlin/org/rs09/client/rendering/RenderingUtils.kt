@@ -50,35 +50,35 @@ object RenderingUtils {
     }
 
     fun drawText(str: String, x: Int, y: Int, rgb: Int, parse: Boolean = false) {
-        if (parse) Class126.plainFont.method681(RSString.parse(str), x, y, rgb, -1)
-        else Class126.plainFont.method681(RSString.of(str), x, y, rgb, -1)
+        if (parse) FontType.plainFont.method681(RSString.parse(str), x, y, rgb, -1)
+        else FontType.plainFont.method681(RSString.of(str), x, y, rgb, -1)
     }
 
     fun drawText(str: String, x: Int, y: Int, rgb: Int, shadow: Int, parse: Boolean = false){
-        if (parse) Class126.plainFont.method681(RSString.parse(str), x, y, rgb, shadow)
-        else Class126.plainFont.method681(RSString.of(str), x, y, rgb, shadow)
+        if (parse) FontType.plainFont.method681(RSString.parse(str), x, y, rgb, shadow)
+        else FontType.plainFont.method681(RSString.of(str), x, y, rgb, shadow)
     }
 
     fun drawText(str: RSString, x: Int, y: Int, rgb: Int) {
-        Class126.plainFont.method681(str, x, y, rgb, -1)
+        FontType.plainFont.method681(str, x, y, rgb, -1)
     }
 
     fun drawText(str: RSString, x: Int, y: Int, rgb: Int, shadow: Int) {
-        Class126.plainFont.method681(str, x, y, rgb, shadow)
+        FontType.plainFont.method681(str, x, y, rgb, shadow)
     }
 
     fun drawTextSmall(str: String, x: Int, y: Int, rgb: Int, parse: Boolean = false) {
-        if (parse) TextureOperation.smallFont.method681(RSString.parse(str), x, y, rgb, -1)
-        else TextureOperation.smallFont.method681(RSString.of(str), x, y, rgb, -1)
+        if (parse) FontType.smallFont.method681(RSString.parse(str), x, y, rgb, -1)
+        else FontType.smallFont.method681(RSString.of(str), x, y, rgb, -1)
     }
 
     fun drawTextSmall(str: String, x: Int, y: Int, rgb: Int, shadow: Int, parse: Boolean = false){
-        if (parse) TextureOperation.smallFont.method681(RSString.parse(str), x, y, rgb, shadow)
-        else TextureOperation.smallFont.method681(RSString.of(str), x, y, rgb, shadow)
+        if (parse) FontType.smallFont.method681(RSString.parse(str), x, y, rgb, shadow)
+        else FontType.smallFont.method681(RSString.of(str), x, y, rgb, shadow)
     }
 
     fun drawTextSmall(str: RSString, x: Int, y: Int, rgb: Int) {
-        TextureOperation.smallFont.method681(str, x, y, rgb, -1)
+        FontType.smallFont.method681(str, x, y, rgb, -1)
     }
 
     fun setClipping(left: Int, top: Int, right: Int, bottom: Int) {

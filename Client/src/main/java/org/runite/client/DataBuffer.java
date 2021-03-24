@@ -25,7 +25,7 @@ public class DataBuffer extends Linkable {
 
     public final int readUnsignedShort() {
         this.index += 2;
-        return (this.buffer[-2 + this.index] << 8 & 0xff00) + (this.buffer[-1 + this.index] & 255);
+        return (this.buffer[-2 + this.index] << 8 & 0xff00) + (this.buffer[-1 + this.index] & 0xFF);
     }
 
     public final void writeInt(int value) {
@@ -113,7 +113,7 @@ public class DataBuffer extends Linkable {
         return ((this.buffer[this.index - 4] & 0xff) << 24) +
                 ((this.buffer[this.index - 3] & 0xff) << 16) +
                 ((this.buffer[this.index - 2] & 0xff) << 8) +
-                (this.buffer[this.index - 1] & 255);
+                (this.buffer[this.index - 1] & 0xFF);
     }
 
     final byte readSigned128Byte() {
@@ -147,14 +147,14 @@ public class DataBuffer extends Linkable {
     }
 
     final int readUnsigned128Byte() {
-        return 128 - this.buffer[this.index++] & 255;
+        return 128 - this.buffer[this.index++] & 0xFF;
     }
 
     // TODO
     final int getTriByte2() {
         try {
             this.index += 3;
-            return ((this.buffer[this.index + -2] & 255) << 8) + ((this.buffer[-1 + this.index] & 255) << 16) + (this.buffer[-3 + this.index] & 255);
+            return ((this.buffer[this.index + -2] & 0xFF) << 8) + ((this.buffer[-1 + this.index] & 0xFF) << 16) + (this.buffer[-3 + this.index] & 0xFF);
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "wa.BA(" + (byte) -118 + ')');
         }
@@ -176,7 +176,7 @@ public class DataBuffer extends Linkable {
     final int readUnsignedShort128() {
         this.index += 2;
         return (this.buffer[this.index - 1] - 128 & 0xff)
-                + ('\uff00' & this.buffer[this.index - 2] << 8);
+                + (65280 & this.buffer[this.index - 2] << 8);
     }
 
     final void writeIntV2(int value) {
@@ -204,7 +204,7 @@ public class DataBuffer extends Linkable {
                 while (Objects.requireNonNull(this.buffer)[this.index++] != 0) {
                 }
 
-                return Class3_Sub13_Sub3.bufferToString(this.buffer, this.index - (var3 - -1), var3);
+                return TextureOperation33.bufferToString(this.buffer, this.index - (var3 - -1), var3);
             } else {
                 throw new IllegalStateException("Bad version number in gjstr2");
             }
@@ -240,7 +240,7 @@ public class DataBuffer extends Linkable {
     final int readUnsignedShortLE() {
         this.index += 2;
         return (255 & this.buffer[this.index - 2])
-                + ('\uff00' & this.buffer[this.index - 1] << 8);
+                + (65280 & this.buffer[this.index - 1] << 8);
     }
 
     // TODO Some smart
@@ -248,7 +248,7 @@ public class DataBuffer extends Linkable {
         if (0 <= var2 && var2 < 128) {
             this.writeByte(var2);
         } else if (0 <= var2 && var2 < 32768) {
-            this.writeShort('\u8000' + var2);
+            this.writeShort(32768 + var2);
         } else {
             throw new IllegalArgumentException();
         }
@@ -357,11 +357,11 @@ public class DataBuffer extends Linkable {
 
         while (this.buffer[this.index++] != 0) ;
 
-        return Class3_Sub13_Sub3.bufferToString(this.buffer, (this.index - 1) - startIndex, startIndex);
+        return TextureOperation33.bufferToString(this.buffer, (this.index - 1) - startIndex, startIndex);
     }
 
     final int getSmart() {
-        int var2 = this.buffer[this.index] & 255;
+        int var2 = this.buffer[this.index] & 0xFF;
         return 128 <= var2 ? -32768 + this.readUnsignedShort() : this.readUnsignedByte();
     }
 
@@ -373,15 +373,15 @@ public class DataBuffer extends Linkable {
 
     final int readIntV1() {
         this.index += 4;
-        return ((this.buffer[this.index - 2] & 255) << 24) +
-                ((this.buffer[this.index - 1] & 255) << 16) +
-                ('\uff00' & this.buffer[this.index - 4] << 8) +
-                (this.buffer[this.index + -3] & 255);
+        return ((this.buffer[this.index - 2] & 0xFF) << 24) +
+                ((this.buffer[this.index - 1] & 0xFF) << 16) +
+                (65280 & this.buffer[this.index - 4] << 8) +
+                (this.buffer[this.index + -3] & 0xFF);
     }
 
     final int readUnsignedShortLE128() {
         this.index += 2;
-        return (this.buffer[this.index - 1] << 8 & '\uff00') +
+        return (this.buffer[this.index - 1] << 8 & 65280) +
                 (255 & this.buffer[this.index - 2] - 128);
     }
 
@@ -390,7 +390,7 @@ public class DataBuffer extends Linkable {
         return (255 & this.buffer[-4 + this.index]) +
                 (16711680 & this.buffer[this.index - 2] << 16) +
                 ((255 & this.buffer[this.index + -1]) << 24) +
-                ((this.buffer[-3 + this.index] & 255) << 8);
+                ((this.buffer[-3 + this.index] & 0xFF) << 8);
     }
 
     final void putShortA(int var1) {
@@ -412,7 +412,7 @@ public class DataBuffer extends Linkable {
 
     final int readSignedShort() {
         this.index += 2;
-        int value = (this.buffer[-1 + this.index] & 255) + ((255 & this.buffer[this.index + -2]) << 8);
+        int value = (this.buffer[-1 + this.index] & 0xFF) + ((255 & this.buffer[this.index + -2]) << 8);
         if (value > 32767) {
             value -= 65536;
         }
@@ -421,7 +421,7 @@ public class DataBuffer extends Linkable {
 
     final int readSignedShortLE128() {
         this.index += 2;
-        int var2 = ((this.buffer[this.index - 1] & 255) << 8) + (this.buffer[-2 + this.index] - 128 & 255);
+        int var2 = ((this.buffer[this.index - 1] & 0xFF) << 8) + (this.buffer[-2 + this.index] - 128 & 0xFF);
 
         if (32767 < var2) {
             var2 -= 65536;
@@ -441,7 +441,7 @@ public class DataBuffer extends Linkable {
     final int readSignedShortLE() {
         this.index += 2;
 
-        int value = (this.buffer[-2 + this.index] & 255) + ('\uff00' & this.buffer[this.index + -1] << 8);
+        int value = (this.buffer[-2 + this.index] & 0xFF) + (65280 & this.buffer[this.index + -1] << 8);
         if (value > 32767) {
             value -= 65536;
         }
@@ -457,8 +457,8 @@ public class DataBuffer extends Linkable {
     public final int readMedium() {
         this.index += 3;
         return (16711680 & this.buffer[this.index + -3] << 16) +
-                (('\uff00' & this.buffer[-2 + this.index] << 8) +
-                        (this.buffer[this.index + -1] & 255));
+                ((65280 & this.buffer[-2 + this.index] << 8) +
+                        (this.buffer[this.index + -1] & 0xFF));
     }
 
     final void writeShortLE(int value) {
@@ -468,15 +468,15 @@ public class DataBuffer extends Linkable {
 
     // TODO
     final int getSmart(int var1) {
-        int var2 = this.buffer[this.index] & 255;
+        int var2 = this.buffer[this.index] & 0xFF;
         return var2 < 128 ? -64 + this.readUnsignedByte() : this.readUnsignedShort() - '\uc000';
     }
 
     final int readIntV2() {
         this.index += 4;
-        return ((this.buffer[this.index + -3] & 255) << 24) +
+        return ((this.buffer[this.index + -3] & 0xFF) << 24) +
                 (16711680 & this.buffer[this.index + -4] << 16) +
-                ((this.buffer[this.index + -1] & 255) << 8) +
+                ((this.buffer[this.index + -1] & 0xFF) << 8) +
                 (255 & this.buffer[this.index + -2]);
     }
 
@@ -507,7 +507,7 @@ public class DataBuffer extends Linkable {
     }
 
     public final int readUnsignedByte() {
-        return this.buffer[this.index++] & 255;
+        return this.buffer[this.index++] & 0xFF;
     }
 
     public final void writeShort(int value) {

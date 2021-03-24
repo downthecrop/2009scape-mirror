@@ -48,7 +48,7 @@ final class Class52 {
             Class84.anIntArrayArray1160[var9][var12] = 99;
             Class97.anIntArrayArray1373[var9][var12] = 0;
             byte var15 = 0;
-            Class3_Sub13_Sub38.anIntArray3456[var15] = var9;
+            TextureOperation38.anIntArray3456[var15] = var9;
             int var28 = var15 + 1;
             Class45.anIntArray729[var15] = var12;
             int var16 = 0;
@@ -59,7 +59,7 @@ final class Class52 {
             int var20;
             label410:
             while (var28 != var16) {
-                var13 = Class3_Sub13_Sub38.anIntArray3456[var16];
+                var13 = TextureOperation38.anIntArray3456[var16];
                 var14 = Class45.anIntArray729[var16];
                 var16 = 1 + var16 & 4095;
                 if (var13 == var6 && var0 == var14) {
@@ -90,7 +90,7 @@ final class Class52 {
 
                     while (true) {
                         if (-1 + var5 <= var20) {
-                            Class3_Sub13_Sub38.anIntArray3456[var28] = -1 + var13;
+                            TextureOperation38.anIntArray3456[var28] = -1 + var13;
                             Class45.anIntArray729[var28] = var14;
                             Class84.anIntArrayArray1160[-1 + var13][var14] = 2;
                             var28 = 4095 & 1 + var28;
@@ -111,7 +111,7 @@ final class Class52 {
 
                     while (true) {
                         if (var20 >= -1 + var5) {
-                            Class3_Sub13_Sub38.anIntArray3456[var28] = var13 + 1;
+                            TextureOperation38.anIntArray3456[var28] = var13 + 1;
                             Class45.anIntArray729[var28] = var14;
                             Class84.anIntArrayArray1160[var13 + 1][var14] = 8;
                             Class97.anIntArrayArray1373[var13 + 1][var14] = var19;
@@ -132,7 +132,7 @@ final class Class52 {
 
                     while (true) {
                         if (-1 + var5 <= var20) {
-                            Class3_Sub13_Sub38.anIntArray3456[var28] = var13;
+                            TextureOperation38.anIntArray3456[var28] = var13;
                             Class45.anIntArray729[var28] = -1 + var14;
                             Class84.anIntArrayArray1160[var13][-1 + var14] = 1;
                             var28 = 4095 & 1 + var28;
@@ -153,7 +153,7 @@ final class Class52 {
 
                     while (true) {
                         if (var20 >= (var5 - 1)) {
-                            Class3_Sub13_Sub38.anIntArray3456[var28] = var13;
+                            TextureOperation38.anIntArray3456[var28] = var13;
                             Class45.anIntArray729[var28] = var14 + 1;
                             Class84.anIntArrayArray1160[var13][1 + var14] = 4;
                             Class97.anIntArrayArray1373[var13][1 + var14] = var19;
@@ -174,7 +174,7 @@ final class Class52 {
 
                     while (true) {
                         if (var5 - 1 <= var20) {
-                            Class3_Sub13_Sub38.anIntArray3456[var28] = var13 - 1;
+                            TextureOperation38.anIntArray3456[var28] = var13 - 1;
                             Class45.anIntArray729[var28] = -1 + var14;
                             var28 = 4095 & var28 + 1;
                             Class84.anIntArrayArray1160[var13 + -1][-1 + var14] = 3;
@@ -195,7 +195,7 @@ final class Class52 {
 
                     while (true) {
                         if ((-1 + var5) <= var20) {
-                            Class3_Sub13_Sub38.anIntArray3456[var28] = 1 + var13;
+                            TextureOperation38.anIntArray3456[var28] = 1 + var13;
                             Class45.anIntArray729[var28] = -1 + var14;
                             var28 = 1 + var28 & 4095;
                             Class84.anIntArrayArray1160[var13 - -1][-1 + var14] = 9;
@@ -216,7 +216,7 @@ final class Class52 {
 
                     while (true) {
                         if (-1 + var5 <= var20) {
-                            Class3_Sub13_Sub38.anIntArray3456[var28] = var13 - 1;
+                            TextureOperation38.anIntArray3456[var28] = var13 - 1;
                             Class45.anIntArray729[var28] = var14 + 1;
                             var28 = 4095 & var28 - -1;
                             Class84.anIntArrayArray1160[-1 + var13][1 + var14] = 6;
@@ -239,7 +239,7 @@ final class Class52 {
                         }
                     }
 
-                    Class3_Sub13_Sub38.anIntArray3456[var28] = 1 + var13;
+                    TextureOperation38.anIntArray3456[var28] = 1 + var13;
                     Class45.anIntArray729[var28] = var14 - -1;
                     Class84.anIntArrayArray1160[1 + var13][1 + var14] = 12;
                     Class97.anIntArrayArray1373[1 + var13][1 + var14] = var19;
@@ -297,13 +297,13 @@ final class Class52 {
             }
 
             byte var29 = 0;
-            Class3_Sub13_Sub38.anIntArray3456[var29] = var13;
+            TextureOperation38.anIntArray3456[var29] = var13;
             var16 = var29 + 1;
             Class45.anIntArray729[var29] = var14;
 
             for (var19 = var20 = Class84.anIntArrayArray1160[var13][var14]; var9 != var13 || var14 != var12; var19 = Class84.anIntArrayArray1160[var13][var14]) {
                 if (var19 != var20) {
-                    Class3_Sub13_Sub38.anIntArray3456[var16] = var13;
+                    TextureOperation38.anIntArray3456[var16] = var13;
                     var20 = var19;
                     Class45.anIntArray729[var16++] = var14;
                 }
@@ -326,7 +326,7 @@ final class Class52 {
             if (0 >= var16) {
                 return var3 != 1;
             } else {
-                Class3_Sub13_Sub27.method299(93, var16, var3);
+                TextureOperation7.method299(93, var16, var3);
                 return true;
             }
         } catch (RuntimeException var27) {
@@ -351,22 +351,22 @@ final class Class52 {
     final Model method1157(int var1, int var2, int var3, int var4, SequenceDefinition var5, int var6, int var7) {
         try {
 
-            long var9 = (long) var3 | (long) (var7 << 16) | (long) var2 << 32;
+            long var9 = (long) var3 | ((long) var7 << 16) | (long) var2 << 32;
             Model var11 = (Model) Unsorted.aReferenceCache_1131.get(var9);
             if (null == var11) {
                 Model_Sub1[] var12 = new Model_Sub1[3];
                 int var13 = 0;
-                if (Class3_Sub13_Sub13.method231(var3).method948() || Class3_Sub13_Sub13.method231(var7).method948() || Class3_Sub13_Sub13.method231(var2).method948()) {
+                if (TextureOperation20.method231(var3).method948() || TextureOperation20.method231(var7).method948() || TextureOperation20.method231(var2).method948()) {
                     return null;
                 }
 
-                Model_Sub1 var14 = Class3_Sub13_Sub13.method231(var3).method941();
+                Model_Sub1 var14 = TextureOperation20.method231(var3).method941();
                 var12[var13++] = var14;
 
-                var14 = Class3_Sub13_Sub13.method231(var7).method941();
+                var14 = TextureOperation20.method231(var7).method941();
                 var12[var13++] = var14;
 
-                var14 = Class3_Sub13_Sub13.method231(var2).method941();
+                var14 = TextureOperation20.method231(var2).method941();
                 var12[var13++] = var14;
 
                 var14 = new Model_Sub1(var12, var13);
@@ -446,9 +446,9 @@ final class Class52 {
 
                 for (int var7 = 0; var7 < 8; ++var7) {
                     for (int var8 = 0; Class25.anInt497 > var8; ++var8) {
-                        Class24 var9 = Class3_Sub13_Sub13.method231(var8);
+                        Class24 var9 = TextureOperation20.method231(var8);
                         if (!var9.aBoolean476 && ((var3 ? CS2Script.anIntArray3228[var7] : Class3_Sub26.anIntArray2559[var7]) == var9.anInt466)) {
-                            look[Class163.anIntArray2043[var7]] = Class3_Sub13_Sub29.bitwiseOr(Integer.MIN_VALUE, var8);
+                            look[Class163.anIntArray2043[var7]] = TextureOperation3.bitwiseOr(Integer.MIN_VALUE, var8);
                             break;
                         }
                     }
@@ -488,8 +488,8 @@ final class Class52 {
         try {
             int var4 = Class163.anIntArray2043[var1];
             if (this.lookInfo[var4] != 0) {
-                Class3_Sub13_Sub13.method231(var2);
-                this.lookInfo[var4] = Class3_Sub13_Sub29.bitwiseOr(var2, Integer.MIN_VALUE);
+                TextureOperation20.method231(var2);
+                this.lookInfo[var4] = TextureOperation3.bitwiseOr(var2, Integer.MIN_VALUE);
                 this.method1158();
             }
         } catch (RuntimeException var5) {
@@ -512,7 +512,7 @@ final class Class52 {
                             var13 ^= -4294967296L;
                             var15[5] = 0;
                         } else {
-                            var15[5] = Class3_Sub13_Sub29.bitwiseOr(1073741824, var4.leftHandItem);
+                            var15[5] = TextureOperation3.bitwiseOr(1073741824, var4.leftHandItem);
                             var13 ^= (long) var15[5] << 32;
                         }
                     }
@@ -522,7 +522,7 @@ final class Class52 {
                             var15[3] = 0;
                             var13 ^= 4294967295L;
                         } else {
-                            var15[3] = Class3_Sub13_Sub29.bitwiseOr(1073741824, var4.rightHandItem);
+                            var15[3] = TextureOperation3.bitwiseOr(1073741824, var4.rightHandItem);
                             var13 ^= var15[3];
                         }
                     }
@@ -551,7 +551,7 @@ final class Class52 {
                             if (!ItemDefinition.getItemDefinition(1073741823 & var19).method1108(this.aBoolean864)) {
                                 var17 = true;
                             }
-                        } else if ((var19 < 0) && !Class3_Sub13_Sub13.method231(1073741823 & var19).method942()) {
+                        } else if ((var19 < 0) && !TextureOperation20.method231(1073741823 & var19).method942()) {
                             var17 = true;
                         }
                     }
@@ -575,7 +575,7 @@ final class Class52 {
                             Model_Sub1 var21;
                             if ((var20 & 1073741824) == 0) {
                                 if (var20 < 0) {
-                                    var21 = Class3_Sub13_Sub13.method231(var20 & 1073741823).method947();
+                                    var21 = TextureOperation20.method231(var20 & 1073741823).method947();
                                     if (null != var21) {
                                         var39[var19] = var21;
                                     }
@@ -611,7 +611,7 @@ final class Class52 {
                                         if (var24 == 0 && var25 == 0 && frame == 0) {
                                             var27[12] = -var45;
                                             var27[13] = -var22;
-                                            var27[0] = var27[4] = var27[8] = '\u8000';
+                                            var27[0] = var27[4] = var27[8] = 32768;
                                             var27[14] = -var23;
                                         } else {
                                             var28 = Class51.anIntArray851[var24] >> 1;
@@ -691,7 +691,7 @@ final class Class52 {
                             var25 = var1[var22].anInt1891;
                             frame = var41.frames[var24];
                             Class166.aClass3_Sub28_Sub5Array2070[var22] = Class3_Sub9.method133(frame >>> 16);
-                            frame &= '\uffff';
+                            frame &= 65535;
                             anIntArray1833[var22] = frame;
                             if (Class166.aClass3_Sub28_Sub5Array2070[var22] != null) {
                                 var42 |= Class166.aClass3_Sub28_Sub5Array2070[var22].method561(frame, (byte) 119);
@@ -704,7 +704,7 @@ final class Class52 {
                                 anIntArray3139[var22] = var1[var22].anInt1897;
                                 var47 = var41.frames[var25];
                                 Class75.aClass3_Sub28_Sub5Array1103[var22] = Class3_Sub9.method133(var47 >>> 16);
-                                var47 &= '\uffff';
+                                var47 &= 65535;
                                 anIntArray1679[var22] = var47;
                                 if (null != Class75.aClass3_Sub28_Sub5Array1103[var22]) {
                                     var42 |= Class75.aClass3_Sub28_Sub5Array1103[var22].method561(var47, (byte) 117);
@@ -732,7 +732,7 @@ final class Class52 {
                         var22 = var4.frames[var10];
                         var47 = var22 >>> 16;
                         var46 = Class3_Sub9.method133(var47);
-                        var22 &= '\uffff';
+                        var22 &= 65535;
                         if (var46 != null) {
                             var42 |= var46.method561(var22, (byte) 124);
                             var38 |= var46.method559(var22);
@@ -742,7 +742,7 @@ final class Class52 {
                         if ((var4.aBoolean1846 || ClientCommands.tweeningEnabled) && var2 != -1 && var4.frames.length > var2) {
                             var23 = var4.frames[var2];
                             var28 = var23 >>> 16;
-                            var23 &= '\uffff';
+                            var23 &= 65535;
                             var24 = var4.duration[var10];
                             if (var28 == var47) {
                                 var48 = var46;
@@ -765,7 +765,7 @@ final class Class52 {
                     if (var3 != null) {
                         var47 = var3.frames[var11];
                         var32 = var47 >>> 16;
-                        var47 &= '\uffff';
+                        var47 &= 65535;
                         var49 = Class3_Sub9.method133(var32);
                         if (null != var49) {
                             var42 |= var49.method561(var47, (byte) 123);
@@ -777,7 +777,7 @@ final class Class52 {
                             var29 = var3.duration[var11];
                             var28 = var3.frames[var6];
                             var33 = var28 >>> 16;
-                            var28 &= '\uffff';
+                            var28 &= 65535;
                             if (var33 == var32) {
                                 var50 = var49;
                             } else {
@@ -840,7 +840,7 @@ final class Class52 {
                     for (int var8 = 0; var8 < 12; ++var8) {
                         var9 = this.lookInfo[var8];
                         if (0 == (1073741824 & var9)) {
-                            if (var9 < 0 && Class3_Sub13_Sub13.method231(var9 & 1073741823).method948()) {
+                            if (var9 < 0 && TextureOperation20.method231(var9 & 1073741823).method948()) {
                                 var7 = true;
                             }
                         } else if (!ItemDefinition.getItemDefinition(1073741823 & var9).method1102(this.aBoolean864)) {
@@ -861,7 +861,7 @@ final class Class52 {
                         Model_Sub1 var12;
                         if ((1073741824 & var11) == 0) {
                             if (0 != (Integer.MIN_VALUE & var11)) {
-                                var12 = Class3_Sub13_Sub13.method231(1073741823 & var11).method941();
+                                var12 = TextureOperation20.method231(1073741823 & var11).method941();
                                 var14[var9++] = var12;
                             }
                         } else {

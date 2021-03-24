@@ -19,7 +19,7 @@ class Class38 {
                     var2 = Class56.localPlayerIndexes[var1];
                 }
 
-                Player var3 = Class3_Sub13_Sub22.players[var2];
+                Player var3 = TextureOperation0.players[var2];
                 if (var3 != null) {
                     Unsorted.method68(var3.getSize(), var3);
                 }
@@ -32,8 +32,8 @@ class Class38 {
 
     static void method1029() {
         try {
-            Class3_Sub13_Sub1.outgoingBuffer.putOpcode(177);
-            Class3_Sub13_Sub1.outgoingBuffer.writeShort(Class113.interfacePacketCounter);
+            TextureOperation12.outgoingBuffer.putOpcode(177);
+            TextureOperation12.outgoingBuffer.writeShort(Class113.interfacePacketCounter);
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "fk.D(" + 0 + ')');
         }

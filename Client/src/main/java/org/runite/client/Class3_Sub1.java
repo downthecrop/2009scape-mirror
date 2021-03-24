@@ -21,7 +21,7 @@ final class Class3_Sub1 extends Linkable {
     static void method90(int var0) {
         try {
             if (HDToolKit.highDetail) {
-                if (!Class3_Sub13_Sub34.aBoolean3416) {
+                if (!TextureOperation25.aBoolean3416) {
                     Class3_Sub2[][][] var1 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638;
                     for (Class3_Sub2[][] var3 : var1) {
                         for (Class3_Sub2[] class3_sub2s : var3) {
@@ -92,7 +92,7 @@ final class Class3_Sub1 extends Linkable {
                         }
                     }
 
-                    Class3_Sub13_Sub34.aBoolean3416 = true;
+                    TextureOperation25.aBoolean3416 = true;
                 }
             }
         } catch (RuntimeException var9) {

@@ -18,7 +18,7 @@ public final class Class97 {
 
         for (int var1 = 0; var1 < 256; ++var1) {
             for (int var2 = 0; var2 <= var1; ++var2) {
-                aByteArray1364[var0++] = (byte) ((int) (255.0D / Math.sqrt((float) ('\uffff' + var2 * var2 + var1 * var1) / 65535.0F)));
+                aByteArray1364[var0++] = (byte) ((int) (255.0D / Math.sqrt((float) (65535 + var2 * var2 + var1 * var1) / 65535.0F)));
             }
         }
 

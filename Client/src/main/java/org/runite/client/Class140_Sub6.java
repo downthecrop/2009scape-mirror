@@ -105,7 +105,7 @@ final class Class140_Sub6 extends GameObject {
             this.aDouble2913 += this.aDouble2908 * (double)var2;
          }
 
-         this.anInt2924 = 1024 + (int)(325.949D * Math.atan2(this.aDouble2895, this.aDouble2918)) & 2047;
+         this.anInt2924 = 1024 + (int)(325.949D * Math.atan2(this.aDouble2895, this.aDouble2918)) & 0x7FF;
          this.anInt2917 = 2047 & (int)(325.949D * Math.atan2(this.aDouble2913, this.aDouble2921));
 
           if(this.aClass142_2923 != null) {

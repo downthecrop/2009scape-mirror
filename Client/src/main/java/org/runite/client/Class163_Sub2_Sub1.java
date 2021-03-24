@@ -43,9 +43,9 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
          for(Class96[] var7 = ClientErrorException.aClass96Array2114; var8 < var7.length; ++var8) {
             Class96 var9 = var7[var8];
             if(null != var9 && var9.anInt1360 == 2) {
-               Unsorted.method1724(var0 >> 1, var5, (-Class82.anInt1152 + var9.anInt1347 << 7) - -var9.anInt1350, var9.anInt1353 * 2, var2 >> 1, var9.anInt1346 + (var9.anInt1356 + -Class131.anInt1716 << 7), (byte)-114, var4);
+               Unsorted.method1724(var0 >> 1, var5, (-Texture.anInt1152 + var9.anInt1347 << 7) - -var9.anInt1350, var9.anInt1353 * 2, var2 >> 1, var9.anInt1346 + (var9.anInt1356 + -Class131.anInt1716 << 7), (byte)-114, var4);
                if(-1 < Class32.anInt590 && Class44.anInt719 % 20 < 10) {
-                  Class166.aAbstractSpriteArray2072[var9.anInt1351].drawAt(-12 + var1 + Class32.anInt590, -28 + var6 - -Class82.anInt2208);
+                  Class166.aAbstractSpriteArray2072[var9.anInt1351].drawAt(-12 + var1 + Class32.anInt590, -28 + var6 - -Texture.anInt2208);
                }
             }
          }
@@ -94,7 +94,7 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
 
                         for(int var14 = 0; Class3_Sub24_Sub3.anIntArray3494.length > var14; ++var14) {
                            if(var13 == Class3_Sub24_Sub3.anIntArray3494[var14] && var4[var14] != null) {
-                              Class3_Sub13_Sub30.parseObjectMapping(AtmosphereParser.aClass91Array1182, var5, var4[var14], var9, var10, 8 * var6, var7 * 8, var0, (var11 & 7) * 8, 8 * (7 & var12));
+                              TextureOperation13.parseObjectMapping(AtmosphereParser.aClass91Array1182, var5, var4[var14], var9, var10, 8 * var6, var7 * 8, var0, (var11 & 7) * 8, 8 * (7 & var12));
                               break;
                            }
                         }

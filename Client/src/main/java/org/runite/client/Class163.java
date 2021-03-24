@@ -4,11 +4,11 @@ import org.rs09.client.data.NodeCache;
 
 import java.util.Objects;
 
-class Class163 {
+public class Class163 {
 
     static NodeCache aClass47_2041 = new NodeCache(64);
     static int[] anIntArray2043 = new int[]{8, 11, 4, 6, 9, 7, 10, 0};
-    static int localNPCCount = 0;
+    public static int localNPCCount = 0;
 
 
     static void method2209(byte var0, int var1, int var2) {
@@ -27,7 +27,7 @@ class Class163 {
             }
 
             var7 <<= var5;
-            Class3_Sub13_Sub23.method281(var1 << var5 & var7 | ~var7 & Class57.varpArray[var4], var4);
+            TextureOperation39.method281(var1 << var5 & var7 | ~var7 & Class57.varpArray[var4], var4);
         } catch (RuntimeException var8) {
             throw ClientErrorException.clientError(var8, "wd.K(" + var0 + ',' + var1 + ',' + var2 + ')');
         }

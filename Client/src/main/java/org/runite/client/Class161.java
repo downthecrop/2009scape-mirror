@@ -1,10 +1,10 @@
 package org.runite.client;
 
-final class Class161 {
+public final class Class161 {
 
     static int[] anIntArray2026;
     static int anInt2027 = -1;
-    static int anInt2028 = 0;
+    public static int anInt2028 = 0;
     static Class33 aClass33_2034;
     static RSString aClass94_2035 = null;
 
@@ -46,9 +46,9 @@ final class Class161 {
 
             int var36 = (-1 + var6) * var27;
             int[] var39 = Class38.anIntArrayArray663[var2];
-            Class3_Sub13_Sub23_Sub1.method282(var39, -var4 + var1, -87, -var11 + var1, var3);
-            Class3_Sub13_Sub23_Sub1.method282(var39, -var11 + var1, -66, var1 - -var11, var0);
-            Class3_Sub13_Sub23_Sub1.method282(var39, var1 - -var11, -68, var4 + var1, var3);
+            TextureOperation18.method282(var39, -var4 + var1, -87, -var11 + var1, var3);
+            TextureOperation18.method282(var39, -var11 + var1, -66, var1 - -var11, var0);
+            TextureOperation18.method282(var39, var1 - -var11, -68, var4 + var1, var3);
 
             while (var9 > 0) {
                 if (var23 < 0) {
@@ -107,15 +107,15 @@ final class Class161 {
                 if (var40) {
                     int var45 = var1 + var10;
                     int var46 = -var10 + var1;
-                    Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var41], var44, -93, var46, var3);
-                    Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var41], var46, 121, var45, var0);
-                    Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var41], var45, -47, var43, var3);
-                    Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var42], var44, 124, var46, var3);
-                    Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var42], var46, -73, var45, var0);
-                    Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var42], var45, 111, var43, var3);
+                    TextureOperation18.method282(Class38.anIntArrayArray663[var41], var44, -93, var46, var3);
+                    TextureOperation18.method282(Class38.anIntArrayArray663[var41], var46, 121, var45, var0);
+                    TextureOperation18.method282(Class38.anIntArrayArray663[var41], var45, -47, var43, var3);
+                    TextureOperation18.method282(Class38.anIntArrayArray663[var42], var44, 124, var46, var3);
+                    TextureOperation18.method282(Class38.anIntArrayArray663[var42], var46, -73, var45, var0);
+                    TextureOperation18.method282(Class38.anIntArrayArray663[var42], var45, 111, var43, var3);
                 } else {
-                    Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var41], var44, 96, var43, var3);
-                    Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var42], var44, 124, var43, var3);
+                    TextureOperation18.method282(Class38.anIntArrayArray663[var41], var44, 96, var43, var3);
+                    TextureOperation18.method282(Class38.anIntArrayArray663[var42], var44, 124, var43, var3);
                 }
             }
 

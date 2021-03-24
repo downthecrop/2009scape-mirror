@@ -96,7 +96,7 @@ public final class Class43 {
             }
 
             for (int var4 = 0; var4 < var1; ++var4) {
-                var3[var4] = Class3_Sub13_Sub38.spritePalette[Unsorted.bitwiseAnd(var2[var4], 255)];
+                var3[var4] = TextureOperation38.spritePalette[Unsorted.bitwiseAnd(var2[var4], 255)];
             }
 
             Object var6;
@@ -144,7 +144,7 @@ public final class Class43 {
     final void method1063(boolean var1, int var2) {
         try {
 
-            int var5 = this.anInt714 + var2 * this.anInt709 / 50 & 2047;
+            int var5 = this.anInt714 + var2 * this.anInt709 / 50 & 0x7FF;
             int var6 = this.anInt694;
             int var4;
             if (var6 == 1) {

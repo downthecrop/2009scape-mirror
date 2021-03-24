@@ -2,18 +2,18 @@ package org.runite.client;
 
 import org.rs09.client.config.GameConfig;
 
-final class Class131 {
+public final class Class131 {
 
-    static int anInt1716;
+    public static int anInt1716;
     static RSString password = TextCore.emptyJagexString;
     static RSString username = TextCore.emptyJagexString;
     static int anInt1719 = -1;
     static CacheIndex aClass153_1723;
-    short[] aShortArray1718;
-    int anInt1720;
-    RSString[] aClass94Array1721;
-    int[] anIntArray1725;
-    short[] aShortArray1727;
+    public short[] aShortArray1718;
+    public int anInt1720;
+    public RSString[] aClass94Array1721;
+    public int[] anIntArray1725;
+    public short[] aShortArray1727;
     byte[] aByteArray1730;
 
     Class131(int var1) {
@@ -36,16 +36,16 @@ final class Class131 {
                     int index = GraphicDefinition.incomingBuffer.getBits(11);
                     if (index != 2047) {
                         boolean var2 = false;
-                        if (null == Class3_Sub13_Sub22.players[index]) {
-                            Class3_Sub13_Sub22.players[index] = new Player();
+                        if (null == TextureOperation0.players[index]) {
+                            TextureOperation0.players[index] = new Player();
                             var2 = true;
                             if (null != Class65.aClass3_Sub30Array986[index]) {
-                                Class3_Sub13_Sub22.players[index].parseAppearance(-54, Class65.aClass3_Sub30Array986[index]);
+                                TextureOperation0.players[index].parseAppearance(-54, Class65.aClass3_Sub30Array986[index]);
                             }
                         }
 
                         Class56.localPlayerIndexes[Class159.localPlayerCount++] = index;
-                        Player var3 = Class3_Sub13_Sub22.players[index];
+                        Player var3 = TextureOperation0.players[index];
                         var3.anInt2838 = Class44.anInt719;
                         int var4 = GraphicDefinition.incomingBuffer.getBits(1);
                         if (var4 == 1) {
@@ -126,11 +126,11 @@ final class Class131 {
                 var4.writeInt((int) (Math.random() * 9.9999999E7D));
                 var4.writeString(password);
                 var4.writeInt((int) (Math.random() * 9.9999999E7D));
-                var4.rsaEncrypt(Class3_Sub13_Sub37.EXPONENT, Class3_Sub13_Sub14.MODULUS);
-                Class3_Sub13_Sub1.outgoingBuffer.index = 0;
-                Class3_Sub13_Sub1.outgoingBuffer.writeByte(210);
-                Class3_Sub13_Sub1.outgoingBuffer.writeByte(var4.index);
-                Class3_Sub13_Sub1.outgoingBuffer.putBytes(var4.buffer, var4.index);
+                var4.rsaEncrypt(TextureOperation10.EXPONENT, TextureOperation31.MODULUS);
+                TextureOperation12.outgoingBuffer.index = 0;
+                TextureOperation12.outgoingBuffer.writeByte(210);
+                TextureOperation12.outgoingBuffer.writeByte(var4.index);
+                TextureOperation12.outgoingBuffer.putBytes(var4.buffer, var4.index);
             } else {
                 Class24.method951();
             }
@@ -148,7 +148,7 @@ final class Class131 {
         }
     }
 
-    final boolean method1789(int var1, int var2) {
+    public final boolean method1789(int var1, int var2) {
         try {
             if (var2 != 530) {
                 this.method1794(-111, 26);
@@ -160,7 +160,7 @@ final class Class131 {
         }
     }
 
-    final int method1791(int var1, int var2) {
+    public final int method1791(int var1, int var2) {
         try {
             return var2 != 8 ? 35 : this.aByteArray1730[var1] & 3;
         } catch (RuntimeException var4) {

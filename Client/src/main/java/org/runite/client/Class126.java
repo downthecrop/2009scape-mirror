@@ -4,10 +4,9 @@ import org.rs09.client.data.Queue;
 
 public final class Class126 {
 
-    public static Font plainFont;
     static int anInt1665;
     static Queue aClass13_1666 = new Queue();
-    static int anInt1676 = 0;
+    public static int anInt1676 = 0;
     int anInt1663;
     int anInt1664;
     int anInt1667;

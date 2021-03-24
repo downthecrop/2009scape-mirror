@@ -282,7 +282,7 @@ final class Class3_Sub27 extends Linkable {
          while(true) {
             int var63 = var1.method741();
             var51.method771(var63);
-            int var64 = var1.buffer[var29++] & 255;
+            int var64 = var1.buffer[var29++] & 0xFF;
             boolean var65 = var64 != var62;
             var62 = var64 & 15;
             if(var64 == 7) {

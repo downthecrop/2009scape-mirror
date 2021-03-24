@@ -31,14 +31,14 @@ public final class Class23 {
             var1.writeByte(Class25.aBoolean488 ? 1 : 0);
             var1.writeByte(!RSInterface.aBoolean236 ? 0 : 1);
             var1.writeByte(!WorldListEntry.aBoolean2623 ? 0 : 1);
-            var1.writeByte(Class3_Sub13_Sub22.aBoolean3275 ? 1 : 0);
+            var1.writeByte(TextureOperation0.aBoolean3275 ? 1 : 0);
             var1.writeByte(!Class140_Sub6.aBoolean2910 ? 0 : 1);
             var1.writeByte(Unsorted.anInt1137);
             var1.writeByte(!Class106.aBoolean1441 ? 0 : 1);
             var1.writeByte(Class128.aBoolean1685 ? 1 : 0);
             var1.writeByte(Class38.aBoolean661 ? 1 : 0);
             var1.writeByte(Class3_Sub28_Sub9.anInt3622);
-            var1.writeByte(!Class3_Sub13_Sub15.aBoolean3184 ? 0 : 1);
+            var1.writeByte(!TextureOperation17.aBoolean3184 ? 0 : 1);
             var1.writeByte(CS2Script.anInt2453);
             var1.writeByte(Unsorted.anInt120);
             var1.writeByte(Sprites.anInt340);

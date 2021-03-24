@@ -16,7 +16,7 @@ public final class RSInterface {
     Object[] anObjectArray165;
     int defY;
     boolean aBoolean167;
-    int width;
+    public int width;
     short aShort169 = 3000;
     Object[] anObjectArray170;
     RSString[] aClass94Array171;
@@ -41,7 +41,7 @@ public final class RSInterface {
     int parentId;
     int anInt191 = -1;
     int anInt192;
-    int height = 0;
+    public int height = 0;
     int anInt194 = 0;
     boolean aBoolean195;
     private int secondModelId;
@@ -55,7 +55,7 @@ public final class RSInterface {
     int anInt204;
     int anInt205 = 0;
     Object[] anObjectArray206;
-    int[] anIntArray207;
+    public int[] anIntArray207;
     int anInt208 = 0;
     int anInt210 = 0;
     int[] anIntArray211;
@@ -138,7 +138,7 @@ public final class RSInterface {
     int anInt288;
     RSString aClass94_289;
     int anInt290;
-    int[] anIntArray291;
+    public int[] anIntArray291;
     int anInt292;
     short aShort293;
     private int secondModelType;
@@ -442,12 +442,12 @@ public final class RSInterface {
             this.modelType = 1;
             this.itemId = buffer.readUnsignedShort();
             this.secondModelType = 1;
-            if (this.itemId == '\uffff') {
+            if (this.itemId == 65535) {
                 this.itemId = -1;
             }
 
             this.secondModelId = buffer.readUnsignedShort();
-            if (this.secondModelId == '\uffff') {
+            if (this.secondModelId == 65535) {
                 this.secondModelId = -1;
             }
 
@@ -457,7 +457,7 @@ public final class RSInterface {
             }
 
             this.secondAnimationId = buffer.readUnsignedShort();
-            if ('\uffff' == this.secondAnimationId) {
+            if (65535 == this.secondAnimationId) {
                 this.secondAnimationId = -1;
             }
 
@@ -701,7 +701,7 @@ public final class RSInterface {
                         return null;
                     } else {
                         int var15 = this.itemId >>> 16;
-                        int var11 = this.itemId & '\uffff';
+                        int var11 = this.itemId & 65535;
                         int var12 = this.anInt265;
                         Model var13 = var7.method1157(var1, var12, var15, var5, var2, var3, var11);
                         if (var13 == null) {
@@ -728,7 +728,7 @@ public final class RSInterface {
         }
     }
 
-    final AbstractSprite method866(boolean var2) {
+    public final AbstractSprite method866(boolean var2) {
         try {
             aBoolean6 = false;
             int archiveId;
@@ -861,7 +861,7 @@ public final class RSInterface {
             this.anInt280 = buffer.readUnsignedShort();
             this.anInt164 = buffer.readUnsignedShort();
             this.animationId = buffer.readUnsignedShort();
-            if ('\uffff' == this.animationId) {
+            if (65535 == this.animationId) {
                 this.animationId = -1;
             }
 
@@ -968,12 +968,12 @@ public final class RSInterface {
                 var8 = -1;
             }
 
-            if ('\uffff' == this.anInt266) {
+            if (65535 == this.anInt266) {
                 this.anInt266 = -1;
             }
 
             this.anInt238 = buffer.readUnsignedShort();
-            if (this.anInt238 == '\uffff') {
+            if (this.anInt238 == 65535) {
                 this.anInt238 = -1;
             }
         }

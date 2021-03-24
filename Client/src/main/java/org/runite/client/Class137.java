@@ -23,7 +23,7 @@ final class Class137 {
 
             Class158_Sub1.aBoolean2981 = false;
             int var8;
-            if (Class3_Sub13_Sub5.anInt3069 != 0) {
+            if (TextureOperation21.anInt3069 != 0) {
                 if (var4 >= var5 && var4 < var5 + 16 && var0 >= var6 && var6 - -16 > var0) {
                     var2.anInt208 -= 4;
                     Class20.method909(var2);

@@ -12,7 +12,7 @@ public final class Class95 {
         try {
 
             if (var1 == var0 && var2 == var9 && var8 == var7 && var5 == var6) {
-                Class3_Sub13_Sub34.method330(var4, 3 + -111, var5, var0, var9, var7);
+                TextureOperation25.method330(var4, 3 + -111, var5, var0, var9, var7);
             } else {
                 int var10 = var0;
                 int var13 = 3 * var9;
@@ -40,7 +40,7 @@ public final class Class95 {
                     int var33 = var0 - -(var29 + (var27 - -var31) >> 12);
                     int var32 = var24 * var23;
                     int var34 = var9 - -(var32 + var28 - -var30 >> 12);
-                    Class3_Sub13_Sub34.method330(var4, -88, var34, var10, var11, var33);
+                    TextureOperation25.method330(var4, -88, var34, var10, var11, var33);
                     var10 = var33;
                     var11 = var34;
                 }

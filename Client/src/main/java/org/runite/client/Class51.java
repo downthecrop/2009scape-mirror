@@ -2,21 +2,21 @@ package org.runite.client;
 
 import org.rs09.client.rendering.Toolkit;
 
-final class Class51 {
+public final class Class51 {
 
     private static final int[] anIntArray839 = new int[512];
     static int[] anIntArray834 = new int[65536];
     static int anInt835;
     static boolean aBoolean837 = false;
     static Interface2 anInterface2_838;
-    static int[] anIntArray840 = new int[2048];
+    public static int[] anIntArray840 = new int[2048];
     static int[] anIntArray841 = new int[2048];
     static boolean aBoolean843 = true;
     static int anInt846;
     static int anInt847;
     static boolean aBoolean849 = false;
     static int anInt850 = 0;
-    static int[] anIntArray851 = new int[2048];
+    public static int[] anIntArray851 = new int[2048];
     private static int[] anIntArray836 = new int[1024];
     private static boolean aBoolean842 = false;
     private static int anInt844;
@@ -26,7 +26,7 @@ final class Class51 {
     static {
         int var0;
         for (var0 = 1; var0 < 512; ++var0) {
-            anIntArray839[var0] = '\u8000' / var0;
+            anIntArray839[var0] = 32768 / var0;
         }
 
         for (var0 = 1; var0 < 2048; ++var0) {
@@ -48,7 +48,7 @@ final class Class51 {
         int[] var19 = anInterface2_838.method13(var18, true, aFloat848);
         int var20;
         if (var19 == null) {
-            var20 = anInterface2_838.method15(var18, '\uffff');
+            var20 = anInterface2_838.method15(var18, 65535);
             method1154(var0, var1, var2, var3, var4, var5, method1136(var20, var6), method1136(var20, var7), method1136(var20, var8));
         } else {
             aBoolean845 = anInterface2_838.method14((byte) -106, var18);
@@ -1295,7 +1295,7 @@ final class Class51 {
                 }
             }
         } else {
-            var20 = anInterface2_838.method15(var18, '\uffff');
+            var20 = anInterface2_838.method15(var18, 65535);
             aBoolean837 = true;
             method1154(var0, var1, var2, var3, var4, var5, method1136(var20, var6), method1136(var20, var7), method1136(var20, var8));
         }
@@ -1378,28 +1378,28 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var18 = var20;
                             var19 = var21;
                             var9 += var12;
@@ -1426,7 +1426,7 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             --var17;
                         } while (var17 > 0);
@@ -1435,49 +1435,49 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
@@ -1507,7 +1507,7 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
@@ -1551,28 +1551,28 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var18 = var20;
                             var19 = var21;
                             var9 += var12;
@@ -1599,7 +1599,7 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             --var17;
                         } while (var17 > 0);
@@ -1608,49 +1608,49 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
@@ -1680,7 +1680,7 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
@@ -1754,28 +1754,28 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var7 += var8;
                             var15 = var7 >> 8;
@@ -1787,7 +1787,7 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             var3 = var1[(var2 & 4032) + (var2 >>> 26)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             --var17;
                         } while (var17 > 0);
@@ -1796,49 +1796,49 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
@@ -1853,7 +1853,7 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             if ((var3 = var1[(var2 & 4032) + (var2 >>> 26)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
@@ -1897,28 +1897,28 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             var7 += var8;
                             var15 = var7 >> 8;
@@ -1930,7 +1930,7 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             var3 = var1[(var2 & 16256) + (var2 >>> 25)];
-                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                            var0[var4++] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             var2 += var16;
                             --var17;
                         } while (var17 > 0);
@@ -1939,49 +1939,49 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
                             var2 += var16;
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
@@ -1996,7 +1996,7 @@ final class Class51 {
                     if (var17 > 0) {
                         do {
                             if ((var3 = var1[(var2 & 16256) + (var2 >>> 25)]) != 0) {
-                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & '\uff00') * var15 & 16711680) >> 8;
+                                var0[var4] = ((var3 & 16711935) * var15 & -16711936) + ((var3 & 65280) * var15 & 16711680) >> 8;
                             }
 
                             ++var4;
@@ -2528,15 +2528,15 @@ final class Class51 {
                         do {
                             var2 = anIntArray834[var6 >> 8];
                             var6 += var7;
-                            var2 = ((var2 & 16711935) * var9 >> 8 & 16711935) + ((var2 & '\uff00') * var9 >> 8 & '\uff00');
+                            var2 = ((var2 & 16711935) * var9 >> 8 & 16711935) + ((var2 & 65280) * var9 >> 8 & 65280);
                             var10 = var0[var1];
-                            var0[var1++] = var2 + ((var10 & 16711935) * var8 >> 8 & 16711935) + ((var10 & '\uff00') * var8 >> 8 & '\uff00');
+                            var0[var1++] = var2 + ((var10 & 16711935) * var8 >> 8 & 16711935) + ((var10 & 65280) * var8 >> 8 & 65280);
                             var10 = var0[var1];
-                            var0[var1++] = var2 + ((var10 & 16711935) * var8 >> 8 & 16711935) + ((var10 & '\uff00') * var8 >> 8 & '\uff00');
+                            var0[var1++] = var2 + ((var10 & 16711935) * var8 >> 8 & 16711935) + ((var10 & 65280) * var8 >> 8 & 65280);
                             var10 = var0[var1];
-                            var0[var1++] = var2 + ((var10 & 16711935) * var8 >> 8 & 16711935) + ((var10 & '\uff00') * var8 >> 8 & '\uff00');
+                            var0[var1++] = var2 + ((var10 & 16711935) * var8 >> 8 & 16711935) + ((var10 & 65280) * var8 >> 8 & 65280);
                             var10 = var0[var1];
-                            var0[var1++] = var2 + ((var10 & 16711935) * var8 >> 8 & 16711935) + ((var10 & '\uff00') * var8 >> 8 & '\uff00');
+                            var0[var1++] = var2 + ((var10 & 16711935) * var8 >> 8 & 16711935) + ((var10 & 65280) * var8 >> 8 & 65280);
                             --var3;
                         } while (var3 > 0);
                     }
@@ -2544,11 +2544,11 @@ final class Class51 {
                     var3 = var5 - var4 & 3;
                     if (var3 > 0) {
                         var2 = anIntArray834[var6 >> 8];
-                        var2 = ((var2 & 16711935) * var9 >> 8 & 16711935) + ((var2 & '\uff00') * var9 >> 8 & '\uff00');
+                        var2 = ((var2 & 16711935) * var9 >> 8 & 16711935) + ((var2 & 65280) * var9 >> 8 & 65280);
 
                         do {
                             var10 = var0[var1];
-                            var0[var1++] = var2 + ((var10 & 16711935) * var8 >> 8 & 16711935) + ((var10 & '\uff00') * var8 >> 8 & '\uff00');
+                            var0[var1++] = var2 + ((var10 & 16711935) * var8 >> 8 & 16711935) + ((var10 & 65280) * var8 >> 8 & 65280);
                             --var3;
                         } while (var3 > 0);
                     }
@@ -2569,9 +2569,9 @@ final class Class51 {
                     do {
                         var2 = anIntArray834[var6 >> 8];
                         var6 += var7;
-                        var2 = ((var2 & 16711935) * var9 >> 8 & 16711935) + ((var2 & '\uff00') * var9 >> 8 & '\uff00');
+                        var2 = ((var2 & 16711935) * var9 >> 8 & 16711935) + ((var2 & 65280) * var9 >> 8 & 65280);
                         var10 = var0[var1];
-                        var0[var1++] = var2 + ((var10 & 16711935) * var8 >> 8 & 16711935) + ((var10 & '\uff00') * var8 >> 8 & '\uff00');
+                        var0[var1++] = var2 + ((var10 & 16711935) * var8 >> 8 & 16711935) + ((var10 & 65280) * var8 >> 8 & 65280);
                         --var3;
                     } while (var3 > 0);
                 }
@@ -3068,7 +3068,7 @@ final class Class51 {
             } else {
                 int var6 = anInt850;
                 int var7 = 256 - anInt850;
-                var2 = ((var2 & 16711935) * var7 >> 8 & 16711935) + ((var2 & '\uff00') * var7 >> 8 & '\uff00');
+                var2 = ((var2 & 16711935) * var7 >> 8 & 16711935) + ((var2 & 65280) * var7 >> 8 & 65280);
 
                 while (true) {
                     --var3;
@@ -3083,18 +3083,18 @@ final class Class51 {
                             }
 
                             var8 = var0[var1];
-                            var0[var1++] = var2 + ((var8 & 16711935) * var6 >> 8 & 16711935) + ((var8 & '\uff00') * var6 >> 8 & '\uff00');
+                            var0[var1++] = var2 + ((var8 & 16711935) * var6 >> 8 & 16711935) + ((var8 & 65280) * var6 >> 8 & 65280);
                         }
                     }
 
                     var8 = var0[var1];
-                    var0[var1++] = var2 + ((var8 & 16711935) * var6 >> 8 & 16711935) + ((var8 & '\uff00') * var6 >> 8 & '\uff00');
+                    var0[var1++] = var2 + ((var8 & 16711935) * var6 >> 8 & 16711935) + ((var8 & 65280) * var6 >> 8 & 65280);
                     var8 = var0[var1];
-                    var0[var1++] = var2 + ((var8 & 16711935) * var6 >> 8 & 16711935) + ((var8 & '\uff00') * var6 >> 8 & '\uff00');
+                    var0[var1++] = var2 + ((var8 & 16711935) * var6 >> 8 & 16711935) + ((var8 & 65280) * var6 >> 8 & 65280);
                     var8 = var0[var1];
-                    var0[var1++] = var2 + ((var8 & 16711935) * var6 >> 8 & 16711935) + ((var8 & '\uff00') * var6 >> 8 & '\uff00');
+                    var0[var1++] = var2 + ((var8 & 16711935) * var6 >> 8 & 16711935) + ((var8 & 65280) * var6 >> 8 & 65280);
                     var8 = var0[var1];
-                    var0[var1++] = var2 + ((var8 & 16711935) * var6 >> 8 & 16711935) + ((var8 & '\uff00') * var6 >> 8 & '\uff00');
+                    var0[var1++] = var2 + ((var8 & 16711935) * var6 >> 8 & 16711935) + ((var8 & 65280) * var6 >> 8 & 65280);
                 }
             }
         }

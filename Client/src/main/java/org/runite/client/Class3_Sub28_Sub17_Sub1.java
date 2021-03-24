@@ -110,7 +110,7 @@ public final class Class3_Sub28_Sub17_Sub1 extends Font {
    }
 
    private static void method706(int[] var0, byte[] var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, int var9) {
-      var2 = ((var2 & 16711935) * var9 & -16711936) + ((var2 & '\uff00') * var9 & 16711680) >> 8;
+      var2 = ((var2 & 16711935) * var9 & -16711936) + ((var2 & 65280) * var9 & 16711680) >> 8;
       var9 = 256 - var9;
 
       for(int var10 = -var6; var10 < 0; ++var10) {
@@ -119,7 +119,7 @@ public final class Class3_Sub28_Sub17_Sub1 extends Font {
                ++var4;
             } else {
                int var12 = var0[var4];
-               var0[var4++] = (((var12 & 16711935) * var9 & -16711936) + ((var12 & '\uff00') * var9 & 16711680) >> 8) + var2;
+               var0[var4++] = (((var12 & 16711935) * var9 & -16711936) + ((var12 & 65280) * var9 & 16711680) >> 8) + var2;
             }
          }
 

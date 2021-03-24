@@ -12,7 +12,7 @@ final class Class46 {
     static void method1087(int var0, int var1) {
         try {
             Class3_Sub30_Sub1.method819();
-            Class3_Sub13_Sub17.method252();
+            TextureOperation23.method252();
             if (var0 < 38) {
                 anInt741 = 118;
             }

@@ -41,18 +41,18 @@ final class Sprites {
             aClass3_Sub28_Sub16_Sub2Array2140 = Class157.method2176(mapFunctionSpriteArchive, index8);
             Class75_Sub3.aAbstractSpriteArray2656 = Class140_Sub6.getSprites(hitmarkSpriteArchive, index8);
             Unsorted.aAbstractSpriteArray996 = Class140_Sub6.getSprites(hitbarDefaultSpriteArchive, index8);
-            Class3_Sub13_Sub31.aAbstractSpriteArray3373 = Class140_Sub6.getSprites(headiconsPkSpriteArchive, index8);
+            TextureOperation2.aAbstractSpriteArray3373 = Class140_Sub6.getSprites(headiconsPkSpriteArchive, index8);
             NPC.aAbstractSpriteArray3977 = Class140_Sub6.getSprites(headiconsPrayerSpriteArchive, index8);
             Class166.aAbstractSpriteArray2072 = Class140_Sub6.getSprites(headiconsHintSpriteArchive, index8);
             Class129_Sub1.aAbstractSpriteArray2690 = Class140_Sub6.getSprites(hintMapMarkersSpriteArchive, index8);
             Class45.aAbstractSprite_736 = Unsorted.method602(mapFlagSpriteArchive, index8);
-            Class65.aAbstractSpriteArray1825 = Class3_Sub13_Sub23_Sub1.method286(crossSpriteArchive, index8);
-            Unsorted.aAbstractSpriteArray1136 = Class3_Sub13_Sub23_Sub1.method286(mapDotsSpriteArchive, index8);
+            Class65.aAbstractSpriteArray1825 = TextureOperation18.method286(crossSpriteArchive, index8);
+            Unsorted.aAbstractSpriteArray1136 = TextureOperation18.method286(mapDotsSpriteArchive, index8);
             GameObject.aClass109Array1831 = Class85.method1424(index8, scrollbarSpriteArchive);
-            Class3_Sub13_Sub22.nameIconsSpriteArray = Class85.method1424(index8, nameIconsSpriteArchive);
-            TextureOperation.smallFont.method697(Class3_Sub13_Sub22.nameIconsSpriteArray, null);
-            Class126.plainFont.method697(Class3_Sub13_Sub22.nameIconsSpriteArray, null);
-            Class168.bold.method697(Class3_Sub13_Sub22.nameIconsSpriteArray, null);
+            TextureOperation0.nameIconsSpriteArray = Class85.method1424(index8, nameIconsSpriteArchive);
+            FontType.smallFont.method697(TextureOperation0.nameIconsSpriteArray, null);
+            FontType.plainFont.method697(TextureOperation0.nameIconsSpriteArray, null);
+            FontType.bold.method697(TextureOperation0.nameIconsSpriteArray, null);
             if (HDToolKit.highDetail) {
                 Class141.aClass109_Sub1Array1843 = method885(floorShadowSpriteArchive, index8);
 
@@ -77,13 +77,13 @@ final class Sprites {
             }
 
             if (HDToolKit.highDetail) {
-                Class3_Sub13_Sub39.aAbstractSpriteArray3458 = new AbstractSprite[var3.length];
+                TextureOperation8.aAbstractSpriteArray3458 = new AbstractSprite[var3.length];
 
                 for (var4 = 0; var4 < var3.length; ++var4) {
-                    Class3_Sub13_Sub39.aAbstractSpriteArray3458[var4] = new HDSprite(var3[var4]);
+                    TextureOperation8.aAbstractSpriteArray3458[var4] = new HDSprite(var3[var4]);
                 }
             } else {
-                Class3_Sub13_Sub39.aAbstractSpriteArray3458 = var3;
+                TextureOperation8.aAbstractSpriteArray3458 = var3;
             }
 
             int var5 = (int) ((double) 21 * Math.random()) - 10;

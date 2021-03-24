@@ -76,9 +76,9 @@ final class Class121 {
                 var26 += (-var26 + var7[1 + var6][var14 - -1]) * var22;
                 var20 += (-var20 + var7[var6 - -1][var14]) * var22;
                 var20 += (-var20 + var26) * var23;
-                int var27 = Class3_Sub13_Sub10.method210(var15, var2, var3);
-                int var28 = Class3_Sub13_Sub10.method210(var15, var0, var8);
-                var21 = Class3_Sub13_Sub10.method210(var17, var27, var28);
+                int var27 = TextureOperation30.method210(var15, var2, var3);
+                int var28 = TextureOperation30.method210(var15, var0, var8);
+                var21 = TextureOperation30.method210(var17, var27, var28);
             }
 
             if (var9 > -111) {
@@ -98,7 +98,7 @@ final class Class121 {
         try {
             try {
                 if (Class43.worldListStage == 0) {
-                    if (Class3_Sub13_Sub34.aLong3411 > TimeUtils.time() + -5000L) {
+                    if (TextureOperation25.aLong3411 > TimeUtils.time() + -5000L) {
                         return 0;
                     }
 
@@ -108,14 +108,14 @@ final class Class121 {
                 }
 
                 if (30000L + RSInterface.aLong261 < TimeUtils.time()) {
-                    return Class3_Sub13_Sub3.method179((byte) 92, 1000);
+                    return TextureOperation33.method179((byte) 92, 1000);
                 }
 
                 int wlUpdateStamp;
                 int var2;
                 if (1 == Class43.worldListStage) {
                     if (Class3_Sub9.aClass64_2318.anInt978 == 2) {
-                        return Class3_Sub13_Sub3.method179((byte) 92, 1001);
+                        return TextureOperation33.method179((byte) 92, 1001);
                     }
 
                     if (1 != Class3_Sub9.aClass64_2318.anInt978) {
@@ -123,16 +123,16 @@ final class Class121 {
                     }
 
                     Class3_Sub15.activeConnection = new Connection((Socket) Class3_Sub9.aClass64_2318.anObject974, Class38.signlink);
-                    Class3_Sub13_Sub1.outgoingBuffer.index = 0;
+                    TextureOperation12.outgoingBuffer.index = 0;
                     Class3_Sub9.aClass64_2318 = null;
                     wlUpdateStamp = 0;
                     if (Class30.loadedWorldList) {
                         wlUpdateStamp = WorldListEntry.updateStamp;
                     }
 
-                    Class3_Sub13_Sub1.outgoingBuffer.writeByte(255);
-                    Class3_Sub13_Sub1.outgoingBuffer.writeInt(wlUpdateStamp);
-                    Class3_Sub15.activeConnection.sendBytes(Class3_Sub13_Sub1.outgoingBuffer.buffer, Class3_Sub13_Sub1.outgoingBuffer.index);
+                    TextureOperation12.outgoingBuffer.writeByte(255);
+                    TextureOperation12.outgoingBuffer.writeInt(wlUpdateStamp);
+                    Class3_Sub15.activeConnection.sendBytes(TextureOperation12.outgoingBuffer.buffer, TextureOperation12.outgoingBuffer.index);
                     if (null != WorldListEntry.aClass155_2627) {
                         WorldListEntry.aClass155_2627.method2159(67);
                     }
@@ -152,7 +152,7 @@ final class Class121 {
                     }
 
                     if (var2 != 0) {
-                        return Class3_Sub13_Sub3.method179((byte) 92, var2);
+                        return TextureOperation33.method179((byte) 92, var2);
                     }
 
                     Class43.worldListStage = 2;
@@ -168,7 +168,7 @@ final class Class121 {
                     Unsorted.wlPacketSize += Class3_Sub15.activeConnection.readByte();
                     Class43.worldListStage = 3;
                     Class3_Sub20.wlPacketIndex = 0;
-                    Class3_Sub13_Sub33.aByteArray3396 = new byte[Unsorted.wlPacketSize];
+                    TextureOperation29.aByteArray3396 = new byte[Unsorted.wlPacketSize];
                 }
 
                 if (Class43.worldListStage == 3) {
@@ -181,10 +181,10 @@ final class Class121 {
                         wlUpdateStamp = Unsorted.wlPacketSize + -Class3_Sub20.wlPacketIndex;
                     }
 
-                    Class3_Sub15.activeConnection.readBytes(Class3_Sub13_Sub33.aByteArray3396, Class3_Sub20.wlPacketIndex, wlUpdateStamp);
+                    Class3_Sub15.activeConnection.readBytes(TextureOperation29.aByteArray3396, Class3_Sub20.wlPacketIndex, wlUpdateStamp);
                     Class3_Sub20.wlPacketIndex += wlUpdateStamp;
                     if (Class3_Sub20.wlPacketIndex >= Unsorted.wlPacketSize) {
-                        if (Class3_Sub13_Sub23.handleWorldListUpdate(Class3_Sub13_Sub33.aByteArray3396)) {
+                        if (TextureOperation39.handleWorldListUpdate(TextureOperation29.aByteArray3396)) {
                             Unsorted.aClass44_Sub1Array3201 = new WorldListEntry[WorldListEntry.activeWorldListSize];
                             var2 = 0;
 
@@ -200,18 +200,18 @@ final class Class121 {
                             Class3_Sub15.activeConnection = null;
                             Unsorted.anInt1088 = 0;
                             Class43.worldListStage = 0;
-                            Class3_Sub13_Sub33.aByteArray3396 = null;
-                            Class3_Sub13_Sub34.aLong3411 = TimeUtils.time();
+                            TextureOperation29.aByteArray3396 = null;
+                            TextureOperation25.aLong3411 = TimeUtils.time();
                             return 0;
                         }
 
-                        return Class3_Sub13_Sub3.method179((byte) 92, 1002);
+                        return TextureOperation33.method179((byte) 92, 1002);
                     }
 
                     return -1;
                 }
             } catch (IOException var5) {
-                return Class3_Sub13_Sub3.method179((byte) 92, 1003);
+                return TextureOperation33.method179((byte) 92, 1003);
             }
 
             return -1;

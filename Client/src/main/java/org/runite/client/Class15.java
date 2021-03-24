@@ -3,12 +3,12 @@ package org.runite.client;
 import java.util.Calendar;
 import java.util.Date;
 
-final class Class15 implements Runnable {
+public final class Class15 implements Runnable {
 
     static short[][] aShortArrayArray344;
     static int anInt4034 = -8 + (int) (17.0D * Math.random());
     static boolean aBoolean346;
-    static int[] localNPCIndexes = new int['\u8000'];
+    public static int[] localNPCIndexes = new int[32768];
     static Class64 aClass64_351;
     volatile boolean aBoolean345 = false;
     Signlink aClass87_350;
@@ -82,7 +82,7 @@ final class Class15 implements Runnable {
 
                 int var8 = var1.readUnsignedByte();
                 int var9 = var1.readUnsignedByte();
-                int var10 = -Class3_Sub13_Sub21.anInt3256 + var8 * 64;
+                int var10 = -TextureOperation37.anInt3256 + var8 * 64;
                 int var11 = -1 + Class108.anInt1460 - var9 * 64 + Unsorted.anInt65;
                 if (var10 >= 0 && 0 <= -63 + var11 && Class23.anInt455 > var10 - -63 && var11 < Class108.anInt1460) {
                     for (var12 = 0; var12 < 64; ++var12) {
@@ -128,7 +128,7 @@ final class Class15 implements Runnable {
 
                     var15 = var12 + -5;
                     if (var15 >= 0) {
-                        var35 = var4[var15][var34] & 255;
+                        var35 = var4[var15][var34] & 0xFF;
                         if (0 < var35) {
                             MapUnderlayColorDefinition var17 = Class158_Sub1.method629(-1 + var35);
                             var28[var34] -= var17.anInt1408;
@@ -212,7 +212,7 @@ final class Class15 implements Runnable {
                 int[] var5 = new int[var3];
 
                 for (int var6 = 0; var6 < var3; ++var6) {
-                    var5[var6] = Class3_Sub13_Sub38.spritePalette[Unsorted.bitwiseAnd(255, var4[var6])];
+                    var5[var6] = TextureOperation38.spritePalette[Unsorted.bitwiseAnd(255, var4[var6])];
                 }
 
                 if (HDToolKit.highDetail) {
@@ -248,14 +248,14 @@ final class Class15 implements Runnable {
     static int[][] method895(int var4) {
         try {
             int[][] var9 = new int[256][64];
-            Class3_Sub13_Sub4 var10 = new Class3_Sub13_Sub4();
+            TextureOperation34 var10 = new TextureOperation34();
             var10.anInt3062 = (int) ((float) 0.4 * 4096.0F);
             var10.anInt3058 = 3;
             var10.anInt3056 = 4;
             var10.aBoolean3065 = false;
             var10.anInt3060 = 8;
             var10.method158(16251);
-            Class3_Sub13_Sub3.method180(122, 256, 64);
+            TextureOperation33.method180(122, 256, 64);
 
             for (int var11 = 0; var11 < 256; ++var11) {
                 var10.method186(var11, var9[var11]);

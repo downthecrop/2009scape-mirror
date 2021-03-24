@@ -3,11 +3,11 @@ package org.runite.client;
 import org.rs09.client.rendering.Toolkit;
 import org.rs09.client.util.ArrayUtils;
 
-final class Class65 {
+public final class Class65 {
 
     static Class61 aClass61_983 = new Class61();
     static DataBuffer[] aClass3_Sub30Array986 = new DataBuffer[2048];
-    static int anInt987 = 0;
+    public static int anInt987 = 0;
     static int currentChunkX;
     static int anInt991 = -1;
     static AbstractSprite[] aAbstractSpriteArray1825;
@@ -37,9 +37,9 @@ final class Class65 {
             int var9 = Class3_Sub28_Sub3.method543(var4 + 1, var6, (byte) -104);
             int var10 = Class3_Sub28_Sub3.method543(var4, 1 + var6, (byte) -100);
             int var11 = Class3_Sub28_Sub3.method543(1 + var4, var6 + 1, (byte) -109);
-            int var12 = Class3_Sub13_Sub23.method275(var8, var9, var5, var0);
-            int var13 = Class3_Sub13_Sub23.method275(var10, var11, var5, var0);
-            return Class3_Sub13_Sub23.method275(var12, var13, var7, var0);
+            int var12 = TextureOperation39.method275(var8, var9, var5, var0);
+            int var13 = TextureOperation39.method275(var10, var11, var5, var0);
+            return TextureOperation39.method275(var12, var13, var7, var0);
         } catch (RuntimeException var14) {
             throw ClientErrorException.clientError(var14, "ja.G(" + var0 + ',' + var1 + ',' + var2 + ',' + 512 + ')');
         }
@@ -55,7 +55,7 @@ final class Class65 {
                 aAbstractSpriteArray1825[4 + Unsorted.anInt2958 / 100].drawAt(Class70.anInt1053 + -8, -8 + Unsorted.anInt4062);
             }
 
-            Class3_Sub13_Sub37.method347();
+            TextureOperation10.method347();
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "ja.A(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + (byte) -121 + ')');
         }
@@ -112,8 +112,8 @@ final class Class65 {
                 int var10;
                 short var12;
                 if (var8 >= ItemDefinition.aShort505) {
-                    if (var8 > Class3_Sub13_Sub23_Sub1.aShort4038) {
-                        var12 = Class3_Sub13_Sub23_Sub1.aShort4038;
+                    if (var8 > TextureOperation18.aShort4038) {
+                        var12 = TextureOperation18.aShort4038;
                         var7 = var12 * var0 * 334 / (var3 * 512);
                         if (var7 < CS2Script.aShort3241) {
                             var7 = CS2Script.aShort3241;
@@ -161,24 +161,24 @@ final class Class65 {
 
     static void method1240() {
         try {
-            Class126.plainFont = null;
+            FontType.plainFont = null;
             Class75_Sub3.aAbstractSpriteArray2656 = null;
             aAbstractSpriteArray1825 = null;
-            Class3_Sub13_Sub22.nameIconsSpriteArray = null;
+            TextureOperation0.nameIconsSpriteArray = null;
             Class157.aClass3_Sub28_Sub17_Sub1_2000 = null;
             Sprites.aClass3_Sub28_Sub16_Sub2Array2140 = null;
             Class140_Sub4.aAbstractSpriteArray2839 = null;
             Class129_Sub1.aAbstractSpriteArray2690 = null;
             NPC.aAbstractSpriteArray3977 = null;
-            Class168.bold = null;
+            FontType.bold = null;
             Class57.aAbstractSprite_895 = null;
             Unsorted.aAbstractSpriteArray1136 = null;
-            TextureOperation.smallFont = null;
+            FontType.smallFont = null;
             Class45.aAbstractSprite_736 = null;
             Unsorted.aAbstractSpriteArray996 = null;
-            Class3_Sub13_Sub39.aAbstractSpriteArray3458 = null;
+            TextureOperation8.aAbstractSpriteArray3458 = null;
             Class166.aAbstractSpriteArray2072 = null;
-            Class3_Sub13_Sub31.aAbstractSpriteArray3373 = null;
+            TextureOperation2.aAbstractSpriteArray3373 = null;
             GameObject.aClass109Array1831 = null;
 
         } catch (RuntimeException var2) {

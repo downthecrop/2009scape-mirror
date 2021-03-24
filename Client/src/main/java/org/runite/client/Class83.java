@@ -23,7 +23,7 @@ public final class Class83 {
         }
     }
 
-    static void method1410(int var0, int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, int var9, int var10) {
+    static void method1410(int var0, int var2, int var3, int var4, int var5, int var6, int var7, int var8) {
         try {
             int var11 = var4 - var6;
             int var12 = -var3 + var2;
@@ -33,10 +33,6 @@ public final class Class83 {
 
             if (Class108.anInt1460 > var2) {
                 ++var12;
-            }
-
-            if (var10 != -12541) {
-                getWindowType();
             }
 
             int var13;
@@ -58,8 +54,8 @@ public final class Class83 {
             int var33;
             int[][] var41;
             for (var13 = 0; var13 < var11; ++var13) {
-                var14 = var13 * var8 + var1 >> 16;
-                var15 = (var13 + 1) * var8 + var1 >> 16;
+                var14 = var13 * var8 >> 16;
+                var15 = (var13 + 1) * var8 >> 16;
                 var16 = -var14 + var15;
                 if (var16 > 0) {
                     var17 = var13 - -var6 >> 6;
@@ -71,11 +67,11 @@ public final class Class83 {
                         byte[][] var23 = Class36.aByteArrayArrayArray640[var17];
                         byte[][] var43 = CS2Script.aByteArrayArrayArray2452[var17];
                         var15 += var5;
-                        byte[][] var46 = Class3_Sub13_Sub33.aByteArrayArrayArray3390[var17];
+                        byte[][] var46 = TextureOperation29.aByteArrayArrayArray3390[var17];
 
                         for (var24 = 0; var12 > var24; ++var24) {
-                            var25 = var7 * var24 + var9 >> 16;
-                            var26 = var9 - -((1 + var24) * var7) >> 16;
+                            var25 = var7 * var24 >> 16;
+                            var26 = - -((1 + var24) * var7) >> 16;
                             int var27 = -var25 + var26;
                             if (var27 > 0) {
                                 var26 += var0;
@@ -89,7 +85,7 @@ public final class Class83 {
                                 } else {
                                     if (Unsorted.aClass3_Sub28_Sub3_2600.anInt3550 == -1) {
                                         if ((var6 + var13 & 4) == (4 & var24 + var3)) {
-                                            var32 = anIntArray1161[1 + Class3_Sub13_Sub6.anInt3081];
+                                            var32 = anIntArray1161[1 + TextureOperation26.anInt3081];
                                         } else {
                                             var32 = 4936552;
                                         }
@@ -107,7 +103,7 @@ public final class Class83 {
                                     }
                                 }
 
-                                var33 = var45[var28] == null ? 0 : anIntArray1161[var45[var28][var31] & 255];
+                                var33 = var45[var28] == null ? 0 : anIntArray1161[var45[var28][var31] & 0xFF];
                                 if (var32 == 0) {
                                     var32 = 1;
                                 }
@@ -148,7 +144,7 @@ public final class Class83 {
                                 }
 
                                 if (var23[var28] != null) {
-                                    int var49 = var23[var28][var31] & 255;
+                                    int var49 = var23[var28][var31] & 0xFF;
                                     if (var49 != 0) {
                                         if (1 == var16) {
                                             var36 = var14;
@@ -238,7 +234,7 @@ public final class Class83 {
                             if (-1 != Unsorted.aClass3_Sub28_Sub3_2600.anInt3550) {
                                 var19 = Unsorted.aClass3_Sub28_Sub3_2600.anInt3550;
                             } else if ((var13 - -var6 & 4) == (4 & var18 + var3)) {
-                                var19 = anIntArray1161[1 + Class3_Sub13_Sub6.anInt3081];
+                                var19 = anIntArray1161[1 + TextureOperation26.anInt3081];
                             } else {
                                 var19 = 4936552;
                             }
@@ -247,8 +243,8 @@ public final class Class83 {
                                 var19 = 1;
                             }
 
-                            var20 = (var7 * var18 + var9 >> 16) + var0;
-                            var21 = var0 + ((var18 + 1) * var7 + var9 >> 16);
+                            var20 = (var7 * var18 >> 16) + var0;
+                            var21 = var0 + ((var18 + 1) * var7 >> 16);
                             var22 = var21 + -var20;
                             Toolkit.JAVA_TOOLKIT.method934(var14, var20, var16, var22, var19);
 //                     Class74.method934(var14, var20, var16, var22, var19);
@@ -259,8 +255,8 @@ public final class Class83 {
             }
 
             for (var13 = -2; 2 + var11 > var13; ++var13) {
-                var14 = var1 - -(var13 * var8) >> 16;
-                var15 = var8 * (var13 + 1) + var1 >> 16;
+                var14 = - -(var13 * var8) >> 16;
+                var15 = var8 * (var13 + 1) >> 16;
                 var16 = -var14 + var15;
                 if (var16 > 0) {
                     var14 += var5;
@@ -269,8 +265,8 @@ public final class Class83 {
                         var41 = Class29.anIntArrayArrayArray558[var17];
 
                         for (var19 = -2; var12 - -2 > var19; ++var19) {
-                            var20 = var9 - -(var19 * var7) >> 16;
-                            var21 = var9 - -((var19 + 1) * var7) >> 16;
+                            var20 = - -(var19 * var7) >> 16;
+                            var21 = - -((var19 + 1) * var7) >> 16;
                             var22 = var21 + -var20;
                             if (var22 > 0) {
                                 var20 += var0;
@@ -318,13 +314,13 @@ public final class Class83 {
             }
 
         } catch (RuntimeException var40) {
-            throw ClientErrorException.clientError(var40, "le.C(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ',' + var8 + ',' + var9 + ',' + var10 + ')');
+            throw ClientErrorException.clientError(var40, "le.C(" + var0 + ',' + 0 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ',' + var8 + ',' + 0 + ',' + -12541 + ')');
         }
     }
 
     public static int getWindowType() {
         try {
-            if (Class3_Sub13_Sub10.aFrame3121 == null) {
+            if (TextureOperation30.aFrame3121 == null) {
                 if (HDToolKit.highDetail && Class3_Sub15.aBoolean2427) {
                     return 2;
                 } else {

@@ -257,7 +257,7 @@ final class RenderAnimationDefinition {
                     this.anInt382 = -1;
                 }
 
-                if ('\uffff' == this.anInt368) {
+                if (65535 == this.anInt368) {
                     this.anInt368 = -1;
                 }
             } else if (var1 == 2) {

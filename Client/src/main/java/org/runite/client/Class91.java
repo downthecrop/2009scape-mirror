@@ -27,36 +27,9 @@ final class Class91 {
         }
     }
 
-    static void drawCompass(int var0, int var1, RSInterface var2, int var3) {
-        try {
-            if (HDToolKit.highDetail) {
-                Class22.setClipping(var0, var1, var2.width + var0, var2.height + var1);
-            }
-
-            if (Class161.anInt2028 >= 3) {
-                if (HDToolKit.highDetail) {
-                    AbstractSprite var5 = var2.method866(false);
-                    if (null != var5) {
-                        var5.drawAt(var0, var1);
-                    }
-                } else {
-                    Class74.method1332(var0, var1, var2.anIntArray207, var2.anIntArray291);
-                }
-            } else if (HDToolKit.highDetail) {
-                ((HDSprite) Class57.aAbstractSprite_895).drawMinimapRegion(var0, var1, var2.width, var2.height, Class57.aAbstractSprite_895.width / 2, Class57.aAbstractSprite_895.height / 2, GraphicDefinition.CAMERA_DIRECTION, 256, (HDSprite) var2.method866(false));
-            } else {
-                ((Class3_Sub28_Sub16_Sub2) Class57.aAbstractSprite_895).method667(var0, var1, var2.width, var2.height, Class57.aAbstractSprite_895.width / 2, Class57.aAbstractSprite_895.height / 2, GraphicDefinition.CAMERA_DIRECTION, var2.anIntArray207, var2.anIntArray291);
-            }
-
-            Class163_Sub1_Sub1.aBooleanArray4008[var3] = true;
-        } catch (RuntimeException var6) {
-            throw ClientErrorException.clientError(var6, "mj.K(" + var0 + ',' + var1 + ',' + (var2 != null ? "{...}" : "null") + ',' + var3 + ',' + (byte) 59 + ')');
-        }
-    }
-
     static boolean method1495(int var0, int var1, int var2, int var3, int var4) {
-        int var5 = var3 * Class3_Sub13_Sub34.anInt3417 + var0 * Class145.anInt3153 >> 16;
-        int var6 = var3 * Class145.anInt3153 - var0 * Class3_Sub13_Sub34.anInt3417 >> 16;
+        int var5 = var3 * TextureOperation25.anInt3417 + var0 * Class145.anInt3153 >> 16;
+        int var6 = var3 * Class145.anInt3153 - var0 * TextureOperation25.anInt3417 >> 16;
         int var7 = var1 * Class60.anInt936 + var6 * Unsorted.anInt1037 >> 16;
         int var8 = var1 * Unsorted.anInt1037 - var6 * Class60.anInt936 >> 16;
         if (var7 < 1) {
@@ -182,7 +155,7 @@ final class Class91 {
 
                     if (var1 == 1) {
                         this.method1501((byte) 40, var4, var6, 2048);
-                        this.method1501((byte) 88, 1 + var4, var6 - -1, '\u8000');
+                        this.method1501((byte) 88, 1 + var4, var6 - -1, 32768);
                     }
 
                     if (var1 == 2) {
@@ -191,7 +164,7 @@ final class Class91 {
                     }
 
                     if (var1 == 3) {
-                        this.method1501((byte) 90, var4, var6, '\u8000');
+                        this.method1501((byte) 90, var4, var6, 32768);
                         this.method1501((byte) 47, var4 + -1, var6 + -1, 2048);
                     }
                 }
@@ -333,7 +306,7 @@ final class Class91 {
 
                     if (var1 == 1) {
                         this.method1490(2048, var6, var5);
-                        this.method1490('\u8000', 1 + var6, var5 + 1);
+                        this.method1490(32768, 1 + var6, var5 + 1);
                     }
 
                     if (var1 == 2) {
@@ -342,7 +315,7 @@ final class Class91 {
                     }
 
                     if (3 == var1) {
-                        this.method1490('\u8000', var6, var5);
+                        this.method1490(32768, var6, var5);
                         this.method1490(2048, -1 + var6, var5 - 1);
                     }
                 }
@@ -720,7 +693,7 @@ final class Class91 {
     private void method1490(int var1, int var3, int var4) {
         try {
 
-            this.anIntArrayArray1304[var3][var4] = Class3_Sub13_Sub29.bitwiseOr(this.anIntArrayArray1304[var3][var4], var1);
+            this.anIntArrayArray1304[var3][var4] = TextureOperation3.bitwiseOr(this.anIntArrayArray1304[var3][var4], var1);
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "mj.J(" + var1 + ',' + (byte) -80 + ',' + var3 + ',' + var4 + ')');
         }
@@ -967,7 +940,7 @@ final class Class91 {
         try {
             var1 -= this.anInt1306;
             var3 -= this.anInt1309;
-            this.anIntArrayArray1304[var3][var1] = Class3_Sub13_Sub29.bitwiseOr(this.anIntArrayArray1304[var3][var1], 2097152);
+            this.anIntArrayArray1304[var3][var1] = TextureOperation3.bitwiseOr(this.anIntArrayArray1304[var3][var1], 2097152);
         } catch (RuntimeException var5) {
             throw ClientErrorException.clientError(var5, "mj.E(" + var1 + ',' + 7605 + ',' + var3 + ')');
         }
@@ -1034,7 +1007,7 @@ final class Class91 {
                     int var8;
                     int var9;
                     if (var7 >= var6) {
-                        var9 = '\u8000';
+                        var9 = 32768;
                         var8 = 65536 * var6 / var7;
 
                         while (var3 != var2) {
@@ -1074,7 +1047,7 @@ final class Class91 {
                         }
                     } else {
                         var8 = 65536 * var7 / var6;
-                        var9 = '\u8000';
+                        var9 = 32768;
 
                         while (var5 != var4) {
                             if (var4 <= var5) {
@@ -1167,7 +1140,7 @@ final class Class91 {
         try {
             var2 -= this.anInt1306;
             var1 -= this.anInt1309;
-            this.anIntArrayArray1304[var1][var2] = Class3_Sub13_Sub29.bitwiseOr(this.anIntArrayArray1304[var1][var2], 262144);
+            this.anIntArrayArray1304[var1][var2] = TextureOperation3.bitwiseOr(this.anIntArrayArray1304[var1][var2], 262144);
         } catch (RuntimeException var5) {
             throw ClientErrorException.clientError(var5, "mj.C(" + var1 + ',' + var2 + ',' + -5 + ')');
         }

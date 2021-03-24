@@ -50,16 +50,16 @@ final class Class72 {
             boolean var5;
             int var6;
             if (var1.anInt1554 == 1) {
-                var2 = var1.anInt1553 - Class97.anInt1375 + Class3_Sub13_Sub39.anInt3466;
-                if (var2 >= 0 && var2 <= Class3_Sub13_Sub39.anInt3466 + Class3_Sub13_Sub39.anInt3466) {
-                    var3 = var1.anInt1563 - Class145.anInt3340 + Class3_Sub13_Sub39.anInt3466;
+                var2 = var1.anInt1553 - Class97.anInt1375 + TextureOperation8.anInt3466;
+                if (var2 >= 0 && var2 <= TextureOperation8.anInt3466 + TextureOperation8.anInt3466) {
+                    var3 = var1.anInt1563 - Class145.anInt3340 + TextureOperation8.anInt3466;
                     if (var3 < 0) {
                         var3 = 0;
                     }
 
-                    var4 = var1.anInt1566 - Class145.anInt3340 + Class3_Sub13_Sub39.anInt3466;
-                    if (var4 > Class3_Sub13_Sub39.anInt3466 + Class3_Sub13_Sub39.anInt3466) {
-                        var4 = Class3_Sub13_Sub39.anInt3466 + Class3_Sub13_Sub39.anInt3466;
+                    var4 = var1.anInt1566 - Class145.anInt3340 + TextureOperation8.anInt3466;
+                    if (var4 > TextureOperation8.anInt3466 + TextureOperation8.anInt3466) {
+                        var4 = TextureOperation8.anInt3466 + TextureOperation8.anInt3466;
                     }
 
                     var5 = false;
@@ -84,24 +84,24 @@ final class Class72 {
                             var6 = -var6;
                         }
 
-                        var1.anInt1555 = (var1.anInt1560 - Class3_Sub13_Sub30.anInt3363 << 8) / var6;
-                        var1.anInt1551 = (var1.anInt1550 - Class3_Sub13_Sub30.anInt3363 << 8) / var6;
+                        var1.anInt1555 = (var1.anInt1560 - TextureOperation13.anInt3363 << 8) / var6;
+                        var1.anInt1551 = (var1.anInt1550 - TextureOperation13.anInt3363 << 8) / var6;
                         var1.anInt1561 = (var1.anInt1544 - Unsorted.anInt3657 << 8) / var6;
                         var1.anInt1565 = (var1.anInt1548 - Unsorted.anInt3657 << 8) / var6;
                         Class145.aClass113Array1895[anInt1672++] = var1;
                     }
                 }
             } else if (var1.anInt1554 == 2) {
-                var2 = var1.anInt1563 - Class145.anInt3340 + Class3_Sub13_Sub39.anInt3466;
-                if (var2 >= 0 && var2 <= Class3_Sub13_Sub39.anInt3466 + Class3_Sub13_Sub39.anInt3466) {
-                    var3 = var1.anInt1553 - Class97.anInt1375 + Class3_Sub13_Sub39.anInt3466;
+                var2 = var1.anInt1563 - Class145.anInt3340 + TextureOperation8.anInt3466;
+                if (var2 >= 0 && var2 <= TextureOperation8.anInt3466 + TextureOperation8.anInt3466) {
+                    var3 = var1.anInt1553 - Class97.anInt1375 + TextureOperation8.anInt3466;
                     if (var3 < 0) {
                         var3 = 0;
                     }
 
-                    var4 = var1.anInt1547 - Class97.anInt1375 + Class3_Sub13_Sub39.anInt3466;
-                    if (var4 > Class3_Sub13_Sub39.anInt3466 + Class3_Sub13_Sub39.anInt3466) {
-                        var4 = Class3_Sub13_Sub39.anInt3466 + Class3_Sub13_Sub39.anInt3466;
+                    var4 = var1.anInt1547 - Class97.anInt1375 + TextureOperation8.anInt3466;
+                    if (var4 > TextureOperation8.anInt3466 + TextureOperation8.anInt3466) {
+                        var4 = TextureOperation8.anInt3466 + TextureOperation8.anInt3466;
                     }
 
                     var5 = false;
@@ -114,7 +114,7 @@ final class Class72 {
                     }
 
                     if (var5) {
-                        var6 = Class3_Sub13_Sub30.anInt3363 - var1.anInt1560;
+                        var6 = TextureOperation13.anInt3363 - var1.anInt1560;
                         if (var6 > 32) {
                             var1.anInt1564 = 3;
                         } else {
@@ -136,25 +136,25 @@ final class Class72 {
             } else if (var1.anInt1554 == 4) {
                 var2 = var1.anInt1544 - Unsorted.anInt3657;
                 if (var2 > 128) {
-                    var3 = var1.anInt1563 - Class145.anInt3340 + Class3_Sub13_Sub39.anInt3466;
+                    var3 = var1.anInt1563 - Class145.anInt3340 + TextureOperation8.anInt3466;
                     if (var3 < 0) {
                         var3 = 0;
                     }
 
-                    var4 = var1.anInt1566 - Class145.anInt3340 + Class3_Sub13_Sub39.anInt3466;
-                    if (var4 > Class3_Sub13_Sub39.anInt3466 + Class3_Sub13_Sub39.anInt3466) {
-                        var4 = Class3_Sub13_Sub39.anInt3466 + Class3_Sub13_Sub39.anInt3466;
+                    var4 = var1.anInt1566 - Class145.anInt3340 + TextureOperation8.anInt3466;
+                    if (var4 > TextureOperation8.anInt3466 + TextureOperation8.anInt3466) {
+                        var4 = TextureOperation8.anInt3466 + TextureOperation8.anInt3466;
                     }
 
                     if (var3 <= var4) {
-                        int var10 = var1.anInt1553 - Class97.anInt1375 + Class3_Sub13_Sub39.anInt3466;
+                        int var10 = var1.anInt1553 - Class97.anInt1375 + TextureOperation8.anInt3466;
                         if (var10 < 0) {
                             var10 = 0;
                         }
 
-                        var6 = var1.anInt1547 - Class97.anInt1375 + Class3_Sub13_Sub39.anInt3466;
-                        if (var6 > Class3_Sub13_Sub39.anInt3466 + Class3_Sub13_Sub39.anInt3466) {
-                            var6 = Class3_Sub13_Sub39.anInt3466 + Class3_Sub13_Sub39.anInt3466;
+                        var6 = var1.anInt1547 - Class97.anInt1375 + TextureOperation8.anInt3466;
+                        if (var6 > TextureOperation8.anInt3466 + TextureOperation8.anInt3466) {
+                            var6 = TextureOperation8.anInt3466 + TextureOperation8.anInt3466;
                         }
 
                         boolean var7 = false;
@@ -173,8 +173,8 @@ final class Class72 {
                             var1.anInt1564 = 5;
                             var1.anInt1549 = (var1.anInt1562 - Class145.anInt2697 << 8) / var2;
                             var1.anInt1557 = (var1.anInt1545 - Class145.anInt2697 << 8) / var2;
-                            var1.anInt1555 = (var1.anInt1560 - Class3_Sub13_Sub30.anInt3363 << 8) / var2;
-                            var1.anInt1551 = (var1.anInt1550 - Class3_Sub13_Sub30.anInt3363 << 8) / var2;
+                            var1.anInt1555 = (var1.anInt1560 - TextureOperation13.anInt3363 << 8) / var2;
+                            var1.anInt1551 = (var1.anInt1550 - TextureOperation13.anInt3363 << 8) / var2;
                             Class145.aClass113Array1895[anInt1672++] = var1;
                         }
                     }

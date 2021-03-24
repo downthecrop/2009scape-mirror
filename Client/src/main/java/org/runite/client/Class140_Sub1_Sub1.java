@@ -118,7 +118,7 @@ final class Class140_Sub1_Sub1 extends Model {
                               var27 = Class51.anIntArray851[var1];
                            }
 
-                           if(var9 > 0L && Class3_Sub13_Sub36.aBoolean3094 && var19 > 0) {
+                           if(var9 > 0L && TextureOperation36.aBoolean3094 && var19 > 0) {
                               int var28;
                               int var30;
                               if(var20 > 0) {
@@ -200,7 +200,7 @@ final class Class140_Sub1_Sub1 extends Model {
 
                                  if(Unsorted.anInt3642 >= var28 && Unsorted.anInt3642 <= var30 && RenderAnimationDefinition.anInt384 >= var29 && RenderAnimationDefinition.anInt384 <= var31) {
                                     if(this.aBoolean2699) {
-                                       Class3_Sub13_Sub38.aLongArray3448[Unsorted.anInt59++] = var9;
+                                       TextureOperation38.aLongArray3448[Unsorted.anInt59++] = var9;
                                     } else {
                                        if(anIntArray3861.length < this.anInt3833) {
                                           anIntArray3861 = new int[this.anInt3833];
@@ -223,7 +223,7 @@ final class Class140_Sub1_Sub1 extends Model {
                                                 short var52 = this.aShortArray3830[var39];
                                                 short var51 = this.aShortArray3831[var39];
                                                 if(this.method1927(Unsorted.anInt3642, RenderAnimationDefinition.anInt384, anIntArray3857[var53], anIntArray3857[var52], anIntArray3857[var51], anIntArray3861[var53], anIntArray3861[var52], anIntArray3861[var51])) {
-                                                   Class3_Sub13_Sub38.aLongArray3448[Unsorted.anInt59++] = var9;
+                                                   TextureOperation38.aLongArray3448[Unsorted.anInt59++] = var9;
                                                    break label118;
                                                 }
 
@@ -595,7 +595,7 @@ final class Class140_Sub1_Sub1 extends Model {
    private static int method1905(int var0, short var1, int var2, byte var3) {
       int var4 = Class51.anIntArray834[Class140_Sub1_Sub2.method1940(var0, var2)];
       if(var1 != -1) {
-         int var5 = Class51.anInterface2_838.method19(93, var1 & '\uffff');
+         int var5 = Class51.anInterface2_838.method19(93, var1 & 65535);
          int var6;
          int var8;
          if(var5 != 0) {
@@ -611,33 +611,33 @@ final class Class140_Sub1_Sub1 extends Model {
                var4 = var6;
             } else {
                var8 = 256 - var5;
-               var4 = ((var6 & 16711935) * var5 + (var4 & 16711935) * var8 & -16711936) + ((var6 & '\uff00') * var5 + (var4 & '\uff00') * var8 & 16711680) >> 8;
+               var4 = ((var6 & 16711935) * var5 + (var4 & 16711935) * var8 & -16711936) + ((var6 & 65280) * var5 + (var4 & 65280) * var8 & 16711680) >> 8;
             }
          }
 
-         var6 = Class51.anInterface2_838.method10(90, var1 & '\uffff');
+         var6 = Class51.anInterface2_838.method10(90, var1 & 65535);
          if(var6 != 0) {
             var6 += 256;
             int var7 = ((var4 & 16711680) >> 16) * var6;
-            if(var7 > '\uffff') {
-               var7 = '\uffff';
+            if(var7 > 65535) {
+               var7 = 65535;
             }
 
-            var8 = ((var4 & '\uff00') >> 8) * var6;
-            if(var8 > '\uffff') {
-               var8 = '\uffff';
+            var8 = ((var4 & 65280) >> 8) * var6;
+            if(var8 > 65535) {
+               var8 = 65535;
             }
 
-            int var9 = (var4 & 255) * var6;
-            if(var9 > '\uffff') {
-               var9 = '\uffff';
+            int var9 = (var4 & 0xFF) * var6;
+            if(var9 > 65535) {
+               var9 = 65535;
             }
 
-            var4 = (var7 << 8 & 16711680) + (var8 & '\uff00') + (var9 >> 8);
+            var4 = (var7 << 8 & 16711680) + (var8 & 65280) + (var9 >> 8);
          }
       }
 
-      return (var4 << 8) + (255 - (var3 & 255));
+      return (var4 << 8) + (255 - (var3 & 0xFF));
    }
 
    private static float[] method1906(int var0, int var1, int var2, int var3, float var4, float var5, float var6) {
@@ -1162,7 +1162,7 @@ final class Class140_Sub1_Sub1 extends Model {
                         for(var13 = 0; var13 < var12.length; ++var13) {
                            var14 = var12[var13];
                            if(this.aShortArray3813 == null || (var7 & this.aShortArray3813[var14]) != 0) {
-                              var15 = (this.aByteArray3816[var14] & 255) + var3 * 8;
+                              var15 = (this.aByteArray3816[var14] & 0xFF) + var3 * 8;
                               if(var15 < 0) {
                                  var15 = 0;
                               } else if(var15 > 255) {
@@ -1190,7 +1190,7 @@ final class Class140_Sub1_Sub1 extends Model {
                         for(var13 = 0; var13 < var12.length; ++var13) {
                            var14 = var12[var13];
                            if(this.aShortArray3813 == null || (var7 & this.aShortArray3813[var14]) != 0) {
-                              var15 = this.aShortArray3808[var14] & '\uffff';
+                              var15 = this.aShortArray3808[var14] & 65535;
                               var16 = var15 >> 10 & 63;
                               var17 = var15 >> 7 & 7;
                               var18 = var15 & 127;
@@ -1243,7 +1243,7 @@ final class Class140_Sub1_Sub1 extends Model {
          var2 = 0;
 
          for(var3 = 0; var3 < this.anInt3823; ++var3) {
-            var4 = this.anIntArray3844[var3] & 255;
+            var4 = this.anIntArray3844[var3] & 0xFF;
             ++var1[var4];
             if(var4 > var2) {
                var2 = var4;
@@ -1258,7 +1258,7 @@ final class Class140_Sub1_Sub1 extends Model {
          }
 
          for(var3 = 0; var3 < this.anInt3823; this.anIntArrayArray3825[var4][var1[var4]++] = var3++) {
-            var4 = this.anIntArray3844[var3] & 255;
+            var4 = this.anIntArray3844[var3] & 0xFF;
          }
 
          this.anIntArray3844 = null;
@@ -1269,7 +1269,7 @@ final class Class140_Sub1_Sub1 extends Model {
          var2 = 0;
 
          for(var3 = 0; var3 < this.anInt3852; ++var3) {
-            var4 = this.aByteArray3820[var3] & 255;
+            var4 = this.aByteArray3820[var3] & 0xFF;
             ++var1[var4];
             if(var4 > var2) {
                var2 = var4;
@@ -1284,7 +1284,7 @@ final class Class140_Sub1_Sub1 extends Model {
          }
 
          for(var3 = 0; var3 < this.anInt3852; this.anIntArrayArray3829[var4][var1[var4]++] = var3++) {
-            var4 = this.aByteArray3820[var3] & 255;
+            var4 = this.aByteArray3820[var3] & 0xFF;
          }
 
          this.aByteArray3820 = null;
@@ -1497,15 +1497,15 @@ final class Class140_Sub1_Sub1 extends Model {
       var3 = 0;
       int var4 = 0;
       if(var1 != -1) {
-         var3 = Class51.anInterface2_838.method19(-125, var1 & '\uffff');
-         var4 = Class51.anInterface2_838.method10(-98, var1 & '\uffff');
+         var3 = Class51.anInterface2_838.method19(-125, var1 & 65535);
+         var4 = Class51.anInterface2_838.method10(-98, var1 & 65535);
       }
 
       int var5 = 0;
       int var6 = 0;
       if(var2 != -1) {
-         var5 = Class51.anInterface2_838.method19(57, var2 & '\uffff');
-         var6 = Class51.anInterface2_838.method10(-114, var2 & '\uffff');
+         var5 = Class51.anInterface2_838.method19(57, var2 & 65535);
+         var6 = Class51.anInterface2_838.method10(-114, var2 & 65535);
       }
 
       if(var3 != var5 || var4 != var6) {
@@ -1657,8 +1657,8 @@ final class Class140_Sub1_Sub1 extends Model {
                   }
                }
             } else if(var1 == 3) {
-               var13 = (var2 & 255) * 4;
-               var14 = (var2 >> 8 & 255) * 4;
+               var13 = (var2 & 0xFF) * 4;
+               var14 = (var2 >> 8 & 0xFF) * 4;
                this.method1895(var4, var6, var7, var8, var13, var14);
             } else if(var1 == 4) {
                var13 = var3.aClass6_3835.aShort92 - var3.aClass6_3835.aShort91;
@@ -2655,7 +2655,7 @@ final class Class140_Sub1_Sub1 extends Model {
 
                         for(var11 = 0; var11 < var10.length; ++var11) {
                            var12 = var10[var11];
-                           var13 = (this.aByteArray3816[var12] & 255) + var3 * 8;
+                           var13 = (this.aByteArray3816[var12] & 0xFF) + var3 * 8;
                            if(var13 < 0) {
                               var13 = 0;
                            } else if(var13 > 255) {
@@ -2681,7 +2681,7 @@ final class Class140_Sub1_Sub1 extends Model {
 
                         for(var11 = 0; var11 < var10.length; ++var11) {
                            var12 = var10[var11];
-                           var13 = this.aShortArray3808[var12] & '\uffff';
+                           var13 = this.aShortArray3808[var12] & 65535;
                            var14 = var13 >> 10 & 63;
                            var15 = var13 >> 7 & 7;
                            var16 = var13 & 127;
@@ -2800,7 +2800,7 @@ final class Class140_Sub1_Sub1 extends Model {
 
          } else if (var1 == 5) {
             for (var5 = 0; var5 < this.anInt3852; ++var5) {
-               var6 = (this.aByteArray3816[var5] & 255) + var2 * 8;
+               var6 = (this.aByteArray3816[var5] & 0xFF) + var2 * 8;
                if (var6 < 0) {
                   var6 = 0;
                } else if (var6 > 255) {
@@ -2813,7 +2813,7 @@ final class Class140_Sub1_Sub1 extends Model {
             this.aClass121_3814.aBoolean1640 = false;
          } else if (var1 == 7) {
             for (var5 = 0; var5 < this.anInt3852; ++var5) {
-               var6 = this.aShortArray3808[var5] & '\uffff';
+               var6 = this.aShortArray3808[var5] & 65535;
                var7 = var6 >> 10 & 63;
                var8 = var6 >> 7 & 7;
                int var9 = var6 & 127;
@@ -2981,7 +2981,7 @@ final class Class140_Sub1_Sub1 extends Model {
                HDToolKit.bindTexture2D(-1);
                Class3_Sub28_Sub4.method551(0, 0);
             } else {
-               Class51.anInterface2_838.method8(var7 & '\uffff', true);
+               Class51.anInterface2_838.method8(var7 & 65535, true);
             }
 
             if(this.aClass121_3846.aClass156_1643 == null) {
@@ -3189,7 +3189,7 @@ final class Class140_Sub1_Sub1 extends Model {
       this.anIntArray3838 = new int[var1.anInt2887 + 1];
 
       for(int var6 = 0; var6 < var1.anInt2849; ++var6) {
-         if((var1.aByteArray2859 == null || var1.aByteArray2859[var6] != 2) && (var1.aShortArray2858 == null || var1.aShortArray2858[var6] == -1 || !Class51.anInterface2_838.method12(var1.aShortArray2858[var6] & '\uffff', -65))) {
+         if((var1.aByteArray2859 == null || var1.aByteArray2859[var6] != 2) && (var1.aShortArray2858 == null || var1.aShortArray2858[var6] == -1 || !Class51.anInterface2_838.method12(var1.aShortArray2858[var6] & 65535, -65))) {
             var5[this.anInt3852++] = var6;
             ++this.anIntArray3838[var1.anIntArray2865[var6]];
             ++this.anIntArray3838[var1.anIntArray2878[var6]];
@@ -3213,12 +3213,12 @@ final class Class140_Sub1_Sub1 extends Model {
          if(var1.aShortArray2858 != null) {
             var13 = var1.aShortArray2858[var8];
             if(var13 != -1) {
-               var11 = Class51.anInterface2_838.method18(var13 & '\uffff', 255);
-               var12 = Class51.anInterface2_838.method9(var13 & '\uffff', false);
+               var11 = Class51.anInterface2_838.method18(var13 & 65535, 255);
+               var12 = Class51.anInterface2_838.method9(var13 & 65535, false);
             }
          }
 
-         boolean var14 = var1.aByteArray2843 != null && var1.aByteArray2843[var8] != 0 || var13 != -1 && !Class51.anInterface2_838.method7((byte)88, var13 & '\uffff');
+         boolean var14 = var1.aByteArray2843 != null && var1.aByteArray2843[var8] != 0 || var13 != -1 && !Class51.anInterface2_838.method7((byte)88, var13 & 65535);
          if((var4 || var14) && var1.aByteArray2889 != null) {
             var9 += var1.aByteArray2889[var8] << 17;
          }
@@ -3227,10 +3227,10 @@ final class Class140_Sub1_Sub1 extends Model {
             var9 += 65536;
          }
 
-         var9 += (var11 & 255) << 8;
-         var9 += var12 & 255;
-         var62 = var10 + ((var13 & '\uffff') << 16);
-         var62 += var7 & '\uffff';
+         var9 += (var11 & 0xFF) << 8;
+         var9 += var12 & 0xFF;
+         var62 = var10 + ((var13 & 65535) << 16);
+         var62 += var7 & 65535;
          var60[var7] = ((long)var9 << 32) + (long)var62;
       }
 
@@ -3315,7 +3315,7 @@ final class Class140_Sub1_Sub1 extends Model {
          for(var20 = 0; var20 < this.anInt3852; ++var20) {
             int var21 = var5[var20];
             if(var1.aByteArray2866[var21] != -1) {
-               int var22 = var1.aByteArray2866[var21] & 255;
+               int var22 = var1.aByteArray2866[var21] & 0xFF;
 
                for(int var23 = 0; var23 < 3; ++var23) {
                   int var24;
@@ -3381,18 +3381,18 @@ final class Class140_Sub1_Sub1 extends Model {
                      var75 = (float)(-var80) / 1024.0F;
                   }
 
-                  var82 = 64.0F / (float)(var1.aShortArray2882[var20] & '\uffff');
+                  var82 = 64.0F / (float)(var1.aShortArray2882[var20] & 65535);
                } else if(var76 == 2) {
-                  var75 = 64.0F / (float)(var1.aShortArray2888[var20] & '\uffff');
-                  var82 = 64.0F / (float)(var1.aShortArray2882[var20] & '\uffff');
-                  var79 = 64.0F / (float)(var1.aShortArray2851[var20] & '\uffff');
+                  var75 = 64.0F / (float)(var1.aShortArray2888[var20] & 65535);
+                  var82 = 64.0F / (float)(var1.aShortArray2882[var20] & 65535);
+                  var79 = 64.0F / (float)(var1.aShortArray2851[var20] & 65535);
                } else {
                   var75 = (float)var1.aShortArray2888[var20] / 1024.0F;
                   var82 = (float)var1.aShortArray2882[var20] / 1024.0F;
                   var79 = (float)var1.aShortArray2851[var20] / 1024.0F;
                }
 
-               var65[var20] = method1906(var1.aShortArray2884[var20], var1.aShortArray2846[var20], var1.aShortArray2891[var20], var1.aByteArray2845[var20] & 255, var75, var82, var79);
+               var65[var20] = method1906(var1.aShortArray2884[var20], var1.aShortArray2846[var20], var1.aShortArray2891[var20], var1.aByteArray2845[var20] & 0xFF, var75, var82, var79);
             }
          }
       }
@@ -3401,7 +3401,7 @@ final class Class140_Sub1_Sub1 extends Model {
       int var67;
       for(var68 = 0; var68 < this.anInt3852; ++var68) {
          int var70 = var5[var68];
-         var67 = var1.aShortArray2870[var70] & '\uffff';
+         var67 = var1.aShortArray2870[var70] & 65535;
          if(var1.aShortArray2858 == null) {
             var71 = -1;
          } else {
@@ -3419,7 +3419,7 @@ final class Class140_Sub1_Sub1 extends Model {
          if(var1.aByteArray2843 == null) {
             var74 = 0;
          } else {
-            var74 = var1.aByteArray2843[var70] & 255;
+            var74 = var1.aByteArray2843[var70] & 0xFF;
          }
 
          float var73 = 0.0F;
@@ -3511,7 +3511,7 @@ final class Class140_Sub1_Sub1 extends Model {
                   byte var90 = var1.aByteArray2867[var72];
                   var37 = (float)var1.aByteArray2877[var72] / 256.0F;
                   if(var28 == 1) {
-                     var38 = (float)(var1.aShortArray2851[var72] & '\uffff') / 1024.0F;
+                     var38 = (float)(var1.aShortArray2851[var72] & 65535) / 1024.0F;
                      method1904(var1.anIntArray2885[var29], var1.anIntArray2881[var29], var1.anIntArray2892[var29], var88, var87, var94, var93, var38, var90, var37);
                      var73 = aFloat3863;
                      var78 = aFloat3866;
@@ -3567,9 +3567,9 @@ final class Class140_Sub1_Sub1 extends Model {
                      int var99 = var96 * var98 - var103 * var101;
                      int var100 = var101 * var102 - var98 * var97;
                      int var104 = var97 * var103 - var102 * var96;
-                     var49 = 64.0F / (float)(var1.aShortArray2888[var72] & '\uffff');
-                     var50 = 64.0F / (float)(var1.aShortArray2882[var72] & '\uffff');
-                     var51 = 64.0F / (float)(var1.aShortArray2851[var72] & '\uffff');
+                     var49 = 64.0F / (float)(var1.aShortArray2888[var72] & 65535);
+                     var50 = 64.0F / (float)(var1.aShortArray2882[var72] & 65535);
+                     var51 = 64.0F / (float)(var1.aShortArray2851[var72] & 65535);
                      var52 = ((float)var99 * var93[0] + (float)var100 * var93[1] + (float)var104 * var93[2]) / var49;
                      var53 = ((float)var99 * var93[3] + (float)var100 * var93[4] + (float)var104 * var93[5]) / var50;
                      var54 = ((float)var99 * var93[6] + (float)var100 * var93[7] + (float)var104 * var93[8]) / var51;

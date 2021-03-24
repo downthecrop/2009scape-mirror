@@ -101,9 +101,9 @@ final class Class140_Sub3 extends GameObject {
          if(var2 != null) {
             var10 = var2.frames[var10];
             int frame = var10 >> 16;
-            //              	 System.out.println(var2.animId  + " Roar " + (var10 >> 16) + ", " + (var10 & '\uffff') + ", " + Arrays.toString(var2.frames));
+            //              	 System.out.println(var2.animId  + " Roar " + (var10 >> 16) + ", " + (var10 & 65535) + ", " + Arrays.toString(var2.frames));
             var40 = Class3_Sub9.method133(frame); //NPC render animating
-            var10 &= '\uffff';
+            var10 &= 65535;
          }
 
          var21 = var32;
@@ -447,7 +447,7 @@ final class Class140_Sub3 extends GameObject {
 
             for(; localPlayerAmount > var2; ++var2) {
                int var3 = Class56.localPlayerIndexes[var2];
-               Player var4 = Class3_Sub13_Sub22.players[var3];
+               Player var4 = TextureOperation0.players[var3];
                int update = GraphicDefinition.incomingBuffer.getBits(1);
                if(update == 0) {
                   Class56.localPlayerIndexes[Class159.localPlayerCount++] = var3;

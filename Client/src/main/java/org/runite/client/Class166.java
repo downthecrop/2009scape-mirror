@@ -22,7 +22,7 @@ final class Class166 {
         if (Class8.method846(var0, var1, var2)) {
             int var4 = var1 << 7;
             int var5 = var2 << 7;
-            return !Class3_Sub13_Sub37.method349(var4 + 1, Class44.anIntArrayArrayArray723[var0][var1][var2] + var3, var5 + 1) || !Class3_Sub13_Sub37.method349(var4 + 128 - 1, Class44.anIntArrayArrayArray723[var0][var1 + 1][var2] + var3, var5 + 1) || !Class3_Sub13_Sub37.method349(var4 + 128 - 1, Class44.anIntArrayArrayArray723[var0][var1 + 1][var2 + 1] + var3, var5 + 128 - 1) || !Class3_Sub13_Sub37.method349(var4 + 1, Class44.anIntArrayArrayArray723[var0][var1][var2 + 1] + var3, var5 + 128 - 1);
+            return !TextureOperation10.method349(var4 + 1, Class44.anIntArrayArrayArray723[var0][var1][var2] + var3, var5 + 1) || !TextureOperation10.method349(var4 + 128 - 1, Class44.anIntArrayArrayArray723[var0][var1 + 1][var2] + var3, var5 + 1) || !TextureOperation10.method349(var4 + 128 - 1, Class44.anIntArrayArrayArray723[var0][var1 + 1][var2 + 1] + var3, var5 + 128 - 1) || !TextureOperation10.method349(var4 + 1, Class44.anIntArrayArrayArray723[var0][var1][var2 + 1] + var3, var5 + 128 - 1);
         } else {
             return true;
         }
@@ -43,25 +43,25 @@ final class Class166 {
             boolean var4 = false;
 
             for (int var5 = 0; Class159.localPlayerCount > var5; ++var5) {
-                Player var6 = Class3_Sub13_Sub22.players[Class56.localPlayerIndexes[var5]];
+                Player var6 = TextureOperation0.players[Class56.localPlayerIndexes[var5]];
                 if (null != var6 && null != var6.displayName && var6.displayName.equalsStringIgnoreCase(var3)) {
                     var4 = true;
                     Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var6.anIntArray2767[0], 1, 0, 2, var6.anIntArray2755[0], Class102.player.anIntArray2767[0]);
                     if (1 == var0) {
-                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(68);
-                        Class3_Sub13_Sub1.outgoingBuffer.writeShort128LE(Class56.localPlayerIndexes[var5]);
+                        TextureOperation12.outgoingBuffer.putOpcode(68);
+                        TextureOperation12.outgoingBuffer.writeShort128LE(Class56.localPlayerIndexes[var5]);
                     } else if (4 == var0) {
-                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(180);
-                        Class3_Sub13_Sub1.outgoingBuffer.writeShort128LE(Class56.localPlayerIndexes[var5]);
+                        TextureOperation12.outgoingBuffer.putOpcode(180);
+                        TextureOperation12.outgoingBuffer.writeShort128LE(Class56.localPlayerIndexes[var5]);
                     } else if (5 == var0) {
-                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(4);
-                        Class3_Sub13_Sub1.outgoingBuffer.writeShortLE(Class56.localPlayerIndexes[var5]);
+                        TextureOperation12.outgoingBuffer.putOpcode(4);
+                        TextureOperation12.outgoingBuffer.writeShortLE(Class56.localPlayerIndexes[var5]);
                     } else if (var0 == 6) {
-                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(133);
-                        Class3_Sub13_Sub1.outgoingBuffer.writeShortLE(Class56.localPlayerIndexes[var5]);
+                        TextureOperation12.outgoingBuffer.putOpcode(133);
+                        TextureOperation12.outgoingBuffer.writeShortLE(Class56.localPlayerIndexes[var5]);
                     } else if (var0 == 7) {
-                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(114);
-                        Class3_Sub13_Sub1.outgoingBuffer.writeShort128LE(Class56.localPlayerIndexes[var5]);
+                        TextureOperation12.outgoingBuffer.putOpcode(114);
+                        TextureOperation12.outgoingBuffer.writeShort128LE(Class56.localPlayerIndexes[var5]);
                     }
                     break;
                 }
@@ -80,9 +80,9 @@ final class Class166 {
         try {
             Object var1;
             if (HDToolKit.highDetail) {
-                var1 = new HDIndexedSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], Class163_Sub1.aByteArrayArray2987[0], Class3_Sub13_Sub38.spritePalette);
+                var1 = new HDIndexedSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], Class163_Sub1.aByteArrayArray2987[0], TextureOperation38.spritePalette);
             } else {
-                var1 = new LDIndexedSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], Class163_Sub1.aByteArrayArray2987[0], Class3_Sub13_Sub38.spritePalette);
+                var1 = new LDIndexedSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], Class163_Sub1.aByteArrayArray2987[0], TextureOperation38.spritePalette);
             }
 
             Class39.method1035((byte) 116);

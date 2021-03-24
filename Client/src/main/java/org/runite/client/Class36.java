@@ -55,7 +55,7 @@ final class Class36 {
                                 break;
                             }
 
-                            var3[var10] = Class3_Sub13_Sub29.bitwiseOr(var12, var11);
+                            var3[var10] = TextureOperation3.bitwiseOr(var12, var11);
                         }
 
                         var9 = var8 | var7;
@@ -141,7 +141,7 @@ final class Class36 {
         try {
 
             for (int var4 = 0; var4 < Client.anInt869; ++var4) {
-                Class168 var5 = Class3_Sub13_Sub37.method350((byte) 120, var4);
+                Class168 var5 = TextureOperation10.method350((byte) 120, var4);
                 if (null != var5) {
                     int var6 = var5.anInt2095;
                     if (0 <= var6 && !Class51.anInterface2_838.method17(var6, 126)) {
@@ -154,7 +154,7 @@ final class Class36 {
                     int var10;
                     if (var5.anInt2098 < 0) {
                         if (var6 >= 0) {
-                            var7 = Class51.anIntArray834[LinkableRSString.method729((byte) -74, Class51.anInterface2_838.method15(var6, '\uffff'), 96)];
+                            var7 = Class51.anIntArray834[LinkableRSString.method729((byte) -74, Class51.anInterface2_838.method15(var6, 65535), 96)];
                         } else if (-1 == var5.anInt2103) {
                             var7 = -1;
                         } else {
@@ -198,7 +198,7 @@ final class Class36 {
 
             int var8;
             for (var8 = var6 << 3; var1 > var5; ++var5) {
-                int var9 = var4[var5] & 255;
+                int var9 = var4[var5] & 0xFF;
                 int var10 = this.anIntArray636[var9];
                 byte var11 = this.aByteArray635[var9];
                 if (0 == var11) {
@@ -211,7 +211,7 @@ final class Class36 {
                 int var14 = var12 + (var13 + var11 - 1 >> 3);
                 var7 &= -var13 >> 31;
                 var13 += 24;
-                var3[var12] = (byte) (var7 = Class3_Sub13_Sub29.bitwiseOr(var7, var10 >>> var13));
+                var3[var12] = (byte) (var7 = TextureOperation3.bitwiseOr(var7, var10 >>> var13));
                 if (var14 > var12) {
                     ++var12;
                     var13 -= 8;

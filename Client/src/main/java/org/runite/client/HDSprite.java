@@ -125,7 +125,7 @@ public class HDSprite extends AbstractSprite {
         var6.glEnd();
     }
 
-    final void drawMinimapRegion(int x, int y, int width, int height, int playerRelativeX, int playerRelativeY, int regionRotation, int zoom, HDSprite var9) {
+    public final void drawMinimapRegion(int x, int y, int width, int height, int playerRelativeX, int playerRelativeY, int regionRotation, int zoom, HDSprite var9) {
         if (var9 != null) {
             HDToolKit.method1822();
             HDToolKit.bindTexture2D(var9.anInt4077);

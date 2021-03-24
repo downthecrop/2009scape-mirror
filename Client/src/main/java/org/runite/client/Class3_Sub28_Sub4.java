@@ -54,7 +54,7 @@ final class Class3_Sub28_Sub4 extends Node {
       try {
          if(null != this.anIntArray3567) {
             for(int var2 = 0; var2 < this.anIntArray3567.length; ++var2) {
-               this.anIntArray3567[var2] = Class3_Sub13_Sub29.bitwiseOr(this.anIntArray3567[var2], '\u8000');
+               this.anIntArray3567[var2] = TextureOperation3.bitwiseOr(this.anIntArray3567[var2], 32768);
             }
          }
 
@@ -92,12 +92,12 @@ final class Class3_Sub28_Sub4 extends Node {
          }
 
          if(var2 == Class23.anInt453) {
-            if(0 != var2 && var1 != Class3_Sub13_Sub21.anInt3263) {
+            if(0 != var2 && var1 != TextureOperation37.anInt3263) {
                Unsorted.anShaderInterfaceArray70[var2].method23(var1);
-               Class3_Sub13_Sub21.anInt3263 = var1;
+               TextureOperation37.anInt3263 = var1;
             }
          } else {
-            if(Class3_Sub13_Sub17.aBoolean3207) {
+            if(TextureOperation23.aBoolean3207) {
                return;
             }
 
@@ -112,7 +112,7 @@ final class Class3_Sub28_Sub4 extends Node {
             }
 
             Class23.anInt453 = var2;
-            Class3_Sub13_Sub21.anInt3263 = var1;
+            TextureOperation37.anInt3263 = var1;
          }
 
       } catch (RuntimeException var4) {

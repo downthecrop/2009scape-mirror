@@ -2,13 +2,13 @@ package org.runite.client;
 
 import org.rs09.client.data.ReferenceCache;
 
-final class Class159 {
+public final class Class159 {
 
     static ReferenceCache aReferenceCache_2016 = new ReferenceCache(100);
     static int[] anIntArray2017 = new int[]{1, 2, 4, 8};
     static int anInt2020 = 0;
     static int[] anIntArray2021 = new int[2];
-    static int localPlayerCount = 0;
+    public static int localPlayerCount = 0;
     static int anInt2023 = 0;
     static int anInt2024 = 0;
     static int[] anIntArray1681;
@@ -57,7 +57,7 @@ final class Class159 {
             if (Class161.anIntArray2026.length < Class72.anInt1071) {
                 Class72.anInt1071 -= Class161.anIntArray2026.length;
                 var3 = (int) (12.0D * Math.random());
-                Class3_Sub13_Sub10.method215((byte) -119, Class163_Sub2_Sub1.aClass109_Sub1Array4027[var3]);
+                TextureOperation30.method215((byte) -119, Class163_Sub2_Sub1.aClass109_Sub1Array4027[var3]);
             }
 
             var3 = 0;

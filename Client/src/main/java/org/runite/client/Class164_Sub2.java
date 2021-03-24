@@ -4,11 +4,11 @@ import org.rs09.client.Linkable;
 
 import java.util.Objects;
 
-class Class164_Sub2 extends Class164 {
+public class Class164_Sub2 extends Class164 {
 
    private int anInt3018;
    static Class33 aClass33_3019;
-   static int anInt3020 = 0;
+   public static int anInt3020 = 0;
    private final int anInt3021;
    private final int anInt3022;
    private int anInt3024;
@@ -95,7 +95,7 @@ class Class164_Sub2 extends Class164 {
                   }
 
                   if(var8 == 1) {
-                     var9 = Class3_Sub13_Sub15.anIntArray3185[var4[var6++]];
+                     var9 = TextureOperation17.anIntArray3185[var4[var6++]];
                   }
 
                   if(var8 == 17) {
@@ -192,7 +192,7 @@ class Class164_Sub2 extends Class164 {
                   }
 
                   if(var8 == 19) {
-                     var9 = (Class102.player.anInt2829 >> 7) - -Class82.anInt1152;
+                     var9 = (Class102.player.anInt2829 >> 7) - -Texture.anInt1152;
                   }
 
                   if(var8 == 20) {

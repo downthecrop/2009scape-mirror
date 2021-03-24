@@ -111,7 +111,7 @@ final class WaterfallShader implements ShaderInterface {
          var2.glLoadIdentity();
          var2.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
          var2.glRotatef((float)Class140_Sub7.anInt2938 * 360.0F / 2048.0F, 1.0F, 0.0F, 0.0F);
-         var2.glRotatef(360.0F * (float)Class3_Sub13_Sub8.anInt3103 / 2048.0F, 0.0F, 1.0F, 0.0F);
+         var2.glRotatef(360.0F * (float) TextureOperation9.anInt3103 / 2048.0F, 0.0F, 1.0F, 0.0F);
          var2.glTranslatef((float)(-Unsorted.anInt144), (float)(-Unsorted.anInt3695), (float)(-LinkableRSString.anInt2587));
          var2.glTexGenfv(8192, 9474, this.aFloatArray2174, 0);
          this.aFloatArray2174[3] = var3 * (float)HDToolKit.anInt1791;
@@ -223,7 +223,7 @@ final class WaterfallShader implements ShaderInterface {
          }
 
          for(int var6 = var3; var6 <= var1; ++var6) {
-            Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var6], var4, 121, var2, var5);
+            TextureOperation18.method282(Class38.anIntArrayArray663[var6], var4, 121, var2, var5);
          }
 
       } catch (RuntimeException var7) {

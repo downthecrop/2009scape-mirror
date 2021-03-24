@@ -14,7 +14,7 @@ abstract class Class146 {
 
     static void updateInterfacePacketCounter(int packetCounter) {
         try {
-            Class113.interfacePacketCounter = packetCounter + 1 & '\uffff';
+            Class113.interfacePacketCounter = packetCounter + 1 & 65535;
             RenderAnimationDefinition.aBoolean402 = true;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "uc.D(" + packetCounter + ',' + (byte) -25 + ')');
@@ -45,14 +45,14 @@ abstract class Class146 {
         int var14;
         int var15;
         int var29;
-        for (int var12 = Class3_Sub13_Sub35.anInt3419; var12 < Class3_Sub17.anInt2456; ++var12) {
+        for (int var12 = TextureOperation22.anInt3419; var12 < Class3_Sub17.anInt2456; ++var12) {
             Class3_Sub2[][] var13 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var12];
 
             for (var14 = Class163_Sub1_Sub1.anInt4006; var14 < Unsorted.anInt67; ++var14) {
                 for (var15 = Unsorted.anInt3603; var15 < Class126.anInt1665; ++var15) {
                     Class3_Sub2 var16 = var13[var14][var15];
                     if (var16 != null) {
-                        if (Class23.aBooleanArrayArray457[var14 - Class97.anInt1375 + Class3_Sub13_Sub39.anInt3466][var15 - Class145.anInt3340 + Class3_Sub13_Sub39.anInt3466] && (var3 == null || var12 < var4 || var3[var12][var14][var15] != var5)) {
+                        if (Class23.aBooleanArrayArray457[var14 - Class97.anInt1375 + TextureOperation8.anInt3466][var15 - Class145.anInt3340 + TextureOperation8.anInt3466] && (var3 == null || var12 < var4 || var3[var12][var14][var15] != var5)) {
                             var16.aBoolean2222 = true;
                             var16.aBoolean2225 = true;
                             var16.aBoolean2236 = var16.anInt2223 > 0;
@@ -105,7 +105,7 @@ abstract class Class146 {
             if (var22) {
                 Class3_Sub22.method403();
                 Class3_Sub28_Sub4.method551(-1, 3);
-                Class3_Sub13_Sub17.aBoolean3207 = true;
+                TextureOperation23.aBoolean3207 = true;
                 WaterShader.method2254();
                 Unsorted.anInt1244 = -1;
                 Class145.anInt3072 = -1;
@@ -124,7 +124,7 @@ abstract class Class146 {
 
                 WaterShader.method2253();
             } else {
-                for (var14 = Class3_Sub13_Sub35.anInt3419; var14 < Class3_Sub17.anInt2456; ++var14) {
+                for (var14 = TextureOperation22.anInt3419; var14 < Class3_Sub17.anInt2456; ++var14) {
                     for (var15 = 0; var15 < Class3_Sub23.aClass3_Sub11ArrayArray2542[var14].length; ++var15) {
                         Class3_Sub11 var25 = Class3_Sub23.aClass3_Sub11ArrayArray2542[var14][var15];
                         float var33 = 201.5F - 50.0F * (float) var14 - (var25.aBoolean2364 ? 1.0F : 0.5F);
@@ -137,7 +137,7 @@ abstract class Class146 {
 
                     if (var14 == 0 && Unsorted.anInt1137 > 0) {
                         HDToolKit.method1832(101.5F);
-                        Class141.method2038(Class97.anInt1375, Class145.anInt3340, Class3_Sub13_Sub39.anInt3466, Class23.aBooleanArrayArray457);
+                        Class141.method2038(Class97.anInt1375, Class145.anInt3340, TextureOperation8.anInt3466, Class23.aBooleanArrayArray457);
                     }
                 }
 
@@ -154,14 +154,14 @@ abstract class Class146 {
         Class3_Sub2[][] var27;
         int var34;
         int var32;
-        for (var23 = Class3_Sub13_Sub35.anInt3419; var23 < Class3_Sub17.anInt2456; ++var23) {
+        for (var23 = TextureOperation22.anInt3419; var23 < Class3_Sub17.anInt2456; ++var23) {
             var27 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var23];
 
-            for (var15 = -Class3_Sub13_Sub39.anInt3466; var15 <= 0; ++var15) {
+            for (var15 = -TextureOperation8.anInt3466; var15 <= 0; ++var15) {
                 var32 = Class97.anInt1375 + var15;
                 var29 = Class97.anInt1375 - var15;
                 if (var32 >= Class163_Sub1_Sub1.anInt4006 || var29 < Unsorted.anInt67) {
-                    for (var34 = -Class3_Sub13_Sub39.anInt3466; var34 <= 0; ++var34) {
+                    for (var34 = -TextureOperation8.anInt3466; var34 <= 0; ++var34) {
                         var19 = Class145.anInt3340 + var34;
                         var20 = Class145.anInt3340 - var34;
                         if (var32 >= Class163_Sub1_Sub1.anInt4006) {
@@ -198,7 +198,7 @@ abstract class Class146 {
 
                         if (anInt3 == 0) {
                             if (!var22) {
-                                Class3_Sub13_Sub21.aBoolean3261 = false;
+                                TextureOperation37.aBoolean3261 = false;
                             }
 
                             return;
@@ -208,14 +208,14 @@ abstract class Class146 {
             }
         }
 
-        for (var23 = Class3_Sub13_Sub35.anInt3419; var23 < Class3_Sub17.anInt2456; ++var23) {
+        for (var23 = TextureOperation22.anInt3419; var23 < Class3_Sub17.anInt2456; ++var23) {
             var27 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var23];
 
-            for (var15 = -Class3_Sub13_Sub39.anInt3466; var15 <= 0; ++var15) {
+            for (var15 = -TextureOperation8.anInt3466; var15 <= 0; ++var15) {
                 var32 = Class97.anInt1375 + var15;
                 var29 = Class97.anInt1375 - var15;
                 if (var32 >= Class163_Sub1_Sub1.anInt4006 || var29 < Unsorted.anInt67) {
-                    for (var34 = -Class3_Sub13_Sub39.anInt3466; var34 <= 0; ++var34) {
+                    for (var34 = -TextureOperation8.anInt3466; var34 <= 0; ++var34) {
                         var19 = Class145.anInt3340 + var34;
                         var20 = Class145.anInt3340 - var34;
                         if (var32 >= Class163_Sub1_Sub1.anInt4006) {
@@ -252,7 +252,7 @@ abstract class Class146 {
 
                         if (anInt3 == 0) {
                             if (!var22) {
-                                Class3_Sub13_Sub21.aBoolean3261 = false;
+                                TextureOperation37.aBoolean3261 = false;
                             }
 
                             return;
@@ -262,7 +262,7 @@ abstract class Class146 {
             }
         }
 
-        Class3_Sub13_Sub21.aBoolean3261 = false;
+        TextureOperation37.aBoolean3261 = false;
     }
 
     abstract int method2078();

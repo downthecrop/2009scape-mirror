@@ -18,11 +18,11 @@ public final class Class143 {
 
             int var16;
             for (var16 = var12; var8 > var16; ++var16) {
-                Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var16], var14, 97, var15, var5);
+                TextureOperation18.method282(Class38.anIntArrayArray663[var16], var14, 97, var15, var5);
             }
 
             for (var16 = var13; var9 < var16; --var16) {
-                Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var16], var14, 94, var15, var5);
+                TextureOperation18.method282(Class38.anIntArrayArray663[var16], var14, 94, var15, var5);
             }
 
             int var10 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var4 + var7, Class101.anInt1425);
@@ -30,9 +30,9 @@ public final class Class143 {
 
             for (var16 = var8; var9 >= var16; ++var16) {
                 int[] var17 = Class38.anIntArrayArray663[var16];
-                Class3_Sub13_Sub23_Sub1.method282(var17, var14, 105, var10, var5);
-                Class3_Sub13_Sub23_Sub1.method282(var17, var10, 111, var11, var1);
-                Class3_Sub13_Sub23_Sub1.method282(var17, var11, 109, var15, var5);
+                TextureOperation18.method282(var17, var14, 105, var10, var5);
+                TextureOperation18.method282(var17, var10, 111, var11, var1);
+                TextureOperation18.method282(var17, var11, 109, var15, var5);
             }
 
         } catch (RuntimeException var18) {

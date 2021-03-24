@@ -29,7 +29,7 @@ final class Class155_Sub1 extends Class155 {
    }
 
    final void method2150(int var1) throws Exception {
-      if(var1 > '\u8000') {
+      if(var1 > 32768) {
          throw new IllegalArgumentException();
       } else {
          anInterface1_2970.method3(this.anInt2969, 25349, var1);

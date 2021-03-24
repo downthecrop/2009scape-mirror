@@ -1,17 +1,17 @@
 package org.runite.client;
 
-final class Class96 {
+public final class Class96 {
 
     static int anInt1358 = 0;
-    int anInt1346;
-    int anInt1347;
-    int anInt1350;
-    int anInt1351;
-    int anInt1353;
-    int anInt1355 = -1;
-    int anInt1356;
-    int anInt1359;
-    int anInt1360;
+    public int anInt1346;
+    public int anInt1347;
+    public int anInt1350;
+    public int anInt1351;
+    public int anInt1353;
+    public int anInt1355 = -1;
+    public int anInt1356;
+    public int anInt1359;
+    public int anInt1360;
 
     static void method1587(DataBuffer var1) {
         try {
@@ -29,7 +29,7 @@ final class Class96 {
 
                     int var7 = var1.readUnsignedByte();
                     int var8 = var1.readUnsignedByte();
-                    int var9 = -Class3_Sub13_Sub21.anInt3256 + 64 * var7;
+                    int var9 = -TextureOperation37.anInt3256 + 64 * var7;
                     int var10 = -(var8 * 64) - (-Unsorted.anInt65 - -1) + Class108.anInt1460;
                     int var11;
                     int var12;

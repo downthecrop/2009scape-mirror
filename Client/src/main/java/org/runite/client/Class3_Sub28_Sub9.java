@@ -23,12 +23,12 @@ final class Class3_Sub28_Sub9 extends Node {
          byte[] var2 = Class163_Sub1.aByteArrayArray2987[0];
 
          Object var3;
-         if(Class3_Sub13_Sub22.aBooleanArray3272[0]) {
+         if(TextureOperation0.aBooleanArray3272[0]) {
             byte[] var4 = Class163_Sub3.aByteArrayArray3005[0];
             int[] var5 = new int[var1];
 
             for(int var6 = 0; var6 < var1; ++var6) {
-               var5[var6] = Class3_Sub13_Sub29.bitwiseOr(Unsorted.bitwiseAnd(var4[var6] << 24, -16777216), Class3_Sub13_Sub38.spritePalette[Unsorted.bitwiseAnd(255, var2[var6])]);
+               var5[var6] = TextureOperation3.bitwiseOr(Unsorted.bitwiseAnd(var4[var6] << 24, -16777216), TextureOperation38.spritePalette[Unsorted.bitwiseAnd(255, var2[var6])]);
             }
 
             var3 = new Class3_Sub28_Sub16_Sub2_Sub1(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], var5);
@@ -36,7 +36,7 @@ final class Class3_Sub28_Sub9 extends Node {
             int[] var8 = new int[var1];
 
             for(int var9 = 0; var9 < var1; ++var9) {
-               var8[var9] = Class3_Sub13_Sub38.spritePalette[Unsorted.bitwiseAnd(var2[var9], 255)];
+               var8[var9] = TextureOperation38.spritePalette[Unsorted.bitwiseAnd(var2[var9], 255)];
             }
 
             var3 = new Class3_Sub28_Sub16_Sub2(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], var8);
@@ -78,15 +78,15 @@ final class Class3_Sub28_Sub9 extends Node {
 
    static void method581(CacheIndex var0, CacheIndex var2) {
       try {
-         TextureOperation.smallFont = Unsorted.method1300(Sprites.p11FullSpriteArchive, var2, var0);
+         FontType.smallFont = Unsorted.method1300(Sprites.p11FullSpriteArchive, var2, var0);
          if(HDToolKit.highDetail) {
             Class157.aClass3_Sub28_Sub17_Sub1_2000 = Class70.method1287(Sprites.p11FullSpriteArchive, var0, var2);
          } else {
-            Class157.aClass3_Sub28_Sub17_Sub1_2000 = (Class3_Sub28_Sub17_Sub1) TextureOperation.smallFont;
+            Class157.aClass3_Sub28_Sub17_Sub1_2000 = (Class3_Sub28_Sub17_Sub1) FontType.smallFont;
          }
 
-         Class126.plainFont = Unsorted.method1300(Sprites.p12FullSpriteArchive, var2, var0);
-         Class168.bold = Unsorted.method1300(Sprites.b12FullSpriteArchive, var2, var0);
+         FontType.plainFont = Unsorted.method1300(Sprites.p12FullSpriteArchive, var2, var0);
+         FontType.bold = Unsorted.method1300(Sprites.b12FullSpriteArchive, var2, var0);
       } catch (RuntimeException var4) {
          throw ClientErrorException.clientError(var4, "hn.D(" + (var0 != null?"{...}":"null") + ',' + 0 + ',' + (var2 != null?"{...}":"null") + ')');
       }

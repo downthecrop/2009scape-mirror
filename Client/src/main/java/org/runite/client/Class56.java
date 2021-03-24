@@ -2,12 +2,12 @@ package org.runite.client;
 
 import org.rs09.client.data.NodeCache;
 
-final class Class56 {
+public final class Class56 {
 
     static Class3_Sub26 aClass3_Sub26_884 = new Class3_Sub26(0, 0);
     static NodeCache aClass47_885 = new NodeCache(128);
     static RSInterface aClass11_886 = null;
-    static int[] localPlayerIndexes = new int[2048];
+    public static int[] localPlayerIndexes = new int[2048];
     static Class106[] aClass106Array890;
 
     static int anInt893 = 0;
@@ -103,7 +103,7 @@ final class Class56 {
             PacketParser.aByteArrayArrayArray81 = null;
             Class67.aByteArrayArrayArray1014 = null;
             Class158_Sub1.aByteArrayArrayArray1828 = null;
-            Class3_Sub13_Sub36.aByteArrayArrayArray3430 = null;
+            TextureOperation36.aByteArrayArrayArray3430 = null;
             Unsorted.anIntArray1138 = null;
             Class129.anIntArray1695 = null;
             Class3_Sub31.anIntArray2606 = null;
@@ -119,7 +119,7 @@ final class Class56 {
         int var16;
         for (int var15 = var1; var15 < var1 + var3; ++var15) {
             for (var16 = var2; var16 < var2 + var4; ++var16) {
-                if (var15 < 0 || var16 < 0 || var15 >= Unsorted.anInt1234 || var16 >= Class3_Sub13_Sub15.anInt3179) {
+                if (var15 < 0 || var16 < 0 || var15 >= Unsorted.anInt1234 || var16 >= TextureOperation17.anInt3179) {
                     return false;
                 }
 
@@ -174,8 +174,8 @@ final class Class56 {
                 var22.anIntArray2237[var22.anInt2223] = var18;
                 var22.anInt2228 |= var18;
                 ++var22.anInt2223;
-                if (var13 && Class3_Sub13_Sub9.anIntArrayArray3115[var16][var21] != 0) {
-                    var14 = Class3_Sub13_Sub9.anIntArrayArray3115[var16][var21];
+                if (var13 && TextureOperation16.anIntArrayArray3115[var16][var21] != 0) {
+                    var14 = TextureOperation16.anIntArrayArray3115[var16][var21];
                 }
             }
         }
@@ -183,8 +183,8 @@ final class Class56 {
         if (var13 && var14 != 0) {
             for (var16 = var1; var16 < var1 + var3; ++var16) {
                 for (var21 = var2; var21 < var2 + var4; ++var21) {
-                    if (Class3_Sub13_Sub9.anIntArrayArray3115[var16][var21] == 0) {
-                        Class3_Sub13_Sub9.anIntArrayArray3115[var16][var21] = var14;
+                    if (TextureOperation16.anIntArrayArray3115[var16][var21] == 0) {
+                        TextureOperation16.anIntArrayArray3115[var16][var21] = var14;
                     }
                 }
             }

@@ -63,20 +63,6 @@ abstract class Class75 {
         }
     }
 
-    static void method1340(int var0, int var1, int var3, int var4) {
-        try {
-
-            for (int var5 = 0; var5 < Class3_Sub28_Sub3.anInt3557; ++var5) {
-                if (var0 < Class3_Sub28_Sub18.anIntArray3768[var5] + Class155.anIntArray1969[var5] && Class155.anIntArray1969[var5] < var1 + var0 && Class140_Sub4.anIntArray2794[var5] + Player.anIntArray3954[var5] > var3 && Player.anIntArray3954[var5] < var3 - -var4) {
-                    Unsorted.aBooleanArray3674[var5] = true;
-                }
-            }
-
-        } catch (RuntimeException var6) {
-            throw ClientErrorException.clientError(var6, "kf.I(" + var0 + ',' + var1 + ',' + (byte) -40 + ',' + var3 + ',' + var4 + ')');
-        }
-    }
-
     abstract void method1335(int var1, int var2, int var3);
 
     abstract void method1337(int var1, boolean var2, int var3);

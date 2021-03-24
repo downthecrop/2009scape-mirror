@@ -24,7 +24,7 @@ final class Class108 {
     static RSString method1653(int var0) {
         try {
 
-            return RSString.stringCombiner(new RSString[]{RSString.stringAnimator(255 & var0 >> 24), TextCore.aClass94_4023, RSString.stringAnimator((var0 & 16712751) >> 16), TextCore.aClass94_4023, RSString.stringAnimator(255 & var0 >> 8), TextCore.aClass94_4023, RSString.stringAnimator(var0 & 255)});
+            return RSString.stringCombiner(new RSString[]{RSString.stringAnimator(255 & var0 >> 24), TextCore.aClass94_4023, RSString.stringAnimator((var0 & 16712751) >> 16), TextCore.aClass94_4023, RSString.stringAnimator(255 & var0 >> 8), TextCore.aClass94_4023, RSString.stringAnimator(var0 & 0xFF)});
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "oi.F(" + var0 + ',' + 0 + ')');
         }

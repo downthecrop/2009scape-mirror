@@ -33,7 +33,7 @@ final class Class133 {
 
     static void method1803() {
         try {
-            Class82.aReferenceCache_1146.clearSoftReferences();
+            Texture.aReferenceCache_1146.clearSoftReferences();
             Class159.aReferenceCache_2016.clearSoftReferences();
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "sg.D(" + (byte) 22 + ')');

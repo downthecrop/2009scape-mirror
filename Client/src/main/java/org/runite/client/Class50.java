@@ -1,10 +1,10 @@
 package org.runite.client;
 
-final class Class50 {
+public final class Class50 {
 
     static int anInt820 = 0;
     static AbstractSprite aAbstractSprite_824;
-    static long[] aLongArray826 = new long[200];
+    public static long[] aLongArray826 = new long[200];
     static int anInt828 = 0;
     int anInt821;
     int anInt823;

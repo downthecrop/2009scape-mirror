@@ -11,7 +11,7 @@ public class QuickChat {
             Class3_Sub28_Sub1 var2 = (Class3_Sub28_Sub1) aClass47_3137.get(fileId);
             if (null == var2) {
                 byte[] var3;
-                if (fileId < '\u8000') {
+                if (fileId < 32768) {
                     var3 = Unsorted.quickChatMessages.getFile(0, fileId);
                 } else {
                     var3 = Unsorted.aClass153_332.getFile(0, fileId & 32767);

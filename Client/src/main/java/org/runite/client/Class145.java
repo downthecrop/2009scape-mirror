@@ -28,7 +28,7 @@ final class Class145 {
             } else if (1 == var5) {
                 Class102.method1617(var0, var1, var4, var3, var2);
             } else {
-                Class3_Sub13_Sub3.method184(var4, var5, var3, var1, var0, var2);
+                TextureOperation33.method184(var4, var5, var3, var1, var0, var2);
             }
 
         } catch (RuntimeException var8) {
@@ -58,7 +58,7 @@ final class Class145 {
                 int var12;
                 if (HDToolKit.highDetail) {
                     if (Unsorted.anIntArrayArrayArray3605 == Class44.anIntArrayArrayArray723) {
-                        var9 = Class3_Sub13_Sub9.anIntArrayArray3115[var3][var4];
+                        var9 = TextureOperation16.anIntArrayArray3115[var3][var4];
                         var10 = var9 & 16777215;
                         if (var10 != Unsorted.anInt1244) {
                             Unsorted.anInt1244 = var10;
@@ -139,32 +139,32 @@ final class Class145 {
                         }
 
                         if (var21.aClass126_2240 != null) {
-                            Class3_Sub13_Sub18.method259(var21.aClass126_2240, 0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var3, var4, Class8.method846(0, var3, var4));
+                            TextureOperation19.method259(var21.aClass126_2240, 0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var3, var4, Class8.method846(0, var3, var4));
                         } else if (var21.aClass35_2226 != null) {
-                            Class3_Sub21.method395(var21.aClass35_2226, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var3, var4, Class8.method846(0, var3, var4));
+                            Class3_Sub21.method395(var21.aClass35_2226, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var3, var4, Class8.method846(0, var3, var4));
                         }
 
                         var23 = var21.aClass70_2234;
                         if (var23 != null) {
                             if (HDToolKit.highDetail) {
                                 if ((var23.anInt1055 & var2.anInt2241) == 0) {
-                                    Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                    Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                                 } else {
-                                    Class68.method1263(var23.anInt1055, anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var6, var3, var4);
+                                    Class68.method1263(var23.anInt1055, anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var6, var3, var4);
                                 }
                             }
 
-                            var23.aClass140_1049.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var23.anInt1054 - anInt2697, var23.anInt1057 - Unsorted.anInt3657, var23.anInt1045 - Class3_Sub13_Sub30.anInt3363, var23.aLong1048, var5, null);
+                            var23.aClass140_1049.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var23.anInt1054 - anInt2697, var23.anInt1057 - Unsorted.anInt3657, var23.anInt1045 - TextureOperation13.anInt3363, var23.aLong1048, var5, null);
                         }
 
                         for (var11 = 0; var11 < var21.anInt2223; ++var11) {
                             var25 = var21.aClass25Array2221[var11];
                             if (var25 != null) {
                                 if (HDToolKit.highDetail) {
-                                    Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                    Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                                 }
 
-                                var25.aClass140_479.animate(var25.anInt496, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var25.anInt482 - anInt2697, var25.anInt489 - Unsorted.anInt3657, var25.anInt484 - Class3_Sub13_Sub30.anInt3363, var25.aLong498, var5, null);
+                                var25.aClass140_479.animate(var25.anInt496, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var25.anInt482 - anInt2697, var25.anInt489 - Unsorted.anInt3657, var25.anInt484 - TextureOperation13.anInt3363, var25.aLong498, var5, null);
                             }
                         }
 
@@ -176,19 +176,19 @@ final class Class145 {
                     var22 = false;
                     if (var2.aClass126_2240 != null) {
                         if (Class8.method846(var6, var3, var4)) {
-                            Class3_Sub13_Sub18.method259(var2.aClass126_2240, var6, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var3, var4, true);
+                            TextureOperation19.method259(var2.aClass126_2240, var6, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var3, var4, true);
                         } else {
                             var22 = true;
-                            if (var2.aClass126_2240.anInt1664 != 12345678 || Class3_Sub13_Sub21.aBoolean3261 && var5 <= Class91.anInt1302) {
-                                Class3_Sub13_Sub18.method259(var2.aClass126_2240, var6, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var3, var4, false);
+                            if (var2.aClass126_2240.anInt1664 != 12345678 || TextureOperation37.aBoolean3261 && var5 <= Class91.anInt1302) {
+                                TextureOperation19.method259(var2.aClass126_2240, var6, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var3, var4, false);
                             }
                         }
                     } else if (var2.aClass35_2226 != null) {
                         if (Class8.method846(var6, var3, var4)) {
-                            Class3_Sub21.method395(var2.aClass35_2226, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var3, var4, true);
+                            Class3_Sub21.method395(var2.aClass35_2226, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var3, var4, true);
                         } else {
                             var22 = true;
-                            Class3_Sub21.method395(var2.aClass35_2226, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var3, var4, false);
+                            Class3_Sub21.method395(var2.aClass35_2226, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var3, var4, false);
                         }
                     }
 
@@ -200,10 +200,10 @@ final class Class145 {
                             }
 
                             if (HDToolKit.highDetail) {
-                                Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                             }
 
-                            var24.object.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var24.anInt324 - anInt2697, var24.anInt326 - Unsorted.anInt3657, var24.anInt330 - Class3_Sub13_Sub30.anInt3363, var24.aLong328, var5, null);
+                            var24.object.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var24.anInt324 - anInt2697, var24.anInt326 - Unsorted.anInt3657, var24.anInt330 - TextureOperation13.anInt3363, var24.aLong328, var5, null);
                             if (HDToolKit.highDetail && var24.aBoolean329) {
                                 HDToolKit.method1832(var8);
                             }
@@ -228,7 +228,7 @@ final class Class145 {
                         }
 
                         var11 = NPC.anIntArray3997[var10];
-                        var2.anInt2241 = Class3_Sub13_Sub26.anIntArray3321[var10];
+                        var2.anInt2241 = TextureOperation35.anIntArray3321[var10];
                     }
 
                     if (var26 != null) {
@@ -248,24 +248,24 @@ final class Class145 {
                             var2.anInt2232 = 12 - var2.anInt2229;
                         } else {
                             var2.anInt2227 = 9;
-                            var2.anInt2229 = Class3_Sub13_Sub23_Sub1.anIntArray4035[var10];
+                            var2.anInt2229 = TextureOperation18.anIntArray4035[var10];
                             var2.anInt2232 = 9 - var2.anInt2229;
                         }
 
                         if ((var26.anInt1055 & var11) != 0 && Class164_Sub1.method2239(var6, var3, var4, var26.anInt1055)) {
                             if (HDToolKit.highDetail) {
-                                Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                             }
 
-                            var26.aClass140_1049.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var26.anInt1054 - anInt2697, var26.anInt1057 - Unsorted.anInt3657, var26.anInt1045 - Class3_Sub13_Sub30.anInt3363, var26.aLong1048, var5, null);
+                            var26.aClass140_1049.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var26.anInt1054 - anInt2697, var26.anInt1057 - Unsorted.anInt3657, var26.anInt1045 - TextureOperation13.anInt3363, var26.aLong1048, var5, null);
                         }
 
                         if ((var26.anInt1059 & var11) != 0 && Class164_Sub1.method2239(var6, var3, var4, var26.anInt1059)) {
                             if (HDToolKit.highDetail) {
-                                Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                             }
 
-                            var26.aClass140_1052.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var26.anInt1054 - anInt2697, var26.anInt1057 - Unsorted.anInt3657, var26.anInt1045 - Class3_Sub13_Sub30.anInt3363, var26.aLong1048, var5, null);
+                            var26.aClass140_1052.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var26.anInt1054 - anInt2697, var26.anInt1057 - Unsorted.anInt3657, var26.anInt1045 - TextureOperation13.anInt3363, var26.aLong1048, var5, null);
                         }
                     }
 
@@ -276,14 +276,14 @@ final class Class145 {
 
                         if ((var13.anInt432 & var11) != 0) {
                             if (HDToolKit.highDetail) {
-                                Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                             }
 
-                            var13.aClass140_429.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var13.anInt424 - anInt2697 + var13.anInt430, var13.anInt425 - Unsorted.anInt3657, var13.anInt427 - Class3_Sub13_Sub30.anInt3363 + var13.anInt426, var13.aLong428, var5, null);
+                            var13.aClass140_429.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var13.anInt424 - anInt2697 + var13.anInt430, var13.anInt425 - Unsorted.anInt3657, var13.anInt427 - TextureOperation13.anInt3363 + var13.anInt426, var13.aLong428, var5, null);
                         } else if (var13.anInt432 == 256) {
                             var14 = var13.anInt424 - anInt2697;
                             var15 = var13.anInt425 - Unsorted.anInt3657;
-                            var16 = var13.anInt427 - Class3_Sub13_Sub30.anInt3363;
+                            var16 = var13.anInt427 - TextureOperation13.anInt3363;
                             var17 = var13.anInt420;
                             if (var17 == 1 || var17 == 2) {
                                 var18 = -var14;
@@ -300,16 +300,16 @@ final class Class145 {
 
                             if (var19 < var18) {
                                 if (HDToolKit.highDetail) {
-                                    Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                    Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                                 }
 
-                                var13.aClass140_429.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var14 + var13.anInt430, var15, var16 + var13.anInt426, var13.aLong428, var5, null);
+                                var13.aClass140_429.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var14 + var13.anInt430, var15, var16 + var13.anInt426, var13.aLong428, var5, null);
                             } else if (var13.aClass140_423 != null) {
                                 if (HDToolKit.highDetail) {
-                                    Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                    Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                                 }
 
-                                var13.aClass140_423.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var14, var15, var16, var13.aLong428, var5, null);
+                                var13.aClass140_423.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var14, var15, var16, var13.aLong428, var5, null);
                             }
                         }
 
@@ -326,10 +326,10 @@ final class Class145 {
                             }
 
                             if (HDToolKit.highDetail) {
-                                Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                             }
 
-                            var30.object.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var30.anInt324 - anInt2697, var30.anInt326 - Unsorted.anInt3657, var30.anInt330 - Class3_Sub13_Sub30.anInt3363, var30.aLong328, var5, null);
+                            var30.object.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var30.anInt324 - anInt2697, var30.anInt326 - Unsorted.anInt3657, var30.anInt330 - TextureOperation13.anInt3363, var30.aLong328, var5, null);
                             if (HDToolKit.highDetail && var30.aBoolean329) {
                                 HDToolKit.method1832(var8);
                             }
@@ -338,19 +338,19 @@ final class Class145 {
                         Class72 var28 = var2.aClass72_2245;
                         if (var28 != null && var28.anInt1077 == 0) {
                             if (HDToolKit.highDetail) {
-                                Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                             }
 
                             if (var28.aClass140_1067 != null) {
-                                var28.aClass140_1067.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var28.anInt1078 - anInt2697, var28.anInt1068 - Unsorted.anInt3657, var28.anInt1075 - Class3_Sub13_Sub30.anInt3363, var28.aLong1079, var5, null);
+                                var28.aClass140_1067.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var28.anInt1078 - anInt2697, var28.anInt1068 - Unsorted.anInt3657, var28.anInt1075 - TextureOperation13.anInt3363, var28.aLong1079, var5, null);
                             }
 
                             if (var28.aClass140_1069 != null) {
-                                var28.aClass140_1069.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var28.anInt1078 - anInt2697, var28.anInt1068 - Unsorted.anInt3657, var28.anInt1075 - Class3_Sub13_Sub30.anInt3363, var28.aLong1079, var5, null);
+                                var28.aClass140_1069.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var28.anInt1078 - anInt2697, var28.anInt1068 - Unsorted.anInt3657, var28.anInt1075 - TextureOperation13.anInt3363, var28.aLong1079, var5, null);
                             }
 
                             if (var28.aClass140_1073 != null) {
-                                var28.aClass140_1073.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var28.anInt1078 - anInt2697, var28.anInt1068 - Unsorted.anInt3657, var28.anInt1075 - Class3_Sub13_Sub30.anInt3363, var28.aLong1079, var5, null);
+                                var28.aClass140_1073.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var28.anInt1078 - anInt2697, var28.anInt1068 - Unsorted.anInt3657, var28.anInt1075 - TextureOperation13.anInt3363, var28.aLong1079, var5, null);
                             }
                         }
                     }
@@ -406,44 +406,44 @@ final class Class145 {
                                 {
                                     if ((var23.aLong1048 & 1032192L) == 16384L) {
                                         var11 = var23.anInt1054 - anInt2697;
-                                        var12 = var23.anInt1045 - Class3_Sub13_Sub30.anInt3363;
+                                        var12 = var23.anInt1045 - TextureOperation13.anInt3363;
                                         var27 = (int) (var23.aLong1048 >> 20 & 3L);
                                         if (var27 == 0) {
                                             var11 -= 64;
                                             var12 += 64;
-                                            if (var12 < var11 && var3 > 0 && var4 < Class3_Sub13_Sub15.anInt3179 - 1) {
-                                                Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3 - 1, var4 + 1);
+                                            if (var12 < var11 && var3 > 0 && var4 < TextureOperation17.anInt3179 - 1) {
+                                                Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3 - 1, var4 + 1);
                                                 break label736;
                                             }
                                         } else if (var27 == 1) {
                                             var11 += 64;
                                             var12 += 64;
-                                            if (var12 < -var11 && var3 < Unsorted.anInt1234 - 1 && var4 < Class3_Sub13_Sub15.anInt3179 - 1) {
-                                                Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3 + 1, var4 + 1);
+                                            if (var12 < -var11 && var3 < Unsorted.anInt1234 - 1 && var4 < TextureOperation17.anInt3179 - 1) {
+                                                Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3 + 1, var4 + 1);
                                                 break label736;
                                             }
                                         } else if (var27 == 2) {
                                             var11 += 64;
                                             var12 -= 64;
                                             if (var12 > var11 && var3 < Unsorted.anInt1234 - 1 && var4 > 0) {
-                                                Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3 + 1, var4 - 1);
+                                                Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3 + 1, var4 - 1);
                                                 break label736;
                                             }
                                         } else {
                                             var11 -= 64;
                                             var12 -= 64;
                                             if (var12 > -var11 && var3 > 0 && var4 > 0) {
-                                                Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3 - 1, var4 - 1);
+                                                Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3 - 1, var4 - 1);
                                                 break label736;
                                             }
                                         }
                                     }
 
-                                    Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                    Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                                 }
                             }
 
-                            var23.aClass140_1049.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var23.anInt1054 - anInt2697, var23.anInt1057 - Unsorted.anInt3657, var23.anInt1045 - Class3_Sub13_Sub30.anInt3363, var23.aLong1048, var5, null);
+                            var23.aClass140_1049.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var23.anInt1054 - anInt2697, var23.anInt1057 - Unsorted.anInt3657, var23.anInt1045 - TextureOperation13.anInt3363, var23.aLong1048, var5, null);
                         }
 
                         var2.anInt2227 = 0;
@@ -523,9 +523,9 @@ final class Class145 {
                                         var12 = var27;
                                     } else if (var34.anInt487 == var11) {
                                         var15 = var34.anInt482 - anInt2697;
-                                        var16 = var34.anInt484 - Class3_Sub13_Sub30.anInt3363;
+                                        var16 = var34.anInt484 - TextureOperation13.anInt3363;
                                         var17 = Unsorted.aClass25Array4060[var12].anInt482 - anInt2697;
-                                        var18 = Unsorted.aClass25Array4060[var12].anInt484 - Class3_Sub13_Sub30.anInt3363;
+                                        var18 = Unsorted.aClass25Array4060[var12].anInt484 - TextureOperation13.anInt3363;
                                         if (var15 * var15 + var16 * var16 > var17 * var17 + var18 * var18) {
                                             var12 = var27;
                                         }
@@ -539,12 +539,12 @@ final class Class145 {
 
                             Class25 var32 = Unsorted.aClass25Array4060[var12];
                             var32.anInt490 = Class3_Sub28_Sub1.anInt3539;
-                            if (!Class3_Sub13_Sub11.method222(var6, var32.anInt483, var32.anInt495, var32.anInt478, var32.anInt481, var32.aClass140_479.method1871())) {
+                            if (!TextureOperation1.method222(var6, var32.anInt483, var32.anInt495, var32.anInt478, var32.anInt481, var32.aClass140_479.method1871())) {
                                 if (HDToolKit.highDetail) {
                                     if ((var32.aLong498 & 1032192L) == 147456L) {
-                                        Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                        Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                                         var14 = var32.anInt482 - anInt2697;
-                                        var15 = var32.anInt484 - Class3_Sub13_Sub30.anInt3363;
+                                        var15 = var32.anInt484 - TextureOperation13.anInt3363;
                                         var16 = (int) (var32.aLong498 >> 20 & 3L);
                                         if (var16 != 1 && var16 != 3) {
                                             if (var15 > var14) {
@@ -558,11 +558,11 @@ final class Class145 {
                                             Class68.method1272(var5, var3, var4 + 1, var3 + 1, var4);
                                         }
                                     } else {
-                                        Class68.method1266(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var32.anInt483, var32.anInt478, var32.anInt495, var32.anInt481);
+                                        Class68.method1266(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var32.anInt483, var32.anInt478, var32.anInt495, var32.anInt481);
                                     }
                                 }
 
-                                var32.aClass140_479.animate(var32.anInt496, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var32.anInt482 - anInt2697, var32.anInt489 - Unsorted.anInt3657, var32.anInt484 - Class3_Sub13_Sub30.anInt3363, var32.aLong498, var5, null);
+                                var32.aClass140_479.animate(var32.anInt496, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var32.anInt482 - anInt2697, var32.anInt489 - Unsorted.anInt3657, var32.anInt484 - TextureOperation13.anInt3363, var32.aLong498, var5, null);
                             }
 
                             for (var14 = var32.anInt483; var14 <= var32.anInt495; ++var14) {
@@ -619,19 +619,19 @@ final class Class145 {
                     Class72 var29 = var2.aClass72_2245;
                     if (var29 != null && var29.anInt1077 != 0) {
                         if (HDToolKit.highDetail) {
-                            Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                            Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                         }
 
                         if (var29.aClass140_1067 != null) {
-                            var29.aClass140_1067.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var29.anInt1078 - anInt2697, var29.anInt1068 - Unsorted.anInt3657 - var29.anInt1077, var29.anInt1075 - Class3_Sub13_Sub30.anInt3363, var29.aLong1079, var5, null);
+                            var29.aClass140_1067.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var29.anInt1078 - anInt2697, var29.anInt1068 - Unsorted.anInt3657 - var29.anInt1077, var29.anInt1075 - TextureOperation13.anInt3363, var29.aLong1079, var5, null);
                         }
 
                         if (var29.aClass140_1069 != null) {
-                            var29.aClass140_1069.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var29.anInt1078 - anInt2697, var29.anInt1068 - Unsorted.anInt3657 - var29.anInt1077, var29.anInt1075 - Class3_Sub13_Sub30.anInt3363, var29.aLong1079, var5, null);
+                            var29.aClass140_1069.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var29.anInt1078 - anInt2697, var29.anInt1068 - Unsorted.anInt3657 - var29.anInt1077, var29.anInt1075 - TextureOperation13.anInt3363, var29.aLong1079, var5, null);
                         }
 
                         if (var29.aClass140_1073 != null) {
-                            var29.aClass140_1073.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var29.anInt1078 - anInt2697, var29.anInt1068 - Unsorted.anInt3657 - var29.anInt1077, var29.anInt1075 - Class3_Sub13_Sub30.anInt3363, var29.aLong1079, var5, null);
+                            var29.aClass140_1073.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var29.anInt1078 - anInt2697, var29.anInt1068 - Unsorted.anInt3657 - var29.anInt1077, var29.anInt1075 - TextureOperation13.anInt3363, var29.aLong1079, var5, null);
                         }
                     }
 
@@ -640,14 +640,14 @@ final class Class145 {
                         if (var36 != null && Class166.method2256(var6, var3, var4, var36.aClass140_429.method1871())) {
                             if ((var36.anInt432 & var2.anInt2241) != 0) {
                                 if (HDToolKit.highDetail) {
-                                    Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                    Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                                 }
 
-                                var36.aClass140_429.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var36.anInt424 - anInt2697 + var36.anInt430, var36.anInt425 - Unsorted.anInt3657, var36.anInt427 - Class3_Sub13_Sub30.anInt3363 + var36.anInt426, var36.aLong428, var5, null);
+                                var36.aClass140_429.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var36.anInt424 - anInt2697 + var36.anInt430, var36.anInt425 - Unsorted.anInt3657, var36.anInt427 - TextureOperation13.anInt3363 + var36.anInt426, var36.aLong428, var5, null);
                             } else if (var36.anInt432 == 256) {
                                 var11 = var36.anInt424 - anInt2697;
                                 var12 = var36.anInt425 - Unsorted.anInt3657;
-                                var27 = var36.anInt427 - Class3_Sub13_Sub30.anInt3363;
+                                var27 = var36.anInt427 - TextureOperation13.anInt3363;
                                 var14 = var36.anInt420;
                                 if (var14 == 1 || var14 == 2) {
                                     var15 = -var11;
@@ -663,16 +663,16 @@ final class Class145 {
 
                                 if (var16 >= var15) {
                                     if (HDToolKit.highDetail) {
-                                        Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                        Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                                     }
 
-                                    var36.aClass140_429.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var11 + var36.anInt430, var12, var27 + var36.anInt426, var36.aLong428, var5, null);
+                                    var36.aClass140_429.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var11 + var36.anInt430, var12, var27 + var36.anInt426, var36.aLong428, var5, null);
                                 } else if (var36.aClass140_423 != null) {
                                     if (HDToolKit.highDetail) {
-                                        Class68.method1268(anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var5, var3, var4);
+                                        Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3, var4);
                                     }
 
-                                    var36.aClass140_423.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var11, var12, var27, var36.aLong428, var5, null);
+                                    var36.aClass140_423.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var11, var12, var27, var36.aLong428, var5, null);
                                 }
                             }
                         }
@@ -681,18 +681,18 @@ final class Class145 {
                         if (var31 != null) {
                             if ((var31.anInt1059 & var2.anInt2241) != 0 && Class164_Sub1.method2239(var6, var3, var4, var31.anInt1059)) {
                                 if (HDToolKit.highDetail) {
-                                    Class68.method1263(var31.anInt1059, anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var6, var3, var4);
+                                    Class68.method1263(var31.anInt1059, anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var6, var3, var4);
                                 }
 
-                                var31.aClass140_1052.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var31.anInt1054 - anInt2697, var31.anInt1057 - Unsorted.anInt3657, var31.anInt1045 - Class3_Sub13_Sub30.anInt3363, var31.aLong1048, var5, null);
+                                var31.aClass140_1052.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var31.anInt1054 - anInt2697, var31.anInt1057 - Unsorted.anInt3657, var31.anInt1045 - TextureOperation13.anInt3363, var31.aLong1048, var5, null);
                             }
 
                             if ((var31.anInt1055 & var2.anInt2241) != 0 && Class164_Sub1.method2239(var6, var3, var4, var31.anInt1055)) {
                                 if (HDToolKit.highDetail) {
-                                    Class68.method1263(var31.anInt1055, anInt2697, Unsorted.anInt3657, Class3_Sub13_Sub30.anInt3363, var6, var3, var4);
+                                    Class68.method1263(var31.anInt1055, anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var6, var3, var4);
                                 }
 
-                                var31.aClass140_1049.animate(0, Class60.anInt936, Unsorted.anInt1037, Class3_Sub13_Sub34.anInt3417, anInt3153, var31.anInt1054 - anInt2697, var31.anInt1057 - Unsorted.anInt3657, var31.anInt1045 - Class3_Sub13_Sub30.anInt3363, var31.aLong1048, var5, null);
+                                var31.aClass140_1049.animate(0, Class60.anInt936, Unsorted.anInt1037, TextureOperation25.anInt3417, anInt3153, var31.anInt1054 - anInt2697, var31.anInt1057 - Unsorted.anInt3657, var31.anInt1045 - TextureOperation13.anInt3363, var31.aLong1048, var5, null);
                             }
                         }
                     }
@@ -764,7 +764,7 @@ final class Class145 {
         try {
             Class29 var2 = (Class29) Class136.aReferenceCache_1772.get(var1);
             if (var2 == null) {
-                byte[] var3 = Class3_Sub13_Sub13.aClass153_3154.getFile(16, var1);
+                byte[] var3 = TextureOperation20.aClass153_3154.getFile(16, var1);
                 {
                     var2 = new Class29();
                     if (null != var3) {
@@ -803,19 +803,19 @@ final class Class145 {
 
             int var11;
             for (var11 = var2; var7 > var11; ++var11) {
-                Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var11], var6, -91, var1, var3);
+                TextureOperation18.method282(Class38.anIntArrayArray663[var11], var6, -91, var1, var3);
             }
 
             for (var11 = var4; var8 < var11; --var11) {
-                Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var11], var6, -113, var1, var3);
+                TextureOperation18.method282(Class38.anIntArrayArray663[var11], var6, -113, var1, var3);
             }
 
             int var10 = -var5 + var1;
 
             for (var11 = var7; var11 <= var8; ++var11) {
                 int[] var12 = Class38.anIntArrayArray663[var11];
-                Class3_Sub13_Sub23_Sub1.method282(var12, var6, -111, var9, var3);
-                Class3_Sub13_Sub23_Sub1.method282(var12, var10, -124, var1, var3);
+                TextureOperation18.method282(var12, var6, -111, var9, var3);
+                TextureOperation18.method282(var12, var10, -124, var1, var3);
             }
 
         } catch (RuntimeException var13) {

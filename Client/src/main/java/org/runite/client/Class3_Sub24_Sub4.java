@@ -50,8 +50,8 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                 Class140_Sub7.aClass94Array2935[Unsorted.menuOptionCount] = var7;
                 Class163_Sub2_Sub1.aClass94Array4016[Unsorted.menuOptionCount] = var4;
                 Class114.anIntArray1578[Unsorted.menuOptionCount] = var0 == -1 ?Class3_Sub28_Sub5.anInt3590:var0;
-                Class3_Sub13_Sub7.aShortArray3095[Unsorted.menuOptionCount] = var6;
-                Class3_Sub13_Sub22.aLongArray3271[Unsorted.menuOptionCount] = var1;
+                TextureOperation27.aShortArray3095[Unsorted.menuOptionCount] = var6;
+                TextureOperation0.aLongArray3271[Unsorted.menuOptionCount] = var1;
                 Class117.anIntArray1613[Unsorted.menuOptionCount] = var5;
                 Class27.anIntArray512[Unsorted.menuOptionCount] = var8;
                 ++Unsorted.menuOptionCount;
@@ -188,7 +188,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
             method1177(-1, 0L, (byte)-92, TextCore.emptyJagexString, 0, (short)51, var3.aClass94_289, var3.componentHash);
          }
 
-         if(var3.anInt318 == 6 && Class3_Sub13_Sub7.aClass11_3087 == null) {
+         if(var3.anInt318 == 6 && TextureOperation27.aClass11_3087 == null) {
             method1177(-1, 0L, (byte)-100, TextCore.emptyJagexString, -1, (short)41, var3.aClass94_289, var3.componentHash);
          }
 
@@ -208,7 +208,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
 
                   if(var7 <= var2 && var0 >= var8 && 32 + var7 > var2 && var0 < var8 + 32) {
                      Class99.aClass11_1402 = var3;
-                     Class3_Sub13_Sub13.anInt2701 = var15;
+                     TextureOperation20.anInt2701 = var15;
                      if(var3.itemAmounts[var15] > 0) {
                         Class3_Sub1 var9 = Client.method44(var3);
                         ItemDefinition var10 = ItemDefinition.getItemDefinition(var3.itemAmounts[var15] + -1);
@@ -325,7 +325,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                for(var15 = 9; var15 >= 5; --var15) {
                   RSString var16 = Class120.method1732(var3, (byte)-71, var15);
                   if(null != var16) {
-                     method1177(Class3_Sub13_Sub2.method173((byte)126, var15, var3), var15 + 1, (byte)-85, var3.aClass94_277, var3.anInt191, (short)1003, var16, var3.componentHash);
+                     method1177(TextureOperation6.method173((byte)126, var15, var3), var15 + 1, (byte)-85, var3.aClass94_277, var3.anInt191, (short)1003, var16, var3.componentHash);
                   }
                }
 
@@ -337,7 +337,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                for(var5 = 4; var5 >= 0; --var5) {
                   RSString var17 = Class120.method1732(var3, (byte)-65, var5);
                   if(var17 != null) {
-                     method1177(Class3_Sub13_Sub2.method173((byte)53, var5, var3), var5 - -1, (byte)-48, var3.aClass94_277, var3.anInt191, (short)9, var17, var3.componentHash);
+                     method1177(TextureOperation6.method173((byte)53, var5, var3), var5 - -1, (byte)-48, var3.aClass94_277, var3.anInt191, (short)9, var17, var3.componentHash);
                   }
                }
 
@@ -511,7 +511,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                var7.anInt2517 = var11.aByteArray2425[var4];
                var7.anInt2520 = var4;
                var7.anInt2513 = var11.aByteArray2430[var4] * var1 * var1 * var11.anInt2424 - -1024 >> 11;
-               var7.anInt2503 = var11.aByteArray2422[var4] & 255;
+               var7.anInt2503 = var11.aByteArray2422[var4] & 0xFF;
                var7.anInt2510 = -(32767 & var11.aShortArray2434[var4]) + (var4 << 8);
                var7.anInt2506 = -1;
                var7.anInt2511 = 0;
@@ -640,7 +640,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
 
             if(var5 == 64) {
                if(64 <= var6) {
-                  this.anIntArray3518[var4] = Class3_Sub13_Sub29.bitwiseOr(this.anIntArray3518[var4], 1);
+                  this.anIntArray3518[var4] = TextureOperation3.bitwiseOr(this.anIntArray3518[var4], 1);
                } else {
                   this.anIntArray3518[var4] = Unsorted.bitwiseAnd(this.anIntArray3518[var4], -2);
                }
@@ -651,7 +651,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                   this.method502(var4, (byte) 56 ^ -57);
                   this.anIntArray3518[var4] = Unsorted.bitwiseAnd(this.anIntArray3518[var4], -3);
                } else {
-                  this.anIntArray3518[var4] = Class3_Sub13_Sub29.bitwiseOr(this.anIntArray3518[var4], 2);
+                  this.anIntArray3518[var4] = TextureOperation3.bitwiseOr(this.anIntArray3518[var4], 2);
                }
             }
 
@@ -708,7 +708,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
 
             if(var5 == 81) {
                if(var6 >= 64) {
-                  this.anIntArray3518[var4] = Class3_Sub13_Sub29.bitwiseOr(this.anIntArray3518[var4], 4);
+                  this.anIntArray3518[var4] = TextureOperation3.bitwiseOr(this.anIntArray3518[var4], 4);
                } else {
                   this.method497(var4, -102);
                   this.anIntArray3518[var4] = Unsorted.bitwiseAnd(this.anIntArray3518[var4], -5);
@@ -736,7 +736,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
             var5 = (var2 >> 9 & 16256) + ((32702 & var2) >> 8);
             this.method476(var4, var5);
          } else {
-            var3 = var2 & 255;
+            var3 = var2 & 0xFF;
             if (255 == var3) {
                this.method500(true, (byte) -40);
             }
@@ -852,7 +852,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                   var3.anInt2511 += (int)(0.5D + Math.pow(2.0D, (double)var7.anInt2067 * var9) * 128.0D);
                }
 
-               while(var7.aByteArray2064.length - 2 > var3.anInt2501 && var3.anInt2511 > ('\uff00' & var7.aByteArray2064[var3.anInt2501 - -2] << 8)) {
+               while(var7.aByteArray2064.length - 2 > var3.anInt2501 && var3.anInt2511 > (65280 & var7.aByteArray2064[var3.anInt2501 - -2] << 8)) {
                   var3.anInt2501 += 2;
                }
 
@@ -1256,8 +1256,8 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                var5 = var2.anInt2511;
                var6 = var3.aByteArray2064[1 + var2.anInt2501];
                if(var3.aByteArray2064.length - 2 > var2.anInt2501) {
-                  var8 = (var3.aByteArray2064[2 + var2.anInt2501] & 255) << 8;
-                  var7 = '\uff00' & var3.aByteArray2064[var2.anInt2501] << 8;
+                  var8 = (var3.aByteArray2064[2 + var2.anInt2501] & 0xFF) << 8;
+                  var7 = 65280 & var3.aByteArray2064[var2.anInt2501] << 8;
                   var6 += (var3.aByteArray2064[3 + var2.anInt2501] + -var6) * (var5 - var7) / (var8 + -var7);
                }
 
@@ -1268,8 +1268,8 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                var5 = var2.anInt2506;
                var6 = var3.aByteArray2076[1 + var2.anInt2519];
                if(-2 + var3.aByteArray2076.length > var2.anInt2519) {
-                  var7 = '\uff00' & var3.aByteArray2076[var2.anInt2519] << 8;
-                  var8 = (var3.aByteArray2076[var2.anInt2519 + 2] & 255) << 8;
+                  var7 = 65280 & var3.aByteArray2076[var2.anInt2519] << 8;
+                  var8 = (var3.aByteArray2076[var2.anInt2519 + 2] & 0xFF) << 8;
                   var6 += (var5 - var7) * (-var6 + var3.aByteArray2076[3 + var2.anInt2519]) / (-var7 + var8);
                }
 

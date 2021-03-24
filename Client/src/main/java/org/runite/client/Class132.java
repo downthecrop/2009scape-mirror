@@ -51,7 +51,7 @@ final class Class132 {
 
     static void method1799(byte var0, CacheIndex var1) {
         try {
-            Class3_Sub13_Sub7.aClass153_3098 = var1;
+            TextureOperation27.aClass153_3098 = var1;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "sf.C(" + var0 + ',' + (var1 != null ? "{...}" : "null") + ')');
         }
@@ -59,11 +59,11 @@ final class Class132 {
 
     static void method1801() {
         try {
-            int var1 = Class168.bold.method682(RSString.parse(GameConfig.RCM_TITLE));
+            int var1 = FontType.bold.method682(RSString.parse(GameConfig.RCM_TITLE));
             int var2;
             int var3;
             for (var2 = 0; Unsorted.menuOptionCount > var2; ++var2) {
-                var3 = Class168.bold.method682(Unsorted.method802(var2));
+                var3 = FontType.bold.method682(Unsorted.method802(var2));
                 if (var3 > var1) {
                     var1 = var3;
                 }
@@ -89,24 +89,24 @@ final class Class132 {
             }
 
             if (Unsorted.anInt3660 == 1) {
-                if (Class3_Sub13_Sub39.anInt3460 == NPCDefinition.anInt1297 && Class38_Sub1.anInt2612 == Class168.anInt2099) {
-                    Class3_Sub28_Sub1.anInt3537 = Unsorted.menuOptionCount * 15 - -(!Unsorted.aBoolean1951 ? 22 : 26);
+                if (TextureOperation8.anInt3460 == NPCDefinition.anInt1297 && Class38_Sub1.anInt2612 == Class168.anInt2099) {
+                    Class21.anInt3537 = Unsorted.menuOptionCount * 15 - -(!Unsorted.aBoolean1951 ? 22 : 26);
                     Unsorted.anInt3660 = 0;
-                    Class3_Sub13_Sub33.anInt3395 = var4;
-                    AbstractIndexedSprite.anInt1462 = var3;
+                    Class21.anInt3395 = var4;
+                    Class21.anInt1462 = var3;
                     Class38_Sub1.aBoolean2615 = true;
-                    Class3_Sub28_Sub3.anInt3552 = var1;
+                    Class21.anInt3552 = var1;
                 }
             } else if (Class163_Sub1.anInt2993 == NPCDefinition.anInt1297 && Class38_Sub1.anInt2614 == Class38_Sub1.anInt2612) {
-                AbstractIndexedSprite.anInt1462 = var3;
+                Class21.anInt1462 = var3;
                 Unsorted.anInt3660 = 0;
-                Class3_Sub28_Sub3.anInt3552 = var1;
-                Class3_Sub13_Sub33.anInt3395 = var4;
-                Class3_Sub28_Sub1.anInt3537 = (Unsorted.aBoolean1951 ? 26 : 22) + Unsorted.menuOptionCount * 15;
+                Class21.anInt3552 = var1;
+                Class21.anInt3395 = var4;
+                Class21.anInt3537 = (Unsorted.aBoolean1951 ? 26 : 22) + Unsorted.menuOptionCount * 15;
                 Class38_Sub1.aBoolean2615 = true;
             } else {
                 Class168.anInt2099 = Class38_Sub1.anInt2614;
-                Class3_Sub13_Sub39.anInt3460 = Class163_Sub1.anInt2993;
+                TextureOperation8.anInt3460 = Class163_Sub1.anInt2993;
                 Unsorted.anInt3660 = 1;
             }
 

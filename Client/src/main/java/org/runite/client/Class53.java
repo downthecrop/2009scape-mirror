@@ -3,7 +3,7 @@ package org.runite.client;
 
 import java.io.*;
 
-final class Class53 {
+public final class Class53 {
 
     static int anInt865 = -1;
     static long aLong866 = 0L;
@@ -15,7 +15,7 @@ final class Class53 {
         return var1 >>> 8;
     }
 
-    static void method1171(int var0, int var1, int var2, int var3, int var4, RSInterface var5) {
+    public static void method1171(int var0, int var1, int var2, int var3, int var4, RSInterface var5) {
         try {
             int var7 = var3 * var3 + var4 * var4;
             if (var7 <= 360000) {
@@ -25,7 +25,7 @@ final class Class53 {
                     Class38_Sub1.minimapIcons(var5, Class129_Sub1.aAbstractSpriteArray2690[var0], var4, var3, var1, var2);
                 } else {
                     var8 -= 10;
-                    int var9 = 2047 & Class3_Sub13_Sub8.anInt3102 + GraphicDefinition.CAMERA_DIRECTION;
+                    int var9 = 2047 & TextureOperation9.anInt3102 + GraphicDefinition.CAMERA_DIRECTION;
                     int var11 = Class51.anIntArray851[var9];
                     int var10 = Class51.anIntArray840[var9];
                     var10 = var10 * 256 / (256 + Class164_Sub2.anInt3020);
@@ -36,9 +36,9 @@ final class Class53 {
                     int var16 = (int) (Math.sin(var14) * (double) var8);
                     int var17 = (int) (Math.cos(var14) * (double) var8);
                     if (HDToolKit.highDetail) {
-                        ((HDSprite) Class3_Sub13_Sub39.aAbstractSpriteArray3458[var0]).method648(240, 240, (var5.width / 2 + var2 + var16) * 16, 16 * (-var17 + var5.height / 2 + var1), (int) (10430.378D * var14));
+                        ((HDSprite) TextureOperation8.aAbstractSpriteArray3458[var0]).method648(240, 240, (var5.width / 2 + var2 + var16) * 16, 16 * (-var17 + var5.height / 2 + var1), (int) (10430.378D * var14));
                     } else {
-                        ((Class3_Sub28_Sub16_Sub2) Class3_Sub13_Sub39.aAbstractSpriteArray3458[var0]).method660(-10 + var16 + var5.width / 2 + var2, -10 + var5.height / 2 + var1 + -var17, var14);
+                        ((Class3_Sub28_Sub16_Sub2) TextureOperation8.aAbstractSpriteArray3458[var0]).method660(-10 + var16 + var5.width / 2 + var2, -10 + var5.height / 2 + var1 + -var17, var14);
                     }
                 }
 

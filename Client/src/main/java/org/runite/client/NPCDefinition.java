@@ -41,7 +41,7 @@ public final class NPCDefinition {
    byte aByte1267;
    byte aByte1268;
    int anInt1269;
-   boolean aBoolean1270 = true;
+   public boolean aBoolean1270 = true;
    private short[] aShortArray1271;
    private HashTable aHashTable_1272;
    RSString NPCName;
@@ -53,16 +53,16 @@ public final class NPCDefinition {
    int anInt1279;
    int renderAnimationId;
    private int anInt1282;
-   int anInt1283;
+   public int anInt1283;
    public int npcId;
-   boolean aBoolean1285;
+   public boolean aBoolean1285;
    short aShort1286;
    byte aByte1287;
    private int[] models;
    int anInt1289;
    int anInt1290;
    int anInt1291;
-   int[] childNPCs;
+   public int[] childNPCs;
    int anInt1293;
    private int configFileId;
    int anInt1296;
@@ -89,7 +89,7 @@ public final class NPCDefinition {
        return null;
    }
 
-   final NPCDefinition method1471(byte var1) {
+   public final NPCDefinition method1471(byte var1) {
       try {
          int var2 = -1;
          if(this.configId == -1) {
@@ -236,7 +236,7 @@ public final class NPCDefinition {
                            if(var20 == 0 && var21 == 0 && var22 == 0) {
                               var23[13] = -var18;
                               var23[14] = -var19;
-                              var23[0] = var23[4] = var23[8] = '\u8000';
+                              var23[0] = var23[4] = var23[8] = 32768;
                               var23[12] = -var17;
                            } else {
                               var24 = Class51.anIntArray851[var20] >> 1;
@@ -287,7 +287,7 @@ public final class NPCDefinition {
                if(this.aShortArray1248 != null) {
                   for(var16 = 0; var16 < this.aShortArray1248.length; ++var16) {
                      if(null != this.aByteArray1247 && var16 < this.aByteArray1247.length) {
-                        Objects.requireNonNull(var34).method2016(this.aShortArray1248[var16], Class136.aShortArray1779[this.aByteArray1247[var16] & 255]);
+                        Objects.requireNonNull(var34).method2016(this.aShortArray1248[var16], Class136.aShortArray1779[this.aByteArray1247[var16] & 0xFF]);
                      } else {
                         Objects.requireNonNull(var34).method2016(this.aShortArray1248[var16], this.aShortArray1254[var16]);
                      }
@@ -323,7 +323,7 @@ public final class NPCDefinition {
                      var19 = var1[var17].anInt1893;
                      var21 = def.frames[var19];
                      aClass3_Sub28_Sub5Array3041[var17] = Class3_Sub9.method133(var21 >>> 16);
-                     var21 &= '\uffff';
+                     var21 &= 65535;
                      anIntArray912[var17] = var21;
                      if(aClass3_Sub28_Sub5Array3041[var17] != null) {
                         var35 |= aClass3_Sub28_Sub5Array3041[var17].method561(var21, (byte)124);
@@ -336,7 +336,7 @@ public final class NPCDefinition {
                         Unsorted.anIntArray2574[var17] = var1[var17].anInt1897;
                         var22 = def.frames[var20];
                         aClass3_Sub28_Sub5Array4031[var17] = Class3_Sub9.method133(var22 >>> 16);
-                        var22 &= '\uffff';
+                        var22 &= 65535;
                         Class30.anIntArray574[var17] = var22;
                         if(null != aClass3_Sub28_Sub5Array4031[var17]) {
                            var35 |= aClass3_Sub28_Sub5Array4031[var17].method561(var22, (byte)124);
@@ -368,7 +368,7 @@ public final class NPCDefinition {
                if(var10 != null) {
                   var17 = var10.frames[var7];
                   var22 = var17 >>> 16;
-                  var17 &= '\uffff';
+                  var17 &= 65535;
                   var40 = Class3_Sub9.method133(var22);
                   if(null != var40) {
                      var35 |= var40.method561(var17, (byte)126);
@@ -380,7 +380,7 @@ public final class NPCDefinition {
                      var19 = var10.duration[var7];
                      var18 = var10.frames[var5];
                      var42 = var18 >>> 16;
-                     var18 &= '\uffff';
+                     var18 &= 65535;
                      if(var22 == var42) {
                         var43 = var40;
                      } else {
@@ -406,7 +406,7 @@ public final class NPCDefinition {
                if(var8 != null) {
                   var22 = var8.frames[var4];
                   var27 = var22 >>> 16;
-                  var22 &= '\uffff';
+                  var22 &= 65535;
                   var44 = Class3_Sub9.method133(var27);
                   if(var44 != null) {
                      var35 |= var44.method561(var22, (byte)124);
@@ -418,7 +418,7 @@ public final class NPCDefinition {
                      var24 = var8.duration[var4];
                      var42 = var8.frames[var2];
                      var28 = var42 >>> 16;
-                     var42 &= '\uffff';
+                     var42 &= 65535;
                      if(var27 == var28) {
                         var46 = var44;
                      } else {
@@ -504,7 +504,7 @@ public final class NPCDefinition {
 
    static void method1479(int var0) {
       try {
-         Class3_Sub13_Sub30.anInt3362 = -1;
+         TextureOperation13.anInt3362 = -1;
 
          if(var0 == 37) {
             NPC.aFloat3979 = 3.0F;
@@ -529,7 +529,7 @@ public final class NPCDefinition {
          var1 = var1.toLowercase();
          int var4 = 0;
 
-         for(int var5 = 0; Class3_Sub13_Sub23.itemDefinitionSize > var5; ++var5) {
+         for(int var5 = 0; TextureOperation39.itemDefinitionSize > var5; ++var5) {
             ItemDefinition var6 = ItemDefinition.getItemDefinition(var5);
             if((!var0 || var6.aBoolean807) && var6.anInt791 == -1 && -1 == var6.anInt762 && var6.anInt800 == 0 && var6.name.toLowercase().indexOf(var1, 116) != -1) {
                if(var4 >= 250) {
@@ -559,7 +559,7 @@ public final class NPCDefinition {
             var10[var11] = ItemDefinition.getItemDefinition(var3[var11]).name;
          }
 
-         Class3_Sub13_Sub29.method307(var10, Class99.aShortArray1398, 77);
+         TextureOperation3.method307(var10, Class99.aShortArray1398, 77);
       } catch (RuntimeException var9) {
          throw ClientErrorException.clientError(var9, "me.J(" + var0 + ',' + (var1 != null?"{...}":"null") + ',' + 102 + ')');
       }
@@ -644,7 +644,7 @@ public final class NPCDefinition {
 
             for(var5 = 0; var4 > var5; ++var5) {
                this.models[var5] = buffer.readUnsignedShort();
-               if(this.models[var5] == '\uffff') {
+               if(this.models[var5] == 65535) {
                   this.models[var5] = -1;
                }
             }
@@ -781,7 +781,7 @@ public final class NPCDefinition {
                buffer.readUnsignedByte();
             } else if (opcode == 134) {
                this.anInt1262 = buffer.readUnsignedShort();
-               if (this.anInt1262 == '\uffff') {
+               if (this.anInt1262 == 65535) {
                   this.anInt1262 = -1;
                }
 

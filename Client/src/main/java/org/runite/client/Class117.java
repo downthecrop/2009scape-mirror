@@ -38,7 +38,7 @@ public final class Class117 {
                 if (var0 == 5) {
                     Class108.method1656(CacheIndex.spritesIndex, (byte) -111);
                 } else {
-                    Class3_Sub13_Sub17.method247((byte) -121);
+                    TextureOperation23.method247((byte) -121);
                 }
 
                 boolean var3 = 5 == Class143.gameStage || Class143.gameStage == 10 || Class143.gameStage == 28;
@@ -89,7 +89,7 @@ public final class Class117 {
             Class158_Sub1.aByteArrayArrayArray1828 = new byte[var2][104][104];
             Class3_Sub31.anIntArray2606 = new int[104];
             PacketParser.aByteArrayArrayArray81 = new byte[var2][104][104];
-            Class3_Sub13_Sub36.aByteArrayArrayArray3430 = new byte[var2][104][104];
+            TextureOperation36.aByteArrayArrayArray3430 = new byte[var2][104][104];
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "pl.B(" + var0 + ',' + var1 + ')');
         }
@@ -102,7 +102,7 @@ public final class Class117 {
             int[] var3 = new int[var1];
 
             for (int var4 = 0; var1 > var4; ++var4) {
-                var3[var4] = Class3_Sub13_Sub38.spritePalette[Unsorted.bitwiseAnd(var2[var4], 255)];
+                var3[var4] = TextureOperation38.spritePalette[Unsorted.bitwiseAnd(var2[var4], 255)];
             }
 
             Class3_Sub28_Sub16_Sub2 var6 = new Class3_Sub28_Sub16_Sub2(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], var3);

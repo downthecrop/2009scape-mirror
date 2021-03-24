@@ -90,10 +90,10 @@ final class Class81 {
                         Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, TextCore.HasOnOwnIgnoreList, -1);
                     } else {
                         Class114.ignores[Class3_Sub28_Sub5.anInt3591] = var1;
-                        Class3_Sub13_Sub27.aClass94Array3341[Class3_Sub28_Sub5.anInt3591++] = Unsorted.method1052(var1);
+                        TextureOperation7.aClass94Array3341[Class3_Sub28_Sub5.anInt3591++] = Unsorted.method1052(var1);
                         Class110.anInt1472 = PacketParser.anInt3213;
-                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(34);
-                        Class3_Sub13_Sub1.outgoingBuffer.writeLong(var1);
+                        TextureOperation12.outgoingBuffer.putOpcode(34);
+                        TextureOperation12.outgoingBuffer.writeLong(var1);
                     }
                 } else {
                     Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, TextCore.HasIgnoreListFull, -1);

@@ -44,13 +44,13 @@ final class Class75_Sub3 extends Class75 {
          Class3_Sub28_Sub4.aReferenceCache_3572.sweep(5);
          Class143.aReferenceCache_1874.sweep(5);
          Class67.aReferenceCache_1013.sweep(5);
-         Class82.aReferenceCache_1146.sweep(5);
+         Texture.aReferenceCache_1146.sweep(5);
          Class159.aReferenceCache_2016.sweep(5);
          CS2Script.aReferenceCache_2450.sweep(5);
          Class136.aReferenceCache_1772.sweep(5);
          RenderAnimationDefinition.aReferenceCache_1955.sweep(5);
-         Class3_Sub13_Sub34.aReferenceCache_3412.sweep(5);
-         Class3_Sub13_Sub31.aReferenceCache_3369.sweep(5);
+         TextureOperation25.aReferenceCache_3412.sweep(5);
+         TextureOperation2.aReferenceCache_3369.sweep(5);
          Class128.aReferenceCache_1683.sweep(5);
          Unsorted.aReferenceCache_684.sweep(5);
          Class163_Sub1.aReferenceCache_2984.sweep(5);
@@ -61,7 +61,7 @@ final class Class75_Sub3 extends Class75 {
          Unsorted.aReferenceCache_743.sweep(50);
          Class61.aReferenceCache_939.sweep(5);
          Class158_Sub1.aReferenceCache_2982.sweep(5);
-         Class3_Sub13_Sub11.aReferenceCache_3130.sweep(5);
+         TextureOperation1.aReferenceCache_3130.sweep(5);
          Unsorted.aReferenceCache_1135.sweep(5);
       } catch (RuntimeException var2) {
          throw ClientErrorException.clientError(var2, "re.K(" + 26211 + ')');
@@ -112,12 +112,12 @@ final class Class75_Sub3 extends Class75 {
             for(int var2 = 0; Class95.anInt1338 > var2; ++var2) {
                byte[] var4 = Class163_Sub1.aByteArrayArray2987[var2];
                int var3 = Unsorted.anIntArray3076[var2] * Class140_Sub7.anIntArray2931[var2];
-               if(Class3_Sub13_Sub22.aBooleanArray3272[var2]) {
+               if(TextureOperation0.aBooleanArray3272[var2]) {
                   int[] var6 = new int[var3];
                   byte[] var5 = Class163_Sub3.aByteArrayArray3005[var2];
 
                   for(int var7 = 0; var3 > var7; ++var7) {
-                     var6[var7] = Class3_Sub13_Sub29.bitwiseOr(Class3_Sub13_Sub38.spritePalette[Unsorted.bitwiseAnd(var4[var7], 255)], Unsorted.bitwiseAnd(-16777216, var5[var7] << 24));
+                     var6[var7] = TextureOperation3.bitwiseOr(TextureOperation38.spritePalette[Unsorted.bitwiseAnd(var4[var7], 255)], Unsorted.bitwiseAnd(-16777216, var5[var7] << 24));
                   }
 
                   if(HDToolKit.highDetail) {
@@ -129,7 +129,7 @@ final class Class75_Sub3 extends Class75 {
                   int[] var9 = new int[var3];
 
                   for(int var10 = 0; var3 > var10; ++var10) {
-                     var9[var10] = Class3_Sub13_Sub38.spritePalette[Unsorted.bitwiseAnd(var4[var10], 255)];
+                     var9[var10] = TextureOperation38.spritePalette[Unsorted.bitwiseAnd(var4[var10], 255)];
                   }
 
                   if(HDToolKit.highDetail) {

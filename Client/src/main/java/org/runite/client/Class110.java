@@ -163,7 +163,7 @@ final class Class110 {
 
                         Class7.method835(var2, var7, var9, var19, 1, 1, (GameObject) object, var24);
                         if (var1 && type <= 17 && type != 13 && var2 > 0) {
-                            Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = Class3_Sub13_Sub29.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 4);
+                            Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 4);
                         }
 
                         if (def.ClipType != 0 && null != var4) {
@@ -191,7 +191,7 @@ final class Class110 {
                                 }
 
                                 if (def.aBoolean1542) {
-                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = Class3_Sub13_Sub29.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 1);
+                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 1);
                                 }
                             } else if (1 == var10) {
                                 if (def.aBoolean1525) {
@@ -200,7 +200,7 @@ final class Class110 {
                                 }
 
                                 if (def.aBoolean1542) {
-                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][1 + var9] = Class3_Sub13_Sub29.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][1 + var9], 2);
+                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][1 + var9] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][1 + var9], 2);
                                 }
                             } else if (var10 == 2) {
                                 if (def.aBoolean1525) {
@@ -209,7 +209,7 @@ final class Class110 {
                                 }
 
                                 if (def.aBoolean1542) {
-                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7 - -1][var9] = Class3_Sub13_Sub29.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7 - -1][var9], 1);
+                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7 - -1][var9] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7 - -1][var9], 1);
                                 }
                             } else if (var10 == 3) {
                                 if (def.aBoolean1525) {
@@ -218,7 +218,7 @@ final class Class110 {
                                 }
 
                                 if (def.aBoolean1542) {
-                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = Class3_Sub13_Sub29.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 2);
+                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 2);
                                 }
                             }
                         }
@@ -287,17 +287,17 @@ final class Class110 {
                             Class154.method2146(var2, var7, var9, var19, (GameObject) var42, (GameObject) var38, Class159.anIntArray2017[var10], Class159.anIntArray2017[var43], var24);
                             if (def.aBoolean1542 && var1) {
                                 if (var10 == 0) {
-                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = Class3_Sub13_Sub29.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 1);
-                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][1 + var9] = Class3_Sub13_Sub29.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][1 + var9], 2);
+                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 1);
+                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][1 + var9] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][1 + var9], 2);
                                 } else if (var10 == 1) {
-                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9 - -1] = Class3_Sub13_Sub29.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9 - -1], 2);
-                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7 - -1][var9] = Class3_Sub13_Sub29.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7 - -1][var9], 1);
+                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9 - -1] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9 - -1], 2);
+                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7 - -1][var9] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7 - -1][var9], 1);
                                 } else if (var10 == 2) {
-                                    Class38_Sub1.anIntArrayArrayArray2609[var2][1 + var7][var9] = Class3_Sub13_Sub29.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][1 + var7][var9], 1);
-                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = Class3_Sub13_Sub29.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 2);
+                                    Class38_Sub1.anIntArrayArrayArray2609[var2][1 + var7][var9] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][1 + var7][var9], 1);
+                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 2);
                                 } else if (var10 == 3) {
-                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = Class3_Sub13_Sub29.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 2);
-                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = Class3_Sub13_Sub29.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 1);
+                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 2);
+                                    Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 1);
                                 }
                             }
 
@@ -472,7 +472,7 @@ final class Class110 {
                     } else {
                         object = new Class140_Sub3(objectId, 22, var10, var0, var7, var9, def.animationId, def.aBoolean1492, null);
                     }
-                    Class3_Sub13_Sub23.method276(var2, var7, var9, var19, (GameObject) object, var24, def.aBoolean1502);
+                    TextureOperation39.method276(var2, var7, var9, var19, (GameObject) object, var24, def.aBoolean1502);
                     if (def.ClipType == 1 && null != var4) {
                         var4.method1503(var7, var9);
                     }

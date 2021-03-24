@@ -54,7 +54,7 @@ final class MapUnderlayColorDefinition {
             double red = (double) (255 & rgbAsInt >> 16) / 256.0D;
             double green = (double) (255 & rgbAsInt >> 8) / 256.0D;
             double var9 = red;
-            double blue = (double) (rgbAsInt & 255) / 256.0D;
+            double blue = (double) (rgbAsInt & 0xFF) / 256.0D;
             if (green < red) {
                 var9 = green;
             }

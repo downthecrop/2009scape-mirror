@@ -13,47 +13,47 @@ final class Class17 {
                 RenderAnimationDefinition var2 = var1.method1965();
                 int var4;
                 int var5;
-                if (var1.anInt2772 != -1 && '\u8000' > var1.anInt2772) {
+                if (var1.anInt2772 != -1 && 32768 > var1.anInt2772) {
                     NPC var3 = NPC.npcs[var1.anInt2772];
                     if (var3 != null) {
                         var5 = -var3.anInt2829 + var1.anInt2829;
                         var4 = -var3.anInt2819 + var1.anInt2819;
                         if (0 != var4 || 0 != var5) {
-                            var1.anInt2806 = (int) (Math.atan2(var4, var5) * 325.949D) & 2047;
+                            var1.anInt2806 = (int) (Math.atan2(var4, var5) * 325.949D) & 0x7FF;
                         }
                     }
                 }
 
                 int var6;
                 int var9;
-                if (var1.anInt2772 >= '\u8000') {
+                if (var1.anInt2772 >= 32768) {
                     var9 = -32768 + var1.anInt2772;
                     if (Class3_Sub1.localIndex == var9) {
                         var9 = 2047;
                     }
 
-                    Player var10 = Class3_Sub13_Sub22.players[var9];
+                    Player var10 = TextureOperation0.players[var9];
                     if (null != var10) {
                         var6 = -var10.anInt2829 + var1.anInt2829;
                         var5 = -var10.anInt2819 + var1.anInt2819;
                         if (var5 != 0 || var6 != 0) {
-                            var1.anInt2806 = (int) (Math.atan2(var5, var6) * 325.949D) & 2047;
+                            var1.anInt2806 = (int) (Math.atan2(var5, var6) * 325.949D) & 0x7FF;
                         }
                     }
                 }
 
                 if ((0 != var1.anInt2786 || 0 != var1.anInt2762) && (var1.anInt2816 == 0 || var1.anInt2824 > 0)) {
                     var9 = var1.anInt2819 + -((-Class131.anInt1716 + (var1.anInt2786 - Class131.anInt1716)) * 64);
-                    var4 = -((-Class82.anInt1152 + (var1.anInt2762 - Class82.anInt1152)) * 64) + var1.anInt2829;
+                    var4 = -((-Texture.anInt1152 + (var1.anInt2762 - Texture.anInt1152)) * 64) + var1.anInt2829;
                     if (var9 != 0 || var4 != 0) {
-                        var1.anInt2806 = (int) (Math.atan2(var9, var4) * 325.949D) & 2047;
+                        var1.anInt2806 = (int) (Math.atan2(var9, var4) * 325.949D) & 0x7FF;
                     }
 
                     var1.anInt2762 = 0;
                     var1.anInt2786 = 0;
                 }
 
-                var9 = var1.anInt2806 - var1.anInt2785 & 2047;
+                var9 = var1.anInt2806 - var1.anInt2785 & 0x7FF;
                 if (var9 == 0) {
                     var1.anInt2789 = 0;
                     var1.anInt2821 = 0;
@@ -106,10 +106,10 @@ final class Class17 {
                     if (var1.anInt2808 != var4) {
                         var1.anInt2791 = 0;
                         var1.anInt2808 = var4;
-                        var5 = -var1.anInt2780 + var4 & '\uffff';
+                        var5 = -var1.anInt2780 + var4 & 65535;
                         var6 = var1.anInt2821 * var1.anInt2821 / (var2.anInt369 * 2);
                         int var7;
-                        if (var1.anInt2821 > 0 && var6 <= var5 && -var6 + var5 < '\u8000') {
+                        if (var1.anInt2821 > 0 && var6 <= var5 && -var6 + var5 < 32768) {
                             var1.anInt2803 = var5 / 2;
                             var1.aBoolean2769 = true;
                             var7 = var2.anInt357 * var2.anInt357 / (var2.anInt369 * 2);
@@ -120,7 +120,7 @@ final class Class17 {
                             if (var7 < var1.anInt2803) {
                                 var1.anInt2803 = -var7 + var5;
                             }
-                        } else if (0 > var1.anInt2821 && var6 <= -var5 + 65536 && 65536 + -var5 + -var6 < '\u8000') {
+                        } else if (0 > var1.anInt2821 && var6 <= -var5 + 65536 && 65536 + -var5 + -var6 < 32768) {
                             var1.anInt2803 = (-var5 + 65536) / 2;
                             var1.aBoolean2769 = true;
                             var7 = var2.anInt357 * var2.anInt357 / (var2.anInt369 * 2);
@@ -137,7 +137,7 @@ final class Class17 {
                     }
 
                     if (var1.anInt2821 == 0) {
-                        var5 = -var1.anInt2780 + var1.anInt2808 & '\uffff';
+                        var5 = -var1.anInt2780 + var1.anInt2808 & 65535;
                         if (var5 < var2.anInt369) {
                             var1.anInt2780 = var1.anInt2808;
                         } else {
@@ -191,7 +191,7 @@ final class Class17 {
                     }
 
                     var1.anInt2780 += var1.anInt2821;
-                    var1.anInt2780 &= '\uffff';
+                    var1.anInt2780 &= 65535;
                     if (0 >= var1.anInt2821) {
                         var1.anInt2791 -= var1.anInt2821;
                     } else {

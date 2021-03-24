@@ -20,7 +20,7 @@ public final class Class7 implements Interface4 {
         try {
             int windowId = interfaceHash >> 16;
 
-            int componentId = '\uffff' & interfaceHash;
+            int componentId = 65535 & interfaceHash;
             if (GameObject.aClass11ArrayArray1834.length <= windowId || windowId < 0) {
                 return null;
             }

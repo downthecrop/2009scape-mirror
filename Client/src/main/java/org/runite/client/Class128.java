@@ -33,7 +33,7 @@ final class Class128 {
                 System.err.println("Local plane " + WorldListCountry.localPlane + " is out of bounds - rendering log=" + Arrays.toString(Class163_Sub3.PLAYER_RENDER_LOG) + "!");
                 WorldListCountry.localPlane %= 4;
             }
-            Class61 var3 = Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var2][var0];
+            Class61 var3 = TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var2][var0];
             if (var3 == null) {
                 ObjectDefinition.method1688(WorldListCountry.localPlane, var2, var0);
             } else {
@@ -75,7 +75,7 @@ final class Class128 {
                     }
 
                     long var13 = 1610612736 + (var0 << 7) + var2;
-                    Class3_Sub13_Sub10.method213(WorldListCountry.localPlane, var2, var0, Class121.method1736(WorldListCountry.localPlane, 1, 64 + 128 * var2, 64 + var0 * 128), var5.aClass140_Sub7_3676, var13, var12, var14);
+                    TextureOperation30.method213(WorldListCountry.localPlane, var2, var0, Class121.method1736(WorldListCountry.localPlane, 1, 64 + 128 * var2, 64 + var0 * 128), var5.aClass140_Sub7_3676, var13, var12, var14);
                 }
             }
         } catch (RuntimeException var11) {
@@ -136,14 +136,14 @@ final class Class128 {
     static void method1764() {
         for (int var3 = 0; var3 < Class3_Sub17.anInt2456; ++var3) {
             for (int var4 = 0; var4 < Unsorted.anInt1234; ++var4) {
-                for (int var5 = 0; var5 < Class3_Sub13_Sub15.anInt3179; ++var5) {
+                for (int var5 = 0; var5 < TextureOperation17.anInt3179; ++var5) {
                     Class3_Sub2 var6 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var3][var4][var5];
                     if (var6 != null) {
                         Class70 var7 = var6.aClass70_2234;
                         if (var7 != null && var7.aClass140_1049.method1865()) {
-                            Class3_Sub13_Sub10.method214(var7.aClass140_1049, var3, var4, var5, 1, 1);
+                            TextureOperation30.method214(var7.aClass140_1049, var3, var4, var5, 1, 1);
                             if (var7.aClass140_1052 != null && var7.aClass140_1052.method1865()) {
-                                Class3_Sub13_Sub10.method214(var7.aClass140_1052, var3, var4, var5, 1, 1);
+                                TextureOperation30.method214(var7.aClass140_1052, var3, var4, var5, 1, 1);
                                 var7.aClass140_1049.method1866(var7.aClass140_1052, 0, 0, 0, false);
                                 var7.aClass140_1052 = var7.aClass140_1052.method1861();
                             }
@@ -154,7 +154,7 @@ final class Class128 {
                         for (int var8 = 0; var8 < var6.anInt2223; ++var8) {
                             Class25 var9 = var6.aClass25Array2221[var8];
                             if (var9 != null && var9.aClass140_479.method1865()) {
-                                Class3_Sub13_Sub10.method214(var9.aClass140_479, var3, var4, var5, var9.anInt495 - var9.anInt483 + 1, var9.anInt481 - var9.anInt478 + 1);
+                                TextureOperation30.method214(var9.aClass140_479, var3, var4, var5, var9.anInt495 - var9.anInt483 + 1, var9.anInt481 - var9.anInt478 + 1);
                                 var9.aClass140_479 = var9.aClass140_479.method1861();
                             }
                         }

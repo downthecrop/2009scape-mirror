@@ -57,7 +57,7 @@ abstract class Class129 {
                         }
 
                         var10 = Class52.anIntArray861[var10];
-                        Class84.aClass3_Sub28_Sub16_Sub2_1381.anIntArray4081[var6++] = Unsorted.bitwiseAnd(var13 * Unsorted.bitwiseAnd(var11, 16711935) + Unsorted.bitwiseAnd(16711935, var10) * var12, -16711936) - -Unsorted.bitwiseAnd(Unsorted.bitwiseAnd(var10, '\uff00') * var12 - -(Unsorted.bitwiseAnd('\uff00', var11) * var13), 16711680) >> 8;
+                        Class84.aClass3_Sub28_Sub16_Sub2_1381.anIntArray4081[var6++] = Unsorted.bitwiseAnd(var13 * Unsorted.bitwiseAnd(var11, 16711935) + Unsorted.bitwiseAnd(16711935, var10) * var12, -16711936) - -Unsorted.bitwiseAnd(Unsorted.bitwiseAnd(var10, 65280) * var12 - -(Unsorted.bitwiseAnd(65280, var11) * var13), 16711680) >> 8;
                     }
                 }
 
@@ -130,7 +130,7 @@ abstract class Class129 {
                                     continue;
                                 }
 
-                                var27 = Class3_Sub13_Sub37.method350((byte) -103, var25 + -1);
+                                var27 = TextureOperation10.method350((byte) -103, var25 + -1);
                                 if (var27.anInt2103 == -1) {
                                     continue;
                                 }
@@ -142,7 +142,7 @@ abstract class Class129 {
                                     continue;
                                 }
                             } else if (var25 != 0) {
-                                var27 = Class3_Sub13_Sub37.method350((byte) 123, var25 - 1);
+                                var27 = TextureOperation10.method350((byte) 123, var25 - 1);
                                 byte var42;
                                 if (var27.anInt2103 == -1) {
                                     var42 = var7[var23][var19];
@@ -182,7 +182,7 @@ abstract class Class129 {
                                         if (!var32 && -1 + var19 >= var17) {
                                             var33 = var13.aShortArray706[var15 + -1];
                                             var34 = var16 + (var33 >> 8);
-                                            var35 = var34 - -(var33 & 255);
+                                            var35 = var34 - -(var33 & 0xFF);
                                             var32 = var23 > var34 && var35 > var23;
                                         }
 
@@ -266,19 +266,19 @@ abstract class Class129 {
                                     continue;
                                 }
 
-                                var46 = Class3_Sub13_Sub37.method350((byte) -49, var43 - 1);
+                                var46 = TextureOperation10.method350((byte) -49, var43 - 1);
                                 if (-1 == var46.anInt2103) {
                                     continue;
                                 }
 
                                 if (var7[var23][var19] != 0) {
-                                    Class3_Sub13_Sub23_Sub1.method284(var0, var9, var23, var6, var19, Class134.anIntArrayArray1763[var7[var23][var19]], var14, (byte) -88, var13, var11, var2[var23][var19]);
+                                    TextureOperation18.method284(var0, var9, var23, var6, var19, Class134.anIntArrayArray1763[var7[var23][var19]], var14, (byte) -88, var13, var11, var2[var23][var19]);
                                     continue;
                                 }
                             } else if (var43 != 0) {
-                                var46 = Class3_Sub13_Sub37.method350((byte) 113, -1 + var43);
+                                var46 = TextureOperation10.method350((byte) 113, -1 + var43);
                                 if (-1 == var46.anInt2103) {
-                                    Class3_Sub13_Sub23_Sub1.method284(var0, var9, var23, var6, var19, Class25.anIntArrayArray499[var7[var23][var19]], var14, (byte) 116, var13, var11, var2[var23][var19]);
+                                    TextureOperation18.method284(var0, var9, var23, var6, var19, Class25.anIntArrayArray499[var7[var23][var19]], var14, (byte) 116, var13, var11, var2[var23][var19]);
                                     continue;
                                 }
 
@@ -303,7 +303,7 @@ abstract class Class129 {
                                         if (!var32 && var18 >= var19 - -1) {
                                             var50 = var13.aShortArray706[1 + var15];
                                             var35 = (var50 >> 8) + var16;
-                                            var36 = (var50 & 255) + var35;
+                                            var36 = (var50 & 0xFF) + var35;
                                             var32 = var23 > var35 && var23 < var36;
                                         }
 
@@ -352,17 +352,17 @@ abstract class Class129 {
                                     }
 
                                     if (null != var45) {
-                                        Class3_Sub13_Sub23_Sub1.method284(var0, var9, var23, var6, var19, var45, var14, (byte) 98, var13, var11, var38);
+                                        TextureOperation18.method284(var0, var9, var23, var6, var19, var45, var14, (byte) 98, var13, var11, var38);
                                     }
                                     continue;
                                 }
                             }
 
                             if (var39) {
-                                Class3_Sub13_Sub23_Sub1.method284(var0, var9, var23, var6, var19, Class25.anIntArrayArray499[var7[var23][var19]], var14, (byte) 96, var13, var11, var2[var23][var19]);
-                                Class3_Sub13_Sub23_Sub1.method284(var0, var9, var23, var6, var19, Class134.anIntArrayArray1763[var7[var23][var19]], var14, (byte) -117, var13, var11, var2[var23][var19]);
+                                TextureOperation18.method284(var0, var9, var23, var6, var19, Class25.anIntArrayArray499[var7[var23][var19]], var14, (byte) 96, var13, var11, var2[var23][var19]);
+                                TextureOperation18.method284(var0, var9, var23, var6, var19, Class134.anIntArrayArray1763[var7[var23][var19]], var14, (byte) -117, var13, var11, var2[var23][var19]);
                             } else {
-                                Class3_Sub13_Sub23_Sub1.method284(var0, var9, var23, var6, var19, Class134.anIntArrayArray1763[0], var14, (byte) 61, var13, var11, var38);
+                                TextureOperation18.method284(var0, var9, var23, var6, var19, Class134.anIntArrayArray1763[0], var14, (byte) 61, var13, var11, var38);
                             }
                         }
 

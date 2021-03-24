@@ -16,7 +16,7 @@ public final class Class74 {
         return Toolkit.JAVA_TOOLKIT.getBuffer();
     }
 
-    static void method1310() {
+    public static void method1310() {
         anIntArray1097 = null;
         anIntArray1098 = null;
     }
@@ -27,7 +27,7 @@ public final class Class74 {
         }
     }
 
-    static void method1314(int[] var0, int[] var1) {
+    public static void method1314(int[] var0, int[] var1) {
         if (var0.length == Toolkit.JAVA_TOOLKIT.clipBottom - Toolkit.JAVA_TOOLKIT.clipTop && var1.length == Toolkit.JAVA_TOOLKIT.clipBottom - Toolkit.JAVA_TOOLKIT.clipTop) {
             anIntArray1097 = var0;
             anIntArray1098 = var1;
@@ -92,15 +92,15 @@ public final class Class74 {
             }
 
             int var5 = 256 - var4;
-            int var6 = (var3 >> 16 & 255) * var4;
-            int var7 = (var3 >> 8 & 255) * var4;
-            int var8 = (var3 & 255) * var4;
+            int var6 = (var3 >> 16 & 0xFF) * var4;
+            int var7 = (var3 >> 8 & 0xFF) * var4;
+            int var8 = (var3 & 0xFF) * var4;
             int var12 = var0 + var1 * Toolkit.JAVA_TOOLKIT.width;
 
             for (int var13 = 0; var13 < var2; ++var13) {
-                int var9 = (getBuffer()[var12] >> 16 & 255) * var5;
-                int var10 = (getBuffer()[var12] >> 8 & 255) * var5;
-                int var11 = (getBuffer()[var12] & 255) * var5;
+                int var9 = (getBuffer()[var12] >> 16 & 0xFF) * var5;
+                int var10 = (getBuffer()[var12] >> 8 & 0xFF) * var5;
+                int var11 = (getBuffer()[var12] & 0xFF) * var5;
                 int var14 = (var6 + var9 >> 8 << 16) + (var7 + var10 >> 8 << 8) + (var8 + var11 >> 8);
                 getBuffer()[var12++] = var14;
             }
@@ -211,15 +211,15 @@ public final class Class74 {
             }
 
             int var5 = 256 - var4;
-            int var6 = (var3 >> 16 & 255) * var4;
-            int var7 = (var3 >> 8 & 255) * var4;
-            int var8 = (var3 & 255) * var4;
+            int var6 = (var3 >> 16 & 0xFF) * var4;
+            int var7 = (var3 >> 8 & 0xFF) * var4;
+            int var8 = (var3 & 0xFF) * var4;
             int var12 = var0 + var1 * Toolkit.JAVA_TOOLKIT.width;
 
             for (int var13 = 0; var13 < var2; ++var13) {
-                int var9 = (getBuffer()[var12] >> 16 & 255) * var5;
-                int var10 = (getBuffer()[var12] >> 8 & 255) * var5;
-                int var11 = (getBuffer()[var12] & 255) * var5;
+                int var9 = (getBuffer()[var12] >> 16 & 0xFF) * var5;
+                int var10 = (getBuffer()[var12] >> 8 & 0xFF) * var5;
+                int var11 = (getBuffer()[var12] & 0xFF) * var5;
                 int var14 = (var6 + var9 >> 8 << 16) + (var7 + var10 >> 8 << 8) + (var8 + var11 >> 8);
                 getBuffer()[var12] = var14;
                 var12 += Toolkit.JAVA_TOOLKIT.width;
@@ -257,7 +257,7 @@ public final class Class74 {
             int var6;
             if (var2 > var3) {
                 var1 <<= 16;
-                var1 += '\u8000';
+                var1 += 32768;
                 var3 <<= 16;
                 var5 = (int) Math.floor((double) var3 / (double) var2 + 0.5D);
                 var2 += var0;
@@ -281,7 +281,7 @@ public final class Class74 {
                 }
             } else {
                 var0 <<= 16;
-                var0 += '\u8000';
+                var0 += 32768;
                 var2 <<= 16;
                 var5 = (int) Math.floor((double) var2 / (double) var3 + 0.5D);
                 var3 += var1;
@@ -411,8 +411,8 @@ public final class Class74 {
                 }
 
                 int var5 = 256 - var4;
-                int var6 = (16776960 >> 16 & 255) * var4;
-                int var7 = (16776960 >> 8 & 255) * var4;
+                int var6 = (16776960 >> 16 & 0xFF) * var4;
+                int var7 = (16776960 >> 8 & 0xFF) * var4;
                 int var8 = 0;
                 int var12 = var1 - var2;
                 if (var12 < Toolkit.JAVA_TOOLKIT.clipTop) {
@@ -461,9 +461,9 @@ public final class Class74 {
                     var22 = var20 + var14 * Toolkit.JAVA_TOOLKIT.width;
 
                     for (var23 = var20; var23 < var21; ++var23) {
-                        var9 = (getBuffer()[var22] >> 16 & 255) * var5;
-                        var10 = (getBuffer()[var22] >> 8 & 255) * var5;
-                        var11 = (getBuffer()[var22] & 255) * var5;
+                        var9 = (getBuffer()[var22] >> 16 & 0xFF) * var5;
+                        var10 = (getBuffer()[var22] >> 8 & 0xFF) * var5;
+                        var11 = (getBuffer()[var22] & 0xFF) * var5;
                         var24 = (var6 + var9 >> 8 << 16) + (var7 + var10 >> 8 << 8) + (var8 + var11 >> 8);
                         getBuffer()[var22++] = var24;
                     }
@@ -497,9 +497,9 @@ public final class Class74 {
                     var22 = var20 + var14 * Toolkit.JAVA_TOOLKIT.width;
 
                     for (var23 = var20; var23 <= var21; ++var23) {
-                        var9 = (getBuffer()[var22] >> 16 & 255) * var5;
-                        var10 = (getBuffer()[var22] >> 8 & 255) * var5;
-                        var11 = (getBuffer()[var22] & 255) * var5;
+                        var9 = (getBuffer()[var22] >> 16 & 0xFF) * var5;
+                        var10 = (getBuffer()[var22] >> 8 & 0xFF) * var5;
+                        var11 = (getBuffer()[var22] & 0xFF) * var5;
                         var24 = (var6 + var9 >> 8 << 16) + (var7 + var10 >> 8 << 8) + (var8 + var11 >> 8);
                         getBuffer()[var22++] = var24;
                     }
@@ -520,7 +520,7 @@ public final class Class74 {
         method1310();
     }
 
-    static void method1332(int var0, int var1, int[] var3, int[] var4) {
+    public static void method1332(int var0, int var1, int[] var3, int[] var4) {
         int var5 = var0 + var1 * Toolkit.JAVA_TOOLKIT.width;
 
         for (var1 = 0; var1 < var3.length; ++var1) {

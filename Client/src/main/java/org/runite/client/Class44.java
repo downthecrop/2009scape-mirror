@@ -8,7 +8,7 @@ import java.io.*;
 public abstract class Class44 {
 
     static int paramModeWhere = 0;
-    static int anInt719 = 0;
+    public static int anInt719 = 0;
     static int[][][] anIntArrayArrayArray720;
     static int[][][] anIntArrayArrayArray723;
     static byte[] aClass8343;

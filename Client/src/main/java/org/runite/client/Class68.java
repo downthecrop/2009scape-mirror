@@ -81,7 +81,7 @@ final class Class68 {
 
                         label101:
                         while (var12 != 0) {
-                            int var13 = (var12 & 255) - 1;
+                            int var13 = (var12 & 0xFF) - 1;
                             var12 >>>= 8;
 
                             int var14;
@@ -173,7 +173,7 @@ final class Class68 {
                 int var9;
                 label71:
                 while (var7 != 0) {
-                    var8 = (var7 & 255) - 1;
+                    var8 = (var7 & 0xFF) - 1;
                     var7 >>>= 8;
 
                     for (var9 = 0; var9 < 4; ++var9) {
@@ -265,7 +265,7 @@ final class Class68 {
                 for (int var8 = var6; var8 <= var7; ++var8) {
                     short var9 = var1.aShortArray706[var5++];
                     int var10 = (var1.anInt703 >> 7) - var1.anInt698 + (var9 >> 8);
-                    int var11 = var10 + (var9 & 255) - 1;
+                    int var11 = var10 + (var9 & 0xFF) - 1;
                     if (var10 < 0) {
                         var10 = 0;
                     }
@@ -276,9 +276,9 @@ final class Class68 {
 
                     for (int var12 = var10; var12 <= var11; ++var12) {
                         int var13 = anIntArrayArrayArray1027[var4][var12][var8];
-                        if ((var13 & 255) == 0) {
+                        if ((var13 & 0xFF) == 0) {
                             anIntArrayArrayArray1027[var4][var12][var8] = var13 | var0 + 1;
-                        } else if ((var13 & '\uff00') == 0) {
+                        } else if ((var13 & 65280) == 0) {
                             anIntArrayArrayArray1027[var4][var12][var8] = var13 | var0 + 1 << 8;
                         } else if ((var13 & 16711680) == 0) {
                             anIntArrayArrayArray1027[var4][var12][var8] = var13 | var0 + 1 << 16;
@@ -310,7 +310,7 @@ final class Class68 {
 
                     int var7;
                     while (var6 != 0) {
-                        var7 = (var6 & 255) - 1;
+                        var7 = (var6 & 0xFF) - 1;
                         var6 >>>= 8;
                         if (var7 == anIntArray1028[var5]) {
                             continue label44;
@@ -320,7 +320,7 @@ final class Class68 {
                     var6 = anIntArrayArrayArray1027[var0][var3][var4];
 
                     while (var6 != 0) {
-                        var7 = (var6 & 255) - 1;
+                        var7 = (var6 & 0xFF) - 1;
                         var6 >>>= 8;
                         if (var7 == anIntArray1028[var5]) {
                             continue label44;
@@ -411,7 +411,7 @@ final class Class68 {
                     while (var10 <= var9) {
                         short var11 = var5.aShortArray706[var7++];
                         int var12 = (var5.anInt703 >> 7) - var5.anInt698 + (var11 >> 8);
-                        int var13 = var12 + (var11 & 255) - 1;
+                        int var13 = var12 + (var11 & 0xFF) - 1;
                         if (var12 < Class163_Sub1_Sub1.anInt4006) {
                             var12 = Class163_Sub1_Sub1.anInt4006;
                         }

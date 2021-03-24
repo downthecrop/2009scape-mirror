@@ -363,7 +363,7 @@ public class Signlink implements Runnable {
                                 throw new IOException();
                             }
 
-                            var4 = (var1.anInt979 >> 24 & 255) + "." + (var1.anInt979 >> 16 & 255) + "." + (var1.anInt979 >> 8 & 255) + "." + (255 & var1.anInt979);
+                            var4 = (var1.anInt979 >> 24 & 0xFF) + "." + (var1.anInt979 >> 16 & 0xFF) + "." + (var1.anInt979 >> 8 & 0xFF) + "." + (255 & var1.anInt979);
                             var1.anObject974 = InetAddress.getByName(var4).getHostName();
                         } else if (stage == 5) {
                             var1.anObject974 = this.display.method919(true);
@@ -371,7 +371,7 @@ public class Signlink implements Runnable {
                             Frame var5 = new Frame("Jagex Full Screen");
                             var1.anObject974 = var5;
                             var5.setResizable(false);
-                            this.display.method918(-56, var1.anInt980 & '\uffff', var1.anInt980 >> 16, '\uffff' & var1.anInt979, var5, var1.anInt979 >>> 16);
+                            this.display.method918(-56, var1.anInt980 & 65535, var1.anInt980 >> 16, 65535 & var1.anInt979, var5, var1.anInt979 >>> 16);
                         } else if (stage == 7) {
                             this.display.method920();
                         } else if (10 == stage) {

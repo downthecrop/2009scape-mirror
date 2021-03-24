@@ -55,7 +55,7 @@ public final class AtmosphereParser {
             if (var2 == null) {
                 byte[] var3 = CacheIndex.fontsIndex.getFile(var1, 0);
                 var2 = new Class3_Sub28_Sub17_Sub1(var3);
-                var2.method697(Class3_Sub13_Sub22.nameIconsSpriteArray, null);
+                var2.method697(TextureOperation0.nameIconsSpriteArray, null);
                 Unsorted.aReferenceCache_1135.put(var2, var1);
             }
             return var2;

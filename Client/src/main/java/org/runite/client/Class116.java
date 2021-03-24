@@ -7,7 +7,7 @@ import java.util.Random;
 final class Class116 {
 
     private static final int[] anIntArray1591;
-    private static final int[] anIntArray1594 = new int['\u8000'];
+    private static final int[] anIntArray1594 = new int[32768];
     private static final int[] anIntArray1598;
     private static final int[] anIntArray1599;
     private static final int[] anIntArray1600;
@@ -21,13 +21,13 @@ final class Class116 {
         Random var0 = new Random(0L);
 
         int var1;
-        for (var1 = 0; var1 < '\u8000'; ++var1) {
+        for (var1 = 0; var1 < 32768; ++var1) {
             anIntArray1594[var1] = (var0.nextInt() & 2) - 1;
         }
 
-        anIntArray1591 = new int['\u8000'];
+        anIntArray1591 = new int[32768];
 
-        for (var1 = 0; var1 < '\u8000'; ++var1) {
+        for (var1 = 0; var1 < 32768; ++var1) {
             anIntArray1591[var1] = (int) (Math.sin((double) var1 / 5215.1903D) * 16384.0D);
         }
 
@@ -115,7 +115,7 @@ final class Class116 {
                 if (this.aClass34_1595 != null) {
                     var14 = this.aClass34_1595.method1007(var1);
                     var15 = this.aClass34_1584.method1007(var1);
-                    var13 = var13 * ((this.method1716(var10, var15, this.aClass34_1595.anInt601) >> 1) + '\u8000') >> 15;
+                    var13 = var13 * ((this.method1716(var10, var15, this.aClass34_1595.anInt601) >> 1) + 32768) >> 15;
                     var10 += (var14 * var8 >> 16) + var9;
                 }
 

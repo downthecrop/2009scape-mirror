@@ -79,7 +79,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
       try {
           if (var0 != null) {
               for (int var2 = 0; var2 < Class3_Sub28_Sub5.anInt3591; ++var2) {
-                  if (var0.equalsStringIgnoreCase(Class3_Sub13_Sub27.aClass94Array3341[var2])) {
+                  if (var0.equalsStringIgnoreCase(TextureOperation7.aClass94Array3341[var2])) {
                       return true;
                   }
               }

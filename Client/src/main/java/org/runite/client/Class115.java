@@ -19,7 +19,7 @@ final class Class115 {
                     if (Class3_Sub1.localIndex == var3) {
                         var2 = Class102.player;
                     } else {
-                        var2 = Class3_Sub13_Sub22.players[var3];
+                        var2 = TextureOperation0.players[var3];
                     }
                 } else {
                     var3 = var1.anInt2273 - 1;

@@ -2,11 +2,11 @@ package org.runite.client;
 
 import java.util.Objects;
 
-final class Class8 {
+public final class Class8 {
 
     static RSInterface[] aClass11Array1836;
     static int anInt101;
-    static int anInt104 = 0;
+    public static int anInt104 = 0;
     static CacheIndex aClass153_105;
     private final Js5Worker aJs5Worker_102;
     private final CacheResourceWorker aCacheResourceWorker_103;
@@ -91,7 +91,7 @@ final class Class8 {
     static void method841() {
         try {
             aClass11Array1836 = null;
-            Class3_Sub13_Sub1.method171(-101, Class3_Sub28_Sub12.anInt3655, 0, Class23.canvasWidth, 0, -1, Class140_Sub7.canvasHeight, 0, 0);
+            TextureOperation12.method171(-101, Class3_Sub28_Sub12.anInt3655, 0, Class23.canvasWidth, 0, -1, Class140_Sub7.canvasHeight, 0, 0);
             if (aClass11Array1836 != null) {
                 Unsorted.method1095(0, Unsorted.anInt1082, Unsorted.anInt3602, aClass11Array1836, Class23.canvasWidth, -1412584499, 0, Class140_Sub7.canvasHeight, (byte) 73, PacketParser.aClass11_88.anInt292);
                 aClass11Array1836 = null;
@@ -133,13 +133,13 @@ final class Class8 {
                 TextCore.aClass94_106 = null;
             }
 
-            if (null == Class3_Sub13_Sub17.anIntArray3212 || null == Class75_Sub2.anIntArray2639) {
-                Class3_Sub13_Sub17.anIntArray3212 = new int[256];
+            if (null == TextureOperation23.anIntArray3212 || null == Class75_Sub2.anIntArray2639) {
+                TextureOperation23.anIntArray3212 = new int[256];
                 Class75_Sub2.anIntArray2639 = new int[256];
 
                 for (int var1 = 0; 256 > var1; ++var1) {
                     double var2 = (double) var1 / 255.0D * 6.283185307179586D;
-                    Class3_Sub13_Sub17.anIntArray3212[var1] = (int) (Math.sin(var2) * 4096.0D);
+                    TextureOperation23.anIntArray3212[var1] = (int) (Math.sin(var2) * 4096.0D);
                     Class75_Sub2.anIntArray2639[var1] = (int) (4096.0D * Math.cos(var2));
                 }
             }
@@ -170,7 +170,7 @@ final class Class8 {
         } else {
             int var4 = var1 << 7;
             int var5 = var2 << 7;
-            if (Class3_Sub13_Sub37.method349(var4 + 1, Class44.anIntArrayArrayArray723[var0][var1][var2], var5 + 1) && Class3_Sub13_Sub37.method349(var4 + 128 - 1, Class44.anIntArrayArrayArray723[var0][var1 + 1][var2], var5 + 1) && Class3_Sub13_Sub37.method349(var4 + 128 - 1, Class44.anIntArrayArrayArray723[var0][var1 + 1][var2 + 1], var5 + 128 - 1) && Class3_Sub13_Sub37.method349(var4 + 1, Class44.anIntArrayArrayArray723[var0][var1][var2 + 1], var5 + 128 - 1)) {
+            if (TextureOperation10.method349(var4 + 1, Class44.anIntArrayArrayArray723[var0][var1][var2], var5 + 1) && TextureOperation10.method349(var4 + 128 - 1, Class44.anIntArrayArrayArray723[var0][var1 + 1][var2], var5 + 1) && TextureOperation10.method349(var4 + 128 - 1, Class44.anIntArrayArrayArray723[var0][var1 + 1][var2 + 1], var5 + 128 - 1) && TextureOperation10.method349(var4 + 1, Class44.anIntArrayArrayArray723[var0][var1][var2 + 1], var5 + 128 - 1)) {
                 Class81.anIntArrayArrayArray1142[var0][var1][var2] = Class3_Sub28_Sub1.anInt3539;
                 return true;
             } else {

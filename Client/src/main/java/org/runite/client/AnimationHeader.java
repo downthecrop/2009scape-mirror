@@ -74,9 +74,9 @@ final class AnimationHeader {
 //
 //					aByteArray1389[var6] = (byte)(var11 >>> 3 & 3);
 //					if(var10 == 2) {
-//						aShortArray1394[var6] = (short)(((aShortArray1394[var6] & 255) << 3) + (aShortArray1394[var6] >> 8 & 7));
-//						aShortArray1391[var6] = (short)(((aShortArray1391[var6] & 255) << 3) + (aShortArray1391[var6] >> 8 & 7));
-//						aShortArray1390[var6] = (short)(((aShortArray1390[var6] & 255) << 3) + (aShortArray1390[var6] >> 8 & 7));
+//						aShortArray1394[var6] = (short)(((aShortArray1394[var6] & 0xFF) << 3) + (aShortArray1394[var6] >> 8 & 7));
+//						aShortArray1391[var6] = (short)(((aShortArray1391[var6] & 0xFF) << 3) + (aShortArray1391[var6] >> 8 & 7));
+//						aShortArray1390[var6] = (short)(((aShortArray1390[var6] & 0xFF) << 3) + (aShortArray1390[var6] >> 8 & 7));
 //					}
 //					var7 = i;
 //					if(var10 != 1 && var10 != 2 && var10 != 3) {
@@ -163,9 +163,9 @@ final class AnimationHeader {
 
                      aByteArray1389[var6] = (byte)(var11 >>> 3 & 3);
 		            if(var10 == 2) {
-		               aShortArray1394[var6] = (short)(((aShortArray1394[var6] & 255) << 3) + (aShortArray1394[var6] >> 8 & 7));
-		               aShortArray1391[var6] = (short)(((aShortArray1391[var6] & 255) << 3) + (aShortArray1391[var6] >> 8 & 7));
-		               aShortArray1390[var6] = (short)(((aShortArray1390[var6] & 255) << 3) + (aShortArray1390[var6] >> 8 & 7));
+		               aShortArray1394[var6] = (short)(((aShortArray1394[var6] & 0xFF) << 3) + (aShortArray1394[var6] >> 8 & 7));
+		               aShortArray1391[var6] = (short)(((aShortArray1391[var6] & 0xFF) << 3) + (aShortArray1391[var6] >> 8 & 7));
+		               aShortArray1390[var6] = (short)(((aShortArray1390[var6] & 0xFF) << 3) + (aShortArray1390[var6] >> 8 & 7));
 		            }
 
 		            aShortArray1392[var6] = -1;

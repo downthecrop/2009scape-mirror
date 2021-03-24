@@ -21,9 +21,9 @@ final class Class70 {
         try {
             Class101.aClass153_1423 = var0;
             Class10.anInt154 = 1;
-            Class3_Sub13_Sub36.anInt3423 = var5;
+            TextureOperation36.anInt3423 = var5;
             Class132.anInt1741 = 0;
-            Class3_Sub13_Sub39.anInt3463 = var2;
+            TextureOperation8.anInt3463 = var2;
             Unsorted.aBoolean2311 = false;
 
             GraphicDefinition.anInt546 = 10000;

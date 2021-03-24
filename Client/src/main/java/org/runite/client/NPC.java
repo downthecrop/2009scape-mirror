@@ -2,11 +2,11 @@ package org.runite.client;
 
 import java.util.Objects;
 
-final class NPC extends Class140_Sub4 {
+public final class NPC extends Class140_Sub4 {
 
     static boolean aBoolean3975 = false;
     static int[] npcSpawnCacheIndices;
-    static NPC[] npcs = new NPC['\u8000'];
+    public static NPC[] npcs = new NPC[32768];
     static Class3_Sub27 aClass3_Sub27_1154;
     static AbstractSprite[] aAbstractSpriteArray3977;
     static float aFloat3979;
@@ -14,7 +14,7 @@ final class NPC extends Class140_Sub4 {
     static int anInt3995;
     static int[] anIntArray3997 = new int[]{19, 55, 38, 155, 255, 110, 137, 205, 76};
     static int anInt4001;
-    NPCDefinition definition;
+    public NPCDefinition definition;
 
     static int method1984(int var0, int var1, int var2) {
         try {
@@ -64,7 +64,7 @@ final class NPC extends Class140_Sub4 {
                 if ((var4 & 16) != 0) {
                     var5 = GraphicDefinition.incomingBuffer.readUnsignedShort();
                     var6 = GraphicDefinition.incomingBuffer.readUnsignedByte();
-                    if ('\uffff' == var5) {
+                    if (65535 == var5) {
                         var5 = -1;
                     }
 
@@ -82,7 +82,7 @@ final class NPC extends Class140_Sub4 {
                 //Ordinal: 4 Graphic
                 if (0 != (var4 & 128)) {
                     var5 = GraphicDefinition.incomingBuffer.readUnsignedShort128();
-                    if (var5 == '\uffff') {
+                    if (var5 == 65535) {
                         var5 = -1;
                     }
 
@@ -94,7 +94,7 @@ final class NPC extends Class140_Sub4 {
 
                     if (var7) {
                         npc.anInt2842 = var5;
-                        npc.anInt2759 = ('\uffff' & var6) + Class44.anInt719;
+                        npc.anInt2759 = (65535 & var6) + Class44.anInt719;
                         npc.anInt2761 = 0;
                         npc.anInt2805 = 0;
                         npc.anInt2799 = var6 >> 16;
@@ -144,7 +144,7 @@ final class NPC extends Class140_Sub4 {
 
                     for (int var15 = 0; var5 > var15; ++var15) {
                         int var10 = GraphicDefinition.incomingBuffer.readUnsignedShortLE();
-                        if (var10 == '\uffff') {
+                        if (var10 == 65535) {
                             var10 = -1;
                         }
 
@@ -153,7 +153,7 @@ final class NPC extends Class140_Sub4 {
                         var14[var15] = GraphicDefinition.incomingBuffer.readUnsignedShort();
                     }
 
-                    Class3_Sub13_Sub22.method273(var14, npc, var13, var12);
+                    TextureOperation0.method273(var14, npc, var13, var12);
                 }
 
                 //Ordinal: 8 Face location
@@ -205,7 +205,7 @@ final class NPC extends Class140_Sub4 {
             try {
                 if (Class10.anInt154 == 2) {
                     if (aClass3_Sub27_1154 == null) {
-                        aClass3_Sub27_1154 = Class3_Sub27.method517(Class101.aClass153_1423, Class3_Sub13_Sub39.anInt3463, Class132.anInt1741);
+                        aClass3_Sub27_1154 = Class3_Sub27.method517(Class101.aClass153_1423, TextureOperation8.anInt3463, Class132.anInt1741);
                         if (null == aClass3_Sub27_1154) {
                             return false;
                         }
@@ -217,7 +217,7 @@ final class NPC extends Class140_Sub4 {
 
                     if (Class101.aClass3_Sub24_Sub4_1421.method470(aClass3_Sub27_1154, Class124.aClass153_1661, Class3_Sub28_Sub4.aClass83_3579)) {
                         Class101.aClass3_Sub24_Sub4_1421.method471();
-                        Class101.aClass3_Sub24_Sub4_1421.method506(Class3_Sub13_Sub36.anInt3423);
+                        Class101.aClass3_Sub24_Sub4_1421.method506(TextureOperation36.anInt3423);
                         Class101.aClass3_Sub24_Sub4_1421.method490(Unsorted.aBoolean2311, aClass3_Sub27_1154);
                         Class10.anInt154 = 0;
                         aClass3_Sub27_1154 = null;
@@ -290,16 +290,16 @@ final class NPC extends Class140_Sub4 {
                         if (var17 != null) {
                             var17.method1897(0, -this.anInt2799, 0);
                             if (var21.aBoolean536) {
-                                if (Class3_Sub13_Sub16.anInt3198 != 0) {
-                                    var17.method1896(Class3_Sub13_Sub16.anInt3198);
+                                if (TextureOperation15.anInt3198 != 0) {
+                                    var17.method1896(TextureOperation15.anInt3198);
                                 }
 
                                 if (Class3_Sub28_Sub9.anInt3623 != 0) {
                                     var17.method1886(Class3_Sub28_Sub9.anInt3623);
                                 }
 
-                                if (0 != Class3_Sub13_Sub9.anInt3111) {
-                                    var17.method1897(0, Class3_Sub13_Sub9.anInt3111, 0);
+                                if (0 != TextureOperation16.anInt3111) {
+                                    var17.method1897(0, TextureOperation16.anInt3111, 0);
                                 }
                             }
                         }
@@ -359,7 +359,7 @@ final class NPC extends Class140_Sub4 {
         }
     }
 
-    final boolean hasDefinitions() {
+    public final boolean hasDefinitions() {
         try {
 
             return null != this.definition;

@@ -5,7 +5,7 @@ import org.rs09.client.config.GameConfig;
 
 import java.awt.*;
 
-final class Class58 {
+public final class Class58 {
 
     static int anInt909 = -1;
     static int[][][] anIntArrayArrayArray911 = new int[2][][];
@@ -15,7 +15,7 @@ final class Class58 {
     static Js5Worker aJs5Worker_917;
 
 
-    static void method1194() {
+    public static void method1194() {
         try {
             if (null != Class3_Sub21.aClass155_2491) {
                 Class3_Sub21.aClass155_2491.method2153();

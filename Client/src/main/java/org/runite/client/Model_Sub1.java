@@ -486,14 +486,14 @@ final class Model_Sub1 extends GameObject {
         int var24 = var15 < var21 ? var15 : var21;
         int var25 = var12 < var18 ? var12 : var18;
         if (var6 != 0) {
-            int var26 = (int) (Math.atan2(var22 - var23, var6) * 325.95D) & 2047;
+            int var26 = (int) (Math.atan2(var22 - var23, var6) * 325.95D) & 0x7FF;
             if (var26 != 0) {
                 this.method2006(var26);
             }
         }
 
         if (var5 != 0) {
-            int var27 = (int) (Math.atan2(var25 - var24, var5) * 325.95D) & 2047;
+            int var27 = (int) (Math.atan2(var25 - var24, var5) * 325.95D) & 0x7FF;
             if (var27 != 0) {
                 this.method1992(var27);
             }
@@ -716,8 +716,8 @@ final class Model_Sub1 extends GameObject {
                         }
                     }
                 } else if (var1 == 3) {
-                    var15 = (var2 & 255) * 4;
-                    var16 = (var2 >> 8 & 255) * 4;
+                    var15 = (var2 & 0xFF) * 4;
+                    var16 = (var2 >> 8 & 0xFF) * 4;
                     this.method1996(var3, var5, var6, var7, var15, var16);
                 } else if (var1 == 4) {
                     var15 = this.aShort2844 - this.aShort2854;
@@ -1102,7 +1102,7 @@ final class Model_Sub1 extends GameObject {
         var7.index = var48;
 
         for (var57 = 0; var57 < var11; ++var57) {
-            var58 = this.aByteArray2857[var57] & 255;
+            var58 = this.aByteArray2857[var57] & 0xFF;
             if (var58 == 0) {
                 this.aShortArray2884[var57] = (short) var2.readUnsignedShort();
                 this.aShortArray2846[var57] = (short) var2.readUnsignedShort();
@@ -1733,9 +1733,9 @@ final class Model_Sub1 extends GameObject {
             boolean var46 = false;
 
             for (var43 = 0; var43 < var10; ++var43) {
-                var44 = this.aByteArray2866[var43] & 255;
+                var44 = this.aByteArray2866[var43] & 0xFF;
                 if (var44 != 255) {
-                    if ((this.aShortArray2884[var44] & '\uffff') == this.anIntArray2865[var43] && (this.aShortArray2846[var44] & '\uffff') == this.anIntArray2878[var43] && (this.aShortArray2891[var44] & '\uffff') == this.anIntArray2864[var43]) {
+                    if ((this.aShortArray2884[var44] & 65535) == this.anIntArray2865[var43] && (this.aShortArray2846[var44] & 65535) == this.anIntArray2878[var43] && (this.aShortArray2891[var44] & 65535) == this.anIntArray2864[var43]) {
                         this.aByteArray2866[var43] = -1;
                     } else {
                         var46 = true;

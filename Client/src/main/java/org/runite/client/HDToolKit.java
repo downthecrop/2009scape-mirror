@@ -51,7 +51,7 @@ public final class HDToolKit {
     private static RSString method1820(String var0) {
         byte[] var1;
         var1 = var0.getBytes(StandardCharsets.ISO_8859_1);
-        return Class3_Sub13_Sub3.bufferToString(var1, var1.length, 0);
+        return TextureOperation33.bufferToString(var1, var1.length, 0);
     }
 
     static void method1821(int offsetX, int offsetY, int ratioWidth, int ratioHeight) {
@@ -113,12 +113,8 @@ public final class HDToolKit {
         }
     }
 
-    static void bufferSwap() {
-        try {
-            glDrawable.swapBuffers();
-        } catch (Exception var1) {
-        }
-
+    public static void bufferSwap() {
+        glDrawable.swapBuffers();
     }
 
     static void method1827(boolean var0) {
@@ -541,7 +537,7 @@ public final class HDToolKit {
      * @param color
      */
     static void clearScreen(int color) {
-        gl.glClearColor((float) (color >> 16 & 255) / 255.0F, (float) (color >> 8 & 255) / 255.0F, (float) (color & 255) / 255.0F, 0.0F);
+        gl.glClearColor((float) (color >> 16 & 0xFF) / 255.0F, (float) (color >> 8 & 0xFF) / 255.0F, (float) (color & 0xFF) / 255.0F, 0.0F);
         gl.glClear(16640);
         gl.glClearColor(0.0F, 0.0F, 0.0F, 0.0F);
     }

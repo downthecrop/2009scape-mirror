@@ -410,7 +410,7 @@ final class ItemDefinition {
 				if(null != this.aShortArray774) {
 					for(var9 = 0; this.aShortArray774.length > var9; ++var9) {
 						if(null != this.aByteArray785 && this.aByteArray785.length > var9) {
-							var12.method2016(this.aShortArray774[var9], Class3_Sub13_Sub38.aShortArray3453[this.aByteArray785[var9] & 255]);
+							var12.method2016(this.aShortArray774[var9], TextureOperation38.aShortArray3453[this.aByteArray785[var9] & 0xFF]);
 						} else {
 							var12.method2016(this.aShortArray774[var9], this.aShortArray772[var9]);
 						}
@@ -793,7 +793,7 @@ final class ItemDefinition {
 				if(this.aShortArray774 != null) {
 					for(var3 = 0; this.aShortArray774.length > var3; ++var3) {
 						if(null != this.aByteArray785 && this.aByteArray785.length > var3) {
-							var2.method2016(this.aShortArray774[var3], Class3_Sub13_Sub38.aShortArray3453[this.aByteArray785[var3] & 255]);
+							var2.method2016(this.aShortArray774[var3], TextureOperation38.aShortArray3453[this.aByteArray785[var3] & 0xFF]);
 						} else {
 							var2.method2016(this.aShortArray774[var3], this.aShortArray772[var3]);
 						}

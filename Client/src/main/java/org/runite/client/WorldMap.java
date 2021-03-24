@@ -29,7 +29,7 @@ final class WorldMap extends Node {
                         return;
                     }
 
-                    Class3_Sub13_Sub1.method169();
+                    TextureOperation12.method169();
                     anInt2737 = 10;
                 }
 
@@ -37,10 +37,10 @@ final class WorldMap extends Node {
                  * This block is dealing with world map zoom
                  */
                 if (anInt2737 == 10) {
-                    Class3_Sub13_Sub21.anInt3256 = Unsorted.aClass3_Sub28_Sub3_2600.anInt3555 >> 6 << 6;
+                    TextureOperation37.anInt3256 = Unsorted.aClass3_Sub28_Sub3_2600.anInt3555 >> 6 << 6;
                     Unsorted.anInt65 = Unsorted.aClass3_Sub28_Sub3_2600.anInt3562 >> 6 << 6;
                     Class108.anInt1460 = (Unsorted.aClass3_Sub28_Sub3_2600.anInt3549 >> 6 << 6) - Unsorted.anInt65 + 64;
-                    Class23.anInt455 = 64 + (Unsorted.aClass3_Sub28_Sub3_2600.anInt3559 >> 6 << 6) + -Class3_Sub13_Sub21.anInt3256;
+                    Class23.anInt455 = 64 + (Unsorted.aClass3_Sub28_Sub3_2600.anInt3559 >> 6 << 6) + -TextureOperation37.anInt3256;
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: Setting initial zoom level to: " + Unsorted.aClass3_Sub28_Sub3_2600.anInt3563);
                     if (Unsorted.aClass3_Sub28_Sub3_2600.anInt3563 == 37) { //Furthest zoom 37% on interface
@@ -65,16 +65,16 @@ final class WorldMap extends Node {
                     /* End Minimap Zoom */
 
 
-                    int var1 = -Class3_Sub13_Sub21.anInt3256 + (Class102.player.anInt2819 >> 7) + Class131.anInt1716;
+                    int var1 = -TextureOperation37.anInt3256 + (Class102.player.anInt2819 >> 7) + Class131.anInt1716;
                     var1 += -5 + (int) (Math.random() * 10.0D);
-                    int var2 = -Class82.anInt1152 + -(Class102.player.anInt2829 >> 7) + Unsorted.anInt65 + -1 + Class108.anInt1460;
+                    int var2 = -Texture.anInt1152 + -(Class102.player.anInt2829 >> 7) + Unsorted.anInt65 + -1 + Class108.anInt1460;
                     var2 += -5 + (int) (Math.random() * 10.0D);
                     if (var1 >= 0 && var1 < Class23.anInt455 && 0 <= var2 && Class108.anInt1460 > var2) {
                         Class3_Sub28_Sub1.anInt3536 = var1;
                         Class3_Sub4.anInt2251 = var2;
                     } else {
                         Class3_Sub4.anInt2251 = Unsorted.anInt65 - Unsorted.aClass3_Sub28_Sub3_2600.anInt3556 * 64 + Class108.anInt1460 + -1;
-                        Class3_Sub28_Sub1.anInt3536 = Unsorted.aClass3_Sub28_Sub3_2600.anInt3558 * 64 + -Class3_Sub13_Sub21.anInt3256;
+                        Class3_Sub28_Sub1.anInt3536 = Unsorted.aClass3_Sub28_Sub3_2600.anInt3558 * 64 + -TextureOperation37.anInt3256;
                     }
 
                     Class3_Sub5.method117();
@@ -87,7 +87,7 @@ final class WorldMap extends Node {
                     Class44.anIntArrayArrayArray720 = new int[var3][var4][];
                     RenderAnimationDefinition.aByteArrayArrayArray383 = new byte[var3][var4][];
                     Class146.anIntArrayArrayArray1903 = new int[var3][var4][];
-                    Class3_Sub13_Sub33.aByteArrayArrayArray3390 = new byte[var3][var4][];
+                    TextureOperation29.aByteArrayArrayArray3390 = new byte[var3][var4][];
                     int var6 = Class158_Sub1.anInt1463 >> 1;
                     CS2Script.aByteArrayArrayArray2452 = new byte[var3][var4][];
                     Class29.anIntArrayArrayArray558 = new int[var3][var4][];
@@ -111,7 +111,7 @@ final class WorldMap extends Node {
                 } else if (anInt2737 == 40) {
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: World Map Stage 40: String given: " + Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561.properlyCapitalize().toString());
-                    Class3_Sub13_Sub34.method328(new DataBuffer(aClass153_3210.method2123(TextCore.worldmapOverlay2, Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//unsure
+                    TextureOperation25.method328(new DataBuffer(aClass153_3210.method2123(TextCore.worldmapOverlay2, Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//unsure
                     anInt2737 = 50;
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 50) {
@@ -278,7 +278,7 @@ final class WorldMap extends Node {
                 if (ClientCommands.fpsOverlayEnabled) {
                     int var10 = -8 + var2 - -var3;
                     int var9 = -5 + (var0 - -var4);
-                    Class126.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_985, RSString.stringAnimator(SequenceDefinition.anInt1862)}), var9, var10, 16776960, -1);
+                    FontType.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_985, RSString.stringAnimator(SequenceDefinition.anInt1862)}), var9, var10, 16776960, -1);
                     Runtime var11 = Runtime.getRuntime();
                     int var12 = (int) ((var11.totalMemory() - var11.freeMemory()) / 1024L);
                     int var13 = 16776960;
@@ -287,7 +287,7 @@ final class WorldMap extends Node {
                         var13 = 16711680;
                     }
 
-                    Class126.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_1630, RSString.stringAnimator(var12), TextCore.aClass94_3055}), var9, var10, var13, -1);
+                    FontType.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_1630, RSString.stringAnimator(var12), TextCore.aClass94_3055}), var9, var10, var13, -1);
                 }
                 /* * * * * * * */
 
@@ -302,7 +302,7 @@ final class WorldMap extends Node {
                 Toolkit.getActiveToolkit().method934(-150 + var6, var7 + 2, 3 * anInt2737, 30, 9179409);
                 Toolkit.getActiveToolkit().method934(-150 + var6 + anInt2737 * 3, var7 - -2, 300 + -(3 * anInt2737), 30, 0);
 
-                Class168.bold.method699(TextCore.LoadingGeneral, var6, var5 + var7, 16777215, -1);
+                FontType.bold.method699(TextCore.LoadingGeneral, var6, var5 + var7, 16777215, -1);
             }
         } catch (RuntimeException var14) {
             throw ClientErrorException.clientError(var14, "wa.FA(" + var0 + ',' + 64 + ',' + var2 + ',' + var3 + ',' + var4 + ')');

@@ -91,7 +91,7 @@ public final class Class167 {
         if (var0) {
             Class75_Sub2.aClass3_Sub2ArrayArrayArray2638 = Class166.aClass3_Sub2ArrayArrayArray2065;
             Class44.anIntArrayArrayArray723 = Unsorted.anIntArrayArrayArray3605;
-            Class3_Sub23.aClass3_Sub11ArrayArray2542 = Class3_Sub13_Sub28.aClass3_Sub11ArrayArray3346;
+            Class3_Sub23.aClass3_Sub11ArrayArray2542 = TextureOperation32.aClass3_Sub11ArrayArray3346;
         } else {
             Class75_Sub2.aClass3_Sub2ArrayArrayArray2638 = Unsorted.aClass3_Sub2ArrayArrayArray4070;
             Class44.anIntArrayArrayArray723 = Class58.anIntArrayArrayArray914;
@@ -164,7 +164,7 @@ public final class Class167 {
                         Unsorted.aByteArrayArrayArray1328[var8][var5][var4] = (byte) ((-2 + var9) / 4);
                         PacketParser.aByteArrayArrayArray81[var8][var5][var4] = (byte) Unsorted.bitwiseAnd(-2 + var9 + var7, 3);
                     } else if (var9 > 81) {
-                        Class3_Sub13_Sub36.aByteArrayArrayArray3430[var8][var5][var4] = (byte) (-81 + var9);
+                        TextureOperation36.aByteArrayArrayArray3430[var8][var5][var4] = (byte) (-81 + var9);
                     } else if (!var2) {
                         Unsorted.aByteArrayArrayArray113[var8][var5][var4] = (byte) (var9 - 49);
                     }
@@ -225,7 +225,7 @@ public final class Class167 {
                 Class3_Sub15.activeConnection = null;
             }
 
-            Class3_Sub13_Sub30.method313((byte) 110);
+            TextureOperation13.method313((byte) 110);
             Class32.method995();
 
             int var1;
@@ -240,7 +240,7 @@ public final class Class167 {
             Class129.anInt1691 = -1;
             Class164_Sub1.method2241((byte) -77, true);
             LinkableRSString.isDynamicSceneGraph = false;
-            Class82.anInt1152 = 0;
+            Texture.anInt1152 = 0;
             Unsorted.anInt3606 = 0;
             Class3_Sub7.anInt2294 = 0;
             Class131.anInt1716 = 0;
@@ -256,7 +256,7 @@ public final class Class167 {
             }
 
             for (var1 = 0; var1 < 2048; ++var1) {
-                Class3_Sub13_Sub22.players[var1] = null;
+                TextureOperation0.players[var1] = null;
                 Class65.aClass3_Sub30Array986[var1] = null;
             }
 
@@ -267,15 +267,15 @@ public final class Class167 {
             for (var1 = 0; 4 > var1; ++var1) {
                 for (int var2 = 0; var2 < 104; ++var2) {
                     for (int var3 = 0; var3 < 104; ++var3) {
-                        Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[var1][var2][var3] = null;
+                        TextureOperation0.aClass61ArrayArrayArray3273[var1][var2][var3] = null;
                     }
                 }
             }
 
             Class3_Sub28_Sub5.method560();
             Class113.interfacePacketCounter = 0;
-            Class3_Sub13_Sub2.method176(var0 + -161);
-            Class3_Sub13_Sub11.method219(true);
+            TextureOperation6.method176(var0 + -161);
+            TextureOperation1.method219(true);
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "wj.C(" + var0 + ')');
         }

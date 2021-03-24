@@ -3,7 +3,7 @@ package org.runite.client;
 import org.rs09.client.Linkable;
 import org.rs09.client.data.ReferenceCache;
 
-final class Class61 {
+public final class Class61 {
 
     static ReferenceCache aReferenceCache_939 = new ReferenceCache(4);
     Linkable aClass3_940 = new Linkable();
@@ -35,7 +35,7 @@ final class Class61 {
             Class3_Sub28_Sub9 var2 = (Class3_Sub28_Sub9) Class163.aClass47_2041.get(var1);
 
             if (null == var2) {
-                byte[] var3 = Class3_Sub13_Sub7.aClass153_3098.getFile(11, var1);
+                byte[] var3 = TextureOperation27.aClass153_3098.getFile(11, var1);
                 var2 = new Class3_Sub28_Sub9();
                 if (var3 != null) {
                     var2.method583(new DataBuffer(var3));

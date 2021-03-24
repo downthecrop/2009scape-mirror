@@ -2,13 +2,13 @@ package org.runite.client;
 
 import java.util.Objects;
 
-final class Class45 {
+public final class Class45 {
 
     static int[] anIntArray729 = new int[4096];
     static float aFloat730;
-    static int anInt733 = 0;
+    public static int anInt733 = 0;
     static int anInt734 = 0;
-    static AbstractSprite aAbstractSprite_736;
+    public static AbstractSprite aAbstractSprite_736;
     static DataBuffer aClass3_Sub30_2030 = new DataBuffer(new byte[5000]);
 
 
@@ -23,12 +23,12 @@ final class Class45 {
                 chatIcon = GraphicDefinition.incomingBuffer.readUnsignedByte();
                 int var6 = GraphicDefinition.incomingBuffer.readUnsignedByte();
                 var7 = GraphicDefinition.incomingBuffer.index;
-                boolean var8 = ('\u8000' & var4) != 0;
+                boolean var8 = (32768 & var4) != 0;
                 if (null != var3.displayName && var3.class52 != null) {
                     long var9 = var3.displayName.toLong();
                     boolean var11 = false;
                     if (chatIcon <= 1) {
-                        if (!var8 && (Class3_Sub15.aBoolean2433 && !Class121.aBoolean1641 || Class3_Sub13_Sub14.aBoolean3166)) {
+                        if (!var8 && (Class3_Sub15.aBoolean2433 && !Class121.aBoolean1641 || TextureOperation31.aBoolean3166)) {
                             var11 = true;
                         } else {
                             for (int var12 = 0; var12 < Class3_Sub28_Sub5.anInt3591; ++var12) {
@@ -56,7 +56,7 @@ final class Class45 {
                         }
 
                         var3.textSpoken = message.trim(1);
-                        var3.textEffect = var4 & 255;
+                        var3.textEffect = var4 & 0xFF;
                         var3.textCycle = 150;
                         var3.textColor = var4 >> 8;
                         if (chatIcon >= 2) {
@@ -153,7 +153,7 @@ final class Class45 {
 
                 for (int var22 = 0; var22 < var4; ++var22) {
                     int var23 = GraphicDefinition.incomingBuffer.readUnsignedShortLE();
-                    if ('\uffff' == var23) {
+                    if (65535 == var23) {
                         var23 = -1;
                     }
 
@@ -168,7 +168,7 @@ final class Class45 {
             //Ordinal: 9 Graphic
             if ((256 & var0) != 0) {
                 var4 = GraphicDefinition.incomingBuffer.readUnsignedShortLE();
-                if (var4 == '\uffff') {
+                if (var4 == 65535) {
                     var4 = -1;
                 }
 
@@ -179,7 +179,7 @@ final class Class45 {
                 }
 
                 if (var21) {
-                    var3.anInt2759 = (chatIcon & '\uffff') + Class44.anInt719;
+                    var3.anInt2759 = (chatIcon & 65535) + Class44.anInt719;
                     var3.anInt2761 = 0;
                     var3.anInt2805 = 0;
                     var3.anInt2842 = var4;
@@ -220,14 +220,14 @@ final class Class45 {
             Unsorted.anIntArray3076 = new int[Class95.anInt1338];
             Class140_Sub7.anIntArray2931 = new int[Class95.anInt1338];
             Class164.anIntArray2048 = new int[Class95.anInt1338];
-            Class3_Sub13_Sub22.aBooleanArray3272 = new boolean[Class95.anInt1338];
+            TextureOperation0.aBooleanArray3272 = new boolean[Class95.anInt1338];
             Class163_Sub3.aByteArrayArray3005 = new byte[Class95.anInt1338][];
             Unsorted.anIntArray2591 = new int[Class95.anInt1338];
             Class163_Sub1.aByteArrayArray2987 = new byte[Class95.anInt1338][];
             var2.index = -(8 * Class95.anInt1338) + var0.length - 7;
             Class3_Sub15.anInt2426 = var2.readUnsignedShort();
             Class133.anInt1748 = var2.readUnsignedShort();
-            int var3 = (var2.readUnsignedByte() & 255) - -1;
+            int var3 = (var2.readUnsignedByte() & 0xFF) - -1;
 
             int var4;
             for (var4 = 0; Class95.anInt1338 > var4; ++var4) {
@@ -247,12 +247,12 @@ final class Class45 {
             }
 
             var2.index = -(8 * Class95.anInt1338) + var0.length + -7 + 3 + -(var3 * 3);
-            Class3_Sub13_Sub38.spritePalette = new int[var3];
+            TextureOperation38.spritePalette = new int[var3];
 
             for (var4 = 1; var3 > var4; ++var4) {
-                Class3_Sub13_Sub38.spritePalette[var4] = var2.readMedium();
-                if (0 == Class3_Sub13_Sub38.spritePalette[var4]) {
-                    Class3_Sub13_Sub38.spritePalette[var4] = 1;
+                TextureOperation38.spritePalette[var4] = var2.readMedium();
+                if (0 == TextureOperation38.spritePalette[var4]) {
+                    TextureOperation38.spritePalette[var4] = 1;
                 }
             }
 
@@ -298,7 +298,7 @@ final class Class45 {
                     }
                 }
 
-                Class3_Sub13_Sub22.aBooleanArray3272[var4] = var10;
+                TextureOperation0.aBooleanArray3272[var4] = var10;
             }
 
         } catch (RuntimeException var15) {

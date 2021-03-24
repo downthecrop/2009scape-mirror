@@ -53,9 +53,9 @@ public class ModPanel extends JPanel {
     }
 
     private void sendCommand(String command) {
-        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(44);
-        Class3_Sub13_Sub1.outgoingBuffer.writeByte(command.length() + -1);
-        Class3_Sub13_Sub1.outgoingBuffer.writeString(command.substring(2));
+        TextureOperation12.outgoingBuffer.putOpcode(44);
+        TextureOperation12.outgoingBuffer.writeByte(command.length() + -1);
+        TextureOperation12.outgoingBuffer.writeString(command.substring(2));
     }
 
     class ButtonListener implements ActionListener {

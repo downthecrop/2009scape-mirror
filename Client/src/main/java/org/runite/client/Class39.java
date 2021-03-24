@@ -32,7 +32,7 @@ public final class Class39 {
                 var3 = GraphicDefinition.incomingBuffer.readUnsignedShortLE128();
                 plane = GraphicDefinition.incomingBuffer.readUnsigned128Byte();
                 var5 = GraphicDefinition.incomingBuffer.readUnsignedShortLE128();
-                GraphicDefinition.incomingBuffer.setBitAccess((byte) 112);
+                GraphicDefinition.incomingBuffer.setBitAccess();
 
                 int var18;
                 for (var6 = 0; var6 < 4; ++var6) {
@@ -65,11 +65,11 @@ public final class Class39 {
                 Client.anIntArray2200 = new int[var6];
                 Class40.aByteArrayArray3057 = new byte[var6][];
                 NPC.npcSpawnCacheIndices = null;
-                Class3_Sub13_Sub15.anIntArray3181 = new int[var6];
+                TextureOperation17.anIntArray3181 = new int[var6];
                 Class3_Sub22.aByteArrayArray2521 = new byte[var6][];
                 Class164_Sub2.aByteArrayArray3027 = new byte[var6][];
                 Class3_Sub24_Sub3.anIntArray3494 = new int[var6];
-                Class3_Sub13_Sub26.aByteArrayArray3335 = null;
+                TextureOperation35.aByteArrayArray3335 = null;
                 Class40.aByteArrayArray3669 = new byte[var6][];
                 var6 = 0;
 
@@ -92,11 +92,11 @@ public final class Class39 {
 
                                 if (var14 != -1) {
                                     Class3_Sub24_Sub3.anIntArray3494[var6] = var14;
-                                    int var16 = var14 & 255;
+                                    int var16 = var14 & 0xFF;
                                     var15 = ('\uff6c' & var14) >> 8;
                                     Client.anIntArray2200[var6] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("m"), RSString.stringAnimator(var15), RSString.parse("_"), RSString.stringAnimator(var16)}));
                                     Class101.anIntArray1426[var6] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("l"), RSString.stringAnimator(var15), RSString.parse("_"), RSString.stringAnimator(var16)}));
-                                    Class3_Sub13_Sub15.anIntArray3181[var6] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("um"), RSString.stringAnimator(var15), RSString.parse("_"), RSString.stringAnimator(var16)}));
+                                    TextureOperation17.anIntArray3181[var6] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("um"), RSString.stringAnimator(var15), RSString.parse("_"), RSString.stringAnimator(var16)}));
                                     Class3_Sub28_Sub5.anIntArray3587[var6] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("ul"), RSString.stringAnimator(var15), RSString.parse("_"), RSString.stringAnimator(var16)}));
                                     ++var6;
                                 }
@@ -124,8 +124,8 @@ public final class Class39 {
                 var7 = GraphicDefinition.incomingBuffer.readUnsignedShort128();
                 Class3_Sub24_Sub3.anIntArray3494 = new int[var3];
                 Class164_Sub2.aByteArrayArray3027 = new byte[var3][];
-                Class3_Sub13_Sub26.aByteArrayArray3335 = null;
-                Class3_Sub13_Sub15.anIntArray3181 = new int[var3];
+                TextureOperation35.aByteArrayArray3335 = null;
+                TextureOperation17.anIntArray3181 = new int[var3];
                 Class3_Sub22.aByteArrayArray2521 = new byte[var3][];
                 Class40.aByteArrayArray3057 = new byte[var3][];
                 NPC.npcSpawnCacheIndices = null;
@@ -150,13 +150,13 @@ public final class Class39 {
                             Class3_Sub24_Sub3.anIntArray3494[var3] = var11;
                             Client.anIntArray2200[var3] = -1;
                             Class101.anIntArray1426[var3] = -1;
-                            Class3_Sub13_Sub15.anIntArray3181[var3] = -1;
+                            TextureOperation17.anIntArray3181[var3] = -1;
                             Class3_Sub28_Sub5.anIntArray3587[var3] = -1;
                         } else {
                             Class3_Sub24_Sub3.anIntArray3494[var3] = var11;
                             Client.anIntArray2200[var3] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("m"), RSString.stringAnimator(var9), RSString.parse("_"), RSString.stringAnimator(var10)}));
                             Class101.anIntArray1426[var3] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("l"), RSString.stringAnimator(var9), RSString.parse("_"), RSString.stringAnimator(var10)}));
-                            Class3_Sub13_Sub15.anIntArray3181[var3] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("um"), RSString.stringAnimator(var9), RSString.parse("_"), RSString.stringAnimator(var10)}));
+                            TextureOperation17.anIntArray3181[var3] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("um"), RSString.stringAnimator(var9), RSString.parse("_"), RSString.stringAnimator(var10)}));
                             Class3_Sub28_Sub5.anIntArray3587[var3] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("ul"), RSString.stringAnimator(var9), RSString.parse("_"), RSString.stringAnimator(var10)}));
                         }
 
@@ -182,7 +182,7 @@ public final class Class39 {
             Unsorted.anIntArray3076 = null;
             Class163_Sub1.aByteArrayArray2987 = null;
             Class164.anIntArray2048 = null;
-            Class3_Sub13_Sub38.spritePalette = null;
+            TextureOperation38.spritePalette = null;
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "g.E(" + var0 + ')');
         }
@@ -298,11 +298,11 @@ public final class Class39 {
                     Class140_Sub7 var31 = new Class140_Sub7();
                     var31.anInt2930 = var5;
                     var31.anInt2936 = var1;
-                    if (Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var3][var4] == null) {
-                        Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var3][var4] = new Class61();
+                    if (TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var3][var4] == null) {
+                        TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var3][var4] = new Class61();
                     }
 
-                    Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var3][var4].method1215(new WorldMap(var31));
+                    TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var3][var4].method1215(new WorldMap(var31));
                     Class128.method1760(var4, var3);
                 }
 
@@ -332,14 +332,14 @@ public final class Class39 {
                     }
 
                     var13 = GraphicDefinition.incomingBuffer.readUnsignedByte();
-                    if (0 <= var2 && 0 <= var3 && 208 > var2 && 208 > var3 && var4 >= 0 && 0 <= var5 && var4 < 208 && var5 < 208 && var7 != '\uffff') {
+                    if (0 <= var2 && 0 <= var3 && 208 > var2 && 208 > var3 && var4 >= 0 && 0 <= var5 && var4 < 208 && var5 < 208 && var7 != 65535) {
                         var5 *= 64;
                         var4 = 64 * var4;
                         var3 = 64 * var3;
                         var2 = 64 * var2;
                         var36 = new Class140_Sub6(var7, WorldListCountry.localPlane, var2, var3, Class121.method1736(WorldListCountry.localPlane, 1, var2, var3) + -var8, Class44.anInt719 + var10, var11 + Class44.anInt719, var35, var13, var6, var28);
                         var36.method2024(var5, Class44.anInt719 + var10, -var28 + Class121.method1736(WorldListCountry.localPlane, 1, var4, var5), var4);
-                        Class3_Sub13_Sub30.aClass61_3364.method1215(new Class3_Sub28_Sub19(var36));
+                        TextureOperation13.aClass61_3364.method1215(new Class3_Sub28_Sub19(var36));
                     }
 
                 } else if (Unsorted.incomingOpcode == 17) {
@@ -353,7 +353,7 @@ public final class Class39 {
                         var2 = var2 * 128 - -64;
                         var3 = var3 * 128 - -64;
                         Class140_Sub2 var32 = new Class140_Sub2(var4, WorldListCountry.localPlane, var2, var3, -var5 + Class121.method1736(WorldListCountry.localPlane, 1, var2, var3), var6, Class44.anInt719);
-                        Class3_Sub13_Sub15.aClass61_3177.method1215(new Class3_Sub28_Sub2(var32));
+                        TextureOperation17.aClass61_3177.method1215(new Class3_Sub28_Sub2(var32));
                     }
 
                 } else if (Unsorted.incomingOpcode == 179) {
@@ -378,7 +378,7 @@ public final class Class39 {
                     var6 = 3 & var4;
                     var7 = Class75.anIntArray1107[var5];
                     var8 = GraphicDefinition.incomingBuffer.readUnsignedShortLE();
-                    if ('\uffff' == var8) {
+                    if (65535 == var8) {
                         var8 = -1;
                     }
 
@@ -401,7 +401,7 @@ public final class Class39 {
                         var13 = GraphicDefinition.incomingBuffer.readUnsignedShort();
                         var14 = GraphicDefinition.incomingBuffer.readSignedShortLE128();
                         if (!HDToolKit.highDetail) {
-                            Class3_Sub13_Sub23.method280(var12, var13, var14, var11, var6, var9, var3, var25, var5, var2, var30, var10);
+                            TextureOperation39.method280(var12, var13, var14, var11, var6, var9, var3, var25, var5, var2, var30, var10);
                         }
                     }
 
@@ -413,7 +413,7 @@ public final class Class39 {
                         var5 = GraphicDefinition.incomingBuffer.readUnsignedShort();
                         var6 = GraphicDefinition.incomingBuffer.readUnsignedShort();
                         if (0 <= var2 && var3 >= 0 && var2 < 104 && var3 < 104) {
-                            Class61 var29 = Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var2][var3];
+                            Class61 var29 = TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var2][var3];
                             if (var29 != null) {
                                 for (WorldMap var34 = (WorldMap) var29.method1222(); var34 != null; var34 = (WorldMap) var29.method1221()) {
                                     Class140_Sub7 var33 = var34.aClass140_Sub7_3676;
@@ -438,11 +438,11 @@ public final class Class39 {
                             Class140_Sub7 var27 = new Class140_Sub7();
                             var27.anInt2930 = var5;
                             var27.anInt2936 = var6;
-                            if (null == Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var3][var4]) {
-                                Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var3][var4] = new Class61();
+                            if (null == TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var3][var4]) {
+                                TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var3][var4] = new Class61();
                             }
 
-                            Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var3][var4].method1215(new WorldMap(var27));
+                            TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var3][var4].method1215(new WorldMap(var27));
                             Class128.method1760(var4, var3);
                         }
 
@@ -472,7 +472,7 @@ public final class Class39 {
                                 var4 = 128 * var4 + 64;
                                 var36 = new Class140_Sub6(var7, WorldListCountry.localPlane, var2, var3, Class121.method1736(WorldListCountry.localPlane, 1, var2, var3) + -var8, var10 + Class44.anInt719, var11 + Class44.anInt719, var35, var13, var6, var28);
                                 var36.method2024(var5, Class44.anInt719 + var10, Class121.method1736(WorldListCountry.localPlane, 1, var4, var5) - var28, var4);
-                                Class3_Sub13_Sub30.aClass61_3364.method1215(new Class3_Sub28_Sub19(var36));
+                                TextureOperation13.aClass61_3364.method1215(new Class3_Sub28_Sub19(var36));
                             }
 
                         } else if (Unsorted.incomingOpcode == 104) {
@@ -494,7 +494,7 @@ public final class Class39 {
                                 var13 = -1;
                             }
 
-                            if (var2 >= 0 && var3 >= 0 && 208 > var2 && var3 < 208 && 0 <= var4 && var5 >= 0 && 208 > var4 && 208 > var5 && var8 != '\uffff') {
+                            if (var2 >= 0 && var3 >= 0 && 208 > var2 && var3 < 208 && 0 <= var4 && var5 >= 0 && 208 > var4 && 208 > var5 && var8 != 65535) {
                                 var4 = 64 * var4;
                                 var2 *= 64;
                                 var5 *= 64;
@@ -516,7 +516,7 @@ public final class Class39 {
                                         if (Class3_Sub1.localIndex == var18) {
                                             var16 = Class102.player;
                                         } else {
-                                            var16 = Class3_Sub13_Sub22.players[var18];
+                                            var16 = TextureOperation0.players[var18];
                                         }
                                     }
 
@@ -538,7 +538,7 @@ public final class Class39 {
 
                                 Class140_Sub6 var37 = new Class140_Sub6(var8, WorldListCountry.localPlane, var2, var3, -var28 + Class121.method1736(WorldListCountry.localPlane, 1, var2, var3), var11 + Class44.anInt719, var35 + Class44.anInt719, var13, var14, var7, var10);
                                 var37.method2024(var5, var11 + Class44.anInt719, -var10 + Class121.method1736(WorldListCountry.localPlane, 1, var4, var5), var4);
-                                Class3_Sub13_Sub30.aClass61_3364.method1215(new Class3_Sub28_Sub19(var37));
+                                TextureOperation13.aClass61_3364.method1215(new Class3_Sub28_Sub19(var37));
                             }
 
                         } else if (97 == Unsorted.incomingOpcode) {
@@ -572,7 +572,7 @@ public final class Class39 {
                             var2 = ((113 & var1) >> 4) + Class65.currentChunkX;
                             var4 = GraphicDefinition.incomingBuffer.readUnsignedShort();
                             if (var2 >= 0 && var3 >= 0 && 104 > var2 && 104 > var3) {
-                                Class61 var24 = Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var2][var3];
+                                Class61 var24 = TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var2][var3];
                                 if (var24 != null) {
                                     for (WorldMap var26 = (WorldMap) var24.method1222(); var26 != null; var26 = (WorldMap) var24.method1221()) {
                                         if (var26.aClass140_Sub7_3676.anInt2936 == (var4 & 32767)) {
@@ -582,7 +582,7 @@ public final class Class39 {
                                     }
 
                                     if (var24.method1222() == null) {
-                                        Class3_Sub13_Sub22.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var2][var3] = null;
+                                        TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var2][var3] = null;
                                     }
 
                                     Class128.method1760(var3, var2);

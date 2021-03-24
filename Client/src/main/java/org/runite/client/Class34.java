@@ -16,8 +16,8 @@ final class Class34 {
 
 
     public Class34() {
-        this.anIntArray604[1] = '\uffff';
-        this.anIntArray602[1] = '\uffff';
+        this.anIntArray604[1] = 65535;
+        this.anIntArray602[1] = 65535;
     }
 
     final int method1007(int var1) {

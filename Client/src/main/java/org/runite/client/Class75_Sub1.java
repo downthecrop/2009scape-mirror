@@ -93,7 +93,7 @@ final class Class75_Sub1 extends Class75 {
          int var5 = this.anInt2635 * var3 >> 12;
          int var6 = var1 * this.anInt2630 >> 12;
          int var7 = var1 * this.anInt2632 >> 12;
-         Class3_Sub13_Sub34.method330(this.anInt1104, -111, var7, var4, var6, var5);
+         TextureOperation25.method330(this.anInt1104, -111, var7, var4, var6, var5);
       } catch (RuntimeException var8) {
          throw ClientErrorException.clientError(var8, "ci.E(" + var1 + ',' + var2 + ',' + var3 + ')');
       }

@@ -40,7 +40,7 @@ final class Class32 {
         if (Unsorted.aClass3_Sub2ArrayArrayArray4070 != null) {
             for (var0 = 0; var0 < Unsorted.aClass3_Sub2ArrayArrayArray4070.length; ++var0) {
                 for (var1 = 0; var1 < Unsorted.anInt1234; ++var1) {
-                    for (var2 = 0; var2 < Class3_Sub13_Sub15.anInt3179; ++var2) {
+                    for (var2 = 0; var2 < TextureOperation17.anInt3179; ++var2) {
                         Unsorted.aClass3_Sub2ArrayArrayArray4070[var0][var1][var2] = null;
                     }
                 }
@@ -51,14 +51,14 @@ final class Class32 {
         if (Class166.aClass3_Sub2ArrayArrayArray2065 != null) {
             for (var0 = 0; var0 < Class166.aClass3_Sub2ArrayArrayArray2065.length; ++var0) {
                 for (var1 = 0; var1 < Unsorted.anInt1234; ++var1) {
-                    for (var2 = 0; var2 < Class3_Sub13_Sub15.anInt3179; ++var2) {
+                    for (var2 = 0; var2 < TextureOperation17.anInt3179; ++var2) {
                         Class166.aClass3_Sub2ArrayArrayArray2065[var0][var1][var2] = null;
                     }
                 }
             }
         }
 
-        Class3_Sub13_Sub28.aClass3_Sub11ArrayArray3346 = null;
+        TextureOperation32.aClass3_Sub11ArrayArray3346 = null;
         Class3_Sub4.anInt2249 = 0;
         if (Class3_Sub28_Sub8.aClass113Array3610 != null) {
         }
@@ -82,10 +82,10 @@ final class Class32 {
     static void method996() {
         try {
 
-            KeyboardListener var1 = Class3_Sub13_Sub3.aClass148_3049;
+            KeyboardListener var1 = TextureOperation33.aClass148_3049;
             synchronized (var1) {
                 Class3_Sub28_Sub9.anInt3620 = Class134.anInt1762;
-                ++Class3_Sub13_Sub33.anInt3398;
+                ++TextureOperation29.anInt3398;
                 int var2;
                 if (KeyboardListener.anInt2384 < 0) {
                     for (var2 = 0; var2 < 112; ++var2) {

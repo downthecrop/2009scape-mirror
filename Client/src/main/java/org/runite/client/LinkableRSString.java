@@ -110,8 +110,8 @@ public final class LinkableRSString extends Linkable {
 
     static void method731(CacheIndex var0) {
         try {
-            Class3_Sub13_Sub13.aClass153_3154 = var0;
-            Class95.anInt1344 = Class3_Sub13_Sub13.aClass153_3154.getFileAmount(16);
+            TextureOperation20.aClass153_3154 = var0;
+            Class95.anInt1344 = TextureOperation20.aClass153_3154.getFileAmount(16);
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "sj.B(" + (var0 != null ? "{...}" : "null") + ',' + (byte) -113 + ')');
         }
@@ -128,7 +128,7 @@ public final class LinkableRSString extends Linkable {
                 if (var1 < 32768) {
                     var3 = Class3_Sub24_Sub3.aClass153_3490.getFile(1, var1);
                 } else {
-                    var3 = Class3_Sub13_Sub8.aClass153_1967.getFile(1, 32767 & var1);
+                    var3 = TextureOperation9.aClass153_1967.getFile(1, 32767 & var1);
                 }
 
                 var2 = new Class3_Sub28_Sub4();
@@ -137,7 +137,7 @@ public final class LinkableRSString extends Linkable {
                     var2.method546(new DataBuffer(var3));
                 }
 
-                if (var1 >= '\u8000') {
+                if (var1 >= 32768) {
                     var2.method548();
                 }
 
@@ -182,7 +182,7 @@ public final class LinkableRSString extends Linkable {
             if (Class10.anInt154 == 0) {
                 Class101.aClass3_Sub24_Sub4_1421.method506(var0);
             } else {
-                Class3_Sub13_Sub36.anInt3423 = var0;
+                TextureOperation36.anInt3423 = var0;
             }
 
         } catch (RuntimeException var3) {

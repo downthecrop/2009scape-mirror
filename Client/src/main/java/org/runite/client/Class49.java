@@ -2,14 +2,15 @@ package org.runite.client;
 
 import org.rs09.client.data.NodeCache;
 import org.rs09.client.rendering.Toolkit;
+import org.runite.client.drawcalls.ContextMenu;
 
 import java.io.DataInputStream;
 import java.net.URL;
 import java.util.Random;
 
-final class Class49 {
+public final class Class49 {
 
-    static AbstractSprite aAbstractSprite_812;
+    public static AbstractSprite aAbstractSprite_812;
     static boolean[][] aBooleanArrayArray814;
     static int anInt815 = 0;
     static int anInt817;
@@ -153,11 +154,11 @@ final class Class49 {
             var3 = InterfaceWidget.a("@", "%40", var3);
             var3 = InterfaceWidget.a("&", "%26", var3);
             var3 = InterfaceWidget.a("#", "%23", var3);
-            if (Class3_Sub13_Sub10.aClass87_3125.gameApplet == null) {
+            if (TextureOperation30.aClass87_3125.gameApplet == null) {
                 return;
             }
 
-            Class64 var4 = Class3_Sub13_Sub10.aClass87_3125.method1439(false, new URL(Class3_Sub13_Sub10.aClass87_3125.gameApplet.getCodeBase(), "clienterror.ws?c=&u=" + PacketParser.aLong3202 + "&v1=" + Signlink.javaVendor + "&v2=" + Signlink.javaVersion + "&e=" + var3));
+            Class64 var4 = TextureOperation30.aClass87_3125.method1439(false, new URL(TextureOperation30.aClass87_3125.gameApplet.getCodeBase(), "clienterror.ws?c=&u=" + PacketParser.aLong3202 + "&v1=" + Signlink.javaVendor + "&v2=" + Signlink.javaVersion + "&e=" + var3));
 
             while (var4.anInt978 == 0) {
                 TimeUtils.sleep(1L);
@@ -186,7 +187,7 @@ final class Class49 {
         try {
             if (!Class38_Sub1.aBoolean2615) {
                 if (Unsorted.anInt3660 != 0) {
-                    NPCDefinition.anInt1297 = Class3_Sub13_Sub39.anInt3460;
+                    NPCDefinition.anInt1297 = TextureOperation8.anInt3460;
                     Class38_Sub1.anInt2612 = Class168.anInt2099;
                 } else if (Unsorted.anInt3644 == 0) {
                     NPCDefinition.anInt1297 = Class126.anInt1676;
@@ -199,7 +200,7 @@ final class Class49 {
                 Unsorted.menuOptionCount = 1;
                 Class140_Sub7.aClass94Array2935[0] = TextCore.HasCancel;
                 Class163_Sub2_Sub1.aClass94Array4016[0] = TextCore.emptyJagexString;
-                Class3_Sub13_Sub7.aShortArray3095[0] = 1005;
+                TextureOperation27.aShortArray3095[0] = 1005;
                 Class114.anIntArray1578[0] = Class3_Sub28_Sub5.anInt3590;
             }
 
@@ -243,22 +244,22 @@ final class Class49 {
                     if (Unsorted.aBoolean1951) {
                         WorldListEntry.buildWorldListInterface();
                     } else {
-                        Class84.rightClickContextMenuDraw();
+                        ContextMenu.draw();
                     }
                 } else if (null == AbstractSprite.aClass11_3708) {
                     if (Class53.anInt865 != -1) {
                         Class24.method950(null, -86, Unsorted.anInt2567, Class53.anInt865);
                     }
                 } else {
-                    Class24.method950(AbstractSprite.aClass11_3708, -120, ClientErrorException.anInt2115, Class3_Sub13_Sub23_Sub1.anInt4041);
+                    Class24.method950(AbstractSprite.aClass11_3708, -120, ClientErrorException.anInt2115, TextureOperation18.anInt4041);
                 }
 
-                var1 = Class38_Sub1.aBoolean2615 ? -1 : Class3_Sub13_Sub35.method335(var0 + 16859);
+                var1 = Class38_Sub1.aBoolean2615 ? -1 : TextureOperation22.method335(var0 + 16859);
                 if (var1 == -1) {
                     var1 = Class161.anInt2027;
                 }
 
-                Class3_Sub13_Sub13.method229(var1);
+                TextureOperation20.method229(var1);
                 if (CS2Script.anInt2440 == 1) {
                     CS2Script.anInt2440 = 2;
                 }
@@ -295,7 +296,7 @@ final class Class49 {
             int var8 = -1;
             int var9 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var2 + var4, Class101.anInt1425);
             int var10 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var4 - var2, Class101.anInt1425);
-            Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var1], var10, -98, var9, var0);
+            TextureOperation18.method282(Class38.anIntArrayArray663[var1], var10, -98, var9, var0);
 
             while (var6 > var5) {
                 var8 += 2;
@@ -313,11 +314,11 @@ final class Class49 {
                         var13 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var4 - -var5, Class101.anInt1425);
                         var14 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, -var5 + var4, Class101.anInt1425);
                         if (Class57.anInt902 >= var12) {
-                            Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var12], var14, 111, var13, var0);
+                            TextureOperation18.method282(Class38.anIntArrayArray663[var12], var14, 111, var13, var0);
                         }
 
                         if (Class159.anInt2020 <= var11) {
-                            Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var11], var14, -84, var13, var0);
+                            TextureOperation18.method282(Class38.anIntArrayArray663[var11], var14, -84, var13, var0);
                         }
                     }
                 }
@@ -329,11 +330,11 @@ final class Class49 {
                     var13 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var4 - -var6, Class101.anInt1425);
                     var14 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, -var6 + var4, Class101.anInt1425);
                     if (var12 <= Class57.anInt902) {
-                        Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var12], var14, 90, var13, var0);
+                        TextureOperation18.method282(Class38.anIntArrayArray663[var12], var14, 90, var13, var0);
                     }
 
                     if (var11 >= Class159.anInt2020) {
-                        Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var11], var14, -103, var13, var0);
+                        TextureOperation18.method282(Class38.anIntArrayArray663[var11], var14, -103, var13, var0);
                     }
                 }
             }

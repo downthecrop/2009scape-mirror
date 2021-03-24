@@ -10,11 +10,11 @@ final class Class29 {
 
     static void method968(int var0) {
         try {
-            int[] var1 = new int[Class3_Sub13_Sub23.itemDefinitionSize];
+            int[] var1 = new int[TextureOperation39.itemDefinitionSize];
             int var2 = 0;
 
             int var3;
-            for (var3 = 0; Class3_Sub13_Sub23.itemDefinitionSize > var3; ++var3) {
+            for (var3 = 0; TextureOperation39.itemDefinitionSize > var3; ++var3) {
                 ItemDefinition var4 = ItemDefinition.getItemDefinition(var3);
                 if (var4.anInt793 >= 0 || var4.anInt761 >= 0) {
                     var1[var2++] = var3;

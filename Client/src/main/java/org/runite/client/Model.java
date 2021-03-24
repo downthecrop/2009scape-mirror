@@ -36,7 +36,7 @@ abstract class Model extends GameObject {
                     int var14;
                     if (var13 != -1) {
                         var14 = var9 & var1.anIntArray2455[var13];
-                        if (var14 == '\uffff') {
+                        if (var14 == 65535) {
                             this.method1891(0, var1.anIntArrayArray2460[var13], 0, 0, 0, var8);
                         } else {
                             this.method1899(0, var1.anIntArrayArray2460[var13], 0, 0, 0, var8, var14, var10);
@@ -44,7 +44,7 @@ abstract class Model extends GameObject {
                     }
 
                     var14 = var9 & var1.anIntArray2455[var12];
-                    if (var14 == '\uffff') {
+                    if (var14 == 65535) {
                         this.method1891(var1.anIntArray2466[var12], var1.anIntArrayArray2460[var12], var2.aShortArray1388[var11], var2.aShortArray1396[var11], var2.aShortArray1395[var11], var8);
                     } else {
                         this.method1899(var1.anIntArray2466[var12], var1.anIntArrayArray2460[var12], var2.aShortArray1388[var11], var2.aShortArray1396[var11], var2.aShortArray1395[var11], var8, var14, var10);
@@ -129,9 +129,9 @@ abstract class Model extends GameObject {
                         int var30;
                         if ((var22 & 2) == 0 && (var27 & 1) == 0) {
                             if (var17 == 2) {
-                                var31 = var23 - var18 & 2047;
-                                int var32 = var24 - var19 & 2047;
-                                int var33 = var25 - var20 & 2047;
+                                var31 = var23 - var18 & 0x7FF;
+                                int var32 = var24 - var19 & 0x7FF;
+                                int var33 = var25 - var20 & 0x7FF;
                                 if (var31 >= 1024) {
                                     var31 -= 2048;
                                 }
@@ -144,9 +144,9 @@ abstract class Model extends GameObject {
                                     var33 -= 2048;
                                 }
 
-                                var28 = var18 + var31 * var4 / var5 & 2047;
-                                var29 = var19 + var32 * var4 / var5 & 2047;
-                                var30 = var20 + var33 * var4 / var5 & 2047;
+                                var28 = var18 + var31 * var4 / var5 & 0x7FF;
+                                var29 = var19 + var32 * var4 / var5 & 0x7FF;
+                                var30 = var20 + var33 * var4 / var5 & 0x7FF;
                             } else if (var17 == 7) {
                                 var31 = var23 - var18 & 63;
                                 if (var31 >= 32) {
@@ -169,14 +169,14 @@ abstract class Model extends GameObject {
 
                         if (var21 != -1) {
                             var31 = var9 & var1.anIntArray2455[var21];
-                            if (var31 == '\uffff') {
+                            if (var31 == 65535) {
                                 this.method1891(0, var1.anIntArrayArray2460[var21], 0, 0, 0, var8);
                             } else {
                                 this.method1899(0, var1.anIntArrayArray2460[var21], 0, 0, 0, var8, var31, var10);
                             }
                         } else if (var26 != -1) {
                             var31 = var9 & var1.anIntArray2455[var26];
-                            if (var31 == '\uffff') {
+                            if (var31 == 65535) {
                                 this.method1891(0, var1.anIntArrayArray2460[var26], 0, 0, 0, var8);
                             } else {
                                 this.method1899(0, var1.anIntArrayArray2460[var26], 0, 0, 0, var8, var31, var10);
@@ -184,7 +184,7 @@ abstract class Model extends GameObject {
                         }
 
                         var31 = var9 & var1.anIntArray2455[var35];
-                        if (var31 == '\uffff') {
+                        if (var31 == 65535) {
                             this.method1891(var17, var1.anIntArrayArray2460[var35], var28, var29, var30, var8);
                         } else {
                             this.method1899(var17, var1.anIntArrayArray2460[var35], var28, var29, var30, var8, var31, var10);
@@ -235,7 +235,7 @@ abstract class Model extends GameObject {
                     }
                 }
 
-                this.method1875(var9, var8, var10, var5, var6, null, false, var7, '\uffff', null);
+                this.method1875(var9, var8, var10, var5, var6, null, false, var7, 65535, null);
                 this.method1879();
             }
         }
@@ -304,9 +304,9 @@ abstract class Model extends GameObject {
                     }
                 }
 
-                this.method1875(var16, var15, var17, var5, var6, debugArray530, false, var14, '\uffff', null);
+                this.method1875(var16, var15, var17, var5, var6, debugArray530, false, var14, 65535, null);
                 this.method1891(0, new int[0], 0, 0, 0, var14);
-                this.method1875(var16, var18, var19, var11, var12, debugArray530, true, var14, '\uffff', null);
+                this.method1875(var16, var18, var19, var11, var12, debugArray530, true, var14, 65535, null);
                 this.method1879();
             }
         }
@@ -334,14 +334,14 @@ abstract class Model extends GameObject {
         int var24 = var15 < var21 ? var15 : var21;
         int var25 = var12 < var18 ? var12 : var18;
         if (var6 != 0) {
-            int var26 = (int) (Math.atan2(var22 - var23, var6) * 325.95D) & 2047;
+            int var26 = (int) (Math.atan2(var22 - var23, var6) * 325.95D) & 0x7FF;
             if (var26 != 0) {
                 this.method1896(var26);
             }
         }
 
         if (var5 != 0) {
-            int var27 = (int) (Math.atan2(var25 - var24, var5) * 325.95D) & 2047;
+            int var27 = (int) (Math.atan2(var25 - var24, var5) * 325.95D) & 0x7FF;
             if (var27 != 0) {
                 this.method1886(var27);
             }

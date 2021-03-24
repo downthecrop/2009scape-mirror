@@ -62,17 +62,17 @@ final class Class37 {
             var19 = 1.0F;
         }
 
-        int var20 = (int) (var19 * (float) (var23 >> 16 & 255));
+        int var20 = (int) (var19 * (float) (var23 >> 16 & 0xFF));
         if (var20 > 255) {
             var20 = 255;
         }
 
-        int var21 = (int) (var19 * (float) (var23 >> 8 & 255));
+        int var21 = (int) (var19 * (float) (var23 >> 8 & 0xFF));
         if (var21 > 255) {
             var21 = 255;
         }
 
-        int var22 = (int) (var19 * (float) (var23 & 255));
+        int var22 = (int) (var19 * (float) (var23 & 0xFF));
         if (var22 > 255) {
             var22 = 255;
         }

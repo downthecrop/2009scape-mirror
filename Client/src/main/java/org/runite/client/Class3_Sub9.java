@@ -93,7 +93,7 @@ final class Class3_Sub9 extends Linkable {
 
    static void method135(int var0, int var1, int var2, int var4, int var5) {
       try {
-         Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var0], var1 - var2, -76, var2 + var1, var5);
+         TextureOperation18.method282(Class38.anIntArrayArray663[var0], var1 - var2, -76, var2 + var1, var5);
          int var6 = 0;
          int var8 = var2 * var2;
          int var9 = var4 * var4;
@@ -139,8 +139,8 @@ final class Class3_Sub9 extends Linkable {
             var13 += -var20;
             int var24 = var1 + -var6;
             var20 -= var15;
-            Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var21], var24, -110, var23, var5);
-            Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var22], var24, 112, var23, var5);
+            TextureOperation18.method282(Class38.anIntArrayArray663[var21], var24, -110, var23, var5);
+            TextureOperation18.method282(Class38.anIntArrayArray663[var22], var24, 112, var23, var5);
          }
 
       } catch (RuntimeException var25) {

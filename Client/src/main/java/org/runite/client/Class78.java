@@ -110,7 +110,7 @@ final class Class78 {
         byte var2 = this.aClass3_Sub30_1113.buffer[this.aClass3_Sub30_1113.index];
         int var5;
         if (var2 < 0) {
-            var5 = var2 & 255;
+            var5 = var2 & 0xFF;
             this.anIntArray1120[var1] = var5;
             ++this.aClass3_Sub30_1113.index;
         } else {
@@ -120,7 +120,7 @@ final class Class78 {
         if (var5 == 240 || var5 == 247) {
             int var3 = this.aClass3_Sub30_1113.method741();
             if (var5 == 247 && var3 > 0) {
-                int var4 = this.aClass3_Sub30_1113.buffer[this.aClass3_Sub30_1113.index] & 255;
+                int var4 = this.aClass3_Sub30_1113.buffer[this.aClass3_Sub30_1113.index] & 0xFF;
                 if (var4 >= 241 && var4 <= 243 || var4 == 246 || var4 == 248 || var4 >= 250 && var4 <= 252 || var4 == 254) {
                     ++this.aClass3_Sub30_1113.index;
                     this.anIntArray1120[var1] = var4;

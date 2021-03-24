@@ -73,7 +73,7 @@ final class Class125 implements ShaderInterface {
             var1.glActiveTexture('\u84c1');
             var1.glMatrixMode(5890);
             var1.glTranslatef((float) Unsorted.anInt144, (float) Unsorted.anInt3695, (float) LinkableRSString.anInt2587);
-            var1.glRotatef(-((float) Class3_Sub13_Sub8.anInt3103 * 360.0F) / 2048.0F, 0.0F, 1.0F, 0.0F);
+            var1.glRotatef(-((float) TextureOperation9.anInt3103 * 360.0F) / 2048.0F, 0.0F, 1.0F, 0.0F);
             var1.glRotatef(-((float) Class140_Sub7.anInt2938 * 360.0F) / 2048.0F, 1.0F, 0.0F, 0.0F);
             var1.glRotatef(-180.0F, 1.0F, 0.0F, 0.0F);
             var1.glMatrixMode(5888);
@@ -83,7 +83,7 @@ final class Class125 implements ShaderInterface {
 
             var1.glActiveTexture('\u84c0');
             if (this.anInt2182 != HDToolKit.anInt1791) {
-                int var2 = (HDToolKit.anInt1791 & 255) * 256;
+                int var2 = (HDToolKit.anInt1791 & 0xFF) * 256;
 
                 for (int var3 = 0; var3 < 64; ++var3) {
                     this.aFloatBuffer2183.position(var2);

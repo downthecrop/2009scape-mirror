@@ -49,7 +49,7 @@ public final class RSString implements Interface3 {
 
         int i = 0;
         while (length > i) {
-            int ascii = bytes[i++] & 255;
+            int ascii = bytes[i++] & 0xFF;
             if (ascii <= 45 && ascii >= 40) {
                 if (length <= i) {
                     break;
@@ -391,7 +391,7 @@ public final class RSString implements Interface3 {
             } else if (var3 == 223) {
                 var3 = 115;
             } else {
-                var3 = this.buffer[var9] & 255;
+                var3 = this.buffer[var9] & 0xFF;
                 ++var9;
             }
 
@@ -593,11 +593,11 @@ public final class RSString implements Interface3 {
             }
 
             for (int var4 = 0; var3 > var4; ++var4) {
-                if ((255 & this.buffer[var4]) < (var1.buffer[var4] & 255)) {
+                if ((255 & this.buffer[var4]) < (var1.buffer[var4] & 0xFF)) {
                     return -1;
                 }
 
-                if ((this.buffer[var4] & 255) > (var1.buffer[var4] & 255)) {
+                if ((this.buffer[var4] & 0xFF) > (var1.buffer[var4] & 0xFF)) {
                     return 1;
                 }
             }
@@ -641,7 +641,7 @@ public final class RSString implements Interface3 {
                         }
 
                         while (var6 < var8) {
-                            Objects.requireNonNull(var10).appendCharacter(this.buffer[var6++] & 255);
+                            Objects.requireNonNull(var10).appendCharacter(this.buffer[var6++] & 0xFF);
                         }
 
                         Objects.requireNonNull(var10).append(var1);
@@ -675,7 +675,7 @@ public final class RSString implements Interface3 {
         int value = 0;
 
         for (int i = 0; i < this.length; ++i) {
-            int current = this.buffer[i] & 255;
+            int current = this.buffer[i] & 0xFF;
             if (0 == i) {
                 if (current == 45) {
                     negate = true;
@@ -922,7 +922,7 @@ public final class RSString implements Interface3 {
 
     final int charAt(int var1, byte var2) {
         try {
-            return this.buffer[var1] & 255;
+            return this.buffer[var1] & 0xFF;
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "na.SA(" + var1 + ',' + var2 + ')');
         }
@@ -1039,7 +1039,7 @@ public final class RSString implements Interface3 {
         }
     }
 
-    final long toLong() {
+    public final long toLong() {
         long var2 = 0L;
         for (int var4 = 0; var4 < this.length && var4 < 12; ++var4) {
             byte var5 = this.buffer[var4];

@@ -1,9 +1,8 @@
 package org.runite.client;
 
 import org.rs09.client.Linkable;
-import org.rs09.client.rendering.Toolkit;
+import org.runite.client.drawcalls.LoadingBox;
 
-import java.awt.Graphics;
 import java.util.Random;
 
 public abstract class TextureOperation extends Linkable {
@@ -12,8 +11,7 @@ public abstract class TextureOperation extends Linkable {
     Class97 aClass97_2376;
     TextureOperation[] subOperations;
     static int anInt2378 = 0;
-    public static Font smallFont;
-    int anInt2381;
+    int imageCacheCapacity;
     Class114 aClass114_2382;
     static int anInt2383 = 0;
 
@@ -31,7 +29,7 @@ public abstract class TextureOperation extends Linkable {
                     var4 = var2.nextInt();
                 } while (var3 <= var4);
 
-                return Class3_Sub13_Sub7.method201(var4, var1, -58);
+                return TextureOperation27.method201(var4, var1, -58);
             }
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "ni.C(" + var0 + ',' + var1 + ',' + (var2 != null ? "{...}" : "null") + ')');
@@ -45,7 +43,7 @@ public abstract class TextureOperation extends Linkable {
                 anInt2383 = 121;
             }
 
-            return this.subOperations[var1].aBoolean2375 ? this.subOperations[var1].method154(var2, (byte) -118) : this.subOperations[var1].method166(-1, var2)[0];
+            return this.subOperations[var1].aBoolean2375 ? this.subOperations[var1].method154(var2, (byte) -118) : this.subOperations[var1].method166(var2)[0];
         } catch (RuntimeException var5) {
             throw ClientErrorException.clientError(var5, "j.RA(" + var1 + ',' + var2 + ',' + var3 + ')');
         }
@@ -106,7 +104,7 @@ public abstract class TextureOperation extends Linkable {
     int method159(int var1) {
         try {
             if (var1 != 4) {
-                method164(true, null);
+                LoadingBox.draw(true, null);
             }
 
             return -1;
@@ -118,7 +116,7 @@ public abstract class TextureOperation extends Linkable {
     final void method160(int var1, int var2) {
         try {
 
-            int var4 = 255 == this.anInt2381 ? var1 : this.anInt2381;
+            int var4 = 255 == this.imageCacheCapacity ? var1 : this.imageCacheCapacity;
             if (this.aBoolean2375) {
                 this.aClass114_2382 = new Class114(var4, var1, var2);
             } else {
@@ -157,7 +155,7 @@ public abstract class TextureOperation extends Linkable {
                 int[] var4 = this.subOperations[var2].method154(var1, (byte) -105);
                 return new int[][]{var4, var4, var4};
             } else {
-                return this.subOperations[var2].method166(-1, var1);
+                return this.subOperations[var2].method166(var1);
             }
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "j.UA(" + var1 + ',' + var2 + ',' + var3 + ')');
@@ -179,39 +177,6 @@ public abstract class TextureOperation extends Linkable {
         }
     }
 
-    static void method164(boolean var1, RSString var2) {
-        try {
-            byte var3 = 4;
-            int var4 = var3 + 6;
-            int var5 = var3 + 6;
-            int var6 = Class126.plainFont.method680(var2, 250);
-            int var7 = Class126.plainFont.method684(var2, 250) * 13;
-            //Used for the top left (please wait...)
-            Toolkit.getActiveToolkit().method934(var4 - var3, -var3 + var5, var3 + var6 - -var3, var3 + var3 + var7, 0);
-            Toolkit.getActiveToolkit().drawRect(-var3 + var4, -var3 + var5, var6 + var3 - -var3, var3 + var7 + var3, 16777215, 255);
-
-            Class126.plainFont.method676(var2, var4, var5, var6, var7, 16777215, -1, 1, 1, 0);
-
-            Class75.method1340(var4 + -var3, var6 + (var3 - -var3), -var3 + var5, var3 + var7 + var3);
-            if (var1) {
-                if (HDToolKit.highDetail) {
-                    HDToolKit.bufferSwap();
-                } else {
-                    try {
-                        Graphics var8 = GameShell.canvas.getGraphics();
-                        Class164_Sub1.aClass158_3009.method2179(var8);
-                    } catch (Exception var9) {
-                        GameShell.canvas.repaint();
-                    }
-                }
-            } else {
-                Unsorted.method1282(var4, (byte) -97, var5, var7, var6);
-            }
-        } catch (RuntimeException var10) {
-            throw ClientErrorException.clientError(var10, "j.TA(" + ',' + var1 + ',' + (var2 != null ? "{...}" : "null") + ')');
-        }
-    }
-
     TextureOperation(int var1, boolean var2) {
         try {
             this.subOperations = new TextureOperation[var1];
@@ -221,29 +186,8 @@ public abstract class TextureOperation extends Linkable {
         }
     }
 
-    static void method165() {
-        try {
-            WorldListEntry.aAbstractSprite_1339 = null;
-            WorldListEntry.aAbstractSprite_3099 = null;
-            Class50.aAbstractSprite_824 = null;
-
-            WorldListEntry.aAbstractSprite_1457 = null;
-            Class3_Sub26.aAbstractSprite_2560 = null;
-        } catch (RuntimeException var2) {
-            throw ClientErrorException.clientError(var2, "j.VA(" + -7878 + ')');
-        }
-    }
-
-    int[][] method166(int var1, int var2) {
-        try {
-            if (var1 == -1) {
-                throw new IllegalStateException("This operation does not have a colour output");
-            } else {
-                return null;
-            }
-        } catch (RuntimeException var4) {
-            throw ClientErrorException.clientError(var4, "j.T(" + var1 + ',' + var2 + ')');
-        }
+    int[][] method166(int var2) {
+        throw new IllegalStateException("This operation does not have a colour output");
     }
 
 }

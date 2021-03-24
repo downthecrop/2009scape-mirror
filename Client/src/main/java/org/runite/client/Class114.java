@@ -36,11 +36,11 @@ final class Class114 {
             int var3 = Class92.screenColorRgb();
             float var7 = 0.58823526F;
             MouseListeningClass.aFloatArray1919[3] = 1.0F;
-            float var4 = (float) (var3 >> 16 & 255) / 255.0F;
+            float var4 = (float) (var3 >> 16 & 0xFF) / 255.0F;
             float var5 = (float) (('\uff1e' & var3) >> 8) / 255.0F;
             MouseListeningClass.aFloatArray1919[1] = var2 * (float) Unsorted.bitwiseAnd(var0 >> 8, 255) / 255.0F * var5 * var7;
             MouseListeningClass.aFloatArray1919[var1] = var2 * var7 * var4 * ((float) (Unsorted.bitwiseAnd(16754958, var0) >> 16) / 255.0F);
-            float var6 = (float) (var3 & 255) / 255.0F;
+            float var6 = (float) (var3 & 0xFF) / 255.0F;
             MouseListeningClass.aFloatArray1919[2] = (float) Unsorted.bitwiseAnd(255, var0) / 255.0F * var6 * var7 * var2;
             return MouseListeningClass.aFloatArray1919;
         } catch (RuntimeException var8) {

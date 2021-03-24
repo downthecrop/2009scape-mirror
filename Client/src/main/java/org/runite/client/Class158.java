@@ -16,7 +16,7 @@ public abstract class Class158 {
 
     static void method2180(CacheIndex var0, CacheIndex var1) {
         Unsorted.aClass153_4048 = var0;
-        Class3_Sub13_Sub18.aClass153_3214 = var1;
+        TextureOperation19.aClass153_3214 = var1;
     }
 
     static void method2183(int parent, boolean notifyScripts, int parentWidth, int parentHeight, RSInterface[] ifaces) {
@@ -80,7 +80,7 @@ public abstract class Class158 {
 
     }
 
-    abstract void method2179(Graphics var3);
+    public abstract void method2179(Graphics var3);
 
     final void method2182() {
         Class74.setBuffer(this.anIntArray2007, this.anInt2012, this.anInt2011);

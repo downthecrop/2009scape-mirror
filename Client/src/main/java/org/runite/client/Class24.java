@@ -85,7 +85,7 @@ public final class Class24 {
 
     static void renderLocalNPCs() {
         try {
-            GraphicDefinition.incomingBuffer.setBitAccess((byte) -98);
+            GraphicDefinition.incomingBuffer.setBitAccess();
             int var1 = GraphicDefinition.incomingBuffer.getBits(8);
             int var2;
             if (var1 < Class163.localNPCCount) {
@@ -157,7 +157,7 @@ public final class Class24 {
     static void method949(int var0, int var2, int var3, int var4) {
         try {
             int var6 = 0;
-            Class3_Sub13_Sub23_Sub1.method282(Class38.anIntArrayArray663[var4], -var2 + var0, 100, var0 - -var2, var3);
+            TextureOperation18.method282(Class38.anIntArrayArray663[var4], -var2 + var0, 100, var0 - -var2, var3);
             int var8 = -var2;
             int var7 = var2;
             int var9 = -1;
@@ -173,16 +173,16 @@ public final class Class24 {
                     int[] var11 = Class38.anIntArrayArray663[var4 - var7];
                     int var12 = var0 - -var6;
                     int var13 = -var6 + var0;
-                    Class3_Sub13_Sub23_Sub1.method282(var10, var13, 115, var12, var3);
-                    Class3_Sub13_Sub23_Sub1.method282(var11, var13, 114, var12, var3);
+                    TextureOperation18.method282(var10, var13, 115, var12, var3);
+                    TextureOperation18.method282(var11, var13, 114, var12, var3);
                 }
 
                 int var16 = var7 + var0;
                 int var15 = -var7 + var0;
                 int[] var17 = Class38.anIntArrayArray663[var4 - -var6];
                 int[] var18 = Class38.anIntArrayArray663[-var6 + var4];
-                Class3_Sub13_Sub23_Sub1.method282(var17, var15, -61, var16, var3);
-                Class3_Sub13_Sub23_Sub1.method282(var18, var15, -93, var16, var3);
+                TextureOperation18.method282(var17, var15, -61, var16, var3);
+                TextureOperation18.method282(var18, var15, -93, var16, var3);
             }
 
         } catch (RuntimeException var14) {
@@ -195,16 +195,16 @@ public final class Class24 {
             if (2 <= Unsorted.menuOptionCount || Class164_Sub1.anInt3012 != 0 || GameObject.aBoolean1837) {
                 RSString var4 = Class3_Sub28_Sub1.method531();
                 if (var0 == null) {
-                    int var5 = Class168.bold.method683(var4, 4 + var3, var2 - -15, aRandom3088, Class38_Sub1.anInt2618);
-                    Class75.method1340(4 + var3, Class168.bold.method682(var4) + var5, var2, 15);
+                    int var5 = FontType.bold.method683(var4, 4 + var3, var2 - -15, aRandom3088, Class38_Sub1.anInt2618);
+                    Class21.method1340(4 + var3, FontType.bold.method682(var4) + var5, var2, 15);
                 } else {
-                    Font var7 = var0.method868(Class3_Sub13_Sub22.nameIconsSpriteArray);
+                    Font var7 = var0.method868(TextureOperation0.nameIconsSpriteArray);
                     if (null == var7) {
-                        var7 = Class168.bold;
+                        var7 = FontType.bold;
                     }
 
                     var7.method702(var4, var3, var2, var0.width, var0.height, var0.anInt218, var0.anInt287, var0.anInt194, var0.anInt225, aRandom3088, Class38_Sub1.anInt2618, Player.anIntArray3951);
-                    Class75.method1340(Player.anIntArray3951[0], Player.anIntArray3951[2], Player.anIntArray3951[1], Player.anIntArray3951[3]);
+                    Class21.method1340(Player.anIntArray3951[0], Player.anIntArray3951[2], Player.anIntArray3951[1], Player.anIntArray3951[3]);
                 }
 
             }
@@ -216,7 +216,7 @@ public final class Class24 {
     static void method951() {
         try {
             Class3_Sub28_Sub18.aBoolean3769 = false;
-            Class3_Sub13_Sub34.anInt3413 = 0;
+            TextureOperation25.anInt3413 = 0;
             Client.messageToDisplay = -3;
             Class50.anInt820 = 0;
             LoginHandler.loginStage = 1;

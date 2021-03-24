@@ -51,7 +51,7 @@ class Class155 {
             }
         }
 
-        if (var2 < Unsorted.anInt1234 && var3 < Class3_Sub13_Sub15.anInt3179) {
+        if (var2 < Unsorted.anInt1234 && var3 < TextureOperation17.anInt3179) {
             var4 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var1][var2 + 1][var3 + 1];
             if (var4 != null && var4.aClass12_2230 != null && var4.aClass12_2230.object.method1865()) {
                 var0.method1866(var4.aClass12_2230.object, 128, 0, 128, true);

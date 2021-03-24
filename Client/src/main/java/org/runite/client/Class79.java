@@ -86,7 +86,7 @@ final class Class79 {
                         Class25.aBoolean488 = 1 == var0.readUnsignedByte();
                         RSInterface.aBoolean236 = var0.readUnsignedByte() == 1;
                         WorldListEntry.aBoolean2623 = var0.readUnsignedByte() == 1;
-                        Class3_Sub13_Sub22.aBoolean3275 = var0.readUnsignedByte() == 1;
+                        TextureOperation0.aBoolean3275 = var0.readUnsignedByte() == 1;
                         Class140_Sub6.aBoolean2910 = 1 == var0.readUnsignedByte();
                         Unsorted.anInt1137 = var0.readUnsignedByte();
                         if (2 < Unsorted.anInt1137) {
@@ -108,7 +108,7 @@ final class Class79 {
                         }
 
                         Unsorted.anInt3671 = Class3_Sub28_Sub9.anInt3622;
-                        Class3_Sub13_Sub15.aBoolean3184 = var0.readUnsignedByte() == 1;
+                        TextureOperation17.aBoolean3184 = var0.readUnsignedByte() == 1;
                         CS2Script.anInt2453 = var0.readUnsignedByte();
                         if (CS2Script.anInt2453 > 127) {
                             CS2Script.anInt2453 = 127;

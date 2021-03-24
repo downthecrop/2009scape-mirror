@@ -13,7 +13,7 @@ public final class Class22 {
     static int anInt451 = 0;
     private static int anInt450 = 0;
 
-    static void method921() {
+    public static void method921() {
         aHDSprite_447 = null;
     }
 
@@ -185,7 +185,7 @@ public final class Class22 {
         method921();
     }
 
-    static void method936(HDSprite var0) {
+    public static void method936(HDSprite var0) {
         if (var0.height == anInt451 - anInt448) {
             aHDSprite_447 = var0;
         } else {

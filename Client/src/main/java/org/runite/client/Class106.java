@@ -22,8 +22,8 @@ final class Class106 {
                     }
 
                     if (var2 < PacketParser.aClass3_Sub19Array3694.length && null != PacketParser.aClass3_Sub19Array3694[var2]) {
-                        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(162);
-                        Class3_Sub13_Sub1.outgoingBuffer.writeLong(PacketParser.aClass3_Sub19Array3694[var2].linkableKey);
+                        TextureOperation12.outgoingBuffer.putOpcode(162);
+                        TextureOperation12.outgoingBuffer.writeLong(PacketParser.aClass3_Sub19Array3694[var2].linkableKey);
                     }
                 }
             }

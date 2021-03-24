@@ -74,10 +74,10 @@ abstract class GameObject {
             LinkableRSString.aClass153_2581 = var4;
             Class97.aClass153_1370 = var2;
             int var5 = Class97.aClass153_1370.method2121() - 1;
-            Class3_Sub13_Sub23.itemDefinitionSize = Class97.aClass153_1370.getFileAmount(var5) + var5 * 256;
+            TextureOperation39.itemDefinitionSize = Class97.aClass153_1370.getFileAmount(var5) + var5 * 256;
             ClientErrorException.aClass94Array2119 = new RSString[]{null, null, null, null, TextCore.HasDrop};
             Unsorted.aClass94Array2596 = new RSString[]{null, null, TextCore.HasTake, null, null};
-            Class3_Sub13_Sub37.aClass3_Sub28_Sub17_Sub1_3440 = var3;
+            TextureOperation10.aClass3_Sub28_Sub17_Sub1_3440 = var3;
         } catch (RuntimeException var7) {
             throw ClientErrorException.clientError(var7, "th.FC(" + true + ',' + (byte) -126 + ',' + (var2 != null ? "{...}" : "null") + ',' + (var3 != null ? "{...}" : "null") + ',' + (var4 != null ? "{...}" : "null") + ')');
         }
@@ -89,11 +89,11 @@ abstract class GameObject {
             int var7 = var4 + -var5;
             if (var7 == 0) {
                 if (var6 != 0) {
-                    Class3_Sub13_Sub16.method244(var3, var5, var2, var1);
+                    TextureOperation15.method244(var3, var5, var2, var1);
                 }
 
             } else if (0 == var6) {
-                Class3_Sub13_Sub32.method320(var1, var3, var4, (byte) -107, var5);
+                TextureOperation14.method320(var1, var3, var4, (byte) -107, var5);
             } else {
                 if (0 > var6) {
                     var6 = -var6;

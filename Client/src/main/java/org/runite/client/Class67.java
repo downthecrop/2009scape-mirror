@@ -16,12 +16,12 @@ final class Class67 implements Runnable {
 
     static int method1258(byte var0) {
         try {
-            Class3_Sub13_Sub17.anInt1780 = 0;
+            TextureOperation23.anInt1780 = 0;
             if (var0 != -53) {
                 method1258((byte) -35);
             }
 
-            return Class3_Sub13_Sub17.method251();
+            return TextureOperation23.method251();
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "jd.D(" + var0 + ')');
         }
@@ -51,7 +51,7 @@ final class Class67 implements Runnable {
                             method1260(23206, var4.componentHash, var4.aClass11Array262);
                         }
 
-                        Class3_Sub31 var5 = Class3_Sub13_Sub17.aHashTable_3208.get(var4.componentHash);
+                        Class3_Sub31 var5 = TextureOperation23.aHashTable_3208.get(var4.componentHash);
                         if (var5 != null) {
                             Class52.method1160(-111, var5.anInt2602);
                         }
@@ -96,7 +96,7 @@ final class Class67 implements Runnable {
                             var6 = var4.anInt237 << 16 >> 16;
                             var4.anInt182 = 2047 & var10 + var4.anInt182;
                             var6 *= Class106.anInt1446;
-                            var4.anInt308 = var4.anInt308 - -var6 & 2047;
+                            var4.anInt308 = var4.anInt308 - -var6 & 0x7FF;
                             Class20.method909(var4);
                         }
                     }

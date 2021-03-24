@@ -91,13 +91,13 @@ final class Class33 {
     private void method1000(int[] var1, byte[] var2, int var3, int var4, int var5, int var6, int var7, int var8, int var9) {
         for (int var10 = -var7; var10 < 0; ++var10) {
             for (int var11 = -var6; var11 < 0; ++var11) {
-                int var12 = var2[var4++] & 255;
+                int var12 = var2[var4++] & 0xFF;
                 if (var12 > 30) {
                     if (var12 >= 230) {
                         var1[var5++] = var3;
                     } else {
                         int var13 = var1[var5];
-                        var1[var5++] = ((var3 & 16711935) * var12 + (var13 & 16711935) * (256 - var12) & -16711936) + ((var3 & '\uff00') * var12 + (var13 & '\uff00') * (256 - var12) & 16711680) >> 8;
+                        var1[var5++] = ((var3 & 16711935) * var12 + (var13 & 16711935) * (256 - var12) & -16711936) + ((var3 & 65280) * var12 + (var13 & 65280) * (256 - var12) & 16711680) >> 8;
                     }
                 } else {
                     ++var5;
@@ -322,7 +322,7 @@ final class Class33 {
 
         for (var19 = var16; var19 < var18; ++var19) {
             for (var20 = var15; var20 < var17; ++var20) {
-                var21 = var13[var20 + var19 * var6] & 255;
+                var21 = var13[var20 + var19 * var6] & 0xFF;
                 if (var21 > 30 && var21 < 230) {
                     this.aBoolean595 = true;
                 }

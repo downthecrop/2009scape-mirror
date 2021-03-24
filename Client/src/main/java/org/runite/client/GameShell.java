@@ -37,7 +37,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
                 Class3_Sub21.aClass155_2491.method2163();
             }
 
-            Class140_Sub3.method1959(Class3_Sub13_Sub15.aBoolean3184);
+            Class140_Sub3.method1959(TextureOperation17.aBoolean3184);
             WorldListEntry.aClass155_2627 = Class58.method1195(22050, Class38.signlink, canvas, 0);
             WorldListEntry.aClass155_2627.method2154(114, Client.aClass3_Sub24_Sub4_1193);
             Class3_Sub21.aClass155_2491 = Class58.method1195(2048, Class38.signlink, canvas, 1);
@@ -50,8 +50,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
     public static void provideSignlink(Signlink var0) {
         try {
             Class38.signlink = var0;
-            Class3_Sub13_Sub10.aClass87_3125 = var0;
-            Class3_Sub13_Sub1.method445();
+            TextureOperation30.aClass87_3125 = var0;
+            TextureOperation12.method445();
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "rc.providesignlink(" + (var0 != null ? "{...}" : "null") + ')');
         }
@@ -97,7 +97,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
     public final void focusGained(FocusEvent var1) {
         try {
             hasWindowFocus = true;
-            Class3_Sub13_Sub10.aBoolean3116 = true;
+            TextureOperation30.aBoolean3116 = true;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "rc.focusGained(" + (var1 != null ? "{...}" : "null") + ')');
         }
@@ -114,8 +114,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
             }
 
             Container var2;
-            if (Class3_Sub13_Sub10.aFrame3121 != null) {
-                var2 = Class3_Sub13_Sub10.aFrame3121;
+            if (TextureOperation30.aFrame3121 != null) {
+                var2 = TextureOperation30.aFrame3121;
             } else if (null == frame) {
                 var2 = Class38.signlink.gameApplet;
             } else {
@@ -137,8 +137,8 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
             canvas.addFocusListener(this);
             canvas.requestFocus();
             hasWindowFocus = true;
-            Class3_Sub13_Sub10.aBoolean3116 = true;
-            Class3_Sub13_Sub6.aBoolean3078 = true;
+            TextureOperation30.aBoolean3116 = true;
+            TextureOperation26.aBoolean3078 = true;
             Class3_Sub28_Sub5.forceReplaceCanvasEnable = false;
             SequenceDefinition.aLong1847 = TimeUtils.time();
             ClientCommands.tweeningEnabled = true;
@@ -152,7 +152,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
             if (this == LinkableRSString.anApplet_Sub1_2588 && !Class29.aBoolean554) {
                 aLong2313 = TimeUtils.time();
                 TimeUtils.sleep(5000L);
-                Class3_Sub13_Sub10.aClass87_3125 = null;
+                TextureOperation30.aClass87_3125 = null;
                 this.method35(false);
             }
         } catch (RuntimeException var2) {
@@ -195,7 +195,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
     public final synchronized void paint(Graphics g) {
         if (LinkableRSString.anApplet_Sub1_2588 == this && !Class29.aBoolean554) {
-            Class3_Sub13_Sub10.aBoolean3116 = true;
+            TextureOperation30.aBoolean3116 = true;
 
             if (aBoolean1784 && !HDToolKit.highDetail && -SequenceDefinition.aLong1847 + TimeUtils.time() > 1000) {
                 Rectangle var2 = g.getClipBounds();
@@ -269,7 +269,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
             Unsorted.anInt1953 = 31 & Unsorted.anInt1953 - -1;
             synchronized (this) {
 
-                Class3_Sub13_Sub6.aBoolean3078 = hasWindowFocus;
+                TextureOperation26.aBoolean3078 = hasWindowFocus;
             }
 
             this.method25();
@@ -291,12 +291,12 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
                 SequenceDefinition.anInt1862 = (32000 + (var6 >> 1)) / var6;
             }
 
-            if (50 < Class3_Sub13_Sub25.anInt3313++) {
-                Class3_Sub13_Sub10.aBoolean3116 = true;
-                Class3_Sub13_Sub25.anInt3313 -= 50;
+            if (50 < TextureOperation28.anInt3313++) {
+                TextureOperation30.aBoolean3116 = true;
+                TextureOperation28.anInt3313 -= 50;
                 canvas.setSize(Class23.canvasWidth, Class140_Sub7.canvasHeight);
                 canvas.setVisible(true);
-                if (frame != null && null == Class3_Sub13_Sub10.aFrame3121) {
+                if (frame != null && null == TextureOperation30.aFrame3121) {
                     Insets var8 = frame.getInsets();
                     canvas.setLocation(var8.left + Class84.anInt1164, Class106.anInt1442 + var8.top);
                 } else {
@@ -370,7 +370,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
                 getMaxMemory();
                 this.addCanvas();
-                Class164_Sub1.aClass158_3009 = Class3_Sub13_Sub23_Sub1.method285(Class140_Sub7.canvasHeight, Class23.canvasWidth, canvas);
+                Unsorted.aClass158_3009 = TextureOperation18.method285(Class140_Sub7.canvasHeight, Class23.canvasWidth, canvas);
                 this.method39();
                 Class3_Sub25.aClass129_2552 = Class36.method1012();
 
@@ -436,7 +436,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
                 frame.toFront();
                 Insets var9 = frame.getInsets();
                 frame.setSize(var9.left + Unsorted.anInt2334 + var9.right, var9.top + Class70.anInt1047 + var9.bottom);
-                Class3_Sub13_Sub10.aClass87_3125 = Class38.signlink = new Signlink(null, 32 - -Class3_Sub13_Sub13.paramModeWhat, "runescape", 29);
+                TextureOperation30.aClass87_3125 = Class38.signlink = new Signlink(null, 32 - -TextureOperation20.paramModeWhat, "runescape", 29);
                 Class64 var10 = Class38.signlink.method1451(1, this);
 
                 while (0 == Objects.requireNonNull(var10).anInt978) {
@@ -491,7 +491,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
                 InterfaceWidget.aBoolean3594 = var6 != null && var6.equals("1");
 
                 if (null == Class38.signlink) {
-                    Class3_Sub13_Sub10.aClass87_3125 = Class38.signlink = new Signlink(this, var3, null, 0);
+                    TextureOperation30.aClass87_3125 = Class38.signlink = new Signlink(this, var3, null, 0);
                 }
 
                 Class64 var7 = Class38.signlink.method1451(1, this);
