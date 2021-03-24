@@ -11,7 +11,6 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
-import core.game.world.map.MapDistance;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
@@ -50,7 +49,7 @@ public final class ChainhitSpecialHandler extends RangeSwingHandler implements P
 	/**
 	 * The door support locations.
 	 */
-	private static final Location[] DOOR_SUPPORTS = new Location[] { Location.create(2545, 10145, 0), Location.create(2545, 10141, 0) };
+	private static final Location[] DOOR_SUPPORTS = new Location[] { Location.create(2545, 10145, 0), Location.create(2545, 10141, 0),Location.create(2543, 10143, 0) };
 
 	@Override
 	public Object fireEvent(String identifier, Object... args) {
@@ -75,7 +74,7 @@ public final class ChainhitSpecialHandler extends RangeSwingHandler implements P
 		}
 		if (victim instanceof NPC) {
 			NPC npc = victim.asNpc();
-			if (npc.getId() == 2443) {
+			if (npc.getId() == 2440) {
 				for (Location l : DOOR_SUPPORTS) {
 					final NPC n = Repository.findNPC(l);
 					if (n == null) {
@@ -176,7 +175,7 @@ public final class ChainhitSpecialHandler extends RangeSwingHandler implements P
 	private List<? extends Entity> getVictimsList(Entity e, Entity victim) {
 		List<? extends Entity> list = e.getAttribute("chain-hit_v");
 		if (list == null) {
-			int distance = MapDistance.RENDERING.getDistance() / 3;
+			int distance = 5;
 			if (victim instanceof NPC) {
 				e.setAttribute("chain-hit_v", list = RegionManager.getLocalNpcs(e, distance));
 			} else {
