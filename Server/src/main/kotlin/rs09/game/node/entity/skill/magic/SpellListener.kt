@@ -27,8 +27,8 @@ abstract class SpellListener(val bookName: String) : Listener {
         SpellListeners.add(spellID,type,bookName,method)
     }
 
-    fun onCast(spellID: Int,type: Int, id: Int,method: (player: Player,node: Node?) -> Unit){
-        SpellListeners.add(spellID,type,id,bookName,method)
+    fun onCast(spellID: Int, type: Int, vararg ids: Int, method: (player: Player, node: Node?) -> Unit){
+        SpellListeners.add(spellID,type,ids,bookName,method)
     }
 
     fun requires(player: Player, magicLevel: Int = 0, runes: Array<Item> = arrayOf<Item>(), specialEquipment: IntArray = intArrayOf()){
@@ -68,5 +68,9 @@ abstract class SpellListener(val bookName: String) : Listener {
 
     fun interrupt(player: Player){
         player.pulseManager.clear()
+    }
+
+    fun showMagicTab(player: Player){
+        player.interfaceManager.setViewedTab(6)
     }
 }

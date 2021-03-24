@@ -8,15 +8,13 @@ object SpellListeners {
     val castMap = HashMap<String,(Player, Node?) -> Unit>()
 
     fun add(spellID: Int, type: Int, book: String, method: (Player,Node?) -> Unit){
-        SystemLogger.logInfo("add $book:$spellID:$type")
-
         castMap["$book:$spellID:$type"] = method
     }
 
-    fun add(spellID: Int, type: Int, id: Int, book: String, method: (Player, Node?) -> Unit){
-        SystemLogger.logInfo("add $book:$spellID:$type")
-
-        castMap["$book:$spellID:$type:$id"] = method
+    fun add(spellID: Int, type: Int, ids: IntArray, book: String, method: (Player, Node?) -> Unit){
+        for(id in ids) {
+            castMap["$book:$spellID:$type:$id"] = method
+        }
     }
 
     fun get(spellID: Int, type: Int, book: String): ((Player,Node?) -> Unit)?{

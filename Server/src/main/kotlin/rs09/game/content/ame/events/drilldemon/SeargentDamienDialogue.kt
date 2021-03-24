@@ -16,7 +16,7 @@ class SeargentDamienDialogue(val isCorrect: Boolean = false) : DialogueFile() {
                     end()
                     player!!.unlock()
                     DrillDemonUtils.cleanup(player!!)
-                    player!!.pulseManager.run(object : Pulse(){
+                    player!!.pulseManager.run(object : Pulse(2){
                         override fun pulse(): Boolean {
                             DrillDemonUtils.reward(player!!)
                             return true
