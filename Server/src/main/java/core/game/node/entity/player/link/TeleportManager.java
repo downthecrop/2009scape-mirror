@@ -106,6 +106,9 @@ public class TeleportManager {
 				p.getDialogueInterpreter().close();
 			}
 		}
+		if(entity.getAttribute("tablet-spell",false)){
+			type = TeleportType.TELETABS;
+		}
 		this.teleportType = teleportType;
 		entity.getWalkingQueue().reset();
 		lastTeleport = currentTeleport;
