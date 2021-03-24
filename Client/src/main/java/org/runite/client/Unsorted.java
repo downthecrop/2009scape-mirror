@@ -4381,19 +4381,19 @@ public class Unsorted {
                                             }
                                         }
                                     } else if (3 == var11.type) {
-                                        if(!Class3_Sub28_Sub12.method609(var11,26)) {
-                                            var20 = var11.anInt218;
-                                            if(var11 == Class107.aClass11_1453 && 0 != var11.anInt228) {
-                                                var20 = var11.anInt228;
-                                            }
-                                        } else {
+                                        if(Class3_Sub28_Sub12.method609(var11, 26)) {
                                             var20 = var11.anInt253;
                                             if(Class107.aClass11_1453 == var11 && 0 != var11.anInt222) {
                                                 var20 = var11.anInt222;
                                             }
+                                        } else {
+                                            var20 = var11.anInt218;
+                                            if(var11 == Class107.aClass11_1453 && 0 != var11.anInt228) {
+                                                var20 = var11.anInt228;
+                                            }
                                         }
 
-                                        if (-1 != ~var15) {
+                                        if (var15 != 0) {
                                             if(var11.aBoolean226) {
                                                 if(HDToolKit.highDetail) {
                                                     Toolkit.OPENGL_TOOLKIT.fillRect(var13, var14, var11.width, var11.height, var20, 256 + -(255 & var15));//Background for mage book

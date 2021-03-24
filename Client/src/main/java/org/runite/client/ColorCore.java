@@ -53,7 +53,7 @@ public class ColorCore {
 
     //private message Class3_Sub28_Sub4.aClass94_3573
     static RSString ObjectNameColor = RSString.parse("<col=00ffff>");//Light blue <col=00ffff>
-    static RSString PMColor = RSString.parse(" )2> <col=ff0000>");
+    static RSString PMColor = RSString.parse(" )2> <col=00ffff>");
 
     //bank will be orange
     //entity color? Item color?
