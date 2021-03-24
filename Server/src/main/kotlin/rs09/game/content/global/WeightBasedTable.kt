@@ -24,9 +24,7 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
     }
 
     open fun roll(player: Player?): ArrayList<Item>{
-        if(size == 0) return ArrayList()
         val items= ArrayList<Item>(3)
-        var tempWeight = RandomFunction.randomDouble(totalWeight)
         items.addAll(guaranteedItems.map { it.getItem() }.toList())
 
         if(player?.inventory?.isFull == true){
@@ -34,6 +32,7 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         }
 
         if(isNotEmpty()) {
+            var tempWeight = RandomFunction.randomDouble(totalWeight)
             for (item in shuffled()) {
                 tempWeight -= item.weight
                 if (tempWeight <= 0) {

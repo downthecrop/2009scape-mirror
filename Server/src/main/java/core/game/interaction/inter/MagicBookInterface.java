@@ -7,6 +7,9 @@ import core.plugin.Initializable;
 import core.game.node.entity.skill.magic.MagicSpell;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
+import rs09.game.node.entity.skill.magic.SpellListener;
+import rs09.game.node.entity.skill.magic.SpellListeners;
+import rs09.game.node.entity.skill.magic.SpellUtils;
 import rs09.game.world.GameWorld;
 import core.plugin.Plugin;
 
@@ -31,6 +34,7 @@ public final class MagicBookInterface extends ComponentPlugin {
 		if (GameWorld.getTicks() < player.getAttribute("magic:delay", -1)) {
 			return true;
 		}
+		SpellListeners.run(button, SpellListener.NONE, SpellUtils.getBookFromInterface(component.getId()),player,null);
 		return MagicSpell.castSpell(player, component.getId() == 192 ? SpellBook.MODERN : component.getId() == 193 ? SpellBook.ANCIENT : SpellBook.LUNAR, button, player);
 	}
 }
