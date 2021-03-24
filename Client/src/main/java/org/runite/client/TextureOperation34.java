@@ -68,14 +68,14 @@ final class TextureOperation34 extends TextureOperation {
             if(this.aBoolean3065) {
                for(var10 = 0; Class113.anInt1559 > var10; ++var10) {
                   var4 = this.anInt3060 * Class102.anIntArray2125[var10];
-                  var6 = this.method192(var8 * var4 >> 12, var18, var17, var12, 121, var11, var14);
+                  var6 = this.method192(var8 * var4 >> 12, var18, var17, var12, var11, var14);
                   var6 = var9 * var6 >> 12;
                   var3[var10] = 2048 - -(var6 >> 1);
                }
             } else {
                for(var10 = 0; var10 < Class113.anInt1559; ++var10) {
                   var4 = this.anInt3060 * Class102.anIntArray2125[var10];
-                  var6 = this.method192(var8 * var4 >> 12, var18, var17, var12, 124, var11, var14);
+                  var6 = this.method192(var8 * var4 >> 12, var18, var17, var12, var11, var14);
                   var3[var10] = var9 * var6 >> 12;
                }
             }
@@ -99,7 +99,7 @@ final class TextureOperation34 extends TextureOperation {
 
                for(var10 = 0; Class113.anInt1559 > var10; ++var10) {
                   var4 = Class102.anIntArray2125[var10] * this.anInt3060;
-                  var6 = this.method192(var4 * var8 >> 12, var18, var17, var12, 122, var11, var14);
+                  var6 = this.method192(var4 * var8 >> 12, var18, var17, var12, var11, var14);
                   var3[var10] = var6 * var9 >> 12;
                }
             }
@@ -124,14 +124,14 @@ final class TextureOperation34 extends TextureOperation {
                   if(this.aBoolean3065 && this.anInt3058 + -1 == var7) {
                      for(var10 = 0; var10 < Class113.anInt1559; ++var10) {
                         var4 = Class102.anIntArray2125[var10] * this.anInt3060;
-                        var6 = this.method192(var8 * var4 >> 12, var18, var17, var12, 120, var11, var14);
+                        var6 = this.method192(var8 * var4 >> 12, var18, var17, var12, var11, var14);
                         var6 = (var9 * var6 >> 12) + var3[var10];
                         var3[var10] = (var6 >> 1) + 2048;
                      }
                   } else {
                      for(var10 = 0; Class113.anInt1559 > var10; ++var10) {
                         var4 = Class102.anIntArray2125[var10] * this.anInt3060;
-                        var6 = this.method192(var4 * var8 >> 12, var18, var17, var12, 126, var11, var14);
+                        var6 = this.method192(var4 * var8 >> 12, var18, var17, var12, var11, var14);
                         var3[var10] += var6 * var9 >> 12;
                      }
                   }
@@ -144,9 +144,9 @@ final class TextureOperation34 extends TextureOperation {
       }
    }
 
-   final void method158(int var1) {
+   final void postDecode() {
       try {
-         this.aByteArray3059 = Class49.method1123(16711935, this.anInt3067);
+         this.aByteArray3059 = Class49.method1123(this.anInt3067);
          this.method191();
 
          for(int var2 = -1 + this.anInt3058; var2 >= 1; --var2) {
@@ -158,12 +158,8 @@ final class TextureOperation34 extends TextureOperation {
             --this.anInt3058;
          }
 
-         if(var1 != 16251) {
-            this.anInt3062 = 101;
-         }
-
       } catch (RuntimeException var4) {
-         throw ClientErrorException.clientError(var4, "bi.P(" + var1 + ')');
+         throw ClientErrorException.clientError(var4, "bi.P(" + ')');
       }
    }
 
@@ -180,7 +176,7 @@ final class TextureOperation34 extends TextureOperation {
                var3 = Class56.localPlayerIndexes[var1];
             }
 
-            Player var4 = TextureOperation0.players[var3];
+            Player var4 = Unsorted.players[var3];
             if(var4 != null && 0 < var4.textCycle) {
                --var4.textCycle;
                if(var4.textCycle == 0) {
@@ -205,11 +201,8 @@ final class TextureOperation34 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if(!var3) {
-            this.method192(49, -110, -55, -117, 117, 10, -51);
-         }
 
          if(var1 == 0) {
             this.aBoolean3065 = var2.readUnsignedByte() == 1;
@@ -235,7 +228,7 @@ final class TextureOperation34 extends TextureOperation {
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "bi.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "bi.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 
@@ -319,12 +312,8 @@ final class TextureOperation34 extends TextureOperation {
       }
    }
 
-   private int method192(int var1, int var2, int var3, int var4, int var5, int var6, int var7) {
+   private int method192(int var1, int var2, int var3, int var4, int var6, int var7) {
       try {
-         if(var5 < 117) {
-            this.method158(89);
-         }
-
          int var10 = -4096 + var6;
          int var13 = var1 >> 12;
          int var12 = 1 + var13;
@@ -371,7 +360,7 @@ final class TextureOperation34 extends TextureOperation {
          int var17 = var8 + ((-var8 + var9) * var15 >> 12);
          return var16 - -(var7 * (var17 + -var16) >> 12);
       } catch (RuntimeException var18) {
-         throw ClientErrorException.clientError(var18, "bi.R(" + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ')');
+         throw ClientErrorException.clientError(var18, "bi.R(" + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var6 + ',' + var7 + ')');
       }
    }
 

@@ -15,9 +15,9 @@ final class TextureOperation16 extends TextureOperation {
       super(0, true);
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if(var3) {
+         if(true) {
             if(var1 == 0) {
                this.anInt3108 = var2.readUnsignedByte();
             } else if (var1 == 1) {

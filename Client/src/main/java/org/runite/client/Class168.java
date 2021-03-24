@@ -903,9 +903,9 @@ final class Class168 {
                         short var6 = TextureOperation27.aShortArray3095[var2];
                         TextureOperation27.aShortArray3095[var2] = TextureOperation27.aShortArray3095[1 + var2];
                         TextureOperation27.aShortArray3095[var2 + 1] = var6;
-                        long var7 = TextureOperation0.aLongArray3271[var2];
-                        TextureOperation0.aLongArray3271[var2] = TextureOperation0.aLongArray3271[var2 + 1];
-                        TextureOperation0.aLongArray3271[var2 - -1] = var7;
+                        long var7 = Unsorted.aLongArray3271[var2];
+                        Unsorted.aLongArray3271[var2] = Unsorted.aLongArray3271[var2 + 1];
+                        Unsorted.aLongArray3271[var2 - -1] = var7;
                     }
                 }
             }

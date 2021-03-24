@@ -639,7 +639,7 @@ final class Class1 {
                         var10 = 25 * Class3_Sub28_Sub8.anInt3611;
                     }
 
-                    for (Class3_Sub23 var11 = (Class3_Sub23) Class84.aClass61_1162.method1222(); var11 != null; var11 = (Class3_Sub23) Class84.aClass61_1162.method1221()) {
+                    for (Class3_Sub23 var11 = (Class3_Sub23) Class84.aLinkedList_1162.method1222(); var11 != null; var11 = (Class3_Sub23) Class84.aLinkedList_1162.method1221()) {
                         if (Class8.anInt101 == var11.anInt2532) {
                             int var13 = var4 - -(var11.anInt2539 * var1 / Class108.anInt1460);
                             int var12 = var2 * var11.anInt2531 / Class23.anInt455 + var0;

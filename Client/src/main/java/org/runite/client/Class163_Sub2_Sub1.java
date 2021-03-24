@@ -146,14 +146,14 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
       }
    }
 
-   static void method2226(Class3_Sub30_Sub1 var0, int var1, int var2) {
+   static void method2226(BufferedDataStream var0, int var1, int var2) {
       try {
          if(var2 > -109) {
             method2226(null, 67, 54);
          }
 
          while(true) {
-            Class3_Sub8 var3 = (Class3_Sub8)Class3_Sub26.aClass61_2557.method1222();
+            Class3_Sub8 var3 = (Class3_Sub8)Class3_Sub26.aLinkedList_2557.method1222();
             if(var3 == null) {
                return;
             }

@@ -89,7 +89,7 @@ final class Class3_Sub21 extends Linkable {
                Class51.aBoolean849 = var13 < 0 || var14 < 0 || var15 < 0 || var13 > Class51.anInt847 || var14 > Class51.anInt847 || var15 > Class51.anInt847;
 
                if(var0.anIntArray616 != null && var0.anIntArray616[var9] != -1) {
-                  if(TextureOperation0.aBoolean3275) {
+                  if(Unsorted.aBoolean3275) {
                      if(var0.aBoolean629) {
                         Class51.method1135(var16, var17, var18, var13, var14, var15, var0.anIntArray625[var9], var0.anIntArray632[var9], var0.anIntArray631[var9], Class35.anIntArray614[0], Class35.anIntArray614[1], Class35.anIntArray614[3], Class35.anIntArray630[0], Class35.anIntArray630[1], Class35.anIntArray630[3], Class35.anIntArray628[0], Class35.anIntArray628[1], Class35.anIntArray628[3], var0.anIntArray616[var9]);
                      } else {

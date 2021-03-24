@@ -16,19 +16,15 @@ final class TextureOperation38 extends TextureOperation {
    static short[] aShortArray3455;
    static int[] anIntArray3456 = new int[4096];
 
-   final void method158(int var1) {
+   final void postDecode() {
       try {
          Class8.method844((byte)-9);
-         if(var1 != 16251) {
-            this.anInt3454 = 107;
-         }
-
       } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "vc.P(" + var1 + ')');
+         throw ClientErrorException.clientError(var3, "vc.P(" + ')');
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(var1 == 0) {
             this.anInt3454 = var2.readUnsignedByte();
@@ -43,7 +39,7 @@ final class TextureOperation38 extends TextureOperation {
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "vc.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "vc.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

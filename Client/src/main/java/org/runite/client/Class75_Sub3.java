@@ -59,7 +59,7 @@ final class Class75_Sub3 extends Class75 {
          Class114.aReferenceCache_1569.sweep(50);
          Class3_Sub15.aReferenceCache_2428.sweep(50);
          Unsorted.aReferenceCache_743.sweep(50);
-         Class61.aReferenceCache_939.sweep(5);
+         LinkedList.aReferenceCache_939.sweep(5);
          Class158_Sub1.aReferenceCache_2982.sweep(5);
          TextureOperation1.aReferenceCache_3130.sweep(5);
          Unsorted.aReferenceCache_1135.sweep(5);
@@ -112,7 +112,7 @@ final class Class75_Sub3 extends Class75 {
             for(int var2 = 0; Class95.anInt1338 > var2; ++var2) {
                byte[] var4 = Class163_Sub1.aByteArrayArray2987[var2];
                int var3 = Unsorted.anIntArray3076[var2] * Class140_Sub7.anIntArray2931[var2];
-               if(TextureOperation0.aBooleanArray3272[var2]) {
+               if(Class45.aBooleanArray3272[var2]) {
                   int[] var6 = new int[var3];
                   byte[] var5 = Class163_Sub3.aByteArrayArray3005[var2];
 

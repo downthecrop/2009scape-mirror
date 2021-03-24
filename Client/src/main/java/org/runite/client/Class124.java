@@ -39,7 +39,7 @@ final class Class124 {
             int var3 = var0.readUnsignedByte();
 
             for (int var4 = 0; var3 > var4; ++var4) {
-                var2.aClass61_3560.method1215(new Class3_Sub21(var0.readUnsignedShort(), var0.readUnsignedShort(), var0.readUnsignedShort(), var0.readUnsignedShort()));
+                var2.aLinkedList_3560.method1215(new Class3_Sub21(var0.readUnsignedShort(), var0.readUnsignedShort(), var0.readUnsignedShort(), var0.readUnsignedShort()));
             }
 
             var2.method538();

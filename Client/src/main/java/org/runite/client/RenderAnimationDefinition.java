@@ -6,40 +6,40 @@ final class RenderAnimationDefinition {
 
     static int[] anIntArray356 = new int[]{1, 0, -1, 0};
     static ReferenceCache aReferenceCache_1955 = new ReferenceCache(64);
-    int anInt357 = 0;
-    int[][] anIntArrayArray359;
-    int anInt360 = -1;
+    int yaw_max_speed = 0;
+    int[][] equipment_transforms;
+    int movement_acceleration = -1;
     static volatile int anInt362 = 0;
-    int anInt364 = -1;
-    int anInt367 = -1;
-    int anInt368 = -1;
-    int anInt369 = 0;
-    int anInt370 = 0;
-    int anInt371 = 0;
-    int anInt372 = -1;
-    int anInt373 = -1;
-    int anInt375 = -1;
+    int walk_follow_cw_turn_anim = -1;
+    int standing_ccw_turn = -1;
+    int stand_animation = -1;
+    int yaw_acceleration = 0;
+    int roll_max_speed = 0;
+    int pitch_target_angle = 0;
+    int slow_walk_follow_full_turn_anim = -1;
+    int run_follow_ccw_turn_anim = -1;
+    int run_follow_cw_turn_anim = -1;
     static int anInt377 = 0;
     static RSString aClass94_378 = null;
-    int anInt379 = -1;
-    int anInt381 = 0;
-    int anInt382 = -1;
+    int slow_walk_follow_cw_turn_anim = -1;
+    int hill_height = 0;
+    int walk_animation = -1;
     static byte[][][] aByteArrayArrayArray383;
     static int anInt384 = 0;
-    int anInt386 = -1;
-    int anInt387 = 0;
-    int anInt389 = -1;
-    int anInt390 = -1;
-    int anInt393 = -1;
-    int anInt395 = 0;
+    int run_follow_full_turn_anim = -1;
+    int roll_acceleration = 0;
+    int walk_follow_full_turn_anim = -1;
+    int walk_follow_ccw_turn_anim = -1;
+    int run_anim = -1;
+    int hill_width = 0;
     static int anInt396;
-    int anInt398 = -1;
-    int anInt399 = 0;
-    int anInt400 = 0;
+    int slow_walk_anim = -1;
+    int pitch_max_speed = 0;
+    int roll_target_angle = 0;
     static boolean aBoolean402 = false;
-    int anInt403 = 0;
-    int anInt406 = -1;
-    int anInt407 = -1;
+    int pitch_acceleration = 0;
+    int slow_walk_follow_ccw_turn_anim = -1;
+    int standing_cw_turn = -1;
 
     static void method897(Class3_Sub24_Sub4 var1, CacheIndex var2, CacheIndex var3, CacheIndex var4) {
         try {
@@ -232,102 +232,112 @@ final class RenderAnimationDefinition {
         }
     }
 
-    final void parse(DataBuffer var2) {
+    final void parse(DataBuffer buffer) {
         try {
 
             while (true) {
-                int opcode = var2.readUnsignedByte();
+                int opcode = buffer.readUnsignedByte();
                 if (opcode == 0) {
                     return;
                 }
 
-                this.parseOpcode(opcode, var2);
+                this.parseOpcode(opcode, buffer);
             }
         } catch (RuntimeException var4) {
-            throw ClientErrorException.clientError(var4, "ck.H(" + -1 + ',' + (var2 != null ? "{...}" : "null") + ')');
+            throw ClientErrorException.clientError(var4, "ck.H(" + -1 + ',' + (buffer != null ? "{...}" : "null") + ')');
         }
     }
 
-    private void parseOpcode(int var1, DataBuffer var3) {
+    private void parseOpcode(int opcode, DataBuffer buffer) {
         try {
-            if (var1 == 1) {
-                this.anInt368 = var3.readUnsignedShort();
-                this.anInt382 = var3.readUnsignedShort();
-                if (this.anInt382 == 65535) {
-                    this.anInt382 = -1;
+            if (opcode == 1) {
+                this.stand_animation = buffer.readUnsignedShort();
+                this.walk_animation = buffer.readUnsignedShort();
+                if (this.walk_animation == 65535) {
+                    this.walk_animation = -1;
                 }
 
-                if (65535 == this.anInt368) {
-                    this.anInt368 = -1;
+                if (65535 == this.stand_animation) {
+                    this.stand_animation = -1;
                 }
-            } else if (var1 == 2) {
-                this.anInt398 = var3.readUnsignedShort();
-            } else if (var1 == 3) {
-                this.anInt372 = var3.readUnsignedShort();
-            } else if (4 == var1) {
-                this.anInt406 = var3.readUnsignedShort();
-            } else if (var1 == 5) {
-                this.anInt379 = var3.readUnsignedShort();
-            } else if (6 == var1) {
-                this.anInt393 = var3.readUnsignedShort();
-            } else if (7 == var1) {
-                this.anInt386 = var3.readUnsignedShort();
-            } else if (var1 == 8) {
-                this.anInt373 = var3.readUnsignedShort();
-            } else if (var1 == 9) {
-                this.anInt375 = var3.readUnsignedShort();
-            } else if (var1 == 26) {
-                this.anInt395 = (short) (4 * var3.readUnsignedByte());
-                this.anInt381 = (short) (4 * var3.readUnsignedByte());
-            } else if (var1 == 27) {
-                if (this.anIntArrayArray359 == null) {
-                    this.anIntArrayArray359 = new int[12][];
+            } else if (opcode == 2) {
+                this.slow_walk_anim = buffer.readUnsignedShort();
+            } else if (opcode == 3) {
+                this.slow_walk_follow_full_turn_anim = buffer.readUnsignedShort();
+            } else if (4 == opcode) {
+                this.slow_walk_follow_ccw_turn_anim = buffer.readUnsignedShort();
+            } else if (opcode == 5) {
+                this.slow_walk_follow_cw_turn_anim = buffer.readUnsignedShort();
+            } else if (6 == opcode) {
+                this.run_anim = buffer.readUnsignedShort();
+            } else if (7 == opcode) {
+                this.run_follow_full_turn_anim = buffer.readUnsignedShort();
+            } else if (opcode == 8) {
+                this.run_follow_ccw_turn_anim = buffer.readUnsignedShort();
+            } else if (opcode == 9) {
+                this.run_follow_cw_turn_anim = buffer.readUnsignedShort();
+            } else if (opcode == 26) {
+                this.hill_width = (short) (4 * buffer.readUnsignedByte());
+                this.hill_height = (short) (4 * buffer.readUnsignedByte());
+            } else if (opcode == 27) {
+                if (this.equipment_transforms == null) {
+                    this.equipment_transforms = new int[12][];
                 }
 
-                int var4 = var3.readUnsignedByte();
-                this.anIntArrayArray359[var4] = new int[6];
+                int bodyID = buffer.readUnsignedByte();
+                this.equipment_transforms[bodyID] = new int[6];
 
-                for (int var5 = 0; var5 < 6; ++var5) {
-                    this.anIntArrayArray359[var4][var5] = var3.readSignedShort();
+                for (int type = 0; type < 6; ++type) {
+
+                    /*
+                     * 0 -Rotate X
+                     * 1 - Rotate Y
+                     * 2 - Rotate Z
+                     * 3 - Translate X
+                     * 4 - Translate Y
+                     * 5 - Translate Z
+                     */
+
+                    this.equipment_transforms[bodyID][type] = buffer.readSignedShort();
                 }
-            } else if (var1 == 29) {
-                this.anInt369 = var3.readUnsignedByte();
-            } else if (var1 == 30) {
-                this.anInt357 = var3.readUnsignedShort();
-            } else if (var1 == 31) {
-                this.anInt387 = var3.readUnsignedByte();
-            } else if (32 == var1) {
-                this.anInt370 = var3.readUnsignedShort();
-            } else if (33 == var1) {
-                this.anInt400 = var3.readSignedShort();
-            } else if (34 == var1) {
-                this.anInt403 = var3.readUnsignedByte();
-            } else if (var1 == 35) {
-                this.anInt399 = var3.readUnsignedShort();
-            } else if (var1 == 36) {
-                this.anInt371 = var3.readSignedShort();
-            } else if (var1 == 37) {
-                this.anInt360 = var3.readUnsignedByte();
-            } else if (var1 == 38) {
-                this.anInt367 = var3.readUnsignedShort();
-            } else if (39 == var1) {
-                this.anInt407 = var3.readUnsignedShort();
-            } else if (var1 == 40) {
-                this.anInt389 = var3.readUnsignedShort();
-            } else if (41 == var1) {
-                this.anInt390 = var3.readUnsignedShort();
-            } else if (var1 == 42) {
-                this.anInt364 = var3.readUnsignedShort();
-            } else if (var1 == 43) {
-                var3.readUnsignedShort();
-            } else if (var1 == 44) {
-                var3.readUnsignedShort();
-            } else if (var1 == 45) {
-                var3.readUnsignedShort();
+            } else if (opcode == 29) {
+                this.yaw_acceleration = buffer.readUnsignedByte();
+            } else if (opcode == 30) {
+                this.yaw_max_speed = buffer.readUnsignedShort();
+            } else if (opcode == 31) {
+                this.roll_acceleration = buffer.readUnsignedByte();
+            } else if (32 == opcode) {
+                this.roll_max_speed = buffer.readUnsignedShort();
+            } else if (33 == opcode) {
+                this.roll_target_angle = buffer.readSignedShort();
+            } else if (34 == opcode) {
+                this.pitch_acceleration = buffer.readUnsignedByte();
+            } else if (opcode == 35) {
+                this.pitch_max_speed = buffer.readUnsignedShort();
+            } else if (opcode == 36) {
+                this.pitch_target_angle = buffer.readSignedShort();
+            } else if (opcode == 37) {
+                this.movement_acceleration = buffer.readUnsignedByte();
+            } else if (opcode == 38) {
+                this.standing_ccw_turn = buffer.readUnsignedShort();
+            } else if (39 == opcode) {
+                this.standing_cw_turn = buffer.readUnsignedShort();
+            } else if (opcode == 40) {
+                this.walk_follow_full_turn_anim = buffer.readUnsignedShort();
+            } else if (41 == opcode) {
+                this.walk_follow_ccw_turn_anim = buffer.readUnsignedShort();
+            } else if (opcode == 42) {
+                this.walk_follow_cw_turn_anim = buffer.readUnsignedShort();
+            } else if (opcode == 43) {
+                buffer.readUnsignedShort();
+            } else if (opcode == 44) {
+                buffer.readUnsignedShort();
+            } else if (opcode == 45) {
+                buffer.readUnsignedShort();
             }
 
         } catch (RuntimeException var6) {
-            throw ClientErrorException.clientError(var6, "ck.E(" + var1 + ',' + (byte) -106 + ',' + (var3 != null ? "{...}" : "null") + ')');
+            throw ClientErrorException.clientError(var6, "ck.E(" + opcode + ',' + (byte) -106 + ',' + (buffer != null ? "{...}" : "null") + ')');
         }
     }
 

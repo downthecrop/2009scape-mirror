@@ -222,7 +222,7 @@ final class Class3_Sub5 extends Linkable {
                 if (var0) {
                     var4 = Class102.player;
                 } else {
-                    var4 = TextureOperation0.players[Class56.localPlayerIndexes[var3]];
+                    var4 = Unsorted.players[Class56.localPlayerIndexes[var3]];
                 }
 
                 if (null != var4 && var4.hasDefinitions()) {
@@ -273,12 +273,12 @@ final class Class3_Sub5 extends Linkable {
                     var4 = Class102.player;
                     var16 = 8791798054912L;
                 } else {
-                    var4 = TextureOperation0.players[Class56.localPlayerIndexes[var3]];
+                    var4 = Unsorted.players[Class56.localPlayerIndexes[var3]];
                     var16 = (long) Class56.localPlayerIndexes[var3] << 32;
                 }
 
                 if (var4 != null && var4.hasDefinitions()) {
-                    var4.aBoolean3968 = (RSInterface.aBoolean236 && Class159.localPlayerCount > 200 || 50 < Class159.localPlayerCount) && !var0 && var4.anInt2764 == var4.method1965().anInt368;
+                    var4.aBoolean3968 = (RSInterface.aBoolean236 && Class159.localPlayerCount > 200 || 50 < Class159.localPlayerCount) && !var0 && var4.anInt2764 == var4.getRenderAnimationType().stand_animation;
 
                     var7 = var4.getSize();
                     if (var7 == 1) {

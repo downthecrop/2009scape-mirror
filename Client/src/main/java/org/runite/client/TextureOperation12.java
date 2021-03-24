@@ -5,7 +5,7 @@ import org.rs09.client.config.GameConfig;
 
 public final class TextureOperation12 extends TextureOperation {
 
-	public static Class3_Sub30_Sub1 outgoingBuffer = new Class3_Sub30_Sub1();
+	public static BufferedDataStream outgoingBuffer = new BufferedDataStream();
 	private int anInt3036 = 0;
 	private int anInt3037 = 1;
 	private int anInt3038 = 0;
@@ -114,15 +114,12 @@ public final class TextureOperation12 extends TextureOperation {
 		}
 	}
 
-	final void method158(int var1) {
+	final void postDecode() {
 		try {
 			Class8.method844((byte)-9);
-			if(var1 != 16251) {
-				method171(106, -38, 106, 7, -28, -61, 30, -77, -47);
-			}
 
 		} catch (RuntimeException var3) {
-			throw ClientErrorException.clientError(var3, "ag.P(" + var1 + ')');
+			throw ClientErrorException.clientError(var3, "ag.P(" + ')');
 		}
 	}
 
@@ -146,11 +143,8 @@ public final class TextureOperation12 extends TextureOperation {
 		}
 	}
 
-	final void method157(int var1, DataBuffer var2, boolean var3) {
+	final void decode(int var1, DataBuffer var2) {
 		try {
-			if(!var3) {
-				this.method158(10);
-			}
 
 			if(var1 == 0) {
 				this.anInt3038 = var2.readUnsignedByte();
@@ -161,7 +155,7 @@ public final class TextureOperation12 extends TextureOperation {
 			}
 
 		} catch (RuntimeException var5) {
-			throw ClientErrorException.clientError(var5, "ag.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+			throw ClientErrorException.clientError(var5, "ag.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
 		}
 	}
 

@@ -123,9 +123,9 @@ final class TextureOperation1 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if(!var3) {
+         if(!true) {
             method221(-64, null, null, null, 34);
          }
 
@@ -134,7 +134,7 @@ final class TextureOperation1 extends TextureOperation {
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "fm.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "fm.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

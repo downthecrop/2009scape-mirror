@@ -96,9 +96,9 @@ public class LoginHandler {
                             return;
                         }
 
-                        Class3_Sub15.activeConnection.readBytes(GraphicDefinition.incomingBuffer.buffer, 0, 8);
-                        GraphicDefinition.incomingBuffer.index = 0;
-                        isaacServerKey = GraphicDefinition.incomingBuffer.readLong();
+                        Class3_Sub15.activeConnection.readBytes(BufferedDataStream.incomingBuffer.buffer, 0, 8);
+                        BufferedDataStream.incomingBuffer.index = 0;
+                        isaacServerKey = BufferedDataStream.incomingBuffer.readLong();
                         int[] var9 = new int[4];
                         TextureOperation12.outgoingBuffer.index = 0;
                         var9[2] = (int) (isaacServerKey >> 32);
@@ -114,66 +114,66 @@ public class LoginHandler {
                         TextureOperation12.outgoingBuffer.writeString(Class131.password);
                         TextureOperation12.method229();
                         TextureOperation12.outgoingBuffer.rsaEncrypt(TextureOperation10.EXPONENT, TextureOperation31.MODULUS);
-                        Unsorted.aClass3_Sub30_Sub1_2942.index = 0;
+                        Unsorted.aBufferedDataStream_2942.index = 0;
                         if (40 == Class143.gameStage) {
-                            Unsorted.aClass3_Sub30_Sub1_2942.writeByte(18);
+                            Unsorted.aBufferedDataStream_2942.writeByte(18);
                         } else {
-                            Unsorted.aClass3_Sub30_Sub1_2942.writeByte(16);
+                            Unsorted.aBufferedDataStream_2942.writeByte(16);
                         }
 
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeShort(TextureOperation12.outgoingBuffer.index + 163 - -TextureOperation29.method326((byte) 111, Class163_Sub2.paramSettings));
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(GameConfig.CLIENT_BUILD);
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeByte(Class7.anInt2161);
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeByte(!Client.paramAdvertisementSuppressed ? 0 : 1);
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeByte(1);
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeByte(Class83.getWindowType());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeShort(Class23.canvasWidth);
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeShort(Class140_Sub7.canvasHeight);
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeByte(Unsorted.anInt3671);
-                        Class81.putRandomDataFile(Unsorted.aClass3_Sub30_Sub1_2942, true);
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeString(Class163_Sub2.paramSettings);
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(Class3_Sub26.paramAffid);
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(Class84.method1421());
+                        Unsorted.aBufferedDataStream_2942.writeShort(TextureOperation12.outgoingBuffer.index + 163 - -TextureOperation29.method326((byte) 111, Class163_Sub2.paramSettings));
+                        Unsorted.aBufferedDataStream_2942.writeInt(GameConfig.CLIENT_BUILD);
+                        Unsorted.aBufferedDataStream_2942.writeByte(Class7.anInt2161);
+                        Unsorted.aBufferedDataStream_2942.writeByte(!Client.paramAdvertisementSuppressed ? 0 : 1);
+                        Unsorted.aBufferedDataStream_2942.writeByte(1);
+                        Unsorted.aBufferedDataStream_2942.writeByte(Class83.getWindowType());
+                        Unsorted.aBufferedDataStream_2942.writeShort(Class23.canvasWidth);
+                        Unsorted.aBufferedDataStream_2942.writeShort(Class140_Sub7.canvasHeight);
+                        Unsorted.aBufferedDataStream_2942.writeByte(Unsorted.anInt3671);
+                        Class81.putRandomDataFile(Unsorted.aBufferedDataStream_2942, true);
+                        Unsorted.aBufferedDataStream_2942.writeString(Class163_Sub2.paramSettings);
+                        Unsorted.aBufferedDataStream_2942.writeInt(Class3_Sub26.paramAffid);
+                        Unsorted.aBufferedDataStream_2942.writeInt(Class84.method1421());
                         CS2Script.aBoolean2705 = true;
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeShort(Class113.interfacePacketCounter);
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.skeletonsIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.skinsIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.configurationsIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.interfacesIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.soundFXIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.landscapesIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.musicIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.modelsIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.spritesIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.texturesIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.huffmanEncodingIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.music2Index.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.interfaceScriptsIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.fontsIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.soundFX2Index.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.soundFX3Index.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.objectConfigIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.clientscriptMaskIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.npcConfigIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.itemConfigIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.animationIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.graphicFXIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.clientScriptConfigIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.worldmapIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.quickchatMessagesIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.quickchatMenusIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.materialsIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.particlesConfigIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.writeInt(CacheIndex.libIndex.getReferenceTableCrc());
-                        Unsorted.aClass3_Sub30_Sub1_2942.putBytes(TextureOperation12.outgoingBuffer.buffer, TextureOperation12.outgoingBuffer.index);
-                        Class3_Sub15.activeConnection.sendBytes(Unsorted.aClass3_Sub30_Sub1_2942.buffer, Unsorted.aClass3_Sub30_Sub1_2942.index);
+                        Unsorted.aBufferedDataStream_2942.writeShort(Class113.interfacePacketCounter);
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.skeletonsIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.skinsIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.configurationsIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.interfacesIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.soundFXIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.landscapesIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.musicIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.modelsIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.spritesIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.texturesIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.huffmanEncodingIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.music2Index.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.interfaceScriptsIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.fontsIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.soundFX2Index.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.soundFX3Index.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.objectConfigIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.clientscriptMaskIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.npcConfigIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.itemConfigIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.animationIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.graphicFXIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.clientScriptConfigIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.worldmapIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.quickchatMessagesIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.quickchatMenusIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.materialsIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.particlesConfigIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.libIndex.getReferenceTableCrc());
+                        Unsorted.aBufferedDataStream_2942.putBytes(TextureOperation12.outgoingBuffer.buffer, TextureOperation12.outgoingBuffer.index);
+                        Class3_Sub15.activeConnection.sendBytes(Unsorted.aBufferedDataStream_2942.buffer, Unsorted.aBufferedDataStream_2942.index);
                         TextureOperation12.outgoingBuffer.method814(var9);
 
                         for (int var2 = 0; var2 < 4; ++var2) {
                             var9[var2] += 50;
                         }
 
-                        GraphicDefinition.incomingBuffer.method814(var9);
+                        BufferedDataStream.incomingBuffer.method814(var9);
                         loginStage = 4;
                     }
 
@@ -260,19 +260,19 @@ public class LoginHandler {
                             return;
                         }
 
-                        Class3_Sub15.activeConnection.readBytes(GraphicDefinition.incomingBuffer.buffer, 0, 14);
-                        GraphicDefinition.incomingBuffer.index = 0;
-                        Player.rights = GraphicDefinition.incomingBuffer.readUnsignedByte();
+                        Class3_Sub15.activeConnection.readBytes(BufferedDataStream.incomingBuffer.buffer, 0, 14);
+                        BufferedDataStream.incomingBuffer.index = 0;
+                        Player.rights = BufferedDataStream.incomingBuffer.readUnsignedByte();
                         ClientLoader.setModPanelVisible(Player.rights == 2);
-                        CS2Script.anInt3775 = GraphicDefinition.incomingBuffer.readUnsignedByte();
-                        Class3_Sub15.aBoolean2433 = GraphicDefinition.incomingBuffer.readUnsignedByte() == 1;
-                        Class121.aBoolean1641 = 1 == GraphicDefinition.incomingBuffer.readUnsignedByte();
-                        Unsorted.aBoolean4063 = GraphicDefinition.incomingBuffer.readUnsignedByte() == 1;
-                        TextureOperation31.aBoolean3166 = 1 == GraphicDefinition.incomingBuffer.readUnsignedByte();
-                        Unsorted.aBoolean29 = GraphicDefinition.incomingBuffer.readUnsignedByte() == 1;
-                        Class3_Sub1.localIndex = GraphicDefinition.incomingBuffer.readUnsignedShort();
-                        TextureOperation3.disableGEBoxes = GraphicDefinition.incomingBuffer.readUnsignedByte() == 1;
-                        Unsorted.isMember = GraphicDefinition.incomingBuffer.readUnsignedByte() == 1;
+                        CS2Script.anInt3775 = BufferedDataStream.incomingBuffer.readUnsignedByte();
+                        Class3_Sub15.aBoolean2433 = BufferedDataStream.incomingBuffer.readUnsignedByte() == 1;
+                        Class121.aBoolean1641 = 1 == BufferedDataStream.incomingBuffer.readUnsignedByte();
+                        Unsorted.aBoolean4063 = BufferedDataStream.incomingBuffer.readUnsignedByte() == 1;
+                        TextureOperation31.aBoolean3166 = 1 == BufferedDataStream.incomingBuffer.readUnsignedByte();
+                        Unsorted.aBoolean29 = BufferedDataStream.incomingBuffer.readUnsignedByte() == 1;
+                        Class3_Sub1.localIndex = BufferedDataStream.incomingBuffer.readUnsignedShort();
+                        TextureOperation3.disableGEBoxes = BufferedDataStream.incomingBuffer.readUnsignedByte() == 1;
+                        Unsorted.isMember = BufferedDataStream.incomingBuffer.readUnsignedByte() == 1;
                         Class113.method1702(Unsorted.isMember);
                         Class8.method845(Unsorted.isMember);
                         if (!Client.paramAdvertisementSuppressed) {
@@ -289,9 +289,9 @@ public class LoginHandler {
                             }
                         }
 
-                        Unsorted.incomingOpcode = GraphicDefinition.incomingBuffer.getOpcode();
+                        Unsorted.incomingOpcode = BufferedDataStream.incomingBuffer.getOpcode();
                         dynamic = Unsorted.incomingOpcode == 214;
-                        Unsorted.incomingPacketLength = GraphicDefinition.incomingBuffer.readUnsignedShort();
+                        Unsorted.incomingPacketLength = BufferedDataStream.incomingBuffer.readUnsignedShort();
                         loginStage = 9;
                     }
 
@@ -300,8 +300,8 @@ public class LoginHandler {
                             return;
                         }
 
-                        GraphicDefinition.incomingBuffer.index = 0;
-                        Class3_Sub15.activeConnection.readBytes(GraphicDefinition.incomingBuffer.buffer, 0, Unsorted.incomingPacketLength);
+                        BufferedDataStream.incomingBuffer.index = 0;
+                        Class3_Sub15.activeConnection.readBytes(BufferedDataStream.incomingBuffer.buffer, 0, Unsorted.incomingPacketLength);
                         Client.messageToDisplay = 2;
                         loginStage = 0;
                         SequenceDefinition.resetAll();

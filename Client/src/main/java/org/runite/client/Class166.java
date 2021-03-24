@@ -43,7 +43,7 @@ final class Class166 {
             boolean var4 = false;
 
             for (int var5 = 0; Class159.localPlayerCount > var5; ++var5) {
-                Player var6 = TextureOperation0.players[Class56.localPlayerIndexes[var5]];
+                Player var6 = Unsorted.players[Class56.localPlayerIndexes[var5]];
                 if (null != var6 && null != var6.displayName && var6.displayName.equalsStringIgnoreCase(var3)) {
                     var4 = true;
                     Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var6.anIntArray2767[0], 1, 0, 2, var6.anIntArray2755[0], Class102.player.anIntArray2767[0]);
@@ -68,7 +68,7 @@ final class Class166 {
             }
 
             if (!var4) {
-                Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, RSString.stringCombiner(new RSString[]{TextCore.HasUnableFind, var3}), -1);
+                BufferedDataStream.addChatMessage(TextCore.emptyJagexString, 0, RSString.stringCombiner(new RSString[]{TextCore.HasUnableFind, var3}), -1);
             }
 
         } catch (RuntimeException var7) {

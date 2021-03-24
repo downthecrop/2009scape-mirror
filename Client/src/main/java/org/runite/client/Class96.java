@@ -86,7 +86,7 @@ public final class Class96 {
                                             var16.anInt2532 = var3.MapIcon;
                                             var16.anInt2531 = var9;
                                             var16.anInt2539 = var10;
-                                            Class84.aClass61_1162.method1215(var16);
+                                            Class84.aLinkedList_1162.method1215(var16);
                                         }
                                     }
                                 }

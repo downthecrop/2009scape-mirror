@@ -71,9 +71,9 @@ final class TextureOperation20 extends TextureOperation {
        }
     }
 
-    final void method157(int var1, DataBuffer var2, boolean var3) {
+    final void decode(int var1, DataBuffer var2) {
       try {
-         if(!var3) {
+         if(!true) {
             paramModeWhat = -117;
          }
 
@@ -84,7 +84,7 @@ final class TextureOperation20 extends TextureOperation {
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "gg.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "gg.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 
@@ -145,10 +145,10 @@ final class TextureOperation20 extends TextureOperation {
             int[] var4;
             int var7;
             if(var6 <= 0) {
-               var4 = this.method152(0, 0, 32755);
+               var4 = this.method152(0, 0);
             } else {
                var7 = var1 % var6;
-               var4 = this.method152(0, Class101.anInt1427 * var7 / var6, 32755);
+               var4 = this.method152(0, Class101.anInt1427 * var7 / var6);
             }
 
             for(var7 = 0; var7 < Class113.anInt1559; ++var7) {
@@ -574,8 +574,8 @@ final class TextureOperation20 extends TextureOperation {
 
                      ++Class106.anInt1446;
                      if(Unsorted.aClass11_1933 != null) {
-                        ++Class3_Sub30_Sub1.anInt2330;
-                        if(15 <= Class3_Sub30_Sub1.anInt2330) {
+                        ++BufferedDataStream.anInt2330;
+                        if(15 <= BufferedDataStream.anInt2330) {
                            Class20.method909(Unsorted.aClass11_1933);
                            Unsorted.aClass11_1933 = null;
                         }
@@ -639,7 +639,7 @@ final class TextureOperation20 extends TextureOperation {
                            }
 
                            Unsorted.anInt3644 = 0;
-                           Class3_Sub30_Sub1.anInt2330 = 10;
+                           BufferedDataStream.anInt2330 = 10;
                            Class67.aClass11_1017 = null;
                         }
                      }
@@ -665,15 +665,15 @@ final class TextureOperation20 extends TextureOperation {
                      ++PacketParser.anInt3213;
 
                      while(true) {
-                        CS2Script var26 = (CS2Script)PacketParser.aClass61_82.method1220();
+                        CS2Script var26 = (CS2Script)PacketParser.aLinkedList_82.method1220();
                         RSInterface var23;
                         RSInterface var25;
                         if(var26 == null) {
                            while(true) {
-                              var26 = (CS2Script)Class65.aClass61_983.method1220();
+                              var26 = (CS2Script)Class65.aLinkedList_983.method1220();
                               if(var26 == null) {
                                  while(true) {
-                                    var26 = (CS2Script) Client.aClass61_1471.method1220();
+                                    var26 = (CS2Script) Client.aLinkedList_1471.method1220();
                                     if(var26 == null) {
                                        if(Class3_Sub28_Sub3.aClass11_3551 == null) {
                                           Class3_Sub19.anInt2475 = 0;
@@ -704,7 +704,7 @@ final class TextureOperation20 extends TextureOperation {
                                        } else if(CS2Script.anInt2440 == 2) {
                                           if(Class27.anInt515 != -1) {
                                              TextureOperation12.outgoingBuffer.putOpcode(131);
-                                             TextureOperation12.outgoingBuffer.writeIntV2(Class3_Sub30_Sub1.anInt872);
+                                             TextureOperation12.outgoingBuffer.writeIntV2(BufferedDataStream.anInt872);
                                              TextureOperation12.outgoingBuffer.putShortA(Class131.anInt1716 + Class27.anInt515);
                                              TextureOperation12.outgoingBuffer.writeShort128LE(RSInterface.anInt278);
                                              TextureOperation12.outgoingBuffer.putShortA(Unsorted.anInt999 + Texture.anInt1152);

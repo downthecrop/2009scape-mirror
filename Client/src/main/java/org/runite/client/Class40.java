@@ -356,9 +356,9 @@ final class Class40 {
 
     static void method318() {
         try {
-            Class3_Sub4 var1 = (Class3_Sub4) TextureOperation26.aClass61_3075.method1222();
+            Class3_Sub4 var1 = (Class3_Sub4) TextureOperation26.aLinkedList_3075.method1222();
 
-            for (; null != var1; var1 = (Class3_Sub4) TextureOperation26.aClass61_3075.method1221()) {
+            for (; null != var1; var1 = (Class3_Sub4) TextureOperation26.aLinkedList_3075.method1221()) {
                 if (var1.anInt2259 == -1) {
                     var1.anInt2261 = 0;
                     Class132.method1798(56, var1);

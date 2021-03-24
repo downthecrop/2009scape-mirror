@@ -14,7 +14,7 @@ final class Class3_Sub28_Sub3 extends Node {
    static int anInt3557 = 0;
    int anInt3558;
    int anInt3559 = 0;
-   Class61 aClass61_3560;
+   LinkedList aLinkedList_3560;
    RSString aClass94_3561;
    int anInt3562 = 12800;
    int anInt3563;
@@ -24,7 +24,7 @@ final class Class3_Sub28_Sub3 extends Node {
    final boolean method537(int var1, int var3) {
       try {
          if(var3 >= this.anInt3555 && var3 <= this.anInt3559 && var1 >= this.anInt3562 && var1 <= this.anInt3549) {
-            for(Class3_Sub21 var4 = (Class3_Sub21)this.aClass61_3560.method1222(); var4 != null; var4 = (Class3_Sub21)this.aClass61_3560.method1221()) {
+            for(Class3_Sub21 var4 = (Class3_Sub21)this.aLinkedList_3560.method1222(); var4 != null; var4 = (Class3_Sub21)this.aLinkedList_3560.method1221()) {
                if(var4.method393(var1, var3)) {
                   return true;
                }
@@ -45,7 +45,7 @@ final class Class3_Sub28_Sub3 extends Node {
          this.anInt3549 = 0;
          this.anInt3555 = 12800;
 
-         for(Class3_Sub21 var2 = (Class3_Sub21)this.aClass61_3560.method1222(); null != var2; var2 = (Class3_Sub21)this.aClass61_3560.method1221()) {
+         for(Class3_Sub21 var2 = (Class3_Sub21)this.aLinkedList_3560.method1222(); null != var2; var2 = (Class3_Sub21)this.aLinkedList_3560.method1221()) {
             if(this.anInt3562 > var2.anInt2494) {
                this.anInt3562 = var2.anInt2494;
             }
@@ -162,7 +162,7 @@ final class Class3_Sub28_Sub3 extends Node {
             this.anInt3563 = 0;
          }
 
-         this.aClass61_3560 = new Class61();
+         this.aLinkedList_3560 = new LinkedList();
       } catch (RuntimeException var9) {
          throw ClientErrorException.clientError(var9, "bn.<init>(" + (var1 != null?"{...}":"null") + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ')');
       }

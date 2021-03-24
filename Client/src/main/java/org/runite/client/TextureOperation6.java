@@ -11,7 +11,7 @@ final class TextureOperation6 extends TextureOperation {
    private int anInt3046 = 4096;
 
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(0 == var1) {
             this.anInt3043 = var2.readUnsignedShort();
@@ -24,7 +24,7 @@ final class TextureOperation6 extends TextureOperation {
          //aClass94_3042 = (RSString)null;
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "aj.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "aj.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 
@@ -218,7 +218,7 @@ final class TextureOperation6 extends TextureOperation {
       try {
          int[] var3 = this.aClass114_2382.method1709(var1);
          if(this.aClass114_2382.aBoolean1580) {
-            int[] var5 = this.method152(0, var1, 32755);
+            int[] var5 = this.method152(0, var1);
 
             for(int var6 = 0; var6 < Class113.anInt1559; ++var6) {
                int var7 = var5[var6];

@@ -14,7 +14,7 @@ abstract class GameObject {
             if (Class70.aDouble1050 != var0) {
                 for (int var3 = 0; 256 > var3; ++var3) {
                     int var4 = (int) (255.0D * Math.pow((double) var3 / 255.0D, var0));
-                    Class3_Sub30_Sub1.anIntArray3804[var3] = var4 > 255 ? 255 : var4;
+                    BufferedDataStream.anIntArray3804[var3] = var4 > 255 ? 255 : var4;
                 }
 
                 Class70.aDouble1050 = var0;

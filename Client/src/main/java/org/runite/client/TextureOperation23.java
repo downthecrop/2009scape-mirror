@@ -68,18 +68,18 @@ final class TextureOperation23 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(var1 == 0) {
             this.aBoolean2375 = var2.readUnsignedByte() == 1;
          }
 
-         if(!var3) {
+         if(!true) {
             WorldMap.aClass153_3210 = null;
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "je.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "je.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 
@@ -114,13 +114,13 @@ final class TextureOperation23 extends TextureOperation {
    static void method252() {
       try {
          Class3_Sub9 var1;
-         for(var1 = (Class3_Sub9) Unsorted.aClass61_78.method1222(); null != var1; var1 = (Class3_Sub9) Unsorted.aClass61_78.method1221()) {
+         for(var1 = (Class3_Sub9) Unsorted.aLinkedList_78.method1222(); null != var1; var1 = (Class3_Sub9) Unsorted.aLinkedList_78.method1221()) {
             if(var1.aBoolean2329) {
                var1.method134();
             }
          }
 
-         for(var1 = (Class3_Sub9) Unsorted.aClass61_1242.method1222(); null != var1; var1 = (Class3_Sub9) Unsorted.aClass61_1242.method1221()) {
+         for(var1 = (Class3_Sub9) Unsorted.aLinkedList_1242.method1222(); null != var1; var1 = (Class3_Sub9) Unsorted.aLinkedList_1242.method1221()) {
             if(var1.aBoolean2329) {
                var1.method134();
             }
@@ -137,7 +137,7 @@ final class TextureOperation23 extends TextureOperation {
          if(this.aClass114_2382.aBoolean1580) {
             for(int var5 = 0; var5 < Class113.anInt1559; ++var5) {
                this.method248(var1, (byte)105, var5);
-               int[] var6 = this.method152(0, Class50.anInt828, 32755);
+               int[] var6 = this.method152(0, Class50.anInt828);
                var4[var5] = var6[Class159.anInt2024];
             }
          }

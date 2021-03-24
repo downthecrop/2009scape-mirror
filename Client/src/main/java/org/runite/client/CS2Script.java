@@ -871,12 +871,12 @@ public final class CS2Script extends Linkable {
                                                 if (opcode < 3200) {
                                                     if (opcode == 3100) {
                                                         RSString class94_3 = ItemDefinition.stringsStack[--sStackCounter];
-                                                        Class3_Sub30_Sub1.addChatMessage(TextCore.aClass94_2331, 0, class94_3, -1);
+                                                        BufferedDataStream.addChatMessage(TextCore.aClass94_2331, 0, class94_3, -1);
                                                         continue;
                                                     }
                                                     if (opcode == 3101) {
                                                         iStackCounter -= 2;
-                                                        WorldMap.method628(ItemDefinition.intsStack[iStackCounter - -1], ItemDefinition.intsStack[iStackCounter], Class102.player);
+                                                        PlayerRendering.method628(ItemDefinition.intsStack[iStackCounter - -1], ItemDefinition.intsStack[iStackCounter], Class102.player);
                                                         continue;
                                                     }
                                                     if (opcode == 3103) {
@@ -1607,7 +1607,7 @@ public final class CS2Script extends Linkable {
                                                             iStackCounter -= 2;
                                                             int k23 = ItemDefinition.intsStack[iStackCounter];
                                                             int i55 = ItemDefinition.intsStack[1 + iStackCounter];
-                                                            Class3_Sub28_Sub9 class3_sub28_sub9 = Class61.method1210(i55);
+                                                            Class3_Sub28_Sub9 class3_sub28_sub9 = LinkedList.method1210(i55);
                                                             if (!class3_sub28_sub9.method585())
                                                                 ItemDefinition.intsStack[iStackCounter++] = NPCDefinition.getNPCDefinition(k23).method1475(i55, class3_sub28_sub9.anInt3614);
                                                             else
@@ -2395,9 +2395,9 @@ public final class CS2Script extends Linkable {
                                                                         RSString class94_55 = ItemDefinition.stringsStack[1 + sStackCounter];
                                                                         RSString class94_26 = ItemDefinition.stringsStack[sStackCounter];
                                                                         if (class94_26.length() > 0) {
-                                                                            if (null == Class3_Sub30_Sub1.aClass94Array3802)
-                                                                                Class3_Sub30_Sub1.aClass94Array3802 = new RSString[TextureOperation19.anIntArray3218[Class158.paramGameTypeID]];
-                                                                            Class3_Sub30_Sub1.aClass94Array3802[i72] = class94_26;
+                                                                            if (null == BufferedDataStream.aClass94Array3802)
+                                                                                BufferedDataStream.aClass94Array3802 = new RSString[TextureOperation19.anIntArray3218[Class158.paramGameTypeID]];
+                                                                            BufferedDataStream.aClass94Array3802[i72] = class94_26;
                                                                         }
                                                                         if (class94_55.length() > 0) {
                                                                             if (Unsorted.aClass94Array45 == null)
@@ -2585,7 +2585,7 @@ public final class CS2Script extends Linkable {
                                                                             continue;
                                                                         }
                                                                         if (opcode == 6009) {
-                                                                            TextureOperation0.aBoolean3275 = ItemDefinition.intsStack[--iStackCounter] == 1;
+                                                                            Unsorted.aBoolean3275 = ItemDefinition.intsStack[--iStackCounter] == 1;
                                                                             Class119.method1730(Class38.signlink);
                                                                             aBoolean2705 = false;
                                                                             continue;
@@ -2768,7 +2768,7 @@ public final class CS2Script extends Linkable {
                                                                             continue;
                                                                         }
                                                                         if (6109 == opcode) {
-                                                                            ItemDefinition.intsStack[iStackCounter++] = TextureOperation0.aBoolean3275 ? 1 : 0;
+                                                                            ItemDefinition.intsStack[iStackCounter++] = Unsorted.aBoolean3275 ? 1 : 0;
                                                                             continue;
                                                                         }
                                                                         if (opcode == 6110) {
@@ -3130,7 +3130,7 @@ public final class CS2Script extends Linkable {
                                                             iStackCounter -= 2;
                                                             int i38 = ItemDefinition.intsStack[iStackCounter];
                                                             int i61 = ItemDefinition.intsStack[iStackCounter - -1];
-                                                            Class3_Sub28_Sub9 class3_sub28_sub9_1 = Class61.method1210(i61);
+                                                            Class3_Sub28_Sub9 class3_sub28_sub9_1 = LinkedList.method1210(i61);
                                                             if (!class3_sub28_sub9_1.method585())
                                                                 ItemDefinition.intsStack[iStackCounter++] = StructDefinitionProvider.provide(i38).getInt(i61, class3_sub28_sub9_1.anInt3614);
                                                             else
@@ -3142,7 +3142,7 @@ public final class CS2Script extends Linkable {
                                                         iStackCounter -= 2;
                                                         int j61 = ItemDefinition.intsStack[iStackCounter - -1];
                                                         int j38 = ItemDefinition.intsStack[iStackCounter];
-                                                        Class3_Sub28_Sub9 class3_sub28_sub9_2 = Class61.method1210(j61);
+                                                        Class3_Sub28_Sub9 class3_sub28_sub9_2 = LinkedList.method1210(j61);
                                                         if (!class3_sub28_sub9_2.method585())
                                                             ItemDefinition.intsStack[iStackCounter++] = ObjectDefinition.getObjectDefinition(j38).method1691(class3_sub28_sub9_2.anInt3614, j61, (byte) 105);
                                                         else
@@ -3214,7 +3214,7 @@ public final class CS2Script extends Linkable {
                                                         iStackCounter -= 2;
                                                         int k40 = ItemDefinition.intsStack[iStackCounter];
                                                         int i62 = ItemDefinition.intsStack[iStackCounter - -1];
-                                                        Class3_Sub28_Sub9 class3_sub28_sub9_3 = Class61.method1210(i62);
+                                                        Class3_Sub28_Sub9 class3_sub28_sub9_3 = LinkedList.method1210(i62);
                                                         if (class3_sub28_sub9_3.method585())
                                                             ItemDefinition.stringsStack[sStackCounter++] = ItemDefinition.getItemDefinition(k40).method1105(class3_sub28_sub9_3.aClass94_3619, i62);
                                                         else
@@ -3261,7 +3261,7 @@ public final class CS2Script extends Linkable {
                                                     RSString class94_31 = ItemDefinition.stringsStack[--sStackCounter];
                                                     int l62 = ItemDefinition.intsStack[--iStackCounter];
                                                     ItemDefinition.stringsStack[sStackCounter++] = RSString.stringCombiner(new RSString[]{
-                                                            class94_31, Class61.method1218(l62)
+                                                            class94_31, LinkedList.method1218(l62)
                                                     });
                                                     continue;
                                                 }
@@ -3971,7 +3971,7 @@ public final class CS2Script extends Linkable {
         try {
             Queue var3 = new Queue();
 
-            for (Class3_Sub28_Sub3 var4 = (Class3_Sub28_Sub3) Class134.aClass61_1758.method1222(); var4 != null; var4 = (Class3_Sub28_Sub3) Class134.aClass61_1758.method1221()) {
+            for (Class3_Sub28_Sub3 var4 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.method1222(); var4 != null; var4 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.method1221()) {
                 if (var4.aBoolean3553 && var4.method537(var1, var0)) {
                     var3.offer(var4);
                 }

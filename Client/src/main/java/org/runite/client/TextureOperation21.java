@@ -15,7 +15,7 @@ final class TextureOperation21 extends TextureOperation {
 
          int[][] var3 = this.aClass97_2376.method1594((byte)7, var2);
          if(this.aClass97_2376.aBoolean1379) {
-            int[] var4 = this.method152(2, var2, 32755);
+            int[] var4 = this.method152(2, var2);
             int[][] var5 = this.method162(var2, 0, (byte)-119);
             int[][] var6 = this.method162(var2, 1, (byte)-107);
             int[] var9 = var3[2];
@@ -57,18 +57,14 @@ final class TextureOperation21 extends TextureOperation {
       super(3, false);
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(var1 == 0) {
             this.aBoolean2375 = var2.readUnsignedByte() == 1;
          }
 
-         if(!var3) {
-            this.method157(118, null, true);
-         }
-
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "bl.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "bl.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 
@@ -89,9 +85,9 @@ final class TextureOperation21 extends TextureOperation {
       try {
          int[] var3 = this.aClass114_2382.method1709(var1);
          if(this.aClass114_2382.aBoolean1580) {
-            int[] var5 = this.method152(0, var1, 32755);
-            int[] var6 = this.method152(1, var1, 32755);
-            int[] var7 = this.method152(2, var1, 32755);
+            int[] var5 = this.method152(0, var1);
+            int[] var6 = this.method152(1, var1);
+            int[] var7 = this.method152(2, var1);
 
             for(int var8 = 0; var8 < Class113.anInt1559; ++var8) {
                int var9 = var7[var8];

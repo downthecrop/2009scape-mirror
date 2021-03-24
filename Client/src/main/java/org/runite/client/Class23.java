@@ -31,7 +31,7 @@ public final class Class23 {
             var1.writeByte(Class25.aBoolean488 ? 1 : 0);
             var1.writeByte(!RSInterface.aBoolean236 ? 0 : 1);
             var1.writeByte(!WorldListEntry.aBoolean2623 ? 0 : 1);
-            var1.writeByte(TextureOperation0.aBoolean3275 ? 1 : 0);
+            var1.writeByte(Unsorted.aBoolean3275 ? 1 : 0);
             var1.writeByte(!Class140_Sub6.aBoolean2910 ? 0 : 1);
             var1.writeByte(Unsorted.anInt1137);
             var1.writeByte(!Class106.aBoolean1441 ? 0 : 1);

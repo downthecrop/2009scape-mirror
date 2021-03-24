@@ -96,7 +96,7 @@ final class Class25 {
     static void method958(byte var0) {
         try {
             if (GameObject.aBoolean1837) {
-                RSInterface var1 = AbstractSprite.method638(Class3_Sub30_Sub1.anInt872, RSInterface.anInt278);
+                RSInterface var1 = AbstractSprite.method638(BufferedDataStream.anInt872, RSInterface.anInt278);
                 if (null != var1 && var1.anObjectArray303 != null) {
                     CS2Script var3 = new CS2Script();
                     var3.arguments = var1.anObjectArray303;

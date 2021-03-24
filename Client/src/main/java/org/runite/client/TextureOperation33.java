@@ -45,9 +45,9 @@ public final class TextureOperation33 extends TextureOperation {
       super(1, false);
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if (!var3) {
+         if (!true) {
             CS2Script.aShort3052 = -37;
          }
 
@@ -58,7 +58,7 @@ public final class TextureOperation33 extends TextureOperation {
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "an.A(" + var1 + ',' + (var2 != null ? "{...}" : "null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "an.A(" + var1 + ',' + (var2 != null ? "{...}" : "null") + ',' + true + ')');
       }
    }
 
@@ -139,7 +139,7 @@ public final class TextureOperation33 extends TextureOperation {
          String var2 = "T2 - " + Unsorted.incomingOpcode + "," + Class7.anInt2166 + "," + Class24.anInt469 + " - " + Unsorted.incomingPacketLength + "," + (Class131.anInt1716 - -Class102.player.anIntArray2767[0]) + "," + (Class102.player.anIntArray2755[0] + Texture.anInt1152) + " - ";
 
          for (int var3 = 0; var3 < Unsorted.incomingPacketLength && 50 > var3; ++var3) {
-            var2 = var2 + GraphicDefinition.incomingBuffer.buffer[var3] + ",";
+            var2 = var2 + BufferedDataStream.incomingBuffer.buffer[var3] + ",";
          }
 
          Class49.reportError(var2, var5, (byte) 108);
@@ -208,9 +208,9 @@ public final class TextureOperation33 extends TextureOperation {
       try {
          int[][] var3 = this.aClass97_2376.method1594((byte) 58, var2);
          if (this.aClass97_2376.aBoolean1379) {
-            int[] var4 = this.method152(0, Class3_Sub20.anInt2487 & var2 + -1, 32755);
-            int[] var5 = this.method152(0, var2, 32755);
-            int[] var6 = this.method152(0, 1 + var2 & Class3_Sub20.anInt2487, 32755);
+            int[] var4 = this.method152(0, Class3_Sub20.anInt2487 & var2 + -1);
+            int[] var5 = this.method152(0, var2);
+            int[] var6 = this.method152(0, 1 + var2 & Class3_Sub20.anInt2487);
             int[] var7 = var3[0];
             int[] var8 = var3[1];
             int[] var9 = var3[2];

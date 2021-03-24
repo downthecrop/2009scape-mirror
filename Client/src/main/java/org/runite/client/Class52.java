@@ -593,17 +593,17 @@ final class Class52 {
                             var40 = Class3_Sub10.getRenderAnimationDefinition(this.renderAnim);
                         }
 
-                        if (var40 != null && null != var40.anIntArrayArray359) {
-                            for (var20 = 0; var20 < var40.anIntArrayArray359.length; ++var20) {
-                                if (null != var40.anIntArrayArray359[var20] && null != var39[var20]) {
-                                    var45 = var40.anIntArrayArray359[var20][0];
-                                    var22 = var40.anIntArrayArray359[var20][1];
-                                    var23 = var40.anIntArrayArray359[var20][2];
-                                    var25 = var40.anIntArrayArray359[var20][4];
-                                    var24 = var40.anIntArrayArray359[var20][3];
-                                    frame = var40.anIntArrayArray359[var20][5];
+                        if (var40 != null && null != var40.equipment_transforms) {
+                            for (var20 = 0; var20 < var40.equipment_transforms.length; ++var20) {
+                                if (null != var40.equipment_transforms[var20] && null != var39[var20]) {
+                                    var45 = var40.equipment_transforms[var20][0];
+                                    var22 = var40.equipment_transforms[var20][1];
+                                    var23 = var40.equipment_transforms[var20][2];
+                                    var25 = var40.equipment_transforms[var20][4];
+                                    var24 = var40.equipment_transforms[var20][3];
+                                    frame = var40.equipment_transforms[var20][5];
                                     if (null == this.anIntArrayArray863) {
-                                        this.anIntArrayArray863 = new int[var40.anIntArrayArray359.length][];
+                                        this.anIntArrayArray863 = new int[var40.equipment_transforms.length][];
                                     }
 
                                     if (this.anIntArrayArray863[var20] == null) {

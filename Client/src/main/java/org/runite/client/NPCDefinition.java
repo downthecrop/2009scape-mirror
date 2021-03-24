@@ -218,17 +218,17 @@ public final class NPCDefinition {
                   render = Class3_Sub10.getRenderAnimationDefinition(this.renderAnimationId);
                }
 
-               if(render != null && null != render.anIntArrayArray359) {
-                  for(var16 = 0; var16 < render.anIntArrayArray359.length; ++var16) {
-                     if(render.anIntArrayArray359[var16] != null && var14.length > var16 && var14[var16] != null) {
-                        var19 = render.anIntArrayArray359[var16][2];
-                        var20 = render.anIntArrayArray359[var16][3];
-                        var21 = render.anIntArrayArray359[var16][4];
-                        var18 = render.anIntArrayArray359[var16][1];
-                        var22 = render.anIntArrayArray359[var16][5];
-                        var17 = render.anIntArrayArray359[var16][0];
+               if(render != null && null != render.equipment_transforms) {
+                  for(var16 = 0; var16 < render.equipment_transforms.length; ++var16) {
+                     if(render.equipment_transforms[var16] != null && var14.length > var16 && var14[var16] != null) {
+                        var19 = render.equipment_transforms[var16][2];
+                        var20 = render.equipment_transforms[var16][3];
+                        var21 = render.equipment_transforms[var16][4];
+                        var18 = render.equipment_transforms[var16][1];
+                        var22 = render.equipment_transforms[var16][5];
+                        var17 = render.equipment_transforms[var16][0];
                         if(this.anIntArrayArray1258 == null) {
-                           this.anIntArrayArray1258 = new int[render.anIntArrayArray359.length][];
+                           this.anIntArrayArray1258 = new int[render.equipment_transforms.length][];
                         }
 
                         if(null == this.anIntArrayArray1258[var16]) {

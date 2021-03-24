@@ -224,7 +224,7 @@ public final class Player extends Class140_Sub4 {
         try {
             if (this.class52 != null) {
                 SequenceDefinition var13 = this.anInt2771 != -1 && 0 == this.anInt2828 ? SequenceDefinition.getAnimationDefinition(this.anInt2771) : null;
-                SequenceDefinition var14 = this.anInt2764 != -1 && !this.aBoolean3968 && (this.method1965().anInt368 != this.anInt2764 || var13 == null) ? SequenceDefinition.getAnimationDefinition(this.anInt2764) : null;
+                SequenceDefinition var14 = this.anInt2764 != -1 && !this.aBoolean3968 && (this.getRenderAnimationType().stand_animation != this.anInt2764 || var13 == null) ? SequenceDefinition.getAnimationDefinition(this.anInt2764) : null;
                 Model var15 = this.class52.method1165(this.aClass145Array2809, this.anInt2776, var14, var13, this.anInt2802, this.anInt2793, -120, this.anInt2760, this.anInt2832, this.anInt2813);
                 int var16 = Unsorted.method1727((byte) 123);
                 if (HDToolKit.highDetail && Class3_Sub24_Sub3.maxClientMemory < 96 && var16 > 50) {
@@ -282,8 +282,8 @@ public final class Player extends Class140_Sub4 {
                                     this.method1979(null, var20, var15, var29, var6, var11, var1, var8, var5, var4, var2, var27.anInt1355, var3, var7);
                                 }
 
-                                if (var27.anInt1360 == 10 && var27.anInt1359 >= 0 && var27.anInt1359 < TextureOperation0.players.length) {
-                                    Player var28 = TextureOperation0.players[var27.anInt1359];
+                                if (var27.anInt1360 == 10 && var27.anInt1359 >= 0 && var27.anInt1359 < Unsorted.players.length) {
+                                    Player var28 = Unsorted.players[var27.anInt1359];
                                     if (null != var28) {
                                         var20 = -(Class102.player.anInt2819 / 32) + var28.anInt2819 / 32;
                                         var21 = var28.anInt2829 / 32 + -(Class102.player.anInt2829 / 32);
@@ -420,8 +420,8 @@ public final class Player extends Class140_Sub4 {
         try {
             RSString var2 = this.displayName;
 
-            if (Class3_Sub30_Sub1.aClass94Array3802 != null) {
-                var2 = RSString.stringCombiner(new RSString[]{Class3_Sub30_Sub1.aClass94Array3802[this.anInt3958], var2});
+            if (BufferedDataStream.aClass94Array3802 != null) {
+                var2 = RSString.stringCombiner(new RSString[]{BufferedDataStream.aClass94Array3802[this.anInt3958], var2});
             }
 
             if (null != Unsorted.aClass94Array45) {

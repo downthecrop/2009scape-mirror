@@ -519,7 +519,7 @@ final class Class158_Sub1 extends Class158 implements ImageProducer, ImageObserv
                Class3_Sub11[] var50;
                if(var1) {
                   var50 = TextureOperation7.method298(Unsorted.aByteArrayArrayArray113, Unsorted.aByteArrayArrayArray1328[var8], TextureOperation36.aByteArrayArrayArray3430[var8], var35, var40, TextureOperation16.anIntArrayArray3115, aByteArrayArrayArray1828[var8], PacketParser.aByteArrayArrayArray81[var8], var38, var8, var43, var34, Class44.anIntArrayArrayArray723[var8], Class58.anIntArrayArrayArray914[0]);
-                  Class61.method1213(var8, var50);
+                  LinkedList.method1213(var8, var50);
                } else {
                   var50 = TextureOperation7.method298(Unsorted.aByteArrayArrayArray113, Unsorted.aByteArrayArrayArray1328[var8], TextureOperation36.aByteArrayArrayArray3430[var8], var35, var40, null, aByteArrayArrayArray1828[var8], PacketParser.aByteArrayArrayArray81[var8], var38, var8, var43, var34, Class44.anIntArrayArrayArray723[var8], null);
                   Class3_Sub11[] var46 = Class1.method70(var40, var38, Class44.anIntArrayArrayArray723[var8], var8, var43, PacketParser.aByteArrayArrayArray81[var8], var35, Unsorted.aByteArrayArrayArray1328[var8], TextureOperation36.aByteArrayArrayArray3430[var8], aByteArrayArrayArray1828[var8], Unsorted.aByteArrayArrayArray113);
@@ -533,7 +533,7 @@ final class Class158_Sub1 extends Class158 implements ImageProducer, ImageObserv
                      var49[var50.length + var44] = var46[var44];
                   }
 
-                  Class61.method1213(var8, var49);
+                  LinkedList.method1213(var8, var49);
                   Class129.method1769(var43, TextureOperation36.aByteArrayArrayArray3430[var8], PacketParser.aByteArrayArrayArray81[var8], Class68.aClass43Array1021, var8, Class68.anInt1032, var40, Unsorted.aByteArrayArrayArray1328[var8], aByteArrayArrayArray1828[var8], Class44.anIntArrayArrayArray723[var8], var38);
                }
             }

@@ -254,7 +254,7 @@ public final class Class15 implements Runnable {
             var10.anInt3056 = 4;
             var10.aBoolean3065 = false;
             var10.anInt3060 = 8;
-            var10.method158(16251);
+            var10.postDecode();
             TextureOperation33.method180(122, 256, 64);
 
             for (int var11 = 0; var11 < 256; ++var11) {

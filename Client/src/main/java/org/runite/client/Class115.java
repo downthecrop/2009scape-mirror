@@ -7,7 +7,7 @@ final class Class115 {
         try {
 
             while (true) {
-                Class3_Sub5 var1 = (Class3_Sub5) Unsorted.aClass61_2468.method1220();
+                Class3_Sub5 var1 = (Class3_Sub5) Unsorted.aLinkedList_2468.method1220();
                 if (var1 == null) {
                     return;
                 }
@@ -19,7 +19,7 @@ final class Class115 {
                     if (Class3_Sub1.localIndex == var3) {
                         var2 = Class102.player;
                     } else {
-                        var2 = TextureOperation0.players[var3];
+                        var2 = Unsorted.players[var3];
                     }
                 } else {
                     var3 = var1.anInt2273 - 1;

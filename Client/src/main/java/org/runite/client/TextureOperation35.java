@@ -36,9 +36,9 @@ final class TextureOperation35 extends TextureOperation {
 		try {
 			int[] var4 = this.aClass114_2382.method1709(var1);
 			if(this.aClass114_2382.aBoolean1580) {
-				int[] var5 = this.method152(0, var1 - 1 & Class3_Sub20.anInt2487, 32755);
-				int[] var6 = this.method152(0, var1, 32755);
-				int[] var7 = this.method152(0, Class3_Sub20.anInt2487 & var1 + 1, 32755);
+				int[] var5 = this.method152(0, var1 - 1 & Class3_Sub20.anInt2487);
+				int[] var6 = this.method152(0, var1);
+				int[] var7 = this.method152(0, Class3_Sub20.anInt2487 & var1 + 1);
 
 				for(int var8 = 0; Class113.anInt1559 > var8; ++var8) {
 					int var9 = (var7[var8] + -var5[var8]) * this.anInt3322;
@@ -59,9 +59,9 @@ final class TextureOperation35 extends TextureOperation {
 		}
 	}
 
-	final void method157(int var1, DataBuffer var2, boolean var3) {
+	final void decode(int var1, DataBuffer var2) {
 		try {
-			if(!var3) {
+			if(!true) {
 				method294((byte)-57);
 			}
 
@@ -70,7 +70,7 @@ final class TextureOperation35 extends TextureOperation {
 			}
 
 		} catch (RuntimeException var5) {
-			throw ClientErrorException.clientError(var5, "pg.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+			throw ClientErrorException.clientError(var5, "pg.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
 		}
 	}
 

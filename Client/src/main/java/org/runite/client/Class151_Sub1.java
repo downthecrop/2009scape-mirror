@@ -22,10 +22,10 @@ final class Class151_Sub1 extends ResourceProvider {
     private final CacheResourceWorker cacheResourceWorker;
     private final int anInt2957;
     private boolean aBoolean2962;
-    private final Class61 aClass61_2963 = new Class61();
+    private final LinkedList aLinkedList_2963 = new LinkedList();
     private int anInt2964 = 0;
     private boolean aBoolean2965;
-    private Class61 aClass61_2966;
+    private LinkedList aLinkedList_2966;
     private long aLong2967 = 0L;
     private final boolean aBoolean2968;
 
@@ -34,14 +34,14 @@ final class Class151_Sub1 extends ResourceProvider {
         try {
             if (null != this.aClass41_2954) {
                 Linkable var3;
-                for (var3 = this.aClass61_2963.method1222(); null != var3; var3 = this.aClass61_2963.method1221()) {
+                for (var3 = this.aLinkedList_2963.method1222(); null != var3; var3 = this.aLinkedList_2963.method1221()) {
                     if ((long) var1 == var3.linkableKey) {
                         return;
                     }
                 }
                 var3 = new Linkable();
                 var3.linkableKey = var1;
-                this.aClass61_2963.method1215(var3);
+                this.aLinkedList_2963.method1215(var3);
             }
         } catch (RuntimeException var5) {
             throw ClientErrorException.clientError(var5, "bg.H(" + var1 + ',' + 127 + ')');
@@ -123,8 +123,8 @@ final class Class151_Sub1 extends ResourceProvider {
         try {
             if (this.aClass41_2954 != null) {
                 this.aBoolean2965 = true;
-                if (this.aClass61_2966 == null) {
-                    this.aClass61_2966 = new Class61();
+                if (this.aLinkedList_2966 == null) {
+                    this.aLinkedList_2966 = new LinkedList();
                 }
 
             }
@@ -147,7 +147,7 @@ final class Class151_Sub1 extends ResourceProvider {
             if (null == this.table) {
                 return 0;
             } else if (this.aBoolean2962) {
-                Linkable var2 = this.aClass61_2966.method1222();
+                Linkable var2 = this.aLinkedList_2966.method1222();
                 if (null == var2) {
                     return 0;
                 } else {
@@ -164,7 +164,7 @@ final class Class151_Sub1 extends ResourceProvider {
 
     final void method2107() {
         try {
-            if (null != this.aClass61_2966) {
+            if (null != this.aLinkedList_2966) {
                 if (this.getReferenceTable() == null) {
                     return;
                 }
@@ -175,7 +175,7 @@ final class Class151_Sub1 extends ResourceProvider {
                 if (this.aBoolean2962) {
                     var2 = true;
 
-                    for (var3 = this.aClass61_2966.method1222(); null != var3; var3 = this.aClass61_2966.method1221()) {
+                    for (var3 = this.aLinkedList_2966.method1222(); null != var3; var3 = this.aLinkedList_2966.method1221()) {
                         var4 = (int) var3.linkableKey;
                         if (this.aByteArray2949[var4] == 0) {
                             this.method2109(1, var4, 51);
@@ -203,7 +203,7 @@ final class Class151_Sub1 extends ResourceProvider {
                                 var2 = false;
                                 var3 = new Linkable();
                                 var3.linkableKey = this.anInt2964;
-                                this.aClass61_2966.method1215(var3);
+                                this.aLinkedList_2966.method1215(var3);
                             }
 
                         }
@@ -217,7 +217,7 @@ final class Class151_Sub1 extends ResourceProvider {
                 } else if (this.aBoolean2965) {
                     var2 = true;
 
-                    for (var3 = this.aClass61_2966.method1222(); var3 != null; var3 = this.aClass61_2966.method1221()) {
+                    for (var3 = this.aLinkedList_2966.method1222(); var3 != null; var3 = this.aLinkedList_2966.method1221()) {
                         var4 = (int) var3.linkableKey;
                         if (this.aByteArray2949[var4] != 1) {
                             this.method2109(2, var4, 96);
@@ -246,7 +246,7 @@ final class Class151_Sub1 extends ResourceProvider {
                             if (this.aByteArray2949[this.anInt2964] != 1) {
                                 var3 = new Linkable();
                                 var3.linkableKey = this.anInt2964;
-                                this.aClass61_2966.method1215(var3);
+                                this.aLinkedList_2966.method1215(var3);
                                 var2 = false;
                             }
 
@@ -259,7 +259,7 @@ final class Class151_Sub1 extends ResourceProvider {
                         this.aBoolean2965 = false;
                     }
                 } else {
-                    this.aClass61_2966 = null;
+                    this.aLinkedList_2966 = null;
                 }
             }
 
@@ -469,9 +469,9 @@ final class Class151_Sub1 extends ResourceProvider {
 
     final void method2110() {
         try {
-            if (this.aClass61_2966 != null) {
+            if (this.aLinkedList_2966 != null) {
                 if (null != this.getReferenceTable()) {
-                    for (Linkable var2 = this.aClass61_2963.method1222(); null != var2; var2 = this.aClass61_2963.method1221()) {
+                    for (Linkable var2 = this.aLinkedList_2963.method1222(); null != var2; var2 = this.aLinkedList_2963.method1221()) {
                         int var3 = (int) var2.linkableKey;
                         if (0 <= var3 && this.table.getArchiveAmount() > var3 && this.table.archiveFileLengths[var3] != 0) {
                             if (this.aByteArray2949[var3] == 0) {
@@ -528,7 +528,7 @@ final class Class151_Sub1 extends ResourceProvider {
                 this.aBoolean2962 = false;
             } else {
                 this.aBoolean2962 = true;
-                this.aClass61_2966 = new Class61();
+                this.aLinkedList_2966 = new LinkedList();
             }
 
             this.cacheResourceWorker = var5;

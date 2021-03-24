@@ -20,14 +20,11 @@ final class TextureOperation28 extends TextureOperation {
    private int anInt3316 = 1024;
 
 
-   final void method158(int var1) {
+   final void postDecode() {
       try {
-         if(var1 != 16251) {
-            this.method157(-7, null, true);
-         }
 
       } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "ol.P(" + var1 + ')');
+         throw ClientErrorException.clientError(var3, "ol.P(" + ')');
       }
    }
 
@@ -321,9 +318,9 @@ final class TextureOperation28 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if(!var3) {
+         if(!true) {
             this.anInt3301 = 4;
          }
 
@@ -348,7 +345,7 @@ final class TextureOperation28 extends TextureOperation {
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "ol.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "ol.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

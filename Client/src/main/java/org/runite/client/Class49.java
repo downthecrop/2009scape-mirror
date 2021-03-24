@@ -85,7 +85,7 @@ public final class Class49 {
         }
     }
 
-    static byte[] method1123(int var0, int var1) {
+    static byte[] method1123(int var1) {
         try {
             Class3_Sub28_Sub8 var2 = (Class3_Sub28_Sub8) Class25.aClass47_480.get(var1);
             if (null == var2) {
@@ -109,9 +109,9 @@ public final class Class49 {
                 Class25.aClass47_480.put(var1, var2);
             }
 
-            return var0 != 16711935 ? null : var2.aByteArray3612;
+            return var2.aByteArray3612;
         } catch (RuntimeException var9) {
-            throw ClientErrorException.clientError(var9, "ha.B(" + var0 + ',' + var1 + ')');
+            throw ClientErrorException.clientError(var9, "ha.B(" + var1 + ')');
         }
     }
 
@@ -280,7 +280,7 @@ public final class Class49 {
                     }
                 }
 
-                Class61.method1214(Class106.anInt1446, Class102.player.anInt2819, Class102.player.anInt2829, WorldListCountry.localPlane);
+                LinkedList.method1214(Class106.anInt1446, Class102.player.anInt2819, Class102.player.anInt2829, WorldListCountry.localPlane);
                 Class106.anInt1446 = 0;
             }
         } catch (RuntimeException var3) {

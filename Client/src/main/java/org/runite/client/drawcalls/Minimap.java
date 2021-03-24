@@ -95,7 +95,7 @@ public class Minimap {
 
              for(var9 = 0; 104 > var9; ++var9) {
                 for(var10 = 0; var10 < 104; ++var10) {
-                   Class61 var25 = TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var9][var10];
+                   LinkedList var25 = Class39.aLinkedListArrayArrayArray3273[WorldListCountry.localPlane][var9][var10];
                    if(null != var25) {
                       var12 = 2 + var9 * 4 + -(Class102.player.anInt2819 / 32);
                       var13 = -(Class102.player.anInt2829 / 32) + 2 + 4 * var10;
@@ -125,7 +125,7 @@ public class Minimap {
              }
 
              for(var9 = 0; var9 < Class159.localPlayerCount; ++var9) {
-                Player var23 = TextureOperation0.players[Class56.localPlayerIndexes[var9]];
+                Player var23 = Unsorted.players[Class56.localPlayerIndexes[var9]];
                 if(null != var23 && var23.hasDefinitions()) {
                    var12 = var23.anInt2829 / 32 - Class102.player.anInt2829 / 32;
                    var11 = -(Class102.player.anInt2819 / 32) + var23.anInt2819 / 32;
@@ -185,8 +185,8 @@ public class Minimap {
                       Class53.method1171(var26.anInt1351, var2, var3, var12, var13, var4);
                    }
 
-                   if(var26.anInt1360 == 10 && var26.anInt1359 >= 0 && TextureOperation0.players.length > var26.anInt1359) {
-                      Player var30 = TextureOperation0.players[var26.anInt1359];
+                   if(var26.anInt1360 == 10 && var26.anInt1359 >= 0 && Unsorted.players.length > var26.anInt1359) {
+                      Player var30 = Unsorted.players[var26.anInt1359];
                       if(null != var30) {
                          var14 = var30.anInt2829 / 32 + -(Class102.player.anInt2829 / 32);
                          var13 = var30.anInt2819 / 32 + -(Class102.player.anInt2819 / 32);

@@ -20,7 +20,7 @@ final class Class3_Sub25 extends Linkable {
             ArrayUtils.arraycopy(Class163_Sub2_Sub1.aClass94Array4016, 1 + var1, Class163_Sub2_Sub1.aClass94Array4016, var1, Unsorted.menuOptionCount - var1);
             ArrayUtils.arraycopy(Class114.anIntArray1578, 1 + var1, Class114.anIntArray1578, var1, -var1 + Unsorted.menuOptionCount);
             ArrayUtils.arraycopy(TextureOperation27.aShortArray3095, 1 + var1, TextureOperation27.aShortArray3095, var1, Unsorted.menuOptionCount + -var1);
-            ArrayUtils.arraycopy(TextureOperation0.aLongArray3271, 1 + var1, TextureOperation0.aLongArray3271, var1, -var1 + Unsorted.menuOptionCount);
+            ArrayUtils.arraycopy(Unsorted.aLongArray3271, 1 + var1, Unsorted.aLongArray3271, var1, -var1 + Unsorted.menuOptionCount);
             ArrayUtils.arraycopy(Class117.anIntArray1613, var1 + 1, Class117.anIntArray1613, var1, -var1 + Unsorted.menuOptionCount);
             ArrayUtils.arraycopy(Class27.anIntArray512, 1 + var1, Class27.anIntArray512, var1, Unsorted.menuOptionCount + -var1);
          }

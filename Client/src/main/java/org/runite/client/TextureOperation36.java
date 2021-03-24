@@ -1,8 +1,6 @@
 package org.runite.client;
 
 import org.rs09.client.config.GameConfig;
-import org.rs09.client.rendering.Toolkit;
-import org.runite.client.drawcalls.LoadingBox;
 
 public final class TextureOperation36 extends TextureOperation {
 
@@ -17,174 +15,6 @@ public final class TextureOperation36 extends TextureOperation {
    private int anInt3434 = -1;
    static float aFloat3435;
 
-   static void method338(int var1, boolean var2, int var3, int var4, int var5) {
-      try {
-         ++Class79.anInt1127;
-         Class124.method1745();
-         if(!var2) {
-            Class3_Sub5.method116(true);
-            Class102.method1611(71, true);
-            Class3_Sub5.method116(false);
-         }
-
-         Class102.method1611(100, false);
-         if(!var2) {
-            TextureOperation32.method302(2);
-         }
-
-         Unsorted.method2067();
-         if(HDToolKit.highDetail) {
-            Class65.method1239(var4, 125, var5, var1, var3, true);
-            var3 = Class163_Sub1.anInt2989;
-            var5 = Class3_Sub28_Sub3.anInt3564;
-            var4 = Class96.anInt1358;
-            var1 = Unsorted.anInt31;
-         }
-
-         int var6;
-         int var7;
-         if(1 == Class133.anInt1753) {
-            var7 = 2047 & LinkableRSString.anInt2589 + GraphicDefinition.CAMERA_DIRECTION;
-            var6 = Unsorted.anInt2309;
-            if(Class75_Sub4.anInt2670 / 256 > var6) {
-               var6 = Class75_Sub4.anInt2670 / 256;
-            }
-
-            if(WaterfallShader.aBooleanArray2169[4] && Class166.anIntArray2073[4] + 128 > var6) {
-               var6 = 128 + Class166.anIntArray2073[4];
-            }
-
-            Class140_Sub2.method1952(Unsorted.anInt3155, var1, Class121.method1736(WorldListCountry.localPlane, 1, Class102.player.anInt2819, Class102.player.anInt2829) + -50, Client.ZOOM - -(var6 * 3), var7, Unsorted.anInt942, var6);
-         }
-
-         var7 = Class7.anInt2162;
-         var6 = NPC.anInt3995;
-         int var8 = Class77.anInt1111;
-         int var9 = Class139.anInt1823;
-         int var10 = TextureOperation28.anInt3315;
-
-         int var11;
-         int var12;
-         for(var11 = 0; 5 > var11; ++var11) {
-            if(WaterfallShader.aBooleanArray2169[var11]) {
-               var12 = (int)((double)(-TextureOperation14.anIntArray3383[var11]) + (double)(TextureOperation14.anIntArray3383[var11] * 2 + 1) * Math.random() + Math.sin((double)Class163_Sub1_Sub1.anIntArray4009[var11] * ((double) TextureOperation3.anIntArray3359[var11] / 100.0D)) * (double)Class166.anIntArray2073[var11]);
-               if(var11 == 3) {
-                  TextureOperation28.anInt3315 = var12 + TextureOperation28.anInt3315 & 0x7FF;
-               }
-
-               if(var11 == 4) {
-                  Class139.anInt1823 += var12;
-                  if(128 > Class139.anInt1823) {
-                     Class139.anInt1823 = 128;
-                  }
-
-                  if(Class139.anInt1823 > 383) {
-                     Class139.anInt1823 = 383;
-                  }
-               }
-
-               if(var11 == 2) {
-                  Class77.anInt1111 += var12;
-               }
-
-               if(var11 == 1) {
-                  Class7.anInt2162 += var12;
-               }
-
-               if(var11 == 0) {
-                  NPC.anInt3995 += var12;
-               }
-            }
-         }
-
-         Class3_Sub28_Sub20.method725();
-         if(HDToolKit.highDetail) {
-            Class22.setClipping(var3, var5, var3 + var4, var5 - -var1);
-            float var17 = (float)Class139.anInt1823 * 0.17578125F;
-            float var16 = 0.17578125F * (float) TextureOperation28.anInt3315;
-            if(Class133.anInt1753 == 3) {
-               var17 = 360.0F * InterfaceWidget.aFloat1169 / 6.2831855F;
-               var16 = Class45.aFloat730 * 360.0F / 6.2831855F;
-            }
-
-            HDToolKit.viewport(var3, var5, var4, var1, var4 / 2 + var3, var5 - -(var1 / 2), var17, var16, Unsorted.anInt1705, Unsorted.anInt1705);
-         } else {
-            Class74.setClipping(var3, var5, var4 + var3, var1 + var5);
-            Class51.method1134();
-         }
-
-         if(!Class38_Sub1.aBoolean2615 && var3 <= NPCDefinition.anInt1297 && var4 + var3 > NPCDefinition.anInt1297 && var5 <= Class38_Sub1.anInt2612 && Class38_Sub1.anInt2612 < var1 + var5) {
-            aBoolean3094 = true;
-            Unsorted.anInt59 = 0;
-            var12 = Class145.screenUpperX;
-            int var13 = Class1.screenUpperY;
-            var11 = Class139.screenLowerX;
-            Unsorted.anInt3642 = var11 + (var12 - var11) * (-var3 + NPCDefinition.anInt1297) / var4;
-            int var14 = AtmosphereParser.screenLowerY;
-            RenderAnimationDefinition.anInt384 = (-var13 + var14) * (Class38_Sub1.anInt2612 - var5) / var1 + var13;
-         } else {
-            aBoolean3094 = false;
-            Unsorted.anInt59 = 0;
-         }
-
-         Class58.method1194();
-         byte var19 = Class137.method1817() != 2 ?1:(byte)Class79.anInt1127;
-         if(HDToolKit.highDetail) {
-            HDToolKit.method1846();
-            HDToolKit.method1831(true);
-            HDToolKit.method1827(true);
-            if(Class143.gameStage == 10) {
-               var12 = Class3_Sub30_Sub1.method809(Class106.anInt1446, Class77.anInt1111 >> 10, Unsorted.anInt3625, NPC.anInt3995 >> 10);
-            } else {
-               var12 = Class3_Sub30_Sub1.method809(Class106.anInt1446, Class102.player.anIntArray2755[0] >> 3, Unsorted.anInt3625, Class102.player.anIntArray2767[0] >> 3);
-            }
-
-            Class68.method1269(Class44.anInt719, !WorldListEntry.aBoolean2623);
-            HDToolKit.clearScreen(var12);
-            ClientErrorException.method2285(Class139.anInt1823, Class77.anInt1111, Class7.anInt2162, NPC.anInt3995, TextureOperation28.anInt3315);
-            HDToolKit.anInt1791 = Class44.anInt719;
-            Class3_Sub22.method398(NPC.anInt3995, Class7.anInt2162, Class77.anInt1111, Class139.anInt1823, TextureOperation28.anInt3315, Class158.aByteArrayArrayArray2008, Unsorted.anIntArray686, Class129_Sub1.anIntArray2696, Class159.anIntArray2021, Player.anIntArray3959, SequenceDefinition.anIntArray1871, WorldListCountry.localPlane + 1, var19, Class102.player.anInt2819 >> 7, Class102.player.anInt2829 >> 7);
-            Unsorted.aBoolean47 = true;
-            Class68.method1265();
-            ClientErrorException.method2285(0, 0, 0, 0, 0);
-            Class58.method1194();
-            Unsorted.method1775();
-            Texture.method1405(var5, var4, var3, Unsorted.anInt1705, var1, Unsorted.anInt1705, -7397);
-            Class163_Sub2_Sub1.method2221(var4, var3, var1, Unsorted.anInt1705, Unsorted.anInt1705, var5);
-         } else {
-            Toolkit.JAVA_TOOLKIT.method934(var3, var5, var4, var1, 0);
-            Class3_Sub22.method398(NPC.anInt3995, Class7.anInt2162, Class77.anInt1111, Class139.anInt1823, TextureOperation28.anInt3315, Class158.aByteArrayArrayArray2008, Unsorted.anIntArray686, Class129_Sub1.anIntArray2696, Class159.anIntArray2021, Player.anIntArray3959, SequenceDefinition.anIntArray1871, WorldListCountry.localPlane - -1, var19, Class102.player.anInt2819 >> 7, Class102.player.anInt2829 >> 7);
-            Class58.method1194();
-            Unsorted.method1775();
-            Texture.method1405(var5, var4, var3, 256, var1, 256, -6403 + -994);
-            Class163_Sub2_Sub1.method2221(var4, var3, var1, 256, 256, var5);
-         }
-
-         ((Class102)Class51.anInterface2_838).method1610(Class106.anInt1446);
-         Class65.method1235(var4, var5, var1, var3);
-         Class139.anInt1823 = var9;
-         Class77.anInt1111 = var8;
-         Class7.anInt2162 = var7;
-         NPC.anInt3995 = var6;
-         TextureOperation28.anInt3315 = var10;
-         if(TextureOperation34.aBoolean3064 && Class58.aJs5Worker_917.countPriorityRequests() == 0) {
-            TextureOperation34.aBoolean3064 = false;
-         }
-
-         if(TextureOperation34.aBoolean3064) {
-            Toolkit.getActiveToolkit().method934(var3, var5, var4, var1, 0);
-            LoadingBox.draw(false, TextCore.LoadingPleaseWait2);
-         }
-
-         if(!var2 && !TextureOperation34.aBoolean3064 && !Class38_Sub1.aBoolean2615 && var3 <= NPCDefinition.anInt1297 && var4 + var3 > NPCDefinition.anInt1297 && Class38_Sub1.anInt2612 >= var5 && var1 + var5 > Class38_Sub1.anInt2612) {
-            method1628(var5, var4, var1, var3, Class38_Sub1.anInt2612, NPCDefinition.anInt1297);
-         }
-
-      } catch (RuntimeException var15) {
-         throw ClientErrorException.clientError(var15, "ui.OA(" + -6403 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ')');
-      }
-   }
-
    static void method1628(int var0, int var1, int var2, int var3, int var4, int var5) {
       try {
          int var9;
@@ -197,7 +27,7 @@ public final class TextureOperation36 extends TextureOperation {
             int var11 = (var5 - var3) * (-var7 + var8) / var1 - -var7;
             var12 = var9 + (var10 + -var9) * (-var0 + var4) / var2;
             if(GameObject.aBoolean1837 && (64 & Class164.anInt2051) != 0) {
-               RSInterface var13 = AbstractSprite.method638(Class3_Sub30_Sub1.anInt872, RSInterface.anInt278);
+               RSInterface var13 = AbstractSprite.method638(BufferedDataStream.anInt872, RSInterface.anInt278);
                if(var13 == null) {
                   Class25.method958((byte)-87);
                } else {
@@ -236,7 +66,7 @@ public final class TextureOperation36 extends TextureOperation {
                    if(Class164_Sub1.anInt3012 == 1) {
                       Class3_Sub24_Sub4.method1177(Class99.anInt1403, var26, (byte)-58, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aClass94_378, ColorCore.PMColor, var16.name}), var12, (short)14, TextCore.HasUse, var27);
                    } else if(GameObject.aBoolean1837) {
-                      Class3_Sub28_Sub9 var17 = -1 == Unsorted.anInt1038?null:Class61.method1210(Unsorted.anInt1038);
+                      Class3_Sub28_Sub9 var17 = -1 == Unsorted.anInt1038?null: LinkedList.method1210(Unsorted.anInt1038);
                       if(0 != (Class164.anInt2051 & 4) && (var17 == null || var17.anInt3614 != var16.method1691(var17.anInt3614, Unsorted.anInt1038, (byte) 98))) {
                          Class3_Sub24_Sub4.method1177(Unsorted.anInt1887, var26, (byte)-77, RSString.stringCombiner(new RSString[]{TextCore.aClass94_676, ColorCore.PMColor, var16.name}), var12, (short)38, Class3_Sub28_Sub9.aClass94_3621, var27);
                       }
@@ -319,7 +149,7 @@ public final class TextureOperation36 extends TextureOperation {
                       }
 
                       for(var37 = 0; var37 < Class159.localPlayerCount; ++var37) {
-                         var38 = TextureOperation0.players[Class56.localPlayerIndexes[var37]];
+                         var38 = Unsorted.players[Class56.localPlayerIndexes[var37]];
                          var21 = var38.anInt2819 + 64 + -(64 * var38.getSize());
                          var22 = var38.anInt2829 - (var38.getSize() * 64 + -64);
                          if(var21 >= var33 && var31.definition.size - (var21 - var33 >> 7) >= var38.getSize() && var18 <= var22 && var38.getSize() <= -(-var18 + var22 >> 7) + var31.definition.size) {
@@ -332,7 +162,7 @@ public final class TextureOperation36 extends TextureOperation {
                 }
 
                 if(var14 == 0) {
-                   Player var30 = TextureOperation0.players[var15];
+                   Player var30 = Unsorted.players[var15];
                    if((127 & var30.anInt2819) == 64 && 64 == (127 & var30.anInt2829)) {
                       var33 = var30.anInt2819 + -(64 * (-1 + var30.getSize()));
                       var18 = var30.anInt2829 + 64 + -(var30.getSize() * 64);
@@ -347,7 +177,7 @@ public final class TextureOperation36 extends TextureOperation {
                       }
 
                       for(var37 = 0; var37 < Class159.localPlayerCount; ++var37) {
-                         var38 = TextureOperation0.players[Class56.localPlayerIndexes[var37]];
+                         var38 = Unsorted.players[Class56.localPlayerIndexes[var37]];
                          var21 = var38.anInt2819 - (var38.getSize() + -1) * 64;
                          var22 = var38.anInt2829 - (-64 + 64 * var38.getSize());
                          if(var38 != var30 && var21 >= var33 && var38.getSize() <= var30.getSize() - (var21 - var33 >> 7) && var18 <= var22 && -(var22 + -var18 >> 7) + var30.getSize() >= var38.getSize()) {
@@ -360,7 +190,7 @@ public final class TextureOperation36 extends TextureOperation {
                 }
 
                 if(var14 == 3) {
-                   Class61 var28 = TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var12][var27];
+                   LinkedList var28 = Class39.aLinkedListArrayArrayArray3273[WorldListCountry.localPlane][var12][var27];
                    if(null != var28) {
                       for(WorldMap var32 = (WorldMap)var28.method1212(); null != var32; var32 = (WorldMap)var28.method1219(41)) {
                          var18 = var32.aClass140_Sub7_3676.anInt2936;
@@ -368,7 +198,7 @@ public final class TextureOperation36 extends TextureOperation {
                          if(Class164_Sub1.anInt3012 == 1) {
                             Class3_Sub24_Sub4.method1177(Class99.anInt1403, var18, (byte)-75, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aClass94_378, ColorCore.BankItemColor, var40.name}), var12, (short)33, TextCore.HasUse, var27);
                          } else if(GameObject.aBoolean1837) {
-                            Class3_Sub28_Sub9 var39 = Unsorted.anInt1038 == -1?null:Class61.method1210(Unsorted.anInt1038);
+                            Class3_Sub28_Sub9 var39 = Unsorted.anInt1038 == -1?null: LinkedList.method1210(Unsorted.anInt1038);
                             if((Class164.anInt2051 & 1) != 0 && (null == var39 || var39.anInt3614 != var40.method1115(var39.anInt3614, 100, Unsorted.anInt1038))) {
                                Class3_Sub24_Sub4.method1177(Unsorted.anInt1887, var18, (byte)-70, RSString.stringCombiner(new RSString[]{TextCore.aClass94_676, ColorCore.BankItemColor, var40.name}), var12, (short)39, Class3_Sub28_Sub9.aClass94_3621, var27);
                             }
@@ -499,9 +329,9 @@ public final class TextureOperation36 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if(!var3) {
+         if(!true) {
             CacheIndex.animationIndex = null;
          }
 
@@ -510,7 +340,7 @@ public final class TextureOperation36 extends TextureOperation {
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "ui.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "ui.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 
@@ -545,15 +375,11 @@ public final class TextureOperation36 extends TextureOperation {
 	      }
 	   }
 
-   final int method155(byte var1) {
+   final int getSpriteFrame() {
       try {
-         if(var1 != 19) {
-            this.method155((byte)-60);
-         }
-
          return this.anInt3434;
       } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "ui.HA(" + var1 + ')');
+         throw ClientErrorException.clientError(var3, "ui.HA(" + (byte) 19 + ')');
       }
    }
 

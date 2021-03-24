@@ -63,7 +63,7 @@ final class TextureOperation29 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(var1 == 0) {
             this.aClass75Array3392 = new Class75[var2.readUnsignedByte()];
@@ -84,12 +84,12 @@ final class TextureOperation29 extends TextureOperation {
             this.aBoolean2375 = var2.readUnsignedByte() == 1;
          }
 
-         if(!var3) {
+         if(!true) {
             this.method323(124, null);
          }
 
       } catch (RuntimeException var7) {
-         throw ClientErrorException.clientError(var7, "si.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var7, "si.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

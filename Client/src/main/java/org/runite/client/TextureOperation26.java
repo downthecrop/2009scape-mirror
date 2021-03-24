@@ -6,7 +6,7 @@ final class TextureOperation26 extends TextureOperation {
 
    private int anInt3073 = 0;
    private int anInt3074 = 4096;
-   static Class61 aClass61_3075 = new Class61();
+   static LinkedList aLinkedList_3075 = new LinkedList();
    static boolean aBoolean3078;
    static int anInt3081 = 0;
 
@@ -123,7 +123,7 @@ final class TextureOperation26 extends TextureOperation {
       try {
          int[] var4 = this.aClass114_2382.method1709(var1);
          if(this.aClass114_2382.aBoolean1580) {
-            int[] var5 = this.method152(0, var1, 32755);
+            int[] var5 = this.method152(0, var1);
 
             for(int var6 = 0; var6 < Class113.anInt1559; ++var6) {
                int var7 = var5[var6];
@@ -146,9 +146,9 @@ final class TextureOperation26 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if(!var3) {
+         if(!true) {
             method196();
          }
 
@@ -159,7 +159,7 @@ final class TextureOperation26 extends TextureOperation {
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "ca.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "ca.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

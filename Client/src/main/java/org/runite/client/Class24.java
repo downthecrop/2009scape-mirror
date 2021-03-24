@@ -83,77 +83,6 @@ public final class Class24 {
         }
     }
 
-    static void renderLocalNPCs() {
-        try {
-            GraphicDefinition.incomingBuffer.setBitAccess();
-            int var1 = GraphicDefinition.incomingBuffer.getBits(8);
-            int var2;
-            if (var1 < Class163.localNPCCount) {
-                for (var2 = var1; var2 < Class163.localNPCCount; ++var2) {
-                    Class3_Sub7.anIntArray2292[Class139.anInt1829++] = Class15.localNPCIndexes[var2];
-                }
-            }
-
-            if (Class163.localNPCCount < var1) {
-                throw new RuntimeException("gnpov1");
-            } else {
-                Class163.localNPCCount = 0;
-
-                for (var2 = 0; var1 > var2; ++var2) {
-                    int var3 = Class15.localNPCIndexes[var2];
-                    NPC var4 = NPC.npcs[var3];
-                    int var5 = GraphicDefinition.incomingBuffer.getBits(1);
-                    if (0 == var5) {
-                        Class15.localNPCIndexes[Class163.localNPCCount++] = var3;
-                        var4.anInt2838 = Class44.anInt719;
-                    } else {
-                        int var6 = GraphicDefinition.incomingBuffer.getBits(2);
-                        if (var6 == 0) {
-                            Class15.localNPCIndexes[Class163.localNPCCount++] = var3;
-                            var4.anInt2838 = Class44.anInt719;
-                            Class21.maskUpdateIndexes[Unsorted.maskUpdateCount++] = var3;
-                        } else {
-                            int var7;
-                            int var8;
-                            if (1 == var6) {
-                                Class15.localNPCIndexes[Class163.localNPCCount++] = var3;
-                                var4.anInt2838 = Class44.anInt719;
-                                var7 = GraphicDefinition.incomingBuffer.getBits(3);
-                                var4.walkStep(1, (byte) 32, var7);
-                                var8 = GraphicDefinition.incomingBuffer.getBits(1);
-                                if (1 == var8) {
-                                    Class21.maskUpdateIndexes[Unsorted.maskUpdateCount++] = var3;
-                                }
-                            } else if (var6 == 2) {
-                                Class15.localNPCIndexes[Class163.localNPCCount++] = var3;
-                                var4.anInt2838 = Class44.anInt719;
-                                if (GraphicDefinition.incomingBuffer.getBits(1) == 1) {
-                                    var7 = GraphicDefinition.incomingBuffer.getBits(3);
-                                    var4.walkStep(2, (byte) -122, var7);
-                                    var8 = GraphicDefinition.incomingBuffer.getBits(3);
-                                    var4.walkStep(2, (byte) 85, var8);
-                                } else {
-                                    var7 = GraphicDefinition.incomingBuffer.getBits(3);
-                                    var4.walkStep(0, (byte) -80, var7);
-                                }
-
-                                var7 = GraphicDefinition.incomingBuffer.getBits(1);
-                                if (var7 == 1) {
-                                    Class21.maskUpdateIndexes[Unsorted.maskUpdateCount++] = var3;
-                                }
-                            } else if (var6 == 3) {
-                                Class3_Sub7.anIntArray2292[Class139.anInt1829++] = var3;
-                            }
-                        }
-                    }
-                }
-
-            }
-        } catch (RuntimeException var9) {
-            throw ClientErrorException.clientError(var9, "dm.E(" + (byte) -11 + ')');
-        }
-    }
-
     static void method949(int var0, int var2, int var3, int var4) {
         try {
             int var6 = 0;
@@ -198,7 +127,7 @@ public final class Class24 {
                     int var5 = FontType.bold.method683(var4, 4 + var3, var2 - -15, aRandom3088, Class38_Sub1.anInt2618);
                     Class21.method1340(4 + var3, FontType.bold.method682(var4) + var5, var2, 15);
                 } else {
-                    Font var7 = var0.method868(TextureOperation0.nameIconsSpriteArray);
+                    Font var7 = var0.method868(Sprites.nameIconsSpriteArray);
                     if (null == var7) {
                         var7 = FontType.bold;
                     }

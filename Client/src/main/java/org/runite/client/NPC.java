@@ -31,143 +31,6 @@ public final class NPC extends Class140_Sub4 {
         }
     }
 
-    static void renderNPCMasks(int var0) {
-        try {
-            int i;
-            for (i = 0; Unsorted.maskUpdateCount > i; ++i) {
-                int mask = Class21.maskUpdateIndexes[i];
-                NPC npc = npcs[mask];
-                int var4 = GraphicDefinition.incomingBuffer.readUnsignedByte();
-                if ((var4 & 8) != 0) {
-                    var4 += GraphicDefinition.incomingBuffer.readUnsignedByte() << 8;
-                }
-
-                int var5;
-                int var6;
-                //Ordinal: 0 Hit
-                if ((64 & var4) != 0) {
-                    var5 = GraphicDefinition.incomingBuffer.readUnsignedByte();
-                    var6 = GraphicDefinition.incomingBuffer.readUnsignedNegativeByte();
-                    npc.method1970(var6, Class44.anInt719, var5);
-                    npc.anInt2781 = 300 + Class44.anInt719;
-                    npc.anInt2775 = GraphicDefinition.incomingBuffer.readUnsigned128Byte();
-                }
-
-                //Ordinal: 1 Hit 2
-                if ((var4 & 2) != 0) {
-                    var5 = GraphicDefinition.incomingBuffer.readUnsignedNegativeByte();
-                    var6 = GraphicDefinition.incomingBuffer.readUnsigned128Byte();
-                    npc.method1970(var6, Class44.anInt719, var5);
-                }
-
-                //Ordinal: 2 Animation
-                if ((var4 & 16) != 0) {
-                    var5 = GraphicDefinition.incomingBuffer.readUnsignedShort();
-                    var6 = GraphicDefinition.incomingBuffer.readUnsignedByte();
-                    if (65535 == var5) {
-                        var5 = -1;
-                    }
-
-                    Unsorted.method1772(var6, var5, 39, npc);
-                }
-
-                //Ordinal: 3 Face entity
-                if ((var4 & 4) != 0) {
-                    npc.anInt2772 = GraphicDefinition.incomingBuffer.readUnsignedShort128();
-                    if (npc.anInt2772 == 65535) {
-                        npc.anInt2772 = -1;
-                    }
-                }
-
-                //Ordinal: 4 Graphic
-                if (0 != (var4 & 128)) {
-                    var5 = GraphicDefinition.incomingBuffer.readUnsignedShort128();
-                    if (var5 == 65535) {
-                        var5 = -1;
-                    }
-
-                    var6 = GraphicDefinition.incomingBuffer.readIntLE();
-                    boolean var7 = true;
-                    if (var5 != -1 && npc.anInt2842 != -1 && SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition((byte) 42, var5).anInt542).forcedPriority < SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition((byte) 42, npc.anInt2842).anInt542).forcedPriority) {
-                        var7 = false;
-                    }
-
-                    if (var7) {
-                        npc.anInt2842 = var5;
-                        npc.anInt2759 = (65535 & var6) + Class44.anInt719;
-                        npc.anInt2761 = 0;
-                        npc.anInt2805 = 0;
-                        npc.anInt2799 = var6 >> 16;
-                        npc.anInt2826 = 1;
-                        if (npc.anInt2759 > Class44.anInt719) {
-                            npc.anInt2805 = -1;
-                        }
-
-                        if (npc.anInt2842 != -1 && Class44.anInt719 == npc.anInt2759) {
-                            int var8 = GraphicDefinition.getGraphicDefinition((byte) 42, npc.anInt2842).anInt542;
-                            if (var8 != -1) {
-                                SequenceDefinition var9 = SequenceDefinition.getAnimationDefinition(var8);
-                                if (var9.frames != null) {
-                                    Unsorted.method1470(npc.anInt2829, var9, 183921384, npc.anInt2819, false, 0);
-                                }
-                            }
-                        }
-                    }
-                }
-
-                //Ordinal: 5 Transform
-                if ((1 & var4) != 0) {
-                    if (npc.definition.method1474()) {
-                        Class3_Sub28_Sub8.method574(npc);
-                    }
-
-                    npc.setDefinitions(NPCDefinition.getNPCDefinition(GraphicDefinition.incomingBuffer.readUnsignedShortLE()));
-                    npc.setSize(npc.definition.size, 2);
-                    npc.renderAnimationId = npc.definition.renderAnimationId;
-                    if (npc.definition.method1474()) {
-                        Class70.method1286(npc.anIntArray2755[0], null, 0, npc, npc.anIntArray2767[0], WorldListCountry.localPlane, null);
-                    }
-                }
-
-                //Ordinal: 6 Force chat
-                if ((var4 & 32) != 0) {
-                    npc.textSpoken = GraphicDefinition.incomingBuffer.readString();
-                    npc.textCycle = 100;
-                }
-
-                //Ordinal: 7
-                if ((256 & var4) != 0) {
-                    var5 = GraphicDefinition.incomingBuffer.readUnsignedNegativeByte();
-                    int[] var12 = new int[var5];
-                    int[] var13 = new int[var5];
-                    int[] var14 = new int[var5];
-
-                    for (int var15 = 0; var5 > var15; ++var15) {
-                        int var10 = GraphicDefinition.incomingBuffer.readUnsignedShortLE();
-                        if (var10 == 65535) {
-                            var10 = -1;
-                        }
-
-                        var12[var15] = var10;
-                        var13[var15] = GraphicDefinition.incomingBuffer.readUnsigned128Byte();
-                        var14[var15] = GraphicDefinition.incomingBuffer.readUnsignedShort();
-                    }
-
-                    TextureOperation0.method273(var14, npc, var13, var12);
-                }
-
-                //Ordinal: 8 Face location
-                if ((var4 & 512) != 0) {
-                    npc.anInt2786 = GraphicDefinition.incomingBuffer.readUnsignedShort128();
-                    npc.anInt2762 = GraphicDefinition.incomingBuffer.readUnsignedShort();
-                }
-            }
-
-        } catch (RuntimeException var11) {
-            throw ClientErrorException.clientError(var11, "ta.M(" + var0 + ')');
-        }
-    }
-
     static byte[] method1985(Object var1, boolean var2) {
         try {
             if (var1 == null) {
@@ -241,6 +104,65 @@ public final class NPC extends Class140_Sub4 {
         }
     }
 
+    static void method273(int[] var0, NPC var2, int[] var3, int[] var4) {
+       try {
+          int var5 = 0;
+          while(var5 < var4.length) {
+             int var6 = var4[var5];
+             int var7 = var0[var5];
+             int var8 = var3[var5];
+
+             for(int var9 = 0; var7 != 0 && var9 < var2.aClass145Array2809.length; ++var9) {
+                if((1 & var7) != 0) {
+                   if(var6 == -1) {
+                      var2.aClass145Array2809[var9] = null;
+                   } else {
+                      SequenceDefinition var10 = SequenceDefinition.getAnimationDefinition(var6);
+                      Class145 var12 = var2.aClass145Array2809[var9];
+                      int var11 = var10.delayType;
+                      if(null != var12) {
+                         if(var12.animationId != var6) {
+                            if(SequenceDefinition.getAnimationDefinition(var12.animationId).forcedPriority <= var10.forcedPriority) {
+                               var12 = var2.aClass145Array2809[var9] = null;
+                            }
+                         } else if(var11 == 0) {
+                            var12 = var2.aClass145Array2809[var9] = null;
+                         } else if(var11 == 1) {
+                            var12.anInt1893 = 0;
+                            var12.anInt1894 = 0;
+                            var12.anInt1891 = 1;
+                            var12.anInt1897 = 0;
+                            var12.anInt1900 = var8;
+                            Unsorted.method1470(var2.anInt2829, var10, 183921384, var2.anInt2819, false, 0);
+                         } else if(var11 == 2) {
+                            var12.anInt1894 = 0;
+                         }
+                      }
+
+                      if(null == var12) {
+                         var12 = var2.aClass145Array2809[var9] = new Class145();
+                         var12.anInt1891 = 1;
+                         var12.anInt1897 = 0;
+                         var12.anInt1900 = var8;
+                         var12.animationId = var6;
+                         var12.anInt1894 = 0;
+                         var12.anInt1893 = 0;
+                         Unsorted.method1470(var2.anInt2829, var10, 183921384, var2.anInt2819, false, 0);
+                      }
+                   }
+                }
+
+                var7 >>>= 1;
+             }
+
+             ++var5;
+          }
+
+       } catch (RuntimeException var13) {
+          throw ClientErrorException.clientError(var13, "mi.B(" + (var0 != null?"{...}":"null") + ',' + (byte) 92 + ',' + (var2 != null?"{...}":"null") + ',' + (var3 != null?"{...}":"null") + ',' + (var4 != null?"{...}":"null") + ')');
+       }
+    }
+
     protected final void finalize() {
     }
 
@@ -256,7 +178,7 @@ public final class NPC extends Class140_Sub4 {
         try {
             if (this.definition != null) {
                 SequenceDefinition var13 = this.anInt2771 != -1 && this.anInt2828 == 0 ? SequenceDefinition.getAnimationDefinition(this.anInt2771) : null;
-                SequenceDefinition var14 = -1 != this.anInt2764 && (this.method1965().anInt368 != this.anInt2764 || var13 == null) ? SequenceDefinition.getAnimationDefinition(this.anInt2764) : null;
+                SequenceDefinition var14 = -1 != this.anInt2764 && (this.getRenderAnimationType().stand_animation != this.anInt2764 || var13 == null) ? SequenceDefinition.getAnimationDefinition(this.anInt2764) : null;
                 Model var15 = this.definition.method1476(this.aClass145Array2809, this.anInt2793, (byte) -116, this.anInt2813, this.anInt2776, this.anInt2760, this.anInt2832, var14, this.anInt2802, var13);
                 if (var15 != null) {
                     this.anInt2820 = var15.method1871();

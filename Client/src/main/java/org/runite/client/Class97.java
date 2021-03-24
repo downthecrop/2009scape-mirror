@@ -32,7 +32,7 @@ public final class Class97 {
     boolean aBoolean1379 = false;
     private int[][][] anIntArrayArrayArray1362;
     private int anInt1365 = -1;
-    private Class61 aClass61_1366 = new Class61();
+    private LinkedList aLinkedList_1366 = new LinkedList();
     private int anInt1368 = 0;
     private Class3_Sub20[] aClass3_Sub20Array1371;
 
@@ -105,8 +105,8 @@ public final class Class97 {
 
             this.aClass3_Sub20Array1371 = null;
             this.anIntArrayArrayArray1362 = null;
-            this.aClass61_1366.method1211(-118);
-            this.aClass61_1366 = null;
+            this.aLinkedList_1366.method1211(-118);
+            this.aLinkedList_1366 = null;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "nd.E(" + (byte) -22 + ')');
         }
@@ -130,7 +130,7 @@ public final class Class97 {
                         var4 = new Class3_Sub20(var2, this.anInt1368);
                         ++this.anInt1368;
                     } else {
-                        Class3_Sub20 var5 = (Class3_Sub20) this.aClass61_1366.method1212();
+                        Class3_Sub20 var5 = (Class3_Sub20) this.aLinkedList_1366.method1212();
                         var4 = new Class3_Sub20(var2, Objects.requireNonNull(var5).anInt2483);
                         this.aClass3_Sub20Array1371[var5.anInt2489] = null;
                         var5.unlink();
@@ -141,7 +141,7 @@ public final class Class97 {
                     this.aBoolean1379 = false;
                 }
 
-                this.aClass61_1366.method1216(var4);
+                this.aLinkedList_1366.method1216(var4);
                 return this.anIntArrayArrayArray1362[var4.anInt2483];
             }
         } catch (RuntimeException var6) {

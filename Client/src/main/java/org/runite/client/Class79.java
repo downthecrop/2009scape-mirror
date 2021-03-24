@@ -86,7 +86,7 @@ final class Class79 {
                         Class25.aBoolean488 = 1 == var0.readUnsignedByte();
                         RSInterface.aBoolean236 = var0.readUnsignedByte() == 1;
                         WorldListEntry.aBoolean2623 = var0.readUnsignedByte() == 1;
-                        TextureOperation0.aBoolean3275 = var0.readUnsignedByte() == 1;
+                        Unsorted.aBoolean3275 = var0.readUnsignedByte() == 1;
                         Class140_Sub6.aBoolean2910 = 1 == var0.readUnsignedByte();
                         Unsorted.anInt1137 = var0.readUnsignedByte();
                         if (2 < Unsorted.anInt1137) {

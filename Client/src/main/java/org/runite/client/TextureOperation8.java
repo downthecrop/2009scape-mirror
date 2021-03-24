@@ -114,7 +114,7 @@ final class TextureOperation8 extends TextureOperation {
       try {
          int[] var8 = this.aClass114_2382.method1709(var1);
          if(this.aClass114_2382.aBoolean1580) {
-            int[] var5 = this.method152(0, var1, 32755);
+            int[] var5 = this.method152(0, var1);
 
             for(int var6 = 0; var6 < Class113.anInt1559; ++var6) {
                int var4 = var5[var6] >> 4;
@@ -168,7 +168,7 @@ final class TextureOperation8 extends TextureOperation {
       }
    }
 
-   final void method158(int var1) {
+   final void postDecode() {
       try {
          if(null == this.anIntArrayArray3469) {
             this.anIntArrayArray3469 = new int[][]{{0, 0}, {4096, 4096}};
@@ -181,15 +181,11 @@ final class TextureOperation8 extends TextureOperation {
                this.method355();
             }
 
-            if(var1 != 16251) {
-               anInt3463 = 22;
-            }
-
             Class8.method844((byte)-9);
             this.method352();
          }
       } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "wi.P(" + var1 + ')');
+         throw ClientErrorException.clientError(var3, "wi.P(" + ')');
       }
    }
 
@@ -207,7 +203,7 @@ final class TextureOperation8 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(0 == var1) {
             this.anInt3462 = var2.readUnsignedByte();
@@ -219,12 +215,12 @@ final class TextureOperation8 extends TextureOperation {
             }
          }
 
-         if(!var3) {
+         if(!true) {
             this.anInt3462 = -6;
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "wi.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "wi.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

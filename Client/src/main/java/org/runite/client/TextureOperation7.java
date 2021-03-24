@@ -16,8 +16,8 @@ final class TextureOperation7 extends TextureOperation {
          int[] var3 = this.aClass114_2382.method1709(var1);
          int var4;
          if(this.aClass114_2382.aBoolean1580) {
-            int[] var6 = this.method152(0, var1, 32755);
-            int[] var7 = this.method152(1, var1, 32755);
+            int[] var6 = this.method152(0, var1);
+            int[] var7 = this.method152(1, var1);
             int var8 = this.anInt3343;
             if(var8 == 1) {
                for(var8 = 0; var8 < Class113.anInt1559; ++var8) {
@@ -93,10 +93,6 @@ final class TextureOperation7 extends TextureOperation {
 
    final int[][] method166(int var2) {
       try {
-         if(-1 != -1) {
-            this.method157(-8, null, false);
-         }
-
          int[][] var3 = this.aClass97_2376.method1594((byte)-125, var2);
          if(this.aClass97_2376.aBoolean1379) {
             int[][] var10 = this.method162(var2, 0, (byte)-87);
@@ -589,7 +585,7 @@ final class TextureOperation7 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(var1 == 0) {
             this.anInt3343 = var2.readUnsignedByte();
@@ -597,12 +593,12 @@ final class TextureOperation7 extends TextureOperation {
             this.aBoolean2375 = var2.readUnsignedByte() == 1;
          }
 
-         if(!var3) {
+         if(!true) {
             TextCore.aClass94_3339 = null;
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "pi.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "pi.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

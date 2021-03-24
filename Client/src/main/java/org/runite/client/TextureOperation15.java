@@ -29,16 +29,12 @@ final class TextureOperation15 extends TextureOperation {
       }
    }
 
-   final void method158(int var1) {
+   final void postDecode() {
       try {
-         if(var1 != 16251) {
-            Unsorted.aClass44_Sub1Array3201 = null;
-         }
-
-         this.aByteArray3195 = Class49.method1123(var1 ^ 16727940, this.anInt3197);
+         this.aByteArray3195 = Class49.method1123(this.anInt3197);
          this.method242();
       } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "hm.P(" + var1 + ')');
+         throw ClientErrorException.clientError(var3, "hm.P(" + ')');
       }
    }
 
@@ -166,12 +162,8 @@ final class TextureOperation15 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if(!var3) {
-            this.method157(-122, null, false);
-         }
-
          if(var1 == 0) {
             this.anInt3203 = this.anInt3204 = var2.readUnsignedByte();
          } else if(var1 == 1) {
@@ -189,7 +181,7 @@ final class TextureOperation15 extends TextureOperation {
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "hm.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "hm.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

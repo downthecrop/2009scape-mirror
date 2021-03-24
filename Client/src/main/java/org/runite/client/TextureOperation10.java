@@ -11,11 +11,8 @@ final class TextureOperation10 extends TextureOperation {
    private int[] anIntArray3443 = new int[257];
 
 
-   final void method158(int var1) {
+   final void postDecode() {
       try {
-         if(var1 != 16251) {
-            this.anIntArray3443 = null;
-         }
 
          if(this.anIntArrayArray3438 == null) {
             this.method345(1);
@@ -23,7 +20,7 @@ final class TextureOperation10 extends TextureOperation {
 
          this.method346();
       } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "um.P(" + var1 + ')');
+         throw ClientErrorException.clientError(var3, "um.P(" + ')');
       }
    }
 
@@ -230,9 +227,9 @@ final class TextureOperation10 extends TextureOperation {
       super(1, false);
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if(var3) {
+         if(true) {
             if(var1 == 0) {
                int var4 = var2.readUnsignedByte();
                if(var4 == 0) {
@@ -351,12 +348,9 @@ final class TextureOperation10 extends TextureOperation {
    final int[][] method166(int var2) {
       try {
          int[][] var3 = this.aClass97_2376.method1594((byte)90, var2);
-         if(-1 != -1) {
-            this.method157(-71, null, false);
-         }
 
          if(this.aClass97_2376.aBoolean1379) {
-            int[] var5 = this.method152(0, var2, 32755);
+            int[] var5 = this.method152(0, var2);
             int[] var7 = var3[1];
             int[] var6 = var3[0];
             int[] var8 = var3[2];

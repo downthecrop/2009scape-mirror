@@ -8,7 +8,7 @@ public final class Class131 {
     static RSString password = TextCore.emptyJagexString;
     static RSString username = TextCore.emptyJagexString;
     static int anInt1719 = -1;
-    static CacheIndex aClass153_1723;
+    static CacheIndex skeletonsReferenceIndex;
     public short[] aShortArray1718;
     public int anInt1720;
     public RSString[] aClass94Array1721;
@@ -26,58 +26,6 @@ public final class Class131 {
             this.aShortArray1727 = new short[this.anInt1720];
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "se.<init>(" + var1 + ')');
-        }
-    }
-
-    static void addLocalPlayers() {
-        try {
-            while (true) {
-                if (GraphicDefinition.incomingBuffer.method815(Unsorted.incomingPacketLength) >= 11) {
-                    int index = GraphicDefinition.incomingBuffer.getBits(11);
-                    if (index != 2047) {
-                        boolean var2 = false;
-                        if (null == TextureOperation0.players[index]) {
-                            TextureOperation0.players[index] = new Player();
-                            var2 = true;
-                            if (null != Class65.aClass3_Sub30Array986[index]) {
-                                TextureOperation0.players[index].parseAppearance(-54, Class65.aClass3_Sub30Array986[index]);
-                            }
-                        }
-
-                        Class56.localPlayerIndexes[Class159.localPlayerCount++] = index;
-                        Player var3 = TextureOperation0.players[index];
-                        var3.anInt2838 = Class44.anInt719;
-                        int var4 = GraphicDefinition.incomingBuffer.getBits(1);
-                        if (var4 == 1) {
-                            Class21.maskUpdateIndexes[Unsorted.maskUpdateCount++] = index;
-                        }
-
-                        int var5 = GraphicDefinition.incomingBuffer.getBits(5);
-                        int var6 = Class27.anIntArray510[GraphicDefinition.incomingBuffer.getBits(3)];
-                        if (var5 > 15) {
-                            var5 -= 32;
-                        }
-
-                        if (var2) {
-                            var3.anInt2806 = var3.anInt2785 = var6;
-                        }
-
-                        int var7 = GraphicDefinition.incomingBuffer.getBits(1);
-                        int var8 = GraphicDefinition.incomingBuffer.getBits(5);
-                        if (var8 > 15) {
-                            var8 -= 32;
-                        }
-
-                        var3.method1981(var5 + Class102.player.anIntArray2767[0], var7 == 1, Class102.player.anIntArray2755[0] + var8);
-                        continue;
-                    }
-                }
-
-                GraphicDefinition.incomingBuffer.method818();
-                return;
-            }
-        } catch (RuntimeException var9) {
-            throw ClientErrorException.clientError(var9, "se.D(" + -59 + ')');
         }
     }
 

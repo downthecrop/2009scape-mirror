@@ -243,7 +243,7 @@ final class Class3_Sub28_Sub5 extends Node {
    //Animation header
    Class3_Sub28_Sub5(CacheIndex cacheIndex0, CacheIndex var2, int frame) {
       try {
-         Class61 var5 = new Class61();
+         LinkedList var5 = new LinkedList();
          int size = cacheIndex0.getFileAmount(frame);
          this.animations = new AnimationHeader[size];
          int[] fileIds = cacheIndex0.getFileIds(frame);

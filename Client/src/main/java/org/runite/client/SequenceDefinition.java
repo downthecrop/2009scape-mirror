@@ -18,7 +18,7 @@ public final class SequenceDefinition {
 	static AbstractIndexedSprite aClass109_1856;
 	int forcedPriority = 5;
 	boolean aBoolean1859 = false;
-	static CacheIndex aClass153_1860;
+	static CacheIndex animationReferenceIndex;
 	int maxLoops = 99;
 	static int anInt1862 = 0;
 	int animId;
@@ -36,7 +36,7 @@ public final class SequenceDefinition {
 
 			SequenceDefinition var2 = (SequenceDefinition) Texture.aReferenceCache_1146.get(var0);
 			if (var2 == null) {
-				byte[] var3 = aClass153_1860.getFile(Class129.method1765(var0), Class67.method1262(117, var0));
+				byte[] var3 = animationReferenceIndex.getFile(Class129.method1765(var0), Class67.method1262(117, var0));
 				var2 = new SequenceDefinition();
 				var2.animId = var0;
 				if (var3 != null) {
@@ -413,7 +413,7 @@ public final class SequenceDefinition {
 			TextureOperation20.aLong1465 = 0L;
 			TextureOperation20.aClass67_1443.anInt1018 = 0;
 			TextureOperation26.aBoolean3078 = true;
-			TextureOperation.method153(112);
+			TextureOperation.method153();
 			Class24.anInt469 = -1;
 			Class7.anInt2166 = -1;
 			Unsorted.incomingOpcode = -1;
@@ -422,7 +422,7 @@ public final class SequenceDefinition {
 			TextureOperation12.outgoingBuffer.index = 0;
 			LinkableRSString.anInt2582 = -1;
 			AbstractSprite.anInt3699 = 0;
-			GraphicDefinition.incomingBuffer.index = 0;
+			BufferedDataStream.incomingBuffer.index = 0;
 
 			int var1;
 			for(var1 = 0; ClientErrorException.aClass96Array2114.length > var1; ++var1) {
@@ -455,7 +455,7 @@ public final class SequenceDefinition {
 			Class163.localNPCCount = 0;
 
 			for(var1 = 0; 2048 > var1; ++var1) {
-				TextureOperation0.players[var1] = null;
+				Unsorted.players[var1] = null;
 				Class65.aClass3_Sub30Array986[var1] = null;
 			}
 
@@ -463,20 +463,20 @@ public final class SequenceDefinition {
 				NPC.npcs[var1] = null;
 			}
 
-			Class102.player = TextureOperation0.players[2047] = new Player();
-			TextureOperation13.aClass61_3364.method1211(-112);
-			TextureOperation17.aClass61_3177.method1211(-58);
-			if(null != TextureOperation0.aClass61ArrayArrayArray3273) {
+			Class102.player = Unsorted.players[2047] = new Player();
+			TextureOperation13.aLinkedList_3364.method1211(-112);
+			TextureOperation17.aLinkedList_3177.method1211(-58);
+			if(null != Class39.aLinkedListArrayArrayArray3273) {
 				for(var1 = 0; 4 > var1; ++var1) {
 					for(int var2 = 0; var2 < 104; ++var2) {
 						for(int var3 = 0; var3 < 104; ++var3) {
-							TextureOperation0.aClass61ArrayArrayArray3273[var1][var2][var3] = null;
+							Class39.aLinkedListArrayArrayArray3273[var1][var2][var3] = null;
 						}
 					}
 				}
 			}
 
-			TextureOperation26.aClass61_3075 = new Class61();
+			TextureOperation26.aLinkedList_3075 = new LinkedList();
 			CS2Script.anInt1357 = 0;
 			Class8.anInt104 = 0;
 			TextureOperation6.method176(-114);

@@ -29,7 +29,7 @@ final class Class3_Sub9 extends Linkable {
       try {
          Class3_Sub28_Sub5 var2 = (Class3_Sub28_Sub5)Class159.aReferenceCache_2016.get(var0);
          if(var2 == null) {
-            var2 = Unsorted.method1089(Class131.aClass153_1723, Class7.aClass153_2160, var0);
+            var2 = Unsorted.method1089(Class131.skeletonsReferenceIndex, Class7.skinsReferenceIndex, var0);
             if(null != var2) {
                Class159.aReferenceCache_2016.put(var2, var0);
             }

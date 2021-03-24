@@ -47,7 +47,7 @@ public final class Client extends GameShell {
     static Class3_Sub24_Sub4 aClass3_Sub24_Sub4_1193;
     static long aLong1310 = 0L;
     static int anInt1354 = 0;
-    static Class61 aClass61_1471 = new Class61();
+    static LinkedList aLinkedList_1471 = new LinkedList();
     static Class30 aClass30_1572;
     static int[] anIntArray3780 = new int[32];
     static boolean paramAdvertisementSuppressed = false;
@@ -263,7 +263,7 @@ public final class Client extends GameShell {
                         }
 
                         if (inter.aBoolean219 && Class126.anInt1676 >= var12 && Unsorted.anInt1709 >= var13 && Class126.anInt1676 < var14 && Unsorted.anInt1709 < var15) {
-                            for (CS2Script var27 = (CS2Script) aClass61_1471.method1222(); var27 != null; var27 = (CS2Script) aClass61_1471.method1221()) {
+                            for (CS2Script var27 = (CS2Script) aLinkedList_1471.method1222(); var27 != null; var27 = (CS2Script) aLinkedList_1471.method1221()) {
                                 if (var27.aBoolean2446) {
                                     var27.unlink();
                                     var27.aClass11_2449.aBoolean163 = false;
@@ -341,7 +341,7 @@ public final class Client extends GameShell {
                                 var30.aClass11_2449 = inter;
                                 var30.scrollbarScrollAmount = Class29.anInt561;
                                 var30.arguments = inter.anObjectArray183;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (Class56.aClass11_886 != null || Class67.aClass11_1017 != null || Class38_Sub1.aBoolean2615 || inter.anInt189 != 1400 && Class3_Sub19.anInt2475 > 0) {
@@ -429,7 +429,7 @@ public final class Client extends GameShell {
                                     var30.worldSelectCursorPositionX = Class163_Sub1.anInt2993 - var10;
                                     var30.scrollbarScrollAmount = Class38_Sub1.anInt2614 - var11;
                                     var30.arguments = inter.anObjectArray165;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
                             }
 
@@ -440,7 +440,7 @@ public final class Client extends GameShell {
                                 var30.worldSelectCursorPositionX = Class126.anInt1676 - var10;
                                 var30.scrollbarScrollAmount = Unsorted.anInt1709 - var11;
                                 var30.arguments = inter.anObjectArray170;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (inter.aBoolean188 && !var25) {
@@ -452,7 +452,7 @@ public final class Client extends GameShell {
                                     var30.worldSelectCursorPositionX = Class126.anInt1676 - var10;
                                     var30.scrollbarScrollAmount = Unsorted.anInt1709 - var11;
                                     var30.arguments = inter.anObjectArray239;
-                                    Class65.aClass61_983.method1215(var30);
+                                    Class65.aLinkedList_983.method1215(var30);
                                 }
                             }
 
@@ -463,7 +463,7 @@ public final class Client extends GameShell {
                                 var30.worldSelectCursorPositionX = Class126.anInt1676 - var10;
                                 var30.scrollbarScrollAmount = Unsorted.anInt1709 - var11;
                                 var30.arguments = inter.anObjectArray180;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (!inter.aBoolean163 && var26) {
@@ -475,7 +475,7 @@ public final class Client extends GameShell {
                                     var30.worldSelectCursorPositionX = Class126.anInt1676 - var10;
                                     var30.scrollbarScrollAmount = Unsorted.anInt1709 - var11;
                                     var30.arguments = inter.anObjectArray248;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
                             }
 
@@ -486,7 +486,7 @@ public final class Client extends GameShell {
                                 var30.worldSelectCursorPositionX = Class126.anInt1676 - var10;
                                 var30.scrollbarScrollAmount = Unsorted.anInt1709 - var11;
                                 var30.arguments = inter.anObjectArray276;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (inter.aBoolean163 && !var26) {
@@ -498,7 +498,7 @@ public final class Client extends GameShell {
                                     var30.worldSelectCursorPositionX = Class126.anInt1676 - var10;
                                     var30.scrollbarScrollAmount = Unsorted.anInt1709 - var11;
                                     var30.arguments = inter.anObjectArray281;
-                                    Class65.aClass61_983.method1215(var30);
+                                    Class65.aLinkedList_983.method1215(var30);
                                 }
                             }
 
@@ -506,7 +506,7 @@ public final class Client extends GameShell {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray269;
-                                PacketParser.aClass61_82.method1215(var30);
+                                PacketParser.aLinkedList_82.method1215(var30);
                             }
 
                             CS2Script var22;
@@ -521,7 +521,7 @@ public final class Client extends GameShell {
                                                 var22 = new CS2Script();
                                                 var22.aClass11_2449 = inter;
                                                 var22.arguments = inter.anObjectArray161;
-                                                aClass61_1471.method1215(var22);
+                                                aLinkedList_1471.method1215(var22);
                                                 break label531;
                                             }
                                         }
@@ -530,7 +530,7 @@ public final class Client extends GameShell {
                                     var30 = new CS2Script();
                                     var30.aClass11_2449 = inter;
                                     var30.arguments = inter.anObjectArray161;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
 
                                 inter.anInt284 = PacketParser.anInt87;
@@ -547,7 +547,7 @@ public final class Client extends GameShell {
                                                 var22 = new CS2Script();
                                                 var22.aClass11_2449 = inter;
                                                 var22.arguments = inter.anObjectArray221;
-                                                aClass61_1471.method1215(var22);
+                                                aLinkedList_1471.method1215(var22);
                                                 break label512;
                                             }
                                         }
@@ -556,7 +556,7 @@ public final class Client extends GameShell {
                                     var30 = new CS2Script();
                                     var30.aClass11_2449 = inter;
                                     var30.arguments = inter.anObjectArray221;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
 
                                 inter.anInt242 = anInt2317;
@@ -573,7 +573,7 @@ public final class Client extends GameShell {
                                                 var22 = new CS2Script();
                                                 var22.aClass11_2449 = inter;
                                                 var22.arguments = inter.anObjectArray282;
-                                                aClass61_1471.method1215(var22);
+                                                aLinkedList_1471.method1215(var22);
                                                 break label493;
                                             }
                                         }
@@ -582,7 +582,7 @@ public final class Client extends GameShell {
                                     var30 = new CS2Script();
                                     var30.aClass11_2449 = inter;
                                     var30.arguments = inter.anObjectArray282;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
 
                                 inter.anInt213 = Class36.anInt641;
@@ -599,7 +599,7 @@ public final class Client extends GameShell {
                                                 var22 = new CS2Script();
                                                 var22.aClass11_2449 = inter;
                                                 var22.arguments = inter.anObjectArray174;
-                                                aClass61_1471.method1215(var22);
+                                                aLinkedList_1471.method1215(var22);
                                                 break label474;
                                             }
                                         }
@@ -608,7 +608,7 @@ public final class Client extends GameShell {
                                     var30 = new CS2Script();
                                     var30.aClass11_2449 = inter;
                                     var30.arguments = inter.anObjectArray174;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
 
                                 inter.anInt255 = Unsorted.anInt944;
@@ -625,7 +625,7 @@ public final class Client extends GameShell {
                                                 var22 = new CS2Script();
                                                 var22.aClass11_2449 = inter;
                                                 var22.arguments = inter.anObjectArray158;
-                                                aClass61_1471.method1215(var22);
+                                                aLinkedList_1471.method1215(var22);
                                                 break label455;
                                             }
                                         }
@@ -634,7 +634,7 @@ public final class Client extends GameShell {
                                     var30 = new CS2Script();
                                     var30.aClass11_2449 = inter;
                                     var30.arguments = inter.anObjectArray158;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
 
                                 inter.anInt311 = Class49.anInt815;
@@ -644,35 +644,35 @@ public final class Client extends GameShell {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray256;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (Class110.anInt1472 > inter.anInt234 && inter.anObjectArray156 != null) {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray156;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (Class167.anInt2087 > inter.anInt234 && inter.anObjectArray313 != null) {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray313;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (Class121.anInt1642 > inter.anInt234 && inter.anObjectArray268 != null) {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray268;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (Class140_Sub6.anInt2905 > inter.anInt234 && inter.anObjectArray315 != null) {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray315;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             inter.anInt234 = PacketParser.anInt3213;
@@ -683,7 +683,7 @@ public final class Client extends GameShell {
                                     var31.inputTextCode = Class133.inputTextCodeArray[var19];
                                     var31.anInt2443 = Class120.anIntArray1638[var19];
                                     var31.arguments = inter.anObjectArray220;
-                                    aClass61_1471.method1215(var31);
+                                    aLinkedList_1471.method1215(var31);
                                 }
                             }
 
@@ -691,7 +691,7 @@ public final class Client extends GameShell {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray217;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
                         }
                     }
@@ -1219,15 +1219,15 @@ public final class Client extends GameShell {
             }
 
             while (true) {
-                CS2Script var11 = (CS2Script) PacketParser.aClass61_82.method1220();
+                CS2Script var11 = (CS2Script) PacketParser.aLinkedList_82.method1220();
                 RSInterface var12;
                 RSInterface var13;
                 if (var11 == null) {
                     while (true) {
-                        var11 = (CS2Script) Class65.aClass61_983.method1220();
+                        var11 = (CS2Script) Class65.aLinkedList_983.method1220();
                         if (null == var11) {
                             while (true) {
-                                var11 = (CS2Script) aClass61_1471.method1220();
+                                var11 = (CS2Script) aLinkedList_1471.method1220();
                                 if (null == var11) {
                                     if (Class56.aClass11_886 != null) {
                                         PacketParser.method829();

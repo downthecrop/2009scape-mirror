@@ -6,7 +6,7 @@ final class TextureOperation13 extends TextureOperation {
 
    static int anInt3362 = -1;
    static int anInt3363;
-   static Class61 aClass61_3364 = new Class61();
+   static LinkedList aLinkedList_3364 = new LinkedList();
    static long aLong3366;
    static int[] anIntArray3367 = new int[64];
 

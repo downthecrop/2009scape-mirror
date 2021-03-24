@@ -51,7 +51,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                 Class163_Sub2_Sub1.aClass94Array4016[Unsorted.menuOptionCount] = var4;
                 Class114.anIntArray1578[Unsorted.menuOptionCount] = var0 == -1 ?Class3_Sub28_Sub5.anInt3590:var0;
                 TextureOperation27.aShortArray3095[Unsorted.menuOptionCount] = var6;
-                TextureOperation0.aLongArray3271[Unsorted.menuOptionCount] = var1;
+                Unsorted.aLongArray3271[Unsorted.menuOptionCount] = var1;
                 Class117.anIntArray1613[Unsorted.menuOptionCount] = var5;
                 Class27.anIntArray512[Unsorted.menuOptionCount] = var8;
                 ++Unsorted.menuOptionCount;
@@ -213,11 +213,11 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                         Class3_Sub1 var9 = Client.method44(var3);
                         ItemDefinition var10 = ItemDefinition.getItemDefinition(var3.itemAmounts[var15] + -1);
                         if(1 == Class164_Sub1.anInt3012 && var9.method99()) {
-                           if(var3.componentHash != Class3_Sub28_Sub18.anInt3764 || var15 != Class3_Sub30_Sub1.anInt1473) {
+                           if(var3.componentHash != Class3_Sub28_Sub18.anInt3764 || var15 != BufferedDataStream.anInt1473) {
                               method1177(-1, var10.itemId, (byte)-91, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aClass94_378, ColorCore.BankItemColor, var10.name}), var15, (short)40, TextCore.HasUse, var3.componentHash);
                            }
                         } else if(GameObject.aBoolean1837 && var9.method99()) {
-                           Class3_Sub28_Sub9 var18 = Unsorted.anInt1038 != -1 ?Class61.method1210(Unsorted.anInt1038):null;
+                           Class3_Sub28_Sub9 var18 = Unsorted.anInt1038 != -1 ? LinkedList.method1210(Unsorted.anInt1038):null;
                            if(0 != (16 & Class164.anInt2051) && (var18 == null || var18.anInt3614 != var10.method1115(var18.anInt3614, 103, Unsorted.anInt1038))) {
                               method1177(Unsorted.anInt1887, var10.itemId, (byte)-89, RSString.stringCombiner(new RSString[]{TextCore.aClass94_676, ColorCore.BankItemColor, var10.name}), var15, (short)3, Class3_Sub28_Sub9.aClass94_3621, var3.componentHash);
                            }
@@ -407,7 +407,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
    private void method481(byte var1, int var2) {
       try {
 
-         for(Class3_Sub22 var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1222(); null != var4; var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1221()) {
+         for(Class3_Sub22 var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1222(); null != var4; var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1221()) {
             if(var2 < 0 || var4.anInt2514 == var2) {
                if(null != var4.aClass3_Sub24_Sub1_2507) {
                   var4.aClass3_Sub24_Sub1_2507.method417(Class21.anInt443 / 100);
@@ -485,7 +485,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
       try {
          this.method493((byte)-123, var4, 64, var2);
          if((2 & this.anIntArray3518[var2]) != 0) {
-            for(Class3_Sub22 var5 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1212(); var5 != null; var5 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1219(98)) {
+            for(Class3_Sub22 var5 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1212(); var5 != null; var5 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1219(98)) {
                if(var5.anInt2514 == var2 && var5.anInt2506 < 0) {
                   this.aClass3_Sub22ArrayArray3512[var2][var5.anInt2520] = null;
                   this.aClass3_Sub22ArrayArray3512[var2][var4] = var5;
@@ -539,7 +539,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                   this.aClass3_Sub22ArrayArray3513[var2][var7.anInt2517] = var7;
                }
 
-               this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1215(var7);
+               this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1215(var7);
                this.aClass3_Sub22ArrayArray3512[var2][var4] = var7;
             }
          }
@@ -748,7 +748,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
 
    private void method489(int var1, int var2) {
       try {
-         for(Class3_Sub22 var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1222(); var3 != null; var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1221()) {
+         for(Class3_Sub22 var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1222(); var3 != null; var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1221()) {
             if((var2 < 0 || var3.anInt2514 == var2) && var3.anInt2506 < 0) {
                this.aClass3_Sub22ArrayArray3512[var3.anInt2514][var3.anInt2520] = null;
                var3.anInt2506 = 0;
@@ -928,7 +928,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
             if((2 & this.anIntArray3518[var4]) == 0) {
                var5.anInt2506 = 0;
             } else {
-               for(Class3_Sub22 var6 = (Class3_Sub22) Objects.requireNonNull(this.aClass3_Sub24_Sub3_3527).aClass61_3489.method1222(); null != var6; var6 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1221()) {
+               for(Class3_Sub22 var6 = (Class3_Sub22) Objects.requireNonNull(this.aClass3_Sub24_Sub3_3527).aLinkedList_3489.method1222(); null != var6; var6 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1221()) {
                   if(var5.anInt2514 == var6.anInt2514 && var6.anInt2506 < 0 && var6 != var5) {
                      var5.anInt2506 = 0;
                      break;
@@ -1059,7 +1059,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
    private void method497(int var1, int var2) {
       try {
          if(0 != (4 & this.anIntArray3518[var1])) {
-            for(Class3_Sub22 var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1222(); null != var4; var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1221()) {
+            for(Class3_Sub22 var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1222(); null != var4; var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1221()) {
                if(var1 == var4.anInt2514) {
                   var4.anInt2516 = 0;
                }
@@ -1160,7 +1160,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
    private void method502(int var1, int var2) {
       try {
          if(var2 != ~(this.anIntArray3518[var1] & 2)) {
-            for(Class3_Sub22 var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1222(); var3 != null; var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1221()) {
+            for(Class3_Sub22 var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1222(); var3 != null; var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1221()) {
                if(var3.anInt2514 == var1 && this.aClass3_Sub22ArrayArray3512[var1][var3.anInt2520] == null && var3.anInt2506 < 0) {
                   var3.anInt2506 = 0;
                }

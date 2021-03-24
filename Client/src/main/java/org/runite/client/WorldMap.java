@@ -186,42 +186,6 @@ final class WorldMap extends Node {
         }
     }
 
-    static void method628(int var1, int var2, Player var3) {
-        try {
-
-            if (var3.anInt2771 == var2 && var2 != -1) {
-                SequenceDefinition var4 = SequenceDefinition.getAnimationDefinition(var2);
-                int var5 = var4.delayType;
-                if (1 == var5) {
-                    var3.anInt2828 = var1;
-                    var3.anInt2760 = 0;
-                    var3.anInt2776 = 1;
-                    var3.anInt2832 = 0;
-                    var3.anInt2773 = 0;
-                    Unsorted.method1470(var3.anInt2829, var4, 183921384, var3.anInt2819, Class102.player == var3, var3.anInt2832);
-                }
-
-                if (var5 == 2) {
-                    var3.anInt2773 = 0;
-                }
-            } else if (-1 == var2 || var3.anInt2771 == -1 || SequenceDefinition.getAnimationDefinition(var2).forcedPriority >= SequenceDefinition.getAnimationDefinition(var3.anInt2771).forcedPriority) {
-                var3.anInt2776 = 1;
-                var3.anInt2832 = 0;
-                var3.anInt2828 = var1;
-                var3.anInt2811 = var3.anInt2816;
-                var3.anInt2773 = 0;
-                var3.anInt2760 = 0;
-                var3.anInt2771 = var2;
-                if (var3.anInt2771 != -1) {
-                    Unsorted.method1470(var3.anInt2829, SequenceDefinition.getAnimationDefinition(var3.anInt2771), 183921384, var3.anInt2819, var3 == Class102.player, var3.anInt2832);
-                }
-            }
-
-        } catch (RuntimeException var6) {
-            throw ClientErrorException.clientError(var6, "pa.C(" + 0 + ',' + var1 + ',' + var2 + ',' + (var3 != null ? "{...}" : "null") + ')');
-        }
-    }
-
     public static void drawWorldMap(int var0, int var2, int var3, int var4) {
         try {
             if (anInt2737 < 100) {

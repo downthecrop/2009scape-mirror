@@ -14,22 +14,20 @@ final class TextureOperation27 extends TextureOperation {
    static CacheIndex aClass153_3098;
 
 
-   final void method158(int var1) {
+   final void postDecode() {
       try {
-         if(var1 == 16251) {
-            this.method202();
-         }
+         this.method202();
       } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "d.P(" + var1 + ')');
+         throw ClientErrorException.clientError(var3, "d.P(" + ')');
       }
    }
 
-   static int method201(int var0, int var1, int var2) {
+   static int method201(int var0, int var1) {
       try {
          int var3 = var1 + -1 & var0 >> 31;
          return var3 + (var0 + (var0 >>> 31)) % var1;
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "d.C(" + var0 + ',' + var1 + ',' + var2 + ')');
+         throw ClientErrorException.clientError(var5, "d.C(" + var0 + ',' + var1 + ',' + -58 + ')');
       }
    }
 
@@ -54,7 +52,7 @@ final class TextureOperation27 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(var1 == 0) {
             this.anInt3085 = var2.readUnsignedByte();
@@ -64,12 +62,12 @@ final class TextureOperation27 extends TextureOperation {
             this.anInt3086 = var2.readUnsignedByte();
          }
 
-         if(!var3) {
+         if(!true) {
             this.anIntArray3089 = null;
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "d.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "d.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

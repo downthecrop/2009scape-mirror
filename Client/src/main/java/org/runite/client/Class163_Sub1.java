@@ -10,7 +10,7 @@ public class Class163_Sub1 extends Class163 {
    static long[] aLongArray2986 = new long[32];
    static byte[][] aByteArrayArray2987;
    static int anInt2989 = 0;
-   static Class61 aClass61_2990 = new Class61();
+   static LinkedList aLinkedList_2990 = new LinkedList();
    static int anInt2993 = 0;
 
 
@@ -79,7 +79,7 @@ public class Class163_Sub1 extends Class163 {
                      }
 
                      if(var7 != -1) {
-                        Class3_Sub30_Sub1.method806(var7);
+                        BufferedDataStream.method806(var7);
                      }
 
                      Class38_Sub1.aBoolean2615 = false;

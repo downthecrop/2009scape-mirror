@@ -19,7 +19,7 @@ class Class38 {
                     var2 = Class56.localPlayerIndexes[var1];
                 }
 
-                Player var3 = TextureOperation0.players[var2];
+                Player var3 = Unsorted.players[var2];
                 if (var3 != null) {
                     Unsorted.method68(var3.getSize(), var3);
                 }

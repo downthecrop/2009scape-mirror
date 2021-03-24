@@ -29,8 +29,8 @@ public final class MouseListeningClass implements MouseListener, MouseMotionList
 
     static void method2087() {
         try {
-            Class3_Sub4 var1 = (Class3_Sub4) TextureOperation26.aClass61_3075.method1222();
-            for (; var1 != null; var1 = (Class3_Sub4) TextureOperation26.aClass61_3075.method1221()) {
+            Class3_Sub4 var1 = (Class3_Sub4) TextureOperation26.aLinkedList_3075.method1222();
+            for (; var1 != null; var1 = (Class3_Sub4) TextureOperation26.aLinkedList_3075.method1221()) {
                 if (var1.anInt2259 > 0) {
                     var1.anInt2259 -= 1;
                 }
