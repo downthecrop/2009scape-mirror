@@ -73,10 +73,10 @@ final class KeyboardListener implements KeyListener, FocusListener {
                DeveloperConsole.INSTANCE.toggle();
                return;
          }
-//         if (DeveloperConsole.INSTANCE.getOpen()) {
-//            DeveloperConsole.INSTANCE.handleKeyDown(var1);
-//            return;
-//         }
+         if (DeveloperConsole.INSTANCE.getOpen()) {
+            DeveloperConsole.INSTANCE.handleKeyDown(var1);
+            return;
+         }
 
          if(null != Class3_Sub13_Sub3.aClass148_3049) {
             Class3_Sub13_Sub33.anInt3398 = 0;

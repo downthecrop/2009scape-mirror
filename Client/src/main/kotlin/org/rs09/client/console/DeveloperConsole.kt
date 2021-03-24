@@ -192,12 +192,13 @@ object DeveloperConsole {
             Class3_Sub13_Sub1.outgoingBuffer.finishVarshortPacket(Class3_Sub13_Sub1.outgoingBuffer.index - index)
         }
 
+        println(str)
         val clientCommand: MutableList<String>
         val args: Any
         val command: String = str
         clientCommand = command.split(' ') as MutableList<String>
         val argSize = clientCommand.size
-        println(str)
+
         when (clientCommand[0]) {
             "enableconsolepackets" -> {
                 ENABLE_PACKETS = true
@@ -340,7 +341,8 @@ object DeveloperConsole {
             }
 
             else -> {
-
+                System.out.println("Console command: $str")
+                sendCommand(str)
             }
         }
     }
@@ -406,10 +408,10 @@ object DeveloperConsole {
         }
     }
 
-    private fun sendCommand(command: String) {
+    @JvmStatic
+    fun sendCommand(command: String) {
         Class3_Sub13_Sub1.outgoingBuffer.putOpcode(44)
-        Class3_Sub13_Sub1.outgoingBuffer.writeByte(command.length + -1)
-//        Class3_Sub13_Sub1.outgoingBuffer.writeString(command.substring(2))
+        Class3_Sub13_Sub1.outgoingBuffer.writeByte(command.length + 2)
+        Class3_Sub13_Sub1.outgoingBuffer.writeString(command)
     }
-
 }

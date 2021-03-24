@@ -4111,7 +4111,6 @@ public class Unsorted {
                                 if (var11.anInt189 == 1405) {
                                     if (DeveloperConsole.INSTANCE.getOpen()) {
                                         gameWindowWidth = var11.width + var13;
-                                        //Toolkit.getActiveToolkit().fillRect(0, 0, var11.width + var13, 300, 0x332277, 128);
                                     }
 
                                     if (ClientCommands.fpsOverlayEnabled) {
