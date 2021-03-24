@@ -1,5 +1,8 @@
 package rs09.game.node.entity.skill.magic
 
+import core.game.node.entity.Entity
+import core.game.node.entity.impl.Animator.Priority
+import core.game.node.entity.impl.Projectile
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.diary.DiaryType
@@ -16,6 +19,35 @@ import rs09.ServerConstants
 import rs09.game.node.entity.skill.magic.spellconsts.Modern
 
 class ModernListeners : SpellListener("modern"){
+
+    private val CONFUSE_START = Graphics(102, 96)
+    private val CONFUSE_PROJECTILE = Projectile.create(null as Entity?, null, 103, 40, 36, 52, 75, 15, 11)
+    private val CONFUSE_END = Graphics(104, 96)
+    private val WEAKEN_START = Graphics(105, 96)
+    private val WEAKEN_PROJECTILE = Projectile.create(null as Entity?, null, 106, 40, 36, 52, 75, 15, 11)
+    private val WEAKEN_END = Graphics(107, 96)
+    private val CURSE_START = Graphics(108, 96)
+    private val CURSE_PROJECTILE = Projectile.create(null as Entity?, null, 109, 40, 36, 52, 75, 15, 11)
+    private val CURSE_END = Graphics(110, 96)
+    private val VULNER_START = Graphics(167, 96)
+    private val VULNER_PROJECTILE = Projectile.create(null as Entity?, null, 168, 40, 36, 52, 75, 15, 11)
+    private val VULNER_END = Graphics(169, 96)
+    private val ENFEEBLE_START = Graphics(170, 96)
+    private val ENFEEBLE_PROJECTILE = Projectile.create(null as Entity?, null, 171, 40, 36, 52, 75, 15, 11)
+    private val ENFEEBLE_END = Graphics(172, 96)
+    private val STUN_START = Graphics(173, 96)
+    private val STUN_PROJECTILE = Projectile.create(null as Entity?, null, 174, 40, 36, 52, 75, 15, 11)
+    private val STUN_END = Graphics(107, 96)
+    private val LOW_ANIMATION = Animation(716, Priority.HIGH)
+    private val HIGH_ANIMATION = Animation(729, Priority.HIGH)
+    private val LOW_ALCH_ANIM = Animation(712)
+    private val LOW_ALCH_GFX = Graphics(112,5)
+    private val HIGH_ALCH_ANIM = Animation(713)
+    private val HIGH_ALCH_GFX = Graphics(113,5)
+    private val BONE_CONVERT_GFX = Graphics(141, 96)
+    private val BONE_CONVERT_ANIM = Animation(722)
+
+
     override fun defineListeners() {
 
         onCast(Modern.HOME_TELEPORT,NONE){player, _ ->
@@ -85,6 +117,24 @@ class ModernListeners : SpellListener("modern"){
             superheat(player,item)
         }
 
+        onCast(Modern.BONES_TO_BANANAS,NONE){player, _ ->
+            requires(player,15, arrayOf(Item(Items.EARTH_RUNE_557,2), Item(Items.WATER_RUNE_555,2), Item(Items.NATURE_RUNE_561,1)))
+            boneConvert(player,true)
+        }
+
+        onCast(Modern.BONES_TO_PEACHES,NONE){player, _ ->
+            requires(player,60, arrayOf(Item(Items.EARTH_RUNE_557,4), Item(Items.WATER_RUNE_555,4), Item(Items.NATURE_RUNE_561,2)))
+            boneConvert(player,false)
+        }
+    }
+
+    private fun boneConvert(player: Player,bananas: Boolean){
+        if(!bananas && !player.savedData.activityData.isBonesToPeaches){
+            player.sendMessage("You can only learn this spell from the Mage Training Arena.")
+            return
+        }
+
+
     }
 
     private fun superheat(player: Player,item: Item){
@@ -112,7 +162,7 @@ class ModernListeners : SpellListener("modern"){
         removeRunes(player)
         addXP(player,53.0)
         player.audioManager.send(117)
-        player.interfaceManager.setViewedTab(6)
+        showMagicTab(player)
         player.pulseManager.run(SmeltingPulse(player, item, bar, 1, true))
         setDelay(player,false)
     }
@@ -120,6 +170,11 @@ class ModernListeners : SpellListener("modern"){
     private fun alchemize(player: Player,item: Item,high:Boolean){
         if(item.name == "Coins") player.sendMessage("You can't alchemize something that's already gold!").also { return }
         if(!item.definition.isTradeable) player.sendMessage("You can't cast this spell on something like that.").also { return }
+
+        if(player.zoneMonitor.isInZone("Alchemists' Playground")){
+            player.sendMessage("You can only alch items from the cupboards!")
+            return
+        }
 
         val coins = Item(995, item.definition.getAlchemyValue(high))
         if (coins.amount > 0 && !player.inventory.hasSpaceFor(coins)) {
@@ -133,9 +188,9 @@ class ModernListeners : SpellListener("modern"){
             removeRunes(player)
             player.audioManager.send(if (high) 97 else 98)
             if (high) {
-                player.visualize(Animation(713), Graphics(113, 5))
+                player.visualize(HIGH_ALCH_ANIM,HIGH_ALCH_GFX)
             } else {
-                player.visualize(Animation(712), Graphics(112, 5))
+                player.visualize(LOW_ALCH_ANIM,LOW_ALCH_GFX)
             }
 
             if(coins.amount > 0)
@@ -146,7 +201,7 @@ class ModernListeners : SpellListener("modern"){
             }
 
             addXP(player,if(high) 65.0 else 31.0)
-            player.interfaceManager.setViewedTab(6)
+            showMagicTab(player)
             setDelay(player,false)
         }
     }

@@ -223,6 +223,8 @@ public enum Master {
 	List<Task> tasks;
 	Master(int npc_id, int required_combat, int required_slayer, int[] assignment_range, int[] streakPoints, Task... tasks) {
 		this.npc_id = npc_id;
+		this.required_combat = required_combat;
+		this.required_slayer = required_slayer;
 		this.assignment_range = assignment_range;
 		this.streakPoints = streakPoints;
 		this.tasks = new ArrayList<>(Arrays.asList(tasks));
