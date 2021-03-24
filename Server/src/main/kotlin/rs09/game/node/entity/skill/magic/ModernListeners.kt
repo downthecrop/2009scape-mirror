@@ -1,5 +1,7 @@
 package rs09.game.node.entity.skill.magic
 
+import core.game.content.activity.mta.impl.GraveyardZone
+import core.game.content.global.Bones
 import core.game.node.entity.Entity
 import core.game.node.entity.impl.Animator.Priority
 import core.game.node.entity.impl.Projectile
@@ -129,12 +131,42 @@ class ModernListeners : SpellListener("modern"){
     }
 
     private fun boneConvert(player: Player,bananas: Boolean){
-        if(!bananas && !player.savedData.activityData.isBonesToPeaches){
+        val isInMTA = player.zoneMonitor.isInZone("Creature Graveyard")
+        if(isInMTA && player.getAttribute("tablet-spell",false)){
+            player.sendMessage("You can not use this tablet in the Mage Training Arena.")
+            return
+        }
+
+        if(!bananas && !player.savedData.activityData.isBonesToPeaches && !player.getAttribute("tablet-spell",false)){
             player.sendMessage("You can only learn this spell from the Mage Training Arena.")
             return
         }
 
+        val bones = if(isInMTA) intArrayOf(6904,6905,6906,6907) else Bones.values().map { it.itemId }.toIntArray()
 
+        for(item in player.inventory.toArray()){
+            item ?: continue
+            if(isInMTA){
+                if(bones.contains(item.id)){
+                    val inInventory = player.inventory.getAmount(item.id)
+                    val amount = inInventory * GraveyardZone.BoneType.forItem(Item(item.id)).ordinal + 1
+                    if(amount > 0){
+                        player.inventory.remove(Item(item.id,inInventory))
+                        player.inventory.add(Item(if(bananas) Items.BANANA_1963 else Items.PEACH_6883,amount))
+                    }
+                }
+            } else {
+                if(bones.contains(item.id)){
+                    val inInventory = player.inventory.getAmount(item.id)
+                    player.inventory.remove(Item(item.id,inInventory))
+                    player.inventory.add(Item(if(bananas) Items.BANANA_1963 else Items.PEACH_6883,inInventory))
+                }
+            }
+        }
+        visualizeSpell(player,BONE_CONVERT_ANIM, BONE_CONVERT_GFX)
+        removeRunes(player)
+        addXP(player,if(bananas) 25.0 else 65.0)
+        setDelay(player,false)
     }
 
     private fun superheat(player: Player,item: Item){
@@ -186,11 +218,10 @@ class ModernListeners : SpellListener("modern"){
 
         if(player.inventory.remove(Item(item.id,1))) {
             removeRunes(player)
-            player.audioManager.send(if (high) 97 else 98)
             if (high) {
-                player.visualize(HIGH_ALCH_ANIM,HIGH_ALCH_GFX)
+                visualizeSpell(player,HIGH_ALCH_ANIM,HIGH_ALCH_GFX,97)
             } else {
-                player.visualize(LOW_ALCH_ANIM,LOW_ALCH_GFX)
+                visualizeSpell(player,LOW_ALCH_ANIM,LOW_ALCH_GFX,98)
             }
 
             if(coins.amount > 0)

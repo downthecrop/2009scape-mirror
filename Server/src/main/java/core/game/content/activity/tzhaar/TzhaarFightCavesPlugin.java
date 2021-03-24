@@ -141,6 +141,7 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 	public void leave(Player player, int wave) {
 		activeNPCs.clear();
 		player.getProperties().setTeleportLocation(getSpawnLocation());
+		player.getSkills().restore();
 		if (wave == 63) {
 			if (!player.getInventory().add(new Item(6570))) {
 				GroundItemManager.create(new Item(6570), getSpawnLocation(), player);
