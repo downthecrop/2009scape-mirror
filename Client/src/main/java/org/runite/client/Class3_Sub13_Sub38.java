@@ -57,7 +57,7 @@ final class Class3_Sub13_Sub38 extends TextureOperation {
          if(this.aClass114_2382.aBoolean1580) {
             int var5 = this.anInt3450 >> 1;
             int[][] var6 = this.aClass114_2382.method1710((byte)93);
-            Random var7 = new Random((long)this.anInt3454);
+            Random var7 = new Random(this.anInt3454);
 
             for(int var8 = 0; this.anInt3447 > var8; ++var8) {
                int var9 = this.anInt3450 > 0?this.anInt3444 + -var5 + TextureOperation.method1603((byte)-99, this.anInt3450, var7):this.anInt3444;

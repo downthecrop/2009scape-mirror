@@ -16,7 +16,7 @@ final class Class3_Sub13_Sub16 extends TextureOperation {
 
    private void method242() {
       try {
-         Random var2 = new Random((long)this.anInt3197);
+         Random var2 = new Random(this.anInt3197);
          this.aShortArray3200 = new short[512];
           if(0 < this.anInt3193) {
              for(int var3 = 0; 512 > var3; ++var3) {
@@ -32,7 +32,7 @@ final class Class3_Sub13_Sub16 extends TextureOperation {
    final void method158(int var1) {
       try {
          if(var1 != 16251) {
-            Unsorted.aClass44_Sub1Array3201 = (WorldListEntry[])null;
+            Unsorted.aClass44_Sub1Array3201 = null;
          }
 
          this.aByteArray3195 = Class49.method1123(var1 ^ 16727940, this.anInt3197);
@@ -91,18 +91,18 @@ final class Class3_Sub13_Sub16 extends TextureOperation {
                          var11 = var11 >= 0 ? var11 : -var11;
                          var12 = var11 >= var10 ? var11 : var10;
                      } else if (4 == var19) {
-                         var10 = (int) (Math.sqrt((double) ((float) (0 > var10 ? -var10 : var10) / 4096.0F)) * 4096.0D);
-                         var11 = (int) (Math.sqrt((double) ((float) (var11 >= 0 ? var11 : -var11) / 4096.0F)) * 4096.0D);
+                         var10 = (int) (Math.sqrt((float) (0 > var10 ? -var10 : var10) / 4096.0F) * 4096.0D);
+                         var11 = (int) (Math.sqrt((float) (var11 >= 0 ? var11 : -var11) / 4096.0F) * 4096.0D);
                          var12 = var11 + var10;
                          var12 = var12 * var12 >> 12;
                      } else if (var19 == 5) {
                          var10 *= var10;
                          var11 *= var11;
-                         var12 = (int) (Math.sqrt(Math.sqrt((double) ((float) (var11 + var10) / 1.6777216E7F))) * 4096.0D);
+                         var12 = (int) (Math.sqrt(Math.sqrt((float) (var11 + var10) / 1.6777216E7F)) * 4096.0D);
                      } else if (2 == var19) {
                          var12 = (var10 >= 0 ? var10 : -var10) - -(var11 < 0 ? -var11 : var11);
                      } else {
-                         var12 = (int) (4096.0D * Math.sqrt((double) ((float) (var11 * var11 + var10 * var10) / 1.6777216E7F)));
+                         var12 = (int) (4096.0D * Math.sqrt((float) (var11 * var11 + var10 * var10) / 1.6777216E7F));
                      }
 
                      if(var12 >= Class3_Sub28_Sub5.anInt3589) {
@@ -169,7 +169,7 @@ final class Class3_Sub13_Sub16 extends TextureOperation {
    final void method157(int var1, DataBuffer var2, boolean var3) {
       try {
          if(!var3) {
-            this.method157(-122, (DataBuffer)null, false);
+            this.method157(-122, null, false);
          }
 
          if(var1 == 0) {

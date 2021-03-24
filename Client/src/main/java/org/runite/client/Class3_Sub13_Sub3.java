@@ -222,7 +222,7 @@ public final class Class3_Sub13_Sub3 extends TextureOperation {
                int var16 = var15 >> 12;
                int var19 = var17 * var17 >> 12;
                int var18 = var16 * var16 >> 12;
-               int var20 = (int) (Math.sqrt((double) ((float) (var18 + var19 - -4096) / 4096.0F)) * 4096.0D);
+               int var20 = (int) (Math.sqrt((float) (var18 + var19 - -4096) / 4096.0F) * 4096.0D);
                int var11;
                int var12;
                int var13;

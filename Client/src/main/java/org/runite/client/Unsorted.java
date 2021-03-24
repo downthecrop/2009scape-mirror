@@ -5,11 +5,10 @@ import org.rs09.XPGainDraw;
 import org.rs09.client.config.GameConfig;
 import org.rs09.client.console.DeveloperConsole;
 import org.rs09.client.data.HashTable;
+import org.rs09.client.data.ReferenceCache;
+import org.rs09.client.net.Connection;
 import org.rs09.client.rendering.Toolkit;
 import org.rs09.client.util.ArrayUtils;
-
-import org.rs09.client.net.Connection;
-import org.rs09.client.data.ReferenceCache;
 
 import java.awt.*;
 import java.io.IOException;
@@ -24,25 +23,10 @@ public class Unsorted {
     public static boolean aBoolean2154;
     public static int[] anIntArray2157 = new int[50];
     public static int[] anIntArray882 = new int[200];
-    static int anInt942;
-    static int anInt944 = 0;
-    static int anInt952;
-    static int anInt963;
     public static int anInt144;
     public static int anInt136 = 0;
     public static int anInt120 = 255;
     public static byte[][][] aByteArrayArrayArray113 = new byte[4][104][104];
-    static int anInt1037;
-    static int anInt1038;
-    static Class30 aClass30_1039;
-    static int anInt3695;
-    static int anInt1042;
-    static CacheIndex aClass153_1043;
-    static AbstractSprite[] aAbstractSpriteArray996;
-    static int maskUpdateCount = 0;
-    static int anInt998 = 0;
-    static int anInt999 = -1;
-    static int wlPacketSize = 0;
     public static int[] anIntArray39;
     public static int anInt40 = 0;
     public static Connection js5Connection;
@@ -84,16 +68,7 @@ public class Unsorted {
     public static boolean aBoolean4068 = true;
     public static Class3_Sub2[][][] aClass3_Sub2ArrayArrayArray4070;
     public static int anInt4073;
-    static ReferenceCache aReferenceCache_684 = new ReferenceCache(64);
-    static int[] anIntArray686 = new int[2];
-    static int anInt688 = 0;
-    static int anInt689;
     public static CacheIndex aClass153_332;
-    static RSString[] aClass94Array2566 = new RSString[200];
-    static int anInt2567 = -1;
-    static int clanSize;
-    static int[] anIntArray2574 = new int[14];
-    static int anInt2577 = 0;
     public static int[] anIntArray2591;
     public static RSString[] aClass94Array2596 = null;
     public static Class3_Sub28_Sub3 aClass3_Sub28_Sub3_2600;
@@ -109,9 +84,6 @@ public class Unsorted {
     public static int anInt1953;
     public static int anInt1881 = 0;
     public static int anInt1887;
-    static boolean aBoolean29 = false;
-    static int anInt30;
-    static int anInt31 = 0;
     public static int anInt14 = 0;
     public static int anInt15 = 0;
     public static ReferenceCache aReferenceCache_21 = new ReferenceCache(64);
@@ -127,7 +99,7 @@ public class Unsorted {
     public static int anInt3642 = 0;
     public static int anInt3644 = 0;
     public static int anInt59 = 0;
-    public static short[] aShortArray63 = new short[]{(short)960, (short)957, (short)-21568, (short)-21571, (short)22464};
+    public static short[] aShortArray63 = new short[]{(short) 960, (short) 957, (short) -21568, (short) -21571, (short) 22464};
     public static int anInt65;
     public static boolean isMember = false;
     public static int anInt67;
@@ -149,7 +121,35 @@ public class Unsorted {
     public static CacheIndex aClass153_4048;
     public static int[] anIntArray4050 = new int[1000];
     public static ReferenceCache aReferenceCache_4051 = new ReferenceCache(30);
-    public static short[][] aShortArrayArray1619 = new short[][]{{(short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898}, {(short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)10347, (short)10582, (short)10429, (short)10407, (short)10359, (short)8414, (short)9540, (short)10456, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0}, {(short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898}, {(short)4300, (short)3294, (short)3303, (short)3264, (short)4506, (short)4382, (short)4387, (short)5293, (short)7622, (short)7384, (short)8412, (short)7496, (short)86, (short)123, (short)111, (short)99, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)13766, (short)13745, (short)13726, (short)13890, (short)13743, (short)13852, (short)17602, (short)18605, (short)21660, (short)24000, (short)24997, (short)24088, (short)27972, (short)25903, (short)26904, (short)27193, (short)27175, (short)27156, (short)30020, (short)28975, (short)29976, (short)12482, (short)13485, (short)10392, (short)10692, (short)10669, (short)10776, (short)6717, (short)6695, (short)7830, (short)6971, (short)6951, (short)5910, (short)3389, (short)3369, (short)3356, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0, (short)0}, {(short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898, (short)10, (short)30, (short)50, (short)70, (short)90, (short)110, (short)310, (short)684, (short)704, (short)556, (short)940, (short)960, (short)6454, (short)6952, (short)6972, (short)2358, (short)2732, (short)2752, (short)10550, (short)10924, (short)10944, (short)10310, (short)10556, (short)10576, (short)14646, (short)15020, (short)15040, (short)19766, (short)20140, (short)20160, (short)-29386, (short)-29012, (short)-28992, (short)31030, (short)31276, (short)31296, (short)-24266, (short)-23892, (short)-23872, (short)-19146, (short)-18772, (short)-18752, (short)-14026, (short)-13652, (short)-13632, (short)-6858, (short)-6484, (short)-6464, (short)522, (short)542, (short)6794, (short)6814, (short)11018, (short)11038, (short)14986, (short)15006, (short)21130, (short)21150, (short)-28918, (short)-28898, (short)-22006, (short)-21986, (short)-12918, (short)-12898}};
+    public static short[][] aShortArrayArray1619 = new short[][]{{(short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898}, {(short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 10347, (short) 10582, (short) 10429, (short) 10407, (short) 10359, (short) 8414, (short) 9540, (short) 10456, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0}, {(short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898}, {(short) 4300, (short) 3294, (short) 3303, (short) 3264, (short) 4506, (short) 4382, (short) 4387, (short) 5293, (short) 7622, (short) 7384, (short) 8412, (short) 7496, (short) 86, (short) 123, (short) 111, (short) 99, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 13766, (short) 13745, (short) 13726, (short) 13890, (short) 13743, (short) 13852, (short) 17602, (short) 18605, (short) 21660, (short) 24000, (short) 24997, (short) 24088, (short) 27972, (short) 25903, (short) 26904, (short) 27193, (short) 27175, (short) 27156, (short) 30020, (short) 28975, (short) 29976, (short) 12482, (short) 13485, (short) 10392, (short) 10692, (short) 10669, (short) 10776, (short) 6717, (short) 6695, (short) 7830, (short) 6971, (short) 6951, (short) 5910, (short) 3389, (short) 3369, (short) 3356, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0}, {(short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898, (short) 10, (short) 30, (short) 50, (short) 70, (short) 90, (short) 110, (short) 310, (short) 684, (short) 704, (short) 556, (short) 940, (short) 960, (short) 6454, (short) 6952, (short) 6972, (short) 2358, (short) 2732, (short) 2752, (short) 10550, (short) 10924, (short) 10944, (short) 10310, (short) 10556, (short) 10576, (short) 14646, (short) 15020, (short) 15040, (short) 19766, (short) 20140, (short) 20160, (short) -29386, (short) -29012, (short) -28992, (short) 31030, (short) 31276, (short) 31296, (short) -24266, (short) -23892, (short) -23872, (short) -19146, (short) -18772, (short) -18752, (short) -14026, (short) -13652, (short) -13632, (short) -6858, (short) -6484, (short) -6464, (short) 522, (short) 542, (short) 6794, (short) 6814, (short) 11018, (short) 11038, (short) 14986, (short) 15006, (short) 21130, (short) 21150, (short) -28918, (short) -28898, (short) -22006, (short) -21986, (short) -12918, (short) -12898}};
+    public static int gameWindowWidth = 0;
+    static int anInt942;
+    static int anInt944 = 0;
+    static int anInt952;
+    static int anInt963;
+    static int anInt1037;
+    static int anInt1038;
+    static Class30 aClass30_1039;
+    static int anInt3695;
+    static int anInt1042;
+    static CacheIndex aClass153_1043;
+    static AbstractSprite[] aAbstractSpriteArray996;
+    static int maskUpdateCount = 0;
+    static int anInt998 = 0;
+    static int anInt999 = -1;
+    static int wlPacketSize = 0;
+    static ReferenceCache aReferenceCache_684 = new ReferenceCache(64);
+    static int[] anIntArray686 = new int[2];
+    static int anInt688 = 0;
+    static int anInt689;
+    static RSString[] aClass94Array2566 = new RSString[200];
+    static int anInt2567 = -1;
+    static int clanSize;
+    static int[] anIntArray2574 = new int[14];
+    static int anInt2577 = 0;
+    static boolean aBoolean29 = false;
+    static int anInt30;
+    static int anInt31 = 0;
     static int anInt3671 = 0;
     static boolean[] aBooleanArray3674 = new boolean[100];
     static int anInt2281 = 0;
@@ -168,8 +168,6 @@ public class Unsorted {
     static int[][] anIntArrayArray2039 = new int[][]{{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, {12, 8, 4, 0, 13, 9, 5, 1, 14, 10, 6, 2, 15, 11, 7, 3}, {15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0}, {3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12}};
     static int menuOptionCount = 0;
     static boolean aBoolean11 = false;
-    public static int gameWindowWidth = 0;
-
 
     static void method2086() {
         try {
@@ -490,7 +488,7 @@ public class Unsorted {
                 Class74.setClipping(var14);
                 Class51.method1134();
                 Class51.aBoolean843 = true;
-                return (AbstractSprite) (HDToolKit.highDetail && !var2 ? new HDSprite(var15) : var15);
+                return HDToolKit.highDetail && !var2 ? new HDSprite(var15) : var15;
             }
         } catch (RuntimeException var20) {
             throw ClientErrorException.clientError(var20, "na.WA(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ')');
@@ -510,7 +508,7 @@ public class Unsorted {
         try {
             ItemDefinition.stringsStack = null;
             if (var0 != 30) {
-                method84((RSString) null, 89);
+                method84(null, 89);
             }
 
             aClass61_78 = null;
@@ -676,26 +674,26 @@ public class Unsorted {
 
     static void method1250(int var0, boolean var1) {
         try {
-            Class3_Sub10.aByteArrayArrayArray2339 = (byte[][][]) null;
-            Class44.anIntArrayArrayArray720 = (int[][][]) null;
+            Class3_Sub10.aByteArrayArrayArray2339 = null;
+            Class44.anIntArrayArrayArray720 = null;
             if (var0 < 14) {
                 method1250(10, true);
             }
 
             Class3_Sub28_Sub3.aClass11_3551 = null;
-            RenderAnimationDefinition.aByteArrayArrayArray383 = (byte[][][]) null;
+            RenderAnimationDefinition.aByteArrayArrayArray383 = null;
             Class83.anIntArray1161 = null;
-            CS2Script.aByteArrayArrayArray2452 = (byte[][][]) null;
+            CS2Script.aByteArrayArrayArray2452 = null;
             if (var1 && null != aClass3_Sub28_Sub3_2600) {
                 Class3_Sub20.aClass94_3220 = aClass3_Sub28_Sub3_2600.aClass94_3561;
             } else {
                 Class3_Sub20.aClass94_3220 = null;
             }
 
-            Class36.aByteArrayArrayArray640 = (byte[][][]) null;
-            Class3_Sub13_Sub33.aByteArrayArrayArray3390 = (byte[][][]) null;
-            Class29.anIntArrayArrayArray558 = (int[][][]) null;
-            Class146.anIntArrayArrayArray1903 = (int[][][]) null;
+            Class36.aByteArrayArrayArray640 = null;
+            Class3_Sub13_Sub33.aByteArrayArrayArray3390 = null;
+            Class29.anIntArrayArrayArray558 = null;
+            Class146.anIntArrayArrayArray1903 = null;
             WorldMap.anInt2737 = 0;
             aClass3_Sub28_Sub3_2600 = null;
             Class84.aClass61_1162.method1211(-108);
@@ -937,7 +935,7 @@ public class Unsorted {
                         Class102.aClass135Array2131[Class113.anInt1552] = null;
                         Class3_Sub8.anIntArray3083[Class113.anInt1552] = var9 + (var10 << 16) + (var11 << 8);
                         if (var2 != 183921384) {
-                            aClass33_1238 = (Class33) null;
+                            aClass33_1238 = null;
                         }
 
                         ++Class113.anInt1552;
@@ -1132,7 +1130,7 @@ public class Unsorted {
                 Class158.method2183(var0.componentHash, var1, var4, var5, var0.aClass11Array262);
             }
 
-            Class3_Sub31 var6 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get((long) var0.componentHash);
+            Class3_Sub31 var6 = Class3_Sub13_Sub17.aHashTable_3208.get(var0.componentHash);
             if (var6 != null) {
                 Class75_Sub4.method1352(var5, var1, var6.anInt2602, var4);
             }
@@ -1518,27 +1516,6 @@ public class Unsorted {
         }
     }
 
-    public static void method594(int var0, int var1) {
-        try {
-            if (var0 < 83) {
-                method592((byte) 122);
-            }
-
-            Class128.aReferenceCache_1683.sweep(var1);
-        } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "c.Q(" + var0 + ',' + var1 + ')');
-        }
-    }
-
-    public static void method595() {
-        try {
-            aReferenceCache_684.sweep(5);
-            Class163_Sub1.aReferenceCache_2984.sweep(5);
-        } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "c.O(" + 5 + ',' + 109 + ')');
-        }
-    }
-
     public static Class106[] method596(Signlink var1) {
         try {
             if (var1.method1432(false)) {
@@ -1551,7 +1528,7 @@ public class Unsorted {
                 if (2 == var2.anInt978) {
                     return new Class106[0];
                 } else {
-                    int[] var3 = (int[]) ((int[]) var2.anObject974);
+                    int[] var3 = (int[]) var2.anObject974;
                     Class106[] var4 = new Class106[var3.length >> 2];
 
                     for (int var5 = 0; var5 < var4.length; ++var5) {
@@ -1964,7 +1941,7 @@ public class Unsorted {
             Class3_Sub9 var2 = (Class3_Sub9) aHashTable_4046.get(var0.displayName.toLong());
 
             if (var2 == null) {
-                Class70.method1286(var0.anIntArray2755[0], (ObjectDefinition) null, 0, (NPC) null, var0.anIntArray2767[0], WorldListCountry.localPlane, var0);
+                Class70.method1286(var0.anIntArray2755[0], null, 0, null, var0.anIntArray2767[0], WorldListCountry.localPlane, var0);
             } else {
                 var2.method134();
             }
@@ -2251,7 +2228,7 @@ public class Unsorted {
         try {
             int var1 = Class137.method1817();
             if (0 == var1) {
-                Class158.aByteArrayArrayArray2008 = (byte[][][]) null;
+                Class158.aByteArrayArrayArray2008 = null;
                 Class136.method1816(0, -7);
             } else if (var1 == 1) {
                 Class3_Sub5.method112((byte) 0);
@@ -2264,15 +2241,6 @@ public class Unsorted {
 
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "wa.AA(" + 9179409 + ')');
-        }
-    }
-
-    public static void method795() {
-        try {
-
-            CS2Script.aReferenceCache_2450.sweep(5);
-        } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "wa.OC(" + (byte) 14 + ',' + 5 + ')');
         }
     }
 
@@ -2325,7 +2293,7 @@ public class Unsorted {
 
                                 Class15.localNPCIndexes[Class163.localNPCCount++] = var11;
                             } else {
-                                NPC.npcs[var11].setDefinitions((NPCDefinition) null);
+                                NPC.npcs[var11].setDefinitions(null);
                                 NPC.npcs[var11] = null;
                             }
                         }
@@ -2590,11 +2558,11 @@ public class Unsorted {
                         }
 
                         if (Class164_Sub1.anInt3012 == 1) {
-                            Class3_Sub24_Sub4.method1177(Class99.anInt1403, (long) var3, (byte) -125, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aClass94_378, ColorCore.TextColor, var5}), var1, (short) 26, TextCore.HasUse, var4);
+                            Class3_Sub24_Sub4.method1177(Class99.anInt1403, var3, (byte) -125, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aClass94_378, ColorCore.TextColor, var5}), var1, (short) 26, TextCore.HasUse, var4);
                         } else if (GameObject.aBoolean1837) {
                             Class3_Sub28_Sub9 var12 = -1 == anInt1038 ? null : Class61.method1210(anInt1038);
                             if ((2 & Class164.anInt2051) != 0 && (var12 == null || var0.method1475(anInt1038, var12.anInt3614) != var12.anInt3614)) {
-                                Class3_Sub24_Sub4.method1177(anInt1887, (long) var3, (byte) -93, RSString.stringCombiner(new RSString[]{TextCore.aClass94_676, ColorCore.TextColor, var5}), var1, (short) 45, Class3_Sub28_Sub9.aClass94_3621, var4);
+                                Class3_Sub24_Sub4.method1177(anInt1887, var3, (byte) -93, RSString.stringCombiner(new RSString[]{TextCore.aClass94_676, ColorCore.TextColor, var5}), var1, (short) 45, Class3_Sub28_Sub9.aClass94_3621, var4);
                             }
                         } else {
                             RSString[] var11 = var0.options;
@@ -2636,7 +2604,7 @@ public class Unsorted {
                                             var8 = 2;
                                         }
 
-                                        Class3_Sub24_Sub4.method1177(var9, (long) var3, (byte) -103, RSString.stringCombiner(new RSString[]{ColorCore.NPCRightClickColor, var5}), var1, var8, var11[var7], var4);
+                                        Class3_Sub24_Sub4.method1177(var9, var3, (byte) -103, RSString.stringCombiner(new RSString[]{ColorCore.NPCRightClickColor, var5}), var1, var8, var11[var7], var4);
                                     }
                                 }
                             }
@@ -2675,15 +2643,15 @@ public class Unsorted {
                                             var13 += var14;
                                         }
 
-                                        Class3_Sub24_Sub4.method1177(var0.anInt1298, (long) var3, (byte) -128, RSString.stringCombiner(new RSString[]{ColorCore.NPCRightClickColor, var5}), var1, var13, var11[var7], var4);
+                                        Class3_Sub24_Sub4.method1177(var0.anInt1298, var3, (byte) -128, RSString.stringCombiner(new RSString[]{ColorCore.NPCRightClickColor, var5}), var1, var13, var11[var7], var4);
                                     }
                                 }
                             }
 
                             if (GameConfig.NPC_DEBUG_ENABLED) {
-                                Class3_Sub24_Sub4.method1177(Class131.anInt1719, (long) var3, (byte) -73, RSString.stringCombiner(new RSString[]{ColorCore.NPCRightClickColor, var5}), var1, (short) 1007, RSString.parse("Examine" + "<br>" + " ID: (X" + var0.npcId + "(Y"), var4);
+                                Class3_Sub24_Sub4.method1177(Class131.anInt1719, var3, (byte) -73, RSString.stringCombiner(new RSString[]{ColorCore.NPCRightClickColor, var5}), var1, (short) 1007, RSString.parse("Examine" + "<br>" + " ID: (X" + var0.npcId + "(Y"), var4);
                             } else {
-                                Class3_Sub24_Sub4.method1177(Class131.anInt1719, (long) var3, (byte) -73, RSString.stringCombiner(new RSString[]{ColorCore.NPCRightClickColor, var5}), var1, (short) 1007, TextCore.HasExamine, var4);
+                                Class3_Sub24_Sub4.method1177(Class131.anInt1719, var3, (byte) -73, RSString.stringCombiner(new RSString[]{ColorCore.NPCRightClickColor, var5}), var1, (short) 1007, TextCore.HasExamine, var4);
                             }
                         }
 
@@ -2962,7 +2930,7 @@ public class Unsorted {
 
     public static LDIndexedSprite[] method619(byte var0, int var1, CacheIndex var2) {
         try {
-            return Class140_Sub7.method2029((byte) -119, var2, var1) ? (var0 <= 52 ? (LDIndexedSprite[]) null : method1281()) : null;
+            return Class140_Sub7.method2029((byte) -119, var2, var1) ? (var0 <= 52 ? null : method1281()) : null;
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "ml.A(" + var0 + ',' + var1 + ',' + (var2 != null ? "{...}" : "null") + ')');
         }
@@ -3167,7 +3135,7 @@ public class Unsorted {
             RenderAnimationDefinition var2 = var1.method1965();
             var1.anInt2764 = var2.anInt368;
             if (var0 >= -5) {
-                anIntArray882 = (int[]) null;
+                anIntArray882 = null;
             }
 
             if (var1.anInt2816 == 0) {
@@ -3430,8 +3398,8 @@ public class Unsorted {
 
     public static boolean method73(short var0) {
         try {
-            if(var0 != 47 && var0 != 5 && var0 != 43 && var0 != 35 && var0 != 58 && var0 != 22 && var0 != 40 && var0 != 3) {
-                if(var0 != 9 && var0 != 12 && var0 != 1006 && var0 != 1003) {
+            if (var0 != 47 && var0 != 5 && var0 != 43 && var0 != 35 && var0 != 58 && var0 != 22 && var0 != 40 && var0 != 3) {
+                if (var0 != 9 && var0 != 12 && var0 != 1006 && var0 != 1003) {
 
                     return var0 == 25 || var0 == 23 || 48 == var0 || var0 == 7 || var0 == 13 || (var0 == 8 || var0 == 32 || var0 == 28 || var0 == 59 || var0 == 51 || var0 == 41);
                 } else {
@@ -3447,32 +3415,32 @@ public class Unsorted {
 
     public static void method75(RSInterface[] var0, int var2) {
         try {
-            for(int var3 = 0; var0.length > var3; ++var3) {
+            for (int var3 = 0; var0.length > var3; ++var3) {
                 RSInterface var4 = var0[var3];
-                if(null != var4) {
-                    if(var4.type == 0) {
-                        if(null != var4.aClass11Array262) {
+                if (null != var4) {
+                    if (var4.type == 0) {
+                        if (null != var4.aClass11Array262) {
                             method75(var4.aClass11Array262, var2);
                         }
 
-                        Class3_Sub31 var5 = (Class3_Sub31)Class3_Sub13_Sub17.aHashTable_3208.get((long)var4.componentHash);
-                        if(null != var5) {
+                        Class3_Sub31 var5 = Class3_Sub13_Sub17.aHashTable_3208.get(var4.componentHash);
+                        if (null != var5) {
                             Class3_Sub8.method124(49, var2, var5.anInt2602);
                         }
                     }
 
                     CS2Script var7;
-                    if(var2 == 0 && null != var4.anObjectArray206) {
+                    if (var2 == 0 && null != var4.anObjectArray206) {
                         var7 = new CS2Script();
                         var7.arguments = var4.anObjectArray206;
                         var7.aClass11_2449 = var4;
                         Class43.method1065(var7);
                     }
 
-                    if(var2 == 1 && var4.anObjectArray176 != null) {
-                        if(var4.anInt191 >= 0) {
+                    if (var2 == 1 && var4.anObjectArray176 != null) {
+                        if (var4.anInt191 >= 0) {
                             RSInterface var8 = Class7.getRSInterface(var4.componentHash);
-                            if(null == var8 || null == var8.aClass11Array262 || var8.aClass11Array262.length <= var4.anInt191 || var8.aClass11Array262[var4.anInt191] != var4) {
+                            if (null == var8 || null == var8.aClass11Array262 || var8.aClass11Array262.length <= var4.anInt191 || var8.aClass11Array262[var4.anInt191] != var4) {
                                 continue;
                             }
                         }
@@ -3486,7 +3454,7 @@ public class Unsorted {
             }
 
         } catch (RuntimeException var6) {
-            throw ClientErrorException.clientError(var6, "aa.I(" + (var0 != null?"{...}":"null") + ',' + true + ',' + var2 + ')');
+            throw ClientErrorException.clientError(var6, "aa.I(" + (var0 != null ? "{...}" : "null") + ',' + true + ',' + var2 + ')');
         }
     }
 
@@ -3494,8 +3462,8 @@ public class Unsorted {
         try {
             int var12;
             int var13;
-            for(var12 = 0; 104 > var12; ++var12) {
-                for(var13 = 0; var13 < 104; ++var13) {
+            for (var12 = 0; 104 > var12; ++var12) {
+                for (var13 = 0; var13 < 104; ++var13) {
                     Class84.anIntArrayArray1160[var12][var13] = 0;
                     Class97.anIntArrayArray1373[var12][var13] = 99999999;
                 }
@@ -3514,34 +3482,34 @@ public class Unsorted {
             int[][] var17 = AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].anIntArrayArray1304;
 
             int var18;
-            while(var15 != var27) {
+            while (var15 != var27) {
                 var12 = Class3_Sub13_Sub38.anIntArray3456[var15];
                 var13 = Class45.anIntArray729[var15];
                 var15 = 4095 & var15 - -1;
-                if(var8 == var12 && var13 == var4) {
+                if (var8 == var12 && var13 == var4) {
                     var16 = true;
                     break;
                 }
 
-                if(var1 != 0) {
-                    if((5 > var1 || var1 == 10) && AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1488(var4, var12, var13, var8, -1 + var1, 2, var7)) {
+                if (var1 != 0) {
+                    if ((5 > var1 || var1 == 10) && AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1488(var4, var12, var13, var8, -1 + var1, 2, var7)) {
                         var16 = true;
                         break;
                     }
 
-                    if(var1 < 10 && AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1492(var4, var1 + -1, var8, var13, 2, var7, var12, 88)) {
+                    if (var1 < 10 && AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1492(var4, var1 + -1, var8, var13, 2, var7, var12, 88)) {
                         var16 = true;
                         break;
                     }
                 }
 
-                if(0 != var0 && var6 != 0 && AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1498(var8, var13, var12, 2, var0, var2, var4, var6)) {
+                if (0 != var0 && var6 != 0 && AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1498(var8, var13, var12, 2, var0, var2, var4, var6)) {
                     var16 = true;
                     break;
                 }
 
                 var18 = Class97.anIntArrayArray1373[var12][var13] - -1;
-                if(var12 > 0 && Class84.anIntArrayArray1160[var12 + -1][var13] == 0 && 0 == (var17[-1 + var12][var13] & 19661070) && (var17[-1 + var12][var13 + 1] & 19661112) == 0) {
+                if (var12 > 0 && Class84.anIntArrayArray1160[var12 + -1][var13] == 0 && 0 == (var17[-1 + var12][var13] & 19661070) && (var17[-1 + var12][var13 + 1] & 19661112) == 0) {
                     Class3_Sub13_Sub38.anIntArray3456[var27] = var12 + -1;
                     Class45.anIntArray729[var27] = var13;
                     var27 = 1 + var27 & 4095;
@@ -3549,7 +3517,7 @@ public class Unsorted {
                     Class97.anIntArrayArray1373[-1 + var12][var13] = var18;
                 }
 
-                if(102 > var12 && Class84.anIntArrayArray1160[1 + var12][var13] == 0 && 0 == (var17[2 + var12][var13] & 19661187) && 0 == (var17[var12 + 2][1 + var13] & 19661280)) {
+                if (102 > var12 && Class84.anIntArrayArray1160[1 + var12][var13] == 0 && 0 == (var17[2 + var12][var13] & 19661187) && 0 == (var17[var12 + 2][1 + var13] & 19661280)) {
                     Class3_Sub13_Sub38.anIntArray3456[var27] = 1 + var12;
                     Class45.anIntArray729[var27] = var13;
                     var27 = 4095 & var27 + 1;
@@ -3557,7 +3525,7 @@ public class Unsorted {
                     Class97.anIntArrayArray1373[var12 - -1][var13] = var18;
                 }
 
-                if(var13 > 0 && Class84.anIntArrayArray1160[var12][var13 + -1] == 0 && (19661070 & var17[var12][-1 + var13]) == 0 && (var17[var12 + 1][var13 - 1] & 19661187) == 0) {
+                if (var13 > 0 && Class84.anIntArrayArray1160[var12][var13 + -1] == 0 && (19661070 & var17[var12][-1 + var13]) == 0 && (var17[var12 + 1][var13 - 1] & 19661187) == 0) {
                     Class3_Sub13_Sub38.anIntArray3456[var27] = var12;
                     Class45.anIntArray729[var27] = -1 + var13;
                     Class84.anIntArrayArray1160[var12][-1 + var13] = 1;
@@ -3565,7 +3533,7 @@ public class Unsorted {
                     var27 = 4095 & 1 + var27;
                 }
 
-                if(var13 < 102 && Class84.anIntArrayArray1160[var12][var13 + 1] == 0 && (var17[var12][2 + var13] & 19661112) == 0 && (var17[1 + var12][var13 + 2] & 19661280) == 0) {
+                if (var13 < 102 && Class84.anIntArrayArray1160[var12][var13 + 1] == 0 && (var17[var12][2 + var13] & 19661112) == 0 && (var17[1 + var12][var13 + 2] & 19661280) == 0) {
                     Class3_Sub13_Sub38.anIntArray3456[var27] = var12;
                     Class45.anIntArray729[var27] = var13 + 1;
                     Class84.anIntArrayArray1160[var12][1 + var13] = 4;
@@ -3573,7 +3541,7 @@ public class Unsorted {
                     Class97.anIntArrayArray1373[var12][var13 - -1] = var18;
                 }
 
-                if(var12 > 0 && var13 > 0 && Class84.anIntArrayArray1160[-1 + var12][-1 + var13] == 0 && (19661112 & var17[-1 + var12][var13]) == 0 && 0 == (var17[-1 + var12][-1 + var13] & 19661070) && 0 == (19661187 & var17[var12][-1 + var13])) {
+                if (var12 > 0 && var13 > 0 && Class84.anIntArrayArray1160[-1 + var12][-1 + var13] == 0 && (19661112 & var17[-1 + var12][var13]) == 0 && 0 == (var17[-1 + var12][-1 + var13] & 19661070) && 0 == (19661187 & var17[var12][-1 + var13])) {
                     Class3_Sub13_Sub38.anIntArray3456[var27] = -1 + var12;
                     Class45.anIntArray729[var27] = -1 + var13;
                     Class84.anIntArrayArray1160[-1 + var12][-1 + var13] = 3;
@@ -3581,7 +3549,7 @@ public class Unsorted {
                     var27 = 4095 & var27 + 1;
                 }
 
-                if(var12 < 102 && 0 < var13 && Class84.anIntArrayArray1160[1 + var12][var13 + -1] == 0 && (var17[var12 - -1][var13 - 1] & 19661070) == 0 && (19661187 & var17[2 + var12][var13 + -1]) == 0 && (19661280 & var17[var12 + 2][var13]) == 0) {
+                if (var12 < 102 && 0 < var13 && Class84.anIntArrayArray1160[1 + var12][var13 + -1] == 0 && (var17[var12 - -1][var13 - 1] & 19661070) == 0 && (19661187 & var17[2 + var12][var13 + -1]) == 0 && (19661280 & var17[var12 + 2][var13]) == 0) {
                     Class3_Sub13_Sub38.anIntArray3456[var27] = var12 - -1;
                     Class45.anIntArray729[var27] = var13 - 1;
                     var27 = 4095 & 1 + var27;
@@ -3589,7 +3557,7 @@ public class Unsorted {
                     Class97.anIntArrayArray1373[1 + var12][var13 + -1] = var18;
                 }
 
-                if(var12 > 0 && var13 < 102 && 0 == Class84.anIntArrayArray1160[var12 - 1][var13 + 1] && (var17[-1 + var12][var13 - -1] & 19661070) == 0 && 0 == (19661112 & var17[-1 + var12][var13 - -2]) && (19661280 & var17[var12][var13 + 2]) == 0) {
+                if (var12 > 0 && var13 < 102 && 0 == Class84.anIntArrayArray1160[var12 - 1][var13 + 1] && (var17[-1 + var12][var13 - -1] & 19661070) == 0 && 0 == (19661112 & var17[-1 + var12][var13 - -2]) && (19661280 & var17[var12][var13 + 2]) == 0) {
                     Class3_Sub13_Sub38.anIntArray3456[var27] = var12 - 1;
                     Class45.anIntArray729[var27] = 1 + var13;
                     Class84.anIntArrayArray1160[var12 - 1][1 + var13] = 6;
@@ -3597,7 +3565,7 @@ public class Unsorted {
                     var27 = 1 + var27 & 4095;
                 }
 
-                if(var12 < 102 && var13 < 102 && Class84.anIntArrayArray1160[1 + var12][1 + var13] == 0 && (19661112 & var17[var12 - -1][2 + var13]) == 0 && (19661280 & var17[var12 + 2][var13 - -2]) == 0 && (19661187 & var17[var12 - -2][var13 + 1]) == 0) {
+                if (var12 < 102 && var13 < 102 && Class84.anIntArrayArray1160[1 + var12][1 + var13] == 0 && (19661112 & var17[var12 - -1][2 + var13]) == 0 && (19661280 & var17[var12 + 2][var13 - -2]) == 0 && (19661187 & var17[var12 - -2][var13 + 1]) == 0) {
                     Class3_Sub13_Sub38.anIntArray3456[var27] = 1 + var12;
                     Class45.anIntArray729[var27] = var13 + 1;
                     var27 = var27 - -1 & 4095;
@@ -3608,8 +3576,8 @@ public class Unsorted {
 
             Class129.anInt1692 = 0;
             int var19;
-            if(!var16) {
-                if(!var5) {
+            if (!var16) {
+                if (!var5) {
                     return false;
                 }
 
@@ -3617,21 +3585,21 @@ public class Unsorted {
                 var19 = 100;
                 byte var20 = 10;
 
-                for(int var21 = -var20 + var8; var20 + var8 >= var21; ++var21) {
-                    for(int var22 = var4 + -var20; var20 + var4 >= var22; ++var22) {
-                        if(var21 >= 0 && var22 >= 0 && var21 < 104 && 104 > var22 && Class97.anIntArrayArray1373[var21][var22] < 100) {
+                for (int var21 = -var20 + var8; var20 + var8 >= var21; ++var21) {
+                    for (int var22 = var4 + -var20; var20 + var4 >= var22; ++var22) {
+                        if (var21 >= 0 && var22 >= 0 && var21 < 104 && 104 > var22 && Class97.anIntArrayArray1373[var21][var22] < 100) {
                             int var23 = 0;
                             int var24 = 0;
-                            if(var8 <= var21) {
-                                if(-1 + var0 + var8 < var21) {
+                            if (var8 <= var21) {
+                                if (-1 + var0 + var8 < var21) {
                                     var23 = var21 + 1 + -var0 + -var8;
                                 }
                             } else {
                                 var23 = var8 - var21;
                             }
 
-                            if(var22 >= var4) {
-                                if(-1 + var4 + var6 < var22) {
+                            if (var22 >= var4) {
+                                if (-1 + var4 + var6 < var22) {
                                     var24 = -var4 + -var6 + 1 + var22;
                                 }
                             } else {
@@ -3639,7 +3607,7 @@ public class Unsorted {
                             }
 
                             int var25 = var23 * var23 + var24 * var24;
-                            if(var25 < var18 || var25 == var18 && Class97.anIntArrayArray1373[var21][var22] < var19) {
+                            if (var25 < var18 || var25 == var18 && Class97.anIntArrayArray1373[var21][var22] < var19) {
                                 var13 = var22;
                                 var19 = Class97.anIntArrayArray1373[var21][var22];
                                 var18 = var25;
@@ -3649,11 +3617,11 @@ public class Unsorted {
                     }
                 }
 
-                if(var18 == 1000) {
+                if (var18 == 1000) {
                     return false;
                 }
 
-                if(var11 == var12 && var3 == var13) {
+                if (var11 == var12 && var3 == var13) {
                     return false;
                 }
 
@@ -3666,21 +3634,21 @@ public class Unsorted {
             Class45.anIntArray729[var28] = var13;
             var18 = var19 = Class84.anIntArrayArray1160[var12][var13];
 
-            for(; var12 != var11 || var13 != var3; var18 = Class84.anIntArrayArray1160[var12][var13]) {
-                if(var19 != var18) {
+            for (; var12 != var11 || var13 != var3; var18 = Class84.anIntArrayArray1160[var12][var13]) {
+                if (var19 != var18) {
                     Class3_Sub13_Sub38.anIntArray3456[var15] = var12;
                     Class45.anIntArray729[var15++] = var13;
                     var19 = var18;
                 }
 
-                if((var18 & 2) != 0) {
+                if ((var18 & 2) != 0) {
                     ++var12;
-                } else if((8 & var18) != 0) {
+                } else if ((8 & var18) != 0) {
                     --var12;
                 }
 
-                if((var18 & 1) == 0) {
-                    if((var18 & 4) != 0) {
+                if ((var18 & 1) == 0) {
+                    if ((var18 & 4) != 0) {
                         --var13;
                     }
                 } else {
@@ -3688,7 +3656,7 @@ public class Unsorted {
                 }
             }
 
-            if(var15 <= 0) {
+            if (var15 <= 0) {
                 return 1 != var9;
             } else {
                 Class3_Sub13_Sub27.method299(113, var15, var9);
@@ -3713,13 +3681,13 @@ public class Unsorted {
         try {
 
             int var2 = var1.anInt189;
-            if(324 == var2) {
-                if(-1 == Class3_Sub13_Sub21.anInt3260) {
+            if (324 == var2) {
+                if (-1 == Class3_Sub13_Sub21.anInt3260) {
                     Class3_Sub13_Sub21.anInt3260 = var1.spriteArchiveId;
                     anInt1165 = var1.anInt296;
                 }
 
-                if(aClass52_1112.aBoolean864) {
+                if (aClass52_1112.aBoolean864) {
                     var1.spriteArchiveId = Class3_Sub13_Sub21.anInt3260;
                 } else {
                     var1.spriteArchiveId = anInt1165;
@@ -3757,7 +3725,7 @@ public class Unsorted {
                 }
             }
         } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "aa.H(" + (byte) -128 + ',' + (var1 != null?"{...}":"null") + ')');
+            throw ClientErrorException.clientError(var3, "aa.H(" + (byte) -128 + ',' + (var1 != null ? "{...}" : "null") + ')');
         }
     }
 
@@ -3772,7 +3740,7 @@ public class Unsorted {
             }
 
             if (var0) {
-                aReferenceCache_743 = (ReferenceCache) null;
+                aReferenceCache_743 = null;
             }
 
             return false;
@@ -4151,7 +4119,7 @@ public class Unsorted {
 
                                         var29 = 10000 * var26 / var25;
                                         var28 = var47 * 100 / var25;
-                                        RSString var55 = RSString.stringCombiner(new RSString[]{TextCore.aClass94_436, Class3_Sub23.method407(0, true, 2, (long) var29), TextCore.aClass94_2498, RSString.stringAnimator(var28), TextCore.aClass94_148});
+                                        RSString var55 = RSString.stringCombiner(new RSString[]{TextCore.aClass94_436, Class3_Sub23.method407(0, true, 2, var29), TextCore.aClass94_2498, RSString.stringAnimator(var28), TextCore.aClass94_148});
                                         TextureOperation.smallFont.drawStringRightAnchor(var55, var20, var21, var24, -1);
                                         aBooleanArray3674[var12] = true;
                                         Class163_Sub1_Sub1.aBooleanArray4008[var12] = true;
@@ -4241,7 +4209,7 @@ public class Unsorted {
                                     method1095(var16, -var11.anInt208 + var14, -var11.anInt247 + var13, var11.aClass11Array262, var18, var11.componentHash, var17, var19, (byte) 52, var12);
                                 }
 
-                                Class3_Sub31 var36 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get((long) var11.componentHash);
+                                Class3_Sub31 var36 = Class3_Sub13_Sub17.aHashTable_3208.get(var11.componentHash);
                                 if (var36 != null) {
                                     if (var36.anInt2603 == 0 && !Class38_Sub1.aBoolean2615 && NPCDefinition.anInt1297 >= var16 && Class38_Sub1.anInt2612 >= var17 && NPCDefinition.anInt1297 < var18 && Class38_Sub1.anInt2612 < var19 && !ClientCommands.commandQaOpEnabled) {
                                         Class140_Sub7.aClass94Array2935[0] = TextCore.HasCancel;
@@ -4381,38 +4349,38 @@ public class Unsorted {
                                             }
                                         }
                                     } else if (3 == var11.type) {
-                                        if(Class3_Sub28_Sub12.method609(var11, 26)) {
+                                        if (Class3_Sub28_Sub12.method609(var11, 26)) {
                                             var20 = var11.anInt253;
-                                            if(Class107.aClass11_1453 == var11 && 0 != var11.anInt222) {
+                                            if (Class107.aClass11_1453 == var11 && 0 != var11.anInt222) {
                                                 var20 = var11.anInt222;
                                             }
                                         } else {
                                             var20 = var11.anInt218;
-                                            if(var11 == Class107.aClass11_1453 && 0 != var11.anInt228) {
+                                            if (var11 == Class107.aClass11_1453 && 0 != var11.anInt228) {
                                                 var20 = var11.anInt228;
                                             }
                                         }
 
                                         if (var15 != 0) {
-                                            if(var11.aBoolean226) {
-                                                if(HDToolKit.highDetail) {
+                                            if (var11.aBoolean226) {
+                                                if (HDToolKit.highDetail) {
                                                     Toolkit.OPENGL_TOOLKIT.fillRect(var13, var14, var11.width, var11.height, var20, 256 + -(255 & var15));//Background for mage book
                                                 } else {
                                                     Toolkit.JAVA_TOOLKIT.fillRect(var13, var14, var11.width, var11.height, var20, 256 + -(255 & var15));
                                                 }
-                                            } else if(HDToolKit.highDetail) {
+                                            } else if (HDToolKit.highDetail) {
                                                 Class22.method928(var13, var14, var11.width, var11.height, var20, 256 + -(var15 & 255));
                                             } else {
                                                 Class74.method1315(var13, var14, var11.width, var11.height, var20, -(var15 & 255) + 256);
                                             }
-                                        } else if(var11.aBoolean226) {
+                                        } else if (var11.aBoolean226) {
                                             if (HDToolKit.highDetail) {
                                                 Toolkit.OPENGL_TOOLKIT.method934(var13, var14, var11.width, var11.height, var20);
                                             } else {
                                                 Toolkit.JAVA_TOOLKIT.fillRect(var13, var14, var11.width, var11.height, var20, 255);
                                             }
                                             //Toolkit.getActiveToolkit().method934(var13, var14, var11.width, var11.height, var20);//Fill Rectangle for skill hover
-                                        } else if(HDToolKit.highDetail){
+                                        } else if (HDToolKit.highDetail) {
                                             Toolkit.OPENGL_TOOLKIT.drawRect(var13, var14, var11.width, var11.height, var20, 255);//Background border for mage book
                                         } else {
                                             Toolkit.JAVA_TOOLKIT.drawRect(var13, var14, var11.width, var11.height, var20, 255);
@@ -4617,7 +4585,7 @@ public class Unsorted {
                                                     }
                                                 } else if (5 != var11.modelType) {
                                                     if (var21 == -1) {
-                                                        var38 = var11.method865(-1, (SequenceDefinition) null, -1, 126, 0, var41, Class102.player.class52);
+                                                        var38 = var11.method865(-1, null, -1, 126, 0, var41, Class102.player.class52);
                                                         if (null == var38 && RSInterface.aBoolean6) {
                                                             Class20.method909(var11);
                                                         }
@@ -4629,7 +4597,7 @@ public class Unsorted {
                                                         }
                                                     }
                                                 } else if (-1 == var11.itemId) {
-                                                    var38 = aClass52_1112.method1165((Class145[]) null, -1, (SequenceDefinition) null, (SequenceDefinition) null, 0, -1, 100, 0, -1, -1);
+                                                    var38 = aClass52_1112.method1165(null, -1, null, null, 0, -1, 100, 0, -1, -1);
                                                 } else {
                                                     var24 = 2047 & var11.itemId;
                                                     if (Class3_Sub1.localIndex == var24) {
@@ -4639,7 +4607,7 @@ public class Unsorted {
                                                     Player var49 = Class3_Sub13_Sub22.players[var24];
                                                     SequenceDefinition var56 = var21 == -1 ? null : SequenceDefinition.getAnimationDefinition(var21);
                                                     if (null != var49 && (-2048 & var11.itemId) == (int) var49.displayName.toLong() << 11) {
-                                                        var38 = var49.class52.method1165((Class145[]) null, -1, (SequenceDefinition) null, var56, 0, -1, -126, 0, var11.anInt283, 0);
+                                                        var38 = var49.class52.method1165(null, -1, null, var56, 0, -1, -126, 0, var11.anInt283, 0);
                                                     }
                                                 }
 
@@ -4847,7 +4815,7 @@ public class Unsorted {
             }
 
             if (var8 <= 31) {
-                quickChatMessages = (CacheIndex) null;
+                quickChatMessages = null;
             }
 
         } catch (RuntimeException var33) {
@@ -4867,7 +4835,7 @@ public class Unsorted {
 
             GraphicDefinition.CAMERA_DIRECTION &= 2047;
             if (var0 >= -31) {
-                quickChatMessages = (CacheIndex) null;
+                quickChatMessages = null;
             }
 
             int var1 = anInt3155 >> 7;
@@ -4940,7 +4908,7 @@ public class Unsorted {
             InterfaceWidget var2 = InterfaceWidget.getWidget(3, var0);
             var2.a();
             if (var1 < 87) {
-                TextCore.aClass94_1326 = (RSString) null;
+                TextCore.aClass94_1326 = null;
             }
 
         } catch (RuntimeException var3) {
@@ -5000,243 +4968,243 @@ public class Unsorted {
     }
 
     public static Class3_Sub28_Sub16_Sub2 method562(CacheIndex var0, int var2) {
-       try {
-         //  System.out.println("Class 3_Sub28_Sub16_Sub2 " + var2);
-          return Class75_Sub4.method1351(var0, 0, var2)? Class3_Sub28_Sub9.method578() :null;
-       } catch (RuntimeException var5) {
-          throw ClientErrorException.clientError(var5, "gf.O(" + (var0 != null?"{...}":"null") + ',' + 0 + ',' + var2 + ',' + (byte) 39 + ')');
-       }
+        try {
+            //  System.out.println("Class 3_Sub28_Sub16_Sub2 " + var2);
+            return Class75_Sub4.method1351(var0, 0, var2) ? Class3_Sub28_Sub9.method578() : null;
+        } catch (RuntimeException var5) {
+            throw ClientErrorException.clientError(var5, "gf.O(" + (var0 != null ? "{...}" : "null") + ',' + 0 + ',' + var2 + ',' + (byte) 39 + ')');
+        }
     }
 
     public static void method564(Signlink var0) {
-       try {
-          anInt3625 = 3;
-          Class25.method957(true);
-          aBoolean3604 = true;
-          Class3_Sub13_Sub15.aBoolean3184 = true;
-          Class128.aBoolean1685 = true;
-          Class3_Sub28_Sub9.anInt3622 = 0;
-          anInt3071 = 0;
-          KeyboardListener.aBoolean1905 = true;
-          WorldListEntry.aBoolean2623 = true;
-          RSInterface.aBoolean236 = true;
-          Sprites.anInt340 = 127;
-          Class38.aBoolean661 = true;
-          Class140_Sub6.aBoolean2910 = true;
-          TextureOperation.anInt2378 = 0;
-          anInt1137 = 2;
-          Class3_Sub13_Sub22.aBoolean3275 = true;
-          Class106.aBoolean1441 = true;
-          anInt120 = 255;
-          Class25.aBoolean488 = true;
-          anInt3671 = 0;
-          RandomAccessFileWrapper var2 = null;
-          CS2Script.anInt2453 = 127;
-          if(Class3_Sub24_Sub3.maxClientMemory >= 96) {
-             Class127_Sub1.method1758(2);
-          } else {
-             Class127_Sub1.method1758(0);
-          }
+        try {
+            anInt3625 = 3;
+            Class25.method957(true);
+            aBoolean3604 = true;
+            Class3_Sub13_Sub15.aBoolean3184 = true;
+            Class128.aBoolean1685 = true;
+            Class3_Sub28_Sub9.anInt3622 = 0;
+            anInt3071 = 0;
+            KeyboardListener.aBoolean1905 = true;
+            WorldListEntry.aBoolean2623 = true;
+            RSInterface.aBoolean236 = true;
+            Sprites.anInt340 = 127;
+            Class38.aBoolean661 = true;
+            Class140_Sub6.aBoolean2910 = true;
+            TextureOperation.anInt2378 = 0;
+            anInt1137 = 2;
+            Class3_Sub13_Sub22.aBoolean3275 = true;
+            Class106.aBoolean1441 = true;
+            anInt120 = 255;
+            Class25.aBoolean488 = true;
+            anInt3671 = 0;
+            RandomAccessFileWrapper var2 = null;
+            CS2Script.anInt2453 = 127;
+            if (Class3_Sub24_Sub3.maxClientMemory >= 96) {
+                Class127_Sub1.method1758(2);
+            } else {
+                Class127_Sub1.method1758(0);
+            }
 
-          anInt2148 = 0;
-          Class3_Sub20.anInt2488 = 0;
-          Class15.aBoolean346 = false;
-          Class163_Sub3.aBoolean3004 = true;
-          aBoolean2146 = false;
-          aBoolean1080 = false;
-          anInt2577 = 0;
+            anInt2148 = 0;
+            Class3_Sub20.anInt2488 = 0;
+            Class15.aBoolean346 = false;
+            Class163_Sub3.aBoolean3004 = true;
+            aBoolean2146 = false;
+            aBoolean1080 = false;
+            anInt2577 = 0;
 
-          try {
-             Class64 var3 = var0.method1433("runescape", 12);
+            try {
+                Class64 var3 = var0.method1433("runescape", 12);
 
-             while(0 == var3.anInt978) {
-                TimeUtils.sleep(1L);
-             }
-
-             if(var3.anInt978 == 1) {
-                var2 = (RandomAccessFileWrapper)var3.anObject974;
-                byte[] var4 = new byte[(int)var2.getLength()];
-
-                int var6;
-                for(int var5 = 0; var4.length > var5; var5 += var6) {
-                   var6 = var2.read(var4, var5, var4.length - var5, 0);
-                   if(var6 == -1) {
-                      throw new IOException("EOF");
-                   }
+                while (0 == var3.anInt978) {
+                    TimeUtils.sleep(1L);
                 }
 
-                Class79.method1390(new DataBuffer(var4));
-             }
-          } catch (Exception var8) {
-          }
+                if (var3.anInt978 == 1) {
+                    var2 = (RandomAccessFileWrapper) var3.anObject974;
+                    byte[] var4 = new byte[(int) var2.getLength()];
 
-          try {
-             if(var2 != null) {
-                var2.close();
-             }
-          } catch (Exception var7) {
-          }
+                    int var6;
+                    for (int var5 = 0; var4.length > var5; var5 += var6) {
+                        var6 = var2.read(var4, var5, var4.length - var5, 0);
+                        if (var6 == -1) {
+                            throw new IOException("EOF");
+                        }
+                    }
 
-       } catch (RuntimeException var9) {
-          throw ClientErrorException.clientError(var9, "gf.F(" + (var0 != null?"{...}":"null") + ',' + 0 + ')');
-       }
+                    Class79.method1390(new DataBuffer(var4));
+                }
+            } catch (Exception var8) {
+            }
+
+            try {
+                if (var2 != null) {
+                    var2.close();
+                }
+            } catch (Exception var7) {
+            }
+
+        } catch (RuntimeException var9) {
+            throw ClientErrorException.clientError(var9, "gf.F(" + (var0 != null ? "{...}" : "null") + ',' + 0 + ')');
+        }
     }
 
     public static void method565(int var1, int var2) {
-       try {
-          Class82.anInt1150 = -Class3_Sub13_Sub21.anInt3256 + var1;
+        try {
+            Class82.anInt1150 = -Class3_Sub13_Sub21.anInt3256 + var1;
 
-          int var3 = -((int)((float)Class3_Sub28_Sub3.aClass11_3551.width / Class44.aFloat727)) + Class82.anInt1150;
-          int var4 = Class82.anInt1150 + (int)((float)Class3_Sub28_Sub3.aClass11_3551.width / Class44.aFloat727);
-          if(var3 < 0) {
-             Class82.anInt1150 = (int)((float)Class3_Sub28_Sub3.aClass11_3551.width / Class44.aFloat727);
-          }
+            int var3 = -((int) ((float) Class3_Sub28_Sub3.aClass11_3551.width / Class44.aFloat727)) + Class82.anInt1150;
+            int var4 = Class82.anInt1150 + (int) ((float) Class3_Sub28_Sub3.aClass11_3551.width / Class44.aFloat727);
+            if (var3 < 0) {
+                Class82.anInt1150 = (int) ((float) Class3_Sub28_Sub3.aClass11_3551.width / Class44.aFloat727);
+            }
 
-          Class3_Sub13_Sub30.anInt3362 = Class108.anInt1460 + -1 + anInt65 + -var2;
-          int var6 = (int)((float)Class3_Sub28_Sub3.aClass11_3551.height / Class44.aFloat727) + Class3_Sub13_Sub30.anInt3362;
-          int var5 = Class3_Sub13_Sub30.anInt3362 - (int)((float)Class3_Sub28_Sub3.aClass11_3551.height / Class44.aFloat727);
-          if(Class23.anInt455 < var4) {
-             Class82.anInt1150 = Class23.anInt455 + -((int)((float)Class3_Sub28_Sub3.aClass11_3551.width / Class44.aFloat727));
-          }
+            Class3_Sub13_Sub30.anInt3362 = Class108.anInt1460 + -1 + anInt65 + -var2;
+            int var6 = (int) ((float) Class3_Sub28_Sub3.aClass11_3551.height / Class44.aFloat727) + Class3_Sub13_Sub30.anInt3362;
+            int var5 = Class3_Sub13_Sub30.anInt3362 - (int) ((float) Class3_Sub28_Sub3.aClass11_3551.height / Class44.aFloat727);
+            if (Class23.anInt455 < var4) {
+                Class82.anInt1150 = Class23.anInt455 + -((int) ((float) Class3_Sub28_Sub3.aClass11_3551.width / Class44.aFloat727));
+            }
 
-          if(var5 < 0) {
-             Class3_Sub13_Sub30.anInt3362 = (int)((float)Class3_Sub28_Sub3.aClass11_3551.height / Class44.aFloat727);
-          }
+            if (var5 < 0) {
+                Class3_Sub13_Sub30.anInt3362 = (int) ((float) Class3_Sub28_Sub3.aClass11_3551.height / Class44.aFloat727);
+            }
 
-          if(var6 > Class108.anInt1460) {
-             Class3_Sub13_Sub30.anInt3362 = -((int)((float)Class3_Sub28_Sub3.aClass11_3551.height / Class44.aFloat727)) + Class108.anInt1460;
-          }
+            if (var6 > Class108.anInt1460) {
+                Class3_Sub13_Sub30.anInt3362 = -((int) ((float) Class3_Sub28_Sub3.aClass11_3551.height / Class44.aFloat727)) + Class108.anInt1460;
+            }
 
-       } catch (RuntimeException var7) {
-          throw ClientErrorException.clientError(var7, "gf.E(" + (byte) 86 + ',' + var1 + ',' + var2 + ')');
-       }
+        } catch (RuntimeException var7) {
+            throw ClientErrorException.clientError(var7, "gf.E(" + (byte) 86 + ',' + var1 + ',' + var2 + ')');
+        }
     }
 
     public static void method566(RSString var0, int var2) {
-       try {
-          InterfaceWidget var3 = InterfaceWidget.getWidget(3, var2);
-          var3.flagUpdate();
-          var3.text = var0;
-       } catch (RuntimeException var4) {
-          throw ClientErrorException.clientError(var4, "gf.P(" + (var0 != null?"{...}":"null") + ',' + 0 + ',' + var2 + ')');
-       }
+        try {
+            InterfaceWidget var3 = InterfaceWidget.getWidget(3, var2);
+            var3.flagUpdate();
+            var3.text = var0;
+        } catch (RuntimeException var4) {
+            throw ClientErrorException.clientError(var4, "gf.P(" + (var0 != null ? "{...}" : "null") + ',' + 0 + ',' + var2 + ')');
+        }
     }
 
     public static void method569(int var1) {
-       try {
-          InterfaceWidget var2 = InterfaceWidget.getWidget(7, var1);
-          var2.a();
-       } catch (RuntimeException var3) {
-          throw ClientErrorException.clientError(var3, "he.C(" + -82 + ',' + var1 + ')');
-       }
+        try {
+            InterfaceWidget var2 = InterfaceWidget.getWidget(7, var1);
+            var2.a();
+        } catch (RuntimeException var3) {
+            throw ClientErrorException.clientError(var3, "he.C(" + -82 + ',' + var1 + ')');
+        }
     }
 
     public static RSString method1723(byte var0, boolean var1, int var3) {
-       try {
-          int var4 = 1;
+        try {
+            int var4 = 1;
 
-          for(int var5 = var3 / 10; 0 != var5; ++var4) {
-             var5 /= 10;
-          }
+            for (int var5 = var3 / 10; 0 != var5; ++var4) {
+                var5 /= 10;
+            }
 
-          int var6 = var4;
-          if(var3 < 0 || var1) {
-             var6 = var4 + 1;
-          }
+            int var6 = var4;
+            if (var3 < 0 || var1) {
+                var6 = var4 + 1;
+            }
 
-          byte[] var7 = new byte[var6];
-          if(var3 >= 0) {
-             if(var1) {
-                var7[0] = 43;
-             }
-          } else {
-             var7[0] = 45;
-          }
+            byte[] var7 = new byte[var6];
+            if (var3 >= 0) {
+                if (var1) {
+                    var7[0] = 43;
+                }
+            } else {
+                var7[0] = 45;
+            }
 
-          for(int var8 = 0; var4 > var8; ++var8) {
-             int var9 = var3 % 10;
-             if(var9 < 0) {
-                var9 = -var9;
-             }
+            for (int var8 = 0; var4 > var8; ++var8) {
+                int var9 = var3 % 10;
+                if (var9 < 0) {
+                    var9 = -var9;
+                }
 
-             var7[var6 + -var8 + -1] = (byte)(48 + var9);
-             var3 /= 10;
-          }
+                var7[var6 + -var8 + -1] = (byte) (48 + var9);
+                var3 /= 10;
+            }
 
-          if(var0 >= -111) {
-             method1727((byte)53);
-          }
+            if (var0 >= -111) {
+                method1727((byte) 53);
+            }
 
-          RSString var11 = new RSString();
-          var11.buffer = var7;
-          var11.length = var6;
-          return var11;
-       } catch (RuntimeException var10) {
-          throw ClientErrorException.clientError(var10, "q.A(" + var0 + ',' + var1 + ',' + 10 + ',' + var3 + ')');
-       }
+            RSString var11 = new RSString();
+            var11.buffer = var7;
+            var11.length = var6;
+            return var11;
+        } catch (RuntimeException var10) {
+            throw ClientErrorException.clientError(var10, "q.A(" + var0 + ',' + var1 + ',' + 10 + ',' + var3 + ')');
+        }
     }
 
     public static void method1724(int var0, int var1, int var2, int var3, int var4, int var5, byte var6, int var7) {
-       try {
-          if(var5 >= 128 && var2 >= 128 && var5 <= 13056 && var2 <= 13056) {
-             int var8 = Class121.method1736(WorldListCountry.localPlane, 1, var5, var2) + -var3;
-             var2 -= Class77.anInt1111;
-             var8 -= Class7.anInt2162;
-             var5 -= NPC.anInt3995;
-             int var9 = Class51.anIntArray840[Class139.anInt1823];
-             int var10 = Class51.anIntArray851[Class139.anInt1823];
-             int var11 = Class51.anIntArray840[Class3_Sub13_Sub25.anInt3315];
-             int var12 = Class51.anIntArray851[Class3_Sub13_Sub25.anInt3315];
-             int var13 = var5 * var12 + var11 * var2 >> 16;
-             var2 = var2 * var12 + -(var11 * var5) >> 16;
-             var5 = var13;
-             var13 = var10 * var8 - var2 * var9 >> 16;
-             if(var6 <= -47) {
-                var2 = var2 * var10 + var8 * var9 >> 16;
-                if(50 > var2) {
-                   Class82.anInt2208 = -1;
-                   Class32.anInt590 = -1;
-                } else if(HDToolKit.highDetail) {
-                   int var14 = var1 * 512 >> 8;
-                   Class32.anInt590 = var14 * var5 / var2 + var0;
-                   int var15 = 512 * var7 >> 8;
-                   Class82.anInt2208 = var15 * var13 / var2 + var4;
-                } else {
-                   Class32.anInt590 = (var5 << 9) / var2 + var0;
-                   Class82.anInt2208 = (var13 << 9) / var2 + var4;
-                }
+        try {
+            if (var5 >= 128 && var2 >= 128 && var5 <= 13056 && var2 <= 13056) {
+                int var8 = Class121.method1736(WorldListCountry.localPlane, 1, var5, var2) + -var3;
+                var2 -= Class77.anInt1111;
+                var8 -= Class7.anInt2162;
+                var5 -= NPC.anInt3995;
+                int var9 = Class51.anIntArray840[Class139.anInt1823];
+                int var10 = Class51.anIntArray851[Class139.anInt1823];
+                int var11 = Class51.anIntArray840[Class3_Sub13_Sub25.anInt3315];
+                int var12 = Class51.anIntArray851[Class3_Sub13_Sub25.anInt3315];
+                int var13 = var5 * var12 + var11 * var2 >> 16;
+                var2 = var2 * var12 + -(var11 * var5) >> 16;
+                var5 = var13;
+                var13 = var10 * var8 - var2 * var9 >> 16;
+                if (var6 <= -47) {
+                    var2 = var2 * var10 + var8 * var9 >> 16;
+                    if (50 > var2) {
+                        Class82.anInt2208 = -1;
+                        Class32.anInt590 = -1;
+                    } else if (HDToolKit.highDetail) {
+                        int var14 = var1 * 512 >> 8;
+                        Class32.anInt590 = var14 * var5 / var2 + var0;
+                        int var15 = 512 * var7 >> 8;
+                        Class82.anInt2208 = var15 * var13 / var2 + var4;
+                    } else {
+                        Class32.anInt590 = (var5 << 9) / var2 + var0;
+                        Class82.anInt2208 = (var13 << 9) / var2 + var4;
+                    }
 
-             }
-          } else {
-             Class82.anInt2208 = -1;
-             Class32.anInt590 = -1;
-          }
-       } catch (RuntimeException var16) {
-          throw ClientErrorException.clientError(var16, "q.C(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ')');
-       }
+                }
+            } else {
+                Class82.anInt2208 = -1;
+                Class32.anInt590 = -1;
+            }
+        } catch (RuntimeException var16) {
+            throw ClientErrorException.clientError(var16, "q.C(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ')');
+        }
     }
 
     public static void method1726(int var0) {
-       try {
-          TextCore.aClass94_1622 = null;
-          aShortArrayArray1619 = (short[][])null;
-          TextCore.aClass94_1617 = null;
+        try {
+            TextCore.aClass94_1622 = null;
+            aShortArrayArray1619 = null;
+            TextCore.aClass94_1617 = null;
 
-       } catch (RuntimeException var2) {
-          throw ClientErrorException.clientError(var2, "q.B(" + var0 + ')');
-       }
+        } catch (RuntimeException var2) {
+            throw ClientErrorException.clientError(var2, "q.B(" + var0 + ')');
+        }
     }
 
     public static int method1727(byte var0) {
-       try {
-          if(var0 != 123) {
-             method1726(-123);
-          }
+        try {
+            if (var0 != 123) {
+                method1726(-123);
+            }
 
-          return KeyboardListener.aReferenceCache_1911.hardCount();
-       } catch (RuntimeException var2) {
-          throw ClientErrorException.clientError(var2, "q.D(" + var0 + ')');
-       }
+            return KeyboardListener.aReferenceCache_1911.hardCount();
+        } catch (RuntimeException var2) {
+            throw ClientErrorException.clientError(var2, "q.D(" + var0 + ')');
+        }
     }
 
     static int method1602(RSString var1) {

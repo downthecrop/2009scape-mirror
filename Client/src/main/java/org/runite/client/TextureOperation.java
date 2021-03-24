@@ -84,7 +84,7 @@ public abstract class TextureOperation extends Linkable {
     void method157(int var1, DataBuffer var2, boolean var3) {
         try {
             if (!var3) {
-                this.subOperations = (TextureOperation[]) null;
+                this.subOperations = null;
             }
 
         } catch (RuntimeException var5) {
@@ -106,7 +106,7 @@ public abstract class TextureOperation extends Linkable {
     int method159(int var1) {
         try {
             if (var1 != 4) {
-                method164(true, (RSString) null);
+                method164(true, null);
             }
 
             return -1;
@@ -152,7 +152,7 @@ public abstract class TextureOperation extends Linkable {
     final int[][] method162(int var1, int var2, byte var3) {
         try {
             if (var3 > -45) {
-                return (int[][]) ((int[][]) null);
+                return null;
             } else if (this.subOperations[var2].aBoolean2375) {
                 int[] var4 = this.subOperations[var2].method154(var1, (byte) -105);
                 return new int[][]{var4, var4, var4};
@@ -239,7 +239,7 @@ public abstract class TextureOperation extends Linkable {
             if (var1 == -1) {
                 throw new IllegalStateException("This operation does not have a colour output");
             } else {
-                return (int[][]) ((int[][]) null);
+                return null;
             }
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "j.T(" + var1 + ',' + var2 + ')');

@@ -702,7 +702,7 @@ public final class PacketParser {
                                                 nodeModelId = GraphicDefinition.incomingBuffer.readUnsignedShort();
                                                 var19 = GraphicDefinition.incomingBuffer.readInt();
                                                 Class146.updateInterfacePacketCounter(nodeModelId);
-                                                Class3_Sub31 var67 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get(var19);
+                                                Class3_Sub31 var67 = Class3_Sub13_Sub17.aHashTable_3208.get(var19);
                                                 if (null != var67) {
                                                     Class3_Sub13_Sub18.method254(true, var67);
                                                 }
@@ -978,8 +978,8 @@ public final class PacketParser {
                                                         var19 = GraphicDefinition.incomingBuffer.readUnsignedShort128();
                                                         modelId = GraphicDefinition.incomingBuffer.readIntV1();
                                                         Class146.updateInterfacePacketCounter(var19);
-                                                        Class3_Sub31 var23 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get(nodeModelId);
-                                                        var26 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get(modelId);
+                                                        Class3_Sub31 var23 = Class3_Sub13_Sub17.aHashTable_3208.get(nodeModelId);
+                                                        var26 = Class3_Sub13_Sub17.aHashTable_3208.get(modelId);
                                                         if (null != var26) {
                                                             Class3_Sub13_Sub18.method254(null == var23 || var26.anInt2602 != var23.anInt2602, var26);
                                                         }
@@ -1132,7 +1132,7 @@ public final class PacketParser {
                                                         modelId = GraphicDefinition.incomingBuffer.readUnsignedShort128();
                                                         counter = GraphicDefinition.incomingBuffer.readUnsignedShort();
                                                         Class146.updateInterfacePacketCounter(modelId);
-                                                        var26 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get(var19);
+                                                        var26 = Class3_Sub13_Sub17.aHashTable_3208.get(var19);
                                                         if (null != var26) {
                                                             Class3_Sub13_Sub18.method254(var26.anInt2602 != counter, var26);
                                                         }

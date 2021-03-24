@@ -108,9 +108,9 @@ final class InterfaceWidget extends Node {
                float var17 = -var3[0] + var16[0];
                float var19 = var16[2] - var3[2];
                float var18 = (-var3[1] + var16[1]) * -1.0F;
-               double var20 = Math.sqrt((double)(var19 * var19 + var17 * var17));
-               aFloat1169 = (float)Math.atan2((double)var18, var20);
-               Class45.aFloat730 = -((float)Math.atan2((double)var17, (double)var19));
+               double var20 = Math.sqrt(var19 * var19 + var17 * var17);
+               aFloat1169 = (float)Math.atan2(var18, var20);
+               Class45.aFloat730 = -((float)Math.atan2(var17, var19));
                Class139.anInt1823 = 2047 & (int)(325.949D * (double) aFloat1169);
                Class3_Sub13_Sub25.anInt3315 = 2047 & (int)((double)Class45.aFloat730 * 325.949D);
             }
@@ -164,7 +164,7 @@ final class InterfaceWidget extends Node {
                var2.decode(new DataBuffer(var3));
             }
 
-            Class3_Sub13_Sub34.aReferenceCache_3412.put(var2, (long)var0);
+            Class3_Sub13_Sub34.aReferenceCache_3412.put(var2, var0);
          }
          return var2;
       } catch (RuntimeException var4) {
@@ -184,7 +184,7 @@ final class InterfaceWidget extends Node {
       try {
          if(null == Class56.aClass11_886 && !Class38_Sub1.aBoolean2615) {
             if(var2 < 61) {
-               a(19, 20, -32, (RSInterface)null);
+               a(19, 20, -32, null);
             }
 
             if(null != var3 && Class49.method1122(var3) != null) {

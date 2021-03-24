@@ -63,37 +63,35 @@ final class Class3_Sub13_Sub29 extends TextureOperation {
                   var4.anIntArray2301[var6] = var7;
                   var4.anIntArray2299[var6] = var10;
                   var4.aClass64Array2303[var6] = var0.method1447(-41, var9, Class3_Sub13_Sub1.method170(var8));
-               } else {
-                  if(var7 == 3 || var7 == 4) {
-                     var8 = new String(var1.readString().method1568());
-                     var9 = new String(var1.readString().method1568());
-                     var10 = var1.readUnsignedByte();
-                     String[] var11 = new String[var10];
+               } else if (var7 == 3 || var7 == 4) {
+                  var8 = new String(var1.readString().method1568());
+                  var9 = new String(var1.readString().method1568());
+                  var10 = var1.readUnsignedByte();
+                  String[] var11 = new String[var10];
 
-                     for(int var12 = 0; var10 > var12; ++var12) {
-                        var11[var12] = new String(var1.readString().method1568());
-                     }
-
-                     byte[][] var21 = new byte[var10][];
-                     int var14;
-                     if(3 == var7) {
-                        for(int var13 = 0; var13 < var10; ++var13) {
-                           var14 = var1.readInt();
-                           var21[var13] = new byte[var14];
-                           var1.readBytes(var21[var13], var14);
-                        }
-                     }
-
-                     var4.anIntArray2301[var6] = var7;
-                     Class[] var22 = new Class[var10];
-
-                     for(var14 = 0; var10 > var14; ++var14) {
-                        var22[var14] = Class3_Sub13_Sub1.method170(var11[var14]);
-                     }
-
-                     var4.aClass64Array2298[var6] = var0.method1443(Class3_Sub13_Sub1.method170(var8), var22, -80, var9);
-                     var4.aByteArrayArrayArray2302[var6] = var21;
+                  for (int var12 = 0; var10 > var12; ++var12) {
+                     var11[var12] = new String(var1.readString().method1568());
                   }
+
+                  byte[][] var21 = new byte[var10][];
+                  int var14;
+                  if (3 == var7) {
+                     for (int var13 = 0; var13 < var10; ++var13) {
+                        var14 = var1.readInt();
+                        var21[var13] = new byte[var14];
+                        var1.readBytes(var21[var13], var14);
+                     }
+                  }
+
+                  var4.anIntArray2301[var6] = var7;
+                  Class[] var22 = new Class[var10];
+
+                  for (var14 = 0; var10 > var14; ++var14) {
+                     var22[var14] = Class3_Sub13_Sub1.method170(var11[var14]);
+                  }
+
+                  var4.aClass64Array2298[var6] = var0.method1443(Class3_Sub13_Sub1.method170(var8), var22, -80, var9);
+                  var4.aByteArrayArrayArray2302[var6] = var21;
                }
             } catch (ClassNotFoundException var15) {
                var4.anIntArray2300[var6] = -1;
@@ -159,7 +157,7 @@ final class Class3_Sub13_Sub29 extends TextureOperation {
             return var3;
          } else {
             if(var1 >= -17) {
-               TextCore.aClass94_3357 = (RSString)null;
+               TextCore.aClass94_3357 = null;
             }
 
             return var0 == 1?7 + -var2:(var0 == 2 ?-var3 + 7:var2);
@@ -171,7 +169,7 @@ final class Class3_Sub13_Sub29 extends TextureOperation {
 
    static CursorDefinition method311(int var0) {
       try {
-         CursorDefinition var2 = (CursorDefinition) Unsorted.aReferenceCache_684.get((long)var0);
+         CursorDefinition var2 = (CursorDefinition) Unsorted.aReferenceCache_684.get(var0);
          if(var2 == null) {
             byte[] var3 = Class3_Sub13_Sub19.aClass153_3227.getFile(33, var0);
 
@@ -180,7 +178,7 @@ final class Class3_Sub13_Sub29 extends TextureOperation {
                var2.decode(new DataBuffer(var3));
             }
 
-            Unsorted.aReferenceCache_684.put(var2, (long)var0);
+            Unsorted.aReferenceCache_684.put(var2, var0);
          }
          return var2;
       } catch (RuntimeException var4) {

@@ -35,11 +35,11 @@ final class Class140_Sub1_Sub2 extends Model {
    private byte[] aByteArray3899;
    private int anInt3900 = 0;
    private int[] anIntArray3901;
-   private static Class140_Sub1_Sub2 aClass140_Sub1_Sub2_3902 = new Class140_Sub1_Sub2();
+   private static final Class140_Sub1_Sub2 aClass140_Sub1_Sub2_3902 = new Class140_Sub1_Sub2();
    private byte[] aByteArray3903;
    private static int[] anIntArray3904 = new int[1];
    private static int[] anIntArray3905 = new int[1];
-   private static Class140_Sub1_Sub2 aClass140_Sub1_Sub2_3906 = new Class140_Sub1_Sub2();
+   private static final Class140_Sub1_Sub2 aClass140_Sub1_Sub2_3906 = new Class140_Sub1_Sub2();
    private static byte[] aByteArray3907 = new byte[1];
    private short[] aShortArray3908;
    private static int[] anIntArray3909 = new int[1];
@@ -48,42 +48,42 @@ final class Class140_Sub1_Sub2 extends Model {
    private static short[] aShortArray3912 = new short[1];
    private static int[] anIntArray3913 = new int[1];
    private static byte[] aByteArray3914 = new byte[1];
-   private static Class140_Sub1_Sub2 aClass140_Sub1_Sub2_3915 = new Class140_Sub1_Sub2();
+   private static final Class140_Sub1_Sub2 aClass140_Sub1_Sub2_3915 = new Class140_Sub1_Sub2();
    private static int[] anIntArray3916 = new int[1];
-   private static boolean[] aBooleanArray3917 = new boolean[4096];
-   private static int[] anIntArray3918 = new int[12];
-   private static int[] anIntArray3919 = new int[10];
-   private static int[] anIntArray3920 = new int[4096];
-   private static int[] anIntArray3921;
-   private static int[] anIntArray3922 = new int[4096];
+   private static final boolean[] aBooleanArray3917 = new boolean[4096];
+   private static final int[] anIntArray3918 = new int[12];
+   private static final int[] anIntArray3919 = new int[10];
+   private static final int[] anIntArray3920 = new int[4096];
+   private static final int[] anIntArray3921;
+   private static final int[] anIntArray3922 = new int[4096];
    private static int[][] anIntArrayArray3923;
    private static int[] anIntArray3924;
-   private static int[] anIntArray3925 = new int[10];
+   private static final int[] anIntArray3925 = new int[10];
    private static int[][] anIntArrayArray3926;
    private static boolean aBoolean3927 = false;
-   private static int[] anIntArray3928;
+   private static final int[] anIntArray3928;
    private static int[] anIntArray3929;
    private static int anInt3930 = 0;
    private static int[] anIntArray3931;
-   private static int[] anIntArray3932 = new int[4096];
+   private static final int[] anIntArray3932 = new int[4096];
    private static byte[] aByteArray3933 = new byte[1];
    private static int anInt3934;
    private static int[] anIntArray3935;
-   private static int[] anIntArray3936 = new int[10];
-   private static boolean[] aBooleanArray3937 = new boolean[4096];
-   private static int[][] anIntArrayArray3938;
+   private static final int[] anIntArray3936 = new int[10];
+   private static final boolean[] aBooleanArray3937 = new boolean[4096];
+   private static final int[][] anIntArrayArray3938;
    private static int[] anIntArray3939;
    private static int anInt3940;
-   private static int[] anIntArray3941 = new int[4096];
+   private static final int[] anIntArray3941 = new int[4096];
    private static boolean aBoolean3942 = false;
-   private static int[] anIntArray3943;
-   private static int[] anIntArray3944 = new int[12];
+   private static final int[] anIntArray3943;
+   private static final int[] anIntArray3944 = new int[12];
    private static int anInt3945;
    private static int[] anIntArray3946;
    private static int[] anIntArray3947 = new int[1];
-   private static int[] anIntArray3948 = new int[4096];
+   private static final int[] anIntArray3948 = new int[4096];
    private static short[] aShortArray3949;
-   private static int[] anIntArray3950;
+   private static final int[] anIntArray3950;
 
 
    private void method1934(int var1) {
@@ -143,9 +143,9 @@ final class Class140_Sub1_Sub2 extends Model {
       anIntArray3931 = new int[4096];
       anIntArray3929 = new int[4096];
       anIntArray3946 = null;
-      anIntArrayArray3926 = (int[][])null;
+      anIntArrayArray3926 = null;
       anIntArray3935 = null;
-      anIntArrayArray3923 = (int[][])null;
+      anIntArrayArray3923 = null;
    }
 
    private void method1936() {
@@ -702,7 +702,7 @@ final class Class140_Sub1_Sub2 extends Model {
             }
          }
 
-         this.method1945(false, false, (long) -1, this.aShort3886, this.aShort3886 << 1);
+         this.method1945(false, false, -1, this.aShort3886, this.aShort3886 << 1);
       } catch (RuntimeException var26) {
       }
 
@@ -2213,7 +2213,7 @@ final class Class140_Sub1_Sub2 extends Model {
       this.anIntArrayArray3872 = var1.anIntArrayArray2856;
       this.aShortArray3871 = var1.aShortArray2855;
       this.aShortArray3893 = var1.aShortArray2893;
-      int var7 = (int)Math.sqrt((double)(var4 * var4 + var5 * var5 + var6 * var6));
+      int var7 = (int)Math.sqrt(var4 * var4 + var5 * var5 + var6 * var6);
       int var8 = var3 * var7 >> 8;
       this.anIntArray3898 = new int[this.anInt3889];
       this.anIntArray3874 = new int[this.anInt3889];

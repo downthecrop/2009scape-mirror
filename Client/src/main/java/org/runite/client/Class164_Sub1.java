@@ -35,9 +35,9 @@ class Class164_Sub1 extends Class164 {
             int var10 = var8 + -Class7.anInt2162;
             int var9 = var6 + -NPC.anInt3995;
             int var11 = -Class77.anInt1111 + var7;
-            int var12 = (int)Math.sqrt((double)(var11 * var11 + var9 * var9));
-            Class139.anInt1823 = 2047 & (int)(Math.atan2((double)var10, (double)var12) * 325.949D);
-            Class3_Sub13_Sub25.anInt3315 = 2047 & (int)(Math.atan2((double)var9, (double)var11) * -325.949D);
+            int var12 = (int)Math.sqrt(var11 * var11 + var9 * var9);
+            Class139.anInt1823 = 2047 & (int)(Math.atan2(var10, var12) * 325.949D);
+            Class3_Sub13_Sub25.anInt3315 = 2047 & (int)(Math.atan2(var9, var11) * -325.949D);
             if(128 > Class139.anInt1823) {
                Class139.anInt1823 = 128;
             }
@@ -239,7 +239,7 @@ class Class164_Sub1 extends Class164 {
          this.anIntArray3014 = new int[this.anInt2062];
 
          for(int var7 = 0; var7 < this.anInt2062; ++var7) {
-            this.anIntArray3014[var7] = (short)((int)(Math.pow((double) (float) 0.45, (double)var7) * 4096.0D));
+            this.anIntArray3014[var7] = (short)((int)(Math.pow((float) 0.45, var7) * 4096.0D));
          }
 
       } catch (RuntimeException var8) {

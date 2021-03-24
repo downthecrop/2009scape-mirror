@@ -385,7 +385,7 @@ final class Class140_Sub1_Sub1 extends Model {
       float var10 = (float)var0 * var6[0] + (float)var1 * var6[1] + (float)var2 * var6[2];
       float var11 = (float)var0 * var6[3] + (float)var1 * var6[4] + (float)var2 * var6[5];
       float var12 = (float)var0 * var6[6] + (float)var1 * var6[7] + (float)var2 * var6[8];
-      float var13 = (float)Math.atan2((double)var10, (double)var12) / 6.2831855F + 0.5F;
+      float var13 = (float)Math.atan2(var10, var12) / 6.2831855F + 0.5F;
       if(var7 != 1.0F) {
          var13 *= var7;
       }
@@ -643,8 +643,8 @@ final class Class140_Sub1_Sub1 extends Model {
    private static float[] method1906(int var0, int var1, int var2, int var3, float var4, float var5, float var6) {
       float[] var7 = new float[9];
       float[] var8 = new float[9];
-      float var9 = (float)Math.cos((double)((float)var3 * 0.024543693F));
-      float var10 = (float)Math.sin((double)((float)var3 * 0.024543693F));
+      float var9 = (float)Math.cos((float)var3 * 0.024543693F);
+      float var10 = (float)Math.sin((float)var3 * 0.024543693F);
       float var11;
       var7[0] = var9;
       var7[1] = 0.0F;
@@ -659,9 +659,9 @@ final class Class140_Sub1_Sub1 extends Model {
       float var13 = 1.0F;
       float var14 = 0.0F;
       var9 = (float)var1 / 32767.0F;
-      var10 = -((float)Math.sqrt((double)(1.0F - var9 * var9)));
+      var10 = -((float)Math.sqrt(1.0F - var9 * var9));
       var11 = 1.0F - var9;
-      float var15 = (float)Math.sqrt((double)(var0 * var0 + var2 * var2));
+      float var15 = (float)Math.sqrt(var0 * var0 + var2 * var2);
       if(var15 == 0.0F && var9 == 0.0F) {
          var8 = var7;
       } else {
@@ -1307,9 +1307,9 @@ final class Class140_Sub1_Sub1 extends Model {
       float var9 = (float)var0 * var6[0] + (float)var1 * var6[1] + (float)var2 * var6[2];
       float var10 = (float)var0 * var6[3] + (float)var1 * var6[4] + (float)var2 * var6[5];
       float var11 = (float)var0 * var6[6] + (float)var1 * var6[7] + (float)var2 * var6[8];
-      float var12 = (float)Math.sqrt((double)(var9 * var9 + var10 * var10 + var11 * var11));
-      float var13 = (float)Math.atan2((double)var9, (double)var11) / 6.2831855F + 0.5F;
-      float var14 = (float)Math.asin((double)(var10 / var12)) / 3.1415927F + 0.5F + var8;
+      float var12 = (float)Math.sqrt(var9 * var9 + var10 * var10 + var11 * var11);
+      float var13 = (float)Math.atan2(var9, var11) / 6.2831855F + 0.5F;
+      float var14 = (float)Math.asin(var10 / var12) / 3.1415927F + 0.5F + var8;
       float var15;
       if(var7 == 1) {
          var15 = var13;
@@ -1569,8 +1569,8 @@ final class Class140_Sub1_Sub1 extends Model {
       this.aClass6_3835.aShort92 = (short)var5;
       this.aClass6_3835.aShort97 = (short)var3;
       this.aClass6_3835.aShort96 = (short)var6;
-      this.aClass6_3835.aShort93 = (short)((int)(Math.sqrt((double)var7) + 0.99D));
-      Math.sqrt((double)var8);
+      this.aClass6_3835.aShort93 = (short)((int)(Math.sqrt(var7) + 0.99D));
+      Math.sqrt(var8);
       this.aClass6_3835.aBoolean98 = true;
    }
 
@@ -1770,8 +1770,8 @@ final class Class140_Sub1_Sub1 extends Model {
          if(var6) {
             this.anIntArray3844 = null;
             this.aByteArray3820 = null;
-            this.anIntArrayArray3825 = (int[][])null;
-            this.anIntArrayArray3829 = (int[][])null;
+            this.anIntArrayArray3825 = null;
+            this.anIntArrayArray3829 = null;
          }
 
       }
@@ -1879,7 +1879,7 @@ final class Class140_Sub1_Sub1 extends Model {
                var7 = (int)Class92.light0Position[0];
                var8 = (int)Class92.light0Position[1];
                var9 = (int)Class92.light0Position[2];
-               var10 = (int)Math.sqrt((double)(var7 * var7 + var8 * var8 + var9 * var9));
+               var10 = (int)Math.sqrt(var7 * var7 + var8 * var8 + var9 * var9);
                var11 = (int)((float)this.aShort3849 * 1.3F);
                var12 = this.aShort3819 * var10 >> 8;
 
@@ -2908,7 +2908,7 @@ final class Class140_Sub1_Sub1 extends Model {
          if(this.aClass121_3839.aClass156_1643 != null) {
             this.aClass121_3839.aClass156_1643.method2169();
             var2 = this.aClass121_3839.aClass156_1643;
-            var1.glVertexPointer(3, 5126, this.aClass121_3839.anInt1648, (long)this.aClass121_3839.anInt1639);
+            var1.glVertexPointer(3, 5126, this.aClass121_3839.anInt1648, this.aClass121_3839.anInt1639);
          }
 
          if(this.aClass121_3814.aClass156_1643 != null) {
@@ -2917,7 +2917,7 @@ final class Class140_Sub1_Sub1 extends Model {
                var2 = this.aClass121_3814.aClass156_1643;
             }
 
-            var1.glColorPointer(4, 5121, this.aClass121_3814.anInt1648, (long)this.aClass121_3814.anInt1639);
+            var1.glColorPointer(4, 5121, this.aClass121_3814.anInt1648, this.aClass121_3814.anInt1639);
          }
 
          if(Class106.aBoolean1441 && this.aClass121_3815.aClass156_1643 != null) {
@@ -2926,7 +2926,7 @@ final class Class140_Sub1_Sub1 extends Model {
                var2 = this.aClass121_3815.aClass156_1643;
             }
 
-            var1.glNormalPointer(5126, this.aClass121_3815.anInt1648, (long)this.aClass121_3815.anInt1639);
+            var1.glNormalPointer(5126, this.aClass121_3815.anInt1648, this.aClass121_3815.anInt1639);
          }
 
          if(this.aClass121_3817.aClass156_1643 != null) {
@@ -2934,7 +2934,7 @@ final class Class140_Sub1_Sub1 extends Model {
                this.aClass121_3817.aClass156_1643.method2169();
             }
 
-            var1.glTexCoordPointer(2, 5126, this.aClass121_3817.anInt1648, (long)this.aClass121_3817.anInt1639);
+            var1.glTexCoordPointer(2, 5126, this.aClass121_3817.anInt1648, this.aClass121_3817.anInt1639);
          }
 
          if(this.aClass121_3846.aClass156_1643 != null) {
@@ -2988,7 +2988,7 @@ final class Class140_Sub1_Sub1 extends Model {
                this.aClass121_3846.aByteBuffer1644.position(var5 * 12);
                var1.glDrawElements(4, (var6 - var5) * 3, 5125, this.aClass121_3846.aByteBuffer1644);
             } else {
-               var1.glDrawElements(4, (var6 - var5) * 3, 5125, (long)(var5 * 12));
+               var1.glDrawElements(4, (var6 - var5) * 3, 5125, var5 * 12);
             }
          }
 
@@ -3287,7 +3287,7 @@ final class Class140_Sub1_Sub1 extends Model {
       int[] var63 = null;
       int[] var61 = null;
       int[] var64 = null;
-      float[][] var65 = (float[][])null;
+      float[][] var65 = null;
       int var27;
       int var68;
       float var79;

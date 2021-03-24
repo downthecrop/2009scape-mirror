@@ -168,7 +168,7 @@ final class Class3_Sub13_Sub8 extends TextureOperation {
 				long var6 = var3 / (long)var0;
 
 				int var5;
-				for(var5 = 1; var6 != 0L; var6 /= (long)var0) {
+				for(var5 = 1; var6 != 0L; var6 /= var0) {
 					++var5;
 				}
 
@@ -188,7 +188,7 @@ final class Class3_Sub13_Sub8 extends TextureOperation {
 
 				for(int var10 = 0; var10 < var5; ++var10) {
 					int var11 = (int)(var3 % (long)var0);
-					var3 /= (long)var0;
+					var3 /= var0;
 					if(var11 < 0) {
 						var11 = -var11;
 					}

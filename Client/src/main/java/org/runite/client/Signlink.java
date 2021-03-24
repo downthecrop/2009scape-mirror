@@ -15,33 +15,203 @@ import java.util.Vector;
 
 public class Signlink implements Runnable {
 
+    private static final Hashtable<String, File> cachedFiles = new Hashtable<>(18);
     public static String javaVersion;
+    public static String osName;
+    public static String osNameCS;
+    public static int anInt1214 = 1;
+    public static String javaVendor;
+    public static String osArchitecture;
+    public static Method setFocusCycleRoot;
+    public static Method setTraversalKeysEnabled;
+    static volatile long aLong1221 = 0L;
+    private static String homeDirectory;
+    private final Thread thread;
+    private final String gameName;
+    private final int anInt1215;
     public RandomAccessFileWrapper[] cacheIndicesFiles;
     public RandomAccessFileWrapper cacheDataFile;
     public EventQueue systemEventQueue;
-    private final Thread thread;
-    private boolean stopped;
-    public static String osName;
-    private Class64 aClass64_1203 = null;
     public RandomAccessFileWrapper cacheChecksumFile;
-    public static String osNameCS;
-    private Sensor sensor;
     public RandomAccessFileWrapper randomDatFile;
-    private Display display;
-    private static String homeDirectory;
-    private static final Hashtable<String, File> cachedFiles = new Hashtable<>(18);
-    private final String gameName;
-    private Class64 aClass64_1213 = null;
-    public static int anInt1214 = 1;
-    private final int anInt1215;
-    public static String javaVendor;
-    private Interface1 anInterface1_1217;
-    public static String osArchitecture;
     public Applet gameApplet;
-    public static Method setFocusCycleRoot;
-    static volatile long aLong1221 = 0L;
-    public static Method setTraversalKeysEnabled;
+    private boolean stopped;
+    private Class64 aClass64_1203 = null;
+    private Sensor sensor;
+    private Display display;
+    private Class64 aClass64_1213 = null;
+    private Interface1 anInterface1_1217;
 
+
+    public Signlink(Applet applet, int var2, String gameName, int cacheIndexes) throws Exception {
+        javaVersion = "1.1";
+        this.gameName = gameName;
+        this.anInt1215 = var2;
+        this.gameApplet = applet;
+        javaVendor = "Unknown";
+
+        try {
+            javaVendor = System.getProperty("java.vendor");
+            javaVersion = System.getProperty("java.version");
+        } catch (Exception var17) {
+        }
+
+        try {
+            osNameCS = System.getProperty("os.name");
+        } catch (Exception var16) {
+            osNameCS = "Unknown";
+        }
+
+        osName = osNameCS.toLowerCase();
+
+        try {
+            osArchitecture = System.getProperty("os.arch").toLowerCase();
+        } catch (Exception var15) {
+            osArchitecture = "";
+        }
+
+        try {
+            homeDirectory = System.getProperty("user.home");
+            if (homeDirectory != null) {
+                homeDirectory = homeDirectory + "/";
+            }
+        } catch (Exception var13) {
+        }
+
+        if (homeDirectory == null) {
+            homeDirectory = "~/";
+        }
+
+        try {
+            this.systemEventQueue = Toolkit.getDefaultToolkit().getSystemEventQueue();
+        } catch (Throwable var12) {
+        }
+
+        try {
+            if (applet == null) {
+                setTraversalKeysEnabled = Class.forName("java.awt.Component").getDeclaredMethod("setFocusTraversalKeysEnabled", Boolean.TYPE);
+            } else {
+                setTraversalKeysEnabled = applet.getClass().getMethod("setFocusTraversalKeysEnabled", Boolean.TYPE);
+            }
+        } catch (Exception var11) {
+        }
+
+        try {
+            if (applet == null) {
+                setFocusCycleRoot = Class.forName("java.awt.Container").getDeclaredMethod("setFocusCycleRoot", Boolean.TYPE);
+            } else {
+                setFocusCycleRoot = applet.getClass().getMethod("setFocusCycleRoot", Boolean.TYPE);
+            }
+        } catch (Exception var10) {
+        }
+
+        this.randomDatFile = new RandomAccessFileWrapper(method1448(null, this.anInt1215, "random.dat"), "rw", 25L);
+        this.cacheDataFile = new RandomAccessFileWrapper(method1448(this.gameName, this.anInt1215, "main_file_cache.dat2"), "rw", 104857600L);
+        this.cacheChecksumFile = new RandomAccessFileWrapper(method1448(this.gameName, this.anInt1215, "main_file_cache.idx255"), "rw", 1048576L);
+        this.cacheIndicesFiles = new RandomAccessFileWrapper[cacheIndexes];
+
+        for (int i = 0; i < cacheIndexes; ++i) {
+            this.cacheIndicesFiles[i] = new RandomAccessFileWrapper(method1448(this.gameName, this.anInt1215, "main_file_cache.idx" + i), "rw", 1048576L);
+        }
+
+        try {
+            this.display = new Display();
+        } catch (Throwable var9) {
+            var9.printStackTrace();
+        }
+
+        try {
+            this.sensor = new Sensor();
+        } catch (Throwable var8) {
+        }
+
+        ThreadGroup threadGroup = Thread.currentThread().getThreadGroup();
+
+        for (ThreadGroup parent = threadGroup.getParent(); parent != null; parent = parent.getParent()) {
+            threadGroup = parent;
+        }
+
+        Thread[] threads = new Thread[1000];
+        threadGroup.enumerate(threads);
+
+        for (Thread value : threads) {
+            if (value != null && value.getName().startsWith("AWT")) {
+                value.setPriority(1);
+            }
+        }
+
+        this.stopped = false;
+        this.thread = new Thread(this);
+        this.thread.setPriority(10);
+        this.thread.setDaemon(true);
+        this.thread.start();
+    }
+
+    private static RandomAccessFileWrapper method1438(boolean var0, String var1) {
+        if (var0) {
+            method1438(true, null);
+        }
+
+        String[] var2 = new String[]{"c:/rscache/", "/rscache/", homeDirectory, "c:/windows/", "c:/winnt/", "c:/", "/tmp/", ""};
+
+        for (String var4 : var2) {
+            if (var4.length() <= 0 || (new File(var4)).exists()) {
+                try {
+                    return new RandomAccessFileWrapper(new File(var4, "jagex_" + var1 + "_preferences.dat"), "rw", 10000L);
+                } catch (Exception var6) {
+                }
+            }
+        }
+
+        return null;
+    }
+
+    public static File method1448(String gameName, int var1, String filename) {
+        File cachedFile = cachedFiles.get(filename);
+        if (cachedFile == null) {
+            String[] basePaths = new String[]{homeDirectory, "c:/rscache/", "/rscache/", "c:/windows/", "c:/winnt/", "c:/", "/tmp/", ""};
+            String[] folders = new String[]{".runite_rs", ".530file_store_" + var1};
+            for (int i = 0; i < 2; ++i) {
+                for (String folder : folders) {
+                    for (String basePath : basePaths) {
+                        String fullPath = basePath + folder + "/" + (gameName != null ? gameName + "/" : "") + filename;
+                        RandomAccessFile raf = null;
+                        try {
+                            File file = new File(fullPath);
+                            if (i != 0 || file.exists()) {
+                                if (i != 1 || basePath.length() <= 0 || (new File(basePath)).exists()) {
+                                    (new File(basePath + folder)).mkdir();
+                                    if (gameName != null) {
+                                        (new File(basePath + folder + "/" + gameName)).mkdir();
+                                    }
+                                    //								ClientLoader.getLibraryDownloader().updateDlls(var10.toString());
+                                    raf = new RandomAccessFile(file, "rw");
+                                    int var14 = raf.read();
+                                    raf.seek(0L);
+                                    raf.write(var14);
+                                    raf.seek(0L);
+                                    raf.close();
+                                    cachedFiles.put(filename, file);
+                                    return file;
+                                }
+                            }
+                        } catch (Exception e) {
+                            try {
+                                if (raf != null) {
+                                    raf.close();
+                                }
+                            } catch (Exception e2) {
+                            }
+                        }
+                    }
+                }
+            }
+
+            throw new RuntimeException();
+        } else {
+            return cachedFile;
+        }
+    }
 
     public final void method1431() {
         aLong1221 = TimeUtils.time() + 5000L;
@@ -94,25 +264,6 @@ public class Signlink implements Runnable {
         }
 
         return this.method1435(7, 0, var1, 0);
-    }
-
-    private static RandomAccessFileWrapper method1438(boolean var0, String var1) {
-        if (var0) {
-            method1438(true, null);
-        }
-
-        String[] var2 = new String[]{"c:/rscache/", "/rscache/", homeDirectory, "c:/windows/", "c:/winnt/", "c:/", "/tmp/", ""};
-
-        for (String var4 : var2) {
-            if (var4.length() <= 0 || (new File(var4)).exists()) {
-                try {
-                    return new RandomAccessFileWrapper(new File(var4, "jagex_" + var1 + "_preferences.dat"), "rw", 10000L);
-                } catch (Exception var6) {
-                }
-            }
-        }
-
-        return null;
     }
 
     public final Class64 method1439(boolean var1, URL var2) {
@@ -240,14 +391,15 @@ public class Signlink implements Runnable {
 
                             SystemLogger.logInfo("Signlink - os Name: " + osName);
                             SystemLogger.logInfo("Signlink - os Arch: " + osArchitecture);
-                            if(osArchitecture.equals("aarch64")) SystemLogger.logWarn("Going into HD will fail - current libs do not support ARM.");
+                            if (osArchitecture.equals("aarch64"))
+                                SystemLogger.logWarn("Going into HD will fail - current libs do not support ARM.");
                             if (osName.startsWith("linux") || isSunOS) {
                                 createLibs(isSunOS ? (is64Bit ? 7 : 6) : (is64Bit ? 5 : 4));
                                 var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, "libgluegen-rt.so").toString());
                                 Class var8 = ((Class) var1.anObject977).getClassLoader().loadClass("com.sun.opengl.impl.x11.DRIHack");
-                                var8.getMethod("begin", new Class[0]).invoke(null, new Object[0]);
+                                var8.getMethod("begin", new Class[0]).invoke(null);
                                 var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, "libjogl.so").toString());
-                                var8.getMethod("end", new Class[0]).invoke(null, new Object[0]);
+                                var8.getMethod("end", new Class[0]).invoke(null);
                                 var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, "libjogl_awt.so").toString());
 
 
@@ -280,9 +432,9 @@ public class Signlink implements Runnable {
 
                                 for (var18 = 0; var18 < var24.size(); ++var18) {
                                     Object var26 = var24.elementAt(var18);
-                                    Method var9 = var26.getClass().getDeclaredMethod("finalize", new Class[0]);
+                                    Method var9 = var26.getClass().getDeclaredMethod("finalize");
                                     var9.setAccessible(true);
-                                    var9.invoke(var26, new Object[0]);
+                                    var9.invoke(var26);
                                     var9.setAccessible(false);
                                     Field var10 = var26.getClass().getDeclaredField("handle");
                                     var10.setAccessible(true);
@@ -359,7 +511,7 @@ public class Signlink implements Runnable {
         fos.write(bs);
         fos.flush();
         fos.close();
-        bs = CacheIndex.libIndex.getFile(archive,1);
+        bs = CacheIndex.libIndex.getFile(archive, 1);
         if (bs == null || bs.length < 1) {
             System.err.println("Could not create native lib " + jogl + ", archive=" + archive + "!");
             return;
@@ -369,7 +521,7 @@ public class Signlink implements Runnable {
         fos.flush();
         fos.close();
         if (archive > 3) {
-            bs = CacheIndex.libIndex.getFile(archive,2);
+            bs = CacheIndex.libIndex.getFile(archive, 2);
             if (bs == null || bs.length < 1) {
                 System.err.println("Could not create native lib libgluegen-rt.so, archive=" + archive + "!");
                 return;
@@ -455,53 +607,6 @@ public class Signlink implements Runnable {
         return this.method1435(9, 0, new Object[]{var3, var2}, 0);
     }
 
-    public static File method1448(String gameName, int var1, String filename) {
-        File cachedFile = cachedFiles.get(filename);
-        if (cachedFile == null) {
-            String[] basePaths = new String[]{homeDirectory, "c:/rscache/", "/rscache/", "c:/windows/", "c:/winnt/", "c:/", "/tmp/", ""};
-            String[] folders = new String[]{".runite_rs", ".530file_store_" + var1};
-            for (int i = 0; i < 2; ++i) {
-                for (String folder : folders) {
-                    for (String basePath : basePaths) {
-                        String fullPath = basePath + folder + "/" + (gameName != null ? gameName + "/" : "") + filename;
-                        RandomAccessFile raf = null;
-                        try {
-                            File file = new File(fullPath);
-                            if (i != 0 || file.exists()) {
-                                if (i != 1 || basePath.length() <= 0 || (new File(basePath)).exists()) {
-                                    (new File(basePath + folder)).mkdir();
-                                    if (gameName != null) {
-                                        (new File(basePath + folder + "/" + gameName)).mkdir();
-                                    }
-                                    //								ClientLoader.getLibraryDownloader().updateDlls(var10.toString());
-                                    raf = new RandomAccessFile(file, "rw");
-                                    int var14 = raf.read();
-                                    raf.seek(0L);
-                                    raf.write(var14);
-                                    raf.seek(0L);
-                                    raf.close();
-                                    cachedFiles.put(filename, file);
-                                    return file;
-                                }
-                            }
-                        } catch (Exception e) {
-                            try {
-                                if (raf != null) {
-                                    raf.close();
-                                }
-                            } catch (Exception e2) {
-                            }
-                        }
-                    }
-                }
-            }
-
-            throw new RuntimeException();
-        } else {
-            return cachedFile;
-        }
-    }
-
     public final Class64 method1449(int var1, int var2) {
         if (var1 != 3) {
             this.cacheChecksumFile = null;
@@ -532,109 +637,5 @@ public class Signlink implements Runnable {
         }
 
         return this.method1435(5, 0, null, 0);
-    }
-
-    public Signlink(Applet applet, int var2, String gameName, int cacheIndexes) throws Exception {
-        javaVersion = "1.1";
-        this.gameName = gameName;
-        this.anInt1215 = var2;
-        this.gameApplet = applet;
-        javaVendor = "Unknown";
-
-        try {
-            javaVendor = System.getProperty("java.vendor");
-            javaVersion = System.getProperty("java.version");
-        } catch (Exception var17) {
-        }
-
-        try {
-            osNameCS = System.getProperty("os.name");
-        } catch (Exception var16) {
-            osNameCS = "Unknown";
-        }
-
-        osName = osNameCS.toLowerCase();
-
-        try {
-            osArchitecture = System.getProperty("os.arch").toLowerCase();
-        } catch (Exception var15) {
-            osArchitecture = "";
-        }
-
-        try {
-            homeDirectory = System.getProperty("user.home");
-            if (homeDirectory != null) {
-                homeDirectory = homeDirectory + "/";
-            }
-        } catch (Exception var13) {
-        }
-
-        if (homeDirectory == null) {
-            homeDirectory = "~/";
-        }
-
-        try {
-            this.systemEventQueue = Toolkit.getDefaultToolkit().getSystemEventQueue();
-        } catch (Throwable var12) {
-        }
-
-        try {
-            if (applet == null) {
-                setTraversalKeysEnabled = Class.forName("java.awt.Component").getDeclaredMethod("setFocusTraversalKeysEnabled", Boolean.TYPE);
-            } else {
-                setTraversalKeysEnabled = applet.getClass().getMethod("setFocusTraversalKeysEnabled", Boolean.TYPE);
-            }
-        } catch (Exception var11) {
-        }
-
-        try {
-            if (applet == null) {
-                setFocusCycleRoot = Class.forName("java.awt.Container").getDeclaredMethod("setFocusCycleRoot", Boolean.TYPE);
-            } else {
-                setFocusCycleRoot = applet.getClass().getMethod("setFocusCycleRoot", Boolean.TYPE);
-            }
-        } catch (Exception var10) {
-        }
-
-        this.randomDatFile = new RandomAccessFileWrapper(method1448(null, this.anInt1215, "random.dat"), "rw", 25L);
-        this.cacheDataFile = new RandomAccessFileWrapper(method1448(this.gameName, this.anInt1215, "main_file_cache.dat2"), "rw", 104857600L);
-        this.cacheChecksumFile = new RandomAccessFileWrapper(method1448(this.gameName, this.anInt1215, "main_file_cache.idx255"), "rw", 1048576L);
-        this.cacheIndicesFiles = new RandomAccessFileWrapper[cacheIndexes];
-
-        for (int i = 0; i < cacheIndexes; ++i) {
-            this.cacheIndicesFiles[i] = new RandomAccessFileWrapper(method1448(this.gameName, this.anInt1215, "main_file_cache.idx" + i), "rw", 1048576L);
-        }
-
-        try {
-            this.display = new Display();
-        } catch (Throwable var9) {
-            var9.printStackTrace();
-        }
-
-        try {
-            this.sensor = new Sensor();
-        } catch (Throwable var8) {
-        }
-
-        ThreadGroup threadGroup = Thread.currentThread().getThreadGroup();
-
-        for (ThreadGroup parent = threadGroup.getParent(); parent != null; parent = parent.getParent()) {
-            threadGroup = parent;
-        }
-
-        Thread[] threads = new Thread[1000];
-        threadGroup.enumerate(threads);
-
-        for (Thread value : threads) {
-            if (value != null && value.getName().startsWith("AWT")) {
-                value.setPriority(1);
-            }
-        }
-
-        this.stopped = false;
-        this.thread = new Thread(this);
-        this.thread.setPriority(10);
-        this.thread.setDaemon(true);
-        this.thread.start();
     }
 }

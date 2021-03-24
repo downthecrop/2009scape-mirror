@@ -14,7 +14,7 @@ final class Class3_Sub13_Sub37 extends TextureOperation {
    final void method158(int var1) {
       try {
          if(var1 != 16251) {
-            this.anIntArray3443 = (int[])null;
+            this.anIntArray3443 = null;
          }
 
          if(this.anIntArrayArray3438 == null) {
@@ -352,7 +352,7 @@ final class Class3_Sub13_Sub37 extends TextureOperation {
       try {
          int[][] var3 = this.aClass97_2376.method1594((byte)90, var2);
          if(var1 != -1) {
-            this.method157(-71, (DataBuffer)null, false);
+            this.method157(-71, null, false);
          }
 
          if(this.aClass97_2376.aBoolean1379) {
@@ -455,7 +455,7 @@ final class Class3_Sub13_Sub37 extends TextureOperation {
 
    static Class168 method350(byte var0, int var1) {
       try {
-         Class168 var2 = (Class168)Class163_Sub2_Sub1.aReferenceCache_4015.get((long)var1);
+         Class168 var2 = (Class168)Class163_Sub2_Sub1.aReferenceCache_4015.get(var1);
          if(null == var2) {
             byte[] var4 = Class3_Sub28_Sub5.aClass153_3580.getFile(4, var1);
             var2 = new Class168();
@@ -463,7 +463,7 @@ final class Class3_Sub13_Sub37 extends TextureOperation {
                var2.method2274(new DataBuffer(var4), var1);
             }
 
-            Class163_Sub2_Sub1.aReferenceCache_4015.put(var2, (long)var1);
+            Class163_Sub2_Sub1.aReferenceCache_4015.put(var2, var1);
          }
           return var2;
       } catch (RuntimeException var5) {

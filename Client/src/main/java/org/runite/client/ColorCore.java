@@ -11,7 +11,8 @@ public class ColorCore {
      * to the corresponding name
      */
 
-    /** Used to display the color difference between two players
+    /**
+     * Used to display the color difference between two players
      * Files that use these colors:
      * Class72.java - combatLevelColor
      * Class3_Sub13_Sub30.java - getCombatLevelDifferenceColor
@@ -31,9 +32,9 @@ public class ColorCore {
     static RSString LvlDiffP9 = RSString.parse("<col=00ff00>");//Bright Green OG: <col=00ff00>
 
 
-
     //Used to display the color of coins
-    /** Used to display the color of stacks of items/coins
+    /**
+     * Used to display the color of stacks of items/coins
      * Files that use these colors:
      * Class3_Sub7.java - Method123
      * Class36.java - Method1013
@@ -43,7 +44,8 @@ public class ColorCore {
     static RSString DefaultStackColor = RSString.parse("<col=ffff00>");//Yellow
 
 
-    /** Used to display the color of Usernames/items/etc. "Context_Menu_Color"
+    /**
+     * Used to display the color of Usernames/items/etc. "Context_Menu_Color"
      * Files that use these colors:
      * Class3_Sub13_Sub30.java - method312
      * Class3_Sub30_Sub1.java - method806
@@ -73,7 +75,8 @@ public class ColorCore {
     static RSString TextColor = RSString.parse(" )2> <col=ffff00>");
 
 
-    /** Used to change the loading bar color on client launch
+    /**
+     * Used to change the loading bar color on client launch
      * Files that use these colors:
      * Class3_Sub28_Sub1.java - method updateLoadingBar
      */

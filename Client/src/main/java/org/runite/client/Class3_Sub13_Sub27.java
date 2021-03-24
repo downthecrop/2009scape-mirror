@@ -94,7 +94,7 @@ final class Class3_Sub13_Sub27 extends TextureOperation {
    final int[][] method166(int var1, int var2) {
       try {
          if(var1 != -1) {
-            this.method157(-8, (DataBuffer)null, false);
+            this.method157(-8, null, false);
          }
 
          int[][] var3 = this.aClass97_2376.method1594((byte)-125, var2);
@@ -262,7 +262,7 @@ final class Class3_Sub13_Sub27 extends TextureOperation {
             }
 
             if(var2 != 1) {
-               aClass94Array3341 = (RSString[])null;
+               aClass94Array3341 = null;
             }
 
          }
@@ -598,7 +598,7 @@ final class Class3_Sub13_Sub27 extends TextureOperation {
          }
 
          if(!var3) {
-            TextCore.aClass94_3339 = (RSString)null;
+            TextCore.aClass94_3339 = null;
          }
 
       } catch (RuntimeException var5) {

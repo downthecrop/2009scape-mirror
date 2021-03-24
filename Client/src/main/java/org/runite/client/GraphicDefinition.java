@@ -24,7 +24,7 @@ public final class GraphicDefinition {
 
 	static GraphicDefinition getGraphicDefinition(byte var0, int graphicId) {
 		try {
-			GraphicDefinition def = (GraphicDefinition) Class3_Sub31.aReferenceCache_2604.get((long) graphicId);
+			GraphicDefinition def = (GraphicDefinition) Class3_Sub31.aReferenceCache_2604.get(graphicId);
 			if (def == null) {
 				byte[] var3 = Class3_Sub13_Sub18.aClass153_3214.getFile(Unsorted.method64(graphicId), Class75.method1338(graphicId, var0 ^ 7));
 				def = new GraphicDefinition();
@@ -37,7 +37,7 @@ public final class GraphicDefinition {
 					def.parse(new DataBuffer(var3));
 				}
 
-				Class3_Sub31.aReferenceCache_2604.put(def, (long) graphicId);
+				Class3_Sub31.aReferenceCache_2604.put(def, graphicId);
 			}
 			return def;
 		} catch (RuntimeException var4) {

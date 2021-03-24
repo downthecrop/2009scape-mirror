@@ -15,6 +15,7 @@ import java.util.Date;
 
 public final class CS2Script extends Linkable {
 
+    public static int userCurrentWorldID = -1;
     static short aShort3052 = 205;
     static int anInt3101 = 0;
     static int[] anIntArray3228 = new int[]{7, 8, 9, 10, 11, 12, 13, 15};
@@ -24,11 +25,14 @@ public final class CS2Script extends Linkable {
     static RSInterface aClass11_1749;
     static boolean aBoolean2705 = true;
     static int anInt3775 = 0;
+    static int anInt2440 = 0;
+    static ReferenceCache aReferenceCache_2442 = new ReferenceCache(50);
+    static ReferenceCache aReferenceCache_2450 = new ReferenceCache(64);
+    static byte[][][] aByteArrayArrayArray2452;
+    static int anInt2453 = 127;
     RSInterface aClass11_2438;
     RSString aClass94_2439;
-    static int anInt2440 = 0;
     int scrollbarScrollAmount;
-    static ReferenceCache aReferenceCache_2442 = new ReferenceCache(50);
     int anInt2443;
     int inputTextCode;
     int interfaceButtons;
@@ -36,11 +40,6 @@ public final class CS2Script extends Linkable {
     int worldSelectCursorPositionX;
     Object[] arguments;
     RSInterface aClass11_2449;
-    static ReferenceCache aReferenceCache_2450 = new ReferenceCache(64);
-    public static int userCurrentWorldID = -1;
-    static byte[][][] aByteArrayArrayArray2452;
-    static int anInt2453 = 127;
-
 
     static void sendRegistryRequest(int year, int country, int day, int month) {
         try {
@@ -65,7 +64,7 @@ public final class CS2Script extends Linkable {
             Class79 var2 = (Class79) aReferenceCache_2450.get(var0);
             if (var2 == null) {
                 if (var1 < 126) {
-                    return (Class79) null;
+                    return null;
                 } else {
                     byte[] var3 = Class101.aClass153_1420.getFile(Class140_Sub7.method2032(var0), var0 & 1023);
                     var2 = new Class79();
@@ -73,7 +72,7 @@ public final class CS2Script extends Linkable {
                         var2.method1387(new DataBuffer(var3));
                     }
 
-                    aReferenceCache_2450.put(var2, (long) var0);
+                    aReferenceCache_2450.put(var2, var0);
                     return var2;
                 }
             } else {
@@ -153,7 +152,7 @@ public final class CS2Script extends Linkable {
                 var8 = 383;
             }
 
-            int var9 = (int) (-325.949D * Math.atan2((double) var4, (double) var6)) & 2047;
+            int var9 = (int) (-325.949D * Math.atan2(var4, var6)) & 2047;
             if (var8 > Class139.anInt1823) {
                 Class139.anInt1823 += Class75.anInt1105 + Class163_Sub2_Sub1.anInt4014 * (-Class139.anInt1823 + var8) / 1000;
                 if (Class139.anInt1823 > var8) {
@@ -3468,7 +3467,7 @@ public final class CS2Script extends Linkable {
                                         }
                                         if (opcode == 2702) {
                                             int l42 = ItemDefinition.intsStack[--iStackCounter];
-                                            Class3_Sub31 class3_sub31 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get(l42);
+                                            Class3_Sub31 class3_sub31 = Class3_Sub13_Sub17.aHashTable_3208.get(l42);
                                             if (class3_sub31 == null)
                                                 ItemDefinition.intsStack[iStackCounter++] = 0;
                                             else
@@ -3500,7 +3499,7 @@ public final class CS2Script extends Linkable {
                                         iStackCounter -= 2;
                                         int i43 = ItemDefinition.intsStack[iStackCounter];
                                         int j65 = ItemDefinition.intsStack[iStackCounter + 1];
-                                        Class3_Sub31 class3_sub31_1 = (Class3_Sub31) Class3_Sub13_Sub17.aHashTable_3208.get(i43);
+                                        Class3_Sub31 class3_sub31_1 = Class3_Sub13_Sub17.aHashTable_3208.get(i43);
                                         if (class3_sub31_1 == null || class3_sub31_1.anInt2602 != j65)
                                             ItemDefinition.intsStack[iStackCounter++] = 0;
                                         else
@@ -3987,7 +3986,7 @@ public final class CS2Script extends Linkable {
     static int method1643(boolean var1, int var2, int var3) {
         try {
 
-            Class3_Sub25 var4 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get((long) var2);
+            Class3_Sub25 var4 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var2);
             if (null == var4) {
                 return 0;
             } else {
@@ -3997,7 +3996,7 @@ public final class CS2Script extends Linkable {
                     if (var4.anIntArray2547[var6] >= 0 && Class3_Sub13_Sub23.itemDefinitionSize > var4.anIntArray2547[var6]) {
                         ItemDefinition var7 = ItemDefinition.getItemDefinition(var4.anIntArray2547[var6]);
                         if (null != var7.aHashTable_798) {
-                            LinkableInt var8 = (LinkableInt) var7.aHashTable_798.get((long) var3);
+                            LinkableInt var8 = (LinkableInt) var7.aHashTable_798.get(var3);
                             if (null != var8) {
                                 if (var1) {
                                     var5 += var4.anIntArray2551[var6] * var8.value;

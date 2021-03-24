@@ -202,7 +202,7 @@ public final class WorldListEntry extends Class44 {
             if (0 > var0) {
                 return 0;
             } else {
-                Class3_Sub25 var2 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get((long) var0);
+                Class3_Sub25 var2 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var0);
                 if (var2 == null) {
                     return Objects.requireNonNull(Unsorted.method2069(var0)).size;
                 } else {

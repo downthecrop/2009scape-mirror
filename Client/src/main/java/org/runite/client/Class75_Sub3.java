@@ -13,15 +13,6 @@ final class Class75_Sub3 extends Class75 {
    private final int anInt2659;
    private final int anInt2661;
 
-   static void method1366() {
-      try {
-          Class158_Sub1.aReferenceCache_2982.sweep(5);
-      } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "kh.C(" + 104 + ',' + 5 + ')');
-      }
-   }
-
-
    final void method1337(int var1, boolean var2, int var3) {
       try {
          int var4 = var3 * this.anInt2654 >> 12;
@@ -38,25 +29,38 @@ final class Class75_Sub3 extends Class75 {
       }
    }
 
-   static void method1346() {
+   static void sweepClientStartupReferenceCache() {
       try {
-         Class3_Sub13_Sub2.method174();
-         Class38.method1027(5, (byte)69);
-         Class3_Sub24_Sub3.method465();
-         Class3_Sub24_Sub4.method474();
-         Class140_Sub6.method2025();
-         Class114.method1711(5, 26211 + -25956);
-         Class3_Sub9.method137(5, (byte)-118);
-         Unsorted.method795();
-         Class3_Sub28_Sub3.method539();
-         Class3_Sub13_Sub4.method188(5, 0);
-         Class166.method2260();
-         Unsorted.method594(26211 + -26090, 5);
-         Unsorted.method595();
-         Class3_Sub31.method820(5, 64);
-         Class25.method953();
-         Class3_Sub13_Sub21.method269(-5, 5);
-         method1366();
+         Class163_Sub2_Sub1.aReferenceCache_4015.sweep(5);
+         Class44.aReferenceCache_725.sweep(5);
+         Class140_Sub4.aReferenceCache_2792.sweep(5);
+         Unsorted.aReferenceCache_21.sweep(5);
+         ObjectDefinition.aReferenceCache_1401.sweep(5);
+         Unsorted.aReferenceCache_4051.sweep(5);
+         ObjectDefinition.aReferenceCache_1965.sweep(5);
+         Unsorted.aReferenceCache_4043.sweep(5);
+         CS2Script.aReferenceCache_2442.sweep(5);
+         Class154.aReferenceCache_1964.sweep(5);
+         Class3_Sub28_Sub4.aReferenceCache_3572.sweep(5);
+         Class143.aReferenceCache_1874.sweep(5);
+         Class67.aReferenceCache_1013.sweep(5);
+         Class82.aReferenceCache_1146.sweep(5);
+         Class159.aReferenceCache_2016.sweep(5);
+         CS2Script.aReferenceCache_2450.sweep(5);
+         Class136.aReferenceCache_1772.sweep(5);
+         RenderAnimationDefinition.aReferenceCache_1955.sweep(5);
+         Class3_Sub13_Sub34.aReferenceCache_3412.sweep(5);
+         Class3_Sub13_Sub31.aReferenceCache_3369.sweep(5);
+         Class128.aReferenceCache_1683.sweep(5);
+         Unsorted.aReferenceCache_684.sweep(5);
+         Class163_Sub1.aReferenceCache_2984.sweep(5);
+         KeyboardListener.aReferenceCache_1911.sweep(5);
+         Unsorted.aReferenceCache_1131.sweep(5);
+         Class114.aReferenceCache_1569.sweep(50);
+         Class3_Sub15.aReferenceCache_2428.sweep(50);
+         Unsorted.aReferenceCache_743.sweep(50);
+         Class61.aReferenceCache_939.sweep(5);
+         Class158_Sub1.aReferenceCache_2982.sweep(5);
          Class3_Sub13_Sub11.aReferenceCache_3130.sweep(5);
          Unsorted.aReferenceCache_1135.sweep(5);
       } catch (RuntimeException var2) {
@@ -139,7 +143,7 @@ final class Class75_Sub3 extends Class75 {
             Class39.method1035((byte)106);
             return var1;
          } else {
-            return (AbstractSprite[])null;
+            return null;
          }
       } catch (RuntimeException var8) {
          throw ClientErrorException.clientError(var8, "re.B(" + var0 + ')');

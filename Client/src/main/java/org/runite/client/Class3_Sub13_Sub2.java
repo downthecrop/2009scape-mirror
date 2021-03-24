@@ -96,15 +96,6 @@ final class Class3_Sub13_Sub2 extends TextureOperation {
       }
    }
 
-   static void method174() {
-      try {
-         Class163_Sub2_Sub1.aReferenceCache_4015.sweep(5);
-
-      } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "aj.E(" + 4096 + ',' + 5 + ')');
-      }
-   }
-
    static void method175(int var0, int var1, int var2, int var4, int var5, int var6) {
       try {
          MouseListeningClass.method2091(var5);

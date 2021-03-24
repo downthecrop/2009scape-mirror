@@ -38,7 +38,7 @@ final class Class3_Sub23 extends Linkable {
 
          var2.method699(Class3_Sub17.aClass94_2464, Class23.canvasWidth / 2, 4 + Class140_Sub7.canvasHeight / 2, 16777215, -1);
          if(var0 < 50) {
-            anIntArray2533 = (int[])null;
+            anIntArray2533 = null;
          }
 
       } catch (RuntimeException var5) {

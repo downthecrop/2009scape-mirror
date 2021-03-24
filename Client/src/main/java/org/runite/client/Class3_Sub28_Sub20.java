@@ -37,7 +37,7 @@ final class Class3_Sub28_Sub20 extends Node {
             }
 
             int var6 = !var5?128:64;
-            this.anIntArray3793 = this.aClass82_3790.method1404(var6, this.aBoolean3800, var6, (double)var3, var4, var1, true);
+            this.anIntArray3793 = this.aClass82_3790.method1404(var6, this.aBoolean3800, var6, var3, var4, var1, true);
             this.aFloat3782 = var3;
             if(this.aBoolean3789) {
                int[] var7 = new int[var6];

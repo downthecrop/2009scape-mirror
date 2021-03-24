@@ -15,15 +15,15 @@ public final class CacheIndex {
      * These Indexes listed below are mostly used for CRC checks
      */
     public static CacheIndex fontsIndex;
+    public static CacheIndex musicIndex;
+    public static CacheIndex spritesIndex;
     static CacheIndex skeletonsIndex;
     static CacheIndex skinsIndex;
     static CacheIndex configurationsIndex;
     static CacheIndex interfacesIndex;
     static CacheIndex soundFXIndex;
     static CacheIndex landscapesIndex;
-    public static CacheIndex musicIndex;
     static CacheIndex modelsIndex;
-    public static CacheIndex spritesIndex;
     static CacheIndex texturesIndex;
     static CacheIndex huffmanEncodingIndex;
     static CacheIndex music2Index;
@@ -44,15 +44,22 @@ public final class CacheIndex {
     static CacheIndex particlesConfigIndex;
     static CacheIndex libIndex;
     /**
+     *
      */
 
 
-    private boolean discardPacked;
+    private final boolean discardPacked;
     private final boolean aBoolean1946;
     private final ResourceProvider provider;
     private ReferenceTable referenceTable = null;
     private Object[] packed;
     private Object[][] unpacked;
+
+    public CacheIndex(ResourceProvider provider, boolean var2, boolean var3) {
+        this.provider = provider;
+        this.discardPacked = var2;
+        this.aBoolean1946 = var3;
+    }
 
     private static Object wrap(byte[] data) {
         if (data == null) {
@@ -574,10 +581,10 @@ public final class CacheIndex {
     final byte[] method2140(int file, int archive) {
         if (this.isValidFile(archive, file)) {
             if (this.unpacked[archive] == null || null == this.unpacked[archive][file]) {
-                boolean var4 = this.unpack(archive, (int[]) null);
+                boolean var4 = this.unpack(archive, null);
                 if (!var4) {
                     this.load(archive);
-                    var4 = this.unpack(archive, (int[]) null);
+                    var4 = this.unpack(archive, null);
                     if (!var4) {
                         return null;
                     }
@@ -609,12 +616,6 @@ public final class CacheIndex {
         } catch (RuntimeException var5) {
             throw ClientErrorException.clientError(var5, "ve.G(" + (byte) -128 + ',' + archiveId + ')');
         }
-    }
-
-    public CacheIndex(ResourceProvider provider, boolean var2, boolean var3) {
-        this.provider = provider;
-        this.discardPacked = var2;
-        this.aBoolean1946 = var3;
     }
 
     final int getFileAmount(int archiveId) {

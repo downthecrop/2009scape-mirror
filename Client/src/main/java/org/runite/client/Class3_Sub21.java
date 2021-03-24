@@ -27,7 +27,7 @@ final class Class3_Sub21 extends Linkable {
          Unsorted.method383(-32584, 3);
          Unsorted.method383(-32584, 4);
          if(var1 <= 83) {
-            method395((Class35)null, -43, -61, -51, 101, -106, -58, true);
+            method395(null, -43, -61, -51, 101, -106, -58, true);
          }
 
       } catch (RuntimeException var3) {

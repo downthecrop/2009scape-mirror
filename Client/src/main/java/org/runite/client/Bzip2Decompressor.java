@@ -2,7 +2,7 @@ package org.runite.client;
 
 public final class Bzip2Decompressor {
 
-   private static Bzip2Context context = new Bzip2Context();
+   private static final Bzip2Context context = new Bzip2Context();
 
 
    private static int method1633(int var0, Bzip2Context var1) {

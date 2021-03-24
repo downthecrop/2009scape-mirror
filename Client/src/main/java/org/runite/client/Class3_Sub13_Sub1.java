@@ -52,7 +52,7 @@ public final class Class3_Sub13_Sub1 extends TextureOperation {
 					var7 = (var8 + -var4) * this.anInt3037;
 				} else {
 					int var10 = var9 * var9 - -(var5 * var5) >> 12;
-					var7 = (int)(Math.sqrt((double)((float)var10 / 4096.0F)) * 4096.0D);
+					var7 = (int)(Math.sqrt((float)var10 / 4096.0F) * 4096.0D);
 					var7 = (int)(3.141592653589793D * (double)(var7 * this.anInt3037));
 				}
 

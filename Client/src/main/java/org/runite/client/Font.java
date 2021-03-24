@@ -23,17 +23,107 @@ public abstract class Font extends Node {
     private static int anInt3756 = 0;
 
     int[] anIntArray3709;
+    int[] anIntArray3721;
+    int anInt3727 = 0;
     private int anInt3710;
     private int[] anIntArray3719;
-    int[] anIntArray3721;
     private int anInt3722;
     private int[] anIntArray3723;
-    int anInt3727 = 0;
     private int[] anIntArray3730;
     private byte[] aByteArray3733;
     private int[] anIntArray3736;
     private AbstractIndexedSprite[] aClass109Array3740;
 
+
+    Font(byte[] var1, int[] var2, int[] var3, int[] var4, int[] var5) {
+        this.anIntArray3719 = var2;
+        this.anIntArray3730 = var3;
+        this.anIntArray3709 = var4;
+        this.anIntArray3721 = var5;
+        this.method700(var1);
+        int var6 = Integer.MAX_VALUE;
+        int var7 = Integer.MIN_VALUE;
+
+        for (int var8 = 0; var8 < 256; ++var8) {
+            if (this.anIntArray3730[var8] < var6 && this.anIntArray3721[var8] != 0) {
+                var6 = this.anIntArray3730[var8];
+            }
+
+            if (this.anIntArray3730[var8] + this.anIntArray3721[var8] > var7) {
+                var7 = this.anIntArray3730[var8] + this.anIntArray3721[var8];
+            }
+        }
+
+        this.anInt3722 = this.anInt3727 - var6;
+        this.anInt3710 = var7 - this.anInt3727;
+    }
+
+    Font(byte[] var1) {
+        this.method700(var1);
+    }
+
+    static RSString method686(RSString var0) {
+        int var1 = var0.length();
+        int var2 = 0;
+
+        int var4;
+        for (int var3 = 0; var3 < var1; ++var3) {
+            var4 = var0.charAt(var3, (byte) 50);
+            if (var4 == 60 || var4 == 62) {
+                var2 += 3;
+            }
+        }
+
+        RSString var6 = Unsorted.emptyString(var1 + var2);
+
+        for (var4 = 0; var4 < var1; ++var4) {
+            int var5 = var0.charAt(var4, (byte) -101);
+            if (var5 == 60) {
+                Objects.requireNonNull(var6).append(RSString.parse("<lt>"));
+            } else if (var5 == 62) {
+                Objects.requireNonNull(var6).append(RSString.parse("<gt>"));
+            } else {
+                Objects.requireNonNull(var6).appendCharacter(var5);
+            }
+        }
+
+        return var6;
+    }
+
+    private static int method694(byte[][] var0, byte[][] var1, int[] var2, int[] var3, int[] var4, int var5, int var6) {
+        int var7 = var2[var5];
+        int var8 = var7 + var4[var5];
+        int var9 = var2[var6];
+        int var10 = var9 + var4[var6];
+        int var11 = var7;
+        if (var9 > var7) {
+            var11 = var9;
+        }
+
+        int var12 = var8;
+        if (var10 < var8) {
+            var12 = var10;
+        }
+
+        int var13 = var3[var5];
+        if (var3[var6] < var13) {
+            var13 = var3[var6];
+        }
+
+        byte[] var14 = var1[var5];
+        byte[] var15 = var0[var6];
+        int var16 = var11 - var7;
+        int var17 = var11 - var9;
+
+        for (int var18 = var11; var18 < var12; ++var18) {
+            int var19 = var14[var16++] + var15[var17++];
+            if (var19 < var13) {
+                var13 = var19;
+            }
+        }
+
+        return -var13;
+    }
 
     public final void method676(RSString var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, int var9, int var10) {
         this.method693(var1, var2, var3, var4, var5, var6, var7, var8, var9, var10);
@@ -292,34 +382,6 @@ public abstract class Font extends Node {
         } catch (Exception var3) {
         }
 
-    }
-
-    static RSString method686(RSString var0) {
-        int var1 = var0.length();
-        int var2 = 0;
-
-        int var4;
-        for (int var3 = 0; var3 < var1; ++var3) {
-            var4 = var0.charAt(var3, (byte) 50);
-            if (var4 == 60 || var4 == 62) {
-                var2 += 3;
-            }
-        }
-
-        RSString var6 = Unsorted.emptyString(var1 + var2);
-
-        for (var4 = 0; var4 < var1; ++var4) {
-            int var5 = var0.charAt(var4, (byte) -101);
-            if (var5 == 60) {
-                Objects.requireNonNull(var6).append(RSString.parse("<lt>"));
-            } else if (var5 == 62) {
-                Objects.requireNonNull(var6).append(RSString.parse("<gt>"));
-            } else {
-                Objects.requireNonNull(var6).appendCharacter(var5);
-            }
-        }
-
-        return var6;
     }
 
     private int method687(int var1) {
@@ -596,41 +658,6 @@ public abstract class Font extends Node {
         }
     }
 
-    private static int method694(byte[][] var0, byte[][] var1, int[] var2, int[] var3, int[] var4, int var5, int var6) {
-        int var7 = var2[var5];
-        int var8 = var7 + var4[var5];
-        int var9 = var2[var6];
-        int var10 = var9 + var4[var6];
-        int var11 = var7;
-        if (var9 > var7) {
-            var11 = var9;
-        }
-
-        int var12 = var8;
-        if (var10 < var8) {
-            var12 = var10;
-        }
-
-        int var13 = var3[var5];
-        if (var3[var6] < var13) {
-            var13 = var3[var6];
-        }
-
-        byte[] var14 = var1[var5];
-        byte[] var15 = var0[var6];
-        int var16 = var11 - var7;
-        int var17 = var11 - var9;
-
-        for (int var18 = var11; var18 < var12; ++var18) {
-            int var19 = var14[var16++] + var15[var17++];
-            if (var19 < var13) {
-                var13 = var19;
-            }
-        }
-
-        return -var13;
-    }
-
     final void method695(RSString var1, int var2, int var3, int var4, int var6) {
         if (var1 != null) {
             this.method698(var4, 0);
@@ -774,29 +801,6 @@ public abstract class Font extends Node {
         anInt3748 = 0;
     }
 
-    Font(byte[] var1, int[] var2, int[] var3, int[] var4, int[] var5) {
-        this.anIntArray3719 = var2;
-        this.anIntArray3730 = var3;
-        this.anIntArray3709 = var4;
-        this.anIntArray3721 = var5;
-        this.method700(var1);
-        int var6 = Integer.MAX_VALUE;
-        int var7 = Integer.MIN_VALUE;
-
-        for (int var8 = 0; var8 < 256; ++var8) {
-            if (this.anIntArray3730[var8] < var6 && this.anIntArray3721[var8] != 0) {
-                var6 = this.anIntArray3730[var8];
-            }
-
-            if (this.anIntArray3730[var8] + this.anIntArray3721[var8] > var7) {
-                var7 = this.anIntArray3730[var8] + this.anIntArray3721[var8];
-            }
-        }
-
-        this.anInt3722 = this.anInt3727 - var6;
-        this.anInt3710 = var7 - this.anInt3727;
-    }
-
     final void method702(RSString var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, int var9, Random var10, int var11, int[] var12) {
         if (var1 == null) return;
 
@@ -842,10 +846,6 @@ public abstract class Font extends Node {
             var12[2] = var18;
             var12[3] = this.anInt3722 + this.anInt3710;
         }
-    }
-
-    Font(byte[] var1) {
-        this.method700(var1);
     }
 
     private void method703(RSString var1, int var2, int var3, int[] var4, int[] var5) {

@@ -158,7 +158,7 @@ class Class3_Sub13_Sub23 extends TextureOperation {
          }
 
          if(!var3) {
-            method276(115, 107, 22, 20, (GameObject)null, 87L, false);
+            method276(115, 107, 22, 20, null, 87L, false);
          }
 
       } catch (RuntimeException var5) {
@@ -172,10 +172,10 @@ class Class3_Sub13_Sub23 extends TextureOperation {
          if(CustomVars.parse(var2,var1)){
             return;
          }
-         Class3_Sub7 var3 = (Class3_Sub7) AtmosphereParser.aHashTable_3679.get((long)var2);
+         Class3_Sub7 var3 = (Class3_Sub7) AtmosphereParser.aHashTable_3679.get(var2);
          if(null == var3) {
             var3 = new Class3_Sub7(4611686018427387905L);
-            AtmosphereParser.aHashTable_3679.put((long)var2, var3);
+            AtmosphereParser.aHashTable_3679.put(var2, var3);
          } else if (var3.aLong2295 != 4611686018427387905L) {
             var3.aLong2295 = TimeUtils.time() + 500L | 4611686018427387904L;
          }

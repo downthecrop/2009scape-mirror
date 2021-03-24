@@ -42,7 +42,7 @@ final class Class3_Sub13_Sub13 extends TextureOperation {
              }
 
              if(cursor == -1 && Class65.anInt991 != -1) {
-                Class38.signlink.method1434((int[])null, 10000, -1, GameShell.canvas, new Point(), -1);
+                Class38.signlink.method1434(null, 10000, -1, GameShell.canvas, new Point(), -1);
                 Class65.anInt991 = -1;
              }
 
@@ -99,7 +99,7 @@ final class Class3_Sub13_Sub13 extends TextureOperation {
 
    static Class24 method231(int var0) {
       try {
-         Class24 var2 = (Class24)Class140_Sub4.aReferenceCache_2792.get((long)var0);
+         Class24 var2 = (Class24)Class140_Sub4.aReferenceCache_2792.get(var0);
          if(var2 == null) {
             byte[] var3 = LoginHandler.aClass153_1680.getFile(3, var0);
             var2 = new Class24();
@@ -107,7 +107,7 @@ final class Class3_Sub13_Sub13 extends TextureOperation {
                var2.method952(new DataBuffer(var3));
             }
 
-            Class140_Sub4.aReferenceCache_2792.put(var2, (long)var0);
+            Class140_Sub4.aReferenceCache_2792.put(var2, var0);
 
          }
          return var2;
@@ -170,7 +170,7 @@ final class Class3_Sub13_Sub13 extends TextureOperation {
    static void method233(int var0, CacheIndex var1) {
       try {
          if(var0 != 28280) {
-            aClass153_3154 = (CacheIndex)null;
+            aClass153_3154 = null;
          }
 
          NPC.anInt4001 = var1.getArchiveForName(TextCore.aClass94_119);
@@ -218,7 +218,7 @@ final class Class3_Sub13_Sub13 extends TextureOperation {
 
             return var3;
          } else {
-            return (int[][])((int[][])null);
+            return null;
          }
       } catch (RuntimeException var16) {
          throw ClientErrorException.clientError(var16, "gg.T(" + var1 + ',' + var2 + ')');
@@ -876,7 +876,7 @@ final class Class3_Sub13_Sub13 extends TextureOperation {
                                        }
 
                                        if(RenderAnimationDefinition.aBoolean402) {
-                                          Class38.method1029(0);
+                                          Class38.method1029();
                                           RenderAnimationDefinition.aBoolean402 = false;
                                        }
 

@@ -1,13 +1,11 @@
 package org.runite.client;
 
 import org.rs09.client.config.GameConfig;
-
-import org.rs09.client.util.ArrayUtils;
 import org.rs09.client.data.HashTable;
+import org.rs09.client.util.ArrayUtils;
 
 import java.applet.Applet;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
+import java.awt.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
@@ -16,9 +14,9 @@ import java.util.Objects;
 public final class RSString implements Interface3 {
 
     static HashTable<LinkableRSString> interned;
-    private boolean mutable = true;
     byte[] buffer;
     int length;
+    private boolean mutable = true;
 
     /**
      * @return A RSString consisting of the actual bytes in the provided string.
@@ -76,11 +74,11 @@ public final class RSString implements Interface3 {
     }
 
     static RSString stringAnimator(int var1) {
-       try {
-          return Unsorted.method1723((byte)-117, false, var1);
-       } catch (RuntimeException var3) {
-          throw ClientErrorException.clientError(var3, "jj.C(" + var1 + ')');
-       }
+        try {
+            return Unsorted.method1723((byte) -117, false, var1);
+        } catch (RuntimeException var3) {
+            throw ClientErrorException.clientError(var3, "jj.C(" + var1 + ')');
+        }
     }
 
     public final URL toURL() throws MalformedURLException {
@@ -242,7 +240,7 @@ public final class RSString implements Interface3 {
      * are changed to uppercase based on the following rules:
      * - The character is the first character in the string
      * - The character is the first non-whitespace character after a '.', '!' or '?' character
-     *
+     * <p>
      * Characters may be either lowercase or uppercase if the previous character is a whitespace character.
      *
      * @return A copy of this string with capitalization based on the rules above.
@@ -340,7 +338,7 @@ public final class RSString implements Interface3 {
 
                 return var2;
             } else {
-                return (RSString) null;
+                return null;
             }
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "na.FB(" + var1 + ')');
@@ -768,7 +766,7 @@ public final class RSString implements Interface3 {
     final RSString trim(int var1) {
         try {
             if (var1 != 1) {
-                Unsorted.method1535((WorldListEntry) null, (WorldListEntry) null, 23, 68, 126, false, false);
+                Unsorted.method1535(null, null, 23, 68, 126, false, false);
             }
 
             int var2;

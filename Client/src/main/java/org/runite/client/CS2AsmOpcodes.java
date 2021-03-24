@@ -75,13 +75,13 @@ public enum CS2AsmOpcodes {
     POP_TO_PAGED_RAM(46);
 
 
-    private int op;
+    private final int op;
 
     public int getOp() {
         return this.op;
     }
 
-    private CS2AsmOpcodes(int op) {
+    CS2AsmOpcodes(int op) {
         this.op = op;
     }
 }

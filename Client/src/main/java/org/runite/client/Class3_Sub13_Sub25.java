@@ -23,7 +23,7 @@ final class Class3_Sub13_Sub25 extends TextureOperation {
    final void method158(int var1) {
       try {
          if(var1 != 16251) {
-            this.method157(-7, (DataBuffer)null, true);
+            this.method157(-7, null, true);
          }
 
       } catch (RuntimeException var3) {
@@ -56,7 +56,7 @@ final class Class3_Sub13_Sub25 extends TextureOperation {
                this.anInt3314 = Class113.anInt1559 / 8 * this.anInt3303 >> 12;
                int[][] var21 = new int[var19][3];
                int[][] var20 = new int[var19][3];
-               Random var22 = new Random((long)this.anInt3312);
+               Random var22 = new Random(this.anInt3312);
 
                while(true) {
                   while(true) {

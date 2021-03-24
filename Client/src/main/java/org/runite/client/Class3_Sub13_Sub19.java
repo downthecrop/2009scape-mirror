@@ -18,11 +18,11 @@ final class Class3_Sub13_Sub19 extends TextureOperation {
    private int anInt3234 = 1024;
    private int anInt3235;
    private int anInt3236 = 409;
-   private static RSString aClass94_3237 = RSString.parse("en");
+   private static final RSString aClass94_3237 = RSString.parse("en");
    private static RSString aClass94_3239 = RSString.parse("fr");
    private int[][] anIntArrayArray3240;
    private int anInt3242 = 4;
-   private static RSString aClass94_3243 = RSString.parse("de");
+   private static final RSString aClass94_3243 = RSString.parse("de");
    static RSString[] aClass94Array3238 = new RSString[]{aClass94_3237, aClass94_3243, aClass94_3239, aClass94_3232};
    
 
@@ -70,7 +70,7 @@ final class Class3_Sub13_Sub19 extends TextureOperation {
          }
 
          if(!var3) {
-            aClass94_3239 = (RSString)null;
+            aClass94_3239 = null;
          }
 
       } catch (RuntimeException var5) {
@@ -109,7 +109,7 @@ final class Class3_Sub13_Sub19 extends TextureOperation {
 
    private void method263() {
       try {
-         Random var2 = new Random((long)this.anInt3233);
+         Random var2 = new Random(this.anInt3233);
          int anInt3222 = 4096 / this.anInt3233;
          this.anInt3223 = this.anInt3224 / 2;
          this.anIntArrayArray3225 = new int[this.anInt3233][1 + this.anInt3242];
@@ -156,14 +156,14 @@ final class Class3_Sub13_Sub19 extends TextureOperation {
       try {
          Class3_Sub13_Sub1.outgoingBuffer.putOpcode(184);
 
-         for(Class3_Sub31 var1 = (Class3_Sub31)Class3_Sub13_Sub17.aHashTable_3208.first(); null != var1; var1 = (Class3_Sub31)Class3_Sub13_Sub17.aHashTable_3208.next()) {
+         for(Class3_Sub31 var1 = Class3_Sub13_Sub17.aHashTable_3208.first(); null != var1; var1 = Class3_Sub13_Sub17.aHashTable_3208.next()) {
             if(var1.anInt2603 == 0) {
                Class3_Sub13_Sub18.method254(true, var1);
             }
          }
 
          if(var0 < 83) {
-            aClass94_3232 = (RSString)null;
+            aClass94_3232 = null;
          }
 
          if(null != Class3_Sub13_Sub7.aClass11_3087) {

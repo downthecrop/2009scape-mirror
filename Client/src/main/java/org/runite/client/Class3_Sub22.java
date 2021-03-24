@@ -123,11 +123,11 @@ final class Class3_Sub22 extends Linkable {
       Class72.method1294();
       if(Class166.aClass3_Sub2ArrayArrayArray2065 != null) {
          Class167.method2264(true);
-         Class146.method2083(var0, var1, var2, (byte[][][])null, 0, (byte)0, var13, var14);
+         Class146.method2083(var0, var1, var2, null, 0, (byte)0, var13, var14);
          if(HDToolKit.highDetail) {
             Class3_Sub13_Sub17.aBoolean3207 = false;
             Class3_Sub28_Sub4.method551(0, 0);
-            Class92.method1512((float[])null);
+            Class92.method1512(null);
             Class68.method1265();
          }
 

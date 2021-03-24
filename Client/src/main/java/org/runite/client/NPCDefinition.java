@@ -71,7 +71,7 @@ public final class NPCDefinition {
 
    static NPCDefinition getNPCDefinition(int npcID) {
        try {
-           NPCDefinition def = (NPCDefinition) Unsorted.aReferenceCache_4043.get((long) npcID);
+           NPCDefinition def = (NPCDefinition) Unsorted.aReferenceCache_4043.get(npcID);
            if (null == def) {
                byte[] var3 = Class29.aClass153_557.getFile(Class38_Sub1.method1031(npcID), Unsorted.method54(npcID));
                def = new NPCDefinition();
@@ -80,7 +80,7 @@ public final class NPCDefinition {
                if (null != var3) {
                    def.method1478(new DataBuffer(var3));
                }
-               Unsorted.aReferenceCache_4043.put(def, (long) npcID);
+               Unsorted.aReferenceCache_4043.put(def, npcID);
            }
            return def;
        } catch (RuntimeException var4) {
@@ -165,7 +165,7 @@ public final class NPCDefinition {
          if(null == this.aHashTable_1272) {
             return var3;
          } else {
-            LinkableInt var4 = (LinkableInt)this.aHashTable_1272.get((long)var1);
+            LinkableInt var4 = (LinkableInt)this.aHashTable_1272.get(var1);
             return var4 != null?var4.value :var3;
          }
       } catch (RuntimeException var5) {
@@ -176,7 +176,7 @@ public final class NPCDefinition {
    final Model method1476(Class145[] var1, int var2, byte var3, int var4, int var5, int var6, int var7, SequenceDefinition var8, int var9, SequenceDefinition var10) {
       try {
          if(this.childNPCs == null) {
-            Model var11 = (Model)CS2Script.aReferenceCache_2442.get((long)this.npcId);
+            Model var11 = (Model)CS2Script.aReferenceCache_2442.get(this.npcId);
             boolean var12;
             int var17;
             int var16;
@@ -305,7 +305,7 @@ public final class NPCDefinition {
                   ((Class140_Sub1_Sub1)var11).method1920(false, false, false, false, false, true);
                }
 
-               CS2Script.aReferenceCache_2442.put(var11, (long)this.npcId);
+               CS2Script.aReferenceCache_2442.put(var11, this.npcId);
             }
 
             var12 = false;
@@ -396,7 +396,7 @@ public final class NPCDefinition {
 
                var22 = -1;
                if(var3 > -63) {
-                  this.parseOpcode(79, 73, (DataBuffer)null);
+                  this.parseOpcode(79, 73, null);
                }
 
                var42 = -1;
@@ -479,7 +479,7 @@ public final class NPCDefinition {
          if(null == this.aHashTable_1272) {
             return var2;
          } else {
-            LinkableRSString var4 = (LinkableRSString)this.aHashTable_1272.get((long)var1);
+            LinkableRSString var4 = (LinkableRSString)this.aHashTable_1272.get(var1);
             return (null == var4?var2:var4.value);
          }
       } catch (RuntimeException var5) {
@@ -571,7 +571,7 @@ public final class NPCDefinition {
             if(null == this.anIntArray1250) {
                return null;
             } else {
-               Model var12 = (Model)Class154.aReferenceCache_1964.get((long)this.npcId);
+               Model var12 = (Model)Class154.aReferenceCache_1964.get(this.npcId);
                if(var12 == null) {
                   boolean var7 = false;
 
@@ -616,7 +616,7 @@ public final class NPCDefinition {
                   }
 
                   var12 = Objects.requireNonNull(var15).method2008(64, 768, -50, -10, -50);
-                  Class154.aReferenceCache_1964.put(var12, (long)this.npcId);
+                  Class154.aReferenceCache_1964.put(var12, this.npcId);
                }
 
                if(null != var1) {
@@ -826,7 +826,7 @@ public final class NPCDefinition {
                      var8 = new LinkableInt(buffer.readInt());
                   }
 
-                  this.aHashTable_1272.put((long) var10, (Linkable) var8);
+                  this.aHashTable_1272.put(var10, (Linkable) var8);
                }
             }
          }

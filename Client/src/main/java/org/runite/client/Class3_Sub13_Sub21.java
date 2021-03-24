@@ -48,7 +48,7 @@ final class Class3_Sub13_Sub21 extends TextureOperation {
       }
    }
 
-   static void method267(byte var0) {
+   static void method267() {
 	  try {
          if(Unsorted.registryStage != 0) {
             try {
@@ -115,10 +115,6 @@ final class Class3_Sub13_Sub21 extends TextureOperation {
                   Unsorted.registryStage = 3;
                }
 
-               if(var0 <= 26) {
-                  method269(-75, 44);
-               }
-
                if(3 == Unsorted.registryStage) {
                   if(Class3_Sub15.activeConnection.availableBytes() < 1) {
                      return;
@@ -170,24 +166,12 @@ final class Class3_Sub13_Sub21 extends TextureOperation {
 
          }
       } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "mh.Q(" + var0 + ')');
+         throw ClientErrorException.clientError(var3, "mh.Q(" + (byte) 36 + ')');
       }
    }
 
    public Class3_Sub13_Sub21() {
       super(0, true);
-   }
-
-   static void method269(int var0, int var1) {
-      try {
-         if(var0 != -5) {
-            anInt3263 = 109;
-         }
-
-         Class61.aReferenceCache_939.sweep(var1);
-      } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "mh.O(" + var0 + ',' + var1 + ')');
-      }
    }
 
    final int[] method154(int var1, byte var2) {
@@ -263,7 +247,7 @@ final class Class3_Sub13_Sub21 extends TextureOperation {
    static void method272(byte var0) {
       try {
          if(var0 != -124) {
-            aClass3_Sub28_Sub3_3264 = (Class3_Sub28_Sub3)null;
+            aClass3_Sub28_Sub3_3264 = null;
          }
 
          int var1 = Class3_Sub13_Sub26.aByteArrayArray3335.length;

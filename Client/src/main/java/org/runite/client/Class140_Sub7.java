@@ -42,7 +42,7 @@ public final class Class140_Sub7 extends GameObject {
             byte var7 = 0;
             Class3_Sub13_Sub38.anIntArray3456[var7] = var2;
             if(var0 >= -9) {
-               method2031((byte)-29, false, 59, 52, (Class3_Sub2[][][])((Class3_Sub2[][][])null), 75);
+               method2031((byte)-29, false, 59, 52, null, 75);
             }
 
             int var23 = var7 + 1;
@@ -261,7 +261,7 @@ public final class Class140_Sub7 extends GameObject {
 
    final void animate(int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, long var9, int var11, Class127_Sub1 var12) {
       try {
-         Model var13 = ItemDefinition.getItemDefinition(this.anInt2936).method1110(-1, 0, (SequenceDefinition)null, this.anInt2930, 0);
+         Model var13 = ItemDefinition.getItemDefinition(this.anInt2936).method1110(-1, 0, null, this.anInt2930, 0);
          if(null != var13) {
             var13.animate(var1, var2, var3, var4, var5, var6, var7, var8, var9, var11, var12);
             this.anInt2932 = var13.method1871();

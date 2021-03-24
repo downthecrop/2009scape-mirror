@@ -64,7 +64,7 @@ final class Class3_Sub13_Sub11 extends TextureOperation {
                Class60.method1208((byte)-128, Class3_Sub28_Sub12.anInt3655);
             }
 
-            for(Class3_Sub31 var2 = (Class3_Sub31)Class3_Sub13_Sub17.aHashTable_3208.first(); null != var2; var2 = (Class3_Sub31)Class3_Sub13_Sub17.aHashTable_3208.next()) {
+            for(Class3_Sub31 var2 = Class3_Sub13_Sub17.aHashTable_3208.first(); null != var2; var2 = Class3_Sub13_Sub17.aHashTable_3208.next()) {
                Class3_Sub13_Sub18.method254(true, var2);
             }
 
@@ -126,7 +126,7 @@ final class Class3_Sub13_Sub11 extends TextureOperation {
    final void method157(int var1, DataBuffer var2, boolean var3) {
       try {
          if(!var3) {
-            method221(-64, (RSString)null, (RSString)null, (RSString)null, 34);
+            method221(-64, null, null, null, 34);
          }
 
          if(var1 == 0) {

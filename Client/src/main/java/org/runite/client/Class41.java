@@ -7,9 +7,16 @@ final class Class41 {
 
     static byte[] aByteArray2040 = new byte[520];
     private final Class30 aClass30_681;
-    int cacheIndex;
     private final Class30 aClass30_683;
     private final int anInt687;
+    int cacheIndex;
+
+    Class41(int var1, Class30 var2, Class30 var3, int var4) {
+        this.anInt687 = var4;
+        this.aClass30_683 = var3;
+        this.cacheIndex = var1;
+        this.aClass30_681 = var2;
+    }
 
     public final String toString() {
         return "Cache:" + this.cacheIndex;
@@ -38,7 +45,7 @@ final class Class41 {
                     return (byte[]) var10000;
                 }
 
-                this.aClass30_683.method984(-35, (long) (6 * var1));
+                this.aClass30_683.method984(-35, 6 * var1);
                 this.aClass30_683.method978(0, aByteArray2040, 6);
                 int var5 = ((255 & aByteArray2040[3]) << 16) - (-(aByteArray2040[4] << 8 & '\uff00') + -(255 & aByteArray2040[5]));
                 int var4 = (aByteArray2040[2] & 255) + ('\uff00' & aByteArray2040[1] << 8) + (16711680 & aByteArray2040[0] << 16);
@@ -59,7 +66,7 @@ final class Class41 {
                         }
 
                         int var10 = -var8 + var4;
-                        this.aClass30_681.method984(-113, (long) (520 * var5));
+                        this.aClass30_681.method984(-113, 520 * var5);
                         if (var10 > 512) {
                             var10 = 512;
                         }
@@ -98,13 +105,6 @@ final class Class41 {
         }
     }
 
-    Class41(int var1, Class30 var2, Class30 var3, int var4) {
-        this.anInt687 = var4;
-        this.aClass30_683 = var3;
-        this.cacheIndex = var1;
-        this.aClass30_681 = var2;
-    }
-
     private boolean method1054(byte var1, int var2, int var3, byte[] var4, boolean var5) {
         synchronized (this.aClass30_681) {
             try {
@@ -114,7 +114,7 @@ final class Class41 {
                         return false;
                     }
 
-                    this.aClass30_683.method984(-116, (long) (6 * var3));
+                    this.aClass30_683.method984(-116, 6 * var3);
                     this.aClass30_683.method978(0, aByteArray2040, 6);
                     var7 = (16711680 & aByteArray2040[3] << 16) + ('\uff00' & aByteArray2040[4] << 8) + (aByteArray2040[5] & 255);
                     if (var7 <= 0 || (long) var7 > this.aClass30_681.method976(0) / 520L) {
@@ -134,12 +134,12 @@ final class Class41 {
                 aByteArray2040[2] = (byte) var2;
                 aByteArray2040[3] = (byte) (var7 >> 16);
                 if (var1 != 87) {
-                    this.method1054((byte) 41, 108, -107, (byte[]) null, true);
+                    this.method1054((byte) 41, 108, -107, null, true);
                 }
 
                 int var9 = 0;
                 aByteArray2040[1] = (byte) (var2 >> 8);
-                this.aClass30_683.method984(-14, (long) (var3 * 6));
+                this.aClass30_683.method984(-14, var3 * 6);
                 this.aClass30_683.method983(aByteArray2040, 0, var1 ^ -903171097, 6);
 
                 while (true) {
@@ -149,7 +149,7 @@ final class Class41 {
                             int var10 = 0;
                             int var11;
                             if (var5) {
-                                this.aClass30_681.method984(-116, (long) (520 * var7));
+                                this.aClass30_681.method984(-116, 520 * var7);
 
                                 try {
                                     this.aClass30_681.method978(0, aByteArray2040, 8);
@@ -200,7 +200,7 @@ final class Class41 {
                             aByteArray2040[3] = (byte) var9;
                             ++var9;
                             aByteArray2040[5] = (byte) (var10 >> 8);
-                            this.aClass30_681.method984(var1 + -128, (long) (var7 * 520));
+                            this.aClass30_681.method984(var1 + -128, var7 * 520);
                             var7 = var10;
                             this.aClass30_681.method983(aByteArray2040, 0, -903171152, 8);
                             this.aClass30_681.method983(var4, var8, -903171152, var11);

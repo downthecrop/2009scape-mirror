@@ -59,7 +59,7 @@ final class Class3_Sub13_Sub14 extends TextureOperation {
                   Class3_Sub28_Sub8.method574(NPC.npcs[var2]);
                }
 
-               NPC.npcs[var2].setDefinitions((NPCDefinition)null);
+               NPC.npcs[var2].setDefinitions(null);
                NPC.npcs[var2] = null;
             }
          }

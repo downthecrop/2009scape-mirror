@@ -948,7 +948,7 @@ public final class Class3_Sub30_Sub1 extends DataBuffer {
 	final void method811(byte var1, int var2, byte[] var3, int var4) {
 		try {
 			if(var1 < 16) {
-				addChatMessage((RSString)null, 126, (RSString)null, -28);
+				addChatMessage(null, 126, null, -28);
 			}
 
 			for(int var5 = 0; var5 < var4; ++var5) {

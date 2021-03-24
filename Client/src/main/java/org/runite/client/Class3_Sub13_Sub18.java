@@ -81,7 +81,7 @@ final class Class3_Sub13_Sub18 extends TextureOperation {
    final int[][] method166(int var1, int var2) {
       try {
          if(var1 != -1) {
-            aClass153_3214 = (CacheIndex)null;
+            aClass153_3214 = null;
          }
 
          int[][] var3 = this.aClass97_2376.method1594((byte)4, var2);

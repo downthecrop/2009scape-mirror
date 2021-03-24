@@ -167,18 +167,6 @@ final class Class3_Sub13_Sub4 extends TextureOperation {
       }
    }
 
-   static void method188(int var0, int var1) {
-      try {
-         if(var1 != 0) {
-            method188(38, 29);
-         }
-
-         RenderAnimationDefinition.aReferenceCache_1955.sweep(var0);
-      } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "bi.U(" + var0 + ',' + var1 + ')');
-      }
-   }
-
    static void method189() {
       try {
          int var2;
@@ -313,7 +301,7 @@ final class Class3_Sub13_Sub4 extends TextureOperation {
                this.aShortArray3063 = new short[this.anInt3058];
 
                for(var2 = 0; var2 < this.anInt3058; ++var2) {
-                  this.aShortArray3063[var2] = (short)((int)Math.pow(2.0D, (double)var2));
+                  this.aShortArray3063[var2] = (short)((int)Math.pow(2.0D, var2));
                }
             }
          } else {
@@ -321,8 +309,8 @@ final class Class3_Sub13_Sub4 extends TextureOperation {
             this.aShortArray3063 = new short[this.anInt3058];
 
             for(var2 = 0; var2 < this.anInt3058; ++var2) {
-               this.aShortArray3066[var2] = (short)((int)(Math.pow((double)((float)this.anInt3062 / 4096.0F), (double)var2) * 4096.0D));
-               this.aShortArray3063[var2] = (short)((int)Math.pow(2.0D, (double)var2));
+               this.aShortArray3066[var2] = (short)((int)(Math.pow((float)this.anInt3062 / 4096.0F, var2) * 4096.0D));
+               this.aShortArray3063[var2] = (short)((int)Math.pow(2.0D, var2));
             }
          }
 
@@ -396,7 +384,7 @@ final class Class3_Sub13_Sub4 extends TextureOperation {
          Method var2 = Signlink.setTraversalKeysEnabled;
          if(null != var2) {
             try {
-               var2.invoke(var1, new Object[]{Boolean.FALSE});
+               var2.invoke(var1, Boolean.FALSE);
             } catch (Throwable var4) {
             }
          }

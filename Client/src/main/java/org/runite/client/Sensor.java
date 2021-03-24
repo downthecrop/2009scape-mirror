@@ -1,14 +1,15 @@
 package org.runite.client;
 
-import java.awt.Component;
-import java.awt.Point;
-import java.awt.Robot;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 class Sensor {
 
     private final Robot robot = new Robot();
     private Component component;
+
+    public Sensor() throws Exception {
+    }
 
     public void setCursor(Component component, Point hotSpot, int width, int height, int[] rgb) {
         if (rgb == null) {
@@ -18,9 +19,6 @@ class Sensor {
             image.setRGB(0, 0, width, height, rgb, 0, width);
             component.setCursor(component.getToolkit().createCustomCursor(image, hotSpot, null));
         }
-    }
-
-    public Sensor() throws Exception {
     }
 
     public void moveMouse(int x, int y) {

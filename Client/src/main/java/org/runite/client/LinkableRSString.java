@@ -122,7 +122,7 @@ public final class LinkableRSString extends Linkable {
 
     static Class3_Sub28_Sub4 method733(int var1) {
         try {
-            Class3_Sub28_Sub4 var2 = (Class3_Sub28_Sub4) aClass47_3776.get((long) var1);
+            Class3_Sub28_Sub4 var2 = (Class3_Sub28_Sub4) aClass47_3776.get(var1);
             if (null == var2) {
                 byte[] var3;
                 if (var1 < 32768) {
@@ -141,7 +141,7 @@ public final class LinkableRSString extends Linkable {
                     var2.method548();
                 }
 
-                aClass47_3776.put((long) var1, var2);
+                aClass47_3776.put(var1, var2);
             }
             return var2;
         } catch (RuntimeException var4) {

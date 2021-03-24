@@ -220,7 +220,7 @@ abstract class Class140_Sub4 extends GameObject {
    final void method1969(byte var1, Model var2, int var3) {
       try {
          if(var1 <= 33) {
-            this.method1971((Model)null, (byte)-26);
+            this.method1971(null, (byte)-26);
          }
 
          Class3_Sub28_Sub9.anInt3623 = 0;
@@ -256,12 +256,12 @@ abstract class Class140_Sub4 extends GameObject {
             int var30 = var28 > var23?var23:var28;
             int var31 = var28 > var18?var18:var28;
             int var32 = var23 <= var13?var23:var13;
-            Class3_Sub13_Sub16.anInt3198 = 2047 & (int)(325.95D * Math.atan2((double)(var29 - var30), (double)var6));
+            Class3_Sub13_Sub16.anInt3198 = 2047 & (int)(325.95D * Math.atan2(var29 - var30, var6));
             if(Class3_Sub13_Sub16.anInt3198 != 0) {
                var2.method1896(Class3_Sub13_Sub16.anInt3198);
             }
 
-            Class3_Sub28_Sub9.anInt3623 = 2047 & (int)(325.95D * Math.atan2((double)(-var31 + var32), (double)var5));
+            Class3_Sub28_Sub9.anInt3623 = 2047 & (int)(325.95D * Math.atan2(-var31 + var32, var5));
             if(Class3_Sub28_Sub9.anInt3623 != 0) {
                var2.method1886(Class3_Sub28_Sub9.anInt3623);
             }

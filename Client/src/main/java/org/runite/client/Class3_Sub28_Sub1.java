@@ -159,7 +159,7 @@ final class Class3_Sub28_Sub1 extends Node {
 
    static void method532(int var0) {
       try {
-         Class3_Sub25 var2 = (Class3_Sub25)Class3_Sub2.aHashTable_2220.get((long)var0);
+         Class3_Sub25 var2 = (Class3_Sub25)Class3_Sub2.aHashTable_2220.get(var0);
          if(null != var2) {
             var2.unlink();
          }
@@ -197,7 +197,7 @@ final class Class3_Sub28_Sub1 extends Node {
                var6.setFont(TextCore.Helvetica);
                var6.setColor(Color.white);
                var3.drawString(var6, 22, (-var3.method1575(aFontMetrics1822) + 304) / 2);
-               var5.drawImage(anImage2695, Class23.canvasWidth / 2 - 152, -18 + Class140_Sub7.canvasHeight / 2, (ImageObserver)null);
+               var5.drawImage(anImage2695, Class23.canvasWidth / 2 - 152, -18 + Class140_Sub7.canvasHeight / 2, null);
             } catch (Exception var9) {
                int var7 = -152 + Class23.canvasWidth / 2;
                int var8 = -18 + Class140_Sub7.canvasHeight / 2;

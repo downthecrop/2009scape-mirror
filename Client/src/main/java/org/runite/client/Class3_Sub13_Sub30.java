@@ -45,7 +45,7 @@ final class Class3_Sub13_Sub30 extends TextureOperation {
 
                int var12;
                if(Class164_Sub1.anInt3012 == 1) {
-                  Class3_Sub24_Sub4.method1177(Class99.anInt1403, (long)var0, (byte)-80, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aClass94_378, TextCore.aClass94_892, var5}), var4, (short)1, TextCore.HasUse, var2);
+                  Class3_Sub24_Sub4.method1177(Class99.anInt1403, var0, (byte)-80, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aClass94_378, TextCore.aClass94_892, var5}), var4, (short)1, TextCore.HasUse, var2);
                } else if(!GameObject.aBoolean1837) {
                   for(var12 = 7; var12 >= 0; --var12) {
                      if(null != Class91.aClass94Array1299[var12]) {
@@ -68,11 +68,11 @@ final class Class3_Sub13_Sub30 extends TextureOperation {
 
                         short var15 = Class7.aShortArray2167[var12];
                         var15 += var14;
-                        Class3_Sub24_Sub4.method1177(Class3_Sub13_Sub26.anIntArray3328[var12], (long)var0, (byte)-73, RSString.stringCombiner(new RSString[]{ColorCore.ContextColor , var5}), var4, var15, Class91.aClass94Array1299[var12], var2);
+                        Class3_Sub24_Sub4.method1177(Class3_Sub13_Sub26.anIntArray3328[var12], var0, (byte)-73, RSString.stringCombiner(new RSString[]{ColorCore.ContextColor , var5}), var4, var15, Class91.aClass94Array1299[var12], var2);
                      }
                   }
                } else if((8 & Class164.anInt2051) != 0) {
-                  Class3_Sub24_Sub4.method1177(Unsorted.anInt1887, (long)var0, (byte)-58, RSString.stringCombiner(new RSString[]{TextCore.aClass94_676, TextCore.aClass94_892, var5}), var4, (short)15, Class3_Sub28_Sub9.aClass94_3621, var2);
+                  Class3_Sub24_Sub4.method1177(Unsorted.anInt1887, var0, (byte)-58, RSString.stringCombiner(new RSString[]{TextCore.aClass94_676, TextCore.aClass94_892, var5}), var4, (short)15, Class3_Sub28_Sub9.aClass94_3621, var2);
                }
 
                if(var1 <= 0) {
@@ -96,7 +96,7 @@ final class Class3_Sub13_Sub30 extends TextureOperation {
    static void method313(byte var0) {
       try {
          if(var0 <= 51) {
-            method312(77, -52, -42, (Player)null, 120);
+            method312(77, -52, -42, null, 120);
          }
 
          Class166.method2257();

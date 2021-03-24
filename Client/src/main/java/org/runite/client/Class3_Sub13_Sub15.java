@@ -133,7 +133,7 @@ final class Class3_Sub13_Sub15 extends TextureOperation {
    final int[][] method166(int var1, int var2) {
       try {
          if(var1 != -1) {
-            TextCore.COMMAND_HIGHRES_GRAPHICS_FULLSCREEN = (RSString)null;
+            TextCore.COMMAND_HIGHRES_GRAPHICS_FULLSCREEN = null;
          }
 
          int[][] var3 = this.aClass97_2376.method1594((byte)-118, var2);

@@ -47,7 +47,7 @@ final class Class3_Sub13_Sub26 extends TextureOperation {
 					int var12 = var9 >> 12;
 					int var13 = var11 * var11 >> 12;
 					int var14 = var12 * var12 >> 12;
-					int var15 = (int)(Math.sqrt((double)((float)(4096 + var14 + var13) / 4096.0F)) * 4096.0D);
+					int var15 = (int)(Math.sqrt((float)(4096 + var14 + var13) / 4096.0F) * 4096.0D);
 					int var16 = 0 != var15?16777216 / var15:0;
 					var4[var8] = 4096 + -var16;
 				}

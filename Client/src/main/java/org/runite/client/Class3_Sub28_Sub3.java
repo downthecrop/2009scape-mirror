@@ -69,15 +69,6 @@ final class Class3_Sub28_Sub3 extends Node {
       }
    }
 
-   static void method539() {
-      try {
-
-         Class136.aReferenceCache_1772.sweep(5);
-      } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "bn.O(" + 0 + ',' + 5 + ')');
-      }
-   }
-
    static int method540(int var0, int var2) {
       try {
          int var3;

@@ -10,7 +10,7 @@ import java.nio.ByteBuffer;
 final class WaterMovementShader implements ShaderInterface {
 
    private int anInt2177 = -1;
-   private static float[] color = new float[]{0.1F, 0.1F, 0.15F, 0.1F};
+   private static final float[] color = new float[]{0.1F, 0.1F, 0.15F, 0.1F};
    private final float[] aFloatArray2179 = new float[4];
    private int textureId = -1;
    private int anInt2181 = -1;

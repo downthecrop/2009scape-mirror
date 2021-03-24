@@ -500,7 +500,7 @@ public final class SequenceDefinition {
 				Class60.method1208((byte)-128, Class3_Sub28_Sub12.anInt3655);
 			}
 
-			for(Class3_Sub31 var7 = (Class3_Sub31)Class3_Sub13_Sub17.aHashTable_3208.first(); var7 != null; var7 = (Class3_Sub31)Class3_Sub13_Sub17.aHashTable_3208.next()) {
+			for(Class3_Sub31 var7 = Class3_Sub13_Sub17.aHashTable_3208.first(); var7 != null; var7 = Class3_Sub13_Sub17.aHashTable_3208.next()) {
 				Class3_Sub13_Sub18.method254(true, var7);
 			}
 
@@ -510,7 +510,7 @@ public final class SequenceDefinition {
 			Class3_Sub13_Sub7.aClass11_3087 = null;
 			Class38_Sub1.aBoolean2615 = false;
 			Unsorted.menuOptionCount = 0;
-			Unsorted.aClass52_1112.method1161(new int[]{0, 0, 0, 0, 0}, -1, false, (int[])null, -1);
+			Unsorted.aClass52_1112.method1161(new int[]{0, 0, 0, 0, 0}, -1, false, null, -1);
 
 			for(var1 = 0; 8 > var1; ++var1) {
 				Class91.aClass94Array1299[var1] = null;

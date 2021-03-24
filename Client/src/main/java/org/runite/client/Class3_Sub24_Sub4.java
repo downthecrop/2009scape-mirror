@@ -42,7 +42,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
     static void method1177(int var0, long var1, byte var3, RSString var4, int var5, short var6, RSString var7, int var8) {
        try {
           if(var3 > -23) {
-             method1177(-45, 37L, (byte)-37, (RSString)null, -16, (short)110, (RSString)null, -75);
+             method1177(-45, 37L, (byte)-37, null, -16, (short)110, null, -75);
           }
 
           if(!Class38_Sub1.aBoolean2615) {
@@ -121,24 +121,12 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
    final synchronized boolean method473(int var1) {
       try {
          if(var1 >= -121) {
-            this.anIntArray3509 = (int[])null;
+            this.anIntArray3509 = null;
          }
 
          return this.aClass78_3505.method1373();
       } catch (RuntimeException var3) {
          throw ClientErrorException.clientError(var3, "va.VA(" + var1 + ')');
-      }
-   }
-
-   static void method474() {
-      try {
-         Unsorted.aReferenceCache_21.sweep(5);
-         ObjectDefinition.aReferenceCache_1401.sweep(5);
-
-         Unsorted.aReferenceCache_4051.sweep(5);
-         ObjectDefinition.aReferenceCache_1965.sweep(5);
-      } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "va.S(" + 2 + ',' + 5 + ')');
       }
    }
 
@@ -226,12 +214,12 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                         ItemDefinition var10 = ItemDefinition.getItemDefinition(var3.itemAmounts[var15] + -1);
                         if(1 == Class164_Sub1.anInt3012 && var9.method99()) {
                            if(var3.componentHash != Class3_Sub28_Sub18.anInt3764 || var15 != Class3_Sub30_Sub1.anInt1473) {
-                              method1177(-1, (long)var10.itemId, (byte)-91, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aClass94_378, ColorCore.BankItemColor, var10.name}), var15, (short)40, TextCore.HasUse, var3.componentHash);
+                              method1177(-1, var10.itemId, (byte)-91, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aClass94_378, ColorCore.BankItemColor, var10.name}), var15, (short)40, TextCore.HasUse, var3.componentHash);
                            }
                         } else if(GameObject.aBoolean1837 && var9.method99()) {
                            Class3_Sub28_Sub9 var18 = Unsorted.anInt1038 != -1 ?Class61.method1210(Unsorted.anInt1038):null;
                            if(0 != (16 & Class164.anInt2051) && (var18 == null || var18.anInt3614 != var10.method1115(var18.anInt3614, 103, Unsorted.anInt1038))) {
-                              method1177(Unsorted.anInt1887, (long)var10.itemId, (byte)-89, RSString.stringCombiner(new RSString[]{TextCore.aClass94_676, ColorCore.BankItemColor, var10.name}), var15, (short)3, Class3_Sub28_Sub9.aClass94_3621, var3.componentHash);
+                              method1177(Unsorted.anInt1887, var10.itemId, (byte)-89, RSString.stringCombiner(new RSString[]{TextCore.aClass94_676, ColorCore.BankItemColor, var10.name}), var15, (short)3, Class3_Sub28_Sub9.aClass94_3621, var3.componentHash);
                            }
                         } else {
                            RSString[] inventoryOptions = var10.inventoryOptions;
@@ -249,13 +237,13 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                                     } else {
                                        var13 = 58;
                                     }
-                                    method1177(-1, (long)var10.itemId, (byte)-65, RSString.stringCombiner(new RSString[]{ColorCore.ItemBackpackColor, var10.name}), var15, var13, inventoryOptions[var12], var3.componentHash);
+                                    method1177(-1, var10.itemId, (byte)-65, RSString.stringCombiner(new RSString[]{ColorCore.ItemBackpackColor, var10.name}), var15, var13, inventoryOptions[var12], var3.componentHash);
                                  }
                               }
                            }
 
                            if(var9.method96()) {
-                              method1177(Class99.anInt1403, (long)var10.itemId, (byte)-96, RSString.stringCombiner(new RSString[]{ColorCore.ItemBackpackColor, var10.name}), var15, (short)22, TextCore.HasUse, var3.componentHash);
+                              method1177(Class99.anInt1403, var10.itemId, (byte)-96, RSString.stringCombiner(new RSString[]{ColorCore.ItemBackpackColor, var10.name}), var15, (short)22, TextCore.HasUse, var3.componentHash);
                            }
 
                            if(var9.method99()) {
@@ -274,7 +262,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                                        var13 = 43;
                                     }
 
-                                    method1177(-1, (long)var10.itemId, (byte)-82, RSString.stringCombiner(new RSString[]{ColorCore.ItemBackpackColor, var10.name}), var15, var13, inventoryOptions[var12], var3.componentHash);
+                                    method1177(-1, var10.itemId, (byte)-82, RSString.stringCombiner(new RSString[]{ColorCore.ItemBackpackColor, var10.name}), var15, var13, inventoryOptions[var12], var3.componentHash);
                                  }
                               }
                            }
@@ -308,14 +296,14 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                                        var13 = 13;
                                     }
 
-                                    method1177(-1, (long)var10.itemId, (byte)-51, RSString.stringCombiner(new RSString[]{ColorCore.ItemBackpackColor, var10.name}), var15, var13, inventoryOptions[var12], var3.componentHash);
+                                    method1177(-1, var10.itemId, (byte)-51, RSString.stringCombiner(new RSString[]{ColorCore.ItemBackpackColor, var10.name}), var15, var13, inventoryOptions[var12], var3.componentHash);
                                  }
                               }
                            }
                            if (GameConfig.ITEM_DEBUG_ENABLED) {
-                              method1177(Class131.anInt1719, (long) var10.itemId, (byte) -98, RSString.stringCombiner(new RSString[]{ColorCore.ItemBackpackColor, var10.name}), var15, (short) 1006, RSString.parse("Examine" + "<br>" + " ID: (X" + var10.itemId + "(Y"), var3.componentHash);
+                              method1177(Class131.anInt1719, var10.itemId, (byte) -98, RSString.stringCombiner(new RSString[]{ColorCore.ItemBackpackColor, var10.name}), var15, (short) 1006, RSString.parse("Examine" + "<br>" + " ID: (X" + var10.itemId + "(Y"), var3.componentHash);
                            } else {
-                              method1177(Class131.anInt1719, (long) var10.itemId, (byte) -98, RSString.stringCombiner(new RSString[]{ColorCore.ItemBackpackColor, var10.name}), var15, (short) 1006, TextCore.HasExamine, var3.componentHash);
+                              method1177(Class131.anInt1719, var10.itemId, (byte) -98, RSString.stringCombiner(new RSString[]{ColorCore.ItemBackpackColor, var10.name}), var15, (short) 1006, TextCore.HasExamine, var3.componentHash);
                            }
                         }
                      }
@@ -337,7 +325,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                for(var15 = 9; var15 >= 5; --var15) {
                   RSString var16 = Class120.method1732(var3, (byte)-71, var15);
                   if(null != var16) {
-                     method1177(Class3_Sub13_Sub2.method173((byte)126, var15, var3), (long)(var15 + 1), (byte)-85, var3.aClass94_277, var3.anInt191, (short)1003, var16, var3.componentHash);
+                     method1177(Class3_Sub13_Sub2.method173((byte)126, var15, var3), var15 + 1, (byte)-85, var3.aClass94_277, var3.anInt191, (short)1003, var16, var3.componentHash);
                   }
                }
 
@@ -349,7 +337,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                for(var5 = 4; var5 >= 0; --var5) {
                   RSString var17 = Class120.method1732(var3, (byte)-65, var5);
                   if(var17 != null) {
-                     method1177(Class3_Sub13_Sub2.method173((byte)53, var5, var3), (long)(var5 - -1), (byte)-48, var3.aClass94_277, var3.anInt191, (short)9, var17, var3.componentHash);
+                     method1177(Class3_Sub13_Sub2.method173((byte)53, var5, var3), var5 - -1, (byte)-48, var3.aClass94_277, var3.anInt191, (short)9, var17, var3.componentHash);
                   }
                }
 
@@ -511,7 +499,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
             }
          }
 
-         Class3_Sub15 var11 = (Class3_Sub15)this.aHashTable_3508.get((long)this.anIntArray3515[var2]);
+         Class3_Sub15 var11 = (Class3_Sub15)this.aHashTable_3508.get(this.anIntArray3515[var2]);
          if(var11 != null) {
             Class3_Sub12_Sub1 var12 = var11.aClass3_Sub12_Sub1Array2431[var4];
             if(var12 != null) {
@@ -933,7 +921,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
          Class3_Sub22 var5 = this.aClass3_Sub22ArrayArray3512[var4][var2];
          if(null != var5) {
             if(var1 > -92) {
-               this.aClass3_Sub24_Sub3_3527 = (Class3_Sub24_Sub3)null;
+               this.aClass3_Sub24_Sub3_3527 = null;
             }
 
             this.aClass3_Sub22ArrayArray3512[var4][var2] = null;
@@ -1217,7 +1205,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
       try {
          this.method507(true);
          if(var1 > -125) {
-            this.anIntArray3520 = (int[])null;
+            this.anIntArray3520 = null;
          }
 
       } catch (RuntimeException var3) {

@@ -149,7 +149,7 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
    static void method2226(Class3_Sub30_Sub1 var0, int var1, int var2) {
       try {
          if(var2 > -109) {
-            method2226((Class3_Sub30_Sub1)null, 67, 54);
+            method2226(null, 67, 54);
          }
 
          while(true) {
@@ -200,12 +200,12 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
                      int var9;
                      if(var7 == 0) {
                         var8 = (Field)var3.aClass64Array2303[var6].anObject974;
-                        var9 = var8.getInt((Object)null);
+                        var9 = var8.getInt(null);
                         var0.writeByte(0);
                         var0.writeInt(var9);
                      } else if (var7 == 1) {
                         var8 = (Field) var3.aClass64Array2303[var6].anObject974;
-                        var8.setInt((Object) null, var3.anIntArray2299[var6]);
+                        var8.setInt(null, var3.anIntArray2299[var6]);
                         var0.writeByte(0);
                      } else if (2 == var7) {
                         var8 = (Field) var3.aClass64Array2303[var6].anObject974;
@@ -225,7 +225,7 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
                            var10[var11] = var12.readObject();
                         }
 
-                        Object var28 = var26.invoke((Object)null, var10);
+                        Object var28 = var26.invoke(null, var10);
                         if(var28 == null) {
                            var0.writeByte(0);
                         } else if(var28 instanceof Number) {

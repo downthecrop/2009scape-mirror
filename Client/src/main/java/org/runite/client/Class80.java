@@ -5,9 +5,13 @@ import org.rs09.client.data.HashTable;
 
 final class Class80<T extends Linkable> {
 
+    private final HashTable<T> table;
     private Linkable aClass3_1130;
     private int anInt1132 = 0;
-    private final HashTable<T> table;
+
+    Class80(HashTable<T> var1) {
+        this.table = var1;
+    }
 
     @SuppressWarnings("unchecked")
     final T method1392() {
@@ -31,10 +35,6 @@ final class Class80<T extends Linkable> {
     final T method1393() {
         this.anInt1132 = 0;
         return this.method1392();
-    }
-
-    Class80(HashTable<T> var1) {
-        this.table = var1;
     }
 
 }

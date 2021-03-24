@@ -9,8 +9,8 @@ final class ISAACCipher {
     private int anInt966;
     private int anInt967;
     private int anInt968;
-    private int[] anIntArray970;
-    private int[] anIntArray971;
+    private final int[] anIntArray970;
+    private final int[] anIntArray971;
     private int anInt972;
 
 

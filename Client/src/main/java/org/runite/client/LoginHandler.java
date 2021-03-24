@@ -263,11 +263,7 @@ public class LoginHandler {
                         Class3_Sub15.activeConnection.readBytes(GraphicDefinition.incomingBuffer.buffer, 0, 14);
                         GraphicDefinition.incomingBuffer.index = 0;
                         Player.rights = GraphicDefinition.incomingBuffer.readUnsignedByte();
-                        if (Player.rights == 2) {
-                            ClientLoader.setModPanelVisible(true);
-                        } else {
-                            ClientLoader.setModPanelVisible(false);
-                        }
+                        ClientLoader.setModPanelVisible(Player.rights == 2);
                         CS2Script.anInt3775 = GraphicDefinition.incomingBuffer.readUnsignedByte();
                         Class3_Sub15.aBoolean2433 = GraphicDefinition.incomingBuffer.readUnsignedByte() == 1;
                         Class121.aBoolean1641 = 1 == GraphicDefinition.incomingBuffer.readUnsignedByte();

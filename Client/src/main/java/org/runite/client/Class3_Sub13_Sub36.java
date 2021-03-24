@@ -289,9 +289,9 @@ public final class Class3_Sub13_Sub36 extends TextureOperation {
                          }
                       }
                       if (GameConfig.OBJECT_DEBUG_ENABLED) {
-                         Class3_Sub24_Sub4.method1177(Class131.anInt1719, (long) var16.objectId, (byte) -26, RSString.stringCombiner(new RSString[]{ColorCore.ObjectNameColor, var16.name}), var12, (short) 1004, RSString.parse("Examine" + "<br>" + " ID: (X" + var16.objectId + "(Y"), var27);
+                         Class3_Sub24_Sub4.method1177(Class131.anInt1719, var16.objectId, (byte) -26, RSString.stringCombiner(new RSString[]{ColorCore.ObjectNameColor, var16.name}), var12, (short) 1004, RSString.parse("Examine" + "<br>" + " ID: (X" + var16.objectId + "(Y"), var27);
                       } else {
-                         Class3_Sub24_Sub4.method1177(Class131.anInt1719, (long) var16.objectId, (byte) -26, RSString.stringCombiner(new RSString[]{ColorCore.ObjectNameColor, var16.name}), var12, (short) 1004, TextCore.HasExamine, var27);
+                         Class3_Sub24_Sub4.method1177(Class131.anInt1719, var16.objectId, (byte) -26, RSString.stringCombiner(new RSString[]{ColorCore.ObjectNameColor, var16.name}), var12, (short) 1004, TextCore.HasExamine, var27);
                       }
                    }
                 }
@@ -365,11 +365,11 @@ public final class Class3_Sub13_Sub36 extends TextureOperation {
                          var18 = var32.aClass140_Sub7_3676.anInt2936;
                          ItemDefinition var40 = ItemDefinition.getItemDefinition(var18);
                          if(Class164_Sub1.anInt3012 == 1) {
-                            Class3_Sub24_Sub4.method1177(Class99.anInt1403, (long)var18, (byte)-75, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aClass94_378, ColorCore.BankItemColor, var40.name}), var12, (short)33, TextCore.HasUse, var27);
+                            Class3_Sub24_Sub4.method1177(Class99.anInt1403, var18, (byte)-75, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aClass94_378, ColorCore.BankItemColor, var40.name}), var12, (short)33, TextCore.HasUse, var27);
                          } else if(GameObject.aBoolean1837) {
                             Class3_Sub28_Sub9 var39 = Unsorted.anInt1038 == -1?null:Class61.method1210(Unsorted.anInt1038);
                             if((Class164.anInt2051 & 1) != 0 && (null == var39 || var39.anInt3614 != var40.method1115(var39.anInt3614, 100, Unsorted.anInt1038))) {
-                               Class3_Sub24_Sub4.method1177(Unsorted.anInt1887, (long)var18, (byte)-70, RSString.stringCombiner(new RSString[]{TextCore.aClass94_676, ColorCore.BankItemColor, var40.name}), var12, (short)39, Class3_Sub28_Sub9.aClass94_3621, var27);
+                               Class3_Sub24_Sub4.method1177(Unsorted.anInt1887, var18, (byte)-70, RSString.stringCombiner(new RSString[]{TextCore.aClass94_676, ColorCore.BankItemColor, var40.name}), var12, (short)39, Class3_Sub28_Sub9.aClass94_3621, var27);
                             }
                          } else {
                             RSString[] var34 = var40.groundOptions;
@@ -409,13 +409,13 @@ public final class Class3_Sub13_Sub36 extends TextureOperation {
                                      var35 = 24;
                                   }
 
-                                  Class3_Sub24_Sub4.method1177(var23, (long)var18, (byte)-43, RSString.stringCombiner(new RSString[]{ColorCore.GroundItemColor, var40.name}), var12, var35, var34[var21], var27);
+                                  Class3_Sub24_Sub4.method1177(var23, var18, (byte)-43, RSString.stringCombiner(new RSString[]{ColorCore.GroundItemColor, var40.name}), var12, var35, var34[var21], var27);
                                }
                             }
                             if (GameConfig.ITEM_DEBUG_ENABLED) {
-                               Class3_Sub24_Sub4.method1177(Class131.anInt1719, (long) var18, (byte) -43, RSString.stringCombiner(new RSString[]{ColorCore.GroundItemColor, var40.name}), var12, (short) 1002, RSString.parse("Examine" + "<br>" + " ID: (X" + var40.itemId + "(Y"), var27);
+                               Class3_Sub24_Sub4.method1177(Class131.anInt1719, var18, (byte) -43, RSString.stringCombiner(new RSString[]{ColorCore.GroundItemColor, var40.name}), var12, (short) 1002, RSString.parse("Examine" + "<br>" + " ID: (X" + var40.itemId + "(Y"), var27);
                             } else {
-                               Class3_Sub24_Sub4.method1177(Class131.anInt1719, (long) var18, (byte) -43, RSString.stringCombiner(new RSString[]{ColorCore.GroundItemColor, var40.name}), var12, (short) 1002, TextCore.HasExamine, var27);
+                               Class3_Sub24_Sub4.method1177(Class131.anInt1719, var18, (byte) -43, RSString.stringCombiner(new RSString[]{ColorCore.GroundItemColor, var40.name}), var12, (short) 1002, TextCore.HasExamine, var27);
                             }
                          }
                       }
@@ -501,7 +501,7 @@ public final class Class3_Sub13_Sub36 extends TextureOperation {
    final void method157(int var1, DataBuffer var2, boolean var3) {
       try {
          if(!var3) {
-            CacheIndex.animationIndex = (CacheIndex)null;
+            CacheIndex.animationIndex = null;
          }
 
          if(0 == var1) {
@@ -561,7 +561,7 @@ public final class Class3_Sub13_Sub36 extends TextureOperation {
          if(0 <= var0 && Class3_Sub24_Sub4.aBooleanArray3503.length > var0) {
             Class3_Sub24_Sub4.aBooleanArray3503[var0] = !Class3_Sub24_Sub4.aBooleanArray3503[var0];
             if(var1 != 4) {
-               aByteArrayArrayArray3430 = (byte[][][])((byte[][][])null);
+               aByteArrayArrayArray3430 = null;
             }
 
          }

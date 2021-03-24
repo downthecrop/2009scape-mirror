@@ -18,7 +18,7 @@ public final class Class3_Sub28_Sub12 extends Node {
         } else {
             int var2 = 0;
             if (var1 <= 20) {
-                TextCore.COMMAND_MEMORY_MANAGEMENT = (RSString) null;
+                TextCore.COMMAND_MEMORY_MANAGEMENT = null;
             }
 
             for (; var0.anIntArray275.length > var2; ++var2) {

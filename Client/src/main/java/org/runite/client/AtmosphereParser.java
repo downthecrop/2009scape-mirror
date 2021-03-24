@@ -36,10 +36,10 @@ public final class AtmosphereParser {
     static void method1428(int var0, int var2) {
         try {
             ItemDefinition.ram[var0] = var2;
-            Class3_Sub7 var3 = (Class3_Sub7) aHashTable_3679.get((long) var0);
+            Class3_Sub7 var3 = (Class3_Sub7) aHashTable_3679.get(var0);
             if (var3 == null) {
                 var3 = new Class3_Sub7(TimeUtils.time() - -500L);
-                aHashTable_3679.put((long) var0, var3);
+                aHashTable_3679.put(var0, var3);
             } else {
                 var3.aLong2295 = 500L + TimeUtils.time();
             }

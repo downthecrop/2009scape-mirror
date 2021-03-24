@@ -548,13 +548,13 @@ public final class RSInterface {
                 if (var3 == -1) {
                     return null;
                 } else {
-                    AbstractSprite var4 = (AbstractSprite) Class114.aReferenceCache_1569.get((long) var3);
+                    AbstractSprite var4 = (AbstractSprite) Class114.aReferenceCache_1569.get(var3);
                     if (var4 == null) {
                         var4 = Unsorted.method602(var3, Class12.aClass153_323);
                         if (null == var4) {
                             aBoolean6 = true;
                         } else {
-                            Class114.aReferenceCache_1569.put(var4, (long) var3);
+                            Class114.aReferenceCache_1569.put(var4, var3);
                         }
 
                     }
@@ -570,7 +570,7 @@ public final class RSInterface {
 
     static int method861(int var0, int var1, int var2) {
         try {
-            Class3_Sub25 var3 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get((long) var0);
+            Class3_Sub25 var3 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var0);
             return null == var3 ? -1 : (0 <= var2 && var2 < var3.anIntArray2547.length ? (var1 < 39 ? -69 : var3.anIntArray2547[var2]) : -1);
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "be.J(" + var0 + ',' + var1 + ',' + var2 + ')');
@@ -644,7 +644,7 @@ public final class RSInterface {
             }
 
             if (var4 < 125) {
-                return (Model) null;
+                return null;
             } else if (var8 == 0) {
                 return null;
             } else if (var8 == 1 && var9 == -1) {
@@ -652,7 +652,7 @@ public final class RSInterface {
             } else {
                 Model var10;
                 if (1 == var8) {
-                    var10 = (Model) Class3_Sub15.aReferenceCache_2428.get((long) ((var8 << 16) - -var9));
+                    var10 = (Model) Class3_Sub15.aReferenceCache_2428.get((var8 << 16) - -var9);
                     if (var10 == null) {
                         Model_Sub1 var18 = Model_Sub1.method2015(Class119.aClass153_1628, var9);
                         if (var18 == null) {
@@ -661,7 +661,7 @@ public final class RSInterface {
                         }
 
                         var10 = var18.method2008(64, 768, -50, -10, -50);
-                        Class3_Sub15.aReferenceCache_2428.put(var10, (long) (var9 + (var8 << 16)));
+                        Class3_Sub15.aReferenceCache_2428.put(var10, var9 + (var8 << 16));
                     }
 
                     if (var2 != null) {
@@ -688,7 +688,7 @@ public final class RSInterface {
                             return var17;
                         }
                     } else if (var8 == 6) {
-                        var10 = NPCDefinition.getNPCDefinition(var9).method1476((Class145[]) null, 0, (byte) -120, 0, var1, var5, var3, (SequenceDefinition) null, 0, var2);
+                        var10 = NPCDefinition.getNPCDefinition(var9).method1476(null, 0, (byte) -120, 0, var1, var5, var3, null, 0, var2);
                         if (null == var10) {
                             aBoolean6 = true;
                             return null;
@@ -1012,7 +1012,7 @@ public final class RSInterface {
             if (this.anInt270 == -1) {
                 return null;
             } else {
-                Font var3 = (Font) Unsorted.aReferenceCache_743.get((long) this.anInt270);
+                Font var3 = (Font) Unsorted.aReferenceCache_743.get(this.anInt270);
                 if (null == var3) {
                     var3 = Unsorted.method1300(this.anInt270, Class12.aClass153_323, Class97.aClass153_1378);
                     if (null == var3) {

@@ -47,48 +47,48 @@ final class Class3_Sub13_Sub6 extends TextureOperation {
                 * 4. Gets the archives for the map underlays (this would be like water for example
                 * 5. Gets the archives for the landscape underlays (things that (appear to be/are) -1 on the plane)
                 */
-               Client.anIntArray2200[var11] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{TextCore.aClass94_3807, RSString.stringAnimator(var7), TextCore.aClass94_3161, RSString.stringAnimator(var8)}));
+               Client.anIntArray2200[var11] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("m"), RSString.stringAnimator(var7), RSString.parse("_"), RSString.stringAnimator(var8)}));
                if (GameConfig.HD_LOGIN_DEBUG) {
                   System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting archive for map: " + Client.anIntArray2200[var11]);
                   if (GameConfig.HD_LOGIN_VERBOSE) {
-                     System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting specific info for map: " + "Type: " + TextCore.aClass94_3807 + " Place in cache: " + RSString.stringAnimator(var7) + TextCore.aClass94_3161 + RSString.stringAnimator(var8));
+                     System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting specific info for map: " + "Type: " + RSString.parse("m") + " Place in cache: " + RSString.stringAnimator(var7) + RSString.parse("_") + RSString.stringAnimator(var8));
                   }
                }
 
 
 
-               Class101.anIntArray1426[var11] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{TextCore.aClass94_2029, RSString.stringAnimator(var7), TextCore.aClass94_3161, RSString.stringAnimator(var8)}));
+               Class101.anIntArray1426[var11] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("l"), RSString.stringAnimator(var7), RSString.parse("_"), RSString.stringAnimator(var8)}));
                if (GameConfig.HD_LOGIN_DEBUG) {
                   System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting archive for landscape: " + Class101.anIntArray1426[var11]);
                   if (GameConfig.HD_LOGIN_VERBOSE) {
-                     System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting specific info for landscape: " + "Type: " + TextCore.aClass94_2029 + " Place in cache: " + RSString.stringAnimator(var7) + TextCore.aClass94_3161 + RSString.stringAnimator(var8));
+                     System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting specific info for landscape: " + "Type: " + RSString.parse("l") + " Place in cache: " + RSString.stringAnimator(var7) + RSString.parse("_") + RSString.stringAnimator(var8));
                   }
                }
 
 
-               NPC.npcSpawnCacheIndices[var11] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("n"), RSString.stringAnimator(var7), TextCore.aClass94_3161, RSString.stringAnimator(var8)}));
+               NPC.npcSpawnCacheIndices[var11] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("n"), RSString.stringAnimator(var7), RSString.parse("_"), RSString.stringAnimator(var8)}));
                if (GameConfig.HD_LOGIN_DEBUG) {
                   System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting archive for packed NPCs: " + NPC.npcSpawnCacheIndices[var11]);
                   if (GameConfig.HD_LOGIN_VERBOSE) {
-                     System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting specific info for packed NPCs: " + "Type: " + RSString.parse("n") + " Place in cache: " + RSString.stringAnimator(var7) + TextCore.aClass94_3161 + RSString.stringAnimator(var8));
+                     System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting specific info for packed NPCs: " + "Type: " + RSString.parse("n") + " Place in cache: " + RSString.stringAnimator(var7) + RSString.parse("_") + RSString.stringAnimator(var8));
                   }
                }
 
 
-               Class3_Sub13_Sub15.anIntArray3181[var11] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{TextCore.aClass94_1333, RSString.stringAnimator(var7), TextCore.aClass94_3161, RSString.stringAnimator(var8)}));
+               Class3_Sub13_Sub15.anIntArray3181[var11] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("um"), RSString.stringAnimator(var7), RSString.parse("_"), RSString.stringAnimator(var8)}));
                if (GameConfig.HD_LOGIN_DEBUG) {
                   System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting archive for map underlays: " + Class3_Sub13_Sub15.anIntArray3181[var11]);
                   if (GameConfig.HD_LOGIN_VERBOSE) {
-                     System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting specific info for map underlays: " + "Type: " + TextCore.aClass94_1333 + " Place in cache: " + RSString.stringAnimator(var7) + TextCore.aClass94_3161 + RSString.stringAnimator(var8));
+                     System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting specific info for map underlays: " + "Type: " + RSString.parse("um") + " Place in cache: " + RSString.stringAnimator(var7) + RSString.parse("_") + RSString.stringAnimator(var8));
                   }
                }
 
 
-               Class3_Sub28_Sub5.anIntArray3587[var11] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{TextCore.HasULLookUp, RSString.stringAnimator(var7), TextCore.aClass94_3161, RSString.stringAnimator(var8)}));
+               Class3_Sub28_Sub5.anIntArray3587[var11] = CacheIndex.landscapesIndex.getArchiveForName(RSString.stringCombiner(new RSString[]{RSString.parse("ul"), RSString.stringAnimator(var7), RSString.parse("_"), RSString.stringAnimator(var8)}));
                if (GameConfig.HD_LOGIN_DEBUG) {
                   System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting archive for landscape underlays: " + Class3_Sub28_Sub5.anIntArray3587[var11]);
                   if (GameConfig.HD_LOGIN_VERBOSE) {
-                     System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting specific info for landscape underlays: " + "Type: " + TextCore.HasULLookUp + " Place in cache: " + RSString.stringAnimator(var7) + TextCore.aClass94_3161 + RSString.stringAnimator(var8));
+                     System.out.println("Class3_Sub13_sub6: HD Login Screen Debug: Getting specific info for landscape underlays: " + "Type: " + RSString.parse("ul") + " Place in cache: " + RSString.stringAnimator(var7) + RSString.parse("_") + RSString.stringAnimator(var8));
                   }
                }
                /* End login screen index lookup */
@@ -139,7 +139,7 @@ final class Class3_Sub13_Sub6 extends TextureOperation {
 
    static void method196() {
       try {
-         Class3_Sub8.anIntArray3083 = (int[])null;
+         Class3_Sub8.anIntArray3083 = null;
 
       } catch (RuntimeException var2) {
          throw ClientErrorException.clientError(var2, "ca.B(" + ')');

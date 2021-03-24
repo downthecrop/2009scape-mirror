@@ -4,15 +4,15 @@ import org.rs09.client.rendering.Toolkit;
 
 final class Class168 {
 
-    int anInt2090 = 128;
     static RSInterface aClass11_2091 = null;
+    static Font bold;
+    static int anInt2099 = 0;
+    int anInt2090 = 128;
     boolean aBoolean2092 = false;
     boolean aBoolean2093 = true;
     int anInt2094 = 1190717;
     int anInt2095 = -1;
-    static Font bold;
     int anInt2098 = -1;
-    static int anInt2099 = 0;
     int anInt2100 = 8;
     int anInt2101 = 16;
     boolean aBoolean2102 = true;
@@ -710,23 +710,6 @@ final class Class168 {
         return null;
     }
 
-
-    final void method2274(DataBuffer var2, int var3) {
-        try {
-            while (true) {
-                int var4 = var2.readUnsignedByte();
-                if (var4 == 0) {
-
-                    return;
-                }
-
-                this.method2279(var4, var2, var3);
-            }
-        } catch (RuntimeException var5) {
-            throw ClientErrorException.clientError(var5, "wl.H(" + 24559 + ',' + (var2 != null ? "{...}" : "null") + ',' + var3 + ')');
-        }
-    }
-
     static void method2275(int var0, int var2, int var3, int var4, int var5, int var6) {
         try {
 
@@ -859,10 +842,10 @@ final class Class168 {
 
     static void method2277(int var0, int var1, int var2, int var3, byte var4) {
         try {
-            Class3_Sub25 var5 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get((long) var3);
+            Class3_Sub25 var5 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var3);
             if (var5 == null) {
                 var5 = new Class3_Sub25();
-                Class3_Sub2.aHashTable_2220.put((long) var3, var5);
+                Class3_Sub2.aHashTable_2220.put(var3, var5);
             }
 
             if (var4 > 16) {
@@ -933,6 +916,32 @@ final class Class168 {
         }
     }
 
+    static void method2280(int var1) {
+        try {
+
+            InterfaceWidget var2 = InterfaceWidget.getWidget(11, var1);
+            var2.a();
+        } catch (RuntimeException var3) {
+            throw ClientErrorException.clientError(var3, "wl.B(" + 2714 + ',' + var1 + ')');
+        }
+    }
+
+    final void method2274(DataBuffer var2, int var3) {
+        try {
+            while (true) {
+                int var4 = var2.readUnsignedByte();
+                if (var4 == 0) {
+
+                    return;
+                }
+
+                this.method2279(var4, var2, var3);
+            }
+        } catch (RuntimeException var5) {
+            throw ClientErrorException.clientError(var5, "wl.H(" + 24559 + ',' + (var2 != null ? "{...}" : "null") + ',' + var3 + ')');
+        }
+    }
+
     private void method2279(int var2, DataBuffer var3, int var4) {
         try {
             if (var2 == 1) {
@@ -966,16 +975,6 @@ final class Class168 {
 
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "wl.E(" + 0 + ',' + var2 + ',' + (var3 != null ? "{...}" : "null") + ',' + var4 + ')');
-        }
-    }
-
-    static void method2280(int var1) {
-        try {
-
-            InterfaceWidget var2 = InterfaceWidget.getWidget(11, var1);
-            var2.a();
-        } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "wl.B(" + 2714 + ',' + var1 + ')');
         }
     }
 

@@ -56,7 +56,7 @@ final class Class3_Sub13_Sub33 extends TextureOperation {
          }
 
          if(var1 != -60) {
-            method326((byte)-35, (RSString)null);
+            method326((byte)-35, null);
          }
 
       } catch (RuntimeException var9) {
@@ -86,7 +86,7 @@ final class Class3_Sub13_Sub33 extends TextureOperation {
          }
 
          if(!var3) {
-            this.method323(124, (int[][])((int[][])null));
+            this.method323(124, null);
          }
 
       } catch (RuntimeException var7) {
@@ -109,7 +109,7 @@ final class Class3_Sub13_Sub33 extends TextureOperation {
    static int method326(byte var0, RSString var1) {
       try {
          if(var0 <= 13) {
-            TextCore.aClass94_3399 = (RSString)null;
+            TextCore.aClass94_3399 = null;
          }
 
          return var1.length() + 1;
@@ -147,7 +147,7 @@ final class Class3_Sub13_Sub33 extends TextureOperation {
 
             return var3;
          } else {
-            return (int[][])((int[][])null);
+            return null;
          }
       } catch (RuntimeException var16) {
          throw ClientErrorException.clientError(var16, "si.T(" + var1 + ',' + var2 + ')');

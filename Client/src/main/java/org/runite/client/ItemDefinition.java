@@ -109,7 +109,7 @@ final class ItemDefinition {
 	static AssembledMethod getMethodByID(int methodID) {
 	   try {
 	   	   // Load and return method from cache
-		   AssembledMethod var2 = (AssembledMethod)Class56.aClass47_885.get((long)methodID);
+		   AssembledMethod var2 = (AssembledMethod)Class56.aClass47_885.get(methodID);
 		   if (var2 != null) {
 			  return var2;
 		   }
@@ -144,7 +144,7 @@ final class ItemDefinition {
 					while(var10-- > 0) {
 					   int var12 = var4.readInt();
 					   int var13 = var4.readInt();
-					   var11.put((long)var12, new LinkableInt(var13));
+					   var11.put(var12, new LinkableInt(var13));
 					}
 				 }
 			  }
@@ -165,7 +165,7 @@ final class ItemDefinition {
 					var2.instructionOperands[var9] = var4.readUnsignedByte();
 				 }
 			  }
-			  Class56.aClass47_885.put((long)methodID, var2);
+			  Class56.aClass47_885.put(methodID, var2);
 			  return var2;
 		   }
 	   } catch (RuntimeException var14) {
@@ -175,7 +175,7 @@ final class ItemDefinition {
 
 	static ItemDefinition getItemDefinition(int itemId) {
 	   try {
-		  ItemDefinition var2 = (ItemDefinition)Class3_Sub28_Sub4.aReferenceCache_3572.get((long)itemId);
+		  ItemDefinition var2 = (ItemDefinition)Class3_Sub28_Sub4.aReferenceCache_3572.get(itemId);
 		  if(var2 == null) {
 			 byte[] var3 = Class97.aClass153_1370.getFile(Class140_Sub2.method1951(itemId), 255 & itemId);
 			 var2 = new ItemDefinition();
@@ -201,7 +201,7 @@ final class ItemDefinition {
 				var2.groundOptions = Unsorted.aClass94Array2596;
 			 }
 
-			 Class3_Sub28_Sub4.aReferenceCache_3572.put(var2, (long)itemId);
+			 Class3_Sub28_Sub4.aReferenceCache_3572.put(var2, itemId);
 		  }
 		  return var2;
 	   } catch (RuntimeException var4) {
@@ -254,7 +254,7 @@ final class ItemDefinition {
 				return var2;
 			} else {
 
-				LinkableRSString var4 = (LinkableRSString)this.aHashTable_798.get((long)var3);
+				LinkableRSString var4 = (LinkableRSString)this.aHashTable_798.get(var3);
 				return null != var4?var4.value :var2;
 			}
 		} catch (RuntimeException var5) {
@@ -399,7 +399,7 @@ final class ItemDefinition {
 				}
 			}
 
-			Model var11 = (Model)Class143.aReferenceCache_1874.get((long)this.itemId);
+			Model var11 = (Model)Class143.aReferenceCache_1874.get(this.itemId);
 			if(var11 == null) {
 				Model_Sub1 var12 = Model_Sub1.method2015(LinkableRSString.aClass153_2581, this.anInt755);
 				if(null == var12) {
@@ -433,7 +433,7 @@ final class ItemDefinition {
 					((Class140_Sub1_Sub1)var11).method1920(false, false, false, false, false, true);
 				}
 
-				Class143.aReferenceCache_1874.put(var11, (long)this.itemId);
+				Class143.aReferenceCache_1874.put(var11, this.itemId);
 			}
 
 			if(var4 != null) {
@@ -624,7 +624,7 @@ final class ItemDefinition {
 							var9 = new LinkableInt(buffer.readInt());
 						}
 
-						this.aHashTable_798.put((long) var8, (Linkable) var9);
+						this.aHashTable_798.put(var8, (Linkable) var9);
 					}
 				}
 			}
@@ -639,7 +639,7 @@ final class ItemDefinition {
 			if(this.aHashTable_798 == null) {
 				return var1;
 			} else {
-				LinkableInt var5 = (LinkableInt)this.aHashTable_798.get((long)var3);
+				LinkableInt var5 = (LinkableInt)this.aHashTable_798.get(var3);
 				return null != var5?var5.value :var1;
 			}
 		} catch (RuntimeException var6) {
@@ -773,7 +773,7 @@ final class ItemDefinition {
 		try {
 			var0.addMouseListener(Unsorted.aClass149_4047);
 			if(var1) {
-				aClass94_811 = (RSString)null;
+				aClass94_811 = null;
 			}
 
 			var0.addMouseMotionListener(Unsorted.aClass149_4047);

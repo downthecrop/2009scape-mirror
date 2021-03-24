@@ -48,7 +48,7 @@ final class Class3_Sub14 extends Linkable {
          var1 = -var1;
       }
 
-      return (float)((double)var1 * Math.pow(2.0D, (double)(var3 - 788)));
+      return (float)((double)var1 * Math.pow(2.0D, var3 - 788));
    }
 
    final Class3_Sub12_Sub1 method359(int[] var1) {

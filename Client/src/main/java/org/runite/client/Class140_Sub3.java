@@ -356,7 +356,7 @@ final class Class140_Sub3 extends GameObject {
                int var15 = var14[var10][var12] + var14[var9][var12] + var14[var9][var11] + var14[var10][var11] >> 2;
                int var16 = (var7 << 6) + (this.anInt2736 << 7);
                int var17 = (var8 << 6) + (this.anInt2730 << 7);
-               int[][] var18 = (int[][])null;
+               int[][] var18 = null;
                if(var3) {
                   var18 = Class58.anIntArrayArrayArray914[0];
                } else if (this.anInt2732 < 3) {

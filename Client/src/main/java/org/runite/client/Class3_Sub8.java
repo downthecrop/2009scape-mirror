@@ -23,7 +23,7 @@ final class Class3_Sub8 extends Linkable {
    static void method124(int var0, int var1, int var2) {
       try {
          if(var0 <= 23) {
-            TextCore.aClass94_2306 = (RSString)null;
+            TextCore.aClass94_2306 = null;
          }
 
          if(Unsorted.loadInterface(var2)) {

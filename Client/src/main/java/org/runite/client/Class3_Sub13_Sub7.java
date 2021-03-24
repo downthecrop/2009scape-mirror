@@ -65,7 +65,7 @@ final class Class3_Sub13_Sub7 extends TextureOperation {
          }
 
          if(!var3) {
-            this.anIntArray3089 = (int[])null;
+            this.anIntArray3089 = null;
          }
 
       } catch (RuntimeException var5) {

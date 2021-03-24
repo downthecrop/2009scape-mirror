@@ -11,18 +11,17 @@ import java.util.Objects;
 
 public class DataBuffer extends Linkable {
 
+    public byte[] buffer;
+    public int index;
+
     public DataBuffer(int capacity) {
         this.buffer = ByteArrayPool.INSTANCE.getByteArray(capacity);
         this.index = 0;
     }
-
     public DataBuffer(byte[] buffer) {
         this.index = 0;
         this.buffer = buffer;
     }
-
-    public byte[] buffer;
-    public int index;
 
     public final int readUnsignedShort() {
         this.index += 2;
@@ -196,7 +195,7 @@ public class DataBuffer extends Linkable {
         try {
             byte var2 = this.buffer[this.index++];
             if (var1 < 50) {
-                this.buffer = (byte[]) null;
+                this.buffer = null;
             }
 
             if (0 == var2) {

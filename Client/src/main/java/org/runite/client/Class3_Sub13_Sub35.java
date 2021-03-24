@@ -32,7 +32,7 @@ final class Class3_Sub13_Sub35 extends TextureOperation {
    static int method335(int var0) {
       try {
          if(var0 != 16859) {
-            aClass131_3421 = (Class131)null;
+            aClass131_3421 = null;
          }
 
          return ClientCommands.shiftClickEnabled && ObjectDefinition.aBooleanArray1490[81] && 2 < Unsorted.menuOptionCount?Class114.anIntArray1578[-2 + Unsorted.menuOptionCount]:Class114.anIntArray1578[Unsorted.menuOptionCount - 1];
@@ -76,7 +76,7 @@ final class Class3_Sub13_Sub35 extends TextureOperation {
 
             return var3;
          } else {
-            return (int[][])((int[][])null);
+            return null;
          }
       } catch (RuntimeException var12) {
          throw ClientErrorException.clientError(var12, "tb.T(" + var1 + ',' + var2 + ')');

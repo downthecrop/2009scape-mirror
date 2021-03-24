@@ -64,7 +64,7 @@ final class Class3_Sub13_Sub5 extends TextureOperation {
          }
 
          if(!var3) {
-            this.method157(118, (DataBuffer)null, true);
+            this.method157(118, null, true);
          }
 
       } catch (RuntimeException var5) {

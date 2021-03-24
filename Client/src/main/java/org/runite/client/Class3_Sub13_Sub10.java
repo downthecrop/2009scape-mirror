@@ -40,7 +40,7 @@ final class Class3_Sub13_Sub10 extends TextureOperation {
          }
 
          if(!var3) {
-            this.method157(56, (DataBuffer)null, true);
+            this.method157(56, null, true);
          }
 
       } catch (RuntimeException var5) {
@@ -51,11 +51,11 @@ final class Class3_Sub13_Sub10 extends TextureOperation {
    public static void method211(int var0) {
       try {
          if(var0 != 1024) {
-            aClass87_3125 = (Signlink)null;
+            aClass87_3125 = null;
          }
          TextCore.COMMAND_NOCLIP = null;
          aFrame3121 = null;
-         aBooleanArrayArray3118 = (boolean[][])null;
+         aBooleanArrayArray3118 = null;
          aClass87_3125 = null;
       } catch (RuntimeException var2) {
          throw ClientErrorException.clientError(var2, "fh.C(" + var0 + ')');

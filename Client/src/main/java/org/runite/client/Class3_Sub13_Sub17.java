@@ -33,7 +33,7 @@ final class Class3_Sub13_Sub17 extends TextureOperation {
          if(var2 > 80) {
             int var4 = Class102.anIntArray2125[var3];
             int var5 = Class163_Sub3.anIntArray2999[var1];
-            float var6 = (float)Math.atan2((double)(var4 - 2048), (double)(var5 - 2048));
+            float var6 = (float)Math.atan2(var4 - 2048, var5 - 2048);
             if((double)var6 >= -3.141592653589793D && -2.356194490192345D >= (double)var6) {
                Class50.anInt828 = var1;
                Class159.anInt2024 = var3;
@@ -75,7 +75,7 @@ final class Class3_Sub13_Sub17 extends TextureOperation {
          }
 
          if(!var3) {
-            WorldMap.aClass153_3210 = (CacheIndex)null;
+            WorldMap.aClass153_3210 = null;
          }
 
       } catch (RuntimeException var5) {

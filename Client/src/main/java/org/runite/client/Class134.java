@@ -22,7 +22,7 @@ final class Class134 {
     static void method1809(int var0, long[] var1, int var2, int var3, Object[] var4) {
         try {
             if (var2 < 85) {
-                aClass61_1758 = (Class61) null;
+                aClass61_1758 = null;
             }
 
             if (var0 > var3) {
