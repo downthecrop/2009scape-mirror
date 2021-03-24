@@ -413,7 +413,7 @@ public final class SequenceDefinition {
 			Class3_Sub13_Sub13.aLong1465 = 0L;
 			Class3_Sub13_Sub13.aClass67_1443.anInt1018 = 0;
 			Class3_Sub13_Sub6.aBoolean3078 = true;
-			Class3_Sub13.method153(112);
+			TextureOperation.method153(112);
 			Class24.anInt469 = -1;
 			Class7.anInt2166 = -1;
 			Unsorted.incomingOpcode = -1;
@@ -548,7 +548,7 @@ public final class SequenceDefinition {
 			Class3_Sub13_Sub28.aClass94_3353 = TextCore.HasWalkHere;
 			Unsorted.aBoolean1084 = false;
 			Class3_Sub13_Sub38.aShortArray3455 = Class3_Sub13_Sub9.aShortArray3110 = Class136.aShortArray1779 = Class3_Sub13_Sub38.aShortArray3453 = new short[256];
-			Class3_Sub13.method165();
+			TextureOperation.method165();
 			Unsorted.aBoolean1951 = false;
 			Class3_Sub13_Sub8.method204(-3);
 		} catch (RuntimeException var6) {

@@ -159,7 +159,7 @@ abstract class Class164 {
 
          for(var3 = 0; var3 < 255; ++var3) {
             int var4 = -var3 + 255;
-            int var5 = Class3_Sub13.method1603((byte)-120, var4, var2);
+            int var5 = TextureOperation.method1603((byte)-120, var4, var2);
             short var6 = this.aShortArray2047[var5];
             this.aShortArray2047[var5] = this.aShortArray2047[var4];
             this.aShortArray2047[var4] = this.aShortArray2047[256 + var4] = var6;

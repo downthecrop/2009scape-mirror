@@ -5,7 +5,7 @@ import java.awt.Point;
 import java.io.IOException;
 import java.util.Objects;
 
-final class Class3_Sub13_Sub13 extends Class3_Sub13 {
+final class Class3_Sub13_Sub13 extends TextureOperation {
 
     static int anInt2212 = 0;
     static int anInt2217 = 2;
@@ -244,7 +244,7 @@ final class Class3_Sub13_Sub13 extends Class3_Sub13 {
             for(queuedVarpIndex = 0; queuedVarpIndex < 100 && Class3_Sub13_Sub3.method181(); ++queuedVarpIndex) {
             }
 
-            if(Class143.loadingStage == 30) {
+            if(Class143.gameStage == 30) {
                Class163_Sub2_Sub1.method2226(Class3_Sub13_Sub1.outgoingBuffer, 163, -116);
                Object var14 = aClass67_1443.anObject1016;
                int var2;
@@ -425,10 +425,10 @@ final class Class3_Sub13_Sub13 extends Class3_Sub13 {
                }
 
                Class163_Sub1_Sub1.method2214();
-               if(Class143.loadingStage == 30) {
+               if(Class143.gameStage == 30) {
                   MouseListeningClass.method2087();
                   Class115.method1713();
-                  Class3_Sub8.method132((byte)-92);
+                  Class3_Sub8.method132();
                   ++AbstractSprite.anInt3699;
                   if(AbstractSprite.anInt3699 > 750) {
                      breakClientConnection();

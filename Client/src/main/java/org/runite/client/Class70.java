@@ -100,7 +100,7 @@ final class Class70 {
     	// System.out.println("Class 70 " + var0);
          if(Class75_Sub4.method1351(var3, 0, var0)) {
 
-            return Class3_Sub13.method163(var2.getFile(var0, 0));
+            return TextureOperation.method163(var2.getFile(var0, 0));
          } else {
             return null;
          }

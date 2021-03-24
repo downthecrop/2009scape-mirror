@@ -18,10 +18,10 @@ final class Class82 {
     static int[] anIntArray3337 = new int[Class3_Sub13_Sub26.anInt3332];
     static int anInt1668 = -1;
     private final int[] anIntArray1144;
-   private final Class3_Sub13 aClass3_Sub13_1145;
+   private final TextureOperation aClass3_Sub13_1145;
    static ReferenceCache aReferenceCache_1146 = new ReferenceCache(64);
-   private final Class3_Sub13[] aClass3_Sub13Array1147;
-   private final Class3_Sub13 aClass3_Sub13_1148;
+   private final TextureOperation[] aClass3_Sub13Array1147;
+   private final TextureOperation aClass3_Sub13_1148;
    private final int[] anIntArray1149;
    static int anInt1150 = -1;
    static int anInt1152;
@@ -230,8 +230,8 @@ final class Class82 {
                if(var8.textSpoken != null && (var7 >= Class159.localPlayerCount || CS2Script.anInt3101 == 0 || 3 == CS2Script.anInt3101 || 1 == CS2Script.anInt3101 && ItemDefinition.method1176(((Player)var8).displayName))) {
                   Class107.method1647(var4 >> 1, var3, var8, var5, var8.method1975(27855), var1 >> 1);
                   if(-1 < Class32.anInt590 && Class3_Sub13_Sub39.anInt3464 < Class3_Sub13_Sub26.anInt3332) {
-                     anIntArray3329[Class3_Sub13_Sub39.anInt3464] = Class168.aClass3_Sub28_Sub17_2096.method682(var8.textSpoken) / 2;
-                     anIntArray3327[Class3_Sub13_Sub39.anInt3464] = Class168.aClass3_Sub28_Sub17_2096.anInt3727;
+                     anIntArray3329[Class3_Sub13_Sub39.anInt3464] = Class168.bold.method682(var8.textSpoken) / 2;
+                     anIntArray3327[Class3_Sub13_Sub39.anInt3464] = Class168.bold.anInt3727;
                      anIntArray3319[Class3_Sub13_Sub39.anInt3464] = Class32.anInt590;
                      anIntArray3337[Class3_Sub13_Sub39.anInt3464] = anInt2208;
                      anIntArray3331[Class3_Sub13_Sub39.anInt3464] = var8.textColor;
@@ -323,7 +323,7 @@ final class Class82 {
                         }
 
                         Class75_Sub3.aAbstractSpriteArray2656[var8.anIntArray2815[var19]].drawAt(-12 + var2 + Class32.anInt590, var0 + anInt2208 - 12);
-                        Class3_Sub13.aClass3_Sub28_Sub17_2379.method699(RSString.stringAnimator(var8.anIntArray2836[var19]), -1 + Class32.anInt590 + var2, 3 + anInt2208 + var0, 16777215, 0);
+                        TextureOperation.smallFont.method699(RSString.stringAnimator(var8.anIntArray2836[var19]), -1 + Class32.anInt590 + var2, 3 + anInt2208 + var0, 16777215, 0);
                      }
                   }
                }
@@ -418,30 +418,30 @@ final class Class82 {
                }
 
                if(0 == anIntArray3336[var7]) {
-                  Class168.aClass3_Sub28_Sub17_2096.method699(var33, Class32.anInt590 + var2, var0 + anInt2208, var32, 0);
+                  Class168.bold.method699(var33, Class32.anInt590 + var2, var0 + anInt2208, var32, 0);
                }
 
                if(1 == anIntArray3336[var7]) {
-                  Class168.aClass3_Sub28_Sub17_2096.method696(var33, var2 - -Class32.anInt590, anInt2208 + var0, var32, Class79.anInt1127);
+                  Class168.bold.method696(var33, var2 - -Class32.anInt590, anInt2208 + var0, var32, Class79.anInt1127);
                }
 
                if(anIntArray3336[var7] == 2) {
-                  Class168.aClass3_Sub28_Sub17_2096.method695(var33, var2 - -Class32.anInt590, var0 - -anInt2208, var32, Class79.anInt1127);
+                  Class168.bold.method695(var33, var2 - -Class32.anInt590, var0 - -anInt2208, var32, Class79.anInt1127);
                }
 
                if(anIntArray3336[var7] == 3) {
-                  Class168.aClass3_Sub28_Sub17_2096.method692(var33, var2 + Class32.anInt590, anInt2208 + var0, var32, Class79.anInt1127, 150 - anIntArray3318[var7]);
+                  Class168.bold.method692(var33, var2 + Class32.anInt590, anInt2208 + var0, var32, Class79.anInt1127, 150 - anIntArray3318[var7]);
                }
 
                if(4 == anIntArray3336[var7]) {
-                  var15 = (-anIntArray3318[var7] + 150) * (Class168.aClass3_Sub28_Sub17_2096.method682(var33) - -100) / 150;
+                  var15 = (-anIntArray3318[var7] + 150) * (Class168.bold.method682(var33) - -100) / 150;
                   if(HDToolKit.highDetail) {
                      Class22.method931(Class32.anInt590 + var2 + -50, var0, Class32.anInt590 + var2 - -50, var4 + var0);
                   } else {
                      Class74.method1326(-50 + (var2 - -Class32.anInt590), var0, 50 + Class32.anInt590 + var2, var4 + var0);
                   }
 
-                  Class168.aClass3_Sub28_Sub17_2096.method681(var33, var2 - (-Class32.anInt590 + -50) + -var15, var0 + anInt2208, var32, 0);
+                  Class168.bold.method681(var33, var2 - (-Class32.anInt590 + -50) + -var15, var0 + anInt2208, var32, 0);
                   if(HDToolKit.highDetail) {
                      Class22.setClipping(var2, var0, var1 + var2, var4 + var0);
                   } else {
@@ -453,9 +453,9 @@ final class Class82 {
                   int var16 = 0;
                   var15 = -anIntArray3318[var7] + 150;
                   if(HDToolKit.highDetail) {
-                     Class22.method931(var2, -1 + -Class168.aClass3_Sub28_Sub17_2096.anInt3727 + anInt2208 + var0, var1 + var2, 5 + var0 - -anInt2208);
+                     Class22.method931(var2, -1 + -Class168.bold.anInt3727 + anInt2208 + var0, var1 + var2, 5 + var0 - -anInt2208);
                   } else {
-                     Class74.method1326(var2, -1 + -Class168.aClass3_Sub28_Sub17_2096.anInt3727 + anInt2208 + var0, var2 + var1, 5 + anInt2208 + var0);
+                     Class74.method1326(var2, -1 + -Class168.bold.anInt3727 + anInt2208 + var0, var2 + var1, 5 + anInt2208 + var0);
                   }
 
                   if(25 > var15) {
@@ -464,7 +464,7 @@ final class Class82 {
                      var16 = var15 - 125;
                   }
 
-                  Class168.aClass3_Sub28_Sub17_2096.method699(var33, Class32.anInt590 + var2, var16 + var0 + anInt2208, var32, 0);
+                  Class168.bold.method699(var33, Class32.anInt590 + var2, var16 + var0 + anInt2208, var32, 0);
                   if(HDToolKit.highDetail) {
                      Class22.setClipping(var2, var0, var2 - -var1, var0 + var4);
                   } else {
@@ -472,7 +472,7 @@ final class Class82 {
                   }
                }
             } else {
-               Class168.aClass3_Sub28_Sub17_2096.method699(var33, var2 - -Class32.anInt590, var0 + anInt2208, 16776960, 0);
+               Class168.bold.method699(var33, var2 - -Class32.anInt590, var0 + anInt2208, 16776960, 0);
             }
          }
 
@@ -646,7 +646,7 @@ final class Class82 {
          this.aClass3_Sub13_1145 = new Class3_Sub13_Sub22();
          this.aClass3_Sub13_1145.anInt2381 = 1;
          this.aClass3_Sub13_1148 = new Class3_Sub13_Sub22();
-         this.aClass3_Sub13Array1147 = new Class3_Sub13[]{this.aClass3_Sub13_1145, this.aClass3_Sub13_1148};
+         this.aClass3_Sub13Array1147 = new TextureOperation[]{this.aClass3_Sub13_1145, this.aClass3_Sub13_1148};
          this.aClass3_Sub13_1148.anInt2381 = 1;
       } catch (RuntimeException var2) {
          throw ClientErrorException.clientError(var2, "lc.<init>()");
@@ -656,13 +656,13 @@ final class Class82 {
    Class82(DataBuffer var1) {
       try {
          int var2 = var1.readUnsignedByte();
-         this.aClass3_Sub13Array1147 = new Class3_Sub13[var2];
+         this.aClass3_Sub13Array1147 = new TextureOperation[var2];
          int[][] var5 = new int[var2][];
          int var4 = 0;
          int var3 = 0;
 
          int var6;
-         Class3_Sub13 var7;
+         TextureOperation var7;
          int var8;
          int var9;
          for(var6 = 0; var2 > var6; ++var6) {
@@ -675,7 +675,7 @@ final class Class82 {
                ++var4;
             }
 
-            var8 = var7.aClass3_Sub13Array2377.length;
+            var8 = var7.subOperations.length;
             var5[var6] = new int[var8];
 
             for(var9 = 0; var9 < var8; ++var9) {
@@ -692,10 +692,10 @@ final class Class82 {
 
          for(var6 = 0; var6 < var2; ++var6) {
             var7 = this.aClass3_Sub13Array1147[var6];
-            var8 = var7.aClass3_Sub13Array2377.length;
+            var8 = var7.subOperations.length;
 
             for(var9 = 0; var8 > var9; ++var9) {
-               var7.aClass3_Sub13Array2377[var9] = this.aClass3_Sub13Array1147[var5[var6][var9]];
+               var7.subOperations[var9] = this.aClass3_Sub13Array1147[var5[var6][var9]];
             }
 
             var9 = var7.method159(4);

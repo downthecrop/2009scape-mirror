@@ -67,17 +67,17 @@ final class Class3_Sub8 extends Linkable {
                      var9 = 2 + 4 * (Class3_Sub13_Sub35.aClass131_3421.aShortArray1727[var8] + -Class131.anInt1716) + -(Class102.player.anInt2819 / 32);
                      var11 = Class51.anIntArray840[var19];
                      var12 = Class51.anIntArray851[var19];
-                     Class3_Sub28_Sub17 var15 = Class3_Sub13.aClass3_Sub28_Sub17_2379;
+                     Font var15 = TextureOperation.smallFont;
                      var11 = var11 * 256 / (256 + Class164_Sub2.anInt3020);
                      var10 = 2 + 4 * (-Class82.anInt1152 + Class3_Sub13_Sub35.aClass131_3421.aShortArray1718[var8]) - Class102.player.anInt2829 / 32;
                      var12 = var12 * 256 / (256 + Class164_Sub2.anInt3020);
                      var14 = -(var9 * var11) + var10 * var12 >> 16;
                      if(Class3_Sub13_Sub35.aClass131_3421.method1791(var8, var1 + -51) == 1) {
-                        var15 = Class126.aClass3_Sub28_Sub17_1669;
+                        var15 = Class126.plainFont;
                      }
 
                      if(2 == Class3_Sub13_Sub35.aClass131_3421.method1791(var8, 8)) {
-                        var15 = Class168.aClass3_Sub28_Sub17_2096;
+                        var15 = Class168.bold;
                      }
 
                      var13 = var11 * var10 - -(var12 * var9) >> 16;
@@ -334,7 +334,7 @@ final class Class3_Sub8 extends Linkable {
       try {
          if(Class30.loadedWorldList && Class53.worldListOffset <= index && WorldListEntry.worldListArraySize >= index) {
             GameConfig.WORLD = index;
-            return Class117.worldList[index - Class53.worldListOffset];
+            return WorldListEntry.worldList[index - Class53.worldListOffset];
          } else {
             return null;
          }
@@ -343,7 +343,7 @@ final class Class3_Sub8 extends Linkable {
       }
    }
 
-   static void method132(byte var0) {
+   static void method132() {
       try {
          for(int var1 = 0; var1 < Class113.anInt1552; ++var1) {
             --Unsorted.anIntArray2157[var1];
@@ -414,7 +414,7 @@ final class Class3_Sub8 extends Linkable {
             }
          }
 
-         if(var0 != -92) {
+         if((byte) -92 != -92) {
             method126(true, 36, 42, 14, 51);
          }
 
@@ -424,14 +424,14 @@ final class Class3_Sub8 extends Linkable {
             }
 
             Class83.aBoolean1158 = false;
-         } else if(Unsorted.anInt120 != 0 && Class129.anInt1691 != -1 && Class79.method1391(var0 + 91)) {
+         } else if(Unsorted.anInt120 != 0 && Class129.anInt1691 != -1 && Class79.method1391((byte) -92 + 91)) {
             Class3_Sub13_Sub1.outgoingBuffer.putOpcode(137);
             Class3_Sub13_Sub1.outgoingBuffer.writeInt(Class129.anInt1691);
             Class129.anInt1691 = -1;
          }
 
       } catch (RuntimeException var10) {
-         throw ClientErrorException.clientError(var10, "ed.C(" + var0 + ')');
+         throw ClientErrorException.clientError(var10, "ed.C(" + (byte) -92 + ')');
       }
    }
 

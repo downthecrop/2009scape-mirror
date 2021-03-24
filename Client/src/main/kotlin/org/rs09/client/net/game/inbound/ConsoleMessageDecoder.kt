@@ -7,6 +7,6 @@ object ConsoleMessageDecoder: GamePacketDecoder {
     override fun decode(buffer: DataBuffer) {
         val line = buffer.readString()
 
-        DeveloperConsole.println(line.toString(), true)
+        DeveloperConsole.println(line.toString())
     }
 }

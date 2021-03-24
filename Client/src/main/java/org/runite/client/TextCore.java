@@ -248,7 +248,7 @@ public class TextCore {
     /**
      * Fonts
      */
-    static Font Helvetica = new Font("Helvetica", Font.BOLD, 13);
+    static java.awt.Font Helvetica = new java.awt.Font("Helvetica", java.awt.Font.BOLD, 13);
 
     /**
      * Holiday Event Text

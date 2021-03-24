@@ -2,7 +2,7 @@ package org.runite.client;
 
 import java.util.Objects;
 
-final class Class3_Sub13_Sub20 extends Class3_Sub13 {
+final class Class3_Sub13_Sub20 extends TextureOperation {
 
    static int anInt3244 = 0;
    private int anInt3245 = 4096;

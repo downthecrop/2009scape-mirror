@@ -97,14 +97,14 @@ final class Class121 {
    static int method1735() {
       try {
          try {
-            if(Class43.anInt692 == 0) {
+            if(Class43.worldListStage == 0) {
                if(Class3_Sub13_Sub34.aLong3411 > TimeUtils.time() + -5000L) {
                   return 0;
                }
 
                Class3_Sub9.aClass64_2318 = Class38.signlink.method1441((byte)8, GameConfig.IP_MANAGEMENT, GameConfig.WL_PORT);//, Class123.anInt1658);
                RSInterface.aLong261 = TimeUtils.time();
-               Class43.anInt692 = 1;
+               Class43.worldListStage = 1;
             }
 
             if(30000L + RSInterface.aLong261 < TimeUtils.time()) {
@@ -113,7 +113,7 @@ final class Class121 {
 
             int wlUpdateStamp;
             int var2;
-            if(1 == Class43.anInt692) {
+            if(1 == Class43.worldListStage) {
                if(Class3_Sub9.aClass64_2318.anInt978 == 2) {
                   return Class3_Sub13_Sub3.method179((byte)92, 1001);
                }
@@ -127,7 +127,7 @@ final class Class121 {
                Class3_Sub9.aClass64_2318 = null;
                wlUpdateStamp = 0;
                if(Class30.loadedWorldList) {
-                  wlUpdateStamp = Unsorted.updateStamp;
+                  wlUpdateStamp = WorldListEntry.updateStamp;
                }
 
                Class3_Sub13_Sub1.outgoingBuffer.writeByte(255);
@@ -155,10 +155,10 @@ final class Class121 {
                   return Class3_Sub13_Sub3.method179((byte)92, var2);
                }
 
-               Class43.anInt692 = 2;
+               Class43.worldListStage = 2;
             }
 
-            if(Class43.anInt692 == 2) {
+            if(Class43.worldListStage == 2) {
                if(2 > Class3_Sub15.activeConnection.availableBytes()) {
                   return -1;
                }
@@ -166,12 +166,12 @@ final class Class121 {
                Unsorted.wlPacketSize = Class3_Sub15.activeConnection.readByte();
                Unsorted.wlPacketSize <<= 8;
                Unsorted.wlPacketSize += Class3_Sub15.activeConnection.readByte();
-               Class43.anInt692 = 3;
+               Class43.worldListStage = 3;
                Class3_Sub20.wlPacketIndex = 0;
                Class3_Sub13_Sub33.aByteArray3396 = new byte[Unsorted.wlPacketSize];
             }
 
-            if(Class43.anInt692 == 3) {
+            if(Class43.worldListStage == 3) {
                wlUpdateStamp = Class3_Sub15.activeConnection.availableBytes();
                if(1 > wlUpdateStamp) {
                   return -1;
@@ -185,7 +185,7 @@ final class Class121 {
                Class3_Sub20.wlPacketIndex += wlUpdateStamp;
                if(Class3_Sub20.wlPacketIndex >= Unsorted.wlPacketSize) {
                   if(Class3_Sub13_Sub23.handleWorldListUpdate(Class3_Sub13_Sub33.aByteArray3396)) {
-                     Unsorted.aClass44_Sub1Array3201 = new WorldListEntry[Class57.activeWorldListSize];
+                     Unsorted.aClass44_Sub1Array3201 = new WorldListEntry[WorldListEntry.activeWorldListSize];
                      var2 = 0;
 
                      for(int var3 = Class53.worldListOffset; var3 <= WorldListEntry.worldListArraySize; ++var3) {
@@ -199,7 +199,7 @@ final class Class121 {
                      Class3_Sub15.activeConnection.close();
                      Class3_Sub15.activeConnection = null;
                      Unsorted.anInt1088 = 0;
-                     Class43.anInt692 = 0;
+                     Class43.worldListStage = 0;
                      Class3_Sub13_Sub33.aByteArray3396 = null;
                      Class3_Sub13_Sub34.aLong3411 = TimeUtils.time();
                      return 0;

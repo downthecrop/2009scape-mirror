@@ -19,7 +19,7 @@ final class Class3_Sub23 extends Linkable {
    static Class3_Sub11[][] aClass3_Sub11ArrayArray2542;
 
 
-   static void method406(byte var0, boolean var1, Class3_Sub28_Sub17 var2) {
+   static void method406(byte var0, boolean var1, Font var2) {
       try {
          int var3;
          if(HDToolKit.highDetail || var1) {

@@ -344,12 +344,12 @@ public final class Class24 {
          if(2 <= Unsorted.menuOptionCount || Class164_Sub1.anInt3012 != 0 || GameObject.aBoolean1837) {
             RSString var4 = Class3_Sub28_Sub1.method531();
             if(var0 == null) {
-               int var5 = Class168.aClass3_Sub28_Sub17_2096.method683(var4, 4 + var3, var2 - -15, aRandom3088, Class38_Sub1.anInt2618);
-               Class75.method1340(4 + var3, Class168.aClass3_Sub28_Sub17_2096.method682(var4) + var5, var2, 15);
+               int var5 = Class168.bold.method683(var4, 4 + var3, var2 - -15, aRandom3088, Class38_Sub1.anInt2618);
+               Class75.method1340(4 + var3, Class168.bold.method682(var4) + var5, var2, 15);
             } else {
-               Class3_Sub28_Sub17 var7 = var0.method868(Class3_Sub13_Sub22.nameIconsSpriteArray);
+               Font var7 = var0.method868(Class3_Sub13_Sub22.nameIconsSpriteArray);
                if(null == var7) {
-                  var7 = Class168.aClass3_Sub28_Sub17_2096;
+                  var7 = Class168.bold;
                }
 
                var7.method702(var4, var3, var2, var0.width, var0.height, var0.anInt218, var0.anInt287, var0.anInt194, var0.anInt225, aRandom3088, Class38_Sub1.anInt2618, Player.anIntArray3951);
@@ -366,7 +366,7 @@ public final class Class24 {
       try {
          Class3_Sub28_Sub18.aBoolean3769 = false;
          Class3_Sub13_Sub34.anInt3413 = 0;
-         Class158.anInt2005 = -3;
+         Client.messageToDisplay = -3;
          Class50.anInt820 = 0;
          LoginHandler.loginStage = 1;
          Class166.anInt2079 = 0;

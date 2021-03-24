@@ -7,7 +7,9 @@ import org.rs09.client.rendering.RenderingUtils
 import org.rs09.client.rendering.Toolkit
 import org.runite.client.*
 import java.awt.event.KeyEvent
+import java.text.SimpleDateFormat
 import java.util.*
+import org.runite.client.Class3_Sub13_Sub1
 
 
 // TODO Escape characters in the string rendering - is this something we can do using RSString / the text renders?
@@ -16,7 +18,10 @@ object DeveloperConsole {
     var ENABLE_PACKETS = false
 
     private val CONSOLE_FONT
-        get() = Class126.aClass3_Sub28_Sub17_1669
+        get() = Class126.plainFont
+
+    private val gameWidth //Offset 5 if in-game offset 20 if on login screen
+        get() = Unsorted.gameWindowWidth
 
     private val LOCK = Any()
 
@@ -31,6 +36,7 @@ object DeveloperConsole {
     private var scrollOffset = 0
     private var str: String = ""
 
+    var firstOpen = false
     var selectedCompletion = 0
     var autocompletions: AutocompletionHints? = null
         set(t) {
@@ -47,15 +53,47 @@ object DeveloperConsole {
     fun draw() {
         if (!open) return
 
-        val tk = Toolkit.getActiveToolkit()
-        tk.fillRect(0, 0, RenderingUtils.width, HEIGHT, BACKGROUND_COLOR, 128)
-        tk.drawHorizontalLine(0, HEIGHT - 14 - 2, RenderingUtils.width, -1)
-        RenderingUtils.drawText(GameConfig.CLIENT_BUILD.toString(), RenderingUtils.width - 27, HEIGHT - 2, -1)
-        RenderingUtils.drawText("--> $str", 3, HEIGHT - 2, -1)
+        if (!firstOpen) {
+            println("This is the developer console. To close, press ALT + `")
+            firstOpen = true
+        }
 
-        RenderingUtils.setClipping(0, 0, RenderingUtils.width, HEIGHT - 16)
+        val tk = Toolkit.getActiveToolkit()
+
+        when (Class83.getWindowType()) {
+            0, 1 -> { //use gameWidth
+                val widthOffsets = if (Class143.gameStage <= 10) RenderingUtils.width else (gameWidth + 3)
+                tk.fillRect(0, 0, widthOffsets, HEIGHT, BACKGROUND_COLOR, 128)
+                tk.drawHorizontalLine(0, HEIGHT - 14 - 2, widthOffsets, -1)
+                RenderingUtils.drawTextSmall("Build: ${GameConfig.CLIENT_BUILD}", widthOffsets - 60, HEIGHT - 17, -1, 2)
+                RenderingUtils.drawText("--> $str", 3, HEIGHT - 2, -1, 2)
+                RenderingUtils.setClipping(0, 0, widthOffsets, HEIGHT - 16)
+            }
+            2 -> { //use RenderingUtils.width
+                tk.fillRect(0, 0, RenderingUtils.width, HEIGHT, BACKGROUND_COLOR, 128)
+                tk.drawHorizontalLine(0, HEIGHT - 14 - 2, RenderingUtils.width, -1)
+                RenderingUtils.drawTextSmall(
+                    "Build: ${GameConfig.CLIENT_BUILD}",
+                    RenderingUtils.width - 60,
+                    HEIGHT - 17,
+                    -1,
+                    2
+                )
+                RenderingUtils.drawText("--> $str", 3, HEIGHT - 2, -1, 2)
+                RenderingUtils.setClipping(0, 0, RenderingUtils.width, HEIGHT - 16)
+            }
+        }
+
         synchronized(LOCK) {
-            lines.forEachIndexed { i, line -> RenderingUtils.drawText(line, 3, scrollOffset + HEIGHT - 20 - i * 14, -1) }
+            lines.forEachIndexed { i, line ->
+                RenderingUtils.drawText(
+                    line,
+                    7,
+                    scrollOffset + HEIGHT - 20 - i * 14,
+                    -1,
+                    2
+                )
+            }
         }
         RenderingUtils.resetClipping()
 
@@ -67,10 +105,27 @@ object DeveloperConsole {
                 val boxWidth = 8 + 8 + (completions.map { CONSOLE_FONT.method682(RSString.of(it)) }.maxOrNull() ?: 0)
 
                 tk.fillRect(startX, HEIGHT - 16 - boxHeight, boxWidth, boxHeight, 0x323232, 255)
-                RenderingUtils.drawRect(startX + 3, HEIGHT - 16 - boxHeight + 6, boxWidth - 6, boxHeight - 9 - 14, 0x646464, 200)
+                RenderingUtils.drawRect(
+                    startX + 3,
+                    HEIGHT - 16 - boxHeight + 6,
+                    boxWidth - 6,
+                    boxHeight - 9 - 14,
+                    0x646464,
+                    200
+                )
                 tk.drawHorizontalLine(startX + 8, HEIGHT - 16 - boxHeight + 6, 75, 0x323232)
-                RenderingUtils.drawText(RSString.parse("Completions"), startX + 12, HEIGHT - 17 - boxHeight + 12, 0xffffff)
-                RenderingUtils.drawText(RSString.parse("<col=ee2222>${completions.size}</col>/<col=ee2222>$totalSize</col> sent"), startX + 4, HEIGHT - 20, 0xffffff)
+                RenderingUtils.drawText(
+                    RSString.parse("Completions"),
+                    startX + 12,
+                    HEIGHT - 17 - boxHeight + 12,
+                    0xffffff
+                )
+                RenderingUtils.drawText(
+                    RSString.parse("<col=ee2222>${completions.size}</col>/<col=ee2222>$totalSize</col> sent"),
+                    startX + 4,
+                    HEIGHT - 20,
+                    0xffffff
+                )
 
 //                tk.fillRect(startX + 4, HEIGHT - 16 - boxHeight + 14, boxWidth - 8, boxHeight - 9 - 14 - 8 - 1, 0xff0000, 255)
 //                RenderingUtils.setClipping(startX + 4, HEIGHT - 16 - boxHeight + 14, boxWidth - 8, boxHeight - 9 - 14 - 8 - 1)
@@ -78,24 +133,22 @@ object DeveloperConsole {
                     if (selectedCompletion == i) {
                         tk.fillRect(startX + 4, HEIGHT - 6 - boxHeight + 4 + i * 14, boxWidth - 8, 14, 0x2a58a8, 255)
                     }
-                    RenderingUtils.drawText(RSString.of(completion), startX + 6, HEIGHT - 6 - boxHeight + 14 + i * 14, 0xffffff)
+                    RenderingUtils.drawText(
+                        RSString.of(completion),
+                        startX + 6,
+                        HEIGHT - 6 - boxHeight + 14 + i * 14,
+                        0xffffff
+                    )
                 }
 //                RenderingUtils.resetClipping()
             }
         }
     }
 
-    fun println(line: String, timestamp: Boolean = false) {
+    fun println(line: String) {
         calendar.time = Date(TimeUtils.time())
-        val h: Int = calendar.get(Calendar.HOUR_OF_DAY)
-        val m: Int = calendar.get(Calendar.MINUTE)
-        val s: Int = calendar.get(Calendar.SECOND)
-
         synchronized(LOCK) {
-            if (timestamp)
-                lines.addFirst(RSString.of("<col=8888cc>[$h:$m:$s]</col> $line"))
-            else
-                lines.addFirst(RSString.of(line))
+            lines.addFirst(RSString.of("${SimpleDateFormat("HH:mm:ss").format(Date(TimeUtils.time()))}: --> $line"))
 
             if (lines.size >= MAX_LINES) lines.removeLast()
 
@@ -139,40 +192,157 @@ object DeveloperConsole {
             Class3_Sub13_Sub1.outgoingBuffer.finishVarshortPacket(Class3_Sub13_Sub1.outgoingBuffer.index - index)
         }
 
-        if (str.toLowerCase() == "enableconsolepackets") {
-            ENABLE_PACKETS = true
-            println("<col=44ff44>Enabled console packets!</col>")
-        } else if (str.toLowerCase() == "quests") {
-            println("<col=5555ff>~~~~~ MINIQUESTS ~~~~~</col>")
-            System.out.println("~~~~~ MINIQUESTS ~~~~~")
-            var lookup = EnumDefinitionProvider.provide(208)
+        val clientCommand: MutableList<String>
+        val args: Any
+        val command: String = str
+        clientCommand = command.split(' ') as MutableList<String>
+        val argSize = clientCommand.size
+        println(str)
+        when (clientCommand[0]) {
+            "enableconsolepackets" -> {
+                ENABLE_PACKETS = true
+                println("<col=44ff44>Enabled console packets!</col>")
+            }
+            "quests" -> {
+                println("<col=5555ff>~~~~~ MINIQUESTS ~~~~~</col>")
+                System.out.println("~~~~~ MINIQUESTS ~~~~~")
+                var lookup = EnumDefinitionProvider.provide(208)
 
-            for (i in 0..17) {
-                val component = (lookup.values!![i.toLong()]!! as LinkableInt).value
+                for (i in 0..17) {
+                    val component = (lookup.values!![i.toLong()]!! as LinkableInt).value
 
-                val rsiface = Class7.getRSInterface(component)
-                if (rsiface == null) println("Error: couldnt find component for hash $component", true)
+                    val rsiface = Class7.getRSInterface(component)
+                    if (rsiface == null) println("Error: couldnt find component for hash $component")
 
-                println("$i: <col=5555ff>${rsiface.text}</col>", true)
-                System.out.println("name ${rsiface.text}, lookup id $i")
+                    println("$i: <col=5555ff>${rsiface.text}</col>")
+                    System.out.println("name ${rsiface.text}, lookup id $i")
+                }
+
+                println("<col=5555ff>~~~~~ QUESTS ~~~~~</col>")
+                System.out.println("~~~~~ QUESTS ~~~~~")
+                lookup = EnumDefinitionProvider.provide(209)
+
+                for (i in 0..130) {
+                    val component = (lookup.values!![i.toLong()]!! as LinkableInt).value
+
+                    val rsiface = Class7.getRSInterface(component)
+                    if (rsiface == null) println("Error: couldnt find component for hash $component")
+
+                    println("$i: <col=5555ff>${rsiface.text}</col>")
+                    System.out.println("name ${rsiface.text}, lookup id $i")
+                }
+            }
+            "errormsg" -> {
+                if (argSize == 2) {
+                    args = clientCommand[1].toIntOrNull() ?: -1
+                    Client.messageToDisplay = args as Int
+                } else {
+                    println("Error. Displays error message on login, account creation. Use: errormsg #")
+                }
+            }
+            "playsong" -> {
+                if (argSize in 2..4) {
+                    if (clientCommand[1].toIntOrNull() == null) {
+                        clientCommand.removeFirst()
+                        AtmosphereParser.musicHandler(
+                            CacheIndex.musicIndex.getArchiveForName(
+                                RSString.of(
+                                    clientCommand.joinToString(
+                                        " "
+                                    )
+                                )
+                            )
+                        )
+                    } else {
+                        args = clientCommand[1].toInt()
+                        AtmosphereParser.musicHandler(args)
+                    }
+                } else {
+                    println("Error. Plays music. Use: playsong # OR playsong songName")
+                }
+            }
+            "playsfx" -> {
+                if (argSize == 2) {
+                    args = clientCommand[1].toIntOrNull() ?: -1
+                    Class167.musicEffectHandler(args as Int)
+                } else {
+                    println("Error. Plays a music effect. Use: playeffectfx #")
+                }
+            }
+            "cstage" -> {
+                when (argSize) {
+                    1 -> {
+                        println("Client.gameStage: " + Class143.gameStage)
+                        println("LoginHandler.adminLoginStage: " + Class163_Sub1_Sub1.adminLoginStage)
+                        println("LoginHandler.userLoginStage: " + LoginHandler.loginStage)
+                        println("AccountRegistration.registryStage: " + Unsorted.registryStage)
+                        println("WorldListMethods.worldStage: " + Class43.worldListStage)
+                    }
+                    2 -> {
+                        args = clientCommand[1]
+                        when (args) {
+                            "game" -> println("GameStateManager.gameState: " + Class143.gameStage)
+                            "login" -> {
+                                println("LoginHandler.adminLoginStage: " + Class163_Sub1_Sub1.adminLoginStage)
+                                println("LoginHandler.userLoginStage: " + LoginHandler.loginStage)
+                            }
+                            "register" -> println("AccountRegistration.registryStage: " + Unsorted.registryStage)
+                            "wl", "worldlist" -> println("WorldListMethods.worldStage: " + Class43.worldListStage)
+                            else -> println("Error. Incorrect usage. Use clientstage or clientstage game/login/register/worldlist to see a specific stage")
+                        }
+                    }
+                    else -> println("Error. Incorrect usage. Use clientstage or clientstage game/login/register/worldlist")
+                }
+            }
+            "worldlist" -> {
+                val worldArray = WorldListEntry.worldList
+                args = clientCommand[1]
+                when (args) {
+                    "active" -> {
+                        println("Active: ${WorldListEntry.activeWorldListSize} Update stamp: ${WorldListEntry.updateStamp}")
+                    }
+                    "world" -> {
+                        if (argSize == 3) {
+                            val worldId = clientCommand[2].toInt()
+                            if (worldArray[worldId] != null) {
+                                val world = worldArray[worldId]
+                                println(
+                                    "ID: ${world.worldId} " +
+                                            "WHERE: ${world.countryIndex} " +
+                                            "MEM: ${world.isMembers} " +
+                                            "PVP: ${world.isPVP} " +
+                                            "Loot: ${world.isLootShare} " +
+                                            "QC: ${world.isQuickchat} " +
+                                            "DESC: ${world.activity} " +
+                                            "NET: ${world.address}:"
+                                )
+                            } else {
+                                println("Requested world ($worldId) is OFFLINE or NULL")
+                            }
+                        } else {
+                            println("Error. Incorrect usage. Use worldlist world worldID")
+                        }
+                    }
+                    "goto" -> {
+                        if (argSize == 3) {
+                            val worldId = clientCommand[2].toInt()
+                            if (worldArray[worldId] != null) {
+                                CS2Script.userCurrentWorldID = worldId
+                            } else {
+                                println("Requested world ($worldId) is OFFLINE or NULL")
+                            }
+                        } else {
+                            println("Error. Incorrect usage. Use: worldlist goto worldID")
+                        }
+                    }
+                    else -> println("World list commands: active, world ID, goto ID")
+                }
             }
 
-            println("<col=5555ff>~~~~~ QUESTS ~~~~~</col>")
-            System.out.println("~~~~~ QUESTS ~~~~~")
-            lookup = EnumDefinitionProvider.provide(209)
+            else -> {
 
-            for (i in 0..130) {
-                val component = (lookup.values!![i.toLong()]!! as LinkableInt).value
-
-                val rsiface = Class7.getRSInterface(component)
-                if (rsiface == null) println("Error: couldnt find component for hash $component", true)
-
-                println("$i: <col=5555ff>${rsiface.text}</col>", true)
-                System.out.println("name ${rsiface.text}, lookup id $i")
             }
         }
-
-        println(str)
     }
 
     fun handleKeyDown(evt: KeyEvent) {
@@ -234,6 +404,12 @@ object DeveloperConsole {
             evt.keyChar == '\b' && str.isNotEmpty() -> str = str.substring(0, str.length - 1)
             else -> str += evt.keyChar
         }
+    }
+
+    private fun sendCommand(command: String) {
+        Class3_Sub13_Sub1.outgoingBuffer.putOpcode(44)
+        Class3_Sub13_Sub1.outgoingBuffer.writeByte(command.length + -1)
+//        Class3_Sub13_Sub1.outgoingBuffer.writeString(command.substring(2))
     }
 
 }

@@ -2,7 +2,7 @@ package org.runite.client;
 
 import org.rs09.client.config.GameConfig;
 
-final class Class3_Sub13_Sub6 extends Class3_Sub13 {
+final class Class3_Sub13_Sub6 extends TextureOperation {
 
    private int anInt3073 = 0;
    private int anInt3074 = 4096;

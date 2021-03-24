@@ -1,6 +1,6 @@
 package org.runite.client;
 
-final class Class3_Sub13_Sub33 extends Class3_Sub13 {
+final class Class3_Sub13_Sub33 extends TextureOperation {
 
    static byte[][][] aByteArrayArrayArray3390;
    static RSString[] aClass94Array3391;

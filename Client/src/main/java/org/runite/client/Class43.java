@@ -1,11 +1,11 @@
 package org.runite.client;
 
-final class Class43 {
+public final class Class43 {
 
     static int[] anIntArray3107;
     boolean aBoolean690;
    
-   static int anInt692 = 0;
+   public static int worldListStage = 0;
    private int anInt693;
    private int anInt694;
    boolean aBoolean696 = false;

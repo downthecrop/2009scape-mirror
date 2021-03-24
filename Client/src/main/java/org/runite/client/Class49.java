@@ -97,7 +97,7 @@ final class Class49 {
 
             for(var5 = 0; var5 < 255; ++var5) {
                int var6 = 255 - var5;
-               int var7 = Class3_Sub13.method1603((byte)125, var6, var4);
+               int var7 = TextureOperation.method1603((byte)125, var6, var4);
                byte var8 = var3[var7];
                var3[var7] = var3[var6];
                var3[var6] = var3[511 + -var5] = var8;

@@ -3,7 +3,7 @@ package org.runite.client;
 
 import org.rs09.client.config.GameConfig;
 
-public final class Class3_Sub13_Sub1 extends Class3_Sub13 {
+public final class Class3_Sub13_Sub1 extends TextureOperation {
 
 	public static Class3_Sub30_Sub1 outgoingBuffer = new Class3_Sub30_Sub1();
 	private int anInt3036 = 0;

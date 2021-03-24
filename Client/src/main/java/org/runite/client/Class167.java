@@ -1,6 +1,6 @@
 package org.runite.client;
 
-final class Class167 {
+public final class Class167 {
 
    static RSString aClass94_2083 = null;
    static int anInt2087 = 0;
@@ -109,14 +109,14 @@ final class Class167 {
       }
    }
 
-   static void method2266(int var0, int var1) {
+   public static void musicEffectHandler(int var1) {
       try {
          if(Unsorted.anInt120 != 0 && var1 != -1) {
             Class70.method1285(CacheIndex.music2Index, var1, Unsorted.anInt120);
             Class83.aBoolean1158 = true;
          }
       } catch (RuntimeException var4) {
-         throw ClientErrorException.clientError(var4, "wj.D(" + var0 + ',' + var1 + ',' + (byte) -1 + ')');
+         throw ClientErrorException.clientError(var4, "wj.D(" + ',' + var1 + ',' + (byte) -1 + ')');
       }
    }
 

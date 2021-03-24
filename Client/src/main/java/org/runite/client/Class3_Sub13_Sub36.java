@@ -3,7 +3,7 @@ package org.runite.client;
 import org.rs09.client.config.GameConfig;
 import org.rs09.client.rendering.Toolkit;
 
-public final class Class3_Sub13_Sub36 extends Class3_Sub13 {
+public final class Class3_Sub13_Sub36 extends TextureOperation {
 
    static int anInt3422;
    static int anInt3423;
@@ -132,7 +132,7 @@ public final class Class3_Sub13_Sub36 extends Class3_Sub13 {
             HDToolKit.method1846();
             HDToolKit.method1831(true);
             HDToolKit.method1827(true);
-            if(Class143.loadingStage == 10) {
+            if(Class143.gameStage == 10) {
                var12 = Class3_Sub30_Sub1.method809(Class106.anInt1446, Class77.anInt1111 >> 10, Unsorted.anInt3625, NPC.anInt3995 >> 10);
             } else {
                var12 = Class3_Sub30_Sub1.method809(Class106.anInt1446, Class102.player.anIntArray2755[0] >> 3, Unsorted.anInt3625, Class102.player.anIntArray2767[0] >> 3);
@@ -172,7 +172,7 @@ public final class Class3_Sub13_Sub36 extends Class3_Sub13 {
 
          if(Class3_Sub13_Sub4.aBoolean3064) {
             Toolkit.getActiveToolkit().method934(var3, var5, var4, var1, 0);
-            Class3_Sub13.method164((byte)-52, false, TextCore.LoadingPleaseWait2);
+            TextureOperation.method164(false, TextCore.LoadingPleaseWait2);
          }
 
          if(!var2 && !Class3_Sub13_Sub4.aBoolean3064 && !Class38_Sub1.aBoolean2615 && var3 <= NPCDefinition.anInt1297 && var4 + var3 > NPCDefinition.anInt1297 && Class38_Sub1.anInt2612 >= var5 && var1 + var5 > Class38_Sub1.anInt2612) {

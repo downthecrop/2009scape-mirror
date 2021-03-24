@@ -1,15 +1,14 @@
 package org.runite.client;
 
-final class Class117 {
+public final class Class117 {
 
-   static WorldListEntry[] worldList;
    static int[] anIntArray1613 = new int[500];
 
 
    static void method1719(int var0) {
       try {
-         if(Class143.loadingStage != var0) {
-            if(Class143.loadingStage == 0) {
+         if(Class143.gameStage != var0) {
+            if(Class143.gameStage == 0) {
                Unsorted.method1517();
             }
 
@@ -42,7 +41,7 @@ final class Class117 {
                Class3_Sub13_Sub17.method247((byte)-121);
             }
 
-            boolean var3 = 5 == Class143.loadingStage || Class143.loadingStage == 10 || Class143.loadingStage == 28;
+            boolean var3 = 5 == Class143.gameStage || Class143.gameStage == 10 || Class143.gameStage == 28;
             if(var3 == !var2) {
                if(var2) {
                   Class129.anInt1691 = KeyboardListener.loginThemeSongArchiveID;
@@ -63,7 +62,7 @@ final class Class117 {
                HDToolKit.method1833();
             }
 
-            Class143.loadingStage = var0;
+            Class143.gameStage = var0;
          }
       } catch (RuntimeException var4) {
          throw ClientErrorException.clientError(var4, "pl.C(" + var0 + ',' + 5 + ')');

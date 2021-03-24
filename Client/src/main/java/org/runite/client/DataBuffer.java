@@ -135,7 +135,7 @@ public class DataBuffer extends Linkable {
         return this.buffer[this.index++] - 128 & 0xff;
     }
 
-    final void writeByte(int value) {
+    public final void writeByte(int value) {
         this.buffer[this.index++] = (byte) value;
     }
 

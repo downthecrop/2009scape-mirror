@@ -6,7 +6,7 @@ import org.rs09.client.net.game.PacketDecoder;
 
 import java.io.IOException;
 
-public final class Class3_Sub13_Sub3 extends Class3_Sub13 {
+public final class Class3_Sub13_Sub3 extends TextureOperation {
 
    private int anInt3047 = 4096;
    static KeyboardListener aClass148_3049 = new KeyboardListener();
@@ -72,11 +72,11 @@ public final class Class3_Sub13_Sub3 extends Class3_Sub13 {
 
             ++Unsorted.anInt1088;
             if (Unsorted.anInt1088 > 4) {
-               Class43.anInt692 = 0;
+               Class43.worldListStage = 0;
                Unsorted.anInt1088 = 0;
                return var1;
             } else {
-               Class43.anInt692 = 0;
+               Class43.worldListStage = 0;
                if (Class123.anInt1658 == Client.anInt3773) {
                   Class123.anInt1658 = Class53.anInt867;
                } else {

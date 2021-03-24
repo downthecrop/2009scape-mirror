@@ -164,7 +164,7 @@ final class Class40 {
 
              if(var1) {
                if(Class163_Sub2_Sub1.anInt4019 != 0) {
-                  Class3_Sub13.method164((byte)-24, true, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_2707}));
+                  TextureOperation.method164(true, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_2707}));
                }
 
                Class58.method1194();
@@ -309,7 +309,7 @@ final class Class40 {
                method318();
                Class3_Sub13_Sub30.method313((byte)100);
                Class3_Sub13_Sub34.aBoolean3416 = false;
-               if(GameShell.frame != null && null != Class3_Sub15.activeConnection && 25 == Class143.loadingStage) {
+               if(GameShell.frame != null && null != Class3_Sub15.activeConnection && 25 == Class143.gameStage) {
                   Class3_Sub13_Sub1.outgoingBuffer.putOpcode(20);
                   Class3_Sub13_Sub1.outgoingBuffer.writeInt(1057001181);
                }
@@ -330,7 +330,7 @@ final class Class40 {
                   }
                }
 
-               if(Class143.loadingStage == 28) {
+               if(Class143.gameStage == 28) {
                   Class117.method1719(10);
                } else {
                   Class117.method1719(30);

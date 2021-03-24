@@ -2,7 +2,7 @@ package org.runite.client;
 
 import org.rs09.client.rendering.Toolkit;
 
-public final class Class3_Sub28_Sub17_Sub1 extends Class3_Sub28_Sub17 {
+public final class Class3_Sub28_Sub17_Sub1 extends Font {
 
    private byte[][] aByteArrayArray4082 = new byte[256][];
 

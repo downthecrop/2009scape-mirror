@@ -64,11 +64,11 @@ final class WaterfallShader implements ShaderInterface {
 //            GameLaunch.SETTINGS.setIp(var2.address.toString());
             var2.address.method1568();
             Class38_Sub1.accRegistryIp = GameConfig.IP_MANAGEMENT;
-            CS2Script.anInt2451 = var2.worldId;
+            CS2Script.userCurrentWorldID = var2.worldId;
             if (Class44.paramModeWhere != 0) {
-               Class162.anInt2036 = '\u9c40' + CS2Script.anInt2451;
+               Class162.anInt2036 = '\u9c40' + CS2Script.userCurrentWorldID;
                Class140_Sub6.accRegistryPort = Class162.anInt2036;
-               Client.currentPort = CS2Script.anInt2451 + '\uc350';
+               Client.currentPort = CS2Script.userCurrentWorldID + '\uc350';
             }
 
             return true;

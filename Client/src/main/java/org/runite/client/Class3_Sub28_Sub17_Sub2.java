@@ -9,7 +9,7 @@ import org.rs09.client.rendering.opengl.enums.GLBeginMode;
 import javax.media.opengl.GL;
 import java.nio.ByteBuffer;
 
-public final class Class3_Sub28_Sub17_Sub2 extends Class3_Sub28_Sub17 {
+public final class Class3_Sub28_Sub17_Sub2 extends Font {
 
    private int anInt4083 = 0;
    private int anInt4084 = -1;

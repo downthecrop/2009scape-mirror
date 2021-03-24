@@ -1,6 +1,6 @@
 package org.runite.client;
 
-final class Class57 {
+public final class Class57 {
 
    static AbstractSprite aAbstractSprite_895;
    int anInt896 = 0;
@@ -8,7 +8,6 @@ final class Class57 {
    int anInt899 = 2048;
    static int anInt902 = 100;
    static int[] anIntArray904 = new int[200];
-   static int activeWorldListSize;
    int anInt907 = 0;
    int anInt908 = 2048;
 

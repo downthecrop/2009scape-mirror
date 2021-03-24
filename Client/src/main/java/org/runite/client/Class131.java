@@ -129,12 +129,12 @@ final class Class131 {
          Class7.anInt2161 = var2;
          username = var0;
          if(username.equalsString(TextCore.emptyJagexString) || password.equalsString(TextCore.emptyJagexString)) {
-            Class158.anInt2005 = 3;
-         } else if (CS2Script.anInt2451 == -1) {
+            Client.messageToDisplay = 3;
+         } else if (CS2Script.userCurrentWorldID == -1) {
             Class163_Sub1_Sub1.anInt2246 = 0;
             Class163_Sub1_Sub1.anInt1616 = 0;
-            Class158.anInt2005 = -3;
-            Class163_Sub1_Sub1.anInt3375 = 1;
+            Client.messageToDisplay = -3;
+            Class163_Sub1_Sub1.adminLoginStage = 1;
             DataBuffer var4 = new DataBuffer(128);
             var4.writeByte(10);
             var4.writeShort((int) (Math.random() * 99999.0D));

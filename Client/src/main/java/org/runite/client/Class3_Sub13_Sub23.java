@@ -1,11 +1,10 @@
 package org.runite.client;
 
 import org.rs09.CustomVars;
-import org.rs09.client.config.GameConfig;
 
 import java.util.Objects;
 
-class Class3_Sub13_Sub23 extends Class3_Sub13 {
+class Class3_Sub13_Sub23 extends TextureOperation {
 
    private int anInt3278 = -1;
    int anInt3280;

@@ -50,9 +50,9 @@ final class Sprites {
          Unsorted.aAbstractSpriteArray1136 = Class3_Sub13_Sub23_Sub1.method286(mapDotsSpriteArchive, index8);
          GameObject.aClass109Array1831 = Class85.method1424(index8, scrollbarSpriteArchive);
          Class3_Sub13_Sub22.nameIconsSpriteArray = Class85.method1424(index8, nameIconsSpriteArchive);
-         Class3_Sub13.aClass3_Sub28_Sub17_2379.method697(Class3_Sub13_Sub22.nameIconsSpriteArray, null);
-         Class126.aClass3_Sub28_Sub17_1669.method697(Class3_Sub13_Sub22.nameIconsSpriteArray, null);
-         Class168.aClass3_Sub28_Sub17_2096.method697(Class3_Sub13_Sub22.nameIconsSpriteArray, null);
+         TextureOperation.smallFont.method697(Class3_Sub13_Sub22.nameIconsSpriteArray, null);
+         Class126.plainFont.method697(Class3_Sub13_Sub22.nameIconsSpriteArray, null);
+         Class168.bold.method697(Class3_Sub13_Sub22.nameIconsSpriteArray, null);
          if(HDToolKit.highDetail) {
             Class141.aClass109_Sub1Array1843 = method885(floorShadowSpriteArchive, index8);
 

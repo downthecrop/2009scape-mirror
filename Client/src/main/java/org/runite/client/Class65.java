@@ -161,7 +161,7 @@ final class Class65 {
 
    static void method1240() {
       try {
-         Class126.aClass3_Sub28_Sub17_1669 = null;
+         Class126.plainFont = null;
          Class75_Sub3.aAbstractSpriteArray2656 = null;
          aAbstractSpriteArray1825 = null;
          Class3_Sub13_Sub22.nameIconsSpriteArray = null;
@@ -170,10 +170,10 @@ final class Class65 {
          Class140_Sub4.aAbstractSpriteArray2839 = null;
          Class129_Sub1.aAbstractSpriteArray2690 = null;
          NPC.aAbstractSpriteArray3977 = null;
-         Class168.aClass3_Sub28_Sub17_2096 = null;
+         Class168.bold = null;
          Class57.aAbstractSprite_895 = null;
          Unsorted.aAbstractSpriteArray1136 = null;
-         Class3_Sub13.aClass3_Sub28_Sub17_2379 = null;
+         TextureOperation.smallFont = null;
          Class45.aAbstractSprite_736 = null;
          Unsorted.aAbstractSpriteArray996 = null;
          Class3_Sub13_Sub39.aAbstractSpriteArray3458 = null;

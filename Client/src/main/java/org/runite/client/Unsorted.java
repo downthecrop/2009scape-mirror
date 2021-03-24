@@ -3,6 +3,7 @@ package org.runite.client;
 import org.rs09.SlayerTracker;
 import org.rs09.XPGainDraw;
 import org.rs09.client.config.GameConfig;
+import org.rs09.client.console.DeveloperConsole;
 import org.rs09.client.data.HashTable;
 import org.rs09.client.rendering.Toolkit;
 import org.rs09.client.util.ArrayUtils;
@@ -141,7 +142,6 @@ public class Unsorted {
     public static int[][][] anIntArrayArrayArray3605;
     public static int anInt3606;
     public static int[] anIntArray3607 = new int[]{0, 2, 2, 2, 1, 1, 2, 2, 1, 3, 1, 1};
-    public static int updateStamp;
     public static ReferenceCache aReferenceCache_4043 = new ReferenceCache(64);
     public static volatile int anInt4045 = 0;
     public static HashTable aHashTable_4046 = new HashTable(16);
@@ -168,6 +168,7 @@ public class Unsorted {
     static int[][] anIntArrayArray2039 = new int[][]{{0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15}, {12, 8, 4, 0, 13, 9, 5, 1, 14, 10, 6, 2, 15, 11, 7, 3}, {15, 14, 13, 12, 11, 10, 9, 8, 7, 6, 5, 4, 3, 2, 1, 0}, {3, 7, 11, 15, 2, 6, 10, 14, 1, 5, 9, 13, 0, 4, 8, 12}};
     static int menuOptionCount = 0;
     static boolean aBoolean11 = false;
+    public static int gameWindowWidth = 0;
 
 
     static void method2086() {
@@ -736,11 +737,11 @@ public class Unsorted {
         }
     }
 
-    public static Class3_Sub13 method63(DataBuffer var1) {
+    public static TextureOperation method63(DataBuffer var1) {
         try {
             var1.readUnsignedByte();
             int var2 = var1.readUnsignedByte();
-            Class3_Sub13 var3 = method1777(var2);
+            TextureOperation var3 = method1777(var2);
             Objects.requireNonNull(var3).anInt2381 = var1.readUnsignedByte();
             int var4 = var1.readUnsignedByte();
             for (int var5 = 0; var5 < var4; ++var5) {
@@ -1279,7 +1280,7 @@ public class Unsorted {
         anInt3070 = 0;
     }
 
-    public static Class3_Sub13 method1777(int var0) {
+    public static TextureOperation method1777(int var0) {
         try {
             if (var0 == 0) {
                 return new Class3_Sub13_Sub22();
@@ -1577,7 +1578,7 @@ public class Unsorted {
                 HDToolKit.method1842();
             }
 
-            if (null != Class3_Sub13_Sub10.aFrame3121 && (3 != var1 || Class3_Sub13.anInt2378 != var5 || anInt3071 != var6)) {
+            if (null != Class3_Sub13_Sub10.aFrame3121 && (3 != var1 || TextureOperation.anInt2378 != var5 || anInt3071 != var6)) {
                 method593(Class3_Sub13_Sub10.aFrame3121, Class38.signlink);
                 Class3_Sub13_Sub10.aFrame3121 = null;
             }
@@ -1586,7 +1587,7 @@ public class Unsorted {
                 Class3_Sub13_Sub10.aFrame3121 = Class99.method1597(0, var6, var5, Class38.signlink);
                 if (null != Class3_Sub13_Sub10.aFrame3121) {
                     anInt3071 = var6;
-                    Class3_Sub13.anInt2378 = var5;
+                    TextureOperation.anInt2378 = var5;
                     Class119.method1730(Class38.signlink);
                 }
             }
@@ -1665,10 +1666,10 @@ public class Unsorted {
                         Class164_Sub1.aClass158_3009 = null;
                         Class164_Sub1.aClass158_3009 = Class3_Sub13_Sub23_Sub1.method285(Class140_Sub7.canvasHeight, Class23.canvasWidth, GameShell.canvas);
                         Class74.method1320();
-                        if (5 == Class143.loadingStage) {
-                            Class3_Sub23.method406((byte) 122, true, Class168.aClass3_Sub28_Sub17_2096);
+                        if (5 == Class143.gameStage) {
+                            Class3_Sub23.method406((byte) 122, true, Class168.bold);
                         } else {
-                            Class3_Sub13.method164((byte) -20, false, TextCore.LoadingPleaseWait2);
+                            TextureOperation.method164(false, TextCore.LoadingPleaseWait2);
                         }
 
                         try {
@@ -1712,7 +1713,7 @@ public class Unsorted {
                             Class51.method1137(0.7F);
                         }
 
-                        Class3_Sub13.method165();
+                        TextureOperation.method165();
                     } else if (0 == var1 && var3 > 0) {
                         Class17.aThread409.setPriority(1);
                         Class164_Sub1.aClass158_3009 = Class3_Sub13_Sub23_Sub1.method285(503, 765, GameShell.canvas);
@@ -1737,7 +1738,7 @@ public class Unsorted {
                         }
 
                         Class3_Sub11.method144();
-                        Class3_Sub13.method165();
+                        TextureOperation.method165();
                     }
 
                     aBoolean742 = !NPC.method1986(89);
@@ -1751,7 +1752,7 @@ public class Unsorted {
                         Class124.method1746(true, (byte) -107);
                     }
 
-                    if (null != Class3_Sub15.activeConnection && (Class143.loadingStage == 30 || Class143.loadingStage == 25)) {
+                    if (null != Class3_Sub15.activeConnection && (Class143.gameStage == 30 || Class143.gameStage == 25)) {
                         Class3_Sub13_Sub8.method204(-3);
                     }
 
@@ -1875,7 +1876,7 @@ public class Unsorted {
         }
     }
 
-    public static Class3_Sub28_Sub17 method880(byte[] var1) {
+    public static Font method880(byte[] var1) {
         try {
             if (null == var1) {
                 return null;
@@ -1888,7 +1889,7 @@ public class Unsorted {
                 }
 
                 Class39.method1035((byte) 106);
-                return (Class3_Sub28_Sub17) var2;
+                return (Font) var2;
             }
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "ce.G(" + -22376 + ',' + "{...}" + ')');
@@ -2275,7 +2276,7 @@ public class Unsorted {
         }
     }
 
-    public static Class3_Sub28_Sub17 method1300(int var1, CacheIndex var3, CacheIndex var4) {
+    public static Font method1300(int var1, CacheIndex var3, CacheIndex var4) {
         //System.out.println("Class 73 " + var1);
         return !Class75_Sub4.method1351(var3, 0, var1) ? null : method880(var4.getFile(var1, 0));
     }
@@ -2296,7 +2297,7 @@ public class Unsorted {
                     Class117.method1719(25);
                 }
 
-                Class3_Sub13.method164((byte) -125, true, TextCore.LoadingPleaseWait2);
+                TextureOperation.method164(true, TextCore.LoadingPleaseWait2);
                 int var8 = Class82.anInt1152;
                 int var7 = Class131.anInt1716;
                 Class82.anInt1152 = regionY * 8 - 48;
@@ -4108,10 +4109,15 @@ public class Unsorted {
                                 }
 
                                 if (var11.anInt189 == 1405) {
+                                    if (DeveloperConsole.INSTANCE.getOpen()) {
+                                        gameWindowWidth = var11.width + var13;
+                                        //Toolkit.getActiveToolkit().fillRect(0, 0, var11.width + var13, 300, 0x332277, 128);
+                                    }
+
                                     if (ClientCommands.fpsOverlayEnabled) {
                                         var20 = var11.width + var13;
                                         var21 = 15 + var14;
-                                        Class126.aClass3_Sub28_Sub17_1669.method688(RSString.stringCombiner(new RSString[]{TextCore.aClass94_3196, RSString.stringAnimator(SequenceDefinition.anInt1862)}), var20, var21, 16776960, -1);//Class72.stringAnimator(SequenceDefinition.anInt1862)}), var20, var21, 16776960, -1);
+                                        Class126.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_3196, RSString.stringAnimator(SequenceDefinition.anInt1862)}), var20, var21, 16776960, -1);//Class72.stringAnimator(SequenceDefinition.anInt1862)}), var20, var21, 16776960, -1);
                                         var21 += 15;
                                         Runtime var57 = Runtime.getRuntime();
                                         var23 = (int) ((var57.totalMemory() + -var57.freeMemory()) / 1024L);
@@ -4120,7 +4126,7 @@ public class Unsorted {
                                             var24 = 16711680;
                                         }
 
-                                        Class126.aClass3_Sub28_Sub17_1669.method688(RSString.stringCombiner(new RSString[]{TextCore.aClass94_4057, RSString.stringAnimator(var23), TextCore.Memoryk}), var20, var21, var24, -1);
+                                        Class126.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_4057, RSString.stringAnimator(var23), TextCore.Memoryk}), var20, var21, var24, -1);
                                         var21 += 15;
                                         if (HDToolKit.highDetail) {
                                             var24 = 16776960;
@@ -4129,7 +4135,7 @@ public class Unsorted {
                                                 var24 = 16711680;
                                             }
 
-                                            Class126.aClass3_Sub28_Sub17_1669.method688(RSString.stringCombiner(new RSString[]{TextCore.aClass94_1622, RSString.stringAnimator(var25), TextCore.Memoryk}), var20, var21, var24, -1);
+                                            Class126.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_1622, RSString.stringAnimator(var25), TextCore.Memoryk}), var20, var21, var24, -1);
                                             var21 += 15;
                                         }
 
@@ -4147,7 +4153,7 @@ public class Unsorted {
                                         var29 = 10000 * var26 / var25;
                                         var28 = var47 * 100 / var25;
                                         RSString var55 = RSString.stringCombiner(new RSString[]{TextCore.aClass94_436, Class3_Sub23.method407(0, true, 2, (long) var29), TextCore.aClass94_2498, RSString.stringAnimator(var28), TextCore.aClass94_148});
-                                        Class3_Sub13.aClass3_Sub28_Sub17_2379.method688(var55, var20, var21, var24, -1);
+                                        TextureOperation.smallFont.drawStringRightAnchor(var55, var20, var21, var24, -1);
                                         aBooleanArray3674[var12] = true;
                                         Class163_Sub1_Sub1.aBooleanArray4008[var12] = true;
                                         continue;
@@ -4167,25 +4173,25 @@ public class Unsorted {
                                             }
                                             var20 = var11.width + var13;
                                             var21 = 15 + var14;
-                                            Class126.aClass3_Sub28_Sub17_1669.method688(RSString.parse(HDToolKit.gl.glGetString(7938)), var20, var21, 16776960, 7);
+                                            Class126.plainFont.drawStringRightAnchor(RSString.parse(HDToolKit.gl.glGetString(7938)), var20, var21, 16776960, 7);
                                             var21 += 15;
-                                            Class126.aClass3_Sub28_Sub17_1669.method688(RSString.parse(vendor), var20, var21, vendorColor, 4);
+                                            Class126.plainFont.drawStringRightAnchor(RSString.parse(vendor), var20, var21, vendorColor, 4);
                                             var21 += 15;
-                                            Class126.aClass3_Sub28_Sub17_1669.method688(RSString.parse(HDToolKit.gl.glGetString(7937)), var20, var21, 16776960, 7);
+                                            Class126.plainFont.drawStringRightAnchor(RSString.parse(HDToolKit.gl.glGetString(7937)), var20, var21, 16776960, 7);
                                             var21 += 15;
-                                            Class126.aClass3_Sub28_Sub17_1669.method688(RSString.parse("Oncard Geometry: " + Class31.anInt585), var20, var21, 16776960, 7);
+                                            Class126.plainFont.drawStringRightAnchor(RSString.parse("Oncard Geometry: " + Class31.anInt585), var20, var21, 16776960, 7);
                                             var21 += 15;
-                                            Class126.aClass3_Sub28_Sub17_1669.method688(RSString.parse("Oncard 2D: " + Class31.memory2D), var20, var21, 16776960, 7);
+                                            Class126.plainFont.drawStringRightAnchor(RSString.parse("Oncard 2D: " + Class31.memory2D), var20, var21, 16776960, 7);
                                             var21 += 15;
-                                            Class126.aClass3_Sub28_Sub17_1669.method688(RSString.parse("Oncard Texture: " + Class31.anInt580), var20, var21, 16776960, 7);
+                                            Class126.plainFont.drawStringRightAnchor(RSString.parse("Oncard Texture: " + Class31.anInt580), var20, var21, 16776960, 7);
                                         } else {
                                             var20 = var11.width + var13;
                                             var21 = 15 + var14;
-                                            Class126.aClass3_Sub28_Sub17_1669.method688(RSString.parse("Java Toolkit"), var20, var21, 16776960, 7);
+                                            Class126.plainFont.drawStringRightAnchor(RSString.parse("Java Toolkit"), var20, var21, 16776960, 7);
                                             var21 += 15;
-                                            Class126.aClass3_Sub28_Sub17_1669.method688(RSString.parse(System.getProperty("java.vendor")), var20, var21, 16776960, 7);
+                                            Class126.plainFont.drawStringRightAnchor(RSString.parse(System.getProperty("java.vendor")), var20, var21, 16776960, 7);
                                             var21 += 15;
-                                            Class126.aClass3_Sub28_Sub17_1669.method688(RSString.parse(System.getProperty("java.version")), var20, var21, 16776960, 7);
+                                            Class126.plainFont.drawStringRightAnchor(RSString.parse(System.getProperty("java.version")), var20, var21, 16776960, 7);
                                         }
                                         continue;
                                     }
@@ -4440,7 +4446,7 @@ public class Unsorted {
 //                                        }
 
                                     } else {
-                                        Class3_Sub28_Sub17 var34;
+                                        Font var34;
                                         if (var11.type == 4) {
                                             // TODO RSInterfaceRenderText
                                             var34 = var11.method868(Class3_Sub13_Sub22.nameIconsSpriteArray);
@@ -4736,7 +4742,7 @@ public class Unsorted {
                                                                 } else if (var11.anInt194 == 1) {
                                                                     var34.method699(var40, 57 + var26, var47, var11.anInt218, !var11.aBoolean215 ? -1 : 0);
                                                                 } else {
-                                                                    var34.method688(var40, -1 + var26 + 115, var47, var11.anInt218, !var11.aBoolean215 ? -1 : 0);
+                                                                    var34.drawStringRightAnchor(var40, -1 + var26 + 115, var47, var11.anInt218, !var11.aBoolean215 ? -1 : 0);
                                                                 }
                                                             }
 
@@ -4749,7 +4755,7 @@ public class Unsorted {
                                                     var21 = 0;
                                                     var20 = 0;
                                                     RSString var43 = var11.text;
-                                                    Class3_Sub28_Sub17 var35 = Class126.aClass3_Sub28_Sub17_1669;
+                                                    Font var35 = Class126.plainFont;
                                                     var43 = method1303(var11, var43);
 
                                                     RSString var44;
@@ -5018,7 +5024,7 @@ public class Unsorted {
           Sprites.anInt340 = 127;
           Class38.aBoolean661 = true;
           Class140_Sub6.aBoolean2910 = true;
-          Class3_Sub13.anInt2378 = 0;
+          TextureOperation.anInt2378 = 0;
           anInt1137 = 2;
           Class3_Sub13_Sub22.aBoolean3275 = true;
           Class106.aBoolean1441 = true;

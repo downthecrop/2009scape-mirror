@@ -10,7 +10,7 @@ final class Class168 {
     boolean aBoolean2093 = true;
     int anInt2094 = 1190717;
     int anInt2095 = -1;
-    static Class3_Sub28_Sub17 aClass3_Sub28_Sub17_2096;
+    static Font bold;
     int anInt2098 = -1;
     static int anInt2099 = 0;
     int anInt2100 = 8;

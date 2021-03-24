@@ -36,7 +36,7 @@ abstract class GameObject {
    static void graphicsSettings(boolean var0, int var1, int var3, int var4) {
       try {
          Class53.aLong866 = 0L;
-         int var5 = Class83.method1411(0);
+         int var5 = Class83.getWindowType();
          if(var1 == 3 || 3 == var5) {
             var0 = true;
          }

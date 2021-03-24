@@ -2,7 +2,7 @@ package org.runite.client;
 
 import org.rs09.client.util.ArrayUtils;
 
-public final class Class3_Sub13_Sub22 extends Class3_Sub13 {
+public final class Class3_Sub13_Sub22 extends TextureOperation {
 
    static Player[] players = new Player[2048];
    public static AbstractIndexedSprite[] nameIconsSpriteArray;

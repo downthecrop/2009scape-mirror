@@ -274,7 +274,7 @@ final class WorldMap extends Node {
                 if (ClientCommands.fpsOverlayEnabled) {
                     int var10 = -8 + var2 - -var3;
                     int var9 = -5 + (var0 - -var4);
-                    Class126.aClass3_Sub28_Sub17_1669.method688(RSString.stringCombiner(new RSString[]{TextCore.aClass94_985, RSString.stringAnimator(SequenceDefinition.anInt1862)}), var9, var10, 16776960, -1);
+                    Class126.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_985, RSString.stringAnimator(SequenceDefinition.anInt1862)}), var9, var10, 16776960, -1);
                     Runtime var11 = Runtime.getRuntime();
                     int var12 = (int) ((var11.totalMemory() - var11.freeMemory()) / 1024L);
                     int var13 = 16776960;
@@ -283,7 +283,7 @@ final class WorldMap extends Node {
                         var13 = 16711680;
                     }
 
-                    Class126.aClass3_Sub28_Sub17_1669.method688(RSString.stringCombiner(new RSString[]{TextCore.aClass94_1630, RSString.stringAnimator(var12), TextCore.aClass94_3055}), var9, var10, var13, -1);
+                    Class126.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_1630, RSString.stringAnimator(var12), TextCore.aClass94_3055}), var9, var10, var13, -1);
                 }
                 /* * * * * * * */
 
@@ -298,7 +298,7 @@ final class WorldMap extends Node {
                 Toolkit.getActiveToolkit().method934(-150 + var6, var7 + 2, 3 * anInt2737, 30, 9179409);
                 Toolkit.getActiveToolkit().method934(-150 + var6 + anInt2737 * 3, var7 - -2, 300 + -(3 * anInt2737), 30, 0);
 
-                Class168.aClass3_Sub28_Sub17_2096.method699(TextCore.LoadingGeneral, var6, var5 + var7, 16777215, -1);
+                Class168.bold.method699(TextCore.LoadingGeneral, var6, var5 + var7, 16777215, -1);
             }
         } catch (RuntimeException var14) {
             throw ClientErrorException.clientError(var14, "wa.FA(" + var0 + ',' + 64 + ',' + var2 + ',' + var3 + ',' + var4 + ')');

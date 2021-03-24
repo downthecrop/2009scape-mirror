@@ -17,7 +17,7 @@ public class Class163_Sub1 extends Class163 {
    static void method2210(boolean var1) {
       try {
          Class58.method1194();
-         if(30 == Class143.loadingStage || Class143.loadingStage == 25) {
+         if(30 == Class143.gameStage || Class143.gameStage == 25) {
             ++Class3_Sub13_Sub23_Sub1.anInt4032;
             if(Class3_Sub13_Sub23_Sub1.anInt4032 >= 50 || var1) {
                Class3_Sub13_Sub23_Sub1.anInt4032 = 0;

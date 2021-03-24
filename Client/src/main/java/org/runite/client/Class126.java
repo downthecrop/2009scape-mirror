@@ -9,7 +9,7 @@ public final class Class126 {
    static int anInt1665;
    static Queue aClass13_1666 = new Queue();
    int anInt1667;
-   public static Class3_Sub28_Sub17 aClass3_Sub28_Sub17_1669;
+   public static Font plainFont;
    int anInt1670;
    int anInt1673;
    boolean aBoolean1674;

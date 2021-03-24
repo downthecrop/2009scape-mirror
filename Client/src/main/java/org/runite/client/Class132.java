@@ -59,11 +59,11 @@ final class Class132 {
 
    static void method1801() {
       try {
-         int var1 = Class168.aClass3_Sub28_Sub17_2096.method682(RSString.parse(GameConfig.RCM_TITLE));
+         int var1 = Class168.bold.method682(RSString.parse(GameConfig.RCM_TITLE));
          int var2;
          int var3;
          for(var2 = 0; Unsorted.menuOptionCount > var2; ++var2) {
-            var3 = Class168.aClass3_Sub28_Sub17_2096.method682(Unsorted.method802(var2));
+            var3 = Class168.bold.method682(Unsorted.method802(var2));
             if(var3 > var1) {
                var1 = var3;
             }

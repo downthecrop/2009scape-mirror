@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.net.Socket;
 import java.util.Objects;
 
-final class Class3_Sub13_Sub21 extends Class3_Sub13 {
+final class Class3_Sub13_Sub21 extends TextureOperation {
 //Class3_Sub13_Sub21
    private int anInt3253 = 0;
    private int anInt3254 = 4096;

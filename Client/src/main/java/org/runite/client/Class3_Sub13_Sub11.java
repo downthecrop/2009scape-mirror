@@ -3,7 +3,7 @@ package org.runite.client;
 import org.rs09.client.data.HashTable;
 import org.rs09.client.data.ReferenceCache;
 
-final class Class3_Sub13_Sub11 extends Class3_Sub13 {
+final class Class3_Sub13_Sub11 extends TextureOperation {
 
     static int anInt3274;
     private int anInt3129;

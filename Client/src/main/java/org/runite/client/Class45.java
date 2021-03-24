@@ -52,7 +52,7 @@ final class Class45 {
 							var13 = var14.anInt149;
 							message = var14.aClass3_Sub28_Sub4_151.method555(aClass3_Sub30_2030);
 						} else {
-							message = Class3_Sub28_Sub17.method686(Objects.requireNonNull(Class32.method992(aClass3_Sub30_2030).properlyCapitalize()));
+							message = Font.method686(Objects.requireNonNull(Class32.method992(aClass3_Sub30_2030).properlyCapitalize()));
 						}
 
 						var3.textSpoken = message.trim(1);

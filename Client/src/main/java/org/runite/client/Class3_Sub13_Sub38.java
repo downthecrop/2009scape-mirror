@@ -2,7 +2,7 @@ package org.runite.client;
 import java.util.Objects;
 import java.util.Random;
 
-final class Class3_Sub13_Sub38 extends Class3_Sub13 {
+final class Class3_Sub13_Sub38 extends TextureOperation {
 
    private int anInt3444 = 0;
    
@@ -60,10 +60,10 @@ final class Class3_Sub13_Sub38 extends Class3_Sub13 {
             Random var7 = new Random((long)this.anInt3454);
 
             for(int var8 = 0; this.anInt3447 > var8; ++var8) {
-               int var9 = this.anInt3450 > 0?this.anInt3444 + -var5 + Class3_Sub13.method1603((byte)-99, this.anInt3450, var7):this.anInt3444;
-               int var10 = Class3_Sub13.method1603((byte)-96, Class113.anInt1559, var7);
+               int var9 = this.anInt3450 > 0?this.anInt3444 + -var5 + TextureOperation.method1603((byte)-99, this.anInt3450, var7):this.anInt3444;
+               int var10 = TextureOperation.method1603((byte)-96, Class113.anInt1559, var7);
                var9 = (var9 & 4088) >> 4;
-               int var11 = Class3_Sub13.method1603((byte)62, Class101.anInt1427, var7);
+               int var11 = TextureOperation.method1603((byte)62, Class101.anInt1427, var7);
                int var12 = var10 - -(this.anInt3451 * Class75_Sub2.anIntArray2639[var9] >> 12);
                int var13 = var11 + (Class3_Sub13_Sub17.anIntArray3212[var9] * this.anInt3451 >> 12);
                int var15 = var12 - var10;
@@ -106,7 +106,7 @@ final class Class3_Sub13_Sub38 extends Class3_Sub13 {
                   }
 
                   int var20 = -var18 / 2;
-                  int var22 = -(Class3_Sub13.method1603((byte)-18, 4096, var7) >> 2) + 1024;
+                  int var22 = -(TextureOperation.method1603((byte)-18, 4096, var7) >> 2) + 1024;
                   int var23 = var11 >= var13 ?-1:1;
                   int var21 = 2048 / var18;
 

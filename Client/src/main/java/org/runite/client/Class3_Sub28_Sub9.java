@@ -78,15 +78,15 @@ final class Class3_Sub28_Sub9 extends Node {
 
    static void method581(CacheIndex var0, CacheIndex var2) {
       try {
-         Class3_Sub13.aClass3_Sub28_Sub17_2379 = Unsorted.method1300(Sprites.p11FullSpriteArchive, var2, var0);
+         TextureOperation.smallFont = Unsorted.method1300(Sprites.p11FullSpriteArchive, var2, var0);
          if(HDToolKit.highDetail) {
             Class157.aClass3_Sub28_Sub17_Sub1_2000 = Class70.method1287(Sprites.p11FullSpriteArchive, var0, var2);
          } else {
-            Class157.aClass3_Sub28_Sub17_Sub1_2000 = (Class3_Sub28_Sub17_Sub1)Class3_Sub13.aClass3_Sub28_Sub17_2379;
+            Class157.aClass3_Sub28_Sub17_Sub1_2000 = (Class3_Sub28_Sub17_Sub1) TextureOperation.smallFont;
          }
 
-         Class126.aClass3_Sub28_Sub17_1669 = Unsorted.method1300(Sprites.p12FullSpriteArchive, var2, var0);
-         Class168.aClass3_Sub28_Sub17_2096 = Unsorted.method1300(Sprites.b12FullSpriteArchive, var2, var0);
+         Class126.plainFont = Unsorted.method1300(Sprites.p12FullSpriteArchive, var2, var0);
+         Class168.bold = Unsorted.method1300(Sprites.b12FullSpriteArchive, var2, var0);
       } catch (RuntimeException var4) {
          throw ClientErrorException.clientError(var4, "hn.D(" + (var0 != null?"{...}":"null") + ',' + 0 + ',' + (var2 != null?"{...}":"null") + ')');
       }

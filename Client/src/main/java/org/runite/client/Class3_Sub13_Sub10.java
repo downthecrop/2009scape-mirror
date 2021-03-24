@@ -2,7 +2,7 @@ package org.runite.client;
 import java.awt.Frame;
 import java.util.Objects;
 
-final class Class3_Sub13_Sub10 extends Class3_Sub13 {
+final class Class3_Sub13_Sub10 extends TextureOperation {
 
    static volatile boolean aBoolean3116 = true;
   
@@ -277,15 +277,15 @@ final class Class3_Sub13_Sub10 extends Class3_Sub13 {
 
    static void method216(DataBuffer var0) {
       try {
-         for(int var2 = 0; var2 < Class57.activeWorldListSize; ++var2) {
+         for(int var2 = 0; var2 < WorldListEntry.activeWorldListSize; ++var2) {
             int var3 = var0.getSmart();
             int var4 = var0.readUnsignedShort();
             if(var4 == 65535) {
                var4 = -1;
             }
 
-            if(null != Class117.worldList[var3]) {
-               Class117.worldList[var3].anInt722 = var4;
+            if(null != WorldListEntry.worldList[var3]) {
+               WorldListEntry.worldList[var3].anInt722 = var4;
             }
          }
 

@@ -3,7 +3,7 @@ package org.runite.client;
 import org.rs09.client.data.HashTable;
 import org.rs09.client.rendering.Toolkit;
 
-final class Class83 {
+public final class Class83 {
 
    static int[] anIntArray1161;
    private final CacheIndex aClass153_1153;
@@ -27,7 +27,7 @@ final class Class83 {
          }
 
          if(var10 != -12541) {
-            method1411(-14);
+            getWindowType();
          }
 
          int var13;
@@ -313,23 +313,19 @@ final class Class83 {
       }
    }
 
-   static int method1411(int var0) {
+   public static int getWindowType() {
       try {
          if(Class3_Sub13_Sub10.aFrame3121 == null) {
             if(HDToolKit.highDetail && Class3_Sub15.aBoolean2427) {
                return 2;
             } else {
-               if(var0 != 0) {
-                  aBoolean1158 = false;
-               }
-
-               return HDToolKit.highDetail ?1:0;
+               return HDToolKit.highDetail ? 1 : 0;
             }
          } else {
             return 3;
          }
       } catch (RuntimeException var2) {
-         throw ClientErrorException.clientError(var2, "le.D(" + var0 + ')');
+         throw ClientErrorException.clientError(var2, "le.D(" + ')');
       }
    }
 

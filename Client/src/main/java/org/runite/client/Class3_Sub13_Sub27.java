@@ -4,7 +4,7 @@ import org.rs09.client.data.HashTable;
 
 import java.util.Objects;
 
-final class Class3_Sub13_Sub27 extends Class3_Sub13 {
+final class Class3_Sub13_Sub27 extends TextureOperation {
 
    static RSString[] aClass94Array3341 = new RSString[100];
    static int anInt3342;

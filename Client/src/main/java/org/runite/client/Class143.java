@@ -2,10 +2,10 @@ package org.runite.client;
 
 import org.rs09.client.data.ReferenceCache;
 
-final class Class143 {
+public final class Class143 {
 
    static ReferenceCache aReferenceCache_1874 = new ReferenceCache(50);
-   static int loadingStage = 0;
+   public static int gameStage = 0;
 
 
    static void method2062(int var0, int var1, int var3, int var4, int var5, int var6, int var7) {

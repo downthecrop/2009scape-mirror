@@ -1,6 +1,6 @@
 package org.runite.client;
 
-final class Class3_Sub13_Sub39 extends Class3_Sub13 {
+final class Class3_Sub13_Sub39 extends TextureOperation {
 
    private int[] anIntArray3457;
    static AbstractSprite[] aAbstractSpriteArray3458;

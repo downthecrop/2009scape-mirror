@@ -3,7 +3,7 @@ import org.rs09.client.util.ArrayUtils;
 
 import java.util.Random;
 
-final class Class3_Sub13_Sub19 extends Class3_Sub13 {
+final class Class3_Sub13_Sub19 extends TextureOperation {
 
    private int anInt3219 = 204;
    private int anInt3223;
@@ -125,7 +125,7 @@ final class Class3_Sub13_Sub19 extends Class3_Sub13 {
             int var7;
             if(var5 > 0) {
                var6 = anInt3222;
-               var7 = (Class3_Sub13.method1603((byte)59, 4096, var2) + -2048) * this.anInt3219 >> 12;
+               var7 = (TextureOperation.method1603((byte)59, 4096, var2) + -2048) * this.anInt3219 >> 12;
                var6 += var7 * var4 >> 12;
                this.anIntArray3230[var5] = this.anIntArray3230[var5 - 1] - -var6;
             }
@@ -135,12 +135,12 @@ final class Class3_Sub13_Sub19 extends Class3_Sub13 {
             for(var6 = 0; this.anInt3242 > var6; ++var6) {
                if(0 < var6) {
                   var7 = this.anInt3235;
-                  int var8 = (-2048 + Class3_Sub13.method1603((byte)-1, 4096, var2)) * this.anInt3236 >> 12;
+                  int var8 = (-2048 + TextureOperation.method1603((byte)-1, 4096, var2)) * this.anInt3236 >> 12;
                   var7 += var3 * var8 >> 12;
                   this.anIntArrayArray3225[var5][var6] = this.anIntArrayArray3225[var5][var6 + -1] - -var7;
                }
 
-               this.anIntArrayArray3240[var5][var6] = this.anInt3229 <= 0 ?4096:4096 + -Class3_Sub13.method1603((byte)33, this.anInt3229, var2);
+               this.anIntArrayArray3240[var5][var6] = this.anInt3229 <= 0 ?4096:4096 + -TextureOperation.method1603((byte)33, this.anInt3229, var2);
             }
 
             this.anIntArrayArray3225[var5][this.anInt3242] = 4096;

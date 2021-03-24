@@ -5,7 +5,7 @@ import org.rs09.client.rendering.Toolkit;
 import java.util.Objects;
 import java.util.zip.CRC32;
 
-final class Class3_Sub13_Sub12 extends Class3_Sub13 {
+final class Class3_Sub13_Sub12 extends TextureOperation {
 
     static CRC32 CRC32 = new CRC32();
     static int anInt3377 = 7759444;//Very light Brown 7759444 // #766654

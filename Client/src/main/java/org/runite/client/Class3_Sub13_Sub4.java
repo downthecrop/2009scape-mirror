@@ -2,7 +2,7 @@ package org.runite.client;
 import java.awt.Component;
 import java.lang.reflect.Method;
 
-final class Class3_Sub13_Sub4 extends Class3_Sub13 {
+final class Class3_Sub13_Sub4 extends TextureOperation {
 
    int anInt3056 = 4;
    int anInt3058 = 4;

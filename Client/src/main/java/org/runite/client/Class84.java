@@ -14,11 +14,11 @@ final class Class84 {
 
     static void method1417() {
       try {
-         if(Class143.loadingStage == 10 && HDToolKit.highDetail) {
+         if(Class143.gameStage == 10 && HDToolKit.highDetail) {
             Class117.method1719(28);
          }
 
-         if(Class143.loadingStage == 30) {
+         if(Class143.gameStage == 30) {
             Class117.method1719(25);
          }
 
@@ -83,7 +83,7 @@ final class Class84 {
             Toolkit.getActiveToolkit().drawRect(1 + x, y + 18, width + -2, -19 + height, GameConfig.RCM_BORDER_COLOR, GameConfig.RCM_BORDER_OPACITY);
          }
 
-         Class168.aClass3_Sub28_Sub17_2096.method681(RSString.parse(GameConfig.RCM_TITLE), x - -3, y + 14, contextMenuColor, -1);
+         Class168.bold.method681(RSString.parse(GameConfig.RCM_TITLE), x - -3, y + 14, contextMenuColor, -1);
          int var7 = Unsorted.anInt1709;
          int var6 = Class126.anInt1676;
 
@@ -94,7 +94,7 @@ final class Class84 {
                var10 = 16776960;
             }
 
-            Class168.aClass3_Sub28_Sub17_2096.method681(Unsorted.method802(var8), x - -3, var9, var10, 0);
+            Class168.bold.method681(Unsorted.method802(var8), x - -3, var9, var10, 0);
          }
 
          Unsorted.method1282(AbstractIndexedSprite.anInt1462, (byte)107, Class3_Sub13_Sub33.anInt3395, Class3_Sub28_Sub1.anInt3537, Class3_Sub28_Sub3.anInt3552);

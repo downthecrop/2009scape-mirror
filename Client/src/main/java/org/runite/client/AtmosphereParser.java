@@ -2,7 +2,7 @@ package org.runite.client;
 
 import org.rs09.client.data.HashTable;
 
-final class AtmosphereParser {
+public final class AtmosphereParser {
 
     static HashTable aHashTable_3679 = new HashTable(16);
     static AtmosphereParser[][] aAtmosphereParserArrayArray1581 = new AtmosphereParser[13][13];
@@ -20,7 +20,7 @@ final class AtmosphereParser {
     static int anInt1191;
     static int screenLowerY;
 
-    static void method1427(int var1) {
+    public static void musicHandler(int var1) {
         try {
             if (-1 == var1 && !Class83.aBoolean1158) {
                 GameObject.method1870();

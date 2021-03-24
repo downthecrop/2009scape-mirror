@@ -5,7 +5,7 @@ import org.rs09.client.filestore.resources.configs.cursors.CursorDefinition;
 
 import java.util.Objects;
 
-final class Class3_Sub13_Sub29 extends Class3_Sub13 {
+final class Class3_Sub13_Sub29 extends TextureOperation {
 
    static boolean disableGEBoxes = false;
    static int[] anIntArray3359 = new int[5];

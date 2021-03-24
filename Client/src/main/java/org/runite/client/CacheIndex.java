@@ -21,7 +21,7 @@ public final class CacheIndex {
     static CacheIndex interfacesIndex;
     static CacheIndex soundFXIndex;
     static CacheIndex landscapesIndex;
-    static CacheIndex musicIndex;
+    public static CacheIndex musicIndex;
     static CacheIndex modelsIndex;
     public static CacheIndex spritesIndex;
     static CacheIndex texturesIndex;
@@ -156,7 +156,7 @@ public final class CacheIndex {
         }
     }
 
-    final int getArchiveForName(RSString name) {
+    public final int getArchiveForName(RSString name) {
         try {
             if (this.isReady()) {
                 name = name.toLowercase();

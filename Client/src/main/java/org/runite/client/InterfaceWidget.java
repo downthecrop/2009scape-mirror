@@ -53,7 +53,7 @@ final class InterfaceWidget extends Node {
    static void d(int var0) {
       try {
          if(NPCDefinition.anInt1252 != -1 && anInt2293 != -1) {
-            int var1 = (Class163_Sub2_Sub1.anInt4020 * (-Class134.anInt1759 + Class3_Sub13.anInt2383) >> 16) + Class134.anInt1759;
+            int var1 = (Class163_Sub2_Sub1.anInt4020 * (-Class134.anInt1759 + TextureOperation.anInt2383) >> 16) + Class134.anInt1759;
             float[] var3 = new float[3];
             Class163_Sub2_Sub1.anInt4020 += var1;
             if(Class163_Sub2_Sub1.anInt4020 >= 65535) {

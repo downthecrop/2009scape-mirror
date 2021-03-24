@@ -4,7 +4,7 @@ import org.rs09.client.config.GameConfig;
 
 import java.util.Objects;
 
-final class Class3_Sub13_Sub18 extends Class3_Sub13 {
+final class Class3_Sub13_Sub18 extends TextureOperation {
 
    static CacheIndex aClass153_3214;
    static int[][] anIntArrayArray3215 = new int[][]{{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1}, {1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0}, {0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1}, {0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0}, {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1}, {1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1}};
@@ -42,10 +42,10 @@ final class Class3_Sub13_Sub18 extends Class3_Sub13 {
             Class75.method1340(AbstractIndexedSprite.anInt1462, Class3_Sub28_Sub3.anInt3552, Class3_Sub13_Sub33.anInt3395, Class3_Sub28_Sub1.anInt3537);
          } else {
             Class75.method1340(AbstractIndexedSprite.anInt1462, Class3_Sub28_Sub3.anInt3552, Class3_Sub13_Sub33.anInt3395, Class3_Sub28_Sub1.anInt3537);
-            var7 = Class168.aClass3_Sub28_Sub17_2096.method682(RSString.parse(GameConfig.RCM_TITLE));
+            var7 = Class168.bold.method682(RSString.parse(GameConfig.RCM_TITLE));
 
             for(int var8 = 0; Unsorted.menuOptionCount > var8; ++var8) {
-               int var9 = Class168.aClass3_Sub28_Sub17_2096.method682(Unsorted.method802(var8));
+               int var9 = Class168.bold.method682(Unsorted.method802(var8));
                if(var7 < var9) {
                   var7 = var9;
                }

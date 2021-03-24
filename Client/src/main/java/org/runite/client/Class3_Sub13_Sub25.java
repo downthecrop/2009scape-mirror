@@ -4,7 +4,7 @@ import org.rs09.client.util.ArrayUtils;
 import java.util.Objects;
 import java.util.Random;
 
-final class Class3_Sub13_Sub25 extends Class3_Sub13 {
+final class Class3_Sub13_Sub25 extends TextureOperation {
 
    private int anInt3299 = 1024;
    private int anInt3300 = 1024;
@@ -60,8 +60,8 @@ final class Class3_Sub13_Sub25 extends Class3_Sub13 {
 
                while(true) {
                   while(true) {
-                     int var24 = var15 - -Class3_Sub13.method1603((byte)-93, var16 - var15, var22);
-                     int var25 = Class3_Sub13.method1603((byte)-96, -var17 + var18, var22) + var17;
+                     int var24 = var15 - -TextureOperation.method1603((byte)-93, var16 - var15, var22);
+                     int var25 = TextureOperation.method1603((byte)-96, -var17 + var18, var22) + var17;
                      int var26 = var9 + var24;
                      if(Class113.anInt1559 < var26) {
                         var26 = Class113.anInt1559;
@@ -165,7 +165,7 @@ final class Class3_Sub13_Sub25 extends Class3_Sub13 {
                         var14 = 0;
                         var40[2] = var25 + var23;
                         var40[1] = var26;
-                        var7 = Class3_Sub13.method1603((byte)-107, Class113.anInt1559, var22);
+                        var7 = TextureOperation.method1603((byte)-107, Class113.anInt1559, var22);
                         var6 = var7 + -var8;
                         int[][] var41 = var21;
                         var9 = 0;
@@ -216,9 +216,9 @@ final class Class3_Sub13_Sub25 extends Class3_Sub13 {
 
    private void method291(int var1, Random var2, int var3, int var4, int var6, int[][] var7) {
       try {
-         int var8 = this.anInt3316 > 0 ?4096 + -Class3_Sub13.method1603((byte)-128, this.anInt3316, var2):4096;
+         int var8 = this.anInt3316 > 0 ?4096 + -TextureOperation.method1603((byte)-128, this.anInt3316, var2):4096;
          int var9 = this.anInt3299 * this.anInt3314 >> 12;
-         int var10 = this.anInt3314 - (0 < var9? Class3_Sub13.method1603((byte)39, var9, var2):0);
+         int var10 = this.anInt3314 - (0 < var9? TextureOperation.method1603((byte)39, var9, var2):0);
          if(Class113.anInt1559 <= var3) {
             var3 -= Class113.anInt1559;
          }

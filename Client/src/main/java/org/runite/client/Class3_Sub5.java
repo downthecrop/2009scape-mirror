@@ -91,7 +91,7 @@ final class Class3_Sub5 extends Linkable {
                   }
 
                   if(null != var16) {
-                     int var17 = Class3_Sub13.aClass3_Sub28_Sub17_2379.method691(Class119.aClass131_1624.aClass94Array1721[var9], (int[])null, Class158_Sub1.aClass94Array2977);
+                     int var17 = TextureOperation.smallFont.method691(Class119.aClass131_1624.aClass94Array1721[var9], (int[])null, Class158_Sub1.aClass94Array2977);
                      var13 -= var16.method998() * (var17 + -1) / 2;
                      var13 += var16.method1006() / 2;
 

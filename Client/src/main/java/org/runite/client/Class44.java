@@ -13,7 +13,7 @@ public abstract class Class44 {
 	static int paramModeWhere = 0;
 	static int anInt719 = 0;
 	static int[][][] anIntArrayArrayArray720;
-	int countryIndex;
+	public int countryIndex;
 	int anInt722;
 	static int[][][] anIntArrayArrayArray723;
 	static byte[] aClass8343;
@@ -78,24 +78,12 @@ public abstract class Class44 {
 		}
 	}
 
-	final boolean method1070(int var1) {
-		try {
-			if(var1 != 8) {
-				this.method1070(15);
-			}
-
-			return 0 != (1 & this.settings);
-		} catch (RuntimeException var3) {
-			throw ClientErrorException.clientError(var3, "gj.E(" + var1 + ')');
-		}
+	public final boolean isMembers() {
+		return 0 != (1 & this.settings);
 	}
 
-	final boolean method1072() {
-		try {
-			return (this.settings & 4) != 0;
-		} catch (RuntimeException var3) {
-			throw ClientErrorException.clientError(var3, "gj.G(" + false + ')');
-		}
+	public final boolean isPVP() {
+		return (this.settings & 4) != 0;
 	}
 
 	static void method1073() {
@@ -107,25 +95,12 @@ public abstract class Class44 {
 		}
 	}
 
-	final boolean method1074(int var1) {
-		try {
-			if(var1 >= -106) {
-				aFloat727 = -0.6283864F;
-			}
-
-			return (this.settings & 8) != 0;
-		} catch (RuntimeException var3) {
-			throw ClientErrorException.clientError(var3, "gj.I(" + var1 + ')');
-		}
+	public final boolean isLootShare() {
+		return (this.settings & 8) != 0;
 	}
 
-	final boolean method1075() {
-		try {
-
-			return (2 & this.settings) != 0;
-		} catch (RuntimeException var3) {
-			throw ClientErrorException.clientError(var3, "gj.H(" + 64 + ')');
-		}
+	public final boolean isQuickchat() {
+		return (2 & this.settings) != 0;
 	}
 
 	static RSString method3434() {

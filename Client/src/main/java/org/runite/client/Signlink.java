@@ -44,7 +44,7 @@ public class Signlink implements Runnable {
 
 
     public final void method1431() {
-        aLong1221 = TimeUtils.time() - -5000L;
+        aLong1221 = TimeUtils.time() + 5000L;
     }
 
     public final boolean method1432(boolean var1) {

@@ -1006,13 +1006,13 @@ public final class RSInterface {
         this.anIntArray185 = this.method863(buffer);
     }
 
-    final Class3_Sub28_Sub17 method868(AbstractIndexedSprite[] var1) {
+    final Font method868(AbstractIndexedSprite[] var1) {
         try {
             aBoolean6 = false;
             if (this.anInt270 == -1) {
                 return null;
             } else {
-                Class3_Sub28_Sub17 var3 = (Class3_Sub28_Sub17) Unsorted.aReferenceCache_743.get((long) this.anInt270);
+                Font var3 = (Font) Unsorted.aReferenceCache_743.get((long) this.anInt270);
                 if (null == var3) {
                     var3 = Unsorted.method1300(this.anInt270, Class12.aClass153_323, Class97.aClass153_1378);
                     if (null == var3) {

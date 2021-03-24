@@ -2,9 +2,7 @@ package org.runite.client;
 
 import org.rs09.client.util.ArrayUtils;
 
-import java.util.Random;
-
-final class Class3_Sub13_Sub7 extends Class3_Sub13 {
+final class Class3_Sub13_Sub7 extends TextureOperation {
 
    private int anInt3085 = 10;
    private int anInt3086 = 0;

@@ -2,7 +2,7 @@ package org.runite.client;
 
 
 
-final class Class3_Sub13_Sub30 extends Class3_Sub13 {
+final class Class3_Sub13_Sub30 extends TextureOperation {
 
    static int anInt3362 = -1;
    static int anInt3363;

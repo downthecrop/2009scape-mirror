@@ -1,6 +1,6 @@
 package org.runite.client;
 
-final class Class3_Sub13_Sub9 extends Class3_Sub13 {
+final class Class3_Sub13_Sub9 extends TextureOperation {
 
    private int anInt3108 = 1;
    private int anInt3109 = 204;

@@ -148,7 +148,7 @@ final class Class79 {
                   }
 
                   if(var2 >= 1) {
-                     Class3_Sub13.anInt2378 = var0.readUnsignedShort();
+                     TextureOperation.anInt2378 = var0.readUnsignedShort();
                      Unsorted.anInt3071 = var0.readUnsignedShort();
                   }
 

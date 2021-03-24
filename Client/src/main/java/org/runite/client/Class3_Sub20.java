@@ -65,15 +65,15 @@ final class Class3_Sub20 extends Linkable {
 	         Class50.aAbstractSprite_824 = null;
 	         WorldListEntry.aAbstractSprite_1339 = null;
 	         WorldListEntry.aAbstractSprite_1457 = null;
-	         if(Class143.loadingStage == 5) {
+	         if(Class143.gameStage == 5) {
 	            Class108.method1656(CacheIndex.spritesIndex, (byte)-60);
 	         }
 
-	         if(10 == Class143.loadingStage) {
+	         if(10 == Class143.gameStage) {
 	            Class3_Sub13_Sub11.method219(false);
 	         }
 
-	         if(Class143.loadingStage == 30) {
+	         if(Class143.gameStage == 30) {
 	            Class117.method1719(25);
 	         }
 

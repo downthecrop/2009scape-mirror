@@ -4,7 +4,7 @@ import org.rs09.client.util.ArrayUtils;
 
 import java.util.Objects;
 
-final class Class3_Sub13_Sub8 extends Class3_Sub13 {
+final class Class3_Sub13_Sub8 extends TextureOperation {
 
     static CacheIndex aClass153_1967;
     private boolean aBoolean3100 = true;
@@ -104,7 +104,7 @@ final class Class3_Sub13_Sub8 extends Class3_Sub13 {
 		try {
 			//Client Resize.
 			Class3_Sub13_Sub1.outgoingBuffer.putOpcode(243);
-			Class3_Sub13_Sub1.outgoingBuffer.writeByte(Class83.method1411(0));
+			Class3_Sub13_Sub1.outgoingBuffer.writeByte(Class83.getWindowType());
 			Class3_Sub13_Sub1.outgoingBuffer.writeShort(Class23.canvasWidth);
 			if(var0 != -3) {
 				anInt3103 = -41;

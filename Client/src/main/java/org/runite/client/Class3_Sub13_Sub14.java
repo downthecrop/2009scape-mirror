@@ -3,7 +3,7 @@ import org.rs09.client.config.GameConfig;
 
 import java.math.BigInteger;
 
-final class Class3_Sub13_Sub14 extends Class3_Sub13 {
+final class Class3_Sub13_Sub14 extends TextureOperation {
 
    static CacheResourceWorker aCacheResourceWorker_3159;
    private int anInt3160 = 0;

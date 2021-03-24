@@ -27,6 +27,7 @@ public final class Client extends GameShell {
      *
      */
     private static final long serialVersionUID = 8336806252605101745L;
+    public static int messageToDisplay = -2;
     static HashTable aHashTable_2194 = new HashTable(16);
     static Class3_Sub11[][] aClass3_Sub11ArrayArray2199;
     static int[] anIntArray2200;
@@ -97,14 +98,14 @@ public final class Client extends GameShell {
 
     final void method38() {
         try {
-            if (Class143.loadingStage != 1000) {
+            if (Class143.gameStage != 1000) {
                 boolean var2 = NPC.method1988();
                 if (var2 && Class83.aBoolean1158 && WorldListEntry.aClass155_2627 != null) {
                     WorldListEntry.aClass155_2627.method2158();
                 }
 
-                if ((Class143.loadingStage == 30 || Class143.loadingStage == 10) && (Class3_Sub28_Sub5.forceReplaceCanvasEnable || Class53.aLong866 != 0 && Class53.aLong866 < TimeUtils.time())) {
-                    GameObject.graphicsSettings(Class3_Sub28_Sub5.forceReplaceCanvasEnable, Class83.method1411(0), Class3_Sub13.anInt2378, Unsorted.anInt3071);
+                if ((Class143.gameStage == 30 || Class143.gameStage == 10) && (Class3_Sub28_Sub5.forceReplaceCanvasEnable || Class53.aLong866 != 0 && Class53.aLong866 < TimeUtils.time())) {
+                    GameObject.graphicsSettings(Class3_Sub28_Sub5.forceReplaceCanvasEnable, Class83.getWindowType(), TextureOperation.anInt2378, Unsorted.anInt3071);
                 }
 
                 int var4;
@@ -137,7 +138,7 @@ public final class Client extends GameShell {
                     }
                 }
 
-                if (Class3_Sub13_Sub10.aFrame3121 != null && !Class3_Sub13_Sub6.aBoolean3078 && (30 == Class143.loadingStage || 10 == Class143.loadingStage)) {
+                if (Class3_Sub13_Sub10.aFrame3121 != null && !Class3_Sub13_Sub6.aBoolean3078 && (30 == Class143.gameStage || 10 == Class143.gameStage)) {
                     GameObject.graphicsSettings(false, Unsorted.anInt2577, -1, -1);
                 }
 
@@ -156,21 +157,21 @@ public final class Client extends GameShell {
                         Unsorted.aBooleanArray3674[var4] = true;
                     }
                 }
-                if (Class143.loadingStage == 0) {
+                if (Class143.gameStage == 0) {
                     if(Discord.checkInitializable()){
                         Discord.initialize();
                         Discord.updatePresence("At the login screen","","");
                     }
                     Class3_Sub28_Sub1.updateLoadingBar((Color) null, var10, Class3_Sub17.aClass94_2464, LoadingStageNumber);
-                } else if (5 == Class143.loadingStage) {
-                    Class3_Sub23.method406((byte) 117, false, Class168.aClass3_Sub28_Sub17_2096);
-                } else if (Class143.loadingStage == 10) {
+                } else if (5 == Class143.gameStage) {
+                    Class3_Sub23.method406((byte) 117, false, Class168.bold);
+                } else if (Class143.gameStage == 10) {
                     Class3_Sub17.method381(true);
-                } else if (25 != Class143.loadingStage && Class143.loadingStage != 28) {
-                    if (Class143.loadingStage == 30) {
+                } else if (25 != Class143.gameStage && Class143.gameStage != 28) {
+                    if (Class143.gameStage == 30) {
                         Class49.method1127(0);
-                    } else if (40 == Class143.loadingStage) {
-                        Class3_Sub13.method164((byte) -95, false, RSString.stringCombiner(new RSString[]{TextCore.ConxLost, TextCore.aClass94_2598, TextCore.AttemptingReestablish}));
+                    } else if (40 == Class143.gameStage) {
+                        TextureOperation.method164(false, RSString.stringCombiner(new RSString[]{TextCore.ConxLost, TextCore.aClass94_2598, TextCore.AttemptingReestablish}));
                     }
                 } else if (Class163_Sub2_Sub1.anInt4019 == 1) {
                     if (Class40.anInt3293 > LinkableRSString.anInt2579) {
@@ -178,22 +179,22 @@ public final class Client extends GameShell {
                     }
 
                     var4 = 50 * (LinkableRSString.anInt2579 + -Class40.anInt3293) / LinkableRSString.anInt2579;
-                    Class3_Sub13.method164((byte) -71, false, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_3399, RSString.stringAnimator(var4), TextCore.aClass94_148}));
+                    TextureOperation.method164(false, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_3399, RSString.stringAnimator(var4), TextCore.aClass94_148}));
                 } else if (Class163_Sub2_Sub1.anInt4019 == 2) {
                     if (anInt2275 < Class162.anInt2038) {
                         anInt2275 = Class162.anInt2038;
                     }
 
                     var4 = (-Class162.anInt2038 + anInt2275) * 50 / anInt2275 + 50;
-                    Class3_Sub13.method164((byte) -41, false, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_3399, RSString.stringAnimator(var4), TextCore.aClass94_148}));
+                    TextureOperation.method164(false, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_3399, RSString.stringAnimator(var4), TextCore.aClass94_148}));
                 } else {
-                    Class3_Sub13.method164((byte) -73, false, TextCore.LoadingPleaseWait2);
+                    TextureOperation.method164(false, TextCore.LoadingPleaseWait2);
                 }
 
                 DeveloperConsole.INSTANCE.preDraw();
                 DeveloperConsole.INSTANCE.draw();
 
-                if (HDToolKit.highDetail && Class143.loadingStage != 0) {
+                if (HDToolKit.highDetail && Class143.gameStage != 0) {
                     HDToolKit.bufferSwap();
 
                     for (var4 = 0; Class3_Sub28_Sub3.anInt3557 > var4; ++var4) {
@@ -201,7 +202,7 @@ public final class Client extends GameShell {
                     }
                 } else {
                     Graphics var11;
-                    if ((Class143.loadingStage == 30 || 10 == Class143.loadingStage) && rectDebugInt == 0 && !var10) {
+                    if ((Class143.gameStage == 30 || 10 == Class143.gameStage) && rectDebugInt == 0 && !var10) {
                         try {
                             var11 = GameShell.canvas.getGraphics();
 
@@ -214,7 +215,7 @@ public final class Client extends GameShell {
                         } catch (Exception var8) {
                             GameShell.canvas.repaint();
                         }
-                    } else if (0 != Class143.loadingStage) {
+                    } else if (0 != Class143.gameStage) {
                         try {
                             var11 = GameShell.canvas.getGraphics();
                             Class164_Sub1.aClass158_3009.method2179(var11);
@@ -233,7 +234,7 @@ public final class Client extends GameShell {
                     Class75_Sub3.method1346();
                 }
 
-                if (Unsorted.aBoolean2146 && 10 == Class143.loadingStage && Class3_Sub28_Sub12.anInt3655 != -1) {
+                if (Unsorted.aBoolean2146 && 10 == Class143.gameStage && Class3_Sub28_Sub12.anInt3655 != -1) {
                     Unsorted.aBoolean2146 = false;
                     Class119.method1730(Class38.signlink);
                 }
@@ -414,7 +415,7 @@ public final class Client extends GameShell {
                 Class3_Sub6.aByteArrayArray2287 = new byte[50][];
             }
 
-            CS2Script.anInt2451 = ObjectDefinition.paramWorldID;
+            CS2Script.userCurrentWorldID = ObjectDefinition.paramWorldID;
             Unsorted.method564(Class38.signlink);
             SystemLogger.logInfo("port: " + Class53.anInt867);
             SystemLogger.logInfo("MSIP: " + GameConfig.IP_MANAGEMENT);
@@ -456,7 +457,7 @@ public final class Client extends GameShell {
 
             Class140_Sub6.accRegistryPort = Class123.anInt1658;
             if (Signlink.anInt1214 == 3 && 2 != Class44.paramModeWhere) {
-                CS2Script.anInt2451 = ObjectDefinition.paramWorldID;
+                CS2Script.userCurrentWorldID = ObjectDefinition.paramWorldID;
             }
 
             KeyboardListener.adjustKeyCodeMap();
@@ -688,17 +689,17 @@ public final class Client extends GameShell {
 
             if (Class58.aJs5Worker_917.errors >= 2 && Class58.aJs5Worker_917.status == 6) {
                 this.errorPrint("js5connect_outofdate");
-                Class143.loadingStage = 1000;
+                Class143.gameStage = 1000;
                 return;
             }
 
             if (Class58.aJs5Worker_917.errors >= 4 && Class58.aJs5Worker_917.status == -1) {
                 this.errorPrint("js5crc");
-                Class143.loadingStage = 1000;
+                Class143.gameStage = 1000;
                 return;
             }
 
-            if (Class58.aJs5Worker_917.errors >= 4 && (Class143.loadingStage == 0 || Class143.loadingStage == 5)) {
+            if (Class58.aJs5Worker_917.errors >= 4 && (Class143.gameStage == 0 || Class143.gameStage == 5)) {
                 if (Class58.aJs5Worker_917.status == 7 || Class58.aJs5Worker_917.status == 9) {
                     this.errorPrint("js5connect_full");
                 } else if (Class58.aJs5Worker_917.status > 0) {
@@ -707,7 +708,7 @@ public final class Client extends GameShell {
                     this.errorPrint("js5io");
                 }
 
-                Class143.loadingStage = 1000;
+                Class143.gameStage = 1000;
                 return;
             }
         }
@@ -745,7 +746,7 @@ public final class Client extends GameShell {
                 }
 
                 if (3 == PacketParser.anInt80) {
-                    if (Class143.loadingStage != 0 && Class143.loadingStage != 5 && 0 >= Unsorted.js5Connection.availableBytes()) {
+                    if (Class143.gameStage != 0 && Class143.gameStage != 5 && 0 >= Unsorted.js5Connection.availableBytes()) {
                         if (TimeUtils.time() + -Class3_Sub13_Sub30.aLong3366 > 30000) {
                             this.method46(1001);
                             return;
@@ -762,7 +763,7 @@ public final class Client extends GameShell {
                 }
 
                 if (PacketParser.anInt80 == 4) {
-                    boolean var6 = Class143.loadingStage == 5 || Class143.loadingStage == 10 || Class143.loadingStage == 28;
+                    boolean var6 = Class143.gameStage == 5 || Class143.gameStage == 10 || Class143.gameStage == 28;
                     Class58.aJs5Worker_917.connect(!var6, Unsorted.js5Connection);
                     Unsorted.js5Connection = null;
                     Class17.aClass64_413 = null;
@@ -1678,7 +1679,7 @@ public final class Client extends GameShell {
                             } else if (anInt1354 == 140) {
                                 loginScreenInterfaceID = CacheIndex.interfacesIndex.getArchiveForName(RSString.parse("loginscreen"));
                                 CacheIndex.landscapesIndex.method2115(-9, false);
-                                CacheIndex.musicIndex.method2115(111, true);
+                                CacheIndex.musicIndex.method2115(111, false);//true
                                 CacheIndex.spritesIndex.method2115(-76, true);
                                 CacheIndex.fontsIndex.method2115(91, true);
                                 CacheIndex.huffmanEncodingIndex.method2115(-116, true);
@@ -1750,7 +1751,7 @@ public final class Client extends GameShell {
 
     final void method25() {
         try {
-            if (Class143.loadingStage != 1000) {
+            if (Class143.gameStage != 1000) {
                 ++Class44.anInt719;
                 if (Class44.anInt719 % 1000 == 1) {
                     GregorianCalendar var2 = new GregorianCalendar();
@@ -1777,29 +1778,29 @@ public final class Client extends GameShell {
                     Class29.anInt561 = var4;
                 }
 
-                if (Class143.loadingStage == 0) {
+                if (Class143.gameStage == 0) {
                     this.method52(48);
                     Class75_Sub4.method1355();
-                } else if (Class143.loadingStage == 5) {
+                } else if (Class143.gameStage == 5) {
                     this.method52(107);
                     Class75_Sub4.method1355();
-                } else if (Class143.loadingStage == 25 || Class143.loadingStage == 28) {
+                } else if (Class143.gameStage == 25 || Class143.gameStage == 28) {
                     Class40.method1046();
                 }
 
-                if (10 == Class143.loadingStage) {
+                if (10 == Class143.gameStage) {
                     this.method47();
                     Class3_Sub13_Sub21.method267((byte) 36);
                     Class163_Sub1_Sub1.method2216();
                     LoginHandler.handleLogin();
-                } else if (Class143.loadingStage == 30) {
+                } else if (Class143.gameStage == 30) {
                     Class3_Sub13_Sub13.method235();
-                } else if (Class143.loadingStage == 40) {
+                } else if (Class143.gameStage == 40) {
                     LoginHandler.handleLogin();
-                    if (Class158.anInt2005 != -3) {
-                        if (Class158.anInt2005 == 15) {
+                    if (messageToDisplay != -3) {
+                        if (messageToDisplay == 15) {
                             Class21.method912();
-                        } else if (Class158.anInt2005 != 2) {
+                        } else if (messageToDisplay != 2) {
                             Class167.method2269((byte) 46);
                         }
                     }

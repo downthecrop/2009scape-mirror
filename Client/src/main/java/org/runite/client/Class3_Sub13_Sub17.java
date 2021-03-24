@@ -4,7 +4,7 @@ import org.rs09.client.data.HashTable;
 
 import java.util.Objects;
 
-final class Class3_Sub13_Sub17 extends Class3_Sub13 {
+final class Class3_Sub13_Sub17 extends TextureOperation {
 
    static boolean aBoolean3207 = false;
    static HashTable<Class3_Sub31> aHashTable_3208 = new HashTable<>(8);

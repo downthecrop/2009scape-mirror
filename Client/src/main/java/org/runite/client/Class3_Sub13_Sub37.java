@@ -3,7 +3,7 @@ import org.rs09.client.config.GameConfig;
 
 import java.math.BigInteger;
 
-final class Class3_Sub13_Sub37 extends Class3_Sub13 {
+final class Class3_Sub13_Sub37 extends TextureOperation {
 
    private int[][] anIntArrayArray3438;
    static Class3_Sub28_Sub17_Sub1 aClass3_Sub28_Sub17_Sub1_3440;

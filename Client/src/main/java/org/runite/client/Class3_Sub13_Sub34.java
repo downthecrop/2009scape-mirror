@@ -4,7 +4,7 @@ import org.rs09.client.data.ReferenceCache;
 
 import java.util.Objects;
 
-public final class Class3_Sub13_Sub34 extends Class3_Sub13 {
+public final class Class3_Sub13_Sub34 extends TextureOperation {
 
     private final int[] anIntArray3403 = new int[3];
     private int anInt3404 = 409;
