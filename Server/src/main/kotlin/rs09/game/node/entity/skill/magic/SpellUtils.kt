@@ -1,5 +1,6 @@
 package rs09.game.node.entity.skill.magic
 
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.magic.CombinationRune
 import core.game.node.entity.skill.magic.MagicStaff
@@ -79,6 +80,10 @@ object SpellUtils {
             return true
         }
         return true
+    }
+
+    fun attackableNPC(npc: NPC): Boolean{
+        return npc.definition.hasAction("attack")
     }
 
     @JvmStatic
