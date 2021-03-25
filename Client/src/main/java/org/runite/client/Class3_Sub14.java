@@ -51,7 +51,7 @@ final class Class3_Sub14 extends Linkable {
       return (float)((double)var1 * Math.pow(2.0D, var3 - 788));
    }
 
-   final Class3_Sub12_Sub1 method359(int[] var1) {
+   final PcmSound method359(int[] var1) {
       if(var1 != null && var1[0] <= 0) {
          return null;
       } else {
@@ -96,7 +96,7 @@ final class Class3_Sub14 extends Linkable {
          this.aFloatArray2394 = null;
          byte[] var7 = this.aByteArray2415;
          this.aByteArray2415 = null;
-         return new Class3_Sub12_Sub1(this.anInt2408, var7, this.anInt2397, this.anInt2401, this.aBoolean2395);
+         return new PcmSound(this.anInt2408, var7, this.anInt2397, this.anInt2401, this.aBoolean2395);
       }
    }
 

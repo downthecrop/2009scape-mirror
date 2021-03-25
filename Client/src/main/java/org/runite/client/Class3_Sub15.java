@@ -16,7 +16,7 @@ public final class Class3_Sub15 extends Linkable {
     static ReferenceCache aReferenceCache_2428 = new ReferenceCache(50);
     public static Connection activeConnection;
     byte[] aByteArray2430;
-    Class3_Sub12_Sub1[] aClass3_Sub12_Sub1Array2431;
+    PcmSound[] aPcmSoundArray2431;
     static boolean aBoolean2433 = false;
     short[] aShortArray2434;
     Class166[] aClass166Array2435;
@@ -57,7 +57,7 @@ public final class Class3_Sub15 extends Linkable {
     final boolean method373(int[] var2, Class83 var3, byte[] var4) {
         try {
             int var6 = 0;
-            Class3_Sub12_Sub1 var7 = null;
+            PcmSound var7 = null;
             boolean var5 = true;
 
             for (int var8 = 0; var8 < 128; ++var8) {
@@ -78,7 +78,7 @@ public final class Class3_Sub15 extends Linkable {
                         }
 
                         if (null != var7) {
-                            this.aClass3_Sub12_Sub1Array2431[var8] = var7;
+                            this.aPcmSoundArray2431[var8] = var7;
                             this.anIntArray2423[var8] = 0;
                         }
                     }
@@ -150,7 +150,7 @@ public final class Class3_Sub15 extends Linkable {
         try {
             this.aShortArray2434 = new short[128];
             this.aByteArray2430 = new byte[128];
-            this.aClass3_Sub12_Sub1Array2431 = new Class3_Sub12_Sub1[128];
+            this.aPcmSoundArray2431 = new PcmSound[128];
             this.aByteArray2422 = new byte[128];
             this.aClass166Array2435 = new Class166[128];
             this.anIntArray2423 = new int[128];

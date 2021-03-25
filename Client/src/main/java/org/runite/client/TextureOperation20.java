@@ -428,13 +428,13 @@ final class TextureOperation20 extends TextureOperation {
                if(Class143.gameStage == 30) {
                   MouseListeningClass.method2087();
                   Class115.method1713();
-                  Class3_Sub8.method132();
+                  AudioHandler.method132();
                   ++AbstractSprite.anInt3699;
                   if(AbstractSprite.anInt3699 > 750) {
                      breakClientConnection();
                   } else {
-                     Class38.method1028();
-                     Class60.method1207();
+                     PlayerRendering.updatePlayerAreaArray();
+                     NPCRendering.updateNPCAreaArray();
                      TextureOperation34.method189();
                      if(Class3_Sub28_Sub3.aClass11_3551 != null) {
                         Unsorted.method848();

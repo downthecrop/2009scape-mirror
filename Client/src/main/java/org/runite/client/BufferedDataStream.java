@@ -226,8 +226,8 @@ public final class BufferedDataStream extends DataBuffer {
                             TextureOperation12.outgoingBuffer.writeByte(TextureOperation9.anInt3102);
                             TextureOperation12.outgoingBuffer.writeByte(Class164_Sub2.anInt3020);
                             TextureOperation12.outgoingBuffer.writeByte(89);
-                            TextureOperation12.outgoingBuffer.writeShort(Class102.player.anInt2819);
-                            TextureOperation12.outgoingBuffer.writeShort(Class102.player.anInt2829);
+                            TextureOperation12.outgoingBuffer.writeShort(Class102.player.xAxis);
+                            TextureOperation12.outgoingBuffer.writeShort(Class102.player.zAxis);
                             TextureOperation12.outgoingBuffer.writeByte(Class129.anInt1692);
                             TextureOperation12.outgoingBuffer.writeByte(63);
                         }

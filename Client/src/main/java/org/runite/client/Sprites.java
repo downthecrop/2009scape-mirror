@@ -8,7 +8,7 @@ final class Sprites {
     public static int hintMapEdgeSpriteArchive;
     public static AbstractIndexedSprite[] nameIconsSpriteArray;
     static boolean aBoolean337;
-    static int anInt340 = 127;
+    static int ambientVolume = 127;
     static int p11FullSpriteArchive;
     static int p12FullSpriteArchive;
     static int b12FullSpriteArchive;

@@ -139,7 +139,7 @@ final class TextureOperation26 extends TextureOperation {
 
    static void method196() {
       try {
-         Class3_Sub8.anIntArray3083 = null;
+         AudioHandler.soundEffectCoordinates = null;
 
       } catch (RuntimeException var2) {
          throw ClientErrorException.clientError(var2, "ca.B(" + ')');

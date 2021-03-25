@@ -501,10 +501,10 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
 
          Class3_Sub15 var11 = (Class3_Sub15)this.aHashTable_3508.get(this.anIntArray3515[var2]);
          if(var11 != null) {
-            Class3_Sub12_Sub1 var12 = var11.aClass3_Sub12_Sub1Array2431[var4];
+            PcmSound var12 = var11.aPcmSoundArray2431[var4];
             if(var12 != null) {
                Class3_Sub22 var7 = new Class3_Sub22();
-               var7.aClass3_Sub12_Sub1_2509 = var12;
+               var7.aPcmSound_2509 = var12;
                var7.aClass3_Sub15_2527 = var11;
                var7.anInt2514 = var2;
                var7.aClass166_2504 = var11.aClass166Array2435[var4];
@@ -1089,7 +1089,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
             var3 += (int)((double)var5 * var7);
          }
 
-         var5 = (int)(0.5D + (double)(256 * var2.aClass3_Sub12_Sub1_2509.anInt3034) * Math.pow(2.0D, (double)var3 * 3.255208333333333E-4D) / (double)Class21.anInt443);
+         var5 = (int)(0.5D + (double)(256 * var2.aPcmSound_2509.anInt3034) * Math.pow(2.0D, (double)var3 * 3.255208333333333E-4D) / (double)Class21.anInt443);
 
          return var5 >= 1?var5:1;
       } catch (RuntimeException var9) {
@@ -1133,10 +1133,10 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
 
    final void method501(Class3_Sub22 var1, boolean var2, byte var3) {
       try {
-         int var4 = var1.aClass3_Sub12_Sub1_2509.aByteArray3030.length;
+         int var4 = var1.aPcmSound_2509.aByteArray3030.length;
          int var5;
-         if(var2 && var1.aClass3_Sub12_Sub1_2509.aBoolean3031) {
-            int var6 = var4 + (var4 - var1.aClass3_Sub12_Sub1_2509.anInt3033);
+         if(var2 && var1.aPcmSound_2509.aBoolean3031) {
+            int var6 = var4 + (var4 - var1.aPcmSound_2509.anInt3033);
             var4 <<= 8;
             var5 = (int)((long)var6 * (long)this.anIntArray3519[var1.anInt2514] >> 6);
             if(var4 <= var5) {

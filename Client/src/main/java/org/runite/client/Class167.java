@@ -46,9 +46,9 @@ public final class Class167 {
 
     public static void musicEffectHandler(int var1) {
         try {
-            if (Unsorted.anInt120 != 0 && var1 != -1) {
-                Class70.method1285(CacheIndex.music2Index, var1, Unsorted.anInt120);
-                Class83.aBoolean1158 = true;
+            if (AudioHandler.musicVolume != 0 && var1 != -1) {
+                Class70.method1285(CacheIndex.music2Index, var1, AudioHandler.musicVolume);
+                AudioHandler.musicEffectPlaying = true;
             }
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "wj.D(" + ',' + var1 + ',' + (byte) -1 + ')');
@@ -171,8 +171,8 @@ public final class Class167 {
             Unsorted.method1250(62, false);
             System.gc();
             Unsorted.method882();
-            Class83.aBoolean1158 = false;
-            Class129.anInt1691 = -1;
+            AudioHandler.musicEffectPlaying = false;
+            AudioHandler.currentTrack = -1;
             Class164_Sub1.method2241((byte) -77, true);
             LinkableRSString.isDynamicSceneGraph = false;
             Texture.anInt1152 = 0;

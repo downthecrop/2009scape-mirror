@@ -67,7 +67,7 @@ public abstract class Class140_Sub4 extends GameObject {
     int anInt2816 = 0;
     int anInt2817;
     int anInt2818;
-    public int anInt2819;
+    public int xAxis;
     int anInt2820 = -32768;
     int anInt2821 = 0;
     private int size = 1;
@@ -77,7 +77,7 @@ public abstract class Class140_Sub4 extends GameObject {
     int anInt2826 = -1;
     private int anInt2827 = 0;
     int anInt2828 = 0;
-    public int anInt2829;
+    public int zAxis;
     private int anInt2830 = 0;
     int anInt2831;
     int anInt2832 = 0;
@@ -141,8 +141,8 @@ public abstract class Class140_Sub4 extends GameObject {
             this.anIntArray2755[0] = var4;
             this.anInt2816 = 0;
             this.anInt2811 = 0;
-            this.anInt2829 = 64 * var2 + this.anIntArray2755[0] * 128;
-            this.anInt2819 = var2 * 64 + 128 * this.anIntArray2767[0];
+            this.zAxis = 64 * var2 + this.anIntArray2755[0] * 128;
+            this.xAxis = var2 * 64 + 128 * this.anIntArray2767[0];
 
             if (HDToolKit.highDetail && Class102.player == this) {
                 TextureOperation31.method236();
@@ -235,13 +235,13 @@ public abstract class Class140_Sub4 extends GameObject {
                 int var10 = -var6 / 2;
                 int var12 = -(var9 * var7) + var10 * var8 >> 16;
                 int var11 = var7 * var10 - -(var8 * var9) >> 16;
-                int var13 = Class121.method1736(WorldListCountry.localPlane, 1, var11 + this.anInt2819, this.anInt2829 + var12);
+                int var13 = Class121.method1736(WorldListCountry.localPlane, 1, var11 + this.xAxis, this.zAxis + var12);
                 int var14 = var5 / 2;
                 int var15 = -var6 / 2;
                 int var16 = var14 * var8 + var15 * var7 >> 16;
                 int var20 = var6 / 2;
                 int var17 = var15 * var8 + -(var14 * var7) >> 16;
-                int var18 = Class121.method1736(WorldListCountry.localPlane, 1, var16 + this.anInt2819, this.anInt2829 - -var17);
+                int var18 = Class121.method1736(WorldListCountry.localPlane, 1, var16 + this.xAxis, this.zAxis - -var17);
                 int var19 = -var5 / 2;
                 int var22 = -(var7 * var19) + var20 * var8 >> 16;
                 int var25 = var6 / 2;
@@ -249,9 +249,9 @@ public abstract class Class140_Sub4 extends GameObject {
                 int var21 = var7 * var20 - -(var8 * var19) >> 16;
                 int var27 = var25 * var8 - var7 * var24 >> 16;
                 int var26 = var7 * var25 + var8 * var24 >> 16;
-                int var23 = Class121.method1736(WorldListCountry.localPlane, 1, this.anInt2819 + var21, var22 + this.anInt2829);
+                int var23 = Class121.method1736(WorldListCountry.localPlane, 1, this.xAxis + var21, var22 + this.zAxis);
                 int var29 = var13 < var18 ? var13 : var18;
-                int var28 = Class121.method1736(WorldListCountry.localPlane, 1, var26 + this.anInt2819, var27 + this.anInt2829);
+                int var28 = Class121.method1736(WorldListCountry.localPlane, 1, var26 + this.xAxis, var27 + this.zAxis);
                 int var30 = var28 > var23 ? var23 : var28;
                 int var31 = var28 > var18 ? var18 : var28;
                 int var32 = var23 <= var13 ? var23 : var13;

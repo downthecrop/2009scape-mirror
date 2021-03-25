@@ -90,10 +90,10 @@ public final class LinkedList {
                     var5.anInt2322 = var6;
                 }
 
-                var5.anInt2326 = var5.aClass140_Sub4_Sub2_2324.anInt2819;
-                var5.anInt2321 = var5.aClass140_Sub4_Sub2_2324.anInt2819 + var5.aClass140_Sub4_Sub2_2324.getSize() * 64;
-                var5.anInt2308 = var5.aClass140_Sub4_Sub2_2324.anInt2829;
-                var5.anInt2307 = var5.aClass140_Sub4_Sub2_2324.anInt2829 + var5.aClass140_Sub4_Sub2_2324.getSize() * 64;
+                var5.anInt2326 = var5.aClass140_Sub4_Sub2_2324.xAxis;
+                var5.anInt2321 = var5.aClass140_Sub4_Sub2_2324.xAxis + var5.aClass140_Sub4_Sub2_2324.getSize() * 64;
+                var5.anInt2308 = var5.aClass140_Sub4_Sub2_2324.zAxis;
+                var5.anInt2307 = var5.aClass140_Sub4_Sub2_2324.zAxis + var5.aClass140_Sub4_Sub2_2324.getSize() * 64;
                 Unsorted.method606(var1, var5, var3, var0, var2, 1 ^ 113);
             }
 
@@ -124,10 +124,10 @@ public final class LinkedList {
                     var5.anInt2322 = var6;
                 }
 
-                var5.anInt2326 = var5.aClass140_Sub4_Sub1_2327.anInt2819;
-                var5.anInt2321 = var5.aClass140_Sub4_Sub1_2327.anInt2819 + 64 * var5.aClass140_Sub4_Sub1_2327.getSize();
-                var5.anInt2308 = var5.aClass140_Sub4_Sub1_2327.anInt2829;
-                var5.anInt2307 = var5.aClass140_Sub4_Sub1_2327.anInt2829 + var5.aClass140_Sub4_Sub1_2327.getSize() * 64;
+                var5.anInt2326 = var5.aClass140_Sub4_Sub1_2327.xAxis;
+                var5.anInt2321 = var5.aClass140_Sub4_Sub1_2327.xAxis + 64 * var5.aClass140_Sub4_Sub1_2327.getSize();
+                var5.anInt2308 = var5.aClass140_Sub4_Sub1_2327.zAxis;
+                var5.anInt2307 = var5.aClass140_Sub4_Sub1_2327.zAxis + var5.aClass140_Sub4_Sub1_2327.getSize() * 64;
                 Unsorted.method606(var1, var5, var3, var0, var2, 110);
             }
 

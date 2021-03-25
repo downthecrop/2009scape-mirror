@@ -7,7 +7,6 @@ final class Class3_Sub25 extends Linkable {
 
    int[] anIntArray2547 = new int[]{-1};
    static short[] aShortArray2548;
-   static int[] anIntArray2550 = new int[50];
    int[] anIntArray2551 = new int[]{0};
    static Class129 aClass129_2552;
 

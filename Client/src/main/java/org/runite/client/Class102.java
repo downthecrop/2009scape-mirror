@@ -5,7 +5,6 @@ import org.rs09.client.data.NodeCache;
 public final class Class102 implements Interface2 {
 
     static int[] anIntArray2125;
-    static Class135[] aClass135Array2131 = new Class135[50];
     static int anInt2136;
     public static Player player;
     private final boolean[] aBooleanArray2122;
@@ -130,9 +129,9 @@ public final class Class102 implements Interface2 {
                     int var4 = var3.getSize();
                     int var5;
                     if (1 != var4) {
-                        if (((1 & var4) != 0 || (127 & var3.anInt2819) == 0 && 0 == (127 & var3.anInt2829)) && ((var4 & 1) != 1 || (127 & var3.anInt2819) == 64 && 64 == (127 & var3.anInt2829))) {
-                            var5 = var3.anInt2819 + -(var4 * 64) >> 7;
-                            var6 = -(var4 * 64) + var3.anInt2829 >> 7;
+                        if (((1 & var4) != 0 || (127 & var3.xAxis) == 0 && 0 == (127 & var3.zAxis)) && ((var4 & 1) != 1 || (127 & var3.xAxis) == 64 && 64 == (127 & var3.zAxis))) {
+                            var5 = var3.xAxis + -(var4 * 64) >> 7;
+                            var6 = -(var4 * 64) + var3.zAxis >> 7;
                             var7 = var3.getSize() + var5;
                             if (var5 < 0) {
                                 var5 = 0;
@@ -157,9 +156,9 @@ public final class Class102 implements Interface2 {
                                 }
                             }
                         }
-                    } else if ((127 & var3.anInt2819) == 64 && (var3.anInt2829 & 127) == 64) {
-                        var5 = var3.anInt2819 >> 7;
-                        var6 = var3.anInt2829 >> 7;
+                    } else if ((127 & var3.xAxis) == 64 && (var3.zAxis & 127) == 64) {
+                        var5 = var3.xAxis >> 7;
+                        var6 = var3.zAxis >> 7;
                         if (var5 >= 0 && var5 < 104 && var6 >= 0 && var6 < 104) {
                             ++Class163_Sub1_Sub1.anIntArrayArray4010[var5][var6];
                         }
@@ -174,9 +173,9 @@ public final class Class102 implements Interface2 {
                 if (var3 != null && var3.hasDefinitions() && !var3.definition.aBoolean1263 == !var1 && var3.definition.method1472()) {
                     var6 = var3.getSize();
                     if (var6 != 1) {
-                        if ((var6 & 1) == 0 && (var3.anInt2819 & 127) == 0 && (127 & var3.anInt2829) == 0 || (var6 & 1) == 1 && (var3.anInt2819 & 127) == 64 && (127 & var3.anInt2829) == 64) {
-                            var7 = -(64 * var6) + var3.anInt2819 >> 7;
-                            var8 = -(var6 * 64) + var3.anInt2829 >> 7;
+                        if ((var6 & 1) == 0 && (var3.xAxis & 127) == 0 && (127 & var3.zAxis) == 0 || (var6 & 1) == 1 && (var3.xAxis & 127) == 64 && (127 & var3.zAxis) == 64) {
+                            var7 = -(64 * var6) + var3.xAxis >> 7;
+                            var8 = -(var6 * 64) + var3.zAxis >> 7;
                             var10 = var8 - -var6;
                             if (var8 < 0) {
                                 var8 = 0;
@@ -223,9 +222,9 @@ public final class Class102 implements Interface2 {
                                 }
                             }
                         }
-                    } else if ((127 & var3.anInt2819) == 64 && (127 & var3.anInt2829) == 64) {
-                        var7 = var3.anInt2819 >> 7;
-                        var8 = var3.anInt2829 >> 7;
+                    } else if ((127 & var3.xAxis) == 64 && (127 & var3.zAxis) == 64) {
+                        var7 = var3.xAxis >> 7;
+                        var8 = var3.zAxis >> 7;
                         if (0 > var7 || var7 >= 104 || var8 < 0 || var8 >= 104) {
                             continue;
                         }
@@ -240,8 +239,8 @@ public final class Class102 implements Interface2 {
                         var15 |= Long.MIN_VALUE;
                     }
 
-                    var3.anInt2831 = Class121.method1736(WorldListCountry.localPlane, 1, var3.anInt2819, var3.anInt2829);
-                    Class20.method907(WorldListCountry.localPlane, var3.anInt2819, var3.anInt2829, var3.anInt2831, -64 + 64 * var6 + 60, var3, var3.anInt2785, var15, var3.aBoolean2810);
+                    var3.anInt2831 = Class121.method1736(WorldListCountry.localPlane, 1, var3.xAxis, var3.zAxis);
+                    Class20.method907(WorldListCountry.localPlane, var3.xAxis, var3.zAxis, var3.anInt2831, -64 + 64 * var6 + 60, var3, var3.anInt2785, var15, var3.aBoolean2810);
                 }
             }
 
@@ -259,7 +258,7 @@ public final class Class102 implements Interface2 {
 
             anIntArray2125 = null;
             Sprites.aClass3_Sub28_Sub16_Sub2Array2140 = null;
-            aClass135Array2131 = null;
+            AudioHandler.soundEffects = null;
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "nk.W(" + var0 + ')');
         }

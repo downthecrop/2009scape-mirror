@@ -109,8 +109,8 @@ final class TextureOperation32 extends TextureOperation {
                if(Class44.anInt719 >= var2.anInt2925) {
                   if(var2.anInt2919 > 0) {
                      NPC var3 = NPC.npcs[-1 + var2.anInt2919];
-                     if(null != var3 && var3.anInt2819 >= 0 && 13312 > var3.anInt2819 && var3.anInt2829 >= 0 && var3.anInt2829 < 13312) {
-                        var2.method2024(var3.anInt2829, Class44.anInt719, Class121.method1736(var2.anInt2907, 1, var3.anInt2819, var3.anInt2829) + -var2.anInt2903, var3.anInt2819);
+                     if(null != var3 && var3.xAxis >= 0 && 13312 > var3.xAxis && var3.zAxis >= 0 && var3.zAxis < 13312) {
+                        var2.method2024(var3.zAxis, Class44.anInt719, Class121.method1736(var2.anInt2907, 1, var3.xAxis, var3.zAxis) + -var2.anInt2903, var3.xAxis);
                      }
                   }
 
@@ -123,8 +123,8 @@ final class TextureOperation32 extends TextureOperation {
                         var6 = Unsorted.players[var4];
                      }
 
-                     if(null != var6 && var6.anInt2819 >= 0 && var6.anInt2819 < 13312 && var6.anInt2829 >= 0 && var6.anInt2829 < 13312) {
-                        var2.method2024(var6.anInt2829, Class44.anInt719, Class121.method1736(var2.anInt2907, 1, var6.anInt2819, var6.anInt2829) - var2.anInt2903, var6.anInt2819);
+                     if(null != var6 && var6.xAxis >= 0 && var6.xAxis < 13312 && var6.zAxis >= 0 && var6.zAxis < 13312) {
+                        var2.method2024(var6.zAxis, Class44.anInt719, Class121.method1736(var2.anInt2907, 1, var6.xAxis, var6.zAxis) - var2.anInt2903, var6.xAxis);
                      }
                   }
 

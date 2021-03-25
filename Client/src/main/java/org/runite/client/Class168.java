@@ -27,8 +27,8 @@ final class Class168 {
                 int var5 = var0.anInt2835 * 128 - -(var0.getSize() * 64);
                 int var6 = 128 * var0.anInt2823 + var0.getSize() * 64;
                 int var7 = 128 * var0.anInt2798 + var0.getSize() * 64;
-                var0.anInt2819 = (var3 * var6 + var4 * (var2 - var3)) / var2;
-                var0.anInt2829 = (var7 * var3 + var5 * (var2 - var3)) / var2;
+                var0.xAxis = (var3 * var6 + var4 * (var2 - var3)) / var2;
+                var0.zAxis = (var7 * var3 + var5 * (var2 - var3)) / var2;
             }
 
             var0.anInt2824 = 0;

@@ -744,7 +744,7 @@ public final class Client extends GameShell {
         try {
             if (Class143.gameStage != 1000) {
                 boolean var2 = NPC.method1988();
-                if (var2 && Class83.aBoolean1158 && WorldListEntry.aClass155_2627 != null) {
+                if (var2 && AudioHandler.musicEffectPlaying && WorldListEntry.aClass155_2627 != null) {
                     WorldListEntry.aClass155_2627.method2158();
                 }
 
@@ -884,10 +884,10 @@ public final class Client extends GameShell {
                 }
 
                 DeveloperConsole.INSTANCE.postDraw();
-//				if (DeveloperConsole.INSTANCE.getOpen()) {
-//				    DeveloperConsole.INSTANCE.draw();
-////					System.out.println("Draw developer console");
-//				}
+				if (DeveloperConsole.INSTANCE.getOpen()) {
+				    DeveloperConsole.INSTANCE.draw();
+//					System.out.println("Draw developer console");
+				}
                 DiscordRPC.discordRunCallbacks();
             }
         } catch (RuntimeException var9) {
@@ -1184,10 +1184,10 @@ public final class Client extends GameShell {
                             int var7 = (int) Math.round(Math.random() * 2.0D - 1.0D);
                             if (var6 != 0 || 0 != var7) {
                                 var4.aByteArray2795[0] = 1;
-                                var4.anIntArray2767[0] = var6 + (var4.anInt2819 >> 7);
-                                var4.anIntArray2755[0] = var7 + (var4.anInt2829 >> 7);
-                                AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1502(var4.anInt2819 >> 7, var4.getSize(), false, 0, var4.getSize(), var4.anInt2829 >> 7);
-                                if (0 <= var4.anIntArray2767[0] && var4.anIntArray2767[0] <= 104 + -var4.getSize() && 0 <= var4.anIntArray2755[0] && var4.anIntArray2755[0] <= 104 - var4.getSize() && AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1500(var4.anInt2829 >> 7, var4.anIntArray2755[0], var4.anIntArray2767[0], var4.anInt2819 >> 7)) {
+                                var4.anIntArray2767[0] = var6 + (var4.xAxis >> 7);
+                                var4.anIntArray2755[0] = var7 + (var4.zAxis >> 7);
+                                AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1502(var4.xAxis >> 7, var4.getSize(), false, 0, var4.getSize(), var4.zAxis >> 7);
+                                if (0 <= var4.anIntArray2767[0] && var4.anIntArray2767[0] <= 104 + -var4.getSize() && 0 <= var4.anIntArray2755[0] && var4.anIntArray2755[0] <= 104 - var4.getSize() && AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1500(var4.zAxis >> 7, var4.anIntArray2755[0], var4.anIntArray2767[0], var4.xAxis >> 7)) {
                                     if (var4.getSize() > 1) {
                                         for (int var8 = var4.anIntArray2767[0]; var8 < var4.anIntArray2767[0] - -var4.getSize(); ++var8) {
                                             for (int var9 = var4.anIntArray2755[0]; var4.anIntArray2755[0] + var4.getSize() > var9; ++var9) {
@@ -1206,7 +1206,7 @@ public final class Client extends GameShell {
                         Unsorted.method1180((byte) -122, var4);
                         Class17.method904(65536, var4);
                         RenderAnimationDefinition.method900(var4, (byte) 1 ^ -11974);
-                        AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1489(var4.anInt2819 >> 7, false, (byte) 85, var4.anInt2829 >> 7, var4.getSize(), var4.getSize());
+                        AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1489(var4.xAxis >> 7, false, (byte) 85, var4.zAxis >> 7, var4.getSize(), var4.getSize());
                     }
                 }
             }
@@ -1529,7 +1529,7 @@ public final class Client extends GameShell {
                         Class3_Sub21.aClass155_2491 = Class58.method1195(2048, Class38.gameSignlink, GameShell.canvas, 1);
                         Class3_Sub26.aClass3_Sub24_Sub2_2563 = new Class3_Sub24_Sub2();
                         Class3_Sub21.aClass155_2491.method2154(-128, Class3_Sub26.aClass3_Sub24_Sub2_2563);
-                        Class27.aClass157_524 = new Class157(22050, Class21.anInt443);
+                        Class27.resampler = new Class157(22050, Class21.anInt443);
                         KeyboardListener.loginThemeSongArchiveID = CacheIndex.musicIndex.getArchiveForName(RSString.parse(GameConfig.LOGIN_THEME));
                         LoadingStageNumber = 30;
                         anInt1354 = 50;

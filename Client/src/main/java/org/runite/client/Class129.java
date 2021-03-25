@@ -5,7 +5,6 @@ import org.rs09.client.rendering.Toolkit;
 abstract class Class129 {
 
     static int[] anIntArray1690;
-    static int anInt1691 = -1;
     static int anInt1692 = 0;
     static int[] anIntArray1693 = new int[128];
     static int[] anIntArray1695;

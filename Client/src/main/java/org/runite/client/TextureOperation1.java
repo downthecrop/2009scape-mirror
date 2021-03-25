@@ -80,8 +80,8 @@ final class TextureOperation1 extends TextureOperation {
          Class3_Sub28_Sub5.anInt3590 = -1;
          TextureOperation20.method229(Class161.anInt2027);
          Class102.player = new Player();
-         Class102.player.anInt2829 = 3000;
-         Class102.player.anInt2819 = 3000;
+         Class102.player.zAxis = 3000;
+         Class102.player.xAxis = 3000;
          if(HDToolKit.highDetail) {
             if(Class133.anInt1753 == 2) {
                NPC.anInt3995 = Unsorted.anInt30 << 7;

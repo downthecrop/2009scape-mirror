@@ -26,7 +26,7 @@ final class Class107 {
     static void method1647(int var1, int var2, Class140_Sub4 var3, int var4, int var5, int var6) {
         try {
 
-            Unsorted.method1724(var6, var2, var3.anInt2829, var5, var1, var3.anInt2819, (byte) -85, var4);
+            Unsorted.method1724(var6, var2, var3.zAxis, var5, var1, var3.xAxis, (byte) -85, var4);
         } catch (RuntimeException var8) {
             throw ClientErrorException.clientError(var8, "og.A(" + (byte) 122 + ',' + var1 + ',' + var2 + ',' + (var3 != null ? "{...}" : "null") + ',' + var4 + ',' + var5 + ',' + var6 + ')');
         }

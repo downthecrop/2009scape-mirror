@@ -114,7 +114,11 @@ public final class HDToolKit {
     }
 
     public static void bufferSwap() {
-        glDrawable.swapBuffers();
+        try {
+            glDrawable.swapBuffers();
+        } catch (GLException ignore) {
+            //TODO: This may be the cause of the display failing sometimes.
+        }
     }
 
     static void method1827(boolean var0) {
@@ -246,7 +250,7 @@ public final class HDToolKit {
             var3.release();
             var3.destroy();
             var2.setRealized(false);
-        } catch (Throwable var4) {
+        } catch (GLException var4) {
         }
 
     }
@@ -392,7 +396,7 @@ public final class HDToolKit {
         if (gl != null) {
             try {
                 Class101.method1609();
-            } catch (Throwable var4) {
+            } catch (GLException var4) {
             }
 
             gl = null;
@@ -405,12 +409,12 @@ public final class HDToolKit {
                 if (javax.media.opengl.GLContext.getCurrent() == glContext) {
                     glContext.release();
                 }
-            } catch (Throwable var3) {
+            } catch (GLException var3) {
             }
 
             try {
                 glContext.destroy();
-            } catch (Throwable var2) {
+            } catch (GLException var2) {
             }
 
             glContext = null;
@@ -419,7 +423,7 @@ public final class HDToolKit {
         if (glDrawable != null) {
             try {
                 glDrawable.setRealized(false);
-            } catch (Throwable var1) {
+            } catch (GLException var1) {
             }
 
             glDrawable = null;
@@ -570,6 +574,12 @@ public final class HDToolKit {
 
         try {
             if (canvas.isDisplayable()) {
+
+                /*
+                    Edited out here is the old JOGL implementation. It was removed due to lack of
+                    support for MacOS + Linux. There was a problem with the threads and Linux users
+                    were unable to interact with the canvas.
+                 */
                 //GLProfile.initSingleton();
 //                GLCapabilities glCapabilities = new GLCapabilities(GLProfile.getDefault());
 //                System.out.println("Scene MSAASamples = " + SceneMSAASamples);
@@ -587,7 +597,7 @@ public final class HDToolKit {
                 GLCapabilities var2 = new GLCapabilities();
                 if (SceneMSAASamples > 0) {
                     var2.setSampleBuffers(true);
-                    var2.setNumSamples(SceneMSAASamples);
+                    var2.setNumSamples(SceneMSAASamples * 128);
                 }
 
                 GLDrawableFactory var3 = GLDrawableFactory.getFactory();
@@ -604,7 +614,7 @@ public final class HDToolKit {
                         if (var5 != 0) {
                             break;
                         }
-                    } catch (Exception var8) {
+                    } catch (GLException var8) {
                     }
 
                     if (var4++ > 5) {
@@ -631,7 +641,7 @@ public final class HDToolKit {
                         try {
                             glDrawable.swapBuffers();
                             break;
-                        } catch (Exception var7) {
+                        } catch (GLException var7) {
                             if (var4++ > 5) {
                                 method1842();
                                 return;
@@ -647,7 +657,7 @@ public final class HDToolKit {
                 }
             } else {
             }
-        } catch (Throwable var9) {
+        } catch (GLException var9) {
             System.err.println("Failed to enter HD");
             method1842();
         }

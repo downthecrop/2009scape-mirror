@@ -203,7 +203,7 @@ final class Class3_Sub5 extends Linkable {
     static void method116(boolean var0) {
         try {
             int var2 = Class159.localPlayerCount;
-            if (Class65.anInt987 == Class102.player.anInt2819 >> 7 && Class45.anInt733 == Class102.player.anInt2829 >> 7) {
+            if (Class65.anInt987 == Class102.player.xAxis >> 7 && Class45.anInt733 == Class102.player.zAxis >> 7) {
                 Class65.anInt987 = 0;
             }
 
@@ -229,16 +229,16 @@ final class Class3_Sub5 extends Linkable {
                     int var5 = var4.getSize();
                     int var6;
                     if (var5 == 1) {
-                        if ((127 & var4.anInt2819) == 64 && 64 == (127 & var4.anInt2829)) {
-                            var6 = var4.anInt2819 >> 7;
-                            var7 = var4.anInt2829 >> 7;
+                        if ((127 & var4.xAxis) == 64 && 64 == (127 & var4.zAxis)) {
+                            var6 = var4.xAxis >> 7;
+                            var7 = var4.zAxis >> 7;
                             if (var6 >= 0 && var6 < 104 && var7 >= 0 && var7 < 104) {
                                 ++Class163_Sub1_Sub1.anIntArrayArray4010[var6][var7];
                             }
                         }
-                    } else if (((1 & var5) != 0 || (var4.anInt2819 & 127) == 0 && (127 & var4.anInt2829) == 0) && ((1 & var5) != 1 || (var4.anInt2819 & 127) == 64 && (127 & var4.anInt2829) == 64)) {
-                        var6 = var4.anInt2819 + -(var5 * 64) >> 7;
-                        var7 = var4.anInt2829 + -(var5 * 64) >> 7;
+                    } else if (((1 & var5) != 0 || (var4.xAxis & 127) == 0 && (127 & var4.zAxis) == 0) && ((1 & var5) != 1 || (var4.xAxis & 127) == 64 && (127 & var4.zAxis) == 64)) {
+                        var6 = var4.xAxis + -(var5 * 64) >> 7;
+                        var7 = var4.zAxis + -(var5 * 64) >> 7;
                         var8 = var4.getSize() + var6;
                         if (104 < var8) {
                             var8 = 104;
@@ -282,9 +282,9 @@ final class Class3_Sub5 extends Linkable {
 
                     var7 = var4.getSize();
                     if (var7 == 1) {
-                        if (64 == (127 & var4.anInt2819) && (127 & var4.anInt2829) == 64) {
-                            var8 = var4.anInt2819 >> 7;
-                            var9 = var4.anInt2829 >> 7;
+                        if (64 == (127 & var4.xAxis) && (127 & var4.zAxis) == 64) {
+                            var8 = var4.xAxis >> 7;
+                            var9 = var4.zAxis >> 7;
                             if (var8 < 0 || var8 >= 104 || var9 < 0 || 104 <= var9) {
                                 continue;
                             }
@@ -294,10 +294,10 @@ final class Class3_Sub5 extends Linkable {
                                 continue;
                             }
                         }
-                    } else if ((1 & var7) == 0 && (127 & var4.anInt2819) == 0 && (var4.anInt2829 & 127) == 0 || 1 == (1 & var7) && (127 & var4.anInt2819) == 64 && (var4.anInt2829 & 127) == 0) {
-                        var8 = var4.anInt2819 + -(64 * var7) >> 7;
+                    } else if ((1 & var7) == 0 && (127 & var4.xAxis) == 0 && (var4.zAxis & 127) == 0 || 1 == (1 & var7) && (127 & var4.xAxis) == 64 && (var4.zAxis & 127) == 0) {
+                        var8 = var4.xAxis + -(64 * var7) >> 7;
                         var10 = var7 + var8;
-                        var9 = -(var7 * 64) + var4.anInt2829 >> 7;
+                        var9 = -(var7 * 64) + var4.zAxis >> 7;
                         if (var10 > 104) {
                             var10 = 104;
                         }
@@ -346,11 +346,11 @@ final class Class3_Sub5 extends Linkable {
 
                     if (null != var4.anObject2796 && var4.anInt2797 <= Class44.anInt719 && Class44.anInt719 < var4.anInt2778) {
                         var4.aBoolean3968 = false;
-                        var4.anInt2831 = Class121.method1736(WorldListCountry.localPlane, 1, var4.anInt2819, var4.anInt2829);
-                        TextureOperation28.method292(WorldListCountry.localPlane, var4.anInt2819, var4.anInt2829, var4.anInt2831, var4, var4.anInt2785, var16, var4.anInt2788, var4.anInt2777, var4.anInt2818, var4.anInt2817);
+                        var4.anInt2831 = Class121.method1736(WorldListCountry.localPlane, 1, var4.xAxis, var4.zAxis);
+                        TextureOperation28.method292(WorldListCountry.localPlane, var4.xAxis, var4.zAxis, var4.anInt2831, var4, var4.anInt2785, var16, var4.anInt2788, var4.anInt2777, var4.anInt2818, var4.anInt2817);
                     } else {
-                        var4.anInt2831 = Class121.method1736(WorldListCountry.localPlane, 1, var4.anInt2819, var4.anInt2829);
-                        Class20.method907(WorldListCountry.localPlane, var4.anInt2819, var4.anInt2829, var4.anInt2831, 64 * (var7 - 1) + 60, var4, var4.anInt2785, var16, var4.aBoolean2810);
+                        var4.anInt2831 = Class121.method1736(WorldListCountry.localPlane, 1, var4.xAxis, var4.zAxis);
+                        Class20.method907(WorldListCountry.localPlane, var4.xAxis, var4.zAxis, var4.anInt2831, 64 * (var7 - 1) + 60, var4, var4.anInt2785, var16, var4.aBoolean2810);
                     }
                 }
             }

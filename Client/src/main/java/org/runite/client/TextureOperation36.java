@@ -135,14 +135,14 @@ public final class TextureOperation36 extends TextureOperation {
                 int var37;
                 if(var14 == 1) {
                    NPC var31 = NPC.npcs[var15];
-                   if((var31.definition.size & 1) == 0 && (127 & var31.anInt2819) == 0 && (var31.anInt2829 & 127) == 0 || 1 == (var31.definition.size & 1) && (127 & var31.anInt2819) == 64 && (var31.anInt2829 & 127) == 64) {
-                      var33 = var31.anInt2819 - -64 - 64 * var31.definition.size;
-                      var18 = -((-1 + var31.definition.size) * 64) + var31.anInt2829;
+                   if((var31.definition.size & 1) == 0 && (127 & var31.xAxis) == 0 && (var31.zAxis & 127) == 0 || 1 == (var31.definition.size & 1) && (127 & var31.xAxis) == 64 && (var31.zAxis & 127) == 64) {
+                      var33 = var31.xAxis - -64 - 64 * var31.definition.size;
+                      var18 = -((-1 + var31.definition.size) * 64) + var31.zAxis;
 
                       for(var37 = 0; var37 < Class163.localNPCCount; ++var37) {
                          var36 = NPC.npcs[Class15.localNPCIndexes[var37]];
-                         var21 = -(var36.definition.size * 64) - -64 + var36.anInt2819;
-                         var22 = var36.anInt2829 + -(var36.definition.size * 64) - -64;
+                         var21 = -(var36.definition.size * 64) - -64 + var36.xAxis;
+                         var22 = var36.zAxis + -(var36.definition.size * 64) - -64;
                          if(var31 != var36 && var33 <= var21 && var31.definition.size - (-var33 + var21 >> 7) >= var36.definition.size && var18 <= var22 && var36.definition.size <= -(-var18 + var22 >> 7) + var31.definition.size) {
                             Unsorted.drawNpcRightClickOptions(var36.definition, var12, -126, Class15.localNPCIndexes[var37], var27);
                          }
@@ -150,8 +150,8 @@ public final class TextureOperation36 extends TextureOperation {
 
                       for(var37 = 0; var37 < Class159.localPlayerCount; ++var37) {
                          var38 = Unsorted.players[Class56.localPlayerIndexes[var37]];
-                         var21 = var38.anInt2819 + 64 + -(64 * var38.getSize());
-                         var22 = var38.anInt2829 - (var38.getSize() * 64 + -64);
+                         var21 = var38.xAxis + 64 + -(64 * var38.getSize());
+                         var22 = var38.zAxis - (var38.getSize() * 64 + -64);
                          if(var21 >= var33 && var31.definition.size - (var21 - var33 >> 7) >= var38.getSize() && var18 <= var22 && var38.getSize() <= -(-var18 + var22 >> 7) + var31.definition.size) {
                             TextureOperation13.method312(Class56.localPlayerIndexes[var37], 5, var27, var38, var12);
                          }
@@ -163,14 +163,14 @@ public final class TextureOperation36 extends TextureOperation {
 
                 if(var14 == 0) {
                    Player var30 = Unsorted.players[var15];
-                   if((127 & var30.anInt2819) == 64 && 64 == (127 & var30.anInt2829)) {
-                      var33 = var30.anInt2819 + -(64 * (-1 + var30.getSize()));
-                      var18 = var30.anInt2829 + 64 + -(var30.getSize() * 64);
+                   if((127 & var30.xAxis) == 64 && 64 == (127 & var30.zAxis)) {
+                      var33 = var30.xAxis + -(64 * (-1 + var30.getSize()));
+                      var18 = var30.zAxis + 64 + -(var30.getSize() * 64);
 
                       for(var37 = 0; var37 < Class163.localNPCCount; ++var37) {
                          var36 = NPC.npcs[Class15.localNPCIndexes[var37]];
-                         var21 = var36.anInt2819 + -(var36.definition.size * 64) - -64;
-                         var22 = var36.anInt2829 - 64 * var36.definition.size - -64;
+                         var21 = var36.xAxis + -(var36.definition.size * 64) - -64;
+                         var22 = var36.zAxis - 64 * var36.definition.size - -64;
                          if(var21 >= var33 && var36.definition.size <= -(var21 - var33 >> 7) + var30.getSize() && var18 <= var22 && -(-var18 + var22 >> 7) + var30.getSize() >= var36.definition.size) {
                             Unsorted.drawNpcRightClickOptions(var36.definition, var12, -121, Class15.localNPCIndexes[var37], var27);
                          }
@@ -178,8 +178,8 @@ public final class TextureOperation36 extends TextureOperation {
 
                       for(var37 = 0; var37 < Class159.localPlayerCount; ++var37) {
                          var38 = Unsorted.players[Class56.localPlayerIndexes[var37]];
-                         var21 = var38.anInt2819 - (var38.getSize() + -1) * 64;
-                         var22 = var38.anInt2829 - (-64 + 64 * var38.getSize());
+                         var21 = var38.xAxis - (var38.getSize() + -1) * 64;
+                         var22 = var38.zAxis - (-64 + 64 * var38.getSize());
                          if(var38 != var30 && var21 >= var33 && var38.getSize() <= var30.getSize() - (var21 - var33 >> 7) && var18 <= var22 && -(var22 + -var18 >> 7) + var30.getSize() >= var38.getSize()) {
                             TextureOperation13.method312(Class56.localPlayerIndexes[var37], 9, var27, var38, var12);
                          }

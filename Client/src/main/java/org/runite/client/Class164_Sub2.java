@@ -188,11 +188,11 @@ public class Class164_Sub2 extends Class164 {
                   }
 
                   if(var8 == 18) {
-                     var9 = (Class102.player.anInt2819 >> 7) - -Class131.anInt1716;
+                     var9 = (Class102.player.xAxis >> 7) - -Class131.anInt1716;
                   }
 
                   if(var8 == 19) {
-                     var9 = (Class102.player.anInt2829 >> 7) - -Texture.anInt1152;
+                     var9 = (Class102.player.zAxis >> 7) - -Texture.anInt1152;
                   }
 
                   if(var8 == 20) {

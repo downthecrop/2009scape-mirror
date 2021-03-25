@@ -3,7 +3,6 @@ package org.runite.client;
 final class Class166 {
 
     static Class3_Sub2[][][] aClass3_Sub2ArrayArrayArray2065;
-    static int[] anIntArray2068 = new int[50];
     static Class3_Sub28_Sub5[] aClass3_Sub28_Sub5Array2070 = new Class3_Sub28_Sub5[14];
     static AbstractSprite[] aAbstractSpriteArray2072;
     static int[] anIntArray2073 = new int[5];

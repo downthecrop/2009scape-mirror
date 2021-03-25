@@ -326,8 +326,8 @@ final class TextureOperation10 extends TextureOperation {
       try {
          PacketParser.inTutorialIsland = 0;
 
-         int var1 = Class131.anInt1716 + (Class102.player.anInt2819 >> 7);
-         int var2 = (Class102.player.anInt2829 >> 7) - -Texture.anInt1152;
+         int var1 = Class131.anInt1716 + (Class102.player.xAxis >> 7);
+         int var2 = (Class102.player.zAxis >> 7) - -Texture.anInt1152;
          if(var1 >= 3053 && var1 <= 3156 && var2 >= 3056 && var2 <= 3136) {
             PacketParser.inTutorialIsland = 1;
          }

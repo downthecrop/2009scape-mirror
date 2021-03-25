@@ -49,8 +49,8 @@ public final class Class97 {
 
     static void method1591(Class3_Sub24 var1) {
         try {
-            if (var1.aClass3_Sub12_2544 != null) {
-                var1.aClass3_Sub12_2544.anInt2374 = 0;
+            if (var1.aSound_2544 != null) {
+                var1.aSound_2544.anInt2374 = 0;
             }
 
             var1.aBoolean2545 = false;

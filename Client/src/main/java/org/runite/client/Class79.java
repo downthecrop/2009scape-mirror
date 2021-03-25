@@ -114,10 +114,10 @@ final class Class79 {
                             AudioHandler.soundEffectVolume = 127;
                         }
 
-                        Unsorted.anInt120 = var0.readUnsignedByte();
-                        Sprites.anInt340 = var0.readUnsignedByte();
-                        if (Sprites.anInt340 > 127) {
-                            Sprites.anInt340 = 127;
+                        AudioHandler.musicVolume = var0.readUnsignedByte();
+                        Sprites.ambientVolume = var0.readUnsignedByte();
+                        if (Sprites.ambientVolume > 127) {
+                            Sprites.ambientVolume = 127;
                         }
 
                         if (var2 >= 1) {

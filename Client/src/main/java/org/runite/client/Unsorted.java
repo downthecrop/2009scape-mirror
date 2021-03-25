@@ -24,11 +24,9 @@ public class Unsorted {
     public static int anInt2148 = 0;
     public static boolean aBoolean2150;
     public static boolean aBoolean2154;
-    public static int[] anIntArray2157 = new int[50];
     public static int[] anIntArray882 = new int[200];
     public static int anInt144;
     public static int anInt136 = 0;
-    public static int anInt120 = 255;
     public static byte[][][] aByteArrayArrayArray113 = new byte[4][104][104];
     public static int[] anIntArray39;
     public static int anInt40 = 0;
@@ -176,8 +174,8 @@ public class Unsorted {
 
     static void method2086() {
         try {
-            int var1 = Class102.player.anInt2819 + TextureOperation20.anInt3216;
-            int var2 = Class102.player.anInt2829 - -anInt42;
+            int var1 = Class102.player.xAxis + TextureOperation20.anInt3216;
+            int var2 = Class102.player.zAxis - -anInt42;
             if (-var1 + anInt3155 < -500 || -var1 + anInt3155 > 500 || anInt942 + -var2 < -500 || -var2 + anInt942 > 500) {
                 anInt3155 = var1;
                 anInt942 = var2;
@@ -864,23 +862,23 @@ public class Unsorted {
                 Class140_Sub2.method1950(var2);
             }
 
-            if (var2.anInt2819 < 128 || var2.anInt2829 < 128 || var2.anInt2819 >= 13184 || var2.anInt2829 >= 13184) {
+            if (var2.xAxis < 128 || var2.zAxis < 128 || var2.xAxis >= 13184 || var2.zAxis >= 13184) {
                 var2.anInt2771 = -1;
                 var2.anInt2842 = -1;
                 var2.anInt2800 = 0;
                 var2.anInt2790 = 0;
-                var2.anInt2819 = 128 * var2.anIntArray2767[0] - -(64 * var2.getSize());
-                var2.anInt2829 = var2.anIntArray2755[0] * 128 + var2.getSize() * 64;
+                var2.xAxis = 128 * var2.anIntArray2767[0] - -(64 * var2.getSize());
+                var2.zAxis = var2.anIntArray2755[0] * 128 + var2.getSize() * 64;
                 var2.method1973(2279 + -2395);
             }
 
-            if (var2 == Class102.player && (var2.anInt2819 < 1536 || var2.anInt2829 < 1536 || var2.anInt2819 >= 11776 || var2.anInt2829 >= 11776)) {
+            if (var2 == Class102.player && (var2.xAxis < 1536 || var2.zAxis < 1536 || var2.xAxis >= 11776 || var2.zAxis >= 11776)) {
                 var2.anInt2842 = -1;
                 var2.anInt2800 = 0;
                 var2.anInt2790 = 0;
                 var2.anInt2771 = -1;
-                var2.anInt2819 = var2.anIntArray2767[0] * 128 + var2.getSize() * 64;
-                var2.anInt2829 = 128 * var2.anIntArray2755[0] + 64 * var2.getSize();
+                var2.xAxis = var2.anIntArray2767[0] * 128 + var2.getSize() * 64;
+                var2.zAxis = 128 * var2.anIntArray2755[0] + 64 * var2.getSize();
                 var2.method1973(-98);
             }
 
@@ -912,14 +910,14 @@ public class Unsorted {
                             AudioHandler.soundEffectHandler(var8, var7, 0);
                         }
 
-                    } else if (0 != Sprites.anInt340) {
-                        Class3_Sub25.anIntArray2550[AudioHandler.currentSoundEffectCount] = var7;
-                        Class166.anIntArray2068[AudioHandler.currentSoundEffectCount] = var8;
+                    } else if (0 != Sprites.ambientVolume) {
+                        AudioHandler.soundEffectIDs[AudioHandler.currentSoundEffectCount] = var7;
+                        AudioHandler.soundEffectVolumeArray[AudioHandler.currentSoundEffectCount] = var8;
                         int var11 = (-64 + var0) / 128;
                         var10 = (var3 + -64) / 128;
-                        anIntArray2157[AudioHandler.currentSoundEffectCount] = 0;
-                        Class102.aClass135Array2131[AudioHandler.currentSoundEffectCount] = null;
-                        Class3_Sub8.anIntArray3083[AudioHandler.currentSoundEffectCount] = var9 + (var10 << 16) + (var11 << 8);
+                        AudioHandler.anIntArray2157[AudioHandler.currentSoundEffectCount] = 0;
+                        AudioHandler.soundEffects[AudioHandler.currentSoundEffectCount] = null;
+                        AudioHandler.soundEffectCoordinates[AudioHandler.currentSoundEffectCount] = var9 + (var10 << 16) + (var11 << 8);
                         if (var2 != 183921384) {
                             aClass33_1238 = null;
                         }
@@ -1027,21 +1025,6 @@ public class Unsorted {
             }
 
             return false;
-        }
-    }
-
-    public static void method2099(int var1, CacheIndex var3, int var5) {
-        try {
-            Class101.aClass153_1423 = var3;
-            Class132.anInt1741 = 0;
-            TextureOperation8.anInt3463 = var1;
-            aBoolean2311 = false;
-            anInt154 = 1;
-            GraphicDefinition.anInt546 = 2;
-
-            TextureOperation36.anInt3423 = var5;
-        } catch (RuntimeException var8) {
-            throw ClientErrorException.clientError(var8, "v.Q(" + true + ',' + var1 + ',' + 0 + ',' + (var3 != null ? "{...}" : "null") + ',' + false + ',' + var5 + ',' + 2 + ')');
         }
     }
 
@@ -1171,7 +1154,7 @@ public class Unsorted {
                     var3.anInt2760 = 0;
                     var3.anInt2773 = 0;
                     var3.anInt2828 = plane;
-                    method1470(var3.anInt2829, var4, 183921384, var3.anInt2819, false, var3.anInt2832);
+                    method1470(var3.zAxis, var4, 183921384, var3.xAxis, false, var3.anInt2832);
                 }
 
                 if (var5 == 2) {
@@ -1186,7 +1169,7 @@ public class Unsorted {
                 var3.anInt2811 = var3.anInt2816;
                 var3.anInt2832 = 0;
                 if (var3.anInt2771 != -1) {
-                    method1470(var3.anInt2829, SequenceDefinition.getAnimationDefinition(var3.anInt2771), dummy + 183921345, var3.anInt2819, false, var3.anInt2832);
+                    method1470(var3.zAxis, SequenceDefinition.getAnimationDefinition(var3.anInt2771), dummy + 183921345, var3.xAxis, false, var3.anInt2832);
                 }
             }
 
@@ -2123,9 +2106,9 @@ public class Unsorted {
                     for (var11 = 0; var11 < 32768; ++var11) {
                         var12 = NPC.npcs[var11];
                         if (null != var12) {
-                            var12.anInt2819 -= 128 * var9;
-                            var12.anInt2829 -= 128 * var10;
-                            if (var12.anInt2819 >= 0 && var12.anInt2819 <= 13184 && var12.anInt2829 >= 0 && var12.anInt2829 <= 13184) {
+                            var12.xAxis -= 128 * var9;
+                            var12.zAxis -= 128 * var10;
+                            if (var12.xAxis >= 0 && var12.xAxis <= 13184 && var12.zAxis >= 0 && var12.zAxis <= 13184) {
                                 for (var13 = 0; 10 > var13; ++var13) {
                                     var12.anIntArray2767[var13] -= var9;
                                     var12.anIntArray2755[var13] -= var10;
@@ -2147,8 +2130,8 @@ public class Unsorted {
                                 var12.anIntArray2755[var13] -= var10;
                             }
 
-                            var12.anInt2819 -= 128 * var9;
-                            var12.anInt2829 -= var10 * 128;
+                            var12.xAxis -= 128 * var9;
+                            var12.zAxis -= var10 * 128;
                         }
                     }
                 }
@@ -2161,8 +2144,8 @@ public class Unsorted {
                             var23.anIntArray2755[var13] -= var10;
                         }
 
-                        var23.anInt2819 -= 128 * var9;
-                        var23.anInt2829 -= 128 * var10;
+                        var23.xAxis -= 128 * var9;
+                        var23.zAxis -= 128 * var10;
                     }
                 }
 
@@ -2869,18 +2852,18 @@ public class Unsorted {
                         var6 += -var1.anInt2307 + var4;
                     }
 
-                    if (0 != var1.anInt2328 && var6 - 64 <= var1.anInt2328 && 0 != Sprites.anInt340 && var2 == var1.anInt2314) {
+                    if (0 != var1.anInt2328 && var6 - 64 <= var1.anInt2328 && 0 != Sprites.ambientVolume && var2 == var1.anInt2314) {
                         var6 -= 64;
                         if (var6 < 0) {
                             var6 = 0;
                         }
 
-                        int var7 = (-var6 + var1.anInt2328) * Sprites.anInt340 / var1.anInt2328;
+                        int var7 = (-var6 + var1.anInt2328) * Sprites.ambientVolume / var1.anInt2328;
                         if (var1.aClass3_Sub24_Sub1_2312 == null) {
                             if (var1.anInt2332 >= 0) {
-                                Class135 var8 = Class135.method1811(CacheIndex.soundFXIndex, var1.anInt2332, 0);
+                                SynthSound var8 = SynthSound.create(CacheIndex.soundFXIndex, var1.anInt2332, 0);
                                 if (null != var8) {
-                                    Class3_Sub12_Sub1 var9 = var8.method1812().method151(Class27.aClass157_524);
+                                    PcmSound var9 = var8.toPCMSound().method151(Class27.resampler);
                                     Class3_Sub24_Sub1 var10 = Class3_Sub24_Sub1.method437(var9, var7);
                                     Objects.requireNonNull(var10).method429(-1);
                                     Class3_Sub26.aClass3_Sub24_Sub2_2563.method457(var10);
@@ -2898,9 +2881,9 @@ public class Unsorted {
                             }
                         } else if (var1.anIntArray2333 != null && ((var1.anInt2316 -= var3) <= 0)) {
                             int var13 = (int) ((double) var1.anIntArray2333.length * Math.random());
-                            Class135 var14 = Class135.method1811(CacheIndex.soundFXIndex, var1.anIntArray2333[var13], 0);
+                            SynthSound var14 = SynthSound.create(CacheIndex.soundFXIndex, var1.anIntArray2333[var13], 0);
                             if (null != var14) {
-                                Class3_Sub12_Sub1 var15 = var14.method1812().method151(Class27.aClass157_524);
+                                PcmSound var15 = var14.toPCMSound().method151(Class27.resampler);
                                 Class3_Sub24_Sub1 var11 = Class3_Sub24_Sub1.method437(var15, var7);
                                 Objects.requireNonNull(var11).method429(0);
                                 Class3_Sub26.aClass3_Sub24_Sub2_2563.method457(var11);
@@ -2952,13 +2935,13 @@ public class Unsorted {
                     }
                 }
 
-                int var18 = var1.anInt2819;
-                int var4 = var1.anInt2829;
+                int var18 = var1.xAxis;
+                int var4 = var1.zAxis;
                 int var5 = var1.anIntArray2767[-1 + var1.anInt2816] * 128 - -(var1.getSize() * 64);
                 int var6 = 128 * var1.anIntArray2755[-1 + var1.anInt2816] - -(var1.getSize() * 64);
                 if (var5 + -var18 > 256 || -var18 + var5 < -256 || var6 - var4 > 256 || -256 > var6 - var4) {
-                    var1.anInt2819 = var5;
-                    var1.anInt2829 = var6;
+                    var1.xAxis = var5;
+                    var1.zAxis = var6;
                     return;
                 }
 
@@ -3077,9 +3060,9 @@ public class Unsorted {
                 if (var2.movement_acceleration != -1) {
                     var9 <<= 7;
                     if (var1.anInt2816 == 1) {
-                        int var13 = (var1.anInt2819 <= var5 ? var5 - var1.anInt2819 : -var5 + var1.anInt2819) << 7;
+                        int var13 = (var1.xAxis <= var5 ? var5 - var1.xAxis : -var5 + var1.xAxis) << 7;
                         int var12 = var1.anInt2758 * var1.anInt2758;
-                        int var14 = (var1.anInt2829 > var6 ? -var6 + var1.anInt2829 : -var1.anInt2829 + var6) << 7;
+                        int var14 = (var1.zAxis > var6 ? -var6 + var1.zAxis : -var1.zAxis + var6) << 7;
                         int var15 = var13 > var14 ? var13 : var14;
                         int var16 = var2.movement_acceleration * 2 * var15;
                         if (var12 <= var16) {
@@ -3116,32 +3099,32 @@ public class Unsorted {
                 }
 
                 if (var5 > var18) {
-                    var1.anInt2819 += var9;
-                    if (var1.anInt2819 > var5) {
-                        var1.anInt2819 = var5;
+                    var1.xAxis += var9;
+                    if (var1.xAxis > var5) {
+                        var1.xAxis = var5;
                     }
                 } else if (var18 > var5) {
-                    var1.anInt2819 -= var9;
-                    if (var1.anInt2819 < var5) {
-                        var1.anInt2819 = var5;
+                    var1.xAxis -= var9;
+                    if (var1.xAxis < var5) {
+                        var1.xAxis = var5;
                     }
                 }
 
                 if (var4 >= var6) {
                     if (var6 < var4) {
-                        var1.anInt2829 -= var9;
-                        if (var6 > var1.anInt2829) {
-                            var1.anInt2829 = var6;
+                        var1.zAxis -= var9;
+                        if (var6 > var1.zAxis) {
+                            var1.zAxis = var6;
                         }
                     }
                 } else {
-                    var1.anInt2829 += var9;
-                    if (var6 < var1.anInt2829) {
-                        var1.anInt2829 = var6;
+                    var1.zAxis += var9;
+                    if (var6 < var1.zAxis) {
+                        var1.zAxis = var6;
                     }
                 }
 
-                if (var5 == var1.anInt2819 && var6 == var1.anInt2829) {
+                if (var5 == var1.xAxis && var6 == var1.zAxis) {
                     --var1.anInt2816;
                     if (0 < var1.anInt2811) {
                         --var1.anInt2811;
@@ -3809,8 +3792,8 @@ public class Unsorted {
                                     var25 = (Class164_Sub2.anInt3020 - -256) * var25 >> 8;
                                     var47 = -(var24 * var20) + var25 * var21 >> 11;
                                     var26 = var21 * var24 - -(var20 * var25) >> 11;
-                                    var28 = Class102.player.anInt2819 + var26 >> 7;
-                                    var29 = -var47 + Class102.player.anInt2829 >> 7;
+                                    var28 = Class102.player.xAxis + var26 >> 7;
+                                    var29 = -var47 + Class102.player.zAxis >> 7;
                                     if (GameObject.aBoolean1837 && 0 != (Class164.anInt2051 & 64)) {
                                         RSInterface var53 = AbstractSprite.method638(BufferedDataStream.anInt872, RSInterface.anInt278);
                                         if (null == var53) {
@@ -4786,14 +4769,14 @@ public class Unsorted {
             KeyboardListener.aBoolean1905 = true;
             WorldListEntry.aBoolean2623 = true;
             RSInterface.aBoolean236 = true;
-            Sprites.anInt340 = 127;
+            Sprites.ambientVolume = 127;
             Class38.aBoolean661 = true;
             Class140_Sub6.aBoolean2910 = true;
             TextureOperation.anInt2378 = 0;
             anInt1137 = 2;
             aBoolean3275 = true;
             Class106.aBoolean1441 = true;
-            anInt120 = 255;
+            AudioHandler.musicVolume = 255;
             Class25.aBoolean488 = true;
             anInt3671 = 0;
             RandomAccessFileWrapper var2 = null;
@@ -5059,7 +5042,7 @@ public class Unsorted {
                 var6 = 128 + Class166.anIntArray2073[4];
              }
 
-             Class140_Sub2.method1952(anInt3155, var1, Class121.method1736(WorldListCountry.localPlane, 1, Class102.player.anInt2819, Class102.player.anInt2829) + -50, Client.ZOOM - -(var6 * 3), var7, anInt942, var6);
+             Class140_Sub2.method1952(anInt3155, var1, Class121.method1736(WorldListCountry.localPlane, 1, Class102.player.xAxis, Class102.player.zAxis) + -50, Client.ZOOM - -(var6 * 3), var7, anInt942, var6);
           }
 
           var7 = Class7.anInt2162;
@@ -5148,7 +5131,7 @@ public class Unsorted {
              HDToolKit.clearScreen(var12);
              ClientErrorException.method2285(Class139.anInt1823, Class77.anInt1111, Class7.anInt2162, NPC.anInt3995, TextureOperation28.anInt3315);
              HDToolKit.anInt1791 = Class44.anInt719;
-             Class3_Sub22.method398(NPC.anInt3995, Class7.anInt2162, Class77.anInt1111, Class139.anInt1823, TextureOperation28.anInt3315, Class158.aByteArrayArrayArray2008, anIntArray686, Class129_Sub1.anIntArray2696, Class159.anIntArray2021, Player.anIntArray3959, SequenceDefinition.anIntArray1871, WorldListCountry.localPlane + 1, var19, Class102.player.anInt2819 >> 7, Class102.player.anInt2829 >> 7);
+             Class3_Sub22.method398(NPC.anInt3995, Class7.anInt2162, Class77.anInt1111, Class139.anInt1823, TextureOperation28.anInt3315, Class158.aByteArrayArrayArray2008, anIntArray686, Class129_Sub1.anIntArray2696, Class159.anIntArray2021, Player.anIntArray3959, SequenceDefinition.anIntArray1871, WorldListCountry.localPlane + 1, var19, Class102.player.xAxis >> 7, Class102.player.zAxis >> 7);
              aBoolean47 = true;
              Class68.method1265();
              ClientErrorException.method2285(0, 0, 0, 0, 0);
@@ -5158,7 +5141,7 @@ public class Unsorted {
              Class163_Sub2_Sub1.method2221(var4, var3, var1, anInt1705, anInt1705, var5);
           } else {
              Toolkit.JAVA_TOOLKIT.method934(var3, var5, var4, var1, 0);
-             Class3_Sub22.method398(NPC.anInt3995, Class7.anInt2162, Class77.anInt1111, Class139.anInt1823, TextureOperation28.anInt3315, Class158.aByteArrayArrayArray2008, anIntArray686, Class129_Sub1.anIntArray2696, Class159.anIntArray2021, Player.anIntArray3959, SequenceDefinition.anIntArray1871, WorldListCountry.localPlane - -1, var19, Class102.player.anInt2819 >> 7, Class102.player.anInt2829 >> 7);
+             Class3_Sub22.method398(NPC.anInt3995, Class7.anInt2162, Class77.anInt1111, Class139.anInt1823, TextureOperation28.anInt3315, Class158.aByteArrayArrayArray2008, anIntArray686, Class129_Sub1.anIntArray2696, Class159.anIntArray2021, Player.anIntArray3959, SequenceDefinition.anIntArray1871, WorldListCountry.localPlane - -1, var19, Class102.player.xAxis >> 7, Class102.player.zAxis >> 7);
              Class58.method1194();
              method1775();
              Texture.method1405(var5, var4, var3, 256, var1, 256, -6403 + -994);

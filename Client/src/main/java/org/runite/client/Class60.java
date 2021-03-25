@@ -7,21 +7,6 @@ final class Class60 {
     static int anInt934;
     static int anInt936;
 
-    static void method1207() {
-        try {
-            for (int var1 = 0; Class163.localNPCCount > var1; ++var1) {
-                int var2 = Class15.localNPCIndexes[var1];
-                NPC var3 = NPC.npcs[var2];
-                if (null != var3) {
-                    Unsorted.method68(var3.definition.size, var3);
-                }
-            }
-
-        } catch (RuntimeException var4) {
-            throw ClientErrorException.clientError(var4, "ig.A(" + -72 + ')');
-        }
-    }
-
     static void method1208(byte var0, int var1) {
         try {
             if (-1 != var1) {

@@ -589,7 +589,7 @@ public final class PacketParser {
                                                                     if (var33 != -1) {
                                                                         var53 = SequenceDefinition.getAnimationDefinition(var33);
                                                                         if (null != var53.frames) {
-                                                                            Unsorted.method1470(var62.anInt2829, var53, 183921384, var62.anInt2819, false, 0);
+                                                                            Unsorted.method1470(var62.zAxis, var53, 183921384, var62.xAxis, false, 0);
                                                                         }
                                                                     }
                                                                 }
@@ -627,7 +627,7 @@ public final class PacketParser {
                                                                     if (var33 != -1) {
                                                                         var53 = SequenceDefinition.getAnimationDefinition(var33);
                                                                         if (null != var53.frames) {
-                                                                            Unsorted.method1470(var60.anInt2829, var53, 183921384, var60.anInt2819, var60 == Class102.player, 0);
+                                                                            Unsorted.method1470(var60.zAxis, var53, 183921384, var60.xAxis, var60 == Class102.player, 0);
                                                                         }
                                                                     }
                                                                 }

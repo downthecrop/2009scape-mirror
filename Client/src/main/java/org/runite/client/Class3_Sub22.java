@@ -19,7 +19,7 @@ final class Class3_Sub22 extends Linkable {
    int anInt2506;
    Class3_Sub24_Sub1 aClass3_Sub24_Sub1_2507;
    int anInt2508;
-   Class3_Sub12_Sub1 aClass3_Sub12_Sub1_2509;
+   PcmSound aPcmSound_2509;
    int anInt2510;
    int anInt2511;
    int anInt2512;
@@ -151,7 +151,7 @@ final class Class3_Sub22 extends Linkable {
    final void method401() {
       try {
          this.aClass166_2504 = null;
-         this.aClass3_Sub12_Sub1_2509 = null;
+         this.aPcmSound_2509 = null;
          this.aClass3_Sub24_Sub1_2507 = null;
          this.aClass3_Sub15_2527 = null;
 

@@ -310,12 +310,12 @@ final class Class3_Sub28_Sub20 extends Node {
                }
 
                if(1 == Class133.anInt1753) {
-                  if((4 & Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][Class102.player.anInt2819 >> 7][Class102.player.anInt2829 >> 7]) != 0) {
-                     Class140_Sub7.method2031((byte)-85, false, Class102.player.anInt2819 >> 7, Class102.player.anInt2829 >> 7, Class75_Sub2.aClass3_Sub2ArrayArrayArray2638, 0);
+                  if((4 & Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][Class102.player.xAxis >> 7][Class102.player.zAxis >> 7]) != 0) {
+                     Class140_Sub7.method2031((byte)-85, false, Class102.player.xAxis >> 7, Class102.player.zAxis >> 7, Class75_Sub2.aClass3_Sub2ArrayArrayArray2638, 0);
                   }
 
                   if(Class139.anInt1823 < 310) {
-                     int var7 = Class102.player.anInt2829 >> 7;
+                     int var7 = Class102.player.zAxis >> 7;
                      var5 = Class77.anInt1111 >> 7;
                      int var9;
                      if(var5 < var7) {
@@ -325,7 +325,7 @@ final class Class3_Sub28_Sub20 extends Node {
                      }
 
                      var4 = NPC.anInt3995 >> 7;
-                     int var6 = Class102.player.anInt2819 >> 7;
+                     int var6 = Class102.player.xAxis >> 7;
                      int var8;
                      if(var4 < var6) {
                         var8 = -var4 + var6;

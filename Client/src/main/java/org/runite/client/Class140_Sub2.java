@@ -44,8 +44,8 @@ final class Class140_Sub2 extends GameObject {
              var0.anInt2806 = 1024;
           }
 
-          var0.anInt2819 += (-var0.anInt2819 + var3) / var2;
-          var0.anInt2829 += (var4 + -var0.anInt2829) / var2;
+          var0.xAxis += (-var0.xAxis + var3) / var2;
+          var0.zAxis += (var4 + -var0.zAxis) / var2;
           if(var0.anInt2840 == 1) {
              var0.anInt2806 = 1536;
           }

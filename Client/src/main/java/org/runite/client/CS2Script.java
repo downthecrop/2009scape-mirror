@@ -998,8 +998,8 @@ public final class CS2Script extends Linkable {
                                                     }
                                                     if (opcode == 3308) {
                                                         int l9 = WorldListCountry.localPlane;
-                                                        int k47 = Class131.anInt1716 + (Class102.player.anInt2819 >> 7);
-                                                        int i68 = (Class102.player.anInt2829 >> 7) - -Texture.anInt1152;
+                                                        int k47 = Class131.anInt1716 + (Class102.player.xAxis >> 7);
+                                                        int i68 = (Class102.player.zAxis >> 7) - -Texture.anInt1152;
                                                         ItemDefinition.intsStack[iStackCounter++] = (l9 << 28) - (-(k47 << 14) - i68);
                                                         continue;
                                                     }
@@ -2674,17 +2674,17 @@ public final class CS2Script extends Linkable {
                                                                                 k35 = 0;
                                                                             if (k35 > 255)
                                                                                 k35 = 255;
-                                                                            if (Unsorted.anInt120 != k35) {
-                                                                                if (Unsorted.anInt120 == 0 && Class129.anInt1691 != -1) {
-                                                                                    Class70.method1285(CacheIndex.musicIndex, Class129.anInt1691, k35);
-                                                                                    Class83.aBoolean1158 = false;
+                                                                            if (AudioHandler.musicVolume != k35) {
+                                                                                if (AudioHandler.musicVolume == 0 && AudioHandler.currentTrack != -1) {
+                                                                                    Class70.method1285(CacheIndex.musicIndex, AudioHandler.currentTrack, k35);
+                                                                                    AudioHandler.musicEffectPlaying = false;
                                                                                 } else if (k35 == 0) {
                                                                                     GameObject.method1870();
-                                                                                    Class83.aBoolean1158 = false;
+                                                                                    AudioHandler.musicEffectPlaying = false;
                                                                                 } else {
                                                                                     LinkableRSString.method736(k35, 115);
                                                                                 }
-                                                                                Unsorted.anInt120 = k35;
+                                                                                AudioHandler.musicVolume = k35;
                                                                             }
                                                                             Class119.method1730(Class38.gameSignlink);
                                                                             aBoolean2705 = false;
@@ -2696,7 +2696,7 @@ public final class CS2Script extends Linkable {
                                                                                 l35 = 0;
                                                                             if (127 < l35)
                                                                                 l35 = 127;
-                                                                            Sprites.anInt340 = l35;
+                                                                            Sprites.ambientVolume = l35;
                                                                             Class119.method1730(Class38.gameSignlink);
                                                                             aBoolean2705 = false;
                                                                             continue;
@@ -2803,11 +2803,11 @@ public final class CS2Script extends Linkable {
                                                                             continue;
                                                                         }
                                                                         if (6119 == opcode) {
-                                                                            ItemDefinition.intsStack[iStackCounter++] = Unsorted.anInt120;
+                                                                            ItemDefinition.intsStack[iStackCounter++] = AudioHandler.musicVolume;
                                                                             continue;
                                                                         }
                                                                         if (opcode == 6120) {
-                                                                            ItemDefinition.intsStack[iStackCounter++] = Sprites.anInt340;
+                                                                            ItemDefinition.intsStack[iStackCounter++] = Sprites.ambientVolume;
                                                                             continue;
                                                                         }
                                                                         if (opcode == 6121) {

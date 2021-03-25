@@ -6,7 +6,6 @@ import org.rs09.client.rendering.Toolkit;
 public final class Class83 {
 
     static int[] anIntArray1161;
-    static boolean aBoolean1158 = false;
     private final CacheIndex aClass153_1153;
     private final HashTable aHashTable_1155 = new HashTable(256);
     private final CacheIndex aClass153_1157;
@@ -333,22 +332,22 @@ public final class Class83 {
         }
     }
 
-    private Class3_Sub12_Sub1 method1412(int[] var1, int var3, int var4) {
+    private PcmSound method1412(int[] var1, int var3, int var4) {
         try {
             int var5 = var4 ^ (var3 >>> 12 | var3 << 4 & '\ufff3');
             var5 |= var3 << 16;
             long var6 = var5;
-            Class3_Sub12_Sub1 var8 = (Class3_Sub12_Sub1) this.aHashTable_1159.get(var6);
+            PcmSound var8 = (PcmSound) this.aHashTable_1159.get(var6);
             if (var8 != null) {
                 return var8;
             } else if (null != var1 && var1[0] <= 0) {
                 return null;
             } else {
-                Class135 var9 = Class135.method1811(this.aClass153_1153, var3, var4);
+                SynthSound var9 = SynthSound.create(this.aClass153_1153, var3, var4);
                 if (null == var9) {
                     return null;
                 } else {
-                    var8 = var9.method1812();
+                    var8 = var9.toPCMSound();
                     this.aHashTable_1159.put(var6, var8);
                     if (var1 != null) {
                         var1[0] -= var8.aByteArray3030.length;
@@ -362,7 +361,7 @@ public final class Class83 {
         }
     }
 
-    final Class3_Sub12_Sub1 method1413(int var1, int[] var3) {
+    final PcmSound method1413(int var1, int[] var3) {
         try {
             if (1 == this.aClass153_1153.method2121()) {
                 return this.method1412(var3, 0, var1);
@@ -377,12 +376,12 @@ public final class Class83 {
         }
     }
 
-    private Class3_Sub12_Sub1 method1415(int var1, int[] var2, int var3) {
+    private PcmSound method1415(int var1, int[] var2, int var3) {
         try {
             int var5 = var3 ^ (var1 >>> 12 | '\ufff3' & var1 << 4);
             var5 |= var1 << 16;
             long var6 = (long) var5 ^ 4294967296L;
-            Class3_Sub12_Sub1 var8 = (Class3_Sub12_Sub1) this.aHashTable_1159.get(var6);
+            PcmSound var8 = (PcmSound) this.aHashTable_1159.get(var6);
             if (null != var8) {
                 return var8;
             } else if (var2 != null && var2[0] <= 0) {
@@ -414,7 +413,7 @@ public final class Class83 {
         }
     }
 
-    final Class3_Sub12_Sub1 method1416(int var2, int[] var3) {
+    final PcmSound method1416(int var2, int[] var3) {
         try {
             if (this.aClass153_1157.method2121() == 1) {
                 return this.method1415(0, var3, var2);

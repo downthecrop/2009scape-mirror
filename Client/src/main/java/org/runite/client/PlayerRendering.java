@@ -377,7 +377,7 @@ public final class PlayerRendering {
                         if (var7 != -1) {
                             SequenceDefinition var24 = SequenceDefinition.getAnimationDefinition(var7);
                             if (var24.frames != null) {
-                                Unsorted.method1470(var3.anInt2829, var24, 183921384, var3.anInt2819, var3 == Class102.player, 0);
+                                Unsorted.method1470(var3.zAxis, var24, 183921384, var3.xAxis, var3 == Class102.player, 0);
                             }
                         }
                     }
@@ -407,7 +407,7 @@ public final class PlayerRendering {
                     var3.anInt2776 = 1;
                     var3.anInt2832 = 0;
                     var3.anInt2773 = 0;
-                    Unsorted.method1470(var3.anInt2829, var4, 183921384, var3.anInt2819, Class102.player == var3, var3.anInt2832);
+                    Unsorted.method1470(var3.zAxis, var4, 183921384, var3.xAxis, Class102.player == var3, var3.anInt2832);
                 }
 
                 if (var5 == 2) {
@@ -422,7 +422,7 @@ public final class PlayerRendering {
                 var3.anInt2760 = 0;
                 var3.anInt2771 = var2;
                 if (var3.anInt2771 != -1) {
-                    Unsorted.method1470(var3.anInt2829, SequenceDefinition.getAnimationDefinition(var3.anInt2771), 183921384, var3.anInt2819, var3 == Class102.player, var3.anInt2832);
+                    Unsorted.method1470(var3.zAxis, SequenceDefinition.getAnimationDefinition(var3.anInt2771), 183921384, var3.xAxis, var3 == Class102.player, var3.anInt2832);
                 }
             }
 
@@ -482,6 +482,27 @@ public final class PlayerRendering {
             }
         } catch (RuntimeException var8) {
             throw ClientErrorException.clientError(var8, "bg.G(" + (byte) 81 + ')');
+        }
+    }
+
+    static void updatePlayerAreaArray() {
+        try {
+            for (int var1 = -1; Class159.localPlayerCount > var1; ++var1) {
+                int var2;
+                if (var1 == -1) {
+                    var2 = 2047;
+                } else {
+                    var2 = Class56.localPlayerIndexes[var1];
+                }
+
+                Player var3 = Unsorted.players[var2];
+                if (var3 != null) {
+                    Unsorted.method68(var3.getSize(), var3);
+                }
+            }
+
+        } catch (RuntimeException var4) {
+            throw ClientErrorException.clientError(var4, "fk.G(" + -102 + ')');
         }
     }
 }

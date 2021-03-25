@@ -105,15 +105,4 @@ final class Class115 {
             throw ClientErrorException.clientError(var19, "ph.A(" + (byte) -91 + ')');
         }
     }
-
-//   static void method1714() {
-//      try {
-//         KeyboardListener.aReferenceCache_1911.clearSoftReferences();
-//
-//          Unsorted.aReferenceCache_1131.clearSoftReferences();
-//      } catch (RuntimeException var2) {
-//         throw ClientErrorException.clientError(var2, "ph.C(" + (byte) -6 + ')');
-//      }
-//   }
-
 }

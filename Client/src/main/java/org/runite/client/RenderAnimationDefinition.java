@@ -73,13 +73,13 @@ final class RenderAnimationDefinition {
                         var0.anInt2802 = 1;
                         ++var0.anInt2813;
                         ++var0.anInt2793;
-                        Unsorted.method1470(var0.anInt2829, var2, 183921384, var0.anInt2819, var0 == Class102.player, var0.anInt2813);
+                        Unsorted.method1470(var0.zAxis, var2, 183921384, var0.xAxis, var0 == Class102.player, var0.anInt2813);
                     }
 
                     if (var2.frames.length <= var0.anInt2813) {
                         var0.anInt2813 = 0;
                         var0.anInt2802 = 0;
-                        Unsorted.method1470(var0.anInt2829, var2, 183921384, var0.anInt2819, Class102.player == var0, var0.anInt2813);
+                        Unsorted.method1470(var0.zAxis, var2, 183921384, var0.xAxis, Class102.player == var0, var0.anInt2813);
                     }
 
                     var0.anInt2793 = var0.anInt2813 - -1;
@@ -101,14 +101,14 @@ final class RenderAnimationDefinition {
                     } else {
                         if (0 > var0.anInt2805) {
                             var0.anInt2805 = 0;
-                            Unsorted.method1470(var0.anInt2829, var3, 183921384, var0.anInt2819, Class102.player == var0, 0);
+                            Unsorted.method1470(var0.zAxis, var3, 183921384, var0.xAxis, Class102.player == var0, 0);
                         }
 
                         ++var0.anInt2761;
                         if (var0.anInt2805 < var3.frames.length && var0.anInt2761 > var3.duration[var0.anInt2805]) {
                             ++var0.anInt2805;
                             var0.anInt2761 = 1;
-                            Unsorted.method1470(var0.anInt2829, var3, var1 ^ -183911469, var0.anInt2819, Class102.player == var0, var0.anInt2805);
+                            Unsorted.method1470(var0.zAxis, var3, var1 ^ -183911469, var0.xAxis, Class102.player == var0, var0.anInt2805);
                         }
 
                         if (var0.anInt2805 >= var3.frames.length) {
@@ -141,7 +141,7 @@ final class RenderAnimationDefinition {
                         if (var2.frames.length > var0.anInt2832 && var0.anInt2760 > var2.duration[var0.anInt2832]) {
                             var0.anInt2760 = 1;
                             ++var0.anInt2832;
-                            Unsorted.method1470(var0.anInt2829, var2, 183921384, var0.anInt2819, var0 == Class102.player, var0.anInt2832);
+                            Unsorted.method1470(var0.zAxis, var2, 183921384, var0.xAxis, var0 == Class102.player, var0.anInt2832);
                         }
 
                         if (var2.frames.length <= var0.anInt2832) {
@@ -149,7 +149,7 @@ final class RenderAnimationDefinition {
                             ++var0.anInt2773;
                             if (var2.maxLoops > var0.anInt2773) {
                                 if (var0.anInt2832 >= 0 && var0.anInt2832 < var2.frames.length) {
-                                    Unsorted.method1470(var0.anInt2829, var2, var1 ^ -183911469, var0.anInt2819, Class102.player == var0, var0.anInt2832);
+                                    Unsorted.method1470(var0.zAxis, var2, var1 ^ -183911469, var0.xAxis, Class102.player == var0, var0.anInt2832);
                                 } else {
                                     var0.anInt2771 = -1;
                                 }
@@ -190,7 +190,7 @@ final class RenderAnimationDefinition {
                                 if (var7.anInt1893 < var4.frames.length && var7.anInt1897 > var4.duration[var7.anInt1893]) {
                                     ++var7.anInt1893;
                                     var7.anInt1897 = 1;
-                                    Unsorted.method1470(var0.anInt2829, var4, 183921384, var0.anInt2819, var0 == Class102.player, var7.anInt1893);
+                                    Unsorted.method1470(var0.zAxis, var4, 183921384, var0.xAxis, var0 == Class102.player, var7.anInt1893);
                                 }
 
                                 if (var7.anInt1893 >= var4.frames.length) {
@@ -198,7 +198,7 @@ final class RenderAnimationDefinition {
                                     var7.anInt1893 -= var4.anInt1865;
                                     if (var4.maxLoops > var7.anInt1894) {
                                         if (var7.anInt1893 >= 0 && var4.frames.length > var7.anInt1893) {
-                                            Unsorted.method1470(var0.anInt2829, var4, 183921384, var0.anInt2819, Class102.player == var0, var7.anInt1893);
+                                            Unsorted.method1470(var0.zAxis, var4, 183921384, var0.xAxis, Class102.player == var0, var7.anInt1893);
                                         } else {
                                             var0.aClass145Array2809[var6] = null;
                                         }

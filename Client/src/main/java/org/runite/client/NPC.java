@@ -133,7 +133,7 @@ public final class NPC extends Class140_Sub4 {
                             var12.anInt1891 = 1;
                             var12.anInt1897 = 0;
                             var12.anInt1900 = var8;
-                            Unsorted.method1470(var2.anInt2829, var10, 183921384, var2.anInt2819, false, 0);
+                            Unsorted.method1470(var2.zAxis, var10, 183921384, var2.xAxis, false, 0);
                          } else if(var11 == 2) {
                             var12.anInt1894 = 0;
                          }
@@ -147,7 +147,7 @@ public final class NPC extends Class140_Sub4 {
                          var12.animationId = var6;
                          var12.anInt1894 = 0;
                          var12.anInt1893 = 0;
-                         Unsorted.method1470(var2.anInt2829, var10, 183921384, var2.anInt2819, false, 0);
+                         Unsorted.method1470(var2.zAxis, var10, 183921384, var2.xAxis, false, 0);
                       }
                    }
                 }
@@ -189,7 +189,7 @@ public final class NPC extends Class140_Sub4 {
 
                     Model var17;
                     if (Class140_Sub6.aBoolean2910 && Objects.requireNonNull(var16).aBoolean1249) {
-                        var17 = Class140_Sub3.method1957(this.definition.aByte1287, this.aBoolean2810, null == var14 ? var13 : var14, this.anInt2819, this.definition.aShort1256, this.anInt2829, this.definition.aShort1286, this.definition.size, var15, var1, null != var14 ? this.anInt2813 : this.anInt2832, this.anInt2831, this.definition.aByte1275);
+                        var17 = Class140_Sub3.method1957(this.definition.aByte1287, this.aBoolean2810, null == var14 ? var13 : var14, this.xAxis, this.definition.aShort1256, this.zAxis, this.definition.aShort1286, this.definition.size, var15, var1, null != var14 ? this.anInt2813 : this.anInt2832, this.anInt2831, this.definition.aByte1275);
                         if (HDToolKit.highDetail) {
                             float var18 = HDToolKit.method1852();
                             float var19 = HDToolKit.method1839();

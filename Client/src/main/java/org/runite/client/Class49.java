@@ -274,7 +274,7 @@ public final class Class49 {
                     }
                 }
 
-                LinkedList.method1214(Class106.anInt1446, Class102.player.anInt2819, Class102.player.anInt2829, WorldListCountry.localPlane);
+                LinkedList.method1214(Class106.anInt1446, Class102.player.xAxis, Class102.player.zAxis, WorldListCountry.localPlane);
                 Class106.anInt1446 = 0;
             }
         } catch (RuntimeException var3) {

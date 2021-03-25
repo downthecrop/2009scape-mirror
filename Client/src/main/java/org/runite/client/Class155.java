@@ -99,7 +99,7 @@ class Class155 {
                         Class3_Sub24 var11 = this.aClass3_Sub24Array1980[var7];
 
                         while (var11 != null) {
-                            Class3_Sub12 var12 = var11.aClass3_Sub12_2544;
+                            Sound var12 = var11.aSound_2544;
                             if (var12 != null && var12.anInt2374 > var8) {
                                 var5 |= 1 << var7;
                                 var10 = var11;

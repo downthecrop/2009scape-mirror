@@ -264,7 +264,7 @@ public final class NPCRendering {
                            if (var8 != -1) {
                                SequenceDefinition var9 = SequenceDefinition.getAnimationDefinition(var8);
                                if (var9.frames != null) {
-                                   Unsorted.method1470(npc.anInt2829, var9, 183921384, npc.anInt2819, false, 0);
+                                   Unsorted.method1470(npc.zAxis, var9, 183921384, npc.xAxis, false, 0);
                                }
                            }
                        }
@@ -323,4 +323,19 @@ public final class NPCRendering {
            throw ClientErrorException.clientError(var11, "ta.M(" + ')');
        }
    }
+
+    static void updateNPCAreaArray() {
+        try {
+            for (int var1 = 0; Class163.localNPCCount > var1; ++var1) {
+                int var2 = Class15.localNPCIndexes[var1];
+                NPC var3 = NPC.npcs[var2];
+                if (null != var3) {
+                    Unsorted.method68(var3.definition.size, var3);
+                }
+            }
+
+        } catch (RuntimeException var4) {
+            throw ClientErrorException.clientError(var4, "ig.A(" + -72 + ')');
+        }
+    }
 }
