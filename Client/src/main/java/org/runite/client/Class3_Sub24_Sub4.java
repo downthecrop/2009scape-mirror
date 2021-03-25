@@ -165,7 +165,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
       try {
 
          if(var3.anInt318 == 1) {
-            method1177(-1, 0L, (byte)-78, TextCore.emptyJagexString, 0, (short)8, var3.aClass94_289, var3.componentHash);
+            method1177(-1, 0L, (byte)-78, RSString.parse(""), 0, (short)8, var3.aClass94_289, var3.componentHash);
          }
 
          RSString var4;
@@ -177,19 +177,19 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
          }
 
          if(var3.anInt318 == 3) {
-            method1177(-1, 0L, (byte)-59, TextCore.emptyJagexString, 0, (short)28, TextCore.HasClose, var3.componentHash);
+            method1177(-1, 0L, (byte)-59, RSString.parse(""), 0, (short)28, TextCore.HasClose, var3.componentHash);
          }
 
          if(var3.anInt318 == 4) {
-            method1177(-1, 0L, (byte)-71, TextCore.emptyJagexString, 0, (short)59, var3.aClass94_289, var3.componentHash);
+            method1177(-1, 0L, (byte)-71, RSString.parse(""), 0, (short)59, var3.aClass94_289, var3.componentHash);
          }
 
          if(var3.anInt318 == 5) {
-            method1177(-1, 0L, (byte)-92, TextCore.emptyJagexString, 0, (short)51, var3.aClass94_289, var3.componentHash);
+            method1177(-1, 0L, (byte)-92, RSString.parse(""), 0, (short)51, var3.aClass94_289, var3.componentHash);
          }
 
          if(var3.anInt318 == 6 && TextureOperation27.aClass11_3087 == null) {
-            method1177(-1, 0L, (byte)-100, TextCore.emptyJagexString, -1, (short)41, var3.aClass94_289, var3.componentHash);
+            method1177(-1, 0L, (byte)-100, RSString.parse(""), -1, (short)41, var3.aClass94_289, var3.componentHash);
          }
 
          int var5;
@@ -342,7 +342,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                }
 
                if(Client.method44(var3).method95()) {
-                  method1177(-1, 0L, (byte)-74, TextCore.emptyJagexString, var3.anInt191, (short)41, TextCore.HasContinue, var3.componentHash);
+                  method1177(-1, 0L, (byte)-74, RSString.parse(""), var3.anInt191, (short)41, TextCore.HasContinue, var3.componentHash);
                }
             }
          }

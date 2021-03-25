@@ -53,7 +53,7 @@ final class Class3_Sub28_Sub8 extends Node {
             return -1;
          } else {
             for (int var2 = 0; var2 < Class119.aClass131_1624.anInt1720; ++var2) {
-               if (Class119.aClass131_1624.aClass94Array1721[var2].method1560(TextCore.aClass94_3192, TextCore.aClass94_4066).equalsString(var0)) {
+               if (Class119.aClass131_1624.aClass94Array1721[var2].method1560(RSString.parse(" "), TextCore.aClass94_4066).equalsString(var0)) {
                   return var2;
                }
             }

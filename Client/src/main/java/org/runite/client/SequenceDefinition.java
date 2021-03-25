@@ -496,15 +496,15 @@ public final class SequenceDefinition {
 				NPCDefinition.anIntArray1277[var1] = -1;
 			}
 
-			if(Class3_Sub28_Sub12.anInt3655 != -1) {
-				Class60.method1208((byte)-128, Class3_Sub28_Sub12.anInt3655);
+			if(ConfigInventoryDefinition.anInt3655 != -1) {
+				Class60.method1208((byte)-128, ConfigInventoryDefinition.anInt3655);
 			}
 
 			for(Class3_Sub31 var7 = TextureOperation23.aHashTable_3208.first(); var7 != null; var7 = TextureOperation23.aHashTable_3208.next()) {
 				TextureOperation19.method254(true, var7);
 			}
 
-			Class3_Sub28_Sub12.anInt3655 = -1;
+			ConfigInventoryDefinition.anInt3655 = -1;
 			TextureOperation23.aHashTable_3208 = new HashTable(8);
 			Class3_Sub7.method122(-113);
 			TextureOperation27.aClass11_3087 = null;

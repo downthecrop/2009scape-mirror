@@ -68,7 +68,7 @@ final class Class166 {
             }
 
             if (!var4) {
-                BufferedDataStream.addChatMessage(TextCore.emptyJagexString, 0, RSString.stringCombiner(new RSString[]{TextCore.HasUnableFind, var3}), -1);
+                BufferedDataStream.addChatMessage(RSString.parse(""), 0, RSString.stringCombiner(new RSString[]{TextCore.HasUnableFind, var3}), -1);
             }
 
         } catch (RuntimeException var7) {

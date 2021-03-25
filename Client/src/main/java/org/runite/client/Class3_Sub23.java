@@ -51,7 +51,7 @@ final class Class3_Sub23 extends Linkable {
          RSString var6 = Unsorted.emptyString(0);
          if(var3 < 0) {
             var3 = -var3;
-            Objects.requireNonNull(var6).append(TextCore.aClass94_3133);
+            Objects.requireNonNull(var6).append(RSString.parse(")2"));
          }
 
          RSString var8 = TextCore.aClass94_1880;
@@ -82,7 +82,7 @@ final class Class3_Sub23 extends Linkable {
          var11 = 0;
          RSString var9;
          if(var3 == 0L) {
-            var9 = TextCore.aClass94_3039;
+            var9 = RSString.parse("0");
          } else {
             RSString var12;
             for(var12 = Unsorted.emptyString(0); var3 > 0L; var3 /= 10L) {

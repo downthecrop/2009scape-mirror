@@ -1567,7 +1567,7 @@ public class Unsorted {
 
                     Class3_Sub15.aBoolean2427 = var1 >= 2;
 
-                    if (-1 != Class3_Sub28_Sub12.anInt3655) {
+                    if (-1 != ConfigInventoryDefinition.anInt3655) {
                         Class124.method1746(true, (byte) -107);
                     }
 
@@ -2272,7 +2272,7 @@ public class Unsorted {
 
     public static RSString method1303(RSInterface var0, RSString var1) {
         try {
-            if (var1.indexOf(TextCore.aClass94_468, 102) == -1) {
+            if (var1.indexOf(RSString.parse("(U"), 102) == -1) {
                 return var1;
             } else {
                 while (true) {
@@ -2296,7 +2296,7 @@ public class Unsorted {
                                                                 return var1;
                                                             }
 
-                                                            RSString var4 = TextCore.emptyJagexString;
+                                                            RSString var4 = RSString.parse("");
                                                             if (null != Class136.aClass64_1778) {
                                                                 var4 = Class108.method1653(Class136.aClass64_1778.anInt979);
 
@@ -2503,20 +2503,6 @@ public class Unsorted {
         } catch (RuntimeException var10) {
             throw ClientErrorException.clientError(var10, "u.A(" + (var0 != null ? "{...}" : "null") + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ')');
         }
-    }
-
-    public static Class3_Sub28_Sub12 method2069(int var0) {
-        Class3_Sub28_Sub12 var2 = (Class3_Sub28_Sub12) Class49.aClass47_818.get(var0);
-        if (null == var2) {
-            byte[] var3 = Class8.aClass153_105.getFile(5, var0);
-            var2 = new Class3_Sub28_Sub12();
-            if (var3 != null) {
-                var2.decode(new DataBuffer(var3));
-            }
-
-            Class49.aClass47_818.put(var0, var2);
-        }
-        return var2;
     }
 
     static void method56(int var0) {
@@ -3838,10 +3824,10 @@ public class Unsorted {
                                     }
 
                                     if (Class158.paramGameTypeID == 1) {
-                                        Class3_Sub24_Sub4.method1177(-1, 1L, (byte) -41, TextCore.emptyJagexString, var28, (short) 36, TextCore.HasFaceHere, var29);
+                                        Class3_Sub24_Sub4.method1177(-1, 1L, (byte) -41, RSString.parse(""), var28, (short) 36, TextCore.HasFaceHere, var29);
                                     }
 
-                                    Class3_Sub24_Sub4.method1177(-1, 1L, (byte) -125, TextCore.emptyJagexString, var28, (short) 60, TextureOperation32.aClass94_3353, var29);
+                                    Class3_Sub24_Sub4.method1177(-1, 1L, (byte) -125, RSString.parse(""), var28, (short) 60, TextureOperation32.aClass94_3353, var29);
                                     continue;
                                 }
 
@@ -3898,7 +3884,7 @@ public class Unsorted {
                                     if (ClientCommands.fpsOverlayEnabled) {
                                         var20 = var11.width + var13;
                                         var21 = 15 + var14;
-                                        FontType.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_3196, RSString.stringAnimator(SequenceDefinition.anInt1862)}), var20, var21, 16776960, -1);//Class72.stringAnimator(SequenceDefinition.anInt1862)}), var20, var21, 16776960, -1);
+                                        FontType.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{RSString.parse("Fps:"), RSString.stringAnimator(SequenceDefinition.anInt1862)}), var20, var21, 16776960, -1);//Class72.stringAnimator(SequenceDefinition.anInt1862)}), var20, var21, 16776960, -1);
                                         var21 += 15;
                                         Runtime var57 = Runtime.getRuntime();
                                         var23 = (int) ((var57.totalMemory() + -var57.freeMemory()) / 1024L);
@@ -3933,7 +3919,7 @@ public class Unsorted {
 
                                         var29 = 10000 * var26 / var25;
                                         var28 = var47 * 100 / var25;
-                                        RSString var55 = RSString.stringCombiner(new RSString[]{TextCore.aClass94_436, Class3_Sub23.method407(0, true, 2, var29), TextCore.aClass94_2498, RSString.stringAnimator(var28), TextCore.aClass94_148});
+                                        RSString var55 = RSString.stringCombiner(new RSString[]{TextCore.aClass94_436, Class3_Sub23.method407(0, true, 2, var29), TextCore.aClass94_2498, RSString.stringAnimator(var28), RSString.parse("(U(Y")});
                                         FontType.smallFont.drawStringRightAnchor(var55, var20, var21, var24, -1);
                                         aBooleanArray3674[var12] = true;
                                         Class163_Sub1_Sub1.aBooleanArray4008[var12] = true;
@@ -3994,7 +3980,7 @@ public class Unsorted {
                                     menuOptionCount = 1;
                                     Class114.anIntArray1578[0] = Class3_Sub28_Sub5.anInt3590;
                                     Class140_Sub7.aClass94Array2935[0] = TextCore.HasCancel;
-                                    Class163_Sub2_Sub1.aClass94Array4016[0] = TextCore.emptyJagexString;
+                                    Class163_Sub2_Sub1.aClass94Array4016[0] = RSString.parse("");
                                     TextureOperation27.aShortArray3095[0] = 1005;
                                 }
 
@@ -4030,7 +4016,7 @@ public class Unsorted {
                                         menuOptionCount = 1;
                                         Class114.anIntArray1578[0] = Class3_Sub28_Sub5.anInt3590;
                                         TextureOperation27.aShortArray3095[0] = 1005;
-                                        Class163_Sub2_Sub1.aClass94Array4016[0] = TextCore.emptyJagexString;
+                                        Class163_Sub2_Sub1.aClass94Array4016[0] = RSString.parse("");
                                     }
 
                                     TextureOperation12.method171(-101, var36.anInt2602, var16, var18, var13, var12, var19, var17, var14);
@@ -4163,7 +4149,7 @@ public class Unsorted {
                                             }
                                         }
                                     } else if (3 == var11.type) {
-                                        if (Class3_Sub28_Sub12.method609(var11, 26)) {
+                                        if (method609(var11, 26)) {
                                             var20 = var11.anInt253;
                                             if (Class107.aClass11_1453 == var11 && 0 != var11.anInt222) {
                                                 var20 = var11.anInt222;
@@ -4233,7 +4219,7 @@ public class Unsorted {
                                             var34 = var11.method868(Sprites.nameIconsSpriteArray);
                                             if (var34 != null) {
                                                 RSString var45 = var11.text;
-                                                if (Class3_Sub28_Sub12.method609(var11, 97)) {
+                                                if (method609(var11, 97)) {
                                                     var21 = var11.anInt253;
                                                     if (Class107.aClass11_1453 == var11 && var11.anInt222 != 0) {
                                                         var21 = var11.anInt222;
@@ -4368,7 +4354,7 @@ public class Unsorted {
                                                     }
                                                 }
                                             } else {
-                                                var37 = var11.method866(Class3_Sub28_Sub12.method609(var11, 69));
+                                                var37 = var11.method866(method609(var11, 69));
                                                 if (null != var37) {
                                                     var37.drawAt(var13, var14);
                                                 } else if (RSInterface.aBoolean6) {
@@ -4378,7 +4364,7 @@ public class Unsorted {
                                         } else {
                                             ItemDefinition var42;
                                             if (var11.type == 6) {
-                                                boolean var41 = Class3_Sub28_Sub12.method609(var11, 110);
+                                                boolean var41 = method609(var11, 110);
                                                 Model var38 = null;
                                                 if (var41) {
                                                     var21 = var11.secondAnimationId;
@@ -4544,7 +4530,7 @@ public class Unsorted {
                                                         var25 = var43.indexOf(TextCore.aClass94_2598, 62);
                                                         if (var25 == -1) {
                                                             var44 = var43;
-                                                            var43 = TextCore.emptyJagexString;
+                                                            var43 = RSString.parse("");
                                                         } else {
                                                             var44 = var43.substring(0, var25, 0);
                                                             var43 = var43.substring(var25 + 4);
@@ -4583,7 +4569,7 @@ public class Unsorted {
                                                         var28 = var43.indexOf(TextCore.aClass94_2598, 86);
                                                         if (var28 == -1) {
                                                             var44 = var43;
-                                                            var43 = TextCore.emptyJagexString;
+                                                            var43 = RSString.parse("");
                                                         } else {
                                                             var44 = var43.substring(0, var28, 0);
                                                             var43 = var43.substring(4 + var28);
@@ -4790,7 +4776,7 @@ public class Unsorted {
         }
     }
 
-    public static void method564(Signlink var0) {
+    public static void parsePreferences(Signlink var0) {
         try {
             anInt3625 = 3;
             Class25.method957(true);
@@ -5027,7 +5013,7 @@ public class Unsorted {
                 return -1;
             } else {
                 for (int var2 = 0; var2 < Class119.aClass131_1624.anInt1720; ++var2) {
-                    if (Class119.aClass131_1624.aClass94Array1721[var2].method1560(TextCore.aClass94_3192, TextCore.aClass94_4066).method1562((byte) -32, var1)) {
+                    if (Class119.aClass131_1624.aClass94Array1721[var2].method1560(RSString.parse(" "), TextCore.aClass94_4066).method1562((byte) -32, var1)) {
                         return var2;
                     }
                 }
@@ -5205,5 +5191,38 @@ public class Unsorted {
        } catch (RuntimeException var15) {
           throw ClientErrorException.clientError(var15, "ui.OA(" + -6403 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ')');
        }
+    }
+
+    static boolean method609(RSInterface var0, int var1) {
+        if (null == var0.anIntArray275) {
+            return false;
+        } else {
+            int var2 = 0;
+            if (var1 <= 20) {
+                TextCore.COMMAND_MEMORY_MANAGEMENT = null;
+            }
+
+            for (; var0.anIntArray275.length > var2; ++var2) {
+                int var3 = Class164_Sub2.method2247((byte) 119, var2, var0);
+                int var4 = var0.anIntArray307[var2];
+                if (var0.anIntArray275[var2] != 2) {
+                    if (var0.anIntArray275[var2] != 3) {
+                        if (4 == var0.anIntArray275[var2]) {
+                            if (var4 == var3) {
+                                return false;
+                            }
+                        } else if (var3 != var4) {
+                            return false;
+                        }
+                    } else if (var3 <= var4) {
+                        return false;
+                    }
+                } else if (var3 >= var4) {
+                    return false;
+                }
+            }
+
+            return true;
+        }
     }
 }

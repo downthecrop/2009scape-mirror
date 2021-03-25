@@ -120,8 +120,8 @@ public final class Class21 {
             }
 
             TextureOperation24.method226(interfaceId);
-            if (Class3_Sub28_Sub12.anInt3655 != -1) {
-                Class3_Sub8.method124(6422 ^ 6509, 1, Class3_Sub28_Sub12.anInt3655);
+            if (ConfigInventoryDefinition.anInt3655 != -1) {
+                Class3_Sub8.method124(6422 ^ 6509, 1, ConfigInventoryDefinition.anInt3655);
             }
 
         } catch (RuntimeException var10) {

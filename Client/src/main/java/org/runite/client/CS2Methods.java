@@ -5,7 +5,7 @@ public class CS2Methods {
         try {
 
             int var2 = Unsorted.method1602(var0);
-            return var2 != -1 ? Class119.aClass131_1624.aClass94Array1721[var2].method1560(TextCore.aClass94_3192, TextCore.aClass94_4066) : TextCore.aClass94_4049;
+            return var2 != -1 ? Class119.aClass131_1624.aClass94Array1721[var2].method1560(RSString.parse(" "), TextCore.aClass94_4066) : TextCore.aClass94_4049;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "rc.V(" + (var0 != null ? "{...}" : "null") + ',' + true + ')');
         }

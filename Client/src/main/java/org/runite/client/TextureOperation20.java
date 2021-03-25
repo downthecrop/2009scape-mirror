@@ -658,8 +658,8 @@ final class TextureOperation20 extends TextureOperation {
                      }
 
                      Class3_Sub28_Sub3.aClass11_3551 = null;
-                     if(Class3_Sub28_Sub12.anInt3655 != -1) {
-                        GraphicDefinition.method967(0, 0, 0, Class23.canvasWidth, Class3_Sub28_Sub12.anInt3655, 0, Class140_Sub7.canvasHeight);
+                     if(ConfigInventoryDefinition.anInt3655 != -1) {
+                        GraphicDefinition.method967(0, 0, 0, Class23.canvasWidth, ConfigInventoryDefinition.anInt3655, 0, Class140_Sub7.canvasHeight);
                      }
 
                      ++PacketParser.anInt3213;

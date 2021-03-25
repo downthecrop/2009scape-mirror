@@ -127,10 +127,10 @@ final class Class36 {
                 return null;
             } else {
                 for (int var3 = Objects.requireNonNull(var2).length() + -3; var3 > 0; var3 -= 3) {
-                    var2 = RSString.stringCombiner(new RSString[]{var2.substring(0, var3, 0), TextCore.aClass94_3268, var2.substring(var3)});
+                    var2 = RSString.stringCombiner(new RSString[]{var2.substring(0, var3, 0), RSString.parse(")1"), var2.substring(var3)});
                 }
 
-                return var2.length() > 9 ? RSString.stringCombiner(new RSString[]{ColorCore.MillionStackColor, var2.substring(0, -8 + var2.length(), 0), TextCore.MillionM, TextCore.LEFT_PARENTHESES, var2, TextCore.aClass94_995}) : (6 < var2.length() ? RSString.stringCombiner(new RSString[]{ColorCore.ThousandStackColor, var2.substring(0, -4 + var2.length(), 0), TextCore.ThousandK, TextCore.LEFT_PARENTHESES, var2, TextCore.aClass94_995}) : RSString.stringCombiner(new RSString[]{ColorCore.DefaultStackColor, var2, TextCore.aClass94_2584}));
+                return var2.length() > 9 ? RSString.stringCombiner(new RSString[]{ColorCore.MillionStackColor, var2.substring(0, -8 + var2.length(), 0), TextCore.MillionM, TextCore.LEFT_PARENTHESES, var2, RSString.parse("(Y<)4col>")}) : (6 < var2.length() ? RSString.stringCombiner(new RSString[]{ColorCore.ThousandStackColor, var2.substring(0, -4 + var2.length(), 0), TextCore.ThousandK, TextCore.LEFT_PARENTHESES, var2, RSString.parse("(Y<)4col>")}) : RSString.stringCombiner(new RSString[]{ColorCore.DefaultStackColor, var2, TextCore.aClass94_2584}));
             }
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "fi.D(" + var0 + ',' + var1 + ')');

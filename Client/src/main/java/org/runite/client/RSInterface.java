@@ -247,7 +247,7 @@ public final class RSInterface {
         try {
 
             RSString var1 = TextCore.aClass94_4052;
-            RSString var2 = TextCore.emptyJagexString;
+            RSString var2 = RSString.parse("");
             if (Class44.paramModeWhere != 0) {
                 var1 = RSString.parse("www)2wtqa");
             }

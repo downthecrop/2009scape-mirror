@@ -124,7 +124,7 @@ public final class Class49 {
                 }
             }
 
-            return Class3_Sub28_Sub12.method612(var1);
+            return Class3_Sub28_Sub4.method612(var1);
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "ha.H(" + (var0 != null ? "{...}" : "null") + ',' + var1 + ',' + var3 + ',' + false + ')');
         }
@@ -199,13 +199,13 @@ public final class Class49 {
 
                 Unsorted.menuOptionCount = 1;
                 Class140_Sub7.aClass94Array2935[0] = TextCore.HasCancel;
-                Class163_Sub2_Sub1.aClass94Array4016[0] = TextCore.emptyJagexString;
+                Class163_Sub2_Sub1.aClass94Array4016[0] = RSString.parse("");
                 TextureOperation27.aShortArray3095[0] = 1005;
                 Class114.anIntArray1578[0] = Class3_Sub28_Sub5.anInt3590;
             }
 
-            if (Class3_Sub28_Sub12.anInt3655 != -1) {
-                Class52.method1160(-113, Class3_Sub28_Sub12.anInt3655);
+            if (ConfigInventoryDefinition.anInt3655 != -1) {
+                Class52.method1160(-113, ConfigInventoryDefinition.anInt3655);
             }
 
             if (var0 == 0) {
@@ -228,7 +228,7 @@ public final class Class49 {
                 }
 
                 Class3_Sub23.anInt2535 = Class44.anInt719;
-                if (Class3_Sub28_Sub12.anInt3655 != -1) {
+                if (ConfigInventoryDefinition.anInt3655 != -1) {
                     Class3_Sub28_Sub3.anInt3557 = 0;
                     Class8.method841();
                 }

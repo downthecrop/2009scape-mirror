@@ -18,6 +18,10 @@ final class Class3_Sub28_Sub4 extends Node {
    static ReferenceCache aReferenceCache_3572 = new ReferenceCache(64);
    static Class83 aClass83_3579;
 
+   static RSString method612(long var0) {
+       return TextureOperation9.method207(10, false, 116, var0);
+   }
+
    final void method545(DataBuffer var1, int[] var2) {
       try {
          if(this.anIntArray3566 != null) {

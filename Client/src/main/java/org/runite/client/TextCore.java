@@ -132,7 +132,6 @@ public class TextCore {
     static RSString MillionM = RSString.parse("M");
     static RSString HasDuelFriend = RSString.parse(":duelfriend:");
     static RSString HasDuelStake = RSString.parse(":duelstake:");
-    static RSString HasTradeRequest = RSString.parse(":tradereq:");
     static RSString HasTrade = RSString.parse(":trade:");
     static RSString HasAssist = RSString.parse(":assist:");
     static RSString HasAssistRequest = RSString.parse(":assistreq:");
@@ -250,32 +249,6 @@ public class TextCore {
      * Unsorted
      */
     static RSString Spacer = RSString.parse(" ");
-    static RSString aClass94_946 = RSString.parse(")2");
-    static RSString aClass94_995 = RSString.parse("(Y<)4col>");
-    static RSString aClass94_1645 = RSString.parse("Hidden)2");
-    static RSString char_colon = RSString.parse(":");
-    static RSString aClass94_148 = RSString.parse("(U(Y");
-    static RSString aClass94_465 = RSString.parse(" ");
-    static RSString aClass94_468 = RSString.parse("(U");
-    static RSString worldmapUnderlay = RSString.parse("underlay");
-    static RSString worldmapOverlay = RSString.parse("overlay");
-    static RSString worldmapOverlay2 = RSString.parse("overlay2");
-    static RSString aClass94_3133 = RSString.parse(")2");
-    static RSString aClass94_422 = RSString.parse("loc");
-    static RSString emptyJagexString = RSString.parse("");
-    static RSString clientDebugNotifier = RSString.parse("<img=2>Client debug notifier");
-    static RSString aClass94_3209 = RSString.parse("showingVideoAd");
-    static RSString aClass94_592 = RSString.parse("<img=0>");
-    static RSString timeZone = RSString.parse(" GMT");
-    static RSString aClass94_3190 = RSString.parse("<img=1>");
-    static RSString aClass94_3192 = RSString.parse(" ");
-    static RSString aClass94_3196 = RSString.parse("Fps:");
-    static RSString openGLVersionText = RSString.parse("Client OpenGL Version:");
-    static RSString graphicsCard = RSString.parse("Graphics Card:");
-    static RSString aClass94_3039 = RSString.parse("0");
-    static RSString aClass94_3055 = RSString.parse("k");
-    static RSString aClass94_3145 = RSString.parse(")1 ");
-    static RSString aClass94_3268 = RSString.parse(")1");
     static RSString aClass94_3339 = RSString.parse("null");
     static RSString aClass94_3357 = RSString.parse("");
     static RSString memoryEquals = RSString.parse("mem=");
@@ -294,7 +267,6 @@ public class TextCore {
     static RSString aClass94_341 = RSString.parse(")3");
     static RSString aClass94_436 = RSString.parse("Cache:");
     static RSString aClass94_442 = RSString.parse("Number of player models in cache:");
-    static RSString aClass94_444 = RSString.parse("<img=1>");
     static RSString aClass94_516 = RSString.parse("unzap");
     static RSString aClass94_2610 = RSString.parse(")1o");
     static RSString aClass94_673 = RSString.parse(")0");

@@ -60,7 +60,7 @@ final class Class67 implements Runnable {
                     if (var4.type == 6) {
                         int var6;
                         if (var4.animationId != -1 || var4.secondAnimationId != -1) {
-                            boolean var9 = Class3_Sub28_Sub12.method609(var4, var0 + -23173);
+                            boolean var9 = Unsorted.method609(var4, var0 + -23173);
                             if (var9) {
                                 var6 = var4.secondAnimationId;
                             } else {

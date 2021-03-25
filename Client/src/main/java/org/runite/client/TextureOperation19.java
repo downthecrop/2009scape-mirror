@@ -55,8 +55,8 @@ final class TextureOperation19 extends TextureOperation {
             Class21.anInt3552 = var7 + 8;
          }
 
-         if(-1 != Class3_Sub28_Sub12.anInt3655) {
-            Class3_Sub8.method124(115, 1, Class3_Sub28_Sub12.anInt3655);
+         if(-1 != ConfigInventoryDefinition.anInt3655) {
+            Class3_Sub8.method124(115, 1, ConfigInventoryDefinition.anInt3655);
          }
 
       } catch (RuntimeException var10) {

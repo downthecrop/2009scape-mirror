@@ -55,7 +55,7 @@ final class Class119 {
                 GameShell.canvas.setLocation(Class84.anInt1164, Class106.anInt1442);
             }
 
-            if (Class3_Sub28_Sub12.anInt3655 != -1) {
+            if (ConfigInventoryDefinition.anInt3655 != -1) {
                 Class124.method1746(true, (byte) -125);
             }
 

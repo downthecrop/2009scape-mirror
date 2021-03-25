@@ -19,6 +19,7 @@ public final class BufferedDataStream extends DataBuffer {
     static int anInt1736;
     static int[] anIntArray2709 = new int[]{0, 1, 3, 7, 15, 31, 63, 127, 255, 511, 1023, 2047, 4095, 8191, 16383, 32767, 65535, 131071, 262143, 524287, 1048575, 2097151, 4194303, 8388607, 16777215, 33554431, 67108863, 134217727, 268435455, 536870911, 1073741823, Integer.MAX_VALUE, -1};
     static int anInt1971;
+    static int anInt3652;
     private ISAACCipher isaacCipher;
     static int[] anIntArray3804 = new int[256];
     static int[] anIntArray3805;
@@ -27,7 +28,7 @@ public final class BufferedDataStream extends DataBuffer {
 
     static void addChatMessage(RSString var0, int type, RSString message, int var3) {
         try {
-            Class3_Sub28_Sub12.sendGameMessage(var3, type, message, null, var0);
+            MessageManager.sendGameMessage(var3, type, message, null, var0);
         } catch (RuntimeException var5) {
             throw ClientErrorException.clientError(var5, "i.W(" + (var0 != null ? "{...}" : "null") + ',' + type + ',' + (message != null ? "{...}" : "null") + ',' + var3 + ')');
         }
@@ -200,7 +201,7 @@ public final class BufferedDataStream extends DataBuffer {
                 if (var4 == 1006) {
                     var13 = Class7.getRSInterface(var3);
                     if (null != var13 && var13.itemIds[var2] >= 100000) {
-                        addChatMessage(TextCore.emptyJagexString, 0, RSString.stringCombiner(new RSString[]{RSString.stringAnimator(var13.itemIds[var2]), TextCore.aClass94_3777, ItemDefinition.getItemDefinition(var5).name}), -1);
+                        addChatMessage(RSString.parse(""), 0, RSString.stringCombiner(new RSString[]{RSString.stringAnimator(var13.itemIds[var2]), TextCore.aClass94_3777, ItemDefinition.getItemDefinition(var5).name}), -1);
                     } else {
                         TextureOperation12.outgoingBuffer.putOpcode(92);
                         TextureOperation12.outgoingBuffer.writeShort128LE(var5);
@@ -902,7 +903,7 @@ public final class BufferedDataStream extends DataBuffer {
                 TextureOperation36.aFloat3435 = TextureOperation36.aFloat3424;
                 TextureOperation9.aFloat3105 = Class30.aFloat578;
                 Class60.anInt932 = var6;
-                anInt1971 = Class3_Sub28_Sub12.anInt3652;
+                anInt1971 = anInt3652;
                 anInt1407 = Unsorted.anInt689;
                 RSInterface.aFloat246 = var9;
                 Unsorted.anInt72 = 0;
@@ -922,7 +923,7 @@ public final class BufferedDataStream extends DataBuffer {
                 float var15 = (float) Unsorted.anInt72 / 65536.0F;
                 int var13 = Unsorted.anInt72 >> 8;
                 int var12 = -Unsorted.anInt72 + 65536 >> 8;
-                Class3_Sub28_Sub12.anInt3652 = (-16711936 & var13 * (anInt1345 & 16711935) + (16711935 & anInt1971) * var12) + (16711680 & var12 * (anInt1971 & 65280) + (65280 & anInt1345) * var13) >> 8;
+                anInt3652 = (-16711936 & var13 * (anInt1345 & 16711935) + (16711935 & anInt1971) * var12) + (16711680 & var12 * (anInt1971 & 65280) + (65280 & anInt1345) * var13) >> 8;
                 float var14 = (float) (65536 - Unsorted.anInt72) / 65536.0F;
                 Class30.aFloat578 = var14 * TextureOperation9.aFloat3105 + var15 * Class3_Sub17.aFloat2457;
                 TextureOperation36.aFloat3424 = TextureOperation36.aFloat3435 * var14 + var15 * aFloat3044;
@@ -932,11 +933,11 @@ public final class BufferedDataStream extends DataBuffer {
             }
 
             Class92.setLightParams(Unsorted.anInt1950, Class30.aFloat578, TextureOperation36.aFloat3424, Class12.aFloat319);
-            Class92.setFogValues(Class3_Sub28_Sub12.anInt3652, Unsorted.anInt689);
+            Class92.setFogValues(anInt3652, Unsorted.anInt689);
 
             Class92.setLightPosition((float) Class46.anInt741, (float) TextureOperation1.anInt3274, (float) AtmosphereParser.anInt1191);
             Class92.method1504();
-            return Class3_Sub28_Sub12.anInt3652;
+            return anInt3652;
         } catch (RuntimeException var16) {
             throw ClientErrorException.clientError(var16, "i.F(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + 1 + ')');
         }

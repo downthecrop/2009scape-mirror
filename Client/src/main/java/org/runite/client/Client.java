@@ -20,6 +20,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
+import static org.rs09.client.constants.Parameter.*;
+
 public final class Client extends GameShell {
 
     /**
@@ -205,7 +207,7 @@ public final class Client extends GameShell {
 
                 Class3_Sub26.paramAffid = 0;
 
-                Class163_Sub2.paramSettings = TextCore.emptyJagexString;
+                Class163_Sub2.paramSettings = RSString.parse("");
 
                 Client client = new Client();
                 clientInstance = client;
@@ -304,7 +306,7 @@ public final class Client extends GameShell {
                                 } else if (inter.anIntArray310 == null || Class44.anInt719 >= inter.anIntArray310[var19]) {
                                     byte var20 = inter.aByteArray231[var19];
                                     if (var20 == 0 || ((var20 & 2) == 0 || ObjectDefinition.aBooleanArray1490[86]) && ((var20 & 1) == 0 || ObjectDefinition.aBooleanArray1490[82]) && ((var20 & 4) == 0 || ObjectDefinition.aBooleanArray1490[81])) {
-                                        Unsorted.method66(TextCore.emptyJagexString, -1, var19 + 1, (byte) -29, inter.componentHash);
+                                        Unsorted.method66(RSString.parse(""), -1, var19 + 1, (byte) -29, inter.componentHash);
                                         var21 = inter.anIntArray299[var19];
                                         if (inter.anIntArray310 == null) {
                                             inter.anIntArray310 = new int[inter.aByteArray263.length];
@@ -828,14 +830,14 @@ public final class Client extends GameShell {
                     }
 
                     var4 = 50 * (LinkableRSString.anInt2579 + -Class40.anInt3293) / LinkableRSString.anInt2579;
-                    LoadingBox.draw(false, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_3399, RSString.stringAnimator(var4), TextCore.aClass94_148}));
+                    LoadingBox.draw(false, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_3399, RSString.stringAnimator(var4), RSString.parse("(U(Y")}));
                 } else if (Class163_Sub2_Sub1.anInt4019 == 2) {
                     if (anInt2275 < Class162.anInt2038) {
                         anInt2275 = Class162.anInt2038;
                     }
 
                     var4 = (-Class162.anInt2038 + anInt2275) * 50 / anInt2275 + 50;
-                    LoadingBox.draw(false, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_3399, RSString.stringAnimator(var4), TextCore.aClass94_148}));
+                    LoadingBox.draw(false, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_3399, RSString.stringAnimator(var4), RSString.parse("(U(Y")}));
                 } else {
                     LoadingBox.draw(false, TextCore.LoadingPleaseWait2);
                 }
@@ -883,7 +885,7 @@ public final class Client extends GameShell {
                     Class75_Sub3.sweepClientStartupReferenceCache();
                 }
 
-                if (Unsorted.aBoolean2146 && 10 == Class143.gameStage && Class3_Sub28_Sub12.anInt3655 != -1) {
+                if (Unsorted.aBoolean2146 && 10 == Class143.gameStage && ConfigInventoryDefinition.anInt3655 != -1) {
                     Unsorted.aBoolean2146 = false;
                     Class119.method1730(Class38.signlink);
                 }
@@ -1017,7 +1019,7 @@ public final class Client extends GameShell {
 
             Class163_Sub2.paramSettings = TextCore.aClass94_1745.getParamValue(this);
             if (Class163_Sub2.paramSettings == null) {
-                Class163_Sub2.paramSettings = TextCore.emptyJagexString;
+                Class163_Sub2.paramSettings = RSString.parse("");
             }
 
             String var5 = this.getParameter("country");
@@ -1044,42 +1046,53 @@ public final class Client extends GameShell {
             Class119.method1729();
             TextureOperation31.aCacheResourceWorker_3159 = new CacheResourceWorker();
             Class58.aJs5Worker_917 = new Js5Worker();
-            if (TextureOperation20.paramModeWhat != 0) {
-                Class3_Sub6.aByteArrayArray2287 = new byte[50][];
+
+            if (TextureOperation20.paramModeWhat != LIVE_ENVIRONMENT) {
+                Class3_Sub6.softReferenceTestArray = new byte[50][];
             }
 
             CS2Script.userCurrentWorldID = ObjectDefinition.paramWorldID;
-            Unsorted.method564(Class38.signlink);
+
+            Unsorted.parsePreferences(Class38.signlink);
             SystemLogger.logInfo("port: " + Class53.anInt867);
             SystemLogger.logInfo("MSIP: " + GameConfig.IP_MANAGEMENT);
-            if (Class44.paramModeWhere == 0) {
+
+            if (Class44.paramModeWhere == LIVE_ENVIRONMENT) {
                 ClientErrorException.worldListHost = Objects.requireNonNull(this.getCodeBase()).getHost();
                 Class53.anInt867 = GameConfig.SERVER_PORT + ObjectDefinition.paramWorldID; //443 is secure port
                 anInt3773 = '\uaa4a';
-            } else if (Class44.paramModeWhere == 1) {
+
+            } else if (Class44.paramModeWhere == OFFICE_ENVIRONMENT) {
                 ClientErrorException.worldListHost = Objects.requireNonNull(this.getCodeBase()).getHost();
                 //System.out.println("port = " + Class53.anInt867);
                 Class53.anInt867 = ObjectDefinition.paramWorldID + 50000;
                 anInt3773 = 40000 + ObjectDefinition.paramWorldID;
-            } else if (Class44.paramModeWhere == 2) {
+
+            } else if (Class44.paramModeWhere == LOCAL_ENVIRONMENT) {
                 ClientErrorException.worldListHost = "127.0.0.1";
                 System.out.println("Setting worldListHost to 127.0.0.1, port = " + Class53.anInt867);
-                Class53.anInt867 = ObjectDefinition.paramWorldID + '\uc350';
-                anInt3773 = ObjectDefinition.paramWorldID + '\u9c40';
+                Class53.anInt867 = ObjectDefinition.paramWorldID + 50000;
+                anInt3773 = ObjectDefinition.paramWorldID + 40000;
             }
-            if (1 == Class158.paramGameTypeID) {
-                ClientCommands.shiftClickEnabled = true;
-                Class92.defaultScreenColorRgb = 16777215;
-                Class92.defaultRegionAmbientRGB = 0;
-                Class15.aShortArrayArray344 = Unsorted.aShortArrayArray1619;
-                Class101.aShortArrayArray1429 = aShortArrayArray2634;
-                Class3_Sub25.aShortArray2548 = Unsorted.aShortArray63;
-                Class91.aShortArray1311 = aShortArray2219;
-            } else {
-                Class15.aShortArrayArray344 = Class3_Sub28_Sub12.aShortArrayArray3654;
-                Class91.aShortArray1311 = aShortArray3349;
-                Class101.aShortArrayArray1429 = Class20.aShortArrayArray435;
-                Class3_Sub25.aShortArray2548 = Class164_Sub1.aShortArray3011;
+
+            switch (Class158.paramGameTypeID) {
+                case GAME_TYPE_RUNESCAPE:
+                    Class15.aShortArrayArray344 = ConfigInventoryDefinition.aShortArrayArray3654;
+                    Class91.aShortArray1311 = aShortArray3349;
+                    Class101.aShortArrayArray1429 = Class20.aShortArrayArray435;
+                    Class3_Sub25.aShortArray2548 = Class164_Sub1.aShortArray3011;
+                    break;
+
+                case GAME_TYPE_MECHSCAPE:
+                    ClientCommands.shiftClickEnabled = true;
+                    Class92.defaultScreenColorRgb = 16777215;
+                    Class92.defaultRegionAmbientRGB = 0;
+                    Class15.aShortArrayArray344 = Unsorted.aShortArrayArray1619;
+                    Class101.aShortArrayArray1429 = aShortArrayArray2634;
+                    Class3_Sub25.aShortArray2548 = Unsorted.aShortArray63;
+                    Class91.aShortArray1311 = aShortArray2219;
+                    break;
+
             }
 
             currentPort = Class53.anInt867;
@@ -1159,8 +1172,8 @@ public final class Client extends GameShell {
             }
 
             ++Class106.anInt1446;
-            if (-1 != Class3_Sub28_Sub12.anInt3655) {
-                GraphicDefinition.method967(0, 0, 0, Class23.canvasWidth, Class3_Sub28_Sub12.anInt3655, 0, Class140_Sub7.canvasHeight);
+            if (-1 != ConfigInventoryDefinition.anInt3655) {
+                GraphicDefinition.method967(0, 0, 0, Class23.canvasWidth, ConfigInventoryDefinition.anInt3655, 0, Class140_Sub7.canvasHeight);
             }
 
             ++PacketParser.anInt3213;
@@ -1500,7 +1513,7 @@ public final class Client extends GameShell {
 
                         if (var2 < 100) { //!= 100
                             if (var2 != 0) {
-                                Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.CheckingForUpdates, RSString.stringAnimator(var2), TextCore.aClass94_468});
+                                Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.CheckingForUpdates, RSString.stringAnimator(var2), RSString.parse("(U")});
                             }
 
                             LoadingStageNumber = 20;
@@ -1535,7 +1548,7 @@ public final class Client extends GameShell {
                             LoadingStageNumber = 35;
                             anInt1354 = 60;
                         } else {
-                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingFonts, RSString.stringAnimator(100 * var2 / var3), TextCore.aClass94_468});
+                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingFonts, RSString.stringAnimator(100 * var2 / var3), RSString.parse("(U")});
                             LoadingStageNumber = 35;
                         }
                     } else if (60 == anInt1354) {
@@ -1545,7 +1558,7 @@ public final class Client extends GameShell {
                             Class3_Sub17.aClass94_2464 = TextCore.LoadedTitleScreen;
                             anInt1354 = 65;
                         } else {
-                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingTitleScreen, RSString.stringAnimator(100 * var2 / var3), TextCore.aClass94_468});
+                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingTitleScreen, RSString.stringAnimator(100 * var2 / var3), RSString.parse("(U")});
                         }
                         LoadingStageNumber = 40;
                     } else if (anInt1354 == 65) {
@@ -1607,14 +1620,14 @@ public final class Client extends GameShell {
                             Class29.method968(128);
                             anInt1354 = 80;
                         } else {
-                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingConfig, RSString.stringAnimator(var2 / 11), TextCore.aClass94_468});
+                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingConfig, RSString.stringAnimator(var2 / 11), RSString.parse("(U")});
                             LoadingStageNumber = 50;
                         }
                     } else if (anInt1354 == 80) {
                         var2 = Sprites.method107(CacheIndex.spritesIndex);
                         var3 = 15;
                         if (var2 < var3) {
-                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingSprites, RSString.stringAnimator(var2 * 100 / var3), TextCore.aClass94_468});
+                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingSprites, RSString.stringAnimator(var2 * 100 / var3), RSString.parse("(U")});
                             LoadingStageNumber = 60;
                         } else {
                             Sprites.method887(CacheIndex.spritesIndex);
@@ -1644,19 +1657,19 @@ public final class Client extends GameShell {
                                                 Class3_Sub17.aClass94_2464 = TextCore.LoadedInterfaces;
                                                 anInt1354 = 135;
                                             } else {
-                                                Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(90 - -(CacheIndex.worldmapIndex.method2116(TextCore.aClass94_1342) / 10)), TextCore.aClass94_468});
+                                                Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(90 - -(CacheIndex.worldmapIndex.method2116(TextCore.aClass94_1342) / 10)), RSString.parse("(U")});
                                                 LoadingStageNumber = 85;
                                             }
                                         } else {
-                                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(85 - -(CacheIndex.fontsIndex.method2136((byte) -124) / 20)), TextCore.aClass94_468});
+                                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(85 - -(CacheIndex.fontsIndex.method2136((byte) -124) / 20)), RSString.parse("(U")});
                                             LoadingStageNumber = 85;
                                         }
                                     } else {
-                                        Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(75 - -(CacheIndex.interfaceScriptsIndex.method2136((byte) -128) / 10)), TextCore.aClass94_468});
+                                        Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(75 - -(CacheIndex.interfaceScriptsIndex.method2136((byte) -128) / 10)), RSString.parse("(U")});
                                         LoadingStageNumber = 85;
                                     }
                                 } else {
-                                    Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(CacheIndex.interfacesIndex.method2136((byte) -123) * 3 / 4), TextCore.aClass94_468});
+                                    Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(CacheIndex.interfacesIndex.method2136((byte) -123) * 3 / 4), RSString.parse("(U")});
                                     LoadingStageNumber = 85;
                                 }
                             } else if (135 == anInt1354) {
@@ -1705,8 +1718,8 @@ public final class Client extends GameShell {
                             } else if (anInt1354 == 160) {
                                 TextureOperation1.method219(true);
                             }
-                        } else if (CacheIndex.huffmanEncodingIndex.method2125(TextCore.emptyJagexString, TextCore.HasHuffman)) {
-                            Class36 var9 = new Class36(CacheIndex.huffmanEncodingIndex.method2123(TextCore.emptyJagexString, TextCore.HasHuffman));
+                        } else if (CacheIndex.huffmanEncodingIndex.method2125(RSString.parse(""), TextCore.HasHuffman)) {
+                            Class36 var9 = new Class36(CacheIndex.huffmanEncodingIndex.method2123(RSString.parse(""), TextCore.HasHuffman));
                             Class1.method69(var9);
                             Class3_Sub17.aClass94_2464 = TextCore.LoadedWordPack;
                             anInt1354 = 130;
@@ -1738,7 +1751,7 @@ public final class Client extends GameShell {
                         anInt1354 = 100;
                         LoadingStageNumber = 70;
                     } else {
-                        Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingTextures, RSString.stringAnimator(CacheIndex.materialsIndex.method2136((byte) -125)), TextCore.aClass94_468});
+                        Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingTextures, RSString.stringAnimator(CacheIndex.materialsIndex.method2136((byte) -125)), RSString.parse("(U")});
                         LoadingStageNumber = 70;
                     }
                 }

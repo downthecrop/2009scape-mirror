@@ -98,26 +98,26 @@ final class WorldMap extends Node {
                 } else if (anInt2737 == 20) {
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: World Map Stage 20: String given: " + Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561.properlyCapitalize().toString());
-                    Class15.method889(new DataBuffer(aClass153_3210.method2123(TextCore.worldmapUnderlay, Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map underlay
+                    Class15.method889(new DataBuffer(aClass153_3210.method2123(RSString.parse("underlay"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map underlay
                     anInt2737 = 30;
                     Class163_Sub1.method2210(true);
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 30) {
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: World Map Stage 30: String given: " + Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561.properlyCapitalize().toString());
-                    Class163_Sub2.method2219(new DataBuffer(aClass153_3210.method2123(TextCore.worldmapOverlay, Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map overlay (water)
+                    Class163_Sub2.method2219(new DataBuffer(aClass153_3210.method2123(RSString.parse("overlay"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map overlay (water)
                     anInt2737 = 40;
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 40) {
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: World Map Stage 40: String given: " + Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561.properlyCapitalize().toString());
-                    TextureOperation25.method328(new DataBuffer(aClass153_3210.method2123(TextCore.worldmapOverlay2, Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//unsure
+                    TextureOperation25.method328(new DataBuffer(aClass153_3210.method2123(RSString.parse("overlay2"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//unsure
                     anInt2737 = 50;
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 50) {
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: World Map Stage 50: String given: " + Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561.properlyCapitalize().toString());
-                    Class96.method1587(new DataBuffer(aClass153_3210.method2123(TextCore.aClass94_422, Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map object drawing (buildings etc)
+                    Class96.method1587(new DataBuffer(aClass153_3210.method2123(RSString.parse("loc"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map object drawing (buildings etc)
                     anInt2737 = 60;
                     Class163_Sub1.method2210(true);
                     Class75_Sub4.method1355();
@@ -251,7 +251,7 @@ final class WorldMap extends Node {
                         var13 = 16711680;
                     }
 
-                    FontType.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_1630, RSString.stringAnimator(var12), TextCore.aClass94_3055}), var9, var10, var13, -1);
+                    FontType.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_1630, RSString.stringAnimator(var12), RSString.parse("k")}), var9, var10, var13, -1);
                 }
                 /* * * * * * * */
 

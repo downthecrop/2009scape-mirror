@@ -31,8 +31,8 @@ final class Class3_Sub17 extends Linkable {
 
 	static void method381(boolean var0) {
 		try {
-			if(Class3_Sub28_Sub12.anInt3655 != -1) {
-				Class52.method1160(-120, Class3_Sub28_Sub12.anInt3655);
+			if(ConfigInventoryDefinition.anInt3655 != -1) {
+				Class52.method1160(-120, ConfigInventoryDefinition.anInt3655);
 			}
 
 			for(int var1 = 0; var1 < Class3_Sub28_Sub3.anInt3557; ++var1) {
@@ -56,7 +56,7 @@ final class Class3_Sub17 extends Linkable {
 				method380(-78);
 			}
 
-			if(Class3_Sub28_Sub12.anInt3655 != -1) {
+			if(ConfigInventoryDefinition.anInt3655 != -1) {
 				Class3_Sub28_Sub3.anInt3557 = 0;
 				Class8.method841();
 			}

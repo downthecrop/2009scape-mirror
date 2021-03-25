@@ -243,11 +243,11 @@ public final class PlayerRendering {
                         var3.textCycle = 150;
                         var3.textColor = var4 >> 8;
                         if (chatIcon >= 2) {
-                            Class3_Sub28_Sub12.sendGameMessage(var13, var8 ? 17 : 1, message, null, RSString.stringCombiner(new RSString[]{RSString.parse("<img=" + (chatIcon - 1) + ">"), var3.getName()}));
+                            MessageManager.sendGameMessage(var13, var8 ? 17 : 1, message, null, RSString.stringCombiner(new RSString[]{RSString.parse("<img=" + (chatIcon - 1) + ">"), var3.getName()}));
                         } else if (chatIcon == 1) {
-                            Class3_Sub28_Sub12.sendGameMessage(var13, var8 ? 17 : 1, message, null, RSString.stringCombiner(new RSString[]{TextCore.aClass94_592, var3.getName()}));
+                            MessageManager.sendGameMessage(var13, var8 ? 17 : 1, message, null, RSString.stringCombiner(new RSString[]{RSString.parse("<img=0>"), var3.getName()}));
                         } else {
-                            Class3_Sub28_Sub12.sendGameMessage(var13, var8 ? 17 : 2, message, null, var3.getName());
+                            MessageManager.sendGameMessage(var13, var8 ? 17 : 2, message, null, var3.getName());
                         }
                     }
                 }

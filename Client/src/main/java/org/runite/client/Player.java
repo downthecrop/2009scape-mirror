@@ -234,12 +234,12 @@ public final class Player extends Class140_Sub4 {
                 int var17;
                 if (0 != TextureOperation20.paramModeWhat && var16 < 50) {
                     for (var17 = 50 - var16; Class56.anInt893 < var17; ++Class56.anInt893) {
-                        Class3_Sub6.aByteArrayArray2287[Class56.anInt893] = new byte[102400];
+                        Class3_Sub6.softReferenceTestArray[Class56.anInt893] = new byte[102400];
                     }
 
                     while (Class56.anInt893 > var17) {
                         --Class56.anInt893;
-                        Class3_Sub6.aByteArrayArray2287[Class56.anInt893] = null;
+                        Class3_Sub6.softReferenceTestArray[Class56.anInt893] = null;
                     }
                 }
 

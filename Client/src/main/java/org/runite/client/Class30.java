@@ -38,7 +38,7 @@ final class Class30 {
 
     static void method979(int var0, int var1, int var2) {
         try {
-            RSString var4 = RSString.stringCombiner(new RSString[]{TextCore.aClass94_853, RSString.stringAnimator(var2), TextCore.aClass94_3268, RSString.stringAnimator(var0 >> 6), TextCore.aClass94_3268, RSString.stringAnimator(var1 >> 6), TextCore.aClass94_3268, RSString.stringAnimator(var0 & 63), TextCore.aClass94_3268, RSString.stringAnimator(63 & var1)});
+            RSString var4 = RSString.stringCombiner(new RSString[]{TextCore.aClass94_853, RSString.stringAnimator(var2), RSString.parse(")1"), RSString.stringAnimator(var0 >> 6), RSString.parse(")1"), RSString.stringAnimator(var1 >> 6), RSString.parse(")1"), RSString.stringAnimator(var0 & 63), RSString.parse(")1"), RSString.stringAnimator(63 & var1)});
 
             ClientCommands.ClientCommands(var4);
         } catch (RuntimeException var5) {

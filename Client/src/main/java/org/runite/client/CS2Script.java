@@ -979,7 +979,7 @@ public final class CS2Script extends Linkable {
                                                     }
                                                     if (3304 == opcode) {
                                                         int l8 = ItemDefinition.intsStack[--iStackCounter];
-                                                        ItemDefinition.intsStack[iStackCounter++] = Unsorted.method2069(l8).size;
+                                                        ItemDefinition.intsStack[iStackCounter++] = ConfigInventoryDefinition.retrieveConfigurationInventoryFile(l8).size;
                                                         continue;
                                                     }
                                                     if (opcode == 3305) { //Skill update listener (mostly spams health value)
@@ -1262,7 +1262,7 @@ public final class CS2Script extends Linkable {
                                                     }
                                                     if (opcode == 3609) {
                                                         RSString class94_12 = ItemDefinition.stringsStack[--sStackCounter];
-                                                        if (class94_12.startsWith(TextCore.aClass94_2323) || class94_12.startsWith(TextCore.aClass94_3190))
+                                                        if (class94_12.startsWith(TextCore.aClass94_2323) || class94_12.startsWith(RSString.parse("<img=1>")))
                                                             class94_12 = class94_12.substring(7);
                                                         ItemDefinition.intsStack[iStackCounter++] = ItemDefinition.method1176(class94_12) ? 1 : 0;
                                                         continue;
@@ -1352,7 +1352,7 @@ public final class CS2Script extends Linkable {
                                                     }
                                                     if (3623 == opcode) {
                                                         RSString class94_15 = ItemDefinition.stringsStack[--sStackCounter];
-                                                        if (class94_15.startsWith(TextCore.aClass94_2323) || class94_15.startsWith(TextCore.aClass94_3190))
+                                                        if (class94_15.startsWith(TextCore.aClass94_2323) || class94_15.startsWith(RSString.parse("<img=1>")))
                                                             class94_15 = class94_15.substring(7);
                                                         ItemDefinition.intsStack[iStackCounter++] = Class3_Sub24_Sub3.method467(class94_15) ? 1 : 0;
                                                         continue;
@@ -1390,7 +1390,7 @@ public final class CS2Script extends Linkable {
                                                     }
                                                     if (opcode == 3628) {
                                                         RSString class94_16 = ItemDefinition.stringsStack[--sStackCounter];
-                                                        if (class94_16.startsWith(TextCore.aClass94_2323) || class94_16.startsWith(TextCore.aClass94_3190))
+                                                        if (class94_16.startsWith(TextCore.aClass94_2323) || class94_16.startsWith(RSString.parse("<img=1>")))
                                                             class94_16 = class94_16.substring(7);
                                                         ItemDefinition.intsStack[iStackCounter++] = PacketParser.method826(class94_16, -1);
                                                         continue;
@@ -1657,7 +1657,7 @@ public final class CS2Script extends Linkable {
                                                                         int j24 = ItemDefinition.intsStack[--iStackCounter];
                                                                         int k55 = -1;
                                                                         if (j24 < 100 && null != LinkableRSString.aClass94Array2580[j24])
-                                                                            k55 = Class3_Sub28_Sub12.anIntArray3082[j24];
+                                                                            k55 = ConfigInventoryDefinition.anIntArray3082[j24];
                                                                         ItemDefinition.intsStack[iStackCounter++] = k55;
                                                                         continue;
                                                                     }
@@ -1808,7 +1808,7 @@ public final class CS2Script extends Linkable {
                                                                         int k24 = ItemDefinition.intsStack[--iStackCounter];
                                                                         RSString class94_49 = null;
                                                                         if (k24 < 100)
-                                                                            class94_49 = Class3_Sub28_Sub12.aClass94Array3226[k24];
+                                                                            class94_49 = ConfigInventoryDefinition.aClass94Array3226[k24];
                                                                         if (null == class94_49)
                                                                             class94_49 = TextCore.aClass94_2331;
                                                                         ItemDefinition.stringsStack[sStackCounter++] = class94_49;
@@ -1828,7 +1828,7 @@ public final class CS2Script extends Linkable {
                                                                         int i25 = ItemDefinition.intsStack[--iStackCounter];
                                                                         int l55 = -1;
                                                                         if (i25 < 100)
-                                                                            l55 = Class3_Sub28_Sub12.anIntArray1835[i25];
+                                                                            l55 = ConfigInventoryDefinition.anIntArray1835[i25];
                                                                         ItemDefinition.intsStack[iStackCounter++] = l55;
                                                                         continue;
                                                                     }

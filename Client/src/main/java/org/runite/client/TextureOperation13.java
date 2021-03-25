@@ -116,8 +116,8 @@ final class TextureOperation13 extends TextureOperation {
          LinkableRSString.method727();
          Class3_Sub21.method397((byte)-41);
          if(TextureOperation20.paramModeWhat != 0) {
-            for(int var1 = 0; var1 < Class3_Sub6.aByteArrayArray2287.length; ++var1) {
-               Class3_Sub6.aByteArrayArray2287[var1] = null;
+            for(int var1 = 0; var1 < Class3_Sub6.softReferenceTestArray.length; ++var1) {
+               Class3_Sub6.softReferenceTestArray[var1] = null;
             }
 
             Class56.anInt893 = 0;

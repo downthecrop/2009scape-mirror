@@ -35,10 +35,10 @@ public final class TextureOperation36 extends TextureOperation {
                }
             } else {
                if(Class158.paramGameTypeID == 1) {
-                  Class3_Sub24_Sub4.method1177(-1, 0L, (byte)-62, TextCore.emptyJagexString, var11, (short)36, TextCore.HasFaceHere, var12);
+                  Class3_Sub24_Sub4.method1177(-1, 0L, (byte)-62, RSString.parse(""), var11, (short)36, TextCore.HasFaceHere, var12);
                }
 
-               Class3_Sub24_Sub4.method1177(-1, 0L, (byte)-75, TextCore.emptyJagexString, var11, (short)60, TextureOperation32.aClass94_3353, var12);
+               Class3_Sub24_Sub4.method1177(-1, 0L, (byte)-75, RSString.parse(""), var11, (short)60, TextureOperation32.aClass94_3353, var12);
             }
          }
 

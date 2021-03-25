@@ -110,8 +110,8 @@ public final class PacketParser {
                 RSString var41;
                 if (Unsorted.incomingOpcode == 70) {
                     RSString message = BufferedDataStream.incomingBuffer.readString();
-                    if (message.endsWith(TextCore.HasTradeRequest)) {
-                        playerName = message.substring(0, message.indexOf(TextCore.char_colon, 65), 0);
+                    if (message.endsWith(RSString.parse(":tradereq:"))) {
+                        playerName = message.substring(0, message.indexOf(RSString.parse(":"), 65), 0);
                         nameAsLong = playerName.toLong();
                         isIgnored = false;
 
@@ -126,7 +126,7 @@ public final class PacketParser {
                             BufferedDataStream.addChatMessage(playerName, 4, TextCore.HasWishToTrade, (byte) -83 + 82);
                         }
                     } else if (message.endsWith(TextCore.cmdChalReq)) {
-                        playerName = message.substring(0, message.indexOf(TextCore.char_colon, 75), 0);
+                        playerName = message.substring(0, message.indexOf(RSString.parse(":"), 75), 0);
                         nameAsLong = playerName.toLong();
                         isIgnored = false;
 
@@ -138,12 +138,12 @@ public final class PacketParser {
                         }
 
                         if (!isIgnored && inTutorialIsland == 0) {
-                            var41 = message.substring(1 + message.indexOf(TextCore.char_colon, 101), message.length() + -9, (byte) -83 ^ -83);
+                            var41 = message.substring(1 + message.indexOf(RSString.parse(":"), 101), message.length() + -9, (byte) -83 ^ -83);
                             BufferedDataStream.addChatMessage(playerName, 8, var41, (byte) -83 ^ 82);
                         }
                     } else if (message.endsWith(TextCore.HasAssistRequest)) {
                         isIgnored = false;
-                        playerName = message.substring(0, message.indexOf(TextCore.char_colon, 96), 0);
+                        playerName = message.substring(0, message.indexOf(RSString.parse(":"), 96), 0);
                         nameAsLong = playerName.toLong();
 
                         for (var30 = 0; var30 < Class3_Sub28_Sub5.anInt3591; ++var30) {
@@ -154,24 +154,24 @@ public final class PacketParser {
                         }
 
                         if (!isIgnored && inTutorialIsland == 0) {
-                            BufferedDataStream.addChatMessage(playerName, 10, TextCore.emptyJagexString, -1);
+                            BufferedDataStream.addChatMessage(playerName, 10, RSString.parse(""), -1);
                         }
                     } else if (message.endsWith(TextCore.HasClan)) {
                         playerName = message.substring(0, message.indexOf(TextCore.HasClan, (byte) -83 ^ -50), 0);
-                        BufferedDataStream.addChatMessage(TextCore.emptyJagexString, 11, playerName, -1);
+                        BufferedDataStream.addChatMessage(RSString.parse(""), 11, playerName, -1);
                     } else if (message.endsWith(TextCore.HasTrade)) {
                         playerName = message.substring(0, message.indexOf(TextCore.HasTrade, 102), 0);
                         if (0 == inTutorialIsland) {
-                            BufferedDataStream.addChatMessage(TextCore.emptyJagexString, 12, playerName, -1);
+                            BufferedDataStream.addChatMessage(RSString.parse(""), 12, playerName, -1);
                         }
                     } else if (message.endsWith(TextCore.HasAssist)) {
                         playerName = message.substring(0, message.indexOf(TextCore.HasAssist, 121), 0);
                         if (inTutorialIsland == 0) {
-                            BufferedDataStream.addChatMessage(TextCore.emptyJagexString, 13, playerName, -1);
+                            BufferedDataStream.addChatMessage(RSString.parse(""), 13, playerName, -1);
                         }
                     } else if (message.endsWith(TextCore.HasDuelStake)) {
                         isIgnored = false;
-                        playerName = message.substring(0, message.indexOf(TextCore.char_colon, 115), 0);
+                        playerName = message.substring(0, message.indexOf(RSString.parse(":"), 115), 0);
                         nameAsLong = playerName.toLong();
 
                         for (var30 = 0; Class3_Sub28_Sub5.anInt3591 > var30; ++var30) {
@@ -182,10 +182,10 @@ public final class PacketParser {
                         }
 
                         if (!isIgnored && inTutorialIsland == 0) {
-                            BufferedDataStream.addChatMessage(playerName, 14, TextCore.emptyJagexString, -1);
+                            BufferedDataStream.addChatMessage(playerName, 14, RSString.parse(""), -1);
                         }
                     } else if (message.endsWith(TextCore.HasDuelFriend)) {
-                        playerName = message.substring(0, message.indexOf(TextCore.char_colon, 118), 0);
+                        playerName = message.substring(0, message.indexOf(RSString.parse(":"), 118), 0);
                         isIgnored = false;
                         nameAsLong = playerName.toLong();
 
@@ -197,10 +197,10 @@ public final class PacketParser {
                         }
 
                         if (!isIgnored && 0 == inTutorialIsland) {
-                            BufferedDataStream.addChatMessage(playerName, 15, TextCore.emptyJagexString, -1);
+                            BufferedDataStream.addChatMessage(playerName, 15, RSString.parse(""), -1);
                         }
                     } else if (message.endsWith(TextCore.HasClanRequest)) {
-                        playerName = message.substring(0, message.indexOf(TextCore.char_colon, (byte) -83 + 138), 0);
+                        playerName = message.substring(0, message.indexOf(RSString.parse(":"), (byte) -83 + 138), 0);
                         nameAsLong = playerName.toLong();
                         isIgnored = false;
 
@@ -212,10 +212,10 @@ public final class PacketParser {
                         }
 
                         if (!isIgnored && inTutorialIsland == 0) {
-                            BufferedDataStream.addChatMessage(playerName, 16, TextCore.emptyJagexString, -1);
+                            BufferedDataStream.addChatMessage(playerName, 16, RSString.parse(""), -1);
                         }
                     } else if (message.endsWith(TextCore.HasAllyReq)) {
-                        playerName = message.substring(0, message.indexOf(TextCore.char_colon, (byte) -83 + 189), (byte) -83 + 83);
+                        playerName = message.substring(0, message.indexOf(RSString.parse(":"), (byte) -83 + 189), (byte) -83 + 83);
                         isIgnored = false;
                         nameAsLong = playerName.toLong();
 
@@ -227,11 +227,11 @@ public final class PacketParser {
                         }
 
                         if (!isIgnored && inTutorialIsland == 0) {
-                            var41 = message.substring(1 + message.indexOf(TextCore.char_colon, 92), message.length() - 9, (byte) -83 ^ -83);
+                            var41 = message.substring(1 + message.indexOf(RSString.parse(":"), 92), message.length() - 9, (byte) -83 ^ -83);
                             BufferedDataStream.addChatMessage(playerName, 21, var41, -1);
                         }
                     } else {
-                        BufferedDataStream.addChatMessage(TextCore.emptyJagexString, 0, message, (byte) -83 + 82);
+                        BufferedDataStream.addChatMessage(RSString.parse(""), 0, message, (byte) -83 + 82);
                     }
 
                     Unsorted.incomingOpcode = -1;
@@ -321,11 +321,11 @@ public final class PacketParser {
                                     MouseListeningClass.anInt1921 = (1 + MouseListeningClass.anInt1921) % 100;
                                     RSString var61 = LinkableRSString.method733(var11).method555(BufferedDataStream.incomingBuffer);
                                     if (clanChatIcon == 2 || 3 == clanChatIcon) {
-                                        Class3_Sub28_Sub12.sendGameMessage(var11, 20, var61, Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), RSString.stringCombiner(new RSString[]{TextCore.aClass94_444, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}));
+                                        MessageManager.sendGameMessage(var11, 20, var61, Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), RSString.stringCombiner(new RSString[]{RSString.parse("<img=1>"), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}));
                                     } else if (clanChatIcon == 1) {
-                                        Class3_Sub28_Sub12.sendGameMessage(var11, 20, var61, Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), RSString.stringCombiner(new RSString[]{TextCore.aClass94_592, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}));
+                                        MessageManager.sendGameMessage(var11, 20, var61, Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), RSString.stringCombiner(new RSString[]{RSString.parse("<img=0>"), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}));
                                     } else {
-                                        Class3_Sub28_Sub12.sendGameMessage(var11, 20, var61, Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString());
+                                        MessageManager.sendGameMessage(var11, 20, var61, Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString());
                                     }
                                 }
 
@@ -462,10 +462,10 @@ public final class PacketParser {
                                         if (var19 == 2) {
                                             Class7.method834();
                                         }
-                                        Class3_Sub28_Sub12.anInt3655 = nodeModelId;
+                                        ConfigInventoryDefinition.anInt3655 = nodeModelId;
                                         TextureOperation20.method232(nodeModelId);
                                         Class124.method1746(false, (byte) -64);
-                                        TextureOperation24.method226(Class3_Sub28_Sub12.anInt3655);
+                                        TextureOperation24.method226(ConfigInventoryDefinition.anInt3655);
 
                                         for (counter = 0; counter < 100; ++counter) {
                                             Unsorted.aBooleanArray3674[counter] = true;
@@ -486,7 +486,7 @@ public final class PacketParser {
                                         var2 = BufferedDataStream.incomingBuffer.readLong();
                                         modelId = BufferedDataStream.incomingBuffer.readUnsignedShort();
                                         var56 = LinkableRSString.method733(modelId).method555(BufferedDataStream.incomingBuffer);
-                                        Class3_Sub28_Sub12.sendGameMessage(modelId, 19, var56, null, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString());
+                                        MessageManager.sendGameMessage(modelId, 19, var56, null, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString());
                                         Unsorted.incomingOpcode = -1;
                                         return true;
                                     } else if (Unsorted.incomingOpcode == 169) { //UNUSED BY SERVER
@@ -814,7 +814,7 @@ public final class PacketParser {
                                                         isIgnored = false;
                                                     }
 
-                                                    var41 = TextCore.emptyJagexString;
+                                                    var41 = RSString.parse("");
                                                     if (modelId > 0) {
                                                         var41 = BufferedDataStream.incomingBuffer.readString();
                                                     }
@@ -826,11 +826,11 @@ public final class PacketParser {
                                                             if (Unsorted.anIntArray882[var33] != modelId) {
                                                                 Unsorted.anIntArray882[var33] = modelId;
                                                                 if (0 < modelId) {
-                                                                    BufferedDataStream.addChatMessage(TextCore.emptyJagexString, 5, RSString.stringCombiner(new RSString[]{var46, TextCore.HasLoggedIn}), -1);
+                                                                    BufferedDataStream.addChatMessage(RSString.parse(""), 5, RSString.stringCombiner(new RSString[]{var46, TextCore.HasLoggedIn}), -1);
                                                                 }
 
                                                                 if (modelId == 0) {
-                                                                    BufferedDataStream.addChatMessage(TextCore.emptyJagexString, 5, RSString.stringCombiner(new RSString[]{var46, TextCore.HasLoggedOut}), -1);
+                                                                    BufferedDataStream.addChatMessage(RSString.parse(""), 5, RSString.stringCombiner(new RSString[]{var46, TextCore.HasLoggedOut}), -1);
                                                                 }
                                                             }
 
@@ -961,11 +961,11 @@ public final class PacketParser {
                                                         MouseListeningClass.anInt1921 = (1 + MouseListeningClass.anInt1921) % 100;
                                                         var64 = LinkableRSString.method733(var33).method555(BufferedDataStream.incomingBuffer);
                                                         if (chatIcon == 2) {
-                                                            Class3_Sub28_Sub12.sendGameMessage(var33, 18, var64, null, RSString.stringCombiner(new RSString[]{TextCore.aClass94_444, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}));
+                                                            MessageManager.sendGameMessage(var33, 18, var64, null, RSString.stringCombiner(new RSString[]{RSString.parse("<img=1>"), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}));
                                                         } else if (1 == chatIcon) {
-                                                            Class3_Sub28_Sub12.sendGameMessage(var33, 18, var64, null, RSString.stringCombiner(new RSString[]{TextCore.aClass94_592, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}));
+                                                            MessageManager.sendGameMessage(var33, 18, var64, null, RSString.stringCombiner(new RSString[]{RSString.parse("<img=0>"), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}));
                                                         } else {
-                                                            Class3_Sub28_Sub12.sendGameMessage(var33, 18, var64, null, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString());
+                                                            MessageManager.sendGameMessage(var33, 18, var64, null, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString());
                                                         }
                                                     }
 
@@ -1000,8 +1000,8 @@ public final class PacketParser {
                                                             Unsorted.method2104(var27, true, 48);
                                                         }
 
-                                                        if (Class3_Sub28_Sub12.anInt3655 != -1) {
-                                                            Class3_Sub8.method124(28, 1, Class3_Sub28_Sub12.anInt3655);
+                                                        if (ConfigInventoryDefinition.anInt3655 != -1) {
+                                                            Class3_Sub8.method124(28, 1, ConfigInventoryDefinition.anInt3655);
                                                         }
 
                                                         Unsorted.incomingOpcode = -1;
@@ -1056,8 +1056,8 @@ public final class PacketParser {
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 209) {
-                                                        if (-1 != Class3_Sub28_Sub12.anInt3655) {
-                                                            Class3_Sub8.method124(48, 0, Class3_Sub28_Sub12.anInt3655);
+                                                        if (-1 != ConfigInventoryDefinition.anInt3655) {
+                                                            Class3_Sub8.method124(48, 0, ConfigInventoryDefinition.anInt3655);
                                                         }
 
                                                         Unsorted.incomingOpcode = -1;
@@ -1292,7 +1292,7 @@ public final class PacketParser {
                                                             MouseListeningClass.anInt1921 = (MouseListeningClass.anInt1921 - -1) % 100;
                                                             RSString var52 = Font.method686(Objects.requireNonNull(Class32.method992(BufferedDataStream.incomingBuffer).properlyCapitalize()));
                                                             if (chatIcon == 2 || chatIcon == 3) {
-                                                                BufferedDataStream.addChatMessage(RSString.stringCombiner(new RSString[]{TextCore.aClass94_444, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}), 7, var52, -1);
+                                                                BufferedDataStream.addChatMessage(RSString.stringCombiner(new RSString[]{RSString.parse("<img=1>"), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}), 7, var52, -1);
                                                             } else if (chatIcon == 1) {
                                                                 BufferedDataStream.addChatMessage(RSString.stringCombiner(new RSString[]{RSString.parse("<img=" + (chatIcon - 1) + ">"), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}), 7, var52, -1);
                                                             } else {
@@ -1344,9 +1344,9 @@ public final class PacketParser {
                                                             MouseListeningClass.anInt1921 = (MouseListeningClass.anInt1921 + 1) % 100;
                                                             var57 = Font.method686(Objects.requireNonNull(Class32.method992(BufferedDataStream.incomingBuffer).properlyCapitalize()));
                                                             if (clanChatIcon == 2 || clanChatIcon == 3) {
-                                                                TextureOperation1.method221(-1, var57, RSString.stringCombiner(new RSString[]{TextCore.aClass94_444, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}), Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), 9);
+                                                                TextureOperation1.method221(-1, var57, RSString.stringCombiner(new RSString[]{RSString.parse("<img=1>"), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}), Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), 9);
                                                             } else if (clanChatIcon == 1) {
-                                                                TextureOperation1.method221(-1, var57, RSString.stringCombiner(new RSString[]{TextCore.aClass94_592, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}), Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), 9);
+                                                                TextureOperation1.method221(-1, var57, RSString.stringCombiner(new RSString[]{RSString.parse("<img=0>"), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}), Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), 9);
                                                             } else {
                                                                 if (clanChatIcon == 0)
                                                                     TextureOperation1.method221(-1, var57, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString(), Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), 9);

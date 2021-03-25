@@ -85,7 +85,7 @@ final class TextureOperation23 extends TextureOperation {
 
    static void method250(CacheIndex var1) {
       try {
-         Class8.aClass153_105 = var1;
+         Class8.configurationReferenceCache = var1;
       } catch (RuntimeException var3) {
          throw ClientErrorException.clientError(var3, "je.C(" + 2048 + ',' + (var1 != null?"{...}":"null") + ')');
       }

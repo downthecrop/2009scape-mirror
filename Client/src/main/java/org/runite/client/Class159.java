@@ -30,7 +30,7 @@ public final class Class159 {
         try {
             if (Unsorted.paramJavaScriptEnabled) {
                 try {
-                    return !(Boolean) TextCore.aClass94_3209.method1577(Class38.signlink.gameApplet);
+                    return !(Boolean) RSString.parse("showingVideoAd").method1577(Class38.signlink.gameApplet);
                 } catch (Throwable var2) {
                 }
             }
@@ -154,15 +154,4 @@ public final class Class159 {
             throw ClientErrorException.clientError(var11, "vl.E(" + var0 + ',' + 0 + ')');
         }
     }
-
-//   static void method2196() {
-//      try {
-//         Class3_Sub13_Sub34.aReferenceCache_3412.clearSoftReferences();
-//
-//         Class3_Sub13_Sub31.aReferenceCache_3369.clearSoftReferences();
-//      } catch (RuntimeException var2) {
-//         throw ClientErrorException.clientError(var2, "vl.D(" + 128 + ')');
-//      }
-//   }
-
 }
