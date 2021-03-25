@@ -394,7 +394,7 @@ public final class PacketParser {
                                     }
                                 } else if (Unsorted.incomingOpcode == 164) {
                                     nodeModelId = BufferedDataStream.incomingBuffer.readIntV1();
-                                    Class136.aClass64_1778 = Class38.signlink.method1449((byte) -83 ^ -82, nodeModelId);
+                                    Class136.aClass64_1778 = Class38.gameSignlink.method1449((byte) -83 ^ -82, nodeModelId);
                                     Unsorted.incomingOpcode = -1;
                                     return true;
                                 } else if (Unsorted.incomingOpcode == 225) {
@@ -1037,7 +1037,7 @@ public final class PacketParser {
                                                         Class140_Sub6.anInt2905 = anInt3213;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 114) {
-                                                        TextureOperation3.method305(Class38.signlink, BufferedDataStream.incomingBuffer, Unsorted.incomingPacketLength);
+                                                        TextureOperation3.method305(Class38.gameSignlink, BufferedDataStream.incomingBuffer, Unsorted.incomingPacketLength);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (65 == Unsorted.incomingOpcode) {
@@ -1092,7 +1092,7 @@ public final class PacketParser {
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 42) {
-                                                        if (null != TextureOperation30.aFrame3121) {
+                                                        if (null != TextureOperation30.fullScreenFrame) {
                                                             GameObject.graphicsSettings(false, Unsorted.anInt2577, -1, -1);
                                                         }
 
@@ -1104,7 +1104,7 @@ public final class PacketParser {
                                                         } else {
                                                             TextureOperation5.aClass94_3295 = playerName;
                                                             Unsorted.aBoolean2154 = true;
-                                                            Class15.aClass64_351 = Class38.signlink.method1452(new String(playerName.method1568(), StandardCharsets.ISO_8859_1), true);
+                                                            Class15.aClass64_351 = Class38.gameSignlink.method1452(new String(playerName.method1568(), StandardCharsets.ISO_8859_1), true);
                                                         }
 
                                                         Unsorted.incomingOpcode = -1;
@@ -1711,7 +1711,7 @@ public final class PacketParser {
                                                             Unsorted.incomingOpcode = -1;
                                                             return true;
                                                         } else {
-                                                            Class49.reportError("T1 - " + Unsorted.incomingOpcode + "," + Class7.anInt2166 + "," + Class24.anInt469 + " - " + Unsorted.incomingPacketLength, null, (byte) 117);
+                                                            Class49.reportError("T1 - " + Unsorted.incomingOpcode + "," + Class7.anInt2166 + "," + Class24.anInt469 + " - " + Unsorted.incomingPacketLength, null);
                                                             Class167.method2269((byte) 46);
                                                             return true;
                                                         }

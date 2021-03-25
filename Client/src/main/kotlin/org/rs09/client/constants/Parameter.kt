@@ -25,7 +25,6 @@ object Parameter {
     const val LANGUAGE_ENGLISH = 0
     const val LANGUAGE_GERMAN = 1
     const val LANGUAGE_FRENCH = 2
-    const val LANGUAGE_PORTUGUESE = 3
 
     /**
      * Game type

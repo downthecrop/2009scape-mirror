@@ -81,7 +81,7 @@ public class ClientCommands {
             }
 
             if (command.equalsStringIgnoreCase(TextCore.COMMAND_BREAK_CONNECTION)) {
-                Class38.signlink.method1431();
+                Class38.gameSignlink.method1431();
                 Class3_Sub15.activeConnection.applyDummyStreams();
                 Class58.aJs5Worker_917.applyDummyStreams();
             }
@@ -158,7 +158,7 @@ public class ClientCommands {
 
             if (command.startsWith(TextCore.COMMAND_SET_PARTICLES)) {
                 Class127_Sub1.method1758(command.substring(15).parseInt());
-                Class119.method1730(Class38.signlink);
+                Class119.method1730(Class38.gameSignlink);
                 CS2Script.aBoolean2705 = false;
             }
 

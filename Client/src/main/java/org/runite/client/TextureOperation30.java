@@ -4,11 +4,11 @@ import java.util.Objects;
 
 final class TextureOperation30 extends TextureOperation {
 
-   static volatile boolean aBoolean3116 = true;
+   static volatile boolean fullRedraw = true;
   
    static boolean[][] aBooleanArrayArray3118 = new boolean[][]{new boolean[0], {true, false, true}, {true, false, false, true}, {false, false, true, true}, {true, true, false}, {false, true, true}, {true, false, false, true}, {false, false, false, true, true}, {false, true, true}, {true, false, true, true, true}, {false, true, true, true, true}, {false, true, true, true, true, false}};
-   static Frame aFrame3121;
-   static Signlink aClass87_3125;
+   static Frame fullScreenFrame;
+   static Signlink signlink;
    private int anInt3126 = 2048;
    private int anInt3127 = 3072;
    private int anInt3128 = 1024;
@@ -41,20 +41,6 @@ final class TextureOperation30 extends TextureOperation {
 
       } catch (RuntimeException var5) {
          throw ClientErrorException.clientError(var5, "fh.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
-      }
-   }
-
-   public static void method211(int var0) {
-      try {
-         if(var0 != 1024) {
-            aClass87_3125 = null;
-         }
-         TextCore.COMMAND_NOCLIP = null;
-         aFrame3121 = null;
-         aBooleanArrayArray3118 = null;
-         aClass87_3125 = null;
-      } catch (RuntimeException var2) {
-         throw ClientErrorException.clientError(var2, "fh.C(" + var0 + ')');
       }
    }
 
@@ -184,7 +170,7 @@ final class TextureOperation30 extends TextureOperation {
          short var2 = 256;
          int var3 = 0;
          if(var0 >= -80) {
-            aBoolean3116 = true;
+            fullRedraw = true;
          }
 
          while(Class161.anIntArray2026.length > var3) {
@@ -245,10 +231,6 @@ final class TextureOperation30 extends TextureOperation {
                var9[var11] = (this.anInt3126 * var6[var11] >> 12) + this.anInt3128;
                var10[var11] = this.anInt3128 + (this.anInt3126 * var7[var11] >> 12);
             }
-         }
-
-         if(-1 != -1) {
-            method211(51);
          }
 
          return var3;

@@ -121,10 +121,10 @@ public final class LinkableRSString extends Linkable {
     static void method734(RSString var1) {
         try {
             Class163_Sub2.paramSettings = var1;
-            if (null != Class38.signlink.gameApplet) {
+            if (null != Class38.gameSignlink.gameApplet) {
                 try {
-                    RSString var2 = TextCore.aClass94_2044.getParamValue(Class38.signlink.gameApplet);
-                    RSString var3 = TextCore.aClass94_1885.getParamValue(Class38.signlink.gameApplet);
+                    RSString var2 = TextCore.aClass94_2044.getParamValue(Class38.gameSignlink.gameApplet);
+                    RSString var3 = TextCore.aClass94_1885.getParamValue(Class38.gameSignlink.gameApplet);
                     RSString var4 = RSString.stringCombiner(new RSString[]{var2, TextCore.aClass94_1151, var1, TextCore.aClass94_2074, var3});
                     if (0 == var1.length()) {
                         var4 = RSString.stringCombiner(new RSString[]{var4, TextCore.HasAgeExpire});
@@ -132,7 +132,7 @@ public final class LinkableRSString extends Linkable {
                         var4 = RSString.stringCombiner(new RSString[]{var4, TextCore.HasExpires, Class15.method894(94608000000L + TimeUtils.time()), TextCore.HasMaxAge, QuickChatDefinition.method612(94608000L)});
                     }
 
-                    RSString.stringCombiner(new RSString[]{TextCore.aClass94_1694, var4, TextCore.aClass94_1698}).method1554(Class38.signlink.gameApplet);
+                    RSString.stringCombiner(new RSString[]{TextCore.aClass94_1694, var4, TextCore.aClass94_1698}).method1554(Class38.gameSignlink.gameApplet);
                 } catch (Throwable var5) {
                 }
 

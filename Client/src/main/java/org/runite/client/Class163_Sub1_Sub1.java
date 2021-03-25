@@ -73,7 +73,7 @@ public final class Class163_Sub1_Sub1 extends Class163_Sub1 {
                     }
 
                     if (adminLoginStage == 1) {
-                        Class3_Sub9.aClass64_2318 = Class38.signlink.method1441((byte) 8, ClientErrorException.worldListHost, Class123.anInt1658);
+                        Class3_Sub9.aClass64_2318 = Class38.gameSignlink.method1441((byte) 8, ClientErrorException.worldListHost, Class123.anInt1658);
                         adminLoginStage = 2;
                     }
 
@@ -87,7 +87,7 @@ public final class Class163_Sub1_Sub1 extends Class163_Sub1 {
                             return;
                         }
 
-                        Class3_Sub15.activeConnection = new Connection((Socket) Class3_Sub9.aClass64_2318.anObject974, Class38.signlink);
+                        Class3_Sub15.activeConnection = new Connection((Socket) Class3_Sub9.aClass64_2318.anObject974, Class38.gameSignlink);
                         Class3_Sub9.aClass64_2318 = null;
                         Class3_Sub15.activeConnection.sendBytes(TextureOperation12.outgoingBuffer.buffer, TextureOperation12.outgoingBuffer.index);
                         if (WorldListEntry.aClass155_2627 != null) {

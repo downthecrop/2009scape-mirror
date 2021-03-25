@@ -1,6 +1,5 @@
 package org.runite.client;
 
-import org.rs09.client.data.NodeCache;
 import org.rs09.client.rendering.Toolkit;
 import org.runite.client.drawcalls.ContextMenu;
 
@@ -14,7 +13,6 @@ public final class Class49 {
     static boolean[][] aBooleanArrayArray814;
     static int anInt815 = 0;
     static int anInt817;
-    static NodeCache aClass47_818 = new NodeCache(64);
     static int anInt819 = 0;
 
 
@@ -130,11 +128,7 @@ public final class Class49 {
         }
     }
 
-    static void reportError(String var0, Throwable var1, byte var2) {
-        if (var2 <= 100) {
-            aClass47_818 = null;
-        }
-
+    static void reportError(String var0, Throwable var1) {
         try {
             String var3 = "";
             if (null != var1) {
@@ -154,11 +148,11 @@ public final class Class49 {
             var3 = InterfaceWidget.a("@", "%40", var3);
             var3 = InterfaceWidget.a("&", "%26", var3);
             var3 = InterfaceWidget.a("#", "%23", var3);
-            if (TextureOperation30.aClass87_3125.gameApplet == null) {
+            if (TextureOperation30.signlink.gameApplet == null) {
                 return;
             }
 
-            Class64 var4 = TextureOperation30.aClass87_3125.method1439(false, new URL(TextureOperation30.aClass87_3125.gameApplet.getCodeBase(), "clienterror.ws?c=&u=" + PacketParser.aLong3202 + "&v1=" + Signlink.javaVendor + "&v2=" + Signlink.javaVersion + "&e=" + var3));
+            Class64 var4 = TextureOperation30.signlink.method1439(false, new URL(TextureOperation30.signlink.gameApplet.getCodeBase(), "clienterror.ws?c=&u=" + PacketParser.aLong3202 + "&v1=" + Signlink.javaVendor + "&v2=" + Signlink.javaVersion + "&e=" + var3));
 
             while (var4.anInt978 == 0) {
                 TimeUtils.sleep(1L);

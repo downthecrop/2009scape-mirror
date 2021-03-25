@@ -3,7 +3,7 @@ package org.runite.client;
 final class Class106 {
 
     static boolean aBoolean1441 = true;
-    static int anInt1442 = 0;
+    static int rightMargin = 0;
     static int anInt1446 = 0;
     static boolean paramUserUsingInternetExplorer = false;
     int anInt1447;

@@ -36,13 +36,13 @@ final class TextureOperation20 extends TextureOperation {
                 if(image == null) {
                    cursor = -1;
                 } else {
-                   Class38.signlink.method1434(image.method655(), 10000, image.anInt3697, GameShell.canvas, new Point(cursorDef.getHotspotX(), cursorDef.getHotspotY()), image.anInt3706);
+                   Class38.gameSignlink.method1434(image.method655(), 10000, image.anInt3697, GameShell.canvas, new Point(cursorDef.getHotspotX(), cursorDef.getHotspotY()), image.anInt3706);
                    Class65.anInt991 = cursor;
                 }
              }
 
              if(cursor == -1 && Class65.anInt991 != -1) {
-                Class38.signlink.method1434(null, 10000, -1, GameShell.canvas, new Point(), -1);
+                Class38.gameSignlink.method1434(null, 10000, -1, GameShell.canvas, new Point(), -1);
                 Class65.anInt991 = -1;
              }
 

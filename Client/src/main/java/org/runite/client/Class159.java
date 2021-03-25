@@ -30,7 +30,7 @@ public final class Class159 {
         try {
             if (Unsorted.paramJavaScriptEnabled) {
                 try {
-                    return !(Boolean) RSString.parse("showingVideoAd").method1577(Class38.signlink.gameApplet);
+                    return !(Boolean) RSString.parse("showingVideoAd").method1577(Class38.gameSignlink.gameApplet);
                 } catch (Throwable var2) {
                 }
             }

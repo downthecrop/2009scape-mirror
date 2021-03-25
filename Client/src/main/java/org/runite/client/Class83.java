@@ -319,7 +319,7 @@ public final class Class83 {
 
     public static int getWindowType() {
         try {
-            if (TextureOperation30.aFrame3121 == null) {
+            if (TextureOperation30.fullScreenFrame == null) {
                 if (HDToolKit.highDetail && Class3_Sub15.aBoolean2427) {
                     return 2;
                 } else {

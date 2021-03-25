@@ -30,7 +30,7 @@ final class Class140_Sub3 extends GameObject {
 
     static Model method1957(int var0, boolean var1, SequenceDefinition var2, int var3, int var4, int var5, int var6, int var7, Model var8, int var9, int var10, int var11, int var12) {
         try {
-            long var14 = ((long) var4 << 48) + (long) (var7 + (var0 << 16) - -(var12 << 24)) + ((long) var6 << 32);
+            long var14 = ((long) var4 << 48) + (var7 + ((long) var0 << 16) - -((long) var12 << 24)) + ((long) var6 << 32);
             Model var16 = (Model) Class158_Sub1.aReferenceCache_2982.get(var14);
             int var21;
             int var23;

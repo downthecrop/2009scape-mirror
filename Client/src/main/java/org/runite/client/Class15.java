@@ -284,7 +284,7 @@ public final class Class15 implements Runnable {
                     Class81.method1400(this.aClass87_350, null, -71);
                 }
             } catch (Exception var7) {
-                Class49.reportError(null, var7, (byte) 111);
+                Class49.reportError(null, var7);
             } finally {
                 this.aBoolean353 = false;
             }

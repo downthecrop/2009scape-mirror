@@ -47,10 +47,6 @@ public final class TextureOperation33 extends TextureOperation {
 
    final void decode(int var1, DataBuffer var2) {
       try {
-         if (!true) {
-            CS2Script.aShort3052 = -37;
-         }
-
          if (0 == var1) {
             this.anInt3047 = var2.readUnsignedShort();
          } else if (var1 == 1) {
@@ -59,37 +55,6 @@ public final class TextureOperation33 extends TextureOperation {
 
       } catch (RuntimeException var5) {
          throw ClientErrorException.clientError(var5, "an.A(" + var1 + ',' + (var2 != null ? "{...}" : "null") + ',' + true + ')');
-      }
-   }
-
-   static int method179(byte var0, int var1) {
-      try {
-         if (var0 == 92) {
-            if (null != Class3_Sub15.activeConnection) {
-               Class3_Sub15.activeConnection.close();
-               Class3_Sub15.activeConnection = null;
-            }
-
-            ++Unsorted.anInt1088;
-            if (Unsorted.anInt1088 > 4) {
-               Class43.worldListStage = 0;
-               Unsorted.anInt1088 = 0;
-               return var1;
-            } else {
-               Class43.worldListStage = 0;
-               if (Class123.anInt1658 == Client.anInt3773) {
-                  Class123.anInt1658 = Class53.anInt867;
-               } else {
-                  Class123.anInt1658 = Client.anInt3773;
-               }
-
-               return -1;
-            }
-         } else {
-            return 122;
-         }
-      } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "an.F(" + var0 + ',' + var1 + ')');
       }
    }
 
@@ -142,7 +107,7 @@ public final class TextureOperation33 extends TextureOperation {
             var2 = var2 + BufferedDataStream.incomingBuffer.buffer[var3] + ",";
          }
 
-         Class49.reportError(var2, var5, (byte) 108);
+         Class49.reportError(var2, var5);
          Class167.method2269((byte) 46);
          return true;
       }
@@ -150,10 +115,6 @@ public final class TextureOperation33 extends TextureOperation {
 
    static void method182() {
       try {
-         if (false) {
-            method179((byte) 120, -73);
-         }
-
          Texture.aReferenceCache_1146.clear();
          Class159.aReferenceCache_2016.clear();
       } catch (RuntimeException var2) {
@@ -163,7 +124,6 @@ public final class TextureOperation33 extends TextureOperation {
 
    static void method183() {
       try {
-
          Unsorted.aReferenceCache_684.clear();
          Class163_Sub1.aReferenceCache_2984.clear();
       } catch (RuntimeException var2) {
@@ -247,11 +207,6 @@ public final class TextureOperation33 extends TextureOperation {
                var9[var10] = var13;
             }
          }
-
-         if (-1 != -1) {
-            method180(-55, -63, -5);
-         }
-
          return var3;
       } catch (RuntimeException var21) {
          throw ClientErrorException.clientError(var21, "an.T(" + -1 + ',' + var2 + ')');

@@ -99,20 +99,16 @@ public final class TextureOperation9 extends TextureOperation {
 		}
 	}
 
-	static void method204(int var0) {
+	static void method204() {
 		try {
 			//Client Resize.
 			TextureOperation12.outgoingBuffer.putOpcode(243);
 			TextureOperation12.outgoingBuffer.writeByte(Class83.getWindowType());
 			TextureOperation12.outgoingBuffer.writeShort(Class23.canvasWidth);
-			if(var0 != -3) {
-				anInt3103 = -41;
-			}
-
 			TextureOperation12.outgoingBuffer.writeShort(Class140_Sub7.canvasHeight);
 			TextureOperation12.outgoingBuffer.writeByte(Unsorted.anInt3671);
 		} catch (RuntimeException var2) {
-			throw ClientErrorException.clientError(var2, "ej.C(" + var0 + ')');
+			throw ClientErrorException.clientError(var2, "ej.C(" + -3 + ')');
 		}
 	}
 

@@ -51,7 +51,7 @@ public final class Class21 {
                 Unsorted.aBooleanArray3674[var1] = true;
             }
 
-            TextureOperation9.method204(-3);
+            TextureOperation9.method204();
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "dh.F(" + false + ')');
         }

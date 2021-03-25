@@ -6,6 +6,8 @@ import org.rs09.Discord;
 import org.rs09.SystemLogger;
 import org.rs09.client.config.GameConfig;
 import org.rs09.client.console.DeveloperConsole;
+import org.rs09.client.constants.gametype.MechscapeGameAppearance;
+import org.rs09.client.constants.gametype.RunescapeGameAppearance;
 import org.rs09.client.data.HashTable;
 import org.rs09.client.filestore.resources.configs.enums.EnumDefinitionProvider;
 import org.rs09.client.filestore.resources.configs.structs.StructDefinitionProvider;
@@ -38,14 +40,11 @@ public final class Client extends GameShell {
     static int LoadingStageNumber = 10;
     static int anInt869;
     static int loginScreenInterfaceID;
-    static short[] aShortArray2219 = new short[]{(short) -4160, (short) -4163, (short) -8256, (short) -8259, (short) 22461};
     static int anInt2275 = 1;
     static int anInt2317 = 0;
     static int anInt3068 = 0;
     static int[] anIntArray3288 = new int[]{4, 4, 1, 2, 6, 4, 2, 49, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
     static long aLong3296 = 0L;
-    static short[] aShortArray3349 = new short[]{(short) -10304, (short) 9104, (short) -1, (short) -1, (short) -1};
-    static short[][] aShortArrayArray2634 = new short[][]{{(short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 4, (short) 24, (short) 44, (short) 64, (short) 84, (short) 104, (short) 304, (short) 678, (short) 698, (short) 550, (short) 934, (short) 954, (short) 6448, (short) 6946, (short) 6966, (short) 2352, (short) 2726, (short) 2746, (short) 10544, (short) 10918, (short) 10938, (short) 10304, (short) 10550, (short) 10570, (short) 14640, (short) 15014, (short) 15034, (short) 19760, (short) 20134, (short) 20154, (short) -29392, (short) -29018, (short) -28998, (short) 31024, (short) 31270, (short) 31290, (short) -24272, (short) -23898, (short) -23878, (short) -19152, (short) -18778, (short) -18758, (short) -14032, (short) -13658, (short) -13638, (short) -6864, (short) -6490, (short) -6470, (short) 516, (short) 536, (short) 6788, (short) 6808, (short) 11012, (short) 11032, (short) 14980, (short) 15000, (short) 21124, (short) 21144, (short) -28924, (short) -28904, (short) -22012, (short) -21992, (short) -12924, (short) -12904}, {(short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 10339, (short) 10574, (short) 10425, (short) 10398, (short) 10345, (short) 7512, (short) 8507, (short) 7378, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0}, {(short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 4, (short) 24, (short) 44, (short) 64, (short) 84, (short) 104, (short) 304, (short) 678, (short) 698, (short) 550, (short) 934, (short) 954, (short) 6448, (short) 6946, (short) 6966, (short) 2352, (short) 2726, (short) 2746, (short) 10544, (short) 10918, (short) 10938, (short) 10304, (short) 10550, (short) 10570, (short) 14640, (short) 15014, (short) 15034, (short) 19760, (short) 20134, (short) 20154, (short) -29392, (short) -29018, (short) -28998, (short) 31024, (short) 31270, (short) 31290, (short) -24272, (short) -23898, (short) -23878, (short) -19152, (short) -18778, (short) -18758, (short) -14032, (short) -13658, (short) -13638, (short) -6864, (short) -6490, (short) -6470, (short) 516, (short) 536, (short) 6788, (short) 6808, (short) 11012, (short) 11032, (short) 14980, (short) 15000, (short) 21124, (short) 21144, (short) -28924, (short) -28904, (short) -22012, (short) -21992, (short) -12924, (short) -12904}, {(short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 13753, (short) 13737, (short) 13719, (short) 13883, (short) 13863, (short) 13974, (short) 19643, (short) 18601, (short) 16532, (short) 23993, (short) 25121, (short) 24980, (short) 26944, (short) 26921, (short) 24854, (short) 27191, (short) 27171, (short) 26130, (short) 26941, (short) 28696, (short) 30100, (short) 12477, (short) 10407, (short) 10388, (short) 10685, (short) 10665, (short) 10646, (short) 6711, (short) 6693, (short) 6674, (short) 6965, (short) 7073, (short) 7056, (short) 2361, (short) 4387, (short) 3346, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0}, {(short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 4, (short) 24, (short) 44, (short) 64, (short) 84, (short) 104, (short) 304, (short) 678, (short) 698, (short) 550, (short) 934, (short) 954, (short) 6448, (short) 6946, (short) 6966, (short) 2352, (short) 2726, (short) 2746, (short) 10544, (short) 10918, (short) 10938, (short) 10304, (short) 10550, (short) 10570, (short) 14640, (short) 15014, (short) 15034, (short) 19760, (short) 20134, (short) 20154, (short) -29392, (short) -29018, (short) -28998, (short) 31024, (short) 31270, (short) 31290, (short) -24272, (short) -23898, (short) -23878, (short) -19152, (short) -18778, (short) -18758, (short) -14032, (short) -13658, (short) -13638, (short) -6864, (short) -6490, (short) -6470, (short) 516, (short) 536, (short) 6788, (short) 6808, (short) 11012, (short) 11032, (short) 14980, (short) 15000, (short) 21124, (short) 21144, (short) -28924, (short) -28904, (short) -22012, (short) -21992, (short) -12924, (short) -12904}};
     static Class3_Sub24_Sub4 aClass3_Sub24_Sub4_1193;
     static long aLong1310 = 0L;
     static int anInt1354 = 0;
@@ -127,100 +126,94 @@ public final class Client extends GameShell {
      */
     public static void main(String[] args) {
         try {
+            if (args.length != 4) {
+                invalidArgument("argument count");
+            }
+
+            int language = -1;
+
+            ObjectDefinition.paramWorldID = Integer.parseInt(args[0]);
+
+            Class44.paramModeWhere = LOCAL_ENVIRONMENT;
+
+            switch (args[1]) {
+                case "live":
+                    TextureOperation20.paramModeWhat = LIVE_SERVER;
+                    break;
+                case "rc":
+                    TextureOperation20.paramModeWhat = RELEASE_CANDIDATE;
+                    break;
+                case "wip":
+                    TextureOperation20.paramModeWhat = WORK_IN_PROGRESS;
+                    break;
+                default:
+                    invalidArgument("modewhat");
+                    break;
+            }
+
+            paramAdvertisementSuppressed = false;
+
             try {
-                if (args.length != 4) {
-                    invalidArgument("argument count");
-                }
-
-                int language = -1;
-
-                ObjectDefinition.paramWorldID = Integer.parseInt(args[0]);
-
-                Class44.paramModeWhere = 2;
-
-                switch (args[1]) {
-                    case "live":
-                        TextureOperation20.paramModeWhat = 0;
-                        break;
-                    case "rc":
-                        TextureOperation20.paramModeWhat = 1;
-                        break;
-                    case "wip":
-                        TextureOperation20.paramModeWhat = 2;
-                        break;
-                    default:
-                        invalidArgument("modewhat");
-                        break;
-                }
-
-                paramAdvertisementSuppressed = false;
-
-                try {
-                    byte[] languageSelection = args[2].getBytes(StandardCharsets.ISO_8859_1);
+                byte[] languageSelection = args[2].getBytes(StandardCharsets.ISO_8859_1);
                     /*
                         Accepts en, de, fr, pt
                      */
-                    language = TextureOperation15.compareEnteredLanguageArgument(TextureOperation33.bufferToString(languageSelection, languageSelection.length, 0));
-                } catch (Exception ignored) {
+                language = TextureOperation15.compareEnteredLanguageArgument(TextureOperation33.bufferToString(languageSelection, languageSelection.length, 0));
+            } catch (Exception ignored) {
 
-                }
-
-                if (language == -1) {
-                    switch (args[2]) {
-                        case "english":
-                            Class3_Sub20.paramLanguage = 0;
-                            break;
-                        case "german":
-                            Class3_Sub20.paramLanguage = 1;
-                            break;
-                        case "french":
-                            Class3_Sub20.paramLanguage = 2;
-                            break;
-                        default:
-                            invalidArgument("language");
-                            break;
-                    }
-                } else {
-                    Class3_Sub20.paramLanguage = language;
-                }
-
-                Unsorted.languageSetter(Class3_Sub20.paramLanguage);
-
-                Class163_Sub2_Sub1.paramObjectTagEnabled = false;
-                Unsorted.paramJavaScriptEnabled = false;
-
-                switch (args[3]) {
-                    case "game0":
-                        Class158.paramGameTypeID = 0;
-                        break;
-                    case "game1":
-                        Class158.paramGameTypeID = 1;
-                        break;
-                    default:
-                        invalidArgument("game");
-                        break;
-                }
-
-                Class3_Sub31.paramCountryID = 0;
-
-                Class106.paramUserUsingInternetExplorer = false;
-
-                Class3_Sub26.paramAffid = 0;
-
-                Class163_Sub2.paramSettings = RSString.parse("");
-
-                Client client = new Client();
-                clientInstance = client;
-                client.launch();
-
-                GameShell.frame.setLocation(40, 40);
-
-            } catch (Exception var4) {
-                Class49.reportError(null, var4, (byte) 119);
             }
 
-        } catch (RuntimeException var5) {
-            throw ClientErrorException.clientError(var5, "client.main(" + (args != null ? "{...}" : "null") + ')');
+            if (language == -1) {
+                switch (args[2]) {
+                    case "english":
+                        Class3_Sub20.paramLanguage = LANGUAGE_ENGLISH;
+                        break;
+                    case "german":
+                        Class3_Sub20.paramLanguage = LANGUAGE_GERMAN;
+                        break;
+                    case "french":
+                        Class3_Sub20.paramLanguage = LANGUAGE_FRENCH;
+                        break;
+                    default:
+                        invalidArgument("language");
+                        break;
+                }
+            } else {
+                Class3_Sub20.paramLanguage = language;
+            }
+
+            Unsorted.languageSetter(Class3_Sub20.paramLanguage);
+
+            Class163_Sub2_Sub1.paramObjectTagEnabled = false;
+            Unsorted.paramJavaScriptEnabled = false;
+
+            switch (args[3]) {
+                case "game0":
+                    Class158.paramGameTypeID = GAME_TYPE_RUNESCAPE;
+                    break;
+                case "game1":
+                    Class158.paramGameTypeID = GAME_TYPE_MECHSCAPE;
+                    break;
+                default:
+                    invalidArgument("game");
+                    break;
+            }
+
+            Class3_Sub31.paramCountryID = 0;
+
+            Class106.paramUserUsingInternetExplorer = false;
+
+            Class3_Sub26.paramAffid = NO_AFFILIATE;
+
+            Class163_Sub2.paramSettings = RSString.parse("");
+
+            Client client = new Client();
+            clientInstance = client;
+            client.launch();
+            GameShell.frame.setLocation(40, 40);
+
+        } catch (Exception var4) {
+            Class49.reportError(null, var4);
         }
     }
 
@@ -761,10 +754,10 @@ public final class Client extends GameShell {
 
                 int var4;
                 int var5;
-                if (null == TextureOperation30.aFrame3121) {
+                if (null == TextureOperation30.fullScreenFrame) {
                     Object var3;
                     if (GameShell.frame == null) {
-                        var3 = Class38.signlink.gameApplet;
+                        var3 = Class38.gameSignlink.gameApplet;
                     } else {
                         var3 = GameShell.frame;
                     }
@@ -777,10 +770,10 @@ public final class Client extends GameShell {
                         var5 -= var6.top + var6.bottom;
                     }
 
-                    if (var4 != Unsorted.anInt2334 || Class70.anInt1047 != var5) {
+                    if (var4 != Unsorted.frameWidth || Class70.frameHeight != var5) {
                         if (Signlink.osName.startsWith("mac")) {
-                            Unsorted.anInt2334 = var4;
-                            Class70.anInt1047 = var5;
+                            Unsorted.frameWidth = var4;
+                            Class70.frameHeight = var5;
                         } else {
                             Class119.method1729();
                         }
@@ -789,14 +782,14 @@ public final class Client extends GameShell {
                     }
                 }
 
-                if (TextureOperation30.aFrame3121 != null && !TextureOperation26.aBoolean3078 && (30 == Class143.gameStage || 10 == Class143.gameStage)) {
+                if (TextureOperation30.fullScreenFrame != null && !TextureOperation26.aBoolean3078 && (30 == Class143.gameStage || 10 == Class143.gameStage)) {
                     GameObject.graphicsSettings(false, Unsorted.anInt2577, -1, -1);
                 }
 
                 boolean var10 = false;
-                if (TextureOperation30.aBoolean3116) {
+                if (TextureOperation30.fullRedraw) {
                     var10 = true;
-                    TextureOperation30.aBoolean3116 = false;
+                    TextureOperation30.fullRedraw = false;
                 }
 
                 if (var10) {
@@ -887,7 +880,7 @@ public final class Client extends GameShell {
 
                 if (Unsorted.aBoolean2146 && 10 == Class143.gameStage && ConfigInventoryDefinition.anInt3655 != -1) {
                     Unsorted.aBoolean2146 = false;
-                    Class119.method1730(Class38.signlink);
+                    Class119.method1730(Class38.gameSignlink);
                 }
 
                 DeveloperConsole.INSTANCE.postDraw();
@@ -908,13 +901,13 @@ public final class Client extends GameShell {
                 HDToolKit.method1842();
             }
 
-            if (null != TextureOperation30.aFrame3121) {
-                Unsorted.method593(TextureOperation30.aFrame3121, Class38.signlink);
-                TextureOperation30.aFrame3121 = null;
+            if (null != TextureOperation30.fullScreenFrame) {
+                Unsorted.method593(TextureOperation30.fullScreenFrame, Class38.gameSignlink);
+                TextureOperation30.fullScreenFrame = null;
             }
 
-            if (null != Class38.signlink) {
-                Class38.signlink.method1442(this.getClass(), 0);
+            if (null != Class38.gameSignlink) {
+                Class38.gameSignlink.method1442(this.getClass(), 0);
             }
 
             if (null != TextureOperation20.aClass67_1443) {
@@ -978,8 +971,9 @@ public final class Client extends GameShell {
         try {
             GameConfig.WORLD = GameConfig.WORLD_OVERRIDE == -1 ? ObjectDefinition.paramWorldID : GameConfig.WORLD_OVERRIDE;
             ObjectDefinition.paramWorldID = GameConfig.WORLD_OVERRIDE == -1 ? 1 : GameConfig.WORLD_OVERRIDE;
+
             Class44.paramModeWhere = Integer.parseInt(Objects.requireNonNull(this.getParameter("modewhere")));
-            if (0 > Class44.paramModeWhere || 1 < Class44.paramModeWhere) {
+            if (Class44.paramModeWhere < LIVE_ENVIRONMENT || Class44.paramModeWhere > LOCAL_ENVIRONMENT) {
                 Class44.paramModeWhere = 0;
             }
 
@@ -1053,7 +1047,7 @@ public final class Client extends GameShell {
 
             CS2Script.userCurrentWorldID = ObjectDefinition.paramWorldID;
 
-            Unsorted.parsePreferences(Class38.signlink);
+            Unsorted.parsePreferences(Class38.gameSignlink);
             SystemLogger.logInfo("port: " + Class53.anInt867);
             SystemLogger.logInfo("MSIP: " + GameConfig.IP_MANAGEMENT);
 
@@ -1077,20 +1071,20 @@ public final class Client extends GameShell {
 
             switch (Class158.paramGameTypeID) {
                 case GAME_TYPE_RUNESCAPE:
-                    Class15.aShortArrayArray344 = ConfigInventoryDefinition.aShortArrayArray3654;
-                    Class91.aShortArray1311 = aShortArray3349;
-                    Class101.aShortArrayArray1429 = Class20.aShortArrayArray435;
-                    Class3_Sub25.aShortArray2548 = Class164_Sub1.aShortArray3011;
+                    Class15.aShortArrayArray344 = RunescapeGameAppearance.INSTANCE.getAShortArrayArray3654();
+                    Class91.aShortArray1311 = RunescapeGameAppearance.INSTANCE.getAShortArray3349();
+                    Class101.aShortArrayArray1429 = RunescapeGameAppearance.INSTANCE.getAShortArrayArray435();
+                    Class3_Sub25.aShortArray2548 = RunescapeGameAppearance.INSTANCE.getAShortArray3011();
                     break;
 
                 case GAME_TYPE_MECHSCAPE:
                     ClientCommands.shiftClickEnabled = true;
                     Class92.defaultScreenColorRgb = 16777215;
                     Class92.defaultRegionAmbientRGB = 0;
-                    Class15.aShortArrayArray344 = Unsorted.aShortArrayArray1619;
-                    Class101.aShortArrayArray1429 = aShortArrayArray2634;
-                    Class3_Sub25.aShortArray2548 = Unsorted.aShortArray63;
-                    Class91.aShortArray1311 = aShortArray2219;
+                    Class15.aShortArrayArray344 = MechscapeGameAppearance.INSTANCE.getAShortArrayArray1619();
+                    Class101.aShortArrayArray1429 = MechscapeGameAppearance.INSTANCE.getAShortArrayArray2634();
+                    Class3_Sub25.aShortArray2548 = MechscapeGameAppearance.INSTANCE.getAShortArray63();
+                    Class91.aShortArray1311 = MechscapeGameAppearance.INSTANCE.getAShortArray2219();
                     break;
 
             }
@@ -1115,20 +1109,20 @@ public final class Client extends GameShell {
             }
 
             try {
-                if (Class38.signlink.cacheDataFile != null) {
-                    Class101.aClass30_1422 = new Class30(Class38.signlink.cacheDataFile, 5200);
+                if (Class38.gameSignlink.cacheDataFile != null) {
+                    Class101.aClass30_1422 = new Class30(Class38.gameSignlink.cacheDataFile, 5200);
 
                     for (int var2 = 0; var2 < 29; ++var2) {
-                        Class163_Sub2.aClass30Array2998[var2] = new Class30(Class38.signlink.cacheIndicesFiles[var2], 6000);
+                        Class163_Sub2.aClass30Array2998[var2] = new Class30(Class38.gameSignlink.cacheIndicesFiles[var2], 6000);
                     }
 
-                    aClass30_1572 = new Class30(Class38.signlink.cacheChecksumFile, 6000);
+                    aClass30_1572 = new Class30(Class38.gameSignlink.cacheChecksumFile, 6000);
                     AtmosphereParser.aClass41_1186 = new Class41(255, Class101.aClass30_1422, aClass30_1572, 500000);
-                    Unsorted.aClass30_1039 = new Class30(Class38.signlink.randomDatFile, 24);
-                    Class38.signlink.cacheIndicesFiles = null;
-                    Class38.signlink.cacheChecksumFile = null;
-                    Class38.signlink.randomDatFile = null;
-                    Class38.signlink.cacheDataFile = null;
+                    Unsorted.aClass30_1039 = new Class30(Class38.gameSignlink.randomDatFile, 24);
+                    Class38.gameSignlink.cacheIndicesFiles = null;
+                    Class38.gameSignlink.cacheChecksumFile = null;
+                    Class38.gameSignlink.randomDatFile = null;
+                    Class38.gameSignlink.cacheDataFile = null;
                 }
             } catch (IOException var3) {
                 Unsorted.aClass30_1039 = null;
@@ -1360,7 +1354,7 @@ public final class Client extends GameShell {
         } else {
             try {
                 if (PacketParser.anInt80 == 0) {
-                    Class17.aClass64_413 = Class38.signlink.method1441((byte) 8, Class38_Sub1.accRegistryIp, Class140_Sub6.accRegistryPort);
+                    Class17.aClass64_413 = Class38.gameSignlink.method1441((byte) 8, Class38_Sub1.accRegistryIp, Class140_Sub6.accRegistryPort);
                     ++PacketParser.anInt80;
                 }
 
@@ -1376,7 +1370,7 @@ public final class Client extends GameShell {
                 }
 
                 if (2 == PacketParser.anInt80) {
-                    Unsorted.js5Connection = new Connection((Socket) Objects.requireNonNull(Class17.aClass64_413).anObject974, Class38.signlink);
+                    Unsorted.js5Connection = new Connection((Socket) Objects.requireNonNull(Class17.aClass64_413).anObject974, Class38.gameSignlink);
                     DataBuffer var2 = new DataBuffer(9);
                     var2.writeByte(15); //JS5 handshake
                     var2.writeInt(GameConfig.CLIENT_BUILD);
@@ -1529,10 +1523,10 @@ public final class Client extends GameShell {
                         Class140_Sub3.method1959(TextureOperation17.aBoolean3184);
                         aClass3_Sub24_Sub4_1193 = new Class3_Sub24_Sub4();
                         aClass3_Sub24_Sub4_1193.method479();
-                        WorldListEntry.aClass155_2627 = Class58.method1195(22050, Class38.signlink, GameShell.canvas, 0);
+                        WorldListEntry.aClass155_2627 = Class58.method1195(22050, Class38.gameSignlink, GameShell.canvas, 0);
                         WorldListEntry.aClass155_2627.method2154(-116, aClass3_Sub24_Sub4_1193);
                         RenderAnimationDefinition.method897(aClass3_Sub24_Sub4_1193, CacheIndex.soundFX3Index, CacheIndex.soundFX2Index, CacheIndex.soundFXIndex);
-                        Class3_Sub21.aClass155_2491 = Class58.method1195(2048, Class38.signlink, GameShell.canvas, 1);
+                        Class3_Sub21.aClass155_2491 = Class58.method1195(2048, Class38.gameSignlink, GameShell.canvas, 1);
                         Class3_Sub26.aClass3_Sub24_Sub2_2563 = new Class3_Sub24_Sub2();
                         Class3_Sub21.aClass155_2491.method2154(-128, Class3_Sub26.aClass3_Sub24_Sub2_2563);
                         Class27.aClass157_524 = new Class157(22050, Class21.anInt443);
@@ -1642,7 +1636,7 @@ public final class Client extends GameShell {
                             }
                         } else if (anInt1354 == 110) {
                             TextureOperation20.aClass67_1443 = new Class67();
-                            Class38.signlink.method1451(10, TextureOperation20.aClass67_1443);
+                            Class38.gameSignlink.startThread(10, TextureOperation20.aClass67_1443);
                             Class3_Sub17.aClass94_2464 = TextCore.LoadedInputHandler;
                             LoadingStageNumber = 75;
                             anInt1354 = 120;
@@ -1710,7 +1704,7 @@ public final class Client extends GameShell {
                                 }
 
                                 Unsorted.aBoolean2146 = true;
-                                Class119.method1730(Class38.signlink);
+                                Class119.method1730(Class38.gameSignlink);
                                 GameObject.graphicsSettings(false, Unsorted.anInt2577, -1, -1);
                                 LoadingStageNumber = 100;
                                 anInt1354 = 160;

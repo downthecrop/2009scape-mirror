@@ -10,6 +10,7 @@ import java.util.Objects;
 
 public class LoginHandler {
 
+    private static final BufferedDataStream buffer = new BufferedDataStream();
     static CacheIndex aClass153_1680;
     static boolean dynamic;
     public static int loginStage = 0;
@@ -42,7 +43,7 @@ public class LoginHandler {
                         ++Class166.anInt2079;
                     }
                     if (loginStage == 1) {
-                        Class3_Sub9.aClass64_2318 = Class38.signlink.method1441((byte) 8, Class38_Sub1.accRegistryIp, GameConfig.SERVER_PORT + GameConfig.WORLD);//Class140_Sub6.accRegistryPort);
+                        Class3_Sub9.aClass64_2318 = Class38.gameSignlink.method1441((byte) 8, Class38_Sub1.accRegistryIp, GameConfig.SERVER_PORT + GameConfig.WORLD);//Class140_Sub6.accRegistryPort);
                         loginStage = 2;
                     }
 
@@ -55,7 +56,7 @@ public class LoginHandler {
                             return;
                         }
 
-                        Class3_Sub15.activeConnection = new Connection((Socket) Class3_Sub9.aClass64_2318.anObject974, Class38.signlink);
+                        Class3_Sub15.activeConnection = new Connection((Socket) Class3_Sub9.aClass64_2318.anObject974, Class38.gameSignlink);
                         Class3_Sub9.aClass64_2318 = null;
                         long var1 = PacketParser.aLong3202 = Class131.username.toLong();
                         TextureOperation12.outgoingBuffer.index = 0;
@@ -114,59 +115,59 @@ public class LoginHandler {
                         TextureOperation12.outgoingBuffer.writeString(Class131.password);
                         TextureOperation12.method229();
                         TextureOperation12.outgoingBuffer.rsaEncrypt(TextureOperation10.EXPONENT, TextureOperation31.MODULUS);
-                        Unsorted.aBufferedDataStream_2942.index = 0;
+                        buffer.index = 0;
                         if (40 == Class143.gameStage) {
-                            Unsorted.aBufferedDataStream_2942.writeByte(18);
+                            buffer.writeByte(18);
                         } else {
-                            Unsorted.aBufferedDataStream_2942.writeByte(16);
+                            buffer.writeByte(16);
                         }
 
-                        Unsorted.aBufferedDataStream_2942.writeShort(TextureOperation12.outgoingBuffer.index + 163 - -TextureOperation29.method326((byte) 111, Class163_Sub2.paramSettings));
-                        Unsorted.aBufferedDataStream_2942.writeInt(GameConfig.CLIENT_BUILD);
-                        Unsorted.aBufferedDataStream_2942.writeByte(Class7.anInt2161);
-                        Unsorted.aBufferedDataStream_2942.writeByte(!Client.paramAdvertisementSuppressed ? 0 : 1);
-                        Unsorted.aBufferedDataStream_2942.writeByte(1);
-                        Unsorted.aBufferedDataStream_2942.writeByte(Class83.getWindowType());
-                        Unsorted.aBufferedDataStream_2942.writeShort(Class23.canvasWidth);
-                        Unsorted.aBufferedDataStream_2942.writeShort(Class140_Sub7.canvasHeight);
-                        Unsorted.aBufferedDataStream_2942.writeByte(Unsorted.anInt3671);
-                        Class81.putRandomDataFile(Unsorted.aBufferedDataStream_2942, true);
-                        Unsorted.aBufferedDataStream_2942.writeString(Class163_Sub2.paramSettings);
-                        Unsorted.aBufferedDataStream_2942.writeInt(Class3_Sub26.paramAffid);
-                        Unsorted.aBufferedDataStream_2942.writeInt(Class84.method1421());
+                        buffer.writeShort(TextureOperation12.outgoingBuffer.index + 163 - -TextureOperation29.method326((byte) 111, Class163_Sub2.paramSettings));
+                        buffer.writeInt(GameConfig.CLIENT_BUILD);
+                        buffer.writeByte(Class7.anInt2161);
+                        buffer.writeByte(!Client.paramAdvertisementSuppressed ? 0 : 1);
+                        buffer.writeByte(1);
+                        buffer.writeByte(Class83.getWindowType());
+                        buffer.writeShort(Class23.canvasWidth);
+                        buffer.writeShort(Class140_Sub7.canvasHeight);
+                        buffer.writeByte(Unsorted.anInt3671);
+                        Class81.putRandomDataFile(buffer, true);
+                        buffer.writeString(Class163_Sub2.paramSettings);
+                        buffer.writeInt(Class3_Sub26.paramAffid);
+                        buffer.writeInt(Class84.method1421());
                         CS2Script.aBoolean2705 = true;
-                        Unsorted.aBufferedDataStream_2942.writeShort(Class113.interfacePacketCounter);
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.skeletonsIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.skinsIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.configurationsIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.interfacesIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.soundFXIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.landscapesIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.musicIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.modelsIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.spritesIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.texturesIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.huffmanEncodingIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.music2Index.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.interfaceScriptsIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.fontsIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.soundFX2Index.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.soundFX3Index.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.objectConfigIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.clientscriptMaskIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.npcConfigIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.itemConfigIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.animationIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.graphicFXIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.clientScriptConfigIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.worldmapIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.quickchatMessagesIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.quickchatMenusIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.materialsIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.particlesConfigIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.writeInt(CacheIndex.libIndex.getReferenceTableCrc());
-                        Unsorted.aBufferedDataStream_2942.putBytes(TextureOperation12.outgoingBuffer.buffer, TextureOperation12.outgoingBuffer.index);
-                        Class3_Sub15.activeConnection.sendBytes(Unsorted.aBufferedDataStream_2942.buffer, Unsorted.aBufferedDataStream_2942.index);
+                        buffer.writeShort(Class113.interfacePacketCounter);
+                        buffer.writeInt(CacheIndex.skeletonsIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.skinsIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.configurationsIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.interfacesIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.soundFXIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.landscapesIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.musicIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.modelsIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.spritesIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.texturesIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.huffmanEncodingIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.music2Index.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.interfaceScriptsIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.fontsIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.soundFX2Index.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.soundFX3Index.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.objectConfigIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.clientscriptMaskIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.npcConfigIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.itemConfigIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.animationIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.graphicFXIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.clientScriptConfigIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.worldmapIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.quickchatMessagesIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.quickchatMenusIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.materialsIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.particlesConfigIndex.getReferenceTableCrc());
+                        buffer.writeInt(CacheIndex.libIndex.getReferenceTableCrc());
+                        buffer.putBytes(TextureOperation12.outgoingBuffer.buffer, TextureOperation12.outgoingBuffer.index);
+                        Class3_Sub15.activeConnection.sendBytes(buffer.buffer, buffer.index);
                         TextureOperation12.outgoingBuffer.method814(var9);
 
                         for (int var2 = 0; var2 < 4; ++var2) {
@@ -278,12 +279,12 @@ public class LoginHandler {
                         if (!Client.paramAdvertisementSuppressed) {
                             if ((!Class3_Sub15.aBoolean2433 || Unsorted.aBoolean4063) && !TextureOperation3.disableGEBoxes) {
                                 try {
-                                    TextCore.aClass94_516.method1577(Class38.signlink.gameApplet);
+                                    TextCore.aClass94_516.method1577(Class38.gameSignlink.gameApplet);
                                 } catch (Throwable var5) {
                                 }
                             } else {
                                 try {
-                                    Class97.aClass94_1374.method1577(Class38.signlink.gameApplet);
+                                    Class97.aClass94_1374.method1577(Class38.gameSignlink.gameApplet);
                                 } catch (Throwable var6) {
                                 }
                             }

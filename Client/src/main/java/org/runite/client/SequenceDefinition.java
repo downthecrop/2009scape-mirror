@@ -550,7 +550,7 @@ public final class SequenceDefinition {
 			TextureOperation38.aShortArray3455 = TextureOperation16.aShortArray3110 = Class136.aShortArray1779 = TextureOperation38.aShortArray3453 = new short[256];
 			InvalidateData.method165();
 			Unsorted.aBoolean1951 = false;
-			TextureOperation9.method204(-3);
+			TextureOperation9.method204();
 		} catch (RuntimeException var6) {
 			throw ClientErrorException.clientError(var6, "tk.A(" + true + ')');
 		}

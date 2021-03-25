@@ -5,7 +5,7 @@ public final class Class84 {
     static int[][] anIntArrayArray1160 = new int[104][104];
     static LinkedList aLinkedList_1162 = new LinkedList();
     public static int[] anIntArray1163 = new int[1000];
-    static int anInt1164 = 0;
+    static int leftMargin = 0;
     static Class3_Sub28_Sub16_Sub2 aClass3_Sub28_Sub16_Sub2_1381;
     static int[] anIntArray1729 = new int[]{12543016, 15504954, 15914854, 16773818};
 

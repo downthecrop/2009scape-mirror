@@ -3,7 +3,7 @@ package org.runite.client;
 final class Class70 {
 
     static RSString[] aClass94Array1046 = new RSString[200];
-    static int anInt1047;
+    static int frameHeight;
     static double aDouble1050 = -1.0D;
     static int anInt1053 = 0;
     int anInt1045;
