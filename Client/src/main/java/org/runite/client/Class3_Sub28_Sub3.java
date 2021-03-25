@@ -88,10 +88,10 @@ final class Class3_Sub28_Sub3 extends Node {
          int var4 = 0;
          short[] var3 = new short[16];
          int var6 = !var1?0:32768;
-         int var7 = (!var1?Class83.anInt1156:RenderAnimationDefinition.anInt377) + var6;
+         int var7 = (!var1? QuickChat.anInt1156: QuickChat.anInt377) + var6;
 
          for(int var8 = var6; var8 < var7; ++var8) {
-            Class3_Sub28_Sub4 var9 = LinkableRSString.method733(var8);
+            QuickChatDefinition var9 = QuickChat.method733(var8);
             if(var9.aBoolean3568 && var9.method554().toLowercase().indexOf(var2, 112) != -1) {
                if(var4 >= 50) {
                   Unsorted.anInt952 = -1;
@@ -117,7 +117,7 @@ final class Class3_Sub28_Sub3 extends Node {
          RSString[] var13 = new RSString[Unsorted.anInt952];
 
          for(int var14 = 0; Unsorted.anInt952 > var14; ++var14) {
-            var13[var14] = LinkableRSString.method733(var3[var14]).method554();
+            var13[var14] = QuickChat.method733(var3[var14]).method554();
          }
 
          TextureOperation3.method307(var13, Class99.aShortArray1398, 100);

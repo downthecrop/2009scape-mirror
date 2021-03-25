@@ -20,7 +20,7 @@ final class WaterfallShader implements ShaderInterface {
 
    static void method1626(byte var0) {
       try {
-         Class3_Sub28_Sub4.aReferenceCache_3572.clear();
+         QuickChatDefinition.aReferenceCache_3572.clear();
          Class143.aReferenceCache_1874.clear();
          if(var0 <= -124) {
             Class67.aReferenceCache_1013.clear();

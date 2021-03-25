@@ -77,7 +77,7 @@ public final class BufferedDataStream extends DataBuffer {
                     TextureOperation12.outgoingBuffer.writeShort128LE(Class164.anInt2050);
                     TextureOperation12.outgoingBuffer.writeShort128LE(var5);
                     anInt2330 = 0;
-                    Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                    Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
                     KeyboardListener.anInt1918 = var2;
                     System.out.println(anInt1473 + ", " + var3 + ", " + var2 + ", " + Class3_Sub28_Sub18.anInt3764 + ", " + Class164.anInt2050 + ", " + var5);
                 }
@@ -128,7 +128,7 @@ public final class BufferedDataStream extends DataBuffer {
                     TextureOperation12.outgoingBuffer.putShortA(var2);
                     TextureOperation12.outgoingBuffer.writeIntV2(var3);
                     anInt2330 = 0;
-                    Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                    Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
                     KeyboardListener.anInt1918 = var2;
                 }
 
@@ -199,7 +199,7 @@ public final class BufferedDataStream extends DataBuffer {
 
                 RSInterface var13;
                 if (var4 == 1006) {
-                    var13 = Class7.getRSInterface(var3);
+                    var13 = Unsorted.getRSInterface(var3);
                     if (null != var13 && var13.itemIds[var2] >= 100000) {
                         addChatMessage(RSString.parse(""), 0, RSString.stringCombiner(new RSString[]{RSString.stringAnimator(var13.itemIds[var2]), TextCore.aClass94_3777, ItemDefinition.getItemDefinition(var5).name}), -1);
                     } else {
@@ -208,7 +208,7 @@ public final class BufferedDataStream extends DataBuffer {
                     }
 
                     anInt2330 = 0;
-                    Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                    Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
                     KeyboardListener.anInt1918 = var2;
                 }
 
@@ -261,7 +261,7 @@ public final class BufferedDataStream extends DataBuffer {
                         TextureOperation12.outgoingBuffer.putShortA(var2);
                         TextureOperation12.outgoingBuffer.writeIntV2(var3);
                         anInt2330 = 0;
-                        Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                        Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
 
 
                     } else {
@@ -270,7 +270,7 @@ public final class BufferedDataStream extends DataBuffer {
                         TextureOperation12.outgoingBuffer.putShortA(var5);
                         TextureOperation12.outgoingBuffer.writeIntLE2(var3);
                         anInt2330 = 0;
-                        Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                        Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
                     }
                     KeyboardListener.anInt1918 = var2;
                 }
@@ -283,7 +283,7 @@ public final class BufferedDataStream extends DataBuffer {
                     TextureOperation12.outgoingBuffer.putShortA(var5);
                     TextureOperation12.outgoingBuffer.writeShortLE(RSInterface.anInt278);
                     anInt2330 = 0;
-                    Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                    Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
                     KeyboardListener.anInt1918 = var2;
                 }
 
@@ -320,7 +320,7 @@ public final class BufferedDataStream extends DataBuffer {
                     TextureOperation12.outgoingBuffer.writeShortLE(var2);//data
                     TextureOperation12.outgoingBuffer.writeIntLE2(var3);//slot
                     anInt2330 = 0;
-                    Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                    Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
                     KeyboardListener.anInt1918 = var2;
                 }
 
@@ -359,7 +359,7 @@ public final class BufferedDataStream extends DataBuffer {
                         TextureOperation12.outgoingBuffer.putShortA(var2);
                         TextureOperation12.outgoingBuffer.writeIntV2(var3);
                         anInt2330 = 0;
-                        Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                        Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
 
                     } else {
                         TextureOperation12.outgoingBuffer.putOpcode(55);
@@ -367,7 +367,7 @@ public final class BufferedDataStream extends DataBuffer {
                         TextureOperation12.outgoingBuffer.putShortA(var2);
                         TextureOperation12.outgoingBuffer.writeIntV1(var3);
                         anInt2330 = 0;
-                        Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                        Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
 
                     }
                     KeyboardListener.anInt1918 = var2;
@@ -445,7 +445,7 @@ public final class BufferedDataStream extends DataBuffer {
                         TextureOperation12.outgoingBuffer.writeShort128LE(var5);
                         TextureOperation12.outgoingBuffer.writeShort128LE(var2);
                         anInt2330 = 0;
-                        Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                        Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
                         KeyboardListener.anInt1918 = var2;
                     }
 
@@ -490,7 +490,7 @@ public final class BufferedDataStream extends DataBuffer {
                         TextureOperation12.outgoingBuffer.writeShort(var5);
                         TextureOperation12.outgoingBuffer.writeIntV1(var3);
                         anInt2330 = 0;
-                        Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                        Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
                         KeyboardListener.anInt1918 = var2;
                     }
 
@@ -511,7 +511,7 @@ public final class BufferedDataStream extends DataBuffer {
                     if (var4 == 51) {
                         TextureOperation12.outgoingBuffer.putOpcode(10);
                         TextureOperation12.outgoingBuffer.writeInt(var3);
-                        var13 = Class7.getRSInterface(var3);
+                        var13 = Unsorted.getRSInterface(var3);
                         if (Objects.requireNonNull(var13).childDataBuffers != null && var13.childDataBuffers[0][0] == 5) {
                             var12 = var13.childDataBuffers[0][1];
                             if (ItemDefinition.ram[var12] != var13.anIntArray307[0]) {
@@ -541,7 +541,7 @@ public final class BufferedDataStream extends DataBuffer {
                     if (59 == var4) {
                         TextureOperation12.outgoingBuffer.putOpcode(10);
                         TextureOperation12.outgoingBuffer.writeInt(var3);
-                        var13 = Class7.getRSInterface(var3);
+                        var13 = Unsorted.getRSInterface(var3);
                         if (Objects.requireNonNull(var13).childDataBuffers != null && var13.childDataBuffers[0][0] == 5) {
                             var12 = var13.childDataBuffers[0][1];
                             ItemDefinition.ram[var12] = -ItemDefinition.ram[var12] + 1;
@@ -591,7 +591,7 @@ public final class BufferedDataStream extends DataBuffer {
                     }
 
                     if (8 == var4) {
-                        var13 = Class7.getRSInterface(var3);
+                        var13 = Unsorted.getRSInterface(var3);
                         boolean var15 = true;
                         if (0 < Objects.requireNonNull(var13).anInt189) {
                             var15 = method715(var13);
@@ -625,7 +625,7 @@ public final class BufferedDataStream extends DataBuffer {
                         TextureOperation12.outgoingBuffer.writeShort(var2);
                         TextureOperation12.outgoingBuffer.putShortA(var5);
                         anInt2330 = 0;
-                        Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                        Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
                         KeyboardListener.anInt1918 = var2;
                     }
 
@@ -665,7 +665,7 @@ public final class BufferedDataStream extends DataBuffer {
                         TextureOperation12.outgoingBuffer.putShortA(var2);
                         TextureOperation12.outgoingBuffer.writeShortLE(var5);
                         anInt2330 = 0;
-                        Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                        Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
                         KeyboardListener.anInt1918 = var2;
                     }
 
@@ -690,13 +690,13 @@ public final class BufferedDataStream extends DataBuffer {
                             TextureOperation12.outgoingBuffer.putShortA(var2);
                             TextureOperation12.outgoingBuffer.writeIntV2(var3);
                             anInt2330 = 0;
-                            Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                            Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
                             KeyboardListener.anInt1918 = var2;
 
                         } else {
 
                             Class25.method958((byte) -86);
-                            var13 = Class7.getRSInterface(var3);
+                            var13 = Unsorted.getRSInterface(var3);
                             Class3_Sub28_Sub18.anInt3764 = var3;
                             anInt1473 = var2;
                             Class164_Sub1.anInt3012 = 1;
@@ -722,7 +722,7 @@ public final class BufferedDataStream extends DataBuffer {
                             TextureOperation12.outgoingBuffer.writeIntV1(var3);
                             TextureOperation12.outgoingBuffer.writeShort128LE(var5);
                             anInt2330 = 0;
-                            Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                            Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
                             KeyboardListener.anInt1918 = var2;
                         }
 
@@ -745,7 +745,7 @@ public final class BufferedDataStream extends DataBuffer {
                             TextureOperation12.outgoingBuffer.writeShortLE(var2);
                             TextureOperation12.outgoingBuffer.writeShortLE(var5);
                             anInt2330 = 0;
-                            Unsorted.aClass11_1933 = Class7.getRSInterface(var3);
+                            Unsorted.aClass11_1933 = Unsorted.getRSInterface(var3);
                             KeyboardListener.anInt1918 = var2;
                         }
 
@@ -836,7 +836,7 @@ public final class BufferedDataStream extends DataBuffer {
 
                         if (Class164_Sub1.anInt3012 != 0) {
                             Class164_Sub1.anInt3012 = 0;
-                            Class20.method909(Class7.getRSInterface(Class3_Sub28_Sub18.anInt3764));
+                            Class20.method909(Unsorted.getRSInterface(Class3_Sub28_Sub18.anInt3764));
                         }
 
                         if (GameObject.aBoolean1837) {
@@ -1058,7 +1058,7 @@ public final class BufferedDataStream extends DataBuffer {
 
                     if (!var3) {
                         var5 = (int) var1.linkableKey;
-                        RSInterface var6 = Class7.getRSInterface(var5);
+                        RSInterface var6 = Unsorted.getRSInterface(var5);
                         if (null != var6) {
                             Class20.method909(var6);
                         }

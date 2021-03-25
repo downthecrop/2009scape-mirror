@@ -124,7 +124,7 @@ public final class Class49 {
                 }
             }
 
-            return Class3_Sub28_Sub4.method612(var1);
+            return QuickChatDefinition.method612(var1);
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "ha.H(" + (var0 != null ? "{...}" : "null") + ',' + var1 + ',' + var3 + ',' + false + ')');
         }
@@ -149,7 +149,7 @@ public final class Class49 {
                 var3 = var3 + var0;
             }
 
-            Class7.method831(var3);
+            method831(var3);
             var3 = InterfaceWidget.a(":", "%3a", var3);
             var3 = InterfaceWidget.a("@", "%40", var3);
             var3 = InterfaceWidget.a("&", "%26", var3);
@@ -344,4 +344,7 @@ public final class Class49 {
         }
     }
 
+    static void method831(String var1) {
+        System.out.println("Error: " + InterfaceWidget.a("%0a", "\n", var1));
+    }
 }

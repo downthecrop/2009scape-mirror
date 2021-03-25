@@ -23,7 +23,7 @@ final class TextureOperation19 extends TextureOperation {
          }
 
          Class164_Sub2.method2249(var3);
-         RSInterface var5 = Class7.getRSInterface(var4);
+         RSInterface var5 = Unsorted.getRSInterface(var4);
          if(null != var5) {
             Class20.method909(var5);
          }

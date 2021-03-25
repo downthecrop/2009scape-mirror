@@ -76,7 +76,7 @@ public final class Class21 {
             var4.anInt2602 = interfaceId;
             TextureOperation23.aHashTable_3208.put(interfaceHash, var4);
             TextureOperation20.method232(interfaceId);
-            RSInterface var5 = Class7.getRSInterface(interfaceHash);
+            RSInterface var5 = Unsorted.getRSInterface(interfaceHash);
             if (var5 == null) {
                 System.out.println("Invalid interface opened - [window=" + (interfaceHash >> 16) + ", child=" + (interfaceHash & 0xFF) + ", id=" + interfaceId + "]");
             } else {

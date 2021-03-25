@@ -66,7 +66,7 @@ public final class NPC extends Class140_Sub4 {
     static boolean method1988() {
         try {
             try {
-                if (Class10.anInt154 == 2) {
+                if (Unsorted.anInt154 == 2) {
                     if (aClass3_Sub27_1154 == null) {
                         aClass3_Sub27_1154 = Class3_Sub27.method517(Class101.aClass153_1423, TextureOperation8.anInt3463, Class132.anInt1741);
                         if (null == aClass3_Sub27_1154) {
@@ -74,17 +74,17 @@ public final class NPC extends Class140_Sub4 {
                         }
                     }
 
-                    if (Class3_Sub28_Sub4.aClass83_3579 == null) {
-                        Class3_Sub28_Sub4.aClass83_3579 = new Class83(Class40.aClass153_679, Class3_Sub28_Sub20.aClass153_3786);
+                    if (QuickChatDefinition.aClass83_3579 == null) {
+                        QuickChatDefinition.aClass83_3579 = new Class83(Class40.aClass153_679, Class3_Sub28_Sub20.aClass153_3786);
                     }
 
-                    if (Class101.aClass3_Sub24_Sub4_1421.method470(aClass3_Sub27_1154, Class124.aClass153_1661, Class3_Sub28_Sub4.aClass83_3579)) {
+                    if (Class101.aClass3_Sub24_Sub4_1421.method470(aClass3_Sub27_1154, Class124.aClass153_1661, QuickChatDefinition.aClass83_3579)) {
                         Class101.aClass3_Sub24_Sub4_1421.method471();
                         Class101.aClass3_Sub24_Sub4_1421.method506(TextureOperation36.anInt3423);
                         Class101.aClass3_Sub24_Sub4_1421.method490(Unsorted.aBoolean2311, aClass3_Sub27_1154);
-                        Class10.anInt154 = 0;
+                        Unsorted.anInt154 = 0;
                         aClass3_Sub27_1154 = null;
-                        Class3_Sub28_Sub4.aClass83_3579 = null;
+                        QuickChatDefinition.aClass83_3579 = null;
                         Class101.aClass153_1423 = null;
                         return true;
                     }
@@ -94,8 +94,8 @@ public final class NPC extends Class140_Sub4 {
                 Class101.aClass3_Sub24_Sub4_1421.method505((byte) -128);
                 Class101.aClass153_1423 = null;
                 aClass3_Sub27_1154 = null;
-                Class10.anInt154 = 0;
-                Class3_Sub28_Sub4.aClass83_3579 = null;
+                Unsorted.anInt154 = 0;
+                QuickChatDefinition.aClass83_3579 = null;
             }
 
             return false;

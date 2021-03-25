@@ -374,7 +374,7 @@ final class Class68 {
     static void method1277(Class3_Sub2[][][] var2) {
         if (Class106.aBoolean1441) {
             GL var3 = HDToolKit.gl;
-            Class3_Sub28_Sub4.method551(0, 0);
+            Unsorted.method551(0, 0);
             HDToolKit.method1856(0);
             HDToolKit.method1823();
             HDToolKit.bindTexture2D(HDToolKit.anInt1810);

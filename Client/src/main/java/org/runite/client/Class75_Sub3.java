@@ -41,7 +41,7 @@ final class Class75_Sub3 extends Class75 {
          Unsorted.aReferenceCache_4043.sweep(5);
          CS2Script.aReferenceCache_2442.sweep(5);
          Class154.aReferenceCache_1964.sweep(5);
-         Class3_Sub28_Sub4.aReferenceCache_3572.sweep(5);
+         QuickChatDefinition.aReferenceCache_3572.sweep(5);
          Class143.aReferenceCache_1874.sweep(5);
          Class67.aReferenceCache_1013.sweep(5);
          Texture.aReferenceCache_1146.sweep(5);

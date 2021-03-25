@@ -73,7 +73,7 @@ final class Class145 {
                         }
 
                         var12 = Class58.anIntArrayArrayArray914[0][var3][var4] + Class58.anIntArrayArrayArray914[0][var3 + 1][var4] + Class58.anIntArrayArrayArray914[0][var3][var4 + 1] + Class58.anIntArrayArrayArray914[0][var3 + 1][var4 + 1] >> 2;
-                        Class3_Sub28_Sub4.method551(-var12, 3);
+                        Unsorted.method551(-var12, 3);
                         var8 = 201.5F;
                     } else {
                         var8 = 201.5F - 50.0F * (float) (var6 + 1);

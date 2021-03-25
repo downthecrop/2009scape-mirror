@@ -126,7 +126,7 @@ final class Class3_Sub22 extends Linkable {
          Class146.method2083(var0, var1, var2, null, 0, (byte)0, var13, var14);
          if(HDToolKit.highDetail) {
             TextureOperation23.aBoolean3207 = false;
-            Class3_Sub28_Sub4.method551(0, 0);
+            Unsorted.method551(0, 0);
             Class92.method1512(null);
             Class68.method1265();
          }

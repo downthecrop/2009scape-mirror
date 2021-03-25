@@ -238,7 +238,7 @@ final class Class3_Sub11 extends Linkable {
          GL var10 = HDToolKit.gl;
          if(this.anInt2351 == -1 || var3) {
             HDToolKit.bindTexture2D(-1);
-            Class3_Sub28_Sub4.method551(0, 0);
+            Unsorted.method551(0, 0);
          } else {
             Class51.anInterface2_838.method8(this.anInt2351, true);
          }

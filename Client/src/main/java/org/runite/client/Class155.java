@@ -23,18 +23,6 @@ class Class155 {
     private int anInt1987 = 0;
     private int anInt1988 = 0;
 
-    static Class10 method2156(DataBuffer var1) {
-        try {
-            Class10 var2 = new Class10();
-            var2.anInt149 = var1.readUnsignedShort();
-
-            var2.aClass3_Sub28_Sub4_151 = LinkableRSString.method733(var2.anInt149);
-            return var2;
-        } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "vh.M(" + 1024 + ',' + (var1 != null ? "{...}" : "null") + ')');
-        }
-    }
-
     static void method2162(GameObject var0, int var1, int var2, int var3) {
         Class3_Sub2 var4;
         if (var2 < Unsorted.anInt1234) {

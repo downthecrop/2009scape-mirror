@@ -6,7 +6,6 @@ import org.rs09.client.rendering.Toolkit;
 public final class Class83 {
 
     static int[] anIntArray1161;
-    static int anInt1156 = 0;
     static boolean aBoolean1158 = false;
     private final CacheIndex aClass153_1153;
     private final HashTable aHashTable_1155 = new HashTable(256);

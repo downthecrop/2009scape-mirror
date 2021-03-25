@@ -510,7 +510,7 @@ public final class CS2Script extends Linkable {
                         int k66 = ItemDefinition.intsStack[2 + iStackCounter];
                         if (i44 == 0)
                             throw new RuntimeException();
-                        RSInterface class11_21 = Class7.getRSInterface(j6);
+                        RSInterface class11_21 = Unsorted.getRSInterface(j6);
                         if (null == class11_21.aClass11Array262)
                             class11_21.aClass11Array262 = new RSInterface[k66 + 1];
                         if (k66 >= class11_21.aClass11Array262.length) {
@@ -542,13 +542,13 @@ public final class CS2Script extends Linkable {
                                 throw new RuntimeException("Tried to cc_delete static active-component!");
                             else
                                 throw new RuntimeException("Tried to .cc_delete static .active-component!");
-                        RSInterface class11_17 = Class7.getRSInterface(class11.componentHash);
+                        RSInterface class11_17 = Unsorted.getRSInterface(class11.componentHash);
                         class11_17.aClass11Array262[class11.anInt191] = null;
                         Class20.method909(class11_17);
                         continue;
                     }
                     if (opcode == 102) {
-                        RSInterface class11_1 = Class7.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
+                        RSInterface class11_1 = Unsorted.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
                         class11_1.aClass11Array262 = null;
                         Class20.method909(class11_1);
                         continue;
@@ -572,7 +572,7 @@ public final class CS2Script extends Linkable {
                     if (opcode != 201)
                         break;
                     int l6 = ItemDefinition.intsStack[--iStackCounter];
-                    RSInterface class11_18 = Class7.getRSInterface(l6);
+                    RSInterface class11_18 = Unsorted.getRSInterface(l6);
                     if (null == class11_18) {
                         ItemDefinition.intsStack[iStackCounter++] = 0;
                     } else {
@@ -590,7 +590,7 @@ public final class CS2Script extends Linkable {
                         if (opcode < 2000) {
                             class11_2 = flag ? Class164.aClass11_2055 : aClass11_1749;
                         } else {
-                            class11_2 = Class7.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
+                            class11_2 = Unsorted.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
                             opcode -= 1000;
                         }
                         if (opcode == 1000) {
@@ -673,7 +673,7 @@ public final class CS2Script extends Linkable {
                             if (opcode >= 1300 && opcode < 1400 || opcode >= 2300 && opcode < 2400) {
                                 RSInterface class11_3;
                                 if (2000 <= opcode) {
-                                    class11_3 = Class7.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
+                                    class11_3 = Unsorted.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
                                     opcode -= 1000;
                                 } else {
                                     class11_3 = flag ? Class164.aClass11_2055 : aClass11_1749;
@@ -838,7 +838,7 @@ public final class CS2Script extends Linkable {
                                         continue;
                                     }
                                     if (2600 > opcode) {
-                                        RSInterface class11_7 = Class7.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
+                                        RSInterface class11_7 = Unsorted.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
                                         if (opcode == 2500) {
                                             ItemDefinition.intsStack[iStackCounter++] = class11_7.anInt306;
                                             continue;
@@ -915,7 +915,7 @@ public final class CS2Script extends Linkable {
                                                         int j46 = ItemDefinition.intsStack[iStackCounter - -1];
                                                         int j7 = ItemDefinition.intsStack[iStackCounter];
                                                         int l67 = ItemDefinition.intsStack[2 + iStackCounter];
-                                                        RSInterface class11_22 = Class7.getRSInterface(l67);
+                                                        RSInterface class11_22 = Unsorted.getRSInterface(l67);
                                                         InterfaceWidget.a(j46, j7, 115, class11_22);
                                                         continue;
                                                     }
@@ -1889,14 +1889,14 @@ public final class CS2Script extends Linkable {
                                                                     }
                                                                     if (opcode == 5055) {
                                                                         int k26 = ItemDefinition.intsStack[--iStackCounter];
-                                                                        ItemDefinition.stringsStack[sStackCounter++] = LinkableRSString.method733(k26).method554();
+                                                                        ItemDefinition.stringsStack[sStackCounter++] = QuickChat.method733(k26).method554();
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5056) {
                                                                         int l26 = ItemDefinition.intsStack[--iStackCounter];
-                                                                        Class3_Sub28_Sub4 class3_sub28_sub4 = LinkableRSString.method733(l26);
-                                                                        if (null != class3_sub28_sub4.anIntArray3567)
-                                                                            ItemDefinition.intsStack[iStackCounter++] = class3_sub28_sub4.anIntArray3567.length;
+                                                                        QuickChatDefinition quickChatDefinition = QuickChat.method733(l26);
+                                                                        if (null != quickChatDefinition.anIntArray3567)
+                                                                            ItemDefinition.intsStack[iStackCounter++] = quickChatDefinition.anIntArray3567.length;
                                                                         else
                                                                             ItemDefinition.intsStack[iStackCounter++] = 0;
                                                                         continue;
@@ -1905,14 +1905,14 @@ public final class CS2Script extends Linkable {
                                                                         iStackCounter -= 2;
                                                                         int k56 = ItemDefinition.intsStack[1 + iStackCounter];
                                                                         int i27 = ItemDefinition.intsStack[iStackCounter];
-                                                                        ItemDefinition.intsStack[iStackCounter++] = LinkableRSString.method733(i27).anIntArray3567[k56];
+                                                                        ItemDefinition.intsStack[iStackCounter++] = QuickChat.method733(i27).anIntArray3567[k56];
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5058) {
-                                                                        Class70.aClass10_1056 = new Class10();
-                                                                        Class70.aClass10_1056.anInt149 = ItemDefinition.intsStack[--iStackCounter];
-                                                                        Class70.aClass10_1056.aClass3_Sub28_Sub4_151 = LinkableRSString.method733(Class70.aClass10_1056.anInt149);
-                                                                        Class70.aClass10_1056.anIntArray153 = new int[Class70.aClass10_1056.aClass3_Sub28_Sub4_151.method552()];
+                                                                        CS2Methods.aQuickChat_1056 = new QuickChat();
+                                                                        CS2Methods.aQuickChat_1056.anInt149 = ItemDefinition.intsStack[--iStackCounter];
+                                                                        CS2Methods.aQuickChat_1056.aQuickChatDefinition_151 = QuickChat.method733(CS2Methods.aQuickChat_1056.anInt149);
+                                                                        CS2Methods.aQuickChat_1056.anIntArray153 = new int[CS2Methods.aQuickChat_1056.aQuickChatDefinition_151.method552()];
                                                                         continue;
                                                                     }
                                                                     if (5059 == opcode) {
@@ -1920,8 +1920,8 @@ public final class CS2Script extends Linkable {
                                                                         TextureOperation12.outgoingBuffer.writeByte(0);
                                                                         int j27 = TextureOperation12.outgoingBuffer.index;
                                                                         TextureOperation12.outgoingBuffer.writeByte(0);
-                                                                        TextureOperation12.outgoingBuffer.writeShort(Class70.aClass10_1056.anInt149);
-                                                                        Class70.aClass10_1056.aClass3_Sub28_Sub4_151.method545(TextureOperation12.outgoingBuffer, Class70.aClass10_1056.anIntArray153);
+                                                                        TextureOperation12.outgoingBuffer.writeShort(CS2Methods.aQuickChat_1056.anInt149);
+                                                                        CS2Methods.aQuickChat_1056.aQuickChatDefinition_151.method545(TextureOperation12.outgoingBuffer, CS2Methods.aQuickChat_1056.anIntArray153);
                                                                         TextureOperation12.outgoingBuffer.method769(-j27 + TextureOperation12.outgoingBuffer.index);
                                                                         continue;
                                                                     }
@@ -1931,8 +1931,8 @@ public final class CS2Script extends Linkable {
                                                                         TextureOperation12.outgoingBuffer.writeByte(0);
                                                                         int l56 = TextureOperation12.outgoingBuffer.index;
                                                                         TextureOperation12.outgoingBuffer.writeLong(class94_21.toLong());
-                                                                        TextureOperation12.outgoingBuffer.writeShort(Class70.aClass10_1056.anInt149);
-                                                                        Class70.aClass10_1056.aClass3_Sub28_Sub4_151.method545(TextureOperation12.outgoingBuffer, Class70.aClass10_1056.anIntArray153);
+                                                                        TextureOperation12.outgoingBuffer.writeShort(CS2Methods.aQuickChat_1056.anInt149);
+                                                                        CS2Methods.aQuickChat_1056.aQuickChatDefinition_151.method545(TextureOperation12.outgoingBuffer, CS2Methods.aQuickChat_1056.anIntArray153);
                                                                         TextureOperation12.outgoingBuffer.method769(TextureOperation12.outgoingBuffer.index + -l56);
                                                                         continue;
                                                                     }
@@ -1941,8 +1941,8 @@ public final class CS2Script extends Linkable {
                                                                         TextureOperation12.outgoingBuffer.writeByte(0);
                                                                         int k27 = TextureOperation12.outgoingBuffer.index;
                                                                         TextureOperation12.outgoingBuffer.writeByte(1);
-                                                                        TextureOperation12.outgoingBuffer.writeShort(Class70.aClass10_1056.anInt149);
-                                                                        Class70.aClass10_1056.aClass3_Sub28_Sub4_151.method545(TextureOperation12.outgoingBuffer, Class70.aClass10_1056.anIntArray153);
+                                                                        TextureOperation12.outgoingBuffer.writeShort(CS2Methods.aQuickChat_1056.anInt149);
+                                                                        CS2Methods.aQuickChat_1056.aQuickChatDefinition_151.method545(TextureOperation12.outgoingBuffer, CS2Methods.aQuickChat_1056.anIntArray153);
                                                                         TextureOperation12.outgoingBuffer.method769(-k27 + TextureOperation12.outgoingBuffer.index);
                                                                         continue;
                                                                     }
@@ -1982,14 +1982,14 @@ public final class CS2Script extends Linkable {
                                                                     }
                                                                     if (opcode == 5066) {
                                                                         int l28 = ItemDefinition.intsStack[--iStackCounter];
-                                                                        ItemDefinition.intsStack[iStackCounter++] = LinkableRSString.method733(l28).method552();
+                                                                        ItemDefinition.intsStack[iStackCounter++] = QuickChat.method733(l28).method552();
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5067) {
                                                                         iStackCounter -= 2;
                                                                         int i58 = ItemDefinition.intsStack[iStackCounter + 1];
                                                                         int i29 = ItemDefinition.intsStack[iStackCounter];
-                                                                        int i70 = LinkableRSString.method733(i29).method550(49, i58);
+                                                                        int i70 = QuickChat.method733(i29).method550(49, i58);
                                                                         ItemDefinition.intsStack[iStackCounter++] = i70;
                                                                         continue;
                                                                     }
@@ -1997,14 +1997,14 @@ public final class CS2Script extends Linkable {
                                                                         iStackCounter -= 2;
                                                                         int j29 = ItemDefinition.intsStack[iStackCounter];
                                                                         int j58 = ItemDefinition.intsStack[1 + iStackCounter];
-                                                                        Class70.aClass10_1056.anIntArray153[j29] = j58;
+                                                                        CS2Methods.aQuickChat_1056.anIntArray153[j29] = j58;
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5069) {
                                                                         iStackCounter -= 2;
                                                                         int k29 = ItemDefinition.intsStack[iStackCounter];
                                                                         int k58 = ItemDefinition.intsStack[iStackCounter + 1];
-                                                                        Class70.aClass10_1056.anIntArray153[k29] = k58;
+                                                                        CS2Methods.aQuickChat_1056.anIntArray153[k29] = k58;
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5070) {
@@ -2012,10 +2012,10 @@ public final class CS2Script extends Linkable {
                                                                         int l29 = ItemDefinition.intsStack[iStackCounter];
                                                                         int j70 = ItemDefinition.intsStack[iStackCounter - -2];
                                                                         int l58 = ItemDefinition.intsStack[iStackCounter + 1];
-                                                                        Class3_Sub28_Sub4 class3_sub28_sub4_1 = LinkableRSString.method733(l29);
-                                                                        if (0 != class3_sub28_sub4_1.method550(73, l58))
+                                                                        QuickChatDefinition quickChatDefinition_1 = QuickChat.method733(l29);
+                                                                        if (0 != quickChatDefinition_1.method550(73, l58))
                                                                             throw new RuntimeException("bad command");
-                                                                        ItemDefinition.intsStack[iStackCounter++] = class3_sub28_sub4_1.method549(j70, l58);
+                                                                        ItemDefinition.intsStack[iStackCounter++] = quickChatDefinition_1.method549(j70, l58);
                                                                         continue;
                                                                     }
                                                                     if (opcode == 5071) {
@@ -2606,7 +2606,7 @@ public final class CS2Script extends Linkable {
                                                                         }
                                                                         if (6012 == opcode) {
                                                                             if (HDToolKit.highDetail)
-                                                                                Class3_Sub28_Sub4.method551(0, 0);
+                                                                                Unsorted.method551(0, 0);
                                                                             Class106.aBoolean1441 = ItemDefinition.intsStack[--iStackCounter] == 1;
                                                                             if (HDToolKit.highDetail && Class106.aBoolean1441) {
                                                                                 Class51.method1137(0.7F);
@@ -3429,7 +3429,7 @@ public final class CS2Script extends Linkable {
                                                 ItemDefinition.stringsStack[sStackCounter++] = Class3_Sub23.method407(Class3_Sub20.paramLanguage, flag1, 0, k64);
                                                 continue;
                                             }
-                                            RSInterface class11_8 = Class7.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
+                                            RSInterface class11_8 = Unsorted.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
                                             if (opcode == 2800) {
                                                 ItemDefinition.intsStack[iStackCounter++] = Client.method44(class11_8).method101();
                                                 continue;
@@ -3452,12 +3452,12 @@ public final class CS2Script extends Linkable {
                                             continue;
                                         }
                                         if (opcode == 2700) {
-                                            RSInterface class11_9 = Class7.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
+                                            RSInterface class11_9 = Unsorted.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
                                             ItemDefinition.intsStack[iStackCounter++] = class11_9.anInt192;
                                             continue;
                                         }
                                         if (opcode == 2701) {
-                                            RSInterface class11_10 = Class7.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
+                                            RSInterface class11_10 = Unsorted.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
                                             if (-1 != class11_10.anInt192)
                                                 ItemDefinition.intsStack[iStackCounter++] = class11_10.anInt271;
                                             else
@@ -3474,7 +3474,7 @@ public final class CS2Script extends Linkable {
                                             continue;
                                         }
                                         if (opcode == 2703) {
-                                            RSInterface class11_11 = Class7.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
+                                            RSInterface class11_11 = Unsorted.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
                                             if (null == class11_11.aClass11Array262) {
                                                 ItemDefinition.intsStack[iStackCounter++] = 0;
                                             } else {
@@ -3505,7 +3505,7 @@ public final class CS2Script extends Linkable {
                                             ItemDefinition.intsStack[iStackCounter++] = 1;
                                         continue;
                                     }
-                                    RSInterface class11_12 = Class7.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
+                                    RSInterface class11_12 = Unsorted.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
                                     if (2600 == opcode) {
                                         ItemDefinition.intsStack[iStackCounter++] = class11_12.anInt247;
                                         continue;
@@ -3580,7 +3580,7 @@ public final class CS2Script extends Linkable {
                                     class11_14 = flag ? Class164.aClass11_2055 : aClass11_1749;
                                 } else {
                                     opcode -= 1000;
-                                    class11_14 = Class7.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
+                                    class11_14 = Unsorted.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
                                 }
                                 int[] ai3 = null;
                                 RSString class94_62 = ItemDefinition.stringsStack[--sStackCounter];
@@ -3677,7 +3677,7 @@ public final class CS2Script extends Linkable {
                         if (opcode < 2000) {
                             class11_15 = flag ? Class164.aClass11_2055 : aClass11_1749;
                         } else {
-                            class11_15 = Class7.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
+                            class11_15 = Unsorted.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
                             opcode -= 1000;
                         }
                         Class20.method909(class11_15);
@@ -3746,7 +3746,7 @@ public final class CS2Script extends Linkable {
                         class11_16 = flag ? Class164.aClass11_2055 : aClass11_1749;
                     } else {
                         opcode -= 1000;
-                        class11_16 = Class7.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
+                        class11_16 = Unsorted.getRSInterface(ItemDefinition.intsStack[--iStackCounter]);
                     }
                     if (opcode == 1100) {
                         iStackCounter -= 2;

@@ -1,6 +1,8 @@
 package org.runite.client;
 
 public class CS2Methods {
+    static QuickChat aQuickChat_1056;
+
     static RSString method27(RSString var0) {
         try {
 
@@ -17,6 +19,22 @@ public class CS2Methods {
 
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "rc.Q(" + true + ')');
+        }
+    }
+
+    static void method852(int var1) {
+        try {
+            Class3_Sub25 var2 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var1);
+            if (var2 != null) {
+
+                for (int var3 = 0; var2.anIntArray2547.length > var3; ++var3) {
+                    var2.anIntArray2547[var3] = -1;
+                    var2.anIntArray2551[var3] = 0;
+                }
+
+            }
+        } catch (RuntimeException var4) {
+            throw ClientErrorException.clientError(var4, "bd.C(" + (byte) 114 + ',' + var1 + ')');
         }
     }
 }

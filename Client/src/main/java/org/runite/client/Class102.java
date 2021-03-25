@@ -368,7 +368,7 @@ public final class Class102 implements Interface2 {
 
     public final void method8(int var1, boolean var2) {
         try {
-            Class3_Sub28_Sub4.method551(255 & this.aByteArray2143[var1], this.aByteArray2144[var1] & 0xFF);
+            Unsorted.method551(255 & this.aByteArray2143[var1], this.aByteArray2144[var1] & 0xFF);
             if (var2) {
                 boolean var3 = false;
                 Class3_Sub28_Sub20 var4 = this.method1613(var1);

@@ -2979,7 +2979,7 @@ final class Class140_Sub1_Sub1 extends Model {
             short var7 = this.aShortArray3827[var5];
             if(var7 == -1) {
                HDToolKit.bindTexture2D(-1);
-               Class3_Sub28_Sub4.method551(0, 0);
+               Unsorted.method551(0, 0);
             } else {
                Class51.anInterface2_838.method8(var7 & 65535, true);
             }

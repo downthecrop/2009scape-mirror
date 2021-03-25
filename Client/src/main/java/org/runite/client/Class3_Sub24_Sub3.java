@@ -5,7 +5,6 @@ import java.util.Objects;
 final class Class3_Sub24_Sub3 extends Class3_Sub24 {
 
    LinkedList aLinkedList_3489 = new LinkedList();
-   static CacheIndex aClass153_3490;
    static int[] anIntArray3491 = new int[]{0, -1, 0, 1};
    static int maxClientMemory = 64;
    private final Class3_Sub24_Sub4 aClass3_Sub24_Sub4_3493;

@@ -213,7 +213,7 @@ public class ClientCommands {
           Unsorted.aReferenceCache_4043.clearSoftReferences();//Class163_Sub2_Sub1.method2222();
           CS2Script.aReferenceCache_2442.clearSoftReferences();//Class163_Sub2_Sub1.method2222();
           Class154.aReferenceCache_1964.clearSoftReferences();//Class163_Sub2_Sub1.method2222();
-          Class3_Sub28_Sub4.aReferenceCache_3572.clearSoftReferences();//Originally Class3_Sub30_Sub1.method813();
+          QuickChatDefinition.aReferenceCache_3572.clearSoftReferences();//Originally Class3_Sub30_Sub1.method813();
           Class143.aReferenceCache_1874.clearSoftReferences();//Originally Class3_Sub30_Sub1.method813();
           Class67.aReferenceCache_1013.clearSoftReferences();//Originally Class3_Sub30_Sub1.method813();
           Texture.aReferenceCache_1146.clearSoftReferences();//Originally Class133.method1803();

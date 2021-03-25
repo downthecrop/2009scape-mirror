@@ -59,7 +59,7 @@ public final class HDToolKit {
     }
 
     static void method1822() {
-        Class3_Sub28_Sub4.method551(0, 0);
+        Unsorted.method551(0, 0);
         method1836();
         method1856(1);
         method1847(1);
@@ -80,7 +80,7 @@ public final class HDToolKit {
     }
 
     static void method1824() {
-        Class3_Sub28_Sub4.method551(0, 0);
+        Unsorted.method551(0, 0);
         method1836();
         method1856(0);
         method1847(0);
@@ -130,7 +130,7 @@ public final class HDToolKit {
     }
 
     static void method1828() {
-        Class3_Sub28_Sub4.method551(0, 0);
+        Unsorted.method551(0, 0);
         method1836();
         method1856(0);
         method1847(0);
@@ -252,7 +252,7 @@ public final class HDToolKit {
     }
 
     public static void method1835() {
-        Class3_Sub28_Sub4.method551(0, 0);
+        Unsorted.method551(0, 0);
         method1836();
         bindTexture2D(-1);
         method1837(false);

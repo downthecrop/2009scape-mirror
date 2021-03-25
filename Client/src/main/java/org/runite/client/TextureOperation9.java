@@ -6,8 +6,7 @@ import java.util.Objects;
 
 public final class TextureOperation9 extends TextureOperation {
 
-    static CacheIndex aClass153_1967;
-    private boolean aBoolean3100 = true;
+	private boolean aBoolean3100 = true;
 	public static int anInt3102 = 0;
 	static int anInt3103;
 	private boolean aBoolean3104 = true;
@@ -114,23 +113,6 @@ public final class TextureOperation9 extends TextureOperation {
 			TextureOperation12.outgoingBuffer.writeByte(Unsorted.anInt3671);
 		} catch (RuntimeException var2) {
 			throw ClientErrorException.clientError(var2, "ej.C(" + var0 + ')');
-		}
-	}
-
-	static void method205(CacheIndex var0, CacheIndex var2, Interface4 var3) {
-		try {
-			aClass153_1967 = var0;
-			Class58.anInterface4_915 = var3;
-			Class3_Sub24_Sub3.aClass153_3490 = var2;
-			if(Class3_Sub24_Sub3.aClass153_3490 != null) {
-				Class83.anInt1156 = Class3_Sub24_Sub3.aClass153_3490.getFileAmount(1);
-			}
-
-			if(aClass153_1967 != null) {
-				RenderAnimationDefinition.anInt377 = aClass153_1967.getFileAmount(1);
-			}
-		} catch (RuntimeException var5) {
-			throw ClientErrorException.clientError(var5, "ej.E(" + (var0 != null?"{...}":"null") + ',' + 115 + ',' + (var2 != null?"{...}":"null") + ',' + (var3 != null?"{...}":"null") + ')');
 		}
 	}
 

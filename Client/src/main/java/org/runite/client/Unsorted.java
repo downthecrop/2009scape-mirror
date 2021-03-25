@@ -175,6 +175,7 @@ public class Unsorted {
     public static Class158 aClass158_3009;
     static long[] aLongArray3271 = new long[500];
     static boolean aBoolean3275 = true;
+    static int anInt154 = 0;
 
     static void method2086() {
         try {
@@ -1038,7 +1039,7 @@ public class Unsorted {
             Class132.anInt1741 = 0;
             TextureOperation8.anInt3463 = var1;
             aBoolean2311 = false;
-            Class10.anInt154 = 1;
+            anInt154 = 1;
             GraphicDefinition.anInt546 = 2;
 
             TextureOperation36.anInt3423 = var5;
@@ -1752,7 +1753,7 @@ public class Unsorted {
         try {
             TextureOperation36.anInt3423 = 0;
             Class132.anInt1741 = -1;
-            Class10.anInt154 = 1;
+            anInt154 = 1;
             GraphicDefinition.anInt546 = 2;
             aBoolean2311 = false;
             Class101.aClass153_1423 = null;
@@ -3239,7 +3240,7 @@ public class Unsorted {
 
                     if (var2 == 1 && var4.anObjectArray176 != null) {
                         if (var4.anInt191 >= 0) {
-                            RSInterface var8 = Class7.getRSInterface(var4.componentHash);
+                            RSInterface var8 = getRSInterface(var4.componentHash);
                             if (null == var8 || null == var8.aClass11Array262 || var8.aClass11Array262.length <= var4.anInt191 || var8.aClass11Array262[var4.anInt191] != var4) {
                                 continue;
                             }
@@ -5224,5 +5225,64 @@ public class Unsorted {
 
             return true;
         }
+    }
+
+    public static RSInterface getRSInterface(int interfaceHash) {
+        try {
+            int windowId = interfaceHash >> 16;
+
+            int componentId = 65535 & interfaceHash;
+            if (GameObject.aClass11ArrayArray1834.length <= windowId || windowId < 0) {
+                return null;
+            }
+            if (GameObject.aClass11ArrayArray1834[windowId] == null || GameObject.aClass11ArrayArray1834[windowId].length <= componentId || null == GameObject.aClass11ArrayArray1834[windowId][componentId]) {
+                boolean var4 = loadInterface(windowId);
+                if (!var4) {
+                    return null;
+                }
+            }
+            if (GameObject.aClass11ArrayArray1834[windowId].length <= componentId) {
+                return null;
+            }
+            return GameObject.aClass11ArrayArray1834[windowId][componentId];
+        } catch (RuntimeException var5) {
+            throw ClientErrorException.clientError(var5, "af.F(" + interfaceHash + ')');
+        }
+    }
+
+    static void method551(int var1, int var2) {
+       try {
+          if(4 == var2 && !Class128.aBoolean1685) {
+             var2 = 2;
+             var1 = 2;
+          }
+
+          if(var2 == Class23.anInt453) {
+             if(0 != var2 && var1 != TextureOperation37.anInt3263) {
+                anShaderInterfaceArray70[var2].method23(var1);
+                TextureOperation37.anInt3263 = var1;
+             }
+          } else {
+             if(TextureOperation23.aBoolean3207) {
+                return;
+             }
+
+             if(Class23.anInt453 != 0) {
+                anShaderInterfaceArray70[Class23.anInt453].method21();
+             }
+
+             if(var2 != 0) {
+                ShaderInterface var3 = anShaderInterfaceArray70[var2];
+                var3.method22();
+                var3.method23(var1);
+             }
+
+             Class23.anInt453 = var2;
+             TextureOperation37.anInt3263 = var1;
+          }
+
+       } catch (RuntimeException var4) {
+          throw ClientErrorException.clientError(var4, "cb.A(" + 0 + ',' + var1 + ',' + var2 + ')');
+       }
     }
 }

@@ -104,7 +104,7 @@ abstract class Class146 {
             var24.glTranslatef((float) (-var0), (float) (-var1), (float) (-var2));
             if (var22) {
                 Class3_Sub22.method403();
-                Class3_Sub28_Sub4.method551(-1, 3);
+                Unsorted.method551(-1, 3);
                 TextureOperation23.aBoolean3207 = true;
                 WaterShader.method2254();
                 Unsorted.anInt1244 = -1;

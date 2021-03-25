@@ -9,6 +9,7 @@ public final class Class24 {
     static Random aRandom3088 = new Random();
     static int anInt467 = 0;
     static int anInt472 = 0;
+    static CacheIndex aClass153_152;
     private final int[] anIntArray475 = new int[]{-1, -1, -1, -1, -1};
     int anInt466 = -1;
     boolean aBoolean476 = false;
@@ -163,7 +164,7 @@ public final class Class24 {
 
             for (int var4 = 0; var4 < 5; ++var4) {
                 if (this.anIntArray475[var4] != -1) {
-                    var2[var3++] = Model_Sub1.method2015(Class10.aClass153_152, this.anIntArray475[var4]);
+                    var2[var3++] = Model_Sub1.method2015(aClass153_152, this.anIntArray475[var4]);
                 }
             }
 
@@ -195,7 +196,7 @@ public final class Class24 {
                 boolean var2 = true;
 
                 for (int var3 = 0; this.anIntArray474.length > var3; ++var3) {
-                    if (!Class10.aClass153_152.method2129((byte) -90, 0, this.anIntArray474[var3])) {
+                    if (!aClass153_152.method2129((byte) -90, 0, this.anIntArray474[var3])) {
                         var2 = false;
                     }
                 }
@@ -260,7 +261,7 @@ public final class Class24 {
                 Model_Sub1[] var2 = new Model_Sub1[this.anIntArray474.length];
 
                 for (int var3 = 0; this.anIntArray474.length > var3; ++var3) {
-                    var2[var3] = Model_Sub1.method2015(Class10.aClass153_152, this.anIntArray474[var3]);
+                    var2[var3] = Model_Sub1.method2015(aClass153_152, this.anIntArray474[var3]);
                 }
                 Model_Sub1 var7;
                 if (var2.length == 1) {
@@ -294,7 +295,7 @@ public final class Class24 {
             boolean var2 = true;
 
             for (int var3 = 0; var3 < 5; ++var3) {
-                if (-1 != this.anIntArray475[var3] && !Class10.aClass153_152.method2129((byte) 95, 0, this.anIntArray475[var3])) {
+                if (-1 != this.anIntArray475[var3] && !aClass153_152.method2129((byte) 95, 0, this.anIntArray475[var3])) {
                     var2 = false;
                 }
             }

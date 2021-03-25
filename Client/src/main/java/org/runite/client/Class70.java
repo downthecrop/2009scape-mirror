@@ -6,7 +6,6 @@ final class Class70 {
     static int anInt1047;
     static double aDouble1050 = -1.0D;
     static int anInt1053 = 0;
-    static Class10 aClass10_1056;
     int anInt1045;
     long aLong1048 = 0L;
     GameObject aClass140_1049;
@@ -20,7 +19,7 @@ final class Class70 {
     static void method1285(CacheIndex var0, int var2, int var5) {
         try {
             Class101.aClass153_1423 = var0;
-            Class10.anInt154 = 1;
+            Unsorted.anInt154 = 1;
             TextureOperation36.anInt3423 = var5;
             Class132.anInt1741 = 0;
             TextureOperation8.anInt3463 = var2;

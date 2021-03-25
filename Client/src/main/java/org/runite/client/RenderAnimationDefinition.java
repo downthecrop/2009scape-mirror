@@ -19,7 +19,6 @@ final class RenderAnimationDefinition {
     int slow_walk_follow_full_turn_anim = -1;
     int run_follow_ccw_turn_anim = -1;
     int run_follow_cw_turn_anim = -1;
-    static int anInt377 = 0;
     static RSString aClass94_378 = null;
     int slow_walk_follow_cw_turn_anim = -1;
     int hill_height = 0;

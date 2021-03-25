@@ -230,10 +230,10 @@ public final class PlayerRendering {
                         int var13 = -1;
                         RSString message;
                         if (var8) {
-                            Class10 var14 = Class155.method2156(playerRenderBuffer);
+                            QuickChat var14 = QuickChat.method2156(playerRenderBuffer);
                             var4 &= 32767;
                             var13 = var14.anInt149;
-                            message = var14.aClass3_Sub28_Sub4_151.method555(playerRenderBuffer);
+                            message = var14.aQuickChatDefinition_151.method555(playerRenderBuffer);
                         } else {
                             message = Font.method686(Objects.requireNonNull(Class32.method992(playerRenderBuffer).properlyCapitalize()));
                         }

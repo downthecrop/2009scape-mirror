@@ -80,7 +80,7 @@ public final class Client extends GameShell {
 
     static void method375(CacheIndex var1, CacheIndex var2) {
         try {
-            Class10.aClass153_152 = var1;
+            Class24.aClass153_152 = var1;
             LoginHandler.aClass153_1680 = var2;
             Class25.anInt497 = LoginHandler.aClass153_1680.getFileAmount(3);
         } catch (RuntimeException var4) {
@@ -103,7 +103,7 @@ public final class Client extends GameShell {
             return null;
         } else {
             for (int var2 = 0; var2 < var1; ++var2) {
-                var0 = Class7.getRSInterface(var0.parentId);
+                var0 = Unsorted.getRSInterface(var0.parentId);
                 if (var0 == null) {
                     return null;
                 }
@@ -594,7 +594,7 @@ public final class Client extends GameShell {
                                 if (inter.anIntArray175 != null && Unsorted.anInt944 - inter.anInt255 <= 32) {
                                     label474:
                                     for (var19 = inter.anInt255; var19 < Unsorted.anInt944; ++var19) {
-                                        var29 = Class3_Sub28_Sub4.anIntArray3565[var19 & 31];
+                                        var29 = QuickChatDefinition.anIntArray3565[var19 & 31];
 
                                         for (var21 = 0; var21 < inter.anIntArray175.length; ++var21) {
                                             if (inter.anIntArray175[var21] == var29) {
@@ -1265,7 +1265,7 @@ public final class Client extends GameShell {
 
                                 var12 = var11.aClass11_2449;
                                 if (0 <= var12.anInt191) {
-                                    var13 = Class7.getRSInterface(var12.parentId);
+                                    var13 = Unsorted.getRSInterface(var12.parentId);
                                     if (var13 == null || null == var13.aClass11Array262 || var12.anInt191 >= var13.aClass11Array262.length || var12 != var13.aClass11Array262[var12.anInt191]) {
                                         continue;
                                     }
@@ -1277,7 +1277,7 @@ public final class Client extends GameShell {
 
                         var12 = var11.aClass11_2449;
                         if (var12.anInt191 >= 0) {
-                            var13 = Class7.getRSInterface(var12.parentId);
+                            var13 = Unsorted.getRSInterface(var12.parentId);
                             if (null == var13 || var13.aClass11Array262 == null || var13.aClass11Array262.length <= var12.anInt191 || var12 != var13.aClass11Array262[var12.anInt191]) {
                                 continue;
                             }
@@ -1289,7 +1289,7 @@ public final class Client extends GameShell {
 
                 var12 = var11.aClass11_2449;
                 if (var12.anInt191 >= 0) {
-                    var13 = Class7.getRSInterface(var12.parentId);
+                    var13 = Unsorted.getRSInterface(var12.parentId);
                     if (null == var13 || null == var13.aClass11Array262 || var12.anInt191 >= var13.aClass11Array262.length || var12 != var13.aClass11Array262[var12.anInt191]) {
                         continue;
                     }
@@ -1610,8 +1610,8 @@ public final class Client extends GameShell {
                             Unsorted.method89(CacheIndex.fontsIndex, CacheIndex.spritesIndex, CacheIndex.interfacesIndex, CacheIndex.modelsIndex);
                             TextureOperation23.method250(CacheIndex.configurationsIndex);
                             EnumDefinitionProvider.setIndex(CacheIndex.clientscriptMaskIndex);
-                            TextureOperation9.method205(CacheIndex.quickchatMenusIndex, CacheIndex.quickchatMessagesIndex, new Class7());
-                            Class65.method1236(CacheIndex.quickchatMenusIndex, CacheIndex.quickchatMessagesIndex);
+                            QuickChat.method205(CacheIndex.quickchatMenusIndex, CacheIndex.quickchatMessagesIndex, new Class7());
+                            QuickChat.method1236(CacheIndex.quickchatMenusIndex, CacheIndex.quickchatMessagesIndex);
                             Class58.method1197(CacheIndex.configurationsIndex);
                             Unsorted.method2065(CacheIndex.configurationsIndex, CacheIndex.spritesIndex);
                             Class107.method1645(CacheIndex.configurationsIndex, CacheIndex.spritesIndex);

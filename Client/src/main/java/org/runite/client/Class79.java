@@ -176,7 +176,7 @@ final class Class79 {
 
     static boolean method1391(int var0) {
         try {
-            return var0 == ~Class10.anInt154 && !Class101.aClass3_Sub24_Sub4_1421.method473(-128);
+            return var0 == ~Unsorted.anInt154 && !Class101.aClass3_Sub24_Sub4_1421.method473(-128);
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "kk.A(" + var0 + ')');
         }

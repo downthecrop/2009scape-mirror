@@ -214,7 +214,7 @@ object DeveloperConsole {
                 for (i in 0..17) {
                     val component = (lookup.values!![i.toLong()]!! as LinkableInt).value
 
-                    val rsiface = Class7.getRSInterface(component)
+                    val rsiface = Unsorted.getRSInterface(component)
                     if (rsiface == null) println("Error: couldnt find component for hash $component")
 
                     println("$i: <col=5555ff>${rsiface.text}</col>")
@@ -228,7 +228,7 @@ object DeveloperConsole {
                 for (i in 0..130) {
                     val component = (lookup.values!![i.toLong()]!! as LinkableInt).value
 
-                    val rsiface = Class7.getRSInterface(component)
+                    val rsiface = Unsorted.getRSInterface(component)
                     if (rsiface == null) println("Error: couldnt find component for hash $component")
 
                     println("$i: <col=5555ff>${rsiface.text}</col>")

@@ -61,15 +61,6 @@ public final class Class65 {
         }
     }
 
-    static void method1236(CacheIndex var0, CacheIndex var1) {
-        try {
-            Unsorted.quickChatMessages = var1;
-            Unsorted.aClass153_332 = var0;
-        } catch (RuntimeException var4) {
-            throw ClientErrorException.clientError(var4, "ja.F(" + (var0 != null ? "{...}" : "null") + ',' + (var1 != null ? "{...}" : "null") + ',' + -117 + ')');
-        }
-    }
-
     static void method1237(int var0) {
         try {
             WorldListEntry.anInt2626 = 1000 / var0;

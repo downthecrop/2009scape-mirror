@@ -319,7 +319,7 @@ public final class PacketParser {
                                 if (!var63 && 0 == inTutorialIsland) {
                                     Class163_Sub2_Sub1.aLongArray4017[MouseListeningClass.anInt1921] = var55;
                                     MouseListeningClass.anInt1921 = (1 + MouseListeningClass.anInt1921) % 100;
-                                    RSString var61 = LinkableRSString.method733(var11).method555(BufferedDataStream.incomingBuffer);
+                                    RSString var61 = QuickChat.method733(var11).method555(BufferedDataStream.incomingBuffer);
                                     if (clanChatIcon == 2 || 3 == clanChatIcon) {
                                         MessageManager.sendGameMessage(var11, 20, var61, Objects.requireNonNull(Unsorted.method1052(nameAsLong)).longToRSString(), RSString.stringCombiner(new RSString[]{RSString.parse("<img=1>"), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}));
                                     } else if (clanChatIcon == 1) {
@@ -460,7 +460,7 @@ public final class PacketParser {
                                         modelId = BufferedDataStream.incomingBuffer.readUnsignedShortLE128();
                                         Class146.updateInterfacePacketCounter(modelId);
                                         if (var19 == 2) {
-                                            Class7.method834();
+                                            method834();
                                         }
                                         ConfigInventoryDefinition.anInt3655 = nodeModelId;
                                         TextureOperation20.method232(nodeModelId);
@@ -485,7 +485,7 @@ public final class PacketParser {
                                     } else if (141 == Unsorted.incomingOpcode) { //UNUSED BY SERVER
                                         var2 = BufferedDataStream.incomingBuffer.readLong();
                                         modelId = BufferedDataStream.incomingBuffer.readUnsignedShort();
-                                        var56 = LinkableRSString.method733(modelId).method555(BufferedDataStream.incomingBuffer);
+                                        var56 = QuickChat.method733(modelId).method555(BufferedDataStream.incomingBuffer);
                                         MessageManager.sendGameMessage(modelId, 19, var56, null, Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString());
                                         Unsorted.incomingOpcode = -1;
                                         return true;
@@ -545,7 +545,7 @@ public final class PacketParser {
                                                     var38 = new Class3_Sub1(var47.anInt2205, nodeModelId);
                                                     var47.unlink();
                                                 } else if (var30 == -1) {
-                                                    var38 = new Class3_Sub1(Objects.requireNonNull(Class7.getRSInterface(var19)).aClass3_Sub1_257.anInt2205, nodeModelId);
+                                                    var38 = new Class3_Sub1(Objects.requireNonNull(Unsorted.getRSInterface(var19)).aClass3_Sub1_257.anInt2205, nodeModelId);
                                                 } else {
                                                     var38 = new Class3_Sub1(0, nodeModelId);
                                                 }
@@ -765,7 +765,7 @@ public final class PacketParser {
                                                 return true;
                                             } else if (Unsorted.incomingOpcode == 144) {
                                                 nodeModelId = BufferedDataStream.incomingBuffer.readIntV2();
-                                                RSInterface var65 = Class7.getRSInterface(nodeModelId);
+                                                RSInterface var65 = Unsorted.getRSInterface(nodeModelId);
 
                                                 for (modelId = 0; Objects.requireNonNull(var65).itemAmounts.length > modelId; ++modelId) {
                                                     var65.itemAmounts[modelId] = -1;
@@ -959,7 +959,7 @@ public final class PacketParser {
                                                     if (!var49 && inTutorialIsland == 0) {
                                                         Class163_Sub2_Sub1.aLongArray4017[MouseListeningClass.anInt1921] = var51;
                                                         MouseListeningClass.anInt1921 = (1 + MouseListeningClass.anInt1921) % 100;
-                                                        var64 = LinkableRSString.method733(var33).method555(BufferedDataStream.incomingBuffer);
+                                                        var64 = QuickChat.method733(var33).method555(BufferedDataStream.incomingBuffer);
                                                         if (chatIcon == 2) {
                                                             MessageManager.sendGameMessage(var33, 18, var64, null, RSString.stringCombiner(new RSString[]{RSString.parse("<img=1>"), Objects.requireNonNull(Unsorted.method1052(var2)).longToRSString()}));
                                                         } else if (1 == chatIcon) {
@@ -989,12 +989,12 @@ public final class PacketParser {
                                                             TextureOperation23.aHashTable_3208.put(modelId, var23);
                                                         }
 
-                                                        RSInterface var27 = Class7.getRSInterface(nodeModelId);
+                                                        RSInterface var27 = Unsorted.getRSInterface(nodeModelId);
                                                         if (var27 != null) {
                                                             Class20.method909(var27);
                                                         }
 
-                                                        var27 = Class7.getRSInterface(modelId);
+                                                        var27 = Unsorted.getRSInterface(modelId);
                                                         if (null != var27) {
                                                             Class20.method909(var27);
                                                             Unsorted.method2104(var27, true, 48);
@@ -1065,7 +1065,7 @@ public final class PacketParser {
                                                     } else if (Unsorted.incomingOpcode == 191) {
                                                         nodeModelId = BufferedDataStream.incomingBuffer.readUnsignedShortLE();
                                                         Class3_Sub28_Sub1.method532(nodeModelId);
-                                                        Class3_Sub28_Sub4.anIntArray3565[Unsorted.bitwiseAnd(31, Unsorted.anInt944++)] = Unsorted.bitwiseAnd(nodeModelId, 32767);
+                                                        QuickChatDefinition.anIntArray3565[Unsorted.bitwiseAnd(31, Unsorted.anInt944++)] = Unsorted.bitwiseAnd(nodeModelId, 32767);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 102) {
@@ -1412,7 +1412,7 @@ public final class PacketParser {
                                                             if (nodeModelId < 0) {
                                                                 var25 = null;
                                                             } else {
-                                                                var25 = Class7.getRSInterface(nodeModelId);
+                                                                var25 = Unsorted.getRSInterface(nodeModelId);
                                                             }
 
                                                             for (; Unsorted.incomingPacketLength > BufferedDataStream.incomingBuffer.index; Class168.method2277(var6 + -1, counter, var30, var19, (byte) 46)) {
@@ -1437,7 +1437,7 @@ public final class PacketParser {
                                                             }
 
                                                             BufferedDataStream.method819();
-                                                            Class3_Sub28_Sub4.anIntArray3565[Unsorted.bitwiseAnd(Unsorted.anInt944++, 31)] = Unsorted.bitwiseAnd(32767, var19);
+                                                            QuickChatDefinition.anIntArray3565[Unsorted.bitwiseAnd(Unsorted.anInt944++, 31)] = Unsorted.bitwiseAnd(32767, var19);
                                                             Unsorted.incomingOpcode = -1;
                                                             return true;
                                                         } else if (Unsorted.incomingOpcode == 24) {
@@ -1503,7 +1503,7 @@ public final class PacketParser {
                                                                 var47 = (Class3_Sub1) Class124.aHashTable_1659.get(var36);
                                                                 if (var47 == null) {
                                                                     if (-1 == var30) {
-                                                                        var38 = new Class3_Sub1(var6, Objects.requireNonNull(Class7.getRSInterface(modelId)).aClass3_Sub1_257.anInt2202);
+                                                                        var38 = new Class3_Sub1(var6, Objects.requireNonNull(Unsorted.getRSInterface(modelId)).aClass3_Sub1_257.anInt2202);
                                                                     } else {
                                                                         var38 = new Class3_Sub1(var6, -1);
                                                                     }
@@ -1611,7 +1611,7 @@ public final class PacketParser {
 
                                                             counter = BufferedDataStream.incomingBuffer.readUnsignedShortLE();
                                                             Class146.updateInterfacePacketCounter(counter);
-                                                            RSInterface var34 = Class7.getRSInterface(var19);
+                                                            RSInterface var34 = Unsorted.getRSInterface(var19);
                                                             ItemDefinition var43;
                                                             if (Objects.requireNonNull(var34).usingScripts) {
                                                                 Class140_Sub6.method2026(var19, nodeModelId, modelId);
@@ -1644,7 +1644,7 @@ public final class PacketParser {
                                                             }
 
                                                             if (0 <= nodeModelId) {
-                                                                var25 = Class7.getRSInterface(nodeModelId);
+                                                                var25 = Unsorted.getRSInterface(nodeModelId);
                                                             } else {
                                                                 var25 = null;
                                                             }
@@ -1656,7 +1656,7 @@ public final class PacketParser {
                                                                 }
                                                             }
 
-                                                            Class10.method852((byte) 114, var19);
+                                                            CS2Methods.method852(var19);
                                                             counter = BufferedDataStream.incomingBuffer.readUnsignedShort();
 
                                                             for (var6 = 0; counter > var6; ++var6) {
@@ -1679,7 +1679,7 @@ public final class PacketParser {
                                                             }
 
                                                             BufferedDataStream.method819();
-                                                            Class3_Sub28_Sub4.anIntArray3565[Unsorted.bitwiseAnd(Unsorted.anInt944++, 31)] = Unsorted.bitwiseAnd(32767, var19);
+                                                            QuickChatDefinition.anIntArray3565[Unsorted.bitwiseAnd(Unsorted.anInt944++, 31)] = Unsorted.bitwiseAnd(32767, var19);
                                                             Unsorted.incomingOpcode = -1;
                                                             return true;
                                                         } else if (Unsorted.incomingOpcode == 142) {
@@ -1836,6 +1836,17 @@ public final class PacketParser {
             TextureOperation12.outgoingBuffer.writeLong(var1.toLong());
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "ni.B(" + 255 + ',' + (var1 != null ? "{...}" : "null") + ',' + var2 + ')');
+        }
+    }
+
+    static void method834() {
+        try {
+            Unsorted.method1250(43, false);
+            System.gc();
+            Class117.method1719(25);
+
+        } catch (RuntimeException var2) {
+            throw ClientErrorException.clientError(var2, "af.D(" + (byte) -86 + ')');
         }
     }
 }

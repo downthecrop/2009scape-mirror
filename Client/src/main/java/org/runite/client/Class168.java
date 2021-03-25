@@ -694,7 +694,7 @@ final class Class168 {
 
     static RSInterface method2273(RSInterface iface) {
         if (iface.parentId != -1) {
-            return Class7.getRSInterface(iface.parentId);
+            return Unsorted.getRSInterface(iface.parentId);
         }
 
         int var3 = iface.componentHash >>> 16;
@@ -702,7 +702,7 @@ final class Class168 {
 
         for (Class3_Sub31 var2 = var4.method1393(); null != var2; var2 = var4.method1392()) {
             if (var2.anInt2602 == var3) {
-                return Class7.getRSInterface((int) var2.linkableKey);
+                return Unsorted.getRSInterface((int) var2.linkableKey);
             }
         }
 
@@ -944,7 +944,7 @@ final class Class168 {
     private void method2279(int var2, DataBuffer var3, int var4) {
         try {
             if (var2 == 1) {
-                this.anInt2103 = RSInterface.method869(116, var3.readMedium());
+                this.anInt2103 = RSInterface.method869(var3.readMedium());
             } else if (var2 == 2) {
                 this.anInt2095 = var3.readUnsignedByte();
             } else if (3 == var2) {
@@ -955,7 +955,7 @@ final class Class168 {
             } else if (5 == var2) {
                 this.aBoolean2102 = false;
             } else if (var2 == 7) {
-                this.anInt2098 = RSInterface.method869(116, var3.readMedium());
+                this.anInt2098 = RSInterface.method869(var3.readMedium());
             } else if (var2 == 8) {
                 TextureOperation26.anInt3081 = var4;
             } else if (var2 == 9) {

@@ -163,7 +163,7 @@ abstract class GameObject {
     static void method1870() {
         try {
             Class101.aClass3_Sub24_Sub4_1421.method505((byte) -128);
-            Class10.anInt154 = 1;
+            Unsorted.anInt154 = 1;
             Class101.aClass153_1423 = null;
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "th.GC(" + false + ')');
