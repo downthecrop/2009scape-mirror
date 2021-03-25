@@ -247,7 +247,7 @@ object DeveloperConsole {
                 if (argSize in 2..4) {
                     if (clientCommand[1].toIntOrNull() == null) {
                         clientCommand.removeFirst()
-                        AtmosphereParser.musicHandler(
+                        AudioHandler.musicHandler(
                             CacheIndex.musicIndex.getArchiveForName(
                                 RSString.of(
                                     clientCommand.joinToString(
@@ -258,7 +258,7 @@ object DeveloperConsole {
                         )
                     } else {
                         args = clientCommand[1].toInt()
-                        AtmosphereParser.musicHandler(args)
+                        AudioHandler.musicHandler(args)
                     }
                 } else {
                     println("Error. Plays music. Use: playsong # OR playsong songName")

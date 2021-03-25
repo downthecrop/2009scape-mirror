@@ -29,7 +29,6 @@ public final class CS2Script extends Linkable {
     static ReferenceCache aReferenceCache_2442 = new ReferenceCache(50);
     static ReferenceCache aReferenceCache_2450 = new ReferenceCache(64);
     static byte[][][] aByteArrayArrayArray2452;
-    static int anInt2453 = 127;
     RSInterface aClass11_2438;
     RSString aClass94_2439;
     int scrollbarScrollAmount;
@@ -938,11 +937,11 @@ public final class CS2Script extends Linkable {
                                                 if (opcode < 3300) {
                                                     if (opcode == 3200) {
                                                         iStackCounter -= 3;
-                                                        TextureOperation26.method199(ItemDefinition.intsStack[iStackCounter - -1], ItemDefinition.intsStack[iStackCounter], ItemDefinition.intsStack[iStackCounter + 2]);
+                                                        AudioHandler.soundEffectHandler(ItemDefinition.intsStack[iStackCounter - -1], ItemDefinition.intsStack[iStackCounter], ItemDefinition.intsStack[iStackCounter + 2]);
                                                         continue;
                                                     }
                                                     if (opcode == 3201) {
-                                                        AtmosphereParser.musicHandler(ItemDefinition.intsStack[--iStackCounter]);
+                                                        AudioHandler.musicHandler(ItemDefinition.intsStack[--iStackCounter]);
                                                         continue;
                                                     }
                                                     if (opcode != 3202)
@@ -2664,7 +2663,7 @@ public final class CS2Script extends Linkable {
                                                                                 j35 = 0;
                                                                             if (j35 > 127)
                                                                                 j35 = 127;
-                                                                            anInt2453 = j35;
+                                                                            AudioHandler.soundEffectVolume = j35;
                                                                             Class119.method1730(Class38.signlink);
                                                                             aBoolean2705 = false;
                                                                             continue;
@@ -2800,7 +2799,7 @@ public final class CS2Script extends Linkable {
                                                                             continue;
                                                                         }
                                                                         if (opcode == 6118) {
-                                                                            ItemDefinition.intsStack[iStackCounter++] = anInt2453;
+                                                                            ItemDefinition.intsStack[iStackCounter++] = AudioHandler.soundEffectVolume;
                                                                             continue;
                                                                         }
                                                                         if (6119 == opcode) {

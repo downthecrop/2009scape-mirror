@@ -895,7 +895,7 @@ public class Unsorted {
 
     public static void method1470(int var0, SequenceDefinition var1, int var2, int var3, boolean var4, int var5) {
         try {
-            if (Class113.anInt1552 < 50) {
+            if (AudioHandler.currentSoundEffectCount < 50) {
                 if (var1.sounds != null && var1.sounds.length > var5 && null != var1.sounds[var5]) {
                     int var6 = var1.sounds[var5][0];
                     int var7 = var6 >> 8;
@@ -911,22 +911,22 @@ public class Unsorted {
                     int var9 = var6 & 31;
                     if (var9 == 0) {
                         if (var4) {
-                            TextureOperation26.method199(var8, var7, 0);
+                            AudioHandler.soundEffectHandler(var8, var7, 0);
                         }
 
                     } else if (0 != Sprites.anInt340) {
-                        Class3_Sub25.anIntArray2550[Class113.anInt1552] = var7;
-                        Class166.anIntArray2068[Class113.anInt1552] = var8;
+                        Class3_Sub25.anIntArray2550[AudioHandler.currentSoundEffectCount] = var7;
+                        Class166.anIntArray2068[AudioHandler.currentSoundEffectCount] = var8;
                         int var11 = (-64 + var0) / 128;
                         var10 = (var3 + -64) / 128;
-                        anIntArray2157[Class113.anInt1552] = 0;
-                        Class102.aClass135Array2131[Class113.anInt1552] = null;
-                        Class3_Sub8.anIntArray3083[Class113.anInt1552] = var9 + (var10 << 16) + (var11 << 8);
+                        anIntArray2157[AudioHandler.currentSoundEffectCount] = 0;
+                        Class102.aClass135Array2131[AudioHandler.currentSoundEffectCount] = null;
+                        Class3_Sub8.anIntArray3083[AudioHandler.currentSoundEffectCount] = var9 + (var10 << 16) + (var11 << 8);
                         if (var2 != 183921384) {
                             aClass33_1238 = null;
                         }
 
-                        ++Class113.anInt1552;
+                        ++AudioHandler.currentSoundEffectCount;
                     }
                 }
             }
@@ -2222,7 +2222,7 @@ public class Unsorted {
                     Class133.anInt1753 = 1;
                 }
 
-                Class113.anInt1552 = 0;
+                AudioHandler.currentSoundEffectCount = 0;
                 if (Class65.anInt987 != 0) {
                     Class45.anInt733 -= var10;
                     Class65.anInt987 -= var9;
@@ -4799,7 +4799,7 @@ public class Unsorted {
             Class25.aBoolean488 = true;
             anInt3671 = 0;
             RandomAccessFileWrapper var2 = null;
-            CS2Script.anInt2453 = 127;
+            AudioHandler.soundEffectVolume = 127;
             if (Class3_Sub24_Sub3.maxClientMemory >= 96) {
                 Class127_Sub1.method1758(2);
             } else {

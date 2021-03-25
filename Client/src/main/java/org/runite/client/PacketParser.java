@@ -1369,7 +1369,7 @@ public final class PacketParser {
                                                         }
 
                                                         modelId = BufferedDataStream.incomingBuffer.readUnsignedShort();
-                                                        TextureOperation26.method199(var19, nodeModelId, modelId);
+                                                        AudioHandler.soundEffectHandler(var19, nodeModelId, modelId);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 66) {
@@ -1697,7 +1697,7 @@ public final class PacketParser {
                                                                 nodeModelId = -1;
                                                             }
 
-                                                            AtmosphereParser.musicHandler(nodeModelId);
+                                                            AudioHandler.musicHandler(nodeModelId);
                                                             Unsorted.incomingOpcode = -1;
                                                             return true;
                                                         } else if (Unsorted.incomingOpcode == 208) {

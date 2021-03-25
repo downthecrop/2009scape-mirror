@@ -39,7 +39,7 @@ public final class Class23 {
             var1.writeByte(Class38.aBoolean661 ? 1 : 0);
             var1.writeByte(Class3_Sub28_Sub9.anInt3622);
             var1.writeByte(!TextureOperation17.aBoolean3184 ? 0 : 1);
-            var1.writeByte(CS2Script.anInt2453);
+            var1.writeByte(AudioHandler.soundEffectVolume);
             var1.writeByte(Unsorted.anInt120);
             var1.writeByte(Sprites.anInt340);
             var1.writeShort(TextureOperation.anInt2378);

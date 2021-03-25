@@ -193,21 +193,4 @@ final class TextureOperation26 extends TextureOperation {
       }
    }
 
-   static void method199(int var0, int var1, int var2) {
-      try {
-
-         if(CS2Script.anInt2453 != 0 && var0 != 0 && Class113.anInt1552 < 50 && var1 != -1) {
-            Class3_Sub25.anIntArray2550[Class113.anInt1552] = var1;
-            Class166.anIntArray2068[Class113.anInt1552] = var0;
-            Unsorted.anIntArray2157[Class113.anInt1552] = var2;
-            Class102.aClass135Array2131[Class113.anInt1552] = null;
-            Class3_Sub8.anIntArray3083[Class113.anInt1552] = 0;
-            ++Class113.anInt1552;
-         }
-
-      } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "ca.C(" + var0 + ',' + var1 + ',' + var2 + ',' + -799 + ')');
-      }
-   }
-
 }

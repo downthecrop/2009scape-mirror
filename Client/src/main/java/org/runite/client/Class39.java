@@ -557,13 +557,13 @@ public final class Class39 {
                             var7 = 7 & var5;
                             if (var2 >= 0 && var3 >= 0 && var2 < 104 && var3 < 104) {
                                 var28 = 1 + var6;
-                                if (var2 + -var28 <= Class102.player.anIntArray2767[0] && Class102.player.anIntArray2767[0] <= var28 + var2 && Class102.player.anIntArray2755[0] >= -var28 + var3 && Class102.player.anIntArray2755[0] <= var28 + var3 && 0 != Sprites.anInt340 && var7 > 0 && 50 > Class113.anInt1552 && var4 != -1) {
-                                    Class3_Sub25.anIntArray2550[Class113.anInt1552] = var4;
-                                    Class166.anIntArray2068[Class113.anInt1552] = var7;
-                                    Unsorted.anIntArray2157[Class113.anInt1552] = var8;
-                                    Class102.aClass135Array2131[Class113.anInt1552] = null;
-                                    Class3_Sub8.anIntArray3083[Class113.anInt1552] = var6 + ((var2 << 16) - -(var3 << 8));
-                                    ++Class113.anInt1552;
+                                if (var2 + -var28 <= Class102.player.anIntArray2767[0] && Class102.player.anIntArray2767[0] <= var28 + var2 && Class102.player.anIntArray2755[0] >= -var28 + var3 && Class102.player.anIntArray2755[0] <= var28 + var3 && 0 != Sprites.anInt340 && var7 > 0 && 50 > AudioHandler.currentSoundEffectCount && var4 != -1) {
+                                    Class3_Sub25.anIntArray2550[AudioHandler.currentSoundEffectCount] = var4;
+                                    Class166.anIntArray2068[AudioHandler.currentSoundEffectCount] = var7;
+                                    Unsorted.anIntArray2157[AudioHandler.currentSoundEffectCount] = var8;
+                                    Class102.aClass135Array2131[AudioHandler.currentSoundEffectCount] = null;
+                                    Class3_Sub8.anIntArray3083[AudioHandler.currentSoundEffectCount] = var6 + ((var2 << 16) - -(var3 << 8));
+                                    ++AudioHandler.currentSoundEffectCount;
                                 }
                             }
 

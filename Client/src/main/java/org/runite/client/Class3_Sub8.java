@@ -131,12 +131,12 @@ final class Class3_Sub8 extends Linkable {
 
    static void method132() {
       try {
-         for(int var1 = 0; var1 < Class113.anInt1552; ++var1) {
+         for(int var1 = 0; var1 < AudioHandler.currentSoundEffectCount; ++var1) {
             --Unsorted.anIntArray2157[var1];
             if(Unsorted.anIntArray2157[var1] < -10) {
-               --Class113.anInt1552;
+               --AudioHandler.currentSoundEffectCount;
 
-               for(int var2 = var1; var2 < Class113.anInt1552; ++var2) {
+               for(int var2 = var1; var2 < AudioHandler.currentSoundEffectCount; ++var2) {
                   Class3_Sub25.anIntArray2550[var2] = Class3_Sub25.anIntArray2550[var2 - -1];
                   Class102.aClass135Array2131[var2] = Class102.aClass135Array2131[var2 + 1];
                   Class166.anIntArray2068[var2] = Class166.anIntArray2068[1 + var2];
@@ -160,7 +160,7 @@ final class Class3_Sub8 extends Linkable {
                if(0 > Unsorted.anIntArray2157[var1]) {
                   int var3;
                   if(anIntArray3083[var1] == 0) {
-                     var3 = CS2Script.anInt2453;
+                     var3 = AudioHandler.soundEffectVolume;
                   } else {
                      int var4 = 128 * (255 & anIntArray3083[var1]);
                      int var7 = anIntArray3083[var1] >> 8 & 0xFF;

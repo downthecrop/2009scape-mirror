@@ -109,9 +109,9 @@ final class Class79 {
 
                         Unsorted.anInt3671 = Class3_Sub28_Sub9.anInt3622;
                         TextureOperation17.aBoolean3184 = var0.readUnsignedByte() == 1;
-                        CS2Script.anInt2453 = var0.readUnsignedByte();
-                        if (CS2Script.anInt2453 > 127) {
-                            CS2Script.anInt2453 = 127;
+                        AudioHandler.soundEffectVolume = var0.readUnsignedByte();
+                        if (AudioHandler.soundEffectVolume > 127) {
+                            AudioHandler.soundEffectVolume = 127;
                         }
 
                         Unsorted.anInt120 = var0.readUnsignedByte();
