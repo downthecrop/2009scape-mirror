@@ -13,13 +13,12 @@ class ConfigCommandSet : CommandSet(Command.Privilege.ADMIN){
         define("sconfigrange"){player, args ->
             if (args.size < 3) {
                 reject(player, "usage: sconfigrange idlo idhi")
-                return@define
             }
-            val idlo = args[1].toIntOrNull() ?: return@define
-            val idhi = args[2].toIntOrNull() ?: return@define
-            for (idsend in idlo until idhi) {
+            val idlo = args[1].toIntOrNull() ?: reject(player, "INCORRECT ID LOW")
+            val idhi = args[2].toIntOrNull() ?: reject(player, "INCORRECT ID HIGH")
+            for (idsend in (idlo as Int) until (idhi as Int)) {
                 player.configManager.set(idsend, Integer.MAX_VALUE)
-                player.packetDispatch.sendMessage("Config: $idsend value: " + Integer.MAX_VALUE)
+                notify(player,"Config: $idsend value: " + Integer.MAX_VALUE)
             }
         }
 
@@ -29,13 +28,12 @@ class ConfigCommandSet : CommandSet(Command.Privilege.ADMIN){
         define("sconfigrange0"){player, args ->
             if (args.size < 3) {
                 reject(player, "usage: sconfigrange0 idlo idhi")
-                return@define
             }
-            val idlo = args[1].toIntOrNull() ?: return@define
-            val idhi = args[2].toIntOrNull() ?: return@define
-            for (idsend in idlo until idhi) {
+            val idlo = args[1].toIntOrNull() ?: reject(player, "INCORRECT ID LOW")
+            val idhi = args[2].toIntOrNull() ?: reject(player, "INCORRECT ID HIGH")
+            for (idsend in (idlo as Int) until (idhi as Int)) {
                 player.configManager.set(idsend, 0)
-                player.packetDispatch.sendMessage("Config: $idsend value: 0")
+                notify(player,"Config: $idsend value: 0")
             }
         }
 
@@ -47,8 +45,8 @@ class ConfigCommandSet : CommandSet(Command.Privilege.ADMIN){
                 reject(player, "usage: iface id")
                 return@define
             }
-            val id = args[1].toIntOrNull() ?: return@define
-            player.interfaceManager.openComponent(id)
+            val id = args[1].toIntOrNull() ?: reject(player, "INVALID INTERFACE ID")
+            player.interfaceManager.openComponent(id as Int)
         }
     }
 }

@@ -65,14 +65,14 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
          * Tells the player to use loc
          */
         define("pos", Command.Privilege.STANDARD){ player, _->
-            player.packetDispatch.sendMessage("Do you mean ::loc?")
+            notify(player, "Do you mean ::loc?")
         }
 
         /**
          * Tells the player to use loc
          */
         define("coords", Command.Privilege.STANDARD){ player, _->
-            player.packetDispatch.sendMessage("Do you mean ::loc?")
+            notify(player, "Do you mean ::loc?")
         }
 
         /**
@@ -98,8 +98,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         define("players", Command.Privilege.STANDARD){ player, _ ->
             val rights = player.rights.ordinal
             if (player!!.interfaceManager.isOpened && player.interfaceManager.opened.id != Components.QUESTJOURNAL_SCROLL_275 || player.locks.isMovementLocked || player.locks.isTeleportLocked) {
-                player.sendMessage("Please finish what you're doing first.")
-                return@define
+                reject(player, "Please finish what you're doing first.")
             }
             player.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
             var i = 0
@@ -202,8 +201,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
          */
         define("reply", Command.Privilege.STANDARD){ player, _ ->
             if(player.interfaceManager.isOpened){
-                player.sendMessage("<col=e74c3c>Please finish what you're doing first.")
-                return@define
+                reject(player, "<col=e74c3c>Please finish what you're doing first.")
             }
             if (player.attributes.containsKey("replyTo")) {
                 player.setAttribute("keepDialogueAlive", true)
@@ -217,7 +215,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 })
                 player.dialogueInterpreter.sendMessageInput(StringUtils.formatDisplayName(replyTo))
             } else {
-                player.packetDispatch.sendMessage("<col=3498db>You have not recieved any recent messages to which you can reply.")
+                reject(player, "<col=3498db>You have not recieved any recent messages to which you can reply.")
             }
         }
 
@@ -255,17 +253,16 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
          * Set a specific skill to a specific level
          */
         define("setlevel"){player,args ->
-            if(args.size < 2) reject(player,"Usage: ::setlevel skillname level").also { return@define }
+            if(args.size < 2) reject(player,"Usage: ::setlevel skillname level")
             val skillname = args[1]
             val desiredLevel: Int? = args[2].toIntOrNull()
             if(desiredLevel == null){
                 reject(player, "Level must be an integer.")
-                return@define
             }
-            if(desiredLevel > 99) reject(player,"Level must be 99 or lower.").also { return@define }
+            if(desiredLevel!! > 99) reject(player,"Level must be 99 or lower.")
             val skill = Skills.getSkillByName(skillname)
 
-            if(skill < 0) reject(player, "Must use a valid skill name!").also { return@define }
+            if(skill < 0) reject(player, "Must use a valid skill name!")
 
             player.skills.setStaticLevel(skill,desiredLevel)
             player.skills.setLevel(skill,desiredLevel)
@@ -333,7 +330,6 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         define("setconfig"){player,args ->
             if(args.size < 3){
                 reject(player,"Syntax: ::setconfig configID value")
-                return@define
             }
             val configID = args[1].toString().toInt()
             val configValue = args[2].toString().toInt()
@@ -343,37 +339,35 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         define("getobjectvarp"){player,args ->
             if(args.size < 2){
                 reject(player,"Syntax: ::getobjectvarp objectid")
-                return@define
             }
             val objectID = args[1].toInt()
-            player.sendMessage("${VarbitDefinition.forObjectID(ObjectDefinition.forId(objectID).varbitID).configId}")
+            notify(player, "${VarbitDefinition.forObjectID(ObjectDefinition.forId(objectID).varbitID).configId}")
         }
 
         define("togglexp",Command.Privilege.STANDARD){ player, args ->
             val enabled = player.varpManager.get(2501).getVarbit(0)?.value == 1
             player.varpManager.get(2501).setVarbit(0,if(enabled) 0 else 1).send(player)
-            player.sendMessage("XP drops are now " + colorize("%R" + if(!enabled) "ON." else "OFF."))
+            notify(player, "XP drops are now " + colorize("%R" + if(!enabled) "ON." else "OFF."))
             player.varpManager.flagSave(2501)
         }
 
         define("xpconfig",Command.Privilege.STANDARD){player,args ->
             if(args.size < 3){
-                reject(player,"Usage: ::xpconfig track|mode type")
-                reject(player,"Track types: total|recent")
-                reject(player, "Mode types: instant|increment")
-                reject(player,"Defaults: track - total, mode - increment")
-                return@define
+                reject(player,"Usage: ::xpconfig track|mode type",
+                    "Track types: total|recent",
+                    "Mode types: instant|increment",
+                    "Defaults: track - total, mode - increment")
             }
 
             when(args[1]){
                 "track" -> when(args[2]){
                     "total" -> {
                         player.varpManager.get(2501).setVarbit(2,0).send(player)
-                        player.sendMessage("You are now tracking " + colorize("%RTOTAL") + " experience.")
+                        notify(player,"You are now tracking " + colorize("%RTOTAL") + " experience.")
                     }
                     "recent" -> {
                         player.varpManager.get(2501).setVarbit(2,1).send(player)
-                        player.sendMessage("You are now tracking the " + colorize("%RMOST RECENT") + " skill's experience.")
+                        notify(player,"You are now tracking the " + colorize("%RMOST RECENT") + " skill's experience.")
                     }
                     else -> {
                         reject(player,"Usage: ::xpconfig track|mode type")
@@ -387,11 +381,11 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                     when(args[2]){
                         "instant" -> {
                             player.varpManager.get(2501).setVarbit(1,1).send(player)
-                            player.sendMessage("Your xp tracker now updates " + colorize("%RINSTANTLY") + ".")
+                            notify(player,"Your xp tracker now updates " + colorize("%RINSTANTLY") + ".")
                         }
                         "increment" -> {
                             player.varpManager.get(2501).setVarbit(1,0).send(player)
-                            player.sendMessage("Your xp tracker now updates " + colorize("%RINCREMENTALLY") + ".")
+                            notify(player,"Your xp tracker now updates " + colorize("%RINCREMENTALLY") + ".")
                         }
                         else -> {
                             reject(player,"Usage: ::xpconfig track|mode type")
@@ -419,14 +413,13 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             } else {
                 player.varpManager.get(2502).save = false
             }
-            player.sendMessage("Slayer task tracker is now " + (if(disabled) colorize("%RON") else colorize("%ROFF")) + ".")
+            notify(player,"Slayer task tracker is now " + (if(disabled) colorize("%RON") else colorize("%ROFF")) + ".")
         }
 
         define("setvarbit",Command.Privilege.ADMIN){
             player,args ->
             if(args.size < 4){
                 reject(player,"Usage: ::setvarbit index offset value")
-                return@define
             }
             val index = args[1].toIntOrNull()
             val offset = args[2].toIntOrNull()
@@ -434,10 +427,9 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
 
             if(index == null || offset == null || value == null){
                 reject(player,"Usage ::setvarbit index offset value")
-                return@define
             }
 
-            player.varpManager.get(index).setVarbit(offset,value).send(player)
+            player.varpManager.get(index!!).setVarbit(offset!!, value!!).send(player)
         }
 
         define("grow",Command.Privilege.ADMIN){player,_ ->

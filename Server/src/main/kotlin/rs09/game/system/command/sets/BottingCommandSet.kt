@@ -50,16 +50,14 @@ class BottingCommandSet : CommandSet(Command.Privilege.STANDARD) {
             }
             if(args.size < 2){
                 reject(player,"Usage: ::script identifier")
-                return@define
             }
             val identifier = args[1]
             val script = PlayerScripts.identifierMap[identifier]
             if(script == null){
                 reject(player,"Invalid script identifier")
-                return@define
             }
             player.interfaceManager.close()
-            GeneralBotCreator(script.clazz.newInstance() as Script,player,true)
+            GeneralBotCreator(script!!.clazz.newInstance() as Script,player,true)
             player.sendMessage(colorize("%RStarting script..."))
             player.sendMessage(colorize("%RTo stop the script, do ::stopscript or log out."))
 

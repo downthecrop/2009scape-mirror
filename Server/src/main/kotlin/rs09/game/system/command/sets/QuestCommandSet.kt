@@ -31,12 +31,11 @@ class QuestCommandSet : CommandSet(Command.Privilege.ADMIN){
         define("setqueststage"){player,args ->
             if (args.size < 2) {
                 reject(player,"You must specify the index# of a quest, and a stage number")
-                return@define
             }
-            val quest = args[1].toIntOrNull() ?: return@define
-            val stage = args[2].toIntOrNull() ?: return@define
-            player.questRepository.setStage(player.questRepository.forIndex(quest), stage)
-            player.sendMessage("<col=209dff>Setting " + player.questRepository.forIndex(quest).name + " to stage $stage</col>")
+            val quest = args[1].toIntOrNull() ?: reject(player,"INVALID QUEST")
+            val stage = args[2].toIntOrNull() ?: reject(player,"INVALID STAGE")
+            player.questRepository.setStage(player.questRepository.forIndex(quest as Int), stage as Int)
+            notify(player, "<col=209dff>Setting " + player.questRepository.forIndex(quest).name + " to stage $stage</col>")
         }
 
         /**
