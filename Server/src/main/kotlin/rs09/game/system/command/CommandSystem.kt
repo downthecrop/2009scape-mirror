@@ -25,7 +25,9 @@ class CommandSystem {
                 }
             }
         } else {
-            command.attemptHandling(player,arguments)
+            try {
+                command.attemptHandling(player, arguments)
+            } catch (e: IllegalStateException){return true}
         }
         return false
     }

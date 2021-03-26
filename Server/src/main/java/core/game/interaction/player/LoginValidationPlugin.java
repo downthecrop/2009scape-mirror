@@ -1,16 +1,16 @@
 package core.game.interaction.player;
 
-import java.util.concurrent.TimeUnit;
-
 import core.game.content.activity.ActivityManager;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.SystemManager;
-import rs09.game.world.GameWorld;
+import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.plugin.PluginManifest;
-import core.plugin.Initializable;
 import core.plugin.PluginType;
+import rs09.game.world.GameWorld;
+
+import java.util.concurrent.TimeUnit;
 
 /**
  * Validates a player login.
@@ -59,7 +59,6 @@ public final class LoginValidationPlugin implements Plugin<Player> {
 		if (player.getAttribute("falconry", false)) {
 			ActivityManager.start(player, "falconry", true);
 		}
-		player.getConfigManager().set(678, 5);// RFD
 		if (player.getSavedData().getQuestData().getDragonSlayerAttribute("repaired")) {
 			player.getConfigManager().set(177, 1967876);
 		}

@@ -28,10 +28,19 @@ abstract class CommandSet(val defaultPrivilege: Command.Privilege) : Plugin<Any?
     /**
      * Glorified player.sendMessage with red text coloring. Please use this
      * rather than just player.sendMessage for anything that involves informing the player
-     * of proper usage or invalid syntax.
+     * of proper usage or invalid syntax. Throws an IllegalStateException and ends command execution immediately.
      */
     fun reject(player: Player, message: String){
         player.sendMessage(colorize("%R$message"))
+        throw IllegalStateException()
+    }
+
+    /**
+     * Glorified player.sendMessage with green text coloring and an arrow. Use this when you need to
+     * notify/inform a player of some information from within the command without ending execution.
+     */
+    fun notify(player: Player, message: String){
+        player.sendMessage(colorize("%G-->$message"))
     }
 
     /**
