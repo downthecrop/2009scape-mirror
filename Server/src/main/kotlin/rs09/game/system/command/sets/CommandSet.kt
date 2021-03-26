@@ -30,8 +30,10 @@ abstract class CommandSet(val defaultPrivilege: Command.Privilege) : Plugin<Any?
      * rather than just player.sendMessage for anything that involves informing the player
      * of proper usage or invalid syntax. Throws an IllegalStateException and ends command execution immediately.
      */
-    fun reject(player: Player, message: String){
-        player.sendMessage(colorize("%R$message"))
+    fun reject(player: Player, vararg message: String){
+        for(msg in message) {
+            player.sendMessage(colorize("%R$message"))
+        }
         throw IllegalStateException()
     }
 
