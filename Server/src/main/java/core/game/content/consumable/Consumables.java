@@ -293,6 +293,7 @@ public enum Consumables {
 	ROE(new Food(new int[]{11324}, new HealingEffect(3))),
 	EQUA_LEAVES(new Food(new int[]{2128}, new HealingEffect(1))),
 	CHOC_ICE(new Food(new int[]{6794}, new HealingEffect(6))),
+	EDIBLE_SEAWEED(new Food(new int[] {403}, new HealingEffect(4))),
 
 	/** Special Events */
 	PUMPKIN(new Food(new int[] {1959}, new HealingEffect(14))),
