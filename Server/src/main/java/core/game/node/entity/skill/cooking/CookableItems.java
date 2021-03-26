@@ -83,6 +83,10 @@ public enum CookableItems {
     BOWL_4(7084, 1871, 7092,43, 60, 70,68,392),
     BOWL_5(7082, 7080, 7094,57, 120, 80,68,392),
 
+    /* Vegetables */
+    BAKED_POTATO(6701, 1942, 6699, 7, 15, 41, 108, 472),
+    SWEETCORN(5988, 5986, 5990, 28, 104, 54, 90, 424),
+
     //Miscellaneous
     RAW_OOMLIE(Items.RAW_OOMLIE_2337, 0, Items.BURNT_OOMLIE_2426, 50, 0, 999,0,0), // always burns
     OOMLIE_WRAP(Items.COOKED_OOMLIE_WRAP_2343, Items.WRAPPED_OOMLIE_2341, Items.BURNT_OOMLIE_WRAP_2345, 50, 110, 999,0,0);

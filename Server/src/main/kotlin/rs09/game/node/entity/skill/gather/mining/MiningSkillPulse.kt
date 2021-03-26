@@ -137,66 +137,59 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
         if (reward > 0) {
             reward = calculateReward(reward) // calculate rewards
             rewardAmount = calculateRewardAmount(reward) // calculate amount
-            /**
-             * Code for randomly detaching the pickaxe handle from the pickaxe head and sending the head flying
-             */
-            if (RandomFunction.random(1,750) == 390) {
-                destroyPickaxe(player, SkillingTool.getPickaxe(player))
-                return true
+
+            applyAchievementTask(reward) // apply achievements
+            SkillingPets.checkPetDrop(player, SkillingPets.GOLEM) // roll for pet
+
+            //add experience
+            val experience = resource!!.getExperience() * rewardAmount
+            player.skills.addExperience(Skills.MINING, experience, true)
+
+            //Handle bracelet of clay
+            if(reward == Items.CLAY_434){
+                val bracelet = player.equipment.get(EquipmentContainer.SLOT_HANDS)
+                if(bracelet != null && bracelet.id == Items.BRACELET_OF_CLAY_11074){
+                    if(bracelet.charge > 28) bracelet.charge = 28
+                    bracelet.charge--
+                    reward = Items.SOFT_CLAY_1761
+                    player.sendMessage("Your bracelet of clay softens the clay for you.")
+                    if(bracelet.charge <= 0){
+                        player.sendMessage("Your bracelet of clay crumbles to dust.")
+                        player.equipment.remove(bracelet)
+                    }
+                }
+            }
+
+            //send the message for the resource reward
+            if (isMiningGems) {
+                val gemName = ItemDefinition.forId(reward).name.toLowerCase()
+                player.sendMessage("You get " + (if (StringUtils.isPlusN(gemName)) "an" else "a") + " " + gemName + ".")
             } else {
-                applyAchievementTask(reward) // apply achievements
-                SkillingPets.checkPetDrop(player, SkillingPets.GOLEM) // roll for pet
+                player.packetDispatch.sendMessage("You get some " + ItemDefinition.forId(reward).name.toLowerCase() + ".")
+            }
+            //give the reward
+            player.inventory.add(Item(reward, rewardAmount))
+            var rocksMined = player.getAttribute("$STATS_BASE:$STATS_ROCKS",0)
+            player.setAttribute("/save:$STATS_BASE:$STATS_ROCKS",++rocksMined)
 
-                //add experience
-                val experience = resource!!.getExperience() * rewardAmount
-                player.skills.addExperience(Skills.MINING, experience, true)
-
-                //Handle bracelet of clay
-                if(reward == Items.CLAY_434){
-                    val bracelet = player.equipment.get(EquipmentContainer.SLOT_HANDS)
-                    if(bracelet != null && bracelet.id == Items.BRACELET_OF_CLAY_11074){
-                        if(bracelet.charge > 28) bracelet.charge = 28
-                        bracelet.charge--
-                        reward = Items.SOFT_CLAY_1761
-                        player.sendMessage("Your bracelet of clay softens the clay for you.")
-                        if(bracelet.charge <= 0){
-                            player.sendMessage("Your bracelet of clay crumbles to dust.")
-                            player.equipment.remove(bracelet)
-                        }
-                    }
+            //calculate bonus gem for mining
+            if (!isMiningEssence) {
+                var chance = 282
+                var altered = false
+                if (Item(player.equipment.getId(12)).name.toLowerCase().contains("ring of wealth")) {
+                    chance = (chance / 1.5).toInt()
+                    altered = true
                 }
-
-                //send the message for the resource reward
-                if (isMiningGems) {
-                    val gemName = ItemDefinition.forId(reward).name.toLowerCase()
-                    player.sendMessage("You get " + (if (StringUtils.isPlusN(gemName)) "an" else "a") + " " + gemName + ".")
-                } else {
-                    player.packetDispatch.sendMessage("You get some " + ItemDefinition.forId(reward).name.toLowerCase() + ".")
+                val necklace = player.equipment[EquipmentContainer.SLOT_AMULET]
+                if (necklace != null && necklace.id > 1705 && necklace.id < 1713) {
+                    chance = (chance / 1.5).toInt()
+                    altered = true
                 }
-                //give the reward
-                player.inventory.add(Item(reward, rewardAmount))
-                var rocksMined = player.getAttribute("$STATS_BASE:$STATS_ROCKS",0)
-                player.setAttribute("/save:$STATS_BASE:$STATS_ROCKS",++rocksMined)
-
-                //calculate bonus gem for mining
-                if (!isMiningEssence) {
-                    var chance = 282
-                    var altered = false
-                    if (Item(player.equipment.getId(12)).name.toLowerCase().contains("ring of wealth")) {
-                        chance = (chance / 1.5).toInt()
-                        altered = true
-                    }
-                    val necklace = player.equipment[EquipmentContainer.SLOT_AMULET]
-                    if (necklace != null && necklace.id > 1705 && necklace.id < 1713) {
-                        chance = (chance / 1.5).toInt()
-                        altered = true
-                    }
-                    if (RandomFunction.random(chance) == chance / 2) {
-                        val gem = RandomFunction.rollChanceTable(true, *GEM_REWARDS)[0]
-                        player.packetDispatch.sendMessage("You find a " + gem.name + "!")
-                        if (!player.inventory.add(gem, player)) {
-                            player.packetDispatch.sendMessage("You do not have enough space in your inventory, so you drop the gem on the floor.")
-                        }
+                if (RandomFunction.random(chance) == chance / 2) {
+                    val gem = RandomFunction.rollChanceTable(true, *GEM_REWARDS)[0]
+                    player.packetDispatch.sendMessage("You find a " + gem.name + "!")
+                    if (!player.inventory.add(gem, player)) {
+                        player.packetDispatch.sendMessage("You do not have enough space in your inventory, so you drop the gem on the floor.")
                     }
                 }
             }
@@ -209,39 +202,6 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             }
         }
         return false
-    }
-
-    private fun destroyPickaxe(player: Player, pickaxe: SkillingTool) {
-        if(pickaxe.name.contains("adze")){
-            return
-        }
-        val radius = 2
-        val l = player.location.transform(RandomFunction.random(-radius, radius), RandomFunction.random(-radius, radius), 0)
-        val p = Pathfinder.find(player.location, l).points.last
-        val headSpawn = Location(p.x, p.y, player.location.z)
-        val headID =
-        when (pickaxe.id) {
-            1265 -> 480
-            1267 -> 482
-            1269 -> 484
-            1271 -> 488
-            1273 -> 486
-            1275 -> 490
-            else -> 0
-        }
-        val pickItem = Item(pickaxe.id)
-        if(player.equipment.containsItem(pickItem)){
-            val realItem = player.equipment.getItem(pickItem)
-            player.equipment.remove(pickItem)
-            player.equipment.add(Item(466),realItem.slot,false,false)
-            player.equipment.refresh()
-        } else if(player.inventory.containsItem(pickItem)) {
-            player.inventory.remove(pickItem)
-            player.inventory.add(Item(466))
-        }
-        player.audioManager.send(17)
-        player.sendMessage(colorize("%RThe head of your pickaxe snaps off and goes flying!"))
-        GroundItemManager.create(Item(headID),headSpawn,player)
     }
 
     private fun calculateRewardAmount(reward: Int): Int {

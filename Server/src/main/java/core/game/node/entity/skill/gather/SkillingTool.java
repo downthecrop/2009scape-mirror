@@ -81,11 +81,6 @@ public enum SkillingTool {
 	RUNE_PICKAXE(1275, 41, 0.65D, new Animation(624)),
 	
 	/**
-	 * Represents a dragon pickaxe (mining).
-	 */
-	DRAGON_PICKAXE(14669, 61, 1.0D, new Animation(11171)),
-	
-	/**
 	 * Represents the Inferno Adze (woodcutting)
 	 */
 	INFERNO_ADZE(13661, 61, 0.85D, new Animation(10251)),
@@ -182,11 +177,9 @@ public enum SkillingTool {
 	public static SkillingTool getPickaxe(Player player) {
 		SkillingTool tool = null;
 		if (checkTool(player, Skills.MINING, SkillingTool.INFERNO_ADZE2)) {
-			if(player.getSkills().getLevel(Skills.FIREMAKING) >= 92) {
+			if (player.getSkills().getLevel(Skills.FIREMAKING) >= 92) {
 				tool = SkillingTool.INFERNO_ADZE2;
 			}
-		} else if (checkTool(player, Skills.MINING, SkillingTool.DRAGON_PICKAXE)) {
-			tool = SkillingTool.DRAGON_PICKAXE;
 		} else if (checkTool(player, Skills.MINING, SkillingTool.RUNE_PICKAXE)) {
 			tool = SkillingTool.RUNE_PICKAXE;
 		} else if (checkTool(player, Skills.MINING, SkillingTool.ADAMANT_PICKAXE)) {
