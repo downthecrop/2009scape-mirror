@@ -22,14 +22,14 @@ public abstract class AbstractSprite extends Node {
 
    public static RSInterface method638(int var1, int var2) {
       try {
-         RSInterface var3 = Class7.getRSInterface(var1);
+         RSInterface var3 = Unsorted.getRSInterface(var1);
          return var2 == -1 ?var3: var3 != null && var3.aClass11Array262 != null && var2 < var3.aClass11Array262.length ?var3.aClass11Array262[var2]:null;
       } catch (RuntimeException var4) {
          throw ClientErrorException.clientError(var4, "qf.P(" + (byte) -19 + ',' + var1 + ',' + var2 + ')');
       }
    }
 
-   abstract void method639(int var1, int var2, int var3, int var4);
+   public abstract void method639(int var1, int var2, int var3, int var4);
 
    public final void drawScaledOrRotated(int x, int y, int angle, int scale) {
       try {

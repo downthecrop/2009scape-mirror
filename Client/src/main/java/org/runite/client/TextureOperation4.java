@@ -26,15 +26,11 @@ final class TextureOperation4 extends TextureOperation {
    static RSString[] aClass94Array3238 = new RSString[]{aClass94_3237, aClass94_3243, aClass94_3239, aClass94_3232};
    
 
-   final void method158(int var1) {
+   final void postDecode() {
       try {
-         if(var1 != 16251) {
-            this.method158(-93);
-         }
-
          this.method263();
       } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "mc.P(" + var1 + ')');
+         throw ClientErrorException.clientError(var3, "mc.P(" + ')');
       }
    }
 
@@ -49,7 +45,7 @@ final class TextureOperation4 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(0 == var1) {
             this.anInt3242 = var2.readUnsignedByte();
@@ -69,12 +65,12 @@ final class TextureOperation4 extends TextureOperation {
             this.anInt3229 = var2.readUnsignedShort();
          }
 
-         if(!var3) {
+         if(!true) {
             aClass94_3239 = null;
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "mc.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "mc.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

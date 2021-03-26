@@ -12,6 +12,26 @@ final class MapUnderlayColorDefinition {
     int anInt1417;
     int anInt1418;
 
+    static MapUnderlayColorDefinition method629(int var1) {
+       try {
+          MapUnderlayColorDefinition var2 = (MapUnderlayColorDefinition)Class44.aReferenceCache_725.get(var1);
+          if(var2 == null) {
+             byte[] var3 = Class3_Sub23.aClass153_2536.getFile(1, var1);
+             var2 = new MapUnderlayColorDefinition();
+             if(null != var3) {
+                var2.parseUnderlayDefinition(var1, new DataBuffer(var3));
+             }
+
+             Class44.aReferenceCache_725.put(var2, var1);
+             return var2;
+          } else {
+             return var2;
+          }
+       } catch (RuntimeException var4) {
+          throw ClientErrorException.clientError(var4, "qc.B(" + true + ',' + var1 + ')');
+       }
+    }
+
     final void parseUnderlayDefinition(int var1, DataBuffer buffer) {
         try {
             while (true) {

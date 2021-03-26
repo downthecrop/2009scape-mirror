@@ -84,7 +84,7 @@ final class Class108 {
 
     static void method1659() {
         try {
-            Class61.aReferenceCache_939.clear();
+            LinkedList.aReferenceCache_939.clear();
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "oi.G(" + 16712751 + ')');
         }

@@ -20,19 +20,6 @@ public final class AtmosphereParser {
     static int anInt1191;
     static int screenLowerY;
 
-    public static void musicHandler(int var1) {
-        try {
-            if (-1 == var1 && !Class83.aBoolean1158) {
-                GameObject.method1870();
-            } else if (var1 != -1 && (Class129.anInt1691 != var1 || Class79.method1391(-1)) && Unsorted.anInt120 != 0 && !Class83.aBoolean1158) {
-                Unsorted.method2099(var1, CacheIndex.musicIndex, Unsorted.anInt120);
-            }
-            Class129.anInt1691 = var1;
-        } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "li.B(" + true + ',' + var1 + ')');
-        }
-    }
-
     static void method1428(int var0, int var2) {
         try {
             ItemDefinition.ram[var0] = var2;
@@ -55,7 +42,7 @@ public final class AtmosphereParser {
             if (var2 == null) {
                 byte[] var3 = CacheIndex.fontsIndex.getFile(var1, 0);
                 var2 = new Class3_Sub28_Sub17_Sub1(var3);
-                var2.method697(TextureOperation0.nameIconsSpriteArray, null);
+                var2.method697(Sprites.nameIconsSpriteArray, null);
                 Unsorted.aReferenceCache_1135.put(var2, var1);
             }
             return var2;

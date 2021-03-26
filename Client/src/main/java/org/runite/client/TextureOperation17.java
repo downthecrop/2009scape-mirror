@@ -7,7 +7,7 @@ final class TextureOperation17 extends TextureOperation {
    private int anInt3174;
    private int anInt3175 = 0;
    private int anInt3176 = 0;
-   static Class61 aClass61_3177 = new Class61();
+   static LinkedList aLinkedList_3177 = new LinkedList();
    private int anInt3178 = 0;
    static int anInt3179;
    private int anInt3180;
@@ -20,7 +20,7 @@ final class TextureOperation17 extends TextureOperation {
    private int anInt3189;
 
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(var1 == 0) {
             this.anInt3175 = var2.readSignedShort();
@@ -30,12 +30,12 @@ final class TextureOperation17 extends TextureOperation {
              this.anInt3176 = (var2.readSignedByte() << 12) / 100;
          }
 
-         if(!var3) {
+         if(!true) {
             this.method240(-114, 127, 95);
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "hk.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "hk.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

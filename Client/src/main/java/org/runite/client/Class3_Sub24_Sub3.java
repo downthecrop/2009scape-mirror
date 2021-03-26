@@ -4,8 +4,7 @@ import java.util.Objects;
 
 final class Class3_Sub24_Sub3 extends Class3_Sub24 {
 
-   Class61 aClass61_3489 = new Class61();
-   static CacheIndex aClass153_3490;
+   LinkedList aLinkedList_3489 = new LinkedList();
    static int[] anIntArray3491 = new int[]{0, -1, 0, 1};
    static int maxClientMemory = 64;
    private final Class3_Sub24_Sub4 aClass3_Sub24_Sub4_3493;
@@ -17,7 +16,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
       try {
          Class3_Sub22 var1;
          do {
-            var1 = (Class3_Sub22)this.aClass61_3489.method1221();
+            var1 = (Class3_Sub22)this.aLinkedList_3489.method1221();
             if(null == var1) {
                return null;
             }
@@ -31,7 +30,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
 
    final Class3_Sub24 method411() {
       try {
-         Class3_Sub22 var1 = (Class3_Sub22)this.aClass61_3489.method1222();
+         Class3_Sub22 var1 = (Class3_Sub22)this.aLinkedList_3489.method1222();
          return null != var1?(null != var1.aClass3_Sub24_Sub1_2507?var1.aClass3_Sub24_Sub1_2507:this.method414()):null;
       } catch (RuntimeException var2) {
          throw ClientErrorException.clientError(var2, "te.Q()");
@@ -46,9 +45,9 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
             var1.anInt2516 = 1048575 & var4 * var3 + var1.anInt2516;
             if(var5 <= var3) {
                if(0 == this.aClass3_Sub24_Sub4_3493.anIntArray3519[var1.anInt2514]) {
-                  var1.aClass3_Sub24_Sub1_2507 = Class3_Sub24_Sub1.method432(var1.aClass3_Sub12_Sub1_2509, var1.aClass3_Sub24_Sub1_2507.method438(), var1.aClass3_Sub24_Sub1_2507.method425(), var1.aClass3_Sub24_Sub1_2507.method451());
+                  var1.aClass3_Sub24_Sub1_2507 = Class3_Sub24_Sub1.method432(var1.aPcmSound_2509, var1.aClass3_Sub24_Sub1_2507.method438(), var1.aClass3_Sub24_Sub1_2507.method425(), var1.aClass3_Sub24_Sub1_2507.method451());
                } else {
-                  var1.aClass3_Sub24_Sub1_2507 = Class3_Sub24_Sub1.method432(var1.aClass3_Sub12_Sub1_2509, var1.aClass3_Sub24_Sub1_2507.method438(), 0, var1.aClass3_Sub24_Sub1_2507.method451());
+                  var1.aClass3_Sub24_Sub1_2507 = Class3_Sub24_Sub1.method432(var1.aPcmSound_2509, var1.aClass3_Sub24_Sub1_2507.method438(), 0, var1.aClass3_Sub24_Sub1_2507.method451());
                   this.aClass3_Sub24_Sub4_3493.method501(var1, var1.aClass3_Sub15_2527.aShortArray2434[var1.anInt2520] < 0, (byte)-101);
                }
 
@@ -110,7 +109,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
       try {
          this.aClass3_Sub24_Sub2_3495.method415(var1);
 
-         for(Class3_Sub22 var3 = (Class3_Sub22)this.aClass61_3489.method1222(); var3 != null; var3 = (Class3_Sub22)this.aClass61_3489.method1221()) {
+         for(Class3_Sub22 var3 = (Class3_Sub22)this.aLinkedList_3489.method1222(); var3 != null; var3 = (Class3_Sub22)this.aLinkedList_3489.method1221()) {
             if(this.aClass3_Sub24_Sub4_3493.method504(var3, 121)) {
                int var2 = var1;
 
@@ -140,7 +139,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
       try {
          this.aClass3_Sub24_Sub2_3495.method413(var1, var2, var3);
 
-         for(Class3_Sub22 var6 = (Class3_Sub22)this.aClass61_3489.method1222(); var6 != null; var6 = (Class3_Sub22)this.aClass61_3489.method1221()) {
+         for(Class3_Sub22 var6 = (Class3_Sub22)this.aLinkedList_3489.method1222(); var6 != null; var6 = (Class3_Sub22)this.aLinkedList_3489.method1221()) {
             if(this.aClass3_Sub24_Sub4_3493.method504(var6, 126)) {
                int var5 = var3;
                int var4 = var2;
@@ -191,9 +190,9 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
 
                var2.anInt2516 += var7 * var8 + -1048576;
                if(this.aClass3_Sub24_Sub4_3493.anIntArray3519[var2.anInt2514] == 0) {
-                  var2.aClass3_Sub24_Sub1_2507 = Class3_Sub24_Sub1.method432(var2.aClass3_Sub12_Sub1_2509, var11.method438(), var11.method425(), var11.method451());
+                  var2.aClass3_Sub24_Sub1_2507 = Class3_Sub24_Sub1.method432(var2.aPcmSound_2509, var11.method438(), var11.method425(), var11.method451());
                } else {
-                  var2.aClass3_Sub24_Sub1_2507 = Class3_Sub24_Sub1.method432(var2.aClass3_Sub12_Sub1_2509, var11.method438(), 0, var11.method451());
+                  var2.aClass3_Sub24_Sub1_2507 = Class3_Sub24_Sub1.method432(var2.aPcmSound_2509, var11.method438(), 0, var11.method451());
                   this.aClass3_Sub24_Sub4_3493.method501(var2, var2.aClass3_Sub15_2527.aShortArray2434[var2.anInt2520] < 0, (byte)-88);
                   var2.aClass3_Sub24_Sub1_2507.method431(var9, var11.method425());
                }

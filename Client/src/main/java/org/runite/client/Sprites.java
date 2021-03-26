@@ -6,8 +6,9 @@ final class Sprites {
 
     public static int compassSpriteArchive;
     public static int hintMapEdgeSpriteArchive;
+    public static AbstractIndexedSprite[] nameIconsSpriteArray;
     static boolean aBoolean337;
-    static int anInt340 = 127;
+    static int ambientVolume = 127;
     static int p11FullSpriteArchive;
     static int p12FullSpriteArchive;
     static int b12FullSpriteArchive;
@@ -49,10 +50,10 @@ final class Sprites {
             Class65.aAbstractSpriteArray1825 = TextureOperation18.method286(crossSpriteArchive, index8);
             Unsorted.aAbstractSpriteArray1136 = TextureOperation18.method286(mapDotsSpriteArchive, index8);
             GameObject.aClass109Array1831 = Class85.method1424(index8, scrollbarSpriteArchive);
-            TextureOperation0.nameIconsSpriteArray = Class85.method1424(index8, nameIconsSpriteArchive);
-            FontType.smallFont.method697(TextureOperation0.nameIconsSpriteArray, null);
-            FontType.plainFont.method697(TextureOperation0.nameIconsSpriteArray, null);
-            FontType.bold.method697(TextureOperation0.nameIconsSpriteArray, null);
+            nameIconsSpriteArray = Class85.method1424(index8, nameIconsSpriteArchive);
+            FontType.smallFont.method697(nameIconsSpriteArray, null);
+            FontType.plainFont.method697(nameIconsSpriteArray, null);
+            FontType.bold.method697(nameIconsSpriteArray, null);
             if (HDToolKit.highDetail) {
                 Class141.aClass109_Sub1Array1843 = method885(floorShadowSpriteArchive, index8);
 

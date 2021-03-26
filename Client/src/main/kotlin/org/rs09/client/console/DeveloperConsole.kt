@@ -10,6 +10,7 @@ import java.awt.event.KeyEvent
 import java.text.SimpleDateFormat
 import java.util.*
 import org.runite.client.TextureOperation12
+import java.util.LinkedList
 
 
 // TODO Escape characters in the string rendering - is this something we can do using RSString / the text renders?
@@ -213,7 +214,7 @@ object DeveloperConsole {
                 for (i in 0..17) {
                     val component = (lookup.values!![i.toLong()]!! as LinkableInt).value
 
-                    val rsiface = Class7.getRSInterface(component)
+                    val rsiface = Unsorted.getRSInterface(component)
                     if (rsiface == null) println("Error: couldnt find component for hash $component")
 
                     println("$i: <col=5555ff>${rsiface.text}</col>")
@@ -227,7 +228,7 @@ object DeveloperConsole {
                 for (i in 0..130) {
                     val component = (lookup.values!![i.toLong()]!! as LinkableInt).value
 
-                    val rsiface = Class7.getRSInterface(component)
+                    val rsiface = Unsorted.getRSInterface(component)
                     if (rsiface == null) println("Error: couldnt find component for hash $component")
 
                     println("$i: <col=5555ff>${rsiface.text}</col>")
@@ -246,7 +247,7 @@ object DeveloperConsole {
                 if (argSize in 2..4) {
                     if (clientCommand[1].toIntOrNull() == null) {
                         clientCommand.removeFirst()
-                        AtmosphereParser.musicHandler(
+                        AudioHandler.musicHandler(
                             CacheIndex.musicIndex.getArchiveForName(
                                 RSString.of(
                                     clientCommand.joinToString(
@@ -257,7 +258,7 @@ object DeveloperConsole {
                         )
                     } else {
                         args = clientCommand[1].toInt()
-                        AtmosphereParser.musicHandler(args)
+                        AudioHandler.musicHandler(args)
                     }
                 } else {
                     println("Error. Plays music. Use: playsong # OR playsong songName")

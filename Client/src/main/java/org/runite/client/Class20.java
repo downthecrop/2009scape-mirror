@@ -70,7 +70,7 @@ final class Class20 {
                 GameObject var13 = null;
                 GameObject var14 = null;
                 if (0 == var4) {
-                    Class70 var15 = Class61.method1209(var3, var2, var1);
+                    Class70 var15 = LinkedList.method1209(var3, var2, var1);
                     if (null != var15) {
                         var13 = var15.aClass140_1049;
                         var14 = var15.aClass140_1052;

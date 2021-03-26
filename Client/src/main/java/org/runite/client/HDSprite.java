@@ -229,7 +229,7 @@ public class HDSprite extends AbstractSprite {
         var7.glLoadIdentity();
     }
 
-    final void method639(int var1, int var2, int var3, int var4) {
+    public final void method639(int var1, int var2, int var3, int var4) {
         if (var3 > 0 && var4 > 0) {
             HDToolKit.method1822();
             int var5 = this.width;

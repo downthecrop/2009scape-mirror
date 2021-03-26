@@ -29,7 +29,7 @@ public abstract class TextureOperation extends Linkable {
                     var4 = var2.nextInt();
                 } while (var3 <= var4);
 
-                return TextureOperation27.method201(var4, var1, -58);
+                return TextureOperation27.method201(var4, var1);
             }
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "ni.C(" + var0 + ',' + var1 + ',' + (var2 != null ? "{...}" : "null") + ')');
@@ -37,26 +37,12 @@ public abstract class TextureOperation extends Linkable {
     }
 
 
-    final int[] method152(int var1, int var2, int var3) {
-        try {
-            if (var3 != 32755) {
-                anInt2383 = 121;
-            }
-
-            return this.subOperations[var1].aBoolean2375 ? this.subOperations[var1].method154(var2, (byte) -118) : this.subOperations[var1].method166(var2)[0];
-        } catch (RuntimeException var5) {
-            throw ClientErrorException.clientError(var5, "j.RA(" + var1 + ',' + var2 + ',' + var3 + ')');
-        }
+    final int[] method152(int var1, int var2) {
+        return this.subOperations[var1].aBoolean2375 ? this.subOperations[var1].method154(var2, (byte) -118) : this.subOperations[var1].method166(var2)[0];
     }
 
-    static void method153(int var0) {
-        try {
-            if (var0 >= 91) {
-                Class3_Sub26.aClass61_2557 = new Class61();
-            }
-        } catch (RuntimeException var2) {
-            throw ClientErrorException.clientError(var2, "j.QA(" + var0 + ')');
-        }
+    static void method153() {
+        Class3_Sub26.aLinkedList_2557 = new LinkedList();
     }
 
     int[] method154(int var1, byte var2) {
@@ -67,38 +53,14 @@ public abstract class TextureOperation extends Linkable {
         }
     }
 
-    int method155(byte var1) {
-        try {
-            if (var1 != 19) {
-                this.method152(-80, 116, -73);
-            }
-
-            return -1;
-        } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "j.HA(" + var1 + ')');
-        }
+    int getSpriteFrame() {
+        return -1;
     }
 
-    void method157(int var1, DataBuffer var2, boolean var3) {
-        try {
-            if (!var3) {
-                this.subOperations = null;
-            }
-
-        } catch (RuntimeException var5) {
-            throw ClientErrorException.clientError(var5, "j.A(" + var1 + ',' + (var2 != null ? "{...}" : "null") + ',' + var3 + ')');
-        }
+    void decode(int var1, DataBuffer var2) {
     }
 
-    void method158(int var1) {
-        try {
-            if (var1 != 16251) {
-                anInt2378 = 12;
-            }
-
-        } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "j.P(" + var1 + ')');
-        }
+    void postDecode() {
     }
 
     int method159(int var1) {

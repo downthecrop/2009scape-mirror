@@ -4,11 +4,11 @@ import java.util.Objects;
 
 final class TextureOperation30 extends TextureOperation {
 
-   static volatile boolean aBoolean3116 = true;
+   static volatile boolean fullRedraw = true;
   
    static boolean[][] aBooleanArrayArray3118 = new boolean[][]{new boolean[0], {true, false, true}, {true, false, false, true}, {false, false, true, true}, {true, true, false}, {false, true, true}, {true, false, false, true}, {false, false, false, true, true}, {false, true, true}, {true, false, true, true, true}, {false, true, true, true, true}, {false, true, true, true, true, false}};
-   static Frame aFrame3121;
-   static Signlink aClass87_3125;
+   static Frame fullScreenFrame;
+   static Signlink signlink;
    private int anInt3126 = 2048;
    private int anInt3127 = 3072;
    private int anInt3128 = 1024;
@@ -29,7 +29,7 @@ final class TextureOperation30 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(var1 == 0) {
             this.anInt3128 = var2.readUnsignedShort();
@@ -39,26 +39,8 @@ final class TextureOperation30 extends TextureOperation {
             this.aBoolean2375 = var2.readUnsignedByte() == 1;
          }
 
-         if(!var3) {
-            this.method157(56, null, true);
-         }
-
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "fh.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
-      }
-   }
-
-   public static void method211(int var0) {
-      try {
-         if(var0 != 1024) {
-            aClass87_3125 = null;
-         }
-         TextCore.COMMAND_NOCLIP = null;
-         aFrame3121 = null;
-         aBooleanArrayArray3118 = null;
-         aClass87_3125 = null;
-      } catch (RuntimeException var2) {
-         throw ClientErrorException.clientError(var2, "fh.C(" + var0 + ')');
+         throw ClientErrorException.clientError(var5, "fh.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 
@@ -66,7 +48,7 @@ final class TextureOperation30 extends TextureOperation {
       try {
          int[] var7 = this.aClass114_2382.method1709(var1);
          if(this.aClass114_2382.aBoolean1580) {
-            int[] var4 = this.method152(0, var1, 32755);
+            int[] var4 = this.method152(0, var1);
 
             for(int var5 = 0; var5 < Class113.anInt1559; ++var5) {
                var7[var5] = this.anInt3128 - -(var4[var5] * this.anInt3126 >> 12);
@@ -188,7 +170,7 @@ final class TextureOperation30 extends TextureOperation {
          short var2 = 256;
          int var3 = 0;
          if(var0 >= -80) {
-            aBoolean3116 = true;
+            fullRedraw = true;
          }
 
          while(Class161.anIntArray2026.length > var3) {
@@ -251,23 +233,17 @@ final class TextureOperation30 extends TextureOperation {
             }
          }
 
-         if(-1 != -1) {
-            method211(51);
-         }
-
          return var3;
       } catch (RuntimeException var12) {
          throw ClientErrorException.clientError(var12, "fh.T(" + -1 + ',' + var2 + ')');
       }
    }
 
-   final void method158(int var1) {
+   final void postDecode() {
       try {
-         if(var1 == 16251) {
-            this.anInt3126 = this.anInt3127 - this.anInt3128;
-         }
+         this.anInt3126 = this.anInt3127 - this.anInt3128;
       } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "fh.P(" + var1 + ')');
+         throw ClientErrorException.clientError(var3, "fh.P(" + ')');
       }
    }
 

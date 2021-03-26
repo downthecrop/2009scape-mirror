@@ -23,7 +23,7 @@ final class Class3_Sub28_Sub9 extends Node {
          byte[] var2 = Class163_Sub1.aByteArrayArray2987[0];
 
          Object var3;
-         if(TextureOperation0.aBooleanArray3272[0]) {
+         if(Class45.aBooleanArray3272[0]) {
             byte[] var4 = Class163_Sub3.aByteArrayArray3005[0];
             int[] var5 = new int[var1];
 

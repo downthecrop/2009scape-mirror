@@ -21,7 +21,7 @@ final class TextureOperation5 extends TextureOperation {
 
             int var10;
             for(var10 = -this.anInt3297 + var1; var1 - -this.anInt3297 >= var10; ++var10) {
-               int[] var11 = this.method152(0, var10 & Class3_Sub20.anInt2487, 32755);
+               int[] var11 = this.method152(0, var10 & Class3_Sub20.anInt2487);
                int[] var12 = new int[Class113.anInt1559];
                int var13 = 0;
 
@@ -141,7 +141,7 @@ final class TextureOperation5 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(var1 == 0) {
             this.anInt3294 = var2.readUnsignedByte();
@@ -151,12 +151,12 @@ final class TextureOperation5 extends TextureOperation {
             this.aBoolean2375 = var2.readUnsignedByte() == 1;
          }
 
-         if(!var3) {
+         if(!true) {
             this.anInt3294 = 60;
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "nm.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "nm.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

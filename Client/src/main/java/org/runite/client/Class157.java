@@ -61,12 +61,35 @@ final class Class157 {
         try {
             //System.out.println("Class 157 " + var2);
             if (Class75_Sub4.method1351(var1, 0, var0)) {
-                return Class10.method851();
+                return method851();
             } else {
                 return null;
             }
         } catch (RuntimeException var5) {
             throw ClientErrorException.clientError(var5, "vj.A(" + 0 + ',' + var0 + ',' + (var1 != null ? "{...}" : "null") + ')');
+        }
+    }
+
+    static Class3_Sub28_Sub16_Sub2[] method851() {
+        try {
+            Class3_Sub28_Sub16_Sub2[] var1 = new Class3_Sub28_Sub16_Sub2[Class95.anInt1338];
+
+            for (int var2 = 0; Class95.anInt1338 > var2; ++var2) {
+                int var3 = Unsorted.anIntArray3076[var2] * Class140_Sub7.anIntArray2931[var2];
+                byte[] var4 = Class163_Sub1.aByteArrayArray2987[var2];
+                int[] var5 = new int[var3];
+
+                for (int var6 = 0; var3 > var6; ++var6) {
+                    var5[var6] = TextureOperation38.spritePalette[Unsorted.bitwiseAnd(255, var4[var6])];
+                }
+
+                var1[var2] = new Class3_Sub28_Sub16_Sub2(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], Class140_Sub7.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var5);
+            }
+
+            Class39.method1035((byte) 113);
+            return var1;
+        } catch (RuntimeException var7) {
+            throw ClientErrorException.clientError(var7, "bd.B(" + true + ')');
         }
     }
 

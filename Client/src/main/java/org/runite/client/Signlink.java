@@ -619,7 +619,7 @@ public class Signlink implements Runnable {
         return this.method1435(6, var1 + (var2 << 16), null, (var4 << 16) + var3);
     }
 
-    public final Class64 method1451(int var2, Runnable var3) {
+    public final Class64 startThread(int var2, Runnable var3) {
         return this.method1435(2, 0, var3, var2);
     }
 

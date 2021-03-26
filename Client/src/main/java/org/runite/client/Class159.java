@@ -30,7 +30,7 @@ public final class Class159 {
         try {
             if (Unsorted.paramJavaScriptEnabled) {
                 try {
-                    return !(Boolean) TextCore.aClass94_3209.method1577(Class38.signlink.gameApplet);
+                    return !(Boolean) RSString.parse("showingVideoAd").method1577(Class38.gameSignlink.gameApplet);
                 } catch (Throwable var2) {
                 }
             }
@@ -125,7 +125,7 @@ public final class Class159 {
                         }
 
                         if (0 <= var10) {
-                            Class3_Sub30_Sub1.anIntArray3805[var10 + var9] = var8 / (1 + var6 * 2);
+                            BufferedDataStream.anIntArray3805[var10 + var9] = var8 / (1 + var6 * 2);
                         }
                     }
                 }
@@ -136,11 +136,11 @@ public final class Class159 {
                     for (var9 = -var6; var2 > var9; ++var9) {
                         var10 = var9 * 128;
                         if (var2 > var9 + var6) {
-                            var8 += Class3_Sub30_Sub1.anIntArray3805[var6 * 128 + (var7 - -var10)];
+                            var8 += BufferedDataStream.anIntArray3805[var6 * 128 + (var7 - -var10)];
                         }
 
                         if (0 <= var9 - var6 - 1) {
-                            var8 -= Class3_Sub30_Sub1.anIntArray3805[-((1 + var6) * 128) + (var7 - -var10)];
+                            var8 -= BufferedDataStream.anIntArray3805[-((1 + var6) * 128) + (var7 - -var10)];
                         }
 
                         if (var9 >= 0) {
@@ -154,15 +154,4 @@ public final class Class159 {
             throw ClientErrorException.clientError(var11, "vl.E(" + var0 + ',' + 0 + ')');
         }
     }
-
-//   static void method2196() {
-//      try {
-//         Class3_Sub13_Sub34.aReferenceCache_3412.clearSoftReferences();
-//
-//         Class3_Sub13_Sub31.aReferenceCache_3369.clearSoftReferences();
-//      } catch (RuntimeException var2) {
-//         throw ClientErrorException.clientError(var2, "vl.D(" + 128 + ')');
-//      }
-//   }
-
 }

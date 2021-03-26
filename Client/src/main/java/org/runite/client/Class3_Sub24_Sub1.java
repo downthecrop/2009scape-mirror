@@ -23,7 +23,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
       if(this.anInt3471 == 0 && this.anInt3480 == 0) {
          this.method415(var3);
       } else {
-         Class3_Sub12_Sub1 var4 = (Class3_Sub12_Sub1)this.aClass3_Sub12_2544;
+         PcmSound var4 = (PcmSound)this.aSound_2544;
          int var5 = this.anInt3473 << 8;
          int var6 = this.anInt3482 << 8;
          int var7 = var4.aByteArray3030.length << 8;
@@ -319,14 +319,14 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
             this.anInt3480 += var2;
             if(this.anInt3470 == 256 && (this.anInt3474 & 0xFF) == 0) {
                if(Unsorted.aBoolean2150) {
-                  var2 = method426(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, this.anInt3475, this.anInt3483, var6, var3, this);
+                  var2 = method426(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, this.anInt3475, this.anInt3483, var6, var3, this);
                } else {
-                  var2 = method428(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, this.anInt3472, var6, var3, this);
+                  var2 = method428(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, this.anInt3472, var6, var3, this);
                }
             } else if(Unsorted.aBoolean2150) {
-               var2 = method421(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, this.anInt3475, this.anInt3483, var6, var3, this, this.anInt3470, var5);
+               var2 = method421(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, this.anInt3475, this.anInt3483, var6, var3, this, this.anInt3470, var5);
             } else {
-               var2 = method422(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, this.anInt3472, var6, var3, this, this.anInt3470, var5);
+               var2 = method422(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, this.anInt3472, var6, var3, this, this.anInt3470, var5);
             }
 
             this.anInt3480 -= var2;
@@ -343,17 +343,17 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
 
          if(this.anInt3470 == 256 && (this.anInt3474 & 0xFF) == 0) {
             if(Unsorted.aBoolean2150) {
-               return method420(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, var4, var3, this);
+               return method420(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, var4, var3, this);
             }
 
-            return method424(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, var4, var3, this);
+            return method424(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, var4, var3, this);
          }
 
          if(Unsorted.aBoolean2150) {
-            return method433(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, var4, var3, this, this.anInt3470, var5);
+            return method433(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, var4, var3, this, this.anInt3470, var5);
          }
 
-         return method455(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, var4, var3, this, this.anInt3470, var5);
+         return method455(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, var4, var3, this, this.anInt3470, var5);
       }
    }
 
@@ -365,9 +365,9 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
       int var1 = this.anInt3476 * 3 >> 6;
       var1 = (var1 ^ var1 >> 31) + (var1 >>> 31);
       if(this.anInt3479 == 0) {
-         var1 -= var1 * this.anInt3474 / (((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030.length << 8);
+         var1 -= var1 * this.anInt3474 / (((PcmSound)this.aSound_2544).aByteArray3030.length << 8);
       } else if(this.anInt3479 >= 0) {
-         var1 -= var1 * this.anInt3473 / ((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030.length;
+         var1 -= var1 * this.anInt3473 / ((PcmSound)this.aSound_2544).aByteArray3030.length;
       }
 
       return var1 > 255?255:var1;
@@ -733,7 +733,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
          }
       }
 
-      Class3_Sub12_Sub1 var2 = (Class3_Sub12_Sub1)this.aClass3_Sub12_2544;
+      PcmSound var2 = (PcmSound)this.aSound_2544;
       int var3 = this.anInt3473 << 8;
       int var4 = this.anInt3482 << 8;
       int var5 = var2.aByteArray3030.length << 8;
@@ -897,7 +897,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
       this.method450(var1, var2, this.method451());
    }
 
-   static Class3_Sub24_Sub1 method432(Class3_Sub12_Sub1 var0, int var1, int var2, int var3) {
+   static Class3_Sub24_Sub1 method432(PcmSound var0, int var1, int var2, int var3) {
       return var0.aByteArray3030 != null && var0.aByteArray3030.length != 0?new Class3_Sub24_Sub1(var0, var1, var2, var3):null;
    }
 
@@ -947,7 +947,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
    }
 
    final synchronized void method434(int var1) {
-      int var2 = ((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030.length << 8;
+      int var2 = ((PcmSound)this.aSound_2544).aByteArray3030.length << 8;
       if(var1 < -1) {
          var1 = -1;
       }
@@ -1033,14 +1033,14 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
             this.anInt3480 += var2;
             if(this.anInt3470 == -256 && (this.anInt3474 & 0xFF) == 0) {
                if(Unsorted.aBoolean2150) {
-                  var2 = method435(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, this.anInt3475, this.anInt3483, var6, var3, this);
+                  var2 = method435(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, this.anInt3475, this.anInt3483, var6, var3, this);
                } else {
-                  var2 = method427(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, this.anInt3472, var6, var3, this);
+                  var2 = method427(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, this.anInt3472, var6, var3, this);
                }
             } else if(Unsorted.aBoolean2150) {
-               var2 = method440(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, this.anInt3475, this.anInt3483, var6, var3, this, this.anInt3470, var5);
+               var2 = method440(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, this.anInt3475, this.anInt3483, var6, var3, this, this.anInt3470, var5);
             } else {
-               var2 = method448(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, this.anInt3472, var6, var3, this, this.anInt3470, var5);
+               var2 = method448(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, this.anInt3472, var6, var3, this, this.anInt3470, var5);
             }
 
             this.anInt3480 -= var2;
@@ -1057,21 +1057,21 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
 
          if(this.anInt3470 == -256 && (this.anInt3474 & 0xFF) == 0) {
             if(Unsorted.aBoolean2150) {
-               return method447(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, var4, var3, this);
+               return method447(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, var4, var3, this);
             }
 
-            return method446(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, var4, var3, this);
+            return method446(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, var4, var3, this);
          }
 
          if(Unsorted.aBoolean2150) {
-            return method453(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, var4, var3, this, this.anInt3470, var5);
+            return method453(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3484, this.anInt3481, var4, var3, this, this.anInt3470, var5);
          }
 
-         return method423(((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, var4, var3, this, this.anInt3470, var5);
+         return method423(((PcmSound)this.aSound_2544).aByteArray3030, var1, this.anInt3474, var2, this.anInt3476, var4, var3, this, this.anInt3470, var5);
       }
    }
 
-   static Class3_Sub24_Sub1 method437(Class3_Sub12_Sub1 var0, int var2) {
+   static Class3_Sub24_Sub1 method437(PcmSound var0, int var2) {
       return var0.aByteArray3030 != null && var0.aByteArray3030.length != 0?new Class3_Sub24_Sub1(var0, (int)((long)var0.anInt3034 * 256L * (long) 100 / (long)(100 * Class21.anInt443)), var2 << 6):null;
    }
 
@@ -1162,7 +1162,7 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
    }
 
    final boolean method444() {
-      return this.anInt3474 < 0 || this.anInt3474 >= ((Class3_Sub12_Sub1)this.aClass3_Sub12_2544).aByteArray3030.length << 8;
+      return this.anInt3474 < 0 || this.anInt3474 >= ((PcmSound)this.aSound_2544).aByteArray3030.length << 8;
    }
 
    final boolean method445() {
@@ -1378,8 +1378,8 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
       return var5 >> 1;
    }
 
-   private Class3_Sub24_Sub1(Class3_Sub12_Sub1 var1, int var2, int var3) {
-      this.aClass3_Sub12_2544 = var1;
+   private Class3_Sub24_Sub1(PcmSound var1, int var2, int var3) {
+      this.aSound_2544 = var1;
       this.anInt3473 = var1.anInt3033;
       this.anInt3482 = var1.anInt3032;
       this.aBoolean3477 = var1.aBoolean3031;
@@ -1398,8 +1398,8 @@ final class Class3_Sub24_Sub1 extends Class3_Sub24 {
       return var1 < 0?-var0:(int)((double)var0 * Math.sqrt((double)var1 * 1.220703125E-4D) + 0.5D);
    }
 
-   private Class3_Sub24_Sub1(Class3_Sub12_Sub1 var1, int var2, int var3, int var4) {
-      this.aClass3_Sub12_2544 = var1;
+   private Class3_Sub24_Sub1(PcmSound var1, int var2, int var3, int var4) {
+      this.aSound_2544 = var1;
       this.anInt3473 = var1.anInt3033;
       this.anInt3482 = var1.anInt3032;
       this.aBoolean3477 = var1.aBoolean3031;

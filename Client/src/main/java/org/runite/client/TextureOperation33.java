@@ -45,12 +45,8 @@ public final class TextureOperation33 extends TextureOperation {
       super(1, false);
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if (!var3) {
-            CS2Script.aShort3052 = -37;
-         }
-
          if (0 == var1) {
             this.anInt3047 = var2.readUnsignedShort();
          } else if (var1 == 1) {
@@ -58,38 +54,7 @@ public final class TextureOperation33 extends TextureOperation {
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "an.A(" + var1 + ',' + (var2 != null ? "{...}" : "null") + ',' + var3 + ')');
-      }
-   }
-
-   static int method179(byte var0, int var1) {
-      try {
-         if (var0 == 92) {
-            if (null != Class3_Sub15.activeConnection) {
-               Class3_Sub15.activeConnection.close();
-               Class3_Sub15.activeConnection = null;
-            }
-
-            ++Unsorted.anInt1088;
-            if (Unsorted.anInt1088 > 4) {
-               Class43.worldListStage = 0;
-               Unsorted.anInt1088 = 0;
-               return var1;
-            } else {
-               Class43.worldListStage = 0;
-               if (Class123.anInt1658 == Client.anInt3773) {
-                  Class123.anInt1658 = Class53.anInt867;
-               } else {
-                  Class123.anInt1658 = Client.anInt3773;
-               }
-
-               return -1;
-            }
-         } else {
-            return 122;
-         }
-      } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "an.F(" + var0 + ',' + var1 + ')');
+         throw ClientErrorException.clientError(var5, "an.A(" + var1 + ',' + (var2 != null ? "{...}" : "null") + ',' + true + ')');
       }
    }
 
@@ -139,10 +104,10 @@ public final class TextureOperation33 extends TextureOperation {
          String var2 = "T2 - " + Unsorted.incomingOpcode + "," + Class7.anInt2166 + "," + Class24.anInt469 + " - " + Unsorted.incomingPacketLength + "," + (Class131.anInt1716 - -Class102.player.anIntArray2767[0]) + "," + (Class102.player.anIntArray2755[0] + Texture.anInt1152) + " - ";
 
          for (int var3 = 0; var3 < Unsorted.incomingPacketLength && 50 > var3; ++var3) {
-            var2 = var2 + GraphicDefinition.incomingBuffer.buffer[var3] + ",";
+            var2 = var2 + BufferedDataStream.incomingBuffer.buffer[var3] + ",";
          }
 
-         Class49.reportError(var2, var5, (byte) 108);
+         Class49.reportError(var2, var5);
          Class167.method2269((byte) 46);
          return true;
       }
@@ -150,10 +115,6 @@ public final class TextureOperation33 extends TextureOperation {
 
    static void method182() {
       try {
-         if (false) {
-            method179((byte) 120, -73);
-         }
-
          Texture.aReferenceCache_1146.clear();
          Class159.aReferenceCache_2016.clear();
       } catch (RuntimeException var2) {
@@ -163,7 +124,6 @@ public final class TextureOperation33 extends TextureOperation {
 
    static void method183() {
       try {
-
          Unsorted.aReferenceCache_684.clear();
          Class163_Sub1.aReferenceCache_2984.clear();
       } catch (RuntimeException var2) {
@@ -208,9 +168,9 @@ public final class TextureOperation33 extends TextureOperation {
       try {
          int[][] var3 = this.aClass97_2376.method1594((byte) 58, var2);
          if (this.aClass97_2376.aBoolean1379) {
-            int[] var4 = this.method152(0, Class3_Sub20.anInt2487 & var2 + -1, 32755);
-            int[] var5 = this.method152(0, var2, 32755);
-            int[] var6 = this.method152(0, 1 + var2 & Class3_Sub20.anInt2487, 32755);
+            int[] var4 = this.method152(0, Class3_Sub20.anInt2487 & var2 + -1);
+            int[] var5 = this.method152(0, var2);
+            int[] var6 = this.method152(0, 1 + var2 & Class3_Sub20.anInt2487);
             int[] var7 = var3[0];
             int[] var8 = var3[1];
             int[] var9 = var3[2];
@@ -247,11 +207,6 @@ public final class TextureOperation33 extends TextureOperation {
                var9[var10] = var13;
             }
          }
-
-         if (-1 != -1) {
-            method180(-55, -63, -5);
-         }
-
          return var3;
       } catch (RuntimeException var21) {
          throw ClientErrorException.clientError(var21, "an.T(" + -1 + ',' + var2 + ')');

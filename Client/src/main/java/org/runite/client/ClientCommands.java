@@ -33,7 +33,7 @@ public class ClientCommands {
 
                 runtime = Runtime.getRuntime();
                 var3 = (int) ((runtime.totalMemory() - runtime.freeMemory()) / 1024L);
-                Class3_Sub30_Sub1.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.memoryEquals, RSString.stringAnimator(var3), TextCore.Memoryk}), -1);
+                BufferedDataStream.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.memoryEquals, RSString.stringAnimator(var3), TextCore.Memoryk}), -1);
             }
 
             int var4;
@@ -46,7 +46,7 @@ public class ClientCommands {
 
                 runtime = Runtime.getRuntime();
                 var3 = (int) ((runtime.totalMemory() + -runtime.freeMemory()) / 1024L);
-                Class3_Sub30_Sub1.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.memoryBeforeCleanup, RSString.stringAnimator(var3), TextCore.Memoryk}), -1);
+                BufferedDataStream.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.memoryBeforeCleanup, RSString.stringAnimator(var3), TextCore.Memoryk}), -1);
                 Class3_Sub1.method90(1);
                 clearClientCacheMemory();
 
@@ -55,11 +55,11 @@ public class ClientCommands {
                 }
 
                 var3 = (int) ((runtime.totalMemory() + -runtime.freeMemory()) / 1024L);
-                Class3_Sub30_Sub1.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.aClass94_2033, RSString.stringAnimator(var3), TextCore.Memoryk}), -1);
+                BufferedDataStream.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.aClass94_2033, RSString.stringAnimator(var3), TextCore.Memoryk}), -1);
             }
 
             if (command.equalsStringIgnoreCase(TextCore.COMMAND_PC_CACHE_SIZE)) {
-                Class3_Sub30_Sub1.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.aClass94_442, RSString.stringAnimator(Unsorted.method1727((byte) 123))}), -1);
+                BufferedDataStream.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.aClass94_442, RSString.stringAnimator(Unsorted.method1727((byte) 123))}), -1);
             }
 
             if (HDToolKit.highDetail && command.equalsStringIgnoreCase(TextCore.COMMAND_GRAPHICS_CARD_MEMORY)) {
@@ -81,7 +81,7 @@ public class ClientCommands {
             }
 
             if (command.equalsStringIgnoreCase(TextCore.COMMAND_BREAK_CONNECTION)) {
-                Class38.signlink.method1431();
+                Class38.gameSignlink.method1431();
                 Class3_Sub15.activeConnection.applyDummyStreams();
                 Class58.aJs5Worker_917.applyDummyStreams();
             }
@@ -127,7 +127,7 @@ public class ClientCommands {
             if (command.equalsStringIgnoreCase(TextCore.TOGGLE_FK)) {
                 boolean on = !modernHotkeys;
                 modernHotkeys = true;
-                Class3_Sub30_Sub1.addChatMessage(null, 0, RSString.parse("Modern hotkeys mode toggled " + (on ? "on." : "off.")), -1);
+                BufferedDataStream.addChatMessage(null, 0, RSString.parse("Modern hotkeys mode toggled " + (on ? "on." : "off.")), -1);
             }
 
             if (command.equalsStringIgnoreCase(TextCore.COMMAND_LOWRES_GRAPHICS)) {
@@ -158,7 +158,7 @@ public class ClientCommands {
 
             if (command.startsWith(TextCore.COMMAND_SET_PARTICLES)) {
                 Class127_Sub1.method1758(command.substring(15).parseInt());
-                Class119.method1730(Class38.signlink);
+                Class119.method1730(Class38.gameSignlink);
                 CS2Script.aBoolean2705 = false;
             }
 
@@ -172,7 +172,7 @@ public class ClientCommands {
 
             if (command.startsWith(TextCore.COMMAND_RECT_DEBUG)) {
                 Client.rectDebugInt = command.substring(12).trim(1).parseInt();
-                Class3_Sub30_Sub1.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.rectDebugEquals, RSString.stringAnimator(Client.rectDebugInt)}), -1);
+                BufferedDataStream.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.rectDebugEquals, RSString.stringAnimator(Client.rectDebugInt)}), -1);
             }
 
             if (command.equalsStringIgnoreCase(TextCore.COMMAND_QA_OP_TEST)) {
@@ -182,10 +182,10 @@ public class ClientCommands {
             if (command.equalsStringIgnoreCase(TextCore.COMMAND_TWEENING)) {
                 if (tweeningEnabled) {
                     tweeningEnabled = false;
-                    Class3_Sub30_Sub1.addChatMessage(null, 0, TextCore.forcedTweeningDisabled, -1);
+                    BufferedDataStream.addChatMessage(null, 0, TextCore.forcedTweeningDisabled, -1);
                 } else {
                     tweeningEnabled = true;
-                    Class3_Sub30_Sub1.addChatMessage(null, 0, TextCore.forcedTweeningEnabled, -1);
+                    BufferedDataStream.addChatMessage(null, 0, TextCore.forcedTweeningEnabled, -1);
                 }
             }
 
@@ -213,7 +213,7 @@ public class ClientCommands {
           Unsorted.aReferenceCache_4043.clearSoftReferences();//Class163_Sub2_Sub1.method2222();
           CS2Script.aReferenceCache_2442.clearSoftReferences();//Class163_Sub2_Sub1.method2222();
           Class154.aReferenceCache_1964.clearSoftReferences();//Class163_Sub2_Sub1.method2222();
-          Class3_Sub28_Sub4.aReferenceCache_3572.clearSoftReferences();//Originally Class3_Sub30_Sub1.method813();
+          QuickChatDefinition.aReferenceCache_3572.clearSoftReferences();//Originally Class3_Sub30_Sub1.method813();
           Class143.aReferenceCache_1874.clearSoftReferences();//Originally Class3_Sub30_Sub1.method813();
           Class67.aReferenceCache_1013.clearSoftReferences();//Originally Class3_Sub30_Sub1.method813();
           Texture.aReferenceCache_1146.clearSoftReferences();//Originally Class133.method1803();
@@ -233,7 +233,7 @@ public class ClientCommands {
           Class114.aReferenceCache_1569.clearSoftReferences();//Class3_Sub28_Sub6.h();
           Class3_Sub15.aReferenceCache_2428.clearSoftReferences();//Class3_Sub28_Sub6.h();
           Unsorted.aReferenceCache_743.clearSoftReferences();//Class3_Sub28_Sub6.h();
-          Class61.aReferenceCache_939.clearSoftReferences();//Class107.method1650();
+          LinkedList.aReferenceCache_939.clearSoftReferences();//Class107.method1650();
           Class158_Sub1.aReferenceCache_2982.clearSoftReferences();//MouseListeningClass.method2089();
           TextureOperation1.aReferenceCache_3130.clearSoftReferences();
           Unsorted.aReferenceCache_1135.clearSoftReferences();

@@ -5,7 +5,7 @@ import org.rs09.client.Linkable;
 final class Class3_Sub6 extends Linkable {
 
 
-    static byte[][] aByteArrayArray2287;
+    static byte[][] softReferenceTestArray;
     static int[] anIntArray2288 = new int[32];
     static int anInt2291;
 

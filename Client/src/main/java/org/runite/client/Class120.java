@@ -33,7 +33,7 @@ final class Class120 {
                 anIntArray1638 = null;
             }
 
-            return !Client.method44(var0).method92(var2, (byte) -110) && var0.anObjectArray314 == null ? null : (null != var0.aClass94Array171 && var0.aClass94Array171.length > var2 && var0.aClass94Array171[var2] != null && var0.aClass94Array171[var2].trim(1).length() != 0 ? var0.aClass94Array171[var2] : (!ClientCommands.commandQaOpEnabled ? null : RSString.stringCombiner(new RSString[]{TextCore.aClass94_1645, RSString.stringAnimator(var2)})));
+            return !Client.method44(var0).method92(var2, (byte) -110) && var0.anObjectArray314 == null ? null : (null != var0.aClass94Array171 && var0.aClass94Array171.length > var2 && var0.aClass94Array171[var2] != null && var0.aClass94Array171[var2].trim(1).length() != 0 ? var0.aClass94Array171[var2] : (!ClientCommands.commandQaOpEnabled ? null : RSString.stringCombiner(new RSString[]{RSString.parse("Hidden)2"), RSString.stringAnimator(var2)})));
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "qj.B(" + (var0 != null ? "{...}" : "null") + ',' + var1 + ',' + var2 + ')');
         }

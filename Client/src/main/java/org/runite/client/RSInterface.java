@@ -247,7 +247,7 @@ public final class RSInterface {
         try {
 
             RSString var1 = TextCore.aClass94_4052;
-            RSString var2 = TextCore.emptyJagexString;
+            RSString var2 = RSString.parse("");
             if (Class44.paramModeWhere != 0) {
                 var1 = RSString.parse("www)2wtqa");
             }
@@ -1030,11 +1030,11 @@ public final class RSInterface {
         }
     }
 
-    static int method869(int var0, int var1) {
+    static int method869(int var1) {
         try {
-            return var1 != 16711935 ? (var0 < 97 ? -63 : Class56.method1186(var1)) : -1;
+            return var1 != 16711935 ? Class56.method1186(var1) : -1;
         } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "be.D(" + var0 + ',' + var1 + ')');
+            throw ClientErrorException.clientError(var3, "be.D(" + 116 + ',' + var1 + ')');
         }
     }
 

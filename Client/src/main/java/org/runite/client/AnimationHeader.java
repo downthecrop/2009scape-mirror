@@ -146,19 +146,19 @@ final class AnimationHeader {
 		            if((var11 & 1) == 0) {
 		               aShortArray1394[var6] = var12;
 		            } else {
-		               aShortArray1394[var6] = (short)parent.getSmart(-21208);
+		               aShortArray1394[var6] = (short)parent.getByteOrShort();
 		            }
 
                      if((var11 & 2) == 0) {
                         aShortArray1391[var6] = var12;
                      } else {
-                        aShortArray1391[var6] = (short)parent.getSmart(-21208);
+                        aShortArray1391[var6] = (short)parent.getByteOrShort();
                      }
 
                      if((var11 & 4) == 0) {
                         aShortArray1390[var6] = var12;
                      } else {
-                        aShortArray1390[var6] = (short)parent.getSmart(-21208);
+                        aShortArray1390[var6] = (short)parent.getByteOrShort();
                      }
 
                      aByteArray1389[var6] = (byte)(var11 >>> 3 & 3);

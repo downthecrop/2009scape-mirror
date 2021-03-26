@@ -51,7 +51,7 @@ abstract class Class75 {
 
     static void method1339(RSString var0) {
         try {
-            for (Class3_Sub28_Sub3 var2 = (Class3_Sub28_Sub3) Class134.aClass61_1758.method1222(); var2 != null; var2 = (Class3_Sub28_Sub3) Class134.aClass61_1758.method1221()) {
+            for (Class3_Sub28_Sub3 var2 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.method1222(); var2 != null; var2 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.method1221()) {
                 if (var2.aClass94_3561.equalsString(var0)) {
                     Unsorted.aClass3_Sub28_Sub3_2600 = var2;
                     return;

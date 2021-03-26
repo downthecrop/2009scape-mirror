@@ -2,74 +2,9 @@ package org.runite.client;
 
 public final class Class167 {
 
-    static RSString aClass94_2083 = null;
+    public static RSString aClass94_2083 = null;
     static int anInt2087 = 0;
 
-
-    static void addLocalNPCs() {
-        try {
-            while (true) {
-                if (GraphicDefinition.incomingBuffer.method815(Unsorted.incomingPacketLength) >= 27) {
-                    int var1 = GraphicDefinition.incomingBuffer.getBits(15);
-                    if (32767 != var1) {
-                        boolean var2 = false;
-                        if (null == NPC.npcs[var1]) {
-                            var2 = true;
-                            NPC.npcs[var1] = new NPC();
-                        }
-
-                        NPC var3 = NPC.npcs[var1];
-                        Class15.localNPCIndexes[Class163.localNPCCount++] = var1;
-                        var3.anInt2838 = Class44.anInt719;
-                        if (null != var3.definition && var3.definition.method1474()) {
-                            Class3_Sub28_Sub8.method574(var3);
-                        }
-
-                        int var4 = GraphicDefinition.incomingBuffer.getBits(1);
-                        int var5 = Class27.anIntArray510[GraphicDefinition.incomingBuffer.getBits(3)];
-                        if (var2) {
-                            var3.anInt2806 = var3.anInt2785 = var5;
-                        }
-
-                        int var6 = GraphicDefinition.incomingBuffer.getBits(1);
-                        if (var6 == 1) {
-                            Class21.maskUpdateIndexes[Unsorted.maskUpdateCount++] = var1;
-                        }
-
-                        int var7 = GraphicDefinition.incomingBuffer.getBits(5);
-                        var3.setDefinitions(NPCDefinition.getNPCDefinition(GraphicDefinition.incomingBuffer.getBits(14)));
-                        if (15 < var7) {
-                            var7 -= 32;
-                        }
-
-                        int var8 = GraphicDefinition.incomingBuffer.getBits(5);
-                        if (15 < var8) {
-                            var8 -= 32;
-                        }
-
-                        var3.setSize(var3.definition.size, 2);
-                        var3.renderAnimationId = var3.definition.renderAnimationId;
-                        var3.anInt2779 = var3.definition.anInt1274;
-                        if (var3.anInt2779 == 0) {
-                            var3.anInt2785 = 0;
-                        }
-
-                        var3.method1967(var3.getSize(), Class102.player.anIntArray2767[0] + var8, var7 + Class102.player.anIntArray2755[0], var4 == 1);
-                        if (var3.definition.method1474()) {
-                            Class70.method1286(var3.anIntArray2755[0], null, 0, var3, var3.anIntArray2767[0], WorldListCountry.localPlane, null);
-                        }
-                        continue;
-                    }
-                }
-
-                GraphicDefinition.incomingBuffer.method818();
-
-                return;
-            }
-        } catch (RuntimeException var9) {
-            throw ClientErrorException.clientError(var9, "wj.E(" + 113 + ')');
-        }
-    }
 
     static void method2263(int var0, int var1, int var2, int var3, int var4, int var5, int var6) {
         Class113 var7 = new Class113();
@@ -111,9 +46,9 @@ public final class Class167 {
 
     public static void musicEffectHandler(int var1) {
         try {
-            if (Unsorted.anInt120 != 0 && var1 != -1) {
-                Class70.method1285(CacheIndex.music2Index, var1, Unsorted.anInt120);
-                Class83.aBoolean1158 = true;
+            if (AudioHandler.musicVolume != 0 && var1 != -1) {
+                Class70.method1285(CacheIndex.music2Index, var1, AudioHandler.musicVolume);
+                AudioHandler.musicEffectPlaying = true;
             }
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "wj.D(" + ',' + var1 + ',' + (byte) -1 + ')');
@@ -236,8 +171,8 @@ public final class Class167 {
             Unsorted.method1250(62, false);
             System.gc();
             Unsorted.method882();
-            Class83.aBoolean1158 = false;
-            Class129.anInt1691 = -1;
+            AudioHandler.musicEffectPlaying = false;
+            AudioHandler.currentTrack = -1;
             Class164_Sub1.method2241((byte) -77, true);
             LinkableRSString.isDynamicSceneGraph = false;
             Texture.anInt1152 = 0;
@@ -256,7 +191,7 @@ public final class Class167 {
             }
 
             for (var1 = 0; var1 < 2048; ++var1) {
-                TextureOperation0.players[var1] = null;
+                Unsorted.players[var1] = null;
                 Class65.aClass3_Sub30Array986[var1] = null;
             }
 
@@ -267,7 +202,7 @@ public final class Class167 {
             for (var1 = 0; 4 > var1; ++var1) {
                 for (int var2 = 0; var2 < 104; ++var2) {
                     for (int var3 = 0; var3 < 104; ++var3) {
-                        TextureOperation0.aClass61ArrayArrayArray3273[var1][var2][var3] = null;
+                        Class39.aLinkedListArrayArrayArray3273[var1][var2][var3] = null;
                     }
                 }
             }

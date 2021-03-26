@@ -175,7 +175,7 @@ final class ItemDefinition {
 
 	static ItemDefinition getItemDefinition(int itemId) {
 	   try {
-		  ItemDefinition var2 = (ItemDefinition)Class3_Sub28_Sub4.aReferenceCache_3572.get(itemId);
+		  ItemDefinition var2 = (ItemDefinition) QuickChatDefinition.aReferenceCache_3572.get(itemId);
 		  if(var2 == null) {
 			 byte[] var3 = Class97.aClass153_1370.getFile(Class140_Sub2.method1951(itemId), 255 & itemId);
 			 var2 = new ItemDefinition();
@@ -201,7 +201,7 @@ final class ItemDefinition {
 				var2.groundOptions = Unsorted.aClass94Array2596;
 			 }
 
-			 Class3_Sub28_Sub4.aReferenceCache_3572.put(var2, itemId);
+			 QuickChatDefinition.aReferenceCache_3572.put(var2, itemId);
 		  }
 		  return var2;
 	   } catch (RuntimeException var4) {

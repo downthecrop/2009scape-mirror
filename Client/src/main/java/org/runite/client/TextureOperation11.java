@@ -9,7 +9,7 @@ final class TextureOperation11 extends TextureOperation {
    private int anInt3250 = 4096;
    private int anInt3252 = 4096;
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(var1 == 0) {
             this.anInt3252 = var2.readUnsignedShort();
@@ -19,12 +19,12 @@ final class TextureOperation11 extends TextureOperation {
              this.anInt3250 = var2.readUnsignedShort();
          }
 
-         if(!var3) {
+         if(!true) {
             method266(12);
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "mg.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "mg.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

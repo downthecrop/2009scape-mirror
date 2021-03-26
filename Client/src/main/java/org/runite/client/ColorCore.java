@@ -80,7 +80,7 @@ public class ColorCore {
      * Files that use these colors:
      * Class3_Sub28_Sub1.java - method updateLoadingBar
      */
-    static Color loadingbarcolor = new Color(140, 17, 17);
+    public static Color loadingbarcolor = new Color(140, 17, 17);
 
     /**
      * Fun little RGB rainbow method

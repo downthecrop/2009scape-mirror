@@ -19,7 +19,7 @@ final class Class3_Sub22 extends Linkable {
    int anInt2506;
    Class3_Sub24_Sub1 aClass3_Sub24_Sub1_2507;
    int anInt2508;
-   Class3_Sub12_Sub1 aClass3_Sub12_Sub1_2509;
+   PcmSound aPcmSound_2509;
    int anInt2510;
    int anInt2511;
    int anInt2512;
@@ -126,7 +126,7 @@ final class Class3_Sub22 extends Linkable {
          Class146.method2083(var0, var1, var2, null, 0, (byte)0, var13, var14);
          if(HDToolKit.highDetail) {
             TextureOperation23.aBoolean3207 = false;
-            Class3_Sub28_Sub4.method551(0, 0);
+            Unsorted.method551(0, 0);
             Class92.method1512(null);
             Class68.method1265();
          }
@@ -151,7 +151,7 @@ final class Class3_Sub22 extends Linkable {
    final void method401() {
       try {
          this.aClass166_2504 = null;
-         this.aClass3_Sub12_Sub1_2509 = null;
+         this.aPcmSound_2509 = null;
          this.aClass3_Sub24_Sub1_2507 = null;
          this.aClass3_Sub15_2527 = null;
 

@@ -11,11 +11,8 @@ final class TextureOperation10 extends TextureOperation {
    private int[] anIntArray3443 = new int[257];
 
 
-   final void method158(int var1) {
+   final void postDecode() {
       try {
-         if(var1 != 16251) {
-            this.anIntArray3443 = null;
-         }
 
          if(this.anIntArrayArray3438 == null) {
             this.method345(1);
@@ -23,7 +20,7 @@ final class TextureOperation10 extends TextureOperation {
 
          this.method346();
       } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "um.P(" + var1 + ')');
+         throw ClientErrorException.clientError(var3, "um.P(" + ')');
       }
    }
 
@@ -230,9 +227,9 @@ final class TextureOperation10 extends TextureOperation {
       super(1, false);
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if(var3) {
+         if(true) {
             if(var1 == 0) {
                int var4 = var2.readUnsignedByte();
                if(var4 == 0) {
@@ -329,8 +326,8 @@ final class TextureOperation10 extends TextureOperation {
       try {
          PacketParser.inTutorialIsland = 0;
 
-         int var1 = Class131.anInt1716 + (Class102.player.anInt2819 >> 7);
-         int var2 = (Class102.player.anInt2829 >> 7) - -Texture.anInt1152;
+         int var1 = Class131.anInt1716 + (Class102.player.xAxis >> 7);
+         int var2 = (Class102.player.zAxis >> 7) - -Texture.anInt1152;
          if(var1 >= 3053 && var1 <= 3156 && var2 >= 3056 && var2 <= 3136) {
             PacketParser.inTutorialIsland = 1;
          }
@@ -351,12 +348,9 @@ final class TextureOperation10 extends TextureOperation {
    final int[][] method166(int var2) {
       try {
          int[][] var3 = this.aClass97_2376.method1594((byte)90, var2);
-         if(-1 != -1) {
-            this.method157(-71, null, false);
-         }
 
          if(this.aClass97_2376.aBoolean1379) {
-            int[] var5 = this.method152(0, var2, 32755);
+            int[] var5 = this.method152(0, var2);
             int[] var7 = var3[1];
             int[] var6 = var3[0];
             int[] var8 = var3[2];
@@ -451,24 +445,6 @@ final class TextureOperation10 extends TextureOperation {
       }
 
       return false;
-   }
-
-   static Class168 method350(byte var0, int var1) {
-      try {
-         Class168 var2 = (Class168)Class163_Sub2_Sub1.aReferenceCache_4015.get(var1);
-         if(null == var2) {
-            byte[] var4 = Class3_Sub28_Sub5.aClass153_3580.getFile(4, var1);
-            var2 = new Class168();
-            if(var4 != null) {
-               var2.method2274(new DataBuffer(var4), var1);
-            }
-
-            Class163_Sub2_Sub1.aReferenceCache_4015.put(var2, var1);
-         }
-          return var2;
-      } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "um.C(" + var0 + ',' + var1 + ')');
-      }
    }
 
 }

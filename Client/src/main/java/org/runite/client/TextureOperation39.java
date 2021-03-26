@@ -107,7 +107,7 @@ class TextureOperation39 extends TextureOperation {
          var13.anInt2268 = var7;
          var13.anInt2272 = var0;
          var13.anInt2278 = var9;
-         Unsorted.aClass61_2468.method1215(var13);
+         Unsorted.aLinkedList_2468.method1215(var13);
       } catch (RuntimeException var14) {
          throw ClientErrorException.clientError(var14, "nh.V(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ',' + var8 + ',' + var9 + ',' + -745213428 + ',' + var11 + ',' + var12 + ')');
       }
@@ -151,18 +151,18 @@ class TextureOperation39 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(var1 == 0) {
             this.anInt3278 = var2.readUnsignedShort();
          }
 
-         if(!var3) {
+         if(!true) {
             method276(115, 107, 22, 20, null, 87L, false);
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "nh.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "nh.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

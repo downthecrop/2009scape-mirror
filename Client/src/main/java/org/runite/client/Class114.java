@@ -16,7 +16,7 @@ final class Class114 {
     private Class3_Sub26[] aClass3_Sub26Array1571;
     private int[][] anIntArrayArray1573;
     private int anInt1576 = -1;
-    private Class61 aClass61_1577 = new Class61();
+    private LinkedList aLinkedList_1577 = new LinkedList();
 
 
     Class114(int var1, int var2, int var3) {
@@ -85,8 +85,8 @@ final class Class114 {
 
             this.anIntArrayArray1573 = null;
             this.aClass3_Sub26Array1571 = null;
-            this.aClass61_1577.method1211(-85);
-            this.aClass61_1577 = null;
+            this.aLinkedList_1577.method1211(-85);
+            this.aLinkedList_1577 = null;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "pf.A(" + 1127165736 + ')');
         }
@@ -111,7 +111,7 @@ final class Class114 {
                         var3 = new Class3_Sub26(var2, this.anInt1570);
                         ++this.anInt1570;
                     } else {
-                        Class3_Sub26 var4 = (Class3_Sub26) this.aClass61_1577.method1212();
+                        Class3_Sub26 var4 = (Class3_Sub26) this.aLinkedList_1577.method1212();
                         var3 = new Class3_Sub26(var2, Objects.requireNonNull(var4).anInt2555);
                         this.aClass3_Sub26Array1571[var4.anInt2553] = null;
                         var4.unlink();
@@ -122,7 +122,7 @@ final class Class114 {
                     this.aBoolean1580 = false;
                 }
 
-                this.aClass61_1577.method1216(var3);
+                this.aLinkedList_1577.method1216(var3);
                 return this.anIntArrayArray1573[var3.anInt2555];
             }
         } catch (RuntimeException var5) {

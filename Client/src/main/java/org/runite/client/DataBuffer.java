@@ -467,7 +467,7 @@ public class DataBuffer extends Linkable {
     }
 
     // TODO
-    final int getSmart(int var1) {
+    final int getByteOrShort() {
         int var2 = this.buffer[this.index] & 0xFF;
         return var2 < 128 ? -64 + this.readUnsignedByte() : this.readUnsignedShort() - '\uc000';
     }

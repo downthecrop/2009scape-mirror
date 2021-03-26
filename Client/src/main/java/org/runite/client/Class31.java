@@ -8,10 +8,10 @@ import javax.media.opengl.GL;
 
 final class Class31 {
 
-    private static final Class61 aClass61_581 = new Class61();
-    private static final Class61 aClass61_586 = new Class61();
-    private static final Class61 aClass61_587 = new Class61();
-    private static final Class61 aClass61_588 = new Class61();
+    private static final LinkedList A_LINKED_LIST___581 = new LinkedList();
+    private static final LinkedList A_LINKED_LIST___586 = new LinkedList();
+    private static final LinkedList A_LINKED_LIST___587 = new LinkedList();
+    private static final LinkedList A_LINKED_LIST___588 = new LinkedList();
     private static final int[] anIntArray589 = new int[1000];
     static int anInt580 = 0;
     static int anInt582 = 0;
@@ -23,7 +23,7 @@ final class Class31 {
         if (var2 == anInt582) {
             LinkableInt var3 = new LinkableInt(var1);
             var3.linkableKey = var0;
-            aClass61_587.method1215(var3);
+            A_LINKED_LIST___587.method1215(var3);
         }
     }
 
@@ -31,16 +31,16 @@ final class Class31 {
         if (var1 == anInt582) {
             LinkableInt var2 = new LinkableInt();
             var2.linkableKey = var0;
-            aClass61_588.method1215(var2);
+            A_LINKED_LIST___588.method1215(var2);
         }
     }
 
     static synchronized void method988() {
         ++anInt582;
-        aClass61_581.method1211(-110);
-        aClass61_586.method1211(-88);
-        aClass61_587.method1211(-123);
-        aClass61_588.method1211(-115);
+        A_LINKED_LIST___581.method1211(-110);
+        A_LINKED_LIST___586.method1211(-88);
+        A_LINKED_LIST___587.method1211(-123);
+        A_LINKED_LIST___588.method1211(-115);
         anInt585 = 0;
         memory2D = 0;
         anInt580 = 0;
@@ -50,7 +50,7 @@ final class Class31 {
         if (var2 == anInt582) {
             LinkableInt var3 = new LinkableInt(var1);
             var3.linkableKey = var0;
-            aClass61_581.method1215(var3);
+            A_LINKED_LIST___581.method1215(var3);
         }
     }
 
@@ -59,7 +59,7 @@ final class Class31 {
         int var1 = 0;
 
         while (true) {
-            LinkableInt var2 = (LinkableInt) aClass61_581.method1220();
+            LinkableInt var2 = (LinkableInt) A_LINKED_LIST___581.method1220();
             if (var2 == null) {
                 if (var1 > 0) {
                     var0.glDeleteBuffersARB(var1, anIntArray589, 0);
@@ -67,17 +67,17 @@ final class Class31 {
                 }
 
                 while (true) {
-                    var2 = (LinkableInt) aClass61_586.method1220();
+                    var2 = (LinkableInt) A_LINKED_LIST___586.method1220();
                     if (var2 == null) {
                         while (true) {
-                            var2 = (LinkableInt) aClass61_587.method1220();
+                            var2 = (LinkableInt) A_LINKED_LIST___587.method1220();
                             if (var2 == null) {
                                 if (var1 > 0) {
                                     var0.glDeleteTextures(var1, anIntArray589, 0);
                                 }
 
                                 while (true) {
-                                    var2 = (LinkableInt) aClass61_588.method1220();
+                                    var2 = (LinkableInt) A_LINKED_LIST___588.method1220();
                                     if (var2 == null) {
                                         if (anInt585 + memory2D + anInt580 > 100663296 && TimeUtils.time() > aLong583 + 60000L) {
                                             System.gc();
@@ -123,7 +123,7 @@ final class Class31 {
         if (var2 == anInt582) {
             LinkableInt var3 = new LinkableInt(var1);
             var3.linkableKey = var0;
-            aClass61_586.method1215(var3);
+            A_LINKED_LIST___586.method1215(var3);
         }
     }
 

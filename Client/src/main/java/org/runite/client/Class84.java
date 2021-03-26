@@ -3,9 +3,9 @@ package org.runite.client;
 public final class Class84 {
 
     static int[][] anIntArrayArray1160 = new int[104][104];
-    static Class61 aClass61_1162 = new Class61();
+    static LinkedList aLinkedList_1162 = new LinkedList();
     public static int[] anIntArray1163 = new int[1000];
-    static int anInt1164 = 0;
+    static int leftMargin = 0;
     static Class3_Sub28_Sub16_Sub2 aClass3_Sub28_Sub16_Sub2_1381;
     static int[] anIntArray1729 = new int[]{12543016, 15504954, 15914854, 16773818};
 
@@ -56,7 +56,7 @@ public final class Class84 {
             Class161.anIntArray2026 = new int[32768];
             Unsorted.anIntArray49 = new int[32768];
             TextureOperation30.method215((byte) -89, null);
-            Class3_Sub30_Sub1.anIntArray3805 = new int[32768];
+            BufferedDataStream.anIntArray3805 = new int[32768];
             Class159.anIntArray1681 = new int[32768];
             aClass3_Sub28_Sub16_Sub2_1381 = new Class3_Sub28_Sub16_Sub2(128, 254);
         } catch (RuntimeException var13) {
@@ -80,7 +80,7 @@ public final class Class84 {
     static int method1421() {
         try {
 
-            return ((TextureOperation17.aBoolean3184 ? 1 : 0) << 19) + (((Class38.aBoolean661 ? 1 : 0) << 16) + ((!Class128.aBoolean1685 ? 0 : 1) << 15) + ((!Class106.aBoolean1441 ? 0 : 1) << 13) + ((Class140_Sub6.aBoolean2910 ? 1 : 0) << 10) + ((TextureOperation0.aBoolean3275 ? 1 : 0) << 9) + ((RSInterface.aBoolean236 ? 1 : 0) << 7) + ((!Class25.aBoolean488 ? 0 : 1) << 6) + ((KeyboardListener.aBoolean1905 ? 1 : 0) << 5) + (((!Unsorted.aBoolean3665 ? 0 : 1) << 3) + (Unsorted.anInt3625 & 7) - (-((!Unsorted.aBoolean3604 ? 0 : 1) << 4) + -((WorldListEntry.aBoolean2623 ? 1 : 0) << 8)) - (-(Unsorted.anInt1137 << 11 & 6144) + -((CS2Script.anInt2453 == 0 ? 0 : 1) << 20) - (((Unsorted.anInt120 != 0 ? 1 : 0) << 21) + ((Sprites.anInt340 == 0 ? 0 : 1) << 22)))) - -(Class127_Sub1.method1757() << 23));
+            return ((TextureOperation17.aBoolean3184 ? 1 : 0) << 19) + (((Class38.aBoolean661 ? 1 : 0) << 16) + ((!Class128.aBoolean1685 ? 0 : 1) << 15) + ((!Class106.aBoolean1441 ? 0 : 1) << 13) + ((Class140_Sub6.aBoolean2910 ? 1 : 0) << 10) + ((Unsorted.aBoolean3275 ? 1 : 0) << 9) + ((RSInterface.aBoolean236 ? 1 : 0) << 7) + ((!Class25.aBoolean488 ? 0 : 1) << 6) + ((KeyboardListener.aBoolean1905 ? 1 : 0) << 5) + (((!Unsorted.aBoolean3665 ? 0 : 1) << 3) + (Unsorted.anInt3625 & 7) - (-((!Unsorted.aBoolean3604 ? 0 : 1) << 4) + -((WorldListEntry.aBoolean2623 ? 1 : 0) << 8)) - (-(Unsorted.anInt1137 << 11 & 6144) + -((AudioHandler.soundEffectVolume == 0 ? 0 : 1) << 20) - (((AudioHandler.musicVolume != 0 ? 1 : 0) << 21) + ((Sprites.ambientVolume == 0 ? 0 : 1) << 22)))) - -(Class127_Sub1.method1757() << 23));
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "lf.F(" + -2 + ')');
         }

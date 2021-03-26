@@ -8,7 +8,7 @@ final class Class3_Sub26 extends Linkable {
    static int paramAffid = 0;
    int anInt2555;
    static int anInt2556 = 0;
-   static Class61 aClass61_2557 = new Class61();
+   static LinkedList aLinkedList_2557 = new LinkedList();
    static int[] anIntArray2559 = new int[]{0, 1, 2, 3, 4, 5, 6, 14};
    static AbstractSprite aAbstractSprite_2560;
    static int anInt2561 = -1;

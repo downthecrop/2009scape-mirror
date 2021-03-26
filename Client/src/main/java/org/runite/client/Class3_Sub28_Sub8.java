@@ -18,7 +18,7 @@ final class Class3_Sub28_Sub8 extends Node {
 
    static void method574(NPC var0) {
       try {
-         for(Class3_Sub9 var2 = (Class3_Sub9) Unsorted.aClass61_1242.method1222(); var2 != null; var2 = (Class3_Sub9) Unsorted.aClass61_1242.method1221()) {
+         for(Class3_Sub9 var2 = (Class3_Sub9) Unsorted.aLinkedList_1242.method1222(); var2 != null; var2 = (Class3_Sub9) Unsorted.aLinkedList_1242.method1221()) {
             if(var0 == var2.aClass140_Sub4_Sub2_2324) {
                if(var2.aClass3_Sub24_Sub1_2312 != null) {
                   Class3_Sub26.aClass3_Sub24_Sub2_2563.method461(var2.aClass3_Sub24_Sub1_2312);
@@ -53,7 +53,7 @@ final class Class3_Sub28_Sub8 extends Node {
             return -1;
          } else {
             for (int var2 = 0; var2 < Class119.aClass131_1624.anInt1720; ++var2) {
-               if (Class119.aClass131_1624.aClass94Array1721[var2].method1560(TextCore.aClass94_3192, TextCore.aClass94_4066).equalsString(var0)) {
+               if (Class119.aClass131_1624.aClass94Array1721[var2].method1560(RSString.parse(" "), TextCore.aClass94_4066).equalsString(var0)) {
                   return var2;
                }
             }

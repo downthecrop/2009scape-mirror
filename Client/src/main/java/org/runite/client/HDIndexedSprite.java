@@ -9,7 +9,7 @@ import javax.media.opengl.GL;
 import java.nio.ByteBuffer;
 
 
-final class HDIndexedSprite extends AbstractIndexedSprite {
+public final class HDIndexedSprite extends AbstractIndexedSprite {
 
    private int anInt2675 = -1;
    private int anInt2676 = -1;
@@ -84,7 +84,7 @@ final class HDIndexedSprite extends AbstractIndexedSprite {
       }
    }
 
-   final void method1667(int var1, int var2) {
+   public final void method1667(int var1, int var2) {
       HDToolKit.method1822();
       var1 += this.anInt1470;
       var2 += this.anInt1464;

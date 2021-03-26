@@ -82,7 +82,7 @@ public abstract class Class44 {
 
     static void method1073() {
         try {
-            Class3_Sub28_Sub4.method551(0, 0);
+            Unsorted.method551(0, 0);
 
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "gj.L(" + 97 + ')');

@@ -8,8 +8,7 @@ import java.util.Objects;
 
 final class Class3_Sub8 extends Linkable {
 
-    static int[] anIntArray3083 = new int[50];
-    int anInt2296;
+   int anInt2296;
    Class64[] aClass64Array2298;
    int[] anIntArray2299;
    int[] anIntArray2300;
@@ -126,98 +125,6 @@ final class Class3_Sub8 extends Linkable {
          }
       } catch (RuntimeException var3) {
          throw ClientErrorException.clientError(var3, "ed.P(" + var0 + ',' + index + ')');
-      }
-   }
-
-   static void method132() {
-      try {
-         for(int var1 = 0; var1 < Class113.anInt1552; ++var1) {
-            --Unsorted.anIntArray2157[var1];
-            if(Unsorted.anIntArray2157[var1] < -10) {
-               --Class113.anInt1552;
-
-               for(int var2 = var1; var2 < Class113.anInt1552; ++var2) {
-                  Class3_Sub25.anIntArray2550[var2] = Class3_Sub25.anIntArray2550[var2 - -1];
-                  Class102.aClass135Array2131[var2] = Class102.aClass135Array2131[var2 + 1];
-                  Class166.anIntArray2068[var2] = Class166.anIntArray2068[1 + var2];
-                  Unsorted.anIntArray2157[var2] = Unsorted.anIntArray2157[1 + var2];
-                  anIntArray3083[var2] = anIntArray3083[var2 - -1];
-               }
-
-               --var1;
-            } else {
-               Class135 var11 = Class102.aClass135Array2131[var1];
-               if(null == var11) {
-                  var11 = Class135.method1811(CacheIndex.soundFXIndex, Class3_Sub25.anIntArray2550[var1], 0);
-                  if(null == var11) {
-                     continue;
-                  }
-
-                  Unsorted.anIntArray2157[var1] += var11.method1813();
-                  Class102.aClass135Array2131[var1] = var11;
-               }
-
-               if(0 > Unsorted.anIntArray2157[var1]) {
-                  int var3;
-                  if(anIntArray3083[var1] == 0) {
-                     var3 = CS2Script.anInt2453;
-                  } else {
-                     int var4 = 128 * (255 & anIntArray3083[var1]);
-                     int var7 = anIntArray3083[var1] >> 8 & 0xFF;
-                     int var5 = 255 & anIntArray3083[var1] >> 16;
-                     int var8 = -Class102.player.anInt2829 + 64 + 128 * var7;
-                     if(var8 < 0) {
-                        var8 = -var8;
-                     }
-
-                     int var6 = -Class102.player.anInt2819 + 64 + var5 * 128;
-                     if(0 > var6) {
-                        var6 = -var6;
-                     }
-
-                     int var9 = -128 + var6 + var8;
-                     if(var9 > var4) {
-                        Unsorted.anIntArray2157[var1] = -100;
-                        continue;
-                     }
-
-                     if(var9 < 0) {
-                        var9 = 0;
-                     }
-
-                     var3 = Sprites.anInt340 * (var4 + -var9) / var4;
-                  }
-
-                  if(var3 > 0) {
-                     Class3_Sub12_Sub1 var12 = var11.method1812().method151(Class27.aClass157_524);
-                     Class3_Sub24_Sub1 var13 = Class3_Sub24_Sub1.method437(var12, var3);
-                     Objects.requireNonNull(var13).method429(Class166.anIntArray2068[var1] + -1);
-                     Class3_Sub26.aClass3_Sub24_Sub2_2563.method457(var13);
-                  }
-
-                  Unsorted.anIntArray2157[var1] = -100;
-               }
-            }
-         }
-
-         if((byte) -92 != -92) {
-            method126(true, 36, 42, 14, 51);
-         }
-
-         if(Class83.aBoolean1158 && Class79.method1391(-1)) {
-            if(0 != Unsorted.anInt120 && Class129.anInt1691 != -1) {
-               Class70.method1285(CacheIndex.musicIndex, Class129.anInt1691, Unsorted.anInt120);
-            }
-
-            Class83.aBoolean1158 = false;
-         } else if(Unsorted.anInt120 != 0 && Class129.anInt1691 != -1 && Class79.method1391((byte) -92 + 91)) {
-            TextureOperation12.outgoingBuffer.putOpcode(137);
-            TextureOperation12.outgoingBuffer.writeInt(Class129.anInt1691);
-            Class129.anInt1691 = -1;
-         }
-
-      } catch (RuntimeException var10) {
-         throw ClientErrorException.clientError(var10, "ed.C(" + (byte) -92 + ')');
       }
    }
 

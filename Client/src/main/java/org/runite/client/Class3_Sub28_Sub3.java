@@ -14,7 +14,7 @@ final class Class3_Sub28_Sub3 extends Node {
    static int anInt3557 = 0;
    int anInt3558;
    int anInt3559 = 0;
-   Class61 aClass61_3560;
+   LinkedList aLinkedList_3560;
    RSString aClass94_3561;
    int anInt3562 = 12800;
    int anInt3563;
@@ -24,7 +24,7 @@ final class Class3_Sub28_Sub3 extends Node {
    final boolean method537(int var1, int var3) {
       try {
          if(var3 >= this.anInt3555 && var3 <= this.anInt3559 && var1 >= this.anInt3562 && var1 <= this.anInt3549) {
-            for(Class3_Sub21 var4 = (Class3_Sub21)this.aClass61_3560.method1222(); var4 != null; var4 = (Class3_Sub21)this.aClass61_3560.method1221()) {
+            for(Class3_Sub21 var4 = (Class3_Sub21)this.aLinkedList_3560.method1222(); var4 != null; var4 = (Class3_Sub21)this.aLinkedList_3560.method1221()) {
                if(var4.method393(var1, var3)) {
                   return true;
                }
@@ -45,7 +45,7 @@ final class Class3_Sub28_Sub3 extends Node {
          this.anInt3549 = 0;
          this.anInt3555 = 12800;
 
-         for(Class3_Sub21 var2 = (Class3_Sub21)this.aClass61_3560.method1222(); null != var2; var2 = (Class3_Sub21)this.aClass61_3560.method1221()) {
+         for(Class3_Sub21 var2 = (Class3_Sub21)this.aLinkedList_3560.method1222(); null != var2; var2 = (Class3_Sub21)this.aLinkedList_3560.method1221()) {
             if(this.anInt3562 > var2.anInt2494) {
                this.anInt3562 = var2.anInt2494;
             }
@@ -88,10 +88,10 @@ final class Class3_Sub28_Sub3 extends Node {
          int var4 = 0;
          short[] var3 = new short[16];
          int var6 = !var1?0:32768;
-         int var7 = (!var1?Class83.anInt1156:RenderAnimationDefinition.anInt377) + var6;
+         int var7 = (!var1? QuickChat.anInt1156: QuickChat.anInt377) + var6;
 
          for(int var8 = var6; var8 < var7; ++var8) {
-            Class3_Sub28_Sub4 var9 = LinkableRSString.method733(var8);
+            QuickChatDefinition var9 = QuickChat.method733(var8);
             if(var9.aBoolean3568 && var9.method554().toLowercase().indexOf(var2, 112) != -1) {
                if(var4 >= 50) {
                   Unsorted.anInt952 = -1;
@@ -117,7 +117,7 @@ final class Class3_Sub28_Sub3 extends Node {
          RSString[] var13 = new RSString[Unsorted.anInt952];
 
          for(int var14 = 0; Unsorted.anInt952 > var14; ++var14) {
-            var13[var14] = LinkableRSString.method733(var3[var14]).method554();
+            var13[var14] = QuickChat.method733(var3[var14]).method554();
          }
 
          TextureOperation3.method307(var13, Class99.aShortArray1398, 100);
@@ -162,7 +162,7 @@ final class Class3_Sub28_Sub3 extends Node {
             this.anInt3563 = 0;
          }
 
-         this.aClass61_3560 = new Class61();
+         this.aLinkedList_3560 = new LinkedList();
       } catch (RuntimeException var9) {
          throw ClientErrorException.clientError(var9, "bn.<init>(" + (var1 != null?"{...}":"null") + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ')');
       }

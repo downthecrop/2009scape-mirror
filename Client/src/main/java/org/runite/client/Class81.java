@@ -48,11 +48,11 @@ final class Class81 {
         try {
 
             int var2 = var1.anInt3963;
-            RenderAnimationDefinition var3 = var1.method1965();
-            if (var1.anInt2764 == var3.anInt368) {
+            RenderAnimationDefinition var3 = var1.getRenderAnimationType();
+            if (var1.anInt2764 == var3.stand_animation) {
                 var2 = var1.anInt3952;
-            } else if (var3.anInt393 != var1.anInt2764 && var1.anInt2764 != var3.anInt386 && var1.anInt2764 != var3.anInt375 && var3.anInt373 != var1.anInt2764) {
-                if (var3.anInt398 == var1.anInt2764 || var3.anInt372 == var1.anInt2764 || var1.anInt2764 == var3.anInt379 || var3.anInt406 == var1.anInt2764) {
+            } else if (var3.run_anim != var1.anInt2764 && var1.anInt2764 != var3.run_follow_full_turn_anim && var1.anInt2764 != var3.run_follow_cw_turn_anim && var3.run_follow_ccw_turn_anim != var1.anInt2764) {
+                if (var3.slow_walk_anim == var1.anInt2764 || var3.slow_walk_follow_full_turn_anim == var1.anInt2764 || var1.anInt2764 == var3.slow_walk_follow_cw_turn_anim || var3.slow_walk_follow_ccw_turn_anim == var1.anInt2764) {
                     var2 = var1.anInt3966;
                 }
             } else {
@@ -74,20 +74,20 @@ final class Class81 {
                     int var5;
                     for (var5 = 0; var5 < Class3_Sub28_Sub5.anInt3591; ++var5) {
                         if (Class114.ignores[var5] == var1) {
-                            Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, RSString.stringCombiner(new RSString[]{var4, TextCore.HasIgnoreAlready}), -1);
+                            BufferedDataStream.addChatMessage(RSString.parse(""), 0, RSString.stringCombiner(new RSString[]{var4, TextCore.HasIgnoreAlready}), -1);
                             return;
                         }
                     }
 
                     for (var5 = 0; Class8.anInt104 > var5; ++var5) {
                         if (var1 == Class50.aLongArray826[var5]) {
-                            Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, RSString.stringCombiner(new RSString[]{TextCore.HasPleaseRemove, var4, TextCore.HasFriendsToIgnore}), -1);
+                            BufferedDataStream.addChatMessage(RSString.parse(""), 0, RSString.stringCombiner(new RSString[]{TextCore.HasPleaseRemove, var4, TextCore.HasFriendsToIgnore}), -1);
                             return;
                         }
                     }
 
                     if (var4.equalsString(Class102.player.displayName)) {
-                        Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, TextCore.HasOnOwnIgnoreList, -1);
+                        BufferedDataStream.addChatMessage(RSString.parse(""), 0, TextCore.HasOnOwnIgnoreList, -1);
                     } else {
                         Class114.ignores[Class3_Sub28_Sub5.anInt3591] = var1;
                         TextureOperation7.aClass94Array3341[Class3_Sub28_Sub5.anInt3591++] = Unsorted.method1052(var1);
@@ -96,7 +96,7 @@ final class Class81 {
                         TextureOperation12.outgoingBuffer.writeLong(var1);
                     }
                 } else {
-                    Class3_Sub30_Sub1.addChatMessage(TextCore.emptyJagexString, 0, TextCore.HasIgnoreListFull, -1);
+                    BufferedDataStream.addChatMessage(RSString.parse(""), 0, TextCore.HasIgnoreListFull, -1);
                 }
             }
         } catch (RuntimeException var6) {

@@ -6,7 +6,7 @@ final class TextureOperation13 extends TextureOperation {
 
    static int anInt3362 = -1;
    static int anInt3363;
-   static Class61 aClass61_3364 = new Class61();
+   static LinkedList aLinkedList_3364 = new LinkedList();
    static long aLong3366;
    static int[] anIntArray3367 = new int[64];
 
@@ -116,8 +116,8 @@ final class TextureOperation13 extends TextureOperation {
          LinkableRSString.method727();
          Class3_Sub21.method397((byte)-41);
          if(TextureOperation20.paramModeWhat != 0) {
-            for(int var1 = 0; var1 < Class3_Sub6.aByteArrayArray2287.length; ++var1) {
-               Class3_Sub6.aByteArrayArray2287[var1] = null;
+            for(int var1 = 0; var1 < Class3_Sub6.softReferenceTestArray.length; ++var1) {
+               Class3_Sub6.softReferenceTestArray[var1] = null;
             }
 
             Class56.anInt893 = 0;

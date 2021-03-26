@@ -106,7 +106,7 @@ final class TextureOperation3 extends TextureOperation {
             }
          }
 
-         Class3_Sub26.aClass61_2557.method1215(var4);
+         Class3_Sub26.aLinkedList_2557.method1215(var4);
       } catch (RuntimeException var20) {
          throw ClientErrorException.clientError(var20, "qg.E(" + (var0 != null?"{...}":"null") + ',' + (var1 != null?"{...}":"null") + ',' + var2 + ',' + (byte) -126 + ')');
       }

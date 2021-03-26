@@ -44,11 +44,11 @@ public final class Class117 {
                 boolean var3 = 5 == Class143.gameStage || Class143.gameStage == 10 || Class143.gameStage == 28;
                 if (var3 == !var2) {
                     if (var2) {
-                        Class129.anInt1691 = KeyboardListener.loginThemeSongArchiveID;
-                        if (Unsorted.anInt120 == 0) {
+                        AudioHandler.currentTrack = KeyboardListener.loginThemeSongArchiveID;
+                        if (AudioHandler.musicVolume == 0) {
                             Unsorted.method882();
                         } else {
-                            Unsorted.method2099(KeyboardListener.loginThemeSongArchiveID, CacheIndex.musicIndex, 255);
+                            AudioHandler.method2099(KeyboardListener.loginThemeSongArchiveID, CacheIndex.musicIndex, 255);
                         }
 
                         Class58.aJs5Worker_917.sendLoginState(false);

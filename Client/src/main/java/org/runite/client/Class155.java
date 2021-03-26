@@ -23,18 +23,6 @@ class Class155 {
     private int anInt1987 = 0;
     private int anInt1988 = 0;
 
-    static Class10 method2156(DataBuffer var1) {
-        try {
-            Class10 var2 = new Class10();
-            var2.anInt149 = var1.readUnsignedShort();
-
-            var2.aClass3_Sub28_Sub4_151 = LinkableRSString.method733(var2.anInt149);
-            return var2;
-        } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "vh.M(" + 1024 + ',' + (var1 != null ? "{...}" : "null") + ')');
-        }
-    }
-
     static void method2162(GameObject var0, int var1, int var2, int var3) {
         Class3_Sub2 var4;
         if (var2 < Unsorted.anInt1234) {
@@ -111,7 +99,7 @@ class Class155 {
                         Class3_Sub24 var11 = this.aClass3_Sub24Array1980[var7];
 
                         while (var11 != null) {
-                            Class3_Sub12 var12 = var11.aClass3_Sub12_2544;
+                            Sound var12 = var11.aSound_2544;
                             if (var12 != null && var12.anInt2374 > var8) {
                                 var5 |= 1 << var7;
                                 var10 = var11;

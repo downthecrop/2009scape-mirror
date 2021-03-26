@@ -20,7 +20,7 @@ final class WaterfallShader implements ShaderInterface {
 
    static void method1626(byte var0) {
       try {
-         Class3_Sub28_Sub4.aReferenceCache_3572.clear();
+         QuickChatDefinition.aReferenceCache_3572.clear();
          Class143.aReferenceCache_1874.clear();
          if(var0 <= -124) {
             Class67.aReferenceCache_1013.clear();
@@ -35,7 +35,7 @@ final class WaterfallShader implements ShaderInterface {
          WorldListEntry var2 = Class3_Sub8.getWorld(97, var0);
          if(var2 == null) {
             return false;
-         } else if (1 != Signlink.anInt1214 && Signlink.anInt1214 != 2 && Class44.paramModeWhere != 2) {
+         } else if (Signlink.anInt1214 != 1 && Signlink.anInt1214 != 2 && Class44.paramModeWhere != 2) {
             RSString var9 = aClass94_8;
             if (Class44.paramModeWhere != 0) {
                var9 = RSString.stringCombiner(new RSString[]{TextCore.aClass94_4007, RSString.stringAnimator(var2.worldId - -7000)});

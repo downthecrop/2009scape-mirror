@@ -3,10 +3,9 @@ package org.runite.client;
 final class Class70 {
 
     static RSString[] aClass94Array1046 = new RSString[200];
-    static int anInt1047;
+    static int frameHeight;
     static double aDouble1050 = -1.0D;
     static int anInt1053 = 0;
-    static Class10 aClass10_1056;
     int anInt1045;
     long aLong1048 = 0L;
     GameObject aClass140_1049;
@@ -20,7 +19,7 @@ final class Class70 {
     static void method1285(CacheIndex var0, int var2, int var5) {
         try {
             Class101.aClass153_1423 = var0;
-            Class10.anInt154 = 1;
+            Unsorted.anInt154 = 1;
             TextureOperation36.anInt3423 = var5;
             Class132.anInt1741 = 0;
             TextureOperation8.anInt3463 = var2;
@@ -64,7 +63,7 @@ final class Class70 {
                     var8.anInt2316 = var8.anInt2310 - -((int) (Math.random() * (double) (-var8.anInt2310 + var8.anInt2325)));
                 }
 
-                Unsorted.aClass61_78.method1215(var8);
+                Unsorted.aLinkedList_78.method1215(var8);
             } else if (null != var4) {
                 var8.aClass140_Sub4_Sub2_2324 = var4;
                 NPCDefinition var12 = var4.definition;
@@ -80,7 +79,7 @@ final class Class70 {
                     var8.anInt2328 = 128 * var12.anInt1291;
                 }
 
-                Unsorted.aClass61_1242.method1215(var8);
+                Unsorted.aLinkedList_1242.method1215(var8);
             } else if (null != var7) {
                 var8.aClass140_Sub4_Sub1_2327 = var7;
                 var8.anInt2321 = (var7.getSize() + var5) * 128;
@@ -120,11 +119,11 @@ final class Class70 {
             }
 
             int var3 = var2.anInt1293;
-            RenderAnimationDefinition var4 = var0.method1965();
-            if (var0.anInt2764 == var4.anInt368) {
+            RenderAnimationDefinition var4 = var0.getRenderAnimationType();
+            if (var0.anInt2764 == var4.stand_animation) {
                 var3 = var2.anInt1262;
-            } else if (var4.anInt393 != var0.anInt2764 && var4.anInt386 != var0.anInt2764 && var0.anInt2764 != var4.anInt375 && var0.anInt2764 != var4.anInt373) {
-                if (var0.anInt2764 == var4.anInt398 || var0.anInt2764 == var4.anInt372 || var4.anInt379 == var0.anInt2764 || var4.anInt406 == var0.anInt2764) {
+            } else if (var4.run_anim != var0.anInt2764 && var4.run_follow_full_turn_anim != var0.anInt2764 && var0.anInt2764 != var4.run_follow_cw_turn_anim && var0.anInt2764 != var4.run_follow_ccw_turn_anim) {
+                if (var0.anInt2764 == var4.slow_walk_anim || var0.anInt2764 == var4.slow_walk_follow_full_turn_anim || var4.slow_walk_follow_cw_turn_anim == var0.anInt2764 || var4.slow_walk_follow_ccw_turn_anim == var0.anInt2764) {
                     var3 = var2.anInt1290;
                 }
             } else {

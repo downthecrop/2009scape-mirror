@@ -38,7 +38,7 @@ final class Class140_Sub6 extends GameObject {
 
    static void method2020(int var0, ObjectDefinition var1, int var3, int var4) {
       try {
-         Class3_Sub9 var5 = (Class3_Sub9) Unsorted.aClass61_78.method1222();
+         Class3_Sub9 var5 = (Class3_Sub9) Unsorted.aLinkedList_78.method1222();
 
           while(null != var5) {
             if(var4 == var5.anInt2314 && 128 * var0 == var5.anInt2326 && var5.anInt2308 == 128 * var3 && var5.aClass111_2320.objectId == var1.objectId) {
@@ -56,7 +56,7 @@ final class Class140_Sub6 extends GameObject {
                return;
             }
 
-            var5 = (Class3_Sub9) Unsorted.aClass61_78.method1221();
+            var5 = (Class3_Sub9) Unsorted.aLinkedList_78.method1221();
          }
 
       } catch (RuntimeException var6) {

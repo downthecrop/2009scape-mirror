@@ -51,7 +51,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                 Class163_Sub2_Sub1.aClass94Array4016[Unsorted.menuOptionCount] = var4;
                 Class114.anIntArray1578[Unsorted.menuOptionCount] = var0 == -1 ?Class3_Sub28_Sub5.anInt3590:var0;
                 TextureOperation27.aShortArray3095[Unsorted.menuOptionCount] = var6;
-                TextureOperation0.aLongArray3271[Unsorted.menuOptionCount] = var1;
+                Unsorted.aLongArray3271[Unsorted.menuOptionCount] = var1;
                 Class117.anIntArray1613[Unsorted.menuOptionCount] = var5;
                 Class27.anIntArray512[Unsorted.menuOptionCount] = var8;
                 ++Unsorted.menuOptionCount;
@@ -165,7 +165,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
       try {
 
          if(var3.anInt318 == 1) {
-            method1177(-1, 0L, (byte)-78, TextCore.emptyJagexString, 0, (short)8, var3.aClass94_289, var3.componentHash);
+            method1177(-1, 0L, (byte)-78, RSString.parse(""), 0, (short)8, var3.aClass94_289, var3.componentHash);
          }
 
          RSString var4;
@@ -177,19 +177,19 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
          }
 
          if(var3.anInt318 == 3) {
-            method1177(-1, 0L, (byte)-59, TextCore.emptyJagexString, 0, (short)28, TextCore.HasClose, var3.componentHash);
+            method1177(-1, 0L, (byte)-59, RSString.parse(""), 0, (short)28, TextCore.HasClose, var3.componentHash);
          }
 
          if(var3.anInt318 == 4) {
-            method1177(-1, 0L, (byte)-71, TextCore.emptyJagexString, 0, (short)59, var3.aClass94_289, var3.componentHash);
+            method1177(-1, 0L, (byte)-71, RSString.parse(""), 0, (short)59, var3.aClass94_289, var3.componentHash);
          }
 
          if(var3.anInt318 == 5) {
-            method1177(-1, 0L, (byte)-92, TextCore.emptyJagexString, 0, (short)51, var3.aClass94_289, var3.componentHash);
+            method1177(-1, 0L, (byte)-92, RSString.parse(""), 0, (short)51, var3.aClass94_289, var3.componentHash);
          }
 
          if(var3.anInt318 == 6 && TextureOperation27.aClass11_3087 == null) {
-            method1177(-1, 0L, (byte)-100, TextCore.emptyJagexString, -1, (short)41, var3.aClass94_289, var3.componentHash);
+            method1177(-1, 0L, (byte)-100, RSString.parse(""), -1, (short)41, var3.aClass94_289, var3.componentHash);
          }
 
          int var5;
@@ -213,11 +213,11 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                         Class3_Sub1 var9 = Client.method44(var3);
                         ItemDefinition var10 = ItemDefinition.getItemDefinition(var3.itemAmounts[var15] + -1);
                         if(1 == Class164_Sub1.anInt3012 && var9.method99()) {
-                           if(var3.componentHash != Class3_Sub28_Sub18.anInt3764 || var15 != Class3_Sub30_Sub1.anInt1473) {
+                           if(var3.componentHash != Class3_Sub28_Sub18.anInt3764 || var15 != BufferedDataStream.anInt1473) {
                               method1177(-1, var10.itemId, (byte)-91, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aClass94_378, ColorCore.BankItemColor, var10.name}), var15, (short)40, TextCore.HasUse, var3.componentHash);
                            }
                         } else if(GameObject.aBoolean1837 && var9.method99()) {
-                           Class3_Sub28_Sub9 var18 = Unsorted.anInt1038 != -1 ?Class61.method1210(Unsorted.anInt1038):null;
+                           Class3_Sub28_Sub9 var18 = Unsorted.anInt1038 != -1 ? LinkedList.method1210(Unsorted.anInt1038):null;
                            if(0 != (16 & Class164.anInt2051) && (var18 == null || var18.anInt3614 != var10.method1115(var18.anInt3614, 103, Unsorted.anInt1038))) {
                               method1177(Unsorted.anInt1887, var10.itemId, (byte)-89, RSString.stringCombiner(new RSString[]{TextCore.aClass94_676, ColorCore.BankItemColor, var10.name}), var15, (short)3, Class3_Sub28_Sub9.aClass94_3621, var3.componentHash);
                            }
@@ -342,7 +342,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                }
 
                if(Client.method44(var3).method95()) {
-                  method1177(-1, 0L, (byte)-74, TextCore.emptyJagexString, var3.anInt191, (short)41, TextCore.HasContinue, var3.componentHash);
+                  method1177(-1, 0L, (byte)-74, RSString.parse(""), var3.anInt191, (short)41, TextCore.HasContinue, var3.componentHash);
                }
             }
          }
@@ -407,7 +407,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
    private void method481(byte var1, int var2) {
       try {
 
-         for(Class3_Sub22 var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1222(); null != var4; var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1221()) {
+         for(Class3_Sub22 var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1222(); null != var4; var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1221()) {
             if(var2 < 0 || var4.anInt2514 == var2) {
                if(null != var4.aClass3_Sub24_Sub1_2507) {
                   var4.aClass3_Sub24_Sub1_2507.method417(Class21.anInt443 / 100);
@@ -485,7 +485,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
       try {
          this.method493((byte)-123, var4, 64, var2);
          if((2 & this.anIntArray3518[var2]) != 0) {
-            for(Class3_Sub22 var5 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1212(); var5 != null; var5 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1219(98)) {
+            for(Class3_Sub22 var5 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1212(); var5 != null; var5 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1219(98)) {
                if(var5.anInt2514 == var2 && var5.anInt2506 < 0) {
                   this.aClass3_Sub22ArrayArray3512[var2][var5.anInt2520] = null;
                   this.aClass3_Sub22ArrayArray3512[var2][var4] = var5;
@@ -501,10 +501,10 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
 
          Class3_Sub15 var11 = (Class3_Sub15)this.aHashTable_3508.get(this.anIntArray3515[var2]);
          if(var11 != null) {
-            Class3_Sub12_Sub1 var12 = var11.aClass3_Sub12_Sub1Array2431[var4];
+            PcmSound var12 = var11.aPcmSoundArray2431[var4];
             if(var12 != null) {
                Class3_Sub22 var7 = new Class3_Sub22();
-               var7.aClass3_Sub12_Sub1_2509 = var12;
+               var7.aPcmSound_2509 = var12;
                var7.aClass3_Sub15_2527 = var11;
                var7.anInt2514 = var2;
                var7.aClass166_2504 = var11.aClass166Array2435[var4];
@@ -539,7 +539,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
                   this.aClass3_Sub22ArrayArray3513[var2][var7.anInt2517] = var7;
                }
 
-               this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1215(var7);
+               this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1215(var7);
                this.aClass3_Sub22ArrayArray3512[var2][var4] = var7;
             }
          }
@@ -748,7 +748,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
 
    private void method489(int var1, int var2) {
       try {
-         for(Class3_Sub22 var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1222(); var3 != null; var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1221()) {
+         for(Class3_Sub22 var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1222(); var3 != null; var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1221()) {
             if((var2 < 0 || var3.anInt2514 == var2) && var3.anInt2506 < 0) {
                this.aClass3_Sub22ArrayArray3512[var3.anInt2514][var3.anInt2520] = null;
                var3.anInt2506 = 0;
@@ -928,7 +928,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
             if((2 & this.anIntArray3518[var4]) == 0) {
                var5.anInt2506 = 0;
             } else {
-               for(Class3_Sub22 var6 = (Class3_Sub22) Objects.requireNonNull(this.aClass3_Sub24_Sub3_3527).aClass61_3489.method1222(); null != var6; var6 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1221()) {
+               for(Class3_Sub22 var6 = (Class3_Sub22) Objects.requireNonNull(this.aClass3_Sub24_Sub3_3527).aLinkedList_3489.method1222(); null != var6; var6 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1221()) {
                   if(var5.anInt2514 == var6.anInt2514 && var6.anInt2506 < 0 && var6 != var5) {
                      var5.anInt2506 = 0;
                      break;
@@ -1059,7 +1059,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
    private void method497(int var1, int var2) {
       try {
          if(0 != (4 & this.anIntArray3518[var1])) {
-            for(Class3_Sub22 var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1222(); null != var4; var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1221()) {
+            for(Class3_Sub22 var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1222(); null != var4; var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1221()) {
                if(var1 == var4.anInt2514) {
                   var4.anInt2516 = 0;
                }
@@ -1089,7 +1089,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
             var3 += (int)((double)var5 * var7);
          }
 
-         var5 = (int)(0.5D + (double)(256 * var2.aClass3_Sub12_Sub1_2509.anInt3034) * Math.pow(2.0D, (double)var3 * 3.255208333333333E-4D) / (double)Class21.anInt443);
+         var5 = (int)(0.5D + (double)(256 * var2.aPcmSound_2509.anInt3034) * Math.pow(2.0D, (double)var3 * 3.255208333333333E-4D) / (double)Class21.anInt443);
 
          return var5 >= 1?var5:1;
       } catch (RuntimeException var9) {
@@ -1133,10 +1133,10 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
 
    final void method501(Class3_Sub22 var1, boolean var2, byte var3) {
       try {
-         int var4 = var1.aClass3_Sub12_Sub1_2509.aByteArray3030.length;
+         int var4 = var1.aPcmSound_2509.aByteArray3030.length;
          int var5;
-         if(var2 && var1.aClass3_Sub12_Sub1_2509.aBoolean3031) {
-            int var6 = var4 + (var4 - var1.aClass3_Sub12_Sub1_2509.anInt3033);
+         if(var2 && var1.aPcmSound_2509.aBoolean3031) {
+            int var6 = var4 + (var4 - var1.aPcmSound_2509.anInt3033);
             var4 <<= 8;
             var5 = (int)((long)var6 * (long)this.anIntArray3519[var1.anInt2514] >> 6);
             if(var4 <= var5) {
@@ -1160,7 +1160,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
    private void method502(int var1, int var2) {
       try {
          if(var2 != ~(this.anIntArray3518[var1] & 2)) {
-            for(Class3_Sub22 var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1222(); var3 != null; var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aClass61_3489.method1221()) {
+            for(Class3_Sub22 var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1222(); var3 != null; var3 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1221()) {
                if(var3.anInt2514 == var1 && this.aClass3_Sub22ArrayArray3512[var1][var3.anInt2520] == null && var3.anInt2506 < 0) {
                   var3.anInt2506 = 0;
                }

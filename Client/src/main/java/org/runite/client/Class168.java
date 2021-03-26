@@ -27,8 +27,8 @@ final class Class168 {
                 int var5 = var0.anInt2835 * 128 - -(var0.getSize() * 64);
                 int var6 = 128 * var0.anInt2823 + var0.getSize() * 64;
                 int var7 = 128 * var0.anInt2798 + var0.getSize() * 64;
-                var0.anInt2819 = (var3 * var6 + var4 * (var2 - var3)) / var2;
-                var0.anInt2829 = (var7 * var3 + var5 * (var2 - var3)) / var2;
+                var0.xAxis = (var3 * var6 + var4 * (var2 - var3)) / var2;
+                var0.zAxis = (var7 * var3 + var5 * (var2 - var3)) / var2;
             }
 
             var0.anInt2824 = 0;
@@ -694,7 +694,7 @@ final class Class168 {
 
     static RSInterface method2273(RSInterface iface) {
         if (iface.parentId != -1) {
-            return Class7.getRSInterface(iface.parentId);
+            return Unsorted.getRSInterface(iface.parentId);
         }
 
         int var3 = iface.componentHash >>> 16;
@@ -702,7 +702,7 @@ final class Class168 {
 
         for (Class3_Sub31 var2 = var4.method1393(); null != var2; var2 = var4.method1392()) {
             if (var2.anInt2602 == var3) {
-                return Class7.getRSInterface((int) var2.linkableKey);
+                return Unsorted.getRSInterface((int) var2.linkableKey);
             }
         }
 
@@ -903,9 +903,9 @@ final class Class168 {
                         short var6 = TextureOperation27.aShortArray3095[var2];
                         TextureOperation27.aShortArray3095[var2] = TextureOperation27.aShortArray3095[1 + var2];
                         TextureOperation27.aShortArray3095[var2 + 1] = var6;
-                        long var7 = TextureOperation0.aLongArray3271[var2];
-                        TextureOperation0.aLongArray3271[var2] = TextureOperation0.aLongArray3271[var2 + 1];
-                        TextureOperation0.aLongArray3271[var2 - -1] = var7;
+                        long var7 = Unsorted.aLongArray3271[var2];
+                        Unsorted.aLongArray3271[var2] = Unsorted.aLongArray3271[var2 + 1];
+                        Unsorted.aLongArray3271[var2 - -1] = var7;
                     }
                 }
             }
@@ -923,6 +923,24 @@ final class Class168 {
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "wl.B(" + 2714 + ',' + var1 + ')');
         }
+    }
+
+    static Class168 method350(int var1) {
+       try {
+          Class168 var2 = (Class168)Class163_Sub2_Sub1.aReferenceCache_4015.get(var1);
+          if(null == var2) {
+             byte[] var4 = Class3_Sub28_Sub5.aClass153_3580.getFile(4, var1);
+             var2 = new Class168();
+             if(var4 != null) {
+                var2.method2274(new DataBuffer(var4), var1);
+             }
+
+             Class163_Sub2_Sub1.aReferenceCache_4015.put(var2, var1);
+          }
+           return var2;
+       } catch (RuntimeException var5) {
+          throw ClientErrorException.clientError(var5, "um.C(" + ',' + var1 + ')');
+       }
     }
 
     final void method2274(DataBuffer var2, int var3) {
@@ -944,7 +962,7 @@ final class Class168 {
     private void method2279(int var2, DataBuffer var3, int var4) {
         try {
             if (var2 == 1) {
-                this.anInt2103 = RSInterface.method869(116, var3.readMedium());
+                this.anInt2103 = RSInterface.method869(var3.readMedium());
             } else if (var2 == 2) {
                 this.anInt2095 = var3.readUnsignedByte();
             } else if (3 == var2) {
@@ -955,7 +973,7 @@ final class Class168 {
             } else if (5 == var2) {
                 this.aBoolean2102 = false;
             } else if (var2 == 7) {
-                this.anInt2098 = RSInterface.method869(116, var3.readMedium());
+                this.anInt2098 = RSInterface.method869(var3.readMedium());
             } else if (var2 == 8) {
                 TextureOperation26.anInt3081 = var4;
             } else if (var2 == 9) {

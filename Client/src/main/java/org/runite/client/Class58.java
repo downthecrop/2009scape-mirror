@@ -53,7 +53,7 @@ public final class Class58 {
                     if (Class3_Sub24_Sub4.anInt3507 > 0 && null == Class38_Sub1.aClass15_2613) {
                         Class38_Sub1.aClass15_2613 = new Class15();
                         Class38_Sub1.aClass15_2613.aClass87_350 = var1;
-                        var1.method1451(Class3_Sub24_Sub4.anInt3507, Class38_Sub1.aClass15_2613);
+                        var1.startThread(Class3_Sub24_Sub4.anInt3507, Class38_Sub1.aClass15_2613);
                     }
 
                     if (Class38_Sub1.aClass15_2613 != null) {
@@ -77,7 +77,7 @@ public final class Class58 {
                         if (Class3_Sub24_Sub4.anInt3507 > 0 && null == Class38_Sub1.aClass15_2613) {
                             Class38_Sub1.aClass15_2613 = new Class15();
                             Class38_Sub1.aClass15_2613.aClass87_350 = var1;
-                            var1.method1451(Class3_Sub24_Sub4.anInt3507, Class38_Sub1.aClass15_2613);
+                            var1.startThread(Class3_Sub24_Sub4.anInt3507, Class38_Sub1.aClass15_2613);
                         }
 
                         if (Class38_Sub1.aClass15_2613 != null) {

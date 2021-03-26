@@ -10,7 +10,7 @@ final class Class27 {
     static int anInt515 = -1;
     static int anInt517 = 0;
     static Class3_Sub28_Sub16_Sub2 aClass3_Sub28_Sub16_Sub2_518;
-    static Class157 aClass157_524;
+    static Class157 resampler;
 
     static RSInterface aClass11_526 = null;
 

@@ -35,9 +35,9 @@ object PacketDecoder {
 
         if (Unsorted.incomingOpcode == -1) {
             availableBytes--
-            Class3_Sub15.activeConnection.readBytes(GraphicDefinition.incomingBuffer.buffer, 0, 1)
-            GraphicDefinition.incomingBuffer.index = 0
-            Unsorted.incomingOpcode = GraphicDefinition.incomingBuffer.opcode
+            Class3_Sub15.activeConnection.readBytes(BufferedDataStream.incomingBuffer.buffer, 0, 1)
+            BufferedDataStream.incomingBuffer.index = 0
+            Unsorted.incomingOpcode = BufferedDataStream.incomingBuffer.opcode
             Unsorted.incomingPacketLength = Class75_Sub4.incomingPacketSizes[Unsorted.incomingOpcode]
         }
 
@@ -45,23 +45,23 @@ object PacketDecoder {
             if (availableBytes < 1) return false
 
             availableBytes--
-            Class3_Sub15.activeConnection.readBytes(GraphicDefinition.incomingBuffer.buffer, 0, 1)
-            Unsorted.incomingPacketLength = GraphicDefinition.incomingBuffer.buffer[0].toInt() and 0xff
+            Class3_Sub15.activeConnection.readBytes(BufferedDataStream.incomingBuffer.buffer, 0, 1)
+            Unsorted.incomingPacketLength = BufferedDataStream.incomingBuffer.buffer[0].toInt() and 0xff
         }
 
         if (Unsorted.incomingPacketLength == -2) {
             if (availableBytes < 2) return false
 
             availableBytes -= 2
-            Class3_Sub15.activeConnection.readBytes(GraphicDefinition.incomingBuffer.buffer, 0, 2)
-            GraphicDefinition.incomingBuffer.index = 0
-            Unsorted.incomingPacketLength = GraphicDefinition.incomingBuffer.readUnsignedShort()
+            Class3_Sub15.activeConnection.readBytes(BufferedDataStream.incomingBuffer.buffer, 0, 2)
+            BufferedDataStream.incomingBuffer.index = 0
+            Unsorted.incomingPacketLength = BufferedDataStream.incomingBuffer.readUnsignedShort()
         }
 
         if (availableBytes < Unsorted.incomingPacketLength) return false
 
-        GraphicDefinition.incomingBuffer.index = 0
-        Class3_Sub15.activeConnection.readBytes(GraphicDefinition.incomingBuffer.buffer, 0, Unsorted.incomingPacketLength)
+        BufferedDataStream.incomingBuffer.index = 0
+        Class3_Sub15.activeConnection.readBytes(BufferedDataStream.incomingBuffer.buffer, 0, Unsorted.incomingPacketLength)
         Class24.anInt469 = Class7.anInt2166
         Class7.anInt2166 = LinkableRSString.anInt2582
         LinkableRSString.anInt2582 = Unsorted.incomingOpcode
@@ -69,7 +69,7 @@ object PacketDecoder {
 
         val decoder = decoders[Unsorted.incomingOpcode]
         if (decoder == null) return PacketParser.parseIncomingPackets();
-        else decoder.decode(GraphicDefinition.incomingBuffer)
+        else decoder.decode(BufferedDataStream.incomingBuffer)
 
         // TODO This should only happen after everything else.
         Unsorted.incomingOpcode = -1

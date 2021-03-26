@@ -3,21 +3,20 @@ package org.runite.client;
 final class Class17 {
 
     static Interface2 anInterface2_408;
-    static Thread aThread409;
     static int anInt410;
     static Class64 aClass64_413;
 
     static void method904(int var0, Class140_Sub4 var1) {
         try {
             if (var1.anInt2779 != 0) {
-                RenderAnimationDefinition var2 = var1.method1965();
+                RenderAnimationDefinition var2 = var1.getRenderAnimationType();
                 int var4;
                 int var5;
                 if (var1.anInt2772 != -1 && 32768 > var1.anInt2772) {
                     NPC var3 = NPC.npcs[var1.anInt2772];
                     if (var3 != null) {
-                        var5 = -var3.anInt2829 + var1.anInt2829;
-                        var4 = -var3.anInt2819 + var1.anInt2819;
+                        var5 = -var3.zAxis + var1.zAxis;
+                        var4 = -var3.xAxis + var1.xAxis;
                         if (0 != var4 || 0 != var5) {
                             var1.anInt2806 = (int) (Math.atan2(var4, var5) * 325.949D) & 0x7FF;
                         }
@@ -32,10 +31,10 @@ final class Class17 {
                         var9 = 2047;
                     }
 
-                    Player var10 = TextureOperation0.players[var9];
+                    Player var10 = Unsorted.players[var9];
                     if (null != var10) {
-                        var6 = -var10.anInt2829 + var1.anInt2829;
-                        var5 = -var10.anInt2819 + var1.anInt2819;
+                        var6 = -var10.zAxis + var1.zAxis;
+                        var5 = -var10.xAxis + var1.xAxis;
                         if (var5 != 0 || var6 != 0) {
                             var1.anInt2806 = (int) (Math.atan2(var5, var6) * 325.949D) & 0x7FF;
                         }
@@ -43,8 +42,8 @@ final class Class17 {
                 }
 
                 if ((0 != var1.anInt2786 || 0 != var1.anInt2762) && (var1.anInt2816 == 0 || var1.anInt2824 > 0)) {
-                    var9 = var1.anInt2819 + -((-Class131.anInt1716 + (var1.anInt2786 - Class131.anInt1716)) * 64);
-                    var4 = -((-Texture.anInt1152 + (var1.anInt2762 - Texture.anInt1152)) * 64) + var1.anInt2829;
+                    var9 = var1.xAxis + -((-Class131.anInt1716 + (var1.anInt2786 - Class131.anInt1716)) * 64);
+                    var4 = -((-Texture.anInt1152 + (var1.anInt2762 - Texture.anInt1152)) * 64) + var1.zAxis;
                     if (var9 != 0 || var4 != 0) {
                         var1.anInt2806 = (int) (Math.atan2(var9, var4) * 325.949D) & 0x7FF;
                     }
@@ -57,7 +56,7 @@ final class Class17 {
                 if (var9 == 0) {
                     var1.anInt2789 = 0;
                     var1.anInt2821 = 0;
-                } else if (var2.anInt369 == 0) {
+                } else if (var2.yaw_acceleration == 0) {
                     ++var1.anInt2789;
                     boolean var11;
                     if (var9 > 1024) {
@@ -68,11 +67,11 @@ final class Class17 {
                             var11 = false;
                         }
 
-                        if (var1.anInt2764 == var2.anInt368 && (25 < var1.anInt2789 || var11)) {
-                            if (var2.anInt367 == -1) {
-                                var1.anInt2764 = var2.anInt382;
+                        if (var1.anInt2764 == var2.stand_animation && (25 < var1.anInt2789 || var11)) {
+                            if (var2.standing_ccw_turn == -1) {
+                                var1.anInt2764 = var2.walk_animation;
                             } else {
-                                var1.anInt2764 = var2.anInt367;
+                                var1.anInt2764 = var2.standing_ccw_turn;
                             }
                         }
                     } else {
@@ -83,22 +82,22 @@ final class Class17 {
                             var1.anInt2785 = var1.anInt2806;
                         }
 
-                        if (var2.anInt368 == var1.anInt2764 && (25 < var1.anInt2789 || var11)) {
-                            if (-1 == var2.anInt407) {
-                                var1.anInt2764 = var2.anInt382;
+                        if (var2.stand_animation == var1.anInt2764 && (25 < var1.anInt2789 || var11)) {
+                            if (-1 == var2.standing_cw_turn) {
+                                var1.anInt2764 = var2.walk_animation;
                             } else {
-                                var1.anInt2764 = var2.anInt407;
+                                var1.anInt2764 = var2.standing_cw_turn;
                             }
                         }
                     }
 
                     var1.anInt2785 &= 2047;
                 } else {
-                    if (var1.anInt2764 == var2.anInt368 && 25 < var1.anInt2789) {
-                        if (var2.anInt407 == -1) {
-                            var1.anInt2764 = var2.anInt382;
+                    if (var1.anInt2764 == var2.stand_animation && 25 < var1.anInt2789) {
+                        if (var2.standing_cw_turn == -1) {
+                            var1.anInt2764 = var2.walk_animation;
                         } else {
-                            var1.anInt2764 = var2.anInt407;
+                            var1.anInt2764 = var2.standing_cw_turn;
                         }
                     }
 
@@ -107,12 +106,12 @@ final class Class17 {
                         var1.anInt2791 = 0;
                         var1.anInt2808 = var4;
                         var5 = -var1.anInt2780 + var4 & 65535;
-                        var6 = var1.anInt2821 * var1.anInt2821 / (var2.anInt369 * 2);
+                        var6 = var1.anInt2821 * var1.anInt2821 / (var2.yaw_acceleration * 2);
                         int var7;
                         if (var1.anInt2821 > 0 && var6 <= var5 && -var6 + var5 < 32768) {
                             var1.anInt2803 = var5 / 2;
                             var1.aBoolean2769 = true;
-                            var7 = var2.anInt357 * var2.anInt357 / (var2.anInt369 * 2);
+                            var7 = var2.yaw_max_speed * var2.yaw_max_speed / (var2.yaw_acceleration * 2);
                             if (32767 < var7) {
                                 var7 = 32767;
                             }
@@ -123,7 +122,7 @@ final class Class17 {
                         } else if (0 > var1.anInt2821 && var6 <= -var5 + 65536 && 65536 + -var5 + -var6 < 32768) {
                             var1.anInt2803 = (-var5 + 65536) / 2;
                             var1.aBoolean2769 = true;
-                            var7 = var2.anInt357 * var2.anInt357 / (var2.anInt369 * 2);
+                            var7 = var2.yaw_max_speed * var2.yaw_max_speed / (var2.yaw_acceleration * 2);
                             if (var7 > 32767) {
                                 var7 = 32767;
                             }
@@ -138,24 +137,24 @@ final class Class17 {
 
                     if (var1.anInt2821 == 0) {
                         var5 = -var1.anInt2780 + var1.anInt2808 & 65535;
-                        if (var5 < var2.anInt369) {
+                        if (var5 < var2.yaw_acceleration) {
                             var1.anInt2780 = var1.anInt2808;
                         } else {
                             var1.anInt2791 = 0;
-                            var6 = var2.anInt357 * var2.anInt357 / (2 * var2.anInt369);
+                            var6 = var2.yaw_max_speed * var2.yaw_max_speed / (2 * var2.yaw_acceleration);
                             var1.aBoolean2769 = true;
                             if (32767 < var6) {
                                 var6 = 32767;
                             }
 
                             if (var5 >= 32768) {
-                                var1.anInt2821 = -var2.anInt369;
+                                var1.anInt2821 = -var2.yaw_acceleration;
                                 var1.anInt2803 = (65536 - var5) / 2;
                                 if (var1.anInt2803 > var6) {
                                     var1.anInt2803 = 65536 - (var5 + var6);
                                 }
                             } else {
-                                var1.anInt2821 = var2.anInt369;
+                                var1.anInt2821 = var2.yaw_acceleration;
                                 var1.anInt2803 = var5 / 2;
                                 if (var1.anInt2803 > var6) {
                                     var1.anInt2803 = -var6 + var5;
@@ -168,12 +167,12 @@ final class Class17 {
                         }
 
                         if (!var1.aBoolean2769) {
-                            var1.anInt2821 += var2.anInt369;
+                            var1.anInt2821 += var2.yaw_acceleration;
                             if (0 < var1.anInt2821) {
                                 var1.anInt2821 = 0;
                             }
-                        } else if (var1.anInt2821 > -var2.anInt357) {
-                            var1.anInt2821 -= var2.anInt369;
+                        } else if (var1.anInt2821 > -var2.yaw_max_speed) {
+                            var1.anInt2821 -= var2.yaw_acceleration;
                         }
                     } else {
                         if (var1.anInt2791 >= var1.anInt2803) {
@@ -181,12 +180,12 @@ final class Class17 {
                         }
 
                         if (!var1.aBoolean2769) {
-                            var1.anInt2821 -= var2.anInt369;
+                            var1.anInt2821 -= var2.yaw_acceleration;
                             if (var1.anInt2821 < 0) {
                                 var1.anInt2821 = 0;
                             }
-                        } else if (var1.anInt2821 < var2.anInt357) {
-                            var1.anInt2821 += var2.anInt369;
+                        } else if (var1.anInt2821 < var2.yaw_max_speed) {
+                            var1.anInt2821 += var2.yaw_acceleration;
                         }
                     }
 

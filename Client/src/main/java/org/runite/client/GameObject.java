@@ -14,7 +14,7 @@ abstract class GameObject {
             if (Class70.aDouble1050 != var0) {
                 for (int var3 = 0; 256 > var3; ++var3) {
                     int var4 = (int) (255.0D * Math.pow((double) var3 / 255.0D, var0));
-                    Class3_Sub30_Sub1.anIntArray3804[var3] = var4 > 255 ? 255 : var4;
+                    BufferedDataStream.anIntArray3804[var3] = var4 > 255 ? 255 : var4;
                 }
 
                 Class70.aDouble1050 = var0;
@@ -163,7 +163,7 @@ abstract class GameObject {
     static void method1870() {
         try {
             Class101.aClass3_Sub24_Sub4_1421.method505((byte) -128);
-            Class10.anInt154 = 1;
+            Unsorted.anInt154 = 1;
             Class101.aClass153_1423 = null;
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "th.GC(" + false + ')');

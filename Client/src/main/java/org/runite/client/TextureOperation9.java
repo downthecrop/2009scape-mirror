@@ -6,17 +6,16 @@ import java.util.Objects;
 
 public final class TextureOperation9 extends TextureOperation {
 
-    static CacheIndex aClass153_1967;
-    private boolean aBoolean3100 = true;
+	private boolean aBoolean3100 = true;
 	public static int anInt3102 = 0;
 	static int anInt3103;
 	private boolean aBoolean3104 = true;
 	static float aFloat3105;
 
 
-	final void method157(int var1, DataBuffer var2, boolean var3) {
+	final void decode(int var1, DataBuffer var2) {
 		try {
-			if(!var3) {
+			if(!true) {
 				method207(18, false, -19, 102L);
 			}
 
@@ -29,7 +28,7 @@ public final class TextureOperation9 extends TextureOperation {
 			}
 
 		} catch (RuntimeException var5) {
-			throw ClientErrorException.clientError(var5, "ej.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+			throw ClientErrorException.clientError(var5, "ej.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
 		}
 	}
 
@@ -77,17 +76,17 @@ public final class TextureOperation9 extends TextureOperation {
 				if(TextureOperation8.anInt3460 == NPCDefinition.anInt1297 && Class38_Sub1.anInt2612 == Class168.anInt2099) {
 					Unsorted.anInt3660 = 0;
 					if(ClientCommands.shiftClickEnabled && ObjectDefinition.aBooleanArray1490[81] && Unsorted.menuOptionCount > 2) {
-						Class3_Sub30_Sub1.method806(Unsorted.menuOptionCount + -2);
+						BufferedDataStream.method806(Unsorted.menuOptionCount + -2);
 					} else {
-						Class3_Sub30_Sub1.method806(Unsorted.menuOptionCount + -1);
+						BufferedDataStream.method806(Unsorted.menuOptionCount + -1);
 					}
 				}
 			} else if(NPCDefinition.anInt1297 == Class163_Sub1.anInt2993 && Class38_Sub1.anInt2614 == Class38_Sub1.anInt2612) {
 				Unsorted.anInt3660 = 0;
 				if(ClientCommands.shiftClickEnabled && ObjectDefinition.aBooleanArray1490[81] && Unsorted.menuOptionCount > 2) {
-					Class3_Sub30_Sub1.method806(Unsorted.menuOptionCount - 2);
+					BufferedDataStream.method806(Unsorted.menuOptionCount - 2);
 				} else {
-					Class3_Sub30_Sub1.method806(Unsorted.menuOptionCount - 1);
+					BufferedDataStream.method806(Unsorted.menuOptionCount - 1);
 				}
 			} else {
 				Class168.anInt2099 = Class38_Sub1.anInt2614;
@@ -100,37 +99,16 @@ public final class TextureOperation9 extends TextureOperation {
 		}
 	}
 
-	static void method204(int var0) {
+	static void method204() {
 		try {
 			//Client Resize.
 			TextureOperation12.outgoingBuffer.putOpcode(243);
 			TextureOperation12.outgoingBuffer.writeByte(Class83.getWindowType());
 			TextureOperation12.outgoingBuffer.writeShort(Class23.canvasWidth);
-			if(var0 != -3) {
-				anInt3103 = -41;
-			}
-
 			TextureOperation12.outgoingBuffer.writeShort(Class140_Sub7.canvasHeight);
 			TextureOperation12.outgoingBuffer.writeByte(Unsorted.anInt3671);
 		} catch (RuntimeException var2) {
-			throw ClientErrorException.clientError(var2, "ej.C(" + var0 + ')');
-		}
-	}
-
-	static void method205(CacheIndex var0, CacheIndex var2, Interface4 var3) {
-		try {
-			aClass153_1967 = var0;
-			Class58.anInterface4_915 = var3;
-			Class3_Sub24_Sub3.aClass153_3490 = var2;
-			if(Class3_Sub24_Sub3.aClass153_3490 != null) {
-				Class83.anInt1156 = Class3_Sub24_Sub3.aClass153_3490.getFileAmount(1);
-			}
-
-			if(aClass153_1967 != null) {
-				RenderAnimationDefinition.anInt377 = aClass153_1967.getFileAmount(1);
-			}
-		} catch (RuntimeException var5) {
-			throw ClientErrorException.clientError(var5, "ej.E(" + (var0 != null?"{...}":"null") + ',' + 115 + ',' + (var2 != null?"{...}":"null") + ',' + (var3 != null?"{...}":"null") + ')');
+			throw ClientErrorException.clientError(var2, "ej.C(" + -3 + ')');
 		}
 	}
 
@@ -142,7 +120,7 @@ public final class TextureOperation9 extends TextureOperation {
 		try {
 			int[] var4 = this.aClass114_2382.method1709(var1);
 			if(this.aClass114_2382.aBoolean1580) {
-				int[] var5 = this.method152(0, !this.aBoolean3104?var1:Class3_Sub20.anInt2487 + -var1, 32755);
+				int[] var5 = this.method152(0, !this.aBoolean3104?var1:Class3_Sub20.anInt2487 + -var1);
 				if(this.aBoolean3100) {
 					for(int var6 = 0; var6 < Class113.anInt1559; ++var6) {
 						var4[var6] = var5[-var6 + RenderAnimationDefinition.anInt396];

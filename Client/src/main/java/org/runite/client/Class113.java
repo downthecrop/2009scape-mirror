@@ -3,7 +3,6 @@ package org.runite.client;
 final class Class113 {
 
     static int interfacePacketCounter = 0;
-    static int anInt1552 = 0;
     static int anInt1559;
     int anInt1544;
     int anInt1545;

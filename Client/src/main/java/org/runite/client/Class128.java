@@ -30,10 +30,10 @@ final class Class128 {
     static void method1760(int var0, int var2) {
         try {
             if (WorldListCountry.localPlane > 3 || WorldListCountry.localPlane < 0) {
-                System.err.println("Local plane " + WorldListCountry.localPlane + " is out of bounds - rendering log=" + Arrays.toString(Class163_Sub3.PLAYER_RENDER_LOG) + "!");
+                System.err.println("Local plane " + WorldListCountry.localPlane + " is out of bounds - rendering log=" + Arrays.toString(PlayerRendering.PLAYER_RENDER_LOG) + "!");
                 WorldListCountry.localPlane %= 4;
             }
-            Class61 var3 = TextureOperation0.aClass61ArrayArrayArray3273[WorldListCountry.localPlane][var2][var0];
+            LinkedList var3 = Class39.aLinkedListArrayArrayArray3273[WorldListCountry.localPlane][var2][var0];
             if (var3 == null) {
                 ObjectDefinition.method1688(WorldListCountry.localPlane, var2, var0);
             } else {
@@ -85,7 +85,7 @@ final class Class128 {
 
     static Model method1763(int var1, int var2, int var3, int var4, Model var5, int var6) {
         try {
-            Model var9 = (Model) Class61.aReferenceCache_939.get(var3);
+            Model var9 = (Model) LinkedList.aReferenceCache_939.get(var3);
             if (var9 == null) {
                 Model_Sub1 var10 = Model_Sub1.method2015(CacheIndex.modelsIndex, var3);
                 if (var10 == null) {
@@ -93,7 +93,7 @@ final class Class128 {
                 }
 
                 var9 = var10.method2008(64, 768, -50, -10, -50);
-                Class61.aReferenceCache_939.put(var9, var3);
+                LinkedList.aReferenceCache_939.put(var9, var3);
             }
 
             int var17 = var5.method1884();

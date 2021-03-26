@@ -126,7 +126,7 @@ final class Class141 {
         HDToolKit.method1847(1);
         HDToolKit.method1823();
         HDToolKit.method1837(false);
-        Class3_Sub28_Sub4.method551(0, 0);
+        Unsorted.method551(0, 0);
         var6.glDepthMask(false);
 
         for (int var7 = 0; var7 < anInt1844; ++var7) {

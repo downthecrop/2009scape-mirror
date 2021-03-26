@@ -59,7 +59,7 @@ public final class Texture {
                     ++var3;
                 }
 
-                if (textureOperation.method155((byte) 19) >= 0) {
+                if (textureOperation.getSpriteFrame() >= 0) {
                     ++var4;
                 }
 
@@ -87,7 +87,7 @@ public final class Texture {
                 }
 
                 var9 = textureOperation.method159(4);
-                int var10 = textureOperation.method155((byte) 19);
+                int var10 = textureOperation.getSpriteFrame();
                 if (var9 > 0) {
                     this.anIntArray1144[var3++] = var9;
                 }
@@ -122,7 +122,7 @@ public final class Texture {
                 if (var7 == -1) {
                     var8 = Class102.player;
                 } else if (var7 < Class159.localPlayerCount) {
-                    var8 = TextureOperation0.players[Class56.localPlayerIndexes[var7]];
+                    var8 = Unsorted.players[Class56.localPlayerIndexes[var7]];
                 } else {
                     var8 = NPC.npcs[Class15.localNPCIndexes[-Class159.localPlayerCount + var7]];
                 }
@@ -494,10 +494,10 @@ public final class Texture {
             int codes = var1.readUnsignedByte();
             for (int var5 = 0; var5 < codes; ++var5) {
                 int opcode = var1.readUnsignedByte();
-                var3.method157(opcode, var1, true);
+                var3.decode(opcode, var1);
             }
 
-            var3.method158(16251);
+            var3.postDecode();
             return var3;
         } catch (RuntimeException var7) {
             throw ClientErrorException.clientError(var7, "qk.B(" + (byte) -67 + ',' + (var1 != null ? "{...}" : "null") + ')');
@@ -648,7 +648,7 @@ public final class Texture {
                         var20 = 0;
                     }
 
-                    var20 = Class3_Sub30_Sub1.anIntArray3804[var20];
+                    var20 = BufferedDataStream.anIntArray3804[var20];
                     int var22 = var18[var25] >> 4;
                     int var21 = var17[var25] >> 4;
                     if (var21 > 255) {
@@ -663,12 +663,12 @@ public final class Texture {
                         var22 = 255;
                     }
 
-                    var21 = Class3_Sub30_Sub1.anIntArray3804[var21];
+                    var21 = BufferedDataStream.anIntArray3804[var21];
                     if (var22 < 0) {
                         var22 = 0;
                     }
 
-                    var22 = Class3_Sub30_Sub1.anIntArray3804[var22];
+                    var22 = BufferedDataStream.anIntArray3804[var22];
                     var10[var14++] = (var20 << 16) - -(var21 << 8) + var22;
                     if (var2) {
                         var14 += var3 + -1;
@@ -749,7 +749,7 @@ public final class Texture {
                         var19 = 255;
                     }
 
-                    var17 = Class3_Sub30_Sub1.anIntArray3804[var17];
+                    var17 = BufferedDataStream.anIntArray3804[var17];
                     if (var19 < 0) {
                         var19 = 0;
                     }
@@ -758,8 +758,8 @@ public final class Texture {
                         var18 = 0;
                     }
 
-                    var18 = Class3_Sub30_Sub1.anIntArray3804[var18];
-                    var19 = Class3_Sub30_Sub1.anIntArray3804[var19];
+                    var18 = BufferedDataStream.anIntArray3804[var18];
+                    var19 = BufferedDataStream.anIntArray3804[var19];
                     int var20;
                     if (var17 == 0 && var18 == 0 && var19 == 0) {
                         var20 = 0;

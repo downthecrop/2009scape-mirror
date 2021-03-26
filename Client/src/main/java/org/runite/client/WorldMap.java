@@ -65,9 +65,9 @@ final class WorldMap extends Node {
                     /* End Minimap Zoom */
 
 
-                    int var1 = -TextureOperation37.anInt3256 + (Class102.player.anInt2819 >> 7) + Class131.anInt1716;
+                    int var1 = -TextureOperation37.anInt3256 + (Class102.player.xAxis >> 7) + Class131.anInt1716;
                     var1 += -5 + (int) (Math.random() * 10.0D);
-                    int var2 = -Texture.anInt1152 + -(Class102.player.anInt2829 >> 7) + Unsorted.anInt65 + -1 + Class108.anInt1460;
+                    int var2 = -Texture.anInt1152 + -(Class102.player.zAxis >> 7) + Unsorted.anInt65 + -1 + Class108.anInt1460;
                     var2 += -5 + (int) (Math.random() * 10.0D);
                     if (var1 >= 0 && var1 < Class23.anInt455 && 0 <= var2 && Class108.anInt1460 > var2) {
                         Class3_Sub28_Sub1.anInt3536 = var1;
@@ -98,26 +98,26 @@ final class WorldMap extends Node {
                 } else if (anInt2737 == 20) {
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: World Map Stage 20: String given: " + Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561.properlyCapitalize().toString());
-                    Class15.method889(new DataBuffer(aClass153_3210.method2123(TextCore.worldmapUnderlay, Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map underlay
+                    Class15.method889(new DataBuffer(aClass153_3210.method2123(RSString.parse("underlay"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map underlay
                     anInt2737 = 30;
                     Class163_Sub1.method2210(true);
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 30) {
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: World Map Stage 30: String given: " + Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561.properlyCapitalize().toString());
-                    Class163_Sub2.method2219(new DataBuffer(aClass153_3210.method2123(TextCore.worldmapOverlay, Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map overlay (water)
+                    Class163_Sub2.method2219(new DataBuffer(aClass153_3210.method2123(RSString.parse("overlay"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map overlay (water)
                     anInt2737 = 40;
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 40) {
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: World Map Stage 40: String given: " + Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561.properlyCapitalize().toString());
-                    TextureOperation25.method328(new DataBuffer(aClass153_3210.method2123(TextCore.worldmapOverlay2, Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//unsure
+                    TextureOperation25.method328(new DataBuffer(aClass153_3210.method2123(RSString.parse("overlay2"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//unsure
                     anInt2737 = 50;
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 50) {
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: World Map Stage 50: String given: " + Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561.properlyCapitalize().toString());
-                    Class96.method1587(new DataBuffer(aClass153_3210.method2123(TextCore.aClass94_422, Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map object drawing (buildings etc)
+                    Class96.method1587(new DataBuffer(aClass153_3210.method2123(RSString.parse("loc"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map object drawing (buildings etc)
                     anInt2737 = 60;
                     Class163_Sub1.method2210(true);
                     Class75_Sub4.method1355();
@@ -186,42 +186,6 @@ final class WorldMap extends Node {
         }
     }
 
-    static void method628(int var1, int var2, Player var3) {
-        try {
-
-            if (var3.anInt2771 == var2 && var2 != -1) {
-                SequenceDefinition var4 = SequenceDefinition.getAnimationDefinition(var2);
-                int var5 = var4.delayType;
-                if (1 == var5) {
-                    var3.anInt2828 = var1;
-                    var3.anInt2760 = 0;
-                    var3.anInt2776 = 1;
-                    var3.anInt2832 = 0;
-                    var3.anInt2773 = 0;
-                    Unsorted.method1470(var3.anInt2829, var4, 183921384, var3.anInt2819, Class102.player == var3, var3.anInt2832);
-                }
-
-                if (var5 == 2) {
-                    var3.anInt2773 = 0;
-                }
-            } else if (-1 == var2 || var3.anInt2771 == -1 || SequenceDefinition.getAnimationDefinition(var2).forcedPriority >= SequenceDefinition.getAnimationDefinition(var3.anInt2771).forcedPriority) {
-                var3.anInt2776 = 1;
-                var3.anInt2832 = 0;
-                var3.anInt2828 = var1;
-                var3.anInt2811 = var3.anInt2816;
-                var3.anInt2773 = 0;
-                var3.anInt2760 = 0;
-                var3.anInt2771 = var2;
-                if (var3.anInt2771 != -1) {
-                    Unsorted.method1470(var3.anInt2829, SequenceDefinition.getAnimationDefinition(var3.anInt2771), 183921384, var3.anInt2819, var3 == Class102.player, var3.anInt2832);
-                }
-            }
-
-        } catch (RuntimeException var6) {
-            throw ClientErrorException.clientError(var6, "pa.C(" + 0 + ',' + var1 + ',' + var2 + ',' + (var3 != null ? "{...}" : "null") + ')');
-        }
-    }
-
     public static void drawWorldMap(int var0, int var2, int var3, int var4) {
         try {
             if (anInt2737 < 100) {
@@ -287,7 +251,7 @@ final class WorldMap extends Node {
                         var13 = 16711680;
                     }
 
-                    FontType.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_1630, RSString.stringAnimator(var12), TextCore.aClass94_3055}), var9, var10, var13, -1);
+                    FontType.plainFont.drawStringRightAnchor(RSString.stringCombiner(new RSString[]{TextCore.aClass94_1630, RSString.stringAnimator(var12), RSString.parse("k")}), var9, var10, var13, -1);
                 }
                 /* * * * * * * */
 

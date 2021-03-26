@@ -12,7 +12,7 @@ public final class TextureOperation22 extends TextureOperation {
       try {
          int[] var3 = this.aClass114_2382.method1709(var1);
          if(this.aClass114_2382.aBoolean1580) {
-            int[] var4 = this.method152(0, var1, 32755);
+            int[] var4 = this.method152(0, var1);
 
             for(int var5 = 0; var5 < Class113.anInt1559; ++var5) {
                var3[var5] = 4096 - var4[var5];
@@ -41,9 +41,9 @@ public final class TextureOperation22 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if(var3) {
+         if(true) {
             if(var1 == 0) {
                this.aBoolean2375 = var2.readUnsignedByte() == 1;
             }

@@ -55,7 +55,7 @@ final class Class101 {
     public static void method1608(byte var0) {
         try {
             CacheIndex.npcConfigIndex = null;
-            Class136.aClass61_1424 = null;
+            Class136.aLinkedList_1424 = null;
             aShortArrayArray1429 = null;
             anIntArray1426 = null;
             aClass3_Sub24_Sub4_1421 = null;

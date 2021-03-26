@@ -211,9 +211,9 @@ public final class TextureOperation25 extends TextureOperation {
         }
     }
 
-    final void method157(int var1, DataBuffer var2, boolean var3) {
+    final void decode(int var1, DataBuffer var2) {
         try {
-            if (var3) {
+            if (true) {
                 if (var1 == 0) {
                     this.anInt3404 = var2.readUnsignedShort();
                 } else if (1 == var1) {

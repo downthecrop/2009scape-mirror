@@ -6,11 +6,15 @@ import org.rs09.Discord;
 import org.rs09.SystemLogger;
 import org.rs09.client.config.GameConfig;
 import org.rs09.client.console.DeveloperConsole;
+import org.rs09.client.constants.gametype.MechscapeGameAppearance;
+import org.rs09.client.constants.gametype.RunescapeGameAppearance;
 import org.rs09.client.data.HashTable;
 import org.rs09.client.filestore.resources.configs.enums.EnumDefinitionProvider;
 import org.rs09.client.filestore.resources.configs.structs.StructDefinitionProvider;
 import org.rs09.client.net.Connection;
 import org.runite.client.drawcalls.LoadingBox;
+import org.runite.client.drawcalls.StartupLoadingBarInitial;
+import org.runite.client.drawcalls.StartupLoadingBar;
 
 import java.awt.*;
 import java.io.IOException;
@@ -20,6 +24,8 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Objects;
 
+import static org.rs09.client.constants.Parameter.*;
+
 public final class Client extends GameShell {
 
     /**
@@ -27,27 +33,25 @@ public final class Client extends GameShell {
      */
     private static final long serialVersionUID = 8336806252605101745L;
     public static int messageToDisplay = -2;
+    public static RSString loadingBarTextToDisplay = RSString.parse("");
     static HashTable aHashTable_2194 = new HashTable(16);
     static Class3_Sub11[][] aClass3_Sub11ArrayArray2199;
     static int[] anIntArray2200;
     static int ZOOM = 600;
     static int currentPort;
     static int rectDebugInt = 0;
-    static int LoadingStageNumber = 10;
+    public static int LoadingStageNumber = 10;
     static int anInt869;
     static int loginScreenInterfaceID;
-    static short[] aShortArray2219 = new short[]{(short) -4160, (short) -4163, (short) -8256, (short) -8259, (short) 22461};
     static int anInt2275 = 1;
     static int anInt2317 = 0;
     static int anInt3068 = 0;
     static int[] anIntArray3288 = new int[]{4, 4, 1, 2, 6, 4, 2, 49, 2, 2, 2, 2, 2, 2, 2, 2, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1};
     static long aLong3296 = 0L;
-    static short[] aShortArray3349 = new short[]{(short) -10304, (short) 9104, (short) -1, (short) -1, (short) -1};
-    static short[][] aShortArrayArray2634 = new short[][]{{(short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 4, (short) 24, (short) 44, (short) 64, (short) 84, (short) 104, (short) 304, (short) 678, (short) 698, (short) 550, (short) 934, (short) 954, (short) 6448, (short) 6946, (short) 6966, (short) 2352, (short) 2726, (short) 2746, (short) 10544, (short) 10918, (short) 10938, (short) 10304, (short) 10550, (short) 10570, (short) 14640, (short) 15014, (short) 15034, (short) 19760, (short) 20134, (short) 20154, (short) -29392, (short) -29018, (short) -28998, (short) 31024, (short) 31270, (short) 31290, (short) -24272, (short) -23898, (short) -23878, (short) -19152, (short) -18778, (short) -18758, (short) -14032, (short) -13658, (short) -13638, (short) -6864, (short) -6490, (short) -6470, (short) 516, (short) 536, (short) 6788, (short) 6808, (short) 11012, (short) 11032, (short) 14980, (short) 15000, (short) 21124, (short) 21144, (short) -28924, (short) -28904, (short) -22012, (short) -21992, (short) -12924, (short) -12904}, {(short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 10339, (short) 10574, (short) 10425, (short) 10398, (short) 10345, (short) 7512, (short) 8507, (short) 7378, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0}, {(short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 4, (short) 24, (short) 44, (short) 64, (short) 84, (short) 104, (short) 304, (short) 678, (short) 698, (short) 550, (short) 934, (short) 954, (short) 6448, (short) 6946, (short) 6966, (short) 2352, (short) 2726, (short) 2746, (short) 10544, (short) 10918, (short) 10938, (short) 10304, (short) 10550, (short) 10570, (short) 14640, (short) 15014, (short) 15034, (short) 19760, (short) 20134, (short) 20154, (short) -29392, (short) -29018, (short) -28998, (short) 31024, (short) 31270, (short) 31290, (short) -24272, (short) -23898, (short) -23878, (short) -19152, (short) -18778, (short) -18758, (short) -14032, (short) -13658, (short) -13638, (short) -6864, (short) -6490, (short) -6470, (short) 516, (short) 536, (short) 6788, (short) 6808, (short) 11012, (short) 11032, (short) 14980, (short) 15000, (short) 21124, (short) 21144, (short) -28924, (short) -28904, (short) -22012, (short) -21992, (short) -12924, (short) -12904}, {(short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 13753, (short) 13737, (short) 13719, (short) 13883, (short) 13863, (short) 13974, (short) 19643, (short) 18601, (short) 16532, (short) 23993, (short) 25121, (short) 24980, (short) 26944, (short) 26921, (short) 24854, (short) 27191, (short) 27171, (short) 26130, (short) 26941, (short) 28696, (short) 30100, (short) 12477, (short) 10407, (short) 10388, (short) 10685, (short) 10665, (short) 10646, (short) 6711, (short) 6693, (short) 6674, (short) 6965, (short) 7073, (short) 7056, (short) 2361, (short) 4387, (short) 3346, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0}, {(short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 0, (short) 4, (short) 24, (short) 44, (short) 64, (short) 84, (short) 104, (short) 304, (short) 678, (short) 698, (short) 550, (short) 934, (short) 954, (short) 6448, (short) 6946, (short) 6966, (short) 2352, (short) 2726, (short) 2746, (short) 10544, (short) 10918, (short) 10938, (short) 10304, (short) 10550, (short) 10570, (short) 14640, (short) 15014, (short) 15034, (short) 19760, (short) 20134, (short) 20154, (short) -29392, (short) -29018, (short) -28998, (short) 31024, (short) 31270, (short) 31290, (short) -24272, (short) -23898, (short) -23878, (short) -19152, (short) -18778, (short) -18758, (short) -14032, (short) -13658, (short) -13638, (short) -6864, (short) -6490, (short) -6470, (short) 516, (short) 536, (short) 6788, (short) 6808, (short) 11012, (short) 11032, (short) 14980, (short) 15000, (short) 21124, (short) 21144, (short) -28924, (short) -28904, (short) -22012, (short) -21992, (short) -12924, (short) -12904}};
     static Class3_Sub24_Sub4 aClass3_Sub24_Sub4_1193;
     static long aLong1310 = 0L;
     static int anInt1354 = 0;
-    static Class61 aClass61_1471 = new Class61();
+    static LinkedList aLinkedList_1471 = new LinkedList();
     static Class30 aClass30_1572;
     static int[] anIntArray3780 = new int[32];
     static boolean paramAdvertisementSuppressed = false;
@@ -78,7 +82,7 @@ public final class Client extends GameShell {
 
     static void method375(CacheIndex var1, CacheIndex var2) {
         try {
-            Class10.aClass153_152 = var1;
+            Class24.aClass153_152 = var1;
             LoginHandler.aClass153_1680 = var2;
             Class25.anInt497 = LoginHandler.aClass153_1680.getFileAmount(3);
         } catch (RuntimeException var4) {
@@ -101,7 +105,7 @@ public final class Client extends GameShell {
             return null;
         } else {
             for (int var2 = 0; var2 < var1; ++var2) {
-                var0 = Class7.getRSInterface(var0.parentId);
+                var0 = Unsorted.getRSInterface(var0.parentId);
                 if (var0 == null) {
                     return null;
                 }
@@ -125,100 +129,94 @@ public final class Client extends GameShell {
      */
     public static void main(String[] args) {
         try {
+            if (args.length != 4) {
+                invalidArgument("argument count");
+            }
+
+            int language = -1;
+
+            ObjectDefinition.paramWorldID = Integer.parseInt(args[0]);
+
+            Class44.paramModeWhere = LOCAL_ENVIRONMENT;
+
+            switch (args[1]) {
+                case "live":
+                    TextureOperation20.paramModeWhat = LIVE_SERVER;
+                    break;
+                case "rc":
+                    TextureOperation20.paramModeWhat = RELEASE_CANDIDATE;
+                    break;
+                case "wip":
+                    TextureOperation20.paramModeWhat = WORK_IN_PROGRESS;
+                    break;
+                default:
+                    invalidArgument("modewhat");
+                    break;
+            }
+
+            paramAdvertisementSuppressed = false;
+
             try {
-                if (args.length != 4) {
-                    invalidArgument("argument count");
-                }
-
-                int language = -1;
-
-                ObjectDefinition.paramWorldID = Integer.parseInt(args[0]);
-
-                Class44.paramModeWhere = 2;
-
-                switch (args[1]) {
-                    case "live":
-                        TextureOperation20.paramModeWhat = 0;
-                        break;
-                    case "rc":
-                        TextureOperation20.paramModeWhat = 1;
-                        break;
-                    case "wip":
-                        TextureOperation20.paramModeWhat = 2;
-                        break;
-                    default:
-                        invalidArgument("modewhat");
-                        break;
-                }
-
-                paramAdvertisementSuppressed = false;
-
-                try {
-                    byte[] languageSelection = args[2].getBytes(StandardCharsets.ISO_8859_1);
+                byte[] languageSelection = args[2].getBytes(StandardCharsets.ISO_8859_1);
                     /*
                         Accepts en, de, fr, pt
                      */
-                    language = TextureOperation15.compareEnteredLanguageArgument(TextureOperation33.bufferToString(languageSelection, languageSelection.length, 0));
-                } catch (Exception ignored) {
+                language = TextureOperation15.compareEnteredLanguageArgument(TextureOperation33.bufferToString(languageSelection, languageSelection.length, 0));
+            } catch (Exception ignored) {
 
-                }
-
-                if (language == -1) {
-                    switch (args[2]) {
-                        case "english":
-                            Class3_Sub20.paramLanguage = 0;
-                            break;
-                        case "german":
-                            Class3_Sub20.paramLanguage = 1;
-                            break;
-                        case "french":
-                            Class3_Sub20.paramLanguage = 2;
-                            break;
-                        default:
-                            invalidArgument("language");
-                            break;
-                    }
-                } else {
-                    Class3_Sub20.paramLanguage = language;
-                }
-
-                Unsorted.languageSetter(Class3_Sub20.paramLanguage);
-
-                Class163_Sub2_Sub1.paramObjectTagEnabled = false;
-                Unsorted.paramJavaScriptEnabled = false;
-
-                switch (args[3]) {
-                    case "game0":
-                        Class158.paramGameTypeID = 0;
-                        break;
-                    case "game1":
-                        Class158.paramGameTypeID = 1;
-                        break;
-                    default:
-                        invalidArgument("game");
-                        break;
-                }
-
-                Class3_Sub31.paramCountryID = 0;
-
-                Class106.paramUserUsingInternetExplorer = false;
-
-                Class3_Sub26.paramAffid = 0;
-
-                Class163_Sub2.paramSettings = TextCore.emptyJagexString;
-
-                Client client = new Client();
-                clientInstance = client;
-                client.launch();
-
-                GameShell.frame.setLocation(40, 40);
-
-            } catch (Exception var4) {
-                Class49.reportError(null, var4, (byte) 119);
             }
 
-        } catch (RuntimeException var5) {
-            throw ClientErrorException.clientError(var5, "client.main(" + (args != null ? "{...}" : "null") + ')');
+            if (language == -1) {
+                switch (args[2]) {
+                    case "english":
+                        Class3_Sub20.paramLanguage = LANGUAGE_ENGLISH;
+                        break;
+                    case "german":
+                        Class3_Sub20.paramLanguage = LANGUAGE_GERMAN;
+                        break;
+                    case "french":
+                        Class3_Sub20.paramLanguage = LANGUAGE_FRENCH;
+                        break;
+                    default:
+                        invalidArgument("language");
+                        break;
+                }
+            } else {
+                Class3_Sub20.paramLanguage = language;
+            }
+
+            Unsorted.languageSetter(Class3_Sub20.paramLanguage);
+
+            Class163_Sub2_Sub1.paramObjectTagEnabled = false;
+            Unsorted.paramJavaScriptEnabled = false;
+
+            switch (args[3]) {
+                case "game0":
+                    Class158.paramGameTypeID = GAME_TYPE_RUNESCAPE;
+                    break;
+                case "game1":
+                    Class158.paramGameTypeID = GAME_TYPE_MECHSCAPE;
+                    break;
+                default:
+                    invalidArgument("game");
+                    break;
+            }
+
+            Class3_Sub31.paramCountryID = 0;
+
+            Class106.paramUserUsingInternetExplorer = false;
+
+            Class3_Sub26.paramAffid = NO_AFFILIATE;
+
+            Class163_Sub2.paramSettings = RSString.parse("");
+
+            Client client = new Client();
+            clientInstance = client;
+            client.launch();
+            GameShell.frame.setLocation(40, 40);
+
+        } catch (Exception var4) {
+            Class49.reportError(null, var4);
         }
     }
 
@@ -263,7 +261,7 @@ public final class Client extends GameShell {
                         }
 
                         if (inter.aBoolean219 && Class126.anInt1676 >= var12 && Unsorted.anInt1709 >= var13 && Class126.anInt1676 < var14 && Unsorted.anInt1709 < var15) {
-                            for (CS2Script var27 = (CS2Script) aClass61_1471.method1222(); var27 != null; var27 = (CS2Script) aClass61_1471.method1221()) {
+                            for (CS2Script var27 = (CS2Script) aLinkedList_1471.method1222(); var27 != null; var27 = (CS2Script) aLinkedList_1471.method1221()) {
                                 if (var27.aBoolean2446) {
                                     var27.unlink();
                                     var27.aClass11_2449.aBoolean163 = false;
@@ -304,7 +302,7 @@ public final class Client extends GameShell {
                                 } else if (inter.anIntArray310 == null || Class44.anInt719 >= inter.anIntArray310[var19]) {
                                     byte var20 = inter.aByteArray231[var19];
                                     if (var20 == 0 || ((var20 & 2) == 0 || ObjectDefinition.aBooleanArray1490[86]) && ((var20 & 1) == 0 || ObjectDefinition.aBooleanArray1490[82]) && ((var20 & 4) == 0 || ObjectDefinition.aBooleanArray1490[81])) {
-                                        Unsorted.method66(TextCore.emptyJagexString, -1, var19 + 1, (byte) -29, inter.componentHash);
+                                        Unsorted.method66(RSString.parse(""), -1, var19 + 1, (byte) -29, inter.componentHash);
                                         var21 = inter.anIntArray299[var19];
                                         if (inter.anIntArray310 == null) {
                                             inter.anIntArray310 = new int[inter.aByteArray263.length];
@@ -341,7 +339,7 @@ public final class Client extends GameShell {
                                 var30.aClass11_2449 = inter;
                                 var30.scrollbarScrollAmount = Class29.anInt561;
                                 var30.arguments = inter.anObjectArray183;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (Class56.aClass11_886 != null || Class67.aClass11_1017 != null || Class38_Sub1.aBoolean2615 || inter.anInt189 != 1400 && Class3_Sub19.anInt2475 > 0) {
@@ -429,7 +427,7 @@ public final class Client extends GameShell {
                                     var30.worldSelectCursorPositionX = Class163_Sub1.anInt2993 - var10;
                                     var30.scrollbarScrollAmount = Class38_Sub1.anInt2614 - var11;
                                     var30.arguments = inter.anObjectArray165;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
                             }
 
@@ -440,7 +438,7 @@ public final class Client extends GameShell {
                                 var30.worldSelectCursorPositionX = Class126.anInt1676 - var10;
                                 var30.scrollbarScrollAmount = Unsorted.anInt1709 - var11;
                                 var30.arguments = inter.anObjectArray170;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (inter.aBoolean188 && !var25) {
@@ -452,7 +450,7 @@ public final class Client extends GameShell {
                                     var30.worldSelectCursorPositionX = Class126.anInt1676 - var10;
                                     var30.scrollbarScrollAmount = Unsorted.anInt1709 - var11;
                                     var30.arguments = inter.anObjectArray239;
-                                    Class65.aClass61_983.method1215(var30);
+                                    Class65.aLinkedList_983.method1215(var30);
                                 }
                             }
 
@@ -463,7 +461,7 @@ public final class Client extends GameShell {
                                 var30.worldSelectCursorPositionX = Class126.anInt1676 - var10;
                                 var30.scrollbarScrollAmount = Unsorted.anInt1709 - var11;
                                 var30.arguments = inter.anObjectArray180;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (!inter.aBoolean163 && var26) {
@@ -475,7 +473,7 @@ public final class Client extends GameShell {
                                     var30.worldSelectCursorPositionX = Class126.anInt1676 - var10;
                                     var30.scrollbarScrollAmount = Unsorted.anInt1709 - var11;
                                     var30.arguments = inter.anObjectArray248;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
                             }
 
@@ -486,7 +484,7 @@ public final class Client extends GameShell {
                                 var30.worldSelectCursorPositionX = Class126.anInt1676 - var10;
                                 var30.scrollbarScrollAmount = Unsorted.anInt1709 - var11;
                                 var30.arguments = inter.anObjectArray276;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (inter.aBoolean163 && !var26) {
@@ -498,7 +496,7 @@ public final class Client extends GameShell {
                                     var30.worldSelectCursorPositionX = Class126.anInt1676 - var10;
                                     var30.scrollbarScrollAmount = Unsorted.anInt1709 - var11;
                                     var30.arguments = inter.anObjectArray281;
-                                    Class65.aClass61_983.method1215(var30);
+                                    Class65.aLinkedList_983.method1215(var30);
                                 }
                             }
 
@@ -506,7 +504,7 @@ public final class Client extends GameShell {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray269;
-                                PacketParser.aClass61_82.method1215(var30);
+                                PacketParser.aLinkedList_82.method1215(var30);
                             }
 
                             CS2Script var22;
@@ -521,7 +519,7 @@ public final class Client extends GameShell {
                                                 var22 = new CS2Script();
                                                 var22.aClass11_2449 = inter;
                                                 var22.arguments = inter.anObjectArray161;
-                                                aClass61_1471.method1215(var22);
+                                                aLinkedList_1471.method1215(var22);
                                                 break label531;
                                             }
                                         }
@@ -530,7 +528,7 @@ public final class Client extends GameShell {
                                     var30 = new CS2Script();
                                     var30.aClass11_2449 = inter;
                                     var30.arguments = inter.anObjectArray161;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
 
                                 inter.anInt284 = PacketParser.anInt87;
@@ -547,7 +545,7 @@ public final class Client extends GameShell {
                                                 var22 = new CS2Script();
                                                 var22.aClass11_2449 = inter;
                                                 var22.arguments = inter.anObjectArray221;
-                                                aClass61_1471.method1215(var22);
+                                                aLinkedList_1471.method1215(var22);
                                                 break label512;
                                             }
                                         }
@@ -556,7 +554,7 @@ public final class Client extends GameShell {
                                     var30 = new CS2Script();
                                     var30.aClass11_2449 = inter;
                                     var30.arguments = inter.anObjectArray221;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
 
                                 inter.anInt242 = anInt2317;
@@ -573,7 +571,7 @@ public final class Client extends GameShell {
                                                 var22 = new CS2Script();
                                                 var22.aClass11_2449 = inter;
                                                 var22.arguments = inter.anObjectArray282;
-                                                aClass61_1471.method1215(var22);
+                                                aLinkedList_1471.method1215(var22);
                                                 break label493;
                                             }
                                         }
@@ -582,7 +580,7 @@ public final class Client extends GameShell {
                                     var30 = new CS2Script();
                                     var30.aClass11_2449 = inter;
                                     var30.arguments = inter.anObjectArray282;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
 
                                 inter.anInt213 = Class36.anInt641;
@@ -592,14 +590,14 @@ public final class Client extends GameShell {
                                 if (inter.anIntArray175 != null && Unsorted.anInt944 - inter.anInt255 <= 32) {
                                     label474:
                                     for (var19 = inter.anInt255; var19 < Unsorted.anInt944; ++var19) {
-                                        var29 = Class3_Sub28_Sub4.anIntArray3565[var19 & 31];
+                                        var29 = QuickChatDefinition.anIntArray3565[var19 & 31];
 
                                         for (var21 = 0; var21 < inter.anIntArray175.length; ++var21) {
                                             if (inter.anIntArray175[var21] == var29) {
                                                 var22 = new CS2Script();
                                                 var22.aClass11_2449 = inter;
                                                 var22.arguments = inter.anObjectArray174;
-                                                aClass61_1471.method1215(var22);
+                                                aLinkedList_1471.method1215(var22);
                                                 break label474;
                                             }
                                         }
@@ -608,7 +606,7 @@ public final class Client extends GameShell {
                                     var30 = new CS2Script();
                                     var30.aClass11_2449 = inter;
                                     var30.arguments = inter.anObjectArray174;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
 
                                 inter.anInt255 = Unsorted.anInt944;
@@ -625,7 +623,7 @@ public final class Client extends GameShell {
                                                 var22 = new CS2Script();
                                                 var22.aClass11_2449 = inter;
                                                 var22.arguments = inter.anObjectArray158;
-                                                aClass61_1471.method1215(var22);
+                                                aLinkedList_1471.method1215(var22);
                                                 break label455;
                                             }
                                         }
@@ -634,7 +632,7 @@ public final class Client extends GameShell {
                                     var30 = new CS2Script();
                                     var30.aClass11_2449 = inter;
                                     var30.arguments = inter.anObjectArray158;
-                                    aClass61_1471.method1215(var30);
+                                    aLinkedList_1471.method1215(var30);
                                 }
 
                                 inter.anInt311 = Class49.anInt815;
@@ -644,35 +642,35 @@ public final class Client extends GameShell {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray256;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (Class110.anInt1472 > inter.anInt234 && inter.anObjectArray156 != null) {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray156;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (Class167.anInt2087 > inter.anInt234 && inter.anObjectArray313 != null) {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray313;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (Class121.anInt1642 > inter.anInt234 && inter.anObjectArray268 != null) {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray268;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             if (Class140_Sub6.anInt2905 > inter.anInt234 && inter.anObjectArray315 != null) {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray315;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
 
                             inter.anInt234 = PacketParser.anInt3213;
@@ -683,7 +681,7 @@ public final class Client extends GameShell {
                                     var31.inputTextCode = Class133.inputTextCodeArray[var19];
                                     var31.anInt2443 = Class120.anIntArray1638[var19];
                                     var31.arguments = inter.anObjectArray220;
-                                    aClass61_1471.method1215(var31);
+                                    aLinkedList_1471.method1215(var31);
                                 }
                             }
 
@@ -691,7 +689,7 @@ public final class Client extends GameShell {
                                 var30 = new CS2Script();
                                 var30.aClass11_2449 = inter;
                                 var30.arguments = inter.anObjectArray217;
-                                aClass61_1471.method1215(var30);
+                                aLinkedList_1471.method1215(var30);
                             }
                         }
                     }
@@ -749,7 +747,7 @@ public final class Client extends GameShell {
         try {
             if (Class143.gameStage != 1000) {
                 boolean var2 = NPC.method1988();
-                if (var2 && Class83.aBoolean1158 && WorldListEntry.aClass155_2627 != null) {
+                if (var2 && AudioHandler.musicEffectPlaying && WorldListEntry.aClass155_2627 != null) {
                     WorldListEntry.aClass155_2627.method2158();
                 }
 
@@ -759,10 +757,10 @@ public final class Client extends GameShell {
 
                 int var4;
                 int var5;
-                if (null == TextureOperation30.aFrame3121) {
+                if (null == TextureOperation30.fullScreenFrame) {
                     Object var3;
                     if (GameShell.frame == null) {
-                        var3 = Class38.signlink.gameApplet;
+                        var3 = Class38.gameSignlink.gameApplet;
                     } else {
                         var3 = GameShell.frame;
                     }
@@ -775,10 +773,10 @@ public final class Client extends GameShell {
                         var5 -= var6.top + var6.bottom;
                     }
 
-                    if (var4 != Unsorted.anInt2334 || Class70.anInt1047 != var5) {
+                    if (var4 != Unsorted.frameWidth || Class70.frameHeight != var5) {
                         if (Signlink.osName.startsWith("mac")) {
-                            Unsorted.anInt2334 = var4;
-                            Class70.anInt1047 = var5;
+                            Unsorted.frameWidth = var4;
+                            Class70.frameHeight = var5;
                         } else {
                             Class119.method1729();
                         }
@@ -787,14 +785,14 @@ public final class Client extends GameShell {
                     }
                 }
 
-                if (TextureOperation30.aFrame3121 != null && !TextureOperation26.aBoolean3078 && (30 == Class143.gameStage || 10 == Class143.gameStage)) {
+                if (TextureOperation30.fullScreenFrame != null && !TextureOperation26.aBoolean3078 && (30 == Class143.gameStage || 10 == Class143.gameStage)) {
                     GameObject.graphicsSettings(false, Unsorted.anInt2577, -1, -1);
                 }
 
                 boolean var10 = false;
-                if (TextureOperation30.aBoolean3116) {
+                if (TextureOperation30.fullRedraw) {
                     var10 = true;
-                    TextureOperation30.aBoolean3116 = false;
+                    TextureOperation30.fullRedraw = false;
                 }
 
                 if (var10) {
@@ -811,11 +809,11 @@ public final class Client extends GameShell {
                         Discord.initialize();
                         Discord.updatePresence("At the login screen", "", "");
                     }
-                    Class3_Sub28_Sub1.updateLoadingBar(null, var10, Class3_Sub17.aClass94_2464, LoadingStageNumber);
+                    StartupLoadingBarInitial.draw(ColorCore.loadingbarcolor, var10, loadingBarTextToDisplay, LoadingStageNumber);
                 } else if (5 == Class143.gameStage) {
-                    Class3_Sub23.method406((byte) 117, false, FontType.bold);
+                    StartupLoadingBar.draw(false, FontType.bold);
                 } else if (Class143.gameStage == 10) {
-                    Class3_Sub17.method381(true);
+                    Class3_Sub17.method381();
                 } else if (25 != Class143.gameStage && Class143.gameStage != 28) {
                     if (Class143.gameStage == 30) {
                         Class49.method1127(0);
@@ -828,14 +826,14 @@ public final class Client extends GameShell {
                     }
 
                     var4 = 50 * (LinkableRSString.anInt2579 + -Class40.anInt3293) / LinkableRSString.anInt2579;
-                    LoadingBox.draw(false, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_3399, RSString.stringAnimator(var4), TextCore.aClass94_148}));
+                    LoadingBox.draw(false, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_3399, RSString.stringAnimator(var4), RSString.parse("(U(Y")}));
                 } else if (Class163_Sub2_Sub1.anInt4019 == 2) {
                     if (anInt2275 < Class162.anInt2038) {
                         anInt2275 = Class162.anInt2038;
                     }
 
                     var4 = (-Class162.anInt2038 + anInt2275) * 50 / anInt2275 + 50;
-                    LoadingBox.draw(false, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_3399, RSString.stringAnimator(var4), TextCore.aClass94_148}));
+                    LoadingBox.draw(false, RSString.stringCombiner(new RSString[]{TextCore.LoadingPleaseWait2, TextCore.aClass94_3399, RSString.stringAnimator(var4), RSString.parse("(U(Y")}));
                 } else {
                     LoadingBox.draw(false, TextCore.LoadingPleaseWait2);
                 }
@@ -883,16 +881,16 @@ public final class Client extends GameShell {
                     Class75_Sub3.sweepClientStartupReferenceCache();
                 }
 
-                if (Unsorted.aBoolean2146 && 10 == Class143.gameStage && Class3_Sub28_Sub12.anInt3655 != -1) {
+                if (Unsorted.aBoolean2146 && 10 == Class143.gameStage && ConfigInventoryDefinition.anInt3655 != -1) {
                     Unsorted.aBoolean2146 = false;
-                    Class119.method1730(Class38.signlink);
+                    Class119.method1730(Class38.gameSignlink);
                 }
 
                 DeveloperConsole.INSTANCE.postDraw();
-//				if (DeveloperConsole.INSTANCE.getOpen()) {
-//				    DeveloperConsole.INSTANCE.draw();
-////					System.out.println("Draw developer console");
-//				}
+				if (DeveloperConsole.INSTANCE.getOpen()) {
+				    DeveloperConsole.INSTANCE.draw();
+//					System.out.println("Draw developer console");
+				}
                 DiscordRPC.discordRunCallbacks();
             }
         } catch (RuntimeException var9) {
@@ -906,13 +904,13 @@ public final class Client extends GameShell {
                 HDToolKit.method1842();
             }
 
-            if (null != TextureOperation30.aFrame3121) {
-                Unsorted.method593(TextureOperation30.aFrame3121, Class38.signlink);
-                TextureOperation30.aFrame3121 = null;
+            if (null != TextureOperation30.fullScreenFrame) {
+                Unsorted.method593(TextureOperation30.fullScreenFrame, Class38.gameSignlink);
+                TextureOperation30.fullScreenFrame = null;
             }
 
-            if (null != Class38.signlink) {
-                Class38.signlink.method1442(this.getClass(), 0);
+            if (null != Class38.gameSignlink) {
+                Class38.gameSignlink.method1442(this.getClass(), 0);
             }
 
             if (null != TextureOperation20.aClass67_1443) {
@@ -976,8 +974,9 @@ public final class Client extends GameShell {
         try {
             GameConfig.WORLD = GameConfig.WORLD_OVERRIDE == -1 ? ObjectDefinition.paramWorldID : GameConfig.WORLD_OVERRIDE;
             ObjectDefinition.paramWorldID = GameConfig.WORLD_OVERRIDE == -1 ? 1 : GameConfig.WORLD_OVERRIDE;
+
             Class44.paramModeWhere = Integer.parseInt(Objects.requireNonNull(this.getParameter("modewhere")));
-            if (0 > Class44.paramModeWhere || 1 < Class44.paramModeWhere) {
+            if (Class44.paramModeWhere < LIVE_ENVIRONMENT || Class44.paramModeWhere > LOCAL_ENVIRONMENT) {
                 Class44.paramModeWhere = 0;
             }
 
@@ -1017,7 +1016,7 @@ public final class Client extends GameShell {
 
             Class163_Sub2.paramSettings = TextCore.aClass94_1745.getParamValue(this);
             if (Class163_Sub2.paramSettings == null) {
-                Class163_Sub2.paramSettings = TextCore.emptyJagexString;
+                Class163_Sub2.paramSettings = RSString.parse("");
             }
 
             String var5 = this.getParameter("country");
@@ -1044,42 +1043,53 @@ public final class Client extends GameShell {
             Class119.method1729();
             TextureOperation31.aCacheResourceWorker_3159 = new CacheResourceWorker();
             Class58.aJs5Worker_917 = new Js5Worker();
-            if (TextureOperation20.paramModeWhat != 0) {
-                Class3_Sub6.aByteArrayArray2287 = new byte[50][];
+
+            if (TextureOperation20.paramModeWhat != LIVE_ENVIRONMENT) {
+                Class3_Sub6.softReferenceTestArray = new byte[50][];
             }
 
             CS2Script.userCurrentWorldID = ObjectDefinition.paramWorldID;
-            Unsorted.method564(Class38.signlink);
+
+            Unsorted.parsePreferences(Class38.gameSignlink);
             SystemLogger.logInfo("port: " + Class53.anInt867);
             SystemLogger.logInfo("MSIP: " + GameConfig.IP_MANAGEMENT);
-            if (Class44.paramModeWhere == 0) {
+
+            if (Class44.paramModeWhere == LIVE_ENVIRONMENT) {
                 ClientErrorException.worldListHost = Objects.requireNonNull(this.getCodeBase()).getHost();
                 Class53.anInt867 = GameConfig.SERVER_PORT + ObjectDefinition.paramWorldID; //443 is secure port
                 anInt3773 = '\uaa4a';
-            } else if (Class44.paramModeWhere == 1) {
+
+            } else if (Class44.paramModeWhere == OFFICE_ENVIRONMENT) {
                 ClientErrorException.worldListHost = Objects.requireNonNull(this.getCodeBase()).getHost();
                 //System.out.println("port = " + Class53.anInt867);
                 Class53.anInt867 = ObjectDefinition.paramWorldID + 50000;
                 anInt3773 = 40000 + ObjectDefinition.paramWorldID;
-            } else if (Class44.paramModeWhere == 2) {
+
+            } else if (Class44.paramModeWhere == LOCAL_ENVIRONMENT) {
                 ClientErrorException.worldListHost = "127.0.0.1";
                 System.out.println("Setting worldListHost to 127.0.0.1, port = " + Class53.anInt867);
-                Class53.anInt867 = ObjectDefinition.paramWorldID + '\uc350';
-                anInt3773 = ObjectDefinition.paramWorldID + '\u9c40';
+                Class53.anInt867 = ObjectDefinition.paramWorldID + 50000;
+                anInt3773 = ObjectDefinition.paramWorldID + 40000;
             }
-            if (1 == Class158.paramGameTypeID) {
-                ClientCommands.shiftClickEnabled = true;
-                Class92.defaultScreenColorRgb = 16777215;
-                Class92.defaultRegionAmbientRGB = 0;
-                Class15.aShortArrayArray344 = Unsorted.aShortArrayArray1619;
-                Class101.aShortArrayArray1429 = aShortArrayArray2634;
-                Class3_Sub25.aShortArray2548 = Unsorted.aShortArray63;
-                Class91.aShortArray1311 = aShortArray2219;
-            } else {
-                Class15.aShortArrayArray344 = Class3_Sub28_Sub12.aShortArrayArray3654;
-                Class91.aShortArray1311 = aShortArray3349;
-                Class101.aShortArrayArray1429 = Class20.aShortArrayArray435;
-                Class3_Sub25.aShortArray2548 = Class164_Sub1.aShortArray3011;
+
+            switch (Class158.paramGameTypeID) {
+                case GAME_TYPE_RUNESCAPE:
+                    Class15.aShortArrayArray344 = RunescapeGameAppearance.INSTANCE.getAShortArrayArray3654();
+                    Class91.aShortArray1311 = RunescapeGameAppearance.INSTANCE.getAShortArray3349();
+                    Class101.aShortArrayArray1429 = RunescapeGameAppearance.INSTANCE.getAShortArrayArray435();
+                    Class3_Sub25.aShortArray2548 = RunescapeGameAppearance.INSTANCE.getAShortArray3011();
+                    break;
+
+                case GAME_TYPE_MECHSCAPE:
+                    ClientCommands.shiftClickEnabled = true;
+                    Class92.defaultScreenColorRgb = 16777215;
+                    Class92.defaultRegionAmbientRGB = 0;
+                    Class15.aShortArrayArray344 = MechscapeGameAppearance.INSTANCE.getAShortArrayArray1619();
+                    Class101.aShortArrayArray1429 = MechscapeGameAppearance.INSTANCE.getAShortArrayArray2634();
+                    Class3_Sub25.aShortArray2548 = MechscapeGameAppearance.INSTANCE.getAShortArray63();
+                    Class91.aShortArray1311 = MechscapeGameAppearance.INSTANCE.getAShortArray2219();
+                    break;
+
             }
 
             currentPort = Class53.anInt867;
@@ -1102,20 +1112,20 @@ public final class Client extends GameShell {
             }
 
             try {
-                if (Class38.signlink.cacheDataFile != null) {
-                    Class101.aClass30_1422 = new Class30(Class38.signlink.cacheDataFile, 5200);
+                if (Class38.gameSignlink.cacheDataFile != null) {
+                    Class101.aClass30_1422 = new Class30(Class38.gameSignlink.cacheDataFile, 5200);
 
                     for (int var2 = 0; var2 < 29; ++var2) {
-                        Class163_Sub2.aClass30Array2998[var2] = new Class30(Class38.signlink.cacheIndicesFiles[var2], 6000);
+                        Class163_Sub2.aClass30Array2998[var2] = new Class30(Class38.gameSignlink.cacheIndicesFiles[var2], 6000);
                     }
 
-                    aClass30_1572 = new Class30(Class38.signlink.cacheChecksumFile, 6000);
+                    aClass30_1572 = new Class30(Class38.gameSignlink.cacheChecksumFile, 6000);
                     AtmosphereParser.aClass41_1186 = new Class41(255, Class101.aClass30_1422, aClass30_1572, 500000);
-                    Unsorted.aClass30_1039 = new Class30(Class38.signlink.randomDatFile, 24);
-                    Class38.signlink.cacheIndicesFiles = null;
-                    Class38.signlink.cacheChecksumFile = null;
-                    Class38.signlink.randomDatFile = null;
-                    Class38.signlink.cacheDataFile = null;
+                    Unsorted.aClass30_1039 = new Class30(Class38.gameSignlink.randomDatFile, 24);
+                    Class38.gameSignlink.cacheIndicesFiles = null;
+                    Class38.gameSignlink.cacheChecksumFile = null;
+                    Class38.gameSignlink.randomDatFile = null;
+                    Class38.gameSignlink.cacheDataFile = null;
                 }
             } catch (IOException var3) {
                 Unsorted.aClass30_1039 = null;
@@ -1159,8 +1169,8 @@ public final class Client extends GameShell {
             }
 
             ++Class106.anInt1446;
-            if (-1 != Class3_Sub28_Sub12.anInt3655) {
-                GraphicDefinition.method967(0, 0, 0, Class23.canvasWidth, Class3_Sub28_Sub12.anInt3655, 0, Class140_Sub7.canvasHeight);
+            if (-1 != ConfigInventoryDefinition.anInt3655) {
+                GraphicDefinition.method967(0, 0, 0, Class23.canvasWidth, ConfigInventoryDefinition.anInt3655, 0, Class140_Sub7.canvasHeight);
             }
 
             ++PacketParser.anInt3213;
@@ -1177,10 +1187,10 @@ public final class Client extends GameShell {
                             int var7 = (int) Math.round(Math.random() * 2.0D - 1.0D);
                             if (var6 != 0 || 0 != var7) {
                                 var4.aByteArray2795[0] = 1;
-                                var4.anIntArray2767[0] = var6 + (var4.anInt2819 >> 7);
-                                var4.anIntArray2755[0] = var7 + (var4.anInt2829 >> 7);
-                                AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1502(var4.anInt2819 >> 7, var4.getSize(), false, 0, var4.getSize(), var4.anInt2829 >> 7);
-                                if (0 <= var4.anIntArray2767[0] && var4.anIntArray2767[0] <= 104 + -var4.getSize() && 0 <= var4.anIntArray2755[0] && var4.anIntArray2755[0] <= 104 - var4.getSize() && AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1500(var4.anInt2829 >> 7, var4.anIntArray2755[0], var4.anIntArray2767[0], var4.anInt2819 >> 7)) {
+                                var4.anIntArray2767[0] = var6 + (var4.xAxis >> 7);
+                                var4.anIntArray2755[0] = var7 + (var4.zAxis >> 7);
+                                AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1502(var4.xAxis >> 7, var4.getSize(), false, 0, var4.getSize(), var4.zAxis >> 7);
+                                if (0 <= var4.anIntArray2767[0] && var4.anIntArray2767[0] <= 104 + -var4.getSize() && 0 <= var4.anIntArray2755[0] && var4.anIntArray2755[0] <= 104 - var4.getSize() && AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1500(var4.zAxis >> 7, var4.anIntArray2755[0], var4.anIntArray2767[0], var4.xAxis >> 7)) {
                                     if (var4.getSize() > 1) {
                                         for (int var8 = var4.anIntArray2767[0]; var8 < var4.anIntArray2767[0] - -var4.getSize(); ++var8) {
                                             for (int var9 = var4.anIntArray2755[0]; var4.anIntArray2755[0] + var4.getSize() > var9; ++var9) {
@@ -1199,7 +1209,7 @@ public final class Client extends GameShell {
                         Unsorted.method1180((byte) -122, var4);
                         Class17.method904(65536, var4);
                         RenderAnimationDefinition.method900(var4, (byte) 1 ^ -11974);
-                        AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1489(var4.anInt2819 >> 7, false, (byte) 85, var4.anInt2829 >> 7, var4.getSize(), var4.getSize());
+                        AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1489(var4.xAxis >> 7, false, (byte) 85, var4.zAxis >> 7, var4.getSize(), var4.getSize());
                     }
                 }
             }
@@ -1219,15 +1229,15 @@ public final class Client extends GameShell {
             }
 
             while (true) {
-                CS2Script var11 = (CS2Script) PacketParser.aClass61_82.method1220();
+                CS2Script var11 = (CS2Script) PacketParser.aLinkedList_82.method1220();
                 RSInterface var12;
                 RSInterface var13;
                 if (var11 == null) {
                     while (true) {
-                        var11 = (CS2Script) Class65.aClass61_983.method1220();
+                        var11 = (CS2Script) Class65.aLinkedList_983.method1220();
                         if (null == var11) {
                             while (true) {
-                                var11 = (CS2Script) aClass61_1471.method1220();
+                                var11 = (CS2Script) aLinkedList_1471.method1220();
                                 if (null == var11) {
                                     if (Class56.aClass11_886 != null) {
                                         PacketParser.method829();
@@ -1252,7 +1262,7 @@ public final class Client extends GameShell {
 
                                 var12 = var11.aClass11_2449;
                                 if (0 <= var12.anInt191) {
-                                    var13 = Class7.getRSInterface(var12.parentId);
+                                    var13 = Unsorted.getRSInterface(var12.parentId);
                                     if (var13 == null || null == var13.aClass11Array262 || var12.anInt191 >= var13.aClass11Array262.length || var12 != var13.aClass11Array262[var12.anInt191]) {
                                         continue;
                                     }
@@ -1264,7 +1274,7 @@ public final class Client extends GameShell {
 
                         var12 = var11.aClass11_2449;
                         if (var12.anInt191 >= 0) {
-                            var13 = Class7.getRSInterface(var12.parentId);
+                            var13 = Unsorted.getRSInterface(var12.parentId);
                             if (null == var13 || var13.aClass11Array262 == null || var13.aClass11Array262.length <= var12.anInt191 || var12 != var13.aClass11Array262[var12.anInt191]) {
                                 continue;
                             }
@@ -1276,7 +1286,7 @@ public final class Client extends GameShell {
 
                 var12 = var11.aClass11_2449;
                 if (var12.anInt191 >= 0) {
-                    var13 = Class7.getRSInterface(var12.parentId);
+                    var13 = Unsorted.getRSInterface(var12.parentId);
                     if (null == var13 || null == var13.aClass11Array262 || var12.anInt191 >= var13.aClass11Array262.length || var12 != var13.aClass11Array262[var12.anInt191]) {
                         continue;
                     }
@@ -1347,7 +1357,7 @@ public final class Client extends GameShell {
         } else {
             try {
                 if (PacketParser.anInt80 == 0) {
-                    Class17.aClass64_413 = Class38.signlink.method1441((byte) 8, Class38_Sub1.accRegistryIp, Class140_Sub6.accRegistryPort);
+                    Class17.aClass64_413 = Class38.gameSignlink.method1441((byte) 8, Class38_Sub1.accRegistryIp, Class140_Sub6.accRegistryPort);
                     ++PacketParser.anInt80;
                 }
 
@@ -1363,7 +1373,7 @@ public final class Client extends GameShell {
                 }
 
                 if (2 == PacketParser.anInt80) {
-                    Unsorted.js5Connection = new Connection((Socket) Objects.requireNonNull(Class17.aClass64_413).anObject974, Class38.signlink);
+                    Unsorted.js5Connection = new Connection((Socket) Objects.requireNonNull(Class17.aClass64_413).anObject974, Class38.gameSignlink);
                     DataBuffer var2 = new DataBuffer(9);
                     var2.writeByte(15); //JS5 handshake
                     var2.writeInt(GameConfig.CLIENT_BUILD);
@@ -1431,9 +1441,9 @@ public final class Client extends GameShell {
                         }
 
                         LoadingStageNumber = 5;
-                        Class3_Sub17.aClass94_2464 = TextCore.AllocatingMemory;
+                        loadingBarTextToDisplay = TextCore.AllocatingMemory;
                     } else {
-                        Class3_Sub17.aClass94_2464 = TextCore.AllocatedMemory;
+                        loadingBarTextToDisplay = TextCore.AllocatedMemory;
                         anInt1354 = 10;
                         LoadingStageNumber = 5;
                     }
@@ -1448,7 +1458,7 @@ public final class Client extends GameShell {
 
                         LoadingStageNumber = 10;
                         anInt1354 = 30;
-                        Class3_Sub17.aClass94_2464 = TextCore.CreatedWorld;
+                        loadingBarTextToDisplay = TextCore.CreatedWorld;
                     } else if (anInt1354 == 30) {
                         if (Unsorted.aClass8_1936 == null) {
                             Unsorted.aClass8_1936 = new Class8(Class58.aJs5Worker_917, TextureOperation31.aCacheResourceWorker_3159);
@@ -1485,10 +1495,10 @@ public final class Client extends GameShell {
                             CacheIndex.particlesConfigIndex = Class8.getCacheIndex(false, true, true, 27);
                             CacheIndex.libIndex = Class8.getCacheIndex(false, true, true, 28);
                             LoadingStageNumber = 15;
-                            Class3_Sub17.aClass94_2464 = TextCore.ConxUpdateServer;
+                            loadingBarTextToDisplay = TextCore.ConxUpdateServer;
                             anInt1354 = 40;
                         } else {
-                            Class3_Sub17.aClass94_2464 = TextCore.LoadingConnecting;
+                            loadingBarTextToDisplay = TextCore.LoadingConnecting;
                             LoadingStageNumber = 12;
                         }
                     } else if (anInt1354 == 40) {
@@ -1500,13 +1510,13 @@ public final class Client extends GameShell {
 
                         if (var2 < 100) { //!= 100
                             if (var2 != 0) {
-                                Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.CheckingForUpdates, RSString.stringAnimator(var2), TextCore.aClass94_468});
+                                loadingBarTextToDisplay = RSString.stringCombiner(new RSString[]{TextCore.CheckingForUpdates, RSString.stringAnimator(var2), RSString.parse("(U")});
                             }
 
                             LoadingStageNumber = 20;
                         } else {
                             LoadingStageNumber = 20;
-                            Class3_Sub17.aClass94_2464 = TextCore.LoadedUpdateList;
+                            loadingBarTextToDisplay = TextCore.LoadedUpdateList;
                             Sprites.getSpriteFromArchive(CacheIndex.spritesIndex);
                             Class97.method1593(111, CacheIndex.spritesIndex);
                             TextureOperation20.method233(28280, CacheIndex.spritesIndex);
@@ -1516,42 +1526,42 @@ public final class Client extends GameShell {
                         Class140_Sub3.method1959(TextureOperation17.aBoolean3184);
                         aClass3_Sub24_Sub4_1193 = new Class3_Sub24_Sub4();
                         aClass3_Sub24_Sub4_1193.method479();
-                        WorldListEntry.aClass155_2627 = Class58.method1195(22050, Class38.signlink, GameShell.canvas, 0);
+                        WorldListEntry.aClass155_2627 = Class58.method1195(22050, Class38.gameSignlink, GameShell.canvas, 0);
                         WorldListEntry.aClass155_2627.method2154(-116, aClass3_Sub24_Sub4_1193);
                         RenderAnimationDefinition.method897(aClass3_Sub24_Sub4_1193, CacheIndex.soundFX3Index, CacheIndex.soundFX2Index, CacheIndex.soundFXIndex);
-                        Class3_Sub21.aClass155_2491 = Class58.method1195(2048, Class38.signlink, GameShell.canvas, 1);
+                        Class3_Sub21.aClass155_2491 = Class58.method1195(2048, Class38.gameSignlink, GameShell.canvas, 1);
                         Class3_Sub26.aClass3_Sub24_Sub2_2563 = new Class3_Sub24_Sub2();
                         Class3_Sub21.aClass155_2491.method2154(-128, Class3_Sub26.aClass3_Sub24_Sub2_2563);
-                        Class27.aClass157_524 = new Class157(22050, Class21.anInt443);
+                        Class27.resampler = new Class157(22050, Class21.anInt443);
                         KeyboardListener.loginThemeSongArchiveID = CacheIndex.musicIndex.getArchiveForName(RSString.parse(GameConfig.LOGIN_THEME));
                         LoadingStageNumber = 30;
                         anInt1354 = 50;
-                        Class3_Sub17.aClass94_2464 = TextCore.PreparedSoundEngine;
+                        loadingBarTextToDisplay = TextCore.PreparedSoundEngine;
                     } else if (anInt1354 == 50) {
                         var2 = Sprites.method228(CacheIndex.spritesIndex, CacheIndex.fontsIndex);
                         var3 = 6;
                         if (var3 <= var2) {
-                            Class3_Sub17.aClass94_2464 = TextCore.LoadedFonts;
+                            loadingBarTextToDisplay = TextCore.LoadedFonts;
                             LoadingStageNumber = 35;
                             anInt1354 = 60;
                         } else {
-                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingFonts, RSString.stringAnimator(100 * var2 / var3), TextCore.aClass94_468});
+                            loadingBarTextToDisplay = RSString.stringCombiner(new RSString[]{TextCore.LoadingFonts, RSString.stringAnimator(100 * var2 / var3), RSString.parse("(U")});
                             LoadingStageNumber = 35;
                         }
                     } else if (60 == anInt1354) {
                         var2 = Unsorted.method599(CacheIndex.spritesIndex);
                         var3 = 2;
                         if (var3 <= var2) {
-                            Class3_Sub17.aClass94_2464 = TextCore.LoadedTitleScreen;
+                            loadingBarTextToDisplay = TextCore.LoadedTitleScreen;
                             anInt1354 = 65;
                         } else {
-                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingTitleScreen, RSString.stringAnimator(100 * var2 / var3), TextCore.aClass94_468});
+                            loadingBarTextToDisplay = RSString.stringCombiner(new RSString[]{TextCore.LoadingTitleScreen, RSString.stringAnimator(100 * var2 / var3), RSString.parse("(U")});
                         }
                         LoadingStageNumber = 40;
                     } else if (anInt1354 == 65) {
                         Class3_Sub28_Sub9.method581(CacheIndex.fontsIndex, CacheIndex.spritesIndex);
                         LoadingStageNumber = 45;
-                        Class3_Sub17.aClass94_2464 = TextCore.OpenedTitleScreen;
+                        loadingBarTextToDisplay = TextCore.OpenedTitleScreen;
                         Class117.method1719(5);
                         anInt1354 = 70;
                     } else if (anInt1354 == 70) {
@@ -1597,30 +1607,30 @@ public final class Client extends GameShell {
                             Unsorted.method89(CacheIndex.fontsIndex, CacheIndex.spritesIndex, CacheIndex.interfacesIndex, CacheIndex.modelsIndex);
                             TextureOperation23.method250(CacheIndex.configurationsIndex);
                             EnumDefinitionProvider.setIndex(CacheIndex.clientscriptMaskIndex);
-                            TextureOperation9.method205(CacheIndex.quickchatMenusIndex, CacheIndex.quickchatMessagesIndex, new Class7());
-                            Class65.method1236(CacheIndex.quickchatMenusIndex, CacheIndex.quickchatMessagesIndex);
+                            QuickChat.method205(CacheIndex.quickchatMenusIndex, CacheIndex.quickchatMessagesIndex, new Class7());
+                            QuickChat.method1236(CacheIndex.quickchatMenusIndex, CacheIndex.quickchatMessagesIndex);
                             Class58.method1197(CacheIndex.configurationsIndex);
                             Unsorted.method2065(CacheIndex.configurationsIndex, CacheIndex.spritesIndex);
                             Class107.method1645(CacheIndex.configurationsIndex, CacheIndex.spritesIndex);
                             LoadingStageNumber = 50;
-                            Class3_Sub17.aClass94_2464 = TextCore.LoadedConfig;
+                            loadingBarTextToDisplay = TextCore.LoadedConfig;
                             Class29.method968(128);
                             anInt1354 = 80;
                         } else {
-                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingConfig, RSString.stringAnimator(var2 / 11), TextCore.aClass94_468});
+                            loadingBarTextToDisplay = RSString.stringCombiner(new RSString[]{TextCore.LoadingConfig, RSString.stringAnimator(var2 / 11), RSString.parse("(U")});
                             LoadingStageNumber = 50;
                         }
                     } else if (anInt1354 == 80) {
                         var2 = Sprites.method107(CacheIndex.spritesIndex);
                         var3 = 15;
                         if (var2 < var3) {
-                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingSprites, RSString.stringAnimator(var2 * 100 / var3), TextCore.aClass94_468});
+                            loadingBarTextToDisplay = RSString.stringCombiner(new RSString[]{TextCore.LoadingSprites, RSString.stringAnimator(var2 * 100 / var3), RSString.parse("(U")});
                             LoadingStageNumber = 60;
                         } else {
                             Sprites.method887(CacheIndex.spritesIndex);
                             anInt1354 = 90;
                             LoadingStageNumber = 60;
-                            Class3_Sub17.aClass94_2464 = TextCore.LoadedSprites;
+                            loadingBarTextToDisplay = TextCore.LoadedSprites;
                         }
                     } else if (anInt1354 != 90) {
                         if (anInt1354 == 100) {
@@ -1629,8 +1639,8 @@ public final class Client extends GameShell {
                             }
                         } else if (anInt1354 == 110) {
                             TextureOperation20.aClass67_1443 = new Class67();
-                            Class38.signlink.method1451(10, TextureOperation20.aClass67_1443);
-                            Class3_Sub17.aClass94_2464 = TextCore.LoadedInputHandler;
+                            Class38.gameSignlink.startThread(10, TextureOperation20.aClass67_1443);
+                            loadingBarTextToDisplay = TextCore.LoadedInputHandler;
                             LoadingStageNumber = 75;
                             anInt1354 = 120;
                         } else if (anInt1354 != 120) {
@@ -1641,34 +1651,34 @@ public final class Client extends GameShell {
                                             if (CacheIndex.worldmapIndex.method2127(TextCore.aClass94_1342)) {
                                                 Class75_Sub4.method1353(Sprites.aClass3_Sub28_Sub16_Sub2Array2140, CacheIndex.worldmapIndex);
                                                 LoadingStageNumber = 95;
-                                                Class3_Sub17.aClass94_2464 = TextCore.LoadedInterfaces;
+                                                loadingBarTextToDisplay = TextCore.LoadedInterfaces;
                                                 anInt1354 = 135;
                                             } else {
-                                                Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(90 - -(CacheIndex.worldmapIndex.method2116(TextCore.aClass94_1342) / 10)), TextCore.aClass94_468});
+                                                loadingBarTextToDisplay = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(90 - -(CacheIndex.worldmapIndex.method2116(TextCore.aClass94_1342) / 10)), RSString.parse("(U")});
                                                 LoadingStageNumber = 85;
                                             }
                                         } else {
-                                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(85 - -(CacheIndex.fontsIndex.method2136((byte) -124) / 20)), TextCore.aClass94_468});
+                                            loadingBarTextToDisplay = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(85 - -(CacheIndex.fontsIndex.method2136((byte) -124) / 20)), RSString.parse("(U")});
                                             LoadingStageNumber = 85;
                                         }
                                     } else {
-                                        Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(75 - -(CacheIndex.interfaceScriptsIndex.method2136((byte) -128) / 10)), TextCore.aClass94_468});
+                                        loadingBarTextToDisplay = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(75 - -(CacheIndex.interfaceScriptsIndex.method2136((byte) -128) / 10)), RSString.parse("(U")});
                                         LoadingStageNumber = 85;
                                     }
                                 } else {
-                                    Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(CacheIndex.interfacesIndex.method2136((byte) -123) * 3 / 4), TextCore.aClass94_468});
+                                    loadingBarTextToDisplay = RSString.stringCombiner(new RSString[]{TextCore.LoadingInterfaces, RSString.stringAnimator(CacheIndex.interfacesIndex.method2136((byte) -123) * 3 / 4), RSString.parse("(U")});
                                     LoadingStageNumber = 85;
                                 }
                             } else if (135 == anInt1354) {
                                 var2 = Class121.method1735();
                                 if (-1 == var2) {
                                     LoadingStageNumber = 95;
-                                    Class3_Sub17.aClass94_2464 = TextCore.LoadingWLD;
+                                    loadingBarTextToDisplay = TextCore.LoadingWLD;
                                 } else if (var2 == 7 || var2 == 9) {
                                     this.errorPrint("worldlistfull");
                                     Class117.method1719(1000);
                                 } else if (Class30.loadedWorldList) {
-                                    Class3_Sub17.aClass94_2464 = TextCore.LoadedWLD;
+                                    loadingBarTextToDisplay = TextCore.LoadedWLD;
                                     anInt1354 = 140;
                                     LoadingStageNumber = 96;
                                 } else {
@@ -1684,7 +1694,7 @@ public final class Client extends GameShell {
                                 CacheIndex.huffmanEncodingIndex.method2115(-116, true);
                                 CacheIndex.interfacesIndex.method2115(99, true);
                                 LoadingStageNumber = 97;
-                                Class3_Sub17.aClass94_2464 = TextCore.Starting3DLibrary;
+                                loadingBarTextToDisplay = TextCore.Starting3DLibrary;
                                 anInt1354 = 150;
                                 sweepReferenceCache = true;
                             } else if (anInt1354 == 150) {
@@ -1697,22 +1707,22 @@ public final class Client extends GameShell {
                                 }
 
                                 Unsorted.aBoolean2146 = true;
-                                Class119.method1730(Class38.signlink);
+                                Class119.method1730(Class38.gameSignlink);
                                 GameObject.graphicsSettings(false, Unsorted.anInt2577, -1, -1);
                                 LoadingStageNumber = 100;
                                 anInt1354 = 160;
-                                Class3_Sub17.aClass94_2464 = TextCore.Started3DLibrary;
+                                loadingBarTextToDisplay = TextCore.Started3DLibrary;
                             } else if (anInt1354 == 160) {
                                 TextureOperation1.method219(true);
                             }
-                        } else if (CacheIndex.huffmanEncodingIndex.method2125(TextCore.emptyJagexString, TextCore.HasHuffman)) {
-                            Class36 var9 = new Class36(CacheIndex.huffmanEncodingIndex.method2123(TextCore.emptyJagexString, TextCore.HasHuffman));
+                        } else if (CacheIndex.huffmanEncodingIndex.method2125(RSString.parse(""), TextCore.HasHuffman)) {
+                            Class36 var9 = new Class36(CacheIndex.huffmanEncodingIndex.method2123(RSString.parse(""), TextCore.HasHuffman));
                             Class1.method69(var9);
-                            Class3_Sub17.aClass94_2464 = TextCore.LoadedWordPack;
+                            loadingBarTextToDisplay = TextCore.LoadedWordPack;
                             anInt1354 = 130;
                             LoadingStageNumber = 80;
                         } else {
-                            Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingWordPack, TextCore.aClass94_37});
+                            loadingBarTextToDisplay = RSString.stringCombiner(new RSString[]{TextCore.LoadingWordPack, TextCore.aClass94_37});
                             LoadingStageNumber = 80;
                         }
                     } else if (CacheIndex.materialsIndex.method2113()) {
@@ -1734,11 +1744,11 @@ public final class Client extends GameShell {
                             Class51.method1137(0.6F);
                         }
 
-                        Class3_Sub17.aClass94_2464 = TextCore.LoadedTextures;
+                        loadingBarTextToDisplay = TextCore.LoadedTextures;
                         anInt1354 = 100;
                         LoadingStageNumber = 70;
                     } else {
-                        Class3_Sub17.aClass94_2464 = RSString.stringCombiner(new RSString[]{TextCore.LoadingTextures, RSString.stringAnimator(CacheIndex.materialsIndex.method2136((byte) -125)), TextCore.aClass94_468});
+                        loadingBarTextToDisplay = RSString.stringCombiner(new RSString[]{TextCore.LoadingTextures, RSString.stringAnimator(CacheIndex.materialsIndex.method2136((byte) -125)), RSString.parse("(U")});
                         LoadingStageNumber = 70;
                     }
                 }

@@ -21,7 +21,7 @@ final class TextureOperation37 extends TextureOperation {
    private int anInt3266 = 8192;
 
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(var1 == 0) {
             this.anInt3265 = var2.readUnsignedShort();
@@ -39,12 +39,12 @@ final class TextureOperation37 extends TextureOperation {
             this.anInt3266 = var2.readUnsignedShort();
          }
 
-         if(!var3) {
+         if(!true) {
             this.anInt3266 = 85;
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "mh.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "mh.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 
@@ -76,7 +76,7 @@ final class TextureOperation37 extends TextureOperation {
 
                if(Unsorted.registryStage == 1) {
             	   //Ip & Port
-                  Class3_Sub9.aClass64_2318 = Class38.signlink.method1441((byte)8, Class38_Sub1.accRegistryIp, Class140_Sub6.accRegistryPort);
+                  Class3_Sub9.aClass64_2318 = Class38.gameSignlink.method1441((byte)8, Class38_Sub1.accRegistryIp, Class140_Sub6.accRegistryPort);
                   Unsorted.registryStage = 2;
                }
 
@@ -88,7 +88,7 @@ final class TextureOperation37 extends TextureOperation {
                   if(1 != Class3_Sub9.aClass64_2318.anInt978) {
                      return;
                   }
-                  Class3_Sub15.activeConnection = new Connection((Socket)Class3_Sub9.aClass64_2318.anObject974, Class38.signlink);
+                  Class3_Sub15.activeConnection = new Connection((Socket)Class3_Sub9.aClass64_2318.anObject974, Class38.gameSignlink);
                   Class3_Sub9.aClass64_2318 = null;
                   Class3_Sub15.activeConnection.sendBytes(TextureOperation12.outgoingBuffer.buffer, TextureOperation12.outgoingBuffer.index);
                    if(WorldListEntry.aClass155_2627 != null) {
@@ -129,11 +129,11 @@ final class TextureOperation37 extends TextureOperation {
                      return;
                   }
 
-                  GraphicDefinition.incomingBuffer.index = 0;
-                  Class3_Sub15.activeConnection.readBytes(GraphicDefinition.incomingBuffer.buffer, 0, 8 * TextureOperation29.aClass94Array3391.length);
+                  BufferedDataStream.incomingBuffer.index = 0;
+                  Class3_Sub15.activeConnection.readBytes(BufferedDataStream.incomingBuffer.buffer, 0, 8 * TextureOperation29.aClass94Array3391.length);
 
                   for(response = 0; response < TextureOperation29.aClass94Array3391.length; ++response) {
-                     TextureOperation29.aClass94Array3391[response] = Unsorted.method1052(GraphicDefinition.incomingBuffer.readLong());
+                     TextureOperation29.aClass94Array3391[response] = Unsorted.method1052(BufferedDataStream.incomingBuffer.readLong());
                   }
 
                   Unsorted.anInt1711 = 21;
@@ -218,15 +218,11 @@ final class TextureOperation37 extends TextureOperation {
       }
    }
 
-   final void method158(int var1) {
+   final void postDecode() {
       try {
          Class8.method844((byte)-9);
-         if(var1 != 16251) {
-            method272((byte)-85);
-         }
-
       } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "mh.P(" + var1 + ')');
+         throw ClientErrorException.clientError(var3, "mh.P(" + ')');
       }
    }
 

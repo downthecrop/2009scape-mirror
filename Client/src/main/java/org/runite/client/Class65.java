@@ -5,7 +5,7 @@ import org.rs09.client.util.ArrayUtils;
 
 public final class Class65 {
 
-    static Class61 aClass61_983 = new Class61();
+    static LinkedList aLinkedList_983 = new LinkedList();
     static DataBuffer[] aClass3_Sub30Array986 = new DataBuffer[2048];
     public static int anInt987 = 0;
     static int currentChunkX;
@@ -58,15 +58,6 @@ public final class Class65 {
             TextureOperation10.method347();
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "ja.A(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + (byte) -121 + ')');
-        }
-    }
-
-    static void method1236(CacheIndex var0, CacheIndex var1) {
-        try {
-            Unsorted.quickChatMessages = var1;
-            Unsorted.aClass153_332 = var0;
-        } catch (RuntimeException var4) {
-            throw ClientErrorException.clientError(var4, "ja.F(" + (var0 != null ? "{...}" : "null") + ',' + (var1 != null ? "{...}" : "null") + ',' + -117 + ')');
         }
     }
 
@@ -164,7 +155,7 @@ public final class Class65 {
             FontType.plainFont = null;
             Class75_Sub3.aAbstractSpriteArray2656 = null;
             aAbstractSpriteArray1825 = null;
-            TextureOperation0.nameIconsSpriteArray = null;
+            Sprites.nameIconsSpriteArray = null;
             Class157.aClass3_Sub28_Sub17_Sub1_2000 = null;
             Sprites.aClass3_Sub28_Sub16_Sub2Array2140 = null;
             Class140_Sub4.aAbstractSpriteArray2839 = null;

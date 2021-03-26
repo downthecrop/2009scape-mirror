@@ -36,13 +36,13 @@ final class TextureOperation20 extends TextureOperation {
                 if(image == null) {
                    cursor = -1;
                 } else {
-                   Class38.signlink.method1434(image.method655(), 10000, image.anInt3697, GameShell.canvas, new Point(cursorDef.getHotspotX(), cursorDef.getHotspotY()), image.anInt3706);
+                   Class38.gameSignlink.method1434(image.method655(), 10000, image.anInt3697, GameShell.canvas, new Point(cursorDef.getHotspotX(), cursorDef.getHotspotY()), image.anInt3706);
                    Class65.anInt991 = cursor;
                 }
              }
 
              if(cursor == -1 && Class65.anInt991 != -1) {
-                Class38.signlink.method1434(null, 10000, -1, GameShell.canvas, new Point(), -1);
+                Class38.gameSignlink.method1434(null, 10000, -1, GameShell.canvas, new Point(), -1);
                 Class65.anInt991 = -1;
              }
 
@@ -71,9 +71,9 @@ final class TextureOperation20 extends TextureOperation {
        }
     }
 
-    final void method157(int var1, DataBuffer var2, boolean var3) {
+    final void decode(int var1, DataBuffer var2) {
       try {
-         if(!var3) {
+         if(!true) {
             paramModeWhat = -117;
          }
 
@@ -84,7 +84,7 @@ final class TextureOperation20 extends TextureOperation {
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "gg.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "gg.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 
@@ -145,10 +145,10 @@ final class TextureOperation20 extends TextureOperation {
             int[] var4;
             int var7;
             if(var6 <= 0) {
-               var4 = this.method152(0, 0, 32755);
+               var4 = this.method152(0, 0);
             } else {
                var7 = var1 % var6;
-               var4 = this.method152(0, Class101.anInt1427 * var7 / var6, 32755);
+               var4 = this.method152(0, Class101.anInt1427 * var7 / var6);
             }
 
             for(var7 = 0; var7 < Class113.anInt1559; ++var7) {
@@ -428,13 +428,13 @@ final class TextureOperation20 extends TextureOperation {
                if(Class143.gameStage == 30) {
                   MouseListeningClass.method2087();
                   Class115.method1713();
-                  Class3_Sub8.method132();
+                  AudioHandler.method132();
                   ++AbstractSprite.anInt3699;
                   if(AbstractSprite.anInt3699 > 750) {
                      breakClientConnection();
                   } else {
-                     Class38.method1028();
-                     Class60.method1207();
+                     PlayerRendering.updatePlayerAreaArray();
+                     NPCRendering.updateNPCAreaArray();
                      TextureOperation34.method189();
                      if(Class3_Sub28_Sub3.aClass11_3551 != null) {
                         Unsorted.method848();
@@ -458,13 +458,13 @@ final class TextureOperation20 extends TextureOperation {
                         } else {
                            RSInterface var20;
                            if(var3 == 3) {
-                              var20 = Class7.getRSInterface(var4);
+                              var20 = Unsorted.getRSInterface(var4);
                               if(!var16.text.equalsString(Objects.requireNonNull(var20).text)) {
                                  var20.text = var16.text;
                                  Class20.method909(var20);
                               }
                            } else if (var3 == 4) {
-                              var20 = Class7.getRSInterface(var4);
+                              var20 = Unsorted.getRSInterface(var4);
                               var6 = var16.anInt3598;
                               var8 = var16.anInt3596;
                               nodeModelID = var16.anInt3597;
@@ -475,7 +475,7 @@ final class TextureOperation20 extends TextureOperation {
                                  Class20.method909(var20);
                               }
                            } else if (var3 == 5) {
-                              var20 = Class7.getRSInterface(var4);
+                              var20 = Unsorted.getRSInterface(var4);
                               if (var16.anInt3598 != Objects.requireNonNull(var20).animationId || var16.anInt3598 == -1) {
                                  var20.anInt260 = 1;
                                  var20.anInt267 = 0;
@@ -488,21 +488,21 @@ final class TextureOperation20 extends TextureOperation {
                               var6 = (32195 & var5) >> 10;
                               var8 = var5 & 31;
                               nodeModelID = (var5 & 1000) >> 5;
-                              RSInterface var10 = Class7.getRSInterface(var4);
+                              RSInterface var10 = Unsorted.getRSInterface(var4);
                               var9 = (var8 << 3) + (nodeModelID << 11) + (var6 << 19);
                               if (Objects.requireNonNull(var10).anInt218 != var9) {
                                  var10.anInt218 = var9;
                                  Class20.method909(var10);
                               }
                            } else if (var3 == 7) {
-                              var20 = Class7.getRSInterface(var4);
+                              var20 = Unsorted.getRSInterface(var4);
                               boolean var24 = var16.anInt3598 == 1;
                               if (var20 != null && var24 == !var20.hidden) {
                                  var20.hidden = var24;
                                  Class20.method909(var20);
                               }
                            } else if (var3 == 8) {
-                              var20 = Class7.getRSInterface(var4);
+                              var20 = Unsorted.getRSInterface(var4);
                               if (var16.anInt3598 != Objects.requireNonNull(var20).anInt182 || var20.anInt308 != var16.anInt3597 || var20.anInt164 != var16.anInt3596) {
                                  var20.anInt182 = var16.anInt3598;
                                  var20.anInt164 = var16.anInt3596;
@@ -520,14 +520,14 @@ final class TextureOperation20 extends TextureOperation {
                                  Class20.method909(var20);
                               }
                            } else if (var3 == 9) {
-                              var20 = Class7.getRSInterface(var4);
+                              var20 = Unsorted.getRSInterface(var4);
                               if (Objects.requireNonNull(var20).anInt192 != var16.anInt3598 || var20.anInt271 != var16.anInt3597) {
                                  var20.anInt192 = var16.anInt3598;
                                  var20.anInt271 = var16.anInt3597;
                                  Class20.method909(var20);
                               }
                            } else if (var3 == 10) {
-                              var20 = Class7.getRSInterface(var4);
+                              var20 = Unsorted.getRSInterface(var4);
                               if (var16.anInt3598 != Objects.requireNonNull(var20).anInt258 || var20.anInt264 != var16.anInt3597 || var20.anInt280 != var16.anInt3596) {
                                  var20.anInt264 = var16.anInt3597;
                                  var20.anInt280 = var16.anInt3596;
@@ -535,14 +535,14 @@ final class TextureOperation20 extends TextureOperation {
                                  Class20.method909(var20);
                               }
                            } else if (var3 == 11) {
-                              var20 = Class7.getRSInterface(var4);
+                              var20 = Unsorted.getRSInterface(var4);
                               Objects.requireNonNull(var20).anInt306 = var20.defX = var16.anInt3598;
                               var20.horizontalPos = 0;
                               var20.verticalPos = 0;
                               var20.anInt210 = var20.defY = var16.anInt3597;
                               Class20.method909(var20);
                            } else if (var3 == 12) {
-                              var20 = Class7.getRSInterface(var4);
+                              var20 = Unsorted.getRSInterface(var4);
                               var6 = var16.anInt3598;
                               if (null != var20 && 0 == var20.type) {
                                  if (var6 > var20.anInt252 + -var20.height) {
@@ -559,7 +559,7 @@ final class TextureOperation20 extends TextureOperation {
                                  }
                               }
                            } else if (var3 == 13) {
-                              var20 = Class7.getRSInterface(var4);
+                              var20 = Unsorted.getRSInterface(var4);
                               Objects.requireNonNull(var20).anInt237 = var16.anInt3598;
                            }
                         }
@@ -574,8 +574,8 @@ final class TextureOperation20 extends TextureOperation {
 
                      ++Class106.anInt1446;
                      if(Unsorted.aClass11_1933 != null) {
-                        ++Class3_Sub30_Sub1.anInt2330;
-                        if(15 <= Class3_Sub30_Sub1.anInt2330) {
+                        ++BufferedDataStream.anInt2330;
+                        if(15 <= BufferedDataStream.anInt2330) {
                            Class20.method909(Unsorted.aClass11_1933);
                            Unsorted.aClass11_1933 = null;
                         }
@@ -639,7 +639,7 @@ final class TextureOperation20 extends TextureOperation {
                            }
 
                            Unsorted.anInt3644 = 0;
-                           Class3_Sub30_Sub1.anInt2330 = 10;
+                           BufferedDataStream.anInt2330 = 10;
                            Class67.aClass11_1017 = null;
                         }
                      }
@@ -658,22 +658,22 @@ final class TextureOperation20 extends TextureOperation {
                      }
 
                      Class3_Sub28_Sub3.aClass11_3551 = null;
-                     if(Class3_Sub28_Sub12.anInt3655 != -1) {
-                        GraphicDefinition.method967(0, 0, 0, Class23.canvasWidth, Class3_Sub28_Sub12.anInt3655, 0, Class140_Sub7.canvasHeight);
+                     if(ConfigInventoryDefinition.anInt3655 != -1) {
+                        GraphicDefinition.method967(0, 0, 0, Class23.canvasWidth, ConfigInventoryDefinition.anInt3655, 0, Class140_Sub7.canvasHeight);
                      }
 
                      ++PacketParser.anInt3213;
 
                      while(true) {
-                        CS2Script var26 = (CS2Script)PacketParser.aClass61_82.method1220();
+                        CS2Script var26 = (CS2Script)PacketParser.aLinkedList_82.method1220();
                         RSInterface var23;
                         RSInterface var25;
                         if(var26 == null) {
                            while(true) {
-                              var26 = (CS2Script)Class65.aClass61_983.method1220();
+                              var26 = (CS2Script)Class65.aLinkedList_983.method1220();
                               if(var26 == null) {
                                  while(true) {
-                                    var26 = (CS2Script) Client.aClass61_1471.method1220();
+                                    var26 = (CS2Script) Client.aLinkedList_1471.method1220();
                                     if(var26 == null) {
                                        if(Class3_Sub28_Sub3.aClass11_3551 == null) {
                                           Class3_Sub19.anInt2475 = 0;
@@ -704,7 +704,7 @@ final class TextureOperation20 extends TextureOperation {
                                        } else if(CS2Script.anInt2440 == 2) {
                                           if(Class27.anInt515 != -1) {
                                              TextureOperation12.outgoingBuffer.putOpcode(131);
-                                             TextureOperation12.outgoingBuffer.writeIntV2(Class3_Sub30_Sub1.anInt872);
+                                             TextureOperation12.outgoingBuffer.writeIntV2(BufferedDataStream.anInt872);
                                              TextureOperation12.outgoingBuffer.putShortA(Class131.anInt1716 + Class27.anInt515);
                                              TextureOperation12.outgoingBuffer.writeShort128LE(RSInterface.anInt278);
                                              TextureOperation12.outgoingBuffer.putShortA(Unsorted.anInt999 + Texture.anInt1152);
@@ -895,7 +895,7 @@ final class TextureOperation20 extends TextureOperation {
 
                                     var25 = var26.aClass11_2449;
                                     if(var25.anInt191 >= 0) {
-                                       var23 = Class7.getRSInterface(var25.parentId);
+                                       var23 = Unsorted.getRSInterface(var25.parentId);
                                        if(null == var23 || var23.aClass11Array262 == null || var23.aClass11Array262.length <= var25.anInt191 || var25 != var23.aClass11Array262[var25.anInt191]) {
                                           continue;
                                        }
@@ -907,7 +907,7 @@ final class TextureOperation20 extends TextureOperation {
 
                               var25 = var26.aClass11_2449;
                               if(var25.anInt191 >= 0) {
-                                 var23 = Class7.getRSInterface(var25.parentId);
+                                 var23 = Unsorted.getRSInterface(var25.parentId);
                                  if(var23 == null || null == var23.aClass11Array262 || var23.aClass11Array262.length <= var25.anInt191 || var23.aClass11Array262[var25.anInt191] != var25) {
                                     continue;
                                  }
@@ -919,7 +919,7 @@ final class TextureOperation20 extends TextureOperation {
 
                         var25 = var26.aClass11_2449;
                         if(var25.anInt191 >= 0) {
-                           var23 = Class7.getRSInterface(var25.parentId);
+                           var23 = Unsorted.getRSInterface(var25.parentId);
                            if(var23 == null || var23.aClass11Array262 == null || var25.anInt191 >= var23.aClass11Array262.length || var23.aClass11Array262[var25.anInt191] != var25) {
                               continue;
                            }

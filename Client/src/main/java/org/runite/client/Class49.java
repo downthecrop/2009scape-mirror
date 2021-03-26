@@ -1,6 +1,5 @@
 package org.runite.client;
 
-import org.rs09.client.data.NodeCache;
 import org.rs09.client.rendering.Toolkit;
 import org.runite.client.drawcalls.ContextMenu;
 
@@ -14,7 +13,6 @@ public final class Class49 {
     static boolean[][] aBooleanArrayArray814;
     static int anInt815 = 0;
     static int anInt817;
-    static NodeCache aClass47_818 = new NodeCache(64);
     static int anInt819 = 0;
 
 
@@ -85,7 +83,7 @@ public final class Class49 {
         }
     }
 
-    static byte[] method1123(int var0, int var1) {
+    static byte[] method1123(int var1) {
         try {
             Class3_Sub28_Sub8 var2 = (Class3_Sub28_Sub8) Class25.aClass47_480.get(var1);
             if (null == var2) {
@@ -109,9 +107,9 @@ public final class Class49 {
                 Class25.aClass47_480.put(var1, var2);
             }
 
-            return var0 != 16711935 ? null : var2.aByteArray3612;
+            return var2.aByteArray3612;
         } catch (RuntimeException var9) {
-            throw ClientErrorException.clientError(var9, "ha.B(" + var0 + ',' + var1 + ')');
+            throw ClientErrorException.clientError(var9, "ha.B(" + var1 + ')');
         }
     }
 
@@ -124,17 +122,13 @@ public final class Class49 {
                 }
             }
 
-            return Class3_Sub28_Sub12.method612(var1);
+            return QuickChatDefinition.method612(var1);
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "ha.H(" + (var0 != null ? "{...}" : "null") + ',' + var1 + ',' + var3 + ',' + false + ')');
         }
     }
 
-    static void reportError(String var0, Throwable var1, byte var2) {
-        if (var2 <= 100) {
-            aClass47_818 = null;
-        }
-
+    static void reportError(String var0, Throwable var1) {
         try {
             String var3 = "";
             if (null != var1) {
@@ -149,16 +143,16 @@ public final class Class49 {
                 var3 = var3 + var0;
             }
 
-            Class7.method831(var3);
+            method831(var3);
             var3 = InterfaceWidget.a(":", "%3a", var3);
             var3 = InterfaceWidget.a("@", "%40", var3);
             var3 = InterfaceWidget.a("&", "%26", var3);
             var3 = InterfaceWidget.a("#", "%23", var3);
-            if (TextureOperation30.aClass87_3125.gameApplet == null) {
+            if (TextureOperation30.signlink.gameApplet == null) {
                 return;
             }
 
-            Class64 var4 = TextureOperation30.aClass87_3125.method1439(false, new URL(TextureOperation30.aClass87_3125.gameApplet.getCodeBase(), "clienterror.ws?c=&u=" + PacketParser.aLong3202 + "&v1=" + Signlink.javaVendor + "&v2=" + Signlink.javaVersion + "&e=" + var3));
+            Class64 var4 = TextureOperation30.signlink.method1439(false, new URL(TextureOperation30.signlink.gameApplet.getCodeBase(), "clienterror.ws?c=&u=" + PacketParser.aLong3202 + "&v1=" + Signlink.javaVendor + "&v2=" + Signlink.javaVersion + "&e=" + var3));
 
             while (var4.anInt978 == 0) {
                 TimeUtils.sleep(1L);
@@ -199,13 +193,13 @@ public final class Class49 {
 
                 Unsorted.menuOptionCount = 1;
                 Class140_Sub7.aClass94Array2935[0] = TextCore.HasCancel;
-                Class163_Sub2_Sub1.aClass94Array4016[0] = TextCore.emptyJagexString;
+                Class163_Sub2_Sub1.aClass94Array4016[0] = RSString.parse("");
                 TextureOperation27.aShortArray3095[0] = 1005;
                 Class114.anIntArray1578[0] = Class3_Sub28_Sub5.anInt3590;
             }
 
-            if (Class3_Sub28_Sub12.anInt3655 != -1) {
-                Class52.method1160(-113, Class3_Sub28_Sub12.anInt3655);
+            if (ConfigInventoryDefinition.anInt3655 != -1) {
+                Class52.method1160(-113, ConfigInventoryDefinition.anInt3655);
             }
 
             if (var0 == 0) {
@@ -228,7 +222,7 @@ public final class Class49 {
                 }
 
                 Class3_Sub23.anInt2535 = Class44.anInt719;
-                if (Class3_Sub28_Sub12.anInt3655 != -1) {
+                if (ConfigInventoryDefinition.anInt3655 != -1) {
                     Class3_Sub28_Sub3.anInt3557 = 0;
                     Class8.method841();
                 }
@@ -280,7 +274,7 @@ public final class Class49 {
                     }
                 }
 
-                Class61.method1214(Class106.anInt1446, Class102.player.anInt2819, Class102.player.anInt2829, WorldListCountry.localPlane);
+                LinkedList.method1214(Class106.anInt1446, Class102.player.xAxis, Class102.player.zAxis, WorldListCountry.localPlane);
                 Class106.anInt1446 = 0;
             }
         } catch (RuntimeException var3) {
@@ -344,4 +338,7 @@ public final class Class49 {
         }
     }
 
+    static void method831(String var1) {
+        System.out.println("Error: " + InterfaceWidget.a("%0a", "\n", var1));
+    }
 }

@@ -5,7 +5,7 @@ import org.rs09.client.Linkable;
 abstract class Class3_Sub24 extends Linkable {
 
    int anInt2543;
-   Class3_Sub12 aClass3_Sub12_2544;
+   Sound aSound_2544;
    volatile boolean aBoolean2545 = true;
    Class3_Sub24 aClass3_Sub24_2546;
 

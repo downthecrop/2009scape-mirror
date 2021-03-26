@@ -97,12 +97,12 @@ public final class Class75_Sub4 extends Class75 {
          WorldMap.aClass153_3210 = var2;
          GameObject.aClass3_Sub28_Sub16_Sub2Array1839 = var0;
          Class3_Sub24_Sub4.aBooleanArray3503 = new boolean[GameObject.aClass3_Sub28_Sub16_Sub2Array1839.length];
-         Class134.aClass61_1758.method1211(-68);
+         Class134.aLinkedList_1758.method1211(-68);
          int var3 = WorldMap.aClass153_3210.getArchiveForName(TextCore.aClass94_2304);
          int[] var4 = WorldMap.aClass153_3210.getFileIds(var3);
 
          for(int var5 = 0; var5 < Objects.requireNonNull(var4).length; ++var5) {
-            Class134.aClass61_1758.method1215(Class124.method1747(new DataBuffer(WorldMap.aClass153_3210.getFile(var3, var4[var5]))));
+            Class134.aLinkedList_1758.method1215(Class124.method1747(new DataBuffer(WorldMap.aClass153_3210.getFile(var3, var4[var5]))));
          }
 
       } catch (RuntimeException var6) {

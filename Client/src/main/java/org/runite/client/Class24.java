@@ -9,6 +9,7 @@ public final class Class24 {
     static Random aRandom3088 = new Random();
     static int anInt467 = 0;
     static int anInt472 = 0;
+    static CacheIndex aClass153_152;
     private final int[] anIntArray475 = new int[]{-1, -1, -1, -1, -1};
     int anInt466 = -1;
     boolean aBoolean476 = false;
@@ -83,77 +84,6 @@ public final class Class24 {
         }
     }
 
-    static void renderLocalNPCs() {
-        try {
-            GraphicDefinition.incomingBuffer.setBitAccess();
-            int var1 = GraphicDefinition.incomingBuffer.getBits(8);
-            int var2;
-            if (var1 < Class163.localNPCCount) {
-                for (var2 = var1; var2 < Class163.localNPCCount; ++var2) {
-                    Class3_Sub7.anIntArray2292[Class139.anInt1829++] = Class15.localNPCIndexes[var2];
-                }
-            }
-
-            if (Class163.localNPCCount < var1) {
-                throw new RuntimeException("gnpov1");
-            } else {
-                Class163.localNPCCount = 0;
-
-                for (var2 = 0; var1 > var2; ++var2) {
-                    int var3 = Class15.localNPCIndexes[var2];
-                    NPC var4 = NPC.npcs[var3];
-                    int var5 = GraphicDefinition.incomingBuffer.getBits(1);
-                    if (0 == var5) {
-                        Class15.localNPCIndexes[Class163.localNPCCount++] = var3;
-                        var4.anInt2838 = Class44.anInt719;
-                    } else {
-                        int var6 = GraphicDefinition.incomingBuffer.getBits(2);
-                        if (var6 == 0) {
-                            Class15.localNPCIndexes[Class163.localNPCCount++] = var3;
-                            var4.anInt2838 = Class44.anInt719;
-                            Class21.maskUpdateIndexes[Unsorted.maskUpdateCount++] = var3;
-                        } else {
-                            int var7;
-                            int var8;
-                            if (1 == var6) {
-                                Class15.localNPCIndexes[Class163.localNPCCount++] = var3;
-                                var4.anInt2838 = Class44.anInt719;
-                                var7 = GraphicDefinition.incomingBuffer.getBits(3);
-                                var4.walkStep(1, (byte) 32, var7);
-                                var8 = GraphicDefinition.incomingBuffer.getBits(1);
-                                if (1 == var8) {
-                                    Class21.maskUpdateIndexes[Unsorted.maskUpdateCount++] = var3;
-                                }
-                            } else if (var6 == 2) {
-                                Class15.localNPCIndexes[Class163.localNPCCount++] = var3;
-                                var4.anInt2838 = Class44.anInt719;
-                                if (GraphicDefinition.incomingBuffer.getBits(1) == 1) {
-                                    var7 = GraphicDefinition.incomingBuffer.getBits(3);
-                                    var4.walkStep(2, (byte) -122, var7);
-                                    var8 = GraphicDefinition.incomingBuffer.getBits(3);
-                                    var4.walkStep(2, (byte) 85, var8);
-                                } else {
-                                    var7 = GraphicDefinition.incomingBuffer.getBits(3);
-                                    var4.walkStep(0, (byte) -80, var7);
-                                }
-
-                                var7 = GraphicDefinition.incomingBuffer.getBits(1);
-                                if (var7 == 1) {
-                                    Class21.maskUpdateIndexes[Unsorted.maskUpdateCount++] = var3;
-                                }
-                            } else if (var6 == 3) {
-                                Class3_Sub7.anIntArray2292[Class139.anInt1829++] = var3;
-                            }
-                        }
-                    }
-                }
-
-            }
-        } catch (RuntimeException var9) {
-            throw ClientErrorException.clientError(var9, "dm.E(" + (byte) -11 + ')');
-        }
-    }
-
     static void method949(int var0, int var2, int var3, int var4) {
         try {
             int var6 = 0;
@@ -193,12 +123,12 @@ public final class Class24 {
     static void method950(RSInterface var0, int var1, int var2, int var3) {
         try {
             if (2 <= Unsorted.menuOptionCount || Class164_Sub1.anInt3012 != 0 || GameObject.aBoolean1837) {
-                RSString var4 = Class3_Sub28_Sub1.method531();
+                RSString var4 = method531();
                 if (var0 == null) {
                     int var5 = FontType.bold.method683(var4, 4 + var3, var2 - -15, aRandom3088, Class38_Sub1.anInt2618);
                     Class21.method1340(4 + var3, FontType.bold.method682(var4) + var5, var2, 15);
                 } else {
-                    Font var7 = var0.method868(TextureOperation0.nameIconsSpriteArray);
+                    Font var7 = var0.method868(Sprites.nameIconsSpriteArray);
                     if (null == var7) {
                         var7 = FontType.bold;
                     }
@@ -227,6 +157,39 @@ public final class Class24 {
         }
     }
 
+    static RSString method531() {
+        RSString var1;
+        if (Class164_Sub1.anInt3012 == 1 && Unsorted.menuOptionCount < 2) {
+            var1 = RSString.stringCombiner(new RSString[]{TextCore.HasUse, TextCore.Spacer, RenderAnimationDefinition.aClass94_378, TextCore.aClass94_1724});
+        } else if (GameObject.aBoolean1837 && 2 > Unsorted.menuOptionCount) {
+            var1 = RSString.stringCombiner(new RSString[]{Class3_Sub28_Sub9.aClass94_3621, TextCore.Spacer, TextCore.aClass94_676, TextCore.aClass94_1724});
+
+        } else if (ClientCommands.shiftClickEnabled && ObjectDefinition.aBooleanArray1490[81] && Unsorted.menuOptionCount > 2 && !ObjectDefinition.aBooleanArray1490[82]) {
+            for (Class3_Sub28_Sub1.counter = 2; Class3_Sub28_Sub1.counter < Unsorted.menuOptionCount; Class3_Sub28_Sub1.counter++) {
+                RSString option = (Unsorted.method802(Unsorted.menuOptionCount - Class3_Sub28_Sub1.counter));
+                if (option.toString().contains("Drop") || option.toString().contains("Release")) {
+                    ClientCommands.canDrop = true;
+                    Class3_Sub28_Sub1.dropAction = Class3_Sub28_Sub1.counter;
+                    break;
+                } else {
+                    ClientCommands.canDrop = false;
+                }
+            }
+            if (ClientCommands.canDrop) {
+                var1 = Unsorted.method802(Unsorted.menuOptionCount - Class3_Sub28_Sub1.dropAction);
+            } else {
+                var1 = Unsorted.method802(Unsorted.menuOptionCount - 1);
+            }
+        } else {
+            var1 = Unsorted.method802(Unsorted.menuOptionCount - 1);
+        }
+
+        if (Unsorted.menuOptionCount > 2) {
+            var1 = RSString.stringCombiner(new RSString[]{var1, Class1.aClass94_58, RSString.stringAnimator(Unsorted.menuOptionCount - 2), TextCore.HasMoreOptions});
+        }
+        return var1;
+    }
+
     final Model_Sub1 method941() {
         try {
             int var3 = 0;
@@ -234,7 +197,7 @@ public final class Class24 {
 
             for (int var4 = 0; var4 < 5; ++var4) {
                 if (this.anIntArray475[var4] != -1) {
-                    var2[var3++] = Model_Sub1.method2015(Class10.aClass153_152, this.anIntArray475[var4]);
+                    var2[var3++] = Model_Sub1.method2015(aClass153_152, this.anIntArray475[var4]);
                 }
             }
 
@@ -266,7 +229,7 @@ public final class Class24 {
                 boolean var2 = true;
 
                 for (int var3 = 0; this.anIntArray474.length > var3; ++var3) {
-                    if (!Class10.aClass153_152.method2129((byte) -90, 0, this.anIntArray474[var3])) {
+                    if (!aClass153_152.method2129((byte) -90, 0, this.anIntArray474[var3])) {
                         var2 = false;
                     }
                 }
@@ -331,7 +294,7 @@ public final class Class24 {
                 Model_Sub1[] var2 = new Model_Sub1[this.anIntArray474.length];
 
                 for (int var3 = 0; this.anIntArray474.length > var3; ++var3) {
-                    var2[var3] = Model_Sub1.method2015(Class10.aClass153_152, this.anIntArray474[var3]);
+                    var2[var3] = Model_Sub1.method2015(aClass153_152, this.anIntArray474[var3]);
                 }
                 Model_Sub1 var7;
                 if (var2.length == 1) {
@@ -365,7 +328,7 @@ public final class Class24 {
             boolean var2 = true;
 
             for (int var3 = 0; var3 < 5; ++var3) {
-                if (-1 != this.anIntArray475[var3] && !Class10.aClass153_152.method2129((byte) 95, 0, this.anIntArray475[var3])) {
+                if (-1 != this.anIntArray475[var3] && !aClass153_152.method2129((byte) 95, 0, this.anIntArray475[var3])) {
                     var2 = false;
                 }
             }

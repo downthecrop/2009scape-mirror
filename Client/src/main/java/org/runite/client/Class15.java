@@ -117,7 +117,7 @@ public final class Class15 implements Runnable {
                     if (var27 > var14) {
                         var15 = 255 & var4[var14][var34];
                         if (var15 > 0) {
-                            MapUnderlayColorDefinition var16 = Class158_Sub1.method629(var15 - 1);
+                            MapUnderlayColorDefinition var16 = MapUnderlayColorDefinition.method629(var15 - 1);
                             var28[var34] += var16.anInt1408;
                             var29[var34] += var16.anInt1406;
                             var30[var34] += var16.anInt1417;
@@ -130,7 +130,7 @@ public final class Class15 implements Runnable {
                     if (var15 >= 0) {
                         var35 = var4[var15][var34] & 0xFF;
                         if (0 < var35) {
-                            MapUnderlayColorDefinition var17 = Class158_Sub1.method629(-1 + var35);
+                            MapUnderlayColorDefinition var17 = MapUnderlayColorDefinition.method629(-1 + var35);
                             var28[var34] -= var17.anInt1408;
                             var29[var34] -= var17.anInt1406;
                             var30[var34] -= var17.anInt1417;
@@ -239,7 +239,7 @@ public final class Class15 implements Runnable {
             int var7 = Class3_Sub28_Sub5.aCalendar3581.get(Calendar.HOUR_OF_DAY);
             int var8 = Class3_Sub28_Sub5.aCalendar3581.get(Calendar.MINUTE);
             int var9 = Class3_Sub28_Sub5.aCalendar3581.get(Calendar.SECOND);
-            return RSString.stringCombiner(new RSString[]{TextCore.DaysOfTheWeek[var3 + -1], TextCore.aClass94_3145, RSString.stringAnimator(var4 / 10), RSString.stringAnimator(var4 % 10), TextCore.aClass94_2025, TextCore.MonthsOfTheYear[var5], TextCore.aClass94_2025, RSString.stringAnimator(var6), TextCore.aClass94_465, RSString.stringAnimator(var7 / 10), RSString.stringAnimator(var7 % 10), TextCore.char_colon, RSString.stringAnimator(var8 / 10), RSString.stringAnimator(var8 % 10), TextCore.char_colon, RSString.stringAnimator(var9 / 10), RSString.stringAnimator(var9 % 10), TextCore.timeZone});
+            return RSString.stringCombiner(new RSString[]{TextCore.DaysOfTheWeek[var3 + -1], RSString.parse(")1 "), RSString.stringAnimator(var4 / 10), RSString.stringAnimator(var4 % 10), TextCore.aClass94_2025, TextCore.MonthsOfTheYear[var5], TextCore.aClass94_2025, RSString.stringAnimator(var6), RSString.parse(" "), RSString.stringAnimator(var7 / 10), RSString.stringAnimator(var7 % 10), RSString.parse(":"), RSString.stringAnimator(var8 / 10), RSString.stringAnimator(var8 % 10), RSString.parse(":"), RSString.stringAnimator(var9 / 10), RSString.stringAnimator(var9 % 10), RSString.parse(" GMT")});
         } catch (RuntimeException var10) {
             throw ClientErrorException.clientError(var10, "cj.F(" + var0 + ')');
         }
@@ -254,7 +254,7 @@ public final class Class15 implements Runnable {
             var10.anInt3056 = 4;
             var10.aBoolean3065 = false;
             var10.anInt3060 = 8;
-            var10.method158(16251);
+            var10.postDecode();
             TextureOperation33.method180(122, 256, 64);
 
             for (int var11 = 0; var11 < 256; ++var11) {
@@ -284,7 +284,7 @@ public final class Class15 implements Runnable {
                     Class81.method1400(this.aClass87_350, null, -71);
                 }
             } catch (Exception var7) {
-                Class49.reportError(null, var7, (byte) 111);
+                Class49.reportError(null, var7);
             } finally {
                 this.aBoolean353 = false;
             }

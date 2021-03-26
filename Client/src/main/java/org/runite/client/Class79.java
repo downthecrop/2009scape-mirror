@@ -86,7 +86,7 @@ final class Class79 {
                         Class25.aBoolean488 = 1 == var0.readUnsignedByte();
                         RSInterface.aBoolean236 = var0.readUnsignedByte() == 1;
                         WorldListEntry.aBoolean2623 = var0.readUnsignedByte() == 1;
-                        TextureOperation0.aBoolean3275 = var0.readUnsignedByte() == 1;
+                        Unsorted.aBoolean3275 = var0.readUnsignedByte() == 1;
                         Class140_Sub6.aBoolean2910 = 1 == var0.readUnsignedByte();
                         Unsorted.anInt1137 = var0.readUnsignedByte();
                         if (2 < Unsorted.anInt1137) {
@@ -109,15 +109,15 @@ final class Class79 {
 
                         Unsorted.anInt3671 = Class3_Sub28_Sub9.anInt3622;
                         TextureOperation17.aBoolean3184 = var0.readUnsignedByte() == 1;
-                        CS2Script.anInt2453 = var0.readUnsignedByte();
-                        if (CS2Script.anInt2453 > 127) {
-                            CS2Script.anInt2453 = 127;
+                        AudioHandler.soundEffectVolume = var0.readUnsignedByte();
+                        if (AudioHandler.soundEffectVolume > 127) {
+                            AudioHandler.soundEffectVolume = 127;
                         }
 
-                        Unsorted.anInt120 = var0.readUnsignedByte();
-                        Sprites.anInt340 = var0.readUnsignedByte();
-                        if (Sprites.anInt340 > 127) {
-                            Sprites.anInt340 = 127;
+                        AudioHandler.musicVolume = var0.readUnsignedByte();
+                        Sprites.ambientVolume = var0.readUnsignedByte();
+                        if (Sprites.ambientVolume > 127) {
+                            Sprites.ambientVolume = 127;
                         }
 
                         if (var2 >= 1) {
@@ -176,7 +176,7 @@ final class Class79 {
 
     static boolean method1391(int var0) {
         try {
-            return var0 == ~Class10.anInt154 && !Class101.aClass3_Sub24_Sub4_1421.method473(-128);
+            return var0 == ~Unsorted.anInt154 && !Class101.aClass3_Sub24_Sub4_1421.method473(-128);
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "kk.A(" + var0 + ')');
         }

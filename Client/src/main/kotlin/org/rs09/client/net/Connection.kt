@@ -132,7 +132,7 @@ class Connection(val socket: Socket, val signlink: Signlink) : Runnable {
             }
 
             if (class64 == null) {
-                class64 = signlink.method1451(3, this)
+                class64 = signlink.startThread(3, this)
             }
 
             condition.signalAll()

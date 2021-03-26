@@ -6,7 +6,7 @@ final class TextureOperation26 extends TextureOperation {
 
    private int anInt3073 = 0;
    private int anInt3074 = 4096;
-   static Class61 aClass61_3075 = new Class61();
+   static LinkedList aLinkedList_3075 = new LinkedList();
    static boolean aBoolean3078;
    static int anInt3081 = 0;
 
@@ -123,7 +123,7 @@ final class TextureOperation26 extends TextureOperation {
       try {
          int[] var4 = this.aClass114_2382.method1709(var1);
          if(this.aClass114_2382.aBoolean1580) {
-            int[] var5 = this.method152(0, var1, 32755);
+            int[] var5 = this.method152(0, var1);
 
             for(int var6 = 0; var6 < Class113.anInt1559; ++var6) {
                int var7 = var5[var6];
@@ -139,16 +139,16 @@ final class TextureOperation26 extends TextureOperation {
 
    static void method196() {
       try {
-         Class3_Sub8.anIntArray3083 = null;
+         AudioHandler.soundEffectCoordinates = null;
 
       } catch (RuntimeException var2) {
          throw ClientErrorException.clientError(var2, "ca.B(" + ')');
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if(!var3) {
+         if(!true) {
             method196();
          }
 
@@ -159,7 +159,7 @@ final class TextureOperation26 extends TextureOperation {
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "ca.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "ca.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 
@@ -190,23 +190,6 @@ final class TextureOperation26 extends TextureOperation {
 
       } catch (RuntimeException var8) {
          throw ClientErrorException.clientError(var8, "ca.E(" + var0 + ',' + -32624 + ')');
-      }
-   }
-
-   static void method199(int var0, int var1, int var2) {
-      try {
-
-         if(CS2Script.anInt2453 != 0 && var0 != 0 && Class113.anInt1552 < 50 && var1 != -1) {
-            Class3_Sub25.anIntArray2550[Class113.anInt1552] = var1;
-            Class166.anIntArray2068[Class113.anInt1552] = var0;
-            Unsorted.anIntArray2157[Class113.anInt1552] = var2;
-            Class102.aClass135Array2131[Class113.anInt1552] = null;
-            Class3_Sub8.anIntArray3083[Class113.anInt1552] = 0;
-            ++Class113.anInt1552;
-         }
-
-      } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "ca.C(" + var0 + ',' + var1 + ',' + var2 + ',' + -799 + ')');
       }
    }
 

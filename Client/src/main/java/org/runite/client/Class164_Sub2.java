@@ -117,7 +117,7 @@ public class Class164_Sub2 extends Class164 {
                   if(var8 == 4) {
                      var11 = var4[var6++] << 16;
                      var11 += var4[var6++];
-                     var12 = Class7.getRSInterface(var11);
+                     var12 = Unsorted.getRSInterface(var11);
                      var13 = var4[var6++];
                      if(-1 != var13 && (!ItemDefinition.getItemDefinition(var13).membersItem || Unsorted.isMember)) {
                         for(var14 = 0; var14 < Objects.requireNonNull(var12).itemAmounts.length; ++var14) {
@@ -156,7 +156,7 @@ public class Class164_Sub2 extends Class164 {
                   if(var8 == 10) {
                      var11 = var4[var6++] << 16;
                      var11 += var4[var6++];
-                     var12 = Class7.getRSInterface(var11);
+                     var12 = Unsorted.getRSInterface(var11);
                      var13 = var4[var6++];
                      if(var13 != -1 && (!ItemDefinition.getItemDefinition(var13).membersItem || Unsorted.isMember)) {
                         for(var14 = 0; var14 < Objects.requireNonNull(var12).itemAmounts.length; ++var14) {
@@ -188,11 +188,11 @@ public class Class164_Sub2 extends Class164 {
                   }
 
                   if(var8 == 18) {
-                     var9 = (Class102.player.anInt2819 >> 7) - -Class131.anInt1716;
+                     var9 = (Class102.player.xAxis >> 7) - -Class131.anInt1716;
                   }
 
                   if(var8 == 19) {
-                     var9 = (Class102.player.anInt2829 >> 7) - -Texture.anInt1152;
+                     var9 = (Class102.player.zAxis >> 7) - -Texture.anInt1152;
                   }
 
                   if(var8 == 20) {

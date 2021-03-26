@@ -60,28 +60,28 @@ final class TextureOperation1 extends TextureOperation {
    static void method219(boolean var0) {
       try {
          if(var0) {
-            if(-1 != Class3_Sub28_Sub12.anInt3655) {
-               Class60.method1208((byte)-128, Class3_Sub28_Sub12.anInt3655);
+            if(-1 != ConfigInventoryDefinition.anInt3655) {
+               Class60.method1208((byte)-128, ConfigInventoryDefinition.anInt3655);
             }
 
             for(Class3_Sub31 var2 = TextureOperation23.aHashTable_3208.first(); null != var2; var2 = TextureOperation23.aHashTable_3208.next()) {
                TextureOperation19.method254(true, var2);
             }
 
-            Class3_Sub28_Sub12.anInt3655 = -1;
+            ConfigInventoryDefinition.anInt3655 = -1;
             TextureOperation23.aHashTable_3208 = new HashTable(8);
             Class3_Sub7.method122(3000 + -2918);
-            Class3_Sub28_Sub12.anInt3655 = Client.loginScreenInterfaceID;
+            ConfigInventoryDefinition.anInt3655 = Client.loginScreenInterfaceID;
             Class124.method1746(false, (byte)-36);
             Unsorted.method1093(false);
-            TextureOperation24.method226(Class3_Sub28_Sub12.anInt3655);
+            TextureOperation24.method226(ConfigInventoryDefinition.anInt3655);
          }
 
          Class3_Sub28_Sub5.anInt3590 = -1;
          TextureOperation20.method229(Class161.anInt2027);
          Class102.player = new Player();
-         Class102.player.anInt2829 = 3000;
-         Class102.player.anInt2819 = 3000;
+         Class102.player.zAxis = 3000;
+         Class102.player.xAxis = 3000;
          if(HDToolKit.highDetail) {
             if(Class133.anInt1753 == 2) {
                NPC.anInt3995 = Unsorted.anInt30 << 7;
@@ -117,24 +117,20 @@ final class TextureOperation1 extends TextureOperation {
 
    static void method221(int var0, RSString var1, RSString var2, RSString var3, int var4) {
       try {
-         Class3_Sub28_Sub12.sendGameMessage(var0, var4, var1, var3, var2);
+         MessageManager.sendGameMessage(var0, var4, var1, var3, var2);
       } catch (RuntimeException var6) {
          throw ClientErrorException.clientError(var6, "fm.F(" + var0 + ',' + (var1 != null?"{...}":"null") + ',' + (var2 != null?"{...}":"null") + ',' + (var3 != null?"{...}":"null") + ',' + var4 + ')');
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
-         if(!var3) {
-            method221(-64, null, null, null, 34);
-         }
-
          if(var1 == 0) {
             this.method218(var2.readMedium());
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "fm.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "fm.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 

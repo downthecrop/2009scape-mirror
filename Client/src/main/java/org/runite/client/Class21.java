@@ -26,14 +26,14 @@ public final class Class21 {
             Class161.anInt2028 = 0;
             Class38_Sub1.anInt2617 = 0;
             Class24.anInt469 = -1;
-            GraphicDefinition.incomingBuffer.index = 0;
+            BufferedDataStream.incomingBuffer.index = 0;
             AbstractSprite.anInt3699 = 0;
             Unsorted.incomingOpcode = -1;
 
             int var1;
-            for (var1 = 0; TextureOperation0.players.length > var1; ++var1) {
-                if (null != TextureOperation0.players[var1]) {
-                    TextureOperation0.players[var1].anInt2772 = -1;
+            for (var1 = 0; Unsorted.players.length > var1; ++var1) {
+                if (null != Unsorted.players[var1]) {
+                    Unsorted.players[var1].anInt2772 = -1;
                 }
             }
 
@@ -51,7 +51,7 @@ public final class Class21 {
                 Unsorted.aBooleanArray3674[var1] = true;
             }
 
-            TextureOperation9.method204(-3);
+            TextureOperation9.method204();
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "dh.F(" + false + ')');
         }
@@ -76,7 +76,7 @@ public final class Class21 {
             var4.anInt2602 = interfaceId;
             TextureOperation23.aHashTable_3208.put(interfaceHash, var4);
             TextureOperation20.method232(interfaceId);
-            RSInterface var5 = Class7.getRSInterface(interfaceHash);
+            RSInterface var5 = Unsorted.getRSInterface(interfaceHash);
             if (var5 == null) {
                 System.out.println("Invalid interface opened - [window=" + (interfaceHash >> 16) + ", child=" + (interfaceHash & 0xFF) + ", id=" + interfaceId + "]");
             } else {
@@ -120,8 +120,8 @@ public final class Class21 {
             }
 
             TextureOperation24.method226(interfaceId);
-            if (Class3_Sub28_Sub12.anInt3655 != -1) {
-                Class3_Sub8.method124(6422 ^ 6509, 1, Class3_Sub28_Sub12.anInt3655);
+            if (ConfigInventoryDefinition.anInt3655 != -1) {
+                Class3_Sub8.method124(6422 ^ 6509, 1, ConfigInventoryDefinition.anInt3655);
             }
 
         } catch (RuntimeException var10) {

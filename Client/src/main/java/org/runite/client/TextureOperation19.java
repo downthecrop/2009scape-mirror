@@ -23,7 +23,7 @@ final class TextureOperation19 extends TextureOperation {
          }
 
          Class164_Sub2.method2249(var3);
-         RSInterface var5 = Class7.getRSInterface(var4);
+         RSInterface var5 = Unsorted.getRSInterface(var4);
          if(null != var5) {
             Class20.method909(var5);
          }
@@ -55,8 +55,8 @@ final class TextureOperation19 extends TextureOperation {
             Class21.anInt3552 = var7 + 8;
          }
 
-         if(-1 != Class3_Sub28_Sub12.anInt3655) {
-            Class3_Sub8.method124(115, 1, Class3_Sub28_Sub12.anInt3655);
+         if(-1 != ConfigInventoryDefinition.anInt3655) {
+            Class3_Sub8.method124(115, 1, ConfigInventoryDefinition.anInt3655);
          }
 
       } catch (RuntimeException var10) {
@@ -86,8 +86,8 @@ final class TextureOperation19 extends TextureOperation {
 
          int[][] var3 = this.aClass97_2376.method1594((byte)4, var2);
          if(this.aClass97_2376.aBoolean1379) {
-            int[] var4 = this.method152(1, var2, 32755);
-            int[] var5 = this.method152(2, var2, 32755);
+            int[] var4 = this.method152(1, var2);
+            int[] var5 = this.method152(2, var2);
             int[] var8 = var3[2];
             int[] var7 = var3[1];
             int[] var6 = var3[0];
@@ -116,8 +116,8 @@ final class TextureOperation19 extends TextureOperation {
       try {
          int[] var4 = this.aClass114_2382.method1709(var1);
          if(this.aClass114_2382.aBoolean1580) {
-            int[] var5 = this.method152(1, var1, 32755);
-            int[] var6 = this.method152(2, var1, 32755);
+            int[] var5 = this.method152(1, var1);
+            int[] var6 = this.method152(2, var1);
 
             for(int var7 = 0; var7 < Class113.anInt1559; ++var7) {
                int var9 = this.anInt3217 * var6[var7] >> 12;
@@ -126,7 +126,7 @@ final class TextureOperation19 extends TextureOperation {
                int var11 = TextureOperation23.anIntArray3212[var8] * var9 >> 12;
                int var12 = RenderAnimationDefinition.anInt396 & (var10 >> 12) + var7;
                int var13 = Class3_Sub20.anInt2487 & (var11 >> 12) + var1;
-               int[] var14 = this.method152(0, var13, 32755);
+               int[] var14 = this.method152(0, var13);
                var4[var7] = var14[var12];
             }
          }
@@ -137,7 +137,7 @@ final class TextureOperation19 extends TextureOperation {
       }
    }
 
-   final void method157(int var1, DataBuffer var2, boolean var3) {
+   final void decode(int var1, DataBuffer var2) {
       try {
          if(var1 == 0) {
             this.anInt3217 = var2.readUnsignedShort() << 4;
@@ -145,12 +145,12 @@ final class TextureOperation19 extends TextureOperation {
             this.aBoolean2375 = var2.readUnsignedByte() == 1;
          }
 
-         if(!var3) {
+         if(!true) {
             TextureOperation20.anInt3216 = -7;
          }
 
       } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "ke.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + var3 + ')');
+         throw ClientErrorException.clientError(var5, "ke.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');
       }
    }
 
@@ -238,7 +238,7 @@ final class TextureOperation19 extends TextureOperation {
                            if(var0.anInt1664 != 12345678) {
                               Class51.method1154(var27, var29, var25, var26, var28, var24, var0.anInt1664, var0.anInt1663, var0.anInt1667);
                            }
-                        } else if(TextureOperation0.aBoolean3275) {
+                        } else if(Unsorted.aBoolean3275) {
                            if(var0.aBoolean1674) {
                               Class51.method1135(var27, var29, var25, var26, var28, var24, var0.anInt1664, var0.anInt1663, var0.anInt1667, var10, var14, var9, var17, var18, var21, var12, var11, var15, var0.anInt1670);
                            } else {
@@ -264,7 +264,7 @@ final class TextureOperation19 extends TextureOperation {
                            if(var0.anInt1675 != 12345678) {
                               Class51.method1154(var23, var25, var29, var22, var24, var28, var0.anInt1675, var0.anInt1667, var0.anInt1663);
                            }
-                        } else if(TextureOperation0.aBoolean3275) {
+                        } else if(Unsorted.aBoolean3275) {
                            Class51.method1135(var23, var25, var29, var22, var24, var28, var0.anInt1675, var0.anInt1667, var0.anInt1663, var10, var14, var9, var17, var18, var21, var12, var11, var15, var0.anInt1670);
                         } else {
                            var30 = Class51.anInterface2_838.method15(var0.anInt1670, 65535);
@@ -279,15 +279,11 @@ final class TextureOperation19 extends TextureOperation {
       }
    }
 
-   final void method158(int var1) {
+   final void postDecode() {
       try {
-         if(var1 != 16251) {
-            method255(33, 78, 124);
-         }
-
          Class8.method844((byte)-9);
       } catch (RuntimeException var3) {
-         throw ClientErrorException.clientError(var3, "ke.P(" + var1 + ')');
+         throw ClientErrorException.clientError(var3, "ke.P(" + ')');
       }
    }
 

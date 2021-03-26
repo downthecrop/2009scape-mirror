@@ -125,7 +125,7 @@ final class Class110 {
                         }
 
                         if (object != null) {
-                            boolean var37 = Class7.method835(var2, var7, var9, var19, var12, var13, (GameObject) object, var24);
+                            boolean var37 = method835(var2, var7, var9, var19, var12, var13, (GameObject) object, var24);
                             if (def.aBoolean1525 && var37 && var1) {
                                 int var29 = 15;
                                 if (object instanceof Model) {
@@ -161,7 +161,7 @@ final class Class110 {
                             object = new Class140_Sub3(objectId, type, var10, var0, var7, var9, def.animationId, def.aBoolean1492, null);
                         }
 
-                        Class7.method835(var2, var7, var9, var19, 1, 1, (GameObject) object, var24);
+                        method835(var2, var7, var9, var19, 1, 1, (GameObject) object, var24);
                         if (var1 && type <= 17 && type != 13 && var2 > 0) {
                             Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9] = TextureOperation3.bitwiseOr(Class38_Sub1.anIntArrayArrayArray2609[var2][var7][var9], 4);
                         }
@@ -350,7 +350,7 @@ final class Class110 {
                                 object = new Class140_Sub3(objectId, type, var10, var0, var7, var9, def.animationId, def.aBoolean1492, null);
                             }
 
-                            Class7.method835(var2, var7, var9, var19, 1, 1, (GameObject) object, var24);
+                            method835(var2, var7, var9, var19, 1, 1, (GameObject) object, var24);
                             if (def.ClipType != 0 && var4 != null) {
                                 var4.method1489(var7, def.ProjectileClipped, (byte) 127, var9, var12, var13);
                             }
@@ -484,4 +484,13 @@ final class Class110 {
         }
     }
 
+    static boolean method835(int var0, int var1, int var2, int var3, int var4, int var5, GameObject var6, long var8) {
+        if (var6 == null) {
+            return true;
+        } else {
+            int var10 = var1 * 128 + 64 * var4;
+            int var11 = var2 * 128 + 64 * var5;
+            return Class56.method1189(var0, var1, var2, var4, var5, var10, var11, var3, var6, 0, false, var8);
+        }
+    }
 }
