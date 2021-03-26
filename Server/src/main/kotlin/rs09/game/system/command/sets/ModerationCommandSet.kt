@@ -1,5 +1,6 @@
 package rs09.game.system.command.sets
 
+import core.game.node.entity.player.Player
 import rs09.game.system.command.Command
 import core.game.system.task.Pulse
 import rs09.game.world.GameWorld
@@ -19,31 +20,46 @@ class ModerationCommandSet : CommandSet(Command.Privilege.MODERATOR){
 
 
         /**
+         * Kick a player
+         * =============================================================================================================
+         */
+        define("kick", Command.Privilege.ADMIN){ player, args ->
+            val playerToKick: Player? = Repository.getPlayerByName(args[1])
+            if (playerToKick != null) {
+                playerToKick.clear(true)
+                notify(player, "Player ${playerToKick.username} was kicked.")
+            } else {
+                reject(player, "ERROR REMOVING PLAYER.")
+            }
+        }
+        /**
+         * =============================================================================================================
+         */
+
+
+        /**
          * Jail a player
          * =============================================================================================================
          */
         define("jail"){player,args ->
             if(args.size < 3) {
                 reject(player,"Usage: ::jail <seconds> <player>")
-                return@define
             }
 
             val timeSeconds = args[1].toIntOrNull()
             if(timeSeconds == null){
                 reject(player, "<seconds> Must be a valid integer!")
-                return@define
             }
-            if(timeSeconds > MAX_JAIL_TIME){
+            if(timeSeconds!! > MAX_JAIL_TIME){
                 reject(player, "Maximum jail time is $MAX_JAIL_TIME seconds.")
-                return@define
             }
             val name = args.slice(2 until args.size).joinToString("_")
             val otherPlayer = Repository.getPlayerByName(name)
             if(otherPlayer == null){
                 reject(player, "Can not find $name in the player list!")
-                return@define
             }
-            player.sendMessage("Jailing ${otherPlayer.username} for $timeSeconds seconds.")
+            notify(player, "Jailing ${otherPlayer!!.username} for $timeSeconds seconds.")
+            notify(otherPlayer, "${player.username} has jailed you for $timeSeconds seconds.")
             GameWorld.Pulser.submit(object : Pulse(3){
                 val originalLoc = otherPlayer.location
                 val releaseTime = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(timeSeconds.toLong())
@@ -62,7 +78,5 @@ class ModerationCommandSet : CommandSet(Command.Privilege.MODERATOR){
         /**
          * =============================================================================================================
          */
-
-
     }
 }

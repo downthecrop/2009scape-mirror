@@ -11,7 +11,7 @@ class SlayerCommandSet : CommandSet(Command.Privilege.ADMIN){
          * Finishes a player's slayer task (the correct way)
          */
         define("finishtask"){player,_ ->
-            player.debug("Kill the npc that spawned to finish your task.")
+            notify(player, "Kill the npc that spawned to finish your task.")
             player.slayer.amount = 1
             val finisher = NPC(player.slayer.task.npcs[0], player.location)
             finisher.isRespawn = false
@@ -24,17 +24,15 @@ class SlayerCommandSet : CommandSet(Command.Privilege.ADMIN){
         define("setslayerpoints"){player,args ->
             if(args.size < 2){
                 reject(player,"Usage: ::setslayerpoints amount")
-                return@define
             }
 
             val amount = args[1].toIntOrNull()
             if(amount == null){
                 reject(player,"Amount needs to be a valid integer!")
-                return@define
             }
 
-            player.slayer.slayerPoints = amount
-            player.sendMessage("Set slayer points to $amount.")
+            player.slayer.slayerPoints = amount!!
+            notify(player, "Set slayer points to $amount.")
         }
     }
 }

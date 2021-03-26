@@ -24,7 +24,6 @@ class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
         define("npcareaanim") { player, args ->
             if (args.size < 3) {
                 reject(player, "Syntax error: ::npcareaanim <Animation ID> <String>")
-                return@define
             }
             npcs = RegionManager.getLocalNpcs(player.location, 10)
             for (n in npcs) {
@@ -49,11 +48,10 @@ class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
             val pnpc_id = args[1].toIntOrNull()
             if(pnpc_id == null){
                 reject(player, "<npcid> must be a valid integer.")
-                return@define
             }
 
-            player.appearance.transformNPC(pnpc_id)
-            player.sendMessage("Transformed into NPC $pnpc_id")
+            player.appearance.transformNPC(pnpc_id!!)
+            notify(player,"Transformed into NPC $pnpc_id")
         }
 
 
@@ -69,7 +67,7 @@ class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
          */
         define("invis"){ player, _ ->
             player.isInvisible = !player.isInvisible
-            player.sendMessage("You are now ${if (player.isInvisible) "invisible" else "visible"} to others.")
+            notify(player,"You are now ${if (player.isInvisible) "invisible" else "visible"} to others.")
         }
 
 
@@ -78,7 +76,7 @@ class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
          */
         define("1hit"){ player, _ ->
             player.setAttribute("1hko", !player.getAttribute("1hko", false))
-            player.sendMessage("1-hit KO mode " + if (player.getAttribute("1hko", false)) "on." else "off.")
+            notify(player,"1-hit KO mode " + if (player.getAttribute("1hko", false)) "on." else "off.")
         }
 
 
@@ -87,7 +85,7 @@ class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
          */
         define("god"){ player, _ ->
             player.setAttribute("godMode", !player.getAttribute("godMode", false))
-            player.sendMessage("God mode ${if (player.getAttribute("godMode", false)) "enabled." else "disabled."}")
+            notify(player,"God mode ${if (player.getAttribute("godMode", false)) "enabled." else "disabled."}")
         }
 
 
@@ -97,7 +95,7 @@ class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
         define("mrboneswildride"){ player, _ ->
             val boneMode = !player.getAttribute("boneMode",false)
             player.setAttribute("boneMode", boneMode)
-            player.sendMessage("Bone Mode ${if (boneMode) "<col=00ff00>ENGAGED</col>." else "<col=ff0000>POWERING DOWN</col>."}")
+            notify(player,"Bone Mode ${if (boneMode) "<col=00ff00>ENGAGED</col>." else "<col=ff0000>POWERING DOWN</col>."}")
             player.appearance.rideCart(boneMode)
             if (player.appearance.isRidingMinecart) {
                 var i = 0
@@ -118,6 +116,5 @@ class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
         define("makeover", Command.Privilege.MODERATOR){ player, _ ->
             CharacterDesign.open(player)
         }
-
     }
 }

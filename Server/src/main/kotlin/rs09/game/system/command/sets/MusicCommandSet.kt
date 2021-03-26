@@ -14,15 +14,13 @@ class MusicCommandSet : CommandSet(Command.Privilege.STANDARD){
         define("playsong"){player,args ->
             if(args.size < 2){
                 reject(player,"Usage: ::playsong songID")
-                return@define
             }
             val id = args[1].toIntOrNull()
             if(id == null){
                 reject(player,"Please use a valid integer for the song id.")
-                return@define
             }
-            player.musicPlayer.play(MusicEntry.forId(id))
-            player.sendMessage("Now playing song $id")
+            player.musicPlayer.play(MusicEntry.forId(id!!))
+            notify(player,"Now playing song $id")
         }
 
         /**

@@ -22,7 +22,6 @@ class AnimationCommandSet : CommandSet(Command.Privilege.ADMIN) {
         define("anim"){ player, args ->
             if (args.size < 2) {
                 reject(player, "Syntax error: ::anim <Animation ID>")
-                return@define
             }
             val animation = Animation(args[1].toInt())
             player.animate(animation)
@@ -34,12 +33,11 @@ class AnimationCommandSet : CommandSet(Command.Privilege.ADMIN) {
         define("loopanim"){ player, args ->
             if (args.size < 2) {
                 reject(player, "Syntax error: ::loopanim <Animation ID> <Loop Amount>")
-                return@define
             }
             val start = toInteger(args[1])
             var end = toInteger((args[2]))
             if (end > 25) {
-                player.sendMessage("Really...? $end times...? Looping 25 times instead.")
+                notify(player, "Really...? $end times...? Looping 25 times instead.")
                 end = 25
             }
             GameWorld.Pulser.submit(object : Pulse(3, player) {
@@ -57,14 +55,12 @@ class AnimationCommandSet : CommandSet(Command.Privilege.ADMIN) {
         define("ranim"){ player, args ->
             if (args.size < 2) {
                 reject(player, "Syntax error: ::ranim <Render Animation ID>")
-                return@define
             }
             try {
                 player.appearance.setAnimations(Animation.create(args[1].toInt()))
                 player.appearance.sync()
             } catch (e: NumberFormatException) {
                 reject(player, "Syntax error: ::ranim <Render Animation ID>")
-                return@define
             }
         }
 

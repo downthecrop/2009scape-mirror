@@ -47,7 +47,6 @@ class TeleportCommandSet : CommandSet(Command.Privilege.ADMIN){
             }
             if (args.size < 2) {
                 reject(player,"syntax error: x, y, (optional) z")
-                return@define
             }
             player.properties.teleportLocation = Location.create(args[1].toInt(), args[2].toInt(), if (args.size > 3) args[3].toInt() else 0)
         }
@@ -59,17 +58,14 @@ class TeleportCommandSet : CommandSet(Command.Privilege.ADMIN){
         define("teleto"){player,args ->
             if (args.size < 1) {
                 reject(player,"syntax error: name")
-                return@define
             }
             val n = args.slice(1 until args.size).joinToString("_")
             val target = Repository.getPlayerByName(n)
             if (target == null) {
                 reject(player,"syntax error: name")
-                return@define
             }
-            if (target.getAttribute<Any?>("fc_wave") != null) {
+            if (target!!.getAttribute<Any?>("fc_wave") != null) {
                 reject(player,"You cannot teleport to a player who is in the Fight Caves.")
-                return@define
             }
             player.properties.teleportLocation = target.location
         }
@@ -81,17 +77,14 @@ class TeleportCommandSet : CommandSet(Command.Privilege.ADMIN){
         define("teletome"){player,args ->
             if (args.size < 1) {
                 reject(player,"syntax error: name")
-                return@define
             }
             val n = args.slice(1 until args.size).joinToString("_")
             val target = Repository.getPlayerByName(n)
             if (target == null) {
                 reject(player,"syntax error: name")
-                return@define
             }
-            if (target.getAttribute<Any?>("fc_wave") != null) {
+            if (target!!.getAttribute<Any?>("fc_wave") != null) {
                 reject(player,"You cannot teleport to a player who is in the Fight Caves.")
-                return@define
             }
             target.properties.teleportLocation = player.location
         }

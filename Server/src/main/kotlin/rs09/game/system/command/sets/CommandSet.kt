@@ -32,7 +32,7 @@ abstract class CommandSet(val defaultPrivilege: Command.Privilege) : Plugin<Any?
      */
     fun reject(player: Player, vararg message: String){
         for(msg in message) {
-            player.sendMessage(colorize("%R$message"))
+            player.sendMessage(colorize("%R$msg"))
         }
         throw IllegalStateException()
     }
