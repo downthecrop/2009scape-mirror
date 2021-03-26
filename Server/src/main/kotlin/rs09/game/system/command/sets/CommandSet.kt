@@ -38,11 +38,11 @@ abstract class CommandSet(val defaultPrivilege: Command.Privilege) : Plugin<Any?
     }
 
     /**
-     * Glorified player.sendMessage with green text coloring and an arrow. Use this when you need to
+     * Glorified player.sendMessage with black text coloring and an arrow. Use this when you need to
      * notify/inform a player of some information from within the command without ending execution.
      */
     fun notify(player: Player, message: String){
-        player.sendMessage(colorize("%G-->$message"))
+        player.sendMessage(colorize("-->$message"))
     }
 
     /**
