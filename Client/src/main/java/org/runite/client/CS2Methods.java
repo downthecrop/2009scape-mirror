@@ -37,4 +37,15 @@ public class CS2Methods {
             throw ClientErrorException.clientError(var4, "bd.C(" + (byte) 114 + ',' + var1 + ')');
         }
     }
+
+    static void method532(int var0) {
+        try {
+            Class3_Sub25 var2 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var0);
+            if (null != var2) {
+                var2.unlink();
+            }
+        } catch (RuntimeException var3) {
+            throw ClientErrorException.clientError(var3, "bc.A(" + var0 + ',' + -28236 + ')');
+        }
+    }
 }

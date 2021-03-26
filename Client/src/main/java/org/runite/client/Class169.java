@@ -116,8 +116,7 @@ final class Class169 {
             var6 += var5 - 128;
         }
 
-        if (var7 == this.anInt2112) {
-        } else {
+        if (var7 != this.anInt2112) {
             this.anInt2112 = var7;
             var6 = var2 * 128 + 1 + (var3 * 128 + 1) * var5;
             var8 = 0;
@@ -158,6 +157,7 @@ final class Class169 {
             var13.limit(16384);
             HDToolKit.bindTexture2D(this.anInt2108);
             var12.glTexImage2D(3553, 0, 6406, 128, 128, 0, 6406, 5121, var13);
+
         }
     }
 

@@ -11,7 +11,7 @@ final class Class119 {
 
     static void method1729() {
         try {
-            Object var1;
+            Container var1;
             if (null == TextureOperation30.fullScreenFrame) {
                 if (GameShell.frame == null) {
                     var1 = Class38.gameSignlink.gameApplet;
@@ -22,8 +22,8 @@ final class Class119 {
                 var1 = TextureOperation30.fullScreenFrame;
             }
 
-            Unsorted.frameWidth = ((Container) var1).getSize().width;
-            Class70.frameHeight = ((Container) var1).getSize().height;
+            Unsorted.frameWidth = var1.getSize().width;
+            Class70.frameHeight = var1.getSize().height;
             Insets var2;
             if (var1 == GameShell.frame) {
                 var2 = GameShell.frame.getInsets();

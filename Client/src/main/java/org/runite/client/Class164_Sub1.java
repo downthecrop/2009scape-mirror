@@ -3,7 +3,6 @@ package org.runite.client;
 class Class164_Sub1 extends Class164 {
 
    private int anInt3010;
-   static short[] aShortArray3011 = new short[]{(short)6798, (short)8741, (short)25238, (short)4626, (short)4550};
    static int anInt3012 = 0;
    private final int[] anIntArray3014;
    private byte[] aByteArray3015;

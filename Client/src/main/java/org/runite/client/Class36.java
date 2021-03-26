@@ -141,7 +141,7 @@ final class Class36 {
         try {
 
             for (int var4 = 0; var4 < Client.anInt869; ++var4) {
-                Class168 var5 = TextureOperation10.method350((byte) 120, var4);
+                Class168 var5 = Class168.method350(var4);
                 if (null != var5) {
                     int var6 = var5.anInt2095;
                     if (0 <= var6 && !Class51.anInterface2_838.method17(var6, 126)) {

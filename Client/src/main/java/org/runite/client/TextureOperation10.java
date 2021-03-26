@@ -447,22 +447,4 @@ final class TextureOperation10 extends TextureOperation {
       return false;
    }
 
-   static Class168 method350(byte var0, int var1) {
-      try {
-         Class168 var2 = (Class168)Class163_Sub2_Sub1.aReferenceCache_4015.get(var1);
-         if(null == var2) {
-            byte[] var4 = Class3_Sub28_Sub5.aClass153_3580.getFile(4, var1);
-            var2 = new Class168();
-            if(var4 != null) {
-               var2.method2274(new DataBuffer(var4), var1);
-            }
-
-            Class163_Sub2_Sub1.aReferenceCache_4015.put(var2, var1);
-         }
-          return var2;
-      } catch (RuntimeException var5) {
-         throw ClientErrorException.clientError(var5, "um.C(" + var0 + ',' + var1 + ')');
-      }
-   }
-
 }

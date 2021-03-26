@@ -129,7 +129,7 @@ abstract class Class129 {
                                     continue;
                                 }
 
-                                var27 = TextureOperation10.method350((byte) -103, var25 + -1);
+                                var27 = Class168.method350(var25 + -1);
                                 if (var27.anInt2103 == -1) {
                                     continue;
                                 }
@@ -141,7 +141,7 @@ abstract class Class129 {
                                     continue;
                                 }
                             } else if (var25 != 0) {
-                                var27 = TextureOperation10.method350((byte) 123, var25 - 1);
+                                var27 = Class168.method350(var25 - 1);
                                 byte var42;
                                 if (var27.anInt2103 == -1) {
                                     var42 = var7[var23][var19];
@@ -265,7 +265,7 @@ abstract class Class129 {
                                     continue;
                                 }
 
-                                var46 = TextureOperation10.method350((byte) -49, var43 - 1);
+                                var46 = Class168.method350(var43 - 1);
                                 if (-1 == var46.anInt2103) {
                                     continue;
                                 }
@@ -275,7 +275,7 @@ abstract class Class129 {
                                     continue;
                                 }
                             } else if (var43 != 0) {
-                                var46 = TextureOperation10.method350((byte) 113, -1 + var43);
+                                var46 = Class168.method350(-1 + var43);
                                 if (-1 == var46.anInt2103) {
                                     TextureOperation18.method284(var0, var9, var23, var6, var19, Class25.anIntArrayArray499[var7[var23][var19]], var14, (byte) 116, var13, var11, var2[var23][var19]);
                                     continue;

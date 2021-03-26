@@ -994,7 +994,7 @@ public final class RSString implements Interface3 {
         }
     }
 
-    final int method1575(FontMetrics var2) {
+    public final int method1575(FontMetrics var2) {
         try {
             String var3;
             var3 = new String(this.buffer, 0, this.length, StandardCharsets.ISO_8859_1);

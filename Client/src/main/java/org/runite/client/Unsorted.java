@@ -9,9 +9,7 @@ import org.rs09.client.data.ReferenceCache;
 import org.rs09.client.net.Connection;
 import org.rs09.client.rendering.Toolkit;
 import org.rs09.client.util.ArrayUtils;
-import org.runite.client.drawcalls.Compass;
-import org.runite.client.drawcalls.LoadingBox;
-import org.runite.client.drawcalls.Minimap;
+import org.runite.client.drawcalls.*;
 
 import java.awt.*;
 import java.io.IOException;
@@ -1395,7 +1393,7 @@ public class Unsorted {
             if (var1 == 3 && TextureOperation30.fullScreenFrame == null) {
                 method598(true, anInt2577, true, var3, var4, -1, -1);
             } else {
-                Object var7;
+                Container var7;
                 if (null == TextureOperation30.fullScreenFrame) {
                     if (null == GameShell.frame) {
                         var7 = Class38.gameSignlink.gameApplet;
@@ -1406,8 +1404,8 @@ public class Unsorted {
                     var7 = TextureOperation30.fullScreenFrame;
                 }
 
-                frameWidth = ((Container) var7).getSize().width;
-                Class70.frameHeight = ((Container) var7).getSize().height;
+                frameWidth = var7.getSize().width;
+                Class70.frameHeight = var7.getSize().height;
                 Insets var8;
                 if (GameShell.frame == var7) {
                     var8 = GameShell.frame.getInsets();
@@ -1467,7 +1465,7 @@ public class Unsorted {
                         aClass158_3009 = TextureOperation18.method285(Class140_Sub7.canvasHeight, Class23.canvasWidth, GameShell.canvas);
                         Class74.method1320();
                         if (5 == Class143.gameStage) {
-                            Class3_Sub23.method406((byte) 122, true, FontType.bold);
+                            StartupLoadingBar.draw(true, FontType.bold);
                         } else {
                             LoadingBox.draw(false, TextCore.LoadingPleaseWait2);
                         }
@@ -3668,10 +3666,10 @@ public class Unsorted {
                         }
 
                         int var14 = var1 + var11.anInt210;
-                        int var15 = var11.anInt223;
+                        int alpha = var11.anInt223;
                         int var13 = var11.anInt306 + var2;
-                        if (ClientCommands.commandQaOpEnabled && (0 != Client.method44(var11).anInt2205 || var11.type == 0) && var15 > 127) {
-                            var15 = 127;
+                        if (ClientCommands.commandQaOpEnabled && (0 != Client.method44(var11).anInt2205 || var11.type == 0) && alpha > 127) {
+                            alpha = 127;
                         }
 
                         int var17;
@@ -3710,7 +3708,7 @@ public class Unsorted {
                             }
 
                             if (!var11.aBoolean200) {
-                                var15 = 128;
+                                alpha = 128;
                             }
                         }
 
@@ -4142,29 +4140,29 @@ public class Unsorted {
                                             }
                                         }
 
-                                        if (var15 != 0) {
+                                        /* INTERFACE DRAWS ALPHA/NON-ALPHA BOXES/BACKGROUNDS */
+                                        if (alpha != 0) {
                                             if (var11.aBoolean226) {
                                                 if (HDToolKit.highDetail) {
-                                                    Toolkit.OPENGL_TOOLKIT.fillRect(var13, var14, var11.width, var11.height, var20, 256 + -(255 & var15));//Background for mage book
+                                                    Toolkit.OPENGL_TOOLKIT.fillRect(var13, var14, var11.width, var11.height, var20, 256 + -(255 & alpha));//Magic book spell tool-tip hover background draw
                                                 } else {
-                                                    Toolkit.JAVA_TOOLKIT.fillRect(var13, var14, var11.width, var11.height, var20, 256 + -(255 & var15));
+                                                    Toolkit.JAVA_TOOLKIT.fillRect(var13, var14, var11.width, var11.height, var20, 256 + -(255 & alpha));
                                                 }
                                             } else if (HDToolKit.highDetail) {
-                                                Class22.method928(var13, var14, var11.width, var11.height, var20, 256 + -(var15 & 0xFF));
+                                                Class22.method928(var13, var14, var11.width, var11.height, var20, 256 + -(alpha & 0xFF));//Interface backgrounds (includes dark areas)
                                             } else {
-                                                Class74.method1315(var13, var14, var11.width, var11.height, var20, -(var15 & 0xFF) + 256);
+                                                Class74.method1315(var13, var14, var11.width, var11.height, var20, -(alpha & 0xFF) + 256);//Interface backgrounds (includes dark areas)
                                             }
                                         } else if (var11.aBoolean226) {
                                             if (HDToolKit.highDetail) {
-                                                Toolkit.OPENGL_TOOLKIT.method934(var13, var14, var11.width, var11.height, var20);
+                                                Toolkit.OPENGL_TOOLKIT.method934(var13, var14, var11.width, var11.height, var20);//Skill tool-tip hover background draw
                                             } else {
-                                                Toolkit.JAVA_TOOLKIT.fillRect(var13, var14, var11.width, var11.height, var20, 255);
+                                                Toolkit.JAVA_TOOLKIT.fillRect(var13, var14, var11.width, var11.height, var20, 255);//Skill tool-tip pop up background
                                             }
-                                            //Toolkit.getActiveToolkit().method934(var13, var14, var11.width, var11.height, var20);//Fill Rectangle for skill hover
                                         } else if (HDToolKit.highDetail) {
-                                            Toolkit.OPENGL_TOOLKIT.drawRect(var13, var14, var11.width, var11.height, var20, 255);//Background border for mage book
+                                            Toolkit.OPENGL_TOOLKIT.drawRect(var13, var14, var11.width, var11.height, var20, 255);//Boxed border background draw
                                         } else {
-                                            Toolkit.JAVA_TOOLKIT.drawRect(var13, var14, var11.width, var11.height, var20, 255);
+                                            Toolkit.JAVA_TOOLKIT.drawRect(var13, var14, var11.width, var11.height, var20, 255);//Boxed border background draw
                                         }
                                         // TODO DRAWRECT
 //                                        if (Class3_Sub28_Sub12.method609(var11, 26)) {
@@ -4266,34 +4264,34 @@ public class Unsorted {
                                                             var46 = Class140_Sub6.method2021((byte) -113, var37.height);
                                                             HDSprite var27 = (HDSprite) var37;
                                                             if (var39 && var46) {
-                                                                if (var15 == 0) {
+                                                                if (alpha == 0) {
                                                                     var27.method649(var13, var14, var23, var24);
                                                                 } else {
-                                                                    var27.method646(var13, var14, -(255 & var15) + 256, var23, var24);
+                                                                    var27.method646(var13, var14, -(255 & alpha) + 256, var23, var24);
                                                                 }
                                                             } else if (var39) {
                                                                 for (var28 = 0; var28 < var24; ++var28) {
-                                                                    if (var15 == 0) {
+                                                                    if (alpha == 0) {
                                                                         var27.method649(var13, var28 * var22 + var14, var23, 1);
                                                                     } else {
-                                                                        var27.method646(var13, var14 + var28 * var22, 256 + -(var15 & 0xFF), var23, 1);
+                                                                        var27.method646(var13, var14 + var28 * var22, 256 + -(alpha & 0xFF), var23, 1);
                                                                     }
                                                                 }
                                                             } else if (var46) {
                                                                 for (var28 = 0; var28 < var23; ++var28) {
-                                                                    if (var15 == 0) {
+                                                                    if (alpha == 0) {
                                                                         var27.method649(var21 * var28 + var13, var14, 1, var24);
                                                                     } else {
-                                                                        var27.method646(var21 * var28 + var13, var14, -(var15 & 0xFF) + 256, 1, var24);
+                                                                        var27.method646(var21 * var28 + var13, var14, -(alpha & 0xFF) + 256, 1, var24);
                                                                     }
                                                                 }
                                                             } else {
                                                                 for (var28 = 0; var23 > var28; ++var28) {
                                                                     for (var29 = 0; var29 < var24; ++var29) {
-                                                                        if (var15 == 0) {
+                                                                        if (alpha == 0) {
                                                                             var37.drawAt(var13 - -(var21 * var28), var22 * var29 + var14);
                                                                         } else {
-                                                                            var37.method637(var28 * var21 + var13, var22 * var29 + var14, -(255 & var15) + 256);
+                                                                            var37.method637(var28 * var21 + var13, var22 * var29 + var14, -(255 & alpha) + 256);
                                                                         }
                                                                     }
                                                                 }
@@ -4306,10 +4304,10 @@ public class Unsorted {
                                                             for (var25 = 0; var25 < var23; ++var25) {
                                                                 for (var26 = 0; var24 > var26; ++var26) {
                                                                     if (var11.anInt301 == 0) {
-                                                                        if (0 == var15) {
+                                                                        if (0 == alpha) {
                                                                             var37.drawAt(var25 * var21 + var13, var22 * var26 + var14);
                                                                         } else {
-                                                                            var37.method637(var25 * var21 + var13, var14 + var26 * var22, 256 - (255 & var15));
+                                                                            var37.method637(var25 * var21 + var13, var14 + var26 * var22, 256 - (255 & alpha));
                                                                         }
                                                                     } else {
                                                                         var37.drawScaledOrRotated(var14 - -(var22 * var26) + var22 / 2, var11.anInt301, 4096, var25 * var21 + var13 + var21 / 2);
@@ -4322,8 +4320,8 @@ public class Unsorted {
                                                     } else {
                                                         var23 = var11.width * 4096 / var21;
                                                         if (var11.anInt301 == 0) {
-                                                            if (0 != var15) {
-                                                                var37.method642(var13, var14, var11.width, var11.height, -(255 & var15) + 256);
+                                                            if (0 != alpha) {
+                                                                var37.method642(var13, var14, var11.width, var11.height, -(255 & alpha) + 256);
                                                             } else if (var11.width == var21 && var11.height == var22) {
                                                                 var37.drawAt(var13, var14);
                                                             } else {
@@ -4715,7 +4713,7 @@ public class Unsorted {
 
     public static void method1517() {
         try {
-            Class3_Sub28_Sub1.aFontMetrics1822 = null;
+            StartupLoadingBarInitial.aFontMetrics1822 = null;
 
             //MillisTimer.anImage2695 = null;
         } catch (RuntimeException var2) {

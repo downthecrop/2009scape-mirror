@@ -15,7 +15,7 @@ public final class SequenceDefinition {
 	public static CacheIndex aClass153_1852;
 	int leftHandItem = -1;
 	boolean[] aBooleanArray1855;
-	static AbstractIndexedSprite aClass109_1856;
+	public static AbstractIndexedSprite aClass109_1856;
 	int forcedPriority = 5;
 	boolean aBoolean1859 = false;
 	static CacheIndex animationReferenceIndex;

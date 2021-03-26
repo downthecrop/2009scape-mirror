@@ -123,7 +123,7 @@ public final class Class24 {
     static void method950(RSInterface var0, int var1, int var2, int var3) {
         try {
             if (2 <= Unsorted.menuOptionCount || Class164_Sub1.anInt3012 != 0 || GameObject.aBoolean1837) {
-                RSString var4 = Class3_Sub28_Sub1.method531();
+                RSString var4 = method531();
                 if (var0 == null) {
                     int var5 = FontType.bold.method683(var4, 4 + var3, var2 - -15, aRandom3088, Class38_Sub1.anInt2618);
                     Class21.method1340(4 + var3, FontType.bold.method682(var4) + var5, var2, 15);
@@ -155,6 +155,39 @@ public final class Class24 {
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "dm.G(" + 0 + ')');
         }
+    }
+
+    static RSString method531() {
+        RSString var1;
+        if (Class164_Sub1.anInt3012 == 1 && Unsorted.menuOptionCount < 2) {
+            var1 = RSString.stringCombiner(new RSString[]{TextCore.HasUse, TextCore.Spacer, RenderAnimationDefinition.aClass94_378, TextCore.aClass94_1724});
+        } else if (GameObject.aBoolean1837 && 2 > Unsorted.menuOptionCount) {
+            var1 = RSString.stringCombiner(new RSString[]{Class3_Sub28_Sub9.aClass94_3621, TextCore.Spacer, TextCore.aClass94_676, TextCore.aClass94_1724});
+
+        } else if (ClientCommands.shiftClickEnabled && ObjectDefinition.aBooleanArray1490[81] && Unsorted.menuOptionCount > 2 && !ObjectDefinition.aBooleanArray1490[82]) {
+            for (Class3_Sub28_Sub1.counter = 2; Class3_Sub28_Sub1.counter < Unsorted.menuOptionCount; Class3_Sub28_Sub1.counter++) {
+                RSString option = (Unsorted.method802(Unsorted.menuOptionCount - Class3_Sub28_Sub1.counter));
+                if (option.toString().contains("Drop") || option.toString().contains("Release")) {
+                    ClientCommands.canDrop = true;
+                    Class3_Sub28_Sub1.dropAction = Class3_Sub28_Sub1.counter;
+                    break;
+                } else {
+                    ClientCommands.canDrop = false;
+                }
+            }
+            if (ClientCommands.canDrop) {
+                var1 = Unsorted.method802(Unsorted.menuOptionCount - Class3_Sub28_Sub1.dropAction);
+            } else {
+                var1 = Unsorted.method802(Unsorted.menuOptionCount - 1);
+            }
+        } else {
+            var1 = Unsorted.method802(Unsorted.menuOptionCount - 1);
+        }
+
+        if (Unsorted.menuOptionCount > 2) {
+            var1 = RSString.stringCombiner(new RSString[]{var1, Class1.aClass94_58, RSString.stringAnimator(Unsorted.menuOptionCount - 2), TextCore.HasMoreOptions});
+        }
+        return var1;
     }
 
     final Model_Sub1 method941() {

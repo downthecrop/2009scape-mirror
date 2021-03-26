@@ -2,7 +2,7 @@ package org.runite.client;
 
 import org.rs09.client.rendering.Toolkit;
 
-final class LDIndexedSprite extends AbstractIndexedSprite {
+public final class LDIndexedSprite extends AbstractIndexedSprite {
 
    private final int[] anIntArray2673;
    byte[] raster;
@@ -394,7 +394,7 @@ final class LDIndexedSprite extends AbstractIndexedSprite {
       method1670(Toolkit.JAVA_TOOLKIT.getBuffer(), this.raster, this.anIntArray2673, var7, var8, var13, var14, var3, var4, var11, var12, var5);
    }
 
-   final void method1667(int var1, int var2) {
+   public final void method1667(int var1, int var2) {
       var1 += this.anInt1470;
       var2 += this.anInt1464;
       int var3 = var1 + var2 * Toolkit.JAVA_TOOLKIT.width;

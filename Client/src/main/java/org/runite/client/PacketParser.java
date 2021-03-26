@@ -1064,7 +1064,7 @@ public final class PacketParser {
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 191) {
                                                         nodeModelId = BufferedDataStream.incomingBuffer.readUnsignedShortLE();
-                                                        Class3_Sub28_Sub1.method532(nodeModelId);
+                                                        CS2Methods.method532(nodeModelId);
                                                         QuickChatDefinition.anIntArray3565[Unsorted.bitwiseAnd(31, Unsorted.anInt944++)] = Unsorted.bitwiseAnd(nodeModelId, 32767);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;

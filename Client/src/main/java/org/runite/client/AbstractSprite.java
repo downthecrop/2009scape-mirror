@@ -29,7 +29,7 @@ public abstract class AbstractSprite extends Node {
       }
    }
 
-   abstract void method639(int var1, int var2, int var3, int var4);
+   public abstract void method639(int var1, int var2, int var3, int var4);
 
    public final void drawScaledOrRotated(int x, int y, int angle, int scale) {
       try {

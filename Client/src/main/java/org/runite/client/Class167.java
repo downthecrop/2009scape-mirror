@@ -2,7 +2,7 @@ package org.runite.client;
 
 public final class Class167 {
 
-    static RSString aClass94_2083 = null;
+    public static RSString aClass94_2083 = null;
     static int anInt2087 = 0;
 
 

@@ -710,7 +710,7 @@ public abstract class Font extends Node {
         anInt3748 = 0;
     }
 
-    final void method699(RSString var1, int var2, int var3, int var4, int var5) {
+    public final void method699(RSString var1, int var2, int var3, int var4, int var5) {
         if (var1 != null) {
             this.method698(var4, var5);
             this.method677(var1, var2 - this.method682(var1) / 2, var3);

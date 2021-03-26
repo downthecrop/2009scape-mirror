@@ -51,7 +51,7 @@ public class TextCore {
      * Login Screen Text
      * Files that use these texts:
      */
-    static RSString RSLoadingPleaseWait = RSString.parse(GameConfig.SERVER_NAME + " is loading )2 please wait)3)3)3");
+    public static RSString RSLoadingPleaseWait = RSString.parse(GameConfig.SERVER_NAME + " is loading )2 please wait)3)3)3");
     static RSString LoadingConfig = RSString.parse("Loading config )2 ");
     static RSString LoadedConfig = RSString.parse("Loaded config");
     static RSString LoadingSprites = RSString.parse("Loading sprites )2 ");
@@ -244,7 +244,7 @@ public class TextCore {
     /**
      * Fonts
      */
-    static java.awt.Font Helvetica = new java.awt.Font("Helvetica", java.awt.Font.BOLD, 13);
+    public static java.awt.Font Helvetica = new java.awt.Font("Helvetica", java.awt.Font.BOLD, 13);
     /**
      * Unsorted
      */

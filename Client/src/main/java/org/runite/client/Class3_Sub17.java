@@ -2,7 +2,7 @@ package org.runite.client;
 
 import org.rs09.client.Linkable;
 
-final class Class3_Sub17 extends Linkable {
+public final class Class3_Sub17 extends Linkable {
 
 	int anInt2454;
 	int[] anIntArray2455;
@@ -14,22 +14,8 @@ final class Class3_Sub17 extends Linkable {
 
 	private static RSString aClass94_2465 = RSString.parse("");
 	int[] anIntArray2466;
-	static RSString aClass94_2464 = aClass94_2465;
 
-	public static void method380(int var0) {
-		try {
-			aClass94_2464 = null;
-			if(var0 != -29113) {
-				method381(false);
-			}
-
-			aClass94_2465 = null;
-		} catch (RuntimeException var2) {
-			throw ClientErrorException.clientError(var2, "jm.B(" + var0 + ')');
-		}
-	}
-
-	static void method381(boolean var0) {
+	static void method381() {
 		try {
 			if(ConfigInventoryDefinition.anInt3655 != -1) {
 				Class52.method1160(-120, ConfigInventoryDefinition.anInt3655);
@@ -52,9 +38,6 @@ final class Class3_Sub17 extends Linkable {
 			}
 
 			Unsorted.anInt2567 = -1;
-			if(!var0) {
-				method380(-78);
-			}
 
 			if(ConfigInventoryDefinition.anInt3655 != -1) {
 				Class3_Sub28_Sub3.anInt3557 = 0;
@@ -69,7 +52,7 @@ final class Class3_Sub17 extends Linkable {
 
 			Class106.anInt1446 = 0;
 		} catch (RuntimeException var2) {
-			throw ClientErrorException.clientError(var2, "jm.A(" + var0 + ')');
+			throw ClientErrorException.clientError(var2, "jm.A(" + ')');
 		}
 	}
 

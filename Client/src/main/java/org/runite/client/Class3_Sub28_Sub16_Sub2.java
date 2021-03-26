@@ -1285,7 +1285,7 @@ public class Class3_Sub28_Sub16_Sub2 extends AbstractSprite {
 
    }
 
-   void method639(int var1, int var2, int var3, int var4) {
+   public void method639(int var1, int var2, int var3, int var4) {
       if(var3 > 0 && var4 > 0) {
          int var5 = this.width;
          int var6 = this.height;
