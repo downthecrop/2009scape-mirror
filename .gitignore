@@ -14,6 +14,11 @@
 /Server/build/kotlin/
 /Server/build/generated/
 /Server/data/eco/bot_offers.json
+/File-Server/build/
+/File-Server/build/classes/
+/File-Server/build/tmp/
+/File-Server/build/kotlin/
+/File-Server/build/generated/
 **/.idea/workspace.xml
 **/.idea/tasks.xml
 Server/**/*.class
