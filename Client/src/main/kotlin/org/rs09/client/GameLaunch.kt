@@ -29,6 +29,9 @@ object GameLaunch {
         } catch (e: Exception){
             GameConfig.IP_ADDRESS = "play.2009scape.org"
             GameConfig.IP_MANAGEMENT = "play.2009scape.org"
+            GameConfig.JS5_SERVER_PORT = 43593
+            GameConfig.SERVER_PORT = 43594
+            GameConfig.WL_PORT = 5555
             GameConfig.RCM_STYLE_PRESET = "classic"
             GameConfig.RCM_TITLE = "<col=5d5447>Choose Option</col>"
             GameConfig.HOLIDAYS_ENABLED = true
