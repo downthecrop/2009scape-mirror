@@ -3,16 +3,15 @@ package core.game.node.entity.skill.cooking
 import core.game.node.`object`.GameObject
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
-import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.Items.BREAD_DOUGH_2307
 import org.rs09.consts.Items.RAW_BEEF_2132
 import org.rs09.consts.Items.SEAWEED_401
 import org.rs09.consts.Items.UNCOOKED_CAKE_1889
 import rs09.game.interaction.InteractionListener
+import rs09.game.node.entity.skill.cooking.CookingDialogue
 
 //author: Ceik
-@Initializable
 class CookingRewrite : InteractionListener() {
 
     val RAW_FOODS: IntArray
@@ -31,11 +30,11 @@ class CookingRewrite : InteractionListener() {
             val range = obj.name.toLowerCase().contains("range")
             when (item.id) {
                 RAW_BEEF_2132 -> if (range) {
-                    player.dialogueInterpreter.open(FoodCookingDialogue.DialogueID, item, 9436, true, obj)
+                    player.dialogueInterpreter.open(CookingDialogue(item,9436,true,obj))
                     return@onUseWith true
                 }
                 SEAWEED_401 -> if (range) {
-                    player.dialogueInterpreter.open(FoodCookingDialogue.DialogueID, item, 1781, false, obj)
+                    player.dialogueInterpreter.open(CookingDialogue(item,1781,false,obj))
                     return@onUseWith true
                 }
                 BREAD_DOUGH_2307, UNCOOKED_CAKE_1889 -> if (!range) {
@@ -45,7 +44,7 @@ class CookingRewrite : InteractionListener() {
             }
 
             //cook a standard item
-            player.dialogueInterpreter.open(FoodCookingDialogue.DialogueID, item.id, obj)
+            player.dialogueInterpreter.open(CookingDialogue(item.id,obj))
             return@onUseWith true
         }
 
