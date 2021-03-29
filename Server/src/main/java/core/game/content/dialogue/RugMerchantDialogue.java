@@ -10,6 +10,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
+import kotlin.Unit;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -284,6 +285,10 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 			player.getInterfaceManager().hideTabs(0,1,2,3,4,5,6,7,8,9,10,11,12,13);
 			player.getEquipment().replace(new Item(Items.MAGIC_CARPET_5614),EquipmentContainer.SLOT_WEAPON);
 			player.getPacketDispatch().sendInterfaceConfig(548,69,true);
+			player.logoutListeners.put("magic-carpet", (pl) -> {
+				pl.getEquipment().replace(null,EquipmentContainer.SLOT_WEAPON);
+				return Unit.INSTANCE;
+			});
 			GameWorld.getPulser().submit(new Pulse(1, player) {
 				int count;
 				int index;
@@ -323,6 +328,7 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 						player.unlock();
 						player.animate(new Animation(-1));
 						player.getConfigManager().set(499, 0);
+						player.logoutListeners.remove("magic-carpet");
 						break;
 					case 902:
 						player.moveStep();

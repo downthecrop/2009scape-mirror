@@ -49,6 +49,7 @@ public final class PyramidPlunderActivity extends ActivityPlugin {
 		if (e instanceof Player) {
 			((Player) e).getInterfaceManager().closeOverlay();
 			((PlunderSession) ((Player) e).getAttribute("plunder-session",null)).setActive(false);
+			((Player) e).removeAttribute("plunder-session");
 		}
 		return super.leave(e, logout);
 	}

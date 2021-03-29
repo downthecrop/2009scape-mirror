@@ -99,6 +99,8 @@ class GameConfig {
         @JvmField
         var IP_MANAGEMENT = "localhost"
 
+        var JS5_SERVER_PORT = 43593
+
         @JvmField
         var SERVER_PORT = 43594
 
@@ -155,6 +157,7 @@ class GameConfig {
             if(data.containsKey("ip_management")) IP_MANAGEMENT = data["ip_management"].toString() else IP_MANAGEMENT = IP_ADDRESS
             if(data.containsKey("wl_port")) WL_PORT = data["wl_port"].toString().toInt()
             if(data.containsKey("server_port")) SERVER_PORT = data["server_port"].toString().toInt()
+            if(data.containsKey("js5_port")) JS5_SERVER_PORT = data["js5_port"].toString().toInt()
             if(data.containsKey("world")) WORLD = data["world"].toString().toInt()
 
             //Parse customization options

@@ -89,6 +89,7 @@ object JobManager {
         player.removeAttribute("jobs:original_amount")
         player.removeAttribute("jobs:type")
         player.incrementAttribute("/save:jobs:dailyAmt",1)
+        System.out.println("Complete amount: ${player.getAttribute("jobs:dailyAmt",0)}")
         if(player.getAttribute("jobs:dailyAmt",0) == 3){
             player.setAttribute("/save:jobs:reset_time",System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24))
         }
