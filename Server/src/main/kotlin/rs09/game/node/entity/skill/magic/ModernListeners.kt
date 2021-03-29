@@ -101,6 +101,11 @@ class ModernListeners : SpellListener("modern"){
             sendTeleport(player,74.0, Location.create(2754, 2784, 0))
         }
 
+        onCast(Modern.TELEPORT_TO_HOUSE,NONE){player, _ ->
+            requires(player,40, arrayOf(Item(Items.LAW_RUNE_563), Item(Items.AIR_RUNE_556), Item(Items.EARTH_RUNE_557)))
+            attemptHouseTeleport(player)
+        }
+
         onCast(Modern.LOW_ALCHEMY,ITEM){player, node ->
             val item = node?.asItem() ?: return@onCast
             requires(player,21, arrayOf(Item(Items.FIRE_RUNE_554,3),Item(Items.NATURE_RUNE_561)))
@@ -241,6 +246,19 @@ class ModernListeners : SpellListener("modern"){
         player.teleporter.send(location,TeleportManager.TeleportType.NORMAL)
         removeRunes(player)
         addXP(player,xp)
+        setDelay(player,true)
+    }
+
+    private fun attemptHouseTeleport(player: Player){
+        val loc = player.houseManager.location.exitLocation
+        if(loc == null){
+            player.sendMessage("You do not have a house whose portal you can teleport to.")
+            return
+        }
+
+        player.teleporter.send(loc,TeleportManager.TeleportType.NORMAL)
+        removeRunes(player)
+        addXP(player,30.0)
         setDelay(player,true)
     }
 }

@@ -57,7 +57,7 @@ class WorkForInteractionListener : InteractionListener() {
             var amount = 0
             var jobId = 0
 
-            if(player.getAttribute("jobs:reset_time",0L) < System.currentTimeMillis()){
+            if(player.getAttribute("jobs:reset_time",Long.MAX_VALUE) < System.currentTimeMillis()){
                 player.setAttribute("/save:jobs:dailyAmt",0)
             }
 

@@ -1,15 +1,15 @@
 package rs09.game.node.entity.state.newsys.states
 
 import core.game.node.entity.player.Player
-import rs09.game.node.entity.skill.farming.Seedling
-import rs09.game.node.entity.state.newsys.PlayerState
-import rs09.game.node.entity.state.newsys.State
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
+import rs09.game.node.entity.skill.farming.Seedling
+import rs09.game.node.entity.state.newsys.PlayerState
+import rs09.game.node.entity.state.newsys.State
 import java.util.concurrent.TimeUnit
 
 @PlayerState("seedling")
@@ -17,7 +17,7 @@ class SeedlingState(player: Player? = null) : State(player) {
     val seedlings = ArrayList<Seedling>()
 
     fun addSeedling(seedling: Int){
-        seedlings.add(Seedling(seedling, System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5),seedling + 6))
+        seedlings.add(Seedling(seedling, System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(5),seedling + if(seedling > 5400) 8 else 6))
     }
 
     override fun save(root: JSONObject) {

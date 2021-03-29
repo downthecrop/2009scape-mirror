@@ -169,6 +169,17 @@ object UseWithPatchHandler{
                         return true
                     }
                 }
+                if(patch.type != PatchType.FRUIT_TREE && patch.type != PatchType.TREE){
+                    if(!player.inventory.contains(Items.SEED_DIBBER_5343,1)){
+                        player.sendMessage("You need a seed dibber to plant that.")
+                        return true
+                    }
+                } else {
+                    if(!player.inventory.contains(Items.SPADE_952,1)){
+                        player.sendMessage("You need a spade to plant that.")
+                        return true
+                    }
+                }
                 player.lock()
                 if(player.inventory.remove(plantItem)) {
                     player.animator.animate(Animation(2291))

@@ -19,6 +19,8 @@ class CookingRewrite : InteractionListener() {
     init {
         val list = CookableItems.values().map { it.raw }.toMutableList()
         list.add(Items.COOKED_MEAT_2142)
+        list.add(RAW_BEEF_2132)
+        list.add(SEAWEED_401)
         RAW_FOODS = list.toIntArray()
     }
 
@@ -30,11 +32,11 @@ class CookingRewrite : InteractionListener() {
             val range = obj.name.toLowerCase().contains("range")
             when (item.id) {
                 RAW_BEEF_2132 -> if (range) {
-                    player.dialogueInterpreter.open(CookingDialogue(item,9436,true,obj))
+                    player.dialogueInterpreter.open(CookingDialogue(item.id,9436,true,obj))
                     return@onUseWith true
                 }
                 SEAWEED_401 -> if (range) {
-                    player.dialogueInterpreter.open(CookingDialogue(item,1781,false,obj))
+                    player.dialogueInterpreter.open(CookingDialogue(item.id,1781,false,obj))
                     return@onUseWith true
                 }
                 BREAD_DOUGH_2307, UNCOOKED_CAKE_1889 -> if (!range) {
