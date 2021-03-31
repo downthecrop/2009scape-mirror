@@ -1538,7 +1538,15 @@ public final class Client extends GameShell {
                         Class3_Sub26.aClass3_Sub24_Sub2_2563 = new Class3_Sub24_Sub2();
                         Class3_Sub21.aAudioChannel_2491.method2154(Class3_Sub26.aClass3_Sub24_Sub2_2563);
                         Class27.resampler = new Class157(22050, Class21.sampleRate);
-                        KeyboardListener.loginThemeSongArchiveID = CacheIndex.musicIndex.getArchiveForName(RSString.parse(GameConfig.LOGIN_THEME));
+
+                        int loginThemeID;
+                        if (GameConfig.EASTER_EVENT_ENABLED) {
+                            loginThemeID = CacheIndex.musicIndex.getArchiveForName(RSString.parse("Funny Bunnies"));
+                        } else {
+                            loginThemeID = CacheIndex.musicIndex.getArchiveForName(RSString.parse(GameConfig.LOGIN_THEME));
+                        }
+
+                        KeyboardListener.loginThemeSongArchiveID = loginThemeID;
                         LoadingStageNumber = 30;
                         anInt1354 = 50;
                         loadingBarTextToDisplay = TextCore.PreparedSoundEngine;

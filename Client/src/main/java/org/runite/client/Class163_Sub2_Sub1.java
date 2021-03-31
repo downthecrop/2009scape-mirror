@@ -55,17 +55,6 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
       }
    }
 
-//   static void method2222() {
-//      try {
-//         Unsorted.aReferenceCache_4043.clearSoftReferences();
-//         CS2Script.aReferenceCache_2442.clearSoftReferences();
-//         Class154.aReferenceCache_1964.clearSoftReferences();
-//
-//      } catch (RuntimeException var2) {
-//         throw ClientErrorException.clientError(var2, "t.G(" + (byte) 127 + ')');
-//      }
-//   }
-
    static void method2223(boolean var0, byte var1) {
       try {
          byte var3;

@@ -255,7 +255,7 @@ object DeveloperConsole {
                 }
             }
             "playsong" -> {
-                if (argSize in 2..4) {
+                if (argSize in 2..8) {
                     if (clientCommand[1].toIntOrNull() == null) {
                         clientCommand.removeFirst()
                         AudioHandler.musicHandler(

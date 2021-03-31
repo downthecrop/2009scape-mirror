@@ -221,7 +221,7 @@ public final class Class40 {
 
                         TextureOperation26.method198(false);
                         if (null != TextureOperation35.aByteArrayArray3335) {
-                            TextureOperation37.method272((byte) -124);
+                            TextureOperation37.displayNPCOnLoginRegion();
                         }
                     }
 
