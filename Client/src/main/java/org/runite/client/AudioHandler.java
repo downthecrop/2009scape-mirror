@@ -5,7 +5,7 @@ import java.util.Objects;
 public final class AudioHandler {
 
 
-    public static int[] anIntArray2157 = new int[50];
+    public static int[] soundEffectDelayArray = new int[50];
     public static int musicVolume = 255;
     static int currentSoundEffectCount = 0;
     static int soundEffectVolume = 127;
@@ -29,34 +29,35 @@ public final class AudioHandler {
         }
     }
 
-    static void soundEffectHandler(int soundEffectID, int soundEffectDelay, int soundEffectVolume) {
+    public static void soundEffectHandler(int soundEffectVolume, int soundEffectID, int soundEffectDelay) {
         try {
-            if (soundEffectVolume != 0 && soundEffectID != 0 && currentSoundEffectCount < 50 && soundEffectDelay != -1) {
-                soundEffectVolumeArray[currentSoundEffectCount] = soundEffectID;
-                soundEffectIDs[currentSoundEffectCount] = soundEffectDelay;
-                anIntArray2157[currentSoundEffectCount] = soundEffectVolume;
+            System.out.println("Playing " + soundEffectID + " DELAY: " + soundEffectDelay + " VOLUME: " + soundEffectVolume);
+            if (soundEffectDelay != -1 && soundEffectVolume != 0 && currentSoundEffectCount < 50 && soundEffectID != -1) {
+                soundEffectVolumeArray[currentSoundEffectCount] = soundEffectVolume;
+                soundEffectIDs[currentSoundEffectCount] = soundEffectID;
+                soundEffectDelayArray[currentSoundEffectCount] = soundEffectDelay;
                 soundEffects[currentSoundEffectCount] = null;
                 soundEffectCoordinates[currentSoundEffectCount] = 0;
                 currentSoundEffectCount++;
             }
 
         } catch (RuntimeException var5) {
-            throw ClientErrorException.clientError(var5, "ca.C(" + soundEffectID + ',' + soundEffectDelay + ',' + soundEffectVolume + ',' + -799 + ')');
+            throw ClientErrorException.clientError(var5, "ca.C(" + soundEffectVolume + ',' + soundEffectID + ',' + soundEffectDelay + ',' + -799 + ')');
         }
     }
 
     static void method132() {
         try {
             for (int var1 = 0; var1 < currentSoundEffectCount; ++var1) {
-                --anIntArray2157[var1];
-                if (anIntArray2157[var1] < -10) {
+                --soundEffectDelayArray[var1];
+                if (soundEffectDelayArray[var1] < -10) {
                     --currentSoundEffectCount;
 
                     for (int var2 = var1; var2 < currentSoundEffectCount; ++var2) {
                         soundEffectIDs[var2] = soundEffectIDs[var2 + 1];
                         soundEffects[var2] = soundEffects[var2 + 1];
                         soundEffectVolumeArray[var2] = soundEffectVolumeArray[1 + var2];
-                        anIntArray2157[var2] = anIntArray2157[1 + var2];
+                        soundEffectDelayArray[var2] = soundEffectDelayArray[1 + var2];
                         soundEffectCoordinates[var2] = soundEffectCoordinates[var2 + 1];
                     }
 
@@ -69,11 +70,11 @@ public final class AudioHandler {
                             continue;
                         }
 
-                        anIntArray2157[var1] += var11.getStart();
+                        soundEffectDelayArray[var1] += var11.getStart();
                         soundEffects[var1] = var11;
                     }
 
-                    if (0 > anIntArray2157[var1]) {
+                    if (0 > soundEffectDelayArray[var1]) {
                         int var3;
                         if (soundEffectCoordinates[var1] == 0) {
                             var3 = soundEffectVolume;
@@ -93,7 +94,7 @@ public final class AudioHandler {
 
                             int var9 = -128 + var6 + var8;
                             if (var9 > var4) {
-                                anIntArray2157[var1] = -100;
+                                soundEffectDelayArray[var1] = -100;
                                 continue;
                             }
 
@@ -111,7 +112,7 @@ public final class AudioHandler {
                             Class3_Sub26.aClass3_Sub24_Sub2_2563.method457(var13);
                         }
 
-                        anIntArray2157[var1] = -100;
+                        soundEffectDelayArray[var1] = -100;
                     }
                 }
             }
@@ -145,6 +146,17 @@ public final class AudioHandler {
             TextureOperation36.anInt3423 = var5;
         } catch (RuntimeException var8) {
             throw ClientErrorException.clientError(var8, "v.Q(" + true + ',' + var1 + ',' + 0 + ',' + (var3 != null ? "{...}" : "null") + ',' + false + ',' + var5 + ',' + 2 + ')');
+        }
+    }
+
+    static void method897(Class3_Sub24_Sub4 var1, CacheIndex var2, CacheIndex var3, CacheIndex var4) {
+        try {
+            Class124.aClass153_1661 = var2;
+            Class40.aClass153_679 = var4;
+            Class3_Sub28_Sub20.aClass153_3786 = var3;
+            Class101.aClass3_Sub24_Sub4_1421 = var1;
+        } catch (RuntimeException var6) {
+            throw ClientErrorException.clientError(var6, "ck.C(" + (var1 != null ? "{...}" : "null") + ',' + (var2 != null ? "{...}" : "null") + ',' + (var3 != null ? "{...}" : "null") + ',' + (var4 != null ? "{...}" : "null") + ')');
         }
     }
 }

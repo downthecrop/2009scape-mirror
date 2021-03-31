@@ -377,7 +377,7 @@ public final class PlayerRendering {
                         if (var7 != -1) {
                             SequenceDefinition var24 = SequenceDefinition.getAnimationDefinition(var7);
                             if (var24.frames != null) {
-                                Unsorted.method1470(var3.zAxis, var24, 183921384, var3.xAxis, var3 == Class102.player, 0);
+                                Unsorted.method1470(var3.zAxis, var24, var3.xAxis, var3 == Class102.player, 0);
                             }
                         }
                     }
@@ -407,7 +407,7 @@ public final class PlayerRendering {
                     var3.anInt2776 = 1;
                     var3.anInt2832 = 0;
                     var3.anInt2773 = 0;
-                    Unsorted.method1470(var3.zAxis, var4, 183921384, var3.xAxis, Class102.player == var3, var3.anInt2832);
+                    Unsorted.method1470(var3.zAxis, var4, var3.xAxis, Class102.player == var3, var3.anInt2832);
                 }
 
                 if (var5 == 2) {
@@ -422,7 +422,7 @@ public final class PlayerRendering {
                 var3.anInt2760 = 0;
                 var3.anInt2771 = var2;
                 if (var3.anInt2771 != -1) {
-                    Unsorted.method1470(var3.zAxis, SequenceDefinition.getAnimationDefinition(var3.anInt2771), 183921384, var3.xAxis, var3 == Class102.player, var3.anInt2832);
+                    Unsorted.method1470(var3.zAxis, SequenceDefinition.getAnimationDefinition(var3.anInt2771), var3.xAxis, var3 == Class102.player, var3.anInt2832);
                 }
             }
 

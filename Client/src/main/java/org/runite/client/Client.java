@@ -747,8 +747,8 @@ public final class Client extends GameShell {
         try {
             if (Class143.gameStage != 1000) {
                 boolean var2 = NPC.method1988();
-                if (var2 && AudioHandler.musicEffectPlaying && WorldListEntry.aClass155_2627 != null) {
-                    WorldListEntry.aClass155_2627.method2158();
+                if (var2 && AudioHandler.musicEffectPlaying && WorldListEntry.aAudioChannel_2627 != null) {
+                    WorldListEntry.aAudioChannel_2627.method2158();
                 }
 
                 if ((Class143.gameStage == 30 || Class143.gameStage == 10) && (Class3_Sub28_Sub5.forceReplaceCanvasEnable || Class53.aLong866 != 0 && Class53.aLong866 < TimeUtils.time())) {
@@ -855,7 +855,7 @@ public final class Client extends GameShell {
 
                             for (var5 = 0; Class3_Sub28_Sub3.anInt3557 > var5; ++var5) {
                                 if (Class163_Sub1_Sub1.aBooleanArray4008[var5]) {
-                                    Unsorted.aClass158_3009.drawGraphics(Class3_Sub28_Sub18.anIntArray3768[var5], Class155.anIntArray1969[var5], Class140_Sub4.anIntArray2794[var5], var11, Player.anIntArray3954[var5]);
+                                    Unsorted.aClass158_3009.drawGraphics(Class3_Sub28_Sub18.anIntArray3768[var5], AudioChannel.anIntArray1969[var5], Class140_Sub4.anIntArray2794[var5], var11, Player.anIntArray3954[var5]);
                                     Class163_Sub1_Sub1.aBooleanArray4008[var5] = false;
                                 }
                             }
@@ -932,12 +932,12 @@ public final class Client extends GameShell {
             TextureOperation12.method167(0);
             MouseListeningClass.method2090();
             Class38.aClass146_668 = null;
-            if (null != WorldListEntry.aClass155_2627) {
-                WorldListEntry.aClass155_2627.method2163();
+            if (null != WorldListEntry.aAudioChannel_2627) {
+                WorldListEntry.aAudioChannel_2627.method2163();
             }
 
-            if (null != Class3_Sub21.aClass155_2491) {
-                Class3_Sub21.aClass155_2491.method2163();
+            if (null != Class3_Sub21.aAudioChannel_2491) {
+                Class3_Sub21.aAudioChannel_2491.method2163();
             }
 
             Class58.aJs5Worker_917.close();
@@ -1074,7 +1074,7 @@ public final class Client extends GameShell {
 
             switch (Class158.paramGameTypeID) {
                 case GAME_TYPE_RUNESCAPE:
-                    Class15.aShortArrayArray344 = RunescapeGameAppearance.INSTANCE.getAShortArrayArray3654();
+                    AudioThread.aShortArrayArray344 = RunescapeGameAppearance.INSTANCE.getAShortArrayArray3654();
                     Class91.aShortArray1311 = RunescapeGameAppearance.INSTANCE.getAShortArray3349();
                     Class101.aShortArrayArray1429 = RunescapeGameAppearance.INSTANCE.getAShortArrayArray435();
                     Class3_Sub25.aShortArray2548 = RunescapeGameAppearance.INSTANCE.getAShortArray3011();
@@ -1084,7 +1084,7 @@ public final class Client extends GameShell {
                     ClientCommands.shiftClickEnabled = true;
                     Class92.defaultScreenColorRgb = 16777215;
                     Class92.defaultRegionAmbientRGB = 0;
-                    Class15.aShortArrayArray344 = MechscapeGameAppearance.INSTANCE.getAShortArrayArray1619();
+                    AudioThread.aShortArrayArray344 = MechscapeGameAppearance.INSTANCE.getAShortArrayArray1619();
                     Class101.aShortArrayArray1429 = MechscapeGameAppearance.INSTANCE.getAShortArrayArray2634();
                     Class3_Sub25.aShortArray2548 = MechscapeGameAppearance.INSTANCE.getAShortArray63();
                     Class91.aShortArray1311 = MechscapeGameAppearance.INSTANCE.getAShortArray2219();
@@ -1208,7 +1208,7 @@ public final class Client extends GameShell {
 
                         Unsorted.method1180((byte) -122, var4);
                         Class17.method904(65536, var4);
-                        RenderAnimationDefinition.method900(var4, (byte) 1 ^ -11974);
+                        RenderAnimationDefinition.method900(var4);
                         AtmosphereParser.aClass91Array1182[WorldListCountry.localPlane].method1489(var4.xAxis >> 7, false, (byte) 85, var4.zAxis >> 7, var4.getSize(), var4.getSize());
                     }
                 }
@@ -1243,14 +1243,14 @@ public final class Client extends GameShell {
                                         PacketParser.method829();
                                     }
 
-                                    if (null != Class15.aClass64_351 && Class15.aClass64_351.anInt978 == 1) {
-                                        if (null != Class15.aClass64_351.anObject974) {
+                                    if (null != AudioThread.aClass64_351 && AudioThread.aClass64_351.anInt978 == 1) {
+                                        if (null != AudioThread.aClass64_351.anObject974) {
                                             Class99.method1596(TextureOperation5.aClass94_3295, (byte) 126, Unsorted.aBoolean2154);
                                         }
 
                                         Unsorted.aBoolean2154 = false;
                                         TextureOperation5.aClass94_3295 = null;
-                                        Class15.aClass64_351 = null;
+                                        AudioThread.aClass64_351 = null;
                                     }
 
                                     if (Class44.anInt719 % 1500 == 0) {
@@ -1528,17 +1528,25 @@ public final class Client extends GameShell {
                             anInt1354 = 45;
                         }
                     } else if (anInt1354 == 45) {
-                        Class140_Sub3.method1959(TextureOperation17.aBoolean3184);
+                        Class140_Sub3.method1959(TextureOperation17.stereoSound);
                         aClass3_Sub24_Sub4_1193 = new Class3_Sub24_Sub4();
                         aClass3_Sub24_Sub4_1193.method479();
-                        WorldListEntry.aClass155_2627 = Class58.method1195(22050, Class38.gameSignlink, GameShell.canvas, 0);
-                        WorldListEntry.aClass155_2627.method2154(-116, aClass3_Sub24_Sub4_1193);
-                        RenderAnimationDefinition.method897(aClass3_Sub24_Sub4_1193, CacheIndex.soundFX3Index, CacheIndex.soundFX2Index, CacheIndex.soundFXIndex);
-                        Class3_Sub21.aClass155_2491 = Class58.method1195(2048, Class38.gameSignlink, GameShell.canvas, 1);
+                        WorldListEntry.aAudioChannel_2627 = AudioChannel.method1195(22050, Class38.gameSignlink, GameShell.canvas, 0);
+                        WorldListEntry.aAudioChannel_2627.method2154(aClass3_Sub24_Sub4_1193);
+                        AudioHandler.method897(aClass3_Sub24_Sub4_1193, CacheIndex.soundFX3Index, CacheIndex.soundFX2Index, CacheIndex.soundFXIndex);
+                        Class3_Sub21.aAudioChannel_2491 = AudioChannel.method1195(2048, Class38.gameSignlink, GameShell.canvas, 1);
                         Class3_Sub26.aClass3_Sub24_Sub2_2563 = new Class3_Sub24_Sub2();
-                        Class3_Sub21.aClass155_2491.method2154(-128, Class3_Sub26.aClass3_Sub24_Sub2_2563);
-                        Class27.resampler = new Class157(22050, Class21.anInt443);
-                        KeyboardListener.loginThemeSongArchiveID = CacheIndex.musicIndex.getArchiveForName(RSString.parse(GameConfig.LOGIN_THEME));
+                        Class3_Sub21.aAudioChannel_2491.method2154(Class3_Sub26.aClass3_Sub24_Sub2_2563);
+                        Class27.resampler = new Class157(22050, Class21.sampleRate);
+
+                        int loginThemeID;
+                        if (GameConfig.EASTER_EVENT_ENABLED) {
+                            loginThemeID = CacheIndex.musicIndex.getArchiveForName(RSString.parse("Funny Bunnies"));
+                        } else {
+                            loginThemeID = CacheIndex.musicIndex.getArchiveForName(RSString.parse(GameConfig.LOGIN_THEME));
+                        }
+
+                        KeyboardListener.loginThemeSongArchiveID = loginThemeID;
                         LoadingStageNumber = 30;
                         anInt1354 = 50;
                         loadingBarTextToDisplay = TextCore.PreparedSoundEngine;

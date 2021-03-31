@@ -4,7 +4,7 @@ import org.rs09.client.Linkable;
 
 final class Class3_Sub21 extends Linkable {
 
-   static Class155 aClass155_2491;
+   static AudioChannel aAudioChannel_2491;
    int anInt2492;
    static volatile int anInt2493 = -1;
    int anInt2494;

@@ -30,19 +30,19 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
     static void method34() {
         try {
-            if (null != WorldListEntry.aClass155_2627) {
-                WorldListEntry.aClass155_2627.method2163();
+            if (null != WorldListEntry.aAudioChannel_2627) {
+                WorldListEntry.aAudioChannel_2627.method2163();
             }
 
-            if (Class3_Sub21.aClass155_2491 != null) {
-                Class3_Sub21.aClass155_2491.method2163();
+            if (Class3_Sub21.aAudioChannel_2491 != null) {
+                Class3_Sub21.aAudioChannel_2491.method2163();
             }
 
-            Class140_Sub3.method1959(TextureOperation17.aBoolean3184);
-            WorldListEntry.aClass155_2627 = Class58.method1195(22050, Class38.gameSignlink, canvas, 0);
-            WorldListEntry.aClass155_2627.method2154(114, Client.aClass3_Sub24_Sub4_1193);
-            Class3_Sub21.aClass155_2491 = Class58.method1195(2048, Class38.gameSignlink, canvas, 1);
-            Class3_Sub21.aClass155_2491.method2154(-126, Class3_Sub26.aClass3_Sub24_Sub2_2563);
+            Class140_Sub3.method1959(TextureOperation17.stereoSound);
+            WorldListEntry.aAudioChannel_2627 = AudioChannel.method1195(22050, Class38.gameSignlink, canvas, 0);
+            WorldListEntry.aAudioChannel_2627.method2154(Client.aClass3_Sub24_Sub4_1193);
+            Class3_Sub21.aAudioChannel_2491 = AudioChannel.method1195(2048, Class38.gameSignlink, canvas, 1);
+            Class3_Sub21.aAudioChannel_2491.method2154(Class3_Sub26.aClass3_Sub24_Sub2_2563);
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "rc.DA(" + -32589 + ')');
         }

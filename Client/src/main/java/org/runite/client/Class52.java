@@ -372,8 +372,8 @@ final class Class52 {
                 var14 = new Model_Sub1(var12, var13);
 
                 for (int var15 = 0; var15 < 5; ++var15) {
-                    if (Class15.aShortArrayArray344[var15].length > this.anIntArray862[var15]) {
-                        var14.method2016(Class3_Sub25.aShortArray2548[var15], Class15.aShortArrayArray344[var15][this.anIntArray862[var15]]);
+                    if (AudioThread.aShortArrayArray344[var15].length > this.anIntArray862[var15]) {
+                        var14.method2016(Class3_Sub25.aShortArray2548[var15], AudioThread.aShortArrayArray344[var15][this.anIntArray862[var15]]);
                     }
 
                     if (this.anIntArray862[var15] < Class101.aShortArrayArray1429[var15].length) {
@@ -655,8 +655,8 @@ final class Class52 {
                         Model_Sub1 var43 = new Model_Sub1(var39, var39.length);
 
                         for (var45 = 0; 5 > var45; ++var45) {
-                            if (Class15.aShortArrayArray344[var45].length > this.anIntArray862[var45]) {
-                                var43.method2016(Class3_Sub25.aShortArray2548[var45], Class15.aShortArrayArray344[var45][this.anIntArray862[var45]]);
+                            if (AudioThread.aShortArrayArray344[var45].length > this.anIntArray862[var45]) {
+                                var43.method2016(Class3_Sub25.aShortArray2548[var45], AudioThread.aShortArrayArray344[var45][this.anIntArray862[var45]]);
                             }
 
                             if (Class101.aShortArrayArray1429[var45].length > this.anIntArray862[var45]) {
@@ -875,8 +875,8 @@ final class Class52 {
                     Model_Sub1 var15 = new Model_Sub1(var14, var9);
 
                     for (var11 = 0; var11 < 5; ++var11) {
-                        if (this.anIntArray862[var11] < Class15.aShortArrayArray344[var11].length) {
-                            var15.method2016(Class3_Sub25.aShortArray2548[var11], Class15.aShortArrayArray344[var11][this.anIntArray862[var11]]);
+                        if (this.anIntArray862[var11] < AudioThread.aShortArrayArray344[var11].length) {
+                            var15.method2016(Class3_Sub25.aShortArray2548[var11], AudioThread.aShortArrayArray344[var11][this.anIntArray862[var11]]);
                         }
 
                         if (Class101.aShortArrayArray1429[var11].length > this.anIntArray862[var11]) {

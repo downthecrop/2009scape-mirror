@@ -124,7 +124,7 @@ public final class Class102 implements Interface2 {
             int var9;
             int var10;
             for (var2 = 0; var2 < Class163.localNPCCount; ++var2) {
-                var3 = NPC.npcs[Class15.localNPCIndexes[var2]];
+                var3 = NPC.npcs[AudioThread.localNPCIndexes[var2]];
                 if (null != var3 && var3.hasDefinitions() && var3.definition.aBoolean1263 == var1 && var3.definition.method1472()) {
                     int var4 = var3.getSize();
                     int var5;
@@ -168,8 +168,8 @@ public final class Class102 implements Interface2 {
 
             label200:
             for (var2 = 0; Class163.localNPCCount > var2; ++var2) {
-                var3 = NPC.npcs[Class15.localNPCIndexes[var2]];
-                long var15 = (long) Class15.localNPCIndexes[var2] << 32 | 536870912L;
+                var3 = NPC.npcs[AudioThread.localNPCIndexes[var2]];
+                long var15 = (long) AudioThread.localNPCIndexes[var2] << 32 | 536870912L;
                 if (var3 != null && var3.hasDefinitions() && !var3.definition.aBoolean1263 == !var1 && var3.definition.method1472()) {
                     var6 = var3.getSize();
                     if (var6 != 1) {

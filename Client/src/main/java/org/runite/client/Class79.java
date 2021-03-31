@@ -108,7 +108,7 @@ final class Class79 {
                         }
 
                         Unsorted.anInt3671 = Class3_Sub28_Sub9.anInt3622;
-                        TextureOperation17.aBoolean3184 = var0.readUnsignedByte() == 1;
+                        TextureOperation17.stereoSound = var0.readUnsignedByte() == 1;
                         AudioHandler.soundEffectVolume = var0.readUnsignedByte();
                         if (AudioHandler.soundEffectVolume > 127) {
                             AudioHandler.soundEffectVolume = 127;
@@ -151,7 +151,7 @@ final class Class79 {
                         }
 
                         if (8 <= var2) {
-                            Class15.aBoolean346 = var0.readUnsignedByte() == 1;
+                            AudioThread.aBoolean346 = var0.readUnsignedByte() == 1;
                         }
 
                         if (9 <= var2) {

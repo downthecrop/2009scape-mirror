@@ -124,7 +124,7 @@ public final class Texture {
                 } else if (var7 < Class159.localPlayerCount) {
                     var8 = Unsorted.players[Class56.localPlayerIndexes[var7]];
                 } else {
-                    var8 = NPC.npcs[Class15.localNPCIndexes[-Class159.localPlayerCount + var7]];
+                    var8 = NPC.npcs[AudioThread.localNPCIndexes[-Class159.localPlayerCount + var7]];
                 }
 
                 if (null != var8 && var8.hasDefinitions()) {
@@ -195,7 +195,7 @@ public final class Texture {
 
                         for (var21 = 0; var20.length > var21; ++var21) {
                             Class96 var24 = var20[var21];
-                            if (null != var24 && var24.anInt1360 == 1 && Class15.localNPCIndexes[-Class159.localPlayerCount + var7] == var24.anInt1359 && Class44.anInt719 % 20 < 10) {
+                            if (null != var24 && var24.anInt1360 == 1 && AudioThread.localNPCIndexes[-Class159.localPlayerCount + var7] == var24.anInt1359 && Class44.anInt719 % 20 < 10) {
                                 if (-1 == var9.anInt1265) {
                                     var29 = 15 + var8.method1975(var6 + '\u89b4');
                                 } else {

@@ -320,6 +320,8 @@ class GameConfig {
         @JvmField
         var HOLIDAYS_ENABLED = true
 
+        @JvmField
+        var EASTER_EVENT_ENABLED = false
         /**
          * Halloween event NPC Definitions are handled inside of NPCDefinition.java
          */
@@ -334,11 +336,17 @@ class GameConfig {
 
         private val calendar: Calendar = Calendar.getInstance()
         private val month = calendar.get(Calendar.MONTH)
+        private val day = calendar.get(Calendar.DAY_OF_MONTH)
 
         @JvmStatic
         fun implementHoliday() {
             if (HOLIDAYS_ENABLED) {
                 when (month) {
+                    3 -> {
+                        if (day <= 8) {
+                            EASTER_EVENT_ENABLED = true
+                        }
+                    }
                     9 -> HALLOWEEN_EVENT_ENABLED = true
                     10 -> THANKSGIVING_EVENT_ENABLED = true
                     11 -> CHRISTMAS_EVENT_ENABLED = true

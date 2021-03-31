@@ -589,7 +589,7 @@ public final class PacketParser {
                                                                     if (var33 != -1) {
                                                                         var53 = SequenceDefinition.getAnimationDefinition(var33);
                                                                         if (null != var53.frames) {
-                                                                            Unsorted.method1470(var62.zAxis, var53, 183921384, var62.xAxis, false, 0);
+                                                                            Unsorted.method1470(var62.zAxis, var53, var62.xAxis, false, 0);
                                                                         }
                                                                     }
                                                                 }
@@ -627,7 +627,7 @@ public final class PacketParser {
                                                                     if (var33 != -1) {
                                                                         var53 = SequenceDefinition.getAnimationDefinition(var33);
                                                                         if (null != var53.frames) {
-                                                                            Unsorted.method1470(var60.zAxis, var53, 183921384, var60.xAxis, var60 == Class102.player, 0);
+                                                                            Unsorted.method1470(var60.zAxis, var53, var60.xAxis, var60 == Class102.player, 0);
                                                                         }
                                                                     }
                                                                 }
@@ -1104,7 +1104,7 @@ public final class PacketParser {
                                                         } else {
                                                             TextureOperation5.aClass94_3295 = playerName;
                                                             Unsorted.aBoolean2154 = true;
-                                                            Class15.aClass64_351 = Class38.gameSignlink.method1452(new String(playerName.method1568(), StandardCharsets.ISO_8859_1), true);
+                                                            AudioThread.aClass64_351 = Class38.gameSignlink.method1452(new String(playerName.method1568(), StandardCharsets.ISO_8859_1), true);
                                                         }
 
                                                         Unsorted.incomingOpcode = -1;
@@ -1362,14 +1362,17 @@ public final class PacketParser {
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 172) {
-                                                        nodeModelId = BufferedDataStream.incomingBuffer.readUnsignedShort();
-                                                        var19 = BufferedDataStream.incomingBuffer.readUnsignedByte();
-                                                        if (nodeModelId == 65535) {
-                                                            nodeModelId = -1;
+                                                        int soundEffectID;
+                                                        int soundEffectDelay;
+                                                        int soundEffectVolume;
+                                                        soundEffectDelay = BufferedDataStream.incomingBuffer.readUnsignedShort();
+                                                        soundEffectID = BufferedDataStream.incomingBuffer.readUnsignedByte();
+                                                        if (soundEffectDelay == 65535) {
+                                                            soundEffectDelay = -1;
                                                         }
 
-                                                        modelId = BufferedDataStream.incomingBuffer.readUnsignedShort();
-                                                        AudioHandler.soundEffectHandler(var19, nodeModelId, modelId);
+                                                        soundEffectVolume = BufferedDataStream.incomingBuffer.readUnsignedShort();
+                                                        AudioHandler.soundEffectHandler(soundEffectID, soundEffectDelay, soundEffectVolume);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 66) {

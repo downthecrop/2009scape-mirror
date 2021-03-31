@@ -186,7 +186,7 @@ final class TextureOperation34 extends TextureOperation {
          }
 
          for(var1 = 0; var1 < Class163.localNPCCount; ++var1) {
-            var2 = Class15.localNPCIndexes[var1];
+            var2 = AudioThread.localNPCIndexes[var1];
             NPC var6 = NPC.npcs[var2];
             if(null != var6 && var6.textCycle > 0) {
                --var6.textCycle;

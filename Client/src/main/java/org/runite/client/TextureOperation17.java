@@ -13,7 +13,7 @@ final class TextureOperation17 extends TextureOperation {
    private int anInt3180;
    static int[] anIntArray3181;
    private int anInt3182;
-   static boolean aBoolean3184 = true;
+   static boolean stereoSound = true;
    static int[] anIntArray3185 = new int[25];
    private int anInt3186;
    private int anInt3188;

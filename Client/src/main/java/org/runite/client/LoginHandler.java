@@ -64,21 +64,21 @@ public class LoginHandler {
                         int nameHash = (int) (var1 >> 16 & 31L);
                         TextureOperation12.outgoingBuffer.writeByte(nameHash);
                         Class3_Sub15.activeConnection.sendBytes(TextureOperation12.outgoingBuffer.buffer, 2);
-                        if (WorldListEntry.aClass155_2627 != null) {
-                            WorldListEntry.aClass155_2627.method2159(106);
+                        if (WorldListEntry.aAudioChannel_2627 != null) {
+                            WorldListEntry.aAudioChannel_2627.method2159();
                         }
 
-                        if (Class3_Sub21.aClass155_2491 != null) {
-                            Class3_Sub21.aClass155_2491.method2159(79);
+                        if (Class3_Sub21.aAudioChannel_2491 != null) {
+                            Class3_Sub21.aAudioChannel_2491.method2159();
                         }
 
                         int var4 = Class3_Sub15.activeConnection.readByte();
-                        if (WorldListEntry.aClass155_2627 != null) {
-                            WorldListEntry.aClass155_2627.method2159(68);
+                        if (WorldListEntry.aAudioChannel_2627 != null) {
+                            WorldListEntry.aAudioChannel_2627.method2159();
                         }
 
-                        if (null != Class3_Sub21.aClass155_2491) {
-                            Class3_Sub21.aClass155_2491.method2159(109);
+                        if (null != Class3_Sub21.aAudioChannel_2491) {
+                            Class3_Sub21.aAudioChannel_2491.method2159();
                         }
 
                         if (var4 != 0) {

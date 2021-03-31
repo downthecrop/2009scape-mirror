@@ -22,8 +22,8 @@ final class Class125 implements ShaderInterface {
             GL var2 = HDToolKit.gl;
             var2.glGenProgramsARB(1, var1, 0);
             this.anInt2184 = var1[0];
-            int[][] var3 = Class15.method895(0);
-            int[][] var4 = Class15.method895(8);
+            int[][] var3 = AudioThread.method895(0);
+            int[][] var4 = AudioThread.method895(8);
             DataBuffer var5 = new DataBuffer(262144);
 
             for (int var6 = 0; var6 < 256; ++var6) {

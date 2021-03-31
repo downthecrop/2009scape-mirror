@@ -161,7 +161,7 @@ final class Class128 {
 
                         Class12 var10 = var6.aClass12_2230;
                         if (var10 != null && var10.object.method1865()) {
-                            Class155.method2162(var10.object, var3, var4, var5);
+                            AudioChannel.method2162(var10.object, var3, var4, var5);
                             var10.object = var10.object.method1861();
                         }
                     }

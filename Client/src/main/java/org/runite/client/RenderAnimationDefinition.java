@@ -40,17 +40,6 @@ final class RenderAnimationDefinition {
     int slow_walk_follow_ccw_turn_anim = -1;
     int standing_cw_turn = -1;
 
-    static void method897(Class3_Sub24_Sub4 var1, CacheIndex var2, CacheIndex var3, CacheIndex var4) {
-        try {
-            Class124.aClass153_1661 = var2;
-            Class40.aClass153_679 = var4;
-            Class3_Sub28_Sub20.aClass153_3786 = var3;
-            Class101.aClass3_Sub24_Sub4_1421 = var1;
-        } catch (RuntimeException var6) {
-            throw ClientErrorException.clientError(var6, "ck.C(" + (var1 != null ? "{...}" : "null") + ',' + (var2 != null ? "{...}" : "null") + ',' + (var3 != null ? "{...}" : "null") + ',' + (var4 != null ? "{...}" : "null") + ')');
-        }
-    }
-
     final void method899() {
         try {
 
@@ -59,7 +48,7 @@ final class RenderAnimationDefinition {
         }
     }
 
-    static void method900(Class140_Sub4 var0, int var1) {
+    static void method900(Class140_Sub4 var0) {
         try {
             var0.aBoolean2810 = false;
             SequenceDefinition var2;
@@ -73,13 +62,13 @@ final class RenderAnimationDefinition {
                         var0.anInt2802 = 1;
                         ++var0.anInt2813;
                         ++var0.anInt2793;
-                        Unsorted.method1470(var0.zAxis, var2, 183921384, var0.xAxis, var0 == Class102.player, var0.anInt2813);
+                        Unsorted.method1470(var0.zAxis, var2, var0.xAxis, var0 == Class102.player, var0.anInt2813);
                     }
 
                     if (var2.frames.length <= var0.anInt2813) {
                         var0.anInt2813 = 0;
                         var0.anInt2802 = 0;
-                        Unsorted.method1470(var0.zAxis, var2, 183921384, var0.xAxis, Class102.player == var0, var0.anInt2813);
+                        Unsorted.method1470(var0.zAxis, var2, var0.xAxis, Class102.player == var0, var0.anInt2813);
                     }
 
                     var0.anInt2793 = var0.anInt2813 - -1;
@@ -101,14 +90,14 @@ final class RenderAnimationDefinition {
                     } else {
                         if (0 > var0.anInt2805) {
                             var0.anInt2805 = 0;
-                            Unsorted.method1470(var0.zAxis, var3, 183921384, var0.xAxis, Class102.player == var0, 0);
+                            Unsorted.method1470(var0.zAxis, var3, var0.xAxis, Class102.player == var0, 0);
                         }
 
                         ++var0.anInt2761;
                         if (var0.anInt2805 < var3.frames.length && var0.anInt2761 > var3.duration[var0.anInt2805]) {
                             ++var0.anInt2805;
                             var0.anInt2761 = 1;
-                            Unsorted.method1470(var0.zAxis, var3, var1 ^ -183911469, var0.xAxis, Class102.player == var0, var0.anInt2805);
+                            Unsorted.method1470(var0.zAxis, var3, var0.xAxis, Class102.player == var0, var0.anInt2805);
                         }
 
                         if (var0.anInt2805 >= var3.frames.length) {
@@ -131,103 +120,101 @@ final class RenderAnimationDefinition {
                 }
             }
 
-            if (var1 == -11973) {
-                if (var0.anInt2771 != -1 && var0.anInt2828 == 0) {
-                    var2 = SequenceDefinition.getAnimationDefinition(var0.anInt2771);
-                    if (var2.frames == null) {
-                        var0.anInt2771 = -1;
-                    } else {
-                        ++var0.anInt2760;
-                        if (var2.frames.length > var0.anInt2832 && var0.anInt2760 > var2.duration[var0.anInt2832]) {
-                            var0.anInt2760 = 1;
-                            ++var0.anInt2832;
-                            Unsorted.method1470(var0.zAxis, var2, 183921384, var0.xAxis, var0 == Class102.player, var0.anInt2832);
-                        }
+            if (var0.anInt2771 != -1 && var0.anInt2828 == 0) {
+                var2 = SequenceDefinition.getAnimationDefinition(var0.anInt2771);
+                if (var2.frames == null) {
+                    var0.anInt2771 = -1;
+                } else {
+                    ++var0.anInt2760;
+                    if (var2.frames.length > var0.anInt2832 && var0.anInt2760 > var2.duration[var0.anInt2832]) {
+                        var0.anInt2760 = 1;
+                        ++var0.anInt2832;
+                        Unsorted.method1470(var0.zAxis, var2, var0.xAxis, var0 == Class102.player, var0.anInt2832);
+                    }
 
-                        if (var2.frames.length <= var0.anInt2832) {
-                            var0.anInt2832 -= var2.anInt1865;
-                            ++var0.anInt2773;
-                            if (var2.maxLoops > var0.anInt2773) {
-                                if (var0.anInt2832 >= 0 && var0.anInt2832 < var2.frames.length) {
-                                    Unsorted.method1470(var0.zAxis, var2, var1 ^ -183911469, var0.xAxis, Class102.player == var0, var0.anInt2832);
-                                } else {
-                                    var0.anInt2771 = -1;
-                                }
+                    if (var2.frames.length <= var0.anInt2832) {
+                        var0.anInt2832 -= var2.anInt1865;
+                        ++var0.anInt2773;
+                        if (var2.maxLoops > var0.anInt2773) {
+                            if (var0.anInt2832 >= 0 && var0.anInt2832 < var2.frames.length) {
+                                Unsorted.method1470(var0.zAxis, var2, var0.xAxis, Class102.player == var0, var0.anInt2832);
                             } else {
                                 var0.anInt2771 = -1;
                             }
+                        } else {
+                            var0.anInt2771 = -1;
                         }
+                    }
 
-                        var0.anInt2776 = var0.anInt2832 + 1;
-                        if (var0.anInt2776 >= var2.frames.length) {
-                            var0.anInt2776 -= var2.anInt1865;
-                            if (var2.maxLoops > var0.anInt2773 + 1) {
-                                if (0 > var0.anInt2776 || var0.anInt2776 >= var2.frames.length) {
-                                    var0.anInt2776 = -1;
-                                }
-                            } else {
+                    var0.anInt2776 = var0.anInt2832 + 1;
+                    if (var0.anInt2776 >= var2.frames.length) {
+                        var0.anInt2776 -= var2.anInt1865;
+                        if (var2.maxLoops > var0.anInt2773 + 1) {
+                            if (0 > var0.anInt2776 || var0.anInt2776 >= var2.frames.length) {
                                 var0.anInt2776 = -1;
                             }
+                        } else {
+                            var0.anInt2776 = -1;
                         }
-
-                        var0.aBoolean2810 = var2.aBoolean1859;
                     }
+
+                    var0.aBoolean2810 = var2.aBoolean1859;
                 }
+            }
 
-                if (0 < var0.anInt2828) {
-                    --var0.anInt2828;
-                }
+            if (0 < var0.anInt2828) {
+                --var0.anInt2828;
+            }
 
-                for (var6 = 0; var0.aClass145Array2809.length > var6; ++var6) {
-                    Class145 var7 = var0.aClass145Array2809[var6];
-                    if (null != var7) {
-                        if (var7.anInt1900 <= 0) {
-                            SequenceDefinition var4 = SequenceDefinition.getAnimationDefinition(var7.animationId);
-                            if (var4.frames == null) {
-                                var0.aClass145Array2809[var6] = null;
-                            } else {
-                                ++var7.anInt1897;
-                                if (var7.anInt1893 < var4.frames.length && var7.anInt1897 > var4.duration[var7.anInt1893]) {
-                                    ++var7.anInt1893;
-                                    var7.anInt1897 = 1;
-                                    Unsorted.method1470(var0.zAxis, var4, 183921384, var0.xAxis, var0 == Class102.player, var7.anInt1893);
-                                }
+            for (var6 = 0; var0.aClass145Array2809.length > var6; ++var6) {
+                Class145 var7 = var0.aClass145Array2809[var6];
+                if (null != var7) {
+                    if (var7.anInt1900 <= 0) {
+                        SequenceDefinition var4 = SequenceDefinition.getAnimationDefinition(var7.animationId);
+                        if (var4.frames == null) {
+                            var0.aClass145Array2809[var6] = null;
+                        } else {
+                            ++var7.anInt1897;
+                            if (var7.anInt1893 < var4.frames.length && var7.anInt1897 > var4.duration[var7.anInt1893]) {
+                                ++var7.anInt1893;
+                                var7.anInt1897 = 1;
+                                Unsorted.method1470(var0.zAxis, var4, var0.xAxis, var0 == Class102.player, var7.anInt1893);
+                            }
 
-                                if (var7.anInt1893 >= var4.frames.length) {
-                                    ++var7.anInt1894;
-                                    var7.anInt1893 -= var4.anInt1865;
-                                    if (var4.maxLoops > var7.anInt1894) {
-                                        if (var7.anInt1893 >= 0 && var4.frames.length > var7.anInt1893) {
-                                            Unsorted.method1470(var0.zAxis, var4, 183921384, var0.xAxis, Class102.player == var0, var7.anInt1893);
-                                        } else {
-                                            var0.aClass145Array2809[var6] = null;
-                                        }
+                            if (var7.anInt1893 >= var4.frames.length) {
+                                ++var7.anInt1894;
+                                var7.anInt1893 -= var4.anInt1865;
+                                if (var4.maxLoops > var7.anInt1894) {
+                                    if (var7.anInt1893 >= 0 && var4.frames.length > var7.anInt1893) {
+                                        Unsorted.method1470(var0.zAxis, var4, var0.xAxis, Class102.player == var0, var7.anInt1893);
                                     } else {
                                         var0.aClass145Array2809[var6] = null;
                                     }
-                                }
-
-                                var7.anInt1891 = 1 + var7.anInt1893;
-                                if (var4.frames.length <= var7.anInt1891) {
-                                    var7.anInt1891 -= var4.anInt1865;
-                                    if (1 + var7.anInt1894 < var4.maxLoops) {
-                                        if (var7.anInt1891 < 0 || var4.frames.length <= var7.anInt1891) {
-                                            var7.anInt1891 = -1;
-                                        }
-                                    } else {
-                                        var7.anInt1891 = -1;
-                                    }
+                                } else {
+                                    var0.aClass145Array2809[var6] = null;
                                 }
                             }
-                        } else {
-                            --var7.anInt1900;
+
+                            var7.anInt1891 = 1 + var7.anInt1893;
+                            if (var4.frames.length <= var7.anInt1891) {
+                                var7.anInt1891 -= var4.anInt1865;
+                                if (1 + var7.anInt1894 < var4.maxLoops) {
+                                    if (var7.anInt1891 < 0 || var4.frames.length <= var7.anInt1891) {
+                                        var7.anInt1891 = -1;
+                                    }
+                                } else {
+                                    var7.anInt1891 = -1;
+                                }
+                            }
                         }
+                    } else {
+                        --var7.anInt1900;
                     }
                 }
-
             }
+
         } catch (RuntimeException var5) {
-            throw ClientErrorException.clientError(var5, "ck.F(" + (var0 != null ? "{...}" : "null") + ',' + var1 + ')');
+            throw ClientErrorException.clientError(var5, "ck.F(" + (var0 != null ? "{...}" : "null") + ',' + -11973 + ')');
         }
     }
 

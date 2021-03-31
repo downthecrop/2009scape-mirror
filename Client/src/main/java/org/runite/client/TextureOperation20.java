@@ -386,7 +386,7 @@ final class TextureOperation20 extends TextureOperation {
                   --anInt2212;
                }
 
-               if(Class15.aBoolean346) {
+               if(AudioThread.aBoolean346) {
                   for(queuedVarpIndex = 0; Class3_Sub23.anInt2537 > queuedVarpIndex; ++queuedVarpIndex) {
                      var2 = Class133.inputTextCodeArray[queuedVarpIndex];
                      if(98 == var2 || var2 == 99 || var2 == 96 || var2 == 97) {
@@ -790,13 +790,13 @@ final class TextureOperation20 extends TextureOperation {
                                           TextureOperation12.outgoingBuffer.putOpcode(245);
                                        }
 
-                                       if(Class15.aClass64_351 != null && Class15.aClass64_351.anInt978 == 1) {
-                                          if(null != Class15.aClass64_351.anObject974) {
+                                       if(AudioThread.aClass64_351 != null && AudioThread.aClass64_351.anInt978 == 1) {
+                                          if(null != AudioThread.aClass64_351.anObject974) {
                                              Class99.method1596(TextureOperation5.aClass94_3295, (byte)126, Unsorted.aBoolean2154);
                                           }
 
                                           TextureOperation5.aClass94_3295 = null;
-                                          Class15.aClass64_351 = null;
+                                          AudioThread.aClass64_351 = null;
                                           Unsorted.aBoolean2154 = false;
                                        }
 

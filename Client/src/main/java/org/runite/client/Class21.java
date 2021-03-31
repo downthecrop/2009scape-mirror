@@ -7,7 +7,7 @@ public final class Class21 {
 
     static boolean aBoolean440 = false;
     static int[] maskUpdateIndexes = new int[2048];
-    static int anInt443;
+    static int sampleRate;
     public static int anInt3537;
     public static int anInt3552;
     public static int anInt3395;
@@ -157,7 +157,7 @@ public final class Class21 {
         try {
 
             for (int var5 = 0; var5 < Class3_Sub28_Sub3.anInt3557; ++var5) {
-                if (var0 < Class3_Sub28_Sub18.anIntArray3768[var5] + Class155.anIntArray1969[var5] && Class155.anIntArray1969[var5] < var1 + var0 && Class140_Sub4.anIntArray2794[var5] + Player.anIntArray3954[var5] > var3 && Player.anIntArray3954[var5] < var3 - -var4) {
+                if (var0 < Class3_Sub28_Sub18.anIntArray3768[var5] + AudioChannel.anIntArray1969[var5] && AudioChannel.anIntArray1969[var5] < var1 + var0 && Class140_Sub4.anIntArray2794[var5] + Player.anIntArray3954[var5] > var3 && Player.anIntArray3954[var5] < var3 - -var4) {
                     Unsorted.aBooleanArray3674[var5] = true;
                 }
             }

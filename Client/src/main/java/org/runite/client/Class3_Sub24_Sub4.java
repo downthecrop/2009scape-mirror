@@ -17,7 +17,6 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
    private final int[] anIntArray3504 = new int[16];
    private final Class78 aClass78_3505 = new Class78();
    private final int[] anIntArray3506 = new int[16];
-   static int anInt3507;
    private final HashTable aHashTable_3508;
    int[] anIntArray3509 = new int[16];
    private final int[] anIntArray3510 = new int[16];
@@ -410,7 +409,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
          for(Class3_Sub22 var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1222(); null != var4; var4 = (Class3_Sub22)this.aClass3_Sub24_Sub3_3527.aLinkedList_3489.method1221()) {
             if(var2 < 0 || var4.anInt2514 == var2) {
                if(null != var4.aClass3_Sub24_Sub1_2507) {
-                  var4.aClass3_Sub24_Sub1_2507.method417(Class21.anInt443 / 100);
+                  var4.aClass3_Sub24_Sub1_2507.method417(Class21.sampleRate / 100);
                   if(var4.aClass3_Sub24_Sub1_2507.method445()) {
                      this.aClass3_Sub24_Sub3_3527.aClass3_Sub24_Sub2_3495.method457(var4.aClass3_Sub24_Sub1_2507);
                   }
@@ -551,7 +550,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
    static boolean method487(int var0, byte var1) {
       try {
          if(var1 != -85) {
-            anInt3507 = 56;
+            AudioChannel.threadPriority = 56;
          }
 
          return 97 <= var0 && var0 <= 122 || var0 >= 65 && var0 <= 90;
@@ -776,7 +775,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
    final synchronized void method413(int[] var1, int var2, int var3) {
       try {
          if(this.aClass78_3505.method1373()) {
-            int var4 = this.aClass78_3505.anInt1116 * this.anInt3511 / Class21.anInt443;
+            int var4 = this.aClass78_3505.anInt1116 * this.anInt3511 / Class21.sampleRate;
 
             while(true) {
                long var5 = this.aLong3526 - -((long)var3 * (long)var4);
@@ -806,7 +805,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
 
    final boolean method492(int var1, int var2, Class3_Sub22 var3, int[] var5) {
       try {
-         var3.anInt2512 = Class21.anInt443 / 100;
+         var3.anInt2512 = Class21.sampleRate / 100;
          if(var3.anInt2506 >= 0 && (var3.aClass3_Sub24_Sub1_2507 == null || var3.aClass3_Sub24_Sub1_2507.method444())) {
             var3.method401();
             var3.unlink();
@@ -1029,7 +1028,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
    final synchronized void method415(int var1) {
       try {
          if(this.aClass78_3505.method1373()) {
-            int var2 = this.aClass78_3505.anInt1116 * this.anInt3511 / Class21.anInt443;
+            int var2 = this.aClass78_3505.anInt1116 * this.anInt3511 / Class21.sampleRate;
 
             while(true) {
                long var3 = this.aLong3526 - -((long)var1 * (long)var2);
@@ -1089,7 +1088,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
             var3 += (int)((double)var5 * var7);
          }
 
-         var5 = (int)(0.5D + (double)(256 * var2.aPcmSound_2509.anInt3034) * Math.pow(2.0D, (double)var3 * 3.255208333333333E-4D) / (double)Class21.anInt443);
+         var5 = (int)(0.5D + (double)(256 * var2.aPcmSound_2509.anInt3034) * Math.pow(2.0D, (double)var3 * 3.255208333333333E-4D) / (double)Class21.sampleRate);
 
          return var5 >= 1?var5:1;
       } catch (RuntimeException var9) {

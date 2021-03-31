@@ -20,7 +20,6 @@ public class Unsorted {
     public static boolean aBoolean2146 = false;
     public static int incomingOpcode = 0;
     public static int anInt2148 = 0;
-    public static boolean aBoolean2150;
     public static boolean aBoolean2154;
     public static int[] anIntArray882 = new int[200];
     public static int anInt144;
@@ -187,7 +186,7 @@ public class Unsorted {
                 anInt3155 += (-anInt3155 + var1) / 16;
             }
 
-            if (Class15.aBoolean346) {
+            if (AudioThread.aBoolean346) {
                 for (int var3 = 0; var3 < Class3_Sub23.anInt2537; ++var3) {
                     int var4 = Class133.inputTextCodeArray[var3];
                     if (98 == var4) {
@@ -311,7 +310,7 @@ public class Unsorted {
                             var15[var16 + 1539] = var14;
                         }
                     }
-                } else if (Class15.method888(var1, var13, var0, 0, var3, var10)) {
+                } else if (AudioThread.method888(var1, var13, var0, var3, var10)) {
                     return false;
                 }
             }
@@ -323,7 +322,7 @@ public class Unsorted {
                 var12 = (int) (var8 >>> 32) & Integer.MAX_VALUE;
                 var13 = ObjectDefinition.getObjectDefinition(var12);
                 if (var13.anInt1516 != -1) {
-                    if (Class15.method888(var1, var13, var0, 0, var3, var10)) {
+                    if (AudioThread.method888(var1, var13, var0, var3, var10)) {
                         return false;
                     }
                 } else if (var11 == 9) {
@@ -353,7 +352,7 @@ public class Unsorted {
                 var10 = (int) var8 >> 20 & 3;
                 var11 = (int) (var8 >>> 32) & Integer.MAX_VALUE;
                 ObjectDefinition var18 = ObjectDefinition.getObjectDefinition(var11);
-                return var18.anInt1516 == -1 || !Class15.method888(var1, var18, var0, 0, var3, var10);
+                return var18.anInt1516 == -1 || !AudioThread.method888(var1, var18, var0, var3, var10);
             }
 
             return true;
@@ -653,7 +652,7 @@ public class Unsorted {
     public static void method1282(int var0, int var2, int var3, int var4) {
         try {
             for (int var5 = 0; var5 < Class3_Sub28_Sub3.anInt3557; ++var5) {
-                if (var0 < Class155.anIntArray1969[var5] - -Class3_Sub28_Sub18.anIntArray3768[var5] && var0 + var4 > Class155.anIntArray1969[var5] && var2 < Player.anIntArray3954[var5] - -Class140_Sub4.anIntArray2794[var5] && var3 + var2 > Player.anIntArray3954[var5]) {
+                if (var0 < AudioChannel.anIntArray1969[var5] - -Class3_Sub28_Sub18.anIntArray3768[var5] && var0 + var4 > AudioChannel.anIntArray1969[var5] && var2 < Player.anIntArray3954[var5] - -Class140_Sub4.anIntArray2794[var5] && var3 + var2 > Player.anIntArray3954[var5]) {
                     Class163_Sub1_Sub1.aBooleanArray4008[var5] = true;
                 }
             }
@@ -881,13 +880,13 @@ public class Unsorted {
             }
 
             Class17.method904(65536, var2);
-            RenderAnimationDefinition.method900(var2, -11973);
+            RenderAnimationDefinition.method900(var2);
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "vg.C(" + var0 + ',' + 2279 + ',' + (var2 != null ? "{...}" : "null") + ')');
         }
     }
 
-    public static void method1470(int var0, SequenceDefinition var1, int var2, int var3, boolean var4, int var5) {
+    public static void method1470(int var0, SequenceDefinition var1, int var3, boolean var4, int var5) {
         try {
             if (AudioHandler.currentSoundEffectCount < 50) {
                 if (var1.sounds != null && var1.sounds.length > var5 && null != var1.sounds[var5]) {
@@ -913,12 +912,9 @@ public class Unsorted {
                         AudioHandler.soundEffectVolumeArray[AudioHandler.currentSoundEffectCount] = var8;
                         int var11 = (-64 + var0) / 128;
                         var10 = (var3 + -64) / 128;
-                        AudioHandler.anIntArray2157[AudioHandler.currentSoundEffectCount] = 0;
+                        AudioHandler.soundEffectDelayArray[AudioHandler.currentSoundEffectCount] = 0;
                         AudioHandler.soundEffects[AudioHandler.currentSoundEffectCount] = null;
                         AudioHandler.soundEffectCoordinates[AudioHandler.currentSoundEffectCount] = var9 + (var10 << 16) + (var11 << 8);
-                        if (var2 != 183921384) {
-                            aClass33_1238 = null;
-                        }
 
                         ++AudioHandler.currentSoundEffectCount;
                     }
@@ -1152,7 +1148,7 @@ public class Unsorted {
                     var3.anInt2760 = 0;
                     var3.anInt2773 = 0;
                     var3.anInt2828 = plane;
-                    method1470(var3.zAxis, var4, 183921384, var3.xAxis, false, var3.anInt2832);
+                    method1470(var3.zAxis, var4, var3.xAxis, false, var3.anInt2832);
                 }
 
                 if (var5 == 2) {
@@ -1167,7 +1163,7 @@ public class Unsorted {
                 var3.anInt2811 = var3.anInt2816;
                 var3.anInt2832 = 0;
                 if (var3.anInt2771 != -1) {
-                    method1470(var3.zAxis, SequenceDefinition.getAnimationDefinition(var3.anInt2771), dummy + 183921345, var3.xAxis, false, var3.anInt2832);
+                    method1470(var3.zAxis, SequenceDefinition.getAnimationDefinition(var3.anInt2771), var3.xAxis, false, var3.anInt2832);
                 }
             }
 
@@ -2112,7 +2108,7 @@ public class Unsorted {
                                     var12.anIntArray2755[var13] -= var10;
                                 }
 
-                                Class15.localNPCIndexes[Class163.localNPCCount++] = var11;
+                                AudioThread.localNPCIndexes[Class163.localNPCCount++] = var11;
                             } else {
                                 NPC.npcs[var11].setDefinitions(null);
                                 NPC.npcs[var11] = null;
@@ -3649,7 +3645,7 @@ public class Unsorted {
                 if (var11 != null && (var5 == var11.parentId || var5 == -1412584499 && var11 == Class56.aClass11_886)) {
                     int var12;
                     if (var9 == -1) {
-                        Class155.anIntArray1969[Class3_Sub28_Sub3.anInt3557] = var2 + var11.anInt306;
+                        AudioChannel.anIntArray1969[Class3_Sub28_Sub3.anInt3557] = var2 + var11.anInt306;
                         Player.anIntArray3954[Class3_Sub28_Sub3.anInt3557] = var11.anInt210 - -var1;
                         Class3_Sub28_Sub18.anIntArray3768[Class3_Sub28_Sub3.anInt3557] = var11.width;
                         Class140_Sub4.anIntArray2794[Class3_Sub28_Sub3.anInt3557] = var11.height;
@@ -4760,7 +4756,7 @@ public class Unsorted {
             anInt3625 = 3;
             Class25.method957(true);
             aBoolean3604 = true;
-            TextureOperation17.aBoolean3184 = true;
+            TextureOperation17.stereoSound = true;
             Class128.aBoolean1685 = true;
             Class3_Sub28_Sub9.anInt3622 = 0;
             anInt3071 = 0;
@@ -4787,7 +4783,7 @@ public class Unsorted {
 
             anInt2148 = 0;
             Class3_Sub20.anInt2488 = 0;
-            Class15.aBoolean346 = false;
+            AudioThread.aBoolean346 = false;
             Class163_Sub3.aBoolean3004 = true;
             aBoolean2146 = false;
             aBoolean1080 = false;

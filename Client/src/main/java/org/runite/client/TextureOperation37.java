@@ -1,4 +1,5 @@
 package org.runite.client;
+import org.rs09.client.config.GameConfig;
 import org.rs09.client.net.Connection;
 
 import java.io.IOException;
@@ -91,19 +92,19 @@ final class TextureOperation37 extends TextureOperation {
                   Class3_Sub15.activeConnection = new Connection((Socket)Class3_Sub9.aClass64_2318.anObject974, Class38.gameSignlink);
                   Class3_Sub9.aClass64_2318 = null;
                   Class3_Sub15.activeConnection.sendBytes(TextureOperation12.outgoingBuffer.buffer, TextureOperation12.outgoingBuffer.index);
-                   if(WorldListEntry.aClass155_2627 != null) {
-                     WorldListEntry.aClass155_2627.method2159(63);
+                   if(WorldListEntry.aAudioChannel_2627 != null) {
+                     WorldListEntry.aAudioChannel_2627.method2159();
                   }
-                  if(null != Class3_Sub21.aClass155_2491) {
-                     Class3_Sub21.aClass155_2491.method2159(66);
+                  if(null != Class3_Sub21.aAudioChannel_2491) {
+                     Class3_Sub21.aAudioChannel_2491.method2159();
                   }
                   response = Class3_Sub15.activeConnection.readByte();
                   System.out.println("Response = " + response);
-                  if(WorldListEntry.aClass155_2627 != null) {
-                     WorldListEntry.aClass155_2627.method2159(64);
+                  if(WorldListEntry.aAudioChannel_2627 != null) {
+                     WorldListEntry.aAudioChannel_2627.method2159();
                   }
-                  if(Class3_Sub21.aClass155_2491 != null) {
-                     Class3_Sub21.aClass155_2491.method2159(111);
+                  if(Class3_Sub21.aAudioChannel_2491 != null) {
+                     Class3_Sub21.aAudioChannel_2491.method2159();
                   }
                   if(response != 21) {
                      Unsorted.anInt1711 = response;
@@ -240,11 +241,8 @@ final class TextureOperation37 extends TextureOperation {
       }
    }
 
-   static void method272(byte var0) {
+   static void displayNPCOnLoginRegion() {
       try {
-         if(var0 != -124) {
-            aClass3_Sub28_Sub3_3264 = null;
-         }
 
          int var1 = TextureOperation35.aByteArrayArray3335.length;
 
@@ -275,11 +273,17 @@ final class TextureOperation37 extends TextureOperation {
                   int var11 = var9 + 64 * (Class3_Sub24_Sub3.anIntArray3494[var2] >> 8) - Class131.anInt1716;
                   int var10 = var7 & 63;
                   int var12 = var10 + -Texture.anInt1152 + 64 * (255 & Class3_Sub24_Sub3.anIntArray3494[var2]);
-                  NPCDefinition var13 = NPCDefinition.getNPCDefinition(var16.readUnsignedShort());
+                  int npcID = var16.readUnsignedShort();
+
+                  if (GameConfig.EASTER_EVENT_ENABLED) {
+                     npcID = 1321;
+                  }
+
+                  NPCDefinition var13 = NPCDefinition.getNPCDefinition(npcID);
                   if(NPC.npcs[var6] == null && (var13.aByte1267 & 1) > 0 && Class140_Sub3.anInt2745 == var8 && var11 >= 0 && 104 > var13.size + var11 && var12 >= 0 && 104 > var12 - -var13.size) {
                      NPC.npcs[var6] = new NPC();
                      NPC npc = NPC.npcs[var6];
-                     Class15.localNPCIndexes[Class163.localNPCCount++] = var6;
+                     AudioThread.localNPCIndexes[Class163.localNPCCount++] = var6;
                      npc.anInt2838 = Class44.anInt719;
                      npc.setDefinitions(var13);
                      npc.setSize(npc.definition.size, 2);
@@ -297,7 +301,7 @@ final class TextureOperation37 extends TextureOperation {
          }
 
       } catch (RuntimeException var15) {
-         throw ClientErrorException.clientError(var15, "mh.E(" + var0 + ')');
+         throw ClientErrorException.clientError(var15, "mh.E(" + (byte) -124 + ')');
       }
    }
 

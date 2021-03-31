@@ -129,7 +129,7 @@ public final class LinkableRSString extends Linkable {
                     if (0 == var1.length()) {
                         var4 = RSString.stringCombiner(new RSString[]{var4, TextCore.HasAgeExpire});
                     } else {
-                        var4 = RSString.stringCombiner(new RSString[]{var4, TextCore.HasExpires, Class15.method894(94608000000L + TimeUtils.time()), TextCore.HasMaxAge, QuickChatDefinition.method612(94608000L)});
+                        var4 = RSString.stringCombiner(new RSString[]{var4, TextCore.HasExpires, AudioThread.method894(94608000000L + TimeUtils.time()), TextCore.HasMaxAge, QuickChatDefinition.method612(94608000L)});
                     }
 
                     RSString.stringCombiner(new RSString[]{TextCore.aClass94_1694, var4, TextCore.aClass94_1698}).method1554(Class38.gameSignlink.gameApplet);
