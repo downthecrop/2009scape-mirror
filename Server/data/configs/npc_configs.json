@@ -5199,7 +5199,7 @@
     "attack_level": "1"
   },
   {
-    "examine": "Examine not added",
+    "examine": "An annoying flappy thing.",
     "slayer_task": "5",
     "attack_speed": "5",
     "magic_level": "10",
@@ -5207,6 +5207,9 @@
     "weakness": "4",
     "slayer_exp": "8",
     "death_animation": "4918",
+    "melee_animation": "4915",
+    "range_animation": "4915",
+    "defence_animation": "4916",
     "name": "Bat",
     "defence_level": "2",
     "safespot": null,
