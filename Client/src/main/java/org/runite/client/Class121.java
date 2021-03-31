@@ -133,22 +133,22 @@ final class Class121 {
                     TextureOperation12.outgoingBuffer.writeByte(255);
                     TextureOperation12.outgoingBuffer.writeInt(wlUpdateStamp);
                     Class3_Sub15.activeConnection.sendBytes(TextureOperation12.outgoingBuffer.buffer, TextureOperation12.outgoingBuffer.index);
-                    if (null != WorldListEntry.aClass155_2627) {
-                        WorldListEntry.aClass155_2627.method2159(67);
+                    if (null != WorldListEntry.aAudioChannel_2627) {
+                        WorldListEntry.aAudioChannel_2627.method2159();
                     }
 
-                    if (null != Class3_Sub21.aClass155_2491) {
-                        Class3_Sub21.aClass155_2491.method2159(101);
+                    if (null != Class3_Sub21.aAudioChannel_2491) {
+                        Class3_Sub21.aAudioChannel_2491.method2159();
                     }
 
                     var2 = Class3_Sub15.activeConnection.readByte();
                     //System.out.println(var2); //Not sure what this was debugging
-                    if (WorldListEntry.aClass155_2627 != null) {
-                        WorldListEntry.aClass155_2627.method2159(55);
+                    if (WorldListEntry.aAudioChannel_2627 != null) {
+                        WorldListEntry.aAudioChannel_2627.method2159();
                     }
 
-                    if (null != Class3_Sub21.aClass155_2491) {
-                        Class3_Sub21.aClass155_2491.method2159(29984 ^ 30075);
+                    if (null != Class3_Sub21.aAudioChannel_2491) {
+                        Class3_Sub21.aAudioChannel_2491.method2159();
                     }
 
                     if (var2 != 0) {

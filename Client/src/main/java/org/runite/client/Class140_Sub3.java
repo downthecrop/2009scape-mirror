@@ -198,9 +198,9 @@ final class Class140_Sub3 extends GameObject {
 
     static void method1959(boolean var3) {
         try {
-            Class3_Sub24_Sub4.anInt3507 = 2;
-            Unsorted.aBoolean2150 = var3;
-            Class21.anInt443 = 22050;
+            AudioChannel.threadPriority = 2;
+            AudioChannel.stereo = var3;
+            Class21.sampleRate = 22050;
         } catch (RuntimeException var5) {
             throw ClientErrorException.clientError(var5, "dc.D(" + 256 + ',' + 2 + ',' + 22050 + ',' + var3 + ')');
         }
@@ -264,7 +264,7 @@ final class Class140_Sub3 extends GameObject {
                 }
 
                 while (this.aClass142_2722.duration[this.anInt2726] < var4) {
-                    Unsorted.method1470(var1, this.aClass142_2722, 183921384, var2, false, this.anInt2726);
+                    Unsorted.method1470(var1, this.aClass142_2722, var2, false, this.anInt2726);
                     var4 -= this.aClass142_2722.duration[this.anInt2726];
                     ++this.anInt2726;
                     if (this.anInt2726 >= this.aClass142_2722.frames.length) {

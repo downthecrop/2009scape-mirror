@@ -14,7 +14,7 @@ public class Class163_Sub1 extends Class163 {
    static int anInt2993 = 0;
 
 
-   static void method2210(boolean var1) {
+   static void ping(boolean var1) {
       try {
          Class58.method1194();
          if(30 == Class143.gameStage || Class143.gameStage == 25) {

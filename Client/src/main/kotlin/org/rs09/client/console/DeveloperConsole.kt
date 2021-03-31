@@ -243,6 +243,17 @@ object DeveloperConsole {
                     println("Error. Displays error message on login, account creation. Use: errormsg #")
                 }
             }
+            "playsound" -> {
+                if (argSize == 4) {
+                    val soundID = if (clientCommand[1].toIntOrNull() == null) 0 else clientCommand[1].toInt()
+                    val soundDelay = if (clientCommand[2].toIntOrNull() == null) 0 else clientCommand[2].toInt()
+                    val soundVolume = if (clientCommand[3].toIntOrNull() == null) 0 else clientCommand[3].toInt()
+                    AudioHandler.soundEffectHandler(soundVolume, soundID, soundDelay)
+                    println("Playing sound: $soundID with delay: $soundDelay volume: $soundVolume")
+                } else {
+                    println("Error. Plays sound effect. Use: playsound soundID soundDelay soundVolume")
+                }
+            }
             "playsong" -> {
                 if (argSize in 2..4) {
                     if (clientCommand[1].toIntOrNull() == null) {

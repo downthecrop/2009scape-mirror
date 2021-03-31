@@ -937,7 +937,7 @@ public final class CS2Script extends Linkable {
                                                 if (opcode < 3300) {
                                                     if (opcode == 3200) {
                                                         iStackCounter -= 3;
-                                                        AudioHandler.soundEffectHandler(ItemDefinition.intsStack[iStackCounter - -1], ItemDefinition.intsStack[iStackCounter], ItemDefinition.intsStack[iStackCounter + 2]);
+                                                        AudioHandler.soundEffectHandler(ItemDefinition.intsStack[iStackCounter + 1], ItemDefinition.intsStack[iStackCounter], ItemDefinition.intsStack[iStackCounter + 2]);
                                                         continue;
                                                     }
                                                     if (opcode == 3201) {
@@ -2384,7 +2384,7 @@ public final class CS2Script extends Linkable {
                                                                         } else {
                                                                             Unsorted.aBoolean2154 = flag5;
                                                                             TextureOperation5.aClass94_3295 = class94_64;
-                                                                            Class15.aClass64_351 = Class38.gameSignlink.method1452(new String(class94_64.method1568(), StandardCharsets.ISO_8859_1), true);
+                                                                            AudioThread.aClass64_351 = Class38.gameSignlink.method1452(new String(class94_64.method1568(), StandardCharsets.ISO_8859_1), true);
                                                                         }
                                                                         continue;
                                                                     }
@@ -2651,7 +2651,7 @@ public final class CS2Script extends Linkable {
                                                                             continue;
                                                                         }
                                                                         if (opcode == 6017) {
-                                                                            TextureOperation17.aBoolean3184 = ItemDefinition.intsStack[--iStackCounter] == 1;
+                                                                            TextureOperation17.stereoSound = ItemDefinition.intsStack[--iStackCounter] == 1;
                                                                             GameShell.method34();
                                                                             Class119.method1730(Class38.gameSignlink);
                                                                             aBoolean2705 = false;
@@ -2795,7 +2795,7 @@ public final class CS2Script extends Linkable {
                                                                             continue;
                                                                         }
                                                                         if (6117 == opcode) {
-                                                                            ItemDefinition.intsStack[iStackCounter++] = TextureOperation17.aBoolean3184 ? 1 : 0;
+                                                                            ItemDefinition.intsStack[iStackCounter++] = TextureOperation17.stereoSound ? 1 : 0;
                                                                             continue;
                                                                         }
                                                                         if (opcode == 6118) {
@@ -2978,13 +2978,13 @@ public final class CS2Script extends Linkable {
                                                                             if (opcode >= 6700)
                                                                                 break;
                                                                             if (6600 == opcode) {
-                                                                                Class15.aBoolean346 = ItemDefinition.intsStack[--iStackCounter] == 1;
+                                                                                AudioThread.aBoolean346 = ItemDefinition.intsStack[--iStackCounter] == 1;
                                                                                 Class119.method1730(Class38.gameSignlink);
                                                                                 continue;
                                                                             }
                                                                             if (opcode != 6601)
                                                                                 break;
-                                                                            ItemDefinition.intsStack[iStackCounter++] = Class15.aBoolean346 ? 1 : 0;
+                                                                            ItemDefinition.intsStack[iStackCounter++] = AudioThread.aBoolean346 ? 1 : 0;
                                                                             continue;
                                                                         }
                                                                         if (6405 == opcode) {

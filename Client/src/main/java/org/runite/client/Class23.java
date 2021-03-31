@@ -38,7 +38,7 @@ public final class Class23 {
             var1.writeByte(Class128.aBoolean1685 ? 1 : 0);
             var1.writeByte(Class38.aBoolean661 ? 1 : 0);
             var1.writeByte(Class3_Sub28_Sub9.anInt3622);
-            var1.writeByte(!TextureOperation17.aBoolean3184 ? 0 : 1);
+            var1.writeByte(!TextureOperation17.stereoSound ? 0 : 1);
             var1.writeByte(AudioHandler.soundEffectVolume);
             var1.writeByte(AudioHandler.musicVolume);
             var1.writeByte(Sprites.ambientVolume);
@@ -48,7 +48,7 @@ public final class Class23 {
             var1.writeInt(Unsorted.anInt2148);
             var1.writeByte(Unsorted.anInt2577);
             var1.writeByte(Unsorted.aBoolean2146 ? 1 : 0);
-            var1.writeByte(!Class15.aBoolean346 ? 0 : 1);
+            var1.writeByte(!AudioThread.aBoolean346 ? 0 : 1);
             var1.writeByte(Class3_Sub20.anInt2488);
             var1.writeByte(Unsorted.aBoolean1080 ? 1 : 0);
             var1.writeByte(Class163_Sub3.aBoolean3004 ? 1 : 0);

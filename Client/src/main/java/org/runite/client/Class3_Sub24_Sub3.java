@@ -40,7 +40,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
    private void method464(Class3_Sub22 var1, int var3) {
       try {
          if((this.aClass3_Sub24_Sub4_3493.anIntArray3518[var1.anInt2514] & 4) != 0 && var1.anInt2506 < 0) {
-            int var4 = this.aClass3_Sub24_Sub4_3493.anIntArray3509[var1.anInt2514] / Class21.anInt443;
+            int var4 = this.aClass3_Sub24_Sub4_3493.anIntArray3509[var1.anInt2514] / Class21.sampleRate;
             int var5 = (var4 + 1048575 + -var1.anInt2516) / var4;
             var1.anInt2516 = 1048575 & var4 * var3 + var1.anInt2516;
             if(var5 <= var3) {
@@ -170,7 +170,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
    private void method469(int[] var1, Class3_Sub22 var2, int var3, int var4, int var5) {
       try {
          if((4 & this.aClass3_Sub24_Sub4_3493.anIntArray3518[var2.anInt2514]) != 0 && var2.anInt2506 < 0) {
-            int var7 = this.aClass3_Sub24_Sub4_3493.anIntArray3509[var2.anInt2514] / Class21.anInt443;
+            int var7 = this.aClass3_Sub24_Sub4_3493.anIntArray3509[var2.anInt2514] / Class21.sampleRate;
 
             while(true) {
                int var8 = (-var2.anInt2516 + 1048575 + var7) / var7;
@@ -181,7 +181,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
 
                var4 -= var8;
                var2.aClass3_Sub24_Sub1_2507.method413(var1, var3, var8);
-               int var9 = Class21.anInt443 / 100;
+               int var9 = Class21.sampleRate / 100;
                Class3_Sub24_Sub1 var11 = var2.aClass3_Sub24_Sub1_2507;
                int var10 = 262144 / var7;
                if(var10 < var9) {

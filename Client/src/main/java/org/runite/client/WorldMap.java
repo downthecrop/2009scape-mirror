@@ -98,28 +98,28 @@ final class WorldMap extends Node {
                 } else if (anInt2737 == 20) {
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: World Map Stage 20: String given: " + Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561.properlyCapitalize().toString());
-                    Class15.method889(new DataBuffer(aClass153_3210.method2123(RSString.parse("underlay"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map underlay
+                    WorldMapUnderlayDecoder.decode(new DataBuffer(aClass153_3210.method2123(RSString.parse("underlay"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map underlay
                     anInt2737 = 30;
-                    Class163_Sub1.method2210(true);
+                    Class163_Sub1.ping(true);
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 30) {
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: World Map Stage 30: String given: " + Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561.properlyCapitalize().toString());
-                    Class163_Sub2.method2219(new DataBuffer(aClass153_3210.method2123(RSString.parse("overlay"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map overlay (water)
+                    WorldMapOverlayDecoder.decode(new DataBuffer(aClass153_3210.method2123(RSString.parse("overlay"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map overlay (water)
                     anInt2737 = 40;
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 40) {
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: World Map Stage 40: String given: " + Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561.properlyCapitalize().toString());
-                    TextureOperation25.method328(new DataBuffer(aClass153_3210.method2123(RSString.parse("overlay2"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//unsure
+                    WorldMapOverlay2Decoder.decode(new DataBuffer(aClass153_3210.method2123(RSString.parse("overlay2"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//unsure
                     anInt2737 = 50;
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 50) {
                     if (GameConfig.WORLD_MAP_DEBUG)
                         System.out.println("World Map Debug: World Map Stage 50: String given: " + Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561.properlyCapitalize().toString());
-                    Class96.method1587(new DataBuffer(aClass153_3210.method2123(RSString.parse("loc"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map object drawing (buildings etc)
+                    WorldMapLOCDecoder.decode(new DataBuffer(aClass153_3210.method2123(RSString.parse("loc"), Unsorted.aClass3_Sub28_Sub3_2600.aClass94_3561)));//This controls the world map object drawing (buildings etc)
                     anInt2737 = 60;
-                    Class163_Sub1.method2210(true);
+                    Class163_Sub1.ping(true);
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 60) {
                     if (GameConfig.WORLD_MAP_DEBUG)
@@ -141,42 +141,42 @@ final class WorldMap extends Node {
                 } else if (anInt2737 == 70) {
                     Class164_Sub2.aClass33_3019 = new Class33(11, GameShell.canvas);//Sets the font size of *some* locations on the world map interface
                     anInt2737 = 73;
-                    Class163_Sub1.method2210(true);
+                    Class163_Sub1.ping(true);
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 73) {
                     Unsorted.aClass33_1238 = new Class33(12, GameShell.canvas);//Unsure
                     anInt2737 = 76;
-                    Class163_Sub1.method2210(true);
+                    Class163_Sub1.ping(true);
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 76) {
                     Class99.aClass33_1399 = new Class33(14, GameShell.canvas);//Sets the font size of *some* cities on the world map interface
                     anInt2737 = 79;
-                    Class163_Sub1.method2210(true);
+                    Class163_Sub1.ping(true);
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 79) {
                     Class75_Sub2.aClass33_2637 = new Class33(17, GameShell.canvas);//unsure
                     anInt2737 = 82;
-                    Class163_Sub1.method2210(true);
+                    Class163_Sub1.ping(true);
                     Class75_Sub4.method1355();
                 } else if (anInt2737 == 82) {
                     Class119.aClass33_1626 = new Class33(19, GameShell.canvas);//Sets the font size of the orange region names on the world map interface
                     anInt2737 = 85;
-                    Class163_Sub1.method2210(true);
+                    Class163_Sub1.ping(true);
                     Class75_Sub4.method1355();
                 } else if (85 == anInt2737) {
                     Class75_Sub2.aClass33_2648 = new Class33(22, GameShell.canvas);//unsure
                     anInt2737 = 88;
-                    Class163_Sub1.method2210(true);
+                    Class163_Sub1.ping(true);
                     Class75_Sub4.method1355();
                 } else if (88 == anInt2737) {
                     Class161.aClass33_2034 = new Class33(26, GameShell.canvas);//unsure
                     anInt2737 = 91;
-                    Class163_Sub1.method2210(true);
+                    Class163_Sub1.ping(true);
                     Class75_Sub4.method1355();
                 } else {
                     Class91.aClass33_1305 = new Class33(30, GameShell.canvas);//unsure
                     anInt2737 = 100;
-                    Class163_Sub1.method2210(true);
+                    Class163_Sub1.ping(true);
                     Class75_Sub4.method1355();
                     System.gc();
                 }

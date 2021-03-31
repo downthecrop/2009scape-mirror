@@ -133,7 +133,7 @@ public final class NPC extends Class140_Sub4 {
                             var12.anInt1891 = 1;
                             var12.anInt1897 = 0;
                             var12.anInt1900 = var8;
-                            Unsorted.method1470(var2.zAxis, var10, 183921384, var2.xAxis, false, 0);
+                            Unsorted.method1470(var2.zAxis, var10, var2.xAxis, false, 0);
                          } else if(var11 == 2) {
                             var12.anInt1894 = 0;
                          }
@@ -147,7 +147,7 @@ public final class NPC extends Class140_Sub4 {
                          var12.animationId = var6;
                          var12.anInt1894 = 0;
                          var12.anInt1893 = 0;
-                         Unsorted.method1470(var2.zAxis, var10, 183921384, var2.xAxis, false, 0);
+                         Unsorted.method1470(var2.zAxis, var10, var2.xAxis, false, 0);
                       }
                    }
                 }

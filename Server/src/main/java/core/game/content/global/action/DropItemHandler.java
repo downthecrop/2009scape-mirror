@@ -36,7 +36,6 @@ public final class DropItemHandler {
 				return true;
 			}
 			player.getDialogueInterpreter().close();
-			player.getAudioManager().send(new Audio(2393, 0, 0));
 			player.getPulseManager().clear();
 			if (option.equalsIgnoreCase("destroy") || option.equalsIgnoreCase("dissolve")) {
 				player.getDialogueInterpreter().open(9878, item);
@@ -48,7 +47,7 @@ public final class DropItemHandler {
 			}
 			if (player.getInventory().replace(null, item.getSlot()) == item) {
 				item = item.getDropItem();
-				player.getAudioManager().send(new Audio(item.getId() == 995 ? 10 : 2739, 1, 0));
+				player.getAudioManager().send(new Audio(item.getId() == 995 ? 10 : 2739, 1, 0));//2739 ACTUAL DROP SOUND
 				GroundItemManager.create(item, player.getLocation(), player);
 				PlayerParser.save(player);
 			}

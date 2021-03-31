@@ -35,9 +35,9 @@ public final class NPCRendering {
 
           if(Unsorted.incomingPacketLength == BufferedDataStream.incomingBuffer.index) {
              for(var1 = 0; var1 < Class163.localNPCCount; ++var1) {
-                if(null == NPC.npcs[Class15.localNPCIndexes[var1]]) {
+                if(null == NPC.npcs[AudioThread.localNPCIndexes[var1]]) {
  //            	   System.err.println("gnp2 pos:" + var1 + " size:" + Class163.anInt2046);
-                       System.err.println("Local NPC was null - index: " + Class15.localNPCIndexes[var1] + ", list index: " + var1 + ", list size: " + Class163.localNPCCount);
+                       System.err.println("Local NPC was null - index: " + AudioThread.localNPCIndexes[var1] + ", list index: " + var1 + ", list size: " + Class163.localNPCCount);
                 }
              }
 
@@ -58,7 +58,7 @@ public final class NPCRendering {
            int var2;
            if (var1 < Class163.localNPCCount) {
                for (var2 = var1; var2 < Class163.localNPCCount; ++var2) {
-                   Class3_Sub7.anIntArray2292[Class139.anInt1829++] = Class15.localNPCIndexes[var2];
+                   Class3_Sub7.anIntArray2292[Class139.anInt1829++] = AudioThread.localNPCIndexes[var2];
                }
            }
 
@@ -68,23 +68,23 @@ public final class NPCRendering {
                Class163.localNPCCount = 0;
 
                for (var2 = 0; var1 > var2; ++var2) {
-                   int var3 = Class15.localNPCIndexes[var2];
+                   int var3 = AudioThread.localNPCIndexes[var2];
                    NPC var4 = NPC.npcs[var3];
                    int var5 = BufferedDataStream.incomingBuffer.getBits(1);
                    if (0 == var5) {
-                       Class15.localNPCIndexes[Class163.localNPCCount++] = var3;
+                       AudioThread.localNPCIndexes[Class163.localNPCCount++] = var3;
                        var4.anInt2838 = Class44.anInt719;
                    } else {
                        int var6 = BufferedDataStream.incomingBuffer.getBits(2);
                        if (var6 == 0) {
-                           Class15.localNPCIndexes[Class163.localNPCCount++] = var3;
+                           AudioThread.localNPCIndexes[Class163.localNPCCount++] = var3;
                            var4.anInt2838 = Class44.anInt719;
                            Class21.maskUpdateIndexes[Unsorted.maskUpdateCount++] = var3;
                        } else {
                            int var7;
                            int var8;
                            if (1 == var6) {
-                               Class15.localNPCIndexes[Class163.localNPCCount++] = var3;
+                               AudioThread.localNPCIndexes[Class163.localNPCCount++] = var3;
                                var4.anInt2838 = Class44.anInt719;
                                var7 = BufferedDataStream.incomingBuffer.getBits(3);
                                var4.walkStep(1, (byte) 32, var7);
@@ -93,7 +93,7 @@ public final class NPCRendering {
                                    Class21.maskUpdateIndexes[Unsorted.maskUpdateCount++] = var3;
                                }
                            } else if (var6 == 2) {
-                               Class15.localNPCIndexes[Class163.localNPCCount++] = var3;
+                               AudioThread.localNPCIndexes[Class163.localNPCCount++] = var3;
                                var4.anInt2838 = Class44.anInt719;
                                if (BufferedDataStream.incomingBuffer.getBits(1) == 1) {
                                    var7 = BufferedDataStream.incomingBuffer.getBits(3);
@@ -135,7 +135,7 @@ public final class NPCRendering {
                        }
 
                        NPC var3 = NPC.npcs[var1];
-                       Class15.localNPCIndexes[Class163.localNPCCount++] = var1;
+                       AudioThread.localNPCIndexes[Class163.localNPCCount++] = var1;
                        var3.anInt2838 = Class44.anInt719;
                        if (null != var3.definition && var3.definition.method1474()) {
                            Class3_Sub28_Sub8.method574(var3);
@@ -264,7 +264,7 @@ public final class NPCRendering {
                            if (var8 != -1) {
                                SequenceDefinition var9 = SequenceDefinition.getAnimationDefinition(var8);
                                if (var9.frames != null) {
-                                   Unsorted.method1470(npc.zAxis, var9, 183921384, npc.xAxis, false, 0);
+                                   Unsorted.method1470(npc.zAxis, var9, npc.xAxis, false, 0);
                                }
                            }
                        }
@@ -327,7 +327,7 @@ public final class NPCRendering {
     static void updateNPCAreaArray() {
         try {
             for (int var1 = 0; Class163.localNPCCount > var1; ++var1) {
-                int var2 = Class15.localNPCIndexes[var1];
+                int var2 = AudioThread.localNPCIndexes[var1];
                 NPC var3 = NPC.npcs[var2];
                 if (null != var3) {
                     Unsorted.method68(var3.definition.size, var3);

@@ -59,7 +59,7 @@ public final class Class40 {
 
     static void method1046() {
         try {
-            Class163_Sub1.method2210(false);
+            Class163_Sub1.ping(false);
             anInt3293 = 0;
             boolean var1 = true;
 
@@ -208,11 +208,11 @@ public final class Class40 {
 
                     Class58.method1194();
                     System.gc();
-                    Class163_Sub1.method2210(true);
+                    Class163_Sub1.ping(true);
                     Class117.method1720(false, 105);
                     if (!LinkableRSString.isDynamicSceneGraph) {
                         Unsorted.method1091(false, -93);
-                        Class163_Sub1.method2210(true);
+                        Class163_Sub1.ping(true);
                         if (HDToolKit.highDetail) {
                             var12 = Class102.player.anIntArray2767[0] >> 3;
                             var4 = Class102.player.anIntArray2755[0] >> 3;
@@ -227,7 +227,7 @@ public final class Class40 {
 
                     if (LinkableRSString.isDynamicSceneGraph) {
                         Class49.method1121(false, (byte) 98);
-                        Class163_Sub1.method2210(true);
+                        Class163_Sub1.ping(true);
                         if (HDToolKit.highDetail) {
                             var12 = Class102.player.anIntArray2767[0] >> 3;
                             var4 = Class102.player.anIntArray2755[0] >> 3;
@@ -238,13 +238,13 @@ public final class Class40 {
                     }
 
                     TextureOperation13.method313((byte) 90);
-                    Class163_Sub1.method2210(true);
+                    Class163_Sub1.ping(true);
                     method2189(AtmosphereParser.aClass91Array1182, false, 66);
                     if (HDToolKit.highDetail) {
                         Class68.method1270();
                     }
 
-                    Class163_Sub1.method2210(true);
+                    Class163_Sub1.ping(true);
                     var12 = Class85.anInt1174;
                     if (var12 > WorldListCountry.localPlane) {
                         var12 = WorldListCountry.localPlane;
@@ -265,20 +265,20 @@ public final class Class40 {
                         Class117.method1720(true, 105);
                         if (!LinkableRSString.isDynamicSceneGraph) {
                             Unsorted.method1091(true, -121);
-                            Class163_Sub1.method2210(true);
+                            Class163_Sub1.ping(true);
                             TextureOperation26.method198(true);
                         }
 
                         if (LinkableRSString.isDynamicSceneGraph) {
                             Class49.method1121(true, (byte) 56);
-                            Class163_Sub1.method2210(true);
+                            Class163_Sub1.ping(true);
                             Class163_Sub2_Sub1.method2223(true, (byte) -105);
                         }
 
                         TextureOperation13.method313((byte) 102);
-                        Class163_Sub1.method2210(true);
+                        Class163_Sub1.ping(true);
                         method2189(AtmosphereParser.aClass91Array1182, true, 112);
-                        Class163_Sub1.method2210(true);
+                        Class163_Sub1.ping(true);
                         Class56.method1188();
                         Class167.method2264(false);
                     }

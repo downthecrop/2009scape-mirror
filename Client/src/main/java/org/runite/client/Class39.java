@@ -560,7 +560,7 @@ public final class Class39 {
                                 if (var2 + -var28 <= Class102.player.anIntArray2767[0] && Class102.player.anIntArray2767[0] <= var28 + var2 && Class102.player.anIntArray2755[0] >= -var28 + var3 && Class102.player.anIntArray2755[0] <= var28 + var3 && 0 != Sprites.ambientVolume && var7 > 0 && 50 > AudioHandler.currentSoundEffectCount && var4 != -1) {
                                     AudioHandler.soundEffectIDs[AudioHandler.currentSoundEffectCount] = var4;
                                     AudioHandler.soundEffectVolumeArray[AudioHandler.currentSoundEffectCount] = var7;
-                                    AudioHandler.anIntArray2157[AudioHandler.currentSoundEffectCount] = var8;
+                                    AudioHandler.soundEffectDelayArray[AudioHandler.currentSoundEffectCount] = var8;
                                     AudioHandler.soundEffects[AudioHandler.currentSoundEffectCount] = null;
                                     AudioHandler.soundEffectCoordinates[AudioHandler.currentSoundEffectCount] = var6 + ((var2 << 16) - -(var3 << 8));
                                     ++AudioHandler.currentSoundEffectCount;

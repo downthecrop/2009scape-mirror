@@ -90,20 +90,20 @@ public final class Class163_Sub1_Sub1 extends Class163_Sub1 {
                         Class3_Sub15.activeConnection = new Connection((Socket) Class3_Sub9.aClass64_2318.anObject974, Class38.gameSignlink);
                         Class3_Sub9.aClass64_2318 = null;
                         Class3_Sub15.activeConnection.sendBytes(TextureOperation12.outgoingBuffer.buffer, TextureOperation12.outgoingBuffer.index);
-                        if (WorldListEntry.aClass155_2627 != null) {
-                            WorldListEntry.aClass155_2627.method2159(83);
+                        if (WorldListEntry.aAudioChannel_2627 != null) {
+                            WorldListEntry.aAudioChannel_2627.method2159();
                         }
-                        if (null != Class3_Sub21.aClass155_2491) {
-                            Class3_Sub21.aClass155_2491.method2159(120);
+                        if (null != Class3_Sub21.aAudioChannel_2491) {
+                            Class3_Sub21.aAudioChannel_2491.method2159();
                         }
 
                         var1 = Class3_Sub15.activeConnection.readByte();
-                        if (WorldListEntry.aClass155_2627 != null) {
-                            WorldListEntry.aClass155_2627.method2159(59);
+                        if (WorldListEntry.aAudioChannel_2627 != null) {
+                            WorldListEntry.aAudioChannel_2627.method2159();
                         }
 
-                        if (Class3_Sub21.aClass155_2491 != null) {
-                            Class3_Sub21.aClass155_2491.method2159(113);
+                        if (Class3_Sub21.aAudioChannel_2491 != null) {
+                            Class3_Sub21.aAudioChannel_2491.method2159();
                         }
 
                         if (var1 != 101) {

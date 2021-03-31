@@ -27,7 +27,7 @@ public final class WorldListEntry extends Class44 {
     static boolean aBoolean2623 = true;
     public RSString address;
     static int anInt2626 = 20;
-    static Class155 aClass155_2627;
+    static AudioChannel aAudioChannel_2627;
 
 
     static void method1076() {
