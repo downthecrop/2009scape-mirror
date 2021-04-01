@@ -32,7 +32,7 @@ final class TextureOperation20 extends TextureOperation {
           if(cursor != Class65.anInt991) {
              if(cursor != -1) {
                 CursorDefinition cursorDef = TextureOperation3.method311(cursor);
-                Class3_Sub28_Sub16_Sub2 image = cursorDef.getImage();
+                SoftwareSprite image = cursorDef.getImage();
                 if(image == null) {
                    cursor = -1;
                 } else {

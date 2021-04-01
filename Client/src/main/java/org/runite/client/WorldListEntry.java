@@ -86,15 +86,15 @@ public final class WorldListEntry extends Class44 {
                     aAbstractSprite_1457 = Unsorted.method562(CacheIndex.spritesIndex, anInt1400);
                     if (HDToolKit.highDetail) {
                         if (aAbstractSprite_3099 instanceof Class3_Sub28_Sub16_Sub2_Sub1) {
-                            aAbstractSprite_3099 = new Class3_Sub28_Sub16_Sub1_Sub1((Class3_Sub28_Sub16_Sub2) aAbstractSprite_3099);
+                            aAbstractSprite_3099 = new Class3_Sub28_Sub16_Sub1_Sub1((SoftwareSprite) aAbstractSprite_3099);
                         } else {
-                            aAbstractSprite_3099 = new HDSprite((Class3_Sub28_Sub16_Sub2) aAbstractSprite_3099);
+                            aAbstractSprite_3099 = new HDSprite((SoftwareSprite) aAbstractSprite_3099);
                         }
 
                         if (aAbstractSprite_1457 instanceof Class3_Sub28_Sub16_Sub2_Sub1) {
-                            aAbstractSprite_1457 = new Class3_Sub28_Sub16_Sub1_Sub1((Class3_Sub28_Sub16_Sub2) aAbstractSprite_1457);
+                            aAbstractSprite_1457 = new Class3_Sub28_Sub16_Sub1_Sub1((SoftwareSprite) aAbstractSprite_1457);
                         } else {
-                            aAbstractSprite_1457 = new HDSprite((Class3_Sub28_Sub16_Sub2) aAbstractSprite_1457);
+                            aAbstractSprite_1457 = new HDSprite((SoftwareSprite) aAbstractSprite_1457);
                         }
                     }
                 } else {
@@ -135,21 +135,21 @@ public final class WorldListEntry extends Class44 {
                 Class3_Sub26.aAbstractSprite_2560 = Unsorted.method562(CacheIndex.spritesIndex, anInt2937);
                 if (HDToolKit.highDetail) {
                     if (aAbstractSprite_1339 instanceof Class3_Sub28_Sub16_Sub2_Sub1) {
-                        aAbstractSprite_1339 = new Class3_Sub28_Sub16_Sub1_Sub1((Class3_Sub28_Sub16_Sub2) aAbstractSprite_1339);
+                        aAbstractSprite_1339 = new Class3_Sub28_Sub16_Sub1_Sub1((SoftwareSprite) aAbstractSprite_1339);
                     } else {
-                        aAbstractSprite_1339 = new HDSprite((Class3_Sub28_Sub16_Sub2) aAbstractSprite_1339);
+                        aAbstractSprite_1339 = new HDSprite((SoftwareSprite) aAbstractSprite_1339);
                     }
 
                     if (Class50.aAbstractSprite_824 instanceof Class3_Sub28_Sub16_Sub2_Sub1) {
-                        Class50.aAbstractSprite_824 = new Class3_Sub28_Sub16_Sub1_Sub1((Class3_Sub28_Sub16_Sub2) Class50.aAbstractSprite_824);
+                        Class50.aAbstractSprite_824 = new Class3_Sub28_Sub16_Sub1_Sub1((SoftwareSprite) Class50.aAbstractSprite_824);
                     } else {
-                        Class50.aAbstractSprite_824 = new HDSprite((Class3_Sub28_Sub16_Sub2) Class50.aAbstractSprite_824);
+                        Class50.aAbstractSprite_824 = new HDSprite((SoftwareSprite) Class50.aAbstractSprite_824);
                     }
 
                     if (Class3_Sub26.aAbstractSprite_2560 instanceof Class3_Sub28_Sub16_Sub2_Sub1) {
-                        Class3_Sub26.aAbstractSprite_2560 = new Class3_Sub28_Sub16_Sub1_Sub1((Class3_Sub28_Sub16_Sub2) Class3_Sub26.aAbstractSprite_2560);
+                        Class3_Sub26.aAbstractSprite_2560 = new Class3_Sub28_Sub16_Sub1_Sub1((SoftwareSprite) Class3_Sub26.aAbstractSprite_2560);
                     } else {
-                        Class3_Sub26.aAbstractSprite_2560 = new HDSprite((Class3_Sub28_Sub16_Sub2) Class3_Sub26.aAbstractSprite_2560);
+                        Class3_Sub26.aAbstractSprite_2560 = new HDSprite((SoftwareSprite) Class3_Sub26.aAbstractSprite_2560);
                     }
                 }
             }

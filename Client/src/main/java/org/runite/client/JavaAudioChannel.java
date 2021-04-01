@@ -27,24 +27,23 @@ final class JavaAudioChannel extends AudioChannel {
       Info[] var2 = AudioSystem.getMixerInfo();
       if(null != var2) {
 
-         for(int var4 = 0; var2.length > var4; ++var4) {
-            Info var5 = var2[var4];
-            if(null != var5) {
+         for (Info var5 : var2) {
+            if (null != var5) {
                String var6 = var5.getName();
-               if(null != var6 && var6.toLowerCase().contains("soundmax")) {
+               if (null != var6 && var6.toLowerCase().contains("soundmax")) {
                   this.aBoolean2973 = true;
                }
             }
          }
       }
 
-      this.anAudioFormat2974 = new AudioFormat((float)Class21.sampleRate, 16, !AudioChannel.stereo ?1:2, true, false);
-      this.aByteArray2975 = new byte[256 << (AudioChannel.stereo ?2:1)];
+      this.anAudioFormat2974 = new AudioFormat((float)Class21.sampleRate, 16, !AudioChannel.stereo ? 1 : 2, true, false);
+      this.aByteArray2975 = new byte[256 << (AudioChannel.stereo ? 2 : 1 )];
    }
 
    final void open(int var1) throws LineUnavailableException {
       try {
-         javax.sound.sampled.DataLine.Info var2 = new javax.sound.sampled.DataLine.Info(SourceDataLine.class, this.anAudioFormat2974, var1 << (!AudioChannel.stereo ?1:2));
+         javax.sound.sampled.DataLine.Info var2 = new javax.sound.sampled.DataLine.Info(SourceDataLine.class, this.anAudioFormat2974, var1 << (!AudioChannel.stereo ? 1 : 2 ));
          this.aSourceDataLine2972 = (SourceDataLine)AudioSystem.getLine(var2);
          this.aSourceDataLine2972.open();
          this.aSourceDataLine2972.start();

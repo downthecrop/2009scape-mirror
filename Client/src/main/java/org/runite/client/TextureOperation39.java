@@ -65,7 +65,7 @@ class TextureOperation39 extends TextureOperation {
             if(this.anInt3278 < 0) {
                return false;
             } else {
-               Class3_Sub28_Sub16_Sub2 var3 = Texture.anInt1668 < 0 ? Unsorted.method1537(WaterfallShader.aClass153_2172, this.anInt3278):Class40.method1043(this.anInt3278, WaterfallShader.aClass153_2172, Texture.anInt1668);
+               SoftwareSprite var3 = Texture.anInt1668 < 0 ? Unsorted.method1537(WaterfallShader.aClass153_2172, this.anInt3278):Class40.method1043(this.anInt3278, WaterfallShader.aClass153_2172, Texture.anInt1668);
                Objects.requireNonNull(var3).method665();
                this.anInt3283 = var3.height;
                this.anInt3280 = var3.width;

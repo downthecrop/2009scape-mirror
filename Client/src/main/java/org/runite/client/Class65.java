@@ -157,7 +157,7 @@ public final class Class65 {
             aAbstractSpriteArray1825 = null;
             Sprites.nameIconsSpriteArray = null;
             Class157.aClass3_Sub28_Sub17_Sub1_2000 = null;
-            Sprites.aClass3_Sub28_Sub16_Sub2Array2140 = null;
+            Sprites.aSoftwareSpriteArray2140 = null;
             Class140_Sub4.aAbstractSpriteArray2839 = null;
             Class129_Sub1.aAbstractSpriteArray2690 = null;
             NPC.aAbstractSpriteArray3977 = null;

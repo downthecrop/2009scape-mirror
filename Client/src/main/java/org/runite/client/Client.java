@@ -59,15 +59,6 @@ public final class Client extends GameShell {
     static Client clientInstance;
     static boolean sweepReferenceCache = false;
 
-    static void method631(CacheIndex var1) {
-        try {
-            Class3_Sub28_Sub5.aClass153_3580 = var1;
-            anInt869 = Class3_Sub28_Sub5.aClass153_3580.getFileAmount(4);
-        } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "qc.D(" + false + ',' + (var1 != null ? "{...}" : "null") + ')');
-        }
-    }
-
     static void method1175(int var0) {
         try {
             TextureOperation13.anInt3362 = -1;
@@ -351,7 +342,7 @@ public final class Client extends GameShell {
                             int var29;
                             if (inter.anInt189 != 0) {
                                 if (inter.anInt189 == 1337) {
-                                    Class168.aClass11_2091 = inter;
+                                    Unsorted.aClass11_2091 = inter;
                                     Class20.method909(inter);
                                     continue;
                                 }
@@ -1605,7 +1596,7 @@ public final class Client extends GameShell {
                         var2 += CacheIndex.particlesConfigIndex.method2136((byte) -124);
                         if (var2 >= 1100) {
                             Class132.method1799((byte) 96, CacheIndex.configurationsIndex);
-                            method631(CacheIndex.configurationsIndex);
+                            FloorOverlayDefinition.method631(CacheIndex.configurationsIndex);
                             Class3_Sub28_Sub8.method575(CacheIndex.configurationsIndex, -1);
                             method375(CacheIndex.modelsIndex, CacheIndex.configurationsIndex);
                             Class108.method1661(CacheIndex.objectConfigIndex, CacheIndex.modelsIndex);
@@ -1662,7 +1653,7 @@ public final class Client extends GameShell {
                                     if (CacheIndex.interfaceScriptsIndex.method2113()) {
                                         if (CacheIndex.fontsIndex.method2113()) {
                                             if (CacheIndex.worldmapIndex.method2127(TextCore.aClass94_1342)) {
-                                                Class75_Sub4.method1353(Sprites.aClass3_Sub28_Sub16_Sub2Array2140, CacheIndex.worldmapIndex);
+                                                Class75_Sub4.method1353(Sprites.aSoftwareSpriteArray2140, CacheIndex.worldmapIndex);
                                                 LoadingStageNumber = 95;
                                                 loadingBarTextToDisplay = TextCore.LoadedInterfaces;
                                                 anInt1354 = 135;

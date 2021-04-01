@@ -120,7 +120,7 @@ public final class Class83 {
                                         var35 = var42[var28] != null ? var42[var28][var31] : 0;
                                         var36 = var35 & 252;
                                         if (var36 != 0 && var16 > 1 && var27 > 1) {
-                                            Class168.method2272(Toolkit.JAVA_TOOLKIT.getBuffer(), var33, var14, var35 & 3, var32, var36 >> 2, var27, var16, var25, true);
+                                            method2272(Toolkit.JAVA_TOOLKIT.getBuffer(), var33, var14, var35 & 3, var32, var36 >> 2, var27, var16, var25, true);
                                         } else {
                                             Toolkit.JAVA_TOOLKIT.method934(var14, var25, var16, var27, var33);//Remember! If it's a SPECIFIC JAVA_TOOLKIT CALL THERE IS A REASON
                                         }
@@ -137,7 +137,7 @@ public final class Class83 {
                                             Toolkit.JAVA_TOOLKIT.method934(var14, var25, var16, var27, var34);//Remember! If it's a SPECIFIC JAVA_TOOLKIT CALL THERE IS A REASON
                                         }
 
-                                        Class168.method2272(Toolkit.JAVA_TOOLKIT.getBuffer(), var34, var14, var35 & 3, 0, var36 >> 2, var27, var16, var25, var33 == 0);
+                                        method2272(Toolkit.JAVA_TOOLKIT.getBuffer(), var34, var14, var35 & 3, 0, var36 >> 2, var27, var16, var25, var33 == 0);
                                     }
                                 }
 
@@ -276,7 +276,7 @@ public final class Class83 {
                                         var26 = 16383 & var25;
                                         if (var26 != 0) {
                                             var28 = ('\ud228' & var25) >> 14;
-                                            Class2 var47 = InterfaceWidget.c(-1 + var26);
+                                            MapSceneDefinition var47 = InterfaceWidget.c(-1 + var26);
                                             LDIndexedSprite var48 = var47.getSprite(var28);
                                             if (var48 != null) {
                                                 var31 = var22 * var48.height / 4;
@@ -329,6 +329,632 @@ public final class Class83 {
             }
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "le.D(" + ')');
+        }
+    }
+
+    static void method2272(int[] var0, int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, boolean var9) {
+        try {
+            int var11 = var2;
+            if (var2 < Toolkit.JAVA_TOOLKIT.clipRight) {
+                if (Toolkit.JAVA_TOOLKIT.clipLeft > var2) {
+                    var11 = Toolkit.JAVA_TOOLKIT.clipLeft;
+                }
+
+                int var12 = var7 + var2;
+                if (Toolkit.JAVA_TOOLKIT.clipLeft < var12) {
+                    if (Toolkit.JAVA_TOOLKIT.clipRight < var12) {
+                        var12 = Toolkit.JAVA_TOOLKIT.clipRight;
+                    }
+
+                    int var13 = var8;
+                    if (var8 < Toolkit.JAVA_TOOLKIT.clipBottom) {
+                        int var14 = var8 + var6;
+                        if (Toolkit.JAVA_TOOLKIT.clipTop > var8) {
+                            var13 = Toolkit.JAVA_TOOLKIT.clipTop;
+                        }
+
+                        if (var14 > Toolkit.JAVA_TOOLKIT.clipTop) {
+                            int var15 = var11 + Toolkit.JAVA_TOOLKIT.width * var13;
+                            if (var5 == 9) {
+                                var3 = 3 & var3 - -1;
+                                var5 = 1;
+                            }
+
+                            int var16 = -var12 + var11 + Toolkit.JAVA_TOOLKIT.width;
+                            var13 -= var8;
+                            int var20 = var6 + -var13;
+                            if (Toolkit.JAVA_TOOLKIT.clipBottom < var14) {
+                                var14 = Toolkit.JAVA_TOOLKIT.clipBottom;
+                            }
+
+                            if (var5 == 10) {
+                                var3 = var3 - -3 & 3;
+                                var5 = 1;
+                            }
+
+                            var11 -= var2;
+                            int var18 = -var11 + var7;
+                            if (11 == var5) {
+                                var3 = 3 & var3 + 3;
+                                var5 = 8;
+                            }
+
+                            var12 -= var2;
+                            int var17 = var7 + -var12;
+                            var14 -= var8;
+                            int var19 = var6 - var14;
+                            int var21;
+                            int var22;
+                            if (var5 != 1) {
+                                if (2 == var5) {
+                                    if (var3 == 0) {
+                                        for (var21 = var20 + -1; var19 <= var21; --var21) {
+                                            for (var22 = var11; var12 > var22; ++var22) {
+                                                if (var22 <= var21 >> 1) {
+                                                    var0[var15] = var1;
+                                                } else if (var9) {
+                                                    var0[var15] = var4;
+                                                }
+
+                                                ++var15;
+                                            }
+
+                                            var15 += var16;
+                                        }
+
+                                    } else if (1 == var3) {
+                                        for (var21 = var13; var14 > var21; ++var21) {
+                                            for (var22 = var11; var22 < var12; ++var22) {
+                                                if (0 <= var15 && var0.length > var15) {
+                                                    if (var22 >= var21 << 1) {
+                                                        var0[var15] = var1;
+                                                    } else if (var9) {
+                                                        var0[var15] = var4;
+                                                    }
+
+                                                    ++var15;
+                                                } else {
+                                                    ++var15;
+                                                }
+                                            }
+
+                                            var15 += var16;
+                                        }
+
+                                    } else if (var3 == 2) {
+                                        for (var21 = var13; var21 < var14; ++var21) {
+                                            for (var22 = var18 + -1; var17 <= var22; --var22) {
+                                                if (var21 >> 1 >= var22) {
+                                                    var0[var15] = var1;
+                                                } else if (var9) {
+                                                    var0[var15] = var4;
+                                                }
+
+                                                ++var15;
+                                            }
+
+                                            var15 += var16;
+                                        }
+
+                                    } else if (3 == var3) {
+                                        for (var21 = var20 + -1; var19 <= var21; --var21) {
+                                            for (var22 = -1 + var18; var17 <= var22; --var22) {
+                                                if (var21 << 1 > var22) {
+                                                    if (var9) {
+                                                        var0[var15] = var4;
+                                                    }
+                                                } else {
+                                                    var0[var15] = var1;
+                                                }
+
+                                                ++var15;
+                                            }
+
+                                            var15 += var16;
+                                        }
+
+                                    }
+                                } else if (var5 != 3) {
+                                    if (var5 != 4) {
+                                        if (var5 != 5) {
+                                            if (var5 == 6) {
+                                                if (var3 == 0) {
+                                                    for (var21 = var13; var14 > var21; ++var21) {
+                                                        for (var22 = var11; var12 > var22; ++var22) {
+                                                            if (var22 > var7 / 2) {
+                                                                if (var9) {
+                                                                    var0[var15] = var4;
+                                                                }
+                                                            } else {
+                                                                var0[var15] = var1;
+                                                            }
+
+                                                            ++var15;
+                                                        }
+
+                                                        var15 += var16;
+                                                    }
+
+                                                    return;
+                                                }
+
+                                                if (var3 == 1) {
+                                                    for (var21 = var13; var14 > var21; ++var21) {
+                                                        for (var22 = var11; var12 > var22; ++var22) {
+                                                            if (var21 > var6 / 2) {
+                                                                if (var9) {
+                                                                    var0[var15] = var4;
+                                                                }
+                                                            } else {
+                                                                var0[var15] = var1;
+                                                            }
+
+                                                            ++var15;
+                                                        }
+
+                                                        var15 += var16;
+                                                    }
+
+                                                    return;
+                                                }
+
+                                                if (2 == var3) {
+                                                    for (var21 = var13; var14 > var21; ++var21) {
+                                                        for (var22 = var11; var22 < var12; ++var22) {
+                                                            if (var22 >= var7 / 2) {
+                                                                var0[var15] = var1;
+                                                            } else if (var9) {
+                                                                var0[var15] = var4;
+                                                            }
+
+                                                            ++var15;
+                                                        }
+
+                                                        var15 += var16;
+                                                    }
+
+                                                    return;
+                                                }
+
+                                                if (var3 == 3) {
+                                                    for (var21 = var13; var14 > var21; ++var21) {
+                                                        for (var22 = var11; var12 > var22; ++var22) {
+                                                            if (var6 / 2 > var21) {
+                                                                if (var9) {
+                                                                    var0[var15] = var4;
+                                                                }
+                                                            } else {
+                                                                var0[var15] = var1;
+                                                            }
+
+                                                            ++var15;
+                                                        }
+
+                                                        var15 += var16;
+                                                    }
+
+                                                    return;
+                                                }
+                                            }
+
+                                            if (7 == var5) {
+                                                if (0 == var3) {
+                                                    for (var21 = var13; var21 < var14; ++var21) {
+                                                        for (var22 = var11; var22 < var12; ++var22) {
+                                                            if (var22 <= var21 + -(var6 / 2)) {
+                                                                var0[var15] = var1;
+                                                            } else if (var9) {
+                                                                var0[var15] = var4;
+                                                            }
+
+                                                            ++var15;
+                                                        }
+
+                                                        var15 += var16;
+                                                    }
+
+                                                    return;
+                                                }
+
+                                                if (var3 == 1) {
+                                                    for (var21 = var20 + -1; var21 >= var19; --var21) {
+                                                        for (var22 = var11; var12 > var22; ++var22) {
+                                                            if (var22 > -(var6 / 2) + var21) {
+                                                                if (var9) {
+                                                                    var0[var15] = var4;
+                                                                }
+                                                            } else {
+                                                                var0[var15] = var1;
+                                                            }
+
+                                                            ++var15;
+                                                        }
+
+                                                        var15 += var16;
+                                                    }
+
+                                                    return;
+                                                }
+
+                                                if (var3 == 2) {
+                                                    for (var21 = var20 + -1; var21 >= var19; --var21) {
+                                                        for (var22 = -1 + var18; var22 >= var17; --var22) {
+                                                            if (var22 > var21 + -(var6 / 2)) {
+                                                                if (var9) {
+                                                                    var0[var15] = var4;
+                                                                }
+                                                            } else {
+                                                                var0[var15] = var1;
+                                                            }
+
+                                                            ++var15;
+                                                        }
+
+                                                        var15 += var16;
+                                                    }
+
+                                                    return;
+                                                }
+
+                                                if (3 == var3) {
+                                                    for (var21 = var13; var14 > var21; ++var21) {
+                                                        for (var22 = -1 + var18; var17 <= var22; --var22) {
+                                                            if (var21 + -(var6 / 2) >= var22) {
+                                                                var0[var15] = var1;
+                                                            } else if (var9) {
+                                                                var0[var15] = var4;
+                                                            }
+
+                                                            ++var15;
+                                                        }
+
+                                                        var15 += var16;
+                                                    }
+
+                                                    return;
+                                                }
+                                            }
+
+                                            if (var5 == 8) {
+                                                if (0 == var3) {
+                                                    for (var21 = var13; var14 > var21; ++var21) {
+                                                        for (var22 = var11; var22 < var12; ++var22) {
+                                                            if (-(var6 / 2) + var21 <= var22) {
+                                                                var0[var15] = var1;
+                                                            } else if (var9) {
+                                                                var0[var15] = var4;
+                                                            }
+
+                                                            ++var15;
+                                                        }
+
+                                                        var15 += var16;
+                                                    }
+
+                                                    return;
+                                                }
+
+                                                if (var3 == 1) {
+                                                    for (var21 = -1 + var20; var21 >= var19; --var21) {
+                                                        for (var22 = var11; var22 < var12; ++var22) {
+                                                            if (-(var6 / 2) + var21 > var22) {
+                                                                if (var9) {
+                                                                    var0[var15] = var4;
+                                                                }
+                                                            } else {
+                                                                var0[var15] = var1;
+                                                            }
+
+                                                            ++var15;
+                                                        }
+
+                                                        var15 += var16;
+                                                    }
+
+                                                    return;
+                                                }
+
+                                                if (var3 == 2) {
+                                                    for (var21 = var20 - 1; var19 <= var21; --var21) {
+                                                        for (var22 = -1 + var18; var22 >= var17; --var22) {
+                                                            if (var21 - var6 / 2 > var22) {
+                                                                if (var9) {
+                                                                    var0[var15] = var4;
+                                                                }
+                                                            } else {
+                                                                var0[var15] = var1;
+                                                            }
+
+                                                            ++var15;
+                                                        }
+
+                                                        var15 += var16;
+                                                    }
+
+                                                    return;
+                                                }
+
+                                                if (var3 == 3) {
+                                                    for (var21 = var13; var21 < var14; ++var21) {
+                                                        for (var22 = -1 + var18; var17 <= var22; --var22) {
+                                                            if (var21 + -(var6 / 2) > var22) {
+                                                                if (var9) {
+                                                                    var0[var15] = var4;
+                                                                }
+                                                            } else {
+                                                                var0[var15] = var1;
+                                                            }
+
+                                                            ++var15;
+                                                        }
+
+                                                        var15 += var16;
+                                                    }
+
+                                                    return;
+                                                }
+                                            }
+
+                                        } else if (0 == var3) {
+                                            for (var21 = var20 + -1; var21 >= var19; --var21) {
+                                                for (var22 = -1 + var18; var22 >= var17; --var22) {
+                                                    if (var21 >> 1 <= var22) {
+                                                        var0[var15] = var1;
+                                                    } else if (var9) {
+                                                        var0[var15] = var4;
+                                                    }
+
+                                                    ++var15;
+                                                }
+
+                                                var15 += var16;
+                                            }
+
+                                        } else if (1 == var3) {
+                                            for (var21 = -1 + var20; var21 >= var19; --var21) {
+                                                for (var22 = var11; var22 < var12; ++var22) {
+                                                    if (var22 > var21 << 1) {
+                                                        if (var9) {
+                                                            var0[var15] = var4;
+                                                        }
+                                                    } else {
+                                                        var0[var15] = var1;
+                                                    }
+
+                                                    ++var15;
+                                                }
+
+                                                var15 += var16;
+                                            }
+
+                                        } else if (var3 == 2) {
+                                            for (var21 = var13; var14 > var21; ++var21) {
+                                                for (var22 = var11; var22 < var12; ++var22) {
+                                                    if (var21 >> 1 > var22) {
+                                                        if (var9) {
+                                                            var0[var15] = var4;
+                                                        }
+                                                    } else {
+                                                        var0[var15] = var1;
+                                                    }
+
+                                                    ++var15;
+                                                }
+
+                                                var15 += var16;
+                                            }
+
+                                        } else if (var3 == 3) {
+                                            for (var21 = var13; var21 < var14; ++var21) {
+                                                for (var22 = var18 + -1; var17 <= var22; --var22) {
+                                                    if (var21 << 1 >= var22) {
+                                                        var0[var15] = var1;
+                                                    } else if (var9) {
+                                                        var0[var15] = var4;
+                                                    }
+
+                                                    ++var15;
+                                                }
+
+                                                var15 += var16;
+                                            }
+
+                                        }
+                                    } else if (var3 == 0) {
+                                        for (var21 = var20 + -1; var21 >= var19; --var21) {
+                                            for (var22 = var11; var12 > var22; ++var22) {
+                                                if (var22 < var21 >> 1) {
+                                                    if (var9) {
+                                                        var0[var15] = var4;
+                                                    }
+                                                } else {
+                                                    var0[var15] = var1;
+                                                }
+
+                                                ++var15;
+                                            }
+
+                                            var15 += var16;
+                                        }
+
+                                    } else if (1 == var3) {
+                                        for (var21 = var13; var21 < var14; ++var21) {
+                                            for (var22 = var11; var22 < var12; ++var22) {
+                                                if (var22 <= var21 << 1) {
+                                                    var0[var15] = var1;
+                                                } else if (var9) {
+                                                    var0[var15] = var4;
+                                                }
+
+                                                ++var15;
+                                            }
+
+                                            var15 += var16;
+                                        }
+
+                                    } else if (2 == var3) {
+                                        for (var21 = var13; var21 < var14; ++var21) {
+                                            for (var22 = var18 + -1; var22 >= var17; --var22) {
+                                                if (var21 >> 1 <= var22) {
+                                                    var0[var15] = var1;
+                                                } else if (var9) {
+                                                    var0[var15] = var4;
+                                                }
+
+                                                ++var15;
+                                            }
+
+                                            var15 += var16;
+                                        }
+
+                                    } else if (var3 == 3) {
+                                        for (var21 = -1 + var20; var21 >= var19; --var21) {
+                                            for (var22 = -1 + var18; var22 >= var17; --var22) {
+                                                if (var22 <= var21 << 1) {
+                                                    var0[var15] = var1;
+                                                } else if (var9) {
+                                                    var0[var15] = var4;
+                                                }
+
+                                                ++var15;
+                                            }
+
+                                            var15 += var16;
+                                        }
+
+                                    }
+                                } else if (var3 == 0) {
+                                    for (var21 = var20 - 1; var21 >= var19; --var21) {
+                                        for (var22 = -1 + var18; var17 <= var22; --var22) {
+                                            if (var22 <= var21 >> 1) {
+                                                var0[var15] = var1;
+                                            } else if (var9) {
+                                                var0[var15] = var4;
+                                            }
+
+                                            ++var15;
+                                        }
+
+                                        var15 += var16;
+                                    }
+
+                                } else if (var3 == 1) {
+                                    for (var21 = -1 + var20; var19 <= var21; --var21) {
+                                        for (var22 = var11; var12 > var22; ++var22) {
+                                            if (var22 >= var21 << 1) {
+                                                var0[var15] = var1;
+                                            } else if (var9) {
+                                                var0[var15] = var4;
+                                            }
+
+                                            ++var15;
+                                        }
+
+                                        var15 += var16;
+                                    }
+
+                                } else if (2 == var3) {
+                                    for (var21 = var13; var21 < var14; ++var21) {
+                                        for (var22 = var11; var12 > var22; ++var22) {
+                                            if (var21 >> 1 >= var22) {
+                                                var0[var15] = var1;
+                                            } else if (var9) {
+                                                var0[var15] = var4;
+                                            }
+
+                                            ++var15;
+                                        }
+
+                                        var15 += var16;
+                                    }
+
+                                } else if (3 == var3) {
+                                    for (var21 = var13; var21 < var14; ++var21) {
+                                        for (var22 = var18 - 1; var17 <= var22; --var22) {
+                                            if (var22 < var21 << 1) {
+                                                if (var9) {
+                                                    var0[var15] = var4;
+                                                }
+                                            } else {
+                                                var0[var15] = var1;
+                                            }
+
+                                            ++var15;
+                                        }
+
+                                        var15 += var16;
+                                    }
+
+                                }
+                            } else if (var3 == 0) {
+                                for (var21 = var13; var21 < var14; ++var21) {
+                                    for (var22 = var11; var22 < var12; ++var22) {
+                                        if (var21 >= var22) {
+                                            var0[var15] = var1;
+                                        } else if (var9) {
+                                            var0[var15] = var4;
+                                        }
+
+                                        ++var15;
+                                    }
+
+                                    var15 += var16;
+                                }
+
+                            } else if (1 == var3) {
+                                for (var21 = var20 + -1; var21 >= var19; --var21) {
+                                    for (var22 = var11; var22 < var12; ++var22) {
+                                        if (var21 >= var22) {
+                                            var0[var15] = var1;
+                                        } else if (var9) {
+                                            var0[var15] = var4;
+                                        }
+
+                                        ++var15;
+                                    }
+
+                                    var15 += var16;
+                                }
+
+                            } else if (2 == var3) {
+                                for (var21 = var13; var21 < var14; ++var21) {
+                                    for (var22 = var11; var12 > var22; ++var22) {
+                                        if (var22 >= var21) {
+                                            var0[var15] = var1;
+                                        } else if (var9) {
+                                            var0[var15] = var4;
+                                        }
+
+                                        ++var15;
+                                    }
+
+                                    var15 += var16;
+                                }
+
+                            } else if (var3 == 3) {
+                                for (var21 = var20 + -1; var19 <= var21; --var21) {
+                                    for (var22 = var11; var12 > var22; ++var22) {
+                                        if (var22 < var21) {
+                                            if (var9) {
+                                                var0[var15] = var4;
+                                            }
+                                        } else {
+                                            var0[var15] = var1;
+                                        }
+
+                                        ++var15;
+                                    }
+
+                                    var15 += var16;
+                                }
+
+                            }
+                        }
+                    }
+                }
+            }
+        } catch (RuntimeException var23) {
+            throw ClientErrorException.clientError(var23, "wl.C(" + "null" + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ',' + var8 + ',' + var9 + ',' + (byte) 21 + ')');
         }
     }
 

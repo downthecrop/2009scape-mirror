@@ -137,60 +137,6 @@ final class Class36 {
         }
     }
 
-    static void method1014(int var1, int var2) {
-        try {
-
-            for (int var4 = 0; var4 < Client.anInt869; ++var4) {
-                Class168 var5 = Class168.method350(var4);
-                if (null != var5) {
-                    int var6 = var5.anInt2095;
-                    if (0 <= var6 && !Class51.anInterface2_838.method17(var6, 126)) {
-                        var6 = -1;
-                    }
-
-                    int var7;
-                    int var8;
-                    int var9;
-                    int var10;
-                    if (var5.anInt2098 < 0) {
-                        if (var6 >= 0) {
-                            var7 = Class51.anIntArray834[LinkableRSString.method729((byte) -74, Class51.anInterface2_838.method15(var6, 65535), 96)];
-                        } else if (-1 == var5.anInt2103) {
-                            var7 = -1;
-                        } else {
-                            var8 = var5.anInt2103;
-                            var9 = var1 + (var8 & 127);
-                            if (var9 < 0) {
-                                var9 = 0;
-                            } else if (var9 > 127) {
-                                var9 = 127;
-                            }
-
-                            var10 = var9 + (896 & var8) + ('\ufc00' & var8 + var2);
-                            var7 = Class51.anIntArray834[LinkableRSString.method729((byte) -127, var10, 96)];
-                        }
-                    } else {
-                        var8 = var5.anInt2098;
-                        var9 = (127 & var8) + var1;
-                        if (var9 < 0) {
-                            var9 = 0;
-                        } else if (var9 > 127) {
-                            var9 = 127;
-                        }
-
-                        var10 = (896 & var8) + ('\ufc00' & var2 + var8) + var9;
-                        var7 = Class51.anIntArray834[LinkableRSString.method729((byte) -63, var10, 96)];
-                    }
-
-                    Class83.anIntArray1161[1 + var4] = var7;
-                }
-            }
-
-        } catch (RuntimeException var11) {
-            throw ClientErrorException.clientError(var11, "fi.B(" + -120 + ',' + var1 + ',' + var2 + ')');
-        }
-    }
-
     final int method1015(int var1, byte[] var3, byte[] var4, int var5, int var6) {
         try {
             var1 += var5;

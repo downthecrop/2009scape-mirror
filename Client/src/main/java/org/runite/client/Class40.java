@@ -39,7 +39,7 @@ public final class Class40 {
         }
     }
 
-    static Class3_Sub28_Sub16_Sub2 method1043(int var0, CacheIndex var1, int archiveId) {
+    static SoftwareSprite method1043(int var0, CacheIndex var1, int archiveId) {
         try {
             // System.out.println("Class 40 " + archiveId);
             return Class75_Sub4.method1351(var1, var0, archiveId) ? Class117.method1722(-53) : null;
@@ -500,7 +500,7 @@ public final class Class40 {
                         if (var37 < 104) {
                             var13 = 255 & TextureOperation36.aByteArrayArrayArray3430[var8][var37][var11];
                             if (var13 > 0) {
-                                MapUnderlayColorDefinition var39 = MapUnderlayColorDefinition.method629(-1 + var13);
+                                FloorUnderlayDefinition var39 = FloorUnderlayDefinition.method629(-1 + var13);
                                 Class129.anIntArray1695[var11] += var39.anInt1408;
                                 Unsorted.anIntArray1138[var11] += var39.anInt1406;
                                 Class3_Sub31.anIntArray2606[var11] += var39.anInt1417;
@@ -513,7 +513,7 @@ public final class Class40 {
                         if (0 <= var13) {
                             var14 = 255 & TextureOperation36.aByteArrayArrayArray3430[var8][var13][var11];
                             if (var14 > 0) {
-                                MapUnderlayColorDefinition var42 = MapUnderlayColorDefinition.method629(-1 + var14);
+                                FloorUnderlayDefinition var42 = FloorUnderlayDefinition.method629(-1 + var14);
                                 Class129.anIntArray1695[var11] -= var42.anInt1408;
                                 Unsorted.anIntArray1138[var11] -= var42.anInt1406;
                                 Class3_Sub31.anIntArray2606[var11] -= var42.anInt1417;
@@ -577,7 +577,7 @@ public final class Class40 {
                                         var47 = false;
                                     }
 
-                                    if (var13 > 0 && !Class168.method350(var13 + -1).aBoolean2102) {
+                                    if (var13 > 0 && !FloorOverlayDefinition.getFile(var13 + -1).aBoolean2102) {
                                         var47 = false;
                                     }
 
@@ -610,7 +610,7 @@ public final class Class40 {
                                 var22 = var35[var10 - -1][var11 - -1];
                                 if (var13 == 0) {
                                     method1629(var8, var10, var11, 0, 0, -1, var14, var15, var16, var44, Unsorted.method1100(var20, var18), Unsorted.method1100(var21, var18), Unsorted.method1100(var22, var18), Unsorted.method1100(var23, var18), 0, 0, 0, 0, var19, 0);
-                                    if (HDToolKit.highDetail && var8 > 0 && var18 != -1 && MapUnderlayColorDefinition.method629(-1 + var37).aBoolean1411) {
+                                    if (HDToolKit.highDetail && var8 > 0 && var18 != -1 && FloorUnderlayDefinition.method629(-1 + var37).aBoolean1411) {
                                         Class141.method2037(0, 0, true, false, var10, var11, var14 - Class44.anIntArrayArrayArray723[0][var10][var11], -Class44.anIntArrayArrayArray723[0][1 + var10][var11] + var15, var16 - Class44.anIntArrayArrayArray723[0][1 + var10][1 + var11], var44 - Class44.anIntArrayArrayArray723[0][var10][1 + var11]);
                                     }
 
@@ -620,7 +620,7 @@ public final class Class40 {
                                                 if ((var24 != var10 || var11 != var52) && var24 >= 0 && var24 < 104 && 0 <= var52 && var52 < 104) {
                                                     int var54 = Class158_Sub1.aByteArrayArrayArray1828[var8][var24][var52] & 0xFF;
                                                     if (var54 != 0) {
-                                                        Class168 var53 = Class168.method350(-1 + var54);
+                                                        FloorOverlayDefinition var53 = FloorOverlayDefinition.getFile(-1 + var54);
                                                         if (var53.anInt2095 != -1 && 4 == Class51.anInterface2_838.method18(var53.anInt2095, 255)) {
                                                             TextureOperation16.anIntArrayArray3115[var10][var11] = var53.anInt2094 + (var53.anInt2101 << 24);
                                                             continue label754;
@@ -633,7 +633,7 @@ public final class Class40 {
                                 } else {
                                     var24 = 1 + Unsorted.aByteArrayArrayArray1328[var8][var10][var11];
                                     byte var25 = PacketParser.aByteArrayArrayArray81[var8][var10][var11];
-                                    Class168 var26 = Class168.method350(var13 + -1);
+                                    FloorOverlayDefinition var26 = FloorOverlayDefinition.getFile(var13 + -1);
                                     int var27;
                                     int var29;
                                     int var28;
@@ -647,7 +647,7 @@ public final class Class40 {
                                                     if ((var27 != var10 || var11 != var28) && var27 >= 0 && var27 < 104 && var28 >= 0 && var28 < 104) {
                                                         var29 = Class158_Sub1.aByteArrayArrayArray1828[var8][var27][var28] & 0xFF;
                                                         if (var29 != 0) {
-                                                            Class168 var30 = Class168.method350(-1 + var29);
+                                                            FloorOverlayDefinition var30 = FloorOverlayDefinition.getFile(-1 + var29);
                                                             if (var30.anInt2095 != -1 && Class51.anInterface2_838.method18(var30.anInt2095, 255) == 4) {
                                                                 TextureOperation16.anIntArrayArray3115[var10][var11] = var30.anInt2094 + (var30.anInt2101 << 24);
                                                                 break label722;
@@ -706,7 +706,7 @@ public final class Class40 {
 
                                     method1629(var8, var10, var11, var24, var25, var27, var14, var15, var16, var44, Unsorted.method1100(var20, var18), Unsorted.method1100(var21, var18), Unsorted.method1100(var22, var18), Unsorted.method1100(var23, var18), LinkableRSString.method729((byte) -72, var28, var20), LinkableRSString.method729((byte) -107, var28, var21), LinkableRSString.method729((byte) -82, var28, var22), LinkableRSString.method729((byte) -93, var28, var23), var19, var29);
                                     if (HDToolKit.highDetail && var8 > 0) {
-                                        Class141.method2037(var24, var25, var28 == -2 || !var26.aBoolean2093, -1 == var18 || !MapUnderlayColorDefinition.method629(-1 + var37).aBoolean1411, var10, var11, -Class44.anIntArrayArrayArray723[0][var10][var11] + var14, var15 - Class44.anIntArrayArrayArray723[0][1 + var10][var11], -Class44.anIntArrayArrayArray723[0][1 + var10][var11 + 1] + var16, -Class44.anIntArrayArrayArray723[0][var10][1 + var11] + var44);
+                                        Class141.method2037(var24, var25, var28 == -2 || !var26.aBoolean2093, -1 == var18 || !FloorUnderlayDefinition.method629(-1 + var37).aBoolean1411, var10, var11, -Class44.anIntArrayArrayArray723[0][var10][var11] + var14, var15 - Class44.anIntArrayArrayArray723[0][1 + var10][var11], -Class44.anIntArrayArrayArray723[0][1 + var10][var11 + 1] + var16, -Class44.anIntArrayArrayArray723[0][var10][1 + var11] + var44);
                                     }
                                 }
                             }

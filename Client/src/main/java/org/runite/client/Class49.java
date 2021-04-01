@@ -182,7 +182,7 @@ public final class Class49 {
             if (!Class38_Sub1.aBoolean2615) {
                 if (Unsorted.anInt3660 != 0) {
                     NPCDefinition.anInt1297 = TextureOperation8.anInt3460;
-                    Class38_Sub1.anInt2612 = Class168.anInt2099;
+                    Class38_Sub1.anInt2612 = Unsorted.anInt2099;
                 } else if (Unsorted.anInt3644 == 0) {
                     NPCDefinition.anInt1297 = Class126.anInt1676;
                     Class38_Sub1.anInt2612 = Unsorted.anInt1709;
@@ -233,7 +233,7 @@ public final class Class49 {
                     Class74.resetClipping();
                 }
 
-                Class168.method2278(var0 + 122);
+                method2278(var0 + 122);
                 if (Class38_Sub1.aBoolean2615) {
                     if (Unsorted.aBoolean1951) {
                         WorldListEntry.buildWorldListInterface();
@@ -340,5 +340,45 @@ public final class Class49 {
 
     static void method831(String var1) {
         System.out.println("Error: " + InterfaceWidget.a("%0a", "\n", var1));
+    }
+
+    static void method2278(int var0) {
+        try {
+            boolean var1 = false;
+
+            while (!var1) {
+                var1 = true;
+
+                for (int var2 = 0; -1 + Unsorted.menuOptionCount > var2; ++var2) {
+                    if (TextureOperation27.aShortArray3095[var2] < 1000 && TextureOperation27.aShortArray3095[1 + var2] > 1000) {
+                        RSString var3 = Class163_Sub2_Sub1.aClass94Array4016[var2];
+                        var1 = false;
+                        Class163_Sub2_Sub1.aClass94Array4016[var2] = Class163_Sub2_Sub1.aClass94Array4016[1 + var2];
+                        Class163_Sub2_Sub1.aClass94Array4016[1 + var2] = var3;
+                        RSString var4 = Class140_Sub7.aClass94Array2935[var2];
+                        Class140_Sub7.aClass94Array2935[var2] = Class140_Sub7.aClass94Array2935[var2 + 1];
+                        Class140_Sub7.aClass94Array2935[var2 - -1] = var4;
+                        int var5 = Class117.anIntArray1613[var2];
+                        Class117.anIntArray1613[var2] = Class117.anIntArray1613[1 + var2];
+                        Class117.anIntArray1613[var2 + 1] = var5;
+                        var5 = Class27.anIntArray512[var2];
+                        Class27.anIntArray512[var2] = Class27.anIntArray512[var2 + 1];
+                        Class27.anIntArray512[1 + var2] = var5;
+                        var5 = Class114.anIntArray1578[var2];
+                        Class114.anIntArray1578[var2] = Class114.anIntArray1578[1 + var2];
+                        Class114.anIntArray1578[var2 - -1] = var5;
+                        short var6 = TextureOperation27.aShortArray3095[var2];
+                        TextureOperation27.aShortArray3095[var2] = TextureOperation27.aShortArray3095[1 + var2];
+                        TextureOperation27.aShortArray3095[var2 + 1] = var6;
+                        long var7 = Unsorted.aLongArray3271[var2];
+                        Unsorted.aLongArray3271[var2] = Unsorted.aLongArray3271[var2 + 1];
+                        Unsorted.aLongArray3271[var2 - -1] = var7;
+                    }
+                }
+            }
+
+        } catch (RuntimeException var9) {
+            throw ClientErrorException.clientError(var9, "wl.D(" + var0 + ')');
+        }
     }
 }

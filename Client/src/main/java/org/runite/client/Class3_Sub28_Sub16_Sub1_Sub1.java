@@ -51,7 +51,7 @@ public final class Class3_Sub28_Sub16_Sub1_Sub1 extends HDSprite {
       super(var1, var2, var3, var4, var5, var6, var7);
    }
 
-   public Class3_Sub28_Sub16_Sub1_Sub1(Class3_Sub28_Sub16_Sub2 var1) {
+   public Class3_Sub28_Sub16_Sub1_Sub1(SoftwareSprite var1) {
       super(var1);
    }
 }

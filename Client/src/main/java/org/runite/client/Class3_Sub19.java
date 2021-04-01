@@ -29,14 +29,14 @@ public final class Class3_Sub19 extends Linkable {
             int var6;
             int var7;
             int var8;
-            if (null == Class27.aClass3_Sub28_Sub16_Sub2_518) {
+            if (null == Class27.aSoftwareSprite_518) {
                 if (HDToolKit.highDetail || null == Class49.aAbstractSprite_812) {
-                    Class27.aClass3_Sub28_Sub16_Sub2_518 = new Class3_Sub28_Sub16_Sub2(512, 512);
+                    Class27.aSoftwareSprite_518 = new SoftwareSprite(512, 512);
                 } else {
-                    Class27.aClass3_Sub28_Sub16_Sub2_518 = (Class3_Sub28_Sub16_Sub2) Class49.aAbstractSprite_812;
+                    Class27.aSoftwareSprite_518 = (SoftwareSprite) Class49.aAbstractSprite_812;
                 }
 
-                int[] var4 = Class27.aClass3_Sub28_Sub16_Sub2_518.anIntArray4081;
+                int[] var4 = Class27.aSoftwareSprite_518.anIntArray4081;
                 var5 = var4.length;
 
                 for (var6 = 0; var5 > var6; ++var6) {
@@ -116,7 +116,7 @@ public final class Class3_Sub19 extends Linkable {
                 }
             }
 
-            Class27.aClass3_Sub28_Sub16_Sub2_518.method658();
+            Class27.aSoftwareSprite_518.method658();
             int var18 = (238 + (int) (20.0D * Math.random()) - 10 << 8) + (-10 + (int) (Math.random() * 20.0D) + 238 << 16) + (228 - -((int) (20.0D * Math.random())));
             var5 = (int) (Math.random() * 20.0D) + 238 + -10 << 16;
 
@@ -145,7 +145,7 @@ public final class Class3_Sub19 extends Linkable {
             }
 
             if (HDToolKit.highDetail) {
-                int[] var19 = Class27.aClass3_Sub28_Sub16_Sub2_518.anIntArray4081;
+                int[] var19 = Class27.aSoftwareSprite_518.anIntArray4081;
                 var7 = var19.length;
 
                 for (var8 = 0; var7 > var8; ++var8) {
@@ -154,9 +154,9 @@ public final class Class3_Sub19 extends Linkable {
                     }
                 }
 
-                Class49.aAbstractSprite_812 = new HDSprite(Class27.aClass3_Sub28_Sub16_Sub2_518);
+                Class49.aAbstractSprite_812 = new HDSprite(Class27.aSoftwareSprite_518);
             } else {
-                Class49.aAbstractSprite_812 = Class27.aClass3_Sub28_Sub16_Sub2_518;
+                Class49.aAbstractSprite_812 = Class27.aSoftwareSprite_518;
             }
 
             if (HDToolKit.highDetail) {
@@ -165,7 +165,7 @@ public final class Class3_Sub19 extends Linkable {
                 Unsorted.aClass158_3009.method2182();
             }
 
-            Class27.aClass3_Sub28_Sub16_Sub2_518 = null;
+            Class27.aSoftwareSprite_518 = null;
             return true;
         } catch (RuntimeException var17) {
             throw ClientErrorException.clientError(var17, "kl.B(" + 0 + ',' + var1 + ')');

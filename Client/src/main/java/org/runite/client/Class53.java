@@ -38,7 +38,7 @@ public final class Class53 {
                     if (HDToolKit.highDetail) {
                         ((HDSprite) TextureOperation8.aAbstractSpriteArray3458[var0]).method648(240, 240, (var5.width / 2 + var2 + var16) * 16, 16 * (-var17 + var5.height / 2 + var1), (int) (10430.378D * var14));
                     } else {
-                        ((Class3_Sub28_Sub16_Sub2) TextureOperation8.aAbstractSpriteArray3458[var0]).method660(-10 + var16 + var5.width / 2 + var2, -10 + var5.height / 2 + var1 + -var17, var14);
+                        ((SoftwareSprite) TextureOperation8.aAbstractSpriteArray3458[var0]).method660(-10 + var16 + var5.width / 2 + var2, -10 + var5.height / 2 + var1 + -var17, var14);
                     }
                 }
 

@@ -17,7 +17,7 @@ final class Class3_Sub28_Sub9 extends Node {
    static int anInt3624;
 
 
-   static Class3_Sub28_Sub16_Sub2 method578() {
+   static SoftwareSprite method578() {
       try {
          int var1 = Unsorted.anIntArray3076[0] * Class140_Sub7.anIntArray2931[0];
          byte[] var2 = Class163_Sub1.aByteArrayArray2987[0];
@@ -39,11 +39,11 @@ final class Class3_Sub28_Sub9 extends Node {
                var8[var9] = TextureOperation38.spritePalette[Unsorted.bitwiseAnd(var2[var9], 255)];
             }
 
-            var3 = new Class3_Sub28_Sub16_Sub2(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], var8);
+            var3 = new SoftwareSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], var8);
          }
 
          Class39.method1035((byte)127);
-         return (Class3_Sub28_Sub16_Sub2)var3;
+         return (SoftwareSprite)var3;
       } catch (RuntimeException var7) {
          throw ClientErrorException.clientError(var7, "hn.P(" + 115 + ')');
       }

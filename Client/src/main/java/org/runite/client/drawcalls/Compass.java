@@ -21,7 +21,7 @@ public final class Compass {
         } else if (HDToolKit.highDetail) {
             ((HDSprite) Class57.aAbstractSprite_895).drawMinimapRegion(var0, var1, var2.width, var2.height, Class57.aAbstractSprite_895.width / 2, Class57.aAbstractSprite_895.height / 2, GraphicDefinition.CAMERA_DIRECTION, 256, (HDSprite) var2.method866(false));
         } else {
-            ((Class3_Sub28_Sub16_Sub2) Class57.aAbstractSprite_895).method667(var0, var1, var2.width, var2.height, Class57.aAbstractSprite_895.width / 2, Class57.aAbstractSprite_895.height / 2, GraphicDefinition.CAMERA_DIRECTION, var2.anIntArray207, var2.anIntArray291);
+            ((SoftwareSprite) Class57.aAbstractSprite_895).method667(var0, var1, var2.width, var2.height, Class57.aAbstractSprite_895.width / 2, Class57.aAbstractSprite_895.height / 2, GraphicDefinition.CAMERA_DIRECTION, var2.anIntArray207, var2.anIntArray291);
         }
 
         Class163_Sub1_Sub1.aBooleanArray4008[var3] = true;

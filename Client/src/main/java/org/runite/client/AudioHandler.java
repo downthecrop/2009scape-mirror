@@ -159,4 +159,15 @@ public final class AudioHandler {
             throw ClientErrorException.clientError(var6, "ck.C(" + (var1 != null ? "{...}" : "null") + ',' + (var2 != null ? "{...}" : "null") + ',' + (var3 != null ? "{...}" : "null") + ',' + (var4 != null ? "{...}" : "null") + ')');
         }
     }
+
+    public static void musicEffectHandler(int var1) {
+        try {
+            if (musicVolume != 0 && var1 != -1) {
+                Class70.method1285(CacheIndex.music2Index, var1, musicVolume);
+                musicEffectPlaying = true;
+            }
+        } catch (RuntimeException var4) {
+            throw ClientErrorException.clientError(var4, "wj.D(" + ',' + var1 + ',' + (byte) -1 + ')');
+        }
+    }
 }

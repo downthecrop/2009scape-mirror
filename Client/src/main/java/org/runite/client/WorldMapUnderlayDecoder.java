@@ -58,7 +58,7 @@ public final class WorldMapUnderlayDecoder {
                     if (var27 > var14) {
                         var15 = 255 & var4[var14][var34];
                         if (var15 > 0) {
-                            MapUnderlayColorDefinition var16 = MapUnderlayColorDefinition.method629(var15 - 1);
+                            FloorUnderlayDefinition var16 = FloorUnderlayDefinition.method629(var15 - 1);
                             var28[var34] += var16.anInt1408;
                             var29[var34] += var16.anInt1406;
                             var30[var34] += var16.anInt1417;
@@ -71,7 +71,7 @@ public final class WorldMapUnderlayDecoder {
                     if (var15 >= 0) {
                         var35 = var4[var15][var34] & 0xFF;
                         if (0 < var35) {
-                            MapUnderlayColorDefinition var17 = MapUnderlayColorDefinition.method629(-1 + var35);
+                            FloorUnderlayDefinition var17 = FloorUnderlayDefinition.method629(-1 + var35);
                             var28[var34] -= var17.anInt1408;
                             var29[var34] -= var17.anInt1406;
                             var30[var34] -= var17.anInt1417;

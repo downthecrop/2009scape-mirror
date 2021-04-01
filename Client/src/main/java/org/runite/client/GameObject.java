@@ -6,7 +6,7 @@ abstract class GameObject {
     static RSInterface[][] aClass11ArrayArray1834;
     static boolean aBoolean1837 = false;
     static int[] anIntArray1838;
-    static Class3_Sub28_Sub16_Sub2[] aClass3_Sub28_Sub16_Sub2Array1839;
+    static SoftwareSprite[] aSoftwareSpriteArray1839;
 
 
     static void method1859(double var0) {

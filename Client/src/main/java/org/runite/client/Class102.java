@@ -257,7 +257,7 @@ public final class Class102 implements Interface2 {
             }
 
             anIntArray2125 = null;
-            Sprites.aClass3_Sub28_Sub16_Sub2Array2140 = null;
+            Sprites.aSoftwareSpriteArray2140 = null;
             AudioHandler.soundEffects = null;
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "nk.W(" + var0 + ')');

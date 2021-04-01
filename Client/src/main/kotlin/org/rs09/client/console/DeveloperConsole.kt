@@ -277,7 +277,7 @@ object DeveloperConsole {
             "playsfx" -> {
                 if (argSize == 2) {
                     args = clientCommand[1].toIntOrNull() ?: -1
-                    Class167.musicEffectHandler(args as Int)
+                    AudioHandler.musicEffectHandler(args as Int)
                 } else {
                     println("Error. Plays a music effect. Use: playeffectfx #")
                 }

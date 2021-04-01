@@ -9,7 +9,7 @@ final class Class27 {
     static int[] anIntArray512 = new int[500];
     static int anInt515 = -1;
     static int anInt517 = 0;
-    static Class3_Sub28_Sub16_Sub2 aClass3_Sub28_Sub16_Sub2_518;
+    static SoftwareSprite aSoftwareSprite_518;
     static Class157 resampler;
 
     static RSInterface aClass11_526 = null;

@@ -2,7 +2,7 @@ package org.runite.client;
 
 import org.rs09.client.config.GameConfig;
 
-final class MapUnderlayColorDefinition {
+final class FloorUnderlayDefinition {
 
     int anInt1406;
     int anInt1408;
@@ -12,12 +12,12 @@ final class MapUnderlayColorDefinition {
     int anInt1417;
     int anInt1418;
 
-    static MapUnderlayColorDefinition method629(int var1) {
+    static FloorUnderlayDefinition method629(int var1) {
        try {
-          MapUnderlayColorDefinition var2 = (MapUnderlayColorDefinition)Class44.aReferenceCache_725.get(var1);
+          FloorUnderlayDefinition var2 = (FloorUnderlayDefinition)Class44.aReferenceCache_725.get(var1);
           if(var2 == null) {
              byte[] var3 = Class3_Sub23.aClass153_2536.getFile(1, var1);
-             var2 = new MapUnderlayColorDefinition();
+             var2 = new FloorUnderlayDefinition();
              if(null != var3) {
                 var2.parseUnderlayDefinition(var1, new DataBuffer(var3));
              }

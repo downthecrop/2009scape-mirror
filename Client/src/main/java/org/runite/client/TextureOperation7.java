@@ -288,7 +288,7 @@ final class TextureOperation7 extends TextureOperation {
                }
 
                if(0 != var18) {
-                  MapUnderlayColorDefinition var19 = MapUnderlayColorDefinition.method629(-1 + (255 & var18));
+                  FloorUnderlayDefinition var19 = FloorUnderlayDefinition.method629(-1 + (255 & var18));
                   var15[var16][var17] = (1 + var19.anInt1412 << 16) - -var19.anInt1414;
                }
             }

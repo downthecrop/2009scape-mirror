@@ -1230,7 +1230,7 @@ public final class PacketParser {
                                                         modelId = BufferedDataStream.incomingBuffer.readSignedShort();
                                                         counter = BufferedDataStream.incomingBuffer.readSignedShort128();
                                                         Class146.updateInterfacePacketCounter(nodeModelId);
-                                                        Class168.method2271(modelId, var19, counter);
+                                                        RSInterface.method2271(modelId, var19, counter);
 
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
@@ -1418,7 +1418,7 @@ public final class PacketParser {
                                                                 var25 = Unsorted.getRSInterface(nodeModelId);
                                                             }
 
-                                                            for (; Unsorted.incomingPacketLength > BufferedDataStream.incomingBuffer.index; Class168.method2277(var6 + -1, counter, var30, var19, (byte) 46)) {
+                                                            for (; Unsorted.incomingPacketLength > BufferedDataStream.incomingBuffer.index; method2277(var6 + -1, counter, var30, var19, (byte) 46)) {
                                                                 counter = BufferedDataStream.incomingBuffer.getSmart();
                                                                 var6 = BufferedDataStream.incomingBuffer.readUnsignedShort();
                                                                 var30 = 0;
@@ -1674,7 +1674,7 @@ public final class PacketParser {
                                                                     var25.itemIds[var6] = var30;
                                                                 }
 
-                                                                Class168.method2277(-1 + chatIcon, var6, var30, var19, (byte) 41);
+                                                                method2277(-1 + chatIcon, var6, var30, var19, (byte) 41);
                                                             }
 
                                                             if (var25 != null) {
@@ -1710,7 +1710,7 @@ public final class PacketParser {
                                                                 var19 = -1;
                                                             }
 
-                                                            Class167.musicEffectHandler(var19);
+                                                            AudioHandler.musicEffectHandler(var19);
                                                             Unsorted.incomingOpcode = -1;
                                                             return true;
                                                         } else {
@@ -1850,6 +1850,42 @@ public final class PacketParser {
 
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "af.D(" + (byte) -86 + ')');
+        }
+    }
+
+    static void method2277(int var0, int var1, int var2, int var3, byte var4) {
+        try {
+            Class3_Sub25 var5 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var3);
+            if (var5 == null) {
+                var5 = new Class3_Sub25();
+                Class3_Sub2.aHashTable_2220.put(var3, var5);
+            }
+
+            if (var4 > 16) {
+                if (var1 >= var5.anIntArray2547.length) {
+                    int[] var6 = new int[var1 - -1];
+                    int[] var7 = new int[1 + var1];
+
+                    int var8;
+                    for (var8 = 0; var8 < var5.anIntArray2547.length; ++var8) {
+                        var6[var8] = var5.anIntArray2547[var8];
+                        var7[var8] = var5.anIntArray2551[var8];
+                    }
+
+                    for (var8 = var5.anIntArray2547.length; var1 > var8; ++var8) {
+                        var6[var8] = -1;
+                        var7[var8] = 0;
+                    }
+
+                    var5.anIntArray2547 = var6;
+                    var5.anIntArray2551 = var7;
+                }
+
+                var5.anIntArray2547[var1] = var0;
+                var5.anIntArray2551[var1] = var2;
+            }
+        } catch (RuntimeException var9) {
+            throw ClientErrorException.clientError(var9, "wl.A(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ')');
         }
     }
 }

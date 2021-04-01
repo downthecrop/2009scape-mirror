@@ -12,6 +12,8 @@ import org.rs09.client.util.ArrayUtils;
 import org.runite.client.drawcalls.*;
 
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
@@ -168,6 +170,8 @@ public class Unsorted {
     static long[] aLongArray3271 = new long[500];
     static boolean aBoolean3275 = true;
     static int anInt154 = 0;
+    static RSInterface aClass11_2091 = null;
+    static int anInt2099 = 0;
 
     static void method2086() {
         try {
@@ -381,7 +385,7 @@ public class Unsorted {
         }
     }
 
-    static Class3_Sub28_Sub16_Sub2 method1537(CacheIndex var0, int var1) {
+    static SoftwareSprite method1537(CacheIndex var0, int var1) {
         try {
             if (Class140_Sub7.method2029((byte) -118, var0, var1)) {
 
@@ -403,14 +407,14 @@ public class Unsorted {
         }
     }
 
-    static AbstractSprite method1570(int var0, byte var1, boolean var2, int var3, boolean var4, int var5, int var6, boolean var7) {
+    static AbstractSprite constructItemSprite(int var0, boolean useHDSprite, int itemID, boolean var4, int outlineType, int itemCount, boolean shrinkInSprite) {
         try {
-            ItemDefinition item = ItemDefinition.getItemDefinition(var3);
-            if (var6 > 1 && item.anIntArray804 != null) {
+            ItemDefinition item = ItemDefinition.getItemDefinition(itemID);
+            if (itemCount > 1 && item.anIntArray804 != null) {
                 int var9 = -1;
 
                 for (int var10 = 0; var10 < 10; ++var10) {
-                    if (item.anIntArray766[var10] <= var6 && item.anIntArray766[var10] != 0) {
+                    if (item.anIntArray766[var10] <= itemCount && item.anIntArray766[var10] != 0) {
                         var9 = item.anIntArray804[var10];
                     }
                 }
@@ -424,16 +428,16 @@ public class Unsorted {
             if (null == var21) {
                 return null;
             } else {
-                Class3_Sub28_Sub16_Sub2 var22 = null;
+                SoftwareSprite var22 = null;
                 if (item.anInt791 == -1) {
                     if (item.anInt762 != -1) {
-                        var22 = (Class3_Sub28_Sub16_Sub2) method1570(var0, (byte) -107, true, item.anInt795, false, var5, var6, false);
+                        var22 = (SoftwareSprite) constructItemSprite(var0, true, item.anInt795, false, outlineType, itemCount, false);
                         if (null == var22) {
                             return null;
                         }
                     }
                 } else {
-                    var22 = (Class3_Sub28_Sub16_Sub2) method1570(0, (byte) 116, true, item.anInt789, false, 1, 10, true);
+                    var22 = (SoftwareSprite) constructItemSprite(0, true, item.noteID, false, 1, 10, true);
                     if (null == var22) {
                         return null;
                     }
@@ -444,24 +448,24 @@ public class Unsorted {
                 int var13 = Toolkit.JAVA_TOOLKIT.height;
                 int[] var14 = new int[4];
                 Class74.method1325(var14);
-                Class3_Sub28_Sub16_Sub2 var15 = new Class3_Sub28_Sub16_Sub2(36, 32);
+                SoftwareSprite var15 = new SoftwareSprite(36, 32);
                 Class74.setBuffer(var15.anIntArray4081, 36, 32);
                 Class51.method1134();
                 Class51.method1145(16, 16);
                 int var16 = item.anInt810;
                 Class51.aBoolean843 = false;
-                if (var7) {
+                if (shrinkInSprite) {
                     var16 = (int) ((double) var16 * 1.5D);
-                } else if (var5 == 2) {
+                } else if (outlineType == 2) {
                     var16 = (int) (1.04D * (double) var16);
                 }
 
                 int var18 = Class51.anIntArray851[item.anInt786] * var16 >> 16;
                 int var17 = Class51.anIntArray840[item.anInt786] * var16 >> 16;
                 var21.method1893(item.anInt799, item.anInt768, item.anInt786, item.anInt792, var17 - (var21.method1871() / 2 + -item.anInt754), item.anInt754 + var18);
-                if (var5 >= 1) {
+                if (outlineType >= 1) {
                     var15.method657(1);
-                    if (var5 >= 2) {
+                    if (outlineType >= 2) {
                         var15.method657(16777215);
                     }
 
@@ -480,18 +484,18 @@ public class Unsorted {
                     var15 = var22;
                 }
 
-                if (var4 && (item.stackingType == 1 || var6 != 1) && var6 != -1) {
-                    TextureOperation10.aClass3_Sub28_Sub17_Sub1_3440.method681(Class3_Sub7.itemStackColor(1000, var6), 0, 9, 16776960, 1);
+                if (var4 && (item.stackingType == 1 || itemCount != 1) && itemCount != -1) {
+                    TextureOperation10.aClass3_Sub28_Sub17_Sub1_3440.method681(Class3_Sub7.itemStackColor(1000, itemCount), 0, 9, 16776960, 1);
                 }
 
                 Class74.setBuffer(var11, var12, var13);
                 Class74.setClipping(var14);
                 Class51.method1134();
                 Class51.aBoolean843 = true;
-                return HDToolKit.highDetail && !var2 ? new HDSprite(var15) : var15;
+                return HDToolKit.highDetail && !useHDSprite ? new HDSprite(var15) : var15;
             }
         } catch (RuntimeException var20) {
-            throw ClientErrorException.clientError(var20, "na.WA(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ')');
+            throw ClientErrorException.clientError(var20, "na.WA(" + var0 + ',' + useHDSprite + ',' + itemID + ',' + var4 + ',' + outlineType + ',' + itemCount + ',' + shrinkInSprite + ')');
         }
     }
 
@@ -709,7 +713,7 @@ public class Unsorted {
             Class119.aClass33_1626 = null;
             Class36.aAbstractSprite_637 = null;
             Texture.anInt1150 = -1;
-            WorldMap.aClass3_Sub28_Sub16_Sub2_3221 = null;
+            WorldMap.aSoftwareSprite_3221 = null;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "jb.E(" + var0 + ',' + var1 + ')');
         }
@@ -851,7 +855,7 @@ public class Unsorted {
         try {
             if (var2.anInt2800 <= Class44.anInt719) {
                 if (var2.anInt2790 >= Class44.anInt719) {
-                    Class168.method2270(var2);
+                    method2270(var2);
                 } else {
                     method1180((byte) -22, var2);
                 }
@@ -930,7 +934,7 @@ public class Unsorted {
             if (Class101.anInt1425 <= var5 - var4 && Class3_Sub28_Sub18.anInt3765 >= var5 - -var4 && Class159.anInt2020 <= -var4 + var1 && Class57.anInt902 >= var4 + var1) {
                 TextureOperation6.method175(var6, var0, var1, var3, var4, var5);
             } else {
-                Class168.method2275(var3, var1, var4, var6, var0, var5);
+                method2275(var3, var1, var4, var6, var0, var5);
             }
 
         } catch (RuntimeException var8) {
@@ -2816,7 +2820,7 @@ public class Unsorted {
         }
 
         if (iface.anInt189 == 1337) {
-            Class168.aClass11_2091 = iface;
+            aClass11_2091 = iface;
         }
 
         if (notifyScripts && null != iface.anObjectArray235 && (iface.width != oldWidth || iface.height != oldHeight)) {
@@ -3742,7 +3746,7 @@ public class Unsorted {
                             int var47;
                             if (var11.anInt189 != 0) {
                                 if (var11.anInt189 == 1337 || var11.anInt189 == 1403 && HDToolKit.highDetail) {
-                                    Class168.aClass11_2091 = var11;
+                                    aClass11_2091 = var11;
                                     anInt2567 = var14;
                                     Class53.anInt865 = var13;
                                     method338(var11.height, var11.anInt189 == 1403, var13, var11.width, var14);
@@ -4742,7 +4746,7 @@ public class Unsorted {
         }
     }
 
-    public static Class3_Sub28_Sub16_Sub2 method562(CacheIndex var0, int var2) {
+    public static SoftwareSprite method562(CacheIndex var0, int var2) {
         try {
             //  System.out.println("Class 3_Sub28_Sub16_Sub2 " + var2);
             return Class75_Sub4.method1351(var0, 0, var2) ? Class3_Sub28_Sub9.method578() : null;
@@ -5257,5 +5261,171 @@ public class Unsorted {
        } catch (RuntimeException var4) {
           throw ClientErrorException.clientError(var4, "cb.A(" + 0 + ',' + var1 + ',' + var2 + ')');
        }
+    }
+
+    static void method2275(int var0, int var2, int var3, int var4, int var5, int var6) {
+        try {
+
+            int var8 = -var5 + var3;
+            MouseListeningClass.method2091(var3);
+            int var7 = 0;
+            if (var8 < 0) {
+                var8 = 0;
+            }
+
+            int var9 = var3;
+            int var10 = -var3;
+            int var12 = -var8;
+            int var11 = var8;
+            int var13 = -1;
+            int var17;
+            int var16;
+            int var19;
+            int var18;
+            if (var2 >= Class159.anInt2020 && Class57.anInt902 >= var2) {
+                int[] var15 = Class38.anIntArrayArray663[var2];
+                var16 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, -var3 + var6, Class101.anInt1425);
+                var17 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var3 + var6, Class101.anInt1425);
+                var18 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var6 + -var8, Class101.anInt1425);
+                var19 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var6 - -var8, Class101.anInt1425);
+                TextureOperation18.method282(var15, var16, 102, var18, var4);
+                TextureOperation18.method282(var15, var18, -44, var19, var0);
+                TextureOperation18.method282(var15, var19, -61, var17, var4);
+            }
+
+            int var14 = -1;
+
+            while (var9 > var7) {
+                var13 += 2;
+                var14 += 2;
+                var12 += var14;
+                var10 += var13;
+                if (var12 >= 0 && var11 >= 1) {
+                    --var11;
+                    GameObject.anIntArray1838[var11] = var7;
+                    var12 -= var11 << 1;
+                }
+
+                ++var7;
+                int var21;
+                int var20;
+                int[] var22;
+                int var24;
+                if (0 <= var10) {
+                    --var9;
+                    var10 -= var9 << 1;
+                    var24 = var2 + -var9;
+                    var16 = var2 + var9;
+                    if (var16 >= Class159.anInt2020 && var24 <= Class57.anInt902) {
+                        if (var8 <= var9) {
+                            var17 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var7 + var6, Class101.anInt1425);
+                            var18 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, -var7 + var6, Class101.anInt1425);
+                            if (var16 <= Class57.anInt902) {
+                                TextureOperation18.method282(Class38.anIntArrayArray663[var16], var18, -53, var17, var4);
+                            }
+
+                            if (var24 >= Class159.anInt2020) {
+                                TextureOperation18.method282(Class38.anIntArrayArray663[var24], var18, 96, var17, var4);
+                            }
+                        } else {
+                            var17 = GameObject.anIntArray1838[var9];
+                            var18 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var7 + var6, Class101.anInt1425);
+                            var19 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, -var7 + var6, Class101.anInt1425);
+                            var20 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var6 - -var17, Class101.anInt1425);
+                            var21 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, -var17 + var6, Class101.anInt1425);
+                            if (Class57.anInt902 >= var16) {
+                                var22 = Class38.anIntArrayArray663[var16];
+                                TextureOperation18.method282(var22, var19, 116, var21, var4);
+                                TextureOperation18.method282(var22, var21, 125, var20, var0);
+                                TextureOperation18.method282(var22, var20, 87, var18, var4);
+                            }
+
+                            if (Class159.anInt2020 <= var24) {
+                                var22 = Class38.anIntArrayArray663[var24];
+                                TextureOperation18.method282(var22, var19, 110, var21, var4);
+                                TextureOperation18.method282(var22, var21, -114, var20, var0);
+                                TextureOperation18.method282(var22, var20, -88, var18, var4);
+                            }
+                        }
+                    }
+                }
+
+                var24 = -var7 + var2;
+                var16 = var2 - -var7;
+                if (var16 >= Class159.anInt2020 && var24 <= Class57.anInt902) {
+                    var17 = var6 + var9;
+                    var18 = var6 + -var9;
+                    if (var17 >= Class101.anInt1425 && var18 <= Class3_Sub28_Sub18.anInt3765) {
+                        var17 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var17, Class101.anInt1425);
+                        var18 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var18, Class101.anInt1425);
+                        if (var7 < var8) {
+                            var19 = var11 >= var7 ? var11 : GameObject.anIntArray1838[var7];
+                            var20 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var19 + var6, Class101.anInt1425);
+                            var21 = Class40.method1040(Class3_Sub28_Sub18.anInt3765, var6 - var19, Class101.anInt1425);
+                            if (Class57.anInt902 >= var16) {
+                                var22 = Class38.anIntArrayArray663[var16];
+                                TextureOperation18.method282(var22, var18, 126, var21, var4);
+                                TextureOperation18.method282(var22, var21, 103, var20, var0);
+                                TextureOperation18.method282(var22, var20, -61, var17, var4);
+                            }
+
+                            if (var24 >= Class159.anInt2020) {
+                                var22 = Class38.anIntArrayArray663[var24];
+                                TextureOperation18.method282(var22, var18, 102, var21, var4);
+                                TextureOperation18.method282(var22, var21, -94, var20, var0);
+                                TextureOperation18.method282(var22, var20, 99, var17, var4);
+                            }
+                        } else {
+                            if (var16 <= Class57.anInt902) {
+                                TextureOperation18.method282(Class38.anIntArrayArray663[var16], var18, 94, var17, var4);
+                            }
+
+                            if (var24 >= Class159.anInt2020) {
+                                TextureOperation18.method282(Class38.anIntArrayArray663[var24], var18, 126, var17, var4);
+                            }
+                        }
+                    }
+                }
+            }
+
+        } catch (RuntimeException var23) {
+            throw ClientErrorException.clientError(var23, "wl.I(" + var0 + ',' + (byte) 109 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ')');
+        }
+    }
+
+    static void method2270(Class140_Sub4 var0) {
+        try {
+            if (Class44.anInt719 == var0.anInt2790 || var0.anInt2771 == -1 || var0.anInt2828 != 0 || SequenceDefinition.getAnimationDefinition(var0.anInt2771).duration[var0.anInt2832] < 1 + var0.anInt2760) {
+                int var2 = var0.anInt2790 + -var0.anInt2800;
+                int var3 = Class44.anInt719 + -var0.anInt2800;
+                int var4 = var0.anInt2784 * 128 + 64 * var0.getSize();
+                int var5 = var0.anInt2835 * 128 - -(var0.getSize() * 64);
+                int var6 = 128 * var0.anInt2823 + var0.getSize() * 64;
+                int var7 = 128 * var0.anInt2798 + var0.getSize() * 64;
+                var0.xAxis = (var3 * var6 + var4 * (var2 - var3)) / var2;
+                var0.zAxis = (var7 * var3 + var5 * (var2 - var3)) / var2;
+            }
+
+            var0.anInt2824 = 0;
+            if (var0.anInt2840 == 0) {
+                var0.anInt2806 = 1024;
+            }
+
+            if (1 == var0.anInt2840) {
+                var0.anInt2806 = 1536;
+            }
+
+            if (var0.anInt2840 == 2) {
+                var0.anInt2806 = 0;
+            }
+
+            if (var0.anInt2840 == 3) {
+                var0.anInt2806 = 512;
+            }
+
+            var0.anInt2785 = var0.anInt2806;
+        } catch (RuntimeException var8) {
+            throw ClientErrorException.clientError(var8, "wl.K(" + (var0 != null ? "{...}" : "null") + ',' + (byte) -56 + ')');
+        }
     }
 }

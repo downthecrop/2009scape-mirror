@@ -92,11 +92,11 @@ public final class Class75_Sub4 extends Class75 {
       }
    }
 
-   static void method1353(Class3_Sub28_Sub16_Sub2[] var0, CacheIndex var2) {
+   static void method1353(SoftwareSprite[] var0, CacheIndex var2) {
       try {
          WorldMap.aClass153_3210 = var2;
-         GameObject.aClass3_Sub28_Sub16_Sub2Array1839 = var0;
-         Class3_Sub24_Sub4.aBooleanArray3503 = new boolean[GameObject.aClass3_Sub28_Sub16_Sub2Array1839.length];
+         GameObject.aSoftwareSpriteArray1839 = var0;
+         Class3_Sub24_Sub4.aBooleanArray3503 = new boolean[GameObject.aSoftwareSpriteArray1839.length];
          Class134.aLinkedList_1758.method1211(-68);
          int var3 = WorldMap.aClass153_3210.getArchiveForName(TextCore.aClass94_2304);
          int[] var4 = WorldMap.aClass153_3210.getFileIds(var3);

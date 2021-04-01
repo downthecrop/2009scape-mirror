@@ -73,7 +73,7 @@ public final class TextureOperation9 extends TextureOperation {
 		try {
 			//int var1 = 15 / ((-11 - var0) / 63);
 			if(Unsorted.anInt3660 == 2) {
-				if(TextureOperation8.anInt3460 == NPCDefinition.anInt1297 && Class38_Sub1.anInt2612 == Class168.anInt2099) {
+				if(TextureOperation8.anInt3460 == NPCDefinition.anInt1297 && Class38_Sub1.anInt2612 == Unsorted.anInt2099) {
 					Unsorted.anInt3660 = 0;
 					if(ClientCommands.shiftClickEnabled && ObjectDefinition.aBooleanArray1490[81] && Unsorted.menuOptionCount > 2) {
 						BufferedDataStream.method806(Unsorted.menuOptionCount + -2);
@@ -89,7 +89,7 @@ public final class TextureOperation9 extends TextureOperation {
 					BufferedDataStream.method806(Unsorted.menuOptionCount - 1);
 				}
 			} else {
-				Class168.anInt2099 = Class38_Sub1.anInt2614;
+				Unsorted.anInt2099 = Class38_Sub1.anInt2614;
 				Unsorted.anInt3660 = 2;
 				TextureOperation8.anInt3460 = Class163_Sub1.anInt2993;
 			}
