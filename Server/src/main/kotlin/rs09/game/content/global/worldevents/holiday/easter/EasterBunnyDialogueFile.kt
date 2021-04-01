@@ -19,7 +19,7 @@ class EasterBunnyDialogueFile(val NEED_BASKET : Boolean) : DialogueFile() {
                 1 -> player(FacialExpression.THINKING,"Thanks goodness I'M here?")
                 2 -> npc("Yes, yes, I need your help, you see!")
                 3 -> npc("I have lost ALL of my eggs. What a terrible thing.")
-                4 -> npc("Us easter bunnies rely on EGG to live.")
+                4 -> npc("Us easter bunnies rely on EGGS to live.")
                 5 -> npc("Take this basket, please, and do me a kindness.")
                 6 -> player(FacialExpression.THINKING,"What kindness might that be?")
                 7 -> npc("I need you to try and gather up as many of my","lost eggs as you can.")
@@ -28,6 +28,9 @@ class EasterBunnyDialogueFile(val NEED_BASKET : Boolean) : DialogueFile() {
                 10 -> {
                     player!!.inventory.add(Item(Items.BASKET_OF_EGGS_4565))
                     player!!.dialogueInterpreter.sendItemMessage(Items.BASKET_OF_EGGS_4565,"The Easter Bunny gives you a basket.")
+                    if(!player!!.musicPlayer.hasUnlocked(273)) {
+                        player!!.musicPlayer.unlock(273, true)
+                    }
                     stage = END_DIALOGUE
                 }
             }
