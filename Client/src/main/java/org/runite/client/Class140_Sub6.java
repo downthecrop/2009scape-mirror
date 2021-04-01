@@ -80,7 +80,7 @@ final class Class140_Sub6 extends GameObject {
 
    private Model method2022() {
       try {
-          GraphicDefinition var2 = GraphicDefinition.getGraphicDefinition((byte)42, this.anInt2915);
+          GraphicDefinition var2 = GraphicDefinition.getGraphicDefinition(this.anInt2915);
           Model var3 = var2.method966(this.anInt2898, this.anInt2922, this.anInt2896);
           if(null == var3) {
              return null;
@@ -242,7 +242,7 @@ final class Class140_Sub6 extends GameObject {
          this.anInt2897 = var9;
          this.anInt2925 = var6;
          this.anInt2911 = var5;
-         int var12 = GraphicDefinition.getGraphicDefinition((byte)42, this.anInt2915).anInt542;
+         int var12 = GraphicDefinition.getGraphicDefinition(this.anInt2915).anInt542;
          if(var12 == -1) {
             this.aClass142_2923 = null;
          } else {

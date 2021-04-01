@@ -37,18 +37,6 @@ abstract class Class75 {
         return null;
     }
 
-    static int method1338(int var0, int var1) {
-        try {
-            if (var1 <= 13) {
-                anIntArray1107 = null;
-            }
-
-            return 255 & var0;
-        } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "kf.H(" + var0 + ',' + var1 + ')');
-        }
-    }
-
     static void method1339(RSString var0) {
         try {
             for (Class3_Sub28_Sub3 var2 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.method1222(); var2 != null; var2 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.method1221()) {

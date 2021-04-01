@@ -986,16 +986,6 @@ public final class BufferedDataStream extends DataBuffer {
         }
     }
 
-//	static void method813() {
-//		try {
-//			Class3_Sub28_Sub4.aReferenceCache_3572.clearSoftReferences();
-//			Class143.aReferenceCache_1874.clearSoftReferences();
-//			Class67.aReferenceCache_1013.clearSoftReferences();
-//		} catch (RuntimeException var2) {
-//			throw ClientErrorException.clientError(var2, "i.O(" + 1974 + ')');
-//		}
-//	}
-
     final void method814(int[] var1) {
         try {
             this.isaacCipher = new ISAACCipher(var1);
