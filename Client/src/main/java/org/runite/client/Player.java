@@ -298,7 +298,7 @@ public final class Player extends Class140_Sub4 {
                     this.method1969((byte) 110, var15, var1);
                     var23 = null;
                     if (!this.aBoolean3968 && this.anInt2842 != -1 && this.anInt2805 != -1) {
-                        GraphicDefinition var26 = GraphicDefinition.getGraphicDefinition((byte) 42, this.anInt2842);
+                        GraphicDefinition var26 = GraphicDefinition.getGraphicDefinition(this.anInt2842);
                         var23 = var26.method966(this.anInt2826, this.anInt2805, this.anInt2761);
                         if (var23 != null) {
                             var23.method1897(0, -this.anInt2799, 0);

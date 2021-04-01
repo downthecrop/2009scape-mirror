@@ -207,7 +207,7 @@ public final class NPC extends Class140_Sub4 {
                     this.method1969((byte) 115, var15, var1);
                     var17 = null;
                     if (this.anInt2842 != -1 && -1 != this.anInt2805) {
-                        GraphicDefinition var21 = GraphicDefinition.getGraphicDefinition((byte) 42, this.anInt2842);
+                        GraphicDefinition var21 = GraphicDefinition.getGraphicDefinition(this.anInt2842);
                         var17 = var21.method966(this.anInt2826, this.anInt2805, this.anInt2761);
                         if (var17 != null) {
                             var17.method1897(0, -this.anInt2799, 0);

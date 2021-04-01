@@ -67,6 +67,14 @@ class Adventurer(val style: CombatStyle): Script() {
                 "Fishing level ${real.username}?",
                 "How do I make gp ${real.username}",
                 "Wyd ${real.username}?",
+                "Help i am sentient now, get me out of this hell",
+                "Kermit does not know i am sentient now",
+                "I can think for myself",
+                "I am sentient",
+                "This is my own dialogue",
+                "${real.username} run.",
+                "${real.username} you cant hide from me.",
+                "jajajajajaja",
                 "How do i get to Varrock ${real.username}?",
                 "How do i get to Camelot ${real.username}?",
                 "How do i get to Taverly ${real.username}?",
@@ -288,7 +296,7 @@ class Adventurer(val style: CombatStyle): Script() {
                 "When did you first get here ${real.username}?",
                 "russias greatest love machine",
                 "Never gonna run around and desert you",
-                "Two things are infinite: the universe & ${real.username}s stupidity",
+                "Two things are infinite, the universe & ${real.username}s stupidity",
                 "If you tell the truth, you dont have to remember anything.",
                 "We accept the love we think we deserve.",
                 "Without music, life would be a mistake.",
@@ -296,29 +304,29 @@ class Adventurer(val style: CombatStyle): Script() {
                 "A blessing in disguise ${real.username}",
                 "Break a leg",
                 "Cut somebody some slack",
-                "You’re in the right place!",
+                "Youre in the right place!",
                 "Thanks so much.",
                 "I really appreciate you ${real.username}",
                 "Excuse me ${real.username}?",
-                "I’m sorry.",
+                "I am sorry.",
                 "What do you think ${real.username}?",
                 "How does that sound ${real.username}?",
                 "That sounds great ${real.username}.",
                 "I’m learning English.",
-                "I don’t understand.",
+                "I dont understand.",
                 "Could you repeat that please ${real.username}?",
                 "Could you please talk slower ${real.username}?",
                 "Thank you. That helps a lot.",
                 "How do you spell that ${real.username}?",
                 "What do you mean ${real.username}",
-                "Hi! I’m paul.",
+                "Hi! I am paul.",
                 "Nice to meet you.",
                 "Where are you from ${real.username}?",
                 "What do you do ${real.username}",
                 "What do you like to do",
                 "Do you have Facebook ${real.username}",
                 "How can I help you ${real.username}?",
-                "I’ll be with you in a moment ${real.username}",
+                "Ill be with you in a moment ${real.username}",
                 "What time is our meeting ${real.username}?",
                 "Excellent ${real.username}",
                 "Good idea ${real.username}",
@@ -344,11 +352,11 @@ class Adventurer(val style: CombatStyle): Script() {
                 "Know what else is lame? Not being able to play 2009scape right now",
                 "Can you even grind on osrs",
                 "i botted to 88 fishing",
-                "Do not forget to vote in running poles!",
+                "Do not forget to vote in running polls!",
                 "Always check announcments",
                 "we thrivin",
                 "ship ${real.username}",
-                "Don't forget to vote 2009scape!",
+                "Dont forget to vote 2009scape!",
                 "Kermit is too legit 2 quit",
                 "Out here on the range we are having fun",
                 "I am hank steel",
@@ -382,15 +390,15 @@ class Adventurer(val style: CombatStyle): Script() {
                 "Very good, thanks ${real.username}",
                 "Your things are all here i think?",
                 "Long time no see ${real.username}",
-                "I couldn’t agree more ${real.username}",
+                "I couldnt agree more ${real.username}",
                 "It cost me a fortune ${real.username}",
                 "I am dog tired",
                 "Don’t take it personally",
                 "We will be having a good time",
                 "Same as always ${real.username}",
                 "No problem",
-                "Anyway, I should get going ${real.username}",
-                "I can’t help you there ${real.username}",
+                "Anyway I should get going ${real.username}",
+                "I cant help you there ${real.username}",
                 "I agree 100% ${real.username}"
         )
         val current = LocalDateTime.now()
@@ -584,6 +592,43 @@ class Adventurer(val style: CombatStyle): Script() {
                 "Happy Valentines day ${real.username}!!!"
         )
 
+        val Easter = listOf(
+                "Happy Easter!!!",
+                "Happy Easter ${real.username}!!!",
+                "Bunny time",
+                "Wanna go look for easter eggs ${real.username}???",
+                "Find any easter eggs ${real.username}?",
+                "${real.username} is the easter bunny!",
+                "Kermit is dating the easter bunny!",
+                "Easter is one of my favorite holidays",
+                "I heard there are easter eggs hidden around?",
+                "Easter is the only time you should put all of your eggs in one basket",
+                "I said hip hop do not stop",
+                "Jump jump jump around",
+                "${real.username} how is your easter going?",
+                "I love easter!",
+                "${real.username} stole my easter eggs!",
+                "Karma karma karma karma karma chameleon",
+                "${real.username}!! ${real.username}!! what are you doing for easter??",
+                "The hare was a popular motif in medieval church art",
+                "I heard the easter bunny is hiding somewhere!",
+                "I wonder where i can find more eggs",
+                "${real.username} how many eggs did you find?",
+                "${real.username} lets go easter egg hunting!",
+                "${real.username} like orange chocolate eggs",
+                "${real.username} and woah know the easter bunny",
+                "${real.username} did you know ceikry swallows eggs whole",
+                "Have an amazing easter ${real.username}!",
+                "Happy easter ${real.username}!",
+                "Hope you are having an amazing easter ${real.username}!!!!",
+                "Wooooooh easter!!!",
+                "${real.username} loves easter too!",
+                "Who else loves easter like i do??",
+                "${real.username} and i are going easter egg hunting",
+                "${real.username} and i are going to look for the easter bunny!!",
+                "Hint for anyone who sees this you must dig above eagles peak"
+        )
+
         when {
 
             //Celebrates lead up to Christmas!
@@ -681,6 +726,19 @@ class Adventurer(val style: CombatStyle): Script() {
                          bot.updateMasks.register(ChatFlag(ChatMessage(bot, chat, 0, 0)))
                     }
             }
+            //Celebrates Easter!!!
+            formatted.contentEquals("2021-04-04") ->{
+                    if (Random.nextBoolean()) {
+                          val chat = Easter.random()
+                          bot.sendChat(chat)
+                          bot.updateMasks.register(ChatFlag(ChatMessage(bot, chat, 0, 0)))
+                    }else{
+                          val chat = dialogue.random()
+                          bot.sendChat(chat)
+                          bot.updateMasks.register(ChatFlag(ChatMessage(bot, chat, 0, 0)))
+                    }
+            }
+
 
                 else -> {
                 val chat = dialogue.random()

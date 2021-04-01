@@ -571,7 +571,7 @@ public final class PacketParser {
                                                             if (counter == 65535) {
                                                                 counter = -1;
                                                             }
-                                                            var32 = counter == -1 || -1 == var62.anInt2842 || SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition((byte) 42, var62.anInt2842).anInt542).forcedPriority <= SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition((byte) 42, counter).anInt542).forcedPriority;
+                                                            var32 = counter == -1 || -1 == var62.anInt2842 || SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition(var62.anInt2842).anInt542).forcedPriority <= SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition(counter).anInt542).forcedPriority;
 
                                                             if (var32) {
                                                                 var62.anInt2761 = 0;
@@ -585,7 +585,7 @@ public final class PacketParser {
                                                                 var62.anInt2799 = var19;
                                                                 var62.anInt2826 = 1;
                                                                 if (var62.anInt2842 != -1 && Class44.anInt719 == var62.anInt2759) {
-                                                                    var33 = GraphicDefinition.getGraphicDefinition((byte) 42, var62.anInt2842).anInt542;
+                                                                    var33 = GraphicDefinition.getGraphicDefinition(var62.anInt2842).anInt542;
                                                                     if (var33 != -1) {
                                                                         var53 = SequenceDefinition.getAnimationDefinition(var33);
                                                                         if (null != var53.frames) {
@@ -608,7 +608,7 @@ public final class PacketParser {
                                                             if (counter == 65535) {
                                                                 counter = -1;
                                                             }
-                                                            var32 = counter == -1 || var60.anInt2842 == -1 || SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition((byte) 42, var60.anInt2842).anInt542).forcedPriority <= SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition((byte) 42, counter).anInt542).forcedPriority;
+                                                            var32 = counter == -1 || var60.anInt2842 == -1 || SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition(var60.anInt2842).anInt542).forcedPriority <= SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition(counter).anInt542).forcedPriority;
 
                                                             if (var32) {
                                                                 var60.anInt2759 = nodeModelId + Class44.anInt719;
@@ -623,7 +623,7 @@ public final class PacketParser {
                                                                 }
 
                                                                 if (var60.anInt2842 != -1 && Class44.anInt719 == var60.anInt2759) {
-                                                                    var33 = GraphicDefinition.getGraphicDefinition((byte) 42, var60.anInt2842).anInt542;
+                                                                    var33 = GraphicDefinition.getGraphicDefinition(var60.anInt2842).anInt542;
                                                                     if (var33 != -1) {
                                                                         var53 = SequenceDefinition.getAnimationDefinition(var33);
                                                                         if (null != var53.frames) {

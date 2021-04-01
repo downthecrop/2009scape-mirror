@@ -19,7 +19,7 @@ final class Class140_Sub2 extends GameObject {
 
    private Model method1949() {
       try {
-         GraphicDefinition var2 = GraphicDefinition.getGraphicDefinition((byte)42, this.anInt2708);
+         GraphicDefinition var2 = GraphicDefinition.getGraphicDefinition(this.anInt2708);
 
          Model var3;
          if(this.aBoolean2718) {
@@ -194,7 +194,7 @@ final class Class140_Sub2 extends GameObject {
          this.anInt2703 = var7 + var6;
          this.anInt2708 = var1;
          this.anInt2712 = var5;
-         int var8 = GraphicDefinition.getGraphicDefinition((byte)42, this.anInt2708).anInt542;
+         int var8 = GraphicDefinition.getGraphicDefinition(this.anInt2708).anInt542;
          if(-1 == var8) {
             this.aBoolean2718 = true;
          } else {

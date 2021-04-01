@@ -21,16 +21,13 @@ public final class GraphicDefinition {
 	static int anInt548 = 0;
 	static volatile int anInt549 = 0;
 
-	static GraphicDefinition getGraphicDefinition(byte var0, int graphicId) {
+	static GraphicDefinition getGraphicDefinition(int graphicId) {
 		try {
 			GraphicDefinition def = (GraphicDefinition) Class3_Sub31.aReferenceCache_2604.get(graphicId);
 			if (def == null) {
-				byte[] var3 = TextureOperation19.aClass153_3214.getFile(Unsorted.method64(graphicId), Class75.method1338(graphicId, var0 ^ 7));
+				byte[] var3 = TextureOperation19.aClass153_3214.getFile(graphicId >>> 8, graphicId & 0xFF);
 				def = new GraphicDefinition();
 				def.graphicId = graphicId;
-				if (var0 != 42) {
-					getGraphicDefinition((byte) -83, -12);
-				}
 
 				if (null != var3) {
 					def.parse(new DataBuffer(var3));
@@ -40,7 +37,7 @@ public final class GraphicDefinition {
 			}
 			return def;
 		} catch (RuntimeException var4) {
-			throw ClientErrorException.clientError(var4, "ck.D(" + var0 + ',' + graphicId + ')');
+			throw ClientErrorException.clientError(var4, "ck.D(" + (byte) 42 + ',' + graphicId + ')');
 		}
 	}
 
@@ -53,14 +50,14 @@ public final class GraphicDefinition {
 					return;
 				}
 
-				this.method965(var1, var3);
+				this.decode(var1, var3);
 			}
 		} catch (RuntimeException var4) {
 			throw ClientErrorException.clientError(var4, "eg.A(" + (var1 != null?"{...}":"null") + ',' + (byte) -113 + ')');
 		}
 	}
 
-	private void method965(DataBuffer var1, int var2) {
+	private void decode(DataBuffer var1, int var2) {
 		try {
 			if(var2 == 1) {
 				this.anInt541 = var1.readUnsignedShort();

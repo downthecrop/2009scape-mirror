@@ -244,7 +244,7 @@ public final class NPCRendering {
 
                    var6 = BufferedDataStream.incomingBuffer.readIntLE();
                    boolean var7 = true;
-                   if (var5 != -1 && npc.anInt2842 != -1 && SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition((byte) 42, var5).anInt542).forcedPriority < SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition((byte) 42, npc.anInt2842).anInt542).forcedPriority) {
+                   if (var5 != -1 && npc.anInt2842 != -1 && SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition(var5).anInt542).forcedPriority < SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition(npc.anInt2842).anInt542).forcedPriority) {
                        var7 = false;
                    }
 
@@ -260,7 +260,7 @@ public final class NPCRendering {
                        }
 
                        if (npc.anInt2842 != -1 && Class44.anInt719 == npc.anInt2759) {
-                           int var8 = GraphicDefinition.getGraphicDefinition((byte) 42, npc.anInt2842).anInt542;
+                           int var8 = GraphicDefinition.getGraphicDefinition(npc.anInt2842).anInt542;
                            if (var8 != -1) {
                                SequenceDefinition var9 = SequenceDefinition.getAnimationDefinition(var8);
                                if (var9.frames != null) {

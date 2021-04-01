@@ -80,7 +80,7 @@ final class RenderAnimationDefinition {
 
             int var6;
             if (var0.anInt2842 != -1 && var0.anInt2759 <= Class44.anInt719) {
-                var6 = GraphicDefinition.getGraphicDefinition((byte) 42, var0.anInt2842).anInt542;
+                var6 = GraphicDefinition.getGraphicDefinition(var0.anInt2842).anInt542;
                 if (var6 == -1) {
                     var0.anInt2842 = -1;
                 } else {

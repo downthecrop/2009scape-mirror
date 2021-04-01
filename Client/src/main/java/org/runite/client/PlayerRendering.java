@@ -357,7 +357,7 @@ public final class PlayerRendering {
 
                 chatIcon = BufferedDataStream.incomingBuffer.readIntV2();
                 boolean var21 = true;
-                if (var4 != -1 && var3.anInt2842 != -1 && SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition((byte) 42, var4).anInt542).forcedPriority < SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition((byte) 42, var3.anInt2842).anInt542).forcedPriority) {
+                if (var4 != -1 && var3.anInt2842 != -1 && SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition(var4).anInt542).forcedPriority < SequenceDefinition.getAnimationDefinition(GraphicDefinition.getGraphicDefinition(var3.anInt2842).anInt542).forcedPriority) {
                     var21 = false;
                 }
 
@@ -373,7 +373,7 @@ public final class PlayerRendering {
                     var3.anInt2799 = chatIcon >> 16;
                     var3.anInt2826 = 1;
                     if (var3.anInt2842 != -1 && Class44.anInt719 == var3.anInt2759) {
-                        var7 = GraphicDefinition.getGraphicDefinition((byte) 42, var3.anInt2842).anInt542;
+                        var7 = GraphicDefinition.getGraphicDefinition(var3.anInt2842).anInt542;
                         if (var7 != -1) {
                             SequenceDefinition var24 = SequenceDefinition.getAnimationDefinition(var7);
                             if (var24.frames != null) {
