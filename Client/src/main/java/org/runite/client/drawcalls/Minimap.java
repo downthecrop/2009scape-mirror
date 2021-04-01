@@ -23,7 +23,7 @@ public final class Minimap {
             if (HDToolKit.highDetail) {
                 ((HDSprite) Class49.aAbstractSprite_812).drawMinimapRegion(var3, var2, var4.width, var4.height, var6, var7, var19, Class164_Sub2.anInt3020 + 256, (HDSprite) var4.method866(false));
             } else {
-                ((Class3_Sub28_Sub16_Sub2) Class49.aAbstractSprite_812).drawMinimapRegion(var3, var2, var4.width, var4.height, var6, var7, var19, 256 - -Class164_Sub2.anInt3020, var4.anIntArray207, var4.anIntArray291);
+                ((SoftwareSprite) Class49.aAbstractSprite_812).drawMinimapRegion(var3, var2, var4.width, var4.height, var6, var7, var19, 256 - -Class164_Sub2.anInt3020, var4.anIntArray207, var4.anIntArray291);
             }
 
             int var9;

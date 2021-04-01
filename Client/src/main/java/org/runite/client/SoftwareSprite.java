@@ -2,7 +2,7 @@ package org.runite.client;
 
 import org.rs09.client.rendering.Toolkit;
 
-public class Class3_Sub28_Sub16_Sub2 extends AbstractSprite {
+public class SoftwareSprite extends AbstractSprite {
 
    int[] anIntArray4081;
 
@@ -823,7 +823,7 @@ public class Class3_Sub28_Sub16_Sub2 extends AbstractSprite {
       }
    }
 
-   Class3_Sub28_Sub16_Sub2(int var1, int var2, int var3, int var4, int var5, int var6, int[] var7) {
+   SoftwareSprite(int var1, int var2, int var3, int var4, int var5, int var6, int[] var7) {
       this.anInt3697 = var1;
       this.anInt3706 = var2;
       this.anInt3701 = var3;
@@ -1129,7 +1129,7 @@ public class Class3_Sub28_Sub16_Sub2 extends AbstractSprite {
       }
    }
 
-   Class3_Sub28_Sub16_Sub2(int var1, int var2) {
+   SoftwareSprite(int var1, int var2) {
       this.anIntArray4081 = new int[var1 * var2];
       this.width = this.anInt3697 = var1;
       this.height = this.anInt3706 = var2;

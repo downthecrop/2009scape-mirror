@@ -61,23 +61,6 @@ final class TextureOperation24 extends TextureOperation {
         }
     }
 
-    static void method225(RSInterface iface) {
-        RSInterface var2 = Class168.method2273(iface);
-
-        int windowWidth;
-        int windowHeight;
-        if (var2 == null) {
-            windowHeight = Class140_Sub7.canvasHeight;
-            windowWidth = Class23.canvasWidth;
-        } else {
-            windowHeight = var2.height;
-            windowWidth = var2.width;
-        }
-
-        Unsorted.calculateInterfaceSize(iface, windowWidth, windowHeight, false);
-        Unsorted.calculateInterfacePosition(iface, windowWidth, windowHeight);
-    }
-
     static void method226(int var0) {
         try {
             if (var0 != -1) {

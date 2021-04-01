@@ -29,7 +29,7 @@ public class HDSprite extends AbstractSprite {
         this.method651();
     }
 
-    public HDSprite(Class3_Sub28_Sub16_Sub2 var1) {
+    public HDSprite(SoftwareSprite var1) {
         this.anInt3697 = var1.anInt3697;
         this.anInt3706 = var1.anInt3706;
         this.anInt3701 = var1.anInt3701;

@@ -8,7 +8,7 @@ final class WorldMap extends Node {
 
     static int anInt2737 = 0;
     static CacheIndex aClass153_3210;
-    static Class3_Sub28_Sub16_Sub2 aClass3_Sub28_Sub16_Sub2_3221;
+    static SoftwareSprite aSoftwareSprite_3221;
     Class140_Sub7 aClass140_Sub7_3676;
 
 
@@ -91,7 +91,7 @@ final class WorldMap extends Node {
                     int var6 = Class158_Sub1.anInt1463 >> 1;
                     CS2Script.aByteArrayArrayArray2452 = new byte[var3][var4][];
                     Class29.anIntArrayArrayArray558 = new int[var3][var4][];
-                    Class36.method1014(var6, var5);
+                    FloorOverlayDefinition.method1014(var6, var5);
                     anInt2737 = 20;
 
 
@@ -211,16 +211,16 @@ final class WorldMap extends Node {
                 Class49.anInt817 = (int) ((float) (var4 * 2) / Class44.aFloat727);
 
                 if (HDToolKit.highDetail) {
-                    if (aClass3_Sub28_Sub16_Sub2_3221 == null || var4 != aClass3_Sub28_Sub16_Sub2_3221.width || var3 != aClass3_Sub28_Sub16_Sub2_3221.height) {
-                        aClass3_Sub28_Sub16_Sub2_3221 = null;
-                        aClass3_Sub28_Sub16_Sub2_3221 = new Class3_Sub28_Sub16_Sub2(var4, var3);
+                    if (aSoftwareSprite_3221 == null || var4 != aSoftwareSprite_3221.width || var3 != aSoftwareSprite_3221.height) {
+                        aSoftwareSprite_3221 = null;
+                        aSoftwareSprite_3221 = new SoftwareSprite(var4, var3);
                     }
 
-                    Class74.setBuffer(aClass3_Sub28_Sub16_Sub2_3221.anIntArray4081, var4, var3);
+                    Class74.setBuffer(aSoftwareSprite_3221.anIntArray4081, var4, var3);
                     Unsorted.method523(var4, 0, var7, var6, 0, var8, var3, var15);
                     Class23.method938(var4, 0, var7, var8, var3, 0, var15, var6);
                     Class3_Sub5.method111((byte) -54, 0, 0, var15, var4, var8, var6, var7, var3);
-                    Class22.method926(aClass3_Sub28_Sub16_Sub2_3221.anIntArray4081, var0, var2, var4, var3);
+                    Class22.method926(aSoftwareSprite_3221.anIntArray4081, var0, var2, var4, var3);
                     Toolkit.JAVA_TOOLKIT.resetBuffer();
                 } else {
                     Unsorted.method523(var4 + var0, var2, var7, var6, var0, var8, var2 - -var3, var15);

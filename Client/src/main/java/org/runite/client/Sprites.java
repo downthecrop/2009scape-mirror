@@ -25,7 +25,7 @@ final class Sprites {
     static int scrollbarSpriteArchive;
     static int nameIconsSpriteArchive;
     static int floorShadowSpriteArchive;
-    static Class3_Sub28_Sub16_Sub2[] aClass3_Sub28_Sub16_Sub2Array2140;
+    static SoftwareSprite[] aSoftwareSpriteArray2140;
 
 
     private static LDIndexedSprite[] method885(int var1, CacheIndex var2) {
@@ -39,7 +39,7 @@ final class Sprites {
 
     static void method887(CacheIndex index8) {
         try {
-            aClass3_Sub28_Sub16_Sub2Array2140 = Class157.method2176(mapFunctionSpriteArchive, index8);
+            aSoftwareSpriteArray2140 = Class157.method2176(mapFunctionSpriteArchive, index8);
             Class75_Sub3.aAbstractSpriteArray2656 = Class140_Sub6.getSprites(hitmarkSpriteArchive, index8);
             Unsorted.aAbstractSpriteArray996 = Class140_Sub6.getSprites(hitbarDefaultSpriteArchive, index8);
             TextureOperation2.aAbstractSpriteArray3373 = Class140_Sub6.getSprites(headiconsPkSpriteArchive, index8);
@@ -62,7 +62,7 @@ final class Sprites {
                 }
             }
 
-            Class3_Sub28_Sub16_Sub2 var10 = Class40.method1043(0, index8, compassSpriteArchive);
+            SoftwareSprite var10 = Class40.method1043(0, index8, compassSpriteArchive);
             Objects.requireNonNull(var10).method665();
             if (HDToolKit.highDetail) {
                 Class57.aAbstractSprite_895 = new HDSprite(var10);
@@ -70,7 +70,7 @@ final class Sprites {
                 Class57.aAbstractSprite_895 = var10;
             }
 
-            Class3_Sub28_Sub16_Sub2[] var3 = Class157.method2176(hintMapEdgeSpriteArchive, index8);
+            SoftwareSprite[] var3 = Class157.method2176(hintMapEdgeSpriteArchive, index8);
 
             int var4;
             for (var4 = 0; Objects.requireNonNull(var3).length > var4; ++var4) {
@@ -93,18 +93,18 @@ final class Sprites {
             int var7 = -20 + (int) (Math.random() * 41.0D);
 
             int var8;
-            for (var8 = 0; var8 < aClass3_Sub28_Sub16_Sub2Array2140.length; ++var8) {
-                aClass3_Sub28_Sub16_Sub2Array2140[var8].method669(var4 + var7, var7 + var5, var7 + var6);
+            for (var8 = 0; var8 < aSoftwareSpriteArray2140.length; ++var8) {
+                aSoftwareSpriteArray2140[var8].method669(var4 + var7, var7 + var5, var7 + var6);
             }
 
             if (HDToolKit.highDetail) {
-                Class140_Sub4.aAbstractSpriteArray2839 = new AbstractSprite[aClass3_Sub28_Sub16_Sub2Array2140.length];
+                Class140_Sub4.aAbstractSpriteArray2839 = new AbstractSprite[aSoftwareSpriteArray2140.length];
 
-                for (var8 = 0; var8 < aClass3_Sub28_Sub16_Sub2Array2140.length; ++var8) {
-                    Class140_Sub4.aAbstractSpriteArray2839[var8] = new HDSprite(aClass3_Sub28_Sub16_Sub2Array2140[var8]);
+                for (var8 = 0; var8 < aSoftwareSpriteArray2140.length; ++var8) {
+                    Class140_Sub4.aAbstractSpriteArray2839[var8] = new HDSprite(aSoftwareSpriteArray2140[var8]);
                 }
             } else {
-                Class140_Sub4.aAbstractSpriteArray2839 = aClass3_Sub28_Sub16_Sub2Array2140;
+                Class140_Sub4.aAbstractSpriteArray2839 = aSoftwareSpriteArray2140;
             }
 
         } catch (RuntimeException var9) {

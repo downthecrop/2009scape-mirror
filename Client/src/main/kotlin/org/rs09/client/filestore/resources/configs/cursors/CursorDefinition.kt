@@ -7,8 +7,8 @@ class CursorDefinition {
     var hotspotY = 0
     var imageId = 0
 
-    fun getImage(): Class3_Sub28_Sub16_Sub2 {
-        var image = Class163_Sub1.aReferenceCache_2984.get(imageId.toLong()) as? Class3_Sub28_Sub16_Sub2
+    fun getImage(): SoftwareSprite {
+        var image = Class163_Sub1.aReferenceCache_2984.get(imageId.toLong()) as? SoftwareSprite
         if (image != null) return image
 
         image = Unsorted.method562(SequenceDefinition.aClass153_1852, imageId)

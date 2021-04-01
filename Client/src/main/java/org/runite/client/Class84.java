@@ -6,7 +6,7 @@ public final class Class84 {
     static LinkedList aLinkedList_1162 = new LinkedList();
     public static int[] anIntArray1163 = new int[1000];
     static int leftMargin = 0;
-    static Class3_Sub28_Sub16_Sub2 aClass3_Sub28_Sub16_Sub2_1381;
+    static SoftwareSprite aSoftwareSprite_1381;
     static int[] anIntArray1729 = new int[]{12543016, 15504954, 15914854, 16773818};
 
     static void method1417() {
@@ -58,7 +58,7 @@ public final class Class84 {
             TextureOperation30.method215((byte) -89, null);
             BufferedDataStream.anIntArray3805 = new int[32768];
             Class159.anIntArray1681 = new int[32768];
-            aClass3_Sub28_Sub16_Sub2_1381 = new Class3_Sub28_Sub16_Sub2(128, 254);
+            aSoftwareSprite_1381 = new SoftwareSprite(128, 254);
         } catch (RuntimeException var13) {
             throw ClientErrorException.clientError(var13, "lf.E(" + -110 + ',' + (var1 != null ? "{...}" : "null") + ')');
         }

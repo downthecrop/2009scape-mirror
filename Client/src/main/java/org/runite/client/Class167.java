@@ -44,17 +44,6 @@ public final class Class167 {
         }
     }
 
-    public static void musicEffectHandler(int var1) {
-        try {
-            if (AudioHandler.musicVolume != 0 && var1 != -1) {
-                Class70.method1285(CacheIndex.music2Index, var1, AudioHandler.musicVolume);
-                AudioHandler.musicEffectPlaying = true;
-            }
-        } catch (RuntimeException var4) {
-            throw ClientErrorException.clientError(var4, "wj.D(" + ',' + var1 + ',' + (byte) -1 + ')');
-        }
-    }
-
     static void method2267(int var0, int var1, boolean var2, DataBuffer var3, int var4, int var5, byte var6, int var7, int var8) {
         try {
             int var9;

@@ -63,7 +63,7 @@ final class ItemDefinition {
 	int anInt786;
 	int itemId;
 	int anInt788;
-	int anInt789;
+	public int noteID;
 	private int anInt790;
 	int anInt791;
 	int anInt792;
@@ -186,7 +186,7 @@ final class ItemDefinition {
 
 			 var2.method1112();
 			 if(var2.anInt791 != -1) {
-				var2.method1118(getItemDefinition(var2.anInt789), getItemDefinition(var2.anInt791));
+				var2.method1118(getItemDefinition(var2.noteID), getItemDefinition(var2.anInt791));
 			 }
 
 			 if(var2.anInt762 != -1) {
@@ -560,7 +560,7 @@ final class ItemDefinition {
 				} else if (opcode == 96) {
 					this.anInt800 = buffer.readUnsignedByte();
 				} else if (opcode == 97) {
-					this.anInt789 = buffer.readUnsignedShort();
+					this.noteID = buffer.readUnsignedShort();
 				} else if (opcode == 98) {
 					this.anInt791 = buffer.readUnsignedShort();
 				} else if (opcode >= 100 && opcode < 110) {
@@ -840,7 +840,7 @@ final class ItemDefinition {
 		this.anInt799 = 0;
 		this.anInt800 = 0;
 		this.stackingType = 0;
-		this.anInt789 = -1;
+		this.noteID = -1;
 		this.anInt794 = -1;
 		this.anInt788 = -1;
 		this.anInt797 = 128;

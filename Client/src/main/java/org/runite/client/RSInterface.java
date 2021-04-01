@@ -166,6 +166,18 @@ public final class RSInterface {
     int[] itemIds;
     int anInt318;
 
+    static void method2271(int var0, int var1, int var3) {
+        try {
+
+            InterfaceWidget var4 = InterfaceWidget.getWidget(11, var1);
+            var4.flagUpdate();
+            var4.anInt3597 = var3;
+            var4.anInt3598 = var0;
+        } catch (RuntimeException var5) {
+            throw ClientErrorException.clientError(var5, "wl.F(" + var0 + ',' + var1 + ',' + 1 + ',' + var3 + ')');
+        }
+    }
+
 
     final void method854(int var1, int var2) {
         try {
@@ -743,7 +755,7 @@ public final class RSInterface {
                 long var4 = ((this.aBoolean178 ? 1L : 0L) << 38) + ((!this.aBoolean157 ? 0L : 1L) << 35) + (long) archiveId + ((long) this.anInt288 << 36) + ((this.aBoolean199 ? 1L : 0L) << 39) + ((long) this.anInt287 << 40);
                 AbstractSprite var6 = (AbstractSprite) Class114.aReferenceCache_1569.get(var4);
                 if (var6 == null) {
-                    Class3_Sub28_Sub16_Sub2 var7;
+                    SoftwareSprite var7;
                     if (this.aBoolean157) {
                         var7 = Unsorted.method562(Class12.aClass153_323, archiveId);
                     } else {

@@ -157,48 +157,48 @@ public final class Class3_Sub15 extends Linkable {
             int var3 = 0;
             this.aByteArray2425 = new byte[128];
 
-            DataBuffer var2;
-            for (var2 = new DataBuffer(var1); var2.buffer[var3 + var2.index] != 0; ++var3) {
+            DataBuffer buffer;
+            for (buffer = new DataBuffer(var1); buffer.buffer[var3 + buffer.index] != 0; ++var3) {
             }
 
             byte[] var4 = new byte[var3];
 
             int var5;
             for (var5 = 0; var3 > var5; ++var5) {
-                var4[var5] = var2.readSignedByte();
+                var4[var5] = buffer.readSignedByte();
             }
 
-            ++var2.index;
+            ++buffer.index;
             ++var3;
-            var5 = var2.index;
-            var2.index += var3;
+            var5 = buffer.index;
+            buffer.index += var3;
 
             int var6;
-            for (var6 = 0; 0 != var2.buffer[var2.index + var6]; ++var6) {
+            for (var6 = 0; 0 != buffer.buffer[buffer.index + var6]; ++var6) {
             }
 
             byte[] var7 = new byte[var6];
 
             int var8;
             for (var8 = 0; var6 > var8; ++var8) {
-                var7[var8] = var2.readSignedByte();
+                var7[var8] = buffer.readSignedByte();
             }
 
-            ++var2.index;
+            ++buffer.index;
             ++var6;
             int var9 = 0;
-            var8 = var2.index;
+            var8 = buffer.index;
 
-            for (var2.index += var6; var2.buffer[var9 + var2.index] != 0; ++var9) {
+            for (buffer.index += var6; buffer.buffer[var9 + buffer.index] != 0; ++var9) {
             }
 
             byte[] var10 = new byte[var9];
 
             for (int var11 = 0; var9 > var11; ++var11) {
-                var10[var11] = var2.readSignedByte();
+                var10[var11] = buffer.readSignedByte();
             }
 
-            ++var2.index;
+            ++buffer.index;
             ++var9;
             byte[] var37 = new byte[var9];
             int var12;
@@ -211,7 +211,7 @@ public final class Class3_Sub15 extends Linkable {
                 int var13 = 1;
 
                 for (var14 = 2; var14 < var9; ++var14) {
-                    int var15 = var2.readUnsignedByte();
+                    int var15 = buffer.readUnsignedByte();
                     if (0 == var15) {
                         var13 = var12++;
                     } else {
@@ -231,48 +231,48 @@ public final class Class3_Sub15 extends Linkable {
             Class166 var41;
             for (var14 = 0; var14 < var38.length; ++var14) {
                 var41 = var38[var14] = new Class166();
-                int var16 = var2.readUnsignedByte();
+                int var16 = buffer.readUnsignedByte();
                 if (0 < var16) {
                     var41.aByteArray2064 = new byte[2 * var16];
                 }
 
-                var16 = var2.readUnsignedByte();
+                var16 = buffer.readUnsignedByte();
                 if (var16 > 0) {
                     var41.aByteArray2076 = new byte[var16 * 2 + 2];
                     var41.aByteArray2076[1] = 64;
                 }
             }
 
-            var14 = var2.readUnsignedByte();
+            var14 = buffer.readUnsignedByte();
             byte[] var40 = var14 > 0 ? new byte[var14 * 2] : null;
-            var14 = var2.readUnsignedByte();
+            var14 = buffer.readUnsignedByte();
             byte[] var39 = var14 > 0 ? new byte[var14 * 2] : null;
 
             int var17;
-            for (var17 = 0; var2.buffer[var17 + var2.index] != 0; ++var17) {
+            for (var17 = 0; buffer.buffer[var17 + buffer.index] != 0; ++var17) {
             }
 
             byte[] var18 = new byte[var17];
 
             int var19;
             for (var19 = 0; var19 < var17; ++var19) {
-                var18[var19] = var2.readSignedByte();
+                var18[var19] = buffer.readSignedByte();
             }
 
-            ++var2.index;
+            ++buffer.index;
             ++var17;
             var19 = 0;
 
             int var20;
             for (var20 = 0; var20 < 128; ++var20) {
-                var19 += var2.readUnsignedByte();
+                var19 += buffer.readUnsignedByte();
                 this.aShortArray2434[var20] = (short) var19;
             }
 
             var19 = 0;
 
             for (var20 = 0; var20 < 128; ++var20) {
-                var19 += var2.readUnsignedByte();
+                var19 += buffer.readUnsignedByte();
                 this.aShortArray2434[var20] = (short) (this.aShortArray2434[var20] + (var19 << 8));
             }
 
@@ -289,7 +289,7 @@ public final class Class3_Sub15 extends Linkable {
                         var20 = -1;
                     }
 
-                    var22 = var2.method741();
+                    var22 = buffer.method741();
                 }
 
                 this.aShortArray2434[var23] = (short) (this.aShortArray2434[var23] + Unsorted.bitwiseAnd(32768, -1 + var22 << 14));
@@ -305,7 +305,7 @@ public final class Class3_Sub15 extends Linkable {
             for (var24 = 0; var24 < 128; ++var24) {
                 if (this.anIntArray2423[var24] != 0) {
                     if (var20 == 0) {
-                        var23 = var2.buffer[var5++] + -1;
+                        var23 = buffer.buffer[var5++] + -1;
                         if (var4.length > var21) {
                             var20 = var4[var21++];
                         } else {
@@ -325,7 +325,7 @@ public final class Class3_Sub15 extends Linkable {
             for (int var25 = 0; var25 < 128; ++var25) {
                 if (this.anIntArray2423[var25] != 0) {
                     if (0 == var20) {
-                        var24 = var2.buffer[var8++] - -16 << 2;
+                        var24 = buffer.buffer[var8++] - -16 << 2;
                         if (var7.length > var21) {
                             var20 = var7[var21++];
                         } else {
@@ -373,7 +373,7 @@ public final class Class3_Sub15 extends Linkable {
                     }
 
                     if (this.anIntArray2423[var27] > 0) {
-                        var26 = var2.readUnsignedByte() + 1;
+                        var26 = buffer.readUnsignedByte() + 1;
                     }
                 }
 
@@ -381,7 +381,7 @@ public final class Class3_Sub15 extends Linkable {
                 this.aByteArray2430[var27] = (byte) var26;
             }
 
-            this.anInt2424 = var2.readUnsignedByte() + 1;
+            this.anInt2424 = buffer.readUnsignedByte() + 1;
 
             int var29;
             Class166 var28;
@@ -389,26 +389,26 @@ public final class Class3_Sub15 extends Linkable {
                 var28 = var38[var27];
                 if (var28.aByteArray2064 != null) {
                     for (var29 = 1; var29 < var28.aByteArray2064.length; var29 += 2) {
-                        var28.aByteArray2064[var29] = var2.readSignedByte();
+                        var28.aByteArray2064[var29] = buffer.readSignedByte();
                     }
                 }
 
                 if (var28.aByteArray2076 != null) {
                     for (var29 = 3; var29 < var28.aByteArray2076.length + -2; var29 += 2) {
-                        var28.aByteArray2076[var29] = var2.readSignedByte();
+                        var28.aByteArray2076[var29] = buffer.readSignedByte();
                     }
                 }
             }
 
             if (null != var40) {
                 for (var27 = 1; var40.length > var27; var27 += 2) {
-                    var40[var27] = var2.readSignedByte();
+                    var40[var27] = buffer.readSignedByte();
                 }
             }
 
             if (null != var39) {
                 for (var27 = 1; var27 < var39.length; var27 += 2) {
-                    var39[var27] = var2.readSignedByte();
+                    var39[var27] = buffer.readSignedByte();
                 }
             }
 
@@ -418,7 +418,7 @@ public final class Class3_Sub15 extends Linkable {
                     var19 = 0;
 
                     for (var29 = 2; var28.aByteArray2076.length > var29; var29 += 2) {
-                        var19 -= -1 + -var2.readUnsignedByte();
+                        var19 -= -1 + -buffer.readUnsignedByte();
                         var28.aByteArray2076[var29] = (byte) var19;
                     }
                 }
@@ -430,7 +430,7 @@ public final class Class3_Sub15 extends Linkable {
                     var19 = 0;
 
                     for (var29 = 2; var28.aByteArray2064.length > var29; var29 += 2) {
-                        var19 = var19 - -1 - -var2.readUnsignedByte();
+                        var19 = var19 - -1 - -buffer.readUnsignedByte();
                         var28.aByteArray2064[var29] = (byte) var19;
                     }
                 }
@@ -443,11 +443,11 @@ public final class Class3_Sub15 extends Linkable {
             int var44;
             byte var48;
             if (null != var40) {
-                var19 = var2.readUnsignedByte();
+                var19 = buffer.readUnsignedByte();
                 var40[0] = (byte) var19;
 
                 for (var27 = 2; var40.length > var27; var27 += 2) {
-                    var19 = 1 + (var19 - -var2.readUnsignedByte());
+                    var19 = 1 + (var19 - -buffer.readUnsignedByte());
                     var40[var27] = (byte) var19;
                 }
 
@@ -479,11 +479,11 @@ public final class Class3_Sub15 extends Linkable {
             }
 
             if (null != var39) {
-                var19 = var2.readUnsignedByte();
+                var19 = buffer.readUnsignedByte();
                 var39[0] = (byte) var19;
 
                 for (var27 = 2; var27 < var39.length; var27 += 2) {
-                    var19 = 1 + (var19 - -var2.readUnsignedByte());
+                    var19 = 1 + (var19 - -buffer.readUnsignedByte());
                     var39[var27] = (byte) var19;
                 }
 
@@ -543,39 +543,39 @@ public final class Class3_Sub15 extends Linkable {
             }
 
             for (var27 = 0; var12 > var27; ++var27) {
-                var38[var27].anInt2078 = var2.readUnsignedByte();
+                var38[var27].anInt2078 = buffer.readUnsignedByte();
             }
 
             for (var27 = 0; var27 < var12; ++var27) {
                 var28 = var38[var27];
                 if (null != var28.aByteArray2064) {
-                    var28.anInt2067 = var2.readUnsignedByte();
+                    var28.anInt2067 = buffer.readUnsignedByte();
                 }
 
                 if (null != var28.aByteArray2076) {
-                    var28.anInt2071 = var2.readUnsignedByte();
+                    var28.anInt2071 = buffer.readUnsignedByte();
                 }
 
                 if (var28.anInt2078 > 0) {
-                    var28.anInt2063 = var2.readUnsignedByte();
+                    var28.anInt2063 = buffer.readUnsignedByte();
                 }
             }
 
             for (var27 = 0; var12 > var27; ++var27) {
-                var38[var27].anInt2077 = var2.readUnsignedByte();
+                var38[var27].anInt2077 = buffer.readUnsignedByte();
             }
 
             for (var27 = 0; var12 > var27; ++var27) {
                 var28 = var38[var27];
                 if (var28.anInt2077 > 0) {
-                    var28.anInt2066 = var2.readUnsignedByte();
+                    var28.anInt2066 = buffer.readUnsignedByte();
                 }
             }
 
             for (var27 = 0; var27 < var12; ++var27) {
                 var28 = var38[var27];
                 if (var28.anInt2066 > 0) {
-                    var28.anInt2069 = var2.readUnsignedByte();
+                    var28.anInt2069 = buffer.readUnsignedByte();
                 }
             }
 

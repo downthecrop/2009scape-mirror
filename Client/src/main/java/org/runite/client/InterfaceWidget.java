@@ -153,13 +153,13 @@ final class InterfaceWidget extends Node {
       }
    }
 
-   static Class2 c(int var0) {
+   static MapSceneDefinition c(int var0) {
       try {
-         Class2 var2 = (Class2) TextureOperation25.aReferenceCache_3412.get(var0);
+         MapSceneDefinition var2 = (MapSceneDefinition) TextureOperation25.aReferenceCache_3412.get(var0);
          if(var2 == null) {
             byte[] var3 = Class107.aClass153_878.getFile(34, var0);
 
-            var2 = new Class2();
+            var2 = new MapSceneDefinition();
             if(var3 != null) {
                var2.decode(new DataBuffer(var3));
             }

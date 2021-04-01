@@ -43,7 +43,7 @@ abstract class Class129 {
                     int var11 = Toolkit.JAVA_TOOLKIT.getBuffer()[var5++ + var0];
                     int var10 = Class159.anIntArray1681[var4++];
                     if (var10 == 0) {
-                        Class84.aClass3_Sub28_Sub16_Sub2_1381.anIntArray4081[var6++] = var11;
+                        Class84.aSoftwareSprite_1381.anIntArray4081[var6++] = var11;
                     } else {
                         int var12 = 18 + var10;
                         if (var12 > 255) {
@@ -56,21 +56,21 @@ abstract class Class129 {
                         }
 
                         var10 = Class52.anIntArray861[var10];
-                        Class84.aClass3_Sub28_Sub16_Sub2_1381.anIntArray4081[var6++] = Unsorted.bitwiseAnd(var13 * Unsorted.bitwiseAnd(var11, 16711935) + Unsorted.bitwiseAnd(16711935, var10) * var12, -16711936) - -Unsorted.bitwiseAnd(Unsorted.bitwiseAnd(var10, 65280) * var12 - -(Unsorted.bitwiseAnd(65280, var11) * var13), 16711680) >> 8;
+                        Class84.aSoftwareSprite_1381.anIntArray4081[var6++] = Unsorted.bitwiseAnd(var13 * Unsorted.bitwiseAnd(var11, 16711935) + Unsorted.bitwiseAnd(16711935, var10) * var12, -16711936) - -Unsorted.bitwiseAnd(Unsorted.bitwiseAnd(var10, 65280) * var12 - -(Unsorted.bitwiseAnd(65280, var11) * var13), 16711680) >> 8;
                     }
                 }
 
                 for (var9 = 0; var9 < var8; ++var9) {
-                    Class84.aClass3_Sub28_Sub16_Sub2_1381.anIntArray4081[var6++] = Toolkit.JAVA_TOOLKIT.getBuffer()[var0 + var5++];
+                    Class84.aSoftwareSprite_1381.anIntArray4081[var6++] = Toolkit.JAVA_TOOLKIT.getBuffer()[var0 + var5++];
                 }
 
                 var5 += Toolkit.JAVA_TOOLKIT.width + -128;
             }
 
             if (HDToolKit.highDetail) {
-                Class22.method926(Class84.aClass3_Sub28_Sub16_Sub2_1381.anIntArray4081, var0, var2, Class84.aClass3_Sub28_Sub16_Sub2_1381.width, Class84.aClass3_Sub28_Sub16_Sub2_1381.height);
+                Class22.method926(Class84.aSoftwareSprite_1381.anIntArray4081, var0, var2, Class84.aSoftwareSprite_1381.width, Class84.aSoftwareSprite_1381.height);
             } else {
-                Class84.aClass3_Sub28_Sub16_Sub2_1381.method635(var0, var2);
+                Class84.aSoftwareSprite_1381.method635(var0, var2);
             }
 
         } catch (RuntimeException var14) {
@@ -121,7 +121,7 @@ abstract class Class129 {
                             int var24 = 255 & var1[var23][var19];
                             var25 = 255 & var8[var23][var19];
                             boolean var26 = false;
-                            Class168 var27;
+                            FloorOverlayDefinition var27;
                             int[] var29;
                             int[] var28;
                             if (0 == var24) {
@@ -129,7 +129,7 @@ abstract class Class129 {
                                     continue;
                                 }
 
-                                var27 = Class168.method350(var25 + -1);
+                                var27 = FloorOverlayDefinition.getFile(var25 + -1);
                                 if (var27.anInt2103 == -1) {
                                     continue;
                                 }
@@ -141,7 +141,7 @@ abstract class Class129 {
                                     continue;
                                 }
                             } else if (var25 != 0) {
-                                var27 = Class168.method350(var25 - 1);
+                                var27 = FloorOverlayDefinition.getFile(var25 - 1);
                                 byte var42;
                                 if (var27.anInt2103 == -1) {
                                     var42 = var7[var23][var19];
@@ -259,13 +259,13 @@ abstract class Class129 {
                             var25 = 255 & var1[var23][var19];
                             byte var38 = var2[var23][var19];
                             boolean var39 = false;
-                            Class168 var46;
+                            FloorOverlayDefinition var46;
                             if (var25 == 0) {
                                 if (0 == var43) {
                                     continue;
                                 }
 
-                                var46 = Class168.method350(var43 - 1);
+                                var46 = FloorOverlayDefinition.getFile(var43 - 1);
                                 if (-1 == var46.anInt2103) {
                                     continue;
                                 }
@@ -275,7 +275,7 @@ abstract class Class129 {
                                     continue;
                                 }
                             } else if (var43 != 0) {
-                                var46 = Class168.method350(-1 + var43);
+                                var46 = FloorOverlayDefinition.getFile(-1 + var43);
                                 if (-1 == var46.anInt2103) {
                                     TextureOperation18.method284(var0, var9, var23, var6, var19, Class25.anIntArrayArray499[var7[var23][var19]], var14, (byte) 116, var13, var11, var2[var23][var19]);
                                     continue;

@@ -89,7 +89,7 @@ final class Class132 {
             }
 
             if (Unsorted.anInt3660 == 1) {
-                if (TextureOperation8.anInt3460 == NPCDefinition.anInt1297 && Class38_Sub1.anInt2612 == Class168.anInt2099) {
+                if (TextureOperation8.anInt3460 == NPCDefinition.anInt1297 && Class38_Sub1.anInt2612 == Unsorted.anInt2099) {
                     Class21.anInt3537 = Unsorted.menuOptionCount * 15 - -(!Unsorted.aBoolean1951 ? 22 : 26);
                     Unsorted.anInt3660 = 0;
                     Class21.anInt3395 = var4;
@@ -105,7 +105,7 @@ final class Class132 {
                 Class21.anInt3537 = (Unsorted.aBoolean1951 ? 26 : 22) + Unsorted.menuOptionCount * 15;
                 Class38_Sub1.aBoolean2615 = true;
             } else {
-                Class168.anInt2099 = Class38_Sub1.anInt2614;
+                Unsorted.anInt2099 = Class38_Sub1.anInt2614;
                 TextureOperation8.anInt3460 = Class163_Sub1.anInt2993;
                 Unsorted.anInt3660 = 1;
             }

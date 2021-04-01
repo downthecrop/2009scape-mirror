@@ -18,7 +18,7 @@ public final class AudioThread implements Runnable {
 
     static boolean method888(int var0, ObjectDefinition var1, int var3, int var5, int var6) {
         try {
-            Class2 var7 = InterfaceWidget.c(var1.anInt1516);
+            MapSceneDefinition var7 = InterfaceWidget.c(var1.anInt1516);
             if (var7.sprite == -1) {
                 return false;
             } else {
@@ -80,7 +80,7 @@ public final class AudioThread implements Runnable {
                 if (HDToolKit.highDetail) {
                     var1[var2] = new HDSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], Class140_Sub7.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var5);
                 } else {
-                    var1[var2] = new Class3_Sub28_Sub16_Sub2(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], Class140_Sub7.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var5);
+                    var1[var2] = new SoftwareSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], Class140_Sub7.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var5);
                 }
             }
 

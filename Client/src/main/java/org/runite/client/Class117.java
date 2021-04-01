@@ -95,7 +95,7 @@ public final class Class117 {
         }
     }
 
-    static Class3_Sub28_Sub16_Sub2 method1722(int var0) {
+    static SoftwareSprite method1722(int var0) {
         try {
             int var1 = Class140_Sub7.anIntArray2931[0] * Unsorted.anIntArray3076[0];
             byte[] var2 = Class163_Sub1.aByteArrayArray2987[0];
@@ -105,7 +105,7 @@ public final class Class117 {
                 var3[var4] = TextureOperation38.spritePalette[Unsorted.bitwiseAnd(var2[var4], 255)];
             }
 
-            Class3_Sub28_Sub16_Sub2 var6 = new Class3_Sub28_Sub16_Sub2(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], var3);
+            SoftwareSprite var6 = new SoftwareSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], var3);
             Class39.method1035((byte) 122);
             return var0 >= -51 ? null : var6;
         } catch (RuntimeException var5) {
