@@ -94,7 +94,7 @@ public enum CookableItems {
     public static HashMap<Integer,CookableItems>cookingMap = new HashMap<>();
     public static HashMap<Integer, CookableItems>intentionalBurnMap = new HashMap<>();
     public int raw,cooked,level,burnLevel,burnt;
-    double experience;
+    public double experience;
     double low,high;
     CookableItems(int cooked, int raw, int burnt, int level, double experience, int burnLevel, double low, double high){
         this.raw = raw;
