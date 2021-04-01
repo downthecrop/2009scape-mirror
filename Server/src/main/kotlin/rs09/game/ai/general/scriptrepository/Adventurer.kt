@@ -344,7 +344,7 @@ class Adventurer(val style: CombatStyle): Script() {
                 "Know what else is lame? Not being able to play 2009scape right now",
                 "Can you even grind on osrs",
                 "i botted to 88 fishing",
-                "Do not forget to vote in running poles!",
+                "Do not forget to vote in running polls!",
                 "Always check announcments",
                 "we thrivin",
                 "ship ${real.username}",
@@ -584,6 +584,35 @@ class Adventurer(val style: CombatStyle): Script() {
                 "Happy Valentines day ${real.username}!!!"
         )
 
+        val Easter = listOf(
+                "Happy Easter!!!",
+                "Happy Easter ${real.username}!!!",
+                "Bunny time",
+                "Wanna go look for easter eggs ${real.username}???",
+                "Find any easter eggs ${real.username}?",
+                "${real.username} is the easter bunny!",
+                "Kermit is dating the easter bunny!",
+                "Easter is one of my favorite holidays",
+                "I heard there are easter eggs hidden around?",
+                "Easter is the only time you should put all of your eggs in one basket",
+                "I said hip hop do not stop",
+                "Jump jump jump around",
+                "${real.username} how is your easter going?",
+                "I love easter!",
+                "${real.username} stole my easter eggs!",
+                "Karma karma karma karma karma chameleon",
+                "${real.username}!! ${real.username}!! what are you doing for easter??",
+                "The hare was a popular motif in medieval church art",
+                "I heard the easter bunny is hiding somewhere!",
+                "I wonder where i can find more eggs",
+                "${real.username} how many eggs did you find?",
+                "${real.username} lets go easter egg hunting!",
+                "${real.username} like orange chocolate eggs",
+                "${real.username} and woah know the easter bunny",
+                "${real.username} did you know ceikry swallows eggs whole",
+                "Hint for anyone who sees this you must dig above eagles peak"
+        )
+
         when {
 
             //Celebrates lead up to Christmas!
@@ -681,6 +710,19 @@ class Adventurer(val style: CombatStyle): Script() {
                          bot.updateMasks.register(ChatFlag(ChatMessage(bot, chat, 0, 0)))
                     }
             }
+            //Celebrates Valentines day!!!
+            formatted.contentEquals("2021-04-04") ->{
+                    if (Random.nextBoolean()) {
+                          val chat = Easter.random()
+                          bot.sendChat(chat)
+                          bot.updateMasks.register(ChatFlag(ChatMessage(bot, chat, 0, 0)))
+                    }else{
+                          val chat = dialogue.random()
+                          bot.sendChat(chat)
+                          bot.updateMasks.register(ChatFlag(ChatMessage(bot, chat, 0, 0)))
+                    }
+            }
+
 
                 else -> {
                 val chat = dialogue.random()
