@@ -243,6 +243,10 @@ class ModernListeners : SpellListener("modern"){
     }
 
     private fun sendTeleport(player: Player, xp: Double, location: Location){
+        if(player.locks.isTeleportLocked){
+            player.sendMessage("A magical force prevents you from teleporting.")
+            return
+        }
         player.teleporter.send(location,TeleportManager.TeleportType.NORMAL)
         removeRunes(player)
         addXP(player,xp)
@@ -250,6 +254,10 @@ class ModernListeners : SpellListener("modern"){
     }
 
     private fun attemptHouseTeleport(player: Player){
+        if(player.locks.isTeleportLocked){
+            player.sendMessage("A magical force prevents you from teleporting.")
+            return
+        }
         val loc = player.houseManager.location.exitLocation
         if(loc == null){
             player.sendMessage("You do not have a house whose portal you can teleport to.")

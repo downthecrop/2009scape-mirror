@@ -23,8 +23,10 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         } else if(patch.type == PatchType.HOPS){
             harvestAmt = RandomFunction.random(3,35)
         } else {
-            harvestAmt = RandomFunction.random(1,4)
+            harvestAmt = RandomFunction.random(3,5)
         }
+        if(compost == CompostType.NORMAL) harvestAmt += 1
+        if(compost == CompostType.SUPER) harvestAmt += 2
     }
 
     fun isWeedy(): Boolean {

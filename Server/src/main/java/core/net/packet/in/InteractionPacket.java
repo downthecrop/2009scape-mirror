@@ -22,6 +22,7 @@ import core.net.packet.context.PlayerContext;
 import core.net.packet.out.ClearMinimapFlag;
 import rs09.ServerConstants;
 import rs09.game.ai.AIPlayer;
+import rs09.game.interaction.InteractionListener;
 import rs09.game.interaction.InteractionListeners;
 import rs09.game.world.repository.Repository;
 
@@ -337,6 +338,9 @@ public final class InteractionPacket implements IncomingPacket {
 		}
 		if(PluginInteractionManager.handle(player,item,option)){
 			player.debug("Handled by quest interaction manager.");
+			return;
+		}
+		if(InteractionListeners.run(item.getId(), InteractionListener.Companion.getITEM(),option.getName(),player,item)){
 			return;
 		}
 		item.getInteraction().handle(player, option);

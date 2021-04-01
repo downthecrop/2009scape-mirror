@@ -7154,6 +7154,18 @@
         "weight": "100.0",
         "id": "0",
         "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "3.0",
+        "id": "6666",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "3.0",
+        "id": "6665",
+        "maxAmount": "1"
       }
     ]
   },

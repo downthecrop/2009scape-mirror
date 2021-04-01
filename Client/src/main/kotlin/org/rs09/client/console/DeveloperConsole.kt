@@ -9,7 +9,6 @@ import org.runite.client.*
 import java.awt.event.KeyEvent
 import java.text.SimpleDateFormat
 import java.util.*
-import org.runite.client.TextureOperation12
 import java.util.LinkedList
 
 
@@ -265,7 +264,7 @@ object DeveloperConsole {
                                         " "
                                     )
                                 )
-                            )
+                            ).also { println("Playing song ID: $it - ${clientCommand.joinToString("")}") }
                         )
                     } else {
                         args = clientCommand[1].toInt()

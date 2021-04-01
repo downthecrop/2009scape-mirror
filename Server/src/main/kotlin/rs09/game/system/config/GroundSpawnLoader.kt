@@ -1,17 +1,17 @@
 package rs09.game.system.config
 
-import rs09.ServerConstants
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
-import rs09.game.system.SystemLogger
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
 import core.game.world.map.Location
-import rs09.game.world.repository.Repository
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
+import rs09.ServerConstants
+import rs09.game.system.SystemLogger
+import rs09.game.world.GameWorld
+import rs09.game.world.repository.Repository
 import java.io.FileReader
 import java.nio.ByteBuffer
 
@@ -69,8 +69,8 @@ class GroundSpawnLoader {
         /**
          * Method used to initialize this spawn.
          */
-        fun init() {
-            GroundItemManager.create(this)
+        fun init(): GroundItem {
+            return GroundItemManager.create(this)
         }
 
         override fun isActive(): Boolean {

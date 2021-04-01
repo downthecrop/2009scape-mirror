@@ -97,11 +97,11 @@ class KingRoaldAFUDialogue(val questStage: Int) : DialogueFile() {
                 START_DIALOGUE -> player("I'm happy to report that the beacon network seems to", "be working as expected.").also { stage++ }
                 1 -> npc("Excellent! I'm delighted to hear it.").also { stage++ }
                 2 -> player("So, about that reward you promised?").also { stage++ }
-                4 -> npc("What happened to the days when adventurers felt", "rewarded in full by the knowledge of a job well done?").also { stage++ }
-                5 -> player("Well before my time, I'm afraid.")
-                6 -> npc("Hmph. Well, I suppose a king must stick to his word.", "Mind you, let me stress how grateful we are - and how", "grateful we'd be if you could continue helping us test", "the beacons.").also { stage++ }
-                7 -> npc("There is much more to be done and this is but a", "pittance compared to what I'm willing to offer for", "further assistance!").also { stage = END_DIALOGUE }
-                END_DIALOGUE -> {
+                3 -> npc("What happened to the days when adventurers felt", "rewarded in full by the knowledge of a job well done?").also { stage++ }
+                4 -> player("Well before my time, I'm afraid.").also { stage++ }
+                5 -> npc("Hmph. Well, I suppose a king must stick to his word.", "Mind you, let me stress how grateful we are - and how", "grateful we'd be if you could continue helping us test", "the beacons.").also { stage++ }
+                6 -> npc("There is much more to be done and this is but a", "pittance compared to what I'm willing to offer for", "further assistance!").also { stage++ }
+                7 -> {
                     end()
                     player!!.questRepository.getQuest("All Fired Up").finish(player)
                 }

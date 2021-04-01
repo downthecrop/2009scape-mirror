@@ -1,6 +1,7 @@
 package rs09.game.system.command.sets
 
 import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.ObjectDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
@@ -15,6 +16,8 @@ import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
 import core.plugin.Initializable
 import core.tools.StringUtils
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import org.rs09.consts.Components
 import rs09.ServerConstants
 import rs09.game.content.activity.fishingtrawler.TrawlerLoot
@@ -464,6 +467,28 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
 
         define("resetmistag",Command.Privilege.STANDARD){player,_ ->
             player.removeAttribute("mistag-greeted")
+        }
+
+        define("getnpcparent"){player,args ->
+            if(args.size < 2){
+                reject(player,"Usage: ::getnpcparent npcid")
+            }
+
+            val npcid = args[1].toIntOrNull() ?: reject(player,"Invalid NPC ID.")
+
+            GlobalScope.launch {
+                for(def in NPCDefinition.getDefinitions().values){
+                    def ?: continue
+                    def.childNPCIds ?: continue
+                    for(id in def.childNPCIds){
+                        if(id == npcid){
+                            notify(player,"Parent NPC: ${def.id}")
+                            return@launch
+                        }
+                    }
+                }
+                notify(player,"No parent NPC found.")
+            }
         }
     }
 }

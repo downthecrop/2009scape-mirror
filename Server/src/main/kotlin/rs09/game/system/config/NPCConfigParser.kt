@@ -12,7 +12,8 @@ import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import java.io.FileReader
 
-class NPCConfigParser {
+class
+NPCConfigParser {
     companion object{
         const val WEAKNESS = "weakness"
 

@@ -123,6 +123,9 @@ object UseWithPatchHandler{
                         override fun pulse(): Boolean {
                             if(player.inventory.remove(event.usedItem,false)){
                                 p.compost = if(usedItem.id == Items.SUPERCOMPOST_6034) CompostType.SUPER else CompostType.NORMAL
+                                if(p.plantable != null){
+                                    p.harvestAmt += if(p.compost == CompostType.NORMAL) 1 else if(p.compost == CompostType.SUPER) 2 else 0
+                                }
                                 player.inventory.add(Item(Items.BUCKET_1925))
                             }
                             return true

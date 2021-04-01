@@ -58,10 +58,12 @@ abstract class SpellListener(val bookName: String) : Listener {
         }
     }
 
-    fun removeRunes(player: Player){
+    fun removeRunes(player: Player,removeAttr: Boolean = true){
         player.inventory.remove(*player.getAttribute("spell:runes",ArrayList<Item>()).toTypedArray())
-        player.removeAttribute("spell:runes")
-        player.removeAttribute("tablet-spell")
+        if(removeAttr) {
+            player.removeAttribute("spell:runes")
+            player.removeAttribute("tablet-spell")
+        }
     }
 
     fun addXP(player: Player,amount:Double){
