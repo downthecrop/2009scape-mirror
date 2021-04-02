@@ -483,7 +483,15 @@ class ScriptAPI(private val bot: Player) {
                     }
                     val canSell = OfferManager.addBotOffer(actualId, itemAmt)
                     if (canSell && saleIsBigNews(actualId, itemAmt)) {
-                        Repository.sendNews("2009Scape just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
+                        when (actualId){
+                            1511 -> continue
+                            1513 -> continue
+                            1515 -> continue
+                            1517 -> continue
+                            1519 -> continue
+                            1521 -> continue
+                            else -> Repository.sendNews("2009Scape just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
+                        }
                     }
                     bot.bank.remove(item).also { SystemLogger.logAI("$item has been listed on the GE.") }
                     bot.bank.refresh()
