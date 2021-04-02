@@ -809,7 +809,6 @@ class Adventurer(val style: CombatStyle): Script() {
     }
 
     init {
-
         skills[Skills.AGILITY] = 99
         inventory.add(Item(1359))//Rune Axe
         skills[Skills.WOODCUTTING] = 95
