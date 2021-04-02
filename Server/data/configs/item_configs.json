@@ -44633,7 +44633,7 @@
     "id": "4564"
   },
   {
-    "bankable": "false",
+    "bankable": "true",
     "turn90cw_anim": "821",
     "examine": "Hand them out to spread the Easter happiness.",
     "walk_anim": "1836",
