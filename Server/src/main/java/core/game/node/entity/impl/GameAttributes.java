@@ -145,6 +145,7 @@ public final class GameAttributes {
 	 */
 	@SuppressWarnings("unchecked")
 	public <T> T getAttribute(String key) {
+		key = key.replace("/save:","");
 		if (!attributes.containsKey(key)) {
 			return null;
 		}
