@@ -2023,5 +2023,32 @@
     "id": "228",
     "title": "Fernahei's Fishing Hut",
     "stock": "{307,5}-{309,5}-{313,200}-{314,500}-{335,0}-{349,0}-{331,0}"
+  },
+  {
+    "npcs": "2357",
+    "high_alch": "0",
+    "currency": "995",
+    "general_store": "false",
+    "id": "229",
+    "title": "Lletya Food Store",
+    "stock": "{2309,10}-{379,15}-{1993,3}-{1985,10}-{1891,5}"
+  },
+  {
+    "npcs": "2356",
+    "high_alch": "0",
+    "currency": "995",
+    "general_store": "false",
+    "id": "230",
+    "title": "Lletya Archery Shop",
+    "stock": "{884,2000}-{886,500}-{888,500}-{890,450}-{892,400}-{877,1500}-{843,5}-{845,5}-{837,5}-{849,5}-{847,5}"
+  },
+  {
+    "npcs": "2352",
+    "high_alch": "0",
+    "currency": "995",
+    "general_store": "true",
+    "id": "231",
+    "title": "Lletya General Store",
+    "stock": ""
   }
 ]
