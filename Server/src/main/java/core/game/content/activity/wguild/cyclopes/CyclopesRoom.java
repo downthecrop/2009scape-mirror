@@ -188,8 +188,13 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 	 * @param player The player.
 	 */
 	private static void enter(Player player) {
-		if (!PLAYERS.contains(player)) {
+		Item tokens = new Item(8851, 10);
+		if (!PLAYERS.contains(player) && player.getInventory().contains(8851, 10)) {
+			player.getInventory().remove(tokens);
+			player.getPacketDispatch().sendMessage("10 of your tokens crumble away as you enter the room.");
 			PLAYERS.add(player);
+		}else{
+			player.getPacketDispatch().sendMessage("You do not have the tokens to enter.");
 		}
 		if (!PULSE.isRunning()) {
 			PULSE.restart();
