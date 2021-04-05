@@ -56,6 +56,11 @@ class Adventurer(val style: CombatStyle): Script() {
     val lumbridge: Location = Location.create(3222, 3219, 0)
     var city: Location = lumbridge
 
+        val common_stuck_locations = arrayListOf<ZoneBorders>(
+                ZoneBorders(2861,3425,2869,3440),
+                ZoneBorders(2937,3356,2936,3353)
+        )
+
     fun dialogue() {
         val player = RegionManager.getLocalPlayers(bot).random()
         val real = if (!player.isArtificial) player else player
@@ -779,9 +784,7 @@ class Adventurer(val style: CombatStyle): Script() {
     val gemrocks = Location.create(2825,2997,0)
     val chaosnpc = Location.create(2612,9484,0)
     val chaosnpc2 = Location.create(2580,9501,0)
-
-    var PoiList = listOf(karamja,alkharid,feldiphills,isafdar,
-            eaglespeek,canafis,treegnome,teak1,teakfarm)
+    val taverly = Location.create(2909, 3436, 0)
 
     var handler1: CombatSwingHandler? = null
 
@@ -835,7 +838,7 @@ class Adventurer(val style: CombatStyle): Script() {
                 teak1,teakfarm,keldagrimout,
                 miningguild,coal,crawlinghands,
                 magics,gemrocks,chaosnpc,chaosnpc,
-                chaosnpc2).random()
+                chaosnpc2,taverly).random()
     }
 
         //TODO: Optimise and adjust how bots handle picking up ground items further.
@@ -901,6 +904,16 @@ class Adventurer(val style: CombatStyle): Script() {
             ticks = 0
             refresh()
             return
+        }
+
+        // zoneborder checker
+        if(ticks % 30 == 0){
+                for(border in common_stuck_locations){
+                        if(border.insideBorder(bot)){
+                                refresh()
+                                ticks = 0
+                        }
+                }
         }
 
         when(state){
