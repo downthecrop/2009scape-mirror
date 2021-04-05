@@ -872,10 +872,10 @@
         "maxAmount": "18"
       },
       {
-        "minAmount": "125",
+        "minAmount": "1",
         "weight": "25.0",
         "id": "882",
-        "maxAmount": "125"
+        "maxAmount": "10"
       },
       {
         "minAmount": "1",
