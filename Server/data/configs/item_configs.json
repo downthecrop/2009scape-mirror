@@ -82793,6 +82793,7 @@
   {
     "shop_price": "30000",
     "turn90cw_anim": "1207",
+    "requirements": "{6,65}",
     "examine": "A Moonclan staff.",
     "walk_anim": "1205",
     "durability": null,
@@ -82872,6 +82873,7 @@
   },
   {
     "turn90cw_anim": "1207",
+    "requirements": "{6,65}",
     "examine": "A staff enchanted by air.",
     "walk_anim": "1205",
     "durability": null,
@@ -82897,6 +82899,7 @@
   },
   {
     "turn90cw_anim": "1207",
+    "requirements": "{6,65}",
     "examine": "A staff enchanted by air and fire.",
     "walk_anim": "1205",
     "durability": null,
@@ -82922,6 +82925,7 @@
   },
   {
     "turn90cw_anim": "1207",
+    "requirements": "{6,65}",
     "examine": "A staff enchanted by air, fire and water.",
     "walk_anim": "1205",
     "durability": null,
@@ -82962,6 +82966,7 @@
   {
     "remove_head": "true",
     "shop_price": "15000",
+    "requirements": "{1,40}-{6,65}",
     "examine": "A mystical helmet.",
     "durability": null,
     "low_alchemy": "40",
@@ -82980,6 +82985,7 @@
   },
   {
     "shop_price": "120000",
+    "requirements": "{1,40}-{6,65}",
     "examine": "Provides good protection.",
     "durability": null,
     "low_alchemy": "40",
@@ -82998,6 +83004,7 @@
   },
   {
     "shop_price": "80000",
+    "requirements": "{1,40}-{6,65}",
     "examine": "These should protect my legs.",
     "durability": null,
     "low_alchemy": "40",
@@ -83015,6 +83022,7 @@
   },
   {
     "shop_price": "10000",
+    "requirements": "{1,40}-{6,65}",
     "examine": "These should keep my hands safe.",
     "durability": null,
     "low_alchemy": "40",
@@ -83031,6 +83039,7 @@
   },
   {
     "shop_price": "10000",
+    "requirements": "{1,40}-{6,65}",
     "examine": "Mystical foot protection.",
     "durability": null,
     "low_alchemy": "40",
@@ -83047,6 +83056,7 @@
   },
   {
     "shop_price": "12000",
+    "requirements": "{1,40}-{6,65}",
     "examine": "Oooo pretty!",
     "durability": null,
     "low_alchemy": "1",
@@ -83064,6 +83074,7 @@
   {
     "shop_price": "4000",
     "examine": "Awesome.",
+    "requirements": "{1,40}-{6,65}",
     "durability": null,
     "low_alchemy": "12",
     "high_alchemy": "18",
@@ -83091,6 +83102,7 @@
   {
     "shop_price": "2000",
     "examine": "A mysterious ring that can fill the wearer with magical power.",
+    "requirements": "{1,40}-{6,65}",
     "durability": null,
     "low_alchemy": "40",
     "high_alchemy": "60",
