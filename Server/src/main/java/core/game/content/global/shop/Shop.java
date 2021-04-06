@@ -605,13 +605,13 @@ public class Shop {
             item = new Item(item.getNoteChange(), item.getAmount());
         }
         int amount = getContainer(1).getAmount(item);
-        if (getCurrency() == TOKKUL) {
+        /*if (getCurrency() == TOKKUL) {
             for (Item i : items) {
                 if (i.getId() == item.getId()) {
                     amount = i.getAmount();
                 }
             }
-        }
+        }*/
         if (amount < 1) {
             amount = getContainer(0).getAmount(item);
         }
@@ -621,6 +621,7 @@ public class Shop {
             if (tokkul > 0) {
                 value = tokkul /= 10;
             }
+            value = value * item.getAmount();
         }
         return value;
     }
