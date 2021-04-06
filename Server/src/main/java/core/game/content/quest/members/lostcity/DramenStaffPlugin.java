@@ -3,6 +3,7 @@ package core.game.content.quest.members.lostcity;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
 
@@ -38,9 +39,13 @@ public final class DramenStaffPlugin extends UseWithHandler {
 	@Override
 	public boolean handle(NodeUsageEvent event) {
 		final Player player = event.getPlayer();
-		if (player.getInventory().remove(DRAMEN_BRANCH)) {
+		if (player.getInventory().containsItem(DRAMEN_BRANCH) && player.getSkills().hasLevel(Skills.CRAFTING,31)) {
+			player.getInventory().remove(DRAMEN_BRANCH);
 			player.getInventory().add(DRAMEN_STAFF);
-			player.getPacketDispatch().sendMessage("You carve the branch into a staff.");
+			player.getDialogueInterpreter().sendDialogue("You carve the branch into a staff.");
+		}else{
+			player.getDialogueInterpreter().sendDialogue("You need a crafting level of 31 to do this.");
+			return false;
 		}
 		player.lock(1);
 		return true;
