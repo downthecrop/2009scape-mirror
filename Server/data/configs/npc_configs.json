@@ -12335,13 +12335,13 @@
     "defence_animation": "425",
     "death_animation": "836",
     "name": "Tyras guard",
-    "defence_level": "1",
+    "defence_level": "110",
     "safespot": null,
-    "lifepoints": "112",
-    "strength_level": "1",
+    "lifepoints": "110",
+    "strength_level": "105",
     "id": "1203",
-    "range_level": "1",
-    "attack_level": "1"
+    "range_level": "50",
+    "attack_level": "95"
   },
   {
     "examine": "One of King Tyras's men.",
