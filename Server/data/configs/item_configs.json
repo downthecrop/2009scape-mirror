@@ -41004,7 +41004,7 @@
     "id": "4209"
   },
   {
-    "requirements": "{16,70}-{4,50}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "ge_buy_limit": "10",
     "examine": "A nice sturdy magical bow.",
@@ -41034,7 +41034,7 @@
     "id": "4213"
   },
   {
-    "requirements": "{16,50}-{4,70}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41054,7 +41054,7 @@
     "bonuses": "0,0,0,0,100,0,0,0,0,0,0,0,0,0,70"
   },
   {
-    "requirements": "{16,50}-{4,70}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41074,7 +41074,7 @@
     "bonuses": "0,0,0,0,96,0,0,0,0,0,0,0,0,0,68"
   },
   {
-    "requirements": "{16,50}-{4,70}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41094,7 +41094,7 @@
     "bonuses": "0,0,0,0,92,0,0,0,0,0,0,0,0,0,66"
   },
   {
-    "requirements": "{16,70}-{4,50}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41114,7 +41114,7 @@
     "bonuses": "0,0,0,0,88,0,0,0,0,0,0,0,0,0,64"
   },
   {
-    "requirements": "{16,70}-{4,50}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41134,7 +41134,7 @@
     "bonuses": "0,0,0,0,84,0,0,0,0,0,0,0,0,0,62"
   },
   {
-    "requirements": "{16,70}-{4,50}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41154,7 +41154,7 @@
     "bonuses": "0,0,0,0,80,0,0,0,0,0,0,0,0,0,60"
   },
   {
-    "requirements": "{16,70}-{4,50}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41174,7 +41174,7 @@
     "bonuses": "0,0,0,0,76,0,0,0,0,0,0,0,0,0,58"
   },
   {
-    "requirements": "{16,70}-{4,50}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41194,7 +41194,7 @@
     "bonuses": "0,0,0,0,72,0,0,0,0,0,0,0,0,0,56"
   },
   {
-    "requirements": "{16,50}-{4,70}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41214,7 +41214,7 @@
     "bonuses": "0,0,0,0,68,0,0,0,0,0,0,0,0,0,54"
   },
   {
-    "requirements": "{16,50}-{4,70}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41234,7 +41234,7 @@
     "bonuses": "0,0,0,0,64,0,0,0,0,0,0,0,0,0,52"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "ge_buy_limit": "10",
     "examine": "A nice sturdy crystal shield.",
@@ -41249,7 +41249,7 @@
     "bonuses": "0,0,0,-10,-10,51,54,53,0,80,70,0,0,0,0"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41263,7 +41263,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41277,7 +41277,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41291,7 +41291,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41305,7 +41305,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41319,7 +41319,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41333,7 +41333,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41347,7 +41347,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41361,7 +41361,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41375,7 +41375,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
