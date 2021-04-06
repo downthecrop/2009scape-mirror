@@ -41004,7 +41004,7 @@
     "id": "4209"
   },
   {
-    "requirements": "{16,70}-{4,50}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "ge_buy_limit": "10",
     "examine": "A nice sturdy magical bow.",
@@ -41034,7 +41034,7 @@
     "id": "4213"
   },
   {
-    "requirements": "{16,50}-{4,70}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41054,7 +41054,7 @@
     "bonuses": "0,0,0,0,100,0,0,0,0,0,0,0,0,0,70"
   },
   {
-    "requirements": "{16,50}-{4,70}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41074,7 +41074,7 @@
     "bonuses": "0,0,0,0,96,0,0,0,0,0,0,0,0,0,68"
   },
   {
-    "requirements": "{16,50}-{4,70}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41094,7 +41094,7 @@
     "bonuses": "0,0,0,0,92,0,0,0,0,0,0,0,0,0,66"
   },
   {
-    "requirements": "{16,70}-{4,50}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41114,7 +41114,7 @@
     "bonuses": "0,0,0,0,88,0,0,0,0,0,0,0,0,0,64"
   },
   {
-    "requirements": "{16,70}-{4,50}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41134,7 +41134,7 @@
     "bonuses": "0,0,0,0,84,0,0,0,0,0,0,0,0,0,62"
   },
   {
-    "requirements": "{16,70}-{4,50}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41154,7 +41154,7 @@
     "bonuses": "0,0,0,0,80,0,0,0,0,0,0,0,0,0,60"
   },
   {
-    "requirements": "{16,70}-{4,50}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41174,7 +41174,7 @@
     "bonuses": "0,0,0,0,76,0,0,0,0,0,0,0,0,0,58"
   },
   {
-    "requirements": "{16,70}-{4,50}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41194,7 +41194,7 @@
     "bonuses": "0,0,0,0,72,0,0,0,0,0,0,0,0,0,56"
   },
   {
-    "requirements": "{16,50}-{4,70}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41214,7 +41214,7 @@
     "bonuses": "0,0,0,0,68,0,0,0,0,0,0,0,0,0,54"
   },
   {
-    "requirements": "{16,50}-{4,70}",
+    "requirements": "{4,70}-{16,50}",
     "shop_price": "900000",
     "examine": "A nice sturdy magical bow.",
     "durability": null,
@@ -41234,7 +41234,7 @@
     "bonuses": "0,0,0,0,64,0,0,0,0,0,0,0,0,0,52"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "ge_buy_limit": "10",
     "examine": "A nice sturdy crystal shield.",
@@ -41249,7 +41249,7 @@
     "bonuses": "0,0,0,-10,-10,51,54,53,0,80,70,0,0,0,0"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41263,7 +41263,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41277,7 +41277,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41291,7 +41291,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41305,7 +41305,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41319,7 +41319,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41333,7 +41333,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41347,7 +41347,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41361,7 +41361,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -41375,7 +41375,7 @@
     "equipment_slot": "5"
   },
   {
-    "requirements": "{1,50}-{16,70}",
+    "requirements": "{1,70}-{16,50}",
     "shop_price": "750000",
     "examine": "A nice sturdy crystal shield.",
     "grand_exchange_price": "749305",
@@ -128953,6 +128953,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -128971,6 +128972,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -128986,6 +128988,7 @@
   {
     "shop_price": "300000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129004,6 +129007,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129021,6 +129025,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129036,6 +129041,7 @@
   {
     "shop_price": "300000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129054,6 +129060,7 @@
     "remove_head": "true",
     "shop_price": "250000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
@@ -129071,6 +129078,7 @@
   {
     "shop_price": "250000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
@@ -129087,6 +129095,7 @@
     "remove_head": "true",
     "shop_price": "150000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
@@ -129104,6 +129113,7 @@
   {
     "turn90cw_anim": "1207",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{6,78}",
     "walk_anim": "1205",
     "rare_item": "true",
     "low_alchemy": "120000",
@@ -129134,6 +129144,7 @@
   {
     "shop_price": "300000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{6,78}",
     "durability": null,
     "low_alchemy": "120000",
     "high_alchemy": "180000",
@@ -129149,6 +129160,7 @@
   {
     "turn90cw_anim": "1207",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{6,78}",
     "walk_anim": "1205",
     "rare_item": "true",
     "low_alchemy": "120000",
@@ -129180,6 +129192,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129198,6 +129211,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129213,6 +129227,7 @@
   {
     "shop_price": "300000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129231,6 +129246,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129248,6 +129264,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129263,6 +129280,7 @@
   {
     "shop_price": "300000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129281,6 +129299,7 @@
     "remove_head": "true",
     "shop_price": "250000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
@@ -129298,6 +129317,7 @@
   {
     "shop_price": "250000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
@@ -129314,6 +129334,7 @@
     "remove_head": "true",
     "shop_price": "150000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
@@ -129331,6 +129352,7 @@
   {
     "shop_price": "4000",
     "examine": "A vicious javelin.",
+    "requirements": "{4,78}",
     "has_special": "true",
     "durability": null,
     "low_alchemy": "1600",
@@ -129346,11 +129368,12 @@
     "name": "Morrigan's javelin",
     "archery_ticket_price": "0",
     "id": "13879",
-    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,145,0,0"
+    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "10000",
     "examine": "A vicious javelin.",
+    "requirements": "{4,78}",
     "has_special": "true",
     "durability": null,
     "low_alchemy": "1600",
@@ -129366,11 +129389,12 @@
     "name": "Morrigan's javelin(p)",
     "archery_ticket_price": "0",
     "id": "13880",
-    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,145,0,0"
+    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "10000",
     "examine": "A vicious javelin.",
+    "requirements": "{4,78}",
     "has_special": "true",
     "durability": null,
     "low_alchemy": "1600",
@@ -129386,11 +129410,12 @@
     "name": "Morrigan's javelin(p+)",
     "archery_ticket_price": "0",
     "id": "13881",
-    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,145,0,0"
+    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "10000",
     "examine": "A vicious javelin.",
+    "requirements": "{4,78}",
     "has_special": "true",
     "durability": null,
     "low_alchemy": "1600",
@@ -129406,11 +129431,12 @@
     "name": "Morrigan's javelin(p++)",
     "archery_ticket_price": "0",
     "id": "13882",
-    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,145,0,0"
+    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "4000",
     "examine": "A vicious throwing axe.",
+    "requirements": "{4,78}",
     "has_special": "true",
     "durability": null,
     "low_alchemy": "1600",
@@ -129425,11 +129451,12 @@
     "name": "Morrigan's throwing axe",
     "archery_ticket_price": "0",
     "id": "13883",
-    "bonuses": "0,0,0,0,93,0,0,0,0,0,0,0,117,0,0"
+    "bonuses": "0,0,0,0,93,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129448,6 +129475,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129463,6 +129491,7 @@
   {
     "shop_price": "300000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129481,6 +129510,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129499,6 +129529,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129514,6 +129545,7 @@
   {
     "shop_price": "300000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129532,6 +129564,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129549,6 +129582,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129564,6 +129598,7 @@
   {
     "shop_price": "300000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129581,6 +129616,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129598,6 +129634,7 @@
   {
     "shop_price": "500000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129613,6 +129650,7 @@
   {
     "shop_price": "300000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
@@ -129631,6 +129669,7 @@
     "remove_head": "true",
     "shop_price": "250000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
@@ -129648,6 +129687,7 @@
   {
     "shop_price": "250000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
@@ -129664,6 +129704,7 @@
     "remove_head": "true",
     "shop_price": "150000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
@@ -129681,6 +129722,7 @@
   {
     "turn90cw_anim": "1207",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{0,78}",
     "walk_anim": "1205",
     "has_special": "true",
     "rare_item": "true",
@@ -129711,6 +129753,7 @@
   {
     "shop_price": "300000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{0,78}",
     "durability": null,
     "low_alchemy": "120000",
     "high_alchemy": "180000",
@@ -129726,6 +129769,7 @@
   {
     "turn90cw_anim": "1207",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{0,78}",
     "walk_anim": "1205",
     "has_special": "true",
     "rare_item": "true",
@@ -129757,6 +129801,7 @@
   {
     "turn90cw_anim": "821",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{0,78}",
     "walk_anim": "819",
     "has_special": "true",
     "low_alchemy": "120000",
@@ -129786,6 +129831,7 @@
   {
     "shop_price": "300000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{0,78}",
     "durability": null,
     "low_alchemy": "120000",
     "high_alchemy": "180000",
@@ -129801,6 +129847,7 @@
   {
     "turn90cw_anim": "821",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{0,78}",
     "walk_anim": "819",
     "has_special": "true",
     "low_alchemy": "120000",
@@ -129831,6 +129878,7 @@
   {
     "turn90cw_anim": "1207",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{0,78}",
     "walk_anim": "1205",
     "has_special": "true",
     "low_alchemy": "120000",
@@ -129862,6 +129910,7 @@
   {
     "shop_price": "300000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{0,78}",
     "durability": null,
     "low_alchemy": "120000",
     "high_alchemy": "180000",
@@ -129878,6 +129927,7 @@
   {
     "shop_price": "180000",
     "examine": "This item degrades in combat, and will turn to dust.",
+    "requirements": "{0,78}",
     "has_special": "true",
     "durability": null,
     "low_alchemy": "120000",
@@ -129899,6 +129949,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -129917,6 +129968,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -129932,6 +129984,7 @@
   {
     "shop_price": "75000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -129950,6 +130003,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -129968,6 +130022,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -129983,6 +130038,7 @@
   {
     "shop_price": "75000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -130001,6 +130057,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -130018,6 +130075,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -130033,6 +130091,7 @@
   {
     "shop_price": "75000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -130050,6 +130109,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "50000",
     "high_alchemy": "75000",
@@ -130067,6 +130127,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "50000",
     "high_alchemy": "75000",
@@ -130082,6 +130143,7 @@
   {
     "shop_price": "75000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "50000",
     "high_alchemy": "75000",
@@ -130100,6 +130162,7 @@
     "remove_head": "true",
     "shop_price": "50000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -130117,6 +130180,7 @@
   {
     "shop_price": "50000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -130133,6 +130197,7 @@
     "remove_head": "true",
     "shop_price": "30000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -130151,6 +130216,7 @@
     "shop_price": "125000",
     "turn90cw_anim": "1207",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{0,78}",
     "walk_anim": "1205",
     "durability": null,
     "low_alchemy": "30000",
@@ -130177,6 +130243,7 @@
     "shop_price": "125000",
     "turn90cw_anim": "1207",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{0,78}",
     "walk_anim": "1205",
     "durability": null,
     "low_alchemy": "30000",
@@ -130200,6 +130267,7 @@
     "shop_price": "75000",
     "turn90cw_anim": "1207",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{0,78}",
     "walk_anim": "1205",
     "durability": null,
     "low_alchemy": "30000",
@@ -130224,6 +130292,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{0,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -130244,6 +130313,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{0,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -130259,6 +130329,7 @@
   {
     "shop_price": "75000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{0,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -130272,11 +130343,12 @@
     "name": "C. statius's warhammer (deg)",
     "archery_ticket_price": "0",
     "id": "13928",
-    "bonuses": "-4,-4,123,0,0,0,0,0,0,0,0,114,0,0,0"
+    "bonuses": "-4,-4,123,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{0,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -130293,11 +130365,12 @@
     "name": "Corrupt vesta's spear",
     "archery_ticket_price": "0",
     "id": "13929",
-    "bonuses": "133,113,120,0,0,18,21,21,0,0,0,122,0,0,0"
+    "bonuses": "133,113,120,0,0,18,21,21,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{0,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -130314,6 +130387,7 @@
   {
     "shop_price": "75000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{0,78}",
     "durability": null,
     "low_alchemy": "30000",
     "high_alchemy": "45000",
@@ -130329,11 +130403,12 @@
     "name": "Corrupt vesta's spear (deg)",
     "archery_ticket_price": "0",
     "id": "13931",
-    "bonuses": "133,113,120,0,0,18,21,21,0,0,0,122,0,0,0"
+    "bonuses": "133,113,120,0,0,18,21,21,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "50000",
     "high_alchemy": "75000",
@@ -130352,6 +130427,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "50000",
     "high_alchemy": "75000",
@@ -130367,6 +130443,7 @@
   {
     "shop_price": "75000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "50000",
     "high_alchemy": "75000",
@@ -130385,6 +130462,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "destroy": "true",
     "attack_speed": "4",
@@ -130401,6 +130479,7 @@
     "destroy_message": "Drop",
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "grand_exchange_price": "121290",
     "durability": null,
     "name": "Corrupt zuriel's robe bottom",
@@ -130413,6 +130492,7 @@
   {
     "shop_price": "75000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "destroy": "true",
     "attack_speed": "4",
@@ -130429,6 +130509,7 @@
     "remove_head": "true",
     "shop_price": "50000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -130446,6 +130527,7 @@
   {
     "shop_price": "50000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -130462,6 +130544,7 @@
     "remove_head": "true",
     "shop_price": "30000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{6,78}",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -130479,6 +130562,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{6,78}",
     "durability": null,
     "low_alchemy": "28000",
     "high_alchemy": "42000",
@@ -130500,6 +130584,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{6,78}",
     "durability": null,
     "low_alchemy": "28000",
     "high_alchemy": "42000",
@@ -130515,6 +130600,7 @@
   {
     "shop_price": "70000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{6,78}",
     "durability": null,
     "low_alchemy": "28000",
     "high_alchemy": "42000",
@@ -130534,6 +130620,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "50000",
     "high_alchemy": "75000",
@@ -130552,6 +130639,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "50000",
     "high_alchemy": "75000",
@@ -130567,6 +130655,7 @@
   {
     "shop_price": "75000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "50000",
     "high_alchemy": "75000",
@@ -130585,6 +130674,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "50000",
     "high_alchemy": "75000",
@@ -130602,6 +130692,7 @@
   {
     "shop_price": "125000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "50000",
     "high_alchemy": "75000",
@@ -130617,6 +130708,7 @@
   {
     "shop_price": "75000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "50000",
     "high_alchemy": "75000",
@@ -130635,6 +130727,7 @@
     "remove_head": "true",
     "shop_price": "50000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -130652,6 +130745,7 @@
   {
     "shop_price": "50000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -130668,6 +130762,7 @@
     "remove_head": "true",
     "shop_price": "30000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{1,78}-{4,78}",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -130685,6 +130780,7 @@
   {
     "shop_price": "1000",
     "examine": "A vicious javelin.",
+    "requirements": "{4,78}",
     "durability": null,
     "low_alchemy": "400",
     "high_alchemy": "600",
@@ -130699,11 +130795,12 @@
     "name": "Corrupt morrigan's javelin",
     "archery_ticket_price": "0",
     "id": "13953",
-    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,145,0,0"
+    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "10000",
     "examine": "A vicious javelin.",
+    "requirements": "{4,78}",
     "durability": null,
     "low_alchemy": "400",
     "high_alchemy": "600",
@@ -130718,11 +130815,12 @@
     "name": "C. morrigan's javelin (p)",
     "archery_ticket_price": "0",
     "id": "13954",
-    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,145,0,0"
+    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "10000",
     "examine": "A vicious javelin.",
+    "requirements": "{4,78}",
     "durability": null,
     "low_alchemy": "400",
     "high_alchemy": "600",
@@ -130737,11 +130835,12 @@
     "name": "C. morrigan's javelin (p+)",
     "archery_ticket_price": "0",
     "id": "13955",
-    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,145,0,0"
+    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "10000",
     "examine": "A vicious javelin.",
+    "requirements": "{4,78}",
     "durability": null,
     "low_alchemy": "400",
     "high_alchemy": "600",
@@ -130756,11 +130855,12 @@
     "name": "C. morrigan's javelin (p++)",
     "archery_ticket_price": "0",
     "id": "13956",
-    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,145,0,0"
+    "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "1000",
     "examine": "A vicious throwing axe.",
+    "requirements": "{4,78}",
     "durability": null,
     "low_alchemy": "400",
     "high_alchemy": "600",
@@ -130774,11 +130874,12 @@
     "name": "C. morrigan's throwing axe",
     "archery_ticket_price": "0",
     "id": "13957",
-    "bonuses": "0,0,0,0,93,0,0,0,0,0,0,0,117,0,0"
+    "bonuses": "0,0,0,0,93,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "120000",
     "examine": "This item degrades while worn, and will turn to dust.",
+    "requirements": "{0,78}-{4,78}",
     "durability": null,
     "low_alchemy": "28800",
     "high_alchemy": "43200",

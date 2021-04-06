@@ -144,6 +144,7 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 			public boolean handle(Player player, Node node, String option) {
 				if (player.getLocation().getX() <= 2846) {
 					Item tokens = new Item(8851, 100);
+					Item tokens10 = new Item(8851, 10);
 					if (!player.getInventory().containsItem(tokens)) {
 						player.getDialogueInterpreter().sendItemMessage(tokens, "You don't have enough Warrior Guild Tokens to enter", "the cyclopes enclosure yet, collect at least 100 then", "come back.");
 						return true;
@@ -153,6 +154,8 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 						return true;
 					}
 					player.removeAttribute("sent_dialogue");
+					player.getInventory().remove(tokens10);
+					player.sendMessages("10 tokens are taken as you enter the room.");
 					enter(player);
 				} else {
 					leave(player);
