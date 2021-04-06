@@ -137110,6 +137110,7 @@
   {
     "shop_price": "65000",
     "examine": "These look pretty heavy, but very elite.",
+    "requirements": "{1,40}",
     "durability": null,
     "low_alchemy": "26000",
     "high_alchemy": "39000",
@@ -137144,6 +137145,7 @@
   {
     "shop_price": "64000",
     "examine": "Provides excellent protection, and is elite.",
+    "requirements": "{1,40}",
     "durability": null,
     "low_alchemy": "25600",
     "high_alchemy": "38400",
@@ -137180,6 +137182,7 @@
     "remove_head": "true",
     "shop_price": "35200",
     "examine": "A full face helmet, and elite.",
+    "requirements": "{1,40}",
     "durability": null,
     "low_alchemy": "14080",
     "high_alchemy": "21120",
@@ -137227,6 +137230,7 @@
   {
     "shop_price": "120000",
     "examine": "A robe worn by members of the Dagon'hai.",
+    "requirements": "{1,20}-{6,40}",
     "durability": null,
     "low_alchemy": "48000",
     "high_alchemy": "72000",
@@ -137261,6 +137265,7 @@
   {
     "shop_price": "15000",
     "examine": "A hat worn by members of the Dagon'hai.",
+    "requirements": "{1,20}-{6,40}",
     "durability": null,
     "low_alchemy": "6000",
     "high_alchemy": "9000",
@@ -137294,6 +137299,7 @@
   {
     "shop_price": "80000",
     "examine": "A robe worn by members of the Dagon'hai.",
+    "requirements": "{1,20}-{6,40}",
     "durability": null,
     "low_alchemy": "32000",
     "high_alchemy": "48000",
