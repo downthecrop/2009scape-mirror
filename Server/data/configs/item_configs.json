@@ -19022,7 +19022,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "Uncharged: A very powerful dragonstone amulet.  1-4 charges: A dragonstone amulet with X magic charges.",
+    "examine": "A very powerful dragonstone amulet.",
     "grand_exchange_price": "28000",
     "durability": null,
     "name": "Amulet of glory",
@@ -19044,7 +19044,7 @@
     "id": "1705"
   },
   {
-    "examine": "Uncharged: A very powerful dragonstone amulet.  1-4 charges: A dragonstone amulet with X magic charges.",
+    "examine": "A dragonstone amulet with 1 magic charges.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Amulet of glory(1)",
@@ -19064,7 +19064,7 @@
     "id": "1707"
   },
   {
-    "examine": "Uncharged: A very powerful dragonstone amulet.  1-4 charges: A dragonstone amulet with X magic charges.",
+    "examine": "A dragonstone amulet with 2 magic charges.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Amulet of glory(2)",
@@ -19084,7 +19084,7 @@
     "id": "1709"
   },
   {
-    "examine": "Uncharged: A very powerful dragonstone amulet.  1-4 charges: A dragonstone amulet with X magic charges.",
+    "examine": "A dragonstone amulet with 3 magic charges.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Amulet of glory(3)",
@@ -19105,7 +19105,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "Uncharged: A very powerful dragonstone amulet.  1-4 charges: A dragonstone amulet with X magic charges.",
+    "examine": "A dragonstone amulet with 4 magic charges.",
     "grand_exchange_price": "29300",
     "durability": null,
     "name": "Amulet of glory(4)",
