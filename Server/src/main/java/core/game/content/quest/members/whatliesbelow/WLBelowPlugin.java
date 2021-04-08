@@ -4,6 +4,7 @@ import core.cache.def.impl.ObjectDefinition;
 import core.game.component.Component;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.content.activity.ActivityManager;
+import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.gather.SkillingTool;
 import core.game.node.entity.skill.runecrafting.Altar;
 import core.game.interaction.NodeUsageEvent;
@@ -194,14 +195,19 @@ public class WLBelowPlugin extends OptionHandler {
 				return true;
 			}*/
 			Item chaosItem = player.getInventory().containsItem(CHAOS_TALISMAN) ? CHAOS_TALISMAN : CHAOS_TIARA;
-			if (chaosItem != null && player.getInventory().remove(CHAOS_RUNES)) {
-				player.lock(5);
-				player.getInventory().remove(WhatLiesBelow.WAND);
-				player.getInventory().add(WhatLiesBelow.INFUSED_WAND);
-				player.animate(Animation.create(6104));
-				player.getDialogueInterpreter().sendDialogue("The metal wand bursts into life and crackles with arcane", "power. This is a powerful instrument indeed!");
+			if (player.getSkills().hasLevel(Skills.RUNECRAFTING,35)){
+				if (chaosItem != null && player.getInventory().remove(CHAOS_RUNES)) {
+					player.lock(5);
+					player.getInventory().remove(WhatLiesBelow.WAND);
+					player.getInventory().add(WhatLiesBelow.INFUSED_WAND);
+					player.animate(Animation.create(6104));
+					player.getDialogueInterpreter().sendDialogue("The metal wand bursts into life and crackles with arcane", "power. This is a powerful instrument indeed!");
+				}
+				return true;
+			}else {
+				player.getDialogueInterpreter().sendDialogue("You need a Runecrafting level of 35 to make the infused wand.");
+				return false;
 			}
-			return true;
 		}
 
 	}
