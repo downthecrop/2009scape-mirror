@@ -138794,5 +138794,39 @@
     "hat": "true",
     "id": "14650",
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
+  },
+  {
+    "id": "14651",
+    "examine": "Passed down from the super egg defending bunny knights.",
+    "destroy": "true",
+    "destroy_message": "<col=ef0000I> WARNING: </col> This item CAN NOT be re-obtained.",
+    "bonuses": "-4,69,50,-4,0,0,0,0,0,-1,0,70,0,0,0",
+    "requirements": "{0,40}",
+    "durability": null,
+    "weight": "0.4",
+    "attack_speed": "4",
+    "weapon_interface": "12",
+    "render_anim": "326",
+    "equipment_slot": "3",
+    "fun_weapon": "true",
+    "name": "Eggscalibur",
+    "archery_ticket_price": "0",
+    "bonuses": "-100,-100,-50,0,0,0,0,0,0,0,0,-10,0,0,0"
+  },
+  {
+    "name": "<col=00e4ef>Super Egg</col>",
+    "id": "14652",
+    "examine": "<col=00e4ef>SUPER.</col> <col=00ef45>EGG.</col> <col=e1ef00>SUPER.</col> <col=ef0078>EGG.</col>",
+    "destroy": "true",
+    "destroy_message": "You dare destroy I?! THE ALL MIGHTY AND POWERFUL SUPER EGG?!",
+    "durability": null,
+    "weight": "0.4",
+    "attack_speed": "4",
+    "weapon_interface": "12",
+    "render_anim": "182",
+    "equipment_slot": "3",
+    "fun_weapon": "true",
+    "archery_ticket_price": "0",
+    "bonuses": "-100,-100,-50,0,0,0,0,0,0,0,0,-10,0,0,0"
   }
 ]
