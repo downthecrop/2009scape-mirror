@@ -47,4 +47,8 @@ abstract class InteractionListener : Listener{
     fun setDest(type: Int, ids: IntArray, vararg options: String, handler: (Node) -> Location){
         InteractionListeners.addDestOverrides(type,ids,options,handler)
     }
+
+    fun onDig(location: Location,method: (player: Player) -> Unit){
+        SpadeDigListener.registerListener(location,method)
+    }
 }

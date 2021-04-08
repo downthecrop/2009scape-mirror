@@ -1,6 +1,7 @@
 package core.game.content.global.action;
 
 import core.game.node.entity.player.Player;
+import rs09.game.interaction.SpadeDigListener;
 import rs09.game.system.SystemLogger;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
@@ -35,6 +36,11 @@ public final class DigSpadeHandler {
 		final DigAction action = ACTIONS.get(player.getLocation());
 		player.animate(ANIMATION);
 		player.lock(1);
+
+		if(SpadeDigListener.runListener(player.getLocation(), player)){
+			return true;
+		}
+
 		if (action != null) {
 			GameWorld.getPulser().submit(new Pulse(1, player) {
 				@Override

@@ -23,6 +23,7 @@ import rs09.ServerConstants
 import rs09.game.content.activity.fishingtrawler.TrawlerLoot
 import rs09.game.content.ame.RandomEvents
 import rs09.game.ge.OfferManager
+import rs09.game.interaction.SpadeDigListener
 import rs09.game.node.entity.state.newsys.states.FarmingState
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Command
@@ -489,6 +490,28 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 }
                 notify(player,"No parent NPC found.")
             }
+        }
+
+
+        define("bury"){player,args ->
+            if(args.size < 2){
+                reject(player,"Usage: ::bury itemid")
+            }
+
+            val itemId = args[1].toInt()
+            val def = ItemDefinition.forId(itemId)
+
+            SpadeDigListener.registerListener(player.location){pl ->
+                if(player.getAttribute("${player.location.toString()}:$itemId",false)){
+                    pl.sendMessage("You dig and find nothing.")
+                    return@registerListener
+                }
+                pl.sendMessage("You dig and find a ${def.name}!")
+                player.inventory.add(Item(itemId))
+                player.setAttribute("/save:${player.location.toString()}:$itemId",true)
+            }
+
+            notify(player,"You buried a ${def.name} at ${player.location}")
         }
     }
 }
