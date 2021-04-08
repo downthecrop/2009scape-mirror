@@ -26225,7 +26225,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "4 doses of Prayer restore potion.",
     "grand_exchange_price": "5687",
     "durability": null,
     "name": "Prayer potion(4)",
@@ -26247,7 +26247,7 @@
   {
     "shop_price": "8000",
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "4 doses of super Attack potion.",
     "grand_exchange_price": "898",
     "durability": null,
     "name": "Super attack(4)",
