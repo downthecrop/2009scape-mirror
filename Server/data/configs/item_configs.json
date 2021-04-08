@@ -138800,7 +138800,6 @@
     "examine": "Passed down from the super egg defending bunny knights.",
     "destroy": "true",
     "destroy_message": "<col=ef0000I> WARNING: </col> This item CAN NOT be re-obtained.",
-    "bonuses": "-4,69,50,-4,0,0,0,0,0,-1,0,70,0,0,0",
     "requirements": "{0,40}",
     "durability": null,
     "weight": "0.4",
