@@ -7,6 +7,7 @@ import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import rs09.game.system.SystemLogger;
+import rs09.game.system.config.ItemConfigParser;
 import rs09.game.world.GameWorld;
 
 /**
@@ -37,7 +38,7 @@ public final class DropItemHandler {
 			}
 			player.getDialogueInterpreter().close();
 			player.getPulseManager().clear();
-			if (option.equalsIgnoreCase("destroy") || option.equalsIgnoreCase("dissolve")) {
+			if (option.equalsIgnoreCase("destroy") || option.equalsIgnoreCase("dissolve") || (boolean) item.getDefinition().getHandlers().getOrDefault(ItemConfigParser.DESTROY,false)) {
 				player.getDialogueInterpreter().open(9878, item);
 				return true;
 			}
