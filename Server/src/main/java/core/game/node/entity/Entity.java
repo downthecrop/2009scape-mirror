@@ -706,6 +706,10 @@ public abstract class Entity extends Node {
 		attributes.setAttribute(key, value);
 	}
 
+	public void setExpirableAttribute(String key, Object value, Long timeToLive){
+		attributes.setExpirableAttribute(key,value,timeToLive);
+	}
+
 	/**
 	 * Gets an attribute.
 	 * @param key The attribute name.

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Handles an entity's game attributes.
@@ -26,6 +27,11 @@ public final class GameAttributes {
 	 * The list of attributes to save.
 	 */
 	private final List<String> savedAttributes = new ArrayList<>(250);
+
+	/**
+	 * The list of key expirations
+	 */
+	public final HashMap<String,Long> keyExpirations = new HashMap<>(250);
 
 	/**
 	 * Constructs a new {@code GameAttributes} {@code Object}.
@@ -139,6 +145,17 @@ public final class GameAttributes {
 	}
 
 	/**
+	 * Sets an inherently temporary (but saved cross-session) key.
+	 * @param key the key to set
+	 * @param value the value to assign to the key
+	 * @param timeToLive the time (in milliseconds) that the key will be valid for
+	 */
+	public void setExpirableAttribute(String key, Object value, Long timeToLive){
+		setAttribute(key,value);
+		keyExpirations.put(key,System.currentTimeMillis() + timeToLive);
+	}
+
+	/**
 	 * Gets an attribute.
 	 * @param key The attribute name.
 	 * @return The attribute value.
@@ -164,6 +181,9 @@ public final class GameAttributes {
 		Object object = attributes.get(string);
 		if (object != null) {
 			return (T) object;
+		}
+		if(keyExpirations.containsKey(string) && keyExpirations.get(string) < System.currentTimeMillis()){
+			return fail;
 		}
 		return fail;
 	}

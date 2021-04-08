@@ -34,6 +34,7 @@ import rs09.tools.stringtools.colorize
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.util.*
+import java.util.concurrent.TimeUnit
 
 @Initializable
 class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
@@ -112,20 +113,11 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             }
             val red = "<col=8A0808>"
             player.packetDispatch.sendString("<col=8A0808>" + "Players" + "</col>", 275, 2)
-            val builder = StringBuilder("<br>")
-            var count = 0
-            for (p in Repository.players) {
-                if (count > 45) {
-                    builder.append("<br>Max amount we can show on this interface.")
-                    break
-                }
-                if (p == null || p.isAdmin && GameWorld.settings?.isDevMode != true && !player.isAdmin || p.isArtificial) {
-                    continue
-                }
-                builder.append(red + "<img=" + (Rights.getChatIcon(p) - 1) + ">" + p.username + if(rights > 0) " [ip=" + p.details.ipAddress + ", name=" + p.details.compName + "]<br><br>" else "<br><br>")
-                count++
+            var lineStart = 11
+            for(p in Repository.players){
+                if(!p.isArtificial)
+                    player.packetDispatch.sendString(red + "<img=" + (Rights.getChatIcon(p) - 1) + ">" + p.username + if(rights > 0) " [ip=" + p.details.ipAddress + ", name=" + p.details.compName + "]" else "",275,lineStart++)
             }
-            player.packetDispatch.sendString(builder.toString(), 275, 11)
         }
         /**
          * ===================================================================================
@@ -506,9 +498,9 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                     pl.sendMessage("You dig and find nothing.")
                     return@registerListener
                 }
-                pl.sendMessage("You dig and find a ${def.name}!")
+                pl.dialogueInterpreter.sendDialogue("You dig and find a ${def.name}!")
                 player.inventory.add(Item(itemId))
-                player.setAttribute("/save:${player.location.toString()}:$itemId",true)
+                player.setExpirableAttribute("/save:${player.location.toString()}:$itemId",true,TimeUnit.SECONDS.toMillis(10))
             }
 
             notify(player,"You buried a ${def.name} at ${player.location}")
