@@ -98,7 +98,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         /**
          * Lists the players currently online
          */
-        define("players", Command.Privilege.STANDARD){ player, _ ->
+        define("players", Command.Privilege.MODERATOR){ player, _ ->
             val rights = player.rights.ordinal
             if (player!!.interfaceManager.isOpened && player.interfaceManager.opened.id != Components.QUESTJOURNAL_SCROLL_275 || player.locks.isMovementLocked || player.locks.isTeleportLocked) {
                 reject(player, "Please finish what you're doing first.")

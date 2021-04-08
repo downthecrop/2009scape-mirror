@@ -1167,7 +1167,7 @@
   {
     "shop_price": "780",
     "ge_buy_limit": "100",
-    "examine": "X doses of Strength potion.",
+    "examine": "4 doses of Strength potion.",
     "grand_exchange_price": "1041",
     "durability": null,
     "name": "Strength potion(4)",
@@ -1189,7 +1189,7 @@
   {
     "shop_price": "780",
     "ge_buy_limit": "100",
-    "examine": "X doses of Strength potion.",
+    "examine": "3 doses of Strength potion.",
     "grand_exchange_price": "812",
     "durability": null,
     "name": "Strength potion(3)",
@@ -1211,7 +1211,7 @@
   {
     "shop_price": "780",
     "ge_buy_limit": "100",
-    "examine": "X doses of Strength potion.",
+    "examine": "2 doses of Strength potion.",
     "grand_exchange_price": "656",
     "durability": null,
     "name": "Strength potion(2)",
@@ -1233,7 +1233,7 @@
   {
     "shop_price": "780",
     "ge_buy_limit": "100",
-    "examine": "X doses of Strength potion.",
+    "examine": "1 dose of Strength potion.",
     "grand_exchange_price": "355",
     "durability": null,
     "name": "Strength potion(1)",
@@ -1255,7 +1255,7 @@
   {
     "shop_price": "560",
     "ge_buy_limit": "100",
-    "examine": "X doses of Attack potion.",
+    "examine": "3 doses of Attack potion.",
     "grand_exchange_price": "195",
     "durability": null,
     "name": "Attack potion(3)",
@@ -1277,7 +1277,7 @@
   {
     "shop_price": "560",
     "ge_buy_limit": "100",
-    "examine": "X doses of Attack potion.",
+    "examine": "2 doses of Attack potion.",
     "grand_exchange_price": "113",
     "durability": null,
     "name": "Attack potion(2)",
@@ -1299,7 +1299,7 @@
   {
     "shop_price": "560",
     "ge_buy_limit": "100",
-    "examine": "X doses of Attack potion.",
+    "examine": "1 dose of Attack potion.",
     "grand_exchange_price": "197",
     "durability": null,
     "name": "Attack potion(1)",
@@ -1321,7 +1321,7 @@
   {
     "shop_price": "139",
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of restore potion.",
+    "examine": "3 doses of restore potion.",
     "grand_exchange_price": "59",
     "durability": null,
     "name": "Restore potion(3)",
@@ -1344,7 +1344,7 @@
   {
     "shop_price": "139",
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of restore potion.",
+    "examine": "2 doses of restore potion.",
     "grand_exchange_price": "35",
     "durability": null,
     "name": "Restore potion(2)",
@@ -1367,7 +1367,7 @@
   {
     "shop_price": "139",
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of restore potion.",
+    "examine": "1 dose of restore potion.",
     "grand_exchange_price": "21",
     "durability": null,
     "name": "Restore potion(1)",
@@ -1390,7 +1390,7 @@
   {
     "shop_price": "114",
     "ge_buy_limit": "100",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "3 doses of Defence Potion.",
     "grand_exchange_price": "323",
     "durability": null,
     "name": "Defence potion(3)",
@@ -1412,7 +1412,7 @@
   {
     "shop_price": "114",
     "ge_buy_limit": "100",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "2 doses of Defence Potion.",
     "grand_exchange_price": "247",
     "durability": null,
     "name": "Defence potion(2)",
@@ -1434,7 +1434,7 @@
   {
     "shop_price": "114",
     "ge_buy_limit": "100",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "1 dose of Defence Potion.",
     "grand_exchange_price": "148",
     "durability": null,
     "name": "Defence potion(1)",
@@ -1455,7 +1455,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "3 doses of Prayer restore potion.",
     "grand_exchange_price": "4134",
     "durability": null,
     "name": "Prayer potion(3)",
@@ -1476,7 +1476,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "2 doses of Prayer restore potion.",
     "grand_exchange_price": "2868",
     "durability": null,
     "name": "Prayer potion(2)",
@@ -1497,7 +1497,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "1 dose of Prayer restore potion.",
     "grand_exchange_price": "1353",
     "durability": null,
     "name": "Prayer potion(1)",
@@ -1518,7 +1518,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "3 doses of super Attack potion.",
     "grand_exchange_price": "691",
     "durability": null,
     "name": "Super attack(3)",
@@ -1539,7 +1539,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "2 doses of super Attack potion.",
     "grand_exchange_price": "451",
     "durability": null,
     "name": "Super attack(2)",
@@ -1560,7 +1560,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "1 dose of super Attack potion.",
     "grand_exchange_price": "243",
     "durability": null,
     "name": "Super attack(1)",
@@ -1581,7 +1581,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X doses of Fishing potion.",
+    "examine": "3 doses of Fishing potion.",
     "grand_exchange_price": "40",
     "durability": null,
     "name": "Fishing potion(3)",
@@ -1603,7 +1603,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X doses of Fishing potion.",
+    "examine": "2 doses of Fishing potion.",
     "grand_exchange_price": "56",
     "durability": null,
     "name": "Fishing potion(2)",
@@ -1625,7 +1625,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X doses of Fishing potion.",
+    "examine": "1 dose of Fishing potion.",
     "grand_exchange_price": "87",
     "durability": null,
     "name": "Fishing potion(1)",
@@ -1647,7 +1647,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "3 doses of super Strength potion.",
     "grand_exchange_price": "1679",
     "durability": null,
     "name": "Super strength(3)",
@@ -1668,7 +1668,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "2 doses of super Strength potion.",
     "grand_exchange_price": "1164",
     "durability": null,
     "name": "Super strength(2)",
@@ -1689,7 +1689,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "1 dose of super Strength potion.",
     "grand_exchange_price": "603",
     "durability": null,
     "name": "Super strength(1)",
@@ -1710,7 +1710,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super Defence potion.",
+    "examine": "3 doses of super Defence potion.",
     "grand_exchange_price": "113",
     "durability": null,
     "name": "Super defence(3)",
@@ -1731,7 +1731,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super Defence potion.",
+    "examine": "2 doses of super Defence potion.",
     "grand_exchange_price": "65",
     "durability": null,
     "name": "Super defence(2)",
@@ -1752,7 +1752,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super Defence potion.",
+    "examine": "1 dose of super Defence potion.",
     "grand_exchange_price": "41",
     "durability": null,
     "name": "Super defence(1)",
@@ -1773,7 +1773,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X doses of ranging potion.",
+    "examine": "3 doses of ranging potion.",
     "grand_exchange_price": "6224",
     "durability": null,
     "name": "Ranging potion(3)",
@@ -1794,7 +1794,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X doses of ranging potion.",
+    "examine": "2 doses of ranging potion.",
     "grand_exchange_price": "4330",
     "durability": null,
     "name": "Ranging potion(2)",
@@ -1815,7 +1815,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X doses of ranging potion.",
+    "examine": "1 dose of ranging potion.",
     "grand_exchange_price": "2068",
     "durability": null,
     "name": "Ranging potion(1)",
@@ -1837,7 +1837,7 @@
   {
     "shop_price": "375",
     "ge_buy_limit": "1000",
-    "examine": "X doses of antipoison potion.",
+    "examine": "3 doses of antipoison potion.",
     "grand_exchange_price": "1239",
     "durability": null,
     "name": "Antipoison(3)",
@@ -1859,7 +1859,7 @@
   {
     "shop_price": "375",
     "ge_buy_limit": "1000",
-    "examine": "X doses of antipoison potion.",
+    "examine": "2 doses of antipoison potion.",
     "grand_exchange_price": "822",
     "durability": null,
     "name": "Antipoison(2)",
@@ -1881,7 +1881,7 @@
   {
     "shop_price": "375",
     "ge_buy_limit": "1000",
-    "examine": "X doses of antipoison potion.",
+    "examine": "1 dose of antipoison potion.",
     "grand_exchange_price": "460",
     "durability": null,
     "name": "Antipoison(1)",
@@ -1902,7 +1902,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super anti poison potion.",
+    "examine": "3 doses of super anti poison potion.",
     "grand_exchange_price": "872",
     "durability": null,
     "name": "Super antipoison(3)",
@@ -1923,7 +1923,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super anti poison potion.",
+    "examine": "2 doses of super anti poison potion.",
     "grand_exchange_price": "509",
     "durability": null,
     "name": "Super antipoison(2)",
@@ -1944,7 +1944,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super anti poison potion.",
+    "examine": "1 dose of super anti poison potion.",
     "grand_exchange_price": "366",
     "durability": null,
     "name": "Super antipoison(1)",
@@ -1986,7 +1986,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose[s] of Zamorak brew.",
+    "examine": "3 doses of Zamorak brew.",
     "grand_exchange_price": "1818",
     "durability": null,
     "name": "Zamorak brew(3)",
@@ -2008,7 +2008,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose[s] of Zamorak brew.",
+    "examine": "2 doses of Zamorak brew.",
     "grand_exchange_price": "1004",
     "durability": null,
     "name": "Zamorak brew(2)",
@@ -2030,7 +2030,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose[s] of Zamorak brew.",
+    "examine": "1 dose of Zamorak brew.",
     "grand_exchange_price": "1175",
     "durability": null,
     "name": "Zamorak brew(1)",
@@ -19022,7 +19022,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "Uncharged: A very powerful dragonstone amulet.  1-4 charges: A dragonstone amulet with X magic charges.",
+    "examine": "A very powerful dragonstone amulet.",
     "grand_exchange_price": "28000",
     "durability": null,
     "name": "Amulet of glory",
@@ -19044,7 +19044,7 @@
     "id": "1705"
   },
   {
-    "examine": "Uncharged: A very powerful dragonstone amulet.  1-4 charges: A dragonstone amulet with X magic charges.",
+    "examine": "A dragonstone amulet with 1 magic charges.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Amulet of glory(1)",
@@ -19064,7 +19064,7 @@
     "id": "1707"
   },
   {
-    "examine": "Uncharged: A very powerful dragonstone amulet.  1-4 charges: A dragonstone amulet with X magic charges.",
+    "examine": "A dragonstone amulet with 2 magic charges.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Amulet of glory(2)",
@@ -19084,7 +19084,7 @@
     "id": "1709"
   },
   {
-    "examine": "Uncharged: A very powerful dragonstone amulet.  1-4 charges: A dragonstone amulet with X magic charges.",
+    "examine": "A dragonstone amulet with 3 magic charges.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Amulet of glory(3)",
@@ -19105,7 +19105,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "Uncharged: A very powerful dragonstone amulet.  1-4 charges: A dragonstone amulet with X magic charges.",
+    "examine": "A dragonstone amulet with 4 magic charges.",
     "grand_exchange_price": "29300",
     "durability": null,
     "name": "Amulet of glory(4)",
@@ -26159,7 +26159,7 @@
   {
     "shop_price": "8002",
     "ge_buy_limit": "100",
-    "examine": "X doses of Attack potion.",
+    "examine": "4 doses of Attack potion.",
     "grand_exchange_price": "275",
     "durability": null,
     "name": "Attack potion(4)",
@@ -26181,7 +26181,7 @@
   {
     "shop_price": "139",
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of restore potion.",
+    "examine": "4 doses of restore potion.",
     "grand_exchange_price": "101",
     "durability": null,
     "name": "Restore potion(4)",
@@ -26204,7 +26204,7 @@
   {
     "shop_price": "7832",
     "ge_buy_limit": "100",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "4 doses of Defence Potion.",
     "grand_exchange_price": "448",
     "durability": null,
     "name": "Defence potion(4)",
@@ -26225,7 +26225,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "4 doses of Prayer restore potion.",
     "grand_exchange_price": "5687",
     "durability": null,
     "name": "Prayer potion(4)",
@@ -26247,7 +26247,7 @@
   {
     "shop_price": "8000",
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "4 doses of super Attack potion.",
     "grand_exchange_price": "898",
     "durability": null,
     "name": "Super attack(4)",
@@ -26269,7 +26269,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X doses of Fishing potion.",
+    "examine": "4 doses of Fishing potion.",
     "grand_exchange_price": "73",
     "durability": null,
     "name": "Fishing potion(4)",
@@ -26292,7 +26292,7 @@
   {
     "shop_price": "8000",
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "4 doses of super Strength potion.",
     "grand_exchange_price": "2278",
     "durability": null,
     "name": "Super strength(4)",
@@ -26315,7 +26315,7 @@
   {
     "shop_price": "7000",
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super Defence potion.",
+    "examine": "4 doses of super Defence potion.",
     "grand_exchange_price": "153",
     "durability": null,
     "name": "Super defence(4)",
@@ -26337,7 +26337,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X doses of ranging potion.",
+    "examine": "4 doses of ranging potion.",
     "grand_exchange_price": "8317",
     "durability": null,
     "name": "Ranging potion(4)",
@@ -26359,7 +26359,7 @@
   {
     "shop_price": "375",
     "ge_buy_limit": "1000",
-    "examine": "X doses of antipoison potion.",
+    "examine": "4 doses of antipoison potion.",
     "grand_exchange_price": "1624",
     "durability": null,
     "name": "Antipoison(4)",
@@ -26380,7 +26380,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super anti poison potion.",
+    "examine": "4 doses of super anti poison potion.",
     "grand_exchange_price": "1062",
     "durability": null,
     "name": "Super antipoison(4)",
@@ -26401,7 +26401,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose[s] of Zamorak brew.",
+    "examine": "4 doses of Zamorak brew.",
     "grand_exchange_price": "2838",
     "durability": null,
     "name": "Zamorak brew(4)",
@@ -26423,7 +26423,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of anti-firebreath potion.",
+    "examine": "4 doses of anti-firebreath potion.",
     "grand_exchange_price": "4743",
     "durability": null,
     "name": "Antifire potion(4)",
@@ -26444,7 +26444,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of anti-firebreath potion.",
+    "examine": "3 doses of anti-firebreath potion.",
     "grand_exchange_price": "3518",
     "durability": null,
     "name": "Antifire potion(3)",
@@ -26465,7 +26465,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of anti-firebreath potion.",
+    "examine": "2 doses of anti-firebreath potion.",
     "grand_exchange_price": "2291",
     "durability": null,
     "name": "Antifire potion(2)",
@@ -26486,7 +26486,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of anti-firebreath potion.",
+    "examine": "1 dose of anti-firebreath potion.",
     "grand_exchange_price": "1099",
     "durability": null,
     "name": "Antifire potion(1)",
@@ -31878,7 +31878,7 @@
   {
     "shop_price": "145",
     "ge_buy_limit": "100",
-    "examine": "X doses of energy potion.",
+    "examine": "4 doses of energy potion.",
     "grand_exchange_price": "33",
     "durability": null,
     "name": "Energy potion(4)",
@@ -31900,7 +31900,7 @@
   {
     "shop_price": "145",
     "ge_buy_limit": "100",
-    "examine": "X doses of energy potion.",
+    "examine": "3 doses of energy potion.",
     "grand_exchange_price": "18",
     "durability": null,
     "name": "Energy potion(3)",
@@ -31922,7 +31922,7 @@
   {
     "shop_price": "145",
     "ge_buy_limit": "100",
-    "examine": "X doses of energy potion.",
+    "examine": "2 doses of energy potion.",
     "grand_exchange_price": "11",
     "durability": null,
     "name": "Energy potion(2)",
@@ -31944,7 +31944,7 @@
   {
     "shop_price": "145",
     "ge_buy_limit": "100",
-    "examine": "X doses of energy potion.",
+    "examine": "1 dose of energy potion.",
     "grand_exchange_price": "25",
     "durability": null,
     "name": "Energy potion(1)",
@@ -31966,7 +31966,7 @@
   {
     "shop_price": "4000",
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super energy potion.",
+    "examine": "4 doses of super energy potion.",
     "grand_exchange_price": "3088",
     "durability": null,
     "name": "Super energy(4)",
@@ -31988,7 +31988,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super energy potion.",
+    "examine": "3 doses of super energy potion.",
     "grand_exchange_price": "2485",
     "durability": null,
     "name": "Super energy(3)",
@@ -32009,7 +32009,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super energy potion.",
+    "examine": "2 doses of super energy potion.",
     "grand_exchange_price": "1592",
     "durability": null,
     "name": "Super energy(2)",
@@ -32030,7 +32030,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super energy potion.",
+    "examine": "1 dose of super energy potion.",
     "grand_exchange_price": "1432",
     "durability": null,
     "name": "Super energy(1)",
@@ -32052,7 +32052,7 @@
   {
     "shop_price": "12000",
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super restore potion.",
+    "examine": "4 doses of super restore potion.",
     "grand_exchange_price": "11500",
     "durability": null,
     "name": "Super restore(4)",
@@ -32075,7 +32075,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super restore potion.",
+    "examine": "3 doses of super restore potion.",
     "grand_exchange_price": "8690",
     "durability": null,
     "name": "Super restore(3)",
@@ -32097,7 +32097,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super restore potion.",
+    "examine": "2 doses of super restore potion.",
     "grand_exchange_price": "5637",
     "durability": null,
     "name": "Super restore(2)",
@@ -32119,7 +32119,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X dose(s) of super restore potion.",
+    "examine": "1 dose of super restore potion.",
     "grand_exchange_price": "2606",
     "durability": null,
     "name": "Super restore(1)",
@@ -32141,7 +32141,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "(X) doses of Agility potion.",
+    "examine": "4 doses of Agility potion.",
     "grand_exchange_price": "276",
     "durability": null,
     "name": "Agility potion(4)",
@@ -32161,7 +32161,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "(X) doses of Agility potion.",
+    "examine": "3 doses of Agility potion.",
     "grand_exchange_price": "148",
     "durability": null,
     "name": "Agility potion(3)",
@@ -32181,7 +32181,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "(X) doses of Agility potion.",
+    "examine": "2 doses of Agility potion.",
     "grand_exchange_price": "115",
     "durability": null,
     "name": "Agility potion(2)",
@@ -32201,7 +32201,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "(X) doses of Agility potion.",
+    "examine": "1 dose of Agility potion.",
     "grand_exchange_price": "306",
     "durability": null,
     "name": "Agility potion(1)",
@@ -32221,7 +32221,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of Magic potion.",
+    "examine": "4 doses of Magic potion.",
     "grand_exchange_price": "7214",
     "durability": null,
     "name": "Magic potion(4)",
@@ -32242,7 +32242,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of Magic potion.",
+    "examine": "3 doses of Magic potion.",
     "grand_exchange_price": "5285",
     "durability": null,
     "name": "Magic potion(3)",
@@ -32263,7 +32263,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of Magic potion.",
+    "examine": "2 doses of Magic potion.",
     "grand_exchange_price": "3697",
     "durability": null,
     "name": "Magic potion(2)",
@@ -32284,7 +32284,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of Magic potion.",
+    "examine": "1 dose of Magic potion.",
     "grand_exchange_price": "1826",
     "durability": null,
     "name": "Magic potion(1)",
@@ -35209,7 +35209,7 @@
     "id": "3407"
   },
   {
-    "examine": "X doses serum 207 as described in Herbi Flax's diary.",
+    "examine": "4 doses serum 207 as described in Herbi Flax's diary.",
     "durability": null,
     "name": "Serum 207 (4)",
     "low_alchemy": "5",
@@ -35218,7 +35218,7 @@
     "id": "3408"
   },
   {
-    "examine": "X doses serum 207 as described in Herbi Flax's diary.",
+    "examine": "3 doses serum 207 as described in Herbi Flax's diary.",
     "durability": null,
     "name": "Serum 207 (3)",
     "low_alchemy": "5",
@@ -35227,7 +35227,7 @@
     "id": "3410"
   },
   {
-    "examine": "X doses serum 207 as described in Herbi Flax's diary.",
+    "examine": "2 doses serum 207 as described in Herbi Flax's diary.",
     "durability": null,
     "name": "Serum 207 (2)",
     "low_alchemy": "5",
@@ -35236,7 +35236,7 @@
     "id": "3412"
   },
   {
-    "examine": "X doses serum 207 as described in Herbi Flax's diary.",
+    "examine": "1 dose serum 207 as described in Herbi Flax's diary.",
     "durability": null,
     "name": "Serum 207 (1)",
     "low_alchemy": "5",
@@ -35246,7 +35246,7 @@
   },
   {
     "shop_price": "208",
-    "examine": "X doses permanent serum 208 as described in Herbi Flax's diary.",
+    "examine": "3 doses permanent serum 208 as described in Herbi Flax's diary.",
     "durability": null,
     "name": "Serum 208 (4)",
     "low_alchemy": "5",
@@ -35256,7 +35256,7 @@
   },
   {
     "shop_price": "208",
-    "examine": "X doses permanent serum 208 as described in Herbi Flax's diary.",
+    "examine": "3 doses permanent serum 208 as described in Herbi Flax's diary.",
     "durability": null,
     "name": "Serum 208 (3)",
     "low_alchemy": "5",
@@ -35266,7 +35266,7 @@
   },
   {
     "shop_price": "208",
-    "examine": "X doses permanent serum 208 as described in Herbi Flax's diary.",
+    "examine": "2 doses permanent serum 208 as described in Herbi Flax's diary.",
     "durability": null,
     "name": "Serum 208 (2)",
     "low_alchemy": "5",
@@ -35276,7 +35276,7 @@
   },
   {
     "shop_price": "208",
-    "examine": "X doses permanent serum 208 as described in Herbi Flax's diary.",
+    "examine": "1 dose permanent serum 208 as described in Herbi Flax's diary.",
     "durability": null,
     "name": "Serum 208 (1)",
     "low_alchemy": "5",
@@ -35310,7 +35310,7 @@
   {
     "shop_price": "26",
     "ge_buy_limit": "1000",
-    "examine": "X doses of olive oil.",
+    "examine": "4 doses of olive oil.",
     "grand_exchange_price": "678",
     "durability": null,
     "name": "Olive oil(4)",
@@ -35332,7 +35332,7 @@
   {
     "shop_price": "26",
     "ge_buy_limit": "1000",
-    "examine": "X doses of olive oil.",
+    "examine": "3 doses of olive oil.",
     "grand_exchange_price": "413",
     "durability": null,
     "name": "Olive oil(3)",
@@ -35354,7 +35354,7 @@
   {
     "shop_price": "26",
     "ge_buy_limit": "1000",
-    "examine": "X doses of olive oil.",
+    "examine": "2 doses of olive oil.",
     "grand_exchange_price": "173",
     "durability": null,
     "name": "Olive oil(2)",
@@ -35376,7 +35376,7 @@
   {
     "shop_price": "26",
     "ge_buy_limit": "1000",
-    "examine": "X doses of olive oil.",
+    "examine": "1 dose of olive oil.",
     "grand_exchange_price": "110",
     "durability": null,
     "name": "Olive oil(1)",
@@ -46847,7 +46847,7 @@
   {
     "shop_price": "200",
     "ge_buy_limit": "1000",
-    "examine": "X doses of Relicym's balm, which helps cure disease.",
+    "examine": "4 doses of Relicym's balm, which helps cure disease.",
     "grand_exchange_price": "1430",
     "durability": null,
     "name": "Relicym's balm(4)",
@@ -46867,7 +46867,7 @@
   {
     "shop_price": "200",
     "ge_buy_limit": "1000",
-    "examine": "X doses of Relicym's balm, which helps cure disease.",
+    "examine": "3 doses of Relicym's balm, which helps cure disease.",
     "grand_exchange_price": "654",
     "durability": null,
     "name": "Relicym's balm(3)",
@@ -46887,7 +46887,7 @@
   {
     "shop_price": "200",
     "ge_buy_limit": "1000",
-    "examine": "X doses of Relicym's balm, which helps cure disease.",
+    "examine": "2 doses of Relicym's balm, which helps cure disease.",
     "grand_exchange_price": "325",
     "durability": null,
     "name": "Relicym's balm(2)",
@@ -46907,7 +46907,7 @@
   {
     "shop_price": "200",
     "ge_buy_limit": "1000",
-    "examine": "X doses of Relicym's balm, which helps cure disease.",
+    "examine": "1 dose of Relicym's balm, which helps cure disease.",
     "grand_exchange_price": "204",
     "durability": null,
     "name": "Relicym's balm(1)",
@@ -57625,7 +57625,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X doses of a super-strong antipoison potion.",
+    "examine": "4 doses of a super-strong antipoison potion.",
     "grand_exchange_price": "1138",
     "durability": null,
     "name": "Antipoison++(4)",
@@ -57646,7 +57646,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X doses of a super-strong antipoison potion.",
+    "examine": "3 doses of a super-strong antipoison potion.",
     "grand_exchange_price": "1071",
     "durability": null,
     "name": "Antipoison++(3)",
@@ -57667,7 +57667,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X doses of a super-strong antipoison potion.",
+    "examine": "2 doses of a super-strong antipoison potion.",
     "grand_exchange_price": "632",
     "durability": null,
     "name": "Antipoison++(2)",
@@ -57688,7 +57688,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X doses of a super-strong antipoison potion.",
+    "examine": "1 dose of a super-strong antipoison potion.",
     "grand_exchange_price": "821",
     "durability": null,
     "name": "Antipoison++(1)",
@@ -86919,7 +86919,7 @@
   {
     "shop_price": "207",
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of combat potion.",
+    "examine": "4 doses of combat potion.",
     "grand_exchange_price": "45",
     "durability": null,
     "name": "Combat potion(4)",
@@ -86941,7 +86941,7 @@
   {
     "shop_price": "207",
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of combat potion.",
+    "examine": "3 doses of combat potion.",
     "grand_exchange_price": "25",
     "durability": null,
     "name": "Combat potion(3)",
@@ -86963,7 +86963,7 @@
   {
     "shop_price": "207",
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of combat potion.",
+    "examine": "2 doses of combat potion.",
     "grand_exchange_price": "19",
     "durability": null,
     "name": "Combat potion(2)",
@@ -86985,7 +86985,7 @@
   {
     "shop_price": "207",
     "ge_buy_limit": "100",
-    "examine": "X dose(s) of combat potion.",
+    "examine": "1 dose of combat potion.",
     "grand_exchange_price": "72",
     "durability": null,
     "name": "Combat potion(1)",
@@ -89081,7 +89081,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X doses of hunter potion.",
+    "examine": "4 doses of hunter potion.",
     "grand_exchange_price": "566",
     "durability": null,
     "name": "Hunter potion(4)",
@@ -89102,7 +89102,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X doses of hunter potion.",
+    "examine": "3 doses of hunter potion.",
     "grand_exchange_price": "229",
     "durability": null,
     "name": "Hunter potion(3)",
@@ -89123,7 +89123,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X doses of hunter potion.",
+    "examine": "2 doses of hunter potion.",
     "grand_exchange_price": "159",
     "durability": null,
     "name": "Hunter potion(2)",
@@ -89144,7 +89144,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "X doses of hunter potion.",
+    "examine": "1 dose of hunter potion.",
     "grand_exchange_price": "148",
     "durability": null,
     "name": "Hunter potion(1)",
@@ -104239,7 +104239,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X doses of a fishy agility potion",
+    "examine": "2 doses of a fishy agility potion",
     "grand_exchange_price": "388",
     "durability": null,
     "name": "Agility mix(2)",
@@ -104258,7 +104258,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "X doses of a fishy agility potion",
+    "examine": "1 dose of a fishy agility potion",
     "grand_exchange_price": "459",
     "durability": null,
     "name": "Agility mix(1)",
@@ -106537,7 +106537,7 @@
     "id": "11808"
   },
   {
-    "examine": "X doses of goblin transmogrification potion.",
+    "examine": "4 doses of goblin transmogrification potion.",
     "durability": null,
     "name": "Goblin potion (4)",
     "low_alchemy": "5",
@@ -106547,7 +106547,7 @@
     "equipment_slot": "5"
   },
   {
-    "examine": "X doses of goblin transmogrification potion.",
+    "examine": "3 doses of goblin transmogrification potion.",
     "durability": null,
     "name": "Goblin potion (3)",
     "low_alchemy": "5",
@@ -106556,7 +106556,7 @@
     "id": "11810"
   },
   {
-    "examine": "X doses of goblin transmogrification potion.",
+    "examine": "2 doses of goblin transmogrification potion.",
     "durability": null,
     "name": "Goblin potion (2)",
     "low_alchemy": "5",
@@ -106565,7 +106565,7 @@
     "id": "11811"
   },
   {
-    "examine": "X doses of goblin transmogrification potion.",
+    "examine": "1 dose of goblin transmogrification potion.",
     "durability": null,
     "name": "Goblin potion (1)",
     "low_alchemy": "5",
@@ -110074,7 +110074,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "4 doses of Summoning potion.",
     "grand_exchange_price": "4489",
     "durability": null,
     "name": "Summoning potion(4)",
@@ -110096,7 +110096,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "3 doses of Summoning potion.",
     "grand_exchange_price": "3320",
     "durability": null,
     "name": "Summoning potion(3)",
@@ -110118,7 +110118,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "2 doses of Summoning potion.",
     "grand_exchange_price": "1671",
     "durability": null,
     "name": "Summoning potion(2)",
@@ -110140,7 +110140,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "1 dose of Summoning potion.",
     "grand_exchange_price": "1576",
     "durability": null,
     "name": "Summoning potion(1)",
@@ -133524,7 +133524,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "3 doses of Prayer restore potion.",
     "durability": null,
     "low_alchemy": "61",
     "high_alchemy": "91",
@@ -133540,7 +133540,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "3 doses of Prayer restore potion.",
     "durability": null,
     "low_alchemy": "61",
     "high_alchemy": "91",
@@ -133555,7 +133555,7 @@
   },
   {
     "shop_price": "120",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "4 doses of Prayer restore potion.",
     "durability": null,
     "low_alchemy": "61",
     "high_alchemy": "91",
@@ -133571,7 +133571,7 @@
   },
   {
     "shop_price": "120",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "4 doses of Prayer restore potion.",
     "durability": null,
     "low_alchemy": "61",
     "high_alchemy": "91",
@@ -133586,7 +133586,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "3 doses of Prayer restore potion.",
     "durability": null,
     "low_alchemy": "61",
     "high_alchemy": "91",
@@ -133602,7 +133602,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "3 doses of Prayer restore potion.",
     "durability": null,
     "low_alchemy": "61",
     "high_alchemy": "91",
@@ -133617,7 +133617,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "2 doses of Prayer restore potion.",
     "durability": null,
     "low_alchemy": "61",
     "high_alchemy": "91",
@@ -133633,7 +133633,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "2 doses of Prayer restore potion.",
     "durability": null,
     "low_alchemy": "61",
     "high_alchemy": "91",
@@ -133648,7 +133648,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "1 dose of Prayer restore potion.",
     "durability": null,
     "low_alchemy": "61",
     "high_alchemy": "91",
@@ -133664,7 +133664,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "(X) doses of Prayer restore potion.",
+    "examine": "1 dose of Prayer restore potion.",
     "durability": null,
     "low_alchemy": "61",
     "high_alchemy": "91",
@@ -133679,7 +133679,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "X doses of energy potion.",
+    "examine": "4 doses of energy potion.",
     "durability": null,
     "low_alchemy": "58",
     "high_alchemy": "87",
@@ -133695,7 +133695,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "X doses of energy potion.",
+    "examine": "4 doses of energy potion.",
     "durability": null,
     "low_alchemy": "58",
     "high_alchemy": "87",
@@ -133710,7 +133710,7 @@
   },
   {
     "shop_price": "120",
-    "examine": "X doses of energy potion.",
+    "examine": "4 doses of energy potion.",
     "durability": null,
     "low_alchemy": "58",
     "high_alchemy": "87",
@@ -133726,7 +133726,7 @@
   },
   {
     "shop_price": "120",
-    "examine": "X doses of energy potion.",
+    "examine": "4 doses of energy potion.",
     "durability": null,
     "low_alchemy": "58",
     "high_alchemy": "87",
@@ -133741,7 +133741,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "X doses of energy potion.",
+    "examine": "3 doses of energy potion.",
     "durability": null,
     "low_alchemy": "58",
     "high_alchemy": "87",
@@ -133757,7 +133757,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "X doses of energy potion.",
+    "examine": "3 doses of energy potion.",
     "durability": null,
     "low_alchemy": "58",
     "high_alchemy": "87",
@@ -133772,7 +133772,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "X doses of energy potion.",
+    "examine": "2 doses of energy potion.",
     "durability": null,
     "low_alchemy": "58",
     "high_alchemy": "87",
@@ -133788,7 +133788,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "X doses of energy potion.",
+    "examine": "2 doses of energy potion.",
     "durability": null,
     "low_alchemy": "58",
     "high_alchemy": "87",
@@ -133803,7 +133803,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "X doses of energy potion.",
+    "examine": "1 dose of energy potion.",
     "durability": null,
     "low_alchemy": "58",
     "high_alchemy": "87",
@@ -133819,7 +133819,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "X doses of energy potion.",
+    "examine": "1 dose of energy potion.",
     "durability": null,
     "low_alchemy": "58",
     "high_alchemy": "87",
@@ -133834,7 +133834,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "5 doses of super Attack potion.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -133850,7 +133850,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "5 doses of super Attack potion.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -133865,7 +133865,7 @@
   },
   {
     "shop_price": "120",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "4 doses of super Attack potion.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -133881,7 +133881,7 @@
   },
   {
     "shop_price": "120",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "4 doses of super Attack potion.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -133896,7 +133896,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "3 doses of super Attack potion.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -133912,7 +133912,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "3 doses of super Attack potion.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -133927,7 +133927,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "2 doses of super Attack potion.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -133943,7 +133943,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "2 doses of super Attack potion.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -133958,7 +133958,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "1 dose of super Attack potion.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -133974,7 +133974,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "X dose(s) of super Attack potion.",
+    "examine": "1 dose of super Attack potion.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -133989,7 +133989,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "5 doses of super Strength potion.",
     "durability": null,
     "low_alchemy": "88",
     "high_alchemy": "132",
@@ -134005,7 +134005,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "5 doses of super Strength potion.",
     "durability": null,
     "low_alchemy": "88",
     "high_alchemy": "132",
@@ -134020,7 +134020,7 @@
   },
   {
     "shop_price": "120",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "4 doses of super Strength potion.",
     "durability": null,
     "low_alchemy": "88",
     "high_alchemy": "132",
@@ -134036,7 +134036,7 @@
   },
   {
     "shop_price": "120",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "4 doses of super Strength potion.",
     "durability": null,
     "low_alchemy": "88",
     "high_alchemy": "132",
@@ -134051,7 +134051,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "3 doses of super Strength potion.",
     "durability": null,
     "low_alchemy": "88",
     "high_alchemy": "132",
@@ -134067,7 +134067,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "3 doses of super Strength potion.",
     "durability": null,
     "low_alchemy": "88",
     "high_alchemy": "132",
@@ -134082,7 +134082,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "2 doses of super Strength potion.",
     "durability": null,
     "low_alchemy": "88",
     "high_alchemy": "132",
@@ -134098,7 +134098,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "2 doses of super Strength potion.",
     "durability": null,
     "low_alchemy": "88",
     "high_alchemy": "132",
@@ -134113,7 +134113,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "1 dose of super Strength potion.",
     "durability": null,
     "low_alchemy": "88",
     "high_alchemy": "132",
@@ -134129,7 +134129,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "X dose(s) of super Strength potion.",
+    "examine": "1 dose of super Strength potion.",
     "durability": null,
     "low_alchemy": "88",
     "high_alchemy": "132",
@@ -134160,7 +134160,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "4 doses of ranging potion.",
+    "examine": "5 doses of ranging potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134206,7 +134206,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "4 doses of ranging potion.",
+    "examine": "3 doses of ranging potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134222,7 +134222,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "4 doses of ranging potion.",
+    "examine": "3 doses of ranging potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134237,7 +134237,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "4 doses of ranging potion.",
+    "examine": "2 doses of ranging potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134253,7 +134253,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "4 doses of ranging potion.",
+    "examine": "2 doses of ranging potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134268,7 +134268,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "4 doses of ranging potion.",
+    "examine": "1 dose of ranging potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134284,7 +134284,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "4 doses of ranging potion.",
+    "examine": "1 dose of ranging potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134299,7 +134299,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "3 doses of Defence Potion.",
     "durability": null,
     "low_alchemy": "352",
     "high_alchemy": "528",
@@ -134315,7 +134315,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "3 doses of Defence Potion.",
     "durability": null,
     "low_alchemy": "352",
     "high_alchemy": "528",
@@ -134330,7 +134330,7 @@
   },
   {
     "shop_price": "120",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "4 doses of Defence Potion.",
     "durability": null,
     "low_alchemy": "352",
     "high_alchemy": "528",
@@ -134346,7 +134346,7 @@
   },
   {
     "shop_price": "120",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "4 doses of Defence Potion.",
     "durability": null,
     "low_alchemy": "352",
     "high_alchemy": "528",
@@ -134361,7 +134361,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "3 doses of Defence Potion.",
     "durability": null,
     "low_alchemy": "352",
     "high_alchemy": "528",
@@ -134377,7 +134377,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "3 doses of Defence Potion.",
     "durability": null,
     "low_alchemy": "352",
     "high_alchemy": "528",
@@ -134392,7 +134392,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "2 doses of Defence Potion.",
     "durability": null,
     "low_alchemy": "352",
     "high_alchemy": "528",
@@ -134408,7 +134408,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "2 doses of Defence Potion.",
     "durability": null,
     "low_alchemy": "352",
     "high_alchemy": "528",
@@ -134423,7 +134423,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "1 dose of Defence Potion.",
     "durability": null,
     "low_alchemy": "352",
     "high_alchemy": "528",
@@ -134439,7 +134439,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "(x) doses of Defence Potion.",
+    "examine": "1 dose of Defence Potion.",
     "durability": null,
     "low_alchemy": "352",
     "high_alchemy": "528",
@@ -134470,7 +134470,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "4 doses of Magic potion.",
+    "examine": "5 doses of Magic potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134516,7 +134516,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "4 doses of Magic potion.",
+    "examine": "3 doses of Magic potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134532,7 +134532,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "4 doses of Magic potion.",
+    "examine": "3 doses of Magic potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134547,7 +134547,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "4 doses of Magic potion.",
+    "examine": "2 doses of Magic potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134563,7 +134563,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "4 doses of Magic potion.",
+    "examine": "2 doses of Magic potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134578,7 +134578,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "4 doses of Magic potion.",
+    "examine": "1 dose of Magic potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134594,7 +134594,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "4 doses of Magic potion.",
+    "examine": "1 dose of Magic potion.",
     "durability": null,
     "low_alchemy": "224",
     "high_alchemy": "336",
@@ -134609,7 +134609,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "3 doses of Summoning potion.",
     "durability": null,
     "low_alchemy": "76",
     "high_alchemy": "114",
@@ -134625,7 +134625,7 @@
   },
   {
     "shop_price": "150",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "3 doses of Summoning potion.",
     "durability": null,
     "low_alchemy": "76",
     "high_alchemy": "114",
@@ -134640,7 +134640,7 @@
   },
   {
     "shop_price": "120",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "4 doses of Summoning potion.",
     "durability": null,
     "low_alchemy": "76",
     "high_alchemy": "114",
@@ -134656,7 +134656,7 @@
   },
   {
     "shop_price": "120",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "4 doses of Summoning potion.",
     "durability": null,
     "low_alchemy": "76",
     "high_alchemy": "114",
@@ -134671,7 +134671,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "3 doses of Summoning potion.",
     "durability": null,
     "low_alchemy": "76",
     "high_alchemy": "114",
@@ -134687,7 +134687,7 @@
   },
   {
     "shop_price": "90",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "3 doses of Summoning potion.",
     "durability": null,
     "low_alchemy": "76",
     "high_alchemy": "114",
@@ -134702,7 +134702,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "2 doses of Summoning potion.",
     "durability": null,
     "low_alchemy": "76",
     "high_alchemy": "114",
@@ -134718,7 +134718,7 @@
   },
   {
     "shop_price": "60",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "2 doses of Summoning potion.",
     "durability": null,
     "low_alchemy": "76",
     "high_alchemy": "114",
@@ -134733,7 +134733,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "1 dose of Summoning potion.",
     "durability": null,
     "low_alchemy": "76",
     "high_alchemy": "114",
@@ -134749,7 +134749,7 @@
   },
   {
     "shop_price": "30",
-    "examine": "(X) doses of Summoning potion.",
+    "examine": "1 dose of Summoning potion.",
     "durability": null,
     "low_alchemy": "76",
     "high_alchemy": "114",

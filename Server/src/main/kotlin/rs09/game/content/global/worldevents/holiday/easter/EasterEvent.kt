@@ -60,7 +60,7 @@ class EasterEvent : WorldEvent("easter") {
     override fun checkActive(): Boolean {
         val isApril = Calendar.getInstance().get(Calendar.MONTH) == Calendar.APRIL
         val isBefore9th = Calendar.getInstance().get(Calendar.DAY_OF_MONTH) < 9
-        return (isApril && isBefore9th)
+        return false
     }
 
     override fun initialize() {
