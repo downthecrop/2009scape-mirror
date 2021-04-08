@@ -104,6 +104,13 @@ class PlayerSaveParser(val player: Player) {
                 val attr = a as JSONObject
                 val key = attr["key"].toString()
                 val type = attr["type"].toString()
+                val isExpirable = attr.getOrDefault("expirable",false) as Boolean
+                if(isExpirable){
+                    val expireTime = attr["expiration-time"].toString().toLong()
+                    if(expireTime < System.currentTimeMillis()) continue
+
+                    player.gameAttributes.keyExpirations[key] = expireTime
+                }
                 player.gameAttributes.savedAttributes.add(key)
                 player.gameAttributes.attributes.put(key, when (type) {
                     "int" -> attr["value"].toString().toInt()
