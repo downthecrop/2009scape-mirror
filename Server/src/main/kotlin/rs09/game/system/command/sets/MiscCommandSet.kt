@@ -28,7 +28,6 @@ import rs09.game.node.entity.state.newsys.states.FarmingState
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Command
 import rs09.game.system.command.CommandMapping
-import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
 import java.awt.Toolkit
@@ -505,5 +504,6 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
 
             notify(player,"You buried a ${def.name} at ${player.location}")
         }
+
     }
 }
