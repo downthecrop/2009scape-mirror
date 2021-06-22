@@ -8,7 +8,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -52,7 +52,7 @@ public final class GrandExchangeShortcut extends OptionHandler {
 			return true;
 		}
 		player.lock(4);
-		final GameObject o = (GameObject) node;
+		final Scenery o = (Scenery) node;
 		if (o.getId() == 9311) {
 			ForceMovement.run(player, Location.create(3138, 3516, 0), o.getLocation(), CLIMB_DOWN);
 			GameWorld.getPulser().submit(new Pulse(1, player) {
@@ -101,7 +101,7 @@ public final class GrandExchangeShortcut extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node n, Node node) {
-		if (((GameObject) node).getId() == 9311) {
+		if (((Scenery) node).getId() == 9311) {
 			return Location.create(3138, 3516, 0);
 		}
 		return Location.create(3144, 3514, 0);

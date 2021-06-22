@@ -5,8 +5,8 @@ import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Initializable;
@@ -30,7 +30,7 @@ public final class DoorManagingPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		GameObject object = (GameObject) node;
+		Scenery object = (Scenery) node;
 		if (object.getType() != 9 && !player.getLocation().equals(node.getLocation()) && !player.getLocation().isNextTo(object) && object.getName().contains("cupboard")) {
 			return true;
 		}
@@ -39,12 +39,12 @@ public final class DoorManagingPlugin extends OptionHandler {
 			switch(option) {
 				case "open":
 					if (object.isActive()) {
-						ObjectBuilder.replace(object, object.transform(object.getId() + 1), 80);
+						SceneryBuilder.replace(object, object.transform(object.getId() + 1), 80);
 					}
 					return true;
 				case "close":
 				case "shut":
-					ObjectBuilder.replace(object, object.transform(object.getId() - 1));
+					SceneryBuilder.replace(object, object.transform(object.getId() - 1));
 					return true;
 			}
 			return true;
@@ -70,7 +70,7 @@ public final class DoorManagingPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node n, Node node) {
-		GameObject o = (GameObject) node;
+		Scenery o = (Scenery) node;
 		if (o.getType() < 4 || o.getType() == 9) {
 			return DoorActionHandler.getDestination((Player) n, o);
 		}

@@ -6,8 +6,8 @@ import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -187,8 +187,8 @@ public final class IgnatiusVulcanDialogue extends DialoguePlugin {
 		npc.getWalkingQueue().reset();
 		npc.getAnimator().forceAnimation(ANIMATION);
 		if (RegionManager.getObject(location) == null) {
-			final GameObject fire = new GameObject(2732, location);
-			ObjectBuilder.add(fire, RandomFunction.random(100, 130));
+			final Scenery fire = new Scenery(2732, location);
+			SceneryBuilder.add(fire, RandomFunction.random(100, 130));
 			npc.faceLocation(fire.getLocation());
 		}
 	}

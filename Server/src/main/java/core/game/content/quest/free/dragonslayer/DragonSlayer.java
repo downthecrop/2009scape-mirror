@@ -6,7 +6,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -324,7 +324,7 @@ public final class DragonSlayer extends Quest {
 			return true;
 		}
 		player.getPacketDispatch().sendMessage("The door opens...");
-		final GameObject object = RegionManager.getObject(new Location(3050, 9839, 0));
+		final Scenery object = RegionManager.getObject(new Location(3050, 9839, 0));
 		player.faceLocation(object.getLocation());
 		player.getPacketDispatch().sendObjectAnimation(object, new Animation(6636));
 		GameWorld.getPulser().submit(new Pulse(1, player) {

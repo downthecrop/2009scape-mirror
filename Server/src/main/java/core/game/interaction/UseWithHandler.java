@@ -5,7 +5,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import rs09.game.system.SystemLogger;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
@@ -116,8 +116,8 @@ public abstract class UseWithHandler implements Plugin<Object> {
                 }
             } else if (n instanceof NPC) {
                 handler = HANDLERS.get(((NPC) n).getId() | NPC_TYPE << 16);
-            } else if (n instanceof GameObject) {
-                handler = HANDLERS.get(((GameObject) n).getId() | OBJECT_TYPE << 16);
+            } else if (n instanceof Scenery) {
+                handler = HANDLERS.get(((Scenery) n).getId() | OBJECT_TYPE << 16);
             } else if (n instanceof Player) {
                 handler = HANDLERS.get(((Item) event.getUsed()).getId() | PLAYER_TYPE << 16);
             } else {

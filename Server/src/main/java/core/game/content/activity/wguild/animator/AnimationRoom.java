@@ -7,7 +7,7 @@ import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.ItemLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
@@ -110,7 +110,7 @@ public final class AnimationRoom extends MapZone implements Plugin<Object> {
 	 * @param object The animator.
 	 * @param set The set to animate.
 	 */
-	private void animateArmour(final Player player, final GameObject object, final ArmourSet set) {
+	private void animateArmour(final Player player, final Scenery object, final ArmourSet set) {
 		if (!player.getInventory().containItems(set.getPieces())) {
 			player.getDialogueInterpreter().sendDialogue("You need a plate body, playe legs and full helm of the same type to", "activate the armour animator.");
 			return;
@@ -181,7 +181,7 @@ public final class AnimationRoom extends MapZone implements Plugin<Object> {
 						}
 					}
 				}
-				animateArmour(event.getPlayer(), (GameObject) event.getUsedWith(), set);
+				animateArmour(event.getPlayer(), (Scenery) event.getUsedWith(), set);
 				return true;
 			}
 

@@ -1,7 +1,7 @@
 package rs09.game.node.entity.skill.magic
 
 import core.game.component.Component
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
@@ -138,7 +138,7 @@ class LunarListeners : SpellListener("lunar") {
         }
     }
 
-    fun curePlant(player: Player, obj: GameObject){
+    fun curePlant(player: Player, obj: Scenery){
         val fPatch = FarmingPatch.forObject(obj)
         if(fPatch == null){
             player.sendMessage("You attempt to cast Cure Plant on ${obj.definition.name}!")

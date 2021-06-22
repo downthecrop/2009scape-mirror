@@ -9,7 +9,7 @@ import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -56,8 +56,8 @@ public class BoneOfferPlugin extends UseWithHandler {
 	@Override
 	public boolean handle(NodeUsageEvent event) {
 		Player player = event.getPlayer();
-		GameObject left = null;
-		GameObject right = null;
+		Scenery left = null;
+		Scenery right = null;
 		if (event.getUsedWith().asObject().getRotation() % 2 == 0) {
 			left = RegionManager.getObject(event.getUsedWith().getLocation().getZ(), event.getUsedWith().getLocation().getX() + 3, event.getUsedWith().getLocation().getY());
 			right = RegionManager.getObject(event.getUsedWith().getLocation().getZ(), event.getUsedWith().getLocation().getX() - 2, event.getUsedWith().getLocation().getY());
@@ -80,7 +80,7 @@ public class BoneOfferPlugin extends UseWithHandler {
 	 * @param right the right brazier
 	 * @param b the bone used
 	 */
-	private void worship(final Player player, final GameObject altar, final GameObject left, final GameObject right, final Bones b) {
+	private void worship(final Player player, final Scenery altar, final Scenery left, final Scenery right, final Bones b) {
 		if (player.getIronmanManager().isIronman() && !player.getHouseManager().isInHouse(player)) {
 			player.sendMessage("You cannot do this on someone else's altar.");
 			return;
@@ -113,7 +113,7 @@ public class BoneOfferPlugin extends UseWithHandler {
 	 * Checks if the burner is lit.
 	 * @param obj the object.
 	 */
-	private boolean isLit(GameObject obj) {
+	private boolean isLit(Scenery obj) {
 		return obj != null && obj.getId() != 15271 && ObjectDefinition.forId(obj.getId()).getOptions() != null && !ObjectDefinition.forId(obj.getId()).hasAction("Light");
 	}
 	
@@ -122,7 +122,7 @@ public class BoneOfferPlugin extends UseWithHandler {
 	 * @param altar the altar object
 	 * @return the base bonus.
 	 */
-	private double getBase(GameObject altar) {
+	private double getBase(Scenery altar) {
 		double base = 150.0;
 		if (altar == null) {
 			return base;
@@ -156,7 +156,7 @@ public class BoneOfferPlugin extends UseWithHandler {
 	 * @param isRight if the right is lit.
 	 * @return the mod.
 	 */
-	private double getMod(GameObject altar, boolean isLeft, boolean isRight) {
+	private double getMod(Scenery altar, boolean isLeft, boolean isRight) {
 		double total = getBase(altar);
 		if (isLeft) {
 			total += 50.0;

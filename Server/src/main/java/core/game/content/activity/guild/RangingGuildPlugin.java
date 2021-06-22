@@ -28,7 +28,7 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -64,7 +64,7 @@ public final class RangingGuildPlugin extends OptionHandler {
 
     @Override
     public boolean handle(Player player, Node node, String option) {
-        final int id = node instanceof GameObject ? ((GameObject) node).getId() : 0;
+        final int id = node instanceof Scenery ? ((Scenery) node).getId() : 0;
         switch (option) {
             case "fire-at":
                 if (player.getArcheryTargets() <= 0) {
@@ -78,7 +78,7 @@ public final class RangingGuildPlugin extends OptionHandler {
                     player.sendMessage("You must have bronze arrows and a bow equipped.");
                     return true;
                 }
-                player.getPulseManager().run(new ArcheryCompetitionPulse(player, (GameObject) node));
+                player.getPulseManager().run(new ArcheryCompetitionPulse(player, (Scenery) node));
                 break;
             case "open":
                 switch (id) {
@@ -89,7 +89,7 @@ public final class RangingGuildPlugin extends OptionHandler {
                                 return true;
                             }
                         }
-                        DoorActionHandler.handleAutowalkDoor(player, (GameObject) node, player.getLocation().getY() >= 3438 ? Location.create(2659, 3437, 0) : Location.create(2657, 3439, 0));
+                        DoorActionHandler.handleAutowalkDoor(player, (Scenery) node, player.getLocation().getY() >= 3438 ? Location.create(2659, 3437, 0) : Location.create(2657, 3439, 0));
                         break;
                 }
                 break;
@@ -114,18 +114,18 @@ public final class RangingGuildPlugin extends OptionHandler {
 
     @Override
     public Location getDestination(Node node, Node n) {
-        if (n instanceof GameObject) {
-            if (((GameObject) n).getDefinition().hasAction("open")) {
-                if (((GameObject) n).getId() == 2514) {
+        if (n instanceof Scenery) {
+            if (((Scenery) n).getDefinition().hasAction("open")) {
+                if (((Scenery) n).getId() == 2514) {
                     if (node.getLocation().getY() >= 3438) {
                         return Location.create(2657, 3439, 0);
                     } else {
                         return Location.create(2659, 3437, 0);
                     }
                 }
-                return DoorActionHandler.getDestination((Player) node, (GameObject) n);
+                return DoorActionHandler.getDestination((Player) node, (Scenery) n);
             }
-            if (((GameObject) n).getId() == 2513)
+            if (((Scenery) n).getId() == 2513)
                 return Location.create(2673, 3420, 0);
         }
         return null;
@@ -1113,9 +1113,9 @@ public final class RangingGuildPlugin extends OptionHandler {
         private final Player player;
 
         /**
-         * Represents the game object.
+         * Represents the scenery.
          */
-        private final GameObject object;
+        private final Scenery object;
 
         /**
          * Constructs a new {@code ArcheryCompetitionPulse} {@code Object}.
@@ -1123,7 +1123,7 @@ public final class RangingGuildPlugin extends OptionHandler {
          * @param player the player.
          * @param object the object.
          */
-        public ArcheryCompetitionPulse(final Player player, final GameObject object) {
+        public ArcheryCompetitionPulse(final Player player, final Scenery object) {
             super(1, player, object);
             this.player = player;
             this.object = object;

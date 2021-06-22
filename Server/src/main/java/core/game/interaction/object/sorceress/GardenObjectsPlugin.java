@@ -14,7 +14,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
@@ -85,7 +85,7 @@ public final class GardenObjectsPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		GameObject object = (GameObject) node;
+		Scenery object = (Scenery) node;
 		if (option.equals("pick")) {
 			final HerbDefinition herbDef = HerbDefinition.forId(object.getId());
 			if (herbDef != null) {
@@ -182,7 +182,7 @@ public final class GardenObjectsPlugin extends OptionHandler {
      * @param object the object.
      * @param herbDef the herbdef.
      */
-    private void handleElementalGarden(final Player player, GameObject object, final HerbDefinition herbDef) {
+    private void handleElementalGarden(final Player player, Scenery object, final HerbDefinition herbDef) {
 	player.lock();
 	player.addExtension(LogoutTask.class, new LocationLogoutTask(99, herbDef.getRespawn()));
 	player.animate(ANIMATION);

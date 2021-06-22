@@ -5,7 +5,7 @@ import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
 import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
@@ -47,7 +47,7 @@ public final class MysteriousRuinPlugin extends UseWithHandler {
 			return true;
 		}
 		final Talisman talisman = Talisman.forItem(event.getUsedItem());
-		final MysteriousRuin ruin = MysteriousRuin.forObject(((GameObject) event.getUsedWith()));
+		final MysteriousRuin ruin = MysteriousRuin.forObject(((Scenery) event.getUsedWith()));
 		if (talisman != ruin.getTalisman() && talisman != Talisman.ELEMENTAL) {
 			return false;
 		}

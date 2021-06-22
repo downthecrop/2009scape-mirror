@@ -4,8 +4,8 @@ import core.cache.def.impl.ItemDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.Region;
 import core.game.world.map.RegionManager;
@@ -36,13 +36,13 @@ public final class SilverSicklePlugin extends OptionHandler {
 			if (player.getSkills().getPrayerPoints() < 1) {
 				player.getPacketDispatch().sendMessage("You don't have enough prayer points to do this.");
 			}
-			for (GameObject[] o : region.getPlanes()[0].getObjects()) {
-				for (GameObject obj : o) {
+			for (Scenery[] o : region.getPlanes()[0].getObjects()) {
+				for (Scenery obj : o) {
 					if (obj != null) {
 						if (obj.getName().equalsIgnoreCase("Rotting log") && player.getSkills().getPrayerPoints() >= 1) {
 							if (player.getLocation().withinDistance(obj.getLocation(), 2)) {
 								handleVisuals(player, node);
-								ObjectBuilder.add(new GameObject(3509, obj.getLocation(), obj.getRotation()));
+								SceneryBuilder.add(new Scenery(3509, obj.getLocation(), obj.getRotation()));
 							}
 						}
 					}

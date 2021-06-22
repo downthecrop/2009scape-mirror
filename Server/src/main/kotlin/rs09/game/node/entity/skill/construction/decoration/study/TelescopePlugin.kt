@@ -4,7 +4,7 @@ import core.cache.def.impl.ObjectDefinition
 import core.game.component.Component
 import core.game.interaction.OptionHandler
 import core.game.node.Node
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
@@ -31,7 +31,7 @@ class TelescopePlugin : OptionHandler() {
         val delay: Int = 25000 + (25000 / 3)
         val timeLeft = delay - star.ticks
         val fakeTimeLeftBecauseFuckPlayers = TimeUnit.MILLISECONDS.toMinutes(timeLeft * 600L) + if(RandomFunction.random(0,100) % 2 == 0) 2 else -2
-        val obj = node?.asObject() as GameObject
+        val obj = node?.asObject() as Scenery
         player?.lock()
         player?.animate(ANIMATION)
         player?.interfaceManager?.open(Component(782)).also { player?.unlock()

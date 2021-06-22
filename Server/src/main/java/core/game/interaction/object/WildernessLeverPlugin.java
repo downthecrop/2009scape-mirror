@@ -9,8 +9,8 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.TeleportManager;
 import core.game.node.entity.player.link.audio.Audio;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -44,14 +44,14 @@ public final class WildernessLeverPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final GameObject object = (GameObject) node;
+		final Scenery object = (Scenery) node;
 		final LeverSets set = LeverSets.forId(object.getId());
 		if (!set.canPull(player, object)) {
 			return true;
 		}
 		set.pull(player, set.getIndex(object.getId()));
 		if (set.getTransformId() != -1) {
-			ObjectBuilder.replace(object, object.transform(set.getTransformId()), 2);
+			SceneryBuilder.replace(object, object.transform(set.getTransformId()), 2);
 		}
 		return true;
 	}
@@ -93,7 +93,7 @@ public final class WildernessLeverPlugin extends OptionHandler {
 		
 		MAGE_BANK("mage's cave", 5959, 5960, Location.create(3090, 3956, 0), Location.create(2539, 4712, 0)), ARENA("arena", 9706, 9707, Location.create(3105, 3956, 0), Location.create(3105, 3951, 0)) {
 			@Override
-			public boolean canPull(Player player, GameObject object) {
+			public boolean canPull(Player player, Scenery object) {
 				if (!player.getSavedData().getActivityData().hasKilledKolodion() && object.getId() == 9706) {
 					player.getDialogueInterpreter().sendDialogues(905, null, "You're not allowed in there. Come downstairs if you", "want to enter my arena.");
 					return false;
@@ -189,7 +189,7 @@ public final class WildernessLeverPlugin extends OptionHandler {
 		 * @param player the player.
 		 * @return {@code True} if so.
 		 */
-		public boolean canPull(Player player, GameObject object) {
+		public boolean canPull(Player player, Scenery object) {
 			return true;
 		}
 

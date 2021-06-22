@@ -9,8 +9,8 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -65,9 +65,9 @@ public class WLBelowCutscene extends CutscenePlugin {
 	public boolean start(final Player player, boolean login, Object... args) {
 		player.lock();
 		player.setAttribute("cutscene", this);
-		GameObject table = RegionManager.getObject(base.transform(9, 37, 0));
+		Scenery table = RegionManager.getObject(base.transform(9, 37, 0));
 		if (table != null) {
-			ObjectBuilder.remove(table);
+			SceneryBuilder.remove(table);
 		}
 		surok = NPC.create(5835, base.transform(8, 39, 0));
 		surok.init();

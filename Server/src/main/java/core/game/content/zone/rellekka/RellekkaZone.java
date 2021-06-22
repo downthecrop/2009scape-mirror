@@ -12,7 +12,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
@@ -178,7 +178,7 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 				switch (node.getId()) {
 				case 4616:
 				case 4615:
-					crossRellekaBridge(player, (GameObject) node);
+					crossRellekaBridge(player, (Scenery) node);
 					break;
 				}
 				break;
@@ -205,7 +205,7 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 		 * @param player the player.
 		 * @param node the node.
 		 */
-		private void crossRellekaBridge(Player player, GameObject node) {
+		private void crossRellekaBridge(Player player, Scenery node) {
 			boolean east = node.getId() == 4616;
 			player.lock(2);
 			if (player.getLocation().equals(node.getLocation())) {

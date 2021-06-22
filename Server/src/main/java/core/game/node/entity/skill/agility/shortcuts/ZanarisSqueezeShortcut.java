@@ -5,7 +5,7 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.agility.AgilityShortcut;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -30,7 +30,7 @@ public class ZanarisSqueezeShortcut extends AgilityShortcut {
 	}
 
 	@Override
-	public void run(Player player, GameObject object, String option, boolean failed) {
+	public void run(Player player, Scenery object, String option, boolean failed) {
 		if (player.getSkills().getLevel(Skills.AGILITY) < 66 && (object.getLocation().equals(new Location(2408, 4395)) || object.getLocation().equals(new Location(2415, 4402)))) {
 			player.getDialogueInterpreter().sendDialogue("You need an Agility level of at least 66 to negotiate this obstacle.");
 			return;

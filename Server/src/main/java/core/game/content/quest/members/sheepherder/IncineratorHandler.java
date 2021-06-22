@@ -5,8 +5,7 @@ import core.game.interaction.MovementPulse;
 import core.game.interaction.NodeUsageEvent;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import rs09.game.system.SystemLogger;
+import core.game.node.object.Scenery;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -27,8 +26,8 @@ public class IncineratorHandler extends PluginInteraction {
     @Override
     public boolean handle(Player player, NodeUsageEvent event) {
         Node n = event.getUsedWith();
-        if(n instanceof GameObject){
-            GameObject obj = (GameObject) n;
+        if(n instanceof Scenery){
+            Scenery obj = (Scenery) n;
             if (n.getId() == 165) {
                 player.getPulseManager().run(new MovementPulse(player, DestinationFlag.OBJECT.getDestination(player,obj)) {
                     @Override

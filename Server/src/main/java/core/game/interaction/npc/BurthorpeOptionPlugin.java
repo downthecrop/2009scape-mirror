@@ -7,7 +7,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -63,7 +63,7 @@ public final class BurthorpeOptionPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final int id = node instanceof NPC ? ((NPC) node).getId() : ((GameObject) node).getId();
+		final int id = node instanceof NPC ? ((NPC) node).getId() : ((Scenery) node).getId();
 		switch (option) {
 		case "climb-down":
 			switch (id) {

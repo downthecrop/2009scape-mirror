@@ -12,7 +12,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -52,7 +52,7 @@ public final class FurnaceOptionPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		switch (((GameObject) node).getId()) {
+		switch (((Scenery) node).getId()) {
 		case 3044:
 			handleTutorialIsland(player);
 			return true;

@@ -19,8 +19,8 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -143,8 +143,8 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 				}
 			});
 			Projectile.create(Location.create(2842, 3554, 1), Location.create(2842, 3545, 1), attack.graphicId, 70, 32, 80, 220, 20, 11).send();
-			GameObject object = RegionManager.getObject(Location.create(2840, 3552, 1));
-			ObjectBuilder.replace(object, object.transform(attack.objectId), 4);
+			Scenery object = RegionManager.getObject(Location.create(2840, 3552, 1));
+			SceneryBuilder.replace(object, object.transform(attack.objectId), 4);
 			Audio sound = new Audio(1911);
 			for (Player p : players) {
 				p.getAudioManager().send(sound);

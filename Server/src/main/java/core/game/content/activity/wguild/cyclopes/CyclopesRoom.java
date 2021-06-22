@@ -17,7 +17,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -68,7 +68,7 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 							Pathfinder.find(p.getLocation(), Location.create(2847, 3541, 2)).walk(p);
 							p.lock(50);
 						} else {
-							GameObject object = RegionManager.getObject(2, 2847, 3541);
+							Scenery object = RegionManager.getObject(2, 2847, 3541);
 							if (object != null && p.getLocation().getX() == 2847 && p.getLocation().getY() == 3541) {
 								DoorActionHandler.handleAutowalkDoor(p, object);
 								leave(p);
@@ -161,7 +161,7 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 					leave(player);
 					PLAYERS.remove(player);
 				}
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 

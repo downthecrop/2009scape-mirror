@@ -10,7 +10,7 @@ import core.game.interaction.UseWithHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import rs09.plugin.PluginManager;
@@ -66,7 +66,7 @@ public final class SmithingPlugin extends UseWithHandler {
 	@Override
 	public boolean handle(NodeUsageEvent event) {
 		final Player player = event.getPlayer();
-		if (((GameObject) event.getUsedWith()).getId() == 2782 && !player.getQuestRepository().isComplete("Doric's Quest")) {
+		if (((Scenery) event.getUsedWith()).getId() == 2782 && !player.getQuestRepository().isComplete("Doric's Quest")) {
 			player.getDialogueInterpreter().sendDialogue("Property of Doric the Dwarf.");
 			return true;
 		}

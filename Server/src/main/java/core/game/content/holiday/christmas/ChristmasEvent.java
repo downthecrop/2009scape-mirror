@@ -30,8 +30,8 @@ import core.game.node.entity.player.link.TeleportManager.TeleportType;
 import core.game.node.entity.player.link.emote.Emotes;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -179,32 +179,32 @@ public class ChristmasEvent extends HolidayEvent {
 	 */
 	private void snow() {
 		Location loc = null;
-		GameObject obj = null;
+		Scenery obj = null;
 		for (Location location : HUBS) {
 			for (int x = 2; x < 10; x++) {
 				for (int y = 2; y < 10; y++) {
 					loc = location.transform(x, y, 0);
 					if (RegionManager.getObject(loc) == null && RegionManager.isTeleportPermitted(loc) && RandomFunction.random(3) == 1) {
-						obj = new GameObject(28296, loc);
-						ObjectBuilder.add(obj);
+						obj = new Scenery(28296, loc);
+						SceneryBuilder.add(obj);
 						RegionManager.removeClippingFlag(0, loc.getX(), loc.getY(), false, 0x100);
 					}
 					loc = location.transform(-x, y, 0);
 					if (RegionManager.getObject(loc) == null && RegionManager.isTeleportPermitted(loc) && RandomFunction.random(3) == 1) {
-						obj = new GameObject(28296, loc);
-						ObjectBuilder.add(obj);
+						obj = new Scenery(28296, loc);
+						SceneryBuilder.add(obj);
 						RegionManager.removeClippingFlag(0, loc.getX(), loc.getY(), false, 0x100);
 					}
 					loc = location.transform(x, -y, 0);
 					if (RegionManager.getObject(loc) == null && RegionManager.isTeleportPermitted(loc) && RandomFunction.random(3) == 1) {
-						obj = new GameObject(28296, loc);
-						ObjectBuilder.add(obj);
+						obj = new Scenery(28296, loc);
+						SceneryBuilder.add(obj);
 						RegionManager.removeClippingFlag(0, loc.getX(), loc.getY(), false, 0x100);
 					}
 					loc =  location.transform(-x, -y, 0);
 					if (RegionManager.getObject(loc) == null && RegionManager.isTeleportPermitted(loc) && RandomFunction.random(3) == 1) {
-						obj = new GameObject(28296, loc);
-						ObjectBuilder.add(obj);
+						obj = new Scenery(28296, loc);
+						SceneryBuilder.add(obj);
 						RegionManager.removeClippingFlag(0, loc.getX(), loc.getY(), false, 0x100);
 					}
 				}
@@ -272,7 +272,7 @@ public class ChristmasEvent extends HolidayEvent {
 				if (player.getInventory().remove(node.asItem())) {
 					player.sendMessage("You start to build a snowman.");
 					player.animate(Animation.create(7532));
-					ObjectBuilder.add(new GameObject(28266, loc));
+					SceneryBuilder.add(new Scenery(28266, loc));
 				}
 				break;
 			case "add-to":
@@ -292,7 +292,7 @@ public class ChristmasEvent extends HolidayEvent {
 					player.sendMessage("You add some snow to the snowman.");
 					player.lock(1);
 					player.animate(Animation.create(node.asObject().getId() <= 28278 ? 7532 : 7533));
-					ObjectBuilder.replace(node.asObject(), node.asObject().transform(node.asObject().getId() + 1));
+					SceneryBuilder.replace(node.asObject(), node.asObject().transform(node.asObject().getId() + 1));
 					if (node.asObject().getId() + 1 >= 28295) {
 						if (player.getZoneMonitor().isInZone(getName())) {
 							player.sendMessages("The snowman is almsot complete! Talk to a snow imp to get a hat or weapon to", "complete it.");
@@ -433,7 +433,7 @@ public class ChristmasEvent extends HolidayEvent {
 					id = 6748;
 				}
 				final int npcId = id;
-				ObjectBuilder.remove(event.getUsedWith().asObject());
+				SceneryBuilder.remove(event.getUsedWith().asObject());
 				final NPC snowman = NPC.create(npcId, event.getUsedWith().getLocation());
 				snowman.init();
 				snowman.faceTemporary(player, 2);

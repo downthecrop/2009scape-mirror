@@ -6,8 +6,8 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -31,7 +31,7 @@ public class PCRavagerNPC extends AbstractNPC {
 	/**
 	 * Current object target to destroy.
 	 */
-	private GameObject target;
+	private Scenery target;
 
 	/**
 	 * The portal index.
@@ -107,14 +107,14 @@ public class PCRavagerNPC extends AbstractNPC {
 					int newId = target.getId() + (target.getId() < 14233 ? 3 : 4);
 					boolean destroyed = !isTarget(newId);
 					int type = destroyed ? 22 : target.getType();
-					final GameObject o = target;
-					final GameObject newTarget = o.transform(newId, o.getRotation(), type);
+					final Scenery o = target;
+					final Scenery newTarget = o.transform(newId, o.getRotation(), type);
 					GameWorld.getPulser().submit(new Pulse(1, this, o) {
 						@Override
 						public boolean pulse() {
 							if (getViewport().getRegion().isActive() && session.getBarricades().remove(o)) {
 								session.getBarricades().add(newTarget);
-								ObjectBuilder.replace(o, newTarget);
+								SceneryBuilder.replace(o, newTarget);
 							}
 							return true;
 						}
@@ -133,10 +133,10 @@ public class PCRavagerNPC extends AbstractNPC {
 	}
 
 	/**
-	 * Starts attacking a game object.
+	 * Starts attacking a scenery.
 	 * @param o The object.
 	 */
-	private void attack(GameObject o) {
+	private void attack(Scenery o) {
 		target = o;
 		if (o == null) {
 			setWalks(true);
@@ -191,7 +191,7 @@ public class PCRavagerNPC extends AbstractNPC {
 	 * @return {@code True} if a target was found.
 	 */
 	private boolean findTarget() {
-		for (GameObject o : session.getBarricades()) {
+		for (Scenery o : session.getBarricades()) {
 			if (o.getLocation().withinDistance(getLocation(), MapDistance.RENDERING.getDistance() / 3) && isTarget(o.getId())) {
 				attack(o);
 				return true;

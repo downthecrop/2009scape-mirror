@@ -13,8 +13,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -73,7 +73,7 @@ public final class FaladorNodePlugin extends OptionHandler {
 		final int id = node.getId();
 		switch (id) {
 		case 11708:// estate door.
-			DoorActionHandler.handleDoor(player, (GameObject) node);
+			DoorActionHandler.handleDoor(player, (Scenery) node);
 			break;
 		case 2290:
 			player.getDialogueInterpreter().open(id, node);
@@ -105,13 +105,13 @@ public final class FaladorNodePlugin extends OptionHandler {
 			});
 			break;
 		case 2271:
-			ObjectBuilder.replace((GameObject) node, ((GameObject) node).transform(2272));
+			SceneryBuilder.replace((Scenery) node, ((Scenery) node).transform(2272));
 			player.animate(OPEN_ANIMATION);
 			break;
 		case 2272:
 			switch (option) {
 			case "shut":
-				ObjectBuilder.replace((GameObject) node, ((GameObject) node).transform(2271));
+				SceneryBuilder.replace((Scenery) node, ((Scenery) node).transform(2271));
 				player.animate(CLOSE_ANIMATION);
 				break;
 			case "search":
@@ -139,7 +139,7 @@ public final class FaladorNodePlugin extends OptionHandler {
 			if (npc.getId() == 2290) {
 				return Location.create(2997, 3374, 0);
 			}
-		} else if (n instanceof GameObject) {
+		} else if (n instanceof Scenery) {
 			if (n.getId() == 11708 && node.getLocation().equals(new Location(2981, 3370, 0))) {
 				return node.getLocation();
 			}

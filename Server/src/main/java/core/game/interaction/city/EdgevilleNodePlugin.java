@@ -5,8 +5,8 @@ import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -36,7 +36,7 @@ public final class EdgevilleNodePlugin extends OptionHandler {
 
     @Override
     public boolean handle(Player player, Node node, String option) {
-        int id = ((GameObject) node).getId();
+        int id = ((Scenery) node).getId();
         switch (id) {
             case 9262:
             case 9261:
@@ -55,12 +55,12 @@ public final class EdgevilleNodePlugin extends OptionHandler {
 				break;
             case 26933: // Trapdoors at edgeville dungeon entrance
                 if (option.equalsIgnoreCase("open")) {
-                    ObjectBuilder.replace(node.asObject(), node.asObject().transform(26934), 500);
+                    SceneryBuilder.replace(node.asObject(), node.asObject().transform(26934), 500);
                 }
                 break;
             case 26934: // Trapdoors at edgeville dungeon entrance
                 if (option.equalsIgnoreCase("close")) {
-                    ObjectBuilder.replace(node.asObject(), node.asObject().transform(26933));
+                    SceneryBuilder.replace(node.asObject(), node.asObject().transform(26933));
                 }
         }
         return true;

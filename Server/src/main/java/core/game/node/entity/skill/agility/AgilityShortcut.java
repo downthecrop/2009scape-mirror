@@ -4,7 +4,7 @@ import core.cache.def.impl.ObjectDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
@@ -97,7 +97,7 @@ public abstract class AgilityShortcut extends OptionHandler {
 	 * @param option the option.
 	 * @param failed the shortcut failed.
 	 */
-	public abstract void run(Player player, GameObject object, String option, boolean failed);
+	public abstract void run(Player player, Scenery object, String option, boolean failed);
 
 	/**
 	 * Checks the requirements for a player.
@@ -119,7 +119,7 @@ public abstract class AgilityShortcut extends OptionHandler {
 	 * @param option2 the option.
 	 * @return {@code True} if failed.
 	 */
-	private boolean checkFail(Player player, GameObject object, String option2) {
+	private boolean checkFail(Player player, Scenery object, String option2) {
 		if (!canFail) {
 			return false;
 		}
@@ -148,7 +148,7 @@ public abstract class AgilityShortcut extends OptionHandler {
 	}
 
 
-	public Location pipeDestination(Player player, GameObject object, int steps) {
+	public Location pipeDestination(Player player, Scenery object, int steps) {
 		player.faceLocation(object.getLocation());
 		int diffX = object.getLocation().getX() - player.getLocation().getX();
 		if (diffX < -1) { diffX = -1; }
@@ -160,7 +160,7 @@ public abstract class AgilityShortcut extends OptionHandler {
 		return dest;
 	}
 
-	public Location agilityDestination(Player player, GameObject object, int steps) {
+	public Location agilityDestination(Player player, Scenery object, int steps) {
 		player.faceLocation(object.getLocation());
 		int diffX = object.getLocation().getX() - player.getLocation().getX();
 		int diffY = object.getLocation().getY() - player.getLocation().getY();

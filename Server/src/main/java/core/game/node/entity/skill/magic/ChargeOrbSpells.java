@@ -8,7 +8,7 @@ import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
@@ -85,11 +85,11 @@ public final class ChargeOrbSpells extends MagicSpell {
 
     @Override
     public boolean cast(Entity entity, Node target) {
-        if (!(target instanceof GameObject)) {
+        if (!(target instanceof Scenery)) {
             return false;
         }
         Player p = (Player) entity;
-        GameObject obj = (GameObject) target;
+        Scenery obj = (Scenery) target;
         if (obj == null || obj.getId() != objectId) {
             p.getPacketDispatch().sendMessage("You can't cast this spell on this object!");
             return false;

@@ -3,7 +3,7 @@ package core.game.node.entity.skill.agility.shortcuts;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -15,8 +15,8 @@ public class RopeSwing extends UseWithHandler {
     @Override
     public boolean handle(NodeUsageEvent event) {
         System.out.println("Trying to handle.");
-        if(event.getUsedWith() instanceof GameObject){
-            GameObject object = event.getUsedWith().asObject();
+        if(event.getUsedWith() instanceof Scenery){
+            Scenery object = event.getUsedWith().asObject();
             int objId = object.getId();
 
             assert event.getUsedItem() != null;

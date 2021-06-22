@@ -4,7 +4,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import rs09.game.system.SystemLogger;
 import core.game.world.map.zone.ZoneBorders;
 import core.tools.RandomFunction;
@@ -293,22 +293,22 @@ public final class RegionManager {
 	}
 	
 	/**
-	 * Gets the game object on the current location.
+	 * Gets the scenery on the current location.
 	 * @param l The location.
-	 * @return The game object, or {@code null} if no object was found.
+	 * @return The scenery, or {@code null} if no object was found.
 	 */
-	public static GameObject getObject(Location l) {
+	public static Scenery getObject(Location l) {
 		return getObject(l.getZ(), l.getX(), l.getY());
 	}
 	
 	/**
-	 * Gets the game object on the current absolute coordinates.
+	 * Gets the scenery on the current absolute coordinates.
 	 * @param z The height.
 	 * @param x The x-coordinate.
 	 * @param y The y-coordinate.
-	 * @return The game object, or {@code null} if no object was found.
+	 * @return The scenery, or {@code null} if no object was found.
 	 */
-	public static GameObject getObject(int z, int x, int y) {
+	public static Scenery getObject(int z, int x, int y) {
 		return getObject(z, x, y, -1);
 	}
 
@@ -318,15 +318,15 @@ public final class RegionManager {
 	 * @param x The x-coordinate.
 	 * @param y The y-coordinate.
 	 * @param objectId The object id.
-	 * @return The game object, or {@code null} if no object was found.
+	 * @return The scenery, or {@code null} if no object was found.
 	 */
-	public static GameObject getObject(int z, int x, int y, int objectId) {
+	public static Scenery getObject(int z, int x, int y, int objectId) {
 		int regionId = ((x >> 6) << 8) | y >> 6;
 		x -= ((x >> 6) << 6);
 		y -= ((y >> 6) << 6);
 		Region region = forId(regionId);
 		Region.load(region);
-		GameObject object = region.getPlanes()[z].getChunkObject(x, y, objectId);
+		Scenery object = region.getPlanes()[z].getChunkObject(x, y, objectId);
 		if (object != null && !object.isRenderable()) {
 			return null;
 		}

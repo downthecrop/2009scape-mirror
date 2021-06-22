@@ -2,7 +2,7 @@ package core.game.node.entity.skill.runecrafting;
 
 import core.cache.def.impl.ItemDefinition;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 
 /**
  * Represents an altar an it's relative information(corresponding ruin, etc)
@@ -151,7 +151,7 @@ public enum Altar {
 	 * @param object the object.
 	 * @return the <code>Altar</code> or <code>Null</code>.
 	 */
-	public static Altar forObject(final GameObject object) {
+	public static Altar forObject(final Scenery object) {
 		for (Altar altar : values()) {
 			if (altar.getObject() == object.getId() || altar.getPortal() == object.getId() || object.getId() == altar.getRiftId()) {
 				return altar;

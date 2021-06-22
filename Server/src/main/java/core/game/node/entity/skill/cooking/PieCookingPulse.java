@@ -3,12 +3,12 @@ package core.game.node.entity.skill.cooking;
 import core.cache.def.impl.ItemDefinition;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 
 public class PieCookingPulse extends StandardCookingPulse {
-    private GameObject object;
+    private Scenery object;
     private Player player;
-    public PieCookingPulse(Player player, GameObject object, int initial, int product, int amount){
+    public PieCookingPulse(Player player, Scenery object, int initial, int product, int amount){
         super(player,object,initial,product,amount);
         this.object = object;
         this.player = player;

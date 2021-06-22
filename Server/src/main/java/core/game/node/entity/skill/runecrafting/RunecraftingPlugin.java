@@ -12,7 +12,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
 import core.game.node.entity.skill.runecrafting.abyss.AbyssPlugin;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.net.packet.PacketRepository;
@@ -89,7 +89,7 @@ public class RunecraftingPlugin extends OptionHandler {
 		}
 		switch (option) {
 		case "use":
-			final Altar altar = Altar.forObject(((GameObject) node));
+			final Altar altar = Altar.forObject(((Scenery) node));
 			player.getProperties().setTeleportLocation(altar.getRuin().getBase());
 			break;
 		case "craft-rune":
@@ -97,21 +97,21 @@ public class RunecraftingPlugin extends OptionHandler {
 				player.sendMessage("You can only craft Astral runes on Lunar Isle.");
 				return true;
 			}
-			player.getPulseManager().run(new RuneCraftPulse(player, null, Altar.forObject(((GameObject) node)), false, null));
+			player.getPulseManager().run(new RuneCraftPulse(player, null, Altar.forObject(((Scenery) node)), false, null));
 			break;
 		case "locate":
 			final Talisman talisman = Talisman.forItem(((Item) node));
 			talisman.locate(player);
 			break;
 		case "enter":
-			final MysteriousRuin ruin = MysteriousRuin.forObject(((GameObject) node));
+			final MysteriousRuin ruin = MysteriousRuin.forObject(((Scenery) node));
 			if (ruin == null) {
 				return true;
 			}
 			ruin.enter(player);
 			break;
 		case "climb":
-			int id = ((GameObject) node).getId();
+			int id = ((Scenery) node).getId();
 			switch (id) {
 			case 26849:
 				ClimbActionHandler.climb(player, null, new Location(3271, 4861, 0));
