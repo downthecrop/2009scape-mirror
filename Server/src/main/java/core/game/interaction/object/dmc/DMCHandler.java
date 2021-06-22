@@ -107,7 +107,7 @@ public final class DMCHandler {
 			player.getPacketDispatch().sendMessage("Your cannon has run out of ammo!");
 			return true;
 		}
-		player.getPacketDispatch().sendObjectAnimation(cannon, Animation.create(direction.getAnimationId()));
+		player.getPacketDispatch().sendSceneryAnimation(cannon, Animation.create(direction.getAnimationId()));
 		Location l = cannon.getLocation().transform(1, 1, 0);
 		direction = DMCRevolution.values()[(direction.ordinal() + 1) % DMCRevolution.values().length];
 		for (NPC npc : RegionManager.getLocalNpcs(l, 10)) {

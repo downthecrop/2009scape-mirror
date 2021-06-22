@@ -658,11 +658,11 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
 					case 7:
 						grubfoot.transform(grubFoot.getId());
 						grubfoot.getProperties().setTeleportLocation(grubfoot.getLocation().transform(-1, 0, 0));
-						player.getPacketDispatch().sendObjectAnimation(RegionManager.getObject(cutscene.getBase().transform(9, 55, 0)), new Animation(24));
+						player.getPacketDispatch().sendSceneryAnimation(RegionManager.getObject(cutscene.getBase().transform(9, 55, 0)), new Animation(24));
 						break;
 					case 11:
 						grubfoot.getProperties().setTeleportLocation(grubfoot.getLocation().transform(1, 0, 0));
-						player.getPacketDispatch().sendObjectAnimation(RegionManager.getObject(cutscene.getBase().transform(9, 55, 0)), new Animation(24));
+						player.getPacketDispatch().sendSceneryAnimation(RegionManager.getObject(cutscene.getBase().transform(9, 55, 0)), new Animation(24));
 						break;
 					case 12:
 						player.getDialogueInterpreter().sendPlainMessage(true, "...And emerges wearing " + type.name().toLowerCase() + " armour.");

@@ -149,17 +149,17 @@ public final class SummoningCreator {
 		@Override
 		public void stop() {
 			super.stop();
-			player.getPacketDispatch().sendObjectAnimation(object, new Animation(8510));
+			player.getPacketDispatch().sendSceneryAnimation(object, new Animation(8510));
 		}
 
 		@Override
 		public boolean reward() {
 			if (getDelay() == 1) {
 				setDelay(4);
-				player.getPacketDispatch().sendObjectAnimation(object, Animation.create(8509));
+				player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(8509));
 				return false;
 			}
-			player.getPacketDispatch().sendObjectAnimation(object, Animation.create(8510));
+			player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(8510));
 			for (int i = 0; i < amount; i++) {
 				for (Item item : type.getRequired()) {
 					if (!player.getInventory().containsItem(item)) {

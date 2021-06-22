@@ -166,7 +166,7 @@ class WildernessCourse
             return
         }
         ropeDelay = GameWorld.ticks + 2
-        player.packetDispatch.sendObjectAnimation(`object`, Animation.create(497), true)
+        player.packetDispatch.sendSceneryAnimation(`object`, Animation.create(497), true)
         AgilityHandler.forceWalk(player, 1, player.location, Location.create(3005, 3958, 0), Animation.create(751), 50, 20.0, "You skillfully swing across.", 1)
     }
 

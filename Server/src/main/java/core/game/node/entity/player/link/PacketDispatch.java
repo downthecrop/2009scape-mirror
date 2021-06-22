@@ -351,7 +351,7 @@ public final class PacketDispatch {
 	 * @param object the object.
 	 * @param animation the animation.
 	 */
-	public void sendObjectAnimation(Scenery object, Animation animation) {
+	public void sendSceneryAnimation(Scenery object, Animation animation) {
 		animation = new Animation(animation.getId(), animation.getDelay(), animation.getPriority());
 		animation.setObject(object);
 		RegionManager.getRegionChunk(object.getLocation()).flag(new AnimateObjectUpdateFlag(animation));
@@ -363,9 +363,9 @@ public final class PacketDispatch {
 	 * @param animation the animation.
 	 * @param global if the animation is global or not.
 	 */
-	public void sendObjectAnimation(Scenery object, Animation animation, boolean global) {
+	public void sendSceneryAnimation(Scenery object, Animation animation, boolean global) {
 		if (global) {
-			sendObjectAnimation(object, animation);
+			sendSceneryAnimation(object, animation);
 			return;
 		}
 		animation.setObject(object);

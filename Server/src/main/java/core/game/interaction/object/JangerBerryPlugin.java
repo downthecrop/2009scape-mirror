@@ -51,7 +51,7 @@ public class JangerBerryPlugin extends OptionHandler {
 			return true;
 		}
 		Location end = node.getId() == 2325 ? new Location(2505, 3087, 0) : new Location(2511, 3096, 0);
-		player.getPacketDispatch().sendObjectAnimation(node.asObject(), Animation.create(497), true);
+		player.getPacketDispatch().sendSceneryAnimation(node.asObject(), Animation.create(497), true);
 		AgilityHandler.forceWalk(player, 0, player.getLocation(), end, Animation.create(751), 50, 22, "You skillfully swing across.", 1);
 		return true;
 	}

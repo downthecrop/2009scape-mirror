@@ -127,14 +127,14 @@ public final class GnomeCopterActivity extends ActivityPlugin {
 					player.getAppearance().setStandTurnAnimation(8963);
 				} else if (stage == 4) {
 					object.setCharge(88);
-					player.getPacketDispatch().sendObjectAnimation(object, new Animation(5));
+					player.getPacketDispatch().sendSceneryAnimation(object, new Animation(5));
 				} else if (stage == 16) {
 					player.getWalkingQueue().reset();
 					player.getWalkingQueue().addPath(object.getLocation().getX(), object.getLocation().getY() + 16, true);
 					Graphics.send(Graphics.create(1579), object.getLocation());
 				} else if (stage == 20) {
 					object.setCharge(1000);
-					player.getPacketDispatch().sendObjectAnimation(object, new Animation(8941));
+					player.getPacketDispatch().sendSceneryAnimation(object, new Animation(8941));
 				} else if (stage == 33) {
 					player.unlock();
 					landGnomeCopter(player);

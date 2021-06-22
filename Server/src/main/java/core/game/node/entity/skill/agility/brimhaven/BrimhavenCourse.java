@@ -46,11 +46,11 @@ public final class BrimhavenCourse extends OptionHandler {
 				@Override
 				public boolean pulse() {
 					if (!finish) {
-						player.getPacketDispatch().sendObjectAnimation(object, Animation.create(1052));
+						player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(1052));
 						finish = true;
 						return false;
 					}
-					player.getPacketDispatch().sendObjectAnimation(object, Animation.create(-1));
+					player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(-1));
 					return true;
 				}
 			});

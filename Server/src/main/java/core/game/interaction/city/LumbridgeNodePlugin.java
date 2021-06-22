@@ -82,7 +82,7 @@ public final class LumbridgeNodePlugin extends OptionHandler {
                                 case 0:
                                 	player.lock();
                                     player.sendMessage("You start cranking the lever.");
-                                    player.getPacketDispatch().sendObjectAnimation(((Scenery) node), new Animation(9979));
+                                    player.getPacketDispatch().sendSceneryAnimation(((Scenery) node), new Animation(9979));
                                     player.animate(new Animation(9977));
                                     break;
                                 case 8:
