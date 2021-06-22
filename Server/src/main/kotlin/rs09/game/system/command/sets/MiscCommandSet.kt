@@ -6,7 +6,7 @@ import core.cache.def.impl.ObjectDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
 import core.game.ge.OfferState
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.player.link.RunScript
 import core.game.node.entity.skill.Skills
@@ -52,7 +52,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         define("loc", Command.Privilege.STANDARD){ player, _->
             val l = player.location
             val r = player.viewport.region
-            var obj: GameObject? = null
+            var obj: Scenery? = null
             notify(player,"Absolute: " + l + ", regional: [" + l.localX + ", " + l.localY + "], chunk: [" + l.chunkOffsetX + ", " + l.chunkOffsetY + "], flag: [" + RegionManager.isTeleportPermitted(l) + ", " + RegionManager.getClippingFlag(l) + ", " + RegionManager.isLandscape(l) + "].")
             notify(player,"Region: [id=" + l.regionId + ", active=" + r.isActive + ", instanced=" + (r is DynamicRegion) + "], obj=" + RegionManager.getObject(l) + ".")
             notify(player,"Object: " + RegionManager.getObject(l).also{obj = it} + ".")

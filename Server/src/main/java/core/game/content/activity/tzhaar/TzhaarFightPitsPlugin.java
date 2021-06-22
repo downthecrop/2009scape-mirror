@@ -22,7 +22,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -245,8 +245,8 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 
 	@Override
 	public boolean interact(Entity e, Node target, Option option) {
-		if (target instanceof GameObject) {
-			GameObject o = (GameObject) target;
+		if (target instanceof Scenery) {
+			Scenery o = (Scenery) target;
 			if (o.getId() == 9369) {
 				ForceMovement.run(e, Location.create(2399, 5175, 0), Location.create(2399, 5177, 0));
 				return true;

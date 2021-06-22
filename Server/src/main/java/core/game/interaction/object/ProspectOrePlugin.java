@@ -9,7 +9,7 @@ import core.game.node.entity.skill.gather.SkillingResource;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.plugin.Plugin;
@@ -23,7 +23,7 @@ public class ProspectOrePlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		final GameObject object = (GameObject) node;
+		final Scenery object = (Scenery) node;
 		int tut_stage = TutorialSession.getExtension(player).getStage();
 		if (tut_stage == 31 && object.getId() == 3043) {
 			GameWorld.getPulser().submit(new Pulse(1) {

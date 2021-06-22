@@ -5,8 +5,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.RegionManager;
@@ -61,7 +61,7 @@ public final class MithrilSeedsPlugin extends OptionHandler {
 		}
 		player.animate(ANIMATION);
 		player.getInventory().remove(ITEM);
-		final GameObject object = ObjectBuilder.add(new GameObject(getFlower(RandomFunction.random(100) == 1 ? RARE : FLOWERS), player.getLocation()), 100);
+		final Scenery object = SceneryBuilder.add(new Scenery(getFlower(RandomFunction.random(100) == 1 ? RARE : FLOWERS), player.getLocation()), 100);
 		player.moveStep();
 		player.lock(3);
 		player.getPulseManager().run(new Pulse(1, player) {

@@ -15,7 +15,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -149,7 +149,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 			case 16082:
 			case 16116:
 			case 16050:
-				handlePortal(player, (GameObject) target);
+				handlePortal(player, (Scenery) target);
 				return true;
 			case 16123:
 			case 16124:
@@ -166,7 +166,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 			case 16044:
 			case 16045:
 			case 16046:
-				handleDoor(player, (GameObject) target);
+				handleDoor(player, (Scenery) target);
 				return true;
 			}
 		}
@@ -186,7 +186,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 	 * Handles a portal.
 	 * @param player the player.
      */
-	private void handlePortal(final Player player, final GameObject object) {
+	private void handlePortal(final Player player, final Scenery object) {
 		final int index = getPortalIndex(object.getId());
 		if (!player.getSavedData().getGlobalData().hasStrongholdReward(index + 1)) {
 			player.getPacketDispatch().sendMessage("You are not of sufficient experience to take the shortcut through this level.");
@@ -201,7 +201,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private static void handleDoor(final Player player, final GameObject object) {
+	private static void handleDoor(final Player player, final Scenery object) {
 		final boolean force = isForced(player, object);
 		if (force || RandomFunction.random(40) < 2) {
 			openDoor(player, object);
@@ -215,7 +215,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private static void openDoor(final Player player, final GameObject object) {
+	private static void openDoor(final Player player, final Scenery object) {
 		player.lock(3);
 		player.animate(Animation.create(4282));
 		GameWorld.getPulser().submit(new Pulse(1, player) {
@@ -274,7 +274,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 	 * @param object the object.
 	 * @return {@code True} if its forced.
 	 */
-	private static boolean isForced(final Player player, final GameObject object) {
+	private static boolean isForced(final Player player, final Scenery object) {
 		if (player.inCombat() || player.getProperties().getCombatPulse().isAttacking()) {
 			return true;
 		}
@@ -312,7 +312,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 		/**
 		 * The door being interacted with.
 		 */
-		private GameObject door;
+		private Scenery door;
 
 		/**
 		 * The npc id.
@@ -343,7 +343,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 
 		@Override
 		public boolean open(Object... args) {
-			door = (GameObject) args[0];
+			door = (Scenery) args[0];
 			npcId = getNpcId(door.getName());
 			if (player.getLocation().getX() == 1859 && player.getLocation().getY() == 5239 || player.getLocation().getX() == 1858 && player.getLocation().getY() == 5239) {
 				interpreter.sendDialogues(npcId, FacialExpression.OLD_NORMAL, "Greetings Adventurer. This place is kept safe by the", "spirits within the doors. As you pass through you will be", "asked questions about security. Hopefully you will learn", "much from us.");

@@ -14,8 +14,8 @@ import core.game.node.entity.skill.firemaking.Log;
 import core.game.node.entity.skill.gather.SkillingTool;
 import core.game.node.item.ChanceItem;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -108,7 +108,7 @@ public final class PyreSitePlugin extends OptionHandler {
 	 * @param player the player.
 	 * @param object the ship object.
 	 */
-	private void ritual(Player player, GameObject object) {
+	private void ritual(Player player, Scenery object) {
 		player.lock();
 		USED_LOCATIONS.add(object.getLocation());
 		player.faceLocation(object.getLocation());
@@ -121,7 +121,7 @@ public final class PyreSitePlugin extends OptionHandler {
 	 * @param object the object.
 	 * @return the pulse.
 	 */
-	private Pulse getPulse(final Player player, final GameObject object) {
+	private Pulse getPulse(final Player player, final Scenery object) {
 		final LogType logType = player.getAttribute("logType", LogType.NORMAL);
 		final SkillingTool tool = SkillingTool.getHatchet(player);
 		final Item bones = player.getInventory().containsItem(CHEWED_BONES) ? player.getInventory().getItem(CHEWED_BONES) : player.getInventory().getItem(MANGLED_BONES);
@@ -178,9 +178,9 @@ public final class PyreSitePlugin extends OptionHandler {
 	 * @param newId the new id.
 	 * @param ship the ship.
 	 */
-	private void replace(int newId, GameObject ship, Player player) {
-		GameObject newShip = new GameObject(newId, getLocation(newId, ship), 10, ship.getLocation().getX() == 2503 ? 4 : 1);
-		ObjectBuilder.add(newShip);
+	private void replace(int newId, Scenery ship, Player player) {
+		Scenery newShip = new Scenery(newId, getLocation(newId, ship), 10, ship.getLocation().getX() == 2503 ? 4 : 1);
+		SceneryBuilder.add(newShip);
 	}
 
 	/**
@@ -189,7 +189,7 @@ public final class PyreSitePlugin extends OptionHandler {
 	 * @param ship the ship.
 	 * @return the location.
 	 */
-	private Location getLocation(int newId, GameObject ship) {
+	private Location getLocation(int newId, Scenery ship) {
 		Location location = ship.getLocation().transform(ship.getDirection(), -2);
 		if (ship.getLocation().getX() == 2507 || ship.getLocation().getX() == 2519) {
 			return location.transform(-1, 0, 0);
@@ -214,7 +214,7 @@ public final class PyreSitePlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		if (n instanceof GameObject) {
+		if (n instanceof Scenery) {
 			return n.getLocation().transform(n.getDirection(), 1);
 		}
 		return null;

@@ -5,8 +5,8 @@ import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Initializable;
@@ -47,7 +47,7 @@ public final class SlayerTowerPlugin extends OptionHandler {
 		switch (node.getId()) {
 		case 4490:
 		case 4487:
-			DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+			DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 			switchStatue();
 			return true;
 		}
@@ -59,10 +59,10 @@ public final class SlayerTowerPlugin extends OptionHandler {
 	 */
 	private void switchStatue() {
 		for (Location l : LOCATIONS) {
-			GameObject object = RegionManager.getObject(l);
+			Scenery object = RegionManager.getObject(l);
 			if (object != null) {
 				int id = object.getId() == OPEN_ID ? CLOSED_ID : OPEN_ID;
-				ObjectBuilder.replace(object, object.transform(id));
+				SceneryBuilder.replace(object, object.transform(id));
 			}
 		}
 	}

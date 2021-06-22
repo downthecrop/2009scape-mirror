@@ -8,7 +8,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
@@ -27,7 +27,7 @@ public final class BrimhavenCourse extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		final GameObject object = (GameObject) node;
+		final Scenery object = (Scenery) node;
 		Direction dir = object.getDirection();
 		Location start = player.getLocation();
 		switch (object.getId()) {
@@ -102,7 +102,7 @@ public final class BrimhavenCourse extends OptionHandler {
 	 * @param player The player.
 	 * @param object The object.
 	 */
-	private static void handleHandHolds(final Player player, final GameObject object) {
+	private static void handleHandHolds(final Player player, final Scenery object) {
 		if (player.getSkills().getLevel(Skills.AGILITY) < 20) {
 			player.getPacketDispatch().sendMessage("You need an agility of at least 20 to get past this obstacle!");
 			return;
@@ -156,7 +156,7 @@ public final class BrimhavenCourse extends OptionHandler {
 	 * @param player The player.
 	 * @param object The balancing rope object.
 	 */
-	private static void handleBalancingRope(final Player player, GameObject object) {
+	private static void handleBalancingRope(final Player player, Scenery object) {
 		final Direction dir = object.getDirection();
 		boolean failed = AgilityHandler.hasFailed(player, 1, 0.1);
 		if (failed) {
@@ -180,7 +180,7 @@ public final class BrimhavenCourse extends OptionHandler {
 	 * @param player The player.
 	 * @param object The object.
 	 */
-	private static void handleMonkeyBars(final Player player, GameObject object) {
+	private static void handleMonkeyBars(final Player player, Scenery object) {
 		player.lock(5);
 		final Direction dir = Direction.get((object.getDirection().toInteger() + 2) % 4);
 		player.getAppearance().setAnimations(Animation.create(745));
@@ -222,7 +222,7 @@ public final class BrimhavenCourse extends OptionHandler {
 	 * @param player The player.
 	 * @param object The object.
 	 */
-	private static void handleBalancingLedge(final Player player, GameObject object) {
+	private static void handleBalancingLedge(final Player player, Scenery object) {
 		final int diff = object.getId() == 3561 ? 0 : 1;
 		Location start = player.getLocation();
 		final Direction dir = Direction.getLogicalDirection(start, object.getLocation());
@@ -250,7 +250,7 @@ public final class BrimhavenCourse extends OptionHandler {
 	 * @param player The player.
 	 * @param object The object.
 	 */
-	private static void handlePlankObstacle(final Player player, GameObject object) {
+	private static void handlePlankObstacle(final Player player, Scenery object) {
 		final Direction dir = Direction.getLogicalDirection(player.getLocation(), object.getLocation());
 		final Location start = player.getLocation();
 		Location end = start.transform(dir.getStepX() * 7, dir.getStepY() * 7, 0);
@@ -284,7 +284,7 @@ public final class BrimhavenCourse extends OptionHandler {
 	 * @param player The player.
 	 * @param object The object.
 	 */
-	private static void handlePillarObstacle(final Player player, GameObject object) {
+	private static void handlePillarObstacle(final Player player, Scenery object) {
 		final Direction dir = Direction.getLogicalDirection(player.getLocation(), object.getLocation());
 		AgilityHandler.forceWalk(player, -1, player.getLocation(), object.getLocation(), Animation.create(741), 10, 0, null);
 		final Location start = player.getLocation();
@@ -313,7 +313,7 @@ public final class BrimhavenCourse extends OptionHandler {
 	 * @param player The player.
 	 * @param object The log balance object.
 	 */
-	private static void handleLogBalance(final Player player, GameObject object) {
+	private static void handleLogBalance(final Player player, Scenery object) {
 		final Direction dir = Direction.getLogicalDirection(player.getLocation(), object.getLocation());
 		boolean failed = AgilityHandler.hasFailed(player, 1, 0.1);
 		if (failed) {
@@ -352,7 +352,7 @@ public final class BrimhavenCourse extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		GameObject object = (GameObject) n;
+		Scenery object = (Scenery) n;
 		Direction dir = object.getDirection();
 		switch (object.getId()) {
 		case 3566:

@@ -3,7 +3,7 @@ package core.game.node.entity.skill.agility.shortcuts;
 import core.game.node.entity.skill.agility.AgilityShortcut;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -29,7 +29,7 @@ public class CrumblingWallShortcut extends AgilityShortcut {
 	}
 
 	@Override
-	public void run(Player player, GameObject object, String option, boolean failed) {
+	public void run(Player player, Scenery object, String option, boolean failed) {
 		ForceMovement.run(player, player.getLocation().getX() >= 2936 ? LOCATIONS[0] : LOCATIONS[1], player.getLocation().getX() >= 2936 ? LOCATIONS[1] : LOCATIONS[0], Animation.create(839), 10);
 	}
 

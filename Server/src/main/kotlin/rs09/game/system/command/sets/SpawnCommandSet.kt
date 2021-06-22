@@ -1,8 +1,8 @@
 package rs09.game.system.command.sets
 
 import core.cache.Cache
-import core.game.node.`object`.GameObject
-import core.game.node.`object`.ObjectBuilder
+import core.game.node.`object`.Scenery
+import core.game.node.`object`.SceneryBuilder
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
 import rs09.game.system.SystemLogger
@@ -66,8 +66,8 @@ class SpawnCommandSet : CommandSet(Command.Privilege.ADMIN){
                 reject(player,"syntax error: id (optional) type rotation or rotation")
                 return@define
             }
-            val `object` = if (args.size > 3) GameObject(CommandPlugin.toInteger(args[1]!!), player!!.location, CommandPlugin.toInteger(args[2]!!), CommandPlugin.toInteger(args[3]!!)) else if (args.size == 3) GameObject(CommandPlugin.toInteger(args[1]!!), player!!.location, CommandPlugin.toInteger(args[2]!!)) else GameObject(CommandPlugin.toInteger(args[1]!!), player!!.location)
-            ObjectBuilder.add(`object`)
+            val `object` = if (args.size > 3) Scenery(CommandPlugin.toInteger(args[1]!!), player!!.location, CommandPlugin.toInteger(args[2]!!), CommandPlugin.toInteger(args[3]!!)) else if (args.size == 3) Scenery(CommandPlugin.toInteger(args[1]!!), player!!.location, CommandPlugin.toInteger(args[2]!!)) else Scenery(CommandPlugin.toInteger(args[1]!!), player!!.location)
+            SceneryBuilder.add(`object`)
             SystemLogger.logInfo("object = $`object`")
         }
     }

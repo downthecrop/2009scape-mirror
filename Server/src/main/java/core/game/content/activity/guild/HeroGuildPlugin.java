@@ -11,7 +11,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
@@ -34,14 +34,14 @@ public final class HeroGuildPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final int id = ((GameObject) node).getId();
+		final int id = ((Scenery) node).getId();
 		switch (option) {
 		case "open":
 			switch (id) {
 			case 2624:
 			case 2625:
 				// player.getPacketDispatch().sendMessage("You need to complete the Heroes' Quest.");
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				break;
 			}
 			return true;

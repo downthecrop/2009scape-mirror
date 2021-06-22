@@ -4,7 +4,7 @@ import core.cache.def.impl.ObjectDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -28,7 +28,7 @@ public class ThievingOptionPlugin extends OptionHandler {
 		switch (option) {
 		case "steal-from":
 		case "steal from":
-			player.getPulseManager().run(new StallThiefPulse(player, (GameObject) node, Stall.forObject((GameObject) node)));
+			player.getPulseManager().run(new StallThiefPulse(player, (Scenery) node, Stall.forObject((Scenery) node)));
 			player.getLocks().lockInteractions(6);
 			break;
 		}

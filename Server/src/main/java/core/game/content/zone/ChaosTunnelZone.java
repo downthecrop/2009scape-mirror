@@ -12,7 +12,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
@@ -227,7 +227,7 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 	 * @param object the object.
 	 * @param player the player.
 	 */
-	private void teleport(Player player, GameObject object) {
+	private void teleport(Player player, Scenery object) {
 		if (object.getLocation().getX() == 3142 || object.getLocation().getY() == 5545) {
 			commenceBorkBattle(player);
 			return;
@@ -284,7 +284,7 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 	 * @param object the object.
 	 * @return {@code True} if so.
 	 */
-	private boolean isStained(GameObject object) {
+	private boolean isStained(Scenery object) {
 		return getStainedTime(object) > GameWorld.getTicks();
 	}
 
@@ -292,7 +292,7 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 	 * Sets stained time.
 	 * @param object the object.
 	 */
-	private void setStainedTime(GameObject object) {
+	private void setStainedTime(Scenery object) {
 		object.getAttributes().setAttribute("stained", (int) GameWorld.getTicks() + RandomFunction.random(50, 150));
 	}
 
@@ -301,7 +301,7 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 	 * @param object the object.
 	 * @return the time.
 	 */
-	private int getStainedTime(GameObject object) {
+	private int getStainedTime(Scenery object) {
 		return object.getAttributes().getAttribute("stained", 0);
 	}
 

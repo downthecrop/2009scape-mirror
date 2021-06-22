@@ -7,7 +7,7 @@ import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -116,7 +116,7 @@ public final class WaterSourcePlugin extends UseWithHandler {
 		 * Method used to handle the interaction.
 		 * @param player the player.
 		 */
-		public final void handle(final GameObject object, final Player player) {
+		public final void handle(final Scenery object, final Player player) {
 			if (object.getId() == 11661
 					&& required.getId() == Items.BUCKET_1925
 					&& !player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR).isComplete(0,7)) {

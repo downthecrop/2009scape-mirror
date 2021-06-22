@@ -6,7 +6,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import rs09.game.world.repository.Repository;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -22,12 +22,12 @@ public class TollGateOptionPlugin extends OptionHandler {
 		if (option.equals("pay-toll(10gp)")) {
 			if (player.getQuestRepository().getQuest("Prince Ali Rescue").getStage(player) > 50) {
 				player.getPacketDispatch().sendMessage("The guards let you through for free.");
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 			} else {
 				if (player.getInventory().contains(995, 10)) {
 					player.getInventory().remove(new Item(995, 10));
 					player.getPacketDispatch().sendMessage("You quickly pay the 10 gold toll and go through the gates.");
-					DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+					DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 					player.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_ALKHARID_GATE, 10);
 					return true;
 				} else {
@@ -35,7 +35,7 @@ public class TollGateOptionPlugin extends OptionHandler {
 				}
 			}
 		} else {
-			player.getDialogueInterpreter().open(925, Repository.findNPC(925), (GameObject) node);
+			player.getDialogueInterpreter().open(925, Repository.findNPC(925), (Scenery) node);
 			return true;
 		}
 		return true;

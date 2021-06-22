@@ -8,7 +8,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
@@ -36,7 +36,7 @@ public class PrinceAliRescuePlugin extends OptionHandler {
 	@Override
 	public boolean handle(Player player, Node node, String option) {
 		final Quest quest = player.getQuestRepository().getQuest("Prince Ali Rescue");
-		final int id = node instanceof GameObject ? ((GameObject) node).getId() : node instanceof NPC ? ((NPC) node).getId() : 0;
+		final int id = node instanceof Scenery ? ((Scenery) node).getId() : node instanceof NPC ? ((NPC) node).getId() : 0;
 		switch (id) {
 		case 925:
 			player.getDialogueInterpreter().open(925, node);
@@ -44,13 +44,13 @@ public class PrinceAliRescuePlugin extends OptionHandler {
 		case 2881:
 			switch (quest.getStage(player)) {
 			case 60:
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				break;
 			case 50:
 				if (player.getAttribute("keli-gone", 0) > GameWorld.getTicks()) {
 					if (player.getInventory().contains(2418, 1)) {
 						player.getPacketDispatch().sendMessage("You unlock the door.");
-						DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+						DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 					} else {
 						player.getPacketDispatch().sendMessage("The door is locked.");
 					}

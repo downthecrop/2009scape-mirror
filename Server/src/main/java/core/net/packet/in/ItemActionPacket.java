@@ -8,7 +8,7 @@ import core.game.interaction.UseWithHandler;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.RegionManager;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
@@ -157,7 +157,7 @@ public class ItemActionPacket implements IncomingPacket {
 			buffer.getShort();
 			int objectId = buffer.getShortA();
 			int z = player.getLocation().getZ();
-			GameObject object = RegionManager.getObject(z, x, y);
+			Scenery object = RegionManager.getObject(z, x, y);
 			if(objectId != 6898) {
 				if (object == null || object.getId() != objectId) {
 					PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
@@ -169,7 +169,7 @@ public class ItemActionPacket implements IncomingPacket {
 					break;
 				}
 			} else {
-				object = new GameObject(6898,x,y,z);
+				object = new Scenery(6898,x,y,z);
 			}
 			used = player.getInventory().get(slot);
 			if (used == null || used.getId() != id) {

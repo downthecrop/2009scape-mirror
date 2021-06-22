@@ -4,7 +4,7 @@ import core.game.content.global.action.DigAction;
 import core.game.content.global.action.DigSpadeHandler;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -106,7 +106,7 @@ public final class BarrowsCrypt {
 	 * Opens the sarcophagus.
 	 * @param player The player.
 	 */
-	public void openSarcophagus(Player player, GameObject object) {
+	public void openSarcophagus(Player player, Scenery object) {
 		if (index == player.getSavedData().getActivityData().getBarrowTunnelIndex()) {
 			player.getDialogueInterpreter().open("barrow_tunnel", index);
 			return;

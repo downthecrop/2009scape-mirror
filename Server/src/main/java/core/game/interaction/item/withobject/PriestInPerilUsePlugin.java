@@ -7,7 +7,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -46,7 +46,7 @@ public class PriestInPerilUsePlugin extends UseWithHandler {
 	@Override
 	public boolean handle(NodeUsageEvent event) {
 		Player player = event.getPlayer();
-		int objUse = ((GameObject) event.getUsedWith()).getId();
+		int objUse = ((Scenery) event.getUsedWith()).getId();
 		int itemUse = ((Item) event.getUsedItem()).getId();
 		switch(objUse) {
 			case 3499:

@@ -3,8 +3,8 @@ package core.game.node.entity.skill.hunter;
 import core.game.node.entity.skill.hunter.NetTrapSetting.NetTrap;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
@@ -46,12 +46,12 @@ public final class TrapWrapper {
 	/**
 	 * The object of the trap.
 	 */
-	private GameObject object;
+	private Scenery object;
 
 	/**
-	 * The secondary game object.
+	 * The secondary scenery.
 	 */
-	private GameObject secondary;
+	private Scenery secondary;
 
 	/**
 	 * The trap hook.
@@ -94,7 +94,7 @@ public final class TrapWrapper {
 	 * @param type the type.
 	 * @param object the object.
 	 */
-	public TrapWrapper(final Player player, Traps type, GameObject object) {
+	public TrapWrapper(final Player player, Traps type, Scenery object) {
 		this.player = player;
 		this.type = type;
 		this.object = object;
@@ -122,9 +122,9 @@ public final class TrapWrapper {
 	 * @param id the id.
 	 */
 	public void setObject(final int id) {
-		GameObject newObject = object.transform(id);
-		ObjectBuilder.remove(object);
-		this.object = ObjectBuilder.add(newObject);
+		Scenery newObject = object.transform(id);
+		SceneryBuilder.remove(object);
+		this.object = SceneryBuilder.add(newObject);
 		this.object.getAttributes().setAttribute("trap-uid", player.getHunterManager().getUid());
 	}
 
@@ -217,7 +217,7 @@ public final class TrapWrapper {
 	 * Gets the object.
 	 * @return The object.
 	 */
-	public GameObject getObject() {
+	public Scenery getObject() {
 		return object;
 	}
 
@@ -362,7 +362,7 @@ public final class TrapWrapper {
 	 * Gets the secondary.
 	 * @return The secondary.
 	 */
-	public GameObject getSecondary() {
+	public Scenery getSecondary() {
 		return secondary;
 	}
 
@@ -370,7 +370,7 @@ public final class TrapWrapper {
 	 * Sets the secondary.
 	 * @param secondary The secondary to set.
 	 */
-	public void setSecondary(GameObject secondary) {
+	public void setSecondary(Scenery secondary) {
 		this.secondary = secondary;
 		this.secondary.getAttributes().setAttribute("trap-uid", player.getName().hashCode());
 	}
@@ -395,7 +395,7 @@ public final class TrapWrapper {
 	 * Sets the object.
 	 * @param object The object to set.
 	 */
-	public void setObject(GameObject object) {
+	public void setObject(Scenery object) {
 		this.object = object;
 	}
 

@@ -12,7 +12,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.net.packet.IncomingPacket;
@@ -226,7 +226,7 @@ public final class InteractionPacket implements IncomingPacket {
 	 * @param objectId The object id.
 	 */
 	public static void handleObjectInteraction(final Player player, int optionIndex, int x, int y, int objectId) {
-		GameObject object = RegionManager.getObject(player.getLocation().getZ(), x, y, objectId);
+		Scenery object = RegionManager.getObject(player.getLocation().getZ(), x, y, objectId);
 		if (objectId == 29735) {//player safety.
 			player.getPulseManager().run(new MovementPulse(player, Location.create(x, y, player .getLocation().getZ())) {
 				@Override
@@ -239,12 +239,12 @@ public final class InteractionPacket implements IncomingPacket {
 			return;
 		}
 		if (objectId == 6898) {
-			object = new GameObject(6898, new Location(3219, 9618));
+			object = new Scenery(6898, new Location(3219, 9618));
 		} else if (objectId == 6899) {
-			object = new GameObject(6899, new Location(3221, 9618));
+			object = new Scenery(6899, new Location(3221, 9618));
 		}
 		if (object == null || object.getId() != objectId) {
-			player.debug("GameObject("  + objectId + ") interaction was " + object + " at location " + x + ", " + y + ".");
+			player.debug("Scenery("  + objectId + ") interaction was " + object + " at location " + x + ", " + y + ".");
 			PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
 			Interaction.handleInvalidInteraction(player, object, Option.NULL);
 			return;

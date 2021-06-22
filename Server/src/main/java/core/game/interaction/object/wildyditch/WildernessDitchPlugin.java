@@ -6,7 +6,7 @@ import core.game.interaction.MovementPulse;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.plugin.PluginManager;
@@ -49,7 +49,7 @@ public final class WildernessDitchPlugin extends OptionHandler {
 	 */
 	public void handleDitch(final Player player, Node node) {
 		player.faceLocation(node.getLocation());
-		GameObject ditch = (GameObject) node;
+		Scenery ditch = (Scenery) node;
 		player.setAttribute("wildy_ditch", ditch);
 		if(!player.isArtificial()) {
 			if (ditch.getRotation() % 2 == 0) {

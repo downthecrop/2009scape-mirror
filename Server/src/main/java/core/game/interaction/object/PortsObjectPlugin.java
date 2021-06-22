@@ -5,7 +5,7 @@ import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
@@ -184,7 +184,7 @@ public class PortsObjectPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final int id = ((GameObject) node).getId();
+		final int id = ((Scenery) node).getId();
 		switch (option) {
 		case "climb-up":
 			ClimbActionHandler.climb(player, new Animation(828), new Location(3048, 3208, 1));

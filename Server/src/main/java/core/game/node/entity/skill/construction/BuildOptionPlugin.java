@@ -8,7 +8,7 @@ import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.node.entity.skill.construction.Hotspot;
@@ -37,7 +37,7 @@ public final class BuildOptionPlugin extends OptionHandler {
 			player.getPacketDispatch().sendMessage("You have to be in building mode to do this.");
 			return true;
 		}
-		GameObject object = ((GameObject) node);
+		Scenery object = ((Scenery) node);
 		if (option.equals("remove")) {
 			Decoration decoration = Decoration.getDecoration(player, object);
 			if (decoration == null || !object.isActive()) {
@@ -81,7 +81,7 @@ public final class BuildOptionPlugin extends OptionHandler {
 	 * @param hotspot The hotspot.
 	 * @return {@code True} if so.
 	 */
-	private static boolean isBuildable(Player player, GameObject object, Hotspot hotspot) {
+	private static boolean isBuildable(Player player, Scenery object, Hotspot hotspot) {
 		Room room = player.getHouseManager().getRoom(object.getLocation());
 		if (room == null) {
 			return false;
@@ -133,7 +133,7 @@ public final class BuildOptionPlugin extends OptionHandler {
 		/**
 		 * The object.
 		 */
-		private GameObject object;
+		private Scenery object;
 
 		/**
 		 * Constructs a new {@code RemoveDialogue} {@code Object}.
@@ -158,7 +158,7 @@ public final class BuildOptionPlugin extends OptionHandler {
 		@Override
 		public boolean open(Object... args) {
 			interpreter.sendOptions("Really remove it?", "Yes", "No");
-			object = (GameObject) args[0];
+			object = (Scenery) args[0];
 			return true;
 		}
 

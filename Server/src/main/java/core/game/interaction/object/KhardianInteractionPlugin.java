@@ -7,8 +7,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -80,7 +80,7 @@ public final class KhardianInteractionPlugin extends OptionHandler {
 			if (!failed) {
 				player.getSkills().addExperience(Skills.WOODCUTTING, 10, true);
 			}
-			ObjectBuilder.replace(((GameObject) node), new GameObject(DRY_CACTUS, node.getLocation()), SPAWN_DELAY + RandomFunction.random(RegionManager.getLocalPlayers(player).size() / 2));
+			SceneryBuilder.replace(((Scenery) node), new Scenery(DRY_CACTUS, node.getLocation()), SPAWN_DELAY + RandomFunction.random(RegionManager.getLocalPlayers(player).size() / 2));
 			break;
 		}
 		return true;

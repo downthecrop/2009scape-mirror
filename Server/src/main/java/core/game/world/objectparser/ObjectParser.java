@@ -1,7 +1,7 @@
 package core.game.world.objectparser;
 
 import rs09.ServerConstants;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import rs09.game.world.GameWorld;
 import core.game.world.map.build.LandscapeParser;
 import core.plugin.Initializable;
@@ -80,7 +80,7 @@ public class ObjectParser extends StartupPlugin {
                                     dir = 6;
                                     break;
                             }
-                            LandscapeParser.addGameObject(new GameObject(id, x, y, z, objType, dir));
+                            LandscapeParser.addScenery(new Scenery(id, x, y, z, objType, dir));
                             break;
                         }
                         case "remove": {
@@ -89,7 +89,7 @@ public class ObjectParser extends StartupPlugin {
                             int y = Integer.parseInt(parseElement.getAttribute("y"));
                             int z = Integer.parseInt(parseElement.getAttribute("z"));
                             int objType = 10;
-                            LandscapeParser.removeGameObject(new GameObject(id,x,y,z));
+                            LandscapeParser.removeScenery(new Scenery(id,x,y,z));
                         }
                     }
                 }

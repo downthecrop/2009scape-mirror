@@ -4,8 +4,8 @@ import core.cache.def.impl.ObjectDefinition;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.BuildRegionChunk;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -84,7 +84,7 @@ public final class RoomBuilder {
 	 * @param deco The decoration.
 	 * @param object The object.
 	 */ 
-	public static void buildDecoration(Player player, BuildHotspot hotspot, Decoration deco, GameObject object) {
+	public static void buildDecoration(Player player, BuildHotspot hotspot, Decoration deco, Scenery object) {
 		if(!player.isAdmin()){
 			if (!player.getInventory().containsItems(deco.getItems())) {
 				player.getPacketDispatch().sendMessage("You don't have the required items to build this.");
@@ -98,17 +98,17 @@ public final class RoomBuilder {
 		if (h != null) {
 			switch(h.getHotspot().getType()) { 
 				case INDIVIDUAL:
-					ObjectBuilder.replace(object, object.transform(deco.getObjectId()));							
+					SceneryBuilder.replace(object, object.transform(deco.getObjectId()));
 					h.setDecorationIndex(hotspot.getDecorationIndex(deco));			
 					break;					
 				case RECURSIVE:
 					room.setAllDecorationIndex(hotspot.getDecorationIndex(deco), h.getHotspot());
-					GameObject[][] objects = player.getHouseManager().getRegion().getPlanes()[l.getZ()].getChunks()[l.getLocalX() >> 3][l.getLocalY() >> 3].getObjects();
+					Scenery[][] objects = player.getHouseManager().getRegion().getPlanes()[l.getZ()].getChunks()[l.getLocalX() >> 3][l.getLocalY() >> 3].getObjects();
 					for (int j = 0; j < objects.length; j++) {
 						for (int k = 0; k < objects[j].length; k++) {
-							GameObject go = objects[j][k];
+							Scenery go = objects[j][k];
 							if (go != null && go.getId() == object.getId()) {
-								ObjectBuilder.replace(go, go.transform(deco.getObjectId()));	
+								SceneryBuilder.replace(go, go.transform(deco.getObjectId()));
 							}
 						}
 					}
@@ -120,9 +120,9 @@ public final class RoomBuilder {
 						for (int y = 0; y < 8; y++) {
 							for(BuildHotspot bh : linkedHotspots) {
 								int index = chunk.getIndex(x, y, bh.getObjectId());
-								GameObject o = chunk.get(x, y, index);
+								Scenery o = chunk.get(x, y, index);
 								if (o != null && bh.getObjectId() == o.getId()) {
-									ObjectBuilder.replace(o, o.transform(bh.getDecorations()[0].getObjectId()));
+									SceneryBuilder.replace(o, o.transform(bh.getDecorations()[0].getObjectId()));
 									room.setAllDecorationIndex(0, bh);
 								}
 							}
@@ -138,7 +138,7 @@ public final class RoomBuilder {
 	 * @param player the player
 	 * @param object the object to remove
 	 */
-	public static void removeDecoration(Player player, GameObject object) {
+	public static void removeDecoration(Player player, Scenery object) {
 		Location l = object.getLocation();
 		Room room = player.getHouseManager().getRooms()[l.getZ()][l.getLocalX() >> 3][l.getLocalY() >> 3];
 		for (int i = 0; i < room.getHotspots().length; i++) {
@@ -146,17 +146,17 @@ public final class RoomBuilder {
 			if (hotspot.getChunkX() == l.getChunkOffsetX() && hotspot.getChunkY() == l.getChunkOffsetY()) {
 				switch (hotspot.getHotspot().getType()) {
 					case INDIVIDUAL:					
-						ObjectBuilder.replace(object, object.transform(hotspot.getHotspot().getObjectId()));
+						SceneryBuilder.replace(object, object.transform(hotspot.getHotspot().getObjectId()));
 						hotspot.setDecorationIndex(-1);					
 						return;
 					case RECURSIVE:
 						room.setAllDecorationIndex(-1, hotspot.getHotspot());
-						GameObject[][] objects = player.getHouseManager().getRegion().getPlanes()[l.getZ()].getChunks()[l.getLocalX() >> 3][l.getLocalY() >> 3].getObjects();
+						Scenery[][] objects = player.getHouseManager().getRegion().getPlanes()[l.getZ()].getChunks()[l.getLocalX() >> 3][l.getLocalY() >> 3].getObjects();
 						for (int j = 0; j < objects.length; j++) {
 							for (int k = 0; k < objects[j].length; k++) {
-								GameObject go = objects[j][k];
+								Scenery go = objects[j][k];
 								if (go != null && go.getId() == object.getId()) {
-									ObjectBuilder.replace(go, go.transform(hotspot.getHotspot().getObjectId()));
+									SceneryBuilder.replace(go, go.transform(hotspot.getHotspot().getObjectId()));
 								}
 							}
 						}
@@ -191,7 +191,7 @@ public final class RoomBuilder {
 	 * @param door the door hotspot the player is trying to build at
 	 * @return true if the room is built already
 	 */
-	public static boolean roomExists(Player player, GameObject door) {
+	public static boolean roomExists(Player player, Scenery door) {
 		int[] location = getRoomPosition(door);
 		return player.getHouseManager().getRooms()[player.getLocation().getZ()][location[0]][location[1]] != null;
 	}
@@ -201,7 +201,7 @@ public final class RoomBuilder {
 	 * @param door The door.
 	 * @return The room offset [x, y].
 	 */
-	public static int[] getRoomPosition(GameObject door) {
+	public static int[] getRoomPosition(Scenery door) {
 		Location l = door.getLocation();
 		switch (door.getRotation()) {
 		case 0: //West
@@ -224,7 +224,7 @@ public final class RoomBuilder {
 	 * @param roomY The room y-coordinate.
 	 * @return The available rotations for the room [NORTH, EAST, SOUTH, WEST].
 	 */
-	public static Direction[] getAvailableRotations(Player player, boolean[] exits, GameObject door, int roomX, int roomY) {
+	public static Direction[] getAvailableRotations(Player player, boolean[] exits, Scenery door, int roomX, int roomY) {
 		Direction[] directions = new Direction[4];
 		//Exits go to: (0=east, 1=south, 2=west, 3=north)
 		boolean[] exit = Arrays.copyOf(exits, exits.length);

@@ -49,8 +49,8 @@ public final class PacketRepository {
 		OUTGOING_PACKETS.put(InterfaceConfig.class, new InterfaceConfig());		 			//
 		OUTGOING_PACKETS.put(PingPacket.class, new PingPacket());				 			//
 		OUTGOING_PACKETS.put(UpdateAreaPosition.class, new UpdateAreaPosition());			//
-		OUTGOING_PACKETS.put(ConstructObject.class, new ConstructObject());		 			//
-		OUTGOING_PACKETS.put(ClearObject.class, new ClearObject());				 			//
+		OUTGOING_PACKETS.put(ConstructScenery.class, new ConstructScenery());		 			//
+		OUTGOING_PACKETS.put(ClearScenery.class, new ClearScenery());				 			//
 		OUTGOING_PACKETS.put(HintIcon.class, new HintIcon());					 			//
 		OUTGOING_PACKETS.put(ClearMinimapFlag.class, new ClearMinimapFlag());	 			//
 		OUTGOING_PACKETS.put(InteractionOption.class, new InteractionOption());  			//

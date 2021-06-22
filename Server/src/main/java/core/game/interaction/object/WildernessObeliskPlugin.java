@@ -5,8 +5,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.TeleportManager.TeleportType;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -38,7 +38,7 @@ public final class WildernessObeliskPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, final Node node, String option) {
-		final GameObject nodeObject = (GameObject) node;
+		final Scenery nodeObject = (Scenery) node;
 		final Obelisk stationObelisk = Obelisk.forLocation(player.getLocation());
 		if (stationObelisk == null) {
 			return false;
@@ -51,22 +51,22 @@ public final class WildernessObeliskPlugin extends OptionHandler {
 			case 0:
 				x = x + 2;
 				y = y + 2;
-				ObjectBuilder.replace(new GameObject(nodeObject.getId(), Location.create(x, y, z)), new GameObject(14825, Location.create(x, y, 0)), 6);
+				SceneryBuilder.replace(new Scenery(nodeObject.getId(), Location.create(x, y, z)), new Scenery(14825, Location.create(x, y, 0)), 6);
 				break;
 			case 1:
 				x = x - 2;
 				y = y + 2;
-				ObjectBuilder.replace(new GameObject(nodeObject.getId(), Location.create(x, y, z)), new GameObject(14825, Location.create(x, y, 0)), 6);
+				SceneryBuilder.replace(new Scenery(nodeObject.getId(), Location.create(x, y, z)), new Scenery(14825, Location.create(x, y, 0)), 6);
 				break;
 			case 2:
 				x = x - 2;
 				y = y - 2;
-				ObjectBuilder.replace(new GameObject(nodeObject.getId(), Location.create(x, y, z)), new GameObject(14825, Location.create(x, y, 0)), 6);
+				SceneryBuilder.replace(new Scenery(nodeObject.getId(), Location.create(x, y, z)), new Scenery(14825, Location.create(x, y, 0)), 6);
 				break;
 			case 3:
 				x = x + 2;
 				y = y - 2;
-				ObjectBuilder.replace(new GameObject(nodeObject.getId(), Location.create(x, y, z)), new GameObject(14825, Location.create(x, y, 0)), 6);
+				SceneryBuilder.replace(new Scenery(nodeObject.getId(), Location.create(x, y, z)), new Scenery(14825, Location.create(x, y, 0)), 6);
 				break;
 			}
 		}

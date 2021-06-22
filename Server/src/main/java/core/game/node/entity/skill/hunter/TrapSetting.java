@@ -8,8 +8,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -135,7 +135,7 @@ public class TrapSetting {
 	 * @return {@code True} if cleared.
 	 */
 	public boolean clear(TrapWrapper wrapper, int type) {
-		GameObject object = wrapper.getObject();
+		Scenery object = wrapper.getObject();
 		returnItems(object, wrapper, type);
 		wrapper.getType().getHooks().remove(wrapper.getHook());
 		removeObject(wrapper);
@@ -148,7 +148,7 @@ public class TrapSetting {
 	 * @param wrapper the wrapper.
 	 * @param type the type.
 	 */
-	public void returnItems(GameObject object, TrapWrapper wrapper, int type) {
+	public void returnItems(Scenery object, TrapWrapper wrapper, int type) {
 		boolean ground = type == 0;
 		Player player = wrapper.getPlayer();
 		if (!isObjectTrap()) {
@@ -213,17 +213,17 @@ public class TrapSetting {
 	 * @param object the object.
 	 * @return {@code True} if so.
 	 */
-	public boolean removeObject(GameObject object) {
-		return ObjectBuilder.remove(object);
+	public boolean removeObject(Scenery object) {
+		return SceneryBuilder.remove(object);
 	}
 
 	/**
-	 * Builds a game object.
+	 * Builds a scenery.
 	 * @param node the node.
 	 * @return the object.
 	 */
-	public GameObject buildObject(Player player, Node node) {
-		return new GameObject(objectIds[0], player.getLocation());
+	public Scenery buildObject(Player player, Node node) {
+		return new Scenery(objectIds[0], player.getLocation());
 	}
 
 	/**
@@ -231,7 +231,7 @@ public class TrapSetting {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	public void investigate(Player player, GameObject object) {
+	public void investigate(Player player, Scenery object) {
 		if (!player.getHunterManager().isOwner(object)) {
 			player.sendMessage("This isn't your trap.");
 			return;

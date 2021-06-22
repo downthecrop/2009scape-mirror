@@ -9,8 +9,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -47,7 +47,7 @@ public final class DemonSlayerPlugin extends OptionHandler {
 	@Override
 	public boolean handle(Player player, Node node, String option) {
 		final Quest quest = player.getQuestRepository().getQuest("Demon Slayer");
-		final int id = node instanceof GameObject ? ((GameObject) node).getId() : node instanceof Item ? ((Item) node).getId() : ((NPC) node).getId();
+		final int id = node instanceof Scenery ? ((Scenery) node).getId() : node instanceof Item ? ((Item) node).getId() : ((NPC) node).getId();
 		switch (id) {
 		case 880:
 			player.getDialogueInterpreter().open(8427322);
@@ -70,7 +70,7 @@ public final class DemonSlayerPlugin extends OptionHandler {
 			}
 			return true;
 		case 881:
-			ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(882));
+			SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(882));
 			break;
 		case 882:
 			switch (option) {
@@ -78,11 +78,11 @@ public final class DemonSlayerPlugin extends OptionHandler {
 				if (node.getLocation().equals(new Location(3237, 3458, 0))) {
 					ClimbActionHandler.climb(player, new Animation(828), SEWER_LOCATION);
 				} else {
-					ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+					ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 				}
 				break;
 			case "close":
-				ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(881));
+				SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(881));
 				break;
 			}
 			break;

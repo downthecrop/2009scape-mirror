@@ -8,8 +8,8 @@ import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -31,9 +31,9 @@ public class JangerBerryPlugin extends OptionHandler {
 
 			@Override
 			public boolean handle(NodeUsageEvent event) {
-				GameObject object = event.getUsedWith().asObject();
+				Scenery object = event.getUsedWith().asObject();
 				if (object.isActive())
-					ObjectBuilder.replace(object, object.transform(2325));
+					SceneryBuilder.replace(object, object.transform(2325));
 				event.getPlayer().getInventory().remove(event.getUsedItem());
 				return true;
 			}

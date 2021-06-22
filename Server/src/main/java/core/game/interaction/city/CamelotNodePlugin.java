@@ -4,7 +4,7 @@ import core.cache.def.impl.ObjectDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -25,7 +25,7 @@ public final class CamelotNodePlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final int id = ((GameObject) node).getId();
+		final int id = ((Scenery) node).getId();
 		switch (id) {
 		case 26017:
 			player.getPacketDispatch().sendMessage("Court is not in session.");
@@ -36,8 +36,8 @@ public final class CamelotNodePlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		if (n instanceof GameObject) {
-			int id = ((GameObject) n).getId();
+		if (n instanceof Scenery) {
+			int id = ((Scenery) n).getId();
 			switch (id) {
 			case 993:
 				if (node.getLocation().getX() <= 2638) {

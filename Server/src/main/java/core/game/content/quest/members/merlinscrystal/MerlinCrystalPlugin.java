@@ -20,8 +20,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -75,14 +75,14 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 	@Override
 	public boolean handle(Player player, Node node, String option) {
 		final Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
-		final int id = node instanceof Item ? ((Item) node).getId() : node instanceof GameObject ? ((GameObject) node).getId() : ((NPC) node).getId();
+		final int id = node instanceof Item ? ((Item) node).getId() : node instanceof Scenery ? ((Scenery) node).getId() : ((NPC) node).getId();
 		switch (id) {
 		case 62:
 			if (quest.getStage(player) == 90 && player.getEquipment().contains(35, 1)) {
 				player.sendMessages("You attempt to smash the crystal...", "... and it shatters under the force of Excalibur!");
 				player.animate(Animation.create(390));
 				player.lock();
-				ObjectBuilder.remove(node.asObject(), 60);
+				SceneryBuilder.remove(node.asObject(), 60);
 				quest.setStage(player, 99);
 				final NPC merlin = NPC.create(249, Location.create(2767, 3493, 2));
 				merlin.init();
@@ -154,7 +154,7 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 				npc.setAttribute("beggar_owner", player.getUsername());
 				ClimbActionHandler.climb(player, new Animation(828), Location.create(3013, 3245, 1));
 			} else {
-				ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 				return true;
 			}
 			return true;
@@ -589,7 +589,7 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 		public boolean handle(NodeUsageEvent event) {
 			Player player = event.getPlayer();
 			Item useditem = event.getUsedItem();
-			final GameObject object = (GameObject) event.getUsedWith();
+			final Scenery object = (Scenery) event.getUsedWith();
 
 			if (player.getAttribute("cleared-beehives", false) && useditem.getId() == REPELLENT.getId() && object.getId() == 68) {
 				player.getDialogueInterpreter().sendDialogue("You have already cleared the hive of its bees.", "You can now safely collect wax from the hive.");

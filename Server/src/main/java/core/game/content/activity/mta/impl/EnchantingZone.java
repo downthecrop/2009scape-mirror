@@ -13,7 +13,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -288,7 +288,7 @@ public class EnchantingZone extends MTAZone {
 		 * Takes from the shape object.
 		 * @param player the player.
 		 */
-		public void take(Player player, GameObject object) {
+		public void take(Player player, Scenery object) {
 			if (!player.getInventory().hasSpaceFor(item)) {
 				player.sendMessage("You have no space left in your inventory.");
 				return;

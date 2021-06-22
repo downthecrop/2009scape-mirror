@@ -10,7 +10,7 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -28,12 +28,12 @@ public class StandardCookingPulse extends Pulse {
     public static final Audio SOUND = new Audio(2577, 1, 1);
 
     private int initial, product, amount, level;
-    private GameObject object;
+    private Scenery object;
     private Player player;
     private double experience;
     private boolean burned = false;
 
-    public StandardCookingPulse(Player player, GameObject object, int initial, int product, int amount) {
+    public StandardCookingPulse(Player player, Scenery object, int initial, int product, int amount) {
         this.player = player;
         this.object = object;
         this.initial = initial;
@@ -113,7 +113,7 @@ public class StandardCookingPulse extends Pulse {
         return amount < 1;
     }
 
-    public boolean isBurned(final Player player, final GameObject object, int food) {
+    public boolean isBurned(final Player player, final Scenery object, int food) {
         boolean hasGauntlets = player.getEquipment().containsItem(new Item(Items.COOKING_GAUNTLETS_775));
         double burn_stop = (double) CookableItems.getBurnLevel(food);
         CookableItems item = CookableItems.forId(food);
@@ -131,7 +131,7 @@ public class StandardCookingPulse extends Pulse {
         return host_ratio > client_ratio;
     }
 
-    public boolean cook(final Player player, final GameObject object, final boolean burned, final int initial, final int product) {
+    public boolean cook(final Player player, final Scenery object, final boolean burned, final int initial, final int product) {
         Item initialItem = new Item(initial);
         Item productItem = new Item(product);
         player.lock(getDelay());
@@ -243,7 +243,7 @@ public class StandardCookingPulse extends Pulse {
         return cook(player, object, burned, initial, product);
     }
 
-    private Animation getAnimation(final GameObject object) {
+    private Animation getAnimation(final Scenery object) {
         return !object.getName().toLowerCase().equals("fire") ? RANGE_ANIMATION : FIRE_ANIMATION;
     }
 }

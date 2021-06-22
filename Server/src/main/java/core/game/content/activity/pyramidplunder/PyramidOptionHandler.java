@@ -7,7 +7,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -60,9 +60,9 @@ public final class PyramidOptionHandler extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		if (node instanceof GameObject) {
+		if (node instanceof Scenery) {
 			Location destination = EMPTY_ROOM;
-			GameObject object = (GameObject) node;
+			Scenery object = (Scenery) node;
 			boolean willBePushed = (RandomFunction.random(10) > 3);
 			if (object.getId() == 16458 || object.getId() == 16459) {
 				ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, Location.create(3288, 2801, 0));

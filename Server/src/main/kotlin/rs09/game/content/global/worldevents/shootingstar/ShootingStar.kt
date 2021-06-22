@@ -1,7 +1,7 @@
 package rs09.game.content.global.worldevents.shootingstar
 
-import core.game.node.`object`.GameObject
-import core.game.node.`object`.ObjectBuilder
+import core.game.node.`object`.Scenery
+import core.game.node.`object`.SceneryBuilder
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
@@ -46,7 +46,7 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
     var location = "Canifis Bank"
     var maxDust = level.totalStardust
     var dustLeft = level.totalStardust
-    var starObject = GameObject(level.objectId, crash_locations.get(location))
+    var starObject = Scenery(level.objectId, crash_locations.get(location))
     var isDiscovered = false
     var ticks = 0
     var isSpawned = false
@@ -57,7 +57,7 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
      */
     fun degrade() {
         if(level.ordinal == 0){
-            ObjectBuilder.remove(starObject)
+            SceneryBuilder.remove(starObject)
             isSpawned = false
             starSprite.location = starObject.location
             starSprite.init()
@@ -68,8 +68,8 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
         maxDust = level.totalStardust
         dustLeft = level.totalStardust
 
-        val newStar = GameObject(level.objectId, starObject.location)
-        ObjectBuilder.replace(starObject, newStar)
+        val newStar = Scenery(level.objectId, starObject.location)
+        SceneryBuilder.replace(starObject, newStar)
         starObject = newStar
     }
 
@@ -81,10 +81,10 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
      * Fires the shooting star (spawns a new one). Only used when spawning new shooting stars, not for downgrading existing ones.
      */
     fun fire() {
-        ObjectBuilder.remove(starObject)
+        SceneryBuilder.remove(starObject)
         rebuildVars()
         clearSprite()
-        ObjectBuilder.add(starObject)
+        SceneryBuilder.add(starObject)
         isSpawned = true
         Repository.sendNews("A shooting star level ${level.ordinal + 1} just crashed near ${location.toLowerCase()}!")
     }
@@ -97,7 +97,7 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
         location = crash_locations.entries.random().key
         maxDust = level.totalStardust
         dustLeft = level.totalStardust
-        starObject = GameObject(level.objectId, crash_locations.get(location))
+        starObject = Scenery(level.objectId, crash_locations.get(location))
         isDiscovered = false
         ticks = 0
     }

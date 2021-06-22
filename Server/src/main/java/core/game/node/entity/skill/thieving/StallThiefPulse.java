@@ -6,8 +6,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -19,7 +19,7 @@ import core.tools.StringUtils;
  * Represents the pulse used to thieve a stall.
  * @author 'Vexia
  */
-public final class StallThiefPulse extends SkillPulse<GameObject> {
+public final class StallThiefPulse extends SkillPulse<Scenery> {
 
 	/**
 	 * Represents the stealing animation.
@@ -42,7 +42,7 @@ public final class StallThiefPulse extends SkillPulse<GameObject> {
 	 * @param node the node.
 	 * @param stall the stall.
 	 */
-	public StallThiefPulse(Player player, GameObject node, final Stall stall) {
+	public StallThiefPulse(Player player, Scenery node, final Stall stall) {
 		super(player, node);
 		this.stall = stall;
 	}
@@ -103,7 +103,7 @@ public final class StallThiefPulse extends SkillPulse<GameObject> {
 				player.getAchievementDiaryManager().finishTask(player,DiaryType.VARROCK,0, 12);
 			}
 			if (node.isActive()) {
-				ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(stall.getEmpty(node.getId())), stall.getDelay());
+				SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(stall.getEmpty(node.getId())), stall.getDelay());
 			}
 			final Item item = stall.getRandomLoot();
 		    player.getInventory().add(item);

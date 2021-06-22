@@ -10,8 +10,8 @@ import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -56,7 +56,7 @@ public class LumbridgeBasementPlugin extends OptionHandler {
 		ObjectDefinition.forId(40260).getHandlers().put("option:climb-through", this);
 		ObjectDefinition.forId(41077).getHandlers().put("option:crawl-through", this);
 		PluginManager.definePlugins(new LightCreatureNPC(), new LightCreatureHandler(), new FishMongerDialogue());
-		ObjectBuilder.add(new GameObject(40260, Location.create(2526, 5828, 2), 2));
+		SceneryBuilder.add(new Scenery(40260, Location.create(2526, 5828, 2), 2));
 		return this;
 	}
 
@@ -158,7 +158,7 @@ public class LumbridgeBasementPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		if (n instanceof GameObject) {
+		if (n instanceof Scenery) {
 			if (n.getId() == 5949) {
 				return node.getLocation().getY() >= 9555 ? Location.create(3221, 9556, 0) : Location.create(3221, 9552, 0);
 			} else if (n.getId() == 40262) {

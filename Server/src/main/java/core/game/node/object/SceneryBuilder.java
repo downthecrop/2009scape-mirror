@@ -15,33 +15,33 @@ import core.game.world.update.flag.chunk.ObjectUpdateFlag;
  *
  * @author Emperor
  */
-public final class ObjectBuilder {
+public final class SceneryBuilder {
 
 	/**
-	 * Replaces a game object.
+	 * Replaces a scenery.
 	 *
 	 * @param remove    The object to remove.
 	 * @param construct The object to add.
 	 * @return {@code True} if successful.
 	 */
-	public static boolean replace(GameObject remove, GameObject construct) {
+	public static boolean replace(Scenery remove, Scenery construct) {
 		return replace(remove, construct, true, false);
 	}
 
 	/**
-	 * Replaces a game object.
+	 * Replaces a scenery.
 	 *
 	 * @param remove    The object to remove.
 	 * @param construct The object to add.
 	 * @param clip      If clipping should be adjusted.
 	 * @return {@code True} if successful.
 	 */
-	public static boolean replace(GameObject remove, GameObject construct, boolean clip, boolean permanent) {
+	public static boolean replace(Scenery remove, Scenery construct, boolean clip, boolean permanent) {
 		if (!clip) {
 			return replaceClientSide(remove, construct, -1);
 		}
 		remove = remove.getWrapper();
-		GameObject current = LandscapeParser.removeGameObject(remove);
+		Scenery current = LandscapeParser.removeScenery(remove);
 		if (current == null) {
 			if (GameWorld.getSettings().isDevMode()) {
 				SystemLogger.logErr("Object could not be replaced - object to remove is invalid.");
@@ -53,9 +53,9 @@ public final class ObjectBuilder {
 			current.setRestorePulse(null);
 		}
 		if (current instanceof Constructed) {
-			GameObject previous = ((Constructed) current).getReplaced();
+			Scenery previous = ((Constructed) current).getReplaced();
 			if (previous != null && previous.equals(construct)) {
-				LandscapeParser.addGameObject(previous);
+				LandscapeParser.addScenery(previous);
 				update(current, previous);
 				return true;
 			}
@@ -64,7 +64,7 @@ public final class ObjectBuilder {
 		if (!permanent) {
 			constructed.setReplaced(current);
 		}
-		LandscapeParser.addGameObject(constructed);
+		LandscapeParser.addScenery(constructed);
 		update(current, constructed);
 		return true;
 	}
@@ -77,7 +77,7 @@ public final class ObjectBuilder {
 	 * @param restoreTicks The restoration ticks.
 	 * @return {@code True} if successful.
 	 */
-	private static boolean replaceClientSide(final GameObject remove, final GameObject construct, int restoreTicks) {
+	private static boolean replaceClientSide(final Scenery remove, final Scenery construct, int restoreTicks) {
 		RegionManager.getRegionChunk(remove.getLocation()).flag(new ObjectUpdateFlag(remove, true));
 		RegionManager.getRegionChunk(construct.getLocation()).flag(new ObjectUpdateFlag(construct, false));
 		if (restoreTicks > 0) {
@@ -92,31 +92,31 @@ public final class ObjectBuilder {
 	}
 
 	/**
-	 * Replaces a game object temporarily.
+	 * Replaces a scenery temporarily.
 	 *
 	 * @param remove       The object to remove.
 	 * @param construct    The object to add.
 	 * @param restoreTicks The amount of ticks before the object gets restored.
 	 * @return {@code True} if successful.
 	 */
-	public static boolean replace(GameObject remove, GameObject construct, int restoreTicks) {
+	public static boolean replace(Scenery remove, Scenery construct, int restoreTicks) {
 		return replace(remove, construct, restoreTicks, true);
 	}
 
 	/**
-	 * Replaces a game object temporarily.
+	 * Replaces a scenery temporarily.
 	 *
 	 * @param remove       The object to remove.
 	 * @param construct    The object to add.
 	 * @param restoreTicks The amount of ticks before the object gets restored.
 	 * @return {@code True} if successful.
 	 */
-	public static boolean replace(GameObject remove, GameObject construct, int restoreTicks, final boolean clip) {
+	public static boolean replace(Scenery remove, Scenery construct, int restoreTicks, final boolean clip) {
 		if (!clip) {
 			return replaceClientSide(remove, construct, restoreTicks);
 		}
 		remove = remove.getWrapper();
-		GameObject current = LandscapeParser.removeGameObject(remove);
+		Scenery current = LandscapeParser.removeScenery(remove);
 		if (current == null) {
 			if (GameWorld.getSettings().isDevMode()) {
 				SystemLogger.logErr("Object could not be replaced - object to remove is invalid.");
@@ -128,7 +128,7 @@ public final class ObjectBuilder {
 			current.setRestorePulse(null);
 		}
 		if (current instanceof Constructed) {
-			GameObject previous = ((Constructed) current).getReplaced();
+			Scenery previous = ((Constructed) current).getReplaced();
 			if (previous != null && previous.equals(construct)) {
 				// Shouldn't happen.
 				throw new IllegalStateException("Can't temporarily replace an already temporary object!");
@@ -136,7 +136,7 @@ public final class ObjectBuilder {
 		}
 		final Constructed constructed = construct.asConstructed();
 		constructed.setReplaced(current);
-		LandscapeParser.addGameObject(constructed);
+		LandscapeParser.addScenery(constructed);
 		update(current, constructed);
 		if (restoreTicks < 0) {
 			return true;
@@ -153,27 +153,27 @@ public final class ObjectBuilder {
 	}
 
 	/**
-	 * Adds a game object.
+	 * Adds a scenery.
 	 *
 	 * @param object The object to add.
 	 * @return {@code True} if successful.
 	 */
-	public static Constructed add(GameObject object) {
+	public static Constructed add(Scenery object) {
 		return add(object, -1);
 	}
 
 	/**
-	 * Adds a game object.
+	 * Adds a scenery.
 	 *
 	 * @param object The object to add.
 	 * @param ticks  The amount of ticks this object should last for (-1 for
 	 *               permanent).
 	 * @return {@code True} if successful.
 	 */
-	public static Constructed add(GameObject object, int ticks, final GroundItem... items) {
+	public static Constructed add(Scenery object, int ticks, final GroundItem... items) {
 		object = object.getWrapper();
 		final Constructed constructed = object.asConstructed();
-		LandscapeParser.addGameObject(constructed);
+		LandscapeParser.addScenery(constructed);
 		update(constructed);
 		if (ticks > -1) {
 			GameWorld.getPulser().submit(new Pulse(ticks, object) {
@@ -208,7 +208,7 @@ public final class ObjectBuilder {
 
 		for (int x = 0; x <= differenceX; x++) {
 			for (int y = 0; y <= differenceY; y++){
-				GameObject object = new GameObject(objectId, Location.create(southWest.getX() + x, southWest.getY() + y, southWest.getZ()));
+				Scenery object = new Scenery(objectId, Location.create(southWest.getX() + x, southWest.getY() + y, southWest.getZ()));
 				remove(object);
 			}
 		}
@@ -216,17 +216,17 @@ public final class ObjectBuilder {
 	}
 
 	/**
-	 * Removes a game object.
+	 * Removes a scenery.
 	 *
 	 * @param object The object to remove.
 	 * @return {@code True} if successful.
 	 */
-	public static boolean remove(GameObject object) {
+	public static boolean remove(Scenery object) {
 		if (object == null) {
 			return false;
 		}
 		object = object.getWrapper();
-		GameObject current = LandscapeParser.removeGameObject(object);
+		Scenery current = LandscapeParser.removeScenery(object);
 		if (current == null) {
 			return false;
 		}
@@ -235,13 +235,13 @@ public final class ObjectBuilder {
 	}
 
 	/**
-	 * Removes a game object.
+	 * Removes a scenery.
 	 *
 	 * @param object       the object.
 	 * @param respawnTicks the respawn ticks.
 	 * @return {@code True}if removed.
 	 */
-	public static boolean remove(final GameObject object, int respawnTicks) {
+	public static boolean remove(final Scenery object, int respawnTicks) {
 		if (remove(object)) {
 			GameWorld.getPulser().submit(new Pulse(respawnTicks) {
 
@@ -258,12 +258,12 @@ public final class ObjectBuilder {
 	}
 
 	/**
-	 * Updates the game object on all the player's screen.
+	 * Updates the scenery on all the player's screen.
 	 *
-	 * @param objects The game objects.
+	 * @param objects The scenerys.
 	 */
-	public static void update(GameObject... objects) {
-		for (GameObject o : objects) {
+	public static void update(Scenery... objects) {
+		for (Scenery o : objects) {
 			if (o == null) {
 				continue;
 			}

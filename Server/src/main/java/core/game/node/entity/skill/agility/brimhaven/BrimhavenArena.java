@@ -11,8 +11,8 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.MovementHook;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
@@ -118,8 +118,8 @@ public final class BrimhavenArena extends MapZone implements Plugin<Object> {
 
     @Override
     public boolean interact(Entity entity, Node node, Option option) {
-        if (node instanceof GameObject) {
-            GameObject object = (GameObject) node;
+        if (node instanceof Scenery) {
+            Scenery object = (Scenery) node;
             if (object.getId() == 3610) {
                 ClimbActionHandler.climb((Player) entity, Animation.create(828), object.getLocation().transform(0, 0, 3));
                 return true;
@@ -246,20 +246,20 @@ public final class BrimhavenArena extends MapZone implements Plugin<Object> {
                 if (GameWorld.getTicks() % ticks == 0) {
                     sawBladeActive = !sawBladeActive;
                     if (sawBladeActive) {
-                        GameObject object = RegionManager.getObject(3, 2788, 9579);
-                        ObjectBuilder.replace(object, object.transform(3567, object.getRotation(), 10), ticks);
+                        Scenery object = RegionManager.getObject(3, 2788, 9579);
+                        SceneryBuilder.replace(object, object.transform(3567, object.getRotation(), 10), ticks);
                         object = RegionManager.getObject(3, 2789, 9579);
-                        ObjectBuilder.replace(object, object.transform(0), ticks);
+                        SceneryBuilder.replace(object, object.transform(0), ticks);
 
                         object = RegionManager.getObject(3, 2783, 9551);
-                        ObjectBuilder.replace(object, object.transform(3567, object.getRotation(), 10), ticks);
+                        SceneryBuilder.replace(object, object.transform(3567, object.getRotation(), 10), ticks);
                         object = RegionManager.getObject(3, 2783, 9552);
-                        ObjectBuilder.replace(object, object.transform(0), ticks);
+                        SceneryBuilder.replace(object, object.transform(0), ticks);
 
                         object = RegionManager.getObject(3, 2761, 9584);
-                        ObjectBuilder.replace(object, object.transform(3567, object.getRotation(), 10), ticks);
+                        SceneryBuilder.replace(object, object.transform(3567, object.getRotation(), 10), ticks);
                         object = RegionManager.getObject(3, 2761, 9585);
-                        ObjectBuilder.replace(object, object.transform(0), ticks);
+                        SceneryBuilder.replace(object, object.transform(0), ticks);
                     }
                 }
                 return false;
@@ -280,8 +280,8 @@ public final class BrimhavenArena extends MapZone implements Plugin<Object> {
             for (PlankSet set : PlankSet.values()) {
                 Location l = set.entrance[i];
                 for (int x = 1; x < set.exit[i].getX() - l.getX(); x++) {
-                    GameObject object = RegionManager.getObject(l.transform(x, 0, 0));
-                    ObjectBuilder.replace(object, object.transform(avail ? 3573 : 3576));
+                    Scenery object = RegionManager.getObject(l.transform(x, 0, 0));
+                    SceneryBuilder.replace(object, object.transform(avail ? 3573 : 3576));
                 }
                 RegionManager.getObject(set.entrance[i]).setCharge(avail ? 1000 : 500);
                 RegionManager.getObject(set.exit[i]).setCharge(avail ? 1000 : 500);

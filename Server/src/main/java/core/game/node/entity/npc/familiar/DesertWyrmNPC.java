@@ -20,7 +20,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -87,7 +87,7 @@ public final class DesertWyrmNPC extends Forager {
 
 			@Override
 			public boolean handle(final Player player, final Node node, String option) {
-				final GameObject rock = getClosestRock(player);
+				final Scenery rock = getClosestRock(player);
 				if (!player.getFamiliarManager().isOwner((Familiar) node)) {
 					return true;
 				}
@@ -131,21 +131,21 @@ public final class DesertWyrmNPC extends Forager {
 			 * Gets the closest combat rock.
 			 * @return the object.
 			 */
-			public GameObject getClosestRock(Player player) {
-				List<GameObject> rocks = new ArrayList<>(20);
+			public Scenery getClosestRock(Player player) {
+				List<Scenery> rocks = new ArrayList<>(20);
 				for (int k = 0; k < 7; k++) {
 					for (int i = 0; i < 4; i++) {
 						Direction dir = Direction.get(i);
 						Location loc = player.getLocation().transform(dir.getStepX() * k, dir.getStepY() * k, 0);
-						GameObject object = RegionManager.getObject(loc);
+						Scenery object = RegionManager.getObject(loc);
 						if (object != null && object.getName().equals("Rocks")) {
 							rocks.add(object);
 						}
 					}
 				}
 				int ordinal = 0;
-				GameObject o = null;
-				for (GameObject r : rocks) {
+				Scenery o = null;
+				for (Scenery r : rocks) {
 					SkillingResource resource = SkillingResource.forId(r.getId());
 					if (resource != null && resource.ordinal() > ordinal) {
 						ordinal = resource.ordinal();

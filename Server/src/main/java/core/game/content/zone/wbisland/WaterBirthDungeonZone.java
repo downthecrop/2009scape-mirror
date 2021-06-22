@@ -17,7 +17,7 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -228,7 +228,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 			NPCDefinition.forId(2443).getHandlers().put("option:destroy", this);
 			NPCDefinition.forId(2446).getHandlers().put("option:destroy", this);
 			for (Location l : DOOR_SUPPORTS) {
-				ObjectBuilder.remove(RegionManager.getObject(l));
+				SceneryBuilder.remove(RegionManager.getObject(l));
 			}
 			return this;
 		}
@@ -249,7 +249,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 				if (!node.isActive()) {
 					return true;
 				}
-				ObjectBuilder.replace(node.asObject(), node.asObject().transform(8962), 30);
+				SceneryBuilder.replace(node.asObject(), node.asObject().transform(8962), 30);
 				break;
 			case 2440:
 			case 2443:

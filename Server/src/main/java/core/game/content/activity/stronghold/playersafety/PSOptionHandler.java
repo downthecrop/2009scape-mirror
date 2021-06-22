@@ -20,8 +20,8 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 
@@ -61,7 +61,7 @@ public class PSOptionHandler extends OptionHandler {
 		boolean locked = config == (1 << 29) || config == (0 << 26);
 		switch (node.getId()) {
 		case 29577:// chest
-			ObjectBuilder.replace(node.asObject(), node.asObject().transform(29578), 60);
+			SceneryBuilder.replace(node.asObject(), node.asObject().transform(29578), 60);
 			return true;
 		case 29578:
 			switch (option) {
@@ -138,8 +138,8 @@ public class PSOptionHandler extends OptionHandler {
 			player.teleport(new Location(3158, 4280, 3));
 			return true;
 		}
-		if (node instanceof GameObject) {
-			GameObject object = (GameObject) node;
+		if (node instanceof Scenery) {
+			Scenery object = (Scenery) node;
 			JailPlaques plaque = forId(object.getId());
 			if (plaque != null) {
 				plaque.read(player, object);

@@ -4,7 +4,7 @@ import core.game.interaction.Option;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneRestriction;
@@ -31,8 +31,8 @@ public final class PCLanderZone extends MapZone {
 
 	@Override
 	public boolean interact(Entity e, Node target, Option option) {
-		if (target instanceof GameObject) {
-			GameObject o = (GameObject) target;
+		if (target instanceof Scenery) {
+			Scenery o = (Scenery) target;
 			switch (o.getId()) {
 			case 14314: // Novice exit ladder
 				if (activities[0].getWaitingPlayers().contains(e)) {

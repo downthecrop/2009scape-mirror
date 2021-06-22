@@ -1,10 +1,10 @@
 package core.game.world.update.flag.chunk;
 
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.update.flag.UpdateFlag;
 import core.net.packet.IoBuffer;
-import core.net.packet.out.ClearObject;
-import core.net.packet.out.ConstructObject;
+import core.net.packet.out.ClearScenery;
+import core.net.packet.out.ConstructScenery;
 
 /**
  * The object update flag.
@@ -15,7 +15,7 @@ public class ObjectUpdateFlag extends UpdateFlag<Object> {
 	/**
 	 * The object to update.
 	 */
-	private final GameObject object;
+	private final Scenery object;
 
 	/**
 	 * If we should remove the object.
@@ -27,7 +27,7 @@ public class ObjectUpdateFlag extends UpdateFlag<Object> {
 	 * @param object The object to update.
 	 * @param remove If we should remove the object.
 	 */
-	public ObjectUpdateFlag(GameObject object, boolean remove) {
+	public ObjectUpdateFlag(Scenery object, boolean remove) {
 		super(null);
 		this.object = object;
 		this.remove = remove;
@@ -36,9 +36,9 @@ public class ObjectUpdateFlag extends UpdateFlag<Object> {
 	@Override
 	public void write(IoBuffer buffer) {
 		if (remove) {
-			ClearObject.write(buffer, object);
+			ClearScenery.write(buffer, object);
 		} else {
-			ConstructObject.write(buffer, object);
+			ConstructScenery.write(buffer, object);
 		}
 	}
 

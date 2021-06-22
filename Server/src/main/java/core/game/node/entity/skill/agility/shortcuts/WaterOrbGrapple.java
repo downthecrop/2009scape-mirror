@@ -8,8 +8,8 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -57,8 +57,8 @@ public class WaterOrbGrapple extends OptionHandler {
     public boolean handle(Player player, Node node, String option) {
         Location destination;
         Location current = player.getLocation();
-        GameObject rock = RegionManager.getObject(Location.create(2841, 3426, 0));
-        GameObject tree = RegionManager.getObject(Location.create(2841, 3434, 0));
+        Scenery rock = RegionManager.getObject(Location.create(2841, 3426, 0));
+        Scenery tree = RegionManager.getObject(Location.create(2841, 3434, 0));
         System.out.println(rock);
         System.out.println(tree);
 
@@ -99,8 +99,8 @@ public class WaterOrbGrapple extends OptionHandler {
                                 player.getPacketDispatch().sendPositionedGraphic(67, 10, 0, Location.create(2840,3427,0)); //
                                 break;
                             case 4:
-                                ObjectBuilder.replace(rock, rock.transform(rock.getId() + 1), 10);
-                                ObjectBuilder.replace(tree, tree.transform(tree.getId() + 1), 10);
+                                SceneryBuilder.replace(rock, rock.transform(rock.getId() + 1), 10);
+                                SceneryBuilder.replace(tree, tree.transform(tree.getId() + 1), 10);
                                 break;
                             case 5:
                                 break;

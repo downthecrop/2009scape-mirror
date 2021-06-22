@@ -4,7 +4,7 @@ import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -41,7 +41,7 @@ public class BeerBarrelPlugin extends UseWithHandler {
 	@Override
 	public boolean handle(NodeUsageEvent event) {
 		Player player = event.getPlayer();
-		final GameObject object = (GameObject) event.getUsedWith();
+		final Scenery object = (Scenery) event.getUsedWith();
 
 		if (player.getInventory().remove(new Item(1919))) {
 			player.animate(Animation.create(833));

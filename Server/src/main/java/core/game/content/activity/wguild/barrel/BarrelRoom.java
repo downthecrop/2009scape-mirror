@@ -13,7 +13,7 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.lock.Lock;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.zone.MapZone;
@@ -126,7 +126,7 @@ public final class BarrelRoom extends MapZone implements Plugin<Object> {
 						player.getAppearance().setStandAnimation(4179);
 						player.getAppearance().sync();
 						player.setAttribute("barrel_count", barrelId);
-						((GameObject) node).setChildIndex(player, 1);
+						((Scenery) node).setChildIndex(player, 1);
 						if (!players.contains(player)) {
 							player.getWalkingQueue().setRunDisabled(true);
 							players.add(player);

@@ -4,7 +4,7 @@ import core.game.interaction.MovementPulse;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.game.content.quest.PluginInteraction;
@@ -15,7 +15,7 @@ public class StairInteraction extends PluginInteraction {
     @Override
     public boolean handle(Player player, Node node) {
         if(!player.getQuestRepository().isComplete("Fishing Contest")) {
-            GameObject object = node.asObject();
+            Scenery object = node.asObject();
             switch (object.getId()) {
                 case 57:
                     handleStairs(player,232,object);
@@ -28,7 +28,7 @@ public class StairInteraction extends PluginInteraction {
         return false;
     }
 
-    private void handleStairs(Player player,int npc_id,GameObject object){
+    private void handleStairs(Player player, int npc_id, Scenery object){
         player.getPulseManager().run(new MovementPulse(player,object.getLocation().transform(0,2,0)) {
             @Override
             public boolean pulse() {

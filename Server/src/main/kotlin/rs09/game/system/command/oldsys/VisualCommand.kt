@@ -3,8 +3,8 @@ package rs09.game.system.command.oldsys
 import core.cache.Cache
 import core.game.container.access.InterfaceContainer
 import core.game.content.quest.tutorials.tutorialisland.CharacterDesign
-import core.game.node.`object`.GameObject
-import core.game.node.`object`.ObjectBuilder
+import core.game.node.`object`.Scenery
+import core.game.node.`object`.SceneryBuilder
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
@@ -38,7 +38,7 @@ class VisualCommand : CommandPlugin() {
 
     override fun parse(player: Player?, name: String?, args: Array<String?>?): Boolean {
         var location: Location? = null
-        var `object`: GameObject? = null
+        var `object`: Scenery? = null
         var o: Player? = null
         when (name) {
             "invisible", "invis", "seti" -> {
@@ -170,8 +170,8 @@ class VisualCommand : CommandPlugin() {
             "char" -> CharacterDesign.open(player)
             "savenpc" -> return true
             "objwithanim" -> {
-                val go = GameObject(toInteger(args!![1]!!), player!!.location, 0)
-                ObjectBuilder.add(go)
+                val go = Scenery(toInteger(args!![1]!!), player!!.location, 0)
+                SceneryBuilder.add(go)
                 player.packetDispatch.sendObjectAnimation(go, Animation.create(toInteger(args[2]!!)))
                 return true
             }

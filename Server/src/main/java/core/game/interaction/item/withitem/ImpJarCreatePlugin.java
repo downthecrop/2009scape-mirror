@@ -4,7 +4,7 @@ import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -43,7 +43,7 @@ public final class ImpJarCreatePlugin extends UseWithHandler {
 	@Override
 	public boolean handle(NodeUsageEvent event) {
 		Player player = event.getPlayer();
-		if (event.getUsedWith() instanceof GameObject) {
+		if (event.getUsedWith() instanceof Scenery) {
 			if ((event.getUsedItem().getId() >= 4525 && event.getUsedItem().getId() <= 4700) || event.getUsedItem().getId() == 1939 || event.getUsedItem().getId() == 11262 || event.getUsedItem().getId() == 10012) {
 				fillOilStill(player, event.getUsedItem());
 			}

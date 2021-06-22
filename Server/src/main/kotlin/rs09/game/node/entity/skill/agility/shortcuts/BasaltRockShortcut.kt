@@ -1,7 +1,7 @@
 package rs09.game.node.entity.skill.agility.shortcuts
 
 import core.game.node.Node
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.agility.AgilityHandler
 import core.game.node.entity.skill.agility.AgilityShortcut
@@ -61,7 +61,7 @@ class BasaltRockShortcut : AgilityShortcut {
      * instead of the rock below them
      */
     override fun getDestination(n: Node?, node: Node): Location? {
-        val obj = node as GameObject
+        val obj = node as Scenery
         if (obj.id == 4550) {
             return Location.create(2522, 3597, 0) //Beach South*
         } else if (obj.id == 4551) {
@@ -86,7 +86,7 @@ class BasaltRockShortcut : AgilityShortcut {
         return super.getDestination(obj, node)
     }
 
-    override fun run(player: Player, obj: GameObject, option: String, failed: Boolean) {
+    override fun run(player: Player, obj: Scenery, option: String, failed: Boolean) {
         GameWorld.Pulser.submit(object : Pulse(1, player) {
             override fun pulse(): Boolean {
                 when (obj.id) {

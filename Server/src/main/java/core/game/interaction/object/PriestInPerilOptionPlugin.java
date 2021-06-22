@@ -10,7 +10,7 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -92,7 +92,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 	@Override
 	public boolean handle(Player player, Node node, String option) {
 		final Quest quest = player.getQuestRepository().getQuest("Priest in Peril");
-		int id = node instanceof GameObject ? ((GameObject) node).getId() : ((NPC) node).getId();
+		int id = node instanceof Scenery ? ((Scenery) node).getId() : ((NPC) node).getId();
 		switch (option) {
 		case "study":
 			player.getInterfaceManager().open(new Component(272));
@@ -169,7 +169,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				player.getDialogueInterpreter().sendDialogues(player, null, "Hmmm... from the looks of things, it seems as though", "somebody has been trying to force this door open. It's", "still securely locked however.");
 				return true;
 			}
-			DoorActionHandler.handleDoor(player, (GameObject) node);
+			DoorActionHandler.handleDoor(player, (Scenery) node);
 			break;
 		case 30573:
 			player.getProperties().setTeleportLocation(Location.create(3440, 9887, 0));
@@ -196,7 +196,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				if (quest.getStage(player) < 15) {
 					player.getPacketDispatch().sendMessage("The door is securely locked shut.");
 				} else {
-					DoorActionHandler.handleDoor(player, (GameObject) node);
+					DoorActionHandler.handleDoor(player, (Scenery) node);
 				}
 				break;
 			case "talk-through":
@@ -212,7 +212,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 			if (quest.getStage(player) < 17) {
 				player.getPacketDispatch().sendMessage("The door is locked shut.");
 			} else {
-				DoorActionHandler.handleDoor(player, (GameObject) node);
+				DoorActionHandler.handleDoor(player, (Scenery) node);
 			}
 			break;
 		case 30707:/** the door to the church. */
@@ -220,7 +220,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 			switch (option) {
 			case "open":
 				if (quest.getStage(player) > 12) {
-					DoorActionHandler.handleDoor(player, (GameObject) node);
+					DoorActionHandler.handleDoor(player, (Scenery) node);
 				} else {
 					player.getPacketDispatch().sendMessage("This door is securely locked from inside.");
 				}

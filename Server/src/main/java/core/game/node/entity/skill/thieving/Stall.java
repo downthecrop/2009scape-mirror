@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.thieving;
 
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.tools.RandomFunction;
 
 import java.util.*;
@@ -87,7 +87,7 @@ public enum Stall {
 		return rewards[RandomFunction.random(rewards.length)];
 	}
 
-	public static Stall forObject(final GameObject object) {
+	public static Stall forObject(final Scenery object) {
 		return idMap.get(object.getId());
 	}
 }

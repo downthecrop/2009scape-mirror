@@ -4,7 +4,7 @@ import core.game.interaction.Option;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
@@ -63,8 +63,8 @@ public final class ClanWarsChallengeRoom extends MapZone implements Plugin<Objec
 
 	@Override
 	public boolean interact(Entity e, Node target, Option option) {
-		if (target instanceof GameObject) {
-			GameObject object = (GameObject) target;
+		if (target instanceof Scenery) {
+			Scenery object = (Scenery) target;
 			Player player = (Player) e;
 			if (object.getId() == 28213) {
 				if (player.getCommunication().getClan() == null) {

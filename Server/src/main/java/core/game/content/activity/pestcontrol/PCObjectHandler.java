@@ -9,8 +9,8 @@ import core.game.node.entity.player.Player;
 import rs09.game.ai.pvmbots.PvMBotsBuilder;
 import core.game.node.entity.player.info.Rights;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -94,7 +94,7 @@ public final class PCObjectHandler extends OptionHandler {
 	public boolean handle(Player player, Node node, String option) {
 		int pestBotsAmount = 0;
 		int pestBots2Amount = 0;
-		GameObject object = (GameObject) node;
+		Scenery object = (Scenery) node;
 		if (option.equals("cross")) {
 			if (player.getFamiliarManager().hasFamiliar() && player.getRights() != Rights.ADMINISTRATOR) {
 				player.getPacketDispatch().sendMessage("You can't take a follower on the lander.");
@@ -160,7 +160,7 @@ public final class PCObjectHandler extends OptionHandler {
 	 * @param session The session.
 	 * @param object The object.
 	 */
-	private void handleTurretTower(Player player, PestControlSession session, GameObject object) {
+	private void handleTurretTower(Player player, PestControlSession session, Scenery object) {
 		int x = object.getLocation().getLocalX();
 		int y = object.getLocation().getLocalY();
 		if (x == 45 && y == 41) {
@@ -188,10 +188,10 @@ public final class PCObjectHandler extends OptionHandler {
 	 * Repairs an object.
 	 * @param player The player.
 	 * @param session The pest control session.
-	 * @param object The game object to repair.
+	 * @param object The scenery to repair.
 	 * @param newId The repaired object id.
 	 */
-	private void repair(Player player, PestControlSession session, GameObject object, int newId) {
+	private void repair(Player player, PestControlSession session, Scenery object, int newId) {
 		if (!player.getInventory().contains(2347, 1)) {
 			player.getPacketDispatch().sendMessage("You'll need a hammer to make any repairs!");
 			return;
@@ -203,9 +203,9 @@ public final class PCObjectHandler extends OptionHandler {
 		session.addZealGained(player, 5);
 		player.animate(Animation.create(898));
 		if (session.getBarricades().remove(object)) {
-			GameObject replacement = object.transform(newId, object.getRotation(), getObjectType(newId));
+			Scenery replacement = object.transform(newId, object.getRotation(), getObjectType(newId));
 			session.getBarricades().add(replacement);
-			ObjectBuilder.replace(object, replacement);
+			SceneryBuilder.replace(object, replacement);
 		}
 	}
 
@@ -213,11 +213,11 @@ public final class PCObjectHandler extends OptionHandler {
 	 * Opens the gates.
 	 * @param player The player.
 	 * @param session The pest control session.
-	 * @param object The game object.
+	 * @param object The scenery.
 	 */
-	private static void handleGates(Player player, PestControlSession session, GameObject object) {
+	private static void handleGates(Player player, PestControlSession session, Scenery object) {
 		boolean open = (object.getId() % 2) != 0;
-		GameObject second = getSecondDoor(object);
+		Scenery second = getSecondDoor(object);
 		if (second == null) {
 			return;
 		}
@@ -233,13 +233,13 @@ public final class PCObjectHandler extends OptionHandler {
 			session.getBarricades().remove(second);
 
 			Location l = object.getLocation().transform(direction.getStepX(), direction.getStepY(), 0);
-			GameObject replacement = new GameObject(object.getId() + (open ? 1 : -1), l, 0, open ? rotation : ((direction.toInteger() + 3) % 4));
-			ObjectBuilder.replace(object, replacement);
+			Scenery replacement = new Scenery(object.getId() + (open ? 1 : -1), l, 0, open ? rotation : ((direction.toInteger() + 3) % 4));
+			SceneryBuilder.replace(object, replacement);
 			session.getBarricades().add(replacement);
 
 			l = second.getLocation().transform(direction.getStepX(), direction.getStepY(), 0);
-			replacement = new GameObject(second.getId() + (open ? 1 : -1), l, 0, open ? getRotation(second) : ((direction.toInteger() + 3) % 4));
-			ObjectBuilder.replace(second, replacement);
+			replacement = new Scenery(second.getId() + (open ? 1 : -1), l, 0, open ? getRotation(second) : ((direction.toInteger() + 3) % 4));
+			SceneryBuilder.replace(second, replacement);
 			session.getBarricades().add(replacement);
 		}
 	}
@@ -249,7 +249,7 @@ public final class PCObjectHandler extends OptionHandler {
 	 * @param object The object.
 	 * @return The rotation.
 	 */
-	private static final int getRotation(GameObject object) {
+	private static final int getRotation(Scenery object) {
 		int id = object.getId();
 		if (id > 14236) {
 			id -= 4;
@@ -272,9 +272,9 @@ public final class PCObjectHandler extends OptionHandler {
 	 * @param object The first door object.
 	 * @return The second door object.
 	 */
-	public static GameObject getSecondDoor(GameObject object) {
+	public static Scenery getSecondDoor(Scenery object) {
 		Location l = object.getLocation();
-		GameObject o = null;
+		Scenery o = null;
 		if ((o = RegionManager.getObject(l.transform(-1, 0, 0))) != null && o.getName().equals(object.getName())) {
 			return o;
 		}

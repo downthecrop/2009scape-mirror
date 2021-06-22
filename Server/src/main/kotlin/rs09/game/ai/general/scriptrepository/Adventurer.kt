@@ -2,7 +2,7 @@ package rs09.game.ai.general.scriptrepository
 
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.combat.CombatStyle
 import rs09.game.node.entity.combat.CombatSwingHandler
 import core.game.node.entity.skill.Skills
@@ -1088,7 +1088,7 @@ class Adventurer(val style: CombatStyle): Script() {
                     state = State.TELEPORTING
                 }
                 sold = false
-                val ge: GameObject? = scriptAPI.getNearestNode("Desk", true) as GameObject?
+                val ge: Scenery? = scriptAPI.getNearestNode("Desk", true) as Scenery?
                 if (ge == null || bot.bank.isEmpty) state = State.EXPLORE
                 class GEPulse : MovementPulse(bot, ge, DestinationFlag.OBJECT) {
                     override fun pulse(): Boolean {
@@ -1109,7 +1109,7 @@ class Adventurer(val style: CombatStyle): Script() {
                 if (counter++ == 300) {
                     state = State.TELEPORTING
                 }
-                val bank: GameObject? = scriptAPI.getNearestNode("Bank booth", true) as GameObject?
+                val bank: Scenery? = scriptAPI.getNearestNode("Bank booth", true) as Scenery?
                 if (badedge.insideBorder(bot) || bot.location == badedge2 || bot.location == badedge3 || bot.location == badedge4) {
                     bot.randomWalk(5, 5)
                 }

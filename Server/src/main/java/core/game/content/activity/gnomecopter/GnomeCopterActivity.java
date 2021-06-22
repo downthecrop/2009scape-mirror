@@ -9,8 +9,8 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -51,8 +51,8 @@ public final class GnomeCopterActivity extends ActivityPlugin {
 
 	@Override
 	public boolean interact(Entity e, Node target, Option option) {
-		if (target instanceof GameObject) {
-			GameObject object = (GameObject) target;
+		if (target instanceof Scenery) {
+			Scenery object = (Scenery) target;
 			if (object.getId() == 30032) {
 				flyGnomeCopter((Player) e, object);
 				return true;
@@ -82,7 +82,7 @@ public final class GnomeCopterActivity extends ActivityPlugin {
 	 * @param player The player.
 	 * @param object The object.
 	 */
-	private void flyGnomeCopter(final Player player, final GameObject object) {
+	private void flyGnomeCopter(final Player player, final Scenery object) {
 		if (!player.getLocation().equals(object.getLocation().transform(0, 1, 0))) {
 			return;
 		}
@@ -175,7 +175,7 @@ public final class GnomeCopterActivity extends ActivityPlugin {
 				} else if (stage == tick) {
 					player.animate(Animation.create(8957));
 				} else if (stage == tick + 14) {
-					ObjectBuilder.add(new GameObject(30034, player.getLocation()), 6);
+					SceneryBuilder.add(new Scenery(30034, player.getLocation()), 6);
 					player.getEquipment().replace(null, 3);
 					ForceMovement.run(player, player.getLocation(), player.getLocation().transform(0, -1, 0), new Animation(8959), 8);
 					player.lock(2);

@@ -6,8 +6,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 
@@ -84,16 +84,16 @@ public final class TrapCreatePulse extends SkillPulse<Node> {
 		if (++ticks % (trap.getSettings().getSetupAnimation().getDefinition().getDurationTicks()) != 0) {
 			return false;
 		}
-		GameObject object = trap.getSettings().buildObject(player, node);
+		Scenery object = trap.getSettings().buildObject(player, node);
 		if (isGroundSetup() || groundItem != null) {
 			GroundItemManager.destroy(groundItem);
 		}
 		if (!trap.getSettings().isObjectTrap()) {
 			player.moveStep();
 		} else {
-			ObjectBuilder.remove(node.asObject());
+			SceneryBuilder.remove(node.asObject());
 		}
-		object = ObjectBuilder.add(object);
+		object = SceneryBuilder.add(object);
 		player.getHunterManager().register(trap, node, object);
 		return true;
 	}

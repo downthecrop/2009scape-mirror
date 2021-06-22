@@ -16,7 +16,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -65,7 +65,7 @@ public final class ShotPutRoom extends DialoguePlugin {
 
 			@Override
 			public Location getDestination(Node n, Node node) {
-				if (node instanceof GameObject) {
+				if (node instanceof Scenery) {
 					return node.getLocation().transform(0, -1, 0);
 				}
 				return null;

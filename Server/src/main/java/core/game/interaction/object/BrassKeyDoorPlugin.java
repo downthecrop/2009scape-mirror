@@ -5,7 +5,7 @@ import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -21,7 +21,7 @@ public final class BrassKeyDoorPlugin extends OptionHandler {
 	@Override
 	public boolean handle(Player player, Node node, String option) {
 		if (player.getInventory().contains(983, 1)) {
-			DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+			DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 		} else {
 			player.getPacketDispatch().sendMessage("This door is locked.");
 			return true;
@@ -37,7 +37,7 @@ public final class BrassKeyDoorPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		return DoorActionHandler.getDestination(((Player) node), ((GameObject) n));
+		return DoorActionHandler.getDestination(((Player) node), ((Scenery) n));
 	}
 
 }

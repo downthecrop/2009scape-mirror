@@ -8,7 +8,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -66,8 +66,8 @@ public final class BKFortressPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		final int id = node instanceof Item ? ((Item) node).getId() : ((GameObject) node).getId();
-		GameObject object = node instanceof GameObject ? ((GameObject) node) : null;
+		final int id = node instanceof Item ? ((Item) node).getId() : ((Scenery) node).getId();
+		Scenery object = node instanceof Scenery ? ((Scenery) node) : null;
 		Location dest = null;
 		switch (id) {
 		case 2342:// listen at grill.
@@ -88,7 +88,7 @@ public final class BKFortressPlugin extends OptionHandler {
 			if (dest != null) {
 				ClimbActionHandler.climb(player, new Animation(828), dest);
 			} else {
-				ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 			}
 			break;
 		case 17149:
@@ -106,7 +106,7 @@ public final class BKFortressPlugin extends OptionHandler {
 			if (dest != null) {
 				ClimbActionHandler.climb(player, new Animation(828), dest);
 			} else {
-				ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 			}
 			break;
 		case 17148:
@@ -120,16 +120,16 @@ public final class BKFortressPlugin extends OptionHandler {
 			if (dest != null) {
 				ClimbActionHandler.climb(player, new Animation(828), dest);
 			} else {
-				ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 			}
 			break;
 		case 2341:
 			player.getPacketDispatch().sendMessage("You push against the wall. You find a secret passage.");
-			DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+			DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 			return true;
 		case 2338:
 			if (player.getLocation().getX() > 3019) {
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			player.getDialogueInterpreter().open(4605, Repository.findNPC(4605), true, true);
@@ -138,7 +138,7 @@ public final class BKFortressPlugin extends OptionHandler {
 			if (!player.getEquipment().containsAtLeastOneItem(1139) || !player.getEquipment().containsAtLeastOneItem(1101)) {
 				player.getDialogueInterpreter().open(4605, Repository.findNPC(4604), true);
 			} else {
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 			}
 			break;
 		case 74:

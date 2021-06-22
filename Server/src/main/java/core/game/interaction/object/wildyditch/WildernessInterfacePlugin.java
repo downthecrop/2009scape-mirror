@@ -6,7 +6,7 @@ import core.game.component.ComponentPlugin;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -44,7 +44,7 @@ public final class WildernessInterfacePlugin extends ComponentPlugin {
 	 * @param player the player.
 	 */
 	public static void handleDitch(final Player player) {
-		GameObject ditch = player.getAttribute("wildy_ditch");
+		Scenery ditch = player.getAttribute("wildy_ditch");
 		if (ditch == null) {
 			return;
 		}

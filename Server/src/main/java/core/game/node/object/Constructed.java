@@ -7,12 +7,12 @@ import core.game.world.map.Location;
  * Represents a constructed object.
  * @author Emperor
  */
-public class Constructed extends GameObject {
+public class Constructed extends Scenery {
 	
 	/**
-	 * The game object we've replaced.
+	 * The scenery we've replaced.
 	 */
-	private GameObject replaced;
+	private Scenery replaced;
 	
 	/**
 	 * The ground items places after the tick is up.
@@ -97,7 +97,7 @@ public class Constructed extends GameObject {
 	 * Gets the replaced.
 	 * @return The replaced.
 	 */
-	public GameObject getReplaced() {
+	public Scenery getReplaced() {
 		return replaced;
 	}
 
@@ -105,7 +105,7 @@ public class Constructed extends GameObject {
 	 * Sets the replaced.
 	 * @param replaced The replaced to set.
 	 */
-	public void setReplaced(GameObject replaced) {
+	public void setReplaced(Scenery replaced) {
 		this.replaced = replaced;
 	}
 

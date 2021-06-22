@@ -6,8 +6,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Initializable;
@@ -40,8 +40,8 @@ public final class BedabinPlugin extends OptionHandler {
 			switch (id) {
 			case 2700:
 				if (player.getLocation().getY() >= 3046) {
-					final GameObject door = RegionManager.getObject(new Location(3169, 3046, 0));
-					ObjectBuilder.replace(door, door.transform(2701), 2);
+					final Scenery door = RegionManager.getObject(new Location(3169, 3046, 0));
+					SceneryBuilder.replace(door, door.transform(2701), 2);
 					player.getWalkingQueue().reset();
 					player.getWalkingQueue().addPath(3169, 3045);
 					player.getPacketDispatch().sendMessage("You walk back out the tent.");

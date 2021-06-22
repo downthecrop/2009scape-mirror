@@ -13,8 +13,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.player.link.quest.Quest;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -55,7 +55,7 @@ public final class DemonSlayerCutscene extends CutscenePlugin {
 	/**
 	 * Represents the stone table.
 	 */
-	public GameObject stoneTable;
+	public Scenery stoneTable;
 
 	/**
 	 * Represents the delrith npc.
@@ -498,8 +498,8 @@ public final class DemonSlayerCutscene extends CutscenePlugin {
 				break;
 			case 1:
 				player.getProperties().setTeleportLocation(cutscene.getBase().transform(28, 35, 0));
-				cutscene.stoneTable = new GameObject(17437, cutscene.getBase().transform(27, 41, 0));
-				ObjectBuilder.add(cutscene.stoneTable);
+				cutscene.stoneTable = new Scenery(17437, cutscene.getBase().transform(27, 41, 0));
+				SceneryBuilder.add(cutscene.stoneTable);
 				PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, player.getLocation().getX() - 1, player.getLocation().getY() + 2, 380, 1, 98));
 				PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, player.getLocation().getX() + 19, player.getLocation().getY() - 55, 380, 1, 98));
 				interpreter.sendPlainMessage(true, "The wizards cast an evil spell...");
@@ -519,7 +519,7 @@ public final class DemonSlayerCutscene extends CutscenePlugin {
 							PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, player.getLocation().getX() - 1, player.getLocation().getY() - 3, 390, 1, 100));
 							PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, player.getLocation().getX() + 30, player.getLocation().getY() - 55, 390, 1, 100));
 							player.getConfigManager().set(222, 14194946, true);
-							ObjectBuilder.replace(cutscene.stoneTable, cutscene.stoneTable.transform(17438));
+							SceneryBuilder.replace(cutscene.stoneTable, cutscene.stoneTable.transform(17438));
 							npc("Ha ha ha! At last you are free, my demonic brother!", "Rest now, and then have your revenge on this pitiful", "city!");
 							stage = 2;
 							return true;

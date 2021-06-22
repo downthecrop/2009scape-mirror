@@ -16,8 +16,8 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.impl.PulseManager;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.ConfigurationManager.Configuration;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.communication.ClanEntry;
 import core.game.system.communication.ClanRepository;
 import core.game.system.task.Pulse;
@@ -134,14 +134,14 @@ public final class ClanWarsActivityPlugin extends ActivityPlugin {
 		int offset = 0;
 		for (int x = 5; x < 54; x++) {
 			offset = (offset + 1) % 3;
-			ObjectBuilder.add(new GameObject(28174 + offset, base.transform(x, 64, 0)));
+			SceneryBuilder.add(new Scenery(28174 + offset, base.transform(x, 64, 0)));
 		}
 		GameWorld.getPulser().submit(pulse = new Pulse(200) {
 			@Override
 			public boolean pulse() {
 				for (int x = 5; x < 54; x++) {
 					Location l = base.transform(x, 64, 0);
-					GameObject object = RegionManager.getObject(l);
+					Scenery object = RegionManager.getObject(l);
 					if (object != null) {
 						Animation anim = Animation.create(7386 + ((object.getId() - 28174) % 3));
 						anim.setObject(object);
@@ -153,9 +153,9 @@ public final class ClanWarsActivityPlugin extends ActivityPlugin {
 					public boolean pulse() {
 						for (int x = 5; x < 54; x++) {
 							Location l = base.transform(x, 64, 0);
-							GameObject object = RegionManager.getObject(l);
+							Scenery object = RegionManager.getObject(l);
 							if (object != null) {
-								ObjectBuilder.remove(object);
+								SceneryBuilder.remove(object);
 							}
 						}
 						return true;
@@ -346,8 +346,8 @@ public final class ClanWarsActivityPlugin extends ActivityPlugin {
 
 	@Override
 	public boolean interact(Entity e, Node target, Option option) {
-		if (target instanceof GameObject) {
-			GameObject object = (GameObject) target;
+		if (target instanceof Scenery) {
+			Scenery object = (Scenery) target;
 			if (object.getId() == 28214 || object.getId() == 28140) {
 				e.getProperties().setTeleportLocation(getLeaveLocation());
 				return true;

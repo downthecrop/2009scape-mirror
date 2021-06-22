@@ -12,7 +12,7 @@ import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
 import core.game.node.entity.skill.summoning.familiar.Forager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
@@ -72,7 +72,7 @@ public class CompostMoundNPC extends Forager {
 
 	@Override
 	protected boolean specialMove(FamiliarSpecial special) {
-		final GameObject object = (GameObject) special.getNode();
+		final Scenery object = (Scenery) special.getNode();
 		if (!object.getName().equals("Compost Bin")) {
 			owner.getPacketDispatch().sendMessage("This scroll can only be used on an empty compost bin.");
 			return false;
