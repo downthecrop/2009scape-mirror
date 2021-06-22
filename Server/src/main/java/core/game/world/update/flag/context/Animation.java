@@ -2,7 +2,7 @@ package core.game.world.update.flag.context;
 
 import core.cache.def.impl.AnimationDefinition;
 import core.game.node.entity.impl.Animator.Priority;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 
 /**
  * Represents an animation.
@@ -38,7 +38,7 @@ public class Animation {
 	/**
 	 * The object to animate.
 	 */
-	private GameObject object;
+	private Scenery object;
 
 	/**
 	 * Constructs a new {@code Animation} {@code Object}.
@@ -140,7 +140,7 @@ public class Animation {
 	 * Gets the object.
 	 * @return The object.
 	 */
-	public GameObject getObject() {
+	public Scenery getObject() {
 		return object;
 	}
 
@@ -148,7 +148,7 @@ public class Animation {
 	 * Sets the object.
 	 * @param object The object to set.
 	 */
-	public void setObject(GameObject object) {
+	public void setObject(Scenery object) {
 		this.object = object;
 	}
 

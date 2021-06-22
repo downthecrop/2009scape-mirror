@@ -13,7 +13,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.entity.skill.gather.GatheringSkillPulse;
 import core.game.node.entity.skill.gather.SkillingTool;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
@@ -76,11 +76,11 @@ public final class LostCityPlugin extends OptionHandler {
 				spirit.sendChat("You must defeat me before touching the tree!");
 				return true;
 			}
-			player.getPulseManager().run(new GatheringSkillPulse(player, (GameObject) node));
+			player.getPulseManager().run(new GatheringSkillPulse(player, (Scenery) node));
 			break;
 		case 2406:
 			final boolean dramenTeleport = player.getEquipment().containsItem(DRAMEN_STAFF) && quest.getStage(player) > 20 && player.getLocation().getX() <= 3201;
-			DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+			DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 			if (dramenTeleport) {
 				player.getPacketDispatch().sendMessage("The world starts to shimmer...");
 				player.getTeleporter().send(Location.create(2452, 4473, 0), TeleportType.FAIRY_RING);

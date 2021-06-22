@@ -1,7 +1,7 @@
 package rs09.game.content.global.worldevents.shootingstar
 
 import core.game.content.global.worldevents.shootingstar.ScoreboardManager
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills
@@ -13,7 +13,7 @@ import rs09.game.world.repository.Repository
 /**
  * The pulse used to handle mining shooting stars.
  */
-class ShootingStarMiningPulse(player: Player?, node: GameObject?, val star: ShootingStar) : SkillPulse<GameObject?>(player, node) {
+class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: ShootingStar) : SkillPulse<Scenery?>(player, node) {
     /**
      * The amount of ticks it takes to get star dust.
      */

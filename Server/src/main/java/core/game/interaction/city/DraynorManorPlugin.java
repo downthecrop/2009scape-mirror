@@ -10,8 +10,8 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -77,7 +77,7 @@ public final class DraynorManorPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		int id = ((GameObject) node).getId();
+		int id = ((Scenery) node).getId();
 		switch (id) {
 		case 11498:
 			ClimbActionHandler.climb(player, new Animation(828), Location.create(3108, 3366, 1));
@@ -85,7 +85,7 @@ public final class DraynorManorPlugin extends OptionHandler {
 		case 160:
 		case 156:
 		case 155:
-			handleBookCase(player, ((GameObject) node));
+			handleBookCase(player, ((Scenery) node));
 			break;
 		case 133:
 			ClimbActionHandler.climb(player, new Animation(827), BASEMENT);
@@ -97,13 +97,13 @@ public final class DraynorManorPlugin extends OptionHandler {
 				return true;
 			}
 			player.getPacketDispatch().sendMessage("The doors slam shut behind you.");
-			DoorActionHandler.handleDoor(player, (GameObject) node);
+			DoorActionHandler.handleDoor(player, (Scenery) node);
 			return true;
 		case 131:
 			if (!player.getInventory().containsItem(KEY)) {
 				player.getPacketDispatch().sendMessage("The door is locked.");
 			} else {
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 			}
 			break;
 		case 152:
@@ -139,7 +139,7 @@ public final class DraynorManorPlugin extends OptionHandler {
 	 * Method used to handle the secret book case opening.
 	 * @param player the player.
 	 */
-	private final void handleBookCase(final Player player, final GameObject object) {
+	private final void handleBookCase(final Player player, final Scenery object) {
 		Location dest = null;
 		if (RegionManager.getObject(Location.create(3097, 3359, 0)) == null || RegionManager.getObject(Location.create(3097, 3358, 0)) == null) {
 			return;
@@ -173,7 +173,7 @@ public final class DraynorManorPlugin extends OptionHandler {
 						player.animate(LEVER_ANIMATION);
 						break;
 					case 2:
-						ObjectBuilder.replace(object, object.transform(161), 6);
+						SceneryBuilder.replace(object, object.transform(161), 6);
 						break;
 					case 3:
 						Pathfinder.find(player, Location.create(3096, 3358, 0)).walk(player);
@@ -182,19 +182,19 @@ public final class DraynorManorPlugin extends OptionHandler {
 						player.faceLocation(destination);
 						break;
 					case 5:
-						ObjectBuilder.remove(RegionManager.getObject(Location.create(3097, 3359, 0)));
-						ObjectBuilder.remove(RegionManager.getObject(Location.create(3097, 3358, 0)));
-						ObjectBuilder.add(new GameObject(156, new Location(3097, 3357, 0)));
-						ObjectBuilder.add(new GameObject(157, new Location(3097, 3360, 0)));
+						SceneryBuilder.remove(RegionManager.getObject(Location.create(3097, 3359, 0)));
+						SceneryBuilder.remove(RegionManager.getObject(Location.create(3097, 3358, 0)));
+						SceneryBuilder.add(new Scenery(156, new Location(3097, 3357, 0)));
+						SceneryBuilder.add(new Scenery(157, new Location(3097, 3360, 0)));
 						break;
 					case 6:
 						AgilityHandler.walk(player, -1, player.getLocation(), destination, null, 0.0, null);
 						break;
 					case 8:
-						ObjectBuilder.remove(RegionManager.getObject(new Location(3097, 3360, 0)));
-						ObjectBuilder.remove(RegionManager.getObject(new Location(3097, 3357, 0)));
-						ObjectBuilder.add(new GameObject(155, new Location(3097, 3359, 0)));
-						ObjectBuilder.add(new GameObject(156, new Location(3097, 3358, 0)));
+						SceneryBuilder.remove(RegionManager.getObject(new Location(3097, 3360, 0)));
+						SceneryBuilder.remove(RegionManager.getObject(new Location(3097, 3357, 0)));
+						SceneryBuilder.add(new Scenery(155, new Location(3097, 3359, 0)));
+						SceneryBuilder.add(new Scenery(156, new Location(3097, 3358, 0)));
 						break;
 					}
 					return false;
@@ -210,19 +210,19 @@ public final class DraynorManorPlugin extends OptionHandler {
 				switch (count) {
 				case 0:
 					player.getPacketDispatch().sendMessage("You've found a secret door!");
-					ObjectBuilder.remove(RegionManager.getObject(Location.create(3097, 3359, 0)));
-					ObjectBuilder.remove(RegionManager.getObject(Location.create(3097, 3358, 0)));
-					ObjectBuilder.add(new GameObject(156, new Location(3097, 3357, 0)));
-					ObjectBuilder.add(new GameObject(157, new Location(3097, 3360, 0)));
+					SceneryBuilder.remove(RegionManager.getObject(Location.create(3097, 3359, 0)));
+					SceneryBuilder.remove(RegionManager.getObject(Location.create(3097, 3358, 0)));
+					SceneryBuilder.add(new Scenery(156, new Location(3097, 3357, 0)));
+					SceneryBuilder.add(new Scenery(157, new Location(3097, 3360, 0)));
 					break;
 				case 1:
 					AgilityHandler.walk(player, -1, player.getLocation(), destination, null, 0.0, null);
 					break;
 				case 3:
-					ObjectBuilder.remove(RegionManager.getObject(new Location(3097, 3360, 0)));
-					ObjectBuilder.remove(RegionManager.getObject(new Location(3097, 3357, 0)));
-					ObjectBuilder.add(new GameObject(155, new Location(3097, 3359, 0)));
-					ObjectBuilder.add(new GameObject(156, new Location(3097, 3358, 0)));
+					SceneryBuilder.remove(RegionManager.getObject(new Location(3097, 3360, 0)));
+					SceneryBuilder.remove(RegionManager.getObject(new Location(3097, 3357, 0)));
+					SceneryBuilder.add(new Scenery(155, new Location(3097, 3359, 0)));
+					SceneryBuilder.add(new Scenery(156, new Location(3097, 3358, 0)));
 					break;
 				}
 				count++;
@@ -234,8 +234,8 @@ public final class DraynorManorPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		if (n instanceof GameObject) {
-			final int id = ((GameObject) n).getId();
+		if (n instanceof Scenery) {
+			final int id = ((Scenery) n).getId();
 			switch (id) {
 			case 155:
 				return Location.create(3098, 3359, 0);

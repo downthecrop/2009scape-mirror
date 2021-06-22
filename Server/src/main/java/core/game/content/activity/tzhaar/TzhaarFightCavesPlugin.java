@@ -12,7 +12,7 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.slayer.Tasks;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
@@ -268,7 +268,7 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 
 	@Override
 	public boolean interact(Entity e, Node target, Option option) {
-		if (target instanceof GameObject && ((GameObject) target).getId() == 9357) {
+		if (target instanceof Scenery && ((Scenery) target).getId() == 9357) {
 			leave((Player) e, e.getAttribute("fc_wave", 0));
 			player.removeAttribute("fc_wave");
 			player.removeAttribute("fc_offset");

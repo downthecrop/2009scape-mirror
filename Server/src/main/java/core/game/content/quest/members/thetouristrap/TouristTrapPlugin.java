@@ -23,8 +23,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -180,7 +180,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                             player.getPacketDispatch().sendMessage("This gate looks like it needs a key to open it.");
                             break;
                         }
-                        DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+                        DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
                         break;
                     case 2686:
                     case 2685:
@@ -262,27 +262,27 @@ public final class TouristTrapPlugin extends OptionHandler {
                                 player.getPacketDispatch().sendMessage("The gate needs a key in order to be opened.");
                                 return true;
                             }
-                            DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+                            DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
                             player.getPacketDispatch().sendMessage("The guards search you thoroughly as you go through the gates.");
                             return true;
                         }
-                        DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+                        DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
                         break;
                     case 2689:
                         if (!player.getInventory().containsItem(TouristTrap.CELL_DOOR_KEY)) {
                             player.getPacketDispatch().sendMessage("The door seems to be pretty locked.");
                             break;
                         }
-                        DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+                        DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
                         break;
                     case 1528:
-                        ObjectBuilder.replace((GameObject) node, ((GameObject) node).transform(1529));
+                        SceneryBuilder.replace((Scenery) node, ((Scenery) node).transform(1529));
                         break;
                 }
                 break;
             case "close":
                 if (id == 1529) {
-                    ObjectBuilder.replace((GameObject) node, ((GameObject) node).transform(1528));
+                    SceneryBuilder.replace((Scenery) node, ((Scenery) node).transform(1528));
                 }
                 break;
             case "look-in":
@@ -768,7 +768,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                                 player.animate(Animation.create(5052));
                                 break;
                             case 3:
-                                ObjectBuilder.remove(RegionManager.getObject(base.transform(54, 22, 0)));
+                                SceneryBuilder.remove(RegionManager.getObject(base.transform(54, 22, 0)));
                                 cart = NPC.create(4980, base.transform(54, 22, 0));
                                 cart.init();
                                 break;
@@ -940,7 +940,7 @@ public final class TouristTrapPlugin extends OptionHandler {
         /**
          * The cart.
          */
-        private GameObject cart;
+        private Scenery cart;
 
         /**
          * Constructs a new {@code MineCartDialogue} {@code Object}.
@@ -973,7 +973,7 @@ public final class TouristTrapPlugin extends OptionHandler {
 
         @Override
         public boolean open(Object... args) {
-            cart = (GameObject) args[0];
+            cart = (Scenery) args[0];
             if (player.getInventory().containsItem(TouristTrap.ANNA_BARREL)) {
                 player("There's not enough room for both of us.");
                 stage = -1;
@@ -1078,8 +1078,8 @@ public final class TouristTrapPlugin extends OptionHandler {
 
             @Override
             public void open() {
-                ObjectBuilder.remove(RegionManager.getObject(base.getLocation().transform(getPath()[0].getLocalX(), getPath()[0].getLocalY(), 0)));
-                ObjectBuilder.remove(RegionManager.getObject(base.getLocation().transform(getPath()[getPath().length - 1].getLocalX(), getPath()[getPath().length - 1].getLocalY(), 0)));
+                SceneryBuilder.remove(RegionManager.getObject(base.getLocation().transform(getPath()[0].getLocalX(), getPath()[0].getLocalY(), 0)));
+                SceneryBuilder.remove(RegionManager.getObject(base.getLocation().transform(getPath()[getPath().length - 1].getLocalX(), getPath()[getPath().length - 1].getLocalY(), 0)));
                 player.getAppearance().setAnimations(Animation.create(211));
                 player.getAppearance().setRidingMinecart(true);
                 player.getAppearance().sync();
@@ -1260,9 +1260,9 @@ public final class TouristTrapPlugin extends OptionHandler {
     public static final class BarrelDialogue extends DialoguePlugin {
 
         /**
-         * The game object barrel.
+         * The scenery barrel.
          */
-        private GameObject barrel;
+        private Scenery barrel;
 
         /**
          * The quest.
@@ -1294,7 +1294,7 @@ public final class TouristTrapPlugin extends OptionHandler {
 
         @Override
         public boolean open(Object... args) {
-            barrel = (GameObject) args[0];
+            barrel = (Scenery) args[0];
             quest = player.getQuestRepository().getQuest(TouristTrap.NAME);
             if ((quest.getStage(player) == 70 || quest.getStage(player) == 72) && !player.hasItem(TouristTrap.ANNA_BARREL)) {
                 interpreter.sendDialogue("You search the barrels and find Ana.");
@@ -1347,11 +1347,11 @@ public final class TouristTrapPlugin extends OptionHandler {
                 case 3:
                     end();
                     player.getInventory().add(TouristTrap.BARREL, player);
-                    ObjectBuilder.remove(barrel);
+                    SceneryBuilder.remove(barrel);
                     GameWorld.getPulser().submit(new Pulse(40) {
                         @Override
                         public boolean pulse() {
-                            ObjectBuilder.add(barrel);
+                            SceneryBuilder.add(barrel);
                             return true;
                         }
                     });
@@ -1618,7 +1618,7 @@ public final class TouristTrapPlugin extends OptionHandler {
              * @author 'Vexia
              * @version 1.0
              */
-            public static final class ProtoTypePulse extends SkillPulse<GameObject> {
+            public static final class ProtoTypePulse extends SkillPulse<Scenery> {
 
                 /**
                  * The hammer item.

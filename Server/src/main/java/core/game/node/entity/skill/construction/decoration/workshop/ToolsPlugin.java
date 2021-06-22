@@ -10,7 +10,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Plugin;
 import rs09.plugin.PluginManager;
 
@@ -86,7 +86,7 @@ public class ToolsPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		GameObject object = node.asObject();
+		Scenery object = node.asObject();
 		ToolStore ts = ToolStore.forId(object.getId());
 		if (ts != null) {
 			player.getDialogueInterpreter().open(DialogueInterpreter.getDialogueKey("con:tools"), ts);

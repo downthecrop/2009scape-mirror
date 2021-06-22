@@ -13,8 +13,8 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
@@ -60,7 +60,7 @@ public final class ShieldArravPlugin extends OptionHandler {
 	@Override
 	public boolean handle(Player player, Node node, String option) {
 		final Quest quest = player.getQuestRepository().getQuest("Shield of Arrav");
-		final int id = node instanceof GameObject ? ((GameObject) node).getId() : node instanceof Item ? ((Item) node).getId() : ((NPC) node).getId();
+		final int id = node instanceof Scenery ? ((Scenery) node).getId() : node instanceof Item ? ((Item) node).getId() : ((NPC) node).getId();
 		switch (id) {
 		case 769:
 			player.getInterfaceManager().open(new Component(526));
@@ -75,7 +75,7 @@ public final class ShieldArravPlugin extends OptionHandler {
 			player.getPacketDispatch().sendString("Attach this certificate to another.", 529, 2);
 			break;
 		case 2400:
-			ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(2401));
+			SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(2401));
 			break;
 		case 2401:
 			switch (option) {
@@ -92,7 +92,7 @@ public final class ShieldArravPlugin extends OptionHandler {
 				}
 				break;
 			case "shut":
-				ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(2400));
+				SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(2400));
 				break;
 			}
 			break;
@@ -100,7 +100,7 @@ public final class ShieldArravPlugin extends OptionHandler {
 			if (node.getLocation().getX() == 3188) {
 				ClimbActionHandler.climb(player, new Animation(828), Location.create(3188, 3392, 1));
 			} else {
-				ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 				return true;
 			}
 			break;
@@ -123,12 +123,12 @@ public final class ShieldArravPlugin extends OptionHandler {
 			}
 			break;
 		case 2403:
-			ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(2404));
+			SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(2404));
 			break;
 		case 2404:
 			switch (option) {
 			case "close":
-				ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(2403));
+				SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(2403));
 				break;
 			case "search":
 				if (quest.getStage(player) == 70 && ShieldofArrav.isPhoenix(player)) {
@@ -161,7 +161,7 @@ public final class ShieldArravPlugin extends OptionHandler {
 				player.getDialogueInterpreter().sendDialogue("This is the door to the weapon stash you were looking for. Maybe if", "you can find another adventurer who happens to be a member of the", "Phoenix Gang, they could help you.");
 				return true;
 			} else if (quest.getStage(player) == 60 && player.getInventory().containsItem(ShieldofArrav.KEY)) {
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			if (quest.getStage(player) == 70 && player.getInventory().containsItem(ShieldofArrav.KEY)) {
@@ -169,7 +169,7 @@ public final class ShieldArravPlugin extends OptionHandler {
 					player.getPacketDispatch().sendMessage("You should get a replacement key from Straven to enter here.");
 					return true;
 				} else {
-					DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+					DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 					return true;
 				}
 			}
@@ -179,13 +179,13 @@ public final class ShieldArravPlugin extends OptionHandler {
 			if (!ShieldofArrav.isBlackArm(player)) {
 				player.getPacketDispatch().sendMessage("This door seems to be locked from the inside.");
 			} else {
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 			}
 			break;
 		case 2397:
 			if (ShieldofArrav.isPhoenix(player)) {
 				player.getPacketDispatch().sendMessage("The door automatically opens for you.");
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			player.getPacketDispatch().sendMessage("The door is securely locked.");
@@ -220,9 +220,9 @@ public final class ShieldArravPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node n, Node node) {
-		if (node instanceof GameObject) {
+		if (node instanceof Scenery) {
 			if (node.getName().toLowerCase().contains("door")) {
-				return DoorActionHandler.getDestination((Player) n, (GameObject) node);
+				return DoorActionHandler.getDestination((Player) n, (Scenery) node);
 			}
 		}
 		return null;

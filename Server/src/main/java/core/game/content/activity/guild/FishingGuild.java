@@ -9,7 +9,7 @@ import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 
@@ -30,7 +30,7 @@ public final class FishingGuild extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final int id = ((GameObject) node).getId();
+		final int id = ((Scenery) node).getId();
 		switch (option) {
 		case "open":
 			switch (id) {
@@ -39,7 +39,7 @@ public final class FishingGuild extends OptionHandler {
 					player.getDialogueInterpreter().sendDialogues(308, null, "Hello, I'm afraid only the top fishers are allowed to use", "our premier fishing facilities.");
 					return true;
 				}
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				break;
 			}
 			break;

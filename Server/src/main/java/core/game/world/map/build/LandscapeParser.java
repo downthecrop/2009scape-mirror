@@ -2,7 +2,7 @@ package core.game.world.map.build;
 
 import core.cache.def.impl.ObjectDefinition;
 import core.cache.misc.buffer.ByteBufferUtils;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.map.Region;
 import core.game.world.map.RegionManager;
@@ -50,8 +50,8 @@ public final class LandscapeParser {
 						z--;
 					}
 					if (z >= 0 && z <= 3) {
-						GameObject object = new GameObject(objectId, Location.create((r.getX() << 6) + x, (r.getY() << 6) + y, z), type, rotation);
-						flagGameObject(r.getPlanes()[z], x, y, object, true, storeObjects);
+						Scenery object = new Scenery(objectId, Location.create((r.getX() << 6) + x, (r.getY() << 6) + y, z), type, rotation);
+						flagScenery(r.getPlanes()[z], x, y, object, true, storeObjects);
 					}
 				} else {
 					System.out.println("Object out of bounds: " + objectId + " - " + x + ", " + y + ", " + z);
@@ -61,31 +61,31 @@ public final class LandscapeParser {
 	}
 
 	/**
-	 * Adds a game object temporarily.
+	 * Adds a scenery temporarily.
 	 * @param object The object to add.
 	 */
-	public static void addGameObject(GameObject object) {
-		addGameObject(object, false);
+	public static void addScenery(Scenery object) {
+		addScenery(object, false);
 	}
 
 	/**
-	 * Adds a game object.
+	 * Adds a scenery.
 	 * @param object The object to add.
 	 * @param landscape If the object should be added permanent.
 	 */
-	public static void addGameObject(GameObject object, boolean landscape) {
+	public static void addScenery(Scenery object, boolean landscape) {
 		Location l = object.getLocation();
-		flagGameObject(RegionManager.getRegionPlane(l), l.getLocalX(), l.getLocalY(), object, landscape, false);
+		flagScenery(RegionManager.getRegionPlane(l), l.getLocalX(), l.getLocalY(), object, landscape, false);
 	}
 
 	/**
-	 * Flags a game object on the plane's clipping flags.
+	 * Flags a scenery on the plane's clipping flags.
 	 * @param plane The plane.
 	 * @param object The object.
-	 * @param landscape If we are adding this game object permanent.
+	 * @param landscape If we are adding this scenery permanent.
 	 * @param storeObjects If all objects should be stored (rather than just the objects with options).
 	 */
-	public static void flagGameObject(RegionPlane plane, int localX, int localY, GameObject object, boolean landscape, boolean storeObjects) {
+	public static void flagScenery(RegionPlane plane, int localX, int localY, Scenery object, boolean landscape, boolean storeObjects) {
 		Region.load(plane.getRegion());
 		ObjectDefinition def = object.getDefinition();
 		int sizeX;
@@ -147,9 +147,9 @@ public final class LandscapeParser {
 	 * @param localY The local y-coordinate.
 	 * @param landscape The landscape.
 	 */
-	private static void addPlaneObject(RegionPlane plane, GameObject object, int localX, int localY, boolean landscape, boolean storeAll) {
+	private static void addPlaneObject(RegionPlane plane, Scenery object, int localX, int localY, boolean landscape, boolean storeAll) {
 		if (landscape && !storeAll) {
-			GameObject current = plane.getObjects()[localX][localY];
+			Scenery current = plane.getObjects()[localX][localY];
 			if (current != null && current.getDefinition().getChildObject(null).hasOptions(!object.getDefinition().getChildObject(null).hasOptions(false))) {
 				return;
 			}
@@ -158,11 +158,11 @@ public final class LandscapeParser {
 	}
 
 	/**
-	 * Removes a game object.
+	 * Removes a scenery.
 	 * @param object The object.
-	 * @return The removed game object.
+	 * @return The removed scenery.
 	 */
-	public static GameObject removeGameObject(GameObject object) {
+	public static Scenery removeScenery(Scenery object) {
 		if (!object.isRenderable()) {
 			return null;
 		}
@@ -170,7 +170,7 @@ public final class LandscapeParser {
 		Region.load(plane.getRegion());
 		int localX = object.getLocation().getLocalX();
 		int localY = object.getLocation().getLocalY();
-		GameObject current = plane.getChunkObject(localX, localY, object.getId());
+		Scenery current = plane.getChunkObject(localX, localY, object.getId());
 		if (current == null || current.getId() != object.getId()) {
 			return null;
 		}

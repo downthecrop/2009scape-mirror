@@ -3,15 +3,15 @@ package core.game.world.map;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import rs09.game.system.SystemLogger;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.build.LandscapeParser;
 import core.game.world.update.flag.UpdateFlag;
 import core.net.packet.IoBuffer;
-import core.net.packet.out.ClearObject;
+import core.net.packet.out.ClearScenery;
 import core.net.packet.out.ConstructGroundItem;
-import core.net.packet.out.ConstructObject;
+import core.net.packet.out.ConstructScenery;
 import core.net.packet.out.UpdateAreaPosition;
 
 import java.util.ArrayList;
@@ -50,9 +50,9 @@ public class RegionChunk {
 	protected List<GroundItem> items;
 	
 	/**
-	 * The game objects in this chunk.
+	 * The scenerys in this chunk.
 	 */
-	protected GameObject[][] objects;
+	protected Scenery[][] objects;
 
 	/**
 	 * The rotation.
@@ -74,7 +74,7 @@ public class RegionChunk {
 		this.currentBase = base;
 		this.rotation = rotation;
 		this.plane = plane;
-		this.objects = new GameObject[SIZE][SIZE];
+		this.objects = new Scenery[SIZE][SIZE];
 	}
 
 	/**
@@ -128,20 +128,20 @@ public class RegionChunk {
 		int baseY = currentBase.getLocalY();
 		for (int x = 0; x < SIZE; x++) {
 			for (int y = 0; y < SIZE; y++) {
-				GameObject dyn = objects[x][y];
+				Scenery dyn = objects[x][y];
 				if (dyn == null || plane.getObjects() == null) {
 					continue;
 				}
-				GameObject stat = plane.getObjects()[baseX + x][baseY + y];
+				Scenery stat = plane.getObjects()[baseX + x][baseY + y];
 				if (!dyn.isRenderable() && stat != null) {
-					ClearObject.write(buffer, stat);
+					ClearScenery.write(buffer, stat);
 					updated = true;
 				}
 				else if (dyn != stat) {
 					if (stat != null) {
-						ClearObject.write(buffer, stat);
+						ClearScenery.write(buffer, stat);
 					}
-					ConstructObject.write(buffer, dyn);
+					ConstructScenery.write(buffer, dyn);
 					updated = true;
 				}
 			}
@@ -185,8 +185,8 @@ public class RegionChunk {
 			SystemLogger.logErr("Region chunk was already rotated!");
 			return;
 		}
-		GameObject[][] copy = new GameObject[SIZE][SIZE];
-		GameObject[][] staticCopy = new GameObject[SIZE][SIZE];
+		Scenery[][] copy = new Scenery[SIZE][SIZE];
+		Scenery[][] staticCopy = new Scenery[SIZE][SIZE];
 		int baseX = currentBase.getLocalX();
 		int baseY = currentBase.getLocalY();
 		for (int x = 0; x < SIZE; x++) {
@@ -200,8 +200,8 @@ public class RegionChunk {
 		rotation = direction.toInteger();
 		for (int x = 0; x < SIZE; x++) {
 			for (int y = 0; y < SIZE; y++) {
-				GameObject object = copy[x][y];
-				GameObject stat = staticCopy[x][y];
+				Scenery object = copy[x][y];
+				Scenery stat = staticCopy[x][y];
 				boolean match = object == stat;
 				if (stat == null) {
 					continue;
@@ -209,7 +209,7 @@ public class RegionChunk {
 				int[] pos = getRotatedPosition(x, y, stat.getDefinition().getSizeX(), stat.getDefinition().getSizeY(), stat.getRotation(), rotation);
 				if (object != null) {
 					object = object.transform(object.getId(), (object.getRotation() + rotation) % 4, object.getLocation().transform(pos[0] - x, pos[1] - y, 0));
-					LandscapeParser.flagGameObject(plane, baseX + pos[0], baseY + pos[1], object, true, true);
+					LandscapeParser.flagScenery(plane, baseX + pos[0], baseY + pos[1], object, true, true);
 				}
 				if (match) {
 					stat = object;
@@ -269,20 +269,20 @@ public class RegionChunk {
 	}
 
 	/**
-	 * Gets the game objects located on the coordinates in this chunk.
+	 * Gets the scenerys located on the coordinates in this chunk.
 	 * @param chunkX The chunk x-coordinate (0-7).
 	 * @param chunkY The chunk y-coordinate (0-7).
 	 * @return The objects.
 	 */
-	public GameObject[] getObjects(int chunkX, int chunkY) {
-		return new GameObject[] { objects[chunkX][chunkY] };
+	public Scenery[] getObjects(int chunkX, int chunkY) {
+		return new Scenery[] { objects[chunkX][chunkY] };
 	}
 	
 	/**
 	 * Gets the objects.
 	 * @return The objects.
 	 */
-	public GameObject[][] getObjects() {
+	public Scenery[][] getObjects() {
 		return objects;
 	}
 
@@ -290,7 +290,7 @@ public class RegionChunk {
 	 * Sets the objects.
 	 * @param objects The objects to set.
 	 */
-	public void setObjects(GameObject[][] objects) {
+	public void setObjects(Scenery[][] objects) {
 		this.objects = objects;
 	}
 

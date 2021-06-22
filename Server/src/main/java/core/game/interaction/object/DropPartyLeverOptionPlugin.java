@@ -4,7 +4,7 @@ import core.cache.def.impl.ObjectDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
@@ -30,7 +30,7 @@ public final class DropPartyLeverOptionPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		final GameObject object = (GameObject) node;
+		final Scenery object = (Scenery) node;
 		if (player.getAttribute("delay:lever", -1) > GameWorld.getTicks())
 			return true;
 		player.setAttribute("delay:picking", GameWorld.getTicks() + 3);

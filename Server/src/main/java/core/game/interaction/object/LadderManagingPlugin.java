@@ -5,7 +5,7 @@ import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -28,13 +28,13 @@ public final class LadderManagingPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, final String option) {
-		ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+		ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 		return true;
 	}
 
 	@Override
 	public Location getDestination(Node n, Node object) {
-		return ClimbActionHandler.getDestination((GameObject) object);
+		return ClimbActionHandler.getDestination((Scenery) object);
 	}
 
 }

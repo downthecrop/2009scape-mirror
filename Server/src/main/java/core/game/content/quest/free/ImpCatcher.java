@@ -5,8 +5,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.game.world.map.RegionManager;
@@ -112,9 +112,9 @@ public class ImpCatcher extends Quest {
 		player.getPacketDispatch().sendItemZoomOnInterface(AMULET.getId(), 230, 277, 3 + 2);
 		player.getSkills().addExperience(Skills.MAGIC, 875);
 		// 16170
-		GameObject table = RegionManager.getObject(Location.create(3102, 3163, 2));
+		Scenery table = RegionManager.getObject(Location.create(3102, 3163, 2));
 		if (table.getId() != 16170) {
-			ObjectBuilder.replace(table, table.transform(16170), 80);
+			SceneryBuilder.replace(table, table.transform(16170), 80);
 		}
 		if (!player.getInventory().add(AMULET)) {
 			GroundItemManager.create(AMULET, player.getLocation(), player);

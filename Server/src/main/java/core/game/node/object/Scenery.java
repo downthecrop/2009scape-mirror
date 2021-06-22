@@ -12,10 +12,10 @@ import core.game.world.map.Direction;
 import core.game.world.map.Location;
 
 /**
- * Represents a game object.
+ * Represents a scenery.
  * @author Emperor
  */
-public class GameObject extends Node {
+public class Scenery extends Node {
 
 	/**
 	 * The object id.
@@ -60,44 +60,44 @@ public class GameObject extends Node {
 	/**
 	 * The child objects.
 	 */
-	private final GameObject[] childs;
+	private final Scenery[] childs;
 	
 	/**
-	 * The game object wrapper (used for object configurations).
+	 * The scenery wrapper (used for object configurations).
 	 */
-	private GameObject wrapper;
+	private Scenery wrapper;
 	
 	/**
-	 * Constructs a new game object.
+	 * Constructs a new scenery.
 	 * @param id The object id.
 	 * @param x The object x-coordinate.
 	 * @param y The object y-coordinate.
 	 * @param z The object z-coordinate.
 	 */
-	public GameObject(int id, int x, int y, int z) {
+	public Scenery(int id, int x, int y, int z) {
 		this(id, Location.create(x, y, z), 10, 0);
 	}
 
 	/**
-	 * Constructs a new game object.
+	 * Constructs a new scenery.
 	 * @param id The object id.
 	 * @param location The object's location.
 	 */
-	public GameObject(int id, Location location) {
+	public Scenery(int id, Location location) {
 		this(id, location, 10, 0);
 	}
 	
 	/**
-	 * Constructs a new game object.
+	 * Constructs a new scenery.
 	 * @param id The object id.
 	 * @param location The object's location.
 	 * @param rotation The object's rotation.
 	 */
-	public GameObject(int id, Location location, int rotation) {
+	public Scenery(int id, Location location, int rotation) {
 		this(id, location, 10, rotation);
 	}
 	
-	public GameObject(int id, Location location, int rotation, Direction direction) {
+	public Scenery(int id, Location location, int rotation, Direction direction) {
 		this(id, location, 10, rotation);
 	}
 
@@ -110,7 +110,7 @@ public class GameObject extends Node {
 	 * @param type The object type.
 	 * @param rotation The rotation.
 	 */
-	public GameObject(int id, int x, int y, int z, int type, int rotation) {
+	public Scenery(int id, int x, int y, int z, int type, int rotation) {
 		this(id, Location.create(x, y, z), type, rotation);
 	}
 	
@@ -120,7 +120,7 @@ public class GameObject extends Node {
 	 * @param type The object type.
 	 * @param rotation The rotation.
 	 */
-	public GameObject(int id, int type, int rotation) {
+	public Scenery(int id, int type, int rotation) {
 		this(id, Location.create(0, 0, 0), type, rotation);
 	}
 	
@@ -131,7 +131,7 @@ public class GameObject extends Node {
 	 * @param type The object type.
 	 * @param rotation The rotation.
 	 */
-	public GameObject(int id, Location location, int type, int rotation) {
+	public Scenery(int id, Location location, int type, int rotation) {
 		super(ObjectDefinition.forId(id).getName(), location);
 		if (rotation < 0) {
 			rotation += 4;
@@ -149,7 +149,7 @@ public class GameObject extends Node {
 		this.definition = ObjectDefinition.forId(id);
 		super.size = definition.sizeX;
 		if (definition.childrenIds != null && definition.childrenIds.length > 0) {
-			this.childs = new GameObject[definition.childrenIds.length];
+			this.childs = new Scenery[definition.childrenIds.length];
 			for (int i = 0; i < childs.length; i++) {
 				childs[i] = transform(definition.childrenIds[i]);
 				childs[i].wrapper = this;
@@ -199,10 +199,10 @@ public class GameObject extends Node {
 	 * @param player The player.
 	 * @return The child object.
 	 */
-	public GameObject getChild(Player player) {
+	public Scenery getChild(Player player) {
 		if (childs != null) {
 			ObjectDefinition def = definition.getChildObject(player);
-			for (GameObject child : childs) {
+			for (Scenery child : childs) {
 				if (child.getId() == def.getId()) {
 					return child;
 				}
@@ -234,20 +234,20 @@ public class GameObject extends Node {
 	/**
 	 * Gets a transformed object of this object.
 	 * @param id The new object id.
-	 * @return The constructed game object.
+	 * @return The constructed scenery.
 	 */
-	public GameObject transform(int id) {
-		return new GameObject(id, location, type, rotation);
+	public Scenery transform(int id) {
+		return new Scenery(id, location, type, rotation);
 	}
 
 	/**
 	 * Gets a transformed object of this object.
 	 * @param id The new object id.
 	 * @param rotation The new rotation.
-	 * @return The constructed game object.
+	 * @return The constructed scenery.
 	 */
-	public GameObject transform(int id, int rotation) {
-		return new GameObject(id, location, type, rotation);
+	public Scenery transform(int id, int rotation) {
+		return new Scenery(id, location, type, rotation);
 	}
 
 	/**
@@ -255,10 +255,10 @@ public class GameObject extends Node {
 	 * @param id The new object id.
 	 * @param rotation The new rotation.
 	 * @param location The new location.
-	 * @return The constructed game object.
+	 * @return The constructed scenery.
 	 */
-	public GameObject transform(int id, int rotation, Location location) {
-		return new GameObject(id, location, type, rotation);
+	public Scenery transform(int id, int rotation, Location location) {
+		return new Scenery(id, location, type, rotation);
 	}
 	
 	/**
@@ -266,10 +266,10 @@ public class GameObject extends Node {
 	 * @param id The new object id.
 	 * @param rotation The new rotation.
 	 * @param type The object type.
-	 * @return The constructed game object.
+	 * @return The constructed scenery.
 	 */
-	public GameObject transform(int id, int rotation, int type) {
-		return new GameObject(id, location, type, rotation);
+	public Scenery transform(int id, int rotation, int type) {
+		return new Scenery(id, location, type, rotation);
 	}
 	
 	/**
@@ -281,7 +281,7 @@ public class GameObject extends Node {
 	}
 
 	/**
-	 * Gets this game object as Constructed object.
+	 * Gets this scenery as Constructed object.
 	 * @return The {@link Constructed} object.
 	 */
 	public Constructed asConstructed() {
@@ -332,16 +332,16 @@ public class GameObject extends Node {
 	
 	@Override
 	public boolean equals(Object obj) {
-		if (obj == null || !(obj instanceof GameObject)) {
+		if (obj == null || !(obj instanceof Scenery)) {
 			return false;
 		}
-		GameObject other = (GameObject) obj;
+		Scenery other = (Scenery) obj;
 		return other.id == id && other.location.equals(location) && rotation == other.rotation && other.type == type;
 	}
 	
 	@Override
 	public String toString() {
-		return "[GameObject " + id + ", " + location + ", type=" + type + ", rot=" + rotation + "]";
+		return "[Scenery " + id + ", " + location + ", type=" + type + ", rot=" + rotation + "]";
 	}
 
 	/**
@@ -403,7 +403,7 @@ public class GameObject extends Node {
 	 * Gets the childs.
 	 * @return The childs.
 	 */
-	public GameObject[] getChilds() {
+	public Scenery[] getChilds() {
 		return childs;
 	}
 
@@ -411,7 +411,7 @@ public class GameObject extends Node {
 	 * Gets the wrapper.
 	 * @return The wrapper.
 	 */
-	public GameObject getWrapper() {
+	public Scenery getWrapper() {
 		if (wrapper == null) {
 			return this;
 		}
@@ -422,7 +422,7 @@ public class GameObject extends Node {
 	 * Sets the wrapper.
 	 * @param wrapper The wrapper to set.
 	 */
-	public void setWrapper(GameObject wrapper) {
+	public void setWrapper(Scenery wrapper) {
 		this.wrapper = wrapper;
 	}
 

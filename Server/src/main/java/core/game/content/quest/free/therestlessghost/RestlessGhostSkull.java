@@ -3,7 +3,7 @@ package core.game.content.quest.free.therestlessghost;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -31,7 +31,7 @@ public final class RestlessGhostSkull extends UseWithHandler {
 
 	@Override
 	public boolean handle(NodeUsageEvent event) {
-		final GameObject object = (GameObject) event.getUsedWith();
+		final Scenery object = (Scenery) event.getUsedWith();
 		if (object.getId() == 2145) {
 			event.getPlayer().getDialogueInterpreter().sendDialogue("Maybe I should open it first.");
 			return true;

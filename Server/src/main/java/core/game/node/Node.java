@@ -5,7 +5,7 @@ import core.game.interaction.Interaction;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.tools.StringUtils;
@@ -88,11 +88,11 @@ public abstract class Node {
 	}
 
 	/**
-	 * Casts the game object.
+	 * Casts the scenery.
 	 * @return the object.
 	 */
-	public GameObject asObject() {
-		return (GameObject) this;
+	public Scenery asObject() {
+		return (Scenery) this;
 	}
 
 	/**
@@ -108,7 +108,7 @@ public abstract class Node {
 	 * @return the id.
 	 */
 	public int getId() {
-		return this instanceof NPC ? ((NPC) this).getId() : this instanceof GameObject ? ((GameObject) this).getId() : this instanceof Item ? ((Item) this).getId() : -1;
+		return this instanceof NPC ? ((NPC) this).getId() : this instanceof Scenery ? ((Scenery) this).getId() : this instanceof Item ? ((Item) this).getId() : -1;
 	}
 
 	/**

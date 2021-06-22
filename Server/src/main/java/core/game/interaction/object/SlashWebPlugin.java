@@ -13,8 +13,8 @@ import core.game.node.entity.combat.equipment.WeaponInterface.WeaponInterfaces;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
@@ -59,7 +59,7 @@ public final class SlashWebPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final GameObject object = (GameObject) node;
+		final Scenery object = (Scenery) node;
 		Item weapon = getWeapon(player, player.getEquipment());
 		if (weapon == null) {
 			weapon = getWeapon(player, player.getInventory());
@@ -76,7 +76,7 @@ public final class SlashWebPlugin extends OptionHandler {
 		player.animate(weapon == KNIFE ? KNIFE_ANIMATION : ANIMATION);
 		if (success) {
 			player.getPacketDispatch().sendMessage("You slash the web apart.");
-			ObjectBuilder.replace(object, object.getId() == 27266 || object.getId() == 29354 ? object.transform(734) : object.transform(object.getId() + 1), 100);
+			SceneryBuilder.replace(object, object.getId() == 27266 || object.getId() == 29354 ? object.transform(734) : object.transform(object.getId() + 1), 100);
 
 			// Venture through the cobwebbed corridor in Varrock Sewers
 			if (object.getId() == 29354) {

@@ -4,8 +4,8 @@ import core.game.content.activity.ActivityPlugin;
 import core.game.content.activity.CutscenePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;
@@ -53,8 +53,8 @@ public final class JulietCutscenePlugin extends CutscenePlugin {
 		npcs.add(juliet);
 		npcs.add(NPC.create(3325, base.transform(29, 38, 1)));
 		npcs.add(NPC.create(3324, base.transform(26, 41, 1)));
-		final GameObject door = RegionManager.getObject(getBase().transform(29, 41, 1));
-		ObjectBuilder.remove(door);
+		final Scenery door = RegionManager.getObject(getBase().transform(29, 41, 1));
+		SceneryBuilder.remove(door);
 		for (NPC npc : npcs) {
 			npc.init();
 		}

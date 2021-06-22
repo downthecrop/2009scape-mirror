@@ -10,8 +10,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -75,8 +75,8 @@ public final class RestlessGhostPlugin extends OptionHandler {
 			GHOST.init();
 			GHOST.setInvisible(true);
 		}
-		final int id = ((GameObject) node).getId();
-		final GameObject object = (GameObject) node;
+		final int id = ((Scenery) node).getId();
+		final Scenery object = (Scenery) node;
 		switch (option) {
 		case "open":
 			switch (id) {
@@ -123,11 +123,11 @@ public final class RestlessGhostPlugin extends OptionHandler {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void toggleCoffin(final Player player, final GameObject object) {
+	private void toggleCoffin(final Player player, final Scenery object) {
 		final boolean open = object.getId() == 2145;
 		player.lock(2);
 		player.animate(open ? OPEN_ANIM : CLOSE_ANIM);
-		ObjectBuilder.replace(object, object.transform(open ? 15061 : 2145));
+		SceneryBuilder.replace(object, object.transform(open ? 15061 : 2145));
 		player.getPacketDispatch().sendMessage("You " + (open ? "open" : "close") + " the coffin.");
 		if (open && !player.getQuestRepository().isComplete(RestlessGhost.NAME)) {
 			sendGhost();
@@ -156,7 +156,7 @@ public final class RestlessGhostPlugin extends OptionHandler {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void searchAltar(final Player player, final GameObject object) {
+	private void searchAltar(final Player player, final Scenery object) {
 		final boolean hasSkull = object.getId() == 15051;
 		if (player.getQuestRepository().getQuest(RestlessGhost.NAME).getStage(player) != 30) {
 			player.getPacketDispatch().sendMessage("You search the altar and find nothing.");

@@ -4,13 +4,13 @@ import core.game.content.global.SkillingPets;
 import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 
 /**
  * Handles the dismantling of a trap.
  * @author Vexia
  */
-public final class TrapDismantlePulse extends SkillPulse<GameObject> {
+public final class TrapDismantlePulse extends SkillPulse<Scenery> {
 
 	/**
 	 * The trap wrapper.
@@ -32,7 +32,7 @@ public final class TrapDismantlePulse extends SkillPulse<GameObject> {
 	 * @param player the player.
 	 * @param node the node.
      */
-	public TrapDismantlePulse(Player player, GameObject node, final TrapWrapper wrapper) {
+	public TrapDismantlePulse(Player player, Scenery node, final TrapWrapper wrapper) {
 		super(player, node);
 		this.trap = wrapper.getType();
 		this.wrapper = wrapper;

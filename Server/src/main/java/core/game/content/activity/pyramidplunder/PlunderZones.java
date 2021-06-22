@@ -9,7 +9,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.world.map.Location;
@@ -243,7 +243,7 @@ public class PlunderZones implements Plugin<Object> {
 
                         if (!alreadyOpened && (success || charmed)) {
                             player.getPacketDispatch().sendMessage("You successfully search the urn...");
-                            ObjectBuilder.replace(target.asObject(), target.asObject().transform(object.openId), 5);
+                            SceneryBuilder.replace(target.asObject(), target.asObject().transform(object.openId), 5);
                             manager.registerOpened(object);
                             reward(player,object.getId());
                         } else {
@@ -255,7 +255,7 @@ public class PlunderZones implements Plugin<Object> {
                             player.getPacketDispatch().sendMessage("You already checked for snakes.");
                         } else {
                             player.getPacketDispatch().sendMessage("You check the urn for snakes...");
-                            ObjectBuilder.replace(target.asObject(), target.asObject().transform(object.snakeId), 5);
+                            SceneryBuilder.replace(target.asObject(), target.asObject().transform(object.snakeId), 5);
                         }
                     }
                     break;

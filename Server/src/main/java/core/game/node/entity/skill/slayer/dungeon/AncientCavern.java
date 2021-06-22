@@ -13,8 +13,8 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -113,7 +113,7 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 				handleLog(player);
 				return true;
 			case 25362:
-				rummageSkeleton(player, (GameObject) target);
+				rummageSkeleton(player, (Scenery) target);
 				return true;
 			}
 		}
@@ -176,7 +176,7 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void rummageSkeleton(Player player, GameObject object) {
+	private void rummageSkeleton(Player player, Scenery object) {
 		final boolean fullInvy = player.getInventory().freeSlots() < 1;
 		final int random = RandomFunction.random(0, 2);
 		player.getPacketDispatch().sendMessages("You rummage in the sharp, slimy pile of bones in search of something useful...");
@@ -207,15 +207,15 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 	 * @param object the object.
 	 * @param spawn the spawn.
 	 */
-	private void removeSkeleton(final GameObject object, final NPC spawn) {
-		ObjectBuilder.remove(object);
+	private void removeSkeleton(final Scenery object, final NPC spawn) {
+		SceneryBuilder.remove(object);
 		GameWorld.getPulser().submit(new Pulse(200) {
 			@Override
 			public boolean pulse() {
 				if (spawn != null && spawn.isActive()) {
 					spawn.clear();
 				}
-				ObjectBuilder.add(object);
+				SceneryBuilder.add(object);
 				return true;
 			}
 		});

@@ -1,6 +1,8 @@
 package rs09.game.interaction.inter
 
+import api.ContentAPI
 import core.game.component.Component
+import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.system.task.Pulse
@@ -35,13 +37,13 @@ class FairyRingInterface : InterfaceListener(){
         }
 
         onClose(RINGS){player, _ ->
-            player.interfaceManager.closeSingleTab()
+            ContentAPI.closeTabInterface(player)
             player.removeAttribute("fr:ring1")
             player.removeAttribute("fr:ring2")
             player.removeAttribute("fr:ring3")
-            player.varpManager.get(816).clearBitRange(0,31)
-            player.varpManager.get(816).send(player)
-            player.interfaceManager.closeSingleTab()
+            ContentAPI.clearVarp(player, 816)
+            ContentAPI.setVarbit(player, 816, 0, 0)
+            ContentAPI.closeTabInterface(player)
             return@onClose true
         }
 
@@ -74,7 +76,7 @@ class FairyRingInterface : InterfaceListener(){
         toSet = !toSet
         player.setAttribute("fr:sortorder",toSet)
         if(toSet) {
-            player.configManager.forceSet(816, ring1index, false)
+            ContentAPI.setVarbit(player, 816, 0, ring1index)
             player.setAttribute("fr:ring2",0)
             player.setAttribute("fr:ring3",0)
         }
@@ -108,7 +110,7 @@ class FairyRingInterface : InterfaceListener(){
         val ring: FairyRing? = FairyRing.valueOf(code.toUpperCase())
         var tile = ring?.tile
         if(ring == FairyRing.CIP){
-            player.dialogueInterpreter.sendDialogue("The ring seems to reject you.")
+            ContentAPI.sendDialogue(player, "The ring seems to reject you.")
         }
         if (ring == null || tile == null) {
             val center = Location(2412, 4434, 0)
@@ -122,7 +124,7 @@ class FairyRingInterface : InterfaceListener(){
             }
             GameWorld.Pulser.submit(object : Pulse(4, player) {
                 override fun pulse(): Boolean {
-                    player.dialogueInterpreter.sendDialogues(player, null, "Wow, fairy magic sure is useful, I hardly moved at all!")
+                    ContentAPI.sendPlayerDialogue(player, "Wow, fairy magic sure is useful, I hardly moved at all!", FacialExpression.AMAZED)
                     return true
                 }
             })
@@ -131,8 +133,8 @@ class FairyRingInterface : InterfaceListener(){
                 player.savedData.globalData.setTravelLog(ring.ordinal)
             }
         }
-        player.interfaceManager.close()
-        player.teleporter.send(tile,TeleportManager.TeleportType.FAIRY_RING)
+        ContentAPI.closeInterface(player)
+        ContentAPI.teleport(player, tile!!, TeleportManager.TeleportType.FAIRY_RING)
     }
 }
 
@@ -190,7 +192,7 @@ enum class FairyRing(val tile: Location?, val tip: String = "", val childId: Int
                 if (ring.childId == -1) {
                     continue
                 }
-                player.packetDispatch.sendString("<br>" + ring.tip, 735, ring.childId)
+                ContentAPI.setInterfaceText(player, "<br>${ring.tip}", 735, ring.childId)
             }
         }
     }

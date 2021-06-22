@@ -1,5 +1,6 @@
 package rs09.game.interaction.inter
 
+import api.ContentAPI
 import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
@@ -141,9 +142,9 @@ class HairDresserInterface : ComponentPlugin(){
             HAIRDRESSER_MALE_COMPONENT_ID -> 61
             else -> 0
         }
-        player.packetDispatch.sendPlayerOnInterface(usedInterface,player_model_child)
-        player.packetDispatch.sendAnimationInterface(FacialExpression.HAPPY.animationId,usedInterface,player_head_child)
-        player.packetDispatch.sendPlayerOnInterface(usedInterface,player_head_child)
+        ContentAPI.sendPlayerOnInterface(player, usedInterface, player_model_child)
+        ContentAPI.sendPlayerOnInterface(player, usedInterface, player_head_child)
+        ContentAPI.sendAnimationOnInterface(player, FacialExpression.HAPPY.animationId, usedInterface, player_head_child)
         player.toggleWardrobe(true)
 
         component?.setCloseEvent{pl,_ ->
