@@ -41,11 +41,9 @@ object ImmerseWorld {
     }
 
     fun immerseSeersAndCatherby(){
-        GeneralBotCreator(SeersMagicTrees(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.AVERAGE, Location.create(2702, 3397, 0)))
         GeneralBotCreator(SeersFlax(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR, Location.create(2738, 3444, 0)))
         GeneralBotCreator(FletchingBankstander(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.AVERAGE, Location.create(2722, 3493, 0)))
         GeneralBotCreator(GlassBlowingBankstander(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.AVERAGE, Location.create(2807, 3441, 0)))
-        GeneralBotCreator(Location.create(2805, 3435, 0), LobsterCatcher())
     }
 
     fun immerseLumbridgeDraynor(){
@@ -55,9 +53,6 @@ object ImmerseWorld {
         GeneralBotCreator(ManThiever(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR,Location.create(3235, 3213, 0)))
         GeneralBotCreator(FarmerThiever(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR,Location.create(3094,3243,0)))
         GeneralBotCreator(FarmerThiever(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR,Location.create(3094,3243,0)))
-        GeneralBotCreator(DraynorWillows(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.values().random(),Location.create(3094, 3245, 0)))
-        GeneralBotCreator(DraynorWillows(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.values().random(),Location.create(3094, 3245, 0)))
-        GeneralBotCreator(DraynorWillows(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.values().random(),Location.create(3094, 3245, 0)))
         GeneralBotCreator(DraynorFisher(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR,Location.create(3095, 3246, 0)))
         GeneralBotCreator(DraynorFisher(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR,Location.create(3095, 3246, 0)))
         GeneralBotCreator(DraynorFisher(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR,Location.create(3095, 3246, 0)))
@@ -81,10 +76,6 @@ object ImmerseWorld {
             GeneralBotCreator(GreenDragonKiller(CombatStyle.MELEE), assembler.assembleMeleeDragonBot(CombatBotAssembler.Tier.MED,wilderness))
             GeneralBotCreator(GreenDragonKiller(CombatStyle.RANGE), assembler.assembleRangedBot(CombatBotAssembler.Tier.HIGH,wilderness))
         }
-    }
-
-    fun immerseFalador(){
-        GeneralBotCreator(CoalMiner(), skillingBotAssembler.produce(SkillingBotAssembler.Wealth.POOR,Location.create(3037, 9737, 0)))
     }
 
     fun immerseSlayer(){
