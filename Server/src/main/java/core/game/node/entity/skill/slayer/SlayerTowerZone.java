@@ -6,7 +6,7 @@ import core.game.interaction.Option;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
@@ -44,7 +44,7 @@ public final class SlayerTowerZone extends MapZone implements Plugin<Object> {
 				return true;
 			}
 			if (target.getId() == 10527 || target.getId() == 10528) {
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) target);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) target);
 				return true;
 			}
 		}

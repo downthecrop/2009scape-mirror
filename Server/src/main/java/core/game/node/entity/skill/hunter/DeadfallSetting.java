@@ -5,8 +5,8 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -59,7 +59,7 @@ public final class DeadfallSetting extends TrapSetting {
 	@Override
 	public boolean clear(TrapWrapper wrapper, int type) {
 		if (super.clear(wrapper, type)) {
-			ObjectBuilder.add(wrapper.getObject().transform(getNodeForObjectId(wrapper.isCaught() ? wrapper.getOriginalId() : wrapper.getObject().getId())));
+			SceneryBuilder.add(wrapper.getObject().transform(getNodeForObjectId(wrapper.isCaught() ? wrapper.getOriginalId() : wrapper.getObject().getId())));
 			return true;
 		}
 		return false;
@@ -118,7 +118,7 @@ public final class DeadfallSetting extends TrapSetting {
 	}
 
 	@Override
-	public GameObject buildObject(Player player, Node node) {
+	public Scenery buildObject(Player player, Node node) {
 		return node.asObject().transform(getObjectForNode(node));
 	}
 
@@ -136,7 +136,7 @@ public final class DeadfallSetting extends TrapSetting {
 	 * Gets the list of locations.
 	 * @return the locations.
 	 */
-	private List<Location> getLocations(GameObject object) {
+	private List<Location> getLocations(Scenery object) {
 		List<Location> locs = new ArrayList<>(20);
 		if (object.getDirection() == Direction.NORTH) {
 			locs.add(object.getLocation().transform(1, -1, 0));

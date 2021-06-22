@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.construction;
 
 
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Region;
 import core.game.world.map.RegionChunk;
 import core.game.world.map.RegionManager;
@@ -937,7 +937,7 @@ public enum RoomProperties {
 	 * @return {@code True} if so.
 	 */
 	private boolean isExit(RegionChunk chunk, int x, int y) {
-		for (GameObject object : chunk.getObjects(x, y)) {
+		for (Scenery object : chunk.getObjects(x, y)) {
 			if (object != null && (object.getId() == 15313 || object.getId() == 15314 || object.getId() == 15317)) {
 				return true;
 			}

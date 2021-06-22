@@ -4,8 +4,8 @@ import core.cache.def.impl.ItemDefinition
 import core.game.component.Component
 import core.game.content.dialogue.FacialExpression
 import core.game.node.Node
-import core.game.node.`object`.GameObject
-import core.game.node.`object`.ObjectBuilder
+import core.game.node.`object`.Scenery
+import core.game.node.`object`.SceneryBuilder
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.Animator
@@ -251,11 +251,11 @@ object ContentAPI {
      * @param for_ticks the number of ticks the object should be replaced for. Use -1 for permanent.
      */
     @JvmStatic
-    fun replaceObject(toReplace: GameObject, with: Int, for_ticks: Int) {
+    fun replaceObject(toReplace: Scenery, with: Int, for_ticks: Int) {
         if (for_ticks == -1) {
-            ObjectBuilder.replace(toReplace, toReplace.transform(with))
+            SceneryBuilder.replace(toReplace, toReplace.transform(with))
         } else {
-            ObjectBuilder.replace(toReplace, toReplace.transform(with), for_ticks)
+            SceneryBuilder.replace(toReplace, toReplace.transform(with), for_ticks)
         }
         toReplace.isActive = false
     }
@@ -341,7 +341,7 @@ object ContentAPI {
      * Send an object animation
      */
     @JvmStatic
-    fun animateObject(player: Player, obj: GameObject, animationId: Int, global: Boolean = false) {
+    fun animateObject(player: Player, obj: Scenery, animationId: Int, global: Boolean = false) {
         player.packetDispatch.sendObjectAnimation(obj, getAnimation(animationId), global)
     }
 
@@ -684,7 +684,7 @@ object ContentAPI {
     fun adjustCharge(node: Node, amount: Int){
         when(node){
             is Item -> node.charge += amount
-            is GameObject -> node.charge += amount
+            is Scenery -> node.charge += amount
             else -> SystemLogger.logErr("Attempt to adjust the charge of invalid type: ${node.javaClass.simpleName}")
         }
     }
@@ -698,7 +698,7 @@ object ContentAPI {
     fun getCharge(node: Node): Int{
         when(node){
             is Item -> return node.charge
-            is GameObject -> return node.charge
+            is Scenery -> return node.charge
             else -> SystemLogger.logErr("Attempt to get charge of invalid type: ${node.javaClass.simpleName}").also { return -1 }
         }
     }
@@ -712,7 +712,7 @@ object ContentAPI {
     fun setCharge(node: Node, charge: Int){
         when(node){
             is Item -> node.charge = charge
-            is GameObject -> node.charge = charge
+            is Scenery -> node.charge = charge
             else -> SystemLogger.logErr("Attempt to set the charge of invalid type: ${node.javaClass.simpleName}")
         }
     }

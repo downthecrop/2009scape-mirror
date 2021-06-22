@@ -5,7 +5,7 @@ import core.game.content.activity.ActivityManager;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
@@ -31,7 +31,7 @@ public final class BHOptionHandler extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		GameObject object = (GameObject) node;
+		Scenery object = (Scenery) node;
 		final BountyHunterActivity activity = player.getExtension(BountyHunterActivity.class);
 		switch (object.getId()) {
 		case 28119:

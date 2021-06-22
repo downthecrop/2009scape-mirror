@@ -17,8 +17,8 @@ import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.TeleportManager.TeleportType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -126,7 +126,7 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 			case 25018:
 			case 25020:
 			case 25021:
-				pushThrough(p, (GameObject) target);
+				pushThrough(p, (Scenery) target);
 				return true;
 			case 25014:
 				p.getTeleporter().send(Location.create(2427, 4446, 0), TeleportType.PURO_PURO);
@@ -141,7 +141,7 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void pushThrough(final Player player, final GameObject object) {
+	private void pushThrough(final Player player, final Scenery object) {
 		if (player.getSkills().getStaticLevel(Skills.HUNTER) < 17) {
 			player.sendMessage("You need a Hunting level of at least 17 to enter the maze.");
 			return;
@@ -376,9 +376,9 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 		private final Location[] locations;
 
 		/**
-		 * The game objects.
+		 * The scenerys.
 		 */
-		private GameObject[] objects = new GameObject[2];
+		private Scenery[] objects = new Scenery[2];
 
 		/**
 		 * The rotation.
@@ -415,8 +415,8 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 		public void init() {
 			int index = 0;
 			for (Location location : locations) {
-				GameObject object = new GameObject(25021, location, 22, rot);
-				ObjectBuilder.add(object);
+				Scenery object = new Scenery(25021, location, 22, rot);
+				SceneryBuilder.add(object);
 				objects[index] = object;
 				index++;
 			}
@@ -428,15 +428,15 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 		 */
 		public void whilt() {
 			busyTicks = GameWorld.getTicks() + 5;
-			for (GameObject object : objects) {
+			for (Scenery object : objects) {
 				if (object == null) {
 					continue;
 				}
 				if (removed) {
-					ObjectBuilder.add(object);
+					SceneryBuilder.add(object);
 					continue;
 				}
-				ObjectBuilder.remove(object);
+				SceneryBuilder.remove(object);
 			}
 			removed = !removed;
 			setNextWhilt();

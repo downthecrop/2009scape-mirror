@@ -8,7 +8,7 @@ import core.game.content.dialogue.FacialExpression;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.skill.Skills;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.*;
 import core.game.world.map.build.DynamicRegion;
@@ -463,7 +463,7 @@ public final class HouseManager {
 	 * @param object The object.
 	 * @return The hotspot.
 	 */
-	public Hotspot getHotspot(GameObject object) {
+	public Hotspot getHotspot(Scenery object) {
 		Room room = getRoom(object.getLocation());
 		if (room == null) {
 			return null;

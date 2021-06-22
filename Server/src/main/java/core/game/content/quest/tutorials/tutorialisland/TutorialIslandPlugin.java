@@ -9,7 +9,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -54,17 +54,17 @@ public class TutorialIslandPlugin extends OptionHandler {
 				player.getDialogueInterpreter().open(((NPC) node).getId(), ((NPC) node));
 				return true;
 			}
-		} else if (node instanceof GameObject) {
+		} else if (node instanceof Scenery) {
 			if (TutorialSession.getExtension(player).getStage() == 16) {
 				int first = node.getId();
 				int second = first == 3015 ? 3016 : 3015;
-				if (DoorActionHandler.autowalkFence(player, (GameObject) node, first, second)) {
+				if (DoorActionHandler.autowalkFence(player, (Scenery) node, first, second)) {
 					TutorialStage.load(player, 17, false);
 				}
 				return true;
 			}
 			final int tut_stage = TutorialSession.getExtension(player).getStage();
-			final GameObject object = (GameObject) node;
+			final Scenery object = (Scenery) node;
 			if (object.getId() == 3028) {
 				return true;
 			}
@@ -163,8 +163,8 @@ public class TutorialIslandPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		if (n instanceof GameObject) {
-			GameObject object = (GameObject) n;
+		if (n instanceof Scenery) {
+			Scenery object = (Scenery) n;
 			if (object.getDefinition().hasAction("open")) {
 				return DoorActionHandler.getDestination((Entity) node, object);
 			}

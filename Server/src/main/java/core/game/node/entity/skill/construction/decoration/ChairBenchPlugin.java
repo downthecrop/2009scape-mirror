@@ -6,7 +6,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -60,7 +60,7 @@ public final class ChairBenchPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		GameObject object = (GameObject) node;
+		Scenery object = (Scenery) node;
 		int animId = -1;
 		int sitAnimId = -1;
 		for (Object[] data : CHAIRS) {

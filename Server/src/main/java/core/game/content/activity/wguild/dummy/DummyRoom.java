@@ -8,8 +8,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -32,12 +32,12 @@ public final class DummyRoom extends OptionHandler {
 	 * @author Emperor
 	 */
 	private static enum Dummy {
-		STAB(new GameObject(15629, 2857, 3549, 0, 10, 2), -1, WeaponInterface.BONUS_STAB), SLASH(new GameObject(15625, 2858, 3554, 0), -1, WeaponInterface.BONUS_SLASH), CRUSH(new GameObject(15628, 2859, 3549, 0, 10, 2), -1, WeaponInterface.BONUS_CRUSH), CONTROLLED(new GameObject(15627, 2855, 3552, 0, 10, 3), WeaponInterface.STYLE_CONTROLLED, -1), DEFENCE(new GameObject(15630, 2855, 3550, 0, 10, 3), WeaponInterface.STYLE_DEFENSIVE, -1), AGGRESSIVE(new GameObject(15626, 2860, 3553, 0, 10, 1), WeaponInterface.STYLE_AGGRESSIVE, -1), ACCURATE(new GameObject(15624, 2856, 3554, 0), WeaponInterface.STYLE_ACCURATE, -1), ;
+		STAB(new Scenery(15629, 2857, 3549, 0, 10, 2), -1, WeaponInterface.BONUS_STAB), SLASH(new Scenery(15625, 2858, 3554, 0), -1, WeaponInterface.BONUS_SLASH), CRUSH(new Scenery(15628, 2859, 3549, 0, 10, 2), -1, WeaponInterface.BONUS_CRUSH), CONTROLLED(new Scenery(15627, 2855, 3552, 0, 10, 3), WeaponInterface.STYLE_CONTROLLED, -1), DEFENCE(new Scenery(15630, 2855, 3550, 0, 10, 3), WeaponInterface.STYLE_DEFENSIVE, -1), AGGRESSIVE(new Scenery(15626, 2860, 3553, 0, 10, 1), WeaponInterface.STYLE_AGGRESSIVE, -1), ACCURATE(new Scenery(15624, 2856, 3554, 0), WeaponInterface.STYLE_ACCURATE, -1), ;
 
 		/**
 		 * The object.
 		 */
-		private final GameObject object;
+		private final Scenery object;
 
 		/**
 		 * The attack style to be used on this dummy.
@@ -54,7 +54,7 @@ public final class DummyRoom extends OptionHandler {
 		 * @param object The object.
 		 * @param attackStyle The attack style.
 		 */
-		private Dummy(GameObject object, int attackStyle, int bonusType) {
+		private Dummy(Scenery object, int attackStyle, int bonusType) {
 			this.object = object;
 			this.attackStyle = attackStyle;
 			this.bonusType = bonusType;
@@ -64,7 +64,7 @@ public final class DummyRoom extends OptionHandler {
 		 * Gets the object.
 		 * @return The object.
 		 */
-		public GameObject getObject() {
+		public Scenery getObject() {
 			return object;
 		}
 
@@ -103,7 +103,7 @@ public final class DummyRoom extends OptionHandler {
 		}
 		GameWorld.getPulser().submit(new Pulse(10) {
 			boolean activeDummy;
-			GameObject controlled;
+			Scenery controlled;
 
 			@Override
 			public boolean pulse() {
@@ -111,12 +111,12 @@ public final class DummyRoom extends OptionHandler {
 					setDelay(10);
 					timeStamp = GameWorld.getTicks();
 					dummy = RandomFunction.getRandomElement(Dummy.values());
-					ObjectBuilder.replace(RegionManager.getObject(dummy.getObject().getLocation()), dummy.getObject(), 11);
+					SceneryBuilder.replace(RegionManager.getObject(dummy.getObject().getLocation()), dummy.getObject(), 11);
 					activeDummy = true;
 					if (dummy == Dummy.CONTROLLED && controlled == null) {
 						Location l = Location.create(2860, 3551, 0);
-						controlled = new GameObject(dummy.getObject().getId(), l, 10, 1);
-						ObjectBuilder.replace(RegionManager.getObject(l), controlled, 11);
+						controlled = new Scenery(dummy.getObject().getId(), l, 10, 1);
+						SceneryBuilder.replace(RegionManager.getObject(l), controlled, 11);
 					}
 					return false;
 				}
@@ -139,7 +139,7 @@ public final class DummyRoom extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		GameObject object = (GameObject) node;
+		Scenery object = (Scenery) node;
 		if (object.getId() == 15656) {
 			player.getInterfaceManager().open(new Component(412));
 			return true;

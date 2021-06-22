@@ -6,7 +6,7 @@ import core.game.node.entity.skill.agility.AgilityShortcut;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -29,7 +29,7 @@ public class StileShortcut extends AgilityShortcut {
 	}
 
 	@Override
-	public void run(final Player player, final GameObject object, String option, boolean failed) {
+	public void run(final Player player, final Scenery object, String option, boolean failed) {
 		player.getWalkingQueue().reset();
 		Location loc = getLocation(player, object, true);
 		player.getWalkingQueue().addPath(loc.getX(), loc.getY());
@@ -47,7 +47,7 @@ public class StileShortcut extends AgilityShortcut {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	public static void climb(final Player player, final GameObject object) {
+	public static void climb(final Player player, final Scenery object) {
 		player.lock(1);
 		int delay = 0;
 		GameWorld.getPulser().submit(new Pulse(delay, player) {
@@ -75,7 +75,7 @@ public class StileShortcut extends AgilityShortcut {
 	 * @param start if getting the start loc.
 	 * @return the location.
 	 */
-	public static Location getLocation(final Player player, final GameObject object, boolean start) {
+	public static Location getLocation(final Player player, final Scenery object, boolean start) {
 		if ((object.getDirection() == Direction.NORTH || object.getDirection() == Direction.SOUTH)) {
 			if (player.getLocation().getY() <= object.getLocation().getY()) {
 				return start ? object.getLocation() : object.getLocation().transform(0, 1, 0);
@@ -96,7 +96,7 @@ public class StileShortcut extends AgilityShortcut {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private static void handleFalconry(final Player player, GameObject object) {
+	private static void handleFalconry(final Player player, Scenery object) {
 		if (player.getLocation().equals(Location.create(2371, 3621, 0))) {
 			ActivityManager.start(player, "falconry", false);
 		} else {

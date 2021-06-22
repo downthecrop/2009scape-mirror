@@ -3,7 +3,7 @@ package core.game.node.entity.skill.construction;
 
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import rs09.game.node.entity.skill.construction.Hotspot;
 
@@ -1183,7 +1183,7 @@ public enum Decoration {
 	 * @param player The player.
 	 * @return The decoration.
 	 */
-	public static Decoration getDecoration(Player player, GameObject object) {
+	public static Decoration getDecoration(Player player, Scenery object) {
 		Location l = object.getLocation();
 		int z = l.getZ();
 		if (HouseManager.isInDungeon(player)) {

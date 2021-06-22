@@ -6,7 +6,7 @@ import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
@@ -98,7 +98,7 @@ public final class SummoningCreator {
 		/**
 		 * Represents the object.
 		 */
-		private GameObject object;
+		private Scenery object;
 
 		/**
 		 * Represents the amount to make.

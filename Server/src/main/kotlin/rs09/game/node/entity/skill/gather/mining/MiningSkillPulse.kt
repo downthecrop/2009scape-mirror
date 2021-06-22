@@ -7,8 +7,8 @@ import core.game.content.global.SkillingPets
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage
 import core.game.node.Node
-import core.game.node.`object`.GameObject
-import core.game.node.`object`.ObjectBuilder
+import core.game.node.`object`.Scenery
+import core.game.node.`object`.SceneryBuilder
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.drop.DropFrequency
 import core.game.node.entity.player.Player
@@ -17,11 +17,9 @@ import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.entity.skill.gather.mining.MiningNode
 import core.game.node.item.ChanceItem
-import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
-import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import core.tools.StringUtils
@@ -29,7 +27,6 @@ import org.rs09.consts.Items
 import rs09.game.node.entity.player.info.stats.STATS_BASE
 import rs09.game.node.entity.player.info.stats.STATS_ROCKS
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks
-import rs09.tools.stringtools.colorize
 
 /**
  * Mining skill pulse
@@ -196,7 +193,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
 
             //transform to depleted version
             if (!isMiningEssence && resource!!.getRespawnRate() != 0) {
-                ObjectBuilder.replace(node as GameObject, GameObject(resource!!.emptyId, node.getLocation(), node.rotation), resource!!.respawnDuration)
+                SceneryBuilder.replace(node as Scenery, Scenery(resource!!.emptyId, node.getLocation(), node.rotation), resource!!.respawnDuration)
                 node.setActive(false)
                 return true
             }

@@ -6,7 +6,7 @@ import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.node.entity.skill.agility.AgilityShortcut;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -62,7 +62,7 @@ public class LogBalanceShortcut extends AgilityShortcut {
 	}
 
 	@Override
-	public void run(Player player, GameObject object, String option, boolean failed) {
+	public void run(Player player, Scenery object, String option, boolean failed) {
 		Location destination = start;
 		if (player.getLocation().getDistance(start) < player.getLocation().getDistance(end)) {
 			destination = end;

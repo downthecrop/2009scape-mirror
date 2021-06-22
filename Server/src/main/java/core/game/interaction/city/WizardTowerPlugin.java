@@ -23,7 +23,7 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -102,7 +102,7 @@ public final class WizardTowerPlugin extends OptionHandler {
                     ClimbActionHandler.climb(player, new Animation(828), new Location(3092, 3361, 0));
                     return true;
                 }
-                if (!Location.create(3103, 9576, 0).equals(((GameObject) node).getLocation())) {
+                if (!Location.create(3103, 9576, 0).equals(((Scenery) node).getLocation())) {
                     return ObjectDefinition.getOptionHandler(2147, "climb-up").handle(player, node, option);
                 }
                 player.getProperties().setTeleportLocation(GROUND_FLOOR);
@@ -112,9 +112,9 @@ public final class WizardTowerPlugin extends OptionHandler {
                 break;
             case "open":
                 if (node.getLocation().equals(new Location(3107, 3162, 0))) {
-                    DoorActionHandler.handleAutowalkDoor(player, (GameObject) node, player.getLocation().getX() >= 3107 ? Location.create(3106, 3161, 0) : Location.create(3108, 3163, 0));
+                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node, player.getLocation().getX() >= 3107 ? Location.create(3106, 3161, 0) : Location.create(3108, 3163, 0));
                 } else {
-                    DoorActionHandler.handleDoor(player, (GameObject) node);
+                    DoorActionHandler.handleDoor(player, (Scenery) node);
                 }
                 break;
         }
@@ -123,8 +123,8 @@ public final class WizardTowerPlugin extends OptionHandler {
 
     @Override
     public Location getDestination(Node node, Node n) {
-        if (n instanceof GameObject) {
-            final GameObject object = (GameObject) n;
+        if (n instanceof Scenery) {
+            final Scenery object = (Scenery) n;
             if (object.getId() == 11993 && object.getLocation().equals(new Location(3107, 3162, 0))) {
                 return node.getLocation().getX() >= 3107 ? Location.create(3108, 3163, 0) : Location.create(3106, 3161, 0);
             }

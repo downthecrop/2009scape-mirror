@@ -10,8 +10,8 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import rs09.game.world.GameWorld;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
@@ -128,8 +128,8 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 		}
 		// GameObject originalOnSpot =
 		// RegionManager.getObject(player.getLocation());
-		final GameObject object = new GameObject(fire.getFireId(), player.getLocation());
-		ObjectBuilder.add(object, fire.getLife(), getAsh(player, fire, object));
+		final Scenery object = new Scenery(fire.getFireId(), player.getLocation());
+		SceneryBuilder.add(object, fire.getLife(), getAsh(player, fire, object));
 		GroundItemManager.destroy(groundItem);
 		player.moveStep();
 		player.faceLocation(FaceLocationFlag.getFaceLocation(player, object));
@@ -189,7 +189,7 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 	 * @param object the object.
 	 * @return {@code GroundItem} the itemm.
 	 */
-	public static GroundItem getAsh(final Player player, Log fire, final GameObject object) {
+	public static GroundItem getAsh(final Player player, Log fire, final Scenery object) {
 		final GroundItem ash = new GroundItem(new Item(592), object.getLocation(), player);
 		ash.setDecayTime(fire.getLife() + 200);
 		return ash;

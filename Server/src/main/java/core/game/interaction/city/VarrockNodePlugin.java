@@ -9,8 +9,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -52,14 +52,14 @@ public final class VarrockNodePlugin extends OptionHandler {
 		ObjectDefinition.forId(29534).getHandlers().put("option:enter", this);
 		ObjectDefinition.forId(17985).getHandlers().put("option:climb-down", this);
 		ObjectDefinition.forId(24366).getHandlers().put("option:climb-up", this);
-		ObjectBuilder.add(new GameObject(17974, new Location(3204, 9911), 10, 0));
+		SceneryBuilder.add(new Scenery(17974, new Location(3204, 9911), 10, 0));
 		new KnockatDoorDialogue().init();
 		return this;
 	}
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		final int id = node instanceof GameObject ? ((GameObject) node).getId() : ((Item) node).getId();
+		final int id = node instanceof Scenery ? ((Scenery) node).getId() : ((Item) node).getId();
 		switch (id) {
 			case 24366:
 				ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, new Location(3237, 3459));
@@ -90,7 +90,7 @@ public final class VarrockNodePlugin extends OptionHandler {
 					ClimbActionHandler.climb(player, new Animation(827), Location.create(3096, 3432, 0));
 					return true;
 				}
-				ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 				return true;
 			case 5581:
 			case 36974:
@@ -98,18 +98,18 @@ public final class VarrockNodePlugin extends OptionHandler {
 					player.getPacketDispatch().sendMessage("You don't have enough inventory space.");
 					return true;
 				}
-				ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(5582), 5000);
+				SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(5582), 5000);
 				break;
 			case 24357:
 				if (player.getLocation().getDistance(Location.create(3188, 3358, 0)) < 3) {
 					ClimbActionHandler.climb(player, new Animation(828), Location.create(3188, 3354, 1));
 					return true;
 				}
-				if (((GameObject) node).getLocation().equals(new Location(3156, 3435, 0))) {
+				if (((Scenery) node).getLocation().equals(new Location(3156, 3435, 0))) {
 					ClimbActionHandler.climb(player, new Animation(828), Location.create(3155, 3435, 1));
 					return true;
 				}
-				ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 				return true;
 
 			case 24427: //varrock museum stairs that lead upstairs
@@ -131,7 +131,7 @@ public final class VarrockNodePlugin extends OptionHandler {
 					return true;
 				}
 				player.getInventory().add(SPADE);
-				ObjectBuilder.replace((GameObject) node, ((GameObject) node).transform(0), 250);
+				SceneryBuilder.replace((Scenery) node, ((Scenery) node).transform(0), 250);
 				return true;
 		}
 		return true;

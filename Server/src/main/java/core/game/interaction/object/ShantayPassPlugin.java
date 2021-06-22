@@ -12,7 +12,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -49,7 +49,7 @@ public class ShantayPassPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		final int id = node instanceof GameObject ? ((GameObject) node).getId() : ((NPC) node).getId();
+		final int id = node instanceof Scenery ? ((Scenery) node).getId() : ((NPC) node).getId();
 		switch (option) {
 		case "open":
 			if (id == 2693) {
@@ -63,7 +63,7 @@ public class ShantayPassPlugin extends OptionHandler {
 				// need to remove.
 			}
 			if (!player.getAttribute("shantay-jail", false)) {
-				DoorActionHandler.handleDoor(player, (GameObject) node);
+				DoorActionHandler.handleDoor(player, (Scenery) node);
 				return true;
 			} else {
 				player.getDialogueInterpreter().open(836, null, true);
@@ -96,8 +96,8 @@ public class ShantayPassPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		if (n instanceof GameObject) {
-			final GameObject object = (GameObject) n;
+		if (n instanceof Scenery) {
+			final Scenery object = (Scenery) n;
 			if (object.getId() == 35543) {
 				return object.getLocation().transform(-1, node.getLocation().getY() > n.getLocation().getY() ? 1 : -1, 0);
 			} else if (object.getId() == 35544) {

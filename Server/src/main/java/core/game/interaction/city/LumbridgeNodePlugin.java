@@ -14,7 +14,7 @@ import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -50,7 +50,7 @@ public final class LumbridgeNodePlugin extends OptionHandler {
 
     @Override
     public boolean handle(final Player player, Node node, String option) {
-        int id = ((GameObject) node).getId();
+        int id = ((Scenery) node).getId();
         switch (id) {
             case 29355:
                 if (node.getLocation().getX() == 3209) {
@@ -64,7 +64,7 @@ public final class LumbridgeNodePlugin extends OptionHandler {
                     player.getPacketDispatch().sendMessage("You need a training bow and arrow to practice here.");
                     return true;
                 }
-                player.getPulseManager().run(new ArcheryTargetPulse(player, (GameObject) node));
+                player.getPulseManager().run(new ArcheryTargetPulse(player, (Scenery) node));
                 return true;
             case 36978:
                 player.lock();
@@ -82,7 +82,7 @@ public final class LumbridgeNodePlugin extends OptionHandler {
                                 case 0:
                                 	player.lock();
                                     player.sendMessage("You start cranking the lever.");
-                                    player.getPacketDispatch().sendObjectAnimation(((GameObject) node), new Animation(9979));
+                                    player.getPacketDispatch().sendObjectAnimation(((Scenery) node), new Animation(9979));
                                     player.animate(new Animation(9977));
                                     break;
                                 case 8:
@@ -122,8 +122,8 @@ public final class LumbridgeNodePlugin extends OptionHandler {
 
     @Override
     public Location getDestination(Node node, Node n) {
-        if (n instanceof GameObject) {
-            final GameObject object = (GameObject) n;
+        if (n instanceof Scenery) {
+            final Scenery object = (Scenery) n;
             if (object.getId() == 36976) {
                 return Location.create(3243, 3205, 2);
             } else if (object.getId() == 37095) {
@@ -147,9 +147,9 @@ public final class LumbridgeNodePlugin extends OptionHandler {
         private final Player player;
 
         /**
-         * Represents the game object.
+         * Represents the scenery.
          */
-        private final GameObject object;
+        private final Scenery object;
 
         /**
          * Constructs a new {@code ArcheryCompetitionPulse} {@code Object}.
@@ -157,7 +157,7 @@ public final class LumbridgeNodePlugin extends OptionHandler {
          * @param player the player.
          * @param object the object.
          */
-        public ArcheryTargetPulse(final Player player, final GameObject object) {
+        public ArcheryTargetPulse(final Player player, final Scenery object) {
             super(1, player, object);
             this.player = player;
             this.object = object;

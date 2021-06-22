@@ -2,7 +2,7 @@ package rs09.game.node.entity.skill.agility
 
 import core.cache.def.impl.ObjectDefinition
 import core.game.node.Node
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.agility.AgilityCourse
@@ -30,7 +30,7 @@ class GnomeStrongholdCourse
 @JvmOverloads constructor(player: Player? = null) : AgilityCourse(player, 7, 39.0) {
     override fun handle(player: Player, node: Node, option: String): Boolean {
         getCourse(player) // Sets the extension.
-        val `object` = node as GameObject
+        val `object` = node as Scenery
         when (`object`.id) {
             2295 -> {
                 TRAINERS[0]!!.sendChat("Okay get over that log, quick quick!")
@@ -101,7 +101,7 @@ class GnomeStrongholdCourse
     }
 
     override fun getDestination(node: Node, n: Node): Location? {
-        val `object` = n as GameObject
+        val `object` = n as Scenery
         when (`object`.id) {
             2295 -> return Location.create(2474, 3436, 0)
             2286 -> {

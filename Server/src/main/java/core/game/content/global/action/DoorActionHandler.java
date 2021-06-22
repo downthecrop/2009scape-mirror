@@ -6,8 +6,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.object.Constructed;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
@@ -38,14 +38,14 @@ public final class DoorActionHandler {
      * @param player The player.
      * @param object The object.
      */
-    public static void handleDoor(final Player player, final GameObject object) {
-        final GameObject second = (object.getId() == 1530 || object.getId() == 1531) ? null : getSecondDoor(object, player);
-        GameObject o = null;
+    public static void handleDoor(final Player player, final Scenery object) {
+        final Scenery second = (object.getId() == 1530 || object.getId() == 1531) ? null : getSecondDoor(object, player);
+        Scenery o = null;
         if (object instanceof Constructed && (o = ((Constructed) object).getReplaced()) != null) {
             player.getAudioManager().send(new Audio(43));
-            ObjectBuilder.replace(object, o);
+            SceneryBuilder.replace(object, o);
             if (second instanceof Constructed && (o = ((Constructed) second).getReplaced()) != null) {
-                ObjectBuilder.replace(second, o);
+                SceneryBuilder.replace(second, o);
                 return;
             }
             return;
@@ -63,7 +63,7 @@ public final class DoorActionHandler {
             int firstDir = (object.getRotation() + 3) % 4;
             Point p = getCloseRotation(object);
             Location firstLoc = object.getLocation().transform((int) p.getX(), (int) p.getY(), 0);
-            ObjectBuilder.replace(object, object.transform(d.getReplaceId(), firstDir, firstLoc));
+            SceneryBuilder.replace(object, object.transform(d.getReplaceId(), firstDir, firstLoc));
             return;
         }
         DoorConfigLoader.Door d = DoorConfigLoader.Companion.forId(object.getId());
@@ -91,11 +91,11 @@ public final class DoorActionHandler {
      * @param object The door object.
      * @return
      */
-    public static boolean handleAutowalkDoor(final Entity entity, final GameObject object, final Location endLocation) {
+    public static boolean handleAutowalkDoor(final Entity entity, final Scenery object, final Location endLocation) {
         if (object.getCharge() == IN_USE_CHARGE) {
             return false;
         }
-        final GameObject second = (object.getId() == 3) ? null : getSecondDoor(object, entity);
+        final Scenery second = (object.getId() == 3) ? null : getSecondDoor(object, entity);
         entity.lock(4);
         final Location loc = entity.getLocation();
         entity.addExtension(LogoutTask.class, new LocationLogoutTask(4, loc));
@@ -150,7 +150,7 @@ public final class DoorActionHandler {
      * @param entity the entity.
      * @param object the object.
      */
-    public static boolean handleAutowalkDoor(final Entity entity, final GameObject object) {
+    public static boolean handleAutowalkDoor(final Entity entity, final Scenery object) {
         return handleAutowalkDoor(entity, object, getEndLocation(entity, object));
     }
 
@@ -161,10 +161,10 @@ public final class DoorActionHandler {
      * @param object the object.
      * @return the end location.
      */
-    public static Location getEndLocation(Entity entity, GameObject object){
+    public static Location getEndLocation(Entity entity, Scenery object){
         return getEndLocation(entity,object,false);
     }
-    public static Location getEndLocation(Entity entity, GameObject object, Boolean isAutoWalk) {
+    public static Location getEndLocation(Entity entity, Scenery object, Boolean isAutoWalk) {
         Location l = object.getLocation();
         Location end = DestinationFlag.OBJECT.getDestination(entity,object);
         switch (object.getRotation()) {
@@ -198,11 +198,11 @@ public final class DoorActionHandler {
      * @param door The door.
      * @return The destination location.
      */
-    public static Location getDestination(Entity entity, GameObject door) {
+    public static Location getDestination(Entity entity, Scenery door) {
         Location l = door.getLocation();
         int rotation = door.getRotation();
         if (door instanceof Constructed && door.getDefinition().hasAction("close")) {
-            GameObject o = ((Constructed) door).getReplaced();
+            Scenery o = ((Constructed) door).getReplaced();
             if (o != null) {
                 l = o.getLocation();
                 rotation = o.getRotation();
@@ -272,7 +272,7 @@ public final class DoorActionHandler {
      * @param restoreTicks    The amount of ticks before the door(s) should be
      *                        closed again.
      */
-    public static void open(GameObject object, GameObject second, int replaceId, int secondReplaceId, boolean clip, int restoreTicks, boolean fence) {
+    public static void open(Scenery object, Scenery second, int replaceId, int secondReplaceId, boolean clip, int restoreTicks, boolean fence) {
         if(GameWorld.getSettings().getIncreased_door_time()){
             restoreTicks *= 5;
         }
@@ -287,7 +287,7 @@ public final class DoorActionHandler {
                 firstDir = 3;
                 firstLoc = firstLoc.transform(0, 1, 0);
             }
-            ObjectBuilder.replace(object, object.transform(replaceId, firstDir, firstLoc), restoreTicks, clip);
+            SceneryBuilder.replace(object, object.transform(replaceId, firstDir, firstLoc), restoreTicks, clip);
             return;
         }
         second = second.getWrapper();
@@ -310,8 +310,8 @@ public final class DoorActionHandler {
             secondDir = (secondDir + 2) % 4;
         }
         Location secondLoc = second.getLocation().transform((int) p.getX(), (int) p.getY(), 0);
-        ObjectBuilder.replace(object, object.transform(replaceId, firstDir, firstLoc), restoreTicks, clip);
-        ObjectBuilder.replace(second, second.transform(secondReplaceId, secondDir, secondLoc), restoreTicks, clip);
+        SceneryBuilder.replace(object, object.transform(replaceId, firstDir, firstLoc), restoreTicks, clip);
+        SceneryBuilder.replace(second, second.transform(secondReplaceId, secondDir, secondLoc), restoreTicks, clip);
     }
 
     /**
@@ -325,7 +325,7 @@ public final class DoorActionHandler {
      * @param restoreTicks    The amount of ticks before the door(s) should be
      *                        closed again.
      */
-    private static void openFence(GameObject object, GameObject second, int replaceId, int secondReplaceId, boolean clip, int restoreTicks) {
+    private static void openFence(Scenery object, Scenery second, int replaceId, int secondReplaceId, boolean clip, int restoreTicks) {
         Direction offset = Direction.getDirection(second.getLocation().getX() - object.getLocation().getX(), second.getLocation().getY() - object.getLocation().getY());
         int firstDir = (object.getRotation() + 3) % 4;
         Point p = getRotationPoint(object.getRotation());
@@ -347,21 +347,21 @@ public final class DoorActionHandler {
         if ((object.getId() == 36917 || object.getId() == 36919)) {
             switch (object.getDirection()) {
                 case SOUTH:
-                    ObjectBuilder.replace(object, object.transform(36919, firstDir, firstLoc), restoreTicks, true);
-                    ObjectBuilder.replace(second, second.transform(36917, secondDir, secondLoc), restoreTicks, true);
+                    SceneryBuilder.replace(object, object.transform(36919, firstDir, firstLoc), restoreTicks, true);
+                    SceneryBuilder.replace(second, second.transform(36917, secondDir, secondLoc), restoreTicks, true);
                     break;
                 case EAST:
-                    ObjectBuilder.replace(object, object.transform(36917, firstDir, firstLoc), restoreTicks, true);
-                    ObjectBuilder.replace(second, second.transform(36919, secondDir, secondLoc), restoreTicks, true);
+                    SceneryBuilder.replace(object, object.transform(36917, firstDir, firstLoc), restoreTicks, true);
+                    SceneryBuilder.replace(second, second.transform(36919, secondDir, secondLoc), restoreTicks, true);
                     break;
                 default:
-                    ObjectBuilder.replace(object, object.transform(36919, firstDir, firstLoc), restoreTicks, true);
-                    ObjectBuilder.replace(second, second.transform(36917, secondDir, secondLoc), restoreTicks, true);
+                    SceneryBuilder.replace(object, object.transform(36919, firstDir, firstLoc), restoreTicks, true);
+                    SceneryBuilder.replace(second, second.transform(36917, secondDir, secondLoc), restoreTicks, true);
                     break;
             }
         } else {
-            ObjectBuilder.replace(object, object.transform(replaceId, firstDir, firstLoc), restoreTicks, clip);
-            ObjectBuilder.replace(second, second.transform(secondReplaceId, secondDir, secondLoc), restoreTicks, clip);
+            SceneryBuilder.replace(object, object.transform(replaceId, firstDir, firstLoc), restoreTicks, clip);
+            SceneryBuilder.replace(second, second.transform(secondReplaceId, secondDir, secondLoc), restoreTicks, clip);
         }
     }
 
@@ -373,8 +373,8 @@ public final class DoorActionHandler {
      * @param secondReplaceId The second replace id.
      *                        closed again.
      */
-    public static boolean autowalkFence(final Entity entity, final GameObject object, final int replaceId, final int secondReplaceId) {
-        final GameObject second = getSecondDoor(object, entity);
+    public static boolean autowalkFence(final Entity entity, final Scenery object, final int replaceId, final int secondReplaceId) {
+        final Scenery second = getSecondDoor(object, entity);
         if (object.getCharge() == IN_USE_CHARGE || second == null) {
             return false;
         }
@@ -412,7 +412,7 @@ public final class DoorActionHandler {
      * @param object The object.
      * @return The point.
      */
-    private static Point getCloseRotation(GameObject object) {
+    private static Point getCloseRotation(Scenery object) {
         switch (object.getRotation()) {
             case 0:
                 return new Point(0, 1);
@@ -451,10 +451,10 @@ public final class DoorActionHandler {
      * @param object The door.
      * @return The second door, if any, {@code null} if no second door existed.
      */
-    public static GameObject getSecondDoor(GameObject object, Entity entity) {
+    public static Scenery getSecondDoor(Scenery object, Entity entity) {
         Location l = object.getLocation();
         Player player = entity instanceof Player ? (Player) entity : null;
-        GameObject o = null;
+        Scenery o = null;
         if ((o = RegionManager.getObject(l.transform(-1, 0, 0))) != null && o.getName().equals(object.getName())) {
             return o;
         }
@@ -479,7 +479,7 @@ public final class DoorActionHandler {
      * @return An int-array, with index 0 being first door rotation and index 1
      * being second door rotation.
      */
-    public static int[] getRotation(GameObject object, GameObject second, Point rp) {
+    public static int[] getRotation(Scenery object, Scenery second, Point rp) {
         if (second == null) {
             return new int[]{(object.getRotation() + 1) % 4};
         }

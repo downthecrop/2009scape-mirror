@@ -5,8 +5,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import rs09.game.system.SystemLogger;
+import core.game.node.object.Scenery;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.build.RegionFlags;
 import core.game.world.update.flag.chunk.ItemUpdateFlag;
@@ -39,9 +38,9 @@ public final class RegionPlane {
 	public static final int CHUNK_SIZE = REGION_SIZE >> 3;
 	
 	/**
-	 * Represents a removed game object.
+	 * Represents a removed scenery.
 	 */
-	public static final GameObject NULL_OBJECT = new GameObject(0, Location.create(0, 0, 0));
+	public static final Scenery NULL_OBJECT = new Scenery(0, Location.create(0, 0, 0));
 	
 	/**
 	 * The plane.
@@ -79,9 +78,9 @@ public final class RegionPlane {
 	private final List<Player> players;
 	
 	/**
-	 * The game objects.
+	 * The scenerys.
 	 */
-	private GameObject[][] objects;
+	private Scenery[][] objects;
 	
 	/**
 	 * Constructs a new {@code RegionPlane} {@code Object}.
@@ -96,7 +95,7 @@ public final class RegionPlane {
 		Location base = region.getBaseLocation();
 		this.flags = new RegionFlags(plane, base.getX(), base.getY());
 		this.projectileFlags = new RegionFlags(plane, base.getX(), base.getY(), true);
-		this.objects = new GameObject[REGION_SIZE][REGION_SIZE];
+		this.objects = new Scenery[REGION_SIZE][REGION_SIZE];
 		this.chunks = new RegionChunk[CHUNK_SIZE][CHUNK_SIZE];
 	}
 
@@ -108,13 +107,13 @@ public final class RegionPlane {
 	}
 
 	/**
-	 * Adds a game object.
+	 * Adds a scenery.
 	 * @param object The object to add.
 	 * @param x The x-coordinate.
 	 * @param y The y-coordinate.
 	 * @param landscape If this object is added through landscape parsing.
 	 */
-	public void add(GameObject object, int x, int y, boolean landscape) {
+	public void add(Scenery object, int x, int y, boolean landscape) {
 		setChunkObject(x, y, object);
 		if (landscape) {
 			objects[x][y] = object;
@@ -142,7 +141,7 @@ public final class RegionPlane {
 	}
 	
 	/**
-	 * Removes a game object.
+	 * Removes a scenery.
 	 * @param x The x-coordinate.
 	 * @param y The y-coordinate.
 	 */
@@ -151,7 +150,7 @@ public final class RegionPlane {
 	}
 
 	/**
-	 * Removes a game object.
+	 * Removes a scenery.
 	 * @param x The x-coordinate.
 	 * @param y The y-coordinate.
 	 * @param objectId The object id.
@@ -162,7 +161,7 @@ public final class RegionPlane {
 		int offsetX = x - chunkX * CHUNK_SIZE;
 		int offsetY = y - chunkY * CHUNK_SIZE;
 		RegionChunk chunk = getRegionChunk(chunkX, chunkY);
-		GameObject remove = new GameObject(0, region.getBaseLocation().transform(x, y, plane), 22, 0);
+		Scenery remove = new Scenery(0, region.getBaseLocation().transform(x, y, plane), 22, 0);
 		remove.setRenderable(false);
 		if (chunk instanceof BuildRegionChunk) {
 			int index = ((BuildRegionChunk) chunk).getIndex(offsetX, offsetY, objectId);
@@ -178,7 +177,7 @@ public final class RegionPlane {
 	 * @param y The regional y-coordinate.
 	 * @param object The object to set.
 	 */
-	private void setChunkObject(int x, int y, GameObject object) {
+	private void setChunkObject(int x, int y, Scenery object) {
 		int chunkX = x / CHUNK_SIZE;
 		int chunkY = y / CHUNK_SIZE;
 		int offsetX = x - chunkX * CHUNK_SIZE;
@@ -192,10 +191,10 @@ public final class RegionPlane {
 	}
 	
 	/**
-	 * Gets the game objects.
-	 * @return The game objects.
+	 * Gets the scenerys.
+	 * @return The scenerys.
 	 */
-	public GameObject[][] getObjects() {
+	public Scenery[][] getObjects() {
 		return objects;
 	}
 	
@@ -350,9 +349,9 @@ public final class RegionPlane {
 	 * Gets an object from a region chunk.
 	 * @param x The region x-coordinate.
 	 * @param y The region y-coordinate.
-	 * @return The game object.
+	 * @return The scenery.
 	 */
-	public GameObject getChunkObject(int x, int y) {
+	public Scenery getChunkObject(int x, int y) {
 		return getChunkObject(x, y, -1);
 	}
 
@@ -361,9 +360,9 @@ public final class RegionPlane {
 	 * @param x The region x-coordinate.
 	 * @param y The region y-coordinate.
 	 * @param objectId The object id.
-	 * @return The game object.
+	 * @return The scenery.
 	 */
-	public GameObject getChunkObject(int x, int y, int objectId) {
+	public Scenery getChunkObject(int x, int y, int objectId) {
 		int chunkX = x / CHUNK_SIZE;
 		int chunkY = y / CHUNK_SIZE;
 		int offsetX = x - chunkX * CHUNK_SIZE;
@@ -380,7 +379,7 @@ public final class RegionPlane {
 	 * Gets an object from a region chunk.
 	 * @param x The region x-coordinate.
 	 * @param y The region y-coordinate.
-	 * @return The game object.
+	 * @return The scenery.
 	 */
 	public List<GroundItem> getChunkItems(int x, int y) {
 		int chunkX = x / CHUNK_SIZE;

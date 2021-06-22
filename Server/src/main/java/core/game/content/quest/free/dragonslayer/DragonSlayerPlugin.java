@@ -15,8 +15,8 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
@@ -115,7 +115,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
 		final Quest quest = player.getQuestRepository().getQuest("Dragon Slayer");
-		final int id = node instanceof Item ? ((Item) node).getId() : node instanceof GameObject ? ((GameObject) node).getId() : ((NPC) node).getId();
+		final int id = node instanceof Item ? ((Item) node).getId() : node instanceof Scenery ? ((Scenery) node).getId() : ((NPC) node).getId();
 		switch (id) {
 		case 10560:
 			ClimbActionHandler.climb(player, new Animation(828), Location.create(3191, 3355, 0));
@@ -127,7 +127,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			if (player.getLocation().withinDistance(Location.create(2939, 9656, 0))) {
 				ClimbActionHandler.climb(player, new Animation(828), Location.create(2939, 3256, 0));
 			} else {
-				ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 				return true;
 			}
 			break;
@@ -135,7 +135,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			if (player.getLocation().getDistance(Location.create(3188, 3358, 0)) < 3) {
 				ClimbActionHandler.climb(player, new Animation(828), Location.create(3188, 3354, 1));
 			} else {
-				ClimbActionHandler.climbLadder(player, (GameObject) node, "climb-up");
+				ClimbActionHandler.climbLadder(player, (Scenery) node, "climb-up");
 			}
 			break;
 		case 1127:
@@ -206,7 +206,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
                     }
                     player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 1, 1);
                     player.getSavedData().getQuestData().setDragonSlayerAttribute("memorized", true);
-                    DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
                 }
                 break;
 		case 25154:
@@ -310,7 +310,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 		switch (id) {
 		case 2603:
 			player.getPacketDispatch().sendMessage("You open the chest.");
-			ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(2604));
+			SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(2604));
 			break;
 		case 2605:
 			ClimbActionHandler.climb(player, new Animation(827), Location.create(2933, 9640, 0));
@@ -329,7 +329,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 				break;
 			case "close":
 				player.getPacketDispatch().sendMessage("You shut the chest.");
-				ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(2603));
+				SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(2603));
 				break;
 			}
 			break;
@@ -339,7 +339,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			} else {
 				player.getInventory().remove(DragonSlayer.GREEN_KEY);
 				player.getPacketDispatch().sendMessage("The key disintegrates as it unlocks the door.");
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			break;
@@ -349,7 +349,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			} else {
 				player.getInventory().remove(DragonSlayer.PURPLE_KEY);
 				player.getPacketDispatch().sendMessage("The key disintegrates as it unlocks the door.");
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			break;
@@ -359,7 +359,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			} else {
 				player.getInventory().remove(DragonSlayer.BLUE_KEY);
 				player.getPacketDispatch().sendMessage("The key disintegrates as it unlocks the door.");
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			break;
@@ -369,7 +369,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			} else {
 				player.getInventory().remove(DragonSlayer.YELLOW_KEY);
 				player.getPacketDispatch().sendMessage("The key disintegrates as it unlocks the door.");
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			break;
@@ -378,20 +378,20 @@ public final class DragonSlayerPlugin extends OptionHandler {
 				ClimbActionHandler.climb(player, new Animation(828), Location.create(2924, 3258, 0));
 				return true;
 			}
-			ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+			ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 			return true;
 		case 1747:// ladder with wrong spawn.
 			if (player.getLocation().getDistance(new Location(2940, 3256, 1)) < 3) {
 				ClimbActionHandler.climb(player, new Animation(828), Location.create(2940, 3256, 2));
 				return true;
 			}
-			ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+			ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 			return true;
 		case 25214:// trapdoor.
 			player.getPacketDispatch().sendMessage("The trapdoor can only be opened from below.");
 			break;
 		case 25038:// melzar's maze trapdoor ladder
-			ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+			ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 			return true;
 		case 1752:
 			player.getPacketDispatch().sendMessage("The ladder is broken, I can't climb it.");
@@ -405,7 +405,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 				ClimbActionHandler.climb(player, new Animation(828), Location.create(2932, 3245, 1));
 				return true;
 			}
-			ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+			ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 			return true;
 		case 2596:// red door.
 			if (!player.getInventory().containsItem(DragonSlayer.RED_KEY)) {
@@ -413,7 +413,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			} else {
 				player.getInventory().remove(DragonSlayer.RED_KEY);
 				player.getPacketDispatch().sendMessage("The key disintegrates as it unlocks the door.");
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			break;
@@ -423,33 +423,33 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			} else {
 				player.getInventory().remove(DragonSlayer.ORANGE_KEY);
 				player.getPacketDispatch().sendMessage("The key disintegrates as it unlocks the door.");
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 		case 32968:
 		case 2602:
 			if (player.getLocation().equals(new Location(2931, 9640, 0))) {
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			if (player.getLocation().equals(new Location(2927, 9649, 0))) {
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			if (player.getLocation().equals(Location.create(2924, 9654, 0)) || player.getLocation().equals(Location.create(2938, 3252, 0))) {
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			player.getPacketDispatch().sendMessage("The door is locked.");
 			break;
 		case 2595:
 			if (player.getLocation().equals(Location.create(2940, 3248, 0))) {
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			if (player.getInventory().containsItem(DragonSlayer.MAZE_KEY)) {
 				player.getPacketDispatch().sendMessage("You use the key and the door opens.");
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			} else {
 				player.getPacketDispatch().sendMessage("This door is securely locked.");
@@ -461,8 +461,8 @@ public final class DragonSlayerPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		if (n instanceof GameObject) {
-			GameObject obj = (GameObject) n;
+		if (n instanceof Scenery) {
+			Scenery obj = (Scenery) n;
 			if (obj.getId() == 25115) {
 				if (node.getLocation().getX() <= 3049) {
 					return Location.create(3049, 9840, 0);

@@ -6,7 +6,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -29,7 +29,7 @@ public class SophanemPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final int id = node instanceof GameObject ? ((GameObject) node).getId() : ((Item) node).getId();
+		final int id = node instanceof Scenery ? ((Scenery) node).getId() : ((Item) node).getId();
 		switch (id) {
 		case 20275:
 			ClimbActionHandler.climb(player, new Animation(827), Location.create(2799, 5160, 0));

@@ -11,7 +11,7 @@ import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -72,7 +72,7 @@ public final class MageArenaPlugin extends OptionHandler {
 				player.getDialogueInterpreter().addAction(new DialogueAction() {
 					@Override
 					public void handle(Player player, int buttonId) {
-						handlePool(player, true, destination, (GameObject) node);
+						handlePool(player, true, destination, (Scenery) node);
 					}
 				});
 				return true;
@@ -81,7 +81,7 @@ public final class MageArenaPlugin extends OptionHandler {
 			GameWorld.getPulser().submit(new Pulse(1, player) {
 				@Override
 				public boolean pulse() {
-					handlePool(player, false, destination, (GameObject) node);
+					handlePool(player, false, destination, (Scenery) node);
 					return true;
 				}
 			});
@@ -89,7 +89,7 @@ public final class MageArenaPlugin extends OptionHandler {
 		case 2873:
 		case 2874:
 		case 2875:
-			GodType.forObject(node.getId()).pray(player, (GameObject) node);
+			GodType.forObject(node.getId()).pray(player, (Scenery) node);
 			break;
 		case 2412:
 		case 2413:
@@ -163,7 +163,7 @@ public final class MageArenaPlugin extends OptionHandler {
 	 * @param enter if entered.
 	 * @param dest the destination.
 	 */
-	public void handlePool(final Player player, boolean enter, final Location dest, final GameObject object) {
+	public void handlePool(final Player player, boolean enter, final Location dest, final Scenery object) {
 		final Location start = player.getAttribute("mb-loc", player.getLocation());
 		final Location end = player.getLocation().transform(player.getAttribute("mb-dir", Direction.NORTH), 1);
 		player.removeAttribute("mc-loc");

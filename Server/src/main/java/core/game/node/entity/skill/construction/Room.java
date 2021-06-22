@@ -2,8 +2,8 @@ package core.game.node.entity.skill.construction;
 
 
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.*;
 import rs09.game.node.entity.skill.construction.Hotspot;
 
@@ -133,15 +133,15 @@ public final class Room {
 				continue;
 			}
 			int index = chunk.getIndex(x, y, spot.getHotspot().getObjectId(house.getStyle()));
-			GameObject[][] objects = chunk.getObjects(index);
-			GameObject object = objects[x][y];
+			Scenery[][] objects = chunk.getObjects(index);
+			Scenery object = objects[x][y];
 			if (object != null && object.getId() == spot.getHotspot().getObjectId(house.getStyle())) {
 				if (spot.getDecorationIndex() > -1 && spot.getDecorationIndex() < spot.getHotspot().getDecorations().length) {
 					int id = spot.getHotspot().getDecorations()[spot.getDecorationIndex()].getObjectId(house.getStyle());
 					if (spot.getHotspot().getType() == BuildHotspotType.CREST) {
 						id += house.getCrest().ordinal();
 					}
-					ObjectBuilder.replace(object, object.transform(id, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)));
+					SceneryBuilder.replace(object, object.transform(id, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)));
 				}
 				else if (object.getId() == BuildHotspot.WINDOW.getObjectId(house.getStyle()) || (!house.isBuildingMode() && object.getId() == BuildHotspot.CHAPEL_WINDOW.getObjectId(house.getStyle()))) {
 					chunk.add(object.transform(house.getStyle().getWindowStyle().getObjectId(house.getStyle()), object.getRotation(), object.getType()));
@@ -169,7 +169,7 @@ public final class Room {
 		for (int i = 0; i < BuildRegionChunk.ARRAY_SIZE; i++) {
 			for (int x = 0; x < 8; x++) {
 				for (int y = 0; y < 8; y++) {
-					GameObject object = chunk.get(x, y, i);
+					Scenery object = chunk.get(x, y, i);
 					if (object != null && object.getDefinition().hasAction("Build")) {
 						if (properties.isChamber() && BuildingUtils.isDoorHotspot(object)) {
 							if (!placeDoors(house, chunk, object, housePlane, x, y, rotation)) {
@@ -198,7 +198,7 @@ public final class Room {
 	 * @param x The x-coordinate of the object.
 	 * @param y The y-coordinate of the object.
 	 */
-	private boolean placeDoors(HouseManager house, BuildRegionChunk chunk, GameObject object, int z, int x, int y, Direction rotation) {
+	private boolean placeDoors(HouseManager house, BuildRegionChunk chunk, Scenery object, int z, int x, int y, Direction rotation) {
 		int doorX;
 		int doorY;
 		switch (rotation) {
@@ -248,7 +248,7 @@ public final class Room {
 		else if (!houseExit) {
 			return false;
 		}
-		return ObjectBuilder.replace(object, object.transform(replaceId, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)), true, true);
+		return SceneryBuilder.replace(object, object.transform(replaceId, object.getRotation(), chunk.getCurrentBase().transform(x, y, 0)), true, true);
 	}
 	
 	/**

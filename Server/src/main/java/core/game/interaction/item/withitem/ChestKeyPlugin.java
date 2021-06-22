@@ -4,8 +4,8 @@ import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -44,7 +44,7 @@ public final class ChestKeyPlugin extends UseWithHandler {
 	public boolean handle(NodeUsageEvent event) {
 		final Player player = event.getPlayer();
 		if (player.getInventory().remove(CHEST_KEY)) {
-			ObjectBuilder.replace((GameObject) event.getUsedWith(), ((GameObject) event.getUsedWith()).transform(2080), 3);
+			SceneryBuilder.replace((Scenery) event.getUsedWith(), ((Scenery) event.getUsedWith()).transform(2080), 3);
 			player.getInventory().add(PIRATE_MESSAGE);
 			player.getPacketDispatch().sendMessage("You unlock the chest.");
 			player.getPacketDispatch().sendMessage("All that's in the chest is a message...");

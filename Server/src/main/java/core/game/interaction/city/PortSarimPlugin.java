@@ -7,7 +7,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -83,7 +83,7 @@ public final class PortSarimPlugin extends OptionHandler {
 			player.getDialogueInterpreter().open(((NPC) node).getId(), ((NPC) node));
 			break;
 		case "open":
-			switch (((GameObject) node).getId()) {
+			switch (((Scenery) node).getId()) {
 			case 9565:
 			case 9563:
 				player.getPacketDispatch().sendMessage("The door is securely locked.");
@@ -91,7 +91,7 @@ public final class PortSarimPlugin extends OptionHandler {
 			}
 			break;
 		case "pick-lock":
-			switch (((GameObject) node).getId()) {
+			switch (((Scenery) node).getId()) {
 			case 9565:
 				if (player.getLocation().getY() <= 3187) {
 					player.getPacketDispatch().sendMessage("You simply cannot find a way to pick the lock from this side.");

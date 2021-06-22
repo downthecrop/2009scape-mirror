@@ -1,7 +1,7 @@
 package rs09.game.node.entity.skill.cooking
 
 import core.cache.def.impl.ItemDefinition
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.player.link.RunScript
 import core.game.node.entity.skill.cooking.CookableItems
 import core.game.node.entity.skill.cooking.CookingRewrite.Companion.cook
@@ -14,7 +14,7 @@ import rs09.tools.START_DIALOGUE
 class CookingDialogue(vararg val args: Any) : DialogueFile(){
     var initial = 0
     var product = 0
-    var `object`: GameObject? = null
+    var `object`: Scenery? = null
     var sinew = false
     override fun handle(componentID: Int, buttonID: Int) {
         when(stage){
@@ -27,13 +27,13 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
                         } else {
                             product = CookableItems.forId(initial).cooked
                         }
-                        `object` = args.get(1) as GameObject
+                        `object` = args.get(1) as Scenery
                     }
                     4 -> {
                         initial = args.get(0) as Int
                         product = args.get(1) as Int
                         sinew = args.get(2) as Boolean
-                        `object` = args.get(3) as GameObject
+                        `object` = args.get(3) as Scenery
                         if (sinew) {
                             player!!.dialogueInterpreter.sendOptions(
                                 "Select one",

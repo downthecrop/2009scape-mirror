@@ -2,8 +2,8 @@ package core.game.content.dialogue;
 
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
@@ -26,7 +26,7 @@ public final class MithrilSeedsDialogue extends DialoguePlugin {
 	/**
 	 * Represents the flower object.
 	 */
-	private GameObject flower;
+	private Scenery flower;
 
 	/**
 	 * Constructs a new {@code MithrilSeedPluginDialogue}.
@@ -51,7 +51,7 @@ public final class MithrilSeedsDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		flower = (GameObject) args[0];
+		flower = (Scenery) args[0];
 		player.getDialogueInterpreter().sendOptions("Select an Option", "Pick the flowers.", "Leave the flowers.");
 		return true;
 	}
@@ -73,7 +73,7 @@ public final class MithrilSeedsDialogue extends DialoguePlugin {
 							player.getPacketDispatch().sendMessage("Not enough space in your inventory!");
 							return true;
 						}
-						if (ObjectBuilder.remove(flower)) {
+						if (SceneryBuilder.remove(flower)) {
 							player.getInventory().add(reward);
 							player.getPacketDispatch().sendMessage("You pick the flowers.");
 						}

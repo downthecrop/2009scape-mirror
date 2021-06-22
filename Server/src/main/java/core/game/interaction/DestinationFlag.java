@@ -3,7 +3,7 @@ package core.game.interaction;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -96,7 +96,7 @@ public class DestinationFlag {
 
 		@Override
 		public Location getDestination(Entity mover, Node n) {
-			GameObject object = (GameObject) n;
+			Scenery object = (Scenery) n;
 			if (object.getType() < 4 || object.getType() == 9) {
 				return DoorActionHandler.getDestination(mover, object);
 			}
@@ -125,7 +125,7 @@ public class DestinationFlag {
 		 * @param dir The preferred direction from the object.
 		 * @return The teleporting destination.
 		 */
-		private Location getDestination(Entity mover, GameObject object, int sizeX, int sizeY, Direction dir, int count) {
+		private Location getDestination(Entity mover, Scenery object, int sizeX, int sizeY, Direction dir, int count) {
 			Location closest = null;
 			double distance = 9999.9;
 			Location loc = object.getLocation();

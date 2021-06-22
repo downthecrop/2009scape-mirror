@@ -1,7 +1,7 @@
 package rs09.game.interaction.`object`
 
-import core.game.node.`object`.GameObject
-import core.game.node.`object`.ObjectBuilder
+import core.game.node.`object`.Scenery
+import core.game.node.`object`.SceneryBuilder
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
@@ -23,7 +23,7 @@ class MuddyChestHandler : InteractionListener() {
             if(player.inventory.containsItem(key)){
                 player.inventory.remove(key)
                 player.animator.animate(Animation(536))
-                ObjectBuilder.replace(node.asObject(),GameObject(171, node.location, node.asObject().rotation),3)
+                SceneryBuilder.replace(node.asObject(), Scenery(171, node.location, node.asObject().rotation),3)
                 for(item in chestLoot){
                     if(!player.inventory.add(item)) GroundItemManager.create(item,player)
                 }

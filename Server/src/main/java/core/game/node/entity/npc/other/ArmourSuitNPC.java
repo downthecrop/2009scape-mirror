@@ -1,8 +1,8 @@
 package core.game.node.entity.npc.other;
 
 import core.game.node.entity.npc.AbstractNPC;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.plugin.Initializable;
@@ -51,7 +51,7 @@ public final class ArmourSuitNPC extends AbstractNPC {
 	@Override
 	public void clear() {
 		super.clear();
-		ObjectBuilder.add(new GameObject(818, getProperties().getSpawnLocation(), 1));
+		SceneryBuilder.add(new Scenery(818, getProperties().getSpawnLocation(), 1));
 	}
 
 	@Override

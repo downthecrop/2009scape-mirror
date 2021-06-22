@@ -3,7 +3,7 @@ package core.game.node.entity.skill.runecrafting;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Plugin;
 
 /**
@@ -30,7 +30,7 @@ public final class CombinationRunePlugin extends UseWithHandler {
 	@Override
 	public boolean handle(NodeUsageEvent event) {
 		final Player player = event.getPlayer();
-		final Altar altar = Altar.forObject(((GameObject) event.getUsedWith()));
+		final Altar altar = Altar.forObject(((Scenery) event.getUsedWith()));
 		final CombinationRune combo = CombinationRune.forAltar(altar, event.getUsedItem());
 		if (combo == null) {
 			return false;

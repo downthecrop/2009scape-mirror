@@ -8,8 +8,8 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
@@ -35,7 +35,7 @@ public final class DMCHandler {
 	/**
 	 * The cannon object.
 	 */
-	private GameObject cannon;
+	private Scenery cannon;
 
 	/**
 	 * The amount of cannonballs loaded.
@@ -181,7 +181,7 @@ public final class DMCHandler {
 	 * Constructs the cannon.
 	 */
 	public static void construct(final Player player) {
-		final Location spawn = RegionManager.getSpawnLocation(player, new GameObject(6, player.getLocation()));
+		final Location spawn = RegionManager.getSpawnLocation(player, new Scenery(6, player.getLocation()));
 		if (spawn == null) {
 			player.getPacketDispatch().sendMessage("There's not enough room for your cannon.");
 			return;
@@ -202,7 +202,7 @@ public final class DMCHandler {
 		player.faceLocation(spawn.transform(Direction.NORTH_EAST));
 		GameWorld.getPulser().submit(new Pulse(2, player) {
 			int count = 0;
-			GameObject object = null;
+			Scenery object = null;
 
 			@Override
 			public boolean pulse() {
@@ -212,7 +212,7 @@ public final class DMCHandler {
 						player.getInventory().add(new Item(6 + (i * 2)));
 					}
 					if (object != null) {
-						ObjectBuilder.remove(object);
+						SceneryBuilder.remove(object);
 					}
 					return true;
 				}
@@ -225,13 +225,13 @@ public final class DMCHandler {
 							player.getInventory().add(new Item(6 + (i * 2)));
 						}
 						if (object != null) {
-							ObjectBuilder.remove(object);
+							SceneryBuilder.remove(object);
 						}
 					}
 				});
 				switch (count) {
 				case 0:
-					object = ObjectBuilder.add(new GameObject(7, spawn));
+					object = SceneryBuilder.add(new Scenery(7, spawn));
 					player.getPacketDispatch().sendMessage("You place the cannon base on the ground.");
 					return count++ == 666;
 				case 1:
@@ -242,12 +242,12 @@ public final class DMCHandler {
 					break;
 				case 3:
 					player.getPacketDispatch().sendMessage("You add the furnace.");
-					ObjectBuilder.remove(object);
-					handler.configure(ObjectBuilder.add(object = object.transform(6)));
+					SceneryBuilder.remove(object);
+					handler.configure(SceneryBuilder.add(object = object.transform(6)));
 					return true;
 				}
-				ObjectBuilder.remove(object);
-				ObjectBuilder.add(object = object.transform(object.getId() + 1));
+				SceneryBuilder.remove(object);
+				SceneryBuilder.add(object = object.transform(object.getId() + 1));
 				return ++count == 4;
 			}
 		});
@@ -257,7 +257,7 @@ public final class DMCHandler {
 	 * Configures the cannon.
 	 * @param cannon The cannon.
 	 */
-	public void configure(GameObject cannon) {
+	public void configure(Scenery cannon) {
 		this.cannon = cannon;
 		player.removeExtension(LogoutTask.class);
 		player.getLogoutPlugins().add(logoutPlugin = new Plugin<Player>() {
@@ -282,7 +282,7 @@ public final class DMCHandler {
 		if (decayPulse.isRunning()) {
 			decayPulse.stop();
 		}
-		ObjectBuilder.remove(cannon);
+		SceneryBuilder.remove(cannon);
 		player.removeAttribute("dmc");
 		player.getLogoutPlugins().remove(logoutPlugin);
 		if (!pickup) {
@@ -310,7 +310,7 @@ public final class DMCHandler {
 	 * Gets the cannon.
 	 * @return the cannon
 	 */
-	public GameObject getCannon() {
+	public Scenery getCannon() {
 		return cannon;
 	}
 
@@ -318,7 +318,7 @@ public final class DMCHandler {
 	 * Sets the cannon.
 	 * @param cannon the cannon to set.
 	 */
-	public void setCannon(GameObject cannon) {
+	public void setCannon(Scenery cannon) {
 		this.cannon = cannon;
 	}
 
