@@ -9,7 +9,7 @@ import core.game.node.Node;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -51,7 +51,7 @@ public final class AbyssPlugin extends OptionHandler {
 			player.getDialogueInterpreter().open(node.getId(), node, true);
 			break;
 		case "exit-through":
-			Altar altar = Altar.forObject((GameObject) node);
+			Altar altar = Altar.forObject((Scenery) node);
 			if (altar != null) {
 				altar.enterRift(player);
 			}
@@ -62,8 +62,8 @@ public final class AbyssPlugin extends OptionHandler {
 		case "distract":
 		case "go-through":
 		case "burn-down":
-			final AbbysalObstacle obstacle = AbbysalObstacle.forObject(((GameObject) node));
-			obstacle.handle(player, ((GameObject) node));
+			final AbbysalObstacle obstacle = AbbysalObstacle.forObject(((Scenery) node));
+			obstacle.handle(player, ((Scenery) node));
 			break;
 		}
 		return true;
@@ -97,7 +97,7 @@ public final class AbyssPlugin extends OptionHandler {
 	public enum AbbysalObstacle {
 		BOIL("burn-down", new Location[] { Location.create(3024, 4833, 0), Location.create(3053, 4830, 0) }, 7165) {
 			@Override
-			public void handle(final Player player, final GameObject object) {
+			public void handle(final Player player, final Scenery object) {
 				if (!player.getInventory().contains(590, 1)) {
 					player.getPacketDispatch().sendMessage("You don't have a tinderbox to burn it.");
 					return;
@@ -137,7 +137,7 @@ public final class AbyssPlugin extends OptionHandler {
 		},
 		MINE("mine", new Location[] { Location.create(3030, 4821, 0), Location.create(3048, 4822, 0) }, 7158, 7153) {
 			@Override
-			public void handle(final Player player, final GameObject object) {
+			public void handle(final Player player, final Scenery object) {
 				final SkillingTool tool = setTool(true, player);
 				if (tool == null) {
 					player.getPacketDispatch().sendMessage("You need a pickaxe in order to do that.");
@@ -178,7 +178,7 @@ public final class AbyssPlugin extends OptionHandler {
 		},
 		CHOP("chop", new Location[] { Location.create(3050, 4824, 0), Location.create(3028, 4824, 0) }, 7161, 7144) {
 			@Override
-			public void handle(final Player player, final GameObject object) {
+			public void handle(final Player player, final Scenery object) {
 				final SkillingTool tool = setTool(false, player);
 				if (tool == null) {
 					player.getPacketDispatch().sendMessage("You need an axe in order to do that.");
@@ -219,7 +219,7 @@ public final class AbyssPlugin extends OptionHandler {
 		},
 		SQUEEZE("squeeze-through", new Location[] { Location.create(3048, 4842, 0), Location.create(3031, 4842, 0) }, 7164, 7147) {
 			@Override
-			public void handle(final Player player, final GameObject object) {
+			public void handle(final Player player, final Scenery object) {
 				player.animate(new Animation(1331));
 				player.lock(3);
 				player.lock(3);
@@ -251,7 +251,7 @@ public final class AbyssPlugin extends OptionHandler {
 		},
 		DISTRACT("distract", new Location[] { Location.create(3029, 4841, 0), Location.create(3051, 4838, 0) }, 7168, 7150) {
 			@Override
-			public void handle(final Player player, final GameObject object) {
+			public void handle(final Player player, final Scenery object) {
 				int[] emotes = { 855, 856, 857, 858, 859, 860, 861, 862, 863, 864, 865, 866, 2113, 2109, 2111, 2106, 2107, 2108, 0x558, 2105, 2110, 2112, 0x84F, 0x850, 1131, 1130, 1129, 1128, 1745, 3544, 3543, 2836 };
 				int index = RandomFunction.random(emotes.length);
 				player.animate(new Animation(emotes[index]));
@@ -289,7 +289,7 @@ public final class AbyssPlugin extends OptionHandler {
 		},
 		PASSAGE("go-through", new Location[] { Location.create(3040, 4844, 0) }, 7154) {
 			@Override
-			public void handle(final Player player, final GameObject object) {
+			public void handle(final Player player, final Scenery object) {
 				player.getProperties().setTeleportLocation(getLocations()[0]);
 			}
 		};
@@ -341,7 +341,7 @@ public final class AbyssPlugin extends OptionHandler {
 		 * @param object the object.
 		 * @return the <code>AbbysalObstacle</code> or <code>Null</code>.
 		 */
-		public static AbbysalObstacle forObject(final GameObject object) {
+		public static AbbysalObstacle forObject(final Scenery object) {
 			for (AbbysalObstacle obstacle : values()) {
 				for (int i : obstacle.getObjects()) {
 					if (i == object.getId()) {
@@ -357,7 +357,7 @@ public final class AbyssPlugin extends OptionHandler {
 		 * @param object the object.
 		 * @return the index.
 		 */
-		public int getIndex(final GameObject object) {
+		public int getIndex(final Scenery object) {
 			for (int i = 0; i < objects.length; i++) {
 				if (getObjects()[i] == object.getId()) {
 					return i;
@@ -371,7 +371,7 @@ public final class AbyssPlugin extends OptionHandler {
 		 * @param player the player.
 		 * @param object the object.
 		 */
-		public void handle(final Player player, final GameObject object) {
+		public void handle(final Player player, final Scenery object) {
 
 		}
 

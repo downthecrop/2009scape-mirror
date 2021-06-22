@@ -1,7 +1,7 @@
 package core.net.packet.context;
 
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.net.packet.Context;
 
 /**
@@ -9,7 +9,7 @@ import core.net.packet.Context;
  * construct/clear object outgoing packet.
  * @author Emperor
  */
-public final class BuildObjectContext implements Context {
+public final class BuildSceneryContext implements Context {
 
 	/**
 	 * The player.
@@ -17,18 +17,18 @@ public final class BuildObjectContext implements Context {
 	private final Player player;
 
 	/**
-	 * The list of game objects to send.
+	 * The list of scenerys to send.
 	 */
-	private final GameObject gameObject;
+	private final Scenery scenery;
 
 	/**
 	 * Constructs a new {@code BuildObjectContext} {@code Object}.
 	 * @param player The player
-	 * @param gameObject the game object to send.
+	 * @param scenery the scenery to send.
 	 */
-	public BuildObjectContext(Player player, GameObject gameObject) {
+	public BuildSceneryContext(Player player, Scenery scenery) {
 		this.player = player;
-		this.gameObject = gameObject;
+		this.scenery = scenery;
 	}
 
 	@Override
@@ -40,8 +40,8 @@ public final class BuildObjectContext implements Context {
 	 * Gets the gameObject.
 	 * @return The gameObject.
 	 */
-	public GameObject getGameObject() {
-		return gameObject;
+	public Scenery getScenery() {
+		return scenery;
 	}
 
 }

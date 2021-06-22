@@ -20,8 +20,6 @@ import core.plugin.Plugin
 import core.tools.RandomFunction
 import rs09.game.ai.AIPBuilder
 import rs09.game.ai.AIPlayer
-import rs09.game.ai.general.GeneralBotCreator
-import rs09.game.ai.general.scriptrepository.LobsterCatcher
 import rs09.game.ai.pvmbots.PvMBotsBuilder
 import rs09.game.ai.pvp.PVPAIPActions
 import rs09.game.ai.pvp.PVPAIPBuilderUtils
@@ -309,7 +307,6 @@ class AIPCommandPlugin : CommandPlugin() {
                 return true
             }
             //"manthiev" -> GeneralBotCreator(player.location, ManThiever())
-            "fish" -> GeneralBotCreator(Location.create(2805, 3435, 0), LobsterCatcher())
         }
         return false
     }

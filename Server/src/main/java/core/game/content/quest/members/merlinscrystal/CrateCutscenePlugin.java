@@ -5,8 +5,8 @@ import core.game.content.activity.CutscenePlugin;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
 
@@ -83,10 +83,10 @@ public class CrateCutscenePlugin extends CutscenePlugin {
 		region = DynamicRegion.create(12609);
 		setRegionBase();
 		registerRegion(region.getId());
-		ObjectBuilder.add(new GameObject(65, base.transform(18, 25, 0), 0, 0));
-		ObjectBuilder.add(new GameObject(65, base.transform(19, 25, 0), 0, 4));
-		ObjectBuilder.add(new GameObject(65, base.transform(18, 24, 0), 0, 1));
-		ObjectBuilder.add(new GameObject(65, base.transform(18, 26, 0), 0, 3));
+		SceneryBuilder.add(new Scenery(65, base.transform(18, 25, 0), 0, 0));
+		SceneryBuilder.add(new Scenery(65, base.transform(19, 25, 0), 0, 4));
+		SceneryBuilder.add(new Scenery(65, base.transform(18, 24, 0), 0, 1));
+		SceneryBuilder.add(new Scenery(65, base.transform(18, 26, 0), 0, 3));
 	}
 
 	/**

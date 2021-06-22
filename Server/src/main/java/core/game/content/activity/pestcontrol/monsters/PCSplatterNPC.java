@@ -8,8 +8,8 @@ import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -67,7 +67,7 @@ public final class PCSplatterNPC extends AbstractNPC {
 		if (getProperties().getCombatPulse().isAttacking()) {
 			return;
 		}
-		for (GameObject o : session.getBarricades()) {
+		for (Scenery o : session.getBarricades()) {
 			if (o.getLocation().isNextTo(this)) {
 				commenceDeath(this);
 				break;
@@ -115,14 +115,14 @@ public final class PCSplatterNPC extends AbstractNPC {
 		int maximum = getProperties().getCurrentCombatLevel() / 3;
 		int minimum = maximum / 2;
 		if (session != null) {
-			for (GameObject o : new ArrayList<>(session.getBarricades())) {
+			for (Scenery o : new ArrayList<>(session.getBarricades())) {
 				if (o.getLocation().isNextTo(this)) {
 					int newId = o.getId() + (o.getId() < 14233 ? 3 : 4);
 					boolean destroyed = !isTarget(newId);
-					final GameObject newTarget = o.transform(newId, o.getRotation(), destroyed ? 22 : o.getType());
+					final Scenery newTarget = o.transform(newId, o.getRotation(), destroyed ? 22 : o.getType());
 					if (session.getBarricades().remove(o)) {
 						session.getBarricades().add(newTarget);
-						ObjectBuilder.replace(o, newTarget);
+						SceneryBuilder.replace(o, newTarget);
 					}
 				}
 			}

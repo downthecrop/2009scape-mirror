@@ -7,8 +7,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -55,7 +55,7 @@ public final class LumbridgeSwampHolePlugin extends OptionHandler {
 				return true;
 			}
 			if (player.getInventory().add(new Item(5341), new Item(952))) {
-				ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(10373), 300);
+				SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(10373), 300);
 			}
 			break;
 		case "read":

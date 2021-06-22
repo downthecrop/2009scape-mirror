@@ -3,7 +3,7 @@ package core.game.content.quest.members.fishingcontest;
 import core.game.interaction.MovementPulse;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -22,8 +22,8 @@ public class VineInteraction extends PluginInteraction {
 
     @Override
     public boolean handle(Player player, Node node) {
-        if(node instanceof GameObject){
-            GameObject obj = node.asObject();
+        if(node instanceof Scenery){
+            Scenery obj = node.asObject();
             if(player.getQuestRepository().getStage("Fishing Contest") > 0 && player.getQuestRepository().getStage("Fishing Contest") < 100){
                 player.getPulseManager().run(new MovementPulse(player, node.asObject().getLocation().transform(0, 0, 0)) {
                     @Override

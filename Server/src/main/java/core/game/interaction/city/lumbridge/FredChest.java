@@ -4,8 +4,8 @@ import core.cache.def.impl.ObjectDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -27,9 +27,9 @@ public class FredChest extends OptionHandler {
     @Override
     public boolean handle(Player player, Node node, String option){
         if(option.equals("open")){
-            ObjectBuilder.replace(node.asObject(),new GameObject(37010,node.asObject().getLocation(),node.asObject().getRotation()));
+            SceneryBuilder.replace(node.asObject(),new Scenery(37010,node.asObject().getLocation(),node.asObject().getRotation()));
         } else if (option.equals("shut")){
-            ObjectBuilder.replace(node.asObject(),new GameObject(37009,node.asObject().getLocation(),node.asObject().getRotation()));
+            SceneryBuilder.replace(node.asObject(),new Scenery(37009,node.asObject().getLocation(),node.asObject().getRotation()));
         } else if (option.equals("search")){
             player.getPacketDispatch().sendMessage("You search the chest but find nothing.");
         }

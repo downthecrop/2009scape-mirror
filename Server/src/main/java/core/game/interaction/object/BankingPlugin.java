@@ -21,7 +21,7 @@ import core.game.node.entity.player.link.IronmanMode;
 import core.game.node.entity.player.link.RunScript;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -60,7 +60,7 @@ public final class BankingPlugin extends OptionHandler {
 
     @Override
     public boolean handle(Player player, Node node, String option) {
-        final GameObject object = (GameObject) node;
+        final Scenery object = (Scenery) node;
         if (player.getIronmanManager().checkRestriction(IronmanMode.ULTIMATE)) {
             return true;
         }
@@ -626,7 +626,7 @@ public final class BankingPlugin extends OptionHandler {
             for (int i = 0; i < 4; i++) {
                 Direction dir = Direction.get(i);
                 Location loc = getLocation().transform(dir.getStepX(), dir.getStepY(), 0);
-                GameObject bank = RegionManager.getObject(loc);
+                Scenery bank = RegionManager.getObject(loc);
                 if (bank != null && bank.getName().equals("Bank booth")) {
                     setDirection(dir);
                     setAttribute("facing_booth", true);

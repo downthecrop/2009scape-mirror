@@ -3,7 +3,7 @@ package core.game.world.map.path;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.item.GroundItem;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import rs09.game.world.map.path.SmartPathfinder;
@@ -142,8 +142,8 @@ public abstract class Pathfinder {
 	 * @return The path.
 	 */
 	public static Path find(Location start, int moverSize, Node destination, boolean near, Pathfinder finder, ClipMaskSupplier clipMaskSupplier) {
-		if (destination instanceof GameObject) {
-			GameObject object = (GameObject) destination;
+		if (destination instanceof Scenery) {
+			Scenery object = (Scenery) destination;
 			int type = object.getType();
 			int rotation = object.getRotation();
 			if (type == 10 || type == 11 || type == 22) {

@@ -2,18 +2,19 @@ package api
 
 import core.cache.def.impl.ItemDefinition
 import core.game.component.Component
+import core.game.content.dialogue.FacialExpression
 import core.game.node.Node
-import core.game.node.`object`.GameObject
-import core.game.node.`object`.ObjectBuilder
+import core.game.node.`object`.Scenery
+import core.game.node.`object`.SceneryBuilder
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
-import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
@@ -23,7 +24,7 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Animation
-import rs09.ServerConstants
+import core.game.world.update.flag.context.Graphics
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
@@ -115,14 +116,21 @@ object ContentAPI {
      * Remove an item from a player's inventory
      * @param player the player whose inventory to remove the item from
      * @param item the ID or Item object to remove from the player's inventory
+     * @param container the Container to remove the items from. An enum exists for this in the api package called Container. Ex: api.Container.BANK
      */
     @JvmStatic
-    fun <T> removeItem(player: Player, item: T): Boolean {
+    fun <T> removeItem(player: Player, item: T, container: Container): Boolean {
         item ?: return false
-        when (item) {
-            is Item -> return player.inventory.remove(item)
-            is Int -> return player.inventory.remove(Item(item))
-            else -> SystemLogger.logErr("Attempted to pass a non-item and non-int to removeItem")
+        val it = when (item) {
+            is Item -> item
+            is Int -> Item(item)
+            else -> throw IllegalStateException("Invalid value passed for item")
+        }
+
+        when(container){
+            Container.INVENTORY -> player.inventory.remove(it)
+            Container.BANK -> player.bank.remove(it)
+            Container.EQUIPMENT -> player.equipment.remove(it)
         }
         return false
     }
@@ -243,11 +251,11 @@ object ContentAPI {
      * @param for_ticks the number of ticks the object should be replaced for. Use -1 for permanent.
      */
     @JvmStatic
-    fun replaceObject(toReplace: GameObject, with: Int, for_ticks: Int) {
+    fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int) {
         if (for_ticks == -1) {
-            ObjectBuilder.replace(toReplace, toReplace.transform(with))
+            SceneryBuilder.replace(toReplace, toReplace.transform(with))
         } else {
-            ObjectBuilder.replace(toReplace, toReplace.transform(with), for_ticks)
+            SceneryBuilder.replace(toReplace, toReplace.transform(with), for_ticks)
         }
         toReplace.isActive = false
     }
@@ -333,8 +341,8 @@ object ContentAPI {
      * Send an object animation
      */
     @JvmStatic
-    fun animateObject(player: Player, obj: GameObject, animationId: Int, global: Boolean = false) {
-        player.packetDispatch.sendObjectAnimation(obj, getAnimation(animationId), global)
+    fun animateScenery(player: Player, obj: Scenery, animationId: Int, global: Boolean = false) {
+        player.packetDispatch.sendSceneryAnimation(obj, getAnimation(animationId), global)
     }
 
     /**
@@ -426,15 +434,21 @@ object ContentAPI {
     /**
      * Plays an animation on the entity
      * @param entity the entity to animate
-     * @param anim the animation to play
+     * @param anim the animation to play, can be an ID or an Animation object.
      * @param forced whether or not to force the animation (usually not necessary)
      */
     @JvmStatic
-    fun animate(entity: Entity, anim: Animation, forced: Boolean = false) {
+    fun <T> animate(entity: Entity, anim: T, forced: Boolean = false) {
+        val animation = when(anim){
+            is Int -> Animation(anim)
+            is Animation -> anim
+            else -> throw IllegalStateException("Invalid value passed for anim")
+        }
+
         if (forced) {
-            entity.animator.forceAnimation(anim)
+            entity.animator.forceAnimation(animation)
         } else {
-            entity.animator.animate(anim)
+            entity.animator.animate(animation)
         }
     }
 
@@ -670,7 +684,7 @@ object ContentAPI {
     fun adjustCharge(node: Node, amount: Int){
         when(node){
             is Item -> node.charge += amount
-            is GameObject -> node.charge += amount
+            is Scenery -> node.charge += amount
             else -> SystemLogger.logErr("Attempt to adjust the charge of invalid type: ${node.javaClass.simpleName}")
         }
     }
@@ -684,7 +698,7 @@ object ContentAPI {
     fun getCharge(node: Node): Int{
         when(node){
             is Item -> return node.charge
-            is GameObject -> return node.charge
+            is Scenery -> return node.charge
             else -> SystemLogger.logErr("Attempt to get charge of invalid type: ${node.javaClass.simpleName}").also { return -1 }
         }
     }
@@ -698,8 +712,190 @@ object ContentAPI {
     fun setCharge(node: Node, charge: Int){
         when(node){
             is Item -> node.charge = charge
-            is GameObject -> node.charge = charge
+            is Scenery -> node.charge = charge
             else -> SystemLogger.logErr("Attempt to set the charge of invalid type: ${node.javaClass.simpleName}")
         }
+    }
+
+    /**
+     * Gets the used option in the context of an interaction.
+     * @param player the player to get the used option for.
+     * @return the option the player used
+     */
+    @JvmStatic
+    fun getUsedOption(player: Player): String {
+        return player.getAttribute("interact:option","INVALID")
+    }
+
+    /**
+     * Used to play both an Animation and Graphics object simultaneously.
+     * @param entity the entity to perform this on
+     * @param anim the Animation object to use, can also be an ID.
+     * @param gfx the Graphics object to use, can also be an ID.
+     */
+    @JvmStatic
+    fun <A,G> visualize(entity: Entity, anim: A, gfx: G){
+        val animation = when(anim){
+            is Int -> Animation(anim)
+            is Animation -> anim
+            else -> throw IllegalStateException("Invalid parameter passed for animation.")
+        }
+
+        val graphics = when(gfx){
+            is Int -> Graphics(gfx)
+            is Graphics -> gfx
+            else -> throw IllegalStateException("Invalid parameter passed for graphics.")
+        }
+
+        entity.visualize(animation,graphics)
+    }
+
+    /**
+     * Used to submit a pulse to the GameWorld's Pulser.
+     * @param pulse the Pulse object to submit
+     */
+    @JvmStatic
+    fun submitWorldPulse(pulse: Pulse){
+        GameWorld.Pulser.submit(pulse)
+    }
+
+    /**
+     * Teleports or "instantly moves" an entity to a given Location object.
+     * @param entity the entity to move
+     * @param loc the Location object to move them to
+     * @param type the teleport type to use (defaults to instant). An enum exists as TeleportManager.TeleportType.
+     */
+    @JvmStatic
+    fun teleport(entity: Entity, loc: Location, type: TeleportManager.TeleportType = TeleportManager.TeleportType.INSTANT){
+        entity.teleporter.send(loc,type)
+    }
+
+    /**
+     * Sets the dynamic or "temporary" (restores) level of a skill.
+     * @param entity the entity to set the level for
+     * @param skill the Skill to set. A Skills enum exists that can be used. Ex: Skills.STRENGTH
+     * @param level the level to set the skill to
+     */
+    @JvmStatic
+    fun setTempLevel(entity: Entity, skill: Int, level: Int){
+        entity.skills.setLevel(skill, level)
+    }
+
+    /**
+     * Gets the static (unchanging/max) level of an entity's skill
+     * @param entity the entity to get the level for
+     * @param skill the Skill to get the level of. A Skills enum exists that can be used. Ex: Skills.STRENGTH
+     * @return the static level of the skill
+     */
+    @JvmStatic
+    fun getStatLevel(entity: Entity, skill: Int): Int {
+        return entity.skills.getStaticLevel(skill)
+    }
+
+    /**
+     * Gets the dynamic (boostable/debuffable/restoring) level of an entity's skill
+     * @param entity the entity to get the level for
+     * @param skill the Skill to get the level of. A Skills enum exists that can be used. Ex: Skills.STRENGTH
+     * @return the dynamic level of the skill
+     */
+    @JvmStatic
+    fun getDynLevel(entity: Entity, skill: Int): Int {
+        return entity.skills.getLevel(skill)
+    }
+
+    /**
+     * Adjusts (buffs/debuffs) the given Skill by the amount given.
+     * @param entity the entity to adjust the skill for
+     * @param skill the Skill to adjust. A Skills enum exists that can be used. Ex: Skills.STRENGTH
+     * @param amount the amount to adjust the skill by. Ex-Buff: 5, Ex-Debuff: -5
+     */
+    @JvmStatic
+    fun adjustLevel(entity: Entity, skill: Int, amount: Int){
+        entity.skills.setLevel(skill, entity.skills.getStaticLevel(skill) + amount)
+    }
+
+    /**
+     * Remove all of a given item from the given container
+     * @param player the player to remove the item from
+     * @param item the item to remove. Can be an Item object or an ID.
+     * @param container the Container to remove the item from. An enum exists for this called Container. Ex: Container.BANK
+     */
+    @JvmStatic
+    fun <T> removeAll(player: Player, item: T, container: Container){
+        val it = when(item){
+            is Item -> item.id
+            is Int -> item
+            else -> throw IllegalStateException("Invalid value passed as item")
+        }
+
+        when(container){
+            Container.EQUIPMENT -> player.equipment.remove(Item(it, amountInEquipment(player, it)))
+            Container.BANK -> player.bank.remove(Item(it, amountInBank(player, it)))
+            Container.INVENTORY -> player.inventory.remove(Item(it, amountInInventory(player, it)))
+        }
+    }
+
+    /**
+     * Sends a string to a specific interface child
+     * @param player the player to send the packet to
+     * @param string the string to send to the child
+     * @param iface the ID of the interface to use
+     * @param child the index of the child to send the string to
+     */
+    @JvmStatic
+    fun setInterfaceText(player: Player, string: String, iface: Int, child: Int){
+        player.packetDispatch.sendString(string,iface,child)
+    }
+
+    /**
+     * Closes any open (non-chat) interfaces for the player
+     * @param player the player to close the interface for
+     */
+    @JvmStatic
+    fun closeInterface(player: Player){
+        player.interfaceManager.close()
+    }
+
+    /**
+     * Closes any opened tab interfaces for the player
+     * @param player the player to close the tab for
+     */
+    @JvmStatic
+    fun closeTabInterface(player: Player){
+        player.interfaceManager.closeSingleTab()
+    }
+
+    /**
+     * Sends a dialogue that uses the player's chathead.
+     * @param player the player to send the dialogue to
+     * @param msg the message to send.
+     * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.FRIENDLY
+     */
+    @JvmStatic
+    fun sendPlayerDialogue(player: Player, msg: String, expr: FacialExpression = FacialExpression.FRIENDLY){
+        player.dialogueInterpreter.sendDialogues(player, expr, *DialUtils.splitLines(msg))
+    }
+
+    /**
+     * Sends a player model to a specific interface child
+     * @param player the player to send the packet to and whose model to use
+     * @param iface the ID of the interface to send it to
+     * @param child the index of the child on the interface to send the model to
+     */
+    @JvmStatic
+    fun sendPlayerOnInterface(player: Player, iface: Int, child: Int){
+        player.packetDispatch.sendPlayerOnInterface(iface,child)
+    }
+
+    /**
+     * Sends an animation to a specific interface child
+     * @param player the player to send the packet to
+     * @param anim the ID of the animation to send to the interface
+     * @param iface the ID of the interface to send the animation to
+     * @param child the index of the child on the interface to send the model to
+     */
+    @JvmStatic
+    fun sendAnimationOnInterface(player: Player, anim: Int, iface: Int, child: Int){
+        player.packetDispatch.sendAnimationInterface(anim,iface,child)
     }
 }

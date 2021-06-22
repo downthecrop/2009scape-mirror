@@ -1,6 +1,6 @@
 package rs09.game.interaction.`object`
 
-import core.game.node.`object`.ObjectBuilder
+import core.game.node.`object`.SceneryBuilder
 import core.game.node.item.Item
 import core.tools.RandomFunction
 import org.rs09.consts.Items
@@ -37,7 +37,7 @@ class TarBarrelListener : InteractionListener() {
 
                 if (node.asObject().charge <= 0) {
                     player.sendMessage(EMPTY_BARREL_STRING)
-                    ObjectBuilder.replace(node.asObject(), node.asObject().transform(EMPTY_TAR_BARREL_16688), 38)
+                    SceneryBuilder.replace(node.asObject(), node.asObject().transform(EMPTY_TAR_BARREL_16688), 38)
                     node.asObject().charge = 1000
                 }
             }

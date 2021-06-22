@@ -6,8 +6,8 @@ import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -27,10 +27,10 @@ public final class KalphiteEntranceHandler extends OptionHandler {
 		UseWithHandler handler = new UseWithHandler(954) {
 			@Override
 			public boolean handle(NodeUsageEvent event) {
-				GameObject object = (GameObject) event.getUsedWith();
+				Scenery object = (Scenery) event.getUsedWith();
 				if (object.getId() == 3827 || object.getId() == 23609) {
 					if (event.getPlayer().getInventory().remove(event.getUsedItem())) {
-						ObjectBuilder.replace(object, object.transform(object.getId() + 1), 500);
+						SceneryBuilder.replace(object, object.transform(object.getId() + 1), 500);
 						return true;
 					}
 				}
@@ -53,7 +53,7 @@ public final class KalphiteEntranceHandler extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		GameObject object = (GameObject) node;
+		Scenery object = (Scenery) node;
 		Location destination = null;
 		switch (object.getId()) {
 		case 3828:

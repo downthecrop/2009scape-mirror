@@ -176,6 +176,8 @@ object InteractionListeners {
         val method = get(id,type,option) ?: get(option,type) ?: return false
         val destOverride = getOverride(type, id, option) ?: getOverride(type,node.id) ?: getOverride(type,option.toLowerCase())
 
+        player.setAttribute("interact:option", option)
+
         if(type != 0) {
             if(player.locks.isMovementLocked) return false
             player.pulseManager.run(object : MovementPulse(player, node, flag, destOverride) {

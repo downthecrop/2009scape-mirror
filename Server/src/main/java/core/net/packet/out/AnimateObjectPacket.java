@@ -1,7 +1,7 @@
 package core.net.packet.out;
 
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.net.packet.IoBuffer;
@@ -20,7 +20,7 @@ public class AnimateObjectPacket implements OutgoingPacket<AnimateObjectContext>
 	 * @param buffer The buffer.
 	 */
 	public static IoBuffer write(IoBuffer buffer, Animation animation) {
-		GameObject object = animation.getObject();
+		Scenery object = animation.getObject();
 		Location l = object.getLocation();
 		buffer.put(20);
 		buffer.putS((l.getChunkOffsetX() << 4) | (l.getChunkOffsetY() & 0x7));
@@ -32,7 +32,7 @@ public class AnimateObjectPacket implements OutgoingPacket<AnimateObjectContext>
 	@Override
 	public void send(AnimateObjectContext context) {
 		Player player = context.getPlayer();
-		GameObject object = context.getAnimation().getObject();
+		Scenery object = context.getAnimation().getObject();
 		IoBuffer buffer = write(UpdateAreaPosition.getBuffer(player, object.getLocation().getChunkBase()), context.getAnimation());
 		buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());player.getSession().write(buffer);
 	}

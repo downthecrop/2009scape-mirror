@@ -4,8 +4,8 @@ import core.cache.def.impl.ObjectDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Initializable;
@@ -24,8 +24,8 @@ public final class CulinomancerChestPliugin extends OptionHandler {
 		ObjectDefinition.forId(12309).getHandlers().put("option:bank", this);
 		ObjectDefinition.forId(12309).getHandlers().put("option:buy-items", this);
 		ObjectDefinition.forId(12309).getHandlers().put("option:buy-food", this);
-		GameObject object = RegionManager.getObject(new Location(3219, 9623, 0));
-		ObjectBuilder.replace(object, object.transform(object.getId(), 3));
+		Scenery object = RegionManager.getObject(new Location(3219, 9623, 0));
+		SceneryBuilder.replace(object, object.transform(object.getId(), 3));
 		return this;
 	}
 

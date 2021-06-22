@@ -6,7 +6,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Plugin;
 
 /**
@@ -24,7 +24,7 @@ public class MerlinCrystalOptionPlugin extends OptionHandler {
 	@Override
 	public boolean handle(Player player, Node node, String option) {
 		final Quest quest = player.getQuestRepository().getQuest("Merlin's Crystal");
-		int id = node instanceof GameObject ? ((GameObject) node).getId() : ((NPC) node).getId();
+		int id = node instanceof Scenery ? ((Scenery) node).getId() : ((NPC) node).getId();
 		switch (id) {
 		case 247:
 			if (quest.getStage(player) < 40) {

@@ -7,7 +7,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -54,7 +54,7 @@ public final class VampireSlayerPlugin extends OptionHandler {
 		final Quest quest = player.getQuestRepository().getQuest("Vampire Slayer");
 		switch (option) {
 		case "open":
-			int id = ((GameObject) node).getId();
+			int id = ((Scenery) node).getId();
 			switch (id) {
 			case 2614:
 				if (quest.getStage(player) == 100) {

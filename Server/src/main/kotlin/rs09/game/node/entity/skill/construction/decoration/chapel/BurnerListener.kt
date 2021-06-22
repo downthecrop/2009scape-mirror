@@ -1,7 +1,7 @@
 package rs09.game.node.entity.skill.construction.decoration.chapel
 
-import core.game.node.`object`.GameObject
-import core.game.node.`object`.ObjectBuilder
+import core.game.node.`object`.Scenery
+import core.game.node.`object`.SceneryBuilder
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
@@ -31,9 +31,9 @@ class BurnerListener : InteractionListener() {
                 player.lock(1)
                 player.animate(Animation.create(3687))
                 player.sendMessage("You burn some marrentill in the incense burner.")
-                ObjectBuilder.replace(
+                SceneryBuilder.replace(
                     node.asObject(),
-                    GameObject(node.asObject().id + 1, node.location),
+                        Scenery(node.asObject().id + 1, node.location),
                     RandomFunction.random(100, 175)
                 )
             }

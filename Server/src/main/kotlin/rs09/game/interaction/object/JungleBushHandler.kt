@@ -1,7 +1,7 @@
 package rs09.game.interaction.`object`
 
-import core.game.node.`object`.GameObject
-import core.game.node.`object`.ObjectBuilder
+import core.game.node.`object`.Scenery
+import core.game.node.`object`.SceneryBuilder
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -31,7 +31,7 @@ class JungleBushHandler : InteractionListener(){
                         when(ticks++){
                             0 -> player.animator.animate(chop_a).also { player.lock() }
                             1 -> player.animator.animate(chop_b)
-                            2 -> ObjectBuilder.replace(toChop, GameObject(chopped_bush, toChop.location, toChop.rotation),20)
+                            2 -> SceneryBuilder.replace(toChop, Scenery(chopped_bush, toChop.location, toChop.rotation),20)
                             3 -> {player.walkingQueue.reset(); player.walkingQueue.addPath(toChop.location.x, toChop.location.y,true)}
                             4 -> player.unlock().also { return true }
                         }

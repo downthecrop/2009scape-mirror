@@ -2,7 +2,7 @@ package rs09.game.node.entity.skill.farming
 
 import core.cache.def.impl.ObjectDefinition
 import core.cache.def.impl.VarbitDefinition
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.player.Player
 import rs09.game.node.entity.state.newsys.states.FarmingState
 
@@ -17,7 +17,7 @@ enum class CompostBins(val varpIndex: Int, val varpOffest: Int) {
         val bins = values().map { (it.varpIndex shl it.varpOffest) to it }.toMap()
 
         @JvmStatic
-        fun forObject(obj: GameObject): CompostBins?{
+        fun forObject(obj: Scenery): CompostBins?{
             return forObjectID(obj.id)
         }
 

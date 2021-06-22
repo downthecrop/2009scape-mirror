@@ -4,8 +4,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -201,8 +201,8 @@ public class TraibornDialogue extends DialoguePlugin {
 				stage = 386;
 				break;
 			case 386:
-				final GameObject object = new GameObject(17434, Location.create(3113, 3161, 1), 11, 1);
-				ObjectBuilder.add(object);
+				final Scenery object = new Scenery(17434, Location.create(3113, 3161, 1), 11, 1);
+				SceneryBuilder.add(object);
 				npc.faceLocation(object.getLocation());
 				npc.animate(ANIMATION);
 				if (!player.getInventory().containsItem(BONES)) {
@@ -225,7 +225,7 @@ public class TraibornDialogue extends DialoguePlugin {
 							npc.face(player);
 							break;
 						case 7:
-							ObjectBuilder.remove(object);
+							SceneryBuilder.remove(object);
 							return true;
 						}
 						return false;

@@ -5,7 +5,7 @@ import core.game.interaction.NodeUsageEvent;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -26,8 +26,8 @@ public class GarlicPipeInteraction extends PluginInteraction {
     @Override
     public boolean handle(Player player, NodeUsageEvent event) {
         System.out.println("Trying to handle it");
-        if(event.getUsed() instanceof Item && event.getUsedWith() instanceof GameObject){
-            GameObject usedWith = event.getUsedWith().asObject();
+        if(event.getUsed() instanceof Item && event.getUsedWith() instanceof Scenery){
+            Scenery usedWith = event.getUsedWith().asObject();
             Item used = event.getUsedItem();
 
             if(used.getId() == Items.GARLIC_1550 && usedWith.getId() == 41 && usedWith.getLocation().equals(Location.create(2638, 3446, 0)) && player.getQuestRepository().getStage("Fishing Contest") > 0){
@@ -48,8 +48,8 @@ public class GarlicPipeInteraction extends PluginInteraction {
 
     @Override
     public boolean handle(Player player, Node node) {
-        if(node instanceof GameObject){
-            GameObject object = node.asObject();
+        if(node instanceof Scenery){
+            Scenery object = node.asObject();
             if(object.getId() == 41 && object.getLocation().equals(Location.create(2638, 3446, 0)) && player.getAttribute("fishing_contest:garlic",false)){
                 player.getPulseManager().run(new MovementPulse(player, object.getLocation().transform(0, -1, 0)) {
                     @Override

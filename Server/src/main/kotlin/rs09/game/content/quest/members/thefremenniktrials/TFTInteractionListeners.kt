@@ -1,7 +1,7 @@
 package rs09.game.content.quest.members.thefremenniktrials
 
 import core.game.content.dialogue.FacialExpression
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -155,7 +155,7 @@ class TFTInteractionListeners : InteractionListener(){
     }
 
     fun getRandomLocation(player: Player?): Location{
-        var obj: GameObject? = null
+        var obj: Scenery? = null
 
         while(obj?.id != 5138) {
             val objects = player?.viewport?.chunks?.random()?.random()?.objects

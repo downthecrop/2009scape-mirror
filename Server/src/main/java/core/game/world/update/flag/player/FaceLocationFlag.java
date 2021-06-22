@@ -1,7 +1,7 @@
 package core.game.world.update.flag.player;
 
 import core.game.node.Node;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.UpdateFlag;
 import core.net.packet.IoBuffer;
@@ -29,8 +29,8 @@ public class FaceLocationFlag extends UpdateFlag<Location> {
 	public static Location getFaceLocation(Node n, Node node) {
 		int x = node.size() >> 1;
 		int y = node.size() >> 1;
-		if (node instanceof GameObject) {
-			GameObject o = (GameObject) node;
+		if (node instanceof Scenery) {
+			Scenery o = (Scenery) node;
 			x = o.getDefinition().sizeX >> 1;
 			y = o.getDefinition().sizeY >> 1;
 			if (o.getRotation() % 2 != 0) {

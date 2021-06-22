@@ -3,7 +3,7 @@ package core.game.node.entity.skill.hunter;
 import core.game.node.entity.skill.Skills;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -71,7 +71,7 @@ public final class HunterManager {
 	 * @param object the object.
 	 * @return {@code True} if registered.
 	 */
-	public boolean register(Traps trap, Node node, final GameObject object) {
+	public boolean register(Traps trap, Node node, final Scenery object) {
 		final TrapWrapper wrapper = new TrapWrapper(player, trap, object);
 		trap.getSettings().reward(player, node, wrapper);
 		wrapper.setHook(trap.addHook(wrapper));
@@ -92,7 +92,7 @@ public final class HunterManager {
 	 * @param object the object.
 	 * @return {@code True} if they're the owner.
 	 */
-	public boolean isOwner(GameObject object) {
+	public boolean isOwner(Scenery object) {
 		return getUid(object) == getUid();
 	}
 
@@ -101,7 +101,7 @@ public final class HunterManager {
 	 * @param object the object.
 	 * @return the wrapper.
 	 */
-	public TrapWrapper getWrapper(GameObject object) {
+	public TrapWrapper getWrapper(Scenery object) {
 		for (TrapWrapper wrapper : traps) {
 			if (wrapper.getObject() == object || (wrapper.getSecondary() != null && wrapper.getSecondary() == object)) {
 				return wrapper;
@@ -143,7 +143,7 @@ public final class HunterManager {
 	 * @param object the object.
 	 * @return the uid.
 	 */
-	public int getUid(GameObject object) {
+	public int getUid(Scenery object) {
 		return object.getAttributes().getAttribute("trap-uid", 0);
 	}
 

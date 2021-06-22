@@ -1,20 +1,20 @@
 package core.game.content.activity.pyramidplunder;
 
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 
 /**
  * Object wrapper for pyramid plunder nodes
  * @author ceik
  */
 
-public class PlunderObject extends GameObject {
+public class PlunderObject extends Scenery {
     private transient Player player;
     private static int thisId;
     public static int snakeId, openId;
 
 
-    public PlunderObject(GameObject obj){
+    public PlunderObject(Scenery obj){
         super(obj.getId(),obj.getLocation(),obj.getRotation(),obj.getDirection());
         this.thisId = obj.getId();
         switch(thisId){

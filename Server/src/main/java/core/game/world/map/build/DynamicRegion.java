@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.music.MusicZone;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.*;
 import core.game.world.map.zone.RegionZone;
 import core.game.world.map.zone.ZoneBorders;
@@ -312,9 +312,9 @@ public final class DynamicRegion extends Region {
 				for (int j = y << 3; j < (y + 1) << 3; j++) {
 					p.getFlags().getClippingFlags()[i][j] = -1;
 					p.getProjectileFlags().getClippingFlags()[i][j] = -1;
-					GameObject object = p.getObjects()[i][j];
+					Scenery object = p.getObjects()[i][j];
 					if (object != null) {
-						LandscapeParser.removeGameObject(object);
+						LandscapeParser.removeScenery(object);
 					} else {
 						p.add(null, i, j, true);
 					}
@@ -336,19 +336,19 @@ public final class DynamicRegion extends Region {
 					p.getFlags().getLandscape()[toX][toY] = rp.getFlags().getLandscape()[fromX][fromY];
 					p.getFlags().getClippingFlags()[toX][toY] = rp.getFlags().getClippingFlags()[fromX][fromY];
 					p.getProjectileFlags().getClippingFlags()[toX][toY] = rp.getProjectileFlags().getClippingFlags()[fromX][fromY];
-					GameObject[] objects = { rp.getChunkObject(fromX, fromY) };
+					Scenery[] objects = { rp.getChunkObject(fromX, fromY) };
 					RegionChunk ch = rp.getChunks()[fromX >> 3][fromY >> 3];
 					if (ch instanceof BuildRegionChunk) {
 						BuildRegionChunk bc = (BuildRegionChunk) ch;
-						objects = new GameObject[BuildRegionChunk.ARRAY_SIZE];
+						objects = new Scenery[BuildRegionChunk.ARRAY_SIZE];
 						for (int k = 0; k < objects.length; k++) {
 							objects[k] = bc.get(i, j, k);
 						}
 					}
-					for (GameObject object : objects) {
+					for (Scenery object : objects) {
 						if (object != null) {
 							object = object.transform(object.getId(), object.getRotation(), getBaseLocation().transform(toX, toY, 0));
-							LandscapeParser.flagGameObject(p, toX, toY, object, false, true);//chunk instanceof BuildRegionChunk);//.addGameObject(object, true);
+							LandscapeParser.flagScenery(p, toX, toY, object, false, true);//chunk instanceof BuildRegionChunk);//.addGameObject(object, true);
 						} else {
 							p.add(null, toX, toY, true);
 						}

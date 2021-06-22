@@ -3,7 +3,7 @@ package core.game.node.entity.skill.agility.pyramid;
 import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.MovementHook;
@@ -25,7 +25,7 @@ public final class RollingBlock implements MovementHook {
 	public boolean handle(final Entity e, final Location dest) {
 		final Player player = (Player) e;
 		final BlockSets set = BlockSets.forLocation(dest);
-		final GameObject stone = RegionManager.getObject(set.getBlockLocation());
+		final Scenery stone = RegionManager.getObject(set.getBlockLocation());
 		final boolean backwards = isBackwards(stone.getDirection(), player.getDirection(), stone.getRotation());
 		final boolean fail = backwards || AgilityHandler.hasFailed(player, 2, 0.3);
 		player.lock(5);

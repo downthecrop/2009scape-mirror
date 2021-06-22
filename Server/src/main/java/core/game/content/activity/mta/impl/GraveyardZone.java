@@ -10,8 +10,8 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -229,7 +229,7 @@ public class GraveyardZone extends MTAZone {
 		 * @param player the player.
 		 * @param object the object.
 		 */
-		public void grab(Player player, GameObject object) {
+		public void grab(Player player, Scenery object) {
 			if (player.getInventory().freeSlots() < 1) {
 				player.sendMessage("You have no free space!");
 				return;
@@ -242,7 +242,7 @@ public class GraveyardZone extends MTAZone {
 			if (life < 1) {
 				life = 4;
 				BoneType type = ordinal() + 1 > BoneType.values().length - 1 ? BoneType.FIRST : BoneType.values()[ordinal() + 1];
-				ObjectBuilder.replace(object, object.transform(type.getObjectId()));
+				SceneryBuilder.replace(object, object.transform(type.getObjectId()));
 			}
 			object.getAttributes().setAttribute("life", life);
 		}

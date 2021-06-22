@@ -6,7 +6,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -30,7 +30,7 @@ public final class ChampionsGuildDoor extends OptionHandler {
 				player.getDialogueInterpreter().sendDialogues(198, null, "Greetings bold adventurer. Welcome to the guild of", "Champions.");
 			}
 			player.getAchievementDiaryManager().finishTask(player, DiaryType.VARROCK, 1, 1);
-			DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+			DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 			return true;
 		}
 		return true;
@@ -44,6 +44,6 @@ public final class ChampionsGuildDoor extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		return DoorActionHandler.getDestination(((Player) node), ((GameObject) n));
+		return DoorActionHandler.getDestination(((Player) node), ((Scenery) n));
 	}
 }

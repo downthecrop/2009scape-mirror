@@ -17,7 +17,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -91,10 +91,10 @@ public final class HunterPlugin extends OptionHandler {
 		case "deactivate":
 		case "retrieve":
 		case "check":
-			trap.dismantle(player, (GameObject) node);
+			trap.dismantle(player, (Scenery) node);
 			return true;
 		case "investigate":
-			trap.investigate(player, (GameObject) node);
+			trap.investigate(player, (Scenery) node);
 			return true;
 		}
 		return true;
@@ -146,7 +146,7 @@ public final class HunterPlugin extends OptionHandler {
 		@Override
 		public boolean handle(NodeUsageEvent event) {
 			final Player player = event.getPlayer();
-			final GameObject object = event.getUsedWith() instanceof GameObject ? (GameObject) event.getUsedWith() : (GameObject) event.getUsed();
+			final Scenery object = event.getUsedWith() instanceof Scenery ? (Scenery) event.getUsedWith() : (Scenery) event.getUsed();
 			final Item item = event.getUsedItem();
 			if (!player.getHunterManager().isOwner(object)) {
 				player.sendMessage("This isn't your trap!");

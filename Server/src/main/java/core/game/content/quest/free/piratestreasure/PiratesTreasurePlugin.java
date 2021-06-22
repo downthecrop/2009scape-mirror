@@ -12,7 +12,7 @@ import core.game.node.entity.player.link.HintIconManager;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 
@@ -46,7 +46,7 @@ public final class PiratesTreasurePlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		int id = node instanceof GameObject ? ((GameObject) node).getId() : ((Item) node).getId();
+		int id = node instanceof Scenery ? ((Scenery) node).getId() : ((Item) node).getId();
 		switch (id) {
 		case 2079:
 			switch (option) {

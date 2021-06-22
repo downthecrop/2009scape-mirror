@@ -8,8 +8,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
@@ -42,7 +42,7 @@ public final class FireplacePlugin extends OptionHandler {
 			player.sendMessage("You need some logs and a tinderbox in order to light the fireplace.");
 			return true;
 		}
-		final GameObject obj = (GameObject) node.asObject();
+		final Scenery obj = (Scenery) node.asObject();
 		player.lock(2);
 		player.animate(ANIMATION);
 		GameWorld.getPulser().submit(new Pulse(2, player) {
@@ -53,7 +53,7 @@ public final class FireplacePlugin extends OptionHandler {
 				}
 				player.getInventory().remove(new Item(1511));
 				player.getSkills().addExperience(Skills.FIREMAKING, 80);
-				ObjectBuilder.replace(new GameObject(obj.getId(), obj.getLocation()), new GameObject(obj.getId() + 1, obj.getLocation(), obj.getRotation()), 1000);
+				SceneryBuilder.replace(new Scenery(obj.getId(), obj.getLocation()), new Scenery(obj.getId() + 1, obj.getLocation(), obj.getRotation()), 1000);
 				player.sendMessage("You light the fireplace.");
 				return true;
 			}

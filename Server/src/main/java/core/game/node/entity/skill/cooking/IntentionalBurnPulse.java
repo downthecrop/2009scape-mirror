@@ -2,13 +2,13 @@ package core.game.node.entity.skill.cooking;
 
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 
 public class IntentionalBurnPulse extends StandardCookingPulse {
     int initial,product,amount;
     Player player;
-    GameObject object;
-    IntentionalBurnPulse(Player player, GameObject object, int initial, int product, int amount){
+    Scenery object;
+    IntentionalBurnPulse(Player player, Scenery object, int initial, int product, int amount){
         super(player,object,initial,product,amount);
         this.initial = initial;
         this.product = product;
@@ -35,7 +35,7 @@ public class IntentionalBurnPulse extends StandardCookingPulse {
     }
 
     @Override
-    public boolean cook(Player player, GameObject object, boolean burned, int initial, int product) {
+    public boolean cook(Player player, Scenery object, boolean burned, int initial, int product) {
         super.animate();
         Item initialItem = new Item(initial);
         Item productItem = new Item(product);

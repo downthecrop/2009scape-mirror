@@ -10,7 +10,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.TeleportManager.TeleportType;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 import rs09.plugin.PluginManager;
@@ -42,7 +42,7 @@ public final class ZanarisPlugin extends OptionHandler {
 		case 12045:
 		case 12047:
 			if ((node.getId() == 12045 && node.getLocation().equals(new Location(2469, 4438, 0)) && player.getLocation().getX() >= 2470) || player.getLocation().getY() < 4434 && (node.getId() == 12045 || node.getId() == 12047 && node.getLocation().equals(new Location(2465, 4434, 0))) || node.getId() == 12047 && player.getLocation().getX() >= 2470) {
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			}
 			player.getDialogueInterpreter().open(MagicDoorDialogue.NAME, node);
@@ -65,7 +65,7 @@ public final class ZanarisPlugin extends OptionHandler {
 		/**
 		 * The object.
 		 */
-		private GameObject door;
+		private Scenery door;
 
 		/**
 		 * Constructs a new {@code MagicDoorDialogue} {@code Object}.
@@ -91,7 +91,7 @@ public final class ZanarisPlugin extends OptionHandler {
 
 		@Override
 		public boolean open(Object... args) {
-			door = (GameObject) args[0];
+			door = (Scenery) args[0];
 			npc("You may not pass through this door without paying the", "trading tax.");
 			return true;
 		}

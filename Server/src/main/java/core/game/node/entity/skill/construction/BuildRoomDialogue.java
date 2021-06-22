@@ -3,8 +3,8 @@ package core.game.node.entity.skill.construction;
 
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionChunk;
@@ -28,7 +28,7 @@ public final class BuildRoomDialogue extends DialoguePlugin {
 	/**
 	 * The door hotspot.
 	 */
-	private GameObject door;
+	private Scenery door;
 
 	/**
 	 * The direction.
@@ -48,7 +48,7 @@ public final class BuildRoomDialogue extends DialoguePlugin {
 	/**
 	 * The boundaries of the room to build.
 	 */
-	private List<GameObject> boundaries = new ArrayList<>(20);
+	private List<Scenery> boundaries = new ArrayList<>(20);
 
 	/**
 	 * The room we're building.
@@ -104,7 +104,7 @@ public final class BuildRoomDialogue extends DialoguePlugin {
 			stage = 2;
 			return true;
 		}
-		this.door = (GameObject) player.getAttribute("con:hsobject");
+		this.door = (Scenery) player.getAttribute("con:hsobject");
 		int[] pos = BuildingUtils.getRoomPosition(player, door);
 		roomX = pos[0];
 		roomY = pos[1];
@@ -175,8 +175,8 @@ public final class BuildRoomDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean close() {
-		for (GameObject object : boundaries) {
-			ObjectBuilder.remove(object);
+		for (Scenery object : boundaries) {
+			SceneryBuilder.remove(object);
 		}
 		boundaries.clear();
 		return super.close();
@@ -235,20 +235,20 @@ public final class BuildRoomDialogue extends DialoguePlugin {
 	 * Draws the current boundaries of the room to build.
 	 */
 	private void drawGhostRoom() {
-		for (GameObject object : boundaries) {
-			ObjectBuilder.remove(object);
+		for (Scenery object : boundaries) {
+			SceneryBuilder.remove(object);
 		}
 		int rotation = directions[index].toInteger();
 		boundaries.clear();
 		Location base = player.getViewport().getRegion().getBaseLocation().transform(roomX << 3, roomY << 3, player.getLocation().getZ());
 		for (int x = 0; x < 8; x++) {
 			for (int y = 0; y < 8; y++) {
-				GameObject[] objects = room.getChunk().getObjects(x, y);
-				for (GameObject object : objects) {
+				Scenery[] objects = room.getChunk().getObjects(x, y);
+				for (Scenery object : objects) {
 					if (object != null && object.getDefinition().hasAction("build")) {
 						int[] pos = RegionChunk.getRotatedPosition(x, y, object.getDefinition().getSizeX(), object.getDefinition().getSizeY(), object.getRotation(), rotation);
-						GameObject obj = object.transform(object.getId(), (object.getRotation() + rotation) % 4, base.transform(pos[0], pos[1], 0));
-						boundaries.add(ObjectBuilder.add(obj));
+						Scenery obj = object.transform(object.getId(), (object.getRotation() + rotation) % 4, base.transform(pos[0], pos[1], 0));
+						boundaries.add(SceneryBuilder.add(obj));
 					}
 				}
 			}

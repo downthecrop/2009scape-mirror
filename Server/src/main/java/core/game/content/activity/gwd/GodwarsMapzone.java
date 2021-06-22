@@ -14,7 +14,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -143,8 +143,8 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 
 	@Override
 	public boolean interact(Entity e, Node target, Option option) {
-		if (target instanceof GameObject) {
-			GameObject object = (GameObject) target;
+		if (target instanceof Scenery) {
+			Scenery object = (Scenery) target;
 			if (object.getId() == 26439) {
 				handleIceBridge((Player) e, object);
 				return true;
@@ -277,7 +277,7 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 	 * @param player The player.
 	 * @param object The pillar object.
 	 */
-	private void handlePillarGrapple(final Player player, final GameObject object) {
+	private void handlePillarGrapple(final Player player, final Scenery object) {
 		if (player.getSkills().getStaticLevel(Skills.RANGE) < 70) {
 			player.getPacketDispatch().sendMessage("You need a Range level of 70 to enter here.");
 			return;
@@ -305,7 +305,7 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 	 * @param player The player.
 	 * @param object The door object.
 	 */
-	private void handleBigDoor(final Player player, final GameObject object, boolean checkLocation) {
+	private void handleBigDoor(final Player player, final Scenery object, boolean checkLocation) {
 		player.lock(4);
 		if (checkLocation && player.getLocation().getX() > object.getLocation().getX()) {
 			GameWorld.getPulser().submit(new MovementPulse(player, object.getLocation()) {
@@ -343,7 +343,7 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 	 * @param object The object.
 	 * @return {@code True} if the player can't pass.
 	 */
-	private boolean handleChamberEntrance(Player player, GameObject object) {
+	private boolean handleChamberEntrance(Player player, Scenery object) {
 		Direction dir = Direction.get((object.getRotation() + 3) % 4);
 		if (dir.getStepX() != 0) {
 			if (player.getLocation().getX() == object.getLocation().transform(dir.getStepX(), 0, 0).getX()) {
@@ -375,7 +375,7 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 	 * @param player The player.
 	 * @param object The object.
 	 */
-	private void handleIceBridge(final Player player, final GameObject object) {
+	private void handleIceBridge(final Player player, final Scenery object) {
 		if (player.getSkills().getStaticLevel(Skills.HITPOINTS) < 70) {
 			player.getPacketDispatch().sendMessage("You need 70 Hitpoints to cross this bridge.");
 			return;

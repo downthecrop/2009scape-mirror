@@ -4,7 +4,7 @@ import core.game.content.global.action.DoorActionHandler;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.game.world.map.RegionManager;
@@ -28,9 +28,9 @@ public final class BorderGuardDialogue extends DialoguePlugin {
 	private static final Item COINS = new Item(995, 10);
 
 	/**
-	 * Represents the door game object.
+	 * Represents the door scenery.
 	 */
-	private GameObject door;
+	private Scenery door;
 
 	/**
 	 * Constructs a new {@code BorderGuardDialogue} {@code Object}.
@@ -58,7 +58,7 @@ public final class BorderGuardDialogue extends DialoguePlugin {
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
 		if (args.length == 2) {
-			door = ((GameObject) args[1]);
+			door = ((Scenery) args[1]);
 		}
 		if (player.getLocation().equals(LOCATIONS[0]) || player.getLocation().equals(LOCATIONS[1]) || player.getLocation().equals(LOCATIONS[2])) {
 			door = RegionManager.getObject(LOCATIONS[3]);

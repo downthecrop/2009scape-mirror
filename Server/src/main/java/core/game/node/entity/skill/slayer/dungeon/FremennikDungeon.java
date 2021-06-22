@@ -8,7 +8,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -47,9 +47,9 @@ public final class FremennikDungeon extends MapZone implements Plugin<Object> {
 
 	@Override
 	public boolean interact(Entity entity, Node target, Option option) {
-		if (entity instanceof Player && target instanceof GameObject) {
+		if (entity instanceof Player && target instanceof Scenery) {
 			final Player player = (Player) entity;
-			final GameObject object = (GameObject) target;
+			final Scenery object = (Scenery) target;
 			final Direction dir = Direction.getLogicalDirection(player.getLocation(), object.getLocation());
 			switch (target.getId()) {
 			case 9326:// pyrefiend area.
