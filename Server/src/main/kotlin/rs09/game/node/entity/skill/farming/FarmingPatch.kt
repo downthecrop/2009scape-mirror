@@ -2,7 +2,7 @@ package rs09.game.node.entity.skill.farming
 
 import core.cache.def.impl.ObjectDefinition
 import core.cache.def.impl.VarbitDefinition
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.player.Player
 import rs09.game.node.entity.state.newsys.states.FarmingState
 
@@ -68,7 +68,7 @@ enum class FarmingPatch(val varpIndex: Int, val varpOffset: Int, val type: Patch
         val patches = FarmingPatch.values().map { (it.varpIndex shl it.varpOffset) to it }.toMap()
 
         @JvmStatic
-        fun forObject(obj: GameObject): FarmingPatch?{
+        fun forObject(obj: Scenery): FarmingPatch?{
             return forObjectID(obj.id)
         }
 

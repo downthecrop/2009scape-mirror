@@ -11,7 +11,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -43,7 +43,7 @@ public final class WizardGuildPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final int id = node instanceof GameObject ? ((GameObject) node).getId() : ((NPC) node).getId();
+		final int id = node instanceof Scenery ? ((Scenery) node).getId() : ((NPC) node).getId();
 		switch (option) {
 		case "climb-up":
 			switch (id) {
@@ -51,7 +51,7 @@ public final class WizardGuildPlugin extends OptionHandler {
 				if (node.getLocation().equals(new Location(2590, 3089, 0))) {
 					ClimbActionHandler.climb(player, null, Location.create(2591, 3092, 1));
 				} else {
-					ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+					ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 				}
 				break;
 			}
@@ -64,7 +64,7 @@ public final class WizardGuildPlugin extends OptionHandler {
 					player.getDialogueInterpreter().sendDialogue("You need a Magic level of at least 66 to enter.");
 					return true;
 				}
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				break;
 			case 2155:
 			case 2154:

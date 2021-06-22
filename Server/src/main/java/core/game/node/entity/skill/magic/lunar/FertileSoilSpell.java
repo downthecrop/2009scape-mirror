@@ -8,7 +8,7 @@ import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.skill.magic.MagicSpell;
 import core.game.node.entity.skill.magic.Runes;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
@@ -51,7 +51,7 @@ public final class FertileSoilSpell extends MagicSpell {
 	@Override
 	public boolean cast(Entity entity, Node target) {
 		final Player player = ((Player) entity);
-		final GameObject object = (GameObject) target;
+		final Scenery object = (Scenery) target;
 		final FarmingPatch fPatch = FarmingPatch.forObject(object);
 		if(fPatch == null){
 			player.sendMessage("Um... I don't want to fertilize that!");

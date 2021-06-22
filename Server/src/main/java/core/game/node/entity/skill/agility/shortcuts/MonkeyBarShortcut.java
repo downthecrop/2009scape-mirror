@@ -6,7 +6,7 @@ import core.game.node.entity.skill.agility.AgilityShortcut;
 import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
@@ -54,7 +54,7 @@ public class MonkeyBarShortcut extends AgilityShortcut {
 	}
 
 	@Override
-	public void run(final Player player, final GameObject object, String option, boolean failed) {
+	public void run(final Player player, final Scenery object, String option, boolean failed) {
 		player.lock(5);
 		Direction direct = Direction.get((object.getDirection().toInteger() + 2) % 4);
 		if (object.getId() == 29375) {

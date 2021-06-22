@@ -12,8 +12,8 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -31,7 +31,7 @@ public final class BalloonManager extends OptionHandler {
 	/**
 	 * The list of dropped balloons.
 	 */
-	private static final List<GameObject> balloons = new ArrayList<>(20);
+	private static final List<Scenery> balloons = new ArrayList<>(20);
 
 	/**
 	 * The count down time until droping.
@@ -112,10 +112,10 @@ public final class BalloonManager extends OptionHandler {
 			public boolean pulse() {
 				if (waves == 0 || waves == 3 || waves == 5 || waves == 8 || waves == 10 || waves == 12 || waves == 15 || waves == 18 || waves == 20) {
 					for (int i = 0; i < 30; i++) {
-						GameObject balloon = getBalloon();
+						Scenery balloon = getBalloon();
 						if (balloon != null) {
 							balloons.add(balloon);
-							ObjectBuilder.add(balloon, RandomFunction.random(200, 300));
+							SceneryBuilder.add(balloon, RandomFunction.random(200, 300));
 						}
 					}
 				}
@@ -129,12 +129,12 @@ public final class BalloonManager extends OptionHandler {
 	 * Gets the balloon drop.
 	 * @return the balloon.
 	 */
-	private GameObject getBalloon() {
+	private Scenery getBalloon() {
 		final Location location = new Location(3045 + RandomFunction.randomSign(RandomFunction.getRandom(8)), 3378 + RandomFunction.randomSign(RandomFunction.getRandom(6)), 0);
 		if (!RegionManager.isTeleportPermitted(location) || RegionManager.getObject(location) != null) {
 			return null;
 		}
-		return new GameObject(PartyBalloon.values()[RandomFunction.random(PartyBalloon.values().length)].getBalloonId(), location);
+		return new Scenery(PartyBalloon.values()[RandomFunction.random(PartyBalloon.values().length)].getBalloonId(), location);
 	}
 
 	/**
@@ -142,7 +142,7 @@ public final class BalloonManager extends OptionHandler {
 	 * @return {@code True} if so.
 	 */
 	public boolean isCluttered() {
-		for (GameObject object : balloons) {
+		for (Scenery object : balloons) {
 			if (RegionManager.getObject(object.getLocation()) != null) {
 				return true;
 			}
@@ -188,7 +188,7 @@ public final class BalloonManager extends OptionHandler {
 	 * Gets the balloons.
 	 * @return the balloons
 	 */
-	public static List<GameObject> getBalloons() {
+	public static List<Scenery> getBalloons() {
 		return balloons;
 	}
 
@@ -232,15 +232,15 @@ public final class BalloonManager extends OptionHandler {
 		 * @param player the player.
 		 * @param object the object.
 		 */
-		public void burst(final Player player, final GameObject object) {
-			final GameObject popped = object.transform(popId);
+		public void burst(final Player player, final Scenery object) {
+			final Scenery popped = object.transform(popId);
 			if (!getBalloons().contains(object)) {
 				player.sendMessage("Error! Balloon not registered.");
 				return;
 			}
 			player.lock(2);
-			ObjectBuilder.remove(object);
-			ObjectBuilder.add(popped);
+			SceneryBuilder.remove(object);
+			SceneryBuilder.add(popped);
 			getBalloons().remove(object);
 			player.animate(Animation.create(10017));
 
@@ -254,7 +254,7 @@ public final class BalloonManager extends OptionHandler {
 				public boolean pulse() {
 					switch (++counter) {
 					case 1:
-						ObjectBuilder.remove(popped);
+						SceneryBuilder.remove(popped);
 						if (!player.getIronmanManager().isIronman() && RandomFunction.random(3) == 1) {
 							GroundItem ground = getGround(object.getLocation(), player);
 							if (ground != null) {

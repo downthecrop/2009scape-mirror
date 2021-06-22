@@ -7,7 +7,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -39,7 +39,7 @@ public final class TzhaarCityPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		int id = ((GameObject) node).getId();
+		int id = ((Scenery) node).getId();
 		switch (option) {
 		case "enter":
 			switch (id) {

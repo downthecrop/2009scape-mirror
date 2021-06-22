@@ -7,8 +7,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -36,7 +36,7 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		GameObject object = (GameObject) node;
+		Scenery object = (Scenery) node;
 		switch (object.getId()) {
 		case 9316:
 		case 9317:
@@ -68,12 +68,12 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void openTreeDoor(final Player player, final GameObject object) {
+	private void openTreeDoor(final Player player, final Scenery object) {
 		if (object.getCharge() == 88) {
 			return;
 		}
 		object.setCharge(88);
-		ObjectBuilder.replace(object, object.transform(object.getId() == 1967 ? 1969 : 1970), 4);
+		SceneryBuilder.replace(object, object.transform(object.getId() == 1967 ? 1969 : 1970), 4);
 		AgilityHandler.walk(player, -1, player.getLocation(), player.getLocation().transform(0, player.getLocation().getY() <= 3491 ? 2 : -2, 0), new Animation(1426), 0, null);
 		GameWorld.getPulser().submit(new Pulse(4) {
 			@Override
@@ -89,13 +89,13 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
 	 * @param player The player.
 	 * @param object The door.
 	 */
-	private void openGates(Player player, final GameObject object) {
+	private void openGates(Player player, final Scenery object) {
 		if (object.getCharge() == 88) {
 			return;
 		}
 		object.setCharge(88);
-		ObjectBuilder.replace(object, object.transform(191), 4);
-		ObjectBuilder.add(new GameObject(192, Location.create(2462, 3383, 0)), 4);
+		SceneryBuilder.replace(object, object.transform(191), 4);
+		SceneryBuilder.add(new Scenery(192, Location.create(2462, 3383, 0)), 4);
 		Location start = Location.create(2461, 3382, 0);
 		Location end = Location.create(2461, 3385, 0);
 		if (player.getLocation().getY() > object.getLocation().getY()) {
@@ -115,8 +115,8 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		if (n instanceof GameObject) {
-			switch (((GameObject) n).getId()) {
+		if (n instanceof Scenery) {
+			switch (((Scenery) n).getId()) {
 			case 190:
 				if (node.getLocation().getY() < n.getLocation().getY()) {
 					return Location.create(2461, 3382, 0);

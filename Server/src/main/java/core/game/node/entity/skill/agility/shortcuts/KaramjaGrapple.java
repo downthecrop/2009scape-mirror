@@ -8,7 +8,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -60,7 +60,7 @@ public class KaramjaGrapple extends OptionHandler {
     public boolean handle(Player player, Node node, String option) {
         Location destination;
         Location current = player.getLocation();
-        GameObject startTree, endTree;
+        Scenery startTree, endTree;
         Direction direction;
         if (current.getY() > 3134) { // starting at north side
             startTree = RegionManager.getObject(Location.create(2874, 3144, 0));
@@ -73,7 +73,7 @@ public class KaramjaGrapple extends OptionHandler {
             destination = Location.create(2874, 3142, 0);
             direction = Direction.NORTH;
         }
-        GameObject islandTree = RegionManager.getObject(Location.create(2873, 3134, 0));
+        Scenery islandTree = RegionManager.getObject(Location.create(2873, 3134, 0));
 
 
         switch (option) {

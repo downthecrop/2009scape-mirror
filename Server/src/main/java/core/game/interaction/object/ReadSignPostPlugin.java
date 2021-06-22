@@ -6,7 +6,7 @@ import core.game.component.Component;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.MinimapStateContext;
 import core.net.packet.out.MinimapState;
@@ -71,7 +71,7 @@ public class ReadSignPostPlugin extends OptionHandler {
 			}
 		});
 		player.getPacketDispatch();
-		final GameObject object = (GameObject) node;
+		final Scenery object = (Scenery) node;
 		Signs sign = Signs.forId(object.getId());
 		if (sign == null) {
 			return false;

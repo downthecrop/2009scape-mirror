@@ -10,7 +10,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.ImpactHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
@@ -61,11 +61,11 @@ public class PickableDoorHandler extends OptionHandler {
                 player.getPacketDispatch().sendMessage("The door is locked.");
                 return true;
             }
-            door.open(player, (GameObject) node);
+            door.open(player, (Scenery) node);
             return true;
         }
         if (option.equals("pick-lock")) {
-            door.pickLock(player, (GameObject) node);
+            door.pickLock(player, (Scenery) node);
             return true;
         }
         System.out.println("Unhandled door: " + node.getId());
@@ -74,8 +74,8 @@ public class PickableDoorHandler extends OptionHandler {
 
     @Override
     public Location getDestination(Node node, Node n) {
-        if (n instanceof GameObject) {
-            GameObject object = (GameObject) n;
+        if (n instanceof Scenery) {
+            Scenery object = (Scenery) n;
             if (object.getDefinition().hasAction("pick-lock")) {
                 return DoorActionHandler.getDestination((Entity) node, object);
             }
@@ -151,7 +151,7 @@ public class PickableDoorHandler extends OptionHandler {
          * @param player the player.
          * @param object the object.
          */
-        public void open(Player player, GameObject object) {
+        public void open(Player player, Scenery object) {
             if (isInside(player, object)) {
                 DoorActionHandler.handleAutowalkDoor(player, object);
                 player.getPacketDispatch().sendMessage("You go through the door.");
@@ -165,7 +165,7 @@ public class PickableDoorHandler extends OptionHandler {
          * @param player the player.
          * @param object the object.
          */
-        public void pickLock(Player player, GameObject object) {
+        public void pickLock(Player player, Scenery object) {
             boolean success = RandomFunction.random(12) >= 4;
             if (isInside(player, object)) {
                 player.getPacketDispatch().sendMessage("The door is already unlocked.");
@@ -196,7 +196,7 @@ public class PickableDoorHandler extends OptionHandler {
          * @param object the object.
          * @return {@code True} if so.
          */
-        private boolean isInside(Player player, GameObject object) {
+        private boolean isInside(Player player, Scenery object) {
             boolean inside = false;
             Direction dir = Direction.getLogicalDirection(player.getLocation(), object.getLocation());
             Direction direction = object.getDirection();

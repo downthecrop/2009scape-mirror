@@ -12,8 +12,8 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -155,12 +155,12 @@ public class AlchemistZone extends MTAZone {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void search(Player player, GameObject object) {
+	private void search(Player player, Scenery object) {
 		AlchemistSession session = getSession(player);
 		AlchemistItem item = session.getItem(object.getId());
 		if (object.getId() % 2 != 0) {
 			player.animate(Animation.create(3032));
-			ObjectBuilder.replace(object, object.transform(object.getId() + 1), 35);
+			SceneryBuilder.replace(object, object.transform(object.getId() + 1), 35);
 		}
 		if (item == null) {
 			player.sendMessage("The cupboard is empty.");

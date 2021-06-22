@@ -3,7 +3,7 @@ package rs09.game.node.entity.skill.agility
 import core.cache.def.impl.ObjectDefinition
 import core.game.content.global.action.DoorActionHandler
 import core.game.node.Node
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
@@ -31,7 +31,7 @@ class WildernessCourse
 @JvmOverloads constructor(player: Player? = null) : AgilityCourse(player, 5, 499.0) {
     override fun handle(player: Player, node: Node, option: String): Boolean {
         getCourse(player) // Sets the extension.
-        val `object` = node as GameObject
+        val `object` = node as Scenery
         when (`object`.id) {
             2309 -> handleEntrance(player, `object`)
             2307, 2308 -> {
@@ -52,7 +52,7 @@ class WildernessCourse
      * @param player the player.
      * @param object the object.
      */
-    private fun handleEntrance(player: Player, `object`: GameObject) {
+    private fun handleEntrance(player: Player, `object`: Scenery) {
         if (player.location.y > 3916 || player.skills.getLevel(Skills.AGILITY) >= 52) {
             DoorActionHandler.handleAutowalkDoor(player, `object`)
             if (player.location.y <= 3916) {
@@ -68,7 +68,7 @@ class WildernessCourse
      * @param player the player.
      * @param object the object.
      */
-    private fun handleEntranceObstacle(player: Player, `object`: GameObject) {
+    private fun handleEntranceObstacle(player: Player, `object`: Scenery) {
         GameWorld.Pulser.submit(object : Pulse(1, player) {
             var counter = 0
             val fail = AgilityHandler.hasFailed(player, 1, 0.3)
@@ -103,7 +103,7 @@ class WildernessCourse
      * @param player the pipe.
      * @param object the object.
      */
-    private fun handlePipe(player: Player, `object`: GameObject) {
+    private fun handlePipe(player: Player, `object`: Scenery) {
         if (`object`.location.y == 3948) {
             player.packetDispatch.sendMessage("You can't do that from here.")
             return
@@ -152,7 +152,7 @@ class WildernessCourse
      * @param player the player.
      * @param object the object.
      */
-    private fun handleRopeSwing(player: Player, `object`: GameObject) {
+    private fun handleRopeSwing(player: Player, `object`: Scenery) {
         if (player.location.y < 3554) {
             player.packetDispatch.sendMessage("You cannot do that from here.")
             return
@@ -166,7 +166,7 @@ class WildernessCourse
             return
         }
         ropeDelay = GameWorld.ticks + 2
-        player.packetDispatch.sendObjectAnimation(`object`, Animation.create(497), true)
+        player.packetDispatch.sendSceneryAnimation(`object`, Animation.create(497), true)
         AgilityHandler.forceWalk(player, 1, player.location, Location.create(3005, 3958, 0), Animation.create(751), 50, 20.0, "You skillfully swing across.", 1)
     }
 
@@ -175,7 +175,7 @@ class WildernessCourse
      * @param player the player.
      * @param object the object.
      */
-    private fun handleSteppingStones(player: Player, `object`: GameObject) {
+    private fun handleSteppingStones(player: Player, `object`: Scenery) {
         player.locks.lock()
         val fail = AgilityHandler.hasFailed(player, 1, 0.3)
         player.addExtension(LogoutTask::class.java, LocationLogoutTask(12, player.location))
@@ -204,7 +204,7 @@ class WildernessCourse
      * @param player the player.
      * @param object the object.
      */
-    private fun handleLogBalance(player: Player, `object`: GameObject) {
+    private fun handleLogBalance(player: Player, `object`: Scenery) {
         val failed = AgilityHandler.hasFailed(player, 1, 0.5)
         val end = if (failed) Location.create(2998, 3945, 0) else Location.create(2994, 3945, 0)
         player.packetDispatch.sendMessage("You walk carefully across the slippery log...")
@@ -226,7 +226,7 @@ class WildernessCourse
      * @param player the player.
      * @param object the object.
      */
-    private fun handleRockClimb(player: Player, `object`: GameObject) {
+    private fun handleRockClimb(player: Player, `object`: Scenery) {
         AgilityHandler.forceWalk(player, 4, Location.create(2994, 3937, 0), Location.create(2994, 3933, 0), Animation.create(740), 8, 0.0, "You reach the top.")
         GameWorld.Pulser.submit(object : Pulse(4, player) {
             override fun pulse(): Boolean {

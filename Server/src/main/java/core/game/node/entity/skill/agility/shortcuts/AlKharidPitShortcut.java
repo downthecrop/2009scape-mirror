@@ -5,7 +5,7 @@ import core.game.node.entity.skill.agility.AgilityShortcut;
 import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -35,7 +35,7 @@ public class AlKharidPitShortcut extends AgilityShortcut {
 	}
 
 	@Override
-	public void run(Player player, GameObject object, String option, boolean failed) {
+	public void run(Player player, Scenery object, String option, boolean failed) {
 		switch (object.getId()) {
 		case 9331:
 			ForceMovement.run(player, player.getLocation(), Location.create(3303, 3315, 0), ANIMATION, ANIMATION, Direction.EAST, 13).setEndAnimation(Animation.RESET);
@@ -48,7 +48,7 @@ public class AlKharidPitShortcut extends AgilityShortcut {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		final GameObject object = (GameObject) n;
+		final Scenery object = (Scenery) n;
 		if (object.getId() == 9331) {
 			return object.getLocation().transform(1, 0, 0);
 		}

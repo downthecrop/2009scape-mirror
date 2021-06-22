@@ -6,8 +6,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Initializable;
@@ -35,7 +35,7 @@ public final class TaverlyDungeonPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final int id = ((GameObject) node).getId();
+		final int id = ((Scenery) node).getId();
 		switch (id) {
 		case 2143:
 		case 2144:
@@ -48,9 +48,9 @@ public final class TaverlyDungeonPlugin extends OptionHandler {
 						ARMOUR_SUITS[i] = npc = NPC.create(453, location);
 						npc.init();
 						npc.getProperties().getCombatPulse().attack(player);
-						GameObject object = RegionManager.getObject(location);
+						Scenery object = RegionManager.getObject(location);
 						if (object != null) {
-							ObjectBuilder.remove(object);
+							SceneryBuilder.remove(object);
 						}
 						alive = false;
 					}
@@ -62,7 +62,7 @@ public final class TaverlyDungeonPlugin extends OptionHandler {
 				}
 			}
 			player.removeAttribute("spawned_suits");
-			DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+			DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 			return true;
 		}
 		return false;

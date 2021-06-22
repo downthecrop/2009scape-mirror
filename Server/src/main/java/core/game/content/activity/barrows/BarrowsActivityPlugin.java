@@ -16,7 +16,7 @@ import core.game.node.entity.npc.agg.AggressiveHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.ActivityData;
 import core.game.node.entity.skill.summoning.familiar.Familiar;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -228,8 +228,8 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 
 	@Override
 	public boolean interact(Entity e, Node target, Option option) {
-		if (target instanceof GameObject) {
-			GameObject object = (GameObject) target;
+		if (target instanceof Scenery) {
+			Scenery object = (Scenery) target;
 			Player player = (Player) e;
 			if (object.getId() >= 6702 && object.getId() <= 6707) {
 				ClimbActionHandler.climb((Player) e, ClimbActionHandler.CLIMB_UP, BarrowsCrypt.getCrypt(object.getId() - 6702).getExitLocation());
@@ -264,7 +264,7 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 				if (index > -1) {
 					BarrowsCrypt.getCrypt(index).spawnBrother(player, RegionManager.getTeleportLocation(target.getLocation(), 1));
 				}
-				DoorActionHandler.handleAutowalkDoor(e, (GameObject) target);
+				DoorActionHandler.handleAutowalkDoor(e, (Scenery) target);
 				return true;
 			case 6821:
 				BarrowsCrypt.getCrypt(BarrowsCrypt.AHRIM).openSarcophagus((Player) e, object);

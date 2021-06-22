@@ -7,7 +7,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.TeleportManager.TeleportType;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -86,7 +86,7 @@ public final class WildernessPlugin extends OptionHandler {
 
 		@Override
 		public boolean handle(Player player, Node node, String option) {
-			int id = ((GameObject) node).getId();
+			int id = ((Scenery) node).getId();
 			switch (option) {
 			case "climb-down":
 				switch (id) {
@@ -94,7 +94,7 @@ public final class WildernessPlugin extends OptionHandler {
 					if (node.getLocation().equals(LOCATIONS[0])) {
 						ClimbActionHandler.climb(player, new Animation(827), LOCATIONS[1]);
 					} else {
-						ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+						ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 						return true;
 					}
 					break;
@@ -106,7 +106,7 @@ public final class WildernessPlugin extends OptionHandler {
 					if (node.getLocation().equals(LOCATIONS[6])) {
 						ClimbActionHandler.climb(player, new Animation(828), LOCATIONS[3]);
 					} else {
-						ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+						ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 						return true;
 					}
 					break;

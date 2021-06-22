@@ -13,8 +13,8 @@ import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -99,7 +99,7 @@ public class YanilleAgilityDungeon extends MapZone implements Plugin<Object> {
 					for (Item item : HERBS) {
 						player.getInventory().add(item, player);
 					}
-					ObjectBuilder.replace(target.asObject(), target.asObject().transform(target.getId() + 1), 5);
+					SceneryBuilder.replace(target.asObject(), target.asObject().transform(target.getId() + 1), 5);
 				}
 				return true;
 			case 378:
@@ -121,7 +121,7 @@ public class YanilleAgilityDungeon extends MapZone implements Plugin<Object> {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void handleBalancingLedge(final Player player, GameObject object) {
+	private void handleBalancingLedge(final Player player, Scenery object) {
 		if (player.getSkills().getLevel(Skills.AGILITY) < 40) {
 			player.getDialogueInterpreter().sendDialogue("You need an Agility level of at least 40 in order to do this.");
 			return;

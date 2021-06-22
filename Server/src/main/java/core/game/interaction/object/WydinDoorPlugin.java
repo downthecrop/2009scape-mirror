@@ -6,7 +6,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -31,7 +31,7 @@ public final class WydinDoorPlugin extends OptionHandler {
 			player.getDialogueInterpreter().open(557, true, true);
 			return true;
 		} else {
-			final GameObject object = (GameObject) node;
+			final Scenery object = (Scenery) node;
 			DoorActionHandler.handleAutowalkDoor(player, object);
 		}
 		return true;
@@ -39,6 +39,6 @@ public final class WydinDoorPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		return DoorActionHandler.getDestination(((Entity) node), ((GameObject) n));
+		return DoorActionHandler.getDestination(((Entity) node), ((Scenery) n));
 	}
 }

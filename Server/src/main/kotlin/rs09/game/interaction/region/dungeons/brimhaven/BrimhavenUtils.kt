@@ -1,8 +1,8 @@
 package rs09.game.interaction.region.dungeons.brimhaven
 
 import core.game.content.global.action.ClimbActionHandler
-import core.game.node.`object`.GameObject
-import core.game.node.`object`.ObjectBuilder
+import core.game.node.`object`.Scenery
+import core.game.node.`object`.SceneryBuilder
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
@@ -15,7 +15,7 @@ import core.game.world.update.flag.context.Animation
 import rs09.game.world.GameWorld
 
 object BrimhavenUtils {
-    fun getVineDestination(player: Player, node: GameObject): Location {
+    fun getVineDestination(player: Player, node: Scenery): Location {
         if (node.rotation % 2 != 0) {
             return if (player.location.x > node.location.x) {
                 node.location.transform(-1, 0, 0)
@@ -26,7 +26,7 @@ object BrimhavenUtils {
         } else node.location.transform(0, 1, 0)
     }
 
-    fun handleStairs(node: GameObject, player: Player){
+    fun handleStairs(node: Scenery, player: Player){
         when(node.id){
             5094 -> ClimbActionHandler.climb(player, null, Location.create(2643, 9594, 2))
             5096 -> ClimbActionHandler.climb(player, null, Location.create(2649, 9591, 0))
@@ -39,7 +39,7 @@ object BrimhavenUtils {
         }
     }
 
-    fun handleSteppingStones(player: Player, node: GameObject){
+    fun handleSteppingStones(player: Player, node: Scenery){
         if (player.skills.getLevel(Skills.AGILITY) < 12) {
             player.packetDispatch.sendMessage("You need an agility level of 12 to cross this.")
             return
@@ -70,7 +70,7 @@ object BrimhavenUtils {
         })
     }
 
-    fun handleVines(player: Player, node: GameObject){
+    fun handleVines(player: Player, node: Scenery){
         val level: Int = 10 + (node.id - 5103) * 6
         if (player.skills.getLevel(Skills.WOODCUTTING) < level) {
             player.packetDispatch.sendMessage("You need a woodcutting level of $level to chop down this vine.")
@@ -84,7 +84,7 @@ object BrimhavenUtils {
         player.animate(tool.animation)
         player.pulseManager.run(object : Pulse(3, player) {
             override fun pulse(): Boolean {
-                if (ObjectBuilder.replace(node.asObject(), node.asObject().transform(0), 2)) {
+                if (SceneryBuilder.replace(node.asObject(), node.asObject().transform(0), 2)) {
                     val destination = getVineDestination(player,node.asObject())
                     player.lock(3)
                     player.walkingQueue.reset()

@@ -1,7 +1,7 @@
 package rs09.game.interaction.`object`
 
-import core.game.node.`object`.GameObject
-import core.game.node.`object`.ObjectBuilder
+import core.game.node.`object`.Scenery
+import core.game.node.`object`.SceneryBuilder
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
@@ -20,20 +20,20 @@ class GutanothChestInteractionHandler : InteractionListener(){
 
         on(CHEST,OBJECT,"open"){player,node ->
             val delay = player.getAttribute("gutanoth-chest-delay", 0L)
-            GameWorld.Pulser.submit(ChestPulse(player,System.currentTimeMillis() > delay, node as GameObject))
+            GameWorld.Pulser.submit(ChestPulse(player,System.currentTimeMillis() > delay, node as Scenery))
             return@on true
         }
 
     }
 
-    class ChestPulse(val player: Player, val isLoot: Boolean, val chest: GameObject): Pulse(){
+    class ChestPulse(val player: Player, val isLoot: Boolean, val chest: Scenery): Pulse(){
         var ticks = 0
         override fun pulse(): Boolean {
             when(ticks++){
                 0 -> {
                     player.lock()
                     player.animator.animate(Animation(536))
-                    ObjectBuilder.replace(chest, GameObject(2828,chest.location,chest.rotation), 5)
+                    SceneryBuilder.replace(chest, Scenery(2828, chest.location, chest.rotation), 5)
                 }
                 2 -> {lootChest(player)}
                 3 -> {player.unlock(); return true}

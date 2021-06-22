@@ -8,7 +8,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.plugin.PluginManifest;
@@ -37,7 +37,7 @@ public final class PortalOptionPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		GameObject object = node.asObject();
+		Scenery object = node.asObject();
 		if (object.getId() == 13405 && option.equals("enter")) {
 			HouseManager.leave(player);
 			return true;

@@ -6,8 +6,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -53,14 +53,14 @@ public final class SpiritKyattOptionPlugin extends OptionHandler {
 				player.getPacketDispatch().sendMessage("You don't have enough inventory space.");
 				return true;
 			}
-			ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(14908), 500);
+			SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(14908), 500);
 			break;
 		case 14910:
 			if (!player.getInventory().add(BRONZE_PICKAXE)) {
 				player.getPacketDispatch().sendMessage("You don't have enough inventory space.");
 				return true;
 			}
-			ObjectBuilder.replace(((GameObject) node), ((GameObject) node).transform(14908), 500);
+			SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(14908), 500);
 			break;
 		}
 		return true;

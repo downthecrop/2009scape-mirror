@@ -8,7 +8,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -41,7 +41,7 @@ public final class MiningGuildPlugin extends OptionHandler {
 				ClimbActionHandler.climb(player, new Animation(828), Location.create(3021, 9739, 0));
 				return true;
 			}
-			ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+			ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 			return true;
 		}
 		if (option.equals("open")) {
@@ -49,13 +49,13 @@ public final class MiningGuildPlugin extends OptionHandler {
 				player.getDialogueInterpreter().open(382, NPC.create(382, Location.create(0, 0, 0)), 1);
 				return true;
 			}
-			DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+			DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 		}
 		if (option.equals("climb-up")) {
 			if (player.getLocation().withinDistance(new Location(3019, 9739, 0))) {
 				ClimbActionHandler.climb(player, new Animation(828), new Location(3017, 3339, 0));
 			} else {
-				ClimbActionHandler.climbLadder(player, (GameObject) node, "climb-up");
+				ClimbActionHandler.climbLadder(player, (Scenery) node, "climb-up");
 			}
 		}
 		return true;

@@ -12,7 +12,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.plugin.PluginManager;
@@ -123,7 +123,7 @@ public class ClockmakersBenchPlugin extends OptionHandler {
 
 		@Override
 		public boolean open(Object... args) {
-			GameObject object = (GameObject) args[0];
+			Scenery object = (Scenery) args[0];
 			decoration = Decoration.forObjectId(object.getId());
 			if (decoration != null) {
 				switch (decoration) {

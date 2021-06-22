@@ -10,8 +10,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -55,7 +55,7 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		final GameObject object = ((GameObject) node);
+		final Scenery object = ((Scenery) node);
 		final LeverCacheExtension extension = LeverCacheExtension.extend(player);
 		Lever lever = Lever.forObject(object.getId());
 		switch (option) {
@@ -127,7 +127,7 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
 		 * @param lever the lever.
 		 * @param object the object.
 		 */
-		public final void pull(final Lever lever, final GameObject object) {
+		public final void pull(final Lever lever, final Scenery object) {
 			final boolean up = isUp(lever);
 			levers[lever.ordinal()] = !up;
 			player.animate(!up ? UP_ANIMATION : DOWN_ANIMATION);
@@ -154,7 +154,7 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
 		 * Method used to walk through a door.
 		 * @param object the object.
 		 */
-		public final void walk(final GameObject object) {
+		public final void walk(final Scenery object) {
 			player.lock(4);
 			GameWorld.getPulser().submit(new Pulse(1, player, object) {
 				@Override
@@ -162,16 +162,16 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
 					Point p = (Point) getWalkData()[0];
 					int[] rotation = (int[]) getWalkData()[1];
 					Location destination = (Location) getWalkData()[2];
-					final GameObject opened = object.transform(object.getId(), rotation[0]);
+					final Scenery opened = object.transform(object.getId(), rotation[0]);
 					opened.setCharge(88);
 					opened.setLocation(object.getLocation().transform((int) p.getX(), (int) p.getY(), 0));
-					final GameObject second = DoorActionHandler.getSecondDoor(object, player);
-					ObjectBuilder.replace(object, opened, 2);
+					final Scenery second = DoorActionHandler.getSecondDoor(object, player);
+					SceneryBuilder.replace(object, opened, 2);
 					if (second != null) {
-						final GameObject secondOpened = second.transform(second.getId(), rotation[1]);
+						final Scenery secondOpened = second.transform(second.getId(), rotation[1]);
 						secondOpened.setCharge(88);
 						secondOpened.setLocation(second.getLocation().transform((int) p.getX(), (int) p.getY(), 0));
-						ObjectBuilder.replace(second, secondOpened, 2);
+						SceneryBuilder.replace(second, secondOpened, 2);
 					}
 					AgilityHandler.walk(player, 0, player.getLocation(), destination, null, 0, null);
 					return true;
@@ -511,11 +511,11 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(final Node node, final Node n) {
-		if (n instanceof GameObject) {
+		if (n instanceof Scenery) {
 			final Player player = ((Player) node);
 			final int x = player.getLocation().getX();
 			final int y = player.getLocation().getY();
-			Location loc = ((GameObject) n).getLocation();
+			Location loc = ((Scenery) n).getLocation();
 			if (loc.equals(new Location(3108, 9758, 0))) {
 				if (y <= 9757) {
 					return Location.create(3108, 9757, 0);

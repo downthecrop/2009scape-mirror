@@ -2,7 +2,7 @@ package core.game.interaction.item.withobject;
 
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -28,7 +28,7 @@ public final class GWDEntranceRopeUsage extends UseWithHandler {
 
 	@Override
 	public boolean handle(NodeUsageEvent event) {
-		GameObject object = (GameObject) event.getUsedWith();
+		Scenery object = (Scenery) event.getUsedWith();
 		return object.getInteraction().get(0).getHandler().handle(event.getPlayer(), object, "tie-rope");
 	}
 

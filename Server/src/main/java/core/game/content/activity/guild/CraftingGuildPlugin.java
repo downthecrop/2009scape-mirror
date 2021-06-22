@@ -12,7 +12,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -41,7 +41,7 @@ public final class CraftingGuildPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		final int id = node instanceof GameObject ? ((GameObject) node).getId() : ((NPC) node).getId();
+		final int id = node instanceof Scenery ? ((Scenery) node).getId() : ((NPC) node).getId();
 		switch (option) {
 		case "open":
 			switch (id) {
@@ -56,9 +56,9 @@ public final class CraftingGuildPlugin extends OptionHandler {
 						return true;
 					}
 					player.getDialogueInterpreter().sendDialogues(805, null, "Welcome to the Guild of Master Craftsmen.");
-					DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+					DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				} else {
-					DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+					DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 					return true;
 				}
 				break;
@@ -77,8 +77,8 @@ public final class CraftingGuildPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		if (n instanceof GameObject) {
-			return DoorActionHandler.getDestination((Player) node, (GameObject) n);
+		if (n instanceof Scenery) {
+			return DoorActionHandler.getDestination((Player) node, (Scenery) n);
 		}
 		return null;
 	}

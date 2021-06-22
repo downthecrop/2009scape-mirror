@@ -5,7 +5,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -25,7 +25,7 @@ public final class ChampionsArenaPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		int id = node instanceof GameObject ? ((GameObject) node).getId() : ((NPC) node).getId();
+		int id = node instanceof Scenery ? ((Scenery) node).getId() : ((NPC) node).getId();
 		switch (id) {
 		case 10556:
 			player.getDialogueInterpreter().open(3050, true, true);

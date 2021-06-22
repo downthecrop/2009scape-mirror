@@ -5,7 +5,7 @@ import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -39,14 +39,14 @@ public final class HamHideoutPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		final int id = ((GameObject) node).getId();
+		final int id = ((Scenery) node).getId();
 		switch (id) {
 		case 5493:
 			if (player.getLocation().withinDistance(Location.create(3149, 9652, 0))) {
 				ClimbActionHandler.climb(player, new Animation(828), new Location(3165, 3251, 0));
 				return true;
 			}
-			ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+			ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 			return true;
 		case 5490:
 		case 5491:

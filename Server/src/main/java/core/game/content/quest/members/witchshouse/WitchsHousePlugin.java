@@ -14,7 +14,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -43,7 +43,7 @@ public class WitchsHousePlugin extends OptionHandler {
     public boolean handle(Player player, Node node, String option) {
         final Quest quest = player.getQuestRepository().getQuest("Witch's House");
         final GroundItem ball = GroundItemManager.get(2407, new Location(2935, 3460, 0), null);
-        final int id = node instanceof Item ? ((Item) node).getId() : node instanceof GameObject ? ((GameObject) node).getId() : node instanceof NPC ? ((NPC) node).getId() : node.getId();
+        final int id = node instanceof Item ? ((Item) node).getId() : node instanceof Scenery ? ((Scenery) node).getId() : node instanceof NPC ? ((NPC) node).getId() : node.getId();
         // boolean killedExperiment = player.getAttribute("witchs_house:experiment_killed",false);
         // boolean experimentAlive = !player.getAttribute("witchs_house:experiment_killed", false);
         boolean readBook = player.getAttribute("readWitchsBook", false);
@@ -109,14 +109,14 @@ public class WitchsHousePlugin extends OptionHandler {
                     break;
                 }
                 if (player.getInventory().containsItem(DOOR_KEY) || player.getLocation().getX() >= 2901) {
-                    DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
                 } else {
                     player.sendMessage("The door is locked.");
                 }
                 break;
             case 2862:
                 if (magnetAttached || player.getLocation().getY() < 3466) {
-                    DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
                     player.removeAttribute("attached_magnet");
                 } else {
                     player.getDialogueInterpreter().sendDialogue("Strange... I can't see any kind of lock or handle to open this door.");
@@ -125,7 +125,7 @@ public class WitchsHousePlugin extends OptionHandler {
             case 2865:
             case 2866:
                 if (player.getEquipment().containsItem(LEATHER_GLOVES)) {
-                    DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
                 } else {
                     player.getImpactHandler().manualHit(player, RandomFunction.random(2, 3), ImpactHandler.HitsplatType.NORMAL);
                     player.getDialogueInterpreter().sendDialogue("As your bare hands touch the gate you feel a shock.");
@@ -136,11 +136,11 @@ public class WitchsHousePlugin extends OptionHandler {
                 break;
             case 2863:
                 if (player.getLocation().getX() >= 2934) {
-                    DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
                     return true;
                 }
                 if (player.getInventory().containsItem(KEY)) {
-                    DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
                 } else {
                     player.sendMessage("The door is locked.");
                 }
@@ -238,7 +238,7 @@ public class WitchsHousePlugin extends OptionHandler {
         public boolean handle(NodeUsageEvent event) {
             Player player = event.getPlayer();
             Item useditem = event.getUsedItem();
-            final GameObject object = (GameObject) event.getUsedWith();
+            final Scenery object = (Scenery) event.getUsedWith();
             assert useditem != null;
             assert object != null;
             if (player.getAttribute("mouse_out") != null && useditem.getId() == CHEESE.getId() && object.getId() == 15518) {

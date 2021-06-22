@@ -7,8 +7,8 @@ import core.game.node.Node;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
@@ -45,12 +45,12 @@ public final class ThievableChestPlugin extends OptionHandler {
 		switch (option) {
 		case "open":
 			if (chest != null) {
-				chest.open(player, (GameObject) node);
+				chest.open(player, (Scenery) node);
 				return true;
 			}
 			return true;
 		case "search for traps":
-			chest.searchTraps(player, (GameObject) node);
+			chest.searchTraps(player, (Scenery) node);
 			return true;
 		}
 		return true;
@@ -125,7 +125,7 @@ public final class ThievableChestPlugin extends OptionHandler {
 		 * @param player the player.
 		 * @param object the object.
 		 */
-		private void open(final Player player, final GameObject object) {
+		private void open(final Player player, final Scenery object) {
 			if (isRespawning()) {
 				player.sendMessage("It looks like this chest has already been looted.");
 				return;
@@ -140,7 +140,7 @@ public final class ThievableChestPlugin extends OptionHandler {
 		 * @param player the player.
 		 * @param object the object.
 		 */
-		private void searchTraps(final Player player, final GameObject object) {
+		private void searchTraps(final Player player, final Scenery object) {
 			player.faceLocation(object.getLocation());
 			if (isRespawning()) {
 				player.sendMessage("It looks like this chest has already been looted.");
@@ -182,7 +182,7 @@ public final class ThievableChestPlugin extends OptionHandler {
 						player.sendMessage("You find treasure inside!");
 						player.getSkills().addExperience(Skills.THIEVING, experience, true);
 						if (object.isActive()) {
-							ObjectBuilder.replace(object, object.transform(2574), 3);
+							SceneryBuilder.replace(object, object.transform(2574), 3);
 						}
 						setRespawn();
 						return true;

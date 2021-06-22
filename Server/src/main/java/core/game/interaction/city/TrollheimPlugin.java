@@ -18,7 +18,7 @@ import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -168,7 +168,7 @@ public final class TrollheimPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		final int id = node instanceof GameObject ? ((GameObject) node).getId() : ((NPC) node).getId();
+		final int id = node instanceof Scenery ? ((Scenery) node).getId() : ((NPC) node).getId();
 		final Location loc = node.getLocation();
 		int xOffset = 0, yOffset = 0;
 		Direction direction = Direction.SOUTH;
@@ -235,7 +235,7 @@ public final class TrollheimPlugin extends OptionHandler {
 			case 3786:// exit
 			case 3782:// entrance
 			case 3783:// entrance.
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				return true;
 			case 3672:
 				player.getPacketDispatch().sendMessage("You don't know how to open the secret door.");
@@ -261,7 +261,7 @@ public final class TrollheimPlugin extends OptionHandler {
 				player.getPacketDispatch().sendMessage("You need Climbing boots to negotiate these rocks.");
 				return true;
 			}
-			final GameObject object = ((GameObject) node);
+			final Scenery object = ((Scenery) node);
 			switch (id) {
 			case 3723:
 				bandaid(player, player.getLocation(), object.getLocation().transform(0, 2, 0), CLIMB_UP);
@@ -399,8 +399,8 @@ public final class TrollheimPlugin extends OptionHandler {
 
 	@Override
 	public Location getDestination(Node node, Node n) {
-		if (n instanceof GameObject) {
-			final GameObject object = ((GameObject) n);
+		if (n instanceof Scenery) {
+			final Scenery object = ((Scenery) n);
 			if (object.getId() == 3782) {
 				if (node.getLocation().getX() >= 2897) {
 					return Location.create(2897, 3618, 0);

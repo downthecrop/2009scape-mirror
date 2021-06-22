@@ -7,7 +7,7 @@ import core.game.interaction.UseWithHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -38,7 +38,7 @@ public final class CowMilkingPlugin extends OptionHandler {
 			player.getDialogueInterpreter().open(70099, "You need to have started the Cold War quest to attempt this.");
 			return true;
 		}
-		milk(player, (GameObject) node);
+		milk(player, (Scenery) node);
 		return true;
 	}
 
@@ -48,7 +48,7 @@ public final class CowMilkingPlugin extends OptionHandler {
 	 * @param object the object.
 	 * @return {@code True} if milked.
 	 */
-	public boolean milk(final Player player, final GameObject object) {
+	public boolean milk(final Player player, final Scenery object) {
 		if (!player.getInventory().contains(1925, 1) && !player.getInventory().contains(3727, 1)) {
 			player.getDialogueInterpreter().open(3807, true, true);
 			return true;
@@ -109,7 +109,7 @@ public final class CowMilkingPlugin extends OptionHandler {
 
 		@Override
 		public boolean handle(NodeUsageEvent event) {
-			milk(event.getPlayer(), (GameObject) event.getUsedWith());
+			milk(event.getPlayer(), (Scenery) event.getUsedWith());
 			return true;
 		}
 

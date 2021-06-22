@@ -16,8 +16,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import rs09.game.world.repository.Repository;
 import core.plugin.Plugin;
@@ -104,19 +104,19 @@ public final class KaramajaOptionPlugin extends OptionHandler {
                     player.getPacketDispatch().sendMessage("Not enough inventory space.");
                     return true;
                 }
-                final GameObject pineApple = ((GameObject) node);
+                final Scenery pineApple = ((Scenery) node);
                 if (pineApple.getId() == 1413) {
                     player.getPacketDispatch().sendMessage("There are no pineapples left on this plant.");
                     return true;
                 }
                 boolean last = pineApple.getId() == 14012;
                 if (player.getInventory().add(PINEAPPLE)) {
-                    ObjectBuilder.replace(pineApple, pineApple.transform(pineApple.getId() + 1), last ? 270 : 40);
+                    SceneryBuilder.replace(pineApple, pineApple.transform(pineApple.getId() + 1), last ? 270 : 40);
                     player.getPacketDispatch().sendMessage("You pick a pineapple.");
                 }
                 break;
             case "enter":
-                switch (((GameObject) node).getId()) {
+                switch (((Scenery) node).getId()) {
                     case 5083:
                         if (player.getAttribute("saniboch:paid", false) || player.getAchievementDiaryManager().getDiary(DiaryType.KARAMJA).isComplete()) {
                             ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, Location.create(2713, 9564, 0));
@@ -152,21 +152,21 @@ public final class KaramajaOptionPlugin extends OptionHandler {
                 }
                 break;
             case "pay-fare":
-                switch (((GameObject) node).getId()) {
+                switch (((Scenery) node).getId()) {
                     case 2230:
                         player.getPacketDispatch().sendMessage("This cart appears to have been out of reward for some time.");
                         break;
                 }
                 break;
             case "climb-up":
-                switch (((GameObject) node).getId()) {
+                switch (((Scenery) node).getId()) {
                     case 3618:
                         player.getProperties().setTeleportLocation(AGILITY_MAIN);
                         break;
                 }
                 break;
             case "climb-down":
-                switch (((GameObject) node).getId()) {
+                switch (((Scenery) node).getId()) {
                     case 492:
                         player.getPacketDispatch().sendMessage("You climb down through the pot hole.");
                         player.getProperties().setTeleportLocation(MUSA_POINT_DUNGEON);
@@ -182,7 +182,7 @@ public final class KaramajaOptionPlugin extends OptionHandler {
                 }
                 break;
             case "climb":
-                switch (((GameObject) node).getId()) {
+                switch (((Scenery) node).getId()) {
                     case 1764:
                         player.getProperties().setTeleportLocation(VOLCANO_RIM);
                         player.getPacketDispatch().sendMessage("You climb up the hanging rope...");
@@ -191,7 +191,7 @@ public final class KaramajaOptionPlugin extends OptionHandler {
                 }
                 break;
             case "open":
-                switch (((GameObject) node).getId()) {
+                switch (((Scenery) node).getId()) {
                     case 2626:
                         player.getDialogueInterpreter().open(789, Repository.findNPC(789));
                         break;
@@ -211,7 +211,7 @@ public final class KaramajaOptionPlugin extends OptionHandler {
                 }
                 break;
             case "search":
-                switch (((GameObject) node).getId()) {
+                switch (((Scenery) node).getId()) {
                     case 2078:
                         player.getPacketDispatch().sendMessage("There are no bananas left on the tree.");
                         break;
@@ -245,7 +245,7 @@ public final class KaramajaOptionPlugin extends OptionHandler {
             case "shake":
                 if (player.getInventory().hasSpaceFor(new Item(Items.PALM_LEAF_2339))) {
                     player.getPacketDispatch().sendMessage("You shake the tree...");
-                    ObjectBuilder.replace(node.asObject(), node.asObject().transform(2976), 60); // 35 second cool-down
+                    SceneryBuilder.replace(node.asObject(), node.asObject().transform(2976), 60); // 35 second cool-down
                     player.lock();
                     final Pulse palmPulse = new Pulse(2) {
                         @Override
@@ -275,9 +275,9 @@ public final class KaramajaOptionPlugin extends OptionHandler {
 
     @Override
     public Location getDestination(Node node, Node n) {
-        if (n instanceof GameObject) {
-            if (((GameObject) n).getDefinition().hasAction("open")) {
-                return DoorActionHandler.getDestination((Player) node, (GameObject) n);
+        if (n instanceof Scenery) {
+            if (((Scenery) n).getDefinition().hasAction("open")) {
+                return DoorActionHandler.getDestination((Player) node, (Scenery) n);
             }
         }
         return null;

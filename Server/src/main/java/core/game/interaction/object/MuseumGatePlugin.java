@@ -5,7 +5,7 @@ import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -28,7 +28,7 @@ public final class MuseumGatePlugin extends OptionHandler {
 		if (player.getLocation().getY() >= 3447) {
 			player.getDialogueInterpreter().open(5941);
 		} else {
-			DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+			DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 			return true;
 		}
 		return true;

@@ -18,8 +18,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -81,7 +81,7 @@ public final class PartyRoomPlugin extends OptionHandler {
 		switch (node.getId()) {
 		case CLOSED_CHEST:
 			player.animate(Animation.create(536));
-			ObjectBuilder.replace(node.asObject(), node.asObject().transform(OPEN_CHEST));
+			SceneryBuilder.replace(node.asObject(), node.asObject().transform(OPEN_CHEST));
 			break;
 		case OPEN_CHEST:
 			switch (option) {
@@ -90,7 +90,7 @@ public final class PartyRoomPlugin extends OptionHandler {
 				break;
 			case "shut":
 				player.animate(Animation.create(535));
-				ObjectBuilder.replace(node.asObject(), node.asObject().transform(CLOSED_CHEST));
+				SceneryBuilder.replace(node.asObject(), node.asObject().transform(CLOSED_CHEST));
 				break;
 			}
 			break;
@@ -193,7 +193,7 @@ public final class PartyRoomPlugin extends OptionHandler {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void handleLever(Player player, GameObject object) {
+	private void handleLever(Player player, Scenery object) {
 		player.lock(3);
 		player.faceLocation(object.getLocation());
 		player.animate(Animation.create(6933), 1);

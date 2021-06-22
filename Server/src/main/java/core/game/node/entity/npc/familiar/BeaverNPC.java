@@ -7,7 +7,7 @@ import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
 import core.game.node.entity.skill.summoning.familiar.Forager;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -63,7 +63,7 @@ public class BeaverNPC extends Forager {
 
 	@Override
 	protected boolean specialMove(FamiliarSpecial special) {
-		final GameObject object = (GameObject) special.getNode();
+		final Scenery object = (Scenery) special.getNode();
 		if (!isTree(object.getName())) {
 			owner.getPacketDispatch().sendMessages("This scroll only works on naturally growing, oak, willow, arctic pine", "teak, mahogany, maple, yew, and magic trees.");
 			return false;

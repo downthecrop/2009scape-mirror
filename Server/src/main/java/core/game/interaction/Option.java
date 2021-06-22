@@ -6,7 +6,7 @@ import core.cache.def.impl.ObjectDefinition;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 
 /**
  * Represents an Interaction option.
@@ -79,7 +79,7 @@ public final class Option {
 		if (node instanceof NPC) {
 			return NPCDefinition.getOptionHandler(nodeId, name);
 		}
-		if (node instanceof GameObject) {
+		if (node instanceof Scenery) {
 			return ObjectDefinition.getOptionHandler(nodeId, name);
 		}
 		if (node instanceof Item) {

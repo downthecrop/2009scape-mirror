@@ -14,8 +14,8 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.gather.SkillingTool;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -37,11 +37,11 @@ public class WoodcuttingSkillPulse extends Pulse {
     private WoodcuttingNode resource;
     private int ticks;
     private Player player;
-    private GameObject node;
+    private Scenery node;
     protected boolean resetAnimation = true;
 
 
-    public WoodcuttingSkillPulse(Player player, GameObject node) {
+    public WoodcuttingSkillPulse(Player player, Scenery node) {
         super(1, player, node);
         this.player = player;
         this.node = node;
@@ -200,9 +200,9 @@ public class WoodcuttingSkillPulse extends Pulse {
                     return true;
                 }
                 if (resource.getEmptyId() > -1) {
-                    ObjectBuilder.replace(node, node.transform(resource.getEmptyId()), resource.getRespawnDuration());
+                    SceneryBuilder.replace(node, node.transform(resource.getEmptyId()), resource.getRespawnDuration());
                 } else {
-                    ObjectBuilder.replace(node, node.transform(0), resource.getRespawnDuration());
+                    SceneryBuilder.replace(node, node.transform(0), resource.getRespawnDuration());
                 }
                 node.setActive(false);
                 return true;

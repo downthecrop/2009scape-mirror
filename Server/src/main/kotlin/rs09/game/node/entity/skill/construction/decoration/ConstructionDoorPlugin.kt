@@ -4,7 +4,7 @@ import core.cache.def.impl.ObjectDefinition
 import core.game.content.global.action.DoorActionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.construction.BuildHotspot
 import core.game.node.entity.skill.construction.HousingStyle
@@ -38,7 +38,7 @@ class ConstructionDoorPlugin : OptionHandler() {
     }
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
-        val `object` = node as GameObject
+        val `object` = node as Scenery
         val second = DoorActionHandler.getSecondDoor(`object`, player)
         when (option) {
             "pick-lock", "force" -> return false //TODO
@@ -52,7 +52,7 @@ class ConstructionDoorPlugin : OptionHandler() {
      * @param object The door.
      * @return The replace object id.
      */
-    private fun getReplaceId(`object`: GameObject): Int {
+    private fun getReplaceId(`object`: Scenery): Int {
         for (data in REPLACEMENT) {
             if (`object`.id == data[0]) {
                 return data[1]

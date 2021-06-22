@@ -12,7 +12,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.tools.StringUtils;
@@ -36,7 +36,7 @@ public final class WeaveOptionPlugin extends OptionHandler {
 		new SkillDialogueHandler(player, SkillDialogue.THREE_OPTION, WeavingItem.SACK.getProduct(), WeavingItem.BASKET.getProduct(), WeavingItem.CLOTH.getProduct()) {
 			@Override
 			public void create(int amount, int index) {
-				player.getPulseManager().run(new WeavePulse(player, (GameObject) node, WeavingItem.values()[index], amount));
+				player.getPulseManager().run(new WeavePulse(player, (Scenery) node, WeavingItem.values()[index], amount));
 			}
 		}.open();
 		return true;
@@ -47,7 +47,7 @@ public final class WeaveOptionPlugin extends OptionHandler {
 	 * @author 'Vexia
 	 * @version 1.0
 	 */
-	public static final class WeavePulse extends SkillPulse<GameObject> {
+	public static final class WeavePulse extends SkillPulse<Scenery> {
 
 		/**
 		 * Represents the animation to use.
@@ -75,7 +75,7 @@ public final class WeaveOptionPlugin extends OptionHandler {
 		 * @param node the node.
 		 * @param amount the amount.
 		 */
-		public WeavePulse(Player player, GameObject node, final WeavingItem type, final int amount) {
+		public WeavePulse(Player player, Scenery node, final WeavingItem type, final int amount) {
 			super(player, node);
 			this.type = type;
 			this.amount = amount;

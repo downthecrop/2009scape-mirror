@@ -4,8 +4,8 @@ import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 
@@ -93,8 +93,8 @@ public final class BedabinNomadDialogue extends DialoguePlugin {
 					break;
 				case 2:
 					end();
-					final GameObject door = RegionManager.getObject(new Location(3169, 3046, 0));
-					ObjectBuilder.replace(door, door.transform(2701), 2);
+					final Scenery door = RegionManager.getObject(new Location(3169, 3046, 0));
+					SceneryBuilder.replace(door, door.transform(2701), 2);
 					player.getWalkingQueue().reset();
 					player.getWalkingQueue().addPath(3169, 3046);
 					player.getPacketDispatch().sendMessage("You walk into the tent.");

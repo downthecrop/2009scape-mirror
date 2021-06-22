@@ -5,8 +5,8 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.herblore.Herbs;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.update.flag.context.Animation;
 import rs09.plugin.PluginManager;
@@ -98,7 +98,7 @@ public final class JunglePotion extends Quest {
 	public static enum JungleObjective {
 		JUNGLE_VINE(2575, Herbs.SNAKE_WEED, 10, "It grows near vines in an area to the south west where", "the ground turns soft and the water kisses your feet.") {
 			@Override
-			public void search(final Player player, final GameObject object) {
+			public void search(final Player player, final Scenery object) {
 				final Animation animation = Animation.create(2094);
 				player.animate(animation);
 				player.getPulseManager().run(new Pulse(animation.getDefinition().getDurationTicks(), player, object) {
@@ -118,7 +118,7 @@ public final class JunglePotion extends Quest {
 		},
 		PALM_TREE(2577, Herbs.ARDRIGAL, 20, "You are looking for Ardrigal. It is related to the palm", "and grows in its brothers shady profusion."), SITO_FOIL(2579, Herbs.SITO_FOIL, 30, "You are looking for Sito Foil, and it grows best where", "the ground has been blackened by the living flame."), VOLENCIA_MOSS(2581, Herbs.VOLENCIA_MOSS, 40, "You are looking for Volencia Moss. It clings to rocks", "for its existence. It is difficult to see, so you must", "search for it well."), ROGUES_PURSE(32106, Herbs.ROGUES_PUSE, 50, "It inhabits the darkness of the underground, and grows", "in the caverns to the north. A secret entrance to the", "caverns is set into the northern cliffs, be careful Bwana.") {
 			@Override
-			public void search(final Player player, final GameObject object) {
+			public void search(final Player player, final Scenery object) {
 				final Animation animation = Animation.create(2097);
 				player.animate(animation);
 				player.getPulseManager().run(new Pulse(animation.getDefinition().getDurationTicks(), player, object) {
@@ -175,7 +175,7 @@ public final class JunglePotion extends Quest {
 		 * @param player the player.
 		 * @param object the object.
 		 */
-		public void search(final Player player, final GameObject object) {
+		public void search(final Player player, final Scenery object) {
 			findHerb(player);
 			switchObject(object);
 		}
@@ -184,9 +184,9 @@ public final class JunglePotion extends Quest {
 		 * Switches the object's id.
 		 * @param object the object.
 		 */
-		public void switchObject(GameObject object) {
+		public void switchObject(Scenery object) {
 			if (object.isActive()) {
-				ObjectBuilder.replace(object, object.transform(object.getId() + 1), 80);
+				SceneryBuilder.replace(object, object.transform(object.getId() + 1), 80);
 			}
 		}
 

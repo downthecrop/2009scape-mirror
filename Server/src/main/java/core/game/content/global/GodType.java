@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -63,7 +63,7 @@ public enum GodType {
 	 * @param player the player.
 	 * @param statue the statue.
 	 */
-	public void pray(final Player player, final GameObject statue) {
+	public void pray(final Player player, final Scenery statue) {
 		if (hasAny(player)) {
 			player.lock(3);
 			player.animate(Animation.create(645));

@@ -3,10 +3,9 @@ package core.game.content.global.action;
 import core.game.container.impl.EquipmentContainer;
 import org.rs09.consts.Items;
 import core.game.node.entity.player.link.diary.DiaryType;
-import rs09.game.system.SystemLogger;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -42,7 +41,7 @@ public final class ClimbActionHandler {
      * @param object The rope object.
      * @param option The option.
      */
-    public static void climbRope(Player player, GameObject object, String option) {
+    public static void climbRope(Player player, Scenery object, String option) {
 
     }
 
@@ -53,7 +52,7 @@ public final class ClimbActionHandler {
      * @param object The trap door object.
      * @param option The option.
      */
-    public static void climbTrapdoor(Player player, GameObject object, String option) {
+    public static void climbTrapdoor(Player player, Scenery object, String option) {
 
     }
 
@@ -61,12 +60,12 @@ public final class ClimbActionHandler {
      * Handles the climbing of a ladder.
      *
      * @param player      The player.
-     * @param startLadder The game object.
+     * @param startLadder The scenery.
      * @param option      The option.
      * @return True if successfully climbed
      */
-    public static boolean climbLadder(Player player, GameObject startLadder, String option) {
-        GameObject endLadder = null;
+    public static boolean climbLadder(Player player, Scenery startLadder, String option) {
+        Scenery endLadder = null;
         Animation animation = CLIMB_UP;
         if (startLadder.getName().startsWith("Stair")) {
             animation = null;
@@ -88,8 +87,8 @@ public final class ClimbActionHandler {
                 endLadder = getLadder(startLadder, true);
                 break;
             case "climb":
-                GameObject upperLadder = getLadder(startLadder, false);
-                GameObject downLadder = getLadder(startLadder, true);
+                Scenery upperLadder = getLadder(startLadder, false);
+                Scenery downLadder = getLadder(startLadder, true);
                 if (upperLadder == null && downLadder != null) {
                     return climbLadder(player, startLadder, "climb-down");
                 }
@@ -117,7 +116,7 @@ public final class ClimbActionHandler {
      * @param object The object to teleport to.
      * @return The teleport destination.
      */
-    public static Location getDestination(GameObject object) {
+    public static Location getDestination(Scenery object) {
         int sizeX = object.getDefinition().sizeX;
         int sizeY = object.getDefinition().sizeY;
         if (object.getRotation() % 2 != 0) {
@@ -149,7 +148,7 @@ public final class ClimbActionHandler {
      * @param dir    The preferred direction from the object.
      * @return The teleporting destination.
      */
-    private static Location getDestination(GameObject object, int sizeX, int sizeY, Direction dir, int count) {
+    private static Location getDestination(Scenery object, int sizeX, int sizeY, Direction dir, int count) {
         Location loc = object.getLocation();
         if (dir.toInteger() % 2 != 0) {
             int x = dir.getStepX();
@@ -248,9 +247,9 @@ public final class ClimbActionHandler {
      * @param down   If the player is going down a floor.
      * @return The ladder the current ladder object leads to.
      */
-    private static GameObject getLadder(GameObject object, boolean down) {
+    private static Scenery getLadder(Scenery object, boolean down) {
         int mod = down ? -1 : 1;
-        GameObject ladder = RegionManager.getObject(object.getLocation().transform(0, 0, mod));
+        Scenery ladder = RegionManager.getObject(object.getLocation().transform(0, 0, mod));
         if (ladder == null || !isLadder(ladder)) {
             if (ladder != null && ladder.getName().equals(object.getName())) {
                 ladder = RegionManager.getObject(ladder.getLocation().transform(0, 0, mod));
@@ -275,10 +274,10 @@ public final class ClimbActionHandler {
      * @param l The location.
      * @return The ladder.
      */
-    private static GameObject findLadder(Location l) {
+    private static Scenery findLadder(Location l) {
         for (int x = -5; x < 6; x++) {
             for (int y = -5; y < 6; y++) {
-                GameObject object = RegionManager.getObject(l.transform(x, y, 0));
+                Scenery object = RegionManager.getObject(l.transform(x, y, 0));
                 if (object != null && isLadder(object)) {
                     return object;
                 }
@@ -293,7 +292,7 @@ public final class ClimbActionHandler {
      * @param object The object.
      * @return {@code True} if so.
      */
-    private static boolean isLadder(GameObject object) {
+    private static boolean isLadder(Scenery object) {
         for (String option : object.getDefinition().getOptions()) {
             if (option != null && (option.contains("Climb"))) {
                 return true;
@@ -341,11 +340,11 @@ public final class ClimbActionHandler {
         /**
          * Represents the object to use.
          */
-        private GameObject object;
+        private Scenery object;
 
         @Override
         public boolean open(Object... args) {
-            object = (GameObject) args[0];
+            object = (Scenery) args[0];
             interpreter.sendOptions("What would you like to do?", "Climb Up.", "Climb Down.");
             stage = 0;
             return true;

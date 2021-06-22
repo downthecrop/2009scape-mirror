@@ -15,7 +15,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.HintIconManager;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -116,7 +116,7 @@ public final class FishingExplosivePlugin extends OptionHandler {
 			final int delay = (int) (2 + (player.getLocation().getDistance(event.getUsedWith().getLocation())) * 0.5);
 			player.animate(ANIMATION);
 			player.getPacketDispatch().sendMessage("You hurl the shuddering vial into the water...");
-			sendProjectile(player, (GameObject) event.getUsedWith());
+			sendProjectile(player, (Scenery) event.getUsedWith());
 			GameWorld.getPulser().submit(new Pulse(delay, player) {
 				@Override
 				public boolean pulse() {
@@ -146,7 +146,7 @@ public final class FishingExplosivePlugin extends OptionHandler {
 		 * @param player the player.
 		 * @param object the object.
 		 */
-		private void sendProjectile(final Player player, final GameObject object) {
+		private void sendProjectile(final Player player, final Scenery object) {
 			Projectile p = Projectile.create(player, null, 49, 30, 20, 30, Projectile.getSpeed(player, object.getLocation()));
 			p.setEndLocation(object.getLocation());
 			p.send();

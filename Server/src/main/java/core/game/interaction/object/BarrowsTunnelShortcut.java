@@ -6,7 +6,7 @@ import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -43,7 +43,7 @@ public class BarrowsTunnelShortcut extends OptionHandler {
 			break;
 		case 5052:
 			player.getPacketDispatch().sendMessage("You search the wall and find a lever.");
-			DoorActionHandler.handleAutowalkDoor(player, ((GameObject) node));
+			DoorActionHandler.handleAutowalkDoor(player, ((Scenery) node));
 			break;
 		case 30261:
 		case 30262:

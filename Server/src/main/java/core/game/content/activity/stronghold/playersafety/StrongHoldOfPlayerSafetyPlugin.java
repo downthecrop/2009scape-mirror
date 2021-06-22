@@ -4,7 +4,7 @@ import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.component.ComponentPlugin;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.CameraContext;
@@ -152,7 +152,7 @@ public class StrongHoldOfPlayerSafetyPlugin implements Plugin<Object> {
 		 * Sends the jail-plague interface.
 		 * @param player The {@code Player} instance.
 		 */
-		public void read(Player player, GameObject object) {
+		public void read(Player player, Scenery object) {
 			int x = object.getLocation().getX();
 			int y = object.getLocation().getY();
 			int rotationX = x;

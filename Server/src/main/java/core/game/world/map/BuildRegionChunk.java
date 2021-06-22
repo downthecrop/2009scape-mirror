@@ -5,13 +5,13 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.item.Item;
 import core.game.node.object.Constructed;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import rs09.game.system.SystemLogger;
 import core.game.world.map.build.LandscapeParser;
 import core.net.packet.IoBuffer;
-import core.net.packet.out.ClearObject;
+import core.net.packet.out.ClearScenery;
 import core.net.packet.out.ConstructGroundItem;
-import core.net.packet.out.ConstructObject;
+import core.net.packet.out.ConstructScenery;
 
 /**
  * A region chunk, used for easily modifying objects.
@@ -28,7 +28,7 @@ public class BuildRegionChunk extends RegionChunk {
 	/**
 	 * The list of changes made.
 	 */
-	private final GameObject[][][] objects;
+	private final Scenery[][][] objects;
 
 	/**
 	 * Constructs a new {@code BuildRegionChunk} {@code Object}
@@ -38,7 +38,7 @@ public class BuildRegionChunk extends RegionChunk {
 	 */
 	public BuildRegionChunk(Location base, int rotation, RegionPlane plane) {
 		super(base, rotation, plane);
-		this.objects = new GameObject[ARRAY_SIZE][8][8];
+		this.objects = new Scenery[ARRAY_SIZE][8][8];
 		this.objects[0] = super.objects;
 	}
 
@@ -48,13 +48,13 @@ public class BuildRegionChunk extends RegionChunk {
 		for (int i = 0; i < objects.length; i++) {
 			for (int x = 0; x < SIZE; x++) {
 				for (int y = 0; y < SIZE; y++) {
-					GameObject o = objects[i][x][y];
+					Scenery o = objects[i][x][y];
 					if (o instanceof Constructed) {
-						ConstructObject.write(buffer, o);
+						ConstructScenery.write(buffer, o);
 						updated = true;
 					}
 					else if (o != null && !o.isRenderable()) {
-						ClearObject.write(buffer, o);
+						ClearScenery.write(buffer, o);
 						updated = true;
 					}
 				}
@@ -80,7 +80,7 @@ public class BuildRegionChunk extends RegionChunk {
 			SystemLogger.logErr("Region chunk was already rotated!");
 			return;
 		}
-		GameObject[][][] copy = new GameObject[ARRAY_SIZE][SIZE][SIZE];
+		Scenery[][][] copy = new Scenery[ARRAY_SIZE][SIZE][SIZE];
 		int baseX = currentBase.getLocalX();
 		int baseY = currentBase.getLocalY();
 		for (int x = 0; x < SIZE; x++) {
@@ -98,16 +98,16 @@ public class BuildRegionChunk extends RegionChunk {
 		for (int i = 0; i < objects.length; i++) {
 			for (int x = 0; x < SIZE; x++) {
 				for (int y = 0; y < SIZE; y++) {
-					GameObject object = copy[i][x][y];
+					Scenery object = copy[i][x][y];
 					if (object != null) {
 						int[] pos = getRotatedPosition(x, y, object.getDefinition().getSizeX(), object.getDefinition().getSizeY(), object.getRotation(), rotation);
-						GameObject obj = object.transform(object.getId(), (object.getRotation() + rotation) % 4, object.getLocation().transform(pos[0] - x, pos[1] - y, 0));
+						Scenery obj = object.transform(object.getId(), (object.getRotation() + rotation) % 4, object.getLocation().transform(pos[0] - x, pos[1] - y, 0));
 						if (object instanceof Constructed) {
 							obj = obj.asConstructed();
 						}
 						obj.setActive(object.isActive());
 						obj.setRenderable(object.isRenderable());
-						LandscapeParser.flagGameObject(plane, baseX + pos[0], baseY + pos[1], obj, true, true);
+						LandscapeParser.flagScenery(plane, baseX + pos[0], baseY + pos[1], obj, true, true);
 					}
 				}
 			}
@@ -120,7 +120,7 @@ public class BuildRegionChunk extends RegionChunk {
 		for (int i = 0; i < chunk.objects.length; i++) {
 			for (int x = 0; x < SIZE; x++) {
 				for (int y = 0; y < SIZE; y++) {
-					GameObject o = objects[i][x][y];
+					Scenery o = objects[i][x][y];
 					if (o instanceof Constructed) {
 						chunk.objects[i][x][y] = o.transform(o.getId(), o.getRotation()).asConstructed();
 					}
@@ -148,13 +148,13 @@ public class BuildRegionChunk extends RegionChunk {
 	}
 
 	/**
-	 * Removes the game object.
+	 * Removes the scenery.
 	 * @param object The object to remove.
 	 */
-	public void remove(GameObject object) {
+	public void remove(Scenery object) {
 		int chunkX = object.getLocation().getChunkOffsetX();
 		int chunkY = object.getLocation().getChunkOffsetY();
-		GameObject current = null;
+		Scenery current = null;
 		int index = -1;
 		int i = 0;
 		while ((current == null || current.getId() != object.getId()) && i < objects.length) {
@@ -175,13 +175,13 @@ public class BuildRegionChunk extends RegionChunk {
 	}
 
 	/**
-	 * Adds the game object.
+	 * Adds the scenery.
 	 * @param object The object to add.
 	 */
-	public void add(GameObject object) {
+	public void add(Scenery object) {
 		int chunkX = object.getLocation().getChunkOffsetX();
 		int chunkY = object.getLocation().getChunkOffsetY();
-		GameObject current = null;
+		Scenery current = null;
 		int index = -1;
 		int i = 0;
 		while ((current == null || current.getId() != object.getId()) && i < objects.length) {
@@ -208,14 +208,14 @@ public class BuildRegionChunk extends RegionChunk {
 	 * Stores an object on the region chunk.
 	 * @param object The object.
 	 */
-	public void store(GameObject object) {
+	public void store(Scenery object) {
 		if (object == null) {
 			return;
 		}
 		int chunkX = object.getLocation().getChunkOffsetX();
 		int chunkY = object.getLocation().getChunkOffsetY();
 		for (int i = 0; i < objects.length; i++) {
-			GameObject stat = objects[i][chunkX][chunkY];
+			Scenery stat = objects[i][chunkX][chunkY];
 			if (stat == null || stat.getId() < 1) {
 				objects[i][chunkX][chunkY] = object;
 				object.setActive(true);
@@ -242,7 +242,7 @@ public class BuildRegionChunk extends RegionChunk {
 	 */
 	public int getIndex(int x, int y, int objectId) {
 		for (int i = 0; i < objects.length; i++) {
-			GameObject o = get(x, y, i);
+			Scenery o = get(x, y, i);
 			if (o != null && ((objectId > -1 && o.getId() == objectId) || (objectId == -1 && o.getDefinition().hasOptions(false)))) {
 				return i;
 			}
@@ -251,19 +251,19 @@ public class BuildRegionChunk extends RegionChunk {
 	}
 
 	/**
-	 * Gets a game object.
+	 * Gets a scenery.
 	 * @param x The chunk x-coordinate.
 	 * @param y The chunk y-coordinate.
 	 * @param index The index (0 = default).
 	 * @return The object.
 	 */
-	public GameObject get(int x, int y, int index) {
+	public Scenery get(int x, int y, int index) {
 		return objects[index][x][y];
 	}
 
 	@Override
-	public GameObject[] getObjects(int chunkX, int chunkY) {
-		GameObject[] objects = new GameObject[ARRAY_SIZE];
+	public Scenery[] getObjects(int chunkX, int chunkY) {
+		Scenery[] objects = new Scenery[ARRAY_SIZE];
 		for (int i = 0; i < ARRAY_SIZE; i++) {
 			objects[i] = this.objects[i][chunkX][chunkY];
 		}
@@ -275,7 +275,7 @@ public class BuildRegionChunk extends RegionChunk {
 	 * @param index The index.
 	 * @return The objects array.
 	 */
-	public GameObject[][] getObjects(int index) {
+	public Scenery[][] getObjects(int index) {
 		return objects[index];
 	}
 }

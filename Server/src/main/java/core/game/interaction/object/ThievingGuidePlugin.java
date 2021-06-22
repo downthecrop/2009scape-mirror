@@ -9,8 +9,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.ChanceItem;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -97,7 +97,7 @@ public class ThievingGuidePlugin extends OptionHandler {
 				@Override
 				public boolean pulse() {
 					if (success) {
-						handleSuccess(player, (GameObject) node);
+						handleSuccess(player, (Scenery) node);
 						return true;
 					}
 					final boolean trapped = RandomFunction.random(3) == 1;
@@ -130,8 +130,8 @@ public class ThievingGuidePlugin extends OptionHandler {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	public void handleSuccess(final Player player, final GameObject object) {
-		ObjectBuilder.replace(object, object.transform(CRACKED_SAFE), 1);
+	public void handleSuccess(final Player player, final Scenery object) {
+		SceneryBuilder.replace(object, object.transform(CRACKED_SAFE), 1);
 		player.getPacketDispatch().sendMessage("You get some loot.");
 		player.getSkills().addExperience(Skills.THIEVING, experience, true);
 		addItem(player);

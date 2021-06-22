@@ -7,8 +7,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 
@@ -27,7 +27,7 @@ public final class JunglePotionPlugin extends OptionHandler {
 		for (JungleObjective s : JungleObjective.values()) {
 			ObjectDefinition.forId(s.getObjectId()).getHandlers().put("option:search", this);
 		}
-		ObjectBuilder.add(new GameObject(2585, Location.create(2828, 9522, 0), 8, 0));
+		SceneryBuilder.add(new Scenery(2585, Location.create(2828, 9522, 0), 8, 0));
 		return this;
 	}
 
@@ -44,7 +44,7 @@ public final class JunglePotionPlugin extends OptionHandler {
 		}
 		switch (option) {
 		case "search":
-			search(player, quest, (GameObject) node, JungleObjective.forId(node.getId()));
+			search(player, quest, (Scenery) node, JungleObjective.forId(node.getId()));
 			break;
 		}
 		return true;
@@ -57,7 +57,7 @@ public final class JunglePotionPlugin extends OptionHandler {
 	 * @param object the object.
 	 * @param objective the searchable.
 	 */
-	private void search(final Player player, Quest quest, final GameObject object, final JungleObjective objective) {
+	private void search(final Player player, Quest quest, final Scenery object, final JungleObjective objective) {
 		if (quest.getStage(player) < objective.getStage()) {
 			player.sendMessage("Unfortunately, you find nothing of interest.");
 			return;

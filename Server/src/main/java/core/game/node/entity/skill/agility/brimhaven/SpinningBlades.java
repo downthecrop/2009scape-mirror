@@ -62,6 +62,6 @@ public final class SpinningBlades implements MovementHook {
 		} else if (l.equals(Location.create(2778, 9557, 3))) {
 			l = Location.create(2777, 9556, 3);
 		}
-		player.getPacketDispatch().sendObjectAnimation(RegionManager.getObject(l), Animation.create(1107));
+		player.getPacketDispatch().sendSceneryAnimation(RegionManager.getObject(l), Animation.create(1107));
 	}
 }

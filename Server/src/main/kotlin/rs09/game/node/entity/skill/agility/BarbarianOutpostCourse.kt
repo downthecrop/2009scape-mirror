@@ -8,7 +8,7 @@ import core.game.content.global.action.ClimbActionHandler
 import core.game.content.global.action.DoorActionHandler
 import core.game.content.quest.miniquest.barcrawl.BarcrawlManager
 import core.game.node.Node
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.agility.AgilityCourse
@@ -45,11 +45,11 @@ class BarbarianOutpostCourse
             2115, 2116 -> if (!player.barcrawlManager.isFinished || player.barcrawlManager.isStarted) {
                 player.dialogueInterpreter.open(384)
             } else {
-                DoorActionHandler.handleAutowalkDoor(player, node as GameObject)
+                DoorActionHandler.handleAutowalkDoor(player, node as Scenery)
             }
-            2282 -> handleRopeSwing(player, node as GameObject)
-            2294 -> handleLogBalance(player, node as GameObject)
-            2302 -> handleLedgeBalance(player, node as GameObject)
+            2282 -> handleRopeSwing(player, node as Scenery)
+            2294 -> handleLogBalance(player, node as Scenery)
+            2302 -> handleLedgeBalance(player, node as Scenery)
             20211 -> {
                 if (player.location.x < node.location.x) {
                     return true
@@ -78,7 +78,7 @@ class BarbarianOutpostCourse
      * @param player the player.
      * @param object the object.
      */
-    private fun handleRopeSwing(player: Player, `object`: GameObject) {
+    private fun handleRopeSwing(player: Player, `object`: Scenery) {
         if (player.location.y < 3554) {
             player.packetDispatch.sendMessage("You cannot do that from here.")
             return
@@ -92,7 +92,7 @@ class BarbarianOutpostCourse
             return
         }
         ropeDelay = GameWorld.ticks + 2
-        player.packetDispatch.sendObjectAnimation(`object`, Animation.create(497), true)
+        player.packetDispatch.sendSceneryAnimation(`object`, Animation.create(497), true)
         AgilityHandler.forceWalk(player, 0, player.location, Location.create(2551, 3549, 0), Animation.create(751), 50, 22.0, "You skillfully swing across.", 1)
     }
 
@@ -101,7 +101,7 @@ class BarbarianOutpostCourse
      * @param player the player.
      * @param object the object.
      */
-    private fun handleLogBalance(player: Player, `object`: GameObject) {
+    private fun handleLogBalance(player: Player, `object`: Scenery) {
         val failed = AgilityHandler.hasFailed(player, 1, 0.5)
         val end = if (failed) Location.create(2545, 3546, 0) else Location.create(2541, 3546, 0)
         player.packetDispatch.sendMessage("You walk carefully across the slippery log...")
@@ -148,7 +148,7 @@ class BarbarianOutpostCourse
      * @param player the player.
      * @param object the object.
      */
-    private fun handleLedgeBalance(player: Player, `object`: GameObject) {
+    private fun handleLedgeBalance(player: Player, `object`: Scenery) {
         val failed = AgilityHandler.hasFailed(player, 1, 0.3)
         val end = if (failed) Location.create(2534, 3547, 1) else Location.create(2532, 3547, 1)
         AgilityHandler.walk(player, if (failed) -1 else 3, Location.create(2536, 3547, 1), end, Animation.create(157), if (failed) 0.0 else 22.0, if (failed) null else "You skillfully edge across the gap.")
@@ -173,7 +173,7 @@ class BarbarianOutpostCourse
     }
 
     override fun getDestination(node: Node, n: Node): Location? {
-        if (n is GameObject) {
+        if (n is Scenery) {
             when (n.getId()) {
                 2282 -> return Location.create(2551, 3554, 0)
             }

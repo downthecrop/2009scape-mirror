@@ -5,7 +5,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.update.flag.player.FaceLocationFlag;
 import core.net.packet.PacketRepository;
@@ -257,8 +257,8 @@ public class Interaction {
 		} else if (node instanceof NPC) {
 			NPC npc = (NPC) node;
 			init(npc.getId(), npc.getDefinition().getOptions());
-		} else if (node instanceof GameObject) {
-			GameObject object = (GameObject) node;
+		} else if (node instanceof Scenery) {
+			Scenery object = (Scenery) node;
 			init(object.getId(), object.getDefinition().getOptions());
 		} else if (node instanceof Item) {
 			Item item = (Item) node;

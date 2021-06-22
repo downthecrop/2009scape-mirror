@@ -9,7 +9,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import rs09.game.world.GameWorld;
 import core.plugin.Plugin;
 import rs09.plugin.PluginManager;
@@ -48,7 +48,7 @@ public final class GoblinDiplomacyPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		int id = node instanceof Item ? ((Item) node).getId() : ((GameObject) node).getId();
+		int id = node instanceof Item ? ((Item) node).getId() : ((Scenery) node).getId();
 		switch (option) {
 		case "wear":
 			player.getPacketDispatch().sendMessage("That armour is to small for a human.");

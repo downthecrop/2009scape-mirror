@@ -5,7 +5,7 @@ import core.game.node.entity.skill.agility.AgilityShortcut;
 import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -69,9 +69,9 @@ public class TunnelShortcut extends AgilityShortcut {
 	}
 
 	@Override
-	public void run(final Player player, GameObject object, String option, boolean failed) {
+	public void run(final Player player, Scenery object, String option, boolean failed) {
 		player.lock(6);
-		final GameObject o = object;
+		final Scenery o = object;
 		final Location start = player.getLocation();
 		final Direction dir = Direction.getDirection(start, o.getLocation());
 		if (object.getLocation().getX() == 2575) {

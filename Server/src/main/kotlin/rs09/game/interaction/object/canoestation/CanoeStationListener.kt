@@ -52,7 +52,7 @@ class CanoeStationListener : InteractionListener() {
                 override fun pulse(): Boolean {
                     player.animator.stop()
                     player.varpManager.setVarbit(varbit,STAGE_LOG_CHOPPED)
-                    player.packetDispatch.sendObjectAnimation(node.asObject().getChild(player), FALL, false)
+                    player.packetDispatch.sendSceneryAnimation(node.asObject().getChild(player), FALL, false)
                     player.unlock()
                     return true
                 }
@@ -81,7 +81,7 @@ class CanoeStationListener : InteractionListener() {
             player.pulseManager.run(object : Pulse(){
                 override fun pulse(): Boolean {
                     player.varpManager.setVarbit(varbit,CanoeUtils.getCraftValue(canoe,true))
-                    player.packetDispatch.sendObjectAnimation(node.asObject(), FLOAT, false)
+                    player.packetDispatch.sendSceneryAnimation(node.asObject(), FLOAT, false)
                     player.unlock()
                     return true
                 }

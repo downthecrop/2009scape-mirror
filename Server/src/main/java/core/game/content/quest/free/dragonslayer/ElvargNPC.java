@@ -12,8 +12,8 @@ import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -82,8 +82,8 @@ public final class ElvargNPC extends AbstractNPC {
 	@Override
 	public void finalizeDeath(final Entity killer) {
 		super.finalizeDeath(killer);
-		final GameObject object = new GameObject(25202, getLocation(), getRotation());
-		ObjectBuilder.add(object);
+		final Scenery object = new Scenery(25202, getLocation(), getRotation());
+		SceneryBuilder.add(object);
 		killer.faceLocation(object.getCenterLocation());
 		killer.lock();
 		GameWorld.getPulser().submit(new Pulse(1) {
@@ -96,14 +96,14 @@ public final class ElvargNPC extends AbstractNPC {
 					killer.animate(ANIMATIONS[0]);
 				} else if (counter == 4) {
 					final Player player = ((Player) killer);
-					ObjectBuilder.replace(object, object.transform(25203));
+					SceneryBuilder.replace(object, object.transform(25203));
 					if (!player.getInventory().add(DragonSlayer.ELVARG_HEAD)) {
 						GroundItemManager.create(DragonSlayer.ELVARG_HEAD, player);
 					}
 					killer.animate(ANIMATIONS[1]);
 					killer.unlock();
 				} else if (counter == 12) {
-					ObjectBuilder.remove(RegionManager.getObject(object.getLocation()));
+					SceneryBuilder.remove(RegionManager.getObject(object.getLocation()));
 					return true;
 				}
 				return false;

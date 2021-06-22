@@ -2,7 +2,7 @@ package rs09.game.node.entity.skill.hunter.tracking
 
 import core.game.interaction.OptionHandler
 import core.game.node.Node
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.GroundItemManager
@@ -38,7 +38,7 @@ abstract class HunterTracking : OptionHandler(){
      * Gets the initial trail based on the ID of the hole object the player clicked on
      * @author Ceikry
      */
-    fun getInitialTrail(obj: GameObject): TrailDefinition? {
+    fun getInitialTrail(obj: Scenery): TrailDefinition? {
         return initialMap[obj.id]?.random()
     }
 
@@ -46,7 +46,7 @@ abstract class HunterTracking : OptionHandler(){
      * Generates the entire trail all at once.
      * @author Ceikry
      */
-    fun generateTrail(startobj: GameObject, player: Player) {
+    fun generateTrail(startobj: Scenery, player: Player) {
         val trail = player.getAttribute(attribute, ArrayList<TrailDefinition>())
         val initialTrail = getInitialTrail(startobj)
         if(initialTrail == null) {

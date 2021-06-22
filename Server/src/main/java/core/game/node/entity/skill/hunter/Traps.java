@@ -4,7 +4,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import rs09.game.system.SystemLogger;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -93,7 +93,7 @@ public enum Traps {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	public void dismantle(Player player, GameObject object) {
+	public void dismantle(Player player, Scenery object) {
 		if (!player.getHunterManager().isOwner(object)) {
 			player.sendMessage("This isn't your trap!");
 			return;
@@ -111,7 +111,7 @@ public enum Traps {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	public void investigate(Player player, GameObject object) {
+	public void investigate(Player player, Scenery object) {
 		getSettings().investigate(player, object);
 	}
 

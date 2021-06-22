@@ -6,8 +6,8 @@ import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.RegionManager;
@@ -149,12 +149,12 @@ public class ForgeRegentNPC extends Familiar {
 						if (!ground.isActive()) {
 							return true;
 						}
-						final GameObject object = new GameObject(log.getFireId(), familiar.getLocation());
+						final Scenery object = new Scenery(log.getFireId(), familiar.getLocation());
 						familiar.moveStep();
 						GroundItemManager.destroy(ground);
 						player.getSkills().addExperience(Skills.FIREMAKING, log.getXp() + 10);
 						familiar.faceLocation(FaceLocationFlag.getFaceLocation(familiar, object));
-						ObjectBuilder.add(object, log.getLife(), FireMakingPulse.getAsh(player, log, object));
+						SceneryBuilder.add(object, log.getLife(), FireMakingPulse.getAsh(player, log, object));
 						if (player.getViewport().getRegion().getId() == 10806) {
 							player.getAchievementDiaryManager().finishTask(player, DiaryType.SEERS_VILLAGE, 1, 9);
 						}

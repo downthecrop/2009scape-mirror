@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.agility.shortcuts
 
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.agility.AgilityHandler
@@ -59,7 +59,7 @@ class PipeShortcut : AgilityShortcut {
      * Run for the main fire event
      * Use this for unlocking achievement diaries + any other unlocks
      */
-    override fun run(player: Player, obj: GameObject, option: String, failed: Boolean) {
+    override fun run(player: Player, obj: Scenery, option: String, failed: Boolean) {
         if (obj.id == 29370)
             player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 2, 1)
 
@@ -77,7 +77,7 @@ class PipeShortcut : AgilityShortcut {
                 * player = player, the player that is being force-walked
                 * -1 = course index, should this be counted as an agility course +1?
                 * player.location, gets the player location (start of pipe)
-                * pipeDestination(player, obj, 6) = custom made for pipes, player = player, obj is getting the game object location, 6 is the amount to move forward. || More info found in AgilityShortcut.java
+                * pipeDestination(player, obj, 6) = custom made for pipes, player = player, obj is getting the scenery location, 6 is the amount to move forward. || More info found in AgilityShortcut.java
                 * Animation.create(10580) = what animation we should play when the user is interacting with that object
                 * 10 = speed at which the player moves through the object
                 * 0.0 = experience that we should award the player on successful completion* SET EXPERIENCE IN METHOD newInstance

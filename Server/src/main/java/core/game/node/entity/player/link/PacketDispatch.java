@@ -3,7 +3,7 @@ package core.game.node.entity.player.link;
 import rs09.game.Varp;
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import rs09.game.system.SystemLogger;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
@@ -351,7 +351,7 @@ public final class PacketDispatch {
 	 * @param object the object.
 	 * @param animation the animation.
 	 */
-	public void sendObjectAnimation(GameObject object, Animation animation) {
+	public void sendSceneryAnimation(Scenery object, Animation animation) {
 		animation = new Animation(animation.getId(), animation.getDelay(), animation.getPriority());
 		animation.setObject(object);
 		RegionManager.getRegionChunk(object.getLocation()).flag(new AnimateObjectUpdateFlag(animation));
@@ -363,9 +363,9 @@ public final class PacketDispatch {
 	 * @param animation the animation.
 	 * @param global if the animation is global or not.
 	 */
-	public void sendObjectAnimation(GameObject object, Animation animation, boolean global) {
+	public void sendSceneryAnimation(Scenery object, Animation animation, boolean global) {
 		if (global) {
-			sendObjectAnimation(object, animation);
+			sendSceneryAnimation(object, animation);
 			return;
 		}
 		animation.setObject(object);

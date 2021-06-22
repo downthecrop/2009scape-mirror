@@ -11,7 +11,7 @@ import core.game.content.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.ConfigurationManager.Configuration;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.map.Point;
 import core.game.world.map.RegionPlane;
@@ -51,7 +51,7 @@ public final class PestControlSession {
 	/**
 	 * The barricade & gate objects.
 	 */
-	private final List<GameObject> barricades = new ArrayList<>(20);
+	private final List<Scenery> barricades = new ArrayList<>(20);
 
 	/**
 	 * The amount of ticks.
@@ -377,7 +377,7 @@ public final class PestControlSession {
 	 * Gets the barricades.
 	 * @return The barricades.
 	 */
-	public List<GameObject> getBarricades() {
+	public List<Scenery> getBarricades() {
 		return barricades;
 	}
 

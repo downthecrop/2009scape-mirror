@@ -8,8 +8,8 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
@@ -44,7 +44,7 @@ public final class FieldPickingPlugin extends OptionHandler {
 		if (player.getAttribute("delay:picking", -1) > GameWorld.getTicks()) {
 			return true;
 		}
-		final GameObject object = (GameObject) node;
+		final Scenery object = (Scenery) node;
 		final PickingPlant plant = PickingPlant.forId(object.getId());
 		if (plant == null) {
 			return false;
@@ -83,17 +83,17 @@ public final class FieldPickingPlugin extends OptionHandler {
 					return true;
 				}
 				boolean banana = plant.name().startsWith("BANANA");
-				GameObject full = null;
+				Scenery full = null;
 				if (plant == PickingPlant.BANANA_TREE_4) {
 					full = object.transform(2073);
-					ObjectBuilder.replace(object, full);
+					SceneryBuilder.replace(object, full);
 				}
 				if (plant == PickingPlant.FUNGI_ON_LOG) {
 					full = object.transform(3508);
-					ObjectBuilder.replace(object, full);
+					SceneryBuilder.replace(object, full);
 				}
 				if (plant != PickingPlant.FUNGI_ON_LOG) {
-					ObjectBuilder.replace(plant == PickingPlant.BANANA_TREE_4 ? full : object, object.transform(banana ? plant.respawn : 0), banana ? 300 : plant.respawn);
+					SceneryBuilder.replace(plant == PickingPlant.BANANA_TREE_4 ? full : object, object.transform(banana ? plant.respawn : 0), banana ? 300 : plant.respawn);
 				}
 				if (!plant.name().startsWith("NETTLES")) {
 					player.getPacketDispatch().sendMessage("You pick a " + reward.getName().toLowerCase() + ".");
@@ -118,7 +118,7 @@ public final class FieldPickingPlugin extends OptionHandler {
 	 * @param object the object.
 	 * @param plant the plank.
 	 */
-	private void handleFlaxPick(final Player player, final GameObject object, final PickingPlant plant) {
+	private void handleFlaxPick(final Player player, final Scenery object, final PickingPlant plant) {
 		int charge = object.getCharge();
 		player.getAudioManager().send(2581);
 		player.getPacketDispatch().sendMessage("You pick some flax.");
@@ -137,7 +137,7 @@ public final class FieldPickingPlugin extends OptionHandler {
 		if (charge > 1000 + RandomFunction.random(2, 8)) {
 			object.setActive(false);
 			object.setCharge(1000);
-			ObjectBuilder.replace(object, object.transform(0), plant.respawn);
+			SceneryBuilder.replace(object, object.transform(0), plant.respawn);
 			return;
 		}
 		object.setCharge(charge + 1);

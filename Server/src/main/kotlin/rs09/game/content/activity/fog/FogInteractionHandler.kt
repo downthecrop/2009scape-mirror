@@ -4,7 +4,7 @@ import core.game.content.global.action.ClimbActionHandler
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.node.Node
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -16,13 +16,13 @@ class FogInteractionHandler : PluginInteraction(30204, 30203){
 
     override fun handle(player: Player?, node: Node?): Boolean {
         when(node?.id){
-            30204 -> player?.pulseManager?.run(ClimbPulse(player,node as GameObject)).also { return true }
-            30203 -> player?.pulseManager?.run(ClimbPulse(player, node as GameObject)).also { return true }
+            30204 -> player?.pulseManager?.run(ClimbPulse(player,node as Scenery)).also { return true }
+            30203 -> player?.pulseManager?.run(ClimbPulse(player, node as Scenery)).also { return true }
         }
         return false
     }
 
-    class ClimbPulse(val player: Player,val obj: GameObject) : MovementPulse(player,obj, DestinationFlag.OBJECT){
+    class ClimbPulse(val player: Player,val obj: Scenery) : MovementPulse(player,obj, DestinationFlag.OBJECT){
         override fun pulse(): Boolean {
             player.faceLocation(obj.location)
             when(obj.id) {

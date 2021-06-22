@@ -19,8 +19,8 @@ import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.item.ItemPlugin;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -602,8 +602,8 @@ public final class DBRCutscenePlugin extends CutscenePlugin {
 				castShock(base.transform(16, 46, 0));
 				break;
 			case 55:
-				GameObject wall = RegionManager.getObject(base.transform(16, 46, 0));
-				ObjectBuilder.replace(wall, wall.transform(9151, 0, 10));
+				Scenery wall = RegionManager.getObject(base.transform(16, 46, 0));
+				SceneryBuilder.replace(wall, wall.transform(9151, 0, 10));
 				getWiseOldMan().getWalkingQueue().reset();
 				getWiseOldMan().getWalkingQueue().addPath(base.getX() + 16, base.getY() + 46);
 				getWiseOldMan().getWalkingQueue().addPath(base.getX() + 17, base.getY() + 46);

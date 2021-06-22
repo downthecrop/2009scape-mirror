@@ -5,7 +5,7 @@ import core.cache.def.Definition;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.interaction.OptionHandler;
 import core.game.node.entity.player.Player;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 
@@ -17,7 +17,7 @@ import java.util.Map;
  * Represents an object's definition.
  * @author Emperor
  */
-public class ObjectDefinition extends Definition<GameObject> {
+public class ObjectDefinition extends Definition<Scenery> {
 
 	/**
 	 * The item definitions mapping.

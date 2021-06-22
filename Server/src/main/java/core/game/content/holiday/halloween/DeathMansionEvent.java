@@ -33,7 +33,7 @@ import core.game.node.entity.player.link.emote.Emotes;
 import core.game.node.entity.player.link.request.RequestType;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
@@ -180,16 +180,16 @@ public class DeathMansionEvent extends HolidayEvent {
 				cleanItems(player, GrimItem.getItems());
 				cleanItems(player, new Item[] { DIARY, SERVANT_SKULL });
 			} else {
-				List<GameObject> objs = player.getAttribute("objs", null);
+				List<Scenery> objs = player.getAttribute("objs", null);
 				if (objs == null) {
-					objs = new ArrayList<GameObject>();
+					objs = new ArrayList<Scenery>();
 				}
-				for (GameObject o : objs) {
+				for (Scenery o : objs) {
 					if (RegionManager.getLocalEntitys(o.getLocation(), 1).size() != 0) {
 						continue;
 					}
 					if (!o.getLocation().withinDistance(player.getLocation(), 1)) {
-						player.getPacketDispatch().sendObjectAnimation(o, Animation.create(7286));
+						player.getPacketDispatch().sendSceneryAnimation(o, Animation.create(7286));
 					}
 				}
 			}
@@ -320,7 +320,7 @@ public class DeathMansionEvent extends HolidayEvent {
 							if (buttonId == 1) {
 								item.search(player, target.asObject());
 							} else {
-								player.getPacketDispatch().sendObjectAnimation(target.asObject(), Animation.create(7278));
+								player.getPacketDispatch().sendSceneryAnimation(target.asObject(), Animation.create(7278));
 								player.animate(Animation.create(7272));
 								player.getDialogueInterpreter().sendDialogues(player, FacialExpression.DISGUSTED, "That wasn't such a good idea.");
 							}
@@ -359,7 +359,7 @@ public class DeathMansionEvent extends HolidayEvent {
 
 					});
 				}
-				player.getPacketDispatch().sendObjectAnimation(target.asObject(), Animation.create(7296));
+				player.getPacketDispatch().sendSceneryAnimation(target.asObject(), Animation.create(7296));
 				AgilityHandler.walk(player, -1, player.getLocation(), target.getLocation(), null, 0.0, null);
 				GameWorld.getPulser().submit(new Pulse(1, player) {
 
@@ -427,30 +427,30 @@ public class DeathMansionEvent extends HolidayEvent {
 		if (entity instanceof Player) {
 			final Player p = entity.asPlayer();
 			Location loc = p.getLocation();
-			List<GameObject> objs = p.getAttribute("objs", null);
+			List<Scenery> objs = p.getAttribute("objs", null);
 			if (objs == null) {
-				objs = new ArrayList<GameObject>();
+				objs = new ArrayList<Scenery>();
 			}
 			for (int i = 0; i < 1; i++) {
 				for (Direction direction : Direction.values()) {
-					GameObject o = RegionManager.getObject(loc.transform(direction, 1));
+					Scenery o = RegionManager.getObject(loc.transform(direction, 1));
 					if (o != null && o.getId() == 27241) {
 						objs.add(o);
 						p.setAttribute("objs", objs);
-						p.getPacketDispatch().sendObjectAnimation(o, Animation.create(7289));
+						p.getPacketDispatch().sendSceneryAnimation(o, Animation.create(7289));
 					}
 				}
 			}
-			for (GameObject o : objs) {
+			for (Scenery o : objs) {
 				if (RegionManager.getLocalEntitys(o.getLocation(), 1).size() != 0) {
 					continue;
 				}
 				if (!o.getLocation().withinDistance(p.getLocation(), 1)) {
-					p.getPacketDispatch().sendObjectAnimation(o, Animation.create(7286));
+					p.getPacketDispatch().sendSceneryAnimation(o, Animation.create(7286));
 				}
 			}
 			if (loc.getX() >= 1630 && loc.getX() <= 1646 && loc.getY() >= 4844 && loc.getY() <= 4852) {
-				final GameObject object = RegionManager.getObject(entity.getLocation());
+				final Scenery object = RegionManager.getObject(entity.getLocation());
 				if (object != null && object.getId() == 27240) {
 					p.getWalkingQueue().reset();
 					p.getLocks().lock();
@@ -466,7 +466,7 @@ public class DeathMansionEvent extends HolidayEvent {
 									p.teleport(object.getLocation());
 								}
 								p.lock();
-								p.getPacketDispatch().sendObjectAnimation(object, Animation.create(1939));
+								p.getPacketDispatch().sendSceneryAnimation(object, Animation.create(1939));
 								break;
 							case 2:
 								p.animate(Animation.create(4366));
@@ -503,7 +503,7 @@ public class DeathMansionEvent extends HolidayEvent {
 	 * @param player the player.
 	 * @param target the target.
 	 */
-	private void handlePassageWay(final Player player, final GameObject target) {
+	private void handlePassageWay(final Player player, final Scenery target) {
 		int stage = getStage(player);
 		if (stage < 1 || stage < 4 && target.getLocation().getX() == 1694) {
 			electrocute(player, target);
@@ -554,7 +554,7 @@ public class DeathMansionEvent extends HolidayEvent {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void passSpiderWeb(Player player, GameObject object) {
+	private void passSpiderWeb(Player player, Scenery object) {
 		int webIndex = player.getAttribute("webIndex", -1);
 		if (webIndex == -1) {
 			player.setAttribute("/save:webIndex", (webIndex = RandomFunction.random(WEB_PATHS.length)));
@@ -570,7 +570,7 @@ public class DeathMansionEvent extends HolidayEvent {
 			player.sendMessage("You cannot pass through this particular web - try another.");
 			return;
 		}
-		player.getPacketDispatch().sendObjectAnimation(object, Animation.create(7280));
+		player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(7280));
 		player.lock(3);
 		AgilityHandler.forceWalk(player, -1, player.getLocation(), player.getLocation().transform(Direction.getDirection(player.getLocation(), object.getLocation()), 2), Animation.create(2240), 8, 0.0, null);
 	}
@@ -593,7 +593,7 @@ public class DeathMansionEvent extends HolidayEvent {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void electrocute(final Player player, GameObject object) {
+	private void electrocute(final Player player, Scenery object) {
 		player.lock(4);
 		player.animate(Animation.create(7299));
 		player.graphics(Graphics.create(281));
@@ -610,11 +610,11 @@ public class DeathMansionEvent extends HolidayEvent {
 			y = -1;
 			y2 = 1;
 		}
-		GameObject first = RegionManager.getObject(object.getLocation().transform(x, y, 0));
-		GameObject second = RegionManager.getObject(object.getLocation().transform(x2, y2, 0));
+		Scenery first = RegionManager.getObject(object.getLocation().transform(x, y, 0));
+		Scenery second = RegionManager.getObject(object.getLocation().transform(x2, y2, 0));
 		if (first != null && second != null) {
-			player.getPacketDispatch().sendObjectAnimation(first, Animation.create(7285));
-			player.getPacketDispatch().sendObjectAnimation(second, Animation.create(7285));
+			player.getPacketDispatch().sendSceneryAnimation(first, Animation.create(7285));
+			player.getPacketDispatch().sendSceneryAnimation(second, Animation.create(7285));
 		}
 		player.sendMessage("You fail to pass through the gargoyles' judgement");
 		GameWorld.getPulser().submit(new Pulse(1, player) {
@@ -807,7 +807,7 @@ public class DeathMansionEvent extends HolidayEvent {
 		 * @param player the player.
 		 * @param object the object.
 		 */
-		public void search(Player player, GameObject object) {
+		public void search(Player player, Scenery object) {
 			if (!player.getInventory().hasSpaceFor(item)) {
 				player.sendMessage("You don't have enough inventory space.");
 				return;
@@ -827,7 +827,7 @@ public class DeathMansionEvent extends HolidayEvent {
 		 * @param player the player.
 		 * @param object the object.
 		 */
-		public void useWithEvent(Player player, GameObject object) {
+		public void useWithEvent(Player player, Scenery object) {
 			if (hasGrimItem(player, this)) {
 				player.getDialogueInterpreter().sendDialogue("You have already returned this item to it's proper", "spot in the mansion.");
 				return;

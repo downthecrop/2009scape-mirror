@@ -9,7 +9,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.plugin.PluginManager;
@@ -26,10 +26,10 @@ public final class SinclairFlourBarrelPlugin extends OptionHandler {
 
     @Override
     public boolean handle(Player player, Node node, String option) {
-        return getFlour(player, (GameObject) node);
+        return getFlour(player, (Scenery) node);
     }
 
-    public boolean getFlour(final Player player, final GameObject object) {
+    public boolean getFlour(final Player player, final Scenery object) {
         if (!player.getInventory().containsItem(EMPTY_POT)) {
             player.getPacketDispatch().sendMessage("I need an empty pot to hold the flour in.");
             return true;

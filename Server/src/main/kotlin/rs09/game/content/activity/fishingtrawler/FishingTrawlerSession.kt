@@ -1,8 +1,8 @@
 package rs09.game.content.activity.fishingtrawler
 
 import core.game.component.Component
-import core.game.node.`object`.GameObject
-import core.game.node.`object`.ObjectBuilder
+import core.game.node.`object`.Scenery
+import core.game.node.`object`.SceneryBuilder
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.state.EntityState
@@ -225,7 +225,7 @@ class FishingTrawlerSession(var region: DynamicRegion, val activity: FishingTraw
     fun spawnHole(){
         if(hole_locations.isEmpty() && used_locations.isEmpty()) return
         val holeLocation = hole_locations.random().also { hole_locations.remove(it) }
-        if(!ObjectBuilder.replace(GameObject(PATCHED_ID, holeLocation), GameObject(LEAKING_ID, holeLocation, if (holeLocation.y == HOLE_NORTH_Y) 1 else 3)) && !ObjectBuilder.replace(GameObject(2177, holeLocation), GameObject(LEAKING_ID, holeLocation, if (holeLocation.y == HOLE_NORTH_Y) 1 else 3))) {
+        if(!SceneryBuilder.replace(Scenery(PATCHED_ID, holeLocation), Scenery(LEAKING_ID, holeLocation, if (holeLocation.y == HOLE_NORTH_Y) 1 else 3)) && !SceneryBuilder.replace(Scenery(2177, holeLocation), Scenery(LEAKING_ID, holeLocation, if (holeLocation.y == HOLE_NORTH_Y) 1 else 3))) {
             maxHoles -= 1
         }
     }
@@ -234,9 +234,9 @@ class FishingTrawlerSession(var region: DynamicRegion, val activity: FishingTraw
         return maxHoles - hole_locations.size
     }
 
-    fun repairHole(player: Player,obj: GameObject){
+    fun repairHole(player: Player,obj: Scenery){
         if(player.inventory.remove(Item(Items.SWAMP_PASTE_1941))){
-            ObjectBuilder.replace(obj,GameObject(PATCHED_ID,obj.location,obj.rotation))
+            SceneryBuilder.replace(obj, Scenery(PATCHED_ID, obj.location, obj.rotation))
             hole_locations.add(obj.location)
             if(RandomFunction.random(100) <= 30){
                 murphy?.sendChat("That's the stuff! Fill those holes!")

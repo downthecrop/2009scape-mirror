@@ -9,7 +9,7 @@ import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -35,7 +35,7 @@ public final class GodwarsEntranceHandler extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		GameObject object = (GameObject) node;
+		Scenery object = (Scenery) node;
 		switch (object.getId()) {
 		case 26340:
 			if (!player.getInventory().remove(new Item(954))) {
@@ -70,7 +70,7 @@ public final class GodwarsEntranceHandler extends OptionHandler {
 				player.getPacketDispatch().sendMessage("You need a Strength level of 60 to move this boulder.");
 				return true;
 			}
-			player.getPacketDispatch().sendObjectAnimation(object, Animation.create(6980));
+			player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(6980));
 			if (player.getLocation().getY() < 3716) {
 				ForceMovement.run(player, Location.create(2898, 3715, 0), Location.create(2898, 3719, 0), new Animation(6978), 3);
 			} else {
@@ -79,7 +79,7 @@ public final class GodwarsEntranceHandler extends OptionHandler {
 			GameWorld.getPulser().submit(new Pulse(12, player) {
 				@Override
 				public boolean pulse() {
-					player.getPacketDispatch().sendObjectAnimation(RegionManager.getObject(0, 2898, 3716), Animation.create(6981));
+					player.getPacketDispatch().sendSceneryAnimation(RegionManager.getObject(0, 2898, 3716), Animation.create(6981));
 					return true;
 				}
 			});

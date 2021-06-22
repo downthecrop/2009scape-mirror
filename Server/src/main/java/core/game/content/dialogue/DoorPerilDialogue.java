@@ -4,7 +4,7 @@ import core.game.content.global.action.DoorActionHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 
 /**
  * Represents the door peril dialogue.
@@ -15,9 +15,9 @@ import core.game.node.object.GameObject;
 public final class DoorPerilDialogue extends DialoguePlugin {
 
 	/**
-	 * Represents the game object door.
+	 * Represents the scenery door.
 	 */
-	private GameObject door;
+	private Scenery door;
 
 	/**
 	 * Constructs a new {@code DoorPerilDialogue} {@code Object}.
@@ -43,7 +43,7 @@ public final class DoorPerilDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		door = (GameObject) args[0];
+		door = (Scenery) args[0];
 		Quest quest = player.getQuestRepository().getQuest("Priest in Peril");
 		if (quest.getStage(player) == 10) {
 			interpreter.sendDialogue("You knock at the door...You hear a voice from inside.", "Who are you, and what do you want?");

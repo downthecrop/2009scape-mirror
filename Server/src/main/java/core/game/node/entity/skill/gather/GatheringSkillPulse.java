@@ -12,8 +12,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
@@ -26,7 +26,7 @@ import java.util.List;
  * Handles a gathering skill, such as woodcutting, mining, ...
  * @author Emperor
  */
-public final class GatheringSkillPulse extends SkillPulse<GameObject> {
+public final class GatheringSkillPulse extends SkillPulse<Scenery> {
 
 	/**
 	 * The gem rewards.
@@ -63,7 +63,7 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 	 * @param player The player.
 	 * @param node The gathering resource.
 	 */
-	public GatheringSkillPulse(Player player, GameObject node) {
+	public GatheringSkillPulse(Player player, Scenery node) {
 		super(player, node);
 	}
 
@@ -218,9 +218,9 @@ public final class GatheringSkillPulse extends SkillPulse<GameObject> {
 //					return true;
 //				}
 				if (resource.getEmptyId() > -1) {
-					ObjectBuilder.replace(node, node.transform(resource.getEmptyId()), resource.getRespawnDuration());
+					SceneryBuilder.replace(node, node.transform(resource.getEmptyId()), resource.getRespawnDuration());
 				} else {
-					ObjectBuilder.replace(node, node.transform(0), resource.getRespawnDuration());
+					SceneryBuilder.replace(node, node.transform(0), resource.getRespawnDuration());
 				}
 				node.setActive(false);
 				return true;

@@ -30,7 +30,7 @@ public final class FloorSpikes implements MovementHook {
 		GameWorld.getPulser().submit(new Pulse(3, e) {
 			@Override
 			public boolean pulse() {
-				player.getPacketDispatch().sendObjectAnimation(RegionManager.getObject(l), Animation.create(1111));
+				player.getPacketDispatch().sendSceneryAnimation(RegionManager.getObject(l), Animation.create(1111));
 				if (AgilityHandler.hasFailed(player, 20, 0.25)) {
 					if (player.getSkills().getLevel(Skills.AGILITY) < 20) {
 						player.getPacketDispatch().sendMessage("You need an agility of at least 20 to get past this trap!");

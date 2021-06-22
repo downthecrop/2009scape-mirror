@@ -11,7 +11,7 @@ import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -100,7 +100,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
 		getCourse(player); // Sets the extension.
-		final GameObject object = (GameObject) node;
+		final Scenery object = (Scenery) node;
 		if (object.getLocation().getDistance(player.getLocation()) >= 3) {
 			player.getPacketDispatch().sendMessage("I can't reach that!");
 			return true;
@@ -163,7 +163,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void handleStairs(final Player player, final GameObject object) {
+	private void handleStairs(final Player player, final Scenery object) {
 		Direction dir = Direction.getLogicalDirection(player.getLocation(), object.getLocation());
 		Location dest = null;
 		if (dir == Direction.NORTH) {
@@ -186,7 +186,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void handleRockClimb(final Player player, final GameObject object) {
+	private void handleRockClimb(final Player player, final Scenery object) {
 		final boolean scale = player.getLocation().getX() < object.getLocation().getX();
 		final Location end = object.getLocation().transform(scale ? 2 : -2, 0, 0);
 		if (object.getId() == 16536 && player.getSkills().getStaticLevel(Skills.AGILITY) < 30) {
@@ -205,7 +205,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void handleLowWall(final Player player, final GameObject object) {
+	private void handleLowWall(final Player player, final Scenery object) {
 		Direction d = Direction.getDirection(player.getLocation(), object.getLocation());
 		final boolean fail = player.getSkills().getLevel(Skills.AGILITY) >= 75 ? false : hasFailed(player) ;
 		if (player.getLocation().equals(Location.create(3355, 2848, 1)) || player.getLocation().equals(Location.create(3359, 2838, 3))) {
@@ -235,7 +235,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void handleLedge(final Player player, final GameObject object) {
+	private void handleLedge(final Player player, final Scenery object) {
 		Direction d = Direction.getLogicalDirection(player.getLocation(), getLedgeLocation(player, object));
 		final Direction dir = d;
 		final int diff = object.getRotation() == 3 && dir == Direction.EAST ? 1 : object.getRotation() == 3 && dir == Direction.WEST ? 0 : d == Direction.EAST || (d == Direction.SOUTH && object.getRotation() != 0) || d == Direction.NORTH ? 0 : 1;
@@ -285,7 +285,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void handlePlank(final Player player, final GameObject object) {
+	private void handlePlank(final Player player, final Scenery object) {
 		final boolean custom = object.getLocation().equals(new Location(3365, 2835, 3)) || object.getLocation().equals(new Location(3370, 2835, 3));
 		final Direction dir = custom ? Direction.EAST : Direction.getLogicalDirection(player.getLocation(), object.getLocation());
 		final boolean fail = player.getSkills().getLevel(Skills.AGILITY) >= 75 ? false : hasFailed(player) ;
@@ -308,7 +308,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void handleJumpGap(Player player, GameObject object) {
+	private void handleJumpGap(Player player, Scenery object) {
 		final Direction dir = Direction.getDirection(player.getLocation(), getGapLocation(player, object));
 		final boolean fail = player.getSkills().getLevel(Skills.AGILITY) >= 75 ? false : hasFailed(player) ;
 		player.getPacketDispatch().sendMessage("You jump the gap...");
@@ -336,7 +336,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void handleGapCross(final Player player, final GameObject object) {
+	private void handleGapCross(final Player player, final Scenery object) {
 		final Direction dir = Direction.getLogicalDirection(player.getLocation(), getGapCrossLocation(player, object));
 		final boolean fail = player.getSkills().getLevel(Skills.AGILITY) >= 75 ? false : hasFailed(player) ;
 		final Location end = player.getLocation().transform(dir, fail ? 4 : 5);
@@ -367,7 +367,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param player the player.
 	 * @param object the object.
 	 */
-	private void handlePyramidTop(final Player player, final GameObject object) {
+	private void handlePyramidTop(final Player player, final Scenery object) {
 		if(player.getSavedData().getActivityData().isTopGrabbed() == true){
 			player.getPacketDispatch().sendMessage("You've already claimed this!");
 			return;
@@ -411,7 +411,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param object the obejct.
 	 * @return the location.
 	 */
-	private Location getGapLocation(Player player, GameObject object) {
+	private Location getGapLocation(Player player, Scenery object) {
 		final Location[] data = getLocationData(GAP_LOCATIONS, object.getLocation());
 		return getClosest(new Location[] { data[0], data[1] }, player.getLocation());
 	}
@@ -422,7 +422,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param object the obejct.
 	 * @return the location.
 	 */
-	private Location getGapCrossLocation(Player player, GameObject object) {
+	private Location getGapCrossLocation(Player player, Scenery object) {
 		final Location[] data = getLocationData(GAP_CROSS_LOCATIONS, object.getLocation());
 		return getClosest(new Location[] { data[4], data[5] }, player.getLocation());
 	}
@@ -433,7 +433,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param object the object.
 	 * @return the location.
 	 */
-	private Location getLedgeLocation(final Player player, final GameObject object) {
+	private Location getLedgeLocation(final Player player, final Scenery object) {
 		final Location[] data = getLocationData(LEDGE_LOCATIONS, object.getLocation());
 		return getClosest(new Location[] { data[4], data[5] }, player.getLocation());
 	}
@@ -510,7 +510,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param value the value.
 	 * @param save if we save.
 	 */
-	public static void addConfig(final Player player, final GameObject object, final int value, boolean save) {
+	public static void addConfig(final Player player, final Scenery object, final int value, boolean save) {
 		addConfig(player, object.getId(), value, save);
 	}
 

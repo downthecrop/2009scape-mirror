@@ -19,8 +19,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
@@ -97,7 +97,7 @@ public final class WaterfallPlugin extends OptionHandler {
 	/**
 	 * The ropes.
 	 */
-	private static final List<GameObject> ROPES = new ArrayList<>(20);
+	private static final List<Scenery> ROPES = new ArrayList<>(20);
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
@@ -192,7 +192,7 @@ public final class WaterfallPlugin extends OptionHandler {
 				if (quest.getStage(player) >= 100 && node.getLocation().equals(new Location(2566, 9901)) && player.getLocation().equals(new Location(2566, 9901))) {
 					player.teleport(new Location(2604, 9901));
 				} else {
-					DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+					DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				}
 			}
 			if (node.getLocation().equals(new Location(2604, 9900))) {
@@ -201,13 +201,13 @@ public final class WaterfallPlugin extends OptionHandler {
 			}
 			break;
 		case 33046:
-			ObjectBuilder.add(new GameObject(33047, Location.create(2530, 9844, 0), 10, 1));
+			SceneryBuilder.add(new Scenery(33047, Location.create(2530, 9844, 0), 10, 1));
 			break;
 		case 42319:
 			if (node.getLocation().equals(new Location(2556, 9844))) {
 				ClimbActionHandler.climb(player, new Animation(828), Location.create(2557, 3444, 0));
 			} else {
-				ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 			}
 			break;
 		case 33047:
@@ -224,7 +224,7 @@ public final class WaterfallPlugin extends OptionHandler {
 				}
 				break;
 			case "close":
-				ObjectBuilder.add(new GameObject(33046, Location.create(2530, 9844, 0), 10, 1));
+				SceneryBuilder.add(new Scenery(33046, Location.create(2530, 9844, 0), 10, 1));
 				break;
 			}
 			break;
@@ -257,7 +257,7 @@ public final class WaterfallPlugin extends OptionHandler {
 			break;
 		case 1991:
 			if (player.getLocation().getY() >= 9576) {
-				DoorActionHandler.handleAutowalkDoor(player, (GameObject) node);
+				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				player.getPacketDispatch().sendMessage("You open the gate and walk through.");
 			} else if (player.getInventory().contains(293, 1) && player.getLocation().getY() < 9576) {
 				player.getPacketDispatch().sendMessage("The gate is locked. You need to use the key on the door to enter.");
@@ -326,8 +326,8 @@ public final class WaterfallPlugin extends OptionHandler {
 				return Location.create(2512, 3481, 0);
 			}
 		}
-		if (n instanceof GameObject) {
-			GameObject obj = ((GameObject) n);
+		if (n instanceof Scenery) {
+			Scenery obj = ((Scenery) n);
 			if (obj.getId() == 1996 || obj.getId() == 1997) {
 				return Location.create(2512, 3476, 0);
 			}
@@ -348,23 +348,23 @@ public final class WaterfallPlugin extends OptionHandler {
 	public void handleObjects(boolean add, final Player player) {// very ugly
 		// code
 		if (add) {
-			ROPES.add(new GameObject(1997, Location.create(2512, 3468, 0), 10, 0));
-			ROPES.add(new GameObject(1998, Location.create(2512, 3469, 0), 10, 0));
-			ROPES.add(new GameObject(1998, Location.create(2512, 3470, 0), 10, 0));
-			ROPES.add(new GameObject(1998, Location.create(2512, 3471, 0), 10, 0));
-			ROPES.add(new GameObject(1998, Location.create(2512, 3472, 0), 10, 0));
-			ROPES.add(new GameObject(1998, Location.create(2512, 3473, 0), 10, 0));
-			ROPES.add(new GameObject(1998, Location.create(2512, 3474, 0), 10, 0));
-			ROPES.add(new GameObject(1998, Location.create(2512, 3475, 0), 10, 0));
-			for (GameObject rope : ROPES) {
-				ObjectBuilder.add(rope);
+			ROPES.add(new Scenery(1997, Location.create(2512, 3468, 0), 10, 0));
+			ROPES.add(new Scenery(1998, Location.create(2512, 3469, 0), 10, 0));
+			ROPES.add(new Scenery(1998, Location.create(2512, 3470, 0), 10, 0));
+			ROPES.add(new Scenery(1998, Location.create(2512, 3471, 0), 10, 0));
+			ROPES.add(new Scenery(1998, Location.create(2512, 3472, 0), 10, 0));
+			ROPES.add(new Scenery(1998, Location.create(2512, 3473, 0), 10, 0));
+			ROPES.add(new Scenery(1998, Location.create(2512, 3474, 0), 10, 0));
+			ROPES.add(new Scenery(1998, Location.create(2512, 3475, 0), 10, 0));
+			for (Scenery rope : ROPES) {
+				SceneryBuilder.add(rope);
 			}
 		} else {
-			for (GameObject rope : ROPES) {
-				ObjectBuilder.remove(rope);
+			for (Scenery rope : ROPES) {
+				SceneryBuilder.remove(rope);
 			}
 			ROPES.clear();
-			ObjectBuilder.add(new GameObject(1996, Location.create(2512, 3468, 0), 10, 0));
+			SceneryBuilder.add(new Scenery(1996, Location.create(2512, 3468, 0), 10, 0));
 
 		}
 	}
@@ -408,8 +408,8 @@ public final class WaterfallPlugin extends OptionHandler {
 
 		@Override
 		public Location getDestination(Player playa, Node n) {
-			if (n instanceof GameObject) {
-				GameObject obj = (GameObject) n;
+			if (n instanceof Scenery) {
+				Scenery obj = (Scenery) n;
 				if (obj.getId() == 1996 || obj.getId() == 1997) {
 					return Location.create(2512, 3476, 0);
 				}
@@ -422,7 +422,7 @@ public final class WaterfallPlugin extends OptionHandler {
 			final Player player = event.getPlayer();
 			Item useditem = event.getUsedItem();
 			final Quest quest = player.getQuestRepository().getQuest(WaterFall.NAME);
-			final GameObject object = (GameObject) event.getUsedWith();
+			final Scenery object = (Scenery) event.getUsedWith();
 
 			if (useditem.getId() == ROPE.getId() && object.getId() == 1996 || object.getId() == 1997) {
 				player.lock(8);

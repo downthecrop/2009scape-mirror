@@ -16,7 +16,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -77,7 +77,7 @@ public final class SummoningTrainingRoom extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		GameObject object = (GameObject) node;
+		Scenery object = (Scenery) node;
 		Location loc = null;
 		Quest quest = player.getQuestRepository().getQuest("Wolf Whistle");
 		int questVal = quest.getStage(player) == 0 ? 0 : quest.getStage(player) > 0 && quest.getStage(player) < 100 ? 5 : 28893;
@@ -141,7 +141,7 @@ public final class SummoningTrainingRoom extends OptionHandler {
 				break;
 			case 100:
 			case 60:
-				ClimbActionHandler.climbLadder(player, (GameObject) node, option);
+				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
 				break;
 			default:
 				player.getDialogueInterpreter().sendDialogue("There is a loud crash from upstairs, followed by the tinkling of", "broken glass.");

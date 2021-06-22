@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import rs09.game.node.entity.skill.magic.SpellListener;
 import rs09.game.node.entity.skill.magic.SpellListeners;
 import rs09.game.node.entity.skill.magic.SpellUtils;
@@ -141,7 +141,7 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 			componentId = payload & 0xFFFF;
 			int objectId = buffer.getShortA();
 			player.debug("Option usage [inter=" + interfaceId + ", child=" + componentId + ", target=(" + objectId + "," + x + "," + y + "), item=" + itemId + "].");
-			GameObject object = RegionManager.getObject(player.getLocation().getZ(), x, y);
+			Scenery object = RegionManager.getObject(player.getLocation().getZ(), x, y);
 			if (object == null) {
 				object = RegionManager.getObject(Location.create(x, y, 0));
 			}

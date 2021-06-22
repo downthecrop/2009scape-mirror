@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.agility.shortcuts
 
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
@@ -33,7 +33,7 @@ class RockClimbShortcut
     ), 1, 0.0, "climb")
 
 {
-    override fun run(player: Player, `object`: GameObject, option: String, failed: Boolean) {
+    override fun run(player: Player, `object`: Scenery, option: String, failed: Boolean) {
         //Scaling down
         val ANIMATION = Animation(1148)
         //Scaling Up

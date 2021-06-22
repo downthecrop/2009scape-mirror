@@ -10,8 +10,8 @@ import core.game.node.entity.skill.construction.BuildingUtils;
 import core.game.node.entity.skill.construction.HouseManager;
 import core.game.node.entity.skill.construction.Room;
 import core.game.node.entity.skill.construction.RoomProperties;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -64,13 +64,13 @@ public final class StaircasePlugin extends OptionHandler {
 			player.getPacketDispatch().sendMessage("You're not in your house right now (REPORT).");
 			return true;
 		}
-		GameObject object = (GameObject) node;
+		Scenery object = (Scenery) node;
 		switch (option) {
 		case "open":
-			ObjectBuilder.replace(object, object.transform(object.getId() + 3), 200);
+			SceneryBuilder.replace(object, object.transform(object.getId() + 3), 200);
 			return true;
 		case "close":
-			ObjectBuilder.replace(object, object.transform(object.getId() - 3));
+			SceneryBuilder.replace(object, object.transform(object.getId() - 3));
 			return true;
 		case "remove-room":
 			if (player.getLocation().getZ() != 0) {
@@ -108,7 +108,7 @@ public final class StaircasePlugin extends OptionHandler {
 	 * @param house The house the player is currently in.
 	 * @param object The object.
 	 */
-	private static void climb(Player player, int z, HouseManager house, GameObject object) {
+	private static void climb(Player player, int z, HouseManager house, Scenery object) {
 		Location l = player.getLocation();
 		int plane = l.getZ() + z;
 		int roomX = l.getChunkX();
@@ -161,7 +161,7 @@ public final class StaircasePlugin extends OptionHandler {
 		/**
 		 * The ladder.
 		 */
-		private GameObject ladder;
+		private Scenery ladder;
 
 		/**
 		 * Constructs a new {@code ClimbPohLadder} {@code Object}.
@@ -186,7 +186,7 @@ public final class StaircasePlugin extends OptionHandler {
 		@Override
 		public boolean open(Object... args) {
 			house = (HouseManager) args[0];
-			ladder = (GameObject) args[1];
+			ladder = (Scenery) args[1];
 			interpreter.sendOptions("What would you like to do?", "Climb Up.", "Climb Down.");
 			stage = 0;
 			return true;
@@ -262,7 +262,7 @@ public final class StaircasePlugin extends OptionHandler {
 		/**
 		 * The stairs object.
 		 */
-		private GameObject stairs;
+		private Scenery stairs;
 		
 		/**
 		 * Constructs a new {@code BuildDialogue} {@code Object}.
@@ -292,7 +292,7 @@ public final class StaircasePlugin extends OptionHandler {
 			roomX = (Integer) args[1];
 			roomY = (Integer) args[2];
 			room = (Room) args[3];
-			stairs = (GameObject) args[4];
+			stairs = (Scenery) args[4];
 			stage = 0;
 			if (stairs.getId() >= 13328 && stairs.getId() <= 13330) {
 				interpreter.sendPlainMessage(false, "These stairs don't seem to lead anywhere. Do you", "want to build a throne room upstairs?");

@@ -7,7 +7,7 @@ import core.game.node.entity.skill.runecrafting.Talisman;
 import core.game.interaction.NodeUsageEvent;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 
 /**
  * Represents the enchant tiara dialogue.
@@ -52,7 +52,7 @@ public final class EnchantTiaraDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		event = ((NodeUsageEvent) args[0]);
-		altar = Altar.forObject(((GameObject) event.getUsedWith()));
+		altar = Altar.forObject(((Scenery) event.getUsedWith()));
 		if (!player.getInventory().containsItem(altar.getTalisman().getTalisman())) {
 			player.getPacketDispatch().sendMessage("You don't have the required talisman.");
 			return true;

@@ -1,7 +1,7 @@
 package rs09.game.content.quest.members.thelostcity
 
 import core.game.content.quest.members.lostcity.TreeSpiritNPC
-import core.game.node.`object`.GameObject
+import core.game.node.`object`.Scenery
 import core.game.node.entity.skill.gather.GatheringSkillPulse
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.world.map.Location
@@ -35,7 +35,7 @@ class DramenTreeListener : InteractionListener() {
                 spirit.sendChat("You must defeat me before touching the tree!")
                 return@on true
             }
-            player.getPulseManager().run(GatheringSkillPulse(player, node as GameObject?))
+            player.getPulseManager().run(GatheringSkillPulse(player, node as Scenery?))
             return@on true
         }
 

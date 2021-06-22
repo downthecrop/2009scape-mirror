@@ -5,8 +5,8 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -43,7 +43,7 @@ public class RedberryBushPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		if (((GameObject) node).getId() == 23630) {
+		if (((Scenery) node).getId() == 23630) {
 			player.getPacketDispatch().sendMessage("There are no berries left on this bush.");
 			player.getPacketDispatch().sendMessage("More berries will grow soon.");
 			return true;
@@ -55,7 +55,7 @@ public class RedberryBushPlugin extends OptionHandler {
 		player.lock(4);
 		player.animate(ANIMATION);
 		if (counter == 2) {
-			ObjectBuilder.replace(((GameObject) node), new GameObject(23630, node.getLocation()), 30);
+			SceneryBuilder.replace(((Scenery) node), new Scenery(23630, node.getLocation()), 30);
 			counter = 0;
 			return true;
 		}

@@ -4,8 +4,8 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 
@@ -38,16 +38,16 @@ public final class NetTrapSetting extends TrapSetting {
 	public boolean clear(TrapWrapper wrapper, int type) {
 		if (super.clear(wrapper, type)) {
 			if (wrapper.getSecondary() != null && wrapper.getSecondary().isActive()) {
-				ObjectBuilder.remove(wrapper.getSecondary());
+				SceneryBuilder.remove(wrapper.getSecondary());
 			}
-			ObjectBuilder.add(wrapper.getObject().transform(wrapper.getNetType().getOriginal()));
+			SceneryBuilder.add(wrapper.getObject().transform(wrapper.getNetType().getOriginal()));
 			return true;
 		}
 		return false;
 	}
 
 	@Override
-	public void returnItems(GameObject object, TrapWrapper wrapper, int type) {
+	public void returnItems(Scenery object, TrapWrapper wrapper, int type) {
 		super.returnItems(object, wrapper, type);
 		if (type == 0) {
 			for (Item i : super.getItems()) {
@@ -58,7 +58,7 @@ public final class NetTrapSetting extends TrapSetting {
 
 	@Override
 	public void reward(Player player, Node node, TrapWrapper wrapper) {
-		GameObject object = wrapper.getObject();
+		Scenery object = wrapper.getObject();
 		wrapper.setNetType(NetTrap.forId(node.getId()));
 		int rotation = 0;
 		int increment = 0;
@@ -67,8 +67,8 @@ public final class NetTrapSetting extends TrapSetting {
 		rotation = (int) netInfo[0];
 		increment = (int) netInfo[1];
 		x = (boolean) netInfo[2];
-		GameObject secondary = new GameObject(wrapper.getNetType().getNet(), object.getLocation().transform(x ? increment : 0, !x ? increment : 0, 0), rotation);
-		secondary = ObjectBuilder.add(secondary);
+		Scenery secondary = new Scenery(wrapper.getNetType().getNet(), object.getLocation().transform(x ? increment : 0, !x ? increment : 0, 0), rotation);
+		secondary = SceneryBuilder.add(secondary);
 		wrapper.setSecondary(secondary);
 		player.moveStep();
 		wrapper.addItem(getItems());
@@ -79,7 +79,7 @@ public final class NetTrapSetting extends TrapSetting {
 	public void handleCatch(int counter, TrapWrapper wrapper, TrapNode node, NPC npc, boolean success) {
 		switch (counter) {
 		case 2:
-			ObjectBuilder.remove(wrapper.getSecondary());
+			SceneryBuilder.remove(wrapper.getSecondary());
 			break;
 		case 3:
 			npc.moveStep();
@@ -89,8 +89,8 @@ public final class NetTrapSetting extends TrapSetting {
 	}
 
 	@Override
-	public GameObject buildObject(Player player, Node node) {
-		return ((GameObject) node).transform(NetTrap.forId(node.getId()).getBent());
+	public Scenery buildObject(Player player, Node node) {
+		return ((Scenery) node).transform(NetTrap.forId(node.getId()).getBent());
 	}
 
 	@Override

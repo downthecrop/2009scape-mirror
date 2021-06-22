@@ -10,8 +10,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
-import core.game.node.object.ObjectBuilder;
+import core.game.node.object.Scenery;
+import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -71,18 +71,18 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
             }
             switch (target.getId()) {
                 case 5259:
-                    handleEnergyBarrier(player, (GameObject) target);
+                    handleEnergyBarrier(player, (Scenery) target);
                     return true;
                 case 5267:
                     player.animate(Animation.create(536));
                     player.getPacketDispatch().sendMessage("The trapdoor opens...");
-                    ObjectBuilder.replace((GameObject) target, ((GameObject) target).transform(5268));
+                    SceneryBuilder.replace((Scenery) target, ((Scenery) target).transform(5268));
                     return true;
                 case 5268:
                     if (option.getName().equals("Close")) {
                         player.animate(Animation.create(535));
                         player.getPacketDispatch().sendMessage("You close the trapdoor.");
-                        ObjectBuilder.replace((GameObject) target, ((GameObject) target).transform(5267));
+                        SceneryBuilder.replace((Scenery) target, ((Scenery) target).transform(5267));
                     } else {
                         player.getPacketDispatch().sendMessage("You climb down through the trapdoor...");
                         player.getProperties().setTeleportLocation(Location.create(3669, 9888, 3));
@@ -90,12 +90,12 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
                     return true;
                 case 7434: // Trapdoors in bar
                     if (option.getName().equalsIgnoreCase("open")) {
-                        ObjectBuilder.replace(target.asObject(), target.asObject().transform(7435));
+                        SceneryBuilder.replace(target.asObject(), target.asObject().transform(7435));
                     }
                     break;
 				case 7435: // open trapdoor in bar
 					if (option.getName().equalsIgnoreCase("close")) {
-						ObjectBuilder.replace(target.asObject(), target.asObject().transform(7434));
+						SceneryBuilder.replace(target.asObject(), target.asObject().transform(7434));
 					}
 					break;
                 case 9308:
@@ -121,7 +121,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
                 case 11162:
                 case 11163:
                 case 11164:
-                    GameObject obj = (GameObject) target;
+                    Scenery obj = (Scenery) target;
                     switch (option.getName().toLowerCase()) {
                         case "fill":
                             player.getPulseManager().run(fillPulse);
@@ -146,7 +146,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
 
     public Pulse emptyPulse = new Pulse(5) {
         //the bin
-        GameObject emptyobj = new GameObject(11164, 3658, 3525, 1);
+        Scenery emptyobj = new Scenery(11164, 3658, 3525, 1);
 
         @Override
         public boolean pulse() {
@@ -162,7 +162,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
     };
     public Pulse windPulse = new Pulse(5) {
         //the crank
-        GameObject windobj = new GameObject(11163, 3659, 3525, 1);
+        Scenery windobj = new Scenery(11163, 3659, 3525, 1);
 
         @Override
         public boolean pulse() {
@@ -218,7 +218,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
      * @param player the player.
      * @param object the object.
      */
-    private void checkStatus(Player player, GameObject object) {
+    private void checkStatus(Player player, Scenery object) {
         String status = "The grinder is empty.";
         if (hasBones(player, object, true)) {
             status = "There are some bones in the hopper.";
@@ -234,7 +234,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
      * @param player the player.
      * @param object the object.
      */
-    private void empty(Player player, GameObject object) {
+    private void empty(Player player, Scenery object) {
         if (hasBones(player, object, true)) {
             player.sendMessage("You need to wind the handle to grind the bones.");
             return;
@@ -261,7 +261,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
      * @param player the player.
      * @param object the object.
      */
-    private void wind(Player player, GameObject object) {
+    private void wind(Player player, Scenery object) {
         final Bones bone = Bones.forConfigValue(player.getConfigManager().get(408), true);
         player.getLocks().lockInteractions(3);
         player.animate(Animation.create(1648));
@@ -280,7 +280,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
      * @param object the object.
      * @return {@code True} if so.
      */
-    public static boolean hasBones(Player player, GameObject object, boolean inHopper) {
+    public static boolean hasBones(Player player, Scenery object, boolean inHopper) {
         int value = player.getConfigManager().get(408);
         for (Bones bone : Bones.values()) {
             if (bone.getConfigValue(inHopper) == value) {
@@ -359,7 +359,7 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
      * @param player the player.
      * @param object the object.
      */
-    private void handleEnergyBarrier(Player player, GameObject object) {
+    private void handleEnergyBarrier(Player player, Scenery object) {
         boolean force = object.getLocation().equals(3659, 3508, 0) && player.getLocation().getY() < 3508 || object.getLocation().equals(3652, 3485, 0) && player.getLocation().getX() > 3652;
         if (!force && !player.getInventory().contains(4278, 2)) {
             player.getDialogueInterpreter().open(1706);

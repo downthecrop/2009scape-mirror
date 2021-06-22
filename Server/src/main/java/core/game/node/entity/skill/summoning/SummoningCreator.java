@@ -6,7 +6,7 @@ import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.GameObject;
+import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
@@ -98,7 +98,7 @@ public final class SummoningCreator {
 		/**
 		 * Represents the object.
 		 */
-		private GameObject object;
+		private Scenery object;
 
 		/**
 		 * Represents the amount to make.
@@ -149,17 +149,17 @@ public final class SummoningCreator {
 		@Override
 		public void stop() {
 			super.stop();
-			player.getPacketDispatch().sendObjectAnimation(object, new Animation(8510));
+			player.getPacketDispatch().sendSceneryAnimation(object, new Animation(8510));
 		}
 
 		@Override
 		public boolean reward() {
 			if (getDelay() == 1) {
 				setDelay(4);
-				player.getPacketDispatch().sendObjectAnimation(object, Animation.create(8509));
+				player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(8509));
 				return false;
 			}
-			player.getPacketDispatch().sendObjectAnimation(object, Animation.create(8510));
+			player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(8510));
 			for (int i = 0; i < amount; i++) {
 				for (Item item : type.getRequired()) {
 					if (!player.getInventory().containsItem(item)) {
