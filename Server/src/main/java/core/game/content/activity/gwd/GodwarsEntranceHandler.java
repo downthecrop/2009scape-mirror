@@ -70,7 +70,7 @@ public final class GodwarsEntranceHandler extends OptionHandler {
 				player.getPacketDispatch().sendMessage("You need a Strength level of 60 to move this boulder.");
 				return true;
 			}
-			player.getPacketDispatch().sendObjectAnimation(object, Animation.create(6980));
+			player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(6980));
 			if (player.getLocation().getY() < 3716) {
 				ForceMovement.run(player, Location.create(2898, 3715, 0), Location.create(2898, 3719, 0), new Animation(6978), 3);
 			} else {
@@ -79,7 +79,7 @@ public final class GodwarsEntranceHandler extends OptionHandler {
 			GameWorld.getPulser().submit(new Pulse(12, player) {
 				@Override
 				public boolean pulse() {
-					player.getPacketDispatch().sendObjectAnimation(RegionManager.getObject(0, 2898, 3716), Animation.create(6981));
+					player.getPacketDispatch().sendSceneryAnimation(RegionManager.getObject(0, 2898, 3716), Animation.create(6981));
 					return true;
 				}
 			});

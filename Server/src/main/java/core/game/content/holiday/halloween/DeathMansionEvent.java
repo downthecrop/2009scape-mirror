@@ -189,7 +189,7 @@ public class DeathMansionEvent extends HolidayEvent {
 						continue;
 					}
 					if (!o.getLocation().withinDistance(player.getLocation(), 1)) {
-						player.getPacketDispatch().sendObjectAnimation(o, Animation.create(7286));
+						player.getPacketDispatch().sendSceneryAnimation(o, Animation.create(7286));
 					}
 				}
 			}
@@ -320,7 +320,7 @@ public class DeathMansionEvent extends HolidayEvent {
 							if (buttonId == 1) {
 								item.search(player, target.asObject());
 							} else {
-								player.getPacketDispatch().sendObjectAnimation(target.asObject(), Animation.create(7278));
+								player.getPacketDispatch().sendSceneryAnimation(target.asObject(), Animation.create(7278));
 								player.animate(Animation.create(7272));
 								player.getDialogueInterpreter().sendDialogues(player, FacialExpression.DISGUSTED, "That wasn't such a good idea.");
 							}
@@ -359,7 +359,7 @@ public class DeathMansionEvent extends HolidayEvent {
 
 					});
 				}
-				player.getPacketDispatch().sendObjectAnimation(target.asObject(), Animation.create(7296));
+				player.getPacketDispatch().sendSceneryAnimation(target.asObject(), Animation.create(7296));
 				AgilityHandler.walk(player, -1, player.getLocation(), target.getLocation(), null, 0.0, null);
 				GameWorld.getPulser().submit(new Pulse(1, player) {
 
@@ -437,7 +437,7 @@ public class DeathMansionEvent extends HolidayEvent {
 					if (o != null && o.getId() == 27241) {
 						objs.add(o);
 						p.setAttribute("objs", objs);
-						p.getPacketDispatch().sendObjectAnimation(o, Animation.create(7289));
+						p.getPacketDispatch().sendSceneryAnimation(o, Animation.create(7289));
 					}
 				}
 			}
@@ -446,7 +446,7 @@ public class DeathMansionEvent extends HolidayEvent {
 					continue;
 				}
 				if (!o.getLocation().withinDistance(p.getLocation(), 1)) {
-					p.getPacketDispatch().sendObjectAnimation(o, Animation.create(7286));
+					p.getPacketDispatch().sendSceneryAnimation(o, Animation.create(7286));
 				}
 			}
 			if (loc.getX() >= 1630 && loc.getX() <= 1646 && loc.getY() >= 4844 && loc.getY() <= 4852) {
@@ -466,7 +466,7 @@ public class DeathMansionEvent extends HolidayEvent {
 									p.teleport(object.getLocation());
 								}
 								p.lock();
-								p.getPacketDispatch().sendObjectAnimation(object, Animation.create(1939));
+								p.getPacketDispatch().sendSceneryAnimation(object, Animation.create(1939));
 								break;
 							case 2:
 								p.animate(Animation.create(4366));
@@ -570,7 +570,7 @@ public class DeathMansionEvent extends HolidayEvent {
 			player.sendMessage("You cannot pass through this particular web - try another.");
 			return;
 		}
-		player.getPacketDispatch().sendObjectAnimation(object, Animation.create(7280));
+		player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(7280));
 		player.lock(3);
 		AgilityHandler.forceWalk(player, -1, player.getLocation(), player.getLocation().transform(Direction.getDirection(player.getLocation(), object.getLocation()), 2), Animation.create(2240), 8, 0.0, null);
 	}
@@ -613,8 +613,8 @@ public class DeathMansionEvent extends HolidayEvent {
 		Scenery first = RegionManager.getObject(object.getLocation().transform(x, y, 0));
 		Scenery second = RegionManager.getObject(object.getLocation().transform(x2, y2, 0));
 		if (first != null && second != null) {
-			player.getPacketDispatch().sendObjectAnimation(first, Animation.create(7285));
-			player.getPacketDispatch().sendObjectAnimation(second, Animation.create(7285));
+			player.getPacketDispatch().sendSceneryAnimation(first, Animation.create(7285));
+			player.getPacketDispatch().sendSceneryAnimation(second, Animation.create(7285));
 		}
 		player.sendMessage("You fail to pass through the gargoyles' judgement");
 		GameWorld.getPulser().submit(new Pulse(1, player) {

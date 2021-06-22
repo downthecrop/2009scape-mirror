@@ -29,7 +29,7 @@ public class RopeSwing extends UseWithHandler {
                     player.sendMessage("I can't reach that.");
                     return true;
                 }
-                player.getPacketDispatch().sendObjectAnimation(object, Animation.create(497), true);
+                player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(497), true);
                 AgilityHandler.forceWalk(player, 0, player.getLocation(), Location.create(2505, 3087, 0), Animation.create(751), 50, 22, "You skillfully swing across.", 1);
                 return true;
             }
