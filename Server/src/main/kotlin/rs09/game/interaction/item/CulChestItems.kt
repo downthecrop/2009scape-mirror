@@ -1,5 +1,6 @@
 package rs09.game.interaction.item
 
+import api.ContentAPI
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
@@ -42,15 +43,13 @@ class CulChestItems: InteractionListener() {
     }
 
     fun alchemize(player: Player, node: Node){
-        val amount = player.inventory.getAmount(node.id) + player.equipment.getAmount(node.id)
-        val coins = amount * node.asItem().definition.value
+        val amount = ContentAPI.amountInInventory(player, node.id) + ContentAPI.amountInEquipment(player, node.id)
+        val coins = amount * ContentAPI.itemDefinition(node.id).value
 
-        player.inventory.remove(Item(node.id,player.inventory.getAmount(node.id)))
-        player.equipment.remove(Item(node.id))
-        if(!player.inventory.add(Item(995,coins))){
-            GroundItemManager.create(Item(995,coins),player)
-        }
+        ContentAPI.removeAll(player, node.id, api.Container.INVENTORY)
+        ContentAPI.removeItem(player, node.id, api.Container.EQUIPMENT)
+        ContentAPI.addItemOrDrop(player, 995, coins)
 
-        player.dialogueInterpreter.sendDialogue("The item instantly alchemized itself!")
+        ContentAPI.sendDialogue(player, "The item instantly alchemized itself!")
     }
 }
