@@ -15,7 +15,6 @@ import core.game.world.map.RegionManager
 import core.plugin.CorePluginTypes.StartupPlugin
 import core.tools.RandomFunction
 import core.tools.mysql.DatabaseManager
-import rs09.game.ai.general.scriptrepository.PlayerScripts
 import rs09.ServerConstants
 import rs09.game.node.entity.state.newsys.StateRepository
 import rs09.game.system.SystemLogger
@@ -152,7 +151,6 @@ object GameWorld {
         }
         ObjectDefinition.getDefinitions().values.forEach(Consumer { obj: ObjectDefinition -> obj.examine })
         System.gc()
-        PlayerScripts.init()
         StateRepository.init()
         SystemLogger.initTradeLogger()
     }
