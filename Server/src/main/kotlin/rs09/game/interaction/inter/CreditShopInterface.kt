@@ -1,5 +1,6 @@
 package rs09.game.interaction.inter
 
+import api.ContentAPI
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import org.rs09.consts.Components
@@ -16,7 +17,7 @@ class CreditShopInterface : InterfaceListener() {
             val item = getItem(buttonID)
 
             if(opcode == 155){
-                player.dialogueInterpreter.sendDialogue("This item costs ${item.price} credits.")
+                ContentAPI.sendDialogue(player, "This item costs ${item.price} credits.")
                 return@on true
             }
 
@@ -58,19 +59,19 @@ class CreditShopInterface : InterfaceListener() {
     }
 
     fun sendCredits(player: Player){
-        player.packetDispatch.sendString("You have ${player.details.credits} credits to spend.",CREDIT_SHOP,TEXT_CHILD)
+        ContentAPI.setInterfaceText(player, "You have ${player.details.credits} credits to spend.", CREDIT_SHOP, TEXT_CHILD)
     }
 
     fun attemptPurchase(player: Player, item: Int, price: Int){
         if(player.details.credits < price){
-            player.dialogueInterpreter.sendDialogue("You don't have enough credits for that.")
+            ContentAPI.sendDialogue(player, "You don't have enough credits for that.")
             return
         }
 
         if(player.inventory.add(Item(item))){
             player.details.credits -= price
         } else {
-            player.dialogueInterpreter.sendDialogue("You don't have enough inventory space for that.")
+            ContentAPI.sendDialogue(player, "You don't have enough inventory space for that.")
         }
         sendCredits(player)
     }

@@ -2,6 +2,7 @@ package api
 
 import core.cache.def.impl.ItemDefinition
 import core.game.component.Component
+import core.game.content.dialogue.FacialExpression
 import core.game.node.Node
 import core.game.node.`object`.GameObject
 import core.game.node.`object`.ObjectBuilder
@@ -832,5 +833,69 @@ object ContentAPI {
             Container.BANK -> player.bank.remove(Item(it, amountInBank(player, it)))
             Container.INVENTORY -> player.inventory.remove(Item(it, amountInInventory(player, it)))
         }
+    }
+
+    /**
+     * Sends a string to a specific interface child
+     * @param player the player to send the packet to
+     * @param string the string to send to the child
+     * @param iface the ID of the interface to use
+     * @param child the index of the child to send the string to
+     */
+    @JvmStatic
+    fun setInterfaceText(player: Player, string: String, iface: Int, child: Int){
+        player.packetDispatch.sendString(string,iface,child)
+    }
+
+    /**
+     * Closes any open (non-chat) interfaces for the player
+     * @param player the player to close the interface for
+     */
+    @JvmStatic
+    fun closeInterface(player: Player){
+        player.interfaceManager.close()
+    }
+
+    /**
+     * Closes any opened tab interfaces for the player
+     * @param player the player to close the tab for
+     */
+    @JvmStatic
+    fun closeTabInterface(player: Player){
+        player.interfaceManager.closeSingleTab()
+    }
+
+    /**
+     * Sends a dialogue that uses the player's chathead.
+     * @param player the player to send the dialogue to
+     * @param msg the message to send.
+     * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.FRIENDLY
+     */
+    @JvmStatic
+    fun sendPlayerDialogue(player: Player, msg: String, expr: FacialExpression = FacialExpression.FRIENDLY){
+        player.dialogueInterpreter.sendDialogues(player, expr, *DialUtils.splitLines(msg))
+    }
+
+    /**
+     * Sends a player model to a specific interface child
+     * @param player the player to send the packet to and whose model to use
+     * @param iface the ID of the interface to send it to
+     * @param child the index of the child on the interface to send the model to
+     */
+    @JvmStatic
+    fun sendPlayerOnInterface(player: Player, iface: Int, child: Int){
+        player.packetDispatch.sendPlayerOnInterface(iface,child)
+    }
+
+    /**
+     * Sends an animation to a specific interface child
+     * @param player the player to send the packet to
+     * @param anim the ID of the animation to send to the interface
+     * @param iface the ID of the interface to send the animation to
+     * @param child the index of the child on the interface to send the model to
+     */
+    @JvmStatic
+    fun sendAnimationOnInterface(player: Player, anim: Int, iface: Int, child: Int){
+        player.packetDispatch.sendAnimationInterface(anim,iface,child)
     }
 }

@@ -1,5 +1,6 @@
 package rs09.game.interaction.inter
 
+import api.ContentAPI
 import core.game.component.CloseEvent
 import core.game.component.Component
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession
@@ -32,15 +33,15 @@ class MainGameInterface : InterfaceListener() {
 
         on(TOPLEVEL_FS){player, _, _, buttonID, _, _ ->
             when (buttonID) {
-                12 -> player.packetDispatch.sendString(
-                    "When you have finished playing " + settings!!.name + ", always use the button below to logout safely. ",
-                    182,
-                    0
+                12 -> ContentAPI.setInterfaceText(player,
+                        "When you have finished playing " + settings!!.name + ", always use the button below to logout safely. ",
+                        182,
+                        0
                 )
-                49 -> player.packetDispatch.sendString(
-                    "Friends List - " + settings!!.name + " " + settings!!.worldId,
-                    550,
-                    3
+                49 -> ContentAPI.setInterfaceText(player,
+                        "Friends List - " + settings!!.name + " " + settings!!.worldId,
+                        550,
+                        3
                 )
                 110 -> configureWorldMap(player)
             }
