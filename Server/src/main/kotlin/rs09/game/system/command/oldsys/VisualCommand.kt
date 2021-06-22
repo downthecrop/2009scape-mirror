@@ -172,7 +172,7 @@ class VisualCommand : CommandPlugin() {
             "objwithanim" -> {
                 val go = Scenery(toInteger(args!![1]!!), player!!.location, 0)
                 SceneryBuilder.add(go)
-                player.packetDispatch.sendObjectAnimation(go, Animation.create(toInteger(args[2]!!)))
+                player.packetDispatch.sendSceneryAnimation(go, Animation.create(toInteger(args[2]!!)))
                 return true
             }
             "oa", "object_anim", "obj_anim", "objectanim", "objanim" -> {
@@ -186,7 +186,7 @@ class VisualCommand : CommandPlugin() {
                     player!!.debug("error: object not found in region cache.")
                     return true
                 }
-                player!!.packetDispatch.sendObjectAnimation(`object`, Animation(toInteger(args[args.size - 1]!!)))
+                player!!.packetDispatch.sendSceneryAnimation(`object`, Animation(toInteger(args[args.size - 1]!!)))
                 return true
             }
             "inter", "component", "interface" -> {
@@ -314,7 +314,7 @@ class VisualCommand : CommandPlugin() {
                             player.debug("error: object not found in region cache.")
                             return true
                         }
-                        player.packetDispatch.sendObjectAnimation(`object`, Animation(id))
+                        player.packetDispatch.sendSceneryAnimation(`object`, Animation(id))
                         player.debug("Animation id: $id")
                         return ++id >= endId
                     }

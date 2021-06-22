@@ -92,7 +92,7 @@ class BarbarianOutpostCourse
             return
         }
         ropeDelay = GameWorld.ticks + 2
-        player.packetDispatch.sendObjectAnimation(`object`, Animation.create(497), true)
+        player.packetDispatch.sendSceneryAnimation(`object`, Animation.create(497), true)
         AgilityHandler.forceWalk(player, 0, player.location, Location.create(2551, 3549, 0), Animation.create(751), 50, 22.0, "You skillfully swing across.", 1)
     }
 

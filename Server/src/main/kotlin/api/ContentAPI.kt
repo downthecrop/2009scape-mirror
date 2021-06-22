@@ -251,7 +251,7 @@ object ContentAPI {
      * @param for_ticks the number of ticks the object should be replaced for. Use -1 for permanent.
      */
     @JvmStatic
-    fun replaceObject(toReplace: Scenery, with: Int, for_ticks: Int) {
+    fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int) {
         if (for_ticks == -1) {
             SceneryBuilder.replace(toReplace, toReplace.transform(with))
         } else {
@@ -341,8 +341,8 @@ object ContentAPI {
      * Send an object animation
      */
     @JvmStatic
-    fun animateObject(player: Player, obj: Scenery, animationId: Int, global: Boolean = false) {
-        player.packetDispatch.sendObjectAnimation(obj, getAnimation(animationId), global)
+    fun animateScenery(player: Player, obj: Scenery, animationId: Int, global: Boolean = false) {
+        player.packetDispatch.sendSceneryAnimation(obj, getAnimation(animationId), global)
     }
 
     /**

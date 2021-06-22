@@ -326,7 +326,7 @@ public final class DragonSlayer extends Quest {
 		player.getPacketDispatch().sendMessage("The door opens...");
 		final Scenery object = RegionManager.getObject(new Location(3050, 9839, 0));
 		player.faceLocation(object.getLocation());
-		player.getPacketDispatch().sendObjectAnimation(object, new Animation(6636));
+		player.getPacketDispatch().sendSceneryAnimation(object, new Animation(6636));
 		GameWorld.getPulser().submit(new Pulse(1, player) {
 			int counter = 0;
 
@@ -337,10 +337,10 @@ public final class DragonSlayer extends Quest {
 					AgilityHandler.walk(player, 0, player.getLocation(), player.getLocation().getX() == 3051 ? Location.create(3049, 9840, 0) : Location.create(3051, 9840, 0), null, 0, null);
 					break;
 				case 5:
-					player.getPacketDispatch().sendObjectAnimation(object, new Animation(6637));
+					player.getPacketDispatch().sendSceneryAnimation(object, new Animation(6637));
 					break;
 				case 6:
-					player.getPacketDispatch().sendObjectAnimation(object, new Animation(6635));
+					player.getPacketDispatch().sendSceneryAnimation(object, new Animation(6635));
 					return true;
 				}
 				return false;
