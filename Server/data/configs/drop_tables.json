@@ -37579,6 +37579,12 @@
       {
         "minAmount": "1",
         "weight": "5.0",
+        "id": "13467",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "5.0",
         "id": "31",
         "maxAmount": "1"
       },
