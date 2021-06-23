@@ -2,7 +2,7 @@ package rs09.game.ai.general.scriptrepository
 
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
-import core.game.node.`object`.Scenery
+import core.game.node.`object`.GameObject
 import core.game.node.entity.combat.CombatStyle
 import rs09.game.node.entity.combat.CombatSwingHandler
 import core.game.node.entity.skill.Skills
@@ -64,9 +64,20 @@ class Adventurer(val style: CombatStyle): Script() {
     fun dialogue() {
         val player = RegionManager.getLocalPlayers(bot).random()
         val real = if (!player.isArtificial) player else player
+        val CurDay = LocalDateTime.now()
+        val CurForm = DateTimeFormatter.ofPattern("yyyyMMdd")
+        val formCur: String = CurDay.format(CurForm)
 
-        val dialogue = listOf(
+        val DayInt = formCur.toI
+        val RyansLie = 20201127
+        val DaysSinceLie = DayInt - RyansLie
+
+
+            val dialogue = listOf(
                 "Hey!",
+                "It is $DaysSinceLie days late for barbarian assault Ryan!!",
+                "$DaysSinceLie days ago Ryan lied to us all...",
+                "It takes Ryan $DaysSinceLie days to write 1 line of code",
                 "Hello ${real.username}",
                 "What are you doing ${real.username}?",
                 "Fishing level ${real.username}?",
@@ -1088,7 +1099,7 @@ class Adventurer(val style: CombatStyle): Script() {
                     state = State.TELEPORTING
                 }
                 sold = false
-                val ge: Scenery? = scriptAPI.getNearestNode("Desk", true) as Scenery?
+                val ge: GameObject? = scriptAPI.getNearestNode("Desk", true) as GameObject?
                 if (ge == null || bot.bank.isEmpty) state = State.EXPLORE
                 class GEPulse : MovementPulse(bot, ge, DestinationFlag.OBJECT) {
                     override fun pulse(): Boolean {
@@ -1109,7 +1120,7 @@ class Adventurer(val style: CombatStyle): Script() {
                 if (counter++ == 300) {
                     state = State.TELEPORTING
                 }
-                val bank: Scenery? = scriptAPI.getNearestNode("Bank booth", true) as Scenery?
+                val bank: GameObject? = scriptAPI.getNearestNode("Bank booth", true) as GameObject?
                 if (badedge.insideBorder(bot) || bot.location == badedge2 || bot.location == badedge3 || bot.location == badedge4) {
                     bot.randomWalk(5, 5)
                 }
