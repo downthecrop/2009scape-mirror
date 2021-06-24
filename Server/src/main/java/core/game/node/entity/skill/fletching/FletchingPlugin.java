@@ -1,5 +1,6 @@
 package core.game.node.entity.skill.fletching;
 
+import org.rs09.consts.Items;
 import rs09.game.content.dialogue.SkillDialogueHandler;
 import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
 import core.game.node.entity.skill.fletching.items.bolts.BoltPulse;
@@ -22,7 +23,7 @@ import core.plugin.Plugin;
 public class FletchingPlugin extends UseWithHandler {
 
 	public FletchingPlugin() {
-		super(819,820,821,822,823,824,11232,9375,9376,9377,9382,9378,9379,9380,9381,13279,1511,1521,1519,1517,1515,1513,6332,6333);
+		super(819,820,821,822,823,824,11232,9375,9376,9377,9382,9378,9379,9380,9381,13279,1511,1521,1519,1517,1515,1513,6332,6333, Items.MAHOGANY_LOGS_6332);
 	}
 
 	@Override

@@ -1,5 +1,6 @@
 package rs09.game.content.ame.events.supriseexam
 
+import api.ContentAPI
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
@@ -28,15 +29,17 @@ object SurpriseExamUtils {
 
     fun teleport(player: Player){
         player.setAttribute(SE_KEY_LOC,player.location)
-        player.addLogoutListener(SE_LOGOUT_KEY){p ->
-            p.location = p.getAttribute(SE_KEY_LOC,null)
+
+        ContentAPI.registerLogoutListener(player, SE_LOGOUT_KEY){p ->
+            ContentAPI.teleport(p, p.getAttribute(SE_KEY_LOC, p.location))
         }
+
         player.properties.teleportLocation = Location.create(1886, 5025, 0)
     }
 
     fun cleanup(player: Player){
         player.properties.teleportLocation = player.getAttribute(SE_KEY_LOC,null)
-        player.removeLogoutListener(SE_LOGOUT_KEY)
+        ContentAPI.clearLogoutListener(player, SE_LOGOUT_KEY)
         player.removeAttribute(SE_KEY_LOC)
         player.removeAttribute(SE_KEY_INDEX)
         player.removeAttribute(SE_KEY_CORRECT)
