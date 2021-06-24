@@ -898,4 +898,24 @@ object ContentAPI {
     fun sendAnimationOnInterface(player: Player, anim: Int, iface: Int, child: Int){
         player.packetDispatch.sendAnimationInterface(anim,iface,child)
     }
+
+    /**
+     * Register a logout listener to a player. Logout listeners are methods that run when a player logs out.
+     * @param player the player to register the listener for
+     * @param handler the method to run when the listener is invoked (when the player logs out)
+     */
+    @JvmStatic
+    fun registerLogoutListener(player: Player, key: String, handler: (p: Player) -> Unit){
+        player.logoutListeners[key] = handler
+    }
+
+    /**
+     * Removes a logout listener based on the key from a player
+     * @param player the player to remove the logout listner from
+     * @param key the key of the logout listener to remove.
+     */
+    @JvmStatic
+    fun clearLogoutListener(player: Player, key: String){
+        player.logoutListeners.remove(key)
+    }
 }

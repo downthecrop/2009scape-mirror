@@ -94,7 +94,6 @@ public class HalgriveDialogue extends DialoguePlugin {
                 }
                 break;
             case 100:
-                player.getQuestRepository().getQuest("Sheep Herder").start(player);
                 npc("Y-you will??? That is excellent news! Head to the","enclosure we have set up on Farmer Brumty's land to","the north of the city; the four infected sheep should still","be somewhere in that vicinity. Before you will be allowed");
                 stage++;
                 break;
@@ -115,6 +114,7 @@ public class HalgriveDialogue extends DialoguePlugin {
                 stage++;
                 break;
             case 105:
+                player.getQuestRepository().getQuest("Sheep Herder").start(player);
                 player.getDialogueInterpreter().sendDialogue("The councillor gives you some poisoned sheep feed.");
                 player.getInventory().add(SheepHerder.POISON);
                 stage++;
