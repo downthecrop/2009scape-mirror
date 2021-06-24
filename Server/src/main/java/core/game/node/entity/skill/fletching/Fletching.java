@@ -314,7 +314,7 @@ public class Fletching {
         MAPLE_STOCK(9448, 32, 54, 1),
 
         //Yew logs
-        YEW_SHORTBOW(68, 55, 65, 1),
+        YEW_SHORTBOW(68, 67.5, 65, 1),
         YEW_LONGBOW(66, 75, 70, 1),
         YEW_STOCK(9452, 50, 69, 1),
 
