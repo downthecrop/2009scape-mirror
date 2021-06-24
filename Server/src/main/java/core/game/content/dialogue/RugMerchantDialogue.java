@@ -1,5 +1,7 @@
 package core.game.content.dialogue;
 
+import api.Container;
+import api.ContentAPI;
 import core.cache.def.impl.NPCDefinition;
 import core.game.container.impl.EquipmentContainer;
 import core.plugin.Initializable;
@@ -286,7 +288,7 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 			player.getEquipment().replace(new Item(Items.MAGIC_CARPET_5614),EquipmentContainer.SLOT_WEAPON);
 			player.getPacketDispatch().sendInterfaceConfig(548,69,true);
 			player.logoutListeners.put("magic-carpet", (pl) -> {
-				pl.getEquipment().replace(null,EquipmentContainer.SLOT_WEAPON);
+				ContentAPI.removeItem(pl, Items.MAGIC_CARPET_5614, Container.EQUIPMENT);
 				return Unit.INSTANCE;
 			});
 			GameWorld.getPulser().submit(new Pulse(1, player) {
