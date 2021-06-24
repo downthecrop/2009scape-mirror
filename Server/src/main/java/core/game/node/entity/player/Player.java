@@ -1369,12 +1369,4 @@ public class Player extends Entity {
 		state.getPulse().stop();
 		states.remove(key);
 	}
-
-	public void addLogoutListener(String key, Function1<Player,Unit> listener){
-		logoutListeners.put(key,listener);
-	}
-
-	public void removeLogoutListener(String key){
-		logoutListeners.remove(key);
-	}
 }

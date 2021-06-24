@@ -1,5 +1,6 @@
 package rs09.game.interaction.region.dungeons.brimhaven
 
+import api.ContentAPI
 import core.game.content.global.action.ClimbActionHandler
 import core.game.node.`object`.Scenery
 import core.game.node.`object`.SceneryBuilder
@@ -47,7 +48,11 @@ object BrimhavenUtils {
         player.lock(12)
         val dir = AgilityHandler.forceWalk(player, -1, player.location, node.location, Animation.create(769), 10, 0.0, null).direction
         val loc = player.location
-        player.logoutListeners["steppingstone"] = { p -> p.properties.teleportLocation = loc }
+
+        ContentAPI.registerLogoutListener(player, "steppingstone"){p ->
+            ContentAPI.teleport(p, loc)
+        }
+
         GameWorld.Pulser.submit(object : Pulse(3, player) {
             var stage = if (dir == Direction.NORTH) -1 else 0
             var direction = dir
@@ -62,7 +67,7 @@ object BrimhavenUtils {
                 }
                 if (stage == 6) {
                     player.achievementDiaryManager.finishTask(player, DiaryType.KARAMJA, 1, 15)
-                    player.logoutListeners.remove("steppingstone")
+                    ContentAPI.clearLogoutListener(player, "steppingstone")
                 }
                 AgilityHandler.forceWalk(player, -1, l, l.transform(direction), Animation.create(769), 10, 0.0, null)
                 return stage == 6

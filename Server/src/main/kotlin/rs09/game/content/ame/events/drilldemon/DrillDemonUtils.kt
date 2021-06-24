@@ -1,5 +1,6 @@
 package rs09.game.content.ame.events.drilldemon
 
+import api.ContentAPI
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
@@ -24,9 +25,11 @@ object DrillDemonUtils {
     fun teleport(player: Player){
         player.setAttribute(DD_KEY_RETURN_LOC,player.location)
         player.properties.teleportLocation = Location.create(3163, 4819, 0)
-        player.addLogoutListener("drilldemon") { p ->
-            p.location = player.getAttribute(DD_KEY_RETURN_LOC,p.location)
+
+        ContentAPI.registerLogoutListener(player, "drilldemon"){p ->
+            ContentAPI.teleport(p, player.getAttribute(DD_KEY_RETURN_LOC, p.location))
         }
+
         changeSignsAndAssignTask(player)
     }
 
@@ -72,7 +75,7 @@ object DrillDemonUtils {
     }
 
     fun cleanup(player: Player){
-        player.removeLogoutListener("drilldemon")
+        ContentAPI.clearLogoutListener(player, "drilldemon")
         player.properties.teleportLocation = player.getAttribute(DD_KEY_RETURN_LOC)
         player.removeAttribute(DD_KEY_NPC)
         player.removeAttribute(DD_KEY_RETURN_LOC)
