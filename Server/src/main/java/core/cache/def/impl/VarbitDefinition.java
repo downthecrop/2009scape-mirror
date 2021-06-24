@@ -2,6 +2,7 @@ package core.cache.def.impl;
 
 import core.cache.Cache;
 import core.game.node.entity.player.Player;
+import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 
 import java.nio.ByteBuffer;
@@ -122,7 +123,7 @@ public final class VarbitDefinition {
 		int size = BITS[bitSize - bitShift];
 		int bitValue = player.varpManager.get(getConfigId()).getBitRangeValue(getBitShift(), getBitShift() + (bitSize - bitShift));
 		if(bitValue != 0){
-			return bitValue >>> bitShift;
+			return size & (bitValue >>> bitShift);
 		}
 		return size & (player.getConfigManager().get(configId) >>> bitShift);
 	}
