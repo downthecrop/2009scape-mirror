@@ -269,7 +269,8 @@ public class Fletching {
         MAPLE(1517, FletchingItems.MAPLE_SHORTOW, FletchingItems.MAPLE_LONGBOW, FletchingItems.MAPLE_STOCK),
         YEW(1515, FletchingItems.YEW_SHORTBOW, FletchingItems.YEW_LONGBOW, FletchingItems.YEW_STOCK),
         MAGIC(1513, FletchingItems.MAGIC_SHORTBOW, FletchingItems.MAGIC_LONGBOW),
-        TEAK(6333, FletchingItems.TEAK_STOCK);
+        TEAK(6333, FletchingItems.TEAK_STOCK),
+        MAHOGANY(6332, FletchingItems.MAHOGANY_STOCK);
 
 
         FletchingItems[] items;
@@ -314,7 +315,7 @@ public class Fletching {
         MAPLE_STOCK(9448, 32, 54, 1),
 
         //Yew logs
-        YEW_SHORTBOW(68, 55, 65, 1),
+        YEW_SHORTBOW(68, 67.5, 65, 1),
         YEW_LONGBOW(66, 75, 70, 1),
         YEW_STOCK(9452, 50, 69, 1),
 
@@ -323,7 +324,10 @@ public class Fletching {
         MAGIC_LONGBOW(70, 91.5, 85, 1),
 
         //Teak
-        TEAK_STOCK(9446, 27, 46,1);
+        TEAK_STOCK(9446, 27, 46,1),
+
+        //Mahogany
+        MAHOGANY_STOCK(9450, 41.0, 61, 1);
 
 
         int id,level,amount,logId;
