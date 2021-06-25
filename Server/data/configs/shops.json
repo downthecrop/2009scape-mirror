@@ -2050,5 +2050,41 @@
     "id": "231",
     "title": "Lletya General Store",
     "stock": ""
+  },
+  {
+    "npcs": "1282",
+    "high_alch": "1",
+    "currency": "995",
+    "general_store": "false",
+    "id": "232",
+    "title": "Sigmund the Merchant",
+    "stock": "{590,2}-{954,10}-{233,3}-{1931,3}-{2142,2}-{2309,10}-{952,10}-{36,10}-{1755,10}-{2347,10}-{229,10}-{227,10}-{1925,10}-{1929,10}-{1944,10}-{1942,10}-{1965,10}"
+  },
+  {
+    "npcs": "1315",
+    "high_alch": "1",
+    "currency": "995",
+    "general_store": "false",
+    "id": "233",
+    "title": "Fremennik Fishmonger",
+    "stock": "{303,5}-{307,5}-{309,5}-{311,2}-{301,2}-{313,1000}-{314,1000}-{305,5}-{317,10}-{327,10}-{345,0}-{353,0}-{341,0}-{321,0}-{335,0}-{331,0}-{359,0}-{377,0}-{363,0}-{371,0}-{383,0}"
+  },
+  {
+    "npcs": "1300",
+    "high_alch": "0",
+    "currency": "995",
+    "general_store": "false",
+    "id": "234",
+    "title": "Rellekka Longhall Bar",
+    "stock": "{1917,10}-{3803,10}-{3711,10}"
+  },
+  {
+    "npcs": "7420",
+    "high_alch": "1",
+    "currency": "995",
+    "general_store": "false",
+    "id": "235",
+    "title": "Gnomic Supplies",
+    "stock": "{1931,inf}-{1929,inf}-{1937,inf}-{2313,inf}-{1887,inf}-{590,inf}-{1735,inf}-{1951,inf}-{1969,inf}-{1949,inf}"
   }
 ]
