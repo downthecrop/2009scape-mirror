@@ -1,5 +1,6 @@
 package core.game.node.entity.skill.summoning.familiar;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -9,6 +10,7 @@ import core.game.node.entity.player.link.RunScript;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import kotlin.Unit;
 
 /**
  * Handles the beast of burden interface.
@@ -54,14 +56,10 @@ public final class BurdenInterfacePlugin extends ComponentPlugin {
 			beast.transfer(item, container.getAmount(item), withdraw);
 			return true;
 		case 234:
-			player.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					beast.transfer(item, (int) getValue(), withdraw);
-					return true;
-				}
+			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				beast.transfer(item, (int) value, withdraw);
+				return Unit.INSTANCE;
 			});
-			player.getDialogueInterpreter().sendInput(false, "Enter the amount:");
 			break;
 		case 168:
 			player.getPacketDispatch().sendMessage(item.getDefinition().getExamine());

@@ -325,7 +325,7 @@ public final class ZaffPlugin extends OptionHandler {
 				break;
 			case 1:
 				end();
-				player.setAttribute("runscript", new RunScript() {
+				/*player.setAttribute("runscript", new RunScript() {
 					@Override
 					public boolean handle() {
 						int amt = (int) value;
@@ -357,7 +357,8 @@ public final class ZaffPlugin extends OptionHandler {
 					}
 				});
 				interpreter.sendInput(false, "Zaff has " + ammount + " battlestaves...");
-				break;
+*/				break;
+				//TODO: Come back and fix this later when achievement diaries can actually be completed kekkekekeke
 			case 2:
 				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Oh, okay then. I'll try again another time.");
 				stage = 3;
