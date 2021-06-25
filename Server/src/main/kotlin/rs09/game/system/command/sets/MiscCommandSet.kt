@@ -1,5 +1,6 @@
 package rs09.game.system.command.sets
 
+import api.ContentAPI
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.ObjectDefinition
@@ -201,14 +202,10 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             if (player.attributes.containsKey("replyTo")) {
                 player.setAttribute("keepDialogueAlive", true)
                 val replyTo = player.getAttribute("replyTo", "").replace("_".toRegex(), " ")
-                player.setAttribute("runscript", object : RunScript() {
-                    override fun handle(): Boolean {
-                        CommunicationInfo.sendMessage(player, replyTo.toLowerCase(), getValue() as String)
-                        player.removeAttribute("keepDialogueAlive")
-                        return true
-                    }
-                })
-                player.dialogueInterpreter.sendMessageInput(StringUtils.formatDisplayName(replyTo))
+                ContentAPI.sendInputDialogue(player, false ,StringUtils.formatDisplayName(replyTo)){value ->
+                    CommunicationInfo.sendMessage(player, replyTo.toLowerCase(), value as String)
+                    player.removeAttribute("keepDialogueAlive")
+                }
             } else {
                 reject(player, "<col=3498db>You have not recieved any recent messages to which you can reply.")
             }

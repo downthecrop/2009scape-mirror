@@ -1,5 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
+import api.ContentAPI
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.RunScript
@@ -135,26 +136,22 @@ class ToolLeprechaunInterface : InterfaceListener() {
         }
 
         if(amount == -2){
-            player.setAttribute("runscript", object : RunScript() {
-                override fun handle(): Boolean {
-                    var amt = getValue().toString().toInt()
-                    if(amt > hasAmount){
-                        amt = hasAmount
-                    }
-                    if(amt > spaceLeft){
-                        amt = spaceLeft
-                    }
-                    if(amt == 0){
-                        player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
-                        return true
-                    }
-                    player.inventory.remove(Item(item,amt))
-                    updateQuantityMethod.invoke(player,amt)
-                    player.varpManager.get(varp).send(player)
-                    return true
+            ContentAPI.sendInputDialogue(player, true, "Enter the amount:"){value ->
+                var amt = value as Int
+                if(amt > hasAmount){
+                    amt = hasAmount
                 }
-            })
-            player.dialogueInterpreter.sendInput(false, "Enter amount:")
+                if(amt > spaceLeft){
+                    amt = spaceLeft
+                }
+                if(amt == 0){
+                    player.dialogueInterpreter.sendDialogue("You don't have any of those to store.")
+                    return@sendInputDialogue
+                }
+                player.inventory.remove(Item(item,amt))
+                updateQuantityMethod.invoke(player,amt)
+                player.varpManager.get(varp).send(player)
+            }
             return
         }
         if(amount == -1){
@@ -191,26 +188,22 @@ class ToolLeprechaunInterface : InterfaceListener() {
             player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
         } else {
             if(amount == -2){
-                player.setAttribute("runscript", object : RunScript() {
-                    override fun handle(): Boolean {
-                        var amt = getValue().toString().toInt()
-                        if(amt > hasAmount){
-                            amt = hasAmount
-                        }
-                        if(amt > player.inventory.freeSlots()){
-                            amt = player.inventory.freeSlots()
-                        }
-                        if(amt <= 0){
-                            player.dialogueInterpreter.sendDialogue("You don't have enough inventory space for that.")
-                        } else {
-                            player.inventory.add(Item(item, amt))
-                            updateQuantityMethod.invoke(player, -amt)
-                            player.varpManager.get(varp).send(player)
-                        }
-                        return true
+                ContentAPI.sendInputDialogue(player, true, "Enter the amount:"){value ->
+                    var amt = value as Int
+                    if(amt > hasAmount){
+                        amt = hasAmount
                     }
-                })
-                player.dialogueInterpreter.sendInput(false, "Enter amount:")
+                    if(amt > player.inventory.freeSlots()){
+                        amt = player.inventory.freeSlots()
+                    }
+                    if(amt <= 0){
+                        player.dialogueInterpreter.sendDialogue("You don't have enough inventory space for that.")
+                    } else {
+                        player.inventory.add(Item(item, amt))
+                        updateQuantityMethod.invoke(player, -amt)
+                        player.varpManager.get(varp).send(player)
+                    }
+                }
                 return
             }
             if(amount == -1){

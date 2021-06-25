@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -12,6 +13,7 @@ import core.game.system.task.Pulse;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import kotlin.Unit;
 
 /**
  * Represents the glass making interface plugin.
@@ -72,15 +74,10 @@ public final class GlassInterface extends ComponentPlugin {
 			real = p.getInventory().getAmount(MOLTEN_GLASS);
 			break;
 		case 211:
-			p.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					int ammount = (int) value;
-					make(p, def, ammount);
-					return true;
-				}
+			ContentAPI.sendInputDialogue(p, true, "Enter the amount:", (value) -> {
+				make(p, def, (int) value);
+				return Unit.INSTANCE;
 			});
-			p.getDialogueInterpreter().sendInput(false, "Enter the amount.");
 			break;
 		}
 		if (opcode == 211) {

@@ -1,5 +1,6 @@
 package rs09.game.system.command.rottenpotato
 
+import api.ContentAPI
 import core.game.content.dialogue.DialoguePlugin
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.login.PlayerParser
@@ -52,37 +53,29 @@ class RottenPotatoRSHDDialogue(player: Player? = null) : DialoguePlugin(player) 
                     //View Bank
                     4 -> {
                         end()
-                        player.setAttribute("runscript", object : RunScript() {
-                            override fun handle(): Boolean {
-                                val other = Repository.getPlayerByName(getValue().toString().toLowerCase().replace(" ","_"))
-                                if(other == null){
-                                    player.sendMessage(colorize("%RInvalid player name."))
-                                    return true
-                                }
-
-                                other.bank.open(player)
-                                return true
+                        ContentAPI.sendInputDialogue(player, false, "Enter player name:"){value ->
+                            val other = Repository.getPlayerByName(value.toString().toLowerCase().replace(" ","_"))
+                            if(other == null){
+                                player.sendMessage(colorize("%RInvalid player name."))
+                                return@sendInputDialogue
                             }
-                        })
-                        player.dialogueInterpreter.sendInput(true, "Enter the player name:")
+
+                            other.bank.open(player)
+                        }
                     }
                     //View Inventory
                     5 -> {
                         end()
-                        player.setAttribute("runscript", object : RunScript() {
-                            override fun handle(): Boolean {
-                                val other = Repository.getPlayerByName(getValue().toString().toLowerCase().replace(" ","_"))
-                                if(other == null){
-                                    player.sendMessage(colorize("%RInvalid player name."))
-                                    return true
-                                }
-
-                                player.inventory.clear()
-                                player.inventory.addAll(other.inventory)
-                                return true
+                        ContentAPI.sendInputDialogue(player, false, "Enter player name:"){value ->
+                            val other = Repository.getPlayerByName(value.toString().toLowerCase().replace(" ","_"))
+                            if(other == null){
+                                player.sendMessage(colorize("%RInvalid player name."))
+                                return@sendInputDialogue
                             }
-                        })
-                        player.dialogueInterpreter.sendInput(true, "Enter the player name:")
+
+                            player.inventory.clear()
+                            player.inventory.addAll(other.inventory)
+                        }
                     }
                 }
             }

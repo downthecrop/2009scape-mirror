@@ -1,5 +1,6 @@
 package rs09.game.system.command.rottenpotato
 
+import api.ContentAPI
 import core.game.content.dialogue.DialoguePlugin
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -37,17 +38,13 @@ class RottenPotatoExtraDialogue(player: Player? = null) : DialoguePlugin(player)
                //Send Player Notification
                1 -> {
                    end()
-                   player.setAttribute("runscript", object : RunScript() {
-                       override fun handle(): Boolean {
-                           val message = getValue().toString()
-                           for (p in Repository.players) {
-                               p ?: continue
-                               p.packetDispatch.sendString(colorize("%Y${message.replace("_", " ").capitalize()}"), 754, 5)
-                           }
-                           return true
+                   ContentAPI.sendInputDialogue(player, false, "Enter the notification message:"){value ->
+                       val message = value as String
+                       for (p in Repository.players) {
+                           p ?: continue
+                           p.packetDispatch.sendString(colorize("%Y${message.replace("_", " ").capitalize()}"), 754, 5)
                        }
-                   })
-                   player.dialogueInterpreter.sendLongInput("Enter the notification message:")
+                   }
                }
                //Targeted AME
                2 -> {
@@ -64,16 +61,12 @@ class RottenPotatoExtraDialogue(player: Player? = null) : DialoguePlugin(player)
                //Force Area NPC Chat
                4 -> {
                    end()
-                   player.setAttribute("runscript", object : RunScript() {
-                       override fun handle(): Boolean {
-                           val msg = getValue().toString()
-                           RegionManager.getLocalNpcs(player).forEach {
-                               it.sendChat(msg)
-                           }
-                           return true
+                   ContentAPI.sendInputDialogue(player, false,"Enter the chat message:"){value ->
+                       val msg = value as String
+                       RegionManager.getLocalNpcs(player).forEach {
+                           it.sendChat(msg)
                        }
-                   })
-                   player.dialogueInterpreter.sendLongInput("Enter the chat message:")
+                   }
                }
 
                //Kill all nearby NPCs
@@ -88,20 +81,12 @@ class RottenPotatoExtraDialogue(player: Player? = null) : DialoguePlugin(player)
                 //AME Spawning
             100 -> {
                 end()
-                player.setAttribute("runscript", object : RunScript() {
-                    override fun handle(): Boolean {
-                        val other = Repository.getPlayerByName(getValue().toString().toLowerCase().replace(" ", "_"))
-                        if (other == null) {
-                            player.sendMessage(colorize("%RInvalid player name."))
-                            return true
-                        }
-
-                        //other?.antiMacroHandler?.fireEvent(AMEs[buttonId - 1])
-
-                        return true
+                ContentAPI.sendInputDialogue(player, false, "Enter player name:"){value ->
+                    val other = Repository.getPlayerByName(value.toString().toLowerCase().replace(" ", "_"))
+                    if (other == null) {
+                        player.sendMessage(colorize("%RInvalid player name."))
                     }
-                })
-                player.dialogueInterpreter.sendInput(true, "Enter player name:")
+                }
             }
 
            //Spawn boss
