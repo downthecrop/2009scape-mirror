@@ -1,5 +1,6 @@
 package core.game.content.activity.duel;
 
+import api.ContentAPI;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -16,6 +17,7 @@ import core.game.node.item.Item;
 import core.game.system.monitor.PlayerMonitor;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import kotlin.Unit;
 import rs09.game.content.global.action.EquipHandler;
 import rs09.game.system.config.ItemConfigParser;
 
@@ -567,14 +569,10 @@ public final class DuelSession extends ComponentPlugin {
 					amount = c.getAmount(c.get(slot));
 					break;
 				case 234:
-					player.setAttribute("runscript", new RunScript() {
-						@Override
-						public boolean handle() {
-							c.withdraw(slot, (int) getValue());
-							return true;
-						}
+					ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+						c.withdraw(slot, (int) value);
+						return Unit.INSTANCE;
 					});
-					player.getDialogueInterpreter().sendInput(false, "Enter the amount:");
 					break;
 				}
 				c.withdraw(slot, amount);
@@ -688,14 +686,10 @@ public final class DuelSession extends ComponentPlugin {
 				c1.offer(slot, player.getInventory().getAmount(player.getInventory().get(slot).getId()));
 				break;
 			case 234:
-				player.setAttribute("runscript", new RunScript() {
-					@Override
-					public boolean handle() {
-						c1.offer(slot, (int) getValue());
-						return true;
-					}
+				ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+					c1.offer(slot, (int) value);
+					return Unit.INSTANCE;
 				});
-				player.getDialogueInterpreter().sendInput(false, "Enter the amount:");
 				break;
 			case 9:
 				player.getPacketDispatch().sendMessage(player.getInventory().get(slot).getDefinition().getExamine());

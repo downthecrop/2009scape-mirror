@@ -1,5 +1,6 @@
 package core.game.interaction.city;
 
+import api.ContentAPI;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.component.Component;
@@ -35,6 +36,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
+import kotlin.Unit;
 import rs09.game.content.global.travel.EssenceTeleport;
 import rs09.game.world.GameWorld;
 import rs09.plugin.PluginManager;
@@ -686,14 +688,9 @@ public final class WizardTowerPlugin extends OptionHandler {
                     }
                     final int amount = getAmt(buttonId);
                     if (amount == -1) {// rscript.
-                        player.getDialogueInterpreter().sendInput(false, "Enter amount:");
-                        player.setAttribute("runscript", new RunScript() {
-                            @Override
-                            public boolean handle() {
-                                final int amt = (int) getValue();
-                                make(bark, amt);
-                                return true;
-                            }
+                        ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+                            make(bark, (int) value);
+                            return Unit.INSTANCE;
                         });
                         return true;
                     }

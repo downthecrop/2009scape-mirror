@@ -12,6 +12,7 @@ import core.game.node.entity.impl.Animator
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.RunScript
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
@@ -127,12 +128,11 @@ object ContentAPI {
             else -> throw IllegalStateException("Invalid value passed for item")
         }
 
-        when(container){
+        return when(container){
             Container.INVENTORY -> player.inventory.remove(it)
             Container.BANK -> player.bank.remove(it)
             Container.EQUIPMENT -> player.equipment.remove(it)
         }
-        return false
     }
 
     /**
@@ -917,5 +917,31 @@ object ContentAPI {
     @JvmStatic
     fun clearLogoutListener(player: Player, key: String){
         player.logoutListeners.remove(key)
+    }
+
+    /**
+     * Sends an item to a specific child on an interface
+     * @param player the player to send the packet to
+     * @param iface the ID of the interface to send the item onto
+     * @Param child the index of the child on the interface to send the item onto
+     * @param item the ID of the item to send
+     * @param amount the amount of the item to send - defaults to 1
+     */
+    @JvmStatic
+    fun sendItemOnInterface(player: Player, iface: Int, child: Int, item: Int, amount: Int = 1){
+        player.packetDispatch.sendItemOnInterface(item,amount,iface,child)
+    }
+
+    /**
+     * Send an input dialogue to retrieve a specified value from the player
+     * @param player the player to send the input dialogue to
+     * @param numeric whether or not the input is numeric
+     * @param prompt what to prompt the player
+     * @param handler the method that handles the value gained from the input dialogue
+     */
+    @JvmStatic
+    fun sendInputDialogue(player: Player, numeric: Boolean, prompt: String, handler: (value: Any) -> Unit){
+        player.dialogueInterpreter.sendInput(!numeric, prompt)
+        player.setAttribute("runscript",handler) //Handled in RunScriptPacketHandler
     }
 }

@@ -1,7 +1,9 @@
 package core.game.interaction.item.withitem;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.plugin.Initializable;
+import kotlin.Unit;
 import org.rs09.consts.Items;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.NodeUsageEvent;
@@ -220,15 +222,10 @@ public final class FruitCuttingPlugin extends UseWithHandler {
 					amount = 5;
 					break;
 				case 4:
-					player.setAttribute("runscript", new RunScript() {
-						@Override
-						public boolean handle() {
-							int ammount = (int) value;
-							cut(player, ammount, slice);
-							return false;
-						}
+					ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+						cut(player, (int) value, slice);
+						return Unit.INSTANCE;
 					});
-					player.getDialogueInterpreter().sendInput(false, "Enter the amount");
 					return true;
 				case 3:
 					amount = player.getInventory().getAmount(fruit.getBase());
