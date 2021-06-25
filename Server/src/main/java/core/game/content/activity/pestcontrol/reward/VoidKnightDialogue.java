@@ -61,8 +61,7 @@ public final class VoidKnightDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			options("Who are you?", "What is this place?",
-					"Ask about Penance gear.", "I'm fine thanks.");
+			options("Who are you?", "What is this place?", "I'm fine thanks.");
 			stage = 1;
 			break;
 		case 1:
@@ -76,10 +75,6 @@ public final class VoidKnightDialogue extends DialoguePlugin {
 				stage = 20;
 				break;
 			case 3:
-				player("I'd like to see your available Penance gear.");
-				stage = 40;
-				break;
-			case 4:
 				player("I'm fine thanks.");
 				stage = 30;
 				break;
@@ -241,51 +236,6 @@ public final class VoidKnightDialogue extends DialoguePlugin {
 			break;
 		case 30:
 			end();
-			break;
-		case 40:
-			npc("How did you know we were supplying that kind of stuff?",
-					"*sigh* Well, I suppose I can help you out.",
-					"Here's what I have in stock.");
-			stage = 41;
-			break;
-		case 41:
-			interpreter.sendOptions("Select an Option", "Fighter Torso",
-					"Fighter Hat", "Ranger Hat", "Runner Hat", "Healer Hat");
-			stage = 42;
-			break;
-		case 42:
-			switch (buttonId) {
-			case 1:
-				npc("You've taken an interest in the Fighter Torso I have",
-						"in stock. That'll cost one hundred and fifty points.");
-				reward = new Item(10551);
-				stage = 43;
-				break;
-			case 2:
-				npc("You've taken an interest in the Fighter Hat I have",
-						"in stock. That'll cost one hundred and fifty points.");
-				reward = new Item(10548);
-				stage = 43;
-				break;
-			case 3:
-				npc("You've taken an interest in the Ranger Hat I have",
-						"in stock. That'll cost one hundred and fifty points.");
-				reward = new Item(10550);
-				stage = 43;
-				break;
-			case 4:
-				npc("You've taken an interest in the Runner Hat I have",
-						"in stock. That'll cost one hundred and fifty points.");
-				reward = new Item(10549);
-				stage = 43;
-				break;
-			case 5:
-				npc("You've taken an interest in the Healer Hat I have",
-						"in stock. That'll cost one hundred and fifty points.");
-				reward = new Item(10547);
-				stage = 43;
-				break;
-			}
 			break;
 		case 43:
 			if (player.getSavedData().getActivityData().getPestPoints() < 150) {

@@ -944,4 +944,20 @@ object ContentAPI {
         player.dialogueInterpreter.sendInput(!numeric, prompt)
         player.setAttribute("runscript",handler) //Handled in RunScriptPacketHandler
     }
+
+    /**
+     * Forces an NPC to "flee" from a player or other entity
+     * @param entity the entity to make flee
+     * @param from the entity to flee from
+     */
+    @JvmStatic
+    fun flee(entity: Entity, from: Entity){
+        lock(entity, 5)
+        face(entity, from, 5)
+
+        val diffX = entity.location.x - from.location.x
+        val diffY = entity.location.y - from.location.y
+
+        forceWalk(entity, entity.location.transform(diffX,diffY,0), "DUMB")
+    }
 }
