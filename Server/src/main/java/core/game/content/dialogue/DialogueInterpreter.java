@@ -554,7 +554,6 @@ public final class DialogueInterpreter {
      * @param objects The arguments.
      */
     public void sendInput(boolean string, Object... objects) {
-        SystemLogger.logInfo("Sending runscript");
         player.getPacketDispatch().sendRunScript(string ? 109 : 108, "s", objects);
     }
 
