@@ -1,7 +1,9 @@
 package core.game.content.dialogue;
 
+import api.ContentAPI;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
+import kotlin.Unit;
 import rs09.game.system.SystemLogger;
 import core.game.node.entity.skill.crafting.armour.DragonCraftPulse;
 import core.game.node.entity.skill.crafting.armour.HardCraftPulse;
@@ -109,15 +111,10 @@ public final class LeatherCraftDialogue extends DialoguePlugin {
 				amt = 5;
 				break;
 			case 3:
-				player.setAttribute("runscript", new RunScript() {
-					@Override
-					public boolean handle() {
-						int ammount = (int) value;
-						player.getPulseManager().run(new HardCraftPulse(player, null, ammount));
-						return false;
-					}
+				ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+					player.getPulseManager().run(new HardCraftPulse(player, null, (int) value));
+					return Unit.INSTANCE;
 				});
-				player.getDialogueInterpreter().sendInput(false, "Enter the amount");
 				return true;
 			case 2:
 				amt = player.getInventory().getAmount(new Item(LeatherCrafting.HARD_LEATHER));
@@ -208,14 +205,10 @@ public final class LeatherCraftDialogue extends DialoguePlugin {
 				if (hidee == null) {
 					return false;
 				}
-				player.setAttribute("runscript", new RunScript() {
-					@Override
-					public boolean handle() {
-						player.getPulseManager().run(new DragonCraftPulse(player, null, hidee, (int) getValue()));
-						return true;
-					}
+				ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+					player.getPulseManager().run(new DragonCraftPulse(player, null, hidee, (int) value));
+					return Unit.INSTANCE;
 				});
-				player.getDialogueInterpreter().sendInput(false, "Enter amount:");
 				return true;
 			}
 			if (hide == null) {

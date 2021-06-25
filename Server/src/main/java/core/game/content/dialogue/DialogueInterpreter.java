@@ -18,6 +18,7 @@ import core.plugin.PluginManifest;
 import core.plugin.PluginType;
 import rs09.game.content.dialogue.DialogueFile;
 import rs09.game.content.dialogue.EmptyPlugin;
+import rs09.game.system.SystemLogger;
 import rs09.game.system.config.ItemConfigParser;
 
 import java.util.ArrayList;

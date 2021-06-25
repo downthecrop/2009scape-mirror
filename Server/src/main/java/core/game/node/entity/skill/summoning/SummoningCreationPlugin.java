@@ -1,5 +1,6 @@
 package core.game.node.entity.skill.summoning;
 
+import api.ContentAPI;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -10,6 +11,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import kotlin.Unit;
 import rs09.plugin.PluginManager;
 
 /**
@@ -47,14 +49,10 @@ public final class SummoningCreationPlugin extends ComponentPlugin {
 				SummoningCreator.create(player, getItemAmount(opcode), component.getId() == 669 ? SummoningPouch.forSlot(slot > 50 ? slot -1 : slot) : SummoningScroll.forId(slot > 50 ? slot -1 : slot));
 				break;
 			case 234:
-				player.setAttribute("runscript", new RunScript() {
-					@Override
-					public boolean handle() {
-						SummoningCreator.create(player, (int) getValue(), component.getId() == 669 ? SummoningPouch.forSlot(slot > 50 ? slot -1 : slot) : SummoningScroll.forId(slot > 50 ? slot -1 : slot));
-						return true;
-					}
+				ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+					SummoningCreator.create(player, (int) value, component.getId() == 669 ? SummoningPouch.forSlot(slot > 50 ? slot -1 : slot) : SummoningScroll.forId(slot > 50 ? slot -1 : slot));
+					return Unit.INSTANCE;
 				});
-				player.getDialogueInterpreter().sendInput(false, "Enter the amount:");
 				return true;
 			case 166:
 				SummoningCreator.list(player, SummoningPouch.forSlot(slot > 50 ? slot -1 : slot));

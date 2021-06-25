@@ -1,8 +1,10 @@
 package core.game.content.dialogue;
 
+import api.ContentAPI;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
 import core.plugin.Initializable;
+import kotlin.Unit;
 import rs09.game.content.dialogue.SkillDialogueHandler;
 
 /**
@@ -56,13 +58,9 @@ public class SkillDialoguePlugin extends DialoguePlugin {
 		if (amount != -1) {
 			handler.create(amount, index);
 		} else {
-			player.getDialogueInterpreter().sendInput(false, "Enter the amount:");
-			player.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					handler.create((int) getValue(), index);
-					return true;
-				}
+			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				handler.create((int) value, index);
+				return Unit.INSTANCE;
 			});
 			return true;
 		}
