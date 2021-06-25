@@ -128,12 +128,11 @@ object ContentAPI {
             else -> throw IllegalStateException("Invalid value passed for item")
         }
 
-        when(container){
+        return when(container){
             Container.INVENTORY -> player.inventory.remove(it)
             Container.BANK -> player.bank.remove(it)
             Container.EQUIPMENT -> player.equipment.remove(it)
         }
-        return false
     }
 
     /**

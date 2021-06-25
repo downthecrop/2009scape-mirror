@@ -10,6 +10,7 @@ import org.rs09.consts.Components
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InterfaceListener
+import rs09.game.system.SystemLogger
 
 class SilverInterface : InterfaceListener() {
 
@@ -58,10 +59,7 @@ class SilverInterface : InterfaceListener() {
 
             if(amt == -1) ContentAPI.sendInputDialogue(player, true, "Enter the amount:"){value ->
                 make(player,product,value as Int)
-            }
-
-            make(player, product, amt)
-
+            } else make(player, product, amt)
             return@on true
         }
     }
@@ -82,6 +80,7 @@ class SilverInterface : InterfaceListener() {
                     if(product == SilverProduct.UNBLESSED && player.location.withinDistance(ContentAPI.location(3226,3254,0))){
                         player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 2, 8)
                     }
+                    delay = 3
                 } else return true
 
                 amt--
