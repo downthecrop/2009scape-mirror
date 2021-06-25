@@ -5,6 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import api.ContentAPI;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -21,6 +22,7 @@ import core.game.node.item.Item;
 import core.game.node.object.Scenery;
 import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
+import kotlin.Unit;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -315,15 +317,10 @@ public final class PartyRoomPlugin extends OptionHandler {
 					viewer.getContainer().addItem(slot, ammount);
 					break;
 				case 234:
-					player.setAttribute("runscript", new RunScript() {
-						@Override
-						public boolean handle() {
-							int ammount = (int) value;
-							viewer.getContainer().addItem(slot, ammount);
-							return false;
-						}
+					ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+						viewer.getContainer().addItem(slot, (int) value);
+						return Unit.INSTANCE;
 					});
-					player.getDialogueInterpreter().sendInput(false, "Enter the amount.");
 					break;
 				}
 				break;
@@ -351,15 +348,10 @@ public final class PartyRoomPlugin extends OptionHandler {
 					viewer.getContainer().takeItem(slot, ammount);
 					break;
 				case 234:
-					player.setAttribute("runscript", new RunScript() {
-						@Override
-						public boolean handle() {
-							int ammount = (int) value;
-							viewer.getContainer().takeItem(slot, ammount);
-							return false;
-						}
+					ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+						viewer.getContainer().takeItem(slot, (int) value);
+						return Unit.INSTANCE;
 					});
-					player.getDialogueInterpreter().sendInput(false, "Enter the amount.");
 					break;
 				}
 				break;

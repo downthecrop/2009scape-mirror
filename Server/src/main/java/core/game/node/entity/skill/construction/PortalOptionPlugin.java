@@ -1,6 +1,7 @@
 package core.game.node.entity.skill.construction;
 
 
+import api.ContentAPI;
 import core.cache.def.impl.ObjectDefinition;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
@@ -13,6 +14,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.plugin.PluginManifest;
 import core.plugin.PluginType;
+import kotlin.Unit;
 import rs09.game.world.repository.Repository;
 import rs09.plugin.PluginManager;
 
@@ -118,35 +120,31 @@ public final class PortalOptionPlugin extends OptionHandler {
 					player.getHouseManager().enter(player, buttonId == 2, true);
 					break;
 				case 3:
-					player.getDialogueInterpreter().sendInput(true, "Enter friend's name:");
-					player.setAttribute("runscript", new RunScript() {
-						@Override
-						public boolean handle() {
-							Player p = Repository.getPlayerByName((String) getValue());
-							if (p == null || !p.isActive()) {
-								player.getPacketDispatch().sendMessage("This player is not online.");
-								return true;
-							}
-							if (p.getUsername().equals(player.getUsername())) {
-								player.getPacketDispatch().sendMessage("You aren't a friend of yourself!");
-								return true;
-							}
-							if (!p.getHouseManager().isLoaded()) {
-								player.getPacketDispatch().sendMessage("This player is not at home right now.");
-								return true;
-							}
-							if (p.getHouseManager().isBuildingMode()) {
-								player.getPacketDispatch().sendMessage("This player is in building mode.");
-								return true;
-							}
-							if (p.getHouseManager().isLocked()) {
-								player.getPacketDispatch().sendMessage("The other player has locked their house.");
-								return true;
-							}
-							p.setAttribute("poh_owner", getValue());
-							p.getHouseManager().enter(player, false, false);
-							return true;
+					ContentAPI.sendInputDialogue(player, false, "Enter friend's name:", (value) -> {
+						Player p = Repository.getPlayerByName((String) value);
+						if (p == null || !p.isActive()) {
+							player.getPacketDispatch().sendMessage("This player is not online.");
+							return Unit.INSTANCE;
 						}
+						if (p.getUsername().equals(player.getUsername())) {
+							player.getPacketDispatch().sendMessage("You aren't a friend of yourself!");
+							return Unit.INSTANCE;
+						}
+						if (!p.getHouseManager().isLoaded()) {
+							player.getPacketDispatch().sendMessage("This player is not at home right now.");
+							return Unit.INSTANCE;
+						}
+						if (p.getHouseManager().isBuildingMode()) {
+							player.getPacketDispatch().sendMessage("This player is in building mode.");
+							return Unit.INSTANCE;
+						}
+						if (p.getHouseManager().isLocked()) {
+							player.getPacketDispatch().sendMessage("The other player has locked their house.");
+							return Unit.INSTANCE;
+						}
+						p.setAttribute("poh_owner", (String) value);
+						p.getHouseManager().enter(player, false, false);
+						return Unit.INSTANCE;
 					});
 					break;
 				}

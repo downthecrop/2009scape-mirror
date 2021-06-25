@@ -1,5 +1,6 @@
 package core.game.content.dialogue;
 
+import api.ContentAPI;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.runecrafting.Altar;
 import core.game.node.entity.skill.runecrafting.EnchantTiaraPulse;
@@ -8,6 +9,7 @@ import core.game.interaction.NodeUsageEvent;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
 import core.game.node.object.Scenery;
+import kotlin.Unit;
 
 /**
  * Represents the enchant tiara dialogue.
@@ -75,15 +77,10 @@ public final class EnchantTiaraDialogue extends DialoguePlugin {
 			amt = 5;
 			break;
 		case 4:
-			player.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					int ammount = (int) value;
-					player.getPulseManager().run(new EnchantTiaraPulse(player, event.getUsedItem(), (Talisman.forItem(event.getUsedItem()).getTiara()), ammount));
-					return false;
-				}
+			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				player.getPulseManager().run(new EnchantTiaraPulse(player, event.getUsedItem(), Talisman.forItem(event.getUsedItem()).getTiara(), (int) value));
+				return Unit.INSTANCE;
 			});
-			player.getDialogueInterpreter().sendInput(false, "Enter the amount");
 			return true;
 		case 3:
 			amt = player.getInventory().getAmount(event.getUsedItem());

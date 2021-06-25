@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -12,6 +13,7 @@ import core.net.amsc.WorldCommunicator;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.StringUtils;
+import kotlin.Unit;
 
 /**
  * Represents the plugin used to handle the clan interfaces.
@@ -93,27 +95,23 @@ public final class ClanInterfacePlugin extends ComponentPlugin {
 					clan.clean(true);
 					break;
 				default:
-					player.setAttribute("runscript", new RunScript() {
-						@Override
-						public boolean handle() {
-							String name = StringUtils.formatDisplayName((String) value);
-							player.getPacketDispatch().sendString(name, 590, 22);//30
-							if (WorldCommunicator.isEnabled()) {
-								MSPacketRepository.sendClanRename(player, name);
-								clan.setName(name);
-								return true;
-							}
-							if (clan.getName().equals("Chat disabled")) {
-								player.getPacketDispatch().sendMessage("Your clan channel has now been enabled!");
-								player.getPacketDispatch().sendMessage("Join your channel by clicking 'Join Chat' and typing: " + player.getUsername());
-							}
+					ContentAPI.sendInputDialogue(player, false, "Enter clan prefix:", (value) -> {
+						String name = StringUtils.formatDisplayName((String) value);
+						ContentAPI.setInterfaceText(player, name, 590, 22);
+						if(WorldCommunicator.isEnabled()){
+							MSPacketRepository.sendClanRename(player, name);
 							clan.setName(name);
-							player.getCommunication().setClanName(name);
-							clan.update();
-							return true;
+							return Unit.INSTANCE;
 						}
+						if (clan.getName().equals("Chat disabled")) {
+							player.getPacketDispatch().sendMessage("Your clan channel has now been enabled!");
+							player.getPacketDispatch().sendMessage("Join your channel by clicking 'Join Chat' and typing: " + player.getUsername());
+						}
+						clan.setName(name);
+						player.getCommunication().setClanName(name);
+						clan.update();
+						return Unit.INSTANCE;
 					});
-					player.getDialogueInterpreter().sendInput(true, "Enter clan prefix:");
 					break;
 				}
 				break;
