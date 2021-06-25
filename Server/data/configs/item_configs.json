@@ -9919,7 +9919,6 @@
     "durability": null,
     "low_alchemy": "8",
     "high_alchemy": "12",
-    "destroy": "true",
     "weight": "0.4",
     "equipment_slot": "1",
     "grand_exchange_price": "187",
@@ -9932,6 +9931,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "187",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Cape",
     "tradeable": "true",
@@ -10063,7 +10063,6 @@
     "durability": null,
     "low_alchemy": "8",
     "high_alchemy": "12",
-    "destroy": "true",
     "weight": "0.4",
     "equipment_slot": "1",
     "grand_exchange_price": "209",
@@ -10076,6 +10075,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "209",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Cape",
     "tradeable": "true",
@@ -10089,7 +10089,6 @@
     "durability": null,
     "low_alchemy": "8",
     "high_alchemy": "12",
-    "destroy": "true",
     "weight": "0.4",
     "equipment_slot": "1",
     "grand_exchange_price": "504",
@@ -10102,6 +10101,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "504",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Cape",
     "tradeable": "true",
@@ -10115,7 +10115,6 @@
     "durability": null,
     "low_alchemy": "8",
     "high_alchemy": "12",
-    "destroy": "true",
     "weight": "0.4",
     "equipment_slot": "1",
     "grand_exchange_price": "439",
@@ -10128,6 +10127,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "439",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Cape",
     "tradeable": "true",
@@ -10164,7 +10164,6 @@
     "durability": null,
     "low_alchemy": "8",
     "high_alchemy": "12",
-    "destroy": "true",
     "weight": "0.4",
     "equipment_slot": "1",
     "grand_exchange_price": "1061",
@@ -10177,6 +10176,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1061",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Cape",
     "tradeable": "true",
@@ -10190,7 +10190,6 @@
     "durability": null,
     "low_alchemy": "8",
     "high_alchemy": "12",
-    "destroy": "true",
     "weight": "0.4",
     "equipment_slot": "1",
     "grand_exchange_price": "955",
@@ -10203,6 +10202,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "955",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Cape",
     "tradeable": "true",
@@ -30762,8 +30762,10 @@
     "id": "2892"
   },
   {
+    "shop_price": "650",
     "ge_buy_limit": "100",
     "grand_exchange_price": "1570",
+    "examine": "Very stylish!",
     "durability": null,
     "name": "Boots",
     "archery_ticket_price": "0",
@@ -30774,6 +30776,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1570",
+	"examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Boots",
     "tradeable": "true",
@@ -30781,9 +30784,9 @@
     "id": "2895"
   },
   {
-    "shop_price": "180",
+    "shop_price": "650",
     "ge_buy_limit": "100",
-    "examine": "The ultimate in gnome design, now in [colour].",
+    "examine": "Some fine werewolf clothing.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -30800,6 +30803,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "867",
+	"examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Robe top",
     "tradeable": "true",
@@ -30807,10 +30811,13 @@
     "id": "2897"
   },
   {
+    "shop_price": "650",
     "ge_buy_limit": "100",
     "grand_exchange_price": "741",
+	"examine": "Made by werewolves for werewolves.",
     "durability": null,
     "name": "Robe bottoms",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2898",
     "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
@@ -30819,6 +30826,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "741",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Robe bottoms",
     "tradeable": "true",
@@ -30826,10 +30834,13 @@
     "id": "2899"
   },
   {
+    "shop_price": "650",
     "ge_buy_limit": "100",
     "grand_exchange_price": "844",
+	"examine": "A silly pointed hat.",
     "durability": null,
     "name": "Hat",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2900",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
@@ -30838,6 +30849,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "844",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Hat",
     "tradeable": "true",
@@ -30845,10 +30857,13 @@
     "id": "2901"
   },
   {
+    "shop_price": "650",
     "ge_buy_limit": "10",
     "grand_exchange_price": "1039",
+	"examine": "These gloves from Canifis will keep my hands warm!",
     "durability": null,
     "name": "Gloves",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2902",
     "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0",
@@ -30857,6 +30872,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "1039",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Gloves",
     "tradeable": "true",
@@ -30864,10 +30880,13 @@
     "id": "2903"
   },
   {
+    "shop_price": "650",
     "ge_buy_limit": "100",
     "grand_exchange_price": "1359",
+	"examine": "Very stylish!",		
     "durability": null,
     "name": "Boots",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2904",
     "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
@@ -30876,6 +30895,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1359",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Boots",
     "tradeable": "true",
@@ -30883,9 +30903,9 @@
     "id": "2905"
   },
   {
-    "shop_price": "180",
+    "shop_price": "650",
     "ge_buy_limit": "100",
-    "examine": "The ultimate in gnome design, now in [colour].",
+    "examine": "Some fine werewolf clothing.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -30902,6 +30922,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "958",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Robe top",
     "tradeable": "true",
@@ -30909,10 +30930,13 @@
     "id": "2907"
   },
   {
+    "shop_price": "650", 
     "ge_buy_limit": "100",
     "grand_exchange_price": "474",
+	"examine": "Made by werewolves for werewolves.",	
     "durability": null,
     "name": "Robe bottoms",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2908",
     "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
@@ -30921,6 +30945,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "474",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Robe bottoms",
     "tradeable": "true",
@@ -30928,8 +30953,11 @@
     "id": "2909"
   },
   {
+    "shop_price": "650",  
     "ge_buy_limit": "100",
     "grand_exchange_price": "1445",
+	"examine": "A silly pointed hat.",
+    "tradeable": "true",	
     "durability": null,
     "name": "Hat",
     "archery_ticket_price": "0",
@@ -30940,6 +30968,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1445",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Hat",
     "tradeable": "true",
@@ -30947,10 +30976,13 @@
     "id": "2911"
   },
   {
+    "shop_price": "650", 
     "ge_buy_limit": "10",
     "grand_exchange_price": "1254",
+    "examine": "These gloves from Canifis will keep my hands warm!",
     "durability": null,
     "name": "Gloves",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2912",
     "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0",
@@ -30959,6 +30991,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "1254",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Gloves",
     "tradeable": "true",
@@ -30966,10 +30999,13 @@
     "id": "2913"
   },
   {
+    "shop_price": "650",
     "ge_buy_limit": "100",
     "grand_exchange_price": "1054",
+	"examine": "Very stylish!",
     "durability": null,
     "name": "Boots",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2914",
     "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
@@ -30978,6 +31014,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1054",
+	"examine": "Swap this note at any bank for the equivalent item.",		
     "durability": null,
     "name": "Boots",
     "tradeable": "true",
@@ -30985,9 +31022,9 @@
     "id": "2915"
   },
   {
-    "shop_price": "180",
+    "shop_price": "650",
     "ge_buy_limit": "100",
-    "examine": "The ultimate in gnome design, now in [colour].",
+    "examine": "Some fine werewolf clothing.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -31004,6 +31041,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "789",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Robe top",
     "tradeable": "true",
@@ -31011,10 +31049,13 @@
     "id": "2917"
   },
   {
+    "shop_price": "650",
     "ge_buy_limit": "100",
     "grand_exchange_price": "603",
+	"examine": "Made by werewolves for werewolves.",	
     "durability": null,
     "name": "Robe bottoms",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2918",
     "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
@@ -31023,6 +31064,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "603",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Robe bottoms",
     "tradeable": "true",
@@ -31030,10 +31072,13 @@
     "id": "2919"
   },
   {
+    "shop_price": "650",
     "ge_buy_limit": "100",
     "grand_exchange_price": "997",
+	"examine": "A silly pointed hat.",	
     "durability": null,
     "name": "Hat",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2920",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
@@ -31042,6 +31087,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "997",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Hat",
     "tradeable": "true",
@@ -31049,10 +31095,13 @@
     "id": "2921"
   },
   {
+    "shop_price": "650",
     "ge_buy_limit": "10",
     "grand_exchange_price": "1221",
+	"examine": "These gloves from Canifis will keep my hands warm!",
     "durability": null,
     "name": "Gloves",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2922",
     "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0",
@@ -31061,6 +31110,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "1221",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Gloves",
     "tradeable": "true",
@@ -31068,10 +31118,13 @@
     "id": "2923"
   },
   {
+    "shop_price": "650",
     "ge_buy_limit": "100",
     "grand_exchange_price": "737",
+	"examine": "Very stylish!",
     "durability": null,
     "name": "Boots",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2924",
     "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
@@ -31080,6 +31133,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "737",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Boots",
     "tradeable": "true",
@@ -31087,9 +31141,9 @@
     "id": "2925"
   },
   {
-    "shop_price": "180",
+    "shop_price": "650",
     "ge_buy_limit": "100",
-    "examine": "The ultimate in gnome design, now in [colour].",
+    "examine": "Some fine werewolf clothing.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -31106,6 +31160,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "504",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Robe top",
     "tradeable": "true",
@@ -31113,10 +31168,13 @@
     "id": "2927"
   },
   {
+    "shop_price": "650", 
     "ge_buy_limit": "100",
     "grand_exchange_price": "637",
+	"examine": "Made by werewolves for werewolves.",
     "durability": null,
     "name": "Robe bottoms",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2928",
     "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
@@ -31125,6 +31183,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "637",
+	"examine": "Swap this note at any bank for the equivalent item.",		
     "durability": null,
     "name": "Robe bottoms",
     "tradeable": "true",
@@ -31132,10 +31191,13 @@
     "id": "2929"
   },
   {
+    "shop_price": "650", 
     "ge_buy_limit": "100",
     "grand_exchange_price": "925",
+	"examine": "A silly pointed hat.",
     "durability": null,
     "name": "Hat",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2930",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
@@ -31144,6 +31206,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "925",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Hat",
     "tradeable": "true",
@@ -31151,10 +31214,13 @@
     "id": "2931"
   },
   {
+    "shop_price": "650", 
     "ge_buy_limit": "10",
     "grand_exchange_price": "1829",
+	"examine": "These gloves from Canifis will keep my hands warm!",
     "durability": null,
     "name": "Gloves",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2932",
     "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0",
@@ -31163,6 +31229,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "1829",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Gloves",
     "tradeable": "true",
@@ -31170,10 +31237,13 @@
     "id": "2933"
   },
   {
+    "shop_price": "650", 
     "ge_buy_limit": "100",
     "grand_exchange_price": "988",
+	"examine": "Very stylish!",
     "durability": null,
     "name": "Boots",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2934",
     "bonuses": "0,0,0,0,0,0,1,1,0,0,0,0,0,0,0",
@@ -31182,6 +31252,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "988",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Boots",
     "tradeable": "true",
@@ -31189,9 +31260,9 @@
     "id": "2935"
   },
   {
-    "shop_price": "180",
+    "shop_price": "650",
     "ge_buy_limit": "100",
-    "examine": "The ultimate in gnome design, now in [colour].",
+    "examine": "Some fine werewolf clothing.",
     "durability": null,
     "low_alchemy": "72",
     "high_alchemy": "108",
@@ -31208,6 +31279,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "925",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Robe top",
     "tradeable": "true",
@@ -31215,10 +31287,13 @@
     "id": "2937"
   },
   {
+    "shop_price": "650",  
     "ge_buy_limit": "100",
     "grand_exchange_price": "927",
+	"examine": "Made by werewolves for werewolves.",
     "durability": null,
     "name": "Robe bottoms",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2938",
     "bonuses": "0,0,0,0,0,0,2,2,0,0,0,0,0,0,0",
@@ -31227,6 +31302,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "927",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Robe bottoms",
     "tradeable": "true",
@@ -31234,10 +31310,13 @@
     "id": "2939"
   },
   {
+    "shop_price": "650",  
     "ge_buy_limit": "100",
     "grand_exchange_price": "1209",
+	"examine": "A silly pointed hat.",
     "durability": null,
     "name": "Hat",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2940",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
@@ -31246,6 +31325,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1209",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Hat",
     "tradeable": "true",
@@ -31253,10 +31333,13 @@
     "id": "2941"
   },
   {
+    "shop_price": "650",  
     "ge_buy_limit": "10",
     "grand_exchange_price": "634",
+	"examine": "These gloves from Canifis will keep my hands warm!",
     "durability": null,
     "name": "Gloves",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "2942",
     "bonuses": "0,0,0,0,0,0,1,2,0,0,0,0,0,0,0",
@@ -31265,6 +31348,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "634",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Gloves",
     "tradeable": "true",
@@ -37854,6 +37938,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "48900",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Archer helm",
     "tradeable": "true",
@@ -37883,6 +37968,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "60900",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Berserker helm",
     "tradeable": "true",
@@ -37912,6 +37998,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "50700",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Warrior helm",
     "tradeable": "true",
@@ -37941,6 +38028,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "47900",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Farseer helm",
     "tradeable": "true",
@@ -98474,6 +98562,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "44800",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Helm of neitiznot",
     "tradeable": "true",
