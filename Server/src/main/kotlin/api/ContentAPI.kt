@@ -767,7 +767,8 @@ object ContentAPI {
      */
     @JvmStatic
     fun teleport(entity: Entity, loc: Location, type: TeleportManager.TeleportType = TeleportManager.TeleportType.INSTANT){
-        entity.teleporter.send(loc,type)
+        if(type == TeleportManager.TeleportType.INSTANT) entity.properties.teleportLocation = loc
+        else entity.teleporter.send(loc,type)
     }
 
     /**
