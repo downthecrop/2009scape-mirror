@@ -1,5 +1,6 @@
 package rs09.game.node.entity.skill.agility
 
+import api.ContentAPI
 import core.cache.def.impl.ObjectDefinition
 import core.game.content.global.action.DoorActionHandler
 import core.game.node.Node
@@ -176,25 +177,25 @@ class WildernessCourse
      * @param object the object.
      */
     private fun handleSteppingStones(player: Player, `object`: Scenery) {
-        player.locks.lock()
+        ContentAPI.lock(player, 50)
         val fail = AgilityHandler.hasFailed(player, 1, 0.3)
-        player.addExtension(LogoutTask::class.java, LocationLogoutTask(12, player.location))
-        GameWorld.Pulser.submit(object : Pulse(2, player) {
+        val origLoc = player.location
+        ContentAPI.registerLogoutListener(player, "steppingstone"){p ->
+            ContentAPI.teleport(p, origLoc)
+        }
+        ContentAPI.submitWorldPulse(object : Pulse(2, player){
             var counter = 0
             override fun pulse(): Boolean {
                 if (counter == 3 && fail) {
                     AgilityHandler.fail(player, -1, Location.create(3001, 3963, 0), Animation.create(771), (player.skills.lifepoints * 0.26).toInt(), "...You lose your footing and fall into the lava.")
                     return true
                 }
-                AgilityHandler.forceWalk(player, if (counter == 5) 2 else -1, player.location, player.location.transform(-1, 0, 0), Animation.create(741), 10, if (counter == 5) 20.0 else 0.toDouble(), if (counter != 0) null else "You carefully start crossing the stepping stones...")
+                AgilityHandler.forceWalk(player, if (counter == 5) 2 else -1, player.location, player.location.transform(-1, 0, 0), Animation.create(741), 10, if (counter == 5) 20.0 else 0.0, if (counter != 0) null else "You carefully start crossing the stepping stones...")
                 if(++counter == 6){
-                    player.unlock()
+                    ContentAPI.unlock(player)
+                    ContentAPI.clearLogoutListener(player, "steppingstone")
                 }
                 return counter == 6
-            }
-
-            override fun stop() {
-                super.stop()
             }
         })
     }

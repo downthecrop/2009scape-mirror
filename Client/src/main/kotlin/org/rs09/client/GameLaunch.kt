@@ -43,6 +43,9 @@ object GameLaunch {
         /**
          * Launches the client
          */
+        if(System.getProperty("os.name").toLowerCase().contains("nux")){ //Fixes crashing due to XInitThreads not being called - JVM bug
+            System.load(javaClass.classLoader.getResource("libfixXInitThreads.so")!!.file)
+        }
         GameShell.launchDesktop()
     }
 
