@@ -22,6 +22,7 @@ class VarrockEssenceMiner : Script(){
 
         when(state){
             State.TO_ESSENCE -> {
+                bot.interfaceManager.close()
                 if(!auburyZone.insideBorder(bot))
                     scriptAPI.walkTo(auburyZone.randomLoc)
                 else {
