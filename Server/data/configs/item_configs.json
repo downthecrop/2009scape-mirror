@@ -138883,7 +138883,7 @@
     "name": "Wizard hat",
     "tradeable": "false",
     "archery_ticket_price": "0",
-    "hat": "false",
+    "hat": "true",
     "id": "14650",
     "bonuses": "0,0,0,2,0,0,0,0,2,0,0,0,0,0,0"
   },
