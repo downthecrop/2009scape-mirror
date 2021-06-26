@@ -1,5 +1,7 @@
 package core.game.node.entity.skill.agility;
 
+import api.ContentAPI;
+import core.game.node.entity.player.link.TeleportManager;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
@@ -100,21 +102,26 @@ public final class AgilityHandler {
 	 */
 	public static void fail(final Player player, int delay, final Location dest, Animation anim, final int hit, final String message) {
 		if (anim != null) {
-			player.animate(anim);
+			ContentAPI.animate(player, anim, true);
 		}
-		GameWorld.getPulser().submit(new Pulse(anim.getDefinition().getDurationTicks(), player) {
+		ContentAPI.submitWorldPulse(new Pulse(ContentAPI.animationDuration(anim), player) {
+			boolean dmg = false;
 			@Override
 			public boolean pulse() {
-				player.getProperties().setTeleportLocation(dest);
-				player.animate(Animation.RESET);
-				if (hit > 0) {
-					player.getImpactHandler().setDisabledTicks(0);
-					player.getImpactHandler().manualHit(player, hit, HitsplatType.NORMAL);
+				ContentAPI.teleport(player, dest, TeleportManager.TeleportType.INSTANT);
+				ContentAPI.animate(player, Animation.RESET, true);
+				if(!dmg) {
+					if (hit > 0) {
+						player.getImpactHandler().setDisabledTicks(0);
+						ContentAPI.impact(player, hit, HitsplatType.NORMAL);
+					}
+					if (message != null) {
+						ContentAPI.sendMessage(player, message);
+					}
+					dmg = true;
 				}
-				if (message != null) {
-					player.getPacketDispatch().sendMessage(message);
-				}
-				return true;
+				setDelay(0);
+				return player.getLocation().equals(dest);
 			}
 		});
 	}
