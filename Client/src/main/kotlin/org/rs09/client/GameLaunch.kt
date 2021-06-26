@@ -26,6 +26,9 @@ object GameLaunch {
             GameConfig.parse(GameConfig.configLocation)
             GameConfig.implementHoliday()
             GameConfig.extendRenderDistance()
+            if(System.getProperty("os.name").toLowerCase().contains("nux")){ //Fixes crashing due to XInitThreads not being called - JVM bug
+                System.load(javaClass.classLoader.getResource("libfixXInitThreads.so")!!.file)
+            }
         } catch (e: Exception){
             GameConfig.IP_ADDRESS = "play.2009scape.org"
             GameConfig.IP_MANAGEMENT = "play.2009scape.org"
