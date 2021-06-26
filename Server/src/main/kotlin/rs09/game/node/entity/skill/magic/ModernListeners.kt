@@ -247,10 +247,11 @@ class ModernListeners : SpellListener("modern"){
             player.sendMessage("A magical force prevents you from teleporting.")
             return
         }
-        player.teleporter.send(location,TeleportManager.TeleportType.NORMAL)
-        removeRunes(player)
-        addXP(player,xp)
-        setDelay(player,true)
+        if(player.teleporter.send(location,TeleportManager.TeleportType.NORMAL)) {
+            removeRunes(player)
+            addXP(player, xp)
+            setDelay(player, true)
+        }
     }
 
     private fun attemptHouseTeleport(player: Player){
