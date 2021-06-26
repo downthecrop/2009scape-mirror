@@ -551,6 +551,28 @@ class ScriptAPI(private val bot: Player) {
     }
 
     /**
+     * Takes every item out of the bots inventory and places it into the bank.
+     * @param none
+     * @author cfunnyman joe
+     */
+    fun bankAll(){
+        class BankingPulse() : Pulse(20){
+            override fun pulse(): Boolean {
+                for(item in bot.inventory.toArray()){
+                    var itemAmount = bot.inventory.getAmount(item)
+
+                    bot.inventory.remove(item)
+                    bot.bank.add(item)
+                    bot.bank.refresh()
+                    bot.inventory.refresh()
+                }
+                return true
+            }
+        }
+        bot.pulseManager.run(BankingPulse())
+    }
+
+    /**
      * Function that makes the bot eat the food item in their inventory if their HP is below 2/3.
      * @author Ceikry
      * @param foodId the ID of the food item to eat
