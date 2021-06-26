@@ -232,10 +232,11 @@ class LunarListeners : SpellListener("lunar") {
             player.sendMessage("A magical force prevents you from teleporting.")
             return
         }
-        player.teleporter.send(loc,TeleportManager.TeleportType.LUNAR)
-        addXP(player,xp)
-        removeRunes(player)
-        setDelay(player,true)
+        if(player.teleporter.send(loc,TeleportManager.TeleportType.LUNAR)) {
+            addXP(player, xp)
+            removeRunes(player)
+            setDelay(player, true)
+        }
     }
 
     fun sendGroupTeleport(player: Player,xp: Double,destName: String,loc: Location){
