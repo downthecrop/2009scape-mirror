@@ -383,7 +383,6 @@ public class Shop {
             return;
         }
         final Item currency = new Item(getCurrency(), getSellingValue(add, player));
-        player.debug("Adding " + currency.getAmount() + " tokkul.");
         if(item.getDefinition().isStackable()){
             if (!player.getInventory().hasSpaceFor(currency)) {
                 player.getPacketDispatch().sendMessage("You don't have enough space for that many " + currency.getName().toLowerCase() + ".");
