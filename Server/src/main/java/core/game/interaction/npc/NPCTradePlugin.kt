@@ -17,7 +17,6 @@ import rs09.game.interaction.InteractionListener
  * @author Ceikry
  * @version 1.0
  */
-@Initializable
 class NPCTradePlugin : InteractionListener() {
     override fun defineListeners() {
         on(NPC, "trade", "shop"){player, node ->
