@@ -114,6 +114,7 @@ class SharkCatcher : Script() {
             }
 
             State.FISHING -> {
+                bot.interfaceManager.close()
                 if (Random.nextBoolean()) {
                     tick = 0
                     val spot = scriptAPI.getNearestNode(334, false)
