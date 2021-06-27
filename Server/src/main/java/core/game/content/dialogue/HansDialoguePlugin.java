@@ -137,7 +137,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 			case 12:
 				switch(buttonId){
 					case 1:
-						options("2.5x","5x","10x","20x");
+						options("1.0x","2.5x","10x","20x");
 						stage++;
 						break;
 					case 2:
@@ -150,7 +150,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 				switch(buttonId){
 					case 1:
 						if(player.newPlayer) {
-							player.getSkills().experienceMutiplier = 2.5;
+							player.getSkills().experienceMutiplier = 1.0;
 							stage = 14;
 						} else {
 							stage = 15;
@@ -159,7 +159,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 						break;
 					case 2:
 						if(player.newPlayer){
-							player.getSkills().experienceMutiplier = 5.0;
+							player.getSkills().experienceMutiplier = 2.5;
 							stage = 14;
 						} else {
 							stage = 15;
