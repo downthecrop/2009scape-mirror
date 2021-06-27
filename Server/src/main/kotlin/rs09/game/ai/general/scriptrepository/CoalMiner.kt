@@ -1,5 +1,6 @@
 package rs09.game.ai.general.scriptrepository
 
+
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.node.Node
@@ -11,21 +12,24 @@ import rs09.game.ai.general.ScriptAPI
 import rs09.game.ai.skillingbot.SkillingBotAssembler
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InteractionListeners
+import api.ContentAPI
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.runBlocking
+import java.util.logging.Handler
 
 @PlayerCompatible
 @ScriptName("Falador Coal Miner")
 @ScriptDescription("Start in Falador East Bank with a pick equipped","or in your inventory.")
 @ScriptIdentifier("fally_coal")
-class CoalMiner() : Script() {
+class CoalMiner : Script() {
     var state = State.INIT
     var ladderSwitch = false
-
     val bottomLadder = ZoneBorders(3016,9736,3024,9742)
     val topLadder = ZoneBorders(3016,3336,3022,3342)
     val mine = ZoneBorders(3027,9733,3054,9743)
     val bank = ZoneBorders(3009,3355,3018,3358)
     var overlay: ScriptAPI.BottingOverlay? = null
-    var coalAmount = 0
+	var coalAmount = 0
 
     override fun tick() {
         when(state){
@@ -47,6 +51,7 @@ class CoalMiner() : Script() {
             }
 
             State.MINING -> {
+                bot.interfaceManager.close()
                 if(bot.inventory.freeSlots() == 0){
                     state = State.TO_BANK
                 }
@@ -56,7 +61,7 @@ class CoalMiner() : Script() {
                     val rock = scriptAPI.getNearestNode("rocks",true)
                     rock?.let { InteractionListeners.run(rock.id, InteractionListener.OBJECT,"mine",bot,rock) }
                 }
-                overlay!!.setAmount(bot.inventory.getAmount(Items.COAL_453) + coalAmount)
+                overlay!!.setAmount(ContentAPI.amountInInventory(bot, Items.COAL_453) + coalAmount)
             }
 
             State.TO_BANK -> {
@@ -83,13 +88,14 @@ class CoalMiner() : Script() {
             }
 
             State.BANKING -> {
-                coalAmount += bot.inventory.getAmount(Items.COAL_453)
-                scriptAPI.bankItem(Items.COAL_453)
+				coalAmount += bot.inventory.getAmount(Items.COAL_453)
+                scriptAPI.bankAll()
                 state = State.TO_MINE
             }
 
             State.TO_MINE -> {
                 if(ladderSwitch){
+                    bot.interfaceManager.close()
                     if(!topLadder.insideBorder(bot.location)){
                         scriptAPI.walkTo(topLadder.randomLoc)
                     } else {
@@ -124,7 +130,6 @@ class CoalMiner() : Script() {
                 scriptAPI.teleport(bank.randomLoc)
                 state = State.TO_MINE
             }
-
         }
     }
 
@@ -156,5 +161,4 @@ class CoalMiner() : Script() {
         equipment.add(Item(Items.IRON_PICKAXE_1267))
         skills.put(Skills.MINING,75)
     }
-
 }
