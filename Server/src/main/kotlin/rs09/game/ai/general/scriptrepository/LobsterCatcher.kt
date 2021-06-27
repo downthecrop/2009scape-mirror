@@ -69,6 +69,7 @@ class LobsterCatcher : Script() {
 
 
             State.FISHING -> {
+                bot.interfaceManager.close()
                 val spot = scriptAPI.getNearestNode(333, false)
                 if(spot == null){
                     state = State.IDLE
@@ -163,10 +164,10 @@ class LobsterCatcher : Script() {
 
 
     init {
-            val setUp = RandomFunction.random(Sets.values().size)
-            equipment.addAll(Sets.values()[setUp].equipment)
-            inventory.add(Item(301))
-            skills[Skills.FISHING] = 40
+        val setUp = RandomFunction.random(Sets.values().size)
+        equipment.addAll(Sets.values()[setUp].equipment)
+        inventory.add(Item(301))
+        skills[Skills.FISHING] = 40
     }
 
     enum class State{
