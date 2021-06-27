@@ -69,10 +69,7 @@ class LobsterCatcher : Script() {
 
 
             State.FISHING -> {
-<<<<<<< refs/remotes/2009scape/master
-=======
                 bot.interfaceManager.close()
->>>>>>> Player script fixes, and bankAll scriptAPI function added
                 val spot = scriptAPI.getNearestNode(333, false)
                 if(spot == null){
                     state = State.IDLE
@@ -167,17 +164,10 @@ class LobsterCatcher : Script() {
 
 
     init {
-<<<<<<< refs/remotes/2009scape/master
-            val setUp = RandomFunction.random(Sets.values().size)
-            equipment.addAll(Sets.values()[setUp].equipment)
-            inventory.add(Item(301))
-            skills[Skills.FISHING] = 40
-=======
         val setUp = RandomFunction.random(Sets.values().size)
         equipment.addAll(Sets.values()[setUp].equipment)
         inventory.add(Item(301))
         skills[Skills.FISHING] = 40
->>>>>>> Player script fixes, and bankAll scriptAPI function added
     }
 
     enum class State{
