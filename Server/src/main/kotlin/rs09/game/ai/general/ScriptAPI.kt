@@ -563,8 +563,6 @@ class ScriptAPI(private val bot: Player) {
 
                     bot.inventory.remove(item)
                     bot.bank.add(item)
-                    bot.bank.refresh()
-                    bot.inventory.refresh()
                 }
                 return true
             }
