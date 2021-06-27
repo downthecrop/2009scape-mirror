@@ -608,24 +608,11 @@ public class Shop {
             item = new Item(item.getNoteChange(), item.getAmount());
         }
         int amount = getContainer(1).getAmount(item);
-        /*if (getCurrency() == TOKKUL) {
-            for (Item i : items) {
-                if (i.getId() == item.getId()) {
-                    amount = i.getAmount();
-                }
-            }
-        }*/
         if (amount < 1) {
             amount = getContainer(0).getAmount(item);
         }
         int value = getSellValue(player, amount, item);
         player.debug(item.getName() + ": " + item.getAmount() + " @" + (value / 3) + "ea");
-        /*if (getCurrency() == TOKKUL) {
-            int tokkul = item.getDefinition().getConfiguration("tokkul_price", -1);
-            if (tokkul > 0) {
-                value = tokkul / 10;
-            }
-        }*/
         SystemLogger.logInfo(value + "");
         return value;
     }
