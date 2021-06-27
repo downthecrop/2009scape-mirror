@@ -33,7 +33,7 @@ class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
         val now = Date().toInstant()
         val days = ChronoUnit.DAYS.between(start,now)
         when(stage){
-            0 -> npcl(FacialExpression.ANNOYED,"I'm having to offer this service because it's been $days days since Ryan promised to give us barbarian assault.")
+            0 -> npcl(FacialExpression.ANNOYED,"I'm having to offer this service because it's been $days days since Ryan promised to give us barbarian assault.").also { stage++ }
             1 -> options("Yes, please.","No, thanks.").also { stage++ }
             2 -> when(buttonId){
                 1 -> playerl(FacialExpression.FRIENDLY, "Yes, please.").also { stage = 10 }
