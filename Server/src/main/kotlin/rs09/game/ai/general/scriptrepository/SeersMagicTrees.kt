@@ -39,12 +39,8 @@ class SeersMagicTrees : Script(){
 
             State.CHOPPING -> {
                 val tree = scriptAPI.getNearestNode(1306,true)
-<<<<<<< refs/remotes/2009scape/master
-                tree?.let { InteractionListeners.run(tree.id, InteractionListener.OBJECT,"chop",bot,tree) }
-=======
                 bot.interfaceManager.close()
                 tree?.let { InteractionListeners.run(tree.id, InteractionListener.OBJECT,"Chop down",bot,tree) }
->>>>>>> Player script fixes, and bankAll scriptAPI function added
                 if(bot.inventory.isFull){
                     state = State.FIND_BANK
                 }
@@ -74,10 +70,7 @@ class SeersMagicTrees : Script(){
             }
 
             State.RETURN_TO_TREES -> {
-<<<<<<< refs/remotes/2009scape/master
-=======
                 bot.interfaceManager.close()
->>>>>>> Player script fixes, and bankAll scriptAPI function added
                 if(!magicsZone.insideBorder(bot)){
                     scriptAPI.walkTo(magicsZone.randomLoc)
                 } else {
