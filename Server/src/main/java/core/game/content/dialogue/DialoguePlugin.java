@@ -311,4 +311,22 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 		}
 	}
 
+	/**
+	 * Use the automatic linesplitting feature in DialUtils to produce npc dialogues
+	 * @param expr the FacialExpression to use, located in the FacialExpression enum.
+	 * @param msg the message for the NPC to say
+	 */
+	public Component npcl(FacialExpression expr, String msg){
+		return npc(expr, api.DialUtils.splitLines(msg));
+	}
+
+	/**
+	 * Use the automatic linesplitting feature in DialUtils to produce player dialogues
+	 * @param expr the FacialExpression to use, located in the FacialExpression enum.
+	 * @param msg the message for the player to say
+	 */
+	public Component playerl(FacialExpression expr, String msg){
+		return player(expr, api.DialUtils.splitLines(msg));
+	}
+
 }
