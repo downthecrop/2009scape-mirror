@@ -1,41 +1,36 @@
-package core.game.interaction.npc;
+package core.game.interaction.npc
 
-import core.cache.def.impl.NPCDefinition;
-import core.game.component.Component;
-import core.game.interaction.OptionHandler;
-import core.game.node.Node;
-import core.game.node.entity.npc.NPC;
-import core.game.node.entity.player.Player;
-import core.plugin.Initializable;
-import core.plugin.Plugin;
-import core.game.node.entity.skill.crafting.TanningProduct;
+import api.ContentAPI
+import core.cache.def.impl.NPCDefinition
+import core.game.component.Component
+import core.plugin.Initializable
+import core.game.interaction.OptionHandler
+import core.game.node.Node
+import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
+import core.plugin.Plugin
+import core.game.node.entity.skill.crafting.TanningProduct
+import rs09.game.interaction.InteractionListener
 
 /**
  * Represents the plugin used for an npc with the trade option.
- * @author 'Vexia
+ * @author Ceikry
  * @version 1.0
  */
 @Initializable
-public final class NPCTradePlugin extends OptionHandler {
-
-	@Override
-	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		NPCDefinition.setOptionHandler("trade", this);
-		return this;
-	}
-
-	@Override
-	public boolean handle(Player player, Node node, String option) {
-		final NPC npc = (NPC) node;
-		if (npc.getId() == 2824) {
-			TanningProduct.open(player, 2824);
-			return true;
-		}
-		if(npc.getId() == 7601){
-			player.getInterfaceManager().open(new Component(732));
-			return true;
-		}
-		return node.asNpc().openShop(player);
-	}
-
+class NPCTradePlugin : InteractionListener() {
+    override fun defineListeners() {
+        on(NPC, "trade", "shop"){player, node ->
+            val npc = node as NPC
+            if (npc.id == 2824) {
+                TanningProduct.open(player, 2824)
+                return@on true
+            }
+            if (npc.id == 7601) {
+                ContentAPI.openInterface(player, 732)
+                return@on true
+            }
+            return@on npc.openShop(player)
+        }
+    }
 }
