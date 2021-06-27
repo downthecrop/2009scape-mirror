@@ -1,5 +1,6 @@
 package core.game.content.global.shop;
 
+import api.ContentAPI;
 import core.cache.def.impl.ItemDefinition;
 import core.game.container.Container;
 import core.game.container.ContainerType;
@@ -7,6 +8,7 @@ import org.rs09.consts.Items;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
+import rs09.game.system.SystemLogger;
 import rs09.game.system.config.ItemConfigParser;
 import rs09.game.world.GameWorld;
 
@@ -605,24 +607,10 @@ public class Shop {
             item = new Item(item.getNoteChange(), item.getAmount());
         }
         int amount = getContainer(1).getAmount(item);
-        /*if (getCurrency() == TOKKUL) {
-            for (Item i : items) {
-                if (i.getId() == item.getId()) {
-                    amount = i.getAmount();
-                }
-            }
-        }*/
         if (amount < 1) {
             amount = getContainer(0).getAmount(item);
         }
         int value = getSellValue(player, amount, item);
-        if (getCurrency() == TOKKUL) {
-            int tokkul = item.getDefinition().getConfiguration("tokkul_price", -1);
-            if (tokkul > 0) {
-                value = tokkul /= 10;
-            }
-            value = value * item.getAmount();
-        }
         return value;
     }
 
@@ -634,6 +622,9 @@ public class Shop {
      * @return the selling value.
      */
     private int getSellValue(Player player, int amount, Item item) {
+        if(item.getAmount() > ContentAPI.amountInInventory(player, item.getId())){
+            item.setAmount(ContentAPI.amountInInventory(player, item.getId()));
+        }
         double diff = item.getDefinition().isStackable() ? 0.005 : 0.05;
         double maxMod = 1.0 - (amount * diff);
         if (maxMod < 0.25) {
