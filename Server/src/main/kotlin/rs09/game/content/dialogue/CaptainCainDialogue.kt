@@ -15,8 +15,6 @@ import java.util.*
 
 @Initializable
 class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
-    val cal1 = GregorianCalendar()
-    val cal2 = GregorianCalendar()
     val sdf = SimpleDateFormat("ddMMyyyy")
     override fun newInstance(player: Player?): DialoguePlugin {
         return CaptainCainDialogue(player)
