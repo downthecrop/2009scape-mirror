@@ -41,8 +41,9 @@ class DraynorWillows : Script(){
                     scriptAPI.walkTo(willowZone.randomLoc)
                 else {
                     val willowtree = scriptAPI.getNearestNode("willow", true)
+                    bot.interfaceManager.close()
                     willowtree?.let { InteractionListeners.run(willowtree.id,
-                        InteractionListener.OBJECT,"chop",bot,willowtree) }
+                        InteractionListener.OBJECT,"Chop down",bot,willowtree) }
                     if (bot.inventory.isFull)
                         state = State.BANKING
                 }
