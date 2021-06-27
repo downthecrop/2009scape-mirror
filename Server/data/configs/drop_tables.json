@@ -33874,26 +33874,20 @@
     "main": [
       {
         "minAmount": "1",
-        "weight": "0.685",
+        "weight": "0.675",
         "id": "6528",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "0.685",
+        "weight": "0.675",
         "id": "6524",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "0.685",
+        "weight": "0.675",
         "id": "6568",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "1393",
         "maxAmount": "1"
       },
       {
