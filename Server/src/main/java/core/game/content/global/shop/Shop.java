@@ -612,8 +612,6 @@ public class Shop {
             amount = getContainer(0).getAmount(item);
         }
         int value = getSellValue(player, amount, item);
-        player.debug(item.getName() + ": " + item.getAmount() + " @" + (value / 3) + "ea");
-        SystemLogger.logInfo(value + "");
         return value;
     }
 
