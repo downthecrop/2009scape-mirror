@@ -9,9 +9,15 @@ import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.tools.END_DIALOGUE
+import java.text.SimpleDateFormat
+import java.time.temporal.ChronoUnit
+import java.util.*
 
 @Initializable
 class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
+    val cal1 = GregorianCalendar()
+    val cal2 = GregorianCalendar()
+    val sdf = SimpleDateFormat("ddMMyyyy")
     override fun newInstance(player: Player?): DialoguePlugin {
         return CaptainCainDialogue(player)
     }
@@ -23,9 +29,13 @@ class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        val start = sdf.parse("27112020").toInstant()
+        val now = Date().toInstant()
+        val days = ChronoUnit.DAYS.between(start,now)
         when(stage){
-            0 -> options("Yes, please.","No, thanks.").also { stage++ }
-            1 -> when(buttonId){
+            0 -> npcl(FacialExpression.ANNOYED,"I'm having to offer this service because it's been $days days since Ryan promised to give us barbarian assault.")
+            1 -> options("Yes, please.","No, thanks.").also { stage++ }
+            2 -> when(buttonId){
                 1 -> playerl(FacialExpression.FRIENDLY, "Yes, please.").also { stage = 10 }
                 2 -> playerl(FacialExpression.HALF_THINKING, "No, thanks.").also { stage = END_DIALOGUE }
             }
