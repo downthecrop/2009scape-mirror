@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -12,6 +13,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
+import kotlin.Unit;
 
 /**
  * @author 'Vexia
@@ -36,15 +38,10 @@ public class SmithingInterface extends ComponentPlugin {
 		p.getGameAttributes().setAttribute("smith-bar", bar);
 		p.getGameAttributes().setAttribute("smith-item", item);
 		if (amount == -1) {
-			p.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					final int ammount = (int) value;
-					p.getPulseManager().run(new SmithingPulse(p, new Item((int) p.getGameAttributes().getAttribute("smith-item"), ammount), (Bars) p.getGameAttributes().getAttribute("smith-bar"), ammount));
-					return false;
-				}
+			ContentAPI.sendInputDialogue(p, true, "Enter the amount:", (value) -> {
+				p.getPulseManager().run(new SmithingPulse(p, new Item((int) p.getGameAttributes().getAttribute("smith-item"), (int) value), (Bars) p.getGameAttributes().getAttribute("smith-bar"), (int) value));
+				return Unit.INSTANCE;
 			});
-			p.getDialogueInterpreter().sendInput(false, "Enter the amount.");
 			return true;
 		}
 		p.getPulseManager().run(new SmithingPulse(p, new Item(item, amount), Bars.forId(item), amount));
