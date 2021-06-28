@@ -37,7 +37,7 @@ public final class AlfonseWaiterDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Welcome to the Shrimps and Parrot.", "Would you like to order, sir?");
+		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Welcome to the Shrimp and Parrot.", "Would you like to order, sir?");
 		stage = 0;
 		return true;
 	}
@@ -73,7 +73,7 @@ public final class AlfonseWaiterDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 30:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "We buy directly off Lubufu, a local fisherman. He", "seems to have a monopoly over Karambwan sale.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "We buy directly off Lubufu, a local fisherman. He", "seems to have a monopoly over Karambwan sales.");
 			stage = 31;
 			break;
 		case 31:
