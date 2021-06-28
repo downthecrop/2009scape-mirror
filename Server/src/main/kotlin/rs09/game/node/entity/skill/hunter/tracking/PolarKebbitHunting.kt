@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.hunter.tracking
 
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -49,20 +49,20 @@ class PolarKebbitHunting : HunterTracking() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
         addExtraTrails()
-        ObjectDefinition.forId(19640).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19641).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19435).handlers["option:inspect"] = this
-        ObjectDefinition.forId(36689).handlers["option:inspect"] = this
-        ObjectDefinition.forId(36690).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19421).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19424).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19426).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19419).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19420).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19423).handlers["option:inspect"] = this
-        ObjectDefinition.forId(36688).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19435).handlers["option:search"] = this
-        ObjectDefinition.forId(19435).handlers["option:attack"] = this
+        SceneryDefinition.forId(19640).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19641).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19435).handlers["option:inspect"] = this
+        SceneryDefinition.forId(36689).handlers["option:inspect"] = this
+        SceneryDefinition.forId(36690).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19421).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19424).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19426).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19419).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19420).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19423).handlers["option:inspect"] = this
+        SceneryDefinition.forId(36688).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19435).handlers["option:search"] = this
+        SceneryDefinition.forId(19435).handlers["option:attack"] = this
         return this
     }
 }

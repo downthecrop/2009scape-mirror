@@ -2,7 +2,7 @@ package core.game.interaction.object;
 
 import api.ContentAPI;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -47,11 +47,11 @@ public final class BankingPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ObjectDefinition.setOptionHandler("use-quickly", this);
-        ObjectDefinition.setOptionHandler("use", this);
-        ObjectDefinition.setOptionHandler("bank", this);
-        ObjectDefinition.setOptionHandler("collect", this);
-        ObjectDefinition.setOptionHandler("deposit", this);
+        SceneryDefinition.setOptionHandler("use-quickly", this);
+        SceneryDefinition.setOptionHandler("use", this);
+        SceneryDefinition.setOptionHandler("bank", this);
+        SceneryDefinition.setOptionHandler("collect", this);
+        SceneryDefinition.setOptionHandler("deposit", this);
         new BankingInterface().newInstance(arg);
         new BankDepositInterface().newInstance(arg);
         new BankNPCPlugin().newInstance(arg);

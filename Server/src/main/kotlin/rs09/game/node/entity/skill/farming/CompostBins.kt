@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.node.`object`.Scenery
 import core.game.node.entity.player.Player
@@ -23,7 +23,7 @@ enum class CompostBins(val varpIndex: Int, val varpOffest: Int) {
 
         @JvmStatic
         fun forObjectID(id: Int): CompostBins?{
-            val objDef = ObjectDefinition.forId(id)
+            val objDef = SceneryDefinition.forId(id)
             val def = VarbitDefinition.forObjectID(objDef.varbitID)
             return bins[def.configId shl def.bitShift]
         }

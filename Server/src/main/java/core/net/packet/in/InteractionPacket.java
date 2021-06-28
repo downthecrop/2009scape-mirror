@@ -1,6 +1,6 @@
 package core.net.packet.in;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.cache.def.impl.VarbitDefinition;
 import core.game.content.quest.PluginInteractionManager;
 import core.game.interaction.Interaction;
@@ -264,7 +264,7 @@ public final class InteractionPacket implements IncomingPacket {
 		}
 		player.debug(object + ", original=" + objectId + ", option=" + option.getName() + "");
 		player.debug("dir=" + object.getDirection());
-		VarbitDefinition def = VarbitDefinition.forObjectID(ObjectDefinition.forId(objectId).getVarbitID());
+		VarbitDefinition def = VarbitDefinition.forObjectID(SceneryDefinition.forId(objectId).getVarbitID());
 		player.debug("Varp ID=" + def.getConfigId() + " Offset=" + def.getBitShift() + " Size=" + def.getBitSize());
 		if (option.getHandler() != null) {
 			player.debug("Object handler: " + option.getHandler().getClass().getSimpleName());

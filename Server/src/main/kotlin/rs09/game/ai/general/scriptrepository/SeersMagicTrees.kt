@@ -40,7 +40,7 @@ class SeersMagicTrees : Script(){
             State.CHOPPING -> {
                 val tree = scriptAPI.getNearestNode(1306,true)
                 bot.interfaceManager.close()
-                tree?.let { InteractionListeners.run(tree.id, InteractionListener.OBJECT,"Chop down",bot,tree) }
+                tree?.let { InteractionListeners.run(tree.id, InteractionListener.SCENERY,"Chop down",bot,tree) }
                 if(bot.inventory.isFull){
                     state = State.FIND_BANK
                 }

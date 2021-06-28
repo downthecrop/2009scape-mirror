@@ -50,7 +50,7 @@ class VarrockEssenceMiner : Script(){
 
             State.MINING -> {
                 val essence = scriptAPI.getNearestNode(2491,true)
-                essence?.let { InteractionListeners.run(essence.id, InteractionListener.OBJECT,"mine",bot,essence) }
+                essence?.let { InteractionListeners.run(essence.id, InteractionListener.SCENERY,"mine",bot,essence) }
                 if(bot.inventory.isFull)
                     state = State.TO_BANK
             }

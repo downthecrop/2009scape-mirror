@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import rs09.ServerConstants;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.plugin.Initializable;
 import core.game.content.dialogue.DialogueAction;
@@ -223,10 +223,10 @@ public class DeathMansionEvent extends HolidayEvent {
 				player.teleport(PORTAL_LOCATION);
 				return true;
 			case 27276:
-				handlePassageWay(player, target.asObject());
+				handlePassageWay(player, target.asScenery());
 				return true;
 			case 27266:
-				passSpiderWeb(player, target.asObject());
+				passSpiderWeb(player, target.asScenery());
 				return true;
 			case 27242:
 			case 27243:
@@ -304,7 +304,7 @@ public class DeathMansionEvent extends HolidayEvent {
 						@Override
 						public void handle(Player player, int buttonId) {
 							if (buttonId == 2) {
-								item.search(player, target.asObject());
+								item.search(player, target.asScenery());
 							} else {
 								player.animate(Animation.create(7271));
 								player.getDialogueInterpreter().sendDialogues(player, FacialExpression.SUSPICIOUS, "Arrghhh! My eyes!");
@@ -318,9 +318,9 @@ public class DeathMansionEvent extends HolidayEvent {
 						@Override
 						public void handle(Player player, int buttonId) {
 							if (buttonId == 1) {
-								item.search(player, target.asObject());
+								item.search(player, target.asScenery());
 							} else {
-								player.getPacketDispatch().sendSceneryAnimation(target.asObject(), Animation.create(7278));
+								player.getPacketDispatch().sendSceneryAnimation(target.asScenery(), Animation.create(7278));
 								player.animate(Animation.create(7272));
 								player.getDialogueInterpreter().sendDialogues(player, FacialExpression.DISGUSTED, "That wasn't such a good idea.");
 							}
@@ -328,7 +328,7 @@ public class DeathMansionEvent extends HolidayEvent {
 					});
 					return true;
 				}
-				item.search(player, target.asObject());
+				item.search(player, target.asScenery());
 				return true;
 			case 27278:
 				final Location end = target.getLocation().equals(new Location(1633, 4824, 0)) ? new Location(1630, 4824, 0) : target.getLocation().equals(new Location(1627, 4819, 0)) ? new Location(1627, 4819, 0) : target.getLocation().equals(new Location(1630, 4819, 0)) ? new Location(1627, 4819, 0) : target.getLocation().equals(1624, 4822, 0) ? new Location(1624, 4828, 0) : new Location(1637, 4820, 0);
@@ -359,7 +359,7 @@ public class DeathMansionEvent extends HolidayEvent {
 
 					});
 				}
-				player.getPacketDispatch().sendSceneryAnimation(target.asObject(), Animation.create(7296));
+				player.getPacketDispatch().sendSceneryAnimation(target.asScenery(), Animation.create(7296));
 				AgilityHandler.walk(player, -1, player.getLocation(), target.getLocation(), null, 0.0, null);
 				GameWorld.getPulser().submit(new Pulse(1, player) {
 
@@ -749,7 +749,7 @@ public class DeathMansionEvent extends HolidayEvent {
 			if (item == null || event.getUsedItem().getId() != item.getItem().getId()) {
 				return false;
 			}
-			item.useWithEvent(player, event.getUsedWith().asObject());
+			item.useWithEvent(player, event.getUsedWith().asScenery());
 			return true;
 		}
 
@@ -1478,7 +1478,7 @@ public class DeathMansionEvent extends HolidayEvent {
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
 			PluginManager.definePlugin(new DarkPortalDialogue());
-			ObjectDefinition.forId(DEATH_PORTAL).getHandlers().put("option:enter", this);
+			SceneryDefinition.forId(DEATH_PORTAL).getHandlers().put("option:enter", this);
 			return this;
 		}
 

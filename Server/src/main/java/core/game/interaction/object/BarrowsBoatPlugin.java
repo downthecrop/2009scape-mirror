@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -20,8 +20,8 @@ public class BarrowsBoatPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(6970).getHandlers().put("option:board", this);
-		ObjectDefinition.forId(6969).getHandlers().put("option:board", this);
+		SceneryDefinition.forId(6970).getHandlers().put("option:board", this);
+		SceneryDefinition.forId(6969).getHandlers().put("option:board", this);
 		return this;
 	}
 

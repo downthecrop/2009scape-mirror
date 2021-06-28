@@ -15,7 +15,7 @@ public class StairInteraction extends PluginInteraction {
     @Override
     public boolean handle(Player player, Node node) {
         if(!player.getQuestRepository().isComplete("Fishing Contest")) {
-            Scenery object = node.asObject();
+            Scenery object = node.asScenery();
             switch (object.getId()) {
                 case 57:
                     handleStairs(player,232,object);

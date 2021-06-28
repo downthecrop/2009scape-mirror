@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -24,7 +24,7 @@ public final class BuyCrateOptionPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(6839).getHandlers().put("option:buy", this);
+		SceneryDefinition.forId(6839).getHandlers().put("option:buy", this);
 		return this;
 	}
 

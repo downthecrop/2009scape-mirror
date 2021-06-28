@@ -1,6 +1,6 @@
 package core.game.interaction.object.sorceress;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.plugin.Initializable;
 import core.game.content.dialogue.DialoguePlugin;
@@ -70,11 +70,11 @@ public final class GardenObjectsPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.setOptionHandler("pick-fruit", this);
-		ObjectDefinition.setOptionHandler("drink-from", this);
-		ObjectDefinition.forId(21794).getHandlers().put("option:search", this);
+		SceneryDefinition.setOptionHandler("pick-fruit", this);
+		SceneryDefinition.setOptionHandler("drink-from", this);
+		SceneryDefinition.forId(21794).getHandlers().put("option:search", this);
 		for (HerbDefinition h : HerbDefinition.values()) {
-			ObjectDefinition.forId(h.getId()).getHandlers().put("option:pick", this);
+			SceneryDefinition.forId(h.getId()).getHandlers().put("option:pick", this);
 		}
 		new SqirkJuicePlugin().newInstance(arg);
 		new OsmanDialogue().init();

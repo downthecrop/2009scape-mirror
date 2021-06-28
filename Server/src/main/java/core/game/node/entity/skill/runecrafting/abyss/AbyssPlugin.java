@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.runecrafting.abyss;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.skill.gather.SkillingTool;
 import core.game.node.entity.skill.runecrafting.Altar;
 import core.game.interaction.OptionHandler;
@@ -29,12 +29,12 @@ public final class AbyssPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (AbbysalObstacle obstacle : AbbysalObstacle.values()) {
 			for (int i : obstacle.getObjects()) {
-				ObjectDefinition.forId(i).getHandlers().put("option:" + obstacle.getOption(), this);
+				SceneryDefinition.forId(i).getHandlers().put("option:" + obstacle.getOption(), this);
 			}
 		}
 		PluginManager.definePlugin(new AbyssalNPC());
 		PluginManager.definePlugin(new DarkMageDialogue());
-		ObjectDefinition.setOptionHandler("exit-through", this);
+		SceneryDefinition.setOptionHandler("exit-through", this);
 		PluginManager.definePlugin(new ZamorakMageDialogue());
 		NPCDefinition.forId(2259).getHandlers().put("option:teleport", this);
 		NPCDefinition.forId(2262).getHandlers().put("option:repair-pouches", this);

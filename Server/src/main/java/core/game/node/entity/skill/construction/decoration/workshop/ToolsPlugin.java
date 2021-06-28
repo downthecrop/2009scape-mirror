@@ -2,7 +2,7 @@ package core.game.node.entity.skill.construction.decoration.workshop;
 
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
@@ -78,7 +78,7 @@ public class ToolsPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (ToolStore t : ToolStore.values()) {
-			ObjectDefinition.forId(t.objectId).getHandlers().put("option:search", this);
+			SceneryDefinition.forId(t.objectId).getHandlers().put("option:search", this);
 		}
 		PluginManager.definePlugin(new ToolDialogue());
 		return this;
@@ -86,7 +86,7 @@ public class ToolsPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		Scenery object = node.asObject();
+		Scenery object = node.asScenery();
 		ToolStore ts = ToolStore.forId(object.getId());
 		if (ts != null) {
 			player.getDialogueInterpreter().open(DialogueInterpreter.getDialogueKey("con:tools"), ts);

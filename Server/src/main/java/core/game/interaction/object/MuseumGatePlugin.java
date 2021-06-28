@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -19,7 +19,7 @@ public final class MuseumGatePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(24536).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(24536).getHandlers().put("option:open", this);
 		return this;
 	}
 

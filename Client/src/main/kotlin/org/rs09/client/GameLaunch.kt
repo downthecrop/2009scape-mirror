@@ -3,6 +3,8 @@ package org.rs09.client
 import org.rs09.SystemLogger
 import org.rs09.client.config.GameConfig
 import org.runite.client.GameShell
+import java.io.File
+import java.io.FileOutputStream
 
 object GameLaunch {
 
@@ -44,7 +46,22 @@ object GameLaunch {
          * Launches the client
          */
         if(System.getProperty("os.name").toLowerCase().contains("nux")){ //Fixes crashing due to XInitThreads not being called - JVM bug
-            System.load(javaClass.classLoader.getResource("libfixXInitThreads.so")!!.file)
+            val istream = javaClass.classLoader.getResourceAsStream("libfixXInitThreads.so")
+            val buff = ByteArray(1024)
+            var read = -1
+            val temp = File.createTempFile("libfixXInitThreads.so","")
+            val fos = FileOutputStream(temp)
+
+            read = istream.read(buff)
+            while(read != -1){
+                fos.write(buff, 0, read)
+                read = istream.read(buff)
+            }
+
+            fos.close()
+            istream.close()
+
+            System.load(temp.absolutePath)
         }
         GameShell.launchDesktop()
     }

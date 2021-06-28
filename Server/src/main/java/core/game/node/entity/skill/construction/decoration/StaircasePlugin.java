@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.construction.decoration;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.OptionHandler;
@@ -34,25 +34,25 @@ public final class StaircasePlugin extends OptionHandler {
 		PluginManager.definePlugin(new BuildDialogue());
 		PluginManager.definePlugin(new ClimbPohLadder());
 		for (int i = 13497; i < 13507; i++) {
-			ObjectDefinition.forId(i).getHandlers().put("option:climb", this);
-			ObjectDefinition.forId(i).getHandlers().put("option:climb-up", this);
-			ObjectDefinition.forId(i).getHandlers().put("option:climb-down", this);
-			ObjectDefinition.forId(i).getHandlers().put("option:remove-room", this);
+			SceneryDefinition.forId(i).getHandlers().put("option:climb", this);
+			SceneryDefinition.forId(i).getHandlers().put("option:climb-up", this);
+			SceneryDefinition.forId(i).getHandlers().put("option:climb-down", this);
+			SceneryDefinition.forId(i).getHandlers().put("option:remove-room", this);
 		}
-		ObjectDefinition.forId(13409).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(13409).getHandlers().put("option:remove-room", this);
+		SceneryDefinition.forId(13409).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(13409).getHandlers().put("option:remove-room", this);
 		for (int id = 13328; id < 13331; id++) {
-			ObjectDefinition.forId(id).getHandlers().put("option:climb", this);
-			ObjectDefinition.forId(id).getHandlers().put("option:remove-room", this);
+			SceneryDefinition.forId(id).getHandlers().put("option:climb", this);
+			SceneryDefinition.forId(id).getHandlers().put("option:remove-room", this);
 		}
 		for (int id = 13675; id <= 13680; id++) {
 			if (id < 13678) {
-				ObjectDefinition.forId(id).getHandlers().put("option:open", this);
+				SceneryDefinition.forId(id).getHandlers().put("option:open", this);
 			} else {
-				ObjectDefinition.forId(id).getHandlers().put("option:go-down", this);
-				ObjectDefinition.forId(id).getHandlers().put("option:close", this);
+				SceneryDefinition.forId(id).getHandlers().put("option:go-down", this);
+				SceneryDefinition.forId(id).getHandlers().put("option:close", this);
 			}
-			ObjectDefinition.forId(id).getHandlers().put("option:remove-room", this);
+			SceneryDefinition.forId(id).getHandlers().put("option:remove-room", this);
 		}
 		return this;
 	}

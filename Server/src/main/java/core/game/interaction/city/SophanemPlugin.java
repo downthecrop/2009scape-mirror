@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -22,8 +22,8 @@ public class SophanemPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(20277).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(20275).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(20277).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(20275).getHandlers().put("option:climb-down", this);
 		return this;
 	}
 

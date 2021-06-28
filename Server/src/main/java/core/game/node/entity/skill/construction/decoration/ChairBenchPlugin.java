@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.construction.decoration;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.skill.construction.Decoration;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -53,7 +53,7 @@ public final class ChairBenchPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (Object[] data : CHAIRS) {
-			ObjectDefinition.forId(((Decoration) data[0]).getObjectId()).getHandlers().put("option:sit-on", this);
+			SceneryDefinition.forId(((Decoration) data[0]).getObjectId()).getHandlers().put("option:sit-on", this);
 		}
 		return this;
 	}

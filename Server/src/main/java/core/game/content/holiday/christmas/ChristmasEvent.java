@@ -3,7 +3,7 @@ import java.util.List;
 
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -240,10 +240,10 @@ public class ChristmasEvent extends HolidayEvent {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			ObjectDefinition.forId(28296).getHandlers().put("option:collect", this);
+			SceneryDefinition.forId(28296).getHandlers().put("option:collect", this);
 			ItemDefinition.forId(BALL_OF_SNOW.getId()).getHandlers().put("option:build", this);
 			for (int i = 28266; i < 28296; i++) {
-				ObjectDefinition.forId(i).getHandlers().put("option:add-to", this);
+				SceneryDefinition.forId(i).getHandlers().put("option:add-to", this);
 			}
 			ItemDefinition.forId(SNOWGLOBE.getId()).getHandlers().put("option:shake", this);
 			return this;
@@ -276,7 +276,7 @@ public class ChristmasEvent extends HolidayEvent {
 				}
 				break;
 			case "add-to":
-				if (node.asObject().getId() == 28295) {
+				if (node.asScenery().getId() == 28295) {
 					player.sendMessage("You need a " + (player.getZoneMonitor().isInZone(getName()) ? "weapon or hat " : "hat") + " to complete this snowman.");
 					return true;
 				}
@@ -291,9 +291,9 @@ public class ChristmasEvent extends HolidayEvent {
 					}
 					player.sendMessage("You add some snow to the snowman.");
 					player.lock(1);
-					player.animate(Animation.create(node.asObject().getId() <= 28278 ? 7532 : 7533));
-					SceneryBuilder.replace(node.asObject(), node.asObject().transform(node.asObject().getId() + 1));
-					if (node.asObject().getId() + 1 >= 28295) {
+					player.animate(Animation.create(node.asScenery().getId() <= 28278 ? 7532 : 7533));
+					SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(node.asScenery().getId() + 1));
+					if (node.asScenery().getId() + 1 >= 28295) {
 						if (player.getZoneMonitor().isInZone(getName())) {
 							player.sendMessages("The snowman is almsot complete! Talk to a snow imp to get a hat or weapon to", "complete it.");
 						} else {
@@ -433,7 +433,7 @@ public class ChristmasEvent extends HolidayEvent {
 					id = 6748;
 				}
 				final int npcId = id;
-				SceneryBuilder.remove(event.getUsedWith().asObject());
+				SceneryBuilder.remove(event.getUsedWith().asScenery());
 				final NPC snowman = NPC.create(npcId, event.getUsedWith().getLocation());
 				snowman.init();
 				snowman.faceTemporary(player, 2);

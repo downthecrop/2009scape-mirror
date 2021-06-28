@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.summoning;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.content.activity.ActivityManager;
 import core.game.content.activity.ActivityPlugin;
@@ -64,13 +64,13 @@ public final class SummoningTrainingRoom extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(28675).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(28676).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(28653).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(28572).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(28676).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(28714).getHandlers().put("option:climb", this);
-		ObjectDefinition.forId(28586).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(28675).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(28676).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(28653).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(28572).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(28676).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(28714).getHandlers().put("option:climb", this);
+		SceneryDefinition.forId(28586).getHandlers().put("option:search", this);
 		ActivityManager.register(new FluffyCutscene());
 		return this;
 	}

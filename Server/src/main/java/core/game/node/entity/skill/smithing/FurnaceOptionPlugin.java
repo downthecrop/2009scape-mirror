@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.smithing;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.skill.Skills;
@@ -42,10 +42,10 @@ public final class FurnaceOptionPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.setOptionHandler("smelt", this);
-		ObjectDefinition.setOptionHandler("smelt-ore", this);
-		ObjectDefinition.forId(3044).getHandlers().put("option:use", this);
-		ObjectDefinition.forId(21303).getHandlers().put("option:use", this);
+		SceneryDefinition.setOptionHandler("smelt", this);
+		SceneryDefinition.setOptionHandler("smelt-ore", this);
+		SceneryDefinition.forId(3044).getHandlers().put("option:use", this);
+		SceneryDefinition.forId(21303).getHandlers().put("option:use", this);
 		new SmeltUseWithHandler().newInstance(arg);
 		return this;
 	}

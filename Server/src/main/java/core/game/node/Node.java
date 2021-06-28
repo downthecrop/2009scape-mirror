@@ -91,7 +91,7 @@ public abstract class Node {
 	 * Casts the scenery.
 	 * @return the object.
 	 */
-	public Scenery asObject() {
+	public Scenery asScenery() {
 		return (Scenery) this;
 	}
 

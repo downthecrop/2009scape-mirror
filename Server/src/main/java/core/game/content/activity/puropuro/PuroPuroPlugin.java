@@ -5,7 +5,7 @@ import java.util.List;
 
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
@@ -241,7 +241,7 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
 			NPCDefinition.forId(6070).getHandlers().put("option:trade", this);
-			ObjectDefinition.forId(24991).getHandlers().put("option:enter", this);
+			SceneryDefinition.forId(24991).getHandlers().put("option:enter", this);
 			ItemDefinition.forId(11273).getHandlers().put("option:toggle-view", this);
 			ItemDefinition.forId(11258).getHandlers().put("option:butterfly-jar", this);
 			ItemDefinition.forId(11258).getHandlers().put("option:impling-jar", this);
