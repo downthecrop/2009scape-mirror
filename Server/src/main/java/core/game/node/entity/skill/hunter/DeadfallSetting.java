@@ -119,7 +119,7 @@ public final class DeadfallSetting extends TrapSetting {
 
 	@Override
 	public Scenery buildObject(Player player, Node node) {
-		return node.asObject().transform(getObjectForNode(node));
+		return node.asScenery().transform(getObjectForNode(node));
 	}
 
 	@Override

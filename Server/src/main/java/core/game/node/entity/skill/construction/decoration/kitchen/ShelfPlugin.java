@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.construction.decoration.kitchen;
 
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -22,7 +22,7 @@ public final class ShelfPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		PluginManager.definePlugin(new ShelfDialogue());
 		for (int i = 13545; i < 13552; i++) {
-			ObjectDefinition.forId(i).getHandlers().put("option:search", this);
+			SceneryDefinition.forId(i).getHandlers().put("option:search", this);
 		}
 		return this;
 	}

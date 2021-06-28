@@ -16,7 +16,7 @@ public class RopeSwing extends UseWithHandler {
     public boolean handle(NodeUsageEvent event) {
         System.out.println("Trying to handle.");
         if(event.getUsedWith() instanceof Scenery){
-            Scenery object = event.getUsedWith().asObject();
+            Scenery object = event.getUsedWith().asScenery();
             int objId = object.getId();
 
             assert event.getUsedItem() != null;

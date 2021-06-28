@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -39,7 +39,7 @@ public final class CrystalChestPlugin extends UseWithHandler {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
-				ObjectDefinition.forId(172).getHandlers().put("option:open", this);
+				SceneryDefinition.forId(172).getHandlers().put("option:open", this);
 				return this;
 			}
 

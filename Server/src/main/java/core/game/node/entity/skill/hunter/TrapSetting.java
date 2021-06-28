@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.hunter;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -483,7 +483,7 @@ public class TrapSetting {
 	 */
 	public String getName() {
 		if (isObjectTrap()) {
-			return ObjectDefinition.forId(nodeIds[0]).getName().toLowerCase();
+			return SceneryDefinition.forId(nodeIds[0]).getName().toLowerCase();
 		}
 		return ItemDefinition.forId(nodeIds[0]).getName().toLowerCase();
 	}

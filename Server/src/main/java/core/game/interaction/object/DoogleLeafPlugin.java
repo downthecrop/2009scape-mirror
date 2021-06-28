@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -23,7 +23,7 @@ public class DoogleLeafPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(31155).getHandlers().put("option:pick-leaf", this);
+		SceneryDefinition.forId(31155).getHandlers().put("option:pick-leaf", this);
 		return this;
 	}
 

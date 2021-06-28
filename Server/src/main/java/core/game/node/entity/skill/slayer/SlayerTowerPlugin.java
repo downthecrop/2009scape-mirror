@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.slayer;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -36,9 +36,9 @@ public final class SlayerTowerPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(4490).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(4487).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(4492).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(4490).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(4487).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(4492).getHandlers().put("option:close", this);
 		return this;
 	}
 

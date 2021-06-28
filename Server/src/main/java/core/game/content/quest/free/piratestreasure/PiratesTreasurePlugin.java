@@ -1,7 +1,7 @@
 package core.game.content.quest.free.piratestreasure;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.DigAction;
 import core.game.content.global.action.DigSpadeHandler;
 import core.game.interaction.OptionHandler;
@@ -30,7 +30,7 @@ public final class PiratesTreasurePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2079).getHandlers().put("option:open", this);// blue
+		SceneryDefinition.forId(2079).getHandlers().put("option:open", this);// blue
 		// moon
 		// chest(pirates
 		// treasure

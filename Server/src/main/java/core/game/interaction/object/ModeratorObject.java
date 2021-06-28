@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -21,8 +21,8 @@ public final class ModeratorObject extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(26806).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(26807).getHandlers().put("option:j-mod options", this);
+		SceneryDefinition.forId(26806).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(26807).getHandlers().put("option:j-mod options", this);
 		return this;
 	}
 

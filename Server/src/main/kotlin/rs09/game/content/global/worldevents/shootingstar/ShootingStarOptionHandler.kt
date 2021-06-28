@@ -12,13 +12,13 @@ class ShootingStarOptionHandler : InteractionListener() {
     val SHOOTING_STARS = ShootingStarType.values().map(ShootingStarType::objectId).toIntArray()
 
     override fun defineListeners() {
-        on(SHOOTING_STARS,OBJECT,"mine"){player, _ ->
+        on(SHOOTING_STARS,SCENERY,"mine"){ player, _ ->
             val star = (WorldEvents.get("shooting-stars") as ShootingStarEvent).star
             star.mine(player)
             return@on true
         }
 
-        on(SHOOTING_STARS,OBJECT,"prospect"){player, _ ->
+        on(SHOOTING_STARS,SCENERY,"prospect"){ player, _ ->
             val star = (WorldEvents.get("shooting-stars") as ShootingStarEvent).star
             star.prospect(player)
             return@on true

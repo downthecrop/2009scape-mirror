@@ -6,7 +6,7 @@ import rs09.game.interaction.InteractionListener
 class BarbFishInteractionListeners : InteractionListener() {
     override fun defineListeners() {
 
-        on(25268,OBJECT,"search"){player,_ ->
+        on(25268,SCENERY,"search"){ player, _ ->
             if(player.getAttribute("barbtraining:fishing",false) == true){
                 if(!player.inventory.containsItem(Item(11323))){
                     player.inventory.add(Item(11323))

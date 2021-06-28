@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -28,8 +28,8 @@ public final class TaverlyDungeonPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2143).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2144).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2143).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2144).getHandlers().put("option:open", this);
 		return this;
 	}
 

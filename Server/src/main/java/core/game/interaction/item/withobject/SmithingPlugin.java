@@ -1,6 +1,6 @@
 package core.game.interaction.item.withobject;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.smithing.SmithingBuilder;
 import core.game.node.entity.skill.smithing.smelting.Bar;
@@ -49,7 +49,7 @@ public final class SmithingPlugin extends UseWithHandler {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
-				ObjectDefinition.forId(42027).getHandlers().put("option:smith", this);
+				SceneryDefinition.forId(42027).getHandlers().put("option:smith", this);
 				return this;
 			}
 

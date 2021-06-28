@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -35,9 +35,9 @@ public class RedberryBushPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(23628).getHandlers().put("option:pick-from", this);
-		ObjectDefinition.forId(23629).getHandlers().put("option:pick-from", this);
-		ObjectDefinition.forId(23630).getHandlers().put("option:pick-from", this);
+		SceneryDefinition.forId(23628).getHandlers().put("option:pick-from", this);
+		SceneryDefinition.forId(23629).getHandlers().put("option:pick-from", this);
+		SceneryDefinition.forId(23630).getHandlers().put("option:pick-from", this);
 		return this;
 	}
 

@@ -3,13 +3,12 @@ package rs09.game.system.command.sets
 import api.ContentAPI
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
 import core.game.ge.OfferState
 import core.game.node.`object`.Scenery
 import core.game.node.entity.player.info.Rights
-import core.game.node.entity.player.link.RunScript
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.communication.CommunicationInfo
@@ -333,7 +332,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 reject(player,"Syntax: ::getobjectvarp objectid")
             }
             val objectID = args[1].toInt()
-            notify(player, "${VarbitDefinition.forObjectID(ObjectDefinition.forId(objectID).varbitID).configId}")
+            notify(player, "${VarbitDefinition.forObjectID(SceneryDefinition.forId(objectID).varbitID).configId}")
         }
 
         define("togglexp",Command.Privilege.STANDARD){ player, args ->

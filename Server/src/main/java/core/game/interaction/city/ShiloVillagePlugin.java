@@ -1,7 +1,7 @@
 package core.game.interaction.city;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.OptionHandler;
@@ -26,13 +26,13 @@ public final class ShiloVillagePlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		NPCDefinition.forId(511).getHandlers().put("option:pay-fare", this);
 		NPCDefinition.forId(510).getHandlers().put("option:pay-fare", this);
-		ObjectDefinition.forId(2230).getHandlers().put("option:board", this);// cart
+		SceneryDefinition.forId(2230).getHandlers().put("option:board", this);// cart
 		// travel.
-		ObjectDefinition.forId(2230).getHandlers().put("option:pay-fare", this);// cart
+		SceneryDefinition.forId(2230).getHandlers().put("option:pay-fare", this);// cart
 		// travel.
-		ObjectDefinition.forId(2265).getHandlers().put("option:board", this);// cart
+		SceneryDefinition.forId(2265).getHandlers().put("option:board", this);// cart
 		// travel.
-		ObjectDefinition.forId(2265).getHandlers().put("option:pay-fare", this);// cart
+		SceneryDefinition.forId(2265).getHandlers().put("option:pay-fare", this);// cart
 		// travel.
 		PluginManager.definePlugin(new VillageCartDialogue());
 		return this;

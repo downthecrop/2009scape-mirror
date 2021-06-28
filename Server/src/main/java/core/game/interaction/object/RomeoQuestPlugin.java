@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -35,9 +35,9 @@ public class RomeoQuestPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(23625).getHandlers().put("option:pick-from", this);
-		ObjectDefinition.forId(23626).getHandlers().put("option:pick-from", this);
-		ObjectDefinition.forId(23627).getHandlers().put("option:pick-from", this);
+		SceneryDefinition.forId(23625).getHandlers().put("option:pick-from", this);
+		SceneryDefinition.forId(23626).getHandlers().put("option:pick-from", this);
+		SceneryDefinition.forId(23627).getHandlers().put("option:pick-from", this);
 		return this;
 	}
 

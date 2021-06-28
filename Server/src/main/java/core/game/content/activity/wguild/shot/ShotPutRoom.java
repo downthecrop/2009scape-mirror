@@ -1,7 +1,7 @@
 package core.game.content.activity.wguild.shot;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.container.impl.EquipmentContainer;
 import core.plugin.Initializable;
 import core.game.content.dialogue.DialogueInterpreter;
@@ -73,8 +73,8 @@ public final class ShotPutRoom extends DialoguePlugin {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
-				ObjectDefinition.forId(15664).getHandlers().put("option:throw", this);
-				ObjectDefinition.forId(15665).getHandlers().put("option:throw", this);
+				SceneryDefinition.forId(15664).getHandlers().put("option:throw", this);
+				SceneryDefinition.forId(15665).getHandlers().put("option:throw", this);
 				ItemDefinition.forId(8858).getHandlers().put("option:take", this);
 				ItemDefinition.forId(8859).getHandlers().put("option:take", this);
 				return this;

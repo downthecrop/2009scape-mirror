@@ -1,6 +1,6 @@
 package core.game.interaction.object.wildyditch;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.interaction.MovementPulse;
 import core.game.interaction.OptionHandler;
@@ -21,7 +21,7 @@ public final class WildernessDitchPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(23271).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(23271).getHandlers().put("option:cross", this);
 		PluginManager.definePlugin(new WildernessInterfacePlugin());
 		return this;
 	}

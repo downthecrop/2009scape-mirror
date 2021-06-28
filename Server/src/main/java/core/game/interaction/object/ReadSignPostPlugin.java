@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.interaction.OptionHandler;
@@ -92,29 +92,29 @@ public class ReadSignPostPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2366).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(2367).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(2368).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(2369).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(2370).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(2371).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(4132).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(4133).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(4134).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(4135).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(5164).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(10090).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(13873).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(15522).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(18493).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(24263).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(25397).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(30039).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(30040).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(31296).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(31298).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(31299).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(31300).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(2366).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(2367).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(2368).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(2369).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(2370).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(2371).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(4132).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(4133).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(4134).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(4135).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(5164).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(10090).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(13873).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(15522).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(18493).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(24263).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(25397).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(30039).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(30040).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(31296).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(31298).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(31299).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(31300).getHandlers().put("option:read", this);
 //		ObjectDefinition.forId(31301).getConfigurations().put("option:read", this);//goblin village
 		return this;
 	}

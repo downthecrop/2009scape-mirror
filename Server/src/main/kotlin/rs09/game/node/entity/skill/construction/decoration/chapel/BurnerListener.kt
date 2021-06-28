@@ -16,7 +16,7 @@ class BurnerListener : InteractionListener() {
     val IDs = intArrayOf(13202,13203,13204,13205,13206,13207,13208,13209,13210,13211,13212,13213)
 
     override fun defineListeners() {
-        on(IDs,OBJECT,"light"){player,node ->
+        on(IDs,SCENERY,"light"){ player, node ->
             if (player.ironmanManager.checkRestriction() && !player.houseManager.isInHouse(player)) {
                 return@on true
             }
@@ -32,8 +32,8 @@ class BurnerListener : InteractionListener() {
                 player.animate(Animation.create(3687))
                 player.sendMessage("You burn some marrentill in the incense burner.")
                 SceneryBuilder.replace(
-                    node.asObject(),
-                        Scenery(node.asObject().id + 1, node.location),
+                    node.asScenery(),
+                        Scenery(node.asScenery().id + 1, node.location),
                     RandomFunction.random(100, 175)
                 )
             }

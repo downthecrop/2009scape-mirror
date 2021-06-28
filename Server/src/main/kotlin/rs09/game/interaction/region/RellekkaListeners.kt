@@ -23,7 +23,7 @@ class RellekkaListeners : InteractionListener() {
     val STAIRS = intArrayOf(19690,19691)
 
     override fun defineListeners() {
-        on(STAIRS,OBJECT,"ascend","descend"){player,node ->
+        on(STAIRS,SCENERY,"ascend","descend"){ player, node ->
             if(player.location.y < 3802){
                 player.properties.teleportLocation = when(player.location.x){
                     2715 -> DOWN1A

@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.slayer;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -42,8 +42,8 @@ public final class FishingExplosivePlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (int id : IDS) {
-			ObjectDefinition.forId(id).getHandlers().put("option:lure", this);
-			ObjectDefinition.forId(id).getHandlers().put("option:bait", this);
+			SceneryDefinition.forId(id).getHandlers().put("option:lure", this);
+			SceneryDefinition.forId(id).getHandlers().put("option:bait", this);
 		}
 		new FishingExplosiveHandler().newInstance(arg);
 		new MogreNPC().newInstance(arg);

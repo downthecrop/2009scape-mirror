@@ -1,7 +1,7 @@
 package core.game.interaction.city;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.plugin.Initializable;
 import org.rs09.consts.Items;
@@ -73,26 +73,26 @@ public final class KaramajaOptionPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ObjectDefinition.forId(2072).getHandlers().put("option:search", this);// banana crate.
-        ObjectDefinition.forId(2072).getHandlers().put("option:fill", this);// banana crate.
-        ObjectDefinition.forId(2078).getHandlers().put("option:search", this);// random crate.
-        ObjectDefinition.forId(492).getHandlers().put("option:climb-down", this);// musa point rock
-        ObjectDefinition.forId(1764).getHandlers().put("option:climb", this);// musa dungeon rope
-        ObjectDefinition.forId(3617).getHandlers().put("option:climb-down", this);// agility ladder
-        ObjectDefinition.forId(3618).getHandlers().put("option:climb-up", this);// agility ladder
+        SceneryDefinition.forId(2072).getHandlers().put("option:search", this);// banana crate.
+        SceneryDefinition.forId(2072).getHandlers().put("option:fill", this);// banana crate.
+        SceneryDefinition.forId(2078).getHandlers().put("option:search", this);// random crate.
+        SceneryDefinition.forId(492).getHandlers().put("option:climb-down", this);// musa point rock
+        SceneryDefinition.forId(1764).getHandlers().put("option:climb", this);// musa dungeon rope
+        SceneryDefinition.forId(3617).getHandlers().put("option:climb-down", this);// agility ladder
+        SceneryDefinition.forId(3618).getHandlers().put("option:climb-up", this);// agility ladder
         NPCDefinition.forId(437).getHandlers().put("option:pay", this);// capn izzy
         NPCDefinition.forId(1055).getHandlers().put("option:trade", this);// capn izzy trader (tickets)
-        ObjectDefinition.forId(2626).getHandlers().put("option:open", this);// grubors locked door
-        ObjectDefinition.forId(2628).getHandlers().put("option:open", this);// the shrimp and parrot door (chef)
-        ObjectDefinition.forId(2627).getHandlers().put("option:open", this);// garv door
-        ObjectDefinition.forId(1591).getHandlers().put("option:open", this);// garv door
+        SceneryDefinition.forId(2626).getHandlers().put("option:open", this);// grubors locked door
+        SceneryDefinition.forId(2628).getHandlers().put("option:open", this);// the shrimp and parrot door (chef)
+        SceneryDefinition.forId(2627).getHandlers().put("option:open", this);// garv door
+        SceneryDefinition.forId(1591).getHandlers().put("option:open", this);// garv door
         NPCDefinition.forId(1178).getHandlers().put("option:fish", this);// lubufu fishing spot
-        ObjectDefinition.forId(5083).getHandlers().put("option:enter", this);// sanibock dungeon entrance
-        ObjectDefinition.forId(2439).getHandlers().put("option:open", this);
+        SceneryDefinition.forId(5083).getHandlers().put("option:enter", this);// sanibock dungeon entrance
+        SceneryDefinition.forId(2439).getHandlers().put("option:open", this);
         for (int pineapple : PINEAPPLE_OBJECTS) {
-            ObjectDefinition.forId(pineapple).getHandlers().put("option:pick", this);// pineapple picking
+            SceneryDefinition.forId(pineapple).getHandlers().put("option:pick", this);// pineapple picking
         }
-        ObjectDefinition.forId(2975).getHandlers().put("option:shake", this); // leafy palm tree
+        SceneryDefinition.forId(2975).getHandlers().put("option:shake", this); // leafy palm tree
         return this;
     }
 
@@ -245,7 +245,7 @@ public final class KaramajaOptionPlugin extends OptionHandler {
             case "shake":
                 if (player.getInventory().hasSpaceFor(new Item(Items.PALM_LEAF_2339))) {
                     player.getPacketDispatch().sendMessage("You shake the tree...");
-                    SceneryBuilder.replace(node.asObject(), node.asObject().transform(2976), 60); // 35 second cool-down
+                    SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(2976), 60); // 35 second cool-down
                     player.lock();
                     final Pulse palmPulse = new Pulse(2) {
                         @Override
