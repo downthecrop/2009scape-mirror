@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.interaction.NodeUsageEvent;
@@ -31,7 +31,7 @@ public class JangerBerryPlugin extends OptionHandler {
 
 			@Override
 			public boolean handle(NodeUsageEvent event) {
-				Scenery object = event.getUsedWith().asObject();
+				Scenery object = event.getUsedWith().asScenery();
 				if (object.isActive())
 					SceneryBuilder.replace(object, object.transform(2325));
 				event.getPlayer().getInventory().remove(event.getUsedItem());
@@ -39,8 +39,8 @@ public class JangerBerryPlugin extends OptionHandler {
 			}
 
 		});
-		ObjectDefinition.forId(2325).getHandlers().put("option:swing-on", this);
-		ObjectDefinition.forId(2324).getHandlers().put("option:swing-on", this);
+		SceneryDefinition.forId(2325).getHandlers().put("option:swing-on", this);
+		SceneryDefinition.forId(2324).getHandlers().put("option:swing-on", this);
 		return this;
 	}
 
@@ -51,7 +51,7 @@ public class JangerBerryPlugin extends OptionHandler {
 			return true;
 		}
 		Location end = node.getId() == 2325 ? new Location(2505, 3087, 0) : new Location(2511, 3096, 0);
-		player.getPacketDispatch().sendSceneryAnimation(node.asObject(), Animation.create(497), true);
+		player.getPacketDispatch().sendSceneryAnimation(node.asScenery(), Animation.create(497), true);
 		AgilityHandler.forceWalk(player, 0, player.getLocation(), end, Animation.create(751), 50, 22, "You skillfully swing across.", 1);
 		return true;
 	}

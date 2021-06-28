@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.thieving;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -18,8 +18,8 @@ public class ThievingOptionPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.setOptionHandler("steal-from", this);
-		ObjectDefinition.setOptionHandler("steal from", this);
+		SceneryDefinition.setOptionHandler("steal-from", this);
+		SceneryDefinition.setOptionHandler("steal from", this);
 		return this;
 	}
 

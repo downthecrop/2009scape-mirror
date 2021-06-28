@@ -1,6 +1,6 @@
 package core.game.content.activity.guild;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.global.Skillcape;
@@ -23,7 +23,7 @@ public final class FishingGuild extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2025).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2025).getHandlers().put("option:open", this);
 		new MasterFisherDialogue().init();
 		return this;
 	}

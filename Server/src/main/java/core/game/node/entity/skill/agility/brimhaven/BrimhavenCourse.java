@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.agility.brimhaven;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.agility.AgilityHandler;
@@ -334,19 +334,19 @@ public final class BrimhavenCourse extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(3566).getHandlers().put("option:swing-on", this);
-		ObjectDefinition.forId(3578).getHandlers().put("option:jump-on", this);
-		ObjectDefinition.forId(3565).getHandlers().put("option:climb-over", this);
-		ObjectDefinition.forId(3553).getHandlers().put("option:walk-on", this);
-		ObjectDefinition.forId(3557).getHandlers().put("option:walk-on", this);
-		ObjectDefinition.forId(3570).getHandlers().put("option:walk-on", this);
-		ObjectDefinition.forId(3571).getHandlers().put("option:walk-on", this);
-		ObjectDefinition.forId(3572).getHandlers().put("option:walk-on", this);
-		ObjectDefinition.forId(3559).getHandlers().put("option:walk-across", this);
-		ObjectDefinition.forId(3561).getHandlers().put("option:walk-across", this);
-		ObjectDefinition.forId(3564).getHandlers().put("option:swing-across", this);
-		ObjectDefinition.forId(3551).getHandlers().put("option:walk-on", this);
-		ObjectDefinition.forId(3583).getHandlers().put("option:climb-across", this);
+		SceneryDefinition.forId(3566).getHandlers().put("option:swing-on", this);
+		SceneryDefinition.forId(3578).getHandlers().put("option:jump-on", this);
+		SceneryDefinition.forId(3565).getHandlers().put("option:climb-over", this);
+		SceneryDefinition.forId(3553).getHandlers().put("option:walk-on", this);
+		SceneryDefinition.forId(3557).getHandlers().put("option:walk-on", this);
+		SceneryDefinition.forId(3570).getHandlers().put("option:walk-on", this);
+		SceneryDefinition.forId(3571).getHandlers().put("option:walk-on", this);
+		SceneryDefinition.forId(3572).getHandlers().put("option:walk-on", this);
+		SceneryDefinition.forId(3559).getHandlers().put("option:walk-across", this);
+		SceneryDefinition.forId(3561).getHandlers().put("option:walk-across", this);
+		SceneryDefinition.forId(3564).getHandlers().put("option:swing-across", this);
+		SceneryDefinition.forId(3551).getHandlers().put("option:walk-on", this);
+		SceneryDefinition.forId(3583).getHandlers().put("option:climb-across", this);
 		return this;
 	}
 

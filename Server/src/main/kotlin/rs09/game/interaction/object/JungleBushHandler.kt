@@ -22,8 +22,8 @@ class JungleBushHandler : InteractionListener(){
 
     override fun defineListeners() {
 
-        on(ids,OBJECT,"chop-down"){player,node ->
-            val toChop = node.asObject()
+        on(ids,SCENERY,"chop-down"){ player, node ->
+            val toChop = node.asScenery()
             if(checkRequirement(player)){
                 GameWorld.Pulser.submit(object : Pulse(0){
                     var ticks = 0

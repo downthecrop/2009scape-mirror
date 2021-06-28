@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.slayer.dungeon;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.node.entity.skill.slayer.Equipment;
 import core.game.interaction.OptionHandler;
@@ -75,8 +75,8 @@ public final class SmokeDungeon extends MapZone implements Plugin<Object> {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
-				ObjectDefinition.forId(36002).getHandlers().put("option:climb-down", this);
-				ObjectDefinition.forId(6439).getHandlers().put("option:climb-up", this);
+				SceneryDefinition.forId(36002).getHandlers().put("option:climb-down", this);
+				SceneryDefinition.forId(6439).getHandlers().put("option:climb-up", this);
 				return this;
 			}
 

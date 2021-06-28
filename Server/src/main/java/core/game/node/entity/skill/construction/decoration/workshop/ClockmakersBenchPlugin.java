@@ -2,7 +2,7 @@ package core.game.node.entity.skill.construction.decoration.workshop;
 
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.skill.Skills;
@@ -73,17 +73,17 @@ public class ClockmakersBenchPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(13709).getHandlers().put("option:craft", this);
-		ObjectDefinition.forId(13710).getHandlers().put("option:craft", this);
-		ObjectDefinition.forId(13711).getHandlers().put("option:craft", this);
-		ObjectDefinition.forId(13712).getHandlers().put("option:craft", this);
+		SceneryDefinition.forId(13709).getHandlers().put("option:craft", this);
+		SceneryDefinition.forId(13710).getHandlers().put("option:craft", this);
+		SceneryDefinition.forId(13711).getHandlers().put("option:craft", this);
+		SceneryDefinition.forId(13712).getHandlers().put("option:craft", this);
 		PluginManager.definePlugin(new ClockmakerBenchDialogue());
 		return this;
 	}
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		player.getDialogueInterpreter().open(DialogueInterpreter.getDialogueKey("con:clockbench"), node.asObject());
+		player.getDialogueInterpreter().open(DialogueInterpreter.getDialogueKey("con:clockbench"), node.asScenery());
 		return true;
 	}
 	

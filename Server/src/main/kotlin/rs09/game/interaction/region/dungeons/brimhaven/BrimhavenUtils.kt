@@ -89,8 +89,8 @@ object BrimhavenUtils {
         player.animate(tool.animation)
         player.pulseManager.run(object : Pulse(3, player) {
             override fun pulse(): Boolean {
-                if (SceneryBuilder.replace(node.asObject(), node.asObject().transform(0), 2)) {
-                    val destination = getVineDestination(player,node.asObject())
+                if (SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(0), 2)) {
+                    val destination = getVineDestination(player,node.asScenery())
                     player.lock(3)
                     player.walkingQueue.reset()
                     // Chop the vines to gain deeper access to Brimhaven Dungeon

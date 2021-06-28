@@ -19,7 +19,7 @@ class CoalTruckInteractionListeners : InteractionListener() {
     val COAL = Items.COAL_453
 
     override fun defineListeners() {
-        on(SEERS_VILLAGE_COAL_TRUCK_2114, OBJECT, "remove-coal") { player, node ->
+        on(SEERS_VILLAGE_COAL_TRUCK_2114, SCENERY, "remove-coal") { player, node ->
 
             var coalInTruck = player.getAttribute("coal-truck-inventory", 0)
             var freeSpace = player.inventory.freeSlots()
@@ -48,13 +48,13 @@ class CoalTruckInteractionListeners : InteractionListener() {
             return@on true
         }
 
-        on(SEERS_VILLAGE_COAL_TRUCK_2114, OBJECT, "investigate") { player, node ->
+        on(SEERS_VILLAGE_COAL_TRUCK_2114, SCENERY, "investigate") { player, node ->
             var coalInTruck = player.getAttribute("coal-truck-inventory", 0)
             player.dialogueInterpreter.sendDialogue("There is currently $coalInTruck coal in the truck.", "The truck has space for " + (120 - coalInTruck) + " more coal.")
             return@on true
         }
 
-        onUseWith(OBJECT,COAL,COAL_TRUCK_2114){ player, _, _ ->
+        onUseWith(SCENERY,COAL,COAL_TRUCK_2114){ player, _, _ ->
             var coalInTruck = player.getAttribute("coal-truck-inventory", 0)
 
             var coalInInventory = player.inventory.getAmount(Items.COAL_453)

@@ -1,6 +1,6 @@
 package core.game.node.entity.npc.city.sophanem;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
@@ -29,7 +29,7 @@ public final class WallShortcut extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ObjectDefinition.forId(6620).getHandlers().put("option:climb-through", this);
+        SceneryDefinition.forId(6620).getHandlers().put("option:climb-through", this);
         return null;
     }
 
