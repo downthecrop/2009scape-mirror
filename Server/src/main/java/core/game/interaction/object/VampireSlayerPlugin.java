@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -42,10 +42,10 @@ public final class VampireSlayerPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(33502).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2614).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(32835).getHandlers().put("option:walk-down", this);
-		ObjectDefinition.forId(32836).getHandlers().put("option:walk-up", this);
+		SceneryDefinition.forId(33502).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2614).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(32835).getHandlers().put("option:walk-down", this);
+		SceneryDefinition.forId(32836).getHandlers().put("option:walk-up", this);
 		return this;
 	}
 

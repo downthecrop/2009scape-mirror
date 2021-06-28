@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.agility
 
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.node.Node
 import core.game.node.`object`.Scenery
 import core.game.node.entity.npc.NPC
@@ -130,16 +130,16 @@ class GnomeStrongholdCourse
             npc!!.init()
             npc.walkRadius = 3
         }
-        ObjectDefinition.forId(2295).handlers["option:walk-across"] = this
-        ObjectDefinition.forId(2285).handlers["option:climb-over"] = this
-        ObjectDefinition.forId(35970).handlers["option:climb"] = this
-        ObjectDefinition.forId(2312).handlers["option:walk-on"] = this
-        ObjectDefinition.forId(4059).handlers["option:walk-on"] = this
-        ObjectDefinition.forId(2314).handlers["option:climb-down"] = this
-        ObjectDefinition.forId(2315).handlers["option:climb-down"] = this
-        ObjectDefinition.forId(2286).handlers["option:climb-over"] = this
-        ObjectDefinition.forId(4058).handlers["option:squeeze-through"] = this
-        ObjectDefinition.forId(154).handlers["option:squeeze-through"] = this
+        SceneryDefinition.forId(2295).handlers["option:walk-across"] = this
+        SceneryDefinition.forId(2285).handlers["option:climb-over"] = this
+        SceneryDefinition.forId(35970).handlers["option:climb"] = this
+        SceneryDefinition.forId(2312).handlers["option:walk-on"] = this
+        SceneryDefinition.forId(4059).handlers["option:walk-on"] = this
+        SceneryDefinition.forId(2314).handlers["option:climb-down"] = this
+        SceneryDefinition.forId(2315).handlers["option:climb-down"] = this
+        SceneryDefinition.forId(2286).handlers["option:climb-over"] = this
+        SceneryDefinition.forId(4058).handlers["option:squeeze-through"] = this
+        SceneryDefinition.forId(154).handlers["option:squeeze-through"] = this
     }
 
     override fun createInstance(player: Player): AgilityCourse {

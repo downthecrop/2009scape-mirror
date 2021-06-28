@@ -1,7 +1,7 @@
 package core.game.content.quest.free.blackknightsfortress;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
@@ -52,15 +52,15 @@ public final class BKFortressPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ItemDefinition.forId(9589).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(74).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(73).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2337).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2338).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2341).getHandlers().put("option:push", this);
-		ObjectDefinition.forId(17148).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(17149).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(17160).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(2342).getHandlers().put("option:listen-at", this);
+		SceneryDefinition.forId(74).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(73).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2337).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2338).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2341).getHandlers().put("option:push", this);
+		SceneryDefinition.forId(17148).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(17149).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(17160).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(2342).getHandlers().put("option:listen-at", this);
 		return this;
 	}
 

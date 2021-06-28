@@ -1,7 +1,7 @@
 package core.game.content.quest.members.witchshouse;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
@@ -174,19 +174,19 @@ public class WitchsHousePlugin extends OptionHandler {
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         PluginManager.definePlugin(new WitchsHouseUseWithHandler());
         PluginManager.definePlugin(new MouseNPC());
-        ObjectDefinition.forId(2867).getHandlers().put("option:look-under", this);
-        ObjectDefinition.forId(2861).getHandlers().put("option:open", this);
-        ObjectDefinition.forId(2865).getHandlers().put("option:open", this);
-        ObjectDefinition.forId(2866).getHandlers().put("option:open", this);
-        ObjectDefinition.forId(2862).getHandlers().put("option:open", this);
-        ObjectDefinition.forId(24724).getHandlers().put("option:wind-up", this);
-        ObjectDefinition.forId(24673).getHandlers().put("option:walk-down", this);
-        ObjectDefinition.forId(24672).getHandlers().put("option:walk-up", this);
-        ObjectDefinition.forId(24721).getHandlers().put("option:play", this);
-        ObjectDefinition.forId(24692).getHandlers().put("option:search", this);
-        ObjectDefinition.forId(2869).getHandlers().put("option:search", this);
-        ObjectDefinition.forId(2863).getHandlers().put("option:open", this);
-        ObjectDefinition.forId(2864).getHandlers().put("option:check", this);
+        SceneryDefinition.forId(2867).getHandlers().put("option:look-under", this);
+        SceneryDefinition.forId(2861).getHandlers().put("option:open", this);
+        SceneryDefinition.forId(2865).getHandlers().put("option:open", this);
+        SceneryDefinition.forId(2866).getHandlers().put("option:open", this);
+        SceneryDefinition.forId(2862).getHandlers().put("option:open", this);
+        SceneryDefinition.forId(24724).getHandlers().put("option:wind-up", this);
+        SceneryDefinition.forId(24673).getHandlers().put("option:walk-down", this);
+        SceneryDefinition.forId(24672).getHandlers().put("option:walk-up", this);
+        SceneryDefinition.forId(24721).getHandlers().put("option:play", this);
+        SceneryDefinition.forId(24692).getHandlers().put("option:search", this);
+        SceneryDefinition.forId(2869).getHandlers().put("option:search", this);
+        SceneryDefinition.forId(2863).getHandlers().put("option:open", this);
+        SceneryDefinition.forId(2864).getHandlers().put("option:check", this);
         ItemDefinition.forId(2408).getHandlers().put("option:read", this);
 
         return this;

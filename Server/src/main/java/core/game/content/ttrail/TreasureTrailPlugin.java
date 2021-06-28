@@ -1,7 +1,7 @@
 package core.game.content.ttrail;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -91,7 +91,7 @@ public final class TreasureTrailPlugin extends OptionHandler {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			ObjectDefinition.forId(19171).getHandlers().put("option:squeeze-through", this);
+			SceneryDefinition.forId(19171).getHandlers().put("option:squeeze-through", this);
 			return this;
 		}
 

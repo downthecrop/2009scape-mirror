@@ -106,7 +106,7 @@ public class TunnelShortcut extends AgilityShortcut {
 	@Override
 	public Location getDestination(Node node, Node n) {
 		if (n.getId() == 14922) {
-			return n.getLocation().transform(getObjectDirection(n.asObject().getDirection()), 1);
+			return n.getLocation().transform(getObjectDirection(n.asScenery().getDirection()), 1);
 		}
 		return getStart(n.getLocation(), n.getDirection());
 	}

@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -167,7 +167,7 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
 				ItemDefinition.forId(SHIELD_ID).getHandlers().put("option:wield", this);
-				ObjectDefinition.forId(15657).getHandlers().put("option:view", this);
+				SceneryDefinition.forId(15657).getHandlers().put("option:view", this);
 				return this;
 			}
 

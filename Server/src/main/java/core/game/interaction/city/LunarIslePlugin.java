@@ -1,7 +1,7 @@
 package core.game.interaction.city;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -20,8 +20,8 @@ public final class LunarIslePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(16777).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(16774).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(16777).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(16774).getHandlers().put("option:open", this);
 		NPCDefinition.forId(4512).getHandlers().put("option:go-inside", this);
 		return this;
 	}

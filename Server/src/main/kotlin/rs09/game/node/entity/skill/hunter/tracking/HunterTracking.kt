@@ -237,7 +237,7 @@ abstract class HunterTracking : OptionHandler(){
                         player.dialogueInterpreter.sendDialogue("You need a hunter level of $requiredLevel to track these.")
                         return true
                     }
-                    generateTrail(node.asObject(),player)
+                    generateTrail(node.asScenery(),player)
                     updateTrail(player)
                 } else {
                     if(currentTrail.triggerObjectLocation.equals(node.location) || (currentIndex == trail.lastIndex && currentTrail.endLocation.equals(node.location))){

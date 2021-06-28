@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import org.rs09.consts.Items;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
@@ -58,7 +58,7 @@ public final class SinclairFlourBarrelPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ObjectDefinition.forId(26122).getHandlers().put("option:take from", this);
+        SceneryDefinition.forId(26122).getHandlers().put("option:take from", this);
         PluginManager.definePlugin(new FlourHandler());
         return this;
     }
@@ -77,7 +77,7 @@ public final class SinclairFlourBarrelPlugin extends OptionHandler {
 
         @Override
         public boolean handle(NodeUsageEvent event) {
-            return getFlour(event.getPlayer(), event.getUsedWith().asObject());
+            return getFlour(event.getPlayer(), event.getUsedWith().asScenery());
         }
     }
 }

@@ -19,7 +19,7 @@ class FairyRingPlugin : InteractionListener() {
 
     override fun defineListeners() {
 
-        on(RINGS,OBJECT,"use"){player,_ ->
+        on(RINGS,SCENERY,"use"){ player, _ ->
             if (!player.equipment.contains(772, 1) && !player.equipment.contains(9084, 1)) {
                 player.sendMessage("The fairy ring only works for those who wield fairy magic.")
                 return@on true
@@ -28,7 +28,7 @@ class FairyRingPlugin : InteractionListener() {
             return@on true
         }
 
-        on(MAIN_RING,OBJECT,"use"){player,_ ->
+        on(MAIN_RING,SCENERY,"use"){ player, _ ->
             if (!player.equipment.contains(772, 1) && !player.equipment.contains(9084, 1)) {
                 player.sendMessage("The fairy ring only works for those who wield fairy magic.")
                 return@on true

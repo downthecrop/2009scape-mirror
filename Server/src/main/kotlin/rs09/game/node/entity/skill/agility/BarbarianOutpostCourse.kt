@@ -2,7 +2,7 @@ package rs09.game.node.entity.skill.agility
 
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.global.action.ClimbActionHandler
 import core.game.content.global.action.DoorActionHandler
@@ -160,13 +160,13 @@ class BarbarianOutpostCourse
     }
 
     override fun configure() {
-        ObjectDefinition.forId(2115).handlers["option:open"] = this
-        ObjectDefinition.forId(2116).handlers["option:open"] = this
-        ObjectDefinition.forId(2282).handlers["option:swing-on"] = this
-        ObjectDefinition.forId(2294).handlers["option:walk-across"] = this
-        ObjectDefinition.forId(20211).handlers["option:climb-over"] = this
-        ObjectDefinition.forId(2302).handlers["option:walk-across"] = this
-        ObjectDefinition.forId(1948).handlers["option:climb-over"] = this
+        SceneryDefinition.forId(2115).handlers["option:open"] = this
+        SceneryDefinition.forId(2116).handlers["option:open"] = this
+        SceneryDefinition.forId(2282).handlers["option:swing-on"] = this
+        SceneryDefinition.forId(2294).handlers["option:walk-across"] = this
+        SceneryDefinition.forId(20211).handlers["option:climb-over"] = this
+        SceneryDefinition.forId(2302).handlers["option:walk-across"] = this
+        SceneryDefinition.forId(1948).handlers["option:climb-over"] = this
         ItemDefinition.forId(455).handlers["option:read"] = this
         NPCDefinition.forId(385).handlers["option:pick-up"] = this
         PluginManager.definePlugin(BarbarianGuardDialogue())

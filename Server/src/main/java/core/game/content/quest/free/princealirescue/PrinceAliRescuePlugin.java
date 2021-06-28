@@ -1,7 +1,7 @@
 package core.game.content.quest.free.princealirescue;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -24,9 +24,9 @@ public class PrinceAliRescuePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2881).getHandlers().put("option:open", this);// prison
+		SceneryDefinition.forId(2881).getHandlers().put("option:open", this);// prison
 		// door.
-		ObjectDefinition.forId(4639).getHandlers().put("option:open", this);// door
+		SceneryDefinition.forId(4639).getHandlers().put("option:open", this);// door
 		// to
 		// jail
 		NPCDefinition.forId(925).getHandlers().put("option:talk-to", this);

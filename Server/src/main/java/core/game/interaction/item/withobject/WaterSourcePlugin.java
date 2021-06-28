@@ -48,7 +48,7 @@ public final class WaterSourcePlugin extends UseWithHandler {
 	@Override
 	public boolean handle(NodeUsageEvent event) {
 		final WaterRecipient recipient = WaterRecipient.forItem(event.getUsedItem());
-		recipient.handle(event.getUsedWith().asObject(), event.getPlayer());
+		recipient.handle(event.getUsedWith().asScenery(), event.getPlayer());
 		return true;
 	}
 
