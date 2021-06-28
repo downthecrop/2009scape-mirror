@@ -27,7 +27,7 @@ public class GateInteraction extends PluginInteraction {
 
     public boolean handleGate(Player player, Node node){
         if(!player.getAttribute("fishing_contest:pass-shown",false) || player.getQuestRepository().getStage("Fishing Contest") < 10) {
-            player.getPulseManager().run(new MovementPulse(player, node.asObject().getLocation().transform(1, 0, 0)) {
+            player.getPulseManager().run(new MovementPulse(player, node.asScenery().getLocation().transform(1, 0, 0)) {
                 @Override
                 public boolean pulse() {
                     if(player.getQuestRepository().getStage("Fishing Contest") >= 10){
@@ -49,7 +49,7 @@ public class GateInteraction extends PluginInteraction {
 
     public boolean handleGruborGate(Player player, Node node){
         if(node.getLocation().withinDistance(Location.create(2650, 3469, 0),4)) {
-            player.getPulseManager().run(new MovementPulse(player, node.asObject().getLocation().transform(0,-1 , 0)) {
+            player.getPulseManager().run(new MovementPulse(player, node.asScenery().getLocation().transform(0,-1 , 0)) {
                 @Override
                 public boolean pulse() {
                     player.getDialogueInterpreter().sendDialogue("This gate is locked.");

@@ -1,7 +1,7 @@
 package core.game.interaction.npc;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -46,18 +46,18 @@ public final class BurthorpeOptionPlugin extends OptionHandler {
 		// soldiers
 		NPCDefinition.forId(1062).getHandlers().put("option:talk-to", this);// other
 		// sergant
-		ObjectDefinition.forId(7257).getHandlers().put("option:enter", this);// thieving
+		SceneryDefinition.forId(7257).getHandlers().put("option:enter", this);// thieving
 		// guide
 		// trapdoor.
-		ObjectDefinition.forId(7258).getHandlers().put("option:enter", this);// thieving
+		SceneryDefinition.forId(7258).getHandlers().put("option:enter", this);// thieving
 		// guide
 		// passegeway.
 		NPCDefinition.forId(1073).getHandlers().put("option:talk-to", this);
 		NPCDefinition.forId(1074).getHandlers().put("option:talk-to", this);
 		NPCDefinition.forId(1076).getHandlers().put("option:talk-to", this);
 		NPCDefinition.forId(1077).getHandlers().put("option:talk-to", this);
-		ObjectDefinition.forId(4624).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(4627).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(4624).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(4627).getHandlers().put("option:climb-down", this);
 		return this;
 	}
 

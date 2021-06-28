@@ -1,7 +1,7 @@
 package core.game.interaction.city;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -48,16 +48,16 @@ public final class PortSarimPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		NPCDefinition.forId(2704).getHandlers().put("option:talk-to", this);
-		ObjectDefinition.forId(9565).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(9565).getHandlers().put("option:pick-lock", this);
-		ObjectDefinition.forId(9563).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(9565).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(9565).getHandlers().put("option:pick-lock", this);
+		SceneryDefinition.forId(9563).getHandlers().put("option:open", this);
 		for (int i : MONKS) {
 			NPCDefinition.forId(i).getHandlers().put("option:take-boat", this);
 		}
-		ObjectDefinition.forId(2071).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(2071).getHandlers().put("option:search", this);
 		NPCDefinition.forId(745).getHandlers().put("option:attack", this);
-		ObjectDefinition.forId(33173).getHandlers().put("option:exit", this);
-		ObjectDefinition.forId(33174).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(33173).getHandlers().put("option:exit", this);
+		SceneryDefinition.forId(33174).getHandlers().put("option:enter", this);
 		return this;
 	}
 

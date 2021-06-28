@@ -2,13 +2,12 @@ package core.game.node.entity.skill.construction;
 
 
 import api.ContentAPI;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.RunScript;
 import core.game.node.object.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -29,17 +28,17 @@ public final class PortalOptionPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (HouseLocation hl : HouseLocation.values()) {
-			ObjectDefinition.forId(hl.getPortalId()).getHandlers().put("option:enter", this);
+			SceneryDefinition.forId(hl.getPortalId()).getHandlers().put("option:enter", this);
 		}
-		ObjectDefinition.forId(13405).getHandlers().put("option:lock", this);
-		ObjectDefinition.forId(13405).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(13405).getHandlers().put("option:lock", this);
+		SceneryDefinition.forId(13405).getHandlers().put("option:enter", this);
 		PluginManager.definePlugin(new PortalDialogue());
 		return this;
 	}
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		Scenery object = node.asObject();
+		Scenery object = node.asScenery();
 		if (object.getId() == 13405 && option.equals("enter")) {
 			HouseManager.leave(player);
 			return true;

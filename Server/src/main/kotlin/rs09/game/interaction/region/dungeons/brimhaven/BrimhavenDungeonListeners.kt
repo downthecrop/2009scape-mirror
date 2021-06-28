@@ -17,23 +17,23 @@ class BrimhavenDungeonListeners : InteractionListener() {
     val LOGS = intArrayOf(5088,5090)
 
     override fun defineListeners() {
-        on(EXIT,OBJECT,"leave"){player, _ ->
+        on(EXIT,SCENERY,"leave"){ player, _ ->
             player.properties.teleportLocation = Location.create(2745, 3152, 0)
             return@on true
         }
 
-        on(STAIRS,OBJECT,"walk-up","walk-down"){player, node ->
-            BrimhavenUtils.handleStairs(node.asObject(),player)
+        on(STAIRS,SCENERY,"walk-up","walk-down"){ player, node ->
+            BrimhavenUtils.handleStairs(node.asScenery(),player)
             return@on true
         }
 
-        on(STEPPING_STONES,OBJECT,"jump-from"){player, node ->
-            BrimhavenUtils.handleSteppingStones(player,node.asObject())
+        on(STEPPING_STONES,SCENERY,"jump-from"){ player, node ->
+            BrimhavenUtils.handleSteppingStones(player,node.asScenery())
             return@on true
         }
 
-        on(VINES,OBJECT,"chop-down"){player, node ->
-            BrimhavenUtils.handleVines(player,node.asObject())
+        on(VINES,SCENERY,"chop-down"){ player, node ->
+            BrimhavenUtils.handleVines(player,node.asScenery())
             return@on true
         }
 
@@ -42,7 +42,7 @@ class BrimhavenDungeonListeners : InteractionListener() {
             return@on true
         }
 
-        on(LOGS,OBJECT,"walk-across"){player, node ->
+        on(LOGS,SCENERY,"walk-across"){ player, node ->
 
             if (player.skills.getLevel(Skills.AGILITY) < 30) {
                 player.packetDispatch.sendMessage("You need an agility level of 30 to cross this.")

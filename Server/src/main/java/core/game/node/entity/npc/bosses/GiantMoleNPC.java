@@ -1,6 +1,6 @@
 package core.game.node.entity.npc.bosses;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -270,7 +270,7 @@ public final class GiantMoleNPC extends AbstractNPC {
 		DigSpadeHandler.register(Location.create(2989, 3378, 0), action);
 		DigSpadeHandler.register(Location.create(2984, 3387, 0), action);
 		DigSpadeHandler.register(Location.create(2987, 3387, 0), action);
-		ObjectDefinition.forId(12230).getHandlers().put("option:climb", new OptionHandler() {
+		SceneryDefinition.forId(12230).getHandlers().put("option:climb", new OptionHandler() {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
 				return this;

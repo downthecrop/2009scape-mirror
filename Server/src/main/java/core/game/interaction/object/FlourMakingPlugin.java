@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -44,15 +44,15 @@ public final class FlourMakingPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		int controls[] = new int[] { 2718, 2720, 2721, 24072, 24070 };
 		for (int i : controls) {
-			ObjectDefinition.forId(i).getHandlers().put("option:operate", this);
+			SceneryDefinition.forId(i).getHandlers().put("option:operate", this);
 		}
-		ObjectDefinition.forId(36878).getHandlers().put("option:empty", this);
-		ObjectDefinition.forId(22420).getHandlers().put("option:empty", this);
-		ObjectDefinition.forId(5792).getHandlers().put("option:empty", this);
-		ObjectDefinition.forId(1782).getHandlers().put("option:empty", this);
-		ObjectDefinition.forId(1781).getHandlers().put("option:empty", this);
-		ObjectDefinition.forId(22421).getHandlers().put("option:empty", this);
-		ObjectDefinition.forId(24070).getHandlers().put("option:empty", this);
+		SceneryDefinition.forId(36878).getHandlers().put("option:empty", this);
+		SceneryDefinition.forId(22420).getHandlers().put("option:empty", this);
+		SceneryDefinition.forId(5792).getHandlers().put("option:empty", this);
+		SceneryDefinition.forId(1782).getHandlers().put("option:empty", this);
+		SceneryDefinition.forId(1781).getHandlers().put("option:empty", this);
+		SceneryDefinition.forId(22421).getHandlers().put("option:empty", this);
+		SceneryDefinition.forId(24070).getHandlers().put("option:empty", this);
 		new GrainHopperPlugin().newInstance(arg);
 		new FillPotHandler().newInstance(arg);
 		return this;

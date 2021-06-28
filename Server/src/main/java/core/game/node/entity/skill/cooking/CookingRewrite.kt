@@ -26,9 +26,9 @@ class CookingRewrite : InteractionListener() {
 
     override fun defineListeners() {
 
-        onUseWith(OBJECT,RAW_FOODS, *COOKING_OBJs){player, used, with ->
+        onUseWith(SCENERY,RAW_FOODS, *COOKING_OBJs){ player, used, with ->
             val item = used.asItem()
-            val obj = with.asObject()
+            val obj = with.asScenery()
             val range = obj.name.toLowerCase().contains("range")
             when (item.id) {
                 RAW_BEEF_2132 -> if (range) {

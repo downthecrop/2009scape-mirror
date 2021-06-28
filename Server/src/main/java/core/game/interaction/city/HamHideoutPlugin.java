@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -29,11 +29,11 @@ public final class HamHideoutPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(5490).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(5490).getHandlers().put("option:pick-lock", this);
-		ObjectDefinition.forId(5491).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(5491).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(5493).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(5490).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(5490).getHandlers().put("option:pick-lock", this);
+		SceneryDefinition.forId(5491).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(5491).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(5493).getHandlers().put("option:climb-up", this);
 		return this;
 	}
 

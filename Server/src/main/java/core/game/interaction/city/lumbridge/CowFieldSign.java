@@ -1,6 +1,6 @@
 package core.game.interaction.city.lumbridge;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -19,7 +19,7 @@ public class CowFieldSign extends OptionHandler {
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable{
         new SignDialogue().init();
-        ObjectDefinition.forId(31297).getHandlers().put("option:read",this);
+        SceneryDefinition.forId(31297).getHandlers().put("option:read",this);
         return this;
     }
     @Override

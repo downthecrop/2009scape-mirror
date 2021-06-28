@@ -1,7 +1,7 @@
 package rs09.game.node.entity.skill.agility
 
 import api.ContentAPI
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.content.global.action.DoorActionHandler
 import core.game.node.Node
 import core.game.node.`object`.Scenery
@@ -10,8 +10,6 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.agility.AgilityCourse
 import core.game.node.entity.skill.agility.AgilityHandler
-import core.game.system.task.LocationLogoutTask
-import core.game.system.task.LogoutTask
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -248,14 +246,14 @@ class WildernessCourse
     }
 
     override fun configure() {
-        ObjectDefinition.forId(2309).handlers["option:open"] = this
-        ObjectDefinition.forId(2308).handlers["option:open"] = this
-        ObjectDefinition.forId(2307).handlers["option:open"] = this
-        ObjectDefinition.forId(2288).handlers["option:squeeze-through"] = this
-        ObjectDefinition.forId(2283).handlers["option:swing-on"] = this
-        ObjectDefinition.forId(37704).handlers["option:cross"] = this
-        ObjectDefinition.forId(2297).handlers["option:walk-across"] = this
-        ObjectDefinition.forId(2328).handlers["option:climb"] = this
+        SceneryDefinition.forId(2309).handlers["option:open"] = this
+        SceneryDefinition.forId(2308).handlers["option:open"] = this
+        SceneryDefinition.forId(2307).handlers["option:open"] = this
+        SceneryDefinition.forId(2288).handlers["option:squeeze-through"] = this
+        SceneryDefinition.forId(2283).handlers["option:swing-on"] = this
+        SceneryDefinition.forId(37704).handlers["option:cross"] = this
+        SceneryDefinition.forId(2297).handlers["option:walk-across"] = this
+        SceneryDefinition.forId(2328).handlers["option:climb"] = this
     }
 
     override fun createInstance(player: Player): AgilityCourse {

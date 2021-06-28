@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.prayer;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.node.entity.player.link.prayer.PrayerType;
 import core.plugin.Initializable;
@@ -25,9 +25,9 @@ public class PrayerAltarPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.setOptionHandler("pray-at", this);
-		ObjectDefinition.setOptionHandler("pray", this);
-		ObjectDefinition.forId(61).getHandlers().put("option:check", this);
+		SceneryDefinition.setOptionHandler("pray-at", this);
+		SceneryDefinition.setOptionHandler("pray", this);
+		SceneryDefinition.forId(61).getHandlers().put("option:check", this);
 		return this;
 	}
 

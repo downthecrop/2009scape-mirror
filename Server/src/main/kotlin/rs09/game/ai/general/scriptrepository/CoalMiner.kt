@@ -13,9 +13,6 @@ import rs09.game.ai.skillingbot.SkillingBotAssembler
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InteractionListeners
 import api.ContentAPI
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.runBlocking
-import java.util.logging.Handler
 
 @PlayerCompatible
 @ScriptName("Falador Coal Miner")
@@ -59,7 +56,7 @@ class CoalMiner : Script() {
                     scriptAPI.walkTo(mine.randomLoc)
                 } else {
                     val rock = scriptAPI.getNearestNode("rocks",true)
-                    rock?.let { InteractionListeners.run(rock.id, InteractionListener.OBJECT,"mine",bot,rock) }
+                    rock?.let { InteractionListeners.run(rock.id, InteractionListener.SCENERY,"mine",bot,rock) }
                 }
                 overlay!!.setAmount(ContentAPI.amountInInventory(bot, Items.COAL_453) + coalAmount)
             }

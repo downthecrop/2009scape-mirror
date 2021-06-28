@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.summoning;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
@@ -39,8 +39,8 @@ public final class ObeliskOptionPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.setOptionHandler("infuse-pouch", this);
-		ObjectDefinition.setOptionHandler("renew-points", this);
+		SceneryDefinition.setOptionHandler("infuse-pouch", this);
+		SceneryDefinition.setOptionHandler("renew-points", this);
 		return this;
 	}
 

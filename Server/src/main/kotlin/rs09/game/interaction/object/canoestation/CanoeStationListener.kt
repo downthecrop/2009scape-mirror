@@ -19,18 +19,18 @@ class CanoeStationListener : InteractionListener() {
     private val FLOAT = Animation(3304)
 
     override fun defineDestinationOverrides() {
-        setDest(OBJECT,STATION_IDs,"chop-down"){node ->
+        setDest(SCENERY,STATION_IDs,"chop-down"){ node ->
             return@setDest CanoeUtils.getChopLocation(node.location)
         }
-        setDest(OBJECT,STATION_IDs,"shape-canoe","float canoe","float log","float waka"){node ->
+        setDest(SCENERY,STATION_IDs,"shape-canoe","float canoe","float log","float waka"){ node ->
             return@setDest CanoeUtils.getCraftFloatLocation(node.location)
         }
     }
 
     override fun defineListeners() {
-        on(STATION_IDs,OBJECT,"chop-down"){player, node ->
+        on(STATION_IDs,SCENERY,"chop-down"){ player, node ->
             val axe: SkillingTool? = SkillingTool.getHatchet(player)
-            val varbit = node.asObject().definition.configFile
+            val varbit = node.asScenery().definition.configFile
             if(varbit.getValue(player) != 0){
                 player.varpManager.setVarbit(varbit,0)
             }
@@ -52,7 +52,7 @@ class CanoeStationListener : InteractionListener() {
                 override fun pulse(): Boolean {
                     player.animator.stop()
                     player.varpManager.setVarbit(varbit,STAGE_LOG_CHOPPED)
-                    player.packetDispatch.sendSceneryAnimation(node.asObject().getChild(player), FALL, false)
+                    player.packetDispatch.sendSceneryAnimation(node.asScenery().getChild(player), FALL, false)
                     player.unlock()
                     return true
                 }
@@ -60,8 +60,8 @@ class CanoeStationListener : InteractionListener() {
             return@on true
         }
 
-        on(STATION_IDs,OBJECT,"shape-canoe"){player, node ->
-            val varbit = node.asObject().definition.configFile
+        on(STATION_IDs,SCENERY,"shape-canoe"){ player, node ->
+            val varbit = node.asScenery().definition.configFile
             if(varbit.getValue(player) != STAGE_LOG_CHOPPED){
                 player.varpManager.setVarbit(varbit,0)
                 return@on true
@@ -72,8 +72,8 @@ class CanoeStationListener : InteractionListener() {
             return@on true
         }
 
-        on(STATION_IDs,OBJECT,"float canoe","float log","float waka"){player, node ->
-            val varbit = node.asObject().definition.configFile
+        on(STATION_IDs,SCENERY,"float canoe","float log","float waka"){ player, node ->
+            val varbit = node.asScenery().definition.configFile
             val canoe = CanoeUtils.getCanoeFromVarbit(player,varbit)
             player.animator.animate(PUSH)
             player.lock()
@@ -81,7 +81,7 @@ class CanoeStationListener : InteractionListener() {
             player.pulseManager.run(object : Pulse(){
                 override fun pulse(): Boolean {
                     player.varpManager.setVarbit(varbit,CanoeUtils.getCraftValue(canoe,true))
-                    player.packetDispatch.sendSceneryAnimation(node.asObject(), FLOAT, false)
+                    player.packetDispatch.sendSceneryAnimation(node.asScenery(), FLOAT, false)
                     player.unlock()
                     return true
                 }
@@ -89,7 +89,7 @@ class CanoeStationListener : InteractionListener() {
             return@on true
         }
 
-        on(STATION_IDs,OBJECT,"paddle log","paddle canoe"){player, node ->
+        on(STATION_IDs,SCENERY,"paddle log","paddle canoe"){ player, node ->
             player.interfaceManager.open(Component(Components.CANOE_STATIONS_MAP_53))
             return@on true
         }

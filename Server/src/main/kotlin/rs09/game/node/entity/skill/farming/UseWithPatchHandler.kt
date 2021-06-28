@@ -37,7 +37,7 @@ object UseWithPatchHandler{
         event ?: return false
         val player = event.player
         val usedItem = event.usedItem
-        val patch = FarmingPatch.forObject(event.usedWith.asObject())
+        val patch = FarmingPatch.forObject(event.usedWith.asScenery())
         patch ?: return false
 
         player.faceLocation(event.usedWith.location)

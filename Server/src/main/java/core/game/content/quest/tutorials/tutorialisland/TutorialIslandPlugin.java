@@ -1,7 +1,7 @@
 package core.game.content.quest.tutorials.tutorialisland;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
@@ -24,25 +24,25 @@ public class TutorialIslandPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(3015).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(3016).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3015).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3016).getHandlers().put("option:open", this);
 		NPCDefinition.forId(2796).getHandlers().put("option:skip-tutorial", this);
-		ObjectDefinition.forId(3014).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(3017).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(3018).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(3019).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(3020).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(3021).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(3022).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(3023).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(3024).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(3025).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(3026).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(3029).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(3030).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(3031).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(1740).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(3028).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(3014).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3017).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3018).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3019).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3020).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3021).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3022).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3023).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3024).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3025).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3026).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3029).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(3030).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(3031).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(1740).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(3028).getHandlers().put("option:climb-up", this);
 //		PluginManager.definePlugin(new BrotherBraceDialogue(), new CombatInstructorDialogue(), new TutorialBook(), new FinancialAdvisorDialogue(), new MasterChefDialogue(), new MiningInstructorDialogue(), new QuestGuideDialogue(), new RSGuideDialogue(), new SurvivalExpertDialogue(), new TutorialCompletionDialogue());
 		return this;
 	}

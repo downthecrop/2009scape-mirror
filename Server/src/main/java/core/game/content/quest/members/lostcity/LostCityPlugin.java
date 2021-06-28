@@ -1,7 +1,7 @@
 package core.game.content.quest.members.lostcity;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.FacialExpression;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
@@ -42,9 +42,9 @@ public final class LostCityPlugin extends OptionHandler {
 		ItemDefinition.forId(1215).getHandlers().put("option:wield", this);
 		ItemDefinition.forId(1231).getHandlers().put("option:wield", this);
 		ItemDefinition.forId(5680).getHandlers().put("option:wield", this);
-		ObjectDefinition.forId(2409).getHandlers().put("option:chop", this);
-		ObjectDefinition.forId(2406).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(1292).getHandlers().put("option:chop down", this);
+		SceneryDefinition.forId(2409).getHandlers().put("option:chop", this);
+		SceneryDefinition.forId(2406).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(1292).getHandlers().put("option:chop down", this);
 		return this;
 	}
 

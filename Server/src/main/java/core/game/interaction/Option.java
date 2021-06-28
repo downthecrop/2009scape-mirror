@@ -2,7 +2,7 @@ package core.game.interaction;
 
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.item.Item;
@@ -80,7 +80,7 @@ public final class Option {
 			return NPCDefinition.getOptionHandler(nodeId, name);
 		}
 		if (node instanceof Scenery) {
-			return ObjectDefinition.getOptionHandler(nodeId, name);
+			return SceneryDefinition.getOptionHandler(nodeId, name);
 		}
 		if (node instanceof Item) {
 			return ItemDefinition.getOptionHandler(nodeId, name);

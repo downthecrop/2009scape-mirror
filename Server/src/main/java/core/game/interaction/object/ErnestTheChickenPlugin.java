@@ -3,7 +3,7 @@ package core.game.interaction.object;
 import java.awt.Point;
 import java.util.Arrays;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.interaction.OptionHandler;
@@ -41,11 +41,11 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(11450).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(11450).getHandlers().put("option:open", this);
 		for (Lever lever : Lever.values()) {
 			for (int i : lever.getObjectIds()) {
-				ObjectDefinition.forId(i).getHandlers().put("option:pull", this);
-				ObjectDefinition.forId(i).getHandlers().put("option:inspect", this);
+				SceneryDefinition.forId(i).getHandlers().put("option:pull", this);
+				SceneryDefinition.forId(i).getHandlers().put("option:inspect", this);
 			}
 		}
 		/** doors */

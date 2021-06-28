@@ -14,7 +14,7 @@ object RottenPotatoUseWithHandler{
     @JvmStatic
     fun handle(node: Node, player: Player){
         if(node is Scenery){
-            val go = node.asObject()
+            val go = node.asScenery()
         }
 
         if(node is NPC){

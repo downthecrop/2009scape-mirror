@@ -1,6 +1,6 @@
 package core.game.interaction;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
@@ -203,7 +203,7 @@ public abstract class UseWithHandler implements Plugin<Object> {
      * @return the valid children.
      */
     public int[] getValidChildren(int wrapper) {
-        final ObjectDefinition definition = ObjectDefinition.forId(wrapper);
+        final SceneryDefinition definition = SceneryDefinition.forId(wrapper);
         final List<Integer> list = new ArrayList<>(20);
         if (definition.getChildrenIds() == null) {
             SystemLogger.logErr("Null child wrapper in option handler wrapperId=" + wrapper);

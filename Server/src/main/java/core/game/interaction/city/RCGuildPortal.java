@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -16,8 +16,8 @@ import core.plugin.Plugin;
 public class RCGuildPortal extends OptionHandler {
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ObjectDefinition.forId(38279).getHandlers().put("option:examine",this);
-        ObjectDefinition.forId(38279).getHandlers().put("option:enter",this);
+        SceneryDefinition.forId(38279).getHandlers().put("option:examine",this);
+        SceneryDefinition.forId(38279).getHandlers().put("option:enter",this);
         return null;
     }
 
