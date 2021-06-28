@@ -68,7 +68,6 @@ public final class BuildOptionPlugin extends OptionHandler {
 			SystemLogger.logErr("Construction (building):  " + hotspot +  " : " + object + " chunkX = " + object.getLocation().getChunkX() + ", chunkY = " + object.getLocation().getChunkY());
 			return true;
 		}
-		System.out.println(object + " chunkX = " + object.getCenterLocation().getChunkX() + ", chunkY = " + object.getCenterLocation().getChunkY());
 
 		player.setAttribute("con:hotspot", hotspot);
 		BuildingUtils.openBuildInterface(player, hotspot.getHotspot());
