@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -10,6 +11,7 @@ import core.game.node.entity.player.link.RunScript;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import kotlin.Unit;
 
 /**
  * Represents the leather crafting interface.
@@ -43,14 +45,10 @@ public final class LeatherCraftInterface extends ComponentPlugin {
 			amount = player.getInventory().getAmount(new Item(LeatherCrafting.LEATHER));
 			break;
 		case 199:
-			player.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					player.getPulseManager().run(new SoftCraftPulse(player, new Item(LeatherCrafting.LEATHER), soft, (int) getValue()));
-					return true;
-				}
+			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				ContentAPI.submitIndividualPulse(player, new SoftCraftPulse(player, new Item(LeatherCrafting.LEATHER), soft, (int) value));
+				return Unit.INSTANCE;
 			});
-			player.getDialogueInterpreter().sendInput(false, "Enter amount:");
 			return true;
 		}
 		player.getPulseManager().run(new SoftCraftPulse(player, null, soft, amount));

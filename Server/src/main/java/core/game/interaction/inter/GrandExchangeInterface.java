@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.ContentAPI;
 import core.cache.def.impl.CS2Mapping;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
@@ -19,6 +20,7 @@ import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import kotlin.Unit;
 import rs09.game.ge.GrandExchangeOffer;
 import rs09.game.ge.PlayerGrandExchange;
 import rs09.game.interaction.npc.BogrogPouchSwapper;
@@ -333,17 +335,13 @@ public class GrandExchangeInterface extends ComponentPlugin {
 			setOfferAmount(player, offer, amount + 1000);
 			return true;
 		case 170: // value x
-			player.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					if (player.getInterfaceManager().getChatbox().getId() == 389) {
-						player.getPlayerGrandExchange().openSearch();
-					}
-					setOfferAmount(player, offer, (int) value);
-					return true;
+			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				if (player.getInterfaceManager().getChatbox().getId() == 389) {
+					player.getPlayerGrandExchange().openSearch();
 				}
+				setOfferAmount(player, offer, (int) value);
+				return Unit.INSTANCE;
 			});
-			player.getDialogueInterpreter().sendInput(false, "Enter the amount.");
 			return false;
 		case 180:
 			if (offer != null) {
@@ -370,17 +368,13 @@ public class GrandExchangeInterface extends ComponentPlugin {
 				player.getPacketDispatch().sendMessage("Please select an offer first.");
 				return true;
 			}
-			player.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					if (player.getInterfaceManager().getChatbox().getId() == 389) {
-						player.getPlayerGrandExchange().openSearch();
-					}
-					setOfferValue(player, offer, (int) value);
-					return true;
+			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				if (player.getInterfaceManager().getChatbox().getId() == 389) {
+					player.getPlayerGrandExchange().openSearch();
 				}
+				setOfferValue(player, offer, (int) value);
+				return Unit.INSTANCE;
 			});
-			player.getDialogueInterpreter().sendInput(false, "Enter the amount.");
 			return false;
 		case 195:
 			player.getInterfaceManager().close();

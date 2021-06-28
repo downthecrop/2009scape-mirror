@@ -11,6 +11,8 @@ import core.game.node.item.Item;
 import core.net.packet.in.ExaminePacket;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import kotlin.Unit;
+import kotlin.jvm.functions.Function1;
 
 /**
  * Represents the plugin used to handle the shopping interface.
@@ -113,20 +115,17 @@ public final class ShoppingPlugin extends ComponentPlugin {
 	 * @return the script.
 	 * @param slot the slot.
 	 */
-	private RunScript getRunScript(final ShopViewer viewer, final int slot, final int componentId) {
-		return new RunScript() {
-			@Override
-			public boolean handle() {
-				switch (componentId){
+	private Function1 getRunScript(final ShopViewer viewer, final int slot, final int componentId) {
+		return (value) -> {
+			switch (componentId){
 				case 620:
-					viewer.getShop().buy(viewer.getPlayer(), slot, (int) getValue(), viewer.getTabIndex());
+					viewer.getShop().buy(viewer.getPlayer(), slot, (int) value, viewer.getTabIndex());
 					break;
 				case 621:
-					viewer.getShop().sell(viewer.getPlayer(), slot, (int) getValue(), viewer.getTabIndex());
+					viewer.getShop().sell(viewer.getPlayer(), slot, (int) value, viewer.getTabIndex());
 					break;
-				}
-				return true;
 			}
+			return Unit.INSTANCE;
 		};
 	}
 
