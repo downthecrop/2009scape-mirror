@@ -2,7 +2,7 @@ package core.game.content.activity.mta;
 
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.activity.mta.impl.TelekineticZone;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -41,13 +41,13 @@ public class MageTrainingArenaPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ItemDefinition.forId(6885).getHandlers().put("option:destroy", this);
 		ItemDefinition.forId(6885).getHandlers().put("option:talk-to", this);
-		ObjectDefinition.forId(10721).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(10721).getHandlers().put("option:enter", this);
 		NPCDefinition.forId(3103).getHandlers().put("option:trade-with", this);
 		for (MTAType type : MTAType.values()) {
 			if (type.getZone() != null) {
 				ZoneBuilder.configure(type.getZone());
 			}
-			ObjectDefinition.forId(type.getObjectId()).getHandlers().put("option:enter", this);
+			SceneryDefinition.forId(type.getObjectId()).getHandlers().put("option:enter", this);
 		}
 		ItemDefinition.forId(TelekineticZone.STATUE).getHandlers().put("option:observe", this);
 		ItemDefinition.forId(TelekineticZone.STATUE).getHandlers().put("option:reset", this);

@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.component.Component;
 import core.game.content.activity.ActivityManager;
@@ -38,13 +38,13 @@ public final class LumbridgeNodePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(36978).getHandlers().put("option:play", this);
-		ObjectDefinition.forId(37335).getHandlers().put("option:raise", this);
-		ObjectDefinition.forId(37095).getHandlers().put("option:shoot-at", this);
-		ObjectDefinition.forId(36976).getHandlers().put("option:ring", this);
-		ObjectDefinition.forId(22114).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(29355).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(37655).getHandlers().put("option:view", this);
+		SceneryDefinition.forId(36978).getHandlers().put("option:play", this);
+		SceneryDefinition.forId(37335).getHandlers().put("option:raise", this);
+		SceneryDefinition.forId(37095).getHandlers().put("option:shoot-at", this);
+		SceneryDefinition.forId(36976).getHandlers().put("option:ring", this);
+		SceneryDefinition.forId(22114).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(29355).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(37655).getHandlers().put("option:view", this);
 		return this;
 	}
 
@@ -57,7 +57,7 @@ public final class LumbridgeNodePlugin extends OptionHandler {
                     ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, new Location(3210, 3216, 0));
                     break;
                 }
-                ClimbActionHandler.climbLadder(player, node.asObject(), "climb-up");
+                ClimbActionHandler.climbLadder(player, node.asScenery(), "climb-up");
                 return true;
             case 37095:
                 if (!player.getEquipment().contains(9706, 1) || !player.getEquipment().contains(9705, 1)) {

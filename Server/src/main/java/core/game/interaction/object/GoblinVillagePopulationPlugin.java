@@ -2,7 +2,7 @@ package core.game.interaction.object;
 
 import java.util.List;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -16,7 +16,7 @@ public class GoblinVillagePopulationPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(31301).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(31301).getHandlers().put("option:read", this);
 		return this;
 	}
 

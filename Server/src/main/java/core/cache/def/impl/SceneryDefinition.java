@@ -17,12 +17,12 @@ import java.util.Map;
  * Represents an object's definition.
  * @author Emperor
  */
-public class ObjectDefinition extends Definition<Scenery> {
+public class SceneryDefinition extends Definition<Scenery> {
 
 	/**
 	 * The item definitions mapping.
 	 */
-	private static final Map<Integer, ObjectDefinition> DEFINITIONS = new HashMap<Integer, ObjectDefinition>();
+	private static final Map<Integer, SceneryDefinition> DEFINITIONS = new HashMap<Integer, SceneryDefinition>();
 
 	/**
 	 * The default option handlers.
@@ -447,7 +447,7 @@ public class ObjectDefinition extends Definition<Scenery> {
 	/**
 	 * Construct a new {@code ObjectDefinition} {@code Object}.
 	 */
-	public ObjectDefinition() {
+	public SceneryDefinition() {
 		anInt3835 = -1;
 		anInt3860 = -1;
 		configFileId = -1;
@@ -572,16 +572,16 @@ public class ObjectDefinition extends Definition<Scenery> {
 		for (int objectId = 0; objectId < Cache.getObjectDefinitionsSize(); objectId++) {
 			byte[] data = Cache.getIndexes()[16].getFileData(getContainerId(objectId), objectId & 0xff);
 			if (data == null) {
-				ObjectDefinition.getDefinitions().put(objectId, new ObjectDefinition());
+				SceneryDefinition.getDefinitions().put(objectId, new SceneryDefinition());
 				//SystemLogger.logErr("Could not load object definitions for id " + objectId + " - no data!");
 				continue;
 			}
-			ObjectDefinition def = ObjectDefinition.parseDefinition(objectId, ByteBuffer.wrap(data));
+			SceneryDefinition def = SceneryDefinition.parseDefinition(objectId, ByteBuffer.wrap(data));
 			if (def == null) {
 			//	SystemLogger.logErr("Could not load object definitions for id " + objectId + " - no definitions found!");
 				return;
 			}
-			ObjectDefinition.getDefinitions().put(objectId, def);
+			SceneryDefinition.getDefinitions().put(objectId, def);
 			data = null;
 		}
 	}
@@ -591,12 +591,12 @@ public class ObjectDefinition extends Definition<Scenery> {
 	 * @param objectId The object's id.
 	 * @return The object definition.
 	 */
-	public static ObjectDefinition forId(int objectId) {
-		ObjectDefinition def = DEFINITIONS.get(objectId);
+	public static SceneryDefinition forId(int objectId) {
+		SceneryDefinition def = DEFINITIONS.get(objectId);
 		if (def != null) {
 			return def;
 		}
-		DEFINITIONS.put(objectId, def = new ObjectDefinition());
+		DEFINITIONS.put(objectId, def = new SceneryDefinition());
 		def.id = objectId;
 		return def;
 	}
@@ -609,8 +609,8 @@ public class ObjectDefinition extends Definition<Scenery> {
 	 * @param buffer The buffer.
 	 * @return The object definition.
 	 */
-	public static ObjectDefinition parseDefinition(int objectId, ByteBuffer buffer) {
-		ObjectDefinition def = new ObjectDefinition();
+	public static SceneryDefinition parseDefinition(int objectId, ByteBuffer buffer) {
+		SceneryDefinition def = new SceneryDefinition();
 		def.id = objectId;
 //		SystemLogger.logErr("----------------------------------------------------\n\n\n");
 		while (true) {
@@ -852,7 +852,7 @@ public class ObjectDefinition extends Definition<Scenery> {
 		}
 		for (int i = 0; i < childrenIds.length; i++) {
 			if (childrenIds[i] != -1) {
-				ObjectDefinition def = forId(childrenIds[i]);
+				SceneryDefinition def = forId(childrenIds[i]);
 				if (def.hasOptions(false)) {
 					return true;
 				}
@@ -866,7 +866,7 @@ public class ObjectDefinition extends Definition<Scenery> {
 	 * @param player The player to get it for.
 	 * @return The object definition.
 	 */
-	public ObjectDefinition getChildObject(Player player) {
+	public SceneryDefinition getChildObject(Player player) {
 		if (childrenIds == null || childrenIds.length < 1) {
 			return this;
 		}
@@ -1586,7 +1586,7 @@ public class ObjectDefinition extends Definition<Scenery> {
 	 * Get the definitions.
 	 * @return the definitions
 	 */
-	public static Map<Integer, ObjectDefinition> getDefinitions() {
+	public static Map<Integer, SceneryDefinition> getDefinitions() {
 		return DEFINITIONS;
 	}
 
@@ -1598,7 +1598,7 @@ public class ObjectDefinition extends Definition<Scenery> {
 	 * option handler.
 	 */
 	public static OptionHandler getOptionHandler(int nodeId, String name) {
-		ObjectDefinition def = forId(nodeId);
+		SceneryDefinition def = forId(nodeId);
 		OptionHandler handler = def.getConfiguration("option:" + name);
 		if (handler != null) {
 			return handler;

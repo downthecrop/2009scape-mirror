@@ -1,6 +1,6 @@
 package core.game.content.activity.gwd;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.container.impl.EquipmentContainer;
 import core.game.content.global.action.DoorActionHandler;
@@ -331,7 +331,7 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 			@Override
 			public boolean pulse() {
 				object.getDefinition().getOptions()[1] = "open";
-				ObjectDefinition.getOptionHandler(object.getId(), "open").handle(player, object, "open");
+				SceneryDefinition.getOptionHandler(object.getId(), "open").handle(player, object, "open");
 				return true;
 			}
 		});

@@ -22,7 +22,7 @@ private val LIGHT_ANIM = Animation(7307)
 class AFUBeaconListeners : InteractionListener(){
 
     override fun defineListeners() {
-        on(OBJECT,"add-logs","light"){player,node ->
+        on(SCENERY,"add-logs","light"){ player, node ->
             val beacon = AFUBeacon.forLocation(node.location)
             val questComplete = player.questRepository.isComplete("All Fired Up")
             val questStage = player.questRepository.getStage("All Fired Up")

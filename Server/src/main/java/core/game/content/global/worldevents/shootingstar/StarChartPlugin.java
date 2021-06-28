@@ -1,6 +1,6 @@
 package core.game.content.global.worldevents.shootingstar;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -39,12 +39,12 @@ public class StarChartPlugin extends ComponentPlugin {
 
         @Override
         public Plugin<Object> newInstance(Object arg) throws Throwable {
-            ObjectDefinition.forId(25582).getHandlers().put("option:look-at",this);
-            ObjectDefinition.forId(25581).getHandlers().put("option:look-at",this);
-            ObjectDefinition.forId(25580).getHandlers().put("option:look-at",this);
-            ObjectDefinition.forId(25583).getHandlers().put("option:look-at",this);
-            ObjectDefinition.forId(25579).getHandlers().put("option:look-at",this);
-            ObjectDefinition.forId(25578).getHandlers().put("option:look-at",this);
+            SceneryDefinition.forId(25582).getHandlers().put("option:look-at",this);
+            SceneryDefinition.forId(25581).getHandlers().put("option:look-at",this);
+            SceneryDefinition.forId(25580).getHandlers().put("option:look-at",this);
+            SceneryDefinition.forId(25583).getHandlers().put("option:look-at",this);
+            SceneryDefinition.forId(25579).getHandlers().put("option:look-at",this);
+            SceneryDefinition.forId(25578).getHandlers().put("option:look-at",this);
             return this;
         }
     }

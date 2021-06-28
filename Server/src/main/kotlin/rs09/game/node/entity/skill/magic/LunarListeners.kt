@@ -123,7 +123,7 @@ class LunarListeners : SpellListener("lunar") {
 
         onCast(Lunar.CURE_PLANT,OBJECT){player,node ->
             requires(player,66, arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.EARTH_RUNE_557,8)))
-            curePlant(player,node!!.asObject())
+            curePlant(player,node!!.asScenery())
         }
 
         onCast(Lunar.NPC_CONTACT,NONE){player,node ->

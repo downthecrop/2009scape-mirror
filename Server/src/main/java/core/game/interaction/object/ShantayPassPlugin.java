@@ -1,7 +1,7 @@
 package core.game.interaction.object;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -33,16 +33,16 @@ public class ShantayPassPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (int i = 35542; i < 35545; i++) {
-			ObjectDefinition.forId(i).getHandlers().put("option:look-at", this);
-			ObjectDefinition.forId(i).getHandlers().put("option:go-through", this);
-			ObjectDefinition.forId(i).getHandlers().put("option:quick-pass", this);
+			SceneryDefinition.forId(i).getHandlers().put("option:look-at", this);
+			SceneryDefinition.forId(i).getHandlers().put("option:go-through", this);
+			SceneryDefinition.forId(i).getHandlers().put("option:quick-pass", this);
 		}
-		ObjectDefinition.forId(35400).getHandlers().put("option:look-at", this);
-		ObjectDefinition.forId(35400).getHandlers().put("option:go-through", this);
-		ObjectDefinition.forId(35400).getHandlers().put("option:quick-pass", this);
+		SceneryDefinition.forId(35400).getHandlers().put("option:look-at", this);
+		SceneryDefinition.forId(35400).getHandlers().put("option:go-through", this);
+		SceneryDefinition.forId(35400).getHandlers().put("option:quick-pass", this);
 		NPCDefinition.forId(838).getHandlers().put("option:bribe", this);
-		ObjectDefinition.forId(35401).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2693).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(35401).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2693).getHandlers().put("option:open", this);
 		new ShantayComponentPlugin().newInstance(arg);
 		return this;
 	}

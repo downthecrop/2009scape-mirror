@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -44,10 +44,10 @@ public final class KalphiteEntranceHandler extends OptionHandler {
 		};
 		UseWithHandler.addHandler(3827, UseWithHandler.OBJECT_TYPE, handler);
 		UseWithHandler.addHandler(23609, UseWithHandler.OBJECT_TYPE, handler);
-		ObjectDefinition.forId(3828).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(3829).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(23610).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(3832).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(3828).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(3829).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(23610).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(3832).getHandlers().put("option:climb-up", this);
 		return this;
 	}
 

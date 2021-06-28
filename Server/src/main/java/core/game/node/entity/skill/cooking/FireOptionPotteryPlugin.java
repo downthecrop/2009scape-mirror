@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.cooking;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -17,10 +17,10 @@ public final class FireOptionPotteryPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2643).getHandlers().put("option:fire", this);
-		ObjectDefinition.forId(4308).getHandlers().put("option:fire", this);
-		ObjectDefinition.forId(11601).getHandlers().put("option:fire", this);
-		ObjectDefinition.forId(34802).getHandlers().put("option:fire", this);
+		SceneryDefinition.forId(2643).getHandlers().put("option:fire", this);
+		SceneryDefinition.forId(4308).getHandlers().put("option:fire", this);
+		SceneryDefinition.forId(11601).getHandlers().put("option:fire", this);
+		SceneryDefinition.forId(34802).getHandlers().put("option:fire", this);
 		return this;
 	}
 

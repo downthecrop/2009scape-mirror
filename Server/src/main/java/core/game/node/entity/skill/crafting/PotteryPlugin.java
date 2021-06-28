@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.crafting;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import rs09.game.content.dialogue.SkillDialogueHandler;
 import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
@@ -95,7 +95,7 @@ public final class PotteryPlugin extends UseWithHandler {
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
 			for (int id : OVENS) {
-				ObjectDefinition.forId(id).getHandlers().put("option:fire", this);
+				SceneryDefinition.forId(id).getHandlers().put("option:fire", this);
 			}
 			new FireUseHandler().newInstance(arg);
 			return this;

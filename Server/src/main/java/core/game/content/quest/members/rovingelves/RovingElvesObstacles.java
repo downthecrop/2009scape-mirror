@@ -1,6 +1,6 @@
 package core.game.content.quest.members.rovingelves;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -21,14 +21,14 @@ public final class RovingElvesObstacles extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(3999).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(3939).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(3998).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(3938).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(3937).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(3924).getHandlers().put("option:jump", this);
-		ObjectDefinition.forId(3925).getHandlers().put("option:jump", this);
-		ObjectDefinition.forId(8742).getHandlers().put("option:pass", this);
+		SceneryDefinition.forId(3999).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(3939).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(3998).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(3938).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(3937).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(3924).getHandlers().put("option:jump", this);
+		SceneryDefinition.forId(3925).getHandlers().put("option:jump", this);
+		SceneryDefinition.forId(8742).getHandlers().put("option:pass", this);
 		return this;
 	}
 

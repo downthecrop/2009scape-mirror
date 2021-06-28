@@ -37,7 +37,7 @@ object UseWithBinHandler {
         event ?: return false
         val player = event.player
         val used = event.used.id
-        val cBin = CompostBins.forObject(event.usedWith.asObject()) ?: return false
+        val cBin = CompostBins.forObject(event.usedWith.asScenery()) ?: return false
         val bin = cBin.getBinForPlayer(player)
 
         when(used){

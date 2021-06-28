@@ -27,7 +27,7 @@ public class GarlicPipeInteraction extends PluginInteraction {
     public boolean handle(Player player, NodeUsageEvent event) {
         System.out.println("Trying to handle it");
         if(event.getUsed() instanceof Item && event.getUsedWith() instanceof Scenery){
-            Scenery usedWith = event.getUsedWith().asObject();
+            Scenery usedWith = event.getUsedWith().asScenery();
             Item used = event.getUsedItem();
 
             if(used.getId() == Items.GARLIC_1550 && usedWith.getId() == 41 && usedWith.getLocation().equals(Location.create(2638, 3446, 0)) && player.getQuestRepository().getStage("Fishing Contest") > 0){
@@ -49,7 +49,7 @@ public class GarlicPipeInteraction extends PluginInteraction {
     @Override
     public boolean handle(Player player, Node node) {
         if(node instanceof Scenery){
-            Scenery object = node.asObject();
+            Scenery object = node.asScenery();
             if(object.getId() == 41 && object.getLocation().equals(Location.create(2638, 3446, 0)) && player.getAttribute("fishing_contest:garlic",false)){
                 player.getPulseManager().run(new MovementPulse(player, object.getLocation().transform(0, -1, 0)) {
                     @Override

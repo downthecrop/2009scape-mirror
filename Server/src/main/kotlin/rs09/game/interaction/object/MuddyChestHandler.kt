@@ -18,12 +18,12 @@ class MuddyChestHandler : InteractionListener() {
 
     override fun defineListeners() {
 
-        on(CHEST,OBJECT,"open"){player,node ->
+        on(CHEST,SCENERY,"open"){ player, node ->
             val key = Item(Items.MUDDY_KEY_991)
             if(player.inventory.containsItem(key)){
                 player.inventory.remove(key)
                 player.animator.animate(Animation(536))
-                SceneryBuilder.replace(node.asObject(), Scenery(171, node.location, node.asObject().rotation),3)
+                SceneryBuilder.replace(node.asScenery(), Scenery(171, node.location, node.asScenery().rotation),3)
                 for(item in chestLoot){
                     if(!player.inventory.add(item)) GroundItemManager.create(item,player)
                 }

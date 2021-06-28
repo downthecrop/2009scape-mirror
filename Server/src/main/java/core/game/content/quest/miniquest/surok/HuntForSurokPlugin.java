@@ -1,6 +1,6 @@
 package core.game.content.quest.miniquest.surok;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -21,7 +21,7 @@ public class HuntForSurokPlugin extends OptionHandler {
 		PluginManager.definePlugin(new MishkalunDornDialogue());
 		PluginManager.definePlugin(new SilasDahcsnuDialogue());
 		PluginManager.definePlugin(new SurokMagisDialogue());
-		ObjectDefinition.forId(28780).getHandlers().put("option:use", this);
+		SceneryDefinition.forId(28780).getHandlers().put("option:use", this);
 		return this;
 	}
 

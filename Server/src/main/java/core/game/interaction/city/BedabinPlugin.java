@@ -1,7 +1,7 @@
 package core.game.interaction.city;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -23,8 +23,8 @@ public final class BedabinPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2700).getHandlers().put("option:walk-through", this);
-		ObjectDefinition.forId(2672).getHandlers().put("option:use", this);
+		SceneryDefinition.forId(2700).getHandlers().put("option:walk-through", this);
+		SceneryDefinition.forId(2672).getHandlers().put("option:use", this);
 		NPCDefinition.forId(834).getHandlers().put("option:talk-to", this);
 		return this;
 	}

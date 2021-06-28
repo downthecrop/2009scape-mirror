@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.content.dialogue.FacialExpression;
 import core.game.interaction.OptionHandler;
@@ -32,18 +32,18 @@ public final class HaystackPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(298).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(299).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(300).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(304).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(36892).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(36893).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(36894).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(36895).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(36896).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(36897).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(36898).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(36899).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(298).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(299).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(300).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(304).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(36892).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(36893).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(36894).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(36895).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(36896).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(36897).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(36898).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(36899).getHandlers().put("option:search", this);
 		return this;
 	}
 

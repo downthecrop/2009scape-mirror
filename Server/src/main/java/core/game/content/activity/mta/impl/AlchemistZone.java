@@ -143,7 +143,7 @@ public class AlchemistZone extends MTAZone {
 				player.getDialogueInterpreter().sendDialogue("This item isn't yours to wield, it belongs to the arena!");
 				return true;
 			} else if (target.getName().equals("Cupboard")) {
-				search(player, target.asObject());
+				search(player, target.asScenery());
 				return true;
 			}
 		}
