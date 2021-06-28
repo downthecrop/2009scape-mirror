@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -9,6 +10,7 @@ import core.game.node.entity.skill.smithing.smelting.SmeltingPulse;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
 import core.plugin.Plugin;
+import kotlin.Unit;
 
 /**
  * @author 'Vexia
@@ -29,16 +31,11 @@ public class SmeltingInterface extends ComponentPlugin {
 			return true;
 		}
 		if (barType.getAmount() == -1) {
-			player.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					int ammount = (int) value;
-					player.getPulseManager().run(new SmeltingPulse(player, null, barType.getBar(), ammount));
-					return false;
-				}
-			});
 			player.getInterfaceManager().closeChatbox();
-			player.getDialogueInterpreter().sendInput(false, "Enter the amount:");
+			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				ContentAPI.submitIndividualPulse(player, new SmeltingPulse(player, null, barType.getBar(), (int) value));
+				return Unit.INSTANCE;
+			});
 		} else {
 			player.getPulseManager().run(new SmeltingPulse(player, null, barType.getBar(), barType.getAmount()));
 		}

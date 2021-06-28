@@ -446,16 +446,11 @@ public final class BankingPlugin extends OptionHandler {
                             p.getBank().addItem(slot, p.getBank().getLastAmountX());
                             break;
                         case 234:
-                            p.setAttribute("runscript", new RunScript() {
-                                @Override
-                                public boolean handle() {
-                                    int amount = (int) value;
-                                    p.getBank().addItem(slot, amount);
-                                    p.getBank().updateLastAmountX(amount);
-                                    return false;
-                                }
+                            ContentAPI.sendInputDialogue(p, true, "Enter the amount:", (value) -> {
+                                p.getBank().addItem(slot, (int) value);
+                                p.getBank().updateLastAmountX((int) value);
+                                return Unit.INSTANCE;
                             });
-                            p.getDialogueInterpreter().sendInput(false, "Enter the amount.");
                             break;
                         case 168:
                             p.getBank().addItem(slot, p.getInventory().getAmount(item));
