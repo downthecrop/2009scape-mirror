@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -9,6 +10,7 @@ import core.game.node.entity.player.link.RunScript;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import kotlin.Unit;
 
 /**
  * @author Vexia
@@ -73,15 +75,10 @@ public class TanningInterface extends ComponentPlugin {
 		case 124:
 			amount = 10;
 		case 199:
-			player.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					int amt = (int) getValue();
-					TanningProduct.tan(player, amt, deff);
-					return true;
-				}
+			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				TanningProduct.tan(player, (int) value, deff);
+				return Unit.INSTANCE;
 			});
-			player.getDialogueInterpreter().sendInput(false, "Enter amount:");
 			break;
 		case 234:
 			amount = player.getInventory().getAmount(new Item(def.getItem(), 1));
