@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -9,6 +10,7 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import kotlin.Unit;
 
 /**
  * Represents the component handler for the interface 403.
@@ -64,14 +66,10 @@ public class SawmillPlankInterface extends ComponentPlugin {
 		}
 		if (amount == 69) {
 			final Plank plankk = plank;
-			player.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					create(player, plankk, (int) super.getValue());
-					return true;
-				}
+			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				create(player, plankk, (int) value);
+				return Unit.INSTANCE;
 			});
-			player.getDialogueInterpreter().sendInput(false, "Enter the amount:");
 			return true;
 		}
 		if (plank != null) {

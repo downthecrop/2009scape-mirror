@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.ContentAPI;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -13,6 +14,7 @@ import core.game.node.item.Item;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
 import core.tools.StringUtils;
+import kotlin.Unit;
 
 /**
  * Represents the interface plugin used for jewellery crafting.
@@ -178,14 +180,10 @@ public final class JewelleryInterface extends ComponentPlugin {
 			break;
 		case 199:
 			final JewelleryItem d = data;
-			player.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					JewelleryCrafting.make(player, d, (int) getValue());
-					return true;
-				}
+			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				JewelleryCrafting.make(player, d, (int) value);
+				return Unit.INSTANCE;
 			});
-			player.getDialogueInterpreter().sendInput(false, "Enter amount:");
 			return true;
 		}
 		if(!player.getSlayer().getLearned()[1] && data.equals(JewelleryItem.SLAYER_RING)){
