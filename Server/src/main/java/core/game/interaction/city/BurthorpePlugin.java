@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -19,7 +19,7 @@ public final class BurthorpePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(4627).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(4627).getHandlers().put("option:climb-up", this);
 		return this;
 	}
 

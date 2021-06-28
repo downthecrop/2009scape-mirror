@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.activity.ActivityManager;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.OptionHandler;
@@ -27,12 +27,12 @@ public final class TzhaarCityPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(31284).getHandlers().put("option:enter", this);// karamja
+		SceneryDefinition.forId(31284).getHandlers().put("option:enter", this);// karamja
 		// cave.
-		ObjectDefinition.forId(9359).getHandlers().put("option:enter", this);// tzhaar
+		SceneryDefinition.forId(9359).getHandlers().put("option:enter", this);// tzhaar
 		// exit
-		ObjectDefinition.forId(9356).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(9369).getHandlers().put("option:pass", this);
+		SceneryDefinition.forId(9356).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(9369).getHandlers().put("option:pass", this);
 		new TzhaarDialogue().init();
 		return this;
 	}

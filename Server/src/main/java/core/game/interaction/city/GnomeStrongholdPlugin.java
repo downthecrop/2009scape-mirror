@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.interaction.OptionHandler;
@@ -26,11 +26,11 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(190).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(1967).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(1968).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(9316).getHandlers().put("option:climb",this);
-		ObjectDefinition.forId(9317).getHandlers().put("option:climb",this);
+		SceneryDefinition.forId(190).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(1967).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(1968).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(9316).getHandlers().put("option:climb",this);
+		SceneryDefinition.forId(9317).getHandlers().put("option:climb",this);
 		return this;
 	}
 

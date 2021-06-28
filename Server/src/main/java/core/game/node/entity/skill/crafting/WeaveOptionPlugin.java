@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.crafting;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
@@ -27,7 +27,7 @@ public final class WeaveOptionPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.setOptionHandler("weave", this);
+		SceneryDefinition.setOptionHandler("weave", this);
 		return this;
 	}
 

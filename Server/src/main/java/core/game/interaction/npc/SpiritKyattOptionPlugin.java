@@ -1,7 +1,7 @@
 package core.game.interaction.npc;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -23,11 +23,11 @@ public final class SpiritKyattOptionPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		NPCDefinition.forId(7365).getHandlers().put("option:interact", this);
-		ObjectDefinition.forId(28741).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(28743).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(28743).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(14910).getHandlers().put("option:take", this);
-		ObjectDefinition.forId(14912).getHandlers().put("option:take", this);
+		SceneryDefinition.forId(28741).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(28743).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(28743).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(14910).getHandlers().put("option:take", this);
+		SceneryDefinition.forId(14912).getHandlers().put("option:take", this);
 		return this;
 	}
 

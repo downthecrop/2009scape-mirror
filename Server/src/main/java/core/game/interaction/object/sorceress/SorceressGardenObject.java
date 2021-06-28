@@ -1,6 +1,6 @@
 package core.game.interaction.object.sorceress;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
@@ -30,10 +30,10 @@ public class SorceressGardenObject extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(21709).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(21753).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(21731).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(21687).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(21709).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(21753).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(21731).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(21687).getHandlers().put("option:open", this);
 		return this;
 	}
 

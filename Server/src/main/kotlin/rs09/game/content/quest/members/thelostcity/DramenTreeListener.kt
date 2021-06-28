@@ -13,7 +13,7 @@ class DramenTreeListener : InteractionListener() {
 
     override fun defineListeners() {
 
-        on(DRAMEN_TREE,OBJECT,"chop down"){player,node ->
+        on(DRAMEN_TREE,SCENERY,"chop down"){ player, node ->
             val quest = player.questRepository.getQuest("Lost City")
             if (SkillingTool.getHatchet(player) == null) {
                 player.getPacketDispatch().sendMessage("You do not have an axe which you have the level to use.")

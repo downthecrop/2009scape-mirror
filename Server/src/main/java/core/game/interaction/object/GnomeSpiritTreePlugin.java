@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -17,12 +17,12 @@ public final class GnomeSpiritTreePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(1317).getHandlers().put("option:talk-to", this);
-		ObjectDefinition.forId(1317).getHandlers().put("option:teleport", this);
-		ObjectDefinition.forId(1293).getHandlers().put("option:talk-to", this);
-		ObjectDefinition.forId(1293).getHandlers().put("option:teleport", this);
-		ObjectDefinition.forId(1294).getHandlers().put("option:talk-to", this);
-		ObjectDefinition.forId(1294).getHandlers().put("option:teleport", this);
+		SceneryDefinition.forId(1317).getHandlers().put("option:talk-to", this);
+		SceneryDefinition.forId(1317).getHandlers().put("option:teleport", this);
+		SceneryDefinition.forId(1293).getHandlers().put("option:talk-to", this);
+		SceneryDefinition.forId(1293).getHandlers().put("option:teleport", this);
+		SceneryDefinition.forId(1294).getHandlers().put("option:talk-to", this);
+		SceneryDefinition.forId(1294).getHandlers().put("option:teleport", this);
 		return this;
 	}
 

@@ -1,6 +1,6 @@
 package core.game.content.dialogue;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -17,11 +17,11 @@ public final class DairyChurnOptionPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(10093).getHandlers().put("option:churn", this);
-		ObjectDefinition.forId(10094).getHandlers().put("option:churn", this);
-		ObjectDefinition.forId(25720).getHandlers().put("option:churn", this);
-		ObjectDefinition.forId(34800).getHandlers().put("option:churn", this);
-		ObjectDefinition.forId(35931).getHandlers().put("option:churn", this);
+		SceneryDefinition.forId(10093).getHandlers().put("option:churn", this);
+		SceneryDefinition.forId(10094).getHandlers().put("option:churn", this);
+		SceneryDefinition.forId(25720).getHandlers().put("option:churn", this);
+		SceneryDefinition.forId(34800).getHandlers().put("option:churn", this);
+		SceneryDefinition.forId(35931).getHandlers().put("option:churn", this);
 		return this;
 	}
 

@@ -2,7 +2,7 @@ package rs09.game.system.command.oldsys
 
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.node.entity.player.Player
 import core.game.system.command.CommandSet
 import core.plugin.Initializable
@@ -39,7 +39,7 @@ class SimpleDumpingCommands : CommandPlugin() {
             "item" -> for (i in ItemDefinition.getDefinitions().values){
                             writer.writeLn("${i.name}(${i.id}) - ${i.examine}")
                        }
-            "object" -> for(i in ObjectDefinition.getDefinitions().values){
+            "object" -> for(i in SceneryDefinition.getDefinitions().values){
                             writer.writeLn("${i.name}(${i.id}) - ${i.examine}")
                        }
             "npc" -> for(i in NPCDefinition.getDefinitions().values){
@@ -70,7 +70,7 @@ class SimpleDumpingCommands : CommandPlugin() {
                 writer.writeLn("<td>${i.examine}</td>")
                 writer.writeLn("</tr>")
             }
-            "object" -> for(i in ObjectDefinition.getDefinitions().values){
+            "object" -> for(i in SceneryDefinition.getDefinitions().values){
                 writer.writeLn("<tr>")
                 writer.writeLn("<td>${i.name}</td>")
                 writer.writeLn("<td>${i.id}</td>")

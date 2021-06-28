@@ -1,6 +1,6 @@
 package core.game.interaction.item.withobject;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -25,8 +25,8 @@ public class IncubatorPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		PluginManager.definePlugin(new IncubatorEggHandler());
-		ObjectDefinition.forId(28359).getHandlers().put("option:take-egg", this);
-		ObjectDefinition.forId(28359).getHandlers().put("option:inspect", this);
+		SceneryDefinition.forId(28359).getHandlers().put("option:take-egg", this);
+		SceneryDefinition.forId(28359).getHandlers().put("option:inspect", this);
 		return this;
 	}
 

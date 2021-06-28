@@ -3,7 +3,7 @@ package core.game.node.entity.skill.hunter;
 import core.cache.def.Definition;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.hunter.NetTrapSetting.NetTrap;
 import core.game.node.entity.skill.hunter.bnet.BNetNode;
@@ -38,36 +38,36 @@ public final class HunterPlugin extends OptionHandler {
 		Definition<?> definition = null;
 		for (Traps trap : Traps.values()) {
 			for (int nodeId : trap.getSettings().getNodeIds()) {
-				definition = trap.getSettings().isObjectTrap() ? ObjectDefinition.forId(nodeId) : ItemDefinition.forId(nodeId);
+				definition = trap.getSettings().isObjectTrap() ? SceneryDefinition.forId(nodeId) : ItemDefinition.forId(nodeId);
 				definition.getHandlers().put("option:" + trap.getSettings().getOption(), this);
 			}
 			if (trap.getSettings().getFailId() != -1) {
-				definition = ObjectDefinition.forId(trap.getSettings().getFailId());
+				definition = SceneryDefinition.forId(trap.getSettings().getFailId());
 				definition.getHandlers().put("option:dismantle", this);
 				definition.getHandlers().put("option:deactivate", this);
 			}
 			for (int objectId : trap.getSettings().getObjectIds()) {
-				definition = ObjectDefinition.forId(objectId);
+				definition = SceneryDefinition.forId(objectId);
 				definition.getHandlers().put("option:deactivate", this);
 				definition.getHandlers().put("option:dismantle", this);
 				definition.getHandlers().put("option:investigate", this);
 			}
 			for (TrapNode node : trap.getNodes()) {
 				for (int objectId : node.getObjectIds()) {
-					definition = ObjectDefinition.forId(objectId);
+					definition = SceneryDefinition.forId(objectId);
 					definition.getHandlers().put("option:check", this);
 					definition.getHandlers().put("option:retrieve", this);
 				}
 			}
 		}
 		for (NetTrap trap : NetTrap.values()) {
-			ObjectDefinition.forId(trap.getBent()).getHandlers().put("option:dismantle", this);
-			ObjectDefinition.forId(trap.getFailed()).getHandlers().put("option:dismantle", this);
-			ObjectDefinition.forId(trap.getNet()).getHandlers().put("option:dismantle", this);
-			ObjectDefinition.forId(trap.getCaught()).getHandlers().put("option:check", this);
-			ObjectDefinition.forId(trap.getBent()).getHandlers().put("option:investigate", this);
-			ObjectDefinition.forId(trap.getFailed()).getHandlers().put("option:investigate", this);
-			ObjectDefinition.forId(trap.getNet()).getHandlers().put("option:investigate", this);
+			SceneryDefinition.forId(trap.getBent()).getHandlers().put("option:dismantle", this);
+			SceneryDefinition.forId(trap.getFailed()).getHandlers().put("option:dismantle", this);
+			SceneryDefinition.forId(trap.getNet()).getHandlers().put("option:dismantle", this);
+			SceneryDefinition.forId(trap.getCaught()).getHandlers().put("option:check", this);
+			SceneryDefinition.forId(trap.getBent()).getHandlers().put("option:investigate", this);
+			SceneryDefinition.forId(trap.getFailed()).getHandlers().put("option:investigate", this);
+			SceneryDefinition.forId(trap.getNet()).getHandlers().put("option:investigate", this);
 		}
 		PluginManager.definePlugin(new HunterNPC());
 		PluginManager.definePlugin(new HunterNetPlugin());

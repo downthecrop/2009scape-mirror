@@ -1,6 +1,6 @@
 package core.game.content.activity.guild;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.node.entity.skill.Skills;
@@ -24,9 +24,9 @@ public final class MiningGuildPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2113).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(30941).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(2112).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2113).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(30941).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(2112).getHandlers().put("option:open", this);
 		return this;
 	}
 

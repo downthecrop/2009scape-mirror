@@ -2,7 +2,7 @@ package core.game.interaction.city;
 
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.DoorActionHandler;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
@@ -46,25 +46,25 @@ public final class FaladorNodePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2271).getHandlers().put("option:open", this);// sir
+		SceneryDefinition.forId(2271).getHandlers().put("option:open", this);// sir
 		// vyvans
 		// cupboard
 		// (closed)
-		ObjectDefinition.forId(2272).getHandlers().put("option:shut", this);// sir
+		SceneryDefinition.forId(2272).getHandlers().put("option:shut", this);// sir
 		// vyvans
 		// cupboard
 		// (open)
-		ObjectDefinition.forId(2272).getHandlers().put("option:search", this);// sir
+		SceneryDefinition.forId(2272).getHandlers().put("option:search", this);// sir
 		// vyvans
 		// cupboard
 		// (open)
 		// dwarven mine
-		ObjectDefinition.forId(30868).getHandlers().put("option:squeeze-through", this);
-		ObjectDefinition.forId(5020).getHandlers().put("option:ride", this);
+		SceneryDefinition.forId(30868).getHandlers().put("option:squeeze-through", this);
+		SceneryDefinition.forId(5020).getHandlers().put("option:ride", this);
 		ItemDefinition.forId(245).getHandlers().put("option:take", this);
 		// fally park.
 		NPCDefinition.forId(2290).getHandlers().put("option:talk-to", this);
-		ObjectDefinition.forId(11708).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(11708).getHandlers().put("option:close", this);
 		return this;
 	}
 

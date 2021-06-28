@@ -1,6 +1,6 @@
 package core.game.content.activity.guild;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.EnchantedJewellery;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.node.entity.skill.summoning.familiar.Familiar;
@@ -26,8 +26,8 @@ public final class HeroGuildPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2624).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2625).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2624).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2625).getHandlers().put("option:open", this);
 		PluginManager.definePlugin(new JewelleryRechargePlugin());
 		return this;
 	}

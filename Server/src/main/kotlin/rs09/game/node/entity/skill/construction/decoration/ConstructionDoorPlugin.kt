@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.construction.decoration
 
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.content.global.action.DoorActionHandler
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -21,18 +21,18 @@ class ConstructionDoorPlugin : OptionHandler() {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any> {
         for (style in HousingStyle.values()) {
-            ObjectDefinition.forId(style.doorId).handlers["option:open"] = this
-            ObjectDefinition.forId(style.secondDoorId).handlers["option:open"] = this
+            SceneryDefinition.forId(style.doorId).handlers["option:open"] = this
+            SceneryDefinition.forId(style.secondDoorId).handlers["option:open"] = this
         }
         for (deco in BuildHotspot.DUNGEON_DOOR_LEFT.decorations) {
-            ObjectDefinition.forId(deco.objectId).handlers["option:open"] = this
-            ObjectDefinition.forId(deco.objectId).handlers["option:pick-lock"] = this
-            ObjectDefinition.forId(deco.objectId).handlers["option:force"] = this
+            SceneryDefinition.forId(deco.objectId).handlers["option:open"] = this
+            SceneryDefinition.forId(deco.objectId).handlers["option:pick-lock"] = this
+            SceneryDefinition.forId(deco.objectId).handlers["option:force"] = this
         }
         for (deco in BuildHotspot.DUNGEON_DOOR_RIGHT.decorations) {
-            ObjectDefinition.forId(deco.objectId).handlers["option:open"] = this
-            ObjectDefinition.forId(deco.objectId).handlers["option:pick-lock"] = this
-            ObjectDefinition.forId(deco.objectId).handlers["option:force"] = this
+            SceneryDefinition.forId(deco.objectId).handlers["option:open"] = this
+            SceneryDefinition.forId(deco.objectId).handlers["option:pick-lock"] = this
+            SceneryDefinition.forId(deco.objectId).handlers["option:force"] = this
         }
         return this
     }

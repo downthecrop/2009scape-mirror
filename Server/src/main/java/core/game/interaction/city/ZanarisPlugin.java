@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
@@ -25,9 +25,9 @@ public final class ZanarisPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		PluginManager.definePlugin(new MagicDoorDialogue());
-		ObjectDefinition.forId(12094).getHandlers().put("option:use", this);
-		ObjectDefinition.forId(12045).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(12047).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(12094).getHandlers().put("option:use", this);
+		SceneryDefinition.forId(12045).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(12047).getHandlers().put("option:open", this);
 		return this;
 	}
 

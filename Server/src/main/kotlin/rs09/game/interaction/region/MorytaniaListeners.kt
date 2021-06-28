@@ -23,17 +23,17 @@ class MorytaniaListeners : InteractionListener() {
     private val JUMP_ANIM = Animation(1603)
 
     override fun defineListeners() {
-        on(GROTTO_ENTRANCE,OBJECT,"enter"){player,node ->
+        on(GROTTO_ENTRANCE,SCENERY,"enter"){ player, node ->
             player.teleport(inside)
             return@on true
         }
 
-        on(GROTTO_EXIT,OBJECT,"exit"){player,node ->
+        on(GROTTO_EXIT,SCENERY,"exit"){ player, node ->
             player.teleport(outside)
             return@on true
         }
 
-        on(GROTTO_BRIDGE,OBJECT,"jump"){player,node ->
+        on(GROTTO_BRIDGE,SCENERY,"jump"){ player, node ->
             if (player.location.y == 3328) {
                 ForceMovement.run(player, node.location, node.location.transform(0, 3, 0), RUNNING_ANIM, JUMP_ANIM, Direction.NORTH, 15).endAnimation = Animation.RESET
             } else if (player.location.y == 3332){

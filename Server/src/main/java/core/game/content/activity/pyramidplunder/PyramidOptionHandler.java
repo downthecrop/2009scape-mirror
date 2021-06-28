@@ -1,7 +1,7 @@
 package core.game.content.activity.pyramidplunder;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -43,16 +43,16 @@ public final class PyramidOptionHandler extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(16484).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(16485).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(16487).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(16488).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(16490).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(16491).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(16493).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(16494).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(16458).getHandlers().put("option:leave tomb", this);
-		ObjectDefinition.forId(16459).getHandlers().put("option:leave tomb", this);
+		SceneryDefinition.forId(16484).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(16485).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(16487).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(16488).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(16490).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(16491).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(16493).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(16494).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(16458).getHandlers().put("option:leave tomb", this);
+		SceneryDefinition.forId(16459).getHandlers().put("option:leave tomb", this);
 		NPCDefinition.forId(4476).getHandlers().put("option:start-minigame", this);
 		NPCDefinition.forId(4476).getHandlers().put("option:talk-to",this);
 		return null;

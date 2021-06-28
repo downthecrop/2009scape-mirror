@@ -2,7 +2,7 @@ package core.game.content.quest.free.dragonslayer;
 
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
@@ -40,63 +40,63 @@ public final class DragonSlayerPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(25115).getHandlers().put("option:open", this);// magic
+		SceneryDefinition.forId(25115).getHandlers().put("option:open", this);// magic
 		// door.
 		NPCDefinition.forId(747).getHandlers().put("option:trade", this);// oziach.
-		ObjectDefinition.forId(2595).getHandlers().put("option:open", this);// maze
+		SceneryDefinition.forId(2595).getHandlers().put("option:open", this);// maze
 		// main
 		// door.
 		// maze first floor.
-		ObjectDefinition.forId(32968).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2602).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2596).getHandlers().put("option:open", this);// red
+		SceneryDefinition.forId(32968).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2602).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2596).getHandlers().put("option:open", this);// red
 		// door.
-		ObjectDefinition.forId(1752).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(25038).getHandlers().put("option:climb-up", this);// trapdoor
+		SceneryDefinition.forId(1752).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(25038).getHandlers().put("option:climb-up", this);// trapdoor
 		// ladder
-		ObjectDefinition.forId(25214).getHandlers().put("option:open", this);// trapdoor
-		ObjectDefinition.forId(1746).getHandlers().put("option:climb-down", this);// ladder
-		ObjectDefinition.forId(2605).getHandlers().put("option:climb-down", this);// ladder
+		SceneryDefinition.forId(25214).getHandlers().put("option:open", this);// trapdoor
+		SceneryDefinition.forId(1746).getHandlers().put("option:climb-down", this);// ladder
+		SceneryDefinition.forId(2605).getHandlers().put("option:climb-down", this);// ladder
 
 		// maze second floor.
-		ObjectDefinition.forId(2597).getHandlers().put("option:open", this);// orange
+		SceneryDefinition.forId(2597).getHandlers().put("option:open", this);// orange
 		// door.
-		ObjectDefinition.forId(1747).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(25045).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(1747).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(25045).getHandlers().put("option:climb-down", this);
 		// maze third floor
-		ObjectDefinition.forId(2598).getHandlers().put("option:open", this);// yellow
+		SceneryDefinition.forId(2598).getHandlers().put("option:open", this);// yellow
 		// door.
 		// basement floor
-		ObjectDefinition.forId(2599).getHandlers().put("option:open", this);// blue
+		SceneryDefinition.forId(2599).getHandlers().put("option:open", this);// blue
 		// door.
-		ObjectDefinition.forId(2600).getHandlers().put("option:open", this);// purple
+		SceneryDefinition.forId(2600).getHandlers().put("option:open", this);// purple
 		// door.
-		ObjectDefinition.forId(2601).getHandlers().put("option:open", this);// green
+		SceneryDefinition.forId(2601).getHandlers().put("option:open", this);// green
 		// door.
-		ObjectDefinition.forId(2603).getHandlers().put("option:open", this);// closed
+		SceneryDefinition.forId(2603).getHandlers().put("option:open", this);// closed
 		// chest.
-		ObjectDefinition.forId(2604).getHandlers().put("option:search", this);// search
+		SceneryDefinition.forId(2604).getHandlers().put("option:search", this);// search
 		// chest.
-		ObjectDefinition.forId(2604).getHandlers().put("option:close", this);// search
+		SceneryDefinition.forId(2604).getHandlers().put("option:close", this);// search
 		// chest.
-		ObjectDefinition.forId(1755).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(1755).getHandlers().put("option:climb-up", this);
 		// map parts
 		ItemDefinition.forId(DragonSlayer.MAZE_PIECE.getId()).getHandlers().put("option:study", this);
 		ItemDefinition.forId(DragonSlayer.MAGIC_PIECE.getId()).getHandlers().put("option:study", this);
 		ItemDefinition.forId(DragonSlayer.WORMBRAIN_PIECE.getId()).getHandlers().put("option:study", this);
 		ItemDefinition.forId(DragonSlayer.CRANDOR_MAP.getId()).getHandlers().put("option:study", this);
 		// dwarv mine
-		ObjectDefinition.forId(2587).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2587).getHandlers().put("option:open", this);
 		NPCDefinition.forId(745).getHandlers().put("option:talk-to", this);
 		// lady lumby
-		ObjectDefinition.forId(25036).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(2589).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(25036).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(2589).getHandlers().put("option:repair", this);
 
 		// crandor
-		ObjectDefinition.forId(25154).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(2606).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(25213).getHandlers().put("option:climb", this);
-		ObjectDefinition.forId(25161).getHandlers().put("option:climb-over", this);
+		SceneryDefinition.forId(25154).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(2606).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(25213).getHandlers().put("option:climb", this);
+		SceneryDefinition.forId(25161).getHandlers().put("option:climb-over", this);
 		NPCDefinition.forId(742).getHandlers().put("option:attack", this);
 		NPCDefinition.forId(745).getHandlers().put("option:attack", this);
 		// reward items
@@ -106,9 +106,9 @@ public final class DragonSlayerPlugin extends OptionHandler {
 		ItemDefinition.forId(2669).getHandlers().put("option:wear", this);
 		ItemDefinition.forId(2661).getHandlers().put("option:wear", this);
 		// guild
-		ObjectDefinition.forId(24357).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(10558).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(10560).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(24357).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(10558).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(10560).getHandlers().put("option:climb-up", this);
 		return this;
 	}
 
