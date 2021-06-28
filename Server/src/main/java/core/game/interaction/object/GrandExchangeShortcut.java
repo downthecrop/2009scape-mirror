@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
@@ -40,8 +40,8 @@ public final class GrandExchangeShortcut extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(9311).getHandlers().put("option:climb-into", this);
-		ObjectDefinition.forId(9312).getHandlers().put("option:climb-into", this);
+		SceneryDefinition.forId(9311).getHandlers().put("option:climb-into", this);
+		SceneryDefinition.forId(9312).getHandlers().put("option:climb-into", this);
 		return null;
 	}
 

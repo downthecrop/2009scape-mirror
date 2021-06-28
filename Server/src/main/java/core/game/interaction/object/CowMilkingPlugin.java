@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -80,9 +80,9 @@ public final class CowMilkingPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(8689).getHandlers().put("option:milk", this);
-		ObjectDefinition.forId(12111).getHandlers().put("option:milk", this);
-		ObjectDefinition.setOptionHandler("steal-cowbell", this);
+		SceneryDefinition.forId(8689).getHandlers().put("option:milk", this);
+		SceneryDefinition.forId(12111).getHandlers().put("option:milk", this);
+		SceneryDefinition.setOptionHandler("steal-cowbell", this);
 		PluginManager.definePlugin(new BucketHandler());
 		return this;
 	}

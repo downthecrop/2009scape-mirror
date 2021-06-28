@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -19,8 +19,8 @@ public final class LavaMazePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(1767).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(1768).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(1767).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(1768).getHandlers().put("option:climb-up", this);
 		return this;
 	}
 

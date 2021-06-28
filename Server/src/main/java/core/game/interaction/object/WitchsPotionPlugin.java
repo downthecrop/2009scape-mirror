@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -18,8 +18,8 @@ public final class WitchsPotionPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2024).getHandlers().put("option:drink from", this);
-		ObjectDefinition.forId(2024).getHandlers().put("option:Drink From", this);
+		SceneryDefinition.forId(2024).getHandlers().put("option:drink from", this);
+		SceneryDefinition.forId(2024).getHandlers().put("option:Drink From", this);
 		return this;
 	}
 

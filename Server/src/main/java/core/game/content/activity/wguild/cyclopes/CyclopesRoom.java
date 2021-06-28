@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.container.impl.EquipmentContainer;
 import core.plugin.Initializable;
 import core.game.content.dialogue.DialogueInterpreter;
@@ -135,8 +135,8 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
-				ObjectDefinition.forId(15641).getHandlers().put("option:open", this);
-				ObjectDefinition.forId(15644).getHandlers().put("option:open", this);
+				SceneryDefinition.forId(15641).getHandlers().put("option:open", this);
+				SceneryDefinition.forId(15644).getHandlers().put("option:open", this);
 				return this;
 			}
 

@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.thieving;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -31,7 +31,7 @@ public final class ThievableChestPlugin extends OptionHandler {
 
 		for (Chest chest : Chest.values()) {
 			for (int id : chest.getObjectIds()) {
-				ObjectDefinition def = ObjectDefinition.forId(id);
+				SceneryDefinition def = SceneryDefinition.forId(id);
 				def.getHandlers().put("option:open", this);
 				def.getHandlers().put("option:search for traps", this);
 			}

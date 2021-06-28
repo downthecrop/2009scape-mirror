@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.interaction.OptionHandler;
@@ -21,8 +21,8 @@ public class MossGiantRopePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2322).getHandlers().put("option:swing-on", this);
-		ObjectDefinition.forId(2323).getHandlers().put("option:swing-on", this);
+		SceneryDefinition.forId(2322).getHandlers().put("option:swing-on", this);
+		SceneryDefinition.forId(2323).getHandlers().put("option:swing-on", this);
 		return this;
 	}
 
@@ -37,7 +37,7 @@ public class MossGiantRopePlugin extends OptionHandler {
 			return true;
 		}
 		Location end = node.getId() == 2322 ? Location.create(2704, 3209, 0) : Location.create(2709, 3205, 0);
-		player.getPacketDispatch().sendSceneryAnimation(node.asObject(), Animation.create(497), true);
+		player.getPacketDispatch().sendSceneryAnimation(node.asScenery(), Animation.create(497), true);
 		AgilityHandler.forceWalk(player, 0, player.getLocation(), end, Animation.create(751), 50, 22, "You skillfully swing across.", 1);
 		player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 0, 1);
 		return true;

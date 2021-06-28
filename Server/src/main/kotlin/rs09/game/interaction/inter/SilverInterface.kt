@@ -10,7 +10,6 @@ import org.rs09.consts.Components
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InterfaceListener
-import rs09.game.system.SystemLogger
 
 class SilverInterface : InterfaceListener() {
 
@@ -93,7 +92,7 @@ class SilverInterface : InterfaceListener() {
 class SilverBarUseWith : InteractionListener() {
     val FURNACES = intArrayOf(2966, 3044, 3294, 4304, 6189, 11009, 11010, 11666, 12100, 12809, 18497, 18525, 18526, 21879, 22721, 26814, 28433, 28434, 30021, 30510, 36956, 37651)
     override fun defineListeners() {
-        onUseWith(OBJECT, Items.SILVER_BAR_2355, *FURNACES){ player, _, _ ->
+        onUseWith(SCENERY, Items.SILVER_BAR_2355, *FURNACES){ player, _, _ ->
             ContentAPI.openInterface(player, Components.CRAFTING_SILVER_CASTING_438)
             return@onUseWith true
         }

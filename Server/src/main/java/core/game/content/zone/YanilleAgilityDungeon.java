@@ -82,7 +82,7 @@ public class YanilleAgilityDungeon extends MapZone implements Plugin<Object> {
 				return true;
 			case 35969:
 			case 2303:
-				handleBalancingLedge(player, target.asObject());
+				handleBalancingLedge(player, target.asScenery());
 				return true;
 			case 377:
 				if (!player.getInventory().contains(993, 1)) {
@@ -99,7 +99,7 @@ public class YanilleAgilityDungeon extends MapZone implements Plugin<Object> {
 					for (Item item : HERBS) {
 						player.getInventory().add(item, player);
 					}
-					SceneryBuilder.replace(target.asObject(), target.asObject().transform(target.getId() + 1), 5);
+					SceneryBuilder.replace(target.asScenery(), target.asScenery().transform(target.getId() + 1), 5);
 				}
 				return true;
 			case 378:

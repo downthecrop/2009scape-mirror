@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -63,7 +63,7 @@ public final class PyreSitePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(25286).getHandlers().put("option:construct", this);
+		SceneryDefinition.forId(25286).getHandlers().put("option:construct", this);
 		PluginManager.definePlugin(new FerociousBarbarianNPC());
 		return this;
 	}
@@ -99,7 +99,7 @@ public final class PyreSitePlugin extends OptionHandler {
 			return true;
 		}
 		player.setAttribute("logType", type);
-		ritual(player, node.asObject());
+		ritual(player, node.asScenery());
 		return true;
 	}
 

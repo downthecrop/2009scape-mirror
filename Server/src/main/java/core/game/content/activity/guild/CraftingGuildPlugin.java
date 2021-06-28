@@ -1,7 +1,7 @@
 package core.game.content.activity.guild;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.global.Skillcape;
 import core.game.content.global.action.DoorActionHandler;
@@ -32,7 +32,7 @@ public final class CraftingGuildPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2647).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2647).getHandlers().put("option:open", this);
 		NPCDefinition.forId(804).getHandlers().put("option:trade", this);
 		new MasterCrafterDialogue().init();
 		new TannerDialogue().init();

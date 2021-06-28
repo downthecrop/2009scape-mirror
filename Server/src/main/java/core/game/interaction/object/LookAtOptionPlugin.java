@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -13,7 +13,7 @@ public class LookAtOptionPlugin extends OptionHandler {
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         for (int i = 18877; i <= 18900; i++)
         {
-            ObjectDefinition.forId(i).getHandlers().put("option:look at", this);
+            SceneryDefinition.forId(i).getHandlers().put("option:look at", this);
         }
         return this;
     }

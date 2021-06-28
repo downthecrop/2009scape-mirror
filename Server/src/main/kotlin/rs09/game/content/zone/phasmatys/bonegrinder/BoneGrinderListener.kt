@@ -29,35 +29,35 @@ class BoneGrinderListener : InteractionListener() {
         /**
          * Handle the bone loader/hopper fill option
          */
-        on(LOADER,OBJECT,"fill"){player, _ ->
+        on(LOADER,SCENERY,"fill"){ player, _ ->
             handleFill(player)
         }
 
         /**
          * Handle the wheel's wind option
          */
-        on(BONE_GRINDER,OBJECT,"wind"){player,_ ->
+        on(BONE_GRINDER,SCENERY,"wind"){ player, _ ->
             handleWind(player)
         }
 
         /**
          * Handle the wheel's status option
          */
-        on(BONE_GRINDER,OBJECT,"status"){player,_ ->
+        on(BONE_GRINDER,SCENERY,"status"){ player, _ ->
             handleStatus(player)
         }
 
         /**
          * Handle the bin's empty option
          */
-        on(BIN,OBJECT,"empty"){player,_ ->
+        on(BIN,SCENERY,"empty"){ player, _ ->
             handleEmpty(player)
         }
 
         /**
          * Handle Bone -> Hopper
          */
-        onUseWith(OBJECT,LOADER,*boneIDs){ player, _, _ ->
+        onUseWith(SCENERY,LOADER,*boneIDs){ player, _, _ ->
             handleFill(player)
             return@onUseWith true
         }

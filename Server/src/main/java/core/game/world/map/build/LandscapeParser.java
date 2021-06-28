@@ -1,6 +1,6 @@
 package core.game.world.map.build;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.node.object.Scenery;
 import core.game.world.map.Location;
@@ -87,7 +87,7 @@ public final class LandscapeParser {
 	 */
 	public static void flagScenery(RegionPlane plane, int localX, int localY, Scenery object, boolean landscape, boolean storeObjects) {
 		Region.load(plane.getRegion());
-		ObjectDefinition def = object.getDefinition();
+		SceneryDefinition def = object.getDefinition();
 		int sizeX;
 		int sizeY;
 		if (object.getRotation() % 2 == 0) {
@@ -177,7 +177,7 @@ public final class LandscapeParser {
 		current.setActive(false);
 		object.setActive(false);
 		plane.remove(localX, localY, object.getId());
-		ObjectDefinition def = object.getDefinition();
+		SceneryDefinition def = object.getDefinition();
 		int sizeX;
 		int sizeY;
 		if (object.getRotation() % 2 == 0) {

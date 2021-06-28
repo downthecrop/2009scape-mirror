@@ -7,7 +7,7 @@ import core.game.world.map.Location
 abstract class InteractionListener : Listener{
     companion object {
         val ITEM = 0
-        val OBJECT = 1
+        val SCENERY = 1
         val NPC = 2
     }
     fun on(id: Int, type: Int, vararg option: String,handler: (player: Player, node: Node) -> Boolean){

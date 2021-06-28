@@ -1,7 +1,7 @@
 package core.game.content.activity.guild;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.global.Skillcape;
 import core.game.content.global.action.ClimbActionHandler;
@@ -27,12 +27,12 @@ public final class WizardGuildPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(1600).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(1601).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(1600).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(1601).getHandlers().put("option:open", this);
 		NPCDefinition.forId(462).getHandlers().put("option:teleport", this);
-		ObjectDefinition.forId(2154).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2155).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(1722).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(2154).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2155).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(1722).getHandlers().put("option:climb-up", this);
 		new WizardDistentorDialogue().init();
 		new ZavisticRarveDialogue().init();
 		new ProfessorImblewynDialogue().init();

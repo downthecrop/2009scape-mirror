@@ -16,7 +16,7 @@ class HatEasterEgg :  InteractionListener(){
     val NEW_HAT = 14650
 
     override fun defineListeners() {
-        onUseWith(OBJECT,WIZ_HAT,MACHINE){player, used, with ->
+        onUseWith(SCENERY,WIZ_HAT,MACHINE){ player, used, with ->
             player.dialogueInterpreter.open(HatDialogue(), NPC(872))
             return@onUseWith true
         }

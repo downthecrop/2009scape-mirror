@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.construction.decoration.questhall;
 
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialogueAction;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.interaction.OptionHandler;
@@ -34,7 +34,7 @@ public class MountedGloryPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(13523).getHandlers().put("option:rub", this);
+		SceneryDefinition.forId(13523).getHandlers().put("option:rub", this);
 		return this;
 	}
 

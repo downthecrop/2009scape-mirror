@@ -1,6 +1,6 @@
 package core.game.node.entity.npc.city.varrock;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -21,7 +21,7 @@ public class VarrockBrokenCart extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(23055).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(23055).getHandlers().put("option:search", this);
 		return this;
 	}
 

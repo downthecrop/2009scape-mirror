@@ -1,7 +1,7 @@
 package core.game.content.quest.members.merlinscrystal;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.activity.ActivityManager;
 import core.game.content.activity.CutscenePlugin;
 import core.game.content.dialogue.DialogueInterpreter;
@@ -61,14 +61,14 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		PluginManager.definePlugin(new MerlinCrystalDialogue());
 		PluginManager.definePlugin(new MerlinCrystalItemHandler());
-		ObjectDefinition.forId(63).getHandlers().put("option:hide-in", this);
-		ObjectDefinition.forId(40026).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(72).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(71).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(71).getHandlers().put("option:knock-at", this);
-		ObjectDefinition.forId(72).getHandlers().put("option:knock-at", this);
+		SceneryDefinition.forId(63).getHandlers().put("option:hide-in", this);
+		SceneryDefinition.forId(40026).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(72).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(71).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(71).getHandlers().put("option:knock-at", this);
+		SceneryDefinition.forId(72).getHandlers().put("option:knock-at", this);
 		ItemDefinition.forId(530).getHandlers().put("option:drop", this);
-		ObjectDefinition.forId(62).getHandlers().put("option:smash", this);
+		SceneryDefinition.forId(62).getHandlers().put("option:smash", this);
 		return this;
 	}
 
@@ -82,7 +82,7 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 				player.sendMessages("You attempt to smash the crystal...", "... and it shatters under the force of Excalibur!");
 				player.animate(Animation.create(390));
 				player.lock();
-				SceneryBuilder.remove(node.asObject(), 60);
+				SceneryBuilder.remove(node.asScenery(), 60);
 				quest.setStage(player, 99);
 				final NPC merlin = NPC.create(249, Location.create(2767, 3493, 2));
 				merlin.init();
@@ -125,7 +125,7 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 						break;
 				}
 			} else {
-				DoorActionHandler.handleAutowalkDoor(player, node.asObject());
+				DoorActionHandler.handleAutowalkDoor(player, node.asScenery());
 			}
 			return true;
 		case 530:

@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.construction.decoration.study
 
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
@@ -118,14 +118,14 @@ class LecternPlugin : OptionHandler() {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any>? {
         for (i in 13642..13648) {
-            ObjectDefinition.forId(i).handlers["option:study"] = this
+            SceneryDefinition.forId(i).handlers["option:study"] = this
         }
         definePlugin(TeleTabInterface())
         return this
     }
 
     override fun handle(player: Player, node: Node, option: String): Boolean {
-        val id = node.asObject().id
+        val id = node.asScenery().id
         player.setAttribute("ttb:objectid", id)
         GameWorld.Pulser.submit(object : Pulse(){
             var counter = 0

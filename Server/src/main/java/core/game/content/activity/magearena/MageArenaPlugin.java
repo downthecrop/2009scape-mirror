@@ -1,7 +1,7 @@
 package core.game.content.activity.magearena;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialogueAction;
 import core.game.content.global.GodType;
 import core.game.interaction.OptionHandler;
@@ -53,11 +53,11 @@ public final class MageArenaPlugin extends OptionHandler {
 		ItemDefinition.forId(2412).getHandlers().put("option:take", this);
 		ItemDefinition.forId(2413).getHandlers().put("option:take", this);
 		ItemDefinition.forId(2414).getHandlers().put("option:take", this);
-		ObjectDefinition.forId(2873).getHandlers().put("option:pray at", this);
-		ObjectDefinition.forId(2874).getHandlers().put("option:pray at", this);
-		ObjectDefinition.forId(2875).getHandlers().put("option:pray at", this);
-		ObjectDefinition.forId(2878).getHandlers().put("option:step-into", this);
-		ObjectDefinition.forId(2879).getHandlers().put("option:step-into", this);
+		SceneryDefinition.forId(2873).getHandlers().put("option:pray at", this);
+		SceneryDefinition.forId(2874).getHandlers().put("option:pray at", this);
+		SceneryDefinition.forId(2875).getHandlers().put("option:pray at", this);
+		SceneryDefinition.forId(2878).getHandlers().put("option:step-into", this);
+		SceneryDefinition.forId(2879).getHandlers().put("option:step-into", this);
 		return this;
 	}
 
