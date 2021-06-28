@@ -375,7 +375,7 @@
     "general_store": "false",
     "id": "43",
     "title": "Davon's Amulet Store",
-    "stock": "{1718,0}-{1727,1}-{1729,0}-{1725,0}-{1731,0}"
+    "stock": "{1718,0}-{1727,0}-{1729,0}-{1725,0}-{1731,0}"
   },
   {
     "npcs": "2356",
@@ -1508,8 +1508,8 @@
     "currency": "995",
     "general_store": "false",
     "id": "170",
-    "title": "The Shrimps and Parrot",
-    "stock": "{347,5}-{339,5}-{379,5}-{373,6}-{3144,0}"
+    "title": "The Shrimp and Parrot",
+    "stock": "{347,5}-{339,5}-{379,3}-{373,2}-{3144,3}"
   },
   {
     "npcs": "747",
