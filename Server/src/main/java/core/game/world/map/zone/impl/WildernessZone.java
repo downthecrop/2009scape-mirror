@@ -24,6 +24,7 @@ import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.RegionZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.tools.RandomFunction;
+import org.rs09.consts.NPCs;
 import rs09.game.system.config.NPCConfigParser;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
@@ -160,39 +161,38 @@ public final class WildernessZone extends MapZone {
 					player.getInterfaceManager().open(new Component(153));
 				}
 			}
-			if (e instanceof NPC && killer instanceof Player && (e.asNpc().getName().contains("Revenant") || e.asNpc().getName().equals("Chaos elemental"))) {
+
+			//Roll for PVP gear and Brawling Gloves from revenants
+			if (e instanceof NPC && killer instanceof Player && (e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200)) {
+
+				boolean gloveDrop = e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? RandomFunction.roll(75) : RandomFunction.roll(100);
+				if (gloveDrop) {
+					byte glove = (byte) RandomFunction.random(1, 13);
+					Item reward = new Item(BrawlingGloves.forIndicator(glove).getId());
+					GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
+					Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
+				}
+				e.asNpc().getDefinition().getDropTables().drop(e.asNpc(), killer);
+				if (((NPC) e).getTask() != null && ((Player) killer).getSlayer().getTask() == e.asNpc().getTask()) {
+					((Player) killer).getSlayer().finalizeDeath(killer.asPlayer(), e.asNpc());
+				}
+
 				int combatLevel = e.asNpc().getDefinition().getCombatLevel();
 				int dropRate = getNewDropRate(combatLevel);
-				for (int i = 0; i < PVP_GEAR.length; i++) {
-					boolean chance = RandomFunction.random(dropRate) == dropRate / 2;
+				for (int j : PVP_GEAR) {
+					boolean chance = RandomFunction.roll(dropRate);
 					if (chance) {
 						Item reward;
-						if (PVP_GEAR[i] == 13879 || PVP_GEAR[i] == 13883) { // checks if it's a javelin or throwing axe
-							reward = new Item(PVP_GEAR[i], RandomFunction.random(15, 50));
+						if (j == 13879 || j == 13883) { // checks if it's a javelin or throwing axe
+							reward = new Item(j, RandomFunction.random(15, 50));
 						} else {
-							reward = new Item(PVP_GEAR[i]);
+							reward = new Item(j);
 						}
 						Repository.sendNews(killer.asPlayer().getUsername() + " has received a " + reward.getName() + " from a " + e.asNpc().getName() + "!");
 						GroundItemManager.create(reward, ((NPC) e).getDropLocation(), killer.asPlayer());
 						return true;
 					}
 				}
-			}
-			if (killer.isPlayer()) {
-				if (e instanceof NPC) {
-					boolean gloveDrop = RandomFunction.random(1, 100) == 54;
-					if (gloveDrop) {
-						byte glove = (byte) RandomFunction.random(1, 13);
-						Item reward = new Item(BrawlingGloves.forIndicator(glove).getId());
-						GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
-						Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
-					}
-					e.asNpc().getDefinition().getDropTables().drop(e.asNpc(), killer);
-					if (((NPC) e).getTask() != null && killer instanceof Player && ((Player) killer).getSlayer().getTask() == e.asNpc().getTask()) {
-						((Player) killer).getSlayer().finalizeDeath(killer.asPlayer(), e.asNpc());
-					}
-				}
-
 			}
 
 			if (e instanceof NPC) {
