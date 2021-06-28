@@ -45,6 +45,15 @@ public class RandomFunction {
 	}
 
 	/**
+	 * Method to roll for a random 1/X chance
+	 * @param chance the 1/chance rate for the roll to succeed
+	 * @return true if you hit the roll, false otherwise
+	 */
+	public static boolean roll(int chance){
+		return random(chance) == chance / 2;
+	}
+
+	/**
 	 * Calculates the chance of succeeding at a skilling event
 	 * @param low - Success chance at level 1
 	 * @param high - Success chance at level 99
