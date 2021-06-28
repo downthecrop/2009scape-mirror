@@ -1,7 +1,7 @@
 package core.game.interaction.object;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.ge.GEGuidePrice;
 import core.game.ge.GrandExchangeDatabase;
@@ -23,11 +23,11 @@ public final class GrandExchangePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(28089).getHandlers().put("option:use", this);
-		ObjectDefinition.forId(28089).getHandlers().put("option:exchange", this);
-		ObjectDefinition.forId(28089).getHandlers().put("option:collect", this);
-		ObjectDefinition.forId(28089).getHandlers().put("option:history", this);
-		ObjectDefinition.forId(28089).getHandlers().put("option:sets", this);
+		SceneryDefinition.forId(28089).getHandlers().put("option:use", this);
+		SceneryDefinition.forId(28089).getHandlers().put("option:exchange", this);
+		SceneryDefinition.forId(28089).getHandlers().put("option:collect", this);
+		SceneryDefinition.forId(28089).getHandlers().put("option:history", this);
+		SceneryDefinition.forId(28089).getHandlers().put("option:sets", this);
 		for (int i : new int[] { 6528, 6529, 6530, 6531 }) {
 			NPCDefinition.forId(i).getHandlers().put("option:exchange", this);
 			NPCDefinition.forId(i).getHandlers().put("option:history", this);

@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.container.Container;
 import core.game.container.impl.EquipmentContainer;
 import core.plugin.Initializable;
@@ -50,10 +50,10 @@ public final class SlashWebPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (int objectId : IDS) {
-			ObjectDefinition.forId(objectId).getHandlers().put("option:slash", this);
+			SceneryDefinition.forId(objectId).getHandlers().put("option:slash", this);
 		}
-		ObjectDefinition.forId(27266).getHandlers().put("option:pass", this);
-		ObjectDefinition.forId(29354).getHandlers().put("option:pass", this);
+		SceneryDefinition.forId(27266).getHandlers().put("option:pass", this);
+		SceneryDefinition.forId(29354).getHandlers().put("option:pass", this);
 		return this;
 	}
 

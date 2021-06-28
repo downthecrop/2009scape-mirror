@@ -1,7 +1,7 @@
 package core.game.interaction.object;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
@@ -27,65 +27,65 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 	 */
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(3444).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3444).getHandlers().put("option:open", this);
 		/** the gate in the chamber near the dog. */
-		ObjectDefinition.forId(3445).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3445).getHandlers().put("option:open", this);
 		/** the gate in the temple to get to the other side. */
-		ObjectDefinition.forId(30707).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(30707).getHandlers().put("option:open", this);
 		/** the "knock-at" door. */
-		ObjectDefinition.forId(30707).getHandlers().put("option:knock-at", this);
+		SceneryDefinition.forId(30707).getHandlers().put("option:knock-at", this);
 		/** the "knock-at" door. */
-		ObjectDefinition.forId(30708).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(30708).getHandlers().put("option:open", this);
 		/** the "knock-at" door. */
-		ObjectDefinition.forId(30708).getHandlers().put("option:knock-at", this);
+		SceneryDefinition.forId(30708).getHandlers().put("option:knock-at", this);
 		/** the "knock-at" door. */
-		ObjectDefinition.forId(30575).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(30575).getHandlers().put("option:climb-up", this);
 		/** represents the ladder to climb back up. */
-		ObjectDefinition.forId(30575).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(30575).getHandlers().put("option:climb-up", this);
 		/** represents the ladder to climb back up. */
-		ObjectDefinition.forId(30728).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(30728).getHandlers().put("option:open", this);
 		/** the coffin. */
-		ObjectDefinition.forId(3463).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(3463).getHandlers().put("option:open", this);
 		/** the drezel door. */
-		ObjectDefinition.forId(3463).getHandlers().put("option:talk-through", this);
+		SceneryDefinition.forId(3463).getHandlers().put("option:talk-through", this);
 		/** talk-through. */
-		ObjectDefinition.forId(3485).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(3485).getHandlers().put("option:search", this);
 		/** teh well. */
-		ObjectDefinition.forId(3496).getHandlers().put("option:study", this);
+		SceneryDefinition.forId(3496).getHandlers().put("option:study", this);
 		/** teh golden hammer */
-		ObjectDefinition.forId(3496).getHandlers().put("option:take-from", this);
+		SceneryDefinition.forId(3496).getHandlers().put("option:take-from", this);
 		/** the golden hammer. */
-		ObjectDefinition.forId(3498).getHandlers().put("option:study", this);
+		SceneryDefinition.forId(3498).getHandlers().put("option:study", this);
 		/** teh golden needle. */
-		ObjectDefinition.forId(3498).getHandlers().put("option:take-from", this);
+		SceneryDefinition.forId(3498).getHandlers().put("option:take-from", this);
 		/** the golden needle. */
-		ObjectDefinition.forId(3495).getHandlers().put("option:study", this);
+		SceneryDefinition.forId(3495).getHandlers().put("option:study", this);
 		/** teh golden pot. */
-		ObjectDefinition.forId(3495).getHandlers().put("option:take-from", this);
+		SceneryDefinition.forId(3495).getHandlers().put("option:take-from", this);
 		/** the golden pot. */
-		ObjectDefinition.forId(3497).getHandlers().put("option:study", this);
+		SceneryDefinition.forId(3497).getHandlers().put("option:study", this);
 		/** teh golden feather. */
-		ObjectDefinition.forId(3497).getHandlers().put("option:take-from", this);
+		SceneryDefinition.forId(3497).getHandlers().put("option:take-from", this);
 		/** the golden feather. */
-		ObjectDefinition.forId(3494).getHandlers().put("option:study", this);
+		SceneryDefinition.forId(3494).getHandlers().put("option:study", this);
 		/** teh golden candle. */
-		ObjectDefinition.forId(3494).getHandlers().put("option:take-from", this);
+		SceneryDefinition.forId(3494).getHandlers().put("option:take-from", this);
 		/** the golden candle. */
-		ObjectDefinition.forId(3499).getHandlers().put("option:study", this);
+		SceneryDefinition.forId(3499).getHandlers().put("option:study", this);
 		/** teh golden key/iron. */
-		ObjectDefinition.forId(3499).getHandlers().put("option:take-from", this);
+		SceneryDefinition.forId(3499).getHandlers().put("option:take-from", this);
 		/** the golden key/iron */
-		ObjectDefinition.forId(3493).getHandlers().put("option:study", this);
+		SceneryDefinition.forId(3493).getHandlers().put("option:study", this);
 		/** teh tinder box. */
-		ObjectDefinition.forId(3493).getHandlers().put("option:take-from", this);
+		SceneryDefinition.forId(3493).getHandlers().put("option:take-from", this);
 		/** the golden tinder box. */
-		ObjectDefinition.forId(3443).getHandlers().put("option:pass-through", this);
+		SceneryDefinition.forId(3443).getHandlers().put("option:pass-through", this);
 		/** the barrier. */
-		ObjectDefinition.forId(30573).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(30573).getHandlers().put("option:open", this);
 		/** the door to get back. */
 		NPCDefinition.forId(7711).getHandlers().put("option:attack", this);
 		/** represents the dog attack option. */
-		ObjectDefinition.forId(30571).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(30571).getHandlers().put("option:open", this);
 		return this;
 	}
 

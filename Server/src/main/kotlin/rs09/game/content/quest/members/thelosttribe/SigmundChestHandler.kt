@@ -1,6 +1,6 @@
 package rs09.game.content.quest.members.thelosttribe
 
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -17,7 +17,7 @@ import org.rs09.consts.Items
  */
 class SigmundChestHandler : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ObjectDefinition.forId(6910).handlers["option:open"] = this
+        SceneryDefinition.forId(6910).handlers["option:open"] = this
         return this
     }
 

@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
@@ -39,19 +39,19 @@ public final class VarrockNodePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(24357).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(5581).getHandlers().put("option:take-axe", this);
-		ObjectDefinition.forId(36974).getHandlers().put("option:take-axe", this);
-		ObjectDefinition.forId(24427).getHandlers().put("option:walk-up", this);
-		ObjectDefinition.forId(24428).getHandlers().put("option:walk-down", this);
-		ObjectDefinition.forId(1749).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(23636).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(24389).getHandlers().put("option:knock-at", this);
-		ObjectDefinition.forId(9662).getHandlers().put("option:take", this);
-		ObjectDefinition.forId(17974).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(29534).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(17985).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(24366).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(24357).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(5581).getHandlers().put("option:take-axe", this);
+		SceneryDefinition.forId(36974).getHandlers().put("option:take-axe", this);
+		SceneryDefinition.forId(24427).getHandlers().put("option:walk-up", this);
+		SceneryDefinition.forId(24428).getHandlers().put("option:walk-down", this);
+		SceneryDefinition.forId(1749).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(23636).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(24389).getHandlers().put("option:knock-at", this);
+		SceneryDefinition.forId(9662).getHandlers().put("option:take", this);
+		SceneryDefinition.forId(17974).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(29534).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(17985).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(24366).getHandlers().put("option:climb-up", this);
 		SceneryBuilder.add(new Scenery(17974, new Location(3204, 9911), 10, 0));
 		new KnockatDoorDialogue().init();
 		return this;

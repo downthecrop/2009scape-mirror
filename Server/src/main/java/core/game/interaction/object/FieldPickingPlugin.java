@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.container.impl.EquipmentContainer;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -34,7 +34,7 @@ public final class FieldPickingPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for(PickingPlant p : PickingPlant.values()){
-			ObjectDefinition.forId(p.objectId).getHandlers().put("option:pick",this);
+			SceneryDefinition.forId(p.objectId).getHandlers().put("option:pick",this);
 		}
 		return this;
 	}

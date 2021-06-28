@@ -1,6 +1,6 @@
 package core.game.content.quest.members.dwarfcannon;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -37,16 +37,16 @@ public class DwarfCannonPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {  
-		ObjectDefinition.forId(3).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(5).getHandlers().put("option:inspect", this);
-		ObjectDefinition.forId(2).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(13).getHandlers().put("option:climb-over", this);
-		ObjectDefinition.forId(15601).getHandlers().put("option:inspect", this);
+		SceneryDefinition.forId(3).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(5).getHandlers().put("option:inspect", this);
+		SceneryDefinition.forId(2).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(13).getHandlers().put("option:climb-over", this);
+		SceneryDefinition.forId(15601).getHandlers().put("option:inspect", this);
 		for (int i = 15; i < 21; i++) {
-			ObjectDefinition.forId(i).getHandlers().put("option:inspect", this);
+			SceneryDefinition.forId(i).getHandlers().put("option:inspect", this);
 		}
-		ObjectDefinition.forId(15596).getHandlers().put("option:take", this);
-		ObjectDefinition.forId(1).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(15596).getHandlers().put("option:take", this);
+		SceneryDefinition.forId(1).getHandlers().put("option:search", this);
 		UseWithHandler.addHandler(5, UseWithHandler.OBJECT_TYPE, new UseWithHandler(1) {
 
 			@Override
@@ -85,13 +85,13 @@ public class DwarfCannonPlugin extends OptionHandler {
 		switch (node.getId()) {
 		case 3:
 			if (!node.getLocation().equals(new Location(3015, 3453, 0))) {
-				return DoorActionHandler.handleAutowalkDoor(player, node.asObject());
+				return DoorActionHandler.handleAutowalkDoor(player, node.asScenery());
 			}
 			if (quest.getStage(player) < 70) {
 				player.sendMessage("The door is locked.");
 				break;
 			}
-			return DoorActionHandler.handleAutowalkDoor(player, node.asObject());
+			return DoorActionHandler.handleAutowalkDoor(player, node.asScenery());
 		case 5:
 			if (quest.getStage(player) == 50) {
 				player.getDialogueInterpreter().sendDialogues(player, null, "I guess I'd better fix it with the toolkit I was given.");
@@ -110,7 +110,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 			ClimbActionHandler.climb(player, new Animation(828), new Location(2623, 3391, 0));
 			break;
 		case 15601:
-			if (node.getId() != node.asObject().getWrapper().getId()) {
+			if (node.getId() != node.asScenery().getWrapper().getId()) {
 				player.getDialogueInterpreter().sendDialogues(player, null, "I think I've already fixed this one.");
 			}
 			return true;
@@ -245,7 +245,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 	@Override
 	public Location getDestination(Node node, Node n) {
 		if (n.getId() == 3) {
-			return DoorActionHandler.getDestination(node.asPlayer(), n.asObject());
+			return DoorActionHandler.getDestination(node.asPlayer(), n.asScenery());
 		} else if (n.getId() == 15601) {
 			if (n.getLocation().equals(new Location(2565, 3456, 0))) {
 				return new Location(2566, 3456, 0);

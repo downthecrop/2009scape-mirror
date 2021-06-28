@@ -1,6 +1,6 @@
 package core.game.content.quest.free.therestlessghost;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -61,7 +61,7 @@ public final class RestlessGhostPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (int coffin : COFFIN_IDS) {
 			for (String option : OPTIONS) {
-				ObjectDefinition.forId(coffin).getHandlers().put("option:" + option, this);
+				SceneryDefinition.forId(coffin).getHandlers().put("option:" + option, this);
 			}
 		}
 		new RestlessGhostNPC().newInstance(arg);

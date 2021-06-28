@@ -135,7 +135,7 @@ public class GraveyardZone extends MTAZone {
 				deposit(player);
 				return true;
 			} else if (target.getId() >= 10725 && target.getId() <= 10728) {
-				BoneType.forObject(target.getId()).grab(player, target.asObject());
+				BoneType.forObject(target.getId()).grab(player, target.asScenery());
 				return true;
 			}
 		}

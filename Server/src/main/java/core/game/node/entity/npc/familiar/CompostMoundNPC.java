@@ -77,7 +77,7 @@ public class CompostMoundNPC extends Forager {
 			owner.getPacketDispatch().sendMessage("This scroll can only be used on an empty compost bin.");
 			return false;
 		}
-		CompostBins cbin = CompostBins.forObject(special.getNode().asObject());
+		CompostBins cbin = CompostBins.forObject(special.getNode().asScenery());
 		if(cbin == null){
 			return false;
 		}

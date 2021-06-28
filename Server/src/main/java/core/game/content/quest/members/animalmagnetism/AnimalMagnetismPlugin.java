@@ -5,7 +5,7 @@ import java.util.Map;
 
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -48,7 +48,7 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 		ItemDefinition.forId(4251).getHandlers().put("option:drop", this);
 		ItemDefinition.forId(4252).getHandlers().put("option:drop", this);
 		NPCDefinition.forId(5198).getHandlers().put("option:trade", this);
-		ObjectDefinition.forId(5167).getHandlers().put("option:push", this);
+		SceneryDefinition.forId(5167).getHandlers().put("option:push", this);
 		AnimalMagnetism.RESEARCH_NOTES.getDefinition().getHandlers().put("option:translate", this);
 		ItemDefinition.forId(AnimalMagnetism.CRONE_AMULET.getId()).getHandlers().put("option:wear", this);
 		ItemDefinition.forId(AnimalMagnetism.CRONE_AMULET.getId()).getHandlers().put("option:equip", this);

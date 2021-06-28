@@ -78,7 +78,7 @@ public class WildernessAreaZone extends MapZone implements Plugin<Object> {
 									switch (buttonId) {
 									case 2:
 										if (player.getInventory().remove(new Item(995, 7500))) {
-											DoorActionHandler.handleDoor(player, node.asObject());
+											DoorActionHandler.handleDoor(player, node.asScenery());
 											player.sendMessage("You pay 7500 coins and enter the resource arena.");
 										}
 										break;
@@ -91,7 +91,7 @@ public class WildernessAreaZone extends MapZone implements Plugin<Object> {
 						player.sendMessage("You do not have enough coins to enter the Arena.");
 						return true;
 					}
-					DoorActionHandler.handleDoor(player, node.asObject());
+					DoorActionHandler.handleDoor(player, node.asScenery());
 					return true;
 				case "Players-inside":
 					if (player.getLocation().getY() < 3495) {

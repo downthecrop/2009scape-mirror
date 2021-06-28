@@ -1,7 +1,7 @@
 package core.game.interaction.object;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
@@ -75,7 +75,7 @@ public class ProspectOrePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.setOptionHandler("prospect", this);
+		SceneryDefinition.setOptionHandler("prospect", this);
 		return this;
 	}
 

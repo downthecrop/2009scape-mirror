@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.agility.shortcuts;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -44,8 +44,8 @@ public class YanilleGrapple extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ObjectDefinition.forId(17047).getHandlers().put("option:grapple", this);
-        ObjectDefinition.forId(17048).getHandlers().put("option:jump", this);
+        SceneryDefinition.forId(17047).getHandlers().put("option:grapple", this);
+        SceneryDefinition.forId(17048).getHandlers().put("option:jump", this);
         return this;
     }
 

@@ -1,6 +1,6 @@
 package rs09.game.content.quest.members.thelosttribe
 
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -19,7 +19,7 @@ import org.rs09.consts.Components
 class CaveRockHandler : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
         for(i in 6921..6924){
-            ObjectDefinition.forId(i).handlers["option:look-at"] = this
+            SceneryDefinition.forId(i).handlers["option:look-at"] = this
         }
         return this
     }

@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -15,7 +15,7 @@ public class SlayerDangerSignPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(5127).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(5127).getHandlers().put("option:read", this);
 		return this;
 	}
 

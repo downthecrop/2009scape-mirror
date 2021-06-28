@@ -1,7 +1,7 @@
 package core.game.interaction.object;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
@@ -76,8 +76,8 @@ public final class LumberYardCratePlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		NPCDefinition.forId(767).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(2620).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(31149).getHandlers().put("option:squeeze-under", this);
+		SceneryDefinition.forId(2620).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(31149).getHandlers().put("option:squeeze-under", this);
 		return null;
 	}
 

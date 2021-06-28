@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -22,9 +22,9 @@ public final class DoorManagingPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.setOptionHandler("open", this);
-		ObjectDefinition.setOptionHandler("close", this);
-		ObjectDefinition.setOptionHandler("shut", this);
+		SceneryDefinition.setOptionHandler("open", this);
+		SceneryDefinition.setOptionHandler("close", this);
+		SceneryDefinition.setOptionHandler("shut", this);
 		return this;
 	}
 
@@ -58,7 +58,7 @@ public final class DoorManagingPlugin extends OptionHandler {
 			player.getProperties().setTeleportLocation(destination);
 			return true;
 		}
-		if (node.asObject().getId() == 25341) {// Mithril door
+		if (node.asScenery().getId() == 25341) {// Mithril door
 			return false;
 		}
 		if (!name.contains("door") && !name.contains("gate") && !name.contains("fence") && !name.contains("wall") && !name.contains("exit") && !name.contains("entrance")) {

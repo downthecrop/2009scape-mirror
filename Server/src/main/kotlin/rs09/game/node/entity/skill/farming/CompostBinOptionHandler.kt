@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -11,8 +11,8 @@ import core.plugin.Plugin
 class CompostBinOptionHandler : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
         for(i in 7836..7839)
-            ObjectDefinition.forId(i).childrenIds.forEach {
-                val def = ObjectDefinition.forId(it)
+            SceneryDefinition.forId(i).childrenIds.forEach {
+                val def = SceneryDefinition.forId(it)
                 def.handlers["option:open"] = this
                 def.handlers["option:close"] = this
                 def.handlers["option:take-tomato"] = this
@@ -23,7 +23,7 @@ class CompostBinOptionHandler : OptionHandler() {
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         player ?: return false
         node ?: return false
-        val cBin = CompostBins.forObject(node.asObject()) ?: return false
+        val cBin = CompostBins.forObject(node.asScenery()) ?: return false
         val bin = cBin.getBinForPlayer(player)
 
         when(option){

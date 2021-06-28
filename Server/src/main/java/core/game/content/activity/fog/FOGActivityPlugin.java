@@ -1,6 +1,6 @@
 package core.game.content.activity.fog;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.activity.ActivityPlugin;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -55,7 +55,7 @@ public class FOGActivityPlugin extends ActivityPlugin {
 		PluginManager.definePlugin(new OptionHandler() {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
-				ObjectDefinition.forId(30204).getHandlers().put("option:enter", this);
+				SceneryDefinition.forId(30204).getHandlers().put("option:enter", this);
 				return this;
 			}
 

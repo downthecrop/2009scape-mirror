@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -20,7 +20,7 @@ import core.plugin.Plugin;
 @Initializable
 public class BrokenCartBypass extends OptionHandler {
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ObjectDefinition.forId(2216).getHandlers().put("option:look-at",this);
+        SceneryDefinition.forId(2216).getHandlers().put("option:look-at",this);
         return this;
     }
 
