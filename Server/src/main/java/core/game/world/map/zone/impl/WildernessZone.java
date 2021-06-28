@@ -165,7 +165,7 @@ public final class WildernessZone extends MapZone {
 			//Roll for PVP gear and Brawling Gloves from revenants
 			if (e instanceof NPC && killer instanceof Player && (e.asNpc().getName().contains("Revenant") || e.getId() == NPCs.CHAOS_ELEMENTAL_3200)) {
 
-				boolean gloveDrop = e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? RandomFunction.roll(100) : RandomFunction.roll(75);
+				boolean gloveDrop = e.getId() == NPCs.CHAOS_ELEMENTAL_3200 ? RandomFunction.roll(75) : RandomFunction.roll(100);
 				if (gloveDrop) {
 					byte glove = (byte) RandomFunction.random(1, 13);
 					Item reward = new Item(BrawlingGloves.forIndicator(glove).getId());
