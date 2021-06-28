@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -21,9 +21,9 @@ public final class CulinomancerChestPliugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(12309).getHandlers().put("option:bank", this);
-		ObjectDefinition.forId(12309).getHandlers().put("option:buy-items", this);
-		ObjectDefinition.forId(12309).getHandlers().put("option:buy-food", this);
+		SceneryDefinition.forId(12309).getHandlers().put("option:bank", this);
+		SceneryDefinition.forId(12309).getHandlers().put("option:buy-items", this);
+		SceneryDefinition.forId(12309).getHandlers().put("option:buy-food", this);
 		Scenery object = RegionManager.getObject(new Location(3219, 9623, 0));
 		SceneryBuilder.replace(object, object.transform(object.getId(), 3));
 		return this;

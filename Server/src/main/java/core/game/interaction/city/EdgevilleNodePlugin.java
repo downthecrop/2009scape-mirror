@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -22,15 +22,15 @@ public final class EdgevilleNodePlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ObjectDefinition.forId(9262).getHandlers().put("option:take-seed", this);
-        ObjectDefinition.forId(9261).getHandlers().put("option:take-seed", this);
-        ObjectDefinition.forId(30806).getHandlers().put("option:take-seed", this);
-        ObjectDefinition.forId(12265).getHandlers().put("option:climb", this);
+        SceneryDefinition.forId(9262).getHandlers().put("option:take-seed", this);
+        SceneryDefinition.forId(9261).getHandlers().put("option:take-seed", this);
+        SceneryDefinition.forId(30806).getHandlers().put("option:take-seed", this);
+        SceneryDefinition.forId(12265).getHandlers().put("option:climb", this);
 
-		ObjectDefinition.forId(12266).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(12266).getHandlers().put("option:open", this);
 
-        ObjectDefinition.forId(26933).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(26934).getHandlers().put("option:close", this);
+        SceneryDefinition.forId(26933).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(26934).getHandlers().put("option:close", this);
         return this;
     }
 
@@ -55,12 +55,12 @@ public final class EdgevilleNodePlugin extends OptionHandler {
 				break;
             case 26933: // Trapdoors at edgeville dungeon entrance
                 if (option.equalsIgnoreCase("open")) {
-                    SceneryBuilder.replace(node.asObject(), node.asObject().transform(26934), 500);
+                    SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(26934), 500);
                 }
                 break;
             case 26934: // Trapdoors at edgeville dungeon entrance
                 if (option.equalsIgnoreCase("close")) {
-                    SceneryBuilder.replace(node.asObject(), node.asObject().transform(26933));
+                    SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(26933));
                 }
         }
         return true;

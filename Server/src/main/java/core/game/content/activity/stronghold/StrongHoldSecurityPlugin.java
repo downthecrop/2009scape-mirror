@@ -1,6 +1,6 @@
 package core.game.content.activity.stronghold;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentPlugin;
 import core.game.content.dialogue.DialogueInterpreter;
@@ -59,7 +59,7 @@ public final class StrongHoldSecurityPlugin extends MapZone implements Plugin<Ob
 		PluginManager.definePlugin(new OptionHandler() {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
-				ObjectDefinition.forId(16154).getHandlers().put("option:climb-down", this);
+				SceneryDefinition.forId(16154).getHandlers().put("option:climb-down", this);
 				return this;
 			}
 

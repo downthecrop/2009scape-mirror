@@ -1,7 +1,7 @@
 package core.game.interaction.npc.sorceress_app;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -49,7 +49,7 @@ public class SorceressApprenticePlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		NPCDefinition.forId(5532).getHandlers().put("option:teleport", this);
-		ObjectDefinition.forId(21781).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(21781).getHandlers().put("option:climb-up", this);
 		new SorceressStairs().newInstance(arg);
 		PluginManager.definePlugin(new SorceressApprenticeDialogue());
 		return this;
@@ -64,7 +64,7 @@ public class SorceressApprenticePlugin extends OptionHandler {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			ObjectDefinition.forId(35645).getHandlers().put("option:climb-down", this);
+			SceneryDefinition.forId(35645).getHandlers().put("option:climb-down", this);
 			return this;
 		}
 

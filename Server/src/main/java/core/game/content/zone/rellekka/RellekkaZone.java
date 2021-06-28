@@ -1,7 +1,7 @@
 package core.game.content.zone.rellekka;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.agility.AgilityHandler;
@@ -164,10 +164,10 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			ObjectDefinition.forId(4616).getHandlers().put("option:cross", this);
-			ObjectDefinition.forId(4615).getHandlers().put("option:cross", this);
-			ObjectDefinition.forId(5847).getHandlers().put("option:climb-over", this);
-			ObjectDefinition.forId(5008).getHandlers().put("option:enter",this);
+			SceneryDefinition.forId(4616).getHandlers().put("option:cross", this);
+			SceneryDefinition.forId(4615).getHandlers().put("option:cross", this);
+			SceneryDefinition.forId(5847).getHandlers().put("option:climb-over", this);
+			SceneryDefinition.forId(5008).getHandlers().put("option:enter",this);
 			return this;
 		}
 

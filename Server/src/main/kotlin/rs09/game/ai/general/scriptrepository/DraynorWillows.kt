@@ -43,7 +43,7 @@ class DraynorWillows : Script(){
                     val willowtree = scriptAPI.getNearestNode("willow", true)
                     bot.interfaceManager.close()
                     willowtree?.let { InteractionListeners.run(willowtree.id,
-                        InteractionListener.OBJECT,"Chop down",bot,willowtree) }
+                        InteractionListener.SCENERY,"Chop down",bot,willowtree) }
                     if (bot.inventory.isFull)
                         state = State.BANKING
                 }

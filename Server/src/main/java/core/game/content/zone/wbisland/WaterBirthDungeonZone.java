@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialogueAction;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.node.entity.skill.Skills;
@@ -221,9 +221,9 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			ObjectDefinition.forId(8958).getHandlers().put("option:open", this);
-			ObjectDefinition.forId(8959).getHandlers().put("option:open", this);
-			ObjectDefinition.forId(8960).getHandlers().put("option:open", this);
+			SceneryDefinition.forId(8958).getHandlers().put("option:open", this);
+			SceneryDefinition.forId(8959).getHandlers().put("option:open", this);
+			SceneryDefinition.forId(8960).getHandlers().put("option:open", this);
 			NPCDefinition.forId(2440).getHandlers().put("option:destroy", this);
 			NPCDefinition.forId(2443).getHandlers().put("option:destroy", this);
 			NPCDefinition.forId(2446).getHandlers().put("option:destroy", this);
@@ -249,7 +249,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 				if (!node.isActive()) {
 					return true;
 				}
-				SceneryBuilder.replace(node.asObject(), node.asObject().transform(8962), 30);
+				SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(8962), 30);
 				break;
 			case 2440:
 			case 2443:

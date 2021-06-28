@@ -1,7 +1,7 @@
 package core.game.content.quest.free.shieldofarrav;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DoorActionHandler;
@@ -38,19 +38,19 @@ public final class ShieldArravPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2402).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(2397).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2399).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2398).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2402).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(2397).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2399).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2398).getHandlers().put("option:open", this);
 		ItemDefinition.forId(761).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(2403).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2404).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(2404).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(2403).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2404).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(2404).getHandlers().put("option:search", this);
 		ItemDefinition.forId(767).getHandlers().put("option:take", this);
-		ObjectDefinition.forId(24356).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(2400).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(2401).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(2401).getHandlers().put("option:shut", this);
+		SceneryDefinition.forId(24356).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(2400).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(2401).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(2401).getHandlers().put("option:shut", this);
 		ItemDefinition.forId(ShieldofArrav.PHOENIX_CERTIFICATE.getId()).getHandlers().put("option:read", this);
 		ItemDefinition.forId(ShieldofArrav.BLACKARM_CERTIFICATE.getId()).getHandlers().put("option:read", this);
 		ItemDefinition.forId(769).getHandlers().put("option:read", this);

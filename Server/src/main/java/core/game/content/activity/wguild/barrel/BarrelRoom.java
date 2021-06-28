@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.container.impl.EquipmentContainer;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -89,7 +89,7 @@ public final class BarrelRoom extends MapZone implements Plugin<Object> {
 		PluginManager.definePlugin(new OptionHandler() {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
-				ObjectDefinition.forId(15668).getHandlers().put("option:pick-up", this);
+				SceneryDefinition.forId(15668).getHandlers().put("option:pick-up", this);
 				return this;
 			}
 

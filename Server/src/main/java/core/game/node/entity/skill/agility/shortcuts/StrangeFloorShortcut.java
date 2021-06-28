@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.agility.shortcuts;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.game.node.entity.skill.agility.AgilityShortcut;
@@ -73,6 +73,6 @@ public class StrangeFloorShortcut extends AgilityShortcut {
 
 	@Override
 	public void configure(AgilityShortcut shortcut) {
-		ObjectDefinition.forId(getIds()[0]).getHandlers().put("option:jump-over",this);
+		SceneryDefinition.forId(getIds()[0]).getHandlers().put("option:jump-over",this);
 	}
 }

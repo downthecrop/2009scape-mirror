@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.construction.decoration;
 
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
@@ -30,9 +30,9 @@ public final class FireplacePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(13609).getHandlers().put("option:light", this);
-		ObjectDefinition.forId(13611).getHandlers().put("option:light", this);
-		ObjectDefinition.forId(13613).getHandlers().put("option:light", this);
+		SceneryDefinition.forId(13609).getHandlers().put("option:light", this);
+		SceneryDefinition.forId(13611).getHandlers().put("option:light", this);
+		SceneryDefinition.forId(13613).getHandlers().put("option:light", this);
 		return this;
 	}
 
@@ -42,7 +42,7 @@ public final class FireplacePlugin extends OptionHandler {
 			player.sendMessage("You need some logs and a tinderbox in order to light the fireplace.");
 			return true;
 		}
-		final Scenery obj = (Scenery) node.asObject();
+		final Scenery obj = (Scenery) node.asScenery();
 		player.lock(2);
 		player.animate(ANIMATION);
 		GameWorld.getPulser().submit(new Pulse(2, player) {

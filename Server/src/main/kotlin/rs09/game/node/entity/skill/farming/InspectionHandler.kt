@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -10,14 +10,14 @@ import core.plugin.Plugin
 @Initializable
 class InspectionHandler : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ObjectDefinition.setOptionHandler("inspect",this)
+        SceneryDefinition.setOptionHandler("inspect",this)
         return this
     }
 
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         node ?: return false
         player ?: return false
-        val patch = FarmingPatch.forObject(node.asObject())
+        val patch = FarmingPatch.forObject(node.asScenery())
         if(patch == null){
             player.sendMessage("This is an improperly handled inspect option. Report this please.")
         } else {

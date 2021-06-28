@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
@@ -29,10 +29,10 @@ public final class LumbridgeSwampHolePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(10375).getHandlers().put("option:take", this);
-		ObjectDefinition.forId(5947).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(5946).getHandlers().put("option:climb", this);
-		ObjectDefinition.forId(15566).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(10375).getHandlers().put("option:take", this);
+		SceneryDefinition.forId(5947).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(5946).getHandlers().put("option:climb", this);
+		SceneryDefinition.forId(15566).getHandlers().put("option:read", this);
 		return this;
 	}
 

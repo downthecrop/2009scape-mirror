@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -72,113 +72,113 @@ public class PortsObjectPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2412).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(2412).getHandlers().put("option:cross", this);// port
 		// sarim
 		// -
 		// entrana
 		// boat.
-		ObjectDefinition.forId(2413).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(2413).getHandlers().put("option:cross", this);// port
 		// sarim
 		// -
 		// entrana
 		// boat.
-		ObjectDefinition.forId(17404).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(17404).getHandlers().put("option:cross", this);// port
 		// sarim
 		// -
 		// charter
 		// boat.
-		ObjectDefinition.forId(17405).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(17405).getHandlers().put("option:cross", this);// port
 		// sarim
 		// -
 		// charter
 		// boat.
-		ObjectDefinition.forId(2083).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(2083).getHandlers().put("option:cross", this);// port
 		// sarim
 		// -
 		// regular
 		// boat.
-		ObjectDefinition.forId(2084).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(2084).getHandlers().put("option:cross", this);// port
 		// sarim
 		// -
 		// regular
 		// boat.
-		ObjectDefinition.forId(14304).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(14304).getHandlers().put("option:cross", this);// port
 		// sarim
 		// -
 		// regular
 		// boat.
-		ObjectDefinition.forId(14305).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(14305).getHandlers().put("option:cross", this);// port
 		// sarim
 		// -
 		// regular
 		// boat.
-		ObjectDefinition.forId(2593).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(2593).getHandlers().put("option:cross", this);// port
 		// sarim
 		// -
 		// lady
 		// lumbridge.
-		ObjectDefinition.forId(2415).getHandlers().put("option:cross", this);// entrana
+		SceneryDefinition.forId(2415).getHandlers().put("option:cross", this);// entrana
 		// off
 		// boat.
-		ObjectDefinition.forId(2414).getHandlers().put("option:cross", this);// entrana
+		SceneryDefinition.forId(2414).getHandlers().put("option:cross", this);// entrana
 		// on
 		// boat.
-		ObjectDefinition.forId(2081).getHandlers().put("option:cross", this);// karamaja
+		SceneryDefinition.forId(2081).getHandlers().put("option:cross", this);// karamaja
 		// boat
 		// (on)
-		ObjectDefinition.forId(2082).getHandlers().put("option:cross", this);// karamaja
+		SceneryDefinition.forId(2082).getHandlers().put("option:cross", this);// karamaja
 		// boat
 		// (off)
-		ObjectDefinition.forId(17398).getHandlers().put("option:cross", this);// karamaja
+		SceneryDefinition.forId(17398).getHandlers().put("option:cross", this);// karamaja
 		// boat
 		// (on)(second)
-		ObjectDefinition.forId(17399).getHandlers().put("option:cross", this);// karamaja
+		SceneryDefinition.forId(17399).getHandlers().put("option:cross", this);// karamaja
 		// boat
 		// (off)(second)
-		ObjectDefinition.forId(17394).getHandlers().put("option:cross", this);// catherby
+		SceneryDefinition.forId(17394).getHandlers().put("option:cross", this);// catherby
 		// boat
 		// (on)
-		ObjectDefinition.forId(17395).getHandlers().put("option:cross", this);// catherby
+		SceneryDefinition.forId(17395).getHandlers().put("option:cross", this);// catherby
 		// boat
 		// (off)
-		ObjectDefinition.forId(69).getHandlers().put("option:cross", this);// catherby
+		SceneryDefinition.forId(69).getHandlers().put("option:cross", this);// catherby
 		// boat
 		// (on)(second)
-		ObjectDefinition.forId(17401).getHandlers().put("option:cross", this);// brimhaven
+		SceneryDefinition.forId(17401).getHandlers().put("option:cross", this);// brimhaven
 		// (off)
-		ObjectDefinition.forId(17400).getHandlers().put("option:cross", this);// brimhaven
+		SceneryDefinition.forId(17400).getHandlers().put("option:cross", this);// brimhaven
 		// (on)
-		ObjectDefinition.forId(2087).getHandlers().put("option:cross", this);// brimhaven
+		SceneryDefinition.forId(2087).getHandlers().put("option:cross", this);// brimhaven
 		// (on)(second)
-		ObjectDefinition.forId(2088).getHandlers().put("option:cross", this);// brimhaven
+		SceneryDefinition.forId(2088).getHandlers().put("option:cross", this);// brimhaven
 		// (off)(second)
-		ObjectDefinition.forId(2086).getHandlers().put("option:cross", this);// ardougne
+		SceneryDefinition.forId(2086).getHandlers().put("option:cross", this);// ardougne
 		// (off)
-		ObjectDefinition.forId(2085).getHandlers().put("option:cross", this);// ardougne
+		SceneryDefinition.forId(2085).getHandlers().put("option:cross", this);// ardougne
 		// (on)
-		ObjectDefinition.forId(17402).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(17402).getHandlers().put("option:cross", this);// port
 		// khazard
 		// (on)
-		ObjectDefinition.forId(17403).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(17403).getHandlers().put("option:cross", this);// port
 		// khazard
 		// (off)
-		ObjectDefinition.forId(17392).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(17392).getHandlers().put("option:cross", this);// port
 		// phasmatys(on)
-		ObjectDefinition.forId(17393).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(17393).getHandlers().put("option:cross", this);// port
 		// phasmatys(off)
-		ObjectDefinition.forId(11209).getHandlers().put("option:cross", this);// port
+		SceneryDefinition.forId(11209).getHandlers().put("option:cross", this);// port
 		// phasmatys(other
 		// boat)
-		ObjectDefinition.forId(14307).getHandlers().put("option:cross", this);// pest
+		SceneryDefinition.forId(14307).getHandlers().put("option:cross", this);// pest
 		// control
 		// ship.
-		ObjectDefinition.forId(14306).getHandlers().put("option:cross", this);// pest
+		SceneryDefinition.forId(14306).getHandlers().put("option:cross", this);// pest
 		// control
 		// ship.
 		// lady lumby
-		ObjectDefinition.forId(2590).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(2592).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(2594).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(2590).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(2592).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(2594).getHandlers().put("option:cross", this);
 		return this;
 	}
 

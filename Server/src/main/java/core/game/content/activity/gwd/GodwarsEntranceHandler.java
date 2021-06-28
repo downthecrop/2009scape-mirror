@@ -1,6 +1,6 @@
 package core.game.content.activity.gwd;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.content.dialogue.FacialExpression;
 import core.game.node.entity.skill.Skills;
@@ -26,10 +26,10 @@ public final class GodwarsEntranceHandler extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(26340).getHandlers().put("option:tie-rope", this);
-		ObjectDefinition.forId(26341).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(26338).getHandlers().put("option:move", this);
-		ObjectDefinition.forId(26305).getHandlers().put("option:crawl-through", this);
+		SceneryDefinition.forId(26340).getHandlers().put("option:tie-rope", this);
+		SceneryDefinition.forId(26341).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(26338).getHandlers().put("option:move", this);
+		SceneryDefinition.forId(26305).getHandlers().put("option:crawl-through", this);
 		return this;
 	}
 

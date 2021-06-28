@@ -26,6 +26,7 @@ import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import core.tools.RandomFunction
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
@@ -960,5 +961,15 @@ object ContentAPI {
         val diffY = entity.location.y - from.location.y
 
         forceWalk(entity, entity.location.transform(diffX,diffY,0), "DUMB")
+    }
+
+    /**
+     * Submits an individual or "weak" pulse to a specific entity's pulse manager. Pulses submitted this way can be overridden by other pulses.
+     * @param entity the entity to submit the pulse to
+     * @param pulse the pulse to submit
+     */
+    @JvmStatic
+    fun submitIndividualPulse(entity: Entity, pulse: Pulse){
+        entity.pulseManager.run(pulse)
     }
 }

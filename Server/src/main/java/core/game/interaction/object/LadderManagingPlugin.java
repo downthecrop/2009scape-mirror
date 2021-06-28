@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -20,9 +20,9 @@ public final class LadderManagingPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.setOptionHandler("climb-up", this);
-		ObjectDefinition.setOptionHandler("climb-down", this);
-		ObjectDefinition.setOptionHandler("climb", this);
+		SceneryDefinition.setOptionHandler("climb-up", this);
+		SceneryDefinition.setOptionHandler("climb-down", this);
+		SceneryDefinition.setOptionHandler("climb", this);
 		return this;
 	}
 

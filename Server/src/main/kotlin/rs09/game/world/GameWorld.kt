@@ -2,7 +2,7 @@ package rs09.game.world
 
 import core.cache.Cache
 import core.cache.ServerStore
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.ge.GrandExchangeDatabase
 import core.game.node.entity.npc.drop.RareDropTable
 import core.game.node.entity.player.Player
@@ -150,7 +150,7 @@ object GameWorld {
         if (run) {
             SystemManager.flag(if (settings?.isDevMode == true) SystemState.PRIVATE else SystemState.ACTIVE)
         }
-        ObjectDefinition.getDefinitions().values.forEach(Consumer { obj: ObjectDefinition -> obj.examine })
+        SceneryDefinition.getDefinitions().values.forEach(Consumer { obj: SceneryDefinition -> obj.examine })
         System.gc()
         PlayerScripts.init()
         StateRepository.init()

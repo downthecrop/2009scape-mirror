@@ -1,6 +1,6 @@
 package core.game.content.activity.duel;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.container.Container;
 import core.game.container.impl.EquipmentContainer;
 import core.game.content.dialogue.DialogueAction;
@@ -570,7 +570,7 @@ public class DuelArea extends MapZone {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			ObjectDefinition.forId(3203).getHandlers().put("option:forfeit", this);
+			SceneryDefinition.forId(3203).getHandlers().put("option:forfeit", this);
 			return this;
 		}
 

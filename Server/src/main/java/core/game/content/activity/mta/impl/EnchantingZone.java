@@ -140,7 +140,7 @@ public class EnchantingZone extends MTAZone {
 		if (e instanceof Player) {
 			Player player = e.asPlayer();
 			if (target.getId() >= 10799 && target.getId() <= 10802) {
-				Shapes.forId(target.getId()).take(player, target.asObject());
+				Shapes.forId(target.getId()).take(player, target.asScenery());
 				return true;
 			}
 			if (target.getId() == 10803) {

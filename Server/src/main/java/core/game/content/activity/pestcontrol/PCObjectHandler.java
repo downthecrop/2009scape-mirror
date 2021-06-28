@@ -1,6 +1,6 @@
 package core.game.content.activity.pestcontrol;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import rs09.game.world.GameWorld;
 import core.game.content.activity.ActivityManager;
 import core.game.interaction.OptionHandler;
@@ -33,47 +33,47 @@ public final class PCObjectHandler extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		// Barricades
-		ObjectDefinition.forId(14227).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14228).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14229).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14230).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14231).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14232).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14227).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14228).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14229).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14230).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14231).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14232).getHandlers().put("option:repair", this);
 		// Gates
-		ObjectDefinition.forId(14233).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(14234).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(14235).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(14236).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(14237).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(14237).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14238).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(14238).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14239).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(14239).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14240).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(14240).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14241).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(14241).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14242).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(14242).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14243).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(14243).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14244).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(14244).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14245).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(14245).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14246).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(14246).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14247).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(14247).getHandlers().put("option:repair", this);
-		ObjectDefinition.forId(14248).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(14248).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14233).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(14234).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(14235).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(14236).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(14237).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(14237).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14238).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(14238).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14239).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(14239).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14240).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(14240).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14241).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(14241).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14242).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(14242).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14243).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(14243).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14244).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(14244).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14245).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(14245).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14246).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(14246).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14247).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(14247).getHandlers().put("option:repair", this);
+		SceneryDefinition.forId(14248).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(14248).getHandlers().put("option:repair", this);
 		// Towers
-		ObjectDefinition.forId(14296).getHandlers().put("option:climb", this);
+		SceneryDefinition.forId(14296).getHandlers().put("option:climb", this);
 		// Lander crossing plank
-		ObjectDefinition.forId(14315).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(25631).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(25632).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(14315).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(25631).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(25632).getHandlers().put("option:cross", this);
 		return this;
 	}
 

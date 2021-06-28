@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.agility.shortcuts;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import org.rs09.consts.Items;
 import core.game.interaction.OptionHandler;
@@ -57,10 +57,10 @@ public final class FaladorGrapplePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(17049).getHandlers().put("option:grapple", this);
-		ObjectDefinition.forId(17050).getHandlers().put("option:grapple", this);
-		ObjectDefinition.forId(17051).getHandlers().put("option:jump", this);
-		ObjectDefinition.forId(17052).getHandlers().put("option:jump", this);
+		SceneryDefinition.forId(17049).getHandlers().put("option:grapple", this);
+		SceneryDefinition.forId(17050).getHandlers().put("option:grapple", this);
+		SceneryDefinition.forId(17051).getHandlers().put("option:jump", this);
+		SceneryDefinition.forId(17052).getHandlers().put("option:jump", this);
 		return this;
 	}
 
@@ -73,14 +73,14 @@ public final class FaladorGrapplePlugin extends OptionHandler {
             case "jump":
                 ForceMovement.run(player,
                         current,
-                        node.asObject().getId() == 17051
+                        node.asScenery().getId() == 17051
                                 ? Location.create(3033, 3390, 0)
                                 : Location.create(3032, 3388, 0),
                         new Animation(7268),
                         10);
                 break;
             case "grapple":
-                destination = node.asObject().getId() == 17049
+                destination = node.asScenery().getId() == 17049
                         ? Location.create(3033, 3389, 1)
                         : Location.create(3032, 3391, 1);
 
@@ -139,7 +139,7 @@ public final class FaladorGrapplePlugin extends OptionHandler {
 
     @Override
     public Location getDestination(final Node moving, final Node destination) {
-        return destination.asObject().getId() == 17050 ? Location.create(3032, 3388, 0) : null;
+        return destination.asScenery().getId() == 17050 ? Location.create(3032, 3388, 0) : null;
     }
 
 }

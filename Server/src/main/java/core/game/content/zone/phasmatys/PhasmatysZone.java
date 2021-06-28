@@ -90,12 +90,12 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
                     return true;
                 case 7434: // Trapdoors in bar
                     if (option.getName().equalsIgnoreCase("open")) {
-                        SceneryBuilder.replace(target.asObject(), target.asObject().transform(7435));
+                        SceneryBuilder.replace(target.asScenery(), target.asScenery().transform(7435));
                     }
                     break;
 				case 7435: // open trapdoor in bar
 					if (option.getName().equalsIgnoreCase("close")) {
-						SceneryBuilder.replace(target.asObject(), target.asObject().transform(7434));
+						SceneryBuilder.replace(target.asScenery(), target.asScenery().transform(7434));
 					}
 					break;
                 case 9308:

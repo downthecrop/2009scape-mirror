@@ -47,7 +47,7 @@ class TFTInteractionListeners : InteractionListener(){
             return@onUseWith true
         }
 
-        onUseWith(OBJECT,FISH_ALTAR,*FISH){ player, _, fish ->
+        onUseWith(SCENERY,FISH_ALTAR,*FISH){ player, _, fish ->
             if(player.inventory.contains(LYRE,1)) {
                 Pulser.submit(spiritPulse(player, fish.id))
             } else {
@@ -104,7 +104,7 @@ class TFTInteractionListeners : InteractionListener(){
             return@on true
         }
 
-        on(PIPE,OBJECT,"put-inside"){player, _ ->
+        on(PIPE,SCENERY,"put-inside"){ player, _ ->
             val bombItem = Item(LIT_BOMB)
             if(player.inventory.containsItem(bombItem)){
                 player.sendMessage("You stuff the lit object into the pipe.")
@@ -116,7 +116,7 @@ class TFTInteractionListeners : InteractionListener(){
             return@on true
         }
 
-        on(PORTALIDs,OBJECT,"use"){player,portal ->
+        on(PORTALIDs,SCENERY,"use"){ player, portal ->
             val toLocation =
             when(portal.id){
                 2273 -> destRoom(2639, 10012, 2645, 10018).getCenter()
@@ -132,7 +132,7 @@ class TFTInteractionListeners : InteractionListener(){
             return@on true;
         }
 
-        on(SWENSEN_LADDER,OBJECT,"climb"){player,_ ->
+        on(SWENSEN_LADDER,SCENERY,"climb"){ player, _ ->
             if(player.getAttribute("fremtrials:swensen-accepted",false) == false){
                 player.dialogueInterpreter?.sendDialogues(1283,FacialExpression.ANGRY,"Where do you think you're going?")
                 return@on true
@@ -140,7 +140,7 @@ class TFTInteractionListeners : InteractionListener(){
             return@on true
         }
 
-        on(SWAYING_TREE,OBJECT,"chop down"){player,_ ->
+        on(SWAYING_TREE,SCENERY,"chop down"){ player, _ ->
             SkillingTool.getHatchet(player)?.let { Pulser.submit(ChoppingPulse(player)).also { return@on true } }
 
             player.sendMessage("You need an axe which you have the woodcutting level to use to do this.")
