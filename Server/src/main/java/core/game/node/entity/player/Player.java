@@ -761,7 +761,7 @@ public class Player extends Entity {
 	 */
 	public void updateSceneGraph(boolean login) {
 		Region region = getViewport().getRegion();
-		if (region instanceof DynamicRegion || (region == null && (region = RegionManager.getRegionCache().get(location.getRegionId())) instanceof DynamicRegion || region == null)) {
+		if (region instanceof DynamicRegion || region == null && (region = RegionManager.forId(location.getRegionId())) instanceof DynamicRegion) {
 			PacketRepository.send(BuildDynamicScene.class, new DynamicSceneContext(this, login));
 		} else {
 			PacketRepository.send(UpdateSceneGraph.class, new SceneGraphContext(this, login));

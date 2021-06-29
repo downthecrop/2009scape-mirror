@@ -247,7 +247,7 @@ class ScriptAPI(private val bot: Player) {
      * @return an Array of the nearest NPCs with matching name, or null.
      * @author Ceikry
      */
-    private fun findTargets(entity: Entity?, radius: Int, name: String? = null): List<Entity>? {
+    private fun findTargets(entity: Entity, radius: Int, name: String? = null): List<Entity>? {
         val targets: MutableList<Entity> = ArrayList()
         val localNPCs: Array<Any> = RegionManager.getLocalNpcs(entity, radius).toTypedArray()
         var length = localNPCs.size
