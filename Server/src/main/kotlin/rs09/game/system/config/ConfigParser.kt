@@ -4,29 +4,20 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 
 class ConfigParser {
-    fun prePlugin() = GlobalScope.launch{
-        launch {
+    fun prePlugin() {
             NPCConfigParser().load()
             ItemConfigParser().load()
-        }
-        launch {
             ObjectConfigParser().load()
             XteaParser().load()
-        }
-        InterfaceConfigParser().load()
+            InterfaceConfigParser().load()
     }
-
-    fun postPlugin() = GlobalScope.launch{
-        launch {
+    fun postPlugin() {
             ShopParser().load()
             DropTableParser().load()
             NPCSpawner().load()
-        }
-        launch {
             DoorConfigLoader().load()
             GroundSpawnLoader().load()
             MusicConfigLoader().load()
-        }
-        RangedConfigLoader().load()
+            RangedConfigLoader().load()
     }
 }
