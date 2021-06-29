@@ -28,10 +28,10 @@ abstract class InteractionListener : Listener{
     fun onUseWith(type: Int, used: IntArray, vararg with: Int, handler: (player: Player, used: Node, with: Node) -> Boolean){
         InteractionListeners.add(type,used,with,handler)
     }
-    fun onEquip(id: Int, handler: (player: Player, node: Node) -> Unit){
+    fun onEquip(id: Int, handler: (player: Player, node: Node) -> Boolean){
         InteractionListeners.addEquip(id,handler)
     }
-    fun onUnequip(id:Int, handler: (player: Player, node: Node) -> Unit){
+    fun onUnequip(id:Int, handler: (player: Player, node: Node) -> Boolean){
         InteractionListeners.addUnequip(id,handler)
     }
 
