@@ -28,6 +28,7 @@
 * [About the Project](#about-the-project)
 * [Contributing](#contributing)
 * [Contributing without Building](#contributing-without-building)
+* [Video Setup Tutorial](#video-setup-tutorial)
 * [Getting Started](#getting-started)
   * [Github Setup](#github-setup)
   * [Prerequisites](#prerequisites)
@@ -249,6 +250,10 @@ We use the AGPL 3.0 license, which can be found <a href="https://www.gnu.org/lic
 ### Contact
 
 <h4>Reminder: Developer support for setting up your own server ended October 5th, 2020. Do not ping/dm developers about setting up your server.</h4>
+
+### Video Setup Tutorial
+Occexe made a nice video showing you how to set it up if you'd prefer that. Check it out here:
+[![View Tutorial](http://img.youtube.com/vi/3oQcsZdrRcE/0.jpg)](http://www.youtube.com/watch?v=3oQcsZdrRcE "2009Scape Setup")
 
 
 
