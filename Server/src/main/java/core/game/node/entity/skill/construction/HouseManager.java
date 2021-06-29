@@ -381,7 +381,7 @@ public final class HouseManager {
 		region = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
 		region.setBorders(borders);
 		region.setUpdateAllPlanes(true);
-		RegionManager.getRegionCache().put(region.getId(), region);
+		RegionManager.addRegion(region.getId(), region);
 		configureRoofs();
 		for (int z = 0; z < 3; z++) {
 			for (int x = 0; x < 8; x++) {
@@ -406,7 +406,7 @@ public final class HouseManager {
 			dungeon = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
 			dungeon.setBorders(borders);
 			dungeon.setUpdateAllPlanes(true);
-			RegionManager.getRegionCache().put(dungeon.getId(), dungeon);
+			RegionManager.addRegion(dungeon.getId(), dungeon);
 			for (int x = 0; x < 8; x++) {
 				for (int y = 0; y < 8; y++) {
 					Room room = rooms[3][x][y];
