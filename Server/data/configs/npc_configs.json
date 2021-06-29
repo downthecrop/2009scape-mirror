@@ -35309,6 +35309,7 @@
     "strength_level": "1",
     "id": "4250",
     "range_level": "1",
+	"facing_booth": "true",
     "attack_level": "1"
   },
   {
