@@ -890,6 +890,18 @@ object ContentAPI {
     }
 
     /**
+     * Sends a dialogue that uses the player's chathead.
+     * @param player the player to send the dialogue to
+     * @param npc the ID of the NPC to use for the chathead
+     * @param msg the message to send.
+     * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.FRIENDLY
+     */
+    @JvmStatic
+    fun sendNPCDialogue(player: Player, npc: Int, msg: String, expr: FacialExpression = FacialExpression.FRIENDLY){
+        player.dialogueInterpreter.sendDialogues(npc, expr, *DialUtils.splitLines(msg))
+    }
+
+    /**
      * Sends an animation to a specific interface child
      * @param player the player to send the packet to
      * @param anim the ID of the animation to send to the interface
@@ -971,5 +983,15 @@ object ContentAPI {
     @JvmStatic
     fun submitIndividualPulse(entity: Entity, pulse: Pulse){
         entity.pulseManager.run(pulse)
+    }
+
+    /**
+     * Gets the number of QP a player has
+     * @param player the player to get the QP for
+     * @return the number of QP the player has
+     */
+    @JvmStatic
+    fun getQP(player: Player): Int{
+        return player.questRepository.points
     }
 }

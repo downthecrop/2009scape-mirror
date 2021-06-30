@@ -29,7 +29,7 @@ public final class SilverSicklePlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		Region region = RegionManager.getRegionCache().get(player.getLocation().getRegionId());
+		Region region = RegionManager.forId(player.getLocation().getRegionId());
 		switch (option) {
 		case "operate":
 		case "cast bloom":
@@ -48,6 +48,7 @@ public final class SilverSicklePlugin extends OptionHandler {
 					}
 				}
 			}
+			RegionManager.getLock().unlock();
 			return true;
 		}
 		return false;
