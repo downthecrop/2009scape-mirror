@@ -42,7 +42,7 @@ class CulChestItems: InteractionListener() {
 
     }
 
-    fun alchemize(player: Player, node: Node){
+    fun alchemize(player: Player, node: Node): Boolean{
         val amount = ContentAPI.amountInInventory(player, node.id) + ContentAPI.amountInEquipment(player, node.id)
         val coins = amount * ContentAPI.itemDefinition(node.id).value
 
@@ -51,5 +51,6 @@ class CulChestItems: InteractionListener() {
         ContentAPI.addItemOrDrop(player, 995, coins)
 
         ContentAPI.sendDialogue(player, "The item instantly alchemized itself!")
+        return false //tell equip handler not to equip the gloves at all if they still even exist lel
     }
 }
