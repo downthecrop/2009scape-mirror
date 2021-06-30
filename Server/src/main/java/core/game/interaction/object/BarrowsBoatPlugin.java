@@ -30,7 +30,7 @@ public class BarrowsBoatPlugin extends OptionHandler {
 		switch (option) {
 		case "board":
 			final Location dest = node.getId() == 6970 ? new Location(3522, 3285, 0) : new Location(3500, 3380, 0);
-			final String name = node.getId() == 6970 ? "Mort'on." : "the swamp";
+			final String name = node.getId() == 6970 ? "Mort'ton." : "the swamp";
 			player.lock();
 			player.getInterfaceManager().open(new Component(321));
 			GameWorld.getPulser().submit(new Pulse(7, player) {
