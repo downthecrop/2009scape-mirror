@@ -10,6 +10,7 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Plugin
 import core.game.node.entity.skill.crafting.TanningProduct
+import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 
 /**
@@ -30,6 +31,16 @@ class NPCTradePlugin : InteractionListener() {
                 return@on true
             }
             return@on npc.openShop(player)
+        }
+
+        on(NPCs.SIEGFRIED_ERKLE_933, NPC, "trade"){player, node ->
+            val points = ContentAPI.getQP(player)
+            if(points < 40){
+                ContentAPI.sendNPCDialogue(player, NPCs.SIEGFRIED_ERKLE_933, "I'm sorry, adventurer, but you need 40 quest points to buy from me.")
+                return@on true
+            }
+            node.asNpc().openShop(player)
+            return@on true
         }
     }
 
