@@ -39771,6 +39771,7 @@
     "name": "Mystic hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": true,	
     "id": "4089",
     "bonuses": "0,0,0,4,0,0,0,0,4,0,4,0,0,0,0"
   },
@@ -39909,6 +39910,7 @@
     "name": "Mystic hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": true,	
     "id": "4099",
     "bonuses": "0,0,0,4,0,0,0,0,4,0,4,0,0,0,0"
   },
@@ -40047,6 +40049,7 @@
     "name": "Mystic hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": true,	
     "id": "4109",
     "bonuses": "0,0,0,4,0,0,0,0,4,0,4,0,0,0,0"
   },
@@ -66990,7 +66993,7 @@
     "id": "6915"
   },
   {
-    "requirements": "{1,50}-{6,25}",
+    "requirements": "{1,25}-{6,50}",
     "ge_buy_limit": "10",
     "examine": "Mystical robes.",
     "durability": null,
@@ -67017,7 +67020,7 @@
     "id": "6917"
   },
   {
-    "requirements": "{1,50}-{6,25}",
+    "requirements": "{1,25}-{6,50}",
     "ge_buy_limit": "10",
     "examine": "A mystic hat.",
     "durability": null,
@@ -67030,6 +67033,7 @@
     "name": "Infinity hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": true,	
     "id": "6918",
     "bonuses": "0,0,0,6,0,0,0,0,6,0,7,0,0,0,0"
   },
@@ -67043,7 +67047,7 @@
     "id": "6919"
   },
   {
-    "requirements": "{1,50}-{6,25}",
+    "requirements": "{1,25}-{6,50}",
     "ge_buy_limit": "10",
     "examine": "Mystical boots.",
     "durability": null,
@@ -67069,7 +67073,7 @@
     "id": "6921"
   },
   {
-    "requirements": "{1,50}-{6,25}",
+    "requirements": "{1,25}-{6,50}",
     "ge_buy_limit": "10",
     "examine": "Mystical gloves.",
     "durability": null,
@@ -67094,7 +67098,7 @@
     "id": "6923"
   },
   {
-    "requirements": "{1,50}-{6,25}",
+    "requirements": "{1,25}-{6,50}",
     "ge_buy_limit": "10",
     "examine": "Mystical robes.",
     "durability": null,
@@ -92943,7 +92947,7 @@
     "id": "10329"
   },
   {
-    "requirements": "{1,65}-{4,45}",
+    "requirements": "{1,45}-{4,65}",
     "ge_buy_limit": "2",
     "examine": "Ancient range protection crafted from white dragonhide.",
     "durability": null,
@@ -92971,7 +92975,7 @@
     "id": "10331"
   },
   {
-    "requirements": "{1,65}-{4,45}",
+    "requirements": "{1,45}-{4,65}",
     "ge_buy_limit": "2",
     "examine": "Fabulously ancient range protection crafted from white dragonhide.",
     "durability": null,
@@ -92999,7 +93003,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,65}-{4,45}",
+    "requirements": "{1,45}-{4,65}",
     "ge_buy_limit": "5000",
     "examine": "Ancient range protection crafted from white dragonhide.",
     "durability": null,
@@ -93026,7 +93030,7 @@
     "id": "10335"
   },
   {
-    "requirements": "{1,65}-{4,45}",
+    "requirements": "{1,45}-{4,65}",
     "ge_buy_limit": "2",
     "examine": "Fabulously ancient range protection crafted from white dragonhide.",
     "durability": null,
@@ -93052,7 +93056,7 @@
     "id": "10337"
   },
   {
-    "requirements": "{1,65}-{6,30}",
+    "requirements": "{1,30}-{6,65}",
     "ge_buy_limit": "2",
     "examine": "Ancient mage protection enchanted in the Third-Age.",
     "durability": null,
@@ -93080,7 +93084,7 @@
     "id": "10339"
   },
   {
-    "requirements": "{1,65}-{6,30}",
+    "requirements": "{1,30}-{6,65}",
     "ge_buy_limit": "2",
     "examine": "Ancient mage protection enchanted in the Third-Age.",
     "durability": null,
@@ -93108,7 +93112,7 @@
   },
   {
     "remove_head": "true",
-    "requirements": "{1,65}-{6,30}",
+    "requirements": "{1,30}-{6,65}",
     "ge_buy_limit": "2",
     "examine": "Ancient mage protection enchanted in the Third-Age.",
     "durability": null,
@@ -93134,7 +93138,7 @@
     "id": "10343"
   },
   {
-    "requirements": "{1,65}-{6,30}",
+    "requirements": "{1,30}-{6,65}",
     "ge_buy_limit": "2",
     "examine": "Ancient mage protection enchanted in the Third-Age.",
     "durability": null,

@@ -128,7 +128,7 @@ public class Fletching {
             WILLOW_LONGBOW((byte) 1,58,847,40, 41.5, new Animation(6686)),
             MAPLE_SHORTBOW((byte) 1,64,853,50, 50, new Animation(6681)),
             MAPLE_LONGBOW((byte) 1,62,851,55, 58.3, new Animation(6687)),
-            YEW_SHORTBOW((byte) 1,68,857,65, 66, new Animation(6682)),
+            YEW_SHORTBOW((byte) 1,68,857,65, 67.5, new Animation(6682)),
             YEW_LONGBOW((byte) 1,66,855,70, 75, new Animation(6688)),
             MAGIC_SHORTBOW((byte) 1,72,861,80, 83.3, new Animation(6683)),
             MAGIC_LONGBOW((byte) 1,70,859,85, 91.5, new Animation(6689)),
@@ -163,12 +163,12 @@ public class Fletching {
             }
         }
     public enum GemBolts {
-        OPAL(877, org.rs09.consts.Items.OPAL_1609, 45, 879, 11, 1.5),
+        OPAL(877, org.rs09.consts.Items.OPAL_1609, 45, 879, 11, 1.6),
         PEARL(9140, org.rs09.consts.Items.OYSTER_PEARL_411, 46, 880, 41, 3.2),
         PEARLS(9140, org.rs09.consts.Items.OYSTER_PEARLS_413, 46, 880, 41, 3.2),
         JADE(9139, org.rs09.consts.Items.JADE_1611, 9187, 9335, 26, 2.4),
         RED_TOPAZ(9141, org.rs09.consts.Items.RED_TOPAZ_1613, 9188, 9336, 48, 3.9),
-        SAPPHIRE(9142, org.rs09.consts.Items.SAPPHIRE_1607, 9189, 9337, 56, 4),
+        SAPPHIRE(9142, org.rs09.consts.Items.SAPPHIRE_1607, 9189, 9337, 56, 4.7),
         EMERALD(9142, org.rs09.consts.Items.EMERALD_1605, 9190, 9338, 58, 5.5),
         RUBY(9143, org.rs09.consts.Items.RUBY_1603, 9191, 9339, 63, 6.3),
         DIAMOND(9143, org.rs09.consts.Items.DIAMOND_1601, 9192, 9340, 65, 7),
@@ -192,10 +192,10 @@ public class Fletching {
         IRON_ARROW(40, 884, 15, 3.8),
         STEEL_ARROW(41, 886, 30, 6.3),
         MITHRIL_ARROW(42, 888, 45, 8.8),
-        ADAMANT_ARROW(43, 890, 60, 10),
+        ADAMANT_ARROW(43, 890, 60, 11.3),
         RUNE_ARROW(44, 892, 75, 13.8),
         DRAGON_ARROW(11237, 11212, 90, 16.3),
-        BROAD_ARROW(13278, 4160, 52, 10);
+        BROAD_ARROW(13278, 4160, 52, 15);
 
         public int unfinished,finished,level;
         public double experience;
@@ -294,7 +294,7 @@ public class Fletching {
     }
     public enum FletchingItems {
         //Standard logs
-        ARROW_SHAFT(52, 15, 1, 15),
+        ARROW_SHAFT(52, 5, 1, 15),
         SHORT_BOW(50, 5, 5, 1),
         LONG_BOW(48, 10, 10, 1),
         WOODEN_STOCK(9440, 6, 9, 1),
