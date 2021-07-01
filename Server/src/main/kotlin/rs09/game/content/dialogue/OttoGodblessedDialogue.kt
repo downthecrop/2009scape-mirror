@@ -36,8 +36,10 @@ class OttoGodblessedDialogue(player: Player? = null) : DialoguePlugin(player) {
             -1 -> options("Ask about barbarian training", "Nevermind.").also { stage++ }
             0 -> when(buttonId){
                 1 -> player("Is there anything you can teach me?").also { stage = 20 }
-                2 -> stage = END_DIALOGUE
+                2 -> stage++
             }
+
+            1 -> stage = END_DIALOGUE
 
 
             20 -> npc("I can teach you how to fish.").also { stage++ }
