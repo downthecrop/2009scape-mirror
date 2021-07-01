@@ -6,6 +6,7 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.plugin.Initializable
+import rs09.tools.END_DIALOGUE
 
 /**
  * Represents the dialogue plugin used for Otto
@@ -32,56 +33,12 @@ class OttoGodblessedDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when (stage) {
-            -1 -> options("Ask about hastas","Ask about barbarian training").also { stage++ }
+            -1 -> options("Ask about barbarian training", "Nevermind.").also { stage++ }
             0 -> when(buttonId){
-                1 -> player("Can you help me with Zamorakian weapons?").also { stage++ }
-                2 -> player("Is there anything you can teach me?").also { stage = 20 }
+                1 -> player("Is there anything you can teach me?").also { stage = 20 }
+                2 -> stage = END_DIALOGUE
             }
-            1 -> {
-                npc("Yes, I can convert a Zamorakian spear into a hasta.", "The spirits require me to request 300,000 coins from", "you for this service.")
-                stage = 2
-            }
-            2 -> {
-                interpreter.sendOptions("Select an Option", "Spear into hasta", "Hasta back to spear")
-                stage = 3
-            }
-            3 -> when (buttonId) {
-                1 -> if (player.inventory.contains(11716, 1) && player.inventory.contains(995, 300000)) {
-                    interpreter.sendOptions("Convert your spear?", "Yes", "No")
-                    stage = 4
-                } else {
-                    player.sendMessage("You need a Zamorakian Spear and 300,000 coins to proceed.")
-                    end()
-                }
-                2 -> if (player.inventory.contains(14662, 1)) {
-                    interpreter.sendOptions("Revert back to spear?", "Yes", "No")
-                    stage = 5
-                } else {
-                    player.sendMessage("You need a Zamorakian Hasta to proceed.")
-                    end()
-                }
-            }
-            4 -> when (buttonId) {
-                1 -> if (player.inventory.remove(Item(11716, 1), Item(995, 300000))) {
-                    player.inventory.add(Item(14662))
-                    interpreter.sendItemMessage(14662, "Otto converts your spear into a hasta.")
-                    stage = 6
-                } else {
-                    end()
-                }
-                2 -> end()
-            }
-            5 -> when (buttonId) {
-                1 -> if (player.inventory.remove(Item(14662, 1))) {
-                    player.inventory.add(Item(11716))
-                    interpreter.sendItemMessage(11716, "Otto converts your hasta back into a spear.")
-                    stage = 6
-                } else {
-                    end()
-                }
-                2 -> end()
-            }
-            6 -> end()
+
 
             20 -> npc("I can teach you how to fish.").also { stage++ }
             21 -> player("Oh, that's pretty underwhelming. But uhhh, okay!").also { stage++ }
