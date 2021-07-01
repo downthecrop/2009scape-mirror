@@ -1,5 +1,6 @@
 package core.game.interaction.item.withobject;
 
+import api.ContentAPI;
 import core.plugin.Initializable;
 import org.rs09.consts.Items;
 import core.game.interaction.NodeUsageEvent;
@@ -11,6 +12,7 @@ import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
+import rs09.game.system.SystemLogger;
 
 /**
  * Represents the plugin used to fill a bucket.
@@ -40,6 +42,9 @@ public final class WaterSourcePlugin extends UseWithHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (int i : OBJECTS) {
+			if(ContentAPI.sceneryDefinition(i).getName().toLowerCase().contains("well")){
+				continue;
+			}
 			addHandler(i, OBJECT_TYPE, this);
 		}
 		return this;
