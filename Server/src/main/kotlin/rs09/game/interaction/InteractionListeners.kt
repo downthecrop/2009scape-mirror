@@ -126,9 +126,9 @@ object InteractionListeners {
     @JvmStatic
     fun run(id: Int, player: Player, node: Node, isEquip: Boolean): Boolean{
         if(isEquip){
-            return equipListeners["equip:$id"]?.invoke(player,node)!!
+            return equipListeners["equip:$id"]?.invoke(player,node) ?: true
         } else {
-            return equipListeners["unequip:$id"]?.invoke(player,node)!!
+            return equipListeners["unequip:$id"]?.invoke(player,node) ?: true
         }
     }
 
