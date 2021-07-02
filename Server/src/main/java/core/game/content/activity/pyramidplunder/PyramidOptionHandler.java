@@ -1,5 +1,6 @@
 package core.game.content.activity.pyramidplunder;
 
+import api.ContentAPI;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
@@ -9,6 +10,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
+import kotlin.Unit;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -84,12 +86,10 @@ public final class PyramidOptionHandler extends OptionHandler {
 			if(entrance == currentEntrance && willBePushed){
 				player.lock();
 				player.animate(new Animation(7299));
-				player.getImpactHandler().setDisabledTicks(4);
-				GameWorld.getPulser().submit(new Pulse(4, player) {
+				ContentAPI.submitWorldPulse(new Pulse(4, player){
 					@Override
 					public boolean pulse() {
 						player.unlock();
-						player.getAnimator().reset();
 						return true;
 					}
 				});
