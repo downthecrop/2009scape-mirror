@@ -1,5 +1,6 @@
 package rs09.game.node.entity.combat
 
+import core.game.component.Component
 import core.game.container.Container
 import core.game.container.impl.EquipmentContainer
 import core.game.node.Node
@@ -7,8 +8,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.combat.InteractionType
-import core.game.node.entity.combat.equipment.ArmourSet
-import core.game.node.entity.combat.equipment.DegradableEquipment
+import core.game.node.entity.combat.equipment.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
@@ -219,6 +219,20 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      * @return `True` if so.
      */
     open fun isAttackable(entity: Entity, victim: Entity): InteractionType? {
+        val comp = entity.getAttribute("autocast_component",null) as Component?
+        if((comp != null || type == CombatStyle.MAGIC) && (entity.properties.autocastSpell == null || entity.properties.autocastSpell.spellId == 0) && entity is Player){
+            val weapEx = entity.getExtension<Any>(WeaponInterface::class.java) as WeaponInterface?
+            if(comp != null){
+                entity.interfaceManager.close(comp)
+                entity.interfaceManager.openTab(weapEx)
+                entity.properties.combatPulse.stop()
+                entity.attack(victim)
+                entity.removeAttribute("autocast_component")
+            }
+            weapEx?.setAttackStyle(1)
+            weapEx?.updateInterface()
+            entity.debug("Adjusting attack style")
+        }
         if (entity.location == victim.location) {
             return if (entity.index < victim.index && victim.properties.combatPulse.getVictim() === entity) {
                 InteractionType.STILL_INTERACT
