@@ -30631,7 +30631,8 @@
     "strength_level": "1",
     "id": "3296",
     "range_level": "1",
-    "attack_level": "1"
+    "attack_level": "1",
+    "water_npc":  true,
   },
   {
     "examine": "Keeps this magic area tidy.",
