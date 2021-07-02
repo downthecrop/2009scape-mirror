@@ -172,10 +172,6 @@ public final class WildernessZone extends MapZone {
 					GroundItemManager.create(reward, e.asNpc().getDropLocation(), killer.asPlayer());
 					Repository.sendNews(killer.getUsername() + " has received " + reward.getName().toLowerCase() + " from a " + e.asNpc().getName() + "!");
 				}
-				e.asNpc().getDefinition().getDropTables().drop(e.asNpc(), killer);
-				if (((NPC) e).getTask() != null && ((Player) killer).getSlayer().getTask() == e.asNpc().getTask()) {
-					((Player) killer).getSlayer().finalizeDeath(killer.asPlayer(), e.asNpc());
-				}
 
 				int combatLevel = e.asNpc().getDefinition().getCombatLevel();
 				int dropRate = getNewDropRate(combatLevel);
@@ -196,6 +192,10 @@ public final class WildernessZone extends MapZone {
 			}
 
 			if (e instanceof NPC) {
+				e.asNpc().getDefinition().getDropTables().drop(e.asNpc(), killer);
+				if (((NPC) e).getTask() != null && ((Player) killer).getSlayer().getTask() == e.asNpc().getTask()) {
+					((Player) killer).getSlayer().finalizeDeath(killer.asPlayer(), e.asNpc());
+				}
 				e.asNpc().setRespawnTick(GameWorld.getTicks() + e.asNpc().getDefinition().getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));
 				if (!e.asNpc().isRespawn()) {
 					e.asNpc().clear();
