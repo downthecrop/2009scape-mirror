@@ -73,7 +73,7 @@ public final class ApothecaryDialogue extends DialoguePlugin {
 		}
 		if (player.getQuestRepository().getQuest("Romeo & Juliet").getStage(player) == 50) {
 			if (!player.getInventory().contains(753, 1)) {
-				npc("Keep searching for those Cadavaberries. They're needed", "for the potion.");
+				npc("Keep searching for those Cadava berries. They're needed", "for the potion.");
 				stage = 507;
 				return true;
 			} else {
@@ -89,7 +89,7 @@ public final class ApothecaryDialogue extends DialoguePlugin {
 					stage = 637;
 					return true;
 				} else {
-					npc("Keep searching for those Cadavaberries. They're needed", "for the potion.");
+					npc("Keep searching for those Cadava berries. They're needed", "for the potion.");
 					stage = 507;
 					return true;
 				}
@@ -106,7 +106,7 @@ public final class ApothecaryDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 1:
-			options("Can you make a strength potion?", "Do you know a potion to mame hair fall out?", "Have you got any good potions to give away?", "Can you make a potion that makes it seem like I'm dead?");
+			options("Can you make a strength potion?", "Do you know a potion to make hair fall out?", "Have you got any good potions to give away?", "Can you make a potion that makes it seem like I'm dead?");
 			stage = 2;
 			break;
 		case 2:
@@ -224,7 +224,7 @@ public final class ApothecaryDialogue extends DialoguePlugin {
 			stage = 503;
 			break;
 		case 503:
-			interpreter.sendDialogues(npc, null, "I have all that, but i need some Cadava berries.");
+			interpreter.sendDialogues(npc, null, "I have all that, but I need some Cadava berries.");
 			stage = 504;
 			break;
 		case 504:
@@ -257,7 +257,7 @@ public final class ApothecaryDialogue extends DialoguePlugin {
 			if (!player.getInventory().add(CADAVA_POTION)) {
 				GroundItemManager.create(new GroundItem(CADAVA_POTION, player.getLocation(), player));
 			}
-			interpreter.sendItemMessage(756, "The Apothecary gives you a Cavada potion.");
+			interpreter.sendItemMessage(756, "The Apothecary gives you a Cadava potion.");
 			stage = 640;
 			break;
 		case 640:
