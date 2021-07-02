@@ -146,7 +146,7 @@ public final class HettyDialogue extends DialoguePlugin {
 			stage = 32;
 			break;
 		case 32:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "What do i need?");
+			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "What do I need?");
 			stage = 33;
 			break;
 		case 33:
