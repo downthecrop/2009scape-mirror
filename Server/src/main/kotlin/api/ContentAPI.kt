@@ -1,6 +1,7 @@
 package api
 
 import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.content.dialogue.FacialExpression
 import core.game.node.Node
@@ -993,5 +994,15 @@ object ContentAPI {
     @JvmStatic
     fun getQP(player: Player): Int{
         return player.questRepository.points
+    }
+
+    /**
+     * Gets a scenery definition from the given ID
+     * @param id the ID of the scenery to get the definition for.
+     * @return the scenery definition
+     */
+    @JvmStatic
+    fun sceneryDefinition(id: Int): SceneryDefinition{
+        return SceneryDefinition.forId(id)
     }
 }
