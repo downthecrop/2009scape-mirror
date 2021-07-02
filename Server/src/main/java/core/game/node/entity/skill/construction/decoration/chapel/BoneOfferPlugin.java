@@ -1,6 +1,7 @@
 package core.game.node.entity.skill.construction.decoration.chapel;
 
 
+import api.ContentAPI;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.Bones;
 import core.game.node.entity.skill.Skills;
@@ -86,7 +87,7 @@ public class BoneOfferPlugin extends UseWithHandler {
 			return;
 		}
 		final Location start = player.getLocation();
-		GameWorld.getPulser().submit(new Pulse(1) {
+		ContentAPI.submitIndividualPulse(player, new Pulse(1) {
 			int counter = 0;
 			
 			@Override
