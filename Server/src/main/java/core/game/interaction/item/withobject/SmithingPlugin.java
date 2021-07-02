@@ -13,6 +13,7 @@ import core.game.node.item.Item;
 import core.game.node.object.Scenery;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
+import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
 import rs09.plugin.PluginManager;
 
 /**
@@ -70,7 +71,7 @@ public final class SmithingPlugin extends UseWithHandler {
 			player.getDialogueInterpreter().sendDialogue("Property of Doric the Dwarf.");
 			return true;
 		}
-		if (!player.getInventory().contains(2347, 1)) {
+		if (!player.getInventory().contains(2347, 1) && !SkillcapePerks.isActive(SkillcapePerks.BAREFISTED_SMITHING,player)) {
 			player.getDialogueInterpreter().sendDialogue("You need a hammer to work the metal with.");
 			return true;
 		} else {
