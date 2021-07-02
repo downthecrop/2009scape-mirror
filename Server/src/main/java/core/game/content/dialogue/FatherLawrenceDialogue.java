@@ -80,7 +80,7 @@ public final class FatherLawrenceDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 41:
-			interpreter.sendDialogues(npc, null, "Can't you see that I'm in the middle of a Sermon?!");
+			interpreter.sendDialogues(npc, null, "Can't you see that I'm in the middle of a sermon?!");
 			stage = 42;
 			break;
 		case 42:
