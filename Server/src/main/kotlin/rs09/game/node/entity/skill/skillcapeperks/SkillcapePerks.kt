@@ -110,6 +110,7 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
         if(!isActive(this,player)){
             player.setAttribute("/save:$attribute",true)
         }
+        player.debug("Activated ${this.name}")
         if(this == CONSTANT_GLOW)
             DarkZone.checkDarkArea(player)
     }
