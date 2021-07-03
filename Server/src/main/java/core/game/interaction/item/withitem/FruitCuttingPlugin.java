@@ -222,8 +222,12 @@ public final class FruitCuttingPlugin extends UseWithHandler {
 					amount = 5;
 					break;
 				case 4:
-					ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
-						cut(player, (int) value, slice);
+					ContentAPI.sendInputDialogue(player, false, "Enter the amount:", (value) -> {
+						String s = value.toString();
+						s = s.replace("k","000");
+						s = s.replace("K","000");
+						int val = Integer.parseInt(s);
+						cut(player, val, slice);
 						return Unit.INSTANCE;
 					});
 					return true;
