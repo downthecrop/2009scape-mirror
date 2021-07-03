@@ -372,9 +372,13 @@ public final class BankingPlugin extends OptionHandler {
                                     amount = p.getBank().getLastAmountX();
                                     break;
                                 case 234:
-                                    ContentAPI.sendInputDialogue(p, true, "Enter the amount:", (value) -> {
-                                        p.getBank().takeItem(slot, (int) value);
-                                        p.getBank().updateLastAmountX((int) value);
+                                    ContentAPI.sendInputDialogue(p, false, "Enter the amount:", (value) -> {
+                                        String s = value.toString();
+                                        s = s.replace("k","000");
+                                        s = s.replace("K","000");
+                                        int val = Integer.parseInt(s);
+                                        p.getBank().takeItem(slot, val);
+                                        p.getBank().updateLastAmountX(val);
                                         return Unit.INSTANCE;
                                     });
                                     break;
@@ -446,9 +450,13 @@ public final class BankingPlugin extends OptionHandler {
                             p.getBank().addItem(slot, p.getBank().getLastAmountX());
                             break;
                         case 234:
-                            ContentAPI.sendInputDialogue(p, true, "Enter the amount:", (value) -> {
-                                p.getBank().addItem(slot, (int) value);
-                                p.getBank().updateLastAmountX((int) value);
+                            ContentAPI.sendInputDialogue(p, false, "Enter the amount:", (value) -> {
+                                String s = value.toString();
+                                s = s.replace("k","000");
+                                s = s.replace("K","000");
+                                int val = Integer.parseInt(s);
+                                p.getBank().addItem(slot, val);
+                                p.getBank().updateLastAmountX(val);
                                 return Unit.INSTANCE;
                             });
                             break;
@@ -512,8 +520,12 @@ public final class BankingPlugin extends OptionHandler {
                             });
                             return true;
                         case 234:
-                            ContentAPI.sendInputDialogue(p, true, "Enter the amount:", (value) -> {
-                                p.getBank().addItem(slot, (int) value);
+                            ContentAPI.sendInputDialogue(p, false, "Enter the amount:", (value) -> {
+                                String s = value.toString();
+                                s = s.replace("k","000");
+                                s = s.replace("K","000");
+                                int val = Integer.parseInt(s);
+                                p.getBank().addItem(slot, val);
                                 InterfaceContainer.generateItems(p, p.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1",}, 11, 15, 5, 7);
                                 return Unit.INSTANCE;
                             });
