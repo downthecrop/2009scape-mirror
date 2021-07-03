@@ -956,8 +956,25 @@ object ContentAPI {
      */
     @JvmStatic
     fun sendInputDialogue(player: Player, numeric: Boolean, prompt: String, handler: (value: Any) -> Unit){
-        player.dialogueInterpreter.sendInput(!numeric, prompt)
-        player.setAttribute("runscript",handler) //Handled in RunScriptPacketHandler
+        if(numeric) sendInputDialogue(player, InputType.NUMERIC, prompt, handler)
+        else sendInputDialogue(player, InputType.STRING_SHORT, prompt, handler)
+    }
+
+    /**
+     * Send input dialogues based on type. Some dialogues are special and can't be covered by the other sendInputDialogue method
+     * @param player the player to send the input dialogue to
+     * @param type the input type to send - an enum is available for this called InputType
+     * @param prompt what to prompt the player
+     * @param handler the method that handles the value from the input dialogue
+     */
+    @JvmStatic
+    fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: (value: Any) -> Unit){
+        when(type){
+            InputType.NUMERIC, InputType.STRING_SHORT -> player.dialogueInterpreter.sendInput(type != InputType.NUMERIC, prompt)
+            InputType.STRING_LONG -> player.dialogueInterpreter.sendLongInput(prompt)
+            InputType.MESSAGE -> player.dialogueInterpreter.sendMessageInput(prompt)
+        }
+        player.setAttribute("runscript", handler)
     }
 
     /**
