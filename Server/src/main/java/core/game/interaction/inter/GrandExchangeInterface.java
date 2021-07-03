@@ -335,11 +335,14 @@ public class GrandExchangeInterface extends ComponentPlugin {
 			setOfferAmount(player, offer, amount + 1000);
 			return true;
 		case 170: // value x
-			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+			ContentAPI.sendInputDialogue(player, false, "Enter the amount:", (value) -> {
 				if (player.getInterfaceManager().getChatbox().getId() == 389) {
 					player.getPlayerGrandExchange().openSearch();
 				}
-				setOfferAmount(player, offer, (int) value);
+				String s = value.toString();
+				s = s.replace("k","000");
+				s = s.replace("K","000");
+				setOfferAmount(player, offer, Integer.parseInt(s));
 				return Unit.INSTANCE;
 			});
 			return false;
@@ -368,11 +371,14 @@ public class GrandExchangeInterface extends ComponentPlugin {
 				player.getPacketDispatch().sendMessage("Please select an offer first.");
 				return true;
 			}
-			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+			ContentAPI.sendInputDialogue(player, false, "Enter the amount:", (value) -> {
 				if (player.getInterfaceManager().getChatbox().getId() == 389) {
 					player.getPlayerGrandExchange().openSearch();
 				}
-				setOfferValue(player, offer, (int) value);
+				String s = value.toString();
+				s = s.replace("k","000");
+				s = s.replace("K","000");
+				setOfferAmount(player, offer, Integer.parseInt(s));
 				return Unit.INSTANCE;
 			});
 			return false;

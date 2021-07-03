@@ -68,8 +68,12 @@ public final class TradeInterfacePlugin extends ComponentPlugin {
 				module.getContainer().withdraw(slot, module.getContainer().getAmount(module.getContainer().get(slot)));
 				break;
 			case 234:
-				ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
-					module.getContainer().withdraw(slot, (int) value);
+				ContentAPI.sendInputDialogue(player, false, "Enter the amount:", (value) -> {
+					String s = value.toString();
+					s = s.replace("k","000");
+					s = s.replace("K","000");
+					int val = Integer.parseInt(s);
+					module.getContainer().withdraw(slot, val);
 					return Unit.INSTANCE;
 				});
 				break;
@@ -96,8 +100,12 @@ public final class TradeInterfacePlugin extends ComponentPlugin {
 				module.getContainer().offer(slot, player.getInventory().getAmount(player.getInventory().get(slot)));
 				break;
 			case 234:
-				ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
-					module.getContainer().offer(slot, (int) value);
+				ContentAPI.sendInputDialogue(player, false, "Enter the amount:", (value) -> {
+					String s = value.toString();
+					s = s.replace("k","000");
+					s = s.replace("K","000");
+					int val = Integer.parseInt(s);
+					module.getContainer().offer(slot, val);
 					return Unit.INSTANCE;
 				});
 				break;
