@@ -27,6 +27,7 @@ import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
+import core.game.world.map.zone.ZoneBuilder
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
@@ -1032,6 +1033,8 @@ object ContentAPI {
      */
     @JvmStatic
     fun registerMapZone(zone: MapZone, borders: ZoneBorders){
+        SystemLogger.logInfo("Registering ${zone.name}")
+        ZoneBuilder.configure(zone)
         zone.register(borders)
     }
 }
