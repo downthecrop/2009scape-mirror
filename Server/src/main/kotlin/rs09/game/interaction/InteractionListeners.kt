@@ -2,6 +2,7 @@ package rs09.game.interaction
 
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
+import core.game.interaction.Option
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
@@ -170,6 +171,8 @@ object InteractionListeners {
             1 -> DestinationFlag.OBJECT
             else -> DestinationFlag.OBJECT
         }
+
+        if(player.zoneMonitor.interact(node, Option(option, 0))) return true
 
         if(player.locks.isInteractionLocked) return false
 
