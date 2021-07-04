@@ -1033,7 +1033,6 @@ object ContentAPI {
      */
     @JvmStatic
     fun registerMapZone(zone: MapZone, borders: ZoneBorders){
-        SystemLogger.logInfo("Registering ${zone.name}")
         ZoneBuilder.configure(zone)
         zone.register(borders)
     }
