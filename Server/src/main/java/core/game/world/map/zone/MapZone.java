@@ -245,7 +245,7 @@ public abstract class MapZone implements Zone {
 	/**
 	 * Configures this map zone.
 	 */
-	public abstract void configure();
+	public void configure(){};
 
 	/**
 	 * Cleans items from a players inventory, equipment and bank.
