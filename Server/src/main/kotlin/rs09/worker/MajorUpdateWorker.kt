@@ -25,7 +25,7 @@ import kotlin.collections.ArrayList
 class MajorUpdateWorker {
     var started = false
     val sequence = UpdateSequence()
-    val sdf = SimpleDateFormat("HH")
+    val sdf = SimpleDateFormat("HHmm")
     fun start() = GlobalScope.launch {
         started = true
         while(true){
