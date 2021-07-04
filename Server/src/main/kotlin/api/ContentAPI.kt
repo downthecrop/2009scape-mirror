@@ -25,6 +25,9 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
+import core.game.world.map.zone.MapZone
+import core.game.world.map.zone.ZoneBorders
+import core.game.world.map.zone.ZoneBuilder
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
@@ -1021,5 +1024,16 @@ object ContentAPI {
     @JvmStatic
     fun sceneryDefinition(id: Int): SceneryDefinition{
         return SceneryDefinition.forId(id)
+    }
+
+    /**
+     * Register a map zone
+     * @param zone the zone to register
+     * @param borders the ZoneBorders that compose the zone
+     */
+    @JvmStatic
+    fun registerMapZone(zone: MapZone, borders: ZoneBorders){
+        ZoneBuilder.configure(zone)
+        zone.register(borders)
     }
 }
