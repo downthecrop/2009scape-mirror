@@ -378,7 +378,7 @@ public class GrandExchangeInterface extends ComponentPlugin {
 				String s = value.toString();
 				s = s.replace("k","000");
 				s = s.replace("K","000");
-				setOfferAmount(player, offer, Integer.parseInt(s));
+				setOfferValue(player, offer, Integer.parseInt(s));
 				return Unit.INSTANCE;
 			});
 			return false;
