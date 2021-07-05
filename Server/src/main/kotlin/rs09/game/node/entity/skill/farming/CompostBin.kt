@@ -1,6 +1,8 @@
 package rs09.game.node.entity.skill.farming
 
+import api.ContentAPI
 import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.tools.RandomFunction
 import org.json.simple.JSONArray
@@ -44,6 +46,8 @@ class CompostBin(val player: Player, val bin: CompostBins) {
             isClosed = false
         }
         updateBit()
+        if(isSuperCompost) ContentAPI.rewardXP(player, Skills.FARMING, 8.5)
+        else ContentAPI.rewardXP(player, Skills.FARMING, 4.5)
         return Item(item)
     }
 

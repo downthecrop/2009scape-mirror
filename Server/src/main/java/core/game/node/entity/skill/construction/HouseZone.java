@@ -3,6 +3,7 @@ package core.game.node.entity.skill.construction;
 
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
+import core.game.world.map.RegionManager;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneRestriction;
 
@@ -70,6 +71,11 @@ public final class HouseZone extends MapZone {
             if (e instanceof Player) {
                 Player p = (Player) e;
                 HouseManager.leave(p);
+                if(house.getRegion() == p.getHouseManager().getRegion()){
+                    house.getRegion().flagActive();
+                    house.getDungeonRegion().flagActive();
+                    RegionManager.getRegionCache().remove(house.getRegion());
+                }
                 return true;
             }
         }
