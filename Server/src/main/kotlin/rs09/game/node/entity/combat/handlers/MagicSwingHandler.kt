@@ -86,6 +86,7 @@ open class MagicSwingHandler
         if (spell!!.type === SpellType.BLITZ) {
             ticks++
         }
+        addExperience(entity, victim, state)
         return ticks
     }
 
