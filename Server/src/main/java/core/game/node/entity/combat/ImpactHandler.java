@@ -171,9 +171,6 @@ public final class ImpactHandler {
 			if (fam && player.getFamiliarManager().hasFamiliar() && !(player.getFamiliarManager().getFamiliar() instanceof Pet)) {
 				source.setAttribute("fam-exp", true);
 			}
-			if(style != CombatStyle.RANGE) {
-				style.getSwingHandler().addExperience(source, entity, state);
-			}
 			source.removeAttribute("fam-exp");
 		}
 		boolean dead = false;
