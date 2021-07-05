@@ -1,6 +1,7 @@
 package rs09.game.system.command.sets
 
 import api.ContentAPI
+import api.InputType
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
@@ -201,7 +202,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             if (player.attributes.containsKey("replyTo")) {
                 player.setAttribute("keepDialogueAlive", true)
                 val replyTo = player.getAttribute("replyTo", "").replace("_".toRegex(), " ")
-                ContentAPI.sendInputDialogue(player, false ,StringUtils.formatDisplayName(replyTo)){value ->
+                ContentAPI.sendInputDialogue(player, InputType.MESSAGE ,StringUtils.formatDisplayName(replyTo)){ value ->
                     CommunicationInfo.sendMessage(player, replyTo.toLowerCase(), value as String)
                     player.removeAttribute("keepDialogueAlive")
                 }
