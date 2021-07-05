@@ -94,6 +94,7 @@ open class RangeSwingHandler
             return -1
         }
         useAmmo(entity, state, victim.location)
+        addExperience(entity, victim, state)
         return 1 + ceil(entity.location.getDistance(victim.location) * 0.3).toInt()
     }
 
