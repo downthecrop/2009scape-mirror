@@ -75,6 +75,7 @@ open class MeleeSwingHandler
             hit = RandomFunction.random(max)
         }
         state.estimatedHit = hit
+        addExperience(entity, victim, state)
         return 1
     }
 
