@@ -267,9 +267,6 @@ public final class HouseManager {
 		int diffX = player.getLocation().getX() - r.getBaseLocation().getX();
 		int diffY = player.getLocation().getY() - r.getBaseLocation().getY();
 		int diffZ = player.getLocation().getZ() - r.getBaseLocation().getZ();
-		RegionManager.getRegionCache().remove(r);
-		region.flagInactive();
-		dungeon.flagInactive();
 		region = null;
 		dungeon = null;
 		enter(player, buildingMode, false);
@@ -381,8 +378,7 @@ public final class HouseManager {
 		Region.load(from, true);
 		RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(1, 0);
 		ZoneBorders borders = DynamicRegion.reserveArea(8, 8);
-		//region = DynamicRegion.create(from.getRegionId());
-		region = new DynamicRegion(from.getRegionId(), borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
+		region = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
 		region.setBorders(borders);
 		region.setUpdateAllPlanes(true);
 		RegionManager.addRegion(region.getId(), region);
