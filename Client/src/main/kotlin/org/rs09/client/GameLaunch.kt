@@ -63,6 +63,10 @@ object GameLaunch {
 
             System.load(temp.absolutePath)
         }
+
+        //Force IPv4 because sometimes Windows insists on using IPv6 regardless of what a service actually offers
+        System.setProperty("java.net.preferIPv4Stack" , "true");
+
         GameShell.launchDesktop()
     }
 
