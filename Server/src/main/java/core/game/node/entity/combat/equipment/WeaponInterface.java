@@ -464,6 +464,7 @@ public final class WeaponInterface extends Component {
 		Component component = new Component(id);
 		component.getDefinition().setTabIndex(0);
 		component.getDefinition().setType(InterfaceType.TAB);
+		player.setAttribute("autocast_component",component);
 		player.getInterfaceManager().openTab(component);
 	}
 

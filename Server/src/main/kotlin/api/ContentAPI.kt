@@ -25,6 +25,9 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
+import core.game.world.map.zone.MapZone
+import core.game.world.map.zone.ZoneBorders
+import core.game.world.map.zone.ZoneBuilder
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
@@ -956,8 +959,25 @@ object ContentAPI {
      */
     @JvmStatic
     fun sendInputDialogue(player: Player, numeric: Boolean, prompt: String, handler: (value: Any) -> Unit){
-        player.dialogueInterpreter.sendInput(!numeric, prompt)
-        player.setAttribute("runscript",handler) //Handled in RunScriptPacketHandler
+        if(numeric) sendInputDialogue(player, InputType.NUMERIC, prompt, handler)
+        else sendInputDialogue(player, InputType.STRING_SHORT, prompt, handler)
+    }
+
+    /**
+     * Send input dialogues based on type. Some dialogues are special and can't be covered by the other sendInputDialogue method
+     * @param player the player to send the input dialogue to
+     * @param type the input type to send - an enum is available for this called InputType
+     * @param prompt what to prompt the player
+     * @param handler the method that handles the value from the input dialogue
+     */
+    @JvmStatic
+    fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: (value: Any) -> Unit){
+        when(type){
+            InputType.NUMERIC, InputType.STRING_SHORT -> player.dialogueInterpreter.sendInput(type != InputType.NUMERIC, prompt)
+            InputType.STRING_LONG -> player.dialogueInterpreter.sendLongInput(prompt)
+            InputType.MESSAGE -> player.dialogueInterpreter.sendMessageInput(prompt)
+        }
+        player.setAttribute("runscript", handler)
     }
 
     /**
@@ -1004,5 +1024,16 @@ object ContentAPI {
     @JvmStatic
     fun sceneryDefinition(id: Int): SceneryDefinition{
         return SceneryDefinition.forId(id)
+    }
+
+    /**
+     * Register a map zone
+     * @param zone the zone to register
+     * @param borders the ZoneBorders that compose the zone
+     */
+    @JvmStatic
+    fun registerMapZone(zone: MapZone, borders: ZoneBorders){
+        ZoneBuilder.configure(zone)
+        zone.register(borders)
     }
 }
