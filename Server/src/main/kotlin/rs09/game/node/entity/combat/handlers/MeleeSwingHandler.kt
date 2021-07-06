@@ -75,6 +75,11 @@ open class MeleeSwingHandler
             hit = RandomFunction.random(max)
         }
         state.estimatedHit = hit
+        if(victim != null) {
+            if (state.estimatedHit > victim.skills.lifepoints) state.estimatedHit = victim.skills.lifepoints
+            if (state.estimatedHit + state.secondaryHit > victim.skills.lifepoints) state.secondaryHit -= ((state.estimatedHit + state.secondaryHit) - victim.skills.lifepoints)
+        }
+        addExperience(entity, victim, state)
         return 1
     }
 
