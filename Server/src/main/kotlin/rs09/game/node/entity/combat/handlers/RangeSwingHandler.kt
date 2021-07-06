@@ -93,7 +93,10 @@ open class RangeSwingHandler
         if (entity == null || victim!!.location == null) {
             return -1
         }
+        if(state.estimatedHit > victim.skills.lifepoints) state.estimatedHit = victim.skills.lifepoints
+        if(state.estimatedHit + state.secondaryHit > victim.skills.lifepoints) state.secondaryHit -= ((state.estimatedHit + state.secondaryHit) - victim.skills.lifepoints)
         useAmmo(entity, state, victim.location)
+        addExperience(entity, victim, state)
         return 1 + ceil(entity.location.getDistance(victim.location) * 0.3).toInt()
     }
 
