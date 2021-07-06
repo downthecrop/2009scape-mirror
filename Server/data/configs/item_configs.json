@@ -101022,7 +101022,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "You will need to recharge the bracelet at the Legends Guild.(uncharged) A handy way to get around.(charged)",
+    "examine": "A handy way to get around.",
     "durability": null,
     "low_alchemy": "8416",
     "high_alchemy": "12624",
@@ -101038,6 +101038,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "29700",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Combat bracelet(4)",
     "tradeable": "true",
@@ -101045,7 +101046,7 @@
     "id": "11119"
   },
   {
-    "examine": "You will need to recharge the bracelet at the Legends Guild.(uncharged) A handy way to get around.(charged)",
+    "examine": "A handy way to get around.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Combat bracelet(3)",
@@ -101059,6 +101060,7 @@
     "equipment_slot": "9"
   },
   {
+ 	"examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Combat bracelet(3)",
     "tradeable": "true",
@@ -101066,7 +101068,7 @@
     "id": "11121"
   },
   {
-    "examine": "You will need to recharge the bracelet at the Legends Guild.(uncharged) A handy way to get around.(charged)",
+    "examine": "A handy way to get around.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Combat bracelet(2)",
@@ -101080,6 +101082,7 @@
     "equipment_slot": "9"
   },
   {
+	"examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Combat bracelet(2)",
     "tradeable": "true",
@@ -101087,7 +101090,7 @@
     "id": "11123"
   },
   {
-    "examine": "You will need to recharge the bracelet at the Legends Guild.(uncharged) A handy way to get around.(charged)",
+    "examine": "A handy way to get around.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Combat bracelet(1)",
@@ -101101,6 +101104,7 @@
     "equipment_slot": "9"
   },
   {
+	"examine": "Swap this note at any bank for the equivalent item.",  
     "durability": null,
     "name": "Combat bracelet(1)",
     "tradeable": "true",
@@ -101109,7 +101113,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "You will need to recharge the bracelet at the Legends Guild.(uncharged) A handy way to get around.(charged)",
+    "examine": "You will need to recharge the bracelet at the Legends Guild.",
     "durability": null,
     "low_alchemy": "8416",
     "high_alchemy": "12624",
@@ -101125,6 +101129,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "29000",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Combat bracelet",
     "tradeable": "true",
