@@ -5,12 +5,12 @@ package core.net.packet;
  * @author Emperor
  * @param <T> The context type.
  */
-public interface OutgoingPacket<T extends Context> {
+public interface OutgoingPacket<Context> {
 
 	/**
 	 * Sends the packet.
 	 * @param context The context.
 	 */
-	public void send(T context);
+	public void send(Context context);
 
 }

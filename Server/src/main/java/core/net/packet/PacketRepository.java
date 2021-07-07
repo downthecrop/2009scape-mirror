@@ -4,6 +4,7 @@ import core.net.packet.in.*;
 import core.net.packet.out.GrandExchangePacket;
 import core.net.packet.out.*;
 import rs09.game.system.SystemLogger;
+import rs09.net.packet.PacketWriteQueue;
 import rs09.net.packet.in.ItemOnGroundItemPacket;
 import rs09.net.packet.in.QuickChatPacketHandler;
 
@@ -19,7 +20,7 @@ public final class PacketRepository {
 	/**
 	 * The outgoing packets mapping.
 	 */
-	private final static Map<Class<?>, OutgoingPacket<? extends Context>> OUTGOING_PACKETS = new HashMap<>();
+	public final static Map<Class<?>, OutgoingPacket<? extends Context>> OUTGOING_PACKETS = new HashMap<>();
 
 	/**
 	 * The incoming packets mapping.
@@ -189,8 +190,9 @@ public final class PacketRepository {
 			SystemLogger.logErr("Invalid outgoing packet [handler=" + clazz + ", context=" + context + "].");
 			return;
 		}
-		if(!context.getPlayer().isArtificial())
-		p.send(context);
+		if(!context.getPlayer().isArtificial()) {
+			PacketWriteQueue.handle(p, context);
+		}
 	}
 
 	/**
