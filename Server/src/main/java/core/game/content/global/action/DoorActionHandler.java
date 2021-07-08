@@ -273,9 +273,6 @@ public final class DoorActionHandler {
      *                        closed again.
      */
     public static void open(Scenery object, Scenery second, int replaceId, int secondReplaceId, boolean clip, int restoreTicks, boolean fence) {
-        if(GameWorld.getSettings().getIncreased_door_time()){
-            restoreTicks *= 5;
-        }
         object = object.getWrapper();
         int mod = object.getType() == 9 ? -1 : 1;
         int firstDir = (object.getRotation() + ((mod + 4) % 4)) % 4;
