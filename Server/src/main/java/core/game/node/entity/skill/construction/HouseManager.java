@@ -267,10 +267,16 @@ public final class HouseManager {
 		int diffX = player.getLocation().getX() - r.getBaseLocation().getX();
 		int diffY = player.getLocation().getY() - r.getBaseLocation().getY();
 		int diffZ = player.getLocation().getZ() - r.getBaseLocation().getZ();
+		DynamicRegion dr = region;
+		DynamicRegion dd = dungeon;
+		RegionManager.getRegionCache().remove(dr);
+		RegionManager.getRegionCache().remove(dd);
 		region = null;
 		dungeon = null;
 		enter(player, buildingMode, false);
 		player.getProperties().setTeleportLocation((player.getViewport().getRegion() == dungeon ? dungeon : region).getBaseLocation().transform(diffX, diffY, diffZ));
+		dr.flagInactive();
+		dd.flagInactive();
 	}
 
 	/**
