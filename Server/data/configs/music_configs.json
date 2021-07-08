@@ -2254,5 +2254,17 @@
     "name": "Too Many Cooks...",
     "indexId": "398",
     "borders": "{2944,9856,3007,9919}"
+  },
+  {
+    "id": "222",
+    "name": "Major Miner",
+    "indexId": "437",
+    "borders": "{2403,10186,2409,10192}"
+  },
+  {
+    "id": "223",
+    "name": "Norse Code",
+    "indexId": "439",
+    "borders": "{2404,3797,2421,3820}"
   }
 ]
