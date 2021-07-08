@@ -13,6 +13,7 @@ import rs09.ServerConstants
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import rs09.game.world.update.UpdateSequence
+import rs09.net.packet.PacketWriteQueue
 import rs09.tools.stringtools.colorize
 import java.text.SimpleDateFormat
 import java.util.*
@@ -48,6 +49,7 @@ class MajorUpdateWorker {
             sequence.start()
             sequence.run()
             sequence.end()
+            PacketWriteQueue.flush()
             //increment global ticks variable
             GameWorld.pulse()
             //disconnect all players waiting to be disconnected
