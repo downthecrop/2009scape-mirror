@@ -25,12 +25,7 @@ class EquipHandler : InteractionListener() {
     override fun defineListeners() {
 
         on(ITEM,"equip","wield","wear"){player,node ->
-            GameWorld.Pulser.submit(object : Pulse(){
-                override fun pulse(): Boolean {
-                    handleEquip(player,node)
-                    return true
-                }
-            })
+            handleEquip(player,node)
             return@on true
         }
 
