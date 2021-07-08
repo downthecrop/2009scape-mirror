@@ -222,7 +222,7 @@ class NedDialogue(player: Player? = null) : DialoguePlugin(player) {
                 if (diary == null) {
                     diary = player.achievementDiaryManager.getDiary(DiaryType.LUMBRIDGE)
                 }
-                if (diary!!.isComplete(level, true) && !diary!!.isLevelRewarded(level)) {
+                if (diary!!.isComplete(level, false) && !diary!!.isLevelRewarded(level)) {
                     player("I've done all the hard tasks in my Lumbridge", "Achievement Diary.")
                     stage = 950
                 }
