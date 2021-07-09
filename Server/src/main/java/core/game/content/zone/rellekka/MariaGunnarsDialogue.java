@@ -4,6 +4,8 @@ import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
+import rs09.game.util.region.rellekka.RellekkaDestination;
+import rs09.game.util.region.rellekka.RellekkaUtils;
 
 /**
  * Handles the maria gunnars dialogue.
@@ -62,9 +64,9 @@ public class MariaGunnarsDialogue extends DialoguePlugin {
 			break;
 		case 3:
 			if (npc.getId() == 5508) {
-				RellekkaZone.sail(player, "Relleka", new Location(2310, 3782, 0));
+				RellekkaUtils.sail(player, RellekkaDestination.RELLEKKA_TO_NEITIZNOT);
 			} else {
-				RellekkaZone.sail(player, "Neitiznot", new Location(2644, 3710, 0));
+				RellekkaUtils.sail(player, RellekkaDestination.NEITIZNOT_TO_RELLEKKA);
 			}
 			end();
 			break;

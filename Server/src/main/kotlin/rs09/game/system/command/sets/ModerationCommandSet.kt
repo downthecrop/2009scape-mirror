@@ -58,6 +58,12 @@ class ModerationCommandSet : CommandSet(Command.Privilege.MODERATOR){
             if(otherPlayer == null){
                 reject(player, "Can not find $name in the player list!")
             }
+
+            val NameCheck = name.toLowerCase()
+            if (NameCheck == "kermit" || NameCheck == "ceikry"){
+                reject(player, "You cannot jail $name, they are a god. Nice try though ${player.username}!")
+            }
+
             notify(player, "Jailing ${otherPlayer!!.username} for $timeSeconds seconds.")
             notify(otherPlayer, "${player.username} has jailed you for $timeSeconds seconds.")
             GameWorld.Pulser.submit(object : Pulse(3){
