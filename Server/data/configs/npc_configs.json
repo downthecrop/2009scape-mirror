@@ -47194,6 +47194,18 @@
     "attack_level": "1"
   },
   {
+    "name": "Magnus Gram",
+    "defence_level": "1",
+    "safespot": null,
+    "lifepoints": "10",
+    "combat_audio": "498,500,499",
+    "strength_level": "1",
+    "id": "5488",
+    "range_level": "1",
+    "attack_level": "1",
+    "facing_booth":  "true"
+  },
+  {
     "examine": "A guard on insult duty.",
     "melee_animation": "0",
     "range_animation": "0",
