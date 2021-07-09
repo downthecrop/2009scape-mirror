@@ -436,6 +436,25 @@ object ContentAPI {
     }
 
     /**
+     * Opens the given interface as an overlay for the given player
+     * @param player the player to open the interface for
+     * @param id the ID of the interface to open
+     */
+    @JvmStatic
+    fun openOverlay(player: Player, id: Int){
+        player.interfaceManager.openOverlay(Component(id))
+    }
+
+    /**
+     * Closes any open overlays for the given player
+     * @param player the player to close for
+     */
+    @JvmStatic
+    fun closeOverlay(player: Player){
+        player.interfaceManager.closeOverlay()
+    }
+
+    /**
      * Runs the given Emote for the given Entity
      * @param entity the entity to run the emote on
      * @param emote the Emotes enum entry to run
@@ -1093,5 +1112,17 @@ object ContentAPI {
     fun registerMapZone(zone: MapZone, borders: ZoneBorders){
         ZoneBuilder.configure(zone)
         zone.register(borders)
+    }
+
+    /**
+     * Animates a component of an interface.
+     * @param player the player to animate the interface for.
+     * @param iface the ID of the interface to animate.
+     * @param child the child on the interface to animate.
+     * @param anim the ID of the animation to use.
+     */
+    @JvmStatic
+    fun animateInterface(player: Player, iface: Int, child: Int, anim: Int){
+        player.packetDispatch.sendAnimationInterface(anim,iface,child)
     }
 }
