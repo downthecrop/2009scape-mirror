@@ -21,6 +21,8 @@ public enum SpecialLadders implements LadderAchievementCheck {
     INTRO_LEAVE(Location.create(2522, 4999, 0),Location.create(3230, 3240, 0)),
     JATIZSO_MINE_UP(Location.create(2406,10188,0),Location.create(2397, 3811, 0)),
     JATIZSO_MINE_DOWN(Location.create(2397, 3812, 0), Location.create(2405, 10188, 0)),
+    JATIZSO_TOWER_UP(Location.create(2373, 3800, 2),Location.create(2374, 3800, 0)),
+    JATIZSO_TOWER_DOWN(Location.create(2373, 3800, 0),Location.create(2374, 3800, 2)),
 
     DRAYNOR_SEWER_SOUTHEAST_DOWN(new Location(3118, 3244, 0), new Location(3118, 9643, 0)),
     DRAYNOR_SEWER_SOUTHEAST_UP(new Location(3118, 9643, 0), new Location(3118, 3243, 0)),
