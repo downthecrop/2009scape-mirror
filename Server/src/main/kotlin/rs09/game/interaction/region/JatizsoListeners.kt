@@ -76,9 +76,10 @@ class JatizsoListeners : InteractionListener() {
         }
 
         on(NPCs.GUARD_5489, NPC, "watch-shouting"){player, node ->
+            val local = ContentAPI.findLocalNPC(player, node.id)
             ContentAPI.lock(player, 200)
-            ContentAPI.face(node.asNpc(), Location.create(2371, 3801, 2))
-            node.asNpc().isRespawn = false
+            ContentAPI.face(local!!, Location.create(2371, 3801, 2))
+            local.asNpc().isRespawn = false
             ContentAPI.submitIndividualPulse(player, object : Pulse(4){
                 var id = node.id
                 var counter = 0
@@ -104,7 +105,7 @@ class JatizsoListeners : InteractionListener() {
                 override fun stop() {
                     ContentAPI.unlock(player)
                     other?.isRespawn = true
-                    node.asNpc().isRespawn = true
+                    local.asNpc().isRespawn = true
                     super.stop()
                 }
 
