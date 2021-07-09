@@ -45909,11 +45909,138 @@
     ]
   },
   {
-    "default": [],
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "532",
+        "maxAmount": "1"
+      }
+    ],
     "charm": [],
-    "ids": "5473,5521,5525",
-    "description": "",
+    "ids": "5473,5521,5525,5474,5522,5526,5475,5523,5527",
+    "description": "first 3: ice troll runt, next 3: ice troll male, last 3: ice troll female",
     "main": [
+      {
+        "minAmount": "1",
+        "weight": "25.0",
+        "id": "1119",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "25.0",
+        "id": "1339",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "25.0",
+        "id": "1141",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "25.0",
+        "id": "1341",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "25.0",
+        "id": "1181",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "1161",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "1357",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "1145",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "1345",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "1201",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "1347",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "3122",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "8",
+        "weight": "50.0",
+        "id": "557",
+        "maxAmount": "60"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "561",
+        "maxAmount": "8"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "563",
+        "maxAmount": "8"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "384",
+        "maxAmount": "8"
+      },
+      {
+        "minAmount": "4",
+        "weight": "50.0",
+        "id": "402",
+        "maxAmount": "10"
+      },
+      {
+        "minAmount": "3",
+        "weight": "25.0",
+        "id": "454",
+        "maxAmount": "3"
+      },
+      {
+        "minAmount": "3",
+        "weight": "25.0",
+        "id": "354",
+        "maxAmount": "3"
+      },
+      {
+        "minAmount": "1",
+        "weight": "50.0",
+        "id": "1760",
+        "maxAmount": "42"
+      },
       {
         "minAmount": "1",
         "weight": "50.0",
@@ -45934,243 +46061,201 @@
       },
       {
         "minAmount": "1",
-        "weight": "50.0",
+        "weight": "25.0",
         "id": "205",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "25.0",
-        "id": "211",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "215",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
+        "weight": "8.0",
         "id": "207",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "25.0",
-        "id": "213",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
+        "weight": "8.0",
         "id": "209",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "25.0",
+        "weight": "8.0",
+        "id": "211",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "213",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "215",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
         "id": "2485",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "25.0",
+        "weight": "8.0",
         "id": "217",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "50.0",
-        "id": "5104",
+        "weight": "8.0",
+        "id": "5100",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "50.0",
-        "id": "5311",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "50.0",
-        "id": "5321",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "50.0",
+        "weight": "8.0",
         "id": "5323",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "50.0",
-        "id": "5100",
-        "maxAmount": "2"
-      },
-      {
-        "minAmount": "1",
-        "weight": "50.0",
-        "id": "5105",
+        "weight": "25.0",
+        "id": "5292",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "50.0",
-        "id": "5280",
+        "weight": "8.0",
+        "id": "5104",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "50.0",
-        "id": "5281",
+        "weight": "8.0",
+        "id": "5293",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "50.0",
-        "id": "5106",
+        "weight": "8.0",
+        "id": "5311",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "50.0",
+        "weight": "8.0",
+        "id": "5321",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
         "id": "5294",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "25.0",
+        "weight": "8.0",
         "id": "5295",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "5.0",
-        "id": "12176",
+        "weight": "8.0",
+        "id": "5105",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "5.0",
+        "weight": "8.0",
+        "id": "5282",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "5296",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "5281",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "5297",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "5106",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "5298",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "5280",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "5299",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "3138",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "5300",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "5301",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "5302",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
         "id": "5303",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "25.0",
-        "id": "1119",
+        "weight": "8.0",
+        "id": "5304",
         "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "50.0",
-        "id": "1141",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "1339",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "1343",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "1345",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "1181",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "1161",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "3122",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "1347",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "1127",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "10",
-        "weight": "50.0",
-        "id": "557",
-        "maxAmount": "60"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "561",
-        "maxAmount": "8"
-      },
-      {
-        "minAmount": "2",
-        "weight": "25.0",
-        "id": "563",
-        "maxAmount": "7"
       },
       {
         "minAmount": "35",
-        "weight": "50.0",
+        "weight": "100.0",
         "id": "995",
-        "maxAmount": "352"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "384",
-        "maxAmount": "8"
-      },
-      {
-        "minAmount": "3",
-        "weight": "25.0",
-        "id": "354",
-        "maxAmount": "3"
-      },
-      {
-        "minAmount": "3",
-        "weight": "25.0",
-        "id": "454",
-        "maxAmount": "3"
-      },
-      {
-        "minAmount": "4",
-        "weight": "25.0",
-        "id": "402",
-        "maxAmount": "10"
-      },
-      {
-        "minAmount": "1",
-        "weight": "25.0",
-        "id": "1760",
-        "maxAmount": "42"
+        "maxAmount": "350"
       },
       {
         "minAmount": "1",
@@ -46180,14 +46265,20 @@
       },
       {
         "minAmount": "1",
-        "weight": "5.0",
+        "weight": "2.0",
         "id": "10977",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "5.0",
+        "weight": "8.0",
         "id": "31",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "100.0",
+        "id": "0",
         "maxAmount": "1"
       }
     ]
@@ -46227,8 +46318,8 @@
         "maxAmount": "1"
       }
     ],
-    "ids": "5474,5522,5526",
-    "description": "",
+    "ids": "",
+    "description": "moved ID's to runt",
     "main": [
       {
         "minAmount": "1",
@@ -46591,8 +46682,8 @@
         "maxAmount": "1"
       }
     ],
-    "ids": "5475,5523,5527",
-    "description": "",
+    "ids": "",
+    "description": "moved ID's to runt",
     "main": [
       {
         "minAmount": "1",
