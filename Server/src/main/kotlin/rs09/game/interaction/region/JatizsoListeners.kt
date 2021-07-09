@@ -1,6 +1,7 @@
 package rs09.game.interaction.region
 
 import api.ContentAPI
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.link.audio.Audio
 import core.game.system.task.Pulse
 import core.game.world.map.Direction
@@ -8,6 +9,7 @@ import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.NPCs
 import rs09.game.camerautils.PlayerCamera
+import rs09.game.content.dialogue.area.jatizso.LeftieRightieDialogue
 import rs09.game.interaction.InteractionListener
 
 class JatizsoListeners : InteractionListener() {
@@ -16,6 +18,7 @@ class JatizsoListeners : InteractionListener() {
     val WEST_GATE_ZONE = ZoneBorders(2386,3797,2390,3801)
     val SOUTH_GAE_ZONE = ZoneBorders(2411,3795,2414,3799)
     val BELL = 21394
+    val GUARDS = intArrayOf(NPCs.GUARD_5491, NPCs.GUARD_5492)
     val LINES = arrayOf(
         arrayOf(
             "YOU WOULDN'T KNOW HOW TO FIGHT A TROLL IF IT CAME UP AND BIT YER ARM OFF",
@@ -119,6 +122,11 @@ class JatizsoListeners : InteractionListener() {
         on(BELL, SCENERY, "ring-bell"){player, _ ->
             ContentAPI.playAudio(player, Audio(15))
             ContentAPI.sendMessage(player, "You ring the warning bell, but everyone ignores it!")
+            return@on true
+        }
+
+        on(GUARDS, NPC, "talk-to"){player, node ->
+            player.dialogueInterpreter.open(LeftieRightieDialogue(), NPC(NPCs.GUARD_5491))
             return@on true
         }
 
