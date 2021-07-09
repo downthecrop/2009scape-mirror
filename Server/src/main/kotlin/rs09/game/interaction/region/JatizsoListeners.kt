@@ -42,14 +42,12 @@ class JatizsoListeners : InteractionListener() {
                 if(node.id == GATES_CLOSED.first()){
                     val other = ContentAPI.getScenery(node.location.transform(1, 0, 0)) ?: return@on true
                     ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.EAST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, -1, Direction.SOUTH)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, 10, Direction.NORTH_EAST)
                 } else {
                     val other = ContentAPI.getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.SOUTH)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id, -1, Direction.EAST)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.NORTH_EAST)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id, 10, Direction.EAST)
                 }
-
-                ContentAPI.playAudio(player, ContentAPI.getAudio(81))
             } else if(WEST_GATE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
                     val other = ContentAPI.getScenery(node.location.transform(0, 1, 0)) ?: return@on true
