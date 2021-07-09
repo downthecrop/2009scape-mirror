@@ -1,5 +1,6 @@
 package rs09.game.content.dialogue
 
+import api.DialUtils.splitLines
 import core.game.component.Component
 import core.game.content.dialogue.DialogueInterpreter
 import core.game.content.dialogue.DialoguePlugin
@@ -54,6 +55,24 @@ abstract class DialogueFile {
 
     open fun player(expression: FacialExpression?, vararg messages: String?): Component? {
         return interpreter!!.sendDialogues(player, expression, *messages)
+    }
+
+    /**
+     * Use the automatic linesplitting feature in DialUtils to produce npc dialogues
+     * @param expr the FacialExpression to use, located in the FacialExpression enum.
+     * @param msg the message for the NPC to say
+     */
+    open fun npcl(expr: FacialExpression?, msg: String?): Component? {
+        return npc(expr, *splitLines(msg!!))
+    }
+
+    /**
+     * Use the automatic linesplitting feature in DialUtils to produce player dialogues
+     * @param expr the FacialExpression to use, located in the FacialExpression enum.
+     * @param msg the message for the player to say
+     */
+    open fun playerl(expr: FacialExpression?, msg: String?): Component? {
+        return player(expr, *splitLines(msg!!))
     }
 
     fun end(){
