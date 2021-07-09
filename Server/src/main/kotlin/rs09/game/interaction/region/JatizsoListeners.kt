@@ -41,11 +41,11 @@ class JatizsoListeners : InteractionListener() {
             if(NORTH_GATE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
                     val other = ContentAPI.getScenery(node.location.transform(1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.EAST)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.EAST)
                     ContentAPI.replaceScenery(other.asScenery(), other.id - 1, -1, Direction.SOUTH)
                 } else {
                     val other = ContentAPI.getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.SOUTH)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.SOUTH)
                     ContentAPI.replaceScenery(other.asScenery(), other.id, -1, Direction.EAST)
                 }
 
@@ -53,22 +53,22 @@ class JatizsoListeners : InteractionListener() {
             } else if(WEST_GATE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
                     val other = ContentAPI.getScenery(node.location.transform(0, 1, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.WEST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, -1, Direction.NORTH)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.WEST)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, 10, Direction.NORTH)
                 } else {
                     val other = ContentAPI.getScenery(node.location.transform(0, -1, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.NORTH)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, -1, Direction.WEST)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.NORTH)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, 10, Direction.WEST)
                 }
             } else if(SOUTH_GAE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
                     val other = ContentAPI.getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.SOUTH)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, -1, Direction.EAST)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.SOUTH)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, 10, Direction.EAST)
                 } else {
                     val other = ContentAPI.getScenery(node.location.transform(1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.EAST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id, -1, Direction.SOUTH)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.EAST)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id, 10, Direction.SOUTH)
                 }
             }
             ContentAPI.playAudio(player, ContentAPI.getAudio(81))
