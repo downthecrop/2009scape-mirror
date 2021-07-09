@@ -721,11 +721,11 @@
   },
   {
     "npcs": "5487",
-    "high_alch": "0",
+    "high_alch": "1",
     "currency": "995",
     "general_store": "false",
     "id": "82",
-    "title": "Keepa Kettilon's Store",
+    "title": "Keepa Kettilon's store",
     "stock": "{361,20}-{329,20}-{339,20}-{379,10}-{373,0}-{385,0}"
   },
   {
@@ -1144,12 +1144,12 @@
   },
   {
     "npcs": "5485",
-    "high_alch": "0",
+    "high_alch": "1",
     "currency": "995",
     "general_store": "false",
     "id": "130",
     "title": "Armour Shop",
-    "stock": "{1109,4}-{1159,4}-{1181,4}-{1197,4}-{1071,4}-{1085,4}-{1121,4}"
+    "stock": "{1109,4}-{1143,4}-{1159,4}-{1181,4}-{1197,4}-{1071,4}-{1085,4}-{1121,4}"
   },
   {
     "npcs": "542",
@@ -1459,12 +1459,12 @@
   },
   {
     "npcs": "5486",
-    "high_alch": "0",
+    "high_alch": "1",
     "currency": "995",
     "general_store": "false",
     "id": "165",
-    "title": "Weapons Galore",
-    "stock": "{1315,10}-{1343,10}-{1369,10}-{1299,10}"
+    "title": "Weapons galore",
+    "stock": "{1299,4}-{1343,4}-{1369,4}-{3099,4}-{1315,4}"
   },
   {
     "npcs": "4250",
@@ -1909,7 +1909,7 @@
   },
   {
     "npcs": "5483",
-    "high_alch": "0",
+    "high_alch": "1",
     "currency": "995",
     "general_store": "false",
     "id": "216",
@@ -2092,7 +2092,7 @@
     "high_alch": "0",
     "currency": "995",
     "general_store": "false",
-    "id": "236",  
+    "id": "236",
     "title": "Keldagrim Stonemason",
     "stock": "{3420,500}-{8786,30}-{8784,30}-{8788,30}"
   },
@@ -2104,5 +2104,23 @@
     "id": "237",
     "title": "Lovecraft's Tackle",
     "stock": "{303,10}-{307,10}-{309,10}-{311,1000}-{301,10}-{313,1000}-{314,1000}-{317,0}-{327,10}-{345,0}-{321,0}-{335,0}-{349,0}-{331,0}-{359,0}-{377,0}-{371,0}"
+  },
+  {
+    "npcs": "5484",
+    "high_alch": "0",
+    "currency": "995",
+    "general_store": "false",
+    "id": "238",
+    "title": "Flosi's Fishmongers",
+    "stock": "{377,5}-{359,20}-{331,20}-{341,20}-{383,0}"
+  },
+  {
+    "npcs": "5495",
+    "high_alch": "0",
+    "currency": "995",
+    "general_store": "false",
+    "id": "239",
+    "title": "Contraband yak produce.",
+    "stock": "{10818,25}-{10816,50}-{10814,50}-{10820,10}"
   }
 ]
