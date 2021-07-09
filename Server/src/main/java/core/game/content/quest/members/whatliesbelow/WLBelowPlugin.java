@@ -1,6 +1,6 @@
 package core.game.content.quest.members.whatliesbelow;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.content.activity.ActivityManager;
@@ -38,9 +38,9 @@ public class WLBelowPlugin extends OptionHandler {
 		PluginManager.definePlugin(new AnnaJonesDialogue());
 		PluginManager.definePlugin(new SurokMagisDialogue());
 		PluginManager.definePlugin(new RatBurgissDialogue());
-		ObjectDefinition.forId(23095).getHandlers().put("option:use", this);
-		ObjectDefinition.forId(23058).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(23057).getHandlers().put("option:excavate", this);
+		SceneryDefinition.forId(23095).getHandlers().put("option:use", this);
+		SceneryDefinition.forId(23058).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(23057).getHandlers().put("option:excavate", this);
 		WhatLiesBelow.RATS_PAPER.getDefinition().getHandlers().put("option:read", this);
 		WhatLiesBelow.EMPTY_FOLDER.getDefinition().getHandlers().put("option:read", this);
 		WhatLiesBelow.USED_FOLDER.getDefinition().getHandlers().put("option:read", this);

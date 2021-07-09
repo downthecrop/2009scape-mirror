@@ -1,7 +1,7 @@
 package core.game.content.quest.free.goblindiplomacy;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -37,7 +37,7 @@ public final class GoblinDiplomacyPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ItemDefinition.forId(288).getHandlers().put("option:wear", this);
 		for (int object : CRATES) {
-			ObjectDefinition.forId(object).getHandlers().put("option:search", this);
+			SceneryDefinition.forId(object).getHandlers().put("option:search", this);
 		}
 		for (GoblinMailPlugin.GoblinMail mail : GoblinMailPlugin.GoblinMail.values()) {
 			ItemDefinition.forId(mail.getProduct().getId()).getHandlers().put("option:wear", this);

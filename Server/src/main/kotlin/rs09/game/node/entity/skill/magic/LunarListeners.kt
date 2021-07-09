@@ -123,7 +123,7 @@ class LunarListeners : SpellListener("lunar") {
 
         onCast(Lunar.CURE_PLANT,OBJECT){player,node ->
             requires(player,66, arrayOf(Item(Items.ASTRAL_RUNE_9075), Item(Items.EARTH_RUNE_557,8)))
-            curePlant(player,node!!.asObject())
+            curePlant(player,node!!.asScenery())
         }
 
         onCast(Lunar.NPC_CONTACT,NONE){player,node ->
@@ -232,10 +232,11 @@ class LunarListeners : SpellListener("lunar") {
             player.sendMessage("A magical force prevents you from teleporting.")
             return
         }
-        player.teleporter.send(loc,TeleportManager.TeleportType.LUNAR)
-        addXP(player,xp)
-        removeRunes(player)
-        setDelay(player,true)
+        if(player.teleporter.send(loc,TeleportManager.TeleportType.LUNAR)) {
+            addXP(player, xp)
+            removeRunes(player)
+            setDelay(player, true)
+        }
     }
 
     fun sendGroupTeleport(player: Player,xp: Double,destName: String,loc: Location){

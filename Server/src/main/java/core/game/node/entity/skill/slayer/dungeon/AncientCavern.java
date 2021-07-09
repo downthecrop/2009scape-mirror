@@ -1,6 +1,7 @@
 package core.game.node.entity.skill.slayer.dungeon;
 
-import core.cache.def.impl.ObjectDefinition;
+import api.ContentAPI;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.plugin.Initializable;
@@ -61,12 +62,13 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
-				ObjectDefinition.forId(25274).getHandlers().put("option:dive in", this);
+				SceneryDefinition.forId(25274).getHandlers().put("option:dive in", this);
 				return this;
 			}
 
 			@Override
 			public boolean handle(final Player player, Node node, String option) {
+				ContentAPI.lock(player, 30);
 				AgilityHandler.forceWalk(player, -1, player.getLocation(), player.getLocation().transform(0, -6, 0), Animation.create(6723), 10, 0.0, null);
 				GameWorld.getPulser().submit(new Pulse(1, player) {
 					int count;
@@ -83,6 +85,9 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 							player.getInterfaceManager().closeOverlay();
 							player.getProperties().setTeleportLocation(Location.create(1763, 5365, 1));
 							player.getPacketDispatch().sendMessages("You dive into the swirling maelstorm of the whirlpool.", "You are swirled beneath the water, the darkness and pressure are overwhelming.", "Mystical forces guide you into a cavern below the whirlpool.");
+							break;
+						case 8:
+							ContentAPI.unlock(player);
 							return true;
 						}
 						return false;

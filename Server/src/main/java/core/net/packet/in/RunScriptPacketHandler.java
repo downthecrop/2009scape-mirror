@@ -5,6 +5,7 @@ import core.game.node.entity.player.link.RunScript;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 import core.tools.StringUtils;
+import kotlin.jvm.functions.Function1;
 
 /**
  * Represents the incoming packet to handle a run script.
@@ -14,7 +15,7 @@ public class RunScriptPacketHandler implements IncomingPacket {
 
 	@Override
 	public void decode(Player player, int opcode, IoBuffer buffer) {
-		final RunScript script = player.getAttribute("runscript", null);
+		final Function1 script = player.getAttribute("runscript", null);
 		if (script == null || player.getLocks().isInteractionLocked()) {
 			return;
 		}
@@ -28,9 +29,7 @@ public class RunScriptPacketHandler implements IncomingPacket {
 		} else {
 			value = buffer.getInt();
 		}
-		script.setValue(value);
-		script.setPlayer(player);
+		script.invoke(value);
 		player.removeAttribute("runscript");
-		script.handle();
 	}
 }

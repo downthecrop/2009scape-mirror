@@ -5,7 +5,7 @@ import java.util.List;
 
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.FacialExpression;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DoorActionHandler;
@@ -103,26 +103,26 @@ public final class WaterfallPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		PluginManager.definePlugin(new WaterfallUseWithHandler());
 		NPCDefinition.forId(305).getHandlers().put("option:talk-to", this);
-		ObjectDefinition.forId(1987).getHandlers().put("option:board", this);
-		ObjectDefinition.forId(2020).getHandlers().put("option:climb", this);
-		ObjectDefinition.forId(2022).getHandlers().put("option:get in", this);
-		ObjectDefinition.forId(10283).getHandlers().put("option:swim", this);
-		ObjectDefinition.forId(1996).getHandlers().put("option:swim to", this);
-		ObjectDefinition.forId(1989).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(1990).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(1991).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(37247).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(32711).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(33046).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(42313).getHandlers().put("option:open",this);
-		ObjectDefinition.forId(33047).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(33047).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(33066).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(1999).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(42319).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(2002).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(1992).getHandlers().put("option:read", this);
-		ObjectDefinition.forId(2014).getHandlers().put("option:take treasure", this);
+		SceneryDefinition.forId(1987).getHandlers().put("option:board", this);
+		SceneryDefinition.forId(2020).getHandlers().put("option:climb", this);
+		SceneryDefinition.forId(2022).getHandlers().put("option:get in", this);
+		SceneryDefinition.forId(10283).getHandlers().put("option:swim", this);
+		SceneryDefinition.forId(1996).getHandlers().put("option:swim to", this);
+		SceneryDefinition.forId(1989).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(1990).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(1991).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(37247).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(32711).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(33046).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(42313).getHandlers().put("option:open",this);
+		SceneryDefinition.forId(33047).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(33047).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(33066).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(1999).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(42319).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(2002).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(1992).getHandlers().put("option:read", this);
+		SceneryDefinition.forId(2014).getHandlers().put("option:take treasure", this);
 		return this;
 	}
 

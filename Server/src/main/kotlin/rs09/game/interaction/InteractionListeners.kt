@@ -2,6 +2,7 @@ package rs09.game.interaction
 
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
+import core.game.interaction.Option
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
@@ -10,7 +11,7 @@ object InteractionListeners {
     private val listeners = HashMap<String,(Player, Node) -> Boolean>(1000)
     private val useWithListeners = HashMap<String,(Player,Node,Node) -> Boolean>(1000)
     private val destinationOverrides = HashMap<String,(Node) -> Location>(100)
-    private val equipListeners = HashMap<String,(Player,Node) -> Unit>(10)
+    private val equipListeners = HashMap<String,(Player,Node) -> Boolean>(10)
 
     @JvmStatic
     fun add(id: Int, type: Int, option: Array<out String>, method: (Player,Node) -> Boolean){
@@ -53,22 +54,22 @@ object InteractionListeners {
     }
 
     @JvmStatic
-    fun addEquip(id: Int,method: (Player, Node) -> Unit){
+    fun addEquip(id: Int,method: (Player, Node) -> Boolean){
         equipListeners["equip:$id"] = method
     }
 
     @JvmStatic
-    fun addUnequip(id: Int, method: (Player,Node) -> Unit){
+    fun addUnequip(id: Int, method: (Player,Node) -> Boolean){
         equipListeners["unequip:$id"] = method
     }
 
     @JvmStatic
-    fun getEquip(id: Int): ((Player,Node) -> Unit)? {
+    fun getEquip(id: Int): ((Player,Node) -> Boolean)? {
         return equipListeners["equip:$id"]
     }
 
     @JvmStatic
-    fun getUnequip(id: Int): ((Player,Node) -> Unit)? {
+    fun getUnequip(id: Int): ((Player,Node) -> Boolean)? {
         return equipListeners["unequip:$id"]
     }
 
@@ -124,11 +125,11 @@ object InteractionListeners {
     }
 
     @JvmStatic
-    fun run(id: Int, player: Player, node: Node, isEquip: Boolean){
+    fun run(id: Int, player: Player, node: Node, isEquip: Boolean): Boolean{
         if(isEquip){
-            equipListeners["equip:$id"]?.invoke(player,node)
+            return equipListeners["equip:$id"]?.invoke(player,node) ?: true
         } else {
-            equipListeners["unequip:$id"]?.invoke(player,node)
+            return equipListeners["unequip:$id"]?.invoke(player,node) ?: true
         }
     }
 
@@ -170,6 +171,8 @@ object InteractionListeners {
             1 -> DestinationFlag.OBJECT
             else -> DestinationFlag.OBJECT
         }
+
+        if(player.zoneMonitor.interact(node, Option(option, 0))) return true
 
         if(player.locks.isInteractionLocked) return false
 

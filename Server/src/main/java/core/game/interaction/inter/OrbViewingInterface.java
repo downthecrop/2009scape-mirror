@@ -1,7 +1,7 @@
 package core.game.interaction.inter;
 
 import rs09.ServerConstants;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -57,11 +57,11 @@ public final class OrbViewingInterface extends ComponentPlugin {
 		PluginManager.definePlugin(new OptionHandler() {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
-				ObjectDefinition.forId(9391).getHandlers().put("option:look-into", this);
-				ObjectDefinition.forId(28194).getHandlers().put("option:look-into", this);
-				ObjectDefinition.forId(28209).getHandlers().put("option:view", this);
-				ObjectDefinition.forId(28210).getHandlers().put("option:view", this);
-				ObjectDefinition.forId(28211).getHandlers().put("option:view", this);
+				SceneryDefinition.forId(9391).getHandlers().put("option:look-into", this);
+				SceneryDefinition.forId(28194).getHandlers().put("option:look-into", this);
+				SceneryDefinition.forId(28209).getHandlers().put("option:view", this);
+				SceneryDefinition.forId(28210).getHandlers().put("option:view", this);
+				SceneryDefinition.forId(28211).getHandlers().put("option:view", this);
 				return this;
 			}
 

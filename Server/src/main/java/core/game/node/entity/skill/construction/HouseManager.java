@@ -267,10 +267,16 @@ public final class HouseManager {
 		int diffX = player.getLocation().getX() - r.getBaseLocation().getX();
 		int diffY = player.getLocation().getY() - r.getBaseLocation().getY();
 		int diffZ = player.getLocation().getZ() - r.getBaseLocation().getZ();
+		DynamicRegion dr = region;
+		DynamicRegion dd = dungeon;
+		RegionManager.getRegionCache().remove(dr);
+		RegionManager.getRegionCache().remove(dd);
 		region = null;
 		dungeon = null;
 		enter(player, buildingMode, false);
 		player.getProperties().setTeleportLocation((player.getViewport().getRegion() == dungeon ? dungeon : region).getBaseLocation().transform(diffX, diffY, diffZ));
+		dr.flagInactive();
+		dd.flagInactive();
 	}
 
 	/**
@@ -381,7 +387,7 @@ public final class HouseManager {
 		region = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
 		region.setBorders(borders);
 		region.setUpdateAllPlanes(true);
-		RegionManager.getRegionCache().put(region.getId(), region);
+		RegionManager.addRegion(region.getId(), region);
 		configureRoofs();
 		for (int z = 0; z < 3; z++) {
 			for (int x = 0; x < 8; x++) {
@@ -406,7 +412,7 @@ public final class HouseManager {
 			dungeon = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
 			dungeon.setBorders(borders);
 			dungeon.setUpdateAllPlanes(true);
-			RegionManager.getRegionCache().put(dungeon.getId(), dungeon);
+			RegionManager.addRegion(dungeon.getId(), dungeon);
 			for (int x = 0; x < 8; x++) {
 				for (int y = 0; y < 8; y++) {
 					Room room = rooms[3][x][y];

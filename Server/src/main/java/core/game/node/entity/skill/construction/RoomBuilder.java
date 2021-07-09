@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.construction;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
@@ -56,7 +56,7 @@ public final class RoomBuilder {
 			} else {
 				items[1 + ((i - 4) * 2)] = new Item(decoration.getInterfaceItem());
 			}
-			player.getPacketDispatch().sendString(ObjectDefinition.forId(decoration.getObjectId()).getName(), 396, 97 + offset);
+			player.getPacketDispatch().sendString(SceneryDefinition.forId(decoration.getObjectId()).getName(), 396, 97 + offset);
 			boolean hasRequirements = true;
 			for (int j = 0; j < 4; j++) {
 				if (j >= decoration.getItems().length) {

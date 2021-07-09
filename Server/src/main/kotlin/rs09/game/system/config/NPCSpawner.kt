@@ -31,6 +31,9 @@ class NPCSpawner {
                 npc.isWalks = tokens[3].trim { it <= ' ' } == "1"
                 npc.direction = Direction.values()[Integer.valueOf(tokens[4].trim { it <= ' ' })]
                 npc.setAttribute("spawned:npc", true)
+                if(npc.definition.getConfiguration("facing_booth",false)){
+                    npc.setAttribute("facing_booth",true)
+                }
                 npc.init()
                 count++
             }

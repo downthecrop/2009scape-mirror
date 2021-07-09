@@ -1,7 +1,7 @@
 package core.game.interaction.city;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.object.SceneryBuilder;
@@ -37,8 +37,8 @@ public final class DraynorNodePlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		NPCDefinition.forId(922).getHandlers().put("option:make-dyes", this);
-		ObjectDefinition.forId(7092).getHandlers().put("option:observe", this);
-		ObjectDefinition.forId(6434).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(7092).getHandlers().put("option:observe", this);
+		SceneryDefinition.forId(6434).getHandlers().put("option:open", this);
 		ActivityManager.register(new TelescopeCutscene());
 		return this;
 	}
@@ -55,7 +55,7 @@ public final class DraynorNodePlugin extends OptionHandler {
 			break;
 		case 6434: // Trapdoors above NW and SE corners of Draynor sewer
 			if (option.equalsIgnoreCase("open")) {
-				SceneryBuilder.replace(node.asObject(), node.asObject().transform(6435), 500);
+				SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(6435), 500);
 			}
 			break;
 		}

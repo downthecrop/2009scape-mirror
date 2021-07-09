@@ -1,7 +1,8 @@
 package core.game.interaction.city;
 
+import api.ContentAPI;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.global.Skillcape;
@@ -15,7 +16,6 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.RunScript;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.player.link.quest.Quest;
@@ -35,6 +35,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
+import kotlin.Unit;
 import rs09.game.content.global.travel.EssenceTeleport;
 import rs09.game.world.GameWorld;
 import rs09.plugin.PluginManager;
@@ -60,12 +61,12 @@ public final class WizardTowerPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(12540).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(12539).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(2147).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(32015).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(12540).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(12539).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(2147).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(32015).getHandlers().put("option:climb-up", this);
 		NPCDefinition.forId(300).getHandlers().put("option:teleport", this);
-		ObjectDefinition.forId(11993).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(11993).getHandlers().put("option:open", this);
 		PluginManager.definePlugin(new WizardtowerWizardNPC());
 		PluginManager.definePlugin(new WizardTowerDialogue());
 		PluginManager.definePlugin(new WizardMisgogDialogue());
@@ -103,7 +104,7 @@ public final class WizardTowerPlugin extends OptionHandler {
                     return true;
                 }
                 if (!Location.create(3103, 9576, 0).equals(((Scenery) node).getLocation())) {
-                    return ObjectDefinition.getOptionHandler(2147, "climb-up").handle(player, node, option);
+                    return SceneryDefinition.getOptionHandler(2147, "climb-up").handle(player, node, option);
                 }
                 player.getProperties().setTeleportLocation(GROUND_FLOOR);
                 break;
@@ -686,14 +687,9 @@ public final class WizardTowerPlugin extends OptionHandler {
                     }
                     final int amount = getAmt(buttonId);
                     if (amount == -1) {// rscript.
-                        player.getDialogueInterpreter().sendInput(false, "Enter amount:");
-                        player.setAttribute("runscript", new RunScript() {
-                            @Override
-                            public boolean handle() {
-                                final int amt = (int) getValue();
-                                make(bark, amt);
-                                return true;
-                            }
+                        ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+                            make(bark, (int) value);
+                            return Unit.INSTANCE;
                         });
                         return true;
                     }

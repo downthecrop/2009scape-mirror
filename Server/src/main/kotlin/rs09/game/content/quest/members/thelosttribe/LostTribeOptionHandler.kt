@@ -2,7 +2,7 @@ package rs09.game.content.quest.members.thelosttribe
 
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.content.dialogue.FacialExpression
 import core.game.interaction.OptionHandler
@@ -23,12 +23,12 @@ class LostTribeOptionHandler : OptionHandler(){
     override fun newInstance(arg: Any?): Plugin<Any> {
         ItemDefinition.forId(5008).handlers["option:look-at"] = this
         ItemDefinition.forId(5009).handlers["option:read"] = this
-        ObjectDefinition.forId(6916).handlers["option:search"] = this
-        ObjectDefinition.forId(6911).handlers["option:search"] = this
+        SceneryDefinition.forId(6916).handlers["option:search"] = this
+        SceneryDefinition.forId(6911).handlers["option:search"] = this
         NPCDefinition.forId(2084).handlers["option:follow"] = this
         NPCDefinition.forId(2086).handlers["option:follow"] = this
-        ObjectDefinition.forId(32952).handlers["option:open"] = this
-        ObjectDefinition.forId(32953).handlers["option:open"] = this
+        SceneryDefinition.forId(32952).handlers["option:open"] = this
+        SceneryDefinition.forId(32953).handlers["option:open"] = this
         return this
     }
 

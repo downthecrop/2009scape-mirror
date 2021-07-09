@@ -1,6 +1,7 @@
 package api
 
 import core.cache.def.impl.ItemDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.content.dialogue.FacialExpression
 import core.game.node.Node
@@ -12,6 +13,7 @@ import core.game.node.entity.impl.Animator
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.RunScript
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
@@ -20,11 +22,16 @@ import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.system.task.Pulse
+import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
+import core.game.world.map.zone.MapZone
+import core.game.world.map.zone.ZoneBorders
+import core.game.world.map.zone.ZoneBuilder
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import core.tools.RandomFunction
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
@@ -127,12 +134,11 @@ object ContentAPI {
             else -> throw IllegalStateException("Invalid value passed for item")
         }
 
-        when(container){
+        return when(container){
             Container.INVENTORY -> player.inventory.remove(it)
             Container.BANK -> player.bank.remove(it)
             Container.EQUIPMENT -> player.equipment.remove(it)
         }
-        return false
     }
 
     /**
@@ -249,13 +255,50 @@ object ContentAPI {
      * @param toReplace the GameObject instance we are replacing
      * @param with the ID of the GameObject we wish to replace toReplace with
      * @param for_ticks the number of ticks the object should be replaced for. Use -1 for permanent.
+     * @param loc the location to move the new object to if necessary. Defaults to null.
      */
     @JvmStatic
-    fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int) {
+    fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, loc: Location? = null) {
+        val newLoc = when(loc){
+            null -> toReplace.location
+            else -> loc
+        }
         if (for_ticks == -1) {
-            SceneryBuilder.replace(toReplace, toReplace.transform(with))
+            SceneryBuilder.replace(toReplace, toReplace.transform(with,toReplace.rotation,newLoc))
         } else {
-            SceneryBuilder.replace(toReplace, toReplace.transform(with), for_ticks)
+            SceneryBuilder.replace(toReplace, toReplace.transform(with,toReplace.rotation, newLoc), for_ticks)
+        }
+        toReplace.isActive = false
+    }
+
+    /**
+     * Replace an object with the given revert timer with the given rotation
+     * @param toReplace the GameObject instance we are replacing
+     * @param with the ID of the GameObject we wish to replace toReplace with
+     * @param for_ticks the number of ticks the object should be replaced for. Use -1 for permanent.
+     * @Param rotation the Direction of the rotation it should use. Direction.NORTH, Direction.SOUTH, etc
+     * @param loc the location to move the new object to if necessary. Defaults to null.
+     */
+    @JvmStatic
+    fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, rotation: Direction, loc: Location? = null){
+        val newLoc = when(loc){
+            null -> toReplace.location
+            else -> loc
+        }
+        val rot = when(rotation){
+            Direction.NORTH_WEST -> 0
+            Direction.NORTH -> 1
+            Direction.NORTH_EAST -> 2
+            Direction.EAST -> 4
+            Direction.SOUTH_EAST -> 7
+            Direction.SOUTH -> 6
+            Direction.SOUTH_WEST -> 5
+            Direction.WEST -> 3
+        }
+        if (for_ticks == -1) {
+            SceneryBuilder.replace(toReplace, toReplace.transform(with,rot, newLoc))
+        } else {
+            SceneryBuilder.replace(toReplace, toReplace.transform(with,rot,newLoc), for_ticks)
         }
         toReplace.isActive = false
     }
@@ -486,6 +529,26 @@ object ContentAPI {
     @JvmStatic
     fun findNPC(id: Int): NPC? {
         return Repository.findNPC(id)
+    }
+
+    /**
+     * Gets the spawned scenery from the world map using the given coordinates
+     * @param x the X coordinate to use
+     * @param y the Y coordinate to use
+     * @param z the Z coordinate to use
+     */
+    @JvmStatic
+    fun getScenery(x: Int, y: Int, z: Int): Scenery?{
+        return RegionManager.getObject(z,x,y)
+    }
+
+    /**
+     * Gets the spawned scenery from the world map using the given Location object.
+     * @param loc the Location object to use.
+     */
+    @JvmStatic
+    fun getScenery(loc: Location): Scenery?{
+        return RegionManager.getObject(loc)
     }
 
     /**
@@ -767,7 +830,8 @@ object ContentAPI {
      */
     @JvmStatic
     fun teleport(entity: Entity, loc: Location, type: TeleportManager.TeleportType = TeleportManager.TeleportType.INSTANT){
-        entity.teleporter.send(loc,type)
+        if(type == TeleportManager.TeleportType.INSTANT) entity.properties.teleportLocation = loc
+        else entity.teleporter.send(loc,type)
     }
 
     /**
@@ -888,6 +952,18 @@ object ContentAPI {
     }
 
     /**
+     * Sends a dialogue that uses the player's chathead.
+     * @param player the player to send the dialogue to
+     * @param npc the ID of the NPC to use for the chathead
+     * @param msg the message to send.
+     * @param expr the FacialExpression to use. An enum exists for these called FacialExpression. Defaults to FacialExpression.FRIENDLY
+     */
+    @JvmStatic
+    fun sendNPCDialogue(player: Player, npc: Int, msg: String, expr: FacialExpression = FacialExpression.FRIENDLY){
+        player.dialogueInterpreter.sendDialogues(npc, expr, *DialUtils.splitLines(msg))
+    }
+
+    /**
      * Sends an animation to a specific interface child
      * @param player the player to send the packet to
      * @param anim the ID of the animation to send to the interface
@@ -897,5 +973,125 @@ object ContentAPI {
     @JvmStatic
     fun sendAnimationOnInterface(player: Player, anim: Int, iface: Int, child: Int){
         player.packetDispatch.sendAnimationInterface(anim,iface,child)
+    }
+
+    /**
+     * Register a logout listener to a player. Logout listeners are methods that run when a player logs out.
+     * @param player the player to register the listener for
+     * @param handler the method to run when the listener is invoked (when the player logs out)
+     */
+    @JvmStatic
+    fun registerLogoutListener(player: Player, key: String, handler: (p: Player) -> Unit){
+        player.logoutListeners[key] = handler
+    }
+
+    /**
+     * Removes a logout listener based on the key from a player
+     * @param player the player to remove the logout listner from
+     * @param key the key of the logout listener to remove.
+     */
+    @JvmStatic
+    fun clearLogoutListener(player: Player, key: String){
+        player.logoutListeners.remove(key)
+    }
+
+    /**
+     * Sends an item to a specific child on an interface
+     * @param player the player to send the packet to
+     * @param iface the ID of the interface to send the item onto
+     * @Param child the index of the child on the interface to send the item onto
+     * @param item the ID of the item to send
+     * @param amount the amount of the item to send - defaults to 1
+     */
+    @JvmStatic
+    fun sendItemOnInterface(player: Player, iface: Int, child: Int, item: Int, amount: Int = 1){
+        player.packetDispatch.sendItemOnInterface(item,amount,iface,child)
+    }
+
+    /**
+     * Send an input dialogue to retrieve a specified value from the player
+     * @param player the player to send the input dialogue to
+     * @param numeric whether or not the input is numeric
+     * @param prompt what to prompt the player
+     * @param handler the method that handles the value gained from the input dialogue
+     */
+    @JvmStatic
+    fun sendInputDialogue(player: Player, numeric: Boolean, prompt: String, handler: (value: Any) -> Unit){
+        if(numeric) sendInputDialogue(player, InputType.NUMERIC, prompt, handler)
+        else sendInputDialogue(player, InputType.STRING_SHORT, prompt, handler)
+    }
+
+    /**
+     * Send input dialogues based on type. Some dialogues are special and can't be covered by the other sendInputDialogue method
+     * @param player the player to send the input dialogue to
+     * @param type the input type to send - an enum is available for this called InputType
+     * @param prompt what to prompt the player
+     * @param handler the method that handles the value from the input dialogue
+     */
+    @JvmStatic
+    fun sendInputDialogue(player: Player, type: InputType, prompt: String, handler: (value: Any) -> Unit){
+        when(type){
+            InputType.NUMERIC, InputType.STRING_SHORT -> player.dialogueInterpreter.sendInput(type != InputType.NUMERIC, prompt)
+            InputType.STRING_LONG -> player.dialogueInterpreter.sendLongInput(prompt)
+            InputType.MESSAGE -> player.dialogueInterpreter.sendMessageInput(prompt)
+        }
+        player.setAttribute("runscript", handler)
+    }
+
+    /**
+     * Forces an NPC to "flee" from a player or other entity
+     * @param entity the entity to make flee
+     * @param from the entity to flee from
+     */
+    @JvmStatic
+    fun flee(entity: Entity, from: Entity){
+        lock(entity, 5)
+        face(entity, from, 5)
+
+        val diffX = entity.location.x - from.location.x
+        val diffY = entity.location.y - from.location.y
+
+        forceWalk(entity, entity.location.transform(diffX,diffY,0), "DUMB")
+    }
+
+    /**
+     * Submits an individual or "weak" pulse to a specific entity's pulse manager. Pulses submitted this way can be overridden by other pulses.
+     * @param entity the entity to submit the pulse to
+     * @param pulse the pulse to submit
+     */
+    @JvmStatic
+    fun submitIndividualPulse(entity: Entity, pulse: Pulse){
+        entity.pulseManager.run(pulse)
+    }
+
+    /**
+     * Gets the number of QP a player has
+     * @param player the player to get the QP for
+     * @return the number of QP the player has
+     */
+    @JvmStatic
+    fun getQP(player: Player): Int{
+        return player.questRepository.points
+    }
+
+    /**
+     * Gets a scenery definition from the given ID
+     * @param id the ID of the scenery to get the definition for.
+     * @return the scenery definition
+     */
+    @JvmStatic
+    fun sceneryDefinition(id: Int): SceneryDefinition{
+        return SceneryDefinition.forId(id)
+    }
+
+    /**
+     * Register a map zone
+     * @param zone the zone to register
+     * @param borders the ZoneBorders that compose the zone
+     */
+    @JvmStatic
+    fun registerMapZone(zone: MapZone, borders: ZoneBorders){
+        ZoneBuilder.configure(zone)
+        zone.register(borders)
     }
 }

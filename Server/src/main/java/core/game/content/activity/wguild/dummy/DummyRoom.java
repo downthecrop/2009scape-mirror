@@ -1,6 +1,6 @@
 package core.game.content.activity.wguild.dummy;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
@@ -97,9 +97,9 @@ public final class DummyRoom extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(15656).getHandlers().put("option:view", this);
+		SceneryDefinition.forId(15656).getHandlers().put("option:view", this);
 		for (Dummy dummy : Dummy.values()) {
-			ObjectDefinition.forId(dummy.getObject().getId()).getHandlers().put("option:hit", this);
+			SceneryDefinition.forId(dummy.getObject().getId()).getHandlers().put("option:hit", this);
 		}
 		GameWorld.getPulser().submit(new Pulse(10) {
 			boolean activeDummy;

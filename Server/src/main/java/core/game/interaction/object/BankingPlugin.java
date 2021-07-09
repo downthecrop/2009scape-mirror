@@ -1,7 +1,8 @@
 package core.game.interaction.object;
 
+import api.ContentAPI;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -29,6 +30,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import kotlin.Unit;
 import rs09.game.ge.GrandExchangeOffer;
 import rs09.game.world.GameWorld;
 
@@ -45,11 +47,11 @@ public final class BankingPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ObjectDefinition.setOptionHandler("use-quickly", this);
-        ObjectDefinition.setOptionHandler("use", this);
-        ObjectDefinition.setOptionHandler("bank", this);
-        ObjectDefinition.setOptionHandler("collect", this);
-        ObjectDefinition.setOptionHandler("deposit", this);
+        SceneryDefinition.setOptionHandler("use-quickly", this);
+        SceneryDefinition.setOptionHandler("use", this);
+        SceneryDefinition.setOptionHandler("bank", this);
+        SceneryDefinition.setOptionHandler("collect", this);
+        SceneryDefinition.setOptionHandler("deposit", this);
         new BankingInterface().newInstance(arg);
         new BankDepositInterface().newInstance(arg);
         new BankNPCPlugin().newInstance(arg);
@@ -370,16 +372,15 @@ public final class BankingPlugin extends OptionHandler {
                                     amount = p.getBank().getLastAmountX();
                                     break;
                                 case 234:
-                                    p.setAttribute("runscript", new RunScript() {
-                                        @Override
-                                        public boolean handle() {
-                                            int amount = (int) value;
-                                            p.getBank().takeItem(slot, amount);
-                                            p.getBank().updateLastAmountX(amount);
-                                            return true;
-                                        }
+                                    ContentAPI.sendInputDialogue(p, false, "Enter the amount:", (value) -> {
+                                        String s = value.toString();
+                                        s = s.replace("k","000");
+                                        s = s.replace("K","000");
+                                        int val = Integer.parseInt(s);
+                                        p.getBank().takeItem(slot, val);
+                                        p.getBank().updateLastAmountX(val);
+                                        return Unit.INSTANCE;
                                     });
-                                    p.getDialogueInterpreter().sendInput(false, "Enter the amount.");
                                     break;
                                 case 9:
                                     p.sendMessage(p.getBank().get(slot).getDefinition().getExamine());
@@ -449,16 +450,15 @@ public final class BankingPlugin extends OptionHandler {
                             p.getBank().addItem(slot, p.getBank().getLastAmountX());
                             break;
                         case 234:
-                            p.setAttribute("runscript", new RunScript() {
-                                @Override
-                                public boolean handle() {
-                                    int amount = (int) value;
-                                    p.getBank().addItem(slot, amount);
-                                    p.getBank().updateLastAmountX(amount);
-                                    return false;
-                                }
+                            ContentAPI.sendInputDialogue(p, false, "Enter the amount:", (value) -> {
+                                String s = value.toString();
+                                s = s.replace("k","000");
+                                s = s.replace("K","000");
+                                int val = Integer.parseInt(s);
+                                p.getBank().addItem(slot, val);
+                                p.getBank().updateLastAmountX(val);
+                                return Unit.INSTANCE;
                             });
-                            p.getDialogueInterpreter().sendInput(false, "Enter the amount.");
                             break;
                         case 168:
                             p.getBank().addItem(slot, p.getInventory().getAmount(item));
@@ -520,16 +520,15 @@ public final class BankingPlugin extends OptionHandler {
                             });
                             return true;
                         case 234:
-                            p.setAttribute("runscript", new RunScript() {
-                                @Override
-                                public boolean handle() {
-                                    int ammount = (int) value;
-                                    p.getBank().addItem(slot, ammount);
-                                    InterfaceContainer.generateItems(p, p.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1",}, 11, 15, 5, 7);
-                                    return false;
-                                }
+                            ContentAPI.sendInputDialogue(p, false, "Enter the amount:", (value) -> {
+                                String s = value.toString();
+                                s = s.replace("k","000");
+                                s = s.replace("K","000");
+                                int val = Integer.parseInt(s);
+                                p.getBank().addItem(slot, val);
+                                InterfaceContainer.generateItems(p, p.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1",}, 11, 15, 5, 7);
+                                return Unit.INSTANCE;
                             });
-                            p.getDialogueInterpreter().sendInput(false, "Enter the amount.");
                             break;
                         case 168:
                             p.sendMessage(item.getDefinition().getExamine());

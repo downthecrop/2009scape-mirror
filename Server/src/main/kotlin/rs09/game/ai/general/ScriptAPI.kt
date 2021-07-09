@@ -247,7 +247,7 @@ class ScriptAPI(private val bot: Player) {
      * @return an Array of the nearest NPCs with matching name, or null.
      * @author Ceikry
      */
-    private fun findTargets(entity: Entity?, radius: Int, name: String? = null): List<Entity>? {
+    private fun findTargets(entity: Entity, radius: Int, name: String? = null): List<Entity>? {
         val targets: MutableList<Entity> = ArrayList()
         val localNPCs: Array<Any> = RegionManager.getLocalNpcs(entity, radius).toTypedArray()
         var length = localNPCs.size
@@ -544,6 +544,26 @@ class ScriptAPI(private val bot: Player) {
                 val logs = bot.inventory.getAmount(item)
                 bot.inventory.remove(Item(item, logs))
                 bot.bank.add(Item(item, logs))
+                return true
+            }
+        }
+        bot.pulseManager.run(BankingPulse())
+    }
+
+    /**
+     * Takes every item out of the bots inventory and places it into the bank.
+     * @param none
+     * @author cfunnyman joe
+     */
+    fun bankAll(){
+        class BankingPulse() : Pulse(20){
+            override fun pulse(): Boolean {
+                for(item in bot.inventory.toArray()){
+                    var itemAmount = bot.inventory.getAmount(item)
+
+                    bot.inventory.remove(item)
+                    bot.bank.add(item)
+                }
                 return true
             }
         }

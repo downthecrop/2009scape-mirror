@@ -23,6 +23,7 @@ public enum GrindingItem {
 	GARLIC(new Item[] { new Item(1550) }, new Item(4668)),
 	DRAGON_SCALE(new Item[] { new Item(243) }, new Item(241)),
 	ANCHOVIES(new Item[] { new Item(319) }, new Item(11266)),
+	CHOCOLATE_BAR(new Item[] {new Item(Items.CHOCOLATE_BAR_1973)}, new Item(Items.CHOCOLATE_DUST_1975)),
 	GUAM_LEAF(new Item[] { new Item(Items.CLEAN_GUAM_249) }, new Item(Items.GROUND_GUAM_6681));
 
 	/**

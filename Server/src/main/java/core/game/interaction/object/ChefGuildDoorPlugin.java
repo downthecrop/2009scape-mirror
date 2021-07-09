@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import org.rs09.consts.Items;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.node.item.Item;
@@ -65,8 +65,8 @@ public final class ChefGuildDoorPlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ObjectDefinition.forId(2712).getHandlers().put("option:open", this);
-        ObjectDefinition.forId(26810).getHandlers().put("option:open", this);
+        SceneryDefinition.forId(2712).getHandlers().put("option:open", this);
+        SceneryDefinition.forId(26810).getHandlers().put("option:open", this);
         return this;
     }
 

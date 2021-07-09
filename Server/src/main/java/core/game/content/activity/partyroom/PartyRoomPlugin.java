@@ -5,7 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import core.cache.def.impl.ObjectDefinition;
+import api.ContentAPI;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -16,11 +17,11 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.RunScript;
 import core.game.node.item.Item;
 import core.game.node.object.Scenery;
 import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
+import kotlin.Unit;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -67,10 +68,10 @@ public final class PartyRoomPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(CLOSED_CHEST).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(OPEN_CHEST).getHandlers().put("option:deposit", this);
-		ObjectDefinition.forId(OPEN_CHEST).getHandlers().put("option:shut", this);
-		ObjectDefinition.forId(LEVER).getHandlers().put("option:pull", this);
+		SceneryDefinition.forId(CLOSED_CHEST).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(OPEN_CHEST).getHandlers().put("option:deposit", this);
+		SceneryDefinition.forId(OPEN_CHEST).getHandlers().put("option:shut", this);
+		SceneryDefinition.forId(LEVER).getHandlers().put("option:pull", this);
 		PluginManager.definePlugin(new DepositInterfaceHandler());
 		PluginManager.definePlugin(new BalloonManager());
 		return this;
@@ -81,7 +82,7 @@ public final class PartyRoomPlugin extends OptionHandler {
 		switch (node.getId()) {
 		case CLOSED_CHEST:
 			player.animate(Animation.create(536));
-			SceneryBuilder.replace(node.asObject(), node.asObject().transform(OPEN_CHEST));
+			SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(OPEN_CHEST));
 			break;
 		case OPEN_CHEST:
 			switch (option) {
@@ -90,12 +91,12 @@ public final class PartyRoomPlugin extends OptionHandler {
 				break;
 			case "shut":
 				player.animate(Animation.create(535));
-				SceneryBuilder.replace(node.asObject(), node.asObject().transform(CLOSED_CHEST));
+				SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(CLOSED_CHEST));
 				break;
 			}
 			break;
 		case LEVER:
-			handleLever(player, node.asObject());
+			handleLever(player, node.asScenery());
 			break;
 		}
 		return true;
@@ -315,15 +316,10 @@ public final class PartyRoomPlugin extends OptionHandler {
 					viewer.getContainer().addItem(slot, ammount);
 					break;
 				case 234:
-					player.setAttribute("runscript", new RunScript() {
-						@Override
-						public boolean handle() {
-							int ammount = (int) value;
-							viewer.getContainer().addItem(slot, ammount);
-							return false;
-						}
+					ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+						viewer.getContainer().addItem(slot, (int) value);
+						return Unit.INSTANCE;
 					});
-					player.getDialogueInterpreter().sendInput(false, "Enter the amount.");
 					break;
 				}
 				break;
@@ -351,15 +347,10 @@ public final class PartyRoomPlugin extends OptionHandler {
 					viewer.getContainer().takeItem(slot, ammount);
 					break;
 				case 234:
-					player.setAttribute("runscript", new RunScript() {
-						@Override
-						public boolean handle() {
-							int ammount = (int) value;
-							viewer.getContainer().takeItem(slot, ammount);
-							return false;
-						}
+					ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+						viewer.getContainer().takeItem(slot, (int) value);
+						return Unit.INSTANCE;
 					});
-					player.getDialogueInterpreter().sendInput(false, "Enter the amount.");
 					break;
 				}
 				break;

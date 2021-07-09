@@ -1,7 +1,8 @@
 package core.game.node.entity.skill.construction.decoration.chapel;
 
 
-import core.cache.def.impl.ObjectDefinition;
+import api.ContentAPI;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.Bones;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.NodeUsageEvent;
@@ -58,7 +59,7 @@ public class BoneOfferPlugin extends UseWithHandler {
 		Player player = event.getPlayer();
 		Scenery left = null;
 		Scenery right = null;
-		if (event.getUsedWith().asObject().getRotation() % 2 == 0) {
+		if (event.getUsedWith().asScenery().getRotation() % 2 == 0) {
 			left = RegionManager.getObject(event.getUsedWith().getLocation().getZ(), event.getUsedWith().getLocation().getX() + 3, event.getUsedWith().getLocation().getY());
 			right = RegionManager.getObject(event.getUsedWith().getLocation().getZ(), event.getUsedWith().getLocation().getX() - 2, event.getUsedWith().getLocation().getY());
 		} else {
@@ -67,7 +68,7 @@ public class BoneOfferPlugin extends UseWithHandler {
 		}
 		Bones b = Bones.forId(event.getUsedItem().getId());
 		if (b != null) {
-			worship(player, event.getUsedWith().asObject(), left, right, b);
+			worship(player, event.getUsedWith().asScenery(), left, right, b);
 		}
 		return true;
 	}
@@ -86,7 +87,7 @@ public class BoneOfferPlugin extends UseWithHandler {
 			return;
 		}
 		final Location start = player.getLocation();
-		GameWorld.getPulser().submit(new Pulse(1) {
+		ContentAPI.submitIndividualPulse(player, new Pulse(1) {
 			int counter = 0;
 			
 			@Override
@@ -114,7 +115,7 @@ public class BoneOfferPlugin extends UseWithHandler {
 	 * @param obj the object.
 	 */
 	private boolean isLit(Scenery obj) {
-		return obj != null && obj.getId() != 15271 && ObjectDefinition.forId(obj.getId()).getOptions() != null && !ObjectDefinition.forId(obj.getId()).hasAction("Light");
+		return obj != null && obj.getId() != 15271 && SceneryDefinition.forId(obj.getId()).getOptions() != null && !SceneryDefinition.forId(obj.getId()).hasAction("Light");
 	}
 	
 	/**

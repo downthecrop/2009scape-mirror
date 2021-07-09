@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -24,16 +24,16 @@ public class SpinSpinningWheelPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2644).getHandlers().put("option:spin", this);
-		ObjectDefinition.forId(4309).getHandlers().put("option:spin", this);
-		ObjectDefinition.forId(8748).getHandlers().put("option:spin", this);
-		ObjectDefinition.forId(20365).getHandlers().put("option:spin", this);
-		ObjectDefinition.forId(21304).getHandlers().put("option:spin", this);
-		ObjectDefinition.forId(25824).getHandlers().put("option:spin", this);
-		ObjectDefinition.forId(26143).getHandlers().put("option:spin", this);
-		ObjectDefinition.forId(34497).getHandlers().put("option:spin", this);
-		ObjectDefinition.forId(36970).getHandlers().put("option:spin", this);
-		ObjectDefinition.forId(37476).getHandlers().put("option:spin", this);
+		SceneryDefinition.forId(2644).getHandlers().put("option:spin", this);
+		SceneryDefinition.forId(4309).getHandlers().put("option:spin", this);
+		SceneryDefinition.forId(8748).getHandlers().put("option:spin", this);
+		SceneryDefinition.forId(20365).getHandlers().put("option:spin", this);
+		SceneryDefinition.forId(21304).getHandlers().put("option:spin", this);
+		SceneryDefinition.forId(25824).getHandlers().put("option:spin", this);
+		SceneryDefinition.forId(26143).getHandlers().put("option:spin", this);
+		SceneryDefinition.forId(34497).getHandlers().put("option:spin", this);
+		SceneryDefinition.forId(36970).getHandlers().put("option:spin", this);
+		SceneryDefinition.forId(37476).getHandlers().put("option:spin", this);
 		return this;
 	}
 

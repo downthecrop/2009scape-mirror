@@ -255,6 +255,7 @@ NPCConfigParser {
                         "aggressive",
                         "poisonous",
                         "poison_immune",
+                        "facing_booth",
                         "water_npc"-> configs.put(it.key.toString(), it.value.toString().toBoolean())
                         else -> SystemLogger.logWarn("Unhandled key for npc config: ${it.key.toString()}")
                     }

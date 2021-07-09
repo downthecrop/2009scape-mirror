@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.activity.ActivityManager;
 import core.game.interaction.Option;
 import core.game.interaction.OptionHandler;
@@ -61,10 +61,10 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
 				for (int i = 0; i < ENTRANCE_DATA.length; i++) {
-					ObjectDefinition.forId((int) ENTRANCE_DATA[i][0]).getHandlers().put("option:enter", this);
-					ObjectDefinition.forId((int) ENTRANCE_DATA[i][2]).getHandlers().put("option:climb-up", this);
+					SceneryDefinition.forId((int) ENTRANCE_DATA[i][0]).getHandlers().put("option:enter", this);
+					SceneryDefinition.forId((int) ENTRANCE_DATA[i][2]).getHandlers().put("option:climb-up", this);
 				}
-				ObjectDefinition.forId(23074).getHandlers().put("option:climb", this);
+				SceneryDefinition.forId(23074).getHandlers().put("option:climb", this);
 				return this;
 			}
 
@@ -122,7 +122,7 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 					entity.asPlayer().sendMessage("You can't go back throught his portal.");
 					return true;
 				}
-				teleport(entity.asPlayer(), target.asObject());
+				teleport(entity.asPlayer(), target.asScenery());
 				break;
 			}
 		}

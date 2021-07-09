@@ -1,6 +1,7 @@
 package rs09.game.node.entity.skill.agility
 
-import core.cache.def.impl.ObjectDefinition
+import api.ContentAPI
+import core.cache.def.impl.SceneryDefinition
 import core.game.content.global.action.DoorActionHandler
 import core.game.node.Node
 import core.game.node.`object`.Scenery
@@ -9,8 +10,6 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.agility.AgilityCourse
 import core.game.node.entity.skill.agility.AgilityHandler
-import core.game.system.task.LocationLogoutTask
-import core.game.system.task.LogoutTask
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -176,25 +175,25 @@ class WildernessCourse
      * @param object the object.
      */
     private fun handleSteppingStones(player: Player, `object`: Scenery) {
-        player.locks.lock()
+        ContentAPI.lock(player, 50)
         val fail = AgilityHandler.hasFailed(player, 1, 0.3)
-        player.addExtension(LogoutTask::class.java, LocationLogoutTask(12, player.location))
-        GameWorld.Pulser.submit(object : Pulse(2, player) {
+        val origLoc = player.location
+        ContentAPI.registerLogoutListener(player, "steppingstone"){p ->
+            ContentAPI.teleport(p, origLoc)
+        }
+        ContentAPI.submitWorldPulse(object : Pulse(2, player){
             var counter = 0
             override fun pulse(): Boolean {
                 if (counter == 3 && fail) {
                     AgilityHandler.fail(player, -1, Location.create(3001, 3963, 0), Animation.create(771), (player.skills.lifepoints * 0.26).toInt(), "...You lose your footing and fall into the lava.")
                     return true
                 }
-                AgilityHandler.forceWalk(player, if (counter == 5) 2 else -1, player.location, player.location.transform(-1, 0, 0), Animation.create(741), 10, if (counter == 5) 20.0 else 0.toDouble(), if (counter != 0) null else "You carefully start crossing the stepping stones...")
+                AgilityHandler.forceWalk(player, if (counter == 5) 2 else -1, player.location, player.location.transform(-1, 0, 0), Animation.create(741), 10, if (counter == 5) 20.0 else 0.0, if (counter != 0) null else "You carefully start crossing the stepping stones...")
                 if(++counter == 6){
-                    player.unlock()
+                    ContentAPI.unlock(player)
+                    ContentAPI.clearLogoutListener(player, "steppingstone")
                 }
                 return counter == 6
-            }
-
-            override fun stop() {
-                super.stop()
             }
         })
     }
@@ -247,14 +246,14 @@ class WildernessCourse
     }
 
     override fun configure() {
-        ObjectDefinition.forId(2309).handlers["option:open"] = this
-        ObjectDefinition.forId(2308).handlers["option:open"] = this
-        ObjectDefinition.forId(2307).handlers["option:open"] = this
-        ObjectDefinition.forId(2288).handlers["option:squeeze-through"] = this
-        ObjectDefinition.forId(2283).handlers["option:swing-on"] = this
-        ObjectDefinition.forId(37704).handlers["option:cross"] = this
-        ObjectDefinition.forId(2297).handlers["option:walk-across"] = this
-        ObjectDefinition.forId(2328).handlers["option:climb"] = this
+        SceneryDefinition.forId(2309).handlers["option:open"] = this
+        SceneryDefinition.forId(2308).handlers["option:open"] = this
+        SceneryDefinition.forId(2307).handlers["option:open"] = this
+        SceneryDefinition.forId(2288).handlers["option:squeeze-through"] = this
+        SceneryDefinition.forId(2283).handlers["option:swing-on"] = this
+        SceneryDefinition.forId(37704).handlers["option:cross"] = this
+        SceneryDefinition.forId(2297).handlers["option:walk-across"] = this
+        SceneryDefinition.forId(2328).handlers["option:climb"] = this
     }
 
     override fun createInstance(player: Player): AgilityCourse {

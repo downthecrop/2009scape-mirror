@@ -1,5 +1,6 @@
 package rs09.game.node.entity.skill.cooking
 
+import api.ContentAPI
 import core.cache.def.impl.ItemDefinition
 import core.game.node.`object`.Scenery
 import core.game.node.entity.player.link.RunScript
@@ -53,14 +54,9 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
                 val amount = getAmount(buttonID)
                 when (amount) {
                     -1 -> {
-                        player!!.setAttribute("runscript", object : RunScript() {
-                            override fun handle(): Boolean {
-                                val amount = value as Int
-                                cook(player, `object`, initial, product, amount)
-                                return false
-                            }
-                        })
-                        player!!.dialogueInterpreter.sendInput(false, "Enter an amount:")
+                        ContentAPI.sendInputDialogue(player!!, true, "Enter the amount:"){value ->
+                            cook(player!!, `object`, initial, product, value as Int)
+                        }
                     }
                     else -> {
                         end()

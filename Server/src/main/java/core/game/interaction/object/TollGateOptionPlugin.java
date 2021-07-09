@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -43,11 +43,11 @@ public class TollGateOptionPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(35551).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(35551).getHandlers().put("option:pay-toll(10gp)", this);
-		ObjectDefinition.forId(35549).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(35549).getHandlers().put("option:pay-toll(10gp)", this);
-		ObjectDefinition.forId(2882).getHandlers().put("option:pay-toll(10gp)", this);
+		SceneryDefinition.forId(35551).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(35551).getHandlers().put("option:pay-toll(10gp)", this);
+		SceneryDefinition.forId(35549).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(35549).getHandlers().put("option:pay-toll(10gp)", this);
+		SceneryDefinition.forId(2882).getHandlers().put("option:pay-toll(10gp)", this);
 		return this;
 	}
 

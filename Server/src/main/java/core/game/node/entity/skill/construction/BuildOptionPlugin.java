@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.construction;
 
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
@@ -25,8 +25,8 @@ public final class BuildOptionPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.setOptionHandler("build", this);
-		ObjectDefinition.setOptionHandler("remove", this);
+		SceneryDefinition.setOptionHandler("build", this);
+		SceneryDefinition.setOptionHandler("remove", this);
 		PluginManager.definePlugin(new RemoveDialogue());
 		return this;
 	}
@@ -68,7 +68,6 @@ public final class BuildOptionPlugin extends OptionHandler {
 			SystemLogger.logErr("Construction (building):  " + hotspot +  " : " + object + " chunkX = " + object.getLocation().getChunkX() + ", chunkY = " + object.getLocation().getChunkY());
 			return true;
 		}
-		System.out.println(object + " chunkX = " + object.getCenterLocation().getChunkX() + ", chunkY = " + object.getCenterLocation().getChunkY());
 
 		player.setAttribute("con:hotspot", hotspot);
 		BuildingUtils.openBuildInterface(player, hotspot.getHotspot());
