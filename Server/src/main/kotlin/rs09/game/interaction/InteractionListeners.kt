@@ -172,8 +172,6 @@ object InteractionListeners {
             else -> DestinationFlag.OBJECT
         }
 
-        if(player.zoneMonitor.interact(node, Option(option, 0))) return true
-
         if(player.locks.isInteractionLocked) return false
 
         val method = get(id,type,option) ?: get(option,type) ?: return false
@@ -185,6 +183,7 @@ object InteractionListeners {
             if(player.locks.isMovementLocked) return false
             player.pulseManager.run(object : MovementPulse(player, node, flag, destOverride) {
                 override fun pulse(): Boolean {
+                    if(player.zoneMonitor.interact(node, Option(option, 0))) return true
                     player.faceLocation(node.location)
                     method.invoke(player,node)
                     return true
