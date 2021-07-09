@@ -121,5 +121,9 @@ class JatizsoListeners : InteractionListener() {
             ContentAPI.sendMessage(player, "You ring the warning bell, but everyone ignores it!")
             return@on true
         }
+
+        setDest(NPC, NPCs.MAGNUS_GRAM_5488){_ ->
+            return@setDest Location.create(2416, 3801, 0)
+        }
     }
 }
