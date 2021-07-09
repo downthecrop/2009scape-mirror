@@ -22,6 +22,7 @@ import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.system.task.Pulse
+import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
@@ -254,13 +255,50 @@ object ContentAPI {
      * @param toReplace the GameObject instance we are replacing
      * @param with the ID of the GameObject we wish to replace toReplace with
      * @param for_ticks the number of ticks the object should be replaced for. Use -1 for permanent.
+     * @param loc the location to move the new object to if necessary. Defaults to null.
      */
     @JvmStatic
-    fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int) {
+    fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, loc: Location? = null) {
+        val newLoc = when(loc){
+            null -> toReplace.location
+            else -> loc
+        }
         if (for_ticks == -1) {
-            SceneryBuilder.replace(toReplace, toReplace.transform(with))
+            SceneryBuilder.replace(toReplace, toReplace.transform(with,toReplace.rotation,newLoc))
         } else {
-            SceneryBuilder.replace(toReplace, toReplace.transform(with), for_ticks)
+            SceneryBuilder.replace(toReplace, toReplace.transform(with,toReplace.rotation, newLoc), for_ticks)
+        }
+        toReplace.isActive = false
+    }
+
+    /**
+     * Replace an object with the given revert timer with the given rotation
+     * @param toReplace the GameObject instance we are replacing
+     * @param with the ID of the GameObject we wish to replace toReplace with
+     * @param for_ticks the number of ticks the object should be replaced for. Use -1 for permanent.
+     * @Param rotation the Direction of the rotation it should use. Direction.NORTH, Direction.SOUTH, etc
+     * @param loc the location to move the new object to if necessary. Defaults to null.
+     */
+    @JvmStatic
+    fun replaceScenery(toReplace: Scenery, with: Int, for_ticks: Int, rotation: Direction, loc: Location? = null){
+        val newLoc = when(loc){
+            null -> toReplace.location
+            else -> loc
+        }
+        val rot = when(rotation){
+            Direction.NORTH_WEST -> 0
+            Direction.NORTH -> 1
+            Direction.NORTH_EAST -> 2
+            Direction.EAST -> 4
+            Direction.SOUTH_EAST -> 7
+            Direction.SOUTH -> 6
+            Direction.SOUTH_WEST -> 5
+            Direction.WEST -> 3
+        }
+        if (for_ticks == -1) {
+            SceneryBuilder.replace(toReplace, toReplace.transform(with,rot, newLoc))
+        } else {
+            SceneryBuilder.replace(toReplace, toReplace.transform(with,rot,newLoc), for_ticks)
         }
         toReplace.isActive = false
     }
@@ -491,6 +529,26 @@ object ContentAPI {
     @JvmStatic
     fun findNPC(id: Int): NPC? {
         return Repository.findNPC(id)
+    }
+
+    /**
+     * Gets the spawned scenery from the world map using the given coordinates
+     * @param x the X coordinate to use
+     * @param y the Y coordinate to use
+     * @param z the Z coordinate to use
+     */
+    @JvmStatic
+    fun getScenery(x: Int, y: Int, z: Int): Scenery?{
+        return RegionManager.getObject(z,x,y)
+    }
+
+    /**
+     * Gets the spawned scenery from the world map using the given Location object.
+     * @param loc the Location object to use.
+     */
+    @JvmStatic
+    fun getScenery(loc: Location): Scenery?{
+        return RegionManager.getObject(loc)
     }
 
     /**
