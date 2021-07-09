@@ -1,4 +1,4 @@
-package rs09.game.interaction.region
+package rs09.game.interaction.region.rellekka
 
 import api.ContentAPI
 import core.game.node.entity.npc.NPC
@@ -8,7 +8,6 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.NPCs
-import rs09.game.camerautils.PlayerCamera
 import rs09.game.content.dialogue.area.jatizso.LeftieRightieDialogue
 import rs09.game.interaction.InteractionListener
 
