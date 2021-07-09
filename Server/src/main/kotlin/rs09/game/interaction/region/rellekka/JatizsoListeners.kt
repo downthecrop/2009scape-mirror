@@ -1,13 +1,14 @@
-package rs09.game.interaction.region
+package rs09.game.interaction.region.rellekka
 
 import api.ContentAPI
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.link.audio.Audio
 import core.game.system.task.Pulse
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.NPCs
-import rs09.game.camerautils.PlayerCamera
+import rs09.game.content.dialogue.area.jatizso.LeftieRightieDialogue
 import rs09.game.interaction.InteractionListener
 
 class JatizsoListeners : InteractionListener() {
@@ -16,6 +17,7 @@ class JatizsoListeners : InteractionListener() {
     val WEST_GATE_ZONE = ZoneBorders(2386,3797,2390,3801)
     val SOUTH_GAE_ZONE = ZoneBorders(2411,3795,2414,3799)
     val BELL = 21394
+    val GUARDS = intArrayOf(NPCs.GUARD_5491, NPCs.GUARD_5492)
     val LINES = arrayOf(
         arrayOf(
             "YOU WOULDN'T KNOW HOW TO FIGHT A TROLL IF IT CAME UP AND BIT YER ARM OFF",
@@ -38,34 +40,32 @@ class JatizsoListeners : InteractionListener() {
             if(NORTH_GATE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
                     val other = ContentAPI.getScenery(node.location.transform(1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.EAST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, -1, Direction.SOUTH)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.EAST)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, 10, Direction.NORTH_EAST)
                 } else {
                     val other = ContentAPI.getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.SOUTH)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id, -1, Direction.EAST)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.NORTH_EAST)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id, 10, Direction.EAST)
                 }
-
-                ContentAPI.playAudio(player, ContentAPI.getAudio(81))
             } else if(WEST_GATE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
                     val other = ContentAPI.getScenery(node.location.transform(0, 1, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.WEST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, -1, Direction.NORTH)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.WEST)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, 10, Direction.NORTH)
                 } else {
                     val other = ContentAPI.getScenery(node.location.transform(0, -1, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.NORTH)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, -1, Direction.WEST)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.NORTH)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, 10, Direction.WEST)
                 }
             } else if(SOUTH_GAE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
                     val other = ContentAPI.getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.SOUTH)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, -1, Direction.EAST)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.SOUTH)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, 10, Direction.EAST)
                 } else {
                     val other = ContentAPI.getScenery(node.location.transform(1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.EAST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id, -1, Direction.SOUTH)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.EAST)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id, 10, Direction.SOUTH)
                 }
             }
             ContentAPI.playAudio(player, ContentAPI.getAudio(81))
@@ -73,9 +73,10 @@ class JatizsoListeners : InteractionListener() {
         }
 
         on(NPCs.GUARD_5489, NPC, "watch-shouting"){player, node ->
+            val local = ContentAPI.findLocalNPC(player, node.id)
             ContentAPI.lock(player, 200)
-            ContentAPI.face(node.asNpc(), Location.create(2371, 3801, 2))
-            node.asNpc().isRespawn = false
+            ContentAPI.face(local!!, Location.create(2371, 3801, 2))
+            local.asNpc().isRespawn = false
             ContentAPI.submitIndividualPulse(player, object : Pulse(4){
                 var id = node.id
                 var counter = 0
@@ -101,7 +102,7 @@ class JatizsoListeners : InteractionListener() {
                 override fun stop() {
                     ContentAPI.unlock(player)
                     other?.isRespawn = true
-                    node.asNpc().isRespawn = true
+                    local.asNpc().isRespawn = true
                     super.stop()
                 }
 
@@ -119,6 +120,11 @@ class JatizsoListeners : InteractionListener() {
         on(BELL, SCENERY, "ring-bell"){player, _ ->
             ContentAPI.playAudio(player, Audio(15))
             ContentAPI.sendMessage(player, "You ring the warning bell, but everyone ignores it!")
+            return@on true
+        }
+
+        on(GUARDS, NPC, "talk-to"){player, node ->
+            player.dialogueInterpreter.open(LeftieRightieDialogue(), NPC(NPCs.GUARD_5491))
             return@on true
         }
 
