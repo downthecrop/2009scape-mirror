@@ -5,6 +5,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 
+import static rs09.tools.DialogueConstKt.END_DIALOGUE;
+
 /**
  * Handles the sailor dialogue.
  * @author Vexia
@@ -40,7 +42,7 @@ public final class SailorDialogue extends DialoguePlugin {
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
 		rellekaNpc = npc.getId() == 1385;
-		player("Hello. Can I get a ride on your ship?");
+		player("Ship's closed due to stingrays?");
 		return true;
 	}
 
@@ -48,8 +50,10 @@ public final class SailorDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			npc("Hello again, brother " + player.getUsername() + ". If you're ready to jump", "aboard, we're all ready to set sail with the tide!");
-			stage++;
+			npc("Yes.");
+			stage = END_DIALOGUE;
+			//npc("Hello again, brother " + player.getUsername() + ". If you're ready to jump", "aboard, we're all ready to set sail with the tide!");
+			//stage++;
 			break;
 		case 1:
 			player("Let's go!");
@@ -59,7 +63,7 @@ public final class SailorDialogue extends DialoguePlugin {
 			end();
 			player.lock();
 			player.sendMessage("You board the longship...");
-			RellekkaZone.sail(player, rellekaNpc ? "Miscellania" : "Rellekka", rellekaNpc ? Location.create(2581, 3845, 0) : Location.create(2629, 3693, 0));
+			//RellekkaZone.sail(player, rellekaNpc ? "Miscellania" : "Rellekka", rellekaNpc ? Location.create(2581, 3845, 0) : Location.create(2629, 3693, 0));
 			break;
 		}
 		return true;
