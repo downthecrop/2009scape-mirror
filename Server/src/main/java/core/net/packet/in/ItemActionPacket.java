@@ -72,6 +72,9 @@ public class ItemActionPacket implements IncomingPacket {
 			if(InteractionListeners.run(item,npc,2,player)){
 				return;
 			}
+			if(player.getZoneMonitor().useWith(used,npc)){
+				return;
+			}
 			event = new NodeUsageEvent(player, interfaceId, item, npc);
 			try {
 				UseWithHandler.run(event);
@@ -95,6 +98,9 @@ public class ItemActionPacket implements IncomingPacket {
 			}
 			event = new NodeUsageEvent(player, interfaceId, item, target);
 			if(PluginInteractionManager.handle(player,event)){
+				return;
+			}
+			if(player.getZoneMonitor().useWith(used,player)){
 				return;
 			}
 			event = new NodeUsageEvent(player, interfaceId, item, target);
@@ -129,6 +135,9 @@ public class ItemActionPacket implements IncomingPacket {
 				return;
 			}
 			if(InteractionListeners.run(used,with,0,player)){
+				return;
+			}
+			if(player.getZoneMonitor().useWith(used,with)){
 				return;
 			}
 			if (usedItemId < usedWithItemId) {
@@ -180,6 +189,9 @@ public class ItemActionPacket implements IncomingPacket {
 				return;
 			}
 			if(InteractionListeners.run(used,object,1,player)){
+				return;
+			}
+			if(player.getZoneMonitor().useWith(used,object)){
 				return;
 			}
 			event = new NodeUsageEvent(player, 0, used, object);
