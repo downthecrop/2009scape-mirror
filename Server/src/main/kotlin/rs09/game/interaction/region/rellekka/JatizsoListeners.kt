@@ -19,6 +19,7 @@ class JatizsoListeners : InteractionListener() {
     val WEST_GATE_ZONE = ZoneBorders(2386,3797,2390,3801)
     val SOUTH_GAE_ZONE = ZoneBorders(2411,3795,2414,3799)
     val BELL = 21394
+    val TOWER_GUARDS = intArrayOf(NPCs.GUARD_5490, NPCs.GUARD_5489)
     val GUARDS = intArrayOf(NPCs.GUARD_5491, NPCs.GUARD_5492)
     val KING_CHEST = intArrayOf(21299,21300)
     val LINES = arrayOf(
@@ -75,15 +76,15 @@ class JatizsoListeners : InteractionListener() {
             return@on true
         }
 
-        on(GUARDS, NPC, "watch-shouting"){player, node ->
-            val local = ContentAPI.findLocalNPC(player, node.id)
+        on(TOWER_GUARDS, NPC, "watch-shouting"){player, _ ->
+            val local = ContentAPI.findLocalNPC(player, NPCs.GUARD_5489)
             ContentAPI.lock(player, 200)
             ContentAPI.face(local!!, Location.create(2371, 3801, 2))
             local.asNpc().isRespawn = false
             ContentAPI.submitIndividualPulse(player, object : Pulse(4){
-                var id = node.id
+                var id = NPCs.GUARD_5489
                 var counter = 0
-                val other = ContentAPI.findLocalNPC(player, getOther(node.id))
+                val other = ContentAPI.findLocalNPC(player, getOther(NPCs.GUARD_5489))
 
                 override fun start() {
                     other?.isRespawn = false
@@ -92,12 +93,12 @@ class JatizsoListeners : InteractionListener() {
                 override fun pulse(): Boolean {
                     val npc = ContentAPI.findLocalNPC(player, id) ?: return false
                     val index = when(id){
-                        node.id -> 0
+                        NPCs.GUARD_5489 -> 0
                         else -> 1
                     }
                     if(index == 1 && counter == 5) return true
                     ContentAPI.sendChat(npc, LINES[index][counter])
-                    if(npc.id != node.id) counter++
+                    if(npc.id != NPCs.GUARD_5489) counter++
                     id = getOther(id)
                     return false
                 }
