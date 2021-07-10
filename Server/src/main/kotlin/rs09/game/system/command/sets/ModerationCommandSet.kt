@@ -60,7 +60,7 @@ class ModerationCommandSet : CommandSet(Command.Privilege.MODERATOR){
             }
 
             val NameCheck = name.toLowerCase()
-            if (NameCheck == "kermit" || NameCheck == "ceikry"){
+            if (NameCheck == "kermit" || NameCheck == "ceikry" || NameCheck == "mod woah"){
                 reject(player, "You cannot jail $name, they are a god. Nice try though ${player.username}!")
             }
 
