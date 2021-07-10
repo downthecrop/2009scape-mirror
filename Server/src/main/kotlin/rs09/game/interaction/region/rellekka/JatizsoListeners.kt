@@ -1,6 +1,8 @@
 package rs09.game.interaction.region.rellekka
 
 import api.ContentAPI
+import core.game.content.dialogue.FacialExpression
+import core.game.content.global.action.SpecialLadders
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.link.audio.Audio
 import core.game.system.task.Pulse
@@ -8,7 +10,7 @@ import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.NPCs
-import rs09.game.content.dialogue.area.jatizso.LeftieRightieDialogue
+import rs09.game.content.dialogue.region.jatizso.LeftieRightieDialogue
 import rs09.game.interaction.InteractionListener
 
 class JatizsoListeners : InteractionListener() {
@@ -18,6 +20,7 @@ class JatizsoListeners : InteractionListener() {
     val SOUTH_GAE_ZONE = ZoneBorders(2411,3795,2414,3799)
     val BELL = 21394
     val GUARDS = intArrayOf(NPCs.GUARD_5491, NPCs.GUARD_5492)
+    val KING_CHEST = intArrayOf(21299,21300)
     val LINES = arrayOf(
         arrayOf(
             "YOU WOULDN'T KNOW HOW TO FIGHT A TROLL IF IT CAME UP AND BIT YER ARM OFF",
@@ -40,32 +43,32 @@ class JatizsoListeners : InteractionListener() {
             if(NORTH_GATE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
                     val other = ContentAPI.getScenery(node.location.transform(1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.EAST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, 10, Direction.NORTH_EAST)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.EAST)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, -1, Direction.NORTH_EAST)
                 } else {
                     val other = ContentAPI.getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.NORTH_EAST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id, 10, Direction.EAST)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.NORTH_EAST)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id, -1, Direction.EAST)
                 }
             } else if(WEST_GATE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
                     val other = ContentAPI.getScenery(node.location.transform(0, 1, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.WEST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, 10, Direction.NORTH)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.WEST)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, -1, Direction.NORTH)
                 } else {
                     val other = ContentAPI.getScenery(node.location.transform(0, -1, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.NORTH)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, 10, Direction.WEST)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.NORTH)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, -1, Direction.WEST)
                 }
             } else if(SOUTH_GAE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
                     val other = ContentAPI.getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.SOUTH)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, 10, Direction.EAST)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.SOUTH)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, -1, Direction.EAST)
                 } else {
                     val other = ContentAPI.getScenery(node.location.transform(1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, 10, Direction.EAST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id, 10, Direction.SOUTH)
+                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.EAST)
+                    ContentAPI.replaceScenery(other.asScenery(), other.id, -1, Direction.SOUTH)
                 }
             }
             ContentAPI.playAudio(player, ContentAPI.getAudio(81))
@@ -128,8 +131,23 @@ class JatizsoListeners : InteractionListener() {
             return@on true
         }
 
+        on(KING_CHEST, SCENERY, "open"){player, node ->
+            ContentAPI.sendPlayerDialogue(player, "I probably shouldn't mess with that.", FacialExpression.HALF_THINKING)
+            return@on true
+        }
+
         setDest(NPC, NPCs.MAGNUS_GRAM_5488){_ ->
             return@setDest Location.create(2416, 3801, 0)
         }
+
+        //Climb handling for the ladders in the towers around the city walls.
+        ContentAPI.addClimbDest(Location.create(2388, 3804, 0),Location.create(2387, 3804, 2))
+        ContentAPI.addClimbDest(Location.create(2388, 3804, 2),Location.create(2387, 3804, 0))
+        ContentAPI.addClimbDest(Location.create(2388, 3793, 0),Location.create(2387, 3793, 2))
+        ContentAPI.addClimbDest(Location.create(2388, 3793, 2),Location.create(2387, 3793, 0))
+        ContentAPI.addClimbDest(Location.create(2410, 3823, 0),Location.create(2410, 3824, 2))
+        ContentAPI.addClimbDest(Location.create(2410, 3823, 2),Location.create(2410, 3824, 0))
+        ContentAPI.addClimbDest(Location.create(2421, 3823, 0),Location.create(2421, 3824, 2))
+        ContentAPI.addClimbDest(Location.create(2421, 3823, 2),Location.create(2421, 3824, 0))
     }
 }

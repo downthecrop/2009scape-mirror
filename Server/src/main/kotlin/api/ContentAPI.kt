@@ -4,6 +4,7 @@ import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.content.dialogue.FacialExpression
+import core.game.content.global.action.SpecialLadders
 import core.game.node.Node
 import core.game.node.`object`.Scenery
 import core.game.node.`object`.SceneryBuilder
@@ -1124,5 +1125,15 @@ object ContentAPI {
     @JvmStatic
     fun animateInterface(player: Player, iface: Int, child: Int, anim: Int){
         player.packetDispatch.sendAnimationInterface(anim,iface,child)
+    }
+
+    /**
+     * Adds a climb destination to the ladder handler.
+     * @param ladderLoc the location of the ladder/stairs object you want to climb.
+     * @param dest the destination for the climb.
+     */
+    @JvmStatic
+    fun addClimbDest(ladderLoc: Location, dest: Location){
+        SpecialLadders.add(ladderLoc,dest)
     }
 }
