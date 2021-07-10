@@ -594,6 +594,16 @@ object ContentAPI {
     }
 
     /**
+     * Gets a list of nearby NPCs that match the given IDs.
+     * @param entity the entity to check around
+     * @param ids the IDs of the NPCs to look for
+     */
+    @JvmStatic
+    fun findLocalNPCs(entity: Entity, ids: IntArray): List<NPC>{
+        return RegionManager.getSurroundingNPCs(entity).filter { it.id in ids }.toList()
+    }
+
+    /**
      * Gets the value of an attribute key from the Entity's attributes store
      * @param entity the entity to get the attribute from
      * @param attribute the attribute key to use
