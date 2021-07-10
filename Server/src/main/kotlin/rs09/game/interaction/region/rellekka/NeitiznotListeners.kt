@@ -1,6 +1,7 @@
 package rs09.game.interaction.region.rellekka
 
 import api.ContentAPI
+import core.game.content.dialogue.FacialExpression
 import core.game.node.Node
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -12,7 +13,15 @@ import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 
 class NeitiznotListeners : InteractionListener() {
+    val STUMP = 21305
+
     override fun defineListeners() {
+
+        on(STUMP, SCENERY, "cut-wood"){player, _ ->
+            ContentAPI.sendPlayerDialogue(player, "I should probably leave this alone.", FacialExpression.HALF_THINKING)
+            return@on true
+        }
+
         val zone = object : MapZone("Yakzone", true){
             override fun handleUseWith(player: Player, used: Item?, with: Node?): Boolean {
                 if(with is NPC && with.id == NPCs.YAK_5529){
