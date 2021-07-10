@@ -46,7 +46,7 @@ class TowerGuardDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.GUARD_5489)
+        return intArrayOf(NPCs.GUARD_5489, NPCs.GUARD_5490)
     }
 
 }
