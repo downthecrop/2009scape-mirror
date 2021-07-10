@@ -1,6 +1,7 @@
 package rs09.game.system.command.sets
 
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.info.Rights
 import rs09.game.system.command.Command
 import core.game.system.task.Pulse
 import rs09.game.world.GameWorld
@@ -59,8 +60,7 @@ class ModerationCommandSet : CommandSet(Command.Privilege.MODERATOR){
                 reject(player, "Can not find $name in the player list!")
             }
 
-            val NameCheck = name.toLowerCase()
-            if (NameCheck == "kermit" || NameCheck == "ceikry"){
+            if (otherPlayer?.rights == Rights.ADMINISTRATOR){
                 reject(player, "You cannot jail $name, they are a god. Nice try though ${player.username}!")
             }
 
