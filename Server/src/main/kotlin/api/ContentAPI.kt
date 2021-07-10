@@ -4,6 +4,7 @@ import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.content.dialogue.FacialExpression
+import core.game.content.global.action.SpecialLadders
 import core.game.node.Node
 import core.game.node.`object`.Scenery
 import core.game.node.`object`.SceneryBuilder
@@ -436,6 +437,25 @@ object ContentAPI {
     }
 
     /**
+     * Opens the given interface as an overlay for the given player
+     * @param player the player to open the interface for
+     * @param id the ID of the interface to open
+     */
+    @JvmStatic
+    fun openOverlay(player: Player, id: Int){
+        player.interfaceManager.openOverlay(Component(id))
+    }
+
+    /**
+     * Closes any open overlays for the given player
+     * @param player the player to close for
+     */
+    @JvmStatic
+    fun closeOverlay(player: Player){
+        player.interfaceManager.closeOverlay()
+    }
+
+    /**
      * Runs the given Emote for the given Entity
      * @param entity the entity to run the emote on
      * @param emote the Emotes enum entry to run
@@ -571,6 +591,16 @@ object ContentAPI {
     @JvmStatic
     fun findLocalNPC(entity: Entity, id: Int): NPC? {
         return RegionManager.getLocalNpcs(entity).firstOrNull { it.id == id }
+    }
+
+    /**
+     * Gets a list of nearby NPCs that match the given IDs.
+     * @param entity the entity to check around
+     * @param ids the IDs of the NPCs to look for
+     */
+    @JvmStatic
+    fun findLocalNPCs(entity: Entity, ids: IntArray): List<NPC>{
+        return RegionManager.getSurroundingNPCs(entity).filter { it.id in ids }.toList()
     }
 
     /**
@@ -1093,5 +1123,27 @@ object ContentAPI {
     fun registerMapZone(zone: MapZone, borders: ZoneBorders){
         ZoneBuilder.configure(zone)
         zone.register(borders)
+    }
+
+    /**
+     * Animates a component of an interface.
+     * @param player the player to animate the interface for.
+     * @param iface the ID of the interface to animate.
+     * @param child the child on the interface to animate.
+     * @param anim the ID of the animation to use.
+     */
+    @JvmStatic
+    fun animateInterface(player: Player, iface: Int, child: Int, anim: Int){
+        player.packetDispatch.sendAnimationInterface(anim,iface,child)
+    }
+
+    /**
+     * Adds a climb destination to the ladder handler.
+     * @param ladderLoc the location of the ladder/stairs object you want to climb.
+     * @param dest the destination for the climb.
+     */
+    @JvmStatic
+    fun addClimbDest(ladderLoc: Location, dest: Location){
+        SpecialLadders.add(ladderLoc,dest)
     }
 }

@@ -11,9 +11,12 @@ object PacketWriteQueue {
     @JvmStatic
     fun <T> handle(packet: OutgoingPacket<T>, context: T){
         when(packet){
+            //Dynamic packets need to be sent immediately
             is UpdateSceneGraph,
             is BuildDynamicScene,
-            is InstancedLocationUpdate -> packet.send(context)
+            is InstancedLocationUpdate,
+            is ClearRegionChunk -> packet.send(context)
+            //Rest get queued up and sent at the end of the tick (authentic)
             else -> queue(packet,context)
         }
     }
