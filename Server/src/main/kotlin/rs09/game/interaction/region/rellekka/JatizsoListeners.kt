@@ -75,7 +75,7 @@ class JatizsoListeners : InteractionListener() {
             return@on true
         }
 
-        on(NPCs.GUARD_5489, NPC, "watch-shouting"){player, node ->
+        on(GUARDS, NPC, "watch-shouting"){player, node ->
             val local = ContentAPI.findLocalNPC(player, node.id)
             ContentAPI.lock(player, 200)
             ContentAPI.face(local!!, Location.create(2371, 3801, 2))
