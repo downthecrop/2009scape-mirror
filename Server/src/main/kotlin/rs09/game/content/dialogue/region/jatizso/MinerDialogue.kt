@@ -1,4 +1,4 @@
-package rs09.game.content.dialogue.area.jatizso
+package rs09.game.content.dialogue.region.jatizso
 
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
