@@ -35,7 +35,7 @@ class TowerGuardDialogue(player: Player? = null) : DialoguePlugin(player) {
             8 -> options("Can I watch? I'm curious.", "Oh well, I'd better get going.").also { stage++ }
             9 -> when(buttonId){
                 1 -> playerl(FacialExpression.ASKING, "Can I watch? I'm curious.").also { stage++ }
-                2 -> npcl(FacialExpression.HALF_THINKING, "Oh well, I'd better get going.").also { stage = END_DIALOGUE }
+                2 -> playerl(FacialExpression.HALF_THINKING, "Oh well, I'd better get going.").also { stage = END_DIALOGUE }
             }
             10 -> npcl(FacialExpression.NEUTRAL,  "IF YOU LIKE!").also {
                 stage = END_DIALOGUE
