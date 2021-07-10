@@ -7,6 +7,7 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.music.MusicZone;
 import core.game.node.entity.player.link.request.RequestType;
+import core.game.node.item.Item;
 import core.game.world.map.Location;
 
 import java.util.ArrayList;
@@ -143,6 +144,18 @@ public final class ZoneMonitor {
 	public boolean interact(Node target, Option option) {
 		for (RegionZone z : zones) {
 			if (z.getZone().interact(entity, target, option)) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * Checks if a zone handles a useWith interaction
+	 */
+	public boolean useWith(Item used, Node with){
+		for (RegionZone z : zones) {
+			if (z.getZone().handleUseWith(entity.asPlayer(), used,with)) {
 				return true;
 			}
 		}
