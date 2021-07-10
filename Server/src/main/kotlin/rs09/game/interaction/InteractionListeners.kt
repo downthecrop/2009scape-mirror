@@ -151,6 +151,9 @@ object InteractionListeners {
             if(player.locks.isMovementLocked) return false
             player.pulseManager.run(object : MovementPulse(player, with, flag) {
                 override fun pulse(): Boolean {
+                    if (player.zoneMonitor.useWith(used.asItem(), with)) {
+                        return true
+                    }
                     player.faceLocation(with.location)
                     if(flipped) method.invoke(player,with,used)
                     else method.invoke(player,used,with)
