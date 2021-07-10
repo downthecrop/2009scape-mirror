@@ -47483,19 +47483,19 @@
     "examine": "A hairy, smelly, grazing animal.",
     "melee_animation": "5782",
     "range_animation": "5782",
-    "attack_speed": "5",
+    "attack_speed": "4",
     "defence_animation": "5783",
     "weakness": "7",
     "magic_animation": "5782",
     "death_animation": "5784",
     "name": "Yak",
-    "defence_level": "30",
+    "defence_level": "1",
     "safespot": null,
     "lifepoints": "50",
-    "strength_level": "7",
+    "strength_level": "10",
     "id": "5529",
     "range_level": "1",
-    "attack_level": "3"
+    "attack_level": "20"
   },
   {
     "examine": "Antisocial.",
