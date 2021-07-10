@@ -60,7 +60,7 @@ class ModerationCommandSet : CommandSet(Command.Privilege.MODERATOR){
                 reject(player, "Can not find $name in the player list!")
             }
 
-            if (otherPlayer!!.rights == Rights.ADMINISTRATOR){
+            if (otherPlayer?.rights == Rights.ADMINISTRATOR){
                 reject(player, "You cannot jail $name, they are a god. Nice try though ${player.username}!")
             }
 
