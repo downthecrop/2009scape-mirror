@@ -23,7 +23,6 @@ object PacketWriteQueue {
 
     @JvmStatic
     fun <T> queue(packet: OutgoingPacket<T>, context: T){
-        SystemLogger.logInfo("Queueing ${packet.javaClass.simpleName}")
         PacketsToWrite.add(QueuedPacket(packet,context))
     }
 
