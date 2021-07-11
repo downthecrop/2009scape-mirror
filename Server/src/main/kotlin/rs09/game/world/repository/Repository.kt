@@ -72,12 +72,12 @@ object Repository {
      * @param icon The icon.
      */
     @JvmStatic
-    fun sendNews(string: String, icon: Int = 12, color: String = "<col=CC6600>") {
+    fun sendNews(string: String, icon: Int = 12, color: String = "CC6600") {
         val players: Array<Any> = playerNames.values.toTypedArray()
         val size = players.size
         for (i in 0 until size) {
             val player = players[i] as Player ?: continue
-            player.sendMessage("<img=" + icon + ">" + color + "News: " + string)
+            player.sendMessage("<img=$icon><col=$color>News: $string")
         }
     }
 
@@ -87,6 +87,7 @@ object Repository {
      * I fucking hate java.
      */
     @JvmStatic
+    @Deprecated("Old and bad",ReplaceWith("ContentAPI.sendNews()"),DeprecationLevel.WARNING)
     fun sendNews(string: String){
         sendNews(string,12)
     }
