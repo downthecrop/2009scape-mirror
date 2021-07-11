@@ -19419,7 +19419,7 @@
   {
     "ge_buy_limit": "10000",
     "examine": "I should take this to the tannery.",
-    "grand_exchange_price": "516",
+    "grand_exchange_price": "150",
     "durability": null,
     "name": "Cowhide",
     "tradeable": "true",
@@ -19833,7 +19833,7 @@
   {
     "ge_buy_limit": "10000",
     "examine": "I need a bow stave to attach this to.",
-    "grand_exchange_price": "223",
+    "grand_exchange_price": "250",
     "durability": null,
     "name": "Bow string",
     "tradeable": "true",
