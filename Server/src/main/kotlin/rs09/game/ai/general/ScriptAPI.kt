@@ -1,5 +1,6 @@
 package rs09.game.ai.general
 
+import api.ContentAPI
 import core.cache.def.impl.ItemDefinition
 import core.game.component.Component
 import core.game.content.consumable.Consumable
@@ -31,6 +32,7 @@ import rs09.game.ai.AIRepository
 import rs09.game.ge.GrandExchangeOffer
 import rs09.game.ge.OfferManager
 import rs09.game.system.SystemLogger
+import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
@@ -680,7 +682,7 @@ class ScriptAPI(private val bot: Player) {
             Items.MAGIC_LOGS_1513 -> 750
             Items.COWHIDE_1739 -> 250
             Items.DRAGON_BONES_536 -> 1250
-            Items.GREEN_DRAGONHIDE_1753 -> 550
+            Items.GREEN_DRAGONHIDE_1753 -> 1000
             Items.GRIMY_RANARR_207 -> 1214
             Items.GRIMY_AVANTOE_211 -> 453
             Items.GRIMY_CADANTINE_215 -> 232
@@ -701,7 +703,11 @@ class ScriptAPI(private val bot: Player) {
             Items.RAW_SHARK_383 -> 710
             Items.TEAK_LOGS_6333 -> 350
             Items.MAHOGANY_LOGS_6332 -> 847
-            else -> null
+            Items.COAL_453 -> 380
+            Items.IRON_ORE_440 -> 265
+            Items.GOLD_ORE_444 -> 380
+            Items.SILVER_ORE_442 -> 260
+            else -> ContentAPI.itemDefinition(id).getConfiguration(ItemConfigParser.GE_PRICE)
         }
     }
 
