@@ -89,6 +89,7 @@ public final class MultiwayCombatZone extends MapZone {
 		registerRegion(13370);//Venenatis
 		registerRegion(12603);//Callisto
 		registerRegion(14939);//Kalphite Stronghold Cave
+		registerRegion(9532); //Isle north of Jatizso
 	}
 
 	@Override
