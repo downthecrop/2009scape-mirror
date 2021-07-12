@@ -600,7 +600,7 @@ object ContentAPI {
      */
     @JvmStatic
     fun findLocalNPCs(entity: Entity, ids: IntArray): List<NPC>{
-        return RegionManager.getSurroundingNPCs(entity).filter { it.id in ids }.toList()
+        return RegionManager.getLocalNpcs(entity).filter { it.id in ids }.toList()
     }
 
     /**
