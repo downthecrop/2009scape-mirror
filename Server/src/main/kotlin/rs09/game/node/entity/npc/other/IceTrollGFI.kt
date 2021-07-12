@@ -23,7 +23,7 @@ class IceTrollGFI : AbstractNPC {
     }
 
     override fun tick() {
-        if(!inCombat() && RandomFunction.roll(20)){
+        if(isActive && !inCombat() && RandomFunction.roll(20)){
             val localGuards = ContentAPI.findLocalNPCs(this, intArrayOf(NPCs.HONOUR_GUARD_5514,NPCs.HONOUR_GUARD_5515,NPCs.HONOUR_GUARD_5516,NPCs.HONOUR_GUARD_5517))
             localGuards.forEach{guard ->
                 SystemLogger.logInfo("Looping guards...")
