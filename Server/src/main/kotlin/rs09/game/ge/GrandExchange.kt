@@ -35,6 +35,8 @@ object GrandExchange : CallBack {
                 Thread.sleep(60_000) //sleep for 60 seconds
             }
         }.start()
+
+        isRunning = true
     }
 
     override fun call(): Boolean {
