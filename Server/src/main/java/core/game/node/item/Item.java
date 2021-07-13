@@ -8,6 +8,7 @@ import core.game.interaction.Interaction;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.combat.equipment.DegradableEquipment;
+import rs09.game.ge.OfferManager;
 
 /**
  * Represents an item.
@@ -99,10 +100,7 @@ public class Item extends Node{
 	 */
 	public long getValue() {
 		long value = 1;
-		GrandExchangeEntry entry = GrandExchangeDatabase.getDatabase().get(getId());
-		if (entry != null) {
-			value = entry.getValue();
-		}
+		value = OfferManager.getRecommendedPrice(getId(), false);
 		if (definition.getValue() > value) {
 			value = definition.getValue();
 		}
