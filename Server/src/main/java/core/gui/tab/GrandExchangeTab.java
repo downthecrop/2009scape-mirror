@@ -161,7 +161,7 @@ public class GrandExchangeTab extends ConsoleTab {
         } catch (NumberFormatException e) {
 
         }
-        for (GrandExchangeOffer o : OfferManager.Companion.getOffersForItem(itemId)) {
+        for (GrandExchangeOffer o : OfferManager.getOffersForItem(itemId)) {
             if (o == null) {
                 continue;
             }
@@ -184,7 +184,7 @@ public class GrandExchangeTab extends ConsoleTab {
             JOptionPane.showMessageDialog(null, "Error! No data in DB yet. Press load.");
             return;
         }
-        for (GrandExchangeOffer offer : OfferManager.Companion.getOFFER_MAPPING().values()) {
+        for (GrandExchangeOffer offer : OfferManager.getOFFER_MAPPING().values()) {
             model.addElement(offer);
         }
     }
