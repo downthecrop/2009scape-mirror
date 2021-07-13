@@ -70,6 +70,11 @@ object SystemLogger {
     }
 
     @JvmStatic
+    fun logGE(message: String){
+        if(message.isNotBlank()) t.println("${getTime()}: ${TextColors.gray("[  GE] $message")}")
+    }
+
+    @JvmStatic
     fun logTrade(message: String){
         if(message.isNotBlank()){
             if(tradeLogWriter == null) logWarn("Trade Logger is null!")
