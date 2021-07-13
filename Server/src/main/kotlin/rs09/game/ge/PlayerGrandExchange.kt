@@ -545,7 +545,7 @@ class PlayerGrandExchange(private val player: Player) {
                 val botSales = OfferManager.amtBotsSelling(offer.itemID)
                 if (botSales > 0) {
                     foundAmounts.add(botSales)
-                    foundOffers.add(OfferManager.getRecommendedPrice(offer.itemID))
+                    foundOffers.add(OfferManager.getRecommendedPrice(offer.itemID, true))
                     count++
                 }
                 if (foundOffers.isNotEmpty()) {

@@ -140,7 +140,7 @@ public final class GEGuidePrice {
 				player.getPacketDispatch().sendInterfaceConfig(642, i, false);
 			}
 			for (GuideItem item : getItems()) {
-				player.getPacketDispatch().sendString("" + OfferManager.getRecommendedPrice(item.item) + " gp", COMPONENT.getId(), item.getChildData()[0]);
+				player.getPacketDispatch().sendString("" + OfferManager.getRecommendedPrice(item.item, false) + " gp", COMPONENT.getId(), item.getChildData()[0]);
 			}
 		}
 	}

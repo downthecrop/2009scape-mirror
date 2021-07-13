@@ -154,9 +154,7 @@ object OfferManager {
         if (BOT_OFFERS[offer.itemID] == null) {
             return
         }
-        val priceIndexCost = getRecommendedPrice(offer.itemID)
-        //10% higher than the recommended price
-        val botPrice = (priceIndexCost + (0.1 * priceIndexCost)).toInt()
+        val botPrice = getRecommendedPrice(offer.itemID, true)
         if (offer.offeredValue < botPrice) {
             return
         }
@@ -524,7 +522,9 @@ object OfferManager {
     }
 
     @JvmStatic
-    fun getRecommendedPrice(itemID: Int): Int {
-        return max(GrandExchangeDatabase.getDatabase()[itemID]?.value ?: 0, getItemDefPrice(itemID))
+    fun getRecommendedPrice(itemID: Int, from_bot: Boolean = false): Int {
+        val base = max(GrandExchangeDatabase.getDatabase()[itemID]?.value ?: 0, getItemDefPrice(itemID))
+        return if(from_bot) (base + (base * 0.1).toInt())
+        else base
     }
 }
