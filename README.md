@@ -222,7 +222,7 @@ First follow the [Github-Setup](#github-setup). After you have forked over your 
 1. Navigate to the right hand side of Intellij where it says "Gradle"
     * Gradle is very useful when it comes to running and compiling the project
     * The only tabs we are concerned about are "Client", "Management-Server", and "Server"
-    * Each of these have a "Tasks" folder and an "application" folder
+    * Each of these have a "Tasks" folder and an "application" folder inside of "Tasks"
     <br>
 2. Click on the "application" folder for the Management-Server and double-click "run"
     * The management server is used for things such as player data(not saves), highscores, and world information
