@@ -22,6 +22,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import kotlin.Unit;
 import rs09.game.ge.GrandExchangeOffer;
+import rs09.game.ge.OfferManager;
 import rs09.game.ge.PlayerGrandExchange;
 import rs09.game.interaction.npc.BogrogPouchSwapper;
 import rs09.game.world.GameWorld;
@@ -69,7 +70,7 @@ public class GrandExchangeInterface extends ComponentPlugin {
 		if (offer == null || value < 1 || offer.getOfferState() != OfferState.PENDING) {
 			return;
 		}
-		if (value == GrandExchangeDatabase.getDatabase().get(offer.getItemID()).getValue()) {
+		if (value == OfferManager.getRecommendedPrice(offer.getItemID(), false)) {
 			player.getAudioManager().send(new Audio(4043, 1, 1));
 		} else if (value > offer.getOfferedValue()) {
 			player.getAudioManager().send(new Audio(4041, 1, 1));
@@ -77,7 +78,7 @@ public class GrandExchangeInterface extends ComponentPlugin {
 			player.getAudioManager().send(new Audio(4045, 1, 1));
 		}
 		offer.setOfferedValue(value);
-		player.getConfigManager().send(1111, offer.getOfferedValue());
+		player.varpManager.get(1111).setVarbit(0,offer.getOfferedValue()).send(player);
 	}
 
 	@Override
@@ -348,14 +349,14 @@ public class GrandExchangeInterface extends ComponentPlugin {
 			return false;
 		case 180:
 			if (offer != null) {
-				setOfferValue(player, offer, GrandExchangeDatabase.getDatabase().get(offer.getItemID()).getValue());
+				setOfferValue(player, offer, OfferManager.getRecommendedPrice(offer.getItemID(), false));
 				return true;
 			}
 			return false;
 		case 177: // mid - 5% value
 		case 183: // mid + 5% value
 			if (offer != null) {
-				setOfferValue(player, offer, (int) (GrandExchangeDatabase.getDatabase().get(offer.getItemID()).getValue() * (button == 177 ? 0.95 : 1.05)));
+				setOfferValue(player, offer, (int) (OfferManager.getRecommendedPrice(offer.getItemID(), false) * (button == 177 ? 0.95 : 1.05)));
 				return true;
 			}
 			return false;
