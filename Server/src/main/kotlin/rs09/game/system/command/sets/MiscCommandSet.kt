@@ -561,7 +561,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         val sellList = sellingMap.map { (name, amount) -> "[Selling] $name - $amount" }.sortedBy { it.length }.toMutableList()
 
         sellList.reverse()
-        sellList.add("<str>                                                                                              </str>")
+        sellList.add("<str>                                                                                             </str>")
         sellList.reverse()
 
         SystemLogger.logInfo("bl: ${buyList.size} sl: ${sellList.size}")
