@@ -1,6 +1,7 @@
 package ms.net;
 
 import ms.world.WorldDatabase;
+import ms09.MSLogger;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -69,6 +70,7 @@ public final class IoEventHandler {
 			if(session.getGameServer() != null){
 				WorldDatabase.unRegister(session.getGameServer());
 			}
+			session.disconnect();
 			key.cancel();
 			return;
 		}
