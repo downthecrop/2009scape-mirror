@@ -45,8 +45,6 @@ public final class SystemTermination {
 			e.printStackTrace();
 		}
 		SystemLogger.logInfo("[SystemTerminator] Server successfully terminated!");
-		Runtime.getRuntime().removeShutdownHook(ServerConstants.SHUTDOWN_HOOK);
-		System.exit(0);
 	}
 
 	/**
