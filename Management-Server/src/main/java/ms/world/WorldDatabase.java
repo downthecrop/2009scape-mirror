@@ -7,6 +7,7 @@ import ms.net.IoSession;
 import ms.net.packet.IoBuffer;
 import ms.world.info.CountryFlag;
 import ms.world.info.WorldInfo;
+import ms09.MSLogger;
 
 /**
  * Holds all the world servers.
@@ -148,8 +149,24 @@ public class WorldDatabase {
 			throw new IllegalStateException("World " + info.getWorldId() + " is already registered!");
 		}
 		flagUpdate();
-		System.out.println("Registered world - [id=" + info.getWorldId() + ", ip=" + info.getAddress() + ", country=" + info.getCountry().name().toLowerCase() + ", revision=" + info.getRevision() + "]!");
+		MSLogger.logInfo("Registered world - [id=" + info.getWorldId() + ", ip=" + info.getAddress() + ", country=" + info.getCountry().name().toLowerCase() + ", revision=" + info.getRevision() + "]!");
 		return DATABASE[info.getWorldId()] = new GameServer(info);
+	}
+
+	public static void unRegister(GameServer server){
+		int index = -1;
+		for(int i = 0; i < DATABASE.length; i++){
+			GameServer s = DATABASE[i];
+			if(s == server){
+				index = i;
+				break;
+			}
+		}
+		if(index != -1){
+			DATABASE[index] = null;
+			WorldInfo info = server.getInfo();
+			MSLogger.logInfo("Unregistered world - [id=" + info.getWorldId() + ", ip=" + info.getAddress() + ", country=" + info.getCountry().name().toLowerCase() + ", revision=" + info.getRevision() + "]!");
+		}
 	}
 	
 	/**

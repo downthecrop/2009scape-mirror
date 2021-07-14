@@ -47,7 +47,6 @@ public final class RegistryReadEvent extends IoReadEvent {
 		boolean quickChat = buffer.get() == 1;
 		boolean lootshare = buffer.get() == 1;
 		String activity = ByteBufferUtils.getString(buffer);
-		System.out.println("["+ revision + "], country = " + country + ", members = " + members + ", pvp = " + pvp + ", quickChat = " + quickChat + ", lootShare = " + lootshare + ", activity = " + activity);
 		for (int i = 0; i < CHECK.length(); i++) {
 			if ((char) buffer.get() != CHECK.charAt(i)) {
 				session.write(3);
