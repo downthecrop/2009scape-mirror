@@ -210,6 +210,8 @@ enum class ImplingLoot(val jarId: Int, val table: WeightBasedTable){
         WeightedItem(Items.SNAKESKIN_BOOTS_6328, 1, 1, 1.65),
         WeightedItem(Items.SPLITBARK_HELM_3385, 1, 1, 1.65),
         WeightedItem(Items.MYSTIC_BOOTS_4098, 1, 1, 1.65),
+        WeightedItem(Items.RUNE_CHAINBODY_1113, 1, 1, 1.65),
+        WeightedItem(Items.MYSTIC_GLOVES_4095, 1, 1, 1.65),
         WeightedItem(Items.OPAL_MACHETE_6313, 1, 1, 1.65),
         WeightedItem(Items.RUNE_CLAWS_3101, 1, 1, 1.65),
         WeightedItem(Items.RUNE_SCIMITAR_1333, 1, 1, 1.65),
