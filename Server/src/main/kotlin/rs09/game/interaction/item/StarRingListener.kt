@@ -11,6 +11,7 @@ import rs09.game.content.global.worldevents.WorldEvents
 import rs09.game.content.global.worldevents.shootingstar.ShootingStar
 import rs09.game.content.global.worldevents.shootingstar.ShootingStarEvent
 import rs09.game.interaction.InteractionListener
+import java.util.concurrent.TimeUnit
 
 class StarRingListener : InteractionListener(){
 
@@ -21,6 +22,11 @@ class StarRingListener : InteractionListener(){
             val star = WorldEvents.get("shooting-stars") as? ShootingStarEvent
 
             if(star == null) ContentAPI.sendDialogue(player, "There is currently no active star.").also { return@on true }
+
+            if(ContentAPI.getAttribute(player, "ring-next-tele", 0L) > System.currentTimeMillis()){
+                ContentAPI.sendDialogue(player, "The ring is still recharging.")
+                return@on true
+            }
 
             val condition: (Player) -> Boolean = when(star?.star!!.location.toLowerCase()){
                 "canifis bank" -> { p -> p.questRepository.isComplete("Priest in Peril")}
@@ -73,6 +79,7 @@ class StarRingListener : InteractionListener(){
 
         fun teleport(player: Player, star: ShootingStar){
             ContentAPI.teleport(player, star.crash_locations[star.location]!!.transform(0, -1, 0), TeleportManager.TeleportType.MINIGAME)
+            ContentAPI.setAttribute(player, "/save:ring-next-tele", System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1))
         }
     }
 }
