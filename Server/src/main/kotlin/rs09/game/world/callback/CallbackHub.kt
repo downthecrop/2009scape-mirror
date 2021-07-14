@@ -3,6 +3,7 @@ package rs09.game.world.callback
 import core.game.node.entity.skill.hunter.ImpetuousImpulses
 import core.game.world.callback.CallBack
 import core.game.world.map.zone.ZoneBuilder
+import rs09.game.ge.GrandExchange
 import rs09.game.ge.OfferManager
 import rs09.game.system.SystemLogger
 import java.util.*
@@ -16,7 +17,7 @@ object CallbackHub {
 
     fun call(): Boolean {
         calls.add(ZoneBuilder())
-        calls.add(OfferManager())
+        calls.add(GrandExchange)
         calls.add(ImpetuousImpulses())
         for (call in calls) {
             if (!call.call()) {

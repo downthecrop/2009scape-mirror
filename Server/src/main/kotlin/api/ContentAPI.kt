@@ -600,7 +600,7 @@ object ContentAPI {
      */
     @JvmStatic
     fun findLocalNPCs(entity: Entity, ids: IntArray): List<NPC>{
-        return RegionManager.getSurroundingNPCs(entity).filter { it.id in ids }.toList()
+        return RegionManager.getLocalNpcs(entity).filter { it.id in ids }.toList()
     }
 
     /**
@@ -1145,5 +1145,14 @@ object ContentAPI {
     @JvmStatic
     fun addClimbDest(ladderLoc: Location, dest: Location){
         SpecialLadders.add(ladderLoc,dest)
+    }
+
+    /**
+     * Sends a news announcement in game chat.
+     * @param message the message to announce
+     */
+    @JvmStatic
+    fun sendNews(message: String){
+        Repository.sendNews(message, 12, "CC6600")
     }
 }

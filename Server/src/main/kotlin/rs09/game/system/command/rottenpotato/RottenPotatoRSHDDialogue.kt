@@ -1,6 +1,7 @@
 package rs09.game.system.command.rottenpotato
 
 import api.ContentAPI
+import api.InputType
 import core.game.content.dialogue.DialoguePlugin
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.login.PlayerParser
@@ -53,7 +54,7 @@ class RottenPotatoRSHDDialogue(player: Player? = null) : DialoguePlugin(player) 
                     //View Bank
                     4 -> {
                         end()
-                        ContentAPI.sendInputDialogue(player, false, "Enter player name:"){value ->
+                        ContentAPI.sendInputDialogue(player, InputType.STRING_SHORT, "Enter player name:"){ value ->
                             val other = Repository.getPlayerByName(value.toString().toLowerCase().replace(" ","_"))
                             if(other == null){
                                 player.sendMessage(colorize("%RInvalid player name."))
@@ -66,7 +67,7 @@ class RottenPotatoRSHDDialogue(player: Player? = null) : DialoguePlugin(player) 
                     //View Inventory
                     5 -> {
                         end()
-                        ContentAPI.sendInputDialogue(player, false, "Enter player name:"){value ->
+                        ContentAPI.sendInputDialogue(player, InputType.STRING_SHORT, "Enter player name:"){ value ->
                             val other = Repository.getPlayerByName(value.toString().toLowerCase().replace(" ","_"))
                             if(other == null){
                                 player.sendMessage(colorize("%RInvalid player name."))

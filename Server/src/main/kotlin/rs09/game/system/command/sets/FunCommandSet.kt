@@ -156,9 +156,11 @@ class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
                 ContentAPI.addItemOrDrop(p, item.id, item.amount)
                 ContentAPI.sendMessage(p, "You dig and find ${if(item.amount > 1) "some" else "a"} ${item.name}")
             }
+            ContentAPI.sendNews("${player.username} has found the hidden treasure! Congratulations!!!")
             SpadeDigListener.listeners.remove(loc)
         }
         player.inventory.clear()
         notify(player, "You have buried your loot at ${loc.toString()}")
     }
+
 }

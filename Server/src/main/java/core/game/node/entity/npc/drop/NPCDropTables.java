@@ -19,6 +19,7 @@ import rs09.game.ai.AIPlayer;
 import rs09.game.ai.AIRepository;
 import rs09.game.ai.general.GeneralBotCreator;
 import rs09.game.content.global.NPCDropTable;
+import rs09.game.ge.OfferManager;
 import rs09.game.system.config.ItemConfigParser;
 import rs09.game.world.repository.Repository;
 
@@ -177,7 +178,7 @@ public final class NPCDropTables {
 					}
 				}
 				player.sendMessage(player.getInterfaceManager().isResizable()+"");
-				int price = item.getName().endsWith("charm") ? 100 : GrandExchangeDatabase.getDatabase().get(itemId).getValue();
+				int price = item.getName().endsWith("charm") ? 100 : OfferManager.getRecommendedPrice(itemId, false);
 				looter.getGlobalData().setLootSharePoints(looter.getGlobalData().getLootSharePoints() - (price) + ((price / looters.size())));
 				looter.sendMessage((player.getInterfaceManager().isResizable() ? "<col=32CD32>" : "<col=009900>") + "You received: " + item.getAmount() + " " + item.getName());
 				for (Player p : looters) {
