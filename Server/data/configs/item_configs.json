@@ -49666,6 +49666,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "219",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Bone spear",
     "tradeable": "true",
@@ -49693,6 +49694,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "384",
+	"examine": "Swap this note at any bank for the equivalent item.",		
     "durability": null,
     "name": "Bone club",
     "tradeable": "true",
@@ -80845,6 +80847,7 @@
     "durability": null,
     "low_alchemy": "800",
     "high_alchemy": "1200",
+    "attack_speed": "4",	
     "weight": "0.4",
     "weapon_interface": "5",
     "render_anim": "2584",
@@ -80854,6 +80857,7 @@
     "grand_exchange_price": "2855",
     "attack_audios": "2517,2517,2500,2517",
     "name": "Bone dagger",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "8872",
     "bonuses": "5,3,-4,1,0,0,0,0,1,0,0,4,0,0,0"
@@ -80861,6 +80865,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "2855",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Bone dagger",
     "tradeable": "true",
@@ -80875,6 +80880,7 @@
     "durability": null,
     "low_alchemy": "800",
     "high_alchemy": "1200",
+    "attack_speed": "4",	
     "weight": "0.4",
     "weapon_interface": "5",
     "render_anim": "2584",
@@ -80884,6 +80890,7 @@
     "grand_exchange_price": "3033",
     "attack_audios": "2517,2517,2500,2517",
     "name": "Bone dagger (p)",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "8874",
     "bonuses": "5,3,-4,1,0,0,0,0,1,0,0,4,0,0,0"
@@ -80891,6 +80898,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "3033",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Bone dagger (p)",
     "tradeable": "true",
@@ -80905,6 +80913,7 @@
     "durability": null,
     "low_alchemy": "800",
     "high_alchemy": "1200",
+    "attack_speed": "4",	
     "weight": "0.4",
     "weapon_interface": "5",
     "render_anim": "2584",
@@ -80914,6 +80923,7 @@
     "grand_exchange_price": "3523",
     "attack_audios": "2517,2517,2500,2517",
     "name": "Bone dagger (p+)",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "8876",
     "bonuses": "5,3,-4,1,0,0,0,0,1,0,0,4,0,0,0"
@@ -80921,6 +80931,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "3523",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Bone dagger (p+)",
     "tradeable": "true",
@@ -80935,6 +80946,7 @@
     "durability": null,
     "low_alchemy": "800",
     "high_alchemy": "1200",
+    "attack_speed": "4",	
     "weight": "0.4",
     "weapon_interface": "5",
     "render_anim": "2584",
@@ -80944,6 +80956,7 @@
     "grand_exchange_price": "8337",
     "attack_audios": "2517,2517,2500,2517",
     "name": "Bone dagger (p++)",
+    "tradeable": "true",	
     "archery_ticket_price": "0",
     "id": "8878",
     "bonuses": "5,3,-4,1,0,0,0,0,1,0,0,4,0,0,0"
@@ -80951,6 +80964,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "8337",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Bone dagger (p++)",
     "tradeable": "true",
@@ -80965,7 +80979,7 @@
     "has_special": "true",
     "low_alchemy": "800",
     "turn90ccw_anim": "822",
-    "attack_speed": "6",
+    "attack_speed": "5",
     "turn180_anim": "4227",
     "defence_anim": "424",
     "equipment_slot": "3",
@@ -80991,6 +81005,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1159",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Dorgeshuun c'bow",
     "tradeable": "true",
