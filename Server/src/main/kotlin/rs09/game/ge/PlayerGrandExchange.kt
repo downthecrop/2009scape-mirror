@@ -241,7 +241,7 @@ class PlayerGrandExchange(private val player: Player) {
                     SystemLogger.logAlert("Check your logs, AVENGING ANGLE might have fucked up HARD and now " + player.name + "'s trade with index " + index + "is gone :(")
                     continue
                 }
-                OfferManager.setIndex(offer["offerUID"].toString().toInt().toLong(), index)
+                OfferManager.setIndex(offer["offerUID"].toString().toLong(), index)
                 offers[index] = OfferManager.OFFER_MAPPING[offer["offerUID"].toString().toLong()]
                 update(offers[index])
             }
