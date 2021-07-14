@@ -1,6 +1,7 @@
 package rs09.game.system.command.rottenpotato
 
 import api.ContentAPI
+import api.InputType
 import core.game.content.dialogue.DialoguePlugin
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -38,7 +39,7 @@ class RottenPotatoExtraDialogue(player: Player? = null) : DialoguePlugin(player)
                //Send Player Notification
                1 -> {
                    end()
-                   ContentAPI.sendInputDialogue(player, false, "Enter the notification message:"){value ->
+                   ContentAPI.sendInputDialogue(player, InputType.STRING_LONG, "Enter the notification message:"){ value ->
                        val message = value as String
                        for (p in Repository.players) {
                            p ?: continue
@@ -61,7 +62,7 @@ class RottenPotatoExtraDialogue(player: Player? = null) : DialoguePlugin(player)
                //Force Area NPC Chat
                4 -> {
                    end()
-                   ContentAPI.sendInputDialogue(player, false,"Enter the chat message:"){value ->
+                   ContentAPI.sendInputDialogue(player, InputType.STRING_LONG,"Enter the chat message:"){ value ->
                        val msg = value as String
                        RegionManager.getLocalNpcs(player).forEach {
                            it.sendChat(msg)
@@ -81,7 +82,7 @@ class RottenPotatoExtraDialogue(player: Player? = null) : DialoguePlugin(player)
                 //AME Spawning
             100 -> {
                 end()
-                ContentAPI.sendInputDialogue(player, false, "Enter player name:"){value ->
+                ContentAPI.sendInputDialogue(player, InputType.STRING_SHORT, "Enter player name:"){ value ->
                     val other = Repository.getPlayerByName(value.toString().toLowerCase().replace(" ", "_"))
                     if (other == null) {
                         player.sendMessage(colorize("%RInvalid player name."))

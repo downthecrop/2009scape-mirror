@@ -81,8 +81,8 @@ public final class BansheeNPC extends AbstractNPC {
 	}
 
 	@Override
-	public void checkImpact(BattleState state) {
-		super.checkImpact(state);
+	public void onImpact(Entity entity, BattleState state) {
+		super.onImpact(entity, state);
 		if (state.getAttacker() instanceof Player) {
 			final Player player = (Player) state.getAttacker();
 			if (!hasEarMuffs(player)) {
