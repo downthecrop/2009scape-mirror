@@ -4,10 +4,16 @@ archivesBaseName = 'managementserver'
 
 mainClassName = 'ms.Management'
 
+repositories {
+    mavenCentral()
+}
+
 dependencies {
-    implementation 'com.google.guava:guava:29.0-jre'
+    implementation "com.github.ajalt.mordant:mordant:2.0.0-alpha2"
+    implementation "org.jetbrains:markdown-jvm:0.2.0"
     implementation 'mysql:mysql-connector-java:8.0.21'
 }
+
 
 jar {
     manifest {
