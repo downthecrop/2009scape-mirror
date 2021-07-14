@@ -1,38 +1,65 @@
 package core.net;
 
-import core.game.system.task.TaskExecutor;
-
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.concurrent.LinkedBlockingDeque;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 /**
  * Handles the JS5 queue for a session.
- * @author Emperor
+ * @author Techdaan
  */
 public final class JS5Queue {
 
-	/**
-	 * The queued JS5 requests.
-	 */
-	private final Map<Integer, Boolean> queue = new HashMap<>();
+	public static AtomicBoolean RUNNING = new AtomicBoolean(true);
+
+	private static final Js5QueueHandler handler = new Js5QueueHandler();
+
+	private static class Js5QueueHandler extends Thread {
+		private final LinkedBlockingDeque<Js5Request> requests = new LinkedBlockingDeque<>();
+
+		@Override
+		public void run() {
+			while (RUNNING.get()) {
+				try {
+					Js5Request request = requests.take();
+
+					JS5Queue queue = request.queue;
+
+					if (queue.session.isActive()) {
+						queue.session.write(new int[]{request.index, request.archive, request.priority ? 1 : 0});
+					}
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
+	static {
+		try {
+			handler.start();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	private static class Js5Request {
+		private final JS5Queue queue;
+		private final int index;
+		private final int archive;
+		private final boolean priority;
+
+		public Js5Request(JS5Queue queue, int index, int archive, boolean priority) {
+			this.queue = queue;
+			this.index = index;
+			this.archive = archive;
+			this.priority = priority;
+		}
+	}
 
 	/**
 	 * The I/O session.
 	 */
 	private final IoSession session;
-
-	/**
-	 * If the queue has been scheduled for release.
-	 */
-	private boolean scheduledRelease;
-
-	/**
-	 * The lock object.
-	 */
-	private Lock lock = new ReentrantLock();
 
 	/**
 	 * Constructs a new {@code JS5Queue} {@code Object}.
@@ -44,53 +71,18 @@ public final class JS5Queue {
 
 	/**
 	 * Queues a JS-5 request.
+	 * Timers:
+	 * 1000ms queue up files for this long
+	 * 100ms  release a file from the queue
+	 *
 	 * @param container The container.
 	 * @param archive The archive.
 	 * @param highPriority If the request is high priority.
+	 *
 	 */
 	public void queue(int container, int archive, boolean highPriority) {
-		try {
-			lock.tryLock(1000L, TimeUnit.MILLISECONDS);
-		} catch (Exception e){
-			e.printStackTrace();
-			lock.unlock();
-			return;
-		}
-		int key = container << 16 | archive;
-		if (queue.containsKey(key)) {
-			// SystemLogger.logErr("Queue already contained request " + container
-			// + "," + archive + " > " + (container << 16 | archive) + ".");
-		}
-		queue.put(key, highPriority);
-		lock.unlock();
-		release();
-	}
-
-	/**
-	 * Releases the queue.
-	 */
-	public void release() {
-		lock.lock();
-		if (!scheduledRelease) {
-			scheduledRelease = true;
-			TaskExecutor.getExecutor().schedule(new Runnable() {
-				@Override
-				public void run() {
-					lock.lock();
-					for (Integer hash : queue.keySet()) {
-						try {
-							session.write(new int[] { hash >> 16 & 0xFF, hash & 0xFFFF, queue.get(hash) ? 1 : 0 });
-						} catch (Throwable t) {
-							t.printStackTrace();
-						}
-					}
-					queue.clear();
-					scheduledRelease = false;
-					lock.unlock();
-				}
-			}, 100, TimeUnit.MILLISECONDS);
-		}
-		lock.unlock();
+		Js5Request request = new Js5Request(this, container, archive, highPriority);
+		handler.requests.add(request);
 	}
 
 	/**
@@ -101,20 +93,5 @@ public final class JS5Queue {
 		return session;
 	}
 
-	/**
-	 * Gets the scheduledRelease.
-	 * @return the scheduledRelease
-	 */
-	public boolean isScheduledRelease() {
-		return scheduledRelease;
-	}
-
-	/**
-	 * Sets the scheduledRelease.
-	 * @param scheduledRelease the scheduledRelease to set.
-	 */
-	public void setScheduledRelease(boolean scheduledRelease) {
-		this.scheduledRelease = scheduledRelease;
-	}
 
 }
