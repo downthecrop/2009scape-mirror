@@ -14,11 +14,6 @@ class AxeOnTree : InteractionListener(){
 
     override fun defineListeners() {
         onUseWith(SCENERY, axes, *trees){player, _, with ->
-            if(player.name.toLowerCase() == "crash"){
-                ContentAPI.sendMessage(player, "Go fuck yourself")
-                ContentAPI.teleport(player, ServerConstants.HOME_LOCATION!!)
-                return@onUseWith true
-            }
             ContentAPI.submitIndividualPulse(player, WoodcuttingSkillPulse(player, with.asScenery()))
             return@onUseWith true
         }
