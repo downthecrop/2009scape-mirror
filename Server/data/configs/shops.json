@@ -1652,8 +1652,8 @@
     "currency": "995",
     "general_store": "false",
     "id": "186",
-    "title": "Neitiznot Supplies",
-    "stock": "{946,10}-{2347,10}-{1734,10}-{1733,10}-{1351,10}-{1759,100}"
+    "title": "Neitiznot supplies.",
+    "stock": "{946,inf}-{2347,inf}-{1734,inf}-{1733,inf}-{1351,inf}-{1759,inf}"
   },
   {
     "npcs": "1778",
