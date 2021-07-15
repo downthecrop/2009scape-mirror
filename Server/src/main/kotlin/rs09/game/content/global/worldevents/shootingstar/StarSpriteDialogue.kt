@@ -227,28 +227,28 @@ class StarSpriteDialogue(player: Player? = null) : DialoguePlugin(player) {
             1005 -> npcl(FacialExpression.NEUTRAL, "I don't see why not. We used to make these for fun and hand them out to adventurers all the time.").also { stage++ }
             1006 -> playerl(FacialExpression.ASKING, "Well, thanks! So.. what do we need to make one?").also { stage++ }
             1007 -> npcl(FacialExpression.NEUTRAL, "Looking at the blueprint here...").also { stage++ }
-            1008 -> npcl(FacialExpression.NEUTRAL, "Yes, it seems we need a ring mould, a gold bar, a cut dragonstone and 200 stardust. Oh, and make sure to bring this blueprint with you.").also { stage++ }
+            1008 -> npcl(FacialExpression.NEUTRAL, "Yes, it seems we need a ring mould, a silver bar, a cut dragonstone and 200 stardust. Oh, and make sure to bring this blueprint with you.").also { stage++ }
             1009 -> playerl(FacialExpression.FRIENDLY, "Thanks, I'll get right on it!").also { stage++ }
-            1010 -> playerl(FacialExpression.ASKING, "So just to make sure I've got it right, I need a ring mould, a gold bar, a cut dragonstone and 200 stardust, as well as this blueprint?").also { stage++ }
+            1010 -> playerl(FacialExpression.ASKING, "So just to make sure I've got it right, I need a ring mould, a silver bar, a cut dragonstone and 200 stardust, as well as this blueprint?").also { stage++ }
             1011 -> npcl(FacialExpression.NEUTRAL, "Yeah, you've got it, human. Any of my kin should be able to do this for you.").also { stage++; ContentAPI.setAttribute(player, "/save:star-ring:bp-shown", true) }
             1012 -> playerl(FacialExpression.FRIENDLY, "Thanks!").also { stage = END_DIALOGUE }
 
             2000 -> npcl(FacialExpression.NEUTRAL, "Yes, did you bring the components to make it, human?").also { stage++ }
-            2001 -> if(ContentAPI.inInventory(player, Items.DRAGONSTONE_1615,1) && ContentAPI.inInventory(player, Items.RING_MOULD_1592, 1) && ContentAPI.inInventory(player, Items.STARDUST_13727, 200) && ContentAPI.inInventory(player, Items.GOLD_BAR_2357, 1)){
+            2001 -> if(ContentAPI.inInventory(player, Items.DRAGONSTONE_1615,1) && ContentAPI.inInventory(player, Items.RING_MOULD_1592, 1) && ContentAPI.inInventory(player, Items.STARDUST_13727, 200) && ContentAPI.inInventory(player, Items.SILVER_BAR_2355, 1)){
                 playerl(FacialExpression.FRIENDLY, "Yes, I have them right here, friend.").also { stage++ }
             } else {
                 playerl(FacialExpression.HALF_GUILTY, "I'm afraid not, what did I need again?").also { stage = 2100 }
             }
             2002 -> npcl(FacialExpression.NEUTRAL, "Excellent, give me just a moment here...").also { stage++ }
             2003 -> sendDialogue("You watch as the Star Sprite casts some strange spell.").also { stage++ }
-            2004 -> if(ContentAPI.removeItem(player, Items.GOLD_BAR_2357, Container.INVENTORY) && ContentAPI.removeItem(player, Items.DRAGONSTONE_1615, Container.INVENTORY) && ContentAPI.removeItem(player, Item(Items.STARDUST_13727, 200), Container.INVENTORY)){
+            2004 -> if(ContentAPI.removeItem(player, Items.SILVER_BAR_2355, Container.INVENTORY) && ContentAPI.removeItem(player, Items.DRAGONSTONE_1615, Container.INVENTORY) && ContentAPI.removeItem(player, Item(Items.STARDUST_13727, 200), Container.INVENTORY)){
                     ContentAPI.addItem(player, Items.RING_OF_THE_STAR_SPRITE_14652)
                     player.dialogueInterpreter.sendItemMessage(Items.RING_OF_THE_STAR_SPRITE_14652, "The Star Sprite hands you a strange ring.").also { stage++ }
                 } else end()
             2005 -> npcl(FacialExpression.NEUTRAL, "There you go, I hope you enjoy it!").also { stage++ }
             2006 -> playerl(FacialExpression.FRIENDLY, "Thank you!").also { stage = END_DIALOGUE }
 
-            2100 -> npcl(FacialExpression.NEUTRAL, "A ring mould, a cut dragonstone, a gold bar and 200 stardust.").also { stage = END_DIALOGUE }
+            2100 -> npcl(FacialExpression.NEUTRAL, "A ring mould, a cut dragonstone, a silver bar and 200 stardust.").also { stage = END_DIALOGUE }
         }
         return true
     }
