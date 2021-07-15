@@ -1,5 +1,6 @@
 package rs09.game.content.global.worldevents.shootingstar
 
+import api.ContentAPI
 import core.game.content.global.worldevents.shootingstar.ScoreboardManager
 import core.game.node.`object`.Scenery
 import core.game.node.entity.player.Player
@@ -7,8 +8,11 @@ import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.item.Item
+import core.tools.RandomFunction
+import org.rs09.consts.Items
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
+import rs09.tools.stringtools.colorize
 
 /**
  * The pulse used to handle mining shooting stars.
@@ -71,7 +75,30 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
         if (ShootingStarOptionHandler.getStarDust(player) < 200) {
             player.inventory.add(Item(ShootingStarOptionHandler.STAR_DUST, 1))
         }
+        if(!ContentAPI.inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && !ContentAPI.inBank(player, Items.ANCIENT_BLUEPRINT_14651)){
+            rollBlueprint(player)
+        }
         return false
+    }
+
+    fun rollBlueprint(player: Player){
+        val chance = when(star.level){
+            ShootingStarType.LEVEL_9 -> 250
+            ShootingStarType.LEVEL_8 -> 500
+            ShootingStarType.LEVEL_7 -> 750
+            ShootingStarType.LEVEL_6 -> 1000
+            ShootingStarType.LEVEL_5 -> 2000
+            ShootingStarType.LEVEL_4 -> 3000
+            ShootingStarType.LEVEL_3 -> 4000
+            ShootingStarType.LEVEL_2 -> 5000
+            ShootingStarType.LEVEL_1 -> 10000
+        }
+
+        if(RandomFunction.roll(chance)){
+            ContentAPI.addItemOrDrop(player, Items.ANCIENT_BLUEPRINT_14651, 1)
+            ContentAPI.sendMessage(player, colorize("%RWhile mining the star you find an ancient-looking blueprint."))
+            ContentAPI.sendNews("${player.username} found an Ancient Blueprint while mining a shooting star!")
+        }
     }
 
     override fun message(type: Int) {
