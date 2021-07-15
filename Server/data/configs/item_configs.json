@@ -139147,35 +139147,25 @@
   },
   {
     "id": "14651",
-    "examine": "Passed down from the super egg defending bunny knights.",
+    "examine": "Mysterious blueprints written in an alien language.",
     "destroy": "true",
-    "destroy_message": "<col=ef0000I> WARNING: </col> This item CAN NOT be re-obtained.",
-    "requirements": "{0,40}",
+    "destroy_message": "<col=ef0000I> WARNING: </col> You will have to reobtain this item the hard way.",
+    "requirements": "",
     "durability": null,
-    "weight": "0.4",
-    "attack_speed": "4",
-    "weapon_interface": "12",
-    "render_anim": "326",
-    "equipment_slot": "3",
-    "fun_weapon": "true",
-    "name": "Eggscalibur",
-    "archery_ticket_price": "0",
-    "bonuses": "-100,-100,-50,0,0,0,0,0,0,0,0,-10,0,0,0"
+    "weight": "0.1",
+    "name": "Ancient Blueprints",
+    "archery_ticket_price": "0"
   },
   {
-    "name": "<col=00e4ef>Super Egg</col>",
+    "name": "Ring of the Star Sprite",
     "id": "14652",
-    "examine": "<col=00e4ef>SUPER.</col> <col=00ef45>EGG.</col> <col=e1ef00>SUPER.</col> <col=ef0078>EGG.</col>",
+    "examine": "A stardust-infused dragonstone ring.",
     "destroy": "true",
-    "destroy_message": "You dare destroy I?! THE ALL MIGHTY AND POWERFUL SUPER EGG?!",
+    "destroy_message": "You can get another by bringing the materials along with the blueprint to a Star Sprite.",
     "durability": null,
-    "weight": "0.4",
-    "attack_speed": "4",
-    "weapon_interface": "12",
-    "render_anim": "182",
-    "equipment_slot": "3",
-    "fun_weapon": "true",
+    "weight": "0.1",
+    "equipment_slot": "12",
     "archery_ticket_price": "0",
-    "bonuses": "-100,-100,-50,0,0,0,0,0,0,0,0,-10,0,0,0"
+    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   }
 ]

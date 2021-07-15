@@ -67,10 +67,14 @@ object BrimhavenUtils {
                 }
                 if (stage == 6) {
                     player.achievementDiaryManager.finishTask(player, DiaryType.KARAMJA, 1, 15)
-                    ContentAPI.clearLogoutListener(player, "steppingstone")
                 }
                 AgilityHandler.forceWalk(player, -1, l, l.transform(direction), Animation.create(769), 10, 0.0, null)
                 return stage == 6
+            }
+
+            override fun stop() {
+                ContentAPI.clearLogoutListener(player, "steppingstone")
+                super.stop()
             }
         })
     }
