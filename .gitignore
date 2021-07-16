@@ -43,3 +43,4 @@ gradle
 .idea/
 Server/worldprops/
 Management-Server/managementprops/
+/Development-Client/
