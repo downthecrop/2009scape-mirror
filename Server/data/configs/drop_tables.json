@@ -62796,12 +62796,5 @@
         "maxAmount": "1"
       }
     ]
-  },
-  {
-    "default": [],
-    "charm": [],
-    "ids": "",
-    "description": "",
-    "main": []
   }
 ]
