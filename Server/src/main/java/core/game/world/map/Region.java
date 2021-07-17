@@ -191,7 +191,7 @@ public class Region {
 	 * Checks if player is tolerated by enemies in this region
 	 */
 	public boolean isTolerated(Player player){
-		return System.currentTimeMillis() - tolerances.getOrDefault(player.getUsername(), System.currentTimeMillis()) > TimeUnit.MINUTES.toMillis(1);
+		return System.currentTimeMillis() - tolerances.getOrDefault(player.getUsername(), System.currentTimeMillis()) > TimeUnit.MINUTES.toMillis(10);
 	}
 
 	/**
