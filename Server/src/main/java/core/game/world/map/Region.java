@@ -16,7 +16,9 @@ import rs09.game.world.repository.Repository;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Represents a region.
@@ -59,6 +61,11 @@ public class Region {
 	 * The music zones lying in this region.
 	 */
 	private final List<MusicZone> musicZones = new ArrayList<>(20);
+
+	/**
+	 * Keeps track of players and time in region for tolerance purposes
+	 */
+	private final HashMap<String,Long> tolerances = new HashMap<>();
 
 	/**
 	 * If the region is active.
@@ -146,6 +153,7 @@ public class Region {
 	 */
 	public void add(Player player) {
 		planes[player.getLocation().getZ()].add(player);
+		tolerances.put(player.getUsername(), System.currentTimeMillis());
 		flagActive();
 	}
 
@@ -175,7 +183,15 @@ public class Region {
 	 */
 	public void remove(Player player) {
 		player.getViewport().getCurrentPlane().remove(player);
+		tolerances.remove(player.getUsername());
 		checkInactive();
+	}
+
+	/**
+	 * Checks if player is tolerated by enemies in this region
+	 */
+	public boolean isTolerated(Player player){
+		return System.currentTimeMillis() - tolerances.getOrDefault(player.getUsername(), System.currentTimeMillis()) > TimeUnit.MINUTES.toMillis(1);
 	}
 
 	/**

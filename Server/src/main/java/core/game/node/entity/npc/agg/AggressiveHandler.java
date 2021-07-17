@@ -81,9 +81,10 @@ public final class AggressiveHandler {
 		Entity target = behavior.getLogicalTarget(entity, behavior.getPossibleTargets(entity, radius));
 		if (target instanceof Player) {
 			if (target.getAttribute("ignore_aggression", false)) {
-				if (((Player) target).getRights().equals(Rights.ADMINISTRATOR)) {
-					return false;
-				}
+				return false;
+			}
+			if (((Player) target).getRights().equals(Rights.ADMINISTRATOR)) {
+				return false;
 			}
 		}
 		if (target != null) {
