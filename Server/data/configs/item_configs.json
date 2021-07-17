@@ -4438,7 +4438,7 @@
   {
     "ge_buy_limit": "25000",
     "examine": "This needs refining.",
-    "grand_exchange_price": "230",
+    "grand_exchange_price": "204",
     "tokkul_price": "25",
     "durability": null,
     "name": "Iron ore",
@@ -4467,7 +4467,7 @@
     "low_alchemy": "30",
     "high_alchemy": "45",
     "weight": "2",
-    "grand_exchange_price": "205",
+    "grand_exchange_price": "180",
     "name": "Silver ore",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -4485,7 +4485,7 @@
   {
     "ge_buy_limit": "25000",
     "examine": "This needs refining.",
-    "grand_exchange_price": "319",
+    "grand_exchange_price": "311",
     "tokkul_price": "225",
     "durability": null,
     "name": "Gold ore",
@@ -4523,7 +4523,7 @@
     "low_alchemy": "64",
     "high_alchemy": "97",
     "weight": "1.75",
-    "grand_exchange_price": "460",
+    "grand_exchange_price": "420",
     "name": "Mithril ore",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -4547,7 +4547,7 @@
     "low_alchemy": "160",
     "high_alchemy": "240",
     "weight": "2.7",
-    "grand_exchange_price": "1330",
+    "grand_exchange_price": "1160",
     "name": "Adamantite ore",
     "tradeable": "true",
     "archery_ticket_price": "0",
@@ -4588,7 +4588,7 @@
   {
     "ge_buy_limit": "25000",
     "examine": "Hmm a non-renewable energy source!",
-    "grand_exchange_price": "350",
+    "grand_exchange_price": "320",
     "tokkul_price": "67",
     "durability": null,
     "name": "Coal",
@@ -5539,7 +5539,7 @@
     "shop_price": "17",
     "ge_buy_limit": "25000",
     "examine": "One of the 4 basic elemental Runes.",
-    "grand_exchange_price": "17",
+    "grand_exchange_price": "18",
     "tokkul_price": "6",
     "durability": null,
     "name": "Fire rune",
@@ -5553,7 +5553,7 @@
     "shop_price": "17",
     "ge_buy_limit": "25000",
     "examine": "One of the 4 basic elemental Runes.",
-    "grand_exchange_price": "17",
+    "grand_exchange_price": "18",
     "tokkul_price": "6",
     "durability": null,
     "name": "Water rune",
@@ -5567,7 +5567,7 @@
     "shop_price": "17",
     "ge_buy_limit": "25000",
     "examine": "One of the 4 basic elemental Runes.",
-    "grand_exchange_price": "17",
+    "grand_exchange_price": "18",
     "tokkul_price": "6",
     "durability": null,
     "name": "Air rune",
@@ -5581,7 +5581,7 @@
     "shop_price": "17",
     "ge_buy_limit": "25000",
     "examine": "One of the 4 basic elemental Runes.",
-    "grand_exchange_price": "17",
+    "grand_exchange_price": "18",
     "tokkul_price": "6",
     "durability": null,
     "name": "Earth rune",
@@ -5595,7 +5595,7 @@
     "shop_price": "17",
     "ge_buy_limit": "25000",
     "examine": "Used for basic missile spells.",
-    "grand_exchange_price": "17",
+    "grand_exchange_price": "18",
     "tokkul_price": "4",
     "durability": null,
     "name": "Mind rune",
@@ -5623,7 +5623,7 @@
     "shop_price": "310",
     "ge_buy_limit": "25000",
     "examine": "Used for medium missile spells.",
-    "grand_exchange_price": "235",
+    "grand_exchange_price": "320",
     "durability": null,
     "name": "Death rune",
     "tradeable": "true",
@@ -5636,7 +5636,7 @@
     "shop_price": "372",
     "ge_buy_limit": "25000",
     "examine": "Used for alchemy spells.",
-    "grand_exchange_price": "325",
+    "grand_exchange_price": "380",
     "durability": null,
     "name": "Nature rune",
     "tradeable": "true",
@@ -5649,7 +5649,7 @@
     "shop_price": "140",
     "ge_buy_limit": "25000",
     "examine": "Used for small missile spells.",
-    "grand_exchange_price": "145",
+    "grand_exchange_price": "140",
     "durability": null,
     "name": "Chaos rune",
     "tradeable": "true",
@@ -5662,7 +5662,7 @@
     "shop_price": "378",
     "ge_buy_limit": "25000",
     "examine": "Used for teleport spells.",
-    "grand_exchange_price": "350",
+    "grand_exchange_price": "380",
     "durability": null,
     "name": "Law rune",
     "tradeable": "true",
@@ -5675,7 +5675,7 @@
     "shop_price": "232",
     "ge_buy_limit": "25000",
     "examine": "Used for enchant spells.",
-    "grand_exchange_price": "180",
+    "grand_exchange_price": "240",
     "durability": null,
     "name": "Cosmic rune",
     "tradeable": "true",
@@ -5688,7 +5688,7 @@
     "shop_price": "550",
     "ge_buy_limit": "25000",
     "examine": "Used for large missile spells.",
-    "grand_exchange_price": "435",
+    "grand_exchange_price": "560",
     "durability": null,
     "name": "Blood rune",
     "tradeable": "true",
@@ -5701,7 +5701,7 @@
     "shop_price": "400",
     "ge_buy_limit": "25000",
     "examine": "Used for high level curse spells.",
-    "grand_exchange_price": "230",
+    "grand_exchange_price": "420",
     "durability": null,
     "name": "Soul rune",
     "tradeable": "true",
@@ -17251,7 +17251,7 @@
   {
     "ge_buy_limit": "25000",
     "examine": "Logs cut from a magic tree.",
-    "grand_exchange_price": "750",
+    "grand_exchange_price": "680",
     "durability": null,
     "name": "Magic logs",
     "tradeable": "true",
@@ -17273,7 +17273,7 @@
   {
     "ge_buy_limit": "25000",
     "examine": "Logs cut from a yew tree.",
-    "grand_exchange_price": "360",
+    "grand_exchange_price": "320",
     "durability": null,
     "name": "Yew logs",
     "tradeable": "true",
@@ -17295,7 +17295,7 @@
   {
     "ge_buy_limit": "25000",
     "examine": "Logs cut from a maple tree.",
-    "grand_exchange_price": "180",
+    "grand_exchange_price": "160",
     "durability": null,
     "name": "Maple logs",
     "tradeable": "true",
@@ -17339,7 +17339,7 @@
   {
     "ge_buy_limit": "25000",
     "examine": "Logs cut from an Oak Tree.",
-    "grand_exchange_price": "160",
+    "grand_exchange_price": "140",
     "durability": null,
     "name": "Oak logs",
     "tradeable": "true",
@@ -18029,7 +18029,7 @@
   {
     "ge_buy_limit": "1000",
     "examine": "A semi precious stone.",
-    "grand_exchange_price": "41",
+    "grand_exchange_price": "44",
     "durability": null,
     "name": "Opal",
     "tradeable": "true",
@@ -18049,7 +18049,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "grand_exchange_price": "83",
+    "grand_exchange_price": "84",
     "durability": null,
     "name": "Jade",
     "archery_ticket_price": "0",
@@ -18067,7 +18067,7 @@
   {
     "ge_buy_limit": "1000",
     "examine": "A semi precious stone.",
-    "grand_exchange_price": "103",
+    "grand_exchange_price": "120",
     "durability": null,
     "name": "Red topaz",
     "tradeable": "true",
@@ -18112,7 +18112,7 @@
   {
     "ge_buy_limit": "500",
     "examine": "An uncut diamond.",
-    "grand_exchange_price": "20000",
+    "grand_exchange_price": "2160",
     "tokkul_price": "300",
     "durability": null,
     "name": "Uncut diamond",
@@ -18134,7 +18134,7 @@
   {
     "ge_buy_limit": "1000",
     "examine": "An uncut ruby.",
-    "grand_exchange_price": "4970",
+    "grand_exchange_price": "1140",
     "tokkul_price": "150",
     "durability": null,
     "name": "Uncut ruby",
@@ -18157,7 +18157,7 @@
     "shop_price": "50",
     "ge_buy_limit": "1000",
     "examine": "An uncut emerald.",
-    "grand_exchange_price": "2621",
+    "grand_exchange_price": "580",
     "tokkul_price": "75",
     "durability": null,
     "name": "Uncut emerald",
@@ -18180,7 +18180,7 @@
     "shop_price": "25",
     "ge_buy_limit": "1000",
     "examine": "An uncut sapphire.",
-    "grand_exchange_price": "1851",
+    "grand_exchange_price": "420",
     "tokkul_price": "37",
     "durability": null,
     "name": "Uncut sapphire",
@@ -19039,6 +19039,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "28000",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Amulet of glory",
     "tradeable": "true",
@@ -19046,7 +19047,7 @@
     "id": "1705"
   },
   {
-    "examine": "A dragonstone amulet with 1 magic charges.",
+    "examine": "A dragonstone amulet with 1 magic charge.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Amulet of glory(1)",
@@ -19059,6 +19060,7 @@
     "equipment_slot": "2"
   },
   {
+	"examine": "Swap this note at any bank for the equivalent item.",  
     "durability": null,
     "name": "Amulet of glory(1)",
     "tradeable": "true",
@@ -19079,6 +19081,7 @@
     "equipment_slot": "2"
   },
   {
+	"examine": "Swap this note at any bank for the equivalent item.",	  
     "durability": null,
     "name": "Amulet of glory(2)",
     "tradeable": "true",
@@ -19099,6 +19102,7 @@
     "equipment_slot": "2"
   },
   {
+	"examine": "Swap this note at any bank for the equivalent item.",	  
     "durability": null,
     "name": "Amulet of glory(3)",
     "tradeable": "true",
@@ -19122,6 +19126,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "29300",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Amulet of glory(4)",
     "tradeable": "true",
@@ -19419,7 +19424,7 @@
   {
     "ge_buy_limit": "10000",
     "examine": "I should take this to the tannery.",
-    "grand_exchange_price": "150",
+    "grand_exchange_price": "140",
     "durability": null,
     "name": "Cowhide",
     "tradeable": "true",
@@ -19833,7 +19838,7 @@
   {
     "ge_buy_limit": "10000",
     "examine": "I need a bow stave to attach this to.",
-    "grand_exchange_price": "250",
+    "grand_exchange_price": "240",
     "durability": null,
     "name": "Bow string",
     "tradeable": "true",
@@ -77451,7 +77456,7 @@
     "bonuses": "0,0,0,0,0,7,9,8,2,8,0,0,0,0,0"
   },
   {
-    "examine": "Uncharged: A very powerful dragonstone amulet.  1-4 charges: A dragonstone amulet with X magic charges.",
+    "examine": "A very powerful dragonstone amulet.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Amulet of glory",
@@ -93289,7 +93294,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "A very powerful dragonstone amulet.",
+    "examine": "A dragonstone amulet with 4 magic charges.",
     "grand_exchange_price": "233100",
     "durability": null,
     "name": "Amulet of glory(t4)",
@@ -93304,6 +93309,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "233100",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Amulet of glory(t4)",
     "tradeable": "true",
@@ -93311,7 +93317,7 @@
     "id": "10355"
   },
   {
-    "examine": "Uncharged: A very powerful dragonstone amulet.  1-4 charges: A dragonstone amulet with X magic charges.",
+    "examine": "A dragonstone amulet with 3 magic charges.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Amulet of glory(t3)",
@@ -93324,6 +93330,7 @@
     "equipment_slot": "2"
   },
   {
+	"examine": "Swap this note at any bank for the equivalent item.",	  
     "durability": null,
     "name": "Amulet of glory(t3)",
     "tradeable": "true",
@@ -93331,7 +93338,7 @@
     "id": "10357"
   },
   {
-    "examine": "A very powerful dragonstone amulet.",
+    "examine": "A dragonstone amulet with 2 magic charges.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Amulet of glory(t2)",
@@ -93344,6 +93351,7 @@
     "equipment_slot": "2"
   },
   {
+	"examine": "Swap this note at any bank for the equivalent item.",  
     "durability": null,
     "name": "Amulet of glory(t2)",
     "tradeable": "true",
@@ -93351,7 +93359,7 @@
     "id": "10359"
   },
   {
-    "examine": "Uncharged: A very powerful dragonstone amulet.  1-4 charges: A dragonstone amulet with X magic charges.",
+    "examine": "A dragonstone amulet with 1 magic charge.",
     "grand_exchange_price": "1",
     "durability": null,
     "name": "Amulet of glory(t1)",
@@ -93364,6 +93372,7 @@
     "equipment_slot": "2"
   },
   {
+	"examine": "Swap this note at any bank for the equivalent item.",  
     "durability": null,
     "name": "Amulet of glory(t1)",
     "tradeable": "true",
@@ -93372,7 +93381,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "A very powerful dragonstone amulet.",
+    "examine": "A very powerful dragonstone amulet with a nice trim.",
     "grand_exchange_price": "223000",
     "durability": null,
     "name": "Amulet of glory(t)",
@@ -93387,6 +93396,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "223000",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Amulet of glory(t)",
     "tradeable": "true",
@@ -115952,9 +115962,9 @@
     "id": "12872"
   },
   {
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "1500",
-    "examine": "Charged - A robe top infused with arcane power, especially created for combat spells.",
+    "examine": "A robe top infused with arcane power, especially created for combat spells.",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -115970,9 +115980,9 @@
     "bonuses": "0,0,0,26,0,17,15,20,26,0,30,0,0,0,0"
   },
   {
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "1500",
-    "examine": "Charged - A robe top infused with arcane power, especially created for combat spells.",
+    "examine": "A robe top infused with arcane power, especially created for combat spells.",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -115988,9 +115998,9 @@
     "bonuses": "0,0,0,26,0,17,15,20,26,0,30,0,0,0,0"
   },
   {
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "1500",
-    "examine": "Charged - A robe top infused with arcane power, especially created for combat spells.",
+    "examine": "A robe top infused with arcane power, especially created for combat spells.",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -116006,9 +116016,9 @@
     "bonuses": "0,0,0,26,0,17,15,20,26,0,30,0,0,0,0"
   },
   {
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "1500",
-    "examine": "Charged - A robe top infused with arcane power, especially created for combat spells.",
+    "examine": "A robe top infused with arcane power, especially created for combat spells.",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -116024,9 +116034,9 @@
     "bonuses": "0,0,0,26,0,17,15,20,26,0,30,0,0,0,0"
   },
   {
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "1500",
-    "examine": "Charged - A robe top infused with arcane power, especially created for combat spells.",
+    "examine": "A robe top infused with arcane power, especially created for combat spells.",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -116042,10 +116052,10 @@
     "bonuses": "0,0,0,26,0,17,15,20,26,0,30,0,0,0,0"
   },
   {
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "1500",
     "ge_buy_limit": "10",
-    "examine": "Charged - A robe top infused with arcane power, especially created for combat spells.",
+    "examine": "Its arcane power is waning.",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -116055,7 +116065,7 @@
     "remove_sleeves": "true",
     "grand_exchange_price": "431400",
     "name": "Battle robe top 0",
-    "tradeable": "false",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "12878",
     "bonuses": "0,0,0,7,0,4,4,5,7,0,8,0,0,0,0"
@@ -116063,14 +116073,15 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "431400",
+	"examine": "Swap this note at any bank for the equivalent item.",		
     "durability": null,
     "name": "Battle robe top 0",
-    "tradeable": "false",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "12879"
   },
   {
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "1000",
     "examine": "A robe bottom infused with arcane power, especially created for combat spells.",
     "durability": null,
@@ -116087,7 +116098,7 @@
     "bonuses": "0,0,0,20,0,14,11,16,20,0,23,0,0,0,0"
   },
   {
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "1000",
     "examine": "A robe bottom infused with arcane power, especially created for combat spells.",
     "durability": null,
@@ -116104,7 +116115,7 @@
     "bonuses": "0,0,0,20,0,14,11,16,20,0,23,0,0,0,0"
   },
   {
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "1000",
     "examine": "A robe bottom infused with arcane power, especially created for combat spells.",
     "durability": null,
@@ -116121,7 +116132,7 @@
     "bonuses": "0,0,0,20,0,14,11,16,20,0,23,0,0,0,0"
   },
   {
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "1000",
     "examine": "A robe bottom infused with arcane power, especially created for combat spells.",
     "durability": null,
@@ -116138,7 +116149,7 @@
     "bonuses": "0,0,0,20,0,14,11,16,20,0,23,0,0,0,0"
   },
   {
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "1000",
     "examine": "A robe bottom infused with arcane power, especially created for combat spells.",
     "durability": null,
@@ -116155,10 +116166,10 @@
     "bonuses": "0,0,0,20,0,14,11,16,20,0,23,0,0,0,0"
   },
   {
-    "requirements": "{1,60}-{6,50}",
+    "requirements": "{1,50}-{6,60}",
     "shop_price": "1000",
     "ge_buy_limit": "10",
-    "examine": "A robe bottom infused with arcane power, especially created for combat spells.",
+    "examine": "Its arcane power is waning.",
     "durability": null,
     "low_alchemy": "16000",
     "high_alchemy": "24000",
@@ -116167,7 +116178,7 @@
     "equipment_slot": "7",
     "grand_exchange_price": "538000",
     "name": "Battle robe bottom 0",
-    "tradeable": "false",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "12885",
     "bonuses": "0,0,0,6,0,4,3,4,6,0,7,0,0,0,0"
@@ -116175,9 +116186,10 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "538000",
+	"examine": "Swap this note at any bank for the equivalent item.",	
     "durability": null,
     "name": "Battle robe bottom 0",
-    "tradeable": "false",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "12886"
   },
@@ -119166,7 +119178,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A fully charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119192,7 +119204,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119216,6 +119228,7 @@
   },
   {
     "turn90cw_anim": "9053",
+    "examine": "A partially charged flail.",	
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119235,7 +119248,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119259,7 +119272,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119283,7 +119296,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119307,7 +119320,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119331,7 +119344,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119355,7 +119368,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119379,7 +119392,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119403,7 +119416,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119427,7 +119440,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119451,7 +119464,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119475,7 +119488,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119499,7 +119512,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119523,7 +119536,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119547,7 +119560,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119571,7 +119584,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119595,7 +119608,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119619,7 +119632,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119643,7 +119656,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119667,7 +119680,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119691,7 +119704,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119715,7 +119728,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119739,7 +119752,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119763,7 +119776,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail - it's nearly out of charges.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119787,7 +119800,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail - it's nearly out of charges.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119811,7 +119824,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail - it's nearly out of charges.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119835,7 +119848,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail - it's nearly out of charges.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
@@ -119859,7 +119872,7 @@
   },
   {
     "turn90cw_anim": "9053",
-    "examine": "At 30: A fully charged flail.  At 29-6 charges: A partially charged flail.  At 5-2 charges: A partially charged flail - it's nearly out of charges.  At 1 charge: A partially charged flail - one last charge left.",
+    "examine": "A partially charged flail - one last charge left.",
     "walk_anim": "9051",
     "has_special": "true",
     "durability": null,
