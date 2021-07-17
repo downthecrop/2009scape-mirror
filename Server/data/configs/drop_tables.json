@@ -2584,28 +2584,28 @@
     ],
     "charm": [
       {
-        "minAmount": "1",
-        "weight": "100.0",
+        "minAmount": "3",
+        "weight": "16.0",
         "id": "12158",
-        "maxAmount": "1"
+        "maxAmount": "3"
       },
       {
-        "minAmount": "1",
-        "weight": "100.0",
+        "minAmount": "3",
+        "weight": "64.0",
         "id": "12159",
-        "maxAmount": "1"
+        "maxAmount": "3"
       },
       {
-        "minAmount": "1",
-        "weight": "100.0",
+        "minAmount": "3",
+        "weight": "16.0",
         "id": "12160",
-        "maxAmount": "1"
+        "maxAmount": "3"
       },
       {
-        "minAmount": "1",
-        "weight": "100.0",
+        "minAmount": "3",
+        "weight": "4.0",
         "id": "12163",
-        "maxAmount": "1"
+        "maxAmount": "3"
       }
     ],
     "ids": "54,4673,4674,4675,4676",
@@ -3945,25 +3945,25 @@
     "charm": [
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "20.0",
         "id": "12158",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "75.0",
         "id": "12159",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "4.0",
         "id": "12160",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "1.0",
         "id": "12163",
         "maxAmount": "1"
       }
@@ -23116,7 +23116,32 @@
         "maxAmount": "1"
       }
     ],
-    "charm": [],
+    "charm": [
+      {
+        "minAmount": "1",
+        "weight": "28.0",
+        "id": "12158",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "14.0",
+        "id": "12159",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "56.0",
+        "id": "12160",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "2.0",
+        "id": "12163",
+        "maxAmount": "1"
+      }
+    ],
     "ids": "2455,2456",
     "description": "Waterbirth Dagannoths",
     "main": [
@@ -26326,25 +26351,25 @@
     "charm": [
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "12.0",
         "id": "12158",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "12.0",
         "id": "12159",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "72.0",
         "id": "12160",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "4.0",
         "id": "12163",
         "maxAmount": "1"
       }
@@ -34882,25 +34907,25 @@
     "charm": [
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "25.0",
         "id": "12158",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "10.0",
         "id": "12159",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "25.0",
         "id": "12160",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "40.0",
         "id": "12163",
         "maxAmount": "1"
       }
@@ -36939,28 +36964,28 @@
     "default": [],
     "charm": [
       {
-        "minAmount": "1",
-        "weight": "100.0",
+        "minAmount": "2",
+        "weight": "27.0",
         "id": "12158",
-        "maxAmount": "1"
+        "maxAmount": "2"
       },
       {
-        "minAmount": "1",
-        "weight": "100.0",
+        "minAmount": "2",
+        "weight": "18.0",
         "id": "12159",
-        "maxAmount": "1"
+        "maxAmount": "2"
       },
       {
-        "minAmount": "1",
-        "weight": "100.0",
+        "minAmount": "2",
+        "weight": "50.0",
         "id": "12160",
-        "maxAmount": "1"
+        "maxAmount": "2"
       },
       {
-        "minAmount": "1",
-        "weight": "100.0",
+        "minAmount": "2",
+        "weight": "5.0",
         "id": "12163",
-        "maxAmount": "1"
+        "maxAmount": "2"
       }
     ],
     "ids": "2889",
@@ -44420,25 +44445,25 @@
     "charm": [
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "13.0",
         "id": "12158",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "5.0",
         "id": "12159",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "80.0",
         "id": "12160",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "100.0",
+        "weight": "2.0",
         "id": "12163",
         "maxAmount": "1"
       }
