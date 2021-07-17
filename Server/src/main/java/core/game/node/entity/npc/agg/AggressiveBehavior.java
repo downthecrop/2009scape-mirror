@@ -62,6 +62,12 @@ public class AggressiveBehavior {
 	 * @return {@code True} if the NPC can select the entity as a target.
 	 */
 	public boolean canSelectTarget(Entity entity, Entity target) {
+		int regionId = target.getLocation().getRegionId();
+		if(target instanceof Player) {
+			if (RegionManager.forId(regionId).isTolerated(target.asPlayer())) {
+				return false;
+			}
+		}
 		if (!target.isActive() || DeathTask.isDead(target)) {
 			return false;
 		}
