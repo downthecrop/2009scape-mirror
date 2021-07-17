@@ -316,29 +316,20 @@ public class Region {
 	}
 
 	/**
-	 * Unloads a region - compatibility method for older uses
-	 */
-	private static void unload(Region r){
-		unload(r, false);
-	}
-
-	/**
 	 * Unloads a region.
 	 * @param r The region.
 	 */
-	private static void unload(Region r, boolean force) {
-		if(!force){
-			if (r.isViewed()) {
-				SystemLogger.logErr("Players viewing region!");
+	private static void unload(Region r) {
+		if (r.isViewed()) {
+			SystemLogger.logErr("Players viewing region!");
+			r.flagActive();
+			return;
+		}
+		for (RegionPlane p : r.planes) {
+			if (!p.getPlayers().isEmpty()) {
+				SystemLogger.logErr("Players still in region!");
 				r.flagActive();
 				return;
-			}
-			for (RegionPlane p : r.planes) {
-				if (!p.getPlayers().isEmpty()) {
-					SystemLogger.logErr("Players still in region!");
-					r.flagActive();
-					return;
-				}
 			}
 		}
 		for (RegionPlane p : r.planes) {
