@@ -91,7 +91,7 @@ public final class TrapCreatePulse extends SkillPulse<Node> {
 		if (!trap.getSettings().isObjectTrap()) {
 			player.moveStep();
 		} else {
-			SceneryBuilder.remove(node.asObject());
+			SceneryBuilder.remove(node.asScenery());
 		}
 		object = SceneryBuilder.add(object);
 		player.getHunterManager().register(trap, node, object);

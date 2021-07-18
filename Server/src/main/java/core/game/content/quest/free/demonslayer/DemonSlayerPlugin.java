@@ -1,7 +1,7 @@
 package core.game.content.quest.free.demonslayer;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -34,11 +34,11 @@ public final class DemonSlayerPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(881).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(882).getHandlers().put("option:close", this);
-		ObjectDefinition.forId(882).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(DRAIN_ID).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(17429).getHandlers().put("option:take", this);
+		SceneryDefinition.forId(881).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(882).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(882).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(DRAIN_ID).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(17429).getHandlers().put("option:take", this);
 		NPCDefinition.forId(DemonSlayerCutscene.DELRITH).getHandlers().put("option:attack", this);
 		NPCDefinition.forId(DemonSlayerCutscene.WEAKENED_DELRITH).getHandlers().put("option:banish", this);
 		return this;

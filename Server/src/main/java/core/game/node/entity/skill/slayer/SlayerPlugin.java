@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.slayer;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DigAction;
 import core.game.content.global.action.DigSpadeHandler;
@@ -25,15 +25,15 @@ public class SlayerPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(8783).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(8785).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(23158).getHandlers().put("option:exit", this);
-		ObjectDefinition.forId(23157).getHandlers().put("option:exit", this);
-		ObjectDefinition.forId(15767).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(15811).getHandlers().put("option:exit", this);
-		ObjectDefinition.forId(15812).getHandlers().put("option:exit", this);
-		ObjectDefinition.forId(96).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(35121).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(8783).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(8785).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(23158).getHandlers().put("option:exit", this);
+		SceneryDefinition.forId(23157).getHandlers().put("option:exit", this);
+		SceneryDefinition.forId(15767).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(15811).getHandlers().put("option:exit", this);
+		SceneryDefinition.forId(15812).getHandlers().put("option:exit", this);
+		SceneryDefinition.forId(96).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(35121).getHandlers().put("option:climb-down", this);
 		for (Location loc : BRYNE_DIGS) {
 			DigSpadeHandler.register(loc, new DigAction() {
 				@Override

@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.ContentAPI;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -11,6 +12,7 @@ import core.game.node.entity.player.link.RunScript;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import kotlin.Unit;
 
 @Initializable
 public class SpinningInterface extends ComponentPlugin {
@@ -43,15 +45,10 @@ public class SpinningInterface extends ComponentPlugin {
 			amt = p.getInventory().getAmount(new Item(spin.getNeed()));
 			break;
 		case 199:
-			p.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					int ammount = (int) value;
-					p.getPulseManager().run(new SpinningPulse(p, new Item(spin.getNeed(), 1), ammount, spin));
-					return true;
-				}
+			ContentAPI.sendInputDialogue(p, true, "Enter the amount:", (value) -> {
+				ContentAPI.submitIndividualPulse(p, new SpinningPulse(p, new Item(spin.getNeed(), 1), (int) value, spin));
+				return Unit.INSTANCE;
 			});
-			p.getDialogueInterpreter().sendInput(false, "Enter the amount.");
 			break;
 		}
 		if (opcode == 199) {

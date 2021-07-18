@@ -12,7 +12,7 @@ class EnchantedValleyListeners : InteractionListener() {
     val TREE_SPIRIT_IDS = intArrayOf(NPCs.TREE_SPIRIT_438,NPCs.TREE_SPIRIT_439,NPCs.TREE_SPIRIT_440,NPCs.TREE_SPIRIT_441,NPCs.TREE_SPIRIT_442,NPCs.TREE_SPIRIT_443)
     override fun defineListeners() {
 
-        on(ENCHANTED_V_TREE,OBJECT,"chop-down"){player, node ->
+        on(ENCHANTED_V_TREE,SCENERY,"chop-down"){ player, node ->
             val tool: SkillingTool? = SkillingTool.getHatchet(player)
             tool ?: player.sendMessage("You lack an axe which you have the Woodcutting level to use.").also { return@on true }
 

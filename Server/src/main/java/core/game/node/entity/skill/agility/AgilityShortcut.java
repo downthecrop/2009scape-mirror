@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.agility;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -86,7 +86,7 @@ public abstract class AgilityShortcut extends OptionHandler {
 		if (!checkRequirements(player)) {
 			return true;
 		}
-		run(player, node.asObject(), option, checkFail(player, node.asObject(), option));
+		run(player, node.asScenery(), option, checkFail(player, node.asScenery(), option));
 		return true;
 	}
 
@@ -131,7 +131,7 @@ public abstract class AgilityShortcut extends OptionHandler {
 	 */
 	public void configure(AgilityShortcut shortcut) {
 		for (int objectId : shortcut.ids) {
-			ObjectDefinition def = ObjectDefinition.forId(objectId);
+			SceneryDefinition def = SceneryDefinition.forId(objectId);
 			for (String option : shortcut.options) {
 				def.getHandlers().put("option:" + option, shortcut);
 			}

@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.agility.shortcuts;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import org.rs09.consts.Items;
 import core.game.interaction.OptionHandler;
@@ -49,7 +49,7 @@ public class WaterOrbGrapple extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ObjectDefinition.forId(17062).getHandlers().put("option:grapple", this);
+        SceneryDefinition.forId(17062).getHandlers().put("option:grapple", this);
         return this;
     }
 

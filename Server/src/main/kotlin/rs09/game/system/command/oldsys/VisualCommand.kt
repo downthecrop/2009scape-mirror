@@ -1,5 +1,6 @@
 package rs09.game.system.command.oldsys
 
+import api.ContentAPI
 import core.cache.Cache
 import core.game.container.access.InterfaceContainer
 import core.game.content.quest.tutorials.tutorialisland.CharacterDesign
@@ -187,6 +188,8 @@ class VisualCommand : CommandPlugin() {
                     return true
                 }
                 player!!.packetDispatch.sendSceneryAnimation(`object`, Animation(toInteger(args[args.size - 1]!!)))
+                //ContentAPI.sendMessage(player, `object`.definition.modelIds.map { it.toString() }.toString())
+                ContentAPI.sendMessage(player, `object`.definition.animationId.toString())
                 return true
             }
             "inter", "component", "interface" -> {
@@ -215,15 +218,49 @@ class VisualCommand : CommandPlugin() {
             }
             "loop_varposition" -> {
                 val value = (args!![1]!!.toString().toInt()) ?: 0
-                val config_index = (args!![2]!!.toString().toInt())
-                GameWorld.Pulser.submit(object : Pulse(3, player) {
-                    var pos = 0
+                val cfg_index = (args.getOrNull(2)?.toString()?.toInt() ?: -1)
+                if(cfg_index == -1){
+                    ContentAPI.submitWorldPulse(object : Pulse(3, player){
+                        var pos = 0
+                        var shift = 0
+                        override fun pulse(): Boolean {
+                            for(i in 0..1999){
+                                player?.configManager?.forceSet(i, pos shl shift, false)
+                            }
+                            player?.sendMessage("$pos << $shift")
+                            if(pos++ >= 32){
+                                shift += 4
+                                pos = 0
+                            }
+                            return shift >= 32
+                        }
+                    })
+                } else {
+                    ContentAPI.submitWorldPulse(object : Pulse(3, player) {
+                        var pos = 0
+                        override fun pulse(): Boolean {
+                            player?.configManager?.forceSet(cfg_index, value shl pos, false)
+                            player?.sendMessage("$pos")
+                            return pos++ >= 32
+                        }
+                    })
+                }
+            }
+            "loop_anim_on_i" -> {
+                var anim = toInteger(args!![1]!!)
+                ContentAPI.submitWorldPulse(object : Pulse(3){
                     override fun pulse(): Boolean {
-					    player?.configManager?.forceSet(config_index, value shl pos,false)
-                        player?.sendMessage("$pos")
-                        return pos++ >= 32
+                        player!!.packetDispatch.sendAnimationInterface(anim++, 224, 7)
+                        ContentAPI.sendMessage(player, "${anim - 1}")
+                        return false
                     }
                 })
+            }
+            "send_i_anim" -> {
+                val iface = args?.getOrNull(0) ?: return true
+                val anim = args.getOrNull(1) ?: return true
+
+                player?.packetDispatch?.sendAnimationInterface(toInteger(anim), toInteger(iface),7)
             }
             "loop_inter" -> {
                 val st = toInteger(args!![1]!!)

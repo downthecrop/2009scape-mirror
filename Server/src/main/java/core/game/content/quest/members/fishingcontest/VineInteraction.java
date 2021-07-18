@@ -23,9 +23,9 @@ public class VineInteraction extends PluginInteraction {
     @Override
     public boolean handle(Player player, Node node) {
         if(node instanceof Scenery){
-            Scenery obj = node.asObject();
+            Scenery obj = node.asScenery();
             if(player.getQuestRepository().getStage("Fishing Contest") > 0 && player.getQuestRepository().getStage("Fishing Contest") < 100){
-                player.getPulseManager().run(new MovementPulse(player, node.asObject().getLocation().transform(0, 0, 0)) {
+                player.getPulseManager().run(new MovementPulse(player, node.asScenery().getLocation().transform(0, 0, 0)) {
                     @Override
                     public boolean pulse() {
                         if(player.getInventory().containsItem(FishingContest.SPADE)) {

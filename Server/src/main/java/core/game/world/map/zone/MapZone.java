@@ -112,6 +112,8 @@ public abstract class MapZone implements Zone {
 		return false;
 	}
 
+	public boolean handleUseWith(Player player, Item used, Node with){return false;}
+
 	/**
 	 * Handles an reward button.
 	 * @param player The player.
@@ -245,7 +247,7 @@ public abstract class MapZone implements Zone {
 	/**
 	 * Configures this map zone.
 	 */
-	public abstract void configure();
+	public void configure(){};
 
 	/**
 	 * Cleans items from a players inventory, equipment and bank.

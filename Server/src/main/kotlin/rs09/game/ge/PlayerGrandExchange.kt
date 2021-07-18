@@ -1,5 +1,6 @@
 package rs09.game.ge
 
+import api.ContentAPI
 import core.cache.def.impl.ItemDefinition
 import core.game.component.CloseEvent
 import core.game.component.Component
@@ -27,8 +28,6 @@ import core.net.packet.out.GrandExchangePacket
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.rs09.consts.Components
-import rs09.game.ge.OfferManager.Companion.dispatch
-import rs09.game.ge.OfferManager.Companion.updateOffer
 import rs09.game.system.SystemLogger
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -242,7 +241,7 @@ class PlayerGrandExchange(private val player: Player) {
                     SystemLogger.logAlert("Check your logs, AVENGING ANGLE might have fucked up HARD and now " + player.name + "'s trade with index " + index + "is gone :(")
                     continue
                 }
-                OfferManager.setIndex(offer["offerUID"].toString().toInt().toLong(), index)
+                OfferManager.setIndex(offer["offerUID"].toString().toLong(), index)
                 offers[index] = OfferManager.OFFER_MAPPING[offer["offerUID"].toString().toLong()]
                 update(offers[index])
             }
@@ -319,13 +318,13 @@ class PlayerGrandExchange(private val player: Player) {
         temporaryOffer!!.itemID = itemId
         temporaryOffer!!.sell = false
         var itemDb = GrandExchangeDatabase.getDatabase()[itemId]
-        if (itemDb == null) {
+        if (itemDb == null || !ContentAPI.itemDefinition(itemId).isTradeable) {
             player.packetDispatch.sendMessage("This item has been blacklisted from the Grand Exchange.")
             return
         }
         temporaryOffer!!.player = player
         temporaryOffer!!.amount = 1
-        temporaryOffer!!.offeredValue = itemDb.value
+        temporaryOffer!!.offeredValue = OfferManager.getRecommendedPrice(itemId)
         temporaryOffer!!.index = openedIndex
         sendConfiguration(temporaryOffer, false)
     }
@@ -350,7 +349,7 @@ class PlayerGrandExchange(private val player: Player) {
             id = item.noteChange
         }
         var itemDb = GrandExchangeDatabase.getDatabase()[id]
-        if (itemDb == null) {
+        if (itemDb == null || !item.definition.isTradeable) {
             player.packetDispatch.sendMessage("This item can't be sold on the Grand Exchange.")
             return
         }
@@ -358,7 +357,7 @@ class PlayerGrandExchange(private val player: Player) {
         temporaryOffer!!.itemID = id
         temporaryOffer!!.sell = true
         temporaryOffer!!.player = player
-        temporaryOffer!!.offeredValue = itemDb.value
+        temporaryOffer!!.offeredValue = OfferManager.getRecommendedPrice(id)
         temporaryOffer!!.amount = item.amount
         temporaryOffer!!.index = openedIndex
         sendConfiguration(temporaryOffer, true)
@@ -425,9 +424,9 @@ class PlayerGrandExchange(private val player: Player) {
                     return
                 }
             }
-            if (dispatch(player, temporaryOffer!!)) {
+            if (OfferManager.dispatch(player, temporaryOffer!!)) {
                 offers[openedIndex] = temporaryOffer
-                updateOffer(temporaryOffer!!)
+                OfferManager.updateOffer(temporaryOffer!!)
             }
         } else {
             val total: Int = temporaryOffer!!.amount * temporaryOffer!!.offeredValue
@@ -436,9 +435,9 @@ class PlayerGrandExchange(private val player: Player) {
                 player.packetDispatch.sendMessage("You do not have enough coins to cover the offer.")
                 return
             }
-            if (dispatch(player, temporaryOffer!!) && player.inventory.remove(Item(995, total))) {
+            if (OfferManager.dispatch(player, temporaryOffer!!) && player.inventory.remove(Item(995, total))) {
                 offers[openedIndex] = temporaryOffer
-                updateOffer(temporaryOffer!!)
+                OfferManager.updateOffer(temporaryOffer!!)
             }
         }
         player.monitor.log(
@@ -546,7 +545,7 @@ class PlayerGrandExchange(private val player: Player) {
                 val botSales = OfferManager.amtBotsSelling(offer.itemID)
                 if (botSales > 0) {
                     foundAmounts.add(botSales)
-                    foundOffers.add(BotPrices.getPrice(offer.itemID))
+                    foundOffers.add(OfferManager.getRecommendedPrice(offer.itemID, true))
                     count++
                 }
                 if (foundOffers.isNotEmpty()) {
@@ -564,16 +563,17 @@ class PlayerGrandExchange(private val player: Player) {
         player.packetDispatch.sendString(if (offer != null && !offer.sell) text.toString() else examine, 105, 142)
         var lowPrice = 0
         var highPrice = 0
+        val recommendedPrice = OfferManager.getRecommendedPrice(entry?.itemId ?: 0)
         if (entry != null) {
-            lowPrice = (entry.value * 0.95).toInt()
-            highPrice = (entry.value * 1.05).toInt()
+            lowPrice = (recommendedPrice * 0.95).toInt()
+            highPrice = (recommendedPrice * 1.05).toInt()
         }
         player.varpManager.get(1109).setVarbit(0, offer?.itemID ?: -1).send(player)
         player.varpManager.get(1110).setVarbit(0, offer?.amount ?: 0).send(player)
         player.varpManager.get(1111).setVarbit(0, offer?.offeredValue ?: 0).send(player)
         player.varpManager.get(1112).setVarbit(0, openedIndex).send(player)
         player.varpManager.get(1113).setVarbit(0, if (sell) 1 else 0).send(player)
-        player.varpManager.get(1114).setVarbit(0, entry?.value ?: 0).send(player)
+        player.varpManager.get(1114).setVarbit(0, recommendedPrice).send(player)
         player.varpManager.get(1115).setVarbit(0, lowPrice).send(player)
         player.varpManager.get(1116).setVarbit(0, highPrice).send(player)
         if (offer != null) {

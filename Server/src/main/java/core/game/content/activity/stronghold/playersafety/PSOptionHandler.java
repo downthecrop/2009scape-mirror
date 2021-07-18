@@ -12,7 +12,7 @@ import static core.game.content.activity.stronghold.playersafety.StrongHoldOfPla
 import static core.game.content.activity.stronghold.playersafety.StrongHoldOfPlayerSafetyPlugin.forId;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialogueAction;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
@@ -34,23 +34,23 @@ public class PSOptionHandler extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(JAIL_ENTRANCE_ID_ENTER).getHandlers().put("option:use", this);
-		ObjectDefinition.forId(JAIL_ENTRANCE_LEAVE).getHandlers().put("option:leave", this);
-		ObjectDefinition.forId(JAIL_STAIRS_UP).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(JAIL_STAIRS_DOWN).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(29732).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(29624).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(29728).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(29735).getHandlers().put("option:pull-back", this);
-		ObjectDefinition.forId(29623).getHandlers().put("option:use", this);
-		ObjectDefinition.forId(29730).getHandlers().put("option:pull", this);
-		ObjectDefinition.forId(29731).getHandlers().put("option:pull", this);
-		ObjectDefinition.forId(29577).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(29578).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(JAIL_ENTRANCE_ID_ENTER).getHandlers().put("option:use", this);
+		SceneryDefinition.forId(JAIL_ENTRANCE_LEAVE).getHandlers().put("option:leave", this);
+		SceneryDefinition.forId(JAIL_STAIRS_UP).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(JAIL_STAIRS_DOWN).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(29732).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(29624).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(29728).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(29735).getHandlers().put("option:pull-back", this);
+		SceneryDefinition.forId(29623).getHandlers().put("option:use", this);
+		SceneryDefinition.forId(29730).getHandlers().put("option:pull", this);
+		SceneryDefinition.forId(29731).getHandlers().put("option:pull", this);
+		SceneryDefinition.forId(29577).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(29578).getHandlers().put("option:search", this);
 		ItemDefinition.forId(TEST_PAPER_ITEM_ID).getHandlers().put("option:take exam", this);
-		ObjectDefinition.forId(29729).getHandlers().put("option:climb", this);
+		SceneryDefinition.forId(29729).getHandlers().put("option:climb", this);
 		for (JailPlaques plaque : JailPlaques.values()) {
-			ObjectDefinition.forId(plaque.getObjectId()).getHandlers().put("option:read-plaque on", this);
+			SceneryDefinition.forId(plaque.getObjectId()).getHandlers().put("option:read-plaque on", this);
 		}
 		return this;
 	}
@@ -61,7 +61,7 @@ public class PSOptionHandler extends OptionHandler {
 		boolean locked = config == (1 << 29) || config == (0 << 26);
 		switch (node.getId()) {
 		case 29577:// chest
-			SceneryBuilder.replace(node.asObject(), node.asObject().transform(29578), 60);
+			SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(29578), 60);
 			return true;
 		case 29578:
 			switch (option) {
@@ -127,7 +127,7 @@ public class PSOptionHandler extends OptionHandler {
 			if (!player.getSavedData().getGlobalData().hasReadPlaques()) {
 				player.sendMessage("This door is locked.");
 			} else {
-				DoorActionHandler.handleAutowalkDoor(player, node.asObject());
+				DoorActionHandler.handleAutowalkDoor(player, node.asScenery());
 			}
 			return true;
 		case 29728:

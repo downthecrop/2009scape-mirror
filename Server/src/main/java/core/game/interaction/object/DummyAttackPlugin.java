@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -19,19 +19,19 @@ public final class DummyAttackPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2038).getHandlers().put("option:attack", this);
-		ObjectDefinition.forId(15624).getHandlers().put("option:attack", this);
-		ObjectDefinition.forId(15625).getHandlers().put("option:attack", this);
-		ObjectDefinition.forId(15626).getHandlers().put("option:attack", this);
-		ObjectDefinition.forId(15627).getHandlers().put("option:attack", this);
-		ObjectDefinition.forId(15628).getHandlers().put("option:attack", this);
-		ObjectDefinition.forId(15629).getHandlers().put("option:attack", this);
-		ObjectDefinition.forId(15630).getHandlers().put("option:attack", this);
-		ObjectDefinition.forId(18238).getHandlers().put("option:attack", this);
-		ObjectDefinition.forId(25648).getHandlers().put("option:attack", this);
-		ObjectDefinition.forId(28912).getHandlers().put("option:attack", this);
-		ObjectDefinition.forId(823).getHandlers().put("option:attack", this);
-		ObjectDefinition.forId(23921).getHandlers().put("option:attack", this);
+		SceneryDefinition.forId(2038).getHandlers().put("option:attack", this);
+		SceneryDefinition.forId(15624).getHandlers().put("option:attack", this);
+		SceneryDefinition.forId(15625).getHandlers().put("option:attack", this);
+		SceneryDefinition.forId(15626).getHandlers().put("option:attack", this);
+		SceneryDefinition.forId(15627).getHandlers().put("option:attack", this);
+		SceneryDefinition.forId(15628).getHandlers().put("option:attack", this);
+		SceneryDefinition.forId(15629).getHandlers().put("option:attack", this);
+		SceneryDefinition.forId(15630).getHandlers().put("option:attack", this);
+		SceneryDefinition.forId(18238).getHandlers().put("option:attack", this);
+		SceneryDefinition.forId(25648).getHandlers().put("option:attack", this);
+		SceneryDefinition.forId(28912).getHandlers().put("option:attack", this);
+		SceneryDefinition.forId(823).getHandlers().put("option:attack", this);
+		SceneryDefinition.forId(23921).getHandlers().put("option:attack", this);
 		return this;
 	}
 

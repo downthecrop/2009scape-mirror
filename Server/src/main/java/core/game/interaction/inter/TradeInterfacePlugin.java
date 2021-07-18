@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -8,6 +9,7 @@ import core.game.node.entity.player.link.RunScript;
 import core.game.node.entity.player.link.request.trade.TradeModule;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import kotlin.Unit;
 
 /**
  * Represents the interface plugin used to handle all trade related functions.
@@ -66,14 +68,14 @@ public final class TradeInterfacePlugin extends ComponentPlugin {
 				module.getContainer().withdraw(slot, module.getContainer().getAmount(module.getContainer().get(slot)));
 				break;
 			case 234:
-				player.setAttribute("runscript", new RunScript() {
-					@Override
-					public boolean handle() {
-						module.getContainer().withdraw(slot, (int) getValue());
-						return true;
-					}
+				ContentAPI.sendInputDialogue(player, false, "Enter the amount:", (value) -> {
+					String s = value.toString();
+					s = s.replace("k","000");
+					s = s.replace("K","000");
+					int val = Integer.parseInt(s);
+					module.getContainer().withdraw(slot, val);
+					return Unit.INSTANCE;
 				});
-				player.getDialogueInterpreter().sendInput(false, "Enter the amount:");
 				break;
 			case 9:// examine.
 				if (TradeModule.getExtension(button == 32 ? module.getTarget() : player) == null) {
@@ -98,14 +100,14 @@ public final class TradeInterfacePlugin extends ComponentPlugin {
 				module.getContainer().offer(slot, player.getInventory().getAmount(player.getInventory().get(slot)));
 				break;
 			case 234:
-				player.setAttribute("runscript", new RunScript() {
-					@Override
-					public boolean handle() {
-						module.getContainer().offer(slot, (int) getValue());
-						return true;
-					}
+				ContentAPI.sendInputDialogue(player, false, "Enter the amount:", (value) -> {
+					String s = value.toString();
+					s = s.replace("k","000");
+					s = s.replace("K","000");
+					int val = Integer.parseInt(s);
+					module.getContainer().offer(slot, val);
+					return Unit.INSTANCE;
 				});
-				player.getDialogueInterpreter().sendInput(false, "Enter the amount:");
 				break;
 			case 9:
 				player.getPacketDispatch().sendMessage(player.getInventory().get(slot).getDefinition().getExamine());

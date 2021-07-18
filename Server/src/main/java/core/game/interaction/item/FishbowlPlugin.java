@@ -2,7 +2,7 @@ package core.game.interaction.item;
 
 import core.Util;
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import org.rs09.consts.Items;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
@@ -219,7 +219,7 @@ public class FishbowlPlugin extends OptionHandler {
     public static final class AquariumPlugin extends OptionHandler {
         @Override
         public Plugin<Object> newInstance(Object arg) throws Throwable {
-            ObjectDefinition.forId(10091).getHandlers().put("option:fish-in", this);
+            SceneryDefinition.forId(10091).getHandlers().put("option:fish-in", this);
             PluginManager.definePlugin(new TinyNetHandler());
             return this;
         }

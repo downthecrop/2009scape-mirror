@@ -5,7 +5,9 @@ import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.agg.AggressiveBehavior;
 import core.game.node.entity.npc.agg.AggressiveHandler;
+import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
+import core.game.world.map.RegionManager;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
@@ -22,6 +24,10 @@ public final class RockCrabNPC extends AbstractNPC {
 	private static final AggressiveBehavior AGGRO_BEHAVIOR = new AggressiveBehavior() {
 		@Override
 		public boolean canSelectTarget(Entity entity, Entity target) {
+			int regionId = target.getLocation().getRegionId();
+			if(target instanceof Player){
+				if(RegionManager.forId(regionId).isTolerated(target.asPlayer())) return false;
+			}
 			RockCrabNPC npc = (RockCrabNPC) entity;
 			if (entity.getLocation().withinDistance(target.getLocation(), 3)) {
 				npc.aggresor = true;

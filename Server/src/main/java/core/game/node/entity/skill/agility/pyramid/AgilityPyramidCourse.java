@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.agility.pyramid;
 
 import core.cache.def.impl.VarbitDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
@@ -68,30 +68,30 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 
 	@Override
 	public void configure() {
-		ObjectDefinition.forId(16535).getHandlers().put("option:climb", this);
-		ObjectDefinition.forId(16536).getHandlers().put("option:climb", this);
-		ObjectDefinition.forId(10851).getHandlers().put("option:climb", this);
-		ObjectDefinition.forId(10855).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(10856).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(10860).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10861).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10862).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10863).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10864).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10868).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10867).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10882).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10883).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10884).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10885).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10886).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10887).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10888).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10889).getHandlers().put("option:cross", this);
-		ObjectDefinition.forId(10859).getHandlers().put("option:jump", this);
-		ObjectDefinition.forId(10857).getHandlers().put("option:climb-up", this);
-		ObjectDefinition.forId(10858).getHandlers().put("option:climb-down", this);
-		ObjectDefinition.forId(10865).getHandlers().put("option:climb-over", this);
+		SceneryDefinition.forId(16535).getHandlers().put("option:climb", this);
+		SceneryDefinition.forId(16536).getHandlers().put("option:climb", this);
+		SceneryDefinition.forId(10851).getHandlers().put("option:climb", this);
+		SceneryDefinition.forId(10855).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(10856).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(10860).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10861).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10862).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10863).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10864).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10868).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10867).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10882).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10883).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10884).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10885).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10886).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10887).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10888).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10889).getHandlers().put("option:cross", this);
+		SceneryDefinition.forId(10859).getHandlers().put("option:jump", this);
+		SceneryDefinition.forId(10857).getHandlers().put("option:climb-up", this);
+		SceneryDefinition.forId(10858).getHandlers().put("option:climb-down", this);
+		SceneryDefinition.forId(10865).getHandlers().put("option:climb-over", this);
 		RollingBlock.BlockSets.values();
 		PluginManager.definePlugin(new MovingBlockNPC());
 		PluginManager.definePlugin(new AgilityPyramidZone());
@@ -497,7 +497,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 	 * @param value the value.
 	 */
 	public static void addConfig(final Player player, final int objectId, final int value, boolean save) {
-		final VarbitDefinition definition = VarbitDefinition.forObjectID(ObjectDefinition.forId(objectId).getVarbitID());
+		final VarbitDefinition definition = VarbitDefinition.forObjectID(SceneryDefinition.forId(objectId).getVarbitID());
 		final int oldVal = (definition.getValue(player) << definition.getBitShift());
 		final int newVal = (value << definition.getBitShift());
 		player.getConfigManager().set(CONFIG_ID, (player.getConfigManager().get(CONFIG_ID) - oldVal) + newVal, save);

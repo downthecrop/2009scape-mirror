@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.hunter.tracking
 
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.node.item.Item
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -45,29 +45,29 @@ class CommonKebbitEast : HunterTracking() {
         if(!linkingTrails.contains(initialMap.values.random()[0])){
             addExtraTrails()
         }
-        ObjectDefinition.forId(19439).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19440).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19360).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19361).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19362).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19363).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19364).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19365).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19356).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19357).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19358).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19359).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19375).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19376).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19377).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19378).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19379).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19372).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19380).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19374).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19373).handlers["option:inspect"] = this
-        ObjectDefinition.forId(19428).handlers["option:search"] = this
-        ObjectDefinition.forId(19428).handlers["option:attack"] = this
+        SceneryDefinition.forId(19439).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19440).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19360).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19361).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19362).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19363).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19364).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19365).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19356).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19357).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19358).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19359).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19375).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19376).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19377).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19378).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19379).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19372).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19380).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19374).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19373).handlers["option:inspect"] = this
+        SceneryDefinition.forId(19428).handlers["option:search"] = this
+        SceneryDefinition.forId(19428).handlers["option:attack"] = this
 
         return this
     }

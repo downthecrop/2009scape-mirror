@@ -21,7 +21,7 @@ class SupriseExamListeners : InteractionListener() {
             return@on true
         }
 
-        on(SurpriseExamUtils.SE_DOORS,OBJECT,"open"){player, node ->
+        on(SurpriseExamUtils.SE_DOORS,SCENERY,"open"){ player, node ->
             val correctDoor = player.getAttribute(SurpriseExamUtils.SE_DOOR_KEY,-1)
 
             if(correctDoor == -1){

@@ -16,17 +16,17 @@ class GatheringSkillOptionListeners : InteractionListener() {
     val ETCETERIA_REGION = 10300
 
     override fun defineListeners() {
-        on(OBJECT,"chop-down","chop down","cut down"){player,node ->
+        on(SCENERY,"chop-down","chop down","cut down"){ player, node ->
             if(player.location.regionId == ETCETERIA_REGION){
                 player.dialogueInterpreter.open(KjallakOnChopDialogue(), NPC(NPCs.CARPENTER_KJALLAK_3916))
                 return@on true
             }
-            player.pulseManager.run(WoodcuttingSkillPulse(player, node.asObject()))
+            player.pulseManager.run(WoodcuttingSkillPulse(player, node.asScenery()))
             return@on true
         }
 
-        on(OBJECT,"mine"){player,node ->
-            player.pulseManager.run(MiningSkillPulse(player, node.asObject()))
+        on(SCENERY,"mine"){ player, node ->
+            player.pulseManager.run(MiningSkillPulse(player, node.asScenery()))
             return@on true
         }
 

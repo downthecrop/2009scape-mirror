@@ -1,6 +1,6 @@
 package core.game.content.quest.members.junglepotion;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.OptionHandler;
@@ -22,10 +22,10 @@ public final class JunglePotionPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2584).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(2585).getHandlers().put("option:climb", this);
+		SceneryDefinition.forId(2584).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(2585).getHandlers().put("option:climb", this);
 		for (JungleObjective s : JungleObjective.values()) {
-			ObjectDefinition.forId(s.getObjectId()).getHandlers().put("option:search", this);
+			SceneryDefinition.forId(s.getObjectId()).getHandlers().put("option:search", this);
 		}
 		SceneryBuilder.add(new Scenery(2585, Location.create(2828, 9522, 0), 8, 0));
 		return this;

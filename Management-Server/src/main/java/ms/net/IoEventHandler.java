@@ -1,5 +1,8 @@
 package ms.net;
 
+import ms.world.WorldDatabase;
+import ms09.MSLogger;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.ClosedChannelException;
@@ -8,6 +11,7 @@ import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
+import java.util.Arrays;
 import java.util.concurrent.ExecutorService;
 
 /**
@@ -63,7 +67,10 @@ public final class IoEventHandler {
 		ByteBuffer buffer = ByteBuffer.allocate(100_000);
 		IoSession session = (IoSession) key.attachment();
 		if (channel.read(buffer) == -1) {
-			System.out.println("Existing session disconnected - likely portscanner or server status checker.");
+			if(session.getGameServer() != null){
+				WorldDatabase.unRegister(session.getGameServer());
+			}
+			session.disconnect();
 			key.cancel();
 			return;
 		}

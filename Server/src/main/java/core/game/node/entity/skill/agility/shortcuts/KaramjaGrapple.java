@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.agility.shortcuts;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import org.rs09.consts.Items;
 import core.game.interaction.OptionHandler;
@@ -49,7 +49,7 @@ public class KaramjaGrapple extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ObjectDefinition.forId(17074).getHandlers().put("option:grapple", this);
+        SceneryDefinition.forId(17074).getHandlers().put("option:grapple", this);
         // island tree 17074 +1 rope loop, +2 grappled one way, +3 grappled other way
         // north tree 17056 +1 rope loop, +2 grappled
         // south tree 17059 +1 rope loop, +2 grappled

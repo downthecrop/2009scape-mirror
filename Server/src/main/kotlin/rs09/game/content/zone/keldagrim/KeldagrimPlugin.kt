@@ -1,6 +1,6 @@
 package rs09.game.content.zone.keldagrim
 
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.content.dialogue.DialoguePlugin
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -59,12 +59,12 @@ class KeldagrimOptionHandlers : OptionHandler() {
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ObjectDefinition.forId(5973).handlers["option:go-through"] = this
-        ObjectDefinition.forId(5998).handlers["option:go-through"] = this
-        ObjectDefinition.forId(9084).handlers["option:climb-down"] = this
-        ObjectDefinition.forId(9138).handlers["option:climb-up"] = this
-        ObjectDefinition.forId(28094).handlers["option:open"] = this
-        ObjectDefinition.forId(5014).handlers["option:enter"] = this
+        SceneryDefinition.forId(5973).handlers["option:go-through"] = this
+        SceneryDefinition.forId(5998).handlers["option:go-through"] = this
+        SceneryDefinition.forId(9084).handlers["option:climb-down"] = this
+        SceneryDefinition.forId(9138).handlers["option:climb-up"] = this
+        SceneryDefinition.forId(28094).handlers["option:open"] = this
+        SceneryDefinition.forId(5014).handlers["option:enter"] = this
         return this
     }
 }

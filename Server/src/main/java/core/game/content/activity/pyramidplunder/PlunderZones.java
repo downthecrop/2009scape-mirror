@@ -197,7 +197,7 @@ public class PlunderZones implements Plugin<Object> {
                 }
                return true; 
             }
-            PlunderObject object = target instanceof NPC ? null : new PlunderObject(target.asObject()); //PlunderObject(target.getId(),target.getLocation());
+            PlunderObject object = target instanceof NPC ? null : new PlunderObject(target.asScenery()); //PlunderObject(target.getId(),target.getLocation());
             PlunderObjectManager manager = player.getPlunderObjectManager();
             boolean alreadyOpened = manager.openedMap.getOrDefault(object.getLocation(),false);
             boolean charmed = manager.charmedMap.getOrDefault(object.getLocation(),false);
@@ -243,7 +243,7 @@ public class PlunderZones implements Plugin<Object> {
 
                         if (!alreadyOpened && (success || charmed)) {
                             player.getPacketDispatch().sendMessage("You successfully search the urn...");
-                            SceneryBuilder.replace(target.asObject(), target.asObject().transform(object.openId), 5);
+                            SceneryBuilder.replace(target.asScenery(), target.asScenery().transform(object.openId), 5);
                             manager.registerOpened(object);
                             reward(player,object.getId());
                         } else {
@@ -255,7 +255,7 @@ public class PlunderZones implements Plugin<Object> {
                             player.getPacketDispatch().sendMessage("You already checked for snakes.");
                         } else {
                             player.getPacketDispatch().sendMessage("You check the urn for snakes...");
-                            SceneryBuilder.replace(target.asObject(), target.asObject().transform(object.snakeId), 5);
+                            SceneryBuilder.replace(target.asScenery(), target.asScenery().transform(object.snakeId), 5);
                         }
                     }
                     break;

@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -27,12 +27,12 @@ public final class WildernessObeliskPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(14829).getHandlers().put("option:activate", this);
-		ObjectDefinition.forId(14826).getHandlers().put("option:activate", this);
-		ObjectDefinition.forId(14827).getHandlers().put("option:activate", this);
-		ObjectDefinition.forId(14828).getHandlers().put("option:activate", this);
-		ObjectDefinition.forId(14830).getHandlers().put("option:activate", this);
-		ObjectDefinition.forId(14831).getHandlers().put("option:activate", this);
+		SceneryDefinition.forId(14829).getHandlers().put("option:activate", this);
+		SceneryDefinition.forId(14826).getHandlers().put("option:activate", this);
+		SceneryDefinition.forId(14827).getHandlers().put("option:activate", this);
+		SceneryDefinition.forId(14828).getHandlers().put("option:activate", this);
+		SceneryDefinition.forId(14830).getHandlers().put("option:activate", this);
+		SceneryDefinition.forId(14831).getHandlers().put("option:activate", this);
 		return this;
 	}
 

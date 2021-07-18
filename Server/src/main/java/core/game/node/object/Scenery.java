@@ -1,7 +1,7 @@
 package core.game.node.object;
 
 import core.cache.def.impl.VarbitDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.DestinationFlag;
 import core.game.interaction.Interaction;
 import core.game.node.Node;
@@ -35,7 +35,7 @@ public class Scenery extends Node {
 	/**
 	 * The object's definition.
 	 */
-	private final ObjectDefinition definition;
+	private final SceneryDefinition definition;
 	
 	/**
 	 * The restore pulse.
@@ -132,7 +132,7 @@ public class Scenery extends Node {
 	 * @param rotation The rotation.
 	 */
 	public Scenery(int id, Location location, int type, int rotation) {
-		super(ObjectDefinition.forId(id).getName(), location);
+		super(SceneryDefinition.forId(id).getName(), location);
 		if (rotation < 0) {
 			rotation += 4;
 		}
@@ -146,7 +146,7 @@ public class Scenery extends Node {
 		this.id = id;
 		this.location = location;
 		this.type = type;
-		this.definition = ObjectDefinition.forId(id);
+		this.definition = SceneryDefinition.forId(id);
 		super.size = definition.sizeX;
 		if (definition.childrenIds != null && definition.childrenIds.length > 0) {
 			this.childs = new Scenery[definition.childrenIds.length];
@@ -201,7 +201,7 @@ public class Scenery extends Node {
 	 */
 	public Scenery getChild(Player player) {
 		if (childs != null) {
-			ObjectDefinition def = definition.getChildObject(player);
+			SceneryDefinition def = definition.getChildObject(player);
 			for (Scenery child : childs) {
 				if (child.getId() == def.getId()) {
 					return child;
@@ -217,7 +217,7 @@ public class Scenery extends Node {
 	 * @param index The child object.
 	 */
 	public void setChildIndex(Player player, int index) {
-		ObjectDefinition def = getDefinition();
+		SceneryDefinition def = getDefinition();
 		if (childs == null && wrapper != null) {
 			def = wrapper.getDefinition();
 		}
@@ -321,7 +321,7 @@ public class Scenery extends Node {
 	 * Gets the definition.
 	 * @return The definition.
 	 */
-	public ObjectDefinition getDefinition() {
+	public SceneryDefinition getDefinition() {
 		return definition;
 	}
 	
