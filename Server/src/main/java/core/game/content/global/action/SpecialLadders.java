@@ -19,6 +19,10 @@ public enum SpecialLadders implements LadderAchievementCheck {
     FOG_ENTER(Location.create(3240,3575,0),Location.create(1675,5599,0)),
     FOG_LEAVE(Location.create(1673,5598,0),Location.create(3242, 3574, 0)),
     INTRO_LEAVE(Location.create(2522, 4999, 0),Location.create(3230, 3240, 0)),
+    JATIZSO_MINE_UP(Location.create(2406,10188,0),Location.create(2397, 3811, 0)),
+    JATIZSO_MINE_DOWN(Location.create(2397, 3812, 0), Location.create(2405, 10188, 0)),
+    JATIZSO_SHOUT_TOWER_UP(Location.create(2373, 3800, 2),Location.create(2374, 3800, 0)),
+    JATIZSO_SHOUT_TOWER_DOWN(Location.create(2373, 3800, 0),Location.create(2374, 3800, 2)),
 
     DRAYNOR_SEWER_SOUTHEAST_DOWN(new Location(3118, 3244, 0), new Location(3118, 9643, 0)),
     DRAYNOR_SEWER_SOUTHEAST_UP(new Location(3118, 9643, 0), new Location(3118, 3243, 0)),
@@ -62,6 +66,10 @@ public enum SpecialLadders implements LadderAchievementCheck {
         this.destLoc = destLoc;
     }
 
+    public static void add(Location from, Location to){
+        destinationMap.put(from,to);
+    }
+
     public static Location getDestination(Location loc){
         return destinationMap.get(loc);
     }
@@ -69,10 +77,4 @@ public enum SpecialLadders implements LadderAchievementCheck {
         return ladderMap.get(loc);
     }
 
-}
-
-interface LadderAchievementCheck {
-    default void checkAchievement(Player player) {
-        return;
-    }
 }

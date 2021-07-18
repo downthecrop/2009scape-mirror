@@ -23,10 +23,12 @@ class MistagEasterEgg : InteractionListener() {
 
         onEquip(ZANIK_RING){player,_ ->
             player.appearance.transformNPC(NPCs.ZANIK_3712)
+            return@onEquip true
         }
 
         onUnequip(ZANIK_RING){player, _ ->
             player.appearance.transformNPC(-1)
+            return@onUnequip true
         }
     }
 }

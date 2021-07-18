@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.slayer.dungeon;
 
 import api.ContentAPI;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.plugin.Initializable;
@@ -62,7 +62,7 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
-				ObjectDefinition.forId(25274).getHandlers().put("option:dive in", this);
+				SceneryDefinition.forId(25274).getHandlers().put("option:dive in", this);
 				return this;
 			}
 

@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
@@ -35,7 +35,7 @@ public final class WildernessLeverPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (LeverSets set : LeverSets.values()) {
 			for (int id : set.getIds()) {
-				ObjectDefinition.forId(id).getHandlers().put("option:pull", this);
+				SceneryDefinition.forId(id).getHandlers().put("option:pull", this);
 			}
 		}
 		PluginManager.definePlugin(new LeverDialogue());

@@ -1,7 +1,10 @@
-package rs09.game.interaction.region
+package rs09.game.interaction.region.rellekka
 
 import core.game.world.map.Location
+import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.game.util.region.rellekka.RellekkaDestination
+import rs09.game.util.region.rellekka.RellekkaUtils
 
 /**
  * File to be used for anything Rellekka related.
@@ -23,7 +26,7 @@ class RellekkaListeners : InteractionListener() {
     val STAIRS = intArrayOf(19690,19691)
 
     override fun defineListeners() {
-        on(STAIRS,OBJECT,"ascend","descend"){player,node ->
+        on(STAIRS,SCENERY,"ascend","descend"){ player, node ->
             if(player.location.y < 3802){
                 player.properties.teleportLocation = when(player.location.x){
                     2715 -> DOWN1A
@@ -41,6 +44,26 @@ class RellekkaListeners : InteractionListener() {
                     else -> player.location
                 }
             }
+            return@on true
+        }
+
+        on(NPCs.MARIA_GUNNARS_5508, NPC, "ferry-neitiznot"){player, _ ->
+            RellekkaUtils.sail(player, RellekkaDestination.RELLEKKA_TO_NEITIZNOT)
+            return@on true
+        }
+
+        on(NPCs.MARIA_GUNNARS_5507, NPC, "ferry-rellekka"){player, node ->
+            RellekkaUtils.sail(player, RellekkaDestination.NEITIZNOT_TO_RELLEKKA)
+            return@on true
+        }
+
+        on(NPCs.MORD_GUNNARS_5481, NPC, "ferry-jatizso"){player, node ->
+            RellekkaUtils.sail(player, RellekkaDestination.RELLEKKA_TO_JATIZSO)
+            return@on true
+        }
+
+        on(NPCs.MORD_GUNNARS_5482, NPC, "ferry-rellekka"){player, node ->
+            RellekkaUtils.sail(player, RellekkaDestination.JATIZSO_TO_RELLEKKA)
             return@on true
         }
     }

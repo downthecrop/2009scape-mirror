@@ -20270,5 +20270,129 @@
   {
     "ids": "14003",
     "examine": "Why do I never take time to look at the grass?"
-  }
+  },
+  {
+    "ids": "15477",
+    "examine": "Home sweet home?"
+  },
+  {
+    "ids": "15480",
+    "examine": "Home sweet home?"
+  },    
+  {
+    "ids": "15748",
+    "examine": "Home sweet home?"
+  },
+  {
+    "ids": "18482",
+    "examine": "A large fish."
+  },
+  {
+    "ids": "21299",
+    "examine": "Might be worth opening?"
+  },
+  {
+    "ids": "21400,21402,21399",
+    "examine": "A sturdy metal door."
+  },
+  {
+    "ids": "21395",
+    "examine": "I can climb this."
+  },  
+  {
+    "ids": "21403,21405",
+    "examine": "A closed, sturdy metal door."
+  },
+  {
+    "ids": "21404",
+    "examine": "An open, sturdy metal door."
+  },
+  {
+    "ids": "21437",
+    "examine": "A display case, full of axes."
+  },   
+  {
+    "ids": "21438",
+    "examine": "A display case, full of swords."
+  },   
+  {
+    "ids": "21439",
+    "examine": "A table, displaying swords."
+  },
+  {
+    "ids": "21441",
+    "examine": "A table for preparing fish."
+  }, 
+  {
+    "ids": "21442",
+    "examine": "A container for storing mineral ores."
+  },
+  {
+    "ids": "21443",
+    "examine": "A table for working with ores."
+  },
+  {
+    "ids": "21444",
+    "examine": "A pile of raw mineral ores."
+  },  
+  {
+    "ids": "21445,21446",
+    "examine": "A shield display."
+  },
+  {
+    "ids": "21447",
+    "examine": "A shelf, displaying armour."
+  },
+  {
+    "ids": "21455",
+    "examine": "I can climb down these stairs."
+  },  
+  {
+    "ids": "21464",
+    "examine": "A sturdy-looking throne."
+  },  
+  {
+    "ids": "21465",
+    "examine": "A stone torch."
+  },
+  {
+    "ids": "21607",
+    "examine": "A chair made from stone."
+  },
+  {
+    "ids": "21608",
+    "examine": "A table with swords on it."
+  },
+  {
+    "ids": "21611",
+    "examine": "A bed to sleep in."
+  },
+  {
+    "ids": "21612",
+    "examine": "A stone crate with some stuff in it."
+  },   
+  {
+    "ids": "21609,21610",
+    "examine": "A table with plates and mugs on it."
+  },
+  {
+    "ids": "21614,21615",
+    "examine": "A shelf with some cups on it."
+  },
+  {
+    "ids": "21637",
+    "examine": "A Fremennik flag."
+  },
+  {
+    "ids": "21834",
+    "examine": "A short longboat!"
+  },
+  {
+    "ids": "29945",
+    "examine": "Contains traces of summoning energy."
+  },  
+  {
+    "ids": "37051",
+    "examine": "I wonder what this spooky contains."
+  }  
 ]

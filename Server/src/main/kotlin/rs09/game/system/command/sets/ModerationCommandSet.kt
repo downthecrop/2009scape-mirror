@@ -1,6 +1,7 @@
 package rs09.game.system.command.sets
 
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.info.Rights
 import rs09.game.system.command.Command
 import core.game.system.task.Pulse
 import rs09.game.world.GameWorld
@@ -58,6 +59,11 @@ class ModerationCommandSet : CommandSet(Command.Privilege.MODERATOR){
             if(otherPlayer == null){
                 reject(player, "Can not find $name in the player list!")
             }
+
+            if (otherPlayer?.rights == Rights.ADMINISTRATOR){
+                reject(player, "You cannot jail $name, they are a god. Nice try though ${player.username}!")
+            }
+
             notify(player, "Jailing ${otherPlayer!!.username} for $timeSeconds seconds.")
             notify(otherPlayer, "${player.username} has jailed you for $timeSeconds seconds.")
             GameWorld.Pulser.submit(object : Pulse(3){

@@ -1,15 +1,16 @@
 package rs09.game.system.command.sets
 
 import api.ContentAPI
+import api.InputType
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
 import core.game.ge.OfferState
 import core.game.node.`object`.Scenery
+import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
-import core.game.node.entity.player.link.RunScript
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.communication.CommunicationInfo
@@ -33,8 +34,10 @@ import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
+import java.lang.Integer.max
 import java.util.*
 import java.util.concurrent.TimeUnit
+import kotlin.collections.ArrayList
 
 @Initializable
 class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
@@ -134,44 +137,20 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         /**
          * Shows the player a list of currently active GE sell offers
          */
-        define("ge", Command.Privilege.STANDARD) { player, _ ->
-            val offers = HashMap<Int,Int>()
-            for (offerIDs in OfferManager.OFFERS_BY_ITEMID) {
-                var totalOffered = 0
-                for (offer in offerIDs.value) {
-                    if (offer.offerState != OfferState.PENDING && offer.sell) {
-                        totalOffered += offer.amountLeft
-                    }
-                }
-                if (totalOffered != 0) {
-                    offers[offerIDs.key] = totalOffered
-                }
+        define("ge", Command.Privilege.STANDARD) { player, args ->
+            if(args.size < 2){
+                reject(player, "Usage: ::ge mode", "Available modes: buying, selling, search")
             }
-            for (offerIDs in OfferManager.BOT_OFFERS) {
-                if (offerIDs.value > 0) {
-                    if (offers[offerIDs.key] == null) {
-                        offers[offerIDs.key] = offerIDs.value
-                    } else {
-                        offers[offerIDs.key] = offers[offerIDs.key]!! + offerIDs.value
-                    }
-                }
-            }
-            for (i in 0..310) {
-                player!!.packetDispatch.sendString("", 275, i)
-            }
-            val offerList = offers.keys.map { "${ItemDefinition.forId(it).name} - ${offers[it]}" }.sorted()
 
-            var lineId = 11
-            player!!.packetDispatch.sendString("Active Sell Offers", 275, 2)
-            var counter = 0
-            for(i in 0..299) {
-                val offer = offerList.elementAtOrNull(i)
-                if (offer != null)
-                    player.packetDispatch.sendString(offer, 275, lineId++)
-                else
-                    player.packetDispatch.sendString("", 275, lineId++)
+            val mode = args[1]
+            when(mode){
+                "buying" -> showGeBuy(player)
+                "selling" -> showGeSell(player)
+                "search" -> ContentAPI.sendInputDialogue(player, InputType.STRING_LONG, "Enter search term:"){value ->
+                    showOffers(player, value as String)
+                }
+                else -> reject(player, "Invalid mode used. Available modes are: buying, selling, search")
             }
-            player.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
         }
         /**
          * ==================================================================================
@@ -202,7 +181,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             if (player.attributes.containsKey("replyTo")) {
                 player.setAttribute("keepDialogueAlive", true)
                 val replyTo = player.getAttribute("replyTo", "").replace("_".toRegex(), " ")
-                ContentAPI.sendInputDialogue(player, false ,StringUtils.formatDisplayName(replyTo)){value ->
+                ContentAPI.sendInputDialogue(player, InputType.MESSAGE ,StringUtils.formatDisplayName(replyTo)){ value ->
                     CommunicationInfo.sendMessage(player, replyTo.toLowerCase(), value as String)
                     player.removeAttribute("keepDialogueAlive")
                 }
@@ -333,7 +312,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 reject(player,"Syntax: ::getobjectvarp objectid")
             }
             val objectID = args[1].toInt()
-            notify(player, "${VarbitDefinition.forObjectID(ObjectDefinition.forId(objectID).varbitID).configId}")
+            notify(player, "${VarbitDefinition.forObjectID(SceneryDefinition.forId(objectID).varbitID).configId}")
         }
 
         define("togglexp",Command.Privilege.STANDARD){ player, args ->
@@ -479,28 +458,133 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 notify(player,"No parent NPC found.")
             }
         }
+    }
 
-
-        define("bury"){player,args ->
-            if(args.size < 2){
-                reject(player,"Usage: ::bury itemid")
-            }
-
-            val itemId = args[1].toInt()
-            val def = ItemDefinition.forId(itemId)
-
-            SpadeDigListener.registerListener(player.location){pl ->
-                if(player.getAttribute("${player.location.toString()}:$itemId",false)){
-                    pl.sendMessage("You dig and find nothing.")
-                    return@registerListener
+    fun showGeSell(player: Player){
+        val offers = HashMap<Int,Int>()
+        for (offerIDs in OfferManager.OFFERS_BY_ITEMID) {
+            var totalOffered = 0
+            for (offer in offerIDs.value) {
+                if (offer.offerState != OfferState.PENDING && offer.sell) {
+                    totalOffered += offer.amountLeft
                 }
-                pl.dialogueInterpreter.sendDialogue("You dig and find a ${def.name}!")
-                player.inventory.add(Item(itemId))
-                player.setExpirableAttribute("/save:${player.location.toString()}:$itemId",true,TimeUnit.SECONDS.toMillis(10))
             }
-
-            notify(player,"You buried a ${def.name} at ${player.location}")
+            if (totalOffered != 0) {
+                offers[offerIDs.key] = totalOffered
+            }
+        }
+        for (offerIDs in OfferManager.BOT_OFFERS) {
+            if (offerIDs.value > 0) {
+                if (offers[offerIDs.key] == null) {
+                    offers[offerIDs.key] = offerIDs.value
+                } else {
+                    offers[offerIDs.key] = offers[offerIDs.key]!! + offerIDs.value
+                }
+            }
         }
 
+        val offerList = offers.keys.map { "${ItemDefinition.forId(it).name} - ${offers[it]}" }.sorted()
+
+        var lineId = 11
+        setScrollTitle(player, "Active Sell Offers")
+        for(i in 0..299) {
+            val offer = offerList.elementAtOrNull(i)
+            if (offer != null)
+                ContentAPI.setInterfaceText(player, offer, Components.QUESTJOURNAL_SCROLL_275, lineId++)
+            else
+                ContentAPI.setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+        }
+        ContentAPI.openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
     }
+
+    fun showGeBuy(player: Player){
+        val offers = HashMap<Int,Int>()
+        for (offerIDs in OfferManager.OFFERS_BY_ITEMID) {
+            var totalOffered = 0
+            for (offer in offerIDs.value) {
+                if (offer.offerState != OfferState.PENDING && !offer.sell) {
+                    totalOffered += offer.amountLeft
+                }
+            }
+            if (totalOffered != 0) {
+                offers[offerIDs.key] = totalOffered
+            }
+        }
+        val offerList = offers.keys.map { "${ContentAPI.itemDefinition(it).name} - ${offers[it]}" }.sorted()
+
+        var lineId = 11
+        setScrollTitle(player, "Active Buy Offers")
+        for(i in 0..299) {
+            val offer = offerList.elementAtOrNull(i)
+            if (offer != null)
+                ContentAPI.setInterfaceText(player, offer, Components.QUESTJOURNAL_SCROLL_275, lineId++)
+            else
+                ContentAPI.setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+        }
+        ContentAPI.openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+    }
+
+    fun showOffers(player: Player, searchTerm: String){
+        val fakeOffers = ArrayList<FakeOffer>()
+
+        OfferManager.OFFERS_BY_ITEMID.forEach { (id, offers) ->
+            if(searchTerm.toLowerCase().contains(ContentAPI.itemDefinition(id).name.toLowerCase()) || ContentAPI.itemDefinition(id).name.toLowerCase().contains(searchTerm.toLowerCase())){
+                offers.forEach {
+                    fakeOffers.add(FakeOffer(it.sell, ContentAPI.itemDefinition(id).name, it.amount))
+                }
+            }
+        }
+
+        OfferManager.BOT_OFFERS.forEach{ (id, amount) ->
+            val name = ContentAPI.getItemName(id)
+            if(searchTerm.toLowerCase().contains(name) || name.toLowerCase().contains(searchTerm.toLowerCase()))
+                fakeOffers.add(FakeOffer(true, ContentAPI.getItemName(id), amount))
+        }
+
+        val buyingList = fakeOffers.filter { !it.sell }
+        val sellingList = fakeOffers.filter { it.sell }
+
+        val buyingMap = HashMap<String, Int>()
+        val sellingMap = HashMap<String, Int>()
+
+        buyingList.forEach {
+            if(buyingMap[it.name] == null) buyingMap[it.name] = it.amount
+            else buyingMap[it.name] = buyingMap[it.name]?.plus(it.amount) ?: 0
+        }
+
+        sellingList.forEach {
+            if(sellingMap[it.name] == null) sellingMap[it.name] = it.amount
+            else sellingMap[it.name] = sellingMap[it.name]?.plus(it.amount) ?: 0
+        }
+
+        val buyList = buyingMap.map { (name,amount) -> "[Buying] $name - $amount" }.sortedBy { it.length }.toMutableList()
+        val sellList = sellingMap.map { (name, amount) -> "[Selling] $name - $amount" }.sortedBy { it.length }.toMutableList()
+
+        sellList.reverse()
+        sellList.add("<str>                                                                                             </str>")
+        sellList.reverse()
+
+        SystemLogger.logInfo("bl: ${buyList.size} sl: ${sellList.size}")
+
+        setScrollTitle(player, "Results for \"$searchTerm\"")
+
+        if(buyList.isEmpty()){
+            buyList.add("[Buying] Nothing!")
+        }
+        if(sellList.size == 1){
+            sellList.add("[Selling] Nothing!")
+        }
+        var lineId = 11
+        for(i in 0..299) {
+            val offer = if(i < buyList.size) buyList.getOrNull(i) else sellList.getOrNull(i - (buyList.size))
+            ContentAPI.setInterfaceText(player, offer ?: "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+        }
+        ContentAPI.openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+    }
+
+    fun setScrollTitle(player: Player, text: String){
+        ContentAPI.setInterfaceText(player, text, Components.QUESTJOURNAL_SCROLL_275, 2)
+    }
+
+    class FakeOffer(val sell: Boolean,val name: String,val amount: Int)
 }

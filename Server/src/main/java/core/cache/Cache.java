@@ -9,7 +9,7 @@ import core.cache.def.impl.AnimationDefinition;
 import core.cache.def.impl.GraphicDefinition;
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import rs09.game.system.SystemLogger;
 
 /**
@@ -67,7 +67,7 @@ public final class Cache {
 			}
 		}
 		ItemDefinition.parse();
-		ObjectDefinition.parse();
+		SceneryDefinition.parse();
 	}
 
 	/**
@@ -216,7 +216,7 @@ public final class Cache {
 	}
 
 	/**
-	 * Method used to return the {@link ObjectDefinition} size.
+	 * Method used to return the {@link SceneryDefinition} size.
 	 *
 	 * @return the size.
 	 */

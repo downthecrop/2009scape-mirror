@@ -668,25 +668,7 @@ public class TeleportManager {
 
 					@Override
 					public void start() {
-						player = ((Player) entity);
-						if (TutorialSession.getExtension(player).getStage() < TutorialSession.MAX_STAGE) {
-							stop();
-							return;
-						}
-						if (player.getSavedData().getGlobalData().getMinigameTeleportDelay() > System.currentTimeMillis()) {
-							long milliseconds = player.getSavedData().getGlobalData().getMinigameTeleportDelay() - System.currentTimeMillis();
-							int minutes = (int) Math.round(milliseconds / 60000);
-							if (minutes > 30) {
-								player.getSavedData().getGlobalData().setMinigameTeleportDelay(System.currentTimeMillis() + 600000);
-								milliseconds = player.getSavedData().getGlobalData().getMinigameTeleportDelay() - System.currentTimeMillis();
-								minutes = (int) Math.round(milliseconds / 60000);
-							}
-							if (minutes != 0) {
-								player.getPacketDispatch().sendMessage("You need to wait another " + minutes + " " + (minutes == 1 ? "minute" : "minutes") + " to use the finder again.");
-								stop();
-								return;
-							}
-						}
+
 						super.start();
 					}
 
@@ -694,7 +676,7 @@ public class TeleportManager {
 					public void stop() {
 						super.stop();
 						entity.getAnimator().forceAnimation(new Animation(-1));
-						player.graphics(new Graphics(-1));
+						entity.graphics(new Graphics(-1));
 					}
 				};
 			}

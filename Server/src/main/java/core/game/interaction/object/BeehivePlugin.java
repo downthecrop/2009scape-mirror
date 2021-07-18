@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import org.rs09.consts.Items;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -59,8 +59,8 @@ public class BeehivePlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ObjectDefinition.forId(68).getHandlers().put("option:take-from", this);
-        ObjectDefinition.forId(68).getHandlers().put("option:take-honey", this);
+        SceneryDefinition.forId(68).getHandlers().put("option:take-from", this);
+        SceneryDefinition.forId(68).getHandlers().put("option:take-honey", this);
         return this;
     }
 

@@ -1,7 +1,7 @@
 package core.game.interaction.object.dmc;
 
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.OptionHandler;
 import core.game.interaction.UseWithHandler;
@@ -23,11 +23,11 @@ public final class DwarfMultiCannonPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ItemDefinition.forId(6).getHandlers().put("option:set-up", this);
-		ObjectDefinition.forId(6).getHandlers().put("option:fire", this);
-		ObjectDefinition.forId(6).getHandlers().put("option:pick-up", this);
-		ObjectDefinition.forId(7).getHandlers().put("option:pick-up", this);
-		ObjectDefinition.forId(8).getHandlers().put("option:pick-up", this);
-		ObjectDefinition.forId(9).getHandlers().put("option:pick-up", this);
+		SceneryDefinition.forId(6).getHandlers().put("option:fire", this);
+		SceneryDefinition.forId(6).getHandlers().put("option:pick-up", this);
+		SceneryDefinition.forId(7).getHandlers().put("option:pick-up", this);
+		SceneryDefinition.forId(8).getHandlers().put("option:pick-up", this);
+		SceneryDefinition.forId(9).getHandlers().put("option:pick-up", this);
 		UseWithHandler.addHandler(6, UseWithHandler.OBJECT_TYPE, new UseWithHandler(2) {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {

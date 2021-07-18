@@ -2,7 +2,7 @@ package core.game.node.entity.skill.runecrafting;
 
 import core.cache.def.impl.VarbitDefinition;
 import core.cache.def.impl.ItemDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
@@ -42,7 +42,7 @@ public final class TiaraPlugin implements Plugin<Object> {
 				break;
 			}
 			MysteriousRuin ruin = MysteriousRuin.forTalisman(Tiara.forItem(item).getTalisman());
-			player.getConfigManager().set(CONFIG, 1 << VarbitDefinition.forObjectID(ObjectDefinition.forId(ruin.getObject()[0]).getVarbitID()).getBitShift(), true);
+			player.getConfigManager().set(CONFIG, 1 << VarbitDefinition.forObjectID(SceneryDefinition.forId(ruin.getObject()[0]).getVarbitID()).getBitShift(), true);
 			break;
 		case "unequip":
 			final Item other = args.length == 2 ? null : (Item) args[2];
@@ -54,7 +54,7 @@ public final class TiaraPlugin implements Plugin<Object> {
 				Tiara tiara = Tiara.forItem(other);
 				if (tiara != null) {
 					MysteriousRuin r = MysteriousRuin.forTalisman(tiara.getTalisman());
-					player.getConfigManager().set(CONFIG, 1 << VarbitDefinition.forObjectID(ObjectDefinition.forId(r.getObject()[0]).getVarbitID()).getBitShift(), true);
+					player.getConfigManager().set(CONFIG, 1 << VarbitDefinition.forObjectID(SceneryDefinition.forId(r.getObject()[0]).getVarbitID()).getBitShift(), true);
 					break;
 				}
 			}

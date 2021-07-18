@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
@@ -67,10 +67,10 @@ public class ThievingGuidePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(7236).getHandlers().put("option:crack", this);// wall
+		SceneryDefinition.forId(7236).getHandlers().put("option:crack", this);// wall
 		// safe.
-		ObjectDefinition.forId(7227).getHandlers().put("option:disarm", this);// trap
-		ObjectDefinition.forId(7256).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(7227).getHandlers().put("option:disarm", this);// trap
+		SceneryDefinition.forId(7256).getHandlers().put("option:open", this);
 		return this;
 	}
 

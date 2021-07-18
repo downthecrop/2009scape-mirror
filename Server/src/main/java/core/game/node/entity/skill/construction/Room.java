@@ -6,6 +6,7 @@ import core.game.node.object.Scenery;
 import core.game.node.object.SceneryBuilder;
 import core.game.world.map.*;
 import rs09.game.node.entity.skill.construction.Hotspot;
+import rs09.game.system.SystemLogger;
 
 /**
  * Represents a room.
@@ -151,11 +152,11 @@ public final class Room {
 				spot.setCurrentY(pos[1]);
 			}
 		}
-		if (!house.isBuildingMode()) {
-			removeHotspots(housePlane, house, chunk);
-		}
 		if (rotation != Direction.NORTH && chunk.getRotation() == 0) {
 			chunk.rotate(rotation);
+		}
+		if (!house.isBuildingMode()) {
+			removeHotspots(housePlane, house, chunk);
 		}
 	}
 	
@@ -176,13 +177,6 @@ public final class Room {
 								chunk.remove(object);
 							}
 						} else {
-//							BuildHotspot hs = BuildHotspot.forId(object.protocol(), house.getStyle());
-//							for (Hotspot h : hotspots) {
-//								if (h != null && h.getHotspot() == hs && h.getHotspot().getObjectIds() == null) {
-//									chunk.remove(object);
-//									break;
-//								}
-//							}
 							chunk.remove(object);
 						}
 					}
