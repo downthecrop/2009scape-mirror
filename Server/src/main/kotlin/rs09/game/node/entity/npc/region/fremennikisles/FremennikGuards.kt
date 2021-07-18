@@ -1,4 +1,4 @@
-package rs09.game.node.entity.npc.other
+package rs09.game.node.entity.npc.region.fremennikisles
 
 import api.ContentAPI
 import core.game.node.entity.npc.AbstractNPC
