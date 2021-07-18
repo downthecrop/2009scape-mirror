@@ -604,6 +604,7 @@ public class Shop {
      */
     public int getSellingValue(Item item, Player player) {
         if (!item.getDefinition().isUnnoted()) {
+            player.setAttribute("shop:originalId",item.getId());
             item = new Item(item.getNoteChange(), item.getAmount());
         }
         int amount = getContainer(1).getAmount(item);
@@ -622,8 +623,10 @@ public class Shop {
      * @return the selling value.
      */
     private int getSellValue(Player player, int amount, Item item) {
-        if(item.getAmount() > ContentAPI.amountInInventory(player, item.getId())){
-            item.setAmount(ContentAPI.amountInInventory(player, item.getId()));
+        int id = player.getAttribute("shop:originalId",item.getId());
+        if(item.getAmount() > ContentAPI.amountInInventory(player, id)){
+            item.setAmount(ContentAPI.amountInInventory(player, id));
+            player.removeAttribute("shop:originalId");
         }
         double diff = item.getDefinition().isStackable() ? 0.005 : 0.05;
         double maxMod = 1.0 - (amount * diff);
@@ -635,6 +638,7 @@ public class Shop {
             minMod = 0.25;
         }
         double mod = (maxMod + minMod) / 2;
+        SystemLogger.logInfo("" + item.getDefinition().getAlchemyValue(highAlch) + " " + mod + " " + item.getAmount());
         int value = (int) (item.getDefinition().getAlchemyValue(highAlch) * mod * item.getAmount());
         if(item.getId() == 12183){
             value = 25 * item.getAmount();

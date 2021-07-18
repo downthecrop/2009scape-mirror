@@ -273,6 +273,8 @@ public enum WoodcuttingNode {
                 experience = 175.0;
                 level = 60;
                 rewardAmount = 40;
+                tierModLow = 2;
+                tierModHigh = 6.25;
                 break;
             case 16:
                 reward = 1513;
