@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.construction.decoration.study
 
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -20,9 +20,9 @@ import java.util.concurrent.TimeUnit
 class TelescopePlugin : OptionHandler() {
     @Throws(Throwable::class)
     override fun newInstance(arg: Any?): Plugin<Any?>? {
-        ObjectDefinition.forId(13656).handlers["option:observe"] = this
-        ObjectDefinition.forId(13657).handlers["option:observe"] = this
-        ObjectDefinition.forId(13658).handlers["option:observe"] = this
+        SceneryDefinition.forId(13656).handlers["option:observe"] = this
+        SceneryDefinition.forId(13657).handlers["option:observe"] = this
+        SceneryDefinition.forId(13658).handlers["option:observe"] = this
         return this
     }
 
@@ -31,7 +31,7 @@ class TelescopePlugin : OptionHandler() {
         val delay: Int = 25000 + (25000 / 3)
         val timeLeft = delay - star.ticks
         val fakeTimeLeftBecauseFuckPlayers = TimeUnit.MILLISECONDS.toMinutes(timeLeft * 600L) + if(RandomFunction.random(0,100) % 2 == 0) 2 else -2
-        val obj = node?.asObject() as Scenery
+        val obj = node?.asScenery() as Scenery
         player?.lock()
         player?.animate(ANIMATION)
         player?.interfaceManager?.open(Component(782)).also { player?.unlock()

@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.thieving;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.DoorActionHandler;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
@@ -39,8 +39,8 @@ public class PickableDoorHandler extends OptionHandler {
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         for (int i : DOORS) {
-            ObjectDefinition.forId(i).getHandlers().put("option:pick-lock", this);
-            ObjectDefinition.forId(i).getHandlers().put("option:open", this);
+            SceneryDefinition.forId(i).getHandlers().put("option:pick-lock", this);
+            SceneryDefinition.forId(i).getHandlers().put("option:open", this);
         }
         pickableDoors.add(new PickableDoor(new Location[]{Location.create(2672, 3308, 0)}, 1, 3.8));
         pickableDoors.add(new PickableDoor(new Location[]{Location.create(2672, 3301, 0)}, 14, 15));
@@ -48,6 +48,7 @@ public class PickableDoorHandler extends OptionHandler {
         pickableDoors.add(new PickableDoor(new Location[]{Location.create(3190, 3957, 0)}, 32, 25, true));
         pickableDoors.add(new PickableDoor(new Location[]{Location.create(2565, 3356, 0)}, 46, 37.5));
         pickableDoors.add(new PickableDoor(new Location[]{Location.create(2579, 3286, 1)}, 61, 50));
+        pickableDoors.add(new PickableDoor(new Location[]{Location.create(2579, 3307, 1)}, 61, 50));
         pickableDoors.add(new PickableDoor(new Location[]{Location.create(3018, 3187, 0)}, 1, 0.0));
         pickableDoors.add(new PickableDoor(new Location[]{Location.create(2601, 9482, 0)}, 82, 0.0, true));
         return this;

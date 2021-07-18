@@ -17,12 +17,12 @@ class IsafdarListeners : InteractionListener() {
     val inside = Location.create(2314, 9624, 0)
 
     override fun defineListeners() {
-        on(CAVE_ENTRANCE,OBJECT,"enter"){player,node ->
+        on(CAVE_ENTRANCE,SCENERY,"enter"){ player, node ->
             player.teleport(inside)
             return@on true
         }
 
-        on(CAVE_EXIT,OBJECT,"exit"){player,node ->
+        on(CAVE_EXIT,SCENERY,"exit"){ player, node ->
             player.teleport(outside)
             return@on true
         }

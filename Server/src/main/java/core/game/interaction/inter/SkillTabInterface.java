@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -53,20 +54,6 @@ public final class SkillTabInterface extends ComponentPlugin {
 				p.sendMessage("You must be inside Edgeville bank to set levels.");
 				return false;
 			}
-			p.getDialogueInterpreter().sendInput(true, "Enter the target level: ");
-			p.setAttribute("runscript", new RunScript() {
-				@Override
-				public boolean handle() {
-					final int target_level = Integer.parseInt((String) getValue());
-					if (target_level > 99 || target_level == -1) {
-						player.getPacketDispatch().sendMessage("Invalid target level.");
-						return true;
-					}
-					p.getSkills().setStaticLevel(config.getSkillId(), target_level);
-					p.getSkills().setLevel(config.getSkillId(), target_level);
-					return true;
-				}
-			});
 		}
 		return true;
 	}

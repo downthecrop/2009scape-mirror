@@ -122,14 +122,14 @@ public final class DynamicRegion extends Region {
 				Location loc = l.transform((x - baseX) << 6, (y - baseY) << 6, 0);
 				DynamicRegion region = copy(regionId, loc);
 				region.setBorders(border);
-				Region r = RegionManager.getRegionCache().get(region.getId());
+				Region r = RegionManager.forId(region.getId());
 				if (r != null) {
 					for (int z = 0; z < 4; z++) {
 						region.getPlanes()[z].getPlayers().addAll(r.getPlanes()[z].getPlayers());
 						region.getPlanes()[z].getNpcs().addAll(r.getPlanes()[z].getNpcs());
 					}
 				}
-				RegionManager.getRegionCache().put(region.getId(), region);
+				RegionManager.addRegion(region.getId(), region);
 				regions.add(region);
 			}
 		}

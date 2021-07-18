@@ -1,6 +1,6 @@
 package core.game.interaction.city.lumbridge;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.OptionHandler;
@@ -14,7 +14,7 @@ public class GnomeCopterSign extends OptionHandler {
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         new SignDialogue().init();
-        ObjectDefinition.forId(30037).getHandlers().put("option:read",this);
+        SceneryDefinition.forId(30037).getHandlers().put("option:read",this);
         return this;
     }
 

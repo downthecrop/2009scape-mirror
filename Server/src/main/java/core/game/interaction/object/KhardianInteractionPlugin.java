@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
@@ -49,7 +49,7 @@ public final class KhardianInteractionPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(2670).getHandlers().put("option:cut", this);
+		SceneryDefinition.forId(2670).getHandlers().put("option:cut", this);
 		return this;
 	}
 

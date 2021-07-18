@@ -1,7 +1,7 @@
 package core.game.content.zone.rellekka;
 
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.agility.AgilityHandler;
@@ -49,13 +49,11 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
-				NPCDefinition.forId(5507).getHandlers().put("option:ferry-rellekka", this);
 				return this;
 			}
 
 			@Override
 			public boolean handle(Player player, Node node, String option) {
-				sail(player, "Relleka", new Location(2644, 3710, 0));
 				return true;
 			}
 
@@ -107,11 +105,6 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 					return true;
 				}
 				break;
-			case 5508:
-				if (option.getName().equals("Ferry-Neitiznot")) {
-					sail(player, "Neitiznot", new Location(2310, 3782, 0));
-				}
-				return true;
 			}
 		}
 		return super.interact(e, target, option);
@@ -128,35 +121,6 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 	}
 
 	/**
-	 * Sails a player using the relleka ships.
-	 * @param player the player.
-	 * @param name the name.
-	 * @param destination the destination.
-	 */
-	public static void sail(final Player player, final String name, final Location destination) {
-		player.lock();
-		player.getInterfaceManager().open(new Component(224));
-		player.addExtension(LogoutTask.class, new LocationLogoutTask(5, destination));
-		GameWorld.getPulser().submit(new Pulse(1, player) {
-			int count;
-
-			@Override
-			public boolean pulse() {
-				switch (++count) {
-				case 5:
-					player.unlock();
-					player.getInterfaceManager().close();
-					player.getProperties().setTeleportLocation(destination);
-					player.getDialogueInterpreter().sendDialogue("The ship arrives at " + name + ".");
-					return true;
-				}
-				return false;
-			}
-
-		});
-	}
-
-	/**
 	 * Handles options related to relleka.
 	 * @author Vexia
 	 */
@@ -164,10 +128,10 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			ObjectDefinition.forId(4616).getHandlers().put("option:cross", this);
-			ObjectDefinition.forId(4615).getHandlers().put("option:cross", this);
-			ObjectDefinition.forId(5847).getHandlers().put("option:climb-over", this);
-			ObjectDefinition.forId(5008).getHandlers().put("option:enter",this);
+			SceneryDefinition.forId(4616).getHandlers().put("option:cross", this);
+			SceneryDefinition.forId(4615).getHandlers().put("option:cross", this);
+			SceneryDefinition.forId(5847).getHandlers().put("option:climb-over", this);
+			SceneryDefinition.forId(5008).getHandlers().put("option:enter",this);
 			return this;
 		}
 

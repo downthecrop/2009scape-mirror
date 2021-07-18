@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.construction.decoration.portalchamber;
 
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.OptionHandler;
@@ -105,12 +105,12 @@ public class PortalChamberPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(13639).getHandlers().put("option:direct-portal", this);
-		ObjectDefinition.forId(13639).getHandlers().put("option:scry", this);
-		ObjectDefinition.forId(13640).getHandlers().put("option:direct-portal", this);
-		ObjectDefinition.forId(13641).getHandlers().put("option:direct-portal", this);
+		SceneryDefinition.forId(13639).getHandlers().put("option:direct-portal", this);
+		SceneryDefinition.forId(13639).getHandlers().put("option:scry", this);
+		SceneryDefinition.forId(13640).getHandlers().put("option:direct-portal", this);
+		SceneryDefinition.forId(13641).getHandlers().put("option:direct-portal", this);
 		for (int i = 13615; i <= 13635; i++) {
-			ObjectDefinition.forId(i).getHandlers().put("option:enter", this);
+			SceneryDefinition.forId(i).getHandlers().put("option:enter", this);
 		}
 		PluginManager.definePlugin(new DirectPortalDialogue());
 		return this;
@@ -118,7 +118,7 @@ public class PortalChamberPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		Scenery object = node.asObject();
+		Scenery object = node.asScenery();
 		switch (option) {
 			case "direct-portal":
 				if (!player.getHouseManager().isBuildingMode()) {

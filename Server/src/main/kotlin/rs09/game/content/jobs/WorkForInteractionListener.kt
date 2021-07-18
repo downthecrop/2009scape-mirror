@@ -8,6 +8,7 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import java.util.concurrent.TimeUnit
 
 /**
  * Handles the work-for actions for the NPCs
@@ -59,6 +60,7 @@ class WorkForInteractionListener : InteractionListener() {
 
             if(player.getAttribute("jobs:reset_time",Long.MAX_VALUE) < System.currentTimeMillis()){
                 player.setAttribute("/save:jobs:dailyAmt",0)
+                player.setAttribute("/save:jobs:reset_time",System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24))
             }
 
             if(player.getAttribute("jobs:id",-1) != -1){

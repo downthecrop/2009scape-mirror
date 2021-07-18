@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
-import core.cache.def.impl.ObjectDefinition
+import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
@@ -13,14 +13,14 @@ import java.util.concurrent.TimeUnit
 @Initializable
 class HealthChecker : OptionHandler(){
     override fun newInstance(arg: Any?): Plugin<Any> {
-        ObjectDefinition.setOptionHandler("check-health",this)
+        SceneryDefinition.setOptionHandler("check-health",this)
         return this
     }
 
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         player ?: return false
         node ?: return false
-        val fPatch = FarmingPatch.forObject(node.asObject())
+        val fPatch = FarmingPatch.forObject(node.asScenery())
         fPatch ?: return false
         val patch = fPatch.getPatchFor(player)
         val type = patch.patch.type

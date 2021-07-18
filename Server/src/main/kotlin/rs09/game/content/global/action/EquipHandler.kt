@@ -25,12 +25,7 @@ class EquipHandler : InteractionListener() {
     override fun defineListeners() {
 
         on(ITEM,"equip","wield","wear"){player,node ->
-            GameWorld.Pulser.submit(object : Pulse(){
-                override fun pulse(): Boolean {
-                    handleEquip(player,node)
-                    return true
-                }
-            })
+            handleEquip(player,node)
             return@on true
         }
 
@@ -41,7 +36,7 @@ class EquipHandler : InteractionListener() {
     fun handleEquip(player: Player,node: Node){
         val item = node.asItem()
 
-        if(item == null || player.inventory[item.slot] != item){
+        if(item == null || player.inventory[item.slot] != item || item.name.toLowerCase().contains("goblin mail")){
             return
         }
 
@@ -52,7 +47,9 @@ class EquipHandler : InteractionListener() {
                 return
             }
         }
-        InteractionListeners.run(node.id,player,node,true)
+        if(!InteractionListeners.run(node.id,player,node,true)){
+            return
+        }
 
         val lock = player.locks.equipmentLock
         if (lock != null && lock.isLocked) {

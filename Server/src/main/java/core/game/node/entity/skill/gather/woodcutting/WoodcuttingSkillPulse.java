@@ -188,7 +188,7 @@ public class WoodcuttingSkillPulse extends Pulse {
             if (node.getCharge() < 1) {
                 node.setCharge(1000);
                 if (resource.isFarming()) {
-                    FarmingPatch fPatch = FarmingPatch.forObject(node.asObject());
+                    FarmingPatch fPatch = FarmingPatch.forObject(node.asScenery());
                     if(fPatch != null) {
                         Patch patch = fPatch.getPatchFor(player);
                         patch.setCurrentState(patch.getCurrentState() + 1);

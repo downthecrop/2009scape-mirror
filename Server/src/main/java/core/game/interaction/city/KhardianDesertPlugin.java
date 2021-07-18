@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -19,10 +19,10 @@ public final class KhardianDesertPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		ObjectDefinition.forId(6481).getHandlers().put("option:enter", this);
-		ObjectDefinition.forId(6545).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(6547).getHandlers().put("option:open", this);
-		ObjectDefinition.forId(6551).getHandlers().put("option:use", this);
+		SceneryDefinition.forId(6481).getHandlers().put("option:enter", this);
+		SceneryDefinition.forId(6545).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(6547).getHandlers().put("option:open", this);
+		SceneryDefinition.forId(6551).getHandlers().put("option:use", this);
 		return this;
 	}
 
@@ -35,7 +35,7 @@ public final class KhardianDesertPlugin extends OptionHandler {
 		case 6545:
 		case 6547:
 			// player.getPacketDispatch().sendMessage("A mystical power has sealed this door...");
-			DoorActionHandler.handleAutowalkDoor(player, node.asObject());
+			DoorActionHandler.handleAutowalkDoor(player, node.asScenery());
 			break;
 		case 6551:
 			player.teleport(new Location(3233, 2887, 0));

@@ -2,7 +2,7 @@ package core.game.node.entity.skill.runecrafting;
 
 import core.cache.def.impl.ItemDefinition;
 import core.cache.def.impl.NPCDefinition;
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
@@ -41,14 +41,14 @@ public class RunecraftingPlugin extends OptionHandler {
 		PluginManager.definePlugin(new EnchantTiaraPlugin());
 		PluginManager.definePlugin(new MysteriousRuinPlugin());
 		PluginManager.definePlugin(new CombinationRunePlugin());
-		ObjectDefinition.forId(2492).getHandlers().put("option:use", this);
+		SceneryDefinition.forId(2492).getHandlers().put("option:use", this);
 		NPCDefinition.forId(553).getHandlers().put("option:teleport", this);
 		NPCDefinition.forId(2328).getHandlers().put("option:teleport", this);
-		ObjectDefinition.forId(26849).getHandlers().put("option:climb", this);
-		ObjectDefinition.forId(26850).getHandlers().put("option:climb", this);
-		ObjectDefinition.forId(268).getHandlers().put("option:climb", this);
-		ObjectDefinition.forId(26844).getHandlers().put("option:squeeze-through", this);
-		ObjectDefinition.forId(26845).getHandlers().put("option:squeeze-through", this);
+		SceneryDefinition.forId(26849).getHandlers().put("option:climb", this);
+		SceneryDefinition.forId(26850).getHandlers().put("option:climb", this);
+		SceneryDefinition.forId(268).getHandlers().put("option:climb", this);
+		SceneryDefinition.forId(26844).getHandlers().put("option:squeeze-through", this);
+		SceneryDefinition.forId(26845).getHandlers().put("option:squeeze-through", this);
 		return this;
 	}
 
@@ -130,12 +130,12 @@ public class RunecraftingPlugin extends OptionHandler {
 	 */
 	private void addNodes() {
 		for (Altar altar : Altar.values()) {
-			ObjectDefinition.forId(altar.getObject()).getHandlers().put("option:craft-rune", this);
-			ObjectDefinition.forId(altar.getPortal()).getHandlers().put("option:use", this);
+			SceneryDefinition.forId(altar.getObject()).getHandlers().put("option:craft-rune", this);
+			SceneryDefinition.forId(altar.getPortal()).getHandlers().put("option:use", this);
 		}
 		for (MysteriousRuin ruin : MysteriousRuin.values()) {
 			for (int i : ruin.getObject()) {
-				ObjectDefinition.forId(i).getHandlers().put("option:enter", this);
+				SceneryDefinition.forId(i).getHandlers().put("option:enter", this);
 			}
 		}
 		for (Talisman talisman : Talisman.values()) {

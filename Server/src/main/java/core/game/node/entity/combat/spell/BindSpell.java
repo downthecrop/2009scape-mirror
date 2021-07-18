@@ -110,14 +110,12 @@ public final class BindSpell extends CombatSpell {
 		if (state.getEstimatedHit() == -1) {
 			return;
 		}
-		int tick = 0;
+		int tick = 9;
 		if (getType() == SpellType.BIND) {
 			state.setEstimatedHit(-2);
 		}
-		if (state.getSpell().getSpellId() == 12) {
-			tick = 8;
-		} else if (state.getSpell().getSpellId() == 30) {
-			tick = 16;
+		if (state.getSpell().getSpellId() == 30) {
+			tick = 17;
 		} else if (state.getSpell().getSpellId() == 56) {
 			tick = 25;
 		}

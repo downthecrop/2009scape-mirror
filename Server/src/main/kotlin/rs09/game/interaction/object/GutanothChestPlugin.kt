@@ -18,7 +18,7 @@ class GutanothChestInteractionHandler : InteractionListener(){
 
     override fun defineListeners() {
 
-        on(CHEST,OBJECT,"open"){player,node ->
+        on(CHEST,SCENERY,"open"){ player, node ->
             val delay = player.getAttribute("gutanoth-chest-delay", 0L)
             GameWorld.Pulser.submit(ChestPulse(player,System.currentTimeMillis() > delay, node as Scenery))
             return@on true

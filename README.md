@@ -18,6 +18,7 @@
     ·
     <a href="https://github.com/2009scape/2009Scape/projects">Bug Board</a>
   </p>
+<h3>NOTE: Do not report issues if you are running your own server. Chances are, the fault lies in your misconfiguration of the server or the issue has already long been fixed on live. Essentially: Your server. Your issues. We have enough to worry about with our own server.</h3>
 <h3>ATTENTION: Starting October 5th, 2020 the development team will no longer be providing support for setting up your own server. Do not ping or private message Developers asking how to build the project. This in-depth guide will be continually updated if the building process changes. We are focusing all of our efforts on the development of features and bugfixes for the live server.</h3>
 </p>
 
@@ -28,6 +29,7 @@
 * [About the Project](#about-the-project)
 * [Contributing](#contributing)
 * [Contributing without Building](#contributing-without-building)
+* [Video Setup Tutorial](#video-setup-tutorial)
 * [Getting Started](#getting-started)
   * [Github Setup](#github-setup)
   * [Prerequisites](#prerequisites)
@@ -220,7 +222,7 @@ First follow the [Github-Setup](#github-setup). After you have forked over your 
 1. Navigate to the right hand side of Intellij where it says "Gradle"
     * Gradle is very useful when it comes to running and compiling the project
     * The only tabs we are concerned about are "Client", "Management-Server", and "Server"
-    * Each of these have a "Tasks" folder and an "application" folder
+    * Each of these have a "Tasks" folder and an "application" folder inside of "Tasks"
     <br>
 2. Click on the "application" folder for the Management-Server and double-click "run"
     * The management server is used for things such as player data(not saves), highscores, and world information
@@ -249,6 +251,12 @@ We use the AGPL 3.0 license, which can be found <a href="https://www.gnu.org/lic
 ### Contact
 
 <h4>Reminder: Developer support for setting up your own server ended October 5th, 2020. Do not ping/dm developers about setting up your server.</h4>
+
+
+### Video Setup Tutorial
+Occexe made a nice video showing you how to set it up if you'd prefer that. Check it out here:
+
+[![View Tutorial](http://img.youtube.com/vi/3oQcsZdrRcE/0.jpg)](http://www.youtube.com/watch?v=3oQcsZdrRcE "2009Scape Setup")
 
 
 

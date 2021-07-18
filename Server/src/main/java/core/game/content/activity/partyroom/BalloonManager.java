@@ -3,7 +3,7 @@ package core.game.content.activity.partyroom;
 import java.util.ArrayList;
 import java.util.List;
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
@@ -50,7 +50,7 @@ public final class BalloonManager extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (PartyBalloon balloon : PartyBalloon.values()) {
-			ObjectDefinition.forId(balloon.getBalloonId()).getHandlers().put("option:burst", this);
+			SceneryDefinition.forId(balloon.getBalloonId()).getHandlers().put("option:burst", this);
 		}
 		return this;
 	}
@@ -59,7 +59,7 @@ public final class BalloonManager extends OptionHandler {
 	public boolean handle(Player player, Node node, String option) {
 		switch (option) {
 		case "burst":
-			PartyBalloon.forId(node.getId()).burst(player, node.asObject());
+			PartyBalloon.forId(node.getId()).burst(player, node.asScenery());
 			return true;
 		}
 		return true;

@@ -1,5 +1,6 @@
 package rs09.game.node.entity.skill.gather.mining
 
+import api.ContentAPI
 import core.cache.def.impl.ItemDefinition
 import core.game.container.impl.EquipmentContainer
 import core.game.content.dialogue.FacialExpression
@@ -173,16 +174,16 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             if (!isMiningEssence) {
                 var chance = 282
                 var altered = false
-                if (Item(player.equipment.getId(12)).name.toLowerCase().contains("ring of wealth")) {
+                if (Item(player.equipment.getId(12)).name.toLowerCase().contains("ring of wealth") || ContentAPI.inEquipment(player, Items.RING_OF_THE_STAR_SPRITE_14652)) {
                     chance = (chance / 1.5).toInt()
                     altered = true
                 }
                 val necklace = player.equipment[EquipmentContainer.SLOT_AMULET]
-                if (necklace != null && necklace.id > 1705 && necklace.id < 1713) {
+                if (necklace != null && necklace.id in 1705..1713) {
                     chance = (chance / 1.5).toInt()
                     altered = true
                 }
-                if (RandomFunction.random(chance) == chance / 2) {
+                if (RandomFunction.roll(chance)) {
                     val gem = RandomFunction.rollChanceTable(true, *GEM_REWARDS)[0]
                     player.packetDispatch.sendMessage("You find a " + gem.name + "!")
                     if (!player.inventory.add(gem, player)) {

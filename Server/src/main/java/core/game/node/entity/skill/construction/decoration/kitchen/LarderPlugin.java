@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.construction.decoration.kitchen;
 
 
-import core.cache.def.impl.ObjectDefinition;
+import core.cache.def.impl.SceneryDefinition;
 import core.plugin.Initializable;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.OptionHandler;
@@ -21,9 +21,9 @@ public final class LarderPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		PluginManager.definePlugin(new LarderDialogue());
-		ObjectDefinition.forId(13565).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(13566).getHandlers().put("option:search", this);
-		ObjectDefinition.forId(13567).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(13565).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(13566).getHandlers().put("option:search", this);
+		SceneryDefinition.forId(13567).getHandlers().put("option:search", this);
 		return this;
 	}
 
