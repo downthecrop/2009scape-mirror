@@ -1,6 +1,8 @@
 package rs09.game.ai.general.scriptrepository
 
+import core.game.node.item.Item
 import core.game.world.map.Location
+import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import rs09.game.ai.general.ScriptAPI
 
@@ -11,14 +13,16 @@ import rs09.game.ai.general.ScriptAPI
 class ChickenKiller : Script(){
     var state = State.INIT
     var chickenCounter = 0
-    var overlay: ScriptAPI.BottingOverlay?= null
+    var overlay: ScriptAPI.BottingOverlay? = null
     var startLocation = Location(0,0,0)
     var timer = 3
     var lootFeathers = false
+    var featherNearby = false
+    var currentFeathers = 0
+    val chickenPen = ZoneBorders(3231,3300,3235,3287)
 
     override fun tick() {
         when(state){
-
             State.INIT -> {
                 overlay = scriptAPI.getOverlay()
                 overlay!!.init()
@@ -26,7 +30,7 @@ class ChickenKiller : Script(){
                 overlay!!.setTaskLabel("Chickens KO'd:")
                 overlay!!.setAmount(0)
                 state = State.CONFIG
-                bot.dialogueInterpreter.sendOptions("Loot Feathers?","Yes","No")
+                bot.dialogueInterpreter.sendOptions("Loot Feathers and bury bones?","Yes","No")
                 bot.dialogueInterpreter.addAction{player,button ->
                     lootFeathers = button == 2
                     state = State.KILLING
@@ -51,15 +55,43 @@ class ChickenKiller : Script(){
 
             State.IDLE -> {
                 if(timer-- <= 0){
-                    state = State.LOOTING
+                    featherNearby = scriptAPI.takeNearestGroundItem(Items.FEATHER_314)
+                    currentFeathers = 0
+                    if (featherNearby) {
+                        state = State.LOOTFEATHER
+                    }else{
+                        state = State.LOOTBONES
+                    }
                 }
             }
 
-            State.LOOTING -> {
-                scriptAPI.takeNearestGroundItem(Items.FEATHER_314)
-                state = State.KILLING
+            State.LOOTFEATHER -> {
+                timer = 1
+                if(timer-- >= 0) {
+                    currentFeathers = bot.inventory.getAmount(Items.FEATHER_314)
+                    scriptAPI.takeNearestGroundItem(Items.FEATHER_314)
+                    featherNearby = false
+                }
+                state = State.LOOTBONES
             }
 
+            State.LOOTBONES -> {
+                timer = 1
+                if(timer-- >= 0){
+                    scriptAPI.takeNearestGroundItem(Items.BONES_526)
+                }
+                state = State.BURYBONES
+            }
+
+            State.BURYBONES -> {
+                timer = 1
+                var hasBone = bot.hasItem(Item(Items.BONES_526))
+                var bone = bot.inventory.getItem(Item(Items.BONES_526))
+                if (hasBone) {
+                    bone.interaction.handleItemOption(bot,bone.interaction.get(0),bot.inventory)
+                }
+                state = State.KILLING
+            }
         }
     }
 
@@ -73,6 +105,9 @@ class ChickenKiller : Script(){
         KILLING,
         LOOTING,
         RETURN,
-        CONFIG
+        CONFIG,
+        LOOTFEATHER,
+        LOOTBONES,
+        BURYBONES
     }
 }
