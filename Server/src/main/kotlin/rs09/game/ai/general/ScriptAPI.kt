@@ -213,10 +213,13 @@ class ScriptAPI(private val bot: Player) {
      * @param id the id to look for
      * @author Ceikry
      */
-    fun takeNearestGroundItem(id: Int){
+    fun takeNearestGroundItem(id: Int) : Boolean{
         val item = getNearestGroundItem(id)
-        if(item != null)
+        if(item != null){
             item.interaction?.handle(bot, item.interaction[2])
+            return true
+        }
+        else return false
     }
 
     /**
