@@ -1,106 +1,96 @@
-package core.game.interaction.item;
+package core.game.interaction.item
 
-import core.Util;
-import core.cache.def.impl.ItemDefinition;
-import core.game.world.update.flag.context.Animation;
-import core.game.world.update.flag.context.Graphics;
-import core.plugin.Initializable;
-import core.game.node.entity.skill.Skills;
-import core.game.interaction.OptionHandler;
-import core.game.node.Node;
-import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.TeleportManager.TeleportType;
-import core.game.node.item.Item;
-import core.game.world.map.Location;
-import core.plugin.Plugin;
+import api.ContentAPI
+import core.Util
+import core.cache.def.impl.ItemDefinition
+import core.plugin.Initializable
+import core.game.interaction.OptionHandler
+import core.plugin.Plugin
+import core.game.node.entity.skill.Skills
+import core.game.interaction.item.ExplorersRingPlugin
+import core.game.node.Node
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.TeleportManager.TeleportType
+import core.game.world.map.Location
+import core.game.world.update.flag.context.Animation
+import core.game.world.update.flag.context.Graphics
+import org.rs09.consts.Items
+import rs09.game.interaction.InteractionListener
 
 /**
  * Handles the explorers ring.
  *
  * @author Vexia
  */
-@Initializable
-public class ExplorersRingPlugin extends OptionHandler {
+class ExplorersRingPlugin : InteractionListener() {
 
-    /**
-     * The cabbage port location.
-     */
-    private static final Location CABBAGE_PORT = Location.create(3051, 3291, 0);
+    val RINGS = intArrayOf(Items.EXPLORERS_RING_1_13560, Items.EXPLORERS_RING_2_13561, Items.EXPLORERS_RING_3_13562)
+    val CABBAGE_PORT = Location.create(3051, 3291, 0)
 
-    @Override
-    public Plugin<Object> newInstance(Object arg) throws Throwable {
-        ItemDefinition.forId(13560).getHandlers().put("option:run-replenish", this);
-        ItemDefinition.forId(13561).getHandlers().put("option:run-replenish", this);
-        ItemDefinition.forId(13562).getHandlers().put("option:run-replenish", this);
 
-        ItemDefinition.forId(13561).getHandlers().put("option:low-alchemy", this);
-        ItemDefinition.forId(13562).getHandlers().put("option:low-alchemy", this);
-
-        ItemDefinition.forId(13562).getHandlers().put("option:cabbage-port", this);
-        return this;
-    }
-
-    @Override
-    public boolean handle(Player player, Node node, String option) {
-        final Item item = node.asItem();
-        int level = getLevel(item.getId());
-
-        switch (option) {
-            case "run-replenish":
-                if (player.getSavedData().getGlobalData().getRunReplenishDelay() < System.currentTimeMillis()) {
-                    player.getSavedData().getGlobalData().setRunReplenishCharges(0);
-                    player.getSavedData().getGlobalData().setRunReplenishDelay(Util.nextMidnight(System.currentTimeMillis()));
-                }
-                int charges = player.getSavedData().getGlobalData().getRunReplenishCharges();
-                if (charges >= level) {
-                    player.sendMessage("You have used all the charges you can for one day.");
-                    return true;
-                }
-                player.getSettings().updateRunEnergy(-50);
-                player.getSavedData().getGlobalData().setRunReplenishCharges(charges + 1);
-                player.sendMessage("You feel refreshed as the ring revitalises you and a charge is used up.");
-                player.visualize(new Animation(9988), new Graphics(1733));
-                break;
-            case "low-alchemy":
-                if (player.getSkills().getStaticLevel(Skills.MAGIC) < 21) {
-                    player.sendMessage("You need a Magic level of 21 in order to do that.");
-                    break;
-                }
-                if (player.getSavedData().getGlobalData().getLowAlchemyDelay() < System.currentTimeMillis()) {
-                    player.getSavedData().getGlobalData().setLowAlchemyCharges(0);
-                    player.getSavedData().getGlobalData().setLowAlchemyDelay(Util.nextMidnight(System.currentTimeMillis()));
-                }
-                if (player.getSavedData().getGlobalData().getLowAlchemyCharges() <= 0
-						&& player.getSavedData().getGlobalData().getLowAlchemyDelay() > System.currentTimeMillis()) {
-                    player.sendMessage("You have used all the charges you can for one day.");
-                    return true;
-                }
-                player.sendMessage("You grant yourself with 30 free low alchemy charges."); // todo this implementation is not correct, see https://www.youtube.com/watch?v=UbUIF2Kw_Dw
-                player.getSavedData().getGlobalData().setLowAlchemyCharges(30);
-                break;
-            case "cabbage-port":
-                player.getTeleporter().send(CABBAGE_PORT, TeleportType.CABBAGE);
-                break;
+    override fun defineListeners() {
+        on(RINGS, ITEM, "run-replenish"){player, node ->
+            if (player.savedData.globalData.runReplenishDelay < System.currentTimeMillis()) {
+                player.savedData.globalData.runReplenishCharges = 0
+                player.savedData.globalData.runReplenishDelay = Util.nextMidnight(System.currentTimeMillis())
+            }
+            val charges = player.savedData.globalData.runReplenishCharges
+            if (charges >= getRingLevel(node.id)) {
+                ContentAPI.sendMessage(player,"You have used all the charges you can for one day.")
+                return@on true
+            }
+            player.settings.updateRunEnergy(-50.0)
+            player.savedData.globalData.runReplenishCharges = charges + 1
+            ContentAPI.sendMessage(player,"You feel refreshed as the ring revitalises you and a charge is used up.")
+            ContentAPI.visualize(player, 9988, 1733)
+            return@on true
         }
-        return true;
-    }
 
-    /**
-     * Gets the level of the ring.
-     *
-     * @param itemId The item id.
-     * @return The level.
-     */
-    private int getLevel(int itemId) {
-        switch (itemId) {
-            case 13560:
-                return 1;
-            case 13561:
-                return 2;
-            case 13562:
-                return 3;
+        on(RINGS, ITEM, "low-alchemy"){player, _ ->
+            if (!ContentAPI.hasLevelStat(player, Skills.MAGIC, 21)) {
+                ContentAPI.sendMessage(player,"You need a Magic level of 21 in order to do that.")
+                return@on true
+            }
+            if (player.savedData.globalData.lowAlchemyDelay < System.currentTimeMillis()) {
+                player.savedData.globalData.lowAlchemyCharges = 0
+                player.savedData.globalData.lowAlchemyDelay = Util.nextMidnight(System.currentTimeMillis())
+            }
+            if (player.savedData.globalData.lowAlchemyCharges <= 0 && player.savedData.globalData.lowAlchemyDelay > System.currentTimeMillis()) {
+                ContentAPI.sendMessage(player,"You have used all the charges you can for one day.")
+                return@on true
+            }
+            ContentAPI.sendMessage(player,"You grant yourself with 30 free low alchemy charges.") // todo this implementation is not correct, see https://www.youtube.com/watch?v=UbUIF2Kw_Dw
+            player.savedData.globalData.lowAlchemyCharges = 30
+
+            return@on true
         }
-        return -1;
+
+        on(RINGS, ITEM, "cabbage-port"){player, node ->
+            teleport(player)
+            return@on true
+        }
+
+        on(RINGS, ITEM, "operate", "rub"){player, node ->
+            if(getRingLevel(node.id) < 3){
+                ContentAPI.sendMessage(player, "This item can not be operated.")
+                return@on true
+            }
+
+            teleport(player)
+            return@on true
+        }
     }
 
+    fun teleport(player: Player){
+        ContentAPI.teleport(player, CABBAGE_PORT, TeleportType.CABBAGE)
+    }
+
+    fun getRingLevel(id: Int): Int{
+        return when(id){
+            Items.EXPLORERS_RING_1_13560 -> 1
+            Items.EXPLORERS_RING_2_13561 -> 2
+            Items.EXPLORERS_RING_3_13562 -> 3
+            else -> -1
+        }
+    }
 }
