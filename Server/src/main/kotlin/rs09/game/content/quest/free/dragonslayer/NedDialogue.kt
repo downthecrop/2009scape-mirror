@@ -222,21 +222,23 @@ class NedDialogue(player: Player? = null) : DialoguePlugin(player) {
                 if (diary == null) {
                     diary = player.achievementDiaryManager.getDiary(DiaryType.LUMBRIDGE)
                 }
-                if (diary!!.isComplete(level, false) && !diary!!.isLevelRewarded(level)) {
-                    player("I've done all the hard tasks in my Lumbridge", "Achievement Diary.")
+                if (diary!!.isComplete(level, true) && !diary!!.isLevelRewarded(level)) {
+                    player("I've done all the medium tasks in my Lumbridge", "Achievement Diary.")
                     stage = 950
                 }
-                if (diary!!.isLevelRewarded(level) && diary!!.isComplete(level, true) && !player.hasItem(diary!!.type.getRewards(level)[0])) {
+                else if (diary!!.isLevelRewarded(level) && diary!!.isComplete(level, true) && !player.hasItem(diary!!.type.getRewards(level)[0])) {
                     player("I've seemed to have lost my explorer's ring...")
                     stage = 960
                 }
-                options(
-                    "What is the Achievement Diary?",
-                    "What are the rewards?",
-                    "How do I claim the rewards?",
-                    "See you later."
-                )
-                stage = 901
+                else {
+                    options(
+                        "What is the Achievement Diary?",
+                        "What are the rewards?",
+                        "How do I claim the rewards?",
+                        "See you later."
+                    )
+                    stage = 901
+                }
             }
             901 -> when (buttonId) {
                 1 -> {
