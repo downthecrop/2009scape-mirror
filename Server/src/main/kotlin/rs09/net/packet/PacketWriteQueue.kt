@@ -29,7 +29,7 @@ object PacketWriteQueue {
     @JvmStatic
     fun flush(){
         while(!PacketsToWrite.isEmpty()){
-            val p = PacketsToWrite.poll()
+            val p = PacketsToWrite.poll() ?: continue
             write(p.out,p.context)
         }
     }
