@@ -35,6 +35,7 @@ class GatheringSkillOptionListeners : InteractionListener() {
         on(NPC,"bait"){player,node -> return@on fish(player,node,"bait")}
         on(NPC,"harpoon"){player,node -> return@on fish(player,node,"harpoon")}
         on(NPC,"cage"){player,node -> return@on fish(player,node,"cage")}
+        on(NPC,"fish"){player, node -> return@on fish(player,node,"fish") }
     }
 
     fun fish(player: Player, node: Node, opt: String): Boolean{

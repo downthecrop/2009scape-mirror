@@ -5,6 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
+import org.rs09.consts.Items;
 
 import java.util.HashMap;
 
@@ -25,7 +26,9 @@ public enum FishingOption {
 	BIG_NET(new Item(305), 16, Animation.create(620), null, "net", Fish.MACKEREL, Fish.COD, Fish.BASS, Fish.SEAWEED),
 	N_HARPOON(new Item(311), 76, Animation.create(618), null, "harpoon", Fish.SHARK), 
 	H_NET(new Item(303), 1, Animation.create(621), null, "net", Fish.MONKFISH),
-	C_CAGE(new Item(301), 85, Animation.create(619), new Item(14943), "cage", Fish.DARK_CRAB);
+	C_CAGE(new Item(301), 85, Animation.create(619), new Item(14943), "cage", Fish.DARK_CRAB),
+	KBWANJI_NET(new Item(Items.SMALL_FISHING_NET_303), 5, Animation.create(621), null, "net", Fish.KARAMBWANJI),
+	KARAMBWAN_VES(new Item(Items.KARAMBWAN_VESSEL_3157), 65, Animation.create(1193), new Item(Items.RAW_KARAMBWANJI_3150), "fish", Fish.KARAMBWAN);
 
 	public static HashMap<String,FishingOption> nameMap = new HashMap<>();
 	static{
