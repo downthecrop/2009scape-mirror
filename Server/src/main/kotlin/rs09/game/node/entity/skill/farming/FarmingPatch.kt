@@ -61,7 +61,10 @@ enum class FarmingPatch(val varpIndex: Int, val varpOffset: Int, val type: Patch
     //Spirit Tree
     ETCETERIA_SPIRIT_TREE(507,8,PatchType.SPIRIT_TREE),
     PORT_SARIM_SPIRIT_TREE(507,0,PatchType.SPIRIT_TREE),
-    KARAMJA_SPIRIT_TREE(507,16,PatchType.SPIRIT_TREE);
+    KARAMJA_SPIRIT_TREE(507,16,PatchType.SPIRIT_TREE),
+
+    //Other
+    DRAYNOR_BELLADONNA(512, 16, PatchType.BELLADONNA);
 
     companion object {
         @JvmField
