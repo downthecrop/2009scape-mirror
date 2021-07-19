@@ -30,7 +30,10 @@ class HealthChecker : OptionHandler(){
             return true
         }
 
+        if(!patch.isCheckHealth) return true
+
         player.skills.addExperience(Skills.FARMING,patch.plantable?.checkHealthXP ?: 0.0)
+        patch.isCheckHealth = false
         when(type){
             PatchType.TREE -> patch.setCurrentState(patch.getCurrentState() + 1)
             PatchType.FRUIT_TREE -> patch.setCurrentState(patch.getCurrentState() - 14)
@@ -42,7 +45,7 @@ class HealthChecker : OptionHandler(){
             patch.nextGrowth = TimeUnit.MINUTES.toMillis(45)
         }
 
-        patch.isCheckHealth = false
+        patch.update()
 
         return true
     }
