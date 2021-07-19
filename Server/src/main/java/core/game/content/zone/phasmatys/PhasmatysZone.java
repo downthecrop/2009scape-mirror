@@ -115,27 +115,6 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
                 case 5264:
                     ClimbActionHandler.climb(player, Animation.create(828), Location.create(3654, 3519, 0));
                     return true;
-			/*case 5244:
-				player.getDialogueInterpreter().open(1686, null, true);
-				return true;*/
-                case 11162:
-                case 11163:
-                case 11164:
-                    Scenery obj = (Scenery) target;
-                    switch (option.getName().toLowerCase()) {
-                        case "fill":
-                            player.getPulseManager().run(fillPulse);
-                            return true;
-                        case "wind":
-                            wind(player, obj);
-                            return true;
-                        case "empty":
-                            empty(player, obj);
-                            return true;
-                        case "status":
-                            checkStatus(player, obj);
-                            return true;
-                    }
                 case 5282:
                     worship(player);
                     return true;
