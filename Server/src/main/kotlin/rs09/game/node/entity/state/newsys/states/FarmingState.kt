@@ -113,7 +113,7 @@ class FarmingState(player: Player? = null) : State(player) {
                     }
                 }
 
-                if((savedState - (patch?.plantable?.value ?: 0)) > patch.plantable?.value ?: 0 + patch.currentGrowthStage){
+                if((savedState - (patch?.plantable?.value ?: 0)) > patch.currentGrowthStage){
                     patch.setCurrentState(savedState)
                 } else {
                     patch.setCurrentState((patch.plantable?.value ?: 0) + patch.currentGrowthStage)

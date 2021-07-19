@@ -1,5 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
+import api.ContentAPI
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -23,6 +24,7 @@ class FruitAndBerryPicker : OptionHandler() {
         SceneryDefinition.setOptionHandler("pick-papaya",this)
         SceneryDefinition.setOptionHandler("pick-leaf",this)
         SceneryDefinition.setOptionHandler("pick-from",this)
+        SceneryDefinition.setOptionHandler("pick-fruit",this)
         return this
     }
 
@@ -58,7 +60,7 @@ class FruitAndBerryPicker : OptionHandler() {
         player.pulseManager.run(object : Pulse(animation.duration){
             override fun pulse(): Boolean {
                 player.animator.animate(animation)
-                player.inventory.add(reward)
+                ContentAPI.addItemOrDrop(player,reward.id,reward.amount)
                 player.skills.addExperience(Skills.FARMING,plantable.harvestXP)
                 patch.setCurrentState(patch.getCurrentState() - 1)
 
