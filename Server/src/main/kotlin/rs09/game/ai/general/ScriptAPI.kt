@@ -71,7 +71,7 @@ class ScriptAPI(private val bot: Player) {
             is Item -> InteractionListener.ITEM
             else -> -1
         }
-        val opt: Option? = node.interaction.options.filter { it.name.equals(option, true) }.firstOrNull()
+        val opt: Option? = node.interaction.options.filter {it != null && it.name.equals(option, true) }.firstOrNull()
 
         if(opt == null){
             SystemLogger.logWarn("Invalid option name provided: $option")
