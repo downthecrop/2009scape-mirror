@@ -376,6 +376,8 @@ public final class BankingPlugin extends OptionHandler {
                                         String s = value.toString();
                                         s = s.replace("k","000");
                                         s = s.replace("K","000");
+                                        s = s.replace("m","000000");
+                                        s = s.replace("M","000000");
                                         int val = Integer.parseInt(s);
                                         p.getBank().takeItem(slot, val);
                                         p.getBank().updateLastAmountX(val);

@@ -1,5 +1,6 @@
 package core.net.packet.in;
 
+import api.ContentAPI;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
 import core.net.packet.IncomingPacket;
@@ -29,7 +30,11 @@ public class RunScriptPacketHandler implements IncomingPacket {
 		} else {
 			value = buffer.getInt();
 		}
-		script.invoke(value);
+		try {
+			script.invoke(value);
+		} catch (NumberFormatException nfe){
+			ContentAPI.sendDialogue(player, "That number's a bit large, don't you think?");
+		}
 		player.removeAttribute("runscript");
 	}
 }
