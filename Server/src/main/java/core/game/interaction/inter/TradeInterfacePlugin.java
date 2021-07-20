@@ -72,6 +72,8 @@ public final class TradeInterfacePlugin extends ComponentPlugin {
 					String s = value.toString();
 					s = s.replace("k","000");
 					s = s.replace("K","000");
+					s = s.replace("m","000000");
+					s = s.replace("M","000000");
 					int val = Integer.parseInt(s);
 					module.getContainer().withdraw(slot, val);
 					return Unit.INSTANCE;
