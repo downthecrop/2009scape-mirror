@@ -67,13 +67,16 @@ enum class Plantable(val itemID: Int, val value: Int, val stages: Int, val plant
     RANARR_SEED(5295,39,4,27.0,30.5,0.0,32,PatchType.HERB,Items.GRIMY_RANARR_207),
     TOADFLAX_SEED(5296,47,4,34.0,38.5,0.0,38,PatchType.HERB,Items.GRIMY_TOADFLAX_3049),
     IRIT_SEED(5297,54,4,43.0,48.5,0.0,44,PatchType.HERB,Items.GRIMY_IRIT_209),
-    AVANTOE_SEED(5298,61,4,54.5,61.5,0.0,50,PatchType.HERB,Items.GRIMY_AVANTOE_211),
+    AVANTOE_SEED(5298,204,4,54.5,61.5,0.0,50,PatchType.HERB,Items.GRIMY_AVANTOE_211),
     KWUARM_SEED(5299,68,4,69.0,78.0,0.0,56,PatchType.HERB,Items.GRIMY_KWUARM_213),
     SNAPDRAGON_SEED(5300,75,4,87.5,98.5,0.0,62,PatchType.HERB,Items.GRIMY_SNAPDRAGON_3051),
     CADANTINE_SEED(5301,82,4,106.5,120.0,0.0,67,PatchType.HERB,Items.GRIMY_CADANTINE_215),
     LANTADYME_SEED(5302,89,4,134.5,151.5,0.0,73,PatchType.HERB,Items.GRIMY_LANTADYME_2485),
     DWARF_WEED_SEED(5303,96,4,170.5,192.0,0.0,79,PatchType.HERB,Items.GRIMY_DWARF_WEED_217),
-    TORSTOL_SEED(5304,103,4,199.5,224.5,0.0,85,PatchType.HERB,Items.GRIMY_TORSTOL_219)
+    TORSTOL_SEED(5304,103,4,199.5,224.5,0.0,85,PatchType.HERB,Items.GRIMY_TORSTOL_219),
+
+    //Other
+    BELLADONNA_SEED(5281, 4, 4, 91.0, 128.0, 0.0, 63, PatchType.BELLADONNA, Items.CAVE_NIGHTSHADE_2398)
     ;
 
     constructor(itemID: Int, value: Int, stages: Int, plantingXP: Double, harvestXP: Double, checkHealthXP: Double, requiredLevel: Int, applicablePatch: PatchType, harvestItem: Int, protectionFlower: Plantable)

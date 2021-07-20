@@ -1,5 +1,6 @@
 package core.game.node.entity.player.link.request.trade;
 
+import api.ContentAPI;
 import core.cache.def.impl.ItemDefinition;
 import core.game.container.*;
 import core.game.node.entity.player.Player;
@@ -9,6 +10,8 @@ import rs09.game.world.GameWorld;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
+
+import static rs09.tools.stringtools.StringToolsKt.colorize;
 
 /**
  * Represents the container during a trade session.
@@ -148,10 +151,23 @@ public final class TradeContainer extends Container {
 	 */
 	private boolean tradeable(final Item item) {
 		final ItemDefinition definition = ItemDefinition.forId(item.getId());
+		Player target = TradeModule.getExtension(player).getTarget();
+		boolean playerIsBot = player.getAttribute("not_on_highscores",false);
+		boolean targetIsBot = target.getAttribute("not_on_highscores",false);
+		String playerIP = player.getDetails().getIpAddress();
+		String targetIP = target.getDetails().getIpAddress();
+		String playerMac = player.getDetails().getMacAddress();
+		String targetMac = target.getDetails().getMacAddress();
+		String playerHost = player.getDetails().getCompName();
+		String targetHost = target.getDetails().getCompName();
 		if (item.getId() == 11174 || item.getId() == 11173 || item.getId() == 759) {
 			return true;
 		}
-		if (player.getIronmanManager().isIronman() || TradeModule.getExtension(player).getTarget() != null && TradeModule.getExtension(player).getTarget().getIronmanManager().isIronman()) {
+		if (player.getIronmanManager().isIronman() || target != null && target.getIronmanManager().isIronman()) {
+			return false;
+		}
+		if ((playerIsBot || targetIsBot) && (playerIP.equals(targetIP) || playerMac.equals(targetMac) || playerHost.equals(targetHost))){
+			ContentAPI.sendMessage(player, colorize("%RYou can not trade items with your own bot accounts."));
 			return false;
 		}
 		if (item.getName().equals("Coins") && item.getId() != 995) {
