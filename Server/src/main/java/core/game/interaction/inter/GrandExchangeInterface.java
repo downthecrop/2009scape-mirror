@@ -343,6 +343,8 @@ public class GrandExchangeInterface extends ComponentPlugin {
 				String s = value.toString();
 				s = s.replace("k","000");
 				s = s.replace("K","000");
+				s = s.replace("m","000000");
+				s = s.replace("M","000000");
 				setOfferAmount(player, offer, Integer.parseInt(s));
 				return Unit.INSTANCE;
 			});
@@ -379,6 +381,8 @@ public class GrandExchangeInterface extends ComponentPlugin {
 				String s = value.toString();
 				s = s.replace("k","000");
 				s = s.replace("K","000");
+				s = s.replace("m","000000");
+				s = s.replace("M","000000");
 				setOfferValue(player, offer, Integer.parseInt(s));
 				return Unit.INSTANCE;
 			});
