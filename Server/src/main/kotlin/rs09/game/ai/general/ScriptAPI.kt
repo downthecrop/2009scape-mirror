@@ -9,6 +9,7 @@ import core.game.content.consumable.Food
 import core.game.content.consumable.effects.HealingEffect
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
+import core.game.interaction.Option
 import core.game.node.Node
 import core.game.node.`object`.Scenery
 import core.game.node.entity.Entity
@@ -31,6 +32,8 @@ import org.rs09.consts.Items
 import rs09.game.ai.AIRepository
 import rs09.game.ge.GrandExchangeOffer
 import rs09.game.ge.OfferManager
+import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.InteractionListeners
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.GameWorld
@@ -56,6 +59,26 @@ class ScriptAPI(private val bot: Player) {
      */
     fun distance(n1: Node, n2: Node): Double {
         return sqrt((n1.location.x - n2.location.x.toDouble()).pow(2.0) + (n2.location.y - n1.location.y.toDouble()).pow(2.0))
+    }
+
+    fun interact(bot: Player, node: Node?, option: String){
+
+        if(node == null) return
+
+        val type = when(node){
+            is Scenery -> InteractionListener.SCENERY
+            is NPC -> InteractionListener.NPC
+            is Item -> InteractionListener.ITEM
+            else -> -1
+        }
+        val opt: Option? = node.interaction.options.filter {it != null && it.name.equals(option, true) }.firstOrNull()
+
+        if(opt == null){
+            SystemLogger.logWarn("Invalid option name provided: $option")
+            return
+        }
+
+        if(!InteractionListeners.run(node.id, type, option, bot, node)) node.interaction.handle(bot, opt)
     }
 
     /**

@@ -85,8 +85,7 @@ object RewardChest {
             }
         }
         val rewards: MutableList<Item> = ArrayList()
-        var maxRolls = 2 + RandomFunction.random(0,player.savedData.activityData.barrowKills / 3)
-        if(maxRolls > 6) maxRolls = 6
+        var maxRolls = 2 + RandomFunction.random(1,4)
         for (i in 0 until maxRolls) {
             rewards.addAll(DROP_TABLE.roll())
         }

@@ -8,5 +8,6 @@ enum class PatchType(val stageGrowthTime: Int) {
     BUSH(20),
     FLOWER(5),
     HERB(20),
-    SPIRIT_TREE(293)
+    SPIRIT_TREE(293),
+    BELLADONNA(80)
 }
