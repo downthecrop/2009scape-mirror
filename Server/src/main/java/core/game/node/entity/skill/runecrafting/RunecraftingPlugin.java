@@ -10,7 +10,6 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
-import core.game.node.entity.skill.runecrafting.abyss.AbyssPlugin;
 import core.game.node.item.Item;
 import core.game.node.object.Scenery;
 import core.game.system.task.Pulse;
@@ -35,7 +34,6 @@ public class RunecraftingPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		addNodes();
-		PluginManager.definePlugin(new AbyssPlugin());
 		PluginManager.definePlugin(new TiaraPlugin());
 		PluginManager.definePlugin(new RunePouchPlugin());
 		PluginManager.definePlugin(new EnchantTiaraPlugin());

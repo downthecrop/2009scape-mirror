@@ -53,7 +53,6 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 PatchType.BUSH -> player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset,250 + (plantable!!.ordinal - Plantable.REDBERRY_SEED.ordinal))
                 else -> SystemLogger.logWarn("Invalid setting of isCheckHealth for patch type: " + patch.type.name)
             }
-            isCheckHealth = false
         } else {
             when(patch.type){
                 PatchType.ALLOTMENT,PatchType.FLOWER,PatchType.HOPS -> {
@@ -63,6 +62,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 PatchType.BUSH -> {
                     if(isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset,getBushDeathValue())
                     else if(isDiseased && !isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset,getBushDiseaseValue())
+                    else player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, plantable?.value ?: 0 + currentGrowthStage)
                 }
                 PatchType.TREE -> {
                     if(isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset + 7,1)
@@ -71,6 +71,11 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 PatchType.FRUIT_TREE -> {
                     if(isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset,getFruitTreeDeathValue())
                     else if(isDiseased && !isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, getFruitTreeDiseaseValue())
+                }
+                PatchType.BELLADONNA -> {
+                    if(isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, getBelladonnaDeathValue())
+                    else if(isDiseased && !isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, getBelladonnaDiseaseValue())
+                    else player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, (plantable?.value ?: 0) + currentGrowthStage)
                 }
                 else -> {}
             }
@@ -110,11 +115,19 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     }
 
     private fun getFruitTreeDiseaseValue(): Int {
-        return (plantable?.value ?: 0) + currentGrowthStage + 13
+        return (plantable?.value ?: 0) + currentGrowthStage + 12
     }
 
     private fun getFruitTreeDeathValue(): Int {
-        return (plantable?.value ?: 0) + currentGrowthStage + 19
+        return (plantable?.value ?: 0) + currentGrowthStage + 18
+    }
+
+    private fun getBelladonnaDiseaseValue(): Int {
+        return (plantable?.value ?: 0) + currentGrowthStage + 4
+    }
+
+    private fun getBelladonnaDeathValue(): Int {
+        return (plantable?.value ?: 0) + currentGrowthStage + 7
     }
 
     private fun grow(){
@@ -154,7 +167,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             }
         }
 
-        if(plantable?.stages ?: 0 > currentGrowthStage){
+        if(plantable?.stages ?: 0 > currentGrowthStage && !isGrown()){
             currentGrowthStage++
             setCurrentState(getCurrentState() + 1)
             isWatered = false
