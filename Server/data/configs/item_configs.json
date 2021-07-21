@@ -45809,6 +45809,7 @@
     "low_alchemy": "34000",
     "turn90ccw_anim": "1208",
     "attack_speed": "6",
+    "two_handed": "true",
     "turn180_anim": "1206",
     "defence_anim": "420",
     "equipment_slot": "3",
