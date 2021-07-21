@@ -12,7 +12,7 @@ compileJava {
 compileKotlin {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
-        freeCompilerArgs = ['-Xjsr305=strict', '-XXLanguage:-NewInference','-Xms2560m','-Xmx4096m', '-XX:MaxPermSize=350m','-XX:ReservedCodeCacheSize=225m','-XX:+UseCompressedOops']
+        freeCompilerArgs += '-XXLanguage:-NewInference'
     }
 }
 
