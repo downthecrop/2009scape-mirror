@@ -382,7 +382,6 @@ object OfferManager {
         if (!offer.isActive) {
             return
         }
-        GE_OFFER_LOCK.lock()
         for (o in OFFERS_BY_ITEMID[offer.itemID]!!) {
             if (o.sell != offer.sell && o.isActive) {
                 exchange(offer, o)
@@ -392,7 +391,6 @@ object OfferManager {
             }
         }
         buyFromBots(offer)
-        GE_OFFER_LOCK.unlock()
     }
 
     private fun getBuylimitAmount(offer: GrandExchangeOffer): Int {
