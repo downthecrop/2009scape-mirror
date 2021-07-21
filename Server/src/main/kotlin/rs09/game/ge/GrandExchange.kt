@@ -32,6 +32,11 @@ object GrandExchange : CallBack {
             while(true) {
                 SystemLogger.logGE("Updating offers...")
                 OfferManager.update()
+                if(OfferManager.dumpDatabase){
+                    SystemLogger.logGE("Saving GE...")
+                    OfferManager.save()
+                    OfferManager.dumpDatabase = false
+                }
                 Thread.sleep(60_000) //sleep for 60 seconds
             }
         }.start()
