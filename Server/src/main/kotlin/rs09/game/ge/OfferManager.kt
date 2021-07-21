@@ -98,10 +98,6 @@ object OfferManager {
                 val offers = saveFile["offers"] as JSONArray
                 for (offer in offers) {
                     val o = offer as JSONObject
-                    // Copy all the bot offers from the file
-                    if (o["playerUID"].toString().toInt() == 0) {
-                        addBotOffer(o["itemId"].toString().toInt(), o["amount"].toString().toInt() - o["completedAmount"].toString().toInt())
-                    }
                     val no = GrandExchangeOffer()
                     no.itemID = o["itemId"].toString().toInt()
                     no.sell = o["sale"] as Boolean
@@ -267,7 +263,7 @@ object OfferManager {
 
         for(entry in OFFER_MAPPING){
             val offer = entry.value
-            if (offer.offerState == OfferState.REMOVED || entry.value.playerUID == PlayerDetails.getDetails("2009scape").uid) {
+            if (offer.offerState == OfferState.REMOVED) {
                 continue
             }
             val o = JSONObject()
