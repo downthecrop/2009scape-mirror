@@ -18,7 +18,6 @@ import rs09.game.system.SystemLogger
 import rs09.game.system.command.Command
 import java.util.*
 import java.util.function.Consumer
-import kotlin.reflect.jvm.internal.impl.load.kotlin.JvmType
 
 /**
  * Represents a class used to handle the loading of all plugins.
@@ -62,7 +61,7 @@ object PluginManager {
         var result = ClassGraph().enableClassInfo().enableAnnotationInfo().scan()
         result.getClassesWithAnnotation("core.plugin.Initializable").forEach(Consumer { p: ClassInfo ->
             try {
-                definePlugin(p.loadClass().newInstance() as Plugin<JvmType.Object>)
+                definePlugin(p.loadClass().newInstance() as Plugin<Object>)
             } catch (e: InstantiationException) {
                 e.printStackTrace()
             } catch (e: IllegalAccessException) {
