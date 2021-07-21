@@ -221,7 +221,7 @@ object OfferManager {
         return true
     }
 
-    fun addEntry(offer: GrandExchangeOffer){
+    @Synchronized fun addEntry(offer: GrandExchangeOffer){
         GE_OFFER_LOCK.lock()
         OFFER_MAPPING[offer.uid] = offer
         if (!OFFERS_BY_ITEMID.containsKey(offer.itemID)) {
