@@ -1,5 +1,7 @@
 package core.net;
 
+import rs09.game.system.SystemLogger;
+
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.*;
@@ -58,8 +60,14 @@ public class IoEventHandler {
 		ByteBuffer buffer = ByteBuffer.allocate(100_000);
 		IoSession session = (IoSession) key.attachment();
 		if (channel.read(buffer) == -1) {
-			//just when a client closes their client, nothing to worry about.
-			throw new IOException("An existing connection was disconnected!");
+			if(session != null){
+				if(session.getPlayer() != null){
+					SystemLogger.logInfo("Connection closed - disconnecting player.");
+					session.getPlayer().clear();
+				}
+				//key.cancel();
+				return;
+			}
 		}
 		buffer.flip();
 		if (session == null) {

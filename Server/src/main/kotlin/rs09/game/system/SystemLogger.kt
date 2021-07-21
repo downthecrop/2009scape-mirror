@@ -29,8 +29,10 @@ object SystemLogger {
 
     @JvmStatic()
     fun flushLogs() {
-        tradeLogWriter?.flush()
-        tradeLogWriter?.close()
+        try {
+            tradeLogWriter?.flush()
+            tradeLogWriter?.close()
+        } catch(ignored: Exception) {}
     }
 
     fun getTime(): String{
@@ -76,10 +78,12 @@ object SystemLogger {
 
     @JvmStatic
     fun logTrade(message: String){
-        if(message.isNotBlank()){
-            if(tradeLogWriter == null) logWarn("Trade Logger is null!")
-            tradeLogWriter?.write("${getTime()}: $message")
-            tradeLogWriter?.newLine()
-        }
+        try {
+            if (message.isNotBlank()) {
+                if (tradeLogWriter == null) logWarn("Trade Logger is null!")
+                tradeLogWriter?.write("${getTime()}: $message")
+                tradeLogWriter?.newLine()
+            }
+        } catch(ignored: Exception){}
     }
 }
