@@ -12,7 +12,7 @@ compileJava {
 compileKotlin {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8
-        freeCompilerArgs = ['-Xjsr305=strict', '-XXLanguage:-NewInference','-Xms2560m','-Xmx4096m', '-XX:MaxPermSize=350m','-XX:ReservedCodeCacheSize=225m','-XX:+UseCompressedOops']
+        freeCompilerArgs += '-XXLanguage:-NewInference'
     }
 }
 
@@ -26,7 +26,7 @@ dependencies {
     implementation 'com.google.guava:guava:29.0-jre'
     implementation 'mysql:mysql-connector-java:8.0.21'
     implementation 'io.github.classgraph:classgraph:4.8.98'
-    implementation 'org.jetbrains.kotlin:kotlin-reflect'
+    implementation 'org.jetbrains.kotlin:kotlin-reflect:1.5.20'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
     implementation files("libs/ConstLib-1.2.jar")
     implementation files("libs/PrimitiveExtensions-1.0.jar")
