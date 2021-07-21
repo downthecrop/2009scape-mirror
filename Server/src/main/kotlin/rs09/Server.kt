@@ -101,6 +101,7 @@ object Server {
             delay(20000)
             while(running){
                 if(System.currentTimeMillis() - lastHeartbeat > 1800){
+                    SystemLogger.logErr("Triggering reboot due to heartbeat timeout")
                     running = false
                     exitProcess(0)
                 }
