@@ -57,11 +57,6 @@ public final class SystemTermination {
 		if (!file.isDirectory()) {
 			file.mkdirs();
 		}
-		GrandExchangeDatabase.save();
-		OfferManager.save();
-		SystemLogger.flushLogs();
-		SystemLogger.logInfo("[SystemTerminator] Saved Grand Exchange databases!");
-		Repository.getDisconnectionQueue().clear();
 		for (Iterator<Player> it = Repository.getPlayers().iterator(); it.hasNext();) {
 			try {
 				Player p = it.next();
@@ -83,6 +78,14 @@ public final class SystemTermination {
 				e.printStackTrace();
 			}
 		}
+		while(!Repository.getPlayerNames().isEmpty()){
+			Thread.yield();
+		}
+		GrandExchangeDatabase.save();
+		OfferManager.save();
+		SystemLogger.flushLogs();
+		SystemLogger.logInfo("[SystemTerminator] Saved Grand Exchange databases!");
+		Repository.getDisconnectionQueue().clear();
 //		ServerStore.dump(directory + "store/");
 		SystemLogger.logInfo("[SystemTerminator] Saved player accounts!");
 	}
