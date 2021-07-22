@@ -742,7 +742,7 @@ object ContentAPI {
     @JvmStatic
     fun forceWalk(entity: Entity, dest: Location, type: String){
         if(type == "clip"){
-            ForceMovement(entity, dest, 1, 1).run()
+            ForceMovement(entity, dest, 10, 10).run()
             return
         }
         val pathfinder = when(type){
