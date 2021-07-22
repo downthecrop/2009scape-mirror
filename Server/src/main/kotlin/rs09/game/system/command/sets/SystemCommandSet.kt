@@ -12,6 +12,7 @@ import core.plugin.Initializable
 import org.rs09.consts.Items
 import rs09.game.system.command.Command
 import rs09.game.world.repository.Repository
+import kotlin.system.exitProcess
 
 @Initializable
 class SystemCommandSet : CommandSet(Command.Privilege.ADMIN) {
@@ -234,7 +235,7 @@ class SystemCommandSet : CommandSet(Command.Privilege.ADMIN) {
         }
 
         define("shutdown",Command.Privilege.ADMIN) { player, _ ->
-            SystemManager.flag(SystemState.TERMINATED)
+            exitProcess(0)
         }
 
     }
