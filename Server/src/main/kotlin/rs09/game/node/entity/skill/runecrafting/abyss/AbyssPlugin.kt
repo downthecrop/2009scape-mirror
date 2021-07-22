@@ -26,10 +26,11 @@ import rs09.game.world.GameWorld
  */
 class AbyssPlugin : InteractionListener() {
 
-    val OBSTACLE = AbbysalObstacle.values().filter { it != AbbysalObstacle.MINE && it != AbbysalObstacle.SQUEEZE && it != AbbysalObstacle.PASSAGE}.map { it.option }.toTypedArray()
+    val OBSTACLE = AbbysalObstacle.values().filter { it != AbbysalObstacle.MINE && it != AbbysalObstacle.SQUEEZE && it != AbbysalObstacle.PASSAGE && it != AbbysalObstacle.CHOP }.map { it.option }.toTypedArray()
     val miningObstacle = 7158
     val agilityObstacle = 7164
     val passage = 7154
+    val chopObstacle = 7161
 
     override fun defineListeners() {
         definePlugin(AbyssalNPC())
@@ -68,7 +69,11 @@ class AbyssPlugin : InteractionListener() {
             obstacle!!.handle(player, node as Scenery)
             return@on true
         }
-
+        on(chopObstacle, SCENERY, "chop"){ player, node ->
+            val obstacle = AbbysalObstacle.forObject(node as Scenery)
+            obstacle!!.handle(player, node as Scenery)
+            return@on true
+        }
 
     }
 
