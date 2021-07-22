@@ -78,7 +78,8 @@ public final class SystemTermination {
 				e.printStackTrace();
 			}
 		}
-		while(!Repository.getDisconnectionQueue().isEmpty()){
+		long start = System.currentTimeMillis();
+		while(!Repository.getDisconnectionQueue().isEmpty() && System.currentTimeMillis() - start < 5000L){
 			Repository.getDisconnectionQueue().update();
 			try {
 				Thread.sleep(100);
