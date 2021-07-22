@@ -281,7 +281,8 @@ open class RangeSwingHandler
             cumulativeStr += 1.0
         }
         cumulativeStr *= getSetMultiplier(entity, Skills.RANGE)
-        return ((14 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier).toInt() / 10 + 1
+        return (1.3 + (cumulativeStr / 10) + (bonus / 80) + ((cumulativeStr * bonus) / 640)).toInt()
+        //return ((14 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier).toInt() / 10 + 1
     }
 
     override fun calculateDefence(entity: Entity?, attacker: Entity?): Int {

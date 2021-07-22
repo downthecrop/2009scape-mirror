@@ -193,8 +193,9 @@ open class MeleeSwingHandler
             cumulativeStr += 1.0
         }
         cumulativeStr *= getSetMultiplier(entity, Skills.STRENGTH)
-        val hit = (16 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier
-        return (hit / 10).toInt() + 1
+        /*val hit = (16 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier
+        return (hit / 10).toInt() + 1*/
+        return (1.3 + (cumulativeStr / 10) + (bonus / 80) + ((cumulativeStr * bonus) / 640)).toInt()
     }
 
     override fun calculateDefence(entity: Entity?, attacker: Entity?): Int {
