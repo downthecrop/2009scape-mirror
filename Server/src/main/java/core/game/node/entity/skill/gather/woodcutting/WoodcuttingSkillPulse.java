@@ -284,7 +284,6 @@ public class WoodcuttingSkillPulse extends Pulse {
             if (!player.getAchievementDiaryManager().hasCompletedTask(DiaryType.SEERS_VILLAGE, 2, 1)) {
                 player.setAttribute("/save:diary:seers:cut-yew", player.getAttribute("diary:seers:cut-yew", 0) + 1);
             }
-            System.out.println(player.getAttribute("diary:seers:cut-yew", 0));
             if (player.getAttribute("diary:seers:cut-yew", 0) >= 5) {
                 player.getAchievementDiaryManager().finishTask(player, DiaryType.SEERS_VILLAGE, 2, 1);
             }
