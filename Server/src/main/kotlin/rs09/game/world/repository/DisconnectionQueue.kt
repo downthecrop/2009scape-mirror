@@ -37,6 +37,11 @@ class DisconnectionQueue {
         }
     }
 
+
+    fun isEmpty(): Boolean{
+        return queue.isEmpty()
+    }
+
     /**
      * Finishes a disconnection.
      * @param entry The entry.
