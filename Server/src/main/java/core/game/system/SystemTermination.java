@@ -78,8 +78,8 @@ public final class SystemTermination {
 						}
 					});
 				}
-			} catch (Throwable t) {
-				t.printStackTrace();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		}
 //		ServerStore.dump(directory + "store/");

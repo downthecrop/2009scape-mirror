@@ -233,5 +233,9 @@ class SystemCommandSet : CommandSet(Command.Privilege.ADMIN) {
             player.inventory.add(Item(Items.ROTTEN_POTATO_5733))
         }
 
+        define("shutdown",Command.Privilege.ADMIN) { player, _ ->
+            SystemManager.flag(SystemState.TERMINATED)
+        }
+
     }
 }
