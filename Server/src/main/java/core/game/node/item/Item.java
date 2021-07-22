@@ -100,7 +100,6 @@ public class Item extends Node{
 	 */
 	public long getValue() {
 		long value = 1;
-		value = OfferManager.getRecommendedPrice(getId(), false);
 		if (definition.getValue() > value) {
 			value = definition.getValue();
 		}
