@@ -11,6 +11,7 @@ import core.game.node.`object`.SceneryBuilder
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.Animator
+import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -736,10 +737,14 @@ object ContentAPI {
      * Force an entity to walk to a given destination.
      * @param entity the entity to forcewalk
      * @param dest the Location object to walk to
-     * @param type the type of pathfinder to use. "smart" for the SMART pathfinder, anything else for DUMB.
+     * @param type the type of pathfinder to use. "smart" for the SMART pathfinder, "clip" for the noclip pathfinder, anything else for DUMB.
      */
     @JvmStatic
     fun forceWalk(entity: Entity, dest: Location, type: String){
+        if(type == "clip"){
+            ForceMovement(entity, dest, 1, 1).run()
+            return
+        }
         val pathfinder = when(type){
             "smart" -> Pathfinder.SMART
             else -> Pathfinder.DUMB
