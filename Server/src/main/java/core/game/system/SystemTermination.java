@@ -78,6 +78,7 @@ public final class SystemTermination {
 				e.printStackTrace();
 			}
 		}
+		Repository.getDisconnectionQueue().update();
 		try {
 			Thread.sleep(3_000);
 		} catch (Exception ignored){}
