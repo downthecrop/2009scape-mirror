@@ -66,9 +66,9 @@ public final class SystemTermination {
 			try {
 				Player p = it.next();
 				if (p != null && !p.isArtificial()) { // Should never be null.
-					p.removeAttribute("combat-time");
+/*					p.removeAttribute("combat-time");
 					p.clear();
-					PlayerParser.save(p);
+					PlayerParser.save(p);*/
 					p.getDetails().save();
 					p.getLogoutPlugins().forEach(playerPlugin -> {
 						try {
@@ -77,6 +77,7 @@ public final class SystemTermination {
 							throwable.printStackTrace();
 						}
 					});
+					p.clear();
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
