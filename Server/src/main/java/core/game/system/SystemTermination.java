@@ -78,9 +78,9 @@ public final class SystemTermination {
 				e.printStackTrace();
 			}
 		}
-		while(!Repository.getPlayerNames().isEmpty()){
-			Thread.yield();
-		}
+		try {
+			Thread.sleep(3_000);
+		} catch (Exception ignored){}
 		GrandExchangeDatabase.save();
 		OfferManager.save();
 		SystemLogger.flushLogs();
