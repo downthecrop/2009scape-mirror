@@ -78,10 +78,13 @@ public final class SystemTermination {
 				e.printStackTrace();
 			}
 		}
+		while(!Repository.getDisconnectionQueue().isEmpty()){
+			Repository.getDisconnectionQueue().update();
+			try {
+				Thread.sleep(100);
+			} catch (Exception ignored) {}
+		}
 		Repository.getDisconnectionQueue().update();
-		try {
-			Thread.sleep(3_000);
-		} catch (Exception ignored){}
 		GrandExchangeDatabase.save();
 		OfferManager.save();
 		SystemLogger.flushLogs();
