@@ -62,7 +62,6 @@ public class IoEventHandler {
 		if (channel.read(buffer) == -1) {
 			if(session != null){
 				if(session.getPlayer() != null){
-					SystemLogger.logInfo("Connection closed - disconnecting player.");
 					session.getPlayer().clear();
 				}
 				//key.cancel();
