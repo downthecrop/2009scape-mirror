@@ -1,5 +1,6 @@
 package core.game.node.entity.player;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.container.Container;
 import core.game.container.impl.BankContainer;
@@ -70,6 +71,7 @@ import core.tools.RandomFunction;
 import core.tools.StringUtils;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
+import org.rs09.consts.Items;
 import rs09.ServerConstants;
 import rs09.game.VarpManager;
 import rs09.game.content.ame.RandomEventManager;
@@ -753,6 +755,14 @@ public class Player extends Entity {
 		renderInfo.setLastLocation(null);
 		renderInfo.setOnFirstCycle(true);
 		Arrays.fill(renderInfo.getAppearanceStamps(),0);
+	}
+
+	/**
+	 * Checks if the player is wearing void.
+	 */
+	public boolean isWearingVoid(boolean melee){
+		int helm = melee ? Items.VOID_MELEE_HELM_11665 : Items.VOID_RANGER_HELM_11664;
+		return ContentAPI.inEquipment(this, helm, 1) && ContentAPI.inEquipment(this, Items.VOID_KNIGHT_ROBE_8840, 1) && ContentAPI.inEquipment(this, Items.VOID_KNIGHT_TOP_8839, 1);
 	}
 
 	/**
