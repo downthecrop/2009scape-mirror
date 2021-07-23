@@ -4,6 +4,7 @@ import core.game.ge.GrandExchangeDatabase;
 import core.game.interaction.object.dmc.DMCHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.login.PlayerParser;
+import rs09.Server;
 import rs09.ServerConstants;
 import rs09.game.ge.OfferManager;
 import rs09.game.system.SystemLogger;
@@ -57,6 +58,7 @@ public final class SystemTermination {
 		if (!file.isDirectory()) {
 			file.mkdirs();
 		}
+		Server.getReactor().terminate();
 		for (Iterator<Player> it = Repository.getPlayers().iterator(); it.hasNext();) {
 			try {
 				Player p = it.next();
