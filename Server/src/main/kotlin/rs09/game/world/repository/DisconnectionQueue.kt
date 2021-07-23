@@ -62,7 +62,8 @@ class DisconnectionQueue {
         Repository.LOGGED_IN_PLAYERS.remove(player.details.username)
         SystemLogger.logInfo("Player cleared. Removed ${player.details.username}")
         try {
-            player.communication.clan.leave(player, false)
+            if(player.communication.clan != null)
+                player.communication.clan.leave(player, false)
         } catch (e: Exception) {
             e.printStackTrace()
         }
