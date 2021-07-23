@@ -194,8 +194,8 @@ class DisconnectionQueue {
             if (sql) {
                 player.details.sqlManager.update(player)
                 player.details.save()
-                SQLEntryHandler.write(HighscoreSQLHandler(player))
-                SQLEntryHandler.write(PlayerLogSQLHandler(player.monitor, player.name))
+                /*SQLEntryHandler.write(HighscoreSQLHandler(player))
+                SQLEntryHandler.write(PlayerLogSQLHandler(player.monitor, player.name))*/
             }
             return true
         } catch (t: Throwable) {
