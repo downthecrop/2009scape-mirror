@@ -90,7 +90,7 @@ object Server {
             while(scanner.hasNextLine()){
                 val command = scanner.nextLine()
                 when(command){
-                    "stop" -> SystemManager.flag(SystemState.TERMINATED)
+                    "stop" -> exitProcess(0)
                     "players" -> System.out.println("Players online: " + (Repository.LOGGED_IN_PLAYERS.size))
                     "update" -> SystemManager.flag(SystemState.UPDATING)
                     "help","commands" -> printCommands()
