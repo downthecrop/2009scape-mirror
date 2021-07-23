@@ -40,6 +40,7 @@ object Server {
     /**
      * The NIO reactor.
      */
+    @JvmStatic
     var reactor: NioReactor? = null
 
     /**
@@ -72,7 +73,8 @@ object Server {
         Runtime.getRuntime().addShutdownHook(ServerConstants.SHUTDOWN_HOOK)
         SystemLogger.logInfo("Starting networking...")
         try {
-            NioReactor.configure(43594 + GameWorld.settings?.worldId!!).start()
+            reactor = NioReactor.configure(43594 + GameWorld.settings?.worldId!!)
+            reactor!!.start()
         } catch (e: BindException) {
             SystemLogger.logErr("Port " + (43594 + GameWorld.settings?.worldId!!) + " is already in use!")
             throw e
