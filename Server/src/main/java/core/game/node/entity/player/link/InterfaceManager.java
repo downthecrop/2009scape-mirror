@@ -467,7 +467,7 @@ public final class InterfaceManager {
 		close(new Component(Components.OPTIONS_261)); // Settings
 		close(new Component(Components.EMOTES_464)); // Emotes
 		close(new Component(Components.MUSIC_V3_187)); // Music
-		close(new Component(Components.LOGOUT_182)); // Logout
+		//close(new Component(Components.LOGOUT_182)); // Logout
 	}
 
 	/**
