@@ -315,8 +315,8 @@ public class TormentedDemonNPC extends AbstractNPC {
 		}
 
 		@Override
-		public int calculateDefence(Entity entity, Entity attacker) {
-			return style.getSwingHandler().calculateDefence(entity, attacker);
+		public int calculateDefence(Entity victim, Entity attacker) {
+			return style.getSwingHandler().calculateDefence(victim, attacker);
 		}
 
 		@Override

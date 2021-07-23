@@ -143,11 +143,11 @@ public final class KingBlackDragonNPC extends AbstractNPC {
 		}
 
 		@Override
-		public int calculateDefence(Entity entity, Entity attacker) {
+		public int calculateDefence(Entity victim, Entity attacker) {
 			if (style == CombatStyle.MELEE) {
-				return style.getSwingHandler().calculateDefence(entity, attacker);
+				return style.getSwingHandler().calculateDefence(victim, attacker);
 			}
-			return CombatStyle.MAGIC.getSwingHandler().calculateDefence(entity, attacker);
+			return CombatStyle.MAGIC.getSwingHandler().calculateDefence(victim, attacker);
 		}
 
 		@Override
