@@ -4,6 +4,7 @@ import api.ContentAPI
 import core.game.node.entity.combat.DeathTask
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
+import core.game.world.map.zone.ZoneBorders
 import org.rs09.consts.Items
 import kotlin.math.max
 
@@ -41,6 +42,13 @@ object FOGUtils {
         }
     }
 
+    fun isInHouse(player: Player): Boolean {
+        for(z in houseZones){
+            if(z.insideBorder(player)) return true
+        }
+        return false
+    }
+
     fun updateHuntStatus(player: Player, hunter: Boolean){
         player.packetDispatch.sendInterfaceConfig(730, 25, hunter)
         player.packetDispatch.sendInterfaceConfig(730, 26, !hunter)
@@ -70,6 +78,13 @@ object FOGUtils {
     fun showStoneNotice(player: Player){
         player.packetDispatch.sendInterfaceConfig(730, 23, false)
     }
+
+    val houseZones = arrayOf(
+        ZoneBorders(1650, 5702, 1652, 5704),
+        ZoneBorders(1666, 5703, 1668, 5705),
+        ZoneBorders(1675, 5687, 1677, 5689),
+        ZoneBorders(1655, 5682, 1657, 5684)
+    )
 
     val startLocations = arrayOf(
         Location.create(1627, 5708, 0),

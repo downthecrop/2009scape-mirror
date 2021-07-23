@@ -6,6 +6,7 @@ import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
+import core.game.world.map.Direction
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBuilder
 import core.game.world.map.zone.ZoneRestriction
@@ -57,6 +58,7 @@ class FOGZone : MapZone("Fist of Guthix", true, ZoneRestriction.RANDOM_EVENTS, Z
 
     override fun interact(e: Entity?, target: Node?, option: Option?): Boolean {
         if(e !is Player) return false
+        target ?: return false
 
         when(option?.name?.toLowerCase()){
             "take-stone" -> {
@@ -75,7 +77,41 @@ class FOGZone : MapZone("Fist of Guthix", true, ZoneRestriction.RANDOM_EVENTS, Z
             }
 
             "pass" -> {
-                ContentAPI.forceWalk(e, e.location.transform(e.direction), "clip")
+                ContentAPI.submitIndividualPulse(e, object : Pulse(){
+                    var counter = 0
+                    val stepDir = if(!FOGUtils.isInHouse(e)) {
+                        when (target.asScenery().rotation) {
+                            0 -> Direction.WEST
+                            1 -> Direction.NORTH
+                            2 -> Direction.EAST
+                            3 -> Direction.SOUTH
+                            else -> target.direction
+                        }
+                    } else {
+                        when (target.asScenery().rotation) {
+                            0 -> Direction.EAST
+                            1 -> Direction.SOUTH
+                            2 -> Direction.WEST
+                            3 -> Direction.NORTH
+                            else -> target.direction
+                        }
+                    }
+                    override fun pulse(): Boolean {
+                        when(counter++){
+                            0 -> {
+                                ContentAPI.lockInteractions(e,5)
+                                ContentAPI.forceWalk(e, target.location, "dumb")
+                                ContentAPI.face(e, target.location.transform(stepDir))
+                            }
+                            1 -> {
+                                ContentAPI.forceWalkStep(e, 1, stepDir)
+                            }
+                            2 -> e.unlock().also { return true }
+                        }
+                        return false
+                    }
+                })
+                return true
             }
 
         }

@@ -737,20 +737,29 @@ object ContentAPI {
      * Force an entity to walk to a given destination.
      * @param entity the entity to forcewalk
      * @param dest the Location object to walk to
-     * @param type the type of pathfinder to use. "smart" for the SMART pathfinder, "clip" for the noclip pathfinder, anything else for DUMB.
+     * @param type the type of pathfinder to use. "smart" for the SMART pathfinder, anything else for DUMB.
      */
     @JvmStatic
     fun forceWalk(entity: Entity, dest: Location, type: String){
-        if(type == "clip"){
-            ForceMovement(entity, dest, 10, 10).run()
-            return
-        }
         val pathfinder = when(type){
             "smart" -> Pathfinder.SMART
             else -> Pathfinder.DUMB
         }
         val path = Pathfinder.find(entity, dest, true, pathfinder)
         path.walk(entity)
+    }
+
+    /**
+     * Forces an entity to walk a certain number of steps in the desired direction. This ignores normal pathfinding rules.
+     * @param entity the entity to move
+     * @param steps the # of steps to take
+     * @param dir the Direction to take them in. An enum exists for this called Direction. Default is the player's currently-facing direction.
+     */
+    @JvmStatic
+    fun forceWalkStep(entity: Entity, steps: Int, dir: Direction = entity.direction){
+        val newLoc = entity.location.transform(dir, steps)
+        entity.walkingQueue.reset()
+        entity.walkingQueue.addPath(newLoc.x, newLoc.y)
     }
 
     /**
