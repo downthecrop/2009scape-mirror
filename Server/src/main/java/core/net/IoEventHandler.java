@@ -60,13 +60,7 @@ public class IoEventHandler {
 		ByteBuffer buffer = ByteBuffer.allocate(100_000);
 		IoSession session = (IoSession) key.attachment();
 		if (channel.read(buffer) == -1) {
-			if(session != null){
-				if(session.getPlayer() != null){
-					session.getPlayer().clear();
-				}
-				//key.cancel();
-				return;
-			}
+			return;
 		}
 		buffer.flip();
 		if (session == null) {

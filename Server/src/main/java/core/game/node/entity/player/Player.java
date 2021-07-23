@@ -79,7 +79,6 @@ import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
 import rs09.game.node.entity.state.newsys.State;
 import rs09.game.node.entity.state.newsys.StateRepository;
-import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 import rs09.game.world.update.MapChunkRenderer;
@@ -386,7 +385,6 @@ public class Player extends Entity {
 	 * @param force If we should force removal, a player engaged in combat will otherwise remain active until out of combat.
 	 */
 	public void clear(boolean force) {
-		SystemLogger.logInfo("Clearing player...");
 		/*if (!force && allowRemoval()) {
 			Repository.getDisconnectionQueue().add(this, true);
 			return;
