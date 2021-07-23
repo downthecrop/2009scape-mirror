@@ -53,6 +53,7 @@ class DisconnectionQueue {
             return false
         }
         if (entry.isClear) {
+            SystemLogger.logInfo("Clearing player...")
             player.clear()
         }
         Repository.playerNames.remove(player.name)
@@ -63,6 +64,7 @@ class DisconnectionQueue {
         try {
             player.communication.clan.leave(player, false)
         } catch (e: Exception) {
+            e.printStackTrace()
         }
         if (player.isArtificial) {
             return true
