@@ -33,7 +33,7 @@ class DisconnectionQueue {
 
         //loop through entries and disconnect each
         entries.forEach {
-            if(finish(it.value,false)) queue.remove(it.key)
+            if(finish(it.value,false).also{cl -> SystemLogger.logInfo("Cleared? - $cl") }) queue.remove(it.key)
         }
     }
 
