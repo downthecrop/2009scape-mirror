@@ -35,6 +35,7 @@ object Server {
 
     var lastHeartbeat = System.currentTimeMillis()
 
+    @JvmStatic
     var running = false
 
     /**
@@ -102,9 +103,8 @@ object Server {
         GlobalScope.launch {
             delay(20000)
             while(running){
-                if(System.currentTimeMillis() - lastHeartbeat > 1800){
+                if(System.currentTimeMillis() - lastHeartbeat > 1800 && running){
                     SystemLogger.logErr("Triggering reboot due to heartbeat timeout")
-                    running = false
                     exitProcess(0)
                 }
                 delay(625)
