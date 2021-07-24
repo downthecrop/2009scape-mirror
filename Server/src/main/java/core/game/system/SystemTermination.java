@@ -35,6 +35,7 @@ public final class SystemTermination {
 	public void terminate() {
 		SystemLogger.logInfo("[SystemTerminator] Initializing termination sequence - do not shutdown!");
 		try {
+			Server.setRunning(false);
 			for(Player player : Repository.getPlayers()){
 				DMCHandler dmc = player.getAttribute("dmc",null);
 				if(dmc != null){
