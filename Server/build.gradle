@@ -21,16 +21,18 @@ repositories {
 }
 
 dependencies {
-    implementation("com.github.ajalt.mordant:mordant:2.0.0-alpha2")
-    implementation "org.jetbrains:markdown-jvm:0.2.4"
-    implementation 'com.google.guava:guava:29.0-jre'
-    implementation 'mysql:mysql-connector-java:8.0.21'
-    implementation 'io.github.classgraph:classgraph:4.8.98'
     implementation 'org.jetbrains.kotlin:kotlin-reflect:1.5.20'
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.4.2'
-    implementation files("libs/ConstLib-1.2.jar")
-    implementation files("libs/PrimitiveExtensions-1.0.jar")
-
+    implementation files(
+            "libs/PrimitiveExtensions-1.0.jar",
+            "libs/ConstLib-1.2.jar",
+            "libs/json-simple-1.1.1.jar",
+            "libs/markdown-jvm-0.2.4.jar",
+            "libs/classgraph-4.8.98.jar",
+            "libs/mysql-connector-java-8.0.21.jar",
+            "libs/mordant-jvm-2.0.0-alpha2.jar",
+            "libs/colormath-jvm-2.0.0.jar"
+    )
 }
 
 /*sourceSets {
