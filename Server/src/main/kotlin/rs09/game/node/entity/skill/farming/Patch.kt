@@ -102,7 +102,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         if(plantable == Plantable.POISON_IVY_SEED){
             return (plantable?.value ?: 0) + currentGrowthStage + 12
         } else {
-            return (plantable?.value ?: 0) + currentGrowthStage + 65
+            return (plantable?.value ?: 0) + currentGrowthStage + 64
         }
     }
 
