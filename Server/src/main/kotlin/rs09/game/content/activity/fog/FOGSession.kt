@@ -21,22 +21,29 @@ class FOGSession(val playerA: Player, val playerB: Player) {
     var round = 1
 
     var roundTimer = 0
+    var interfaceTimerCounter = 0
 
     fun start(){
         playerA.setAttribute("fog-session",this)
         playerA.logoutListeners["fog-logout"] = { player -> ContentAPI.teleport(player, Location.create(1714, 5599, 0)); isActive = false }
         playerB.setAttribute("fog-session",this)
         playerB.logoutListeners["fog-logout"] = { player -> ContentAPI.teleport(player, Location.create(1714, 5599, 0)); isActive = false }
-
+        playerA.properties.teleportLocation = FOGUtils.getRandomStartLocation()
+        playerB.properties.teleportLocation = FOGUtils.getRandomStartLocation()
+        FOGWaitingArea.currentlyWaiting.remove(playerA)
+        FOGWaitingArea.currentlyWaiting.remove(playerB)
     }
 
     fun tick() {
         roundTimer++
-        playerA.varpManager.get(FOGUtils.TIMER_VARP).setVarbit(4, roundTimer).send(playerA)
-        playerB.varpManager.get(FOGUtils.TIMER_VARP).setVarbit(4, roundTimer).send(playerB)
-
-        if(FOGUtils.carryingStone(hunted) && roundTimer % 5 == 0){
-            FOGUtils.incrementHuntedScore(this, FOGUtils.getTickScore(hunted))
+        if(roundTimer % 16 == 0) {
+            interfaceTimerCounter++
+            playerA.varpManager.get(FOGUtils.TIMER_VARP).setVarbit(4, interfaceTimerCounter).send(playerA)
+            playerB.varpManager.get(FOGUtils.TIMER_VARP).setVarbit(4, interfaceTimerCounter).send(playerB)
+        }
+        if(FOGUtils.carryingStone(hunted)){
+            if(roundTimer % 5 == 0)
+                FOGUtils.incrementHuntedScore(this, FOGUtils.getTickScore(hunted))
         } else if (!ContentAPI.inInventory(hunted, Items.STONE_OF_POWER_12845)){
             FOGUtils.showStoneNotice(hunted)
         }

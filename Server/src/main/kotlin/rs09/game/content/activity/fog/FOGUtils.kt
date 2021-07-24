@@ -40,6 +40,8 @@ object FOGUtils {
             1 -> session.playerBScore += amount
             2 -> session.playerAScore += amount
         }
+
+
     }
 
     fun isInHouse(player: Player): Boolean {

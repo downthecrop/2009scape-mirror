@@ -12,10 +12,12 @@ import rs09.game.ai.general.scriptrepository.Idler
 import rs09.game.ai.general.scriptrepository.Script
 
 class GeneralBotCreator {
+    var bot: AIPlayer? = null
     //org/crandor/net/packet/in/InteractionPacket.java <<< This is a very useful class for learning to code bots
     constructor(loc: Location?, botScript: Script) {
         botScript.bot = AIPBuilder.create(loc)
         GameWorld.Pulser.submit(BotScriptPulse(botScript))
+        bot = (botScript.bot as AIPlayer?)!!
     }
 
     constructor(botScript: Script, bot: AIPlayer?) {

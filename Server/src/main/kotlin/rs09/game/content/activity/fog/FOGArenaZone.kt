@@ -15,7 +15,7 @@ import core.plugin.Plugin
 import org.rs09.consts.Items
 
 @Initializable
-class FOGZone : MapZone("Fist of Guthix", true, ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FIRES), Plugin<Any> {
+class FOGArenaZone : MapZone("Fist of Guthix Arena", true, ZoneRestriction.RANDOM_EVENTS, ZoneRestriction.CANNON, ZoneRestriction.FIRES), Plugin<Any> {
     override fun newInstance(arg: Any?): Plugin<Any> {
         ZoneBuilder.configure(this)
         ContentAPI.submitWorldPulse(pulse)
@@ -73,6 +73,7 @@ class FOGZone : MapZone("Fist of Guthix", true, ZoneRestriction.RANDOM_EVENTS, Z
                 }
 
                 ContentAPI.addItem(e, Items.STONE_OF_POWER_12845)
+                FOGUtils.hideStoneNotice(e)
                 return true
             }
 
