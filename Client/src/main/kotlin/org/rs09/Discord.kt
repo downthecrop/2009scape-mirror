@@ -15,7 +15,6 @@ object Discord {
     var initialized = false
 
     @JvmStatic
-    //Removed support for Linux due to the outlined issue on line 37. TODO: Revisit this when the RPC library updates. There's a PR there that *should* fix it.
     fun checkInitializable() : Boolean{
         val OS = System.getProperty("os.name")
         if(OS.toLowerCase().startsWith("windows") || OS.toLowerCase().contains("nux")){
