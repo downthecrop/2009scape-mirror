@@ -34,6 +34,7 @@ import core.game.world.map.zone.ZoneBuilder
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import core.game.world.update.flag.player.ForceMovementFlag
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld

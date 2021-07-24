@@ -3,6 +3,9 @@ package rs09.game.system.command.sets
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import rs09.game.ai.general.GeneralBotCreator
+import rs09.game.ai.general.scriptrepository.GlassBlowingBankstander
+import rs09.game.content.activity.fog.FOGWaitingArea
 import rs09.game.system.command.Command
 
 @Initializable
@@ -20,6 +23,12 @@ class DevelopmentCommandSet : CommandSet(Command.Privilege.ADMIN) {
             }
         }
 
+        define("testbots"){player, _ ->
+            for(i in 1..3){
+                val g = GeneralBotCreator(player.location, GlassBlowingBankstander())
+                FOGWaitingArea.register(g.bot!!)
+            }
+        }
 
     }
 }
