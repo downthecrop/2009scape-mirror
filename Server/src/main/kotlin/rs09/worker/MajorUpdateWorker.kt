@@ -10,11 +10,14 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import rs09.Server
 import rs09.ServerConstants
+import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import rs09.game.world.update.UpdateSequence
 import rs09.net.packet.PacketWriteQueue
 import rs09.tools.stringtools.colorize
+import java.lang.Long.max
+import java.lang.Long.min
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
@@ -29,8 +32,9 @@ class MajorUpdateWorker {
     val sdf = SimpleDateFormat("HHmm")
     fun start() = GlobalScope.launch {
         started = true
+        delay(600L)
         while(true){
-            delay(600L)
+            val start = System.currentTimeMillis()
             val rmlist = ArrayList<Pulse>()
             val list = ArrayList(GameWorld.Pulser.TASKS)
 
@@ -75,6 +79,9 @@ class MajorUpdateWorker {
                     }
                 })
             }
+
+            val end = System.currentTimeMillis()
+            delay(max(600 - (end - start), 0))
         }
     }
 }

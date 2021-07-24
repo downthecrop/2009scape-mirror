@@ -159,8 +159,8 @@ public final class GWDGraardorSwingHandler extends CombatSwingHandler {
 	}
 
 	@Override
-	public int calculateDefence(Entity entity, Entity attacker) {
-		return getType().getSwingHandler().calculateDefence(entity, attacker);
+	public int calculateDefence(Entity victim, Entity attacker) {
+		return getType().getSwingHandler().calculateDefence(victim, attacker);
 	}
 
 	@Override

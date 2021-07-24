@@ -62,7 +62,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 PatchType.BUSH -> {
                     if(isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset,getBushDeathValue())
                     else if(isDiseased && !isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset,getBushDiseaseValue())
-                    else player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, plantable?.value ?: 0 + currentGrowthStage)
+                    //else player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, (plantable?.value ?: 0) + currentGrowthStage)
                 }
                 PatchType.TREE -> {
                     if(isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset + 7,1)
@@ -100,7 +100,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
 
     private fun getBushDiseaseValue(): Int{
         if(plantable == Plantable.POISON_IVY_SEED){
-            return (plantable?.value ?: 0) + currentGrowthStage + 13
+            return (plantable?.value ?: 0) + currentGrowthStage + 12
         } else {
             return (plantable?.value ?: 0) + currentGrowthStage + 65
         }

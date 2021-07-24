@@ -25,6 +25,9 @@ object DrillDemonUtils {
     fun teleport(player: Player){
         player.setAttribute(DD_KEY_RETURN_LOC,player.location)
         player.properties.teleportLocation = Location.create(3163, 4819, 0)
+        player.interfaceManager.closeDefaultTabs()
+        player.packetDispatch.sendInterfaceConfig(548, 69, true)
+        player.packetDispatch.sendInterfaceConfig(746, 12, true)
 
         ContentAPI.registerLogoutListener(player, "drilldemon"){p ->
             ContentAPI.teleport(p, player.getAttribute(DD_KEY_RETURN_LOC, p.location))
@@ -82,6 +85,9 @@ object DrillDemonUtils {
         player.removeAttribute(DD_KEY_TASK)
         player.removeAttribute(DD_CORRECT_OFFSET)
         player.removeAttribute(DD_CORRECT_COUNTER)
+        player.interfaceManager.openDefaultTabs()
+        player.packetDispatch.sendInterfaceConfig(548, 69, false)
+        player.packetDispatch.sendInterfaceConfig(746, 12, false)
     }
 
     fun animationForTask(task: Int): Animation {

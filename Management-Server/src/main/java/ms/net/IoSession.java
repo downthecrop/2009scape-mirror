@@ -55,7 +55,7 @@ public class IoSession {
 	/**
 	 * The writing lock.
 	 */
-	private Lock writingLock = new ReentrantLock();
+	private final Lock writingLock = new ReentrantLock();
 	
 	/**
 	 * The name hash.
@@ -139,7 +139,7 @@ public class IoSession {
 		try {
 			writingLock.tryLock(1000L, TimeUnit.MILLISECONDS);
 		} catch (Exception e){
-			System.out.println(e);
+			e.printStackTrace();
 			writingLock.unlock();
 			return;
 		}

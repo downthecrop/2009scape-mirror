@@ -11,10 +11,10 @@ import core.game.node.`object`.SceneryBuilder
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.Animator
+import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.RunScript
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
@@ -26,13 +26,14 @@ import core.game.system.task.Pulse
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
+import core.game.world.map.RegionManager.getRegionChunk
 import core.game.world.map.path.Pathfinder
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneBuilder
+import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
-import core.tools.RandomFunction
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
@@ -390,6 +391,16 @@ object ContentAPI {
     }
 
     /**
+     * Send an object animation independent of a player
+     */
+    @JvmStatic
+    fun animateScenery(obj: Scenery, animationId: Int){
+        val animation = Animation(animationId)
+        animation.setObject(obj)
+        getRegionChunk(obj.location).flag(AnimateObjectUpdateFlag(animation))
+    }
+
+    /**
      * Produce a ground item owned by the player
      */
     @JvmStatic
@@ -736,10 +747,14 @@ object ContentAPI {
      * Force an entity to walk to a given destination.
      * @param entity the entity to forcewalk
      * @param dest the Location object to walk to
-     * @param type the type of pathfinder to use. "smart" for the SMART pathfinder, anything else for DUMB.
+     * @param type the type of pathfinder to use. "smart" for the SMART pathfinder, "clip" for the noclip pathfinder, anything else for DUMB.
      */
     @JvmStatic
     fun forceWalk(entity: Entity, dest: Location, type: String){
+        if(type == "clip"){
+            ForceMovement(entity, dest, 10, 10).run()
+            return
+        }
         val pathfinder = when(type){
             "smart" -> Pathfinder.SMART
             else -> Pathfinder.DUMB
