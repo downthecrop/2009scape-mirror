@@ -18,7 +18,7 @@ object Discord {
     //Removed support for Linux due to the outlined issue on line 37. TODO: Revisit this when the RPC library updates. There's a PR there that *should* fix it.
     fun checkInitializable() : Boolean{
         val OS = System.getProperty("os.name")
-        if(OS.toLowerCase().startsWith("windows")){
+        if(OS.toLowerCase().startsWith("windows") || OS.toLowerCase().contains("nux")){
             val arch = System.getProperty("os.arch")
             return arch != "aarch64" && !initialized
         }
