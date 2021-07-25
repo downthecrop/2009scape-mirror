@@ -10,6 +10,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import rs09.Server
 import rs09.ServerConstants
+import rs09.ServerStore
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
@@ -21,6 +22,7 @@ import java.lang.Long.min
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.system.exitProcess
 
 /**
  * Handles the running of pulses and writing of masks, etc
@@ -29,7 +31,7 @@ import kotlin.collections.ArrayList
 class MajorUpdateWorker {
     var started = false
     val sequence = UpdateSequence()
-    val sdf = SimpleDateFormat("HHmm")
+    val sdf = SimpleDateFormat("HHmmss")
     fun start() = GlobalScope.launch {
         started = true
         delay(600L)
@@ -63,21 +65,28 @@ class MajorUpdateWorker {
             Server.heartbeat()
 
             //Handle daily restart if enabled
-            if(ServerConstants.DAILY_RESTART && sdf.format(Date()).toInt() == 0){
-                Repository.sendNews(colorize("%RSERVER GOING DOWN FOR DAILY RESTART IN 5 MINUTES!"))
-                ServerConstants.DAILY_RESTART = false
-                ContentAPI.submitWorldPulse(object : Pulse(100) {
-                    var counter = 0
-                    override fun pulse(): Boolean {
-                        counter++
-                        if(counter == 5){
-                            SystemManager.flag(SystemState.TERMINATED)
-                            return true
+            if(sdf.format(Date()).toInt() == 0){
+
+                if(GameWorld.checkDay() == 7) {//sunday
+                    ServerStore.clearWeeklyEntries()
+                }
+
+                ServerStore.clearDailyEntries()
+                if(ServerConstants.DAILY_RESTART ) {
+                    Repository.sendNews(colorize("%RSERVER GOING DOWN FOR DAILY RESTART IN 5 MINUTES!"))
+                    ServerConstants.DAILY_RESTART = false
+                    ContentAPI.submitWorldPulse(object : Pulse(100) {
+                        var counter = 0
+                        override fun pulse(): Boolean {
+                            counter++
+                            if (counter == 5) {
+                                exitProcess(0)
+                            }
+                            Repository.sendNews(colorize("%RSERVER GOING DOWN FOR DAILY RESTART IN ${5 - counter} MINUTE${if (counter < 4) "S" else ""}!"))
+                            return false
                         }
-                        Repository.sendNews(colorize("%RSERVER GOING DOWN FOR DAILY RESTART IN ${5 - counter} MINUTE${if(counter < 4) "S" else ""}!"))
-                        return false
-                    }
-                })
+                    })
+                }
             }
 
             val end = System.currentTimeMillis()
