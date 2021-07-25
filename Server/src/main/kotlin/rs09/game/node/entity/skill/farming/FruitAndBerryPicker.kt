@@ -25,6 +25,7 @@ class FruitAndBerryPicker : OptionHandler() {
         SceneryDefinition.setOptionHandler("pick-leaf",this)
         SceneryDefinition.setOptionHandler("pick-from",this)
         SceneryDefinition.setOptionHandler("pick-fruit",this)
+        SceneryDefinition.setOptionHandler("pick-spine",this)
         return this
     }
 
