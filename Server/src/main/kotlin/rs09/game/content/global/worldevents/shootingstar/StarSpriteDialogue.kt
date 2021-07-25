@@ -8,7 +8,10 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.tools.RandomFunction
+import org.json.simple.JSONObject
 import org.rs09.consts.Items
+import rs09.ServerStore
+import rs09.ServerStore.getBoolean
 import rs09.game.node.entity.state.newsys.states.ShootingStarState
 import rs09.tools.END_DIALOGUE
 import rs09.tools.secondsToTicks
@@ -61,15 +64,15 @@ class StarSpriteDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
-        if (player.getSavedData().getGlobalData().getStarSpriteDelay() > System.currentTimeMillis() || !player.getInventory().contains(ShootingStarOptionHandler.STAR_DUST, 1)) {
-            npc("Hello, strange creature.")
-            stage = 0
-        } else if (ContentAPI.inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && !ContentAPI.getAttribute(player, "star-ring:bp-shown", false)) {
+         if (ContentAPI.inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && !ContentAPI.getAttribute(player, "star-ring:bp-shown", false)) {
             npcl(FacialExpression.NEUTRAL, "I see you got ahold of a blueprint of those silly old rings we used to make.")
             stage = 1000
         } else if (ContentAPI.inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && ContentAPI.getAttribute(player, "star-ring:bp-shown", false)) {
-            playerl(FacialExpression.HALF_ASKING, "So about those rings...")
-            stage = 2000
+             playerl(FacialExpression.HALF_ASKING, "So about those rings...")
+             stage = 2000
+        } else if (getStoreFile().getBoolean(player.username.toLowerCase()) || !player.getInventory().contains(ShootingStarOptionHandler.STAR_DUST, 1)) {
+             npc("Hello, strange creature.")
+             stage = 0
         } else {
             npc("Thank you for helping me out of here.")
             stage = 50
@@ -193,7 +196,9 @@ class StarSpriteDialogue(player: Player? = null) : DialoguePlugin(player) {
                     player.getInventory().add(Item(GOLD_ORE, goldOre), player)
                     player.getInventory().add(Item(COINS, coins), player)
                     npc("I have rewarded you by making it so you can mine", "extra ore for the next 15 minutes. Also, have $cosmicRunes", "cosmic runes, $astralRunes astral runes, $goldOre gold ore and $coins", "coins.")
-                    player.getSavedData().getGlobalData().setStarSpriteDelay(System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1))
+
+                    getStoreFile()[player.username.toLowerCase()] = true //flag daily as completed
+
                     player.registerState("shooting-star")?.init()
 
                     if(wearingRing){
@@ -269,6 +274,10 @@ class StarSpriteDialogue(player: Player? = null) : DialoguePlugin(player) {
             player.savedData.globalData.starSpriteDelay = 0L
             ContentAPI.sendMessage(player, colorize("%RYour ring vibrates briefly as if surging with power, and then stops."))
         }
+    }
+
+    fun getStoreFile(): JSONObject{
+        return ServerStore.getArchive("daily-shooting-star")
     }
 
 }
