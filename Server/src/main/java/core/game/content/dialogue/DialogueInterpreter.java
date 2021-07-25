@@ -111,6 +111,7 @@ public final class DialogueInterpreter {
                 npc.getWalkingQueue().reset();
                 npc.getPulseManager().clear();
             } catch(Exception e){
+                e.printStackTrace();
             }
         } else if (args.length < 1) {
             args = new Object[] { dialogueKey };
