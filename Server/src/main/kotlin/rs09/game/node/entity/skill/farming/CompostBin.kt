@@ -71,9 +71,21 @@ class CompostBin(val player: Player, val bin: CompostBins) {
             Items.JANGERBERRIES_247,
             Items.WHITE_BERRIES_239,
             Items.POISON_IVY_BERRIES_6018,
+            Items.CLEAN_TOADFLAX_2998,
+            Items.CLEAN_AVANTOE_261,
+            Items.CLEAN_KWUARM_263,
+            Items.CLEAN_CADANTINE_265,
+            Items.CLEAN_DWARF_WEED_267,
+            Items.CLEAN_TORSTOL_269,
+            Items.CLEAN_LANTADYME_2481,
+            Items.CLEAN_SNAPDRAGON_3000,
+            Items.GRIMY_TOADFLAX_3049,
+            Items.GRIMY_KWUARM_213,
+            Items.GRIMY_AVANTOE_211,
             Items.GRIMY_TORSTOL_219,
             Items.GRIMY_DWARF_WEED_217,
             Items.GRIMY_LANTADYME_2485,
+            Items.GRIMY_SNAPDRAGON_3051,
             Items.GRIMY_CADANTINE_215 -> true
             else -> false
         }
