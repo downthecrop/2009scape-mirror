@@ -1,6 +1,6 @@
 package core.game.content.holiday;
 
-import core.cache.ServerStore;
+import core.cache.AriosStore;
 import core.cache.def.impl.ItemDefinition;
 
 import java.nio.ByteBuffer;
@@ -32,10 +32,10 @@ public final class ItemLimitation {
 	 * @return {@code True} if parsed.
 	 */
 	public boolean parse() {
-		if (ServerStore.get("hir_limits") == null) {
+		if (AriosStore.get("hir_limits") == null) {
 			return true;
 		}
-		ByteBuffer buffer = ServerStore.getArchive("hir_limits");
+		ByteBuffer buffer = AriosStore.getArchive("hir_limits");
 		int length = buffer.get() & 0xFF;
 		for (int i = 0; i < length; i++) {
 			int itemId = buffer.getShort() & 0xFFFF;
@@ -56,7 +56,7 @@ public final class ItemLimitation {
 			buffer.putShort((short) (int) ITEMS.get(itemId));
 		}
 		buffer.flip();
-		ServerStore.setArchive("hir_limits", buffer);
+		AriosStore.setArchive("hir_limits", buffer);
 	}
 
 	/**

@@ -4,6 +4,8 @@ import core.game.content.global.worldevents.shootingstar.ScoreboardHandler
 import core.game.content.global.worldevents.shootingstar.ShootingStarScoreboard
 import core.game.content.global.worldevents.shootingstar.StarChartPlugin
 import core.game.system.task.Pulse
+import org.json.simple.JSONObject
+import rs09.ServerStore
 import rs09.game.content.global.worldevents.PluginSet
 import rs09.game.content.global.worldevents.WorldEvent
 import rs09.game.content.global.worldevents.WorldEvents
@@ -79,6 +81,12 @@ class ShootingStarEvent : WorldEvent("shooting-stars") {
             }
 
             return false //always returns false because it needs to run forever.
+        }
+    }
+
+    companion object {
+        fun getStoreFile() : JSONObject {
+            return ServerStore.getArchive("shooting-star")
         }
     }
 }

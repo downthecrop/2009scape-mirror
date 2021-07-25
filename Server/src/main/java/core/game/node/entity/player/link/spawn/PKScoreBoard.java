@@ -1,6 +1,6 @@
 package core.game.node.entity.player.link.spawn;
 
-import core.cache.ServerStore;
+import core.cache.AriosStore;
 import core.cache.StoreFile;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.component.Component;
@@ -52,7 +52,7 @@ public final class PKScoreBoard {
 	 * Initializes the score boards data.
 	 */
 	public static void init() {
-		StoreFile file = ServerStore.get("pk_scores");
+		StoreFile file = AriosStore.get("pk_scores");
 		if (file == null) { //Indicates no cache exists yet.
 			return;
 		}
@@ -73,7 +73,7 @@ public final class PKScoreBoard {
 			ByteBufferUtils.putString(names[i], buffer);
 		}
 		buffer.flip();
-		ServerStore.setArchive("pk_scores", buffer);
+		AriosStore.setArchive("pk_scores", buffer);
 	}
 	
 	/**

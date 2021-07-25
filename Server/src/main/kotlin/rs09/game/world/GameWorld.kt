@@ -1,7 +1,7 @@
 package rs09.game.world
 
 import core.cache.Cache
-import core.cache.ServerStore
+import core.cache.AriosStore
 import core.cache.def.impl.SceneryDefinition
 import core.game.ge.GrandExchangeDatabase
 import core.game.node.entity.npc.drop.RareDropTable
@@ -25,6 +25,7 @@ import rs09.game.world.callback.CallbackHub
 import rs09.game.world.repository.Repository
 import rs09.plugin.PluginManager
 import rs09.worker.MajorUpdateWorker
+import java.text.SimpleDateFormat
 import java.util.*
 import java.util.function.Consumer
 
@@ -90,11 +91,9 @@ object GameWorld {
         }
     }
 
-    private fun checkDay(): Boolean {
-        val calendar = Calendar.getInstance(TimeZone.getTimeZone("America/Toronto"))
-        val day = calendar[Calendar.DAY_OF_WEEK]
-        val hour = calendar[Calendar.HOUR_OF_DAY]
-        return day == Calendar.SATURDAY && hour == 1 || day == Calendar.SUNDAY && hour == 1 || day == Calendar.TUESDAY && hour == 10
+    fun checkDay(): Int {
+        val weeklySdf = SimpleDateFormat("u")
+        return weeklySdf.format(Date()).toInt()
     }
 
     /**
@@ -131,7 +130,7 @@ object GameWorld {
     fun prompt(run: Boolean, directory: String?){
         SystemLogger.logInfo("Prompting ${settings?.name} Game World...")
         Cache.init(ServerConstants.CACHE_PATH)
-        ServerStore.init(ServerConstants.STORE_PATH)
+        AriosStore.init(ServerConstants.STORE_PATH)
         databaseManager = DatabaseManager(ServerConstants.DATABASE)
         databaseManager!!.connect()
         GrandExchangeDatabase.init()
