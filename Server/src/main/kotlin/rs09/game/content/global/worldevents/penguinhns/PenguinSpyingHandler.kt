@@ -18,16 +18,17 @@ class PenguinSpyingHandler : PluginInteraction(8107,8108,8104,8105,8109,8110){
         var stage = 0
         val curPoints = player.getAttribute("phns:points",0)
         val weeklyPoints = player.getAttribute("phns:weekly",0)
-        val WEEKLY_CAP = 10
 
         val ANIMATION = Animation(10355)
 
         override fun pulse(): Boolean {
             when(stage++){
                 0 -> player.lock().also { player.animator.animate(ANIMATION) }
-                1 -> player.sendMessage("You manage to spy on the penguin.").also { player.setAttribute("/save:phns:points",curPoints + 1);player.setAttribute("/save:phns:weekly",weeklyPoints + 1);player.unlock();}
-                2 -> if(weeklyPoints + 1 >= WEEKLY_CAP) player.setAttribute("/save:phns:date", ((System.currentTimeMillis() * 0.001) + 604800).toLong())
-                3 -> return true
+                1 -> player.sendMessage("You manage to spy on the penguin.").also {
+                    player.setAttribute("/save:phns:points",curPoints + 1)
+                    player.unlock()
+                }
+                2 -> return true
             }
             return false
         }
@@ -41,19 +42,12 @@ class PenguinSpyingHandler : PluginInteraction(8107,8108,8104,8105,8109,8110){
             }
         }
         if(option?.name?.toLowerCase()?.equals("spy-on")!!){
-            val currentDate = System.currentTimeMillis() * 0.001
-            val playerDate: Long = player?.getAttribute("phns:date",0L)!!
-            if(currentDate < playerDate){
-                player.sendMessage("You have already earned your maximum number of points this week.").also { return true }
-            } else if(playerDate != 0L){
-                player.removeAttribute("phns:date")
-                player.removeAttribute("phns:weekly")
-            }
-            if(PenguinManager.tagMapping[npc?.location]?.contains(player.username)!!){
+            player ?: return false
+            if(PenguinManager.hasTagged(player, npc!!.location)){
                 player.sendMessage("You've already tagged this penguin.")
             } else {
                 GameWorld.submit(movePulse())
-                PenguinManager.tagMapping[npc?.location]?.add(player.username)
+                PenguinManager.registerTag(player, npc!!.location)
             }
             return true
         }
