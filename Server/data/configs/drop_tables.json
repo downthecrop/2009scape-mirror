@@ -7863,7 +7863,32 @@
         "maxAmount": "1"
       }
     ],
-    "charm": [],
+    "charm": [
+      {
+        "minAmount": "1",
+        "weight": "85.0",
+        "id": "12158",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "7.0",
+        "id": "12159",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "7.0",
+        "id": "12160",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "12163",
+        "maxAmount": "1"
+      }
+    ],
     "ids": "117,4689,4690,4691,4692,4693",
     "description": "",
     "main": [
@@ -26219,14 +26244,8 @@
       },
       {
         "minAmount": "1",
-        "weight": "25.0",
+        "weight": "8.0",
         "id": "4131",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "1185",
         "maxAmount": "1"
       },
       {
@@ -26248,62 +26267,44 @@
         "maxAmount": "1"
       },
       {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "1303",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "1373",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "1319",
-        "maxAmount": "1"
-      },
-      {
         "minAmount": "5",
-        "weight": "50.0",
+        "weight": "25.0",
         "id": "560",
         "maxAmount": "5"
       },
       {
         "minAmount": "10",
-        "weight": "50.0",
+        "weight": "25.0",
         "id": "560",
         "maxAmount": "10"
       },
       {
         "minAmount": "3",
-        "weight": "25.0",
+        "weight": "12.5",
         "id": "562",
         "maxAmount": "3"
       },
       {
         "minAmount": "37",
-        "weight": "25.0",
+        "weight": "12.5",
         "id": "562",
         "maxAmount": "37"
       },
       {
         "minAmount": "1",
-        "weight": "50.0",
+        "weight": "25.0",
         "id": "5281",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "50.0",
+        "weight": "25.0",
         "id": "5297",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "50.0",
+        "weight": "25.0",
         "id": "5280",
         "maxAmount": "1"
       },
@@ -26339,27 +26340,21 @@
       },
       {
         "minAmount": "1",
-        "weight": "5.0",
+        "weight": "8.0",
         "id": "5303",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "5.0",
+        "weight": "8.0",
         "id": "5302",
         "maxAmount": "1"
       },
       {
-        "minAmount": "1144",
+        "minAmount": "10",
         "weight": "50.0",
         "id": "995",
-        "maxAmount": "1144"
-      },
-      {
-        "minAmount": "132",
-        "weight": "50.0",
-        "id": "995",
-        "maxAmount": "132"
+        "maxAmount": "460"
       },
       {
         "minAmount": "1",
@@ -26381,19 +26376,13 @@
       },
       {
         "minAmount": "1",
-        "weight": "5.0",
-        "id": "2363",
+        "weight": "8.0",
+        "id": "12070",
         "maxAmount": "1"
       },
       {
         "minAmount": "1",
-        "weight": "5.0",
-        "id": "2723",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
+        "weight": "16.0",
         "id": "31",
         "maxAmount": "1"
       },
@@ -26401,6 +26390,24 @@
         "minAmount": "1",
         "weight": "100.0",
         "id": "0",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "5300",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "5304",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "25.0",
+        "id": "5295",
         "maxAmount": "1"
       }
     ]
