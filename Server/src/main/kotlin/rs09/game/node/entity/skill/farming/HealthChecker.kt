@@ -25,7 +25,7 @@ class HealthChecker : OptionHandler(){
         val patch = fPatch.getPatchFor(player)
         val type = patch.patch.type
 
-        if(type != PatchType.BUSH && type != PatchType.FRUIT_TREE && type != PatchType.TREE){
+        if(type != PatchType.BUSH && type != PatchType.FRUIT_TREE && type != PatchType.TREE && type != PatchType.CACTUS){
             player.sendMessage("This shouldn't be happening. Please report this.")
             return true
         }
@@ -38,6 +38,7 @@ class HealthChecker : OptionHandler(){
             PatchType.TREE -> patch.setCurrentState(patch.getCurrentState() + 1)
             PatchType.FRUIT_TREE -> patch.setCurrentState(patch.getCurrentState() - 14)
             PatchType.BUSH -> patch.setCurrentState(patch.plantable!!.value + patch.plantable!!.stages + 4)
+            PatchType.CACTUS -> patch.setCurrentState(patch.plantable!!.value + patch.plantable!!.stages + 3)
             else -> SystemLogger.logErr("Unreachable patch type from when(type) switch in HealthChecker.kt line 36")
         }
 
