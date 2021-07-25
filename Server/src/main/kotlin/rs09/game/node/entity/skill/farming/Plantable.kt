@@ -76,7 +76,8 @@ enum class Plantable(val itemID: Int, val value: Int, val stages: Int, val plant
     TORSTOL_SEED(5304,103,4,199.5,224.5,0.0,85,PatchType.HERB,Items.GRIMY_TORSTOL_219),
 
     //Other
-    BELLADONNA_SEED(5281, 4, 4, 91.0, 128.0, 0.0, 63, PatchType.BELLADONNA, Items.CAVE_NIGHTSHADE_2398)
+    BELLADONNA_SEED(5281, 4, 4, 91.0, 128.0, 0.0, 63, PatchType.BELLADONNA, Items.CAVE_NIGHTSHADE_2398),
+    CACTUS_SEED(Items.CACTUS_SEED_5280, 8, 7, 66.5, 25.0, 374.0, 55, PatchType.CACTUS, Items.CACTUS_SPINE_6016)
     ;
 
     constructor(itemID: Int, value: Int, stages: Int, plantingXP: Double, harvestXP: Double, checkHealthXP: Double, requiredLevel: Int, applicablePatch: PatchType, harvestItem: Int, protectionFlower: Plantable)
