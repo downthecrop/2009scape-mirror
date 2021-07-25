@@ -45946,7 +45946,7 @@
     "high_alchemy": "124800",
     "weight": "13",
     "weapon_interface": "2",
-    "render_anim": "1426",
+    "render_anim": "134",
     "name": "Dharok's greataxe"
   },
   {
@@ -47598,7 +47598,7 @@
     "high_alchemy": "124800",
     "weight": "13",
     "weapon_interface": "2",
-    "render_anim": "1426",
+    "render_anim": "134",
     "attack_audios": "1320,0,0,0",
     "name": "Dharok's axe 100"
   },
@@ -47626,7 +47626,7 @@
     "high_alchemy": "124800",
     "weight": "13",
     "weapon_interface": "2",
-    "render_anim": "1426",
+    "render_anim": "134",
     "attack_audios": "1320,0,0,0",
     "name": "Dharok's axe 75"
   },
@@ -47654,7 +47654,7 @@
     "high_alchemy": "124800",
     "weight": "13",
     "weapon_interface": "2",
-    "render_anim": "1426",
+    "render_anim": "134",
     "attack_audios": "1320,0,0,0",
     "name": "Dharok's axe 50"
   },
@@ -47682,7 +47682,7 @@
     "high_alchemy": "124800",
     "weight": "13",
     "weapon_interface": "2",
-    "render_anim": "1426",
+    "render_anim": "134",
     "attack_audios": "1320,0,0,0",
     "name": "Dharok's axe 25"
   },
@@ -47709,7 +47709,7 @@
     "high_alchemy": "124800",
     "weight": "13",
     "weapon_interface": "2",
-    "render_anim": "1426",
+    "render_anim": "134",
     "attack_audios": "1320,0,0,0",
     "name": "Dharok's axe 0"
   },
