@@ -69,6 +69,9 @@ object Server {
         }
         startTime = System.currentTimeMillis()
         val t = TimeStamp()
+        SystemLogger.logInfo("Initializing Server Store...")
+        ServerStore.init()
+        SystemLogger.logInfo("Initialized ${ServerStore.counter} store files.")
         GameWorld.prompt(true)
         SQLManager.init()
         Runtime.getRuntime().addShutdownHook(ServerConstants.SHUTDOWN_HOOK)

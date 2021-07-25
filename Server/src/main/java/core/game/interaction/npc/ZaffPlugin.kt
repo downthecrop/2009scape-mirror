@@ -1,18 +1,28 @@
-package core.game.interaction.npc;
+package core.game.interaction.npc
 
-import core.cache.def.impl.NPCDefinition;
-import core.plugin.Initializable;
-import core.game.content.dialogue.DialoguePlugin;
-import core.game.content.dialogue.FacialExpression;
-import core.game.interaction.OptionHandler;
-import core.game.node.Node;
-import core.game.node.entity.npc.NPC;
-import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.RunScript;
-import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.node.entity.player.link.quest.Quest;
-import core.game.node.item.Item;
-import core.plugin.Plugin;
+import api.Container
+import api.ContentAPI
+import api.InputType
+import core.cache.def.impl.NPCDefinition
+import core.plugin.Initializable
+import core.game.interaction.OptionHandler
+import core.plugin.Plugin
+import core.game.interaction.npc.ZaffPlugin.ZaffDialogue
+import core.game.interaction.npc.ZaffPlugin.ZaffStaveDialogue
+import core.game.content.dialogue.DialoguePlugin
+import core.game.node.entity.player.link.quest.Quest
+import core.game.content.dialogue.FacialExpression
+import core.game.interaction.npc.ZaffPlugin
+import core.game.node.Node
+import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
+import core.game.node.item.Item
+import org.json.simple.JSONObject
+import org.rs09.consts.Items
+import rs09.ServerStore
+import rs09.ServerStore.getInt
+import rs09.game.system.SystemLogger
 
 /**
  * Represents the plugin used for buying a battle staff from zeke.
@@ -20,377 +30,427 @@ import core.plugin.Plugin;
  * @version 1.0
  */
 @Initializable
-public final class ZaffPlugin extends OptionHandler {
-	
-	/**
-	 * The bacon ring.
-	 */
-	public static final Item BEACON_RING = new Item(11014);
+class ZaffPlugin : OptionHandler() {
+    @Throws(Throwable::class)
+    override fun newInstance(arg: Any?): Plugin<Any?> {
+        NPCDefinition.setOptionHandler("buy-battlestaves", this)
+        ZaffDialogue().init()
+        ZaffStaveDialogue().init()
+        return this
+    }
 
-	@Override
-	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		NPCDefinition.setOptionHandler("buy-battlestaves", this);
-		new ZaffDialogue().init();
-		new ZaffStaveDialogue().init();
-		return this;
-	}
+    override fun handle(player: Player, node: Node, option: String): Boolean {
+        player.dialogueInterpreter.open(9679)
+        return true
+    }
 
-	@Override
-	public boolean handle(Player player, Node node, String option) {
-		player.getDialogueInterpreter().open(9679);
-		return true;
-	}
+    /**
+     * Represents the dialogue plugin used for the zaff npc.
+     * @author 'Vexia
+     * @version 1.0
+     */
+    class ZaffDialogue : DialoguePlugin {
+        /**
+         * The quest.
+         */
+        private var quest: Quest? = null
 
-	/**
-	 * Represents the dialogue plugin used for the zaff npc.
-	 * @author 'Vexia
-	 * @version 1.0
-	 */
-	public static final class ZaffDialogue extends DialoguePlugin {
+        /**
+         * Constructs a new `ZaffDialogue` `Object`.
+         */
+        constructor() {
+            /**
+             * empty.
+             */
+        }
 
-		/**
-		 * Represents the staff item.
-		 */
-		@SuppressWarnings("unused")
-		private static final Item STAFF = new Item(11014, 1);
+        /**
+         * Constructs a new `ZaffDialogue` `Object`.
+         * @param player the player.
+         */
+        constructor(player: Player?) : super(player) {}
 
-		/**
-		 * The quest.
-		 */
-		private Quest quest;
+        override fun newInstance(player: Player?): DialoguePlugin {
+            return ZaffDialogue(player)
+        }
 
-		/**
-		 * Constructs a new {@code ZaffDialogue} {@code Object}.
-		 */
-		public ZaffDialogue() {
-			/**
-			 * empty.
-			 */
-		}
+        override fun open(vararg args: Any): Boolean {
+            npc = args[0] as NPC
+            quest = player.questRepository.getQuest("What Lies Below")
+            interpreter.sendDialogues(
+                npc,
+                FacialExpression.HALF_GUILTY,
+                "Would you like to buy or sell some staves or is there",
+                "something else you need?"
+            )
+            stage = 0
+            return true
+        }
 
-		/**
-		 * Constructs a new {@code ZaffDialogue} {@code Object}.
-		 * @param player the player.
-		 */
-		public ZaffDialogue(Player player) {
-			super(player);
-		}
+        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+            when (stage) {
+                0 -> {
+                    if (quest!!.getStage(player) == 60) {
+                        interpreter.sendOptions(
+                            "Select an Option",
+                            "Yes, please.",
+                            "No, thank you.",
+                            "Rat Burgiss sent me."
+                        )
+                        stage = 1
+                    } else if (quest!!.getStage(player) == 80) {
+                        interpreter.sendOptions(
+                            "Select an Option",
+                            "Yes, please.",
+                            "No, thank you.",
+                            "We did it! We beat Surok!"
+                        )
+                        stage = 1
+                    } else if (quest!!.getStage(player) >= 70) {
+                        interpreter.sendOptions(
+                            "Select an Option",
+                            "Yes, please.",
+                            "No, thank you.",
+                            "Can I have another ring?"
+                        )
+                        stage = 1
+                    }
+                    interpreter.sendOptions("Select an Option", "Yes, please.", "No, thank you.")
+                    stage = 1
+                }
+                1 -> when (buttonId) {
+                    1 -> {
+                        interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Yes, please.")
+                        stage = 10
+                    }
+                    2 -> {
+                        interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No, thank you.")
+                        stage = 20
+                    }
+                    3 -> {
+                        if (quest!!.getStage(player) == 60) {
+                            player("Rat Burgiss sent me!")
+                            stage = 70
+                        } else if (quest!!.getStage(player) == 80) {
+                            player("We did it! We beat Surok!")
+                            stage = 200
+                        }
+                        interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Can I have another ring?")
+                        stage = 50
+                    }
+                }
+                10 -> {
+                    if(player.achievementDiaryManager.getDiary(DiaryType.VARROCK).levelRewarded.contains(true)){
+                        npcl(FacialExpression.FRIENDLY, "Would you like to hear about my battlestaves?")
+                        stage = 1000
+                    } else {
+                        end()
+                        npc.openShop(player)
+                    }
+                }
+                20 -> {
+                    interpreter.sendDialogues(
+                        npc,
+                        FacialExpression.HALF_GUILTY,
+                        "Well, 'stick' your head in again if you change your mind."
+                    )
+                    stage = 21
+                }
+                21 -> {
+                    interpreter.sendDialogues(
+                        player,
+                        FacialExpression.HALF_GUILTY,
+                        "Huh, terrible pun. You just can't get the 'staff' these",
+                        "days!"
+                    )
+                    stage = 22
+                }
+                22 -> end()
+                50 -> {
+                    if (player.inventory.contains(11014, 1)) interpreter.sendDialogues(
+                        npc,
+                        FacialExpression.HALF_GUILTY,
+                        "Go and get the one that's in your inventory " + player.username + "!"
+                    ) else if (player.bank.contains(11014, 1)) interpreter.sendDialogues(
+                        npc,
+                        FacialExpression.HALF_GUILTY,
+                        "Go and get the one that's in your bank" + player.username + "!"
+                    ) else if (player.equipment.contains(11014, 1)) interpreter.sendDialogues(
+                        npc,
+                        FacialExpression.HALF_GUILTY,
+                        "Go and get the one that's on your finger " + player.username + "!"
+                    ) else {
+                        interpreter.sendDialogues(
+                            npc,
+                            FacialExpression.HALF_GUILTY,
+                            "Of course you can! Here you go " + player.username + "!"
+                        )
+                        player.inventory.add(BEACON_RING)
+                    }
+                    stage = 51
+                }
+                51 -> end()
+                70 -> {
+                    npc(
+                        "Ah, yes; You must be " + player.username + "! Rat sent word that you",
+                        "would be coming. Everything is prepared. I have created",
+                        "a spell that will remove the mind control spell."
+                    )
+                    stage++
+                }
+                71 -> {
+                    player("Okay, what's the plan?")
+                    stage++
+                }
+                72 -> {
+                    npc(
+                        "Listen carefully. For the spell to succeed, the king must",
+                        "be made very weak, if his mind is controlled, you will",
+                        "need to fight him until he is all but dead."
+                    )
+                    stage++
+                }
+                73 -> {
+                    npc(
+                        "Then and ONLY then, use your ring to summon me.",
+                        "I will teleport to you and cast the spell that will",
+                        "cure the king."
+                    )
+                    stage++
+                }
+                74 -> {
+                    player("Why must I summon you? Can't you come with me?")
+                    stage++
+                }
+                75 -> {
+                    npc(
+                        "I cannot. I must look after my shop here and",
+                        "I have lots to do. Rest assured, I will come when you",
+                        "summon me."
+                    )
+                    stage++
+                }
+                76 -> {
+                    player("Okay, so what do I do now?")
+                    stage++
+                }
+                77 -> {
+                    npc("Take this beacon ring and some instructions.")
+                    stage++
+                }
+                78 -> {
+                    npc("Once you have read the instructions. It will be time for", "you to arrest Surok.")
+                    stage++
+                }
+                79 -> {
+                    player("Won't he be disinclined to acquiesce to that request?")
+                    stage++
+                }
+                80 -> {
+                    npc("Won't he what?")
+                    stage++
+                }
+                81 -> {
+                    player("Won't he refuse?")
+                    stage++
+                }
+                82 -> {
+                    npc(
+                        "I very much expect so. It may turn nasty, so be on your",
+                        "guard. I hope we can stop him before he can cast his",
+                        "spell!",
+                        "Make sure you have that ring I gave you."
+                    )
+                    stage++
+                }
+                83 -> {
+                    player("Okay, thanks, Zaff!")
+                    stage++
+                }
+                84 -> {
+                    player.inventory.add(BEACON_RING)
+                    quest!!.setStage(player, 70)
+                    end()
+                }
+                200 -> {
+                    npc("Yes. You have done well, " + player.username + ". You are to be", "commended for you actions!")
+                    stage++
+                }
+                201 -> {
+                    player("It was all in the call of duty!")
+                    stage++
+                }
+                202 -> {
+                    player("What will happen with Surok now?")
+                    stage++
+                }
+                203 -> {
+                    npc(
+                        "Well, when I disrupted Surok's spell, he will have been",
+                        "sealed in the library, but we still need to keep an",
+                        "eye on him, just in case."
+                    )
+                    stage++
+                }
+                204 -> {
+                    npc("When you are ready, report back to Rat and he will", "reward you.")
+                    stage++
+                }
+                205 -> {
+                    player("Okay, I will.")
+                    stage++
+                }
+                206 -> {
+                    quest!!.setStage(player, 90)
+                    end()
+                }
 
-		@Override
-		public DialoguePlugin newInstance(Player player) {
-			return new ZaffDialogue(player);
-		}
+                1000 -> options("Yes, please.", "No, thanks.").also { stage++ }
+                1001 -> when(buttonId){
+                    1 -> {
+                        end()
+                        ContentAPI.openDialogue(player, 9679, npc)
+                    }
+                    2 -> {
+                        end()
+                        npc.openShop(player)
+                    }
+                }
+            }
+            return true
+        }
 
-		@Override
-		public boolean open(Object... args) {
-			npc = (NPC) args[0];
-			quest = player.getQuestRepository().getQuest("What Lies Below");
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Would you like to buy or sell some staves or is there", "something else you need?");
-			stage = 0;
-			return true;
-		}
+        override fun getIds(): IntArray {
+            return intArrayOf(546)
+        }
 
-		@Override
-		public boolean handle(int interfaceId, int buttonId) {
-			switch (stage) {
-			case 0:
-				if (quest.getStage(player) == 60) {
-					interpreter.sendOptions("Select an Option", "Yes, please.", "No, thank you.", "Rat Burgiss sent me.");
-					stage = 1;
-					break;
-				} else if (quest.getStage(player) == 80) {
-					interpreter.sendOptions("Select an Option", "Yes, please.", "No, thank you.", "We did it! We beat Surok!");
-					stage = 1;
-					break;
-				} else if (quest.getStage(player) >= 70) {
-					interpreter.sendOptions("Select an Option", "Yes, please.", "No, thank you.", "Can I have another ring?");
-					stage = 1;
-					break;
-				}
-				interpreter.sendOptions("Select an Option", "Yes, please.", "No, thank you.");
-				stage = 1;
-				break;
-			case 1:
-				switch (buttonId) {
-				case 1:
-					interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Yes, please.");
-					stage = 10;
-					break;
-				case 2:
-					interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No, thank you.");
-					stage = 20;
-					break;
-				case 3:
-					if (quest.getStage(player) == 60) {
-						player("Rat Burgiss sent me!");
-						stage = 70;
-						break;
-					} else if (quest.getStage(player) == 80) {
-						player("We did it! We beat Surok!");
-						stage = 200;
-						break;
-					}
-					interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Can I have another ring?");
-					stage = 50;
-					break;
-				}
+        companion object {
+            /**
+             * Represents the staff item.
+             */
+            private val STAFF = Item(11014, 1)
+        }
+    }
 
-				break;
-			case 10:
-				end();
-				npc.openShop(player);
-				break;
-			case 20:
-				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, 'stick' your head in again if you change your mind.");
-				stage = 21;
-				break;
-			case 21:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Huh, terrible pun. You just can't get the 'staff' these", "days!");
-				stage = 22;
-				break;
-			case 22:
-				end();
-				break;
-			case 50:
-				if (player.getInventory().contains(11014, 1))
-					interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Go and get the one that's in your inventory " + player.getUsername() + "!");
-				else if (player.getBank().contains(11014, 1))
-					interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Go and get the one that's in your bank" + player.getUsername() + "!");
-				else if (player.getEquipment().contains(11014, 1))
-					interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Go and get the one that's on your finger " + player.getUsername() + "!");
-				else {
-					interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Of course you can! Here you go " + player.getUsername() + "!");
-					player.getInventory().add(BEACON_RING);
-				}
-				stage = 51;
-				break;
-			case 51:
-				end();
-				break;
-			case 70:
-				npc("Ah, yes; You must be " + player.getUsername() + "! Rat sent word that you", "would be coming. Everything is prepared. I have created", "a spell that will remove the mind control spell.");
-				stage++;
-				break;
-			case 71:
-				player("Okay, what's the plan?");
-				stage++;
-				break;
-			case 72:
-				npc("Listen carefully. For the spell to succeed, the king must", "be made very weak, if his mind is controlled, you will", "need to fight him until he is all but dead.");
-				stage++;
-				break;
-			case 73:
-				npc("Then and ONLY then, use your ring to summon me.", "I will teleport to you and cast the spell that will", "cure the king.");
-				stage++;
-				break;
-			case 74:
-				player("Why must I summon you? Can't you come with me?");
-				stage++;
-				break;
-			case 75:
-				npc("I cannot. I must look after my shop here and", "I have lots to do. Rest assured, I will come when you", "summon me.");
-				stage++;
-				break;
-			case 76:
-				player("Okay, so what do I do now?");
-				stage++;
-				break;
-			case 77:
-				npc("Take this beacon ring and some instructions.");
-				stage++;
-				break;
-			case 78:
-				npc("Once you have read the instructions. It will be time for", "you to arrest Surok.");
-				stage++;
-				break;
-			case 79:
-				player("Won't he be disinclined to acquiesce to that request?");
-				stage++;
-				break;
-			case 80:
-				npc("Won't he what?");
-				stage++;
-				break;
-			case 81:
-				player("Won't he refuse?");
-				stage++;
-				break;
-			case 82:
-				npc("I very much expect so. It may turn nasty, so be on your", "guard. I hope we can stop him before he can cast his", "spell!", "Make sure you have that ring I gave you.");
-				stage++;
-				break;
-			case 83:
-				player("Okay, thanks, Zaff!");
-				stage++;
-				break;
-			case 84:
-				player.getInventory().add(BEACON_RING);
-				quest.setStage(player, 70);
-				end();
-				break;
-			case 200:
-				npc("Yes. You have done well, " + player.getUsername() + ". You are to be", "commended for you actions!");
-				stage++;
-				break;
-			case 201:
-				player("It was all in the call of duty!");
-				stage++;
-				break;
-			case 202:
-				player("What will happen with Surok now?");
-				stage++;
-				break;
-			case 203:
-				npc("Well, when I disrupted Surok's spell, he will have been", "sealed in the library, but we still need to keep an", "eye on him, just in case.");
-				stage++;
-				break;
-			case 204:
-				npc("When you are ready, report back to Rat and he will", "reward you.");
-				stage++;
-				break;
-			case 205:
-				player("Okay, I will.");
-				stage++;
-				break;
-			case 206:
-				quest.setStage(player, 90);
-				end();
-				break;
-			}
-			return true;
-		}
+    /**
+     * Represents the dialogue used to buy staves from zaff.
+     * @author 'Vexia
+     * @version 1.0
+     */
+    inner class ZaffStaveDialogue : DialoguePlugin {
+        /**
+         * The ammount of battlestaves.
+         */
+        private var ammount = 0
 
-		@Override
-		public int[] getIds() {
-			return new int[] { 546 };
-		}
-	}
+        /**
+         * Constructs a new `ZaffBuyStavesDialogue` `Object`.
+         */
+        constructor() {
+            /**
+             * empty.
+             */
+        }
 
-	/**
-	 * Represents the dialogue used to buy staves from zaff.
-	 * @author 'Vexia
-	 * @version 1.0
-	 */
-	public final class ZaffStaveDialogue extends DialoguePlugin {
+        /**
+         * Constructs a new `ZaffBuyStavesDialogue` `Object`.
+         * @param player the player.
+         */
+        constructor(player: Player?) : super(player) {}
 
-		/**
-		 * The ammount of battlestaves.
-		 */
-		private int ammount;
+        override fun newInstance(player: Player?): DialoguePlugin {
+            return ZaffStaveDialogue(player)
+        }
 
-		/**
-		 * Constructs a new {@code ZaffBuyStavesDialogue} {@code Object}.
-		 */
-		public ZaffStaveDialogue() {
-			/**
-			 * empty.
-			 */
-		}
+        override fun open(vararg args: Any): Boolean {
+            ammount = getStoreFile().getInt(player.username.toLowerCase())
+            interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Do you have any battlestaves?")
+            stage = 0
+            return true
+        }
 
-		/**
-		 * Constructs a new {@code ZaffBuyStavesDialogue} {@code Object}.
-		 * @param player the player.
-		 */
-		public ZaffStaveDialogue(Player player) {
-			super(player);
-		}
+        override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+            when (stage) {
+                0 -> {
+                    if (ammount >= maxStaffs) {
+                        interpreter.sendDialogues(
+                            546,
+                            FacialExpression.HALF_GUILTY,
+                            "I'm very sorry! I seem to be out of battlestaves at the",
+                            "moment! I expect I'll get some more in by tomorrow,",
+                            "though."
+                        )
+                        stage = 2
+                        return true
+                    }
+                    interpreter.sendDialogues(
+                        546,
+                        FacialExpression.HALF_GUILTY,
+                        "Battlestaves cost 8,000 gold pieces each. I have ${maxStaffs - ammount} left.",
+                        "How many would you like to buy?"
+                    )
+                    stage = 1
+                }
+                1 -> end().also { ContentAPI.sendInputDialogue(player, InputType.NUMERIC, "Enter an amount:"){ value ->
+                    ammount = getStoreFile().getInt(player.username.toLowerCase())
+                    var amt = value as Int
+                    if(amt > maxStaffs - ammount) amt = maxStaffs - ammount
+                    val coinage = amt * 8000
+                    if(!ContentAPI.inInventory(player, Items.COINS_995, coinage)){
+                        ContentAPI.sendDialogue(player, "You can't afford that many.")
+                        return@sendInputDialogue
+                    }
 
-		@Override
-		public DialoguePlugin newInstance(Player player) {
-			return new ZaffStaveDialogue(player);
-		}
+                    if(amt == 0){
+                        return@sendInputDialogue
+                    }
 
-		@Override
-		public boolean open(Object... args) {
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Do you have any battlestaves?");
-			stage = 0;
-			return true;
-		}
+                    if(ContentAPI.removeItem(player, Item(Items.COINS_995, coinage), Container.INVENTORY)){
+                        ContentAPI.addItem(player, Items.BATTLESTAFF_1392, amt)
+                        ZaffPlugin.getStoreFile()[player.username.toLowerCase()] = amt + ammount
+                    }
+                } }
+                2 -> {
+                    interpreter.sendDialogues(
+                        player,
+                        FacialExpression.HALF_GUILTY,
+                        "Oh, okay then. I'll try again another time."
+                    )
+                    stage = 3
+                }
+                3 -> end()
+            }
+            return true
+        }
 
-		@Override
-		public boolean handle(int interfaceId, int buttonId) {
-			switch (stage) {
-			case 0:
-				ammount = player.getSavedData().getGlobalData().getZaffAmount();
-				if (player.getSavedData().getGlobalData().getZafTime() < System.currentTimeMillis()) {
-					ammount = getMaxStaffs();
-				}
-				if (player.getSavedData().getGlobalData().getZafTime() > System.currentTimeMillis() && ammount <= 0) {
-					interpreter.sendDialogues(546, FacialExpression.HALF_GUILTY, "I'm very sorry! I seem to be out of battlestaves at the", "moment! I expect I'll get some more in by tomorrow,", "though.");
-					stage = 2;
-					break;
-				}
-				interpreter.sendDialogues(546, FacialExpression.HALF_GUILTY, "Battlestaves cost 8,000 gold pieces each. I have " + ammount + " left.", "How many would you like to buy?");
-				stage = 1;
-				break;
-			case 1:
-				end();
-				/*player.setAttribute("runscript", new RunScript() {
-					@Override
-					public boolean handle() {
-						int amt = (int) value;
-						if (amt > ammount) {
-							amt = ammount;
-						}
-						if (amt > player.getInventory().freeSlots()) {
-							amt = player.getInventory().freeSlots();
-						}
-						if (amt == 0) {
-							return true;
-						}
-						if (7000 * amt > player.getInventory().getAmount(new Item(995))) {
-							player.getPacketDispatch().sendMessage("You don't have enough money to buy that many.");
-							return true;
-						} else {
-							Item remove = new Item(995, 7000 * amt);
-							if (!player.getInventory().containsItem(remove)) {
-								end();
-								return true;
-							}
-							player.getInventory().remove(remove);
-							if (player.getInventory().add(new Item(1391, amt))) {
-								player.getSavedData().getGlobalData().setZafTime(System.currentTimeMillis() + (24 * 60 * 60 * 1000));
-								player.getSavedData().getGlobalData().setZaffAmount(ammount - amt);
-							}
-						}
-						return true;
-					}
-				});
-				interpreter.sendInput(false, "Zaff has " + ammount + " battlestaves...");
-*/				break;
-				//TODO: Come back and fix this later when achievement diaries can actually be completed kekkekekeke
-			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Oh, okay then. I'll try again another time.");
-				stage = 3;
-				break;
-			case 3:
-				end();
-				break;
-			}
-			return true;
-		}
+        /**
+         * Gets the max staffs to buy.
+         * @return the max staffs to buy.
+         */
+        val maxStaffs: Int
+            get() {
+                val level = player.achievementDiaryManager.getDiary(DiaryType.VARROCK).level
+                return when (level) {
+                    2 -> 64
+                    1 -> 32
+                    0 -> 16
+                    else -> 0
+                }
+            }
 
-		/**
-		 * Gets the max staffs to buy.
-		 * @return the max staffs to buy.
-		 */
-		public int getMaxStaffs() {
-			int level = player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).getLevel();
-			switch (level) {
-				case 2:
-					return 64;
-				case 1:
-					return 32;
-				case 0:
-					return 16;
-				default:
-					return 8;
-			}
-		}
+        override fun getIds(): IntArray {
+            return intArrayOf(9679)
+        }
+    }
 
-		@Override
-		public int[] getIds() {
-			return new int[] { 9679 };
-		}
-	}
+    companion object {
+        /**
+         * The bacon ring.
+         */
+        val BEACON_RING = Item(11014)
+
+        fun getStoreFile(): JSONObject {
+            return ServerStore.getArchive("daily-zaff")
+        }
+    }
 }

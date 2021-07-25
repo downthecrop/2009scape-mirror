@@ -5,7 +5,10 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
+import org.json.simple.JSONObject
 import org.rs09.consts.Items
+import rs09.ServerStore
+import rs09.ServerStore.getBoolean
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.global.worldevents.WorldEvents
 import rs09.game.content.global.worldevents.shootingstar.ShootingStar
@@ -23,7 +26,7 @@ class StarRingListener : InteractionListener(){
 
             if(star == null) ContentAPI.sendDialogue(player, "There is currently no active star.").also { return@on true }
 
-            if(ContentAPI.getAttribute(player, "ring-next-tele", 0L) > System.currentTimeMillis()){
+            if(getStoreFile().getBoolean(player.username.toLowerCase())){
                 ContentAPI.sendDialogue(player, "The ring is still recharging.")
                 return@on true
             }
@@ -79,7 +82,13 @@ class StarRingListener : InteractionListener(){
 
         fun teleport(player: Player, star: ShootingStar){
             ContentAPI.teleport(player, star.crash_locations[star.location]!!.transform(0, -1, 0), TeleportManager.TeleportType.MINIGAME)
-            ContentAPI.setAttribute(player, "/save:ring-next-tele", System.currentTimeMillis() + TimeUnit.DAYS.toMillis(1))
+            getStoreFile()[player.username.toLowerCase()] = true
+        }
+    }
+
+    companion object {
+        fun getStoreFile(): JSONObject {
+            return ServerStore.getArchive("daily-star-ring")
         }
     }
 }

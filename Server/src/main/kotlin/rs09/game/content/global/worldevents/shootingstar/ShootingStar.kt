@@ -5,6 +5,10 @@ import core.game.node.`object`.SceneryBuilder
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
+import rs09.ServerStore.getBoolean
+import rs09.ServerStore.getInt
+import rs09.ServerStore.getString
+import rs09.game.system.SystemLogger
 import rs09.game.world.repository.Repository
 
 /**
@@ -51,6 +55,7 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
     var ticks = 0
     var isSpawned = false
     var spriteSpawned = false
+    var firstStar = true
 
     /**
      * Degrades a ShootingStar (or removes the starObject and spawns a Star Sprite if it's the last star)
@@ -62,11 +67,15 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
             starSprite.location = starObject.location
             starSprite.init()
             spriteSpawned = true
+            ShootingStarEvent.getStoreFile().clear()
             return
         }
         level = getNextType()
         maxDust = level.totalStardust
         dustLeft = level.totalStardust
+
+        ShootingStarEvent.getStoreFile()["level"] = level.ordinal
+        ShootingStarEvent.getStoreFile()["isDiscovered"] = isDiscovered
 
         val newStar = Scenery(level.objectId, starObject.location)
         SceneryBuilder.replace(starObject, newStar)
@@ -93,13 +102,26 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
      * Rebuilds some of the variables with new information.
      */
     fun rebuildVars(){
-        level = ShootingStarType.values().random()
-        location = crash_locations.entries.random().key
+        if(firstStar && ShootingStarEvent.getStoreFile().isNotEmpty()){
+            level = ShootingStarType.values()[ShootingStarEvent.getStoreFile().getInt("level")]
+            location = ShootingStarEvent.getStoreFile().getString("location")
+            isDiscovered = ShootingStarEvent.getStoreFile().getBoolean("isDiscovered")
+        } else {
+            level = ShootingStarType.values().random()
+            location = crash_locations.entries.random().key
+            isDiscovered = false
+        }
+
         maxDust = level.totalStardust
         dustLeft = level.totalStardust
         starObject = Scenery(level.objectId, crash_locations.get(location))
-        isDiscovered = false
+
+        ShootingStarEvent.getStoreFile()["level"] = level.ordinal
+        ShootingStarEvent.getStoreFile()["location"] = location
+        ShootingStarEvent.getStoreFile()["isDiscovered"] = false
+
         ticks = 0
+        firstStar = false
     }
 
     fun clearSprite() {
