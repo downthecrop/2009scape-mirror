@@ -32,6 +32,7 @@ public final class PlayerParser {
 			}
 			return true;
 		} catch (Exception e){
+			e.printStackTrace();
 			return false;
 		}
 	}
@@ -58,7 +59,7 @@ public final class PlayerParser {
 			while ((length = is.read(buffer)) > 0) {
 				os.write(buffer, 0, length);
 			}
-		} catch (Exception ignored){
+		} catch (Exception e){ e.printStackTrace();
 		} finally {
 			try {
 				assert is != null;
@@ -67,6 +68,7 @@ public final class PlayerParser {
 				os.close();
 			} catch (Exception f){
 				SystemLogger.logWarn("Unable to close file copiers in PlayerParser.java line 216.");
+				f.printStackTrace();
 			}
 		}
 	}
