@@ -377,15 +377,21 @@ public final class HouseManager {
 		Region from = RegionManager.forId(style.getRegionId());
 		Region.load(from, true);
 		RegionChunk defaultChunk = from.getPlanes()[style.getPlane()].getRegionChunk(1, 0);
-		ZoneBorders borders = DynamicRegion.reserveArea(8, 8);
-		region = new DynamicRegion(-1, borders.getSouthWestX() >> 6, borders.getSouthWestY() >> 6);
-		region.setBorders(borders);
+		RegionChunk defaultSkyChunk = from.getPlanes()[1].getRegionChunk(0,0);
+		ZoneBorders borders;
+		//DynamicRegion[] regions = DynamicRegion.create(borders);
+		region = DynamicRegion.create(style.getRegionId());
+/*		region.setBorders(borders);
 		region.setUpdateAllPlanes(true);
-		RegionManager.addRegion(region.getId(), region);
+		RegionManager.addRegion(region.getId(), region);*/
 		configureRoofs();
-		for (int z = 0; z < 3; z++) {
+		for (int z = 0; z < 4; z++) {
 			for (int x = 0; x < 8; x++) {
 				for (int y = 0; y < 8; y++) {
+					if(z == 3){
+						region.replaceChunk(z, x, y, defaultSkyChunk.copy(region.getPlanes()[z]), from);
+						 continue;
+					}
 					Room room = rooms[z][x][y];
 					if (room != null) {
 						if (room.getProperties().isRoof() && buildingMode) {
@@ -395,7 +401,7 @@ public final class HouseManager {
 						region.replaceChunk(z, x, y, copy, from);
 						room.loadDecorations(z, copy, this);
 					} else {
-						region.replaceChunk(z, x, y, z != 0 ? null : defaultChunk.copy(region.getPlanes()[0]), from);
+						region.replaceChunk(z, x, y, z != 0 ? defaultSkyChunk.copy(region.getPlanes()[z]) : defaultChunk.copy(region.getPlanes()[0]), from);
 					}
 				}
 			}
