@@ -14,7 +14,11 @@ import core.game.node.entity.player.link.TeleportManager.TeleportType
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import org.json.simple.JSONObject
 import org.rs09.consts.Items
+import rs09.ServerStore
+import rs09.ServerStore.getBoolean
+import rs09.ServerStore.getInt
 import rs09.game.interaction.InteractionListener
 
 /**
@@ -30,17 +34,15 @@ class ExplorersRingPlugin : InteractionListener() {
 
     override fun defineListeners() {
         on(RINGS, ITEM, "run-replenish"){player, node ->
-            if (player.savedData.globalData.runReplenishDelay < System.currentTimeMillis()) {
-                player.savedData.globalData.runReplenishCharges = 0
-                player.savedData.globalData.runReplenishDelay = Util.nextMidnight(System.currentTimeMillis())
-            }
-            val charges = player.savedData.globalData.runReplenishCharges
+            val charges = getStoreFile().getInt(player.username.toLowerCase() + ":run")
             if (charges >= getRingLevel(node.id)) {
                 ContentAPI.sendMessage(player,"You have used all the charges you can for one day.")
                 return@on true
             }
             player.settings.updateRunEnergy(-50.0)
-            player.savedData.globalData.runReplenishCharges = charges + 1
+
+            getStoreFile()[player.username.toLowerCase() + ":run"] = charges + 1
+
             ContentAPI.sendMessage(player,"You feel refreshed as the ring revitalises you and a charge is used up.")
             ContentAPI.visualize(player, 9988, 1733)
             return@on true
@@ -51,16 +53,13 @@ class ExplorersRingPlugin : InteractionListener() {
                 ContentAPI.sendMessage(player,"You need a Magic level of 21 in order to do that.")
                 return@on true
             }
-            if (player.savedData.globalData.lowAlchemyDelay < System.currentTimeMillis()) {
-                player.savedData.globalData.lowAlchemyCharges = 0
-                player.savedData.globalData.lowAlchemyDelay = Util.nextMidnight(System.currentTimeMillis())
-            }
-            if (player.savedData.globalData.lowAlchemyCharges <= 0 && player.savedData.globalData.lowAlchemyDelay > System.currentTimeMillis()) {
-                ContentAPI.sendMessage(player,"You have used all the charges you can for one day.")
+            if(getStoreFile().getBoolean(player.username.toLowerCase() + ":alchs")){
+                ContentAPI.sendMessage(player, "You have claimed all the charges you can for one day.")
                 return@on true
             }
             ContentAPI.sendMessage(player,"You grant yourself with 30 free low alchemy charges.") // todo this implementation is not correct, see https://www.youtube.com/watch?v=UbUIF2Kw_Dw
-            player.savedData.globalData.lowAlchemyCharges = 30
+
+            getStoreFile()[player.username.toLowerCase() + ":alchs"] = true
 
             return@on true
         }
@@ -92,5 +91,9 @@ class ExplorersRingPlugin : InteractionListener() {
             Items.EXPLORERS_RING_3_13562 -> 3
             else -> -1
         }
+    }
+
+    fun getStoreFile(): JSONObject{
+        return ServerStore.getArchive("daily-explorer-ring")
     }
 }

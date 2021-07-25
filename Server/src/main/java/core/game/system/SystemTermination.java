@@ -6,6 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.login.PlayerParser;
 import rs09.Server;
 import rs09.ServerConstants;
+import rs09.ServerStore;
 import rs09.game.ge.OfferManager;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.repository.Repository;
@@ -35,6 +36,7 @@ public final class SystemTermination {
 	public void terminate() {
 		SystemLogger.logInfo("[SystemTerminator] Initializing termination sequence - do not shutdown!");
 		try {
+			Server.setRunning(false);
 			for(Player player : Repository.getPlayers()){
 				DMCHandler dmc = player.getAttribute("dmc",null);
 				if(dmc != null){
@@ -93,6 +95,9 @@ public final class SystemTermination {
 		SystemLogger.flushLogs();
 		SystemLogger.logInfo("[SystemTerminator] Saved Grand Exchange databases!");
 		Repository.getDisconnectionQueue().clear();
+		SystemLogger.logInfo("[SystemTerminator] Saving Server Store...");
+		ServerStore.save();
+		SystemLogger.logInfo("[SystemTerminator] Server Store Saved!");
 //		ServerStore.dump(directory + "store/");
 		SystemLogger.logInfo("[SystemTerminator] Saved player accounts!");
 	}
