@@ -15,7 +15,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     fun setNewHarvestAmount() {
         if(patch.type == PatchType.ALLOTMENT){
             harvestAmt = RandomFunction.random(4,17)
-        } else if(patch.type == PatchType.FLOWER) {
+        } else if(patch.type == PatchType.FLOWER || patch.type == PatchType.EVIL_TURNIP) {
             harvestAmt = when (plantable) {
                 Plantable.LIMPWURT_SEED, Plantable.WOAD_SEED -> 3
                 else -> 1
@@ -163,7 +163,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             CompostType.SUPER -> 13
         }
 
-        if(RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid && !isFlowerProtected()){
+        if(RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid && !isFlowerProtected() && patch.type != PatchType.EVIL_TURNIP){
             //bush, tree, fruit tree and cactus can not disease on stage 1(0) of growth.
             if(!((patch.type == PatchType.BUSH || patch.type == PatchType.TREE || patch.type == PatchType.FRUIT_TREE || patch.type == PatchType.CACTUS) && currentGrowthStage == 0)) {
                 isDiseased = true
