@@ -229,9 +229,9 @@ public class BorkNPC extends AbstractNPC {
 						unlock();
 						if (player != null) {
 							attack(player);
+							player.getInterfaceManager().restoreTabs();
+							PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 0));
 						}
-						player.getInterfaceManager().restoreTabs();
-						PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 0));
 						for (NPC n : legions) {
 							n.getProperties().getCombatPulse().attack(player);
 						}

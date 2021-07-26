@@ -43,7 +43,8 @@ public final class SystemTermination {
 					dmc.clear(false);
 				}
 			}
-			save(ServerConstants.DATA_PATH);
+			if(ServerConstants.DATA_PATH != null)
+				save(ServerConstants.DATA_PATH);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}

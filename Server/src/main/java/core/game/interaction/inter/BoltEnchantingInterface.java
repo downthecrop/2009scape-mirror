@@ -205,16 +205,8 @@ public final class BoltEnchantingInterface extends ComponentPlugin {
 		 * Gets the runes.
 		 * @return The runes.
 		 */
-		public Item[] getRunes() {
+		private Item[] getRunes() {
 			return runes;
-		}
-
-		/**
-		 * Sets the runes.
-		 * @param runes The runes to set.
-		 */
-		public void setRunes(Item[] runes) {
-			this.runes = runes;
 		}
 
 		/**
@@ -226,27 +218,11 @@ public final class BoltEnchantingInterface extends ComponentPlugin {
 		}
 
 		/**
-		 * Sets the exp.
-		 * @param exp The exp to set.
-		 */
-		public void setExp(double exp) {
-			this.exp = exp;
-		}
-
-		/**
 		 * Gets the enchanted.
 		 * @return The enchanted.
 		 */
 		public int getEnchanted() {
 			return enchanted;
-		}
-
-		/**
-		 * Sets the enchanted.
-		 * @param enchanted The enchanted to set.
-		 */
-		public void setEnchanted(int enchanted) {
-			this.enchanted = enchanted;
 		}
 
 		/**

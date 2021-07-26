@@ -111,7 +111,7 @@ public class Player extends Entity {
 
 	public Location startLocation = null;
 
-	private Graphics wardrobe_hold_graphics = new Graphics(1182,0,0);
+	private final Graphics wardrobe_hold_graphics = new Graphics(1182,0,0);
 
 	public boolean newPlayer = getSkills().getTotalLevel() < 50;
 

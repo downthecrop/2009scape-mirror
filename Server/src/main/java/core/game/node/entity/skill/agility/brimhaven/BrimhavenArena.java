@@ -281,7 +281,8 @@ public final class BrimhavenArena extends MapZone implements Plugin<Object> {
                 Location l = set.entrance[i];
                 for (int x = 1; x < set.exit[i].getX() - l.getX(); x++) {
                     Scenery object = RegionManager.getObject(l.transform(x, 0, 0));
-                    SceneryBuilder.replace(object, object.transform(avail ? 3573 : 3576));
+                    if(object != null)
+                        SceneryBuilder.replace(object, object.transform(avail ? 3573 : 3576));
                 }
                 RegionManager.getObject(set.entrance[i]).setCharge(avail ? 1000 : 500);
                 RegionManager.getObject(set.exit[i]).setCharge(avail ? 1000 : 500);

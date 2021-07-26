@@ -36,7 +36,7 @@ object PestControlHelper {
         return p.getAttribute<Any?>("pc_zeal") != null
     }
 
-    enum class BoatInfo(var boatBorder: ZoneBorders, var outsideBoatBorder: ZoneBorders, var ladderId: Int) {
+    enum class BoatInfo(val boatBorder: ZoneBorders, val outsideBoatBorder: ZoneBorders, val ladderId: Int) {
         NOVICE(ZoneBorders(2660, 2638, 2663, 2643), ZoneBorders(2658, 2635, 2656, 2646), 14315),
         INTERMEDIATE(ZoneBorders(2638, 2642, 2641, 2647), ZoneBorders(2645, 2639, 2643, 2652), 25631),
         VETERAN(ZoneBorders(2632, 2649, 2635, 2654), ZoneBorders(2638, 2652, 2638, 2655), 25632);

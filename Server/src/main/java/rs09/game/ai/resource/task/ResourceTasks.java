@@ -28,7 +28,7 @@ public enum ResourceTasks {
         }
     });
 
-    private ResourceTask resourceTask;
+    private final ResourceTask resourceTask;
 
 
     ResourceTasks(ResourceTask resourceTask) {
@@ -39,9 +39,6 @@ public enum ResourceTasks {
         return resourceTask;
     }
 
-    public void setResourceTask(ResourceTask resourceTask) {
-        this.resourceTask = resourceTask;
-    }
 
     private static String reqirementMessage() {
         return "You do not meet the requirements for this task.";

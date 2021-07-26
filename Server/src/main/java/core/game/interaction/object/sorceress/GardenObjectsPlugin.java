@@ -564,7 +564,7 @@ public final class GardenObjectsPlugin extends OptionHandler {
 			Item with = event.getBaseItem();
 			Player player = event.getPlayer();
 			SeasonDefinitions def = SeasonDefinitions.forFruitId(item.getId());
-			if (item == null || with == null || player == null || def == null)
+			if (with == null || player == null || def == null)
 				return true;
 			int amt = player.getInventory().getAmount(item);
 			if (!player.getInventory().containItems(1919)) {

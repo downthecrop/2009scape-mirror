@@ -85,14 +85,6 @@ public enum GEItemSet {
 	}
 
 	/**
-	 * Sets the components.
-	 * @param components The components to set.
-	 */
-	public void setComponents(int[] components) {
-		this.components = components;
-	}
-
-	/**
 	 * Gets the item array.
 	 * @return The item array.
 	 */
