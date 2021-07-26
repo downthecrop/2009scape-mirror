@@ -140,7 +140,9 @@ public class Definition<T extends Node> {
 		if (examine == null) {
 			try {
 				examine = handlers.get("examine").toString();
-			} catch (Exception e){}
+			} catch (Exception e){
+				e.printStackTrace();
+			}
 			if(examine == null) {
 				if (name.length() > 0) {
 					examine = "It's a" + (StringUtils.isPlusN(name) ? "n " : " ") + name + ".";

@@ -2,6 +2,7 @@ package core.game.ge;
 
 import core.game.node.item.Item;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,19 +77,11 @@ public enum GEItemSet {
 	}
 
 	/**
-	 * Sets the itemId.
-	 * @param itemId The itemId to set.
-	 */
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
-	}
-
-	/**
 	 * Gets the components.
 	 * @return The components.
 	 */
 	public int[] getComponents() {
-		return components;
+		return Arrays.copyOf(components, components.length);
 	}
 
 	/**
@@ -104,6 +97,6 @@ public enum GEItemSet {
 	 * @return The item array.
 	 */
 	public static Item[] getItemArray() {
-		return itemArray;
+		return Arrays.copyOf(itemArray, itemArray.length);
 	}
 }

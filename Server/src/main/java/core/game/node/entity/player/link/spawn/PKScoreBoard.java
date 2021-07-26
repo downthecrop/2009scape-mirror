@@ -114,7 +114,7 @@ public final class PKScoreBoard {
 		int score = player.getSavedData().getSpawnData().getKills();
 		int myScore = 0;
 		for (int i = 0; i < names.length; i++) {
-			if (names[i].equals(player.getName()) || names[i].equals(player.getName())) {
+			if (names[i].equals(player.getName())) {
 				myScore = scores[i];
 				break;
 			}
@@ -152,13 +152,13 @@ public final class PKScoreBoard {
 		if (scores[index] == score) {
 			return;
 		}
-		if (names[index].equals(player.getName()) || names[index].equals(player.getName())) {
+		if (names[index].equals(player.getName())) {
 			scores[index] = score;
 			return;
 		}
 		for (int i = SIZE - 2; i >= index; i--) {
 			String name = names[i];
-			if (name.equals(player.getName()) || name.equals(player.getName())) {
+			if (name.equals(player.getName())) {
 				name = names[--i];
 			}
 			scores[i + 1] = scores[i];

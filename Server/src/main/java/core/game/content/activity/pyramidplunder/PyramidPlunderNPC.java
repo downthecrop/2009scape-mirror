@@ -56,7 +56,6 @@ public abstract class PyramidPlunderNPC extends AbstractNPC {
     public PyramidPlunderNPC(int id, Location location, Player player) {
         super(id, location);
         this.player = player;
-        this.quotes = quotes;
         this.endTime = (int) (GameWorld.getTicks() + (1000 / 0.6));
     }
 

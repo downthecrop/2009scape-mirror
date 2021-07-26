@@ -186,14 +186,6 @@ public final class BoltEnchantingInterface extends ComponentPlugin {
 		}
 
 		/**
-		 * Sets the button.
-		 * @param button The button to set.
-		 */
-		public void setButton(int button) {
-			this.button = button;
-		}
-
-		/**
 		 * Gets the bolt.
 		 * @return The bolt.
 		 */
@@ -202,27 +194,11 @@ public final class BoltEnchantingInterface extends ComponentPlugin {
 		}
 
 		/**
-		 * Sets the bolt.
-		 * @param bolt The bolt to set.
-		 */
-		public void setBolt(int bolt) {
-			this.bolt = bolt;
-		}
-
-		/**
 		 * Gets the level.
 		 * @return The level.
 		 */
 		public int getLevel() {
 			return level;
-		}
-
-		/**
-		 * Sets the level.
-		 * @param level The level to set.
-		 */
-		public void setLevel(int level) {
-			this.level = level;
 		}
 
 		/**

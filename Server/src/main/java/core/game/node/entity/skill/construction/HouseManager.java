@@ -494,6 +494,9 @@ public final class HouseManager {
 				chunkY = 7 - chunkY;
 				break;
 			}
+			default: {
+
+			}
 		}
 		for (Hotspot h : room.getHotspots()) {
 			if ((h.getChunkX() == chunkX || h.getChunkX2() == chunkX) && (h.getChunkY() == chunkY || h.getChunkY2() == chunkY) && h.getHotspot().getObjectId(style) == object.getId()) {

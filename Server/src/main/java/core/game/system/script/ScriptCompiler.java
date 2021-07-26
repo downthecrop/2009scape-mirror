@@ -14,6 +14,7 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.Files;
 import java.util.*;
 
 /**
@@ -105,7 +106,7 @@ public final class ScriptCompiler {
 	 */
 	public static ScriptContext parseRaw(File file) throws Throwable {
 		loadInstructions();
-		BufferedReader br = new BufferedReader(new FileReader(file));
+		BufferedReader br = Files.newBufferedReader(file.toPath());
 		lineId = -1;
 		String line;
 		builder = null;

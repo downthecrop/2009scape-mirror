@@ -55,7 +55,7 @@ public final class MinotaurFamiliarNPC implements Plugin<Object> {
 		familiar.sendFamiliarHit(target, RandomFunction.random(maxHit));
 		Projectile.magic(familiar, target, 1497, 80, 36, 70, 10).send();
 		familiar.visualize(Animation.create(8026), Graphics.create(1496));
-		if (!(familiar instanceof BronzeMinotaurNPC && familiar instanceof RuneMinotaurNPC) && RandomFunction.random(10) < 6) {
+		if (!(familiar instanceof BronzeMinotaurNPC || familiar instanceof RuneMinotaurNPC) && RandomFunction.random(10) < 6) {
 			final int ticks = 2 + (int) Math.floor(familiar.getLocation().getDistance(target.getLocation()) * 0.5);
 			GameWorld.getPulser().submit(new Pulse(ticks) {
 				@Override
