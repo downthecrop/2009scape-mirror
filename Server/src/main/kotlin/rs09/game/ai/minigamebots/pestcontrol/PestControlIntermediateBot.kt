@@ -98,7 +98,10 @@ class PestControlTestBot2(l: Location) : PvMBots(legitimizeLocation(l)) {
             combathandler.goToPortals()
         } else {
             movetimer = RandomFunction.random(2,10)
-            randomWalkAroundPoint(PestControlHelper.getMyPestControlSession2(this)?.squire?.location ?: location,5)
+            val location = PestControlHelper.getMyPestControlSession2(this)?.squire?.location ?: location
+            if(location != null) {
+                randomWalkAroundPoint(location, 5)
+            }
             combathandler.fightNPCs()
         }
     }
@@ -108,7 +111,7 @@ class PestControlTestBot2(l: Location) : PvMBots(legitimizeLocation(l)) {
          justStartedGame = true
          openedGate = false
          time = 0
-         if (!prayer.active.isEmpty()) {
+         if (prayer.active.isNotEmpty()) {
              prayer.reset()
          }
          if (PestControlHelper.outsideGangplankContainsLoc2(getLocation())){
@@ -168,7 +171,7 @@ class PestControlTestBot2(l: Location) : PvMBots(legitimizeLocation(l)) {
     }
 
     var switch = false
-    fun toPC() {
+    private fun toPC() {
         time = 0
         if (!switch) {
             this.teleport(PestControlHelper.PestControlLanderIntermediate)//.also { println("I was stuck ${this.username}") }
