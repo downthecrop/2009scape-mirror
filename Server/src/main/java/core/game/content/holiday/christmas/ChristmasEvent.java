@@ -1099,7 +1099,6 @@ public class ChristmasEvent extends HolidayEvent {
 			final Item other = args.length == 2 ? null : (Item) args[2];
 			if (other != null) {
 				identifier = "equip";
-				item = other;
 			}
 			switch (identifier) {
 			case "equip":

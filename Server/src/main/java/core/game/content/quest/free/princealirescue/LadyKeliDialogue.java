@@ -187,6 +187,7 @@ public final class LadyKeliDialogue extends DialoguePlugin {
 			case 56:
 				interpreter.sendDialogues(npc, null, "As you put it that way I am sure you can see it. You", "cannot steal the key, it is on a Runite chain.");
 				stage = 57;
+				break;
 			case 57:
 				interpreter.sendDialogue("Keli shows you a small key on a strong looking chain.");
 				stage = 58;

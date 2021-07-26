@@ -537,14 +537,5 @@ public final class PvPBotsBuilder{
 			player.getSkills().updateCombatLevel();
 			player.getAppearance().sync();
 	}
-	
-	public void RandomItem()
-	{
-		Item test = null;
-		ArrayList<Item> tests = new ArrayList<Item>();
-		for (int x = 0; x < 9999; x++)
-			test = new Item(x);
-			if (test.getDefinition().getEquipId() != 0)
-				tests.add(test);
-	}
+
 }

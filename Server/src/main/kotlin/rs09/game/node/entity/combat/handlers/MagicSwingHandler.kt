@@ -192,7 +192,7 @@ open class MagicSwingHandler
             val level = entity!!.skills.getLevel(Skills.MAGIC, true)
             val bonus = entity.properties.bonuses[if (entity is Player) 14 else 13]
             val cumulativeStr = level.toDouble()
-            return 1 + ((14 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * baseDamage).toInt() / 10
+            return 1 + ((14 + cumulativeStr + bonus.toDouble() / 8 + cumulativeStr * bonus * 0.016865) * baseDamage).toInt() / 10
         }
         var levelMod = 1.0
         val entityMod = entity!!.getLevelMod(entity, victim)

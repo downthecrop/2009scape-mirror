@@ -31,6 +31,7 @@ enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = n
     SURPRISE_EXAM(MysteriousOldManNPC(),"sexam");
 
     var type: String = ""
+    private set
 
     constructor(npc: RandomEventNPC, type: String) : this(npc,null){
         this.type = type

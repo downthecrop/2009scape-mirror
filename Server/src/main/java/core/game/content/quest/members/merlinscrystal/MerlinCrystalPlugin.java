@@ -529,7 +529,7 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 
 		@Override
 		public void handleTickActions() {
-			if (player != null && !player.isActive() || !player.getLocation().withinDistance(getLocation(), 20)) {
+			if (player != null && !player.isActive() || player != null && !player.getLocation().withinDistance(getLocation(), 20)) {
 				clear();
 			}
 			super.handleTickActions();
@@ -545,10 +545,7 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 
 		@Override
 		public boolean canAttack(Entity entity) {
-			if (getAttribute("thrantax_owner", entity) == entity) {
-				return true;
-			}
-			return false;
+			return getAttribute("thrantax_owner", entity) == entity;
 		}
 
 		@Override
@@ -591,20 +588,20 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 			Item useditem = event.getUsedItem();
 			final Scenery object = (Scenery) event.getUsedWith();
 
-			if (player.getAttribute("cleared-beehives", false) && useditem.getId() == REPELLENT.getId() && object.getId() == 68) {
+			if (useditem != null && player.getAttribute("cleared-beehives", false) && useditem.getId() == REPELLENT.getId() && object.getId() == 68) {
 				player.getDialogueInterpreter().sendDialogue("You have already cleared the hive of its bees.", "You can now safely collect wax from the hive.");
 			}
 
-			if (useditem.getId() == REPELLENT.getId() && object.getId() == 68 && player.getAttribute("cleared-beehives", false)) {
+			if (useditem != null && useditem.getId() == REPELLENT.getId() && object.getId() == 68 && player.getAttribute("cleared-beehives", false)) {
 				player.getDialogueInterpreter().sendDialogue("You pour insect repellent on the beehive. You see the bees leaving the", "hive.");
 				player.setAttribute("cleared-beehives", true);
 			}
 
-			if (useditem.getId() == BUCKET.getId() && player.getAttribute("cleared-beehives", false)) {
+			if (useditem != null && useditem.getId() == BUCKET.getId() && player.getAttribute("cleared-beehives", false)) {
 				player.getDialogueInterpreter().sendDialogue("You get some wax from the beehive.");
 				player.getInventory().remove(new Item(BUCKET.getId(), 1));
 				player.getInventory().add(new Item(BUCKET_OF_WAX.getId(), 1));
-			} else if (useditem.getId() == BUCKET.getId() && !player.getAttribute("cleared-beehives", false)) {
+			} else if (useditem != null && useditem.getId() == BUCKET.getId() && !player.getAttribute("cleared-beehives", false)) {
 				player.getDialogueInterpreter().sendDialogue("It would be dangerous to stick the bucket into the hive while", "the bees are still in it. Perhaps you can clear them out", "somehow.");
 			}
 

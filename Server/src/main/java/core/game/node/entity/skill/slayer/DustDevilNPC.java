@@ -36,7 +36,7 @@ public final class DustDevilNPC extends AbstractNPC {
 					for (int i : SKILLS) {
 						player.getSkills().updateLevel(i, -player.getSkills().getStaticLevel(i), 0);
 					}
-					player.getSkills().decrementPrayerPoints(player.getSkills().getStaticLevel(Skills.PRAYER) / 2);
+					player.getSkills().decrementPrayerPoints((double) player.getSkills().getStaticLevel(Skills.PRAYER) / 2);
 					state.setEstimatedHit(14);
 				}
 			}

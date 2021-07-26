@@ -158,6 +158,7 @@ public class StankersDialogue extends DialoguePlugin {
             case 90:
                 npc("Your headband will help you get experience when", "woodcutting maple trees, and an extra log or two when", "cutting normal trees. I've also told Geoff to increase");
                 stage++;
+                break;
             case 91:
                 npc("your flax allowance in acknowledgement of your", "standing.");
                 stage = 999;

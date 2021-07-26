@@ -39,7 +39,7 @@ public class EblisDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		//TODO: Add proper dialogue once DT is implemented
-		NPC npc = (NPC) args[0];
+		npc = (NPC) args[0];
 		if(!player.getAttribute("DT:staff-bought",false)) {
 			player("Hey.");
 			stage = 0;

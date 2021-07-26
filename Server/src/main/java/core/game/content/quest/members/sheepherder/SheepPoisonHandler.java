@@ -28,7 +28,6 @@ public class SheepPoisonHandler extends PluginInteraction {
     @Override
     public boolean handle(Player player, NodeUsageEvent event) {
         Node n = event.getUsedWith();
-        Item i = event.getUsedItem();
         if(n instanceof HerderSheepNPC){
             if (withinBorders(n.getLocation(),Location.create(2595, 3364, 0),Location.create(2609, 3351, 0))){
                 handlePoisoning(player,(HerderSheepNPC) n);

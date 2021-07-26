@@ -43,7 +43,7 @@ class CombatStateIntermediate(val bot: PestControlTestBot2) {
         if (bot.justStartedGame) {
             bot.customState = "Walking randomly"
             bot.justStartedGame = false
-            bot.randomWalkAroundPoint(getMyPestControlSession2(bot)?.squire?.location, 15)
+            bot.randomWalkAroundPoint(getMyPestControlSession2(bot)?.squire?.location ?: bot.location, 15)
             bot.movetimer = Random.nextInt(7) + 6
             return
         }

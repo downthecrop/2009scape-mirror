@@ -59,7 +59,7 @@ public class ReadbeardFrankDialogue extends DialoguePlugin {
         quest = player.getQuestRepository().getQuest("Pirate's Treasure");
         npc("Arr, Matey!");
         stage = 0;
-        AchievementDiary diary = player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR);
+        diary = player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR);
         replacementReward = diary.isLevelRewarded(level)
                 && diary.isComplete(level, true)
                 && !player.hasItem(diary.getType().getRewards(level)[0]);

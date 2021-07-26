@@ -445,8 +445,4 @@ public enum PrayerType {
 		return defenceReq;
 	}
 
-	public void setDefenceReq(int defenceReq) {
-		this.defenceReq = defenceReq;
-	}
-
 }

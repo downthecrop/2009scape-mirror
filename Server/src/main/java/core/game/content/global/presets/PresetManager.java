@@ -12,7 +12,7 @@ public class PresetManager {
 
 	private Player player;
 
-	private Map<String, Preset> current_presets;
+	private final Map<String, Preset> current_presets;
 
 	public PresetManager() {
 		current_presets = new HashMap<>();

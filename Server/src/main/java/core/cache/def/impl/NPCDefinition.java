@@ -58,7 +58,7 @@ public final class NPCDefinition extends Definition<NPC> {
 	public boolean isVisibleOnMap;
 
 
-	public String examine;
+/*	public String examine;*/
 
 	/**
 	 * The drop tables.
@@ -623,6 +623,8 @@ public final class NPCDefinition extends Definition<NPC> {
 		case 4:
 			name = NPCConfigParser.DEATH_ANIMATION;
 			break;
+			default:
+				break;
 		}
 		return getConfiguration(name, null);
 	}

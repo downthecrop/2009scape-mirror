@@ -94,6 +94,7 @@ public final class SphinxDialogue extends DialoguePlugin {
             case 52:
                 player.getFamiliarManager().getFamiliar().sendChat("Meow");
                 stage = 53;
+                break;
             case 53:
                 player.getDialogueInterpreter().sendDialogue("The Sphinx and the cat have a chat.");
                 stage = 54;

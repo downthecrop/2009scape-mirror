@@ -89,7 +89,7 @@ object OfferManager {
 
         if(file.exists() && file.length() != 0L) {
             val parser = JSONParser()
-            val reader: FileReader? = FileReader(DB_PATH)
+            val reader: FileReader = FileReader(DB_PATH)
             val saveFile = parser.parse(reader) as JSONObject
 
             offsetUID = saveFile["offsetUID"].toString().toLong()
@@ -122,7 +122,7 @@ object OfferManager {
 
         if(File(BOT_DB_PATH).exists()) {
             try {
-                val botReader: FileReader? = FileReader(BOT_DB_PATH)
+                val botReader: FileReader = FileReader(BOT_DB_PATH)
                 val botSave = JSONParser().parse(botReader) as JSONObject
                 if (botSave.containsKey("offers")) {
                     val offers = botSave["offers"] as JSONArray

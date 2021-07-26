@@ -968,7 +968,7 @@ public enum TutorialStage {
 	 * Represents if it is a login stage.
 	 * @param login the login value.
 	 */
-	public void isLogin(boolean login) {
+	private void isLogin(boolean login) {
 		this.login = login;
 	}
 

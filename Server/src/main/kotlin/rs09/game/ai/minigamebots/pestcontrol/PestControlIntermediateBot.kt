@@ -98,7 +98,7 @@ class PestControlTestBot2(l: Location) : PvMBots(legitimizeLocation(l)) {
             combathandler.goToPortals()
         } else {
             movetimer = RandomFunction.random(2,10)
-            randomWalkAroundPoint(PestControlHelper.getMyPestControlSession2(this)?.squire?.location,5)
+            randomWalkAroundPoint(PestControlHelper.getMyPestControlSession2(this)?.squire?.location ?: location,5)
             combathandler.fightNPCs()
         }
     }

@@ -85,6 +85,7 @@ public class SirReniteeDialogue extends DialoguePlugin {
                         stage = 500;
                         break;
                 }
+                break;
             case 200:
                 interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "What is your name?");
                 stage = 210;

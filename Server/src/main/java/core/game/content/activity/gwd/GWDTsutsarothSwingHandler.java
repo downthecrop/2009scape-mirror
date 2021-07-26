@@ -75,7 +75,7 @@ public final class GWDTsutsarothSwingHandler extends CombatSwingHandler {
 				victim.getStateManager().register(EntityState.POISONED, false, 168, entity);
 			}
 			if (special) {
-				((Player) victim).getSkills().decrementPrayerPoints(hit / 2);
+				((Player) victim).getSkills().decrementPrayerPoints((double) hit / 2);
 			}
 		}
 		state.setEstimatedHit(hit);
@@ -85,14 +85,14 @@ public final class GWDTsutsarothSwingHandler extends CombatSwingHandler {
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
-		switch (state.getStyle()) {
-		case MELEE:
+		if(entity == null || state == null || state.getStyle() == null){
+			return;
+		}
+		if (state.getStyle() == CombatStyle.MELEE) {
 			entity.animate(MELEE_ATTACK);
-			break;
-		default:
+		} else {
 			entity.visualize(MAGIC_ATTACK, MAGIC_START);
 			Projectile.magic(entity, victim, 1211, 0, 0, 46, 1).send();
-			break;
 		}
 	}
 

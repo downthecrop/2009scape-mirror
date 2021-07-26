@@ -64,12 +64,11 @@ public class RenderAnimationDefinition {
 	 * @return The render animation definitions.
 	 */
 	public static RenderAnimationDefinition forId(int animId) {
-		RenderAnimationDefinition defs = new RenderAnimationDefinition();
 		if (animId == -1) {
 			return null;
 		}
 		byte[] data = Cache.getIndexes()[2].getFileData(32, animId);
-		defs = new RenderAnimationDefinition();
+		RenderAnimationDefinition defs = new RenderAnimationDefinition();
 		if (data != null) {
 			defs.parse(ByteBuffer.wrap(data));
 		} else {

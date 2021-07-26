@@ -230,14 +230,6 @@ public class PrayerAltarPlugin extends OptionHandler {
 		}
 
 		/**
-		 * Sets the baid.
-		 * @param id the id to set.
-		 */
-		public void setId(int id) {
-			this.id = id;
-		}
-
-		/**
 		 * Gets the book.
 		 * @return the book
 		 */
@@ -246,29 +238,12 @@ public class PrayerAltarPlugin extends OptionHandler {
 		}
 
 		/**
-		 * Sets the babook.
-		 * @param book the book to set.
-		 */
-		public void setBook(int book) {
-			this.book = book;
-		}
-
-		/**
 		 * Gets the messages.
 		 * @return the messages
 		 */
-		public String[] getMessages() {
+		private String[] getMessages() {
 			return messages;
 		}
-
-		/**
-		 * Sets the bamessages.
-		 * @param messages the messages to set.
-		 */
-		public void setMessages(String[] messages) {
-			this.messages = messages;
-		}
-
 	}
 
 }

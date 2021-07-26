@@ -95,7 +95,7 @@ public final class ImpDefenderNPC extends AbstractNPC {
 			thievingLevel += 15;
 		}
 		int currentLevel = RandomFunction.random(thievingLevel) + 1;
-		double ratio = currentLevel / (new Random().nextInt(level + 5) + 1);
+		double ratio = (double) currentLevel / (new Random().nextInt(level + 5) + 1);
 		return Math.round(ratio * thievingLevel) < level;
 	}
 
