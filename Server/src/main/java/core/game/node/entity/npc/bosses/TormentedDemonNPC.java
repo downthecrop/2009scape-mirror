@@ -115,7 +115,7 @@ public class TormentedDemonNPC extends AbstractNPC {
 
 	@Override
 	public void checkImpact(BattleState state) {
-		if (fireShield && state.getAttacker().isPlayer() && state.getEstimatedHit() > 0 && state.getWeapon() != null && (state.getWeapon().getId() == 6746 || state.getWeapon().getId() == 6746 || state.getWeapon().getId() == 732)) {
+		if (fireShield && state.getAttacker().isPlayer() && state.getEstimatedHit() > 0 && state.getWeapon() != null && (state.getWeapon().getId() == 6746 || state.getWeapon().getId() == 732)) {
 			shieldDelay = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(60);
 			fireShield = false;
 			setAttribute("shield-player", state.getAttacker());

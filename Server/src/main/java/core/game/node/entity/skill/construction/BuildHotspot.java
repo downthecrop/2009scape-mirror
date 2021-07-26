@@ -375,7 +375,7 @@ public enum BuildHotspot {
 	/**
 	 * The linked hotspots
 	 */
-	private static List<BuildHotspot[]> linkedHotspots = new ArrayList<BuildHotspot[]>();
+	private static final List<BuildHotspot[]> linkedHotspots = new ArrayList<BuildHotspot[]>();
 	
 	/**
 	 * Configures hotspots.

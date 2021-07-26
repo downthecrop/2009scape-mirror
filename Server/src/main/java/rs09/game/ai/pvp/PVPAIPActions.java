@@ -75,7 +75,7 @@ public class PVPAIPActions {
 						pvp_players.remove(bot);
 						return true;
 					}
-					if (!pvp_players.contains(target) || !Pathfinder.find(bot, target[0]).isSuccessful() || !canAttack(bot, target[0])) {
+					if (!pvp_players.contains(target[0]) || !Pathfinder.find(bot, target[0]).isSuccessful() || !canAttack(bot, target[0])) {
 						target[0] = pvp_players.get(RandomFunction.getRandom(pvp_players.size() - 1));
 					}
 					attackTarget(player, bot, target[0]);

@@ -48,7 +48,7 @@ public class GraphicDefinition {
 		if (def != null) {
 			return def;
 		}
-		byte[] data = Cache.getIndexes()[21].getFileData(gfxId >>> 735411752, gfxId & 0xff);
+		byte[] data = Cache.getIndexes()[21].getFileData(gfxId >>> 8, gfxId & 0xff);
 		def = new GraphicDefinition();
 		def.graphicsId = gfxId;
 		if (data != null) {
