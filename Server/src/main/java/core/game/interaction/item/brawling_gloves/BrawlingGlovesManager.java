@@ -21,7 +21,7 @@ public class BrawlingGlovesManager {
         try {
             registerGlove(id, Objects.requireNonNull(BrawlingGloves.forId(id)).getCharges());
         } catch (Exception e){
-            System.out.println(e);
+            e.printStackTrace();
         }
     }
     public void registerGlove(int id, int charges) {GloveCharges.putIfAbsent(id,charges);}
