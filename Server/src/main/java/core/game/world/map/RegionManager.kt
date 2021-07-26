@@ -37,9 +37,6 @@ object RegionManager {
             var region = REGION_CACHE[regionId]
             if (region == null) {
                 region = Region((regionId shr 8) and 0xFF, regionId and 0xFF)
-                if (region!!.regionId != regionId) {
-                    SystemLogger.logErr("IDs do NOT match - ${region!!.regionId} supposed to be $regionId")
-                }
                 REGION_CACHE[regionId] = region
             }
             LOCK.unlock()
