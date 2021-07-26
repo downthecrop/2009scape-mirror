@@ -199,6 +199,7 @@ public class PlunderZones implements Plugin<Object> {
             }
             PlunderObject object = target instanceof NPC ? null : new PlunderObject(target.asScenery()); //PlunderObject(target.getId(),target.getLocation());
             PlunderObjectManager manager = player.getPlunderObjectManager();
+            if(manager == null) return super.interact(e, target, option);
             boolean alreadyOpened = manager.openedMap.getOrDefault(object.getLocation(),false);
             boolean charmed = manager.charmedMap.getOrDefault(object.getLocation(),false);
             boolean success = success(player, Skills.THIEVING);

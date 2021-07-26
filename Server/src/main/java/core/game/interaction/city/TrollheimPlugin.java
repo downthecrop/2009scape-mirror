@@ -270,17 +270,13 @@ public final class TrollheimPlugin extends OptionHandler {
 				bandaid(player, player.getLocation(), object.getLocation().transform(0, -3, 0), CLIMB_DOWN, CLIMB_DOWN, object.getDirection());
 				break;
 			case 3790:// rock scalling.
-				xOffset = player.getLocation().getX() < loc.getX() ? 2 : -2;
-				direction = getOpposite(ForceMovement.direction(player.getLocation(), object.getLocation().transform(xOffset, yOffset, 0)));
+				case 3791:
+					xOffset = player.getLocation().getX() < loc.getX() ? 2 : -2;
 				//bandaid(player, player.getLocation(), object.getLocation().transform(xOffset, yOffset, 0), CLIMB_DOWN, CLIMB_DOWN, direction);
 				player.getProperties().setTeleportLocation(object.getLocation().transform(xOffset, yOffset, 0));
 				break;
-			case 3791:// rock scalling.
-				xOffset = player.getLocation().getX() < loc.getX() ? 2 : -2;
 				//bandaid(player, player.getLocation(), object.getLocation().transform(xOffset, yOffset, 0), CLIMB_UP);
-				player.getProperties().setTeleportLocation(object.getLocation().transform(xOffset, yOffset, 0));
-				break;
-			case 3748:
+				case 3748:
 				player.getPacketDispatch().sendMessage("You climb onto the rock...");
 				if (loc.equals(new Location(2821, 3635, 0))) {
 					bandaid(player, player.getLocation(), loc.transform(player.getLocation().getX() > loc.getX() ? -1 : 1, 0, 0), JUMP);

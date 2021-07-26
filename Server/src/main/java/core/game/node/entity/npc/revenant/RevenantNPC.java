@@ -104,7 +104,6 @@ public class RevenantNPC extends AbstractNPC {
 
 	@Override
 	public void finalizeDeath(Entity killer) {
-		Location itemLoc = getLocation();
 		super.finalizeDeath(killer);
 		if (killer instanceof Player) {
 			killer.asPlayer().getAudioManager().send(4063, true);

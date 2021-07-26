@@ -70,7 +70,6 @@ public class ReadSignPostPlugin extends OptionHandler {
 				return true;
 			}
 		});
-		player.getPacketDispatch();
 		final Scenery object = (Scenery) node;
 		Signs sign = Signs.forId(object.getId());
 		if (sign == null) {

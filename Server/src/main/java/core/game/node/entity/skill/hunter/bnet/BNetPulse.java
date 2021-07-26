@@ -148,7 +148,7 @@ public final class BNetPulse extends SkillPulse<NPC> {
 			huntingLevel *= 0.5;
 		}
 		int currentLevel = RandomFunction.random(huntingLevel) + 1;
-		double ratio = currentLevel / (new Random().nextInt(level + 5) + 1);
+		double ratio = (double) currentLevel / (new Random().nextInt(level + 5) + 1);
 		return Math.round(ratio * huntingLevel) >= level;
 	}
 

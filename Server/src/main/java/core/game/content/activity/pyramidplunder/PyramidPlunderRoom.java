@@ -17,9 +17,9 @@ public enum PyramidPlunderRoom {
     ROOM_7(7, 81, 0, 2,new Location(1927, 4424), new Location[] {Location.create(1923, 4432, 0),Location.create(1925, 4440, 0),Location.create(1929, 4440, 0),Location.create(1931, 4432, 0)}),
     ROOM_8(8, 91, -2, 0,new Location(1965,4444), new Location[] {Location.create(1952, 4447, 0),Location.create(1953, 4445, 0),Location.create(1957, 4444, 0),Location.create(1962, 4448, 0)});
 
-    public int roomNum, reqLevel, spearX, spearY;
+    public final int roomNum, reqLevel, spearX, spearY;
     Location entrance;
-    public List<Location> doorLocations;
+    public final List<Location> doorLocations;
     PyramidPlunderRoom(int roomNum, int reqLevel, int spearX, int spearY, Location entrance, Location[] door_locations){
         this.roomNum = roomNum;
         this.reqLevel = reqLevel;

@@ -112,7 +112,7 @@ public class Interaction {
 					if (option.getHandler() == null || !option.getHandler().handle(player, node, option.getName().toLowerCase())) {
 						player.getPacketDispatch().sendMessage("Nothing interesting happens.");
 					}
-					if (option != null && option.getHandler() != null) {
+					if (option.getHandler() != null) {
 						player.debug("Using item handler " + option.getHandler().getClass().getSimpleName());
 					}
 				} catch (Exception e){

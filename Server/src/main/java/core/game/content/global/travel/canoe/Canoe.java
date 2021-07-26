@@ -26,9 +26,9 @@ public enum Canoe {
         this.maxDist = ordinal() + 1;
     }
 
-    public int silhouetteChild;
-    public int textChild;
-    public int maxDist;
+    public final int silhouetteChild;
+    public final int textChild;
+    public final int maxDist;
 
     /**
      * Represents the woodcutting level requirement to craft the canoe.

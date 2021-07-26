@@ -86,7 +86,7 @@ class AbyssPlugin : InteractionListener() {
         /**
          * Represents the option.
          */
-        var option: String,
+        val option: String,
         /**
          * Represents the corssing location.
          */
@@ -444,15 +444,6 @@ class AbyssPlugin : InteractionListener() {
                     true
                 } else player.inventory.contains(tool.getId(), 1)
             }
-        }
-
-        /**
-         * Constructs a new `RunecraftingOptionPlugin` `Object`.
-         * @param locations the locations.
-         * @param objects the objects.
-         */
-        init {
-            option = option
         }
     }
 
