@@ -32,7 +32,7 @@ public final class TeleportCrystalPlugin extends OptionHandler {
 
 	 @Override
 	    public boolean handle(Player player, Node node, String option) {
-	        if (!WildernessZone.checkTeleport(player, 20)) {
+	        if (true) {
 	            player.getPacketDispatch().sendMessage("The crystal is unresponsive.");
 	            return true;
 	        }
