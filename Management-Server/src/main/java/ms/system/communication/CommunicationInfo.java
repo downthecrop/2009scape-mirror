@@ -141,14 +141,20 @@ public final class CommunicationInfo {
 	public void save(PreparedStatement statement) throws SQLException {
 		String contacts = "";
 		String blocked = "";
+		StringBuilder blockedBuilder = new StringBuilder();
 		for (int i = 0; i < this.blocked.size(); i++) {
-			blocked += (i == 0 ? "" : ",") + this.blocked.get(i);
+			String blockline = (i == 0 ? "" : ",") + this.blocked.get(i);
+			blockedBuilder.append(blockline);
 		}
+		blocked = blockedBuilder.toString();
 		int count = 0;
+		StringBuilder contactBuilder = new StringBuilder();
 		for (Entry<String, ClanRank> entry : this.contacts.entrySet()) {
-			contacts += "{" + entry.getKey() + "," + entry.getValue().ordinal() + "}" + (count == this.contacts.size() - 1 ? "" : "~");
+			String contactLine = "{" + entry.getKey() + "," + entry.getValue().ordinal() + "}" + (count == this.contacts.size() - 1 ? "" : "~");
+			contactBuilder.append(contactLine);
 			count++;
 		}
+		contacts = contactBuilder.toString();
 		statement.setString(3, contacts);
 		statement.setString(4, blocked);
 		statement.setString(5, clanName);
@@ -211,6 +217,8 @@ public final class CommunicationInfo {
 					case 3:
 						lootRequirement = rank;
 						break;
+					default:
+						break;
 				}
 			}
 		}
@@ -239,9 +247,9 @@ public final class CommunicationInfo {
 	 */
 	public void save(ByteBuffer buffer) {
 		buffer.put((byte) contacts.size());
-		for (String name : contacts.keySet()) {
-			ByteBufferUtils.putString(name, buffer);
-			buffer.put((byte) contacts.get(name).ordinal());
+		for(Entry<String,ClanRank> contact : contacts.entrySet()){
+			ByteBufferUtils.putString(contact.getKey(), buffer);
+			buffer.put((byte) contact.getValue().ordinal());
 		}
 		buffer.put((byte) blocked.size());
 		for (String name : blocked) {

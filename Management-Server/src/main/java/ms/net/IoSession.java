@@ -137,15 +137,15 @@ public class IoSession {
 	 */
 	public void queue(ByteBuffer buffer) {
 		try {
-			writingLock.tryLock(1000L, TimeUnit.MILLISECONDS);
+			if(writingLock.tryLock(1000L, TimeUnit.MILLISECONDS)){
+				writingQueue.add(buffer);
+				writingLock.unlock();
+				write();
+			}
 		} catch (Exception e){
 			e.printStackTrace();
 			writingLock.unlock();
-			return;
 		}
-		writingQueue.add(buffer);
-		writingLock.unlock();
-		write();
 	}
 	
 	/**
@@ -168,10 +168,11 @@ public class IoSession {
 				}
 				writingQueue.remove(0);
 			}
+			writingLock.unlock();
 		} catch (IOException e) {
 			disconnect();
+			writingLock.unlock();
 		}
-		writingLock.unlock();
 	}
 
 	/**

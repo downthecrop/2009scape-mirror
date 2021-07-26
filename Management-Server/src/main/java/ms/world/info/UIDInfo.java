@@ -102,6 +102,8 @@ public class UIDInfo {
 			case 4:
 				serial = ByteBufferUtils.getString(buffer);
 				break;
+				default:
+					break;
 			}
 		}
 	}
@@ -112,7 +114,7 @@ public class UIDInfo {
 	 * @return the string.
 	 */
 	private String parseFormat(String string) {
-		if (string == null || string == "") {
+		if (string == null || string.equals("")) {
 			return null;
 		}
 		StringTokenizer token = new StringTokenizer(string, "|");

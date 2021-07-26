@@ -13,8 +13,10 @@ import ms.world.WorldDatabase;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
@@ -138,7 +140,7 @@ public final class Management {
 		Runtime.getRuntime().addShutdownHook(new ShutdownSequence());
 		System.out.println("Status: ready.");
 		System.out.println("Use -commands for a list of commands!");
-		Scanner s = new Scanner(System.in);
+		Scanner s = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 		while (s.hasNext()) {
 			try {
 				String command = s.nextLine();

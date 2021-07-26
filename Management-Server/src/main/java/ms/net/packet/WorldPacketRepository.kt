@@ -42,7 +42,7 @@ object WorldPacketRepository {
      * @param message The message to send.
      */
     @JvmStatic
-    fun sendPlayerMessage(player: PlayerSession?, message: String?) {
+    fun sendPlayerMessage(player: PlayerSession?, message: String) {
         if (player == null) {
             return
         }
@@ -52,7 +52,7 @@ object WorldPacketRepository {
         player.world.session.write(buffer)
     }
 
-    fun sendPlayerMessage(player: PlayerSession?, messages: Array<String?>) {
+    fun sendPlayerMessage(player: PlayerSession?, messages: Array<String>) {
         if (player == null) {
             return
         }
@@ -98,7 +98,7 @@ object WorldPacketRepository {
     @JvmStatic
     fun sendContactUpdate(
         player: PlayerSession,
-        contact: String?,
+        contact: String,
         block: Boolean,
         remove: Boolean,
         worldId: Int,
@@ -127,7 +127,7 @@ object WorldPacketRepository {
      * @param type The message type.
      */
     @JvmStatic
-    fun sendMessage(player: PlayerSession, p: PlayerSession, type: Int, message: String?) {
+    fun sendMessage(player: PlayerSession, p: PlayerSession, type: Int, message: String) {
         val buffer = IoBuffer(5, PacketHeader.BYTE)
         buffer.putString(player.username)
         buffer.putString(p.username)
@@ -184,7 +184,7 @@ object WorldPacketRepository {
      * @param names The names.
      */
     @JvmStatic
-    fun notifyPlayers(server: GameServer, player: PlayerSession, names: List<String?>) {
+    fun notifyPlayers(server: GameServer, player: PlayerSession, names: List<String>) {
         val buffer = IoBuffer(8, PacketHeader.SHORT)
         buffer.putString(player.username)
         buffer.put(player.worldId)
@@ -227,7 +227,7 @@ object WorldPacketRepository {
      * @param duration The duration of the punishment.
      */
     @JvmStatic
-    fun sendPunishUpdate(world: GameServer, key: String?, type: Int, duration: Long) {
+    fun sendPunishUpdate(world: GameServer, key: String, type: Int, duration: Long) {
         val buffer = IoBuffer(11, PacketHeader.BYTE)
         buffer.putString(key)
         buffer.put(type)

@@ -57,10 +57,8 @@ public final class NPCDefinition extends Definition<NPC> {
 	 */
 	public boolean isVisibleOnMap;
 
-/*	*//**
-	 * The examine option value
-	 *//*
-	public String examine;*/
+
+	public String examine;
 
 	/**
 	 * The drop tables.

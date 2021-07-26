@@ -132,6 +132,8 @@ public final class PlayerSession {
 			ex.printStackTrace();
 			SQLManager.close(connection);
 			return false;
+		} finally {
+			SQLManager.close(connection);
 		}
 		return true;
 	}
@@ -159,6 +161,8 @@ public final class PlayerSession {
 			SQLManager.close(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			SQLManager.close(connection);
+		} finally {
 			SQLManager.close(connection);
 		}
 		communication.clear();
@@ -200,6 +204,8 @@ public final class PlayerSession {
 			SQLManager.close(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			SQLManager.close(connection);
+		} finally {
 			SQLManager.close(connection);
 		}
 	}
@@ -459,7 +465,9 @@ public final class PlayerSession {
 
 	@Override
 	public boolean equals(Object o) {
-		return username.equals(((PlayerSession) o).username);
+		if(o instanceof PlayerSession) {
+			return username.equals(((PlayerSession) o).username);
+		} else return false;
 	}
 
 	@Override
