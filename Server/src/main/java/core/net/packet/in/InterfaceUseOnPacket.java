@@ -229,7 +229,7 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 			interfaceId = buffer.getLEShort();
 			int itemSlot = buffer.getLEShortA();
 			itemId = buffer.getShortA();
-			unknown = buffer.getShortA();
+			buffer.getShortA();
 			if (itemSlot < 0 || itemSlot > 27) {
 				break;
 			}
