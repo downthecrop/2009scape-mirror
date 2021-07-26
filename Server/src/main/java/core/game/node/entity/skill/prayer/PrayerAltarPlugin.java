@@ -241,7 +241,7 @@ public class PrayerAltarPlugin extends OptionHandler {
 		 * Gets the messages.
 		 * @return the messages
 		 */
-		private String[] getMessages() {
+		public String[] getMessages() {
 			return messages;
 		}
 	}
