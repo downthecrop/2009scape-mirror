@@ -31,12 +31,16 @@ public final class WorldListSQLHandler extends SQLEntryHandler<GameServer> {
 	 * Clears the world list.
 	 */
 	public static void clearWorldList() {
+		Connection connection = SQLManager.getConnection();
+		if(connection == null) return;
 		try {
-			Connection connection = SQLManager.getConnection();
 			PreparedStatement statement = connection.prepareStatement("DELETE FROM " + TABLE);
 			statement.executeUpdate();
-		} catch (SQLException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
+			SQLManager.close(connection);
+		} finally {
+			SQLManager.close(connection);
 		}
 	}
 	

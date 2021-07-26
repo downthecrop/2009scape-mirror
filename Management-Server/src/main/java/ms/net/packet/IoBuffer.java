@@ -1,6 +1,7 @@
 package ms.net.packet;
 
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 
 import ms.system.util.ByteBufferUtils;
 
@@ -301,7 +302,7 @@ public class IoBuffer {
 	 * @return
 	 */
 	public IoBuffer putString(String val) {
-		buf.put(val.getBytes());
+		buf.put(val.getBytes(StandardCharsets.UTF_8));
 		buf.put((byte) 0);
 		return this;
 	}
@@ -313,7 +314,7 @@ public class IoBuffer {
 	 */
 	public IoBuffer putJagString(String val) {
 		buf.put((byte) 0);
-		buf.put(val.getBytes());
+		buf.put(val.getBytes(StandardCharsets.UTF_8));
 		buf.put((byte) 0);
 		return this;
 	}
@@ -555,18 +556,6 @@ public class IoBuffer {
 	 */
 	public long getLong() {
 		return buf.getLong();
-	}
-
-	/**
-	 * 
-	 * @return
-	 */
-	public int getSmart() {
-		int peek = buf.get(buf.position());
-		if (peek <= Byte.MAX_VALUE) {
-			return buf.get() & 0xFF;
-		}
-		return (buf.getShort() & 0xFFFF) - 32768;
 	}
 
 	/**
