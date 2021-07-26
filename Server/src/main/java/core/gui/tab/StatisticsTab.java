@@ -21,6 +21,9 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.StandardOpenOption;
 
 /**
  * Handles server info tab.
@@ -314,7 +317,7 @@ public class StatisticsTab extends ConsoleTab {
      * @param file The file to log to.
      */
     protected static void logQueues(File file) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(file, true))) {
+        try (BufferedWriter bw = Files.newBufferedWriter(file.toPath(), StandardCharsets.UTF_8, StandardOpenOption.APPEND)) {
             bw.append("/////////////////////////////////////////////////////////////////////////");
             bw.newLine();
             bw.append("/////////////////////////////////////////////////////////////////////////");

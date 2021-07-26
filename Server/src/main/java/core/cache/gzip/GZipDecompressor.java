@@ -7,7 +7,7 @@ public class GZipDecompressor {
 
 	private static final Inflater inflaterInstance = new Inflater(true);
 
-	public static final void decompress(ByteBuffer buffer, byte data[]) {
+	public static final void decompress(ByteBuffer buffer, byte[] data) {
 		synchronized (inflaterInstance) {
 			if (~buffer.get(buffer.position()) != -32 || buffer.get(buffer.position() + 1) != -117) {
 				data = null;

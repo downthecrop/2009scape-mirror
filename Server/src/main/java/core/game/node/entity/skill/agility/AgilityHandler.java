@@ -103,27 +103,28 @@ public final class AgilityHandler {
 	public static void fail(final Player player, int delay, final Location dest, Animation anim, final int hit, final String message) {
 		if (anim != null) {
 			ContentAPI.animate(player, anim, true);
-		}
-		ContentAPI.submitWorldPulse(new Pulse(ContentAPI.animationDuration(anim), player) {
-			boolean dmg = false;
-			@Override
-			public boolean pulse() {
-				ContentAPI.teleport(player, dest, TeleportManager.TeleportType.INSTANT);
-				ContentAPI.animate(player, Animation.RESET, true);
-				if(!dmg) {
-					if (hit > 0) {
-						player.getImpactHandler().setDisabledTicks(0);
-						ContentAPI.impact(player, hit, HitsplatType.NORMAL);
+			ContentAPI.submitWorldPulse(new Pulse(ContentAPI.animationDuration(anim), player) {
+				boolean dmg = false;
+
+				@Override
+				public boolean pulse() {
+					ContentAPI.teleport(player, dest, TeleportManager.TeleportType.INSTANT);
+					ContentAPI.animate(player, Animation.RESET, true);
+					if (!dmg) {
+						if (hit > 0) {
+							player.getImpactHandler().setDisabledTicks(0);
+							ContentAPI.impact(player, hit, HitsplatType.NORMAL);
+						}
+						if (message != null) {
+							ContentAPI.sendMessage(player, message);
+						}
+						dmg = true;
 					}
-					if (message != null) {
-						ContentAPI.sendMessage(player, message);
-					}
-					dmg = true;
+					setDelay(0);
+					return player.getLocation().equals(dest);
 				}
-				setDelay(0);
-				return player.getLocation().equals(dest);
-			}
-		});
+			});
+		}
 	}
 
 	/**

@@ -392,7 +392,7 @@ public final class DBRCutscenePlugin extends CutscenePlugin {
 		getWiseOldMan().animate(CAST_ANIMATION);
 		getWiseOldMan().graphics(new Graphics(433));
 		if (target instanceof Entity) {
-			Projectile.create(getWiseOldMan(), target instanceof Entity ? ((Entity) target) : null, 434).send();
+			Projectile.create(getWiseOldMan(), (Entity) target, 434).send();
 		} else {
 			Projectile projectile = Projectile.create(getWiseOldMan(), null, 434, 30, 30, 41, 140, 0, 0);
 			projectile.setEndLocation((Location) target);

@@ -181,7 +181,9 @@ public final class AnimationRoom extends MapZone implements Plugin<Object> {
 						}
 					}
 				}
-				animateArmour(event.getPlayer(), (Scenery) event.getUsedWith(), set);
+				if(set != null) {
+					animateArmour(event.getPlayer(), (Scenery) event.getUsedWith(), set);
+				}
 				return true;
 			}
 

@@ -132,6 +132,7 @@ object OfferManager {
                     }
                 }
             } catch (e: IOException) {
+                GE_OFFER_LOCK.unlock()
                 SystemLogger.logWarn("Unable to load bot offers. Perhaps it doesn't exist?")
             }
         }
@@ -216,7 +217,7 @@ object OfferManager {
             return false
         }
         OFFER_MAPPING.remove(offer.uid)
-        OFFERS_BY_ITEMID[offer.itemID]!!.remove(offer)
+        OFFERS_BY_ITEMID[offer.itemID]?.remove(offer)
         GE_OFFER_LOCK.unlock()
         return true
     }
@@ -227,7 +228,7 @@ object OfferManager {
         if (!OFFERS_BY_ITEMID.containsKey(offer.itemID)) {
             OFFERS_BY_ITEMID[offer.itemID] = mutableListOf()
         }
-        OFFERS_BY_ITEMID[offer.itemID]!!.add(offer)
+        OFFERS_BY_ITEMID[offer.itemID]?.add(offer)
         GE_OFFER_LOCK.unlock()
     }
 
@@ -326,6 +327,7 @@ object OfferManager {
             }
         } catch (e: Exception) {
             e.printStackTrace()
+            GE_OFFER_LOCK.unlock()
         }
         GE_OFFER_LOCK.unlock()
     }
