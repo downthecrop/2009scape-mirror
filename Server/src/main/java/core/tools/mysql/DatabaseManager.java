@@ -55,7 +55,7 @@ public class DatabaseManager {
 			return statement.executeQuery(query);
 
 		} catch (SQLException e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 
 		return null;
@@ -75,7 +75,7 @@ public class DatabaseManager {
 			return statement.executeUpdate(query);
 
 		} catch (SQLException e) {
-			System.out.println(e);
+			e.printStackTrace();
 		}
 
 		return -1;
