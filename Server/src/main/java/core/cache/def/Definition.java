@@ -139,7 +139,8 @@ public class Definition<T extends Node> {
 	public String getExamine() {
 		if (examine == null) {
 			try {
-				examine = handlers.get("examine").toString();
+				if(handlers.get("examine") != null)
+					examine = handlers.get("examine").toString();
 			} catch (Exception e){
 				e.printStackTrace();
 			}

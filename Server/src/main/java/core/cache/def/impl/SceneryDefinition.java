@@ -6,7 +6,6 @@ import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.interaction.OptionHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.object.Scenery;
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 

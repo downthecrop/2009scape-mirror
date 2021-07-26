@@ -358,7 +358,7 @@ object RegionManager {
         val region = forId(regionId)
         Region.load(region)
         val `object`: Scenery? = region.planes[z].getChunkObject(x, y, objectId)
-        return if (`object` != null && !`object`.isRenderable()) {
+        return if (`object` != null && !`object`.isRenderable) {
             null
         } else `object`
     }
