@@ -97,6 +97,7 @@ public final class GrandExchangeDatabase {
 			}
 			initialized = true;
 		} catch (Exception e){
+			e.printStackTrace();
 			initNewDB();
 		}
 	}
