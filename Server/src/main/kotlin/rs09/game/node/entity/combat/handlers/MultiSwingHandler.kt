@@ -139,8 +139,8 @@ open class MultiSwingHandler(meleeDistance: Boolean, vararg attacks: SwitchAttac
         } else current.handler.calculateHit(entity, victim, modifier)
     }
 
-    override fun calculateDefence(entity: Entity?, attacker: Entity?): Int {
-        return current.handler.calculateDefence(entity, attacker)
+    override fun calculateDefence(victim: Entity?, attacker: Entity?): Int {
+        return current.handler.calculateDefence(victim, attacker)
     }
 
     override fun getSetMultiplier(e: Entity?, skillId: Int): Double {

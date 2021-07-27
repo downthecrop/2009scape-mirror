@@ -2,10 +2,12 @@ package rs09.game.content.global.worldevents.penguinhns
 
 import core.game.component.Component
 import core.game.content.dialogue.DialoguePlugin
+import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
 import rs09.game.world.GameWorld
+import rs09.tools.END_DIALOGUE
 
 class LarryHandler(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
@@ -19,7 +21,7 @@ class LarryHandler(player: Player? = null) : DialoguePlugin(player){
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         class HintPulse : Pulse(){
             override fun pulse(): Boolean {
-                val hint = PenguinManager.penguins.random().hint
+                val hint = Penguin.values()[PenguinManager.penguins.random()].hint
                 player.sendMessage("Here, I know one is...")
                 player.sendMessage(hint)
                 return true
@@ -36,7 +38,13 @@ class LarryHandler(player: Player? = null) : DialoguePlugin(player){
             1 -> npc("Sure!").also { player.inventory.add(Item(13732));stage = 1000 }
 
             //Hint
-            10 -> npc("Yes, but I will have to write it down","for you so these penguins don't overhear.").also { GameWorld.submit(HintPulse()); stage = 1000 }
+            10 -> npc("Yes, give me just one moment...").also { stage++ }
+
+            11 -> {
+                val hint = Penguin.values()[PenguinManager.penguins.random()].hint
+                npcl(FacialExpression.FRIENDLY, "One is $hint")
+                stage = END_DIALOGUE
+            }
 
             //Point turn-in
             20 -> if(player.getAttribute("phns:points",0) > 0) npc("Sure thing, what would you like to be","rewarded with?").also { stage++ } else npc("Uh, you don't have any points","to turn in.").also{stage = 1000}

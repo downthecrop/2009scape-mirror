@@ -139,8 +139,11 @@ public class Definition<T extends Node> {
 	public String getExamine() {
 		if (examine == null) {
 			try {
-				examine = handlers.get("examine").toString();
-			} catch (Exception e){}
+				if(handlers.get("examine") != null)
+					examine = handlers.get("examine").toString();
+			} catch (Exception e){
+				e.printStackTrace();
+			}
 			if(examine == null) {
 				if (name.length() > 0) {
 					examine = "It's a" + (StringUtils.isPlusN(name) ? "n " : " ") + name + ".";

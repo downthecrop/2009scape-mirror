@@ -154,12 +154,11 @@ public final class TownCrierDialogue extends DialoguePlugin {
 				npc("Beware of players trying to lue you into the wilderness.", "Your items cannot be returned if you lose them!");
 				stage = 2;
 				break;
-			case 5:
+			default:
 				npc("" + GameWorld.getSettings().getName() + " will never email you asking for your log-in details.");
 				stage = 2;
 				break;
 			}
-			stage = 2;
 			break;
 		case 150:
 			npc("Player Moderators are normal players of the game, just", "like you. However, since they have shown themselves to be", "trustworthy and active reporters, they have been invited", "by Jagex to monitor the game and take appropriate");

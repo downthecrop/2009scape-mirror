@@ -134,7 +134,9 @@ public final class MovingBlockNPC extends AbstractNPC {
 						}
 						player.lock(4);
 						player.setAttribute("block-move", GameWorld.getTicks() + 4);
-						AgilityHandler.failWalk(player, close ? 1 : 3, player.getLocation(), dest, AgilityPyramidCourse.transformLevel(dest), Animation.create(3066), 10, 8, null, getId() == 3124 ? Direction.WEST : Direction.SOUTH);
+						if(dest != null) {
+							AgilityHandler.failWalk(player, close ? 1 : 3, player.getLocation(), dest, AgilityPyramidCourse.transformLevel(dest), Animation.create(3066), 10, 8, null, getId() == 3124 ? Direction.WEST : Direction.SOUTH);
+						}
 						return true;
 					}
 				});

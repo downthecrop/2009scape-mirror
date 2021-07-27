@@ -77,11 +77,11 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
 
     /**
      * Calculates the maximum defence of the entity.
-     * @param entity The entity.
+     * @param victim The entity.
      * @param attacker The entity to defend against.
      * @return The maximum defence value.
      */
-    abstract fun calculateDefence(entity: Entity?, attacker: Entity?): Int
+    abstract fun calculateDefence(victim: Entity?, attacker: Entity?): Int
 
     /**
      * Gets the void set multiplier.
@@ -188,18 +188,17 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         }
         val attack = calculateAccuracy(entity) * accuracyMod * mod * getSetMultiplier(entity, Skills.ATTACK)
         val defence = calculateDefence(victim, entity) * defenceMod * getSetMultiplier(victim, Skills.DEFENCE)
-        val chance: Double
-        chance = if (attack < defence) {
-            (attack - 1) / (defence * 2)
+        val chance: Double = if (attack > defence) {
+            1 - ((defence + 2) / ((2 * attack) + 1))
         } else {
-            1 - (defence + 1) / (attack * 2)
+            attack / ((2 * defence) + 1)
         }
         val ratio = chance * 100
         val accuracy = floor(ratio)
         val block = floor(101 - ratio)
         val acc = Math.random() * accuracy
         val def = Math.random() * block
-        return acc > def
+        return (acc > def).also { if(entity?.username?.toLowerCase() == "test10") SystemLogger.logInfo("Should hit: $it") }
     }
 
     /**

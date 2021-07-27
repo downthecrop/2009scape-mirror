@@ -101,14 +101,14 @@ public class TeleTabsOptionPlugin extends OptionHandler {
 		/**
 		 * @param item the item to set
 		 */
-		public void setItem(int item) {
+		private void setItem(int item) {
 			this.item = item;
 		}
 
 		/**
 		 * @param location the location to set
 		 */
-		public void setLocation(Location location) {
+		private void setLocation(Location location) {
 			this.location = location;
 		}
 
@@ -122,7 +122,7 @@ public class TeleTabsOptionPlugin extends OptionHandler {
 		/**
 		 * @param exp the exp to set.
 		 */
-		public void setExp(double exp) {
+		private void setExp(double exp) {
 			this.exp = exp;
 		}
 	}

@@ -35,11 +35,13 @@ object Server {
 
     var lastHeartbeat = System.currentTimeMillis()
 
+    @JvmStatic
     var running = false
 
     /**
      * The NIO reactor.
      */
+    @JvmStatic
     var reactor: NioReactor? = null
 
     /**
@@ -67,12 +69,16 @@ object Server {
         }
         startTime = System.currentTimeMillis()
         val t = TimeStamp()
+        SystemLogger.logInfo("Initializing Server Store...")
+        ServerStore.init()
+        SystemLogger.logInfo("Initialized ${ServerStore.counter} store files.")
         GameWorld.prompt(true)
         SQLManager.init()
         Runtime.getRuntime().addShutdownHook(ServerConstants.SHUTDOWN_HOOK)
         SystemLogger.logInfo("Starting networking...")
         try {
-            NioReactor.configure(43594 + GameWorld.settings?.worldId!!).start()
+            reactor = NioReactor.configure(43594 + GameWorld.settings?.worldId!!)
+            reactor!!.start()
         } catch (e: BindException) {
             SystemLogger.logErr("Port " + (43594 + GameWorld.settings?.worldId!!) + " is already in use!")
             throw e
@@ -88,7 +94,7 @@ object Server {
             while(scanner.hasNextLine()){
                 val command = scanner.nextLine()
                 when(command){
-                    "stop" -> SystemManager.flag(SystemState.TERMINATED)
+                    "stop" -> exitProcess(0)
                     "players" -> System.out.println("Players online: " + (Repository.LOGGED_IN_PLAYERS.size))
                     "update" -> SystemManager.flag(SystemState.UPDATING)
                     "help","commands" -> printCommands()
@@ -100,8 +106,8 @@ object Server {
         GlobalScope.launch {
             delay(20000)
             while(running){
-                if(System.currentTimeMillis() - lastHeartbeat > 1800){
-                    running = false
+                if(System.currentTimeMillis() - lastHeartbeat > 1800 && running){
+                    SystemLogger.logErr("Triggering reboot due to heartbeat timeout")
                     exitProcess(0)
                 }
                 delay(625)

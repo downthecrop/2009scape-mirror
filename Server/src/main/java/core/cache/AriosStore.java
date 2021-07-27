@@ -15,7 +15,7 @@ import core.cache.misc.buffer.ByteBufferUtils;
  * The server data storage.
  * @author Emperor
  */
-public final class ServerStore {
+public final class AriosStore {
 
 	/**
 	 * The storage.

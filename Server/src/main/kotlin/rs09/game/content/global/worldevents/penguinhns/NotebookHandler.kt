@@ -9,8 +9,7 @@ import core.plugin.Plugin
 class NotebookHandler : OptionHandler(){
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         val total = player?.getAttribute("phns:points",0)
-        val weekly = player?.getAttribute("phns:weekly",0)
-        player?.dialogueInterpreter?.sendDialogue("Total points: $total","Penguins spied this week: $weekly")
+        player?.dialogueInterpreter?.sendDialogue("Total points: $total")
         return true
     }
 

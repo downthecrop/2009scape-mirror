@@ -23,7 +23,7 @@ public class AliTheCarter extends DialoguePlugin {
     @Override
     public DialoguePlugin newInstance(Player player){return new AliTheCarter(player);}
     public boolean open(Object... args){
-        NPC npc = (NPC)args[0];
+        npc = (NPC)args[0];
         player("Hello");
         return true;
     }

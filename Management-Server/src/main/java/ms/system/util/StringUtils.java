@@ -14,26 +14,16 @@ public final class StringUtils {
 	/**
 	 * The valid characters to be used in names/messages/...
 	 */
-	public static final char[] VALID_CHARS = { 
+	private static final char[] VALID_CHARS = {
 		'_', 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 
 		'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 
 		'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
 		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9' 
 	};
 	/**
-	 * Character mapping.
-	 */
-	public static char[] mapping = {
-		'\n',
-		'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
-		'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
-		'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
-		'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z',
-		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', ' ' };
-	/**
 	 * The an int array241.
 	 */
-	public static int[] anIntArray241 = { 215, 203, 83, 158, 104, 101, 93, 84,
+	private final static int[] anIntArray241 = { 215, 203, 83, 158, 104, 101, 93, 84,
 		107, 103, 109, 95, 94, 98, 89, 86, 70, 41, 32, 27, 24, 23, -1, -2,
 		26, -3, -4, 31, 30, -5, -6, -7, 37, 38, 36, -8, -9, -10, 40, -11,
 		-12, 55, 48, 46, 47, -13, -14, -15, 52, 51, -16, -17, 54, -18, -19,
@@ -173,7 +163,7 @@ public final class StringUtils {
 		boolean wasSpace = true;
 		for (int i = 0; i < name.length(); i++) {
 			if (wasSpace) {
-				newName.append((new String() + name.charAt(i)).toUpperCase());
+				newName.append(("" + name.charAt(i)).toUpperCase());
 				wasSpace = false;
 			} else {
 				newName.append(name.charAt(i));
@@ -306,9 +296,8 @@ public final class StringUtils {
 	 * @return The string value.
 	 */
 	public static String getString(String s) {
-		String string = s.replaceAll("\\<.*?>", "").replaceAll("&#160;", "")
+		return s.replaceAll("\\<.*?>", "").replaceAll("&#160;", "")
 				.replaceAll("Discontinued Item:", "");
-		return string;
 	}
 	/**
 	 * Characters used to convert a String to a Long.
@@ -319,7 +308,7 @@ public final class StringUtils {
 		't', 'u', 'v', 'w', 'x', 'y', 'z', '0', '1', '2', 
 		'3', '4', '5', '6', '7', '8', '9'
 	};
-	public static int[] anIntArray233 = {
+	private final static int[] anIntArray233 = {
 		0, 1024, 2048, 3072, 4096, 5120,
 		6144, 8192, 9216, 12288, 10240, 11264, 16384, 18432, 17408, 20480,
 		21504, 22528, 23552, 24576, 25600, 26624, 27648, 28672, 29696,
@@ -362,7 +351,7 @@ public final class StringUtils {
 		301188096, 301189120, 301190144, 301191168, 301193216, 301195264,
 		301194240, 301197312, 301198336, 301199360, 301201408, 301202432
 	};
-	public static byte[] aByteArray235 = {
+	private final static byte[] aByteArray235 = {
 		22, 22, 22, 22, 22, 22, 21, 22, 22,
 		20, 22, 22, 22, 21, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22, 22,
 		22, 22, 22, 22, 22, 22, 3, 8, 22, 16, 22, 16, 17, 7, 13, 13, 13,
@@ -387,16 +376,16 @@ public final class StringUtils {
 		try {
 			i_27_ += i_25_;
 			int i_29_ = 0;
-			int i_30_ = i_26_ << -2116795453;
+			int i_30_ = i_26_ << 3;
 			for (; i_27_ > i_25_; i_25_++) {
 				int i_31_ = 0xff & is_28_[i_25_];
 				int i_32_ = anIntArray233[i_31_];
 				int i_33_ = aByteArray235[i_31_];
-				int i_34_ = i_30_ >> -1445887805;
+				int i_34_ = i_30_ >> 3;
 			int i_35_ = i_30_ & 0x7;
-			i_29_ &= (-i_35_ >> 473515839);
+			i_29_ &= (-i_35_ >> 31);
 			i_30_ += i_33_;
-			int i_36_ = ((-1 + (i_35_ - -i_33_)) >> -1430991229) + i_34_;
+			int i_36_ = ((-1 + (i_35_ - -i_33_)) >> 3) + i_34_;
 			i_35_ += 24;
 			is[i_34_] = (byte) (i_29_ = (i_29_ | (i_32_ >>> i_35_)));
 			if ((i_36_ ^ 0xffffffff) < (i_34_ ^ 0xffffffff)) {

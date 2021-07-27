@@ -55,7 +55,7 @@ public final class RareDropTable {
 	 * Initializes the rare drop table.
 	 */
 	public static void init(){
-		if(!new File(ServerConstants.RDT_DATA_PATH).exists()){
+		if(ServerConstants.RDT_DATA_PATH != null && !new File(ServerConstants.RDT_DATA_PATH).exists()){
 			SystemLogger.logErr("Can't locate RDT file at " + ServerConstants.RDT_DATA_PATH);
 			return;
 		}

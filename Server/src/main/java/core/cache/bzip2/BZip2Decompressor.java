@@ -100,10 +100,6 @@ public class BZip2Decompressor {
 					i1++;
 					j1--;
 				} while (true);
-				if (j1 == 0) {
-					i = 1;
-					break;
-				}
 				abyte0[i1] = byte4;
 				i1++;
 				j1--;
