@@ -39,6 +39,7 @@ class MajorUpdateWorker {
             val start = System.currentTimeMillis()
             val rmlist = ArrayList<Pulse>()
             val list = ArrayList(GameWorld.Pulser.TASKS)
+            Server.heartbeat()
 
             //run our pulses
             for(pulse in list) {
@@ -52,17 +53,20 @@ class MajorUpdateWorker {
 
             rmlist.clear()
             //perform our update sequence where we write masks, etc
-            sequence.start()
-            sequence.run()
-            sequence.end()
-            PacketWriteQueue.flush()
+            try {
+                sequence.start()
+                sequence.run()
+                sequence.end()
+                PacketWriteQueue.flush()
+            } catch (e: Exception){
+                e.printStackTrace()
+            }
             //increment global ticks variable
             GameWorld.pulse()
             //disconnect all players waiting to be disconnected
             Repository.disconnectionQueue.update()
             //tick all manager plugins
             Managers.tick()
-            Server.heartbeat()
 
             //Handle daily restart if enabled
             if(sdf.format(Date()).toInt() == 0){
