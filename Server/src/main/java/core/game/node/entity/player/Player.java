@@ -72,6 +72,7 @@ import core.tools.StringUtils;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import org.rs09.consts.Items;
+import rs09.GlobalStats;
 import rs09.ServerConstants;
 import rs09.game.VarpManager;
 import rs09.game.content.ame.RandomEventManager;
@@ -582,6 +583,7 @@ public class Player extends Entity {
 
 	@Override
 	public void finalizeDeath(Entity killer) {
+		GlobalStats.incrementDeathCount();
 		settings.setSpecialEnergy(100);
 		settings.updateRunEnergy(settings.getRunEnergy() - 100);
 		Player k = killer instanceof Player ? (Player) killer : this;

@@ -8,6 +8,7 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.GlobalStats;
 
 /**
  * Zone for the lumbridge cow pen
@@ -40,7 +41,7 @@ public class CowPenZone extends MapZone implements Plugin<Object> {
     @Override
     public boolean death(Entity e, Entity killer) {
         if (killer instanceof Player && e instanceof NPC) {
-            CowDeaths++;
+            GlobalStats.incrementDailyCowDeaths();
         }
         return false;
     }
