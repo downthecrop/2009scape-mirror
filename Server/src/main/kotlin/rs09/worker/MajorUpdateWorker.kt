@@ -71,7 +71,7 @@ class MajorUpdateWorker {
             //Handle daily restart if enabled
             if(sdf.format(Date()).toInt() == 0){
 
-                if(GameWorld.checkDay() == 7) {//sunday
+                if(GameWorld.checkDay() == 1) {//monday
                     ServerStore.clearWeeklyEntries()
                 }
 
