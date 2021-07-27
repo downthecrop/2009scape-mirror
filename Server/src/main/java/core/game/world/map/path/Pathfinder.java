@@ -183,7 +183,7 @@ public abstract class Pathfinder {
 	 */
 	public static boolean canDecorationInteract(int curX, int curY, int size, int destX, int destY, int rotation, int type, int z, ClipMaskSupplier clipMaskSupplier) {
 		if (size != 1) {
-			if (destX >= curX && destX <= (curX + size) - 1 && destY >= destY && destY <= (destY + size) - 1) {
+			if (destX >= curX && destX <= (curX + size) - 1 && destY <= (destY + size) - 1) {
 				return true;
 			}
 		} else if (destX == curX && curY == destY) {
@@ -307,7 +307,7 @@ public abstract class Pathfinder {
 	 */
 	public static boolean canDoorInteract(int curX, int curY, int size, int destX, int destY, int type, int rotation, int z, ClipMaskSupplier clipMaskSupplier) {
 		if (size != 1) {
-			if (destX >= curX && destX <= size + curX - 1 && destY >= destY && destY <= destY + size - 1) {
+			if (destX >= curX && destX <= size + curX - 1 && destY <= destY + size - 1) {
 				return true;
 			}
 		} else if (curX == destX && destY == curY) {

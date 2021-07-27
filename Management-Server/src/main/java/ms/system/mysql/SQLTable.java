@@ -52,12 +52,4 @@ public final class SQLTable {
 		return updated;
 	}
 	
-	/**
-	 * Gets the columns.
-	 * @return The columns.
-	 */
-	public SQLColumn[] getColumns() {
-		return columns;
-	}
-	
 }

@@ -239,8 +239,7 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 		Direction d = Direction.getLogicalDirection(player.getLocation(), getLedgeLocation(player, object));
 		final Direction dir = d;
 		final int diff = object.getRotation() == 3 && dir == Direction.EAST ? 1 : object.getRotation() == 3 && dir == Direction.WEST ? 0 : d == Direction.EAST || (d == Direction.SOUTH && object.getRotation() != 0) || d == Direction.NORTH ? 0 : 1;
-		final boolean fail = player.getSkills().getLevel(Skills.AGILITY) >= 75 ? false : hasFailed(player) ;
-		player.getSkills().getLevel(Skills.AGILITY);
+		final boolean fail = player.getSkills().getLevel(Skills.AGILITY) < 75 && hasFailed(player);
 		final Location end = player.getLocation().transform(dir.getStepX() * (fail ? 3 : 5), dir.getStepY() * (fail ? 3 : 5), 0);
 		player.getPacketDispatch().sendMessage("You put your foot on the ledge and try to edge across...");
 		if (fail) {

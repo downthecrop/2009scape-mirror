@@ -1,5 +1,6 @@
 package core.game.interaction.inter;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -30,7 +31,7 @@ public final class GliderInterface extends ComponentPlugin {
 		if (glider == null) {
 			return true;
 		}
-		player.getPulseManager().run(new GliderPulse(1, player, glider));
+		ContentAPI.submitWorldPulse(new GliderPulse(1, player, glider));
 		return true;
 	}
 }

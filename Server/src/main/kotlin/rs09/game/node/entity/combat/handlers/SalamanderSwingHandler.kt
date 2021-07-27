@@ -58,8 +58,8 @@ class SalamanderSwingHandler(private var style: CombatStyle) : CombatSwingHandle
         }
     }
 
-    override fun calculateDefence(entity: Entity?, attacker: Entity?): Int {
-        return style.swingHandler.calculateDefence(entity, attacker)
+    override fun calculateDefence(victim: Entity?, attacker: Entity?): Int {
+        return style.swingHandler.calculateDefence(victim, attacker)
     }
 
     override fun getSetMultiplier(e: Entity?, skillId: Int): Double {

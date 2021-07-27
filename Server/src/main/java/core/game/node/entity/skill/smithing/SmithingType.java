@@ -168,15 +168,15 @@ public enum SmithingType {
 	 */
 	TYPE_PICKAXE(2, 267, 268, new int[] { 273, 272, 271, 270 }, 1);
 
-	private int name;
+	private final int name;
 
-	private int[] button;
+	private final int[] button;
 
-	private int child;
+	private final int child;
 
-	private int required;
+	private final int required;
 
-	private int product_amount;
+	private final int product_amount;
 
 	/**
 	 * Constructs a new {@code SmithingType.java} {@code Object}.
@@ -227,13 +227,6 @@ public enum SmithingType {
 	 */
 	public int getProductAmount() {
 		return product_amount;
-	}
-
-	/**
-	 * @param name the name to set.
-	 */
-	public void setName(int name) {
-		this.name = name;
 	}
 
 	public static int forButton(Player player, Bars bar, int button, int item) {

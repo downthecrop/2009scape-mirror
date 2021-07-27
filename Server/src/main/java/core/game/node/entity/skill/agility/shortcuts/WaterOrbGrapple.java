@@ -59,8 +59,6 @@ public class WaterOrbGrapple extends OptionHandler {
         Location current = player.getLocation();
         Scenery rock = RegionManager.getObject(Location.create(2841, 3426, 0));
         Scenery tree = RegionManager.getObject(Location.create(2841, 3434, 0));
-        System.out.println(rock);
-        System.out.println(tree);
 
         switch (option) {
             case "grapple":

@@ -45,7 +45,7 @@ public final class ChemistDialogue extends DialoguePlugin {
     public boolean open(Object... args) {
         interpreter.sendOptions("Do you want to talk about lamps?", "Yes.", "No.", "No, I'm more interested in impling jars.", "Falador Achievement Diary");
         stage = 0;
-        AchievementDiary diary = player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR);
+        diary = player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR);
         replacementReward = diary.isLevelRewarded(level)
                 && diary.isComplete(level, true)
                 && !player.hasItem(diary.getType().getRewards(level)[0]);

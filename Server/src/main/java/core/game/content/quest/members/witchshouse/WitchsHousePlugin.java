@@ -42,7 +42,6 @@ public class WitchsHousePlugin extends OptionHandler {
     @Override
     public boolean handle(Player player, Node node, String option) {
         final Quest quest = player.getQuestRepository().getQuest("Witch's House");
-        final GroundItem ball = GroundItemManager.get(2407, new Location(2935, 3460, 0), null);
         final int id = node instanceof Item ? ((Item) node).getId() : node instanceof Scenery ? ((Scenery) node).getId() : node instanceof NPC ? ((NPC) node).getId() : node.getId();
         // boolean killedExperiment = player.getAttribute("witchs_house:experiment_killed",false);
         // boolean experimentAlive = !player.getAttribute("witchs_house:experiment_killed", false);

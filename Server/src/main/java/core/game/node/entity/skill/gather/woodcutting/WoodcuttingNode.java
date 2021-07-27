@@ -416,7 +416,7 @@ public enum WoodcuttingNode {
     public int getRespawnDuration() {
         int minimum = respawnRate & 0xFFFF;
         int maximum = (respawnRate >> 16) & 0xFFFF;
-        double playerRatio = ServerConstants.MAX_PLAYERS / Repository.getPlayers().size();
+        double playerRatio = (double) ServerConstants.MAX_PLAYERS / Repository.getPlayers().size();
         return (int) (minimum + ((maximum - minimum) / playerRatio));
     }
 }

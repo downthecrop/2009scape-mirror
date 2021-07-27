@@ -208,8 +208,8 @@ public class DragonfireSwingHandler extends CombatSwingHandler {
 	}
 
 	@Override
-	public int calculateDefence(Entity entity, Entity attacker) {
-		return CombatStyle.MAGIC.getSwingHandler().calculateDefence(entity, attacker);
+	public int calculateDefence(Entity victim, Entity attacker) {
+		return CombatStyle.MAGIC.getSwingHandler().calculateDefence(victim, attacker);
 	}
 
 	@Override

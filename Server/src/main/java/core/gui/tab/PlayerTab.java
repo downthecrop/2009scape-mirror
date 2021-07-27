@@ -143,6 +143,7 @@ public class PlayerTab extends ConsoleTab {
     public void populatePlayerSearch() {
         playerNames.clear();
         model.clear();
+        if(ServerConstants.PLAYER_SAVE_PATH == null) return;
         File f = new File(ServerConstants.PLAYER_SAVE_PATH);
         if (f.listFiles() == null) {
             System.out.println("Player directory was null!");

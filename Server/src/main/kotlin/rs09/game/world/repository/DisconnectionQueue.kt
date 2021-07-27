@@ -37,6 +37,11 @@ class DisconnectionQueue {
         }
     }
 
+
+    fun isEmpty(): Boolean{
+        return queue.isEmpty()
+    }
+
     /**
      * Finishes a disconnection.
      * @param entry The entry.
@@ -48,6 +53,7 @@ class DisconnectionQueue {
             return false
         }
         if (entry.isClear) {
+            SystemLogger.logInfo("Clearing player...")
             player.clear()
         }
         Repository.playerNames.remove(player.name)
@@ -56,8 +62,10 @@ class DisconnectionQueue {
         Repository.LOGGED_IN_PLAYERS.remove(player.details.username)
         SystemLogger.logInfo("Player cleared. Removed ${player.details.username}")
         try {
-            player.communication.clan.leave(player, false)
+            if(player.communication.clan != null)
+                player.communication.clan.leave(player, false)
         } catch (e: Exception) {
+            e.printStackTrace()
         }
         if (player.isArtificial) {
             return true
@@ -189,8 +197,8 @@ class DisconnectionQueue {
             if (sql) {
                 player.details.sqlManager.update(player)
                 player.details.save()
-                SQLEntryHandler.write(HighscoreSQLHandler(player))
-                SQLEntryHandler.write(PlayerLogSQLHandler(player.monitor, player.name))
+                /*SQLEntryHandler.write(HighscoreSQLHandler(player))
+                SQLEntryHandler.write(PlayerLogSQLHandler(player.monitor, player.name))*/
             }
             return true
         } catch (t: Throwable) {

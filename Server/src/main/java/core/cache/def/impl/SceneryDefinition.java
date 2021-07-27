@@ -1670,6 +1670,6 @@ public class SceneryDefinition extends Definition<Scenery> {
 	 * @return The container id.
 	 */
 	public static int getContainerId(int id) {
-		return id >>> 1998118472;
+		return id >>> 8;
 	}
 }
