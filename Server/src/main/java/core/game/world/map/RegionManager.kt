@@ -33,17 +33,17 @@ object RegionManager {
      */
     @JvmStatic
     fun forId(regionId: Int): Region {
-        LOCK.tryLock(10000, TimeUnit.MILLISECONDS)
-        var region = REGION_CACHE[regionId]
-        if (region == null) {
-            region = Region((regionId shr 8) and 0xFF, regionId and 0xFF)
-            if(region!!.regionId != regionId){
-                SystemLogger.logErr("IDs do NOT match - ${region!!.regionId} supposed to be $regionId")
+        if(LOCK.tryLock() || LOCK.tryLock(10000, TimeUnit.MILLISECONDS)) {
+            var region = REGION_CACHE[regionId]
+            if (region == null) {
+                region = Region((regionId shr 8) and 0xFF, regionId and 0xFF)
+                REGION_CACHE[regionId] = region
             }
-            REGION_CACHE[regionId] = region
+            LOCK.unlock()
+            return REGION_CACHE[regionId]!!
         }
-        LOCK.unlock()
-        return REGION_CACHE[regionId]!!
+        SystemLogger.logErr("UNABLE TO OBTAIN LOCK WHEN GETTING REGION BY ID. RETURNING BLANK REGION.")
+        return Region(0,0)
     }
 
     /**
@@ -51,15 +51,16 @@ object RegionManager {
      */
     @JvmStatic
     fun pulse() {
-        LOCK.tryLock(10000,TimeUnit.MILLISECONDS)
-        for (r in REGION_CACHE.values) {
-            if (r != null && r.isActive) {
-                for (p in r.planes) {
-                    p.pulse()
+        if(LOCK.tryLock() || LOCK.tryLock(10000,TimeUnit.MILLISECONDS)) {
+            for (r in REGION_CACHE.values) {
+                if (r.isActive) {
+                    for (p in r.planes) {
+                        p.pulse()
+                    }
                 }
             }
+            LOCK.unlock()
         }
-        LOCK.unlock()
     }
 
     /**
@@ -354,7 +355,7 @@ object RegionManager {
         val region = forId(regionId)
         Region.load(region)
         val `object`: Scenery? = region.planes[z].getChunkObject(x, y, objectId)
-        return if (`object` != null && !`object`.isRenderable()) {
+        return if (`object` != null && !`object`.isRenderable) {
             null
         } else `object`
     }
@@ -788,9 +789,10 @@ object RegionManager {
 
     @JvmStatic
     fun addRegion(id: Int, region: Region){
-        LOCK.tryLock(10000, TimeUnit.MILLISECONDS)
-        REGION_CACHE[id] = region
-        LOCK.unlock()
+        if(lock.tryLock() || LOCK.tryLock(10000, TimeUnit.MILLISECONDS)) {
+            REGION_CACHE[id] = region
+            LOCK.unlock()
+        }
     }
 
     /**

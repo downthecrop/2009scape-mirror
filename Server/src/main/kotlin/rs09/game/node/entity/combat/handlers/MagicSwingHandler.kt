@@ -192,7 +192,7 @@ open class MagicSwingHandler
             val level = entity!!.skills.getLevel(Skills.MAGIC, true)
             val bonus = entity.properties.bonuses[if (entity is Player) 14 else 13]
             val cumulativeStr = level.toDouble()
-            return 1 + ((14 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * baseDamage).toInt() / 10
+            return 1 + ((14 + cumulativeStr + bonus.toDouble() / 8 + cumulativeStr * bonus * 0.016865) * baseDamage).toInt() / 10
         }
         var levelMod = 1.0
         val entityMod = entity!!.getLevelMod(entity, victim)
@@ -202,14 +202,14 @@ open class MagicSwingHandler
         return (baseDamage * levelMod).toInt() + 1
     }
 
-    override fun calculateDefence(entity: Entity?, attacker: Entity?): Int {
-        val level = entity!!.skills.getLevel(Skills.DEFENCE, true)
+    override fun calculateDefence(victim: Entity?, attacker: Entity?): Int {
+        val level = victim!!.skills.getLevel(Skills.DEFENCE, true)
         var prayer = 1.0
-        if (entity is Player) {
-            prayer += entity.prayer.getSkillBonus(Skills.MAGIC)
+        if (victim is Player) {
+            prayer += victim.prayer.getSkillBonus(Skills.MAGIC)
         }
-        val effective = floor(level * prayer * 0.3) + entity.skills.getLevel(Skills.MAGIC, true) * 0.7
-        val equipment = entity.properties.bonuses[WeaponInterface.BONUS_MAGIC + 5]
+        val effective = floor(level * prayer * 0.3) + victim.skills.getLevel(Skills.MAGIC, true) * 0.7
+        val equipment = victim.properties.bonuses[WeaponInterface.BONUS_MAGIC + 5]
         return floor((effective + 8) * (equipment + 64) / 10).toInt()
     }
 

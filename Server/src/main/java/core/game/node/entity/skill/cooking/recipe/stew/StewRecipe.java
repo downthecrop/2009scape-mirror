@@ -47,13 +47,15 @@ public class StewRecipe extends Recipe {
 	public void mix(Player player, NodeUsageEvent event) {
 		Item first = event.getUsedItem();
 		Item second = event.getBaseItem();
-		if (player.getInventory().remove(first) && player.getInventory().remove(second)) {
-			if (first.getId() == BOWL_OF_WATER.getId() || second.getId() == BOWL_OF_WATER.getId()) {
-				player.getInventory().add(first.getId() == POTATO.getId() ? INCOMPLETE_STEW : first.getId() == MEAT.getId() ? INCOMPLETE_STEW2 : second.getId() == POTATO.getId() ? INCOMPLETE_STEW : second.getId() == MEAT.getId() ? INCOMPLETE_STEW2 : null);
-			} else {
-				player.getInventory().add(UNCOOKED_STEW);
+		if(first != null && second != null) {
+			if (player.getInventory().remove(first) && player.getInventory().remove(second)) {
+				if (first.getId() == BOWL_OF_WATER.getId() || second.getId() == BOWL_OF_WATER.getId()) {
+					player.getInventory().add(first.getId() == POTATO.getId() ? INCOMPLETE_STEW : first.getId() == MEAT.getId() ? INCOMPLETE_STEW2 : second.getId() == POTATO.getId() ? INCOMPLETE_STEW : second.getId() == MEAT.getId() ? INCOMPLETE_STEW2 : null);
+				} else {
+					player.getInventory().add(UNCOOKED_STEW);
+				}
+				player.getPacketDispatch().sendMessage(getMixMessage(event));
 			}
-			player.getPacketDispatch().sendMessage(getMixMessage(event));
 		}
 	}
 

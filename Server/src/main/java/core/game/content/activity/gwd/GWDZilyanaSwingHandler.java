@@ -64,7 +64,7 @@ public class GWDZilyanaSwingHandler extends CombatSwingHandler {
 					list.add(new BattleState(entity, t));
 				}
 			}
-			state.setTargets(targets = list.toArray(new BattleState[list.size()]));
+			state.setTargets(targets = list.toArray(new BattleState[0]));
 			state.setStyle(CombatStyle.MAGIC);
 			setType(CombatStyle.MAGIC);
 		}
@@ -83,31 +83,38 @@ public class GWDZilyanaSwingHandler extends CombatSwingHandler {
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
-		switch (getType()) {
-		case MELEE:
-			entity.animate(MELEE_ATTACK);
-			break;
-		case MAGIC:
-			entity.animate(MAGIC_ATTACK);
-			break;
-		default:
-			break;
+		if(getType() != null) {
+			switch (getType()) {
+				case MELEE:
+					entity.animate(MELEE_ATTACK);
+					break;
+				case MAGIC:
+					entity.animate(MAGIC_ATTACK);
+					break;
+				default:
+					break;
+			}
 		}
 	}
 
 	@Override
 	public ArmourSet getArmourSet(Entity e) {
-		return getType().getSwingHandler().getArmourSet(e);
+		if(getType() != null)
+			return getType().getSwingHandler().getArmourSet(e);
+		else return ArmourSet.AHRIM;
 	}
 
 	@Override
 	public double getSetMultiplier(Entity e, int skillId) {
-		return getType().getSwingHandler().getSetMultiplier(e, skillId);
+		if(getType() != null)
+			return getType().getSwingHandler().getSetMultiplier(e, skillId);
+		else return -1;
 	}
 
 	@Override
 	public void impact(Entity entity, Entity victim, BattleState state) {
-		state.getStyle().getSwingHandler().impact(entity, victim, state);
+		if(state != null)
+			state.getStyle().getSwingHandler().impact(entity, victim, state);
 	}
 
 	@Override
@@ -117,22 +124,28 @@ public class GWDZilyanaSwingHandler extends CombatSwingHandler {
 
 	@Override
 	public int calculateAccuracy(Entity entity) {
-		return getType().getSwingHandler().calculateAccuracy(entity);
+		if(getType() != null)
+			return getType().getSwingHandler().calculateAccuracy(entity);
+		else return -1;
 	}
 
 	@Override
-	public int calculateDefence(Entity entity, Entity attacker) {
-		return getType().getSwingHandler().calculateDefence(entity, attacker);
+	public int calculateDefence(Entity victim, Entity attacker) {
+		if(getType() != null)
+			return getType().getSwingHandler().calculateDefence(victim, attacker);
+		else return -1;
 	}
 
 	@Override
 	public int calculateHit(Entity entity, Entity victim, double modifier) {
-		return getType().getSwingHandler().calculateHit(entity, victim, modifier);
+		if(getType() != null)
+			return getType().getSwingHandler().calculateHit(entity, victim, modifier);
+		else return -1;
 	}
 
 	@Override
 	public void visualizeImpact(Entity entity, Entity victim, BattleState state) {
-		if (state.getStyle() == CombatStyle.MAGIC) {
+		if (state != null && state.getStyle() == CombatStyle.MAGIC) {
 			for (BattleState s : state.getTargets()) {
 				if (s.getEstimatedHit() > 0) {
 					s.getVictim().graphics(MAGIC_END_GRAPHIC);
@@ -140,7 +153,8 @@ public class GWDZilyanaSwingHandler extends CombatSwingHandler {
 			}
 			return;
 		}
-		state.getStyle().getSwingHandler().visualizeImpact(entity, victim, state);
+		if(state != null)
+			state.getStyle().getSwingHandler().visualizeImpact(entity, victim, state);
 	}
 
 }

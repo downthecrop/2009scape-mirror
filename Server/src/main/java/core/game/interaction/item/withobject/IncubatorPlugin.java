@@ -44,20 +44,20 @@ public class IncubatorPlugin extends OptionHandler {
 				player.sendMessage("You don't have enough inventory space.");
 				return true;
 			}
-			if (egg != null) {
-				String name = egg.getProduct().getName().toLowerCase();
-				player.varpManager.get(1160).setVarbit(4,0).send(player);
-				player.sendMessage("You take your " + name + " out of the incubator.");
-				if(!player.getInventory().add(egg.getProduct())){
-					GroundItemManager.create(egg.getProduct(),player);
-				}
-				player.removeAttribute("inc");
+		{
+			String name = egg.getProduct().getName().toLowerCase();
+			player.varpManager.get(1160).setVarbit(4,0).send(player);
+			player.sendMessage("You take your " + name + " out of the incubator.");
+			if(!player.getInventory().add(egg.getProduct())){
+				GroundItemManager.create(egg.getProduct(),player);
 			}
+			player.removeAttribute("inc");
+		}
 			return true;
 		case "inspect":
 			if (player.states.get("incubator") != null || inc != -1) {
 				IncubatorState p = (IncubatorState) player.states.get("incubator");
-				if(p.getPulse() == null){
+				if(p != null && p.getPulse() == null){
 					player.varpManager.get(1160).setVarbit(4,0).send(player);
 					return true;
 				}

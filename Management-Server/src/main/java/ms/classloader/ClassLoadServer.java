@@ -30,7 +30,7 @@ public class ClassLoadServer extends Thread {
     /**
      * Holds classes and resources already added in the server
      */
-    protected static HashMap<String, byte[]> resourceCache = new HashMap<String, byte[]>();
+    protected final static HashMap<String, byte[]> resourceCache = new HashMap<String, byte[]>();
 
 	/**
 	 * New socket
@@ -60,7 +60,9 @@ public class ClassLoadServer extends Thread {
                 //System.out.println("New Connection from : " + clientSocket.getInetAddress());
                 WorkerThread wcs  = new WorkerThread(clientSocket);
                 wcs.start();
-            } catch (Exception e) {}
+            } catch (Exception e) {
+            	e.printStackTrace();
+			}
 		}
     }
     

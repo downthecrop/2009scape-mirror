@@ -9,11 +9,10 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.github.Vatuu:discord-rpc:1.6.2'
     implementation 'com.googlecode.json-simple:json-simple:1.1.1'
     implementation("com.github.ajalt.mordant:mordant:2.0.0-alpha2")
     implementation "org.jetbrains:markdown:0.2.4"
-    implementation files('libs/clientlibs.jar')
+    implementation files('libs/clientlibs.jar', 'libs/discord-rpc.jar')
 }
 
 jar {

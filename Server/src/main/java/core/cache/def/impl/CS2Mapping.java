@@ -3,6 +3,8 @@ package core.cache.def.impl;
 import java.io.BufferedWriter;
 import java.io.FileWriter;
 import java.nio.ByteBuffer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -71,7 +73,7 @@ public final class CS2Mapping {
 	 */
 	public static void main(String... args) throws Throwable {
 		GameWorld.prompt(false);
-		BufferedWriter bw = new BufferedWriter(new FileWriter("./cs2.txt"));
+		BufferedWriter bw = Files.newBufferedWriter(Paths.get("./cs2.txt"));
 		for (int i = 0; i < 10000; i++) {
 			CS2Mapping mapping = forId(i);
 			if (mapping == null) {

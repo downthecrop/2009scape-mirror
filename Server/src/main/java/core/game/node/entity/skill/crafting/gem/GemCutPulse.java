@@ -68,9 +68,6 @@ public final class GemCutPulse extends SkillPulse<Item> {
 
 	@Override
 	public boolean reward() {
-		if (++ticks % 1 != 0) {
-			return false;
-		}
 		if (player.getInventory().remove(gem.getUncut())) {
 			final Item item = gem.getGem();
 		    player.getInventory().add(item);

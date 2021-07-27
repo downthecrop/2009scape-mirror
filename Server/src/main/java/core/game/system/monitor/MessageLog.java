@@ -21,7 +21,7 @@ public class MessageLog {
 	/**
 	 * The date format used.
 	 */
-	private static final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+	private final DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
 
 	/**
 	 * The messages.

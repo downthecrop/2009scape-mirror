@@ -85,7 +85,8 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 			}
 			break;
 		case 195: // Interface On Player
-			payload = buffer.getShortA();
+			//payload = buffer.getShortA();
+			buffer.getShortA();
 			componentId = buffer.getLEShort();
 			interfaceId = buffer.getLEShort();
 			int targetIndex = buffer.getLEShortA();
@@ -175,7 +176,7 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 		case 239: // Interface On NPC
 			componentId = buffer.getLEShort();
 			interfaceId = buffer.getLEShort();
-			int unknown = buffer.getShortA();
+			buffer.getShortA();
 		    int index = buffer.getLEShortA();
 			if (index < 1 || index > ServerConstants.MAX_NPCS) {
 				PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
@@ -228,7 +229,7 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 			interfaceId = buffer.getLEShort();
 			int itemSlot = buffer.getLEShortA();
 			itemId = buffer.getShortA();
-			unknown = buffer.getShortA();
+			buffer.getShortA();
 			if (itemSlot < 0 || itemSlot > 27) {
 				break;
 			}

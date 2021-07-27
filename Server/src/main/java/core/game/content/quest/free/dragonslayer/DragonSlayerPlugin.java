@@ -150,7 +150,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 			InteractionListeners.run(node.getId(),0,"equip",player,node);
 			break;
 		case 742:
-			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD) || player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
+			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
 				player.getPacketDispatch().sendMessage("You have already slain the dragon. Now you just need to return to Oziach for");
 				player.getPacketDispatch().sendMessage("your reward!");
 				return true;
@@ -169,7 +169,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 				movement.run(player, 10);
 				return true;
 			}
-			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD) || player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
+			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
 				player.getPacketDispatch().sendMessage("You have already slain the dragon. Now you just need to return to Oziach for");
 				player.getPacketDispatch().sendMessage("your reward!");
 				return true;
@@ -318,7 +318,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 		case 2604:
 			switch (option) {
 			case "search":
-				if (!player.getInventory().containsItem(DragonSlayer.MAZE_PIECE) && !player.getInventory().containsItem(DragonSlayer.MAZE_PIECE)) {
+				if (!player.getInventory().containsItem(DragonSlayer.MAZE_PIECE)) {
 					if (!player.getInventory().add(DragonSlayer.MAZE_PIECE)) {
 						GroundItemManager.create(DragonSlayer.MAZE_PIECE, player);
 					}

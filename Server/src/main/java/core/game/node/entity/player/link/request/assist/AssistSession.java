@@ -406,7 +406,7 @@ public final class AssistSession extends Pulse implements RequestModule {
 		if (getPlayer() != p) {
 			int index = getSkillIndex(slot);
 			if (index != -1) {
-				if (index != -1 && !isRestricted()) {
+				if (!isRestricted()) {
 					int level = p.getSkills().getLevel(slot);
 					int pLevel = player.getSkills().getLevel(slot);
 					if (pLevel < level) {

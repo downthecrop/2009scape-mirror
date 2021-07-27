@@ -148,7 +148,7 @@ public final class ElvargNPC extends AbstractNPC {
 			return super.isAttackable(entity, style);
 		}
 		final Player player = (Player) entity;
-		if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD) || player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
+		if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
 			player.getPacketDispatch().sendMessage("You have already slain the dragon. Now you just need to return to Oziach for");
 			player.getPacketDispatch().sendMessage("your reward!");
 			return true;
@@ -216,8 +216,8 @@ public final class ElvargNPC extends AbstractNPC {
 		}
 
 		@Override
-		public int calculateDefence(Entity entity, Entity attacker) {
-			return style.getSwingHandler().calculateDefence(entity, attacker);
+		public int calculateDefence(Entity victim, Entity attacker) {
+			return style.getSwingHandler().calculateDefence(victim, attacker);
 		}
 
 		@Override

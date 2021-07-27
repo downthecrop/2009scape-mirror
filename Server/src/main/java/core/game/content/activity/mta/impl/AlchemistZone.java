@@ -305,7 +305,7 @@ public class AlchemistZone extends MTAZone {
 			int alchIndex = indexer + index;
 			if (indexer != 0) {
 				if (indexer >= 4 && index < 4) {
-					if (indexer == 4 && indexer - index < 4 || indexer - index < 4) {
+					if (indexer == 4 && indexer - index < 4) {
 						return null;
 					}
 					if (indexer == 4) {
@@ -430,7 +430,7 @@ public class AlchemistZone extends MTAZone {
 		 * Sets the cost.
 		 * @param cost the cost to set.
 		 */
-		public void setCost(int cost) {
+		private void setCost(int cost) {
 			this.cost = cost;
 		}
 

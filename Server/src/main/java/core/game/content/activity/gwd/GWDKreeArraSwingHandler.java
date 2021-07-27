@@ -61,11 +61,11 @@ public final class GWDKreeArraSwingHandler extends CombatSwingHandler {
 	@Override
 	public int swing(Entity entity, Entity victim, BattleState state) {
 		int ticks = 1;
-		int distance = entity.size() >> 1;
-		if (!entity.inCombat()) {
+		int distance = entity != null ? entity.size() >> 1 : 0;
+		if (entity != null && !entity.inCombat()) {
 			distance++;
 		}
-		if (victim.getLocation().withinDistance(entity.getCenterLocation(), distance) && RandomFunction.RANDOM.nextBoolean()) {
+		if (entity != null && victim.getLocation().withinDistance(entity.getCenterLocation(), distance) && RandomFunction.RANDOM.nextBoolean()) {
 			int hit = 0;
 			int max = CombatStyle.MELEE.getSwingHandler().calculateHit(entity, victim, 1.0);
 			if (CombatStyle.MELEE.getSwingHandler().isAccurateImpact(entity, victim, CombatStyle.MELEE)) {
@@ -80,7 +80,7 @@ public final class GWDKreeArraSwingHandler extends CombatSwingHandler {
 			state.setMaximumHit(max);
 			state.setStyle(CombatStyle.MELEE);
 		} else {
-			ticks += (int) Math.ceil(entity.getLocation().getDistance(victim.getLocation()) * 0.3);
+			ticks += (int) Math.ceil(entity != null ? entity.getLocation().getDistance(victim.getLocation()) : 0.0 * 0.3);
 			NPC npc = (NPC) entity;
 			List<BattleState> list = new ArrayList<>(20);
 			for (Entity t : RegionManager.getLocalPlayers(npc, 28)) {
@@ -93,7 +93,7 @@ public final class GWDKreeArraSwingHandler extends CombatSwingHandler {
 			}
 			BattleState[] targets;
 			state.setStyle(CombatStyle.RANGE);
-			state.setTargets(targets = list.toArray(new BattleState[list.size()]));
+			state.setTargets(targets = list.toArray(new BattleState[0]));
 			for (BattleState s : targets) {
 				CombatStyle style = RandomFunction.randomize(10) < 3 ? CombatStyle.MAGIC : CombatStyle.RANGE;
 				s.setStyle(style);
@@ -114,62 +114,69 @@ public final class GWDKreeArraSwingHandler extends CombatSwingHandler {
 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
-		switch (state.getStyle()) {
-		case MELEE:
-			entity.animate(MELEE_ATTACK);
-			break;
-		default:
-			entity.animate(RANGE_ATTACK);
-			for (BattleState s : state.getTargets()) {
-				int gfxId = 1197;
-				if (s.getStyle() == CombatStyle.MAGIC) {
-					gfxId = 1198;
+		if(state != null) {
+			if (state.getStyle() == CombatStyle.MELEE) {
+				entity.animate(MELEE_ATTACK);
+			} else {
+				entity.animate(RANGE_ATTACK);
+				for (BattleState s : state.getTargets()) {
+					int gfxId = 1197;
+					if (s.getStyle() == CombatStyle.MAGIC) {
+						gfxId = 1198;
+					}
+					Projectile.ranged(entity, s.getVictim(), gfxId, 92, 36, 46, 5).send();
 				}
-				Projectile.ranged(entity, s.getVictim(), gfxId, 92, 36, 46, 5).send();
 			}
-			break;
 		}
 	}
 
 	@Override
 	public ArmourSet getArmourSet(Entity e) {
-		return getType().getSwingHandler().getArmourSet(e);
+		if(getType() != null)
+			return getType().getSwingHandler().getArmourSet(e);
+		else return ArmourSet.AHRIM;
 	}
 
 	@Override
 	public double getSetMultiplier(Entity e, int skillId) {
-		return getType().getSwingHandler().getSetMultiplier(e, skillId);
+		if(getType() != null)
+			return getType().getSwingHandler().getSetMultiplier(e, skillId);
+		else return 0.0;
 	}
 
 	@Override
 	public void impact(Entity entity, Entity victim, BattleState state) {
-		if (state.getStyle() == CombatStyle.MELEE) {
+		if (state != null && state.getStyle() == CombatStyle.MELEE) {
 			state.getStyle().getSwingHandler().impact(entity, victim, state);
 			return;
 		}
-		for (BattleState s : state.getTargets()) {
-			if (s == null || s.getEstimatedHit() < 0) {
-				continue;
+		if(state != null) {
+			for (BattleState s : state.getTargets()) {
+				if (s == null || s.getEstimatedHit() < 0) {
+					continue;
+				}
+				int hit = s.getEstimatedHit();
+				s.getVictim().getImpactHandler().handleImpact(entity, hit, s.getStyle(), s);
 			}
-			int hit = s.getEstimatedHit();
-			s.getVictim().getImpactHandler().handleImpact(entity, hit, s.getStyle(), s);
 		}
 	}
 
 	@Override
 	public void visualizeImpact(Entity entity, Entity victim, BattleState state) {
-		if (state.getStyle() == CombatStyle.MELEE) {
+		if (state != null && state.getStyle() == CombatStyle.MELEE) {
 			victim.animate(victim.getProperties().getDefenceAnimation());
 			return;
 		}
-		for (BattleState s : state.getTargets()) {
-			s.getVictim().animate(s.getVictim().getProperties().getDefenceAnimation());
-			if (RandomFunction.randomize(10) < 8) {
-				Direction dir = Direction.getLogicalDirection(entity.getLocation(), s.getVictim().getLocation());
-				Location destination = s.getVictim().getLocation().transform(dir.getStepX(), dir.getStepY(), 0);
-				if (CHAMBER.insideBorder(destination)) {
-					s.getVictim().getProperties().setTeleportLocation(destination);
-					s.getVictim().graphics(END_GRAPHIC);
+		if(state != null) {
+			for (BattleState s : state.getTargets()) {
+				s.getVictim().animate(s.getVictim().getProperties().getDefenceAnimation());
+				if (RandomFunction.randomize(10) < 8) {
+					Direction dir = Direction.getLogicalDirection(entity.getLocation(), s.getVictim().getLocation());
+					Location destination = s.getVictim().getLocation().transform(dir.getStepX(), dir.getStepY(), 0);
+					if (CHAMBER.insideBorder(destination)) {
+						s.getVictim().getProperties().setTeleportLocation(destination);
+						s.getVictim().graphics(END_GRAPHIC);
+					}
 				}
 			}
 		}
@@ -188,17 +195,23 @@ public final class GWDKreeArraSwingHandler extends CombatSwingHandler {
 
 	@Override
 	public int calculateAccuracy(Entity entity) {
-		return getType().getSwingHandler().calculateAccuracy(entity);
+		if(getType() != null)
+			return getType().getSwingHandler().calculateAccuracy(entity);
+		else return -1;
 	}
 
 	@Override
-	public int calculateDefence(Entity entity, Entity attacker) {
-		return getType().getSwingHandler().calculateDefence(entity, attacker);
+	public int calculateDefence(Entity victim, Entity attacker) {
+		if(getType() != null)
+			return getType().getSwingHandler().calculateDefence(victim, attacker);
+		else return -1;
 	}
 
 	@Override
 	public int calculateHit(Entity entity, Entity victim, double modifier) {
-		return getType().getSwingHandler().calculateHit(entity, victim, modifier);
+		if(getType() != null)
+			return getType().getSwingHandler().calculateHit(entity, victim, modifier);
+		else return -1;
 	}
 
 }

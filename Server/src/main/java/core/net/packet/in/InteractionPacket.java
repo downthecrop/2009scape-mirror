@@ -298,9 +298,6 @@ public final class InteractionPacket implements IncomingPacket {
 		}
 		final Option option = player.getInteraction().get(optionIndex);
 		//Handling for "Pelt" option
-		if(option.getName().toLowerCase().equals("pelt")){
-
-		}
 		if (option == null) {
 			PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
 			return;

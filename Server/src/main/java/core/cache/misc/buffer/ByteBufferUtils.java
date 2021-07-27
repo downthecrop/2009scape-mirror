@@ -2,6 +2,7 @@ package core.cache.misc.buffer;
 
 import java.io.ObjectInputStream;
 import java.nio.ByteBuffer;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Holds utility methods for reading/writing a byte buffer.
@@ -29,7 +30,7 @@ public final class ByteBufferUtils {
 	 * @param buffer The byte buffer.
 	 */
 	public static void putString(String s, ByteBuffer buffer) {
-		buffer.put(s.getBytes()).put((byte) 0);
+		buffer.put(s.getBytes(StandardCharsets.UTF_8)).put((byte) 0);
 	}
 
 	/**

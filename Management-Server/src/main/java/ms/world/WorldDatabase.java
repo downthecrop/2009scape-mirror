@@ -19,7 +19,7 @@ public class WorldDatabase {
 	/**
 	 * The game servers.
 	 */
-	public static final GameServer[] DATABASE = new GameServer[ServerConstants.WORLD_LIMIT];
+	private static final GameServer[] DATABASE = new GameServer[ServerConstants.WORLD_LIMIT];
 	
 	/**
 	 * The update time stamp.

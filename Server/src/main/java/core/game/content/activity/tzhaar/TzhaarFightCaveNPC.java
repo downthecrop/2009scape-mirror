@@ -217,12 +217,15 @@ public final class TzhaarFightCaveNPC extends AbstractNPC {
 				}
 				return InteractionType.NO_INTERACT;
 			}
-			return getType().getSwingHandler().canSwing(entity, victim);
+			if(getType() != null)
+				return getType().getSwingHandler().canSwing(entity, victim);
+			else return InteractionType.NO_INTERACT;
 		}
 
 		@Override
 		public int swing(Entity entity, Entity victim, BattleState state) {
-			style = super.getType();
+			if(super.getType() != null)
+				style = super.getType();
 			int ticks = 1;
 			if (jad) {
 				main = CombatStyle.values()[1 + RandomFunction.RANDOM.nextInt(2)];
@@ -262,7 +265,7 @@ public final class TzhaarFightCaveNPC extends AbstractNPC {
 
 		@Override
 		public void visualize(Entity entity, Entity victim, BattleState state) {
-			if (state.getStyle() == null) {
+			if (state == null || state.getStyle() == null) {
 				return;
 			}
 			switch (state.getStyle()) {
@@ -291,19 +294,19 @@ public final class TzhaarFightCaveNPC extends AbstractNPC {
 
 		@Override
 		public void impact(Entity entity, Entity victim, BattleState state) {
-			if (state.getStyle() != null && victim.hasProtectionPrayer(state.getStyle())) {
+			if (state != null && state.getStyle() != null && victim.hasProtectionPrayer(state.getStyle())) {
 				state.setEstimatedHit(0);
 			}
-			if (state.getStyle() == null) {
+			if (state != null && state.getStyle() == null) {
 				NPC n = victim instanceof NPC ? ((NPC) victim) : (NPC) npc.activity.getPlayer().getProperties().getCombatPulse().getVictim();
-				if (n == null || !(n instanceof TzhaarFightCaveNPC)) {
+				if (!(n instanceof TzhaarFightCaveNPC)) {
 					n = npc;
 				}
 				((TzhaarFightCaveNPC) n).heal(state.getEstimatedHit());
 				n.graphics(new Graphics(444, 96));
 				return;
 			}
-			if (state.getEstimatedHit() > 0) {
+			if (state != null && state.getEstimatedHit() > 0) {
 				state.setEstimatedHit(formatHit(victim, state.getEstimatedHit()));
 				if (((NPC) entity).getId() == 2734 || ((NPC) entity).getId() == 2735) {
 					victim.getSkills().decrementPrayerPoints(state.getEstimatedHit());
@@ -316,11 +319,11 @@ public final class TzhaarFightCaveNPC extends AbstractNPC {
 
 		@Override
 		public void visualizeImpact(Entity entity, Entity victim, BattleState state) {
-			if (state.getStyle() == null) {
+			if (state != null && state.getStyle() == null) {
 				return;
-			} else if (state.getStyle() == CombatStyle.MAGIC && !jad) {
+			} else if (state != null && state.getStyle() == CombatStyle.MAGIC && !jad) {
 				victim.graphics(Graphics.create(1624));
-			} else if (jad && state.getStyle() == CombatStyle.RANGE) {
+			} else if (state != null && jad && state.getStyle() == CombatStyle.RANGE) {
 				victim.graphics(Graphics.create(451));
 			}
 			style.getSwingHandler().visualizeImpact(entity, victim, state);
@@ -332,8 +335,8 @@ public final class TzhaarFightCaveNPC extends AbstractNPC {
 		}
 
 		@Override
-		public int calculateDefence(Entity entity, Entity attacker) {
-			return style.getSwingHandler().calculateDefence(entity, attacker);
+		public int calculateDefence(Entity victim, Entity attacker) {
+			return style.getSwingHandler().calculateDefence(victim, attacker);
 		}
 
 		@Override

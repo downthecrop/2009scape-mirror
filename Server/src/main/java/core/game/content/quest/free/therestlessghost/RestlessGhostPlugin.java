@@ -80,7 +80,7 @@ public final class RestlessGhostPlugin extends OptionHandler {
 		switch (option) {
 		case "open":
 			switch (id) {
-			case 2145:
+			default:
 				toggleCoffin(player, object);
 				break;
 			}

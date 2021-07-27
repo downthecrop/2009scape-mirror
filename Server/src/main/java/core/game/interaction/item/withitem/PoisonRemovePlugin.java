@@ -288,34 +288,6 @@ public class PoisonRemovePlugin extends UseWithHandler {
 		}
 
 		/**
-		 * @param first the first to set.
-		 */
-		public void setFirst(int first) {
-			this.first = first;
-		}
-
-		/**
-		 * @param item the item to set.
-		 */
-		public void setItem(int item) {
-			this.item = item;
-		}
-
-		/**
-		 * @param second the second to set.
-		 */
-		public void setSecond(int second) {
-			this.second = second;
-		}
-
-		/**
-		 * @param third the third to set.
-		 */
-		public void setThird(int third) {
-			this.third = third;
-		}
-
-		/**
 		 * Method used to get the poisioned weapon for the id.
 		 * @param i the id.
 		 * @return the weapon.

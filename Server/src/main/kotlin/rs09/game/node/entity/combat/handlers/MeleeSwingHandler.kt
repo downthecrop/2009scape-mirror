@@ -1,6 +1,7 @@
 package rs09.game.node.entity.combat.handlers
 
-import core.game.container.Container
+import api.ContentAPI
+import api.EquipmentSlot
 import core.game.container.impl.EquipmentContainer
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage
@@ -18,7 +19,6 @@ import core.game.node.entity.state.EntityState
 import core.game.world.map.path.Pathfinder
 import core.tools.RandomFunction
 import rs09.game.node.entity.combat.CombatSwingHandler
-import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks
 import kotlin.math.floor
 
 /**
@@ -72,7 +72,7 @@ open class MeleeSwingHandler
         if (state.armourEffect === ArmourSet.VERAC || isAccurateImpact(entity, victim, CombatStyle.MELEE)) {
             val max = calculateHit(entity, victim, 1.0)
             state.maximumHit = max
-            hit = RandomFunction.random(max)
+            hit = RandomFunction.random(max + 1)
         }
         state.estimatedHit = hit
         if(victim != null) {
@@ -137,46 +137,36 @@ open class MeleeSwingHandler
     }
 
     override fun calculateAccuracy(entity: Entity?): Int {
-        val baseLevel = entity!!.skills.getStaticLevel(Skills.ATTACK)
-        var weaponRequirement = baseLevel
-        if (entity is Player) {
-            val weapon = entity.equipment[3]
-            weaponRequirement = weapon?.definition?.getRequirement(Skills.ATTACK) ?: 1
+        //formula taken from wiki: https://oldschool.runescape.wiki/w/Damage_per_second/Melee#Step_six:_Calculate_the_hit_chance Yes I know it's old school. It's the best resource we have for potentially authentic formulae.
+        entity ?: return 0
+        var effectiveAttackLevel = entity.skills.getLevel(Skills.ATTACK).toDouble()
+        if(entity is Player) effectiveAttackLevel = floor(effectiveAttackLevel + (entity.prayer.getSkillBonus(Skills.ATTACK) * effectiveAttackLevel))
+        if(entity.properties.attackStyle.style == WeaponInterface.STYLE_ACCURATE) effectiveAttackLevel += 3
+        else if(entity.properties.attackStyle.style == WeaponInterface.STYLE_CONTROLLED) effectiveAttackLevel += 1
+        effectiveAttackLevel += 8
+        if(entity is Player && entity.isWearingVoid(true)) effectiveAttackLevel *= 1.1
+        effectiveAttackLevel = floor(effectiveAttackLevel)
+        effectiveAttackLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
+
+        val helmetName = (if(entity is Player) ContentAPI.getItemFromEquipment(entity, EquipmentSlot.HAT)?.name ?: "null" else "null").toLowerCase()
+        val amuletName = (if(entity is Player) ContentAPI.getItemFromEquipment(entity, EquipmentSlot.AMULET)?.name ?: "null" else "null").toLowerCase()
+        val victimName = entity.properties.combatPulse.getVictim()?.name ?: "none"
+
+        if (entity is Player //Slayer helm/ black mask
+            && (helmetName.contains("black mask") || helmetName.contains("slayer helm"))
+            && entity.slayer.task?.ids?.contains((entity.properties.combatPulse.getVictim()?.id ?: 0)) == true
+        ) {
+            effectiveAttackLevel *= 1.2
         }
-        var weaponBonus = 0.0
-        if (baseLevel > weaponRequirement) {
-            weaponBonus = (baseLevel - weaponRequirement) * .3
+
+        else if (entity is Player //Salve amulet
+            && (amuletName.contains("salve"))
+            && checkUndead(victimName)
+        ) {
+            effectiveAttackLevel *= 1.2
         }
-        val style = entity.properties.attackStyle
-        var level = entity.skills.getLevel(Skills.ATTACK)
-        if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.PRECISION_STRIKES,entity.asPlayer())){
-            level += 6
-        }
-        var prayer = 1.0
-        if (entity is Player) {
-            prayer += entity.prayer.getSkillBonus(Skills.ATTACK)
-        }
-        var additional = 1.0 // Black mask/slayer helmet/salve/...
-        if (entity.properties.combatPulse.getVictim() != null) {
-            if (!entity.properties.combatPulse.getVictim()!!.isPlayer && entity is Player) {
-                if (checkUndead(entity.getProperties().combatPulse.getVictim()!!.name) && entity.asPlayer().equipment[EquipmentContainer.SLOT_AMULET] != null) {
-                    if (entity.asPlayer().equipment[EquipmentContainer.SLOT_AMULET].id == 10588) {
-                        additional += 0.20
-                    } else if (entity.isPlayer() && entity.asPlayer().equipment[EquipmentContainer.SLOT_AMULET].id == 4081) {
-                        additional += 0.15
-                    }
-                }
-            }
-        }
-        var styleBonus = 0
-        if (style.style == WeaponInterface.STYLE_ACCURATE) {
-            styleBonus = 3
-        } else if (style.style == WeaponInterface.STYLE_CONTROLLED) {
-            styleBonus = 1
-        }
-        val effective = floor(level * prayer * additional + styleBonus + weaponBonus)
-        val bonus = entity.properties.bonuses[style.bonusType]
-        return floor((effective + 8) * (bonus + 64) / 10 * 1.10).toInt()
+
+        return floor(effectiveAttackLevel).toInt()
     }
 
     override fun calculateHit(entity: Entity?, victim: Entity?, modifier: Double): Int {
@@ -193,45 +183,40 @@ open class MeleeSwingHandler
             cumulativeStr += 1.0
         }
         cumulativeStr *= getSetMultiplier(entity, Skills.STRENGTH)
-        val hit = (16 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier
-        return (hit / 10).toInt() + 1
+        /*val hit = (16 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier
+        return (hit / 10).toInt() + 1*/
+        return (1.3 + (cumulativeStr / 10) + (bonus / 80) + ((cumulativeStr * bonus) / 640)).toInt()
     }
 
-    override fun calculateDefence(entity: Entity?, attacker: Entity?): Int {
-        val style = entity!!.properties.attackStyle
-        var styleBonus = 0
-        if (style.style == WeaponInterface.STYLE_DEFENSIVE || style.style == WeaponInterface.STYLE_LONG_RANGE) {
-            styleBonus = 3
-        } else if (style.style == WeaponInterface.STYLE_CONTROLLED) {
-            styleBonus = 1
+    override fun calculateDefence(victim: Entity?, attacker: Entity?): Int {
+        //authentic formula, taken from OSRS wiki: https://oldschool.runescape.wiki/w/Damage_per_second/Melee#Step_five:_Calculate_the_Defence_roll
+        victim ?: return 0
+        attacker ?: return 0
+
+        when(victim){
+            is Player -> {
+                var effectiveDefenceLevel = victim.skills.getLevel(Skills.DEFENCE).toDouble()
+                effectiveDefenceLevel = floor(effectiveDefenceLevel + (victim.prayer.getSkillBonus(Skills.DEFENCE) * effectiveDefenceLevel))
+                if(victim.properties.attackStyle.style == WeaponInterface.STYLE_DEFENSIVE) effectiveDefenceLevel += 3
+                else if(victim.properties.attackStyle.style == WeaponInterface.STYLE_CONTROLLED) effectiveDefenceLevel += 1
+                effectiveDefenceLevel += 8
+                effectiveDefenceLevel = floor(effectiveDefenceLevel)
+                return floor(effectiveDefenceLevel * (victim.properties.bonuses[attacker.properties.attackStyle.bonusType + 5] + 64)).toInt()
+            }
+            is NPC -> {
+                val defLevel = victim.skills.getLevel(Skills.DEFENCE)
+                val styleDefenceBonus = victim.properties.bonuses[attacker.properties.attackStyle.bonusType + 5] + 64
+                return defLevel * styleDefenceBonus
+            }
         }
-        val level = entity.skills.getLevel(Skills.DEFENCE)
-        var prayer = 1.0
-        if (entity is Player) {
-            prayer += entity.prayer.getSkillBonus(Skills.DEFENCE)
-        }
-        val effective = floor(level * prayer + styleBonus)
-        val equipment = entity.properties.bonuses[attacker!!.properties.attackStyle.bonusType + 5]
-        return floor((effective + 8) * (equipment + 64) / 10).toInt()
+
+        return 0
     }
 
     override fun getSetMultiplier(e: Entity?, skillId: Int): Double {
         if (e!!.properties.armourSet === ArmourSet.DHAROK && skillId == Skills.STRENGTH) {
 //			System.out.println("Fiist number -> " + 1.0 + ((e.getSkills().getMaximumLifepoints() - e.getSkills().getLifepoints()) * 0.01));
             return 1.0 + (e!!.skills.maximumLifepoints - e.skills.lifepoints) * 0.01
-        }
-        if (e is Player) {
-            val c: Container = e.equipment
-            val itemId = c.getNew(EquipmentContainer.SLOT_HAT).id
-            if ((skillId == Skills.ATTACK || skillId == Skills.STRENGTH) && (itemId in 8901..8921 || itemId == 13263)) {
-                val victim = e.getProperties().combatPulse.getVictim()
-                if (victim is NPC && victim.task == e.slayer.task) {
-                    return 1.15
-                }
-            }
-            if (containsVoidSet(c) && c.getNew(EquipmentContainer.SLOT_HAT).id == 11665) {
-                return 1.1
-            }
         }
         return 1.0
     }

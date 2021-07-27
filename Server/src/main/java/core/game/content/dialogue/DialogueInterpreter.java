@@ -111,6 +111,7 @@ public final class DialogueInterpreter {
                 npc.getWalkingQueue().reset();
                 npc.getPulseManager().clear();
             } catch(Exception e){
+                e.printStackTrace();
             }
         } else if (args.length < 1) {
             args = new Object[] { dialogueKey };
@@ -163,7 +164,7 @@ public final class DialogueInterpreter {
     public void startScript(int dialogueKey, ScriptContext script, Object... args) {
         key = dialogueKey;
         (dialogueStage = script).execute(args);
-        if (script != null && script.isInstant()) {
+        if (script.isInstant()) {
             dialogueStage = script = ScriptManager.run(script, args);
         }
     }

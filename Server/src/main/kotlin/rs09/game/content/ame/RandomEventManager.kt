@@ -17,10 +17,15 @@ class RandomEventManager(val player: Player) {
 
     fun fireEvent(){
         if(player.zoneMonitor.isRestricted(ZoneRestriction.RANDOM_EVENTS)){
+            nextSpawn = GameWorld.ticks + 3000
             return
         }
         val ame = RandomEvents.values().random()
         event = ame.npc.create(player,ame.loot,ame.type)
+        if(event!!.spawnLocation == null){
+            nextSpawn = GameWorld.ticks + 3000
+            return
+        }
         event!!.init()
         nextSpawn = GameWorld.ticks + DELAY_TICKS
         SystemLogger.logRE("Fired ${event!!.name} for ${player.username}")

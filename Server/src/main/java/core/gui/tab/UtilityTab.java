@@ -330,7 +330,6 @@ public final class UtilityTab extends ConsoleTab {
     public List<String> itemScanner(Item item) {
         Map<String, Integer> map = new HashMap<>();
         for (Player p : players) {
-            p.getAnimator();
             List<core.game.container.Container> containers = new ArrayList<>(20);
             containers.add(p.getInventory());
             containers.add(p.getBank());

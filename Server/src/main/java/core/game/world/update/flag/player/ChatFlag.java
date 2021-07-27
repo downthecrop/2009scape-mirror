@@ -6,6 +6,8 @@ import core.game.world.update.flag.context.ChatMessage;
 import core.net.packet.IoBuffer;
 import core.tools.StringUtils;
 
+import java.nio.charset.StandardCharsets;
+
 /**
  * Handles the chat flag.
  * @author Emperor
@@ -24,7 +26,7 @@ public class ChatFlag extends UpdateFlag<ChatMessage> {
 	public void write(IoBuffer buffer) {
 		byte[] chatStr = new byte[256];
 		chatStr[0] = (byte) context.getText().length();
-		int offset = 1 + StringUtils.encryptPlayerChat(chatStr, 0, 1, context.getText().length(), context.getText().getBytes());
+		int offset = 1 + StringUtils.encryptPlayerChat(chatStr, 0, 1, context.getText().length(), context.getText().getBytes(StandardCharsets.UTF_8));
 		buffer.putLEShort(context.getEffects()); // 0x8000 does something (you'd
 													// need to send something
 													// extra.

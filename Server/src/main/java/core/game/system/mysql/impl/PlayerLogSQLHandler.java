@@ -75,12 +75,12 @@ public class PlayerLogSQLHandler extends SQLEntryHandler<PlayerMonitor> {
 				}
 				statement.setString(size + 1, log);
 			}
-			statement.executeUpdate();
+			//statement.executeUpdate();
 		} else {
 			PreparedStatement statement = connection.prepareStatement("INSERT INTO " + table + " (username,public_chat,private_chat,clan_chat,address_log,command_log,trade_log,ge_log,duel_log,duplication_log) VALUES(?,?,?,?,?,?,?,?,?,?)");
 			statement.setString(1, value);
 			for (int i = 0; i < MESSAGE_COLUMNS.length; i++) {
-				writeLog(statement, 2 + i, i);
+				//writeLog(statement, 2 + i, i);
 			}
 			String log = "";
 			MessageLog messageLog = entry.getDuplicationLog();
@@ -91,7 +91,7 @@ public class PlayerLogSQLHandler extends SQLEntryHandler<PlayerMonitor> {
 				log += messageLog.getMessages().get(i) + "\n";
 			}
 			statement.setString(10, log);
-			statement.executeUpdate();
+			//statement.executeUpdate();
 		}
 		entry.clear();
 		SQLManager.close(connection);

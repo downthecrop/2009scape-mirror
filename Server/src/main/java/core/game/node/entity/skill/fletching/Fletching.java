@@ -144,8 +144,8 @@ public class Fletching {
 
 
             public int unfinished,product,string,level;
-            public double experience;
-            public Animation animation;
+            public final double experience;
+            public final Animation animation;
             String(byte indicator, final int unfinished, final int product, final int level, final double experience, final Animation animation) {
                 this.unfinished = unfinished;
                 this.product = product;
@@ -158,6 +158,8 @@ public class Fletching {
                         break;
                     case 2:
                         this.string = org.rs09.consts.Items.CROSSBOW_STRING_9438;
+                        break;
+                    default:
                         break;
                 }
             }

@@ -529,7 +529,7 @@ public class IoBuffer {
 	 */
 	public int getSmart() {
 		int peek = buf.get(buf.position());
-		if (peek <= Byte.MAX_VALUE) {
+		if (peek <= (0xFF & peek)) {
 			return buf.get() & 0xFF;
 		}
 		return (buf.getShort() & 0xFFFF) - 32768;

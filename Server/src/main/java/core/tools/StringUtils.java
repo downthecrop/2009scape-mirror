@@ -329,16 +329,16 @@ public final class StringUtils {
 		try {
 			i_27_ += i_25_;
 			int i_29_ = 0;
-			int i_30_ = i_26_ << -2116795453;
+			int i_30_ = i_26_ << 3;
 			for (; i_27_ > i_25_; i_25_++) {
 				int i_31_ = 0xff & is_28_[i_25_];
 				int i_32_ = anIntArray233[i_31_];
 				int i_33_ = aByteArray235[i_31_];
-				int i_34_ = i_30_ >> -1445887805;
+				int i_34_ = i_30_ >> 3;
 			int i_35_ = i_30_ & 0x7;
-			i_29_ &= (-i_35_ >> 473515839);
+			i_29_ &= (-i_35_ >> 31);
 			i_30_ += i_33_;
-			int i_36_ = ((-1 + (i_35_ - -i_33_)) >> -1430991229) + i_34_;
+			int i_36_ = ((-1 + (i_35_ - -i_33_)) >> 3) + i_34_;
 			i_35_ += 24;
 			is[i_34_] = (byte) (i_29_ = (i_29_ | (i_32_ >>> i_35_)));
 			if ((i_36_ ^ 0xffffffff) < (i_34_ ^ 0xffffffff)) {
@@ -362,7 +362,7 @@ public final class StringUtils {
 				}
 			}
 			}
-			return -i_26_ + ((7 + i_30_) >> -662855293);
+			return -i_26_ + ((7 + i_30_) >> 3);
 		} catch (RuntimeException runtimeexception) {
 		}
 		return 0;

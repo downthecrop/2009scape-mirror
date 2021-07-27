@@ -1164,7 +1164,7 @@ public final class RangingGuildPlugin extends OptionHandler {
                     cumulativeStr += 1;
                 }*/
                 cumulativeStr *= 1.0;
-                int hit = (int) ((14 + cumulativeStr + (bonus / 8) + ((cumulativeStr * bonus) * 0.016865)) * 1.0) / 10 + 1;
+                int hit = (int) ((14 + cumulativeStr + (bonus / 8) + ((cumulativeStr * bonus) * 0.016865))) / 10 + 1;
                 hit = hit + RandomFunction.randomSign(RandomFunction.random(3));
 
                 int target = Math.max(0, 13 - hit);

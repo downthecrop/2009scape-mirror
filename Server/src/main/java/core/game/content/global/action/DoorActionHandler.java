@@ -166,7 +166,6 @@ public final class DoorActionHandler {
     }
     public static Location getEndLocation(Entity entity, Scenery object, Boolean isAutoWalk) {
         Location l = object.getLocation();
-        Location end = DestinationFlag.OBJECT.getDestination(entity,object);
         switch (object.getRotation()) {
             case 0:
                 if (entity.getLocation().getX() >= l.getX()) {
@@ -183,7 +182,7 @@ public final class DoorActionHandler {
                     l = l.transform(1, 0, 0);
                 }
                 break;
-            case 3:
+            default:
                 if (entity.getLocation().getY() >= l.getY()) {
                     l = l.transform(0, -1, 0);
                 }

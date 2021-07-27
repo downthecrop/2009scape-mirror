@@ -91,10 +91,10 @@ public enum CookableItems {
     RAW_OOMLIE(Items.RAW_OOMLIE_2337, 0, Items.BURNT_OOMLIE_2426, 50, 0, 999,0,0), // always burns
     OOMLIE_WRAP(Items.COOKED_OOMLIE_WRAP_2343, Items.WRAPPED_OOMLIE_2341, Items.BURNT_OOMLIE_WRAP_2345, 50, 110, 999,0,0);
 
-    public static HashMap<Integer,CookableItems>cookingMap = new HashMap<>();
-    public static HashMap<Integer, CookableItems>intentionalBurnMap = new HashMap<>();
-    public int raw,cooked,level,burnLevel,burnt;
-    public double experience;
+    public final static HashMap<Integer,CookableItems>cookingMap = new HashMap<>();
+    public final static HashMap<Integer, CookableItems>intentionalBurnMap = new HashMap<>();
+    public final int raw,cooked,level,burnLevel,burnt;
+    public final double experience;
     double low,high;
     CookableItems(int cooked, int raw, int burnt, int level, double experience, int burnLevel, double low, double high){
         this.raw = raw;

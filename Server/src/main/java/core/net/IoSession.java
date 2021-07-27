@@ -161,7 +161,7 @@ public class IoSession {
 		try {
 			writingLock.tryLock(1000L, TimeUnit.MILLISECONDS);
 		} catch (Exception e){
-			System.out.println(e);
+			e.printStackTrace();
 			writingLock.unlock();
 		}
 		writingQueue.add(buffer);
@@ -180,7 +180,7 @@ public class IoSession {
 		try {
 			writingLock.tryLock(1000L, TimeUnit.MILLISECONDS);
 		} catch (Exception e){
-			System.out.println(e);
+			e.printStackTrace();
 			writingLock.unlock();
 			return;
 		}

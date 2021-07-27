@@ -237,9 +237,8 @@ public enum BoltEffect {
 	 */
 	@SuppressWarnings("unused")
 	public void impact(BattleState state) {
-		Entity entity = state.getAttacker();
 		Entity victim = state.getVictim();
-		if (sound != null && victim != null && victim instanceof Player) {
+		if (sound != null && victim instanceof Player) {
 			sound.send(victim.asPlayer(), true);
 		}
 		if (graphics != null) {

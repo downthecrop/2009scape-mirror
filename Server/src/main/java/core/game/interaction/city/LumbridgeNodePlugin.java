@@ -188,7 +188,7 @@ public final class LumbridgeNodePlugin extends OptionHandler {
                     cumulativeStr += 1;
                 }
                 cumulativeStr *= 1.0;
-                int hit = (int) ((14 + cumulativeStr + (bonus / 8) + ((cumulativeStr * bonus) * 0.016865)) * 1.0) / 10 + 1;
+                int hit = (int) ((14.0 + cumulativeStr + ((double) bonus / 8) + ((cumulativeStr * bonus) * 0.016865))) / 10 + 1;
                 player.getSkills().addExperience(Skills.RANGE, ((hit * 1.33) / 10));
                 return !player.getEquipment().contains(9706, 1) || !player.getEquipment().contains(9705, 1);
             } else {

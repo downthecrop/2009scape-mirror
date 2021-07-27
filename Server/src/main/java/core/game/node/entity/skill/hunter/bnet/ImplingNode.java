@@ -84,7 +84,7 @@ public final class ImplingNode extends BNetNode {
 		strengthLevel /= 0.5;
 		int level = getLevel();
 		int currentLevel = RandomFunction.random(strengthLevel) + 1;
-		double ratio = currentLevel / (new Random().nextInt(level + 5) + 1);
+		double ratio = (double) currentLevel / (new Random().nextInt(level + 5) + 1);
 		return Math.round(ratio * strengthLevel) < level;
 	}
 
@@ -93,10 +93,8 @@ public final class ImplingNode extends BNetNode {
 		if (!success) {
 			return;
 		}
-		switch (type) {
-		case 1:
+		if(type == 1){
 			player.sendMessage("You manage to catch the impling and squeeze it into a jar.");
-			break;
 		}
 	}
 

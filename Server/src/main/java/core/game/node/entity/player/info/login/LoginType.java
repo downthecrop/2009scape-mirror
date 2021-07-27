@@ -54,7 +54,7 @@ public enum LoginType {
 	/**
 	 * @param type the type to set.
 	 */
-	public void setType(int type) {
+	private void setType(int type) {
 		this.type = type;
 	}
 }

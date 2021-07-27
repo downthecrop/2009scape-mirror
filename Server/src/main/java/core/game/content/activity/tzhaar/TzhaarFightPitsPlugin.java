@@ -138,12 +138,12 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 					// Become the Champion of the Fight Pits
 					if (lastVictor != null) {
 						lastVictor.getAchievementDiaryManager().finishTask(lastVictor, DiaryType.KARAMJA, 2, 0);
+						addTokkul(lastVictor);
+						lastVictor.getAppearance().setSkullIcon(SKULL_ID);
+						lastVictor.getUpdateMasks().register(new AppearanceFlag(lastVictor));
+						lastVictor.getPacketDispatch().sendString("Current Champion: " + getChampionName(), INTERFACE_ID, 0);
+						resetDamagePulse(lastVictor);
 					}
-					addTokkul(lastVictor);
-					lastVictor.getAppearance().setSkullIcon(SKULL_ID);
-					lastVictor.getUpdateMasks().register(new AppearanceFlag(lastVictor));
-					lastVictor.getPacketDispatch().sendString("Current Champion: " + getChampionName(), INTERFACE_ID, 0);
-					resetDamagePulse(lastVictor);
 					RegionManager.forId(9552).getPlanes()[0].getNpcs().get(0).setAttribute("fp_champn", getChampionName());
 				}
 				minutes = 0;

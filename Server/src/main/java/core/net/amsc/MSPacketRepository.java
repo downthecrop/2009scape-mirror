@@ -599,8 +599,8 @@ public final class MSPacketRepository {
 				Player player = Repository.getPlayerByName(key);
 				if (player != null && player.isActive()) {
 					player.getPacketDispatch().sendMessages((duration > 0L ? new String[]{"You have been muted.", "To prevent further mutes please read the rules."} : new String[]{"You have been unmuted."}));
+					player.getDetails().setMuteTime(duration);
 				}
-				player.getDetails().setMuteTime(duration);
 				break;
 			case 1:
 				player = Repository.getPlayerByName(key);

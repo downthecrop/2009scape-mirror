@@ -46,6 +46,7 @@ public class ClanEntry {
 
 	@Override
 	public boolean equals(Object o) {
+		if(o == null) return false;
 		ClanEntry e = (ClanEntry) o;
 		if (name != null && !name.equals(e.name)) {
 			return false;

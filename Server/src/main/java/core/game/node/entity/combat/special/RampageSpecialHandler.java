@@ -69,7 +69,6 @@ public final class RampageSpecialHandler extends MeleeSwingHandler implements Pl
 			boost += drain;
 			p.getSkills().updateLevel(i, (int) -drain, (int) (p.getSkills().getStaticLevel(i) - drain));
 		}
-		boost *= 0.25;
 		p.getSkills().updateLevel(Skills.STRENGTH, (int) (p.getSkills().getStaticLevel(Skills.STRENGTH) * 0.20));
 		p.getAudioManager().send(new Audio(386), true);
 		return -1;
