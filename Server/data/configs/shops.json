@@ -2122,5 +2122,14 @@
     "id": "239",
     "title": "Contraband yak produce.",
     "stock": "{10818,25}-{10816,50}-{10814,50}-{10820,10}"
+  },
+  {
+    "npcs": "1163,1164",
+    "high_alch": "0",
+    "currency": "995",
+    "general_store": "false",
+    "id": "240",
+    "title": "Tiadeche's Karambwan Stall",
+    "stock": "{3142,10}-{3157,10}"
   }
 ]
