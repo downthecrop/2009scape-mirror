@@ -1,5 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
+import api.ContentAPI
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -66,12 +67,8 @@ class CropHarvester : OptionHandler() {
                 delay = 2
                 player.inventory.add(Item(plantable.harvestItem,1))
                 player.skills.addExperience(Skills.FARMING,plantable.harvestXP)
-                patch.harvestAmt--
-
-                if(patch.harvestAmt <= 0){
-                    patch.clear()
-                }
-                return patch.harvestAmt <= 0
+                patch.rollLivesDecrement(ContentAPI.getDynLevel(player, Skills.FARMING), requiredItem == Items.MAGIC_SECATEURS_7409)
+                return patch.cropLives <= 0
             }
         })
 
