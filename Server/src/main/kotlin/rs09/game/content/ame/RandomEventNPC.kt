@@ -73,9 +73,9 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     }
 
     override fun init() {
+        initialized = true
         spawnLocation ?: terminate()
         location = spawnLocation
-        initialized = true
         super.init()
     }
 
