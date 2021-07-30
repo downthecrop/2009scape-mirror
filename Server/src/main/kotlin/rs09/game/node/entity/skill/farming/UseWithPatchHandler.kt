@@ -128,6 +128,7 @@ object UseWithPatchHandler{
                                 if(p.plantable != null){
                                     p.harvestAmt += if(p.compost == CompostType.NORMAL) 1 else if(p.compost == CompostType.SUPER) 2 else 0
                                 }
+                                p.cropLives += if(p.compost == CompostType.SUPER) 2 else 1
                                 player.inventory.add(Item(Items.BUCKET_1925))
                             }
                             return true

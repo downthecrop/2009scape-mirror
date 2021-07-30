@@ -50,6 +50,7 @@ class FarmingState(player: Player? = null) : State(player) {
             p.put("patch-checkHealth",patch.isCheckHealth)
             p.put("patch-compost",patch.compost.ordinal)
             p.put("patch-paidprot",patch.protectionPaid)
+            p.put("patch-croplives", patch.cropLives)
             patches.add(p)
         }
         val bins = JSONArray()
@@ -91,10 +92,12 @@ class FarmingState(player: Player? = null) : State(player) {
                 val savedState = p["patch-state"].toString().toInt()
                 val compostOrdinal = p["patch-compost"].toString().toInt()
                 val protectionPaid = p["patch-paidprot"] as Boolean
+                val cropLives = if(p["patch-croplives"] != null) p["patch-croplives"].toString().toInt() else 3
                 val fPatch = FarmingPatch.values()[patchOrdinal]
                 val plantable = if(patchPlantableOrdinal != -1) Plantable.values()[patchPlantableOrdinal] else null
                 val patch = Patch(player,fPatch,plantable,patchStage,patchDiseased,patchDead,patchWatered,nextGrowth,harvestAmt,checkHealth)
 
+                patch.cropLives = cropLives
                 patch.compost = CompostType.values()[compostOrdinal]
                 patch.protectionPaid = protectionPaid
                 patch.setCurrentState(savedState)
