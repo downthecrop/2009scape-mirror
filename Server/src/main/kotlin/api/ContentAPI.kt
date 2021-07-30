@@ -565,6 +565,7 @@ object ContentAPI {
      */
     @JvmStatic
     fun openDialogue(player: Player, dialogue: Any, vararg args: Any) {
+        player.dialogueInterpreter.close()
         when (dialogue) {
             is Int -> player.dialogueInterpreter.open(dialogue, *args)
             is DialogueFile -> player.dialogueInterpreter.open(dialogue, *args)
