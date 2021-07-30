@@ -7,6 +7,8 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
 import core.tools.RandomFunction
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import rs09.game.content.activity.pestcontrol.PestControlHelper.GATE_ENTRIES
 import rs09.game.content.activity.pestcontrol.PestControlHelper.getMyPestControlSession1
 import rs09.game.world.GameWorld
@@ -100,7 +102,7 @@ class CombatState(val bot: PestControlTestBot) {
 
     fun randomWalkTo(loc: Location, radius: Int) {
         if(!bot.walkingQueue.isMoving) {
-            Executors.newSingleThreadExecutor().execute {
+            GlobalScope.launch {
                 var newloc = loc.transform(RandomFunction.random(radius, -radius),
                         RandomFunction.random(radius, -radius), 0)
                 walkToIterator(newloc)
