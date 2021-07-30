@@ -204,6 +204,7 @@ public final class DialogueInterpreter {
     public boolean close() {
         if (dialogue != null || dialogueStage != null) {
             actions.clear();
+
             if (player.getInterfaceManager().getChatbox() != null && player.getInterfaceManager().getChatbox().getCloseEvent() != null) {
                 return true;
             }
@@ -211,8 +212,10 @@ public final class DialogueInterpreter {
                 dialogueStage = null;
                 player.getInterfaceManager().closeChatbox();
             }
-            if (dialogue != null && dialogue.close()) {
+            if (dialogue != null) {
+                DialoguePlugin d = dialogue;
                 dialogue = null;
+                d.close();
             }
         }
         return dialogue == null && dialogueStage == null;

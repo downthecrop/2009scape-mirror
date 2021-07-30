@@ -75,7 +75,7 @@ abstract class DialogueFile {
         return player(expr, *splitLines(msg!!))
     }
 
-    fun end(){
+    open fun end(){
         if(interpreter != null) interpreter!!.close()
     }
 
