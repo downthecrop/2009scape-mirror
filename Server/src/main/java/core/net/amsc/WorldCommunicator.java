@@ -7,6 +7,7 @@ import core.net.EventProducer;
 import core.net.IoSession;
 import core.net.NioReactor;
 import core.net.producer.MSHSEventProducer;
+import kotlin.Unit;
 import rs09.game.node.entity.player.info.login.LoginParser;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
@@ -76,15 +77,13 @@ public final class WorldCommunicator {
 			return;
 		}
 		loginAttempts.put(parser.getDetails().getUsername(), parser);
-		TaskExecutor.executeSQL(new Runnable() {
-			@Override
-			public void run() {
-				if (!parser.getDetails().parse()) {
-					parser.getDetails().getSession().write(Response.INVALID_LOGIN_SERVER, true);
-					return;
-				}
-				MSPacketRepository.sendPlayerRegistry(parser);
+		TaskExecutor.executeSQL(() -> {
+			if (!parser.getDetails().parse()) {
+				parser.getDetails().getSession().write(Response.INVALID_LOGIN_SERVER, true);
+				return Unit.INSTANCE;
 			}
+			MSPacketRepository.sendPlayerRegistry(parser);
+			return Unit.INSTANCE;
 		});
 	}
 

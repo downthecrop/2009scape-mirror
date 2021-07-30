@@ -1,54 +1,33 @@
-package core.game.system.task;
+package core.game.system.task
 
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 
 /**
  * A class holding methods to execute tasks.
  * @author Emperor
  */
-public final class TaskExecutor {
+object TaskExecutor {
 
-	/**
-	 * The executor to use.
-	 */
-	private static final ScheduledExecutorService EXECUTOR = Executors.newSingleThreadScheduledExecutor();
+    /**
+     * Executes an SQL handling task.
+     * @param task The task.
+     */
+    @JvmStatic
+    fun executeSQL(task: () -> Unit) {
+        GlobalScope.launch {
+            task.invoke()
+        }
+    }
 
-	/**
-	 * The SQL task executor.
-	 */
-	private static final ScheduledExecutorService SQL_EXECUTOR = Executors.newSingleThreadScheduledExecutor();
-
-	/**
-	 * Constructs a new {@code TaskExecutor} {@code Object}.
-	 */
-	private TaskExecutor() {
-		/*
-		 * empty.
-		 */
-	}
-
-	/**
-	 * Executes an SQL handling task.
-	 * @param task The task.
-	 */
-	public static void executeSQL(Runnable task) {
-		SQL_EXECUTOR.execute(task);
-	}
-
-	/**
-	 * Executes the task.
-	 * @param task The task to execute.
-	 */
-	public static void execute(Runnable task) {
-		EXECUTOR.execute(task);
-	}
-
-	/**
-	 * Gets the executor.
-	 * @return The executor.
-	 */
-	public static ScheduledExecutorService getExecutor() {
-		return EXECUTOR;
-	}
+    /**
+     * Executes the task.
+     * @param task The task to execute.
+     */
+    @JvmStatic
+    fun execute(task: () -> Unit) {
+        GlobalScope.launch {
+            task.invoke()
+        }
+    }
 }
