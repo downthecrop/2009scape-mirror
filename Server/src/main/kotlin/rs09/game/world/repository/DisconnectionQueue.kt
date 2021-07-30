@@ -2,9 +2,6 @@ package rs09.game.world.repository
 
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.login.PlayerParser
-import core.game.system.mysql.SQLEntryHandler
-import core.game.system.mysql.impl.HighscoreSQLHandler
-import core.game.system.mysql.impl.PlayerLogSQLHandler
 import core.game.system.task.TaskExecutor
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
@@ -71,7 +68,10 @@ class DisconnectionQueue {
             return true
         }
         if (!force) {
-            TaskExecutor.executeSQL { save(player, true) }
+            TaskExecutor.executeSQL {
+                Thread.currentThread().name = "PlayerSave SQL"
+                save(player, true)
+            }
             return true
         }
         save(player, false)

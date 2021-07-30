@@ -103,21 +103,22 @@ class LoginReadEvent
             session.isaacPair = ISAACPair(inCipher, outCipher)
             session.clientInfo = ClientInfo(displayMode, windowMode, screenWidth, screenHeight)
             val b = buffer
-            TaskExecutor.executeSQL(Runnable {
+            TaskExecutor.executeSQL {
+                Thread.currentThread().name = "Login Password Response"
                 try {
                     val username = StringUtils.longToString(b.long)
                     val password = ByteBufferUtils.getString(b)
                     val response = PlayerSQLManager.getCredentialResponse(username, password)
                     if (response != Response.SUCCESSFUL) {
                         session.write(response, true)
-                        return@Runnable
+                        return@executeSQL
                     }
                     login(PlayerDetails(username, password), session, b, opcode)
                 } catch (e: Exception) {
                     e.printStackTrace()
                     session.write(Response.COULD_NOT_LOGIN)
                 }
-            })
+            }
         }
 
         /**
@@ -138,7 +139,7 @@ class LoginReadEvent
             if (WorldCommunicator.isEnabled()) {
                 WorldCommunicator.register(parser)
             } else {
-                TaskExecutor.executeSQL(parser)
+                TaskExecutor.executeSQL {parser.run()}
             }
         }
 

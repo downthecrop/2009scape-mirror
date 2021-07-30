@@ -100,6 +100,7 @@ class CombatStateIntermediate(val bot: PestControlTestBot2) {
     fun randomWalkTo(loc: Location, radius: Int) {
         if(!bot.walkingQueue.isMoving) {
             Executors.newSingleThreadExecutor().execute {
+                Thread.currentThread().name = "RandomWalkToIteratorBot"
                 var newloc = loc.transform(RandomFunction.random(radius, -radius),
                         RandomFunction.random(radius, -radius), 0)
                 walkToIterator(newloc)
