@@ -1,5 +1,7 @@
 package core.game.node.entity.skill.herblore;
 
+import api.Container;
+import api.ContentAPI;
 import core.cache.def.impl.ItemDefinition;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
@@ -35,9 +37,10 @@ public final class HerbCleanPlugin extends OptionHandler {
 			return true;
 		}
 		double exp = herb.getExperience();
-		if (player.getInventory().replace(herb.getProduct(), ((Item) node).getSlot()) != null) {
-		    player.getSkills().addExperience(Skills.HERBLORE, exp, true);
-		    player.getPacketDispatch().sendMessage("You clean the dirt from the " + herb.getProduct().getName().toLowerCase().replace("clean", "").trim() + " leaf.");
+		if (ContentAPI.removeItem(player, node.asItem(), Container.INVENTORY)){
+			player.getSkills().addExperience(Skills.HERBLORE, exp, true);
+			ContentAPI.addItem(player, herb.getProduct().getId(), 1);
+			player.getPacketDispatch().sendMessage("You clean the dirt from the " + herb.getProduct().getName().toLowerCase().replace("clean", "").trim() + " leaf.");
 		}
 		player.lock(1);
 		return true;
