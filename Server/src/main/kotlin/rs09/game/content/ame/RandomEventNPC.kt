@@ -1,5 +1,6 @@
 package rs09.game.content.ame
 
+import api.ContentAPI
 import core.game.interaction.MovementPulse
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -36,18 +37,7 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     open fun terminate(){
         player.antiMacroHandler.event = null
         if(initialized){
-            Pulser.submit(object : Pulse(){
-                var counter = 0
-                override fun pulse(): Boolean {
-                    when(counter++){
-                        2 -> {
-                            isInvisible = true; Graphics.send(SMOKE_GRAPHICS, location)
-                        }
-                        3 -> clear().also { return true }
-                    }
-                    return false
-                }
-            })
+            ContentAPI.poofClear(this)
         }
     }
 
@@ -73,9 +63,9 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     }
 
     override fun init() {
+        initialized = true
         spawnLocation ?: terminate()
         location = spawnLocation
-        initialized = true
         super.init()
     }
 

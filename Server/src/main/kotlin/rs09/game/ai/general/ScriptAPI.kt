@@ -340,7 +340,7 @@ class ScriptAPI(private val bot: Player) {
      */
     fun walkTo(loc: Location){
         if(!bot.walkingQueue.isMoving) {
-            Executors.newSingleThreadExecutor().execute {
+            GlobalScope.launch {
                 walkToIterator(loc)
             }
         }
@@ -645,7 +645,7 @@ class ScriptAPI(private val bot: Player) {
      * @return true if item was successfully bought, false if not.
      */
     fun buyFromGE(bot: Player, itemID: Int, amount: Int){
-        Executors.newSingleThreadExecutor().execute{
+        GlobalScope.launch {
             val offer = GrandExchangeOffer()
             offer.itemID = itemID
             offer.sell = false
