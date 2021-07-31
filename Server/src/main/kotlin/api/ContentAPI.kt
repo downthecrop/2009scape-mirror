@@ -168,6 +168,26 @@ object ContentAPI {
     }
 
     /**
+     * Clears an NPC with the "poof" smoke graphics commonly seen with random event NPCs.
+     * @param npc the NPC object to initialize
+     */
+    @JvmStatic
+    fun poofClear(npc: NPC){
+        submitWorldPulse(object : Pulse(){
+            var counter = 0
+            override fun pulse(): Boolean {
+                when(counter++){
+                    2 -> {
+                        npc.isInvisible = true; Graphics.send(Graphics(86), npc.location)
+                    }
+                    3 -> npc.clear().also { return true }
+                }
+                return false
+            }
+        })
+    }
+
+    /**
      * Check if an item exists in a player's bank
      * @param player the player whose bank to check
      * @param item the ID of the item to check for
@@ -545,9 +565,10 @@ object ContentAPI {
      */
     @JvmStatic
     fun openDialogue(player: Player, dialogue: Any, vararg args: Any) {
+        player.dialogueInterpreter.close()
         when (dialogue) {
-            is Int -> player.dialogueInterpreter.open(dialogue, args)
-            is DialogueFile -> player.dialogueInterpreter.open(dialogue, args)
+            is Int -> player.dialogueInterpreter.open(dialogue, *args)
+            is DialogueFile -> player.dialogueInterpreter.open(dialogue, *args)
             else -> SystemLogger.logErr("Invalid object type passed to openDialogue() -> ${dialogue.javaClass.simpleName}")
         }
     }

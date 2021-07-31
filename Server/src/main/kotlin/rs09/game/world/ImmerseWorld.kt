@@ -15,6 +15,7 @@ object ImmerseWorld {
     @JvmStatic
     fun init() {
         Executors.newSingleThreadExecutor().execute {
+            Thread.currentThread().name = "BotSpawner"
             immerseSeersAndCatherby()
             immerseLumbridgeDraynor()
             immerseVarrock()

@@ -8,6 +8,8 @@ import core.game.world.repository.InitializingNodeList
 import core.net.packet.PacketRepository
 import core.net.packet.context.PlayerContext
 import core.net.packet.out.ClearMinimapFlag
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
 import rs09.game.world.repository.Repository
 import java.util.concurrent.CountDownLatch
 import java.util.concurrent.Executors
@@ -58,7 +60,7 @@ class UpdateSequence
     fun run() {
         val latch = CountDownLatch(renderablePlayers.size)
         playersList!!.forEach(Consumer { player: Player ->
-            EXECUTOR.execute {
+            GlobalScope.launch {
                 try {
                     player.update()
                 } catch (t: Throwable) {
@@ -89,7 +91,6 @@ class UpdateSequence
      * Terminates the update sequence.
      */
     fun terminate() {
-        EXECUTOR.shutdown()
     }
 
     companion object {
@@ -102,12 +103,6 @@ class UpdateSequence
          */
         @JvmStatic
         val renderablePlayers = InitializingNodeList<Player>()
-
-        /**
-         * The executor used.
-         */
-        @JvmStatic
-        private val EXECUTOR = Executors.newFixedThreadPool(Runtime.getRuntime().availableProcessors())
 
     }
 }

@@ -8,6 +8,7 @@ import core.game.system.mysql.SQLManager;
 import core.game.system.task.TaskExecutor;
 import core.net.Constants;
 import core.net.IoSession;
+import kotlin.Unit;
 import rs09.ServerConstants;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
@@ -76,19 +77,17 @@ public class AccountRegister extends SQLEntryHandler<RegistryDetails> {
 					break;
 				}
 				System.out.println(username);
-				TaskExecutor.executeSQL(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							if (PlayerSQLManager.hasSqlAccount(username, "username")) {
-								response(session, RegistryResponse.NOT_AVAILBLE_USER);
-								return;
-							}
-							response(session, RegistryResponse.SUCCESS);
-						} catch (SQLException e) {
-							e.printStackTrace();
+				TaskExecutor.executeSQL(() -> {
+					try {
+						if (PlayerSQLManager.hasSqlAccount(username, "username")) {
+							response(session, RegistryResponse.NOT_AVAILBLE_USER);
+							return Unit.INSTANCE;
 						}
+						response(session, RegistryResponse.SUCCESS);
+					} catch (SQLException e) {
+						e.printStackTrace();
 					}
+					return Unit.INSTANCE;
 				});
 				break;
 			case 36://Register details
@@ -129,21 +128,19 @@ public class AccountRegister extends SQLEntryHandler<RegistryDetails> {
 				buffer.getInt();
 				@SuppressWarnings("deprecation")
 				final RegistryDetails details = new RegistryDetails(name, SystemManager.getEncryption().hashPassword(password), new Date(year, month, day), country);
-				TaskExecutor.execute(new Runnable() {
-					@Override
-					public void run() {
-						try {
-							if (PlayerSQLManager.hasSqlAccount(name, "username")) {
-								response(session, RegistryResponse.CANNOT_CREATE);
-								return;
-							}
-							SQLEntryHandler.write(new AccountRegister(details));
-							response(session, RegistryResponse.SUCCESS);
-						} catch (SQLException e) {
-							e.printStackTrace();
+				TaskExecutor.execute(() -> {
+					try {
+						if (PlayerSQLManager.hasSqlAccount(name, "username")) {
 							response(session, RegistryResponse.CANNOT_CREATE);
+							return Unit.INSTANCE;
 						}
+						SQLEntryHandler.write(new AccountRegister(details));
+						response(session, RegistryResponse.SUCCESS);
+					} catch (SQLException e) {
+						e.printStackTrace();
+						response(session, RegistryResponse.CANNOT_CREATE);
 					}
+					return Unit.INSTANCE;
 				});
 				break;
 			default:
