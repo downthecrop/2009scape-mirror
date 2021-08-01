@@ -74,7 +74,7 @@ public final class CaveHorrorNPC extends AbstractNPC {
 	 * @return {@code true} if it is equipped.
 	 */
 	public static boolean hasWitchwood(Player player) {
-		return player.getEquipment().containsItem(Equipment.WITCHWOOD_ICON.getItem());
+		return SlayerEquipmentFlags.hasWitchwoodIcon(player);
 	}
 
 	@Override

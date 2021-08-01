@@ -105,7 +105,7 @@ public final class BansheeNPC extends AbstractNPC {
 	 * @return {@code True} if they have it.
 	 */
 	public static boolean hasEarMuffs(Player player) {
-		return Equipment.EARMUFFS.hasEquipment(player);
+		return SlayerEquipmentFlags.hasEarmuffs(player);
 	}
 
 	@Override

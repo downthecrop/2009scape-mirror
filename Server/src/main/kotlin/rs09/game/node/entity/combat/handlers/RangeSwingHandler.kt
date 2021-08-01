@@ -26,6 +26,7 @@ import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import rs09.game.node.entity.combat.CombatSwingHandler
+import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import java.util.*
@@ -247,6 +248,8 @@ open class RangeSwingHandler
         if(entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) effectiveRangedLevel += 3
         effectiveRangedLevel += 8
         if(entity is Player && entity.isWearingVoid(false)) effectiveRangedLevel *= 1.1
+        if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.ACCURATE_MARKSMAN,entity)) effectiveRangedLevel *= 1.1
+
         effectiveRangedLevel = floor(effectiveRangedLevel)
         effectiveRangedLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
 
