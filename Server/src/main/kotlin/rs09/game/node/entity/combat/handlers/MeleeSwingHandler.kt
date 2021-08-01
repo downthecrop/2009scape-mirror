@@ -158,7 +158,7 @@ open class MeleeSwingHandler
             effectiveAttackLevel += 6
         }
 
-        if(entity is Player && (entity.properties.combatPulse.getVictim()?.id ?: 0) in entity.slayer.task.ids)
+        if(entity is Player && entity.slayer.task?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true)
             effectiveAttackLevel *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer Helm/ Black Mask/ Slayer cape
 
         else if (entity is Player //Salve amulet
@@ -191,7 +191,7 @@ open class MeleeSwingHandler
 
         cumulativeStr *= getSetMultiplier(entity, Skills.STRENGTH)
 
-        if(entity is Player && (entity.properties.combatPulse.getVictim()?.id ?: 0) in entity.slayer.task.ids)
+        if(entity is Player && entity.slayer.task?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true)
             cumulativeStr *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer helm/black mask/skillcape
 
         /*val hit = (16 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier
