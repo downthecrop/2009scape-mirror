@@ -151,7 +151,6 @@ open class MeleeSwingHandler
         effectiveAttackLevel = floor(effectiveAttackLevel)
         effectiveAttackLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
 
-        val helmetName = (if(entity is Player) ContentAPI.getItemFromEquipment(entity, EquipmentSlot.HAT)?.name ?: "null" else "null").toLowerCase()
         val amuletName = (if(entity is Player) ContentAPI.getItemFromEquipment(entity, EquipmentSlot.AMULET)?.name ?: "null" else "null").toLowerCase()
         val victimName = entity.properties.combatPulse.getVictim()?.name ?: "none"
 
@@ -159,7 +158,7 @@ open class MeleeSwingHandler
             effectiveAttackLevel += 6
         }
 
-        if(entity is Player)
+        if(entity is Player && (entity.properties.combatPulse.getVictim()?.id ?: 0) in entity.slayer.task.ids)
             effectiveAttackLevel *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer Helm/ Black Mask/ Slayer cape
 
         else if (entity is Player //Salve amulet
@@ -192,7 +191,8 @@ open class MeleeSwingHandler
 
         cumulativeStr *= getSetMultiplier(entity, Skills.STRENGTH)
 
-        if(entity is Player) cumulativeStr *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer helm/black mask/skillcape
+        if(entity is Player && (entity.properties.combatPulse.getVictim()?.id ?: 0) in entity.slayer.task.ids)
+            cumulativeStr *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer helm/black mask/skillcape
 
         /*val hit = (16 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier
         return (hit / 10).toInt() + 1*/
