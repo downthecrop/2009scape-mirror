@@ -105,6 +105,8 @@ public final class DragonSlayerPlugin extends OptionHandler {
 		ItemDefinition.forId(2653).getHandlers().put("option:wear", this);
 		ItemDefinition.forId(2669).getHandlers().put("option:wear", this);
 		ItemDefinition.forId(2661).getHandlers().put("option:wear", this);
+		ItemDefinition.forId(2615).getHandlers().put("option:wear", this);
+		ItemDefinition.forId(2623).getHandlers().put("option:wear", this);
 		// guild
 		SceneryDefinition.forId(24357).getHandlers().put("option:climb-up", this);
 		SceneryDefinition.forId(10558).getHandlers().put("option:open", this);
@@ -143,6 +145,8 @@ public final class DragonSlayerPlugin extends OptionHandler {
 		case 2653:
 		case 2661:
 		case 2669:
+		case 2615:
+		case 2623:
 			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) != 100) {
 				player.getPacketDispatch().sendMessage("You need to complete the Dragon Slayer Quest in order to wear this.");
 				return true;
