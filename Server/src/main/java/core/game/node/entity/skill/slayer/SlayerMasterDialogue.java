@@ -1,5 +1,7 @@
 package core.game.node.entity.skill.slayer;
 
+import org.json.simple.JSONObject;
+import rs09.ServerStore;
 import rs09.game.world.GameWorld;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
@@ -12,6 +14,8 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
+
+import static rs09.tools.DialogueConstKt.END_DIALOGUE;
 
 /**
  * Represents the dialogue plugin used for a slayer master.
@@ -68,6 +72,8 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
 
     private final int level = 2;
 
+    private int rerolls = 0;
+
     /**
      * Constructs a new {@code SlayerMasterDialogue} {@code Object}.
      */
@@ -117,6 +123,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
 
     @Override
     public boolean handle(int interfaceId, int buttonId) {
+        rerolls = ServerStore.getInt(getStoreFile(), player.getUsername().toLowerCase());
         if (isDiary) {
             switch (stage) {
                 case 999:
@@ -495,8 +502,8 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                     break;
                 }
                 if (Master.hasSameTask(master, player)) {
-                    interpreter.sendDialogues(master.getNpc(), getExpression(master), "You're still hunting something. Come back when you've", "finished your task.");
-                    stage = 999;
+                    interpreter.sendDialogues(master.getNpc(), getExpression(master), "You're still hunting something. But let me check something...");
+                    stage = 847;
                 } else {
                     player.getSlayer().setTaskCount(0);
                     player.getSlayer().generate(master);
@@ -514,9 +521,9 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                 } else {
                     options("Got any tips for me?", "Okay, great!");
                 }
-                stage = 854;
+                stage++;
                 break;
-            case 854:
+            case 845:
                 switch (buttonId) {
                     case 1:
                         interpreter.sendDialogues(master.getNpc(), getExpression(master), player.getSlayer().getTask().getTip());
@@ -528,8 +535,45 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                         break;
                     case 3:
                         player("I'd like to re-roll this task.");
+                        if(rerolls == 10){
+                            stage++;
+                        } else {
+                            player.getSlayer().clear();
+                            getStoreFile().put(player.getUsername().toLowerCase(), rerolls + 1);
+                            stage = 701;
+                        }
+                }
+                break;
+            case 846:
+                npcl(FacialExpression.NEUTRAL, "Actually, you're out of free rerolls. You can buy a reroll from my reward store, though.");
+                stage = END_DIALOGUE;
+                break;
+            case 847:
+                if(rerolls < 10){
+                    npcl(FacialExpression.NEUTRAL, "You do have " + (10 - rerolls) + " rerolls left today, would you like to use one?");
+                    stage++;
+                }
+                else {
+                    npcl(FacialExpression.NEUTRAL, "And it also seems you're out of rerolls for today. That's unfortunate.");
+                    stage = END_DIALOGUE;
+                }
+                break;
+            case 848:
+                options("Yes, please.", "No, thanks.");
+                stage++;
+                break;
+            case 849:
+                switch(buttonId){
+                    case 1:
+                        playerl(FacialExpression.FRIENDLY, "Yes, please.");
                         player.getSlayer().clear();
+                        getStoreFile().put(player.getUsername().toLowerCase(), rerolls + 1);
                         stage = 701;
+                        break;
+                    case 2:
+                        playerl(FacialExpression.NEUTRAL, "No, thanks.");
+                        stage = END_DIALOGUE;
+                        break;
                 }
                 break;
             case 860:
@@ -665,6 +709,10 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
     @Override
     public int[] getIds() {
         return new int[]{70, 1598, 1596, 1597, 1599, 8275, 8273, 8274, 8649};
+    }
+
+    private JSONObject getStoreFile() {
+        return ServerStore.getArchive("daily-slayer-rerolls");
     }
 
 }
