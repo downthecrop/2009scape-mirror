@@ -1,117 +1,87 @@
-package core.game.node.entity.skill.slayer;
+package core.game.node.entity.skill.slayer
 
-import core.game.node.entity.skill.Skills;
-import core.game.node.entity.player.Player;
-import core.game.node.item.Item;
+import api.ContentAPI
+import api.EquipmentSlot
+import core.game.node.entity.player.Player
+import org.rs09.consts.Items
+import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks
 
 /**
  * Represents a slayer equipment.
- * @author Vexia
+ * @author Ceikry
  */
-public enum Equipment {
-	ENCHANTED_GEM(new Item(4155, 1)),
-	MIRROR_SHIELD(new Item(4156, 1)) {
-		@Override
-		public boolean hasRequirement(final Player player) {
-			return player.getSkills().getStaticLevel(Skills.DEFENCE) >= 20;
-		}
-	},
-	LEAF_BLADED_SPEAR(new Item(4158, 1)), 
-	BROAD_ARROWS(new Item(4150, 1)), 
-	BAG_OF_SALT(new Item(4161, 1)), 
-	ROCK_HAMMER(new Item(4162, 1)),
-	FACEMASK(new Item(4164, 1), true), 
-	EARMUFFS(new Item(4166, 1), true) {
-		@Override
-		public boolean hasRequirement(final Player player) {
-			return player.getSkills().getStaticLevel(Skills.DEFENCE) >= 15;
-		}
-	},
-	NOSE_PEG(new Item(4168, 1), true),
-	SLAYERS_STAFF(new Item(4170, 1)),
-	SPINY_HELMET(new Item(4551, 1), true), 
-	FISHING_EXPLOSIVE(new Item(6660, 1)), 
-	ICE_COOLER(new Item(6696, 1)),
-	SLAYER_GLOVES(new Item(6708, 1)), 
-	UNLIT_BUG_LANTERN(new Item(7051, 1)), 
-	INSULATED_BOOTS(new Item(7159, 1)),
-	FUNGICIDE_SPRAY_10(new Item(7421, 1)),
-	FUNGICIDE(new Item(7432, 1)), 
-	LUMBER_PATCH(new Item(8932, 1)),
-	SLAYER_BELL(new Item(10952, 1)), 
-	WITCHWOOD_ICON(new Item(8923, 1)),
-	LIT_BUG_LANTERN(new Item(7053, 1)),
+object SlayerEquipmentFlags {
 
-	//null equipment for when none is needed
-	NONE(new Item(0));
+    val blackMasks = (Items.BLACK_MASK_10_8901..Items.BLACK_MASK_8921).map { it }.toIntArray()
+    val slayerItems = intArrayOf(Items.NOSE_PEG_4168, Items.EARMUFFS_4166, Items.FACE_MASK_4164, *blackMasks, Items.SPINY_HELMET_4551, Items.SLAYER_CAPET_9787, Items.SLAYER_CAPE_9786, Items.SLAYER_HELMET_13263, Items.WITCHWOOD_ICON_8923, Items.MIRROR_SHIELD_4156)
 
-	/**
-	 * The slayer helmet item.
-	 */
-	private static final Item SLAYER_HELM = new Item(13263);
+    @JvmStatic
+    fun updateFlags(player: Player){
+        var flags = 0
+        if(SkillcapePerks.isActive(SkillcapePerks.TRICKS_OF_THE_TRADE,player) && ContentAPI.getAttribute(player, "cape_perks:tott:helmet-stored", false)) flags = 0x2F
+        else if(hasItem(player, Items.SLAYER_HELMET_13263)) flags = 0x1F
+        else if(hasItem(player, Items.NOSE_PEG_4168)) flags = 1
+        else if(hasItem(player, Items.EARMUFFS_4166)) flags = flags or (1 shl 1)
+        else if(hasItem(player, Items.FACE_MASK_4164)) flags = flags or (1 shl 2)
+        else if((ContentAPI.getItemFromEquipment(player, EquipmentSlot.HAT)?.id ?: 0) in blackMasks) flags = flags or (1 shl 3)
+        else if(hasItem(player, Items.SPINY_HELMET_4551)) flags = flags or (1 shl 4)
 
-	/**
-	 * Represents the item.
-	 */
-	private final Item item;
-	
-	/**
-	 * IF the slayer helm has this equipment.
-	 */
-	private final boolean slayerHelm;
+        if((ContentAPI.getItemFromEquipment(player, EquipmentSlot.AMULET)?.id ?: 0) == Items.WITCHWOOD_ICON_8923) flags = flags or (1 shl 7)
+        if((ContentAPI.getItemFromEquipment(player, EquipmentSlot.SHIELD)?.id ?: 0) == Items.MIRROR_SHIELD_4156) flags = flags or (1 shl 8)
+        player.slayer.equipmentFlags = flags
+    }
 
-	/**
-	 * Constructs a new {@Code Equipment} {@Code Object}
-	 * @param item The item.
-	 * @param slayerHelm If slayer helm incorporated.
-	 */
-	Equipment(Item item, boolean slayerHelm) {
-		this.item = item;
-		this.slayerHelm = slayerHelm;
-	}
-	
-	/**
-	 * Constructs a new {@Code Equipment} {@Code Object}
-	 * @param item The item.
-	 */
-	Equipment(Item item) {
-		this(item, false);
-	}
+    @JvmStatic
+    fun hasNosePeg(player: Player): Boolean{
+        return player.slayer.equipmentFlags and 1 == 1
+    }
 
-	/**
-	 * Checks if the player has the requirement for the item.
-	 * @param player the player.
-	 * @return {@code True} if so.
-	 */
-	public boolean hasRequirement(final Player player) {
-		return item.getDefinition().hasRequirement(player, false, false);
-	}
+    @JvmStatic
+    fun hasEarmuffs(player: Player): Boolean {
+        return (player.slayer.equipmentFlags shr 1) and 1 == 1
+    }
 
-	/**
-	 * Checks if the player has the equipment equipped.
-	 * @param player the player.
-	 * @return {@code True} if so.
-	 */
-	public boolean hasEquipment(final Player player) {
-		if (slayerHelm && player.getEquipment().containsItem(SLAYER_HELM)) {
-			return true;
-		}
-		return player.getEquipment().containsItem(item);
-	}
+    @JvmStatic
+    fun hasFaceMask(player: Player): Boolean {
+        return (player.slayer.equipmentFlags shr 2) and 1 == 1
+    }
 
-	/**
-	 * Gets the item.
-	 * @return The item.
-	 */
-	public Item getItem() {
-		return item;
-	}
+    @JvmStatic
+    fun hasBlackMask(player: Player): Boolean {
+        return (player.slayer.equipmentFlags shr 3) and 1 == 1
+    }
 
-	/**
-	 * Gets the slayerHelm.
-	 * @return the slayerHelm.
-	 */
-	public boolean isSlayerHelm() {
-		return slayerHelm;
-	}
+    @JvmStatic
+    fun hasSpinyHelmet(player: Player): Boolean {
+        return (player.slayer.equipmentFlags shr 4) and 1 == 1
+    }
+
+    @JvmStatic
+    fun hasWitchwoodIcon(player: Player): Boolean {
+        return (player.slayer.equipmentFlags shr 7) and 1 == 1
+    }
+
+    @JvmStatic
+    fun hasMirrorShield(player: Player): Boolean {
+        return (player.slayer.equipmentFlags shr 8) and 1 == 1
+    }
+
+    @JvmStatic
+    fun getDamAccBonus(player: Player): Double {
+        val isCape = player.slayer.equipmentFlags == 0x2F
+        val hasMask = hasBlackMask(player)
+
+        return if(isCape) 1.075
+        else if(hasMask) 1.15
+        else 1.0
+    }
+
+    private fun hasItem(player: Player, id: Int): Boolean{
+        return (ContentAPI.getItemFromEquipment(player, EquipmentSlot.HAT)?.id ?: 0) == id
+    }
+
+    fun isSlayerEq(item: Int): Boolean{
+        return item in slayerItems
+    }
+
 }

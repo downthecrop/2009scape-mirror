@@ -30,7 +30,7 @@ public final class AberrantSpectreNPC extends AbstractNPC {
 		public void impact(final Entity entity, final Entity victim, BattleState state) {
 			if (victim instanceof Player) {
 				Player player = (Player) victim;
-				if (!Equipment.NOSE_PEG.hasEquipment(player)) {
+				if (!SlayerEquipmentFlags.hasNosePeg(player)) {
 					for (int skill : SKILLS) {
 						int drain = (int) (player.getSkills().getStaticLevel(skill) * 0.5);
 						player.getSkills().updateLevel(skill, -drain, 0);
@@ -62,7 +62,7 @@ public final class AberrantSpectreNPC extends AbstractNPC {
 		super.checkImpact(state);
 		if (state.getAttacker() instanceof Player) {
 			final Player player = (Player) state.getAttacker();
-			if (!Equipment.NOSE_PEG.hasEquipment(player)) {
+			if (!SlayerEquipmentFlags.hasNosePeg(player)) {
 				state.neutralizeHits();
 			}
 		}
