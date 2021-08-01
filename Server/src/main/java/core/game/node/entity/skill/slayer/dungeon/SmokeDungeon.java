@@ -2,7 +2,7 @@ package core.game.node.entity.skill.slayer.dungeon;
 
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
-import core.game.node.entity.skill.slayer.Equipment;
+import core.game.node.entity.skill.slayer.SlayerEquipmentFlags;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -164,7 +164,7 @@ public final class SmokeDungeon extends MapZone implements Plugin<Object> {
 	 * @return {@code True} if so.
 	 */
 	private static boolean isProtected(Player player) {
-		return Equipment.FACEMASK.hasEquipment(player);
+		return SlayerEquipmentFlags.hasFaceMask(player);
 	}
 
 	@Override
