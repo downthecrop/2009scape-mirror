@@ -18,7 +18,7 @@ object SlayerEquipmentFlags {
     @JvmStatic
     fun updateFlags(player: Player){
         var flags = 0
-        if(SkillcapePerks.isActive(SkillcapePerks.TRICKS_OF_THE_TRADE,player) && ContentAPI.getAttribute(player, "cape_perks:tott:helmet-stored", false)) flags = 0x2F
+        if(SkillcapePerks.isActive(SkillcapePerks.TRICKS_OF_THE_TRADE,player) && ContentAPI.getAttribute(player, "cape_perks:tott:helmet-stored", false)) flags = 0x3F
         else if(hasItem(player, Items.SLAYER_HELMET_13263)) flags = 0x1F
         else if(hasItem(player, Items.NOSE_PEG_4168)) flags = 1
         else if(hasItem(player, Items.EARMUFFS_4166)) flags = flags or (1 shl 1)
@@ -68,7 +68,7 @@ object SlayerEquipmentFlags {
 
     @JvmStatic
     fun getDamAccBonus(player: Player): Double {
-        val isCape = player.slayer.equipmentFlags == 0x2F
+        val isCape = player.slayer.equipmentFlags == 0x3F
         val hasMask = hasBlackMask(player)
 
         return if(isCape) 1.075
