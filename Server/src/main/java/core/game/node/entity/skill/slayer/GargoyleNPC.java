@@ -10,6 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Items;
 import rs09.plugin.PluginManager;
 
 /**
@@ -88,7 +89,7 @@ public final class GargoyleNPC extends AbstractNPC {
 		 * Constructs a new {@code RockHammerHandler} {@code Object}.
 		 */
 		public RockHammerHandler() {
-			super(Equipment.ROCK_HAMMER.getItem().getId());
+			super(Items.ROCK_HAMMER_4162);
 		}
 
 		@Override

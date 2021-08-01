@@ -66,6 +66,11 @@ public final class SlayerManager {
 	private final List<Tasks> removed = new ArrayList<>(4);
 
 	/**
+	 * The equipment flags for the given player
+	 */
+	public int equipmentFlags = 0;
+
+	/**
 	 * Constructs a new {@Code SlayerManager} {@Code Object}
 	 * @param player The player.
 	 */
@@ -102,6 +107,8 @@ public final class SlayerManager {
 		}
 		taskTotal = Integer.parseInt( slayerData.get("totalTasks").toString());
 		canEarnPoints = (boolean) slayerData.get("canEarnPoints");
+		if(slayerData.containsKey("equipmentFlags"))
+			equipmentFlags = Integer.parseInt(slayerData.get("equipmentFlags").toString());
 	}
 
 	/**

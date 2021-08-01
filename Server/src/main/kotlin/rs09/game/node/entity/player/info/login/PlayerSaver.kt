@@ -723,6 +723,7 @@ class PlayerSaver (val player: Player){
         }
         slayer.put("totalTasks",slayerManager.totalTasks.toString())
         slayer.put("canEarnPoints",slayerManager.isCanEarnPoints)
+        slayer.put("equipmentFlags",slayerManager.equipmentFlags)
         root.put("slayer",slayer)
     }
 
