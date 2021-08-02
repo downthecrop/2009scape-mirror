@@ -1404,7 +1404,7 @@ public final class PacketParser {
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else {
-                                                        RSInterface var25;
+                                                        RSInterface iface;
                                                         if (Unsorted.incomingOpcode == 22) {
                                                             nodeModelId = BufferedDataStream.incomingBuffer.readInt();
                                                             var19 = BufferedDataStream.incomingBuffer.readUnsignedShort();
@@ -1413,9 +1413,9 @@ public final class PacketParser {
                                                             }
 
                                                             if (nodeModelId < 0) {
-                                                                var25 = null;
+                                                                iface = null;
                                                             } else {
-                                                                var25 = Unsorted.getRSInterface(nodeModelId);
+                                                                iface = Unsorted.getRSInterface(nodeModelId);
                                                             }
 
                                                             for (; Unsorted.incomingPacketLength > BufferedDataStream.incomingBuffer.index; method2277(var6 + -1, counter, var30, var19, (byte) 46)) {
@@ -1429,14 +1429,14 @@ public final class PacketParser {
                                                                     }
                                                                 }
 
-                                                                if (var25 != null && counter >= 0 && counter < var25.itemAmounts.length) {
-                                                                    var25.itemAmounts[counter] = var6;
-                                                                    var25.itemIds[counter] = var30;
+                                                                if (iface != null && counter >= 0 && counter < iface.itemAmounts.length) {
+                                                                    iface.itemAmounts[counter] = var6;
+                                                                    iface.itemIds[counter] = var30;
                                                                 }
                                                             }
 
-                                                            if (var25 != null) {
-                                                                Class20.method909(var25);
+                                                            if (iface != null) {
+                                                                Class20.method909(iface);
                                                             }
 
                                                             BufferedDataStream.method819();
@@ -1647,15 +1647,15 @@ public final class PacketParser {
                                                             }
 
                                                             if (0 <= nodeModelId) {
-                                                                var25 = Unsorted.getRSInterface(nodeModelId);
+                                                                iface = Unsorted.getRSInterface(nodeModelId);
                                                             } else {
-                                                                var25 = null;
+                                                                iface = null;
                                                             }
 
-                                                            if (var25 != null) {
-                                                                for (counter = 0; var25.itemAmounts.length > counter; ++counter) {
-                                                                    var25.itemAmounts[counter] = 0;
-                                                                    var25.itemIds[counter] = 0;
+                                                            if (iface != null) {
+                                                                for (counter = 0; iface.itemAmounts.length > counter; ++counter) {
+                                                                    iface.itemAmounts[counter] = 0;
+                                                                    iface.itemIds[counter] = 0;
                                                                 }
                                                             }
 
@@ -1669,16 +1669,16 @@ public final class PacketParser {
                                                                 }
 
                                                                 chatIcon = BufferedDataStream.incomingBuffer.readUnsignedShort();
-                                                                if (null != var25 && var25.itemAmounts.length > var6) {
-                                                                    var25.itemAmounts[var6] = chatIcon;
-                                                                    var25.itemIds[var6] = var30;
+                                                                if (null != iface && iface.itemAmounts.length > var6) {
+                                                                    iface.itemAmounts[var6] = chatIcon;
+                                                                    iface.itemIds[var6] = var30;
                                                                 }
 
                                                                 method2277(-1 + chatIcon, var6, var30, var19, (byte) 41);
                                                             }
 
-                                                            if (var25 != null) {
-                                                                Class20.method909(var25);
+                                                            if (iface != null) {
+                                                                Class20.method909(iface);
                                                             }
 
                                                             BufferedDataStream.method819();
