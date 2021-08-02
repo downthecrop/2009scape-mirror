@@ -132,34 +132,34 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 				break;
 			case 22://Broad arrows
 			case 29:
-				if (player.getSlayer().getLearned()[0]) {
+				if (player.getSlayer().flags.isBroadsUnlocked()) {
 					player.sendMessage("You don't need to learn this ability again.");
 					break;
 				}
 				if (purchase(player, 300)) {
-					player.getSlayer().getLearned()[0] = true;
+					player.getSlayer().flags.unlockBroads();
 					updateInterface(player, component);
 				}
 				break;
 			case 23://Slayer ring
 			case 30:
-				if (player.getSlayer().getLearned()[1]) {
+				if (player.getSlayer().flags.isRingUnlocked()) {
 					player.sendMessage("You don't need to learn this ability again.");
 					break;
 				}
 				if (purchase(player, 300)) {
-					player.getSlayer().getLearned()[1] = true;
+					player.getSlayer().flags.unlockRing();
 					updateInterface(player, component);
 				}
 				break;
 			case 24://Slayer helm
 			case 31:
-				if (player.getSlayer().getLearned()[2]) {
+				if (player.getSlayer().flags.isHelmUnlocked()) {
 					player.sendMessage("You don't need to learn this ability again.");
 					break;
 				}
 				if (purchase(player, 400)) {
-					player.getSlayer().getLearned()[2] = true;
+					player.getSlayer().flags.unlockHelm();
 					updateInterface(player, component);
 				}
 				break;
@@ -268,8 +268,20 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 			player.getPacketDispatch().sendString(space + player.getSlayer().getSlayerPoints(), open.getId(), 19);
 			break;
 		case 163://learn
-			for (int i = 0; i < player.getSlayer().getLearned().length; i++) {
-				player.getPacketDispatch().sendInterfaceConfig(open.getId(), 25 + i, !player.getSlayer().getLearned()[i]);
+			for (int i = 0; i < 3; i++) {
+				switch(i){
+					case 0:
+						player.getPacketDispatch().sendInterfaceConfig(open.getId(), 25 + i, !player.getSlayer().flags.isBroadsUnlocked());
+						break;
+					case 1:
+						player.getPacketDispatch().sendInterfaceConfig(open.getId(), 25 + i, !player.getSlayer().flags.isRingUnlocked());
+						break;
+					case 2:
+						player.getPacketDispatch().sendInterfaceConfig(open.getId(), 25 + i, !player.getSlayer().flags.isHelmUnlocked());
+						break;
+					default:
+						break;
+				}
 			}
 			player.getPacketDispatch().sendString(space + player.getSlayer().getSlayerPoints(), open.getId(), 18);
 			break;
@@ -370,7 +382,7 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 				player.sendMessage("You need a Crafting level of at least 55 in order to do this.");
 				return true;
 			}
-			if (!player.getSlayer().getLearned()[2]) {
+			if (!player.getSlayer().flags.isHelmUnlocked()) {
 				player.sendMessage("You need to unlock the ability to do that first.");
 				return true;
 			}
