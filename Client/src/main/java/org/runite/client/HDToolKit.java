@@ -1,5 +1,6 @@
 package org.runite.client;
 
+import org.rs09.SlayerTracker;
 import org.rs09.client.config.GameConfig;
 
 import javax.media.opengl.*;
@@ -431,6 +432,7 @@ public final class HDToolKit {
 
         Class68.method1273();
         highDetail = false;
+        SlayerTracker.setSprite();
     }
 
     static void method1843(float var0, float var1) {
@@ -627,6 +629,7 @@ public final class HDToolKit {
                 gl = glContext.getGL();
                 new GLU();
                 highDetail = true;
+                SlayerTracker.setSprite();
                 System.out.println("Setting high detail to " + highDetail);
                 viewWidth = canvas.getSize().width;
                 viewHeight = canvas.getSize().height;
