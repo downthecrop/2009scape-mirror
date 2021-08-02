@@ -80754,7 +80754,7 @@
     "name": "Defensive shield",
     "weight": "3.6",
     "archery_ticket_price": "0",
-    "two_handed": "true",
+    "two_handed": "false",
     "id": "8856",
     "bonuses": "0,0,0,-6,-2,8,9,7,0,8,0,0,0,0,0",
     "equipment_slot": "5"
