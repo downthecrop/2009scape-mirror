@@ -43,7 +43,7 @@ public class ArrowHeadPulse extends SkillPulse<Item> {
 	@Override
 	public boolean checkRequirements() {
 		if (arrow.unfinished == 4160) {
-			if (!player.getSlayer().getLearned()[0]) {
+			if (!player.getSlayer().flags.isBroadsUnlocked()) {
 				player.getDialogueInterpreter().sendDialogue("You need to unlock the ability to create broad arrows.");
 				return false;
 			}
