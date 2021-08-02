@@ -44,7 +44,7 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 	/**
 	 * The target location.
 	 */
-	private static final Location TARGET = Location.create(2842, 3545, 1);
+	public static final Location TARGET = Location.create(2842, 3545, 1);
 
 	/**
 	 * The shield item id.
