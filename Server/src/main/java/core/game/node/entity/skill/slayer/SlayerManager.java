@@ -148,8 +148,7 @@ public final class SlayerManager {
 		} else if (master == Master.VANNAKA) {
 			player.getAchievementDiaryManager().finishTask(player, DiaryType.VARROCK, 1, 14);
 		}
-		getPlayer().varpManager.get(2502).setVarbit(1,task.ordinal());
-		getPlayer().varpManager.get(2502).setVarbit(8,getAmount()).send(player);
+		getPlayer().varpManager.get(2502).setVarbit(0, flags.getTaskFlags() >> 4).send(player);
 	}
 
 	/**
