@@ -17,9 +17,11 @@ object CustomVars {
                 true
             }
             2502 -> {
-                GameConfig.slayerCountEnabled = (varValue and 1) == 0
-                GameConfig.slayerTaskID = (varValue shr 1) and 127
-                GameConfig.setSlayerAmount((varValue shr 8) and 511)
+                GameConfig.slayerCountEnabled = true
+                GameConfig.slayerTaskID = varValue and 0x7F
+                GameConfig.setSlayerAmount((varValue shr 7) and 0xFF)
+                SlayerTracker.setSprite()
+                SystemLogger.logInfo(varValue.toString())
                 true
             }
             else -> false
