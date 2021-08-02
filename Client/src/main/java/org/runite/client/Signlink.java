@@ -10,6 +10,7 @@ import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.Socket;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Hashtable;
 import java.util.Vector;
 
@@ -394,20 +395,20 @@ public class Signlink implements Runnable {
                             if (osArchitecture.equals("aarch64"))
                                 SystemLogger.logWarn("Going into HD will fail - current libs do not support ARM.");
                             if (osName.startsWith("linux") || isSunOS) {
-                                createLibs(isSunOS ? (is64Bit ? 7 : 6) : (is64Bit ? 5 : 4));
-                                var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, "libgluegen-rt.so").toString());
-                                Class var8 = ((Class) var1.anObject977).getClassLoader().loadClass("com.sun.opengl.impl.x11.DRIHack");
+                                String[] libs = createLibs(isSunOS ? (is64Bit ? 7 : 6) : (is64Bit ? 5 : 4));
+                                var7.invoke(runtime, var1.anObject977, libs[2]);
+                                Class var8 = getClass().getClassLoader().loadClass("com.sun.opengl.impl.x11.DRIHack");
                                 var8.getMethod("begin", new Class[0]).invoke(null);
-                                var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, "libjogl.so").toString());
+                                var7.invoke(runtime, var1.anObject977, libs[0]);
                                 var8.getMethod("end", new Class[0]).invoke(null);
-                                var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, "libjogl_awt.so").toString());
+                                var7.invoke(runtime, var1.anObject977, libs[1]);
 
 
                             } else if (osName.startsWith("mac")) {
-                                createLibs(is64Bit ? 2 : 3);
+                                String[] libs = createLibs(is64Bit ? 2 : 3);
                                 try {
-                                    var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, "libjogl.jnilib").toString());
-                                    var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, "libjogl_awt.jnilib").toString());
+                                    var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, libs[0]).toString());
+                                    var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, libs[1]).toString());
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -416,10 +417,10 @@ public class Signlink implements Runnable {
                                 if (!osName.startsWith("win")) {
                                     throw new Exception();
                                 }
-                                createLibs(is64Bit ? 1 : 0);
+                                String[] libs = createLibs(is64Bit ? 1 : 0);
 //                                System.out.println("Trying to invoke libs");
-                                var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, "jogl.dll").toString());
-                                var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, "jogl_awt.dll").toString());
+                                var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, libs[0]).toString());
+                                var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, libs[1]).toString());
                             }
 
                             var7.setAccessible(false);
@@ -499,13 +500,60 @@ public class Signlink implements Runnable {
         }
     }
 
-    public void createLibs(int archive) throws Throwable {
-        String jogl = archive < 2 ? "jogl.dll" : archive < 4 ? "libjogl.jnilib" : "libjogl.so";
+    public String[] createLibs(int archive) throws Throwable {
+        ArrayList<String> filenames = new ArrayList<>();
+        String jogl;
+        String awt;
+        String glueGen = "";
+        boolean isGluegenRequired = false;
+        boolean is64Bit = osArchitecture.contains("64");
+
+        jogl = (archive < 2 ? "jogl" : "libjogl") +
+               (is64Bit ? "_64" : "_32") +
+               (archive < 2 ? ".dll" : archive < 4 ? ".jnilib" : ".so");
+
+        awt = (archive < 2 ? "jogl_awt" : "libjogl_awt") +
+              (is64Bit ? "_64" : "_32") +
+              (archive < 2 ? ".dll" : archive < 4 ? ".jnilib" : ".so");
+
+        if(archive > 3) isGluegenRequired = true;
+
+        if(isGluegenRequired) glueGen = "libgluegen-rt_" + (is64Bit ? "64" : "32") + ".so";
+
+        File joglLib = File.createTempFile("jogl","." + jogl.split("\\.")[1]);
+        try (InputStream in = getClass().getResourceAsStream("/lib/" + jogl); OutputStream out = openOutputStream(joglLib)){
+            if(in == null) throw new FileNotFoundException("Needed library does not exist: " + jogl);
+            copyFile(in, out);
+            joglLib.deleteOnExit();
+            filenames.add(joglLib.getAbsolutePath());
+        }
+
+        File awtLib = File.createTempFile("jogl_awt", "." + awt.split("\\.")[1]);
+        try (InputStream in = getClass().getResourceAsStream("/lib/" + awt); OutputStream out = openOutputStream(awtLib)){
+            if(in == null) throw new FileNotFoundException("Needed library does not exist: " + awt);
+            copyFile(in, out);
+            awtLib.deleteOnExit();
+            filenames.add(awtLib.getAbsolutePath());
+        }
+
+        if(isGluegenRequired){
+            File glueLib = File.createTempFile("libgluegen", ".so");
+            try (InputStream in = getClass().getResourceAsStream("/lib/" + glueGen); OutputStream out = openOutputStream(glueLib)){
+                if(in == null) throw new FileNotFoundException("Needed library does not exist: " + glueGen);
+                copyFile(in, out);
+                glueLib.deleteOnExit();
+                filenames.add(glueLib.getAbsolutePath());
+            }
+        }
+
+        return filenames.toArray(new String[]{});
+
+        /*String jogl = archive < 2 ? "jogl.dll" : archive < 4 ? "libjogl.jnilib" : "libjogl.so";
         String joglAwt = archive < 2 ? "jogl_awt.dll" : archive < 4 ? "libjogl_awt.jnilib" : "libjogl_awt.so";
         byte[] bs = CacheIndex.libIndex.getFile(archive, 0);
         if (bs == null || bs.length < 1) {
             System.err.println("Could not create native lib " + joglAwt + ", archive=" + archive + "!");
-            return;
+            return new String[]{};
         }
         FileOutputStream fos = new FileOutputStream(method1448(this.gameName, this.anInt1215, joglAwt));
         fos.write(bs);
@@ -530,7 +578,7 @@ public class Signlink implements Runnable {
             fos.write(bs);
             fos.flush();
             fos.close();
-        }
+        }*/
     }
 
     public final Class64 method1444(int var1, Class var2) {
@@ -637,5 +685,32 @@ public class Signlink implements Runnable {
         }
 
         return this.method1435(5, 0, null, 0);
+    }
+
+    private static FileOutputStream openOutputStream(final File file) throws IOException {
+        if (file.exists()) {
+            if (file.isDirectory()) {
+                throw new IOException("File '" + file + "' exists but is a directory");
+            }
+            if (!file.canWrite()) {
+                throw new IOException("File '" + file + "' cannot be written to");
+            }
+        } else {
+            final File parent = file.getParentFile();
+            if (parent != null) {
+                if (!parent.mkdirs() && !parent.isDirectory()) {
+                    throw new IOException("Directory '" + parent + "' could not be created");
+                }
+            }
+        }
+        return new FileOutputStream(file);
+    }
+
+    private static void copyFile(final InputStream input, final OutputStream output) throws IOException {
+        byte[] buffer = new byte[1024 * 4];
+        int n;
+        while (-1 != (n = input.read(buffer))) {
+            output.write(buffer, 0, n);
+        }
     }
 }
