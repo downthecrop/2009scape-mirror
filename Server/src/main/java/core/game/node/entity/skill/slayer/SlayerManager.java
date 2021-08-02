@@ -293,7 +293,7 @@ public final class SlayerManager {
 	 * @return {@code True} if so.
 	 */
 	public boolean hasStarted() {
-		return flags.getCompletedTasks() > 0;
+		return flags.getCompletedTasks() > 0 || flags.getTaskAmount() > 0;
 	}
 
 	/**

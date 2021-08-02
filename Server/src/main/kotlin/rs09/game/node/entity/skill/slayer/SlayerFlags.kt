@@ -1,8 +1,6 @@
 package rs09.game.node.entity.skill.slayer
 
-import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.slayer.Master
 import core.game.node.entity.skill.slayer.Tasks
 
@@ -122,7 +120,7 @@ class SlayerFlags(val player: Player) {
      * Get/set/increment points flag
      */
     fun setPoints(amount: Int) {
-        rewardFlags = rewardFlags or (amount shl 15)
+        rewardFlags = (rewardFlags - (getPoints() shl 15)) or (amount shl 15)
     }
 
     fun getPoints(): Int {
@@ -149,47 +147,6 @@ class SlayerFlags(val player: Player) {
      */
     fun hasTask(): Boolean{
         return getTaskAmount() != 0
-    }
-
-    /**
-     * Called when a hunted creature dies.
-     * @param player The player.
-     * @param npc The NPC. You're currently
-     */
-    fun finalizeDeath(player: Player, npc: NPC) {
-        player.skills.addExperience(Skills.SLAYER, npc.skills.maximumLifepoints.toDouble())
-        decrementTaskAmount(1)
-        if (!hasTask()) {
-            clearTask()
-            taskStreak++
-            completedTasks++
-            if ((completedTasks > 4 || canEarnPoints()) && getMaster() != Master.TURAEL && getPoints() < 64000) {
-                var points: Int = getMaster().taskPoints[0]
-                if (taskStreak % 10 == 0) {
-                    points = getMaster().taskPoints[1]
-                } else if (taskStreak % 50 == 0) {
-                    points = getMaster().taskPoints[2]
-                }
-                incrementPoints(points)
-                if (getPoints() > 64000) {
-                    setPoints(64000)
-                }
-                player.sendMessages(
-                    "You've completed " + taskStreak + " tasks in a row and received " + points + " points, with a total of " + getPoints(),
-                    "You have completed $completedTasks tasks in total. Return to a Slayer master."
-                )
-            } else if (completedTasks == 4) {
-                player.sendMessage("You've completed your task; you will start gaining points on your next task!")
-                flagCanEarnPoints()
-            } else {
-                player.sendMessages(
-                    "You've completed your task; Complete " + (4 - completedTasks) + " more task(s) to start gaining points.",
-                    "Return to a Slayer master."
-                )
-            }
-        } else {
-            //player.sendMessage("You're assigned to kill " + NPCDefinition.forId((player.getSlayer().getTask().getNpcs()[0])).getName().toLowerCase() + "s; Only " + getAmount() + " more to go.");
-        }
     }
 
 }
