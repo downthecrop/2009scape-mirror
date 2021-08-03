@@ -186,7 +186,7 @@ public final class JewelleryInterface extends ComponentPlugin {
 			});
 			return true;
 		}
-		if(!player.getSlayer().flags.isRingUnlocked()){
+		if(!player.getSlayer().flags.isRingUnlocked() && data.equals(JewelleryItem.SLAYER_RING)){
 			player.sendMessages("You don't know how to make this. Talk to any Slayer master in order to learn the", "ability that creates Slayer rings.");
 			return true;
 		}
