@@ -418,9 +418,9 @@ public class Signlink implements Runnable {
                                     throw new Exception();
                                 }
                                 String[] libs = createLibs(is64Bit ? 1 : 0);
-//                                System.out.println("Trying to invoke libs");
-                                var7.invoke(runtime, var1.anObject977, libs[0]);
-                                var7.invoke(runtime, var1.anObject977, libs[1]);
+                                //Windows has to load them this way because temporary files are illegal.
+                                var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, libs[0]).toString());
+                                var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, libs[1]).toString());
                             }
 
                             var7.setAccessible(false);
@@ -520,29 +520,49 @@ public class Signlink implements Runnable {
 
         if(isGluegenRequired) glueGen = "libgluegen-rt_" + (is64Bit ? "64" : "32") + ".so";
 
-        File joglLib = File.createTempFile("jogl","." + jogl.split("\\.")[1]);
-        try (InputStream in = getClass().getResourceAsStream("/lib/" + jogl); OutputStream out = openOutputStream(joglLib)){
-            if(in == null) throw new FileNotFoundException("Needed library does not exist: " + jogl);
-            copyFile(in, out);
-            joglLib.deleteOnExit();
-            filenames.add(joglLib.getAbsolutePath());
-        }
-
-        File awtLib = File.createTempFile("jogl_awt", "." + awt.split("\\.")[1]);
-        try (InputStream in = getClass().getResourceAsStream("/lib/" + awt); OutputStream out = openOutputStream(awtLib)){
-            if(in == null) throw new FileNotFoundException("Needed library does not exist: " + awt);
-            copyFile(in, out);
-            awtLib.deleteOnExit();
-            filenames.add(awtLib.getAbsolutePath());
-        }
-
-        if(isGluegenRequired){
-            File glueLib = File.createTempFile("libgluegen", ".so");
-            try (InputStream in = getClass().getResourceAsStream("/lib/" + glueGen); OutputStream out = openOutputStream(glueLib)){
-                if(in == null) throw new FileNotFoundException("Needed library does not exist: " + glueGen);
+        if(archive >= 4) { //good, proper, correct Linux loading to allow multiple HD sessions
+            File joglLib = File.createTempFile("jogl", "." + jogl.split("\\.")[1]);
+            try (InputStream in = getClass().getResourceAsStream("/lib/" + jogl); OutputStream out = openOutputStream(joglLib)) {
+                if (in == null) throw new FileNotFoundException("Needed library does not exist: " + jogl);
                 copyFile(in, out);
-                glueLib.deleteOnExit();
-                filenames.add(glueLib.getAbsolutePath());
+                joglLib.deleteOnExit();
+                filenames.add(joglLib.getAbsolutePath());
+            }
+
+            File awtLib = File.createTempFile("jogl_awt", "." + awt.split("\\.")[1]);
+            try (InputStream in = getClass().getResourceAsStream("/lib/" + awt); OutputStream out = openOutputStream(awtLib)) {
+                if (in == null) throw new FileNotFoundException("Needed library does not exist: " + awt);
+                copyFile(in, out);
+                awtLib.deleteOnExit();
+                filenames.add(awtLib.getAbsolutePath());
+            }
+
+            if (isGluegenRequired) {
+                File glueLib = File.createTempFile("libgluegen", ".so");
+                try (InputStream in = getClass().getResourceAsStream("/lib/" + glueGen); OutputStream out = openOutputStream(glueLib)) {
+                    if (in == null) throw new FileNotFoundException("Needed library does not exist: " + glueGen);
+                    copyFile(in, out);
+                    glueLib.deleteOnExit();
+                    filenames.add(glueLib.getAbsolutePath());
+                }
+            }
+        } else { //Shitty, fucking headass windows-specific loading that is backwards as fuck
+            File jogLib = method1448(this.gameName, this.anInt1215, jogl);
+            if(!jogLib.exists()){
+                try (InputStream in = getClass().getResourceAsStream("/lib/" + jogl); OutputStream out = openOutputStream(jogLib)) {
+                    if (in == null) throw new FileNotFoundException("Needed library does not exist: " + jogl);
+                    copyFile(in, out);
+                    filenames.add(jogLib.getName());
+                }
+            }
+
+            File awtLib = method1448(this.gameName, this.anInt1215, awt);
+            if(!awtLib.exists()){
+                try (InputStream in = getClass().getResourceAsStream("/lib/" + awt); OutputStream out = openOutputStream(awtLib)) {
+                    if (in == null) throw new FileNotFoundException("Needed library does not exist: " + awt);
+                    copyFile(in, out);
+                    filenames.add(awtLib.getName());
+                }
             }
         }
 
