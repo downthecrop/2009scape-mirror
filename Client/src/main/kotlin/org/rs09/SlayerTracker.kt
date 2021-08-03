@@ -4,6 +4,7 @@ import org.rs09.client.config.GameConfig
 import org.rs09.client.rendering.RenderingUtils
 import org.rs09.client.rendering.Toolkit
 import org.runite.client.*
+import java.lang.Exception
 import java.util.concurrent.TimeUnit
 
 object SlayerTracker {
@@ -145,6 +146,6 @@ object SlayerTracker {
             }
 
             curSprite = sprite
-        } catch (ignored: Exception){ }
+        } catch (ignored: Exception){}
     }
 }
