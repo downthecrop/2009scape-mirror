@@ -419,8 +419,10 @@ public class Signlink implements Runnable {
                                 }
                                 String[] libs = createLibs(is64Bit ? 1 : 0);
                                 //Windows has to load them this way because temporary files are illegal.
-                                var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, libs[0]).toString());
-                                var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, libs[1]).toString());
+                                String jogl = method1448(this.gameName, this.anInt1215, libs[0]).toString();
+                                String awt = method1448(this.gameName, this.anInt1215, libs[1]).toString();
+                                var7.invoke(runtime, var1.anObject977, jogl);
+                                var7.invoke(runtime, var1.anObject977, awt);
                             }
 
                             var7.setAccessible(false);
@@ -500,6 +502,12 @@ public class Signlink implements Runnable {
         }
     }
 
+    /**
+     * Extracts the libs from the client resources
+     * @param archive deprecated - used to point to the cache archive for the lib, now indicates OS|Architecture "hash"
+     * @return an array of the created filenames to load.
+     * @author Ceikry
+     */
     public String[] createLibs(int archive) throws Throwable {
         ArrayList<String> filenames = new ArrayList<>();
         String jogl;
@@ -507,6 +515,7 @@ public class Signlink implements Runnable {
         String glueGen = "";
         boolean isGluegenRequired = false;
         boolean is64Bit = osArchitecture.contains("64");
+        boolean isWindowsOrMac = archive < 4;
 
         jogl = (archive < 2 ? "jogl" : "libjogl") +
                (is64Bit ? "_64" : "_32") +
@@ -516,89 +525,35 @@ public class Signlink implements Runnable {
               (is64Bit ? "_64" : "_32") +
               (archive < 2 ? ".dll" : archive < 4 ? ".jnilib" : ".so");
 
-        if(archive > 3) isGluegenRequired = true;
-
+        if(!isWindowsOrMac) isGluegenRequired = true;
         if(isGluegenRequired) glueGen = "libgluegen-rt_" + (is64Bit ? "64" : "32") + ".so";
 
-        if(archive >= 4) { //good, proper, correct Linux loading to allow multiple HD sessions
-            File joglLib = File.createTempFile("jogl", "." + jogl.split("\\.")[1]);
-            try (InputStream in = getClass().getResourceAsStream("/lib/" + jogl); OutputStream out = openOutputStream(joglLib)) {
-                if (in == null) throw new FileNotFoundException("Needed library does not exist: " + jogl);
+        File joglLib = isWindowsOrMac ? method1448(this.gameName, this.anInt1215, "jogl.dll") : File.createTempFile("jogl", "." + jogl.split("\\.")[1]);
+        File awtLib = isWindowsOrMac ? method1448(this.gameName, this.anInt1215, "jogl_awt.dll") : File.createTempFile("jogl_awt", "." + awt.split("\\.")[1]);
+
+        try (InputStream in = getClass().getResourceAsStream("/lib/" + jogl); OutputStream out = openOutputStream(joglLib)) {
+            if (in == null) throw new FileNotFoundException("Needed library does not exist: " + jogl);
+            copyFile(in, out);
+            filenames.add(isWindowsOrMac ? joglLib.getName() : joglLib.getAbsolutePath());
+        }
+
+        try (InputStream in = getClass().getResourceAsStream("/lib/" + awt); OutputStream out = openOutputStream(awtLib)) {
+            if (in == null) throw new FileNotFoundException("Needed library does not exist: " + awt);
+            copyFile(in, out);
+            filenames.add(isWindowsOrMac ? awtLib.getName() : awtLib.getAbsolutePath());
+        }
+
+        if (isGluegenRequired) {
+            File glueLib = File.createTempFile("libgluegen", ".so");
+            try (InputStream in = getClass().getResourceAsStream("/lib/" + glueGen); OutputStream out = openOutputStream(glueLib)) {
+                if (in == null) throw new FileNotFoundException("Needed library does not exist: " + glueGen);
                 copyFile(in, out);
-                joglLib.deleteOnExit();
-                filenames.add(joglLib.getAbsolutePath());
-            }
-
-            File awtLib = File.createTempFile("jogl_awt", "." + awt.split("\\.")[1]);
-            try (InputStream in = getClass().getResourceAsStream("/lib/" + awt); OutputStream out = openOutputStream(awtLib)) {
-                if (in == null) throw new FileNotFoundException("Needed library does not exist: " + awt);
-                copyFile(in, out);
-                awtLib.deleteOnExit();
-                filenames.add(awtLib.getAbsolutePath());
-            }
-
-            if (isGluegenRequired) {
-                File glueLib = File.createTempFile("libgluegen", ".so");
-                try (InputStream in = getClass().getResourceAsStream("/lib/" + glueGen); OutputStream out = openOutputStream(glueLib)) {
-                    if (in == null) throw new FileNotFoundException("Needed library does not exist: " + glueGen);
-                    copyFile(in, out);
-                    glueLib.deleteOnExit();
-                    filenames.add(glueLib.getAbsolutePath());
-                }
-            }
-        } else { //Shitty, fucking headass windows-specific loading that is backwards as fuck
-            File jogLib = method1448(this.gameName, this.anInt1215, jogl);
-            if(!jogLib.exists()){
-                try (InputStream in = getClass().getResourceAsStream("/lib/" + jogl); OutputStream out = openOutputStream(jogLib)) {
-                    if (in == null) throw new FileNotFoundException("Needed library does not exist: " + jogl);
-                    copyFile(in, out);
-                    filenames.add(jogLib.getName());
-                }
-            }
-
-            File awtLib = method1448(this.gameName, this.anInt1215, awt);
-            if(!awtLib.exists()){
-                try (InputStream in = getClass().getResourceAsStream("/lib/" + awt); OutputStream out = openOutputStream(awtLib)) {
-                    if (in == null) throw new FileNotFoundException("Needed library does not exist: " + awt);
-                    copyFile(in, out);
-                    filenames.add(awtLib.getName());
-                }
+                filenames.add(glueLib.getAbsolutePath());
             }
         }
+
 
         return filenames.toArray(new String[]{});
-
-        /*String jogl = archive < 2 ? "jogl.dll" : archive < 4 ? "libjogl.jnilib" : "libjogl.so";
-        String joglAwt = archive < 2 ? "jogl_awt.dll" : archive < 4 ? "libjogl_awt.jnilib" : "libjogl_awt.so";
-        byte[] bs = CacheIndex.libIndex.getFile(archive, 0);
-        if (bs == null || bs.length < 1) {
-            System.err.println("Could not create native lib " + joglAwt + ", archive=" + archive + "!");
-            return new String[]{};
-        }
-        FileOutputStream fos = new FileOutputStream(method1448(this.gameName, this.anInt1215, joglAwt));
-        fos.write(bs);
-        fos.flush();
-        fos.close();
-        bs = CacheIndex.libIndex.getFile(archive, 1);
-        if (bs == null || bs.length < 1) {
-            System.err.println("Could not create native lib " + jogl + ", archive=" + archive + "!");
-            return;
-        }
-        fos = new FileOutputStream(method1448(this.gameName, this.anInt1215, jogl));
-        fos.write(bs);
-        fos.flush();
-        fos.close();
-        if (archive > 3) {
-            bs = CacheIndex.libIndex.getFile(archive, 2);
-            if (bs == null || bs.length < 1) {
-                System.err.println("Could not create native lib libgluegen-rt.so, archive=" + archive + "!");
-                return;
-            }
-            fos = new FileOutputStream(method1448(this.gameName, this.anInt1215, "libgluegen-rt.so"));
-            fos.write(bs);
-            fos.flush();
-            fos.close();
-        }*/
     }
 
     public final Class64 method1444(int var1, Class var2) {
