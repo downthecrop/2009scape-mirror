@@ -406,28 +406,15 @@ public class Signlink implements Runnable {
                             }
 
                             if (osName.startsWith("linux") || isSunOS) {
-
-                                String[] libs = createLibs(isSunOS ? (is64Bit ? 7 : 6) : (is64Bit ? 5 : 4));
+                                String[] libs = createLibs("linux");
                                 libLoaderMethod.invoke(runtime, clientClass, libs[2]);
                                 DRIHack.begin();
                                 libLoaderMethod.invoke(runtime, clientClass, libs[0]);
                                 DRIHack.end();
                                 libLoaderMethod.invoke(runtime, clientClass, libs[1]);
-
-                            } else if (osName.startsWith("mac")) {
-                                if(!osArchitecture.equals("ppc")) throw new Exception(); //we only have ppc libs for mac.
-                                String[] libs = createLibs(is64Bit ? 2 : 3);
-                                try {
-                                    libLoaderMethod.invoke(runtime, clientClass, getFileFromCacheFolder(this.gameName, this.cacheSubrevisionNum, libs[0]).toString());
-                                    libLoaderMethod.invoke(runtime, clientClass, getFileFromCacheFolder(this.gameName, this.cacheSubrevisionNum, libs[1]).toString());
-                                } catch (Exception e) {
-                                    e.printStackTrace();
-                                }
                             } else {
-                                if (!osName.startsWith("win")) {
-                                    throw new Exception();
-                                }
-                                String[] libs = createLibs(is64Bit ? 1 : 0);
+                                if(osName.startsWith("mac") && !osArchitecture.equals("ppc")) throw new Exception(); //We only have ppc libs for mac.
+                                String[] libs = createLibs(osName.contains("win") ? "windows" : "macppc");
                                 //Windows has to load them this way because temporary files are illegal.
                                 String jogl = getFileFromCacheFolder(this.gameName, this.cacheSubrevisionNum, libs[0]).toString();
                                 String awt = getFileFromCacheFolder(this.gameName, this.cacheSubrevisionNum, libs[1]).toString();
@@ -514,26 +501,26 @@ public class Signlink implements Runnable {
 
     /**
      * Extracts the libs from the client resources
-     * @param archive deprecated - used to point to the cache archive for the lib, now indicates OS|Architecture "hash"
+     * @param os The OS in use: windows, macppc, or linux
      * @return an array of the created filenames to load.
      * @author Ceikry
      */
-    public String[] createLibs(int archive) throws Throwable {
+    public String[] createLibs(String os) throws Throwable {
         ArrayList<String> filenames = new ArrayList<>();
         String jogl;
         String awt;
         String glueGen = "";
         boolean isGluegenRequired = false;
         boolean is64Bit = osArchitecture.contains("64");
-        boolean isWindowsOrMac = archive < 4;
+        boolean isWindowsOrMac = os.equals("macppc") || os.equals("windows");
 
-        jogl = (archive < 2 ? "jogl" : "libjogl") +
-               (is64Bit ? "_64" : "_32") +
-               (archive < 2 ? ".dll" : archive < 4 ? ".jnilib" : ".so");
+        String fileExtension = os.equals("windows") ? ".dll" : os.equals("macppc") ? ".jnilib" : ".so";
 
-        awt = (archive < 2 ? "jogl_awt" : "libjogl_awt") +
-              (is64Bit ? "_64" : "_32") +
-              (archive < 2 ? ".dll" : archive < 4 ? ".jnilib" : ".so");
+        jogl = (os.equals("windows") ? "jogl" : "libjogl") +
+               (is64Bit ? "_64" : "_32") + fileExtension;
+
+        awt = (os.equals("windows") ? "jogl_awt" : "libjogl_awt") +
+              (is64Bit ? "_64" : "_32") + fileExtension;
 
         if(!isWindowsOrMac) isGluegenRequired = true;
         if(isGluegenRequired) glueGen = "libgluegen-rt_" + (is64Bit ? "64" : "32") + ".so";
