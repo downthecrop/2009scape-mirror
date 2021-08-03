@@ -407,8 +407,8 @@ public class Signlink implements Runnable {
                             } else if (osName.startsWith("mac")) {
                                 String[] libs = createLibs(is64Bit ? 2 : 3);
                                 try {
-                                    var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, libs[0]).toString());
-                                    var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, libs[1]).toString());
+                                    var7.invoke(runtime, var1.anObject977, libs[0]);
+                                    var7.invoke(runtime, var1.anObject977, libs[1]);
                                 } catch (Exception e) {
                                     e.printStackTrace();
                                 }
@@ -419,8 +419,8 @@ public class Signlink implements Runnable {
                                 }
                                 String[] libs = createLibs(is64Bit ? 1 : 0);
 //                                System.out.println("Trying to invoke libs");
-                                var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, libs[0]).toString());
-                                var7.invoke(runtime, var1.anObject977, method1448(this.gameName, this.anInt1215, libs[1]).toString());
+                                var7.invoke(runtime, var1.anObject977, libs[0]);
+                                var7.invoke(runtime, var1.anObject977, libs[1]);
                             }
 
                             var7.setAccessible(false);
