@@ -391,6 +391,7 @@ public class Signlink implements Runnable {
                                 libLoaderMethod.setAccessible(false);
                             }
 
+                            boolean is64Bit = osArchitecture.contains("64");
                             boolean isSunOS = osName.startsWith("sunos");
                             //load0 is a reflection-based package-private method in Runtime. Not sure why jagex used this, but it's fucky.
                             libLoaderMethod = Class.forName("java.lang.Runtime").getDeclaredMethod("load0", declaredMethodFields);
@@ -412,16 +413,8 @@ public class Signlink implements Runnable {
                                 DRIHack.end();
                                 libLoaderMethod.invoke(runtime, clientClass, libs[1]);
                             } else {
-                                String[] libs;
-                                if(osName.startsWith("mac")){
-                                    if(!osArchitecture.equals("ppc")){
-                                        libs = createLibs("macx86");
-                                    } else {
-                                        libs = createLibs("macppc");
-                                    }
-                                } else {
-                                    libs = createLibs("windows");
-                                }
+                                if(osName.startsWith("mac") && !osArchitecture.equals("ppc")) throw new Exception(); //We only have ppc libs for mac.
+                                String[] libs = createLibs(osName.contains("win") ? "windows" : "macppc");
                                 //Windows has to load them this way because temporary files are illegal.
                                 String jogl = getFileFromCacheFolder(this.gameName, this.cacheSubrevisionNum, libs[0]).toString();
                                 String awt = getFileFromCacheFolder(this.gameName, this.cacheSubrevisionNum, libs[1]).toString();
@@ -521,12 +514,13 @@ public class Signlink implements Runnable {
         boolean is64Bit = osArchitecture.contains("64");
         boolean isWindowsOrMac = os.equals("macppc") || os.equals("windows");
 
-        String fileExtension = os.equals("windows") ? ".dll" : (os.equals("macppc") || os.equals("macx86")) ? ".jnilib" : ".so";
-        String platformExt = os.equals("macx86") ? "" : (is64Bit ? "_64" : "_32") + fileExtension;
+        String fileExtension = os.equals("windows") ? ".dll" : os.equals("macppc") ? ".jnilib" : ".so";
 
-        jogl = (os.equals("windows") ? "jogl" : "libjogl") + platformExt;
+        jogl = (os.equals("windows") ? "jogl" : "libjogl") +
+                (is64Bit ? "_64" : "_32") + fileExtension;
 
-        awt = (os.equals("windows") ? "jogl_awt" : "libjogl_awt") + platformExt;
+        awt = (os.equals("windows") ? "jogl_awt" : "libjogl_awt") +
+                (is64Bit ? "_64" : "_32") + fileExtension;
 
         if(!isWindowsOrMac) isGluegenRequired = true;
         if(isGluegenRequired) glueGen = "libgluegen-rt_" + (is64Bit ? "64" : "32") + ".so";
