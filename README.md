@@ -69,16 +69,16 @@ In the current climate of RSPS in general, we believe it's important to wear our
 
 There are many ways everyone can contribute! From the most seasoned programmers to those who do not have the most remote clue how code works! Below are some things that can always use some love from the community.
 
-* Wiki Editors: Did you know we have a wiki? Well it's always in need of people to fill it out and stay on top of it. Editing the wiki is one of the easiest ways you can contribute to 2009scape! If you're an active player and have the will, there's so much you could be helping out with over at the wiki. <a href="http://play.2009scape.org/wiki">Click here to go to the wiki.</a>
+* **Wiki Editors**: Did you know we have a wiki? Well it's always in need of people to fill it out and stay on top of it. Editing the wiki is one of the easiest ways you can contribute to 2009scape! If you're an active player and have the will, there's so much you could be helping out with over at the wiki. <a href="http://play.2009scape.org/wiki">Click here to go to the wiki.</a>
 
 
-* JSON editors: Did you know that the vast majority of our drop tables, stats, examines, item info, npc info, etc is all stored in a very easy-to-modify format called JSON? This is something almost anyone can help with, especially with the tool made by Ceikry to make it simple and streamlined. If you want to know what can be done to help here, get in touch in the development channel in the discord! **JSON editors are always in need and always appreciated!!**.
+* **JSON editors**: Did you know that the vast majority of our drop tables, stats, examines, item info, npc info, etc is all stored in a very easy-to-modify format called JSON? This is something almost anyone can help with, especially with the tool made by Ceikry to make it simple and streamlined. If you want to know what can be done to help here, get in touch in the development channel in the discord! **JSON editors are always in need and always appreciated!!**.
 
 
-* Auditors: As a remake, authenticity is central to our core values! We could always use someone to go through the game and create large lists of simple tasks that can be done to bring us closer to the authentic 2009 game! The preferred way to do this is one-area-at-a-time. If you want to see an example of some audits we've done in the past, take a look <a href="https://gitlab.com/2009scape/2009scape/-/issues/46">here.</a>
+* **Auditors**: As a remake, authenticity is central to our core values! We could always use someone to go through the game and create large lists of simple tasks that can be done to bring us closer to the authentic 2009 game! The preferred way to do this is one-area-at-a-time. If you want to see an example of some audits we've done in the past, take a look <a href="https://gitlab.com/2009scape/2009scape/-/issues/46">here.</a>
 
 
-* Content Developers: As a remake, we have massive amounts of content that need to be implemented or corrected. If you know how to program or are willing to learn, this is where you could be extremely helpful! We need everything from quests to dialogue to minigames to skills that still need to be corrected or implemented, and this is perhaps one of the most valuable ways someone could help out the project! If you are interested in developing content, reach out in the development channel of the Discord.
+* **Content Developers**: As a remake, we have massive amounts of content that need to be implemented or corrected. If you know how to program or are willing to learn, this is where you could be extremely helpful! We need everything from quests to dialogue to minigames to skills that still need to be corrected or implemented, and this is perhaps one of the most valuable ways someone could help out the project! If you are interested in developing content, reach out in the development channel of the Discord.
 
 ## Content Developers: Setting Up the Project.
 ### Github Setup
