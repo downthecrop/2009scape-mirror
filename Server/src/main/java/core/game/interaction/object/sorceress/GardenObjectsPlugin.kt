@@ -478,6 +478,7 @@ class GardenObjectsPlugin : InteractionListener() {
      * @author SonicForce41
      * @date 31/12/2013
      */
+    @Initializable
     class OsmanDialogue : DialoguePlugin {
         /**
          * Represents the quest instance.
@@ -538,10 +539,7 @@ class GardenObjectsPlugin : InteractionListener() {
                 20 -> {
                     if (!player.getInventory().containsItem(KEY_PRINT)) {
                         interpreter.sendDialogues(player, null, "Can you tell me what I need to get?")
-                    } else if (!player.getInventory().containsItem(BRONZE_BAR) && player.getInventory().containsItem(
-                            KEY_PRINT
-                        )
-                    ) {
+                    } else if (!player.getInventory().containsItem(BRONZE_BAR) && player.getInventory().containsItem(KEY_PRINT)) {
                         interpreter.sendDialogues(
                             npc,
                             null,
