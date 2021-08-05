@@ -8,6 +8,7 @@ import core.game.node.entity.skill.Skills;
 import core.tools.RandomFunction;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
+import rs09.game.node.entity.skill.slayer.SlayerFlags;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -26,44 +27,9 @@ public final class SlayerManager {
 	private final Player player;
 
 	/**
-	 * The current slayer master used.
+	 * The player's slayer flags
 	 */
-	private Master master;
-
-	/**
-	 * The current task.
-	 */
-	private Tasks task;
-
-	/**
-	 * The amount of the hunted killed.
-	 */
-	private int amount;
-
-	/**
-	 * The slayer points.
-	 */
-	private int slayerPoints;
-
-	/**
-	 * The task streak.
-	 */
-	private int taskCount;
-
-	/**
-	 * Total tasks completed
-	 */
-	private int taskTotal;
-
-	/**
-	 * The learned rewards.
-	 */
-	private final boolean[] learned = new boolean[3];
-
-	/**
-	 * The removed tasks.
-	 */
-	private final List<Tasks> removed = new ArrayList<>(4);
+	public final SlayerFlags flags;
 
 	/**
 	 * Constructs a new {@Code SlayerManager} {@Code Object}
@@ -71,37 +37,66 @@ public final class SlayerManager {
 	 */
 	public SlayerManager(Player player) {
 		this.player = player;
+		this.flags = new SlayerFlags(player);
 	}
-
-	/**
-	 * If the player can earn points (taskTotal > 4)
-	 */
-	private boolean canEarnPoints = false;
 
 	public void parse(JSONObject slayerData){
 		Object m = slayerData.get("master");
-		if(m != null)
-			this.master = Master.forId(Integer.parseInt(m.toString()));
+		if(m != null) {
+			flags.setMaster(Master.forId(Integer.parseInt(m.toString())));
+		}
 		Object t = slayerData.get("taskId");
 		if(t != null)
-			task = Tasks.values()[Integer.parseInt(t.toString())];
+			flags.setTask(Tasks.values()[Integer.parseInt(t.toString())]);
 		Object a = slayerData.get("taskAmount");
 		if(a != null)
-			amount = Integer.parseInt(a.toString());
-		slayerPoints = Integer.parseInt( slayerData.get("points").toString());
-		taskCount = Integer.parseInt( slayerData.get("taskStreak").toString());
-		JSONArray learnedArray = (JSONArray) slayerData.get("learned_rewards");
-		for(int i = 0; i < learnedArray.size(); i++){
-			learned[i] = (boolean) learnedArray.get(i);
- 		}
+			flags.setTaskAmount(Integer.parseInt(a.toString()));
+		Object points = slayerData.get("points");
+		if(points != null){
+			flags.setPoints(Integer.parseInt(points.toString()));
+		}
+		Object taskStreak = slayerData.get("taskStreak");
+		if(taskStreak != null){
+			flags.setTaskStreak(Integer.parseInt(taskStreak.toString()));
+		}
+		Object la = slayerData.get("learned_rewards");
+		if(la != null) {
+			JSONArray learnedArray = (JSONArray) slayerData.get("learned_rewards");
+			for (int i = 0; i < learnedArray.size(); i++) {
+				boolean unlocked = (boolean) learnedArray.get(i);
+				switch(i){
+					case 0:
+						if(unlocked) flags.unlockBroads();
+						break;
+					case 1:
+						if(unlocked) flags.unlockRing();
+						break;
+					case 2:
+						if(unlocked) flags.unlockHelm();
+						break;
+					default:
+						break;
+				}
+			}
+		}
 		JSONArray removedTasks = (JSONArray) slayerData.get("removedTasks");
 		if(removedTasks != null){
 			for(int i = 0; i < removedTasks.size(); i++){
-				removed.add(Tasks.values()[Integer.parseInt(removedTasks.get(i).toString())]);
+				flags.getRemoved().add(Tasks.values()[Integer.parseInt(removedTasks.get(i).toString())]);
 			}
 		}
-		taskTotal = Integer.parseInt( slayerData.get("totalTasks").toString());
-		canEarnPoints = (boolean) slayerData.get("canEarnPoints");
+		Object completedTasks = slayerData.get("totalTasks").toString();
+		if(completedTasks != null) flags.setCompletedTasks(Integer.parseInt(completedTasks.toString()));
+		if(flags.getCompletedTasks() >= 4) flags.flagCanEarnPoints();
+
+		//New system parsing
+		if(slayerData.containsKey("equipmentFlags"))
+			flags.setEquipmentFlags(Integer.parseInt(slayerData.get("equipmentFlags").toString()));
+		if(slayerData.containsKey("taskFlags"))
+			flags.setTaskFlags(Integer.parseInt(slayerData.get("taskFlags").toString()));
+		if(slayerData.containsKey("rewardFlags"))
+			flags.setRewardFlags(Integer.parseInt(slayerData.get("rewardFlags").toString()));
+
 	}
 
 	/**
@@ -114,25 +109,25 @@ public final class SlayerManager {
 		decrementAmount(1);
 		if (!hasTask()) {
 			clear();
-			taskCount++;
-			taskTotal++;
-			if ((taskCount > 4 || canEarnPoints ) && master != Master.TURAEL && slayerPoints < 64000) {
-				int points = master.getTaskPoints()[0];
-				if (taskCount % 10 == 0) {
-					points = master.getTaskPoints()[1];
-				} else if (taskCount % 50 == 0) {
-					points = master.getTaskPoints()[2];
+			flags.setTaskStreak(flags.getTaskStreak() + 1);
+			flags.setCompletedTasks(flags.getCompletedTasks() + 1);
+			if ((flags.getCompletedTasks() > 4 || flags.canEarnPoints() ) && flags.getMaster() != Master.TURAEL && flags.getPoints() < 64000) {
+				int points = flags.getMaster().getTaskPoints()[0];
+				if (flags.getTaskStreak() % 10 == 0) {
+					points = flags.getMaster().getTaskPoints()[1];
+				} else if (flags.getTaskStreak() % 50 == 0) {
+					points = flags.getMaster().getTaskPoints()[2];
 				}
-				slayerPoints += points;
-				if (slayerPoints > 64000) {
-					slayerPoints = 64000;
+				flags.incrementPoints(points);
+				if (flags.getPoints() > 64000) {
+					flags.setPoints(64000);
 				}
-				player.sendMessages("You've completed " + taskCount + " tasks in a row and received " + points + " points, with a total of " + player.getSlayer().getSlayerPoints(),"You have completed " + taskTotal + " tasks in total. Return to a Slayer master.");
-			} else if(taskCount == 4){
+				player.sendMessages("You've completed " + flags.getTaskStreak() + " tasks in a row and received " + points + " points, with a total of " + flags.getPoints(),"You have completed " + flags.getCompletedTasks() + " tasks in total. Return to a Slayer master.");
+			} else if(flags.getCompletedTasks() == 4){
 				player.sendMessage("You've completed your task; you will start gaining points on your next task!");
-				canEarnPoints = true;
+				flags.flagCanEarnPoints();
 			} else {
-				player.sendMessages("You've completed your task; Complete " + (4 - taskCount) + " more task(s) to start gaining points.", "Return to a Slayer master.");
+				player.sendMessages("You've completed your task; Complete " + (4 - flags.getCompletedTasks()) + " more task(s) to start gaining points.", "Return to a Slayer master.");
 			}
 		} else {
 			//player.sendMessage("You're assigned to kill " + NPCDefinition.forId((player.getSlayer().getTask().getNpcs()[0])).getName().toLowerCase() + "s; Only " + getAmount() + " more to go.");
@@ -153,8 +148,7 @@ public final class SlayerManager {
 		} else if (master == Master.VANNAKA) {
 			player.getAchievementDiaryManager().finishTask(player, DiaryType.VARROCK, 1, 14);
 		}
-		getPlayer().varpManager.get(2502).setVarbit(1,task.ordinal());
-		getPlayer().varpManager.get(2502).setVarbit(8,getAmount()).send(player);
+		getPlayer().varpManager.get(2502).setVarbit(0, flags.getTaskFlags() >> 4).send(player);
 	}
 
 	/**
@@ -178,14 +172,13 @@ public final class SlayerManager {
 	}
 
 	public boolean canBeAssigned(Tasks task){
-		return player.getSkills().getLevel(Skills.SLAYER) >= task.levelReq && !removed.contains(task);
+		return player.getSkills().getLevel(Skills.SLAYER) >= task.levelReq && !flags.getRemoved().contains(task);
 	}
 
 	/**
 	 * Clears the task.
 	 */
 	public void clear() {
-		setTask(null);
 		setAmount(0);
 	}
 
@@ -203,14 +196,12 @@ public final class SlayerManager {
 	 * @return the name.
 	 */
 	public String getTaskName() {
-		if (task == null) {
-			return "null";
-		}
+		Tasks task = flags.getTask();
 		if (task.getNpcs() == null) {
 			return "no npcs report me";
 		}
 		if (task.getNpcs().length < 1) {
-			return "npc length to small report me";
+			return "npc length too small report me";
 		}
 		return NPCDefinition.forId(task.getNpcs()[0]).getName().toLowerCase();
 	}
@@ -220,15 +211,15 @@ public final class SlayerManager {
 	 * @return The task.
 	 */
 	public Tasks getTask() {
-		return task;
+		return flags.getTask();
 	}
 
 	/**
 	 * Sets the task.
 	 * @param task The task to set.
 	 */
-	public void setTask(Tasks task) {
-		this.task = task;
+	public void setTask(Tasks task){
+		flags.setTask(task);
 	}
 
 	/**
@@ -244,7 +235,7 @@ public final class SlayerManager {
 	 * @return The master.
 	 */
 	public Master getMaster() {
-		return master;
+		return flags.getMaster();
 	}
 
 	/**
@@ -252,7 +243,7 @@ public final class SlayerManager {
 	 * @param master The master to set.
 	 */
 	public void setMaster(Master master) {
-		this.master = master;
+		flags.setMaster(master);
 	}
 
 	/**
@@ -260,13 +251,7 @@ public final class SlayerManager {
 	 * @return {@code True} if so.
 	 */
 	public boolean hasTask() {
-		if (task == null) {
-			return false;
-		}
-		if (getAmount() == 0) {
-			return false;
-		}
-		return true;
+		return getAmount() != 0;
 	}
 
 	/**
@@ -274,7 +259,7 @@ public final class SlayerManager {
 	 * @return <code>True</code> if so.
 	 */
 	public boolean isCompleted() {
-		return amount <= 0;
+		return flags.getTaskAmount() <= 0;
 	}
 
 	/**
@@ -282,7 +267,7 @@ public final class SlayerManager {
 	 * @return The amount.
 	 */
 	public int getAmount() {
-		return amount;
+		return flags.getTaskAmount();
 	}
 
 	/**
@@ -290,7 +275,7 @@ public final class SlayerManager {
 	 * @param amount The amount to set.
 	 */
 	public void setAmount(int amount) {
-		this.amount = amount;
+		flags.setTaskAmount(amount);
 	}
 
 	/**
@@ -298,10 +283,8 @@ public final class SlayerManager {
 	 * @param amount the amount.
 	 */
 	public void decrementAmount(int amount) {
-		this.amount -= amount;
-		if(player.varpManager.get(2502).getVarbit(1) == null) player.varpManager.get(2502).setVarbit(1,task.ordinal());
-		player.varpManager.get(2502).setVarbit(8,getAmount());
-		player.varpManager.get(2502).send(player);
+		flags.decrementTaskAmount(amount);
+		player.varpManager.get(2502).setVarbit(0, flags.getTaskFlags() >> 4).send(player);
 	}
 
 	/**
@@ -309,7 +292,7 @@ public final class SlayerManager {
 	 * @return {@code True} if so.
 	 */
 	public boolean hasStarted() {
-		return master != null;
+		return flags.getCompletedTasks() > 0 || flags.getTaskAmount() > 0;
 	}
 
 	/**
@@ -317,7 +300,7 @@ public final class SlayerManager {
 	 * @return the slayerPoints.
 	 */
 	public int getSlayerPoints() {
-		return slayerPoints;
+		return flags.getPoints();
 	}
 
 	/**
@@ -325,7 +308,7 @@ public final class SlayerManager {
 	 * @param slayerPoints the slayerPoints to set
 	 */
 	public void setSlayerPoints(int slayerPoints) {
-		this.slayerPoints = slayerPoints;
+		flags.setPoints(slayerPoints);
 	}
 
 	/**
@@ -333,7 +316,7 @@ public final class SlayerManager {
 	 * @return the taskCount.
 	 */
 	public int getTaskCount() {
-		return taskCount;
+		return flags.getTaskStreak();
 	}
 
 	/**
@@ -341,15 +324,7 @@ public final class SlayerManager {
 	 * @param taskCount the taskCount to set
 	 */
 	public void setTaskCount(int taskCount) {
-		this.taskCount = taskCount;
-	}
-
-	/**
-	 * Gets the learned.
-	 * @return the learned.
-	 */
-	public boolean[] getLearned() {
-		return learned;
+		flags.setTaskStreak(taskCount);
 	}
 
 	/**
@@ -357,13 +332,13 @@ public final class SlayerManager {
 	 * @return the removed.
 	 */
 	public List<Tasks> getRemoved() {
-		return removed;
+		return flags.getRemoved();
 	}
 
-	public int getTotalTasks() {return taskTotal;}
+	public int getTotalTasks() {return flags.getCompletedTasks();}
 
 	public boolean isCanEarnPoints(){
-		return canEarnPoints;
+		return flags.canEarnPoints();
 	}
 
 }

@@ -63,6 +63,7 @@ object ServerStore {
         }
     }
 
+    @JvmStatic
     fun getArchive(name: String): JSONObject {
         if(fileMap[name] == null){
             fileMap[name] = JSONObject()
@@ -87,6 +88,7 @@ object ServerStore {
         }
     }
 
+    @JvmStatic
     fun JSONObject.getInt(key: String): Int {
         return when(val value = this[key]){
             is Long -> value.toInt()

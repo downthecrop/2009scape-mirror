@@ -8,6 +8,7 @@ import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.entity.player.link.grave.GraveType
 import core.game.node.entity.player.link.music.MusicEntry
+import core.game.node.entity.skill.slayer.SlayerEquipmentFlags
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.simple.JSONArray

@@ -15,10 +15,13 @@ import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
+import core.game.node.entity.skill.slayer.SlayerEquipmentFlags
 import core.game.node.entity.state.EntityState
 import core.game.world.map.path.Pathfinder
 import core.tools.RandomFunction
 import rs09.game.node.entity.combat.CombatSwingHandler
+import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks
+import kotlin.math.ceil
 import kotlin.math.floor
 
 /**
@@ -148,16 +151,15 @@ open class MeleeSwingHandler
         effectiveAttackLevel = floor(effectiveAttackLevel)
         effectiveAttackLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
 
-        val helmetName = (if(entity is Player) ContentAPI.getItemFromEquipment(entity, EquipmentSlot.HAT)?.name ?: "null" else "null").toLowerCase()
         val amuletName = (if(entity is Player) ContentAPI.getItemFromEquipment(entity, EquipmentSlot.AMULET)?.name ?: "null" else "null").toLowerCase()
         val victimName = entity.properties.combatPulse.getVictim()?.name ?: "none"
 
-        if (entity is Player //Slayer helm/ black mask
-            && (helmetName.contains("black mask") || helmetName.contains("slayer helm"))
-            && entity.slayer.task?.ids?.contains((entity.properties.combatPulse.getVictim()?.id ?: 0)) == true
-        ) {
-            effectiveAttackLevel *= 1.2
+        if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.PRECISION_STRIKES, entity)){ //Attack skillcape perk
+            effectiveAttackLevel += 6
         }
+
+        if(entity is Player && entity.slayer.task?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true)
+            effectiveAttackLevel *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer Helm/ Black Mask/ Slayer cape
 
         else if (entity is Player //Salve amulet
             && (amuletName.contains("salve"))
@@ -171,7 +173,7 @@ open class MeleeSwingHandler
 
     override fun calculateHit(entity: Entity?, victim: Entity?, modifier: Double): Int {
         val level = entity!!.skills.getLevel(Skills.STRENGTH)
-        val bonus = entity.properties.bonuses[11]
+        var bonus = entity.properties.bonuses[11]
         var prayer = 1.0
         if (entity is Player) {
             prayer += entity.prayer.getSkillBonus(Skills.STRENGTH)
@@ -182,7 +184,16 @@ open class MeleeSwingHandler
         } else if (entity.properties.attackStyle.style == WeaponInterface.STYLE_CONTROLLED) {
             cumulativeStr += 1.0
         }
+
+        //Strength skillcape perk
+        if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.FINE_ATTUNEMENT, entity) && ContentAPI.getItemFromEquipment(entity, EquipmentSlot.WEAPON)?.definition?.getRequirement(Skills.STRENGTH) != 0)
+            bonus = ceil(bonus * 1.20).toInt()
+
         cumulativeStr *= getSetMultiplier(entity, Skills.STRENGTH)
+
+        if(entity is Player && entity.slayer.task?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true)
+            cumulativeStr *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer helm/black mask/skillcape
+
         /*val hit = (16 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier
         return (hit / 10).toInt() + 1*/
         return (1.3 + (cumulativeStr / 10) + (bonus / 80) + ((cumulativeStr * bonus) / 640)).toInt()
