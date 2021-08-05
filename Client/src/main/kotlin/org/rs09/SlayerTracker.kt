@@ -13,7 +13,7 @@ object SlayerTracker {
     const val textX = 7
     const val textY = 50
     const val spriteY = 30
-    val boxColor = GameConfig.slayerTrackerColor.toInt(16)
+    val boxColor = GameConfig.slayerTrackerColor.toIntOrNull(16) ?: 6116423
 
     @JvmField
     var lastUpdate = 0L
