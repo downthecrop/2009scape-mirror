@@ -146,6 +146,7 @@ class GameConfig {
         @JvmStatic
         fun setSlayerAmount(amount : Int){
             slayerTaskAmount = amount
+            if(slayerTaskAmount < 0) slayerTaskAmount = 0
             SlayerTracker.lastUpdate = System.currentTimeMillis()
         }
 

@@ -25,7 +25,7 @@ object SlayerTracker {
     fun draw(){
         val timeSinceUpdate = System.currentTimeMillis() - lastUpdate
         if(!GameConfig.slayerCountEnabled) return
-        if(GameConfig.slayerTaskAmount == 0) return
+        if(GameConfig.slayerTaskAmount <= 0) return
         if(timeSinceUpdate >= TimeUnit.MINUTES.toMillis(5L)) return
         val tk = Toolkit.getActiveToolkit()
         var rectWidth = 60
