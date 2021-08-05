@@ -16,6 +16,8 @@ import org.rs09.consts.Items
 @Initializable
 class CropHarvester : OptionHandler() {
 
+    val livesBased = arrayOf(PatchType.HERB, PatchType.CACTUS, PatchType.BELLADONNA, PatchType.HOPS, PatchType.ALLOTMENT,PatchType.EVIL_TURNIP)
+
     val spadeAnim = Animation(830)
 
     override fun newInstance(arg: Any?): Plugin<Any> {
@@ -67,8 +69,18 @@ class CropHarvester : OptionHandler() {
                 delay = 2
                 player.inventory.add(Item(plantable.harvestItem,1))
                 player.skills.addExperience(Skills.FARMING,plantable.harvestXP)
-                patch.rollLivesDecrement(ContentAPI.getDynLevel(player, Skills.FARMING), requiredItem == Items.MAGIC_SECATEURS_7409)
-                return patch.cropLives <= 0
+                if(patch.patch.type in livesBased){
+                    patch.rollLivesDecrement(
+                        ContentAPI.getDynLevel(player, Skills.FARMING),
+                        requiredItem == Items.MAGIC_SECATEURS_7409
+                    )
+                } else {
+                    patch.harvestAmt--
+                    if(patch.harvestAmt <= 0){
+                        patch.clear()
+                    }
+                }
+                return patch.cropLives <= 0 || patch.harvestAmt <= 0
             }
         })
 

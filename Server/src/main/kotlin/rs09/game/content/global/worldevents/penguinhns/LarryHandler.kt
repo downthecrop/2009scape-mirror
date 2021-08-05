@@ -1,5 +1,6 @@
 package rs09.game.content.global.worldevents.penguinhns
 
+import api.ContentAPI
 import core.game.component.Component
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
@@ -68,19 +69,19 @@ class LarryHandler(player: Player? = null) : DialoguePlugin(player){
         return true
     }
 
-    override fun handleSelectionCallback(skill: Int, player: Player?) {
-        val points = player?.getAttribute("phns:points",0)
+    override fun handleSelectionCallback(skill: Int, player: Player) {
+        val points = player.getAttribute("phns:points",0)
         if(points == 0){
             player.sendMessage("Sorry, but you have no points to redeem.")
             return
         }
 
-        val level = player?.skills?.getLevel(skill) ?: 0
+        val level = ContentAPI.getStatLevel(player, skill)
         System.out.println("Level: $level")
         val expGained = points?.toDouble()?.times((level * 25))
         System.out.print("exp: $expGained")
-        player?.skills?.addExperience(skill,expGained!!)
-        player?.setAttribute("/save:phns:points",0)
+        player.skills.addExperience(skill,expGained!!)
+        player.setAttribute("/save:phns:points",0)
     }
 
     override fun getIds(): IntArray {

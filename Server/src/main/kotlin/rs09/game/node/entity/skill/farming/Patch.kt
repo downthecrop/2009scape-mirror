@@ -16,6 +16,10 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     var cropLives = 3
 
     fun setNewHarvestAmount() {
+        harvestAmt = when (plantable) {
+            Plantable.LIMPWURT_SEED, Plantable.WOAD_SEED -> 3
+            else -> 1
+        }
         cropLives = 3
     }
 

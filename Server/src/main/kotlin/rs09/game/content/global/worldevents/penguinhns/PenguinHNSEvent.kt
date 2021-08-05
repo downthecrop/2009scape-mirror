@@ -25,7 +25,6 @@ class PenguinHNSEvent : WorldEvent("penguin-hns"){
         plugins = PluginSet(
                 LarryHandler(),
                 NotebookHandler(),
-                PenguinSpyingHandler()
         )
         super.initialize()
         fireEvent()

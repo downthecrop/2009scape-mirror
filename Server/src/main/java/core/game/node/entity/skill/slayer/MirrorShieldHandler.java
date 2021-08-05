@@ -60,7 +60,7 @@ public final class MirrorShieldHandler extends MeleeSwingHandler {
 	 * @return {@code True} if so.
 	 */
 	private static boolean hasShield(final Player player) {
-		return Equipment.MIRROR_SHIELD.hasEquipment(player);
+		return SlayerEquipmentFlags.hasMirrorShield(player);
 	}
 
 }

@@ -63,6 +63,14 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
             player.dialogueInterpreter.sendDialogue("Your cape is still on cooldown.","Ready in " + java.util.concurrent.TimeUnit.MILLISECONDS.toMinutes(time - System.currentTimeMillis()) + " minutes.")
         }
     }),
+    TRICKS_OF_THE_TRADE("cape_perks:tott",{player ->
+        val hasHelmetBonus = api.ContentAPI.getAttribute(player, "cape_perks:tott:helmet-stored", false)
+        if(hasHelmetBonus){
+            api.ContentAPI.sendDialogue(player, "Your cape's pockets are lined with all the utilities you need for slayer.")
+        } else {
+            api.ContentAPI.sendDialogue(player, "Your cape is lined with empty pockets shaped like various utilities needed for slayer.")
+        }
+    }),
     NONE("cape_perks:none")
     ;
 
@@ -87,7 +95,7 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
                 Skillcape.THIEVING -> NONE
                 Skillcape.CRAFTING -> NONE
                 Skillcape.FLETCHING -> NONE
-                Skillcape.SLAYER -> NONE
+                Skillcape.SLAYER -> TRICKS_OF_THE_TRADE
                 Skillcape.CONSTRUCTION -> NONE
                 Skillcape.MINING -> PRECISION_MINER
                 Skillcape.SMITHING -> BAREFISTED_SMITHING
