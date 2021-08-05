@@ -31,8 +31,8 @@
   * [Github Setup](#github-setup)
   * [Prerequisites](#prerequisites)
   * [Prereq Installation](#prereq-installation)
-* [Project Setup](#project-setup)
-* [Running the project](#running-the-project)
+  * [Project Setup](#project-setup)
+  * [Running the project](#running-the-project)
 * [License](#license)
 * [Contact](#contact)
 
