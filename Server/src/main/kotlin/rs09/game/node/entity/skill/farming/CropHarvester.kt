@@ -76,6 +76,9 @@ class CropHarvester : OptionHandler() {
                     )
                 } else {
                     patch.harvestAmt--
+                    if(patch.harvestAmt <= 0){
+                        patch.clear()
+                    }
                 }
                 return patch.cropLives <= 0 || patch.harvestAmt <= 0
             }
