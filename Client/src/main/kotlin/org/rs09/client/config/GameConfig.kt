@@ -129,6 +129,12 @@ class GameConfig {
         var slayerCountEnabled = true
 
         @JvmField
+        var slayerTrackerColor = "#635a38"
+
+        @JvmField
+        var slayerTrackerOpacity = 180
+
+        @JvmField
         var slayerTaskID = 0
 
         @JvmField
@@ -198,6 +204,21 @@ class GameConfig {
                         if(style.containsKey("rs3border")) RS3_CONTEXT_STYLE = style["rs3border"] as Boolean
                     }
                 }
+
+                if(custom.containsKey("xpdrops")){
+                    val xpd = custom["xpdrops"] as JSONObject
+                    if(xpd.containsKey("enabled")) xpDropsEnabled = xpd["enabled"] as Boolean
+                    if(xpd.containsKey("drop_mode")) xpDropMode = xpd["drop_mode"].toString().toInt()
+                    if(xpd.containsKey("track_mode")) xpTrackMode = xpd["track_mode"].toString().toInt()
+                }
+
+                if(custom.containsKey("slayer")){
+                    val slayer = custom["slayer"] as JSONObject
+                    if(slayer.containsKey("enabled")) slayerCountEnabled = slayer["enabled"] as Boolean
+                    if(slayer.containsKey("color")) slayerTrackerColor = slayer["color"].toString()
+                    if(slayer.containsKey("opacity")) slayerTrackerOpacity = slayer["opacity"].toString().toInt()
+                }
+
                 if(custom.containsKey("rendering_options")) {
                     val hdoptions = custom["rendering_options"] as JSONObject
 

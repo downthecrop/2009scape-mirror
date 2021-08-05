@@ -13,7 +13,7 @@ object SlayerTracker {
     const val textX = 7
     const val textY = 50
     const val spriteY = 30
-    val boxColor = "635a38".toInt(16)
+    val boxColor = GameConfig.slayerTrackerColor.toInt(16)
 
     @JvmField
     var lastUpdate = 0L
@@ -32,7 +32,7 @@ object SlayerTracker {
         var amountPos = textX + 40
         if(rectWidth < 90) rectWidth = 90
         if(amountPos < textX + 60) amountPos = textX + 60
-        tk.fillRect(posX,posY,rectWidth,30, boxColor,180)
+        tk.fillRect(posX,posY,rectWidth,30, boxColor,GameConfig.slayerTrackerOpacity)
 
         curSprite?.drawAt(textX, spriteY)
         RenderingUtils.drawText(GameConfig.slayerTaskAmount.toString(),amountPos, textY, -1, 2, false)
