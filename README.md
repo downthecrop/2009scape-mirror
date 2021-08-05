@@ -7,26 +7,24 @@
   </a>
   <h3 align="center">An open source MMORPG emulation server</h3>
 
-  <h1 align="center"><a href="https://github.com/2009scape/2009Scape/releases/latest/download/2009Scape.jar"><strong>Play the live server »</strong></a></h1>
+  <h1 align="center"><a href="https://2009scape.org/"><strong>Play the live server »</strong></a></h1>
   <p align="center">
     <br />
     <br />
-    <a href="https://github.com/2009scape/2009Scape/releases/latest/download/2009Scape.jar">Community Hosted Server</a>
+    <a href="https://2009scape.org/">Community Hosted Server</a>
     ·
     <a href="https://discord.gg/43YPGND">Discord Invite</a>
-    ·    <a href="https://github.com/2009scape/2009Scape/issues">Report Bug</a>
-    ·
-    <a href="https://github.com/2009scape/2009Scape/projects">Bug Board</a>
+    ·    <a href="https://gitlab.com/2009scape/2009scape/-/issues">Report Bug</a>
   </p>
-<h3>NOTE: Do not report issues if you are running your own server. Chances are, the fault lies in your misconfiguration of the server or the issue has already long been fixed on live. Essentially: Your server. Your issues. We have enough to worry about with our own server.</h3>
-<h3>ATTENTION: Starting October 5th, 2020 the development team will no longer be providing support for setting up your own server. Do not ping or private message Developers asking how to build the project. This in-depth guide will be continually updated if the building process changes. We are focusing all of our efforts on the development of features and bugfixes for the live server.</h3>
+<h3>NOTE: Bug reports and support are only accepted by/offered to players of our live hosted server. We will not provide support to those running their own copies.</h3>
 </p>
 
 
 ## Table of Contents
 
 * [Live Server Information](#live-server-information)
-* [About the Project](#about-the-project)
+* [History of this Codebase](#history-of-this-codebase)
+* [Our Core Values](#our-core-values) 
 * [Contributing](#contributing)
 * [Contributing without Building](#contributing-without-building)
 * [Video Setup Tutorial](#video-setup-tutorial)
@@ -42,49 +40,57 @@
 
 ## Live Server Information
 
-Did you know that the 2009Scape Development Team hosts the main branch of this repo that you can connect to and play? Come join a growing community of people that love to grind out skills, quest, and hangout together. A download link for the launcher can be found <a href="https://github.com/2009scape/2009Scape/releases/latest/download/2009Scape.jar"><strong>here.</strong></a> Connecting to the live server is also one of the easiest ways to identify bugs/typos/missing features. Identifying these issues help developers, whether already on the project, or are even brand new to the project, fix bugs and issues in an expedited rate.
+Did you know that the 2009Scape Development Team hosts the main branch of this repo that you can connect to and play? Come join a growing community of people that love to grind out skills, quest, and hangout together. A download link for the launcher can be found <a href="https://2009scape.org"><strong>here.</strong></a> Connecting to the live server is also one of the easiest ways to identify bugs/typos/missing features. Identifying these issues help developers, whether already on the project, or are even brand new to the project, fix bugs and issues in an expedited rate.
 
-## About The Project
+## History of this Codebase
 
 The 2009Scape you see today has gone through a magnitude of changes. Originally starting its life as Arios498, this server saw a lot of people playing it daily, unfortunately, it was for profit and closed source. It was later upgraded to Arios530, targeting the build 530 of runescape with content in and around January 1st, 2009. Development came to a halt when a developer of the closed source project released the source code. The original developers of this server went on to create Kratos 530 back in 2015.
 
-This project was started out of love for the 530 revision. A small group of developers spent hundreds of hours improving on the existing source that was left to the curb. Over the past year, this project has seen many developers coming and going, fixing bugs that they find either through their own server, or bugs that they find in the live game that is currently hosted. We do not accept donations of any kind. The smiles and wonderful compliments are more than enough to keep us going! Content and bugfixes are always number one on our list, and we try our best to answer any questions that you may have, provided you have read through this readme and frequently asked questions on the discord.
+This project was started out of love for the 530 revision. A small group of developers spent thousands of hours improving on the existing source that was left to the curb. Over the past year, this project has seen many developers coming and going, fixing bugs that they find either through their own server, or bugs that they find in the live game that is currently hosted. We do not accept donations of any kind. The smiles and wonderful compliments are more than enough to keep us going! Content and bugfixes are always number one on our list, and we try our best to answer any questions that you may have, provided you have read through this readme and frequently asked questions on the discord.
+
+## Our Core Values
+
+In the current climate of RSPS in general, we believe it's important to wear our core values on our sleeves and defend them with everything we have! Below are what we hold as our core, most important values:
+
+* **We do NOT believe in profiting off RSPS.** To many of us here at the 2009scape team, what we care about most is preserving the wonderful work of the Gower brothers in the most true-to-spirit manner possible. We do NOT do this to make a profit, and in fact **we outright refuse donations.** This is a labor of love and passion for everyone involved, a love for real RS2! This is perhaps the single most central value we have. If you want to "donate" to us, do so with your time and your dedication. That is what we desire most.
+  
+
+* **Authenticity is central to the work**. As a remake, one of the most important things to us is being true to the Gower spirit. What the Gowers brought to us in our childhood is what we are driven to preserve for the remainder of the world. 
+
+
+* **Open Source Is Crucial**. We believe open source remakes to be crucial to preserving what we loved in our childhood, and we believe for-profit and/or closed-source servers are destined to flounder out and fail. 
+
+
+* **Be Welcoming**. One of our most important goals is to provide a community of friendly and caring people that get along and love to enjoy the game with eachother. For this reason, we do tend to be very strict when it comes to toxicity. We care about quality a whole lot more than quantity! 
 
 ## Contributing
 
-<h4>Note: A live server that the 2009Scape development team runs is the best way to find and report bugs! Any changes made should be pushed to the Development Branch, Any changes that are pushed to the main branch will be denied, and you will have to submit another PR request. We are currently in the process of rewriting the codebase in Kotlin. Any new commits should be written in Kotlin Only.</h4>
+<h4>Note: A live server that the 2009Scape development team runs is the best way to find and report bugs! We are currently in the process of rewriting the codebase in Kotlin. Any new commits should be written in Kotlin Only.</h4>
 <h4>More information on Kotlin can be found <a href="https://kotlinlang.org/">here.</a></h4>
 
-We are always looking for fellow helpers and developers to help preserve history and contribute towards making the most complete emulation server! The beautiful part is you don't even have to download and build the project in order to contribute! Want to make simple edits to NPCs, Items, Music, Shops, Typos? Follow the [Contributing-without-Building](#contributing-without-building) guide below!
+There are many ways everyone can contribute! From the most seasoned programmers to those who do not have the most remote clue how code works! Below are some things that can always use some love from the community.
 
-## Contributing without Building
-
-First create a Github account if you do not have one already. Editing the repository directly is one of the easiest ways to contribute to the project. You will start off in the master/main branch. Switch to the **"Development Branch"** by clicking on the drop down menu which is on the left hand side where it says "Branches" and "Tags". Then navigate to the file you wish to change, for example, All definitions are located in **"Server/data/configs/"**. If you were to edit NPCSpawns.json, you would select NPCSpawns.json, and on the right hand side of the window there will be a screen icon, pencil icon, and trashcan icon. Click on the pencil icon to make changes. When you are finished with your changes, ensure you are in **development** by looking at the branch in the top left. Scroll down until you see "propose changes", and fill out the two info bars at the bottom to describe what you changed/fixed. 
-<br>
-**More information on repository file editing can be found <a href="https://docs.github.com/en/free-pro-team@latest/github/managing-files-in-a-repository/editing-files-in-another-users-repository">here.</a>**
-<br>
-<br>
-**Editing files that are too large for Github in-browser editing**
-<br>
-First follow the [Github-Setup](#github-setup). After you have forked over your copy of the repo, swap over to the **Development branch**, and then download the file that you wish to edit. JSON format can be edited in any notepad program, however it is recommended to use either <a href="https://atom.io/">Atom</a> or <a href="https://notepad-plus-plus.org/">Notepad++</a>. After you are finished editing your file, navigate back to the file you wish to replace on your **Development Branch**. Select it and delete it off your branch. Then go back and on the right hand side click on "Add files" and then "Upload new files". Upload the file you are done editing and then submit a Pull request (PR). To submit a PR navigate to "Pull requests" and then click on "New pull request". On the top of the page you should see "Comparing changes". The left set of options is what you will be pushing to and the right side is where you are pushing from. On the right side, put your repo and compare to **Development**, On the left hand side put the repo as 2009scape/2009scape base: **Development**. If at anytime it tries to pull/push into its own repository, click "Compare across forks" and you should be able to select where you want to push to and from. 
-<br>
-**More information about submitting PR's can be found <a href="https://docs.github.com/en/free-pro-team@latest/github/collaborating-with-issues-and-pull-requests/proposing-changes-to-your-work-with-pull-requests">here.</a>**
+* Wiki Editors: Did you know we have a wiki? Well it's always in need of people to fill it out and stay on top of it. Editing the wiki is one of the easiest ways you can contribute to 2009scape! If you're an active player and have the will, there's so much you could be helping out with over at the wiki. <a href="http://play.2009scape.org/wiki">Click here to go to the wiki.</a>
 
 
+* JSON editors: Did you know that the vast majority of our drop tables, stats, examines, item info, npc info, etc is all stored in a very easy-to-modify format called JSON? This is something almost anyone can help with, especially with the tool made by Ceikry to make it simple and streamlined. If you want to know what can be done to help here, get in touch in the development channel in the discord! **JSON editors are always in need and always appreciated!!**.
 
-## Getting Started
 
+* Auditors: As a remake, authenticity is central to our core values! We could always use someone to go through the game and create large lists of simple tasks that can be done to bring us closer to the authentic 2009 game! The preferred way to do this is one-area-at-a-time. If you want to see an example of some audits we've done in the past, take a look <a href="https://gitlab.com/2009scape/2009scape/-/issues/46">here.</a>
+
+
+* Content Developers: As a remake, we have massive amounts of content that need to be implemented or corrected. If you know how to program or are willing to learn, this is where you could be extremely helpful! We need everything from quests to dialogue to minigames to skills that still need to be corrected or implemented, and this is perhaps one of the most valuable ways someone could help out the project! If you are interested in developing content, reach out in the development channel of the Discord.
+
+## Content Developers: Setting Up the Project.
 ### Github Setup
 
 <h4>Note: This allows you to commit changes to the main repo (with approval)! Also, always stay up to date with the most recent updates by pulling into your copy when 2009Scape updates!</h4>
 
-1. Create a github account if you haven't done so already
+1. Create a gitlab account if you haven't done so already
 
-2. Go to the 2009Scape <a href="https://github.com/2009scape/2009Scape">Github Page</a>
+3. Click "Fork" in the top right hand side of our  gitlab page.
 
-3. Click "Fork" in the top right hand side of Github
-
-**If at anytime you have an issue with Github please refer to the** <a href="https://docs.github.com/en/free-pro-team@latest/github">Github help center.</a>
+**If at anytime you have an issue with gitlab please refer to the** <a href="https://gitlab.com/help">Gitlab help center.</a>
 
 
 ### Prerequisites
@@ -92,7 +98,7 @@ First follow the [Github-Setup](#github-setup). After you have forked over your 
 <h4>Note: It is required for a developer submitting a PR to use Intellij IDEA as your integrated development environment.</h4>
 
 * Intellij IDEA
-* Java SE Development Kit Version 1.8
+* Java SE Development Kit Version 1.8/OpenJDK 1.8 (preferred)
 * Gradle (optional - Installs with Intellij on project build)
 * Xampp
 
