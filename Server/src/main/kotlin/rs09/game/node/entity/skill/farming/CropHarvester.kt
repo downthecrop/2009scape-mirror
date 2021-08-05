@@ -16,7 +16,7 @@ import org.rs09.consts.Items
 @Initializable
 class CropHarvester : OptionHandler() {
 
-    val nonLives = arrayOf(PatchType.HERB, PatchType.CACTUS, PatchType.BELLADONNA, PatchType.HOPS, PatchType.ALLOTMENT,PatchType.EVIL_TURNIP)
+    val livesBased = arrayOf(PatchType.HERB, PatchType.CACTUS, PatchType.BELLADONNA, PatchType.HOPS, PatchType.ALLOTMENT,PatchType.EVIL_TURNIP)
 
     val spadeAnim = Animation(830)
 
@@ -69,13 +69,13 @@ class CropHarvester : OptionHandler() {
                 delay = 2
                 player.inventory.add(Item(plantable.harvestItem,1))
                 player.skills.addExperience(Skills.FARMING,plantable.harvestXP)
-                if(patch.patch.type in nonLives){
-                    patch.harvestAmt--
-                } else {
+                if(patch.patch.type in livesBased){
                     patch.rollLivesDecrement(
                         ContentAPI.getDynLevel(player, Skills.FARMING),
                         requiredItem == Items.MAGIC_SECATEURS_7409
                     )
+                } else {
+                    patch.harvestAmt--
                 }
                 return patch.cropLives <= 0 || patch.harvestAmt <= 0
             }
