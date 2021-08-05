@@ -50,20 +50,32 @@ class GameConfig {
         @JvmField
         var RCM_BG_COLOR = 6116423
 
-        @JvmField
+        @JvmStatic
         var RCM_BG_OPACITY  = 255
+            set(value) {
+                if(value > 255 || value < 0) field = 255
+                else field = value
+            }
 
         @JvmField
         var RCM_TITLE_COLOR = 0
 
-        @JvmField
+        @JvmStatic
         var RCM_TITLE_OPACITY = 255
+            set(value) {
+                if(value > 255 || value < 0) field = 255
+                else field = value
+            }
 
         @JvmField
         var RCM_BORDER_COLOR = 0
 
-        @JvmField
+        @JvmStatic
         var RCM_BORDER_OPACITY = 255
+            set(value) {
+                if(value > 255 || value < 0) field = 255
+                else field = value
+            }
 
         @JvmField
         var RCM_TITLE = "<col=0>Choose Option</col>"
@@ -129,6 +141,16 @@ class GameConfig {
         var slayerCountEnabled = true
 
         @JvmField
+        var slayerTrackerColor = "#635a38"
+
+        @JvmStatic
+        var slayerTrackerOpacity = 180
+        set(value) {
+            if(value > 255 || value < 0) field = 255
+            else field = value
+        }
+
+        @JvmField
         var slayerTaskID = 0
 
         @JvmField
@@ -140,6 +162,7 @@ class GameConfig {
         @JvmStatic
         fun setSlayerAmount(amount : Int){
             slayerTaskAmount = amount
+            if(slayerTaskAmount < 0) slayerTaskAmount = 0
             SlayerTracker.lastUpdate = System.currentTimeMillis()
         }
 
@@ -172,7 +195,7 @@ class GameConfig {
                     //background
                     if(rcm.containsKey("background")){
                         val bg = rcm["background"] as JSONObject
-                        if(bg.containsKey("color")) RCM_BG_COLOR = bg["color"].toString().replace("#", "").toInt(16) //convert hex -> deci
+                        if(bg.containsKey("color")) RCM_BG_COLOR = bg["color"].toString().replace("#", "").toIntOrNull(16) ?: 6116423//convert hex -> deci
                         if(bg.containsKey("opacity")) RCM_BG_OPACITY = bg["opacity"].toString().toInt()
                     }
 
@@ -180,14 +203,14 @@ class GameConfig {
                     if(rcm.containsKey("title_bar")){
                         val tb = rcm["title_bar"] as JSONObject
                         if(tb.containsKey("font_color")) RCM_TITLE = RCM_TITLE.replace("0", tb["font_color"].toString().replace("#", ""))
-                        if(tb.containsKey("color")) RCM_TITLE_COLOR = tb["color"].toString().replace("#", "").toInt(16) //convert hex -> deci
+                        if(tb.containsKey("color")) RCM_TITLE_COLOR = tb["color"].toString().replace("#", "").toIntOrNull(16) ?: 6116423//convert hex -> deci
                         if(tb.containsKey("opacity")) RCM_TITLE_OPACITY = tb["opacity"].toString().toInt()
                     }
 
                     //border
                     if(rcm.containsKey("border")){
                         val border = rcm["border"] as JSONObject
-                        if(border.containsKey("color")) RCM_BORDER_COLOR = border["color"].toString().replace("#", "").toInt(16) //convert hex -> deci
+                        if(border.containsKey("color")) RCM_BORDER_COLOR = border["color"].toString().replace("#", "").toIntOrNull(16) ?: 6116423 //convert hex -> deci
                         if(border.containsKey("opacity")) RCM_BORDER_OPACITY = border["opacity"].toString().toInt()
                     }
 
@@ -198,6 +221,21 @@ class GameConfig {
                         if(style.containsKey("rs3border")) RS3_CONTEXT_STYLE = style["rs3border"] as Boolean
                     }
                 }
+
+                if(custom.containsKey("xpdrops")){
+                    val xpd = custom["xpdrops"] as JSONObject
+                    if(xpd.containsKey("enabled")) xpDropsEnabled = xpd["enabled"] as Boolean
+                    if(xpd.containsKey("drop_mode")) xpDropMode = xpd["drop_mode"].toString().toInt()
+                    if(xpd.containsKey("track_mode")) xpTrackMode = xpd["track_mode"].toString().toInt()
+                }
+
+                if(custom.containsKey("slayer")){
+                    val slayer = custom["slayer"] as JSONObject
+                    if(slayer.containsKey("enabled")) slayerCountEnabled = slayer["enabled"] as Boolean
+                    if(slayer.containsKey("color")) slayerTrackerColor = slayer["color"].toString().replace("#", "")
+                    if(slayer.containsKey("opacity")) slayerTrackerOpacity = slayer["opacity"].toString().toInt()
+                }
+
                 if(custom.containsKey("rendering_options")) {
                     val hdoptions = custom["rendering_options"] as JSONObject
 

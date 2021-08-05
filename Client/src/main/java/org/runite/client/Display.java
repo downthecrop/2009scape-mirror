@@ -69,7 +69,7 @@ public class Display {
 
     }
 
-    public void method918(int var1, int var2, int var3, int var4, Frame var5, int var6) {
+    public void configureDisplayMode(int var1, int var2, int var3, int var4, Frame var5, int var6) {
         this.displayMode = this.graphicsDevice.getDisplayMode();
         if (var1 > -6) {
             this.method919(false);
@@ -123,7 +123,7 @@ public class Display {
         }
     }
 
-    public void method920() {
+    public void updateDisplayMode() {
         if (this.displayMode != null) {
             this.graphicsDevice.setDisplayMode(this.displayMode);
             if (!this.graphicsDevice.getDisplayMode().equals(this.displayMode)) {

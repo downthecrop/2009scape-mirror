@@ -6,6 +6,7 @@ import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.diary.DiaryType
+import core.game.node.entity.skill.slayer.SlayerEquipmentFlags
 import core.game.system.task.Pulse
 import core.game.world.map.zone.ZoneBorders
 import core.plugin.Plugin
@@ -78,6 +79,10 @@ class EquipHandler : InteractionListener() {
                 wif.selectAutoSpell(-1, true)
                 wif.openAutocastSelect()
             }
+
+            if(SlayerEquipmentFlags.isSlayerEq(item.id)){
+                SlayerEquipmentFlags.updateFlags(player)
+            }
         }
     }
 
@@ -120,6 +125,10 @@ class EquipHandler : InteractionListener() {
                 player.audioManager.send(Audio(2238, 10, 1))
                 player.dialogueInterpreter.close()
                 player.inventory.add(item)
+            }
+
+            if(SlayerEquipmentFlags.isSlayerEq(item.id)){
+                SlayerEquipmentFlags.updateFlags(player)
             }
         }
     }

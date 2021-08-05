@@ -639,7 +639,10 @@ public class Shop {
         }
         double mod = (maxMod + minMod) / 2;
         SystemLogger.logInfo("" + item.getDefinition().getAlchemyValue(highAlch) + " " + mod + " " + item.getAmount());
-        int value = (int) (item.getDefinition().getAlchemyValue(highAlch) * mod * item.getAmount());
+        int baseValue = item.getDefinition().getAlchemyValue(highAlch);
+        int value = (int) (baseValue * mod * item.getAmount());
+        if(getCurrency() == Items.TOKKUL_6529 && item.getId() == Items.CHAOS_RUNE_562) value = 13;
+        if(getCurrency() == Items.TOKKUL_6529 && item.getId() == Items.DEATH_RUNE_560) value = 27;
         if(item.getId() == 12183){
             value = 25 * item.getAmount();
         }
