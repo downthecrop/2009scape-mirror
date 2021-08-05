@@ -11,13 +11,27 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Plugin
 import core.game.content.quest.PluginInteraction
 import core.game.content.quest.PluginInteractionManager
+import rs09.game.interaction.InteractionListener
 
-class PenguinSpyingHandler : PluginInteraction(8107,8108,8104,8105,8109,8110){
+class PenguinSpyingHandler : InteractionListener(){
 
-    class SpyPulse(val player: Player) : Pulse() {
+    override fun defineListeners() {
+        on(PENGUINS, NPC, "spy-on"){player, node ->
+            val npc = node.asNpc()
+            if(PenguinManager.hasTagged(player, npc.location)){
+                player.sendMessage("You've already tagged this penguin.")
+            } else {
+                GameWorld.submit(SpyPulse(player, npc))
+            }
+            return@on true
+        }
+    }
+
+    val PENGUINS = intArrayOf(8104,8105,8107,8108,8109,8110)
+
+    class SpyPulse(val player: Player, val npc: NPC) : Pulse() {
         var stage = 0
         val curPoints = player.getAttribute("phns:points",0)
-        val weeklyPoints = player.getAttribute("phns:weekly",0)
 
         val ANIMATION = Animation(10355)
 
@@ -26,6 +40,7 @@ class PenguinSpyingHandler : PluginInteraction(8107,8108,8104,8105,8109,8110){
                 0 -> player.lock().also { player.animator.animate(ANIMATION) }
                 1 -> player.sendMessage("You manage to spy on the penguin.").also {
                     player.setAttribute("/save:phns:points",curPoints + 1)
+                    PenguinManager.registerTag(player, npc.location)
                     player.unlock()
                 }
                 2 -> return true
@@ -33,34 +48,4 @@ class PenguinSpyingHandler : PluginInteraction(8107,8108,8104,8105,8109,8110){
             return false
         }
     }
-
-    override fun handle(player: Player?, npc: NPC?, option: Option?): Boolean {
-        class movePulse : MovementPulse(player,DestinationFlag.ENTITY.getDestination(player,npc)){
-            override fun pulse(): Boolean {
-                player.let { player?.face(npc);GameWorld.submit(SpyPulse(player!!)) }
-                return true
-            }
-        }
-        if(option?.name?.toLowerCase()?.equals("spy-on")!!){
-            player ?: return false
-            if(PenguinManager.hasTagged(player, npc!!.location)){
-                player.sendMessage("You've already tagged this penguin.")
-            } else {
-                GameWorld.submit(movePulse())
-                PenguinManager.registerTag(player, npc!!.location)
-            }
-            return true
-        }
-        return false
-    }
-
-    override fun fireEvent(identifier: String?, vararg args: Any?): Any {
-        return Unit
-    }
-
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        PluginInteractionManager.register(this,PluginInteractionManager.InteractionType.NPC)
-        return this
-    }
-
 }
