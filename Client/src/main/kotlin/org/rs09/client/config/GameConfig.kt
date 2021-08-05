@@ -215,7 +215,7 @@ class GameConfig {
                 if(custom.containsKey("slayer")){
                     val slayer = custom["slayer"] as JSONObject
                     if(slayer.containsKey("enabled")) slayerCountEnabled = slayer["enabled"] as Boolean
-                    if(slayer.containsKey("color")) slayerTrackerColor = slayer["color"].toString()
+                    if(slayer.containsKey("color")) slayerTrackerColor = slayer["color"].toString().replace("#", "")
                     if(slayer.containsKey("opacity")) slayerTrackerOpacity = slayer["opacity"].toString().toInt()
                 }
 
