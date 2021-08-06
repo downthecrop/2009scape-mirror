@@ -150,7 +150,7 @@ public class StandardCookingPulse extends Pulse {
             case Items.RAW_RABBIT_3226: // Iron spits
             case Items.IRON_SPIT_7225:
                 if (RandomFunction.random(15) == 5) {
-                    player.getPacketDispatch().sendMessage("Your iron spit seems to have broken in the proccess.");
+                    player.getPacketDispatch().sendMessage("Your iron spit seems to have broken in the process.");
                 } else {
                     if (!player.getInventory().add(new Item(Items.IRON_SPIT_7225))) {
                         GroundItemManager.create(new Item(Items.IRON_SPIT_7225), player.getLocation(), player);
