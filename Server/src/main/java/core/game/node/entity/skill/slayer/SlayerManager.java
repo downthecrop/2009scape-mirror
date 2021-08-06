@@ -251,7 +251,7 @@ public final class SlayerManager {
 	 * @return {@code True} if so.
 	 */
 	public boolean hasTask() {
-		return getAmount() != 0;
+		return getAmount() > 0;
 	}
 
 	/**
