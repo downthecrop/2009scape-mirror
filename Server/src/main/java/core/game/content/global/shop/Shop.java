@@ -641,8 +641,8 @@ public class Shop {
         SystemLogger.logInfo("" + item.getDefinition().getAlchemyValue(highAlch) + " " + mod + " " + item.getAmount());
         int baseValue = item.getDefinition().getAlchemyValue(highAlch);
         int value = (int) (baseValue * mod * item.getAmount());
-        if(getCurrency() == Items.TOKKUL_6529 && item.getId() == Items.CHAOS_RUNE_562) value = 13;
-        if(getCurrency() == Items.TOKKUL_6529 && item.getId() == Items.DEATH_RUNE_560) value = 27;
+        if(getCurrency() == Items.TOKKUL_6529 && item.getId() == Items.CHAOS_RUNE_562) value = (13 * item.getAmount());
+        if(getCurrency() == Items.TOKKUL_6529 && item.getId() == Items.DEATH_RUNE_560) value = (27 * item.getAmount());
         if(item.getId() == 12183){
             value = 25 * item.getAmount();
         }
