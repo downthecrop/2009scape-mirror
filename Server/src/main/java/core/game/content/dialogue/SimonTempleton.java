@@ -38,7 +38,6 @@ public final class SimonTempleton extends DialoguePlugin{
                 return true;
             }
         }
-        player.getPacketDispatch().sendMessage("" + args.length);
         npc("G'day, mate!. Got any new", "pyramid artefacts for me?");
         return true;
     }
