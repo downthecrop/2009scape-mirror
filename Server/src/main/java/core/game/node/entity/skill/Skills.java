@@ -22,6 +22,9 @@ import org.rs09.consts.Items;
 
 import java.nio.ByteBuffer;
 
+import static java.lang.Math.floor;
+import static java.lang.Math.max;
+
 /**
  * Represents an entity's skills.
  * @author Emperor
@@ -453,8 +456,8 @@ public final class Skills {
 		int points = 0;
 		int output = 0;
 		for (byte lvl = 1; lvl < 100; lvl++) {
-			points += Math.floor(lvl + 300.0 * Math.pow(2.0, lvl / 7.0));
-			output = (int) Math.floor(points / 4);
+			points += floor(lvl + 300.0 * Math.pow(2.0, lvl / 7.0));
+			output = (int) floor(points / 4);
 			if ((output - 1) >= exp) {
 				return lvl;
 			}
@@ -467,8 +470,8 @@ public final class Skills {
 		int points = 0;
 		int output = 0;
 		for (byte lvl = 1; lvl < 100; lvl++) {
-			points += Math.floor(lvl + 300.0 * Math.pow(2.0, lvl / 7.0));
-			output = (int) Math.floor(points / 4);
+			points += floor(lvl + 300.0 * Math.pow(2.0, lvl / 7.0));
+			output = (int) floor(points / 4);
 			if ((output - 1) >= exp) {
 				return lvl;
 			}
@@ -485,11 +488,11 @@ public final class Skills {
 		int points = 0;
 		int output = 0;
 		for (int lvl = 1; lvl <= level; lvl++) {
-			points += Math.floor(lvl + 300.0 * Math.pow(2.0, lvl / 7.0));
+			points += floor(lvl + 300.0 * Math.pow(2.0, lvl / 7.0));
 			if (lvl >= level) {
 				return output;
 			}
-			output = (int) Math.floor(points / 4);
+			output = (int) floor(points / 4);
 		}
 		return 0;
 	}
@@ -523,19 +526,13 @@ public final class Skills {
 		if (entity instanceof NPC) {
 			return ((NPC) entity).getDefinition().getCombatLevel();
 		}
-		int combatLevel = 0;
-		int melee = staticLevels[ATTACK] + staticLevels[STRENGTH];
-		int range = (int) (1.5 * staticLevels[RANGE]);
-		int mage = (int) (1.5 * staticLevels[MAGIC]);
-		if (melee > range && melee > mage) {
-			combatLevel = melee;
-		} else if (range > melee && range > mage) {
-			combatLevel = range;
-		} else {
-			combatLevel = mage;
-		}
-		combatLevel = staticLevels[DEFENCE] + staticLevels[HITPOINTS] + (staticLevels[PRAYER] / 2) + (int) (1.3 * combatLevel);
-		return combatLevel / 4;
+
+		double base = 0.25 * (staticLevels[DEFENCE] + staticLevels[HITPOINTS] + floor(0.5 * staticLevels[PRAYER]));
+		double meleeBase = 0.325 * (staticLevels[ATTACK] + staticLevels[STRENGTH]);
+		double rangeBase = 0.325 * (floor(staticLevels[RANGE] / 2.0) * 1.5);
+		double magicBase = 0.325 * (floor(staticLevels[MAGIC] / 2.0) * 1.5);
+
+		return (int) (base + max(meleeBase, max(rangeBase, magicBase)));
 	}
 
 	/**
