@@ -137,7 +137,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 			case 12:
 				switch(buttonId){
 					case 1:
-						options("1.0x","2.5x","10x","20x");
+						options("1.0x","2.5x","Stay 5.0x");
 						stage++;
 						break;
 					case 2:
@@ -166,13 +166,9 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 						}
 						break;
 					case 3:
-						player.getSkills().experienceMutiplier = 10.0;
-						stage = 14;
-						break;
-					case 4:
-						player.getSkills().experienceMutiplier = 20.0;
-						stage = 14;
-						break;
+						playerl(FacialExpression.FRIENDLY, "I'd rather stay 5x, thank you.");
+						stage = END_DIALOGUE;
+						return true;
 				}
 				npc("One moment, please...");
 				break;
