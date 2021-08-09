@@ -18,6 +18,9 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import core.net.packet.PacketRepository
+import core.net.packet.context.VarbitContext
+import core.net.packet.out.Varbit
 import core.plugin.Initializable
 import core.plugin.Plugin
 import rs09.game.system.command.CommandPlugin
@@ -221,14 +224,14 @@ class VisualCommand : CommandPlugin() {
                 val cfg_index = (args.getOrNull(2)?.toString()?.toInt() ?: -1)
                 if(cfg_index == -1){
                     ContentAPI.submitWorldPulse(object : Pulse(3, player){
-                        var pos = 0
+                        var pos = 32
                         var shift = 0
                         override fun pulse(): Boolean {
                             for(i in 0..1999){
                                 player?.configManager?.forceSet(i, pos shl shift, false)
                             }
-                            player?.sendMessage("$pos << $shift")
-                            if(pos++ >= 32){
+                            player?.sendMessage("$pos shl $shift")
+                            if(pos++ >= 63){
                                 shift += 4
                                 pos = 0
                             }
@@ -245,6 +248,18 @@ class VisualCommand : CommandPlugin() {
                         }
                     })
                 }
+            }
+            "setbit" -> {
+                if (args!!.size < 2) {
+                    player!!.debug("syntax error: bit value")
+                    return true
+                }
+                var bit = toInteger(args[0]!!)
+                var value = toInteger(args[1]!!)
+                var val2 = toInteger(args[2]!!)
+                player!!.debug("$value $val2")
+                PacketRepository.send(Varbit::class.java, VarbitContext(player, value, val2))
+                return true
             }
             "loop_anim_on_i" -> {
                 var anim = toInteger(args!![1]!!)
