@@ -32,9 +32,10 @@ class MajorUpdateWorker {
     var started = false
     val sequence = UpdateSequence()
     val sdf = SimpleDateFormat("HHmmss")
-    fun start() = GlobalScope.launch {
+    val worker = Thread {
+        Thread.currentThread().name = "Major Update Worker"
         started = true
-        delay(600L)
+        Thread.sleep(600L)
         while(true){
             val start = System.currentTimeMillis()
             val rmlist = ArrayList<Pulse>()
@@ -94,7 +95,12 @@ class MajorUpdateWorker {
             }
 
             val end = System.currentTimeMillis()
-            delay(max(600 - (end - start), 0))
+            Thread.sleep(max(600 - (end - start), 0))
+        }
+    }
+    fun start() = {
+        if(!started){
+            worker.start()
         }
     }
 }
