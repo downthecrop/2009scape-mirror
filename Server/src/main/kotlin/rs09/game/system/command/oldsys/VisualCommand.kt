@@ -261,6 +261,15 @@ class VisualCommand : CommandPlugin() {
                 PacketRepository.send(Varbit::class.java, VarbitContext(player, value, val2))
                 return true
             }
+            "setbits" -> {
+                args ?: return false
+                val start = toInteger(args[1]!!)
+                val end = toInteger(args[2]!!)
+                val value = toInteger(args[3]!!)
+                for(i in start until end){
+                    player?.varpManager?.setVarbit(i, value)
+                }
+            }
             "loop_anim_on_i" -> {
                 var anim = toInteger(args!![1]!!)
                 ContentAPI.submitWorldPulse(object : Pulse(3){
