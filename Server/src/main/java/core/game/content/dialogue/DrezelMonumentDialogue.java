@@ -5,6 +5,9 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
+import org.rs09.consts.NPCs;
+import rs09.game.content.quest.members.naturespirit.NSDrezelDialogue;
+import rs09.game.system.SystemLogger;
 
 /**
  * Represents the dialogue plugin used for the drezel monument.
@@ -108,15 +111,36 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 420:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Well, I'm going to look around a bit more.");
+			options("Well, I'm going to look around a bit more.", "Is there anything else interesting to do around here?");
 			stage = 421;
 			break;
 		case 421:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, that sounds like a good idea. Don't get into any", "trouble though!");
-			stage = 422;
+			switch(buttonId){
+				case 1:
+					playerl(FacialExpression.FRIENDLY, "Well, I'm going to look around a bit more.");
+					stage++;
+					break;
+				case 2:
+					playerl(FacialExpression.HALF_THINKING, "Is there anything else interesting to do around here?");
+					stage = 425;
+					break;
+			}
 			break;
 		case 422:
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, that sounds like a good idea. Don't get into any", "trouble though!");
+			stage = 423;
+			break;
+		case 423:
 			end();
+			break;
+		case 425:
+			npcl(FacialExpression.HALF_THINKING, "Well, not a great deal... but there is something you can do for me if you're interested. Though it is quite dangerous.");
+			stage++;
+			break;
+		case 426:
+			end();
+			player.getDialogueInterpreter().open(new NSDrezelDialogue(), npc);
+			player.getDialogueInterpreter().handle(0,0);
 			break;
 		case 120:
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I need " + player.getGameAttributes().getAttribute("priest-in-peril:rune", 50) + " more.");
@@ -239,6 +263,6 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 
 	@Override
 	public int[] getIds() {
-		return new int[] { 1049 };
+		return new int[] { NPCs.DREZEL_7707 };
 	}
 }
