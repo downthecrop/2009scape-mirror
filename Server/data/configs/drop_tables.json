@@ -62767,5 +62767,31 @@
         "maxAmount": "1"
       }
     ]
+  },
+  {
+    "default": [],
+    "charm": [],
+    "ids": "428, 429",
+    "description": "Shade (Stronghold of Security) (So Shade Robes can drop)",
+    "main": [
+      {
+        "minAmount": "1",
+        "weight": "0.1",
+        "id": "546",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "0.1",
+        "id": "548",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "0",
+        "maxAmount": "1"
+      }
+    ]
   }
 ]
