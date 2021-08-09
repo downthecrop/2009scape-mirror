@@ -1,14 +1,16 @@
 package org.runite.client;
 
+import org.rs09.SystemLogger;
+
 import java.awt.event.KeyEvent;
 
-final class Class79 {
+final class CSConfigCachefile {
 
     static int anInt1124 = -1;
     static int anInt1127 = 0;
-    int anInt1123;
-    int anInt1125;
-    int anInt1128;
+    int lowerBound;
+    int upperBound;
+    int parentVarpIndex;
 
 
     static void method1385(int var0, int var1) {
@@ -182,31 +184,44 @@ final class Class79 {
         }
     }
 
-    final void method1387(DataBuffer var1) {
+    static CSConfigCachefile getCSConfigFileFromVarbitID(int varbitID) {
         try {
-            while (true) {
-                int var3 = var1.readUnsignedByte();
-                if (var3 == 0) {
-                    return;
+            CSConfigCachefile cacheFile = (CSConfigCachefile) VarpHelpers.varbitLookup.get(varbitID);
+            if (cacheFile == null) {
+                byte[] fileData = Class101.csConfigFileRAM.getFile(varbitID >>> 10, varbitID & 1023);
+                cacheFile = new CSConfigCachefile();
+                if (fileData != null) {
+                    cacheFile.tryParseConfigFile(new DataBuffer(fileData));
                 }
 
-                this.method1389(var1, var3);
+                VarpHelpers.varbitLookup.put(cacheFile, varbitID);
             }
+            return cacheFile;
         } catch (RuntimeException var4) {
-            throw ClientErrorException.clientError(var4, "kk.G(" + (var1 != null ? "{...}" : "null") + ',' + -111 + ')');
+            throw ClientErrorException.clientError(var4, "jl.A(" + varbitID + ',' + (byte) 127 + ')');
         }
     }
 
-    private void method1389(DataBuffer var1, int var3) {
+    final void tryParseConfigFile(DataBuffer fileData) {
         try {
-            if (1 == var3) {
-                this.anInt1128 = var1.readUnsignedShort();
-                this.anInt1123 = var1.readUnsignedByte();
-                this.anInt1125 = var1.readUnsignedByte();
+            boolean end = fileData.readUnsignedByte() == 0;
+            while (!end) {
+                this.parseConfigFile(fileData);
+                end = fileData.readUnsignedByte() == 0;
             }
+        } catch (RuntimeException var4) {
+            throw ClientErrorException.clientError(var4, "kk.G(" + (fileData != null ? "{...}" : "null") + ',' + -111 + ')');
+        }
+    }
+
+    private void parseConfigFile(DataBuffer fileData) {
+        try {
+            this.parentVarpIndex = fileData.readUnsignedShort();
+            this.lowerBound = fileData.readUnsignedByte();
+            this.upperBound = fileData.readUnsignedByte();
 
         } catch (RuntimeException var5) {
-            throw ClientErrorException.clientError(var5, "kk.B(" + (var1 != null ? "{...}" : "null") + ',' + 1 + ',' + var3 + ')');
+            throw ClientErrorException.clientError(var5, "kk.B(" + (fileData != null ? "{...}" : "null") + ',' + 1 + ')');
         }
     }
 

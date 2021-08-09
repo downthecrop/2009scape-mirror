@@ -6,15 +6,15 @@ final class Class3_Sub6 extends Linkable {
 
 
     static byte[][] softReferenceTestArray;
-    static int[] anIntArray2288 = new int[32];
+    static int[] expectedMinimumValues = new int[32];
     static int anInt2291;
 
     static {
-        int var0 = 2;
+        int accumulator = 2;
 
-        for (int var1 = 0; var1 < 32; ++var1) {
-            anIntArray2288[var1] = -1 + var0;
-            var0 += var0;
+        for (int i = 0; i < 32; ++i) {
+            expectedMinimumValues[i] = -1 + accumulator;
+            accumulator += accumulator;
         }
 
         anInt2291 = 1;
