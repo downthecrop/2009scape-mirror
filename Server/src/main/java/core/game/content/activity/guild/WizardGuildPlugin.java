@@ -60,7 +60,7 @@ public final class WizardGuildPlugin extends OptionHandler {
 			switch (id) {
 			case 1600:
 			case 1601:
-				if (player.getSkills().getStaticLevel(Skills.MAGIC) < 66) {
+				if (player.getSkills().getLevel(Skills.MAGIC) < 66) {
 					player.getDialogueInterpreter().sendDialogue("You need a Magic level of at least 66 to enter.");
 					return true;
 				}
