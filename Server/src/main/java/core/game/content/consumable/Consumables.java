@@ -97,8 +97,8 @@ public enum Consumables {
 	CAKE(new Cake(new int[] {1891, 1893, 1895}, new HealingEffect(4), "You eat part of the cake.", "You eat some more cake.", "You eat the slice of cake.")),
 	CHOCOLATE_CAKE(new Cake(new int[] {1897, 1899, 1901}, new HealingEffect(5), "You eat part of the chocolate cake.", "You eat some more of the chocolate cake.", "You eat the slice of cake.")),
 	ROCK_CAKE(new Food(new int[] {2379}, new RockCakeEffect(), "The rock cake resists all attempts to eat it.")),
-	DWARVEN_ROCK_CAKE(new Food(new int[] {7510, 7510}, new DwarvenRockCakeEffect())),
-	HOT_DWARVEN_ROCK_CAKE(new Food(new int[] {7509, 7509}, new DwarvenRockCakeEffect())),
+	DWARVEN_ROCK_CAKE(new Food(new int[] {7510, 7510}, new DwarvenRockCakeEffect(), "Ow! You nearly broke a tooth!", "The rock cake resists all attempts to eat it.")),
+	HOT_DWARVEN_ROCK_CAKE(new Food(new int[] {7509, 7509}, new DwarvenRockCakeEffect(), "Ow! You nearly broke a tooth!", "The rock cake resists all attempts to eat it.")),
 	COOKED_FISHCAKE(new Food(new int[] {7530}, new HealingEffect(11))),
 	MINT_CAKE(new Food(new int[] {9475}, new EnergyEffect(50))),
 
