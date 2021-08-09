@@ -75,10 +75,7 @@ class WorkForInteractionListener : InteractionListener() {
 
             val type = typeMap[node.id] ?: return@on false
             jobId = if(type == 0) {
-                var job = gatheringMap[node.id]?.random()
-                while(!checkRequirement(player,job)){
-                    job = gatheringMap[node.id]?.random()
-                }
+                var job = gatheringMap[node.id]?.filter { checkRequirement(player, it) }?.random()
                 amount = job?.getAmount() ?: 0
                 job?.ordinal ?: 0
             } else {
@@ -111,8 +108,7 @@ class WorkForInteractionListener : InteractionListener() {
 
     fun checkRequirement(player: Player, jobs: GatheringJobs?): Boolean{
         jobs ?: return true
-        val requirement: Pair<Int,Int> = Pair(jobs.lvlReq,jobs.skill)
-        if(player.skills.getLevel(requirement.second) < requirement.first){
+        if(player.skills.getLevel(jobs.skill) < jobs.lvlReq){
             return false
         }
         return true
