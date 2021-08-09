@@ -98,7 +98,7 @@ class MajorUpdateWorker {
             Thread.sleep(max(600 - (end - start), 0))
         }
     }
-    fun start() = {
+    fun start() {
         if(!started){
             worker.start()
         }
