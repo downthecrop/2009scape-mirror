@@ -346,15 +346,15 @@ public final class Texture {
                     }
 
                     if (6 == anIntArray3331[var7]) {
-                        var32 = 10 <= Class79.anInt1127 % 20 ? 16776960 : 16711680;
+                        var32 = 10 <= CSConfigCachefile.anInt1127 % 20 ? 16776960 : 16711680;
                     }
 
                     if (anIntArray3331[var7] == 7) {
-                        var32 = Class79.anInt1127 % 20 < 10 ? 255 : 65535;
+                        var32 = CSConfigCachefile.anInt1127 % 20 < 10 ? 255 : 65535;
                     }
 
                     if (8 == anIntArray3331[var7]) {
-                        var32 = Class79.anInt1127 % 20 >= 10 ? 8454016 : '\ub000';
+                        var32 = CSConfigCachefile.anInt1127 % 20 >= 10 ? 8454016 : '\ub000';
                     }
 
                     if (9 == anIntArray3331[var7]) {
@@ -405,15 +405,15 @@ public final class Texture {
                     }
 
                     if (1 == anIntArray3336[var7]) {
-                        FontType.bold.method696(var33, var2 - -Class32.anInt590, anInt2208 + var0, var32, Class79.anInt1127);
+                        FontType.bold.method696(var33, var2 - -Class32.anInt590, anInt2208 + var0, var32, CSConfigCachefile.anInt1127);
                     }
 
                     if (anIntArray3336[var7] == 2) {
-                        FontType.bold.method695(var33, var2 - -Class32.anInt590, var0 - -anInt2208, var32, Class79.anInt1127);
+                        FontType.bold.method695(var33, var2 - -Class32.anInt590, var0 - -anInt2208, var32, CSConfigCachefile.anInt1127);
                     }
 
                     if (anIntArray3336[var7] == 3) {
-                        FontType.bold.method692(var33, var2 + Class32.anInt590, anInt2208 + var0, var32, Class79.anInt1127, 150 - anIntArray3318[var7]);
+                        FontType.bold.method692(var33, var2 + Class32.anInt590, anInt2208 + var0, var32, CSConfigCachefile.anInt1127, 150 - anIntArray3318[var7]);
                     }
 
                     if (4 == anIntArray3336[var7]) {

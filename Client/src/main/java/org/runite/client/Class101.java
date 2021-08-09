@@ -2,7 +2,7 @@ package org.runite.client;
 
 final class Class101 {
 
-    static CacheIndex aClass153_1420;
+    static CacheIndex csConfigFileRAM;
     static Class3_Sub24_Sub4 aClass3_Sub24_Sub4_1421;
     static Class30 aClass30_1422;
     static CacheIndex aClass153_1423;
@@ -65,7 +65,7 @@ final class Class101 {
                 method1607(46, 78, true, null, null);
             }
 
-            aClass153_1420 = null;
+            csConfigFileRAM = null;
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "nj.A(" + var0 + ')');
         }

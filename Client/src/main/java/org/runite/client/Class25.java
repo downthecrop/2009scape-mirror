@@ -115,7 +115,7 @@ final class Class25 {
 
     static void method959() {
         try {
-            CS2Script.aReferenceCache_2450.clear();
+            VarpHelpers.varbitLookup.clear();
 
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "ec.B(" + 0 + ')');

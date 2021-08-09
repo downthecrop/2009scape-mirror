@@ -1,5 +1,6 @@
 package org.runite.client;
 
+import org.rs09.SystemLogger;
 import org.rs09.client.util.ArrayUtils;
 import org.rs09.client.filestore.resources.configs.cursors.CursorDefinition;
 
@@ -114,12 +115,13 @@ final class TextureOperation3 extends TextureOperation {
 
    static void method306(int var0, int var2) {
       try {
-         Class79 var3 = CS2Script.method378(var0, (byte)127);
-         int var6 = Objects.requireNonNull(var3).anInt1125;
-         int var5 = var3.anInt1123;
-         int var4 = var3.anInt1128;
-         int var7 = Class3_Sub6.anIntArray2288[var6 - var5];
+         CSConfigCachefile var3 = CSConfigCachefile.getCSConfigFileFromVarbitID(var0);
+         int var6 = Objects.requireNonNull(var3).upperBound;
+         int var5 = var3.lowerBound;
+         int var4 = var3.parentVarpIndex;
+         int var7 = Class3_Sub6.expectedMinimumValues[var6 - var5];
          if(var2 < 0 || var7 < var2) {
+            SystemLogger.logInfo(var7 + " < " + var2);
             var2 = 0;
          }
 

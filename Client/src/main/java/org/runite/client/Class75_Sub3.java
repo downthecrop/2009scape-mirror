@@ -46,7 +46,7 @@ final class Class75_Sub3 extends Class75 {
          Class67.aReferenceCache_1013.sweep(5);
          Texture.aReferenceCache_1146.sweep(5);
          Class159.aReferenceCache_2016.sweep(5);
-         CS2Script.aReferenceCache_2450.sweep(5);
+         VarpHelpers.varbitLookup.sweep(5);
          Class136.aReferenceCache_1772.sweep(5);
          RenderAnimationDefinition.aReferenceCache_1955.sweep(5);
          TextureOperation25.aReferenceCache_3412.sweep(5);

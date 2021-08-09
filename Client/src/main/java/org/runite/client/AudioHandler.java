@@ -20,7 +20,7 @@ public final class AudioHandler {
         try {
             if (-1 == var1 && !musicEffectPlaying) {
                 GameObject.method1870();
-            } else if (var1 != -1 && (currentTrack != var1 || Class79.method1391(-1)) && musicVolume != 0 && !musicEffectPlaying) {
+            } else if (var1 != -1 && (currentTrack != var1 || CSConfigCachefile.method1391(-1)) && musicVolume != 0 && !musicEffectPlaying) {
                 method2099(var1, CacheIndex.musicIndex, musicVolume);
             }
             currentTrack = var1;
@@ -117,13 +117,13 @@ public final class AudioHandler {
                 }
             }
 
-            if (musicEffectPlaying && Class79.method1391(-1)) {
+            if (musicEffectPlaying && CSConfigCachefile.method1391(-1)) {
                 if (0 != musicVolume && currentTrack != -1) {
                     Class70.method1285(CacheIndex.musicIndex, currentTrack, musicVolume);
                 }
 
                 musicEffectPlaying = false;
-            } else if (musicVolume != 0 && currentTrack != -1 && Class79.method1391((byte) -92 + 91)) {
+            } else if (musicVolume != 0 && currentTrack != -1 && CSConfigCachefile.method1391((byte) -92 + 91)) {
                 TextureOperation12.outgoingBuffer.putOpcode(137);
                 TextureOperation12.outgoingBuffer.writeInt(currentTrack);
                 currentTrack = -1;

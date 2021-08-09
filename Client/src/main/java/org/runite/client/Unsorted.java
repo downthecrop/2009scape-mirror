@@ -12,8 +12,6 @@ import org.rs09.client.util.ArrayUtils;
 import org.runite.client.drawcalls.*;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
@@ -1964,7 +1962,7 @@ public class Unsorted {
                 Class136.method1816(512, -7);
                 TextureOperation19.method257();
             } else {
-                Class3_Sub5.method112((byte) (-4 + Class79.anInt1127 & 0xFF));
+                Class3_Sub5.method112((byte) (-4 + CSConfigCachefile.anInt1127 & 0xFF));
                 Class136.method1816(2, -7);
             }
 
@@ -2646,7 +2644,7 @@ public class Unsorted {
                 ++var2;
             }
 
-            if (var1.retrieveSpriteFile(Class79.anInt1124)) {
+            if (var1.retrieveSpriteFile(CSConfigCachefile.anInt1124)) {
                 ++var2;
             }
 
@@ -4720,7 +4718,7 @@ public class Unsorted {
                         }
                     }
 
-                    Class79.method1390(new DataBuffer(var4));
+                    CSConfigCachefile.method1390(new DataBuffer(var4));
                 }
             } catch (Exception var8) {
             }
@@ -4913,7 +4911,7 @@ public class Unsorted {
 
     static void method338(int var1, boolean var2, int var3, int var4, int var5) {
        try {
-          ++Class79.anInt1127;
+          ++CSConfigCachefile.anInt1127;
           Class124.method1745();
           if(!var2) {
              Class3_Sub5.method116(true);
@@ -5022,7 +5020,7 @@ public class Unsorted {
           }
 
           Class58.method1194();
-          byte var19 = Class137.method1817() != 2 ?1:(byte)Class79.anInt1127;
+          byte var19 = Class137.method1817() != 2 ?1:(byte) CSConfigCachefile.anInt1127;
           if(HDToolKit.highDetail) {
              HDToolKit.method1846();
              HDToolKit.method1831(true);
