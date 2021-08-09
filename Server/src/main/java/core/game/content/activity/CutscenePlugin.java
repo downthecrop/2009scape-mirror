@@ -100,6 +100,7 @@ public abstract class CutscenePlugin extends ActivityPlugin {
 				unpause();
 			}
 			player.unlock();
+			player.getInterfaceManager().openDefaultTabs();
 			player.getWalkingQueue().reset();
 			player.getLocks().unlockMovement();
 		}
