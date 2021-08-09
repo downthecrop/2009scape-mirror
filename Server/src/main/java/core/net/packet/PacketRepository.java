@@ -77,6 +77,7 @@ public final class PacketRepository {
 		OUTGOING_PACKETS.put(UpdateRandomFile.class, new UpdateRandomFile());				//
 		OUTGOING_PACKETS.put(InstancedLocationUpdate.class, new InstancedLocationUpdate());	//
 		OUTGOING_PACKETS.put(CSConfigPacket.class, new CSConfigPacket());					//
+		OUTGOING_PACKETS.put(Varbit.class, new Varbit());
 		INCOMING_PACKETS.put(22, new ClientFocusPacket());
 		INCOMING_PACKETS.put(93, new PingPacketHandler());
 		INCOMING_PACKETS.put(44, new CommandPacket());
