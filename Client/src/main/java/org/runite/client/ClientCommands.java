@@ -1,7 +1,11 @@
 package org.runite.client;
 
 
+import org.rs09.SystemLogger;
+
 import java.awt.*;
+import java.io.File;
+import java.io.FileWriter;
 import java.net.URI;
 
 public class ClientCommands {
@@ -192,6 +196,29 @@ public class ClientCommands {
             if (command.equalsStringIgnoreCase(TextCore.COMMAND_SHIFT_DROP_CLICK)) {
                 shiftClickEnabled = !shiftClickEnabled;
             }
+
+            if (command.startsWith(TextCore.COMMAND_GETBITS)) {
+                System.out.println("Trying to write file...");
+                try {
+                    int index = command.substring(10).parseInt();
+                    File file = new File("FILE_BITS.txt");
+                    FileWriter writer = new FileWriter(file);
+                    for(int i = 0; i < 200000; i++){
+                        CSConfigCachefile cachefile = CSConfigCachefile.getCSConfigFileFromVarbitID(i);
+                        if(cachefile.parentVarpIndex == index){
+                            writer.write("ID: " + i + " lowerBound = " + cachefile.lowerBound + " upperBound = " + cachefile.upperBound + " size = " + ((cachefile.upperBound - cachefile.lowerBound) + 1));
+                            writer.write("\n");
+                        }
+                    }
+                    writer.flush();
+                    writer.close();
+                    BufferedDataStream.addChatMessage(null, 0, RSString.parse("Wrote bits to " + file.getAbsolutePath()), -1);
+                } catch (Exception e){
+                    SystemLogger.logInfo("Whoopsie");
+                    e.printStackTrace();
+                }
+            }
+
             TextureOperation12.outgoingBuffer.putOpcode(44);
             TextureOperation12.outgoingBuffer.writeByte(command.length() + -1);
             TextureOperation12.outgoingBuffer.writeString(command.substring(2));
@@ -220,7 +247,7 @@ public class ClientCommands {
           Class159.aReferenceCache_2016.clearSoftReferences();//Originally Class133.method1803();
           Class3_Sub31.aReferenceCache_2604.clearSoftReferences();//Class38.method1025();
           Class27.aReferenceCache_511.clearSoftReferences();//Class38.method1025();
-          CS2Script.aReferenceCache_2450.clearSoftReferences();//Class40.method1044();
+          VarpHelpers.varbitLookup.clearSoftReferences();//Class40.method1044();
           Class136.aReferenceCache_1772.clearSoftReferences();
           RenderAnimationDefinition.aReferenceCache_1955.clearSoftReferences();//Originally: Class158_Sub1.method2192();
           TextureOperation25.aReferenceCache_3412.clearSoftReferences();//Originally: Class159.method2196();

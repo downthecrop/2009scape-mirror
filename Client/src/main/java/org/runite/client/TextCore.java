@@ -196,6 +196,7 @@ public class TextCore {
      */
     static RSString COMMAND_HIGHRES_GRAPHICS_RESIZE = RSString.parse("::wm2");
     static RSString COMMAND_SHIFT_DROP_CLICK = RSString.parse("::shiftclick");
+    static RSString COMMAND_GETBITS = RSString.parse("::getbits");
     static RSString COMMAND_REPLACE_CANVAS = RSString.parse("::replacecanvas");
     static RSString COMMAND_HIGHRES_GRAPHICS_WINDOW = RSString.parse("::wm1");
     static RSString COMMAND_QA_OP_TEST = RSString.parse("::qa_op_test");
