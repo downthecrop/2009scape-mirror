@@ -2,6 +2,7 @@ package org.runite.client;
 
 import org.rs09.Discord;
 import org.rs09.SlayerTracker;
+import org.rs09.SystemLogger;
 import org.rs09.XPGainDraw;
 
 import java.nio.charset.StandardCharsets;
@@ -1123,7 +1124,7 @@ public final class PacketParser {
                                                     } else if (37 == Unsorted.incomingOpcode) {
                                                         nodeModelId = BufferedDataStream.incomingBuffer.readUnsignedByte128();
                                                         var19 = BufferedDataStream.incomingBuffer.readUnsignedShortLE();
-                                                        Class163.method2209((byte) -122, nodeModelId, var19);
+                                                        Class163.updateVarbit((byte) -122, nodeModelId, var19);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 155) {
@@ -1400,7 +1401,7 @@ public final class PacketParser {
                                                     } else if (Unsorted.incomingOpcode == 84) {
                                                         nodeModelId = BufferedDataStream.incomingBuffer.readIntLE();
                                                         var19 = BufferedDataStream.incomingBuffer.readUnsignedShortLE128();
-                                                        Class163.method2209((byte) -106, nodeModelId, var19);
+                                                        Class163.updateVarbit((byte) -106, nodeModelId, var19);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else {
