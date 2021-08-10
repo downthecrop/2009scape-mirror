@@ -547,7 +547,7 @@ public class IoBuffer {
 		long second = getIntB();
 		if (second < 0)
 			second = second & 0xffffffffL;
-		return (first << -41780448) + second;
+		return (first << 32) + second;
 	}
 
 	/**
@@ -567,7 +567,7 @@ public class IoBuffer {
 		if (peek <= Short.MAX_VALUE) {
 			return buf.getShort() & 0xFFFF;
 		}
-		return (buf.getInt() & 0xFFFFFFFF) - 32768;
+		return buf.getInt() - 32768;
 	}
 
 	/**

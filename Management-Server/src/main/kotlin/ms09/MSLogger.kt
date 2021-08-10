@@ -9,12 +9,12 @@ import java.util.*
 
 object MSLogger {
     val t = Terminal()
-    val formatter = SimpleDateFormat("HH:mm:ss")
     var tradeLog: Writer? = null
     var tradeLogWriter: BufferedWriter? = null
 
 
     fun getTime(): String{
+        val formatter = SimpleDateFormat("HH:mm:ss")
         return "[" + formatter.format(Date(System.currentTimeMillis())) +"]"
     }
 
