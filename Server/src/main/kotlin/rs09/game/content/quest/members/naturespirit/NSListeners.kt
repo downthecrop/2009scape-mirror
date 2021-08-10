@@ -2,22 +2,29 @@ package rs09.game.content.quest.members.naturespirit
 
 import api.ContentAPI
 import api.DialUtils
+import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
+import core.game.world.map.Location
 import org.rs09.consts.Items
+import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
+import rs09.game.content.global.action.PickupHandler
 import rs09.game.interaction.InteractionListener
+import rs09.game.system.SystemLogger
 import rs09.tools.END_DIALOGUE
+import sun.audio.AudioPlayer.player
 
 class NSListeners : InteractionListener() {
 
     val GROTTO_TREE = 3517
+    val GROTTO_ENTRANCE = 3516
     val JOURNAL = Items.JOURNAL_2967
     val NATURE_STONE = 3527
     val FAITH_STONE = 3528
     val FREELY_GIVEN_STONE = 3529
     val WASHING_BOWL = Items.WASHING_BOWL_2964
-    val MIRROR = Items.HAND_MIRROR_6639
+    val MIRROR = Items.MIRROR_2966
     val MIRROR_TAKEN = "/save:ns:mirror_taken"
     val GROTTO_SEARCHED = "/save:ns:grotto_searched"
 
@@ -28,13 +35,19 @@ class NSListeners : InteractionListener() {
         }
 
         on(GROTTO_TREE, SCENERY, "search"){player, _ ->
-            if(!ContentAPI.getAttribute(player, GROTTO_SEARCHED, false)){
+            if(!ContentAPI.getAttribute(player, GROTTO_SEARCHED, false) || !(ContentAPI.inInventory(player, JOURNAL) || ContentAPI.inBank(player, JOURNAL))){
                 ContentAPI.sendItemDialogue(player, JOURNAL, "You search the strange rock. You find a knot and inside of it you discover a small tome. The words on the front are a bit vague, but you can make out the words 'Tarlock' and 'journal'.")
                 ContentAPI.addItemOrDrop(player, JOURNAL, 1)
                 ContentAPI.setAttribute(player, GROTTO_SEARCHED, true)
                 return@on true
             }
             return@on false
+        }
+
+        on(GROTTO_ENTRANCE, SCENERY, "enter"){player, node ->
+            val npc = core.game.node.entity.npc.NPC.create(NPCs.FILLIMAN_TARLOCK_1050, Location.create(3440, 3336, 0))
+            npc.init()
+            return@on true
         }
 
         on(NATURE_STONE, SCENERY, "search"){player, _ ->
@@ -57,17 +70,20 @@ class NSListeners : InteractionListener() {
             return@on true
         }
 
-        on(WASHING_BOWL, ITEM, "take"){_, node ->
-            GroundItemManager.create(Item(MIRROR), node.location)
-            return@on false
+        on(WASHING_BOWL, GROUNDITEM, "take"){player, node ->
+            SystemLogger.logInfo("Running listener")
+            GroundItemManager.create(Item(MIRROR), node.location, player)
+            PickupHandler.take(player, node as GroundItem)
+            return@on true
         }
 
-        on(MIRROR, ITEM, "take"){player, _ ->
-            if(ContentAPI.getAttribute(player, MIRROR_TAKEN, false) && !(ContentAPI.inInventory(player, MIRROR) || ContentAPI.inBank(player, MIRROR))){
+        on(MIRROR, GROUNDITEM, "take"){player, node ->
+            if(ContentAPI.getAttribute(player, MIRROR_TAKEN, false) && (ContentAPI.inInventory(player, MIRROR) || ContentAPI.inBank(player, MIRROR))){
                 ContentAPI.sendDialogue(player, "I don't need another one of these.")
-                return@on false
+                return@on true
             }
             ContentAPI.setAttribute(player, MIRROR_TAKEN, true)
+            PickupHandler.take(player, node as GroundItem)
             return@on true
         }
     }

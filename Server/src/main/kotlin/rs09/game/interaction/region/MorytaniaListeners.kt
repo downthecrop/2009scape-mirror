@@ -23,10 +23,10 @@ class MorytaniaListeners : InteractionListener() {
     private val JUMP_ANIM = Animation(1603)
 
     override fun defineListeners() {
-        on(GROTTO_ENTRANCE,SCENERY,"enter"){ player, node ->
+/*        on(GROTTO_ENTRANCE,SCENERY,"enter"){ player, node ->
             player.teleport(inside)
             return@on true
-        }
+        }*/
 
         on(GROTTO_EXIT,SCENERY,"exit"){ player, node ->
             player.teleport(outside)
