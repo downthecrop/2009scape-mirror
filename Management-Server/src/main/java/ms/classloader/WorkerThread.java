@@ -61,7 +61,7 @@ public class WorkerThread extends Thread {
     */
     @SuppressWarnings("unused") //saving resource type for later
 	public void run() {
-        byte opcode = -1;
+    /*    byte opcode = -1;
         try {
             while (true) {
                 opcode = is.readByte();
@@ -104,8 +104,8 @@ public class WorkerThread extends Thread {
                 is.close();
                 os.close();
                 launcher.close();
-            } catch (Exception e) {}
-        }
+            } catch (Exception e) {e.printStackTrace();}
+        }*/
     }
 
 	/**
