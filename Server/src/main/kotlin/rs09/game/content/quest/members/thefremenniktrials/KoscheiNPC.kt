@@ -73,6 +73,7 @@ class KoscheiNPC constructor(id: Int = 0, location: Location? = null, session: K
             } else {
                 session?.player?.sendMessage("Congratulations! You have completed the warriors trial!")
                 session?.player?.setAttribute("/save:fremtrials:thorvald-vote",true)
+                session?.player?.setAttribute("/save:fremtrials:votesplayer", session?.player?.getAttribute("fremtrials:votesplayer", 0) + 1)
                 session?.player?.removeAttribute("fremtrials:warrior-accepted")
                 ContentAPI.addItemOrDrop(session?.player!!, Items.FREMENNIK_BLADE_3757, 1)
                 session.close()
@@ -189,7 +190,10 @@ class KoscheiNPC constructor(id: Int = 0, location: Location? = null, session: K
         override fun pulse(): Boolean {
             when(counter++) {
                 0 -> player?.lock().also { player?.animate(Animation(1332)).also { player?.sendMessage("Oh dear you are...") }}
-                1 -> player?.setAttribute("/save:fremtrials:thorvald-vote",true).also { player?.removeAttribute("fremtrials:warrior-accepted") }
+                1 -> player?.setAttribute("/save:fremtrials:thorvald-vote",true).also {
+                    player?.setAttribute("/save:fremtrials:votesplayer", player.getAttribute("fremtrials:votesplayer", 0) + 1);
+                    player?.removeAttribute("fremtrials:warrior-accepted")
+                }
                 3 -> player?.teleport(Location.create(2666,3694,1)).also { koschei.session?.close() }
                 4 -> player?.sendMessage("...still alive somehow?")
                 6 -> player?.dialogueInterpreter?.open(NPCs.THORVALD_THE_WARRIOR_1289, Repository.findNPC(NPCs.THORVALD_THE_WARRIOR_1289), this)
