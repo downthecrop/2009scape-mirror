@@ -1,6 +1,8 @@
 package rs09.game.content.quest.members.thefremenniktrials
 
+import core.game.container.impl.EquipmentContainer.SLOT_WEAPON
 import core.game.content.dialogue.FacialExpression
+import core.game.content.global.action.ClimbActionHandler
 import core.game.node.`object`.Scenery
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.NPC
@@ -17,6 +19,7 @@ import org.rs09.consts.NPCs
 import org.rs09.primextends.getNext
 import org.rs09.primextends.isLast
 import rs09.game.interaction.InteractionListener
+import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.GameWorld
 import rs09.game.world.GameWorld.Pulser
 
@@ -39,6 +42,9 @@ class TFTInteractionListeners : InteractionListener(){
     val KNIFE = Items.KNIFE_946
     val TREE_BRANCH = Items.BRANCH_3692
     val LYRE_IDs = intArrayOf(14591,14590,6127,6126,6125,3691,3690)
+    val THORVALD_LADDER = 34286
+    val THORVALD_LADDER_LOWER = 4188
+    var FREMENNIK_HELMS = intArrayOf(Items.ARCHER_HELM_3749, Items.BERSERKER_HELM_3751, Items.WARRIOR_HELM_3753, Items.FARSEER_HELM_3755/*, Items.HELM_OF_NEITIZNOT_10828 Should this be included?*/)
 
 
     override fun defineListeners() {
@@ -140,12 +146,59 @@ class TFTInteractionListeners : InteractionListener(){
             return@on true
         }
 
+        on(THORVALD_LADDER, SCENERY, "climb-down") { player, _ ->
+            if (player.questRepository.isComplete("Fremennik Trials") || player.getAttribute("fremtrials:thorvald-vote",false)!!) {
+                player.sendMessage("You have no reason to go back down there.")
+                return@on true
+            } else if (!player.getAttribute("fremtrials:warrior-accepted",false)!!) {
+                player.dialogueInterpreter?.sendDialogues(NPCs.THORVALD_THE_WARRIOR_1289, FacialExpression.ANGRY,
+                    "Outerlander... do not test my patience. I do not take",
+                    "kindly to people wandering in here and acting as though",
+                    "they own the place."
+                )
+                return@on true
+            } else if (hasEquippableItems(player)) {
+                player.dialogueInterpreter?.sendDialogues(NPCs.THORVALD_THE_WARRIOR_1289, FacialExpression.ANGRY,
+                    "You may not enter the battleground with any armour",
+                    "or weaponry of any kind."
+                )
+                player.dialogueInterpreter.addAction { player, buttonId ->
+                    player.dialogueInterpreter?.sendDialogues(NPCs.THORVALD_THE_WARRIOR_1289, FacialExpression.ANGRY,
+                        "If you need to place your equipment into your bank",
+                        "account, I recommend that you speak to the seer. He",
+                        "knows a spell that will do that for you."
+                    )
+                }
+                return@on true
+            }
+
+            ClimbActionHandler.climb(player, Animation(828), Location.create(2671, 10099, 2))
+            Pulser.submit(KoscheiPulse(player))
+            return@on true
+        }
+
+        on(THORVALD_LADDER_LOWER, SCENERY, "climb-up") { player, _ ->
+            ClimbActionHandler.climb(player, Animation(828), Location.create(2666, 3694, 0))
+            return@on true
+        }
+
         on(SWAYING_TREE,SCENERY,"chop down"){ player, _ ->
             SkillingTool.getHatchet(player)?.let { Pulser.submit(ChoppingPulse(player)).also { return@on true } }
 
             player.sendMessage("You need an axe which you have the woodcutting level to use to do this.")
             return@on true
         }
+
+        //TODO: Uncomment this when the quest is finished
+        /*for(id in FREMENNIK_HELMS){
+            onEquip(id){ player, _ ->
+                if(!player.questRepository.isComplete("Fremennik Trials")){
+                    ContentAPI.sendMessage(player, "You must have completed The Fremennik Trials to equip this.")
+                    return@onEquip false
+                }
+                return@onEquip true
+            }
+        }*/
     }
 
     class destRoom(val swx: Int, val swy: Int, val nex: Int, val ney: Int)
@@ -165,6 +218,28 @@ class TFTInteractionListeners : InteractionListener(){
             }
         }
         return obj.location
+    }
+
+    fun hasEquippableItems(player: Player?): Boolean {
+        val container = arrayOf(player!!.inventory, player.equipment)
+        for (c in container) {
+            for (i in c.toArray()) {
+                if (i == null) {
+                    continue
+                }
+                if (i.name.toLowerCase().contains(" rune")) {
+                    return true
+                }
+                var slot: Int = i.definition.getConfiguration(ItemConfigParser.EQUIP_SLOT, -1)
+                if (slot == -1 && i.definition.getConfiguration(ItemConfigParser.WEAPON_INTERFACE, -1) != -1) {
+                    slot = SLOT_WEAPON
+                }
+                if (slot >= 0) {
+                    return true
+                }
+            }
+        }
+        return false
     }
 
     class spiritPulse(val player: Player?, val fish: Int) : Pulse(){
@@ -219,6 +294,17 @@ class TFTInteractionListeners : InteractionListener(){
                 0 -> player.animator.animate(Animation(9600, Animator.Priority.VERY_HIGH), Graphics(1682))
                 6 -> player.properties.teleportLocation = Location.create(2661, 3646, 0)
                 7 -> player.unlock().also { return true }
+            }
+            return false
+        }
+    }
+
+    class KoscheiPulse(val player: Player) : Pulse() {
+        var counter = 0
+        override fun pulse(): Boolean {
+            when(counter++) {
+                0 -> player.sendMessage("Explore this battleground and find your foe...")
+                20 -> KoscheiSession.create(player).start().also { return true }
             }
             return false
         }

@@ -87,9 +87,6 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 			case 1288:
 				player.getDialogueInterpreter().sendDialogues((NPC) target, null, "I have no interest in talking to you just now", "outerlander.");
 				return true;
-			case 34286:
-				player.getDialogueInterpreter().sendDialogues(1289, null, "Outerlander... do not test my patience. I do not take", "kindly to people wandering in here and acting as though", "they own the place.");
-				return true;
 			case 4148:
 				player.getDialogueInterpreter().sendDialogues(1278, null, "Hey, outerlander. You can't go through there. Talent", "only, backstage.");
 				return true;
