@@ -1,6 +1,5 @@
 package ms;
 
-import ms.classloader.ClassLoadServer;
 import ms.net.NioReactor;
 import ms.net.packet.WorldPacketRepository;
 import ms.system.ShutdownSequence;
@@ -100,7 +99,6 @@ public final class Management {
 		new Command("-rlcache", "Reloads launcher/client resource cache") {
 			@Override
 			public void run(String... args) {
-				ClassLoadServer.resetResourceCache();
 				System.out.println("Reloaded resource cache!");
 			}	
 		},
@@ -136,7 +134,6 @@ public final class Management {
 		SQLManager.init();
 		//NioReactor.configure(ServerConstants.PORT).start();
 		NioReactor.configure(5555).start();
-		new ClassLoadServer().start();
 		Runtime.getRuntime().addShutdownHook(new ShutdownSequence());
 		System.out.println("Status: ready.");
 		System.out.println("Use -commands for a list of commands!");
