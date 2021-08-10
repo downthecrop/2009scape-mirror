@@ -96,6 +96,7 @@ public final class NioReactor implements Runnable {
 						SelectionKey key = keys.next();
 						keys.remove();
 						try {
+							if(key == null) continue;
 							if (!key.isValid() || !key.channel().isOpen()) {
 								key.cancel();
 								continue;
