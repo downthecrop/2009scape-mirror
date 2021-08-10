@@ -67,6 +67,10 @@ public final class IoEventHandler {
 		ByteBuffer buffer = ByteBuffer.allocate(100_000);
 		IoSession session = (IoSession) key.attachment();
 		if (channel.read(buffer) == -1) {
+			if(session == null){
+				key.cancel();
+				return;
+			}
 			if(session.getGameServer() != null){
 				WorldDatabase.unRegister(session.getGameServer());
 			}
@@ -87,8 +91,10 @@ public final class IoEventHandler {
 	 */
 	public void write(SelectionKey key) {
 		IoSession session = (IoSession) key.attachment();
-		key.interestOps(key.interestOps() & ~SelectionKey.OP_WRITE);
-		session.write();
+		if(session != null) {
+			key.interestOps(key.interestOps() & ~SelectionKey.OP_WRITE);
+			session.write();
+		}
 	}
 	
 	/**

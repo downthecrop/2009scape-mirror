@@ -12,10 +12,7 @@ import java.nio.ByteBuffer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
 
 /**
@@ -184,9 +181,7 @@ public final class CommunicationInfo {
 		String bl = set.getString("blocked");
 		if (bl != null && !bl.isEmpty()) {
 			tokens = bl.split(",");
-			for (String name : tokens) {
-				blocked.add(name);
-			}
+			blocked.addAll(Arrays.asList(tokens));
 		}
 		clanName = set.getString("clanName");
 		currentClan = set.getString("currentClan");
@@ -235,6 +230,9 @@ public final class CommunicationInfo {
 						break;
 					case 2:
 						tradeSetting = Integer.parseInt(tokens[2]);
+						break;
+					default:
+						System.out.println("Illegal arg count in chatsetting string: " + chatSettings);
 						break;
 				}
 			}

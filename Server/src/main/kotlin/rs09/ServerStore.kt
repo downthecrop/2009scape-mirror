@@ -100,14 +100,17 @@ object ServerStore {
         }
     }
 
+    @JvmStatic
     fun JSONObject.getString(key: String): String {
         return this[key] as? String ?: "nothing"
     }
 
+    @JvmStatic
     fun JSONObject.getLong(key: String): Long {
         return this[key] as? Long ?: 0L
     }
 
+    @JvmStatic
     fun JSONObject.getBoolean(key: String): Boolean {
         return this[key] as? Boolean ?: false
     }
