@@ -168,9 +168,9 @@ public class IoSession {
 				}
 				writingQueue.remove(0);
 			}
-			writingLock.unlock();
 		} catch (IOException e) {
 			disconnect();
+		} finally {
 			writingLock.unlock();
 		}
 	}
