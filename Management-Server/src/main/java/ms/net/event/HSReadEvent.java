@@ -4,6 +4,7 @@ import java.nio.ByteBuffer;
 
 import ms.net.IoReadEvent;
 import ms.net.IoSession;
+import ms.system.util.ManagementConstants;
 import ms.world.WorldDatabase;
 import ms.system.util.ByteBufferUtils;
 
@@ -12,11 +13,6 @@ import ms.system.util.ByteBufferUtils;
  * @author Emperor
  */
 public final class HSReadEvent extends IoReadEvent {
-
-	/**
-	 * The password used to verify
-	 */
-	private static final String PASSWORD = "0x14ari0SSbh98989910";
 	
 	/**
 	 * Constructs a new {@code HSReadEvent}.
@@ -33,7 +29,7 @@ public final class HSReadEvent extends IoReadEvent {
 		switch (opcode) {
 		case 88:
 			String password = ByteBufferUtils.getString(buffer);
-			if (!password.equals(PASSWORD)) {
+			if (!password.equals(ManagementConstants.getSECRET_KEY())) {
 				System.out.println("Password mismatch (attempt=" + password + ")!");
 				session.disconnect();
 				break;
