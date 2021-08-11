@@ -49,7 +49,7 @@ public final class PunishmentStorage {
 			return;
 		}
 		long end = Long.MAX_VALUE;
-		if (duration != -1l && duration != 0L) {
+		if (duration != -1L && duration != 0L) {
 			end = System.currentTimeMillis() + duration;
 		} else if (duration == 0L) {
 			end = 0L;

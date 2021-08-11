@@ -1349,8 +1349,8 @@ public final class Client extends GameShell {
         } else {
             try {
                 if (PacketParser.anInt80 == 0) {
-                    System.out.println("Trying " + GameConfig.Companion.getJS5_SERVER_PORT());
-                    Class17.aClass64_413 = Class38.gameSignlink.method1441((byte) 8, Class38_Sub1.accRegistryIp, GameConfig.Companion.getJS5_SERVER_PORT());
+                    System.out.println("Trying " + GameConfig.JS5_SERVER_PORT);
+                    Class17.aClass64_413 = Class38.gameSignlink.method1441((byte) 8, Class38_Sub1.accRegistryIp, GameConfig.JS5_SERVER_PORT);
                     ++PacketParser.anInt80;
                 }
 
@@ -1358,7 +1358,7 @@ public final class Client extends GameShell {
 
                     /* If the connection is null we reset the JS5 port to the backup server JS5 for compatibility reasons */
                     if (2 == Objects.requireNonNull(Class17.aClass64_413).anInt978) {
-                        GameConfig.Companion.setJS5_SERVER_PORT(GameConfig.SERVER_PORT + ObjectDefinition.paramWorldID);
+                        GameConfig.JS5_SERVER_PORT = GameConfig.SERVER_PORT + ObjectDefinition.paramWorldID;
                         this.method46(1000);
                         return;
                     }

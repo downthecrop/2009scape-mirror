@@ -67,7 +67,7 @@ public final class Class97 {
     static void method1593(int var0, CacheIndex var1) {
         try {
             Class154.anInt1966 = var1.getArchiveForName(TextCore.aClass94_3574);
-            Class79.anInt1124 = var1.getArchiveForName(TextCore.aClass94_1341);
+            CSConfigCachefile.anInt1124 = var1.getArchiveForName(TextCore.aClass94_1341);
             if (var0 <= 108) {
                 method1593(14, null);
             }

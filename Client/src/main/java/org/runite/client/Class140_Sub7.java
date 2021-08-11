@@ -32,7 +32,7 @@ public final class Class140_Sub7 extends GameObject {
 
    static boolean method2031(byte var0, boolean var1, int var2, int var3, Class3_Sub2[][][] var4, int var5) {
       try {
-         byte var6 = !var1?(byte)(255 & Class79.anInt1127):1;
+         byte var6 = !var1?(byte)(255 & CSConfigCachefile.anInt1127):1;
          if(Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][var2][var3] == var6) {
             return false;
          } else if((Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][var2][var3] & 4) == 0) {

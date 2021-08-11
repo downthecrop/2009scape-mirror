@@ -12,13 +12,13 @@ public final class ContextMenu {
         int width = Class21.anInt3552;
         int height = Class21.anInt3537;
         int contextMenuColor = 6116423; //Context Menu RGB || 6116423 Classic || Old var5 || ColorCore.getHexColors()
-        Toolkit.getActiveToolkit().fillRect(1 + x, y + 18, width + -2, -19 + height, GameConfig.RCM_BG_COLOR, GameConfig.RCM_BG_OPACITY);
+        Toolkit.getActiveToolkit().fillRect(1 + x, y + 18, width + -2, -19 + height, GameConfig.RCM_BG_COLOR, GameConfig.getRCM_BG_OPACITY());
         if (GameConfig.RS3_CONTEXT_STYLE) {
-            Toolkit.getActiveToolkit().fillRect(1 + x, 2 + y, width + -2, 16, GameConfig.RCM_TITLE_COLOR, GameConfig.RCM_TITLE_OPACITY);
-            Toolkit.getActiveToolkit().drawRect(1 + x, 1 + y, width + -2, height, GameConfig.RCM_BORDER_COLOR, GameConfig.RCM_BORDER_OPACITY);
+            Toolkit.getActiveToolkit().fillRect(1 + x, 2 + y, width + -2, 16, GameConfig.RCM_TITLE_COLOR, GameConfig.getRCM_TITLE_OPACITY());
+            Toolkit.getActiveToolkit().drawRect(1 + x, 1 + y, width + -2, height, GameConfig.RCM_BORDER_COLOR, GameConfig.getRCM_BORDER_OPACITY());
         } else {
-            Toolkit.getActiveToolkit().fillRect(1 + x, 2 + y, width + -2, 16, GameConfig.RCM_TITLE_COLOR, GameConfig.RCM_TITLE_OPACITY);
-            Toolkit.getActiveToolkit().drawRect(1 + x, y + 18, width + -2, -19 + height, GameConfig.RCM_BORDER_COLOR, GameConfig.RCM_BORDER_OPACITY);
+            Toolkit.getActiveToolkit().fillRect(1 + x, 2 + y, width + -2, 16, GameConfig.RCM_TITLE_COLOR, GameConfig.getRCM_TITLE_OPACITY());
+            Toolkit.getActiveToolkit().drawRect(1 + x, y + 18, width + -2, -19 + height, GameConfig.RCM_BORDER_COLOR, GameConfig.getRCM_BORDER_OPACITY());
         }
 
         FontType.bold.method681(RSString.parse(GameConfig.RCM_TITLE), x - -3, y + 14, contextMenuColor, -1);

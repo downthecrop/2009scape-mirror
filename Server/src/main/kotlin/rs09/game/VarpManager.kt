@@ -2,6 +2,8 @@ package rs09.game
 
 import core.cache.def.impl.VarbitDefinition
 import core.game.node.entity.player.Player
+import core.net.packet.PacketRepository
+import core.net.packet.context.VarbitContext
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import rs09.game.node.entity.skill.farming.FarmingPatch
@@ -30,6 +32,10 @@ class VarpManager(val player: Player) {
 
     fun setVarbit(def: VarbitDefinition, value: Int){
         get(def.configId).setVarbit(def.bitShift,value).send(player)
+    }
+
+    fun setVarbit(varbitIndex: Int, value: Int){
+        PacketRepository.send(core.net.packet.out.Varbit::class.java, VarbitContext(player, varbitIndex, value))
     }
 
     fun flagSave(index: Int){

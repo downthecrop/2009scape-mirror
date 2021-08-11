@@ -13,6 +13,8 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.object.Scenery;
+import org.json.simple.JSONObject;
+import rs09.ServerStore;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
@@ -261,13 +263,13 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 	 * @param player The player.
 	 */
 	private void commenceBorkBattle(Player player) {
-		if ((System.currentTimeMillis() - player.getSavedData().getActivityData().getLastBorkBattle()) < 24 * 60 * 60_000 && GameWorld.getSettings().isHosted()) {
+		if (ServerStore.getBoolean(getStoreFile(), player.getUsername().toLowerCase()) && GameWorld.getSettings().isHosted()) {
 			player.getPacketDispatch().sendMessage("The portal's magic is too weak to teleport you right now.");
 			return;
 		}
 		player.lock(10);
 		player.graphics(Graphics.create(110));
-		player.getSavedData().getActivityData().setLastBorkBattle(System.currentTimeMillis());
+		getStoreFile().put(player.getUsername().toLowerCase(), true);
 		ActivityManager.start(player, "Bork cutscene", false);
 	}
 
@@ -350,6 +352,14 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 	 */
 	private void addLink(Location location, Location loc) {
 		PORTALS.put(location, loc);
+	}
+
+	/**
+	 * Returns the Server Store file for Bork being killed for the day
+	 * @return The JSONObject containing the boolean of whether Bork has been killed
+	 */
+	private JSONObject getStoreFile() {
+		return ServerStore.getArchive("daily-bork-killed");
 	}
 
 }

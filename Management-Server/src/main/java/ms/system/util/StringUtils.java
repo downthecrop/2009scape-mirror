@@ -409,8 +409,9 @@ public final class StringUtils {
 				}
 			}
 			}
-			return -i_26_ + ((7 + i_30_) >> -662855293);
+			return -i_26_ + ((7 + i_30_) >> 3);
 		} catch (RuntimeException runtimeexception) {
+			runtimeexception.printStackTrace();
 		}
 		return 0;
 	}

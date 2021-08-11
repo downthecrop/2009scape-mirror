@@ -66,7 +66,7 @@ public final class PlayerSession {
 	/**
 	 * The time stamp of last disconnection.
 	 */
-	private long disconnectionTime = 0l;
+	private long disconnectionTime = 0L;
 
 	/**
 	 * How long the player is banned for.
@@ -463,11 +463,8 @@ public final class PlayerSession {
 		this.disconnectionTime = time;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		if(o instanceof PlayerSession) {
-			return username.equals(((PlayerSession) o).username);
-		} else return false;
+	public boolean equalsSession(PlayerSession o){
+		return username.equals(o.username);
 	}
 
 	@Override

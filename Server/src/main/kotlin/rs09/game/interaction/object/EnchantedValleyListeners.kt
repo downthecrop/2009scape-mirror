@@ -41,7 +41,7 @@ class EnchantedValleyListeners : InteractionListener() {
     fun getSpirit(player: Player): NPC {
         val level = player.properties.currentCombatLevel
         var index = Math.ceil(level / 20.0).toInt()
-        if(index > TREE_SPIRIT_IDS.size) index = TREE_SPIRIT_IDS.size
+        if(index >= TREE_SPIRIT_IDS.size) index = TREE_SPIRIT_IDS.size - 1
         return NPC(TREE_SPIRIT_IDS[index])
     }
 }
