@@ -1,11 +1,11 @@
 package ms.system.mysql
 
 import ms.system.util.ManagementConstants
-import ms.system.util.ManagementConstants.Companion.DATABASE_HOST_ADDRESS
-import ms.system.util.ManagementConstants.Companion.DATABASE_NAME
-import ms.system.util.ManagementConstants.Companion.DATABASE_PASSWORD
-import ms.system.util.ManagementConstants.Companion.DATABASE_PORT
-import ms.system.util.ManagementConstants.Companion.DATABASE_USERNAME
+import ms.system.util.ManagementConstants.DATABASE_HOST_ADDRESS
+import ms.system.util.ManagementConstants.DATABASE_NAME
+import ms.system.util.ManagementConstants.DATABASE_PASSWORD
+import ms.system.util.ManagementConstants.DATABASE_PORT
+import ms.system.util.ManagementConstants.DATABASE_USERNAME
 import java.sql.Connection
 import java.sql.DriverManager
 import java.sql.SQLException

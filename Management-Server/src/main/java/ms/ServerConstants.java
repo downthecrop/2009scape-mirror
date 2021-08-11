@@ -30,18 +30,6 @@ public final class ServerConstants {
 	public static final OperatingSystem OS = System.getProperty("os.name").toUpperCase().contains("WIN") ? OperatingSystem.WINDOWS : OperatingSystem.UNIX;
 	
 	/**
-	 * The administrators.
-	 */
-	public static final String[] ADMINISTRATORS = {
-			"redsparr0w",
-	};
-	
-	public static final String[] DATABASE_NAMES = {
-			"server",
-			"global",
-	};
-	
-	/**
 	 * Stops from instantiating.
 	 */
 	private ServerConstants() {
