@@ -44,10 +44,10 @@ class CerterEventInterface : InterfaceListener() {
 
         player.packetDispatch.sendString(items[correct],CERTER_INTERFACE,optionFromIndex(correctIndex))
 
-        val tempOptions = falseOptions
+        val tempOptions = falseOptions.toMutableList()
         val false1 = tempOptions.random()
+        tempOptions.remove(false1)
         var false2 = tempOptions.random()
-        while(false1 == false2) false2 = tempOptions.random()
 
         player.packetDispatch.sendString(false1,CERTER_INTERFACE,optionFromIndex(indexes[0]))
         player.packetDispatch.sendString(false2,CERTER_INTERFACE,optionFromIndex(indexes[1]))

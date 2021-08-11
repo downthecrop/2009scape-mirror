@@ -216,14 +216,12 @@ class BoneGrinderListener : InteractionListener() {
 
         val bone = Bones.values()[player.getAttribute(LOADED_BONE_KEY,-1)]
 
+        player.lock()
         Pulser.submit(object : Pulse(){
             var stage = 0
             override fun pulse(): Boolean {
                 when(stage++){
-                    0 -> {
-                        player.lock()
-                        player.animator.animate(SCOOP_ANIM)
-                    }
+                    0 -> player.animator.animate(SCOOP_ANIM)
                     SCOOP_ANIM.duration -> {
                         player.unlock()
                         if(player.inventory.remove(Item(Items.EMPTY_POT_1931))){

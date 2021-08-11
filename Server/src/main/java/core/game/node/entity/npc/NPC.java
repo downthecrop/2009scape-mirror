@@ -513,7 +513,7 @@ public class NPC extends Entity {
 		if (getZoneMonitor().handleDeath(killer)) {
 			return;
 		}
-		if (task != null && killer instanceof Player && ((Player) killer).getSlayer().getTask() == task) {
+		if (task != null && killer instanceof Player && ((Player) killer).getSlayer().getTask() == task && ((Player) killer).getSlayer().hasTask()) {
 			((Player) killer).getSlayer().finalizeDeath(killer.asPlayer(), this);
 		}
 		if (killer instanceof Player && killer.getAttribute("jobs:id",null) != null) {
