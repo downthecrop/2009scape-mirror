@@ -105,10 +105,12 @@ public final class SlayerManager {
 	 * @param npc The NPC. You're currently
 	 */
 	public void finalizeDeath(Player player, NPC npc) {
-		player.getSkills().addExperience(Skills.SLAYER,npc.getSkills().getMaximumLifepoints());
-		decrementAmount(1);
-		if (!hasTask()) {
-			clear();
+		if(hasTask()) {
+			player.getSkills().addExperience(Skills.SLAYER, npc.getSkills().getMaximumLifepoints());
+			decrementAmount(1);
+		}
+
+		if(!hasTask()){
 			flags.setTaskStreak(flags.getTaskStreak() + 1);
 			flags.setCompletedTasks(flags.getCompletedTasks() + 1);
 			if ((flags.getCompletedTasks() > 4 || flags.canEarnPoints() ) && flags.getMaster() != Master.TURAEL && flags.getPoints() < 64000) {
@@ -251,7 +253,7 @@ public final class SlayerManager {
 	 * @return {@code True} if so.
 	 */
 	public boolean hasTask() {
-		return getAmount() != 0;
+		return getAmount() > 0;
 	}
 
 	/**

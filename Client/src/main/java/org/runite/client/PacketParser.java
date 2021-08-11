@@ -77,7 +77,7 @@ public final class PacketParser {
         if (60 == Unsorted.incomingOpcode) {
             nodeModelId = BufferedDataStream.incomingBuffer.readUnsignedShort128();
             byte var69 = BufferedDataStream.incomingBuffer.readSignedNegativeByte();
-            TextureOperation39.method281(var69, nodeModelId);
+            VarpHelpers.setVarp(var69, nodeModelId);
             Unsorted.incomingOpcode = -1;
             return true;
         } else {
@@ -442,7 +442,7 @@ public final class PacketParser {
                                     } else if (Unsorted.incomingOpcode == 226) {
                                         nodeModelId = BufferedDataStream.incomingBuffer.readInt();
                                         var19 = BufferedDataStream.incomingBuffer.readUnsignedShort128();
-                                        TextureOperation39.method281(nodeModelId, var19);
+                                        VarpHelpers.setVarp(nodeModelId, var19);
                                         Unsorted.incomingOpcode = -1;
                                         return true;
                                     } else if (Unsorted.incomingOpcode == 21) {
@@ -1027,7 +1027,7 @@ public final class PacketParser {
                                                         var19 = BufferedDataStream.incomingBuffer.readUnsignedShort128();
                                                         modelId = BufferedDataStream.incomingBuffer.readUnsignedShortLE128();
                                                         Class146.updateInterfacePacketCounter(var19);
-                                                        Class79.method1385(modelId, nodeModelId);
+                                                        CSConfigCachefile.method1385(modelId, nodeModelId);
 
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
@@ -1123,7 +1123,7 @@ public final class PacketParser {
                                                     } else if (37 == Unsorted.incomingOpcode) {
                                                         nodeModelId = BufferedDataStream.incomingBuffer.readUnsignedByte128();
                                                         var19 = BufferedDataStream.incomingBuffer.readUnsignedShortLE();
-                                                        Class163.method2209((byte) -122, nodeModelId, var19);
+                                                        VarpHelpers.setVarbit((byte) -122, nodeModelId, var19);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 155) {
@@ -1400,7 +1400,7 @@ public final class PacketParser {
                                                     } else if (Unsorted.incomingOpcode == 84) {
                                                         nodeModelId = BufferedDataStream.incomingBuffer.readIntLE();
                                                         var19 = BufferedDataStream.incomingBuffer.readUnsignedShortLE128();
-                                                        Class163.method2209((byte) -106, nodeModelId, var19);
+                                                        VarpHelpers.setVarbit((byte) -106, nodeModelId, var19);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else {

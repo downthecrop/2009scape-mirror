@@ -166,25 +166,6 @@ class TextureOperation39 extends TextureOperation {
       }
    }
 
-   static void method281(int var1, int var2) {
-      try {
-         Class57.varpArray[var2] = var1;
-         if(CustomVars.parse(var2,var1)){
-            return;
-         }
-         Class3_Sub7 var3 = (Class3_Sub7) AtmosphereParser.aHashTable_3679.get(var2);
-         if(null == var3) {
-            var3 = new Class3_Sub7(4611686018427387905L);
-            AtmosphereParser.aHashTable_3679.put(var2, var3);
-         } else if (var3.aLong2295 != 4611686018427387905L) {
-            var3.aLong2295 = TimeUtils.time() + 500L | 4611686018427387904L;
-         }
-
-      } catch (RuntimeException var4) {
-         throw ClientErrorException.clientError(var4, "nh.W(" + (byte) 99 + ',' + var1 + ',' + var2 + ')');
-      }
-   }
-
    final void method161(byte var1) {
       try {
          super.method161(var1);

@@ -902,11 +902,11 @@ public final class NPCDefinition {
    static int method1484(int var1) {
       try {
 
-         Class79 var2 = CS2Script.method378(var1, (byte)127);
-         int var3 = Objects.requireNonNull(var2).anInt1128;
-         int var5 = var2.anInt1125;
-         int var4 = var2.anInt1123;
-         int var6 = Class3_Sub6.anIntArray2288[var5 + -var4];
+         CSConfigCachefile var2 = CSConfigCachefile.getCSConfigFileFromVarbitID(var1);
+         int var3 = Objects.requireNonNull(var2).parentVarpIndex;
+         int var5 = var2.upperBound;
+         int var4 = var2.lowerBound;
+         int var6 = Class3_Sub6.expectedMinimumValues[var5 + -var4];
          return ItemDefinition.ram[var3] >> var4 & var6;
       } catch (RuntimeException var7) {
          throw ClientErrorException.clientError(var7, "me.B(" + 64835055 + ',' + var1 + ')');

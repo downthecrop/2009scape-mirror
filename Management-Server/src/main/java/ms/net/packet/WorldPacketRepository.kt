@@ -5,7 +5,7 @@ import ms.system.PunishmentStorage
 import ms.system.communication.ClanRank
 import ms.system.communication.ClanRepository
 import ms.system.communication.CommunicationInfo
-import ms.system.util.ManagementConstants.Companion.WORLD_HOP_DELAY
+import ms.system.util.ManagementConstants.WORLD_HOP_DELAY
 import ms.world.GameServer
 import ms.world.PlayerSession
 import ms.world.WorldDatabase

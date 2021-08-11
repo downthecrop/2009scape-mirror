@@ -30,19 +30,20 @@ class ManagementConfigParser(path: String) {
             data = parser.parse(reader) as JSONObject
             parseDatabaseInformation()
             parseWorldTechnicalSettings()
+            ManagementConstants.SECRET_KEY = data!!["secret_key"].toString()
         }
     }
 
     private fun parseDatabaseInformation(){
         data ?: return
         val dbData = data!!["DatabaseInformation"] as JSONObject
-        ManagementConstants().parseDBProp(dbData)
+        ManagementConstants.parseDBProp(dbData)
     }
 
     private fun parseWorldTechnicalSettings(){
         data ?: return
         val wtiData = data!!["WorldTechnicalInformation"] as JSONObject
-        ManagementConstants().parseWTIProp(wtiData)
+        ManagementConstants.parseWTIProp(wtiData)
     }
 
     /**
