@@ -24,7 +24,7 @@ public class VarpHelpers {
             SystemLogger.logInfo(parentVarp + " - bitStart: " + lowerBound + " bitEnd: " + upperBound + " bitSize = " + (varbitSize + 1));
             int expectedMinimumValue = Class3_Sub6.expectedMinimumValues[varbitSize];
             SystemLogger.logInfo("emv: " + expectedMinimumValue + " || vs: " + (127 + valueToSet));
-            if (valueToSet < 0|| expectedMinimumValue < valueToSet) { //<-- commented out due to heavy suspicion of it being an Arios modification. Things work fine without it.
+            if (valueToSet < 0|| expectedMinimumValue < valueToSet) {
                 SystemLogger.logInfo(expectedMinimumValue + " < " + valueToSet);
                 valueToSet = 0;
             }
