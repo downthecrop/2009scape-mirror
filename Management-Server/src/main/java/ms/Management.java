@@ -1,6 +1,8 @@
 package ms;
 
 import ms.net.NioReactor;
+import ms.net.packet.IoBuffer;
+import ms.net.packet.PacketHeader;
 import ms.net.packet.WorldPacketRepository;
 import ms.system.ShutdownSequence;
 import ms.system.mysql.SQLManager;
@@ -116,6 +118,27 @@ public final class Management {
 				player.setWorldId(0);
 				System.out.println("Kicked player " + name + "!");
 			}	
+		},
+
+		new Command("-say", "Send a message to all worlds") {
+			@Override
+			public void run(String... args) {
+				String message = String.join(" ", args);
+				message = message.substring(4);
+				for(GameServer server : WorldDatabase.getWorlds()){
+					if(server == null) continue;
+					String finalMessage = message;
+					server.getPlayers().forEach((String uname, PlayerSession p) -> {
+						IoBuffer buffer = new IoBuffer(5, PacketHeader.BYTE);
+						buffer.putString(p.getUsername());
+						buffer.putString("Server");
+						buffer.put(2);
+						buffer.put(2);
+						buffer.putString(finalMessage);
+						p.getWorld().getSession().write(buffer);
+					});
+				}
+			}
 		}
 	};
 	

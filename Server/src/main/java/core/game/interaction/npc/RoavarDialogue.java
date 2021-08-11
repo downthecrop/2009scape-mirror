@@ -44,7 +44,7 @@ public class RoavarDialogue extends DialoguePlugin {
 			stage = 1;
 			break;
 		case 1:
-			interpreter.sendOptions("Select an Option", "Can I buy a beer?", "Can I hear some gossipp?", "Do you have a spare silver sickle?", "Nothing thanks.");
+			interpreter.sendOptions("Select an Option", "Can I buy a beer?", "Can I hear some gossipp?", "Nothing thanks.");
 			stage = 2;
 			break;
 		case 2:
@@ -58,10 +58,6 @@ public class RoavarDialogue extends DialoguePlugin {
 				stage = 20;
 				break;
 			case 3:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Would you happen to have a spare silver sickle?");
-				stage = 30;
-				break;
-			case 4:
 				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Nothing thanks.");
 				stage = 40;
 				break;
