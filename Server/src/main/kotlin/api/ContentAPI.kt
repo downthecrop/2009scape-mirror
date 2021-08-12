@@ -437,6 +437,22 @@ object ContentAPI {
     }
 
     /**
+     * Spawns a projectile with more advanced parameters
+     * @param source the initial Location of the projectile
+     * @param dest the final Location of the projectile
+     * @param projectile the ID of the gfx used for the projectile
+     * @param startHeight the height the projectile spawns at
+     * @param endHeight the height the projectile ends at
+     * @param delay the delay before the projectile spawns
+     * @param speed the speed the projectile travels at
+     * @param angle the angle the projectile travels at
+     */
+    @JvmStatic
+    fun spawnProjectile(source: Location, dest: Location, projectile: Int, startHeight: Int, endHeight: Int, delay: Int, speed: Int, angle: Int){
+        Projectile.create(source, dest, projectile, startHeight, endHeight, delay, speed, angle, source.getDistance(dest).toInt()).send()
+    }
+
+    /**
      * Causes the given entity to face the given toFace
      * @param entity the entity you wish to face something
      * @param toFace the thing to face
