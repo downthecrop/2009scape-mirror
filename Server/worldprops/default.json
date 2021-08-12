@@ -43,7 +43,8 @@
     "database_username": "root",
     "database_password": "",
     "database_address": "127.0.0.1",
-    "database_port": "3306"
+    "database_port": "3306",
+    "ms_secret_key": "2009scape_development"
   },
 
   "PluginToggles": {

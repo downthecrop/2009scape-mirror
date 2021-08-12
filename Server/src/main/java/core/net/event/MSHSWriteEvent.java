@@ -3,6 +3,8 @@ package core.net.event;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.net.IoSession;
 import core.net.IoWriteEvent;
+import rs09.Server;
+import rs09.ServerConstants;
 
 import java.nio.ByteBuffer;
 
@@ -11,11 +13,6 @@ import java.nio.ByteBuffer;
  * @author Emperor
  */
 public final class MSHSWriteEvent extends IoWriteEvent {
-
-	/**
-	 * The password used to verify
-	 */
-	private static final String PASSWORD = "0x14ari0SSbh98989910";
 
 	/**
 	 * Constructs a new {@code MSHSWriteEvent} {@code Object}
@@ -28,9 +25,9 @@ public final class MSHSWriteEvent extends IoWriteEvent {
 
 	@Override
 	public void write(IoSession session, Object context) {
-		ByteBuffer	buffer = ByteBuffer.allocate(2 + PASSWORD.length());
+		ByteBuffer	buffer = ByteBuffer.allocate(2 + ServerConstants.MS_SECRET_KEY.length());
 		buffer.put((byte) 88);
-		ByteBufferUtils.putString(PASSWORD, buffer);
+		ByteBufferUtils.putString(ServerConstants.MS_SECRET_KEY, buffer);
 		session.queue((ByteBuffer) buffer.flip());
 	}
 

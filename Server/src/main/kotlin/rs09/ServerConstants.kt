@@ -106,6 +106,9 @@ class ServerConstants {
 		@JvmField
 		var GE_AUTOSTOCK_ENABLED = false
 
+		@JvmField
+		var MS_SECRET_KEY = ""
+
 		//location names for the ::to command.
 		val TELEPORT_DESTINATIONS = arrayOf(
 				arrayOf(Location.create(2974, 4383, 2), "corp", "corporal", "corporeal"),
@@ -218,6 +221,9 @@ class ServerConstants {
 			if(data.containsKey("daily_restart")){
 				DAILY_RESTART = data["daily_restart"] as Boolean
 			}
+
+			if(data.containsKey("ms_secret_key")) MS_SECRET_KEY = data["ms_secret_key"].toString()
+			else MS_SECRET_KEY = "2009scape_development"
 		}
 	}
 }
