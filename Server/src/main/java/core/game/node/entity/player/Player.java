@@ -80,6 +80,7 @@ import rs09.game.ge.PlayerGrandExchange;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
+import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
 import rs09.game.node.entity.state.newsys.State;
 import rs09.game.node.entity.state.newsys.StateRepository;
 import rs09.game.world.GameWorld;
@@ -354,6 +355,8 @@ public class Player extends Entity {
 	
 	private int archeryTotal = 0;
 
+	private int prayerActiveTicks = 0;
+
 	/**
 	 * Constructs a new {@code Player} {@code Object}.
 	 * @param details The player's details.
@@ -496,6 +499,24 @@ public class Player extends Entity {
 		if (!artificial && (System.currentTimeMillis() - getSession().getLastPing()) > 20_000L) {
 			details.getSession().disconnect();
 			getSession().setLastPing(Long.MAX_VALUE);
+		}
+		//Decrements prayer points
+		if(!prayer.getActive().isEmpty() && prayerActiveTicks % 2 == 0){
+			double amountDrain = 0;
+			for(PrayerType type : prayer.getActive()){
+				double drain = type.getDrain();
+				double bonus = (1/30f) * prayer.getPlayer().getProperties().getBonuses()[12];
+				drain = drain * (1 + bonus);
+				drain = 0.6 / drain;
+				amountDrain += drain;
+			}
+			if(SkillcapePerks.isActive(SkillcapePerks.DIVINE_FAVOR,prayer.getPlayer()) && RandomFunction.random(100) <= 10){
+				amountDrain = 0;
+			}
+
+			getSkills().decrementPrayerPoints(amountDrain);
+		} else {
+			prayerActiveTicks = 0;
 		}
 	}
 
