@@ -128,6 +128,7 @@ public final class Prayer {
 			}
 
 			getPlayer().getSkills().decrementPrayerPoints(amountDrain);
+			prayerActiveTicks++;
 		} else {
 			prayerActiveTicks = 0;
 		}
