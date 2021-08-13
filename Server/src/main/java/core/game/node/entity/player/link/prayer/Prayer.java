@@ -29,11 +29,6 @@ public final class Prayer {
 	private final List<PrayerType> active = new ArrayList<>(20);
 
 	/**
-	 * Represents the current draining task.
-	 */
-	private final DrainTask task = new DrainTask();
-
-	/**
 	 * Represents the player instance.
 	 */
 	private final Player player;
@@ -157,14 +152,6 @@ public final class Prayer {
 	 */
 	public Player getPlayer() {
 		return player;
-	}
-
-	/**
-	 * Gets the task.
-	 * @return The task.
-	 */
-	public DrainTask getTask() {
-		return task;
 	}
 
 	/**
