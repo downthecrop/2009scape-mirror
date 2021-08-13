@@ -131,6 +131,9 @@ public final class Prayer {
 			}
 
 			getPlayer().getSkills().decrementPrayerPoints(amountDrain);
+			if(getPlayer().getSkills().getPrayerPoints() == 0){
+				reset();
+			}
 		}
 	}
 
