@@ -114,7 +114,10 @@ public final class Prayer {
 	}
 
 	public void tick() {
-		if(!getActive().isEmpty() && prayerActiveTicks % 2 == 0){
+		if(!getActive().isEmpty()) prayerActiveTicks ++;
+		else prayerActiveTicks = 0;
+
+		if(prayerActiveTicks > 0 && prayerActiveTicks % 2 == 0){
 			double amountDrain = 0;
 			for(PrayerType type : getActive()){
 				double drain = type.getDrain();
@@ -128,9 +131,6 @@ public final class Prayer {
 			}
 
 			getPlayer().getSkills().decrementPrayerPoints(amountDrain);
-			prayerActiveTicks++;
-		} else {
-			prayerActiveTicks = 0;
 		}
 	}
 
