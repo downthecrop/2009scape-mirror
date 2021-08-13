@@ -1,5 +1,6 @@
 package core.game.content.dialogue;
 
+import api.ContentAPI;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
@@ -47,7 +48,7 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		final Quest quest = player.getQuestRepository().getQuest("Priest in Peril");
+		Quest quest = player.getQuestRepository().getQuest("Priest in Peril");
 		if (quest.getStage(player) == 17) {
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Ah, " + player.getUsername() + ". I see you finally made it down here.", "Things are worse than I feared. I'm not sure if I will", "be able to repair the damage.");
 			stage = 900;
@@ -67,9 +68,20 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "So can I pass through that barrier now?");
 			stage = 400;
 			return true;
-		} else {
+		}
+
+		/*else {
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Greetings again adventurer, How go your travels in", "Morytania? Is it as evil as I have heard?");
 			stage = 420;
+		}*/
+
+		quest = player.getQuestRepository().getQuest("Nature Spirit");
+
+		if(quest.getStage(player) <= 5){
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Greetings again adventurer, How go your travels in", "Morytania? Is it as evil as I have heard?");
+			stage = 420;
+		} else if (quest.getStage(player) < 100){
+			ContentAPI.openDialogue(player, new NSDrezelDialogue());
 		}
 		return true;
 	}
