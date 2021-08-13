@@ -355,8 +355,6 @@ public class Player extends Entity {
 	
 	private int archeryTotal = 0;
 
-	private int prayerActiveTicks = 0;
-
 	/**
 	 * Constructs a new {@code Player} {@code Object}.
 	 * @param details The player's details.
@@ -500,24 +498,9 @@ public class Player extends Entity {
 			details.getSession().disconnect();
 			getSession().setLastPing(Long.MAX_VALUE);
 		}
-		//Decrements prayer points
-		if(!prayer.getActive().isEmpty() && prayerActiveTicks % 2 == 0){
-			double amountDrain = 0;
-			for(PrayerType type : prayer.getActive()){
-				double drain = type.getDrain();
-				double bonus = (1/30f) * prayer.getPlayer().getProperties().getBonuses()[12];
-				drain = drain * (1 + bonus);
-				drain = 0.6 / drain;
-				amountDrain += drain;
-			}
-			if(SkillcapePerks.isActive(SkillcapePerks.DIVINE_FAVOR,prayer.getPlayer()) && RandomFunction.random(100) <= 10){
-				amountDrain = 0;
-			}
 
-			getSkills().decrementPrayerPoints(amountDrain);
-		} else {
-			prayerActiveTicks = 0;
-		}
+		//Decrements prayer points
+		getPrayer().tick();
 	}
 
 	@Override

@@ -12,6 +12,7 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,6 +33,8 @@ public final class Prayer {
 	 * Represents the player instance.
 	 */
 	private final Player player;
+
+	private int prayerActiveTicks = 0;
 
 	/**
 	 * Constructs a new {@code Prayer} {@code Object}.
@@ -107,6 +110,26 @@ public final class Prayer {
 					entity.getImpactHandler().manualHit(player, 1 + RandomFunction.randomize(maximum), HitsplatType.NORMAL);
 				}
 			}
+		}
+	}
+
+	public void tick() {
+		if(!getActive().isEmpty() && prayerActiveTicks % 2 == 0){
+			double amountDrain = 0;
+			for(PrayerType type : getActive()){
+				double drain = type.getDrain();
+				double bonus = (1/30f) * getPlayer().getProperties().getBonuses()[12];
+				drain = drain * (1 + bonus);
+				drain = 0.6 / drain;
+				amountDrain += drain;
+			}
+			if(SkillcapePerks.isActive(SkillcapePerks.DIVINE_FAVOR, getPlayer()) && RandomFunction.random(100) <= 10){
+				amountDrain = 0;
+			}
+
+			getPlayer().getSkills().decrementPrayerPoints(amountDrain);
+		} else {
+			prayerActiveTicks = 0;
 		}
 	}
 
