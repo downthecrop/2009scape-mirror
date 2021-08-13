@@ -170,6 +170,10 @@ class VisualCommand : CommandPlugin() {
                 }
                 return true
             }
+            "teleallowed" -> {
+                player!!.debug("Is tele allowed here? " + RegionManager.isTeleportPermitted(player!!.location))
+                return true
+            }
             "oib" -> player!!.interfaceManager.openInfoBars()
             "char" -> CharacterDesign.open(player)
             "savenpc" -> return true
