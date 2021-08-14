@@ -81,7 +81,7 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Greetings again adventurer, How go your travels in", "Morytania? Is it as evil as I have heard?");
 			stage = 420;
 		} else if (quest.getStage(player) < 100){
-			ContentAPI.openDialogue(player, new NSDrezelDialogue());
+			ContentAPI.openDialogue(player, new NSDrezelDialogue(), npc);
 		}
 		return true;
 	}

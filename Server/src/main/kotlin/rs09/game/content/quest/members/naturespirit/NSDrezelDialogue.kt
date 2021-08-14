@@ -2,6 +2,12 @@ package rs09.game.content.quest.members.naturespirit
 
 import api.ContentAPI
 import core.game.content.dialogue.FacialExpression
+import core.game.node.entity.npc.NPC
+import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.audio.Audio
+import core.game.system.task.Pulse
+import core.game.world.update.flag.context.Animation
+import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.tools.END_DIALOGUE
@@ -54,7 +60,55 @@ class NSDrezelDialogue : DialogueFile() {
             }
         }
 
+        if(questStage == 15) {
+            when(stage){
+                0 -> playerl(FacialExpression.HALF_GUILTY, "I've found Filliman and you should prepare for some sad news.").also { stage++ }
+                1 -> npcl(FacialExpression.HALF_GUILTY, "You mean... he's dead?").also { stage++ }
+                2 -> playerl(FacialExpression.NEUTRAL, "Well, er sort of. I got to his camp and I encountered a spirit of some kind. I don't think it was a Ghast, it tried to communicate with me, but made no sense, it was all 'ooooh' this and 'oooh' that.").also { stage++ }
+                3 -> npcl(FacialExpression.NEUTRAL, "Hmmm, that's very interesting, I seem to remember Father Aereck in Lumbridge and his predecessor Father Urhney having a similar issue. Though this is probably not related to your problem.").also { stage++ }
+                4 -> npcl(FacialExpression.NEUTRAL, " I will pray that it wasn't the spirit of my friend Filliman, but some lost soul who needs some help. Please do let me know how you get on with it.").also { stage = END_DIALOGUE }
+            }
+        }
+
+        if(questStage == 35){
+            when(stage){
+                0 -> playerl(FacialExpression.FRIENDLY, "Hello again! I'm helping Filliman, he plans to become a nature spirit. I have a spell to cast but first I need to be blessed. Can you bless me?").also { stage++ }
+                1 -> npcl(FacialExpression.NEUTRAL, "But you haven't sneezed!").also { stage++ }
+                2 -> playerl(FacialExpression.FRIENDLY, "You're so funny! But can you bless me?").also { stage++ }
+                3 -> npcl(FacialExpression.NEUTRAL, "Very well my friend, prepare yourself for the blessings of Saradomin. Here we go!").also { stage++ }
+                4 -> {
+                    end()
+                    player!!.lock();
+                    ContentAPI.submitIndividualPulse(player!!, BlessingPulse(npc!!, player!!))
+                }
+            }
+        }
+
+        if(questStage == 40){
+            when(stage){
+                0 -> npcl(FacialExpression.NEUTRAL, "There you go my friend, you're now blessed. It's funny, now I look at you, there seems to be something of the faith about you. Anyway, good luck with your quest!").also { stage = END_DIALOGUE; player!!.questRepository.getQuest("Nature Spirit").setStage(player!!, 45) }
+            }
+        }
 
     }
 
+}
+
+private class BlessingPulse(val drezel: NPC, val player: Player) : Pulse(){
+    var ticks = 0
+
+    override fun pulse(): Boolean {
+        when(ticks){
+            0 -> ContentAPI.animate(drezel, 1162).also { ContentAPI.spawnProjectile(drezel, player, 268); ContentAPI.playAudio(player, Audio(2674)) }
+            2 -> ContentAPI.visualize(player, Animation(645), Graphics(267, 100))
+            4 -> ContentAPI.unlock(player).also { player.questRepository.getQuest("Nature Spirit").setStage(player, 40); return true }
+        }
+        ticks++
+        return false
+    }
+
+    override fun stop() {
+        super.stop()
+        ContentAPI.openDialogue(player, NSDrezelDialogue(), drezel)
+    }
 }
