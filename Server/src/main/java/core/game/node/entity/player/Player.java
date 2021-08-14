@@ -80,6 +80,7 @@ import rs09.game.ge.PlayerGrandExchange;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
+import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
 import rs09.game.node.entity.state.newsys.State;
 import rs09.game.node.entity.state.newsys.StateRepository;
 import rs09.game.world.GameWorld;
@@ -497,6 +498,9 @@ public class Player extends Entity {
 			details.getSession().disconnect();
 			getSession().setLastPing(Long.MAX_VALUE);
 		}
+
+		//Decrements prayer points
+		getPrayer().tick();
 	}
 
 	@Override

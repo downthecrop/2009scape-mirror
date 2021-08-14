@@ -89,8 +89,8 @@ object RegionManager {
         if (!region.isHasFlags) {
             return -1
         }
-        x -= x shr 6 shl 6
-        y -= y shr 6 shl 6
+        x -= (x shr 6) shl 6
+        y -= (y shr 6) shl 6
         return region.planes[z].flags.clippingFlags[x][y]
     }
 
@@ -175,8 +175,8 @@ object RegionManager {
         if (!region.isHasFlags) {
             return
         }
-        x -= x shr 6 shl 6
-        y -= y shr 6 shl 6
+        x -= (x shr 6) shl 6
+        y -= (y shr 6) shl 6
         if (projectile) {
             region.planes[z].projectileFlags.flag(x, y, flag)
         } else {
@@ -201,8 +201,8 @@ object RegionManager {
         if (!region.isHasFlags) {
             return
         }
-        x -= x shr 6 shl 6
-        y -= y shr 6 shl 6
+        x -= (x shr 6) shl 6
+        y -= (y shr 6) shl 6
         if (projectile) {
             region.planes[z].projectileFlags.unflag(x, y, flag)
         } else {
@@ -226,8 +226,8 @@ object RegionManager {
         if (!region.isHasFlags) {
             return -1
         }
-        x -= x shr 6 shl 6
-        y -= y shr 6 shl 6
+        x -= (x shr 6) shl 6
+        y -= (y shr 6) shl 6
         return region.planes[z].projectileFlags.clippingFlags[x][y]
     }
 
