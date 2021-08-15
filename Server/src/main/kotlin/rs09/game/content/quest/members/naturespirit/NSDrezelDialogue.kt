@@ -11,6 +11,7 @@ import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.tools.END_DIALOGUE
+import rs09.tools.stringtools.colorize
 
 class NSDrezelDialogue : DialogueFile() {
     var questStage = 0
@@ -49,8 +50,8 @@ class NSDrezelDialogue : DialogueFile() {
                 22 -> {
                     ContentAPI.sendDoubleItemDialogue(player!!, Items.MEAT_PIE_2327, Items.APPLE_PIE_2323, "The cleric hands you some food.")
                     if(questStage == 0){
-                        ContentAPI.addItemOrDrop(player!!, Items.MEAT_PIE_2327, 3)
-                        ContentAPI.addItemOrDrop(player!!, Items.APPLE_PIE_2323, 3)
+                        repeat(3) { ContentAPI.addItemOrDrop(player!!, Items.MEAT_PIE_2327, 1) }
+                        repeat(3) { ContentAPI.addItemOrDrop(player!!, Items.APPLE_PIE_2323, 1) }
                         player!!.questRepository.getQuest("Nature Spirit").setStage(player!!, 5)
                     }
                     stage++
@@ -60,7 +61,7 @@ class NSDrezelDialogue : DialogueFile() {
             }
         }
 
-        if(questStage == 15) {
+        else if(questStage == 15) {
             when(stage){
                 0 -> playerl(FacialExpression.HALF_GUILTY, "I've found Filliman and you should prepare for some sad news.").also { stage++ }
                 1 -> npcl(FacialExpression.HALF_GUILTY, "You mean... he's dead?").also { stage++ }
@@ -70,7 +71,7 @@ class NSDrezelDialogue : DialogueFile() {
             }
         }
 
-        if(questStage == 35){
+        else if(questStage == 35){
             when(stage){
                 0 -> playerl(FacialExpression.FRIENDLY, "Hello again! I'm helping Filliman, he plans to become a nature spirit. I have a spell to cast but first I need to be blessed. Can you bless me?").also { stage++ }
                 1 -> npcl(FacialExpression.NEUTRAL, "But you haven't sneezed!").also { stage++ }
@@ -84,12 +85,17 @@ class NSDrezelDialogue : DialogueFile() {
             }
         }
 
-        if(questStage == 40){
-            when(stage){
-                0 -> npcl(FacialExpression.NEUTRAL, "There you go my friend, you're now blessed. It's funny, now I look at you, there seems to be something of the faith about you. Anyway, good luck with your quest!").also { stage = END_DIALOGUE; player!!.questRepository.getQuest("Nature Spirit").setStage(player!!, 45) }
-            }
+        else if(questStage == 40){
+            npcl(FacialExpression.NEUTRAL, "There you go my friend, you're now blessed. It's funny, now I look at you, there seems to be something of the faith about you. Anyway, good luck with your quest!").also { stage = END_DIALOGUE; player!!.questRepository.getQuest("Nature Spirit").setStage(player!!, 45) }
         }
 
+        else {
+            when(stage){
+                0 -> npcl(FacialExpression.NEUTRAL, "Hello, friend, how goes your quest with Filliman?").also { stage++ }
+                1 -> playerl(FacialExpression.NEUTRAL, "Still working at it.").also { stage++ }
+                2 -> npcl(FacialExpression.NEUTRAL, "Well enough! Do let me know when something develops!").also { stage = END_DIALOGUE }
+            }
+        }
     }
 
 }

@@ -1,5 +1,6 @@
 package rs09.game.content.quest.members.naturespirit
 
+import api.Container
 import api.ContentAPI
 import api.DialUtils
 import core.game.node.item.GroundItem
@@ -25,6 +26,7 @@ class NSListeners : InteractionListener() {
     val FREELY_GIVEN_STONE = 3529
     val WASHING_BOWL = Items.WASHING_BOWL_2964
     val MIRROR = Items.MIRROR_2966
+    val SPELLCARD = Items.DRUIDIC_SPELL_2968
     val MIRROR_TAKEN = "/save:ns:mirror_taken"
     val GROTTO_SEARCHED = "/save:ns:grotto_searched"
 
@@ -84,6 +86,14 @@ class NSListeners : InteractionListener() {
             }
             ContentAPI.setAttribute(player, MIRROR_TAKEN, true)
             PickupHandler.take(player, node as GroundItem)
+            return@on true
+        }
+
+        on(SPELLCARD, ITEM, "cast"){player, node ->
+            if(NSUtils.castBloom(player)){
+                ContentAPI.removeItem(player, node.asItem(), Container.INVENTORY)
+                ContentAPI.addItem(player, Items.A_USED_SPELL_2969)
+            }
             return@on true
         }
     }

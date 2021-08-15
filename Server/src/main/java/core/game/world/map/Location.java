@@ -339,7 +339,7 @@ public final class Location extends Node {
 	 * @return The local y-coordinate.
 	 */
 	public int getSceneY(Location loc) {
-		return y - ((loc.getRegionY() - 6) * 8);
+		return y - ((loc.getRegionY() - 6) << 3);
 	}
 
 	/**

@@ -80,7 +80,6 @@ import rs09.game.ge.PlayerGrandExchange;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
-import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
 import rs09.game.node.entity.state.newsys.State;
 import rs09.game.node.entity.state.newsys.StateRepository;
 import rs09.game.world.GameWorld;
@@ -95,7 +94,7 @@ import java.util.*;
 
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_DEATHS;
-import static rs09.tools.stringtools.StringToolsKt.colorize;
+import static rs09.tools.stringtools.GlobalsKt.colorize;
 
 /**
  * Represents a player entity.

@@ -7,6 +7,8 @@ import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
+import core.game.system.task.Pulse
+import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
@@ -36,6 +38,17 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
             25 -> npcl(FacialExpression.HALF_GUILTY, "Oh, hello... Sorry, you've caught me at a bad time, it's just that I've had a sign you see and I need to find my journal.").also { stage = 7 }
             30 -> npcl(FacialExpression.HALF_GUILTY, "Thanks for the journal, I've been reading it. It looks like I came to a violent and bitter end but that's not really important. I just have to figure out what I am going to do now?").also { stage = 14 }
             35 -> npcl(FacialExpression.NEUTRAL, "Hello there, have you been blessed yet?").also { stage = 60 }
+            40 -> {
+                if(ContentAPI.inInventory(player, Items.MORT_MYRE_FUNGUS_2970)){
+                    npcl(FacialExpression.NEUTRAL, "Did you manage to get something from nature?").also { stage = 80 }
+                } else {
+                    playerl(
+                        FacialExpression.NEUTRAL,
+                        "Hello, I've been blessed but I don't know what to do now."
+                    ).also { stage = 70 }
+                }
+            }
+            45 -> npcl(FacialExpression.NEUTRAL, " Hello again! I don't suppose you've found out what the other components of the Nature spell are have you?").also { stage = 90 }
             else -> return false
         }
         return true
@@ -103,6 +116,67 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
                   else playerl(FacialExpression.NEUTRAL, "Could I have another bloom scroll please?").also { stage++ }
             63 -> npcl(FacialExpression.NEUTRAL, "Sure, but please look after this one.").also { stage++ }
             64 -> sendDialogue("The spirit of Filliman Tarlock gives you another bloom spell.").also { ContentAPI.addItemOrDrop(player, Items.DRUIDIC_SPELL_2968); stage = END_DIALOGUE }
+
+            //I've been blessed
+            70 -> npcl(FacialExpression.NEUTRAL, "Well, you need to bring 'something from nature', 'something with faith' and 'something of the spirit-to- become freely given.'").also { stage++ }
+            71 -> playerl(FacialExpression.NEUTRAL, "Yeah, but what does that mean?").also { stage++ }
+            72 -> npcl(FacialExpression.NEUTRAL, "Hmm, it is a conundrum, however, if you use that spell I gave you, you should be able to get from nature. Once you have that, we may be puzzle the rest out.").also { stage++ }
+            73 -> if(!ContentAPI.inInventory(player, Items.DRUIDIC_SPELL_2968) && !ContentAPI.inBank(player, Items.DRUIDIC_SPELL_2968)){
+                playerl(FacialExpression.NEUTRAL, "Could I have another bloom scroll please?").also { stage++ }
+            } else end()
+            74 -> npcl(FacialExpression.NEUTRAL, "Sure, but please look after this one.").also { stage++ }
+            75 -> sendDialogue("The spirit of Filliman Tarlock gives you","another bloom spell.").also { ContentAPI.addItem(player, Items.DRUIDIC_SPELL_2968); stage = END_DIALOGUE }
+
+            //has fungus
+            80 -> sendDialogue("You show the fungus to Filliman.").also { stage++ }
+            81 -> playerl(FacialExpression.NEUTRAL, "Yes, I have a fungus here that I picked.").also { stage++ }
+            82 -> npcl(FacialExpression.NEUTRAL, "Wonderful, the mushroom represents 'something from nature'. Now we need to work out what the other components of the spell are!").also { stage = 90; setQuest(45) }
+
+            //pre-spell options
+            90 -> options("What are the things that are needed?", "What should I do when I have those things?", "I think I've solved the puzzle!", "Could I have another bloom scroll please?", "Ok, thanks.").also { stage++ }
+            91 -> when(buttonId){
+                1 -> playerl(FacialExpression.NEUTRAL, "What are the things that are needed?").also { stage = 100 }
+                2 -> playerl(FacialExpression.NEUTRAL, "What should I do when I have those things?").also { stage = 110 }
+                3 -> playerl(FacialExpression.FRIENDLY, "I think I've solved the puzzle!").also { stage = 120 }
+                4 -> playerl(FacialExpression.FRIENDLY, "Can I have another bloom scroll please?").also { stage = 130 }
+                5 -> playerl(FacialExpression.NEUTRAL, "Ok, thanks.").also { stage = END_DIALOGUE }
+            }
+
+            //What things are needed?
+            100 -> npcl(FacialExpression.NEUTRAL, "The three things are: 'Something with faith', 'something from nature' and 'something of the spirit-to-become freely given'.").also { stage++ }
+            101 -> playerl(FacialExpression.FRIENDLY, " Ok, and 'something from nature' is the mushroom from the bloom spell you gave me?").also { stage++ }
+            102 -> npcl(FacialExpression.FRIENDLY, "Yes, that's correct, that seems right to me. The other things we need are 'something with faith' and 'something of the spirit-to-become freely given.").also { stage++ }
+            103 -> playerl(FacialExpression.NEUTRAL, "Do you have any ideas what those things are?").also { stage++ }
+            104 -> npcl(FacialExpression.HALF_GUILTY, "I'm sorry my friend, but I do not.").also { stage = 90 }
+
+            //What should I do when I have them?
+            110 -> npcl(FacialExpression.NEUTRAL, "Ah yes, I looked this up. It says,.. 'to arrange upon three rocks around the spirit-to-become...'. Then I must cast a spell. As you can see, I've already placed the rocks. I must have planned to do this before I died!").also { stage++ }
+            111 -> playerl(FacialExpression.NEUTRAL, "Can we just place the components on any rock?").also { stage++ }
+            112 -> npcl(FacialExpression.NEUTRAL, "Well, the only thing the journal says is that 'something with faith stands south of the spirit-to-become', but I'm so confused now I don't really know what that means. Oh, if only I had all my faculties!").also { stage = 90 }
+
+            //I think I've solved the puzzle!
+            120 -> npcl(FacialExpression.NEUTRAL, "Oh really.. Have you placed all the items on the stones? Ok, well, let's try!").also { stage++ }
+            121 -> sendDialogue("~ The druid attempts to cast a spell. ~").also { stage++ }
+            122 -> {
+                ContentAPI.animate(npc, 1162)
+                if(NSUtils.hasPlacedCard(player) && NSUtils.hasPlacedFungus(player) && NSUtils.onStone(player)){
+                    player.lock()
+                    val locations = arrayOf(Location.create(3439, 3336, 0), Location.create(3441, 3336, 0), Location.create(3440, 3335, 0))
+                    repeat(3) {i -> ContentAPI.spawnProjectile(locations[i], Location.create(3440, 3336, 0), 268, 0, 150, 0, 30, 30) }
+                    ContentAPI.submitIndividualPulse(player, object : Pulse(4){
+                        override fun pulse(): Boolean {
+                            ContentAPI.sendNPCDialogue(player, npc.originalId, "Aha, everything seems to be in place! You can come through now into the grotto for the final section of my transformation.")
+                            setQuest(50)
+                            ContentAPI.unlock(player)
+                            return true
+                        }
+                    })
+                } else {
+                    npcl(FacialExpression.NEUTRAL, "Hmm, something still doesn't seem right. I think we need something more before we can continue.")
+                }
+
+                stage = END_DIALOGUE
+            }
 
             //Initial dialogue
             1000 -> playerl(FacialExpression.HALF_ASKING, "Hello?").also { stage++ }

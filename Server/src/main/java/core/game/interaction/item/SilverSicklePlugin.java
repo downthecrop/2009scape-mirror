@@ -12,6 +12,7 @@ import core.game.world.map.RegionManager;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import rs09.game.content.quest.members.naturespirit.NSUtils;
 
 /**
  * Handles the Silver Sickle (b) to collect Mort Myre Fungus.
@@ -33,22 +34,7 @@ public final class SilverSicklePlugin extends OptionHandler {
 		switch (option) {
 		case "operate":
 		case "cast bloom":
-			if (player.getSkills().getPrayerPoints() < 1) {
-				player.getPacketDispatch().sendMessage("You don't have enough prayer points to do this.");
-			}
-			for (Scenery[] o : region.getPlanes()[0].getObjects()) {
-				for (Scenery obj : o) {
-					if (obj != null) {
-						if (obj.getName().equalsIgnoreCase("Rotting log") && player.getSkills().getPrayerPoints() >= 1) {
-							if (player.getLocation().withinDistance(obj.getLocation(), 2)) {
-								handleVisuals(player, node);
-								SceneryBuilder.add(new Scenery(3509, obj.getLocation(), obj.getRotation()));
-							}
-						}
-					}
-				}
-			}
-			RegionManager.getLock().unlock();
+			NSUtils.castBloom(player);
 			return true;
 		}
 		return false;
