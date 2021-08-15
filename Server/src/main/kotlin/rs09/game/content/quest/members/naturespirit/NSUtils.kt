@@ -42,6 +42,7 @@ object NSUtils {
         val region = forId(player.location.regionId)
         if (player.skills.prayerPoints < 1) {
             player.packetDispatch.sendMessage("You don't have enough prayer points to do this.")
+            return false
         }
         handleVisuals(player)
         for (o in region.planes[0].objects) {
@@ -65,18 +66,7 @@ object NSUtils {
      */
     private fun handleVisuals(player: Player) {
         player.skills.decrementPrayerPoints(RandomFunction.random(1, 3).toDouble())
-        player.packetDispatch.sendAnimation(9021)
-        val AROUND_YOU = arrayOf(
-            Location.create(player.location.x - 1, player.location.y, 0),
-            Location.create(player.location.x + 1, player.location.y, 0),
-            Location.create(player.location.x, player.location.y - 1, 0),
-            Location.create(player.location.x, player.location.y + 1, 0),
-            Location.create(player.location.x + 1, player.location.y + 1, 0),
-            Location.create(player.location.x - 1, player.location.y + 1, 0),
-            Location.create(player.location.x + 1, player.location.y - 1, 0),
-            Location.create(player.location.x - 1, player.location.y - 1, 0),
-            Location.create(player.location.x + 1, player.location.y + 1, 0)
-        )
+        val AROUND_YOU = player.location.surroundingTiles
         for (location in AROUND_YOU) {
             // The graphic is meant to play on a 3x3 radius around you, but not
             // including the tile you are on.

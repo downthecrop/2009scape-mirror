@@ -61,7 +61,7 @@ class NatureSpiritQuest : Quest("Nature Spirit", 95, 94, 2, 307, 0, 1, 110 ) {
             }
 
             if(stage >= 35) {
-                line(player, "I've agreed to help Filliman become a Nature Spirit.",line++)
+                line(player, "I've agreed to help Filliman become a Nature Spirit.",line++, true)
             }
 
             if(stage == 35){
@@ -69,15 +69,28 @@ class NatureSpiritQuest : Quest("Nature Spirit", 95, 94, 2, 307, 0, 1, 110 ) {
                 line(player, "blessed by !!Drezel?? in the temple of Saradomin.",line++)
             }
 
-            if(stage >= 40){
-                line(player, "Drezel mentioned I seem to have !!something of the faith??.", line++, false)
-            }
-
             if (stage == 40){
                 line(player, "I should return to !!Filliman?? to see what I need to do.", line++, false)
             }
 
+            if(stage in 45 until 55){
+                line(player, "In order to help Filliman I need to find 3 things:", line++, false)
+                line(player, "Something of !!Faith??.",line++, false)
+                line(player, "Something of !!Nature??.", line++, stage >= 50)
+                line(player, "Something of the !!spirit-to-be freely given??.", line++, false)
+            }
 
+            if(stage == 50){
+                line(player, "I know for a fact the fungus is !!something of Nature??.", line++, false)
+            }
+
+            if(stage >= 55){
+                line(player, "I've helped Filliman complete the spell.", line++, true)
+            }
+
+            if(stage == 55){
+                line(player, "Filliman has asked me to meet him back inside the !!grotto??.", line++, false)
+            }
 
         }
     }

@@ -5,10 +5,12 @@ import api.ContentAPI
 import api.DialUtils
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.system.task.Pulse
 import core.game.world.map.Location
+import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
@@ -23,6 +25,7 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun open(vararg args: Any?): Boolean {
+        npc = args[0] as NPC
         val quest = player.questRepository.getQuest("Nature Spirit")
         questStage = quest.getStage(player)
 
@@ -38,7 +41,7 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
             25 -> npcl(FacialExpression.HALF_GUILTY, "Oh, hello... Sorry, you've caught me at a bad time, it's just that I've had a sign you see and I need to find my journal.").also { stage = 7 }
             30 -> npcl(FacialExpression.HALF_GUILTY, "Thanks for the journal, I've been reading it. It looks like I came to a violent and bitter end but that's not really important. I just have to figure out what I am going to do now?").also { stage = 14 }
             35 -> npcl(FacialExpression.NEUTRAL, "Hello there, have you been blessed yet?").also { stage = 60 }
-            40 -> {
+            45 -> {
                 if(ContentAPI.inInventory(player, Items.MORT_MYRE_FUNGUS_2970)){
                     npcl(FacialExpression.NEUTRAL, "Did you manage to get something from nature?").also { stage = 80 }
                 } else {
@@ -48,7 +51,7 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
                     ).also { stage = 70 }
                 }
             }
-            45 -> npcl(FacialExpression.NEUTRAL, " Hello again! I don't suppose you've found out what the other components of the Nature spell are have you?").also { stage = 90 }
+            50 -> npcl(FacialExpression.NEUTRAL, " Hello again! I don't suppose you've found out what the other components of the Nature spell are have you?").also { stage = 90 }
             else -> return false
         }
         return true
@@ -130,7 +133,7 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
             //has fungus
             80 -> sendDialogue("You show the fungus to Filliman.").also { stage++ }
             81 -> playerl(FacialExpression.NEUTRAL, "Yes, I have a fungus here that I picked.").also { stage++ }
-            82 -> npcl(FacialExpression.NEUTRAL, "Wonderful, the mushroom represents 'something from nature'. Now we need to work out what the other components of the spell are!").also { stage = 90; setQuest(45) }
+            82 -> npcl(FacialExpression.NEUTRAL, "Wonderful, the mushroom represents 'something from nature'. Now we need to work out what the other components of the spell are!").also { stage = 90; setQuest(50) }
 
             //pre-spell options
             90 -> options("What are the things that are needed?", "What should I do when I have those things?", "I think I've solved the puzzle!", "Could I have another bloom scroll please?", "Ok, thanks.").also { stage++ }
@@ -150,31 +153,45 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
             104 -> npcl(FacialExpression.HALF_GUILTY, "I'm sorry my friend, but I do not.").also { stage = 90 }
 
             //What should I do when I have them?
-            110 -> npcl(FacialExpression.NEUTRAL, "Ah yes, I looked this up. It says,.. 'to arrange upon three rocks around the spirit-to-become...'. Then I must cast a spell. As you can see, I've already placed the rocks. I must have planned to do this before I died!").also { stage++ }
+            110 -> npcl(FacialExpression.NEUTRAL, "It says,.. 'to arrange upon three rocks around the spirit-to-become...'. Then I must cast a spell. As you can see, I've already placed the rocks.").also { stage++ }
             111 -> playerl(FacialExpression.NEUTRAL, "Can we just place the components on any rock?").also { stage++ }
-            112 -> npcl(FacialExpression.NEUTRAL, "Well, the only thing the journal says is that 'something with faith stands south of the spirit-to-become', but I'm so confused now I don't really know what that means. Oh, if only I had all my faculties!").also { stage = 90 }
+            112 -> npcl(FacialExpression.NEUTRAL, "Well, the only thing the journal says is that 'something with faith stands south of the spirit-to-become', but I'm so confused now I don't really know what that means.").also { stage = 90 }
 
             //I think I've solved the puzzle!
             120 -> npcl(FacialExpression.NEUTRAL, "Oh really.. Have you placed all the items on the stones? Ok, well, let's try!").also { stage++ }
             121 -> sendDialogue("~ The druid attempts to cast a spell. ~").also { stage++ }
             122 -> {
-                ContentAPI.animate(npc, 1162)
+                ContentAPI.animate(npc, 812)
                 if(NSUtils.hasPlacedCard(player) && NSUtils.hasPlacedFungus(player) && NSUtils.onStone(player)){
+                    end()
                     player.lock()
                     val locations = arrayOf(Location.create(3439, 3336, 0), Location.create(3441, 3336, 0), Location.create(3440, 3335, 0))
-                    repeat(3) {i -> ContentAPI.spawnProjectile(locations[i], Location.create(3440, 3336, 0), 268, 0, 150, 0, 30, 30) }
+                    repeat(3) {i -> ContentAPI.spawnProjectile(locations[i], Location.create(3440, 3336, 0), 268, 0, 35, 0, 100, 20) }
                     ContentAPI.submitIndividualPulse(player, object : Pulse(4){
                         override fun pulse(): Boolean {
                             ContentAPI.sendNPCDialogue(player, npc.originalId, "Aha, everything seems to be in place! You can come through now into the grotto for the final section of my transformation.")
-                            setQuest(50)
+                            setQuest(55)
                             ContentAPI.unlock(player)
                             return true
+                        }
+
+                        override fun stop() {
+                            ContentAPI.visualize(npc, -1, Graphics(266, 80))
+                            super.stop()
                         }
                     })
                 } else {
                     npcl(FacialExpression.NEUTRAL, "Hmm, something still doesn't seem right. I think we need something more before we can continue.")
                 }
 
+                stage = END_DIALOGUE
+            }
+
+            130 -> if(ContentAPI.inInventory(player, Items.DRUIDIC_SPELL_2968) || ContentAPI.inBank(player, Items.DRUIDIC_SPELL_2968)){
+                npcl(FacialExpression.NEUTRAL, "No, you've already got one!").also { stage = END_DIALOGUE }
+            } else {
+                npcl(FacialExpression.NEUTRAL, "Sure, but look after this one.")
+                ContentAPI.addItem(player, Items.DRUIDIC_SPELL_2968)
                 stage = END_DIALOGUE
             }
 

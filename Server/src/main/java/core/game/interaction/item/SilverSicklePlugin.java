@@ -30,30 +30,14 @@ public final class SilverSicklePlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		Region region = RegionManager.forId(player.getLocation().getRegionId());
 		switch (option) {
 		case "operate":
 		case "cast bloom":
+			player.getPacketDispatch().sendAnimation(9021);
 			NSUtils.castBloom(player);
 			return true;
 		}
 		return false;
-	}
-
-	/**
-	 * Handles the draining of prayer points and physical graphics and
-	 * animation.
-	 */
-	public void handleVisuals(Player player, Node node) {
-		player.getSkills().decrementPrayerPoints(RandomFunction.random(1, 3));
-		player.getPacketDispatch().sendAnimation(9021);
-		final Location[] AROUND_YOU = new Location[] { Location.create(player.getLocation().getX() - 1, player.getLocation().getY(), 0), Location.create(player.getLocation().getX() + 1, player.getLocation().getY(), 0), Location.create(player.getLocation().getX(), player.getLocation().getY() - 1, 0), Location.create(player.getLocation().getX(), player.getLocation().getY() + 1, 0), Location.create(player.getLocation().getX() + 1, player.getLocation().getY() + 1, 0), Location.create(player.getLocation().getX() - 1, player.getLocation().getY() + 1, 0), Location.create(player.getLocation().getX() + 1, player.getLocation().getY() - 1, 0), Location.create(player.getLocation().getX() - 1, player.getLocation().getY() - 1, 0), Location.create(player.getLocation().getX() + 1, player.getLocation().getY() + 1, 0), };
-		for (Location location : AROUND_YOU) {
-			// The graphic is meant to play on a 3x3 radius around you, but not
-			// including the tile you are on.
-			player.getPacketDispatch().sendGlobalPositionGraphic(263, location);
-		}
-
 	}
 
 }

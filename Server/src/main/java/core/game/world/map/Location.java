@@ -6,6 +6,8 @@ import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
 import core.tools.RandomFunction;
 
+import java.util.ArrayList;
+
 /**
  * Represents a location on the world map.
  * @author Emperor
@@ -248,6 +250,24 @@ public final class Location extends Node {
 		int xdiff = first.getX() - second.getX();
 		int ydiff = first.getY() - second.getY();
 		return Math.sqrt(xdiff * xdiff + ydiff * ydiff);
+	}
+
+	/**
+	 * Gets the 8 tiles surrounding this location as an ArrayList<Location>
+	 */
+	public ArrayList<Location> getSurroundingTiles() {
+		ArrayList<Location> locs = new ArrayList<>();
+
+		locs.add(transform(0,1,0)); //N
+		locs.add(transform(1,1,0)); //NE
+		locs.add(transform(1,0,0)); //E
+		locs.add(transform(1,-1,0)); //SE
+		locs.add(transform(0,-1,0)); //S
+		locs.add(transform(-1,-1,0));//SW
+		locs.add(transform(-1,0,0));//W
+		locs.add(transform(-1,1,0));//NW
+
+		return locs;
 	}
 
 	/**
