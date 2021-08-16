@@ -52,7 +52,7 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
                 }
             }
             50 -> npcl(FacialExpression.NEUTRAL, " Hello again! I don't suppose you've found out what the other components of the Nature spell are have you?").also { stage = 90 }
-            else -> return false
+            else -> npcl(FacialExpression.NEUTRAL, ".......").also { stage = END_DIALOGUE }
         }
         return true
     }

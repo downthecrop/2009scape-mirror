@@ -15,7 +15,7 @@ import rs09.game.interaction.InteractionListener
 class MorytaniaListeners : InteractionListener() {
 
     val GROTTO_ENTRANCE = 3516
-    val GROTTO_EXIT = 3526
+    val GROTTO_EXIT = intArrayOf(3525, 3526)
     val GROTTO_BRIDGE = 3522
     val outside = Location.create(3439, 3337, 0)
     val inside = Location.create(3442, 9734, 1)

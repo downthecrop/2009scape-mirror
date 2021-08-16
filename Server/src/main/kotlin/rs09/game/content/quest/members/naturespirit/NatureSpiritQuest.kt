@@ -1,8 +1,11 @@
 package rs09.game.content.quest.members.naturespirit
 
+import api.ContentAPI
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
+import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
+import org.rs09.consts.Items
 
 @Initializable
 class NatureSpiritQuest : Quest("Nature Spirit", 95, 94, 2, 307, 0, 1, 110 ) {
@@ -92,14 +95,28 @@ class NatureSpiritQuest : Quest("Nature Spirit", 95, 94, 2, 307, 0, 1, 110 ) {
                 line(player, "Filliman has asked me to meet him back inside the !!grotto??.", line++, false)
             }
 
-        }
-    }
+            if(stage == 75){
+                line(player, "I need to go and kill !!3 Ghasts?? for Filliman.", line++, false)
+            }
 
-    override fun drawReward(player: Player?, string: String?, line: Int) {
-        super.drawReward(player, string, line)
+            if(stage >= 100){
+                line(player,"!!QUEST COMPLETE!??",line++)
+            }
+        }
     }
 
     override fun finish(player: Player?) {
         super.finish(player)
+        player ?: return
+        var ln = 10
+        player.packetDispatch.sendItemZoomOnInterface(Items.SILVER_SICKLEB_2963,230,277,5)
+        drawReward(player, "2 Quest Points", ln++)
+        drawReward(player, "3,000 Crafting XP",ln++)
+        drawReward(player, "2,000 Hitpoints XP", ln++)
+        drawReward(player, "2,000 Defence XP", ln++)
+        ContentAPI.rewardXP(player, Skills.CRAFTING, 3000.0)
+        ContentAPI.rewardXP(player, Skills.HITPOINTS, 2000.0)
+        ContentAPI.rewardXP(player, Skills.DEFENCE, 2000.0)
+        NSUtils.cleanupAttributes(player)
     }
 }

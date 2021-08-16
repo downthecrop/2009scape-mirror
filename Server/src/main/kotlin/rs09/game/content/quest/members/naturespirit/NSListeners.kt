@@ -16,7 +16,9 @@ import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.global.action.PickupHandler
 import rs09.game.interaction.InteractionListener
+import rs09.game.node.entity.npc.other.MortMyreGhastNPC
 import rs09.game.system.SystemLogger
+import rs09.game.system.config.ShopParser
 import rs09.tools.END_DIALOGUE
 
 class NSListeners : InteractionListener() {
@@ -24,6 +26,7 @@ class NSListeners : InteractionListener() {
     val GROTTO_TREE = 3517
     val GROTTO_ENTRANCE = 3516
     val GROTTO_ALTAR = 3520
+    val NATURE_ALTAR = 3521
     val JOURNAL = Items.JOURNAL_2967
     val NATURE_STONE = 3527
     val FAITH_STONE = 3528
@@ -35,6 +38,9 @@ class NSListeners : InteractionListener() {
     val FUNGUS = Items.MORT_MYRE_FUNGUS_2970
     val MIRROR_TAKEN = "/save:ns:mirror_taken"
     val GROTTO_SEARCHED = "/save:ns:grotto_searched"
+    val WISHING_WELL = 28715
+    val DRUID_POUCH = Items.DRUID_POUCH_2958
+    val DRUID_POUCH_EMPTY = Items.DRUID_POUCH_2957
     val stones = intArrayOf(NATURE_STONE, FAITH_STONE, FREELY_GIVEN_STONE)
     val items = intArrayOf(USED_SPELLCARD, FUNGUS)
 
@@ -92,6 +98,15 @@ class NSListeners : InteractionListener() {
             return@on true
         }
 
+        on(WISHING_WELL, SCENERY, "make-wish"){player, node ->
+            if(player.questRepository.isComplete("Nature Spirit"))
+                ShopParser.openUid(player, 241)
+            else
+                ContentAPI.sendDialogue(player, "You can't do that yet.")
+
+            return@on true
+        }
+
         on(JOURNAL, ITEM, "read"){player, _ ->
             player.dialogueInterpreter.open(NSJournalDialogue())
             return@on true
@@ -120,6 +135,37 @@ class NSListeners : InteractionListener() {
                 ContentAPI.addItem(player, Items.A_USED_SPELL_2969)
             }
             return@on true
+        }
+
+        on(intArrayOf(DRUID_POUCH, DRUID_POUCH_EMPTY), ITEM, "fill"){player, node ->
+
+            if(player.questRepository.getStage("Nature Spirit") >= 75) {
+                if (ContentAPI.amountInInventory(player, Items.MORT_MYRE_FUNGUS_2970) >= 3) {
+                    if (node.id != Items.DRUID_POUCH_2958) {
+                        ContentAPI.removeItem(player, node, Container.INVENTORY)
+                    }
+                    ContentAPI.removeItem(player, Item(Items.MORT_MYRE_FUNGUS_2970, 3), Container.INVENTORY)
+                    ContentAPI.addItem(player, Items.DRUID_POUCH_2958, 3)
+                } else {
+                    ContentAPI.sendDialogue(player, "You need 3 fungus before you can do that.")
+                }
+            } else {
+                ContentAPI.sendDialogue(player, "I don't know how to use that yet.")
+            }
+
+            return@on true
+        }
+
+        onUseWith(SCENERY, Items.SILVER_SICKLE_2961, NATURE_ALTAR){player, used, with ->
+            ContentAPI.sendItemDialogue(player, Items.SILVER_SICKLEB_2963, "You dump the sickle into the waters.")
+            if(ContentAPI.removeItem(player, Items.SILVER_SICKLE_2961, Container.INVENTORY)){
+                ContentAPI.addItem(player, Items.SILVER_SICKLEB_2963, 1)
+            }
+            return@onUseWith true
+        }
+
+        onUseWith(NPC, DRUID_POUCH, NPCs.GHAST_1052){player, used, with ->
+            NSUtils.activatePouch(player, with as MortMyreGhastNPC)
         }
 
         onUseWith(SCENERY, items, *stones) { player, used, with ->

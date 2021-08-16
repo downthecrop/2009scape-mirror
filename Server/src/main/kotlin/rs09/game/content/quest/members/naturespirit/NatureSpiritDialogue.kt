@@ -29,9 +29,9 @@ class NatureSpiritDialogue(player: Player? = null) : DialoguePlugin(player){
             60 -> npcl(FacialExpression.NEUTRAL, "Hmm, good, the transformation is complete. Now, my friend, in return for your assistance, I will help you to kill the Ghasts. First bring to me a silver sickle so that I can bless it for you.").also { return true }
             65 -> npcl(FacialExpression.NEUTRAL, "Have you brought me a silver sickle?").also { stage = 100; return true }
             70 -> npcl(FacialExpression.NEUTRAL, "Now you can go forth and make the swamp bloom. Collect nature's bounty to fill a druids pouch. So armed will the Ghasts be bound to you until, you flee or they are defeated.").also { stage = 200 }
-            75 -> npcl(FacialExpression.NEUTRAL, "")
+            75 -> npcl(FacialExpression.NEUTRAL, "Hello again, my friend. Have you defeated three ghasts as I asked you?").also { stage = 300 }
+            else -> npcl(FacialExpression.FRIENDLY, "Welcome to my grotto, friend. Enjoy your visit.").also { stage = END_DIALOGUE }
         }
-
         return true
     }
 
@@ -79,12 +79,43 @@ class NatureSpiritDialogue(player: Player? = null) : DialoguePlugin(player){
             112 -> end().also { ContentAPI.lock(player, 10); ContentAPI.submitWorldPulse(SickleBlessPulse(player, npc)) }
 
             //go kill some ghasts bro
-            200 -> npcl(FacialExpression.NEUTRAL, "Before I can make this grotto into an Altar of Nature, I need to be sure that the Ghasts will be kept at bay. Go forth into Mort Myre and slay three Ghasts. You'll be releasing their souls from Mort Myre.").also { stage++ }
+            200 -> npcl(FacialExpression.NEUTRAL, "Go forth into Mort Myre and slay three Ghasts. You'll be releasing their souls from Mort Myre.").also { stage++ }
             201 -> ContentAPI.sendItemDialogue(player, Items.DRUID_POUCH_2957, "The nature spirit gives you an empty pouch.").also { stage++; setQuest(75) }
-            202 -> npcl(FacialExpression.NEUTRAL, "You'll need this in order to collect together nature's bounty. When it contains items, it will bind the Ghast to you until you flee or it is defeated.")
+            202 -> npcl(FacialExpression.NEUTRAL, "You'll need this in order to collect together nature's bounty. It will bind the Ghast to you until you flee or it is defeated.").also { stage = END_DIALOGUE }
 
             //Have you killed the ghasts yet bro
-            300 ->
+            300 -> if(NSUtils.getGhastKC(player) >= 3){
+                playerl(FacialExpression.NEUTRAL, "Yes, I've killed all three and their spirits have been released!").also { stage = 350 }
+            } else {
+                playerl(FacialExpression.NEUTRAL, "Not yet.").also { stage++ }
+            }
+
+            //nah bro
+            301 -> npcl(FacialExpression.NEUTRAL, "Well, when you do, please come to me and I'll reward you!").also { stage++ }
+            302 -> options("How do I get to attack the Ghasts?", "What's this pouch for?", "What can I do with this sickle?", "I've lost my sickle.", "Ok, thanks.").also { stage++ }
+            303 -> when(buttonID){
+                1 -> playerl(FacialExpression.NEUTRAL, "How do I get to attack the Ghasts?").also { stage = 310 }
+                2 -> playerl(FacialExpression.NEUTRAL, "What's this pouch for?").also { stage = 320 }
+                3 -> playerl(FacialExpression.NEUTRAL, "What can I do with this sickle?").also { stage = 330 }
+                4 -> playerl(FacialExpression.NEUTRAL, "I've lost my sickle.").also { stage = 340 }
+                5 -> playerl(FacialExpression.NEUTRAL, "Ok, thanks.").also { stage = END_DIALOGUE }
+            }
+
+            //How do I attack duh ghosty bois
+            310 -> npcl(FacialExpression.NEUTRAL, "Go forth and with the sickle make the swamp bloom. Collect natures bounty to fill a druids pouch. So armed will the Ghasts be bound to you until, you flee or they are defeated.").also { stage = 302 }
+
+            //What's dis funny pouch for?
+            320 -> npcl(FacialExpression.NEUTRAL, "It is for collecting natures bounty, once it contains the blossomed items of the swamp, it will make the Ghasts appear and you can then attack them.").also { stage = 302 }
+
+            //What can I do wif da sickle m8
+            330 -> npcl(FacialExpression.NEUTRAL, "You may use it wisely within the area of Mort Myre to affect natures balance and bring forth a bounty of natures harvest. Once collected into the druid pouch will the Ghast be apparent.").also { stage = 302 }
+
+            //oi I lost it bruv
+            340 -> npcl(FacialExpression.NEUTRAL, "If you should lose the blessed sickle, simply bring another to my altar of nature and refresh it in the grotto waters.").also { stage = 302 }
+
+            //killed all dem buggers bruv
+            350 -> npcl(FacialExpression.NEUTRAL, "Many thanks my friend, you have completed your quest!").also { stage++ }
+            351 -> end().also { player.questRepository.getQuest("Nature Spirit").finish(player) }
         }
 
         return true
