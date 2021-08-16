@@ -23,8 +23,7 @@ class FillimanTarlockNPC : AbstractNPC {
 
     override fun handleTickActions() {
         super.handleTickActions()
-        if(dialoguePlayer != null) spawnedTicks = 0
-        if(spawnedTicks++ > 100 && dialoguePlayer != null) ContentAPI.poofClear(this)
+        if(spawnedTicks++ > 100) ContentAPI.poofClear(this)
     }
 
     override fun getIds(): IntArray {
