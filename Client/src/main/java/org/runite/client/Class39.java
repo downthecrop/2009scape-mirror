@@ -346,13 +346,13 @@ public final class Class39 {
                 } else if (Unsorted.incomingOpcode == 17) {
                     var1 = BufferedDataStream.incomingBuffer.readUnsignedByte();
                     var2 = Class65.currentChunkX + (var1 >> 4 & 7);
-                    var3 = currentChunkY - -(var1 & 7);
+                    var3 = currentChunkY + (var1 & 7);
                     var4 = BufferedDataStream.incomingBuffer.readUnsignedShort();
                     var5 = BufferedDataStream.incomingBuffer.readUnsignedByte();
                     var6 = BufferedDataStream.incomingBuffer.readUnsignedShort();
                     if (var2 >= 0 && var3 >= 0 && var2 < 104 && var3 < 104) {
-                        var2 = var2 * 128 - -64;
-                        var3 = var3 * 128 - -64;
+                        var2 = var2 * 128 + 64;
+                        var3 = var3 * 128 + 64;
                         Class140_Sub2 var32 = new Class140_Sub2(var4, WorldListCountry.localPlane, var2, var3, -var5 + Class121.method1736(WorldListCountry.localPlane, 1, var2, var3), var6, Class44.anInt719);
                         TextureOperation17.aLinkedList_3177.method1215(new Class3_Sub28_Sub2(var32));
                     }

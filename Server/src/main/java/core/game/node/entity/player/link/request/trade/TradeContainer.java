@@ -11,7 +11,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 
-import static rs09.tools.stringtools.StringToolsKt.colorize;
+import static rs09.tools.stringtools.GlobalsKt.colorize;
 
 /**
  * Represents the container during a trade session.

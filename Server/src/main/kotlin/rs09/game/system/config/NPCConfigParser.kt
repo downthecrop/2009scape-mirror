@@ -245,6 +245,7 @@ NPCConfigParser {
                         "prj_height",
                         "end_height",
                         "spell_id",
+                        "death_gfx",
                         "magic_level" -> configs.put(it.key.toString(), if (it.value.toString().isEmpty()) Unit else it.value.toString().toInt())
 
                         //doubles
