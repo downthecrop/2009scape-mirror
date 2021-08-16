@@ -381,6 +381,6 @@ public final class DrezelDialogue extends DialoguePlugin {
 
 	@Override
 	public int[] getIds() {
-		return new int[] { 1047 };
+		return new int[] { 7690 };
 	}
 }
