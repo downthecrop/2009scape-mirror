@@ -638,7 +638,6 @@ public abstract class Entity extends Node {
 	public Properties getProperties() {
 		return properties;
 	}
-
 	/**
 	 * Gets the updateMasks.
 	 * @return The updateMasks.
