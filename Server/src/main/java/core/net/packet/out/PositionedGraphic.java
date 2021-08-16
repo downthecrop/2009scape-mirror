@@ -5,6 +5,7 @@ import core.game.world.update.flag.context.Graphics;
 import core.net.packet.IoBuffer;
 import core.net.packet.OutgoingPacket;
 import core.net.packet.context.PositionedGraphicContext;
+import rs09.game.system.SystemLogger;
 
 /**
  * The positioned graphic outgoing packet.
@@ -16,8 +17,16 @@ public final class PositionedGraphic implements OutgoingPacket<PositionedGraphic
 	public void send(PositionedGraphicContext context) {
 		Location l = context.getLocation();
 		Graphics g = context.getGraphic();
-		IoBuffer buffer = UpdateAreaPosition.getBuffer(context.getPlayer(), l).put(17).put((l.getChunkOffsetX() << 4) | (l.getChunkOffsetY() & 0x7)).putShort(g.getId()).put(g.getHeight()).putShort(g.getDelay());
-		buffer.cypherOpcode(context.getPlayer().getSession().getIsaacPair().getOutput());context.getPlayer().getSession().write(buffer);
+		int offsetHash = (context.offsetX << 4) | context.offsetY;
+		IoBuffer buffer = new IoBuffer()
+				.put(26)					//update current scene x and scene y client-side
+				.putC(context.sceneX)  		//this has to be done for each graphic being sent
+				.put(context.sceneY)        //opcode 26 is the lastSceneX/lastSceneY update packet
+				.put(17).put(offsetHash)   	//send the graphics
+				.putShort(g.getId())
+				.put(g.getHeight())
+				.putShort(g.getDelay());
+		context.getPlayer().getSession().write(buffer);
 	}
 
 }

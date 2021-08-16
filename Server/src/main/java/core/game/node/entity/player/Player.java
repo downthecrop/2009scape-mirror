@@ -94,7 +94,7 @@ import java.util.*;
 
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_DEATHS;
-import static rs09.tools.stringtools.StringToolsKt.colorize;
+import static rs09.tools.stringtools.GlobalsKt.colorize;
 
 /**
  * Represents a player entity.
@@ -497,6 +497,9 @@ public class Player extends Entity {
 			details.getSession().disconnect();
 			getSession().setLastPing(Long.MAX_VALUE);
 		}
+
+		//Decrements prayer points
+		getPrayer().tick();
 	}
 
 	@Override

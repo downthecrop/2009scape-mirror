@@ -338,7 +338,7 @@ public final class InteractionPacket implements IncomingPacket {
 			player.debug("Handled by quest interaction manager.");
 			return;
 		}
-		if(InteractionListeners.run(item.getId(), InteractionListener.Companion.getITEM(),option.getName(),player,item)){
+		if(InteractionListeners.run(item.getId(), InteractionListener.Companion.getGROUNDITEM(), option.getName(),player,item)){
 			return;
 		}
 		item.getInteraction().handle(player, option);
