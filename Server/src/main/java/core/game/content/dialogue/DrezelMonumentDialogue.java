@@ -10,6 +10,8 @@ import org.rs09.consts.NPCs;
 import rs09.game.content.quest.members.naturespirit.NSDrezelDialogue;
 import rs09.game.system.SystemLogger;
 
+import static rs09.tools.DialogueConstKt.END_DIALOGUE;
+
 /**
  * Represents the dialogue plugin used for the drezel monument.
  * @author 'Vexia
@@ -82,6 +84,9 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 			stage = 420;
 		} else if (quest.getStage(player) < 100){
 			ContentAPI.openDialogue(player, new NSDrezelDialogue(), npc);
+		} else {
+			npcl(FacialExpression.NEUTRAL, "I heard you finished your quest with Filliman! Great work!");
+			stage = END_DIALOGUE;
 		}
 		return true;
 	}
