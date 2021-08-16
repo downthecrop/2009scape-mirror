@@ -20,7 +20,7 @@ import core.plugin.Plugin;
 import rs09.plugin.PluginManager;
 import org.rs09.consts.Items;
 
-import static rs09.tools.stringtools.StringToolsKt.colorize;
+import static rs09.tools.stringtools.GlobalsKt.colorize;
 
 
 /**
