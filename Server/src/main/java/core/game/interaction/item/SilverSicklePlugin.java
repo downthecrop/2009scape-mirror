@@ -1,5 +1,6 @@
 package core.game.interaction.item;
 
+import api.ContentAPI;
 import core.cache.def.impl.ItemDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -33,8 +34,12 @@ public final class SilverSicklePlugin extends OptionHandler {
 		switch (option) {
 		case "operate":
 		case "cast bloom":
-			player.getPacketDispatch().sendAnimation(9021);
-			NSUtils.castBloom(player);
+			if(player.getQuestRepository().getQuest("Nature Spirit").getStage(player) >= 75) {
+				player.getPacketDispatch().sendAnimation(9021);
+				NSUtils.castBloom(player);
+			} else {
+				ContentAPI.sendDialogue(player, "You must complete Nature Spirit to use this.");
+			}
 			return true;
 		}
 		return false;
