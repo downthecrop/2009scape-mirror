@@ -12,6 +12,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
+import core.game.world.update.flag.context.Graphics;
 import rs09.game.node.entity.combat.CombatPulse;
 import rs09.game.system.config.ItemConfigParser;
 import rs09.game.system.config.NPCConfigParser;
@@ -91,6 +92,8 @@ public final class Properties {
 	 * The death animation.
 	 */
 	private Animation deathAnimation = new Animation(9055, Animator.Priority.HIGH);
+
+	public Graphics deathGfx = new Graphics(-1);
 
 	/**
 	 * The range animation.

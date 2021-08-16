@@ -55,8 +55,9 @@ public final class DeathTask extends NodeTask {
 				}
 			}
 		}
-		e.getAnimator().forceAnimation(e.getProperties().getDeathAnimation());
 		e.graphics(Animator.RESET_G);
+		e.visualize(e.getProperties().getDeathAnimation(), e.getProperties().deathGfx);
+		e.getAnimator().forceAnimation(e.getProperties().getDeathAnimation());
 		e.commenceDeath(killer);
 		e.getImpactHandler().setDisabledTicks(50);
 	}

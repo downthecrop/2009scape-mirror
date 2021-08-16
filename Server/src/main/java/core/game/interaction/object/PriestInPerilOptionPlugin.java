@@ -14,6 +14,7 @@ import core.game.node.object.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.NPCs;
 
 /**
  * Represents the quest node plugin handler.
@@ -200,7 +201,7 @@ public class PriestInPerilOptionPlugin extends OptionHandler {
 				}
 				break;
 			case "talk-through":
-				player.getDialogueInterpreter().open(1047, NPC.create(1047, player.getLocation()));
+				player.getDialogueInterpreter().open(NPCs.DREZEL_7690, NPC.create(NPCs.DREZEL_7690, player.getLocation()));
 				break;
 			}
 			break;
