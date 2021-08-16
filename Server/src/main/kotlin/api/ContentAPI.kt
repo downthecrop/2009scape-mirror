@@ -1091,6 +1091,29 @@ object ContentAPI {
     }
 
     /**
+     * Sends a dialogue box with a single item and some text
+     * @param player the player to send it to
+     * @param item the ID of the item to show
+     * @param message the text to display
+     */
+    @JvmStatic
+    fun sendItemDialogue(player: Player, item: Int, message: String){
+        player.dialogueInterpreter.sendItemMessage(item, *DialUtils.splitLines(message))
+    }
+
+    /**
+     * Sends a dialogue box with two items and some text
+     * @param player the player to send it to
+     * @param item1 the ID of the first item to show
+     * @param item2 the ID of the second item to show
+     * @param message the text to display
+     */
+    @JvmStatic
+    fun sendDoubleItemDialogue(player: Player, item1: Int, item2: Int, message: String){
+        player.dialogueInterpreter.sendDoubleItemMessage(item1, item2, message)
+    }
+
+    /**
      * Send an input dialogue to retrieve a specified value from the player
      * @param player the player to send the input dialogue to
      * @param numeric whether or not the input is numeric

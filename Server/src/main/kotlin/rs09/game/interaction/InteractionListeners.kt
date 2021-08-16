@@ -170,6 +170,7 @@ object InteractionListeners {
     @JvmStatic
     fun run(id: Int, type: Int, option: String, player: Player, node: Node): Boolean{
         val flag = when(type){
+            3 -> DestinationFlag.ITEM
             2 -> DestinationFlag.ENTITY
             1 -> DestinationFlag.OBJECT
             else -> DestinationFlag.OBJECT

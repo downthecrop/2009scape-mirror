@@ -109,6 +109,10 @@ public abstract class Consumable implements Plugin<Object> {
 		return effect.getHealthEffectValue(player);
 	}
 
+	public ConsumableEffect getEffect() {
+		return effect;
+	}
+
 	public int[] getIds() {
 		return ids;
 	}
