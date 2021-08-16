@@ -26,16 +26,23 @@ public final class PositionedGraphicContext implements Context {
 	 */
 	private final Location location;
 
+	public int sceneX, sceneY;
+	public int offsetX, offsetY;
+
 	/**
 	 * Constructs a new {@code PositionedGraphicContext} {@code Object}.
 	 * @param player The player.
 	 * @param graphic The graphic to display on the given location.
 	 * @param location The location to display the graphic on.
 	 */
-	public PositionedGraphicContext(Player player, Graphics graphic, Location location) {
+	public PositionedGraphicContext(Player player, Graphics graphic, Location location, int offsetX, int offsetY) {
 		this.player = player;
 		this.graphic = graphic;
 		this.location = location;
+		this.sceneX = location.getSceneX(player.getPlayerFlags().getLastSceneGraph());
+		this.sceneY = location.getSceneY(player.getPlayerFlags().getLastSceneGraph());
+		this.offsetX = offsetX;
+		this.offsetY = offsetY;
 	}
 
 	@Override
