@@ -99,7 +99,7 @@ class NSListeners : InteractionListener() {
         }
 
         on(WISHING_WELL, SCENERY, "make-wish"){player, node ->
-            if(player.questRepository.isComplete("Nature Spirit"))
+            if(player.questRepository.isComplete("Nature Spirit") && player.questRepository.isComplete("Wolf Whistle"))
                 ShopParser.openUid(player, 241)
             else
                 ContentAPI.sendDialogue(player, "You can't do that yet.")
