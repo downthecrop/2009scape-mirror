@@ -1,6 +1,7 @@
 package core.game.node.entity.skill.herblore;
 
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
 
 /**
  * Represents a finished potion.
@@ -21,7 +22,7 @@ public enum FinishedPotion {
 	SUPER_ANTIPOISON(UnfinishedPotion.IRIT, new Item(235), 48, 106.3, new Item(181)),
 	FISHING_POTION(UnfinishedPotion.AVANTOE, new Item(231), 50, 112.5, new Item(151)),
 	SUPER_ENERGY(UnfinishedPotion.AVANTOE, new Item(2970), 52, 117.5, new Item(3018)),
-	HUNTING_POTION(UnfinishedPotion.AVANTOE, new Item(10109), 53, 120, new Item(10000)),
+	HUNTING_POTION(UnfinishedPotion.AVANTOE, new Item(Items.KEBBIT_TEETH_DUST_10111), 53, 120, new Item(10000)),
 	SUPER_STRENGTH(UnfinishedPotion.KWUARM, new Item(225), 55, 125, new Item(157)),
 	WEAPON_POISON(UnfinishedPotion.KWUARM, new Item(241), 60, 137.5, new Item(187)),
 	SUPER_RESTORE(UnfinishedPotion.SNAPDRAGON, new Item(223), 63, 142.5, new Item(3026)),

@@ -322,7 +322,7 @@ public final class PacketDispatch {
 	 * @param location the location.
 	 */
 	public void sendPositionedGraphic(int id, int height, int delay, Location location) {
-		PacketRepository.send(PositionedGraphic.class, new PositionedGraphicContext(player, new Graphics(id, height, delay), location));
+		PacketRepository.send(PositionedGraphic.class, new PositionedGraphicContext(player, new Graphics(id, height, delay), location, 0, 0));
 	}
 
 	/**
@@ -342,8 +342,7 @@ public final class PacketDispatch {
 	 * @param location the location.
 	 */
 	public void sendPositionedGraphics(Graphics graphics, Location location) {
-		PacketRepository.send(PositionedGraphic.class, new PositionedGraphicContext(player, graphics, location));
-
+		PacketRepository.send(PositionedGraphic.class, new PositionedGraphicContext(player, graphics, location, 0, 0));
 	}
 
 	/**
