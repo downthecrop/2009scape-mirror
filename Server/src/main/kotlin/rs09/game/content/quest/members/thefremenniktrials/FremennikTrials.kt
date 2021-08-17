@@ -38,6 +38,7 @@ class FremennikTrials : Quest("Fremennik Trials",64,63,3,347,0,1,10){
             line(player,"Swensen the Navigator",line++,player.getAttribute("fremtrials:swensen-vote",false))
             line(player,"Sigli the Huntsman",line++,player.getAttribute("fremtrials:sigli-vote",false))
             line(player,"Olaf the Bard",line++,player.getAttribute("fremtrials:olaf-vote",false))
+            line(player,"Thorvald the Warrior",line++,player.getAttribute("fremtrials:thorvald-vote",false))
             line(player,"So far I have gotten ${player.getAttribute("fremtrials:votes",0)} votes.",line++)
         }
     }
