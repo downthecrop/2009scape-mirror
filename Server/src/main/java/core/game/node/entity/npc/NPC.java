@@ -25,6 +25,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.update.flag.context.Animation;
+import core.game.world.update.flag.context.Graphics;
 import core.game.world.update.flag.npc.NPCFaceEntity;
 import core.game.world.update.flag.npc.NPCFaceLocation;
 import core.game.world.update.flag.npc.NPCForceChat;
@@ -304,6 +305,9 @@ public class NPC extends Entity {
 		forceTalk = definition.getConfiguration("force_talk", null);
 		if (definition.getConfiguration("movement_radius") != null) {
 			this.setWalkRadius(definition.getConfiguration("movement_radius"));
+		}
+		if(definition.getConfiguration("death_gfx") != null) {
+			getProperties().deathGfx = new Graphics(definition.getConfiguration("death_gfx"));
 		}
 	}
 

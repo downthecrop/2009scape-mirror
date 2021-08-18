@@ -9,6 +9,7 @@ abstract class InteractionListener : Listener{
         val ITEM = 0
         val SCENERY = 1
         val NPC = 2
+        val GROUNDITEM = 3
     }
     fun on(id: Int, type: Int, vararg option: String,handler: (player: Player, node: Node) -> Boolean){
         InteractionListeners.add(id,type,option,handler)

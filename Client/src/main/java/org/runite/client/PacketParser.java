@@ -2,6 +2,7 @@ package org.runite.client;
 
 import org.rs09.Discord;
 import org.rs09.SlayerTracker;
+import org.rs09.SystemLogger;
 import org.rs09.XPGainDraw;
 
 import java.nio.charset.StandardCharsets;

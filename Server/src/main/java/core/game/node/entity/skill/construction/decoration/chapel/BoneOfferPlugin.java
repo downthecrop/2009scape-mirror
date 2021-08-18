@@ -87,9 +87,12 @@ public class BoneOfferPlugin extends UseWithHandler {
 			return;
 		}
 		final Location start = player.getLocation();
+
+		Location gfxLoc = player.getLocation().transform(player.getDirection(), 1);
+
 		ContentAPI.submitIndividualPulse(player, new Pulse(1) {
 			int counter = 0;
-			
+
 			@Override
 			public boolean pulse() {
 				counter++;
@@ -97,7 +100,7 @@ public class BoneOfferPlugin extends UseWithHandler {
 					if (player.getInventory().remove(new Item(b.getItemId()))) {
 						player.animate(ANIM);
 						player.getAudioManager().send(new Audio(958));
-						player.getPacketDispatch().sendPositionedGraphics(GFX, altar.getLocation());
+						player.getPacketDispatch().sendPositionedGraphics(GFX, gfxLoc);
 						player.sendMessage(getMessage(isLit(left), isLit(right)));
 						player.getSkills().addExperience(Skills.PRAYER, b.getExperience() * getMod(altar, isLit(left), isLit(right)));
 					}

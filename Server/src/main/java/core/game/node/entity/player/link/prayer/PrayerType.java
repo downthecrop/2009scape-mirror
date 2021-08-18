@@ -1,10 +1,12 @@
 package core.game.node.entity.player.link.prayer;
 
+import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.skill.SkillBonus;
 import core.game.node.entity.skill.SkillRestoration;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
+import core.game.world.map.zone.ZoneBorders;
 import core.tools.StringUtils;
 
 import java.util.List;
@@ -251,16 +253,16 @@ public enum PrayerType {
 		if (on) {
 			flag(player, this);
 			player.getPrayer().getActive().add(this);
-			player.getPrayer().getTask().init(player);
 			iconify(player, getIcon(player, this));
 			player.getAudioManager().send(getSound());
+
+			if (this == PrayerType.PIETY
+					&& new ZoneBorders(2732, 3467, 2739, 3471, 0).insideBorder(player)) {
+				player.getAchievementDiaryManager().finishTask(player, DiaryType.SEERS_VILLAGE, 2, 3);
+			}
 		} else {
 			player.getPrayer().getActive().remove(this);
 			findNextIcon(player);
-			if (player.getPrayer().getActive().isEmpty()) {
-				player.getPrayer().getTask().stop(player);
-				return true;
-			}
 		}
 		return true;
 	}
