@@ -69,11 +69,11 @@ public final class DrezelDialogue extends DialoguePlugin {
 		final Quest quest = player.getQuestRepository().getQuest("Priest in Peril");
 		switch (stage) {
 		case 0:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Oh! You do not appear to be on of those Zamorkians", "who imprisoned me here! Who are you and why are", "you here?");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Oh! You do not appear to be on of those Zamorakians", "who imprisoned me here! Who are you and why are", "you here?");
 			stage = 1;
 			break;
 		case 1:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "My name's " + player.getUsername() + ". King Roald sent me to find out", "what was going on at the temple. I take it you are", "Drezel?");
+			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "My name's " + player.getUsername() + ". King Roald sent me to find", "out what was going on at the temple. I take it you are", "Drezel?");
 			stage = 2;
 			break;
 		case 2:
@@ -99,7 +99,7 @@ public final class DrezelDialogue extends DialoguePlugin {
 		case 7:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Tell me anyway.");
+				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Tell me anyway. I'd like to know the full facts before","acting any further.");
 				stage = 8;
 				break;
 			case 2:
@@ -109,7 +109,7 @@ public final class DrezelDialogue extends DialoguePlugin {
 			}
 			break;
 		case 8:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "d, Saradomin has granted you wisdom I see. Well, the", "story of the river Salve and of how it protects Mithsalin", "is the story of this temple,");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Ah, Saradomin has granted you wisdom I see. Well, the", "story of the river Salve and of how it protects Mithsalin", "is the story of this temple,");
 			stage = 9;
 			break;
 		case 9:
@@ -137,7 +137,7 @@ public final class DrezelDialogue extends DialoguePlugin {
 			stage = 15;
 			break;
 		case 15:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "that he could find, and the seven of them rode here to", "make a final stand. The enemies swarmed across the", "Salve but they did not yield");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "that he could find, and the seven of them rode here to", "make a final stand. The enemies swarmed across the", "Salve but they did not yield.");
 			stage = 16;
 			break;
 		case 16:
@@ -145,7 +145,7 @@ public final class DrezelDialogue extends DialoguePlugin {
 			stage = 17;
 			break;
 		case 17:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "On the eleventh day they were to be joined by", "reinforcements from a neighbouring encampment, but", "then those reinforecements arrived all they found");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "On the eleventh day they were to be joined by", "reinforcements from a neighbouring encampment, but", "then those reinforcements arrived all they found");
 			stage = 18;
 			break;
 		case 18:
@@ -153,7 +153,7 @@ public final class DrezelDialogue extends DialoguePlugin {
 			stage = 19;
 			break;
 		case 19:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "The men were saddend at the loss of such pure and", "mighty warriors, yet their sacrifice had not been in", "vain; for the water of the Salve");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "The men were saddened at the loss of such pure and", "mighty warriors, yet their sacrifice had not been in", "vain; for the water of the Salve");
 			stage = 20;
 			break;
 		case 20:
@@ -189,20 +189,20 @@ public final class DrezelDialogue extends DialoguePlugin {
 			stage = 28;
 			break;
 		case 28:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I fear that should those Zamorakians somehow pollute", "the Salve and desecrate his blessing, his power might not", "be able to stop.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I fear that should those Zamorakians somehow pollute", "the Salve and desecrate his blessing, his power might not", "be able to stop");
 			stage = 29;
 			break;
 		case 29:
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "the army of evil that lurks to the east, longing for the", "opportunity to invade and destroy us all!");
 			stage = 30;
 			break;
-		case 31:
-			interpreter.sendOptions("Select an Option", "Yes.", "No.");
-			stage = 503;
-			break;
 		case 30:
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "So what do you say adventurer? Will you aid me and", "all of Misthalin in foiling this Zamorakian plot?");
 			stage = 31;
+			break;
+		case 31:
+			interpreter.sendOptions("Select an Option", "Yes.", "No.");
+			stage = 503;
 			break;
 		case 500:
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, let's just say if we cannot undo whatever damage", "has been done here the entire land is in grave peril!");
@@ -210,16 +210,12 @@ public final class DrezelDialogue extends DialoguePlugin {
 			break;
 		case 501:
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "So what do you say adventurer? Will you aid me and", "all of Misthalin in foiling this Zamorakian plot?");
-			stage = 502;
-			break;
-		case 502:
-			interpreter.sendOptions("Select an Option", "Yes.", "No.");
-			stage = 503;
+			stage = 31;
 			break;
 		case 503:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Yes, ofcourse. Any threat to Misthalin must be", "neutralised immediately. So what can I do to help?");
+				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Yes, of course. Any threat to Misthalin must be", "neutralised immediately. So what can I do to help?");
 				stage = 506;
 				break;
 			case 2:
@@ -236,11 +232,11 @@ public final class DrezelDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 506:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, the immediate problem is that I am trapped in this", "cell. I know that they key to free me is nearby, for none", "of the Zamorakians");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, the immediate problem is that I am trapped in this", "cell. I know that the key to free me is nearby, for none", "of the Zamorakians");
 			stage = 507;
 			break;
 		case 507:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "who imprisoned me here were ever gone for long", "periods of time, Should you find the key however, as", "you may have noticed,");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "who imprisoned me here were ever gone for long", "periods of time. Should you find the key however, as", "you may have noticed,");
 			stage = 508;
 			break;
 		case 508:
@@ -276,7 +272,7 @@ public final class DrezelDialogue extends DialoguePlugin {
 			stage = 516;
 			break;
 		case 516:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "When you have done both of those I will be able to", "inspect the damage which those Zamorakians have done", "to the purity of the Salve");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "When you have done both of those I will be able to", "inspect the damage which those Zamorakians have done", "to the purity of the Salve.");
 			stage = 517;
 			break;
 		case 517:
@@ -352,7 +348,7 @@ public final class DrezelDialogue extends DialoguePlugin {
 			player.getPacketDispatch().sendMessage("The priest blesses the water for you.");
 			break;
 		case 730:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "well, the water of the salve should still have enough", "power to work against the vampie despite what those", "Zamorakians might have done to it...");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "well, the water of the salve should still have enough", "power to work against the vampire despite what those", "Zamorakians might have done to it...");
 			stage = 731;
 			break;
 		case 731:
