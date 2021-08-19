@@ -211,7 +211,7 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 			stage = 901;
 			break;
 		case 901:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "From what I can tell, after you killed the guard dog", "who protected the entrance to the mouments, those", "Zamorakians forced the door into the main chamber");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "From what I can tell, after you killed the guard dog", "who protected the entrance to the monuments, those", "Zamorakians forced the door into the main chamber");
 			stage = 902;
 			break;
 		case 902:
