@@ -17,10 +17,10 @@ class KingRoaldPIPDialogue(val questStage: Int) : DialogueFile() {
             when(stage){
                 1 -> player("I am looking for a quest!").also { stage++ }
                 2 -> npc("A quest you say? Hmm, what an odd request to make", "of the king. It's funny you should mention it though, as", "there is something you can do for me.").also { stage++ }
-                3 -> npc("Are you aware of the temple easy of here? It stands on", "the river Salve and guards the entrance to the lands of", "Morytania?").also { stage++ }
+                3 -> npc("Are you aware of the temple east of here? It stands on", "the river Salve and guards the entrance to the lands of", "Morytania?").also { stage++ }
                 4 -> player("No, I don't think I know it...").also { stage++ }
                 5 -> npc("Hmm, how strange that you don't. Well anyway, it has", "been some days since last I heard from Drezel, the", "priest who lives there.").also { stage++ }
-                6 -> npc("Be a sport and go make sure that nothing untoward", "has happend to the silly old codger for me, would you?").also { stage++ }
+                6 -> npc("Be a sport and go make sure that nothing untoward", "has happened to the silly old codger for me, would you?").also { stage++ }
                 7 -> options("Sure.", "No, that sounds boring.").also { stage++ }
                 8 -> when(buttonID){
                     1 -> {
@@ -49,11 +49,11 @@ class KingRoaldPIPDialogue(val questStage: Int) : DialogueFile() {
             when(stage){
                 1 -> npc("You have news of Drezel for me?").also { stage++ }
                 2 -> player("Yeah, I spoke to the guys at the temple and they said", "they were being bothered by that dog in the crypt, so I", "went and killed it for them. No problem.").also { stage++ }
-                3 -> npc("YOU DID WHAT??").also { stage++ }
+                3 -> npc("YOU DID WHAT???").also { stage++ }
                 4 -> npc("Are you mentally deficient??? That guard dog was", "protecting the route to Morytania! Without it we could", "be in severe peril of attack!").also { stage++ }
                 5 -> player("Did I make a mistake?").also { stage++ }
-                6 -> npc("YES YOU DID!!!!! You need to get there", "and find out what is happening! Before it is too late for", "us all!").also { stage++ }
-                7 -> player("B-but Drezel TOLD me to..!").also { stage++ }
+                6 -> npc("YES YOU DID!!!!! You need to get there right now", "and find out what is happening! Before it is too late for", "us all!").also { stage++ }
+                7 -> player("B-but Drezel TOLD me to...!").also { stage++ }
                 8 -> npc("No, you absolute cretin! Obviously some fiend has done", "something to Drezel and tricked your feeble intellect", "into helping them kill that guard dog!").also { stage++ }
                 9 -> npc("You get back there and do whatever is necessary to", "safeguard my kingdom from attack, or I will see you", "beheaded for high treason!").also { stage++ }
                 10 -> {
