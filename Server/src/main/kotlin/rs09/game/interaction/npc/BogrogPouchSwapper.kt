@@ -9,6 +9,7 @@ import core.game.node.entity.skill.summoning.SummoningScroll
 import core.game.node.item.Item
 import core.game.world.map.zone.ZoneBorders
 import kotlin.math.ceil
+import kotlin.math.floor
 
 /**
  * Handles swapping pouches/scrolls for shards.
@@ -49,21 +50,21 @@ object BogrogPouchSwapper {
     private fun swap(player: Player, amount: Int, itemID: Int): Boolean{
         var amt = amount
         val value = getValue(itemID)
-        if(value == 0){
+        if(value == 0.0){
             return false
         }
         val inInventory = player.inventory.getAmount(itemID)
         if(amount > inInventory)
             amt = inInventory
         player.inventory.remove(Item(itemID,amt))
-        player.inventory.add(Item(SPIRIT_SHARD,value * amt))
+        player.inventory.add(Item(SPIRIT_SHARD, floor(value * amt).toInt()))
         player.interfaceManager.close(Component(644))
         return true
     }
 
     private fun sendValue(itemID: Int, player: Player): Boolean{
         val value = getValue(itemID)
-        if(value == 0){
+        if(value == 0.0){
             return false
         }
 
@@ -71,11 +72,14 @@ object BogrogPouchSwapper {
         return true
     }
 
-    private fun getValue(itemID: Int): Int{
+    private fun getValue(itemID: Int): Double{
         var item = SummoningPouch.get(itemID)
+        var isScroll = false
         if(item == null) item = SummoningPouch.get(Item(itemID).noteChange)
-        if(item == null) item = SummoningPouch.get(SummoningScroll.forItemId(itemID)?.pouch ?: -1)
-        item ?: return 0
-        return ceil(item.items[item.items.size - 1].amount * 0.7).toInt()
+        if(item == null) item = SummoningPouch.get(SummoningScroll.forItemId(itemID)?.pouch ?: -1).also { isScroll = true }
+        item ?: return 0.0
+        var shardQuantity = item.items[item.items.size - 1].amount * 0.7
+        if(isScroll) shardQuantity /= 20.0
+        return shardQuantity
     }
 }
