@@ -108,31 +108,30 @@ public final class SlayerManager {
 		if(hasTask()) {
 			player.getSkills().addExperience(Skills.SLAYER, npc.getSkills().getMaximumLifepoints());
 			decrementAmount(1);
-		}
-
-		if(!hasTask()){
-			flags.setTaskStreak(flags.getTaskStreak() + 1);
-			flags.setCompletedTasks(flags.getCompletedTasks() + 1);
-			if ((flags.getCompletedTasks() > 4 || flags.canEarnPoints() ) && flags.getMaster() != Master.TURAEL && flags.getPoints() < 64000) {
-				int points = flags.getMaster().getTaskPoints()[0];
-				if (flags.getTaskStreak() % 10 == 0) {
-					points = flags.getMaster().getTaskPoints()[1];
-				} else if (flags.getTaskStreak() % 50 == 0) {
-					points = flags.getMaster().getTaskPoints()[2];
+			if(!hasTask()){
+				flags.setTaskStreak(flags.getTaskStreak() + 1);
+				flags.setCompletedTasks(flags.getCompletedTasks() + 1);
+				if ((flags.getCompletedTasks() > 4 || flags.canEarnPoints() ) && flags.getMaster() != Master.TURAEL && flags.getPoints() < 64000) {
+					int points = flags.getMaster().getTaskPoints()[0];
+					if (flags.getTaskStreak() % 10 == 0) {
+						points = flags.getMaster().getTaskPoints()[1];
+					} else if (flags.getTaskStreak() % 50 == 0) {
+						points = flags.getMaster().getTaskPoints()[2];
+					}
+					flags.incrementPoints(points);
+					if (flags.getPoints() > 64000) {
+						flags.setPoints(64000);
+					}
+					player.sendMessages("You've completed " + flags.getTaskStreak() + " tasks in a row and received " + points + " points, with a total of " + flags.getPoints(),"You have completed " + flags.getCompletedTasks() + " tasks in total. Return to a Slayer master.");
+				} else if(flags.getCompletedTasks() == 4){
+					player.sendMessage("You've completed your task; you will start gaining points on your next task!");
+					flags.flagCanEarnPoints();
+				} else {
+					player.sendMessages("You've completed your task; Complete " + (4 - flags.getCompletedTasks()) + " more task(s) to start gaining points.", "Return to a Slayer master.");
 				}
-				flags.incrementPoints(points);
-				if (flags.getPoints() > 64000) {
-					flags.setPoints(64000);
-				}
-				player.sendMessages("You've completed " + flags.getTaskStreak() + " tasks in a row and received " + points + " points, with a total of " + flags.getPoints(),"You have completed " + flags.getCompletedTasks() + " tasks in total. Return to a Slayer master.");
-			} else if(flags.getCompletedTasks() == 4){
-				player.sendMessage("You've completed your task; you will start gaining points on your next task!");
-				flags.flagCanEarnPoints();
 			} else {
-				player.sendMessages("You've completed your task; Complete " + (4 - flags.getCompletedTasks()) + " more task(s) to start gaining points.", "Return to a Slayer master.");
+				//player.sendMessage("You're assigned to kill " + NPCDefinition.forId((player.getSlayer().getTask().getNpcs()[0])).getName().toLowerCase() + "s; Only " + getAmount() + " more to go.");
 			}
-		} else {
-			//player.sendMessage("You're assigned to kill " + NPCDefinition.forId((player.getSlayer().getTask().getNpcs()[0])).getName().toLowerCase() + "s; Only " + getAmount() + " more to go.");
 		}
 	}
 
