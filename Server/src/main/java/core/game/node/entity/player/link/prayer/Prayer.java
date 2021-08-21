@@ -120,6 +120,7 @@ public final class Prayer {
 		if(prayerActiveTicks > 0 && prayerActiveTicks % 2 == 0){
 			if(getPlayer().getSkills().getPrayerPoints() == 0){
 				reset();
+				return;
 			}
 			double amountDrain = 0;
 			for(PrayerType type : getActive()){
