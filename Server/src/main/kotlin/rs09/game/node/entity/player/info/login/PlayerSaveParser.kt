@@ -344,6 +344,7 @@ class PlayerSaveParser(val player: Player) {
         val coreData = saveFile!!["core_data"] as JSONObject
         val inventory = coreData["inventory"] as JSONArray
         val bank = coreData["bank"] as JSONArray
+        val bankSecondary = coreData.getOrDefault("bankSecondary", JSONArray()) as JSONArray
         val equipment = coreData["equipment"] as JSONArray
         val location = coreData["location"] as String
         val bankTabData = coreData["bankTabs"]
@@ -354,11 +355,24 @@ class PlayerSaveParser(val player: Player) {
                 val tab = i as JSONObject
                 val index = tab["index"].toString().toInt()
                 val startSlot = tab["startSlot"].toString().toInt()
-                player.bank.tabStartSlot[index] = startSlot
+                player.bankPrimary.tabStartSlot[index] = startSlot
             }
         }
+        val bankTabSecondaryData = coreData["bankTabsSecondary"]
+        if (bankTabSecondaryData != null) {
+            val tabData = bankTabSecondaryData as JSONArray
+            for (i in tabData) {
+                i ?: continue
+                val tab = i as JSONObject
+                val index = tab["index"].toString().toInt()
+                val startSlot = tab["startSlot"].toString().toInt()
+                player.bankSecondary.tabStartSlot[index] = startSlot
+            }
+        }
+        player.useSecondaryBank = coreData.getOrDefault("useSecondaryBank", false) as Boolean
         player.inventory.parse(inventory)
-        player.bank.parse(bank)
+        player.bankPrimary.parse(bank)
+        player.bankSecondary.parse(bankSecondary)
         player.equipment.parse(equipment)
         player.location = rs09.JSONUtils.parseLocation(location)
     }
