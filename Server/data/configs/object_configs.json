@@ -5584,7 +5584,7 @@
     "ids": "3514,3515"
   },
   {
-    "examine": "A dark dank entrance to below..",
+    "examine": "A dark dank entrance to below.",
     "ids": "3516"
   },
   {
@@ -17025,7 +17025,7 @@
   },
   {
     "examine": "Better not eat them!",
-    "ids": "12094,12095,12096,12097,12098,12099"
+    "ids": "12094,12095,12096,12097,12098,12099,14121"
   },
   {
     "examine": "A hot furnace.",
@@ -20413,7 +20413,7 @@
   },
   {
     "examine": "Storage for all needs.",
-    "ids": "40047"
+    "ids": "40047,30648,30649,30650"
   },
   {
     "examine": "A wooden barrel for storage.",
@@ -20530,5 +20530,33 @@
   {
     "examine": "Looking good!",
     "ids": "40065"
+  },
+  {
+    "examine": "It looks slightly different from the rest.",
+    "ids": "30532"
+  },
+  {
+    "examine": "'Here lies...' is all I can read.",
+    "ids": "30671,30672"
+  },
+  {
+    "examine": "The inscription is worn away and unreadable.",
+    "ids": "30667,30669"
+  },
+  {
+    "examine": "Whoever bought this must have really cared for the inhabitant.",
+    "ids": "30668"
+  },
+  {
+    "examine": "Make a wish.",
+    "ids": "28715"
+  },
+  {
+    "examine": "Contains no summoning energy.",
+    "ids": "28720,28721"
+  },
+  {
+    "examine": "Glowing with barely-suppressed energies.",
+    "ids": "28719"
   }
 ]
