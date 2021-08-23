@@ -1230,4 +1230,17 @@ object ContentAPI {
     fun sendNews(message: String){
         Repository.sendNews(message, 12, "CC6600")
     }
+
+    /**
+     * Sends a given Graphics object, or graphics ID, to the given location.
+     * @param gfx the Graphics object, or the Integer ID of the graphics, to send. Either works.
+     * @param location the location to send it to
+     */
+    @JvmStatic
+    fun <G> sendGraphics(gfx: G, location: Location){
+        when(gfx){
+            is Int -> Graphics.send(Graphics(gfx),location)
+            is Graphics -> Graphics.send(gfx, location)
+        }
+    }
 }
