@@ -31,9 +31,6 @@ class MorytaniaListeners : InteractionListener() {
     private val failMessage = "You nearly drown in the disgusting swamp."
     private val splashGFX = Graphics(68)
 
-    private var failLanding = Location(3438,3328)
-    private var fallAnim = Animation(770)
-
     override fun defineListeners() {
 /*        on(GROTTO_ENTRANCE,SCENERY,"enter"){ player, node ->
             player.teleport(inside)
@@ -46,27 +43,42 @@ class MorytaniaListeners : InteractionListener() {
         }
 
         on(GROTTO_BRIDGE,SCENERY,"jump"){ player, node ->
-            var end = node.location
+            val start = node.location
+            var failLand = Location(3438,3331)
+            var failAnim = Animation(770)
+            var fromGrotto = false
+
+            // Switch to south facing animations if jumping from Grotto
+            if (start.y == 3331) {
+                fromGrotto = true
+                failAnim = Animation(771)
+                failLand = Location(3438,3328)
+            }
+
             if (AgilityHandler.hasFailed(player, 1, 1.0)) {
-                if (player.location.y == 3332) {
-                    fallAnim = Animation(771)
-                    failLanding = Location(3438,3331)
-                    end = end.transform(-1,-1,0)
-                }
-                AgilityHandler.forceWalk(player, -1, node.location, end, fallAnim, 15, 0.0, null,0).endAnimation = swimAnim
-                AgilityHandler.forceWalk(player, -1, failWater, failLanding, swimAnim, 15, 2.0, failMessage,3)
+                val end = if (fromGrotto) failWater else start
+                AgilityHandler.forceWalk(player, -1, start, end, failAnim, 15, 0.0, null,0).endAnimation = swimAnim
+                AgilityHandler.forceWalk(player, -1, failWater, failLand, swimAnim, 15, 2.0, failMessage,3)
+                var counter = 0
                 ContentAPI.submitIndividualPulse(player, object : Pulse(2){
                     override fun pulse(): Boolean {
-                        ContentAPI.visualize(player,fallAnim,splashGFX)
-                        ContentAPI.teleport(player,failWater,TeleportManager.TeleportType.INSTANT)
-                        ContentAPI.impact(player,Random.nextInt(1,7), ImpactHandler.HitsplatType.NORMAL)
-                        return true
+                        if (counter == 0){
+                            ContentAPI.visualize(player,failAnim,splashGFX)
+                            ContentAPI.teleport(player,failWater,TeleportManager.TeleportType.INSTANT)
+                        }
+                        // Deal 1-6 damage but wait until the player is back on land
+                        else if (counter >= 2){
+                            ContentAPI.impact(player,Random.nextInt(1,7), ImpactHandler.HitsplatType.NORMAL)
+                            return true
+                        }
+                        counter++
+                        return false
                     }
                 })
             }
             else{
-                end = if (player.location.y == 3332) end.transform(0,-3,0) else end.transform(0,3,0)
-                AgilityHandler.forceWalk(player, -1, node.location, end, jumpAnim, 15, 15.0, null,0)
+                val end = if (fromGrotto) start.transform(0,-3,0) else start.transform(0,3,0)
+                AgilityHandler.forceWalk(player, -1, start, end, jumpAnim, 15, 15.0, null,0)
             }
             return@on true
         }
