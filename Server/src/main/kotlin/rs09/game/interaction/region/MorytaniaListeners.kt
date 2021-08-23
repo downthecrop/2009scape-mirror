@@ -55,7 +55,7 @@ class MorytaniaListeners : InteractionListener() {
                 failLand = Location(3438,3328)
             }
 
-            if (AgilityHandler.hasFailed(player, 1, 1.0)) {
+            if (AgilityHandler.hasFailed(player, 1, 0.1)) {
                 val end = if (fromGrotto) failWater else start
                 AgilityHandler.forceWalk(player, -1, start, end, failAnim, 15, 0.0, null,0).endAnimation = swimAnim
                 AgilityHandler.forceWalk(player, -1, failWater, failLand, swimAnim, 15, 2.0, failMessage,3)
