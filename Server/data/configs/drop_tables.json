@@ -62638,11 +62638,17 @@
         "weight": "100.0",
         "id": "526",
         "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "1.0",
+        "id": "1591",
+        "maxAmount": "1"
       }
     ],
     "charm": [],
     "ids": "201",
-    "description": "",
+    "description": "Jailer (Taverley Dungeon, drops Jail key)",
     "main": []
   },
   {
