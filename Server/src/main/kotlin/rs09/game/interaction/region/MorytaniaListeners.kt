@@ -48,31 +48,25 @@ class MorytaniaListeners : InteractionListener() {
             var failAnim = Animation(770)
             var fromGrotto = false
 
+            ContentAPI.lock(player,10)
+
             // Switch to south facing animations if jumping from Grotto
             if (start.y == 3331) {
                 fromGrotto = true
                 failAnim = Animation(771)
                 failLand = Location(3438,3328)
             }
-
             if (AgilityHandler.hasFailed(player, 1, 0.1)) {
                 val end = if (fromGrotto) failWater else start
                 AgilityHandler.forceWalk(player, -1, start, end, failAnim, 15, 0.0, null,0).endAnimation = swimAnim
-                AgilityHandler.forceWalk(player, -1, failWater, failLand, swimAnim, 15, 2.0, failMessage,3)
-                var counter = 0
+                AgilityHandler.forceWalk(player, -1, failWater, failLand, swimAnim, 15, 2.0, null,3)
                 ContentAPI.submitIndividualPulse(player, object : Pulse(2){
                     override fun pulse(): Boolean {
-                        if (counter == 0){
-                            ContentAPI.visualize(player,failAnim,splashGFX)
-                            ContentAPI.teleport(player,failWater,TeleportManager.TeleportType.INSTANT)
-                        }
+                        ContentAPI.visualize(player,failAnim,splashGFX)
+                        ContentAPI.teleport(player,failWater)
                         // Deal 1-6 damage but wait until the player is back on land
-                        else if (counter >= 2){
-                            ContentAPI.impact(player,Random.nextInt(1,7), ImpactHandler.HitsplatType.NORMAL)
-                            return true
-                        }
-                        counter++
-                        return false
+                        AgilityHandler.fail(player,0,failLand,swimAnim,Random.nextInt(1,7),failMessage)
+                        return true
                     }
                 })
             }
