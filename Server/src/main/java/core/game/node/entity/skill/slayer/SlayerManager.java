@@ -113,10 +113,10 @@ public final class SlayerManager {
 				flags.setCompletedTasks(flags.getCompletedTasks() + 1);
 				if ((flags.getCompletedTasks() > 4 || flags.canEarnPoints() ) && flags.getMaster() != Master.TURAEL && flags.getPoints() < 64000) {
 					int points = flags.getMaster().getTaskPoints()[0];
-					if (flags.getTaskStreak() % 10 == 0) {
-						points = flags.getMaster().getTaskPoints()[1];
-					} else if (flags.getTaskStreak() % 50 == 0) {
+					if (flags.getTaskStreak() % 50 == 0) {
 						points = flags.getMaster().getTaskPoints()[2];
+					} else if (flags.getTaskStreak() % 10 == 0) {
+						points = flags.getMaster().getTaskPoints()[1];
 					}
 					flags.incrementPoints(points);
 					if (flags.getPoints() > 64000) {
