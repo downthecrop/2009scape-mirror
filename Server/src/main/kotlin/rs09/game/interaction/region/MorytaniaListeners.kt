@@ -1,8 +1,6 @@
 package rs09.game.interaction.region
 
 import api.ContentAPI
-import core.game.node.entity.combat.ImpactHandler
-import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.agility.AgilityHandler
 import core.game.system.task.Pulse
 import core.game.world.map.Location
