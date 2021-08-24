@@ -20493,7 +20493,7 @@
   },
   {
     "examine": "I can climb down this.",
-    "ids": "40027"
+    "ids": "40027,20987"
   },
   {
     "examine": "Storage for cookery items.",
@@ -20558,5 +20558,33 @@
   {
     "examine": "Glowing with barely-suppressed energies.",
     "ids": "28719"
+  },
+  {
+    "examine": "Looks kind of like a man made of metal.",
+    "ids": "32292"
+  },
+  {
+    "examine": "Technically a bed.",
+    "ids": "32031"
+  },
+  {
+    "examine": "A really bad portrait of the King.",
+    "ids": "32326"
+  },
+  {
+    "examine": "A tatty old standard.",
+    "ids": "32295"
+  },
+  {
+    "examine": "I can climb this.",
+    "ids": "32015"
+  },
+  {
+    "examine": "An old crate for storage.",
+    "ids": "31137,31139,31140"
+  },
+  {
+    "examine": "A wooden barrel for storage.",
+    "ids": "31136"
   }
 ]
