@@ -70,6 +70,13 @@ class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
         }
 
         /**
+         * Switch between primary and secondary banks
+         */
+        define("switchbank"){ player, _ ->
+            player.useSecondaryBank = !player.useSecondaryBank
+        }
+
+        /**
          * Toggle invisibility
          */
         define("invis"){ player, _ ->

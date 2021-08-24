@@ -144,6 +144,16 @@ public class Player extends Entity {
 	private final BankContainer bank = new BankContainer(this);
 
 	/**
+	 * The secondary bank container.
+	 */
+	private final BankContainer bankSecondary = new BankContainer(this);
+
+	/**
+	 * Is secondary bank in use or not
+	 */
+	public boolean useSecondaryBank = false;
+
+	/**
 	 * The packet dispatcher.
 	 */
 	private final PacketDispatch packetDispatch = new PacketDispatch(this);
@@ -970,11 +980,27 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * Gets the bank.
-	 * @return The bank.
+	 * Gets the current active bank.
+	 * @return Current active bank.
 	 */
 	public BankContainer getBank() {
+		return useSecondaryBank ? bankSecondary : bank;
+	}
+
+	/**
+	 * Gets the primary bank.
+	 * @return Primary bank
+	 */
+	public BankContainer getBankPrimary() {
 		return bank;
+	}
+
+	/**
+	 * Gets the Secondary bank.
+	 * @return Secondary bank
+	 */
+	public BankContainer getBankSecondary() {
+		return bankSecondary;
 	}
 
 	public BankContainer getDropLog() {return dropLog;}

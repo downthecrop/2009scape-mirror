@@ -188,7 +188,7 @@ public final class BankingPlugin extends OptionHandler {
                     stage = 0;
                     break;
                 case 0:
-                    interpreter.sendOptions("What would you like to say?", "I'd like to access my bank account, please.", "I'd like to check my PIN settings.", "I'd like to see my collection box.", "What is this place?");
+                    interpreter.sendOptions("What would you like to say?", "I'd like to access my bank account, please.", "I'd like to check my PIN settings.", "I'd like to see my collection box.", "I'd like to switch to my " + (player.useSecondaryBank ? "primary": "secondary") + " bank account.", "What is this place?");
                     stage = 10;
                     break;
                 case 1:
@@ -214,6 +214,11 @@ public final class BankingPlugin extends OptionHandler {
                     break;
                 case 5:
                     interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "Yes we did, but people kept on coming into our", "signs were wrong. They acted as if we didn't know", "what town we were in or something.");
+                    stage = 100;
+                    break;
+                case 6:
+                    player.useSecondaryBank = !player.useSecondaryBank;
+                    interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "I've switched you over to your " + (player.useSecondaryBank ? "secondary" : "primary") + " bank account");
                     stage = 100;
                     break;
                 case 100:
@@ -243,7 +248,7 @@ public final class BankingPlugin extends OptionHandler {
                     break;
                 case 10:
                     switch (interfaceId) {
-                        case 232:
+                        case 234:
                             switch (buttonId) {
                                 case 1:
                                 case 2:
@@ -253,6 +258,10 @@ public final class BankingPlugin extends OptionHandler {
                                     end();
                                     break;
                                 case 4:
+                                    player("I'd like to switch to my " + (player.useSecondaryBank ? "primary": "secondary") + " bank account");
+                                    stage = 6;
+                                    break;
+                                case 5:
                                     player("What is this place?");
                                     stage = 1;
                                     break;
