@@ -137,7 +137,7 @@ class JatizsoListeners : InteractionListener() {
             return@on true
         }
 
-        setDest(NPC, NPCs.MAGNUS_GRAM_5488){_ ->
+        setDest(NPC, NPCs.MAGNUS_GRAM_5488){_,_ ->
             return@setDest Location.create(2416, 3801, 0)
         }
 
