@@ -285,7 +285,7 @@ public enum Consumables {
 	/** Miscellaneous */
 	CHOCOLATE_BAR(new Food(new int[] {1973}, new HealingEffect(3))),
 	PURPLE_SWEETS(new Food(new int[] {4561}, new HealingEffect(0))),
-	PURPLE_SWEETS_STACKABLE(new Food(new int[] {10476, 10476}, new MultiEffect(new EnergyEffect(10), new RandomHealthEffect(1, 3)), "The sugary goodness heals some energy.", "The sugary goodness is yummy.")),
+	PURPLE_SWEETS_STACKABLE(new Food(new int[] {10476}, new MultiEffect(new EnergyEffect(10), new RandomHealthEffect(1, 3)), "The sugary goodness heals some energy.", "The sugary goodness is yummy.")),
 	FIELD_RATION(new Food(new int[] {7934}, new HealingEffect(10))),
 	ROLL(new Food(new int[] {6963}, new HealingEffect(6))),
 	TCHIKI_MONKEY_NUTS(new Food(new int[] {7573}, new HealingEffect(5), "You eat the Tchiki monkey nuts. They taste nutty.")),
