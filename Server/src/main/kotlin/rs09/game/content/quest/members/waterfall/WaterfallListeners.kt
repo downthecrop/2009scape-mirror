@@ -15,7 +15,7 @@ class WaterfallListeners : InteractionListener(){
     }
 
     override fun defineDestinationOverrides() {
-        setDest(NPC,HUDON){
+        setDest(NPC,HUDON){_,_ ->
             return@setDest Location.create(2512, 3481, 0)
         }
     }

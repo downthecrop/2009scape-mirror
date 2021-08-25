@@ -53,7 +53,7 @@ class SupriseExamListeners : InteractionListener() {
     }
 
     override fun defineDestinationOverrides() {
-        setDest(NPC,MORDAUT){_ ->
+        setDest(NPC,MORDAUT){_,_ ->
             return@setDest Location.create(1886, 5025, 0)
         }
     }
