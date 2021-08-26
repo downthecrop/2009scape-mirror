@@ -147,10 +147,16 @@ object InteractionListeners {
         var flipped = false
 
         val method = get(used.id,with.id,type) ?: get(with.id,used.id,type).also { flipped = true } ?: return false
+        val destOverride = if(flipped) {
+            getOverride(type, with.id, "use") ?: getOverride(type, with.id) ?: getOverride(type, "use")
+        } else {
+            getOverride(type, used.id, "use") ?: getOverride(type, used.id) ?: getOverride(type, "use")
+        }
+
 
         if(type != 0) {
             if(player.locks.isMovementLocked) return false
-            player.pulseManager.run(object : MovementPulse(player, with, flag) {
+            player.pulseManager.run(object : MovementPulse(player, with, flag, destOverride) {
                 override fun pulse(): Boolean {
                     if (player.zoneMonitor.useWith(used.asItem(), with)) {
                         return true
