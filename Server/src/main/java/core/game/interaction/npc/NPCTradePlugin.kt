@@ -45,7 +45,7 @@ class NPCTradePlugin : InteractionListener() {
     }
 
     override fun defineDestinationOverrides() {
-        setDest(NPC,"trade","shop"){node ->
+        setDest(NPC,"trade","shop"){_,node ->
             val npc = node as NPC
             if (npc.getAttribute("facing_booth", false)) {
                 val offsetX = npc.direction.stepX shl 1

@@ -40,7 +40,7 @@ class NPCTalkListener : InteractionListener() {
     }
 
     override fun defineDestinationOverrides() {
-        setDest(NPC,"talk","talk-to"){node ->
+        setDest(NPC,"talk","talk-to"){_,node ->
             val npc = node as NPC
             if (npc.getAttribute("facing_booth", false)) {
                 val offsetX = npc.direction.stepX shl 1
