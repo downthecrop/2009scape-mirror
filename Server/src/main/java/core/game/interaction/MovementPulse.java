@@ -14,6 +14,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.PlayerContext;
 import core.net.packet.out.ClearMinimapFlag;
 import kotlin.jvm.functions.Function1;
+import kotlin.jvm.functions.Function2;
 import rs09.game.system.SystemLogger;
 
 import java.util.Deque;
@@ -75,7 +76,7 @@ public abstract class MovementPulse extends Pulse {
      */
     private boolean near;
 
-    private Function1<Node,Location> overrideMethod;
+    private Function2<Entity,Node,Location> overrideMethod;
 
     /**
      * Constructs a new {@code MovementPulse} {@code Object}.
@@ -145,7 +146,7 @@ public abstract class MovementPulse extends Pulse {
         this.destinationFlag = destinationFlag;
     }
 
-    public MovementPulse(Entity mover, Node destination, DestinationFlag destinationFlag, Function1<Node,Location> method){
+    public MovementPulse(Entity mover, Node destination, DestinationFlag destinationFlag, Function2<Entity,Node,Location> method){
         this(mover,destination,null,false);
         this.destinationFlag = destinationFlag;
         this.overrideMethod = method;
@@ -241,7 +242,7 @@ public abstract class MovementPulse extends Pulse {
             loc = destinationFlag.getDestination(mover, destination);
         }
         if(overrideMethod != null){
-            loc = overrideMethod.invoke(destination);
+            loc = overrideMethod.invoke(mover,destination);
             if(loc == destination.getLocation()) loc = destinationFlag.getDestination(mover,destination);
         }
         if (loc == null && optionHandler != null) {

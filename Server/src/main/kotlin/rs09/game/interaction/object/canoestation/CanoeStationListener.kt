@@ -19,10 +19,10 @@ class CanoeStationListener : InteractionListener() {
     private val FLOAT = Animation(3304)
 
     override fun defineDestinationOverrides() {
-        setDest(SCENERY,STATION_IDs,"chop-down"){ node ->
+        setDest(SCENERY,STATION_IDs,"chop-down"){ _,node ->
             return@setDest CanoeUtils.getChopLocation(node.location)
         }
-        setDest(SCENERY,STATION_IDs,"shape-canoe","float canoe","float log","float waka"){ node ->
+        setDest(SCENERY,STATION_IDs,"shape-canoe","float canoe","float log","float waka"){ _,node ->
             return@setDest CanoeUtils.getCraftFloatLocation(node.location)
         }
     }
