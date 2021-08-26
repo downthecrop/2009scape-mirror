@@ -162,12 +162,12 @@ public class GodBookPlugin extends OptionHandler {
 		/**
 		 * The partnership messages.
 		 */
-		private static final String[][] PARTNERSHIPS = new String[][] { { "In the name of Saradomin,", "protector of us all,", " I now join you in the eyes of Saradomin." }, { "Light and dark,", "day and night,", "Balance arises from constrast.", "I unify thee in the name of Guthix." }, { "May your union not be harmonious,", "but may your conflicts make you stronger,", "in Zamorak's name,", "now two are one." } };
+		private static final String[][] PARTNERSHIPS = new String[][] { { "In the name of Saradomin,", "protector of us all,", " I now join you in the eyes of Saradomin." }, { "Light and dark,", "day and night,", "Balance arises from contrast.", "I unify thee in the name of Guthix." }, { "May your union not be harmonious,", "but may your conflicts make you stronger,", "in Zamorak's name,", "now two are one." } };
 
 		/**
 		 * The last rite messages.
 		 */
-		private static final String[][] LAST_RITES = new String[][] { { "Thy cause was false,", "thy skills did lack;", "See you in Lumbridge when you get back." }, { "Thy death was not in vain,", "For it brought some balance to the world.", "May guthix bring thee rest." }, { "The weak deserve to die,", "so the strong may flourish.", "This is the creed of Zamorak." } };
+		private static final String[][] LAST_RITES = new String[][] { { "Thy cause was false,", "thy skills did lack;", "See you in Lumbridge when you get back." }, { "Thy death was not in vain,", "For it brought some balance to the world.", "May Guthix bring thee rest." }, { "The weak deserve to die,", "so the strong may flourish.", "This is the creed of Zamorak." } };
 
 		/**
 		 * The blessing messages.
