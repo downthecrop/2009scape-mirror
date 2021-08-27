@@ -7,6 +7,7 @@ import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
+import rs09.game.system.SystemLogger
 
 object InteractionListeners {
     private val listeners = HashMap<String,(Player, Node) -> Boolean>(1000)
@@ -148,9 +149,9 @@ object InteractionListeners {
 
         val method = get(used.id,with.id,type) ?: get(with.id,used.id,type).also { flipped = true } ?: return false
         val destOverride = if(flipped) {
-            getOverride(type, with.id, "use") ?: getOverride(type, with.id) ?: getOverride(type, "use")
+            getOverride(type, used.id, "use") ?: getOverride(type, with.id) ?: getOverride(type, "use")
         } else {
-            getOverride(type, used.id, "use") ?: getOverride(type, used.id) ?: getOverride(type, "use")
+            getOverride(type, with.id, "use") ?: getOverride(type, used.id) ?: getOverride(type, "use")
         }
 
 
