@@ -8,13 +8,11 @@ import core.game.node.item.Item
 import core.tools.RandomFunction
 import org.rs09.consts.Items
 
-private val CHARMS = intArrayOf(Items.CRIMSON_CHARM_12160,Items.BLUE_CHARM_12163,Items.GREEN_CHARM_12159,Items.GOLD_CHARM_12158)
 class NPCDropTable : WeightBasedTable() {
     val charmDrops = WeightBasedTable()
 
-    override fun add(element: WeightedItem): Boolean {
-        return if(CHARMS.contains(element.id)) charmDrops.add(element)
-        else super.add(element)
+    fun addToCharms(element: WeightedItem): Boolean {
+        return charmDrops.add(element)
     }
 
     override fun roll(player: Player?): ArrayList<Item> {
