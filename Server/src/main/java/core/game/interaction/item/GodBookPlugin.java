@@ -31,9 +31,8 @@ public class GodBookPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		for (GodBook book : GodBook.values()) {
 			book.getDamagedBook().getDefinition().getHandlers().put("option:check", this);
-			book.getBook().getDefinition().getHandlers().put("option:preach", this);
 		}
-		PluginManager.definePlugins(new PageHandler(), new GodBookDialogue(), new GodBookItem(), new SymbolBlessHandler());
+		PluginManager.definePlugins(new PageHandler(), new GodBookItem(), new SymbolBlessHandler());
 		return this;
 	}
 
@@ -149,133 +148,6 @@ public class GodBookPlugin extends OptionHandler {
 				return false;
 			}
 			return true;
-		}
-
-	}
-
-	/**
-	 * Handles the god book dialogue.
-	 * @author Vexia
-	 */
-	public static class GodBookDialogue extends DialoguePlugin {
-
-		/**
-		 * The partnership messages.
-		 */
-		private static final String[][] PARTNERSHIPS = new String[][] { { "In the name of Saradomin,", "protector of us all,", " I now join you in the eyes of Saradomin." }, { "Light and dark,", "day and night,", "Balance arises from contrast.", "I unify thee in the name of Guthix." }, { "May your union not be harmonious,", "but may your conflicts make you stronger,", "in Zamorak's name,", "now two are one." } };
-
-		/**
-		 * The last rite messages.
-		 */
-		private static final String[][] LAST_RITES = new String[][] { { "Thy cause was false,", "thy skills did lack;", "See you in Lumbridge when you get back." }, { "Thy death was not in vain,", "For it brought some balance to the world.", "May Guthix bring thee rest." }, { "The weak deserve to die,", "so the strong may flourish.", "This is the creed of Zamorak." } };
-
-		/**
-		 * The blessing messages.
-		 */
-		private static final String[][] BLESSINGS = new String[][] { { "Go in peace in the name of Saradomin;", "may his glory shine upon you like the sun." }, { "Mayest thou walk the path,", "and never fall,", "For Guthix walks beside thee on thy journey.", "May Guthix bring thee peace." }, { "May you reject all safe paths,", "and embrace all challenges.", "Zamorak bring you strength." } };
-
-		/**
-		 * The preaching messages.
-		 */
-		private static final String[][] PREACH = new String[][] { { "Protect yourself,", "protect your friends.", "Mine is the glory that never ends.", "This is Saradomin's wisdom." }, { "Thee trees,", "the earth,", "the sky,", "the waters:", "All play their part upon this land.", "May Guthix bring thee balance." }, { "Battles are not lost and won;", "They simply remove the weak from the equation.", "Zamorak give me strength!" } };
-
-		private static final Animation[] ANIMATIONS = new Animation[] { new Animation(1335), new Animation(1337), new Animation(1336) };
-
-		/**
-		 * The god book.
-		 */
-		private GodBook book;
-
-		/**
-		 * Constructs a new {@code GodBookDialogue} {@code Object}
-		 */
-		public GodBookDialogue() {
-			/**
-			 * empty.
-			 */
-		}
-
-		/**
-		 * Constructs a new {@code GodBookDialogue} {@code Object}
-		 * @param player the player.
-		 */
-		public GodBookDialogue(Player player) {
-			super(player);
-		}
-
-		@Override
-		public DialoguePlugin newInstance(Player player) {
-			return new GodBookDialogue(player);
-		}
-
-		@Override
-		public boolean open(Object... args) {
-			book = (GodBook) args[0];
-			options("Wedding Ceremony", "Last Rites", "Blessings", "Preach");
-			return true;
-		}
-
-		@Override
-		public boolean handle(int interfaceId, int buttonId) {
-			switch (stage) {
-			case 0:
-				String[][] data = null;
-				switch (buttonId) {
-				case 1:
-					data = PARTNERSHIPS;
-					break;
-				case 2:
-					data = LAST_RITES;
-					break;
-				case 3:
-					data = BLESSINGS;
-					break;
-				case 4:
-					data = PREACH;
-					break;
-				}
-				say(data);
-				end();
-				break;
-			}
-			return true;
-		}
-
-		/**
-		 * Says the messages for the type.
-		 * @param data the data.
-		 */
-		private void say(String[][] data) {
-			if (player.inCombat()) {
-				player.sendMessage("You can't do that while in combat.");
-				return;
-			}
-			final String[] messages = data[book.ordinal()];
-			final Animation animation = ANIMATIONS[book.ordinal()];
-			player.animate(animation);
-			player.lock();
-			GameWorld.getPulser().submit(new Pulse(2, player) {
-				int index = 0;
-
-				@Override
-				public boolean pulse() {
-					player.animate(animation);
-					player.sendChat(messages[index]);
-					return index++ >= messages.length - 1;
-				}
-
-				@Override
-				public void stop() {
-					super.stop();
-					player.unlock();
-				}
-
-			});
-		}
-
-		@Override
-		public int[] getIds() {
-			return new int[] { DialogueInterpreter.getDialogueKey("god-book") };
 		}
 
 	}
