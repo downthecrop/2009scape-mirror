@@ -66,7 +66,7 @@ public final class PlayerSession {
 	/**
 	 * The time stamp of last disconnection.
 	 */
-	private long disconnectionTime = 0l;
+	private long disconnectionTime = 0L;
 
 	/**
 	 * How long the player is banned for.
@@ -132,6 +132,8 @@ public final class PlayerSession {
 			ex.printStackTrace();
 			SQLManager.close(connection);
 			return false;
+		} finally {
+			SQLManager.close(connection);
 		}
 		return true;
 	}
@@ -159,6 +161,8 @@ public final class PlayerSession {
 			SQLManager.close(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			SQLManager.close(connection);
+		} finally {
 			SQLManager.close(connection);
 		}
 		communication.clear();
@@ -200,6 +204,8 @@ public final class PlayerSession {
 			SQLManager.close(connection);
 		} catch (SQLException e) {
 			e.printStackTrace();
+			SQLManager.close(connection);
+		} finally {
 			SQLManager.close(connection);
 		}
 	}
@@ -457,9 +463,8 @@ public final class PlayerSession {
 		this.disconnectionTime = time;
 	}
 
-	@Override
-	public boolean equals(Object o) {
-		return username.equals(((PlayerSession) o).username);
+	public boolean equalsSession(PlayerSession o){
+		return username.equals(o.username);
 	}
 
 	@Override

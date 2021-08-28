@@ -53,8 +53,9 @@ fun getNewTTL(): Int{
 }
 
 fun getNewLoc(): Location {
-    var loc = locations.random()
-    while(usedLocations.contains(loc)) loc = locations.random()
+    val possibleLoc = locations.toTypedArray().toMutableList()
+    possibleLoc.removeAll(usedLocations)
+    val loc = possibleLoc.random()
     usedLocations.add(loc)
     return loc
 }

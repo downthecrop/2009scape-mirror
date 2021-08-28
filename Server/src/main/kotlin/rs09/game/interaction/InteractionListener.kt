@@ -1,6 +1,7 @@
 package rs09.game.interaction
 
 import core.game.node.Node
+import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
 
@@ -9,6 +10,7 @@ abstract class InteractionListener : Listener{
         val ITEM = 0
         val SCENERY = 1
         val NPC = 2
+        val GROUNDITEM = 3
     }
     fun on(id: Int, type: Int, vararg option: String,handler: (player: Player, node: Node) -> Boolean){
         InteractionListeners.add(id,type,option,handler)
@@ -37,14 +39,14 @@ abstract class InteractionListener : Listener{
 
     open fun defineDestinationOverrides(){}
 
-    fun setDest(type: Int, id: Int,handler: (Node) -> Location){
+    fun setDest(type: Int, id: Int,handler: (Entity, Node) -> Location){
         InteractionListeners.addDestOverride(type,id,handler)
     }
-    fun setDest(type:Int, vararg options: String, handler: (Node) -> Location){
+    fun setDest(type:Int, vararg options: String, handler: (Entity, Node) -> Location){
         InteractionListeners.addDestOverrides(type,options,handler)
     }
 
-    fun setDest(type: Int, ids: IntArray, vararg options: String, handler: (Node) -> Location){
+    fun setDest(type: Int, ids: IntArray, vararg options: String, handler: (Entity, Node) -> Location){
         InteractionListeners.addDestOverrides(type,ids,options,handler)
     }
 

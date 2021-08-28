@@ -55,7 +55,8 @@ public enum Consumables {
 	MANTA_RAY(new Food(new int[] {391}, new HealingEffect(22))),
 	KARAMBWANJI(new Food(new int[] {3151}, new HealingEffect(3))),
 	STUFFED_SNAKE(new Food(new int[] {7579}, new HealingEffect(20), "You eat the stuffed snake-it's quite a meal! It tastes like chicken.")),
-
+	CRAYFISH(new Food(new int[] {13433}, new HealingEffect(2))),
+	
 	/** Breads */
 	BREAD(new Food(new int[] {2309}, new HealingEffect(5))),
 	BAGUETTE(new Food(new int[] {6961}, new HealingEffect(6))),
@@ -97,8 +98,8 @@ public enum Consumables {
 	CAKE(new Cake(new int[] {1891, 1893, 1895}, new HealingEffect(4), "You eat part of the cake.", "You eat some more cake.", "You eat the slice of cake.")),
 	CHOCOLATE_CAKE(new Cake(new int[] {1897, 1899, 1901}, new HealingEffect(5), "You eat part of the chocolate cake.", "You eat some more of the chocolate cake.", "You eat the slice of cake.")),
 	ROCK_CAKE(new Food(new int[] {2379}, new RockCakeEffect(), "The rock cake resists all attempts to eat it.")),
-	DWARVEN_ROCK_CAKE(new Food(new int[] {7510, 7510}, new DwarvenRockCakeEffect())),
-	HOT_DWARVEN_ROCK_CAKE(new Food(new int[] {7509, 7509}, new DwarvenRockCakeEffect())),
+	DWARVEN_ROCK_CAKE(new Food(new int[] {7510, 7510}, new DwarvenRockCakeEffect(), "Ow! You nearly broke a tooth!", "The rock cake resists all attempts to eat it.")),
+	HOT_DWARVEN_ROCK_CAKE(new Food(new int[] {7509, 7509}, new DwarvenRockCakeEffect(), "Ow! You nearly broke a tooth!", "The rock cake resists all attempts to eat it.")),
 	COOKED_FISHCAKE(new Food(new int[] {7530}, new HealingEffect(11))),
 	MINT_CAKE(new Food(new int[] {9475}, new EnergyEffect(50))),
 
@@ -284,7 +285,7 @@ public enum Consumables {
 	/** Miscellaneous */
 	CHOCOLATE_BAR(new Food(new int[] {1973}, new HealingEffect(3))),
 	PURPLE_SWEETS(new Food(new int[] {4561}, new HealingEffect(0))),
-	PURPLE_SWEETS_STACKABLE(new Food(new int[] {10476, 10476}, new MultiEffect(new EnergyEffect(10), new RandomHealthEffect(1, 3)), "The sugary goodness heals some energy.", "The sugary goodness is yummy.")),
+	PURPLE_SWEETS_STACKABLE(new Food(new int[] {10476}, new MultiEffect(new EnergyEffect(10), new RandomHealthEffect(1, 3)), "The sugary goodness heals some energy.", "The sugary goodness is yummy.")),
 	FIELD_RATION(new Food(new int[] {7934}, new HealingEffect(10))),
 	ROLL(new Food(new int[] {6963}, new HealingEffect(6))),
 	TCHIKI_MONKEY_NUTS(new Food(new int[] {7573}, new HealingEffect(5), "You eat the Tchiki monkey nuts. They taste nutty.")),
@@ -329,6 +330,7 @@ public enum Consumables {
 	MAGIC_ESS(new Potion(new int[] {11491, 11489}, new SkillEffect(Skills.MAGIC,3,0))),
 	SANFEW(new Potion(new int[] {10925, 10927, 10929, 10931}, new MultiEffect(new RestoreEffect(8,0.25), new PrayerEffect(8,0.25), new RemoveStateEffect(EntityState.POISONED.ordinal()), new RemoveStateEffect("disease")))),
 	SUPER_ENERGY(new Potion(new int[] {3016, 3018, 3020, 3022}, new EnergyEffect(20))),
+	BLAMISH_OIL(new FakeConsumable(1582, new String[] {"You know... I'd really rather not."})),
 
 	/** Barbarian Mixes */
 	PRAYERMIX(new BarbarianMix(new int[] {11467, 11465}, new MultiEffect(new PrayerEffect(7, 0.25), new HealingEffect(6)))),

@@ -169,6 +169,26 @@ object ContentAPI {
     }
 
     /**
+     * Clears an NPC with the "poof" smoke graphics commonly seen with random event NPCs.
+     * @param npc the NPC object to initialize
+     */
+    @JvmStatic
+    fun poofClear(npc: NPC){
+        submitWorldPulse(object : Pulse(){
+            var counter = 0
+            override fun pulse(): Boolean {
+                when(counter++){
+                    2 -> {
+                        npc.isInvisible = true; Graphics.send(Graphics(86), npc.location)
+                    }
+                    3 -> npc.clear().also { return true }
+                }
+                return false
+            }
+        })
+    }
+
+    /**
      * Check if an item exists in a player's bank
      * @param player the player whose bank to check
      * @param item the ID of the item to check for
@@ -418,6 +438,22 @@ object ContentAPI {
     }
 
     /**
+     * Spawns a projectile with more advanced parameters
+     * @param source the initial Location of the projectile
+     * @param dest the final Location of the projectile
+     * @param projectile the ID of the gfx used for the projectile
+     * @param startHeight the height the projectile spawns at
+     * @param endHeight the height the projectile ends at
+     * @param delay the delay before the projectile spawns
+     * @param speed the speed the projectile travels at
+     * @param angle the angle the projectile travels at
+     */
+    @JvmStatic
+    fun spawnProjectile(source: Location, dest: Location, projectile: Int, startHeight: Int, endHeight: Int, delay: Int, speed: Int, angle: Int){
+        Projectile.create(source, dest, projectile, startHeight, endHeight, delay, speed, angle, source.getDistance(dest).toInt()).send()
+    }
+
+    /**
      * Causes the given entity to face the given toFace
      * @param entity the entity you wish to face something
      * @param toFace the thing to face
@@ -546,9 +582,10 @@ object ContentAPI {
      */
     @JvmStatic
     fun openDialogue(player: Player, dialogue: Any, vararg args: Any) {
+        player.dialogueInterpreter.close()
         when (dialogue) {
-            is Int -> player.dialogueInterpreter.open(dialogue, args)
-            is DialogueFile -> player.dialogueInterpreter.open(dialogue, args)
+            is Int -> player.dialogueInterpreter.open(dialogue, *args)
+            is DialogueFile -> player.dialogueInterpreter.open(dialogue, *args)
             else -> SystemLogger.logErr("Invalid object type passed to openDialogue() -> ${dialogue.javaClass.simpleName}")
         }
     }
@@ -1064,6 +1101,29 @@ object ContentAPI {
     }
 
     /**
+     * Sends a dialogue box with a single item and some text
+     * @param player the player to send it to
+     * @param item the ID of the item to show
+     * @param message the text to display
+     */
+    @JvmStatic
+    fun sendItemDialogue(player: Player, item: Int, message: String){
+        player.dialogueInterpreter.sendItemMessage(item, *DialUtils.splitLines(message))
+    }
+
+    /**
+     * Sends a dialogue box with two items and some text
+     * @param player the player to send it to
+     * @param item1 the ID of the first item to show
+     * @param item2 the ID of the second item to show
+     * @param message the text to display
+     */
+    @JvmStatic
+    fun sendDoubleItemDialogue(player: Player, item1: Int, item2: Int, message: String){
+        player.dialogueInterpreter.sendDoubleItemMessage(item1, item2, message)
+    }
+
+    /**
      * Send an input dialogue to retrieve a specified value from the player
      * @param player the player to send the input dialogue to
      * @param numeric whether or not the input is numeric
@@ -1179,5 +1239,18 @@ object ContentAPI {
     @JvmStatic
     fun sendNews(message: String){
         Repository.sendNews(message, 12, "CC6600")
+    }
+
+    /**
+     * Sends a given Graphics object, or graphics ID, to the given location.
+     * @param gfx the Graphics object, or the Integer ID of the graphics, to send. Either works.
+     * @param location the location to send it to
+     */
+    @JvmStatic
+    fun <G> sendGraphics(gfx: G, location: Location){
+        when(gfx){
+            is Int -> Graphics.send(Graphics(gfx),location)
+            is Graphics -> Graphics.send(gfx, location)
+        }
     }
 }

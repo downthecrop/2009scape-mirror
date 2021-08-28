@@ -99,12 +99,6 @@ public final class DragonSlayerPlugin extends OptionHandler {
 		SceneryDefinition.forId(25161).getHandlers().put("option:climb-over", this);
 		NPCDefinition.forId(742).getHandlers().put("option:attack", this);
 		NPCDefinition.forId(745).getHandlers().put("option:attack", this);
-		// reward items
-		ItemDefinition.forId(1127).getHandlers().put("option:wear", this);
-		ItemDefinition.forId(1135).getHandlers().put("option:wear", this);
-		ItemDefinition.forId(2653).getHandlers().put("option:wear", this);
-		ItemDefinition.forId(2669).getHandlers().put("option:wear", this);
-		ItemDefinition.forId(2661).getHandlers().put("option:wear", this);
 		// guild
 		SceneryDefinition.forId(24357).getHandlers().put("option:climb-up", this);
 		SceneryDefinition.forId(10558).getHandlers().put("option:open", this);
@@ -138,19 +132,8 @@ public final class DragonSlayerPlugin extends OptionHandler {
 				ClimbActionHandler.climbLadder(player, (Scenery) node, "climb-up");
 			}
 			break;
-		case 1127:
-		case 1135:
-		case 2653:
-		case 2661:
-		case 2669:
-			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) != 100) {
-				player.getPacketDispatch().sendMessage("You need to complete the Dragon Slayer Quest in order to wear this.");
-				return true;
-			}
-			InteractionListeners.run(node.getId(),0,"equip",player,node);
-			break;
 		case 742:
-			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD) || player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
+			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
 				player.getPacketDispatch().sendMessage("You have already slain the dragon. Now you just need to return to Oziach for");
 				player.getPacketDispatch().sendMessage("your reward!");
 				return true;
@@ -169,7 +152,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 				movement.run(player, 10);
 				return true;
 			}
-			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD) || player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
+			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) == 40 && (player.getInventory().containsItem(DragonSlayer.ELVARG_HEAD))) {
 				player.getPacketDispatch().sendMessage("You have already slain the dragon. Now you just need to return to Oziach for");
 				player.getPacketDispatch().sendMessage("your reward!");
 				return true;
@@ -318,7 +301,7 @@ public final class DragonSlayerPlugin extends OptionHandler {
 		case 2604:
 			switch (option) {
 			case "search":
-				if (!player.getInventory().containsItem(DragonSlayer.MAZE_PIECE) && !player.getInventory().containsItem(DragonSlayer.MAZE_PIECE)) {
+				if (!player.getInventory().containsItem(DragonSlayer.MAZE_PIECE)) {
 					if (!player.getInventory().add(DragonSlayer.MAZE_PIECE)) {
 						GroundItemManager.create(DragonSlayer.MAZE_PIECE, player);
 					}

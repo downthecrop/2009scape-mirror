@@ -1,6 +1,7 @@
 package core.game.node.entity.skill.herblore;
 
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
 
 /**
  * Represents a finished potion.
@@ -21,7 +22,7 @@ public enum FinishedPotion {
 	SUPER_ANTIPOISON(UnfinishedPotion.IRIT, new Item(235), 48, 106.3, new Item(181)),
 	FISHING_POTION(UnfinishedPotion.AVANTOE, new Item(231), 50, 112.5, new Item(151)),
 	SUPER_ENERGY(UnfinishedPotion.AVANTOE, new Item(2970), 52, 117.5, new Item(3018)),
-	HUNTING_POTION(UnfinishedPotion.AVANTOE, new Item(10109), 53, 120, new Item(10000)),
+	HUNTING_POTION(UnfinishedPotion.AVANTOE, new Item(Items.KEBBIT_TEETH_DUST_10111), 53, 120, new Item(10000)),
 	SUPER_STRENGTH(UnfinishedPotion.KWUARM, new Item(225), 55, 125, new Item(157)),
 	WEAPON_POISON(UnfinishedPotion.KWUARM, new Item(241), 60, 137.5, new Item(187)),
 	SUPER_RESTORE(UnfinishedPotion.SNAPDRAGON, new Item(223), 63, 142.5, new Item(3026)),
@@ -34,7 +35,8 @@ public enum FinishedPotion {
 	STRONG_WEAPON_POISON(UnfinishedPotion.STRONG_WEAPON_POISON, new Item(223), 73, 165, new Item(5937)),
 	SUPER_STRONG_WEAPON_POISON(UnfinishedPotion.SUPER_STRONG_WEAPON_POISON, new Item(6018), 82, 190, new Item(5940)),
 	STRONG_ANTIPOISON(UnfinishedPotion.STRONG_ANTIPOISON, new Item(6049), 68, 155, new Item(5945)),
-	SUPER_STRONG_ANTIPOISON(UnfinishedPotion.SUPER_STRONG_ANTIPOISON, new Item(6051), 79, 177.5, new Item(5954));
+	SUPER_STRONG_ANTIPOISON(UnfinishedPotion.SUPER_STRONG_ANTIPOISON, new Item(6051), 79, 177.5, new Item(5954)),
+	BLAMISH_OIL(UnfinishedPotion.HARRALANDER, new Item(1581), 25, 80, new Item(1582));
 
 	/**
 	 * Represents the unfinished potion.

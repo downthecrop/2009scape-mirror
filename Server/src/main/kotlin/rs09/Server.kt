@@ -16,9 +16,13 @@ import rs09.game.system.config.ServerConfigParser
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import java.io.File
+import java.io.FileWriter
+import java.lang.management.ManagementFactory
+import java.lang.management.ThreadMXBean
 import java.net.BindException
 import java.util.*
 import kotlin.system.exitProcess
+
 
 /**
  * The main class, for those that are unable to read the class' name.
@@ -35,6 +39,7 @@ object Server {
 
     var lastHeartbeat = System.currentTimeMillis()
 
+    @JvmStatic
     var running = false
 
     /**
@@ -68,6 +73,9 @@ object Server {
         }
         startTime = System.currentTimeMillis()
         val t = TimeStamp()
+        SystemLogger.logInfo("Initializing Server Store...")
+        ServerStore.init()
+        SystemLogger.logInfo("Initialized ${ServerStore.counter} store files.")
         GameWorld.prompt(true)
         SQLManager.init()
         Runtime.getRuntime().addShutdownHook(ServerConstants.SHUTDOWN_HOOK)
@@ -102,9 +110,15 @@ object Server {
         GlobalScope.launch {
             delay(20000)
             while(running){
-                if(System.currentTimeMillis() - lastHeartbeat > 1800){
+                if(System.currentTimeMillis() - lastHeartbeat > 1800 && running){
                     SystemLogger.logErr("Triggering reboot due to heartbeat timeout")
-                    running = false
+                    SystemLogger.logErr("Creating thread dump...")
+                    val dump = threadDump(true, true)
+                    FileWriter("latestdump.txt").use {
+                        it.write(dump)
+                        it.flush()
+                        it.close()
+                    }
                     exitProcess(0)
                 }
                 delay(625)
@@ -135,6 +149,15 @@ object Server {
      */
     fun getStartTime(): Long {
         return startTime
+    }
+
+    private fun threadDump(lockedMonitors: Boolean, lockedSynchronizers: Boolean): String? {
+        val threadDump = StringBuffer(System.lineSeparator())
+        val threadMXBean: ThreadMXBean = ManagementFactory.getThreadMXBean()
+        for (threadInfo in threadMXBean.dumpAllThreads(lockedMonitors, lockedSynchronizers)) {
+            threadDump.append(threadInfo.toString())
+        }
+        return threadDump.toString()
     }
 
     /**

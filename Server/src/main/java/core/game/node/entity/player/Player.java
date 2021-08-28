@@ -72,6 +72,7 @@ import core.tools.StringUtils;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
 import org.rs09.consts.Items;
+import rs09.GlobalStats;
 import rs09.ServerConstants;
 import rs09.game.VarpManager;
 import rs09.game.content.ame.RandomEventManager;
@@ -93,7 +94,7 @@ import java.util.*;
 
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_DEATHS;
-import static rs09.tools.stringtools.StringToolsKt.colorize;
+import static rs09.tools.stringtools.GlobalsKt.colorize;
 
 /**
  * Represents a player entity.
@@ -111,7 +112,7 @@ public class Player extends Entity {
 
 	public Location startLocation = null;
 
-	private Graphics wardrobe_hold_graphics = new Graphics(1182,0,0);
+	private final Graphics wardrobe_hold_graphics = new Graphics(1182,0,0);
 
 	public boolean newPlayer = getSkills().getTotalLevel() < 50;
 
@@ -496,6 +497,9 @@ public class Player extends Entity {
 			details.getSession().disconnect();
 			getSession().setLastPing(Long.MAX_VALUE);
 		}
+
+		//Decrements prayer points
+		getPrayer().tick();
 	}
 
 	@Override
@@ -582,6 +586,7 @@ public class Player extends Entity {
 
 	@Override
 	public void finalizeDeath(Entity killer) {
+		GlobalStats.incrementDeathCount();
 		settings.setSpecialEnergy(100);
 		settings.updateRunEnergy(settings.getRunEnergy() - 100);
 		Player k = killer instanceof Player ? (Player) killer : this;

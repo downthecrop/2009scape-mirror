@@ -51,7 +51,7 @@ final class Class108 {
                 int var2 = Class140_Sub7.canvasHeight;
                 int var3 = var2 * 956 / 503;
                 Objects.requireNonNull(Class40.aAbstractSprite_680).method639((Class23.canvasWidth + -var3) / 2, 0, var3, var2);
-                SequenceDefinition.aClass109_1856 = InterfaceWidget.a(Class79.anInt1124, var0);
+                SequenceDefinition.aClass109_1856 = InterfaceWidget.a(CSConfigCachefile.anInt1124, var0);
                 Objects.requireNonNull(SequenceDefinition.aClass109_1856).method1667(Class23.canvasWidth / 2 + -(SequenceDefinition.aClass109_1856.width / 2), 18);
                 Class140_Sub2.aBoolean2713 = true;
                 if (var1 > -50) {

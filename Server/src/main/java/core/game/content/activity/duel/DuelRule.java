@@ -69,12 +69,4 @@ public enum DuelRule {
 	public int getEquipmentSlot() {
 		return equipmentSlot;
 	}
-
-	/**
-	 * Sets the equipmentSlot.
-	 * @param equipmentSlot the equipmentSlot to set
-	 */
-	public void setEquipmentSlot(int equipmentSlot) {
-		this.equipmentSlot = equipmentSlot;
-	}
 }

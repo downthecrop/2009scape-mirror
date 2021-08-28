@@ -188,7 +188,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         }
         val attack = calculateAccuracy(entity) * accuracyMod * mod * getSetMultiplier(entity, Skills.ATTACK)
         val defence = calculateDefence(victim, entity) * defenceMod * getSetMultiplier(victim, Skills.DEFENCE)
-        val chance: Double = if (attack < defence) {
+        val chance: Double = if (attack > defence) {
             1 - ((defence + 2) / ((2 * attack) + 1))
         } else {
             attack / ((2 * defence) + 1)

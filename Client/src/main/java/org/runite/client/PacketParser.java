@@ -2,6 +2,7 @@ package org.runite.client;
 
 import org.rs09.Discord;
 import org.rs09.SlayerTracker;
+import org.rs09.SystemLogger;
 import org.rs09.XPGainDraw;
 
 import java.nio.charset.StandardCharsets;
@@ -77,7 +78,7 @@ public final class PacketParser {
         if (60 == Unsorted.incomingOpcode) {
             nodeModelId = BufferedDataStream.incomingBuffer.readUnsignedShort128();
             byte var69 = BufferedDataStream.incomingBuffer.readSignedNegativeByte();
-            TextureOperation39.method281(var69, nodeModelId);
+            VarpHelpers.setVarp(var69, nodeModelId);
             Unsorted.incomingOpcode = -1;
             return true;
         } else {
@@ -442,7 +443,7 @@ public final class PacketParser {
                                     } else if (Unsorted.incomingOpcode == 226) {
                                         nodeModelId = BufferedDataStream.incomingBuffer.readInt();
                                         var19 = BufferedDataStream.incomingBuffer.readUnsignedShort128();
-                                        TextureOperation39.method281(nodeModelId, var19);
+                                        VarpHelpers.setVarp(nodeModelId, var19);
                                         Unsorted.incomingOpcode = -1;
                                         return true;
                                     } else if (Unsorted.incomingOpcode == 21) {
@@ -1027,7 +1028,7 @@ public final class PacketParser {
                                                         var19 = BufferedDataStream.incomingBuffer.readUnsignedShort128();
                                                         modelId = BufferedDataStream.incomingBuffer.readUnsignedShortLE128();
                                                         Class146.updateInterfacePacketCounter(var19);
-                                                        Class79.method1385(modelId, nodeModelId);
+                                                        CSConfigCachefile.method1385(modelId, nodeModelId);
 
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
@@ -1123,7 +1124,7 @@ public final class PacketParser {
                                                     } else if (37 == Unsorted.incomingOpcode) {
                                                         nodeModelId = BufferedDataStream.incomingBuffer.readUnsignedByte128();
                                                         var19 = BufferedDataStream.incomingBuffer.readUnsignedShortLE();
-                                                        Class163.method2209((byte) -122, nodeModelId, var19);
+                                                        VarpHelpers.setVarbit((byte) -122, nodeModelId, var19);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else if (Unsorted.incomingOpcode == 155) {
@@ -1400,11 +1401,11 @@ public final class PacketParser {
                                                     } else if (Unsorted.incomingOpcode == 84) {
                                                         nodeModelId = BufferedDataStream.incomingBuffer.readIntLE();
                                                         var19 = BufferedDataStream.incomingBuffer.readUnsignedShortLE128();
-                                                        Class163.method2209((byte) -106, nodeModelId, var19);
+                                                        VarpHelpers.setVarbit((byte) -106, nodeModelId, var19);
                                                         Unsorted.incomingOpcode = -1;
                                                         return true;
                                                     } else {
-                                                        RSInterface var25;
+                                                        RSInterface iface;
                                                         if (Unsorted.incomingOpcode == 22) {
                                                             nodeModelId = BufferedDataStream.incomingBuffer.readInt();
                                                             var19 = BufferedDataStream.incomingBuffer.readUnsignedShort();
@@ -1413,9 +1414,9 @@ public final class PacketParser {
                                                             }
 
                                                             if (nodeModelId < 0) {
-                                                                var25 = null;
+                                                                iface = null;
                                                             } else {
-                                                                var25 = Unsorted.getRSInterface(nodeModelId);
+                                                                iface = Unsorted.getRSInterface(nodeModelId);
                                                             }
 
                                                             for (; Unsorted.incomingPacketLength > BufferedDataStream.incomingBuffer.index; method2277(var6 + -1, counter, var30, var19, (byte) 46)) {
@@ -1429,14 +1430,14 @@ public final class PacketParser {
                                                                     }
                                                                 }
 
-                                                                if (var25 != null && counter >= 0 && counter < var25.itemAmounts.length) {
-                                                                    var25.itemAmounts[counter] = var6;
-                                                                    var25.itemIds[counter] = var30;
+                                                                if (iface != null && counter >= 0 && counter < iface.itemAmounts.length) {
+                                                                    iface.itemAmounts[counter] = var6;
+                                                                    iface.itemIds[counter] = var30;
                                                                 }
                                                             }
 
-                                                            if (var25 != null) {
-                                                                Class20.method909(var25);
+                                                            if (iface != null) {
+                                                                Class20.method909(iface);
                                                             }
 
                                                             BufferedDataStream.method819();
@@ -1647,15 +1648,15 @@ public final class PacketParser {
                                                             }
 
                                                             if (0 <= nodeModelId) {
-                                                                var25 = Unsorted.getRSInterface(nodeModelId);
+                                                                iface = Unsorted.getRSInterface(nodeModelId);
                                                             } else {
-                                                                var25 = null;
+                                                                iface = null;
                                                             }
 
-                                                            if (var25 != null) {
-                                                                for (counter = 0; var25.itemAmounts.length > counter; ++counter) {
-                                                                    var25.itemAmounts[counter] = 0;
-                                                                    var25.itemIds[counter] = 0;
+                                                            if (iface != null) {
+                                                                for (counter = 0; iface.itemAmounts.length > counter; ++counter) {
+                                                                    iface.itemAmounts[counter] = 0;
+                                                                    iface.itemIds[counter] = 0;
                                                                 }
                                                             }
 
@@ -1669,16 +1670,16 @@ public final class PacketParser {
                                                                 }
 
                                                                 chatIcon = BufferedDataStream.incomingBuffer.readUnsignedShort();
-                                                                if (null != var25 && var25.itemAmounts.length > var6) {
-                                                                    var25.itemAmounts[var6] = chatIcon;
-                                                                    var25.itemIds[var6] = var30;
+                                                                if (null != iface && iface.itemAmounts.length > var6) {
+                                                                    iface.itemAmounts[var6] = chatIcon;
+                                                                    iface.itemIds[var6] = var30;
                                                                 }
 
                                                                 method2277(-1 + chatIcon, var6, var30, var19, (byte) 41);
                                                             }
 
-                                                            if (var25 != null) {
-                                                                Class20.method909(var25);
+                                                            if (iface != null) {
+                                                                Class20.method909(iface);
                                                             }
 
                                                             BufferedDataStream.method819();

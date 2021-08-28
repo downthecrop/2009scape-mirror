@@ -5625,6 +5625,7 @@
     "examine": "Used for medium missile spells.",
     "grand_exchange_price": "320",
     "durability": null,
+    "tokkul_price": "270",
     "name": "Death rune",
     "tradeable": "true",
     "low_alchemy": "41",
@@ -5651,6 +5652,7 @@
     "examine": "Used for small missile spells.",
     "grand_exchange_price": "140",
     "durability": null,
+    "tokkul_price": "135",
     "name": "Chaos rune",
     "tradeable": "true",
     "low_alchemy": "18",
@@ -24827,6 +24829,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "366",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Incomplete pizza",
     "tradeable": "true",
@@ -24835,7 +24838,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "This needs cooking",
+    "examine": "This needs cooking.",
     "grand_exchange_price": "1141",
     "durability": null,
     "name": "Uncooked pizza",
@@ -24848,6 +24851,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "1141",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Uncooked pizza",
     "tradeable": "true",
@@ -24857,7 +24861,7 @@
   {
     "shop_price": "200",
     "ge_buy_limit": "1000",
-    "examine": "A cheese and tomato pizza. (Whole)Half of this plain pizza has been eaten. (Half)",
+    "examine": "A cheese and tomato pizza.",
     "grand_exchange_price": "1357",
     "durability": null,
     "name": "Plain pizza",
@@ -24871,6 +24875,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "1357",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Plain pizza",
     "tradeable": "true",
@@ -24880,7 +24885,7 @@
   {
     "shop_price": "200",
     "ge_buy_limit": "1000",
-    "examine": "A cheese and tomato pizza. (Whole)Half of this plain pizza has been eaten. (Half)",
+    "examine": "Half of this plain pizza has been eaten.",
     "grand_exchange_price": "238",
     "durability": null,
     "name": "1/2 plain pizza",
@@ -24894,6 +24899,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "238",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "1/2 plain pizza",
     "tradeable": "true",
@@ -24902,7 +24908,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "A pizza with bits of meat on it. (Whole) Half of this meat pizza has been eaten. (Half)",
+    "examine": "A pizza with bits of meat on it.",
     "grand_exchange_price": "1012",
     "durability": null,
     "name": "Meat pizza",
@@ -24916,6 +24922,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "1012",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Meat pizza",
     "tradeable": "true",
@@ -24924,7 +24931,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "A pizza with bits of meat on it. (Whole) Half of this meat pizza has been eaten. (Half)",
+    "examine": "Half of this meat pizza has been eaten.",
     "grand_exchange_price": "339",
     "durability": null,
     "name": "1/2 meat pizza",
@@ -24938,6 +24945,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "339",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "1/2 meat pizza",
     "tradeable": "true",
@@ -24946,7 +24954,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "A pizza with anchovies. (Whole) Half of this anchovy pizza has been eaten. (Half)",
+    "examine": "A pizza with anchovies.",
     "grand_exchange_price": "1573",
     "durability": null,
     "name": "Anchovy pizza",
@@ -24960,6 +24968,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "1573",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Anchovy pizza",
     "tradeable": "true",
@@ -24968,7 +24977,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "A pizza with anchovies. (Whole) Half of this anchovy pizza has been eaten. (Half)",
+    "examine": "Half of this anchovy pizza has been eaten.",
     "grand_exchange_price": "44",
     "durability": null,
     "name": "1/2 anchovy pizza",
@@ -24982,6 +24991,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "44",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "1/2 anchovy pizza",
     "tradeable": "true",
@@ -24990,7 +25000,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "A pizza with bits of pineapple on it. (Whole)Half of this pineapple pizza has been eaten. (Half)",
+    "examine": "A pizza with bits of pineapple on it.",
     "grand_exchange_price": "1469",
     "durability": null,
     "name": "Pineapple pizza",
@@ -25004,6 +25014,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "1469",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Pineapple pizza",
     "tradeable": "true",
@@ -25013,6 +25024,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "156",
+    "examine": "Half of this pineapple pizza has been eaten.",
     "durability": null,
     "name": "1/2 p'apple pizza",
     "archery_ticket_price": "0",
@@ -25021,6 +25033,7 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "156",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "1/2 p'apple pizza",
     "tradeable": "true",
@@ -25028,6 +25041,7 @@
     "id": "2304"
   },
   {
+    "examine": "Oh dear!",
     "durability": null,
     "name": "Burnt pizza",
     "tradeable": "true",
@@ -25145,6 +25159,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "781",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Uncooked apple pie",
     "tradeable": "true",
@@ -25167,6 +25182,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "747",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Uncooked meat pie",
     "tradeable": "true",
@@ -25189,6 +25205,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "802",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Uncooked berry pie",
     "tradeable": "true",
@@ -25198,7 +25215,7 @@
   {
     "shop_price": "140",
     "ge_buy_limit": "1000",
-    "examine": "Mmm Apple pie. (Whole)Mmm half an apple pie. (Half)",
+    "examine": "Mmm Apple pie.",
     "grand_exchange_price": "246",
     "durability": null,
     "name": "Apple pie",
@@ -25212,6 +25229,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "246",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Apple pie",
     "tradeable": "true",
@@ -25220,7 +25238,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "Looks tasty. (Whole)So tasty I kept some for later. (Half)",
+    "examine": "Looks tasty.",
     "grand_exchange_price": "534",
     "durability": null,
     "name": "Redberry pie",
@@ -25234,6 +25252,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "534",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Redberry pie",
     "tradeable": "true",
@@ -25244,6 +25263,7 @@
     "shop_price": "16",
     "ge_buy_limit": "1000",
     "grand_exchange_price": "160",
+    "examine": "Not for vegetarians.",
     "durability": null,
     "name": "Meat pie",
     "tradeable": "true",
@@ -25253,6 +25273,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "160",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Meat pie",
     "tradeable": "true",
@@ -25260,6 +25281,7 @@
     "id": "2328"
   },
   {
+    "examine": "I think I left it on the stove too long.",
     "durability": null,
     "name": "Burnt pie",
     "tradeable": "true",
@@ -25270,6 +25292,7 @@
     "shop_price": "16",
     "ge_buy_limit": "1000",
     "grand_exchange_price": "174",
+    "examine": "Half of it is suitable for vegetarians.",
     "durability": null,
     "name": "Half a meat pie",
     "tradeable": "true",
@@ -25279,6 +25302,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "174",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Half a meat pie",
     "tradeable": "true",
@@ -25287,7 +25311,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "Looks tasty. (Whole)So tasty I kept some for later. (Half)",
+    "examine": "So tasty I kept some for later.",
     "grand_exchange_price": "248",
     "durability": null,
     "name": "Half a redberry pie",
@@ -25301,6 +25325,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "248",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Half a redberry pie",
     "tradeable": "true",
@@ -25310,7 +25335,7 @@
   {
     "shop_price": "140",
     "ge_buy_limit": "1000",
-    "examine": "Mmm Apple pie. (Whole)Mmm half an apple pie. (Half)",
+    "examine": "Mmm half an apple pie.",
     "grand_exchange_price": "146",
     "durability": null,
     "name": "Half an apple pie",
@@ -25324,6 +25349,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "146",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Half an apple pie",
     "tradeable": "true",
@@ -31487,7 +31513,7 @@
     "id": "2956"
   },
   {
-    "examine": "A druid pouch.",
+    "examine": "An empty druid pouch.",
     "durability": null,
     "name": "Druid pouch",
     "low_alchemy": "2",
@@ -35032,7 +35058,7 @@
     "durability": null,
     "name": "Cooked slimy eel",
     "tradeable": "false",
-    "destroy": "true",
+    "destroy": "false",
     "weight": "2",
     "archery_ticket_price": "0",
     "id": "3381"
@@ -38786,7 +38812,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "An incomplete book of Saradomin/Guthix/Zamorak/Bandos/ArmadylAn incomplete ancient book",
+    "examine": "An incomplete book of Saradomin.",
     "durability": null,
     "name": "Damaged book",
     "low_alchemy": "80",
@@ -38812,7 +38838,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "An incomplete book of Saradomin/Guthix/Zamorak/Bandos/ArmadylAn incomplete ancient book",
+    "examine": "An incomplete book of Zamorak.",
     "durability": null,
     "name": "Damaged book",
     "low_alchemy": "80",
@@ -38837,7 +38863,7 @@
   },
   {
     "shop_price": "5000",
-    "examine": "An incomplete book of Saradomin/Guthix/Zamorak/Bandos/ArmadylAn incomplete ancient book",
+    "examine": "An incomplete book of Guthix.",
     "durability": null,
     "name": "Damaged book",
     "low_alchemy": "80",
@@ -45778,7 +45804,7 @@
     "remove_head": "true",
     "requirements": "{1,70}-{6,70}",
     "ge_buy_limit": "10",
-    "examine": "Ahrim The Blighted's Hood.",
+    "examine": "Ahrim the Blighted's leather hood.",
     "durability": null,
     "low_alchemy": "5200",
     "high_alchemy": "7800",
@@ -45795,6 +45821,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "94300",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Ahrim's hood",
     "tradeable": "true",
@@ -45834,6 +45861,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "69500",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Ahrim's staff",
     "tradeable": "true",
@@ -45861,6 +45889,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "1000000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Ahrim's robetop",
     "tradeable": "true",
@@ -45887,6 +45916,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "1700000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Ahrim's robeskirt",
     "tradeable": "true",
@@ -45897,7 +45927,7 @@
     "remove_head": "true",
     "requirements": "{1,70}",
     "ge_buy_limit": "10",
-    "examine": "Dharok The Wretched's Helmet",
+    "examine": "Dharok the Wretched's helm.",
     "durability": "1",
     "low_alchemy": "41200",
     "high_alchemy": "61800",
@@ -45914,6 +45944,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "1300000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Dharok's helm",
     "tradeable": "true",
@@ -45923,7 +45954,7 @@
   {
     "ge_buy_limit": "10",
     "turn90cw_anim": "821",
-    "examine": "Dharok the Wretched's Greataxe.",
+    "examine": "Dharok the Wretched's greataxe.",
     "walk_anim": "2064",
     "low_alchemy": "83200",
     "turn90ccw_anim": "822",
@@ -45946,12 +45977,13 @@
     "high_alchemy": "124800",
     "weight": "13",
     "weapon_interface": "2",
-    "render_anim": "1426",
+    "render_anim": "134",
     "name": "Dharok's greataxe"
   },
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "516900",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Dharok's greataxe",
     "tradeable": "true",
@@ -45961,7 +45993,7 @@
   {
     "requirements": "{1,70}",
     "ge_buy_limit": "10",
-    "examine": "Dharok the Wretched's platebody.",
+    "examine": "Dharok the Wretched's platebody armour.",
     "durability": null,
     "low_alchemy": "112000",
     "high_alchemy": "168000",
@@ -45979,6 +46011,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "511400",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Dharok's platebody",
     "tradeable": "true",
@@ -45988,7 +46021,7 @@
   {
     "requirements": "{1,70}",
     "ge_buy_limit": "10",
-    "examine": "Dharok the wretched's plate leg armour.",
+    "examine": "Dharok the Wretched's plate leg armour.",
     "durability": null,
     "low_alchemy": "110000",
     "high_alchemy": "165000",
@@ -46005,6 +46038,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "748800",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Dharok's platelegs",
     "tradeable": "true",
@@ -46015,7 +46049,7 @@
     "remove_head": "true",
     "requirements": "{1,70}",
     "ge_buy_limit": "10",
-    "examine": "Guthan the Infested's helm.",
+    "examine": "Guthan the Infested's helm",
     "durability": null,
     "low_alchemy": "41200",
     "high_alchemy": "61800",
@@ -46033,6 +46067,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "396300",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Guthan's helm",
     "tradeable": "true",
@@ -46042,7 +46077,7 @@
   {
     "ge_buy_limit": "10",
     "turn90cw_anim": "1207",
-    "examine": "Guthan The Infested's Warspear.",
+    "examine": "Guthan the Infested's warspear.",
     "walk_anim": "1205",
     "low_alchemy": "40000",
     "turn90ccw_anim": "1208",
@@ -46071,6 +46106,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "588400",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Guthan's warspear",
     "tradeable": "true",
@@ -46098,6 +46134,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "316800",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Guthan's platebody",
     "tradeable": "true",
@@ -46124,6 +46161,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "315600",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Guthan's chainskirt",
     "tradeable": "true",
@@ -46151,6 +46189,7 @@
   {
     "ge_buy_limit": "1",
     "grand_exchange_price": "38900",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Karil's coif",
     "tradeable": "true",
@@ -46190,6 +46229,7 @@
   {
     "ge_buy_limit": "1",
     "grand_exchange_price": "188000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Karil's crossbow",
     "tradeable": "true",
@@ -46199,7 +46239,7 @@
   {
     "requirements": "{1,70}-{4,70}",
     "ge_buy_limit": "10000",
-    "examine": "Karil the Tainted's leatherbody.",
+    "examine": "Karil the Tainted's leather body armour.",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -46217,6 +46257,7 @@
   {
     "ge_buy_limit": "10000",
     "grand_exchange_price": "1800000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Karil's leathertop",
     "tradeable": "true",
@@ -46243,6 +46284,7 @@
   {
     "ge_buy_limit": "10000",
     "grand_exchange_price": "217000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Karil's leatherskirt",
     "tradeable": "true",
@@ -46287,6 +46329,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "139000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Torag's helm",
     "tradeable": "true",
@@ -46318,6 +46361,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "111600",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Torag's hammers",
     "tradeable": "true",
@@ -46327,7 +46371,7 @@
   {
     "requirements": "{1,70}",
     "ge_buy_limit": "10",
-    "examine": "Torag the Corrupted's plate body armour.",
+    "examine": "Torag the Corrupted's platebody armour.",
     "durability": null,
     "low_alchemy": "112000",
     "high_alchemy": "168000",
@@ -46345,6 +46389,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "346200",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Torag's platebody",
     "tradeable": "true",
@@ -46371,6 +46416,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "427200",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Torag's platelegs",
     "tradeable": "true",
@@ -46399,6 +46445,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "687200",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Verac's helm",
     "tradeable": "true",
@@ -46408,7 +46455,7 @@
   {
     "ge_buy_limit": "10",
     "turn90cw_anim": "2060",
-    "examine": "Verac the Defiled's Flail.",
+    "examine": "Verac the Defiled's flail.",
     "walk_anim": "1830",
     "low_alchemy": "64000",
     "turn90ccw_anim": "2060",
@@ -46438,6 +46485,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "135500",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Verac's flail",
     "tradeable": "true",
@@ -46465,6 +46513,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "270000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Verac's brassard",
     "tradeable": "true",
@@ -46491,6 +46540,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "411400",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Verac's plateskirt",
     "tradeable": "true",
@@ -47079,7 +47129,7 @@
   {
     "remove_head": "true",
     "requirements": "{1,70}-{6,70}",
-    "examine": "Ahrim The Blighted's Hood.",
+    "examine": "Ahrim the Blighted's leather hood.",
     "durability": null,
     "low_alchemy": "5200",
     "high_alchemy": "7800",
@@ -47095,7 +47145,7 @@
   {
     "remove_head": "true",
     "requirements": "{1,70}-{6,70}",
-    "examine": "Ahrim The Blighted's Hood.",
+    "examine": "Ahrim the Blighted's leather hood.",
     "durability": null,
     "low_alchemy": "5200",
     "high_alchemy": "7800",
@@ -47111,7 +47161,7 @@
   {
     "remove_head": "true",
     "requirements": "{1,70}-{6,70}",
-    "examine": "Ahrim The Blighted's Hood.",
+    "examine": "Ahrim the Blighted's leather hood.",
     "durability": null,
     "low_alchemy": "5200",
     "high_alchemy": "7800",
@@ -47127,7 +47177,7 @@
   {
     "remove_head": "true",
     "requirements": "{1,70}-{6,70}",
-    "examine": "Ahrim The Blighted's Hood.",
+    "examine": "Ahrim the Blighted's leather hood.",
     "durability": null,
     "low_alchemy": "5200",
     "high_alchemy": "7800",
@@ -47144,7 +47194,7 @@
     "remove_head": "true",
     "requirements": "{1,70}-{6,70}",
     "ge_buy_limit": "10",
-    "examine": "Ahrim The Blighted's Hood.",
+    "examine": "Ahrim the Blighted's leather hood.",
     "durability": null,
     "low_alchemy": "5200",
     "high_alchemy": "7800",
@@ -47160,6 +47210,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "51700",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Ahrim's hood 0",
     "tradeable": "true",
@@ -47303,6 +47354,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "50600",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Ahrim's staff 0",
     "tradeable": "true",
@@ -47393,6 +47445,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "1100000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Ahrim's top 0",
     "tradeable": "true",
@@ -47478,6 +47531,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "1500000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Ahrim's skirt 0",
     "tradeable": "true",
@@ -47487,7 +47541,7 @@
   {
     "remove_head": "true",
     "requirements": "{1,70}",
-    "examine": "Dharok The Wretched's Helmet",
+    "examine": "Dharok the Wretched's helm.",
     "durability": null,
     "low_alchemy": "41200",
     "high_alchemy": "61800",
@@ -47503,7 +47557,7 @@
   {
     "remove_head": "true",
     "requirements": "{1,70}",
-    "examine": "Dharok The Wretched's Helmet",
+    "examine": "Dharok the Wretched's helm.",
     "durability": null,
     "low_alchemy": "41200",
     "high_alchemy": "61800",
@@ -47519,7 +47573,7 @@
   {
     "remove_head": "true",
     "requirements": "{1,70}",
-    "examine": "Dharok The Wretched's Helmet",
+    "examine": "Dharok the Wretched's helm.",
     "durability": null,
     "low_alchemy": "41200",
     "high_alchemy": "61800",
@@ -47535,7 +47589,7 @@
   {
     "remove_head": "true",
     "requirements": "{1,70}",
-    "examine": "Dharok The Wretched's Helmet",
+    "examine": "Dharok the Wretched's helm.",
     "durability": null,
     "low_alchemy": "41200",
     "high_alchemy": "61800",
@@ -47552,7 +47606,7 @@
     "remove_head": "true",
     "requirements": "{1,70}",
     "ge_buy_limit": "10",
-    "examine": "Dharok The Wretched's Helmet",
+    "examine": "Dharok the Wretched's helm.",
     "durability": null,
     "low_alchemy": "41200",
     "high_alchemy": "61800",
@@ -47568,6 +47622,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "1300000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Dharok's helm 0",
     "tradeable": "true",
@@ -47576,7 +47631,7 @@
   },
   {
     "turn90cw_anim": "2064",
-    "examine": "Dharok the Wretched's Greataxe.",
+    "examine": "Dharok the Wretched's greataxe.",
     "walk_anim": "2064",
     "low_alchemy": "83200",
     "turn90ccw_anim": "2064",
@@ -47598,13 +47653,13 @@
     "high_alchemy": "124800",
     "weight": "13",
     "weapon_interface": "2",
-    "render_anim": "1426",
+    "render_anim": "134",
     "attack_audios": "1320,0,0,0",
     "name": "Dharok's axe 100"
   },
   {
     "turn90cw_anim": "2064",
-    "examine": "Dharok the Wretched's Greataxe.",
+    "examine": "Dharok the Wretched's greataxe.",
     "walk_anim": "2064",
     "low_alchemy": "83200",
     "turn90ccw_anim": "2064",
@@ -47626,13 +47681,13 @@
     "high_alchemy": "124800",
     "weight": "13",
     "weapon_interface": "2",
-    "render_anim": "1426",
+    "render_anim": "134",
     "attack_audios": "1320,0,0,0",
     "name": "Dharok's axe 75"
   },
   {
     "turn90cw_anim": "2064",
-    "examine": "Dharok the Wretched's Greataxe.",
+    "examine": "Dharok the Wretched's greataxe.",
     "walk_anim": "2064",
     "low_alchemy": "83200",
     "turn90ccw_anim": "2064",
@@ -47654,13 +47709,13 @@
     "high_alchemy": "124800",
     "weight": "13",
     "weapon_interface": "2",
-    "render_anim": "1426",
+    "render_anim": "134",
     "attack_audios": "1320,0,0,0",
     "name": "Dharok's axe 50"
   },
   {
     "turn90cw_anim": "2064",
-    "examine": "Dharok the Wretched's Greataxe.",
+    "examine": "Dharok the Wretched's greataxe.",
     "walk_anim": "2064",
     "low_alchemy": "83200",
     "turn90ccw_anim": "2064",
@@ -47682,14 +47737,14 @@
     "high_alchemy": "124800",
     "weight": "13",
     "weapon_interface": "2",
-    "render_anim": "1426",
+    "render_anim": "134",
     "attack_audios": "1320,0,0,0",
     "name": "Dharok's axe 25"
   },
   {
     "ge_buy_limit": "10",
     "turn90cw_anim": "2064",
-    "examine": "Dharok the Wretched's Greataxe.",
+    "examine": "Dharok the Wretched's greataxe.",
     "walk_anim": "2064",
     "low_alchemy": "83200",
     "turn90ccw_anim": "2064",
@@ -47709,13 +47764,14 @@
     "high_alchemy": "124800",
     "weight": "13",
     "weapon_interface": "2",
-    "render_anim": "1426",
+    "render_anim": "134",
     "attack_audios": "1320,0,0,0",
     "name": "Dharok's axe 0"
   },
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "442600",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Dharok's axe 0",
     "tradeable": "true",
@@ -47724,7 +47780,7 @@
   },
   {
     "requirements": "{1,70}",
-    "examine": "Dharok the Wretched's platebody.",
+    "examine": "Dharok the Wretched's platebody armour.",
     "durability": null,
     "low_alchemy": "112000",
     "high_alchemy": "168000",
@@ -47740,7 +47796,7 @@
   },
   {
     "requirements": "{1,70}",
-    "examine": "Dharok the Wretched's platebody.",
+    "examine": "Dharok the Wretched's platebody armour.",
     "durability": null,
     "low_alchemy": "112000",
     "high_alchemy": "168000",
@@ -47756,7 +47812,7 @@
   },
   {
     "requirements": "{1,70}",
-    "examine": "Dharok the Wretched's platebody.",
+    "examine": "Dharok the Wretched's platebody armour.",
     "durability": null,
     "low_alchemy": "112000",
     "high_alchemy": "168000",
@@ -47772,7 +47828,7 @@
   },
   {
     "requirements": "{1,70}",
-    "examine": "Dharok the Wretched's platebody.",
+    "examine": "Dharok the Wretched's platebody armour.",
     "durability": null,
     "low_alchemy": "112000",
     "high_alchemy": "168000",
@@ -47789,7 +47845,7 @@
   {
     "requirements": "{1,70}",
     "ge_buy_limit": "10",
-    "examine": "Dharok the Wretched's platebody.",
+    "examine": "Dharok the Wretched's platebody armour.",
     "durability": null,
     "low_alchemy": "112000",
     "high_alchemy": "168000",
@@ -47806,6 +47862,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "438200",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Dharok's body 0",
     "tradeable": "true",
@@ -47814,7 +47871,7 @@
   },
   {
     "requirements": "{1,70}",
-    "examine": "Dharok the wretched's plate leg armour.",
+    "examine": "Dharok the Wretched's plate leg armour.",
     "durability": null,
     "low_alchemy": "110000",
     "high_alchemy": "165000",
@@ -47829,7 +47886,7 @@
   },
   {
     "requirements": "{1,70}",
-    "examine": "Dharok the wretched's plate leg armour.",
+    "examine": "Dharok the Wretched's plate leg armour.",
     "durability": null,
     "low_alchemy": "110000",
     "high_alchemy": "165000",
@@ -47844,7 +47901,7 @@
   },
   {
     "requirements": "{1,70}",
-    "examine": "Dharok the wretched's plate leg armour.",
+    "examine": "Dharok the Wretched's plate leg armour.",
     "durability": null,
     "low_alchemy": "110000",
     "high_alchemy": "165000",
@@ -47859,7 +47916,7 @@
   },
   {
     "requirements": "{1,70}",
-    "examine": "Dharok the wretched's plate leg armour.",
+    "examine": "Dharok the Wretched's plate leg armour.",
     "durability": null,
     "low_alchemy": "110000",
     "high_alchemy": "165000",
@@ -47875,7 +47932,7 @@
   {
     "requirements": "{1,70}",
     "ge_buy_limit": "10",
-    "examine": "Dharok the wretched's plate leg armour.",
+    "examine": "Dharok the Wretched's plate leg armour.",
     "durability": null,
     "low_alchemy": "110000",
     "high_alchemy": "165000",
@@ -47891,6 +47948,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "676000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Dharok's legs 0",
     "tradeable": "true",
@@ -47900,7 +47958,7 @@
   {
     "remove_head": "true",
     "requirements": "{1,70}",
-    "examine": "Guthan the Infested's helm.",
+    "examine": "Guthan the Infested's helm",
     "durability": null,
     "low_alchemy": "41200",
     "high_alchemy": "61800",
@@ -47917,7 +47975,7 @@
   {
     "remove_head": "true",
     "requirements": "{1,70}",
-    "examine": "Guthan the Infested's helm.",
+    "examine": "Guthan the Infested's helm",
     "durability": null,
     "low_alchemy": "41200",
     "high_alchemy": "61800",
@@ -47934,7 +47992,7 @@
   {
     "remove_head": "true",
     "requirements": "{1,70}",
-    "examine": "Guthan the Infested's helm.",
+    "examine": "Guthan the Infested's helm",
     "durability": null,
     "low_alchemy": "41200",
     "high_alchemy": "61800",
@@ -47951,7 +48009,7 @@
   {
     "remove_head": "true",
     "requirements": "{1,70}",
-    "examine": "Guthan the Infested's helm.",
+    "examine": "Guthan the Infested's helm",
     "durability": null,
     "low_alchemy": "41200",
     "high_alchemy": "61800",
@@ -47969,7 +48027,7 @@
     "remove_head": "true",
     "requirements": "{1,70}",
     "ge_buy_limit": "10",
-    "examine": "Guthan the Infested's helm.",
+    "examine": "Guthan the Infested's helm",
     "durability": null,
     "low_alchemy": "41200",
     "high_alchemy": "61800",
@@ -47986,6 +48044,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "368200",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Guthan's helm 0",
     "tradeable": "true",
@@ -47994,7 +48053,7 @@
   },
   {
     "turn90cw_anim": "1207",
-    "examine": "Guthan The Infested's Warspear.",
+    "examine": "Guthan the Infested's warspear.",
     "walk_anim": "1205",
     "low_alchemy": "40000",
     "turn90ccw_anim": "1208",
@@ -48022,7 +48081,7 @@
   },
   {
     "turn90cw_anim": "1207",
-    "examine": "Guthan The Infested's Warspear.",
+    "examine": "Guthan the Infested's warspear.",
     "walk_anim": "1205",
     "low_alchemy": "40000",
     "turn90ccw_anim": "1208",
@@ -48050,7 +48109,7 @@
   },
   {
     "turn90cw_anim": "1207",
-    "examine": "Guthan The Infested's Warspear.",
+    "examine": "Guthan the Infested's warspear.",
     "walk_anim": "1205",
     "low_alchemy": "40000",
     "turn90ccw_anim": "1208",
@@ -48078,7 +48137,7 @@
   },
   {
     "turn90cw_anim": "1207",
-    "examine": "Guthan The Infested's Warspear.",
+    "examine": "Guthan the Infested's warspear.",
     "walk_anim": "1205",
     "low_alchemy": "40000",
     "turn90ccw_anim": "1208",
@@ -48107,7 +48166,7 @@
   {
     "ge_buy_limit": "10",
     "turn90cw_anim": "1207",
-    "examine": "Guthan The Infested's Warspear.",
+    "examine": "Guthan the Infested's warspear.",
     "walk_anim": "1205",
     "low_alchemy": "40000",
     "turn90ccw_anim": "1208",
@@ -48134,6 +48193,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "379500",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Guthan's spear 0",
     "tradeable": "true",
@@ -48224,6 +48284,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "245900",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Guthan's body 0",
     "tradeable": "true",
@@ -48309,6 +48370,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "240900",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Guthan's skirt 0",
     "tradeable": "true",
@@ -48399,6 +48461,7 @@
   {
     "ge_buy_limit": "1",
     "grand_exchange_price": "7557",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Karil's coif 0",
     "tradeable": "true",
@@ -48546,6 +48609,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "106300",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Karil's x-bow 0",
     "tradeable": "true",
@@ -48554,7 +48618,7 @@
   },
   {
     "requirements": "{1,70}-{4,70}",
-    "examine": "Karil the Tainted's leatherbody.",
+    "examine": "Karil the Tainted's leather body armour.",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -48570,7 +48634,7 @@
   },
   {
     "requirements": "{1,70}-{4,70}",
-    "examine": "Karil the Tainted's leatherbody.",
+    "examine": "Karil the Tainted's leather body armour.",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -48586,7 +48650,7 @@
   },
   {
     "requirements": "{1,70}-{4,70}",
-    "examine": "Karil the Tainted's leatherbody.",
+    "examine": "Karil the Tainted's leather body armour.",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -48602,7 +48666,7 @@
   },
   {
     "requirements": "{1,70}-{4,70}",
-    "examine": "Karil the Tainted's leatherbody.",
+    "examine": "Karil the Tainted's leather body armour.",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -48619,7 +48683,7 @@
   {
     "requirements": "{1,70}-{4,70}",
     "ge_buy_limit": "1",
-    "examine": "Karil the Tainted's leatherbody.",
+    "examine": "Karil the Tainted's leather body armour.",
     "durability": null,
     "low_alchemy": "20000",
     "high_alchemy": "30000",
@@ -48636,6 +48700,7 @@
   {
     "ge_buy_limit": "1",
     "grand_exchange_price": "1500000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Karil's top 0",
     "tradeable": "true",
@@ -48721,6 +48786,7 @@
   {
     "ge_buy_limit": "1",
     "grand_exchange_price": "153100",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Karil's skirt 0",
     "tradeable": "true",
@@ -48816,6 +48882,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "78200",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Torag's helm 0",
     "tradeable": "true",
@@ -48924,6 +48991,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "95600",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Torag's hammer 0",
     "tradeable": "true",
@@ -48932,7 +49000,7 @@
   },
   {
     "requirements": "{1,70}",
-    "examine": "Torag the Corrupted's plate body armour.",
+    "examine": "Torag the Corrupted's platebody armour.",
     "durability": null,
     "low_alchemy": "112000",
     "high_alchemy": "168000",
@@ -48948,7 +49016,7 @@
   },
   {
     "requirements": "{1,70}",
-    "examine": "Torag the Corrupted's plate body armour.",
+    "examine": "Torag the Corrupted's platebody armour.",
     "durability": null,
     "low_alchemy": "112000",
     "high_alchemy": "168000",
@@ -48964,7 +49032,7 @@
   },
   {
     "requirements": "{1,70}",
-    "examine": "Torag the Corrupted's plate body armour.",
+    "examine": "Torag the Corrupted's platebody armour.",
     "durability": null,
     "low_alchemy": "112000",
     "high_alchemy": "168000",
@@ -48980,7 +49048,7 @@
   },
   {
     "requirements": "{1,70}",
-    "examine": "Torag the Corrupted's plate body armour.",
+    "examine": "Torag the Corrupted's platebody armour.",
     "durability": null,
     "low_alchemy": "112000",
     "high_alchemy": "168000",
@@ -48997,7 +49065,7 @@
   {
     "requirements": "{1,70}",
     "ge_buy_limit": "10",
-    "examine": "Torag the Corrupted's plate body armour.",
+    "examine": "Torag the Corrupted's platebody armour.",
     "durability": null,
     "low_alchemy": "112000",
     "high_alchemy": "168000",
@@ -49014,6 +49082,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "271600",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Torag's body 0",
     "tradeable": "true",
@@ -49099,6 +49168,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "371300",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Torag's legs 0",
     "tradeable": "true",
@@ -49194,6 +49264,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "648900",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Verac's helm 0",
     "tradeable": "true",
@@ -49202,7 +49273,7 @@
   },
   {
     "turn90cw_anim": "2060",
-    "examine": "Verac the Defiled's Flail.",
+    "examine": "Verac the Defiled's flail.",
     "walk_anim": "1830",
     "low_alchemy": "64000",
     "turn90ccw_anim": "2060",
@@ -49230,7 +49301,7 @@
   },
   {
     "turn90cw_anim": "2060",
-    "examine": "Verac the Defiled's Flail.",
+    "examine": "Verac the Defiled's flail.",
     "walk_anim": "1830",
     "low_alchemy": "64000",
     "turn90ccw_anim": "2060",
@@ -49258,7 +49329,7 @@
   },
   {
     "turn90cw_anim": "2060",
-    "examine": "Verac the Defiled's Flail.",
+    "examine": "Verac the Defiled's flail.",
     "walk_anim": "1830",
     "low_alchemy": "64000",
     "turn90ccw_anim": "2060",
@@ -49286,7 +49357,7 @@
   },
   {
     "turn90cw_anim": "2060",
-    "examine": "Verac the Defiled's Flail.",
+    "examine": "Verac the Defiled's flail.",
     "walk_anim": "1830",
     "low_alchemy": "64000",
     "turn90ccw_anim": "2060",
@@ -49315,7 +49386,7 @@
   {
     "ge_buy_limit": "10",
     "turn90cw_anim": "2060",
-    "examine": "Verac the Defiled's Flail.",
+    "examine": "Verac the Defiled's flail.",
     "walk_anim": "1830",
     "low_alchemy": "64000",
     "turn90ccw_anim": "2060",
@@ -49342,6 +49413,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "95500",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Verac's flail 0",
     "tradeable": "true",
@@ -49432,6 +49504,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "174000",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Verac's top 0",
     "tradeable": "true",
@@ -49517,6 +49590,7 @@
   {
     "ge_buy_limit": "10",
     "grand_exchange_price": "321600",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Verac's skirt 0",
     "tradeable": "true",
@@ -68710,7 +68784,7 @@
   {
     "shop_price": "54",
     "ge_buy_limit": "1000",
-    "examine": "All the good of the earth.",
+    "examine": "Still needs two more ingredients.",
     "grand_exchange_price": "77",
     "durability": null,
     "name": "Part mud pie",
@@ -68723,6 +68797,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "77",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Part mud pie",
     "tradeable": "true",
@@ -68732,7 +68807,7 @@
   {
     "shop_price": "54",
     "ge_buy_limit": "1000",
-    "examine": "All the good of the earth.",
+    "examine": "Still needs one more ingredient.",
     "grand_exchange_price": "284",
     "durability": null,
     "name": "Part mud pie",
@@ -68745,6 +68820,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "284",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Part mud pie",
     "tradeable": "true",
@@ -68766,6 +68842,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "1625",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Raw mud pie",
     "tradeable": "true",
@@ -68798,6 +68875,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "2024",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Mud pie",
     "tradeable": "true",
@@ -68806,7 +68884,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "What I wouldn't give for a good steak about now...",
+    "examine": "Still needs two more ingredients.",
     "grand_exchange_price": "94",
     "durability": null,
     "name": "Part garden pie",
@@ -68819,6 +68897,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "94",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Part garden pie",
     "tradeable": "true",
@@ -68827,7 +68906,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "What I wouldn't give for a good steak about now...",
+    "examine": "Still needs one more ingredient.",
     "grand_exchange_price": "150",
     "durability": null,
     "name": "Part garden pie",
@@ -68840,6 +68919,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "150",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Part garden pie",
     "tradeable": "true",
@@ -68862,6 +68942,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "1052",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Raw garden pie",
     "tradeable": "true",
@@ -68883,6 +68964,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "1667",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Garden pie",
     "tradeable": "true",
@@ -68904,6 +68986,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "442",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Half a garden pie",
     "tradeable": "true",
@@ -68912,7 +68995,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "Bounty of the sea.",
+    "examine": "Still needs two more ingredients.",
     "grand_exchange_price": "51",
     "durability": null,
     "name": "Part fish pie",
@@ -68925,6 +69008,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "51",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Part fish pie",
     "tradeable": "true",
@@ -68933,7 +69017,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "Bounty of the sea.",
+    "examine": "Still needs one more ingredient.",
     "grand_exchange_price": "691",
     "durability": null,
     "name": "Part fish pie",
@@ -68946,6 +69030,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "691",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Part fish pie",
     "tradeable": "true",
@@ -68968,6 +69053,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "1198",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Raw fish pie",
     "tradeable": "true",
@@ -68989,6 +69075,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "121",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Fish pie",
     "tradeable": "true",
@@ -69010,6 +69097,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "56",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Half a fish pie",
     "tradeable": "true",
@@ -69018,7 +69106,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "Much tastier than a normal fish pie.",
+    "examine": "Still needs two more ingredients. ",
     "grand_exchange_price": "159",
     "durability": null,
     "name": "Part admiral pie",
@@ -69029,6 +69117,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "159",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Part admiral pie",
     "tradeable": "true",
@@ -69037,7 +69126,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "Much tastier than a normal fish pie.",
+    "examine": "Still needs one more ingredient.",
     "grand_exchange_price": "537",
     "durability": null,
     "name": "Part admiral pie",
@@ -69048,6 +69137,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "537",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Part admiral pie",
     "tradeable": "true",
@@ -69070,6 +69160,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "1813",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Raw admiral pie",
     "tradeable": "true",
@@ -69089,6 +69180,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "532",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Admiral pie",
     "tradeable": "true",
@@ -69108,6 +69200,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "184",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Half an admiral pie",
     "tradeable": "true",
@@ -69116,7 +69209,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "A triumph of man over nature.",
+    "examine": "Still needs two more ingredients.",
     "grand_exchange_price": "126",
     "durability": null,
     "name": "Part wild pie",
@@ -69129,6 +69222,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "126",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Part wild pie",
     "tradeable": "true",
@@ -69137,7 +69231,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "A triumph of man over nature.",
+    "examine": "Still needs one more ingredient.",
     "grand_exchange_price": "1116",
     "durability": null,
     "name": "Part wild pie",
@@ -69150,6 +69244,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "1116",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Part wild pie",
     "tradeable": "true",
@@ -69171,6 +69266,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "3787",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Raw wild pie",
     "tradeable": "true",
@@ -69192,6 +69288,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "1322",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Wild pie",
     "tradeable": "true",
@@ -69213,6 +69310,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "112",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Half a wild pie",
     "tradeable": "true",
@@ -69221,7 +69319,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "All the fruits of a very small forest.",
+    "examine": "Still needs two more ingredients.",
     "grand_exchange_price": "495",
     "durability": null,
     "name": "Part summer pie",
@@ -69234,6 +69332,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "495",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Part summer pie",
     "tradeable": "true",
@@ -69242,7 +69341,7 @@
   },
   {
     "ge_buy_limit": "1000",
-    "examine": "All the fruits of a very small forest.",
+    "examine": "Still needs one more ingredient.",
     "grand_exchange_price": "980",
     "durability": null,
     "name": "Part summer pie",
@@ -69255,6 +69354,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "980",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Part summer pie",
     "tradeable": "true",
@@ -69277,6 +69377,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "2577",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Raw summer pie",
     "tradeable": "true",
@@ -69298,6 +69399,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "1288",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Summer pie",
     "tradeable": "true",
@@ -69319,6 +69421,7 @@
   {
     "ge_buy_limit": "1000",
     "grand_exchange_price": "430",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Half a summer pie",
     "tradeable": "true",
@@ -72317,7 +72420,7 @@
     "id": "7508"
   },
   {
-    "examine": "Hot: A strange looking cake. Cooled: Cool and heavy as a brick. Only for dwarf consumption.",
+    "examine": "Red hot and glowing, ouch! Only for dwarf consumption.",
     "durability": null,
     "name": "Dwarven rock cake",
     "weight": "8.5",
@@ -72325,7 +72428,7 @@
     "id": "7509"
   },
   {
-    "examine": "Hot: A strange looking cake. Cooled: Cool and heavy as a brick. Only for dwarf consumption.",
+    "examine": "Cool and heavy as a brick. Only for dwarf consumption.",
     "durability": null,
     "name": "Dwarven rock cake",
     "weight": "8.5",
@@ -80752,7 +80855,7 @@
     "name": "Defensive shield",
     "weight": "3.6",
     "archery_ticket_price": "0",
-    "two_handed": "true",
+    "two_handed": "false",
     "id": "8856",
     "bonuses": "0,0,0,-6,-2,8,9,7,0,8,0,0,0,0,0",
     "equipment_slot": "5"
@@ -110747,21 +110850,21 @@
     "id": "12184"
   },
   {
-    "examine": "Chick: A fluffy chick.Bird: Lovely blue plumage.Owl: A fantastic saradomin owl.",
+    "examine": "A fantastic saradomin owl.",
     "durability": null,
     "name": "Saradomin owl",
     "archery_ticket_price": "0",
     "id": "12185"
   },
   {
-    "examine": "Chick: A fluffy chick.Bird: Lovely red plumage.Hawk: A stately zamorak hawk.",
+    "examine": "A stately zamorak hawk.",
     "durability": null,
     "name": "Zamorak hawk",
     "archery_ticket_price": "0",
     "id": "12186"
   },
   {
-    "examine": "Chick: A fluffy chick.Bird: Lovely green plumage.Raptor: An impressive Guthix raptor.",
+    "examine": "An impressive Guthix raptor.",
     "durability": null,
     "name": "Guthix raptor",
     "archery_ticket_price": "0",
@@ -111586,9 +111689,11 @@
     "requirements": "{23,41}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "96",
+    "examine": "A scroll for a macaw familiar.",
     "durability": null,
     "name": "Herbcall scroll",
     "low_alchemy": "94",
+    "tradeable": "true",
     "high_alchemy": "142",
     "archery_ticket_price": "0",
     "id": "12422"
@@ -111597,9 +111702,11 @@
     "requirements": "{23,69}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "258",
+    "examine": "A scroll for a fruit bat familiar.",
     "durability": null,
     "name": "Fruitfall scroll",
     "low_alchemy": "146",
+    "tradeable": "true",
     "high_alchemy": "220",
     "archery_ticket_price": "0",
     "id": "12423"
@@ -111608,9 +111715,11 @@
     "requirements": "{23,56}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "146",
+    "examine": "A scroll for an ibis familiar.",
     "durability": null,
     "name": "Fish rain scroll",
     "low_alchemy": "125",
+    "tradeable": "true",
     "high_alchemy": "188",
     "archery_ticket_price": "0",
     "id": "12424"
@@ -111618,9 +111727,11 @@
   {
     "ge_buy_limit": "5000",
     "grand_exchange_price": "7",
+    "examine": "A scroll for a spirit wolf familiar.",
     "durability": null,
     "name": "Howl scroll",
     "low_alchemy": "23",
+    "tradeable": "true",
     "high_alchemy": "35",
     "archery_ticket_price": "0",
     "id": "12425"
@@ -111629,9 +111740,11 @@
     "requirements": "{23,47}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "97",
+    "examine": "A scroll for a magpie familiar.",
     "durability": null,
     "name": "Thieving fingers scroll",
     "low_alchemy": "104",
+    "tradeable": "true",
     "high_alchemy": "157",
     "archery_ticket_price": "0",
     "id": "12426"
@@ -111640,20 +111753,24 @@
     "requirements": "{23,62}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "533",
+    "examine": "A scroll for an abyssal lurker familiar.",
     "durability": null,
     "name": "Abyssal stealth scroll",
     "low_alchemy": "135",
+    "tradeable": "true",
     "high_alchemy": "203",
     "archery_ticket_price": "0",
     "id": "12427"
   },
   {
-    "requirements": "{10,23}",
+    "requirements": "{23,10}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "237",
+    "examine": "A scroll for a spirit spider familiar.",
     "durability": null,
     "name": "Egg spawn scroll",
     "low_alchemy": "24",
+    "tradeable": "true",
     "high_alchemy": "37",
     "archery_ticket_price": "0",
     "id": "12428"
@@ -111662,9 +111779,11 @@
     "requirements": "{23,33}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "97",
+    "examine": "A scroll for a beaver familiar.",
     "durability": null,
     "name": "Multichop scroll",
     "low_alchemy": "88",
+    "tradeable": "true",
     "high_alchemy": "133",
     "archery_ticket_price": "0",
     "id": "12429"
@@ -111673,9 +111792,11 @@
     "requirements": "{23,23}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "121",
+    "examine": "A scroll for an albino rat familiar.",
     "durability": null,
     "name": "Cheese feast scroll",
     "low_alchemy": "91",
+    "tradeable": "true",
     "high_alchemy": "137",
     "archery_ticket_price": "0",
     "id": "12430"
@@ -111684,20 +111805,24 @@
     "requirements": "{23,40}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "39",
+    "examine": "A scroll for a bull ant familiar.",
     "durability": null,
     "name": "Unburden scroll",
     "low_alchemy": "27",
+    "tradeable": "true",
     "high_alchemy": "41",
     "archery_ticket_price": "0",
     "id": "12431"
   },
   {
-    "requirements": "{19,23}",
+    "requirements": "{23,19}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "72",
+    "examine": "A scroll for a spirit scorpion familiar.",
     "durability": null,
     "name": "Venom shot scroll",
     "low_alchemy": "73",
+    "tradeable": "true",
     "high_alchemy": "110",
     "archery_ticket_price": "0",
     "id": "12432"
@@ -111706,9 +111831,11 @@
     "requirements": "{23,32}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "99",
+    "examine": "A scroll for a honey badger familiar.",
     "durability": null,
     "name": "Insane ferocity scroll",
     "low_alchemy": "100",
+    "tradeable": "true",
     "high_alchemy": "151",
     "archery_ticket_price": "0",
     "id": "12433"
@@ -111717,9 +111844,11 @@
     "requirements": "{23,88}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "299",
+    "examine": "A scroll for a unicorn stallion familiar.",
     "durability": null,
     "name": "Healing aura scroll",
     "low_alchemy": "156",
+    "tradeable": "true",
     "high_alchemy": "235",
     "archery_ticket_price": "0",
     "id": "12434"
@@ -111728,9 +111857,11 @@
     "requirements": "{23,96}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "428",
+    "examine": "A scroll for a pack yak familiar.",
     "durability": null,
     "name": "Winter storage scroll",
     "low_alchemy": "227",
+    "tradeable": "true",
     "high_alchemy": "341",
     "archery_ticket_price": "0",
     "id": "12435"
@@ -111739,9 +111870,11 @@
     "requirements": "{23,63}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "223",
+    "examine": "A scroll for a spirit cobra familiar.",
     "durability": null,
     "name": "Oph. incubation scroll",
     "low_alchemy": "132",
+    "tradeable": "true",
     "high_alchemy": "199",
     "archery_ticket_price": "0",
     "id": "12436"
@@ -111750,9 +111883,11 @@
     "requirements": "{23,92}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "419",
+    "examine": "A scroll for a wolpertinger familiar.",
     "durability": null,
     "name": "Magic focus scroll",
     "low_alchemy": "219",
+    "tradeable": "true",
     "high_alchemy": "329",
     "archery_ticket_price": "0",
     "id": "12437"
@@ -111761,9 +111896,11 @@
     "requirements": "{23,68}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "220",
+    "examine": "A scroll for a bunyip familiar.",
     "durability": null,
     "name": "Swallow whole scroll",
     "low_alchemy": "126",
+    "tradeable": "true",
     "high_alchemy": "190",
     "archery_ticket_price": "0",
     "id": "12438"
@@ -111772,9 +111909,11 @@
     "requirements": "{23,67}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "269",
+    "examine": "A scroll for a war tortoise familiar.",
     "durability": null,
     "name": "Testudo scroll",
     "low_alchemy": "17",
+    "tradeable": "true",
     "high_alchemy": "26",
     "archery_ticket_price": "0",
     "id": "12439"
@@ -111783,9 +111922,11 @@
     "requirements": "{23,28}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "47",
+    "examine": "A scroll for a compost mound familiar.",
     "durability": null,
     "name": "Generate compost scroll",
     "low_alchemy": "63",
+    "tradeable": "true",
     "high_alchemy": "95",
     "archery_ticket_price": "0",
     "id": "12440"
@@ -111794,9 +111935,11 @@
     "requirements": "{23,52}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "35",
+    "examine": "A scroll for a spirit terrorbird familiar.",
     "durability": null,
     "name": "Tireless run scroll",
     "low_alchemy": "28",
+    "tradeable": "true",
     "high_alchemy": "43",
     "archery_ticket_price": "0",
     "id": "12441"
@@ -111805,9 +111948,11 @@
     "requirements": "{23,80}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "174",
+    "examine": "A scroll for a hydra familiar.",
     "durability": null,
     "name": "Regrowth scroll",
     "low_alchemy": "144",
+    "tradeable": "true",
     "high_alchemy": "217",
     "archery_ticket_price": "0",
     "id": "12442"
@@ -111816,9 +111961,11 @@
     "requirements": "{23,34}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "1118",
+    "examine": "A scroll for a Pest Control familiar.",
     "durability": null,
     "name": "Call to arms scroll",
     "low_alchemy": "90",
+    "tradeable": "true",
     "high_alchemy": "136",
     "archery_ticket_price": "0",
     "id": "12443"
@@ -111827,20 +111974,24 @@
     "requirements": "{23,49}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "148",
+    "examine": "A scroll for a bloated leech familiar.",
     "durability": null,
     "name": "Blood drain scroll",
     "low_alchemy": "133",
+    "tradeable": "true",
     "high_alchemy": "200",
     "archery_ticket_price": "0",
     "id": "12444"
   },
   {
-    "requirements": "{4,23}",
+    "requirements": "{23,4}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "7",
+    "examine": "A scroll for a dreadfowl familiar.",
     "durability": null,
     "name": "Dreadfowl strike scroll",
     "low_alchemy": "24",
+    "tradeable": "true",
     "high_alchemy": "37",
     "archery_ticket_price": "0",
     "id": "12445"
@@ -111849,9 +112000,11 @@
     "requirements": "{23,25}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "122",
+    "examine": "A scroll for a spirit kalphite familiar.",
     "durability": null,
     "name": "Sandstorm scroll",
     "low_alchemy": "67",
+    "tradeable": "true",
     "high_alchemy": "101",
     "archery_ticket_price": "0",
     "id": "12446"
@@ -111860,9 +112013,11 @@
     "requirements": "{23,31}",
     "ge_buy_limit": "1000",
     "grand_exchange_price": "98",
+    "examine": "A scroll for a vampire bat familiar.",
     "durability": null,
     "name": "Vampire touch scroll",
     "low_alchemy": "97",
+    "tradeable": "true",
     "high_alchemy": "146",
     "archery_ticket_price": "0",
     "id": "12447"
@@ -111871,9 +112026,11 @@
     "requirements": "{23,42}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "123",
+    "examine": "A scroll for an evil turnip familiar.",
     "durability": null,
     "name": "Evil flames scroll",
     "low_alchemy": "120",
+    "tradeable": "true",
     "high_alchemy": "181",
     "archery_ticket_price": "0",
     "id": "12448"
@@ -111882,9 +112039,11 @@
     "requirements": "{23,74}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "219",
+    "examine": "A scroll for a granite lobster familiar.",
     "durability": null,
     "name": "Crushing claw scroll",
     "low_alchemy": "182",
+    "tradeable": "true",
     "high_alchemy": "274",
     "archery_ticket_price": "0",
     "id": "12449"
@@ -111893,8 +112052,10 @@
     "requirements": "{23,75}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "221",
+    "examine": "A scroll for a praying mantis familiar.",
     "durability": null,
     "name": "Mantis strike scroll",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "12450"
   },
@@ -111902,9 +112063,11 @@
     "requirements": "{23,71}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "12",
+    "examine": "A scroll for an arctic bear familiar.",
     "durability": null,
     "name": "Arctic blast scroll",
     "low_alchemy": "30",
+    "tradeable": "true",
     "high_alchemy": "46",
     "archery_ticket_price": "0",
     "id": "12451"
@@ -111913,9 +112076,11 @@
     "requirements": "{23,66}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "10",
+    "examine": "A scroll for a barker toad familiar.",
     "durability": null,
     "name": "Toad bark scroll",
     "low_alchemy": "27",
+    "tradeable": "true",
     "high_alchemy": "41",
     "archery_ticket_price": "0",
     "id": "12452"
@@ -111924,9 +112089,11 @@
     "requirements": "{23,55}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "202",
+    "examine": "A scroll for a spirit jelly familiar.",
     "durability": null,
     "name": "Dissolve scroll",
     "low_alchemy": "167",
+    "tradeable": "true",
     "high_alchemy": "251",
     "archery_ticket_price": "0",
     "id": "12453"
@@ -111935,9 +112102,11 @@
     "requirements": "{23,54}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "163",
+    "examine": "A scroll for an abyssal parasite familiar.",
     "durability": null,
     "name": "Abyssal drain scroll",
     "low_alchemy": "122",
+    "tradeable": "true",
     "high_alchemy": "183",
     "archery_ticket_price": "0",
     "id": "12454"
@@ -111946,9 +112115,11 @@
     "requirements": "{23,58}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "198",
+    "examine": "A scroll for a karamthulhu overlord familiar.",
     "durability": null,
     "name": "Doomsphere scroll",
     "low_alchemy": "160",
+    "tradeable": "true",
     "high_alchemy": "241",
     "archery_ticket_price": "0",
     "id": "12455"
@@ -111957,9 +112128,11 @@
     "requirements": "{23,83}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "9",
+    "examine": "A scroll for a spirit dagannoth familiar.",
     "durability": null,
     "name": "Spike shot scroll",
     "low_alchemy": "17",
+    "tradeable": "true",
     "high_alchemy": "26",
     "archery_ticket_price": "0",
     "id": "12456"
@@ -111968,9 +112141,11 @@
     "requirements": "{23,78}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "146",
+    "examine": "A scroll for a giant ent familiar.",
     "durability": null,
     "name": "Acorn missile scroll",
     "low_alchemy": "140",
+    "tradeable": "true",
     "high_alchemy": "211",
     "archery_ticket_price": "0",
     "id": "12457"
@@ -111979,31 +112154,37 @@
     "requirements": "{23,43}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "97",
+    "examine": "A scroll for a cockatrice variant familiar.",
     "durability": null,
     "name": "Petrifying gaze scroll",
     "low_alchemy": "104",
+    "tradeable": "true",
     "high_alchemy": "157",
     "archery_ticket_price": "0",
     "id": "12458"
   },
   {
-    "requirements": "{13,23}",
+    "requirements": "{23,13}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "10",
+    "examine": "A scroll for a thorny snail familiar.",
     "durability": null,
     "name": "Slime spray scroll",
     "low_alchemy": "184",
+    "tradeable": "true",
     "high_alchemy": "277",
     "archery_ticket_price": "0",
     "id": "12459"
   },
   {
-    "requirements": "{18,23}",
+    "requirements": "{23,18}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "47",
+    "examine": "A scroll for a desert wyrm familiar.",
     "durability": null,
     "name": "Electric lash scroll",
     "low_alchemy": "61",
+    "tradeable": "true",
     "high_alchemy": "92",
     "archery_ticket_price": "0",
     "id": "12460"
@@ -112012,9 +112193,11 @@
     "requirements": "{23,36}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "135",
+    "examine": "A scroll for a bronze minotaur familiar.",
     "durability": null,
     "name": "Bronze bull rush scroll",
     "low_alchemy": "118",
+    "tradeable": "true",
     "high_alchemy": "178",
     "archery_ticket_price": "0",
     "id": "12461"
@@ -112023,9 +112206,11 @@
     "requirements": "{23,46}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "180",
+    "examine": "A scroll for an iron minotaur familiar.",
     "durability": null,
     "name": "Iron bull rush scroll",
     "low_alchemy": "141",
+    "tradeable": "true",
     "high_alchemy": "212",
     "archery_ticket_price": "0",
     "id": "12462"
@@ -112034,9 +112219,11 @@
     "requirements": "{23,56}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "182",
+    "examine": "A scroll for a steel minotaur familiar.",
     "durability": null,
     "name": "Steel bull rush scroll",
     "low_alchemy": "157",
+    "tradeable": "true",
     "high_alchemy": "236",
     "archery_ticket_price": "0",
     "id": "12463"
@@ -112045,9 +112232,11 @@
     "requirements": "{23,66}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "198",
+    "examine": "A scroll for a mithril minotaur familiar.",
     "durability": null,
     "name": "Mith bull rush scroll",
     "low_alchemy": "168",
+    "tradeable": "true",
     "high_alchemy": "253",
     "archery_ticket_price": "0",
     "id": "12464"
@@ -112056,9 +112245,11 @@
     "requirements": "{23,76}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "203",
+    "examine": "A scroll for an adamant minotaur familiar.",
     "durability": null,
     "name": "Addy bull rush scroll",
     "low_alchemy": "160",
+    "tradeable": "true",
     "high_alchemy": "241",
     "archery_ticket_price": "0",
     "id": "12465"
@@ -112067,9 +112258,11 @@
     "requirements": "{23,86}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "67",
+    "examine": "A scroll for a rune minotaur familiar.",
     "durability": null,
     "name": "Rune bull rush scroll",
     "low_alchemy": "17",
+    "tradeable": "true",
     "high_alchemy": "26",
     "archery_ticket_price": "0",
     "id": "12466"
@@ -112078,9 +112271,11 @@
     "requirements": "{23,64}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "171",
+    "examine": "A scroll for a stranger plant familiar.",
     "durability": null,
     "name": "Poisonous blast scroll",
     "low_alchemy": "144",
+    "tradeable": "true",
     "high_alchemy": "217",
     "archery_ticket_price": "0",
     "id": "12467"
@@ -112089,9 +112284,11 @@
     "requirements": "{23,61}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "170",
+    "examine": "A scroll for a smoke devil familiar.",
     "durability": null,
     "name": "Dust cloud scroll",
     "low_alchemy": "157",
+    "tradeable": "true",
     "high_alchemy": "236",
     "archery_ticket_price": "0",
     "id": "12468"
@@ -112309,63 +112506,63 @@
     "id": "12502"
   },
   {
-    "examine": "Chick: A fluffy chick.Bird: Lovely blue plumage.Owl: A fantastic saradomin owl.",
+    "examine": "A fluffy chick.",
     "durability": null,
     "name": "Saradomin chick",
     "archery_ticket_price": "0",
     "id": "12503"
   },
   {
-    "examine": "Chick: A fluffy chick.Bird: Lovely blue plumage.Owl: A fantastic saradomin owl.",
+    "examine": "Lovely blue plumage.",
     "durability": null,
     "name": "Saradomin bird",
     "archery_ticket_price": "0",
     "id": "12504"
   },
   {
-    "examine": "Chick: A fluffy chick.Bird: Lovely blue plumage.Owl: A fantastic saradomin owl.",
+    "examine": "A fantastic saradomin owl.",
     "durability": null,
     "name": "Saradomin owl",
     "archery_ticket_price": "0",
     "id": "12505"
   },
   {
-    "examine": "Chick: A fluffy chick.Bird: Lovely red plumage.Hawk: A stately zamorak hawk.",
+    "examine": "A fluffy chick.",
     "durability": null,
     "name": "Zamorak chick",
     "archery_ticket_price": "0",
     "id": "12506"
   },
   {
-    "examine": "Chick: A fluffy chick.Bird: Lovely red plumage.Hawk: A stately zamorak hawk.",
+    "examine": "Lovely red plumage.",
     "durability": null,
     "name": "Zamorak bird",
     "archery_ticket_price": "0",
     "id": "12507"
   },
   {
-    "examine": "Chick: A fluffy chick.Bird: Lovely red plumage.Hawk: A stately zamorak hawk.",
+    "examine": "A stately zamorak hawk.",
     "durability": null,
     "name": "Zamorak hawk",
     "archery_ticket_price": "0",
     "id": "12508"
   },
   {
-    "examine": "Chick: A fluffy chick.Bird: Lovely green plumage.Raptor: An impressive Guthix raptor.",
+    "examine": "A fluffy chick.",
     "durability": null,
     "name": "Guthix chick",
     "archery_ticket_price": "0",
     "id": "12509"
   },
   {
-    "examine": "Chick: A fluffy chick.Bird: Lovely green plumage.Raptor: An impressive Guthix raptor.",
+    "examine": "Lovely green plumage.",
     "durability": null,
     "name": "Guthix bird",
     "archery_ticket_price": "0",
     "id": "12510"
   },
   {
-    "examine": "Chick: A fluffy chick.Bird: Lovely green plumage.Raptor: An impressive Guthix raptor.",
+    "examine": "An impressive Guthix raptor.",
     "durability": null,
     "name": "Guthix raptor",
     "archery_ticket_price": "0",
@@ -112534,12 +112731,14 @@
     "id": "12532"
   },
   {
-    "requirements": "{16,23}",
+    "requirements": "{23,16}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "7",
+    "examine": "A scroll for a granite crab familiar.",
     "durability": null,
     "name": "Stony shell scroll",
     "low_alchemy": "23",
+    "tradeable": "true",
     "high_alchemy": "35",
     "archery_ticket_price": "0",
     "id": "12533"
@@ -115386,9 +115585,11 @@
     "requirements": "{23,79}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "380",
+    "examine": "A scroll for an elemental titan familiar.",
     "durability": null,
     "name": "Titan's con. scroll",
     "low_alchemy": "214",
+    "tradeable": "true",
     "high_alchemy": "322",
     "archery_ticket_price": "0",
     "id": "12824"
@@ -115397,9 +115598,11 @@
     "requirements": "{23,99}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "646",
+    "examine": "A scroll for a steel titan familiar.",
     "durability": null,
     "name": "Steel of legends scroll",
     "low_alchemy": "194",
+    "tradeable": "true",
     "high_alchemy": "292",
     "archery_ticket_price": "0",
     "id": "12825"
@@ -115408,9 +115611,11 @@
     "requirements": "{23,73}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "271",
+    "examine": "A scroll for an obsidian golem familiar.",
     "durability": null,
     "name": "Volcanic str. scroll",
     "low_alchemy": "211",
+    "tradeable": "true",
     "high_alchemy": "317",
     "archery_ticket_price": "0",
     "id": "12826"
@@ -115419,9 +115624,11 @@
     "requirements": "{23,93}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "310",
+    "examine": "A scroll for an abyssal titan familiar.",
     "durability": null,
     "name": "Essence shipment scroll",
     "low_alchemy": "129",
+    "tradeable": "true",
     "high_alchemy": "194",
     "archery_ticket_price": "0",
     "id": "12827"
@@ -115430,9 +115637,11 @@
     "requirements": "{23,95}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "389",
+    "examine": "A scroll for an iron titan familiar.",
     "durability": null,
     "name": "Iron within scroll",
     "low_alchemy": "214",
+    "tradeable": "true",
     "high_alchemy": "322",
     "archery_ticket_price": "0",
     "id": "12828"
@@ -115441,9 +115650,11 @@
     "requirements": "{23,46}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "146",
+    "examine": "A scroll for a pyrelord familiar.",
     "durability": null,
     "name": "Immense heat scroll",
     "low_alchemy": "127",
+    "tradeable": "true",
     "high_alchemy": "191",
     "archery_ticket_price": "0",
     "id": "12829"
@@ -115452,9 +115663,11 @@
     "requirements": "{23,70}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "149",
+    "examine": "A scroll for a ravenous locust familiar.",
     "durability": null,
     "name": "Famine scroll",
     "low_alchemy": "95",
+    "tradeable": "true",
     "high_alchemy": "143",
     "archery_ticket_price": "0",
     "id": "12830"
@@ -115463,9 +115676,11 @@
     "requirements": "{23,77}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "245",
+    "examine": "A scroll for a talon beast familiar.",
     "durability": null,
     "name": "Deadly claw scroll",
     "low_alchemy": "190",
+    "tradeable": "true",
     "high_alchemy": "286",
     "archery_ticket_price": "0",
     "id": "12831"
@@ -115474,9 +115689,11 @@
     "requirements": "{23,85}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "192",
+    "examine": "A scroll for a swamp titan familiar.",
     "durability": null,
     "name": "Swamp plague scroll",
     "low_alchemy": "166",
+    "tradeable": "true",
     "high_alchemy": "250",
     "archery_ticket_price": "0",
     "id": "12832"
@@ -115485,8 +115702,10 @@
     "requirements": "{23,89}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "294",
+    "examine": "A scroll for a geyser titan familiar.",
     "durability": null,
     "name": "Boil scroll",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "12833"
   },
@@ -115494,9 +115713,11 @@
     "requirements": "{23,29}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "103",
+    "examine": "A scroll for a giant chinchompa familiar.",
     "durability": null,
     "name": "Explode scroll",
     "low_alchemy": "238",
+    "tradeable": "true",
     "high_alchemy": "358",
     "archery_ticket_price": "0",
     "id": "12834"
@@ -115505,9 +115726,11 @@
     "requirements": "{23,57}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "250",
+    "examine": "A scroll for a spirit graahk familiar.",
     "durability": null,
     "name": "Goad scroll",
     "low_alchemy": "170",
+    "tradeable": "true",
     "high_alchemy": "256",
     "archery_ticket_price": "0",
     "id": "12835"
@@ -115516,9 +115739,11 @@
     "requirements": "{23,57}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "1428",
+    "examine": "A scroll for a spirit kyatt familiar.",
     "durability": null,
     "name": "Ambush scroll",
     "low_alchemy": "169",
+    "tradeable": "true",
     "high_alchemy": "254",
     "archery_ticket_price": "0",
     "id": "12836"
@@ -115527,31 +115752,37 @@
     "requirements": "{23,83}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "300",
+    "examine": "A scroll for a lava titan familiar.",
     "durability": null,
     "name": "Ebon thunder scroll",
     "low_alchemy": "211",
+    "tradeable": "true",
     "high_alchemy": "317",
     "archery_ticket_price": "0",
     "id": "12837"
   },
   {
-    "requirements": "{17,23}",
+    "requirements": "{23,17}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "1",
+    "examine": "A scroll for a spirit mosquito familiar.",
     "durability": null,
     "name": "Pester scroll",
     "low_alchemy": "17",
+    "tradeable": "true",
     "high_alchemy": "26",
     "archery_ticket_price": "0",
     "id": "12838"
   },
   {
-    "requirements": "{22,23}",
+    "requirements": "{23,22}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "78",
+    "examine": "A scroll for a spirit Tz-Kih familiar.",
     "durability": null,
     "name": "Fireball assault scroll",
     "low_alchemy": "80",
+    "tradeable": "true",
     "high_alchemy": "121",
     "archery_ticket_price": "0",
     "id": "12839"
@@ -115560,9 +115791,11 @@
     "requirements": "{23,57}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "196",
+    "examine": "A scroll for a spirit larupia familiar.",
     "durability": null,
     "name": "Rending scroll",
     "low_alchemy": "171",
+    "tradeable": "true",
     "high_alchemy": "257",
     "archery_ticket_price": "0",
     "id": "12840"
@@ -115571,9 +115804,11 @@
     "requirements": "{23,76}",
     "ge_buy_limit": "5000",
     "grand_exchange_price": "173",
+    "examine": "A scroll for a forge regent familiar.",
     "durability": null,
     "name": "Inferno scroll",
     "low_alchemy": "157",
+    "tradeable": "true",
     "high_alchemy": "236",
     "archery_ticket_price": "0",
     "id": "12841"
@@ -122989,23 +123224,24 @@
     "durability": null,
     "low_alchemy": "8",
     "high_alchemy": "12",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "0,0,0",
     "destroy_message": "Drop",
     "grand_exchange_price": "25",
     "name": "Crayfish cage",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13431",
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "20",
-    "examine": "Useful for catching crayfish.",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "low_alchemy": "8",
     "high_alchemy": "12",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "25",
@@ -123020,23 +123256,24 @@
     "durability": null,
     "low_alchemy": "2",
     "high_alchemy": "3",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "0,0,0",
     "destroy_message": "Drop",
     "grand_exchange_price": "32",
     "name": "Crayfish",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13433",
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "5",
-    "examine": "Some cooked crayfish. Eat it to heal.",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "low_alchemy": "2",
     "high_alchemy": "3",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "32",
@@ -123051,23 +123288,24 @@
     "durability": null,
     "low_alchemy": "2",
     "high_alchemy": "3",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "0,0,0",
     "destroy_message": "Drop",
     "grand_exchange_price": "41",
     "name": "Raw crayfish",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13435",
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0"
   },
   {
     "shop_price": "5",
-    "examine": "I should try cooking this. Used in Cooking (1).",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "low_alchemy": "2",
     "high_alchemy": "3",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "41",
@@ -123080,7 +123318,9 @@
     "shop_price": "1",
     "durability": null,
     "name": "Burnt crayfish",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "destroy": "false",
     "attack_speed": "4",
     "id": "13437",
     "absorb": "0,0,0",
@@ -123088,10 +123328,12 @@
   },
   {
     "shop_price": "1",
+    "examine": "Swap this note at any bank for the equivalent item.",
     "durability": null,
     "name": "Burnt crayfish",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "destroy": "false",
     "attack_speed": "4",
     "id": "13438"
   },
@@ -138810,9 +139052,12 @@
     "id": "14621"
   },
   {
+    "requirements": "{23,72}",
     "shop_price": "498",
+    "examine": "A scroll for a phoenix familiar.",
     "durability": null,
     "name": "Rise from the ashes scroll",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "attack_speed": "4",
     "id": "14622",

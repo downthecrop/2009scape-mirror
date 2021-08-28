@@ -266,6 +266,7 @@ public final class InteractionPacket implements IncomingPacket {
 		player.debug("dir=" + object.getDirection());
 		VarbitDefinition def = VarbitDefinition.forObjectID(SceneryDefinition.forId(objectId).getVarbitID());
 		player.debug("Varp ID=" + def.getConfigId() + " Offset=" + def.getBitShift() + " Size=" + def.getBitSize());
+		player.debug("Varbit: " + def.getId());
 		if (option.getHandler() != null) {
 			player.debug("Object handler: " + option.getHandler().getClass().getSimpleName());
 		}
@@ -298,9 +299,6 @@ public final class InteractionPacket implements IncomingPacket {
 		}
 		final Option option = player.getInteraction().get(optionIndex);
 		//Handling for "Pelt" option
-		if(option.getName().toLowerCase().equals("pelt")){
-
-		}
 		if (option == null) {
 			PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
 			return;
@@ -340,7 +338,7 @@ public final class InteractionPacket implements IncomingPacket {
 			player.debug("Handled by quest interaction manager.");
 			return;
 		}
-		if(InteractionListeners.run(item.getId(), InteractionListener.Companion.getITEM(),option.getName(),player,item)){
+		if(InteractionListeners.run(item.getId(), InteractionListener.Companion.getGROUNDITEM(), option.getName(),player,item)){
 			return;
 		}
 		item.getInteraction().handle(player, option);

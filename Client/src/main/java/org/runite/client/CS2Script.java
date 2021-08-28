@@ -27,7 +27,6 @@ public final class CS2Script extends Linkable {
     static int anInt3775 = 0;
     static int anInt2440 = 0;
     static ReferenceCache aReferenceCache_2442 = new ReferenceCache(50);
-    static ReferenceCache aReferenceCache_2450 = new ReferenceCache(64);
     static byte[][][] aByteArrayArrayArray2452;
     RSInterface aClass11_2438;
     RSString aClass94_2439;
@@ -55,30 +54,6 @@ public final class CS2Script extends Linkable {
             Unsorted.anInt1711 = -3;
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "jl.C(" + year + ',' + country + ',' + day + ',' + month + ',' + 1 + ')');
-        }
-    }
-
-    static Class79 method378(int var0, byte var1) {
-        try {
-            Class79 var2 = (Class79) aReferenceCache_2450.get(var0);
-            if (var2 == null) {
-                if (var1 < 126) {
-                    return null;
-                } else {
-                    byte[] var3 = Class101.aClass153_1420.getFile(Class140_Sub7.method2032(var0), var0 & 1023);
-                    var2 = new Class79();
-                    if (var3 != null) {
-                        var2.method1387(new DataBuffer(var3));
-                    }
-
-                    aReferenceCache_2450.put(var2, var0);
-                    return var2;
-                }
-            } else {
-                return var2;
-            }
-        } catch (RuntimeException var4) {
-            throw ClientErrorException.clientError(var4, "jl.A(" + var0 + ',' + var1 + ')');
         }
     }
 

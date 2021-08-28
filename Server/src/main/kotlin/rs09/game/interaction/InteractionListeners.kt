@@ -4,13 +4,15 @@ import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.interaction.Option
 import core.game.node.Node
+import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
+import rs09.game.system.SystemLogger
 
 object InteractionListeners {
     private val listeners = HashMap<String,(Player, Node) -> Boolean>(1000)
     private val useWithListeners = HashMap<String,(Player,Node,Node) -> Boolean>(1000)
-    private val destinationOverrides = HashMap<String,(Node) -> Location>(100)
+    private val destinationOverrides = HashMap<String,(Entity, Node) -> Location>(100)
     private val equipListeners = HashMap<String,(Player,Node) -> Boolean>(10)
 
     @JvmStatic
@@ -89,19 +91,19 @@ object InteractionListeners {
     }
 
     @JvmStatic
-    fun addDestOverride(type: Int, id: Int, method: (Node) -> Location){
+    fun addDestOverride(type: Int, id: Int, method: (Entity,Node) -> Location){
         destinationOverrides["$type:$id"] = method
     }
 
     @JvmStatic
-    fun addDestOverrides(type: Int,options: Array<out String>, method: (Node) -> Location){
+    fun addDestOverrides(type: Int,options: Array<out String>, method: (Entity,Node) -> Location){
         for(opt in options){
             destinationOverrides["$type:${opt.toLowerCase()}"] = method
         }
     }
 
     @JvmStatic
-    fun addDestOverrides(type: Int, ids: IntArray,options: Array<out String>, method: (Node) -> Location){
+    fun addDestOverrides(type: Int, ids: IntArray,options: Array<out String>, method: (Entity,Node) -> Location){
         for(id in ids){
             for(opt in options){
                 destinationOverrides["$type:$id:${opt.toLowerCase()}"] = method
@@ -110,17 +112,17 @@ object InteractionListeners {
     }
 
     @JvmStatic
-    fun getOverride(type: Int, id:Int, option: String): ((Node) -> Location)?{
+    fun getOverride(type: Int, id:Int, option: String): ((Entity, Node) -> Location)?{
         return destinationOverrides["$type:$id:${option.toLowerCase()}"]
     }
 
     @JvmStatic
-    fun getOverride(type: Int,id: Int): ((Node) -> Location)?{
+    fun getOverride(type: Int,id: Int): ((Entity,Node) -> Location)?{
         return destinationOverrides["$type:$id"]
     }
 
     @JvmStatic
-    fun getOverride(type: Int,option: String): ((Node) -> Location)?{
+    fun getOverride(type: Int,option: String): ((Entity,Node) -> Location)?{
         return destinationOverrides["$type:$option"]
     }
 
@@ -146,10 +148,16 @@ object InteractionListeners {
         var flipped = false
 
         val method = get(used.id,with.id,type) ?: get(with.id,used.id,type).also { flipped = true } ?: return false
+        val destOverride = if(flipped) {
+            getOverride(type, used.id, "use") ?: getOverride(type, with.id) ?: getOverride(type, "use")
+        } else {
+            getOverride(type, with.id, "use") ?: getOverride(type, used.id) ?: getOverride(type, "use")
+        }
+
 
         if(type != 0) {
             if(player.locks.isMovementLocked) return false
-            player.pulseManager.run(object : MovementPulse(player, with, flag) {
+            player.pulseManager.run(object : MovementPulse(player, with, flag, destOverride) {
                 override fun pulse(): Boolean {
                     if (player.zoneMonitor.useWith(used.asItem(), with)) {
                         return true
@@ -170,6 +178,7 @@ object InteractionListeners {
     @JvmStatic
     fun run(id: Int, type: Int, option: String, player: Player, node: Node): Boolean{
         val flag = when(type){
+            3 -> DestinationFlag.ITEM
             2 -> DestinationFlag.ENTITY
             1 -> DestinationFlag.OBJECT
             else -> DestinationFlag.OBJECT

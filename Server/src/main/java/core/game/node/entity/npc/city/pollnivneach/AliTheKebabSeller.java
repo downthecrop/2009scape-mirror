@@ -20,7 +20,7 @@ public class AliTheKebabSeller extends DialoguePlugin {
     public DialoguePlugin newInstance(Player player){return new AliTheKebabSeller(player);}
     @Override
     public boolean open(Object... args){
-        NPC npc = (NPC)args[0];
+        npc = (NPC)args[0];
         player("Hello");
         return true;
     }

@@ -1,6 +1,8 @@
 package rs09.game.content.global.worldevents.penguinhns
 
 import core.game.system.task.Pulse
+import org.json.simple.JSONObject
+import rs09.ServerStore
 import rs09.game.content.global.worldevents.PluginSet
 import rs09.game.content.global.worldevents.WorldEvent
 import rs09.game.content.global.worldevents.WorldEvents
@@ -16,34 +18,30 @@ class PenguinHNSEvent : WorldEvent("penguin-hns"){
     }
 
     override fun checkTrigger(): Boolean {
-        return GameWorld.ticks - lastTrigger >= tickDelay
+        return PenguinManager.penguins.isEmpty()
     }
 
     override fun initialize() {
         plugins = PluginSet(
                 LarryHandler(),
                 NotebookHandler(),
-                PenguinSpyingHandler()
         )
         super.initialize()
-        GameWorld.Pulser.submit(PenguinRegeneration())
+        fireEvent()
         log("Penguin HNS initialized.")
     }
 
     override fun fireEvent() {
-        log("Reshuffling Penguins...")
+        log("Loading penguins...")
         manager.rebuildVars()
         lastTrigger = GameWorld.ticks
-        log("Penguins Reshuffled.")
+        log("Penguins loaded.")
     }
 
-    class PenguinRegeneration : Pulse(25){
-        override fun pulse(): Boolean {
-            val event = WorldEvents.get("penguin-hns")
-            event ?: return true
-
-            if(event.checkTrigger()) event.fireEvent()
-            return false
+    companion object {
+        @JvmStatic
+        fun getStoreFile() : JSONObject {
+            return ServerStore.getArchive("weekly-penguinhns")
         }
     }
 

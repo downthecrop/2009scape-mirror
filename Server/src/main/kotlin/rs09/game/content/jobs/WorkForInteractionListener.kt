@@ -2,12 +2,17 @@ package rs09.game.content.jobs
 
 import GatheringJobs
 import SlayingJob
+import api.ContentAPI
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
+import org.json.simple.JSONObject
 import org.rs09.consts.Items
+import rs09.ServerStore
+import rs09.ServerStore.getInt
 import rs09.game.interaction.InteractionListener
+import rs09.game.system.SystemLogger
 import java.util.concurrent.TimeUnit
 
 /**
@@ -58,9 +63,9 @@ class WorkForInteractionListener : InteractionListener() {
             var amount = 0
             var jobId = 0
 
-            if(player.getAttribute("jobs:reset_time",Long.MAX_VALUE) < System.currentTimeMillis()){
-                player.setAttribute("/save:jobs:dailyAmt",0)
-                player.setAttribute("/save:jobs:reset_time",System.currentTimeMillis() + TimeUnit.HOURS.toMillis(24))
+            if(JobManager.getStoreFile().getInt(player.username.toLowerCase()) == 3){
+                ContentAPI.sendNPCDialogue(player, node.id,"You've hit your limit for the day. Come back tomorrow!")
+                return@on true
             }
 
             if(player.getAttribute("jobs:id",-1) != -1){
@@ -70,10 +75,7 @@ class WorkForInteractionListener : InteractionListener() {
 
             val type = typeMap[node.id] ?: return@on false
             jobId = if(type == 0) {
-                var job = gatheringMap[node.id]?.random()
-                while(!checkRequirement(player,job)){
-                    job = gatheringMap[node.id]?.random()
-                }
+                var job = gatheringMap[node.id]?.filter { checkRequirement(player, it) }?.random()
                 amount = job?.getAmount() ?: 0
                 job?.ordinal ?: 0
             } else {
@@ -106,8 +108,7 @@ class WorkForInteractionListener : InteractionListener() {
 
     fun checkRequirement(player: Player, jobs: GatheringJobs?): Boolean{
         jobs ?: return true
-        val requirement: Pair<Int,Int> = Pair(jobs.lvlReq,jobs.skill)
-        if(player.skills.getLevel(requirement.second) < requirement.first){
+        if(player.skills.getLevel(jobs.skill) < jobs.lvlReq){
             return false
         }
         return true

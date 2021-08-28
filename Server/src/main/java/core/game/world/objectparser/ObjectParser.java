@@ -22,6 +22,7 @@ import java.io.File;
 public class ObjectParser extends StartupPlugin {
 
     public void parseObjects(){
+        if(ServerConstants.OBJECT_PARSER_PATH == null) return;
         File f = new File(ServerConstants.OBJECT_PARSER_PATH);
         if(!f.exists()){
             System.out.println("[ObjectParser]: Can't find file " + ServerConstants.OBJECT_PARSER_PATH);

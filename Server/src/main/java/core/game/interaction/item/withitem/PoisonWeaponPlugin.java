@@ -1,5 +1,6 @@
 package core.game.interaction.item.withitem;
 
+import api.ContentAPI;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
@@ -7,6 +8,7 @@ import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import org.rs09.consts.Items;
 
 /**
  * Handles weapon poisiong.
@@ -262,34 +264,6 @@ public class PoisonWeaponPlugin extends UseWithHandler {
 		}
 
 		/**
-		 * @param first the first to set.
-		 */
-		public void setFirst(int first) {
-			this.first = first;
-		}
-
-		/**
-		 * @param item the item to set.
-		 */
-		public void setItem(int item) {
-			this.item = item;
-		}
-
-		/**
-		 * @param second the second to set.
-		 */
-		public void setSecond(int second) {
-			this.second = second;
-		}
-
-		/**
-		 * @param third the third to set.
-		 */
-		public void setThird(int third) {
-			this.third = third;
-		}
-
-		/**
 		 * Method used to get the poisioned weapon for the id.
 		 * @param i the id.
 		 * @return the weapon.
@@ -320,11 +294,13 @@ public class PoisonWeaponPlugin extends UseWithHandler {
 			product = weapon.getThird();
 			player.getInventory().remove(new Item(5940, 1));
 			break;
+			default:
+				break;
 		}
-		int amt = weaponItem.getAmount() > 5 ? 5 : weaponItem.getAmount();
+		int amt = Math.min(weaponItem.getAmount(), 5);
 		player.getInventory().remove(new Item(weaponItem.getId(), amt));
-		player.getInventory().add(new Item(229, 1));
-		player.getInventory().add(new Item(product, amt));
+		ContentAPI.addItemOrDrop(player, product, amt);
+		ContentAPI.addItemOrDrop(player, Items.VIAL_229, 1);
 		player.getPacketDispatch().sendMessage("You poison the " + weaponItem.getName().toLowerCase() + ".");
 	}
 

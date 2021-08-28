@@ -221,7 +221,7 @@ public final class NPCDropTables {
 	 */
 	private boolean handleBoneCrusher(Player player, Item item) {
 		Bones bone = Bones.forId(item.getId());
-		if (bone == null || item == null) {
+		if (bone == null) {
 			return false;
 		}
 		if (!player.getGlobalData().isEnableBoneCrusher()) {

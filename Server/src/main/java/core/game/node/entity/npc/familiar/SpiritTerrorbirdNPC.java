@@ -43,7 +43,7 @@ public class SpiritTerrorbirdNPC extends BurdenBeast {
 	protected boolean specialMove(FamiliarSpecial special) {
 		visualize(Animation.create(1009), Graphics.create(1521));
 		owner.getSkills().updateLevel(Skills.AGILITY, 2);
-		owner.getSettings().updateRunEnergy(-owner.getSkills().getStaticLevel(Skills.AGILITY) / 2);
+		owner.getSettings().updateRunEnergy(-owner.getSkills().getStaticLevel(Skills.AGILITY) / 2.0);
 		return true;
 	}
 

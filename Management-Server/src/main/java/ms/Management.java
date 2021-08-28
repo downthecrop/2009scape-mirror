@@ -1,7 +1,8 @@
 package ms;
 
-import ms.classloader.ClassLoadServer;
 import ms.net.NioReactor;
+import ms.net.packet.IoBuffer;
+import ms.net.packet.PacketHeader;
 import ms.net.packet.WorldPacketRepository;
 import ms.system.ShutdownSequence;
 import ms.system.mysql.SQLManager;
@@ -13,8 +14,10 @@ import ms.world.WorldDatabase;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
+import java.nio.charset.StandardCharsets;
 import java.util.Scanner;
 
 /**
@@ -98,7 +101,6 @@ public final class Management {
 		new Command("-rlcache", "Reloads launcher/client resource cache") {
 			@Override
 			public void run(String... args) {
-				ClassLoadServer.resetResourceCache();
 				System.out.println("Reloaded resource cache!");
 			}	
 		},
@@ -116,6 +118,27 @@ public final class Management {
 				player.setWorldId(0);
 				System.out.println("Kicked player " + name + "!");
 			}	
+		},
+
+		new Command("-say", "Send a message to all worlds") {
+			@Override
+			public void run(String... args) {
+				String message = String.join(" ", args);
+				message = message.substring(4);
+				for(GameServer server : WorldDatabase.getWorlds()){
+					if(server == null) continue;
+					String finalMessage = message;
+					server.getPlayers().forEach((String uname, PlayerSession p) -> {
+						IoBuffer buffer = new IoBuffer(5, PacketHeader.BYTE);
+						buffer.putString(p.getUsername());
+						buffer.putString("Server");
+						buffer.put(2);
+						buffer.put(2);
+						buffer.putString(finalMessage);
+						p.getWorld().getSession().write(buffer);
+					});
+				}
+			}
 		}
 	};
 	
@@ -134,11 +157,10 @@ public final class Management {
 		SQLManager.init();
 		//NioReactor.configure(ServerConstants.PORT).start();
 		NioReactor.configure(5555).start();
-		new ClassLoadServer().start();
 		Runtime.getRuntime().addShutdownHook(new ShutdownSequence());
 		System.out.println("Status: ready.");
 		System.out.println("Use -commands for a list of commands!");
-		Scanner s = new Scanner(System.in);
+		Scanner s = new Scanner(new InputStreamReader(System.in, StandardCharsets.UTF_8));
 		while (s.hasNext()) {
 			try {
 				String command = s.nextLine();

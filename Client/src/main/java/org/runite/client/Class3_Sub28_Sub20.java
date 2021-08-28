@@ -289,8 +289,8 @@ final class Class3_Sub28_Sub20 extends Node {
    static void method725() {
       try {
          if(Class137.method1817() == 2) {
-            byte var2 = (byte)(255 & Class79.anInt1127 + -4);
-            int var3 = Class79.anInt1127 % 104;
+            byte var2 = (byte)(255 & CSConfigCachefile.anInt1127 + -4);
+            int var3 = CSConfigCachefile.anInt1127 % 104;
 
             int var4;
             int var5;

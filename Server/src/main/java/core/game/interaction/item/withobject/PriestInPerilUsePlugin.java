@@ -136,8 +136,8 @@ public class PriestInPerilUsePlugin extends UseWithHandler {
 					Quest quest = player.getQuestRepository().getQuest("Priest in Peril");
 					quest.setStage(player, 15);
 					player.getPacketDispatch().sendMessage("You have unlocked the cell door.");
-					NPC npc = NPC.create(1047, player.getLocation());
-					npc.setName("Dezel");
+					NPC npc = NPC.create(7690, player.getLocation());
+					npc.setName("Drezel");
 					player.getDialogueInterpreter().sendDialogues(npc, FacialExpression.HALF_GUILTY, "Oh! Thank you! You have found the key!");
 				}
 			}

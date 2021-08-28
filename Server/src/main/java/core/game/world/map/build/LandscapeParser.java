@@ -45,7 +45,9 @@ public final class LandscapeParser {
 				int type = configuration >> 2;
 				int z = location >> 12;
 				r.setObjectCount(r.getObjectCount() + 1);
-				if (x >= 0 && y >= 0 && x < 64 && y < 64) {
+				if (x < 0 || y < 0 || x >= 64 || y >= 64) {
+					System.out.println("Object out of bounds: " + objectId + " - " + x + ", " + y + ", " + z);
+				} else {
 					if ((mapscape[1][x][y] & 0x2) == 2) {
 						z--;
 					}
@@ -53,8 +55,6 @@ public final class LandscapeParser {
 						Scenery object = new Scenery(objectId, Location.create((r.getX() << 6) + x, (r.getY() << 6) + y, z), type, rotation);
 						flagScenery(r.getPlanes()[z], x, y, object, true, storeObjects);
 					}
-				} else {
-					System.out.println("Object out of bounds: " + objectId + " - " + x + ", " + y + ", " + z);
 				}
 			}
 		}

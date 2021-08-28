@@ -255,18 +255,10 @@ public enum Direction {
 	}
 
 	/**
-	 * Gets the traversal.
-	 * @return The traversal.
-	 */
-	public int[] getTraversal() {
-		return traversal;
-	}
-
-	/**
 	 * Sets the traversal.
 	 * @param traversal The traversal to set.
 	 */
-	public void setTraversal(int[] traversal) {
+	private void setTraversal(int[] traversal) {
 		this.traversal = traversal;
 	}
 }

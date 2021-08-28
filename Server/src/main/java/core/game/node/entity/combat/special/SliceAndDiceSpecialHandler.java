@@ -68,7 +68,6 @@ public final class SliceAndDiceSpecialHandler extends MeleeSwingHandler implemen
 				} else {
 					hit = getHit(entity, victim, (int) (maximum * 1.5));
 					if (hit > 0) {
-						maximum *= 1.5;
 						hits = new int[] {0, 0, 0, hit};
 					} else {
 						hits = new int[] {0, RandomFunction.random(2)};

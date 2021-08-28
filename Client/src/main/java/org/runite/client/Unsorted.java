@@ -12,8 +12,6 @@ import org.rs09.client.util.ArrayUtils;
 import org.runite.client.drawcalls.*;
 
 import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.io.File;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Objects;
@@ -404,98 +402,6 @@ public class Unsorted {
             return Class75_Sub4.method1351(var3, 0, var2) ? Class77.method1364() : null;
         } catch (RuntimeException var5) {
             throw ClientErrorException.clientError(var5, "na.MA(" + 0 + ',' + true + ',' + var2 + ',' + (var3 != null ? "{...}" : "null") + ')');
-        }
-    }
-
-    static AbstractSprite constructItemSprite(int var0, boolean useHDSprite, int itemID, boolean var4, int outlineType, int itemCount, boolean shrinkInSprite) {
-        try {
-            ItemDefinition item = ItemDefinition.getItemDefinition(itemID);
-            if (itemCount > 1 && item.anIntArray804 != null) {
-                int var9 = -1;
-
-                for (int var10 = 0; var10 < 10; ++var10) {
-                    if (item.anIntArray766[var10] <= itemCount && item.anIntArray766[var10] != 0) {
-                        var9 = item.anIntArray804[var10];
-                    }
-                }
-
-                if (var9 != -1) {
-                    item = ItemDefinition.getItemDefinition(var9);
-                }
-            }
-
-            Class140_Sub1_Sub2 var21 = item.method1120();
-            if (null == var21) {
-                return null;
-            } else {
-                SoftwareSprite var22 = null;
-                if (item.anInt791 == -1) {
-                    if (item.anInt762 != -1) {
-                        var22 = (SoftwareSprite) constructItemSprite(var0, true, item.anInt795, false, outlineType, itemCount, false);
-                        if (null == var22) {
-                            return null;
-                        }
-                    }
-                } else {
-                    var22 = (SoftwareSprite) constructItemSprite(0, true, item.noteID, false, 1, 10, true);
-                    if (null == var22) {
-                        return null;
-                    }
-                }
-
-                int[] var11 = Toolkit.JAVA_TOOLKIT.getBuffer();
-                int var12 = Toolkit.JAVA_TOOLKIT.width;
-                int var13 = Toolkit.JAVA_TOOLKIT.height;
-                int[] var14 = new int[4];
-                Class74.method1325(var14);
-                SoftwareSprite var15 = new SoftwareSprite(36, 32);
-                Class74.setBuffer(var15.anIntArray4081, 36, 32);
-                Class51.method1134();
-                Class51.method1145(16, 16);
-                int var16 = item.anInt810;
-                Class51.aBoolean843 = false;
-                if (shrinkInSprite) {
-                    var16 = (int) ((double) var16 * 1.5D);
-                } else if (outlineType == 2) {
-                    var16 = (int) (1.04D * (double) var16);
-                }
-
-                int var18 = Class51.anIntArray851[item.anInt786] * var16 >> 16;
-                int var17 = Class51.anIntArray840[item.anInt786] * var16 >> 16;
-                var21.method1893(item.anInt799, item.anInt768, item.anInt786, item.anInt792, var17 - (var21.method1871() / 2 + -item.anInt754), item.anInt754 + var18);
-                if (outlineType >= 1) {
-                    var15.method657(1);
-                    if (outlineType >= 2) {
-                        var15.method657(16777215);
-                    }
-
-                    Class74.setBuffer(var15.anIntArray4081, 36, 32);
-                }
-
-                if (var0 != 0) {
-                    var15.method668(var0);
-                }
-
-                if (item.anInt791 != -1) {
-                    Objects.requireNonNull(var22).drawAt(0, 0);
-                } else if (-1 != item.anInt762) {
-                    Class74.setBuffer(Objects.requireNonNull(var22).anIntArray4081, 36, 32);
-                    var15.drawAt(0, 0);
-                    var15 = var22;
-                }
-
-                if (var4 && (item.stackingType == 1 || itemCount != 1) && itemCount != -1) {
-                    TextureOperation10.aClass3_Sub28_Sub17_Sub1_3440.method681(Class3_Sub7.itemStackColor(1000, itemCount), 0, 9, 16776960, 1);
-                }
-
-                Class74.setBuffer(var11, var12, var13);
-                Class74.setClipping(var14);
-                Class51.method1134();
-                Class51.aBoolean843 = true;
-                return HDToolKit.highDetail && !useHDSprite ? new HDSprite(var15) : var15;
-            }
-        } catch (RuntimeException var20) {
-            throw ClientErrorException.clientError(var20, "na.WA(" + var0 + ',' + useHDSprite + ',' + itemID + ',' + var4 + ',' + outlineType + ',' + itemCount + ',' + shrinkInSprite + ')');
         }
     }
 
@@ -2056,7 +1962,7 @@ public class Unsorted {
                 Class136.method1816(512, -7);
                 TextureOperation19.method257();
             } else {
-                Class3_Sub5.method112((byte) (-4 + Class79.anInt1127 & 0xFF));
+                Class3_Sub5.method112((byte) (-4 + CSConfigCachefile.anInt1127 & 0xFF));
                 Class136.method1816(2, -7);
             }
 
@@ -2738,7 +2644,7 @@ public class Unsorted {
                 ++var2;
             }
 
-            if (var1.retrieveSpriteFile(Class79.anInt1124)) {
+            if (var1.retrieveSpriteFile(CSConfigCachefile.anInt1124)) {
                 ++var2;
             }
 
@@ -4812,7 +4718,7 @@ public class Unsorted {
                         }
                     }
 
-                    Class79.method1390(new DataBuffer(var4));
+                    CSConfigCachefile.method1390(new DataBuffer(var4));
                 }
             } catch (Exception var8) {
             }
@@ -5005,7 +4911,7 @@ public class Unsorted {
 
     static void method338(int var1, boolean var2, int var3, int var4, int var5) {
        try {
-          ++Class79.anInt1127;
+          ++CSConfigCachefile.anInt1127;
           Class124.method1745();
           if(!var2) {
              Class3_Sub5.method116(true);
@@ -5114,7 +5020,7 @@ public class Unsorted {
           }
 
           Class58.method1194();
-          byte var19 = Class137.method1817() != 2 ?1:(byte)Class79.anInt1127;
+          byte var19 = Class137.method1817() != 2 ?1:(byte) CSConfigCachefile.anInt1127;
           if(HDToolKit.highDetail) {
              HDToolKit.method1846();
              HDToolKit.method1831(true);

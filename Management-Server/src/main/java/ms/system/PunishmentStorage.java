@@ -49,7 +49,7 @@ public final class PunishmentStorage {
 			return;
 		}
 		long end = Long.MAX_VALUE;
-		if (duration != -1l && duration != 0L) {
+		if (duration != -1L && duration != 0L) {
 			end = System.currentTimeMillis() + duration;
 		} else if (duration == 0L) {
 			end = 0L;
@@ -79,8 +79,9 @@ public final class PunishmentStorage {
 				e.printStackTrace();
 				SQLManager.close(connection);
 				return;
+			} finally {
+				SQLManager.close(connection);
 			}
-			SQLManager.close(connection);
 			return;
 		case 2:
 			ban(player.getIpAddress(), type);
@@ -152,8 +153,9 @@ public final class PunishmentStorage {
 			e.printStackTrace();
 			SQLManager.close(connection);
 			return false;
+		} finally {
+			SQLManager.close(connection);
 		}
-		SQLManager.close(connection);
 		return true;
 	}
 
@@ -175,8 +177,9 @@ public final class PunishmentStorage {
 			e.printStackTrace();
 			SQLManager.close(connection);
 			return false;
+		} finally {
+			SQLManager.close(connection);
 		}
-		SQLManager.close(connection);
 		return true;
 	}
 	
@@ -239,8 +242,9 @@ public final class PunishmentStorage {
 			e.printStackTrace();
 			SQLManager.close(connection);
 			return false;
+		} finally {
+			SQLManager.close(connection);
 		}
-		SQLManager.close(connection);
 		return true;
 	}
 
@@ -252,9 +256,9 @@ public final class PunishmentStorage {
 	private static String getDuration(long end) {
 		String time = "indefinite time";
 		if (end != Long.MAX_VALUE) {
-			int days = (int) ((end -= System.currentTimeMillis()) / (24 * 60 * 60_000));
-			int hours = (int) ((end -= (days * 24 * 60 * 60_000)) / (60 * 60_000));
-			int minutes = (int) ((end -= (hours * (60 * 60_000))) / 60_000);
+			int days = (int) ((System.currentTimeMillis()) / (24 * 60 * 60_000));
+			int hours = (int) (((24L * days * 60 * 60_000)) / (60 * 60_000));
+			int minutes = (int) (((hours * (60 * 60_000))) / 60_000);
 			time = days + "d, " + hours + "h, " + minutes + "m";
 		}
 		return time;

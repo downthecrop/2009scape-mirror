@@ -32,11 +32,11 @@ public final class DustDevilNPC extends AbstractNPC {
 		public void impact(Entity entity, Entity victim, BattleState state) {
 			if (victim instanceof Player) {
 				final Player player = (Player) victim;
-				if (!Equipment.FACEMASK.hasEquipment(player)) {
+				if (!SlayerEquipmentFlags.hasFaceMask(player)) {
 					for (int i : SKILLS) {
 						player.getSkills().updateLevel(i, -player.getSkills().getStaticLevel(i), 0);
 					}
-					player.getSkills().decrementPrayerPoints(player.getSkills().getStaticLevel(Skills.PRAYER) / 2);
+					player.getSkills().decrementPrayerPoints((double) player.getSkills().getStaticLevel(Skills.PRAYER) / 2);
 					state.setEstimatedHit(14);
 				}
 			}
@@ -76,7 +76,7 @@ public final class DustDevilNPC extends AbstractNPC {
 		super.checkImpact(state);
 		if (state.getAttacker() instanceof Player) {
 			Player player = (Player) state.getAttacker();
-			if (!Equipment.FACEMASK.hasEquipment(player)) {
+			if (!SlayerEquipmentFlags.hasFaceMask(player)) {
 				state.neutralizeHits();
 			}
 		}

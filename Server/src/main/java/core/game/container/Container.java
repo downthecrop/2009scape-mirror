@@ -521,7 +521,7 @@ public class Container {
             int id = buffer.getShort() & 0xFFFF;
             int amount = buffer.getInt();
             int charge = buffer.getInt();
-            if (id >= ItemDefinition.getDefinitions().size() || id < 0 || slot >= items.length || slot < 0) {
+            if (id >= ItemDefinition.getDefinitions().size() || slot >= items.length || slot < 0) {
                 continue;
             }
             Item item = items[slot] = new Item(id, amount, charge);

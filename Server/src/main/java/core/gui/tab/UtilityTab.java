@@ -10,6 +10,7 @@ import core.gui.ConsoleFrame;
 import core.gui.ConsoleTab;
 import core.tools.PlayerLoader;
 import core.tools.StringUtils;
+import kotlin.Unit;
 
 import javax.swing.*;
 import javax.swing.border.EtchedBorder;
@@ -330,7 +331,6 @@ public final class UtilityTab extends ConsoleTab {
     public List<String> itemScanner(Item item) {
         Map<String, Integer> map = new HashMap<>();
         for (Player p : players) {
-            p.getAnimator();
             List<core.game.container.Container> containers = new ArrayList<>(20);
             containers.add(p.getInventory());
             containers.add(p.getBank());
@@ -418,6 +418,7 @@ public final class UtilityTab extends ConsoleTab {
         populating = true;
         players.clear();
         TaskExecutor.execute(() -> {
+            Thread.currentThread().setName("Utility Tab");
             ConsoleFrame.getInstance().getPlayerTab().getPlayerNames().clear();
             ConsoleFrame.getInstance().getPlayerTab().populatePlayerSearch();
             for (String name : ConsoleFrame.getInstance().getPlayerTab().getPlayerNames()) {
@@ -436,6 +437,7 @@ public final class UtilityTab extends ConsoleTab {
             populating = false;
             System.gc();
             lblPlayersLoaded.setText("Players loaded: " + players.size());
+            return Unit.INSTANCE;
         });
     }
 

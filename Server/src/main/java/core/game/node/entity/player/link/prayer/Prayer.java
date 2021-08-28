@@ -12,6 +12,7 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -29,14 +30,11 @@ public final class Prayer {
 	private final List<PrayerType> active = new ArrayList<>(20);
 
 	/**
-	 * Represents the current draining task.
-	 */
-	private final DrainTask task = new DrainTask();
-
-	/**
 	 * Represents the player instance.
 	 */
 	private final Player player;
+
+	private int prayerActiveTicks = 0;
 
 	/**
 	 * Constructs a new {@code Prayer} {@code Object}.
@@ -115,6 +113,31 @@ public final class Prayer {
 		}
 	}
 
+	public void tick() {
+		if(!getActive().isEmpty()) prayerActiveTicks ++;
+		else prayerActiveTicks = 0;
+
+		if(prayerActiveTicks > 0 && prayerActiveTicks % 2 == 0){
+			if(getPlayer().getSkills().getPrayerPoints() == 0){
+				reset();
+				return;
+			}
+			double amountDrain = 0;
+			for(PrayerType type : getActive()){
+				double drain = type.getDrain();
+				double bonus = (1/30f) * getPlayer().getProperties().getBonuses()[12];
+				drain = drain * (1 + bonus);
+				drain = 0.6 / drain;
+				amountDrain += drain;
+			}
+			if(SkillcapePerks.isActive(SkillcapePerks.DIVINE_FAVOR, getPlayer()) && RandomFunction.random(100) <= 10){
+				amountDrain = 0;
+			}
+
+			getPlayer().getSkills().decrementPrayerPoints(amountDrain);
+		}
+	}
+
 	/**
 	 * Gets the skill bonus for the given skill id.
 	 * @param skillId The skill id.
@@ -157,14 +180,6 @@ public final class Prayer {
 	 */
 	public Player getPlayer() {
 		return player;
-	}
-
-	/**
-	 * Gets the task.
-	 * @return The task.
-	 */
-	public DrainTask getTask() {
-		return task;
 	}
 
 	/**

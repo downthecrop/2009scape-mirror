@@ -508,14 +508,6 @@ public class Region {
 	}
 
 	/**
-	 * Gets the viewAmount.
-	 * @return The viewAmount.
-	 */
-	public int getViewAmount() {
-		return viewAmount;
-	}
-
-	/**
 	 * Sets the viewAmount.
 	 * @param viewAmount The viewAmount to set.
 	 */

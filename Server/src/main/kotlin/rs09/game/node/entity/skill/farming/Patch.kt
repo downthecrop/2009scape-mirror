@@ -4,6 +4,8 @@ import core.game.node.entity.player.Player
 import core.tools.RandomFunction
 import rs09.game.system.SystemLogger
 import java.util.concurrent.TimeUnit
+import kotlin.math.ceil
+import kotlin.math.min
 
 class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantable?, var currentGrowthStage: Int, var isDiseased: Boolean, var isDead: Boolean, var isWatered: Boolean, var nextGrowth: Long, var harvestAmt: Int, var isCheckHealth: Boolean) {
     constructor(player: Player, patch: FarmingPatch) : this(player,patch,null,0,false,false,false,0L,0,false)
@@ -11,22 +13,62 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     var diseaseMod = 0
     var compost = CompostType.NONE
     var protectionPaid = false
+    var cropLives = 3
 
     fun setNewHarvestAmount() {
-        if(patch.type == PatchType.ALLOTMENT){
-            harvestAmt = RandomFunction.random(4,17)
-        } else if(patch.type == PatchType.FLOWER) {
-            harvestAmt = when (plantable) {
-                Plantable.LIMPWURT_SEED, Plantable.WOAD_SEED -> 3
-                else -> 1
-            }
-        } else if(patch.type == PatchType.HOPS){
-            harvestAmt = RandomFunction.random(3,35)
-        } else {
-            harvestAmt = RandomFunction.random(3,5)
+        harvestAmt = when (plantable) {
+            Plantable.LIMPWURT_SEED, Plantable.WOAD_SEED -> 3
+            else -> 1
         }
-        if(compost == CompostType.NORMAL) harvestAmt += 1
-        if(compost == CompostType.SUPER) harvestAmt += 2
+        cropLives = 3
+    }
+
+    fun rollLivesDecrement(farmingLevel: Int, magicSecateurs: Boolean){
+        if(patch.type == PatchType.HERB){
+            //authentic formula thanks to released data.
+            var herbSaveLow = when(plantable){
+                Plantable.GUAM_SEED         -> min(24 + farmingLevel, 80)
+                Plantable.MARRENTILL_SEED   -> min(28 + farmingLevel, 80)
+                Plantable.TARROMIN_SEED     -> min(31 + farmingLevel, 80)
+                Plantable.HARRALANDER_SEED  -> min(36 + farmingLevel, 80)
+                Plantable.GOUT_TUBER        -> min(39 + farmingLevel, 80)
+                Plantable.RANARR_SEED       -> min(39 + farmingLevel, 80)
+                Plantable.SPIRIT_WEED_SEED  -> min(43 + farmingLevel, 80)
+                Plantable.TOADFLAX_SEED     -> min(43 + farmingLevel, 80)
+                Plantable.IRIT_SEED         -> min(46 + farmingLevel, 80)
+                Plantable.AVANTOE_SEED      -> min(50 + farmingLevel, 80)
+                Plantable.KWUARM_SEED       -> min(54 + farmingLevel, 80)
+                Plantable.SNAPDRAGON_SEED   -> min(57 + farmingLevel, 80)
+                Plantable.CADANTINE_SEED    -> min(60 + farmingLevel, 80)
+                Plantable.LANTADYME_SEED    -> min(64 + farmingLevel, 80)
+                Plantable.DWARF_WEED_SEED   -> min(67 + farmingLevel, 80)
+                Plantable.TORSTOL_SEED      -> min(71 + farmingLevel, 80)
+                else -> -1
+            }
+
+            if(magicSecateurs) herbSaveLow = ceil(1.10 * herbSaveLow).toInt()
+
+            val rand = RandomFunction.random(256)
+
+            if(rand > herbSaveLow){
+                cropLives -= 1
+            }
+        } else {
+            //inauthentic formulae based on reported averages due to lack of formula
+            var chance = when(patch.type){
+                PatchType.ALLOTMENT -> 8 //average of 8 per life times 3 lives = average 24
+                PatchType.HOPS -> 6 //average of 6 per life times 3 lives = 18
+                PatchType.BELLADONNA -> 2 //average of 2 per life times 3 lives = 6
+                PatchType.CACTUS -> 3 //average of 3 per life times 3 lives = 9
+                else -> return
+            }
+
+            if(magicSecateurs) chance += ceil(1.10 * chance).toInt() //will increase average yield by roughly 3.
+
+            if(RandomFunction.roll(chance)) cropLives -= 1
+        }
+
+        if(cropLives <= 0) clear()
     }
 
     fun isWeedy(): Boolean {
@@ -51,6 +93,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             when(patch.type){
                 PatchType.FRUIT_TREE -> player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset,plantable!!.value + plantable!!.stages + 20)
                 PatchType.BUSH -> player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset,250 + (plantable!!.ordinal - Plantable.REDBERRY_SEED.ordinal))
+                PatchType.CACTUS -> player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, 31)
                 else -> SystemLogger.logWarn("Invalid setting of isCheckHealth for patch type: " + patch.type.name)
             }
         } else {
@@ -77,6 +120,15 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                     else if(isDiseased && !isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, getBelladonnaDiseaseValue())
                     else player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, (plantable?.value ?: 0) + currentGrowthStage)
                 }
+                PatchType.CACTUS -> {
+                    if(isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, getCactusDeathValue())
+                    else if(isDiseased && !isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, getCactusDiseaseValue())
+                }
+                PatchType.HERB -> {
+                    if(isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, getHerbDeathValue())
+                    else if(isDiseased && !isDead) player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, getHerbDiseaseValue())
+                    else player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, (plantable?.value ?: 0) + currentGrowthStage)
+                }
                 else -> {}
             }
         }
@@ -88,6 +140,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         when(patch.type){
             PatchType.BUSH,PatchType.FRUIT_TREE -> player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset,(plantable?.value ?: 0) + currentGrowthStage)
             PatchType.TREE -> player.varpManager.get(patch.varpIndex).clearBitRange(patch.varpOffset + 6, patch.varpOffset + 7)
+            PatchType.CACTUS -> player.varpManager.get(patch.varpIndex).setVarbit(patch.varpOffset, (plantable?.value ?: 0) + currentGrowthStage)
             else -> {}
         }
         updateBit()
@@ -102,7 +155,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         if(plantable == Plantable.POISON_IVY_SEED){
             return (plantable?.value ?: 0) + currentGrowthStage + 12
         } else {
-            return (plantable?.value ?: 0) + currentGrowthStage + 65
+            return (plantable?.value ?: 0) + currentGrowthStage + 64
         }
     }
 
@@ -130,6 +183,30 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         return (plantable?.value ?: 0) + currentGrowthStage + 7
     }
 
+    private fun getCactusDiseaseValue(): Int {
+        return (plantable?.value ?: 0) + currentGrowthStage + 10
+    }
+
+    private fun getCactusDeathValue(): Int {
+        return (plantable?.value ?: 0) + currentGrowthStage + 16
+    }
+
+    private fun getHerbDiseaseValue(): Int {
+        return if (plantable?.value ?: -1 <= 103) {
+            128 + (((plantable?.ordinal ?: 0) - Plantable.GUAM_SEED.ordinal) * 3) + currentGrowthStage - 1
+        } else if (plantable == Plantable.SPIRIT_WEED_SEED) {
+            211 + currentGrowthStage - 1
+        } else {
+            198 + currentGrowthStage -1
+        }
+    }
+
+    private fun getHerbDeathValue(): Int {
+        return if(plantable == Plantable.GOUT_TUBER){
+            201 + currentGrowthStage - 1
+        } else 170 + currentGrowthStage - 1
+    }
+
     private fun grow(){
         if(isWeedy() && getCurrentState() > 0) {
             nextGrowth = System.currentTimeMillis() + 60000
@@ -149,20 +226,20 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             CompostType.SUPER -> 13
         }
 
-        if(RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid && !isFlowerProtected()){
-            //bush, tree, fruit tree can not disease on stage 1(0) of growth.
-            if(!((patch.type == PatchType.BUSH || patch.type == PatchType.TREE || patch.type == PatchType.FRUIT_TREE) && currentGrowthStage == 0)) {
+        if(RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid && !isFlowerProtected() && patch.type != PatchType.EVIL_TURNIP){
+            //bush, tree, fruit tree, herb and cactus can not disease on stage 1(0) of growth.
+            if(!((patch.type == PatchType.BUSH || patch.type == PatchType.TREE || patch.type == PatchType.FRUIT_TREE || patch.type == PatchType.CACTUS || patch.type == PatchType.HERB) && currentGrowthStage == 0)) {
                 isDiseased = true
                 return
             }
         }
 
-        if((patch.type == PatchType.FRUIT_TREE || patch.type == PatchType.TREE || patch.type == PatchType.BUSH) && plantable != null && plantable?.stages == currentGrowthStage + 1){
+        if((patch.type == PatchType.FRUIT_TREE || patch.type == PatchType.TREE || patch.type == PatchType.BUSH || patch.type == PatchType.CACTUS) && plantable != null && plantable?.stages == currentGrowthStage + 1){
             isCheckHealth = true
         }
 
-        if((patch.type == PatchType.FRUIT_TREE || patch.type == PatchType.BUSH) && plantable?.stages == currentGrowthStage){
-            if((patch.type == PatchType.BUSH && getFruitOrBerryCount() < 4) || (patch.type == PatchType.FRUIT_TREE && getFruitOrBerryCount() < 6)){
+        if((patch.type == PatchType.FRUIT_TREE || patch.type == PatchType.BUSH || patch.type == PatchType.CACTUS) && plantable?.stages == currentGrowthStage){
+            if((patch.type == PatchType.BUSH && getFruitOrBerryCount() < 4) || (patch.type == PatchType.FRUIT_TREE && getFruitOrBerryCount() < 6) || (patch.type == PatchType.CACTUS && getFruitOrBerryCount() < 3)){
                 setCurrentState(getCurrentState() + 1)
             }
         }

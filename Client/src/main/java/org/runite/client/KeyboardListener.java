@@ -188,7 +188,7 @@ final class KeyboardListener implements KeyListener, FocusListener {
       try {
     	 
          if(TextureOperation33.aClass148_3049 != null) {
-            int var2 = Class79.method1386(var1);
+            int var2 = CSConfigCachefile.method1386(var1);
             if(var2 >= 0) {
                int var3 = 1 + Class25.anInt491 & 127;
                if(var3 != Class3_Sub28_Sub9.anInt3620) {

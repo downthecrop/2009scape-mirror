@@ -44,7 +44,7 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 	/**
 	 * The target location.
 	 */
-	private static final Location TARGET = Location.create(2842, 3545, 1);
+	public static final Location TARGET = Location.create(2842, 3545, 1);
 
 	/**
 	 * The shield item id.
@@ -144,7 +144,8 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 			});
 			Projectile.create(Location.create(2842, 3554, 1), Location.create(2842, 3545, 1), attack.graphicId, 70, 32, 80, 220, 20, 11).send();
 			Scenery object = RegionManager.getObject(Location.create(2840, 3552, 1));
-			SceneryBuilder.replace(object, object.transform(attack.objectId), 4);
+			if(object != null)
+				SceneryBuilder.replace(object, object.transform(attack.objectId), 4);
 			Audio sound = new Audio(1911);
 			for (Player p : players) {
 				p.getAudioManager().send(sound);

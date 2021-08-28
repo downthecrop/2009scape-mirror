@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.slayer.dungeon;
 
 import core.cache.def.impl.NPCDefinition;
-import core.game.node.entity.skill.slayer.Equipment;
+import core.game.node.entity.skill.slayer.SlayerEquipmentFlags;
 import core.game.interaction.Option;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
@@ -75,7 +75,7 @@ public final class LumbridgeDungeon extends MapZone implements Plugin<Object> {
 	 * @return {@code True} if so.
 	 */
 	private boolean hasHelmet(final Player player) {
-		return Equipment.SPINY_HELMET.hasEquipment(player);
+		return SlayerEquipmentFlags.hasSpinyHelmet(player);
 	}
 
 	@Override

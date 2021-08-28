@@ -700,20 +700,6 @@ class PlayerSaver (val player: Player){
     fun saveSlayer(root: JSONObject){
         val slayer = JSONObject()
         val slayerManager = player.slayer
-        if(slayerManager.hasStarted()){
-            slayer.put("master",slayerManager.master.npc.toString())
-        }
-        if(slayerManager.hasTask()){
-            slayer.put("taskId",slayerManager.task.ordinal.toString())
-            slayer.put("taskAmount",slayerManager.amount.toString())
-        }
-        slayer.put("points",slayerManager.slayerPoints.toString())
-        slayer.put("taskStreak",slayerManager.taskCount.toString())
-        val learnedRewards = JSONArray()
-        slayerManager.learned.map {
-            learnedRewards.add(it)
-        }
-        slayer.put("learned_rewards",learnedRewards)
         if(slayerManager.removed.isNotEmpty()) {
             val removedTasks = JSONArray()
             slayerManager.removed.map {
@@ -721,8 +707,11 @@ class PlayerSaver (val player: Player){
             }
             slayer.put("removedTasks",removedTasks)
         }
+        slayer.put("taskStreak",slayerManager.taskCount.toString())
         slayer.put("totalTasks",slayerManager.totalTasks.toString())
-        slayer.put("canEarnPoints",slayerManager.isCanEarnPoints)
+        slayer.put("equipmentFlags",slayerManager.flags.equipmentFlags)
+        slayer.put("taskFlags", slayerManager.flags.taskFlags)
+        slayer.put("rewardFlags", slayerManager.flags.rewardFlags)
         root.put("slayer",slayer)
     }
 

@@ -1,10 +1,16 @@
 package core.game.content.dialogue;
 
+import api.ContentAPI;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
 import core.game.node.item.Item;
+import org.rs09.consts.NPCs;
+import rs09.game.content.quest.members.naturespirit.NSDrezelDialogue;
+import rs09.game.system.SystemLogger;
+
+import static rs09.tools.DialogueConstKt.END_DIALOGUE;
 
 /**
  * Represents the dialogue plugin used for the drezel monument.
@@ -44,7 +50,7 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		final Quest quest = player.getQuestRepository().getQuest("Priest in Peril");
+		Quest quest = player.getQuestRepository().getQuest("Priest in Peril");
 		if (quest.getStage(player) == 17) {
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Ah, " + player.getUsername() + ". I see you finally made it down here.", "Things are worse than I feared. I'm not sure if I will", "be able to repair the damage.");
 			stage = 900;
@@ -64,9 +70,23 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "So can I pass through that barrier now?");
 			stage = 400;
 			return true;
-		} else {
+		}
+
+		/*else {
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Greetings again adventurer, How go your travels in", "Morytania? Is it as evil as I have heard?");
 			stage = 420;
+		}*/
+
+		quest = player.getQuestRepository().getQuest("Nature Spirit");
+
+		if(quest.getStage(player) <= 5){
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Greetings again adventurer, How go your travels in", "Morytania? Is it as evil as I have heard?");
+			stage = 420;
+		} else if (quest.getStage(player) < 100){
+			ContentAPI.openDialogue(player, new NSDrezelDialogue(), npc);
+		} else {
+			npcl(FacialExpression.NEUTRAL, "I heard you finished your quest with Filliman! Great work!");
+			stage = END_DIALOGUE;
 		}
 		return true;
 	}
@@ -108,15 +128,36 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 420:
-			interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Well, I'm going to look around a bit more.");
+			options("Well, I'm going to look around a bit more.", "Is there anything else interesting to do around here?");
 			stage = 421;
 			break;
 		case 421:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, that sounds like a good idea. Don't get into any", "trouble though!");
-			stage = 422;
+			switch(buttonId){
+				case 1:
+					playerl(FacialExpression.FRIENDLY, "Well, I'm going to look around a bit more.");
+					stage++;
+					break;
+				case 2:
+					playerl(FacialExpression.HALF_THINKING, "Is there anything else interesting to do around here?");
+					stage = 425;
+					break;
+			}
 			break;
 		case 422:
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Well, that sounds like a good idea. Don't get into any", "trouble though!");
+			stage = 423;
+			break;
+		case 423:
 			end();
+			break;
+		case 425:
+			npcl(FacialExpression.HALF_THINKING, "Well, not a great deal... but there is something you can do for me if you're interested. Though it is quite dangerous.");
+			stage++;
+			break;
+		case 426:
+			end();
+			player.getDialogueInterpreter().open(new NSDrezelDialogue(), npc);
+			player.getDialogueInterpreter().handle(0,0);
 			break;
 		case 120:
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I need " + player.getGameAttributes().getAttribute("priest-in-peril:rune", 50) + " more.");
@@ -170,7 +211,7 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 			stage = 901;
 			break;
 		case 901:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "From what I can tell, after you killed the guard dog", "who protected the entrance to the mouments, those", "Zamorakians forced the door into the main chamber");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "From what I can tell, after you killed the guard dog", "who protected the entrance to the monuments, those", "Zamorakians forced the door into the main chamber");
 			stage = 902;
 			break;
 		case 902:
@@ -239,6 +280,6 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 
 	@Override
 	public int[] getIds() {
-		return new int[] { 1049 };
+		return new int[] { NPCs.DREZEL_7707 };
 	}
 }
