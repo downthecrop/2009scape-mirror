@@ -114,9 +114,10 @@ class ZaffPlugin : OptionHandler() {
                             "Can I have another ring?"
                         )
                         stage = 1
+                    } else {
+                        interpreter.sendOptions("Select an Option", "Yes, please.", "No, thank you.")
+                        stage = 1
                     }
-                    interpreter.sendOptions("Select an Option", "Yes, please.", "No, thank you.")
-                    stage = 1
                 }
                 1 -> when (buttonId) {
                     1 -> {
@@ -134,9 +135,10 @@ class ZaffPlugin : OptionHandler() {
                         } else if (quest!!.getStage(player) == 80) {
                             player("We did it! We beat Surok!")
                             stage = 200
+                        } else {
+                            interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Can I have another ring?")
+                            stage = 50
                         }
-                        interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Can I have another ring?")
-                        stage = 50
                     }
                 }
                 10 -> {
