@@ -35,7 +35,8 @@ public enum FinishedPotion {
 	STRONG_WEAPON_POISON(UnfinishedPotion.STRONG_WEAPON_POISON, new Item(223), 73, 165, new Item(5937)),
 	SUPER_STRONG_WEAPON_POISON(UnfinishedPotion.SUPER_STRONG_WEAPON_POISON, new Item(6018), 82, 190, new Item(5940)),
 	STRONG_ANTIPOISON(UnfinishedPotion.STRONG_ANTIPOISON, new Item(6049), 68, 155, new Item(5945)),
-	SUPER_STRONG_ANTIPOISON(UnfinishedPotion.SUPER_STRONG_ANTIPOISON, new Item(6051), 79, 177.5, new Item(5954));
+	SUPER_STRONG_ANTIPOISON(UnfinishedPotion.SUPER_STRONG_ANTIPOISON, new Item(6051), 79, 177.5, new Item(5954)),
+	BLAMISH_OIL(UnfinishedPotion.HARRALANDER, new Item(1581), 25, 80, new Item(1582));
 
 	/**
 	 * Represents the unfinished potion.
