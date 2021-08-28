@@ -1,11 +1,16 @@
 package rs09.game.interaction.region
 
 import api.ContentAPI
+import core.game.content.global.action.DoorActionHandler
 import core.game.node.entity.skill.agility.AgilityHandler
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.launch
+import org.rs09.consts.NPCs
+import org.rs09.consts.Scenery
 import rs09.game.interaction.InteractionListener
 import kotlin.random.Random
 
@@ -17,7 +22,7 @@ import kotlin.random.Random
 
 class MorytaniaListeners : InteractionListener() {
 
-    val GROTTO_ENTRANCE = 3516
+    val SWAMP_GATES = intArrayOf(Scenery.GATE_3506, Scenery.GATE_3507)
     val GROTTO_EXIT = intArrayOf(3525, 3526)
     val GROTTO_BRIDGE = 3522
     val outside = Location.create(3439, 3337, 0)
@@ -30,10 +35,26 @@ class MorytaniaListeners : InteractionListener() {
     private val splashGFX = Graphics(68)
 
     override fun defineListeners() {
-/*        on(GROTTO_ENTRANCE,SCENERY,"enter"){ player, node ->
-            player.teleport(inside)
+
+        on(SWAMP_GATES, SCENERY, "open"){player, node ->
+            if(player.location.y == 3457){
+                DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                GlobalScope.launch {
+                    ContentAPI.findLocalNPC(player, NPCs.ULIZIUS_1054)?.sendChat("Oh my! You're still alive!", 2)
+                }
+            } else {
+                if (player.questRepository.hasStarted("Nature Spirit")) {
+                    DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
+                } else {
+                    ContentAPI.sendNPCDialogue(
+                        player,
+                        NPCs.ULIZIUS_1054,
+                        "I'm sorry, but I'm afraid it's too dangerous to let you through this gate right now."
+                    )
+                }
+            }
             return@on true
-        }*/
+        }
 
         on(GROTTO_EXIT,SCENERY,"exit"){ player, node ->
             player.teleport(outside)
