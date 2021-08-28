@@ -10,6 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.object.Scenery;
 import core.game.node.object.SceneryBuilder;
 import core.game.system.task.Pulse;
+import core.game.world.map.path.Pathfinder;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -90,10 +91,10 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
 	 * @param object The door.
 	 */
 	private void openGates(Player player, final Scenery object) {
-		if (object.getCharge() == 88) {
+		if (object.getCharge() == 0) {
 			return;
 		}
-		object.setCharge(88);
+		object.setCharge(0);
 		SceneryBuilder.replace(object, object.transform(191), 4);
 		SceneryBuilder.add(new Scenery(192, Location.create(2462, 3383, 0)), 4);
 		Location start = Location.create(2461, 3382, 0);
@@ -103,7 +104,7 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
 			start = end;
 			end = s;
 		}
-		AgilityHandler.walk(player, -1, start, end, new Animation(1426), 0, null);
+		Pathfinder.find(player, end).walk(player);
 		GameWorld.getPulser().submit(new Pulse(4) {
 			@Override
 			public boolean pulse() {
