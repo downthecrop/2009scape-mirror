@@ -4,7 +4,7 @@ import core.game.content.global.action.DoorActionHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 
 /**
  * Represents the door peril dialogue.

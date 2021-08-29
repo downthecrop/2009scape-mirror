@@ -7,7 +7,7 @@ import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.node.entity.skill.construction.Hotspot;

@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.construction.Decoration;
 import core.game.node.entity.skill.runecrafting.Rune;
 import core.game.node.item.Item;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;

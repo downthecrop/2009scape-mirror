@@ -1,7 +1,7 @@
 package rs09.game.interaction.`object`
 
-import core.game.node.`object`.Scenery
-import core.game.node.`object`.SceneryBuilder
+import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryBuilder
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation

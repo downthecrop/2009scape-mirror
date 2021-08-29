@@ -8,7 +8,7 @@ import core.game.content.global.action.ClimbActionHandler
 import core.game.content.global.action.DoorActionHandler
 import core.game.content.quest.miniquest.barcrawl.BarcrawlManager
 import core.game.node.Node
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.agility.AgilityCourse

@@ -8,7 +8,7 @@ import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
 import core.game.ge.OfferState
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.skill.Skills

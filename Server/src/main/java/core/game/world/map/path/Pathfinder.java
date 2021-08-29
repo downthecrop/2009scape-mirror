@@ -3,7 +3,7 @@ package core.game.world.map.path;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.item.GroundItem;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import rs09.game.world.map.path.SmartPathfinder;

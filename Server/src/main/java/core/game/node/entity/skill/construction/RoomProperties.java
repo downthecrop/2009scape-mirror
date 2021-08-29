@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.construction;
 
 
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.world.map.Region;
 import core.game.world.map.RegionChunk;
 import core.game.world.map.RegionManager;

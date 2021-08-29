@@ -1,7 +1,7 @@
 package rs09.game.content.global.worldevents.shootingstar
 
-import core.game.node.`object`.Scenery
-import core.game.node.`object`.SceneryBuilder
+import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
