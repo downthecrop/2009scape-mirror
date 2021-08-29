@@ -2,7 +2,7 @@ package core.game.world.map.build;
 
 import core.cache.def.impl.SceneryDefinition;
 import core.cache.misc.buffer.ByteBufferUtils;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.game.world.map.Region;
 import core.game.world.map.RegionManager;

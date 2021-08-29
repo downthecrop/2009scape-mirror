@@ -12,7 +12,7 @@ import core.game.node.entity.player.link.HintIconManager;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 

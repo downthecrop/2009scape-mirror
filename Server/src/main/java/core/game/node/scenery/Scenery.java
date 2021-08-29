@@ -1,4 +1,4 @@
-package core.game.node.object;
+package core.game.node.scenery;
 
 import core.cache.def.impl.VarbitDefinition;
 import core.cache.def.impl.SceneryDefinition;

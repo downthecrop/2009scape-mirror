@@ -6,7 +6,7 @@ import core.game.node.entity.skill.agility.AgilityShortcut;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;

@@ -5,7 +5,7 @@ import core.game.interaction.Interaction;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.tools.StringUtils;

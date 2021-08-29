@@ -8,7 +8,7 @@ import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.skill.magic.MagicSpell;
 import core.game.node.entity.skill.magic.Runes;
 import core.game.node.item.Item;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;

@@ -16,7 +16,7 @@ import core.game.node.entity.npc.agg.AggressiveHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.ActivityData;
 import core.game.node.entity.skill.summoning.familiar.Familiar;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
