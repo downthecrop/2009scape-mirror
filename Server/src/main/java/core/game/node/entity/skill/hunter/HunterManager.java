@@ -3,7 +3,7 @@ package core.game.node.entity.skill.hunter;
 import core.game.node.entity.skill.Skills;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 
 import java.util.ArrayList;
 import java.util.Iterator;

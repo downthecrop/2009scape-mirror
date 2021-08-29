@@ -1,8 +1,8 @@
 package core.game.node.entity.npc.other;
 
 import core.game.node.entity.npc.AbstractNPC;
-import core.game.node.object.Scenery;
-import core.game.node.object.SceneryBuilder;
+import core.game.node.scenery.Scenery;
+import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.plugin.Initializable;

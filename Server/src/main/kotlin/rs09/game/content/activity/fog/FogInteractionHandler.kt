@@ -4,7 +4,7 @@ import core.game.content.global.action.ClimbActionHandler
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.node.Node
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.plugin.Plugin

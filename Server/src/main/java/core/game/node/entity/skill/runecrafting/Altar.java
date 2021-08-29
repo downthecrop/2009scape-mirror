@@ -2,7 +2,7 @@ package core.game.node.entity.skill.runecrafting;
 
 import core.cache.def.impl.ItemDefinition;
 import core.game.node.entity.player.Player;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 
 /**
  * Represents an altar an it's relative information(corresponding ruin, etc)

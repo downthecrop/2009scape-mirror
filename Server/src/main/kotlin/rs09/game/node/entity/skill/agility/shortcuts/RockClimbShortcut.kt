@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.agility.shortcuts
 
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.impl.ForceMovement
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills

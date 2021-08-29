@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.music.MusicZone;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.world.map.*;
 import core.game.world.map.zone.RegionZone;
 import core.game.world.map.zone.ZoneBorders;

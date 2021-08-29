@@ -6,7 +6,7 @@ import core.cache.def.impl.SceneryDefinition;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.item.Item;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 
 /**
  * Represents an Interaction option.

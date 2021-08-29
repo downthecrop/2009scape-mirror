@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.cooking
 
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import org.rs09.consts.Items

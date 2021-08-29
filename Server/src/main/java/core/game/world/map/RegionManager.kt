@@ -2,7 +2,7 @@ package core.game.world.map
 
 import core.game.world.map.RegionManager
 import core.game.world.map.RegionPlane
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
