@@ -1,4 +1,4 @@
-package core.game.node.object;
+package core.game.node.scenery;
 
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;

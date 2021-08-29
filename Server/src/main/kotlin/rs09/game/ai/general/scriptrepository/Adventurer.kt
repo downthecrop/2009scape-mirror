@@ -2,7 +2,7 @@ package rs09.game.ai.general.scriptrepository
 
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.combat.CombatStyle
 import rs09.game.node.entity.combat.CombatSwingHandler
 import core.game.node.entity.skill.Skills

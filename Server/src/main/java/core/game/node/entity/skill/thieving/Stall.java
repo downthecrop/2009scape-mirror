@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.thieving;
 
 import core.game.node.item.Item;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.tools.RandomFunction;
 
 import java.util.*;

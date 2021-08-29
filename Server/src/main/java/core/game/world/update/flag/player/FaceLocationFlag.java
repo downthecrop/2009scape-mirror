@@ -1,7 +1,7 @@
 package core.game.world.update.flag.player;
 
 import core.game.node.Node;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.UpdateFlag;
 import core.net.packet.IoBuffer;

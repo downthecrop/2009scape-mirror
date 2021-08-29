@@ -3,7 +3,7 @@ package core.game.interaction;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;

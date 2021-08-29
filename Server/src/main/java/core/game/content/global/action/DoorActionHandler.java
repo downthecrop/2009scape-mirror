@@ -1,13 +1,12 @@
 package core.game.content.global.action;
 
-import core.game.interaction.DestinationFlag;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.player.link.diary.DiaryType;
-import core.game.node.object.Constructed;
-import core.game.node.object.Scenery;
-import core.game.node.object.SceneryBuilder;
+import core.game.node.scenery.Constructed;
+import core.game.node.scenery.Scenery;
+import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;

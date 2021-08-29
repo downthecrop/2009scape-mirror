@@ -1,7 +1,7 @@
 package core.net.packet.out;
 
 import core.game.node.entity.player.Player;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.net.packet.IoBuffer;

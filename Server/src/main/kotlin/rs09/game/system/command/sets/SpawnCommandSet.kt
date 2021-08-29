@@ -1,8 +1,8 @@
 package rs09.game.system.command.sets
 
 import core.cache.Cache
-import core.game.node.`object`.Scenery
-import core.game.node.`object`.SceneryBuilder
+import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
 import rs09.game.system.SystemLogger

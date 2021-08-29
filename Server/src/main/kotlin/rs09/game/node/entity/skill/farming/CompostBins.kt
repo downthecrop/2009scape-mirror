@@ -2,7 +2,7 @@ package rs09.game.node.entity.skill.farming
 
 import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
 import rs09.game.node.entity.state.newsys.states.FarmingState
 

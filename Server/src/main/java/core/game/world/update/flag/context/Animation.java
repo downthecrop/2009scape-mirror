@@ -2,7 +2,7 @@ package core.game.world.update.flag.context;
 
 import core.cache.def.impl.AnimationDefinition;
 import core.game.node.entity.impl.Animator.Priority;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 
 /**
  * Represents an animation.

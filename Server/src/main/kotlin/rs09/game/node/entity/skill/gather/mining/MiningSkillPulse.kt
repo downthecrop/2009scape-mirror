@@ -8,8 +8,8 @@ import core.game.content.global.SkillingPets
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage
 import core.game.node.Node
-import core.game.node.`object`.Scenery
-import core.game.node.`object`.SceneryBuilder
+import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.drop.DropFrequency
 import core.game.node.entity.player.Player

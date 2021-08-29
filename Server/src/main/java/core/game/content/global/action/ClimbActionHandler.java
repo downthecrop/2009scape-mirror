@@ -5,7 +5,7 @@ import org.rs09.consts.Items;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;

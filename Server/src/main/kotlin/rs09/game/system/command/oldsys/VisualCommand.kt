@@ -4,8 +4,8 @@ import api.ContentAPI
 import core.cache.Cache
 import core.game.container.access.InterfaceContainer
 import core.game.content.quest.tutorials.tutorialisland.CharacterDesign
-import core.game.node.`object`.Scenery
-import core.game.node.`object`.SceneryBuilder
+import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC

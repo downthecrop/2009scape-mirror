@@ -11,7 +11,7 @@ import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.interaction.Option
 import core.game.node.Node
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -41,7 +41,6 @@ import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
 import java.util.*
 import java.util.concurrent.CountDownLatch
-import java.util.concurrent.Executors
 import kotlin.math.pow
 import kotlin.math.sqrt
 

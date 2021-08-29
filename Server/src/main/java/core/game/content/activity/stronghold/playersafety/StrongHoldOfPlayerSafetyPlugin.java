@@ -4,7 +4,7 @@ import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.component.ComponentPlugin;
 import core.game.node.entity.player.Player;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.CameraContext;

@@ -2,7 +2,7 @@ package rs09.game.node.entity.skill.cooking
 
 import api.ContentAPI
 import core.cache.def.impl.ItemDefinition
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.player.link.RunScript
 import core.game.node.entity.skill.cooking.CookableItems
 import core.game.node.entity.skill.cooking.CookingRewrite.Companion.cook
