@@ -8,7 +8,6 @@ import core.game.world.map.Location
 import rs09.ServerStore.getBoolean
 import rs09.ServerStore.getInt
 import rs09.ServerStore.getString
-import rs09.game.system.SystemLogger
 import rs09.game.world.repository.Repository
 
 /**
