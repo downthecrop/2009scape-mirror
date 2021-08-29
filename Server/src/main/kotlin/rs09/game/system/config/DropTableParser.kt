@@ -5,6 +5,7 @@ import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import rs09.ServerConstants
+import rs09.game.content.global.NPCDropTable
 import rs09.game.content.global.WeightBasedTable
 import rs09.game.content.global.WeightedItem
 import rs09.game.system.SystemLogger
@@ -24,7 +25,7 @@ class DropTableParser {
                 val def = NPCDefinition.forId(n.toInt()).dropTables
                 def ?: continue
                 parseTable(tab["main"] as JSONArray, def.table, false)
-                parseTable(tab["charm"] as JSONArray, def.table, false)
+                parseTable(tab["charm"] as JSONArray, def.table, false, true)
                 parseTable(tab["default"] as JSONArray,def.table,true)
                 count++
             }
@@ -32,7 +33,7 @@ class DropTableParser {
         SystemLogger.logInfo("Parsed $count drop tables.")
     }
 
-    private fun parseTable(data: JSONArray, destTable: WeightBasedTable, isAlways: Boolean) {
+    private fun parseTable(data: JSONArray, destTable: NPCDropTable, isAlways: Boolean, isCharms: Boolean = false) {
         for(it in data){
             val item = it as JSONObject
             val id = item["id"].toString().toInt()
@@ -40,7 +41,8 @@ class DropTableParser {
             val maxAmount = item["maxAmount"].toString().toInt()
             val weight = item["weight"].toString().toDouble()
             val newItem = WeightedItem(id,minAmount,maxAmount,weight.toDouble(),isAlways)
-            destTable.add(newItem)
+            if(isCharms) destTable.addToCharms(newItem)
+            else destTable.add(newItem)
         }
     }
 }

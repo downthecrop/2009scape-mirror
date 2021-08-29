@@ -4,7 +4,7 @@ import api.ContentAPI
 import rs09.plugin.PluginManager.definePlugin
 import rs09.tools.stringtools.colorize
 import rs09.game.system.SystemLogger.logInfo
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player

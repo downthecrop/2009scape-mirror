@@ -4,7 +4,7 @@ import core.game.content.global.SkillingPets;
 import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 
 /**
  * Handles the dismantling of a trap.

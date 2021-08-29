@@ -1,9 +1,11 @@
 package rs09.game.interaction.npc
 
+import core.game.content.quest.miniquest.barcrawl.BarcrawlType
 import core.game.node.entity.npc.NPC
 import rs09.game.content.activity.gnomecooking.*
 import rs09.game.content.ame.RandomEvents
 import rs09.game.interaction.InteractionListener
+import rs09.game.system.SystemLogger
 
 /**
  * Handles the NPC talk-to option.
@@ -11,7 +13,20 @@ import rs09.game.interaction.InteractionListener
  */
 class NPCTalkListener : InteractionListener() {
 
+    val barCrawlNPCs = intArrayOf(733,848,735,739,737,738,731,568,3217,736,734)
+
     override fun defineListeners() {
+
+        on(barCrawlNPCs, NPC, "talk-to", "talk"){player, node ->
+            val type = BarcrawlType.forId(node.id)
+
+            if (player.barcrawlManager.isFinished || !player.barcrawlManager.isStarted || player.barcrawlManager.isCompleted(type!!.ordinal)) {
+                player.dialogueInterpreter.open(node.id, node)
+            } else {
+                player.dialogueInterpreter.open("barcrawl dialogue", node.id, type)
+            }
+            return@on true
+        }
 
         on(NPC,"talk-to","talk"){player,node ->
             val npc = node.asNpc()

@@ -1,7 +1,7 @@
 package rs09.game.node.entity.skill.magic
 
 import core.game.component.Component
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager

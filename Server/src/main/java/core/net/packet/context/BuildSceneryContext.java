@@ -1,7 +1,7 @@
 package core.net.packet.context;
 
 import core.game.node.entity.player.Player;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.net.packet.Context;
 
 /**

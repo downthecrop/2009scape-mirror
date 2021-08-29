@@ -2,7 +2,7 @@ package rs09.game.content.global.worldevents.shootingstar
 
 import api.ContentAPI
 import core.game.content.global.worldevents.shootingstar.ScoreboardManager
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills

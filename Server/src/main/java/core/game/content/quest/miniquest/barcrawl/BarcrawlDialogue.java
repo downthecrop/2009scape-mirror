@@ -2,6 +2,7 @@ package core.game.content.quest.miniquest.barcrawl;
 
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
+import core.plugin.Initializable;
 import rs09.game.world.GameWorld;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
@@ -11,12 +12,13 @@ import core.game.content.dialogue.DialoguePlugin;
  * @author 'Vexia
  * @version 1.0
  */
+@Initializable
 public final class BarcrawlDialogue extends DialoguePlugin {
 
     /**
      * The npc id being used.
      */
-    private BarcrawlPlugin.BarcrawlType type;
+    private BarcrawlType type;
 
     /**
      * The npc id.
@@ -48,7 +50,7 @@ public final class BarcrawlDialogue extends DialoguePlugin {
     @Override
     public boolean open(Object... args) {
         npcId = (Integer) args[0];
-        type = (BarcrawlPlugin.BarcrawlType) args[1];
+        type = (BarcrawlType) args[1];
         player("I'm doing Alfred Grimhand's Barcrawl.");
         return true;
     }

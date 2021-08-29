@@ -7,8 +7,7 @@ import core.game.node.entity.skill.runecrafting.EnchantTiaraPulse;
 import core.game.node.entity.skill.runecrafting.Talisman;
 import core.game.interaction.NodeUsageEvent;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.RunScript;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import kotlin.Unit;
 
 /**

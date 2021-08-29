@@ -1,6 +1,6 @@
 package core.game.world.update.flag.chunk;
 
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.world.update.flag.UpdateFlag;
 import core.net.packet.IoBuffer;
 import core.net.packet.out.ClearScenery;

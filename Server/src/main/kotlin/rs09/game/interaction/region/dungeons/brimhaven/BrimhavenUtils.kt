@@ -2,8 +2,8 @@ package rs09.game.interaction.region.dungeons.brimhaven
 
 import api.ContentAPI
 import core.game.content.global.action.ClimbActionHandler
-import core.game.node.`object`.Scenery
-import core.game.node.`object`.SceneryBuilder
+import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
