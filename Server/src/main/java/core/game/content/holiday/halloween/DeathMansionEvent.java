@@ -33,7 +33,7 @@ import core.game.node.entity.player.link.emote.Emotes;
 import core.game.node.entity.player.link.request.RequestType;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;

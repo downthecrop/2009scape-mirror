@@ -2,7 +2,7 @@ package core.game.interaction.item.withobject;
 
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 

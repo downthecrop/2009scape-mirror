@@ -1,7 +1,7 @@
 package rs09.game.content.quest.members.thelostcity
 
 import core.game.content.quest.members.lostcity.TreeSpiritNPC
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.skill.gather.GatheringSkillPulse
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.world.map.Location

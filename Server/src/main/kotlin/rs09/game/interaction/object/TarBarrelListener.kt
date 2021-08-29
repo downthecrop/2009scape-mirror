@@ -1,6 +1,6 @@
 package rs09.game.interaction.`object`
 
-import core.game.node.`object`.SceneryBuilder
+import core.game.node.scenery.SceneryBuilder
 import core.game.node.item.Item
 import core.tools.RandomFunction
 import org.rs09.consts.Items

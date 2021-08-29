@@ -1,7 +1,7 @@
 package rs09.game.content.quest.members.thefremenniktrials
 
 import core.game.content.dialogue.FacialExpression
-import core.game.node.`object`.Scenery
+import core.game.node.scenery.Scenery
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player

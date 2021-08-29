@@ -1,7 +1,7 @@
 package core.game.content.activity.pyramidplunder;
 
 import core.game.node.entity.player.Player;
-import core.game.node.object.Scenery;
+import core.game.node.scenery.Scenery;
 
 /**
  * Object wrapper for pyramid plunder nodes
