@@ -45730,7 +45730,7 @@
     "id": "4699"
   },
   {
-    "examine": "Unfuelled: You need to add lamp oil before you can use it. Unlit: A bullseye lantern with a sapphire for a lens. Lit: A lantern casting a bright blue beam.",
+    "examine": "You need to add lamp oil before you can use it.",
     "durability": null,
     "name": "Sapphire lantern",
     "low_alchemy": "240",
@@ -45740,7 +45740,7 @@
     "id": "4700"
   },
   {
-    "examine": "Unfuelled: You need to add lamp oil before you can use it. Unlit: A bullseye lantern with a sapphire for a lens. Lit: A lantern casting a bright blue beam.",
+    "examine": "A bullseye lantern with a sapphire for a lens.",
     "durability": null,
     "name": "Sapphire lantern",
     "low_alchemy": "240",
@@ -45750,7 +45750,7 @@
     "id": "4701"
   },
   {
-    "examine": "Unfuelled: You need to add lamp oil before you can use it. Unlit: A bullseye lantern with a sapphire for a lens. Lit: A lantern casting a bright blue beam.",
+    "examine": "A lantern casting a bright blue beam.",
     "durability": null,
     "name": "Sapphire lantern",
     "low_alchemy": "240",
