@@ -80,7 +80,7 @@ class LanternCrafting : UseWithHandler(36,38,4525,4542,1607){
                 if(player.skills.getLevel(Skills.CRAFTING) >= 20){
                     removeEventItems(player,event)
                     player.inventory.add(Item(4700))
-                    player.sendMessage("You fashion the gem into a lens and fit it onto the lantern")
+                    player.sendMessage("You fashion the gem into a lens and fit it onto the lantern.")
                 } else {
                     player.sendMessage("You require a crafting level of 20 to use a gem as a lens.")
                 }
