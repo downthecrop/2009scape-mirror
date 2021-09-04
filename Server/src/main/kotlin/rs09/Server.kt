@@ -95,7 +95,6 @@ object Server {
         GEAutoStock.autostock()
         val scanner = Scanner(System.`in`)
 
-        ServerMonitor.open()
         running = true
         GlobalScope.launch {
             while(scanner.hasNextLine()){
