@@ -7,6 +7,7 @@ import core.gui.ConsoleFrame
 import core.net.NioReactor
 import core.net.amsc.WorldCommunicator
 import core.tools.TimeStamp
+import gui.ServerMonitor
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -93,6 +94,8 @@ object Server {
 
         GEAutoStock.autostock()
         val scanner = Scanner(System.`in`)
+
+        ServerMonitor.open()
         running = true
         GlobalScope.launch {
             while(scanner.hasNextLine()){
