@@ -115,6 +115,7 @@ class DisconnectionQueue {
      */
     @JvmOverloads
     fun add(player: Player, clear: Boolean = false) {
+        if(queue[player.name] != null) return
         queue[player.name] = DisconnectionEntry(player, clear)
     }
 

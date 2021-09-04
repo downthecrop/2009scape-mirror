@@ -5,6 +5,8 @@ import core.game.system.SystemManager
 import core.game.system.SystemState
 import core.game.system.task.Pulse
 import core.plugin.CorePluginTypes.Managers
+import gui.GuiEvent
+import gui.ServerMonitor
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -95,9 +97,12 @@ class MajorUpdateWorker {
             }
 
             val end = System.currentTimeMillis()
+            ServerMonitor.eventQueue.add(GuiEvent.UpdateTickTime(end - start))
+            ServerMonitor.eventQueue.add(GuiEvent.UpdatePulseCount(GameWorld.Pulser.TASKS.size))
             Thread.sleep(max(600 - (end - start), 0))
         }
     }
+
     fun start() {
         if(!started){
             worker.start()
