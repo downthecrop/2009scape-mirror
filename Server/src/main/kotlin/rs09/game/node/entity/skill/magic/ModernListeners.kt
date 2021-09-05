@@ -244,6 +244,7 @@ class ModernListeners : SpellListener("modern"){
 
     private fun sendTeleport(player: Player, xp: Double, location: Location){
         if(player.locks.isTeleportLocked){
+            player.removeAttribute("spell:runes")
             player.sendMessage("A magical force prevents you from teleporting.")
             return
         }
@@ -256,6 +257,7 @@ class ModernListeners : SpellListener("modern"){
 
     private fun attemptHouseTeleport(player: Player){
         if(player.locks.isTeleportLocked){
+            player.removeAttribute("spell:runes")
             player.sendMessage("A magical force prevents you from teleporting.")
             return
         }
