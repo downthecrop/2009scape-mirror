@@ -134,7 +134,7 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 					player.animate(Animation.create(1652));
 					player.getInventory().remove(new Item(4252));
 					player.getInventory().add(item);
-					player.sendMessage("Your ectophial vial automatically refills.");
+					player.sendMessage("You refill the ectophial from the Ectofuntus.");
 				}
 				return true;
 			}
