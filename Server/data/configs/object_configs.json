@@ -20389,7 +20389,7 @@
   },
   {
     "examine": "Contains traces of summoning energy.",
-    "ids": "29945"
+    "ids": "29945,29947"
   },
   {
     "examine": "I wonder what this spooky contains.",
@@ -20586,5 +20586,17 @@
   {
     "examine": "A wooden barrel for storage.",
     "ids": "31136"
+  },
+  {
+    "examine": "A home for baby creatures.",
+    "ids": "32312"
+  },
+  {
+    "examine": "Must have been laid by a huge bird.",
+    "ids": "32313"
+  },
+  {
+    "examine": "Stops bits of building falling on me.",
+    "ids": "37451"
   }
 ]
