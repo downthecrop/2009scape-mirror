@@ -33,7 +33,7 @@ public final class HerbCleanPlugin extends OptionHandler {
 		}
 		final Herbs herb = Herbs.forItem((Item) node);
 		if (player.getSkills().getLevel(Skills.HERBLORE) < herb.getLevel()) {
-			player.getPacketDispatch().sendMessage("You need a herblore level " + herb.getLevel() + " to clean this herb.");
+			player.getPacketDispatch().sendMessage("You need level " + herb.getLevel() + " Herblore to clean the " + herb.getProduct().getName().replace("Clean", "Grimy") + ".");
 			return true;
 		}
 		double exp = herb.getExperience();
