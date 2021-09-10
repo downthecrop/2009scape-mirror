@@ -507,7 +507,7 @@ public abstract class Entity extends Node {
 	 * @param hit the hit.
 	 * @return {@code True} if so.
 	 */
-	public double getFormatedHit(BattleState state, int hit) {
+	public double getFormattedHit(BattleState state, int hit) {
 		if (state.getAttacker() == null || state.getVictim() == null || state.getStyle() == null) {
 			return hit;
 		}
