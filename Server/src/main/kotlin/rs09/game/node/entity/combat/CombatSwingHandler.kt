@@ -370,6 +370,16 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         if (victim.id == 757) {
             EXPERIENCE_MOD = 0.01
         }
+        // Recursively adjustBattleState targets so that multi-target attacks have protection prayers applied.
+        if (state.targets != null && state.targets.isNotEmpty()) {
+            if (!(state.targets.size == 1 && state.targets[0] == state)) {
+                for (s in state.targets) {
+                    if (s != null && s != state) {
+                        adjustBattleState(entity, victim, s);
+                    }
+                }
+            }
+        }
         if (state.estimatedHit > 0) {
             state.estimatedHit = getFormattedHit(entity, victim, state, state.estimatedHit)
             totalHit += state.estimatedHit
@@ -412,7 +422,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      */
     protected open fun getFormattedHit(attacker: Entity, victim: Entity, state: BattleState, rawHit: Int): Int {
         var hit = rawHit
-        hit = attacker.getFormatedHit(state, hit).toInt()
+        hit = attacker.getFormattedHit(state, hit).toInt()
         if (victim is Player) {
             val player = victim.asPlayer()
             val shield = player.equipment[EquipmentContainer.SLOT_SHIELD]
