@@ -422,7 +422,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      */
     protected open fun getFormattedHit(attacker: Entity, victim: Entity, state: BattleState, rawHit: Int): Int {
         var hit = rawHit
-        hit = attacker.getFormatedHit(state, hit).toInt()
+        hit = attacker.getFormattedHit(state, hit).toInt()
         if (victim is Player) {
             val player = victim.asPlayer()
             val shield = player.equipment[EquipmentContainer.SLOT_SHIELD]
