@@ -115,23 +115,37 @@ public class TormentedDemonNPC extends AbstractNPC {
 
 	@Override
 	public void checkImpact(BattleState state) {
-		if (fireShield && state.getAttacker().isPlayer() && state.getEstimatedHit() > 0 && state.getWeapon() != null && (state.getWeapon().getId() == 6746 || state.getWeapon().getId() == 732)) {
+        // Use the formatted hit to ensure protection prayers are applied (i.e. can't darklight while the demon is praying melee).
+        int formattedHit = (int) state.getAttacker().getFormattedHit(state, state.getEstimatedHit());
+		if (state.getAttacker().isPlayer() && formattedHit > 0 && state.getWeapon() != null && (state.getWeapon().getId() == 6746 || state.getWeapon().getId() == 732)) {
+            // The message doesn't get sent twice, but additional darklight strikes while the shield is down do delay the shield's return.
+            if(fireShield) {
+                state.getAttacker().asPlayer().sendMessage("The demon is temporarily weakened by your weapon.");
+            }
 			shieldDelay = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(60);
 			fireShield = false;
 			setAttribute("shield-player", state.getAttacker());
-			state.getAttacker().asPlayer().sendMessage("The demon is temporarily weakened by your weapon.");
 		}
 		if (fireShield) {
-			state.setEstimatedHit((int) (state.getEstimatedHit() * 0.75));
+			state.setEstimatedHit((int) (state.getEstimatedHit() * 0.25));
 			graphics(Graphics.create(1885));
 		}
 		if (state.getStyle() == null) {
 			return;
 		}
-		int hit = state.getEstimatedHit() > 0 ? state.getEstimatedHit() : 1;
+        // Use formattedHit for the prayer swap calculation since it's before the fire 
+        // shield reduction was applied (a ranged hit of 8 through the shield corresponds to a 
+        // pre-shield hit of 32, which should cause the demon to switch to praying range).
+		int hit = formattedHit > 0 ? formattedHit : 1;
 		damageLog[state.getStyle().ordinal()] = damageLog[state.getStyle().ordinal()] + hit;
+	}
+
+    @Override
+    public void onImpact(final Entity entity, BattleState state) {
+        // "The demon will switch prayers after it receives 31 damage from one attack style."
+        // This is done in onImpact so that it happens after the damage that caused the switch is dealt.
 		CombatStyle damaged = getMostDamagedStyle();
-		if (damaged != null && damageLog[damaged.ordinal()] > 30 + hit && damaged != getProperties().getProtectStyle()) {
+		if (damaged != null && damageLog[damaged.ordinal()] >= 31 && damaged != getProperties().getProtectStyle()) {
 			for (int i = 0; i < 3; i++) {
 				damageLog[i] = 0;
 			}
@@ -141,7 +155,7 @@ public class TormentedDemonNPC extends AbstractNPC {
 			transformDemon(RandomFunction.getRandomElement(getAlternateStyle(TD_SWING_HANDLER.style)), null);
 			lastSwitch = System.currentTimeMillis() + 15000;
 		}
-	}
+    }
 
 	@Override
 	public void finalizeDeath(Entity killer)  {
