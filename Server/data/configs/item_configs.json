@@ -61345,6 +61345,7 @@
     "weapon_interface": "6",
     "render_anim": "2554",
     "equipment_slot": "3",
+    "attack_anims": "390,390,381,390",
     "grand_exchange_price": "8774",
     "name": "Red topaz machete",
     "tradeable": "true",
