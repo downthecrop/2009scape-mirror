@@ -44598,11 +44598,12 @@
   {
     "shop_price": "400",
     "ge_buy_limit": "100",
-    "examine": "A sturdy steel lantern casting a bright beam.",
+    "examine": "You need to add a lens before you can use it.",
     "grand_exchange_price": "88",
     "durability": null,
     "name": "Bullseye lantern",
     "low_alchemy": "168",
+    "tradeable": "true",
     "high_alchemy": "252",
     "weight": "1",
     "archery_ticket_price": "0",
@@ -44621,13 +44622,14 @@
     "requirements": "{11,49}",
     "shop_price": "400",
     "ge_buy_limit": "100",
-    "examine": "A sturdy steel lantern casting a bright beam.",
-    "grand_exchange_price": "158",
+    "examine": "You need to add lamp oil before you can use it.",
     "durability": null,
-    "name": "Bullseye lantern",
     "low_alchemy": "168",
     "high_alchemy": "252",
     "weight": "1",
+    "grand_exchange_price": "158",
+    "name": "Bullseye lantern",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "4546"
   },
@@ -44644,13 +44646,14 @@
     "requirements": "{11,49}",
     "shop_price": "400",
     "ge_buy_limit": "100",
-    "examine": "A sturdy steel lantern casting a bright beam.",
-    "grand_exchange_price": "1345",
+    "examine": "A sturdy steel lantern.",
     "durability": null,
-    "name": "Bullseye lantern",
     "low_alchemy": "168",
     "high_alchemy": "252",
     "weight": "1",
+    "grand_exchange_price": "1345",
+    "name": "Bullseye lantern",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "4548"
   },
@@ -44670,6 +44673,7 @@
     "durability": null,
     "name": "Bullseye lantern",
     "low_alchemy": "168",
+    "tradeable": "false",
     "high_alchemy": "252",
     "weight": "1",
     "archery_ticket_price": "0",
@@ -139441,5 +139445,10 @@
     "id": "14652",
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
     "equipment_slot": "12"
+  },
+  {
+    "examine": "A chunk of rock.",
+    "name": "Rock",
+    "id": "1480"
   }
 ]
