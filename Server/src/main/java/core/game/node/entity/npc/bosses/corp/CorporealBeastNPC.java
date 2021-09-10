@@ -99,11 +99,11 @@ public final class CorporealBeastNPC extends AbstractNPC {
 	}
 	
 	@Override
-	public double getFormatedHit(BattleState state, int hit) {
+	public double getFormattedHit(BattleState state, int hit) {
 		if (hit > 100) {
 			hit = 100;
 		}
-		return super.getFormatedHit(state, hit);
+		return super.getFormattedHit(state, hit);
 	}
 
 	@Override
@@ -312,7 +312,7 @@ public final class CorporealBeastNPC extends AbstractNPC {
 		@Override
 		protected int getFormattedHit(Entity entity, Entity victim, BattleState state, int hit) {
 			if (getCurrent().getProjectile() == null || getCurrent().getProjectile().getProjectileId() != 1825) {
-				hit = (int) entity.getFormatedHit(state, hit);
+				hit = (int) entity.getFormattedHit(state, hit);
 			}
 			return formatHit(victim, hit);
 		}
