@@ -28,7 +28,6 @@ import kotlin.system.exitProcess
 /**
  * The main class, for those that are unable to read the class' name.
  * @author Emperor
- * @author Vexia
  * @author Ceikry
  */
 object Server {
@@ -112,7 +111,7 @@ object Server {
         GlobalScope.launch {
             delay(20000)
             while(running){
-                if(System.currentTimeMillis() - lastHeartbeat > 1800 && running){
+                if(System.currentTimeMillis() - lastHeartbeat > 7200 && running){
                     SystemLogger.logErr("Triggering reboot due to heartbeat timeout")
                     SystemLogger.logErr("Creating thread dump...")
                     val dump = threadDump(true, true)

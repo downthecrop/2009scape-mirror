@@ -60,12 +60,13 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 PatchType.HOPS -> 6 //average of 6 per life times 3 lives = 18
                 PatchType.BELLADONNA -> 2 //average of 2 per life times 3 lives = 6
                 PatchType.CACTUS -> 3 //average of 3 per life times 3 lives = 9
+                PatchType.EVIL_TURNIP -> 1
                 else -> return
             }
 
             if(magicSecateurs) chance += ceil(1.10 * chance).toInt() //will increase average yield by roughly 3.
 
-            if(RandomFunction.roll(chance)) cropLives -= 1
+            if(RandomFunction.roll(chance) || chance == 1) cropLives -= 1
         }
 
         if(cropLives <= 0) clear()
