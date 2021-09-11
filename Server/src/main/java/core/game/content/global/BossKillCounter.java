@@ -25,6 +25,11 @@ public enum BossKillCounter {
 	JAD(new int[] { 2745 }, "Tz-Tok Jad", 14828), 
 	KALPHITE_QUEEN(new int[] { 1160 }, "Kalphite Queen", 14650),
 	CORPOREAL_BEAST(new int[] { 8133 }, "Corporeal Beast", 14653),
+	TORMENTED_DEMONS(new int[] {
+        8349, 8350, 8351, 8352, 8353, 8354,
+        8355, 8356, 8357, 8358, 8359, 8360,
+        8361, 8362, 8363, 8364, 8365, 8366,
+        }, "Tormented demon", -1),
 	CALLISTO(new int[] { 8610 }, "Callisto", 14658),
 	SCORPIA(new int[] { 8611 }, "Scorpia", 14661),
 	VENENATIS(new int[] { 8612 }, "Venenatis", 14657),
