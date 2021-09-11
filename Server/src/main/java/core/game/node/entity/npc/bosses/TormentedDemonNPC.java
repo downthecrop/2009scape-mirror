@@ -2,6 +2,7 @@ package core.game.node.entity.npc.bosses;
 
 import java.util.concurrent.TimeUnit;
 
+import core.game.content.global.BossKillCounter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
@@ -62,6 +63,14 @@ public class TormentedDemonNPC extends AbstractNPC {
 	 * The damage log of what style is dealing the most damage.
 	 */
 	private final int[] damageLog = new int[3];
+
+	@Override
+	public void init() {
+		super.init();
+        getAggressiveHandler().setChanceRatio(10);
+        getAggressiveHandler().setRadius(64);
+        getAggressiveHandler().setAllowTolerance(false);
+    }
 
 	/**
 	 * Constructs a new {@Code TormentedDemonNPC} {@Code Object}
@@ -162,6 +171,7 @@ public class TormentedDemonNPC extends AbstractNPC {
 		super.finalizeDeath(killer);
 		reTransform();
 		fireShield = true;
+		BossKillCounter.addtoKillcount((Player) killer, this.getId());
 	}
 
 	@Override
