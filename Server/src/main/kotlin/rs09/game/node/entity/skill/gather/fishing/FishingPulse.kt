@@ -3,6 +3,7 @@ package rs09.game.node.entity.skill.gather.fishing
 import core.game.content.global.SkillingPets
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage
+import core.game.container.Container
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
@@ -64,8 +65,8 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
             stop()
             return false
         }
-        if (option.bait != null && !player.inventory.containsItem(option.bait)) {
-            player.dialogueInterpreter.sendDialogue("You don't have any " + option.bait.name.toLowerCase() + "s left.")
+        if (!option.hasBait(player.inventory)) {
+            player.dialogueInterpreter.sendDialogue("You don't have any " + option.getBaitName().toLowerCase() + "s left.")
             stop()
             return false
         }
@@ -113,10 +114,7 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
             forager.handlePassiveAction()
         }
         if (success()) {
-            if (if (player.inventory.hasSpaceFor(fish!!.item) && option!!.bait != null) player.inventory.remove(
-                    option.bait
-                ) else true
-            ) {
+            if (player.inventory.hasSpaceFor(fish!!.item) && option!!.removeBait(player.inventory)) {
                 if (player.skillTasks.hasTask()) {
                     updateSkillTask()
                 }

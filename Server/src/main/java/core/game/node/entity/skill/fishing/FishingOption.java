@@ -1,5 +1,6 @@
 package core.game.node.entity.skill.fishing;
 
+import core.game.container.Container;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
@@ -17,18 +18,18 @@ public enum FishingOption {
 
 	CRAYFISH_CAGE(new Item(13431), 1, Animation.create(619), null, "cage", Fish.CRAYFISH),
 	SMALL_NET(new Item(303), 1, Animation.create(621), null, "net", Fish.SHRIMP, Fish.ANCHOVIE),
-	BAIT(new Item(307), 5, Animation.create(622), new Item(313), "bait", Fish.SARDINE, Fish.HERRING), 
-	LURE(new Item(309), 20, new Animation(622), new Item(314), "lure", Fish.TROUT, Fish.SALMON, Fish.RAINBOW_FISH), 
-	L_BAIT(new Item(307), 25, Animation.create(622), new Item(313), "bait", Fish.PIKE), 
+	BAIT(new Item(307), 5, Animation.create(622), new Item[]{new Item(313)}, "bait", Fish.SARDINE, Fish.HERRING), 
+	LURE(new Item(309), 20, new Animation(622), new Item[]{new Item(Items.FEATHER_314), new Item(Items.STRIPY_FEATHER_10087)}, "lure", Fish.TROUT, Fish.SALMON, Fish.RAINBOW_FISH), 
+	L_BAIT(new Item(307), 25, Animation.create(622), new Item[]{new Item(313)}, "bait", Fish.PIKE), 
 	CAGE(new Item(301), 40, Animation.create(619), null, "cage", Fish.LOBSTER), 
 	HARPOON(new Item(311), 35, Animation.create(618), null, "harpoon", Fish.TUNA, Fish.SWORDFISH),
 	BARB_HARPOON(new Item(10129), 35, Animation.create(618), null, "harpoon", Fish.TUNA, Fish.SWORDFISH), 
 	BIG_NET(new Item(305), 16, Animation.create(620), null, "net", Fish.MACKEREL, Fish.COD, Fish.BASS, Fish.SEAWEED),
 	N_HARPOON(new Item(311), 76, Animation.create(618), null, "harpoon", Fish.SHARK), 
 	H_NET(new Item(303), 1, Animation.create(621), null, "net", Fish.MONKFISH),
-	C_CAGE(new Item(301), 85, Animation.create(619), new Item(14943), "cage", Fish.DARK_CRAB),
+	C_CAGE(new Item(301), 85, Animation.create(619), new Item[]{new Item(14943)}, "cage", Fish.DARK_CRAB),
 	KBWANJI_NET(new Item(Items.SMALL_FISHING_NET_303), 5, Animation.create(621), null, "net", Fish.KARAMBWANJI),
-	KARAMBWAN_VES(new Item(Items.KARAMBWAN_VESSEL_3157), 65, Animation.create(1193), new Item(Items.RAW_KARAMBWANJI_3150), "fish", Fish.KARAMBWAN);
+	KARAMBWAN_VES(new Item(Items.KARAMBWAN_VESSEL_3157), 65, Animation.create(1193), new Item[]{new Item(Items.RAW_KARAMBWANJI_3150)}, "fish", Fish.KARAMBWAN);
 
 	public static HashMap<String,FishingOption> nameMap = new HashMap<>();
 	static{
@@ -58,7 +59,7 @@ public enum FishingOption {
 	/**
 	 * The bait.
 	 */
-	private final Item bait;
+	private final Item[] bait;
 
 	/**
 	 * The option name.
@@ -77,7 +78,7 @@ public enum FishingOption {
 	 * @param animation The animation.
 	 * @param fish The fish to catch.
 	 */
-	private FishingOption(Item tool, int level, Animation animation, Item bait, String name, Fish... fish) {
+	private FishingOption(Item tool, int level, Animation animation, Item[] bait, String name, Fish... fish) {
 		this.tool = tool;
 		this.level = level;
 		this.animation = animation;
@@ -105,7 +106,7 @@ public enum FishingOption {
 			return Fish.RAINBOW_FISH;
 		}
 		Fish reward = fish[RandomFunction.randomize(fish.length)];
-		if (reward.getLevel() > player.getSkills().getLevel(Skills.FISHING) || (reward == Fish.RAINBOW_FISH && !player.getInventory().contains(100887, 1))) {
+		if (reward.getLevel() > player.getSkills().getLevel(Skills.FISHING) || (reward == Fish.RAINBOW_FISH && !player.getInventory().contains(10087, 1))) {
 			reward = fish[0];
 		}
 		return reward;
@@ -146,13 +147,40 @@ public enum FishingOption {
 		return animation;
 	}
 
-	/**
-	 * Gets the bait.
-	 * @return The bait.
-	 */
-	public Item getBait() {
-		return bait;
-	}
+    public String getBaitName() {
+        if(bait != null && bait.length > 0) {
+            return bait[0].getName();
+        } else {
+            return "null";
+        }
+            
+    }
+
+    public boolean hasBait(Container inventory) {
+        if(bait == null) {
+            return true;
+        } else {
+            boolean any_bait = false;
+            for(Item b : bait) {
+                any_bait = any_bait || inventory.containsItem(b);
+            }
+            return any_bait;
+        }
+    }
+
+    public boolean removeBait(Container inventory) {
+        if(bait == null) {
+            return true;
+        } else {
+            // Remove more specific bait (later in the list) first.
+            for(int i = bait.length; i > 0; i--) {
+                if(inventory.remove(bait[i-1])) {
+                    return true;
+                }
+            }
+            return false;
+        }
+    }
 
 	/**
 	 * Gets the name.
