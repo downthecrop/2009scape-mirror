@@ -67,7 +67,12 @@ public class BunyipNPC extends Familiar {
 		if (lastHeal < GameWorld.getTicks()) {
 			setLastHeal();
 			owner.graphics(Graphics.create(1507), 1);
-			owner.getSkills().heal((int) ((int) owner.getSkills().getMaximumLifepoints() * 0.02));
+            // Since https://runescape.wiki/w/Bunyip?oldid=391088 (2008-04-02)
+            // "The bunyip will automatically heal two hitpoints approximately every 15 seconds up to a player's maximum."
+            // Since https://runescape.wiki/w/Bunyip?oldid=400848 (2008-04-06)
+            // "The healing effect of the Bunyip can restore up to 352 hitpoints over its summoning duration of 44 minutes."
+            // Numbers were multiplied by 10 with the constitution update on 2010-03-10 (https://runescape.wiki/w/Bunyip?oldid=2345672)
+			owner.getSkills().heal(2);
 		}
 	}
 
@@ -154,7 +159,6 @@ public class BunyipNPC extends Familiar {
 
 	@Override
 	public int[] getIds() {
-		return new int[] { 6813, 6184 };
+		return new int[] { 6813, 6814 };
 	}
-
 }
