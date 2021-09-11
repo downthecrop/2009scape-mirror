@@ -57,7 +57,7 @@ class StatsCommandSet : CommandSet(Command.Privilege.STANDARD) {
 
                 //Boss KC
                 82 -> sendLine(player, "KBD KC: ${globalData.bossCounters.get(BossKillCounter.KING_BLACK_DRAGON.ordinal)}",i)
-                83 -> sendLine(player, "Bork KC: ${globalData.bossCounters.get(BossKillCounter.BORK.ordinal)}",i)
+                83 -> sendLine(player, "TDs KC: ${globalData.bossCounters.get(BossKillCounter.TORMENTED_DEMONS.ordinal)}",i)
                 84 -> sendLine(player, "Supreme KC: ${globalData.bossCounters.get(BossKillCounter.DAGANNOTH_SUPREME.ordinal)}",i)
                 85 -> sendLine(player, "Rex KC: ${globalData.bossCounters.get(BossKillCounter.DAGANNOTH_REX.ordinal)}",i)
                 86 -> sendLine(player, "Prime KC: ${globalData.bossCounters.get(BossKillCounter.DAGANNOTH_PRIME.ordinal)}",i)
