@@ -151,6 +151,8 @@ public class TormentedDemonNPC extends AbstractNPC {
 
     @Override
     public void onImpact(final Entity entity, BattleState state) {
+        // Call the parent class's onImpact handler to ensure that retaliation happens if the TD is non-aggressive.
+        super.onImpact(entity, state);
         // "The demon will switch prayers after it receives 31 damage from one attack style."
         // This is done in onImpact so that it happens after the damage that caused the switch is dealt.
 		CombatStyle damaged = getMostDamagedStyle();
