@@ -653,7 +653,7 @@ public class NPC extends Entity {
 
 	@Override
 	public boolean hasProtectionPrayer(CombatStyle style) {
-		return false;
+		return getProperties().getProtectStyle() == style;
 	}
 
 	/**
