@@ -515,7 +515,7 @@ public abstract class Entity extends Node {
 		Entity victim = state.getVictim();
 		CombatStyle type = state.getStyle();
 		if (state.getArmourEffect() != ArmourSet.VERAC && !entity.isIgnoreProtection(type) && victim.hasProtectionPrayer(type)) {
-			return hit *= entity instanceof Player ? 0.6 : 0;
+			return hit *= (entity instanceof Player && victim instanceof Player) ? 0.6 : 0;
 		}
 		return hit;
 	}
