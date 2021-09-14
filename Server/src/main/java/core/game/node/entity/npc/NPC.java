@@ -628,10 +628,10 @@ public class NPC extends Entity {
 		}
 		getProperties().setAttackStyle(new WeaponInterface.AttackStyle(WeaponInterface.STYLE_CONTROLLED, index));
 		CombatStyle style = getDefinition().getConfiguration(NPCConfigParser.COMBAT_STYLE);
-		if (style == CombatStyle.RANGE) {
-			getProperties().getCombatPulse().setStyle(style);
-		} else if (style == CombatStyle.MAGIC) {
-			getProperties().getCombatPulse().setStyle(style);
+        if (style != null) {
+            getProperties().getCombatPulse().setStyle(style);
+        }
+		if (style == CombatStyle.MAGIC) {
 			getProperties().setAutocastSpell(new DefaultCombatSpell(this));
 			int spell = definition.getConfiguration("spell_id", -1);
 			if (spell != -1) {
