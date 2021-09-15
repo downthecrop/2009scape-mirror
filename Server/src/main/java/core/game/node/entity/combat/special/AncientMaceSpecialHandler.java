@@ -51,6 +51,7 @@ public final class AncientMaceSpecialHandler extends MeleeSwingHandler implement
 		if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
+        state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
 		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.1, 0.98)) {
 			hit = RandomFunction.random(calculateHit(entity, victim, 1));
@@ -72,5 +73,6 @@ public final class AncientMaceSpecialHandler extends MeleeSwingHandler implement
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
 		entity.visualize(ANIMATION, GRAPHIC);
+        addExperience(entity, victim, state);
 	}
 }

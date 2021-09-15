@@ -83,6 +83,7 @@ public final class SpearWallSpecialHandler extends MeleeSwingHandler implements 
 				BattleState s = targets[count++] = new BattleState(entity, e);
 				int hit = 0;
 				hit = RandomFunction.random(calculateHit(entity, e, 1.0));
+                s.setStyle(CombatStyle.MELEE);
 				s.setEstimatedHit(hit);
 			}
 		}
@@ -93,6 +94,7 @@ public final class SpearWallSpecialHandler extends MeleeSwingHandler implements 
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
 		entity.visualize(ANIMATION, GRAPHIC);
+        addExperience(entity, victim, state);
 	}
 
 	@Override

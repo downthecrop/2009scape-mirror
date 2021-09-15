@@ -52,6 +52,7 @@ public final class EnergyDrainSpecialHandler extends MeleeSwingHandler implement
 		if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
+        state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
 		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.2, 1.0)) {
 			hit = RandomFunction.random(calculateHit(entity, victim, 1));
@@ -69,5 +70,6 @@ public final class EnergyDrainSpecialHandler extends MeleeSwingHandler implement
 	public void visualize(Entity entity, Entity victim, BattleState state) {
 		entity.animate(ANIMATION);
 		victim.graphics(GRAPHIC);
+        addExperience(entity, victim, state);
 	}
 }
