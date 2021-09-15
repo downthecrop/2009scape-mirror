@@ -60,6 +60,7 @@ public final class SnapshotSpecialHandler extends RangeSwingHandler implements P
 		if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
+        state.setStyle(CombatStyle.RANGE);
 		int max = calculateHit(entity, victim, 1.0);
 		state.setMaximumHit(max);
 		int hit = 0;
@@ -104,5 +105,6 @@ public final class SnapshotSpecialHandler extends RangeSwingHandler implements P
 		Projectile.create(entity, victim, 249, 40, 36, 20, speed, 15, 11).send();
 		speed = (int) (32 + (entity.getLocation().getDistance(victim.getLocation()) * 10));
 		Projectile.create(entity, victim, 249, 40, 36, 50, speed, 15, 11).send();
+        addExperience(entity, victim, state);
 	}
 }
