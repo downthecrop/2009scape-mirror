@@ -82,12 +82,12 @@ open class MeleeSwingHandler
             if (state.estimatedHit > victim.skills.lifepoints) state.estimatedHit = victim.skills.lifepoints
             if (state.estimatedHit + state.secondaryHit > victim.skills.lifepoints) state.secondaryHit -= ((state.estimatedHit + state.secondaryHit) - victim.skills.lifepoints)
         }
-        addExperience(entity, victim, state)
         return 1
     }
 
     override fun visualize(entity: Entity, victim: Entity?, state: BattleState?) {
         entity.animate(entity.properties.attackAnimation)
+        addExperience(entity, victim, state)
     }
 
     override fun impact(entity: Entity?, victim: Entity?, state: BattleState?) {
