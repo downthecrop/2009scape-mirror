@@ -66,6 +66,7 @@ public final class QuickSmashSpecialHandler extends MeleeSwingHandler implements
 		if (!p.getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
+        // TODO: apply protection prayers/experience manually (since this is bypassing normal BattleState machinery)
 		visualize(entity, victim, null);
 		int hit = 0;
 		if (isAccurateImpact(entity, victim)) {
