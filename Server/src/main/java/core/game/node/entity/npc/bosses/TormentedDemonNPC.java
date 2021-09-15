@@ -6,15 +6,17 @@ import core.game.content.global.BossKillCounter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
-import rs09.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.InteractionType;
+import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
+import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.combat.CombatSwingHandler;
 
 /**
  * Handles the Tormented Demon NPC.
@@ -162,9 +164,13 @@ public class TormentedDemonNPC extends AbstractNPC {
 			}
 			transformDemon(null, damaged);
 			return;
-		}	else if (lastSwitch < System.currentTimeMillis()) {
+		} else if (lastSwitch < System.currentTimeMillis()) {
 			transformDemon(RandomFunction.getRandomElement(getAlternateStyle(TD_SWING_HANDLER.style)), null);
 			lastSwitch = System.currentTimeMillis() + 15000;
+            // The roar animation that TDs do when they change attack styles 
+            // shouldn't be interrupted by attack/defence animations.
+            // https://youtu.be/VcWncVTev1s?t=220
+            animate(new Animation(10917, Priority.HIGH));
 		}
     }
 
@@ -188,18 +194,20 @@ public class TormentedDemonNPC extends AbstractNPC {
 
 	/**
 	 * Switches the Tormented Demons style (protection & combat)
-	 * @param style The combat style to switch to.
-	 * @param protection The protection style to switch to.
+	 * @param attackStyle The combat style to switch to.
+	 * @param protectionStyle The protection style to switch to.
 	 */
-	public void transformDemon(CombatStyle style, CombatStyle protection) {
+	public void transformDemon(CombatStyle attackStyle, CombatStyle protectionStyle) {
 		//System.out.println("Transforming demon, selected combat style = " + style + ", the selected protection style = " + protection);
-		int id = getId();
-		if (protection != null) {
-			int[] ids = getDemonIds(protection);
-			id = ids[RandomFunction.random(ids.length)];
-		} else {
-			id = getCombatStyleDemon(getProperties().getProtectStyle(), style);
-		}
+
+        // If either attackStyle or protectionStyle are null, use the current form's values
+        if(attackStyle == null) {
+            attackStyle = getProperties().getCombatPulse().getStyle();
+        }
+        if(protectionStyle == null) {
+            protectionStyle = getProperties().getProtectStyle();
+        }
+        int id = getCombatStyleDemon(protectionStyle, attackStyle);
 		int oldHp = getSkills().getLifepoints();
 		transform(id);
 		getSkills().setLifepoints(oldHp);
