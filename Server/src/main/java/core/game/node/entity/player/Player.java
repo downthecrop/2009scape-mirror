@@ -497,6 +497,9 @@ public class Player extends Entity {
 			details.getSession().disconnect();
 			getSession().setLastPing(Long.MAX_VALUE);
 		}
+        if(getAttribute("infinite-special", false)) {
+            settings.setSpecialEnergy(100);
+        }
 
 		//Decrements prayer points
 		getPrayer().tick();

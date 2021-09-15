@@ -53,6 +53,7 @@ public final class ImpaleSpecialHandler extends MeleeSwingHandler implements Plu
 		if (!player.getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
+        state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
 		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.1, 0.98)) {
 			hit = RandomFunction.random(calculateHit(entity, victim, 1.1));
@@ -68,5 +69,6 @@ public final class ImpaleSpecialHandler extends MeleeSwingHandler implements Plu
 			return;
 		}
 		entity.visualize(ANIMATION, GRAPHIC);
+        addExperience(entity, victim, state);
 	}
 }
