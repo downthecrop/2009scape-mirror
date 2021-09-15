@@ -455,6 +455,17 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 notify(player,"No parent NPC found.")
             }
         }
+        define("infinitespecial",Command.Privilege.ADMIN){player,args ->
+            val usageStr = "Usage: ::infinitespecial true|false"
+            if(args.size < 2){
+                reject(player, usageStr)
+            }
+            when(args[1]){
+                "true" -> player.setAttribute("infinite-special", true)
+                "false" -> player.removeAttribute("infinite-special")
+                else -> reject(player, usageStr)
+            }
+        }
     }
 
     fun showGeSell(player: Player){

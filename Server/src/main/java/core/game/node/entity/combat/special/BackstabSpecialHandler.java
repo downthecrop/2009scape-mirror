@@ -54,6 +54,7 @@ public final class BackstabSpecialHandler extends MeleeSwingHandler implements P
 		if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
+        state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
 		double accuracy = 1.0;
 		if (!victim.getProperties().getCombatPulse().isAttacking()) {
@@ -70,5 +71,6 @@ public final class BackstabSpecialHandler extends MeleeSwingHandler implements P
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
 		entity.visualize(ANIMATION, GRAPHIC);
+        addExperience(entity, victim, state);
 	}
 }
