@@ -1,6 +1,7 @@
 package core.game.node.entity.impl;
 
 import core.game.node.entity.Entity;
+import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
@@ -307,7 +308,9 @@ public class ForceMovement extends Pulse {
 		int ticks = 1 + commenceSpeed + pathSpeed;
 		entity.getImpactHandler().setDisabledTicks(ticks);
 		entity.getUpdateMasks().register(new ForceMovementFlag(this));
-		entity.getWalkingQueue().updateRegion(destination, false);
+        if(entity instanceof Player) {
+            entity.getWalkingQueue().updateRegion(destination, false);
+        }
 		super.start();
 	}
 
