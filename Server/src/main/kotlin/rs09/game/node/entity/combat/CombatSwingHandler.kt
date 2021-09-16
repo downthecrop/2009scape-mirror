@@ -243,10 +243,6 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         if (el.x >= vl.x && el.x < evl.x && el.y >= vl.y && el.y < evl.y || el.z != vl.z) {
             return InteractionType.NO_INTERACT
         }
-        if (!victim.isAttackable(entity, type)) {
-            entity.properties.combatPulse.stop()
-            return InteractionType.NO_INTERACT
-        }
         return InteractionType.STILL_INTERACT
     }
 
