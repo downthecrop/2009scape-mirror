@@ -53,6 +53,7 @@ public final class SmashSpecialHandler extends MeleeSwingHandler implements Plug
 		if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
+        state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
 		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.0, 1.0)) {
 			hit = RandomFunction.random(calculateHit(entity, victim, RandomFunction.random(1.0, 1.5)));
@@ -66,5 +67,6 @@ public final class SmashSpecialHandler extends MeleeSwingHandler implements Plug
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
 		entity.visualize(ANIMATION, GRAPHIC);
+        addExperience(entity, victim, state);
 	}
 }

@@ -2,18 +2,21 @@ package core.game.node.entity.npc.bosses;
 
 import java.util.concurrent.TimeUnit;
 
+import core.game.content.global.BossKillCounter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
-import rs09.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.InteractionType;
+import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
+import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.combat.CombatSwingHandler;
 
 /**
  * Handles the Tormented Demon NPC.
@@ -62,6 +65,14 @@ public class TormentedDemonNPC extends AbstractNPC {
 	 * The damage log of what style is dealing the most damage.
 	 */
 	private final int[] damageLog = new int[3];
+
+	@Override
+	public void init() {
+		super.init();
+        getAggressiveHandler().setChanceRatio(10);
+        getAggressiveHandler().setRadius(64);
+        getAggressiveHandler().setAllowTolerance(false);
+    }
 
 	/**
 	 * Constructs a new {@Code TormentedDemonNPC} {@Code Object}
@@ -115,39 +126,60 @@ public class TormentedDemonNPC extends AbstractNPC {
 
 	@Override
 	public void checkImpact(BattleState state) {
-		if (fireShield && state.getAttacker().isPlayer() && state.getEstimatedHit() > 0 && state.getWeapon() != null && (state.getWeapon().getId() == 6746 || state.getWeapon().getId() == 732)) {
+        // Use the formatted hit to ensure protection prayers are applied (i.e. can't darklight while the demon is praying melee).
+        int formattedHit = (int) state.getAttacker().getFormattedHit(state, state.getEstimatedHit());
+		if (state.getAttacker().isPlayer() && formattedHit > 0 && state.getWeapon() != null && (state.getWeapon().getId() == 6746 || state.getWeapon().getId() == 732)) {
+            // The message doesn't get sent twice, but additional darklight strikes while the shield is down do delay the shield's return.
+            if(fireShield) {
+                state.getAttacker().asPlayer().sendMessage("The demon is temporarily weakened by your weapon.");
+            }
 			shieldDelay = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(60);
 			fireShield = false;
 			setAttribute("shield-player", state.getAttacker());
-			state.getAttacker().asPlayer().sendMessage("The demon is temporarily weakened by your weapon.");
 		}
 		if (fireShield) {
-			state.setEstimatedHit((int) (state.getEstimatedHit() * 0.75));
+			state.setEstimatedHit((int) (state.getEstimatedHit() * 0.25));
 			graphics(Graphics.create(1885));
 		}
 		if (state.getStyle() == null) {
 			return;
 		}
-		int hit = state.getEstimatedHit() > 0 ? state.getEstimatedHit() : 1;
+        // Use formattedHit for the prayer swap calculation since it's before the fire 
+        // shield reduction was applied (a ranged hit of 8 through the shield corresponds to a 
+        // pre-shield hit of 32, which should cause the demon to switch to praying range).
+		int hit = formattedHit > 0 ? formattedHit : 1;
 		damageLog[state.getStyle().ordinal()] = damageLog[state.getStyle().ordinal()] + hit;
+	}
+
+    @Override
+    public void onImpact(final Entity entity, BattleState state) {
+        // Call the parent class's onImpact handler to ensure that retaliation happens if the TD is non-aggressive.
+        super.onImpact(entity, state);
+        // "The demon will switch prayers after it receives 31 damage from one attack style."
+        // This is done in onImpact so that it happens after the damage that caused the switch is dealt.
 		CombatStyle damaged = getMostDamagedStyle();
-		if (damaged != null && damageLog[damaged.ordinal()] > 30 + hit && damaged != getProperties().getProtectStyle()) {
+		if (damaged != null && damageLog[damaged.ordinal()] >= 31 && damaged != getProperties().getProtectStyle()) {
 			for (int i = 0; i < 3; i++) {
 				damageLog[i] = 0;
 			}
 			transformDemon(null, damaged);
 			return;
-		}	else if (lastSwitch < System.currentTimeMillis()) {
+		} else if (lastSwitch < System.currentTimeMillis()) {
 			transformDemon(RandomFunction.getRandomElement(getAlternateStyle(TD_SWING_HANDLER.style)), null);
 			lastSwitch = System.currentTimeMillis() + 15000;
+            // The roar animation that TDs do when they change attack styles 
+            // shouldn't be interrupted by attack/defence animations.
+            // https://youtu.be/VcWncVTev1s?t=220
+            animate(new Animation(10917, Priority.HIGH));
 		}
-	}
+    }
 
 	@Override
 	public void finalizeDeath(Entity killer)  {
 		super.finalizeDeath(killer);
 		reTransform();
 		fireShield = true;
+		BossKillCounter.addtoKillcount((Player) killer, this.getId());
 	}
 
 	@Override
@@ -162,18 +194,20 @@ public class TormentedDemonNPC extends AbstractNPC {
 
 	/**
 	 * Switches the Tormented Demons style (protection & combat)
-	 * @param style The combat style to switch to.
-	 * @param protection The protection style to switch to.
+	 * @param attackStyle The combat style to switch to.
+	 * @param protectionStyle The protection style to switch to.
 	 */
-	public void transformDemon(CombatStyle style, CombatStyle protection) {
+	public void transformDemon(CombatStyle attackStyle, CombatStyle protectionStyle) {
 		//System.out.println("Transforming demon, selected combat style = " + style + ", the selected protection style = " + protection);
-		int id = getId();
-		if (protection != null) {
-			int[] ids = getDemonIds(protection);
-			id = ids[RandomFunction.random(ids.length)];
-		} else {
-			id = getCombatStyleDemon(getProperties().getProtectStyle(), style);
-		}
+
+        // If either attackStyle or protectionStyle are null, use the current form's values
+        if(attackStyle == null) {
+            attackStyle = getProperties().getCombatPulse().getStyle();
+        }
+        if(protectionStyle == null) {
+            protectionStyle = getProperties().getProtectStyle();
+        }
+        int id = getCombatStyleDemon(protectionStyle, attackStyle);
 		int oldHp = getSkills().getLifepoints();
 		transform(id);
 		getSkills().setLifepoints(oldHp);
