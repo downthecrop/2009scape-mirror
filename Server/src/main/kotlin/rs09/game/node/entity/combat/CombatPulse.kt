@@ -129,6 +129,9 @@ class CombatPulse(
             if (handler == null) {
                 handler = entity.getSwingHandler(true)
             }
+            if (!entity.isAttackable(v, handler!!.type)) {
+                return true
+            }
             if (!swing(entity, victim, handler)) {
                 temporaryHandler = null
                 updateStyle()
