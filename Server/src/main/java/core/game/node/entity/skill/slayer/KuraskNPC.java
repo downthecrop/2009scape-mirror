@@ -6,6 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
+import org.rs09.consts.Items;
 
 /**
  * Handles the kurask npc.
@@ -41,7 +42,10 @@ public final class KuraskNPC extends AbstractNPC {
 		boolean effective = false;
 		if (state.getAttacker() instanceof Player) {
 			final Player player = (Player) state.getAttacker();
-			if ((state.getWeapon() != null && state.getWeapon().getId() == 4158) || (state.getAmmunition() != null && state.getAmmunition().getItemId() == 4160) || (state.getWeapon() != null && state.getWeapon().getId() == 13290) || (state.getSpell() != null && state.getSpell().getSpellId() == 31 && player.getSpellBookManager().getSpellBook() == SpellBook.MODERN.getInterfaceId()) || (state.getAmmunition() != null && state.getAmmunition().getItemId() == 881)) {
+			if ((state.getWeapon() != null && state.getWeapon().getId() == Items.LEAF_BLADED_SPEAR_4158) ||
+					(state.getAmmunition() != null && (state.getAmmunition().getItemId() == Items.BROAD_ARROW_4160 || state.getAmmunition().getItemId() == Items.BROAD_TIPPED_BOLTS_13280)) ||
+					(state.getWeapon() != null && state.getWeapon().getId() == Items.LEAF_BLADED_SWORD_13290) ||
+					(state.getSpell() != null && state.getSpell().getSpellId() == 31 && player.getSpellBookManager().getSpellBook() == SpellBook.MODERN.getInterfaceId())) {
 				effective = true;
 			}
 		}
