@@ -13,6 +13,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import core.tools.RandomFunction;
 
 /**
  * The super glass make spell.
@@ -79,6 +80,11 @@ public class SuperglassMakeSpell extends MagicSpell {
 			if (hasSet(player, setIndex)) {
 				if (player.getInventory().remove(BUCKET_OF_SAND, SETS[setIndex])) {
 					player.getInventory().add(MOLTEN_GLASS);
+                    // https://runescape.wiki/w/Superglass_Make?oldid=1970761
+                    // "On average, each set will produce 1.30 pieces of molten glass"
+                    if(RandomFunction.randomDouble(1.0) < 0.3) {
+                        player.getInventory().add(MOLTEN_GLASS);
+                    }
 					player.getSkills().addExperience(Skills.CRAFTING, 10, true);
 				}
 			}
