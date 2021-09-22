@@ -101,7 +101,7 @@ public class BunyipNPC extends Familiar {
 			player.sendMessage("Error: Report to admin.");
 			return false;
 		}
-		if (player.getSkills().getLevel(Skills.COOKING) < CookableItems.forId(special.getItem().getId() + 2).level) {
+		if (player.getSkills().getLevel(Skills.COOKING) < CookableItems.forId(special.getItem().getId()).level) {
 			player.sendMessage("You need a Cooking level of at least " + CookableItems.forId(special.getItem().getId()).level + " in order to do that.");
 			return false;
 		}
