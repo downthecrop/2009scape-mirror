@@ -229,6 +229,23 @@ public final class Location extends Node {
 		return product <= dist;
 	}
 
+    /**
+     * Returns if a player is within a specified distance using max norm distance.
+     * @param other The other location.
+     * @param dist The amount of distance.
+     * @return If you're within the other distance.
+     */
+	public boolean withinMaxnormDistance(Location other, int dist) {
+	    if (other.z != z) {
+	        return false;
+        }
+
+		int a = Math.abs(other.x - x);
+		int b = Math.abs(other.y - y);
+		double max = Math.max(a, b);
+		return max <= dist;
+	}
+
 	/**
 	 * Returns the distance between you and the other.
 	 * @param other The other location.
