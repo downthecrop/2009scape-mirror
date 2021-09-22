@@ -125,7 +125,7 @@ object UseWithPatchHandler{
                             if(player.inventory.remove(event.usedItem,false)){
                                 p.compost = if(usedItem.id == Items.SUPERCOMPOST_6034) CompostType.SUPER else CompostType.NORMAL
                                 if(p.compost == CompostType.SUPER) ContentAPI.rewardXP(player, Skills.FARMING, 26.0) else ContentAPI.rewardXP(player, Skills.FARMING, 18.5)
-                                if(p.plantable != null){
+                                if(p.plantable != null && p.plantable?.applicablePatch != PatchType.FLOWER) {
                                     p.harvestAmt += if(p.compost == CompostType.NORMAL) 1 else if(p.compost == CompostType.SUPER) 2 else 0
                                 }
                                 p.cropLives += if(p.compost == CompostType.SUPER) 2 else 1
