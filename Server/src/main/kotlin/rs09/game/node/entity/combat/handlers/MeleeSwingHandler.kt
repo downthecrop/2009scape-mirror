@@ -244,6 +244,18 @@ open class MeleeSwingHandler
             if (state.secondaryHit > 0) {
                 hit += state.secondaryHit
             }
+            if(state.targets != null) {
+                for (s in state.targets) {
+                    if (s != null) {
+                        if(s.estimatedHit > 0) {
+                            hit += s.estimatedHit
+                        }
+                        if(s.secondaryHit > 0) {
+                            hit += s.secondaryHit
+                        }
+                    }
+                }
+            }
             var experience = hit * EXPERIENCE_MOD
             val famExp = entity.getAttribute("fam-exp", false) && entity.familiarManager.hasFamiliar()
             if (!famExp) {
