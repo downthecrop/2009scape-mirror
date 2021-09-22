@@ -538,11 +538,15 @@ object RegionManager {
      */
     @JvmStatic
     fun getSurroundingPlayers(n: Node, maximum: Int, vararg ignore: Node): List<Player> {
-        val players = getLocalPlayers(n.location, 1)
+        val players = getLocalPlayers(n.location, 2)
         var count = 0
         val it = players.iterator()
         while (it.hasNext()) {
             val p = it.next()
+            if(!p.location.withinMaxnormDistance(n.location, 1)) {
+                it.remove()
+                continue
+            }
             if (++count >= maximum) {
                 it.remove()
                 continue
@@ -577,11 +581,15 @@ object RegionManager {
      */
     @JvmStatic
     fun getSurroundingNPCs(n: Node, maximum: Int, vararg ignore: Node): List<NPC> {
-        val npcs = getLocalNpcs(n.location, 1)
+        val npcs = getLocalNpcs(n.location, 2)
         var count = 0
         val it = npcs.iterator()
         while (it.hasNext()) {
             val p = it.next()
+            if(!p.location.withinMaxnormDistance(n.location, 1)) {
+                it.remove()
+                continue
+            }
             if (++count > maximum) {
                 it.remove()
                 continue
