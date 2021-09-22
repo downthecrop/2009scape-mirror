@@ -2,6 +2,7 @@ package rs09.game.node.entity.skill.farming
 
 import core.game.node.entity.player.Player
 import core.tools.RandomFunction
+import org.rs09.consts.Items
 import rs09.game.system.SystemLogger
 import java.util.concurrent.TimeUnit
 import kotlin.math.ceil
@@ -16,11 +17,16 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     var cropLives = 3
 
     fun setNewHarvestAmount() {
+        val compostMod = if(compost == CompostType.SUPER) 2 else 1
         harvestAmt = when (plantable) {
             Plantable.LIMPWURT_SEED, Plantable.WOAD_SEED -> 3
+            Plantable.MUSHROOM_SPORE -> 6
             else -> 1
         }
-        cropLives = 3
+        if(plantable != null && plantable?.applicablePatch != PatchType.FLOWER) {
+            harvestAmt += compostMod
+        }
+        cropLives = 3 + compostMod
     }
 
     fun rollLivesDecrement(farmingLevel: Int, magicSecateurs: Boolean){
@@ -290,9 +296,12 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             FarmingPatch.ARDOUGNE_ALLOTMENT_S,FarmingPatch.ARDOUGNE_ALLOTMENT_N -> FarmingPatch.ARDOUGNE_FLOWER_C
             FarmingPatch.CATHERBY_ALLOTMENT_S,FarmingPatch.CATHERBY_ALLOTMENT_N -> FarmingPatch.CATHERBY_FLOWER_C
             FarmingPatch.PORT_PHAS_ALLOTMENT_SE,FarmingPatch.PORT_PHAS_ALLOTMENT_NW -> FarmingPatch.PORT_PHAS_FLOWER_C
+            FarmingPatch.TROLL_STRONGHOLD_HERB -> return true
             else -> return false
         }.getPatchFor(player)
 
-        return (fpatch.plantable != null && fpatch.plantable == plantable?.protectionFlower && fpatch.isGrown())
+        return (fpatch.plantable != null &&
+            (fpatch.plantable == plantable?.protectionFlower || fpatch.plantable == Plantable.forItemID(Items.WHITE_LILY_SEED_14589))
+            && fpatch.isGrown())
     }
 }
