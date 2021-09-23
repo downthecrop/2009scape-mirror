@@ -17,7 +17,11 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     var cropLives = 3
 
     fun setNewHarvestAmount() {
-        val compostMod = if(compost == CompostType.SUPER) 2 else 1
+        val compostMod = when(compost) {
+            CompostType.NONE -> 0
+            CompostType.NORMAL -> 1
+            CompostType.SUPER -> 2
+        }
         harvestAmt = when (plantable) {
             Plantable.LIMPWURT_SEED, Plantable.WOAD_SEED -> 3
             Plantable.MUSHROOM_SPORE -> 6
