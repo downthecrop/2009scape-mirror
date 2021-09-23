@@ -129,7 +129,7 @@ class CombatPulse(
             if (handler == null) {
                 handler = entity.getSwingHandler(true)
             }
-            if (!entity.isAttackable(v, handler!!.type)) {
+            if (!v.isAttackable(entity, handler!!.type)) {
                 return true
             }
             if (!swing(entity, victim, handler)) {
