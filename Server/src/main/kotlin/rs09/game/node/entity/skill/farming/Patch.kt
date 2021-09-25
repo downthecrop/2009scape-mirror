@@ -237,7 +237,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             CompostType.SUPER -> 13
         }
 
-        if(RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid && !isFlowerProtected() && patch.type != PatchType.EVIL_TURNIP){
+        if(patch != FarmingPatch.TROLL_STRONGHOLD_HERB && RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid && !isFlowerProtected() && patch.type != PatchType.EVIL_TURNIP ){
             //bush, tree, fruit tree, herb and cactus can not disease on stage 1(0) of growth.
             if(!((patch.type == PatchType.BUSH || patch.type == PatchType.TREE || patch.type == PatchType.FRUIT_TREE || patch.type == PatchType.CACTUS || patch.type == PatchType.HERB) && currentGrowthStage == 0)) {
                 isDiseased = true
@@ -301,7 +301,6 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             FarmingPatch.ARDOUGNE_ALLOTMENT_S,FarmingPatch.ARDOUGNE_ALLOTMENT_N -> FarmingPatch.ARDOUGNE_FLOWER_C
             FarmingPatch.CATHERBY_ALLOTMENT_S,FarmingPatch.CATHERBY_ALLOTMENT_N -> FarmingPatch.CATHERBY_FLOWER_C
             FarmingPatch.PORT_PHAS_ALLOTMENT_SE,FarmingPatch.PORT_PHAS_ALLOTMENT_NW -> FarmingPatch.PORT_PHAS_FLOWER_C
-            FarmingPatch.TROLL_STRONGHOLD_HERB -> return true
             else -> return false
         }.getPatchFor(player)
 
