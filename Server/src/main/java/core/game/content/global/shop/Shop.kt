@@ -708,7 +708,7 @@ open class Shop @JvmOverloads constructor(
     open fun getBuyPrice(item: Item, player: Player): Int {
         var item = item
         item = Item(item.id, 1)
-        var price = item.definition.maxValue
+        var price = item.definition.value
         val sellVal = getSellingValue(item, player)
         if (price < sellVal) {
             price = getSellingValue(player, 0, item) + sellVal - (sellVal - item.definition.maxValue)
