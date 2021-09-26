@@ -63,9 +63,9 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 	 * The waiting players.
 	 */
 	private final PriorityQueue<Player> waitingPlayers = new PriorityQueue<Player>(20, (player1, player2) -> {
-		//get priorities of players. If the player is a bot, use -1 to make sure real players have priority to get in game
-		int p1 = player1 instanceof AIPlayer? -1: player1.getAttribute("pc_prior", 0);
-		int p2 = player2 instanceof AIPlayer? -1: player1.getAttribute("pc_prior", 0);
+		//get priorities of players. default to 0
+		int p1 = player1.getAttribute("pc_prior", 0);
+		int p2 = player2.getAttribute("pc_prior", 0);
 		//return in descending order
 		return p2 - p1;
 	});
