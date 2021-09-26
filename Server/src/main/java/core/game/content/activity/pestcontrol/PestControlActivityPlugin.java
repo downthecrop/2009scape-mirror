@@ -2,6 +2,7 @@ package core.game.content.activity.pestcontrol;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.PriorityQueue;
 
 import rs09.ServerConstants;
 import core.game.component.Component;
@@ -17,6 +18,7 @@ import core.game.node.entity.state.EntityState;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
+import rs09.game.ai.AIPlayer;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
@@ -60,7 +62,13 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 	/**
 	 * The waiting players.
 	 */
-	private final List<Player> waitingPlayers = new ArrayList<>(20);
+	private final PriorityQueue<Player> waitingPlayers = new PriorityQueue<Player>(20, (player1, player2) -> {
+		//get priorities of players. default to 0
+		int p1 = player1.getAttribute("pc_prior", 0);
+		int p2 = player2.getAttribute("pc_prior", 0);
+		//return in descending order
+		return p2 - p1;
+	});
 
 	/**
 	 * The active game sessions.
@@ -313,7 +321,7 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 	 * Gets the list of waiting players.
 	 * @return The list of waiting players.
 	 */
-	public List<Player> getWaitingPlayers() {
+	public PriorityQueue<Player> getWaitingPlayers() {
 		return waitingPlayers;
 	}
 
