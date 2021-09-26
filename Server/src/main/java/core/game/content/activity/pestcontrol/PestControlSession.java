@@ -1,10 +1,6 @@
 package core.game.content.activity.pestcontrol;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 import core.game.component.Component;
 import core.game.content.dialogue.FacialExpression;
@@ -212,7 +208,7 @@ public final class PestControlSession {
 	 * Starts a game.
 	 * @param waitingPlayers The list of waiting players.
 	 */
-	public void startGame(List<Player> waitingPlayers) {
+	public void startGame(PriorityQueue<Player> waitingPlayers) {
 		region.flagActive();
 		initBarricadesList();
 		List<Integer> list = new ArrayList<>(20);
@@ -225,21 +221,29 @@ public final class PestControlSession {
 		ids = list.toArray(new Integer[4]);
 		int count = 0;
 		String portalHealth = "<col=00FF00>" + (activity.getType().ordinal() == 0 ? 200 : 250);
-		for (Iterator<Player> it = waitingPlayers.iterator(); it.hasNext();) {
-			Player p = it.next();
+
+		List<Player> remainingPlayers = new ArrayList<>();
+		for (Player p = waitingPlayers.poll(); p != null; p = waitingPlayers.poll()) {
 			if (p.getSession().isActive()) {
 				if (++count > MAX_TEAM_SIZE) {
-					int priority = p.getAttribute("pc_prior", 0) + 1;
-					p.getPacketDispatch().sendMessage("You have been given priority level " + priority + " over other players in joining the next");
-					p.getPacketDispatch().sendMessage("game.");
-					p.setAttribute("pc_prior", priority);
+					remainingPlayers.add(p);
 					continue;
 				}
 				addPlayer(p, portalHealth);
 			}
-			it.remove();
 		}
+
+		for (Player p : remainingPlayers)
+		{
+			int priority = p.getAttribute("pc_prior", 0) + 1;
+			p.getPacketDispatch().sendMessage("You have been given priority level " + priority + " over other players in joining the next");
+			p.getPacketDispatch().sendMessage("game.");
+			p.setAttribute("pc_prior", priority);
+			waitingPlayers.add(p);
+		}
+		
 		spawnNPCs();
+		
 	}
 
 	/**
