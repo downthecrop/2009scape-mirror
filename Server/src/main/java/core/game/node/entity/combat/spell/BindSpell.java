@@ -134,9 +134,12 @@ public final class BindSpell extends CombatSpell {
 
 	@Override
 	public Plugin<SpellType> newInstance(SpellType type) throws Throwable {
-		SpellBook.MODERN.register(12, new BindSpell(SpellType.BIND, 20, 30.0, 151, BIND_START, BIND_PROJECTILE, BIND_END, Runes.NATURE_RUNE.getItem(2), Runes.EARTH_RUNE.getItem(3), Runes.WATER_RUNE.getItem(3)));
-		SpellBook.MODERN.register(30, new BindSpell(SpellType.SNARE, 50, 60.0, 152, SNARE_START, SNARE_PROJECTILE, SNARE_END, Runes.NATURE_RUNE.getItem(3), Runes.EARTH_RUNE.getItem(4), Runes.WATER_RUNE.getItem(4)));
-		SpellBook.MODERN.register(56, new BindSpell(SpellType.ENTANGLE, 79, 89.0, 153, ENTANGLE_START, ENTANGLE_PROJECTILE, ENTANGLE_END, Runes.NATURE_RUNE.getItem(4), Runes.EARTH_RUNE.getItem(5), Runes.WATER_RUNE.getItem(5)));
+        // TODO: bind/snare/entangle have separate casting and onhit components 
+        // to their sound effects, in order for splashes to sound distinct, currently 
+        // these just sound like the spells should on success, even if they splash
+		SpellBook.MODERN.register(12, new BindSpell(SpellType.BIND, 20, 30.0, 101, BIND_START, BIND_PROJECTILE, BIND_END, Runes.NATURE_RUNE.getItem(2), Runes.EARTH_RUNE.getItem(3), Runes.WATER_RUNE.getItem(3)));
+		SpellBook.MODERN.register(30, new BindSpell(SpellType.SNARE, 50, 60.0, 186, SNARE_START, SNARE_PROJECTILE, SNARE_END, Runes.NATURE_RUNE.getItem(3), Runes.EARTH_RUNE.getItem(4), Runes.WATER_RUNE.getItem(4)));
+		SpellBook.MODERN.register(56, new BindSpell(SpellType.ENTANGLE, 79, 89.0, 152, ENTANGLE_START, ENTANGLE_PROJECTILE, ENTANGLE_END, Runes.NATURE_RUNE.getItem(4), Runes.EARTH_RUNE.getItem(5), Runes.WATER_RUNE.getItem(5)));
 		return this;
 	}
 
