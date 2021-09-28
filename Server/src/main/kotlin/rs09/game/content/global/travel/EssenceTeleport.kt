@@ -38,7 +38,7 @@ object EssenceTeleport {
         npc.faceTemporary(player, 1)
         npc.graphics(Graphics(108))
         player.lock()
-        player.audioManager.send(195)
+        player.audioManager.send(125)
         Projectile.create(npc, player, 109).send()
         npc.sendChat("Senventior Disthinte Molesko!")
         GameWorld.Pulser.submit(object : Pulse(1) {
