@@ -133,6 +133,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
     public void animate() {
         player.animate(ANIMATION);
         player.graphics(GRAPHICS);
+        player.getAudioManager().send(2710);
     }
 
     @Override
