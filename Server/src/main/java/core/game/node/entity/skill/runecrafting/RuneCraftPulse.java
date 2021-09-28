@@ -235,14 +235,14 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
             }
             if (player.getInventory().remove(new Item(PURE_ESSENCE.getId(), amount)) && player.getInventory().remove(new Item(rune.getId(), amount))) {
                 for (int i = 0; i < amount; i++) {
-                    if (RandomFunction.random(1, 3) == 1 || hasBindingNeckalce()) {
+                    if (RandomFunction.random(1, 3) == 1 || hasBindingNecklace()) {
                         player.getInventory().add(new Item(combo.getRune().getId(), 1));
                         player.getSkills().addExperience(Skills.RUNECRAFTING, combo.getExperience(), true);
                     }
                 }
-                if (hasBindingNeckalce()) {
-                    player.getEquipment().get(EquipmentContainer.SLOT_HAT).setCharge(player.getEquipment().get(EquipmentContainer.SLOT_HAT).getCharge() - 1);
-                    if (1000 - player.getEquipment().get(EquipmentContainer.SLOT_HAT).getCharge() > 14) {
+                if (hasBindingNecklace()) {
+                    player.getEquipment().get(EquipmentContainer.SLOT_AMULET).setCharge(player.getEquipment().get(EquipmentContainer.SLOT_AMULET).getCharge() - 1);
+                    if (1000 - player.getEquipment().get(EquipmentContainer.SLOT_AMULET).getCharge() > 14) {
                         player.getEquipment().remove(BINDING_NECKLACE, true);
                         player.getPacketDispatch().sendMessage("Your binding necklace crumbles into dust.");
                     }
@@ -326,7 +326,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
      *
      * @return <code>True</code> if so.
      */
-    public boolean hasBindingNeckalce() {
+    public boolean hasBindingNecklace() {
         return player.getEquipment().containsItem(BINDING_NECKLACE);
     }
 
