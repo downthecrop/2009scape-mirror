@@ -253,6 +253,29 @@ object DeveloperConsole {
                     println("Error. Plays sound effect. Use: playsound soundID soundDelay soundVolume")
                 }
             }
+            "playsoundrange" -> {
+                if (argSize == 4) {
+                    var beginID = if (clientCommand[1].toIntOrNull() == null) 0 else clientCommand[1].toInt()
+                    var endID = if (clientCommand[2].toIntOrNull() == null) 0 else clientCommand[2].toInt()
+                    var delay = if (clientCommand[3].toIntOrNull() == null) 0 else clientCommand[3].toInt()
+                    if (beginID > endID) {
+                        val tmp = endID;
+                        endID = beginID;
+                        beginID = tmp;
+                    }
+                    Thread(object : Runnable {
+                        override fun run() {
+                            for (i in beginID..endID) {
+                                println("Playing sound effect ${i}")
+                                AudioHandler.soundEffectHandler(1, i, 0)
+                                Thread.sleep(delay.toLong())
+                            }
+                        }
+                    }).start()
+                } else {
+                    println("Error. Plays sound effect. Use: playsoundrange beginID endID delay")
+                }
+            }
             "playsong" -> {
                 if (argSize in 2..8) {
                     if (clientCommand[1].toIntOrNull() == null) {
