@@ -1386,7 +1386,10 @@ public class Player extends Entity {
 	public void clearState(String key){
 		State state = states.get(key);
 		if(state == null) return;
-		state.getPulse().stop();
+        Pulse pulse = state.getPulse();
+        if(pulse != null) {
+            pulse.stop();
+        }
 		states.remove(key);
 	}
 }
