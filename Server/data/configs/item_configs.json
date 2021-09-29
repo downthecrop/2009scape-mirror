@@ -86655,7 +86655,7 @@
   },
   {
     "requirements": "{1,30}-{5,20}",
-    "shop_price": "10",
+    "shop_price": "10000",
     "ge_buy_limit": "100",
     "examine": "A Proselyte Temple Knight's leg armour.",
     "durability": null,
