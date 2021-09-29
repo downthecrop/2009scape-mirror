@@ -319,6 +319,10 @@ class PitfallNPC : AbstractNPC {
     }
 
     override fun isAttackable(entity: Entity, style: CombatStyle): Boolean {
-        return entity is Player
+        return false
+    }
+
+    override fun isIgnoreAttackRestrictions(victim: Entity): Boolean {
+        return victim is Player
     }
 }

@@ -1,6 +1,8 @@
 package core.net;
 
 import rs09.game.system.SystemLogger;
+import rs09.game.world.repository.DisconnectionQueue;
+import rs09.game.world.repository.Repository;
 
 import java.io.IOException;
 import java.nio.ByteBuffer;
@@ -60,6 +62,11 @@ public class IoEventHandler {
 		ByteBuffer buffer = ByteBuffer.allocate(100_000);
 		IoSession session = (IoSession) key.attachment();
 		if (channel.read(buffer) == -1) {
+			if(session.getPlayer() != null){
+				Repository.getDisconnectionQueue().add(session.getPlayer());
+			}
+			key.cancel();
+			session.disconnect();
 			return;
 		}
 		buffer.flip();

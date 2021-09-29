@@ -38,6 +38,8 @@ import rs09.game.system.config.ShopParser;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 
+import java.util.Map;
+
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_ENEMIES_KILLED;
 
@@ -543,7 +545,7 @@ public class NPC extends Entity {
 		if (getAttribute("disable:drop", false)) {
 			return;
 		}
-		if (killer instanceof Player && p != null && p.getIronmanManager().isIronman() && getImpactHandler().getImpactLog().size() > 1) {
+		if (killer instanceof Player && p != null && p.getIronmanManager().isIronman() && getImpactHandler().getPlayerImpactLog().size() > 1) {
 			return;
 		}
 		if (definition == null || definition.getDropTables() == null) {
