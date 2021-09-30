@@ -30,6 +30,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import kotlin.Unit;
+import rs09.game.content.dialogue.DumpContainer;
 import rs09.game.ge.GrandExchangeOffer;
 import rs09.game.world.GameWorld;
 
@@ -325,7 +326,7 @@ public final class BankingPlugin extends OptionHandler {
                 case 762:
                     switch (button) {
                         case 18:
-                            p.getDialogueInterpreter().open(628371);
+                            p.getDialogueInterpreter().open(new DumpContainer().getID());
                             return true;
                         case 23:
                             p.getDialogueInterpreter().sendOptions("Select an Option", "Check bank value", "Banking assistance", "Close");
