@@ -32,7 +32,7 @@ public final class TeleportCrystalPlugin extends OptionHandler {
 
 	 @Override
 	    public boolean handle(Player player, Node node, String option) {
-	        if (true) {
+	        if (!WildernessZone.checkTeleport(player, 20)) {
 	            player.getPacketDispatch().sendMessage("The crystal is unresponsive.");
 	            return true;
 	        }
@@ -89,12 +89,10 @@ public final class TeleportCrystalPlugin extends OptionHandler {
 			itemId = (Integer) args[1];
 			switch ((Integer) args[0]) {
 			case 1:
-				interpreter.sendOptions("Select an Option", "Save your location", "Teleport to your location", "Contact Bill Teach", "Teleport to Lletya");
+				interpreter.sendOptions("Select an Option", "Teleport to Lletya", "Cancel");
 				stage = 100;
 				break;
 			}
-			
-			
 			return true;
 		}
 
@@ -106,67 +104,13 @@ public final class TeleportCrystalPlugin extends OptionHandler {
 			case 100:
 				switch(buttonId) {
 				case 1:
-					interpreter.sendDialogues(npc, null, "That'll cost you 100,000 coins, is that okay?");
-					stage = 1000;
-					break;
-				case 2:
-					player.getTeleporter().send(new Location(player.getGlobalData().getSavedX(), player.getGlobalData().getSavedY(), player.getGlobalData().getSavedH()), TeleportType.NORMAL);
-					end();
-					degrade(player, new Item(itemId));
-					break;
-				case 3:
-					interpreter.sendDialogues(npc, null, "This will use up a charge of your crystal,", "are you sure you wish to continue?");
-					stage = 3000;
-					break;
-				case 4:
 					player.getTeleporter().send(new Location(2329, 3172), TeleportType.NORMAL);
-			        break;
-				}
-				break;
-			case 1000:
-				interpreter.sendOptions("Select an Option", "Yes", "No");
-				stage = 2000;
-				break;
-			case 2000:
-				switch(buttonId) {
-				case 1:
-				if(player.getInventory().getAmount(995) >= 100000) {
-					end();
-					player.sendMessage("Your location has been saved succesfully!");
-					player.getInventory().remove(new Item(995, 100000));
-					player.getGlobalData().setSavedLocation(player.getLocation().getX(), player.getLocation().getY(), player.getLocation().getZ());
-				} else {
-					interpreter.sendDialogues(npc, null, "I'm sorry, but you don't have enough coins", "to cover this.");
-					stage = 7;
-				}
-				break;
-				case 2:
-					interpreter.sendOptions("Select an Option", "Save your location", "Teleport to your location", "Contact Bill Teach", "Teleport to Lletya");
-					stage = 100;
-					break;
-					
-				}
-				break;
-			case 3000:
-				interpreter.sendOptions("Select an Option", "Yes", "No");
-				stage = 4000;
-				break;
-				
-			case 4000:
-				switch(buttonId) {
-				case 1:
-					player.getDialogueInterpreter().open(billTeach.getId());
 					degrade(player, new Item(itemId));
-				break;
-				case 2:
-					interpreter.sendOptions("Select an Option", "Save your location", "Teleport to your location", "Contact Bill Teach", "Teleport to Lletya");
-					stage = 100;
-					break;
+			        break;
+                case 2:
+                    end();
+                    break;
 				}
-				break;
-				
-			case 7:
-				end();
 				break;
 			}
 			return true;
@@ -187,7 +131,8 @@ public final class TeleportCrystalPlugin extends OptionHandler {
 	            p.getPacketDispatch().sendMessage("Your teleportation crystal has degraded from use.");
 	        } else {
 	            p.getInventory().remove(new Item(id, 1));
-	            p.getPacketDispatch().sendMessages("Your teleportation crystal has turned into dust,", "you can purchase a new one from Mama.");
+	            p.getInventory().add(new Item(newItem, 1));
+	            p.getPacketDispatch().sendMessages("Your teleportation crystal has degraded to a tiny elf crystal,", "Eluned can re-enchant it.");
 	        }
 	    }
 
