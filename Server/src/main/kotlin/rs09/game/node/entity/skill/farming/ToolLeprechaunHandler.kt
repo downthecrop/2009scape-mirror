@@ -11,7 +11,7 @@ import core.plugin.Plugin
 import org.rs09.consts.Components
 import org.rs09.consts.NPCs
 
-val TL_IDS = arrayOf(NPCs.TOOL_LEPRECHAUN_3021,NPCs.GOTH_LEPRECHAUN_8000,NPCs.TOOL_LEPRECHAUN_4965)
+val TL_IDS = arrayOf(NPCs.TOOL_LEPRECHAUN_3021,NPCs.GOTH_LEPRECHAUN_8000,NPCs.TOOL_LEPRECHAUN_4965,NPCs.TECLYN_2861)
 @Initializable
 class ToolLeprechaunHandler : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
