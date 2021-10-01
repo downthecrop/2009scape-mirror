@@ -148,6 +148,18 @@ open class RangeSwingHandler
             if (state.secondaryHit > 0) {
                 hit += state.secondaryHit
             }
+            if(state.targets != null) {
+                for (s in state.targets) {
+                    if (s != null) {
+                        if(s.estimatedHit > 0) {
+                            hit += s.estimatedHit
+                        }
+                        if(s.secondaryHit > 0) {
+                            hit += s.secondaryHit
+                        }
+                    }
+                }
+            }
             val p = entity.asPlayer()
             val famExp = entity.getAttribute("fam-exp", false) && p.familiarManager.hasFamiliar()
             if (famExp) {

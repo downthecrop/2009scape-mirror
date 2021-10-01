@@ -480,6 +480,7 @@ public class Player extends Entity {
 			if(time == 0){
 				sendMessage(colorize("%RYour antifire potion has expired."));
 				removeAttribute("fire:immune");
+                getAudioManager().send(2607);
 			}
 		}
 		if(getAttribute("poison:immunity",0) > 0){
@@ -491,6 +492,7 @@ public class Player extends Entity {
 			if(time == 0){
 				sendMessage(colorize("%RYour antipoison potion has expired."));
 				removeAttribute("poison:immunity");
+                getAudioManager().send(2607);
 			}
 		}
 		if (!artificial && (System.currentTimeMillis() - getSession().getLastPing()) > 20_000L) {
@@ -1384,7 +1386,10 @@ public class Player extends Entity {
 	public void clearState(String key){
 		State state = states.get(key);
 		if(state == null) return;
-		state.getPulse().stop();
+        Pulse pulse = state.getPulse();
+        if(pulse != null) {
+            pulse.stop();
+        }
 		states.remove(key);
 	}
 }
