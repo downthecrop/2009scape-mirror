@@ -146,6 +146,7 @@ public final class ChinchompaSwingHandler extends RangeSwingHandler {
 				s.getVictim().animate(s.getVictim().getProperties().getDefenceAnimation());
 			}
 		}
+        addExperience(entity, victim, state);
 	}
 
 	/**
