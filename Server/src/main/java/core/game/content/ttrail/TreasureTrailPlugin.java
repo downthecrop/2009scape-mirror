@@ -132,16 +132,7 @@ public final class TreasureTrailPlugin extends OptionHandler {
 
 		@Override
 		public boolean createDrop(Item item, Player player, NPC npc, Location l) {
-			if ((npc.getId() == 49 || npc.getId() == 3586)) {
-				return true;
-			}
-			if (npc.getDefinition().getDropTables().getMainTable().size() < 3) {
-				return false;
-			}
-			if (!hasClue(player)) {
-				return true;
-			}
-			return false;
+			return !hasClue(player);
 		}
 
 		@Override

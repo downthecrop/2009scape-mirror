@@ -78,6 +78,7 @@ enum class Plantable(val itemID: Int, val value: Int, val stages: Int, val plant
 
     //Other
     BELLADONNA_SEED(5281, 4, 4, 91.0, 128.0, 0.0, 63, PatchType.BELLADONNA, Items.CAVE_NIGHTSHADE_2398),
+    MUSHROOM_SPORE(Items.MUSHROOM_SPORE_5282, 6, 7, 61.5, 57.7, 0.0, 53, PatchType.MUSHROOM, Items.MUSHROOM_6004),
     CACTUS_SEED(Items.CACTUS_SEED_5280, 8, 7, 66.5, 25.0, 374.0, 55, PatchType.CACTUS, Items.CACTUS_SPINE_6016),
     EVIL_TURNIP_SEED(Items.EVIL_TURNIP_SEED_12148, 4, 1, 41.0, 46.0, 0.0, 42, PatchType.EVIL_TURNIP, Items.EVIL_TURNIP_12134)
     ;

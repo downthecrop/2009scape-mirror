@@ -65,8 +65,10 @@ enum class FarmingPatch(val varpIndex: Int, val varpOffset: Int, val type: Patch
 
     //Other
     DRAYNOR_BELLADONNA(512, 16, PatchType.BELLADONNA),
+    CANIFIS_MUSHROOM(512, 8, PatchType.MUSHROOM),
     ALKHARID_CACTUS(512, 0, PatchType.CACTUS),
     EVIL_TURNIP(1171, 7, PatchType.EVIL_TURNIP);
+
 
     companion object {
         @JvmField
