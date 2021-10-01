@@ -52,7 +52,7 @@ public enum PrayerType {
 	STEEL_SKIN(28, 3, 92, 31, PrayerCategory.BABY_BLUE, 2687, new SkillBonus(Skills.DEFENCE, 0.15)), 
 	ULTIMATE_STRENGTH(31, 3, 93, 33, PrayerCategory.GREEN, 2691, new SkillBonus(Skills.STRENGTH, 0.15)), 
 	INCREDIBLE_REFLEXES(34, 3, 94, 35, PrayerCategory.PINK, 2667, new SkillBonus(Skills.ATTACK, 0.15)), 
-	PROTECT_FROM_SUMMONING(35, 2, 1168, 53, PrayerCategory.DARK_BROWN, PrayerCategory.MAGENTA, new Audio(-1)),
+	PROTECT_FROM_SUMMONING(35, 2, 1168, 53, PrayerCategory.DARK_BROWN, PrayerCategory.MAGENTA, new Audio(4262)),
 	PROTECT_FROM_MAGIC(37, 3, 95, 37, PrayerCategory.LIGHT_BROWN, 2675), 
 	PROTECT_FROM_MISSILES(40, 3, 96, 39, PrayerCategory.LIGHT_BROWN, 2677), 
 	PROTECT_FROM_MELEE(43, 4, 97, 41, PrayerCategory.LIGHT_BROWN, 2676), 
