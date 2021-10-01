@@ -9,7 +9,7 @@ import java.util.*
 
 class SimpleHalloweenEvent : WorldEvent("hween"){
     override fun checkActive(): Boolean {
-        return Calendar.getInstance().get(Calendar.MONTH) == Calendar.OCTOBER
+        return false
     }
 
     override fun initialize() {
