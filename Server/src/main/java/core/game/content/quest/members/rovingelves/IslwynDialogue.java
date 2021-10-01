@@ -239,7 +239,7 @@ public class IslwynDialogue extends DialoguePlugin {
 		case 33:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(1680, FacialExpression.HALF_GUILTY, "Ah, very well.", "I will sell you a new bow or shield for 750,000 coins.");
+				interpreter.sendDialogues(1680, FacialExpression.HALF_GUILTY, "Ah, very well.", "I will sell you a new bow or shield for 900,000 coins.");
 				stage = 37;
 				break;
 			case 2:
@@ -269,13 +269,16 @@ public class IslwynDialogue extends DialoguePlugin {
 				interpreter.sendDialogue("You don't have any seeds to recharge.");
 				stage = 500;
 			}
-			if (!player.getInventory().contains(995, 500000)) {
-				interpreter.sendDialogue("You don't have enough coins.");
+            int timesRecharged = player.getAttribute("rovingelves:crystal-equip-recharges", 0);
+            int price = crystalWeaponPrice(timesRecharged);
+			if (!player.getInventory().contains(995, price)) {
+				interpreter.sendDialogue(String.format("You don't have enough coins, you need %d.", price));
 				stage = 500;
 			}
-			if (player.getInventory().contains(995, 500000) && player.getInventory().contains(RovingElves.CRYSTAL_SEED.getId(), 1)) {
-				if (player.getInventory().remove(RovingElves.CRYSTAL_SEED) && player.getInventory().remove(new Item(995, 500000))) {
+			if (player.getInventory().contains(995, price) && player.getInventory().contains(RovingElves.CRYSTAL_SEED.getId(), 1)) {
+				if (player.getInventory().remove(RovingElves.CRYSTAL_SEED) && player.getInventory().remove(new Item(995, price))) {
 					player.getInventory().add(new Item(4214, 1));
+                    player.incrementAttribute("/save:rovingelves:crystal-equip-recharges", 1);
 					end();
 				}
 			}
@@ -285,13 +288,16 @@ public class IslwynDialogue extends DialoguePlugin {
 				interpreter.sendDialogue("You don't have any seeds to recharge.");
 				stage = 500;
 			}
-			if (!player.getInventory().contains(995, 500000)) {
+            timesRecharged = player.getAttribute("rovingelves:crystal-equip-recharges", 0);
+            price = crystalWeaponPrice(timesRecharged);
+			if (!player.getInventory().contains(995, price)) {
 				interpreter.sendDialogue("You don't have enough coins.");
 				stage = 500;
 			}
-			if (player.getInventory().contains(995, 500000) && player.getInventory().contains(RovingElves.CRYSTAL_SEED.getId(), 1)) {
-				if (player.getInventory().remove(RovingElves.CRYSTAL_SEED) && player.getInventory().remove(new Item(995, 500000))) {
+			if (player.getInventory().contains(995, price) && player.getInventory().contains(RovingElves.CRYSTAL_SEED.getId(), 1)) {
+				if (player.getInventory().remove(RovingElves.CRYSTAL_SEED) && player.getInventory().remove(new Item(995, price))) {
 					player.getInventory().add(new Item(4225, 1));
+                    player.incrementAttribute("/save:rovingelves:crystal-equip-recharges", 1);
 					end();
 				}
 			}
@@ -313,12 +319,13 @@ public class IslwynDialogue extends DialoguePlugin {
 			}
 			break;
 		case 39:
-			if (!player.getInventory().contains(995, 750000)) {
+            price = crystalWeaponPrice(0);
+			if (!player.getInventory().contains(995, price)) {
 				interpreter.sendDialogue("You don't have enough coins.");
 				stage = 500;
 			}
-			if (player.getInventory().contains(995, 750000)) {
-				if (player.getInventory().remove(new Item(995, 750000))) {
+			if (player.getInventory().contains(995, price)) {
+				if (player.getInventory().remove(new Item(995, price))) {
 					if (!player.getInventory().add(new Item(4214, 1))) {
 						GroundItemManager.create(new Item(4214, 1), player);
 					}
@@ -327,12 +334,13 @@ public class IslwynDialogue extends DialoguePlugin {
 			}
 			break;
 		case 40:
-			if (!player.getInventory().contains(995, 750000)) {
+            price = crystalWeaponPrice(0);
+			if (!player.getInventory().contains(995, price)) {
 				interpreter.sendDialogue("You don't have enough coins.");
 				stage = 500;
 			}
-			if (player.getInventory().contains(995, 750000)) {
-				if (player.getInventory().remove(new Item(995, 750000))) {
+			if (player.getInventory().contains(995, price)) {
+				if (player.getInventory().remove(new Item(995, price))) {
 					if (!player.getInventory().add(new Item(4225, 1))) {
 						GroundItemManager.create(new Item(4225, 1), player);
 					}
@@ -371,4 +379,9 @@ public class IslwynDialogue extends DialoguePlugin {
 		}
 		return true;
 	}
+
+    // 900k for the 0th recharge (or for new bows), decreasing by 180k per recharge down to 180k
+    public int crystalWeaponPrice(int timesRecharged) {
+        return Math.max(900000 - 180000 * timesRecharged, 180000);
+    }
 }
