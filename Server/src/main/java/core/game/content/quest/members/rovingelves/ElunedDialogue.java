@@ -5,6 +5,7 @@ import core.game.content.dialogue.FacialExpression;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
+import org.rs09.consts.Items;
 
 /**
  * Handles Eluned's Dialogue for Roving Elves.
@@ -54,8 +55,8 @@ public class ElunedDialogue extends DialoguePlugin {
 			}
 			break;
 		case 1001:
-			if (quest.getStage(player) >= 100) {
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I am looking to buy teleportation crystals.");
+			if (quest.getStage(player) >= 100 && player.getInventory().contains(Items.TINY_ELF_CRYSTAL_6103, 1)) {
+				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I am looking to recharge teleportation crystals.");
 				stage = 1200;
 			} else {
 				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "I'm just looking around.");
@@ -76,23 +77,28 @@ public class ElunedDialogue extends DialoguePlugin {
 			stage = 500;
 			break;
 		case 1200:
-			interpreter.sendDialogues(1679, FacialExpression.HALF_GUILTY, "Very well. I'll sell you a brand new teleportation", "crystal for 750 gold. What do you say?");
+            int timesRecharged = player.getAttribute("rovingelves:crystal-teleport-recharges", 0);
+            int price = crystalTeleportPrice(timesRecharged);
+			interpreter.sendDialogues(1679, FacialExpression.HALF_GUILTY, "Very well. I'll recharge your teleportation", String.format("crystal for %d gold. What do you say?", price));
 			stage = 1202;
 			break;
 		case 1202:
-			interpreter.sendOptions("Select an Option", "Buy a crystal", "Nevermind");
+			interpreter.sendOptions("Select an Option", "Recharge a crystal", "Nevermind");
 			stage = 1203;
 			break;
 		case 1203:
 			switch (buttonId) {
 			case 1:
 				stage = 1204;
-				if (!player.getInventory().contains(995, 750)) {
+                timesRecharged = player.getAttribute("rovingelves:crystal-teleport-recharges", 0);
+                price = crystalTeleportPrice(timesRecharged);
+				if (!player.getInventory().contains(995, price)) {
 					interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Actually, I don't have enough coins.");
 				} else {
-					interpreter.sendDialogue("You purchase an elven teleportation crystal for 750 gold.");
-					if (player.getInventory().remove(new Item(995, 750))) {
-						player.getInventory().add(new Item(6099, 1));
+					interpreter.sendDialogue(String.format("Eluned recharges your elven teleportation crystal for %d gold.", price));
+					if (player.getInventory().remove(new Item(Items.TINY_ELF_CRYSTAL_6103)) && player.getInventory().remove(new Item(995, price))) {
+						player.getInventory().add(new Item(Items.TELEPORT_CRYSTAL_4_6099, 1));
+                        player.incrementAttribute("/save:rovingelves:crystal-teleport-recharges", 1);
 					}
 				}
 				break;
@@ -184,4 +190,9 @@ public class ElunedDialogue extends DialoguePlugin {
 		}
 		return true;
 	}
+
+    // 750 for the 0th recharge, decreasing by 150 per recharge down to 150
+    public int crystalTeleportPrice(int timesRecharged) {
+        return Math.max(750 - 150 * timesRecharged, 150);
+    }
 }
