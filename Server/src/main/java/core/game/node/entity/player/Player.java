@@ -476,6 +476,7 @@ public class Player extends Entity {
 			int time = getAttribute("fire:immune",0) - GameWorld.getTicks();
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antifire potion."));
+                getAudioManager().send(3120);
 			}
 			if(time == 0){
 				sendMessage(colorize("%RYour antifire potion has expired."));
@@ -488,6 +489,7 @@ public class Player extends Entity {
 			debug(time + "");
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antipoison potion."));
+                getAudioManager().send(3120);
 			}
 			if(time == 0){
 				sendMessage(colorize("%RYour antipoison potion has expired."));
