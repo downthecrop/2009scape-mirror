@@ -38,7 +38,7 @@ class LightSourceLighter : UseWithHandler(590,36,38){
      *
      * For bullseye lanterns:
      * 4548 + tinderbox = 4550
-     * 4700 + tinderbox = 4702
+     * 4701 + tinderbox = 4702
      * 9064 + tinderbox = 9065
      * Required Level: 49 Firemaking
      */
@@ -51,7 +51,7 @@ class LightSourceLighter : UseWithHandler(590,36,38){
         addHandler(4522, ITEM_TYPE, this)
         addHandler(4537, ITEM_TYPE, this)
         addHandler(4548, ITEM_TYPE, this)
-        addHandler(4700, ITEM_TYPE, this)
+        addHandler(4701, ITEM_TYPE, this)
         addHandler(9064, ITEM_TYPE, this)
         return this
     }
