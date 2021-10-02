@@ -25,7 +25,7 @@ class CreditShopInterface : InterfaceListener() {
                 val specific = when(opcode){
                     196 -> if(buttonID == 14) Items.RED_PARTYHAT_1038 else Items.RED_HWEEN_MASK_1057
                     124 -> if(buttonID == 14) Items.GREEN_PARTYHAT_1044 else Items.GREEN_HWEEN_MASK_1053
-                    199 -> if(buttonID == 14) Items.BLUE_PARTYHAT_2422 else Items.BLUE_HWEEN_MASK_1055
+                    199 -> if(buttonID == 14) Items.BLUE_PARTYHAT_1042 else Items.BLUE_HWEEN_MASK_1055
                     234 -> Items.YELLOW_PARTYHAT_1040
                     168 -> Items.PURPLE_PARTYHAT_1046
                     166 -> Items.WHITE_PARTYHAT_1048
@@ -46,7 +46,7 @@ class CreditShopInterface : InterfaceListener() {
 
     private fun getItem(buttonID: Int): ShopItem{
         return when(buttonID){
-            14 -> ShopItem(Items.BLUE_PARTYHAT_2422,75)
+            14 -> ShopItem(Items.BLUE_PARTYHAT_1042,75)
             18 -> ShopItem(Items.SCYTHE_1419,100)
             20 -> ShopItem(Items.JANGLES_THE_MONKEY_14648,200)
             17 -> ShopItem(Items.CHRISTMAS_CRACKER_962,65)
