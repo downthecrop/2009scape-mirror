@@ -4,7 +4,10 @@ import core.cache.def.impl.VarbitDefinition
 import core.game.content.global.travel.canoe.Canoe
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
+import core.game.node.entity.skill.gather.SkillingTool
 import core.game.world.map.Location
+import core.game.world.update.flag.context.Animation
+import core.net.packet.out.SkillLevel
 import org.rs09.consts.Components
 
 object CanoeUtils {
@@ -35,6 +38,20 @@ object CanoeUtils {
             12603 -> 4
             else -> 0
         }
+    }
+
+    fun getShapeAnimation(axe: SkillingTool): Animation{
+        when(axe){
+            SkillingTool.BRONZE_AXE -> return Animation(6744);
+            SkillingTool.IRON_AXE -> return Animation(6743);
+            SkillingTool.STEEL_AXE -> return Animation(6742);
+            SkillingTool.BLACK_AXE -> return Animation(6741);
+            SkillingTool.MITHRIL_AXE -> return Animation(6740);
+            SkillingTool.ADAMANT_AXE -> return Animation(6739);
+            SkillingTool.RUNE_AXE -> return Animation(6738);
+            SkillingTool.DRAGON_AXE -> return Animation(6745);
+        }
+        return axe.animation;
     }
 
     fun getDestinationFromButtonID(buttonID: Int): Location {
