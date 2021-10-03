@@ -9,24 +9,16 @@ import core.game.world.map.zone.impl.WildernessZone;
 import core.plugin.Initializable;
 
 /**
- * Represents the spirit graahk's dialogue
- * @author Splinter
- * @version 1.0
+ * Represents the lava titan's dialogue
  */
 @Initializable
 public final class LavaTitanDialogue extends DialoguePlugin {
 
-	/**
-	 * Constructs a new {@code GertrudesCatDialogue} {@code Object}.
-	 */
 	public LavaTitanDialogue() {
-		/**
-		 * empty.
-		 */
 	}
 
 	/**
-	 * Constructs a new {@code GertrudesCatDialogue} {@code Object}.
+	 * Constructs a new {@code LavaTitanDialogue} {@code Object}.
 	 * @param player the player.
 	 */
 	public LavaTitanDialogue(Player player) {

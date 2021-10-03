@@ -8,8 +8,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 /**
- * Represents the plugin used to handle the spirit graahk familiar
- * @author Splinter
+ * Represents the plugin used to handle the lava titan familiar
  */
 @Initializable
 public final class LavaTitanOptionPlugin extends OptionHandler {
