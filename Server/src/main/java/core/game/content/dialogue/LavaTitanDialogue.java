@@ -41,7 +41,7 @@ public final class LavaTitanDialogue extends DialoguePlugin {
 			player.getPacketDispatch().sendMessage("This is not your familiar.");
 			return true;
 		} else {
-			interpreter.sendOptions("Select an Option", "Chat", "DANGER: Teleport (lava maze, level 38 wilderness)");
+			interpreter.sendOptions("Select an Option", "Chat", "Teleport to Lava Maze");
 		}
 		return true;
 	}
