@@ -192,7 +192,7 @@ public class SlayerRewardPlugin extends ComponentPlugin {
 			case 28:
 			case 36:
 				if (purchase(player, 35)) {
-					player.getInventory().add(new Item(558, 750), player);
+					player.getInventory().add(new Item(558, 1000), player);
 					player.getInventory().add(new Item(560, 250), player);
 				}
 				break;
