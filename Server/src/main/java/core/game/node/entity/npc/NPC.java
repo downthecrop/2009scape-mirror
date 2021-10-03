@@ -516,11 +516,11 @@ public class NPC extends Entity {
 	@Override
 	public void finalizeDeath(Entity killer) {
 		super.finalizeDeath(killer);
-		if (getZoneMonitor().handleDeath(killer)) {
-			return;
-		}
 		if (task != null && killer instanceof Player && ((Player) killer).getSlayer().getTask() == task && ((Player) killer).getSlayer().hasTask()) {
 			((Player) killer).getSlayer().finalizeDeath(killer.asPlayer(), this);
+		}
+		if (getZoneMonitor().handleDeath(killer)) {
+			return;
 		}
 		if (killer instanceof Player && killer.getAttribute("jobs:id",null) != null) {
 			JobManager.handleDeath(id,(Player) killer);
