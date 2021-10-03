@@ -55,7 +55,7 @@ public final class LavaTitanDialogue extends DialoguePlugin {
 			break;
 		case 2:
 			if (!WildernessZone.checkTeleport(player, 20)) {
-				player.sendMessage("You cannot teleport with the Graahk above level 20 wilderness.");
+				player.sendMessage("You cannot teleport with the Lava Titan above level 20 wilderness.");
 				end();
 			} else {
 				player.getTeleporter().send(new Location(3048, 3820), TeleportType.NORMAL);
