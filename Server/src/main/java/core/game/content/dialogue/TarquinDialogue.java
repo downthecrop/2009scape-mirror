@@ -53,7 +53,7 @@ public class TarquinDialogue extends DialoguePlugin {
 			stage = 11;
 			break;
 		case 11:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I'd be suprised if you haven't already heard of me?");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I'd be surprised if you haven't already heard of me?");
 			stage = 12;
 			break;
 		case 12:
@@ -109,7 +109,7 @@ public class TarquinDialogue extends DialoguePlugin {
 			stage = 26;
 			break;
 		case 26:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "You look like you know your way around a tree, you can", "you can make many canoes.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "You look like you know your way around a tree,", "you can make many canoes.");
 			stage = 27;
 			break;
 		case 27:
