@@ -11,7 +11,7 @@ import core.game.node.entity.player.Player;
  * @author Aero
  */
 @Initializable
-public class MossTitanNPC extends Familiar {
+public class MossTitanNPC extends ElementalTitanNPC {
 
 	/**
 	 * Constructs a new {@code MossTitanNPC} {@code Object}.
@@ -32,11 +32,6 @@ public class MossTitanNPC extends Familiar {
 	@Override
 	public Familiar construct(Player owner, int id) {
 		return new MossTitanNPC(owner, id);
-	}
-
-	@Override
-	protected boolean specialMove(FamiliarSpecial special) {
-		return false;
 	}
 
 	@Override
