@@ -2,12 +2,15 @@ import api.ContentAPI
 import core.game.component.Component
 import core.game.node.entity.Entity
 import core.game.node.entity.player.Player
+import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.world.map.Location
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBuilder
+import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
+import rs09.game.interaction.InterfaceListener
 
 val AVACH_NIMPORTO_LOC = Location.create(1637, 4709)
 val PORTAL = 29534
@@ -15,8 +18,6 @@ val SIGNS = intArrayOf(29461, 29462, 29463, 29464)
 val HOLES = intArrayOf(29476, 29477, 29478)
 val NUMBERS = intArrayOf(29447, 29448, 29449, 29450, 29451, 29452, 29453, 29454, 29455)
 var i = 0
-
-//val TUTORIALS = intArrayOf(684, 685, 687, 688, 690)
 
 val TUTORIALS = hashMapOf(
     29463 to 684,
@@ -77,6 +78,98 @@ class VinesweeperZone : MapZone("Vinesweeper", true) {
         super.registerRegion(6473)
     }
 }
+
+class VinesweeperRewards : InterfaceListener() {
+    val IFACE = 686
+    val TRADE_FOR_XP_BUTTON = 53
+    val XP_CONFIRM = 72
+    val XP_DENY = 73
+
+    enum class Opcode(val value: Int) {
+        VALUE(155),
+        BUY1(196),
+        BUY5(124),
+        BUY10(199),
+        BUYX(234),
+    }
+
+    data class Reward(val itemID: Int, val points: Int) {}
+
+    val REWARDS = hashMapOf(
+        18 to Reward(Items.TOMATO_SEED_5322, 10),
+        19 to Reward(Items.SWEETCORN_SEED_5320, 150),
+        20 to Reward(Items.STRAWBERRY_SEED_5323, 165),
+        21 to Reward(Items.WATERMELON_SEED_5321, 680),
+        22 to Reward(Items.GUAM_SEED_5291, 10),
+        23 to Reward(Items.MARRENTILL_SEED_5292, 10),
+        24 to Reward(Items.RANARR_SEED_5295, 4000),
+        25 to Reward(Items.KWUARM_SEED_5299, 1000),
+        26 to Reward(Items.TARROMIN_SEED_5293, 10),
+        27 to Reward(Items.NASTURTIUM_SEED_5098, 10),
+
+        28 to Reward(Items.WOAD_SEED_5099, 30),
+        29 to Reward(Items.LIMPWURT_SEED_5100, 70),
+        30 to Reward(Items.ASGARNIAN_SEED_5308, 5),
+        31 to Reward(Items.KRANDORIAN_SEED_5310, 20),
+        32 to Reward(Items.REDBERRY_SEED_5101, 5),
+        33 to Reward(Items.CADAVABERRY_SEED_5102, 5),
+        34 to Reward(Items.DWELLBERRY_SEED_5103, 5),
+        35 to Reward(Items.JANGERBERRY_SEED_5104, 10),
+        36 to Reward(Items.WHITEBERRY_SEED_5105, 25),
+
+        37 to Reward(Items.POISON_IVY_SEED_5106, 30),
+        38 to Reward(Items.ACORN_5312, 100),
+        39 to Reward(Items.WILLOW_SEED_5313, 1800),
+        40 to Reward(Items.MAPLE_SEED_5314, 12000),
+        41 to Reward(Items.PINEAPPLE_SEED_5287, 10000),
+        42 to Reward(Items.YEW_SEED_5315, 29000),
+        43 to Reward(Items.PALM_TREE_SEED_5289, 35000),
+        44 to Reward(Items.SPIRIT_SEED_5317, 55000),
+        45 to Reward(Items.COMPOST_POTION4_6470, 5000),
+        46 to Reward(Items.FLAG_12625, 50),
+
+        // Magic number from dumps/scripts/2003.cs2
+        TRADE_FOR_XP_BUTTON to Reward(11209, 0)
+    )
+
+
+    override fun defineListeners() {
+        onOpen(IFACE) { player, _ ->
+            for((buttonID, reward) in REWARDS) {
+                //ContentAPI.sendItemOnInterface(player, IFACE, buttonID, reward.itemID, 5)
+            }
+            //player.packetDispatch.sendRunScript(2003, "")
+            return@onOpen true
+        }
+        on(IFACE) { player, component, opcode, buttonID, slot, itemID ->
+            player.sendMessage("vinesweeper ${opcode}, ${buttonID}, ${slot}, ${itemID}")
+            when(opcode) {
+                Opcode.VALUE.value -> {
+                    when(buttonID) {
+                        TRADE_FOR_XP_BUTTON -> {
+                            player.packetDispatch.sendInterfaceConfig(686, 60, false)
+                        }
+                        XP_CONFIRM -> {
+                            player.sendMessage("TODO: award xp")
+                            player.packetDispatch.sendInterfaceConfig(686, 60, true)
+                        }
+                        XP_DENY -> {
+                            player.packetDispatch.sendInterfaceConfig(686, 60, true)
+                        }
+                        else -> {
+                            val reward = REWARDS[buttonID] ?: return@on true
+                            player.sendMessage("${Item(reward.itemID).name}: ${reward.points} vinesweeper points")
+                        }
+                    }
+                }
+                else -> {}
+            }
+            return@on true
+        }
+    }
+}
+
+
 
 /*
 https://www.youtube.com/watch?v=WkCVAOOR7Sw
