@@ -7,6 +7,7 @@ import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
 import core.game.world.map.Location
 import core.game.world.map.zone.MapZone
+import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneBuilder
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
@@ -19,30 +20,85 @@ val HOLES = intArrayOf(29476, 29477, 29478)
 val NUMBERS = intArrayOf(29447, 29448, 29449, 29450, 29451, 29452, 29453, 29454, 29455)
 var i = 0
 
-val TUTORIALS = hashMapOf(
+val TUTORIAL = 685
+
+val INSTRUCTION_SIGNS = hashMapOf(
     29463 to 684,
     29464 to 687,
     29462 to 688,
     29461 to 690
     )
 
+val RABBIT = 7125
+val FARMERS = intArrayOf(7128, 7129, 7130)
+val FARMER_BLINKIN = 7131
 val MRS_WINKIN = 7132
 
+val MAX_SEEDS = 300
+val VINESWEEPER_BORDERS = ZoneBorders(1600,4672,1663,4735)
+
 class VinesweeperListener : InteractionListener() {
+    var SEED_LOCS: HashSet<Location> = HashSet()
+    fun populateSeeds() {
+        while(SEED_LOCS.size < MAX_SEEDS) {
+            val loc = VINESWEEPER_BORDERS.getRandomLoc()
+            val scenery = ContentAPI.getScenery(loc)
+            if(scenery != null && HOLES.contains(scenery.id)) {
+                SEED_LOCS.add(loc)
+            }
+        }
+        System.out.println("seed_locs: ${SEED_LOCS}")
+    }
+    fun isSeed(loc: Location): Boolean {
+        val scenery = ContentAPI.getScenery(loc)
+        return scenery != null && HOLES.contains(scenery.id) && SEED_LOCS.contains(scenery.location)
+    }
+    fun isHole(loc: Location): Boolean {
+        val scenery = ContentAPI.getScenery(loc)
+        return scenery != null && HOLES.contains(scenery.id)
+    }
+    fun dig(player: Player, loc: Location) {
+        if(isSeed(loc)) {
+            player.sendMessage("TODO: dead plant and decrement points and schedule farmer")
+        } else {
+            var count = 0
+            for(dx in -1..1) {
+                for(dy in -1..1) {
+                    if(isSeed(loc.transform(dx, dy, 0))) {
+                        count += 1
+                    }
+                }
+            }
+            val scenery = ContentAPI.getScenery(loc)
+            if(scenery != null) {
+                SceneryBuilder.replace(scenery, scenery.transform(NUMBERS[count]))
+            }
+            if(count == 0) {
+                for(dx in -1..1) {
+                    for(dy in -1..1) {
+                        val newLoc = loc.transform(dx, dy, 0)
+                        if(isHole(newLoc))
+                        dig(player, newLoc)
+                    }
+                }
+            }
+        }
+    }
     override fun defineListeners() {
         ZoneBuilder.configure(VinesweeperZone())
+        populateSeeds()
         on(PORTAL, SCENERY, "enter") { player, _ ->
             val loc = player.getAttribute("vinesweeper:return-tele", Location.create(3052, 3304))
             ContentAPI.teleport(player, loc)
             return@on true
         }
         on(SIGNS, SCENERY, "read") { player, node ->
-            player.interfaceManager.open(Component(TUTORIALS[node.id]!!))
+            player.interfaceManager.open(Component(INSTRUCTION_SIGNS[node.id]!!))
             return@on true
         }
         on(HOLES, SCENERY, "dig") { player, node ->
-            player.sendMessage("hello from ${node.location}")
-            SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(NUMBERS[i++ % NUMBERS.size]))
+            dig(player, node.location)
+            //SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(NUMBERS[i++ % NUMBERS.size]))
             return@on true
         }
         on(MRS_WINKIN, NPC, "trade") { player, node ->
@@ -52,11 +108,14 @@ class VinesweeperListener : InteractionListener() {
         on(MRS_WINKIN, NPC, "buy-flags") { player, node ->
             return@on true
         }
+        on(FARMER_BLINKIN, NPC, "talk-to") { player, _ ->
+            player.interfaceManager.open(Component(TUTORIAL))
+            return@on true
+        }
     }
 }
 
 class VinesweeperZone : MapZone("Vinesweeper", true) {
-
     override fun enter(e: Entity): Boolean {
         if(e is Player) {
             e.interfaceManager.openOverlay(Component(689))
@@ -135,9 +194,9 @@ class VinesweeperRewards : InterfaceListener() {
 
     override fun defineListeners() {
         onOpen(IFACE) { player, _ ->
-            for((buttonID, reward) in REWARDS) {
-                //ContentAPI.sendItemOnInterface(player, IFACE, buttonID, reward.itemID, 5)
-            }
+            /*for((buttonID, reward) in REWARDS) {
+                ContentAPI.sendItemOnInterface(player, IFACE, buttonID, reward.itemID, 5)
+            }*/
             //player.packetDispatch.sendRunScript(2003, "")
             return@onOpen true
         }
