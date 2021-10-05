@@ -10,6 +10,7 @@ import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
 import core.game.world.map.zone.ZoneBuilder
 import org.rs09.consts.Items
+import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InterfaceListener
 
@@ -108,8 +109,21 @@ class VinesweeperListener : InteractionListener() {
         on(MRS_WINKIN, NPC, "buy-flags") { player, node ->
             return@on true
         }
-        on(FARMER_BLINKIN, NPC, "talk-to") { player, _ ->
-            player.interfaceManager.open(Component(TUTORIAL))
+        on(FARMER_BLINKIN, NPC, "talk-to") { player, npc ->
+            //player.interfaceManager.open(Component(TUTORIAL))
+			ContentAPI.openDialogue(player, BlinkinDialogue(), npc)
+            return@on true
+        }
+        on(FARMER_BLINKIN, NPC, "buy-flags") { player, npc ->
+            val dialogue = BlinkinDialogue()
+            dialogue.stage = 21
+            ContentAPI.openDialogue(player, dialogue, npc)
+            return@on true
+        }
+        on(FARMER_BLINKIN, NPC, "buy-roots") { player, npc ->
+            val dialogue = BlinkinDialogue()
+            dialogue.stage = 40
+            ContentAPI.openDialogue(player, dialogue, npc)
             return@on true
         }
     }
