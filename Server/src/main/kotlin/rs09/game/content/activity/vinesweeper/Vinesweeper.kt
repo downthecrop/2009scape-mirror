@@ -199,10 +199,8 @@ class VinesweeperListener : InteractionListener() {
             if(player.inventory.remove(Item(Items.FLAG_12625, 1))) {
                 player.sendMessage("You add a flag to the patch.")
                 val scenery = node as Scenery
-                if(scenery != null) {
-                    SceneryBuilder.replace(scenery, scenery.transform(FLAG_OBJ))
-                    scheduleNPCs(player, scenery.location, true, true)
-                }
+                SceneryBuilder.replace(scenery, scenery.transform(FLAG_OBJ))
+                scheduleNPCs(player, scenery.location, true, true)
             } else {
                 // TODO (crash): authenticity
                 player.sendMessage("You do not have a flag to place in the patch.")
@@ -231,11 +229,18 @@ class VinesweeperListener : InteractionListener() {
             })
             return@on true
         }
-        on(MRS_WINKIN, NPC, "trade") { player, node ->
+        on(MRS_WINKIN, NPC, "talk-to") { player, npc ->
+			ContentAPI.openDialogue(player, WinkinDialogue(), npc)
+            return@on true
+        }
+        on(MRS_WINKIN, NPC, "trade") { player, _ ->
             player.interfaceManager.open(Component(686))
             return@on true
         }
-        on(MRS_WINKIN, NPC, "buy-flags") { player, node ->
+        on(MRS_WINKIN, NPC, "buy flags") { player, npc ->
+            val dialogue = WinkinDialogue()
+            dialogue.stage = 20
+            ContentAPI.openDialogue(player, dialogue, npc)
             return@on true
         }
         on(RABBIT, NPC, "feed") { player, node ->
@@ -508,15 +513,14 @@ class VinesweeperRewards : InterfaceListener() {
     }
 
     override fun defineListeners() {
-        onOpen(IFACE) { player, _ ->
+        onOpen(IFACE) { _, _ ->
             /*for((buttonID, reward) in REWARDS) {
                 ContentAPI.sendItemOnInterface(player, IFACE, buttonID, reward.itemID, 5)
             }*/
             //player.packetDispatch.sendRunScript(2003, "")
             return@onOpen true
         }
-        on(IFACE) { player, component, opcode, buttonID, slot, itemID ->
-            player.sendMessage("vinesweeper ${opcode}, ${buttonID}, ${slot}, ${itemID}")
+        on(IFACE) { player, _, opcode, buttonID, _, _ ->
             when(opcode) {
                 Opcode.VALUE.value -> {
                     when(buttonID) {
@@ -557,10 +561,10 @@ class VinesweeperRewards : InterfaceListener() {
                     return@on true
                 }
                 Opcode.BUYX.value -> {
-                    player!!.setAttribute("runscript") { amount: Int ->
+                    player.setAttribute("runscript") { amount: Int ->
                         buy(player, buttonID, amount)
                     }
-                    player!!.dialogueInterpreter.sendInput(false, "Enter the amount:")
+                    player.dialogueInterpreter.sendInput(false, "Enter the amount:")
                     return@on true
                 }
                 else -> {}
