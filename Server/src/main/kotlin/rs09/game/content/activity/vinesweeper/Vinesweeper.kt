@@ -54,7 +54,7 @@ val VINESWEEPER_BORDERS = ZoneBorders(1600,4672,1663,4735)
 
 fun sendUpdatedPoints(player: Player) {
     val points = player.getAttribute("vinesweeper:points", 0);
-    player.configManager.set(1195, points shl 6);
+    player.varpManager.get(1195).setVarbit(6, points).send(player)
 }
 
 data class SeedDestination(val player: Player, val loc: Location, val alive: Boolean) {
@@ -187,10 +187,7 @@ class VinesweeperListener : InteractionListener() {
                 // TODO (crash): authenticity
                 player.sendMessage("You need a spade to dig here.")
             } else {
-                //player.animate(830)
-                //player.visualize(Animation(8709), Graphics(1543))
-                player.animate(Animation(8709))
-                player.graphics(Graphics(1543))
+                player.visualize(Animation(8709), Graphics(1543))
                 dig(player, node.location)
             }
             return@on true
@@ -213,7 +210,7 @@ class VinesweeperListener : InteractionListener() {
             GameWorld.Pulser.submit(object : Pulse(5) {
                 override fun pulse(): Boolean {
                     val msg = when(RandomFunction.random(0, 7)) {
-                        0 -> "You don't see anything interesting. You an't be sure if there's a seed there or not."
+                        0 -> "You don't see anything interesting. You can't be sure if there's a seed there or not."
                         1 -> "You get some mud in your eye and it stings! You have no idea what is in the hole."
                         2 -> "The mud seems to be too thick to see what is there."
                         3 -> "A slimy worm wriggles out of the mud, making you jump and lose concentration. You're not sure if there is a seed here or not."
