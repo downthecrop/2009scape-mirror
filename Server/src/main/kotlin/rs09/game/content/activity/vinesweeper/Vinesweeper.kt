@@ -6,6 +6,7 @@ import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills;
+import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
@@ -412,7 +413,9 @@ class VinesweeperZone : MapZone("Vinesweeper", true) {
         if(e is Player) {
             e.interfaceManager.closeOverlay()
             if(!logout) {
-                e.sendMessage("Winkin's Farm thanks you for your visit.\nLeftover ogleroots and flags have been returned to the establishment.\nYou have been reimbursed at a rate of 10gp per ogleroot and the flags have been collected.")
+                e.sendMessage("Winkin's Farm thanks you for your visit.")
+                e.sendMessage("Leftover ogleroots and flags have been returned to the establishment.")
+                e.sendMessage("You have been reimbursed at a rate of 10gp per ogleroot and the flags have been collected.")
                 val flags = e.inventory.getAmount(Item(Items.FLAG_12625))
                 if(flags > 0) {
                     e.setAttribute("/save:vinesweeper:stored-flags", flags)
@@ -425,7 +428,6 @@ class VinesweeperZone : MapZone("Vinesweeper", true) {
                 }
             }
         }
-
 
         return super.leave(e, logout)
     }
@@ -488,6 +490,22 @@ class VinesweeperRewards : InterfaceListener() {
         TRADE_FOR_XP_BUTTON to Reward(11209, 0)
     )
 
+    fun buy(player: Player, buttonID: Int, amount: Int) {
+        val reward = REWARDS[buttonID] ?: return
+        val cost = amount * reward.points
+        val points = player.getAttribute("vinesweeper:points", 0)
+        if(cost < points) {
+            val item = Item(reward.itemID, amount)
+            if(!player.inventory.add(item)) {
+                GroundItemManager.create(item, player)
+            }
+            player.incrementAttribute("/save:vinesweeper:points", -cost)
+            sendUpdatedPoints(player)
+        } else {
+            // TODO (crash): authenticity
+            player.sendMessage("You don't have enough points for that.")
+        }
+    }
 
     override fun defineListeners() {
         onOpen(IFACE) { player, _ ->
@@ -525,6 +543,25 @@ class VinesweeperRewards : InterfaceListener() {
                             player.sendMessage("${Item(reward.itemID).name}: ${reward.points} vinesweeper points")
                         }
                     }
+                }
+                Opcode.BUY1.value -> {
+                    buy(player, buttonID, 1)
+                    return@on true
+                }
+                Opcode.BUY5.value -> {
+                    buy(player, buttonID, 5)
+                    return@on true
+                }
+                Opcode.BUY10.value -> {
+                    buy(player, buttonID, 10)
+                    return@on true
+                }
+                Opcode.BUYX.value -> {
+                    player!!.setAttribute("runscript") { amount: Int ->
+                        buy(player, buttonID, amount)
+                    }
+                    player!!.dialogueInterpreter.sendInput(false, "Enter the amount:")
+                    return@on true
                 }
                 else -> {}
             }
