@@ -14,7 +14,7 @@ import core.game.world.update.flag.context.Graphics;
  * @author Aero
  */
 @Initializable
-public class IceTitanNPC extends Familiar {
+public class IceTitanNPC extends ElementalTitanNPC {
 
 	/**
 	 * Constructs a new {@code IceTitanNPC} {@code Object}.
@@ -37,11 +37,6 @@ public class IceTitanNPC extends Familiar {
 		return new IceTitanNPC(owner, id);
 	}
 
-	@Override
-	protected boolean specialMove(FamiliarSpecial special) {
-		owner.getSkills().updateLevel(Skills.DEFENCE, (int) ((int) owner.getSkills().getStaticLevel(Skills.DEFENCE) * 0.12));
-		return true;
-	}
 
 	@Override
 	public void visualizeSpecialMove() {

@@ -1,5 +1,6 @@
 package rs09.game.interaction.`object`.canoestation
 
+import api.ContentAPI
 import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
 import core.game.content.global.travel.canoe.Canoe
@@ -44,7 +45,7 @@ class CanoeInterfaceListeners : InterfaceListener() {
             }
 
             player.lock()
-            player.animate(axe.animation)
+            ContentAPI.animate(player,CanoeUtils.getShapeAnimation(axe))
             player.pulseManager.run(object : Pulse(3) {
                 override fun pulse(): Boolean {
                     if (RandomFunction.random(if (canoe == Canoe.WAKA) 8 else 6) == 1) {
@@ -56,7 +57,7 @@ class CanoeInterfaceListeners : InterfaceListener() {
                         player.unlock()
                         return true
                     }
-                    player.animate(axe.animation)
+                    ContentAPI.animate(player,CanoeUtils.getShapeAnimation(axe))
                     return false
                 }
             })
@@ -98,13 +99,20 @@ class CanoeInterfaceListeners : InterfaceListener() {
                 var counter = 0
                 override fun pulse(): Boolean {
                     when(counter++){
-                        0 -> player.interfaceManager.openOverlay(Component(Components.FADE_TO_BLACK_120))
+                        0 -> {
+                            player.interfaceManager.openOverlay(Component(Components.FADE_TO_BLACK_120))
+                            player.interfaceManager.open(Component(Components.CANOE_TRAVEL_758))
+                            }
                         2 -> {
                             PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 2))
                             player.interfaceManager.hideTabs(0, 1, 2, 3, 4, 5, 6, 11, 12)
                         }
                         15 -> player.properties.teleportLocation = dest
-                        16 -> {player.interfaceManager.closeOverlay(); player.interfaceManager.openOverlay(Component(Components.FADE_FROM_BLACK_170))}
+                        16 -> {
+                            player.interfaceManager.close(Component(Components.CANOE_TRAVEL_758))
+                            player.interfaceManager.closeOverlay()
+                            player.interfaceManager.openOverlay(Component(Components.FADE_FROM_BLACK_170))
+                        }
                         18 -> {
                             player.unlock()
                             player.interfaceManager.restoreTabs()
