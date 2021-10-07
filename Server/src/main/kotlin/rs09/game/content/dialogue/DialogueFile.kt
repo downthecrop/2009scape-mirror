@@ -66,6 +66,10 @@ abstract class DialogueFile {
         return npc(expr, *splitLines(msg!!))
     }
 
+    open fun npcl(msg: String?): Component? {
+        return npc(*splitLines(msg!!))
+    }
+
     /**
      * Use the automatic linesplitting feature in DialUtils to produce player dialogues
      * @param expr the FacialExpression to use, located in the FacialExpression enum.
@@ -73,6 +77,10 @@ abstract class DialogueFile {
      */
     open fun playerl(expr: FacialExpression?, msg: String?): Component? {
         return player(expr, *splitLines(msg!!))
+    }
+
+    open fun playerl(msg: String?): Component? {
+        return player(*splitLines(msg!!))
     }
 
     open fun end(){

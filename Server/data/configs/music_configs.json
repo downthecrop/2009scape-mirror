@@ -2290,5 +2290,11 @@
     "name": "The Sound of Guthix",
     "indexId": "626",
     "borders": "{2500,5766,2620,5810}"
+  },
+  {
+    "id": "487",
+    "name": "Charmin' Farmin'",
+    "indexId": "516",
+    "borders": "{1600,4672,1663,4735}"
   }
 ]
