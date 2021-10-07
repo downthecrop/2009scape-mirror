@@ -212,14 +212,14 @@ public class StandardCookingPulse extends Pulse {
         if (food.getId() == Items.RAW_OOMLIE_2337) {
             return "The meat is far too delicate to cook like this. Perhaps you should wrap something around it to protect it from the heat.";
         }
-        if (CookableItems.intentionalBurn(food.getId())) {
-            return "You deliberately burn the perfectly good piece of meat.";
-        }
         switch (product.getId()) {
             case Items.SINEW_9436:
                 return "You dry the meat into sinew.";
             case Items.SODA_ASH_1781:
                 return "You burn the seaweed into soda ash.";
+        }
+        if (CookableItems.intentionalBurn(food.getId())) {
+            return "You deliberately burn the perfectly good piece of meat.";
         }
         if (!burned) {
             return "You manage to cook some " + food.getName().replace("Raw ", "");
