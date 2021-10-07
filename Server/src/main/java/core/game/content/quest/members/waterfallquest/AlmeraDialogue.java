@@ -61,7 +61,7 @@ public class AlmeraDialogue extends DialoguePlugin {
 				}
 				break;
 			case 3:
-				interpreter.sendDialogues(304, FacialExpression.DISGUSTED, "It's my son Hudon, he's always getting to trouble, the", "boy's convinced there's hidden treasure in the river and", "I'm a bit worried about his safety, the poor lad can't", "even swim.");
+				interpreter.sendDialogues(304, FacialExpression.DISGUSTED, "It's my son Hudon, he's always getting into trouble, the", "boy's convinced there's hidden treasure in the river and", "I'm a bit worried about his safety, the poor lad can't", "even swim.");
 				stage = 4;
 				break;
 			case 4:

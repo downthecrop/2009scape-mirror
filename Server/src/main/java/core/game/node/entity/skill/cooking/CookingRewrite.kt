@@ -35,10 +35,6 @@ class CookingRewrite : InteractionListener() {
                     player.dialogueInterpreter.open(CookingDialogue(item.id,9436,true,obj))
                     return@onUseWith true
                 }
-                SEAWEED_401 -> if (range) {
-                    player.dialogueInterpreter.open(CookingDialogue(item.id,1781,false,obj))
-                    return@onUseWith true
-                }
                 BREAD_DOUGH_2307, UNCOOKED_CAKE_1889 -> if (!range) {
                     player.packetDispatch.sendMessage("You need to cook this on a range.")
                     return@onUseWith false
