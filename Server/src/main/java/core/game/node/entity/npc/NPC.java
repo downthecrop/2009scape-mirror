@@ -495,6 +495,11 @@ public class NPC extends Entity {
 		nextWalk = GameWorld.getTicks() + 5 + RandomFunction.randomize(10);
 	}
 
+    public void resetWalk() {
+        nextWalk = GameWorld.getTicks() - 1;
+        getWalkingQueue().reset();
+    }
+
 	/**
 	 * Called when the region goes inactive.
 	 */
