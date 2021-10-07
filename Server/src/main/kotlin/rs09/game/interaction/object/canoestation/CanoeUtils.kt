@@ -7,7 +7,6 @@ import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import core.net.packet.out.SkillLevel
 import org.rs09.consts.Components
 
 object CanoeUtils {

@@ -27,7 +27,7 @@ public final class MerlinCrystal extends Quest {
 			line(player, "<blue>I can start this quest by speaking to <red>King Arthur<blue> at<n> <red>Camelot Castle<blue>, just <red>North West of Catherby<n><blue>I must be able to defeat a <red>level 37 enemy", 11);
 			break;
 		case 10:// after talking to arthur
-			line(player, "<str>I spoke to King Arthur and he said I would be worthy of <n><str>becoming a Knight of the Round Table if I could free Merlin<n><str>from a giant crystal that he has been trapped in.</str>" + "<n><br><br><br><blue> I should ask the <red>other Knights<blue> if they have any <red>advice<blue> for<n><blue>me on how I should go about doing this.", 11);
+			line(player, "<str>I spoke to King Arthur and he said I would be worthy of <n><str>becoming a Knight of the Round Table if I could free Merlin<n><str>from a giant crystal that he has been trapped in.</str>" + "<n><blue> I should ask the<red> other Knights<blue> if they have any <red>advice<blue> for<n><blue>me on how I should go about doing this.", 11);
 			break;
 		case 20:// upon talking to kay/gawain and learning how merlin got trapped
 			line(player, "<str>I spoke to King Arthur and he said I would be worthy of <n><str>becoming a Knight of the Round Table if I could free Merlin<n><str>from a giant crystal that he has been trapped in.</str>" + "<n><blue>Gawain told me it was the work of <red>Morgan Le Faye<blue>.", 11);
