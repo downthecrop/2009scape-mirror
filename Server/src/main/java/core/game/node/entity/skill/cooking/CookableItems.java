@@ -89,7 +89,8 @@ public enum CookableItems {
 
     //Miscellaneous
     RAW_OOMLIE(Items.RAW_OOMLIE_2337, 0, Items.BURNT_OOMLIE_2426, 50, 0, 999,0,0), // always burns
-    OOMLIE_WRAP(Items.COOKED_OOMLIE_WRAP_2343, Items.WRAPPED_OOMLIE_2341, Items.BURNT_OOMLIE_WRAP_2345, 50, 110, 999,0,0);
+    OOMLIE_WRAP(Items.COOKED_OOMLIE_WRAP_2343, Items.WRAPPED_OOMLIE_2341, Items.BURNT_OOMLIE_WRAP_2345, 50, 110, 999,0,0),
+    SEAWEED(Items.SEAWEED_401,0,Items.SODA_ASH_1781,0,0,999,0,0);
 
     public final static HashMap<Integer,CookableItems>cookingMap = new HashMap<>();
     public final static HashMap<Integer, CookableItems>intentionalBurnMap = new HashMap<>();
