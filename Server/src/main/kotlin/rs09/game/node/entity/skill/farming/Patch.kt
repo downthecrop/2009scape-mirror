@@ -282,6 +282,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         isDead = false
         plantable = null
         player.varpManager.get(patch.varpIndex).clearBitRange(patch.varpOffset,patch.varpOffset + 7)
+        nextGrowth = 0L
         currentGrowthStage = 3
         setCurrentState(3)
         compost = CompostType.NONE
