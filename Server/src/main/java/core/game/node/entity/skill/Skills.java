@@ -401,6 +401,22 @@ public final class Skills {
 		}
 	}
 
+	public void correct(double divisor){
+		for(int i = 0; i < staticLevels.length; i++){
+			experience[i] /= divisor;
+			staticLevels[i] = getStaticLevelByExperience(i);
+			dynamicLevels[i] = staticLevels[i];
+			if(i == PRAYER){
+				setPrayerPoints(staticLevels[i]);
+			}
+			if(i == HITPOINTS){
+				setLifepoints(staticLevels[i]);
+			}
+		}
+		experienceMutiplier = 5.0;
+		updateCombatLevel();
+	}
+
 	public void parseExpRate(ByteBuffer buffer) {
 		experienceMutiplier = buffer.getDouble();
 		if(GameWorld.getSettings().getDefault_xp_rate() != experienceMutiplier){
