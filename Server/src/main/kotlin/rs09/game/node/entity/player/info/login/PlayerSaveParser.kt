@@ -372,6 +372,11 @@ class PlayerSaveParser(val player: Player) {
         if (GameWorld.settings?.default_xp_rate != 5.0) {
             player.skills.experienceMutiplier = GameWorld.settings?.default_xp_rate!!
         }
+        val divisor: Double
+        if(player.skills.experienceMutiplier >= 10){
+            divisor = player.skills.experienceMutiplier / 5.0
+            player.skills.correct(divisor)
+        }
         if (saveFile!!.containsKey("milestone")) {
             val milestone: JSONObject = saveFile!!["milestone"] as JSONObject
             player.skills.combatMilestone = (milestone.get("combatMilestone")).toString().toInt()
