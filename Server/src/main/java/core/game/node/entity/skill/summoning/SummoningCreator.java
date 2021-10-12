@@ -123,7 +123,7 @@ public final class SummoningCreator {
 		@Override
 		public boolean checkRequirements() {
 			player.getInterfaceManager().close();
-			if (player.getSkills().getLevel(Skills.SUMMONING) < type.getLevel()) {
+			if (player.getSkills().getStaticLevel(Skills.SUMMONING) < type.getLevel()) {
 				player.getPacketDispatch().sendMessage("You need a Summoning level of at least " + type.getLevel() + " in order to do this.");
 				return false;
 			}
