@@ -123,6 +123,9 @@ class BlinkinDialogue : FarmerDialogue() {
             42 -> {
 				player!!.setAttribute("runscript") { amount: Int ->
                     val price = Item(Items.COINS_995, 10 * amount)
+                    if(price.amount <= 0){
+                        return@setAttribute
+                    }
                     if(player!!.inventory.containsItem(price) && player!!.inventory.remove(price)) {
                         if(player!!.inventory.add(Item(Items.OGLEROOT_12624, amount))) {
                             npcl("There ya go! Good luck!")
