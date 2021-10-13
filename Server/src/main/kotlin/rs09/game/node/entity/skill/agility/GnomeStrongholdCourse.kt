@@ -1,5 +1,6 @@
 package rs09.game.node.entity.skill.agility
 
+import api.ContentAPI
 import core.cache.def.impl.SceneryDefinition
 import core.game.node.Node
 import core.game.node.scenery.Scenery
@@ -34,41 +35,41 @@ class GnomeStrongholdCourse
         when (`object`.id) {
             2295 -> {
                 TRAINERS[0]!!.sendChat("Okay get over that log, quick quick!")
-                player.packetDispatch.sendMessage("You walk carefully across the slippery log...")
+				ContentAPI.sendMessage(player, "You walk carefully across the slippery log...")
                 AgilityHandler.walk(player, 0, Location.create(2474, 3436, 0), Location.create(2474, 3429, 0), Animation.create(155), 7.5, "...You make it safely to the other side.")
                 return true
             }
             2285 -> {
                 TRAINERS[1]!!.sendChat("Move it, move it, move it!")
-                player.packetDispatch.sendMessage("You climb the netting...")
+				ContentAPI.sendMessage(player, "You climb the netting...")
                 AgilityHandler.climb(player, 1, Animation.create(828), `object`.location.transform(0, -1, 1), 7.5, null)
                 return true
             }
             35970 -> {
                 TRAINERS[2]!!.sendChat("That's it - straight up.")
-                player.packetDispatch.sendMessage("You climb the tree..")
+				ContentAPI.sendMessage(player, "You climb the tree..")
                 AgilityHandler.climb(player, 2, Animation.create(828), Location.create(2473, 3420, 2), 5.0, "...To the platform above.")
                 return true
             }
             2312 -> {
                 TRAINERS[3]!!.sendChat("Come on scaredy cat, get across that rope!")
-                player.packetDispatch.sendMessage("You carefully cross the tightrope.")
+				ContentAPI.sendMessage(player, "You carefully cross the tightrope.")
                 AgilityHandler.walk(player, 3, Location.create(2477, 3420, 2), Location.create(2483, 3420, 2), Animation.create(155), 7.5, null)
                 return true
             }
             4059 -> {
-                player.packetDispatch.sendMessage("You can't do that from here.")
+				ContentAPI.sendMessage(player, "You can't do that from here.")
                 return true
             }
             2314, 2315 -> {
-                player.packetDispatch.sendMessage("You climb down the tree..")
+				ContentAPI.sendMessage(player, "You climb down the tree..")
                 AgilityHandler.climb(player, 4, Animation.create(828), Location.create(2487, 3420, 0), 5.0, "You land on the ground.")
                 return true
             }
             2286 -> {
                 TRAINERS[4]!!.sendChat("My Granny can move faster than you.")
                 player.faceLocation(player.location.transform(0, 2, 0))
-                player.packetDispatch.sendMessage("You climb the netting...")
+				ContentAPI.sendMessage(player, "You climb the netting...")
                 AgilityHandler.climb(player, 5, Animation.create(828), player.location.transform(0, 2, 0), 7.5, null)
                 return true
             }
@@ -76,11 +77,11 @@ class GnomeStrongholdCourse
                 val index = if (`object`.id == 154) 0 else 1 //If the player clicks on the left pipe, set index to 0, otherwise 1
                 val x = 2484 + index * 3 //change the x coordinates for walking/animations depending on index multiplier
                 if (`object`.location.y == 3435) {
-                    player.packetDispatch.sendMessage("You can't do that from here.")
+					ContentAPI.sendMessage(player, "You can't do that from here.")
                     return true
                 }
                 if (USED_PIPES[index] > GameWorld.ticks) {
-                    player.packetDispatch.sendMessage("The pipe is being used.")
+					ContentAPI.sendMessage(player, "The pipe is being used.")
                     return true
                 }
                 USED_PIPES[index] = GameWorld.ticks + 10
