@@ -116,7 +116,7 @@ public final class HerblorePulse extends SkillPulse<Item> {
 		if ((player.getInventory().containsItem(potion.getBase()) && player.getInventory().containsItem(potion.getIngredient())) && player.getInventory().remove(potion.getBase(), potion.getIngredient())) {
 			final Item item = potion.getProduct();
 		    player.getInventory().add(item);
-			player.getPacketDispatch().sendMessage("You put the" + StringUtils.formatDisplayName(potion.getIngredient().getName().replace("Clean", "")) + " Leaf into the vial of water.");
+			player.getPacketDispatch().sendMessage("You put the" + StringUtils.formatDisplayName(potion.getIngredient().getName().toLowerCase().replace("clean", "")) + " leaf into the vial of water.");
 			if (cycles++ == 3) {
 				player.animate(ANIMATION);
 				cycles = 0;

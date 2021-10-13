@@ -41,7 +41,7 @@ public class EctophialFillPlugin extends UseWithHandler {
 				if (player.getInventory().remove(new Item(4252))) {
 					player.getInventory().add(new Item(4251));
 				}
-				player.sendMessage("You refill the ectophial.");
+				player.sendMessage("You refill the ectophial from the Ectofuntus.");
 				return true;
 			}
 		});

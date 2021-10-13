@@ -162,6 +162,7 @@ public enum EnchantedJewellery {
 		}
 		player.lock();
 		player.visualize(ANIMATION, GRAPHICS);
+		player.getAudioManager().send(200);
 		player.getImpactHandler().setDisabledTicks(4);
 		GameWorld.getPulser().submit(new Pulse(4, player) {
 			@Override
