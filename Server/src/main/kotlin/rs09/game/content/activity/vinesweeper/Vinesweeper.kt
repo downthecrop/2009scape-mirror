@@ -487,16 +487,13 @@ class VinesweeperRewards : InterfaceListener() {
         44 to Reward(Items.SPIRIT_SEED_5317, 55000),
         45 to Reward(Items.COMPOST_POTION4_6470, 5000),
         46 to Reward(Items.FLAG_12625, 50),
-
-        // Magic number from dumps/scripts/2003.cs2
-        TRADE_FOR_XP_BUTTON to Reward(11209, 0)
     )
 
     fun buy(player: Player, buttonID: Int, amount: Int) {
         val reward = REWARDS[buttonID] ?: return
         val cost = amount * reward.points
         val points = player.getAttribute("vinesweeper:points", 0)
-        if(cost < points) {
+        if(cost in 1 until points) {
             val item = Item(reward.itemID, amount)
             if(!player.inventory.add(item)) {
                 GroundItemManager.create(item, player)
