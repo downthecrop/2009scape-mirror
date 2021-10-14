@@ -312,13 +312,13 @@ public final class CharacterDesign {
 			player.getInterfaceManager().closeOverlay();
 
 			//Clears and Resets the Player's account and focuses the default interface to their Inventory
-			player.getInventory().clear();
-			player.getEquipment().clear();
-			player.getBank().clear();
+//			player.getInventory().clear();
+//			player.getEquipment().clear();
+//			player.getBank().clear();
 			player.getInterfaceManager().restoreTabs(); //This still hides the Attack (double swords) in the player menu until Player wields a weapon.
 			player.getInterfaceManager().setViewedTab(3);
-			player.getInventory().add(STARTER_PACK);
-			player.getBank().add(STARTER_BANK);
+//			player.getInventory().add(STARTER_PACK);
+//			player.getBank().add(STARTER_BANK);
 
 			player.getPulseManager().run(new Pulse(1){
 				@Override
