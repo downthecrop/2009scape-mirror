@@ -244,14 +244,14 @@ public final class TrollheimPlugin extends OptionHandler {
 		case "climb-up":
 			switch (id) {
 			case 18834:
-				ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, new Location(2828, 3678), "You climb up the ladder to the surface.");
+				ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, new Location(2828, 3678), "You clamber onto the windswept roof of the Troll Stronghold.");
 				break;
 			}
 			break;
 		case "climb-down":
 			switch (id) {
 			case 18833:
-				ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_DOWN, new Location(2831, 10076, 2), "You climb down the ladder.");
+				ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_DOWN, new Location(2831, 10076, 2), "You clamber back inside the Troll Stronghold.");
 				break;
 			}
 			break;
@@ -741,7 +741,7 @@ public final class TrollheimPlugin extends OptionHandler {
 		public boolean handle(int interfaceId, int buttonId) {
 			switch (stage) {
 			case 0:
-				npc("Hello traveller. What can I do for you?");
+				npc("Hello traveler. What can I do for you?");
 				stage = 1;
 				break;
 			case 1:
@@ -794,7 +794,7 @@ public final class TrollheimPlugin extends OptionHandler {
 				break;
 			case 13:
 				if (!player.getInventory().hasSpaceFor(CLIMBING_BOOTS)) {
-					player("I don't have enough space in my backback right", "this second.");
+					player("I don't have enough space in my backpack right", "this second.");
 					stage = 50;
 					return true;
 				}

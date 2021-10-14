@@ -1,5 +1,6 @@
 package rs09.game.node.entity.skill.agility
 
+import api.ContentAPI
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
@@ -61,14 +62,22 @@ class BarbarianOutpostCourse
                     player.packetDispatch.sendMessage("You cannot climb from this side.")
                 }
                 val flag = if (node.location == Location(2536, 3553, 0)) 4 else if (node.location == Location(2539, 3553, 0)) 5 else 6
-                player.packetDispatch.sendMessage("You climb the low wall...")
+				ContentAPI.sendMessage(player, "You climb the low wall...")
                 AgilityHandler.forceWalk(player, flag, node.location.transform(-1, 0, 0), node.location.transform(1, 0, 0), Animation.create(839), 10, 13.5, null)
             }
             455 -> player.barcrawlManager.read()
             385 -> {
-                player.packetDispatch.sendMessage("The scorpion stings you!")
+                ContentAPI.sendMessage(player, "The scorpion stings you!")
                 player.impactHandler.manualHit(player, 3, HitsplatType.NORMAL)
             }
+			386 -> {
+                ContentAPI.sendMessage(player, "The scorpion stings you!")
+                player.impactHandler.manualHit(player, 3, HitsplatType.NORMAL)
+            }
+			387 -> {
+                ContentAPI.sendMessage(player, "The scorpion stings you!")
+                player.impactHandler.manualHit(player, 3, HitsplatType.NORMAL)
+            }			
         }
         return true
     }
@@ -80,15 +89,15 @@ class BarbarianOutpostCourse
      */
     private fun handleRopeSwing(player: Player, `object`: Scenery) {
         if (player.location.y < 3554) {
-            player.packetDispatch.sendMessage("You cannot do that from here.")
+			ContentAPI.sendMessage(player, "You cannot do that from here.")
             return
         }
         if (ropeDelay > GameWorld.ticks) {
-            player.packetDispatch.sendMessage("The rope is being used.")
+			ContentAPI.sendMessage(player, "The rope is being used.")
             return
         }
         if (AgilityHandler.hasFailed(player, 1, 0.1)) {
-            AgilityHandler.fail(player, 0, Location.create(2549, 9951, 0), null, getHitAmount(player), "You slip and fall to the pit bellow.")
+            AgilityHandler.fail(player, 0, Location.create(2549, 9951, 0), null, getHitAmount(player), "You slip and fall to the pit below.")
             return
         }
         ropeDelay = GameWorld.ticks + 2
@@ -104,7 +113,7 @@ class BarbarianOutpostCourse
     private fun handleLogBalance(player: Player, `object`: Scenery) {
         val failed = AgilityHandler.hasFailed(player, 1, 0.5)
         val end = if (failed) Location.create(2545, 3546, 0) else Location.create(2541, 3546, 0)
-        player.packetDispatch.sendMessage("You walk carefully across the slippery log...")
+		ContentAPI.sendMessage(player, "You walk carefully across the slippery log...")
         AgilityHandler.walk(player, if (failed) -1 else 1, Location.create(2551, 3546, 0), end, Animation.create(155), if (failed) 0.0 else 13.5, if (failed) null else "...You make it safely to the other side.")
         if (failed) {
             AgilityHandler.walk(player, -1, player.location, Location.create(2545, 3546, 0), Animation.create(155), 0.0, null)
@@ -152,9 +161,9 @@ class BarbarianOutpostCourse
         val failed = AgilityHandler.hasFailed(player, 1, 0.3)
         val end = if (failed) Location.create(2534, 3547, 1) else Location.create(2532, 3547, 1)
         AgilityHandler.walk(player, if (failed) -1 else 3, Location.create(2536, 3547, 1), end, Animation.create(157), if (failed) 0.0 else 22.0, if (failed) null else "You skillfully edge across the gap.")
-        player.packetDispatch.sendMessage("You put your foot on the ledge and try to edge across..")
+		ContentAPI.sendMessage(player, "You put your foot on the ledge and try to edge across..")
         if (failed) {
-            AgilityHandler.fail(player, 3, Location.create(2534, 3545, 0), Animation(760), getHitAmount(player), "You slip and fall to the pit bellow.")
+            AgilityHandler.fail(player, 3, Location.create(2534, 3545, 0), Animation(760), getHitAmount(player), "You slip and fall to the pit below.")
             return
         }
     }
@@ -169,6 +178,8 @@ class BarbarianOutpostCourse
         SceneryDefinition.forId(1948).handlers["option:climb-over"] = this
         ItemDefinition.forId(455).handlers["option:read"] = this
         NPCDefinition.forId(385).handlers["option:pick-up"] = this
+		NPCDefinition.forId(386).handlers["option:pick-up"] = this
+		NPCDefinition.forId(387).handlers["option:pick-up"] = this
         PluginManager.definePlugin(BarbarianGuardDialogue())
     }
 
@@ -226,7 +237,7 @@ class BarbarianOutpostCourse
                 }
                 1 -> when (buttonId) {
                     1 -> {
-                        player("I want to come throught his gate.")
+                        player("I want to come through this gate.")
                         stage = 5
                     }
                     2 -> {
