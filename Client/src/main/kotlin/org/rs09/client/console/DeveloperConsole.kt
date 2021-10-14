@@ -242,6 +242,16 @@ object DeveloperConsole {
                     println("Error. Displays error message on login, account creation. Use: errormsg #")
                 }
             }
+            "dumpscript" -> {
+                if (argSize == 2) {
+                    val i = clientCommand[1].toIntOrNull()
+                    if(i != null) {
+                        DumpingTools.DumpOpcodesToTextFile("script_${i}.cs2", i)
+                    }
+                } else {
+                    println("Error. Dumps a cs2 script. Use: dumpscript #")
+                }
+            }
             "playsound" -> {
                 if (argSize == 4) {
                     val soundID = if (clientCommand[1].toIntOrNull() == null) 0 else clientCommand[1].toInt()
