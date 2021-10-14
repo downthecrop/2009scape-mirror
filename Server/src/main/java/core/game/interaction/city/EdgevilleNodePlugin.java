@@ -1,5 +1,6 @@
 package core.game.interaction.city;
 
+import api.ContentAPI;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.OptionHandler;
@@ -8,11 +9,12 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.world.map.Location;
+import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 /**
- * Represents the plugin used to handle edgeville related interactions.
+ * Represents the plugin used to handle Edgeville related interactions.
  *
  * @author 'Vexia
  * @version 1.0
@@ -31,6 +33,7 @@ public final class EdgevilleNodePlugin extends OptionHandler {
 
         SceneryDefinition.forId(26933).getHandlers().put("option:open", this);
 		SceneryDefinition.forId(26934).getHandlers().put("option:close", this);
+		SceneryDefinition.forId(26934).getHandlers().put("option:climb-down", this);
         return this;
     }
 
@@ -41,7 +44,7 @@ public final class EdgevilleNodePlugin extends OptionHandler {
             case 9262:
             case 9261:
             case 30806:
-                player.getPacketDispatch().sendMessage("There doesn't seem to be any seeds on this rosebush.");
+			    ContentAPI.sendMessage(player, "There doesn't seem to be any seeds on this rosebush.");
                 break;
             case 12265:
                 ClimbActionHandler.climb(player, null, Location.create(3078, 3493, 0));
@@ -53,14 +56,21 @@ public final class EdgevilleNodePlugin extends OptionHandler {
 					player.getConfigManager().set(680, 0);
 				}
 				break;
-            case 26933: // Trapdoors at edgeville dungeon entrance
+            case 26933: // Edgeville Dungeon trapdoor (when closed)
                 if (option.equalsIgnoreCase("open")) {
-                    SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(26934), 500);
+					player.animate(Animation.create(536));
+					ContentAPI.sendMessage(player, "The trapdoor opens...");
+					SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(26934), 500);
                 }
                 break;
-            case 26934: // Trapdoors at edgeville dungeon entrance
+            case 26934: // Edgeville Dungeon trapdoor (when open)
                 if (option.equalsIgnoreCase("close")) {
+					player.animate(Animation.create(535));
+					ContentAPI.sendMessage(player, "You close the trapdoor.");
                     SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(26933));
+                } else if (option.equalsIgnoreCase("climb-down")) {
+					ContentAPI.sendMessage(player, "You climb down through the trapdoor...");
+					ClimbActionHandler.climbLadder(player, (Scenery) node, option);
                 }
         }
         return true;
