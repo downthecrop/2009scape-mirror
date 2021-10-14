@@ -1,6 +1,6 @@
 package org.runite.client;
 
-final class SynthSound {
+public final class SynthSound {
 
     private final SynthInstrument[] synthInstruments = new SynthInstrument[10];
     private int end;
@@ -20,7 +20,7 @@ final class SynthSound {
         this.end = buffer.readUnsignedShort();
     }
 
-    static SynthSound create(CacheIndex var0, int var1, int var2) {
+    public static SynthSound create(CacheIndex var0, int var1, int var2) {
         byte[] var3 = var0.getFile(var1, var2);
         return var3 == null ? null : new SynthSound(new DataBuffer(var3));
     }
@@ -62,7 +62,7 @@ final class SynthSound {
         }
     }
 
-    final PcmSound toPCMSound() {
+    public final PcmSound toPCMSound() {
         byte[] var1 = this.getSamples();
         return new PcmSound(var1, 22050 * this.start / 1000, 22050 * this.end / 1000);
     }

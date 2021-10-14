@@ -1088,7 +1088,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
             var3 += (int)((double)var5 * var7);
          }
 
-         var5 = (int)(0.5D + (double)(256 * var2.aPcmSound_2509.anInt3034) * Math.pow(2.0D, (double)var3 * 3.255208333333333E-4D) / (double)Class21.sampleRate);
+         var5 = (int)(0.5D + (double)(256 * var2.aPcmSound_2509.frequency) * Math.pow(2.0D, (double)var3 * 3.255208333333333E-4D) / (double)Class21.sampleRate);
 
          return var5 >= 1?var5:1;
       } catch (RuntimeException var9) {
@@ -1132,7 +1132,7 @@ final class Class3_Sub24_Sub4 extends Class3_Sub24 {
 
    final void method501(Class3_Sub22 var1, boolean var2, byte var3) {
       try {
-         int var4 = var1.aPcmSound_2509.aByteArray3030.length;
+         int var4 = var1.aPcmSound_2509.samples.length;
          int var5;
          if(var2 && var1.aPcmSound_2509.aBoolean3031) {
             int var6 = var4 + (var4 - var1.aPcmSound_2509.anInt3033);
