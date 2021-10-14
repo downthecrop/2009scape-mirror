@@ -76,8 +76,8 @@ class WildernessCourse
                     2 -> {
                         val end = if (fail) Location.create(2998, 3924, 0) else if (`object`.id < 2309) Location.create(2998, 3917, 0) else Location.create(2998, 3930, 0)
                         val start = if (`object`.id < 2309) player.location else Location.create(2998, 3917, 0)
-                        player.packetDispatch.sendMessage("You go through the gate and try to edge over the ridge...")
-                        AgilityHandler.walk(player, -1, start, end, Animation.create(155), if (fail) 0.0 else 15.00, if (fail) "You loose your footing and fail into the wolf pit." else "You skillfully balance across the ridge...")
+						ContentAPI.sendMessage(player, "You go through the gate and try to edge over the ridge...")
+                        AgilityHandler.walk(player, -1, start, end, Animation.create(155), if (fail) 0.0 else 15.00, if (fail) "You lose your footing and fail into the wolf pit." else "You skillfully balance across the ridge...")
                     }
                     9 -> {
                         if (fail) {
@@ -104,7 +104,7 @@ class WildernessCourse
      */
     private fun handlePipe(player: Player, `object`: Scenery) {
         if (`object`.location.y == 3948) {
-            player.packetDispatch.sendMessage("You can't do that from here.")
+			ContentAPI.sendMessage(player, "You can't do that from here.")
             return
         }
         if (player.skills.getLevel(Skills.AGILITY) < 49) {
@@ -153,15 +153,15 @@ class WildernessCourse
      */
     private fun handleRopeSwing(player: Player, `object`: Scenery) {
         if (player.location.y < 3554) {
-            player.packetDispatch.sendMessage("You cannot do that from here.")
+			ContentAPI.sendMessage(player, "You cannot do that from here.")
             return
         }
         if (ropeDelay > GameWorld.ticks) {
-            player.packetDispatch.sendMessage("The rope is being used.")
+			ContentAPI.sendMessage(player, "The rope is being used.")
             return
         }
         if (AgilityHandler.hasFailed(player, 1, 0.1)) {
-            AgilityHandler.fail(player, 0, Location.create(3005, 10357, 0), null, getHitAmount(player), "You slip and fall to the pit bellow.")
+            AgilityHandler.fail(player, 0, Location.create(3005, 10357, 0), null, getHitAmount(player), "You slip and fall to the pit below.")
             return
         }
         ropeDelay = GameWorld.ticks + 2
@@ -206,7 +206,7 @@ class WildernessCourse
     private fun handleLogBalance(player: Player, `object`: Scenery) {
         val failed = AgilityHandler.hasFailed(player, 1, 0.5)
         val end = if (failed) Location.create(2998, 3945, 0) else Location.create(2994, 3945, 0)
-        player.packetDispatch.sendMessage("You walk carefully across the slippery log...")
+		ContentAPI.sendMessage(player, "You walk carefully across the slippery log...")
         AgilityHandler.walk(player, if (failed) -1 else 3, player.location, end, Animation.create(155), if (failed) 0.0 else 20.0, if (failed) null else "You skillfully edge across the gap.")
         if (failed) {
             GameWorld.Pulser.submit(object : Pulse(5, player) {
