@@ -976,7 +976,7 @@ public final class Class83 {
                     var8 = var9.toPCMSound();
                     this.aHashTable_1159.put(var6, var8);
                     if (var1 != null) {
-                        var1[0] -= var8.aByteArray3030.length;
+                        var1[0] -= var8.samples.length;
                     }
 
                     return var8;

@@ -7,9 +7,16 @@ import org.rs09.client.rendering.RenderingUtils
 import org.rs09.client.rendering.Toolkit
 import org.runite.client.*
 import java.awt.event.KeyEvent
+import java.io.ByteArrayInputStream;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat
 import java.util.*
 import java.util.LinkedList
+import javax.sound.sampled.AudioFileFormat;
+import javax.sound.sampled.AudioFormat;
+import javax.sound.sampled.AudioInputStream
+import javax.sound.sampled.AudioSystem;
 
 
 // TODO Escape characters in the string rendering - is this something we can do using RSString / the text renders?
@@ -284,6 +291,30 @@ object DeveloperConsole {
                     }).start()
                 } else {
                     println("Error. Plays sound effect. Use: playsoundrange beginID endID delay")
+                }
+            }
+            "dumpsfx" -> {
+                if (argSize == 3) {
+                    var beginID = if (clientCommand[1].toIntOrNull() == null) 0 else clientCommand[1].toInt()
+                    var endID = if (clientCommand[2].toIntOrNull() == null) 0 else clientCommand[2].toInt()
+                    Thread(object : Runnable {
+                        override fun run() {
+                            Files.createDirectories(FileSystems.getDefault().getPath("sfx"))
+                            for (i in beginID..endID) {
+                                val sfx = SynthSound.create(CacheIndex.soundFXIndex, i, 0).toPCMSound()
+                                println("len of ${i}: ${sfx.samples.size}")
+                                val out = Files.newOutputStream(FileSystems.getDefault().getPath("sfx", String.format("sfx_%05d.wav", i)))
+                                val format = AudioFormat(AudioFormat.Encoding.PCM_SIGNED, sfx.frequency.toFloat(), 8, 1, 1, sfx.frequency.toFloat(), false)
+                                AudioSystem.write(
+                                    AudioInputStream(ByteArrayInputStream(sfx.samples), format, sfx.samples.size.toLong()),
+                                    AudioFileFormat.Type.WAVE,
+                                    out)
+                                out.close()
+                            }
+                        }
+                    }).start()
+                } else {
+                    println("Error. Dumps sound effects. Use: dumpsfx beginID endID")
                 }
             }
             "playsong" -> {
