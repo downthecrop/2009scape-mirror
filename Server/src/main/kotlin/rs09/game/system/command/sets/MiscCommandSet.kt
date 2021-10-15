@@ -312,6 +312,13 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             notify(player, "${VarbitDefinition.forObjectID(SceneryDefinition.forId(objectID).varbitID).configId}")
         }
 
+        define("define_varbit"){ player, args ->
+            if(args.size < 2) {
+                reject(player, "Syntax: ::define_varbit varbitId")
+            }
+            val varbitID = args[1].toInt()
+            notify(player, "${varbitID}: ${VarbitDefinition.forId(varbitID, 0)}")
+        }
         define("togglexp",Command.Privilege.STANDARD){ player, args ->
             val enabled = player.varpManager.get(2501).getVarbit(0)?.value == 1
             player.varpManager.get(2501).setVarbit(0,if(enabled) 0 else 1).send(player)

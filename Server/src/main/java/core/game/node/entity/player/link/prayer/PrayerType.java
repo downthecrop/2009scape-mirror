@@ -61,8 +61,8 @@ public enum PrayerType {
 	RETRIBUTION(46, 12, 98, 47, PrayerCategory.LIGHT_BROWN, PrayerCategory.MAGENTA, new Audio(10000)), 
 	REDEMPTION(49, 6, 99, 49, PrayerCategory.LIGHT_BROWN, PrayerCategory.MAGENTA, new Audio(2678)), 
 	SMITE(52, 2, 100, 51, PrayerCategory.LIGHT_BROWN, PrayerCategory.MAGENTA, new Audio(2685)), 
-	CHIVALRY(60, 2, 1052, 55, PrayerCategory.PINK, 1000,65, new SkillBonus(Skills.DEFENCE, 0.2), new SkillBonus(Skills.STRENGTH, 0.18), new SkillBonus(Skills.ATTACK, 0.15)), 
-	PIETY(70, 2, 1053, 57, PrayerCategory.PINK, 1000, 70 , new SkillBonus(Skills.DEFENCE, 0.25), new SkillBonus(Skills.STRENGTH, 0.23), new SkillBonus(Skills.ATTACK, 0.2));
+	CHIVALRY(60, 2, 1052, 55, PrayerCategory.PINK, 3826, 65, new SkillBonus(Skills.DEFENCE, 0.2), new SkillBonus(Skills.STRENGTH, 0.18), new SkillBonus(Skills.ATTACK, 0.15)), 
+	PIETY(70, 2, 1053, 57, PrayerCategory.PINK, 3825, 70, new SkillBonus(Skills.DEFENCE, 0.25), new SkillBonus(Skills.STRENGTH, 0.23), new SkillBonus(Skills.ATTACK, 0.2));
 
 	/**
 	 * Represents the a cache of objects related to prayers in order to decide
