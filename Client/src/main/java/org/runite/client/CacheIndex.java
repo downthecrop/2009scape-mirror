@@ -21,7 +21,7 @@ public final class CacheIndex {
     static CacheIndex skinsIndex;
     static CacheIndex configurationsIndex;
     static CacheIndex interfacesIndex;
-    static CacheIndex soundFXIndex;
+    public static CacheIndex soundFXIndex;
     static CacheIndex landscapesIndex;
     static CacheIndex modelsIndex;
     static CacheIndex texturesIndex;
