@@ -204,6 +204,7 @@ public final class CS2Script extends Linkable {
             Object[] aobj = script.arguments;
             int j = ((Integer) aobj[0]).intValue();
             AssembledMethod currentMethod = ItemDefinition.getMethodByID(j);
+            // System.out.printf("Method id: %d\n", j);
             if (null == currentMethod)
                 return;
             ItemDefinition.scriptHeapCounter = 0;
@@ -270,7 +271,7 @@ public final class CS2Script extends Linkable {
                 if (maxIterations < j2)
                     throw new RuntimeException("Script exceeded max iterations");
                 int opcode = instructions[++programCounter];
-                //System.out.println("Instruction: " + programCounter + ". opcode is: " + opcode);
+                // System.out.println("Instruction: " + programCounter + ". opcode is: " + opcode);
                 if (opcode < 100) {
                     if (opcode == CS2AsmOpcodes.PUSH_INT.getOp()) {
                         ItemDefinition.intsStack[iStackCounter++] = instructionOperands[programCounter];
@@ -333,6 +334,7 @@ public final class CS2Script extends Linkable {
                     if (opcode == 25) {
                         int j3 = instructionOperands[programCounter];
                         ItemDefinition.intsStack[iStackCounter++] = NPCDefinition.method1484(j3);
+                        // System.out.printf("varp lookup: %s %s\n", j3, ItemDefinition.intsStack[iStackCounter-1]);
                         continue;
                     }
                     if (opcode == 27) {
@@ -964,6 +966,7 @@ public final class CS2Script extends Linkable {
                                                     if (opcode == 3306) { //Another Skill update listener (spams 10? Possible TOTAL hp)
                                                         int j9 = ItemDefinition.intsStack[--iStackCounter];
                                                         ItemDefinition.intsStack[iStackCounter++] = Class3_Sub20.anIntArray2480[j9];
+                                                        //System.out.printf("3306 -> %s: %s\n", j9, ItemDefinition.intsStack[iStackCounter - 1]);
                                                         continue;
                                                     }
                                                     if (3307 == opcode) { //Hover tooltip for Skill Interface, total xp for selected skill

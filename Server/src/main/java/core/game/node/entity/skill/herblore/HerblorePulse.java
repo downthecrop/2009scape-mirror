@@ -117,6 +117,7 @@ public final class HerblorePulse extends SkillPulse<Item> {
 			final Item item = potion.getProduct();
 		    player.getInventory().add(item);
 			player.getPacketDispatch().sendMessage("You put the" + StringUtils.formatDisplayName(potion.getIngredient().getName().toLowerCase().replace("clean", "")) + " leaf into the vial of water.");
+            player.getAudioManager().send(2608);
 			if (cycles++ == 3) {
 				player.animate(ANIMATION);
 				cycles = 0;
@@ -133,6 +134,7 @@ public final class HerblorePulse extends SkillPulse<Item> {
 		    player.getInventory().add(item);
 			player.getSkills().addExperience(Skills.HERBLORE, potion.getExperience(), true);
 			player.getPacketDispatch().sendMessage("You mix the " + potion.getIngredient().getName().toLowerCase() + " into your potion.");
+            player.getAudioManager().send(2608);
 			player.animate(ANIMATION);
 		}
 	}

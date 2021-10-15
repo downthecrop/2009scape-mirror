@@ -157,6 +157,7 @@ public final class SummoningCreator {
 			if (getDelay() == 1) {
 				setDelay(4);
 				player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(8509));
+                player.getAudioManager().send(4164); // 4277 also sounds the same
 				return false;
 			}
 			player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(8510));

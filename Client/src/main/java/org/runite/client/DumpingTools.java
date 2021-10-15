@@ -28,13 +28,33 @@ public class DumpingTools {
         //DumpToRuneStarCompatible("binaryScripts"); // Requires making the folder first. Probably the most useful one.
     }
 
+    public static String FriendlyOpcodeName(int i, int opcode, int arg) {
+        switch(opcode) {
+            case 0: return String.format("push_int %d (%08x)", arg, arg);
+            case 6: return String.format("jmp +%d (%04d)", arg, i + 1 + arg);
+            case 7: return String.format("bne +%d (%04d)", arg, i + 1 + arg);
+            case 8: return String.format("be +%d (%04d)", arg, i + 1 + arg);
+            case 9: return String.format("bgt +%d (%04d)", arg, i + 1 + arg);
+            case 10: return String.format("blt +%d (%04d)", arg, i + 1 + arg);
+            case 21: return String.format("ret %d", arg);
+            case 25: return String.format("fetch_varbit %d", arg);
+            case 33: return String.format("push_arg %d", arg);
+            case 3305: return String.format("getcurrentlevel %d", arg);
+            case 3306: return String.format("getstaticlevel %d", arg);
+            case 3200: return String.format("playsfx %d", arg);
+            default: return String.format("unknown (%d: %d)", opcode, arg);
+        }
+    }
+
     public static void DumpOpcodesToTextFile(String outputFile, int methodID) {
         try {
             AssembledMethod a = ItemDefinition.getMethodByID(methodID);
             FileWriter myWriter = new FileWriter(outputFile);
             myWriter.write("Opcodes for Method" + methodID + ":\n");
-            for (int opcode : a.assemblyInstructions) {
-                myWriter.write(opcode + "\n");
+            for (int i = 0; i < a.assemblyInstructions.length; i++) {
+                int opcode = a.assemblyInstructions[i];
+                int arg = a.instructionOperands[i];
+                myWriter.write(String.format("%04d: %s\n", i, FriendlyOpcodeName(i, opcode, arg)));
             }
             myWriter.close();
         } catch (IOException e) {
