@@ -43,6 +43,10 @@ public final class Prayer {
 	 */
 	public Prayer(Player player) {
 		this.player = player;
+
+        // 1050 is checked client-side for making piety/chivalry disallowed sfx, likely due to the minigame requirement.
+        // Set it here unconditionally until the minigame is implemented.
+        player.varpManager.get(1050).setVarbit(1, 8);
 	}
 
 	/**
