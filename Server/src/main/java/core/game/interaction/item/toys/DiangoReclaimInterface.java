@@ -1,5 +1,6 @@
 package core.game.interaction.item.toys;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -24,7 +25,7 @@ import java.util.Objects;
 public class DiangoReclaimInterface extends ComponentPlugin {
     private static final int COMPONENT_ID = 468;
     public static final List<Item> ITEMS = new ArrayList<>(20);
-    public static final Item[] HOLIDAY_ITEMS = {YoyoPlugin.YOYO, ReindeerHatPlugin.ReindeerHat, BasketofEggsEvent.RUBBER_CHICKEN,ZombieHeadPlugin.ZOMBIE_HEAD, new Item(6857), new Item(6856), new Item(6858), new Item(6859), new Item(6860), new Item(6861), new Item(6862), new Item(6863), new Item(9920), new Item(9921),new Item(9922), new Item(9923), new Item(9924), new Item(9925), new Item(11019), new Item(11020), new Item(11021), new Item(11022), new Item(11789), new Item(11949), new Item(12634), new Item(14076), new Item(14077), new Item(14081),new Item(14595), new Item(14602), new Item(14603), new Item(14605)};
+    public static final Item[] HOLIDAY_ITEMS = {YoyoPlugin.YOYO, ReindeerHatPlugin.ReindeerHat, BasketofEggsEvent.RUBBER_CHICKEN,ZombieHeadPlugin.ZOMBIE_HEAD, new Item(6857), new Item(6856), new Item(6858), new Item(6859), new Item(6860), new Item(6861), new Item(6862), new Item(6863), new Item(9920), new Item(9921),new Item(9922), new Item(9923), new Item(9924), new Item(9925), new Item(11019), new Item(11020), new Item(11021), new Item(11022), new Item(11789), new Item(11949), new Item(12634), new Item(14076), new Item(14077), new Item(14081),new Item(14595), new Item(14602), new Item(14603), new Item(14605), new Item(14654)};
 
     //initialize the plugin, add lists of items to the ITEMS list...
     @Override
@@ -43,7 +44,12 @@ public class DiangoReclaimInterface extends ComponentPlugin {
         }
 
         //filter out items the player already has in their bank, inventory, or equipped
-        Item[] reclaimables = ITEMS.stream().filter(Objects::nonNull).filter(item -> !player.getEquipment().containsItem(item) && !player.getInventory().containsItem(item) && !player.getBank().containsItem(item)).toArray(Item[]::new);
+        Item[] reclaimables = ITEMS.stream().filter(Objects::nonNull)
+                .filter(item -> !player.getEquipment().containsItem(item) && !player.getInventory().containsItem(item) && !player.getBank().containsItem(item)
+                        && (item.getId() != 14654
+                        || (!(ContentAPI.inInventory(player, 14655, 1) || ContentAPI.inEquipment(player, 14656, 1)) && player.getAttribute("sotr:purchased",false))
+                        ))
+                .toArray(Item[]::new);
 
         //only send items if there are some to send
         if(reclaimables.length > 0) {
