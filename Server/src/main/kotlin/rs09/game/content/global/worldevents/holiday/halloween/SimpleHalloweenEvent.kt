@@ -9,22 +9,16 @@ import java.util.*
 
 class SimpleHalloweenEvent : WorldEvent("hween"){
     override fun checkActive(): Boolean {
-        return false
+        return true
     }
 
     override fun initialize() {
         plugins = PluginSet(
-            CandyRewardPlugin(),
             GrimDialogue()
         )
-        val grim = NPC(6390, Location(3247,3198))
-        grim.isWalks = false
-        grim.walkRadius = 0
-        grim.isNeverWalks = true
-        grim.init()
         super.initialize()
         GameWorld.settings?.message_model = 800
-        GameWorld.settings?.message_string = "A mysterious figure has appeared in lumbridge cemetery! You should go investigate!"
+        GameWorld.settings?.message_string = "A mysterious figure has appeared in Draynor! You should go investigate!"
         log("Initialized.")
     }
 }
