@@ -4,6 +4,7 @@ import org.rs09.consts.Items
 import rs09.game.content.ame.events.MysteriousOldManNPC
 import rs09.game.content.ame.events.certer.CerterNPC
 import rs09.game.content.ame.events.drilldemon.SeargentDamienNPC
+import rs09.game.content.ame.events.evilchicken.EvilChickenNPC
 import rs09.game.content.ame.events.sandwichlady.SandwichLadyRENPC
 import rs09.game.content.global.WeightBasedTable
 import rs09.game.content.global.WeightedItem
@@ -28,6 +29,7 @@ enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = n
         WeightedItem(Items.LOOP_HALF_OF_A_KEY_987,1,1,1.0)
     )),
     DRILL_DEMON(SeargentDamienNPC()),
+    EVIL_CHICKEN(EvilChickenNPC()),
     SURPRISE_EXAM(MysteriousOldManNPC(),"sexam");
 
     var type: String = ""
