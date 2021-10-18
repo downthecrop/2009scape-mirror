@@ -6,11 +6,13 @@ import rs09.game.content.ame.events.certer.CerterNPC
 import rs09.game.content.ame.events.drilldemon.SeargentDamienNPC
 import rs09.game.content.ame.events.evilchicken.EvilChickenNPC
 import rs09.game.content.ame.events.sandwichlady.SandwichLadyRENPC
+import rs09.game.content.ame.events.genie.GenieNPC
 import rs09.game.content.global.WeightBasedTable
 import rs09.game.content.global.WeightedItem
 
 enum class RandomEvents(val npc: RandomEventNPC, val loot: WeightBasedTable? = null) {
     SANDWICH_LADY(SandwichLadyRENPC()),
+	GENIE(GenieNPC()),
     CERTER(CerterNPC(),WeightBasedTable.create(
         WeightedItem(Items.COINS_995,1,100,2.0),
         WeightedItem(Items.SPINACH_ROLL_1969,1,1,2.0),
