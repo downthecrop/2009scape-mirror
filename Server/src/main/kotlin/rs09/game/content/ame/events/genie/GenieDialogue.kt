@@ -13,7 +13,7 @@ import rs09.tools.END_DIALOGUE
 class GenieDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val assigned = player!!.getAttribute("genie:item",0)
-        npcl(FacialExpression.NEUTRAL, "Ah, so you are there, @name. I'm so glad you summoned me. Please take this lamp and make your wish.")
+        npcl(FacialExpression.NEUTRAL, "Ah, so you are there, ${player!!.name.capitalize()}. I'm so glad you summoned me. Please take this lamp and make your wish.")
 		ContentAPI.addItemOrDrop(player!!, assigned)
         player!!.antiMacroHandler.event?.terminate()
         stage = END_DIALOGUE
