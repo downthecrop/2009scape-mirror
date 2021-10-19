@@ -35,7 +35,9 @@ import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import rs09.game.content.dialogue.DialogueFile
+import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.system.SystemLogger
+import rs09.game.system.config.ItemConfigParser;
 import rs09.game.world.GameWorld
 import rs09.game.world.GameWorld.Pulser
 import rs09.game.world.repository.Repository
@@ -1252,6 +1254,14 @@ object ContentAPI {
         when(gfx){
             is Int -> Graphics.send(Graphics(gfx),location)
             is Graphics -> Graphics.send(gfx, location)
+        }
+    }
+
+    @JvmStatic
+    fun announceIfRare(player: Player, item: Item) {
+        if (item.definition.getConfiguration(ItemConfigParser.RARE_ITEM, false)) {
+            ContentAPI.sendNews("${player.username} has just received: ${item.amount} x ${item.name}.");
+            GlobalKillCounter.incrementRareDrop(player, item);
         }
     }
 }
