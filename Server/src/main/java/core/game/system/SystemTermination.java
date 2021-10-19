@@ -7,6 +7,7 @@ import core.game.node.entity.player.info.login.PlayerParser;
 import rs09.Server;
 import rs09.ServerConstants;
 import rs09.ServerStore;
+import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.ge.OfferManager;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.repository.Repository;
@@ -91,6 +92,7 @@ public final class SystemTermination {
 			} catch (Exception ignored) {}
 		}
 		Repository.getDisconnectionQueue().update();
+        GlobalKillCounter.save();
 		GrandExchangeDatabase.save();
 		OfferManager.save();
 		SystemLogger.flushLogs();
