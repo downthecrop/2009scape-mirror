@@ -31,6 +31,7 @@ import core.game.world.update.flag.npc.NPCFaceLocation;
 import core.game.world.update.flag.npc.NPCForceChat;
 import core.game.world.update.flag.npc.NPCSwitchId;
 import core.tools.RandomFunction;
+import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.content.jobs.JobManager;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.system.config.NPCConfigParser;
@@ -534,6 +535,7 @@ public class NPC extends Entity {
 		Player p = !(killer instanceof Player) ? null : (Player) killer;
 		if (p != null) {
 			p.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_ENEMIES_KILLED);
+            GlobalKillCounter.incrementKills(p, originalId);
 		}
 		handleDrops(p, killer);
 		if (!isRespawn()) {
