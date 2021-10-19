@@ -23,8 +23,8 @@ public class NewsPaperPlugin extends OptionHandler {
 			player.getInterfaceManager().open(new Component(530));
 			final String page1 = "Varrock gets Makeover!          The city of Varrock is the latest recipient of a complete makeover. When interviewed, King Roald said, 'In order to keep visitors coming to see the sights of our beautiful capital, we felt that tidying-up the city would be more effective than just issuing  a decree - make sure you visit the new museum while you are here.'";
 			final String page2 = "Obituaries     Goblin-Died Giant Rat-Died Unicorn-Died Varrock Guard-Died Varrock Guard-Died Bear-Died.                                          Classifieds.";
-			player.getPacketDispatch().sendString(page1, 530, 2);
-			player.getPacketDispatch().sendString(page2, 530, 4);
+			player.getPacketDispatch().sendString(page1, 530, 7);
+			player.getPacketDispatch().sendString(page2, 530, 8);
 			return true;
 		} else
 			player.getDialogueInterpreter().open(70099, "Come to the Al Kharid Market place! Highquality", "produce at low, low prices! Show this flyer to a", "merchant for money off your next purchase,", "courtesy of Ali Morrisane!");
