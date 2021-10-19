@@ -1,5 +1,7 @@
 package core.game.node.entity.npc.familiar;
 
+import core.game.node.entity.skill.SkillBonus;
+import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
 import core.game.node.entity.combat.equipment.WeaponInterface;
@@ -27,6 +29,7 @@ public class LavaTitanNPC extends Familiar {
 	 */
 	public LavaTitanNPC(Player owner, int id) {
 		super(owner, id, 6100, 12788, 4, WeaponInterface.STYLE_AGGRESSIVE);
+		boosts.add(new SkillBonus(Skills.MINING, 10));
 	}
 
 	@Override
