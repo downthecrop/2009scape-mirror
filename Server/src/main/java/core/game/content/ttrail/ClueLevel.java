@@ -26,133 +26,134 @@ import java.util.List;
 public enum ClueLevel {
 
 	EASY(new Item(2714), 1 << 16 | 5,
-			new ChanceItem(2633, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(2635, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(2637, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(2587, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLUE_BERET_2633, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_BERET_2635, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.WHITE_BERET_2637, 1, 1, DropFrequency.UNCOMMON),
 			// black
 			// t
-			new ChanceItem(2583, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(2585, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(3472, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(2589, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(2595, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_FULL_HELMT_2587, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_PLATEBODY_T_2583, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_PLATELEGS_T_2585, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_PLATESKIRT_T_3472, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_KITESHIELD_T_2589, 1, 1, DropFrequency.UNCOMMON),
 			// black
 			// g
-			new ChanceItem(2591, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(2593, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(3473, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(2597, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(2631, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_FULL_HELMG_2595, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_PLATEBODY_G_2591, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_PLATELEGS_G_2593, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_PLATESKIRT_G_3473, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_KITESHIELD_G_2597, 1, 1, DropFrequency.UNCOMMON),
 			// highway
 			// man
 			// mask
-			new ChanceItem(7392, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.HIGHWAYMAN_MASK_2631, 1, 1, DropFrequency.UNCOMMON),
 			// wizard t
-			new ChanceItem(7396, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(7388, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(7390, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.WIZARD_ROBE_T_7392, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.WIZARD_HAT_T_7396, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLUE_SKIRT_T_7388, 1, 1, DropFrequency.UNCOMMON),
 			// wizard
 			// g
-			new ChanceItem(7386, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(7394, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(7362, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.WIZARD_ROBE_G_7390, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLUE_SKIRT_G_7386, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.WIZARD_HAT_G_7394, 1, 1, DropFrequency.UNCOMMON),
 			// studded
 			// g
-			new ChanceItem(7366, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(7364, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.STUDDED_BODY_G_7362, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.STUDDED_CHAPS_G_7366, 1, 1, DropFrequency.UNCOMMON),
 			// studded
 			// t
-			new ChanceItem(7368, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10404, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.STUDDED_BODY_T_7364, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.STUDDED_CHAPS_T_7368, 1, 1, DropFrequency.UNCOMMON),
 			// red
 			// ele
 			// shirt
-			new ChanceItem(10406, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10424, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10426, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10408, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.RED_ELE_SHIRT_10404, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.RED_ELE_LEGS_10406, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.RED_ELE_BLOUSE_10424, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.RED_ELE_SKIRT_10426, 1, 1, DropFrequency.UNCOMMON),
 			// blue
 			// ele
 			// shirt
-			new ChanceItem(10410, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10428, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10430, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10412, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLUE_ELE_SHIRT_10408, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLUE_ELE_LEGS_10410, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLUE_ELE_BLOUSE_10428, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLUE_ELE_SKIRT_10430, 1, 1, DropFrequency.UNCOMMON),
 			// green
 			// ele
 			// shirt
-			new ChanceItem(10414, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10432, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10434, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10316, 1, 1, DropFrequency.RARE),
+			new ChanceItem(Items.GREEN_ELE_SHIRT_10412, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.GREEN_ELE_LEGS_10414, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.GREEN_ELE_BLOUSE_10432, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.GREEN_ELE_SKIRT_10434, 1, 1, DropFrequency.UNCOMMON),
 			// bob
 			// the
 			// cat
-			new ChanceItem(10318, 1, 1, DropFrequency.RARE),
-			new ChanceItem(10320, 1, 1, DropFrequency.RARE),
-			new ChanceItem(10322, 1, 1, DropFrequency.RARE),
-			new ChanceItem(10324, 1, 1, DropFrequency.RARE),
-			new ChanceItem(10392, 1, 1, DropFrequency.RARE),
+			new ChanceItem(Items.BOB_SHIRT_10316, 1, 1, DropFrequency.RARE),
+			new ChanceItem(Items.BOB_SHIRT_10318, 1, 1, DropFrequency.RARE),
+			new ChanceItem(Items.BOB_SHIRT_10320, 1, 1, DropFrequency.RARE),
+			new ChanceItem(Items.BOB_SHIRT_10322, 1, 1, DropFrequency.RARE),
+			new ChanceItem(Items.BOB_SHIRT_10324, 1, 1, DropFrequency.RARE),
 			// emote
 			// enhancers
-			new ChanceItem(10394, 1, 1, DropFrequency.RARE),
-			new ChanceItem(10396, 1, 1, DropFrequency.RARE),
-			new ChanceItem(10398, 1, 1, DropFrequency.RARE),
-			new ChanceItem(10366, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10458, 1, 1, DropFrequency.UNCOMMON),
-			// vestement
+			new ChanceItem(Items.A_POWDERED_WIG_10392, 1, 1, DropFrequency.RARE),
+			new ChanceItem(Items.FLARED_TROUSERS_10394, 1, 1, DropFrequency.RARE),
+			new ChanceItem(Items.PANTALOONS_10396, 1, 1, DropFrequency.RARE),
+			new ChanceItem(Items.SLEEPING_CAP_10398, 1, 1, DropFrequency.RARE),
+			new ChanceItem(Items.AMULET_OF_MAGICT_10366, 1, 1, DropFrequency.UNCOMMON),
+			// vestment
 			// robes(sara,
 			// guthix,
 			// zammy)
-			new ChanceItem(10464, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10462, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10466, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10460, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(10468, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(13095, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.SARADOMIN_ROBE_TOP_10458, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.SARADOMIN_ROBE_LEGS_10464, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.GUTHIX_ROBE_TOP_10462, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.GUTHIX_ROBE_LEGS_10466, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.ZAMORAK_ROBE_TOP_10460, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.ZAMORAK_ROBE_LEGS_10468, 1, 1, DropFrequency.UNCOMMON),
 			// black
 			// cane
-			new ChanceItem(13105, 1, 1, DropFrequency.RARE),
+			new ChanceItem(Items.BLACK_CANE_13095, 1, 1, DropFrequency.UNCOMMON),
 			// spikey
 			// helmet
-			new ChanceItem(1077, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1089, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1107, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1125, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1151, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1165, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1179, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1195, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1217, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1283, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1297, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1313, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1327, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1341, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1361, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1367, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1426, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(3098, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(4821, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(8779, 4, 38, DropFrequency.COMMON),
-			new ChanceItem(850, 1, 4, DropFrequency.COMMON),
-			new ChanceItem(334, 4, 19, DropFrequency.COMMON),
-			new ChanceItem(1169, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1059, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1061, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1063, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1095, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1129, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1167, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1131, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(858, 1, 4, DropFrequency.COMMON),
-			new ChanceItem(330, 3, 23, DropFrequency.COMMON),
-			new ChanceItem(1441, 1, 3, DropFrequency.COMMON),
-			new ChanceItem(1443, 1, 3, DropFrequency.COMMON),
-			new ChanceItem(1270, 1, 3, DropFrequency.COMMON),
-			new ChanceItem(1097, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(1133, 1, 1, DropFrequency.COMMON)),
+			new ChanceItem(Items.SPIKED_HELMET_13105, 1, 1, DropFrequency.RARE),
+			//other common crap
+			new ChanceItem(Items.BLACK_PLATELEGS_1077, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_PLATESKIRT_1089, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_CHAINBODY_1107, 1, 1, DropFrequency.COMMON), //?
+			new ChanceItem(Items.BLACK_PLATEBODY_1125, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_MED_HELM_1151, 1, 1, DropFrequency.COMMON), //?
+			new ChanceItem(Items.BLACK_FULL_HELM_1165, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_SQ_SHIELD_1179, 1, 1, DropFrequency.COMMON), //?
+			new ChanceItem(Items.BLACK_KITESHIELD_1195, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_DAGGER_1217, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_SWORD_1283, 1, 1, DropFrequency.COMMON), //?
+			new ChanceItem(Items.BLACK_LONGSWORD_1297, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_2H_SWORD_1313, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_SCIMITAR_1327, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_WARHAMMER_1341, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_AXE_1361, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_BATTLEAXE_1367, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_MACE_1426, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_CLAWS_3098, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.BLACK_NAILS_4821, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.OAK_PLANK_8779, 4, 38, DropFrequency.COMMON),
+			new ChanceItem(Items.WILLOW_SHORTBOW_850, 1, 4, DropFrequency.COMMON),
+			new ChanceItem(Items.TROUT_334, 4, 19, DropFrequency.COMMON),
+			new ChanceItem(Items.COIF_1169, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.LEATHER_GLOVES_1059, 1, 1, DropFrequency.COMMON), //??
+			new ChanceItem(Items.LEATHER_BOOTS_1061, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.LEATHER_VAMBRACES_1063, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.LEATHER_CHAPS_1095, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.LEATHER_BODY_1129, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.LEATHER_COWL_1167, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.HARDLEATHER_BODY_1131, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.YEW_SHORTBOW_858, 1, 4, DropFrequency.COMMON),
+			new ChanceItem(Items.SALMON_330, 3, 23, DropFrequency.COMMON),
+			new ChanceItem(Items.EARTH_TALISMAN_1441, 1, 3, DropFrequency.COMMON),
+			new ChanceItem(Items.FIRE_TALISMAN_1443, 1, 3, DropFrequency.COMMON),
+			new ChanceItem(Items.STEEL_PICKAXE_1270, 1, 3, DropFrequency.COMMON),
+			new ChanceItem(Items.STUDDED_CHAPS_1097, 1, 1, DropFrequency.COMMON),
+			new ChanceItem(Items.STUDDED_BODY_1133, 1, 1, DropFrequency.COMMON)),
 
 	MEDIUM(new Item(2717), 1 << 16 | 6,
 			new ChanceItem(2605, 1, 1, DropFrequency.UNCOMMON),
