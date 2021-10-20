@@ -294,7 +294,7 @@ public enum ClueLevel {
 			// Trimmed
 			// rune
 			// shit
-			new ChanceItem(Items.RUNE_FULL_HELM_T_2628, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.RUNE_FULL_HELM_T_2627, 1, 1, DropFrequency.UNCOMMON),
 			new ChanceItem(Items.RUNE_PLATEBODY_T_2623, 1, 1, DropFrequency.UNCOMMON),
 			new ChanceItem(Items.RUNE_PLATELEGS_T_2625, 1, 1, DropFrequency.UNCOMMON),
 			new ChanceItem(Items.RUNE_PLATESKIRT_T_3477, 1, 1, DropFrequency.UNCOMMON),
@@ -411,14 +411,6 @@ public enum ClueLevel {
 			new ChanceItem(Items.FIRE_RUNE_554, 1, 228, DropFrequency.COMMON),
 			new ChanceItem(Items.EARTH_RUNE_557, 1, 228, DropFrequency.COMMON),
 			new ChanceItem(Items.WATER_RUNE_555, 1, 228, DropFrequency.COMMON),
-			new ChanceItem(Items.SAPPHIRE_AMULET_1694, 1, 1, DropFrequency.RARE),
-			new ChanceItem(Items.EMERALD_AMULET_1696, 1, 1, DropFrequency.RARE),
-			new ChanceItem(Items.RUBY_AMULET_1698, 1, 1, DropFrequency.RARE),
-			new ChanceItem(Items.DIAMOND_AMULET_1700, 1, 1, DropFrequency.RARE),
-			new ChanceItem(Items.DRAGONSTONE_AMMY_1702, 1, 1, DropFrequency.RARE),
-			new ChanceItem(Items.WILLOW_LONGBOW_847, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(Items.YEW_LONGBOW_855, 1, 1, DropFrequency.UNCOMMON),
-			new ChanceItem(Items.MAGIC_LONGBOW_859, 1, 1, DropFrequency.UNCOMMON),
 			new ChanceItem(Items.SARADOMIN_PAGE_1_3827, 1, 1, DropFrequency.RARE),
 			new ChanceItem(Items.SARADOMIN_PAGE_2_3828, 1, 1, DropFrequency.RARE),
 			new ChanceItem(Items.SARADOMIN_PAGE_3_3829, 1, 1, DropFrequency.RARE),
