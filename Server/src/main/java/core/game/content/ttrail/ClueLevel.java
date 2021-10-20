@@ -43,6 +43,18 @@ public enum ClueLevel {
 			new ChanceItem(Items.BLACK_PLATELEGS_G_2593, 1, 1, DropFrequency.UNCOMMON),
 			new ChanceItem(Items.BLACK_PLATESKIRT_G_3473, 1, 1, DropFrequency.UNCOMMON),
 			new ChanceItem(Items.BLACK_KITESHIELD_G_2597, 1, 1, DropFrequency.UNCOMMON),
+			//black h helms
+			new ChanceItem(Items.BLACK_HELM_H1_10306, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_HELM_H2_10308, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_HELM_H3_10310, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_HELM_H4_10312, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_HELM_H5_10314, 1, 1, DropFrequency.UNCOMMON),
+			//black h shields
+			new ChanceItem(Items.BLACK_SHIELDH1_7332, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_SHIELDH2_7338, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_SHIELDH3_7344, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_SHIELDH4_7350, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.BLACK_SHIELDH5_7356, 1, 1, DropFrequency.UNCOMMON),
 			// highway
 			// man
 			// mask
@@ -116,17 +128,19 @@ public enum ClueLevel {
 			// spikey
 			// helmet
 			new ChanceItem(Items.SPIKED_HELMET_13105, 1, 1, DropFrequency.RARE),
+			//comp bow
+			new ChanceItem(Items.WILLOW_COMP_BOW_10280, 1, 1, DropFrequency.UNCOMMON),
 			//other common crap
 			new ChanceItem(Items.BLACK_PLATELEGS_1077, 1, 1, DropFrequency.COMMON),
 			new ChanceItem(Items.BLACK_PLATESKIRT_1089, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(Items.BLACK_CHAINBODY_1107, 1, 1, DropFrequency.COMMON), //?
+			new ChanceItem(Items.BLACK_CHAINBODY_1107, 1, 1, DropFrequency.COMMON),
 			new ChanceItem(Items.BLACK_PLATEBODY_1125, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(Items.BLACK_MED_HELM_1151, 1, 1, DropFrequency.COMMON), //?
+			new ChanceItem(Items.BLACK_MED_HELM_1151, 1, 1, DropFrequency.COMMON),
 			new ChanceItem(Items.BLACK_FULL_HELM_1165, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(Items.BLACK_SQ_SHIELD_1179, 1, 1, DropFrequency.COMMON), //?
+			new ChanceItem(Items.BLACK_SQ_SHIELD_1179, 1, 1, DropFrequency.COMMON),
 			new ChanceItem(Items.BLACK_KITESHIELD_1195, 1, 1, DropFrequency.COMMON),
 			new ChanceItem(Items.BLACK_DAGGER_1217, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(Items.BLACK_SWORD_1283, 1, 1, DropFrequency.COMMON), //?
+			new ChanceItem(Items.BLACK_SWORD_1283, 1, 1, DropFrequency.COMMON),
 			new ChanceItem(Items.BLACK_LONGSWORD_1297, 1, 1, DropFrequency.COMMON),
 			new ChanceItem(Items.BLACK_2H_SWORD_1313, 1, 1, DropFrequency.COMMON),
 			new ChanceItem(Items.BLACK_SCIMITAR_1327, 1, 1, DropFrequency.COMMON),
@@ -140,7 +154,7 @@ public enum ClueLevel {
 			new ChanceItem(Items.WILLOW_SHORTBOW_850, 1, 4, DropFrequency.COMMON),
 			new ChanceItem(Items.TROUT_334, 4, 19, DropFrequency.COMMON),
 			new ChanceItem(Items.COIF_1169, 1, 1, DropFrequency.COMMON),
-			new ChanceItem(Items.LEATHER_GLOVES_1059, 1, 1, DropFrequency.COMMON), //??
+			new ChanceItem(Items.LEATHER_GLOVES_1059, 1, 1, DropFrequency.COMMON),
 			new ChanceItem(Items.LEATHER_BOOTS_1061, 1, 1, DropFrequency.COMMON),
 			new ChanceItem(Items.LEATHER_VAMBRACES_1063, 1, 1, DropFrequency.COMMON),
 			new ChanceItem(Items.LEATHER_CHAPS_1095, 1, 1, DropFrequency.COMMON),
@@ -191,6 +205,7 @@ public enum ClueLevel {
 			new ChanceItem(Items.DHIDE_CHAPS_G_7378, 1, 1, DropFrequency.UNCOMMON),
 			new ChanceItem(Items.PITH_HELMET_13103, 1, 1, DropFrequency.UNCOMMON),
 			new ChanceItem(Items.ADAMANT_CANE_13097, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(Items.YEW_COMP_BOW_10282, 1, 1, DropFrequency.UNCOMMON),
 			// animal
 			// masks
 			new ChanceItem(Items.PENGUIN_MASK_13109, 1, 1, DropFrequency.UNCOMMON),
@@ -267,6 +282,7 @@ public enum ClueLevel {
 			new ChanceItem(Items.LOBSTER_380, 15, 43, DropFrequency.COMMON)),
 
 	HARD(new Item(2720), 1 << 16 | 8,
+			new ChanceItem(Items.MAGIC_COMP_BOW_10284, 1, 1, DropFrequency.UNCOMMON),
 			new ChanceItem(Items.TOP_HAT_13101, 1, 1, DropFrequency.UNCOMMON),
 			new ChanceItem(Items.RUNE_CANE_13099, 1, 1, DropFrequency.UNCOMMON),
 			new ChanceItem(Items.SARADOMIN_STOLE_10470, 1, 1, DropFrequency.UNCOMMON),
