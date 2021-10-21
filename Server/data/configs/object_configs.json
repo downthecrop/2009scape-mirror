@@ -20526,5 +20526,77 @@
   {
     "examine": "Looks like part of the entrance is blocked by rubble.",
     "ids": "15767"
+  },
+  {
+    "examine": "They know how much that dog in the window is.",
+    "ids": "28351"
+  },
+  {
+    "examine": "Lots of things for a growing fish.",
+    "ids": "28355"
+  },
+  {
+    "examine": "It's a basket for dogs.",
+    "ids": "28338"
+  },
+  {
+    "examine": "Enough baskets for any dog's needs.",
+    "ids": "28339"
+  },
+  {
+    "examine": "Made by the A. Wilson Company.",
+    "ids": "28345"
+  },
+  {
+    "examine": "Sure it's gilded, but would you want to live in it?",
+    "ids": "28335"
+  },
+  {
+    "examine": "It's covered in hairs.",
+    "ids": "28361"
+  },
+  {
+    "examine": "It's good for bedding and stuffing.",
+    "ids": "28343"
+  },
+  {
+    "examine": "Lots of little fishies.",
+    "ids": "28340"
+  },
+  {
+    "examine": "Fetch!",
+    "ids": "28360"
+  },
+  {
+    "examine": "It's a basket for cats.",
+    "ids": "28337"
+  },
+  {
+    "examine": "It seems to be sat happily on the counter.",
+    "ids": "28356"
+  },
+  {
+    "examine": "Lots of things for a growing pup.",
+    "ids": "28353"
+  },
+  {
+    "examine": "Lots of things for a growing kitten.",
+    "ids": "28354"
+  },
+  {
+    "examine": "Lots of things for a growing pup/kitten/fish.",
+    "ids": "28357"
+  },
+  {
+    "examine": "Things are cheaper by the pound.",
+    "ids": "28344"
+  },
+  {
+    "examine": "It incubates eggs.",
+    "ids": "28336"
+  },
+  {
+    "examine": "There are a lot of pet supplies here.",
+    "ids": "28363"
   }
 ]
