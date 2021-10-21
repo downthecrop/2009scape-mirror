@@ -6,8 +6,6 @@ import core.game.component.Component;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
-import core.game.interaction.object.wildyditch.WildernessDitchPlugin;
-import core.game.interaction.object.wildyditch.WildernessInterfacePlugin;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
@@ -16,7 +14,6 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
 
 /**
  * Represents the plugin used to handle Edgeville related interactions.
