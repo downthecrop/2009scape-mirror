@@ -35,6 +35,7 @@ public class EctophialFillPlugin extends UseWithHandler {
 		final Player player = event.getPlayer();
 		player.lock(3);
 		player.animate(Animation.create(1652));
+        player.getAudioManager().send(1132);
 		GameWorld.getPulser().submit(new Pulse(3, player) {
 			@Override
 			public boolean pulse() {
