@@ -3,6 +3,7 @@ package core.game.interaction.object.wildyditch;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
+import core.game.content.global.action.DoorActionHandler;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
@@ -35,7 +36,10 @@ public final class WildernessInterfacePlugin extends ComponentPlugin {
 		if (button != 18) {
 			return true;
 		}
-		handleDitch(player);
+		if (player.getAttribute("wildy_ditch") != null)
+			handleDitch(player);
+		else if(player.getAttribute("wildy_gate") != null)
+			handleGate(player);
 		return true;
 	}
 
@@ -45,9 +49,6 @@ public final class WildernessInterfacePlugin extends ComponentPlugin {
 	 */
 	public static void handleDitch(final Player player) {
 		Scenery ditch = player.getAttribute("wildy_ditch");
-		if (ditch == null) {
-			return;
-		}
 		player.removeAttribute("wildy_ditch");
 		Location l = ditch.getLocation();
 		int x = player.getLocation().getX();
@@ -70,5 +71,16 @@ public final class WildernessInterfacePlugin extends ComponentPlugin {
 			ActivityManager.register(new BountyHunterActivity(CraterType.MID_LEVEL));
 			ActivityManager.register(new BountyHunterActivity(CraterType.HIGH_LEVEL));
 		}*/
+	}
+	public static void handleGate(final Player player){
+		Scenery gate = player.getAttribute("wildy_gate");
+		Location endLocation = player.getAttribute("wildy_gate_loc");
+
+		// Cleanup
+		player.removeAttribute("wildy_gate");
+		player.removeAttribute("wildy_gate_loc");
+
+		// Move player through gate/door
+		DoorActionHandler.handleAutowalkDoor(player,gate,endLocation);
 	}
 }
