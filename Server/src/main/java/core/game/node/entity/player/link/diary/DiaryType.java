@@ -98,7 +98,7 @@ public enum DiaryType {
                             "Spin a bowl on the pottery wheel and fire it in the oven in<br><br>Barbarian Village",
                             "Enter Edgeville Dungeon using the entrance to the south of<br><br>Edgeville",
                             "Move your player-owned house portal to a different location<br><br>using the Varrock estate agent",
-                            "Speak to Haig Halen after obtaining at least 50 kudos", //TODO need to implement kudos
+                            "Speak to Haig Halen after obtaining at least 50 quest points", //TODO need to changes this back to kudos when implemented
                             "Enter the Earth Altar using an earth tiara or talisman",
                             "Have Elsie tell you a story",
                             "Mine some limestone near Paterdomus, the temple to the east<br><br>of Varrock",
