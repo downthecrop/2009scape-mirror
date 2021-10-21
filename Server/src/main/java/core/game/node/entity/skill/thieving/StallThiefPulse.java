@@ -99,9 +99,6 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 			if (stall == Stall.SILK_STALL) {
 				player.getSavedData().getGlobalData().setSilkSteal(System.currentTimeMillis() + 1800000);
 			}
-			if (stall == Stall.TEA_STALL && player.getLocation().withinDistance(new Location(3266, 3413, 0))) {
-				player.getAchievementDiaryManager().finishTask(player,DiaryType.VARROCK,0, 12);
-			}
 			if (node.isActive()) {
 				SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(stall.getEmpty(node.getId())), stall.getDelay());
 			}
