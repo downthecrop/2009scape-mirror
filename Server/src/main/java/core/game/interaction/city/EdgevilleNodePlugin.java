@@ -2,7 +2,9 @@ package core.game.interaction.city;
 
 import api.ContentAPI;
 import core.cache.def.impl.SceneryDefinition;
+import core.game.component.Component;
 import core.game.content.global.action.ClimbActionHandler;
+import core.game.content.global.action.DoorActionHandler;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
@@ -29,8 +31,12 @@ public final class EdgevilleNodePlugin extends OptionHandler {
         SceneryDefinition.forId(30806).getHandlers().put("option:take-seed", this);
         SceneryDefinition.forId(12265).getHandlers().put("option:climb", this);
 
-		SceneryDefinition.forId(12266).getHandlers().put("option:open", this);
+        //Dungeon Wilderness gates
+        SceneryDefinition.forId(29319).getHandlers().put("option:open", this);
+        SceneryDefinition.forId(29320).getHandlers().put("option:open", this);
 
+
+		SceneryDefinition.forId(12266).getHandlers().put("option:open", this);
         SceneryDefinition.forId(26933).getHandlers().put("option:open", this);
 		SceneryDefinition.forId(26934).getHandlers().put("option:close", this);
 		SceneryDefinition.forId(26934).getHandlers().put("option:climb-down", this);
@@ -71,6 +77,19 @@ public final class EdgevilleNodePlugin extends OptionHandler {
                 } else if (option.equalsIgnoreCase("climb-down")) {
 					ContentAPI.sendMessage(player, "You climb down through the trapdoor...");
 					ClimbActionHandler.climbLadder(player, (Scenery) node, option);
+                }
+                break;
+            case 29319:
+            case 29320: // Edgeville Dungeon wilderness entrance
+                if (option.equalsIgnoreCase("open") && player.getLocation().getY() < 9918) {
+                    Location endLocation = new Location(player.getLocation().getX(),player.getLocation().getY()+1);
+                    player.getInterfaceManager().open(new Component(382));
+                    player.setAttribute("wildy_gate", node);
+                    player.setAttribute("wildy_gate_loc",endLocation);
+                }
+                else{ // Leaving the wilderness
+                    Location endLocation = new Location(player.getLocation().getX(),player.getLocation().getY()-1);
+                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node,endLocation);
                 }
         }
         return true;
