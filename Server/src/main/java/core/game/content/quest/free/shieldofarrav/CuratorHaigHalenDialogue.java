@@ -4,6 +4,7 @@ import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 
 /**
@@ -39,6 +40,11 @@ public final class CuratorHaigHalenDialogue extends DialoguePlugin {
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
 		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Welcome to the museum of Varrock.");
+
+		if (player.getQuestRepository().getPoints() >= 50) {
+			player.getAchievementDiaryManager().finishTask(player, DiaryType.VARROCK, 0, 12);
+		}
+
 		stage = 0;
 		return true;
 	}
