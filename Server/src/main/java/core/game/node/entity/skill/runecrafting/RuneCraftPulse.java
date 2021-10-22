@@ -1,16 +1,18 @@
 package core.game.node.entity.skill.runecrafting;
 
 import core.game.container.impl.EquipmentContainer;
-import core.game.node.entity.skill.SkillPulse;
-import core.game.node.entity.skill.Skills;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
+import core.game.node.entity.skill.SkillPulse;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
+import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
+import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_RC;
+import rs09.game.world.GameWorld;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -176,6 +178,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
 
             if (player.getInventory().remove(item) && player.getInventory().hasSpaceFor(i)) {
                 player.getInventory().add(i);
+                player.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_RC, amount);
                 player.getSkills().addExperience(Skills.RUNECRAFTING, rune.getExperience() * amount, true);
 
                 // Achievement Diary handling
@@ -195,6 +198,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
             }
         } else {
             if (player.getInventory().remove(item)) {
+                player.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_RC, amount);
                 for (int i = 0; i < amount; i++) {
                     Rune rune = null;
                     while (rune == null) {

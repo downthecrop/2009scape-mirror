@@ -40578,6 +40578,7 @@
     "grand_exchange_price": "29900",
     "stand_anim": "1662",
     "tradeable": "true",
+    "rare_item": "true",
     "run_anim": "1664",
     "archery_ticket_price": "0",
     "id": "4153",
@@ -45819,6 +45820,7 @@
     "grand_exchange_price": "94300",
     "name": "Ahrim's hood",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4708",
     "bonuses": "0,0,0,6,-2,15,13,16,6,0,15,0,0,0,0"
@@ -45849,6 +45851,7 @@
     "grand_exchange_price": "69500",
     "stand_anim": "813",
     "tradeable": "true",
+    "rare_item": "true",
     "run_anim": "1210",
     "archery_ticket_price": "0",
     "id": "4710",
@@ -45887,6 +45890,7 @@
     "grand_exchange_price": "1000000",
     "name": "Ahrim's robetop",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4712",
     "bonuses": "0,0,0,30,-10,52,37,63,30,0,60,0,0,0,0"
@@ -45914,6 +45918,7 @@
     "grand_exchange_price": "1700000",
     "name": "Ahrim's robeskirt",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4714",
     "bonuses": "0,0,0,22,-7,33,30,36,22,0,30,0,0,0,0"
@@ -45942,6 +45947,7 @@
     "grand_exchange_price": "1300000",
     "name": "Dharok's helm",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4716",
     "bonuses": "0,0,0,-3,-1,45,48,44,-1,51,15,0,0,0,0"
@@ -45972,6 +45978,7 @@
     "grand_exchange_price": "516900",
     "stand_anim": "2065",
     "tradeable": "true",
+    "rare_item": "true",
     "run_anim": "824",
     "archery_ticket_price": "0",
     "id": "4718",
@@ -46009,6 +46016,7 @@
     "grand_exchange_price": "511400",
     "name": "Dharok's platebody",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4720",
     "bonuses": "0,0,0,-30,-10,122,120,107,-6,132,60,0,0,0,0"
@@ -46036,6 +46044,7 @@
     "grand_exchange_price": "748800",
     "name": "Dharok's platelegs",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4722",
     "bonuses": "0,0,0,-21,-7,85,82,83,-4,92,30,0,0,0,0"
@@ -46065,6 +46074,7 @@
     "grand_exchange_price": "396300",
     "name": "Guthan's helm",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4724",
     "bonuses": "0,0,0,-6,-2,55,58,54,-1,62,15,0,0,0,0"
@@ -46095,6 +46105,7 @@
     "grand_exchange_price": "588400",
     "stand_anim": "813",
     "tradeable": "true",
+    "rare_item": "true",
     "run_anim": "1210",
     "archery_ticket_price": "0",
     "id": "4726",
@@ -46132,6 +46143,7 @@
     "grand_exchange_price": "316800",
     "name": "Guthan's platebody",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4728",
     "bonuses": "0,0,0,-30,-10,122,120,107,-6,132,60,0,0,0,0"
@@ -46159,6 +46171,7 @@
     "grand_exchange_price": "315600",
     "name": "Guthan's chainskirt",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4730",
     "bonuses": "0,0,0,-14,-7,75,72,73,-4,82,30,0,0,0,0"
@@ -46187,6 +46200,7 @@
     "grand_exchange_price": "38900",
     "name": "Karil's coif",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4732",
     "bonuses": "0,0,0,-1,3,6,9,12,6,10,15,0,0,0,0"
@@ -46217,6 +46231,7 @@
     "grand_exchange_price": "188000",
     "stand_anim": "2074",
     "tradeable": "true",
+    "rare_item": "true",
     "run_anim": "2077",
     "archery_ticket_price": "0",
     "id": "4734",
@@ -46255,6 +46270,7 @@
     "grand_exchange_price": "1800000",
     "name": "Karil's leathertop",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4736",
     "bonuses": "0,0,0,-15,30,47,42,50,65,57,60,0,0,0,0"
@@ -46282,6 +46298,7 @@
     "grand_exchange_price": "217000",
     "name": "Karil's leatherskirt",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4738",
     "bonuses": "0,0,0,-10,17,26,20,28,35,33,30,0,0,0,0"
@@ -46327,6 +46344,7 @@
     "grand_exchange_price": "139000",
     "name": "Torag's helm",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4745",
     "bonuses": "0,0,0,-6,-2,55,58,54,-1,62,15,0,0,0,0"
@@ -46359,6 +46377,7 @@
     "attack_audios": "1332,0,0,0",
     "name": "Torag's hammers",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4747",
     "bonuses": "-4,-4,85,-4,0,0,0,0,0,0,0,72,0,0,0"
@@ -46387,6 +46406,7 @@
     "grand_exchange_price": "346200",
     "name": "Torag's platebody",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4749",
     "bonuses": "0,0,0,-30,-10,122,120,107,-6,132,60,0,0,0,0"
@@ -46414,6 +46434,7 @@
     "grand_exchange_price": "427200",
     "name": "Torag's platelegs",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4751",
     "bonuses": "0,0,0,-21,-7,85,82,83,-4,92,30,0,0,0,0"
@@ -46443,6 +46464,7 @@
     "grand_exchange_price": "687200",
     "name": "Verac's helm",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4753",
     "bonuses": "0,0,0,-6,-2,55,58,54,0,56,15,0,3,0,0"
@@ -46473,6 +46495,7 @@
     "grand_exchange_price": "135500",
     "stand_anim": "1832",
     "tradeable": "true",
+    "rare_item": "true",
     "run_anim": "1831",
     "archery_ticket_price": "0",
     "id": "4755",
@@ -46511,6 +46534,7 @@
     "grand_exchange_price": "270000",
     "name": "Verac's brassard",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4757",
     "bonuses": "0,0,0,-6,-2,81,95,85,0,81,60,0,5,0,0"
@@ -46538,6 +46562,7 @@
     "grand_exchange_price": "411400",
     "name": "Verac's plateskirt",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4759",
     "bonuses": "0,0,0,-21,-7,85,82,83,0,84,30,0,4,0,0"
@@ -106101,6 +106126,7 @@
     "grand_exchange_price": "95400",
     "name": "Dragon boots",
     "tradeable": "true",
+    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "11732",
     "bonuses": "0,0,0,-3,-1,16,17,18,0,0,15,4,0,0,0"
@@ -121161,6 +121187,7 @@
     "grand_exchange_price": "43082",
     "stand_anim": "813",
     "tradeable": "true",
+    "rare_item": "true",
     "run_anim": "824",
     "archery_ticket_price": "0",
     "id": "13290",

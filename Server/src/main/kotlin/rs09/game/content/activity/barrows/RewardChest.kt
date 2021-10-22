@@ -1,5 +1,6 @@
 package rs09.game.content.activity.barrows
 
+import api.ContentAPI
 import core.game.component.Component
 import core.game.container.access.InterfaceContainer
 import core.game.content.global.BossKillCounter
@@ -93,6 +94,7 @@ object RewardChest {
         player.interfaceManager.open(Component(Components.TRAIL_REWARD_364))
         BossKillCounter.addtoBarrowsCount(player)
         for(item in rewards){
+            ContentAPI.announceIfRare(player, item);
             if(!player.inventory.add(item)){
                 GroundItemManager.create(item,player)
             }
