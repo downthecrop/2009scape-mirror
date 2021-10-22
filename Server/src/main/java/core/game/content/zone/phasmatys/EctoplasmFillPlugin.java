@@ -38,6 +38,7 @@ public class EctoplasmFillPlugin extends UseWithHandler {
 	public boolean handle(NodeUsageEvent event) {
 		final Player player = event.getPlayer();
 		player.animate(Animation.create(4471));
+        player.getAudioManager().send(1132);
 		player.getPacketDispatch().sendMessage("You fill the bucket with ectoplasm.");
 		player.getPulseManager().run(new Pulse(3, player) {
 			@Override
@@ -46,6 +47,7 @@ public class EctoplasmFillPlugin extends UseWithHandler {
 					player.getInventory().add(new Item(4286));
 					if (player.getInventory().contains(1925, 1)) {
 						player.animate(Animation.create(4471), 1);
+                        player.getAudioManager().send(1132);
 						return false;
 					}
 				}

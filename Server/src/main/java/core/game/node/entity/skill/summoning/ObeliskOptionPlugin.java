@@ -30,6 +30,7 @@ public final class ObeliskOptionPlugin extends OptionHandler {
 				return true;
 			}
 			player.visualize(Animation.create(8502), Graphics.create(1308));
+            player.getAudioManager().send(4214);
 			player.getSkills().setLevel(Skills.SUMMONING, player.getSkills().getStaticLevel(Skills.SUMMONING));
 			player.getPacketDispatch().sendMessage("You renew your summoning points.");
 			return true;
