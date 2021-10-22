@@ -3,13 +3,14 @@ package core.game.node.entity.skill.herblore;
 import api.Container;
 import api.ContentAPI;
 import core.cache.def.impl.ItemDefinition;
-import core.game.node.entity.skill.Skills;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import core.tools.RandomFunction;
 
 /**
  * Represents the cleaning of a dirty herb.
@@ -18,6 +19,7 @@ import core.plugin.Plugin;
  */
 @Initializable
 public final class HerbCleanPlugin extends OptionHandler {
+    private static final int[] SFX_IDS = new int[] { 5153, 5155, 5157 };
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
@@ -40,6 +42,7 @@ public final class HerbCleanPlugin extends OptionHandler {
 		if (ContentAPI.removeItem(player, node.asItem(), Container.INVENTORY)){
 			player.getSkills().addExperience(Skills.HERBLORE, exp, true);
 			ContentAPI.addItem(player, herb.getProduct().getId(), 1);
+            player.getAudioManager().send(SFX_IDS[RandomFunction.random(SFX_IDS.length)], 1);
 			player.getPacketDispatch().sendMessage("You clean the dirt from the " + herb.getProduct().getName().toLowerCase().replace("clean", "").trim() + " leaf.");
 		}
 		player.lock(1);
