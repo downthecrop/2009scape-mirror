@@ -66,7 +66,6 @@ public class IoEventHandler {
 				Repository.getDisconnectionQueue().add(session.getPlayer());
 			}
 			key.cancel();
-			session.disconnect();
 			return;
 		}
 		buffer.flip();
