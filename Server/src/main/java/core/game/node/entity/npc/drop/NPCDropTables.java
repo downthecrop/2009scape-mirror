@@ -1,5 +1,6 @@
 package core.game.node.entity.npc.drop;
 
+import api.ContentAPI;
 import core.cache.def.impl.NPCDefinition;
 import core.game.content.global.Bones;
 import core.game.ge.GrandExchangeDatabase;
@@ -17,6 +18,7 @@ import core.tools.StringUtils;
 import rs09.game.ai.AIPlayer;
 import rs09.game.ai.AIRepository;
 import rs09.game.ai.general.GeneralBotCreator;
+import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.content.global.NPCDropTable;
 import rs09.game.ge.OfferManager;
 import rs09.game.system.config.ItemConfigParser;
@@ -111,9 +113,7 @@ public final class NPCDropTables {
 			}
 			return;
 		}
-		if (item.getDefinition().getConfiguration(ItemConfigParser.RARE_ITEM, false)) {
-			Repository.sendNews(player.getUsername() + " has just received: " + item.getAmount() + " x " + item.getName() + ".");
-		}
+        ContentAPI.announceIfRare(player, item);
 		if(item.getId() == 6199 && player instanceof Player){
 		    player.sendMessage("<col=990000>A mystery box has fallen on the ground.</col>");
 		}

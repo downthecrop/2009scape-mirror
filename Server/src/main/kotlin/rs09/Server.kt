@@ -10,6 +10,7 @@ import core.tools.TimeStamp
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.ge.GEAutoStock
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ServerConfigParser
@@ -74,6 +75,7 @@ object Server {
         startTime = System.currentTimeMillis()
         val t = TimeStamp()
         SystemLogger.logInfo("Initializing Server Store...")
+        GlobalKillCounter.init()
         ServerStore.init()
         SystemLogger.logInfo("Initialized ${ServerStore.counter} store files.")
         GameWorld.prompt(true)
