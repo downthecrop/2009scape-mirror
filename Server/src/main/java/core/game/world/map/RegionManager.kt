@@ -295,21 +295,19 @@ object RegionManager {
             return null
         }
         var destination: Location? = null
-        for (i in 0..3) {
+        outer@ for (i in 0..7) {
             val dir = Direction.get(i)
-            val l = owner.location.transform(dir, if (dir.toInteger() < 2) 1 else node.size())
-            var success = true
-            for (x in 0 until node.size()) {
-                for (y in 0 until node.size()) {
-                    if (isClipped(l.transform(x, y, 0))) {
-                        success = false
-                        break
+            inner@for(j in 0 until node.size()) {
+                val l = owner.location.transform(dir, j)
+                for (x in 0 until node.size()) {
+                    for (y in 0 until node.size()) {
+                        if (isClipped(l.transform(x, y, 0))) {
+                            continue@inner
+                        }
                     }
                 }
-            }
-            if (success) {
                 destination = l
-                break
+                break@outer
             }
         }
         return destination

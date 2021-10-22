@@ -44,7 +44,7 @@ open class MeleeSwingHandler
             distance += if (entity.walkingQueue.isRunningBoth) 2 else 1
             goodRange = canMelee(entity, victim, distance)
         }
-        if (!isProjectileClipped(entity, victim, true)) {
+        if (!isProjectileClipped(entity, victim, !usingHalberd(entity))) {
             return InteractionType.NO_INTERACT
         }
         val isRunning = entity.walkingQueue.runDir != -1
