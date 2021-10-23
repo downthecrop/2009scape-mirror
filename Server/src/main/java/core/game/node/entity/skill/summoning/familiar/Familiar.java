@@ -112,6 +112,8 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	 */
 	private final int attackStyle;
 
+    private boolean firstCall = true;
+
 	/**
 	 * Constructs a new {@code Familiar} {@code Object}.
 	 * @param owner The owner.
@@ -346,6 +348,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		if (specialMove(special)) {
 			setAttribute("special-delay", GameWorld.getTicks() + 3);
 			owner.getInventory().remove(new Item(scroll.getItemId()));
+            owner.getAudioManager().send(4161);
 			visualizeSpecialMove();
 			updateSpecialPoints(specialCost);
 			owner.getSkills().addExperience(Skills.SUMMONING, scroll.getExperience(), true);
@@ -536,6 +539,12 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		setInvisible(getZoneMonitor().isRestricted(ZoneRestriction.FOLLOWERS) && !owner.getLocks().isLocked("enable_summoning"));
 		getProperties().setTeleportLocation(destination);
 		if (!(this instanceof Pet)) {
+            if(firstCall) {
+                owner.getAudioManager().send(4366);
+                firstCall = false;
+            } else {
+                owner.getAudioManager().send(188);
+            }
 			if (size() > 1) {
 				graphics(LARGE_SUMMON_GRAPHIC);
 			} else {

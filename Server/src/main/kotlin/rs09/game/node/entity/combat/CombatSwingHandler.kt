@@ -15,6 +15,7 @@ import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.summoning.familiar.Familiar
+import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
@@ -521,11 +522,21 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
          */
 		@JvmStatic
 		fun isProjectileClipped(entity: Node, victim: Node?, checkClose: Boolean): Boolean {
-            return if (checkClose) {
-                if (entity.id == 54) { // /temp until emp is back.
-                    Pathfinder.find(entity as Entity, victim!!, false, Pathfinder.SMART).isSuccessful
-                } else Pathfinder.find(entity as Entity, victim!!, false, Pathfinder.DUMB).isSuccessful
-            } else Pathfinder.find(entity as Entity, victim!!, false, Pathfinder.PROJECTILE).isSuccessful
+            for(x1 in 0 until entity.size()) {
+                for(y1 in 0 until entity.size()) {
+                    val src = entity.location.transform(x1, y1, 0)
+                    for(x2 in 0 until victim!!.size()) {
+                        for(y2 in 0 until victim!!.size()) {
+                            val dst = victim!!.location.transform(x2, y2, 0)
+                            val path = Pathfinder.PROJECTILE.find(src, 1, dst, 1, 1, 0, 0, 0, false, RegionManager::getClippingFlag)
+                            if(path.isSuccessful && (!checkClose || path.points.size <= 1)) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+            return false
         }
     }
 
