@@ -10,7 +10,7 @@ class EnchantedJewelleryDialogueFile(val jewellery: EnchantedJewellery, val item
         when(stage){
             START_DIALOGUE -> interpreter!!.sendOptions("Where would you like to go?", *jewellery.options).also { stage++ }
             1 -> {
-                jewellery.use(player, item, buttonID - 1, player!!.equipment.containsItem(item))
+                jewellery.use(player, item, buttonID - 1,item.slot < player!!.equipment.capacity() && player!!.equipment[item.slot] == item)
                 end()
             }
         }
