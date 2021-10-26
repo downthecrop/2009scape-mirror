@@ -473,6 +473,18 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 else -> reject(player, usageStr)
             }
         }
+        define("allow_aggro", Command.Privilege.ADMIN) { player, args ->
+            val usageStr = "Usage: ::allow_aggro true | false"
+            if(args.size < 2) {
+                reject(player, usageStr)
+            }
+            when(args[1]) {
+                "true" -> player.setAttribute("allow_admin_aggression", true)
+                "false" -> player.removeAttribute("allow_admin_aggression")
+                else -> reject(player, usageStr)
+
+            }
+        }
     }
 
     fun showGeSell(player: Player){

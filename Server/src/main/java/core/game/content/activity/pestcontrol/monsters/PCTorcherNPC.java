@@ -10,6 +10,7 @@ import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.AbstractNPC;
+import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.world.map.Location;
@@ -90,6 +91,11 @@ public final class PCTorcherNPC extends AbstractNPC {
 			getProperties().getCombatPulse().attack(session.getSquire());
 		}
 	}
+
+    @Override
+    public boolean shouldPreventStacking(Entity mover) {
+        return mover instanceof NPC;
+    }
 
 	@Override
 	public void onImpact(final Entity entity, BattleState state) {

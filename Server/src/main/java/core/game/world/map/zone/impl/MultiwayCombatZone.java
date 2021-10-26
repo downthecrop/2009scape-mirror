@@ -7,6 +7,7 @@ import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.MapDistance;
 import core.game.world.map.RegionManager;
+import core.game.world.map.path.Pathfinder;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.net.packet.PacketRepository;
@@ -122,39 +123,21 @@ public final class MultiwayCombatZone extends MapZone {
 		if (e.getProperties().isNPCWalkable()) {
 			return true;
 		}
-		boolean pestControl = e.getViewport().getRegion().getRegionId() == 10536;
-		boolean player = e instanceof Player;
-		if (!player) {
-			Direction dir = Direction.getDirection(loc, destination);
-			if (dir.getStepX() != 0 && dir.getStepY() != 0) {
-				return true; // Allow diagonal steps so people can still "stack"
-				// npcs (see barraging mummies)
-			}
-		}
-		if (e instanceof NPC || pestControl) {
-			for (NPC n : RegionManager.getLocalNpcs(e, MapDistance.RENDERING.getDistance() / 2)) {
-				if (n.isInvisible() || !n.getDefinition().hasAttackOption() || n == e) {
-					continue;
-				}
-				if (player && pestControl && !(n.getId() >= 3772 && n.getId() <= 3776)) {
-					continue;
-				}
-				Location l = n.getLocation();
-				// TODO: Better support for sizes.
-				int s = n.size() - 1;
-				int x = destination.getX();
-				int y = destination.getY();
-				if (x > l.getX()) {
-					x += e.size() - 1;
-				}
-				if (y > l.getY()) {
-					y += e.size() - 1;
-				}
-				if (l.getX() <= x && l.getY() <= y && (l.getX() + s) >= x && (l.getY() + s) >= y) {
-					return false;
-				}
-			}
-		}
+        for (NPC n : RegionManager.getLocalNpcs(e, MapDistance.RENDERING.getDistance() / 2)) {
+            if (n.isInvisible() || !n.getDefinition().hasAttackOption() || n == e) {
+                continue;
+            }
+            if(n.shouldPreventStacking(e)) {
+                int s1 = e.size();
+                int s2 = n.size();
+                int x = destination.getX();
+                int y = destination.getY();
+                Location l = n.getLocation();
+                if(Pathfinder.isStandingIn(x, y, s1, s1, l.getX(), l.getY(), s2, s2)) {
+                    return false;
+                }
+            }
+        }
 		return true;
 	}
 

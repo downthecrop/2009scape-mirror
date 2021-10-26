@@ -249,6 +249,13 @@ public abstract class Entity extends Node {
 		return false;
 	}
 
+    /**
+     * Should this entity prevent the mover from moving through it?
+     */
+    public boolean shouldPreventStacking(Entity mover) {
+        return false;
+    }
+
 	/**
 	 * Checks an impact before receiving it.
 	 */

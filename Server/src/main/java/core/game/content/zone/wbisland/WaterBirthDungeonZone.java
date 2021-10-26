@@ -24,9 +24,11 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
+import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.map.zone.ZoneRestriction;
 import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
+import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.plugin.PluginManager;
 
@@ -34,6 +36,7 @@ import rs09.plugin.PluginManager;
  * Handles the waterbirth dungeon zone.
  * @author Vexia
  */
+@Initializable
 public final class WaterBirthDungeonZone extends MapZone implements Plugin<Object> {
 
 	/**
@@ -54,6 +57,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
+		ZoneBuilder.configure(this);
 		return this;
 	}
 
