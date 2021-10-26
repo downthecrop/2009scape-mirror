@@ -6,6 +6,7 @@ import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.InteractionType;
 import core.game.node.entity.npc.AbstractNPC;
+import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.game.world.map.MapDistance;
@@ -76,6 +77,11 @@ public final class PCDefilerNPC extends AbstractNPC {
 			getProperties().getCombatPulse().attack(session.getSquire());
 		}
 	}
+
+    @Override
+    public boolean shouldPreventStacking(Entity mover) {
+        return mover instanceof NPC;
+    }
 
 	@Override
 	public void onImpact(final Entity entity, BattleState state) {
