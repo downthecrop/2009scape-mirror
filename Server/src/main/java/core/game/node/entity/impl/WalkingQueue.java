@@ -123,10 +123,10 @@ public final class WalkingQueue {
 				walk = walk.transform(point.getDiffX(), point.getDiffY(), 0);
 				if (!entity.getZoneMonitor().move(entity.getLocation(), walk)) {
 					reset();
-					if (entity.getPulseManager().isMovingPulse()) {
+					/*if (entity.getPulseManager().isMovingPulse()) {
 						entity.getPulseManager().clear(); // TODO: Check for
 						// bugs
-					}
+					}*/
 					return;
 				}
 			}
@@ -137,10 +137,10 @@ public final class WalkingQueue {
 					runPoint = null;
 					runDirection = -1;
 					reset();
-					if (entity.getPulseManager().isMovingPulse()) {
+					/*if (entity.getPulseManager().isMovingPulse()) {
 						entity.getPulseManager().clear(); // TODO: Check for
 						// bugs
-					}
+					}*/
 				}
 			}
 			if (runPoint != null) {

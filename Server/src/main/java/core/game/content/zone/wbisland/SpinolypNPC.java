@@ -58,6 +58,7 @@ public final class SpinolypNPC extends AbstractNPC {
 		super.init();
 		super.getLocks().lockMovement(Integer.MAX_VALUE);
 		setSpell();
+        getAggressiveHandler().setAllowTolerance(false);
 	}
 
 	/**

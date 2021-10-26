@@ -63,7 +63,7 @@ public final class VoidSealPlugin extends OptionHandler {
 	 * @return {@code True} if so.
 	 */
 	private static boolean canTarget(NPC npc) {
-		return npc instanceof PCDefilerNPC || npc instanceof PCRavagerNPC || npc instanceof PCShifterNPC || npc instanceof PCSpinnerNPC || npc instanceof PCSplatterNPC || npc instanceof PCTorcherNPC;
+		return npc instanceof PCDefilerNPC || npc instanceof PCRavagerNPC || npc instanceof PCShifterNPC || npc instanceof PCSpinnerNPC || npc instanceof PCSplatterNPC || npc instanceof PCTorcherNPC || npc instanceof PCBrawlerNPC;
 	}
 
 }

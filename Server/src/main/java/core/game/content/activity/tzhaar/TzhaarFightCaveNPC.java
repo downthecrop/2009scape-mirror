@@ -98,6 +98,10 @@ public final class TzhaarFightCaveNPC extends AbstractNPC {
 			}
 		}
 	}
+    @Override
+    public boolean shouldPreventStacking(Entity mover) {
+        return mover instanceof TzhaarFightCaveNPC;
+    }
 
 	@Override
 	public void finalizeDeath(Entity killer) {

@@ -63,11 +63,6 @@ public class AggressiveBehavior {
 	 */
 	public boolean canSelectTarget(Entity entity, Entity target) {
 		int regionId = target.getLocation().getRegionId();
-		if(target instanceof Player) {
-			if (RegionManager.forId(regionId).isTolerated(target.asPlayer())) {
-				return false;
-			}
-		}
 		if (!target.isActive() || DeathTask.isDead(target)) {
 			return false;
 		}
@@ -77,6 +72,9 @@ public class AggressiveBehavior {
 		if (entity instanceof NPC && target instanceof Player) {
 			NPC npc = (NPC) entity;
 			if (npc.getAggressiveHandler() != null && npc.getAggressiveHandler().isAllowTolerance()) {
+                if (RegionManager.forId(regionId).isTolerated(target.asPlayer())) {
+                    return false;
+                }
 				int ticks = GameWorld.getTicks() - npc.getAggressiveHandler().getPlayerTolerance()[target.getIndex()];
 				if (ticks > 3000) {
 					npc.getAggressiveHandler().getPlayerTolerance()[target.getIndex()] = GameWorld.getTicks();
@@ -86,11 +84,15 @@ public class AggressiveBehavior {
 			}
 		}
 		int level = target.getProperties().getCurrentCombatLevel();
-		if (level > entity.getProperties().getCurrentCombatLevel() << 1) {
+		if (level > entity.getProperties().getCurrentCombatLevel() << 1 && !ignoreCombatLevelDifference()) {
 			return false;
 		}
 		return true;
 	}
+
+    public boolean ignoreCombatLevelDifference() {
+        return false;
+    }
 
 	/**
 	 * Gets the priority flag.
