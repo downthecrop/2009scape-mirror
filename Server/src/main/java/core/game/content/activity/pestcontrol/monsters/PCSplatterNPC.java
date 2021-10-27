@@ -75,6 +75,11 @@ public final class PCSplatterNPC extends AbstractNPC {
 		}
 	}
 
+    @Override
+    public boolean shouldPreventStacking(Entity mover) {
+        return mover instanceof NPC;
+    }
+
 	@Override
 	public void onImpact(final Entity entity, BattleState state) {
 		super.onImpact(entity, state);

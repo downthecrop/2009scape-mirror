@@ -541,6 +541,9 @@ object RegionManager {
         val it = players.iterator()
         while (it.hasNext()) {
             val p = it.next()
+            if(p.isInvisible()) {
+                it.remove()
+            }
             if(!p.location.withinMaxnormDistance(n.location, 1)) {
                 it.remove()
                 continue
@@ -584,6 +587,9 @@ object RegionManager {
         val it = npcs.iterator()
         while (it.hasNext()) {
             val p = it.next()
+            if(p.isInvisible()) {
+                it.remove()
+            }
             if(!p.location.withinMaxnormDistance(n.location, 1)) {
                 it.remove()
                 continue

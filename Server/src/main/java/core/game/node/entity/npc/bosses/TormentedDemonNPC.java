@@ -92,6 +92,11 @@ public class TormentedDemonNPC extends AbstractNPC {
 		setAggressive(true);
 		this.setDefaultBehavior();
 	}
+
+    @Override
+    public boolean shouldPreventStacking(Entity other) {
+        return other instanceof TormentedDemonNPC;
+    }
 	
 	@Override
 	public void handleTickActions() {

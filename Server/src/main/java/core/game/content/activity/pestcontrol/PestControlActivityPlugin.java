@@ -227,6 +227,7 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 			PluginManager.definePlugin(new PCShifterNPC());
 			PluginManager.definePlugin(new PCSplatterNPC());
 			PluginManager.definePlugin(new PCSpinnerNPC());
+			PluginManager.definePlugin(new PCBrawlerNPC());
 			PluginManager.definePlugin(new PCObjectHandler());
 			PluginManager.definePlugin(new PestControlSquire());
 			PluginManager.definePlugin(new VoidSealPlugin());
