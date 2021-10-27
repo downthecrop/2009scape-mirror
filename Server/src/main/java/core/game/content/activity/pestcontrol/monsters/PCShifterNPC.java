@@ -6,6 +6,7 @@ import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.InteractionType;
 import core.game.node.entity.npc.AbstractNPC;
+import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
 import core.game.world.map.Location;
@@ -83,6 +84,11 @@ public final class PCShifterNPC extends AbstractNPC {
 			}
 		}
 	}
+
+    @Override
+    public boolean shouldPreventStacking(Entity mover) {
+        return mover instanceof NPC;
+    }
 
 	@Override
 	public void onImpact(final Entity entity, BattleState state) {

@@ -5,6 +5,7 @@ import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.npc.AbstractNPC;
+import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
@@ -170,6 +171,11 @@ public class PCRavagerNPC extends AbstractNPC {
 		}
 		return true;
 	}
+
+    @Override
+    public boolean shouldPreventStacking(Entity mover) {
+        return mover instanceof NPC;
+    }
 
 	@Override
 	public void onImpact(final Entity entity, BattleState state) {
