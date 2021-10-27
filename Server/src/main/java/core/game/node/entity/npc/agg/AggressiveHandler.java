@@ -83,7 +83,7 @@ public final class AggressiveHandler {
 			if (target.getAttribute("ignore_aggression", false)) {
 				return false;
 			}
-			if (((Player) target).getRights().equals(Rights.ADMINISTRATOR)) {
+			if (((Player) target).getRights().equals(Rights.ADMINISTRATOR) && !target.getAttribute("allow_admin_aggression", false)) {
 				return false;
 			}
 		}
