@@ -64,7 +64,7 @@ In the current climate of RSPS in general, we believe it's important to wear our
 
 ## Contributing
 
-<h4>Note: A live server that the 2009Scape development team runs is the best way to find and report bugs! We are currently in the process of rewriting the codebase in Kotlin. Any new commits should be written in Kotlin Only.</h4>
+<h4>Note: All merge requests MUST be made using the defaut MR template you can select from the dropdown when creating a new merge request. Merge requests that do not use this template will not be accepted. </h4>
 <h4>More information on Kotlin can be found <a href="https://kotlinlang.org/">here.</a></h4>
 
 There are many ways everyone can contribute! From the most seasoned programmers to those who do not have the most remote clue how code works! Below are some things that can always use some love from the community.
