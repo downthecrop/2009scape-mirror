@@ -194,7 +194,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
 
             //transform to depleted version
             if (!isMiningEssence && resource!!.getRespawnRate() != 0) {
-                SceneryBuilder.replace(node as Scenery, Scenery(resource!!.emptyId, node.getLocation(), node.rotation), resource!!.respawnDuration)
+                SceneryBuilder.replace(node as Scenery, Scenery(resource!!.emptyId, node.getLocation(), node.type, node.rotation), resource!!.respawnDuration)
                 node.setActive(false)
                 return true
             }
