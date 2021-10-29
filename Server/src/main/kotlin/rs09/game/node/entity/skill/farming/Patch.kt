@@ -25,6 +25,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         harvestAmt = when (plantable) {
             Plantable.LIMPWURT_SEED, Plantable.WOAD_SEED -> 3
             Plantable.MUSHROOM_SPORE -> 6
+            Plantable.WILLOW_SAPLING -> 0
             else -> 1
         }
         if(plantable != null && plantable?.applicablePatch != PatchType.FLOWER) {
@@ -254,11 +255,29 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 setCurrentState(getCurrentState() + 1)
             }
         }
+        if(patch.type == PatchType.TREE) {
+            // Willow branches
+            if(harvestAmt < 6) {
+                harvestAmt++;
+            }
+        }
 
         if(plantable?.stages ?: 0 > currentGrowthStage && !isGrown()){
             currentGrowthStage++
             setCurrentState(getCurrentState() + 1)
             isWatered = false
+        }
+
+        regrowIfTreeStump()
+    }
+
+    fun regrowIfTreeStump() {
+        if(patch.type == PatchType.TREE && plantable != null) {
+            // plantable.value + plantable.stages is the check-health stage, so +1 is the choppable tree, and +2 is the stump
+            if(getCurrentState() == plantable!!.value + plantable!!.stages + 2) {
+                setCurrentState(getCurrentState() - 1)
+                isWatered = false
+            }
         }
     }
 
