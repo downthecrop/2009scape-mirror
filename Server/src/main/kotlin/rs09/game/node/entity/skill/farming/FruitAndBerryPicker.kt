@@ -4,6 +4,7 @@ import api.ContentAPI
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
+import core.game.node.entity.npc.familiar.GiantEntNPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
@@ -42,7 +43,6 @@ class FruitAndBerryPicker : OptionHandler() {
         plantable ?: return false
 
         val animation = Animation(2281)
-        val reward = Item(plantable.harvestItem)
 
         if(patch.getFruitOrBerryCount() <= 0){
             player.sendMessage("This shouldn't be happening. Please report this.")
@@ -60,6 +60,13 @@ class FruitAndBerryPicker : OptionHandler() {
 
         player.pulseManager.run(object : Pulse(animation.duration){
             override fun pulse(): Boolean {
+				val reward = Item(plantable.harvestItem, 1)
+
+				val familiar = player.familiarManager.familiar
+				if(familiar != null && familiar is GiantEntNPC) {
+					familiar.modifyFarmingReward(fPatch, reward)
+				}
+
                 player.animator.animate(animation)
                 ContentAPI.addItemOrDrop(player,reward.id,reward.amount)
                 player.skills.addExperience(Skills.FARMING,plantable.harvestXP)
