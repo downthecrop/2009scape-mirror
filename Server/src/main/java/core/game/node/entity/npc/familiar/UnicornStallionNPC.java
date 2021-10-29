@@ -48,7 +48,6 @@ public class UnicornStallionNPC extends Familiar {
 		Player player = (Player) special.getNode();
 		player.getAudioManager().send(4372);
 		visualize(Animation.create(8267), Graphics.create(1356));
-		player.getSettings().updateRunEnergy(player.getSettings().getRunEnergy() * 0.10);
 		player.getSkills().heal((int) (player.getSkills().getMaximumLifepoints() * 0.15));
 		return true;
 	}
