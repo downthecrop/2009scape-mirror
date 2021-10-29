@@ -7,6 +7,7 @@ import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
+import rs09.game.node.entity.skill.farming.CropHarvester
 
 object UseWithPatchHandler{
     val RAKE = Items.RAKE_5341
@@ -17,6 +18,7 @@ object UseWithPatchHandler{
     val pourBucketAnim = Animation(2283)
     val wateringCanAnim = Animation(2293)
     val plantCureAnim = Animation(2288)
+    val secateursAnim = Animation(7227)
 
     @JvmField
     val allowedNodes = ArrayList<Int>()
@@ -46,7 +48,23 @@ object UseWithPatchHandler{
             RAKE -> PatchRaker.rake(player,patch)
             SEED_DIBBER -> player.sendMessage("I should plant a seed, not the seed dibber.")
             SPADE -> player.dialogueInterpreter.open(67984003,patch.getPatchFor(player)) //DigUpPatchDialogue.kt
-            SECATEURS -> {}
+            SECATEURS -> {
+                val p = patch.getPatchFor(player)
+                if(patch.type == PatchType.TREE) {
+                    if(p.isDiseased && !p.isDead) {
+                        player.pulseManager.run(object: Pulse(){
+                            override fun pulse(): Boolean {
+                                player.animator.animate(secateursAnim)
+                                p.cureDisease()
+                                return true
+                            }
+                        })
+                    } else if(p.plantable == Plantable.WILLOW_SAPLING && p.harvestAmt > 0) {
+                        val pulse = CropHarvester.harvestPulse(player, event.usedWith, Items.WILLOW_BRANCH_5933) ?: return false
+                        player.pulseManager.run(pulse)
+                    }
+                }
+            }
             TROWEL -> {
                 val p = patch.getPatchFor(player)
                 if(!p.isWeedy()){
