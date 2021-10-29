@@ -148,7 +148,13 @@ class FarmingState(player: Player? = null) : State(player) {
 
                         if(patch.nextGrowth < System.currentTimeMillis() && !patch.isDead){
                             patch.update()
-                            patch.nextGrowth = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(patch.patch.type.stageGrowthTime.toLong())
+                            var minutes = patch.patch.type.stageGrowthTime.toLong()
+                            if(patch.patch.type == PatchType.FRUIT_TREE && patch.isGrown()) {
+                                // Fruit trees take 160 minutes per stage to grow, but
+                                // restocking their fruit should take 40 minutes per fruit
+                                minutes = 40
+                            }
+                            patch.nextGrowth = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(minutes)
                         }
 
                     }
