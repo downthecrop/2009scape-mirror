@@ -1,10 +1,14 @@
 package core.game.node.entity.npc.familiar;
 
-import core.plugin.Initializable;
-import core.game.node.entity.skill.summoning.familiar.Familiar;
-import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
+import core.game.node.Node;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.summoning.familiar.Familiar;
+import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
+import core.game.node.scenery.Scenery;
+import core.plugin.Initializable;
+import rs09.game.node.entity.skill.farming.FarmingPatch;
+import rs09.game.node.entity.skill.farming.Patch;
 
 /**
  * Represents the Hydra familiar.
@@ -36,6 +40,17 @@ public class HydraNPC extends Familiar {
 
 	@Override
 	protected boolean specialMove(FamiliarSpecial special) {
+        Node node = special.getNode();
+        if(node instanceof Scenery) {
+            Scenery scenery = (Scenery)node;
+            FarmingPatch farmingPatch = FarmingPatch.forObject(scenery);
+            if(farmingPatch != null) {
+                Patch patch = farmingPatch.getPatchFor(owner);
+                patch.regrowIfTreeStump();
+                return true;
+            }
+        }
+        
 		return false;
 	}
 

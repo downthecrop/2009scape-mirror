@@ -151,6 +151,11 @@ public final class PCPortalNPC extends AbstractNPC {
 		}
 	}
 
+    @Override
+    public boolean shouldPreventStacking(Entity mover) {
+        return true;
+    }
+
 	@Override
 	public void onImpact(final Entity entity, BattleState state) {
 		updateLifepoints = true;
