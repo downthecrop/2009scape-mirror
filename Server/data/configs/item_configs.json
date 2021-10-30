@@ -5383,7 +5383,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "When the druids and Taverley as a whole were first graphically updated, the Druid robes themselves did not receive a graphical update, nor were they updated when the Troll Warzone update was released.",
+    "examine": "Keeps a druid's knees nice and warm.",
     "grand_exchange_price": "168",
     "durability": null,
     "name": "Druid's robe",
@@ -5406,7 +5406,7 @@
   },
   {
     "ge_buy_limit": "100",
-    "examine": "When the druids and Taverley as a whole were first graphically updated, the Druid robes themselves did not receive a graphical update, nor were they updated when the Troll Warzone update was released.",
+    "examine": "I feel closer to the gods when I am wearing this.",
     "durability": null,
     "low_alchemy": "16",
     "high_alchemy": "24",
