@@ -2,3 +2,30 @@
 - Diseased trees can be cured with secateurs.
 - Willow branches can be harvested from willow trees.
 - Giant ent improves yields of certain patch types by 50%.
+- Replaced all Druids with their RSHD counterparts, released the same time as Summoning and the Taverley Graphical Update.
+- This also means the Druidess is now correctly added to the game, and can be attacked.
+- Druid and Druidess added to Druid's Cricle (5 Druid/Druidess)
+- All HD Druids/Druidess' now have the right drop table assigned (all have identical drops to the original Druid NPC)
+- All Druid and Druidess NPCs animations corrected
+- All Druid and Druidess NPCs attack speed corrected
+- All Druid and Druidess NPCs stats corrected
+- All Druid and Druidess NPCs correct respawn rate of 25 ticks (15 seconds)
+- Pen (Taverley/Yanille Pet Shop) (ID 28341) examine added
+- Counter (Taverley/Yanille Pet Shop) (IDs 28357,28358,28364) examine added
+- The puppy spawns wandering inside the Yanille Pet Shop's pen have been corrected to the right NPCs
+- The puppy spawns wandering isnide the Taverley Pet Shop's pen have been corrected to the right NPCs
+- Gaius' Two Handed Shop (Taverley) name correction
+- Gaius' Two Handed Shop (Taverley) stock correction
+- Relocated Bernald (Burthorpe Vineyard) to his grapevines
+- Bernald (NPC ID 2580) examine added
+- Sanfew (NPC ID 454) examine added
+- Jatix (NPC ID 587) examine added
+- Kaqemeex (NPC ID 455) examine added
+- Pikkupstix (NPC ID 6971) examine added
+- Gaius (NPC ID 586) examine added
+- Sylas (NPC ID 5987) examine added
+- Druid's robe bottom (ID 538) examine corrected
+- Druid's robe top (ID 540) examine corrected
+- removed erroneous runite items from Ice Warrior droptable
+- relocated one Imp spawn near Ardougne Monastery a few tiles to resolve a poor pathing issue
+- removed [REDACTED] trapdoor

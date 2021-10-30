@@ -1301,8 +1301,8 @@
     "currency": "995",
     "general_store": "false",
     "id": "147",
-    "title": "Gaiu's Two Handed Shop",
-    "stock": "{1307,10}-{1309,10}-{1311,10}-{1313,10}-{1315,10}-{1317,10}"
+    "title": "Gaius' Two Handed Shop.",
+    "stock": "{1307,4}-{1309,3}-{1311,2}-{1313,1}-{1315,1}-{1317,1}"
   },
   {
     "npcs": "602",
