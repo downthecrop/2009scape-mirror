@@ -20597,6 +20597,10 @@
   },
   {
     "examine": "There are a lot of pet supplies here.",
-    "ids": "28363"
+    "ids": "28357,28358,28363,28364"
+  },
+  {
+    "examine": "Keeps the puppies out of trouble.",
+    "ids": "28341"
   }
 ]

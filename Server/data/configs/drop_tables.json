@@ -9730,24 +9730,6 @@
         "maxAmount": "1"
       },
       {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "1303",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "2",
-        "weight": "5.0",
-        "id": "892",
-        "maxAmount": "2"
-      },
-      {
-        "minAmount": "1",
-        "weight": "5.0",
-        "id": "9185",
-        "maxAmount": "1"
-      },
-      {
         "minAmount": "2",
         "weight": "50.0",
         "id": "564",
@@ -64338,8 +64320,8 @@
       }
     ],
     "charm": [],
-    "ids": "14",
-    "description": "",
+    "ids": "14,6972,6973,6974,6975,6976,6977,6978,6979,6980,6981,6982,6983,6984,6985,6986,6987",
+    "description": "Druid and Druidess (Taverley)",
     "main": [
       {
         "minAmount": "27",
