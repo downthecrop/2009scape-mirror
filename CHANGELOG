@@ -29,3 +29,14 @@
 - removed erroneous runite items from Ice Warrior droptable
 - relocated one Imp spawn near Ardougne Monastery a few tiles to resolve a poor pathing issue
 - removed [REDACTED] trapdoor
+- Removed a whole bunch of Dragon gear, including dragon boots, and combat bracelets that were erroneously on the Revenant ork, Revenant knight, Revenant cyclops, Revenant hellhound, Revenant demon, Revenant dark beast and Revenant dragon
+- Added Clue Scroll (easy) drop to Revenant imp, Revenant goblin and Revenant icefiend 
+- Added Clue Scroll (medium) drop to Revenant werewolf, Revenant hobgoblin, Revenant vampire, Revenant pyrefiend and Revenant cyclops
+- Added Clue Scroll (hard) drop to Revenant ork, Revenant knight, Revenant hellhound, Revenant demon, Revenant dark beast and Revenant dragon
+- Removed all Rune platebody drops across all Revenants
+- Removed all Rune pickaxe drops across all Revenants
+- Removed all Rune axe drops across all Revenants
+- Removed all Rune scimitar drops across all Revenants
+- Removed ridiculous noted Manta ray drop across all Revenants
+- Reverted the absurd 50-100 noted Sharks drop to a more believable number of 4 across all Revenants
+- Reverted the noted tuna potato drop to a maximum of 5 across all Revenants
