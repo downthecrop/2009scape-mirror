@@ -24,6 +24,13 @@ public enum SpecialLadders implements LadderAchievementCheck {
     JATIZSO_SHOUT_TOWER_UP(Location.create(2373, 3800, 2),Location.create(2374, 3800, 0)),
     JATIZSO_SHOUT_TOWER_DOWN(Location.create(2373, 3800, 0),Location.create(2374, 3800, 2)),
 
+    ALKHARID_ZEKE_UP(Location.create(3284,3186,0), Location.create(3284,3190,1)),
+    ALKHARID_ZEKE_DOWN(Location.create(3284,3190,1), Location.create(3284,3186,0)),
+    ALKHARID_CRAFTING_UP(Location.create(3311,3187,0),Location.create(3314,3187,1)),
+    ALKHARID_CRAFTING_DOWN(Location.create(3314,3187,1),Location.create(3310,3187,0)),
+    ALKHARID_SOCRCERESS_UP(Location.create(3325,3142,0),Location.create(3325,3139,1)),
+    ALKHARID_SOCRCERESS_DOWN(Location.create(3325,3139,1),Location.create(3325,3143,0)),
+
     DRAYNOR_SEWER_SOUTHEAST_DOWN(new Location(3118, 3244, 0), new Location(3118, 9643, 0)),
     DRAYNOR_SEWER_SOUTHEAST_UP(new Location(3118, 9643, 0), new Location(3118, 3243, 0)),
     DRAYNOR_SEWER_NORTHWEST_DOWN(new Location(3084, 3272, 0), new Location(3085, 9672, 0)),
