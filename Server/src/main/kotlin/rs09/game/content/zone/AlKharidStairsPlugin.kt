@@ -15,12 +15,10 @@ import core.plugin.Plugin
 @Initializable
 class AlKharidStairsPlugin : OptionHandler() {
 
-    // Zekes Shop Upstairs Door replacement
     private val zekeStairsTop = Scenery(35645,Location(3284,3190,1),2,0)
     private val zekeDoorClosed = Scenery(27988,Location(3284,3190,1),0,2)
     private val zekeDoorOpened = Scenery(27989,Location(3285,3190,1),0,3)
 
-    // Crafting Shop Upstairs Door replacement
     private val craftingStairsTop = Scenery(35645,Location(3314,3187,1),2,0)
     private val craftingDoorClosed = Scenery(27988,Location(3314,3187,1),0,3)
     private val craftingDoorOpened = Scenery(27989,Location(3314,3186,1),0,0)
@@ -30,7 +28,7 @@ class AlKharidStairsPlugin : OptionHandler() {
         node ?: return false
         option ?: return false
         if(node.location == zekeDoorOpened.location || node.location == craftingDoorOpened.location){
-                ContentAPI.sendMessage(player,"Nothing interesting happens.")
+                ContentAPI.sendMessage(player,"This door appears to be stuck open.")
         } else{
             DoorActionHandler.handleDoor(player,node.asScenery())
         }
@@ -39,9 +37,11 @@ class AlKharidStairsPlugin : OptionHandler() {
 
     override fun newInstance(arg: Any?): Plugin<Any> {
 
+        // Zekes Shop Upstairs Door replacement
         SceneryBuilder.replace(zekeDoorClosed,zekeDoorOpened)
         SceneryBuilder.add(zekeStairsTop)
 
+        // Crafting Shop Upstairs Door replacement
         SceneryBuilder.replace(craftingDoorClosed,craftingDoorOpened)
         SceneryBuilder.add(craftingStairsTop)
 
