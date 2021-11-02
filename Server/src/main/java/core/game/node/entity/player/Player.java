@@ -577,7 +577,7 @@ public class Player extends Entity {
 				packetDispatch.sendMessage("Unhandled special attack for item " + weaponId + "!");
 			}
 		}
-		if (style == CombatStyle.RANGE && equipment.getNew(3).getId() == 10034) {
+		if (style == CombatStyle.RANGE && equipment.getNew(3).getId() == 10033 || equipment.getNew(3).getId() == 10034) {
 			return ChinchompaSwingHandler.getInstance();
 		}
 		return style.getSwingHandler();

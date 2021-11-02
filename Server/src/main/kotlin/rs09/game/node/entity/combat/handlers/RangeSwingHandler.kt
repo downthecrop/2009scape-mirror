@@ -367,6 +367,7 @@ open class RangeSwingHandler
             if (dropRate == -1.0) {
                 return
             }
+            e.equipment.replace(Item(ammo.id, ammo.amount - amount, ammo.charge), state.weapon.ammunitionSlot)
             if (dropLocation == null) {
                 return
             }
@@ -374,7 +375,6 @@ open class RangeSwingHandler
             if (flag and 0x200000 != 0) { //Water
                 dropLocation = null
             }
-            e.equipment.replace(Item(ammo.id, ammo.amount - amount, ammo.charge), state.weapon.ammunitionSlot)
             if (dropLocation != null && state.rangeWeapon.isDropAmmo) {
                 val rate = 5 * (1.0 + e.skills.getLevel(Skills.RANGE) * 0.01) * dropRate
                 if (RandomFunction.randomize(rate.toInt()) != 0) {

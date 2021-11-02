@@ -8,7 +8,7 @@ import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
 public abstract class ElementalTitanNPC extends Familiar {
 
     private static final int scrollHealAmount = 8;
-    private static final double  scrollDefenceBoostPercent = 12.5;
+    private static final double scrollDefenceBoostPercent = 0.125;
 
     public ElementalTitanNPC(Player owner, int id, int ticks, int pouchId, int specialCost, int attackStyle) {
         super(owner, id, ticks, pouchId, specialCost, attackStyle);
@@ -20,7 +20,10 @@ public abstract class ElementalTitanNPC extends Familiar {
     @Override
     protected boolean specialMove(FamiliarSpecial special) {
         int currentDefenceLevel = owner.getSkills().getLevel(Skills.DEFENCE);
-        owner.getSkills().updateLevel(Skills.DEFENCE, (int)(scrollDefenceBoostPercent * currentDefenceLevel));
+        int maximumDefenceLevel = owner.getSkills().getStaticLevel(Skills.DEFENCE);
+        owner.getSkills().updateLevel(Skills.DEFENCE,
+            (int)((1.0 + scrollDefenceBoostPercent) * currentDefenceLevel),
+            (int)((1.0 + scrollDefenceBoostPercent) * maximumDefenceLevel));
         int currentHp = owner.getSkills().getLifepoints();
         int maxHp = owner.getSkills().getMaximumLifepoints() + scrollHealAmount;
         int healAmount = Math.min(maxHp - currentHp, scrollHealAmount);
