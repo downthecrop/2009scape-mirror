@@ -9,7 +9,7 @@ import java.util.*
 
 class SimpleHalloweenEvent : WorldEvent("hween"){
     override fun checkActive(): Boolean {
-        return true
+        return false
     }
 
     override fun initialize() {
