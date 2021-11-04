@@ -33,31 +33,33 @@ class SpikyVambraces: UseWithHandler(Items.KEBBIT_CLAWS_10113) {
         val player = event.player
         when(vamb){
             Items.LEATHER_VAMBRACES_1063 -> {
-                craftVam(player,vamb,Items.SPIKY_VAMBRACES_10077,"leather")
+                craftVamb(player,vamb,Items.SPIKY_VAMBRACES_10077,"leather")
             }
             Items.GREEN_DHIDE_VAMB_1065 -> {
-                craftVam(player,vamb,Items.GREEN_SPIKY_VAMBS_10079,"green dragonhide")
+                craftVamb(player,vamb,Items.GREEN_SPIKY_VAMBS_10079,"green dragonhide")
             }
             Items.BLUE_DHIDE_VAMB_2487 -> {
-                craftVam(player,vamb,Items.BLUE_SPIKY_VAMBS_10081,"blue dragonhide")
+                craftVamb(player,vamb,Items.BLUE_SPIKY_VAMBS_10081,"blue dragonhide")
             }
             Items.RED_DHIDE_VAMB_2489 -> {
-                craftVam(player,vamb,Items.RED_SPIKY_VAMBS_10083,"red dragonhide")
+                craftVamb(player,vamb,Items.RED_SPIKY_VAMBS_10083,"red dragonhide")
             }
             Items.BLACK_DHIDE_VAMB_2491 -> {
-                craftVam(player,vamb,Items.BLACK_SPIKY_VAMBS_10085,"black dragonhide")
+                craftVamb(player,vamb,Items.BLACK_SPIKY_VAMBS_10085,"black dragonhide")
             }
         }
         return true
     }
 
-    private fun craftVam(player: Player, vamb: Int, product: Int, vambLeather: String){
+    private fun craftVamb(player: Player, vamb: Int, product: Int, vambLeather: String){
         if (player.skills.getLevel(Skills.CRAFTING) >= 32){
-            ContentAPI.removeItem(player,vamb,Container.INVENTORY)
-            ContentAPI.removeItem(player,Items.KEBBIT_CLAWS_10113,Container.INVENTORY)
-            ContentAPI.addItem(player,product)
-            player.skills.addExperience(Skills.CRAFTING,6.0)
-            ContentAPI.sendMessage(player, "You carefully attach the sharp claws to the $vambLeather vambraces.")
+            if (ContentAPI.removeItem(player,vamb,Container.INVENTORY) &&
+                ContentAPI.removeItem(player,Items.KEBBIT_CLAWS_10113,Container.INVENTORY)
+            ) {
+                ContentAPI.addItem(player,product)
+                player.skills.addExperience(Skills.CRAFTING,6.0)
+                ContentAPI.sendMessage(player, "You carefully attach the sharp claws to the $vambLeather vambraces.")
+            }
         }
         else{
             ContentAPI.sendMessage(player,"You need a crafting level of 32 to craft this.")
