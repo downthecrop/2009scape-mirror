@@ -96,7 +96,7 @@ public class YakArmourPlugin extends UseWithHandler {
 
 		@Override
 		public boolean checkRequirements() {
-			int level = (index == 1 ? 43 : 46);
+			int level = (index == 1 ? 46 : 43);
 			if (player.getSkills().getLevel(Skills.CRAFTING) < level) {
 				player.getDialogueInterpreter().sendDialogue("You need a Crafting level of at least " + level + " in order to do this.");
 				return false;
