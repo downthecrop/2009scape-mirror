@@ -212,7 +212,7 @@ public class ProfessorOddensteinPlugin extends DialoguePlugin {
 				stage = 14;
 				break;
 			case 14:
-				interpreter.sendDialogues(npc, null, "My machine is broken, and the house germlins have", "run off with some vital bits.");
+				interpreter.sendDialogues(npc, null, "My machine is broken, and the house gremlins have", "run off with some vital bits.");
 				stage = 15;
 				break;
 			case 15:
