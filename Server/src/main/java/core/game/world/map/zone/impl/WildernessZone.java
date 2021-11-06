@@ -23,6 +23,7 @@ import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.RegionZone;
 import core.game.world.map.zone.ZoneBorders;
+import core.game.world.map.zone.ZoneRestriction;
 import core.tools.RandomFunction;
 import org.rs09.consts.NPCs;
 import rs09.game.system.config.NPCConfigParser;
@@ -60,7 +61,7 @@ public final class WildernessZone extends MapZone {
 	 * Constructs a new {@code WildernessZone} {@code Object}.
 	 */
 	public WildernessZone(ZoneBorders... borders) {
-		super("Wilderness", true);
+		super("Wilderness", true, ZoneRestriction.RANDOM_EVENTS);
 		this.borders = borders;
 	}
 
