@@ -447,6 +447,9 @@ public class TeleportManager {
 						switch (++delay) {
 							case 2:
 								entity.animate(Animation.create(3265));
+                                if(entity instanceof Player) {
+                                    ((Player) entity).getAudioManager().send(1098, 1);
+                                }
 								break;
 							case 4:
 								Quest quest = null;
