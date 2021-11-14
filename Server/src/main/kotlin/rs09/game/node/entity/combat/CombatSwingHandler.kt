@@ -407,7 +407,50 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      * @param victim The victim.
      * @param state The battle state.
      */
-    open fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {}
+    open fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {
+        if (entity == null || (victim is Player && entity is Player && entity.asPlayer().ironmanManager.isIronman)) {
+            return
+        }
+
+        if (entity is Player && state != null) {
+            val famExp = entity.getAttribute("fam-exp", false) && entity.familiarManager.hasFamiliar()
+            val hit = state.totalDamage
+            var skill = -1
+            when (if (famExp) entity.familiarManager.familiar.attackStyle else entity.properties.attackStyle.style) {
+                WeaponInterface.STYLE_DEFENSIVE -> skill = Skills.DEFENCE
+                WeaponInterface.STYLE_ACCURATE -> skill = Skills.ATTACK
+                WeaponInterface.STYLE_AGGRESSIVE -> skill = Skills.STRENGTH
+                WeaponInterface.STYLE_CONTROLLED -> {
+                    var experience = hit * EXPERIENCE_MOD
+                    experience /= 3.0
+                    entity.getSkills().addExperience(Skills.ATTACK, experience, true)
+                    entity.getSkills().addExperience(Skills.STRENGTH, experience, true)
+                    entity.getSkills().addExperience(Skills.DEFENCE, experience, true)
+                    return
+                }
+
+                WeaponInterface.STYLE_RANGE_ACCURATE -> skill = Skills.RANGE
+                WeaponInterface.STYLE_RAPID -> skill = Skills.RANGE
+                WeaponInterface.STYLE_LONG_RANGE -> {
+                    entity.getSkills().addExperience(Skills.RANGE, hit * (EXPERIENCE_MOD / 2), true)
+                    entity.getSkills().addExperience(Skills.DEFENCE, hit * (EXPERIENCE_MOD / 2), true)
+                    return
+                }
+
+                WeaponInterface.STYLE_CAST -> skill = Skills.MAGIC
+                WeaponInterface.STYLE_DEFENSIVE_CAST -> {
+                    entity.getSkills().addExperience(Skills.MAGIC, hit * 1.33, true)
+                    entity.getSkills().addExperience(Skills.DEFENCE, hit.toDouble(), true)
+                    return
+                }
+            }
+            if (skill < 0) return
+            entity.getSkills().addExperience(skill, hit * EXPERIENCE_MOD, true)
+            if (!famExp) {
+                entity.getSkills().addExperience(Skills.HITPOINTS, hit * 1.33, true)
+            }
+        }
+    }
 
     /**
      * Gets the formated hit.

@@ -1,5 +1,6 @@
 package rs09.game.system.command.sets
 
+import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
@@ -18,6 +19,15 @@ class DevelopmentCommandSet : CommandSet(Command.Privilege.ADMIN) {
             for(item in farmKitItems){
                 player.inventory.add(Item(item))
             }
+        }
+
+        define("spellbook"){player, args ->
+            if(args.size < 2){
+                reject(player,"Usage: ::spellbook [int]. 0 = MODERN, 1 = ANCIENTS, 2 = LUNARS")
+            }
+            val spellBook = SpellBookManager.SpellBook.values()[args[1].toInt()]
+            player.spellBookManager.setSpellBook(spellBook)
+            player.spellBookManager.update(player)
         }
 
 
