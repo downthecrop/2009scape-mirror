@@ -107,7 +107,6 @@ public final class ChainhitSpecialHandler extends RangeSwingHandler implements P
 		entity.visualize(ANIMATION, GRAPHIC);
 		int speed = (int) (32 + (entity.getLocation().getDistance(victim.getLocation()) * 5));
 		Projectile.create(entity, victim, 258, 40, 36, 32, speed, 5, 11).send();
-        addExperience(entity, victim, state);
 	}
 
 	@Override
