@@ -39,6 +39,58 @@ object CanoeUtils {
         }
     }
 
+    fun getTravelAnimation(stationId: Int, destId: Int): Int? {
+        val fromLumbridge = mapOf(
+                4 to 9887,
+                3 to 9888,
+                2 to 9889,
+                1 to 9890
+        )
+        val fromChampions = mapOf(
+                4 to 9891,
+                3 to 9892,
+                2 to 9893,
+                0 to 9906
+        )
+        val fromBarbarian = mapOf(
+                4 to 9894,
+                3 to 9895,
+                1 to 9905,
+                0 to 9906
+        )
+        val fromEdge = mapOf(
+                4 to 9896,
+                2 to 9903,
+                1 to 9902,
+                0 to 9901
+        )
+
+        val fromWilderness = mapOf(
+                3 to 9900,
+                2 to 9899,
+                1 to 9898,
+                0 to 9897
+        )
+        when(stationId){
+            0 -> {
+                return fromLumbridge[destId]
+            }
+            1 -> {
+                return fromChampions[destId]
+            }
+            2 -> {
+                return fromBarbarian[destId]
+            }
+            3 -> {
+                return fromEdge[destId]
+            }
+            4 -> {
+                return fromWilderness[destId]
+            }
+        }
+        return 0
+    }
+
     fun getShapeAnimation(axe: SkillingTool): Animation{
         when(axe){
             SkillingTool.BRONZE_AXE -> return Animation(6744);
