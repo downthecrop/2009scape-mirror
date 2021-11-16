@@ -310,6 +310,7 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 	 * @param hit The hit.
 	 */
 	public void addExperience(Entity entity, int hit) {
+		entity.getSkills().addExperience(Skills.MAGIC, experience, true);
 		if (!(entity instanceof Player) || hit < 1) {
 			return;
 		}

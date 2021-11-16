@@ -87,7 +87,6 @@ open class MeleeSwingHandler
 
     override fun visualize(entity: Entity, victim: Entity?, state: BattleState?) {
         entity.animate(entity.properties.attackAnimation)
-        addExperience(entity, victim, state)
     }
 
     override fun impact(entity: Entity?, victim: Entity?, state: BattleState?) {
@@ -230,50 +229,6 @@ open class MeleeSwingHandler
             return 1.0 + (e!!.skills.maximumLifepoints - e.skills.lifepoints) * 0.01
         }
         return 1.0
-    }
-
-    override fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {
-        if (entity is Player && state != null) {
-            if (victim is Player && entity.asPlayer().ironmanManager.isIronman) {
-                return
-            }
-            var hit = state.estimatedHit
-            if (hit < 0) {
-                hit = 0
-            }
-            if (state.secondaryHit > 0) {
-                hit += state.secondaryHit
-            }
-            if(state.targets != null) {
-                for (s in state.targets) {
-                    if (s != null) {
-                        if(s.estimatedHit > 0) {
-                            hit += s.estimatedHit
-                        }
-                        if(s.secondaryHit > 0) {
-                            hit += s.secondaryHit
-                        }
-                    }
-                }
-            }
-            var experience = hit * EXPERIENCE_MOD
-            val famExp = entity.getAttribute("fam-exp", false) && entity.familiarManager.hasFamiliar()
-            if (!famExp) {
-                entity.getSkills().addExperience(Skills.HITPOINTS, hit * 1.33, true)
-            }
-            when (if (famExp) entity.familiarManager.familiar.attackStyle else entity.properties.attackStyle.style) {
-                WeaponInterface.STYLE_ACCURATE -> entity.skills.addExperience(Skills.ATTACK, experience, true)
-                WeaponInterface.STYLE_AGGRESSIVE -> entity.skills.addExperience(Skills.STRENGTH, experience, true)
-                WeaponInterface.STYLE_DEFENSIVE -> entity.skills.addExperience(Skills.DEFENCE, experience, true)
-                WeaponInterface.STYLE_CONTROLLED -> {
-                    experience /= 3.0
-                    entity.skills.addExperience(Skills.ATTACK, experience, true)
-                    entity.skills.addExperience(Skills.STRENGTH, experience, true)
-                    entity.skills.addExperience(Skills.DEFENCE, experience, true)
-                }
-                WeaponInterface.STYLE_CAST -> entity.skills.addExperience(Skills.MAGIC, experience, true)
-            }
-        }
     }
 
     override fun getArmourSet(e: Entity?): ArmourSet? {

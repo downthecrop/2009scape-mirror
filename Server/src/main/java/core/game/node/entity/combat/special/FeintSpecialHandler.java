@@ -59,6 +59,5 @@ public final class FeintSpecialHandler extends MeleeSwingHandler implements Plug
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
 		entity.animate(ANIMATION);
-        addExperience(entity, victim, state);
 	}
 }

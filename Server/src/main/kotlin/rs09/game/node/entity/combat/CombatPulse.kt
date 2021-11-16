@@ -417,6 +417,7 @@ class CombatPulse(
                 entity.faceTemporary(victim, 1) // face back to entity.
             }
             handler.adjustBattleState(entity, victim!!, state)
+            handler.addExperience(entity, victim, state)
             handler.visualize(entity, victim, state)
             if (delay - 1 < 1) {
                 handler.visualizeImpact(entity, victim, state)
