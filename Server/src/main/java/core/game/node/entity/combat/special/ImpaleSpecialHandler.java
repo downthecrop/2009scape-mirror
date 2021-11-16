@@ -69,6 +69,5 @@ public final class ImpaleSpecialHandler extends MeleeSwingHandler implements Plu
 			return;
 		}
 		entity.visualize(ANIMATION, GRAPHIC);
-        addExperience(entity, victim, state);
 	}
 }

@@ -120,7 +120,9 @@ open class MultiSwingHandler(meleeDistance: Boolean, vararg attacks: SwitchAttac
         super.adjustBattleState(entity, victim, state)
     }
 
-    override fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {}
+    override fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {
+        current.handler.addExperience(entity, victim, state)
+    }
     override fun visualizeImpact(entity: Entity?, victim: Entity?, state: BattleState?) {
         if (current.isUseHandler) {
             current.handler.visualizeImpact(entity, victim, state)
