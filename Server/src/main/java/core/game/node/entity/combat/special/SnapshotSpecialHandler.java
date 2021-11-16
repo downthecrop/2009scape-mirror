@@ -105,6 +105,5 @@ public final class SnapshotSpecialHandler extends RangeSwingHandler implements P
 		Projectile.create(entity, victim, 249, 40, 36, 20, speed, 15, 11).send();
 		speed = (int) (32 + (entity.getLocation().getDistance(victim.getLocation()) * 10));
 		Projectile.create(entity, victim, 249, 40, 36, 50, speed, 15, 11).send();
-        addExperience(entity, victim, state);
 	}
 }
