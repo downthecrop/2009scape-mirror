@@ -8,12 +8,14 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.system.task.Pulse
+import core.game.world.update.flag.context.Animation
 import core.net.packet.PacketRepository
 import core.net.packet.context.MinimapStateContext
 import core.net.packet.out.MinimapState
 import core.tools.RandomFunction
 import org.rs09.consts.Components
 import rs09.game.interaction.InterfaceListener
+import kotlin.math.abs
 
 class CanoeInterfaceListeners : InterfaceListener() {
 
@@ -75,7 +77,7 @@ class CanoeInterfaceListeners : InterfaceListener() {
                 player.packetDispatch.sendInterfaceConfig(DESTINATION_INTERFACE,49,true)
                 for(i in 0..3){
                     if(i == stationIndex) continue
-                    if(Math.abs(i - stationIndex) > maxDistance){
+                    if(abs(i - stationIndex) > maxDistance){
                         player.packetDispatch.sendInterfaceConfig(DESTINATION_INTERFACE,boatChilds[i],true)
                         player.packetDispatch.sendInterfaceConfig(DESTINATION_INTERFACE,locationChilds[i],true)
                     }
@@ -88,11 +90,19 @@ class CanoeInterfaceListeners : InterfaceListener() {
             val dest = CanoeUtils.getDestinationFromButtonID(buttonID)
             val destIndex = CanoeUtils.getStationIndex(dest)
             val arrivalMessage = CanoeUtils.getNameByIndex(destIndex)
+            val stationIndex = CanoeUtils.getStationIndex(player.location)
+            val interfaceAnimationId = CanoeUtils.getTravelAnimation(stationIndex,destIndex)
+            var travelAnimDur = 15
             val varbit = player.getAttribute("canoe-varbit",VarbitDefinition.forObjectID(0))
+
             if (player.familiarManager.hasFamiliar()) {
                 player.sendMessage("You can't take a follower on a canoe.")
                 return@on true
             }
+            if (interfaceAnimationId != 0) {
+                travelAnimDur = Animation(interfaceAnimationId).duration
+            }
+
             player.lock()
             player.interfaceManager.close()
             player.pulseManager.run(object : Pulse(){
@@ -102,18 +112,19 @@ class CanoeInterfaceListeners : InterfaceListener() {
                         0 -> {
                             player.interfaceManager.openOverlay(Component(Components.FADE_TO_BLACK_120))
                             player.interfaceManager.open(Component(Components.CANOE_TRAVEL_758))
-                            }
+                            ContentAPI.animateInterface(player, Components.CANOE_TRAVEL_758, 3, interfaceAnimationId)
+                        }
                         2 -> {
                             PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 2))
                             player.interfaceManager.hideTabs(0, 1, 2, 3, 4, 5, 6, 11, 12)
                         }
-                        15 -> player.properties.teleportLocation = dest
-                        16 -> {
+                        travelAnimDur -> player.properties.teleportLocation = dest
+                        travelAnimDur+1 -> {
                             player.interfaceManager.close(Component(Components.CANOE_TRAVEL_758))
                             player.interfaceManager.closeOverlay()
                             player.interfaceManager.openOverlay(Component(Components.FADE_FROM_BLACK_170))
                         }
-                        18 -> {
+                        travelAnimDur+3 -> {
                             player.unlock()
                             player.interfaceManager.restoreTabs()
                             PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 0))
