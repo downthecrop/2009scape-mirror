@@ -76,7 +76,6 @@ public final class SaradominsLightningHandler extends MeleeSwingHandler implemen
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
 		entity.visualize(ANIMATION, GRAPHIC);
-        addExperience(entity, victim, state);
 	}
 
 	@Override

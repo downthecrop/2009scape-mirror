@@ -70,6 +70,5 @@ public final class EnergyDrainSpecialHandler extends MeleeSwingHandler implement
 	public void visualize(Entity entity, Entity victim, BattleState state) {
 		entity.animate(ANIMATION);
 		victim.graphics(GRAPHIC);
-        addExperience(entity, victim, state);
 	}
 }

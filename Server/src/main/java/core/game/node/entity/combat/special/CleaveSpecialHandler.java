@@ -66,6 +66,5 @@ public final class CleaveSpecialHandler extends MeleeSwingHandler implements Plu
 	@Override
 	public void visualize(Entity entity, Entity victim, BattleState state) {
 		entity.visualize(ANIMATION, GRAPHIC);
-        addExperience(entity, victim, state);
 	}
 }
