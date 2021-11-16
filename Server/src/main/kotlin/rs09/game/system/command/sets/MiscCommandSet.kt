@@ -12,10 +12,8 @@ import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.skill.Skills
-import core.game.node.entity.skill.agility.AgilityHandler
 import core.game.node.item.Item
 import core.game.system.communication.CommunicationInfo
-import core.game.system.task.Pulse
 import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
 import core.plugin.Initializable
@@ -37,12 +35,10 @@ import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.util.*
 import kotlin.collections.ArrayList
-import kotlin.random.Random
 
 @Initializable
 class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
     override fun defineCommands() {
-        var i = 6500;
 
         /**
          * Toggles debug mode
@@ -133,35 +129,6 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
          */
         define("shop", Command.Privilege.STANDARD){ player, _ ->
             player.interfaceManager.open(Component(Components.CREDIT_SHOP))
-        }
-
-        // Cropster Testing Interface Animations
-        // boat is 3??
-        // not 1-400
-        //600 ish is promissing
-        // 5100 is travel
-
-        define("cc", Command.Privilege.STANDARD) { player, args ->
-
-            if (args.size < 2){
-                ContentAPI.submitIndividualPulse(player, object : Pulse(2){
-                    override fun pulse(): Boolean {
-                        while (i < 100000){
-                            player.interfaceManager.open(Component(Components.CANOE_TRAVEL_758))
-                            ContentAPI.animateInterface(player, Components.CANOE_TRAVEL_758, 3, i)
-                            player.sendMessage(i.toString())
-                            i += 1
-                            return false
-                        }
-                        return true
-                    }
-                })
-            }
-            else{
-                i = args[1].toInt()
-                player.interfaceManager.open(Component(Components.CANOE_TRAVEL_758))
-                ContentAPI.animateInterface(player, Components.CANOE_TRAVEL_758, 3, args[1].toInt())
-            }
         }
 
         /**
