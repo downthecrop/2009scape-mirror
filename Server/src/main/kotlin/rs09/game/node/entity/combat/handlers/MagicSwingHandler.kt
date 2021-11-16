@@ -173,7 +173,7 @@ open class MagicSwingHandler
         if (entity is Player) {
             prayer += entity.prayer.getSkillBonus(Skills.MAGIC)
         }
-        val additional = 1.0 // Slayer helmet/salve/...
+        val additional = getSetMultiplier(entity, Skills.MAGIC);
         val effective = floor(level * prayer * additional + spellBonus)
         val bonus = entity.properties.bonuses[WeaponInterface.BONUS_MAGIC]
         return floor((effective + 8) * (bonus + 64) / 10).toInt()
@@ -210,9 +210,8 @@ open class MagicSwingHandler
     }
 
     override fun getSetMultiplier(e: Entity?, skillId: Int): Double {
-        if (e is Player) {
-            val c: Container = e.equipment
-            if (containsVoidSet(c) && c.getNew(EquipmentContainer.SLOT_HAT).id == 11663) {
+        if(skillId == Skills.MAGIC) {
+            if(e is Player && e.isWearingVoid(CombatStyle.MAGIC)) {
                 return 1.3
             }
         }

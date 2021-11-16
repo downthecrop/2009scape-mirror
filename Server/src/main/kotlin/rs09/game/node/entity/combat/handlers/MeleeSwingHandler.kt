@@ -146,7 +146,7 @@ open class MeleeSwingHandler
         if(entity.properties.attackStyle.style == WeaponInterface.STYLE_ACCURATE) effectiveAttackLevel += 3
         else if(entity.properties.attackStyle.style == WeaponInterface.STYLE_CONTROLLED) effectiveAttackLevel += 1
         effectiveAttackLevel += 8
-        if(entity is Player && entity.isWearingVoid(true)) effectiveAttackLevel *= 1.1
+        effectiveAttackLevel *= getSetMultiplier(entity, Skills.ATTACK);
         effectiveAttackLevel = floor(effectiveAttackLevel)
         effectiveAttackLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
 
@@ -227,6 +227,9 @@ open class MeleeSwingHandler
         if (e!!.properties.armourSet === ArmourSet.DHAROK && skillId == Skills.STRENGTH) {
 //			System.out.println("Fiist number -> " + 1.0 + ((e.getSkills().getMaximumLifepoints() - e.getSkills().getLifepoints()) * 0.01));
             return 1.0 + (e!!.skills.maximumLifepoints - e.skills.lifepoints) * 0.01
+        }
+        if(e is Player && e.isWearingVoid(CombatStyle.MELEE) && (skillId == Skills.ATTACK || skillId == Skills.STRENGTH)) {
+            return 1.1
         }
         return 1.0
     }
