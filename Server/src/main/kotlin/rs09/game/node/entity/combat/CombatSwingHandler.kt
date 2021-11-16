@@ -138,18 +138,6 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
     }
 
     /**
-     * Checks if the container contains a void knight set.
-     * @param c The container to check.
-     * @return `True` if so.
-     */
-    fun containsVoidSet(c: Container): Boolean {
-        val top = c.getNew(EquipmentContainer.SLOT_CHEST)
-        return if (top.id != 8839 && top.id != 10611) {
-            false
-        } else c.getNew(EquipmentContainer.SLOT_LEGS).id == 8840 && c.getNew(EquipmentContainer.SLOT_HANDS).id == 8842
-    }
-
-    /**
      * Checks if the hit will be accurate.
      * @param entity The entity.
      * @param victim The victim.
