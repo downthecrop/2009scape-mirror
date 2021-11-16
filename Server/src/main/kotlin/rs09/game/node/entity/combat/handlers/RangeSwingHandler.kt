@@ -136,63 +136,6 @@ open class RangeSwingHandler
         super.adjustBattleState(entity, victim, state)
     }
 
-    override fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {
-        if (entity is Player) {
-            if (victim is Player && entity.asPlayer().ironmanManager.isIronman) {
-                return
-            }
-            var hit = state!!.estimatedHit
-            if (hit < 0) {
-                hit = 0
-            }
-            if (state.secondaryHit > 0) {
-                hit += state.secondaryHit
-            }
-            if(state.targets != null) {
-                for (s in state.targets) {
-                    if (s != null) {
-                        if(s.estimatedHit > 0) {
-                            hit += s.estimatedHit
-                        }
-                        if(s.secondaryHit > 0) {
-                            hit += s.secondaryHit
-                        }
-                    }
-                }
-            }
-            val p = entity.asPlayer()
-            val famExp = entity.getAttribute("fam-exp", false) && p.familiarManager.hasFamiliar()
-            if (famExp) {
-                val fam = p.familiarManager.familiar
-                var skill = Skills.RANGE
-                when (fam.attackStyle) {
-                    WeaponInterface.STYLE_DEFENSIVE -> skill = Skills.DEFENCE
-                    WeaponInterface.STYLE_ACCURATE -> skill = Skills.ATTACK
-                    WeaponInterface.STYLE_AGGRESSIVE -> skill = Skills.STRENGTH
-                    WeaponInterface.STYLE_RANGE_ACCURATE -> skill = Skills.RANGE
-                    WeaponInterface.STYLE_CONTROLLED -> {
-                        var experience = hit * EXPERIENCE_MOD
-                        experience /= 3.0
-                        entity.getSkills().addExperience(Skills.ATTACK, experience, true)
-                        entity.getSkills().addExperience(Skills.STRENGTH, experience, true)
-                        entity.getSkills().addExperience(Skills.DEFENCE, experience, true)
-                        return
-                    }
-                    WeaponInterface.STYLE_CAST -> skill = Skills.MAGIC
-                }
-                entity.getSkills().addExperience(skill, hit * EXPERIENCE_MOD, true)
-                return
-            }
-            entity.getSkills().addExperience(Skills.HITPOINTS, hit * 1.33, true)
-            if (entity.getProperties().attackStyle.style == WeaponInterface.STYLE_LONG_RANGE) {
-                entity.getSkills().addExperience(Skills.RANGE, hit * (EXPERIENCE_MOD / 2), true)
-                entity.getSkills().addExperience(Skills.DEFENCE, hit * (EXPERIENCE_MOD / 2), true)
-            } else {
-                entity.getSkills().addExperience(Skills.RANGE, hit * EXPERIENCE_MOD, true)
-            }
-        }
-    }
-
     override fun visualize(entity: Entity, victim: Entity?, state: BattleState?) {
         var start: Graphics? = null
         if (state!!.ammunition != null) {
@@ -221,7 +164,6 @@ open class RangeSwingHandler
             }
         }
         entity.visualize(entity.properties.attackAnimation, start)
-        addExperience(entity, victim, state)
     }
 
     override fun impact(entity: Entity?, victim: Entity?, state: BattleState?) {

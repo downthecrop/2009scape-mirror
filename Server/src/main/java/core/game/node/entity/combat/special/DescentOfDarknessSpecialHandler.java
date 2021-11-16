@@ -146,6 +146,5 @@ public final class DescentOfDarknessSpecialHandler extends RangeSwingHandler imp
 	@Override
 	public void visualizeImpact(Entity entity, Entity victim, BattleState state) {
 		victim.visualize(victim.getProperties().getDefenceAnimation(), state.isFrozen() ? DRAGON_IMPACT : DARKNESS_IMPACT);
-        addExperience(entity, victim, state);
 	}
 }
