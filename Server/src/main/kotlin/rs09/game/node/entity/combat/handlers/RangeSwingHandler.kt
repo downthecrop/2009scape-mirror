@@ -201,7 +201,7 @@ open class RangeSwingHandler
         if(entity is Player) effectiveRangedLevel = floor(effectiveRangedLevel + (entity.prayer.getSkillBonus(Skills.RANGE) * effectiveRangedLevel))
         if(entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) effectiveRangedLevel += 3
         effectiveRangedLevel += 8
-        if(entity is Player && entity.isWearingVoid(false)) effectiveRangedLevel *= 1.1
+        effectiveRangedLevel *= getSetMultiplier(entity, Skills.RANGE)
         if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.ACCURATE_MARKSMAN,entity)) effectiveRangedLevel *= 1.1
 
         effectiveRangedLevel = floor(effectiveRangedLevel)
@@ -237,9 +237,8 @@ open class RangeSwingHandler
     }
 
     override fun getSetMultiplier(e: Entity?, skillId: Int): Double {
-        if (e is Player) {
-            val c: Container = e.equipment
-            if (containsVoidSet(c) && c.getNew(EquipmentContainer.SLOT_HAT).id == 11664) {
+        if(skillId == Skills.RANGE) {
+            if(e is Player && e.isWearingVoid(CombatStyle.RANGE)) {
                 return 1.1
             }
         }

@@ -772,9 +772,22 @@ public class Player extends Entity {
 	/**
 	 * Checks if the player is wearing void.
 	 */
-	public boolean isWearingVoid(boolean melee){
-		int helm = melee ? Items.VOID_MELEE_HELM_11665 : Items.VOID_RANGER_HELM_11664;
-		return ContentAPI.inEquipment(this, helm, 1) && ContentAPI.inEquipment(this, Items.VOID_KNIGHT_ROBE_8840, 1) && ContentAPI.inEquipment(this, Items.VOID_KNIGHT_TOP_8839, 1);
+	public boolean isWearingVoid(CombatStyle style) {
+		int helm;
+        if(style == CombatStyle.MELEE) {
+            helm = Items.VOID_MELEE_HELM_11665;
+        } else if(style == CombatStyle.RANGE) {
+            helm = Items.VOID_RANGER_HELM_11664;
+        } else if(style == CombatStyle.MAGIC) {
+            helm = Items.VOID_MAGE_HELM_11663;
+        } else {
+            return false;
+        }
+        boolean legs = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_ROBE_8840, 1);
+        boolean top = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_TOP_8839, 1)
+            || ContentAPI.inEquipment(this, Items.VOID_KNIGHT_TOP_10611, 1);
+        boolean gloves = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_GLOVES_8842, 1);
+		return ContentAPI.inEquipment(this, helm, 1) && legs && top && gloves;
 	}
 
 	/**
