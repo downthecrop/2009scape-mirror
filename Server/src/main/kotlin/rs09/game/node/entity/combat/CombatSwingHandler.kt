@@ -138,18 +138,6 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
     }
 
     /**
-     * Checks if the container contains a void knight set.
-     * @param c The container to check.
-     * @return `True` if so.
-     */
-    fun containsVoidSet(c: Container): Boolean {
-        val top = c.getNew(EquipmentContainer.SLOT_CHEST)
-        return if (top.id != 8839 && top.id != 10611) {
-            false
-        } else c.getNew(EquipmentContainer.SLOT_LEGS).id == 8840 && c.getNew(EquipmentContainer.SLOT_HANDS).id == 8842
-    }
-
-    /**
      * Checks if the hit will be accurate.
      * @param entity The entity.
      * @param victim The victim.
@@ -407,7 +395,55 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      * @param victim The victim.
      * @param state The battle state.
      */
-    open fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {}
+    open fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {
+        if (entity == null || (victim is Player && entity is Player && entity.asPlayer().ironmanManager.isIronman)) {
+            return
+        }
+        var player: Player
+        var attStyle: Int
+
+        when(entity)
+        {
+            is Familiar -> {player = entity.owner; attStyle = entity.attackStyle}
+            is Player -> {player = entity; attStyle = entity.properties.attackStyle.style}
+            else -> return
+        }
+        if (state != null) {
+            val hit = state.totalDamage
+            var skill = -1
+            when (attStyle) {
+                WeaponInterface.STYLE_DEFENSIVE -> skill = Skills.DEFENCE
+                WeaponInterface.STYLE_ACCURATE -> skill = Skills.ATTACK
+                WeaponInterface.STYLE_AGGRESSIVE -> skill = Skills.STRENGTH
+                WeaponInterface.STYLE_CONTROLLED -> {
+                    var experience = hit * EXPERIENCE_MOD
+                    experience /= 3.0
+                    player.skills.addExperience(Skills.ATTACK, experience, true)
+                    player.skills.addExperience(Skills.STRENGTH, experience, true)
+                    player.skills.addExperience(Skills.DEFENCE, experience, true)
+                    return
+                }
+
+                WeaponInterface.STYLE_RANGE_ACCURATE -> skill = Skills.RANGE
+                WeaponInterface.STYLE_RAPID -> skill = Skills.RANGE
+                WeaponInterface.STYLE_LONG_RANGE -> {
+                    player.skills.addExperience(Skills.RANGE, hit * (EXPERIENCE_MOD / 2), true)
+                    player.skills.addExperience(Skills.DEFENCE, hit * (EXPERIENCE_MOD / 2), true)
+                    return
+                }
+
+                WeaponInterface.STYLE_CAST -> skill = Skills.MAGIC
+                WeaponInterface.STYLE_DEFENSIVE_CAST -> {
+                    player.skills.addExperience(Skills.MAGIC, hit * 1.33, true)
+                    player.skills.addExperience(Skills.DEFENCE, hit.toDouble(), true)
+                    return
+                }
+            }
+            if (skill < 0) return
+            player.skills.addExperience(skill, hit * EXPERIENCE_MOD, true)
+            player.skills.addExperience(Skills.HITPOINTS, hit * 1.33, true)
+        }
+    }
 
     /**
      * Gets the formated hit.

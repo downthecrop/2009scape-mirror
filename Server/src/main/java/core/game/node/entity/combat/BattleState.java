@@ -336,4 +336,18 @@ public final class BattleState {
 	public Entity getAttacker() {
 		return entity;
 	}
+
+	public int getTotalDamage() {
+		int hit = Math.max(estimatedHit, 0) + Math.max(secondaryHit, 0);
+
+		if (targets != null) {
+			for (BattleState s : targets) {
+				if (s != null) {
+					hit += Math.max(s.getEstimatedHit(), 0) + Math.max(s.getSecondaryHit(), 0);
+				}
+			}
+		}
+		return hit;
+	}
+
 }

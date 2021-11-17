@@ -68,6 +68,5 @@ public final class PowershotSpecialHandler extends RangeSwingHandler implements 
 		entity.visualize(state.getRangeWeapon().getAnimation(), GRAPHIC);
 		int speed = (int) (46 + (entity.getLocation().getDistance(victim.getLocation()) * 5));
 		Projectile.create(entity, victim, 249, 40, 36, 45, speed, 5, 11).send();
-        addExperience(entity, victim, state);
 	}
 }
