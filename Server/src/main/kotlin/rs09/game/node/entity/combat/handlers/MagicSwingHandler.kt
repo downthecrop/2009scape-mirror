@@ -195,7 +195,7 @@ open class MagicSwingHandler
         if (entityMod != 0.0) {
             levelMod += entityMod
         }
-        return (baseDamage * levelMod).toInt() + 1
+        return (baseDamage * levelMod * modifier).toInt() + 1
     }
 
     override fun calculateDefence(victim: Entity?, attacker: Entity?): Int {
