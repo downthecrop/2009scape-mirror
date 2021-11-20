@@ -146,16 +146,15 @@ open class MeleeSwingHandler
         if(entity.properties.attackStyle.style == WeaponInterface.STYLE_ACCURATE) effectiveAttackLevel += 3
         else if(entity.properties.attackStyle.style == WeaponInterface.STYLE_CONTROLLED) effectiveAttackLevel += 1
         effectiveAttackLevel += 8
+        if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.PRECISION_STRIKES, entity)){ //Attack skillcape perk
+            effectiveAttackLevel += 6
+        }
         effectiveAttackLevel *= getSetMultiplier(entity, Skills.ATTACK);
         effectiveAttackLevel = floor(effectiveAttackLevel)
         effectiveAttackLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
 
         val amuletName = (if(entity is Player) ContentAPI.getItemFromEquipment(entity, EquipmentSlot.AMULET)?.name ?: "null" else "null").toLowerCase()
         val victimName = entity.properties.combatPulse.getVictim()?.name ?: "none"
-
-        if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.PRECISION_STRIKES, entity)){ //Attack skillcape perk
-            effectiveAttackLevel += 6
-        }
 
         if(entity is Player && entity.slayer.task?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true)
             effectiveAttackLevel *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer Helm/ Black Mask/ Slayer cape

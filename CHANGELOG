@@ -54,4 +54,5 @@
 - Void set effects now work more uniformly.
 - Summoning familiars now grant combat xp when attacking
 - Canoe travel interface now animates correctly
+- Fix how the attack skill cape perk is calculated. It should now have a much more noticeable effect
 - Properly track leaf-bladed sword drops in ::stats command
