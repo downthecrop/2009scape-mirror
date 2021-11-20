@@ -8,11 +8,12 @@ import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
 import core.game.ge.OfferState
-import core.game.node.scenery.Scenery
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.game.node.scenery.Scenery
 import core.game.system.communication.CommunicationInfo
 import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
@@ -34,7 +35,6 @@ import rs09.tools.stringtools.colorize
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.util.*
-import kotlin.collections.ArrayList
 
 @Initializable
 class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
@@ -45,6 +45,21 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
          */
         define("debug", Command.Privilege.STANDARD){ player, _ ->
             player.toggleDebug()
+        }
+
+        define("calc_accuracy", Command.Privilege.STANDARD){ player, args ->
+            val handler = player.getSwingHandler(false)
+            player.sendMessage("handler type: ${handler.type}")
+            player.sendMessage("calculateAccuracy: ${handler.calculateAccuracy(player)}")
+
+            if (args.size > 1)
+            {
+                val npcId: Int = args[1].toInt()
+                val npc = NPC(npcId)
+                npc.initConfig()
+                player.sendMessage("npc: ${npc.name}. npc defence: ${npc.skills.getLevel(Skills.DEFENCE)}")
+                player.sendMessage("calculateDefence: ${handler.calculateDefence(npc, player)}")
+            }
         }
 
         /**
