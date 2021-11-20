@@ -74,7 +74,7 @@ fun sendStats(player: Player, other: Player, page: Int){
                 when(i) {
                     97 -> sendLine(player, "Turoths: ${GlobalKillCounter.getKills(other, TUROTH_IDS)}", i)
                     68 -> sendLine(player, "Kurasks: ${GlobalKillCounter.getKills(other, KURASK_IDS)}", i)
-                    69 -> sendLine(player, "Leaf-bladed swords: ${GlobalKillCounter.getRareDrops(other, Items.LEAF_BLADED_SPEAR_4158)}", i)
+                    69 -> sendLine(player, "Leaf-bladed swords: ${GlobalKillCounter.getRareDrops(other, Items.LEAF_BLADED_SWORD_13290)}", i)
                     70 -> sendLine(player,SPACER,i)
                     71 -> sendLine(player, "Gargoyles: ${GlobalKillCounter.getKills(other, GARGOYLE_IDS)}", i)
                     72 -> sendLine(player, "Granite mauls: ${GlobalKillCounter.getRareDrops(other, Items.GRANITE_MAUL_4153)}", i)

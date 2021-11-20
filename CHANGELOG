@@ -54,3 +54,4 @@
 - Void set effects now work more uniformly.
 - Summoning familiars now grant combat xp when attacking
 - Canoe travel interface now animates correctly
+- Properly track leaf-bladed sword drops in ::stats command
