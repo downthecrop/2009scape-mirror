@@ -95,6 +95,12 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             notify(player, "Do you mean ::loc?")
         }
 
+        define("calcmaxhit", Command.Privilege.STANDARD) { player, _ ->
+            val swingHandler = player.getSwingHandler(false)
+            val hit = swingHandler.calculateHit(player, player, 1.0)
+            notify(player, "max hit (${(swingHandler as Object).getClass().getName()}): ${hit}")
+        }
+
         /**
          * Empty a player's inventory
          * ADMIN only (for obvious reasons)
