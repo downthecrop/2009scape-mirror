@@ -121030,10 +121030,10 @@
     "destroy_message": "Drop",
     "grand_exchange_price": "34",
     "name": "Broad-tipped bolts",
-    "tradeable": "false",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13280",
-    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,135"
+    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,100"
   },
   {
     "shop_price": "150",
