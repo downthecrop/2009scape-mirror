@@ -57,3 +57,4 @@
 - Fix how the attack skill cape perk is calculated. It should now have a much more noticeable effect
 - Properly track leaf-bladed sword drops in ::stats command
 - Make broad bolts tradeable and fix their ranged strength
+< ---- ABOVE Released NOVEMBER 22, 2021 https://gitlab.com/2009scape/2009scape/-/tags/Nov-22-2021 ---- >
