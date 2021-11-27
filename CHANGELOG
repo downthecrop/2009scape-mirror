@@ -60,3 +60,4 @@
 < ---- ABOVE Released NOVEMBER 22, 2021 https://gitlab.com/2009scape/2009scape/-/tags/Nov-22-2021 ---- >
 - Animations for passing through Isafdar Dense Forest added
 - Implement Wire Traps, Leaf Traps, and Stick Traps in Isafdar
+- Quest point cape/hood no longer unequip on login if wearing QP hood
