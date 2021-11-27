@@ -76,7 +76,9 @@ public final class LoginValidationPlugin implements Plugin<Player> {
 	 * @param player the player.
 	 */
 	private static void checkQuestPointsItems(final Player player) {
-		if (!player.getQuestRepository().hasCompletedAll() && player.getEquipment().contains(9813, 1) || player.getEquipment().contains(9814, 1)) {
+		if (!player.getQuestRepository().hasCompletedAll() &&
+			(player.getEquipment().contains(9813, 1) || player.getEquipment().contains(9814, 1))
+		) {
 			for (Item i : QUEST_ITEMS) {
 				if (player.getEquipment().remove(i)) {
 					player.getDialogueInterpreter().sendItemMessage(i, "As you no longer have completed all the quests, your " + i.getName() + " unequips itself to your " + (player.getInventory().freeSlots() < 1 ? "bank" : "inventory") + "!");
