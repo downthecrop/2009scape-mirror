@@ -46,7 +46,11 @@ public final class LampPlugin extends OptionHandler {
 			player.sendMessage("Your need at least" + lamp.getLevelRequirement()  + " " + Skills.SKILL_NAME[skill]  + " to do this.");
 			return;
 		}
-		player.getSkills().addExperience(skill,lamp.getExp());
+		if(lamp == Lamps.GENIE_LAMP){
+			player.getSkills().addExperience(skill,player.getSkills().getLevel(skill)*10);
+		} else {
+			player.getSkills().addExperience(skill,lamp.getExp());
+		}
 		player.getInventory().remove((Item) player.getAttribute("lamp"));
 	}
 
