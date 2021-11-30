@@ -194,7 +194,7 @@ open class MeleeSwingHandler
 
         /*val hit = (16 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier
         return (hit / 10).toInt() + 1*/
-        return (1.3 + (cumulativeStr / 10) + (bonus / 80) + ((cumulativeStr * bonus) / 640)).toInt()
+        return ((1.3 + (cumulativeStr / 10) + (bonus / 80) + ((cumulativeStr * bonus) / 640)) * modifier).toInt()
     }
 
     override fun calculateDefence(victim: Entity?, attacker: Entity?): Int {

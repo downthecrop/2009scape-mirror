@@ -64,3 +64,4 @@
 - Random Event Genie lamps now scale exp correctly
 - Void mace now consumes runes correctly
 - Add remote kicking support to the Management Server
+- Correctly factor in the damage modifier (mostly used by special attacks)
