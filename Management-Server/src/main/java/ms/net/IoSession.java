@@ -152,6 +152,7 @@ public class IoSession {
 	 * Handles the writing of all buffers in the queue.
 	 */
 	public void write() {
+
 		if (!key.isValid()) {
 			disconnect();
 			return;
@@ -169,6 +170,7 @@ public class IoSession {
 				writingQueue.remove(0);
 			}
 		} catch (IOException e) {
+			e.printStackTrace();
 			disconnect();
 		} finally {
 			writingLock.unlock();
