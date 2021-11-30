@@ -63,3 +63,4 @@
 - Quest point cape/hood no longer unequip on login if wearing QP hood
 - Random Event Genie lamps now scale exp correctly
 - Void mace now consumes runes correctly
+- Add remote kicking support to the Management Server
