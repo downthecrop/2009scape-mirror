@@ -64,3 +64,4 @@
 - Random Event Genie lamps now scale exp correctly
 - Void mace now consumes runes correctly
 - Add remote kicking support to the Management Server
+- Fix granting hp xp on controlled
