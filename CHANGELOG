@@ -64,3 +64,5 @@
 - Random Event Genie lamps now scale exp correctly
 - Void mace now consumes runes correctly
 - Add remote kicking support to the Management Server
+- Fix a bug where the canoe from Edgeville to wilderness pond didn't work
+- Edgeville Dungeon Wilderness gate temporary location object should now be garbage collected
