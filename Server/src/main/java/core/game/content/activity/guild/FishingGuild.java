@@ -35,7 +35,7 @@ public final class FishingGuild extends OptionHandler {
 		case "open":
 			switch (id) {
 			case 2025:
-				if (player.getSkills().getStaticLevel(Skills.FISHING) < 68 && player.getLocation().withinDistance(new Location(2611, 3394, 0))) {
+				if (player.getSkills().getDynamicLevels()[Skills.FISHING] < 68 && player.getLocation().withinDistance(new Location(2611, 3394, 0))) {
 					player.getDialogueInterpreter().sendDialogues(308, null, "Hello, I'm afraid only the top fishers are allowed to use", "our premier fishing facilities.");
 					return true;
 				}
