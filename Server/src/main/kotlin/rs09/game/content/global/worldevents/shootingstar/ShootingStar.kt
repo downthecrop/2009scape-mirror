@@ -8,6 +8,7 @@ import core.game.world.map.Location
 import rs09.ServerStore.getBoolean
 import rs09.ServerStore.getInt
 import rs09.ServerStore.getString
+import rs09.game.ai.general.scriptrepository.ShootingStarBot
 import rs09.game.world.repository.Repository
 
 /**
@@ -55,12 +56,15 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
     var isSpawned = false
     var spriteSpawned = false
     var firstStar = true
+    var selfBots = ArrayList<ShootingStarBot>()
+    var activePlayers = HashSet<Player>()
 
     /**
      * Degrades a ShootingStar (or removes the starObject and spawns a Star Sprite if it's the last star)
      */
     fun degrade() {
         if(level.ordinal == 0){
+            selfBots.filter { it.isMining() }.forEach { it.sleep() }
             SceneryBuilder.remove(starObject)
             isSpawned = false
             starSprite.location = starObject.location
@@ -93,6 +97,14 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
         rebuildVars()
         clearSprite()
         SceneryBuilder.add(starObject)
+        if(!isSpawned) {
+            (0..2).forEach {
+                selfBots.add(ShootingStarBot.new())
+            }
+        }
+        if (level.ordinal + 1 > 5) {
+            selfBots.filter { it.isIdle() }.forEach { it.activate(true) }
+        }
         isSpawned = true
         Repository.sendNews("A shooting star level ${level.ordinal + 1} just crashed near ${location.toLowerCase()}!")
     }
@@ -147,6 +159,28 @@ class ShootingStar(var level: ShootingStarType = ShootingStarType.values().rando
      */
     fun prospect(player: Player) {
         player.dialogueInterpreter.sendDialogue("This is a size " + (level.ordinal + 1) + " star. A Mining level of at least " + miningLevel + " is", "required to mine this layer. There is $dustLeft stardust remaining", "until the next layer.")
+    }
+
+    /**
+     * Notifies the star when a player begins mining it
+     */
+    fun notifyNewPlayer(player: Player) {
+        if(activePlayers.size < 3){
+            val leavingBot = selfBots.firstOrNull { it.isMining() }
+            leavingBot?.sleep()
+        }
+        activePlayers.add(player)
+    }
+
+    /**
+     * Notifies the star when a player stops mining it
+     */
+    fun notifyPlayerLeave(player: Player) {
+        activePlayers.remove(player)
+        if (activePlayers.size < 3){
+            val newBot = selfBots.firstOrNull() { it.isIdle() }
+            newBot?.activate(true)
+        }
     }
 
     /**
