@@ -24,7 +24,19 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
     private var ticks = 0
     override fun start() {
         if(!star.isSpawned) return
+
+        if(!player.isArtificial) {
+            star.notifyNewPlayer(player)
+        }
         super.start()
+    }
+
+    override fun stop() {
+        super.stop()
+
+        if(!player.isArtificial){
+            star.notifyPlayerLeave(player)
+        }
     }
 
     override fun checkRequirements(): Boolean {
@@ -33,7 +45,7 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
             return false
         }
         //checks if the star has been discovered and if not, awards the bonus xp. Xp can be awarded regardless of mining level as per the wiki.
-        if (!star.isDiscovered) {
+        if (!star.isDiscovered && !player.isArtificial) {
             val bonusXp = 75 * player.skills.getStaticLevel(Skills.MINING)
             player.incrementAttribute("/save:shooting-star:bonus-xp", bonusXp)
             Repository.sendNews(player.username + " is the discoverer of the crashed star near " + star.location + "!")

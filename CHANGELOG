@@ -69,3 +69,4 @@
 < --- ABOVE Released December 4, 2021 https://gitlab.com/2009scape/2009scape/-/tags/Dec-4-2021 ---- >
 - Shooting star discovery bonus xp is now gradually disbursed instead of lump-sum.
 - Spending points to cancel your slayer task no longer sets your task streak to 0.
+- Stars now have bots that will spawn and help mine for stars higher than level 5.
