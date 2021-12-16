@@ -15,12 +15,14 @@ class EquipmentDegrader{
     companion object StaticDegrader { //Use a static companion object for lists and registers so they persist across instances
         val itemList = arrayListOf<Int>()
         val setList = arrayListOf<ArrayList<Int>>()
-        fun register(item: Int){
+        val itemCharges = hashMapOf<Int, Int>()
+        fun register(charges: Int, item: Int){
             itemList.add(item)
+            itemCharges.put(item, charges)
         }
 
-        fun registerSet(items: Array<Int>){
-            setList.add(ArrayList(items.map { item -> item.also { register(item) } }))
+        fun registerSet(charges: Int, items: Array<Int>){
+            setList.add(ArrayList(items.map { item -> item.also { register(charges, item) } }))
         }
     }
 
@@ -54,6 +56,7 @@ class EquipmentDegrader{
             charge = 0
         }
         if(this.charge <= 0) {
+            val charges = itemCharges.getOrElse(this.id, { 1000 })
             if (set?.size!! > 2) {
                 p?.equipment?.remove(this)
                 p?.sendMessage("Your $name has degraded.")
@@ -61,7 +64,7 @@ class EquipmentDegrader{
                     p?.inventory?.add(Item(set.getNext(this.id)))
                     p?.sendMessage("Your $name has broken.")
                 } else {
-                    p?.equipment?.add(Item(set.getNext(this.id)), slot, false, false)
+                    p?.equipment?.add(Item(set.getNext(this.id), 1, charges), slot, false, false)
                     p?.equipment?.refresh()
                 }
             } else if (set.size == 2) {
@@ -71,7 +74,7 @@ class EquipmentDegrader{
                 } else {
                     p?.equipment?.remove(this)
                     p?.sendMessage("Your $name has degraded.")
-                    p?.equipment?.add(Item(set.getNext(this.id)), slot, false, false)
+                    p?.equipment?.add(Item(set.getNext(this.id), 1, charges), slot, false, false)
                     p?.equipment?.refresh()
                 }
             }

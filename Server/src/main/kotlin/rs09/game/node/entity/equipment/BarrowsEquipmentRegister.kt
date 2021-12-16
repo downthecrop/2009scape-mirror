@@ -6,6 +6,12 @@ import core.plugin.Plugin
 
 @Initializable
 class BarrowsEquipmentRegister : Plugin<Any>{
+    public companion object {
+        // Barrows equipment lasts for 15 hours of combat, and each piece has 4 stages of degredation
+        @JvmField
+        public val TICKS = (15 * 6000) / 4
+    }
+
     val DHAROK_HELM = arrayOf(4716,4880,4881,4882,4883,4884)
     val DHAROK_AXE = arrayOf(4718,4886,4887,4888,4889,4890)
     val DHAROK_BODY = arrayOf(4720,4892,4893,4894,4895,4896)
@@ -37,30 +43,30 @@ class BarrowsEquipmentRegister : Plugin<Any>{
     val KARIL_SKIRT = arrayOf(4738,4946,4947,4948,4949,4950)
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        EquipmentDegrader.registerSet(AHRIM_HOOD)
-        EquipmentDegrader.registerSet(AHRIM_STAFF)
-        EquipmentDegrader.registerSet(AHRIM_TOP)
-        EquipmentDegrader.registerSet(AHRIM_SKIRT)
-        EquipmentDegrader.registerSet(KARIL_COIF)
-        EquipmentDegrader.registerSet(KARIL_CBOW)
-        EquipmentDegrader.registerSet(KARIL_TOP)
-        EquipmentDegrader.registerSet(KARIL_SKIRT)
-        EquipmentDegrader.registerSet(DHAROK_HELM)
-        EquipmentDegrader.registerSet(DHAROK_AXE)
-        EquipmentDegrader.registerSet(DHAROK_BODY)
-        EquipmentDegrader.registerSet(DHAROK_LEGS)
-        EquipmentDegrader.registerSet(GUTHAN_HELM)
-        EquipmentDegrader.registerSet(GUTHAN_SPEAR)
-        EquipmentDegrader.registerSet(GUTHAN_BODY)
-        EquipmentDegrader.registerSet(GUTHAN_SKIRT)
-        EquipmentDegrader.registerSet(TORAG_HELM)
-        EquipmentDegrader.registerSet(TORAG_HAMMER)
-        EquipmentDegrader.registerSet(TORAG_BODY)
-        EquipmentDegrader.registerSet(TORAG_LEGS)
-        EquipmentDegrader.registerSet(VERAC_HELM)
-        EquipmentDegrader.registerSet(VERAC_FLAIL)
-        EquipmentDegrader.registerSet(VERAC_BRASS)
-        EquipmentDegrader.registerSet(VERAC_SKIRT)
+        EquipmentDegrader.registerSet(TICKS, AHRIM_HOOD)
+        EquipmentDegrader.registerSet(TICKS, AHRIM_STAFF)
+        EquipmentDegrader.registerSet(TICKS, AHRIM_TOP)
+        EquipmentDegrader.registerSet(TICKS, AHRIM_SKIRT)
+        EquipmentDegrader.registerSet(TICKS, KARIL_COIF)
+        EquipmentDegrader.registerSet(TICKS, KARIL_CBOW)
+        EquipmentDegrader.registerSet(TICKS, KARIL_TOP)
+        EquipmentDegrader.registerSet(TICKS, KARIL_SKIRT)
+        EquipmentDegrader.registerSet(TICKS, DHAROK_HELM)
+        EquipmentDegrader.registerSet(TICKS, DHAROK_AXE)
+        EquipmentDegrader.registerSet(TICKS, DHAROK_BODY)
+        EquipmentDegrader.registerSet(TICKS, DHAROK_LEGS)
+        EquipmentDegrader.registerSet(TICKS, GUTHAN_HELM)
+        EquipmentDegrader.registerSet(TICKS, GUTHAN_SPEAR)
+        EquipmentDegrader.registerSet(TICKS, GUTHAN_BODY)
+        EquipmentDegrader.registerSet(TICKS, GUTHAN_SKIRT)
+        EquipmentDegrader.registerSet(TICKS, TORAG_HELM)
+        EquipmentDegrader.registerSet(TICKS, TORAG_HAMMER)
+        EquipmentDegrader.registerSet(TICKS, TORAG_BODY)
+        EquipmentDegrader.registerSet(TICKS, TORAG_LEGS)
+        EquipmentDegrader.registerSet(TICKS, VERAC_HELM)
+        EquipmentDegrader.registerSet(TICKS, VERAC_FLAIL)
+        EquipmentDegrader.registerSet(TICKS, VERAC_BRASS)
+        EquipmentDegrader.registerSet(TICKS, VERAC_SKIRT)
         return this
     }
 
