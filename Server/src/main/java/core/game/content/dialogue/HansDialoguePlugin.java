@@ -137,7 +137,11 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 			case 12:
 				switch(buttonId){
 					case 1:
-						options("1.0x","2.5x","Stay 5.0x");
+						if(player.getAttributes().containsKey("permadeath")){
+							options("1.0x", "2.5x", "Stay 5.0x", "(HCIM Only) 10x");
+						} else {
+							options("1.0x", "2.5x", "Stay 5.0x");
+						}
 						stage++;
 						break;
 					case 2:
@@ -169,6 +173,14 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 						playerl(FacialExpression.FRIENDLY, "I'd rather stay 5x, thank you.");
 						stage = END_DIALOGUE;
 						return true;
+					case 4:
+						if (player.newPlayer) {
+							player.getSkills().experienceMutiplier = 10.0;
+							stage = 14;
+						} else {
+							stage = 15;
+						}
+						break;
 				}
 				npc("One moment, please...");
 				break;
@@ -325,6 +337,9 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 						interpreter.sendDialogues(npc, FacialExpression.NEUTRAL,"I have changed your Iron Man mode to: ","" + (buttonId == 1 ? "Standard" : "<col=8A0808>Hardcore</col>" + " Ironman mode."));
 						player.getSettings().toggleAcceptAid();
 						player.getIronmanManager().setMode(IronmanMode.values()[buttonId]);
+						if(buttonId == 2) {
+							player.setAttribute("/save:permadeath",true);
+						}
 						player.sendMessage("Your Iron Man status has been changed.");
 						stage = 50;
 						break;
