@@ -9,6 +9,7 @@ import core.game.container.impl.InventoryListener;
 import core.game.content.activity.pyramidplunder.PlunderObjectManager;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.quest.miniquest.barcrawl.BarcrawlManager;
+import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.content.ttrail.TreasureTrailManager;
 import core.game.interaction.Interaction;
 import core.game.interaction.item.brawling_gloves.BrawlingGlovesManager;
@@ -79,10 +80,12 @@ import rs09.game.content.ame.RandomEventManager;
 import rs09.game.ge.PlayerGrandExchange;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
+import rs09.game.node.entity.player.info.login.PlayerSaver;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
 import rs09.game.node.entity.state.newsys.State;
 import rs09.game.node.entity.state.newsys.StateRepository;
 import rs09.game.world.GameWorld;
+import rs09.game.world.repository.DisconnectionQueue;
 import rs09.game.world.repository.Repository;
 import rs09.game.world.update.MapChunkRenderer;
 import rs09.game.world.update.NPCRenderer;
@@ -201,7 +204,7 @@ public class Player extends Entity {
 	/**
 	 * The quest repository.
 	 */
-	private final QuestRepository questRepository = new QuestRepository(this);
+	private QuestRepository questRepository = new QuestRepository(this);
 
 	/**
 	 * The prayer manager.
@@ -241,7 +244,7 @@ public class Player extends Entity {
 	/**
 	 * The saved data.
 	 */
-	private final SavedData savedData = new SavedData(this);
+	private SavedData savedData = new SavedData(this);
 
 	/**
 	 * The request manager.
@@ -613,11 +616,27 @@ public class Player extends Entity {
 		if (!getZoneMonitor().handleDeath(killer) && (!getProperties().isSafeZone() && getZoneMonitor().getType() != ZoneType.SAFE.getId()) && getDetails().getRights() != Rights.ADMINISTRATOR) {
 			//If player was a Hardcore Ironman, announce that they died
 			if (this.getIronmanManager().getMode().equals(IronmanMode.HARDCORE)){ //if this was checkRestriction, ultimate irons would be moved to HARDCORE_DEAD as well
-				String gender = this.isMale() ? "Man " : "Woman ";
-				Repository.sendNews("Hardcore Iron " + gender + " " + this.getUsername() +" has fallen. Total Level: " + this.getSkills().getTotalLevel()); // Not enough room for XP
-				this.getIronmanManager().setMode(IronmanMode.STANDARD);
-				asPlayer().getSavedData().getActivityData().setHardcoreDeath(true);
-				this.sendMessage("You have fallen as a Hardcore Iron Man, your Hardcore status has been revoked.");
+				String gender = this.isMale() ? "man " : "woman ";
+				if (getAttributes().containsKey("permadeath")) {
+					Repository.sendNews("Permadeath Hardcore Iron" + gender + " " + this.getUsername() + " has fallen. Total Level: " + this.getSkills().getTotalLevel()); // Not enough room for XP
+					TutorialSession.getExtension(this).setStage(0);
+					equipment.clear();
+					inventory.clear();
+					bank.clear();
+					skills = new Skills(this);
+					clearAttributes();
+					setAttribute("/save:permadeath", true);
+					savedData = new SavedData(this);
+					questRepository = new QuestRepository(this);
+					new PlayerSaver(this).save();
+					clear(true);
+					return;
+				} else {
+					Repository.sendNews("Hardcore Iron " + gender + " " + this.getUsername() + " has fallen. Total Level: " + this.getSkills().getTotalLevel()); // Not enough room for XP
+					this.getIronmanManager().setMode(IronmanMode.STANDARD);
+					asPlayer().getSavedData().getActivityData().setHardcoreDeath(true);
+					this.sendMessage("You have fallen as a Hardcore Iron Man, your Hardcore status has been revoked.");
+				}
 			}
 			GroundItemManager.create(new Item(526), getLocation(), k);
 			final Container[] c = DeathTask.getContainers(this);
