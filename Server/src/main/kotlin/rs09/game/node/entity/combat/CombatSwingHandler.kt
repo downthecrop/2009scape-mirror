@@ -410,6 +410,10 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         }
         if (state != null) {
             val hit = state.totalDamage
+            if (entity is Player) {
+                player.skills.addExperience(Skills.HITPOINTS, hit * 1.33, true)
+            }
+
             var skill = -1
             when (attStyle) {
                 WeaponInterface.STYLE_DEFENSIVE -> skill = Skills.DEFENCE
@@ -441,7 +445,6 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
             }
             if (skill < 0) return
             player.skills.addExperience(skill, hit * EXPERIENCE_MOD, true)
-            player.skills.addExperience(Skills.HITPOINTS, hit * 1.33, true)
         }
     }
 
