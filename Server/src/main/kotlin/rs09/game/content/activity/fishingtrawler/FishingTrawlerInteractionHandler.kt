@@ -173,11 +173,12 @@ class NetLootDialogue(player: Player? = null): DialoguePlugin(player){
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
+        val level = player.skills.getLevel(Skills.FISHING)
         when(buttonId){
-            1 -> TrawlerLoot.getLoot(rolls,true).forEach {
+            1 -> TrawlerLoot.getLoot(level, rolls, true).forEach {
                 if(!player.bank.add(it)) GroundItemManager.create(it,player)
             }
-            2 -> TrawlerLoot.getLoot(rolls,false).forEach {
+            2 -> TrawlerLoot.getLoot(level, rolls, false).forEach {
                 if(!player.bank.add(it)) GroundItemManager.create(it,player)
             }
         }
