@@ -9,6 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.AchievementDiary;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
+import rs09.game.node.entity.equipment.BarrowsEquipmentRegister;
 
 /**
  * Represents the dialogue plugin used for the bob npc who repairs items.
@@ -388,6 +389,7 @@ public final class BobDialogue extends DialoguePlugin {
 		 * @return the price.
 		 */
 		public static int getFormatedCost(String name, Item item) {
+            int ticks = BarrowsEquipmentRegister.TICKS;
 			int[] degrades = new int[] { 100, 75, 50, 25, 0 };
 			for (int i = 0; i < prices.length; i++) {
 				String check = (String) prices[i][0];
@@ -399,7 +401,7 @@ public final class BobDialogue extends DialoguePlugin {
 							break;
 						}
 					}
-					degrade -= 25 - (25 * (item.getCharge() * 0.001));
+					degrade -= 25 - (25 * ((double)item.getCharge() / (double)ticks));
 					int max = (int) prices[i][1] * 1000;
 					return (int) (max - (max * (degrade * 0.01)));
 				}
