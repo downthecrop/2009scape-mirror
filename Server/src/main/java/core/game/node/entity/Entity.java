@@ -55,7 +55,7 @@ public abstract class Entity extends Node {
 	/**
 	 * The entity's skills.
 	 */
-	private final Skills skills = new Skills(this);
+	public Skills skills = new Skills(this);
 
 	/**
 	 * The entity's extension classes.
@@ -701,6 +701,11 @@ public abstract class Entity extends Node {
 	 */
 	public Map<String, Object> getAttributes() {
 		return attributes.getAttributes();
+	}
+
+	public void clearAttributes() {
+		this.attributes.getAttributes().clear();
+		this.attributes.getSavedAttributes().clear();
 	}
 
 	/**
