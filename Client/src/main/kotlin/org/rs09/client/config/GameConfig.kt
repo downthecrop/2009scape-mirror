@@ -36,6 +36,9 @@ object GameConfig {
     @JvmField
     var WORLD_MAP_DEBUG = false
 
+    @JvmField
+    var DO_SNOW_DECEMBER = true
+
     /**
      * Context Menu Presets
      */
@@ -186,6 +189,7 @@ object GameConfig {
         if(data.containsKey("customization")){
             val custom = data["customization"] as JSONObject
             if(custom.containsKey("login_theme")) LOGIN_THEME = custom["login_theme"].toString()
+            if(custom.containsKey("december_snow")) DO_SNOW_DECEMBER = custom["december_snow"] as Boolean
 
             //Right-click menu customizations
             if(custom.containsKey("right_click_menu")){
@@ -386,7 +390,7 @@ object GameConfig {
                 }
                 9 -> HALLOWEEN_EVENT_ENABLED = true
                 10 -> THANKSGIVING_EVENT_ENABLED = true
-                11 -> CHRISTMAS_EVENT_ENABLED = true
+                11 -> CHRISTMAS_EVENT_ENABLED = DO_SNOW_DECEMBER
             }
         }
     }

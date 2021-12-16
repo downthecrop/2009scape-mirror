@@ -6,6 +6,9 @@ import core.plugin.Plugin
 
 @Initializable
 class PVPEquipmentRegister : Plugin<Any> {
+    // PVP equipment lasts for 1 hour of combat, which is 6000 ticks
+    val TICKS = 6000
+
     val VESTA_BODY = arrayOf(13887,13889)
     val VESTA_SKIRT = arrayOf(13893,13895)
     val VESTA_SWORD = arrayOf(13899,13901)
@@ -27,21 +30,21 @@ class PVPEquipmentRegister : Plugin<Any> {
 
 
     override fun newInstance(arg: Any?): Plugin<Any> {
-        EquipmentDegrader.registerSet(VESTA_BODY)
-        EquipmentDegrader.registerSet(VESTA_SKIRT)
-        EquipmentDegrader.registerSet(VESTA_SWORD)
-        EquipmentDegrader.registerSet(VESTA_SPEAR)
-        EquipmentDegrader.registerSet(STATIUS_BODY)
-        EquipmentDegrader.registerSet(STATIUS_HAMMER)
-        EquipmentDegrader.registerSet(STATIUS_HELM)
-        EquipmentDegrader.registerSet(STATIUS_LEGS)
-        EquipmentDegrader.registerSet(ZUREL_BOTTOM)
-        EquipmentDegrader.registerSet(ZURIEL_HOOD)
-        EquipmentDegrader.registerSet(ZURIEL_STAFF)
-        EquipmentDegrader.registerSet(ZURIEL_TOP)
-        EquipmentDegrader.registerSet(MORRIGAN_BODY)
-        EquipmentDegrader.registerSet(MORRIGAN_CHAP)
-        EquipmentDegrader.registerSet(MORRIGAN_COIF)
+        EquipmentDegrader.registerSet(TICKS, VESTA_BODY)
+        EquipmentDegrader.registerSet(TICKS, VESTA_SKIRT)
+        EquipmentDegrader.registerSet(TICKS, VESTA_SWORD)
+        EquipmentDegrader.registerSet(TICKS, VESTA_SPEAR)
+        EquipmentDegrader.registerSet(TICKS, STATIUS_BODY)
+        EquipmentDegrader.registerSet(TICKS, STATIUS_HAMMER)
+        EquipmentDegrader.registerSet(TICKS, STATIUS_HELM)
+        EquipmentDegrader.registerSet(TICKS, STATIUS_LEGS)
+        EquipmentDegrader.registerSet(TICKS, ZUREL_BOTTOM)
+        EquipmentDegrader.registerSet(TICKS, ZURIEL_HOOD)
+        EquipmentDegrader.registerSet(TICKS, ZURIEL_STAFF)
+        EquipmentDegrader.registerSet(TICKS, ZURIEL_TOP)
+        EquipmentDegrader.registerSet(TICKS, MORRIGAN_BODY)
+        EquipmentDegrader.registerSet(TICKS, MORRIGAN_CHAP)
+        EquipmentDegrader.registerSet(TICKS, MORRIGAN_COIF)
         return this
     }
 

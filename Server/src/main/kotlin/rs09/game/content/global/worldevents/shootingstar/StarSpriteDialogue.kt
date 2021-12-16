@@ -271,7 +271,7 @@ class StarSpriteDialogue(player: Player? = null) : DialoguePlugin(player) {
             ContentAPI.addItem(player, bonusId, bonusBaseAmt)
             ContentAPI.sendMessage(player, colorize("%RYour ring shines brightly as if surging with energy and then fades out."))
         } else if(RandomFunction.roll(25)){
-            player.savedData.globalData.starSpriteDelay = 0L
+            getStoreFile()[player.username.toLowerCase()] = false //flag daily as uncompleted
             ContentAPI.sendMessage(player, colorize("%RYour ring vibrates briefly as if surging with power, and then stops."))
         }
     }
