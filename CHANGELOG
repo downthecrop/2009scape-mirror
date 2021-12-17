@@ -74,3 +74,4 @@
 - Fix granting hp xp on controlled
 - Implemented HCIM Rework
 < --- ABOVE Released December 15, 2021 https://gitlab.com/2009scape/2009scape/-/tags/Dec-15-2021 ---- >
+- Fishing and fishing trawler now use closer-to-empirical formulae.

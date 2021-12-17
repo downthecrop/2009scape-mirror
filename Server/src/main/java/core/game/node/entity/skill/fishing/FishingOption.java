@@ -8,6 +8,8 @@ import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import org.rs09.consts.Items;
 
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.HashMap;
 
 /**
@@ -26,8 +28,7 @@ public enum FishingOption {
 	BARB_HARPOON(new Item(10129), 35, Animation.create(618), null, "harpoon", Fish.TUNA, Fish.SWORDFISH), 
 	BIG_NET(new Item(305), 16, Animation.create(620), null, "net", Fish.MACKEREL, Fish.COD, Fish.BASS, Fish.SEAWEED),
 	N_HARPOON(new Item(311), 76, Animation.create(618), null, "harpoon", Fish.SHARK), 
-	H_NET(new Item(303), 1, Animation.create(621), null, "net", Fish.MONKFISH),
-	C_CAGE(new Item(301), 85, Animation.create(619), new Item[]{new Item(14943)}, "cage", Fish.DARK_CRAB),
+	H_NET(new Item(303), 62, Animation.create(621), null, "net", Fish.MONKFISH),
 	KBWANJI_NET(new Item(Items.SMALL_FISHING_NET_303), 5, Animation.create(621), null, "net", Fish.KARAMBWANJI),
 	KARAMBWAN_VES(new Item(Items.KARAMBWAN_VESSEL_3157), 65, Animation.create(1193), new Item[]{new Item(Items.RAW_KARAMBWANJI_3150)}, "fish", Fish.KARAMBWAN);
 
@@ -84,6 +85,12 @@ public enum FishingOption {
 		this.animation = animation;
 		this.bait = bait;
 		this.name = name;
+        Arrays.sort(fish, new Comparator<Fish>() {
+            @Override
+            public int compare(Fish x, Fish y) {
+                return y.getLevel() - x.getLevel();
+            }
+        });
 		this.fish = fish;
 	}
 
@@ -91,7 +98,7 @@ public enum FishingOption {
 	 * Method used to get a random {@link Fish}.
 	 * @return the {@link Fish}.
 	 */
-	public Fish getRandomFish(final Player player) {
+	public Fish rollFish(final Player player) {
 		if (this == BIG_NET) {
 			switch (RandomFunction.randomize(100)) {
 			case 0:
@@ -102,14 +109,22 @@ public enum FishingOption {
 				return Fish.SEAWEED;
 			}
 		}
-		if (this == LURE && player.getInventory().contains(10087, 1)) {
-			return Fish.RAINBOW_FISH;
-		}
-		Fish reward = fish[RandomFunction.randomize(fish.length)];
-		if (reward.getLevel() > player.getSkills().getLevel(Skills.FISHING) || (reward == Fish.RAINBOW_FISH && !player.getInventory().contains(10087, 1))) {
-			reward = fish[0];
-		}
-		return reward;
+        int visibleLevel = player.getSkills().getLevel(Skills.FISHING);
+        int invisibleLevel = visibleLevel + player.getFamiliarManager().getBoost(Skills.FISHING);
+        for(Fish f : fish) {
+            if(f.getLevel() > player.getSkills().getLevel(Skills.FISHING)) {
+                continue;
+            }
+            if(this == LURE && (player.getInventory().contains(Items.STRIPY_FEATHER_10087, 1) != (f == Fish.RAINBOW_FISH))) {
+                continue;
+            }
+            double chance = f.getSuccessChance(invisibleLevel);
+            //System.out.printf("rollFish: %s %s %s %s %s\n", player.getName(), f.getItem().getName(), f.getLowChance(), f.getHighChance(), chance);
+            if(RandomFunction.random(0.0, 1.0) < chance) {
+                return f;
+            }
+        }
+        return null;
 	}
 
 	/**
