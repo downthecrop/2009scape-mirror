@@ -54,6 +54,11 @@ class FishingTrawlerSession(var region: DynamicRegion, val activity: FishingTraw
     var inactiveTicks = 0
 
     fun start(pl: ArrayList<Player>){
+        if(RandomFunction.roll(2)) {
+            region.setMusicId(38)
+        } else {
+            region.setMusicId(51)
+        }
         this.players.addAll(pl)
         isActive = true
         initHoles()
