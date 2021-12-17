@@ -13,7 +13,6 @@ public enum FishingSpot {
 	CAGE_HARPOON(new int[] { 312, 321, 324, 333, 405, 1332, 1399, 3804, 5470, 7046}, FishingOption.CAGE, FishingOption.HARPOON), 
 	NET_HARPOON(new int[] { 313, 322, 334, 406, 1191, 1333, 1405, 1406, 3574, 3575, 5471, 7044 }, FishingOption.BIG_NET, FishingOption.N_HARPOON), 
 	HARPOON_NET(new int[] { 3848, 3849 }, FishingOption.HARPOON, FishingOption.H_NET, FishingOption.BARB_HARPOON),
-	CRAB_CAGE(new int[] {8665}, FishingOption.C_CAGE),
 	SPOT_KBWANJI(new int[] {1174}, FishingOption.KBWANJI_NET),
 	SPOT_KARAMBWAN(new int[] {1177}, FishingOption.KARAMBWAN_VES);
 
