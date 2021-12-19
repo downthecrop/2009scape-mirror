@@ -1,6 +1,6 @@
 package rs09.game.content.zone
 
-import api.ContentAPI
+import api.*
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
@@ -26,7 +26,7 @@ class FarmingPatchZone : MapZone("farming patch", true), Plugin<Any> {
         registerRegion(12083)
         registerRegion(10548)
         register(ZoneBorders(3594,3521,3608,3532))
-        ContentAPI.submitWorldPulse(zonePulse)
+        submitWorldPulse(zonePulse)
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {
@@ -39,7 +39,7 @@ class FarmingPatchZone : MapZone("farming patch", true), Plugin<Any> {
     }
 
     override fun enter(e: Entity?): Boolean {
-        if(e is Player && playersInZone[e] == null && ContentAPI.getStatLevel(e, Skills.FARMING) <= 15) {
+        if(e is Player && playersInZone[e] == null && getStatLevel(e, Skills.FARMING) <= 15) {
             playersInZone[e] = 0
         }
         return super.enter(e)
@@ -61,14 +61,14 @@ class FarmingPatchZone : MapZone("farming patch", true), Plugin<Any> {
                     npc.init()
                     npc.moveStep()
                     npc.face(player)
-                    ContentAPI.openDialogue(player, SpiritDialogue(true), npc)
+                    openDialogue(player, SpiritDialogue(true), npc)
                 } else if (ticks == secondsToTicks(TimeUnit.MINUTES.toSeconds(10).toInt())){
                     val npc = NPC(NPCs.GITHAN_7122)
                     npc.location = player.location
                     npc.init()
                     npc.moveStep()
                     npc.face(player)
-                    ContentAPI.openDialogue(player, SpiritDialogue(false), npc)
+                    openDialogue(player, SpiritDialogue(false), npc)
                     playersInZone.remove(player)
                 }
 
@@ -91,7 +91,7 @@ class FarmingPatchZone : MapZone("farming patch", true), Plugin<Any> {
 
         override fun end(){
             super.end()
-            ContentAPI.poofClear(npc ?: return)
+            poofClear(npc ?: return)
         }
     }
 

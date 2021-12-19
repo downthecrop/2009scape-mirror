@@ -1,6 +1,6 @@
 package rs09.game.interaction.item
 
-import api.ContentAPI
+import api.*
 import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
@@ -43,14 +43,14 @@ class CulChestItems: InteractionListener() {
     }
 
     fun alchemize(player: Player, node: Node): Boolean{
-        val amount = ContentAPI.amountInInventory(player, node.id) + ContentAPI.amountInEquipment(player, node.id)
-        val coins = amount * ContentAPI.itemDefinition(node.id).value
+        val amount = amountInInventory(player, node.id) + amountInEquipment(player, node.id)
+        val coins = amount * itemDefinition(node.id).value
 
-        ContentAPI.removeAll(player, node.id, api.Container.INVENTORY)
-        ContentAPI.removeItem(player, node.id, api.Container.EQUIPMENT)
-        ContentAPI.addItemOrDrop(player, 995, coins)
+        removeAll(player, node.id, api.Container.INVENTORY)
+        removeItem(player, node.id, api.Container.EQUIPMENT)
+        addItemOrDrop(player, 995, coins)
 
-        ContentAPI.sendDialogue(player, "The item instantly alchemized itself!")
+        sendDialogue(player, "The item instantly alchemized itself!")
         return false //tell equip handler not to equip the gloves at all if they still even exist lel
     }
 }

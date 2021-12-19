@@ -1,6 +1,6 @@
 package core.game.interaction.item.withitem;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
@@ -299,8 +299,8 @@ public class PoisonWeaponPlugin extends UseWithHandler {
 		}
 		int amt = Math.min(weaponItem.getAmount(), 5);
 		player.getInventory().remove(new Item(weaponItem.getId(), amt));
-		ContentAPI.addItemOrDrop(player, product, amt);
-		ContentAPI.addItemOrDrop(player, Items.VIAL_229, 1);
+		addItemOrDrop(player, product, amt);
+		addItemOrDrop(player, Items.VIAL_229, 1);
 		player.getPacketDispatch().sendMessage("You poison the " + weaponItem.getName().toLowerCase() + ".");
 	}
 

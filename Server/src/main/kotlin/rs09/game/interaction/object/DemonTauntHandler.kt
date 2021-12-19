@@ -1,6 +1,6 @@
 package rs09.game.interaction.`object`
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.player.link.emote.Emotes
 import org.rs09.consts.NPCs
@@ -15,11 +15,11 @@ class DemonTauntHandler : InteractionListener(){
 
     override fun defineListeners() {
         on(BARS,SCENERY,"taunt-through"){ player, _ ->
-            ContentAPI.sendMessage(player, "You taunt the demon, making it growl.")
-            val demon = ContentAPI.findLocalNPC(player, NPCs.LESSER_DEMON_82) ?: return@on true
-            ContentAPI.sendChat(demon, "Graaagh!")
-            ContentAPI.face(demon, player, 3)
-            ContentAPI.emote(player, Emotes.RASPBERRY)
+            sendMessage(player, "You taunt the demon, making it growl.")
+            val demon = findLocalNPC(player, NPCs.LESSER_DEMON_82) ?: return@on true
+            sendChat(demon, "Graaagh!")
+            face(demon, player, 3)
+            emote(player, Emotes.RASPBERRY)
             player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 1, 13)
             return@on true
         }

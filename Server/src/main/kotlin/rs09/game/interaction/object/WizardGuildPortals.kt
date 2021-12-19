@@ -1,6 +1,6 @@
 package rs09.game.interaction.`object`
 
-import api.ContentAPI
+import api.*
 import core.game.world.map.Location
 import rs09.game.interaction.InteractionListener
 
@@ -12,23 +12,23 @@ class WizardGuildPortals : InteractionListener() {
 
     override fun defineListeners() {
         on(WTOWER_PORTAL, SCENERY, "enter"){player, _ ->
-            ContentAPI.teleport(player, Location.create(3109, 3159, 0))
-			ContentAPI.sendMessage(player, "You enter the magic portal...")
-			ContentAPI.sendMessage(player, "You teleport to the Wizards' tower.")
+            teleport(player, Location.create(3109, 3159, 0))
+			sendMessage(player, "You enter the magic portal...")
+			sendMessage(player, "You teleport to the Wizards' tower.")
             return@on true
         }
 
         on(DWTOWER_PORTAL, SCENERY, "enter"){player, _ ->
-            ContentAPI.teleport(player, Location.create(2907, 3333, 0))
-			ContentAPI.sendMessage(player, "You enter the magic portal...")
-			ContentAPI.sendMessage(player, "You teleport to the Dark Wizards' tower.")
+            teleport(player, Location.create(2907, 3333, 0))
+			sendMessage(player, "You enter the magic portal...")
+			sendMessage(player, "You teleport to the Dark Wizards' tower.")
             return@on true
         }
 
         on(SORC_TOWER_PORTAL, SCENERY, "enter"){player, _ ->
-            ContentAPI.teleport(player, Location.create(2703, 3406, 0))
-			ContentAPI.sendMessage(player, "You enter the magic portal...")
-			ContentAPI.sendMessage(player, "You teleport to Thormac the Sorceror's house.")
+            teleport(player, Location.create(2703, 3406, 0))
+			sendMessage(player, "You enter the magic portal...")
+			sendMessage(player, "You teleport to Thormac the Sorceror's house.")
             return@on true
         }
     }

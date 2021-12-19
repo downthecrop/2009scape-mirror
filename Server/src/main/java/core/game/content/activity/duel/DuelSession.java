@@ -1,6 +1,6 @@
 package core.game.content.activity.duel;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -569,7 +569,7 @@ public final class DuelSession extends ComponentPlugin {
 					amount = c.getAmount(c.get(slot));
 					break;
 				case 234:
-					ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+					sendInputDialogue(player, true, "Enter the amount:", (value) -> {
 						c.withdraw(slot, (int) value);
 						return Unit.INSTANCE;
 					});
@@ -686,7 +686,7 @@ public final class DuelSession extends ComponentPlugin {
 				c1.offer(slot, player.getInventory().getAmount(player.getInventory().get(slot).getId()));
 				break;
 			case 234:
-				ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				sendInputDialogue(player, true, "Enter the amount:", (value) -> {
 					c1.offer(slot, (int) value);
 					return Unit.INSTANCE;
 				});

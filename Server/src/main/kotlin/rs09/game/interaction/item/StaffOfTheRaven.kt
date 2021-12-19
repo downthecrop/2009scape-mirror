@@ -1,6 +1,6 @@
 package rs09.game.interaction.item
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.world.update.flag.context.Graphics
@@ -19,7 +19,7 @@ class StaffOfTheRaven : InteractionListener() {
             val hasRecolorA = player.getAttribute("sotr:recolor1", false)
             val hasRecolorB = player.getAttribute("sotr:recolor2", false)
             val isBase = node.id == 14654
-            val isOperate = ContentAPI.getUsedOption(player) == "operate"
+            val isOperate = getUsedOption(player) == "operate"
 
             if(!hasUnlocked){
                 //Remove the item if the player has not purchased it. Just in case.

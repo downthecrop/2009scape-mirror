@@ -1,6 +1,6 @@
 package rs09.game.content.ame.events.certer
 
-import api.ContentAPI
+import api.*
 import core.game.component.Component
 import core.game.node.item.GroundItemManager
 import rs09.game.content.dialogue.DialogueFile
@@ -23,7 +23,7 @@ class CerterDialogue(val initial: Boolean) : DialogueFile() {
                 0 -> if(!isCorrect) npc("Sorry, I don't think so.").also { stage = END_DIALOGUE; player!!.antiMacroHandler.event?.terminate() } else npc("Oh yes! That's right.").also { stage++ }
                 1 -> {
                     npc("Please, take this as a thanks.")
-                    player!!.antiMacroHandler.event?.loot!!.roll().forEach { ContentAPI.addItemOrDrop(player!!, it.id, it.amount) }
+                    player!!.antiMacroHandler.event?.loot!!.roll().forEach { addItemOrDrop(player!!, it.id, it.amount) }
                     player!!.antiMacroHandler.event?.terminate()
                     stage = END_DIALOGUE
                 }

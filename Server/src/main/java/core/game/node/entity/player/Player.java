@@ -1,6 +1,5 @@
 package core.game.node.entity.player;
 
-import api.ContentAPI;
 import core.game.component.Component;
 import core.game.container.Container;
 import core.game.container.impl.BankContainer;
@@ -94,6 +93,7 @@ import rs09.tools.TickUtilsKt;
 
 import java.util.*;
 
+import static api.ContentAPIKt.*;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_DEATHS;
 import static rs09.tools.stringtools.GlobalsKt.colorize;
@@ -801,11 +801,11 @@ public class Player extends Entity {
         } else {
             return false;
         }
-        boolean legs = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_ROBE_8840, 1);
-        boolean top = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_TOP_8839, 1)
-            || ContentAPI.inEquipment(this, Items.VOID_KNIGHT_TOP_10611, 1);
-        boolean gloves = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_GLOVES_8842, 1);
-		return ContentAPI.inEquipment(this, helm, 1) && legs && top && gloves;
+        boolean legs = inEquipment(this, Items.VOID_KNIGHT_ROBE_8840, 1);
+        boolean top = inEquipment(this, Items.VOID_KNIGHT_TOP_8839, 1)
+            || inEquipment(this, Items.VOID_KNIGHT_TOP_10611, 1);
+        boolean gloves = inEquipment(this, Items.VOID_KNIGHT_GLOVES_8842, 1);
+		return inEquipment(this, helm, 1) && legs && top && gloves;
 	}
 
 	/**

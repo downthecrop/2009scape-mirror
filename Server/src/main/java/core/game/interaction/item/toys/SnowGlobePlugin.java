@@ -17,9 +17,6 @@ import rs09.plugin.PluginManager;
 
 @Initializable
 public class SnowGlobePlugin extends OptionHandler {
-
-    private final Animation SHAKE = new Animation(7535);//Initial Shake
-    private final Animation HOLDFACE = new Animation(7536);//Immediately after shake, player holds the snow globe to face
     private static final Component INTERFACE = new Component(659);//After HOLDFACE this interface is displayed, player either clicks 'continue' for inv of snowballs, or 'close' for no snowballs
     private final Animation DOWNFAST = new Animation(7537);//Used when player hit 'close' on the interface
     private final Animation DOWNSLOW = new Animation(7538);//Used when the player hit 'continue' on the interface
@@ -29,28 +26,11 @@ public class SnowGlobePlugin extends OptionHandler {
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         PluginManager.definePlugin(new SnowGlobeInterface());
-        ItemDefinition.forId(11949).getHandlers().put("option:shake",this);
         return this;
     }
 
     @Override
     public boolean handle(Player player, Node node, String option) {
-        player.getLocks().lockInteractions(2);
-        player.getAnimator().animate(SHAKE);
-        player.getPulseManager().run(new Pulse(3) {
-            @Override
-            public boolean pulse() {
-                player.getAnimator().animate(HOLDFACE);
-                player.getPulseManager().run(new Pulse(1){
-                    @Override
-                    public boolean pulse(){
-                        player.getInterfaceManager().open(INTERFACE);
-                        return true;
-                    }
-                });
-                return true;
-            }
-        });
         return true;
     }
 

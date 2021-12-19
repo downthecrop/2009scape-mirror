@@ -1,6 +1,6 @@
 package core.game.content.quest.members.rovingelves;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.ImpactHandler;
 import core.game.node.entity.player.Player;
@@ -56,15 +56,15 @@ public final class IsafdarZone extends MapZone implements Plugin<Object> {
         if (e instanceof Player) {
             Player player = (Player) e;
             if(LEAF_TRAPS.contains(player.getLocation())){
-                ContentAPI.sendMessage(player,LEAF_FAIL_MSG);
-                ContentAPI.impact(player,1, ImpactHandler.HitsplatType.NORMAL);
+                sendMessage(player,LEAF_FAIL_MSG);
+                impact(player,1, ImpactHandler.HitsplatType.NORMAL);
                 player.teleport(LEAF_TRAP_PIT);
             } else if(STICK_TRAPS.contains(player.getLocation())) {
-                ContentAPI.sendMessage(player,STICK_FAIL_MSG);
-                ContentAPI.impact(player,1, ImpactHandler.HitsplatType.NORMAL);
+                sendMessage(player,STICK_FAIL_MSG);
+                impact(player,1, ImpactHandler.HitsplatType.NORMAL);
             } else if (WIRE_TRAPS.contains(player.getLocation())){
-                ContentAPI.sendMessage(player,WIRE_FAIL_MSG);
-                ContentAPI.impact(player,1, ImpactHandler.HitsplatType.NORMAL);
+                sendMessage(player,WIRE_FAIL_MSG);
+                impact(player,1, ImpactHandler.HitsplatType.NORMAL);
             }
         }
     }

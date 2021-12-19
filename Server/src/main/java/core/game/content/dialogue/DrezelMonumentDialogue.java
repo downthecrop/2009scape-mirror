@@ -1,6 +1,6 @@
 package core.game.content.dialogue;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
@@ -83,7 +83,7 @@ public final class DrezelMonumentDialogue extends DialoguePlugin {
 			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Greetings again adventurer, How go your travels in", "Morytania? Is it as evil as I have heard?");
 			stage = 420;
 		} else if (quest.getStage(player) < 100){
-			ContentAPI.openDialogue(player, new NSDrezelDialogue(), npc);
+			openDialogue(player, new NSDrezelDialogue(), npc);
 		} else {
 			npcl(FacialExpression.NEUTRAL, "I heard you finished your quest with Filliman! Great work!");
 			stage = END_DIALOGUE;

@@ -1,6 +1,6 @@
 package rs09.game.util.region.rellekka
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.map.Location
@@ -9,18 +9,18 @@ import org.rs09.consts.Components
 object RellekkaUtils {
     @JvmStatic
     fun sail(player: Player, destination: RellekkaDestination){
-        ContentAPI.lock(player, 100)
-        ContentAPI.openOverlay(player, 115)
-        ContentAPI.openInterface(player, Components.MISC_SHIPJOURNEY_224)
-        ContentAPI.animateInterface(player, Components.MISC_SHIPJOURNEY_224, 7, destination.shipAnim)
+        lock(player, 100)
+        openOverlay(player, 115)
+        openInterface(player, Components.MISC_SHIPJOURNEY_224)
+        animateInterface(player, Components.MISC_SHIPJOURNEY_224, 7, destination.shipAnim)
 
-        val animDuration = ContentAPI.animationDuration(ContentAPI.getAnimation(destination.shipAnim))
-        ContentAPI.submitWorldPulse(object : Pulse(animDuration){
+        val animDuration = animationDuration(getAnimation(destination.shipAnim))
+        submitWorldPulse(object : Pulse(animDuration){
             override fun pulse(): Boolean {
-                ContentAPI.teleport(player, destination.destLoc)
-                ContentAPI.closeInterface(player)
-                ContentAPI.closeOverlay(player)
-                ContentAPI.unlock(player)
+                teleport(player, destination.destLoc)
+                closeInterface(player)
+                closeOverlay(player)
+                unlock(player)
                 return true
             }
         })
