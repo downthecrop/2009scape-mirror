@@ -2,6 +2,8 @@ package rs09.net.packet
 
 import core.net.packet.OutgoingPacket
 import core.net.packet.out.*
+import gui.GuiEvent
+import gui.ServerMonitor
 import rs09.game.system.SystemLogger
 import java.util.*
 
@@ -28,6 +30,7 @@ object PacketWriteQueue {
 
     @JvmStatic
     fun flush(){
+        ServerMonitor.eventQueue.add(GuiEvent.UpdateQueuedPackets(PacketsToWrite.size))
         while(!PacketsToWrite.isEmpty()){
             val p = PacketsToWrite.poll() ?: continue
             write(p.out,p.context)
