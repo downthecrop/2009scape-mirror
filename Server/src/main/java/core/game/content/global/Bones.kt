@@ -117,11 +117,7 @@ enum class Bones
                 for (i in bones.keys) {
                     list.add(i)
                 }
-                val array = IntArray(list.size)
-                for (i in list.indices) {
-                    array[i] = list[i]
-                }
-                return array
+                return list.toIntArray()
             }
 
         /**
