@@ -48,7 +48,7 @@ final class Sprites {
             Class129_Sub1.aAbstractSpriteArray2690 = Class140_Sub6.getSprites(hintMapMarkersSpriteArchive, index8);
             Class45.aAbstractSprite_736 = Unsorted.method602(mapFlagSpriteArchive, index8);
             Class65.aAbstractSpriteArray1825 = TextureOperation18.method286(crossSpriteArchive, index8);
-            Unsorted.aAbstractSpriteArray1136 = TextureOperation18.method286(mapDotsSpriteArchive, index8);
+            Unsorted.minimapDotSprites = TextureOperation18.method286(mapDotsSpriteArchive, index8);
             GameObject.aClass109Array1831 = Class85.method1424(index8, scrollbarSpriteArchive);
             nameIconsSpriteArray = Class85.method1424(index8, nameIconsSpriteArchive);
             FontType.smallFont.method697(nameIconsSpriteArray, null);
@@ -98,13 +98,13 @@ final class Sprites {
             }
 
             if (HDToolKit.highDetail) {
-                Class140_Sub4.aAbstractSpriteArray2839 = new AbstractSprite[aSoftwareSpriteArray2140.length];
+                Entity.aAbstractSpriteArray2839 = new AbstractSprite[aSoftwareSpriteArray2140.length];
 
                 for (var8 = 0; var8 < aSoftwareSpriteArray2140.length; ++var8) {
-                    Class140_Sub4.aAbstractSpriteArray2839[var8] = new HDSprite(aSoftwareSpriteArray2140[var8]);
+                    Entity.aAbstractSpriteArray2839[var8] = new HDSprite(aSoftwareSpriteArray2140[var8]);
                 }
             } else {
-                Class140_Sub4.aAbstractSpriteArray2839 = aSoftwareSpriteArray2140;
+                Entity.aAbstractSpriteArray2839 = aSoftwareSpriteArray2140;
             }
 
         } catch (RuntimeException var9) {

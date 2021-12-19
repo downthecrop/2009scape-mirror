@@ -46,13 +46,13 @@ abstract class Class146 {
         int var15;
         int var29;
         for (int var12 = TextureOperation22.anInt3419; var12 < Class3_Sub17.anInt2456; ++var12) {
-            Class3_Sub2[][] var13 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var12];
+            TileData[][] var13 = TileData.aTileDataArrayArrayArray2638[var12];
 
             for (var14 = Class163_Sub1_Sub1.anInt4006; var14 < Unsorted.anInt67; ++var14) {
                 for (var15 = Unsorted.anInt3603; var15 < Class126.anInt1665; ++var15) {
-                    Class3_Sub2 var16 = var13[var14][var15];
+                    TileData var16 = var13[var14][var15];
                     if (var16 != null) {
-                        if (Class23.aBooleanArrayArray457[var14 - Class97.anInt1375 + TextureOperation8.anInt3466][var15 - Class145.anInt3340 + TextureOperation8.anInt3466] && (var3 == null || var12 < var4 || var3[var12][var14][var15] != var5)) {
+                        if (Class23.aBooleanArrayArray457[var14 - Class97.anInt1375 + TextureOperation8.renderDistanceTiles][var15 - Class145.anInt3340 + TextureOperation8.renderDistanceTiles] && (var3 == null || var12 < var4 || var3[var12][var14][var15] != var5)) {
                             var16.aBoolean2222 = true;
                             var16.aBoolean2225 = true;
                             var16.aBoolean2236 = var16.anInt2223 > 0;
@@ -119,7 +119,7 @@ abstract class Class146 {
                         Class92.method1512(Class72.method1297());
                     }
 
-                    var28.method149(Class75_Sub2.aClass3_Sub2ArrayArrayArray2638, var26, false);
+                    var28.method149(TileData.aTileDataArrayArrayArray2638, var26, false);
                 }
 
                 WaterShader.method2253();
@@ -132,36 +132,36 @@ abstract class Class146 {
                             Class3_Sub28_Sub2.method535((byte) 56, var25.anInt2355);
                         }
 
-                        var25.method149(Class75_Sub2.aClass3_Sub2ArrayArrayArray2638, var33, false);
+                        var25.method149(TileData.aTileDataArrayArrayArray2638, var33, false);
                     }
 
                     if (var14 == 0 && Unsorted.anInt1137 > 0) {
                         HDToolKit.method1832(101.5F);
-                        Class141.method2038(Class97.anInt1375, Class145.anInt3340, TextureOperation8.anInt3466, Class23.aBooleanArrayArray457);
+                        Class141.method2038(Class97.anInt1375, Class145.anInt3340, TextureOperation8.renderDistanceTiles, Class23.aBooleanArrayArray457);
                     }
                 }
 
-                Class68.method1277(Class75_Sub2.aClass3_Sub2ArrayArrayArray2638);
+                Class68.method1277(TileData.aTileDataArrayArrayArray2638);
             }
 
             var24.glPopMatrix();
         }
 
         int var19;
-        Class3_Sub2 var21;
+        TileData var21;
         int var20;
         int var23;
-        Class3_Sub2[][] var27;
+        TileData[][] var27;
         int var34;
         int var32;
         for (var23 = TextureOperation22.anInt3419; var23 < Class3_Sub17.anInt2456; ++var23) {
-            var27 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var23];
+            var27 = TileData.aTileDataArrayArrayArray2638[var23];
 
-            for (var15 = -TextureOperation8.anInt3466; var15 <= 0; ++var15) {
+            for (var15 = -TextureOperation8.renderDistanceTiles; var15 <= 0; ++var15) {
                 var32 = Class97.anInt1375 + var15;
                 var29 = Class97.anInt1375 - var15;
                 if (var32 >= Class163_Sub1_Sub1.anInt4006 || var29 < Unsorted.anInt67) {
-                    for (var34 = -TextureOperation8.anInt3466; var34 <= 0; ++var34) {
+                    for (var34 = -TextureOperation8.renderDistanceTiles; var34 <= 0; ++var34) {
                         var19 = Class145.anInt3340 + var34;
                         var20 = Class145.anInt3340 - var34;
                         if (var32 >= Class163_Sub1_Sub1.anInt4006) {
@@ -209,13 +209,13 @@ abstract class Class146 {
         }
 
         for (var23 = TextureOperation22.anInt3419; var23 < Class3_Sub17.anInt2456; ++var23) {
-            var27 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var23];
+            var27 = TileData.aTileDataArrayArrayArray2638[var23];
 
-            for (var15 = -TextureOperation8.anInt3466; var15 <= 0; ++var15) {
+            for (var15 = -TextureOperation8.renderDistanceTiles; var15 <= 0; ++var15) {
                 var32 = Class97.anInt1375 + var15;
                 var29 = Class97.anInt1375 - var15;
                 if (var32 >= Class163_Sub1_Sub1.anInt4006 || var29 < Unsorted.anInt67) {
-                    for (var34 = -TextureOperation8.anInt3466; var34 <= 0; ++var34) {
+                    for (var34 = -TextureOperation8.renderDistanceTiles; var34 <= 0; ++var34) {
                         var19 = Class145.anInt3340 + var34;
                         var20 = Class145.anInt3340 - var34;
                         if (var32 >= Class163_Sub1_Sub1.anInt4006) {

@@ -14,7 +14,7 @@ final class QuickChatDefinition extends Node {
    int[] anIntArray3567;
    boolean aBoolean3568 = true;
    private int[][] anIntArrayArray3570;
-   private RSString[] aClass94Array3571;
+   private RSString[] aStringArray3571;
    static ReferenceCache aReferenceCache_3572 = new ReferenceCache(64);
    static Class83 aClass83_3579;
 
@@ -38,7 +38,7 @@ final class QuickChatDefinition extends Node {
       try {
 
          if(var2 == 1) {
-            this.aClass94Array3571 = var1.readString().method1567(60, (byte)118);
+            this.aStringArray3571 = var1.readString().method1567(60, (byte)118);
          } else {
             int var4;
             int var5;
@@ -134,14 +134,14 @@ final class QuickChatDefinition extends Node {
    final RSString method554() {
       try {
          RSString var2 = Unsorted.emptyString(80);
-         if(null == this.aClass94Array3571) {
-            return TextCore.aClass94_3357;
+         if(null == this.aStringArray3571) {
+            return TextCore.aString_3357;
          } else {
-            Objects.requireNonNull(var2).append(this.aClass94Array3571[0]);
+            Objects.requireNonNull(var2).append(this.aStringArray3571[0]);
 
-            for(int var3 = 1; var3 < this.aClass94Array3571.length; ++var3) {
+            for(int var3 = 1; var3 < this.aStringArray3571.length; ++var3) {
                var2.append(RSString.parse(")3)3)3"));
-               var2.append(this.aClass94Array3571[var3]);
+               var2.append(this.aStringArray3571[var3]);
             }
 
             return var2.method1576();
@@ -157,12 +157,12 @@ final class QuickChatDefinition extends Node {
          RSString var3 = Unsorted.emptyString(80);
          if(this.anIntArray3566 != null) {
             for(int var4 = 0; var4 < this.anIntArray3566.length; ++var4) {
-               Objects.requireNonNull(var3).append(this.aClass94Array3571[var4]);
+               Objects.requireNonNull(var3).append(this.aStringArray3571[var4]);
                var3.append(Class49.method1124(this.anIntArrayArray3570[var4], var2.method772(anIntArray2209[this.anIntArray3566[var4]]), this.anIntArray3566[var4]));
             }
          }
 
-         Objects.requireNonNull(var3).append(this.aClass94Array3571[-1 + this.aClass94Array3571.length]);
+         Objects.requireNonNull(var3).append(this.aStringArray3571[-1 + this.aStringArray3571.length]);
          return var3.method1576();
       } catch (RuntimeException var5) {
          throw ClientErrorException.clientError(var5, "cb.B(" + 28021 + ',' + (var2 != null?"{...}":"null") + ')');

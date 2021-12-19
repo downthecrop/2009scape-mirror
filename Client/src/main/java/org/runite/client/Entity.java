@@ -2,11 +2,11 @@ package org.runite.client;
 
 import org.rs09.client.data.ReferenceCache;
 
-public abstract class Class140_Sub4 extends GameObject {
+public abstract class Entity extends GameObject {
 
     int textEffect = 0;
     private int anInt2754 = 0;
-    int[] anIntArray2755 = new int[10];
+    public int[] yOffsets2755 = new int[10];
     static int anInt2756;
     private int anInt2757 = 0;
     int anInt2758 = 0;
@@ -17,7 +17,7 @@ public abstract class Class140_Sub4 extends GameObject {
     int renderAnimationId = -1;
     int anInt2764 = -1;
     private int anInt2766 = 0;
-    int[] anIntArray2767 = new int[10];
+    public int[] xOffsets2767 = new int[10];
     int[] anIntArray2768 = new int[4];
     boolean aBoolean2769 = false;
     int anInt2771 = -1;
@@ -77,7 +77,7 @@ public abstract class Class140_Sub4 extends GameObject {
     int anInt2826 = -1;
     private int anInt2827 = 0;
     int anInt2828 = 0;
-    public int zAxis;
+    public int yAxis;
     private int anInt2830 = 0;
     int anInt2831;
     int anInt2832 = 0;
@@ -109,54 +109,54 @@ public abstract class Class140_Sub4 extends GameObject {
         }
     }
 
-    final void method1967(int var2, int var3, int var4, boolean var5) {
+    final void updateAnimationPosition(int var2, int newX, int newY, boolean var5) {
         try {
             if (this.anInt2771 != -1 && SequenceDefinition.getAnimationDefinition(this.anInt2771).priority == 1) {
                 this.anInt2771 = -1;
             }
 
             if (!var5) {
-                int var6 = var3 + -this.anIntArray2767[0];
-                int var7 = var4 + -this.anIntArray2755[0];
+                int var6 = newX + -this.xOffsets2767[0];
+                int var7 = newY + -this.yOffsets2755[0];
                 if (var6 >= -8 && 8 >= var6 && var7 >= -8 && var7 <= 8) {
                     if (this.anInt2816 < 9) {
                         ++this.anInt2816;
                     }
 
                     for (int var8 = this.anInt2816; var8 > 0; --var8) {
-                        this.anIntArray2767[var8] = this.anIntArray2767[-1 + var8];
-                        this.anIntArray2755[var8] = this.anIntArray2755[var8 + -1];
+                        this.xOffsets2767[var8] = this.xOffsets2767[-1 + var8];
+                        this.yOffsets2755[var8] = this.yOffsets2755[var8 + -1];
                         this.aByteArray2795[var8] = this.aByteArray2795[var8 - 1];
                     }
 
                     this.aByteArray2795[0] = 1;
-                    this.anIntArray2767[0] = var3;
-                    this.anIntArray2755[0] = var4;
+                    this.xOffsets2767[0] = newX;
+                    this.yOffsets2755[0] = newY;
                     return;
                 }
             }
 
             this.anInt2824 = 0;
-            this.anIntArray2767[0] = var3;
-            this.anIntArray2755[0] = var4;
+            this.xOffsets2767[0] = newX;
+            this.yOffsets2755[0] = newY;
             this.anInt2816 = 0;
             this.anInt2811 = 0;
-            this.zAxis = 64 * var2 + this.anIntArray2755[0] * 128;
-            this.xAxis = var2 * 64 + 128 * this.anIntArray2767[0];
+            this.yAxis = 64 * var2 + this.yOffsets2755[0] * 128;
+            this.xAxis = var2 * 64 + 128 * this.xOffsets2767[0];
 
             if (HDToolKit.highDetail && Class102.player == this) {
                 TextureOperation31.method236();
             }
 
         } catch (RuntimeException var9) {
-            throw ClientErrorException.clientError(var9, "fe.J(" + -2 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ')');
+            throw ClientErrorException.clientError(var9, "fe.J(" + -2 + ',' + var2 + ',' + newX + ',' + newY + ',' + var5 + ')');
         }
     }
 
     final void walkStep(int var1, byte var2, int var3) {
         try {
-            int var4 = this.anIntArray2767[0];
-            int var5 = this.anIntArray2755[0];
+            int var4 = this.xOffsets2767[0];
+            int var5 = this.yOffsets2755[0];
             if (0 == var3) {
                 --var4;
                 ++var5;
@@ -172,8 +172,8 @@ public abstract class Class140_Sub4 extends GameObject {
 
             int var6;
             for (var6 = this.anInt2816; var6 > 0; --var6) {
-                this.anIntArray2767[var6] = this.anIntArray2767[-1 + var6];
-                this.anIntArray2755[var6] = this.anIntArray2755[-1 + var6];
+                this.xOffsets2767[var6] = this.xOffsets2767[-1 + var6];
+                this.yOffsets2755[var6] = this.yOffsets2755[-1 + var6];
                 this.aByteArray2795[var6] = this.aByteArray2795[-1 + var6];
             }
 
@@ -209,8 +209,8 @@ public abstract class Class140_Sub4 extends GameObject {
                 ++var4;
             }
 
-            this.anIntArray2767[0] = var4;
-            this.anIntArray2755[0] = var5;
+            this.xOffsets2767[0] = var4;
+            this.yOffsets2755[0] = var5;
         } catch (RuntimeException var7) {
             throw ClientErrorException.clientError(var7, "fe.E(" + var1 + ',' + var2 + ',' + var3 + ')');
         }
@@ -235,13 +235,13 @@ public abstract class Class140_Sub4 extends GameObject {
                 int var10 = -var6 / 2;
                 int var12 = -(var9 * var7) + var10 * var8 >> 16;
                 int var11 = var7 * var10 - -(var8 * var9) >> 16;
-                int var13 = Class121.method1736(WorldListCountry.localPlane, 1, var11 + this.xAxis, this.zAxis + var12);
+                int var13 = Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var11 + this.xAxis, this.yAxis + var12);
                 int var14 = var5 / 2;
                 int var15 = -var6 / 2;
                 int var16 = var14 * var8 + var15 * var7 >> 16;
                 int var20 = var6 / 2;
                 int var17 = var15 * var8 + -(var14 * var7) >> 16;
-                int var18 = Class121.method1736(WorldListCountry.localPlane, 1, var16 + this.xAxis, this.zAxis - -var17);
+                int var18 = Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var16 + this.xAxis, this.yAxis - -var17);
                 int var19 = -var5 / 2;
                 int var22 = -(var7 * var19) + var20 * var8 >> 16;
                 int var25 = var6 / 2;
@@ -249,9 +249,9 @@ public abstract class Class140_Sub4 extends GameObject {
                 int var21 = var7 * var20 - -(var8 * var19) >> 16;
                 int var27 = var25 * var8 - var7 * var24 >> 16;
                 int var26 = var7 * var25 + var8 * var24 >> 16;
-                int var23 = Class121.method1736(WorldListCountry.localPlane, 1, this.xAxis + var21, var22 + this.zAxis);
+                int var23 = Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, this.xAxis + var21, var22 + this.yAxis);
                 int var29 = var13 < var18 ? var13 : var18;
-                int var28 = Class121.method1736(WorldListCountry.localPlane, 1, var26 + this.xAxis, var27 + this.zAxis);
+                int var28 = Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var26 + this.xAxis, var27 + this.yAxis);
                 int var30 = var28 > var23 ? var23 : var28;
                 int var31 = var28 > var18 ? var18 : var28;
                 int var32 = var23 <= var13 ? var23 : var13;

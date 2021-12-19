@@ -22,10 +22,10 @@ final class Class3_Sub1 extends Linkable {
         try {
             if (HDToolKit.highDetail) {
                 if (!TextureOperation25.aBoolean3416) {
-                    Class3_Sub2[][][] var1 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638;
-                    for (Class3_Sub2[][] var3 : var1) {
-                        for (Class3_Sub2[] class3_sub2s : var3) {
-                            for (Class3_Sub2 var6 : class3_sub2s) {
+                    TileData[][][] var1 = TileData.aTileDataArrayArrayArray2638;
+                    for (TileData[][] var3 : var1) {
+                        for (TileData[] class3_sub2s : var3) {
+                            for (TileData var6 : class3_sub2s) {
                                 if (var6 != null) {
                                     Class140_Sub1_Sub1 var7;
                                     if (var6.aClass12_2230 != null && var6.aClass12_2230.object instanceof Class140_Sub1_Sub1) {

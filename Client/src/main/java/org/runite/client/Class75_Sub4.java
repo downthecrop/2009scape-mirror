@@ -85,7 +85,7 @@ public final class Class75_Sub4 extends Class75 {
    static void method1352(int var0, boolean var1, int var3, int var4) {
       try {
          if(Unsorted.loadInterface(var3)) {
-            Class158.method2183(-1, var1, var4, var0, GameObject.aClass11ArrayArray1834[var3]);
+            Class158.method2183(-1, var1, var4, var0, GameObject.interfaces1834[var3]);
          }
       } catch (RuntimeException var6) {
          throw ClientErrorException.clientError(var6, "ta.K(" + var0 + ',' + var1 + ',' + -1 + ',' + var3 + ',' + var4 + ')');
@@ -94,15 +94,15 @@ public final class Class75_Sub4 extends Class75 {
 
    static void method1353(SoftwareSprite[] var0, CacheIndex var2) {
       try {
-         WorldMap.aClass153_3210 = var2;
+         GroundItemLink.worldmapIndex_3210 = var2;
          GameObject.aSoftwareSpriteArray1839 = var0;
          Class3_Sub24_Sub4.aBooleanArray3503 = new boolean[GameObject.aSoftwareSpriteArray1839.length];
-         Class134.aLinkedList_1758.method1211(-68);
-         int var3 = WorldMap.aClass153_3210.getArchiveForName(TextCore.aClass94_2304);
-         int[] var4 = WorldMap.aClass153_3210.getFileIds(var3);
+         Class134.aLinkedList_1758.clear();
+         int var3 = GroundItemLink.worldmapIndex_3210.getArchiveForName(TextCore.aString_2304);
+         int[] var4 = GroundItemLink.worldmapIndex_3210.getFileIds(var3);
 
          for(int var5 = 0; var5 < Objects.requireNonNull(var4).length; ++var5) {
-            Class134.aLinkedList_1758.method1215(Class124.method1747(new DataBuffer(WorldMap.aClass153_3210.getFile(var3, var4[var5]))));
+            Class134.aLinkedList_1758.pushBack(Class124.method1747(new DataBuffer(GroundItemLink.worldmapIndex_3210.getFile(var3, var4[var5]))));
          }
 
       } catch (RuntimeException var6) {

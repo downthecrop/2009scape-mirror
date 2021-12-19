@@ -99,7 +99,7 @@ public final class Class53 {
 
     static RSString method1174(RSInterface var0, byte var1) {
         try {
-            return Client.method44(var0).method101() != 0 ? (null != var0.aClass94_245 && var0.aClass94_245.trim(1).length() != 0 ? var0.aClass94_245 : (ClientCommands.commandQaOpEnabled ? TextCore.aClass94_2116 : null)) : null;
+            return Client.method44(var0).method101() != 0 ? (null != var0.aString_245 && var0.aString_245.trim(1).length() != 0 ? var0.aString_245 : (ClientCommands.commandQaOpEnabled ? TextCore.aString_2116 : null)) : null;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "hi.F(" + (var0 != null ? "{...}" : "null") + ',' + var1 + ')');
         }

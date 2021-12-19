@@ -28,30 +28,30 @@ class AudioChannel {
     private int anInt1968 = 32;
 
     static void method2162(GameObject var0, int var1, int var2, int var3) {
-        Class3_Sub2 var4;
-        if (var2 < Unsorted.anInt1234) {
-            var4 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var1][var2 + 1][var3];
+        TileData var4;
+        if (var2 < Unsorted.width1234) {
+            var4 = TileData.aTileDataArrayArrayArray2638[var1][var2 + 1][var3];
             if (var4 != null && var4.aClass12_2230 != null && var4.aClass12_2230.object.method1865()) {
                 var0.method1866(var4.aClass12_2230.object, 128, 0, 0, true);
             }
         }
 
-        if (var3 < Unsorted.anInt1234) {
-            var4 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var1][var2][var3 + 1];
+        if (var3 < Unsorted.width1234) {
+            var4 = TileData.aTileDataArrayArrayArray2638[var1][var2][var3 + 1];
             if (var4 != null && var4.aClass12_2230 != null && var4.aClass12_2230.object.method1865()) {
                 var0.method1866(var4.aClass12_2230.object, 0, 0, 128, true);
             }
         }
 
-        if (var2 < Unsorted.anInt1234 && var3 < TextureOperation17.anInt3179) {
-            var4 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var1][var2 + 1][var3 + 1];
+        if (var2 < Unsorted.width1234 && var3 < TextureOperation17.height3179) {
+            var4 = TileData.aTileDataArrayArrayArray2638[var1][var2 + 1][var3 + 1];
             if (var4 != null && var4.aClass12_2230 != null && var4.aClass12_2230.object.method1865()) {
                 var0.method1866(var4.aClass12_2230.object, 128, 0, 128, true);
             }
         }
 
-        if (var2 < Unsorted.anInt1234 && var3 > 0) {
-            var4 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var1][var2 + 1][var3 - 1];
+        if (var2 < Unsorted.width1234 && var3 > 0) {
+            var4 = TileData.aTileDataArrayArrayArray2638[var1][var2 + 1][var3 - 1];
             if (var4 != null && var4.aClass12_2230 != null && var4.aClass12_2230.object.method1865()) {
                 var0.method1866(var4.aClass12_2230.object, 128, 0, -128, true);
             }

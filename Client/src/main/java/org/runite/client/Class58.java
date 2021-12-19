@@ -43,7 +43,7 @@ public final class Class58 {
     static void method1197(CacheIndex var0) {
         try {
 
-            Class46.aClass153_737 = var0;
+            Class46.configurationsIndex737 = var0;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "id.E(" + (var0 != null ? "{...}" : "null") + ',' + (byte) 69 + ')');
         }

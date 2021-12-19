@@ -83,7 +83,7 @@ final class ItemDefinition {
 	boolean aBoolean807;
 
 	int anInt810;
-	private static RSString aClass94_811;
+	private static RSString aString_811;
 
 	boolean itemContextMenuDebug = true;
 
@@ -93,7 +93,7 @@ final class ItemDefinition {
 			 return false;
 		  } else {
 			 for(int var2 = 0; Class8.anInt104 > var2; ++var2) {
-				if(var0.equalsStringIgnoreCase(Class70.aClass94Array1046[var2])) {
+				if(var0.equalsStringIgnoreCase(Class70.aStringArray1046[var2])) {
 				   return true;
 				}
 			 }
@@ -177,7 +177,7 @@ final class ItemDefinition {
 	   try {
 		  ItemDefinition var2 = (ItemDefinition) QuickChatDefinition.aReferenceCache_3572.get(itemId);
 		  if(var2 == null) {
-			 byte[] var3 = Class97.aClass153_1370.getFile(Class140_Sub2.method1951(itemId), 255 & itemId);
+			 byte[] var3 = Class97.itemConfigIndex_1370.getFile(PositionedGraphicObject.method1951(itemId), 255 & itemId);
 			 var2 = new ItemDefinition();
 			 var2.itemId = itemId;
 			 if(var3 != null) {
@@ -196,9 +196,9 @@ final class ItemDefinition {
 			 if(!Class139.aBoolean1827 && var2.membersItem) {
 				var2.name = TextCore.MembersObject;
 				var2.teamId = 0;
-				var2.inventoryOptions = ClientErrorException.aClass94Array2119;
+				var2.inventoryOptions = ClientErrorException.aStringArray2119;
 				var2.aBoolean807 = false;
-				var2.groundOptions = Unsorted.aClass94Array2596;
+				var2.groundOptions = Unsorted.aStringArray2596;
 			 }
 
 			 QuickChatDefinition.aReferenceCache_3572.put(var2, itemId);
@@ -224,11 +224,11 @@ final class ItemDefinition {
 				return true;
 			} else {
 				boolean var5 = true;
-				if(!LinkableRSString.aClass153_2581.method2129((byte)-75, 0, var3)) {
+				if(!LinkableRSString.modelsIndex_2581.method2129((byte)-75, 0, var3)) {
 					var5 = false;
 				}
 
-				if(var4 != -1 && !LinkableRSString.aClass153_2581.method2129((byte)58, 0, var4)) {
+				if(var4 != -1 && !LinkableRSString.modelsIndex_2581.method2129((byte)58, 0, var4)) {
 					var5 = false;
 				}
 
@@ -241,8 +241,8 @@ final class ItemDefinition {
 
 	static void method1103(CacheIndex var0, CacheIndex var1) {
 		try {
-			NPCDefinition.aClass153_3173 = var0;
-			Class29.aClass153_557 = var1;
+			NPCDefinition.modelsIndex_3137 = var0;
+			Class29.npcConfigIndex_557 = var1;
 		} catch (RuntimeException var4) {
 			throw ClientErrorException.clientError(var4, "h.B(" + (var0 != null?"{...}":"null") + ',' + (var1 != null?"{...}":"null") + ',' + false + ')');
 		}
@@ -316,15 +316,15 @@ final class ItemDefinition {
 				return true;
 			} else {
 				boolean var7 = true;
-				if(!LinkableRSString.aClass153_2581.method2129((byte)-90, 0, var3)) {
+				if(!LinkableRSString.modelsIndex_2581.method2129((byte)-90, 0, var3)) {
 					var7 = false;
 				}
 
-				if(var4 != -1 && !LinkableRSString.aClass153_2581.method2129((byte)-114, 0, var4)) {
+				if(var4 != -1 && !LinkableRSString.modelsIndex_2581.method2129((byte)-114, 0, var4)) {
 					var7 = false;
 				}
 
-				if(-1 != var5 && !LinkableRSString.aClass153_2581.method2129((byte)83, 0, var5)) {
+				if(-1 != var5 && !LinkableRSString.modelsIndex_2581.method2129((byte)83, 0, var5)) {
 					var7 = false;
 				}
 
@@ -401,7 +401,7 @@ final class ItemDefinition {
 
 			Model var11 = (Model)Class143.aReferenceCache_1874.get(this.itemId);
 			if(var11 == null) {
-				Model_Sub1 var12 = Model_Sub1.method2015(LinkableRSString.aClass153_2581, this.anInt755);
+				Model_Sub1 var12 = Model_Sub1.method2015(LinkableRSString.modelsIndex_2581, this.anInt755);
 				if(null == var12) {
 					return null;
 				}
@@ -659,9 +659,9 @@ final class ItemDefinition {
 			if(-1 == var3) {
 				return null;
 			} else {
-				Model_Sub1 var5 = Model_Sub1.method2015(LinkableRSString.aClass153_2581, var3);
+				Model_Sub1 var5 = Model_Sub1.method2015(LinkableRSString.modelsIndex_2581, var3);
 				if(-1 != var4) {
-					Model_Sub1 var6 = Model_Sub1.method2015(LinkableRSString.aClass153_2581, var4);
+					Model_Sub1 var6 = Model_Sub1.method2015(LinkableRSString.modelsIndex_2581, var4);
 					Model_Sub1[] var7 = new Model_Sub1[]{var5, var6};
 					var5 = new Model_Sub1(var7, 2);
 				}
@@ -701,14 +701,14 @@ final class ItemDefinition {
 			if(var3 == -1) {
 				return null;
 			} else {
-				Model_Sub1 var6 = Model_Sub1.method2015(LinkableRSString.aClass153_2581, var3);
+				Model_Sub1 var6 = Model_Sub1.method2015(LinkableRSString.modelsIndex_2581, var3);
 				if(var4 != -1) {
-					Model_Sub1 var7 = Model_Sub1.method2015(LinkableRSString.aClass153_2581, var4);
+					Model_Sub1 var7 = Model_Sub1.method2015(LinkableRSString.modelsIndex_2581, var4);
 					if(-1 == var5) {
 						Model_Sub1[] var8 = new Model_Sub1[]{var6, var7};
 						var6 = new Model_Sub1(var8, 2);
 					} else {
-						Model_Sub1 var12 = Model_Sub1.method2015(LinkableRSString.aClass153_2581, var5);
+						Model_Sub1 var12 = Model_Sub1.method2015(LinkableRSString.modelsIndex_2581, var5);
 						Model_Sub1[] var9 = new Model_Sub1[]{var6, var7, var12};
 						var6 = new Model_Sub1(var9, 3);
 					}
@@ -773,7 +773,7 @@ final class ItemDefinition {
 		try {
 			var0.addMouseListener(Unsorted.aClass149_4047);
 			if(var1) {
-				aClass94_811 = null;
+				aString_811 = null;
 			}
 
 			var0.addMouseMotionListener(Unsorted.aClass149_4047);
@@ -785,7 +785,7 @@ final class ItemDefinition {
 
 	final Class140_Sub1_Sub2 method1120() {
 		try {
-			Model_Sub1 var2 = Model_Sub1.method2015(LinkableRSString.aClass153_2581, this.anInt755);
+			Model_Sub1 var2 = Model_Sub1.method2015(LinkableRSString.modelsIndex_2581, this.anInt755);
 			if(var2 == null) {
 				return null;
 			} else {
@@ -820,7 +820,7 @@ final class ItemDefinition {
 	}
 
 	public ItemDefinition() {
-		this.name = Class40.aClass94_672;
+		this.name = Class40.aString_672;
 		this.wornModelPositionY = 0;
 		this.anInt784 = 0;
 		this.anInt769 = -1;
@@ -869,6 +869,6 @@ final class ItemDefinition {
 			int var4 = var0 / 4;
 			anIntArray781[var1] = var4;
 		}
-		aClass94_811 = RSString.parse("green:");
+		aString_811 = RSString.parse("green:");
 	}
 }

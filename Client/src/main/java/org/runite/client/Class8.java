@@ -28,72 +28,12 @@ public final class Class8 {
         }
     }
 
-    static void method840(ObjectDefinition var0, byte var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8) {
-        try {
-            int var9 = 3 & var3;
-            if (var1 >= -1) {
-                TextCore.aClass94_106 = null;
-            }
-
-            int var10;
-            int var11;
-            if (var9 == 1 || var9 == 3) {
-                var10 = var0.SizeY;
-                var11 = var0.SizeX;
-            } else {
-                var11 = var0.SizeY;
-                var10 = var0.SizeX;
-            }
-
-            int var14;
-            int var15;
-            if (var7 - -var11 > 104) {
-                var15 = 1 + var7;
-                var14 = var7;
-            } else {
-                var14 = var7 - -(var11 >> 1);
-                var15 = var7 - -(1 + var11 >> 1);
-            }
-
-            int var16 = (var6 << 7) - -(var10 << 6);
-            int var17 = (var7 << 7) + (var11 << 6);
-            int var12;
-            int var13;
-            if (104 < var6 - -var10) {
-                var12 = var6;
-                var13 = var6 + 1;
-            } else {
-                var12 = var6 + (var10 >> 1);
-                var13 = (var10 - -1 >> 1) + var6;
-            }
-
-            int[][] var18 = Class44.anIntArrayArrayArray723[var8];
-            int var20 = 0;
-            int var19 = var18[var12][var15] + var18[var12][var14] + var18[var13][var14] + var18[var13][var15] >> 2;
-            int[][] var21;
-            if (var8 != 0) {
-                var21 = Class44.anIntArrayArrayArray723[0];
-                var20 = -(var21[var12][var15] + var21[var13][var14] + (var21[var12][var14] - -var21[var13][var15]) >> 2) + var19;
-            }
-
-            var21 = null;
-            if (3 > var8) {
-                var21 = Class44.anIntArrayArrayArray723[1 + var8];
-            }
-
-            Class136 var22 = var0.method1696(var3, var16, var18, var5, var19, var21, false, null, (byte) -69, true, var17);
-            Class141.method2047(Objects.requireNonNull(var22).aClass109_Sub1_1770, -var4 + var16, var20, var17 + -var2);
-        } catch (RuntimeException var23) {
-            throw ClientErrorException.clientError(var23, "al.K(" + (var0 != null ? "{...}" : "null") + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ',' + var8 + ')');
-        }
-    }
-
     static void method841() {
         try {
             aClass11Array1836 = null;
-            TextureOperation12.method171(-101, ConfigInventoryDefinition.anInt3655, 0, Class23.canvasWidth, 0, -1, Class140_Sub7.canvasHeight, 0, 0);
+            TextureOperation12.method171(-101, ConfigInventoryDefinition.anInt3655, 0, Class23.canvasWidth, 0, -1, GroundItem.canvasHeight, 0, 0);
             if (aClass11Array1836 != null) {
-                Unsorted.method1095(0, Unsorted.anInt1082, Unsorted.anInt3602, aClass11Array1836, Class23.canvasWidth, -1412584499, 0, Class140_Sub7.canvasHeight, (byte) 73, PacketParser.aClass11_88.anInt292);
+                Unsorted.method1095(0, Unsorted.anInt1082, Unsorted.anInt3602, aClass11Array1836, Class23.canvasWidth, -1412584499, 0, GroundItem.canvasHeight, (byte) 73, PacketParser.aClass11_88.anInt292);
                 aClass11Array1836 = null;
             }
 
@@ -130,7 +70,7 @@ public final class Class8 {
     static void method844(byte var0) {
         try {
             if (var0 != -9) {
-                TextCore.aClass94_106 = null;
+                TextCore.aString_106 = null;
             }
 
             if (null == TextureOperation23.anIntArray3212 || null == Class75_Sub2.anIntArray2639) {

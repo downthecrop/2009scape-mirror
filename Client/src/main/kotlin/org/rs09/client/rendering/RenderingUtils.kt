@@ -18,7 +18,7 @@ object RenderingUtils {
 
     // TODO Is this actually the height?
     val height: Int
-        get() = Class140_Sub7.canvasHeight
+        get() = GroundItem.canvasHeight
 
     @JvmStatic
     @Deprecated("Please use the Toolkit methods instead of this delegating method", ReplaceWith("Toolkit.getActiveToolkit().fillRect(x, y, w, h, rgb, alpha)"))

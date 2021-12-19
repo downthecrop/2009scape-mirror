@@ -9,7 +9,7 @@ final class TextureOperation8 extends TextureOperation {
    static int anInt3463;
    static int anInt3464 = 0;
    private final short[] aShortArray3465 = new short[257];
-   static int anInt3466;
+   static int renderDistanceTiles;
    private int[] anIntArray3467;
    static boolean[][] aBooleanArrayArray3468 = new boolean[][]{{true, true, true}, {false, false}, {false, true}, {true, false}, {false, true, true}, {true, false, true}, {false, true, false}, {true, false, false}};
    private int[][] anIntArrayArray3469;
@@ -161,7 +161,7 @@ final class TextureOperation8 extends TextureOperation {
       try {
          TextureOperation13.anInt3362 = -1;
 
-         Class3_Sub4.anInt2251 = var1;
+         Scenery.anInt2251 = var1;
          Class3_Sub5.method117();
       } catch (RuntimeException var3) {
          throw ClientErrorException.clientError(var3, "wi.B(" + -126 + ',' + var1 + ')');

@@ -113,7 +113,7 @@ final class Class67 implements Runnable {
 
             for (int var5 = 0; var1 > var5; ++var5) {
                 if (null == var2[var0 - -var5]) {
-                    var2[var5 + var0] = TextCore.aClass94_3339;
+                    var2[var5 + var0] = TextCore.aString_3339;
                 }
 
                 var4 += var2[var5 + var0].length;

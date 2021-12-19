@@ -8,7 +8,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
    static int[] anIntArray3491 = new int[]{0, -1, 0, 1};
    static int maxClientMemory = 64;
    private final Class3_Sub24_Sub4 aClass3_Sub24_Sub4_3493;
-   static int[] anIntArray3494;
+   static int[] regionIds;
    Class3_Sub24_Sub2 aClass3_Sub24_Sub2_3495 = new Class3_Sub24_Sub2();
 
 
@@ -16,7 +16,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
       try {
          Class3_Sub22 var1;
          do {
-            var1 = (Class3_Sub22)this.aLinkedList_3489.method1221();
+            var1 = (Class3_Sub22)this.aLinkedList_3489.nextIteration();
             if(null == var1) {
                return null;
             }
@@ -30,7 +30,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
 
    final Class3_Sub24 method411() {
       try {
-         Class3_Sub22 var1 = (Class3_Sub22)this.aLinkedList_3489.method1222();
+         Class3_Sub22 var1 = (Class3_Sub22)this.aLinkedList_3489.startIteration();
          return null != var1?(null != var1.aClass3_Sub24_Sub1_2507?var1.aClass3_Sub24_Sub1_2507:this.method414()):null;
       } catch (RuntimeException var2) {
          throw ClientErrorException.clientError(var2, "te.Q()");
@@ -78,7 +78,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
       try {
           if (var0 != null) {
               for (int var2 = 0; var2 < Class3_Sub28_Sub5.anInt3591; ++var2) {
-                  if (var0.equalsStringIgnoreCase(TextureOperation7.aClass94Array3341[var2])) {
+                  if (var0.equalsStringIgnoreCase(TextureOperation7.aStringArray3341[var2])) {
                       return true;
                   }
               }
@@ -109,7 +109,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
       try {
          this.aClass3_Sub24_Sub2_3495.method415(var1);
 
-         for(Class3_Sub22 var3 = (Class3_Sub22)this.aLinkedList_3489.method1222(); var3 != null; var3 = (Class3_Sub22)this.aLinkedList_3489.method1221()) {
+         for(Class3_Sub22 var3 = (Class3_Sub22)this.aLinkedList_3489.startIteration(); var3 != null; var3 = (Class3_Sub22)this.aLinkedList_3489.nextIteration()) {
             if(this.aClass3_Sub24_Sub4_3493.method504(var3, 121)) {
                int var2 = var1;
 
@@ -139,7 +139,7 @@ final class Class3_Sub24_Sub3 extends Class3_Sub24 {
       try {
          this.aClass3_Sub24_Sub2_3495.method413(var1, var2, var3);
 
-         for(Class3_Sub22 var6 = (Class3_Sub22)this.aLinkedList_3489.method1222(); var6 != null; var6 = (Class3_Sub22)this.aLinkedList_3489.method1221()) {
+         for(Class3_Sub22 var6 = (Class3_Sub22)this.aLinkedList_3489.startIteration(); var6 != null; var6 = (Class3_Sub22)this.aLinkedList_3489.nextIteration()) {
             if(this.aClass3_Sub24_Sub4_3493.method504(var6, 126)) {
                int var5 = var3;
                int var4 = var2;

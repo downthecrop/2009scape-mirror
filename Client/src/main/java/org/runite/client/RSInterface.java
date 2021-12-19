@@ -7,7 +7,7 @@ public final class RSInterface {
     Object[] anObjectArray156;
     boolean aBoolean157;
     Object[] anObjectArray158;
-    Object[] anObjectArray159;
+    Object[] interfaceScript159;
     int anInt160 = 1;
     Object[] anObjectArray161;
     byte verticalPos = 0;
@@ -19,8 +19,8 @@ public final class RSInterface {
     public int width;
     short aShort169 = 3000;
     Object[] anObjectArray170;
-    RSString[] aClass94Array171;
-    RSString aClass94_172;
+    RSString[] aStringArray171;
+    RSString aString_172;
     RSString[] options;
     Object[] anObjectArray174;
     int[] anIntArray175;
@@ -90,15 +90,15 @@ public final class RSInterface {
     int anInt240;
     byte verticalResize;
     int anInt242;
-    RSString aClass94_243;
+    RSString aString_243;
     int defHeight;
-    RSString aClass94_245;
+    RSString aString_245;
     static float aFloat246;
     int anInt247;
     Object[] anObjectArray248;
     int[] anIntArray249;
     int anInt250 = 1;
-    static RSString aClass94_251 = null;
+    static RSString aString_251 = null;
     int anInt252;
     int anInt253;
     int[] itemAmounts;
@@ -124,7 +124,7 @@ public final class RSInterface {
     int[] anIntArray274;
     int[] anIntArray275;
     Object[] anObjectArray276;
-    RSString aClass94_277;
+    RSString aString_277;
     static int anInt278 = -1;
     int componentHash;
     int anInt280;
@@ -136,7 +136,7 @@ public final class RSInterface {
     int[] anIntArray286;
     int anInt287;
     int anInt288;
-    RSString aClass94_289;
+    RSString aString_289;
     int anInt290;
     public int[] anIntArray291;
     int anInt292;
@@ -207,7 +207,7 @@ public final class RSInterface {
     final boolean method855() {
         try {
             if (this.anIntArray207 == null) {
-                LDIndexedSprite var2 = Unsorted.method1539(this.spriteArchiveId, Class12.aClass153_323);
+                LDIndexedSprite var2 = Unsorted.method1539(this.spriteArchiveId, Class12.spritesIndex_323);
                 if (null == var2) {
                     return false;
                 } else {
@@ -258,17 +258,17 @@ public final class RSInterface {
     static RSString method856() {
         try {
 
-            RSString var1 = TextCore.aClass94_4052;
+            RSString var1 = TextCore.aString_4052;
             RSString var2 = RSString.parse("");
             if (Class44.paramModeWhere != 0) {
                 var1 = RSString.parse("www)2wtqa");
             }
 
             if (null != Class163_Sub2.paramSettings) {
-                var2 = RSString.stringCombiner(new RSString[]{TextCore.aClass94_3637, Class163_Sub2.paramSettings});
+                var2 = RSString.stringCombiner(new RSString[]{TextCore.aString_3637, Class163_Sub2.paramSettings});
             }
 
-            return RSString.stringCombiner(new RSString[]{TextCore.aClass94_577, var1, TextCore.aClass94_3601, RSString.stringAnimator(Class3_Sub20.paramLanguage), TextCore.aClass94_1932, RSString.stringAnimator(Class3_Sub26.paramAffid), var2, TextCore.aClass94_2735});
+            return RSString.stringCombiner(new RSString[]{TextCore.aString_577, var1, TextCore.aString_3601, RSString.stringAnimator(Class3_Sub20.paramLanguage), TextCore.aString_1932, RSString.stringAnimator(Class3_Sub26.paramAffid), var2, TextCore.aString_2735});
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "be.N(" + true + ')');
         }
@@ -276,16 +276,16 @@ public final class RSInterface {
 
     final void method857(RSString var2, int var3) {
         try {
-            if (null == this.aClass94Array171 || var3 >= this.aClass94Array171.length) {
+            if (null == this.aStringArray171 || var3 >= this.aStringArray171.length) {
                 RSString[] var4 = new RSString[1 + var3];
-                if (null != this.aClass94Array171) {
-                    System.arraycopy(this.aClass94Array171, 0, var4, 0, this.aClass94Array171.length);
+                if (null != this.aStringArray171) {
+                    System.arraycopy(this.aStringArray171, 0, var4, 0, this.aStringArray171.length);
                 }
 
-                this.aClass94Array171 = var4;
+                this.aStringArray171 = var4;
             }
 
-            this.aClass94Array171[var3] = var2;
+            this.aStringArray171[var3] = var2;
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "be.B(" + (byte) 112 + ',' + (var2 != null ? "{...}" : "null") + ',' + var3 + ')');
         }
@@ -432,7 +432,7 @@ public final class RSInterface {
 
         if (this.type == 4) {
             this.text = buffer.readString();
-            this.aClass94_172 = buffer.readString();
+            this.aString_172 = buffer.readString();
         }
 
         if (this.type == 1 || this.type == 3 || 4 == this.type) {
@@ -514,29 +514,29 @@ public final class RSInterface {
         }
 
         if (this.anInt318 == 2 || this.type == 2) {
-            this.aClass94_245 = buffer.readString();
-            this.aClass94_243 = buffer.readString();
+            this.aString_245 = buffer.readString();
+            this.aString_243 = buffer.readString();
             var6 = 63 & buffer.readUnsignedShort();
             var5 |= var6 << 11;
         }
 
         if (this.anInt318 == 1 || this.anInt318 == 4 || this.anInt318 == 5 || this.anInt318 == 6) {
-            this.aClass94_289 = buffer.readString();
-            if (this.aClass94_289.length() == 0) {
+            this.aString_289 = buffer.readString();
+            if (this.aString_289.length() == 0) {
                 if (this.anInt318 == 1) {
-                    this.aClass94_289 = TextCore.HasOK;
+                    this.aString_289 = TextCore.HasOK;
                 }
 
                 if (this.anInt318 == 4) {
-                    this.aClass94_289 = TextCore.HasSelect;
+                    this.aString_289 = TextCore.HasSelect;
                 }
 
                 if (5 == this.anInt318) {
-                    this.aClass94_289 = TextCore.HasSelect;
+                    this.aString_289 = TextCore.HasSelect;
                 }
 
                 if (this.anInt318 == 6) {
-                    this.aClass94_289 = TextCore.HasContinue;
+                    this.aString_289 = TextCore.HasContinue;
                 }
             }
         }
@@ -562,7 +562,7 @@ public final class RSInterface {
                 } else {
                     AbstractSprite var4 = (AbstractSprite) Class114.aReferenceCache_1569.get(var3);
                     if (var4 == null) {
-                        var4 = Unsorted.method602(var3, Class12.aClass153_323);
+                        var4 = Unsorted.method602(var3, Class12.spritesIndex_323);
                         if (null == var4) {
                             aBoolean6 = true;
                         } else {
@@ -582,7 +582,7 @@ public final class RSInterface {
 
     static int method861(int var0, int var1, int var2) {
         try {
-            Class3_Sub25 var3 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var0);
+            Class3_Sub25 var3 = (Class3_Sub25) TileData.aHashTable_2220.get(var0);
             return null == var3 ? -1 : (0 <= var2 && var2 < var3.anIntArray2547.length ? (var1 < 39 ? -69 : var3.anIntArray2547[var2]) : -1);
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "be.J(" + var0 + ',' + var1 + ',' + var2 + ')');
@@ -666,7 +666,7 @@ public final class RSInterface {
                 if (1 == var8) {
                     var10 = (Model) Class3_Sub15.aReferenceCache_2428.get((var8 << 16) - -var9);
                     if (var10 == null) {
-                        Model_Sub1 var18 = Model_Sub1.method2015(Class119.aClass153_1628, var9);
+                        Model_Sub1 var18 = Model_Sub1.method2015(Class119.modelsIndex_1628, var9);
                         if (var18 == null) {
                             aBoolean6 = true;
                             return null;
@@ -757,9 +757,9 @@ public final class RSInterface {
                 if (var6 == null) {
                     SoftwareSprite var7;
                     if (this.aBoolean157) {
-                        var7 = Unsorted.method562(Class12.aClass153_323, archiveId);
+                        var7 = Unsorted.loadSoftwareSprite(Class12.spritesIndex_323, archiveId);
                     } else {
-                        var7 = Class40.method1043(0, Class12.aClass153_323, archiveId);
+                        var7 = Class40.method1043(0, Class12.spritesIndex_323, archiveId);
                     }
 
                     if (null == var7) {
@@ -938,15 +938,15 @@ public final class RSInterface {
             }
         }
 
-        this.aClass94_277 = buffer.readString();
+        this.aString_277 = buffer.readString();
         var5 = buffer.readUnsignedByte();
         int var6 = var5 & 15;
         int var8;
         if (0 < var6) {
-            this.aClass94Array171 = new RSString[var6];
+            this.aStringArray171 = new RSString[var6];
 
             for (var8 = 0; var6 > var8; ++var8) {
-                this.aClass94Array171[var8] = buffer.readString();
+                this.aStringArray171[var8] = buffer.readString();
             }
         }
 
@@ -972,7 +972,7 @@ public final class RSInterface {
         this.anInt179 = buffer.readUnsignedByte();
         this.aBoolean200 = buffer.readUnsignedByte() == 1;
         var8 = -1;
-        this.aClass94_245 = buffer.readString();
+        this.aString_245 = buffer.readString();
         if (0 != (127 & var3 >> 11)) {
             var8 = buffer.readUnsignedShort();
             this.anInt266 = buffer.readUnsignedShort();
@@ -991,7 +991,7 @@ public final class RSInterface {
         }
 
         this.aClass3_Sub1_257 = new Class3_Sub1(var3, var8);
-        this.anObjectArray159 = this.method862(buffer);
+        this.interfaceScript159 = this.method862(buffer);
         this.anObjectArray248 = this.method862(buffer);
         this.anObjectArray281 = this.method862(buffer);
         this.anObjectArray303 = this.method862(buffer);
@@ -1026,7 +1026,7 @@ public final class RSInterface {
             } else {
                 Font var3 = (Font) Unsorted.aReferenceCache_743.get(this.anInt270);
                 if (null == var3) {
-                    var3 = Unsorted.method1300(this.anInt270, Class12.aClass153_323, Class97.aClass153_1378);
+                    var3 = Unsorted.method1300(this.anInt270, Class12.spritesIndex_323, Class97.fontsIndex_1378);
                     if (null == var3) {
                         aBoolean6 = true;
                     } else {
@@ -1051,7 +1051,7 @@ public final class RSInterface {
     }
 
     public RSInterface() {
-        this.aClass94_243 = TextCore.aClass94_2171;
+        this.aString_243 = TextCore.aString_2171;
         this.aBoolean163 = false;
         this.anInt225 = 0;
         this.anInt212 = -1;
@@ -1067,7 +1067,7 @@ public final class RSInterface {
         this.usingScripts = false;
         this.aClass3_Sub1_257 = Class158_Sub1.aClass3_Sub1_2980;
         this.anInt253 = 0;
-        this.text = TextCore.aClass94_2171;
+        this.text = TextCore.aString_2171;
         this.width = 0;
         this.anInt247 = 0;
         this.aBoolean219 = false;
@@ -1077,7 +1077,7 @@ public final class RSInterface {
         this.anInt192 = -1;
         this.anInt222 = 0;
         this.anInt264 = 0;
-        this.aClass94_277 = TextCore.aClass94_2171;
+        this.aString_277 = TextCore.aString_2171;
         this.anInt284 = 0;
         this.defWidth = 0;
         this.anInt285 = 0;
@@ -1086,9 +1086,9 @@ public final class RSInterface {
         this.anInt184 = 0;
         this.anInt223 = 0;
         this.anInt258 = 0;
-        this.aClass94_245 = TextCore.aClass94_2171;
+        this.aString_245 = TextCore.aString_2171;
         this.anInt237 = 0;
-        this.aClass94_172 = TextCore.aClass94_2171;
+        this.aString_172 = TextCore.aString_2171;
         this.anInt288 = 0;
         this.anInt265 = -1;
         this.anInt242 = 0;
@@ -1105,7 +1105,7 @@ public final class RSInterface {
         this.aShort293 = 0;
         this.anInt301 = 0;
         this.animationId = -1;
-        this.aClass94_289 = TextCore.HasOK;
+        this.aString_289 = TextCore.HasOK;
         this.anInt280 = 0;
         this.anInt271 = 0;
         this.anInt292 = -1;

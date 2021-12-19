@@ -39,7 +39,7 @@ public abstract class Class44 {
     }
 
     static Class19 method1068(int var0, int var1, int var2) {
-        Class3_Sub2 var3 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2];
+        TileData var3 = TileData.aTileDataArrayArrayArray2638[var0][var1][var2];
         return var3 == null ? null : var3.aClass19_2233;
     }
 

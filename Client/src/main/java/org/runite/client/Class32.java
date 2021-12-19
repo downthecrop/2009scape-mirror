@@ -9,7 +9,7 @@ final class Class32 {
     static RSString method992(DataBuffer var0) {
         try {
 
-            return Class140_Sub7.method2033(var0);
+            return GroundItem.method2033(var0);
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "fc.C(" + (var0 != null ? "{...}" : "null") + ',' + 29488 + ')');
         }
@@ -37,29 +37,29 @@ final class Class32 {
         int var0;
         int var1;
         int var2;
-        if (Unsorted.aClass3_Sub2ArrayArrayArray4070 != null) {
-            for (var0 = 0; var0 < Unsorted.aClass3_Sub2ArrayArrayArray4070.length; ++var0) {
-                for (var1 = 0; var1 < Unsorted.anInt1234; ++var1) {
-                    for (var2 = 0; var2 < TextureOperation17.anInt3179; ++var2) {
-                        Unsorted.aClass3_Sub2ArrayArrayArray4070[var0][var1][var2] = null;
+        if (Unsorted.aTileDataArrayArrayArray4070 != null) {
+            for (var0 = 0; var0 < Unsorted.aTileDataArrayArrayArray4070.length; ++var0) {
+                for (var1 = 0; var1 < Unsorted.width1234; ++var1) {
+                    for (var2 = 0; var2 < TextureOperation17.height3179; ++var2) {
+                        Unsorted.aTileDataArrayArrayArray4070[var0][var1][var2] = null;
                     }
                 }
             }
         }
 
         Client.aClass3_Sub11ArrayArray2199 = null;
-        if (Class166.aClass3_Sub2ArrayArrayArray2065 != null) {
-            for (var0 = 0; var0 < Class166.aClass3_Sub2ArrayArrayArray2065.length; ++var0) {
-                for (var1 = 0; var1 < Unsorted.anInt1234; ++var1) {
-                    for (var2 = 0; var2 < TextureOperation17.anInt3179; ++var2) {
-                        Class166.aClass3_Sub2ArrayArrayArray2065[var0][var1][var2] = null;
+        if (Class166.aTileDataArrayArrayArray2065 != null) {
+            for (var0 = 0; var0 < Class166.aTileDataArrayArrayArray2065.length; ++var0) {
+                for (var1 = 0; var1 < Unsorted.width1234; ++var1) {
+                    for (var2 = 0; var2 < TextureOperation17.height3179; ++var2) {
+                        Class166.aTileDataArrayArrayArray2065[var0][var1][var2] = null;
                     }
                 }
             }
         }
 
         TextureOperation32.aClass3_Sub11ArrayArray3346 = null;
-        Class3_Sub4.anInt2249 = 0;
+        Scenery.anInt2249 = 0;
         if (Class3_Sub28_Sub8.aClass113Array3610 != null) {
         }
 

@@ -90,7 +90,7 @@ final class Class81 {
                         BufferedDataStream.addChatMessage(RSString.parse(""), 0, TextCore.HasOnOwnIgnoreList, -1);
                     } else {
                         Class114.ignores[Class3_Sub28_Sub5.anInt3591] = var1;
-                        TextureOperation7.aClass94Array3341[Class3_Sub28_Sub5.anInt3591++] = Unsorted.method1052(var1);
+                        TextureOperation7.aStringArray3341[Class3_Sub28_Sub5.anInt3591++] = Unsorted.method1052(var1);
                         Class110.anInt1472 = PacketParser.anInt3213;
                         TextureOperation12.outgoingBuffer.putOpcode(34);
                         TextureOperation12.outgoingBuffer.writeLong(var1);
@@ -129,7 +129,7 @@ final class Class81 {
         try {
             Class57 var2 = (Class57) Class128.aReferenceCache_1683.get(var1);
             if (var2 == null) {
-                byte[] var3 = Class46.aClass153_737.getFile(31, var1);
+                byte[] var3 = Class46.configurationsIndex737.getFile(31, var1);
                 var2 = new Class57();
                 if (var3 != null) {
                     var2.method1190(new DataBuffer(var3), var1);
@@ -154,10 +154,10 @@ final class Class81 {
 
                 for (int var6 = 0; var5.anInt1720 > var6; ++var6) {
                     DataBuffer var7 = new DataBuffer(var2.getFile(var3, var4[var6]));
-                    var5.aClass94Array1721[var6] = var7.readString();
+                    var5.aStringArray1721[var6] = var7.readString();
                     var5.aByteArray1730[var6] = var7.readSignedByte();
-                    var5.aShortArray1727[var6] = (short) var7.readUnsignedShort();
-                    var5.aShortArray1718[var6] = (short) var7.readUnsignedShort();
+                    var5.xArray1727[var6] = (short) var7.readUnsignedShort();
+                    var5.yArray1718[var6] = (short) var7.readUnsignedShort();
                     var5.anIntArray1725[var6] = var7.readInt();
                 }
 

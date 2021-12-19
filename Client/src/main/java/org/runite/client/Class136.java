@@ -56,7 +56,7 @@ final class Class136 {
                                                 var30.anInt2531 = var18;
                                                 var30.anInt2539 = var24;
                                                 var30.anInt2532 = var14.MapIcon;
-                                                aLinkedList_1424.method1215(var30);
+                                                aLinkedList_1424.pushBack(var30);
                                             } else {
                                                 GameObject.aSoftwareSpriteArray1839[var14.MapIcon].drawAt(var18 + -7, -7 + var24);
                                             }
@@ -69,7 +69,7 @@ final class Class136 {
                 }
             }
 
-            for (Class3_Sub23 var32 = (Class3_Sub23) aLinkedList_1424.method1222(); null != var32; var32 = (Class3_Sub23) aLinkedList_1424.method1221()) {
+            for (Class3_Sub23 var32 = (Class3_Sub23) aLinkedList_1424.startIteration(); null != var32; var32 = (Class3_Sub23) aLinkedList_1424.nextIteration()) {
                 Class74.method1330(var32.anInt2531, var32.anInt2539, 15, var13);
                 Class74.method1330(var32.anInt2531, var32.anInt2539, 13, var13);
                 Class74.method1330(var32.anInt2531, var32.anInt2539, 11, var13);
@@ -77,7 +77,7 @@ final class Class136 {
                 GameObject.aSoftwareSpriteArray1839[var32.anInt2532].drawAt(-7 + var32.anInt2531, -7 + var32.anInt2539);
             }
 
-            aLinkedList_1424.method1211(-76);
+            aLinkedList_1424.clear();
         } catch (RuntimeException var31) {
             throw ClientErrorException.clientError(var31, "sm.B(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + 0 + ',' + 0 + ',' + 127 + ',' + var8 + ',' + var9 + ',' + var10 + ')');
         }

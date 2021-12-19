@@ -5,7 +5,7 @@ import org.rs09.client.Linkable;
 final class Class3_Sub7 extends Linkable {
 
     static int[] anIntArray2292 = new int[1000];
-    static int anInt2294;
+    static int viewportY;
     long aLong2295;
 
 
@@ -26,8 +26,8 @@ final class Class3_Sub7 extends Linkable {
 
     static void method122(int var0) {
         try {
-            GameObject.aClass11ArrayArray1834 = new RSInterface[Unsorted.aClass153_3361.method2121()][];
-            Unsorted.aBooleanArray1703 = new boolean[Unsorted.aClass153_3361.method2121()];
+            GameObject.interfaces1834 = new RSInterface[Unsorted.interfacesIndex_3361.method2121()][];
+            Unsorted.aBooleanArray1703 = new boolean[Unsorted.interfacesIndex_3361.method2121()];
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "eb.D(" + var0 + ')');
         }
@@ -36,13 +36,13 @@ final class Class3_Sub7 extends Linkable {
     static RSString itemStackColor(int var0, int var1) {
         try {
             if (100000 > var1) {
-                return RSString.stringCombiner(new RSString[]{ColorCore.DefaultStackColor, RSString.stringAnimator(var1), TextCore.aClass94_1076});
+                return RSString.stringCombiner(new RSString[]{ColorCore.DefaultStackColor, RSString.stringAnimator(var1), TextCore.aString_1076});
             } else {
                 if (var0 != 1000) {
                     itemStackColor(-54, 54);
                 }
 
-                return var1 >= 10000000 ? RSString.stringCombiner(new RSString[]{ColorCore.MillionStackColor, RSString.stringAnimator(var1 / 1000000), TextCore.MillionM, TextCore.aClass94_1076}) : RSString.stringCombiner(new RSString[]{ColorCore.ThousandStackColor, RSString.stringAnimator(var1 / 1000), TextCore.ThousandK, TextCore.aClass94_1076});
+                return var1 >= 10000000 ? RSString.stringCombiner(new RSString[]{ColorCore.MillionStackColor, RSString.stringAnimator(var1 / 1000000), TextCore.MillionM, TextCore.aString_1076}) : RSString.stringCombiner(new RSString[]{ColorCore.ThousandStackColor, RSString.stringAnimator(var1 / 1000), TextCore.ThousandK, TextCore.aString_1076});
             }
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "eb.C(" + var0 + ',' + var1 + ')');

@@ -33,7 +33,7 @@ final class Class75_Sub3 extends Class75 {
       try {
          Class163_Sub2_Sub1.aReferenceCache_4015.sweep(5);
          Class44.aReferenceCache_725.sweep(5);
-         Class140_Sub4.aReferenceCache_2792.sweep(5);
+         Entity.aReferenceCache_2792.sweep(5);
          Unsorted.aReferenceCache_21.sweep(5);
          ObjectDefinition.aReferenceCache_1401.sweep(5);
          Unsorted.aReferenceCache_4051.sweep(5);
@@ -111,7 +111,7 @@ final class Class75_Sub3 extends Class75 {
 
             for(int var2 = 0; Class95.anInt1338 > var2; ++var2) {
                byte[] var4 = Class163_Sub1.aByteArrayArray2987[var2];
-               int var3 = Unsorted.anIntArray3076[var2] * Class140_Sub7.anIntArray2931[var2];
+               int var3 = Unsorted.anIntArray3076[var2] * GroundItem.anIntArray2931[var2];
                if(Class45.aBooleanArray3272[var2]) {
                   int[] var6 = new int[var3];
                   byte[] var5 = Class163_Sub3.aByteArrayArray3005[var2];
@@ -121,9 +121,9 @@ final class Class75_Sub3 extends Class75 {
                   }
 
                   if(HDToolKit.highDetail) {
-                     var1[var2] = new Class3_Sub28_Sub16_Sub1_Sub1(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], Class140_Sub7.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var6);
+                     var1[var2] = new Class3_Sub28_Sub16_Sub1_Sub1(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], GroundItem.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var6);
                   } else {
-                     var1[var2] = new Class3_Sub28_Sub16_Sub2_Sub1(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], Class140_Sub7.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var6);
+                     var1[var2] = new Class3_Sub28_Sub16_Sub2_Sub1(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], GroundItem.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var6);
                   }
                } else {
                   int[] var9 = new int[var3];
@@ -133,9 +133,9 @@ final class Class75_Sub3 extends Class75 {
                   }
 
                   if(HDToolKit.highDetail) {
-                     var1[var2] = new HDSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], Class140_Sub7.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var9);
+                     var1[var2] = new HDSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], GroundItem.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var9);
                   } else {
-                     var1[var2] = new SoftwareSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], Class140_Sub7.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var9);
+                     var1[var2] = new SoftwareSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], GroundItem.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var9);
                   }
                }
             }

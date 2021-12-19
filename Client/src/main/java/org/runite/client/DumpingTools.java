@@ -39,6 +39,8 @@ public class DumpingTools {
             case 21: return String.format("ret %d", arg);
             case 25: return String.format("fetch_varbit %d", arg);
             case 33: return String.format("push_arg %d", arg);
+            case 42: return String.format("load_varc %d", arg);
+            case 43: return String.format("store_varc %d", arg);
             case 3305: return String.format("getcurrentlevel %d", arg);
             case 3306: return String.format("getstaticlevel %d", arg);
             case 3200: return String.format("playsfx %d", arg);

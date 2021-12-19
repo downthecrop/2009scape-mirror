@@ -6,7 +6,7 @@ public final class Class161 {
     static int anInt2027 = -1;
     public static int anInt2028 = 0;
     static Class33 aClass33_2034;
-    static RSString aClass94_2035 = null;
+    static RSString aString_2035 = null;
 
     static void method2200(int var0, int var1, int var2, int var3, int var4, int var5, int var6, int var7) {
         try {

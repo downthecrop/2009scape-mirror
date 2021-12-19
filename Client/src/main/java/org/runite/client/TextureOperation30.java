@@ -70,7 +70,7 @@ final class TextureOperation30 extends TextureOperation {
 
                   for(int var4 = var3; var4 < Class3_Sub28_Sub5.anInt3591; ++var4) {
                      Class114.ignores[var4] = Class114.ignores[var4 + 1];
-                     TextureOperation7.aClass94Array3341[var4] = TextureOperation7.aClass94Array3341[1 + var4];
+                     TextureOperation7.aStringArray3341[var4] = TextureOperation7.aStringArray3341[1 + var4];
                   }
 
                   Class110.anInt1472 = PacketParser.anInt3213;
@@ -96,7 +96,7 @@ final class TextureOperation30 extends TextureOperation {
       var9.aClass140_1067 = var7;
       var9.aClass140_1069 = var8;
       int var10 = 0;
-      Class3_Sub2 var11 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2];
+      TileData var11 = TileData.aTileDataArrayArrayArray2638[var0][var1][var2];
       if(var11 != null) {
          for(int var12 = 0; var12 < var11.anInt2223; ++var12) {
             Class25 var13 = var11.aClass25Array2221[var12];
@@ -110,11 +110,11 @@ final class TextureOperation30 extends TextureOperation {
       }
 
       var9.anInt1077 = -var10;
-      if(Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2] == null) {
-         Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2] = new Class3_Sub2(var0, var1, var2);
+      if(TileData.aTileDataArrayArrayArray2638[var0][var1][var2] == null) {
+         TileData.aTileDataArrayArrayArray2638[var0][var1][var2] = new TileData(var0, var1, var2);
       }
 
-      Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2].aClass72_2245 = var9;
+      TileData.aTileDataArrayArrayArray2638[var0][var1][var2].aClass72_2245 = var9;
    }
 
    static void method214(GameObject var0, int var1, int var2, int var3, int var4, int var5) {
@@ -127,10 +127,10 @@ final class TextureOperation30 extends TextureOperation {
       for(int var11 = var1; var11 <= var1 + 1; ++var11) {
          if(var11 != Class3_Sub17.anInt2456) {
             for(int var12 = var7; var12 <= var8; ++var12) {
-               if(var12 >= 0 && var12 < Unsorted.anInt1234) {
+               if(var12 >= 0 && var12 < Unsorted.width1234) {
                   for(int var13 = var9; var13 <= var10; ++var13) {
-                     if(var13 >= 0 && var13 < TextureOperation17.anInt3179 && (!var6 || var12 >= var8 || var13 >= var10 || var13 < var3 && var12 != var2)) {
-                        Class3_Sub2 var14 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var11][var12][var13];
+                     if(var13 >= 0 && var13 < TextureOperation17.height3179 && (!var6 || var12 >= var8 || var13 >= var10 || var13 < var3 && var12 != var2)) {
+                        TileData var14 = TileData.aTileDataArrayArrayArray2638[var11][var12][var13];
                         if(var14 != null) {
                            int var15 = (Class44.anIntArrayArrayArray723[var11][var12][var13] + Class44.anIntArrayArrayArray723[var11][var12 + 1][var13] + Class44.anIntArrayArrayArray723[var11][var12][var13 + 1] + Class44.anIntArrayArrayArray723[var11][var12 + 1][var13 + 1]) / 4 - (Class44.anIntArrayArrayArray723[var1][var2][var3] + Class44.anIntArrayArrayArray723[var1][var2 + 1][var3] + Class44.anIntArrayArrayArray723[var1][var2][var3 + 1] + Class44.anIntArrayArrayArray723[var1][var2 + 1][var3 + 1]) / 4;
                            Class70 var16 = var14.aClass70_2234;

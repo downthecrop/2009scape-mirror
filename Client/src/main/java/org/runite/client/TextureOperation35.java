@@ -14,7 +14,7 @@ final class TextureOperation35 extends TextureOperation {
 		try {
 			Texture.anIntArray3327 = null;
 			Texture.anIntArray3337 = null;
-			Texture.aClass94Array3317 = null;
+			Texture.aStringArray3317 = null;
 			anIntArray3328 = null;
 			Texture.anIntArray3319 = null;
 			aByteArrayArray3335 = null;

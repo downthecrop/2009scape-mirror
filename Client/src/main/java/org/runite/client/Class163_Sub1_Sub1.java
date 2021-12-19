@@ -21,14 +21,14 @@ public final class Class163_Sub1_Sub1 extends Class163_Sub1 {
     static void method2214() {
         try {
 
-            if (NPC.method1986(90) || WorldListCountry.localPlane == Class140_Sub3.anInt2745) {
+            if (NPC.isHighDetail(90) || WorldListCountry.localPlane == Class140_Sub3.viewportZ) {
                 if (Class58.anInt909 != WorldListCountry.localPlane && Class3_Sub19.method385(WorldListCountry.localPlane)) {
                     Class58.anInt909 = WorldListCountry.localPlane;
                     Unsorted.method792();
                 }
 
             } else {
-                Unsorted.method1301(WorldListCountry.localPlane, Class3_Sub7.anInt2294, Unsorted.anInt3606, Class102.player.anIntArray2755[0], false, Class102.player.anIntArray2767[0]);
+                Unsorted.method1301(WorldListCountry.localPlane, Class3_Sub7.viewportY, Unsorted.viewportX, Class102.player.yOffsets2755[0], false, Class102.player.xOffsets2767[0]);
             }
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "ch.E(" + 0 + ')');

@@ -8,8 +8,8 @@ import java.util.Random;
 
 public abstract class Font extends Node {
 
-    private static final RSString[] aClass94Array3753 = new RSString[100];
-    private static final RSString aClass94_3745 = Unsorted.emptyString(100);
+    private static final RSString[] aStringArray3753 = new RSString[100];
+    private static final RSString aString_3745 = Unsorted.emptyString(100);
 
     private static int anInt3746 = -1;
     private static int anInt3747 = -1;
@@ -239,11 +239,11 @@ public abstract class Font extends Node {
     abstract void method679(int var1, int var2, int var3, int var4, int var5, int var6, int var7);
 
     public final int method680(RSString var1, int var2) {
-        int var3 = this.method691(var1, new int[]{var2}, aClass94Array3753);
+        int var3 = this.method691(var1, new int[]{var2}, aStringArray3753);
         int var4 = 0;
 
         for (int var5 = 0; var5 < var3; ++var5) {
-            int var6 = this.method682(aClass94Array3753[var5]);
+            int var6 = this.method682(aStringArray3753[var5]);
             if (var6 > var4) {
                 var4 = var6;
             }
@@ -345,7 +345,7 @@ public abstract class Font extends Node {
     }
 
     public final int method684(RSString var1, int var2) {
-        return this.method691(var1, new int[]{var2}, aClass94Array3753);
+        return this.method691(var1, new int[]{var2}, aStringArray3753);
     }
 
     private void method685(RSString var1) {
@@ -421,7 +421,7 @@ public abstract class Font extends Node {
         if (var1 == null) {
             return 0;
         } else {
-            aClass94_3745.method1553(0);
+            aString_3745.method1553(0);
             int var4 = 0;
             int var5 = 0;
             int var6 = -1;
@@ -440,19 +440,19 @@ public abstract class Font extends Node {
                     if (var14 == 62 && var9 != -1) {
                         RSString var15 = var1.substring(var9 + 1, var13, 0);
                         var9 = -1;
-                        aClass94_3745.appendCharacter(60);
-                        aClass94_3745.append(var15);
-                        aClass94_3745.appendCharacter(62);
+                        aString_3745.appendCharacter(60);
+                        aString_3745.append(var15);
+                        aString_3745.appendCharacter(62);
                         if (var15.equalsString(RSString.parse("br"))) {
                             if (var3[var11] == null) {
-                                var3[var11] = aClass94_3745.method1563(101).substring(var5, aClass94_3745.length(), 0);
+                                var3[var11] = aString_3745.method1563(101).substring(var5, aString_3745.length(), 0);
                             } else {
                                 var3[var11].method1553(0);
-                                var3[var11].method1542(aClass94_3745, var5, aClass94_3745.length());
+                                var3[var11].method1542(aString_3745, var5, aString_3745.length());
                             }
 
                             ++var11;
-                            var5 = aClass94_3745.length();
+                            var5 = aString_3745.length();
                             var4 = 0;
                             var6 = -1;
                             var10 = 0;
@@ -526,7 +526,7 @@ public abstract class Font extends Node {
 
                     if (var9 == -1) {
                         if (var14 != 0) {
-                            aClass94_3745.appendCharacter(var14);
+                            aString_3745.appendCharacter(var14);
                             var4 += this.anIntArray3736[var14];
                             if (this.aByteArray3733 != null && var10 != 0) {
                                 var4 += this.aByteArray3733[(var10 << 8) + var14];
@@ -536,17 +536,17 @@ public abstract class Font extends Node {
                         }
 
                         if (var14 == 32) {
-                            var6 = aClass94_3745.length();
+                            var6 = aString_3745.length();
                             var7 = var4;
                             var8 = 1;
                         }
 
                         if (var2 != null && var4 > var2[var11 < var2.length ? var11 : var2.length - 1] && var6 >= 0) {
                             if (var3[var11] == null) {
-                                var3[var11] = aClass94_3745.method1563(88).substring(var5, var6 - var8, 0);
+                                var3[var11] = aString_3745.method1563(88).substring(var5, var6 - var8, 0);
                             } else {
                                 var3[var11].method1553(0);
-                                var3[var11] = var3[var11].method1542(aClass94_3745, var5, var6 - var8);
+                                var3[var11] = var3[var11].method1542(aString_3745, var5, var6 - var8);
                             }
 
                             ++var11;
@@ -557,7 +557,7 @@ public abstract class Font extends Node {
                         }
 
                         if (var14 == 45) {
-                            var6 = aClass94_3745.length();
+                            var6 = aString_3745.length();
                             var7 = var4;
                             var8 = 0;
                         }
@@ -565,12 +565,12 @@ public abstract class Font extends Node {
                 }
             }
 
-            if (aClass94_3745.length() > var5) {
+            if (aString_3745.length() > var5) {
                 if (var3[var11] == null) {
-                    var3[var11] = aClass94_3745.method1563(94).substring(var5, aClass94_3745.length(), 0);
+                    var3[var11] = aString_3745.method1563(94).substring(var5, aString_3745.length(), 0);
                 } else {
                     var3[var11].method1553(0);
-                    var3[var11] = var3[var11].method1542(aClass94_3745, var5, aClass94_3745.length());
+                    var3[var11] = var3[var11].method1542(aString_3745, var5, aString_3745.length());
                 }
 
                 ++var11;
@@ -613,7 +613,7 @@ public abstract class Font extends Node {
                 var12 = null;
             }
 
-            int var13 = this.method691(var1, var12, aClass94Array3753);
+            int var13 = this.method691(var1, var12, aStringArray3753);
             if (var10 == 3 && var13 == 1) {
                 var10 = 1;
             }
@@ -638,16 +638,16 @@ public abstract class Font extends Node {
 
             for (var15 = 0; var15 < var13; ++var15) {
                 if (var9 == 0) {
-                    this.method677(aClass94Array3753[var15], var2, var14);
+                    this.method677(aStringArray3753[var15], var2, var14);
                 } else if (var9 == 1) {
-                    this.method677(aClass94Array3753[var15], var2 + (var4 - this.method682(aClass94Array3753[var15])) / 2, var14);
+                    this.method677(aStringArray3753[var15], var2 + (var4 - this.method682(aStringArray3753[var15])) / 2, var14);
                 } else if (var9 == 2) {
-                    this.method677(aClass94Array3753[var15], var2 + var4 - this.method682(aClass94Array3753[var15]), var14);
+                    this.method677(aStringArray3753[var15], var2 + var4 - this.method682(aStringArray3753[var15]), var14);
                 } else if (var15 == var13 - 1) {
-                    this.method677(aClass94Array3753[var15], var2, var14);
+                    this.method677(aStringArray3753[var15], var2, var14);
                 } else {
-                    this.method690(aClass94Array3753[var15], var4);
-                    this.method677(aClass94Array3753[var15], var2, var14);
+                    this.method690(aStringArray3753[var15], var4);
+                    this.method677(aStringArray3753[var15], var2, var14);
                     anInt3756 = 0;
                 }
 

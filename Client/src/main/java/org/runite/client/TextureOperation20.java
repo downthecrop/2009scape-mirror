@@ -19,7 +19,7 @@ final class TextureOperation20 extends TextureOperation {
     private int anInt3147 = 4;
    static int paramModeWhat = 0;
    private int anInt3149 = 4;
-   static CacheIndex aClass153_3154;
+   static CacheIndex configurationsIndex_3154;
    static int anInt3156 = -1;
 
 
@@ -99,15 +99,15 @@ final class TextureOperation20 extends TextureOperation {
 
    static Class24 method231(int var0) {
       try {
-         Class24 var2 = (Class24)Class140_Sub4.aReferenceCache_2792.get(var0);
+         Class24 var2 = (Class24)Entity.aReferenceCache_2792.get(var0);
          if(var2 == null) {
-            byte[] var3 = LoginHandler.aClass153_1680.getFile(3, var0);
+            byte[] var3 = LoginHandler.configurationsIndex_1680.getFile(3, var0);
             var2 = new Class24();
             if(null != var3) {
                var2.method952(new DataBuffer(var3));
             }
 
-            Class140_Sub4.aReferenceCache_2792.put(var2, var0);
+            Entity.aReferenceCache_2792.put(var2, var0);
 
          }
          return var2;
@@ -119,7 +119,7 @@ final class TextureOperation20 extends TextureOperation {
    static void method232(int var0) {
       try {
          if(Unsorted.loadInterface(var0)) {
-            RSInterface[] var2 = GameObject.aClass11ArrayArray1834[var0];
+            RSInterface[] var2 = GameObject.interfaces1834[var0];
 
             for(int var3 = 0; var3 < var2.length; ++var3) {
                RSInterface var4 = var2[var3];
@@ -170,10 +170,10 @@ final class TextureOperation20 extends TextureOperation {
    static void method233(int var0, CacheIndex var1) {
       try {
          if(var0 != 28280) {
-            aClass153_3154 = null;
+            configurationsIndex_3154 = null;
          }
 
-         NPC.anInt4001 = var1.getArchiveForName(TextCore.aClass94_119);
+         NPC.anInt4001 = var1.getArchiveForName(TextCore.aString_119);
       } catch (RuntimeException var3) {
          throw ClientErrorException.clientError(var3, "gg.R(" + var0 + ',' + (var1 != null?"{...}":"null") + ')');
       }
@@ -426,7 +426,7 @@ final class TextureOperation20 extends TextureOperation {
 
                Class163_Sub1_Sub1.method2214();
                if(Class143.gameStage == 30) {
-                  MouseListeningClass.method2087();
+                  Scenery.cleanupOldScenery();
                   Class115.method1713();
                   AudioHandler.method132();
                   ++AbstractSprite.anInt3699;
@@ -446,14 +446,14 @@ final class TextureOperation20 extends TextureOperation {
                      }
 
                      int nodeModelID;
-                     for(InterfaceWidget var16 = Unsorted.method1302(); var16 != null; var16 = Unsorted.method1302()) {
+                     for(InterfaceWidget var16 = Unsorted.popNextInterfaceWidget(); var16 != null; var16 = Unsorted.popNextInterfaceWidget()) {
                         var3 = var16.e();
                         var4 = var16.f();
                         if(1 == var3) {
-                           NPCDefinition.anIntArray1277[var4] = var16.anInt3598;
+                           NPCDefinition.varcArray[var4] = var16.anInt3598;
                            NPC.anIntArray3986[Unsorted.bitwiseAnd(31, PacketParser.anInt87++)] = var4;
                         } else if(var3 == 2) {
-                           Class132.aClass94Array1739[var4] = var16.text;
+                           Class132.aStringArray1739[var4] = var16.text;
                            Class163_Sub2_Sub1.anIntArray4025[Unsorted.bitwiseAnd(31, Client.anInt2317++)] = var4;
                         } else {
                            RSInterface var20;
@@ -659,7 +659,7 @@ final class TextureOperation20 extends TextureOperation {
 
                      Class3_Sub28_Sub3.aClass11_3551 = null;
                      if(ConfigInventoryDefinition.anInt3655 != -1) {
-                        GraphicDefinition.method967(0, 0, 0, Class23.canvasWidth, ConfigInventoryDefinition.anInt3655, 0, Class140_Sub7.canvasHeight);
+                        GraphicDefinition.method967(0, 0, 0, Class23.canvasWidth, ConfigInventoryDefinition.anInt3655, 0, GroundItem.canvasHeight);
                      }
 
                      ++PacketParser.anInt3213;
@@ -691,12 +691,12 @@ final class TextureOperation20 extends TextureOperation {
                                              var5 = 3;
                                           }
 
-                                          Class30.method979(Class102.player.anIntArray2767[0] + Class131.anInt1716, Class102.player.anIntArray2755[0] + Texture.anInt1152, var5);
+                                          Class30.method979(Class102.player.xOffsets2767[0] + Class131.x1716, Class102.player.yOffsets2755[0] + Texture.y1152, var5);
                                        }
 
                                        if(Player.rights > 0 && ObjectDefinition.aBooleanArray1490[82] && ObjectDefinition.aBooleanArray1490[81]) {
                                           if(-1 != Class27.anInt515) {
-                                             Class30.method979(Class131.anInt1716 + Class27.anInt515, Texture.anInt1152 - -Unsorted.anInt999, WorldListCountry.localPlane);
+                                             Class30.method979(Class131.x1716 + Class27.anInt515, Texture.y1152 - -Unsorted.anInt999, WorldListCountry.localPlane);
                                           }
 
                                           ObjectDefinition.anInt1521 = 0;
@@ -705,9 +705,9 @@ final class TextureOperation20 extends TextureOperation {
                                           if(Class27.anInt515 != -1) {
                                              TextureOperation12.outgoingBuffer.putOpcode(131);
                                              TextureOperation12.outgoingBuffer.writeIntV2(BufferedDataStream.anInt872);
-                                             TextureOperation12.outgoingBuffer.putShortA(Class131.anInt1716 + Class27.anInt515);
+                                             TextureOperation12.outgoingBuffer.putShortA(Class131.x1716 + Class27.anInt515);
                                              TextureOperation12.outgoingBuffer.writeShort128LE(RSInterface.anInt278);
-                                             TextureOperation12.outgoingBuffer.putShortA(Unsorted.anInt999 + Texture.anInt1152);
+                                             TextureOperation12.outgoingBuffer.putShortA(Unsorted.anInt999 + Texture.y1152);
                                              Class36.anInt638 = 1;
                                              Unsorted.anInt2958 = 0;
                                              Unsorted.anInt4062 = Class38_Sub1.anInt2614;
@@ -718,8 +718,8 @@ final class TextureOperation20 extends TextureOperation {
                                        } else if(2 == ObjectDefinition.anInt1521) {
                                           if(-1 != Class27.anInt515) {
                                              TextureOperation12.outgoingBuffer.putOpcode(179);
-                                             TextureOperation12.outgoingBuffer.writeShort(Texture.anInt1152 + Unsorted.anInt999);
-                                             TextureOperation12.outgoingBuffer.writeShort(Class27.anInt515 + Class131.anInt1716);
+                                             TextureOperation12.outgoingBuffer.writeShort(Texture.y1152 + Unsorted.anInt999);
+                                             TextureOperation12.outgoingBuffer.writeShort(Class27.anInt515 + Class131.x1716);
                                              Unsorted.anInt2958 = 0;
                                              Class36.anInt638 = 1;
                                              Class70.anInt1053 = Class163_Sub1.anInt2993;
@@ -728,7 +728,7 @@ final class TextureOperation20 extends TextureOperation {
 
                                           ObjectDefinition.anInt1521 = 0;
                                        } else if(-1 != Class27.anInt515 && 0 == CS2Script.anInt2440 && ObjectDefinition.anInt1521 == 0) {
-                                          boolean var27 = Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, true, 0, 2, Class27.anInt515, 0, 0, 0, Unsorted.anInt999, Class102.player.anIntArray2767[0]);
+                                          boolean var27 = Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 0, true, 0, 2, Class27.anInt515, 0, 0, 0, Unsorted.anInt999, Class102.player.xOffsets2767[0]);
                                           if(var27) {
                                              Unsorted.anInt4062 = Class38_Sub1.anInt2614;
                                              Unsorted.anInt2958 = 0;
@@ -792,10 +792,10 @@ final class TextureOperation20 extends TextureOperation {
 
                                        if(AudioThread.aClass64_351 != null && AudioThread.aClass64_351.anInt978 == 1) {
                                           if(null != AudioThread.aClass64_351.anObject974) {
-                                             Class99.method1596(TextureOperation5.aClass94_3295, (byte)126, Unsorted.aBoolean2154);
+                                             Class99.method1596(TextureOperation5.aString_3295, (byte)126, Unsorted.aBoolean2154);
                                           }
 
-                                          TextureOperation5.aClass94_3295 = null;
+                                          TextureOperation5.aString_3295 = null;
                                           AudioThread.aClass64_351 = null;
                                           Unsorted.aBoolean2154 = false;
                                        }

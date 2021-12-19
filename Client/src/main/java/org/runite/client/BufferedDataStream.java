@@ -7,7 +7,7 @@ import java.util.Objects;
 public final class BufferedDataStream extends DataBuffer {
 
     public static BufferedDataStream incomingBuffer = new BufferedDataStream();
-    static RSString[] aClass94Array3802;
+    static RSString[] aStringArray3802;
     static int anInt872;
     static int anInt2330 = 0;
     static float aFloat3044;
@@ -23,7 +23,7 @@ public final class BufferedDataStream extends DataBuffer {
     private ISAACCipher isaacCipher;
     static int[] anIntArray3804 = new int[256];
     static int[] anIntArray3805;
-    private int headiconsPrayerSpriteArchive6;
+    private int bitIndex;
 
 
     static void addChatMessage(RSString var0, int type, RSString message, int var3) {
@@ -50,7 +50,7 @@ public final class BufferedDataStream extends DataBuffer {
                 if (31 == var4) {
                     var8 = Unsorted.players[var5];
                     if (null != var8) {
-                        Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var8.anIntArray2767[0], 1, 0, 2, var8.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                        Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var8.xOffsets2767[0], 1, 0, 2, var8.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                         Class36.anInt638 = 2;
                         Unsorted.anInt2958 = 0;
                         Class70.anInt1053 = Class163_Sub1.anInt2993;
@@ -63,8 +63,8 @@ public final class BufferedDataStream extends DataBuffer {
                 if (var4 == 46) {
                     Class163_Sub2_Sub1.method2224(var6, var3, var2);
                     TextureOperation12.outgoingBuffer.putOpcode(247);
-                    TextureOperation12.outgoingBuffer.writeShortLE(Texture.anInt1152 + var3);
-                    TextureOperation12.outgoingBuffer.writeShort128LE(var2 + Class131.anInt1716);
+                    TextureOperation12.outgoingBuffer.writeShortLE(Texture.y1152 + var3);
+                    TextureOperation12.outgoingBuffer.writeShort128LE(var2 + Class131.x1716);
                     TextureOperation12.outgoingBuffer.writeShort(Integer.MAX_VALUE & (int) (var6 >>> 32));
                 }
 
@@ -86,7 +86,7 @@ public final class BufferedDataStream extends DataBuffer {
                 if (var4 == 19) {
                     var11 = NPC.npcs[var5];
                     if (null != var11) {
-                        Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var11.anIntArray2767[0], 1, 0, 2, var11.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                        Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var11.xOffsets2767[0], 1, 0, 2, var11.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                         Class70.anInt1053 = Class163_Sub1.anInt2993;
                         Class36.anInt638 = 2;
                         Unsorted.anInt2958 = 0;
@@ -99,7 +99,7 @@ public final class BufferedDataStream extends DataBuffer {
                 if (17 == var4) {
                     var11 = NPC.npcs[var5];
                     if (var11 != null) {
-                        Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var11.anIntArray2767[0], 1, 0, 2, var11.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                        Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var11.xOffsets2767[0], 1, 0, 2, var11.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                         Class70.anInt1053 = Class163_Sub1.anInt2993;
                         Unsorted.anInt2958 = 0;
                         Class36.anInt638 = 2;
@@ -112,7 +112,7 @@ public final class BufferedDataStream extends DataBuffer {
                 if (var4 == 44) {
                     var8 = Unsorted.players[var5];
                     if (null != var8) {
-                        Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var8.anIntArray2767[0], 1, 0, 2, var8.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                        Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var8.xOffsets2767[0], 1, 0, 2, var8.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                         Class70.anInt1053 = Class163_Sub1.anInt2993;
                         Class36.anInt638 = 2;
                         Unsorted.anInt4062 = Class38_Sub1.anInt2614;
@@ -135,9 +135,9 @@ public final class BufferedDataStream extends DataBuffer {
                 if (var4 == 42) {
                     Class163_Sub2_Sub1.method2224(var6, var3, var2);
                     TextureOperation12.outgoingBuffer.putOpcode(254);
-                    TextureOperation12.outgoingBuffer.writeShortLE(var2 + Class131.anInt1716);
+                    TextureOperation12.outgoingBuffer.writeShortLE(var2 + Class131.x1716);
                     TextureOperation12.outgoingBuffer.putShortA((int) (var6 >>> 32) & Integer.MAX_VALUE);
-                    TextureOperation12.outgoingBuffer.writeShort(var3 - -Texture.anInt1152);
+                    TextureOperation12.outgoingBuffer.writeShort(var3 - -Texture.y1152);
                 }
 
                 if (28 == var4) {
@@ -147,7 +147,7 @@ public final class BufferedDataStream extends DataBuffer {
                 if (var4 == 45) {
                     var11 = NPC.npcs[var5];
                     if (var11 != null) {
-                        Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var11.anIntArray2767[0], 1, 0, 2, var11.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                        Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var11.xOffsets2767[0], 1, 0, 2, var11.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                         Class70.anInt1053 = Class163_Sub1.anInt2993;
                         Class36.anInt638 = 2;
                         Unsorted.anInt2958 = 0;
@@ -162,11 +162,11 @@ public final class BufferedDataStream extends DataBuffer {
                 boolean var14;
                 if (18 == var4) {
                     if (Class158.paramGameTypeID == 1) {
-                        Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                        Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.xOffsets2767[0]);
                     } else {
-                        var14 = Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, false, 0, 2597 ^ 2599, var2, 0, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                        var14 = Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 0, false, 0, 2597 ^ 2599, var2, 0, 0, 2, var3, Class102.player.xOffsets2767[0]);
                         if (!var14) {
-                            Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                            Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.xOffsets2767[0]);
                         }
                     }
 
@@ -175,17 +175,17 @@ public final class BufferedDataStream extends DataBuffer {
                     Class36.anInt638 = 2;
                     Unsorted.anInt4062 = Class38_Sub1.anInt2614;
                     TextureOperation12.outgoingBuffer.putOpcode(66);
-                    TextureOperation12.outgoingBuffer.writeShortLE(Class131.anInt1716 + var2);
+                    TextureOperation12.outgoingBuffer.writeShortLE(Class131.x1716 + var2);
                     TextureOperation12.outgoingBuffer.writeShort(var5);
-                    TextureOperation12.outgoingBuffer.writeShort128LE(var3 - -Texture.anInt1152);
+                    TextureOperation12.outgoingBuffer.writeShort128LE(var3 - -Texture.y1152);
                 }
 
                 if (var4 == 1001) {
                     Class163_Sub2_Sub1.method2224(var6, var3, var2);
                     TextureOperation12.outgoingBuffer.putOpcode(170);
                     TextureOperation12.outgoingBuffer.writeShort128LE(Integer.MAX_VALUE & (int) (var6 >>> 32));
-                    TextureOperation12.outgoingBuffer.writeShort128LE(var2 - -Class131.anInt1716);
-                    TextureOperation12.outgoingBuffer.writeShort128LE(var3 - -Texture.anInt1152);
+                    TextureOperation12.outgoingBuffer.writeShort128LE(var2 - -Class131.x1716);
+                    TextureOperation12.outgoingBuffer.writeShort128LE(var3 - -Texture.y1152);
                 }
 
                 if (var4 == 1002) {
@@ -201,7 +201,7 @@ public final class BufferedDataStream extends DataBuffer {
                 if (var4 == 1006) {
                     var13 = Unsorted.getRSInterface(var3);
                     if (null != var13 && var13.itemIds[var2] >= 100000) {
-                        addChatMessage(RSString.parse(""), 0, RSString.stringCombiner(new RSString[]{RSString.stringAnimator(var13.itemIds[var2]), TextCore.aClass94_3777, ItemDefinition.getItemDefinition(var5).name}), -1);
+                        addChatMessage(RSString.parse(""), 0, RSString.stringCombiner(new RSString[]{RSString.stringAnimator(var13.itemIds[var2]), TextCore.aString_3777, ItemDefinition.getItemDefinition(var5).name}), -1);
                     } else {
                         TextureOperation12.outgoingBuffer.putOpcode(92);
                         TextureOperation12.outgoingBuffer.writeShort128LE(var5);
@@ -217,8 +217,8 @@ public final class BufferedDataStream extends DataBuffer {
                         Unsorted.method589(WorldListCountry.localPlane, var2, var3);
                     } else if (var5 == 1) {
                         if (0 < Player.rights && ObjectDefinition.aBooleanArray1490[82] && ObjectDefinition.aBooleanArray1490[81]) {
-                            Class30.method979(Class131.anInt1716 + var2, Texture.anInt1152 + var3, WorldListCountry.localPlane);
-                        } else if (Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, true, 0, 2, var2, 0, 0, 1, var3, Class102.player.anIntArray2767[0])) {
+                            Class30.method979(Class131.x1716 + var2, Texture.y1152 + var3, WorldListCountry.localPlane);
+                        } else if (Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 0, true, 0, 2, var2, 0, 0, 1, var3, Class102.player.xOffsets2767[0])) {
                             TextureOperation12.outgoingBuffer.writeByte(Class1.anInt56);
                             TextureOperation12.outgoingBuffer.writeByte(Class58.anInt916);
                             TextureOperation12.outgoingBuffer.writeShort(GraphicDefinition.CAMERA_DIRECTION);
@@ -227,7 +227,7 @@ public final class BufferedDataStream extends DataBuffer {
                             TextureOperation12.outgoingBuffer.writeByte(Class164_Sub2.anInt3020);
                             TextureOperation12.outgoingBuffer.writeByte(89);
                             TextureOperation12.outgoingBuffer.writeShort(Class102.player.xAxis);
-                            TextureOperation12.outgoingBuffer.writeShort(Class102.player.zAxis);
+                            TextureOperation12.outgoingBuffer.writeShort(Class102.player.yAxis);
                             TextureOperation12.outgoingBuffer.writeByte(Class129.anInt1692);
                             TextureOperation12.outgoingBuffer.writeByte(63);
                         }
@@ -290,7 +290,7 @@ public final class BufferedDataStream extends DataBuffer {
                 if (var4 == 10) {
                     var8 = Unsorted.players[var5];
                     if (var8 != null) {
-                        Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var8.anIntArray2767[0], 1, 0, 2, var8.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                        Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var8.xOffsets2767[0], 1, 0, 2, var8.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                         Class36.anInt638 = 2;
                         Unsorted.anInt4062 = Class38_Sub1.anInt2614;
                         Class70.anInt1053 = Class163_Sub1.anInt2993;
@@ -310,8 +310,8 @@ public final class BufferedDataStream extends DataBuffer {
                     Class163_Sub2_Sub1.method2224(var6, var3, var2);
                     TextureOperation12.outgoingBuffer.putOpcode(84);
                     TextureOperation12.outgoingBuffer.writeShort128LE(Integer.MAX_VALUE & (int) (var6 >>> 32));
-                    TextureOperation12.outgoingBuffer.writeShort128LE(Texture.anInt1152 + var3);
-                    TextureOperation12.outgoingBuffer.writeShortLE(var2 - -Class131.anInt1716);
+                    TextureOperation12.outgoingBuffer.writeShort128LE(Texture.y1152 + var3);
+                    TextureOperation12.outgoingBuffer.writeShortLE(var2 - -Class131.x1716);
                 }
 
                 if (var4 == 23) {
@@ -327,9 +327,9 @@ public final class BufferedDataStream extends DataBuffer {
                 if (var4 == 14) {
                     Class163_Sub2_Sub1.method2224(var6, var3, var2);
                     TextureOperation12.outgoingBuffer.putOpcode(134);
-                    TextureOperation12.outgoingBuffer.putShortA(Class131.anInt1716 + var2);
+                    TextureOperation12.outgoingBuffer.putShortA(Class131.x1716 + var2);
                     TextureOperation12.outgoingBuffer.writeShort(Class164.anInt2050);
-                    TextureOperation12.outgoingBuffer.writeShortLE(var3 - -Texture.anInt1152);
+                    TextureOperation12.outgoingBuffer.writeShortLE(var3 - -Texture.y1152);
                     TextureOperation12.outgoingBuffer.writeShort(anInt1473);
                     TextureOperation12.outgoingBuffer.writeIntV2(Class3_Sub28_Sub18.anInt3764);
                     TextureOperation12.outgoingBuffer.putShortA((int) (var6 >>> 32) & Integer.MAX_VALUE);
@@ -338,7 +338,7 @@ public final class BufferedDataStream extends DataBuffer {
                 if (var4 == 37) {
                     var8 = Unsorted.players[var5];
                     if (var8 != null) {
-                        Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var8.anIntArray2767[0], 1, 0, 2, var8.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                        Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var8.xOffsets2767[0], 1, 0, 2, var8.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                         Unsorted.anInt2958 = 0;
                         Class36.anInt638 = 2;
                         Unsorted.anInt4062 = Class38_Sub1.anInt2614;
@@ -349,7 +349,7 @@ public final class BufferedDataStream extends DataBuffer {
                 }
 
                 if (var4 == 9 || 1003 == var4) {
-                    Unsorted.method66(Class163_Sub2_Sub1.aClass94Array4016[var1], var2, var5, (byte) -19, var3);
+                    Unsorted.method66(Class163_Sub2_Sub1.aStringArray4016[var1], var2, var5, (byte) -19, var3);
                 }
 
                 if (var4 == 5) {
@@ -375,11 +375,11 @@ public final class BufferedDataStream extends DataBuffer {
 
                 if (var4 == 21) {
                     if (Class158.paramGameTypeID == 1) {
-                        Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2597 + -2595, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                        Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2597 + -2595, var2, 1, 0, 2, var3, Class102.player.xOffsets2767[0]);
                     } else {
-                        var14 = Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, false, 0, 2597 + -2595, var2, 0, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                        var14 = Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 0, false, 0, 2597 + -2595, var2, 0, 0, 2, var3, Class102.player.xOffsets2767[0]);
                         if (!var14) {
-                            Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2597 + -2595, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                            Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2597 + -2595, var2, 1, 0, 2, var3, Class102.player.xOffsets2767[0]);
                         }
                     }
 
@@ -389,14 +389,14 @@ public final class BufferedDataStream extends DataBuffer {
                     Unsorted.anInt4062 = Class38_Sub1.anInt2614;
                     TextureOperation12.outgoingBuffer.putOpcode(228);
                     TextureOperation12.outgoingBuffer.writeShort(var5);
-                    TextureOperation12.outgoingBuffer.writeShortLE(Class131.anInt1716 + var2);
-                    TextureOperation12.outgoingBuffer.writeShort128LE(Texture.anInt1152 + var3);
+                    TextureOperation12.outgoingBuffer.writeShortLE(Class131.x1716 + var2);
+                    TextureOperation12.outgoingBuffer.writeShort128LE(Texture.y1152 + var3);
                 }
 
                 if (var4 == 4) {
                     var11 = NPC.npcs[var5];
                     if (var11 != null) {
-                        Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var11.anIntArray2767[0], 1, 0, 2, var11.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                        Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var11.xOffsets2767[0], 1, 0, 2, var11.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                         Class36.anInt638 = 2;
                         Unsorted.anInt2958 = 0;
                         Unsorted.anInt4062 = Class38_Sub1.anInt2614;
@@ -413,15 +413,15 @@ public final class BufferedDataStream extends DataBuffer {
                         Class3_Sub1 var16 = Client.method44(var13);
                         Class145.method2074(var3, var2, var16.method101(), var16.anInt2202, var13.anInt266, var13.anInt238);
                         Class164_Sub1.anInt3012 = 0;
-                        Class3_Sub28_Sub9.aClass94_3621 = Class53.method1174(var13, (byte) -94);
-                        if (Class3_Sub28_Sub9.aClass94_3621 == null) {
-                            Class3_Sub28_Sub9.aClass94_3621 = TextCore.aClass94_1915;
+                        Class3_Sub28_Sub9.aString_3621 = Class53.method1174(var13, (byte) -94);
+                        if (Class3_Sub28_Sub9.aString_3621 == null) {
+                            Class3_Sub28_Sub9.aString_3621 = TextCore.aString_1915;
                         }
 
                         if (var13.usingScripts) {
-                            TextCore.aClass94_676 = RSString.stringCombiner(new RSString[]{var13.aClass94_277, ColorCore.ContextColor});
+                            TextCore.aString_676 = RSString.stringCombiner(new RSString[]{var13.aString_277, ColorCore.ContextColor});
                         } else {
-                            TextCore.aClass94_676 = RSString.stringCombiner(new RSString[]{RSString.parse("<col=00ff00>"), var13.aClass94_243, ColorCore.ContextColor});
+                            TextCore.aString_676 = RSString.stringCombiner(new RSString[]{RSString.parse("<col=00ff00>"), var13.aString_243, ColorCore.ContextColor});
                         }
                     }
 
@@ -429,7 +429,7 @@ public final class BufferedDataStream extends DataBuffer {
                     if (29 == var4) {
                         var8 = Unsorted.players[var5];
                         if (null != var8) {
-                            Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var8.anIntArray2767[0], 1, 0, 2, var8.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                            Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var8.xOffsets2767[0], 1, 0, 2, var8.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                             Unsorted.anInt4062 = Class38_Sub1.anInt2614;
                             Unsorted.anInt2958 = 0;
                             Class36.anInt638 = 2;
@@ -452,7 +452,7 @@ public final class BufferedDataStream extends DataBuffer {
                     if (15 == var4) {
                         var8 = Unsorted.players[var5];
                         if (var8 != null) {
-                            Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var8.anIntArray2767[0], 1, 0, 2, var8.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                            Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var8.xOffsets2767[0], 1, 0, 2, var8.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                             Unsorted.anInt2958 = 0;
                             Class36.anInt638 = 2;
                             Class70.anInt1053 = Class163_Sub1.anInt2993;
@@ -466,11 +466,11 @@ public final class BufferedDataStream extends DataBuffer {
 
                     if (34 == var4) {
                         if (Class158.paramGameTypeID == 1) {
-                            Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                            Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.xOffsets2767[0]);
                         } else {
-                            var14 = Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, false, 0, 2597 ^ 2599, var2, 0, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                            var14 = Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 0, false, 0, 2597 ^ 2599, var2, 0, 0, 2, var3, Class102.player.xOffsets2767[0]);
                             if (!var14) {
-                                Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                                Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.xOffsets2767[0]);
                             }
                         }
 
@@ -479,8 +479,8 @@ public final class BufferedDataStream extends DataBuffer {
                         Unsorted.anInt4062 = Class38_Sub1.anInt2614;
                         Unsorted.anInt2958 = 0;
                         TextureOperation12.outgoingBuffer.putOpcode(109);
-                        TextureOperation12.outgoingBuffer.writeShortLE(var3 - -Texture.anInt1152);
-                        TextureOperation12.outgoingBuffer.writeShort(var2 + Class131.anInt1716);
+                        TextureOperation12.outgoingBuffer.writeShortLE(var3 - -Texture.y1152);
+                        TextureOperation12.outgoingBuffer.writeShort(var2 + Class131.x1716);
                         TextureOperation12.outgoingBuffer.writeShort128LE(var5);
                     }
 
@@ -497,7 +497,7 @@ public final class BufferedDataStream extends DataBuffer {
                     if (var4 == 2) {
                         var11 = NPC.npcs[var5];
                         if (var11 != null) {
-                            Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2597 + -2595, var11.anIntArray2767[0], 1, 0, 2, var11.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                            Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2597 + -2595, var11.xOffsets2767[0], 1, 0, 2, var11.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                             Unsorted.anInt4062 = Class38_Sub1.anInt2614;
                             Class36.anInt638 = 2;
                             Class70.anInt1053 = Class163_Sub1.anInt2993;
@@ -524,7 +524,7 @@ public final class BufferedDataStream extends DataBuffer {
                     if (var4 == 26) {
                         var11 = NPC.npcs[var5];
                         if (var11 != null) {
-                            Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var11.anIntArray2767[0], 1, 0, 2, var11.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                            Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var11.xOffsets2767[0], 1, 0, 2, var11.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                             Class36.anInt638 = 2;
                             Unsorted.anInt2958 = 0;
                             Unsorted.anInt4062 = Class38_Sub1.anInt2614;
@@ -550,9 +550,9 @@ public final class BufferedDataStream extends DataBuffer {
                     }
 
                     if (var4 == 33) {
-                        var14 = Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, false, 0, 2, var2, 0, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                        var14 = Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 0, false, 0, 2, var2, 0, 0, 2, var3, Class102.player.xOffsets2767[0]);
                         if (!var14) {
-                            Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2597 + -2595, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                            Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2597 + -2595, var2, 1, 0, 2, var3, Class102.player.xOffsets2767[0]);
                         }
 
                         Class70.anInt1053 = Class163_Sub1.anInt2993;
@@ -560,11 +560,11 @@ public final class BufferedDataStream extends DataBuffer {
                         Unsorted.anInt4062 = Class38_Sub1.anInt2614;
                         Class36.anInt638 = 2;
                         TextureOperation12.outgoingBuffer.putOpcode(101);
-                        TextureOperation12.outgoingBuffer.writeShort128LE(var2 - -Class131.anInt1716);
+                        TextureOperation12.outgoingBuffer.writeShort128LE(var2 - -Class131.x1716);
                         TextureOperation12.outgoingBuffer.writeShortLE(anInt1473);
                         TextureOperation12.outgoingBuffer.writeShortLE(Class164.anInt2050);
                         TextureOperation12.outgoingBuffer.writeShortLE(var5);
-                        TextureOperation12.outgoingBuffer.writeShort128LE(Texture.anInt1152 + var3);
+                        TextureOperation12.outgoingBuffer.writeShort128LE(Texture.y1152 + var3);
                         TextureOperation12.outgoingBuffer.writeIntV2(Class3_Sub28_Sub18.anInt3764);
                     }
 
@@ -584,9 +584,9 @@ public final class BufferedDataStream extends DataBuffer {
                         } else if (1 == var5) {
                             TextureOperation12.outgoingBuffer.putOpcode(131);
                             TextureOperation12.outgoingBuffer.writeIntV2(anInt872);
-                            TextureOperation12.outgoingBuffer.putShortA(Class131.anInt1716 + var2);
+                            TextureOperation12.outgoingBuffer.putShortA(Class131.x1716 + var2);
                             TextureOperation12.outgoingBuffer.writeShort128LE(RSInterface.anInt278);
-                            TextureOperation12.outgoingBuffer.putShortA(var3 + Texture.anInt1152);
+                            TextureOperation12.outgoingBuffer.putShortA(var3 + Texture.y1152);
                         }
                     }
 
@@ -606,7 +606,7 @@ public final class BufferedDataStream extends DataBuffer {
                     if (var4 == 1) {
                         var8 = Unsorted.players[var5];
                         if (var8 != null) {
-                            Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var8.anIntArray2767[0], 1, 0, 2, var8.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                            Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var8.xOffsets2767[0], 1, 0, 2, var8.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                             Unsorted.anInt2958 = 0;
                             Unsorted.anInt4062 = Class38_Sub1.anInt2614;
                             Class36.anInt638 = 2;
@@ -631,11 +631,11 @@ public final class BufferedDataStream extends DataBuffer {
 
                     if (var4 == 24) {
                         if (Class158.paramGameTypeID == 1) {
-                            Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2597 + -2595, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                            Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2597 + -2595, var2, 1, 0, 2, var3, Class102.player.xOffsets2767[0]);
                         } else {
-                            var14 = Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, false, 0, 2, var2, 0, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                            var14 = Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 0, false, 0, 2, var2, 0, 0, 2, var3, Class102.player.xOffsets2767[0]);
                             if (!var14) {
-                                Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                                Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.xOffsets2767[0]);
                             }
                         }
 
@@ -644,16 +644,16 @@ public final class BufferedDataStream extends DataBuffer {
                         Class70.anInt1053 = Class163_Sub1.anInt2993;
                         Unsorted.anInt2958 = 0;
                         TextureOperation12.outgoingBuffer.putOpcode(48);
-                        TextureOperation12.outgoingBuffer.putShortA(var2 - -Class131.anInt1716);
+                        TextureOperation12.outgoingBuffer.putShortA(var2 - -Class131.x1716);
                         TextureOperation12.outgoingBuffer.writeShort128LE(var5);
-                        TextureOperation12.outgoingBuffer.writeShortLE(Texture.anInt1152 + var3);
+                        TextureOperation12.outgoingBuffer.writeShortLE(Texture.y1152 + var3);
                     }
 
                     if (var4 == 38) {
                         Class163_Sub2_Sub1.method2224(var6, var3, var2);
                         TextureOperation12.outgoingBuffer.putOpcode(233);
-                        TextureOperation12.outgoingBuffer.writeShort128LE(var3 + Texture.anInt1152);
-                        TextureOperation12.outgoingBuffer.putShortA(Class131.anInt1716 + var2);
+                        TextureOperation12.outgoingBuffer.writeShort128LE(var3 + Texture.y1152);
+                        TextureOperation12.outgoingBuffer.putShortA(Class131.x1716 + var2);
                         TextureOperation12.outgoingBuffer.writeShort128LE(RSInterface.anInt278);
                         TextureOperation12.outgoingBuffer.writeIntV1(anInt872);
                         TextureOperation12.outgoingBuffer.putShortA((int) (var6 >>> 32) & Integer.MAX_VALUE);
@@ -672,7 +672,7 @@ public final class BufferedDataStream extends DataBuffer {
                     if (57 == var4) {
                         var8 = Unsorted.players[var5];
                         if (null != var8) {
-                            Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var8.anIntArray2767[0], 1, 0, 2, var8.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                            Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var8.xOffsets2767[0], 1, 0, 2, var8.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                             Class36.anInt638 = 2;
                             Unsorted.anInt4062 = Class38_Sub1.anInt2614;
                             Class70.anInt1053 = Class163_Sub1.anInt2993;
@@ -702,7 +702,7 @@ public final class BufferedDataStream extends DataBuffer {
                             Class164_Sub1.anInt3012 = 1;
                             Class164.anInt2050 = var5;
                             Class20.method909(var13);
-                            RenderAnimationDefinition.aClass94_378 = RSString.stringCombiner(new RSString[]{
+                            RenderAnimationDefinition.aString_378 = RSString.stringCombiner(new RSString[]{
                                     ColorCore.ContextColor2, ItemDefinition.getItemDefinition(var5).name, ColorCore.ContextColor
                             });
 
@@ -711,8 +711,8 @@ public final class BufferedDataStream extends DataBuffer {
                         if (var4 == 50) {
                             Class163_Sub2_Sub1.method2224(var6, var3, var2);
                             TextureOperation12.outgoingBuffer.putOpcode(194);
-                            TextureOperation12.outgoingBuffer.writeShort128LE(var3 + Texture.anInt1152);
-                            TextureOperation12.outgoingBuffer.writeShortLE(Class131.anInt1716 + var2);
+                            TextureOperation12.outgoingBuffer.writeShort128LE(var3 + Texture.y1152);
+                            TextureOperation12.outgoingBuffer.writeShortLE(Class131.x1716 + var2);
                             TextureOperation12.outgoingBuffer.writeShort((int) (var6 >>> 32) & Integer.MAX_VALUE);
                         }
 
@@ -729,7 +729,7 @@ public final class BufferedDataStream extends DataBuffer {
                         if (var4 == 30) {
                             var8 = Unsorted.players[var5];
                             if (null != var8) {
-                                Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var8.anIntArray2767[0], 1, 0, 2, var8.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                                Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var8.xOffsets2767[0], 1, 0, 2, var8.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                                 Unsorted.anInt2958 = 0;
                                 Class70.anInt1053 = Class163_Sub1.anInt2993;
                                 Unsorted.anInt4062 = Class38_Sub1.anInt2614;
@@ -750,9 +750,9 @@ public final class BufferedDataStream extends DataBuffer {
                         }
 
                         if (var4 == 39) {
-                            var14 = Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, false, 0, 2, var2, 0, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                            var14 = Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 0, false, 0, 2, var2, 0, 0, 2, var3, Class102.player.xOffsets2767[0]);
                             if (!var14) {
-                                Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                                Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.xOffsets2767[0]);
                             }
 
                             Unsorted.anInt4062 = Class38_Sub1.anInt2614;
@@ -761,9 +761,9 @@ public final class BufferedDataStream extends DataBuffer {
                             Unsorted.anInt2958 = 0;
                             TextureOperation12.outgoingBuffer.putOpcode(73);
                             TextureOperation12.outgoingBuffer.writeIntV1(anInt872);
-                            TextureOperation12.outgoingBuffer.writeShort(Texture.anInt1152 + var3);
+                            TextureOperation12.outgoingBuffer.writeShort(Texture.y1152 + var3);
                             TextureOperation12.outgoingBuffer.writeShort128LE(var5);
-                            TextureOperation12.outgoingBuffer.writeShort128LE(var2 + Class131.anInt1716);
+                            TextureOperation12.outgoingBuffer.writeShort128LE(var2 + Class131.x1716);
                             TextureOperation12.outgoingBuffer.writeShortLE(RSInterface.anInt278);
                         }
 
@@ -780,18 +780,18 @@ public final class BufferedDataStream extends DataBuffer {
                                 ObjectDefinition.anInt1521 = 1;
                                 Unsorted.method589(WorldListCountry.localPlane, var2, var3);
                             } else if (Player.rights > 0 && ObjectDefinition.aBooleanArray1490[82] && ObjectDefinition.aBooleanArray1490[81]) {
-                                Class30.method979(var2 + Class131.anInt1716, Texture.anInt1152 - -var3, WorldListCountry.localPlane);
+                                Class30.method979(var2 + Class131.x1716, Texture.y1152 - -var3, WorldListCountry.localPlane);
                             } else {
                                 TextureOperation12.outgoingBuffer.putOpcode(179);
-                                TextureOperation12.outgoingBuffer.writeShort(var3 + Texture.anInt1152);
-                                TextureOperation12.outgoingBuffer.writeShort(var2 + Class131.anInt1716);
+                                TextureOperation12.outgoingBuffer.writeShort(var3 + Texture.y1152);
+                                TextureOperation12.outgoingBuffer.writeShort(var2 + Class131.x1716);
                             }
                         }
 
                         if (6 == var4) {
                             var8 = Unsorted.players[var5];
                             if (var8 != null) {
-                                Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var8.anIntArray2767[0], 1, 0, 2, var8.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                                Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var8.xOffsets2767[0], 1, 0, 2, var8.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                                 Unsorted.anInt4062 = Class38_Sub1.anInt2614;
                                 Unsorted.anInt2958 = 0;
                                 Class36.anInt638 = 2;
@@ -803,11 +803,11 @@ public final class BufferedDataStream extends DataBuffer {
 
                         if (var4 == 20) {
                             if (1 == Class158.paramGameTypeID) {
-                                Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                                Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.xOffsets2767[0]);
                             } else {
-                                var14 = Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 0, false, 0, 2, var2, 0, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                                var14 = Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 0, false, 0, 2, var2, 0, 0, 2, var3, Class102.player.xOffsets2767[0]);
                                 if (!var14) {
-                                    Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.anIntArray2767[0]);
+                                    Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var2, 1, 0, 2, var3, Class102.player.xOffsets2767[0]);
                                 }
                             }
 
@@ -817,14 +817,14 @@ public final class BufferedDataStream extends DataBuffer {
                             Class36.anInt638 = 2;
                             TextureOperation12.outgoingBuffer.putOpcode(33);
                             TextureOperation12.outgoingBuffer.writeShort(var5);
-                            TextureOperation12.outgoingBuffer.writeShort(Class131.anInt1716 + var2);
-                            TextureOperation12.outgoingBuffer.writeShortLE(Texture.anInt1152 + var3);
+                            TextureOperation12.outgoingBuffer.writeShort(Class131.x1716 + var2);
+                            TextureOperation12.outgoingBuffer.writeShortLE(Texture.y1152 + var3);
                         }
 
                         if (var4 == 16) {
                             var11 = NPC.npcs[var5];
                             if (null != var11) {
-                                Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var11.anIntArray2767[0], 1, 0, 2, var11.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                                Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var11.xOffsets2767[0], 1, 0, 2, var11.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                                 Class70.anInt1053 = Class163_Sub1.anInt2993;
                                 Unsorted.anInt2958 = 0;
                                 Unsorted.anInt4062 = Class38_Sub1.anInt2614;
@@ -870,7 +870,7 @@ public final class BufferedDataStream extends DataBuffer {
 
     final void setBitAccess() {
         try {
-            this.headiconsPrayerSpriteArchive6 = this.index * 8;
+            this.bitIndex = this.index * 8;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "i.R(" + ')');
         }
@@ -964,10 +964,10 @@ public final class BufferedDataStream extends DataBuffer {
 
     final int getBits(int var2) {
         try {
-            int var3 = this.headiconsPrayerSpriteArchive6 >> 3;
-            int var4 = 8 + -(7 & this.headiconsPrayerSpriteArchive6);
+            int var3 = this.bitIndex >> 3;
+            int var4 = 8 + -(7 & this.bitIndex);
             int var5 = 0;
-            this.headiconsPrayerSpriteArchive6 += var2;
+            this.bitIndex += var2;
             while (var2 > var4) {
                 var5 += (anIntArray2709[var4] & this.buffer[var3++]) << -var4 + var2;
                 var2 -= var4;
@@ -998,7 +998,7 @@ public final class BufferedDataStream extends DataBuffer {
     final int method815(int var1) {
         try {
 
-            return var1 * 8 - this.headiconsPrayerSpriteArchive6;
+            return var1 * 8 - this.bitIndex;
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "i.U(" + var1 + ',' + 32666 + ')');
         }
@@ -1020,9 +1020,9 @@ public final class BufferedDataStream extends DataBuffer {
         }
     }
 
-    final void method818() {
+    final void setByteAccess() {
         try {
-            this.index = (this.headiconsPrayerSpriteArchive6 + 7) / 8;
+            this.index = (this.bitIndex + 7) / 8;
 
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "i.Q(" + false + ')');
@@ -1036,7 +1036,7 @@ public final class BufferedDataStream extends DataBuffer {
                 int var2 = var1.anInt2602;
                 if (Unsorted.loadInterface(var2)) {
                     boolean var3 = true;
-                    RSInterface[] var4 = GameObject.aClass11ArrayArray1834[var2];
+                    RSInterface[] var4 = GameObject.interfaces1834[var2];
 
                     int var5;
                     for (var5 = 0; var5 < var4.length; ++var5) {

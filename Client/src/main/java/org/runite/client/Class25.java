@@ -87,7 +87,7 @@ final class Class25 {
     static void method957(boolean var1) {
         try {
             Unsorted.aBoolean3665 = var1;
-            Unsorted.aBoolean742 = !NPC.method1986(42);
+            Unsorted.aBoolean742 = !NPC.isHighDetail(42);
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "ec.C(" + 96 + ',' + var1 + ')');
         }

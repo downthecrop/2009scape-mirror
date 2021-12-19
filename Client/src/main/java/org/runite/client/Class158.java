@@ -15,8 +15,8 @@ public abstract class Class158 {
     int anInt2012;
 
     static void method2180(CacheIndex var0, CacheIndex var1) {
-        Unsorted.aClass153_4048 = var0;
-        TextureOperation19.aClass153_3214 = var1;
+        Unsorted.modelsIndex_4048 = var0;
+        TextureOperation19.graphicFXIndex_3214 = var1;
     }
 
     static void method2183(int parent, boolean notifyScripts, int parentWidth, int parentHeight, RSInterface[] ifaces) {
@@ -52,7 +52,7 @@ public abstract class Class158 {
     static void method2186(Class25 var0) {
         for (int var1 = var0.anInt483; var1 <= var0.anInt495; ++var1) {
             for (int var2 = var0.anInt478; var2 <= var0.anInt481; ++var2) {
-                Class3_Sub2 var3 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0.anInt493][var1][var2];
+                TileData var3 = TileData.aTileDataArrayArrayArray2638[var0.anInt493][var1][var2];
                 if (var3 != null) {
                     int var4;
                     for (var4 = 0; var4 < var3.anInt2223; ++var4) {

@@ -5,7 +5,7 @@ import java.util.Objects;
 final class Class163_Sub3 extends Class163 {
 
     static int[] anIntArray2999;
-    static RSString[] aClass94Array3003 = new RSString[100];
+    static RSString[] aStringArray3003 = new RSString[100];
     static boolean aBoolean3004 = true;
     static byte[][] aByteArrayArray3005;
     static int[] anIntArray3007 = new int[]{-1, -1, 1, 1};
@@ -35,10 +35,10 @@ final class Class163_Sub3 extends Class163 {
                     if (var3.equalsString(Class102.player.displayName)) {
                         BufferedDataStream.addChatMessage(RSString.parse(""), 0, TextCore.HasOnOwnFriendsList, -1);
                     } else {
-                        Class70.aClass94Array1046[Class8.anInt104] = var3;
+                        Class70.aStringArray1046[Class8.anInt104] = var3;
                         Class50.aLongArray826[Class8.anInt104] = var0;
                         Unsorted.anIntArray882[Class8.anInt104] = 0;
-                        Unsorted.aClass94Array2566[Class8.anInt104] = RSString.parse("");
+                        Unsorted.aStringArray2566[Class8.anInt104] = RSString.parse("");
                         Class57.anIntArray904[Class8.anInt104] = 0;
                         Unsorted.aBooleanArray73[Class8.anInt104] = false;
                         ++Class8.anInt104;

@@ -20,7 +20,7 @@ final class Class140_Sub3 extends GameObject {
     private LDIndexedSprite aClass109_Sub1_2738 = null;
     private Class127_Sub1 aClass127_Sub1_2742;
     static volatile int anInt2743 = 0;
-    static int anInt2745 = 0;
+    static int viewportZ = 0;
     private int anInt2746;
     private int anInt2748 = 0;
     private int anInt2749;
@@ -158,9 +158,9 @@ final class Class140_Sub3 extends GameObject {
 
             if (HDToolKit.highDetail) {
                 Class140_Sub1_Sub1 var36 = (Class140_Sub1_Sub1) var16;
-                if (var11 != Class121.method1736(WorldListCountry.localPlane, (byte) -49 ^ -50, var3 - -var35, var24 + var5) || var11 != Class121.method1736(WorldListCountry.localPlane, 1, var23 + var3, var5 - -var25)) {
+                if (var11 != Scenery.sceneryPositionHash(WorldListCountry.localPlane, (byte) -49 ^ -50, var3 - -var35, var24 + var5) || var11 != Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var23 + var3, var5 - -var25)) {
                     for (var28 = 0; var28 < var36.anInt3823; ++var28) {
-                        var36.anIntArray3845[var28] += -var11 + Class121.method1736(WorldListCountry.localPlane, Unsorted.bitwiseXOR((byte) -49, -50), var36.anIntArray3822[var28] - -var3, var5 + var36.anIntArray3848[var28]);
+                        var36.anIntArray3845[var28] += -var11 + Scenery.sceneryPositionHash(WorldListCountry.localPlane, Unsorted.bitwiseXOR((byte) -49, -50), var36.anIntArray3822[var28] - -var3, var5 + var36.anIntArray3848[var28]);
                     }
 
                     var36.aClass6_3835.aBoolean98 = false;
@@ -168,9 +168,9 @@ final class Class140_Sub3 extends GameObject {
                 }
             } else {
                 Class140_Sub1_Sub2 var37 = (Class140_Sub1_Sub2) var16;
-                if (var11 != Class121.method1736(WorldListCountry.localPlane, 1, var3 - -var35, var5 - -var24) || var11 != Class121.method1736(WorldListCountry.localPlane, 1, var3 + var23, var5 - -var25)) {
+                if (var11 != Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var3 - -var35, var5 - -var24) || var11 != Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var3 + var23, var5 - -var25)) {
                     for (var28 = 0; var28 < var37.anInt3891; ++var28) {
-                        var37.anIntArray3883[var28] += -var11 + Class121.method1736(WorldListCountry.localPlane, 1, var3 + var37.anIntArray3885[var28], var5 + var37.anIntArray3895[var28]);
+                        var37.anIntArray3883[var28] += -var11 + Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var3 + var37.anIntArray3885[var28], var5 + var37.anIntArray3895[var28]);
                     }
 
                     var37.aBoolean3897 = false;
@@ -451,7 +451,7 @@ final class Class140_Sub3 extends GameObject {
                     }
 
                     if (null != var10) {
-                        Class8.method840(var10, (byte) -76, 0, this.anInt2724, 0, this.type, this.anInt2736, this.anInt2730, this.anInt2732);
+                        Scenery.method840(var10, (byte) -76, 0, this.anInt2724, 0, this.type, this.anInt2736, this.anInt2730, this.anInt2732);
                     }
                 }
             }

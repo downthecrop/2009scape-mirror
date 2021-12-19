@@ -3,7 +3,7 @@ package org.runite.client;
 final class Class85 {
 
     static boolean aBoolean1167 = false;
-    static CacheIndex aClass153_1171;
+    static CacheIndex objectConfigIndex_1171;
     static int anInt1174 = 99;
 
 
@@ -29,10 +29,10 @@ final class Class85 {
     static void method1425(int var0) {
         TextureOperation22.anInt3419 = var0;
 
-        for (int var1 = 0; var1 < Unsorted.anInt1234; ++var1) {
-            for (int var2 = 0; var2 < TextureOperation17.anInt3179; ++var2) {
-                if (Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2] == null) {
-                    Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2] = new Class3_Sub2(var0, var1, var2);
+        for (int var1 = 0; var1 < Unsorted.width1234; ++var1) {
+            for (int var2 = 0; var2 < TextureOperation17.height3179; ++var2) {
+                if (TileData.aTileDataArrayArrayArray2638[var0][var1][var2] == null) {
+                    TileData.aTileDataArrayArrayArray2638[var0][var1][var2] = new TileData(var0, var1, var2);
                 }
             }
         }

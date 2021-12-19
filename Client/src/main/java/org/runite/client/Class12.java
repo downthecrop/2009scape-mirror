@@ -4,8 +4,8 @@ import org.rs09.client.util.ArrayUtils;
 
 public final class Class12 {
 
-    public static CacheIndex aClass153_322;
-    public static CacheIndex aClass153_323;
+    public static CacheIndex aCacheIndex_322;
+    public static CacheIndex spritesIndex_323;
     static float aFloat319;
     GameObject object;
     int anInt324;
@@ -76,7 +76,7 @@ public final class Class12 {
 
     static int method872(int var1, int var2) {
         try {
-            Class3_Sub25 var3 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var1);
+            Class3_Sub25 var3 = (Class3_Sub25) TileData.aHashTable_2220.get(var1);
             return null == var3 ? 0 : (var2 >= 0 && var2 < var3.anIntArray2551.length ? var3.anIntArray2551[var2] : 0);
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "bm.C(" + -1 + ',' + var1 + ',' + var2 + ')');

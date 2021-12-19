@@ -5,7 +5,7 @@ import java.util.Objects;
 final class TextureOperation5 extends TextureOperation {
 
    private int anInt3294 = 1;
-   static RSString aClass94_3295;
+   static RSString aString_3295;
    private int anInt3297 = 1;
 
 

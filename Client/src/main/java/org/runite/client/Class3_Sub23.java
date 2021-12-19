@@ -7,12 +7,12 @@ import java.util.Objects;
 
 public final class Class3_Sub23 extends Linkable {
 
-    static RSString aClass94_3080 = Class95.method1586();
+    static RSString aString_3080 = Class95.method1586();
     int anInt2531;
     int anInt2532;
     public static int[] anIntArray2533;
     static int anInt2535 = -2;
-    static CacheIndex aClass153_2536;
+    static CacheIndex configurationsIndex_2536;
     static int anInt2537 = 0;
     static boolean[] aBooleanArray2538 = new boolean[]{true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, true, false};
     int anInt2539;
@@ -27,21 +27,21 @@ public final class Class3_Sub23 extends Linkable {
                 Objects.requireNonNull(var6).append(RSString.parse(")2"));
             }
 
-            RSString var8 = TextCore.aClass94_1880;
-            RSString var7 = TextCore.aClass94_341;
+            RSString var8 = TextCore.aString_1880;
+            RSString var7 = TextCore.aString_341;
             if (var0 == 1) {
-                var8 = TextCore.aClass94_341;
-                var7 = TextCore.aClass94_1880;
+                var8 = TextCore.aString_341;
+                var7 = TextCore.aString_1880;
             }
 
             if (var0 == 2) {
-                var7 = TextCore.aClass94_1880;
-                var8 = aClass94_3080;
+                var7 = TextCore.aString_1880;
+                var8 = aString_3080;
             }
 
             if (var0 == 3) {
-                var8 = TextCore.aClass94_341;
-                var7 = TextCore.aClass94_1880;
+                var8 = TextCore.aString_341;
+                var7 = TextCore.aString_1880;
             }
 
             RSString var10 = Unsorted.emptyString(0);

@@ -101,7 +101,7 @@ public final class TextureOperation33 extends TextureOperation {
          TextureOperation20.breakClientConnection();
          return true;
       } catch (Exception var5) {
-         String var2 = "T2 - " + Unsorted.incomingOpcode + "," + Class7.anInt2166 + "," + Class24.anInt469 + " - " + Unsorted.incomingPacketLength + "," + (Class131.anInt1716 - -Class102.player.anIntArray2767[0]) + "," + (Class102.player.anIntArray2755[0] + Texture.anInt1152) + " - ";
+         String var2 = "T2 - " + Unsorted.incomingOpcode + "," + Class7.anInt2166 + "," + Class24.anInt469 + " - " + Unsorted.incomingPacketLength + "," + (Class131.x1716 - -Class102.player.xOffsets2767[0]) + "," + (Class102.player.yOffsets2755[0] + Texture.y1152) + " - ";
 
          for (int var3 = 0; var3 < Unsorted.incomingPacketLength && 50 > var3; ++var3) {
             var2 = var2 + BufferedDataStream.incomingBuffer.buffer[var3] + ",";

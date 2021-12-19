@@ -8,7 +8,7 @@ public final class Texture {
 
     static int anInt2208 = -1;
     static int[] anIntArray2213 = new int[]{16776960, 16711680, 65280, 65535, 16711935, 16777215};
-    static RSString[] aClass94Array3317 = new RSString[TextureOperation35.anInt3332];
+    static RSString[] aStringArray3317 = new RSString[TextureOperation35.anInt3332];
     static int[] anIntArray3318 = new int[TextureOperation35.anInt3332];
     static int[] anIntArray3319 = new int[TextureOperation35.anInt3332];
     static int[] anIntArray3327 = new int[TextureOperation35.anInt3332];
@@ -19,7 +19,7 @@ public final class Texture {
     static int anInt1668 = -1;
     static ReferenceCache aReferenceCache_1146 = new ReferenceCache(64);
     static int anInt1150 = -1;
-    public static int anInt1152;
+    public static int y1152;
     private final int[] anIntArray1144;
     private final TextureOperation aClass3_Sub13_1145;
     private final TextureOperation[] aClass3_Sub13Array1147;
@@ -118,7 +118,7 @@ public final class Texture {
             int var29;
             int var32;
             for (var7 = -1; var7 < Class159.localPlayerCount + Class163.localNPCCount; ++var7) {
-                Class140_Sub4 var8;
+                Entity var8;
                 if (var7 == -1) {
                     var8 = Class102.player;
                 } else if (var7 < Class159.localPlayerCount) {
@@ -220,7 +220,7 @@ public final class Texture {
                             anIntArray3331[TextureOperation8.anInt3464] = var8.textColor;
                             anIntArray3336[TextureOperation8.anInt3464] = var8.textEffect;
                             anIntArray3318[TextureOperation8.anInt3464] = var8.textCycle;
-                            aClass94Array3317[TextureOperation8.anInt3464] = var8.textSpoken;
+                            aStringArray3317[TextureOperation8.anInt3464] = var8.textSpoken;
                             ++TextureOperation8.anInt3464;
                         }
                     }
@@ -338,7 +338,7 @@ public final class Texture {
 
                 Class32.anInt590 = anIntArray3319[var7];
                 anInt2208 = anIntArray3337[var7] = var19;
-                RSString var33 = aClass94Array3317[var7];
+                RSString var33 = aStringArray3317[var7];
                 if (Unsorted.anInt688 == 0) {
                     var32 = 16776960;
                     if (anIntArray3331[var7] < 6) {
@@ -476,10 +476,10 @@ public final class Texture {
         try {
             aReferenceCache_1146 = null;
             if (var0) {
-                TextCore.aClass94_1151 = null;
+                TextCore.aString_1151 = null;
             }
 
-            TextCore.aClass94_1151 = null;
+            TextCore.aString_1151 = null;
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "lc.A(" + var0 + ')');
         }
@@ -594,7 +594,7 @@ public final class Texture {
         try {
             GameObject.method1859(var4);
             Class17.anInterface2_408 = var8;
-            WaterfallShader.aClass153_2172 = var7;
+            WaterfallShader.spritesIndex_probably_2172 = var7;
             TextureOperation33.method180(-1, var1, var3);
 
             int var11;
@@ -690,7 +690,7 @@ public final class Texture {
         try {
             byte[] var9 = new byte[4 * var2 * var1];
             GameObject.method1859(0.7);
-            WaterfallShader.aClass153_2172 = var8;
+            WaterfallShader.spritesIndex_probably_2172 = var8;
             Class17.anInterface2_408 = var4;
             TextureOperation33.method180(-32, var1, var2);
 

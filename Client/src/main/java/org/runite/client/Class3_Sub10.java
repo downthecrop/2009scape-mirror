@@ -42,7 +42,7 @@ public final class Class3_Sub10 extends Linkable {
       try {
          RenderAnimationDefinition def = (RenderAnimationDefinition) RenderAnimationDefinition.aReferenceCache_1955.get(renderAnimationId);
          if(def == null) {
-            byte[] var3 = Class97.aClass153_1372.getFile(32, renderAnimationId);
+            byte[] var3 = Class97.configurationsIndex_1372.getFile(32, renderAnimationId);
 
             def = new RenderAnimationDefinition();
             if(var3 != null) {

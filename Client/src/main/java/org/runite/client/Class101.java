@@ -5,7 +5,7 @@ final class Class101 {
     static CacheIndex csConfigFileRAM;
     static Class3_Sub24_Sub4 aClass3_Sub24_Sub4_1421;
     static Class30 aClass30_1422;
-    static CacheIndex aClass153_1423;
+    static CacheIndex musicIndex_1423;
     static int anInt1425 = 0;
     static int[] anIntArray1426;
     static int anInt1427;
@@ -60,7 +60,7 @@ final class Class101 {
             anIntArray1426 = null;
             aClass3_Sub24_Sub4_1421 = null;
             aClass30_1422 = null;
-            aClass153_1423 = null;
+            musicIndex_1423 = null;
             if (var0 != 110) {
                 method1607(46, 78, true, null, null);
             }
