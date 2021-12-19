@@ -3,7 +3,7 @@ package org.runite.client;
 final class TextureOperation29 extends TextureOperation {
 
    static byte[][][] aByteArrayArrayArray3390;
-   static RSString[] aClass94Array3391;
+   static RSString[] aStringArray3391;
    private Class75[] aClass75Array3392;
    static Class133[] aClass133Array3393 = new Class133[6];
    static byte[] aByteArray3396;
@@ -108,7 +108,7 @@ final class TextureOperation29 extends TextureOperation {
    static int method326(byte var0, RSString var1) {
       try {
          if(var0 <= 13) {
-            TextCore.aClass94_3399 = null;
+            TextCore.aString_3399 = null;
          }
 
          return var1.length() + 1;

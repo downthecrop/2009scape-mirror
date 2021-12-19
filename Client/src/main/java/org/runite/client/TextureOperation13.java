@@ -34,7 +34,7 @@ final class TextureOperation13 extends TextureOperation {
 
                   RSString levelEquals = Class158.paramGameTypeID != 1?TextCore.HasLevel:TextCore.HasRating;
                   if(playerUsername.COMBAT_LEVEL < playerUsername.combatLevel) {
-                     var5 = RSString.stringCombiner(new RSString[]{playerUsername.getName(), var6 ? Player.combatLevelColor(playerUsername.COMBAT_LEVEL, (byte)-73, Class102.player.COMBAT_LEVEL) : ColorCore.ContextColor , TextCore.LEFT_PARENTHESES, levelEquals, RSString.stringAnimator(playerUsername.COMBAT_LEVEL), TextCore.aClass94_673, RSString.stringAnimator(playerUsername.combatLevel + -playerUsername.COMBAT_LEVEL), TextCore.RIGHT_PARENTHESES});
+                     var5 = RSString.stringCombiner(new RSString[]{playerUsername.getName(), var6 ? Player.combatLevelColor(playerUsername.COMBAT_LEVEL, (byte)-73, Class102.player.COMBAT_LEVEL) : ColorCore.ContextColor , TextCore.LEFT_PARENTHESES, levelEquals, RSString.stringAnimator(playerUsername.COMBAT_LEVEL), TextCore.aString_673, RSString.stringAnimator(playerUsername.combatLevel + -playerUsername.COMBAT_LEVEL), TextCore.RIGHT_PARENTHESES});
                   } else {
                 	 //here
                      var5 = RSString.stringCombiner(new RSString[]{playerUsername.getName(), var6 ? Player.combatLevelColor(playerUsername.COMBAT_LEVEL, (byte)-128, Class102.player.COMBAT_LEVEL) : Player.getCombatLevelDifferenceColor(playerUsername.COMBAT_LEVEL, Class102.player.COMBAT_LEVEL), TextCore.LEFT_PARENTHESES, levelEquals, RSString.stringAnimator(playerUsername.COMBAT_LEVEL), TextCore.RIGHT_PARENTHESES});
@@ -45,12 +45,12 @@ final class TextureOperation13 extends TextureOperation {
 
                int var12;
                if(Class164_Sub1.anInt3012 == 1) {
-                  Class3_Sub24_Sub4.method1177(Class99.anInt1403, var0, (byte)-80, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aClass94_378, TextCore.aClass94_892, var5}), var4, (short)1, TextCore.HasUse, var2);
+                  Class3_Sub24_Sub4.pushRightClickMenuAction(Class99.anInt1403, var0, (byte)-80, RSString.stringCombiner(new RSString[]{RenderAnimationDefinition.aString_378, TextCore.aString_892, var5}), var4, (short)1, TextCore.HasUse, var2);
                } else if(!GameObject.aBoolean1837) {
                   for(var12 = 7; var12 >= 0; --var12) {
-                     if(null != Class91.aClass94Array1299[var12]) {
+                     if(null != Class91.aStringArray1299[var12]) {
                         short var14 = 0;
-                        if(Class158.paramGameTypeID == 0 && Class91.aClass94Array1299[var12].equalsStringIgnoreCase(TextCore.HasAttack)) {
+                        if(Class158.paramGameTypeID == 0 && Class91.aStringArray1299[var12].equalsStringIgnoreCase(TextCore.HasAttack)) {
                          //If other player level greater than my level, then right click to attack.
                            if(playerUsername.COMBAT_LEVEL > Class102.player.COMBAT_LEVEL) {
                               var14 = 2000;//Var for right click higher level players
@@ -68,11 +68,11 @@ final class TextureOperation13 extends TextureOperation {
 
                         short var15 = Class7.aShortArray2167[var12];
                         var15 += var14;
-                        Class3_Sub24_Sub4.method1177(TextureOperation35.anIntArray3328[var12], var0, (byte)-73, RSString.stringCombiner(new RSString[]{ColorCore.ContextColor , var5}), var4, var15, Class91.aClass94Array1299[var12], var2);
+                        Class3_Sub24_Sub4.pushRightClickMenuAction(TextureOperation35.anIntArray3328[var12], var0, (byte)-73, RSString.stringCombiner(new RSString[]{ColorCore.ContextColor , var5}), var4, var15, Class91.aStringArray1299[var12], var2);
                      }
                   }
                } else if((8 & Class164.anInt2051) != 0) {
-                  Class3_Sub24_Sub4.method1177(Unsorted.anInt1887, var0, (byte)-58, RSString.stringCombiner(new RSString[]{TextCore.aClass94_676, TextCore.aClass94_892, var5}), var4, (short)15, Class3_Sub28_Sub9.aClass94_3621, var2);
+                  Class3_Sub24_Sub4.pushRightClickMenuAction(Unsorted.anInt1887, var0, (byte)-58, RSString.stringCombiner(new RSString[]{TextCore.aString_676, TextCore.aString_892, var5}), var4, (short)15, Class3_Sub28_Sub9.aString_3621, var2);
                }
 
                if(var1 <= 0) {
@@ -81,7 +81,7 @@ final class TextureOperation13 extends TextureOperation {
 
                for(var12 = 0; var12 < Unsorted.menuOptionCount; ++var12) {
                   if(TextureOperation27.aShortArray3095[var12] == 60) {
-                     Class163_Sub2_Sub1.aClass94Array4016[var12] = RSString.stringCombiner(new RSString[]{ColorCore.ContextColor , var5});
+                     Class163_Sub2_Sub1.aStringArray4016[var12] = RSString.stringCombiner(new RSString[]{ColorCore.ContextColor , var5});
                      break;
                   }
                }
@@ -227,7 +227,7 @@ final class TextureOperation13 extends TextureOperation {
                      Class91 var25 = null;
                      if(!var7) {
                         int var26 = var1;
-                        if(2 == (Unsorted.aByteArrayArrayArray113[1][var23][var24] & 2)) {
+                        if(2 == (Unsorted.sceneryTypeMaskGrid[1][var23][var24] & 2)) {
                            var26 = var1 - 1;
                         }
 
@@ -236,7 +236,7 @@ final class TextureOperation13 extends TextureOperation {
                         }
                      }
 
-                     Class110.method1683(var1, !var7, var1, var7, var25, var12, var20, var23, var24, 3 & var21 + var4);
+                     Scenery.method1683(var1, !var7, var1, var7, var25, var12, var20, var23, var24, 3 & var21 + var4);
                   }
                }
             }

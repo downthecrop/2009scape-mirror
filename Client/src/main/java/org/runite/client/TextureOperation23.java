@@ -18,9 +18,9 @@ final class TextureOperation23 extends TextureOperation {
 
    static void method247(byte var0) {
       try {
-         if(Class140_Sub2.aBoolean2713) {
+         if(PositionedGraphicObject.aBoolean2713) {
             SequenceDefinition.aClass109_1856 = null;
-            Class140_Sub2.aBoolean2713 = false;
+            PositionedGraphicObject.aBoolean2713 = false;
             Class40.aAbstractSprite_680 = null;
          }
       } catch (RuntimeException var2) {
@@ -75,7 +75,7 @@ final class TextureOperation23 extends TextureOperation {
          }
 
          if(!true) {
-            WorldMap.aClass153_3210 = null;
+            GroundItemLink.worldmapIndex_3210 = null;
          }
 
       } catch (RuntimeException var5) {
@@ -114,13 +114,13 @@ final class TextureOperation23 extends TextureOperation {
    static void method252() {
       try {
          Class3_Sub9 var1;
-         for(var1 = (Class3_Sub9) Unsorted.aLinkedList_78.method1222(); null != var1; var1 = (Class3_Sub9) Unsorted.aLinkedList_78.method1221()) {
+         for(var1 = (Class3_Sub9) Unsorted.aLinkedList_78.startIteration(); null != var1; var1 = (Class3_Sub9) Unsorted.aLinkedList_78.nextIteration()) {
             if(var1.aBoolean2329) {
                var1.method134();
             }
          }
 
-         for(var1 = (Class3_Sub9) Unsorted.aLinkedList_1242.method1222(); null != var1; var1 = (Class3_Sub9) Unsorted.aLinkedList_1242.method1221()) {
+         for(var1 = (Class3_Sub9) Unsorted.aLinkedList_1242.startIteration(); null != var1; var1 = (Class3_Sub9) Unsorted.aLinkedList_1242.nextIteration()) {
             if(var1.aBoolean2329) {
                var1.method134();
             }
@@ -152,7 +152,7 @@ final class TextureOperation23 extends TextureOperation {
       try {
 
          Class3_Sub28_Sub1.anInt3536 = Class23.anInt455 * var3 / var1;
-         Class3_Sub4.anInt2251 = Class108.anInt1460 * var2 / var4;
+         Scenery.anInt2251 = Class108.anInt1460 * var2 / var4;
          Texture.anInt1150 = -1;
          TextureOperation13.anInt3362 = -1;
          Class3_Sub5.method117();

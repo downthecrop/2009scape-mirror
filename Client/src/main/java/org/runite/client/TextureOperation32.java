@@ -6,7 +6,7 @@ final class TextureOperation32 extends TextureOperation {
    private int anInt3347 = 3216;
    private final int[] anIntArray3348 = new int[3];
    private int anInt3350 = 4096;
-   static RSString aClass94_3353;
+   static RSString aString_3353;
    private int anInt3354 = 3216;
 
 
@@ -103,19 +103,19 @@ final class TextureOperation32 extends TextureOperation {
             method301((byte)56);
          }
 
-         for(Class3_Sub28_Sub19 var1 = (Class3_Sub28_Sub19) TextureOperation13.aLinkedList_3364.method1222(); var1 != null; var1 = (Class3_Sub28_Sub19) TextureOperation13.aLinkedList_3364.method1221()) {
+         for(Class3_Sub28_Sub19 var1 = (Class3_Sub28_Sub19) TextureOperation13.aLinkedList_3364.startIteration(); var1 != null; var1 = (Class3_Sub28_Sub19) TextureOperation13.aLinkedList_3364.nextIteration()) {
             Class140_Sub6 var2 = var1.aClass140_Sub6_3778;
             if(var2.anInt2907 == WorldListCountry.localPlane && Class44.anInt719 <= var2.anInt2899) {
                if(Class44.anInt719 >= var2.anInt2925) {
-                  if(var2.anInt2919 > 0) {
-                     NPC var3 = NPC.npcs[-1 + var2.anInt2919];
-                     if(null != var3 && var3.xAxis >= 0 && 13312 > var3.xAxis && var3.zAxis >= 0 && var3.zAxis < 13312) {
-                        var2.method2024(var3.zAxis, Class44.anInt719, Class121.method1736(var2.anInt2907, 1, var3.xAxis, var3.zAxis) + -var2.anInt2903, var3.xAxis);
+                  if(var2.entityIndex > 0) {
+                     NPC var3 = NPC.npcs[-1 + var2.entityIndex];
+                     if(null != var3 && var3.xAxis >= 0 && 13312 > var3.xAxis && var3.yAxis >= 0 && var3.yAxis < 13312) {
+                        var2.method2024(var3.yAxis, Class44.anInt719, Scenery.sceneryPositionHash(var2.anInt2907, 1, var3.xAxis, var3.yAxis) + -var2.anInt2903, var3.xAxis);
                      }
                   }
 
-                  if(var2.anInt2919 < 0) {
-                     int var4 = -1 + -var2.anInt2919;
+                  if(var2.entityIndex < 0) {
+                     int var4 = -1 + -var2.entityIndex;
                      Player var6;
                      if(Class3_Sub1.localIndex == var4) {
                         var6 = Class102.player;
@@ -123,8 +123,8 @@ final class TextureOperation32 extends TextureOperation {
                         var6 = Unsorted.players[var4];
                      }
 
-                     if(null != var6 && var6.xAxis >= 0 && var6.xAxis < 13312 && var6.zAxis >= 0 && var6.zAxis < 13312) {
-                        var2.method2024(var6.zAxis, Class44.anInt719, Class121.method1736(var2.anInt2907, 1, var6.xAxis, var6.zAxis) - var2.anInt2903, var6.xAxis);
+                     if(null != var6 && var6.xAxis >= 0 && var6.xAxis < 13312 && var6.yAxis >= 0 && var6.yAxis < 13312) {
+                        var2.method2024(var6.yAxis, Class44.anInt719, Scenery.sceneryPositionHash(var2.anInt2907, 1, var6.xAxis, var6.yAxis) - var2.anInt2903, var6.xAxis);
                      }
                   }
 

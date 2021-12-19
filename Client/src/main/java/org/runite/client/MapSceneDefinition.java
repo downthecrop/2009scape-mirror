@@ -28,8 +28,8 @@ public final class MapSceneDefinition {
             return sprite;
         }
 
-        KeyboardListener.aClass153_1916.retrieveSpriteFile(this.sprite);
-        sprite = Unsorted.method1539(this.sprite, KeyboardListener.aClass153_1916);
+        KeyboardListener.spritesIndex_1916.retrieveSpriteFile(this.sprite);
+        sprite = Unsorted.method1539(this.sprite, KeyboardListener.spritesIndex_1916);
         if (sprite != null) {
             sprite.method1668(Class102.anInt2136, Class46.anInt740, Class158.anInt2015);
             sprite.anInt1469 = sprite.width;

@@ -9,9 +9,9 @@ final class Class3_Sub28_Sub9 extends Node {
    int anInt3614;
    static Calendar aCalendar3616 = Calendar.getInstance();
    private int anInt3617;
-   RSString aClass94_3619;
+   RSString aString_3619;
    static int anInt3620 = 0;
-   static RSString aClass94_3621 = null;
+   static RSString aString_3621 = null;
    static int anInt3622 = 0;
    static int anInt3623 = 0;
    static int anInt3624;
@@ -19,7 +19,7 @@ final class Class3_Sub28_Sub9 extends Node {
 
    static SoftwareSprite method578() {
       try {
-         int var1 = Unsorted.anIntArray3076[0] * Class140_Sub7.anIntArray2931[0];
+         int var1 = Unsorted.anIntArray3076[0] * GroundItem.anIntArray2931[0];
          byte[] var2 = Class163_Sub1.aByteArrayArray2987[0];
 
          Object var3;
@@ -31,7 +31,7 @@ final class Class3_Sub28_Sub9 extends Node {
                var5[var6] = TextureOperation3.bitwiseOr(Unsorted.bitwiseAnd(var4[var6] << 24, -16777216), TextureOperation38.spritePalette[Unsorted.bitwiseAnd(255, var2[var6])]);
             }
 
-            var3 = new Class3_Sub28_Sub16_Sub2_Sub1(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], var5);
+            var3 = new Class3_Sub28_Sub16_Sub2_Sub1(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], GroundItem.anIntArray2931[0], Unsorted.anIntArray3076[0], var5);
          } else {
             int[] var8 = new int[var1];
 
@@ -39,7 +39,7 @@ final class Class3_Sub28_Sub9 extends Node {
                var8[var9] = TextureOperation38.spritePalette[Unsorted.bitwiseAnd(var2[var9], 255)];
             }
 
-            var3 = new SoftwareSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], var8);
+            var3 = new SoftwareSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], GroundItem.anIntArray2931[0], Unsorted.anIntArray3076[0], var8);
          }
 
          Class39.method1035((byte)127);
@@ -56,7 +56,7 @@ final class Class3_Sub28_Sub9 extends Node {
          } else if (var1 == 2) {
             this.anInt3614 = var2.readInt();
          } else if (var1 == 5) {
-            this.aClass94_3619 = var2.readString();
+            this.aString_3619 = var2.readString();
          }
 
       } catch (RuntimeException var5) {
@@ -70,7 +70,7 @@ final class Class3_Sub28_Sub9 extends Node {
             method582(88, 85, -8, true, 72, 12, 29, 96, 6, 57, -13, 15);
          }
 
-         Class3_Sub2.aHashTable_2220 = new HashTable(32);
+         TileData.aHashTable_2220 = new HashTable(32);
       } catch (RuntimeException var2) {
          throw ClientErrorException.clientError(var2, "hn.B(" + var0 + ')');
       }

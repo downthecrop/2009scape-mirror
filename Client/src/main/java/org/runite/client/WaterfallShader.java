@@ -10,12 +10,12 @@ import java.util.Objects;
 final class WaterfallShader implements ShaderInterface {
 
    static boolean[] aBooleanArray2169 = new boolean[5];
-   static CacheIndex aClass153_2172;
+   static CacheIndex spritesIndex_probably_2172;
    static int waterfallTextureId = -1;
-    static RSString aClass94_8 = RSString.parse("");
+    static RSString aString_8 = RSString.parse("");
     private int listId;
    private final float[] aFloatArray2174 = new float[4];
-   private static RSString aClass94_2175 = RSString.parse(")4a=");
+   private static RSString aString_2175 = RSString.parse(")4a=");
 
 
    static void method1626(byte var0) {
@@ -36,19 +36,19 @@ final class WaterfallShader implements ShaderInterface {
          if(var2 == null) {
             return false;
          } else if (Signlink.anInt1214 != 1 && Signlink.anInt1214 != 2 && Class44.paramModeWhere != 2) {
-            RSString var9 = aClass94_8;
+            RSString var9 = aString_8;
             if (Class44.paramModeWhere != 0) {
-               var9 = RSString.stringCombiner(new RSString[]{TextCore.aClass94_4007, RSString.stringAnimator(var2.worldId - -7000)});
+               var9 = RSString.stringCombiner(new RSString[]{TextCore.aString_4007, RSString.stringAnimator(var2.worldId - -7000)});
             }
 
             if (var1 > -2) {
                return false;
             } else {
-               RSString var4 = aClass94_8;
+               RSString var4 = aString_8;
                if (Class163_Sub2.paramSettings != null) {
-                  var4 = RSString.stringCombiner(new RSString[]{Class97.aClass94_1380, Class163_Sub2.paramSettings});
+                  var4 = RSString.stringCombiner(new RSString[]{Class97.aString_1380, Class163_Sub2.paramSettings});
                }
-               RSString var5 = RSString.stringCombiner(new RSString[]{RSString.parse("http:)4)4"), var2.address, var9, TextCore.aClass94_2608, RSString.stringAnimator(Class3_Sub20.paramLanguage), aClass94_2175, RSString.stringAnimator(Class3_Sub26.paramAffid), var4, TextCore.aClass94_1133, !Unsorted.paramJavaScriptEnabled ? TextCore.aClass94_3013 : TextCore.aClass94_339, TextCore.aClass94_2610, !Class163_Sub2_Sub1.paramObjectTagEnabled ? TextCore.aClass94_3013 : TextCore.aClass94_339, TextCore.aClass94_1617, Client.paramAdvertisementSuppressed ? TextCore.aClass94_339 : TextCore.aClass94_3013});
+               RSString var5 = RSString.stringCombiner(new RSString[]{RSString.parse("http:)4)4"), var2.address, var9, TextCore.aString_2608, RSString.stringAnimator(Class3_Sub20.paramLanguage), aString_2175, RSString.stringAnimator(Class3_Sub26.paramAffid), var4, TextCore.aString_1133, !Unsorted.paramJavaScriptEnabled ? TextCore.aString_3013 : TextCore.aString_339, TextCore.aString_2610, !Class163_Sub2_Sub1.paramObjectTagEnabled ? TextCore.aString_3013 : TextCore.aString_339, TextCore.aString_1617, Client.paramAdvertisementSuppressed ? TextCore.aString_339 : TextCore.aString_3013});
 
                try {
                   Objects.requireNonNull(Client.clientInstance.getAppletContext()).showDocument(var5.toURL(), "_self");
@@ -110,7 +110,7 @@ final class WaterfallShader implements ShaderInterface {
          var2.glPushMatrix();
          var2.glLoadIdentity();
          var2.glRotatef(180.0F, 1.0F, 0.0F, 0.0F);
-         var2.glRotatef((float)Class140_Sub7.anInt2938 * 360.0F / 2048.0F, 1.0F, 0.0F, 0.0F);
+         var2.glRotatef((float)GroundItem.anInt2938 * 360.0F / 2048.0F, 1.0F, 0.0F, 0.0F);
          var2.glRotatef(360.0F * (float) TextureOperation9.anInt3103 / 2048.0F, 0.0F, 1.0F, 0.0F);
          var2.glTranslatef((float)(-Unsorted.anInt144), (float)(-Unsorted.anInt3695), (float)(-LinkableRSString.anInt2587));
          var2.glTexGenfv(8192, 9474, this.aFloatArray2174, 0);
@@ -157,13 +157,13 @@ final class WaterfallShader implements ShaderInterface {
 
    public static void method1630(byte var0) {
       try {
-         TextCore.aClass94_2171 = null;
-         aClass153_2172 = null;
+         TextCore.aString_2171 = null;
+         spritesIndex_probably_2172 = null;
          aBooleanArray2169 = null;
          if(var0 > -112) {
             method1632(-116, 108, 54, -120, 44, 6);
          }
-         aClass94_2175 = null;
+         aString_2175 = null;
       } catch (RuntimeException var2) {
          throw ClientErrorException.clientError(var2, "ob.J(" + var0 + ')');
       }

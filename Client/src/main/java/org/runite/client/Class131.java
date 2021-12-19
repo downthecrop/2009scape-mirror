@@ -4,26 +4,26 @@ import org.rs09.client.config.GameConfig;
 
 public final class Class131 {
 
-    public static int anInt1716;
+    public static int x1716;
     static RSString password = RSString.parse("");
     static RSString username = RSString.parse("");
     static int anInt1719 = -1;
     static CacheIndex skeletonsReferenceIndex;
-    public short[] aShortArray1718;
+    public short[] yArray1718;
     public int anInt1720;
-    public RSString[] aClass94Array1721;
+    public RSString[] aStringArray1721;
     public int[] anIntArray1725;
-    public short[] aShortArray1727;
+    public short[] xArray1727;
     byte[] aByteArray1730;
 
     Class131(int var1) {
         try {
             this.anInt1720 = var1;
-            this.aClass94Array1721 = new RSString[this.anInt1720];
-            this.aShortArray1718 = new short[this.anInt1720];
+            this.aStringArray1721 = new RSString[this.anInt1720];
+            this.yArray1718 = new short[this.anInt1720];
             this.anIntArray1725 = new int[this.anInt1720];
             this.aByteArray1730 = new byte[this.anInt1720];
-            this.aShortArray1727 = new short[this.anInt1720];
+            this.xArray1727 = new short[this.anInt1720];
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "se.<init>(" + var1 + ')');
         }

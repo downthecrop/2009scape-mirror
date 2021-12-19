@@ -39,14 +39,14 @@ final class Class3_Sub22 extends Linkable {
    static void method398(int var0, int var1, int var2, int var3, int var4, byte[][][] var5, int[] var6, int[] var7, int[] var8, int[] var9, int[] var10, int var11, byte var12, int var13, int var14) {
       if(var0 < 0) {
          var0 = 0;
-      } else if(var0 >= Unsorted.anInt1234 * 128) {
-         var0 = Unsorted.anInt1234 * 128 - 1;
+      } else if(var0 >= Unsorted.width1234 * 128) {
+         var0 = Unsorted.width1234 * 128 - 1;
       }
 
       if(var2 < 0) {
          var2 = 0;
-      } else if(var2 >= TextureOperation17.anInt3179 * 128) {
-         var2 = TextureOperation17.anInt3179 * 128 - 1;
+      } else if(var2 >= TextureOperation17.height3179 * 128) {
+         var2 = TextureOperation17.height3179 * 128 - 1;
       }
 
       Class60.anInt936 = Class51.anIntArray840[var3];
@@ -58,24 +58,24 @@ final class Class3_Sub22 extends Linkable {
       TextureOperation13.anInt3363 = var2;
       Class97.anInt1375 = var0 / 128;
       Class145.anInt3340 = var2 / 128;
-      Class163_Sub1_Sub1.anInt4006 = Class97.anInt1375 - TextureOperation8.anInt3466;
+      Class163_Sub1_Sub1.anInt4006 = Class97.anInt1375 - TextureOperation8.renderDistanceTiles;
       if(Class163_Sub1_Sub1.anInt4006 < 0) {
          Class163_Sub1_Sub1.anInt4006 = 0;
       }
 
-      Unsorted.anInt3603 = Class145.anInt3340 - TextureOperation8.anInt3466;
+      Unsorted.anInt3603 = Class145.anInt3340 - TextureOperation8.renderDistanceTiles;
       if(Unsorted.anInt3603 < 0) {
          Unsorted.anInt3603 = 0;
       }
 
-      Unsorted.anInt67 = Class97.anInt1375 + TextureOperation8.anInt3466;
-      if(Unsorted.anInt67 > Unsorted.anInt1234) {
-         Unsorted.anInt67 = Unsorted.anInt1234;
+      Unsorted.anInt67 = Class97.anInt1375 + TextureOperation8.renderDistanceTiles;
+      if(Unsorted.anInt67 > Unsorted.width1234) {
+         Unsorted.anInt67 = Unsorted.width1234;
       }
 
-      Class126.anInt1665 = Class145.anInt3340 + TextureOperation8.anInt3466;
-      if(Class126.anInt1665 > TextureOperation17.anInt3179) {
-         Class126.anInt1665 = TextureOperation17.anInt3179;
+      Class126.anInt1665 = Class145.anInt3340 + TextureOperation8.renderDistanceTiles;
+      if(Class126.anInt1665 > TextureOperation17.height3179) {
+         Class126.anInt1665 = TextureOperation17.height3179;
       }
 
       short var15;
@@ -87,13 +87,13 @@ final class Class3_Sub22 extends Linkable {
 
       int var17;
       int var16;
-      for(var16 = 0; var16 < TextureOperation8.anInt3466 + TextureOperation8.anInt3466 + 2; ++var16) {
-         for(var17 = 0; var17 < TextureOperation8.anInt3466 + TextureOperation8.anInt3466 + 2; ++var17) {
-            int var18 = (var16 - TextureOperation8.anInt3466 << 7) - (Class145.anInt2697 & 127);
-            int var19 = (var17 - TextureOperation8.anInt3466 << 7) - (TextureOperation13.anInt3363 & 127);
-            int var20 = Class97.anInt1375 - TextureOperation8.anInt3466 + var16;
-            int var21 = Class145.anInt3340 - TextureOperation8.anInt3466 + var17;
-            if(var20 >= 0 && var21 >= 0 && var20 < Unsorted.anInt1234 && var21 < TextureOperation17.anInt3179) {
+      for(var16 = 0; var16 < TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles + 2; ++var16) {
+         for(var17 = 0; var17 < TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles + 2; ++var17) {
+            int var18 = (var16 - TextureOperation8.renderDistanceTiles << 7) - (Class145.anInt2697 & 127);
+            int var19 = (var17 - TextureOperation8.renderDistanceTiles << 7) - (TextureOperation13.anInt3363 & 127);
+            int var20 = Class97.anInt1375 - TextureOperation8.renderDistanceTiles + var16;
+            int var21 = Class145.anInt3340 - TextureOperation8.renderDistanceTiles + var17;
+            if(var20 >= 0 && var21 >= 0 && var20 < Unsorted.width1234 && var21 < TextureOperation17.height3179) {
                int var22;
                if(Unsorted.anIntArrayArrayArray3605 == null) {
                   var22 = Class58.anIntArrayArrayArray914[0][var20][var21] - Unsorted.anInt3657 + 128;
@@ -109,8 +109,8 @@ final class Class3_Sub22 extends Linkable {
          }
       }
 
-      for(var16 = 0; var16 < TextureOperation8.anInt3466 + TextureOperation8.anInt3466 + 1; ++var16) {
-         for(var17 = 0; var17 < TextureOperation8.anInt3466 + TextureOperation8.anInt3466 + 1; ++var17) {
+      for(var16 = 0; var16 < TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles + 1; ++var16) {
+         for(var17 = 0; var17 < TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles + 1; ++var17) {
             Class23.aBooleanArrayArray457[var16][var17] = Class49.aBooleanArrayArray814[var16][var17] || Class49.aBooleanArrayArray814[var16 + 1][var17] || Class49.aBooleanArrayArray814[var16][var17 + 1] || Class49.aBooleanArrayArray814[var16 + 1][var17 + 1];
          }
       }
@@ -121,7 +121,7 @@ final class Class3_Sub22 extends Linkable {
       Class75_Sub4.anIntArray2663 = var9;
       Unsorted.anIntArray39 = var10;
       Class72.method1294();
-      if(Class166.aClass3_Sub2ArrayArrayArray2065 != null) {
+      if(Class166.aTileDataArrayArrayArray2065 != null) {
          Class167.method2264(true);
          Class146.method2083(var0, var1, var2, null, 0, (byte)0, var13, var14);
          if(HDToolKit.highDetail) {
@@ -174,7 +174,7 @@ final class Class3_Sub22 extends Linkable {
          if(var2.anInt2351 >= 0 && Class51.anInterface2_838.method18(var2.anInt2351, 255) == 4) {
             var0.glColor4fv(Class114.method1705(var2.anInt2355, 0), 0);
             float var3 = 201.5F - (var2.aBoolean2364?1.0F:0.5F);
-            var2.method149(Class75_Sub2.aClass3_Sub2ArrayArrayArray2638, var3, true);
+            var2.method149(TileData.aTileDataArrayArrayArray2638, var3, true);
          }
       }
 

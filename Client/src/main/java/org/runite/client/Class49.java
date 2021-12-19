@@ -33,7 +33,7 @@ public final class Class49 {
 
                 for (int var5 = 0; var5 < 13; ++var5) {
                     for (int var6 = 0; var6 < 13; ++var6) {
-                        int var8 = ObjectDefinition.anIntArrayArrayArray1497[var4][var5][var6];
+                        int var8 = ObjectDefinition.rawChunkData[var4][var5][var6];
                         boolean var7 = false;
                         if (var8 != -1) {
                             int var9 = var8 >> 24 & 3;
@@ -43,8 +43,8 @@ public final class Class49 {
                                 int var11 = 1023 & var8 >> 14;
                                 int var13 = (var11 / 8 << 8) + var12 / 8;
 
-                                for (int var14 = 0; var14 < Class3_Sub24_Sub3.anIntArray3494.length; ++var14) {
-                                    if (var13 == Class3_Sub24_Sub3.anIntArray3494[var14] && null != var3[var14]) {
+                                for (int var14 = 0; var14 < Class3_Sub24_Sub3.regionIds.length; ++var14) {
+                                    if (var13 == Class3_Sub24_Sub3.regionIds[var14] && null != var3[var14]) {
                                         Unsorted.method60(var10, 8 * var5, var4, AtmosphereParser.aClass91Array1182, var6 * 8, (byte) -100, var3[var14], var9, (var12 & 7) * 8, 8 * (var11 & 7), var0);
                                         var7 = true;
                                         break;
@@ -192,8 +192,8 @@ public final class Class49 {
                 }
 
                 Unsorted.menuOptionCount = 1;
-                Class140_Sub7.aClass94Array2935[0] = TextCore.HasCancel;
-                Class163_Sub2_Sub1.aClass94Array4016[0] = RSString.parse("");
+                GroundItem.aStringArray2935[0] = TextCore.HasCancel;
+                Class163_Sub2_Sub1.aStringArray4016[0] = RSString.parse("");
                 TextureOperation27.aShortArray3095[0] = 1005;
                 Class114.anIntArray1578[0] = Class3_Sub28_Sub5.anInt3590;
             }
@@ -266,15 +266,15 @@ public final class Class49 {
                     for (int var2 = 0; Class3_Sub28_Sub3.anInt3557 > var2; ++var2) {
                         if (!Unsorted.aBooleanArray1712[var2]) {
                             if (Class163_Sub1_Sub1.aBooleanArray4008[var2]) {
-                                Toolkit.getActiveToolkit().fillRect(AudioChannel.anIntArray1969[var2], Player.anIntArray3954[var2], Class3_Sub28_Sub18.anIntArray3768[var2], Class140_Sub4.anIntArray2794[var2], 16711680, 128);
+                                Toolkit.getActiveToolkit().fillRect(AudioChannel.anIntArray1969[var2], Player.anIntArray3954[var2], Class3_Sub28_Sub18.anIntArray3768[var2], Entity.anIntArray2794[var2], 16711680, 128);
                             }
                         } else {
-                            Toolkit.getActiveToolkit().fillRect(AudioChannel.anIntArray1969[var2], Player.anIntArray3954[var2], Class3_Sub28_Sub18.anIntArray3768[var2], Class140_Sub4.anIntArray2794[var2], 16711935, 128);
+                            Toolkit.getActiveToolkit().fillRect(AudioChannel.anIntArray1969[var2], Player.anIntArray3954[var2], Class3_Sub28_Sub18.anIntArray3768[var2], Entity.anIntArray2794[var2], 16711935, 128);
                         }
                     }
                 }
 
-                LinkedList.method1214(Class106.anInt1446, Class102.player.xAxis, Class102.player.zAxis, WorldListCountry.localPlane);
+                LinkedList.method1214(Class106.anInt1446, Class102.player.xAxis, Class102.player.yAxis, WorldListCountry.localPlane);
                 Class106.anInt1446 = 0;
             }
         } catch (RuntimeException var3) {
@@ -351,13 +351,13 @@ public final class Class49 {
 
                 for (int var2 = 0; -1 + Unsorted.menuOptionCount > var2; ++var2) {
                     if (TextureOperation27.aShortArray3095[var2] < 1000 && TextureOperation27.aShortArray3095[1 + var2] > 1000) {
-                        RSString var3 = Class163_Sub2_Sub1.aClass94Array4016[var2];
+                        RSString var3 = Class163_Sub2_Sub1.aStringArray4016[var2];
                         var1 = false;
-                        Class163_Sub2_Sub1.aClass94Array4016[var2] = Class163_Sub2_Sub1.aClass94Array4016[1 + var2];
-                        Class163_Sub2_Sub1.aClass94Array4016[1 + var2] = var3;
-                        RSString var4 = Class140_Sub7.aClass94Array2935[var2];
-                        Class140_Sub7.aClass94Array2935[var2] = Class140_Sub7.aClass94Array2935[var2 + 1];
-                        Class140_Sub7.aClass94Array2935[var2 - -1] = var4;
+                        Class163_Sub2_Sub1.aStringArray4016[var2] = Class163_Sub2_Sub1.aStringArray4016[1 + var2];
+                        Class163_Sub2_Sub1.aStringArray4016[1 + var2] = var3;
+                        RSString var4 = GroundItem.aStringArray2935[var2];
+                        GroundItem.aStringArray2935[var2] = GroundItem.aStringArray2935[var2 + 1];
+                        GroundItem.aStringArray2935[var2 - -1] = var4;
                         int var5 = Class117.anIntArray1613[var2];
                         Class117.anIntArray1613[var2] = Class117.anIntArray1613[1 + var2];
                         Class117.anIntArray1613[var2 + 1] = var5;

@@ -22,17 +22,17 @@ final class Class154 {
             var10.anInt1059 = var7;
 
             for (int var11 = var0; var11 >= 0; --var11) {
-                if (Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var11][var1][var2] == null) {
-                    Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var11][var1][var2] = new Class3_Sub2(var11, var1, var2);
+                if (TileData.aTileDataArrayArrayArray2638[var11][var1][var2] == null) {
+                    TileData.aTileDataArrayArrayArray2638[var11][var1][var2] = new TileData(var11, var1, var2);
                 }
             }
 
-            Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2].aClass70_2234 = var10;
+            TileData.aTileDataArrayArrayArray2638[var0][var1][var2].aClass70_2234 = var10;
         }
     }
 
     static Class70 method2147(int var0, int var1, int var2) {
-        Class3_Sub2 var3 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2];
+        TileData var3 = TileData.aTileDataArrayArrayArray2638[var0][var1][var2];
         return var3 == null ? null : var3.aClass70_2234;
     }
 
@@ -40,7 +40,7 @@ final class Class154 {
         try {
             if (999999999 <= var0) {
 
-                return TextCore.aClass94_1687;
+                return TextCore.aString_1687;
             } else {
                 return RSString.stringAnimator(var0);
             }

@@ -11,7 +11,7 @@ import java.util.Objects;
 public class LoginHandler {
 
     private static final BufferedDataStream buffer = new BufferedDataStream();
-    static CacheIndex aClass153_1680;
+    static CacheIndex configurationsIndex_1680;
     static boolean dynamic;
     public static int loginStage = 0;
     static long isaacServerKey = 0L;
@@ -129,7 +129,7 @@ public class LoginHandler {
                         buffer.writeByte(1);
                         buffer.writeByte(Class83.getWindowType());
                         buffer.writeShort(Class23.canvasWidth);
-                        buffer.writeShort(Class140_Sub7.canvasHeight);
+                        buffer.writeShort(GroundItem.canvasHeight);
                         buffer.writeByte(Unsorted.anInt3671);
                         Class81.putRandomDataFile(buffer, true);
                         buffer.writeString(Class163_Sub2.paramSettings);
@@ -279,12 +279,12 @@ public class LoginHandler {
                         if (!Client.paramAdvertisementSuppressed) {
                             if ((!Class3_Sub15.aBoolean2433 || Unsorted.aBoolean4063) && !TextureOperation3.disableGEBoxes) {
                                 try {
-                                    TextCore.aClass94_516.method1577(Class38.gameSignlink.gameApplet);
+                                    TextCore.aString_516.method1577(Class38.gameSignlink.gameApplet);
                                 } catch (Throwable var5) {
                                 }
                             } else {
                                 try {
-                                    Class97.aClass94_1374.method1577(Class38.gameSignlink.gameApplet);
+                                    Class97.aString_1374.method1577(Class38.gameSignlink.gameApplet);
                                 } catch (Throwable var6) {
                                 }
                             }
@@ -306,7 +306,7 @@ public class LoginHandler {
                         Client.messageToDisplay = 2;
                         loginStage = 0;
                         SequenceDefinition.resetAll();
-                        Unsorted.anInt3606 = -1;
+                        Unsorted.viewportX = -1;
                         Class39.updateSceneGraph(dynamic);
                         Unsorted.incomingOpcode = -1;
                         return;

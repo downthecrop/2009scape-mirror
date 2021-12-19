@@ -9,21 +9,21 @@ final class TextureOperation4 extends TextureOperation {
    private int anInt3223;
    private int anInt3224 = 81;
    private int[][] anIntArrayArray3225;
-   static CacheIndex aClass153_3227;
+   static CacheIndex configurationsIndex_3227;
    private int anInt3229 = 1024;
    private int[] anIntArray3230;
    private int anInt3231 = 0;
-   private static RSString aClass94_3232 = RSString.parse("pt");
+   private static RSString aString_3232 = RSString.parse("pt");
    private int anInt3233 = 8;
    private int anInt3234 = 1024;
    private int anInt3235;
    private int anInt3236 = 409;
-   private static final RSString aClass94_3237 = RSString.parse("en");
-   private static RSString aClass94_3239 = RSString.parse("fr");
+   private static final RSString aString_3237 = RSString.parse("en");
+   private static RSString aString_3239 = RSString.parse("fr");
    private int[][] anIntArrayArray3240;
    private int anInt3242 = 4;
-   private static final RSString aClass94_3243 = RSString.parse("de");
-   static RSString[] aClass94Array3238 = new RSString[]{aClass94_3237, aClass94_3243, aClass94_3239, aClass94_3232};
+   private static final RSString aString_3243 = RSString.parse("de");
+   static RSString[] aStringArray3238 = new RSString[]{aString_3237, aString_3243, aString_3239, aString_3232};
    
 
    final void postDecode() {
@@ -66,7 +66,7 @@ final class TextureOperation4 extends TextureOperation {
          }
 
          if(!true) {
-            aClass94_3239 = null;
+            aString_3239 = null;
          }
 
       } catch (RuntimeException var5) {
@@ -159,7 +159,7 @@ final class TextureOperation4 extends TextureOperation {
          }
 
          if(var0 < 83) {
-            aClass94_3232 = null;
+            aString_3232 = null;
          }
 
          if(null != TextureOperation27.aClass11_3087) {

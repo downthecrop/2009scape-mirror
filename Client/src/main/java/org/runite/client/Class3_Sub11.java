@@ -162,7 +162,7 @@ final class Class3_Sub11 extends Linkable {
         this.aFloatArray2346 = null;
     }
 
-    final void method149(Class3_Sub2[][][] var1, float var2, boolean var3) {
+    final void method149(TileData[][][] var1, float var2, boolean var3) {
         if (aClass3_Sub30_2372 != null && aClass3_Sub30_2372.buffer.length >= this.anInt2359 * 4) {
             aClass3_Sub30_2372.index = 0;
         } else {
@@ -176,7 +176,7 @@ final class Class3_Sub11 extends Linkable {
         }
 
         int var4;
-        Class3_Sub2 var5;
+        TileData var5;
         DataBuffer var6;
         int[] var7;
         int[] var8;

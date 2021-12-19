@@ -2,7 +2,7 @@ package org.runite.client;
 
 import java.util.Objects;
 
-public final class NPC extends Class140_Sub4 {
+public final class NPC extends Entity {
 
     static boolean aBoolean3975 = false;
     static int[] npcSpawnCacheIndices;
@@ -51,7 +51,7 @@ public final class NPC extends Class140_Sub4 {
         }
     }
 
-    static boolean method1986(int var0) {
+    static boolean isHighDetail(int var0) {
         try {
             if (var0 <= 22) {
                 method1984(-48, 88, 31);
@@ -68,31 +68,31 @@ public final class NPC extends Class140_Sub4 {
             try {
                 if (Unsorted.anInt154 == 2) {
                     if (aClass3_Sub27_1154 == null) {
-                        aClass3_Sub27_1154 = Class3_Sub27.method517(Class101.aClass153_1423, TextureOperation8.anInt3463, Class132.anInt1741);
+                        aClass3_Sub27_1154 = Class3_Sub27.method517(Class101.musicIndex_1423, TextureOperation8.anInt3463, Class132.anInt1741);
                         if (null == aClass3_Sub27_1154) {
                             return false;
                         }
                     }
 
                     if (QuickChatDefinition.aClass83_3579 == null) {
-                        QuickChatDefinition.aClass83_3579 = new Class83(Class40.aClass153_679, Class3_Sub28_Sub20.aClass153_3786);
+                        QuickChatDefinition.aClass83_3579 = new Class83(Class40.soundFXIndex_679, Class3_Sub28_Sub20.soundFX2Index_3786);
                     }
 
-                    if (Class101.aClass3_Sub24_Sub4_1421.method470(aClass3_Sub27_1154, Class124.aClass153_1661, QuickChatDefinition.aClass83_3579)) {
+                    if (Class101.aClass3_Sub24_Sub4_1421.method470(aClass3_Sub27_1154, Class124.soundFX3Index_1661, QuickChatDefinition.aClass83_3579)) {
                         Class101.aClass3_Sub24_Sub4_1421.method471();
                         Class101.aClass3_Sub24_Sub4_1421.method506(TextureOperation36.anInt3423);
                         Class101.aClass3_Sub24_Sub4_1421.method490(Unsorted.aBoolean2311, aClass3_Sub27_1154);
                         Unsorted.anInt154 = 0;
                         aClass3_Sub27_1154 = null;
                         QuickChatDefinition.aClass83_3579 = null;
-                        Class101.aClass153_1423 = null;
+                        Class101.musicIndex_1423 = null;
                         return true;
                     }
                 }
             } catch (Exception var2) {
                 var2.printStackTrace();
                 Class101.aClass3_Sub24_Sub4_1421.method505((byte) -128);
-                Class101.aClass153_1423 = null;
+                Class101.musicIndex_1423 = null;
                 aClass3_Sub27_1154 = null;
                 Unsorted.anInt154 = 0;
                 QuickChatDefinition.aClass83_3579 = null;
@@ -133,7 +133,7 @@ public final class NPC extends Class140_Sub4 {
                             var12.anInt1891 = 1;
                             var12.anInt1897 = 0;
                             var12.anInt1900 = var8;
-                            Unsorted.method1470(var2.zAxis, var10, var2.xAxis, false, 0);
+                            Unsorted.method1470(var2.yAxis, var10, var2.xAxis, false, 0);
                          } else if(var11 == 2) {
                             var12.anInt1894 = 0;
                          }
@@ -147,7 +147,7 @@ public final class NPC extends Class140_Sub4 {
                          var12.animationId = var6;
                          var12.anInt1894 = 0;
                          var12.anInt1893 = 0;
-                         Unsorted.method1470(var2.zAxis, var10, var2.xAxis, false, 0);
+                         Unsorted.method1470(var2.yAxis, var10, var2.xAxis, false, 0);
                       }
                    }
                 }
@@ -189,7 +189,7 @@ public final class NPC extends Class140_Sub4 {
 
                     Model var17;
                     if (Class140_Sub6.aBoolean2910 && Objects.requireNonNull(var16).aBoolean1249) {
-                        var17 = Class140_Sub3.method1957(this.definition.aByte1287, this.aBoolean2810, null == var14 ? var13 : var14, this.xAxis, this.definition.aShort1256, this.zAxis, this.definition.aShort1286, this.definition.size, var15, var1, null != var14 ? this.anInt2813 : this.anInt2832, this.anInt2831, this.definition.aByte1275);
+                        var17 = Class140_Sub3.method1957(this.definition.aByte1287, this.aBoolean2810, null == var14 ? var13 : var14, this.xAxis, this.definition.aShort1256, this.yAxis, this.definition.aShort1286, this.definition.size, var15, var1, null != var14 ? this.anInt2813 : this.anInt2832, this.anInt2831, this.definition.aByte1275);
                         if (HDToolKit.highDetail) {
                             float var18 = HDToolKit.method1852();
                             float var19 = HDToolKit.method1839();

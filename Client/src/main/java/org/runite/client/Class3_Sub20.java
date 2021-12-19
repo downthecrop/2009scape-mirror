@@ -6,7 +6,7 @@ import org.rs09.client.data.NodeCache;
 final class Class3_Sub20 extends Linkable {
 
     static int[] anIntArray2480 = new int[25];
-    static RSString aClass94_3220;
+    static RSString aString_3220;
     static NodeCache aClass47_3801 = new NodeCache(4);
 
     int anInt2483;
@@ -19,9 +19,9 @@ final class Class3_Sub20 extends Linkable {
     static void method388(byte var0) {
         try {
             //int var1 = 44 / ((-2 - var0) / 52);
-            if (aClass94_3220 != null) {
-                Class3_Sub10.method138(aClass94_3220);
-                aClass94_3220 = null;
+            if (aString_3220 != null) {
+                Class3_Sub10.method138(aString_3220);
+                aString_3220 = null;
             }
 
         } catch (RuntimeException var2) {
@@ -92,7 +92,7 @@ final class Class3_Sub20 extends Linkable {
             if (var0 && Unsorted.anInt3631 >= 100) {
                 NPC.anInt3995 = 128 * Unsorted.anInt30 + 64;
                 Class77.anInt1111 = 128 * Class146.anInt1904 + 64;
-                Class7.anInt2162 = Class121.method1736(WorldListCountry.localPlane, 1, NPC.anInt3995, Class77.anInt1111) + -TextureOperation25.anInt3414;
+                Class7.anInt2162 = Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, NPC.anInt3995, Class77.anInt1111) + -TextureOperation25.anInt3414;
             }
 
             // int var7 = 76 % ((-79 - var4) / 35);

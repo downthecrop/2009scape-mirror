@@ -5,7 +5,7 @@ import org.rs09.client.data.HashTable;
 final class Class124 {
 
     static HashTable aHashTable_1659 = new HashTable(512);
-    static CacheIndex aClass153_1661;
+    static CacheIndex soundFX3Index_1661;
 
 
     static void method1745() {
@@ -24,10 +24,10 @@ final class Class124 {
     static void method1746(boolean var0, byte var1) {
         try {
             if (var1 > -31) {
-                aClass153_1661 = null;
+                soundFX3Index_1661 = null;
             }
 
-            Class75_Sub4.method1352(Class140_Sub7.canvasHeight, var0, ConfigInventoryDefinition.anInt3655, Class23.canvasWidth);
+            Class75_Sub4.method1352(GroundItem.canvasHeight, var0, ConfigInventoryDefinition.anInt3655, Class23.canvasWidth);
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "rb.C(" + var0 + ',' + var1 + ')');
         }
@@ -39,7 +39,7 @@ final class Class124 {
             int var3 = var0.readUnsignedByte();
 
             for (int var4 = 0; var3 > var4; ++var4) {
-                var2.aLinkedList_3560.method1215(new Class3_Sub21(var0.readUnsignedShort(), var0.readUnsignedShort(), var0.readUnsignedShort(), var0.readUnsignedShort()));
+                var2.aLinkedList_3560.pushBack(new Class3_Sub21(var0.readUnsignedShort(), var0.readUnsignedShort(), var0.readUnsignedShort(), var0.readUnsignedShort()));
             }
 
             var2.method538();

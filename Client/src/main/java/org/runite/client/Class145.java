@@ -36,11 +36,11 @@ final class Class145 {
         }
     }
 
-    static void method2073(Class3_Sub2 var0, boolean var1) {
-        Class163_Sub1.aLinkedList_2990.method1215(var0);
+    static void method2073(TileData var0, boolean var1) {
+        Class163_Sub1.aLinkedList_2990.pushBack(var0);
 
         while (true) {
-            Class3_Sub2 var2 = (Class3_Sub2) Class163_Sub1.aLinkedList_2990.method1220();
+            TileData var2 = (TileData) Class163_Sub1.aLinkedList_2990.method1220();
             if (var2 == null) {
                 return;
             }
@@ -50,7 +50,7 @@ final class Class145 {
                 int var4 = var2.anInt2231;
                 int var5 = var2.anInt2244;
                 int var6 = var2.anInt2238;
-                Class3_Sub2[][] var7 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var5];
+                TileData[][] var7 = TileData.aTileDataArrayArrayArray2638[var5];
                 float var8 = 0.0F;
                 int var9;
                 int var10;
@@ -86,15 +86,15 @@ final class Class145 {
                 int var17;
                 int var16;
                 int var18;
-                Class3_Sub2 var21;
+                TileData var21;
                 Class70 var23;
                 boolean var22;
                 Class25 var25;
-                Class3_Sub2 var35;
+                TileData var35;
                 if (var2.aBoolean2222) {
                     if (var1) {
                         if (var5 > 0) {
-                            var21 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var5 - 1][var3][var4];
+                            var21 = TileData.aTileDataArrayArrayArray2638[var5 - 1][var3][var4];
                             if (var21 != null && var21.aBoolean2225) {
                                 continue;
                             }
@@ -240,7 +240,7 @@ final class Class145 {
                             var2.anInt2232 = 3 - var2.anInt2229;
                         } else if (var26.anInt1055 == 32) {
                             var2.anInt2227 = 6;
-                            var2.anInt2229 = Class140_Sub7.anIntArray2933[var10];
+                            var2.anInt2229 = GroundItem.anIntArray2933[var10];
                             var2.anInt2232 = 6 - var2.anInt2229;
                         } else if (var26.anInt1055 == 64) {
                             var2.anInt2227 = 12;
@@ -360,28 +360,28 @@ final class Class145 {
                         if (var3 < Class97.anInt1375 && (var14 & 4) != 0) {
                             var35 = var7[var3 + 1][var4];
                             if (var35 != null && var35.aBoolean2225) {
-                                Class163_Sub1.aLinkedList_2990.method1215(var35);
+                                Class163_Sub1.aLinkedList_2990.pushBack(var35);
                             }
                         }
 
                         if (var4 < anInt3340 && (var14 & 2) != 0) {
                             var35 = var7[var3][var4 + 1];
                             if (var35 != null && var35.aBoolean2225) {
-                                Class163_Sub1.aLinkedList_2990.method1215(var35);
+                                Class163_Sub1.aLinkedList_2990.pushBack(var35);
                             }
                         }
 
                         if (var3 > Class97.anInt1375 && (var14 & 1) != 0) {
                             var35 = var7[var3 - 1][var4];
                             if (var35 != null && var35.aBoolean2225) {
-                                Class163_Sub1.aLinkedList_2990.method1215(var35);
+                                Class163_Sub1.aLinkedList_2990.pushBack(var35);
                             }
                         }
 
                         if (var4 > anInt3340 && (var14 & 8) != 0) {
                             var35 = var7[var3][var4 - 1];
                             if (var35 != null && var35.aBoolean2225) {
-                                Class163_Sub1.aLinkedList_2990.method1215(var35);
+                                Class163_Sub1.aLinkedList_2990.pushBack(var35);
                             }
                         }
                     }
@@ -411,21 +411,21 @@ final class Class145 {
                                         if (var27 == 0) {
                                             var11 -= 64;
                                             var12 += 64;
-                                            if (var12 < var11 && var3 > 0 && var4 < TextureOperation17.anInt3179 - 1) {
+                                            if (var12 < var11 && var3 > 0 && var4 < TextureOperation17.height3179 - 1) {
                                                 Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3 - 1, var4 + 1);
                                                 break label736;
                                             }
                                         } else if (var27 == 1) {
                                             var11 += 64;
                                             var12 += 64;
-                                            if (var12 < -var11 && var3 < Unsorted.anInt1234 - 1 && var4 < TextureOperation17.anInt3179 - 1) {
+                                            if (var12 < -var11 && var3 < Unsorted.width1234 - 1 && var4 < TextureOperation17.height3179 - 1) {
                                                 Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3 + 1, var4 + 1);
                                                 break label736;
                                             }
                                         } else if (var27 == 2) {
                                             var11 += 64;
                                             var12 -= 64;
-                                            if (var12 > var11 && var3 < Unsorted.anInt1234 - 1 && var4 > 0) {
+                                            if (var12 > var11 && var3 < Unsorted.width1234 - 1 && var4 > 0) {
                                                 Class68.method1268(anInt2697, Unsorted.anInt3657, TextureOperation13.anInt3363, var5, var3 + 1, var4 - 1);
                                                 break label736;
                                             }
@@ -567,11 +567,11 @@ final class Class145 {
 
                             for (var14 = var32.anInt483; var14 <= var32.anInt495; ++var14) {
                                 for (var15 = var32.anInt478; var15 <= var32.anInt481; ++var15) {
-                                    Class3_Sub2 var37 = var7[var14][var15];
+                                    TileData var37 = var7[var14][var15];
                                     if (var37.anInt2227 != 0) {
-                                        Class163_Sub1.aLinkedList_2990.method1215(var37);
+                                        Class163_Sub1.aLinkedList_2990.pushBack(var37);
                                     } else if ((var14 != var3 || var15 != var4) && var37.aBoolean2225) {
-                                        Class163_Sub1.aLinkedList_2990.method1215(var37);
+                                        Class163_Sub1.aLinkedList_2990.pushBack(var37);
                                     }
                                 }
                             }
@@ -697,39 +697,39 @@ final class Class145 {
                         }
                     }
 
-                    Class3_Sub2 var33;
+                    TileData var33;
                     if (var5 < Class3_Sub17.anInt2456 - 1) {
-                        var33 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var5 + 1][var3][var4];
+                        var33 = TileData.aTileDataArrayArrayArray2638[var5 + 1][var3][var4];
                         if (var33 != null && var33.aBoolean2225) {
-                            Class163_Sub1.aLinkedList_2990.method1215(var33);
+                            Class163_Sub1.aLinkedList_2990.pushBack(var33);
                         }
                     }
 
                     if (var3 < Class97.anInt1375) {
                         var33 = var7[var3 + 1][var4];
                         if (var33 != null && var33.aBoolean2225) {
-                            Class163_Sub1.aLinkedList_2990.method1215(var33);
+                            Class163_Sub1.aLinkedList_2990.pushBack(var33);
                         }
                     }
 
                     if (var4 < anInt3340) {
                         var33 = var7[var3][var4 + 1];
                         if (var33 != null && var33.aBoolean2225) {
-                            Class163_Sub1.aLinkedList_2990.method1215(var33);
+                            Class163_Sub1.aLinkedList_2990.pushBack(var33);
                         }
                     }
 
                     if (var3 > Class97.anInt1375) {
                         var33 = var7[var3 - 1][var4];
                         if (var33 != null && var33.aBoolean2225) {
-                            Class163_Sub1.aLinkedList_2990.method1215(var33);
+                            Class163_Sub1.aLinkedList_2990.pushBack(var33);
                         }
                     }
 
                     if (var4 > anInt3340) {
                         var33 = var7[var3][var4 - 1];
                         if (var33 != null && var33.aBoolean2225) {
-                            Class163_Sub1.aLinkedList_2990.method1215(var33);
+                            Class163_Sub1.aLinkedList_2990.pushBack(var33);
                         }
                     }
                 }
@@ -764,7 +764,7 @@ final class Class145 {
         try {
             Class29 var2 = (Class29) Class136.aReferenceCache_1772.get(var1);
             if (var2 == null) {
-                byte[] var3 = TextureOperation20.aClass153_3154.getFile(16, var1);
+                byte[] var3 = TextureOperation20.configurationsIndex_3154.getFile(16, var1);
                 {
                     var2 = new Class29();
                     if (null != var3) {

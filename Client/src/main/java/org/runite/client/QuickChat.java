@@ -4,8 +4,8 @@ import org.rs09.client.data.NodeCache;
 
 final class QuickChat {
 
-    static CacheIndex aClass153_1967;
-    static CacheIndex aClass153_3490;
+    static CacheIndex quickchatMenusIndex_1967;
+    static CacheIndex quickchatMessagesIndex_3490;
     static NodeCache aClass47_3137 = new NodeCache(64);
     static NodeCache aClass47_3776 = new NodeCache(64);
     static int anInt377 = 0;
@@ -17,15 +17,15 @@ final class QuickChat {
 
     static void method205(CacheIndex quickchatMenusIndex, CacheIndex quickchatMessagesIndex, Interface4 var3) {
         try {
-            aClass153_1967 = quickchatMenusIndex;
+            quickchatMenusIndex_1967 = quickchatMenusIndex;
             Class58.anInterface4_915 = var3;
-            aClass153_3490 = quickchatMessagesIndex;
-            if (aClass153_3490 != null) {
-                anInt1156 = aClass153_3490.getFileAmount(1);
+            quickchatMessagesIndex_3490 = quickchatMessagesIndex;
+            if (quickchatMessagesIndex_3490 != null) {
+                anInt1156 = quickchatMessagesIndex_3490.getFileAmount(1);
             }
 
-            if (aClass153_1967 != null) {
-                anInt377 = aClass153_1967.getFileAmount(1);
+            if (quickchatMenusIndex_1967 != null) {
+                anInt377 = quickchatMenusIndex_1967.getFileAmount(1);
             }
         } catch (RuntimeException var5) {
             throw ClientErrorException.clientError(var5, "ej.E(" + (quickchatMenusIndex != null ? "{...}" : "null") + ',' + 115 + ',' + (quickchatMessagesIndex != null ? "{...}" : "null") + ',' + (var3 != null ? "{...}" : "null") + ')');
@@ -38,9 +38,9 @@ final class QuickChat {
             if (null == var2) {
                 byte[] var3;
                 if (var1 < 32768) {
-                    var3 = aClass153_3490.getFile(1, var1);
+                    var3 = quickchatMessagesIndex_3490.getFile(1, var1);
                 } else {
-                    var3 = aClass153_1967.getFile(1, 32767 & var1);
+                    var3 = quickchatMenusIndex_1967.getFile(1, 32767 & var1);
                 }
 
                 var2 = new QuickChatDefinition();
@@ -81,7 +81,7 @@ final class QuickChat {
                 if (fileId < 32768) {
                     var3 = Unsorted.quickChatMessages.getFile(0, fileId);
                 } else {
-                    var3 = Unsorted.aClass153_332.getFile(0, fileId & 32767);
+                    var3 = Unsorted.quickchatMenusIndex_332.getFile(0, fileId & 32767);
                 }
 
                 var2 = new Class3_Sub28_Sub1();
@@ -104,7 +104,7 @@ final class QuickChat {
     static void method1236(CacheIndex var0, CacheIndex var1) {
         try {
             Unsorted.quickChatMessages = var1;
-            Unsorted.aClass153_332 = var0;
+            Unsorted.quickchatMenusIndex_332 = var0;
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "ja.F(" + (var0 != null ? "{...}" : "null") + ',' + (var1 != null ? "{...}" : "null") + ',' + -117 + ')');
         }

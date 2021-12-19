@@ -65,13 +65,14 @@ final class TextureOperation24 extends TextureOperation {
         try {
             if (var0 != -1) {
                 if (Unsorted.loadInterface(var0)) {
-                    RSInterface[] var2 = GameObject.aClass11ArrayArray1834[var0];
+                    RSInterface[] var2 = GameObject.interfaces1834[var0];
 
                     for (int var3 = 0; var3 < var2.length; ++var3) {
                         RSInterface var4 = var2[var3];
-                        if (null != var4.anObjectArray159) {
+                        if (null != var4.interfaceScript159) {
                             CS2Script var5 = new CS2Script();
-                            var5.arguments = var4.anObjectArray159;
+                            System.out.printf("Interface (%d, %d) running script %d\n", var4.componentHash >> 16, var4.componentHash & 0xffff, var4.interfaceScript159[0]);
+                            var5.arguments = var4.interfaceScript159;
                             var5.aClass11_2449 = var4;
                             DumpingTools.RunOnceAfterStartup();
                             CS2Script.runAssembledScript(2000000, var5);

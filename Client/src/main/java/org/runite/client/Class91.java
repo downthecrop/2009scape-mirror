@@ -2,7 +2,7 @@ package org.runite.client;
 
 final class Class91 {
 
-    static RSString[] aClass94Array1299 = new RSString[8];
+    static RSString[] aStringArray1299 = new RSString[8];
     static int anInt1302 = 0;
     static Class33 aClass33_1305;
     static byte aByte1308;
@@ -710,7 +710,7 @@ final class Class91 {
             }
 
             if (var8 <= 78) {
-                TextCore.aClass94_1301 = null;
+                TextCore.aString_1301 = null;
             }
 
             var7 -= this.anInt1309;

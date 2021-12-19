@@ -7,7 +7,7 @@ class Class163_Sub2 extends Class163 {
 
 
    static Class25 method2217(int var0, int var1, int var2) {
-      Class3_Sub2 var3 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2];
+      TileData var3 = TileData.aTileDataArrayArrayArray2638[var0][var1][var2];
       if (var3 != null) {
          for (int var4 = 0; var4 < var3.anInt2223; ++var4) {
             Class25 var5 = var3.aClass25Array2221[var4];

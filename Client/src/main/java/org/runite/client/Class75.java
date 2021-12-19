@@ -24,7 +24,7 @@ abstract class Class75 {
     }
 
     static Class25 method1336(int var0, int var1, int var2) {
-        Class3_Sub2 var3 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2];
+        TileData var3 = TileData.aTileDataArrayArrayArray2638[var0][var1][var2];
         if (var3 != null) {
             for (int var4 = 0; var4 < var3.anInt2223; ++var4) {
                 Class25 var5 = var3.aClass25Array2221[var4];
@@ -39,8 +39,8 @@ abstract class Class75 {
 
     static void method1339(RSString var0) {
         try {
-            for (Class3_Sub28_Sub3 var2 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.method1222(); var2 != null; var2 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.method1221()) {
-                if (var2.aClass94_3561.equalsString(var0)) {
+            for (Class3_Sub28_Sub3 var2 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.startIteration(); var2 != null; var2 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.nextIteration()) {
+                if (var2.aString_3561.equalsString(var0)) {
                     Unsorted.aClass3_Sub28_Sub3_2600 = var2;
                     return;
                 }

@@ -23,7 +23,7 @@ final class Class31 {
         if (var2 == anInt582) {
             LinkableInt var3 = new LinkableInt(var1);
             var3.linkableKey = var0;
-            A_LINKED_LIST___587.method1215(var3);
+            A_LINKED_LIST___587.pushBack(var3);
         }
     }
 
@@ -31,16 +31,16 @@ final class Class31 {
         if (var1 == anInt582) {
             LinkableInt var2 = new LinkableInt();
             var2.linkableKey = var0;
-            A_LINKED_LIST___588.method1215(var2);
+            A_LINKED_LIST___588.pushBack(var2);
         }
     }
 
     static synchronized void method988() {
         ++anInt582;
-        A_LINKED_LIST___581.method1211(-110);
-        A_LINKED_LIST___586.method1211(-88);
-        A_LINKED_LIST___587.method1211(-123);
-        A_LINKED_LIST___588.method1211(-115);
+        A_LINKED_LIST___581.clear();
+        A_LINKED_LIST___586.clear();
+        A_LINKED_LIST___587.clear();
+        A_LINKED_LIST___588.clear();
         anInt585 = 0;
         memory2D = 0;
         anInt580 = 0;
@@ -50,7 +50,7 @@ final class Class31 {
         if (var2 == anInt582) {
             LinkableInt var3 = new LinkableInt(var1);
             var3.linkableKey = var0;
-            A_LINKED_LIST___581.method1215(var3);
+            A_LINKED_LIST___581.pushBack(var3);
         }
     }
 
@@ -123,7 +123,7 @@ final class Class31 {
         if (var2 == anInt582) {
             LinkableInt var3 = new LinkableInt(var1);
             var3.linkableKey = var0;
-            A_LINKED_LIST___586.method1215(var3);
+            A_LINKED_LIST___586.pushBack(var3);
         }
     }
 

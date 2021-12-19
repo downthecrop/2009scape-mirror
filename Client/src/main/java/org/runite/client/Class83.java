@@ -6,16 +6,16 @@ import org.rs09.client.rendering.Toolkit;
 public final class Class83 {
 
     static int[] anIntArray1161;
-    private final CacheIndex aClass153_1153;
+    private final CacheIndex soundFXIndex_1153;
     private final HashTable aHashTable_1155 = new HashTable(256);
-    private final CacheIndex aClass153_1157;
+    private final CacheIndex soundFX2Index_1157;
     private final HashTable aHashTable_1159 = new HashTable(256);
 
 
     Class83(CacheIndex var1, CacheIndex var2) {
         try {
-            this.aClass153_1153 = var1;
-            this.aClass153_1157 = var2;
+            this.soundFXIndex_1153 = var1;
+            this.soundFX2Index_1157 = var2;
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "le.<init>(" + (var1 != null ? "{...}" : "null") + ',' + (var2 != null ? "{...}" : "null") + ')');
         }
@@ -969,7 +969,7 @@ public final class Class83 {
             } else if (null != var1 && var1[0] <= 0) {
                 return null;
             } else {
-                SynthSound var9 = SynthSound.create(this.aClass153_1153, var3, var4);
+                SynthSound var9 = SynthSound.create(this.soundFXIndex_1153, var3, var4);
                 if (null == var9) {
                     return null;
                 } else {
@@ -989,9 +989,9 @@ public final class Class83 {
 
     final PcmSound method1413(int var1, int[] var3) {
         try {
-            if (1 == this.aClass153_1153.method2121()) {
+            if (1 == this.soundFXIndex_1153.method2121()) {
                 return this.method1412(var3, 0, var1);
-            } else if (this.aClass153_1153.getFileAmount(var1) == 1) {
+            } else if (this.soundFXIndex_1153.getFileAmount(var1) == 1) {
                 return this.method1412(var3, var1, 0);
             } else {
 
@@ -1015,7 +1015,7 @@ public final class Class83 {
             } else {
                 Class3_Sub14 var9 = (Class3_Sub14) this.aHashTable_1155.get(var6);
                 if (null == var9) {
-                    var9 = Class3_Sub14.method363(this.aClass153_1157, var1, var3);
+                    var9 = Class3_Sub14.method363(this.soundFX2Index_1157, var1, var3);
                     if (null == var9) {
                         return null;
                     }
@@ -1041,9 +1041,9 @@ public final class Class83 {
 
     final PcmSound method1416(int var2, int[] var3) {
         try {
-            if (this.aClass153_1157.method2121() == 1) {
+            if (this.soundFX2Index_1157.method2121() == 1) {
                 return this.method1415(0, var3, var2);
-            } else if (this.aClass153_1157.getFileAmount(var2) == 1) {
+            } else if (this.soundFX2Index_1157.getFileAmount(var2) == 1) {
                 return this.method1415(var2, var3, 0);
             } else {
                 throw new RuntimeException();

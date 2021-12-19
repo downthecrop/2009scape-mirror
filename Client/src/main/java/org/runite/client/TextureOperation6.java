@@ -6,7 +6,7 @@ import java.util.Objects;
 
 final class TextureOperation6 extends TextureOperation {
 
-   //static RSString aClass94_3042 = RSString.createRSString("<col=ff9040>");
+   //static RSString aString_3042 = RSString.createRSString("<col=ff9040>");
    private int anInt3043 = 0;
    private int anInt3046 = 4096;
 
@@ -21,7 +21,7 @@ final class TextureOperation6 extends TextureOperation {
              this.aBoolean2375 = var2.readUnsignedByte() == 1;
          }
 
-         //aClass94_3042 = (RSString)null;
+         //aString_3042 = (RSString)null;
 
       } catch (RuntimeException var5) {
          throw ClientErrorException.clientError(var5, "aj.A(" + var1 + ',' + (var2 != null?"{...}":"null") + ',' + true + ')');

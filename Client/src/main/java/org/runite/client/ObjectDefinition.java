@@ -24,7 +24,7 @@ public final class ObjectDefinition {
     int anInt1484;
     int SizeY = 1;
     boolean ProjectileClipped;
-    private int[] configuration;
+    public int[] configuration;
     private int anInt1488;
     private int anInt1489;
     static boolean[] aBooleanArray1490 = new boolean[112];
@@ -34,14 +34,14 @@ public final class ObjectDefinition {
     private int anInt1494 = 0;
     private short[] aShortArray1495;
     private int anInt1496;
-    static int[][][] anIntArrayArrayArray1497 = new int[4][13][13];
+    static int[][][] rawChunkData = new int[4][13][13];
     boolean NotClipped;
-    RSString[] options;
+    public RSString[] options;
     private short aShort1500;
     private HashTable aHashTable_1501;
     boolean aBoolean1502 = false;
     boolean aBoolean1503;
-    RSString name;
+    public RSString name;
     private byte aByte1505;
     private short[] ModifiedColors;
     boolean aBoolean1507;
@@ -60,13 +60,13 @@ public final class ObjectDefinition {
     int anInt1522;
     public int[] ChildrenIds;
     boolean aBoolean1525;
-    private int ConfigFileId;
+    public int ConfigFileId;
     int objectId;
     int anInt1528;
     int SecondInt;
     boolean aBoolean1530;
     int animationId;
-    private int ConfigId;
+    public int ConfigId;
     int WalkingFlag;
     private int SecondBool;
     static short aShort1535 = 320;
@@ -83,7 +83,7 @@ public final class ObjectDefinition {
             //36873, 24065, 22418
             ObjectDefinition objdef = (ObjectDefinition) Unsorted.aReferenceCache_21.get(objectId);
             if (objdef == null) {
-                byte[] var3 = Class85.aClass153_1171.getFile(TextureOperation36.method340(objectId), objectId & 0xFF);
+                byte[] var3 = Class85.objectConfigIndex_1171.getFile(TextureOperation36.method340(objectId), objectId & 0xFF);
                 objdef = new ObjectDefinition();
                 objdef.objectId = objectId;
                 if (null != var3) {
@@ -113,7 +113,7 @@ public final class ObjectDefinition {
             if (this.configuration != null) {
                 for (int var7 = 0; var7 < this.configuration.length; ++var7) {
                     if (this.configuration[var7] == var2) {
-                        return Unsorted.aClass153_1043.method2129((byte) 72, 0, this.models[var7] & 65535);
+                        return Unsorted.modelsIndex_1043.method2129((byte) 72, 0, this.models[var7] & 65535);
                     }
                 }
 
@@ -124,7 +124,7 @@ public final class ObjectDefinition {
                 boolean var4 = true;
 
                 for (int var5 = 0; this.models.length > var5; ++var5) {
-                    var4 &= Unsorted.aClass153_1043.method2129((byte) 71, 0, 65535 & this.models[var5]);
+                    var4 &= Unsorted.modelsIndex_1043.method2129((byte) 71, 0, 65535 & this.models[var5]);
                 }
 
                 return var4;
@@ -144,7 +144,7 @@ public final class ObjectDefinition {
 
             int var2 = -1;
             if (this.ConfigFileId != -1) {
-                var2 = NPCDefinition.method1484(this.ConfigFileId);
+                var2 = NPCDefinition.lookupVarbit(this.ConfigFileId);
             } else if (this.ConfigId != -1) {
                 var2 = ItemDefinition.ram[this.ConfigId];
             }
@@ -189,7 +189,7 @@ public final class ObjectDefinition {
 
                     var4 = (Model_Sub1) aReferenceCache_1401.get(var8);
                     if (var4 == null) {
-                        var4 = Model_Sub1.method2015(Unsorted.aClass153_1043, var8 & 65535);
+                        var4 = Model_Sub1.method2015(Unsorted.modelsIndex_1043, var8 & 65535);
                         if (var4 == null) {
                             return null;
                         }
@@ -230,7 +230,7 @@ public final class ObjectDefinition {
 
                 var4 = (Model_Sub1) aReferenceCache_1401.get(var7);
                 if (null == var4) {
-                    var4 = Model_Sub1.method2015(Unsorted.aClass153_1043, var7 & 65535);
+                    var4 = Model_Sub1.method2015(Unsorted.modelsIndex_1043, var7 & 65535);
                     if (null == var4) {
                         return null;
                     }
@@ -296,7 +296,7 @@ public final class ObjectDefinition {
     }
 
     static void method1688(int var0, int var1, int var2) {
-        Class3_Sub2 var3 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2];
+        TileData var3 = TileData.aTileDataArrayArrayArray2638[var0][var1][var2];
         if (var3 == null) {
         } else {
             var3.aClass72_2245 = null;
@@ -653,7 +653,7 @@ public final class ObjectDefinition {
                 boolean var2 = true;
 
                 for (int var3 = 0; var3 < this.models.length; ++var3) {
-                    var2 &= Unsorted.aClass153_1043.method2129((byte) 64, 0, 65535 & this.models[var3]);
+                    var2 &= Unsorted.modelsIndex_1043.method2129((byte) 64, 0, 65535 & this.models[var3]);
                 }
 
                 return var2;
@@ -699,7 +699,7 @@ public final class ObjectDefinition {
                     Model_Sub1 var17 = null;
 
                     for (var12 = 0; var12 < var8; ++var12) {
-                        var17 = Model_Sub1.method2015(Unsorted.aClass153_1043, this.models[var12] & 65535);
+                        var17 = Model_Sub1.method2015(Unsorted.modelsIndex_1043, this.models[var12] & 65535);
                         if (null == var17) {
                             return null;
                         }
@@ -738,7 +738,7 @@ public final class ObjectDefinition {
 
                 var5 = (Class140_Sub1_Sub1) aReferenceCache_1401.get(var9);
                 if (null == var5) {
-                    Model_Sub1 var10 = Model_Sub1.method2015(Unsorted.aClass153_1043, 65535 & var9);
+                    Model_Sub1 var10 = Model_Sub1.method2015(Unsorted.modelsIndex_1043, 65535 & var9);
                     if (null == var10) {
                         return null;
                     }

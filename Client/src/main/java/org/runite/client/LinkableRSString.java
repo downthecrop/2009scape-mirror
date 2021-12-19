@@ -5,8 +5,8 @@ import org.rs09.client.Linkable;
 public final class LinkableRSString extends Linkable {
 
     static int anInt2579 = 1;
-    static RSString[] aClass94Array2580 = new RSString[100];
-    static CacheIndex aClass153_2581;
+    static RSString[] aStringArray2580 = new RSString[100];
+    static CacheIndex modelsIndex_2581;
     public static int anInt2582 = 0;
     static boolean isDynamicSceneGraph = false;
     public RSString value;
@@ -44,7 +44,7 @@ public final class LinkableRSString extends Linkable {
                     Class101.aClass3_Sub24_Sub4_1421.method485();
                     NPC.aClass3_Sub27_1154 = null;
                     QuickChatDefinition.aClass83_3579 = null;
-                    if (Class101.aClass153_1423 == null) {
+                    if (Class101.musicIndex_1423 == null) {
                         Unsorted.anInt154 = 0;
                     } else {
                         Unsorted.anInt154 = 2;
@@ -53,7 +53,7 @@ public final class LinkableRSString extends Linkable {
             } catch (Exception var2) {
                 var2.printStackTrace();
                 Class101.aClass3_Sub24_Sub4_1421.method505((byte) -127);
-                Class101.aClass153_1423 = null;
+                Class101.musicIndex_1423 = null;
                 NPC.aClass3_Sub27_1154 = null;
                 Unsorted.anInt154 = 0;
                 QuickChatDefinition.aClass83_3579 = null;
@@ -108,8 +108,8 @@ public final class LinkableRSString extends Linkable {
 
     static void method731(CacheIndex var0) {
         try {
-            TextureOperation20.aClass153_3154 = var0;
-            Class95.anInt1344 = TextureOperation20.aClass153_3154.getFileAmount(16);
+            TextureOperation20.configurationsIndex_3154 = var0;
+            Class95.anInt1344 = TextureOperation20.configurationsIndex_3154.getFileAmount(16);
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "sj.B(" + (var0 != null ? "{...}" : "null") + ',' + (byte) -113 + ')');
         }
@@ -123,16 +123,16 @@ public final class LinkableRSString extends Linkable {
             Class163_Sub2.paramSettings = var1;
             if (null != Class38.gameSignlink.gameApplet) {
                 try {
-                    RSString var2 = TextCore.aClass94_2044.getParamValue(Class38.gameSignlink.gameApplet);
-                    RSString var3 = TextCore.aClass94_1885.getParamValue(Class38.gameSignlink.gameApplet);
-                    RSString var4 = RSString.stringCombiner(new RSString[]{var2, TextCore.aClass94_1151, var1, TextCore.aClass94_2074, var3});
+                    RSString var2 = TextCore.aString_2044.getParamValue(Class38.gameSignlink.gameApplet);
+                    RSString var3 = TextCore.aString_1885.getParamValue(Class38.gameSignlink.gameApplet);
+                    RSString var4 = RSString.stringCombiner(new RSString[]{var2, TextCore.aString_1151, var1, TextCore.aString_2074, var3});
                     if (0 == var1.length()) {
                         var4 = RSString.stringCombiner(new RSString[]{var4, TextCore.HasAgeExpire});
                     } else {
                         var4 = RSString.stringCombiner(new RSString[]{var4, TextCore.HasExpires, AudioThread.method894(94608000000L + TimeUtils.time()), TextCore.HasMaxAge, QuickChatDefinition.method612(94608000L)});
                     }
 
-                    RSString.stringCombiner(new RSString[]{TextCore.aClass94_1694, var4, TextCore.aClass94_1698}).method1554(Class38.gameSignlink.gameApplet);
+                    RSString.stringCombiner(new RSString[]{TextCore.aString_1694, var4, TextCore.aString_1698}).method1554(Class38.gameSignlink.gameApplet);
                 } catch (Throwable var5) {
                 }
 

@@ -11,7 +11,7 @@ final class TextureOperation27 extends TextureOperation {
    private int[] anIntArray3091;
    private int anInt3093 = 2048;
    static short[] aShortArray3095 = new short[500];
-   static CacheIndex aClass153_3098;
+   static CacheIndex configurationsIndex_3098;
 
 
    final void postDecode() {

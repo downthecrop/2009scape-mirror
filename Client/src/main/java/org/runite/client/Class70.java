@@ -2,7 +2,7 @@ package org.runite.client;
 
 final class Class70 {
 
-    static RSString[] aClass94Array1046 = new RSString[200];
+    static RSString[] aStringArray1046 = new RSString[200];
     static int frameHeight;
     static double aDouble1050 = -1.0D;
     static int anInt1053 = 0;
@@ -18,7 +18,7 @@ final class Class70 {
 
     static void method1285(CacheIndex var0, int var2, int var5) {
         try {
-            Class101.aClass153_1423 = var0;
+            Class101.musicIndex_1423 = var0;
             Unsorted.anInt154 = 1;
             TextureOperation36.anInt3423 = var5;
             Class132.anInt1741 = 0;
@@ -63,9 +63,9 @@ final class Class70 {
                     var8.anInt2316 = var8.anInt2310 - -((int) (Math.random() * (double) (-var8.anInt2310 + var8.anInt2325)));
                 }
 
-                Unsorted.aLinkedList_78.method1215(var8);
+                Unsorted.aLinkedList_78.pushBack(var8);
             } else if (null != var4) {
-                var8.aClass140_Sub4_Sub2_2324 = var4;
+                var8.aEntity_Sub2_2324 = var4;
                 NPCDefinition var12 = var4.definition;
                 if (null != var12.childNPCs) {
                     var8.aBoolean2329 = true;
@@ -79,9 +79,9 @@ final class Class70 {
                     var8.anInt2328 = 128 * var12.anInt1291;
                 }
 
-                Unsorted.aLinkedList_1242.method1215(var8);
+                Unsorted.aLinkedList_1242.pushBack(var8);
             } else if (null != var7) {
-                var8.aClass140_Sub4_Sub1_2327 = var7;
+                var8.aEntity_Sub1_2327 = var7;
                 var8.anInt2321 = (var7.getSize() + var5) * 128;
                 var8.anInt2307 = 128 * (var7.getSize() + var0);
                 var8.anInt2332 = Class81.method1398(var7);

@@ -6,7 +6,7 @@ final class Class119 {
 
     static Class131 aClass131_1624;
     static Class33 aClass33_1626;
-    static CacheIndex aClass153_1628;
+    static CacheIndex modelsIndex_1628;
 
 
     static void method1729() {
@@ -35,19 +35,19 @@ final class Class119 {
                 Class23.canvasWidth = Unsorted.frameWidth;
                 Class84.leftMargin = 0;
                 Class106.rightMargin = 0;
-                Class140_Sub7.canvasHeight = Class70.frameHeight;
+                GroundItem.canvasHeight = Class70.frameHeight;
             } else {
                 Class106.rightMargin = 0;
                 Class84.leftMargin = (-765 + Unsorted.frameWidth) / 2;
-                Class140_Sub7.canvasHeight = 503;
+                GroundItem.canvasHeight = 503;
                 Class23.canvasWidth = 765;
             }
 
             if (HDToolKit.highDetail) {
-                HDToolKit.method1854(Class23.canvasWidth, Class140_Sub7.canvasHeight);
+                HDToolKit.method1854(Class23.canvasWidth, GroundItem.canvasHeight);
             }
 
-            GameShell.canvas.setSize(Class23.canvasWidth, Class140_Sub7.canvasHeight);
+            GameShell.canvas.setSize(Class23.canvasWidth, GroundItem.canvasHeight);
             if (var1 == GameShell.frame) {
                 var2 = GameShell.frame.getInsets();
                 GameShell.canvas.setLocation(var2.left + Class84.leftMargin, Class106.rightMargin + var2.top);

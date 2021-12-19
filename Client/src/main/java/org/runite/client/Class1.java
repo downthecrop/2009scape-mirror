@@ -10,7 +10,7 @@ final class Class1 {
     static int screenUpperY;
     static int anInt56;
     static int anInt57;
-    static RSString aClass94_58;
+    static RSString aString_58;
     static int[] anIntArray2642 = new int[]{1, 1, 1, 1, 4, 1, 1, 5, 6, 1, 5, 0, 7, 0, 4, 1, 7, 2, 1, 1, 6, 1, 1, 3, 6, 1, 7, 0, 0, 6, 7, 0, 1, 7, 6, 1, 1, 1, 5, 4, 3, 2, 1, 1, 0, 4, 1, 5};
 
     static {
@@ -20,7 +20,7 @@ final class Class1 {
 
         aBooleanArray54 = new boolean[8];
         anInt57 = 0;
-        aClass94_58 = RSString.parse("<col=ffffff> )4 ");
+        aString_58 = RSString.parse("<col=ffffff> )4 ");
     }
 
     static void method69(Class36 var0) {
@@ -602,7 +602,7 @@ final class Class1 {
                 Toolkit.JAVA_TOOLKIT.method934(var0, var4, var2, var1, 0); //Specific JTK call because set Clipping is not migrated
             }
 
-            if (WorldMap.anInt2737 >= 100) {
+            if (GroundItemLink.anInt2737 >= 100) {
                 if (null == Class36.aAbstractSprite_637 || var2 != Class36.aAbstractSprite_637.width || Class36.aAbstractSprite_637.height != var1) {
                     SoftwareSprite var5 = new SoftwareSprite(var2, var1);
                     Class74.setBuffer(var5.anIntArray4081, var2, var1);
@@ -639,7 +639,7 @@ final class Class1 {
                         var10 = 25 * Class3_Sub28_Sub8.anInt3611;
                     }
 
-                    for (Class3_Sub23 var11 = (Class3_Sub23) Class84.aLinkedList_1162.method1222(); var11 != null; var11 = (Class3_Sub23) Class84.aLinkedList_1162.method1221()) {
+                    for (Class3_Sub23 var11 = (Class3_Sub23) Class84.aLinkedList_1162.startIteration(); var11 != null; var11 = (Class3_Sub23) Class84.aLinkedList_1162.nextIteration()) {
                         if (Class8.anInt101 == var11.anInt2532) {
                             int var13 = var4 - -(var11.anInt2539 * var1 / Class108.anInt1460);
                             int var12 = var2 * var11.anInt2531 / Class23.anInt455 + var0;

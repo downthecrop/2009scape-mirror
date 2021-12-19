@@ -7,9 +7,9 @@ public final class Class3_Sub19 extends Linkable {
 
     public static int[] anIntArray3693 = new int[1000];
     byte aByte2472;
-    RSString aClass94_2473;
+    RSString aString_2473;
     static int anInt2475 = 0;
-    RSString aClass94_2476;
+    RSString aString_2476;
     int anInt2478;
 
 
@@ -47,11 +47,11 @@ public final class Class3_Sub19 extends Linkable {
                     var7 = 4 * 512 * (var3 + 103 + -var6) + 24628;
 
                     for (var8 = 1; 104 + -1 > var8; ++var8) {
-                        if ((Unsorted.aByteArrayArrayArray113[var1][var8][var6] & 24) == 0) {
+                        if ((Unsorted.sceneryTypeMaskGrid[var1][var8][var6] & 24) == 0) {
                             Unsorted.method1469(var4, var7, 512, var1, var8, var6);
                         }
 
-                        if (var1 < 3 && 0 != (Unsorted.aByteArrayArrayArray113[1 + var1][var8][var6] & 8)) {
+                        if (var1 < 3 && 0 != (Unsorted.sceneryTypeMaskGrid[1 + var1][var8][var6] & 8)) {
                             Unsorted.method1469(var4, var7, 512, var1 + 1, var8, var6);
                         }
 
@@ -63,7 +63,7 @@ public final class Class3_Sub19 extends Linkable {
 
                 for (var6 = 0; 104 > var6; ++var6) {
                     for (var7 = 0; 104 > var7; ++var7) {
-                        long var20 = Class3_Sub2.method104(WorldListCountry.localPlane, var6, var7 - -var3);
+                        long var20 = Scenery.lookupTypeMask3(WorldListCountry.localPlane, var6, var7 - -var3);
                         if (var20 != 0) {
                             ObjectDefinition var10 = ObjectDefinition.getObjectDefinition((int) (var20 >>> 32) & Integer.MAX_VALUE);
                             int var11 = var10.MapIcon;
@@ -122,7 +122,7 @@ public final class Class3_Sub19 extends Linkable {
 
             for (var6 = 1; var6 < 103; ++var6) {
                 for (var7 = 1; 103 > var7; ++var7) {
-                    if (0 == (Unsorted.aByteArrayArrayArray113[var1][var7][var6 - -var3] & 24) && !Unsorted.method1529(var3, var7, var18, var6, var5, var1)) {
+                    if (0 == (Unsorted.sceneryTypeMaskGrid[var1][var7][var6 - -var3] & 24) && !Unsorted.method1529(var3, var7, var18, var6, var5, var1)) {
                         if (HDToolKit.highDetail) {
                             Toolkit.JAVA_TOOLKIT.resetBuffer();
                         } else {
@@ -132,7 +132,7 @@ public final class Class3_Sub19 extends Linkable {
                         return false;
                     }
 
-                    if (var1 < 3 && (Unsorted.aByteArrayArrayArray113[1 + var1][var7][var6 + var3] & 8) != 0 && !Unsorted.method1529(var3, var7, var18, var6, var5, 1 + var1)) {
+                    if (var1 < 3 && (Unsorted.sceneryTypeMaskGrid[1 + var1][var7][var6 + var3] & 8) != 0 && !Unsorted.method1529(var3, var7, var18, var6, var5, 1 + var1)) {
                         if (HDToolKit.highDetail) {
                             Toolkit.JAVA_TOOLKIT.resetBuffer();
                         } else {

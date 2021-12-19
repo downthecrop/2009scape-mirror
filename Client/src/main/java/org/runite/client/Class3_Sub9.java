@@ -15,10 +15,10 @@ final class Class3_Sub9 extends Linkable {
     ObjectDefinition aClass111_2320;
     int anInt2321;
     int anInt2322 = 0;
-    NPC aClass140_Sub4_Sub2_2324;
+    NPC aEntity_Sub2_2324;
     int anInt2325;
     int anInt2326;
-    Player aClass140_Sub4_Sub1_2327;
+    Player aEntity_Sub1_2327;
     int anInt2328;
     boolean aBoolean2329;
     int anInt2332;
@@ -59,15 +59,15 @@ final class Class3_Sub9 extends Linkable {
                     this.anInt2328 = var3.anInt1484 * 128;
                     this.anIntArray2333 = var3.anIntArray1539;
                 }
-            } else if (this.aClass140_Sub4_Sub2_2324 == null) {
-                if (null != this.aClass140_Sub4_Sub1_2327) {
-                    this.anInt2332 = Class81.method1398(this.aClass140_Sub4_Sub1_2327);
-                    this.anInt2328 = 128 * this.aClass140_Sub4_Sub1_2327.anInt3969;
+            } else if (this.aEntity_Sub2_2324 == null) {
+                if (null != this.aEntity_Sub1_2327) {
+                    this.anInt2332 = Class81.method1398(this.aEntity_Sub1_2327);
+                    this.anInt2328 = 128 * this.aEntity_Sub1_2327.anInt3969;
                 }
             } else {
-                int var6 = Class70.method1232(this.aClass140_Sub4_Sub2_2324);
+                int var6 = Class70.method1232(this.aEntity_Sub2_2324);
                 if (var2 != var6) {
-                    NPCDefinition var4 = this.aClass140_Sub4_Sub2_2324.definition;
+                    NPCDefinition var4 = this.aEntity_Sub2_2324.definition;
                     this.anInt2332 = var6;
                     if (var4.childNPCs != null) {
                         var4 = var4.method1471((byte) -87);

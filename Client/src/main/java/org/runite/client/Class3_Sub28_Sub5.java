@@ -6,7 +6,7 @@ import java.util.TimeZone;
 
 final class Class3_Sub28_Sub5 extends Node {
 
-   static CacheIndex aClass153_3580;
+   static CacheIndex configurationsIndex_3580;
    static Calendar aCalendar3581 = Calendar.getInstance(TimeZone.getTimeZone("GMT"));
    static int[] anIntArray3587;
    AnimationHeader[] animations;
@@ -84,20 +84,6 @@ final class Class3_Sub28_Sub5 extends Node {
       } catch (RuntimeException var25) {
          throw ClientErrorException.clientError(var25, "cl.C(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ')');
       }
-   }
-
-   static long method557(int var0, int var1, int var2) {
-      Class3_Sub2 var3 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2];
-      if (var3 != null) {
-         for (int var4 = 0; var4 < var3.anInt2223; ++var4) {
-            Class25 var5 = var3.aClass25Array2221[var4];
-            if ((var5.aLong498 >> 29 & 3L) == 2L && var5.anInt483 == var1 && var5.anInt478 == var2) {
-               return var5.aLong498;
-            }
-         }
-
-      }
-      return 0L;
    }
 
    final boolean method559(int var2) {
@@ -252,13 +238,13 @@ final class Class3_Sub28_Sub5 extends Node {
          while(Objects.requireNonNull(fileIds).length > var8) {
             byte[] var9 = cacheIndex0.getFile(frame, fileIds[var8]);
             int skinId = 255 & var9[1] | (var9[0] & 0xFF) << 8;
-            Class3_Sub17 var12 = (Class3_Sub17) var5.method1222();
+            Class3_Sub17 var12 = (Class3_Sub17) var5.startIteration();
             Class3_Sub17 skin = null;
 
             while(true) {
                if(var12 != null) {
                   if(var12.anInt2454 != skinId) {
-                     var12 = (Class3_Sub17)var5.method1221();
+                     var12 = (Class3_Sub17)var5.nextIteration();
                      continue;
                   }
 
@@ -270,7 +256,7 @@ final class Class3_Sub28_Sub5 extends Node {
                   var13 = var2.method2140(0, skinId);
 
                   skin = new Class3_Sub17(skinId, var13);
-                  var5.method1215(skin);
+                  var5.pushBack(skin);
                }
 
                this.animations[fileIds[var8]] = new AnimationHeader(var9, skin);

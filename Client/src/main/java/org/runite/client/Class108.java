@@ -24,7 +24,7 @@ final class Class108 {
     static RSString method1653(int var0) {
         try {
 
-            return RSString.stringCombiner(new RSString[]{RSString.stringAnimator(255 & var0 >> 24), TextCore.aClass94_4023, RSString.stringAnimator((var0 & 16712751) >> 16), TextCore.aClass94_4023, RSString.stringAnimator(255 & var0 >> 8), TextCore.aClass94_4023, RSString.stringAnimator(var0 & 0xFF)});
+            return RSString.stringCombiner(new RSString[]{RSString.stringAnimator(255 & var0 >> 24), TextCore.aString_4023, RSString.stringAnimator((var0 & 16712751) >> 16), TextCore.aString_4023, RSString.stringAnimator(255 & var0 >> 8), TextCore.aString_4023, RSString.stringAnimator(var0 & 0xFF)});
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "oi.F(" + var0 + ',' + 0 + ')');
         }
@@ -32,7 +32,7 @@ final class Class108 {
 
 //   static void method1654(int var0) { //Separated into method1656 + clearClientCacheMemory
 //      try {
-//         Class140_Sub4.aReferenceCache_2792.clearSoftReferences();
+//         Entity.aReferenceCache_2792.clearSoftReferences();
 //      } catch (RuntimeException var2) {
 //         throw ClientErrorException.clientError(var2, "oi.E(" + var0 + ')');
 //      }
@@ -40,7 +40,7 @@ final class Class108 {
 
     static void method1656(CacheIndex var0, byte var1) {
         try {
-            if (!Class140_Sub2.aBoolean2713) {
+            if (!PositionedGraphicObject.aBoolean2713) {
                 if (HDToolKit.highDetail) {
                     Class22.method932();
                 } else {
@@ -48,14 +48,14 @@ final class Class108 {
                 }
 
                 Class40.aAbstractSprite_680 = Class75_Sub2.method1344(var0, Class154.anInt1966);
-                int var2 = Class140_Sub7.canvasHeight;
+                int var2 = GroundItem.canvasHeight;
                 int var3 = var2 * 956 / 503;
                 Objects.requireNonNull(Class40.aAbstractSprite_680).method639((Class23.canvasWidth + -var3) / 2, 0, var3, var2);
                 SequenceDefinition.aClass109_1856 = InterfaceWidget.a(CSConfigCachefile.anInt1124, var0);
                 Objects.requireNonNull(SequenceDefinition.aClass109_1856).method1667(Class23.canvasWidth / 2 + -(SequenceDefinition.aClass109_1856.width / 2), 18);
-                Class140_Sub2.aBoolean2713 = true;
+                PositionedGraphicObject.aBoolean2713 = true;
                 if (var1 > -50) {
-                    Class140_Sub4.aReferenceCache_2792.clearSoftReferences();
+                    Entity.aReferenceCache_2792.clearSoftReferences();
                 }
 
             }
@@ -93,9 +93,9 @@ final class Class108 {
     static void method1661(CacheIndex var1, CacheIndex var2) {
         try {
             Sprites.aBoolean337 = true;
-            Unsorted.aClass153_1043 = var2;
+            Unsorted.modelsIndex_1043 = var2;
 
-            Class85.aClass153_1171 = var1;
+            Class85.objectConfigIndex_1171 = var1;
         } catch (RuntimeException var5) {
             throw ClientErrorException.clientError(var5, "oi.D(" + 2 + ',' + (var1 != null ? "{...}" : "null") + ',' + (var2 != null ? "{...}" : "null") + ',' + true + ')');
         }

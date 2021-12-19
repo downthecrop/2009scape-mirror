@@ -16,7 +16,7 @@ public final class Class159 {
 
 
     static Class12 method2193(int var0, int var1, int var2) {
-        Class3_Sub2 var3 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2];
+        TileData var3 = TileData.aTileDataArrayArrayArray2638[var0][var1][var2];
         if (var3 == null) {
             return null;
         } else {
