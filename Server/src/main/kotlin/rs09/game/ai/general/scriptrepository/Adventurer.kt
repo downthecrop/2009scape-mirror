@@ -187,13 +187,10 @@ class Adventurer(val style: CombatStyle): Script() {
         }
     }
 
-    var handler1: CombatSwingHandler? = null
-
     var ticks = 0
     var freshspawn = true
-    var new_city = false
     var sold = false
-    val geloc: Location = if (Random.nextBoolean()){
+    private val geloc: Location = if (Random.nextBoolean()){
         Location.create(3165, 3487, 0)
     }else{
         Location.create(3164, 3492, 0)

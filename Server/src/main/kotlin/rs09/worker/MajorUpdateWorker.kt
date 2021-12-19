@@ -128,6 +128,8 @@ class MajorUpdateWorker {
         if(!started){
             worker.start()
         }
-        ServerMonitor.open()
+
+        if (ServerConstants.ALLOW_GUI)
+            ServerMonitor.open()
     }
 }
