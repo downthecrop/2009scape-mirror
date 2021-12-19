@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
-import api.ContentAPI
+import api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -68,7 +68,7 @@ class FruitAndBerryPicker : OptionHandler() {
 				}
 
                 player.animator.animate(animation)
-                ContentAPI.addItemOrDrop(player,reward.id,reward.amount)
+                addItemOrDrop(player,reward.id,reward.amount)
                 player.skills.addExperience(Skills.FARMING,plantable.harvestXP)
                 patch.setCurrentState(patch.getCurrentState() - 1)
 

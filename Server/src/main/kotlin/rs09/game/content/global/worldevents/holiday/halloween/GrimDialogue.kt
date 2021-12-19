@@ -1,6 +1,6 @@
 package rs09.game.content.global.worldevents.holiday.halloween
 
-import api.ContentAPI
+import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.combat.ImpactHandler
@@ -179,7 +179,7 @@ class GrimDialogue(player: Player? = null) : DialoguePlugin(player){
     fun buyStaff(player: Player){
         player.setAttribute("/save:sotr:purchased", true)
         removeCandies(player, 40)
-        ContentAPI.addItem(player, 14654, 1)
+        addItem(player, 14654, 1)
         stage = 104
         handleRewardShop(player, -1)
     }

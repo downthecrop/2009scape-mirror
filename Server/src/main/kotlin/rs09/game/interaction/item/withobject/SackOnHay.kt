@@ -1,7 +1,7 @@
 package rs09.game.interaction.item.withobject
 
 import api.Container
-import api.ContentAPI
+import api.*
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 
@@ -11,9 +11,9 @@ class SackOnHay : InteractionListener() {
 
     override fun defineListeners() {
         onUseWith(SCENERY, SACK, *HAY){player, used, _ ->
-            if(ContentAPI.removeItem(player, used.asItem(), Container.INVENTORY)){
-                ContentAPI.addItem(player, Items.HAY_SACK_6057, 1)
-                ContentAPI.sendMessage(player, "You fill the sack with hay.")
+            if(removeItem(player, used.asItem(), Container.INVENTORY)){
+                addItem(player, Items.HAY_SACK_6057, 1)
+                sendMessage(player, "You fill the sack with hay.")
             }
             return@onUseWith true
         }

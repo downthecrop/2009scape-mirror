@@ -1,4 +1,4 @@
-import api.ContentAPI
+import api.*
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.item.GroundItemManager
@@ -140,7 +140,7 @@ class BlinkinDialogue : FarmerDialogue() {
                         npcl("Sorry, ya can't afford that many. Come back when yer feeling a bit richer if ya like!")
                         stage = END_DIALOGUE
                     }
-                    //ContentAPI.openDialogue(player!!, this, npc as Any)
+                    //openDialogue(player!!, this, npc as Any)
                 }
 				player!!.dialogueInterpreter.sendInput(false, "Enter the amount:")
             }

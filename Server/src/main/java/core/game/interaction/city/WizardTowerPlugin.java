@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
@@ -687,7 +687,7 @@ public final class WizardTowerPlugin extends OptionHandler {
                     }
                     final int amount = getAmt(buttonId);
                     if (amount == -1) {// rscript.
-                        ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+                        sendInputDialogue(player, true, "Enter the amount:", (value) -> {
                             make(bark, (int) value);
                             return Unit.INSTANCE;
                         });

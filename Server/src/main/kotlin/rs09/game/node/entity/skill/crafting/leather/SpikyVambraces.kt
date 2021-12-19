@@ -1,7 +1,7 @@
 package rs09.game.node.entity.skill.crafting.leather
 
 import api.Container
-import api.ContentAPI
+import api.*
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
 import core.game.node.entity.player.Player
@@ -53,16 +53,16 @@ class SpikyVambraces: UseWithHandler(Items.KEBBIT_CLAWS_10113) {
 
     private fun craftVamb(player: Player, vamb: Int, product: Int, vambLeather: String){
         if (player.skills.getLevel(Skills.CRAFTING) >= 32){
-            if (ContentAPI.removeItem(player,vamb,Container.INVENTORY) &&
-                ContentAPI.removeItem(player,Items.KEBBIT_CLAWS_10113,Container.INVENTORY)
+            if (removeItem(player,vamb,Container.INVENTORY) &&
+                removeItem(player,Items.KEBBIT_CLAWS_10113,Container.INVENTORY)
             ) {
-                ContentAPI.addItem(player,product)
+                addItem(player,product)
                 player.skills.addExperience(Skills.CRAFTING,6.0)
-                ContentAPI.sendMessage(player, "You carefully attach the sharp claws to the $vambLeather vambraces.")
+                sendMessage(player, "You carefully attach the sharp claws to the $vambLeather vambraces.")
             }
         }
         else{
-            ContentAPI.sendMessage(player,"You need a crafting level of 32 to craft this.")
+            sendMessage(player,"You need a crafting level of 32 to craft this.")
         }
     }
 }

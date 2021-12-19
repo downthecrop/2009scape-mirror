@@ -1,6 +1,8 @@
 package core.game.interaction.city.lumbridge;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
+
+import api.ContentAPIKt;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.interaction.OptionHandler;
@@ -44,9 +46,9 @@ public class CowFieldSign extends OptionHandler {
         public boolean open(Object... args){
             int dailyCowDeaths = GlobalStats.getDailyCowDeaths();
             if(dailyCowDeaths > 0) {
-                ContentAPI.sendDialogue(player, "Local cowherders have reported that " + dailyCowDeaths + " cows have been slain in this field today by passing adventurers. Farmers throughout the land fear this may be an epidemic.");
+                ContentAPIKt.sendDialogue(player,"Local cowherders have reported that " + dailyCowDeaths + " cows have been slain in this field today by passing adventurers. Farmers throughout the land fear this may be an epidemic.");
             } else {
-                ContentAPI.sendDialogue(player, "The Lumbridge cow population has been thriving today, without a single cow death to worry about!" );
+                ContentAPIKt.sendDialogue(player,"The Lumbridge cow population has been thriving today, without a single cow death to worry about!" );
             }
             return true;
         }
