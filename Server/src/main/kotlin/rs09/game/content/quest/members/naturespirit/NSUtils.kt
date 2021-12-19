@@ -1,7 +1,7 @@
 package rs09.game.content.quest.members.naturespirit
 
 import api.Container
-import api.ContentAPI
+import api.*
 import core.game.node.Node
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
@@ -19,19 +19,19 @@ import rs09.game.node.entity.npc.other.MortMyreGhastNPC
 
 object NSUtils {
     fun flagFungusPlaced(player: Player) {
-        ContentAPI.setAttribute(player, "/save:ns:fungus_placed", true)
+        setAttribute(player, "/save:ns:fungus_placed", true)
     }
 
     fun flagCardPlaced(player: Player){
-        ContentAPI.setAttribute(player, "/save:ns:card_placed", true)
+        setAttribute(player, "/save:ns:card_placed", true)
     }
 
     fun hasPlacedFungus(player: Player): Boolean {
-        return ContentAPI.getAttribute(player, "ns:fungus_placed", false)
+        return getAttribute(player, "ns:fungus_placed", false)
     }
 
     fun hasPlacedCard(player: Player): Boolean {
-        return ContentAPI.getAttribute(player, "ns:card_placed", false)
+        return getAttribute(player, "ns:card_placed", false)
     }
 
     fun onStone(player: Player): Boolean {
@@ -39,11 +39,11 @@ object NSUtils {
     }
 
     fun getGhastKC(player: Player): Int {
-        return ContentAPI.getAttribute(player,"ns:ghasts_killed", 0) as Int
+        return getAttribute(player,"ns:ghasts_killed", 0) as Int
     }
 
     fun incrementGhastKC(player: Player){
-        ContentAPI.setAttribute(player, "/save:ns:ghasts_killed", getGhastKC(player) + 1)
+        setAttribute(player, "/save:ns:ghasts_killed", getGhastKC(player) + 1)
         val msg = when(getGhastKC(player)) {
             1 -> "That's one down, two more to go."
             2 -> "Two down, only one more to go."
@@ -52,25 +52,25 @@ object NSUtils {
         }
 
         if(!msg.isEmpty()){
-            ContentAPI.sendMessage(player, msg)
+            sendMessage(player, msg)
         }
     }
 
     fun activatePouch(player: Player, attacker: MortMyreGhastNPC): Boolean {
         var shouldAddEmptyPouch = false
-        val pouchAmt = ContentAPI.amountInInventory(player, Items.DRUID_POUCH_2958)
+        val pouchAmt = amountInInventory(player, Items.DRUID_POUCH_2958)
         if(pouchAmt == 1) shouldAddEmptyPouch = true
-        if(pouchAmt > 0 && ContentAPI.removeItem(player, Items.DRUID_POUCH_2958, Container.INVENTORY)){
+        if(pouchAmt > 0 && removeItem(player, Items.DRUID_POUCH_2958, Container.INVENTORY)){
             if(shouldAddEmptyPouch){
-                ContentAPI.addItem(player, Items.DRUID_POUCH_2957)
+                addItem(player, Items.DRUID_POUCH_2957)
             }
-            ContentAPI.spawnProjectile(player, attacker, 268)
-            ContentAPI.submitWorldPulse(object : Pulse(){
+            spawnProjectile(player, attacker, 268)
+            submitWorldPulse(object : Pulse(){
                 var ticks = 0
                 override fun pulse(): Boolean {
                     when(ticks++){
-                        2 -> ContentAPI.visualize(attacker, -1, Graphics(269, 125))
-                        3 -> attacker.transform(attacker.id + 1).also { attacker.attack(player); attacker.setAttribute("woke", ContentAPI.getWorldTicks()); return true }
+                        2 -> visualize(attacker, -1, Graphics(269, 125))
+                        3 -> attacker.transform(attacker.id + 1).also { attacker.attack(player); attacker.setAttribute("woke", getWorldTicks()); return true }
                     }
                     return false
                 }

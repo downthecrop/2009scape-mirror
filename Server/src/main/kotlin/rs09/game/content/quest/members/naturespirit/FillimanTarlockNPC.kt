@@ -1,6 +1,6 @@
 package rs09.game.content.quest.members.naturespirit
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.npc.AbstractNPC
 import core.game.world.map.Location
 import core.plugin.Initializable
@@ -23,7 +23,7 @@ class FillimanTarlockNPC : AbstractNPC {
 
     override fun handleTickActions() {
         super.handleTickActions()
-        if(spawnedTicks++ > 100) ContentAPI.poofClear(this)
+        if(spawnedTicks++ > 100) poofClear(this)
     }
 
     override fun getIds(): IntArray {

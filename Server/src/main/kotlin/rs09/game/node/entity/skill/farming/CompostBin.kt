@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
@@ -46,8 +46,8 @@ class CompostBin(val player: Player, val bin: CompostBins) {
             isClosed = false
         }
         updateBit()
-        if(isSuperCompost) ContentAPI.rewardXP(player, Skills.FARMING, 8.5)
-        else ContentAPI.rewardXP(player, Skills.FARMING, 4.5)
+        if(isSuperCompost) rewardXP(player, Skills.FARMING, 8.5)
+        else rewardXP(player, Skills.FARMING, 4.5)
         return Item(item)
     }
 

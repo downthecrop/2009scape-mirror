@@ -1,7 +1,7 @@
 package rs09.game.interaction.item
 
 import api.Container
-import api.ContentAPI
+import api.*
 import core.game.content.ttrail.ClueScrollPlugin
 import org.rs09.consts.Items
 import rs09.game.content.global.WeightBasedTable
@@ -19,9 +19,9 @@ class ImplingJarListener : InteractionListener() {
 
             val loot = ImplingLoot.forId(jar.id)?.roll()?.first() ?: return@on false
 
-            if(ContentAPI.removeItem(player, jar, Container.INVENTORY)) {
-                ContentAPI.addItemOrDrop(player, loot.id, loot.amount)
-                ContentAPI.addItemOrDrop(player, Items.IMPLING_JAR_11260, 1)
+            if(removeItem(player, jar, Container.INVENTORY)) {
+                addItemOrDrop(player, loot.id, loot.amount)
+                addItemOrDrop(player, Items.IMPLING_JAR_11260, 1)
             }
 
             return@on true

@@ -1,6 +1,6 @@
 package core.game.content.dialogue;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.RunScript;
 import core.plugin.Initializable;
@@ -58,7 +58,7 @@ public class SkillDialoguePlugin extends DialoguePlugin {
 		if (amount != -1) {
 			handler.create(amount, index);
 		} else {
-			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+			sendInputDialogue(player, true, "Enter the amount:", (value) -> {
 				handler.create((int) value, index);
 				return Unit.INSTANCE;
 			});

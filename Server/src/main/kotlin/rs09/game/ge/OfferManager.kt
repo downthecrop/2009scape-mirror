@@ -1,6 +1,6 @@
 package rs09.game.ge
 
-import api.ContentAPI
+import api.*
 import rs09.ServerConstants
 import core.cache.def.impl.ItemDefinition
 import core.game.content.eco.EcoStatus
@@ -510,7 +510,7 @@ object OfferManager {
     }
 
     private fun getItemDefPrice(itemID: Int): Int {
-        return max(ContentAPI.itemDefinition(itemID).getConfiguration(ItemConfigParser.GE_PRICE) ?: 0, ContentAPI.itemDefinition(itemID).value)
+        return max(itemDefinition(itemID).getConfiguration(ItemConfigParser.GE_PRICE) ?: 0, itemDefinition(itemID).value)
     }
 
     @JvmStatic

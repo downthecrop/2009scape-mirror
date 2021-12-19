@@ -1,6 +1,6 @@
 package core.game.content.activity.guild;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialoguePlugin;
@@ -61,7 +61,7 @@ public final class WizardGuildPlugin extends OptionHandler {
 			switch (id) {
 			case 1600:
 			case 1601:
-				if (ContentAPI.getDynLevel(player, Skills.MAGIC) < 66) {
+				if (getDynLevel(player, Skills.MAGIC) < 66) {
 					player.getDialogueInterpreter().sendDialogue("You need a Magic level of at least 66 to enter.");
 					return true;
 				}

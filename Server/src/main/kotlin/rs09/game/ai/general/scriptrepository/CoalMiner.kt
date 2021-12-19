@@ -12,7 +12,7 @@ import rs09.game.ai.general.ScriptAPI
 import rs09.game.ai.skillingbot.SkillingBotAssembler
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InteractionListeners
-import api.ContentAPI
+import api.*
 
 @PlayerCompatible
 @ScriptName("Falador Coal Miner")
@@ -58,7 +58,7 @@ class CoalMiner : Script() {
                     val rock = scriptAPI.getNearestNode("rocks",true)
                     rock?.let { InteractionListeners.run(rock.id, InteractionListener.SCENERY,"mine",bot,rock) }
                 }
-                overlay!!.setAmount(ContentAPI.amountInInventory(bot, Items.COAL_453) + coalAmount)
+                overlay!!.setAmount(amountInInventory(bot, Items.COAL_453) + coalAmount)
             }
 
             State.TO_BANK -> {

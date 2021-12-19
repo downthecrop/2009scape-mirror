@@ -1,6 +1,6 @@
 package rs09.game.ai.general.scriptrepository
 
-import api.ContentAPI
+import api.*
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.node.entity.skill.crafting.spinning.SpinningItem
@@ -131,7 +131,7 @@ class GnomeBowstring : Script() {
                         }
                     })
                 }
-                if(ContentAPI.freeSlots(bot) > 27){
+                if(freeSlots(bot) > 27){
                     bLadderSwitch = true
                     state = State.RETURN_TO_FLAX
                 }

@@ -1,7 +1,7 @@
 package rs09.game.content.global.worldevents.holiday.christmas
 
 import api.Container
-import api.ContentAPI
+import api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.plugin.Initializable
@@ -30,8 +30,8 @@ class GiftRollPlugin : XPGainPlugin() {
         if(System.currentTimeMillis() > cooldown && numDaily < 10 && RandomFunction.roll(15).also { player.debug("Rolling gift: $it") } && amount > 20) {
             incrementDailyGifts(player)
 
-            ContentAPI.addItemOrDrop(player, Items.MYSTERY_BOX_6199)
-            ContentAPI.sendMessage(player, colorize("%RMerry Christmas! %GYou randomly receive a mystery box while training ${Skills.SKILL_NAME[skill]}!"))
+            addItemOrDrop(player, Items.MYSTERY_BOX_6199)
+            sendMessage(player, colorize("%RMerry Christmas! %GYou randomly receive a mystery box while training ${Skills.SKILL_NAME[skill]}!"))
         }
     }
 
@@ -63,9 +63,9 @@ class XMASMboxHandler : InteractionListener() {
         on(MBOX, ITEM, "open"){player, used ->
             val item = MBOX_LOOT.roll().first()
 
-            if(ContentAPI.removeItem(player, used, Container.INVENTORY)) {
-                ContentAPI.sendDialogue(player, "You open the gift and find ${item.amount} ${item.name}!")
-                ContentAPI.addItemOrDrop(player, item.id, item.amount)
+            if(removeItem(player, used, Container.INVENTORY)) {
+                sendDialogue(player, "You open the gift and find ${item.amount} ${item.name}!")
+                addItemOrDrop(player, item.id, item.amount)
             }
             return@on true
         }

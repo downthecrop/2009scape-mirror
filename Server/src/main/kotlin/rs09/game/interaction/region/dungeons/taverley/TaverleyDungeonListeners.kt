@@ -1,6 +1,6 @@
 package rs09.game.interaction.region.dungeons.taverley
 
-import api.ContentAPI
+import api.*
 import core.game.content.global.action.DoorActionHandler
 import org.rs09.consts.Items
 import org.rs09.consts.Scenery
@@ -14,8 +14,8 @@ class TaverleyDungeonListeners : InteractionListener() {
     override fun defineListeners() {
 
         on(BD_GATE, SCENERY, "open"){player, node ->
-            if(!ContentAPI.inInventory(player, Items.DUSTY_KEY_1590)){
-                ContentAPI.sendMessage(player, "This gate seems to be locked.")
+            if(!inInventory(player, Items.DUSTY_KEY_1590)){
+                sendMessage(player, "This gate seems to be locked.")
             } else {
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
             }
@@ -27,8 +27,8 @@ class TaverleyDungeonListeners : InteractionListener() {
             when(player.location.y){
                 9689 -> DoorActionHandler.handleAutowalkDoor(player, node.asScenery()) //inside the cell going out
                 9690 -> {                                                              //outside the cell going in
-                    if(!ContentAPI.inInventory(player, Items.JAIL_KEY_1591)){
-                        ContentAPI.sendMessage(player, "This door is locked.")
+                    if(!inInventory(player, Items.JAIL_KEY_1591)){
+                        sendMessage(player, "This door is locked.")
                     } else {
                         DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                     }

@@ -1,6 +1,6 @@
 package rs09.game.interaction.item.withobject
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.skill.gather.woodcutting.WoodcuttingNode
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
@@ -13,12 +13,12 @@ class FishEasterEgg : InteractionListener() {
 
     override fun defineListeners() {
         onUseWith(SCENERY, fish, *TREE_IDs){player, _, _ ->
-            ContentAPI.sendMessage(player, "This is not the mightiest tree in the forest.")
+            sendMessage(player, "This is not the mightiest tree in the forest.")
             return@onUseWith true
         }
 
         onUseWith(SCENERY, fish, *doors){player, _, _ ->
-            ContentAPI.sendMessage(player, "It can't be done!")
+            sendMessage(player, "It can't be done!")
             return@onUseWith true
         }
     }

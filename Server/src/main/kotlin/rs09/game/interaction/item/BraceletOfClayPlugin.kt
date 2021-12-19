@@ -1,6 +1,6 @@
 package rs09.game.interaction.item
 
-import api.ContentAPI
+import api.*
 import rs09.game.interaction.InteractionListener
 
 /**
@@ -14,8 +14,8 @@ class BraceletOfClayPlugin : InteractionListener() {
     override fun defineListeners() {
 
         on(BRACELET,ITEM,"operate"){player,node ->
-            var charge = ContentAPI.getCharge(node)
-            if (charge > 28) ContentAPI.setCharge(node, 28).also { charge = 28 }
+            var charge = getCharge(node)
+            if (charge > 28) setCharge(node, 28).also { charge = 28 }
             player.sendMessage("You have $charge uses left.")
             return@on true
         }

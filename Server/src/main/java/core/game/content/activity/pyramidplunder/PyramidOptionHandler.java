@@ -1,6 +1,6 @@
 package core.game.content.activity.pyramidplunder;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
@@ -84,7 +84,7 @@ public final class PyramidOptionHandler extends OptionHandler {
 			if(entrance == currentEntrance && willBePushed){
 				player.lock();
 				player.animate(new Animation(7299));
-				ContentAPI.submitWorldPulse(new Pulse(4, player){
+				submitWorldPulse(new Pulse(4, player){
 					@Override
 					public boolean pulse() {
 						player.unlock();

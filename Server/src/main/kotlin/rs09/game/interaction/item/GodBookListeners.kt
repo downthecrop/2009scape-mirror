@@ -1,6 +1,6 @@
 package rs09.game.interaction.item
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
@@ -17,17 +17,17 @@ class GodBookListeners : InteractionListener() {
 
     override fun defineListeners() {
         on(GB_SARADOMIN, ITEM, "preach"){player, _ ->
-            ContentAPI.openDialogue(player, HOLY_DIALOGUE(BOOK.SARA))
+            openDialogue(player, HOLY_DIALOGUE(BOOK.SARA))
             return@on true
         }
 
         on(GB_ZAMORAK, ITEM, "preach"){ player, _ ->
-            ContentAPI.openDialogue(player, HOLY_DIALOGUE(BOOK.ZAM))
+            openDialogue(player, HOLY_DIALOGUE(BOOK.ZAM))
             return@on true
         }
 
         on(GB_GUTHIX, ITEM, "preach"){ player, _ ->
-            ContentAPI.openDialogue(player, HOLY_DIALOGUE(BOOK.GUTHIX))
+            openDialogue(player, HOLY_DIALOGUE(BOOK.GUTHIX))
             return@on true
         }
     }
@@ -112,18 +112,18 @@ class GodBookListeners : InteractionListener() {
                 BOOK.GUTHIX -> PREACH_GUTH_AMEN
             }
 
-            val lastTick = ContentAPI.animationDuration(animation)
+            val lastTick = animationDuration(animation)
 
-            ContentAPI.lock(player, 100)
-            ContentAPI.animate(player, animation)
+            lock(player, 100)
+            animate(player, animation)
 
-            ContentAPI.submitIndividualPulse(player, object : Pulse() {
+            submitIndividualPulse(player, object : Pulse() {
                 var counter = 0
                 override fun pulse(): Boolean {
                     when(counter++){
-                        0 -> ContentAPI.sendChat(player, message)
-                        lastTick - 1 -> if(preach) ContentAPI.sendChat(player, preachText)
-                        lastTick -> ContentAPI.unlock(player).also { return true }
+                        0 -> sendChat(player, message)
+                        lastTick - 1 -> if(preach) sendChat(player, preachText)
+                        lastTick -> unlock(player).also { return true }
                     }
                     return false
                 }

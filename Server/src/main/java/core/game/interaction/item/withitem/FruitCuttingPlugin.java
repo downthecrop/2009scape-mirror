@@ -1,6 +1,6 @@
 package core.game.interaction.item.withitem;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.component.Component;
 import core.plugin.Initializable;
 import kotlin.Unit;
@@ -222,7 +222,7 @@ public final class FruitCuttingPlugin extends UseWithHandler {
 					amount = 5;
 					break;
 				case 4:
-					ContentAPI.sendInputDialogue(player, false, "Enter the amount:", (value) -> {
+					sendInputDialogue(player, false, "Enter the amount:", (value) -> {
 						String s = value.toString();
 						s = s.replace("k","000");
 						s = s.replace("K","000");

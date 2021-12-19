@@ -1,6 +1,6 @@
 package core.game.interaction.inter;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -75,7 +75,7 @@ public class TanningInterface extends ComponentPlugin {
 		case 124:
 			amount = 10;
 		case 199:
-			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+			sendInputDialogue(player, true, "Enter the amount:", (value) -> {
 				TanningProduct.tan(player, (int) value, deff);
 				return Unit.INSTANCE;
 			});

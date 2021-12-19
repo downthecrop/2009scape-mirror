@@ -1,6 +1,6 @@
 package rs09.game.content.global.worldevents.penguinhns
 
-import api.ContentAPI
+import api.*
 import core.game.component.Component
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
@@ -75,7 +75,7 @@ class LarryHandler(player: Player? = null) : DialoguePlugin(player){
             return
         }
 
-        val level = ContentAPI.getStatLevel(player, skill)
+        val level = getStatLevel(player, skill)
         System.out.println("Level: $level")
         val expGained = points?.toDouble()?.times((level * 25))
         System.out.print("exp: $expGained")

@@ -1,6 +1,6 @@
 package rs09.game.content.dialogue
 
-import api.DialUtils.splitLines
+import api.splitLines
 import core.game.component.Component
 import core.game.content.dialogue.DialogueInterpreter
 import core.game.content.dialogue.DialoguePlugin

@@ -1,7 +1,7 @@
 package rs09.game.node.entity.npc.other
 
 import api.Container
-import api.ContentAPI
+import api.*
 import core.game.content.consumable.Consumables
 import core.game.content.consumable.Food
 import core.game.interaction.MovementPulse
@@ -39,7 +39,7 @@ class MortMyreGhastNPC : AbstractNPC {
             val players = RegionManager.getLocalPlayers(this, 5).filter { !it.inCombat() }
             if(players.isNotEmpty()){
                 val player = players.random()
-                ContentAPI.submitIndividualPulse(this, object : MovementPulse(this, player){
+                submitIndividualPulse(this, object : MovementPulse(this, player){
                     override fun pulse(): Boolean {
                         animate(Animation(1093))
                         attemptLifeSiphon(player)
@@ -48,7 +48,7 @@ class MortMyreGhastNPC : AbstractNPC {
                 })
             }
         } else {
-            val ticksTransformed = ContentAPI.getWorldTicks() - ContentAPI.getAttribute(this, "woke", 0)
+            val ticksTransformed = getWorldTicks() - getAttribute(this, "woke", 0)
             if(!inCombat() && ticksTransformed > 10){
                 reTransform()
             }
@@ -70,18 +70,18 @@ class MortMyreGhastNPC : AbstractNPC {
                 val consumable = Consumables.getConsumableById(i.id)
                 if(consumable != null && consumable is Food) {
                     hasFood = true
-                    ContentAPI.removeItem(player, i, Container.INVENTORY)
-                    ContentAPI.addItem(player, Items.ROTTEN_FOOD_2959)
-                    ContentAPI.sendMessage(player, "You feel something attacking your backpack, and smell a terrible stench.")
+                    removeItem(player, i, Container.INVENTORY)
+                    addItem(player, Items.ROTTEN_FOOD_2959)
+                    sendMessage(player, "You feel something attacking your backpack, and smell a terrible stench.")
                     break
                 }
             }
 
             if(!hasFood && RandomFunction.roll(3)) {
-                ContentAPI.sendMessage(player, "An attacking Ghast just misses you.")
+                sendMessage(player, "An attacking Ghast just misses you.")
             } else if(!hasFood){
-                ContentAPI.impact(player, RandomFunction.random(3,6), ImpactHandler.HitsplatType.NORMAL)
-                ContentAPI.sendMessage(player, "A supernatural force draws energy from you.")
+                impact(player, RandomFunction.random(3,6), ImpactHandler.HitsplatType.NORMAL)
+                sendMessage(player, "A supernatural force draws energy from you.")
             }
         }
     }
@@ -96,7 +96,7 @@ class MortMyreGhastNPC : AbstractNPC {
             reTransform()
             if(killer is Player){
                 NSUtils.incrementGhastKC(killer)
-                ContentAPI.rewardXP(killer, Skills.PRAYER, 30.0)
+                rewardXP(killer, Skills.PRAYER, 30.0)
                 removeAttribute("woke")
             }
         }

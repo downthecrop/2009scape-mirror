@@ -1,7 +1,7 @@
 package core.game.content.consumable;
 
 import api.Container;
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
@@ -50,11 +50,11 @@ public abstract class Consumable implements Plugin<Object> {
 		final int nextItemId = getNextItemId(item.getId());
 
 		if(item.getAmount() > 1){
-			ContentAPI.removeItem(player, item.getId(), Container.INVENTORY);
-		} else 	ContentAPI.removeItem(player, item, Container.INVENTORY);
+			removeItem(player, item.getId(), Container.INVENTORY);
+		} else 	removeItem(player, item, Container.INVENTORY);
 
 		if (nextItemId != -1) {
-			ContentAPI.addItem(player, nextItemId, 1);
+			addItem(player, nextItemId, 1);
 		}
 		final int initialLifePoints = player.getSkills().getLifepoints();
 		Consumables.getConsumableById(item.getId()).effect.activate(player);

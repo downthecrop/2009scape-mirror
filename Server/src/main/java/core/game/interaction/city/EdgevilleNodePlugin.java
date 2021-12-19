@@ -1,6 +1,6 @@
 package core.game.interaction.city;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.content.global.action.ClimbActionHandler;
@@ -50,7 +50,7 @@ public final class EdgevilleNodePlugin extends OptionHandler {
             case 9262:
             case 9261:
             case 30806:
-			    ContentAPI.sendMessage(player, "There doesn't seem to be any seeds on this rosebush.");
+			    sendMessage(player, "There doesn't seem to be any seeds on this rosebush.");
                 break;
             case 12265:
                 ClimbActionHandler.climb(player, null, Location.create(3078, 3493, 0));
@@ -65,17 +65,17 @@ public final class EdgevilleNodePlugin extends OptionHandler {
             case 26933: // Edgeville Dungeon trapdoor (when closed)
                 if (option.equalsIgnoreCase("open")) {
 					player.animate(Animation.create(536));
-					ContentAPI.sendMessage(player, "The trapdoor opens...");
+					sendMessage(player, "The trapdoor opens...");
 					SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(26934), 500);
                 }
                 break;
             case 26934: // Edgeville Dungeon trapdoor (when open)
                 if (option.equalsIgnoreCase("close")) {
 					player.animate(Animation.create(535));
-					ContentAPI.sendMessage(player, "You close the trapdoor.");
+					sendMessage(player, "You close the trapdoor.");
                     SceneryBuilder.replace(node.asScenery(), node.asScenery().transform(26933));
                 } else if (option.equalsIgnoreCase("climb-down")) {
-					ContentAPI.sendMessage(player, "You climb down through the trapdoor...");
+					sendMessage(player, "You climb down through the trapdoor...");
 					ClimbActionHandler.climbLadder(player, (Scenery) node, option);
                 }
                 break;

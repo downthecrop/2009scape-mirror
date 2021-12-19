@@ -2,7 +2,7 @@ package rs09.game.content.jobs
 
 import GatheringJobs
 import SlayingJob
-import api.ContentAPI
+import api.*
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
@@ -64,7 +64,7 @@ class WorkForInteractionListener : InteractionListener() {
             var jobId = 0
 
             if(JobManager.getStoreFile().getInt(player.username.toLowerCase()) == 3){
-                ContentAPI.sendNPCDialogue(player, node.id,"You've hit your limit for the day. Come back tomorrow!")
+                sendNPCDialogue(player, node.id,"You've hit your limit for the day. Come back tomorrow!")
                 return@on true
             }
 

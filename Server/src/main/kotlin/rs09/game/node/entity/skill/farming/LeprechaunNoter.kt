@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
-import api.ContentAPI
+import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.item.Item
@@ -27,7 +27,7 @@ class LeprechaunNoter : InteractionListener() {
                 if(player.inventory.remove(Item(usedItem.id,amt))){
                     player.inventory.add(Item(usedItem.noteChange,amt))
                 }
-                 ContentAPI.sendItemDialogue(player,usedItem.id,"The leprechaun exchanges your items for banknotes.")
+                 sendItemDialogue(player,usedItem.id,"The leprechaun exchanges your items for banknotes.")
             } else {
 			// Unsure why the line below no longer functions, despite only changing the line above to be more correct. Using your note(NOT CROP) on the leprechaun no longer functions because of this. - Crash
                 player.dialogueInterpreter.sendDialogues(npc.id,expr,"That IS a banknote!") 

@@ -1,6 +1,6 @@
 package rs09.game.system.command.sets
 
-import api.ContentAPI
+import api.*
 import api.InputType
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
@@ -164,7 +164,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             when(mode){
                 "buying" -> showGeBuy(player)
                 "selling" -> showGeSell(player)
-                "search" -> ContentAPI.sendInputDialogue(player, InputType.STRING_LONG, "Enter search term:"){value ->
+                "search" -> sendInputDialogue(player, InputType.STRING_LONG, "Enter search term:"){value ->
                     showOffers(player, value as String)
                 }
                 else -> reject(player, "Invalid mode used. Available modes are: buying, selling, search")
@@ -199,7 +199,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             if (player.attributes.containsKey("replyTo")) {
                 player.setAttribute("keepDialogueAlive", true)
                 val replyTo = player.getAttribute("replyTo", "").replace("_".toRegex(), " ")
-                ContentAPI.sendInputDialogue(player, InputType.MESSAGE ,StringUtils.formatDisplayName(replyTo)){ value ->
+                sendInputDialogue(player, InputType.MESSAGE ,StringUtils.formatDisplayName(replyTo)){ value ->
                     CommunicationInfo.sendMessage(player, replyTo.toLowerCase(), value as String)
                     player.removeAttribute("keepDialogueAlive")
                 }
@@ -551,11 +551,11 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         for(i in 0..299) {
             val offer = offerList.elementAtOrNull(i)
             if (offer != null)
-                ContentAPI.setInterfaceText(player, offer, Components.QUESTJOURNAL_SCROLL_275, lineId++)
+                setInterfaceText(player, offer, Components.QUESTJOURNAL_SCROLL_275, lineId++)
             else
-                ContentAPI.setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+                setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
         }
-        ContentAPI.openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+        openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
     }
 
     fun showGeBuy(player: Player){
@@ -571,35 +571,35 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 offers[offerIDs.key] = totalOffered
             }
         }
-        val offerList = offers.keys.map { "${ContentAPI.itemDefinition(it).name} - ${offers[it]}" }.sorted()
+        val offerList = offers.keys.map { "${itemDefinition(it).name} - ${offers[it]}" }.sorted()
 
         var lineId = 11
         setScrollTitle(player, "Active Buy Offers")
         for(i in 0..299) {
             val offer = offerList.elementAtOrNull(i)
             if (offer != null)
-                ContentAPI.setInterfaceText(player, offer, Components.QUESTJOURNAL_SCROLL_275, lineId++)
+                setInterfaceText(player, offer, Components.QUESTJOURNAL_SCROLL_275, lineId++)
             else
-                ContentAPI.setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+                setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
         }
-        ContentAPI.openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+        openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
     }
 
     fun showOffers(player: Player, searchTerm: String){
         val fakeOffers = ArrayList<FakeOffer>()
 
         OfferManager.OFFERS_BY_ITEMID.forEach { (id, offers) ->
-            if(searchTerm.toLowerCase().contains(ContentAPI.itemDefinition(id).name.toLowerCase()) || ContentAPI.itemDefinition(id).name.toLowerCase().contains(searchTerm.toLowerCase())){
+            if(searchTerm.toLowerCase().contains(itemDefinition(id).name.toLowerCase()) || itemDefinition(id).name.toLowerCase().contains(searchTerm.toLowerCase())){
                 offers.forEach {
-                    fakeOffers.add(FakeOffer(it.sell, ContentAPI.itemDefinition(id).name, it.amount))
+                    fakeOffers.add(FakeOffer(it.sell, itemDefinition(id).name, it.amount))
                 }
             }
         }
 
         OfferManager.BOT_OFFERS.forEach{ (id, amount) ->
-            val name = ContentAPI.getItemName(id)
+            val name = getItemName(id)
             if(searchTerm.toLowerCase().contains(name) || name.toLowerCase().contains(searchTerm.toLowerCase()))
-                fakeOffers.add(FakeOffer(true, ContentAPI.getItemName(id), amount))
+                fakeOffers.add(FakeOffer(true, getItemName(id), amount))
         }
 
         val buyingList = fakeOffers.filter { !it.sell }
@@ -638,13 +638,13 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         var lineId = 11
         for(i in 0..299) {
             val offer = if(i < buyList.size) buyList.getOrNull(i) else sellList.getOrNull(i - (buyList.size))
-            ContentAPI.setInterfaceText(player, offer ?: "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+            setInterfaceText(player, offer ?: "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
         }
-        ContentAPI.openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+        openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
     }
 
     fun setScrollTitle(player: Player, text: String){
-        ContentAPI.setInterfaceText(player, text, Components.QUESTJOURNAL_SCROLL_275, 2)
+        setInterfaceText(player, text, Components.QUESTJOURNAL_SCROLL_275, 2)
     }
 
     class FakeOffer(val sell: Boolean,val name: String,val amount: Int)
