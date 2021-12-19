@@ -1,4 +1,4 @@
-package core.net.amsc;
+package core.net.ms;
 
 import java.util.ArrayList;
 import java.util.List;

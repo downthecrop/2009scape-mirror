@@ -12,7 +12,7 @@ import core.game.node.entity.skill.construction.HousingStyle
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
-import rs09.game.world.GameWorld.settings
+import rs09.game.world.World.settings
 import rs09.tools.END_DIALOGUE
 import rs09.tools.START_DIALOGUE
 

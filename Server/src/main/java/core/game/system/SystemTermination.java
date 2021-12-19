@@ -6,6 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.login.PlayerParser;
 import rs09.Server;
 import rs09.ServerConstants;
+import rs09.ServerState;
 import rs09.ServerStore;
 import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.ge.OfferManager;
@@ -37,15 +38,13 @@ public final class SystemTermination {
 	public void terminate() {
 		SystemLogger.logInfo("[SystemTerminator] Initializing termination sequence - do not shutdown!");
 		try {
-			Server.setRunning(false);
 			for(Player player : Repository.getPlayers()){
 				DMCHandler dmc = player.getAttribute("dmc",null);
 				if(dmc != null){
 					dmc.clear(false);
 				}
 			}
-			if(ServerConstants.DATA_PATH != null)
-				save(ServerConstants.DATA_PATH);
+			Server.setState(ServerState.SHUTDOWN);
 		} catch (Throwable e) {
 			e.printStackTrace();
 		}
@@ -62,7 +61,6 @@ public final class SystemTermination {
 		if (!file.isDirectory()) {
 			file.mkdirs();
 		}
-		Server.getReactor().terminate();
 		for (Iterator<Player> it = Repository.getPlayers().iterator(); it.hasNext();) {
 			try {
 				Player p = it.next();

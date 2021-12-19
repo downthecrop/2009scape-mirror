@@ -1,6 +1,6 @@
 package core.net.lobby;
 
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.net.IoSession;
 import core.net.packet.IoBuffer;
 
@@ -209,6 +209,6 @@ public final class WorldList {
 	 * Sets the baupdateStamp.
      */
 	public static void flagUpdate() {
-		WorldList.updateStamp = GameWorld.getTicks();
+		WorldList.updateStamp = World.getTicks();
 	}
 }

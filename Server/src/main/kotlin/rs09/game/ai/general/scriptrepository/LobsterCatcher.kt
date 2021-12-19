@@ -15,7 +15,7 @@ import rs09.game.ai.AIPlayer
 import rs09.game.ai.general.ScriptAPI
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InteractionListeners
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import kotlin.random.Random
 
 @PlayerCompatible
@@ -146,7 +146,7 @@ class LobsterCatcher : Script() {
                     bot.visualize(ANIMATION, GRAPHICS)
                     bot.impactHandler.disabledTicks = 4
                     val location = Location.create(2819, 3437, 0)
-                    GameWorld.Pulser.submit(object : Pulse(4, bot) {
+                    World.Pulser.submit(object : Pulse(4, bot) {
                         override fun pulse(): Boolean {
                             bot.unlock()
                             bot.properties.teleportLocation = location

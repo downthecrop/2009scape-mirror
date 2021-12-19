@@ -17,7 +17,7 @@ import core.tools.RandomFunction;
 import rs09.game.node.entity.combat.CombatPulse;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.handlers.MeleeSwingHandler;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -149,7 +149,7 @@ public final class PCShifterNPC extends AbstractNPC {
 		entity.getWalkingQueue().reset();
 		entity.getLocks().lockMovement(2);
 		entity.lock(3);
-		GameWorld.getPulser().submit(new Pulse(1, entity) {
+		World.getPulser().submit(new Pulse(1, entity) {
 			@Override
 			public boolean pulse() {
 				entity.animate(Animation.create(3904));

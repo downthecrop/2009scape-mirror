@@ -12,7 +12,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.zone.ZoneBorders;
@@ -106,7 +106,7 @@ public final class GnomeCopterActivity extends ActivityPlugin {
 		player.lock();
 		player.faceLocation(player.getLocation().transform(0, 3, 0));
 		object.setCharge(88);
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
 			int stage = 0;
 
 			@Override
@@ -161,7 +161,7 @@ public final class GnomeCopterActivity extends ActivityPlugin {
 		final int pad = index;
 		player.setDirection(Direction.SOUTH);
 		player.getProperties().setTeleportLocation(Location.create(3162, 3352, 0));
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
 			int stage = 0;
 			int tick = 0;
 

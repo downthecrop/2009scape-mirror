@@ -6,7 +6,7 @@ import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.plugin.Initializable;
 import core.game.world.map.Location;
 
@@ -63,7 +63,7 @@ public final class GodWarsMinionNPC extends AbstractNPC {
 	public void finalizeDeath(Entity killer) {
 		super.finalizeDeath(killer);
 		getProperties().getCombatPulse().stop();
-		if (boss != null && boss.getRespawnTick() > GameWorld.getTicks()) {
+		if (boss != null && boss.getRespawnTick() > World.getTicks()) {
 			setRespawnTick(boss.getRespawnTick());
 		}
 	}

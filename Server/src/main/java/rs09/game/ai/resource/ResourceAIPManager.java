@@ -4,7 +4,7 @@ import core.game.node.entity.player.Player;
 import rs09.game.ai.resource.task.ResourceTask;
 import rs09.game.ai.resource.task.ResourceTasks;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.sql.ResultSet;
 import java.sql.Statement;
@@ -58,7 +58,7 @@ public class ResourceAIPManager {
 
     public ResourceAIPManager load(Player player) {
         try {
-            Statement statement = GameWorld.getDatabaseManager().connections().get("global").createStatement();
+            Statement statement = World.getDatabaseManager().connections().get("global").createStatement();
 
             ResultSet result = statement.executeQuery("SELECT * FROM `members` WHERE username='" + player.getUsername() + "'");
            // Results result = new Results(GameWorld.getDatabaseManager().query("global", "SELECT * FROM `members` WHERE username='" + player.getUsername() + "'"));
@@ -87,14 +87,14 @@ public class ResourceAIPManager {
             StringBuilder query = new StringBuilder();
             query.append("UPDATE `members` SET `taskName`='" + entry.getKey().getTaskName() + "',`taskTime`='" + entry.getValue() + "' WHERE `username`='" + player.getUsername() + "'");
             System.out.println("ResourceAIPManager: " + query.toString());
-            GameWorld.getDatabaseManager().update("global", query.toString());
+            World.getDatabaseManager().update("global", query.toString());
 
         }
         return this;
     }
 
     public void pulse(Player player) {
-        GameWorld.getPulser().submit(new Pulse(1) {
+        World.getPulser().submit(new Pulse(1) {
             @Override
             public boolean pulse() {
 

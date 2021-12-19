@@ -14,7 +14,7 @@ import core.game.node.item.ChanceItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.update.flag.context.Animation;
@@ -136,7 +136,7 @@ public class BorkNPC extends AbstractNPC {
 		if (player.getDialogueInterpreter().getDialogue() != null) {
 			player.getDialogueInterpreter().getDialogue().end();
 		}
-		GameWorld.getPulser().submit(new Pulse(10, player) {
+		World.getPulser().submit(new Pulse(10, player) {
 
 			@Override
 			public boolean pulse() {
@@ -193,14 +193,14 @@ public class BorkNPC extends AbstractNPC {
 		getProperties().getCombatPulse().stop();
 		player.getProperties().getCombatPulse().stop();
 		getAnimator().forceAnimation(Animation.create(8757));
-		GameWorld.getPulser().submit(new Pulse(1, player, this) {
+		World.getPulser().submit(new Pulse(1, player, this) {
 
 			@Override
 			public boolean pulse() {
 				getAnimator().forceAnimation(Animation.create(8757));
 				sendChat("Come to my aid, brothers!");
 				player.sendMessage("Bork strikes the ground with his axe.");
-				GameWorld.getPulser().submit(new Pulse(4, player) {
+				World.getPulser().submit(new Pulse(4, player) {
 
 					@Override
 					public boolean pulse() {
@@ -209,7 +209,7 @@ public class BorkNPC extends AbstractNPC {
 					}
 
 				});
-				GameWorld.getPulser().submit(new Pulse(13, player) {
+				World.getPulser().submit(new Pulse(13, player) {
 
 					@Override
 					public boolean pulse() {
@@ -278,7 +278,7 @@ public class BorkNPC extends AbstractNPC {
 		/**
 		 * The last talk.
 		 */
-		private int lastTalk = GameWorld.getTicks() + 30;
+		private int lastTalk = World.getTicks() + 30;
 
 		/**
 		 * Constructs a new {@Code OrkLegion} {@Code Object}
@@ -303,9 +303,9 @@ public class BorkNPC extends AbstractNPC {
 				return;
 			}
 
-			if (lastTalk < GameWorld.getTicks()) {
+			if (lastTalk < World.getTicks()) {
 				sendChat(LEGION_CHATS[RandomFunction.random(LEGION_CHATS.length)]);
-				lastTalk = GameWorld.getTicks() + 30;
+				lastTalk = World.getTicks() + 30;
 			}
 		}
 
@@ -499,7 +499,7 @@ public class BorkNPC extends AbstractNPC {
 			bork.cutscene.player = player;
 			player.lock();
 			player.getInterfaceManager().open(new Component(692));
-			GameWorld.getPulser().submit(new Pulse(13, player) {
+			World.getPulser().submit(new Pulse(13, player) {
 
 				@Override
 				public boolean pulse() {

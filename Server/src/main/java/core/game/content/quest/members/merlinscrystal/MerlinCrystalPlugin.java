@@ -23,7 +23,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -87,7 +87,7 @@ public final class MerlinCrystalPlugin extends OptionHandler {
 				final NPC merlin = NPC.create(249, Location.create(2767, 3493, 2));
 				merlin.init();
 				player.getDialogueInterpreter().open(merlin.getId(), merlin);
-				GameWorld.getPulser().submit(new Pulse(100, player, merlin) {
+				World.getPulser().submit(new Pulse(100, player, merlin) {
 
 					@Override
 					public boolean pulse() {

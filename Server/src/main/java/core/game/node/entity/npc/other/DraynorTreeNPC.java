@@ -6,7 +6,7 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
@@ -61,13 +61,13 @@ public final class DraynorTreeNPC extends AbstractNPC {
 	public void tick() {
 		final List<Player> players = RegionManager.getLocalPlayers(this, 1);
 		if (players.size() != 0) {
-			if (attackDelay < GameWorld.getTicks()) {
+			if (attackDelay < World.getTicks()) {
 				for (Player p : players) {
 					faceTemporary(p, 2);
 					getAnimator().forceAnimation(ANIMATION);
 					int hit = RandomFunction.random(2);
 					p.getImpactHandler().manualHit(this, hit, hit > 0 ? HitsplatType.NORMAL : HitsplatType.MISS);
-					attackDelay = GameWorld.getTicks() + 3;
+					attackDelay = World.getTicks() + 3;
 					p.animate(p.getProperties().getDefenceAnimation());
 					return;
 				}

@@ -8,7 +8,7 @@ import core.game.node.item.Item
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import rs09.game.interaction.Listener
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 
 abstract class SpellListener(val bookName: String) : Listener {
     companion object {
@@ -34,7 +34,7 @@ abstract class SpellListener(val bookName: String) : Listener {
     }
 
     fun requires(player: Player, magicLevel: Int = 0, runes: Array<Item> = arrayOf<Item>(), specialEquipment: IntArray = intArrayOf()){
-        if(player.getAttribute("magic-delay",0) > GameWorld.ticks){
+        if(player.getAttribute("magic-delay",0) > World.ticks){
             throw IllegalStateException()
         }
         if(player.getAttribute("tablet-spell",false)){
@@ -80,7 +80,7 @@ abstract class SpellListener(val bookName: String) : Listener {
     }
 
     fun setDelay(player: Player,isTeleport: Boolean = false){
-        if(!isTeleport) player.setAttribute("magic-delay",GameWorld.ticks + 3) else player.setAttribute("magic-delay",GameWorld.ticks + 5)
+        if(!isTeleport) player.setAttribute("magic-delay",World.ticks + 3) else player.setAttribute("magic-delay",World.ticks + 5)
     }
 
     fun interrupt(player: Player){

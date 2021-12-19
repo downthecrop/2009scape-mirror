@@ -15,7 +15,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.zone.ZoneBorders;
@@ -126,7 +126,7 @@ public class EnchantingZone extends MTAZone {
 			if (!PULSE.isRunning()) {
 				PULSE.restart();
 				PULSE.start();
-				GameWorld.getPulser().submit(PULSE);
+				World.getPulser().submit(PULSE);
 			}
 			createGroundSpawns(e.asPlayer());
 			BONUS_SHAPE.setAsBonus(e.asPlayer());
@@ -180,7 +180,7 @@ public class EnchantingZone extends MTAZone {
 
 				@Override
 				public void respawn() {
-					GameWorld.getPulser().submit(getRespawnPulse(this));
+					World.getPulser().submit(getRespawnPulse(this));
 				}
 			};
 			items.add(item);
@@ -195,7 +195,7 @@ public class EnchantingZone extends MTAZone {
 	 * @return the pulse.
 	 */
 	public Pulse getRespawnPulse(final GroundItem item) {
-		return new Pulse(GameWorld.getSettings().isDevMode() ? 45 : RandomFunction.random(700, 800)) {
+		return new Pulse(World.getSettings().isDevMode() ? 45 : RandomFunction.random(700, 800)) {
 			@Override
 			public boolean pulse() {
 				GroundItemManager.create(item);

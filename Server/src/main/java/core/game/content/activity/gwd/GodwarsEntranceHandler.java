@@ -11,7 +11,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
@@ -57,7 +57,7 @@ public final class GodwarsEntranceHandler extends OptionHandler {
 			player.lock(2);
 			player.getPacketDispatch().sendMessage("You climb down the rope.");
 			player.animate(Animation.create(828));
-			GameWorld.getPulser().submit(new Pulse(1, player) {
+			World.getPulser().submit(new Pulse(1, player) {
 				@Override
 				public boolean pulse() {
 					player.getProperties().setTeleportLocation(Location.create(2882, 5311, 2));
@@ -76,7 +76,7 @@ public final class GodwarsEntranceHandler extends OptionHandler {
 			} else {
 				ForceMovement.run(player, Location.create(2898, 3719, 0), Location.create(2898, 3715, 0), new Animation(6979), 3);
 			}
-			GameWorld.getPulser().submit(new Pulse(12, player) {
+			World.getPulser().submit(new Pulse(12, player) {
 				@Override
 				public boolean pulse() {
 					player.getPacketDispatch().sendSceneryAnimation(RegionManager.getObject(0, 2898, 3716), Animation.create(6981));

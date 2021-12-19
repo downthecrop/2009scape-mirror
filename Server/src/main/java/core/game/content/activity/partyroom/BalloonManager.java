@@ -15,7 +15,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
@@ -77,16 +77,16 @@ public final class BalloonManager extends OptionHandler {
 		if (isCountingDown()) {
 			return;
 		}
-		countdown = GameWorld.getTicks() + getDropDelay();
+		countdown = World.getTicks() + getDropDelay();
 		final NPC partyPete = RegionManager.getNpc(new Location(3052, 3373, 0), 659, 1);
-		GameWorld.getPulser().submit(new Pulse(1) {
+		World.getPulser().submit(new Pulse(1) {
 			@Override
 			public boolean pulse() {
-				int realCount = --countdown - GameWorld.getTicks();
+				int realCount = --countdown - World.getTicks();
 				for (ChestViewer viewer : PartyRoomPlugin.getViewers().values()) {
 					viewer.getPlayer().getConfigManager().set(1135, realCount);
 				}
-				if (--realCount - GameWorld.getTicks() <= 0) {
+				if (--realCount - World.getTicks() <= 0) {
 					drop();
 					return true;
 				}
@@ -105,7 +105,7 @@ public final class BalloonManager extends OptionHandler {
 		PartyRoomPlugin.getPartyChest().addAll(PartyRoomPlugin.getChestQueue());
 		PartyRoomPlugin.getChestQueue().clear();
 		PartyRoomPlugin.update();
-		GameWorld.getPulser().submit(new Pulse(1) {
+		World.getPulser().submit(new Pulse(1) {
 			int waves;
 
 			@Override
@@ -181,7 +181,7 @@ public final class BalloonManager extends OptionHandler {
 	 * @return {@code True} if so.
 	 */
 	public boolean isCountingDown() {
-		return countdown > GameWorld.getTicks();
+		return countdown > World.getTicks();
 	}
 
 	/**
@@ -247,7 +247,7 @@ public final class BalloonManager extends OptionHandler {
 			// Pop a party balloon
 			player.getAchievementDiaryManager().finishTask(player, DiaryType.FALADOR, 0, 12);
 
-			GameWorld.getPulser().submit(new Pulse(1) {
+			World.getPulser().submit(new Pulse(1) {
 				int counter;
 
 				@Override

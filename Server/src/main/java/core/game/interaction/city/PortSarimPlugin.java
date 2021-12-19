@@ -9,7 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -103,7 +103,7 @@ public final class PortSarimPlugin extends OptionHandler {
 		case "talk-to":
 			player.lock(2);
 			((NPC) node).sendChat(MESSAGES[RandomFunction.random(MESSAGES.length)]);
-			GameWorld.getPulser().submit(new Pulse(1) {
+			World.getPulser().submit(new Pulse(1) {
 				@Override
 				public boolean pulse() {
 					player.getDialogueInterpreter().sendDialogues(player, null, "Maybe I should let him sleep.");
@@ -118,7 +118,7 @@ public final class PortSarimPlugin extends OptionHandler {
 			}
 			player.getPacketDispatch().sendMessage("There are lots of bananas in the crate.");
 			player.lock(2);
-			GameWorld.getPulser().submit(new Pulse(1) {
+			World.getPulser().submit(new Pulse(1) {
 				@Override
 				public boolean pulse() {
 					if (player.getAttribute("wydin-rum", false)) {

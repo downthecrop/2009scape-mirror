@@ -8,7 +8,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
@@ -92,7 +92,7 @@ public class FruitBatNPC extends Forager {
 	 */
 	@Override
 	protected boolean specialMove(FamiliarSpecial special) {
-		if (owner.getAttribute("fruit-bat", 0) > GameWorld.getTicks()) {
+		if (owner.getAttribute("fruit-bat", 0) > World.getTicks()) {
 			return false;
 		}
 
@@ -104,9 +104,9 @@ public class FruitBatNPC extends Forager {
 		graphics(new Graphics(1332, 200));
 		animate(new Animation(8321), 3); // TODO - this animates the fruit bat with the splattering fruit animation, should do it for all falling fruits but Items are not Entities and therefore cannot animate
 		graphics(new Graphics(1331), 4);
-		owner.setAttribute("fruit-bat", GameWorld.getTicks() + 5);
+		owner.setAttribute("fruit-bat", World.getTicks() + 5);
 		lock(4);
-		GameWorld.getPulser().submit(new Pulse(4, this) {
+		World.getPulser().submit(new Pulse(4, this) {
 			@Override
 			public boolean pulse() {
 				if (anyFruit){

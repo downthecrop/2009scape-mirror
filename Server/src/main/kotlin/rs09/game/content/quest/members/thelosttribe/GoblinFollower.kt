@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import org.rs09.consts.Components
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 
 /**
  * Small object for the goblin follow options
@@ -20,7 +20,7 @@ object GoblinFollower {
     }
 
     private fun travel(player: Player,location: Location){
-        GameWorld.Pulser.submit(object: Pulse(){
+        World.Pulser.submit(object: Pulse(){
             var counter = 0
             override fun pulse(): Boolean {
                 when(counter++){

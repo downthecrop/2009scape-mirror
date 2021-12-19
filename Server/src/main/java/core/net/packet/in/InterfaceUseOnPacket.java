@@ -14,7 +14,7 @@ import core.game.node.scenery.Scenery;
 import rs09.game.node.entity.skill.magic.SpellListener;
 import rs09.game.node.entity.skill.magic.SpellListeners;
 import rs09.game.node.entity.skill.magic.SpellUtils;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import rs09.game.world.repository.Repository;
@@ -51,7 +51,7 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 			if (groundItem == null || !player.getLocation().withinDistance(groundItem.getLocation())) {
 				break;
 			}
-			if (player.getAttribute("magic:delay", -1) > GameWorld.getTicks()) {
+			if (player.getAttribute("magic:delay", -1) > World.getTicks()) {
 				break;
 			}
 			if (player.getZoneMonitor().clickButton(interfaceId, componentId, spell, itemId, opcode)) {
@@ -188,7 +188,7 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 				PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
 				break;
 			}
-			if (player.getAttribute("magic:delay", -1) > GameWorld.getTicks()) {
+			if (player.getAttribute("magic:delay", -1) > World.getTicks()) {
 				break;
 			}
 			if(!SpellUtils.getBookFromInterface(interfaceId).equals("none")){
@@ -242,13 +242,13 @@ public class InterfaceUseOnPacket implements IncomingPacket {
 			}
 			switch (interfaceId) {
 			case 430:
-				if (player.getAttribute("magic:delay", -1) > GameWorld.getTicks()) {
+				if (player.getAttribute("magic:delay", -1) > World.getTicks()) {
 					break;
 				}
 				MagicSpell.castSpell(player, SpellBookManager.SpellBook.LUNAR, componentId, item);
 				break;
 			case 192:
-				if (player.getAttribute("magic:delay", -1) > GameWorld.getTicks()) {
+				if (player.getAttribute("magic:delay", -1) > World.getTicks()) {
 					break;
 				}
 				MagicSpell.castSpell(player, SpellBookManager.SpellBook.MODERN, componentId, item);

@@ -21,7 +21,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
 import rs09.game.content.global.action.PickupHandler;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Represents the telekenitic grab spell.
@@ -102,7 +102,7 @@ public final class TelekineticGrabSpell extends MagicSpell {
 		}
 		entity.lock(2);
 		visualize(entity, target);
-		GameWorld.getPulser().submit(getGrabPulse(entity, ground));
+		World.getPulser().submit(getGrabPulse(entity, ground));
 		return true;
 	}
 

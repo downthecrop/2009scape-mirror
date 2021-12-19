@@ -4,7 +4,7 @@ import core.game.node.entity.skill.gather.SkillingResource;
 import core.game.node.entity.player.Player;
 import rs09.game.ai.AIPlayer;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import rs09.game.world.repository.Repository;
 
 import java.util.List;
@@ -21,7 +21,7 @@ public class ResourceAIPActions {
 		}
 		for (int aip_index = 0; aip_index < resource_players.size(); aip_index++) {
 			final AIPlayer bot = resource_players.get(aip_index);
-			GameWorld.getPulser().submit(new Pulse(1, bot) {
+			World.getPulser().submit(new Pulse(1, bot) {
 				int ticks;
 				int ov;
 				@Override

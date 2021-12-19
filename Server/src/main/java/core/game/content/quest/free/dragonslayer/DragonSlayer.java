@@ -14,7 +14,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import rs09.game.content.dialogue.DukeHoracioDialogue;
 import rs09.game.content.quest.free.dragonslayer.NedDialogue;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import rs09.plugin.PluginManager;
 
 /**
@@ -327,7 +327,7 @@ public final class DragonSlayer extends Quest {
 		final Scenery object = RegionManager.getObject(new Location(3050, 9839, 0));
 		player.faceLocation(object.getLocation());
 		player.getPacketDispatch().sendSceneryAnimation(object, new Animation(6636));
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
 			int counter = 0;
 
 			@Override

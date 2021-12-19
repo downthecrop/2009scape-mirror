@@ -13,7 +13,7 @@ import core.game.system.task.Pulse;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 import rs09.game.interaction.InterfaceListeners;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.util.List;
 
@@ -287,7 +287,7 @@ public class ActionButtonPacket implements IncomingPacket {
 			//System.out.println("Using action handler184-95");
 			if (player.getAttribute("logging_in") != null) {
 				player.getInterfaceManager().close();
-				GameWorld.getPulser().submit(new Pulse(1, player) {
+				World.getPulser().submit(new Pulse(1, player) {
 					@Override
 					public boolean pulse() {
 						player.removeAttribute("logging_in");

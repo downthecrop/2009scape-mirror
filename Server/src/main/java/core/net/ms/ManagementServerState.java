@@ -1,4 +1,4 @@
-package core.net.amsc;
+package core.net.ms;
 
 import core.game.node.entity.player.Player;
 import rs09.game.world.repository.Repository;

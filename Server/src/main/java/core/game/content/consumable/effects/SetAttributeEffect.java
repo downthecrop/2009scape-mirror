@@ -1,7 +1,7 @@
 package core.game.content.consumable.effects;
 
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.content.consumable.ConsumableEffect;
 
 public class SetAttributeEffect extends ConsumableEffect {
@@ -28,7 +28,7 @@ public class SetAttributeEffect extends ConsumableEffect {
     @Override
     public void activate(Player p) {
         if(isTicks){
-            int val = (Integer) attrValue + GameWorld.getTicks();
+            int val = (Integer) attrValue + World.getTicks();
             p.setAttribute(attrString,val);
             return;
         }

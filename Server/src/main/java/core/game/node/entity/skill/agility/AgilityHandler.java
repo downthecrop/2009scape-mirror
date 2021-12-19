@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -70,7 +70,7 @@ public final class AgilityHandler {
 		}
 		movement.start();
 		movement.setDelay(delay);
-		GameWorld.getPulser().submit(movement);
+		World.getPulser().submit(movement);
 		return movement;
 	}
 
@@ -152,7 +152,7 @@ public final class AgilityHandler {
 			}
 		};
 		movement.start();
-		GameWorld.getPulser().submit(movement);
+		World.getPulser().submit(movement);
 		return movement;
 	}
 
@@ -183,11 +183,11 @@ public final class AgilityHandler {
 				setObstacleFlag(player, courseIndex);
 			}
 		};
-		GameWorld.getPulser().submit(new Pulse(delay, player) {
+		World.getPulser().submit(new Pulse(delay, player) {
 			@Override
 			public boolean pulse() {
 				movement.start();
-				GameWorld.getPulser().submit(movement);
+				World.getPulser().submit(movement);
 				return true;
 			}
 		});
@@ -217,7 +217,7 @@ public final class AgilityHandler {
 	public static void climb(final Player player, final int courseIndex, Animation animation, final Location destination, final double experience, final String message, int delay) {
 		player.lock(delay + 1);
 		player.animate(animation);
-		GameWorld.getPulser().submit(new Pulse(delay) {
+		World.getPulser().submit(new Pulse(delay) {
 			@Override
 			public boolean pulse() {
 				if (message != null) {
@@ -272,7 +272,7 @@ public final class AgilityHandler {
 			player.getAppearance().setAnimations(animation);
 		}
 		player.getSettings().setRunEnergy(100.0);
-		GameWorld.getPulser().submit(new Pulse(ticks, player) {
+		World.getPulser().submit(new Pulse(ticks, player) {
 			@Override
 			public boolean pulse() {
 				if (animation != null) {

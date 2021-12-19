@@ -10,7 +10,7 @@ import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -55,7 +55,7 @@ public final class GrandExchangeShortcut extends OptionHandler {
 		final Scenery o = (Scenery) node;
 		if (o.getId() == 9311) {
 			ForceMovement.run(player, Location.create(3138, 3516, 0), o.getLocation(), CLIMB_DOWN);
-			GameWorld.getPulser().submit(new Pulse(1, player) {
+			World.getPulser().submit(new Pulse(1, player) {
 				int count;
 
 				@Override
@@ -76,7 +76,7 @@ public final class GrandExchangeShortcut extends OptionHandler {
 			});
 		} else {
 			ForceMovement.run(player, Location.create(3144, 3514, 0), o.getLocation(), CLIMB_DOWN);
-			GameWorld.getPulser().submit(new Pulse(1, player) {
+			World.getPulser().submit(new Pulse(1, player) {
 				int count;
 
 				@Override

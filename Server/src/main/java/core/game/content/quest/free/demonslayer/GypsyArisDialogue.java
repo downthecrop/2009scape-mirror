@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.update.flag.context.Animation;
 import core.net.packet.PacketRepository;
@@ -602,7 +602,7 @@ public final class GypsyArisDialogue extends DialoguePlugin {
 				PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() + 2, 260, 1, 10));
 				PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, player.getLocation().getX() + 190, player.getLocation().getY() + 14, 260, 1, 10));
 				interpreter.sendDialogues(wally, FacialExpression.FURIOUS, "Die, foul demon!");
-				GameWorld.getPulser().submit(new Pulse(5) {
+				World.getPulser().submit(new Pulse(5) {
 					@Override
 					public boolean pulse() {
 						wally.animate(new Animation(4603));
@@ -622,7 +622,7 @@ public final class GypsyArisDialogue extends DialoguePlugin {
 			case 203:
 				close();
 				player.getInterfaceManager().openOverlay(new Component(115));
-				GameWorld.getPulser().submit(new Pulse(1) {
+				World.getPulser().submit(new Pulse(1) {
 					int counter = 0;
 
 					@Override
