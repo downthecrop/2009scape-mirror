@@ -2,8 +2,6 @@ package core.game.content.activity.bountyhunter;
 
 import java.nio.ByteBuffer;
 
-import core.cache.AriosStore;
-import core.cache.StoreFile;
 import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
@@ -53,8 +51,7 @@ public final class BHScoreBoard {
 	 * Initializes the score boards data.
 	 */
 	public static void init() {
-		StoreFile file = AriosStore.get("bh_scores");
-		if (file == null) { // Indicates no cache exists yet.
+/*		if (true) { // Indicates no cache exists yet.
 			return;
 		}
 		ByteBuffer buffer = file.data();
@@ -65,7 +62,7 @@ public final class BHScoreBoard {
 		for (int i = 0; i < SIZE; i++) {
 			ROGUES.scores[i] = buffer.getInt();
 			ROGUES.names[i] = ByteBufferUtils.getString(buffer);
-		}
+		}*/
 	}
 
 	/**
@@ -82,7 +79,7 @@ public final class BHScoreBoard {
 			ByteBufferUtils.putString(ROGUES.names[i], buffer);
 		}
 		buffer.flip();
-		AriosStore.setArchive("bh_scores", buffer);
+		//AriosStore.setArchive("bh_scores", buffer);
 	}
 
 	/**
