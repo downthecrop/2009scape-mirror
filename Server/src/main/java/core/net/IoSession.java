@@ -328,7 +328,7 @@ public class IoSession {
 	 * @return The player.
 	 */
 	public Player getPlayer() {
-		return (Player) object;
+		return object instanceof Player ? ((Player) object) : null;
 	}
 	
 	/**
