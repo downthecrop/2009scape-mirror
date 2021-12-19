@@ -1,6 +1,6 @@
 package core.game.interaction.item;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.ItemDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -32,7 +32,7 @@ public final class SilverSicklePlugin extends OptionHandler {
 				player.getPacketDispatch().sendAnimation(9021);
 				NSUtils.castBloom(player);
 			} else {
-				ContentAPI.sendDialogue(player, "You must complete Nature Spirit to use this.");
+				sendDialogue(player, "You must complete Nature Spirit to use this.");
 			}
 			return true;
 		}

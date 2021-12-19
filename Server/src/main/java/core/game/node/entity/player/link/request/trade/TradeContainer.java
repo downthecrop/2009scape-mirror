@@ -1,6 +1,6 @@
 package core.game.node.entity.player.link.request.trade;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.ItemDefinition;
 import core.game.container.*;
 import core.game.node.entity.player.Player;
@@ -167,7 +167,7 @@ public final class TradeContainer extends Container {
 			return false;
 		}
 		if ((playerIsBot || targetIsBot) && (playerIP.equals(targetIP) || playerMac.equals(targetMac) || playerHost.equals(targetHost))){
-			ContentAPI.sendMessage(player, colorize("%RYou can not trade items with your own bot accounts."));
+			sendMessage(player, colorize("%RYou can not trade items with your own bot accounts."));
 			return false;
 		}
 		if (item.getName().equals("Coins") && item.getId() != 995) {

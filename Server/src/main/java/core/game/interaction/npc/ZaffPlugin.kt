@@ -1,7 +1,7 @@
 package core.game.interaction.npc
 
 import api.Container
-import api.ContentAPI
+import api.*
 import api.InputType
 import core.cache.def.impl.NPCDefinition
 import core.plugin.Initializable
@@ -311,7 +311,7 @@ class ZaffPlugin : OptionHandler() {
                 1001 -> when(buttonId){
                     1 -> {
                         end()
-                        ContentAPI.openDialogue(player, 9679, npc)
+                        openDialogue(player, 9679, npc)
                     }
                     2 -> {
                         end()
@@ -393,13 +393,13 @@ class ZaffPlugin : OptionHandler() {
                     )
                     stage = 1
                 }
-                1 -> end().also { ContentAPI.sendInputDialogue(player, InputType.NUMERIC, "Enter an amount:"){ value ->
+                1 -> end().also { sendInputDialogue(player, InputType.NUMERIC, "Enter an amount:"){ value ->
                     ammount = getStoreFile().getInt(player.username.toLowerCase())
                     var amt = value as Int
                     if(amt > maxStaffs - ammount) amt = maxStaffs - ammount
                     val coinage = amt * 8000
-                    if(!ContentAPI.inInventory(player, Items.COINS_995, coinage)){
-                        ContentAPI.sendDialogue(player, "You can't afford that many.")
+                    if(!inInventory(player, Items.COINS_995, coinage)){
+                        sendDialogue(player, "You can't afford that many.")
                         return@sendInputDialogue
                     }
 
@@ -407,8 +407,8 @@ class ZaffPlugin : OptionHandler() {
                         return@sendInputDialogue
                     }
 
-                    if(ContentAPI.removeItem(player, Item(Items.COINS_995, coinage), Container.INVENTORY)){
-                        ContentAPI.addItem(player, Items.BATTLESTAFF_1392, amt)
+                    if(removeItem(player, Item(Items.COINS_995, coinage), Container.INVENTORY)){
+                        addItem(player, Items.BATTLESTAFF_1392, amt)
                         ZaffPlugin.getStoreFile()[player.username.toLowerCase()] = amt + ammount
                     }
                 } }

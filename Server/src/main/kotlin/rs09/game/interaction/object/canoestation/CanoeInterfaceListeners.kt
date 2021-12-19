@@ -1,6 +1,6 @@
 package rs09.game.interaction.`object`.canoestation
 
-import api.ContentAPI
+import api.*
 import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
 import core.game.content.global.travel.canoe.Canoe
@@ -47,7 +47,7 @@ class CanoeInterfaceListeners : InterfaceListener() {
             }
 
             player.lock()
-            ContentAPI.animate(player,CanoeUtils.getShapeAnimation(axe))
+            animate(player,CanoeUtils.getShapeAnimation(axe))
             player.pulseManager.run(object : Pulse(3) {
                 override fun pulse(): Boolean {
                     if (RandomFunction.random(if (canoe == Canoe.WAKA) 8 else 6) == 1) {
@@ -59,7 +59,7 @@ class CanoeInterfaceListeners : InterfaceListener() {
                         player.unlock()
                         return true
                     }
-                    ContentAPI.animate(player,CanoeUtils.getShapeAnimation(axe))
+                    animate(player,CanoeUtils.getShapeAnimation(axe))
                     return false
                 }
             })
@@ -112,7 +112,7 @@ class CanoeInterfaceListeners : InterfaceListener() {
                         0 -> {
                             player.interfaceManager.openOverlay(Component(Components.FADE_TO_BLACK_120))
                             player.interfaceManager.open(Component(Components.CANOE_TRAVEL_758))
-                            ContentAPI.animateInterface(player, Components.CANOE_TRAVEL_758, 3, interfaceAnimationId)
+                            animateInterface(player, Components.CANOE_TRAVEL_758, 3, interfaceAnimationId)
                         }
                         2 -> {
                             PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 2))

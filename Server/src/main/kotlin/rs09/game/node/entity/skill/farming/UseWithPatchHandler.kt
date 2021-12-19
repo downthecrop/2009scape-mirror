@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
-import api.ContentAPI
+import api.*
 import core.game.interaction.NodeUsageEvent
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
@@ -142,7 +142,7 @@ object UseWithPatchHandler{
                         override fun pulse(): Boolean {
                             if(player.inventory.remove(event.usedItem,false)){
                                 p.compost = if(usedItem.id == Items.SUPERCOMPOST_6034) CompostType.SUPER else CompostType.NORMAL
-                                if(p.compost == CompostType.SUPER) ContentAPI.rewardXP(player, Skills.FARMING, 26.0) else ContentAPI.rewardXP(player, Skills.FARMING, 18.5)
+                                if(p.compost == CompostType.SUPER) rewardXP(player, Skills.FARMING, 26.0) else rewardXP(player, Skills.FARMING, 18.5)
                                 if(p.plantable != null && p.plantable?.applicablePatch != PatchType.FLOWER) {
                                     p.harvestAmt += if(p.compost == CompostType.NORMAL) 1 else if(p.compost == CompostType.SUPER) 2 else 0
                                 }

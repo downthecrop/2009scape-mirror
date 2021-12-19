@@ -1,6 +1,6 @@
 package rs09.game.interaction.region.wilderness
 
-import api.ContentAPI
+import api.*
 import core.game.node.scenery.Scenery
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.player.Player
@@ -15,7 +15,7 @@ import rs09.game.interaction.InteractionListener
 
 class RoguesCastleListeners : InteractionListener() {
 
-    val CHEST_ANIM = ContentAPI.getAnimation(536)
+    val CHEST_ANIM = getAnimation(536)
     val FLOOR_1_CHESTS = intArrayOf(14773, 14774)
     val FLOOR_2_CHESTS = intArrayOf(38834, 38835)
 
@@ -28,55 +28,55 @@ class RoguesCastleListeners : InteractionListener() {
 
         on(FLOOR_1_CHESTS, SCENERY, "search"){player, node ->
             val scenery = node.asScenery()
-            if(ContentAPI.getCharge(scenery) == 0){
-                ContentAPI.sendMessage(player, "This chest has already been looted.")
+            if(getCharge(scenery) == 0){
+                sendMessage(player, "This chest has already been looted.")
                 return@on true
             }
 
-            if(ContentAPI.freeSlots(player) == 0){
-                ContentAPI.sendMessage(player, "You don't have enough space to do that.")
+            if(freeSlots(player) == 0){
+                sendMessage(player, "You don't have enough space to do that.")
                 return@on true
             }
 
             val item = FLOOR_1_LOOT.roll()[0]
             addLoot(player, item)
-            ContentAPI.setCharge(scenery, 0)
+            setCharge(scenery, 0)
             return@on true
         }
 
         on(FLOOR_2_CHESTS, SCENERY, "open"){player, node ->
-            ContentAPI.sendMessage(player, "This chest appears to be locked.")
+            sendMessage(player, "This chest appears to be locked.")
             return@on true
         }
 
         on(FLOOR_2_CHESTS, SCENERY, "pick-lock"){player, node ->
             val scenery = node.asScenery()
-            if(!ContentAPI.inInventory(player, Items.LOCKPICK_1523)){
-                ContentAPI.sendMessage(player, "You need a lockpick in order to attempt this.")
+            if(!inInventory(player, Items.LOCKPICK_1523)){
+                sendMessage(player, "You need a lockpick in order to attempt this.")
                 return@on true
             }
 
-            if(!ContentAPI.hasLevelDyn(player, Skills.THIEVING, 13)){
-                ContentAPI.sendMessage(player, "You need a Thieving level of 13 to attempt this.")
+            if(!hasLevelDyn(player, Skills.THIEVING, 13)){
+                sendMessage(player, "You need a Thieving level of 13 to attempt this.")
                 return@on true
             }
 
-            ContentAPI.sendMessage(player, "You attempt to pick the lock on the chest...")
-            ContentAPI.submitIndividualPulse(player, object : Pulse(2){
+            sendMessage(player, "You attempt to pick the lock on the chest...")
+            submitIndividualPulse(player, object : Pulse(2){
                 override fun pulse(): Boolean {
                     val success = RandomFunction.roll(10) // 1/10 chance to succeed
                     if(success){
-                        ContentAPI.replaceScenery(scenery, scenery.id + 1, 20)
-                        ContentAPI.rewardXP(player, Skills.THIEVING, 300.0)
+                        replaceScenery(scenery, scenery.id + 1, 20)
+                        rewardXP(player, Skills.THIEVING, 300.0)
                     } else {
                         val dealsDamage = RandomFunction.roll(10) // 1/10 chance to deal damage on a fail
                         if(dealsDamage) {
-                            ContentAPI.impact(player, RandomFunction.random(1, 3), ImpactHandler.HitsplatType.NORMAL)
-                            ContentAPI.sendMessage(player, "You activated a trap on the chest!")
+                            impact(player, RandomFunction.random(1, 3), ImpactHandler.HitsplatType.NORMAL)
+                            sendMessage(player, "You activated a trap on the chest!")
                         }
                     }
 
-                    ContentAPI.sendMessage(player, "You ${if(success) "manage" else "fail"} to pick the lock on the chest.")
+                    sendMessage(player, "You ${if(success) "manage" else "fail"} to pick the lock on the chest.")
                     return true
                 }
             })
@@ -87,17 +87,17 @@ class RoguesCastleListeners : InteractionListener() {
         on(FLOOR_2_CHESTS, SCENERY, "search"){player, node ->
             val scenery = node.asScenery()
 
-            if(ContentAPI.getCharge(scenery) == 0){
-                ContentAPI.sendMessage(player, "This chest has already been looted.")
+            if(getCharge(scenery) == 0){
+                sendMessage(player, "This chest has already been looted.")
                 return@on true
             }
 
             val loot = FLOOR_2_LOOT.roll()[0]
-            if(ContentAPI.freeSlots(player) > 0){
-                ContentAPI.addItemOrDrop(player, loot.id, loot.amount)
-                ContentAPI.sendMessage(player, "In the chest you find some ${loot.name.toLowerCase() + if(!loot.name.endsWith("s")) "s" else ""}!")
-                ContentAPI.setCharge(scenery, 0)
-                ContentAPI.rewardXP(player, Skills.THIEVING, 60.0)
+            if(freeSlots(player) > 0){
+                addItemOrDrop(player, loot.id, loot.amount)
+                sendMessage(player, "In the chest you find some ${loot.name.toLowerCase() + if(!loot.name.endsWith("s")) "s" else ""}!")
+                setCharge(scenery, 0)
+                rewardXP(player, Skills.THIEVING, 60.0)
             }
 
             return@on true
@@ -105,20 +105,20 @@ class RoguesCastleListeners : InteractionListener() {
     }
 
     fun openChest(player: Player, scenery: Scenery){
-        ContentAPI.animate(player, CHEST_ANIM)
-        ContentAPI.submitIndividualPulse(player, object : Pulse(ContentAPI.animationDuration(CHEST_ANIM)){
+        animate(player, CHEST_ANIM)
+        submitIndividualPulse(player, object : Pulse(animationDuration(CHEST_ANIM)){
             override fun pulse(): Boolean {
-                return true.also { ContentAPI.replaceScenery(scenery, scenery.id + 1, 20) }
+                return true.also { replaceScenery(scenery, scenery.id + 1, 20) }
             }
         })
     }
 
     fun addLoot(player: Player, item: Item){
-        ContentAPI.sendMessage(player, "You search the chest...")
-        ContentAPI.submitIndividualPulse(player, object : Pulse(){
+        sendMessage(player, "You search the chest...")
+        submitIndividualPulse(player, object : Pulse(){
             override fun pulse(): Boolean {
-                ContentAPI.sendMessage(player, "... and find some ${item.name.toLowerCase() + if(!item.name.endsWith("s")) "s" else ""}!")
-                ContentAPI.addItemOrDrop(player, item.id, item.amount)
+                sendMessage(player, "... and find some ${item.name.toLowerCase() + if(!item.name.endsWith("s")) "s" else ""}!")
+                addItemOrDrop(player, item.id, item.amount)
                 return true
             }
         })

@@ -1,6 +1,6 @@
 package rs09.game.content.zone;
 
-import api.ContentAPI
+import api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.content.global.action.DoorActionHandler
 import core.game.interaction.OptionHandler
@@ -28,7 +28,7 @@ class AlKharidStairsPlugin : OptionHandler() {
         node ?: return false
         option ?: return false
         if(node.location == zekeDoorOpened.location || node.location == craftingDoorOpened.location){
-                ContentAPI.sendMessage(player,"This door appears to be stuck open.")
+                sendMessage(player,"This door appears to be stuck open.")
         } else{
             DoorActionHandler.handleDoor(player,node.asScenery())
         }

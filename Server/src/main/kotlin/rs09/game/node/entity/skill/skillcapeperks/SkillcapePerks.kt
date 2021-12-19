@@ -64,11 +64,11 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
         }
     }),
     TRICKS_OF_THE_TRADE("cape_perks:tott",{player ->
-        val hasHelmetBonus = api.ContentAPI.getAttribute(player, "cape_perks:tott:helmet-stored", false)
+        val hasHelmetBonus = api.getAttribute(player, "cape_perks:tott:helmet-stored", false)
         if(hasHelmetBonus){
-            api.ContentAPI.sendDialogue(player, "Your cape's pockets are lined with all the utilities you need for slayer.")
+            api.sendDialogue(player, "Your cape's pockets are lined with all the utilities you need for slayer.")
         } else {
-            api.ContentAPI.sendDialogue(player, "Your cape is lined with empty pockets shaped like various utilities needed for slayer.")
+            api.sendDialogue(player, "Your cape is lined with empty pockets shaped like various utilities needed for slayer.")
         }
     }),
     NONE("cape_perks:none")

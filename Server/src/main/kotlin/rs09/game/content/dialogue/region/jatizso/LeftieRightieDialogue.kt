@@ -1,6 +1,6 @@
 package rs09.game.content.dialogue.region.jatizso
 
-import api.DialUtils
+import api.*
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import org.rs09.consts.NPCs
@@ -27,6 +27,6 @@ class LeftieRightieDialogue() : DialogueFile() {
     }
 
     fun npc2(messages: String){
-        sendNormalDialogue(leftie, FacialExpression.NEUTRAL, *DialUtils.splitLines(messages))
+        sendNormalDialogue(leftie, FacialExpression.NEUTRAL, *splitLines(messages))
     }
 }

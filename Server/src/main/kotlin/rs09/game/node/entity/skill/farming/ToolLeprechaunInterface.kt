@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
-import api.ContentAPI
+import api.*
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.RunScript
@@ -136,7 +136,7 @@ class ToolLeprechaunInterface : InterfaceListener() {
         }
 
         if(amount == -2){
-            ContentAPI.sendInputDialogue(player, true, "Enter the amount:"){value ->
+            sendInputDialogue(player, true, "Enter the amount:"){value ->
                 var amt = value as Int
                 if(amt > hasAmount){
                     amt = hasAmount
@@ -188,7 +188,7 @@ class ToolLeprechaunInterface : InterfaceListener() {
             player.dialogueInterpreter.sendDialogue("You don't have any of those stored.")
         } else {
             if(amount == -2){
-                ContentAPI.sendInputDialogue(player, true, "Enter the amount:"){value ->
+                sendInputDialogue(player, true, "Enter the amount:"){value ->
                     var amt = value as Int
                     if(amt > hasAmount){
                         amt = hasAmount

@@ -1,6 +1,6 @@
 package rs09.game.ai.general
 
-import api.ContentAPI
+import api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.component.Component
 import core.game.content.consumable.Consumable
@@ -704,7 +704,7 @@ class ScriptAPI(private val bot: Player) {
      */
     fun checkPriceOverrides(id: Int): Int?{
         return when(id){
-            else -> ContentAPI.itemDefinition(id).getConfiguration(ItemConfigParser.GE_PRICE)
+            else -> itemDefinition(id).getConfiguration(ItemConfigParser.GE_PRICE)
         }
     }
 

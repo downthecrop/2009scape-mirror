@@ -1,6 +1,6 @@
 package core.game.content.dialogue;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import kotlin.Unit;
@@ -111,7 +111,7 @@ public final class LeatherCraftDialogue extends DialoguePlugin {
 				amt = 5;
 				break;
 			case 3:
-				ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				sendInputDialogue(player, true, "Enter the amount:", (value) -> {
 					player.getPulseManager().run(new HardCraftPulse(player, null, (int) value));
 					return Unit.INSTANCE;
 				});
@@ -205,7 +205,7 @@ public final class LeatherCraftDialogue extends DialoguePlugin {
 				if (hidee == null) {
 					return false;
 				}
-				ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				sendInputDialogue(player, true, "Enter the amount:", (value) -> {
 					player.getPulseManager().run(new DragonCraftPulse(player, null, hidee, (int) value));
 					return Unit.INSTANCE;
 				});

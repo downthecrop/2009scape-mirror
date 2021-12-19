@@ -1,6 +1,6 @@
 package rs09.game.content.quest.members.naturespirit
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
@@ -114,9 +114,9 @@ class NatureSpiritQuest : Quest("Nature Spirit", 95, 94, 2, 307, 0, 1, 110 ) {
         drawReward(player, "3,000 Crafting XP",ln++)
         drawReward(player, "2,000 Hitpoints XP", ln++)
         drawReward(player, "2,000 Defence XP", ln++)
-        ContentAPI.rewardXP(player, Skills.CRAFTING, 3000.0)
-        ContentAPI.rewardXP(player, Skills.HITPOINTS, 2000.0)
-        ContentAPI.rewardXP(player, Skills.DEFENCE, 2000.0)
+        rewardXP(player, Skills.CRAFTING, 3000.0)
+        rewardXP(player, Skills.HITPOINTS, 2000.0)
+        rewardXP(player, Skills.DEFENCE, 2000.0)
         NSUtils.cleanupAttributes(player)
     }
 }

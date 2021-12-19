@@ -1,6 +1,6 @@
 package core.game.content.dialogue;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.runecrafting.Altar;
 import core.game.node.entity.skill.runecrafting.EnchantTiaraPulse;
@@ -76,7 +76,7 @@ public final class EnchantTiaraDialogue extends DialoguePlugin {
 			amt = 5;
 			break;
 		case 4:
-			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+			sendInputDialogue(player, true, "Enter the amount:", (value) -> {
 				player.getPulseManager().run(new EnchantTiaraPulse(player, event.getUsedItem(), Talisman.forItem(event.getUsedItem()).getTiara(), (int) value));
 				return Unit.INSTANCE;
 			});

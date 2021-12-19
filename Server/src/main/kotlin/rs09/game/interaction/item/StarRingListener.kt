@@ -1,6 +1,6 @@
 package rs09.game.interaction.item
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.skill.Skills
@@ -24,22 +24,22 @@ class StarRingListener : InteractionListener(){
         on(RING, ITEM, "rub", "operate"){player, node ->
             val star = WorldEvents.get("shooting-stars") as? ShootingStarEvent
 
-            if(star == null) ContentAPI.sendDialogue(player, "There is currently no active star.").also { return@on true }
+            if(star == null) sendDialogue(player, "There is currently no active star.").also { return@on true }
 
             if(getStoreFile().getBoolean(player.username.toLowerCase())){
-                ContentAPI.sendDialogue(player, "The ring is still recharging.")
+                sendDialogue(player, "The ring is still recharging.")
                 return@on true
             }
 
             val condition: (Player) -> Boolean = when(star?.star!!.location.toLowerCase()){
                 "canifis bank" -> { p -> p.questRepository.isComplete("Priest in Peril")}
-                "crafting guild" -> {p -> ContentAPI.hasLevelStat(p, Skills.CRAFTING, 40) }
+                "crafting guild" -> {p -> hasLevelStat(p, Skills.CRAFTING, 40) }
                 "south crandor mining site" -> {p -> p.questRepository.isComplete("Dragon Slayer")}
                 else -> {_ -> true}
             }
 
             if(!condition.invoke(player) || player.skullManager.isWilderness){
-                ContentAPI.sendDialogue(player, "Magical forces prevent your teleportation.")
+                sendDialogue(player, "Magical forces prevent your teleportation.")
                 return@on true
             }
 
@@ -52,7 +52,7 @@ class StarRingListener : InteractionListener(){
                 else -> false
             }
 
-            ContentAPI.openDialogue(player, RingDialogue(shouldWarn, star.star))
+            openDialogue(player, RingDialogue(shouldWarn, star.star))
 
             return@on true
         }
@@ -81,7 +81,7 @@ class StarRingListener : InteractionListener(){
         }
 
         fun teleport(player: Player, star: ShootingStar){
-            ContentAPI.teleport(player, star.crash_locations[star.location]!!.transform(0, -1, 0), TeleportManager.TeleportType.MINIGAME)
+            teleport(player, star.crash_locations[star.location]!!.transform(0, -1, 0), TeleportManager.TeleportType.MINIGAME)
             getStoreFile()[player.username.toLowerCase()] = true
         }
     }

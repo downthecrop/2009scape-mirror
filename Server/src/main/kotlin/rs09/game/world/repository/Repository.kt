@@ -87,7 +87,7 @@ object Repository {
      * I fucking hate java.
      */
     @JvmStatic
-    @Deprecated("Old and bad",ReplaceWith("ContentAPI.sendNews()"),DeprecationLevel.WARNING)
+    @Deprecated("Old and bad",ReplaceWith("sendNews()"),DeprecationLevel.WARNING)
     fun sendNews(string: String){
         sendNews(string,12)
     }

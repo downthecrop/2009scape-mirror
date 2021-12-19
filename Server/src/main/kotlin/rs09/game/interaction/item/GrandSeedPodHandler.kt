@@ -1,6 +1,6 @@
 package rs09.game.interaction.item
 
-import api.ContentAPI
+import api.*
 import core.game.content.global.travel.glider.GliderPulse
 import core.game.content.global.travel.glider.Gliders
 import core.game.node.entity.player.Player
@@ -25,12 +25,12 @@ class GrandSeedPodHandler : InteractionListener() {
 
     override fun defineListeners() {
         on(Items.GRAND_SEED_POD_9469, ITEM, "squash", "launch"){player, _ ->
-            when(ContentAPI.getUsedOption(player)){
-                "launch" -> ContentAPI.submitWorldPulse(LaunchPulse(player))
-                "squash" -> ContentAPI.submitWorldPulse(SquashPulse(player))
+            when(getUsedOption(player)){
+                "launch" -> submitWorldPulse(LaunchPulse(player))
+                "squash" -> submitWorldPulse(SquashPulse(player))
             }
-            ContentAPI.removeItem(player, Items.GRAND_SEED_POD_9469, api.Container.INVENTORY)
-            ContentAPI.lock(player, 50)
+            removeItem(player, Items.GRAND_SEED_POD_9469, api.Container.INVENTORY)
+            lock(player, 50)
             return@on true
         }
     }
@@ -39,9 +39,9 @@ class GrandSeedPodHandler : InteractionListener() {
         var counter = 0
         override fun pulse(): Boolean {
             when(counter++){
-                1 -> ContentAPI.visualize(player, LAUNCH_ANIMATION, LAUNCH_GRAPHICS)
-                3 -> ContentAPI.rewardXP(player, Skills.FARMING, 100.0)
-                4 -> ContentAPI.submitWorldPulse(GliderPulse(2,player,Gliders.TA_QUIR_PRIW)).also { return true }
+                1 -> visualize(player, LAUNCH_ANIMATION, LAUNCH_GRAPHICS)
+                3 -> rewardXP(player, Skills.FARMING, 100.0)
+                4 -> submitWorldPulse(GliderPulse(2,player,Gliders.TA_QUIR_PRIW)).also { return true }
             }
             return false
         }
@@ -51,12 +51,12 @@ class GrandSeedPodHandler : InteractionListener() {
         var counter = 0
         override fun pulse(): Boolean {
             when(counter++){
-                1 -> ContentAPI.visualize(player, SQUASH_ANIM_BEGIN, SQUASH_GRAPHICS_BEGIN)
-                4 -> ContentAPI.animate(player, 1241, true)
-                5 -> ContentAPI.teleport(player, Location.create(2464, 3494, 0))
-                6 -> ContentAPI.visualize(player, anim = 1241, gfx = SQUASH_GRAPHICS_END)
-                8 -> ContentAPI.animate(player, SQUASH_ANIM_END, true).also { ContentAPI.adjustLevel(player, Skills.FARMING, -5) }
-                9 -> ContentAPI.unlock(player).also { return true }
+                1 -> visualize(player, SQUASH_ANIM_BEGIN, SQUASH_GRAPHICS_BEGIN)
+                4 -> animate(player, 1241, true)
+                5 -> teleport(player, Location.create(2464, 3494, 0))
+                6 -> visualize(player, anim = 1241, gfx = SQUASH_GRAPHICS_END)
+                8 -> animate(player, SQUASH_ANIM_END, true).also { adjustLevel(player, Skills.FARMING, -5) }
+                9 -> unlock(player).also { return true }
             }
             return false
         }
