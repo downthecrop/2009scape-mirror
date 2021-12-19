@@ -1,6 +1,6 @@
 package rs09.game.content.quest.members.naturespirit
 
-import api.ContentAPI
+import api.*
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -48,10 +48,10 @@ class NSDrezelDialogue : DialogueFile() {
                 20 -> npcl(FacialExpression.NEUTRAL, "That's great! Many Thanks! Now then, please be aware of the Ghasts, you cannot attack them, only Filliman knew how to take them on.").also { stage++ }
                 21 -> npcl(FacialExpression.NEUTRAL, "Just run from them if you can. If you start to get lost, try to make your way back to the temple.").also { stage++ }
                 22 -> {
-                    ContentAPI.sendDoubleItemDialogue(player!!, Items.MEAT_PIE_2327, Items.APPLE_PIE_2323, "The cleric hands you some food.")
+                    sendDoubleItemDialogue(player!!, Items.MEAT_PIE_2327, Items.APPLE_PIE_2323, "The cleric hands you some food.")
                     if(questStage == 0){
-                        repeat(3) { ContentAPI.addItemOrDrop(player!!, Items.MEAT_PIE_2327, 1) }
-                        repeat(3) { ContentAPI.addItemOrDrop(player!!, Items.APPLE_PIE_2323, 1) }
+                        repeat(3) { addItemOrDrop(player!!, Items.MEAT_PIE_2327, 1) }
+                        repeat(3) { addItemOrDrop(player!!, Items.APPLE_PIE_2323, 1) }
                         player!!.questRepository.getQuest("Nature Spirit").setStage(player!!, 5)
                     }
                     stage++
@@ -80,7 +80,7 @@ class NSDrezelDialogue : DialogueFile() {
                 4 -> {
                     end()
                     player!!.lock();
-                    ContentAPI.submitIndividualPulse(player!!, BlessingPulse(npc!!, player!!))
+                    submitIndividualPulse(player!!, BlessingPulse(npc!!, player!!))
                 }
             }
         }
@@ -105,9 +105,9 @@ private class BlessingPulse(val drezel: NPC, val player: Player) : Pulse(){
 
     override fun pulse(): Boolean {
         when(ticks){
-            0 -> ContentAPI.animate(drezel, 1162).also { ContentAPI.spawnProjectile(drezel, player, 268); ContentAPI.playAudio(player, Audio(2674)) }
-            2 -> ContentAPI.visualize(player, Animation(645), Graphics(267, 100))
-            4 -> ContentAPI.unlock(player).also { player.questRepository.getQuest("Nature Spirit").setStage(player, 40); return true }
+            0 -> animate(drezel, 1162).also { spawnProjectile(drezel, player, 268); playAudio(player, Audio(2674)) }
+            2 -> visualize(player, Animation(645), Graphics(267, 100))
+            4 -> unlock(player).also { player.questRepository.getQuest("Nature Spirit").setStage(player, 40); return true }
         }
         ticks++
         return false
@@ -115,6 +115,6 @@ private class BlessingPulse(val drezel: NPC, val player: Player) : Pulse(){
 
     override fun stop() {
         super.stop()
-        ContentAPI.openDialogue(player, NSDrezelDialogue(), drezel)
+        openDialogue(player, NSDrezelDialogue(), drezel)
     }
 }

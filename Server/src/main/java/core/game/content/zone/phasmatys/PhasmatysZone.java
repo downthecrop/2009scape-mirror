@@ -1,6 +1,6 @@
 package core.game.content.zone.phasmatys;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.content.global.Bones;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.interaction.Option;
@@ -76,16 +76,16 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
                     return true;
                 case 5267:
                     player.animate(Animation.create(536));
-					ContentAPI.sendMessage(player, "The trapdoor opens...");
+					sendMessage(player, "The trapdoor opens...");
                     SceneryBuilder.replace((Scenery) target, ((Scenery) target).transform(5268));
                     return true;
                 case 5268:
                     if (option.getName().equals("Close")) {
                         player.animate(Animation.create(535));
-						ContentAPI.sendMessage(player, "You close the trapdoor.");
+						sendMessage(player, "You close the trapdoor.");
                         SceneryBuilder.replace((Scenery) target, ((Scenery) target).transform(5267));
                     } else {
-                        ContentAPI.sendMessage(player, "You climb down through the trapdoor...");
+                        sendMessage(player, "You climb down through the trapdoor...");
                         player.getProperties().setTeleportLocation(Location.create(3669, 9888, 3));
                     }
                     return true;

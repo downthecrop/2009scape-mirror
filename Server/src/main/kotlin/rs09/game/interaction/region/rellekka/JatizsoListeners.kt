@@ -1,6 +1,6 @@
 package rs09.game.interaction.region.rellekka
 
-import api.ContentAPI
+import api.*
 import core.game.content.dialogue.FacialExpression
 import core.game.content.global.action.SpecialLadders
 import core.game.node.entity.npc.NPC
@@ -43,68 +43,68 @@ class JatizsoListeners : InteractionListener() {
         on(GATES_CLOSED, SCENERY, "open"){player, node ->
             if(NORTH_GATE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
-                    val other = ContentAPI.getScenery(node.location.transform(1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.EAST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, -1, Direction.NORTH_EAST)
+                    val other = getScenery(node.location.transform(1, 0, 0)) ?: return@on true
+                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.EAST)
+                    replaceScenery(other.asScenery(), other.id - 1, -1, Direction.NORTH_EAST)
                 } else {
-                    val other = ContentAPI.getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.NORTH_EAST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id, -1, Direction.EAST)
+                    val other = getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
+                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.NORTH_EAST)
+                    replaceScenery(other.asScenery(), other.id, -1, Direction.EAST)
                 }
             } else if(WEST_GATE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
-                    val other = ContentAPI.getScenery(node.location.transform(0, 1, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.WEST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, -1, Direction.NORTH)
+                    val other = getScenery(node.location.transform(0, 1, 0)) ?: return@on true
+                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.WEST)
+                    replaceScenery(other.asScenery(), other.id + 1, -1, Direction.NORTH)
                 } else {
-                    val other = ContentAPI.getScenery(node.location.transform(0, -1, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.NORTH)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id + 1, -1, Direction.WEST)
+                    val other = getScenery(node.location.transform(0, -1, 0)) ?: return@on true
+                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.NORTH)
+                    replaceScenery(other.asScenery(), other.id + 1, -1, Direction.WEST)
                 }
             } else if(SOUTH_GAE_ZONE.insideBorder(player)){
                 if(node.id == GATES_CLOSED.first()){
-                    val other = ContentAPI.getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.SOUTH)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id - 1, -1, Direction.EAST)
+                    val other = getScenery(node.location.transform(-1, 0, 0)) ?: return@on true
+                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.SOUTH)
+                    replaceScenery(other.asScenery(), other.id - 1, -1, Direction.EAST)
                 } else {
-                    val other = ContentAPI.getScenery(node.location.transform(1, 0, 0)) ?: return@on true
-                    ContentAPI.replaceScenery(node.asScenery(), node.id + 1, -1, Direction.EAST)
-                    ContentAPI.replaceScenery(other.asScenery(), other.id, -1, Direction.SOUTH)
+                    val other = getScenery(node.location.transform(1, 0, 0)) ?: return@on true
+                    replaceScenery(node.asScenery(), node.id + 1, -1, Direction.EAST)
+                    replaceScenery(other.asScenery(), other.id, -1, Direction.SOUTH)
                 }
             }
-            ContentAPI.playAudio(player, ContentAPI.getAudio(81))
+            playAudio(player, getAudio(81))
             return@on true
         }
 
         on(TOWER_GUARDS, NPC, "watch-shouting"){player, _ ->
-            val local = ContentAPI.findLocalNPC(player, NPCs.GUARD_5489)
-            ContentAPI.lock(player, 200)
-            ContentAPI.face(local!!, Location.create(2371, 3801, 2))
+            val local = findLocalNPC(player, NPCs.GUARD_5489)
+            lock(player, 200)
+            face(local!!, Location.create(2371, 3801, 2))
             local.asNpc().isRespawn = false
-            ContentAPI.submitIndividualPulse(player, object : Pulse(4){
+            submitIndividualPulse(player, object : Pulse(4){
                 var id = NPCs.GUARD_5489
                 var counter = 0
-                val other = ContentAPI.findLocalNPC(player, getOther(NPCs.GUARD_5489))
+                val other = findLocalNPC(player, getOther(NPCs.GUARD_5489))
 
                 override fun start() {
                     other?.isRespawn = false
                 }
 
                 override fun pulse(): Boolean {
-                    val npc = ContentAPI.findLocalNPC(player, id) ?: return false
+                    val npc = findLocalNPC(player, id) ?: return false
                     val index = when(id){
                         NPCs.GUARD_5489 -> 0
                         else -> 1
                     }
                     if(index == 1 && counter == 5) return true
-                    ContentAPI.sendChat(npc, LINES[index][counter])
+                    sendChat(npc, LINES[index][counter])
                     if(npc.id != NPCs.GUARD_5489) counter++
                     id = getOther(id)
                     return false
                 }
 
                 override fun stop() {
-                    ContentAPI.unlock(player)
+                    unlock(player)
                     other?.isRespawn = true
                     local.asNpc().isRespawn = true
                     super.stop()
@@ -122,8 +122,8 @@ class JatizsoListeners : InteractionListener() {
         }
 
         on(BELL, SCENERY, "ring-bell"){player, _ ->
-            ContentAPI.playAudio(player, Audio(15))
-            ContentAPI.sendMessage(player, "You ring the warning bell, but everyone ignores it!")
+            playAudio(player, Audio(15))
+            sendMessage(player, "You ring the warning bell, but everyone ignores it!")
             return@on true
         }
 
@@ -133,7 +133,7 @@ class JatizsoListeners : InteractionListener() {
         }
 
         on(KING_CHEST, SCENERY, "open"){player, node ->
-            ContentAPI.sendPlayerDialogue(player, "I probably shouldn't mess with that.", FacialExpression.HALF_THINKING)
+            sendPlayerDialogue(player, "I probably shouldn't mess with that.", FacialExpression.HALF_THINKING)
             return@on true
         }
 
@@ -142,13 +142,13 @@ class JatizsoListeners : InteractionListener() {
         }
 
         //Climb handling for the ladders in the towers around the city walls.
-        ContentAPI.addClimbDest(Location.create(2388, 3804, 0),Location.create(2387, 3804, 2))
-        ContentAPI.addClimbDest(Location.create(2388, 3804, 2),Location.create(2387, 3804, 0))
-        ContentAPI.addClimbDest(Location.create(2388, 3793, 0),Location.create(2387, 3793, 2))
-        ContentAPI.addClimbDest(Location.create(2388, 3793, 2),Location.create(2387, 3793, 0))
-        ContentAPI.addClimbDest(Location.create(2410, 3823, 0),Location.create(2410, 3824, 2))
-        ContentAPI.addClimbDest(Location.create(2410, 3823, 2),Location.create(2410, 3824, 0))
-        ContentAPI.addClimbDest(Location.create(2421, 3823, 0),Location.create(2421, 3824, 2))
-        ContentAPI.addClimbDest(Location.create(2421, 3823, 2),Location.create(2421, 3824, 0))
+        addClimbDest(Location.create(2388, 3804, 0),Location.create(2387, 3804, 2))
+        addClimbDest(Location.create(2388, 3804, 2),Location.create(2387, 3804, 0))
+        addClimbDest(Location.create(2388, 3793, 0),Location.create(2387, 3793, 2))
+        addClimbDest(Location.create(2388, 3793, 2),Location.create(2387, 3793, 0))
+        addClimbDest(Location.create(2410, 3823, 0),Location.create(2410, 3824, 2))
+        addClimbDest(Location.create(2410, 3823, 2),Location.create(2410, 3824, 0))
+        addClimbDest(Location.create(2421, 3823, 0),Location.create(2421, 3824, 2))
+        addClimbDest(Location.create(2421, 3823, 2),Location.create(2421, 3824, 0))
     }
 }

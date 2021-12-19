@@ -1,6 +1,6 @@
 package core.game.interaction.inter;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -32,8 +32,8 @@ public class SmeltingInterface extends ComponentPlugin {
 		}
 		if (barType.getAmount() == -1) {
 			player.getInterfaceManager().closeChatbox();
-			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
-				ContentAPI.submitIndividualPulse(player, new SmeltingPulse(player, null, barType.getBar(), (int) value));
+			sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				submitIndividualPulse(player, new SmeltingPulse(player, null, barType.getBar(), (int) value));
 				return Unit.INSTANCE;
 			});
 		} else {

@@ -1,7 +1,7 @@
 package rs09.game.interaction.item.withnpc
 
 import api.Container
-import api.ContentAPI
+import api.*
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
@@ -45,10 +45,10 @@ class CatOnArdougneCivilian: InteractionListener() {
 
     override fun defineListeners() {
         onUseWith(NPC,cats,*civilians){player, used, _ ->
-            ContentAPI.sendItemDialogue(player,Items.DEATH_RUNE_560,"You hand over the cat.<br>You are given 100 Death Runes.")
+            sendItemDialogue(player,Items.DEATH_RUNE_560,"You hand over the cat.<br>You are given 100 Death Runes.")
             player.familiarManager.removeDetails(used.id)
-            ContentAPI.removeItem(player,used,Container.INVENTORY)
-            ContentAPI.addItem(player,Items.DEATH_RUNE_560,100)
+            removeItem(player,used,Container.INVENTORY)
+            addItem(player,Items.DEATH_RUNE_560,100)
             return@onUseWith true;
         }
     }

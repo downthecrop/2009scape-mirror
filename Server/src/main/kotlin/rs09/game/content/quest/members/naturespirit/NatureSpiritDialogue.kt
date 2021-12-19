@@ -1,7 +1,7 @@
 package rs09.game.content.quest.members.naturespirit
 
 import api.Container
-import api.ContentAPI
+import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
@@ -57,7 +57,7 @@ class NatureSpiritDialogue(player: Player? = null) : DialoguePlugin(player){
             30 -> npcl(FacialExpression.NEUTRAL, "My blessings will entice nature to bloom in Mort Myre! And then with nature's harvest you can fill a druids pouch and release the Ghasts from their torment.").also { stage = 2 } //this dude kinda weird
 
             //have you brought me a sickle yet bro
-            100 -> if(ContentAPI.inInventory(player, Items.SILVER_SICKLE_2961)){
+            100 -> if(inInventory(player, Items.SILVER_SICKLE_2961)){
                 playerl(FacialExpression.FRIENDLY, "Yes, here it is. What are you going to do with it?").also { stage = 110 }
             } else {
                 playerl(FacialExpression.NEUTRAL, "No sorry, not yet!").also { stage++ }
@@ -76,11 +76,11 @@ class NatureSpiritDialogue(player: Player? = null) : DialoguePlugin(player){
             /**
              * Here we go uoooh
              */
-            112 -> end().also { ContentAPI.lock(player, 10); ContentAPI.submitWorldPulse(SickleBlessPulse(player, npc)) }
+            112 -> end().also { lock(player, 10); submitWorldPulse(SickleBlessPulse(player, npc)) }
 
             //go kill some ghasts bro
             200 -> npcl(FacialExpression.NEUTRAL, "Go forth into Mort Myre and slay three Ghasts. You'll be releasing their souls from Mort Myre.").also { stage++ }
-            201 -> ContentAPI.sendItemDialogue(player, Items.DRUID_POUCH_2957, "The nature spirit gives you an empty pouch.").also { stage++; setQuest(75) }
+            201 -> sendItemDialogue(player, Items.DRUID_POUCH_2957, "The nature spirit gives you an empty pouch.").also { stage++; setQuest(75) }
             202 -> npcl(FacialExpression.NEUTRAL, "You'll need this in order to collect together nature's bounty. It will bind the Ghast to you until you flee or it is defeated.").also { stage = END_DIALOGUE }
 
             //Have you killed the ghasts yet bro
@@ -135,21 +135,21 @@ class NatureSpiritDialogue(player: Player? = null) : DialoguePlugin(player){
 
         override fun pulse(): Boolean {
             when(ticks++){
-                0 -> ContentAPI.animate(spirit, 812)
+                0 -> animate(spirit, 812)
                 1 -> repeat(4) {
                     val loc = locs.random()
                     locs.remove(loc)
 
-                    ContentAPI.spawnProjectile(loc, player.location, 268, 0, 400, 0, 125, 180)
-                    ContentAPI.animate(player, 9021)
+                    spawnProjectile(loc, player.location, 268, 0, 400, 0, 125, 180)
+                    animate(player, 9021)
                 }
                 4 -> {
-                    if(ContentAPI.removeItem(player, Items.SILVER_SICKLE_2961, Container.INVENTORY)){
-                        ContentAPI.addItem(player, Items.SILVER_SICKLEB_2963)
-                        ContentAPI.unlock(player)
+                    if(removeItem(player, Items.SILVER_SICKLE_2961, Container.INVENTORY)){
+                        addItem(player, Items.SILVER_SICKLEB_2963)
+                        unlock(player)
                         player.questRepository.getQuest("Nature Spirit").setStage(player, 70)
-                        ContentAPI.openDialogue(player, NPCs.NATURE_SPIRIT_1051, ContentAPI.findLocalNPC(player, NPCs.NATURE_SPIRIT_1051) as NPC)
-                        ContentAPI.sendMessage(player, "Your sickle has been blessed! You can bless a new sickle by dipping it into the grotto waters.")
+                        openDialogue(player, NPCs.NATURE_SPIRIT_1051, findLocalNPC(player, NPCs.NATURE_SPIRIT_1051) as NPC)
+                        sendMessage(player, "Your sickle has been blessed! You can bless a new sickle by dipping it into the grotto waters.")
                     }
                 }
                 6 -> return true

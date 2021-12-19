@@ -1,6 +1,6 @@
 package rs09.game.interaction.region
 
-import api.ContentAPI
+import api.*
 import core.game.content.global.action.DoorActionHandler
 import core.game.node.entity.skill.agility.AgilityHandler
 import core.game.system.task.Pulse
@@ -40,13 +40,13 @@ class MorytaniaListeners : InteractionListener() {
             if(player.location.y == 3457){
                 DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 GlobalScope.launch {
-                    ContentAPI.findLocalNPC(player, NPCs.ULIZIUS_1054)?.sendChat("Oh my! You're still alive!", 2)
+                    findLocalNPC(player, NPCs.ULIZIUS_1054)?.sendChat("Oh my! You're still alive!", 2)
                 }
             } else {
                 if (player.questRepository.hasStarted("Nature Spirit")) {
                     DoorActionHandler.handleAutowalkDoor(player, node.asScenery())
                 } else {
-                    ContentAPI.sendNPCDialogue(
+                    sendNPCDialogue(
                         player,
                         NPCs.ULIZIUS_1054,
                         "I'm sorry, but I'm afraid it's too dangerous to let you through this gate right now."
@@ -67,7 +67,7 @@ class MorytaniaListeners : InteractionListener() {
             var failAnim = Animation(770)
             var fromGrotto = false
 
-            ContentAPI.lock(player,10)
+            lock(player,10)
 
             // Switch to south facing animations if jumping from Grotto
             if (start.y == 3331) {
@@ -79,10 +79,10 @@ class MorytaniaListeners : InteractionListener() {
                 val end = if (fromGrotto) failWater else start
                 AgilityHandler.forceWalk(player, -1, start, end, failAnim, 15, 0.0, null,0).endAnimation = swimAnim
                 AgilityHandler.forceWalk(player, -1, failWater, failLand, swimAnim, 15, 2.0, null,3)
-                ContentAPI.submitIndividualPulse(player, object : Pulse(2){
+                submitIndividualPulse(player, object : Pulse(2){
                     override fun pulse(): Boolean {
-                        ContentAPI.visualize(player,failAnim,splashGFX)
-                        ContentAPI.teleport(player,failWater)
+                        visualize(player,failAnim,splashGFX)
+                        teleport(player,failWater)
                         // Deal 1-6 damage but wait until the player is back on land
                         AgilityHandler.fail(player,0,failLand,swimAnim,Random.nextInt(1,7),failMessage)
                         return true

@@ -1,6 +1,6 @@
 package rs09.game.node.entity.combat.handlers
 
-import api.ContentAPI
+import api.*
 import api.EquipmentSlot
 import core.game.container.impl.EquipmentContainer
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession
@@ -153,7 +153,7 @@ open class MeleeSwingHandler
         effectiveAttackLevel = floor(effectiveAttackLevel)
         effectiveAttackLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
 
-        val amuletName = (if(entity is Player) ContentAPI.getItemFromEquipment(entity, EquipmentSlot.AMULET)?.name ?: "null" else "null").toLowerCase()
+        val amuletName = (if(entity is Player) getItemFromEquipment(entity, EquipmentSlot.AMULET)?.name ?: "null" else "null").toLowerCase()
         val victimName = entity.properties.combatPulse.getVictim()?.name ?: "none"
 
         if(entity is Player && entity.slayer.task?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true)
@@ -184,7 +184,7 @@ open class MeleeSwingHandler
         }
 
         //Strength skillcape perk
-        if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.FINE_ATTUNEMENT, entity) && ContentAPI.getItemFromEquipment(entity, EquipmentSlot.WEAPON)?.definition?.getRequirement(Skills.STRENGTH) != 0)
+        if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.FINE_ATTUNEMENT, entity) && getItemFromEquipment(entity, EquipmentSlot.WEAPON)?.definition?.getRequirement(Skills.STRENGTH) != 0)
             bonus = ceil(bonus * 1.20).toInt()
 
         cumulativeStr *= getSetMultiplier(entity, Skills.STRENGTH)

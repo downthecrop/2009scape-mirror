@@ -1,7 +1,7 @@
 package core.game.content.dialogue;
 
 import api.Container;
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.NPCDefinition;
 import core.game.container.impl.EquipmentContainer;
 import core.plugin.Initializable;
@@ -288,8 +288,8 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 			player.getEquipment().replace(new Item(Items.MAGIC_CARPET_5614),EquipmentContainer.SLOT_WEAPON);
 			player.getPacketDispatch().sendInterfaceConfig(548,69,true);
 
-			ContentAPI.registerLogoutListener(player, "magic-carpet", (pl) -> {
-				ContentAPI.removeItem(pl, Items.MAGIC_CARPET_5614, Container.EQUIPMENT);
+			registerLogoutListener(player, "magic-carpet", (pl) -> {
+				removeItem(pl, Items.MAGIC_CARPET_5614, Container.EQUIPMENT);
 				return Unit.INSTANCE;
 			});
 
@@ -333,7 +333,7 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 						player.animate(new Animation(-1));
 						player.getConfigManager().set(499, 0);
 
-						ContentAPI.clearLogoutListener(player, "magic-carpet");
+						clearLogoutListener(player, "magic-carpet");
 
 						break;
 					case 902:

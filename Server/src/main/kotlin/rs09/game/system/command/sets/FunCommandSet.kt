@@ -1,6 +1,6 @@
 package rs09.game.system.command.sets
 
-import api.ContentAPI
+import api.*
 import core.game.content.quest.tutorials.tutorialisland.CharacterDesign
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -152,10 +152,10 @@ class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
         val inv = player.inventory.toArray().filterNotNull()
         SpadeDigListener.registerListener(player.location){p ->
             for(item in inv){
-                ContentAPI.addItemOrDrop(p, item.id, item.amount)
-                ContentAPI.sendMessage(p, "You dig and find ${if(item.amount > 1) "some" else "a"} ${item.name}")
+                addItemOrDrop(p, item.id, item.amount)
+                sendMessage(p, "You dig and find ${if(item.amount > 1) "some" else "a"} ${item.name}")
             }
-            ContentAPI.sendNews("${player.username} has found the hidden treasure! Congratulations!!!")
+            sendNews("${player.username} has found the hidden treasure! Congratulations!!!")
             SpadeDigListener.listeners.remove(loc)
         }
         player.inventory.clear()

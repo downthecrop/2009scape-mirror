@@ -1,6 +1,6 @@
 package core.game.node.entity.combat.spell;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.magic.Runes;
 import core.game.node.entity.Entity;

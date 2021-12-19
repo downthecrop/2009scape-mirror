@@ -1,6 +1,6 @@
 package core.game.interaction.object;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.CloseEvent;
@@ -372,7 +372,7 @@ public final class BankingPlugin extends OptionHandler {
                                     amount = p.getBank().getLastAmountX();
                                     break;
                                 case 234:
-                                    ContentAPI.sendInputDialogue(p, false, "Enter the amount:", (value) -> {
+                                    sendInputDialogue(p, false, "Enter the amount:", (value) -> {
                                         String s = value.toString();
                                         s = s.replace("k","000");
                                         s = s.replace("K","000");
@@ -452,7 +452,7 @@ public final class BankingPlugin extends OptionHandler {
                             p.getBank().addItem(slot, p.getBank().getLastAmountX());
                             break;
                         case 234:
-                            ContentAPI.sendInputDialogue(p, false, "Enter the amount:", (value) -> {
+                            sendInputDialogue(p, false, "Enter the amount:", (value) -> {
                                 String s = value.toString();
                                 s = s.replace("k","000");
                                 s = s.replace("K","000");
@@ -522,7 +522,7 @@ public final class BankingPlugin extends OptionHandler {
                             });
                             return true;
                         case 234:
-                            ContentAPI.sendInputDialogue(p, false, "Enter the amount:", (value) -> {
+                            sendInputDialogue(p, false, "Enter the amount:", (value) -> {
                                 String s = value.toString();
                                 s = s.replace("k","000");
                                 s = s.replace("K","000");

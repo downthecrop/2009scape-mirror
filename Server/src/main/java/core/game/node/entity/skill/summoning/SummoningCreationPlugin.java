@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.summoning;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -49,7 +49,7 @@ public final class SummoningCreationPlugin extends ComponentPlugin {
 				SummoningCreator.create(player, getItemAmount(opcode), component.getId() == 669 ? SummoningPouch.forSlot(slot > 50 ? slot -1 : slot) : SummoningScroll.forId(slot > 50 ? slot -1 : slot));
 				break;
 			case 234:
-				ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+				sendInputDialogue(player, true, "Enter the amount:", (value) -> {
 					SummoningCreator.create(player, (int) value, component.getId() == 669 ? SummoningPouch.forSlot(slot > 50 ? slot -1 : slot) : SummoningScroll.forId(slot > 50 ? slot -1 : slot));
 					return Unit.INSTANCE;
 				});

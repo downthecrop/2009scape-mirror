@@ -1,6 +1,6 @@
 package core.game.node.entity.npc.drop;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.NPCDefinition;
 import core.game.content.global.Bones;
 import core.game.ge.GrandExchangeDatabase;
@@ -113,7 +113,7 @@ public final class NPCDropTables {
 			}
 			return;
 		}
-        ContentAPI.announceIfRare(player, item);
+        announceIfRare(player, item);
 		if(item.getId() == 6199 && player instanceof Player){
 		    player.sendMessage("<col=990000>A mystery box has fallen on the ground.</col>");
 		}

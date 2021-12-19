@@ -1,6 +1,6 @@
 package rs09.game.content.global.worldevents.holiday.halloween
 
-import api.ContentAPI
+import api.*
 import core.game.component.Component
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
@@ -26,12 +26,12 @@ class TrickOrTreatHandler : InteractionListener() {
             val hasDoneMe = getTrickOrTreatedNPCs(player).contains(node.name.toLowerCase())
 
             if(hasDone5){
-                ContentAPI.sendNPCDialogue(player, node.id, "My informants tell me you've already collected candy from 5 people today.", FacialExpression.FRIENDLY)
+                sendNPCDialogue(player, node.id, "My informants tell me you've already collected candy from 5 people today.", FacialExpression.FRIENDLY)
                 return@on true
             }
 
             if(hasDoneMe){
-                ContentAPI.sendNPCDialogue(player, node.id, "You've already asked me today! Don't get greedy, now.", FacialExpression.ANNOYED)
+                sendNPCDialogue(player, node.id, "You've already asked me today! Don't get greedy, now.", FacialExpression.ANNOYED)
                 return@on true
             }
 
@@ -42,7 +42,7 @@ class TrickOrTreatHandler : InteractionListener() {
                         1 -> npcl(FacialExpression.FRIENDLY, "Very well, then, here you are my friend.").also { stage++ }
                         2 -> {
                             player.dialogueInterpreter.sendItemMessage(14084, "They hand you a nicely-wrapped candy.")
-                            ContentAPI.addItemOrDrop(player, 14084, 1)
+                            addItemOrDrop(player, 14084, 1)
                             registerNpc(player, npc!!)
                             incrementDailyToT(player)
                             stage = END_DIALOGUE

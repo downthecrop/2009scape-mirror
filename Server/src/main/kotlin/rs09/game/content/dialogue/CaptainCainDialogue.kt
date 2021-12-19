@@ -1,6 +1,6 @@
 package rs09.game.content.dialogue
 
-import api.ContentAPI
+import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
@@ -41,7 +41,7 @@ class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
             10 -> npcl(FacialExpression.FRIENDLY, "Alright, then, that'll be 7,500,000 gold please.").also { stage++ }
             11 -> options("Here you go!","Nevermind.").also { stage++ }
             12 -> when(buttonId){
-                1 -> if(ContentAPI.inInventory(player, 995, 7500000))
+                1 -> if(inInventory(player, 995, 7500000))
                     playerl(FacialExpression.FRIENDLY, "Here you go!").also { stage = 20 }
                 else
                     playerl(FacialExpression.HALF_GUILTY, "Actually, I don't have that much.").also { stage = END_DIALOGUE }
@@ -51,8 +51,8 @@ class CaptainCainDialogue(player: Player? = null) : DialoguePlugin(player) {
 
             20 -> {
                 npcl(FacialExpression.FRIENDLY, "Thank you much, kind sir. And here's your torso.")
-                if(ContentAPI.removeItem(player, Item(995,7500000), api.Container.INVENTORY)) {
-                    ContentAPI.addItem(player, Items.FIGHTER_TORSO_10551, 1)
+                if(removeItem(player, Item(995,7500000), api.Container.INVENTORY)) {
+                    addItem(player, Items.FIGHTER_TORSO_10551, 1)
                 }
                 stage = END_DIALOGUE
             }

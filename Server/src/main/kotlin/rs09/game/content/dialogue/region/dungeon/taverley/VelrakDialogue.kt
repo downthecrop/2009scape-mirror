@@ -1,7 +1,7 @@
 package rs09.game.content.dialogue.region.dungeon.taverley
 
 import api.Container
-import api.ContentAPI
+import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
@@ -17,11 +17,11 @@ class VelrakDialogue(player: Player? = null) : DialoguePlugin(player) {
     }
 
     override fun open(vararg args: Any?): Boolean {
-        if(ContentAPI.inInventory(player, Items.DUSTY_KEY_1590)){
+        if(inInventory(player, Items.DUSTY_KEY_1590)){
             playerl(FacialExpression.HALF_THINKING, "Are you still here?").also { stage = 100 }
         } else {
             npcl(FacialExpression.FRIENDLY, "Thank you for rescuing me! It isn't very comfy in this cell.")
-            ContentAPI.removeItem(player, Items.JAIL_KEY_1591, Container.INVENTORY)
+            removeItem(player, Items.JAIL_KEY_1591, Container.INVENTORY)
         }
         return true
     }
@@ -42,7 +42,7 @@ class VelrakDialogue(player: Player? = null) : DialoguePlugin(player) {
                 2 -> playerl(FacialExpression.NEUTRAL, "No, it's too dangerous for me too.").also { stage = 15 }
             }
 
-            14 -> ContentAPI.sendItemDialogue(player, Items.DUSTY_KEY_1590, "Velrak reaches somewhere mysterious and passes you a key.").also { ContentAPI.addItem(player, Items.DUSTY_KEY_1590, 1); stage = END_DIALOGUE }
+            14 -> sendItemDialogue(player, Items.DUSTY_KEY_1590, "Velrak reaches somewhere mysterious and passes you a key.").also { addItem(player, Items.DUSTY_KEY_1590, 1); stage = END_DIALOGUE }
 
             15 -> npcl(FacialExpression.FRIENDLY, "I don't blame you!").also { stage = END_DIALOGUE }
 

@@ -1,7 +1,7 @@
 package rs09.game.content.zone.phasmatys.bonegrinder
 
 import api.Container
-import api.ContentAPI
+import api.*
 import core.game.content.global.Bones
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
@@ -71,15 +71,15 @@ class BoneGrinderListener : InteractionListener() {
     fun handleFill(player: Player): Boolean{
         val bone = getBone(player)
         if(bone == null){
-            ContentAPI.sendMessage(player,"You have no bones to grind.")
+            sendMessage(player,"You have no bones to grind.")
             return true
         }
-        if(ContentAPI.getAttribute(player,BONE_HOPPER_KEY,false)){
-            ContentAPI.sendMessage(player,"You already have some bones in the hopper.")
+        if(getAttribute(player,BONE_HOPPER_KEY,false)){
+            sendMessage(player,"You already have some bones in the hopper.")
             return true
         }
-        if(ContentAPI.getAttribute(player,BONE_BIN_KEY,false)){
-            ContentAPI.sendMessage(player,"You already have some bonemeal that needs to be collected.")
+        if(getAttribute(player,BONE_BIN_KEY,false)){
+            sendMessage(player,"You already have some bonemeal that needs to be collected.")
             return true
         }
 
@@ -88,14 +88,14 @@ class BoneGrinderListener : InteractionListener() {
             override fun pulse(): Boolean {
                 when(stage++){
                     0 -> {
-                        ContentAPI.lock(player, FILL_ANIM.duration)
-                        ContentAPI.animate(player,FILL_ANIM)
+                        lock(player, FILL_ANIM.duration)
+                        animate(player,FILL_ANIM)
                     }
                     FILL_ANIM.duration -> {
-                        ContentAPI.sendMessage(player,"You fill the hopper with bones.")
-                        ContentAPI.removeItem(player,Item(bone.itemId),Container.INVENTORY)
-                        ContentAPI.setAttribute(player,LOADED_BONE_KEY,bone.ordinal)
-                        ContentAPI.setAttribute(player,BONE_HOPPER_KEY,true)
+                        sendMessage(player,"You fill the hopper with bones.")
+                        removeItem(player,Item(bone.itemId),Container.INVENTORY)
+                        setAttribute(player,LOADED_BONE_KEY,bone.ordinal)
+                        setAttribute(player,BONE_HOPPER_KEY,true)
                         return true
                     }
                 }
@@ -103,15 +103,15 @@ class BoneGrinderListener : InteractionListener() {
             }
         }
 
-        if(ContentAPI.inInventory(player,bone.itemId)){
+        if(inInventory(player,bone.itemId)){
             player.pulseManager.run(object : Pulse(){
                 var stage = 0
                 override fun pulse(): Boolean {
                     when(stage++){
                         0 -> Pulser.submit(fillPulse).also { delay = FILL_ANIM.duration + 1}
                         1 -> {
-                            ContentAPI.stopWalk(player)
-                            ContentAPI.forceWalk(player,Location(3659,3524),"smart")
+                            stopWalk(player)
+                            forceWalk(player,Location(3659,3524),"smart")
                             delay = 2
                         }
                         2 -> {
@@ -119,12 +119,12 @@ class BoneGrinderListener : InteractionListener() {
                             delay = WIND_ANIM.duration + 1
                         }
                         3 -> {
-                            ContentAPI.stopWalk(player)
-                            ContentAPI.forceWalk(player,Location(3658,3524),"smart")
+                            stopWalk(player)
+                            forceWalk(player,Location(3658,3524),"smart")
                             delay = 2
                         }
                         4 -> {
-                            if(!ContentAPI.inInventory(player,Items.EMPTY_POT_1931,1)){
+                            if(!inInventory(player,Items.EMPTY_POT_1931,1)){
                                 return handleEmpty(player)
                             } else {
                                 handleEmpty(player)
@@ -132,12 +132,12 @@ class BoneGrinderListener : InteractionListener() {
                             }
                         }
                         5 -> {
-                            ContentAPI.stopWalk(player)
-                            ContentAPI.forceWalk(player,Location(3660,3524),"smart")
+                            stopWalk(player)
+                            forceWalk(player,Location(3660,3524),"smart")
                             delay = 4
                         }
                         6 -> {
-                            ContentAPI.face(player,Location(3660,3526))
+                            face(player,Location(3660,3526))
                             handleFill(player)
                             return true
                         }
@@ -152,13 +152,13 @@ class BoneGrinderListener : InteractionListener() {
     }
 
     fun handleWind(player: Player): Boolean{
-        if(!ContentAPI.getAttribute(player,BONE_HOPPER_KEY,false)){
-            ContentAPI.sendMessage(player,"You have no bones loaded to grind.")
+        if(!getAttribute(player,BONE_HOPPER_KEY,false)){
+            sendMessage(player,"You have no bones loaded to grind.")
             return true
         }
 
-        if(ContentAPI.getAttribute(player,BONE_BIN_KEY,false)){
-            ContentAPI.sendMessage(player,"You already have some bonemeal which you need to collect.")
+        if(getAttribute(player,BONE_BIN_KEY,false)){
+            sendMessage(player,"You already have some bonemeal which you need to collect.")
             return true
         }
 
@@ -167,15 +167,15 @@ class BoneGrinderListener : InteractionListener() {
             override fun pulse(): Boolean {
                 when(stage++){
                     0 -> {
-                        ContentAPI.face(player,Location(3659, 3526, 1))
-                        ContentAPI.lock(player,WIND_ANIM.duration)
-                        ContentAPI.animate(player,WIND_ANIM)
-                        ContentAPI.sendMessage(player,"You wind the handle.")
+                        face(player,Location(3659, 3526, 1))
+                        lock(player,WIND_ANIM.duration)
+                        animate(player,WIND_ANIM)
+                        sendMessage(player,"You wind the handle.")
                     }
                     WIND_ANIM.duration -> {
-                        ContentAPI.sendMessage(player,"The bonemeal falls into the bin.")
-                        ContentAPI.setAttribute(player,BONE_HOPPER_KEY,false)
-                        ContentAPI.setAttribute(player,BONE_BIN_KEY,true)
+                        sendMessage(player,"The bonemeal falls into the bin.")
+                        setAttribute(player,BONE_HOPPER_KEY,false)
+                        setAttribute(player,BONE_BIN_KEY,true)
                         return true
                     }
                 }
@@ -186,36 +186,36 @@ class BoneGrinderListener : InteractionListener() {
     }
 
     private fun handleStatus(player: Player): Boolean{
-        val bonesLoaded = ContentAPI.getAttribute(player,BONE_HOPPER_KEY,false)
-        val boneMealReady = ContentAPI.getAttribute(player,BONE_BIN_KEY,false)
+        val bonesLoaded = getAttribute(player,BONE_HOPPER_KEY,false)
+        val boneMealReady = getAttribute(player,BONE_BIN_KEY,false)
 
-        if(bonesLoaded) ContentAPI.sendMessage(player,"There are bones waiting in the hopper.")
-        if(boneMealReady) ContentAPI.sendMessage(player,"There is bonemeal waiting in the bin to be collected.")
+        if(bonesLoaded) sendMessage(player,"There are bones waiting in the hopper.")
+        if(boneMealReady) sendMessage(player,"There is bonemeal waiting in the bin to be collected.")
 
         if(!bonesLoaded && !boneMealReady){
-            ContentAPI.sendMessage(player,"There is nothing loaded into the machine.")
+            sendMessage(player,"There is nothing loaded into the machine.")
         }
 
         return true
     }
 
     fun handleEmpty(player: Player): Boolean{
-        if(!ContentAPI.getAttribute(player,BONE_BIN_KEY,false)){
-            ContentAPI.sendMessage(player,"You have no bonemeal to collect.")
+        if(!getAttribute(player,BONE_BIN_KEY,false)){
+            sendMessage(player,"You have no bonemeal to collect.")
             return true
         }
 
-        if(ContentAPI.getAttribute(player,BONE_HOPPER_KEY,false) && !ContentAPI.getAttribute(player,BONE_BIN_KEY,false)){
-            ContentAPI.sendMessage(player,"You need to wind the wheel to grind the bones.")
+        if(getAttribute(player,BONE_HOPPER_KEY,false) && !getAttribute(player,BONE_BIN_KEY,false)){
+            sendMessage(player,"You need to wind the wheel to grind the bones.")
             return true
         }
 
-        if(!ContentAPI.inInventory(player,Items.EMPTY_POT_1931,1)){
-            ContentAPI.sendMessage(player,"You don't have any pots to take the bonemeal with.")
+        if(!inInventory(player,Items.EMPTY_POT_1931,1)){
+            sendMessage(player,"You don't have any pots to take the bonemeal with.")
             return true
         }
 
-        val bone = Bones.values()[ContentAPI.getAttribute(player,LOADED_BONE_KEY,-1)]
+        val bone = Bones.values()[getAttribute(player,LOADED_BONE_KEY,-1)]
 
 
         Pulser.submit(object : Pulse(){
@@ -223,16 +223,16 @@ class BoneGrinderListener : InteractionListener() {
             override fun pulse(): Boolean {
                 when(stage++){
                     0 -> {
-                        ContentAPI.face(player,Location(3658, 3525, 1))
-                        ContentAPI.lock(player, SCOOP_ANIM.duration)
-                        ContentAPI.animate(player,SCOOP_ANIM)
+                        face(player,Location(3658, 3525, 1))
+                        lock(player, SCOOP_ANIM.duration)
+                        animate(player,SCOOP_ANIM)
                     }
                     SCOOP_ANIM.duration -> {
-                        if(ContentAPI.removeItem(player,Item(Items.EMPTY_POT_1931),Container.INVENTORY)){
-                            ContentAPI.addItem(player,bone.boneMeal.id)
-                            ContentAPI.setAttribute(player,BONE_BIN_KEY,false)
-                            ContentAPI.setAttribute(player,BONE_HOPPER_KEY,false)
-                            ContentAPI.setAttribute(player,LOADED_BONE_KEY,-1)
+                        if(removeItem(player,Item(Items.EMPTY_POT_1931),Container.INVENTORY)){
+                            addItem(player,bone.boneMeal.id)
+                            setAttribute(player,BONE_BIN_KEY,false)
+                            setAttribute(player,BONE_HOPPER_KEY,false)
+                            setAttribute(player,LOADED_BONE_KEY,-1)
                         }
                         return true
                     }
@@ -245,7 +245,7 @@ class BoneGrinderListener : InteractionListener() {
 
     fun getBone(player: Player): Bones? {
         for(bone in Bones.values()){
-            if(ContentAPI.inInventory(player,bone.itemId)) return bone
+            if(inInventory(player,bone.itemId)) return bone
         }
         return null
     }

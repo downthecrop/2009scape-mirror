@@ -1,6 +1,6 @@
 import java.util.concurrent.TimeUnit;
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.impl.Animator.Priority;
@@ -218,7 +218,7 @@ class PitfallListeners : InteractionListener() {
                         //ForceMovement.run(pitfall_npc, pitfall_npc.getLocation(), pit.getLocation(), ForceMovement.WALK_ANIMATION, Animation(ANIM), dir, 8);
                         //pitfall_npc.setLocation(pit.getLocation());
                         //pitfall_npc.walkingQueue.addPath(pit.location.x, pit.location.y);
-                        ContentAPI.teleport(pitfall_npc, pit.location)
+                        teleport(pitfall_npc, pit.location)
                         pitfall_npc.startDeath(null)
                         player.removeAttribute("pitfall:timestamp:${pit.location.x}:${pit.location.y}")
                         player.incrementAttribute("pitfall:count", -1)
@@ -228,7 +228,7 @@ class PitfallListeners : InteractionListener() {
                         //ForceMovement.run(pitfall_npc, pitfall_npc.getLocation(), dst, ForceMovement.WALK_ANIMATION, Animation(ANIM), dir, 8);
                         //pitfall_npc.walkingQueue.addPath(npcdst.x, npcdst.y)
                         val npcdst = dst.transform(dir, if(dir == Direction.SOUTH || dir == Direction.WEST) 1 else 0)
-                        ContentAPI.teleport(pitfall_npc, npcdst)
+                        teleport(pitfall_npc, npcdst)
                         pitfall_npc.animate(Animation(5232, Priority.HIGH))
                         pitfall_npc.attack(player)
                         pitfall_npc.setAttribute("last_pit_loc", pit.location)

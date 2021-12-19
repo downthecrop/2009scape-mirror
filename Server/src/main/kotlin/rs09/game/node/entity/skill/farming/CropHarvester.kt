@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.farming
 
-import api.ContentAPI
+import api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -76,7 +76,7 @@ class CropHarvester : OptionHandler() {
                     player.skills.addExperience(Skills.FARMING,plantable.harvestXP)
                     if(patch.patch.type in livesBased){
                         patch.rollLivesDecrement(
-                            ContentAPI.getDynLevel(player, Skills.FARMING),
+                            getDynLevel(player, Skills.FARMING),
                             requiredItem == Items.MAGIC_SECATEURS_7409
                         )
                     } else {

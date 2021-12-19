@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.construction;
 
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
@@ -121,10 +121,10 @@ public final class PortalOptionPlugin extends OptionHandler {
 				case 3:
 					if(player.getIronmanManager().isIronman()){
 						end();
-						ContentAPI.sendMessage(player, "You can't do that as an ironman.");
+						sendMessage(player, "You can't do that as an ironman.");
 						return true;
 					}
-					ContentAPI.sendInputDialogue(player, false, "Enter friend's name:", (value) -> {
+					sendInputDialogue(player, false, "Enter friend's name:", (value) -> {
 						Player p = Repository.getPlayerByName((String) value);
 						if (p == null || !p.isActive()) {
 							player.getPacketDispatch().sendMessage("This player is not online.");

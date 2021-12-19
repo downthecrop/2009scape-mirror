@@ -1,6 +1,6 @@
 package rs09.game.interaction.inter
 
-import api.ContentAPI
+import api.*
 import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
@@ -41,8 +41,8 @@ class ExperienceInterface() : ComponentPlugin() {
                 if(caller is Plugin<*>)
                     caller.handleSelectionCallback(confirmedSkill, player)
                 else (caller as (Int,Player) -> Unit).invoke(confirmedSkill,player)
-                ContentAPI.playAudio(player, SOUND)
-                ContentAPI.closeInterface(player)
+                playAudio(player, SOUND)
+                closeInterface(player)
             }
         } else {
             val skill = when (button) {

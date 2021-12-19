@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.agility
 
-import api.ContentAPI
+import api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.content.global.action.DoorActionHandler
 import core.game.node.Node
@@ -76,7 +76,7 @@ class WildernessCourse
                     2 -> {
                         val end = if (fail) Location.create(2998, 3924, 0) else if (`object`.id < 2309) Location.create(2998, 3917, 0) else Location.create(2998, 3930, 0)
                         val start = if (`object`.id < 2309) player.location else Location.create(2998, 3917, 0)
-						ContentAPI.sendMessage(player, "You go through the gate and try to edge over the ridge...")
+						sendMessage(player, "You go through the gate and try to edge over the ridge...")
                         AgilityHandler.walk(player, -1, start, end, Animation.create(155), if (fail) 0.0 else 15.00, if (fail) "You lose your footing and fail into the wolf pit." else "You skillfully balance across the ridge...")
                     }
                     9 -> {
@@ -104,7 +104,7 @@ class WildernessCourse
      */
     private fun handlePipe(player: Player, `object`: Scenery) {
         if (`object`.location.y == 3948) {
-			ContentAPI.sendMessage(player, "You can't do that from here.")
+			sendMessage(player, "You can't do that from here.")
             return
         }
         if (player.skills.getLevel(Skills.AGILITY) < 49) {
@@ -153,11 +153,11 @@ class WildernessCourse
      */
     private fun handleRopeSwing(player: Player, `object`: Scenery) {
         if (player.location.y < 3554) {
-			ContentAPI.sendMessage(player, "You cannot do that from here.")
+			sendMessage(player, "You cannot do that from here.")
             return
         }
         if (ropeDelay > World.ticks) {
-			ContentAPI.sendMessage(player, "The rope is being used.")
+			sendMessage(player, "The rope is being used.")
             return
         }
         if (AgilityHandler.hasFailed(player, 1, 0.1)) {
@@ -175,13 +175,13 @@ class WildernessCourse
      * @param object the object.
      */
     private fun handleSteppingStones(player: Player, `object`: Scenery) {
-        ContentAPI.lock(player, 50)
+        lock(player, 50)
         val fail = AgilityHandler.hasFailed(player, 1, 0.3)
         val origLoc = player.location
-        ContentAPI.registerLogoutListener(player, "steppingstone"){p ->
-            ContentAPI.teleport(p, origLoc)
+        registerLogoutListener(player, "steppingstone"){p ->
+            teleport(p, origLoc)
         }
-        ContentAPI.submitWorldPulse(object : Pulse(2, player){
+        submitWorldPulse(object : Pulse(2, player){
             var counter = 0
             override fun pulse(): Boolean {
                 if (counter == 3 && fail) {
@@ -190,8 +190,8 @@ class WildernessCourse
                 }
                 AgilityHandler.forceWalk(player, if (counter == 5) 2 else -1, player.location, player.location.transform(-1, 0, 0), Animation.create(741), 10, if (counter == 5) 20.0 else 0.0, if (counter != 0) null else "You carefully start crossing the stepping stones...")
                 if(++counter == 6){
-                    ContentAPI.unlock(player)
-                    ContentAPI.clearLogoutListener(player, "steppingstone")
+                    unlock(player)
+                    clearLogoutListener(player, "steppingstone")
                 }
                 return counter == 6
             }
@@ -206,7 +206,7 @@ class WildernessCourse
     private fun handleLogBalance(player: Player, `object`: Scenery) {
         val failed = AgilityHandler.hasFailed(player, 1, 0.5)
         val end = if (failed) Location.create(2998, 3945, 0) else Location.create(2994, 3945, 0)
-		ContentAPI.sendMessage(player, "You walk carefully across the slippery log...")
+		sendMessage(player, "You walk carefully across the slippery log...")
         AgilityHandler.walk(player, if (failed) -1 else 3, player.location, end, Animation.create(155), if (failed) 0.0 else 20.0, if (failed) null else "You skillfully edge across the gap.")
         if (failed) {
             World.Pulser.submit(object : Pulse(5, player) {

@@ -11,6 +11,7 @@ import rs09.game.content.dialogue.DialogueFile;
 
 import java.util.ArrayList;
 
+import static api.DialUtilsKt.splitLines;
 import static rs09.tools.DialogueConstKt.DIALOGUE_INITIAL_OPTIONS_HANDLE;
 import static rs09.tools.DialogueConstKt.START_DIALOGUE;
 
@@ -318,7 +319,7 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 	 * @param msg the message for the NPC to say
 	 */
 	public Component npcl(FacialExpression expr, String msg){
-		return npc(expr, api.DialUtils.splitLines(msg));
+		return npc(expr, splitLines(msg));
 	}
 
 	/**
@@ -327,7 +328,7 @@ public abstract class DialoguePlugin implements Plugin<Player> {
 	 * @param msg the message for the player to say
 	 */
 	public Component playerl(FacialExpression expr, String msg){
-		return player(expr, api.DialUtils.splitLines(msg));
+		return player(expr, splitLines(msg));
 	}
 
 }

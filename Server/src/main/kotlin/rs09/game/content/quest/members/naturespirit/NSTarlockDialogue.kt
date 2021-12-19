@@ -1,8 +1,7 @@
 package rs09.game.content.quest.members.naturespirit
 
 import api.Container
-import api.ContentAPI
-import api.DialUtils
+import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
@@ -29,7 +28,7 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
         val quest = player.questRepository.getQuest("Nature Spirit")
         questStage = quest.getStage(player)
 
-        if(questStage > 10 && !ContentAPI.inEquipment(player, Items.GHOSTSPEAK_AMULET_552)){
+        if(questStage > 10 && !inEquipment(player, Items.GHOSTSPEAK_AMULET_552)){
             npcl(FacialExpression.HALF_GUILTY, "OooOOOOOOoooOoOOoOOOo")
             setQuest(15)
             return false
@@ -42,7 +41,7 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
             30 -> npcl(FacialExpression.HALF_GUILTY, "Thanks for the journal, I've been reading it. It looks like I came to a violent and bitter end but that's not really important. I just have to figure out what I am going to do now?").also { stage = 14 }
             35 -> npcl(FacialExpression.NEUTRAL, "Hello there, have you been blessed yet?").also { stage = 60 }
             45 -> {
-                if(ContentAPI.inInventory(player, Items.MORT_MYRE_FUNGUS_2970)){
+                if(inInventory(player, Items.MORT_MYRE_FUNGUS_2970)){
                     npcl(FacialExpression.NEUTRAL, "Did you manage to get something from nature?").also { stage = 80 }
                 } else {
                     playerl(
@@ -59,7 +58,7 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> if(ContentAPI.inInventory(player, Items.MIRROR_2966)){
+            0 -> if(inInventory(player, Items.MIRROR_2966)){
                 sendDialogue("You use the mirror on the spirit","of the dead Filliman Tarlock.").also { stage++ }
             } else {
                 playerl(FacialExpression.NEUTRAL, "Yes, I do think you're dead and I'll prove it somehow.").also { stage = 1002 }
@@ -71,9 +70,9 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
             4 -> playerl(FacialExpression.NEUTRAL, "That's because you're dead! Dead as a door nail... Deader in fact... You bear a remarkable resemblance to wormbait! Err... No offence...").also { stage++ }
             5 -> npcl(FacialExpression.HALF_GUILTY, "I think you might be right my friend, though I still feel very much alive. It is strange how I still come to be here and yet I've not turned into a Ghast.").also { stage++ }
             6 -> npcl(FacialExpression.HALF_GUILTY, " It must be a sign... Yes a sign... I must try to find out what it means. Now, where did I put my journal?").also { stage++ }
-            7 -> if(!ContentAPI.inInventory(player, Items.JOURNAL_2967)){
+            7 -> if(!inInventory(player, Items.JOURNAL_2967)){
                 playerl(FacialExpression.NEUTRAL, "Where did you put it?").also { stage++; setQuest(25) }
-            } else sendDialogue("You give the journal to Filliman Tarlock").also { ContentAPI.removeItem(player, Items.JOURNAL_2967, Container.INVENTORY); stage = 10; setQuest(30) }
+            } else sendDialogue("You give the journal to Filliman Tarlock").also { removeItem(player, Items.JOURNAL_2967, Container.INVENTORY); stage = 10; setQuest(30) }
 
             //no journal
             8 -> npcl(FacialExpression.HALF_GUILTY, "Well, if I knew that, I wouldn't still be looking for it. However, I do remember something about a knot? Perhaps I was meant to tie a knot or something?").also { stage = END_DIALOGUE }
@@ -107,7 +106,7 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
             52 -> npcl(FacialExpression.HALF_GUILTY, "Well, the book says, that I need, and I quote:- 'Something with faith', 'something from nature' and the 'spirit-to-become' freely given'. Hmm, I know how to get something from nature.").also { stage++ }
             53 -> playerl(FacialExpression.NEUTRAL, "Well, that does seem a bit vague.").also { stage++ }
             54 -> npcl(FacialExpression.HALF_GUILTY, "Hmm, it does and I could understand if you didn't want to help. However, if you could perhaps at least get the item from nature, that would be a start. Perhaps we can figure out the rest as we go along.").also { stage++ }
-            55 -> sendDialogue(*DialUtils.splitLines("The druid produces a small sheet of papyrus with some writing on it.")).also { ContentAPI.addItemOrDrop(player, Items.DRUIDIC_SPELL_2968); setQuest(35); stage++ }
+            55 -> sendDialogue(*splitLines("The druid produces a small sheet of papyrus with some writing on it.")).also { addItemOrDrop(player, Items.DRUIDIC_SPELL_2968); setQuest(35); stage++ }
             56 -> npcl(FacialExpression.NEUTRAL, "This spell needs to be cast in the swamp after you have been blessed. I'm afraid you'll need to go to the temple to the North and ask a member of the clergy to bless you.").also { stage++ }
             57 -> playerl(FacialExpression.NEUTRAL, "Blessed, what does that do?").also { stage++ }
             58 -> npcl(FacialExpression.NEUTRAL, "It is required if you're to cast this druid spell. Once you've cast the spell, you should find something from nature. Bring it back to me and then we'll try to figure out the other things we need.").also { stage = END_DIALOGUE }
@@ -115,20 +114,20 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
             //have you been blessed yet
             60 -> playerl(FacialExpression.NEUTRAL, "No, not yet.").also { stage++ }
             61 -> npcl(FacialExpression.NEUTRAL, "Well, hurry up!").also { stage++ }
-            62 -> if(ContentAPI.inInventory(player, Items.DRUIDIC_SPELL_2968) || ContentAPI.inBank(player, Items.DRUIDIC_SPELL_2968)) end()
+            62 -> if(inInventory(player, Items.DRUIDIC_SPELL_2968) || inBank(player, Items.DRUIDIC_SPELL_2968)) end()
                   else playerl(FacialExpression.NEUTRAL, "Could I have another bloom scroll please?").also { stage++ }
             63 -> npcl(FacialExpression.NEUTRAL, "Sure, but please look after this one.").also { stage++ }
-            64 -> sendDialogue("The spirit of Filliman Tarlock gives you another bloom spell.").also { ContentAPI.addItemOrDrop(player, Items.DRUIDIC_SPELL_2968); stage = END_DIALOGUE }
+            64 -> sendDialogue("The spirit of Filliman Tarlock gives you another bloom spell.").also { addItemOrDrop(player, Items.DRUIDIC_SPELL_2968); stage = END_DIALOGUE }
 
             //I've been blessed
             70 -> npcl(FacialExpression.NEUTRAL, "Well, you need to bring 'something from nature', 'something with faith' and 'something of the spirit-to- become freely given.'").also { stage++ }
             71 -> playerl(FacialExpression.NEUTRAL, "Yeah, but what does that mean?").also { stage++ }
             72 -> npcl(FacialExpression.NEUTRAL, "Hmm, it is a conundrum, however, if you use that spell I gave you, you should be able to get from nature. Once you have that, we may be puzzle the rest out.").also { stage++ }
-            73 -> if(!ContentAPI.inInventory(player, Items.DRUIDIC_SPELL_2968) && !ContentAPI.inBank(player, Items.DRUIDIC_SPELL_2968)){
+            73 -> if(!inInventory(player, Items.DRUIDIC_SPELL_2968) && !inBank(player, Items.DRUIDIC_SPELL_2968)){
                 playerl(FacialExpression.NEUTRAL, "Could I have another bloom scroll please?").also { stage++ }
             } else end()
             74 -> npcl(FacialExpression.NEUTRAL, "Sure, but please look after this one.").also { stage++ }
-            75 -> sendDialogue("The spirit of Filliman Tarlock gives you","another bloom spell.").also { ContentAPI.addItem(player, Items.DRUIDIC_SPELL_2968); stage = END_DIALOGUE }
+            75 -> sendDialogue("The spirit of Filliman Tarlock gives you","another bloom spell.").also { addItem(player, Items.DRUIDIC_SPELL_2968); stage = END_DIALOGUE }
 
             //has fungus
             80 -> sendDialogue("You show the fungus to Filliman.").also { stage++ }
@@ -161,22 +160,22 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
             120 -> npcl(FacialExpression.NEUTRAL, "Oh really.. Have you placed all the items on the stones? Ok, well, let's try!").also { stage++ }
             121 -> sendDialogue("~ The druid attempts to cast a spell. ~").also { stage++ }
             122 -> {
-                ContentAPI.animate(npc, 812)
+                animate(npc, 812)
                 if(NSUtils.hasPlacedCard(player) && NSUtils.hasPlacedFungus(player) && NSUtils.onStone(player)){
                     end()
                     player.lock()
                     val locations = arrayOf(Location.create(3439, 3336, 0), Location.create(3441, 3336, 0), Location.create(3440, 3335, 0))
-                    repeat(3) {i -> ContentAPI.spawnProjectile(locations[i], Location.create(3440, 3336, 0), 268, 0, 35, 0, 100, 20) }
-                    ContentAPI.submitIndividualPulse(player, object : Pulse(4){
+                    repeat(3) {i -> spawnProjectile(locations[i], Location.create(3440, 3336, 0), 268, 0, 35, 0, 100, 20) }
+                    submitIndividualPulse(player, object : Pulse(4){
                         override fun pulse(): Boolean {
-                            ContentAPI.sendNPCDialogue(player, npc.originalId, "Aha, everything seems to be in place! You can come through now into the grotto for the final section of my transformation.")
+                            sendNPCDialogue(player, npc.originalId, "Aha, everything seems to be in place! You can come through now into the grotto for the final section of my transformation.")
                             setQuest(55)
-                            ContentAPI.unlock(player)
+                            unlock(player)
                             return true
                         }
 
                         override fun stop() {
-                            ContentAPI.visualize(npc, -1, Graphics(266, 80))
+                            visualize(npc, -1, Graphics(266, 80))
                             super.stop()
                         }
                     })
@@ -187,17 +186,17 @@ class NSTarlockDialogue(player: Player? = null) : DialoguePlugin(player) {
                 stage = END_DIALOGUE
             }
 
-            130 -> if(ContentAPI.inInventory(player, Items.DRUIDIC_SPELL_2968) || ContentAPI.inBank(player, Items.DRUIDIC_SPELL_2968)){
+            130 -> if(inInventory(player, Items.DRUIDIC_SPELL_2968) || inBank(player, Items.DRUIDIC_SPELL_2968)){
                 npcl(FacialExpression.NEUTRAL, "No, you've already got one!").also { stage = END_DIALOGUE }
             } else {
                 npcl(FacialExpression.NEUTRAL, "Sure, but look after this one.")
-                ContentAPI.addItem(player, Items.DRUIDIC_SPELL_2968)
+                addItem(player, Items.DRUIDIC_SPELL_2968)
                 stage = END_DIALOGUE
             }
 
             //Initial dialogue
             1000 -> playerl(FacialExpression.HALF_ASKING, "Hello?").also { stage++ }
-            1001 -> if(ContentAPI.inEquipment(player, Items.GHOSTSPEAK_AMULET_552)){
+            1001 -> if(inEquipment(player, Items.GHOSTSPEAK_AMULET_552)){
                 npcl(FacialExpression.EXTREMELY_SHOCKED, "Oh, I understand you! At last, someone who doesn't just mumble. I understand what you're saying!").also { stage++ }
             } else npcl(FacialExpression.HALF_GUILTY, "OooOOoOOoOOOOo.")
 

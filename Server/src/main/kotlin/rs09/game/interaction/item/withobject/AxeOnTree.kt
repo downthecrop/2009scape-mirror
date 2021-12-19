@@ -1,6 +1,6 @@
 package rs09.game.interaction.item.withobject
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.entity.skill.gather.woodcutting.WoodcuttingNode
 import core.game.node.entity.skill.gather.woodcutting.WoodcuttingSkillPulse
@@ -14,7 +14,7 @@ class AxeOnTree : InteractionListener(){
 
     override fun defineListeners() {
         onUseWith(SCENERY, axes, *trees){player, _, with ->
-            ContentAPI.submitIndividualPulse(player, WoodcuttingSkillPulse(player, with.asScenery()))
+            submitIndividualPulse(player, WoodcuttingSkillPulse(player, with.asScenery()))
             return@onUseWith true
         }
     }

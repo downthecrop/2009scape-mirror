@@ -1,7 +1,7 @@
 package rs09.game.content.global.worldevents.shootingstar
 
 import api.Container
-import api.ContentAPI
+import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
@@ -64,10 +64,10 @@ class StarSpriteDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any): Boolean {
         npc = args[0] as NPC
-         if (ContentAPI.inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && !ContentAPI.getAttribute(player, "star-ring:bp-shown", false)) {
+         if (inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && !getAttribute(player, "star-ring:bp-shown", false)) {
             npcl(FacialExpression.NEUTRAL, "I see you got ahold of a blueprint of those silly old rings we used to make.")
             stage = 1000
-        } else if (ContentAPI.inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && ContentAPI.getAttribute(player, "star-ring:bp-shown", false)) {
+        } else if (inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && getAttribute(player, "star-ring:bp-shown", false)) {
              playerl(FacialExpression.HALF_ASKING, "So about those rings...")
              stage = 2000
         } else if (getStoreFile().getBoolean(player.username.toLowerCase()) || !player.getInventory().contains(ShootingStarOptionHandler.STAR_DUST, 1)) {
@@ -184,7 +184,7 @@ class StarSpriteDialogue(player: Player? = null) : DialoguePlugin(player) {
             }
             41 -> end()
             50 -> {
-                val wearingRing = ContentAPI.inEquipment(player, Items.RING_OF_THE_STAR_SPRITE_14652)
+                val wearingRing = inEquipment(player, Items.RING_OF_THE_STAR_SPRITE_14652)
                 val dust = if (player.getInventory().getAmount(ShootingStarOptionHandler.STAR_DUST) > 200) 200 else player.getInventory().getAmount(ShootingStarOptionHandler.STAR_DUST)
                 if (player.getInventory().remove(Item(ShootingStarOptionHandler.STAR_DUST, dust))) {
                     val cosmicRunes = (Math.ceil(0.76 * dust) * AMPLIFIER).toInt()
@@ -214,10 +214,10 @@ class StarSpriteDialogue(player: Player? = null) : DialoguePlugin(player) {
                     }
                 }
 
-                if(!ContentAPI.inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && !ContentAPI.inBank(player, Items.ANCIENT_BLUEPRINT_14651) && RandomFunction.roll(500)){
-                    ContentAPI.addItemOrDrop(player, Items.ANCIENT_BLUEPRINT_14651, 1)
-                    ContentAPI.sendMessage(player, colorize("%RThe Star Sprite dropped what looks like some ancient piece of paper and you pick it up."))
-                    ContentAPI.sendNews("${player.username} found an Ancient Blueprint while mining a shooting star!")
+                if(!inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && !inBank(player, Items.ANCIENT_BLUEPRINT_14651) && RandomFunction.roll(500)){
+                    addItemOrDrop(player, Items.ANCIENT_BLUEPRINT_14651, 1)
+                    sendMessage(player, colorize("%RThe Star Sprite dropped what looks like some ancient piece of paper and you pick it up."))
+                    sendNews("${player.username} found an Ancient Blueprint while mining a shooting star!")
                 }
                 stage = 52
             }
@@ -235,19 +235,19 @@ class StarSpriteDialogue(player: Player? = null) : DialoguePlugin(player) {
             1008 -> npcl(FacialExpression.NEUTRAL, "Yes, it seems we need a ring mould, a silver bar, a cut dragonstone and 200 stardust. Oh, and make sure to bring this blueprint with you.").also { stage++ }
             1009 -> playerl(FacialExpression.FRIENDLY, "Thanks, I'll get right on it!").also { stage++ }
             1010 -> playerl(FacialExpression.ASKING, "So just to make sure I've got it right, I need a ring mould, a silver bar, a cut dragonstone and 200 stardust, as well as this blueprint?").also { stage++ }
-            1011 -> npcl(FacialExpression.NEUTRAL, "Yeah, you've got it, human. Any of my kin should be able to do this for you.").also { stage++; ContentAPI.setAttribute(player, "/save:star-ring:bp-shown", true) }
+            1011 -> npcl(FacialExpression.NEUTRAL, "Yeah, you've got it, human. Any of my kin should be able to do this for you.").also { stage++; setAttribute(player, "/save:star-ring:bp-shown", true) }
             1012 -> playerl(FacialExpression.FRIENDLY, "Thanks!").also { stage = END_DIALOGUE }
 
             2000 -> npcl(FacialExpression.NEUTRAL, "Yes, did you bring the components to make it, human?").also { stage++ }
-            2001 -> if(ContentAPI.inInventory(player, Items.DRAGONSTONE_1615,1) && ContentAPI.inInventory(player, Items.RING_MOULD_1592, 1) && ContentAPI.inInventory(player, Items.STARDUST_13727, 200) && ContentAPI.inInventory(player, Items.SILVER_BAR_2355, 1)){
+            2001 -> if(inInventory(player, Items.DRAGONSTONE_1615,1) && inInventory(player, Items.RING_MOULD_1592, 1) && inInventory(player, Items.STARDUST_13727, 200) && inInventory(player, Items.SILVER_BAR_2355, 1)){
                 playerl(FacialExpression.FRIENDLY, "Yes, I have them right here, friend.").also { stage++ }
             } else {
                 playerl(FacialExpression.HALF_GUILTY, "I'm afraid not, what did I need again?").also { stage = 2100 }
             }
             2002 -> npcl(FacialExpression.NEUTRAL, "Excellent, give me just a moment here...").also { stage++ }
             2003 -> sendDialogue("You watch as the Star Sprite casts some strange spell.").also { stage++ }
-            2004 -> if(ContentAPI.removeItem(player, Items.SILVER_BAR_2355, Container.INVENTORY) && ContentAPI.removeItem(player, Items.DRAGONSTONE_1615, Container.INVENTORY) && ContentAPI.removeItem(player, Item(Items.STARDUST_13727, 200), Container.INVENTORY)){
-                    ContentAPI.addItem(player, Items.RING_OF_THE_STAR_SPRITE_14652)
+            2004 -> if(removeItem(player, Items.SILVER_BAR_2355, Container.INVENTORY) && removeItem(player, Items.DRAGONSTONE_1615, Container.INVENTORY) && removeItem(player, Item(Items.STARDUST_13727, 200), Container.INVENTORY)){
+                    addItem(player, Items.RING_OF_THE_STAR_SPRITE_14652)
                     player.dialogueInterpreter.sendItemMessage(Items.RING_OF_THE_STAR_SPRITE_14652, "The Star Sprite hands you a strange ring.").also { stage++ }
                 } else end()
             2005 -> npcl(FacialExpression.NEUTRAL, "There you go, I hope you enjoy it!").also { stage++ }
@@ -266,13 +266,13 @@ class StarSpriteDialogue(player: Player? = null) : DialoguePlugin(player) {
         if(RandomFunction.roll(3)){
             val state = player.states["shooting-star"] as? ShootingStarState ?: return
             state.ticksLeft += secondsToTicks(TimeUnit.MINUTES.toSeconds(5).toInt())
-            ContentAPI.sendMessage(player, colorize("%RYour ring shines dimly as if imbued with energy."))
+            sendMessage(player, colorize("%RYour ring shines dimly as if imbued with energy."))
         } else if(RandomFunction.roll(5)){
-            ContentAPI.addItem(player, bonusId, bonusBaseAmt)
-            ContentAPI.sendMessage(player, colorize("%RYour ring shines brightly as if surging with energy and then fades out."))
+            addItem(player, bonusId, bonusBaseAmt)
+            sendMessage(player, colorize("%RYour ring shines brightly as if surging with energy and then fades out."))
         } else if(RandomFunction.roll(25)){
             getStoreFile()[player.username.toLowerCase()] = false //flag daily as uncompleted
-            ContentAPI.sendMessage(player, colorize("%RYour ring vibrates briefly as if surging with power, and then stops."))
+            sendMessage(player, colorize("%RYour ring vibrates briefly as if surging with power, and then stops."))
         }
     }
 

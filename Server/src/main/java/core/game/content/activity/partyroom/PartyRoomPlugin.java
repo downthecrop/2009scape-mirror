@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -316,7 +316,7 @@ public final class PartyRoomPlugin extends OptionHandler {
 					viewer.getContainer().addItem(slot, ammount);
 					break;
 				case 234:
-					ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+					sendInputDialogue(player, true, "Enter the amount:", (value) -> {
 						viewer.getContainer().addItem(slot, (int) value);
 						return Unit.INSTANCE;
 					});
@@ -347,7 +347,7 @@ public final class PartyRoomPlugin extends OptionHandler {
 					viewer.getContainer().takeItem(slot, ammount);
 					break;
 				case 234:
-					ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+					sendInputDialogue(player, true, "Enter the amount:", (value) -> {
 						viewer.getContainer().takeItem(slot, (int) value);
 						return Unit.INSTANCE;
 					});
