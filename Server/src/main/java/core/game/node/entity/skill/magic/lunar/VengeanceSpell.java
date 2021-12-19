@@ -8,7 +8,7 @@ import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
@@ -59,7 +59,7 @@ public final class VengeanceSpell extends MagicSpell {
 
 	@Override
 	public boolean cast(Entity entity, Node target) {
-		int ticks = GameWorld.getTicks();
+		int ticks = World.getTicks();
 		boolean vengOther = spellId == 19;
 		if (entity.getAttribute("vengeance_delay", -1) > ticks) {
 			((Player) entity).getPacketDispatch().sendMessage("You can only cast vengeance spells once every 30 seconds.");

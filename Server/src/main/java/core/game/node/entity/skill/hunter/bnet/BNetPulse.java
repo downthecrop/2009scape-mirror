@@ -7,7 +7,7 @@ import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
@@ -106,14 +106,14 @@ public final class BNetPulse extends SkillPulse<NPC> {
 		if (++ticks % 2 != 0) {
 			return false;
 		}
-		if (node.getAttribute("dead", 0) > GameWorld.getTicks()) {
+		if (node.getAttribute("dead", 0) > World.getTicks()) {
 			player.sendMessage("Ooops! It's gone.");
 			return true;
 		}
 		if ((success = isSuccessful())) {
 			node.finalizeDeath(player);
 			type.reward(player, node);
-			node.setAttribute("dead", GameWorld.getTicks() + 10);
+			node.setAttribute("dead", World.getTicks() + 10);
 			if (type == BNetTypes.ECLECTIC_IMPLING.getNode() || type == BNetTypes.ESSENCE_IMPLING.getNode() ) {
 				updateLumbridgeImplingTask(player);
 			}
@@ -126,7 +126,7 @@ public final class BNetPulse extends SkillPulse<NPC> {
 	@Override
 	public void message(int type) {
 		if (type == 0) {
-			node.setAttribute("looting", GameWorld.getTicks() + (ANIMATION.getDuration() + 1));
+			node.setAttribute("looting", World.getTicks() + (ANIMATION.getDuration() + 1));
 			player.lock(ANIMATION.getDuration());
 		}
 		this.type.message(player, type, success);

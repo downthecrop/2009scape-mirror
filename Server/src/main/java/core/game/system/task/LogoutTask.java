@@ -1,7 +1,7 @@
 package core.game.system.task;
 
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * A task called upon when a player disconnects from the game.
@@ -18,7 +18,7 @@ public abstract class LogoutTask {
 	 * Constructs a new {@code LogoutTask} {@code Object}.
 	 */
 	public LogoutTask() {
-		this(Integer.MAX_VALUE - GameWorld.getTicks());
+		this(Integer.MAX_VALUE - World.getTicks());
 	}
 
 	/**
@@ -26,7 +26,7 @@ public abstract class LogoutTask {
 	 * @param ticks The amount of ticks this logout task is valid.
 	 */
 	public LogoutTask(int ticks) {
-		this.validity = GameWorld.getTicks() + ticks;
+		this.validity = World.getTicks() + ticks;
 	}
 
 	/**
@@ -50,7 +50,7 @@ public abstract class LogoutTask {
 	 * @return {@code True} if so.
 	 */
 	public boolean isValid() {
-		return validity > GameWorld.getTicks();
+		return validity > World.getTicks();
 	}
 
 	/**
@@ -58,6 +58,6 @@ public abstract class LogoutTask {
 	 * @param ticks The amount of ticks this task should remain valid for.
 	 */
 	public void setDelay(int ticks) {
-		this.validity = GameWorld.getTicks() + ticks;
+		this.validity = World.getTicks() + ticks;
 	}
 }

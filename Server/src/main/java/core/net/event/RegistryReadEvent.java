@@ -1,12 +1,10 @@
 package core.net.event;
 
 import rs09.game.system.SystemLogger;
-import rs09.game.world.GameWorld;
 import core.net.IoReadEvent;
 import core.net.IoSession;
-import core.net.amsc.ManagementServerState;
-import core.net.amsc.WorldCommunicator;
 import core.net.producer.MSEventProducer;
+import rs09.net.ms.ManagementServer;
 
 import java.nio.ByteBuffer;
 
@@ -34,26 +32,26 @@ public final class RegistryReadEvent extends IoReadEvent {
 	public void read(IoSession session, ByteBuffer buffer) {
 		int opcode = buffer.get() & 0xFF;
 		switch (opcode) {
-		case 0:
-			WorldCommunicator.setState(ManagementServerState.NOT_AVAILABLE);
-			SystemLogger.logErr("Failed registering world to AMS - [id=" + GameWorld.getSettings().getWorldId() + ", cause=World id out of bounds]!");
-			break;
-		case 1:
-			session.setProducer(PRODUCER);
-			WorldCommunicator.setState(ManagementServerState.AVAILABLE);
-			SystemLogger.logInfo("Successfully registered world to AMS - [id=" + GameWorld.getSettings().getWorldId() + "]!");
-			break;
-		case 2:
-			WorldCommunicator.setState(ManagementServerState.NOT_AVAILABLE);
-			SystemLogger.logErr("Failed registering world to AMS - [id=" + GameWorld.getSettings().getWorldId() + ", cause=World id already in use]!");
-			break;
-		case 3:
-			WorldCommunicator.setState(ManagementServerState.NOT_AVAILABLE);
-			SystemLogger.logErr("Failed registering world to AMS - [id=" + GameWorld.getSettings().getWorldId() + ", cause=Exception in AMS]!");
-			break;
-		default:
-			System.out.println("??" + opcode);
-			break;
+			case 0:
+				SystemLogger.logErr("[MS] Registration Denied - World ID out of bounds.");
+				ManagementServer.flagCantConnect();
+				break;
+			case 1:
+				session.setProducer(PRODUCER);
+				SystemLogger.logInfo("[MS] Successfully Registered to RS09 Management Server.");
+				ManagementServer.flagConnected();
+				break;
+			case 2:
+				SystemLogger.logErr("[MS] Registration Denied - World ID already in use.");
+				ManagementServer.flagCantConnect();
+				break;
+			case 3:
+				SystemLogger.logErr("[MS] Registration Denied - Internal error encountered by RS09 Management Server.");
+				ManagementServer.flagCantConnect();
+				break;
+			default:
+				System.out.println("??" + opcode);
+				break;
 		}
 	}
 

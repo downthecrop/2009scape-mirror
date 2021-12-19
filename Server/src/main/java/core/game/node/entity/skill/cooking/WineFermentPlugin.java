@@ -7,7 +7,7 @@ import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.plugin.Plugin;
 
 /**
@@ -55,7 +55,7 @@ public final class WineFermentPlugin extends UseWithHandler {
 		}
 		if (player.getInventory().remove(GRAPES, JUG_OF_WATER)) {
 			player.getInventory().add(UNFERMENTED_WINE);
-			GameWorld.getPulser().submit(new WineFermentingPulse(1, player));
+			World.getPulser().submit(new WineFermentingPulse(1, player));
 		}
 		return true;
 	}

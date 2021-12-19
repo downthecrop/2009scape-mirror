@@ -16,7 +16,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.path.Path;
@@ -412,7 +412,7 @@ public final class DemonSlayerCutscene extends CutscenePlugin {
 				interpreter.sendPlainMessage(true, "Delrith is sucked into the vortex...");
 				cutscene.delrith.animate(new Animation(4624));
 				player.lock();
-				GameWorld.getPulser().submit(new Pulse(10) {
+				World.getPulser().submit(new Pulse(10) {
 					@Override
 					public boolean pulse() {
 						cutscene.delrith.clear();
@@ -503,7 +503,7 @@ public final class DemonSlayerCutscene extends CutscenePlugin {
 				PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, player.getLocation().getX() - 1, player.getLocation().getY() + 2, 380, 1, 98));
 				PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, player.getLocation().getX() + 19, player.getLocation().getY() - 55, 380, 1, 98));
 				interpreter.sendPlainMessage(true, "The wizards cast an evil spell...");
-				GameWorld.getPulser().submit(new Pulse(1, player) {
+				World.getPulser().submit(new Pulse(1, player) {
 					int counter = 0;
 
 					@SuppressWarnings("deprecation")

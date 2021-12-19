@@ -4,12 +4,10 @@ import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
-import rs09.game.world.GameWorld;
-import core.game.world.map.Location;
+import rs09.game.world.World;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
@@ -49,7 +47,7 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 
 	@Override
 	public void start() {
-		player.setAttribute("thieveDelay", GameWorld.getTicks());
+		player.setAttribute("thieveDelay", World.getTicks());
 		super.start();
 	}
 
@@ -75,7 +73,7 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 
 	@Override
 	public boolean hasInactiveNode() {
-		if (player.getAttribute("thieveDelay", 0) <= GameWorld.getTicks()) {
+		if (player.getAttribute("thieveDelay", 0) <= World.getTicks()) {
 			return false;
 		}
 		return super.hasInactiveNode();

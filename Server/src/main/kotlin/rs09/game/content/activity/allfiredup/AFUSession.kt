@@ -3,7 +3,7 @@ package rs09.game.content.activity.allfiredup
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import core.plugin.Plugin
 import org.rs09.consts.Items
 import rs09.tools.stringtools.colorize
@@ -20,7 +20,7 @@ class AFUSession(val player: Player) {
 
     fun init() {
         isActive = true
-        GameWorld.Pulser.submit(object: Pulse(){
+        World.Pulser.submit(object: Pulse(){
             override fun pulse(): Boolean {
                 player.setAttribute("afu-pulse",this)
                 beaconTimers.forEach {timer ->

@@ -6,9 +6,8 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.PlayerDetails;
 import core.game.node.entity.player.info.Rights;
 import core.game.system.monitor.PlayerMonitor;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import rs09.game.world.repository.Repository;
-import core.net.amsc.WorldCommunicator;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ClanContext;
 import core.net.packet.context.MessageContext;
@@ -133,26 +132,6 @@ public final class ClanRepository {
 	 * Cleans the chat from all players that shouldn't be in it.
 	 */
 	public void clean(boolean disable) {
-		if (WorldCommunicator.isEnabled()) {
-			return;
-		}
-		for (Iterator<ClanEntry> it = players.iterator(); it.hasNext();) {
-			ClanEntry entry = it.next();
-			Player player = entry.getPlayer();
-			boolean remove = disable;
-			if (!remove) {
-				remove = getRank(player).ordinal() < joinRequirement.ordinal();
-			}
-			if (remove) {
-				leave(player, false);
-				player.getCommunication().setClan(null);
-				it.remove();
-			}
-		}
-		if (players.isEmpty()) {
-			banned.clear();
-		}
-		update();
 	}
 
 	/**
@@ -283,7 +262,7 @@ public final class ClanRepository {
 	public void update() {
 		for (Iterator<ClanEntry> it = players.iterator(); it.hasNext();) {
 			ClanEntry e = it.next();
-			if (e.getWorldId() == GameWorld.getSettings().getWorldId() && e.getPlayer() != null) {
+			if (e.getWorldId() == World.getSettings().getWorldId() && e.getPlayer() != null) {
 				PacketRepository.send(UpdateClanChat.class, new ClanContext(e.getPlayer(), this, false));
 			}
 		}
@@ -402,7 +381,7 @@ public final class ClanRepository {
 	 * @return {@code True} if so.
 	 */
 	public boolean isDefault() {
-		return owner.equals(GameWorld.getSettings().getName().toLowerCase());
+		return owner.equals(World.getSettings().getName().toLowerCase());
 	}
 
 	/**
@@ -410,7 +389,7 @@ public final class ClanRepository {
 	 * @return The default clan chat.
 	 */
 	public static ClanRepository getDefault() {
-		return get(GameWorld.getSettings().getName().toLowerCase());
+		return get(World.getSettings().getName().toLowerCase());
 	}
 
 	/**

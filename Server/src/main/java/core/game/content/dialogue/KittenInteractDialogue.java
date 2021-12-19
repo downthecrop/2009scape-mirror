@@ -3,7 +3,7 @@ package core.game.content.dialogue;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.RegionManager;
 import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
@@ -88,7 +88,7 @@ public final class KittenInteractDialogue extends DialoguePlugin {
 					final Path path = Pathfinder.find(player.getFamiliarManager().getFamiliar(), rat);
 					path.walk(player.getFamiliarManager().getFamiliar());
 					rat.sendChat("Eeek!");
-					GameWorld.getPulser().submit(new Pulse(5) {
+					World.getPulser().submit(new Pulse(5) {
 
 						@Override
 						public boolean pulse() {

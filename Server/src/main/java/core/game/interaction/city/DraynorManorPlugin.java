@@ -13,7 +13,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.path.Pathfinder;
@@ -162,7 +162,7 @@ public final class DraynorManorPlugin extends OptionHandler {
 		}
 		final Location destination = dest;
 		if (object.getId() == 160) {
-			GameWorld.getPulser().submit(new Pulse(1, player) {
+			World.getPulser().submit(new Pulse(1, player) {
 				int counter = 0;
 
 				@Override
@@ -202,7 +202,7 @@ public final class DraynorManorPlugin extends OptionHandler {
 			});
 			return;
 		}
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
 			int count = 0;
 
 			@Override

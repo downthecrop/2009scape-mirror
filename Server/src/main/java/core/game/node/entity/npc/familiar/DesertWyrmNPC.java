@@ -22,7 +22,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -107,7 +107,7 @@ public final class DesertWyrmNPC extends Forager {
 				player.lock(9);
 				familiar.lock(8);
 				familiar.visualize(new Animation(7800), new Graphics(1412));
-				GameWorld.getPulser().submit(new Pulse(1, player, familiar) {
+				World.getPulser().submit(new Pulse(1, player, familiar) {
 					int counter;
 
 					@Override

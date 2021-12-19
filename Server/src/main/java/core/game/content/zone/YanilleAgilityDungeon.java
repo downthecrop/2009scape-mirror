@@ -16,7 +16,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
@@ -132,7 +132,7 @@ public class YanilleAgilityDungeon extends MapZone implements Plugin<Object> {
 		double xp = 0.0;
 		if (AgilityHandler.hasFailed(player, 40, 0.01)) {
 			player.lock(3);
-			GameWorld.getPulser().submit(new Pulse(2, player) {
+			World.getPulser().submit(new Pulse(2, player) {
 				@Override
 				public boolean pulse() {
 					AgilityHandler.fail(player, 1, new Location(2572, 9570, 0), Animation.create(761 - diff), RandomFunction.random(1, 3), "You lost your balance!");

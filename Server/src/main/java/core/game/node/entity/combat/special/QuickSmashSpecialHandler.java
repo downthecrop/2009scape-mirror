@@ -7,7 +7,7 @@ import rs09.game.node.entity.combat.handlers.MeleeSwingHandler;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
@@ -57,7 +57,7 @@ public final class QuickSmashSpecialHandler extends MeleeSwingHandler implements
 		Player p = (Player) entity;
 		if (victim == null) {
 			victim = p.getProperties().getCombatPulse().getLastVictim();
-			if (victim == null || GameWorld.getTicks() - p.getAttribute("combat-stop", -1) > 2 || !MeleeSwingHandler.Companion.canMelee(p, victim, 1)) {
+			if (victim == null || World.getTicks() - p.getAttribute("combat-stop", -1) > 2 || !MeleeSwingHandler.Companion.canMelee(p, victim, 1)) {
 				p.getPacketDispatch().sendMessage("Warning: Since the maul's special is an instant attack, it will be wasted when used ");
 				p.getPacketDispatch().sendMessage("on a first strike.");
 				return -1;

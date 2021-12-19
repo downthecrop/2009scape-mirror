@@ -5,7 +5,7 @@ import core.game.interaction.UseWithHandler
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -34,7 +34,7 @@ class CocktailCooker : UseWithHandler(UNCOOKED_CHOC_SAT, UNCOOKED_DRUN_DRA) {
     }
 
     private fun cook(drink: CookedDrinks, player: Player, raw: Item){
-        GameWorld.Pulser.submit(object : Pulse(){
+        World.Pulser.submit(object : Pulse(){
             var counter = 0
             override fun pulse(): Boolean {
                 when(counter++){

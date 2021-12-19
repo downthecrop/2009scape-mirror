@@ -18,7 +18,7 @@ import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.system.config.NPCConfigParser;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Handles a revenant NPC.
@@ -112,17 +112,17 @@ public class RevenantNPC extends AbstractNPC {
 
 	@Override
 	public void handleTickActions() {
-		if (!DeathTask.isDead(this) && getSkills().getLifepoints() <= (getSkills().getStaticLevel(Skills.HITPOINTS) / 2) && getAttribute("eat-delay", 0) < GameWorld.getTicks()) {
+		if (!DeathTask.isDead(this) && getSkills().getLifepoints() <= (getSkills().getStaticLevel(Skills.HITPOINTS) / 2) && getAttribute("eat-delay", 0) < World.getTicks()) {
 			lock(3);
 			getProperties().getCombatPulse().delayNextAttack(3);
 			getSkills().heal(10);
 			for (Player p : RegionManager.getLocalPlayers(this)) {
 				p.getAudioManager().send(2393);
 			}
-			setAttribute("eat-delay", GameWorld.getTicks() + 6);
+			setAttribute("eat-delay", World.getTicks() + 6);
 		}
 		if (!getLocks().isMovementLocked()) {
-			if (!getPulseManager().hasPulseRunning() && !getProperties().getCombatPulse().isAttacking() && !getProperties().getCombatPulse().isInCombat() && nextWalk < GameWorld.getTicks()) {
+			if (!getPulseManager().hasPulseRunning() && !getProperties().getCombatPulse().isAttacking() && !getProperties().getCombatPulse().isInCombat() && nextWalk < World.getTicks()) {
 				setNextWalk();
 				Location l = getMovementDestination();
 				if (canMove(l)) {
@@ -154,7 +154,7 @@ public class RevenantNPC extends AbstractNPC {
 
 	@Override
 	public void setNextWalk() {
-		nextWalk = GameWorld.getTicks() + RandomFunction.random(7, 15);
+		nextWalk = World.getTicks() + RandomFunction.random(7, 15);
 	}
 
 	@Override

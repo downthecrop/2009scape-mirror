@@ -10,10 +10,9 @@ import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import rs09.game.content.dialogue.DialogueFile
-import rs09.game.interaction.InteractionListeners
 import rs09.game.interaction.SpadeDigListener
 import rs09.game.system.command.Command
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import rs09.tools.END_DIALOGUE
 import java.util.*
 
@@ -106,7 +105,7 @@ class FunCommandSet : CommandSet(Command.Privilege.ADMIN) {
             player.appearance.rideCart(boneMode)
             if (player.appearance.isRidingMinecart) {
                 var i = 0
-                GameWorld.Pulser.submit(object : Pulse(1, player) {
+                World.Pulser.submit(object : Pulse(1, player) {
                     override fun pulse(): Boolean {
                         if (i++ % 12 == 0) player.sendChat("I want to get off Mr. Bones Wild Ride.")
                         player.moveStep()

@@ -36,7 +36,7 @@ import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InteractionListeners
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ItemConfigParser
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
 import java.util.*
@@ -552,7 +552,7 @@ class ScriptAPI(private val bot: Player) {
         bot.visualize(ANIMATIONUP, GRAPHICSUP)
         bot.impactHandler.disabledTicks = 4
         val location = loc
-        GameWorld.Pulser.submit(object : Pulse(4, bot) {
+        World.Pulser.submit(object : Pulse(4, bot) {
             override fun pulse(): Boolean {
                 bot.unlock()
                 bot.properties.teleportLocation = location

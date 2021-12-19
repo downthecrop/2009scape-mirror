@@ -11,7 +11,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
@@ -45,7 +45,7 @@ public final class FireplacePlugin extends OptionHandler {
 		final Scenery obj = (Scenery) node.asScenery();
 		player.lock(2);
 		player.animate(ANIMATION);
-		GameWorld.getPulser().submit(new Pulse(2, player) {
+		World.getPulser().submit(new Pulse(2, player) {
 			@Override
 			public boolean pulse() {
 				if (!obj.isActive()) {

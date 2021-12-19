@@ -7,7 +7,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
@@ -53,12 +53,12 @@ public final class BHOptionHandler extends OptionHandler {
 			if (activity == null) {
 				return false;
 			}
-			if (player.getAttribute("exit_penalty", 0) > GameWorld.getTicks()) {
+			if (player.getAttribute("exit_penalty", 0) > World.getTicks()) {
 				player.getPacketDispatch().sendMessage("You can't leave the crater until the exit penalty is over.");
 				return true;
 			}
 			player.lock(2);
-			GameWorld.getPulser().submit(new Pulse(1) {
+			World.getPulser().submit(new Pulse(1) {
 				@Override
 				public boolean pulse() {
 					player.getProperties().setTeleportLocation(activity.getType().getExitLocation());

@@ -5,7 +5,7 @@ import core.game.node.entity.combat.CombatSpell
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.player.link.appearance.Gender
 import core.game.node.item.Item
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import core.game.world.map.Location
 import core.tools.RandomFunction
 import rs09.game.ai.AIPlayer
@@ -496,7 +496,7 @@ class PvMBotsBuilder {
 		spawnDragonKiller(new Location(3417, 3561, 1));
 		//Brimhaven dragons
 		spawnDragonKiller(new Location(2704, 9450));
-		spawnDragonKiller(new Location(2704, 9450));*/println("[" + GameWorld.settings?.name + "]: PvMBotsBuilder: Spawned " + botsSpawned + " bots.")
+		spawnDragonKiller(new Location(2704, 9450));*/println("[" + World.settings?.name + "]: PvMBotsBuilder: Spawned " + botsSpawned + " bots.")
             }
         }
 
