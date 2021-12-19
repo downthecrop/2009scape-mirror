@@ -3,7 +3,7 @@ package core.game.content.dialogue;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -104,7 +104,7 @@ public final class GnomeSpiritTreeDialogue extends DialoguePlugin {
      */
     private void sendTeleport(final Player player, final Location location) {
         end();
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
             int loop;
 
             @Override

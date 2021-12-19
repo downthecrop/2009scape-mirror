@@ -10,7 +10,6 @@ import core.game.system.mysql.SQLEntryHandler;
 import core.game.system.mysql.SQLManager;
 import core.game.system.mysql.SQLTable;
 import core.game.system.mysql.impl.PlayerSQLHandler;
-import core.net.amsc.WorldCommunicator;
 
 import java.math.BigInteger;
 import java.sql.Connection;
@@ -102,9 +101,6 @@ public final class PlayerSQLManager {
 	 * @param player The player instance.
 	 */
 	public void update(Player player) {
-		if (!WorldCommunicator.isEnabled()) {
-			details.getCommunication().save(table);
-		}
 		table.getColumn("credits").updateValue(player.getDetails().credits);
 		table.getColumn("bank").updateValue(player.getBank().format());
 		table.getColumn("lastLogin").updateValue(player.getDetails().getLastLogin());

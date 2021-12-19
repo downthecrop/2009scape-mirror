@@ -1,8 +1,5 @@
 package rs09.game.node.entity.combat.handlers
 
-import api.ContentAPI
-import api.EquipmentSlot
-import core.game.container.Container
 import core.game.container.impl.EquipmentContainer
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage
@@ -28,7 +25,7 @@ import core.tools.RandomFunction
 import rs09.game.node.entity.combat.CombatSwingHandler
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks
 import rs09.game.system.SystemLogger
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import java.util.*
 import kotlin.math.ceil
 import kotlin.math.floor
@@ -182,7 +179,7 @@ open class RangeSwingHandler
         victim!!.impactHandler.handleImpact(entity, hit, CombatStyle.RANGE, state)
         if (state.secondaryHit > -1) {
             val hitt = state.secondaryHit
-            GameWorld.Pulser.submit(object : Pulse(1, victim) {
+            World.Pulser.submit(object : Pulse(1, victim) {
                 override fun pulse(): Boolean {
                     victim.impactHandler.handleImpact(entity, hitt, CombatStyle.RANGE, state)
                     return true

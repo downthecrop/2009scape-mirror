@@ -84,8 +84,7 @@ import rs09.game.node.entity.player.info.login.PlayerSaver;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
 import rs09.game.node.entity.state.newsys.State;
 import rs09.game.node.entity.state.newsys.StateRepository;
-import rs09.game.world.GameWorld;
-import rs09.game.world.repository.DisconnectionQueue;
+import rs09.game.world.World;
 import rs09.game.world.repository.Repository;
 import rs09.game.world.update.MapChunkRenderer;
 import rs09.game.world.update.NPCRenderer;
@@ -462,7 +461,7 @@ public class Player extends Entity {
 		}
 		if(intoWardrobe){
 			packetDispatch.sendInterfaceConfig(548,69,true);
-			GameWorld.getPulser().submit(new wardrobePulse(this));
+			World.getPulser().submit(new wardrobePulse(this));
 			inWardrobe = true;
 		} else {
 			inWardrobe = false;
@@ -476,7 +475,7 @@ public class Player extends Entity {
 		hunterManager.pulse();
 		musicPlayer.tick();
 		if(getAttribute("fire:immune",0) > 0){
-			int time = getAttribute("fire:immune",0) - GameWorld.getTicks();
+			int time = getAttribute("fire:immune",0) - World.getTicks();
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antifire potion."));
                 getAudioManager().send(3120);
@@ -488,7 +487,7 @@ public class Player extends Entity {
 			}
 		}
 		if(getAttribute("poison:immunity",0) > 0){
-			int time = getAttribute("poison:immunity",0) - GameWorld.getTicks();
+			int time = getAttribute("poison:immunity",0) - World.getTicks();
 			debug(time + "");
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antipoison potion."));
@@ -675,10 +674,10 @@ public class Player extends Entity {
 		getPrayer().reset();
 		super.finalizeDeath(killer);
 		appearance.sync();
-		if (killer instanceof Player && !GameWorld.isEconomyWorld() && getSkullManager().isWilderness() && killer.asPlayer().getSkullManager().isWilderness()) {
+		if (killer instanceof Player && !World.isEconomyWorld() && getSkullManager().isWilderness() && killer.asPlayer().getSkullManager().isWilderness()) {
 			killer.asPlayer().getSavedData().getSpawnData().onDeath(killer.asPlayer(), this);
 		}
-		if (GameWorld.isEconomyWorld() && !getSavedData().getGlobalData().isDeathScreenDisabled()) {
+		if (World.isEconomyWorld() && !getSavedData().getGlobalData().isDeathScreenDisabled()) {
 			getInterfaceManager().open(new Component(153));
 		}
 		if (!getSavedData().getGlobalData().isDeathScreenDisabled()) {
@@ -737,7 +736,7 @@ public class Player extends Entity {
 
 	@Override
 	public boolean isPoisonImmune() {
-		return getAttribute("poison:immunity", -1) > GameWorld.getTicks();
+		return getAttribute("poison:immunity", -1) > World.getTicks();
 	}
 
 	@Override

@@ -12,7 +12,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 
@@ -176,7 +176,7 @@ public enum Emotes {
     GIVE_THANKS(46, "This emote can be unlocked by playing a Thanksgiving holiday event.") {
         @Override
         public void play(final Player player) {
-			GameWorld.getPulser().submit(new Pulse(1, player) {
+			World.getPulser().submit(new Pulse(1, player) {
                 int counter;
 
                 @Override

@@ -14,7 +14,7 @@ import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
@@ -133,7 +133,7 @@ public final class IceSpells extends CombatSpell {
 		}
 		int ticks = (1 + (type.ordinal() - SpellType.RUSH.ordinal())) * 8;
 		if (state.getEstimatedHit() > -1) {
-			if (victim.getAttribute("freeze_immunity", -1) < GameWorld.getTicks()) {
+			if (victim.getAttribute("freeze_immunity", -1) < World.getTicks()) {
 				victim.getStateManager().set(EntityState.FROZEN, ticks);
 			} else if (type == SpellType.BARRAGE) {
 				state.setFrozen(true);

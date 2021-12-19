@@ -19,7 +19,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.path.Pathfinder;
@@ -197,7 +197,7 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 		if (!PULSE.isRunning()) {
 			PULSE.restart();
 			PULSE.start();
-			GameWorld.getPulser().submit(PULSE);
+			World.getPulser().submit(PULSE);
 		}
 	}
 

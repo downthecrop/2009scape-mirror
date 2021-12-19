@@ -5,7 +5,7 @@ import java.util.concurrent.TimeUnit;
 import core.cache.def.impl.ItemDefinition;
 import core.game.node.entity.Entity;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.game.content.consumable.effects.PrayerEffect;
@@ -58,7 +58,7 @@ public class FaladorShieldPlugin extends OptionHandler {
                 }
                 return true;
             case "operate":
-                GameWorld.getPulser().submit(getPulse(player, level));
+                World.getPulser().submit(getPulse(player, level));
                 break;
         }
         return true;

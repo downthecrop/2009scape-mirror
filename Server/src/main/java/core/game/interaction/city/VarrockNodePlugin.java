@@ -12,7 +12,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -201,7 +201,7 @@ public final class VarrockNodePlugin extends OptionHandler {
 				case 0:
 					player.lock(3);
 					interpreter.sendPlainMessage(true, "<col=08088A>Knock knock...");
-					GameWorld.getPulser().submit(new Pulse(3, player) {
+					World.getPulser().submit(new Pulse(3, player) {
 						@Override
 						public boolean pulse() {
 							interpreter.sendDialogues(npcId, null, "Who's there?");

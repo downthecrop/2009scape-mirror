@@ -14,7 +14,7 @@ import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +69,7 @@ public final class Prayer {
 		}
 		getActive().clear();
         // Clear the overhead prayer icon a tick later
-        GameWorld.getPulser().submit(new Pulse(1) {
+        World.getPulser().submit(new Pulse(1) {
             @Override
             public boolean pulse() {
                 player.getAppearance().setHeadIcon(-1);

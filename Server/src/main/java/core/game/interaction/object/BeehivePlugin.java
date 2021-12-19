@@ -8,7 +8,7 @@ import core.game.node.entity.combat.ImpactHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
@@ -26,7 +26,7 @@ public class BeehivePlugin extends OptionHandler {
         if (!player.getInventory().containsItem(REPELLANT)) {
             player.getPacketDispatch().sendMessage("The bees fly out of the hive and sting you!");
             player.getImpactHandler().manualHit(player, 2, ImpactHandler.HitsplatType.NORMAL, 1);
-            GameWorld.getPulser().submit(new Pulse(2, player) {
+            World.getPulser().submit(new Pulse(2, player) {
                 @Override
                 public boolean pulse() {
                     player.getPacketDispatch().sendMessage("Maybe you can clear them out somehow.");

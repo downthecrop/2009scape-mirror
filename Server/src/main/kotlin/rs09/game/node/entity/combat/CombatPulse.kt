@@ -17,7 +17,7 @@ import core.game.node.entity.skill.Skills
 import core.game.node.entity.state.EntityState
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 
@@ -122,7 +122,7 @@ class CombatPulse(
         }
         combatTimeOut = 0
         entity.face(victim)
-        if (nextAttack <= GameWorld.ticks) {
+        if (nextAttack <= World.ticks) {
             victim ?: return false
             val v: Entity = victim!!
             var handler = temporaryHandler
@@ -310,7 +310,7 @@ class CombatPulse(
      * @param ticks The amount of ticks.
      */
     fun setNextAttack(ticks: Int) {
-        nextAttack = GameWorld.ticks + ticks
+        nextAttack = World.ticks + ticks
     }
 
     /**
@@ -349,7 +349,7 @@ class CombatPulse(
 
     override fun stop() {
         super.stop()
-        entity!!.setAttribute("combat-stop", GameWorld.ticks)
+        entity!!.setAttribute("combat-stop", World.ticks)
         if (victim != null) {
             lastVictim = victim
         }
@@ -426,7 +426,7 @@ class CombatPulse(
             if (set != null && set.effect(entity, victim, state)) {
                 set.visualize(entity, victim)
             }
-            GameWorld.Pulser.submit(object : Pulse(delay - 1, entity, victim) {
+            World.Pulser.submit(object : Pulse(delay - 1, entity, victim) {
                 var impact = false
                 override fun pulse(): Boolean {
                     if (DeathTask.isDead(victim)) {

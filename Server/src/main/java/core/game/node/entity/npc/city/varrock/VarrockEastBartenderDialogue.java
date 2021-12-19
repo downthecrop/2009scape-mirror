@@ -6,7 +6,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Handles the VarrockEastBartenderDialogue dialogue.
@@ -98,7 +98,7 @@ public class VarrockEastBartenderDialogue extends DialoguePlugin {
 
 			break;
 		case 160:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "This world around us... is a computer game.... called", "" + GameWorld.getSettings().getName() + ".");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "This world around us... is a computer game.... called", "" + World.getSettings().getName() + ".");
 			stage = 161;
 			break;
 		case 161:

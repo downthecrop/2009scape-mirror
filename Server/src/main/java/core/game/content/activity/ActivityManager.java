@@ -2,7 +2,7 @@ package core.game.content.activity;
 
 import core.game.node.entity.player.Player;
 import rs09.game.system.SystemLogger;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -49,7 +49,7 @@ public final class ActivityManager {
 	public static boolean start(Player player, String name, boolean login, Object... args) {
 		ActivityPlugin plugin = ACTIVITIES.get(name);
 		if (plugin == null) {
-			if (GameWorld.getSettings().isDevMode()) {
+			if (World.getSettings().isDevMode()) {
 				SystemLogger.logErr("Unhandled activity - " + name + "!");
 			}
 			return false;
@@ -61,7 +61,7 @@ public final class ActivityManager {
 			return plugin.start(player, login, args);
 		} catch (Throwable e) {
 			e.printStackTrace();
-			if (GameWorld.getSettings().isDevMode()) {
+			if (World.getSettings().isDevMode()) {
 				player.getPacketDispatch().sendMessage("Error starting activity " + (plugin == null ? null : plugin.getName()) + "!");
 			}
 		}

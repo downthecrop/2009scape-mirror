@@ -1,13 +1,11 @@
-package core.net.amsc;
+package core.net.ms;
 
-import rs09.game.system.SystemLogger;
 import core.net.IoEventHandler;
-import core.net.IoSession;
+import rs09.net.ms.ManagementServer;
 
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.Selector;
-import java.nio.channels.SocketChannel;
 import java.util.concurrent.Executors;
 
 /**
@@ -25,21 +23,9 @@ public final class MSEventHandler extends IoEventHandler {
 
 	@Override
 	public void connect(SelectionKey key) throws IOException {
-		SocketChannel ch = (SocketChannel) key.channel();
-		try {
-			if (ch.finishConnect()) {
-				key.interestOps(key.interestOps() ^ SelectionKey.OP_CONNECT);
-				key.interestOps(key.interestOps() | SelectionKey.OP_READ);
-				IoSession session = (IoSession) key.attachment();
-				key.attach(session = new IoSession(key, service));
-				WorldCommunicator.register(session);
-				return;
-			}
-		} catch (Throwable t) {
-			t.printStackTrace();
-		}
-		SystemLogger.logErr("Failed connecting to Management Server!");
-		WorldCommunicator.terminate();
+		/**
+		 * Empty
+		 */
 	}
 
 	@Override
@@ -60,7 +46,7 @@ public final class MSEventHandler extends IoEventHandler {
 	@Override
 	public void disconnect(SelectionKey key, Throwable t) {
 		super.disconnect(key, t);
-		WorldCommunicator.terminate();
+		ManagementServer.disconnect();
 	}
 
 }

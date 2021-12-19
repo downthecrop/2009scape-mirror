@@ -21,10 +21,9 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable
 import core.tools.RandomFunction
 import org.rs09.consts.Items
-import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InterfaceListener
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 val AVACH_NIMPORTO_LOC = Location.create(1637, 4709)
 val PORTAL = 29534
@@ -109,7 +108,7 @@ object VinesweeperTeleport {
         player.audioManager.send(125)
         Projectile.create(npc, player, 109).send()
         npc.sendChat("Avach nimporto!")
-        GameWorld.Pulser.submit(object : Pulse(1) {
+        World.Pulser.submit(object : Pulse(1) {
             var counter = 0
             override fun pulse(): Boolean {
                 when (counter++) {
@@ -207,7 +206,7 @@ class VinesweeperListener : InteractionListener() {
         on(HOLES, SCENERY, "inspect") { player, node ->
             player.animate(Animation(8710))
             player.lock(5)
-            GameWorld.Pulser.submit(object : Pulse(5) {
+            World.Pulser.submit(object : Pulse(5) {
                 override fun pulse(): Boolean {
                     val msg = when(RandomFunction.random(0, 7)) {
                         0 -> "You don't see anything interesting. You can't be sure if there's a seed there or not."
@@ -248,10 +247,10 @@ class VinesweeperListener : InteractionListener() {
                 npc.sendChat("Squeak!")
                 npc.lock(3)
                 player.skills.addExperience(Skills.HUNTER, 30.0)
-                GameWorld.Pulser.submit(object : Pulse(3) {
+                World.Pulser.submit(object : Pulse(3) {
                     override fun pulse(): Boolean {
                         //npc.setInvisible(true)
-                        npc.respawnTick = GameWorld.ticks + 50
+                        npc.respawnTick = World.ticks + 50
                         npc.location = npc.properties.spawnLocation
                         return true
                     }
@@ -325,7 +324,7 @@ class VinesweeperNPC : AbstractNPC {
                     } else {
                         sendChat("Hmm. Looks like there's a plant here.")
                         lock(3)
-                        GameWorld.Pulser.submit(object : Pulse(3) {
+                        World.Pulser.submit(object : Pulse(3) {
                             override fun pulse(): Boolean {
                                 sendChat("Gracious me! This one's dead")
                                 SceneryBuilder.replace(scenery, scenery.transform(HOLES[0]))
@@ -356,7 +355,7 @@ class VinesweeperNPC : AbstractNPC {
         animate(Animation(451))
         if(SEED_LOCS.contains(dest.loc)) {
             val npc = this
-            GameWorld.Pulser.submit(object : Pulse(3) {
+            World.Pulser.submit(object : Pulse(3) {
                 override fun pulse(): Boolean {
                     sendChat("Ah! A seed. Points for everyone near me!")
                     val level = dest.player.skills.getStaticLevel(Skills.FARMING)
@@ -379,7 +378,7 @@ class VinesweeperNPC : AbstractNPC {
             SceneryBuilder.replace(scenery, scenery.transform(HOLES[0]))
             var i = 0
             val lines = arrayOf("Hmm, no seeds planted here, I'm afraid.", "I'll have to keep this 'ere flag. Sorry.")
-            GameWorld.Pulser.submit(object : Pulse(3) {
+            World.Pulser.submit(object : Pulse(3) {
                 override fun pulse(): Boolean {
                     sendChat(lines[i++])
                     return i >= lines.size

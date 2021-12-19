@@ -11,7 +11,7 @@ import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.StringUtils;
 import rs09.game.system.config.NPCConfigParser;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -210,19 +210,6 @@ public final class NPCDefinition extends Definition<NPC> {
 			DEFINITIONS.put(id, def);
 		}
 		return def;
-	}
-
-	public static void main(String... args) throws Throwable {
-		GameWorld.prompt(false);
-		System.out.println("Roar: " + NPCDefinition.forId(2329).standAnimation);
-		// for (int i = 0; i < 11000; i++) {
-		// ItemDefinition def = ItemDefinition.forId(i);
-		// if (def.getMaleWornModelId1() >= 1250 && def.getMaleWornModelId1() <=
-		// 1550) {
-		// System.out.println(def.getName() + " " + i + ": " +
-		// def.getMaleWornModelId1());
-		// }
-		// }
 	}
 
 	/**

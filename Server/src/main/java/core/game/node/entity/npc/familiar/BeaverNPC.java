@@ -9,7 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.update.flag.context.Animation;
@@ -81,14 +81,14 @@ public class BeaverNPC extends Forager {
 		owner.lock(ticks);
 		multiChop = true;
 		getPulseManager().clear();
-		GameWorld.getPulser().submit(new Pulse(ticks, owner, this) {
+		World.getPulser().submit(new Pulse(ticks, owner, this) {
 			@Override
 			public boolean pulse() {
 				lock(11);
 				owner.lock(11);
 				faceLocation(object.getLocation());
 				animate(Animation.create(7722));
-				GameWorld.getPulser().submit(new Pulse(1, owner, BeaverNPC.this) {
+				World.getPulser().submit(new Pulse(1, owner, BeaverNPC.this) {
 					int counter;
 					boolean recieved = false;
 

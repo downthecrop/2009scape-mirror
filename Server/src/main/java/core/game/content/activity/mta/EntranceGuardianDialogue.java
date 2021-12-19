@@ -2,7 +2,7 @@ package core.game.content.activity.mta;
 
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Handles the entrance guardian dialogue.
@@ -261,7 +261,7 @@ public class EntranceGuardianDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 73:
-			npc("arena and to help fund magic shops around " + GameWorld.getSettings().getName() + ".", "You will be rewarded with 1 Pizazz Point for every", "100 coins deposited and a percentage of the money you", "create. Keep in mind that you will not be able to take");
+			npc("arena and to help fund magic shops around " + World.getSettings().getName() + ".", "You will be rewarded with 1 Pizazz Point for every", "100 coins deposited and a percentage of the money you", "create. Keep in mind that you will not be able to take");
 			stage++;
 			break;
 		case 74:

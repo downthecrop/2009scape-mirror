@@ -2,7 +2,7 @@ package core.game.content.quest.tutorials.tutorialisland;
 
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.InterfaceConfigContext;
 import core.net.packet.out.InterfaceConfig;
@@ -160,7 +160,7 @@ public final class TutorialSession {
 
 		@Override
 		public boolean pulse() {
-			if (delay < GameWorld.getTicks()) {
+			if (delay < World.getTicks()) {
 				show();
 			}
 			return false;
@@ -170,7 +170,7 @@ public final class TutorialSession {
 		 * Method used to reset the delay.
 		 */
 		public void reset() {
-			delay = GameWorld.getTicks() + 20000;
+			delay = World.getTicks() + 20000;
 		}
 
 		/**

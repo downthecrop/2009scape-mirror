@@ -1,6 +1,6 @@
 package rs09.game.ai.lumbridge;
 
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.tools.RandomFunction;
 
 import java.util.concurrent.Executors;
@@ -13,7 +13,7 @@ public class LumbridgeBotHandler {
     public static void immersiveLumbridge()
     {
         //Generate a few random bots here and there
-        System.out.println("[" + GameWorld.getSettings().getName() + "]: LumbridgeBotHandler: Initialized dead idlers.");
+        System.out.println("[" + World.getSettings().getName() + "]: LumbridgeBotHandler: Initialized dead idlers.");
         generateDeadIdlers();
     }
 

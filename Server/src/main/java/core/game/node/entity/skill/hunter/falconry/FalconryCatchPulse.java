@@ -9,7 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.HintIconManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import rs09.game.world.repository.Repository;
 import core.tools.RandomFunction;
@@ -123,7 +123,7 @@ public final class FalconryCatchPulse extends SkillPulse<NPC> {
 			falcon.setAttribute("falcon:catch", falconCatch);
 			falcon.init();
 			HintIconManager.registerHintIcon(player, falcon);
-			GameWorld.getPulser().submit(new Pulse(100, falcon) {
+			World.getPulser().submit(new Pulse(100, falcon) {
 				@Override
 				public boolean pulse() {
 					if (!falcon.isActive()) {

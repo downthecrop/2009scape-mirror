@@ -19,7 +19,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.content.global.action.PickupHandler;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import rs09.plugin.PluginManager;
 
 /**
@@ -78,7 +78,7 @@ public final class MageArenaPlugin extends OptionHandler {
 				return true;
 			}
 			player.lock(1);
-			GameWorld.getPulser().submit(new Pulse(1, player) {
+			World.getPulser().submit(new Pulse(1, player) {
 				@Override
 				public boolean pulse() {
 					handlePool(player, false, destination, (Scenery) node);
@@ -172,7 +172,7 @@ public final class MageArenaPlugin extends OptionHandler {
 			final Location middle = object.getId() == 2879 ? Location.create(2509, 4687, 0) : Location.create(2542, 4720, 0);
 			player.lock();
 			AgilityHandler.walk(player, -1, start, middle, new Animation(1426), 0.0, null);
-			GameWorld.getPulser().submit(new Pulse(1, player) {
+			World.getPulser().submit(new Pulse(1, player) {
 				int counter;
 
 				@Override
@@ -194,7 +194,7 @@ public final class MageArenaPlugin extends OptionHandler {
 		}
 		player.sendMessage("You step into the pool.");
 		AgilityHandler.walk(player, -1, start, end, new Animation(1426), 0.0, "Your boots get wet.");
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
 
 			@Override
 			public boolean pulse() {

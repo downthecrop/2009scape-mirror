@@ -13,7 +13,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import rs09.game.node.entity.combat.handlers.RangeSwingHandler;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Handles the magic shortbow special attack "Snapshot".
@@ -88,7 +88,7 @@ public final class SnapshotSpecialHandler extends RangeSwingHandler implements P
 				victim.getImpactHandler().handleImpact(entity, hitt, CombatStyle.RANGE, state);
 				return;
 			}
-			GameWorld.getPulser().submit(new Pulse(1, victim) {
+			World.getPulser().submit(new Pulse(1, victim) {
 				@Override
 				public boolean pulse() {
 					victim.getImpactHandler().handleImpact(entity, hitt, CombatStyle.RANGE, state);

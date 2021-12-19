@@ -18,7 +18,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import rs09.game.system.SystemLogger;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -217,7 +217,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 		player.sendMessages("You search the crate...", "Inside you see a dwarf child, tied up!", "You untie the child.");
 		lollk.setInvisible(false);
 		lollk.sendChat("Hooray!");
-		GameWorld.getPulser().submit(new Pulse(150, lollk) {
+		World.getPulser().submit(new Pulse(150, lollk) {
 
 			@Override
 			public boolean pulse() {
@@ -304,7 +304,7 @@ public class DwarfCannonPlugin extends OptionHandler {
 				player.getConfigManager().set(0, 8, true);
 				player.getQuestRepository().getQuest(DwarfCannon.NAME).setStage(player, 60);
 				player.sendMessage("Well done! You've fixed the cannon! Better go and tell Captain Lawgof.");
-				GameWorld.getPulser().submit(new Pulse(5, player) {
+				World.getPulser().submit(new Pulse(5, player) {
 					@Override
 					public boolean pulse() {
 						player.getInterfaceManager().close();

@@ -14,7 +14,7 @@ import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs09.consts.Items
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import rs09.tools.stringtools.colorize
 
 val snowball = Item(Items.SNOWBALL_11951)
@@ -43,13 +43,13 @@ class PeltOptionPlugin : OptionHandler() {
 
         if(player.inventory.remove(snowball) || player.equipment.remove(snowball)){
             player.lock()
-            GameWorld.Pulser.submit(object : Pulse(hitDelay + 1){
+            World.Pulser.submit(object : Pulse(hitDelay + 1){
                 override fun pulse(): Boolean {
                     other?.animator?.graphics(Graphics(1282))
                     return true
                 }
             })
-            GameWorld.Pulser.submit(object : Pulse() {
+            World.Pulser.submit(object : Pulse() {
                 var counter = 0
                 override fun pulse(): Boolean {
                     when (counter++) {

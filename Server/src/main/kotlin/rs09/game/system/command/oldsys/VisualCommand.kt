@@ -24,7 +24,7 @@ import core.net.packet.out.Varbit
 import core.plugin.Initializable
 import core.plugin.Plugin
 import rs09.game.system.command.CommandPlugin
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 
@@ -293,7 +293,7 @@ class VisualCommand : CommandPlugin() {
             "loop_inter" -> {
                 val st = toInteger(args!![1]!!)
                 val en = if (args.size > 2) toInteger(args[2]!!) else 740
-                GameWorld.Pulser.submit(object : Pulse(3, player) {
+                World.Pulser.submit(object : Pulse(3, player) {
                     var id = st
                     override fun pulse(): Boolean {
 //					PacketRepository.send(Interface.class, new InterfaceContext(player, 548, 77, id, false));
@@ -307,7 +307,7 @@ class VisualCommand : CommandPlugin() {
             "loop_iconfig" -> {
                 val st = toInteger(args!![1]!!)
                 val en = if (args.size > 2) toInteger(args[2]!!) else 740
-                GameWorld.Pulser.submit(object : Pulse(3, player) {
+                World.Pulser.submit(object : Pulse(3, player) {
                     var id = 0
                     override fun pulse(): Boolean {
 //					PacketRepository.send(Interface.class, new InterfaceContext(player, 548, 77, id, false));
@@ -321,7 +321,7 @@ class VisualCommand : CommandPlugin() {
             "loop_itemoni" -> {
                 val st = toInteger(args!![1]!!)
                 val en = if (args.size > 2) toInteger(args[2]!!) else 740
-                GameWorld.Pulser.submit(object : Pulse(1, player) {
+                World.Pulser.submit(object : Pulse(1, player) {
                     var id = 0
                     override fun pulse(): Boolean {
 //					PacketRepository.send(Interface.class, new InterfaceContext(player, 548, 77, id, false));
@@ -371,7 +371,7 @@ class VisualCommand : CommandPlugin() {
             "loop_oa" -> {
                 val startId = toInteger(args!![1]!!)
                 val endId = if (args.size > 2) toInteger(args[2]!!) else 11000
-                GameWorld.Pulser.submit(object : Pulse(3, player) {
+                World.Pulser.submit(object : Pulse(3, player) {
                     var id = startId
                     override fun pulse(): Boolean {
                         val `object` = RegionManager.getObject(player!!.location)
@@ -389,7 +389,7 @@ class VisualCommand : CommandPlugin() {
             "loop_anim" -> {
                 val start = toInteger(args!![1]!!)
                 val end = if (args.size > 2) toInteger(args[2]!!) else 11000
-                GameWorld.Pulser.submit(object : Pulse(3, player) {
+                World.Pulser.submit(object : Pulse(3, player) {
                     var id = start
                     override fun pulse(): Boolean {
                         player!!.animate(Animation.create(id))
@@ -402,7 +402,7 @@ class VisualCommand : CommandPlugin() {
             "loop_gfx" -> {
                 val s = toInteger(args!![1]!!)
                 val e = if (args.size > 2) toInteger(args[2]!!) else 11000
-                GameWorld.Pulser.submit(object : Pulse(3, player) {
+                World.Pulser.submit(object : Pulse(3, player) {
                     var id = s
                     override fun pulse(): Boolean {
                         Projectile.create(player!!.location, player.location.transform(0, 3, 0), id, 42, 36, 46, 75, 5, 11).send()

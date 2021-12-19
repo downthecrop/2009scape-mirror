@@ -12,7 +12,7 @@ import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_RC;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -261,7 +261,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
      * @return {@code True} if so.
      */
     private boolean hasSpellImbue() {
-        return player.getAttribute("spell:imbue", 0) > GameWorld.getTicks();
+        return player.getAttribute("spell:imbue", 0) > World.getTicks();
     }
 
     /**

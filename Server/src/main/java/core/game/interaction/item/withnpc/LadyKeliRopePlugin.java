@@ -5,7 +5,7 @@ import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -43,7 +43,7 @@ public final class LadyKeliRopePlugin extends UseWithHandler {
 			if (player.getInventory().remove(ROPE)) {
 				player.getDialogueInterpreter().sendDialogue("You overpower Keli, tie her up, and put her in a cupboard.");
 				quest.setStage(player, 50);
-				player.setAttribute("keli-gone", GameWorld.getTicks() + 350);
+				player.setAttribute("keli-gone", World.getTicks() + 350);
 			}
 		} else {
 			if (quest.getStage(player) == 40) {

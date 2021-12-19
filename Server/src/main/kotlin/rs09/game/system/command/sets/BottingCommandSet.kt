@@ -7,14 +7,14 @@ import rs09.game.ai.general.GeneralBotCreator
 import rs09.game.ai.general.scriptrepository.PlayerScripts
 import rs09.game.ai.general.scriptrepository.Script
 import rs09.game.system.command.Command
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import rs09.tools.stringtools.colorize
 
 @Initializable
 class BottingCommandSet : CommandSet(Command.Privilege.STANDARD) {
     override fun defineCommands() {
         define("scripts"){player, _ ->
-            if(GameWorld.settings?.enabled_botting != true){
+            if(World.settings?.enabled_botting != true){
                 player.sendChat("I just tried to do something silly!")
                 return@define
             }
@@ -39,7 +39,7 @@ class BottingCommandSet : CommandSet(Command.Privilege.STANDARD) {
             player.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
         }
         define("script"){player,args ->
-            if(GameWorld.settings?.enabled_botting != true){
+            if(World.settings?.enabled_botting != true){
                 player.sendChat("I just tried to do something very silly!")
                 return@define
             }

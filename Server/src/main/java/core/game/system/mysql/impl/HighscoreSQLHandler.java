@@ -6,7 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
 import core.game.system.mysql.SQLEntryHandler;
 import core.game.system.mysql.SQLManager;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -32,7 +32,7 @@ public final class HighscoreSQLHandler extends SQLEntryHandler<Player> {
 
 	@Override
 	public void create() throws SQLException {
-		if (entry.getDetails().getRights() == Rights.ADMINISTRATOR || GameWorld.getSettings().isDevMode()) {
+		if (entry.getDetails().getRights() == Rights.ADMINISTRATOR || World.getSettings().isDevMode()) {
 			return;
 		}
 		StringBuilder b = new StringBuilder("INSERT highscores(username,overall_xp,total_level,ironManMode,xp_0,xp_1,xp_2,xp_3,xp_4,xp_5,xp_6,xp_7,xp_8,xp_9,xp_10,xp_11,xp_12,xp_13,xp_14,xp_15,xp_16,xp_17,xp_18,xp_19,xp_20,xp_21,xp_22,xp_23) ");
@@ -50,7 +50,7 @@ public final class HighscoreSQLHandler extends SQLEntryHandler<Player> {
 
 	@Override
 	public void save() throws SQLException {
-		if (entry.getDetails().getRights() == Rights.ADMINISTRATOR || GameWorld.getSettings().isDevMode()) {
+		if (entry.getDetails().getRights() == Rights.ADMINISTRATOR || World.getSettings().isDevMode()) {
 			return;
 		}
 		super.read();

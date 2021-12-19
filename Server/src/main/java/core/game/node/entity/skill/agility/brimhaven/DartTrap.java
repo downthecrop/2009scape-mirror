@@ -9,7 +9,7 @@ import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.MovementHook;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -33,7 +33,7 @@ public final class DartTrap implements MovementHook {
 		e.lock(6);
 		e.addExtension(LogoutTask.class, new LocationLogoutTask(13, start));
 		final Location startProj = l.transform(dir.getStepX() * 5, dir.getStepY() * 5, 0);
-		GameWorld.getPulser().submit(new Pulse(2, e) {
+		World.getPulser().submit(new Pulse(2, e) {
 			boolean failed;
 			int count;
 

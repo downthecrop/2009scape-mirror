@@ -16,7 +16,7 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import rs09.plugin.PluginManager.definePlugin
 
 /**
@@ -127,7 +127,7 @@ class LecternPlugin : OptionHandler() {
     override fun handle(player: Player, node: Node, option: String): Boolean {
         val id = node.asScenery().id
         player.setAttribute("ttb:objectid", id)
-        GameWorld.Pulser.submit(object : Pulse(){
+        World.Pulser.submit(object : Pulse(){
             var counter = 0
             override fun pulse(): Boolean {
                 when(counter++){

@@ -8,7 +8,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Plugin;
@@ -194,7 +194,7 @@ public final class AnaDialogue extends DialoguePlugin {
 					player.getInventory().add(TouristTrap.ANNA_BARREL);
 					close();
 					player.lock(3);
-					GameWorld.getPulser().submit(new Pulse(3, player) {
+					World.getPulser().submit(new Pulse(3, player) {
 						@Override
 						public boolean pulse() {
 							interpreter.sendDialogues(823, null, "<col=08088A>-- You manage to squeeze Ana into the barrel, --", "<col=08088A>-- despite her many complaints. --", "I djont fit in dis bawwel... Wet me out!!");

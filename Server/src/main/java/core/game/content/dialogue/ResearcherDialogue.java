@@ -3,7 +3,7 @@ package core.game.content.dialogue;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Represents the dialogue plugin for the new Researcher NPC that sells unobtainable items.
@@ -51,7 +51,7 @@ public final class ResearcherDialogue extends DialoguePlugin {
 	    stage = 1;
 	    break;
 	case 1:
-	    npc("I am indeed. I am a traveling researcher studying the", "lands of "+GameWorld.getSettings().getName()+".");
+	    npc("I am indeed. I am a traveling researcher studying the", "lands of "+ World.getSettings().getName()+".");
 	    stage = 2;
 	    break;
 	case 2:

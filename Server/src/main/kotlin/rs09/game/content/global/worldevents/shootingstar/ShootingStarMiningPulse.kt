@@ -10,7 +10,7 @@ import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.item.Item
 import core.tools.RandomFunction
 import org.rs09.consts.Items
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
 
@@ -81,7 +81,7 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
         if (!checkReward()) {
             return false
         }
-        if (GameWorld.settings?.isDevMode == true) {
+        if (World.settings?.isDevMode == true) {
             star.dustLeft = 1
         }
         star.decDust()

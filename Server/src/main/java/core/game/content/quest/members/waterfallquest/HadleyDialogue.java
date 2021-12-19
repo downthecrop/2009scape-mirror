@@ -4,7 +4,7 @@ import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Handles Almera's Dialogue for the Waterfall Quest.
@@ -38,7 +38,7 @@ public class HadleyDialogue extends DialoguePlugin {
 				interpreter.sendDialogues(302, FacialExpression.HALF_GUILTY, "I hope you're enjoying your stay, there should be lots", "of useful information in that book: places to go, people to", "see.");
 				stage = 100;
 			} else {
-				interpreter.sendDialogues(302, FacialExpression.HALF_GUILTY, "Are you on holiday? If so you've come to the right", "place. I'm Hadley the tourist guide, anything you need", "to know just ask me. We have some of the most unspoilt", "wildlife and scenery in " + GameWorld.getSettings().getName() + ".");
+				interpreter.sendDialogues(302, FacialExpression.HALF_GUILTY, "Are you on holiday? If so you've come to the right", "place. I'm Hadley the tourist guide, anything you need", "to know just ask me. We have some of the most unspoilt", "wildlife and scenery in " + World.getSettings().getName() + ".");
 				stage = 1;
 			}
 			break;

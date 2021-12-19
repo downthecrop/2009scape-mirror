@@ -2,7 +2,7 @@ package core.game.node.entity.skill.hunter;
 
 import core.game.node.entity.skill.hunter.bnet.BNetTypes;
 import core.game.node.entity.skill.hunter.bnet.ImplingNode;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.callback.CallBack;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
@@ -139,7 +139,7 @@ public final class ImpetuousImpulses implements CallBack {
 			npc.setAttribute("puroPuro", true);
 		} else {
 			npc = new ImplingNPC(impling.getNpcs()[0], LOCATIONS[RANDOM.nextInt(LOCATIONS.length)], impling);
-			npc.setAttribute("nextTeleport", GameWorld.getTicks() + 600);
+			npc.setAttribute("nextTeleport", World.getTicks() + 600);
 		}
 		npc.init();
 	}

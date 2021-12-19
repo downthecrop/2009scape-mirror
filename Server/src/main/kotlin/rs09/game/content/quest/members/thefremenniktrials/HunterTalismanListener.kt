@@ -6,7 +6,7 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
-import rs09.game.world.GameWorld.Pulser
+import rs09.game.world.World.Pulser
 import kotlin.math.abs
 import kotlin.math.atan2
 

@@ -12,7 +12,7 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.rs09.consts.Items
 import rs09.game.content.activity.gnomecooking.*
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import rs09.tools.stringtools.colorize
 import java.util.concurrent.TimeUnit
 
@@ -161,7 +161,7 @@ class AluftGianneSnrDialogue(player: Player? = null) : DialoguePlugin(player) {
                 player.setAttribute("$GC_BASE_ATTRIBUTE:$GC_JOB_ORDINAL", job.ordinal)
                 player.setAttribute("$GC_BASE_ATTRIBUTE:$GC_NEEDED_ITEM", item)
                 player.dialogueInterpreter.sendDialogue("I need to deliver a ${item.name.toLowerCase()} to ${NPC(job.npc_id).name.toLowerCase()},", "who is ${job.tip}")
-                GameWorld.Pulser.submit(GnomeRestaurantPulse(player, if (level == GnomeTipper.LEVEL.HARD) 11L else 6L))
+                World.Pulser.submit(GnomeRestaurantPulse(player, if (level == GnomeTipper.LEVEL.HARD) 11L else 6L))
             }
         }
     }

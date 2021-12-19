@@ -3,7 +3,7 @@ package core.game.content.quest.miniquest.barcrawl;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
 import core.plugin.Initializable;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.dialogue.DialoguePlugin;
 
@@ -75,7 +75,7 @@ public final class BarcrawlDialogue extends DialoguePlugin {
                 player.getInventory().remove(type.getCoins());
                 player.getBarcrawlManager().complete(type.ordinal());
                 player.lock(6);
-                GameWorld.getPulser().submit(new Pulse(6, player) {
+                World.getPulser().submit(new Pulse(6, player) {
                     @Override
                     public boolean pulse() {
                         type.message(player, false);

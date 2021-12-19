@@ -13,7 +13,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
 import kotlin.Unit;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -283,7 +283,7 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 		public void travel(final RugDestination current, final Player player) {
 			player.lock();
 			player.getConfigManager().set(499, 0);
-			player.getImpactHandler().setDisabledTicks(GameWorld.getTicks() + 200);
+			player.getImpactHandler().setDisabledTicks(World.getTicks() + 200);
 			player.getInterfaceManager().hideTabs(0,1,2,3,4,5,6,7,8,9,10,11,12,13);
 			player.getEquipment().replace(new Item(Items.MAGIC_CARPET_5614),EquipmentContainer.SLOT_WEAPON);
 			player.getPacketDispatch().sendInterfaceConfig(548,69,true);
@@ -293,7 +293,7 @@ public final class RugMerchantDialogue extends DialoguePlugin {
 				return Unit.INSTANCE;
 			});
 
-			GameWorld.getPulser().submit(new Pulse(1, player) {
+			World.getPulser().submit(new Pulse(1, player) {
 				int count;
 				int index;
 				Location[] locs = getLocData();

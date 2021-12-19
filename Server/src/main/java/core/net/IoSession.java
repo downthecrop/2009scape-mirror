@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.ClientInfo;
 import core.game.node.entity.player.info.login.Response;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.net.producer.HSEventProducer;
 import core.net.producer.LoginEventProducer;
 
@@ -215,7 +215,7 @@ public class IoSession {
 			channel.socket().close();
 			if (object instanceof Player) {
 				final Player p = getPlayer();
-				GameWorld.getPulser().submit(new Pulse(0) {
+				World.getPulser().submit(new Pulse(0) {
 					@Override
 					public boolean pulse() {
 						if (p.isActive() && !p.getSession().active) {

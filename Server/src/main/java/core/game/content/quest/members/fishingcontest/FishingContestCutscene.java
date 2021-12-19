@@ -5,7 +5,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
@@ -66,9 +66,9 @@ public class FishingContestCutscene extends CutscenePlugin {
         if(player.getAttribute("fishing_contest:garlic",false)){
             NPC stranger = npcs.get(2);
             stranger.sendChat("What is this smell??");
-            GameWorld.getPulser().submit(new SwitchPulse());
+            World.getPulser().submit(new SwitchPulse());
         } else {
-            GameWorld.getPulser().submit(new FishingPulse());
+            World.getPulser().submit(new FishingPulse());
         }
         player.lock();
     }
@@ -93,10 +93,10 @@ public class FishingContestCutscene extends CutscenePlugin {
                         player.setAttribute("/save:fishing_contest:won",true);
                         player.getWalkingQueue().setRunDisabled(false);
                     }
-                    GameWorld.getPulser().submit(getEndPulse());
+                    World.getPulser().submit(getEndPulse());
                     break;
                 case 15:
-                    GameWorld.getPulser().submit(new Pulse(){
+                    World.getPulser().submit(new Pulse(){
                         int counter = 0;
                         @Override
                         public boolean pulse() {
@@ -161,7 +161,7 @@ public class FishingContestCutscene extends CutscenePlugin {
                             return true;
                         }
                     }, "movement");
-                    GameWorld.getPulser().submit(new FishingPulse());
+                    World.getPulser().submit(new FishingPulse());
                     return true;
             }
             return false;

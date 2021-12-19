@@ -9,7 +9,7 @@ import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -43,7 +43,7 @@ public final class WallShortcut extends OptionHandler {
         final Scenery o = (Scenery) node;
         if (o.getId() == 6620) {
             ForceMovement.run(player, Location.create(3320, 2796, 0), o.getLocation(), CLIMB_DOWN);
-            GameWorld.getPulser().submit(new Pulse(1, player) {
+            World.getPulser().submit(new Pulse(1, player) {
                 int count;
 
                 @Override

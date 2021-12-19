@@ -1,7 +1,7 @@
 package core.game.content.activity.pestcontrol;
 
 import core.cache.def.impl.SceneryDefinition;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.content.activity.ActivityManager;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -102,8 +102,8 @@ public final class PCObjectHandler extends OptionHandler {
 			}
 			switch (object.getId()){
 				case 14315: // Novice
-					if (!GameWorld.getPCnBotsSpawned() && !player.isArtificial()) { //First person to join gets bots to play with
-						GameWorld.setPCnBotsSpawned(true);
+					if (!World.getPCnBotsSpawned() && !player.isArtificial()) { //First person to join gets bots to play with
+						World.setPCnBotsSpawned(true);
 						for (pestBotsAmount = 0; pestBotsAmount <= 35; pestBotsAmount++) {
 							PvMBotsBuilder.createPestControlTestBot(new Location(2657, 2640));
 						}
@@ -115,8 +115,8 @@ public final class PCObjectHandler extends OptionHandler {
 					startActivity(player, "pest control novice", Location.create(2661, 2639, 0));
 					return true;
 				case 25631: // Intermediate
-					if (!GameWorld.getPCiBotsSpawned() && !player.isArtificial()) { //First person to join gets bots to play with
-						GameWorld.setPCiBotsSpawned(true);
+					if (!World.getPCiBotsSpawned() && !player.isArtificial()) { //First person to join gets bots to play with
+						World.setPCiBotsSpawned(true);
 						for (pestBots2Amount = 0; pestBots2Amount <= 50; pestBots2Amount++ ) {
 							PvMBotsBuilder.createPestControlTestBot2(new Location(2644, 2644));
 						}

@@ -2,7 +2,7 @@ package rs09.game.content.activity.fishingtrawler
 
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import core.game.world.map.Location
 import core.game.world.map.build.DynamicRegion
 import core.game.world.map.zone.ZoneRestriction
@@ -17,11 +17,11 @@ import rs09.tools.stringtools.colorize
  * Handles the fishing trawler "waiting room"
  * @author Ceikry
  */
-private val WAIT_TIME = if(GameWorld.settings?.isDevMode == true) 10 else 203
+private val WAIT_TIME = if(World.settings?.isDevMode == true) 10 else 203
 private val waitingPlayers = ArrayList<Player>()
 private val sessions = ArrayList<FishingTrawlerSession>()
 private var activity: FishingTrawlerActivity? = null
-private var nextStart = GameWorld.ticks + WAIT_TIME
+private var nextStart = World.ticks + WAIT_TIME
 @Initializable
 class FishingTrawlerActivity : ActivityPlugin("fishing trawler",false,false,true,ZoneRestriction.CANNON,ZoneRestriction.FIRES,ZoneRestriction.FOLLOWERS,ZoneRestriction.RANDOM_EVENTS) {
 
@@ -29,20 +29,20 @@ class FishingTrawlerActivity : ActivityPlugin("fishing trawler",false,false,true
         activity = this
     }
     override fun configure() {
-        GameWorld.Pulser.submit(
+        World.Pulser.submit(
         object  : Pulse(1){
             override fun pulse(): Boolean {
-                if((nextStart - GameWorld.ticks) % 100 == 0){
+                if((nextStart - World.ticks) % 100 == 0){
                     for(player in waitingPlayers) {
-                        player.sendMessage (colorize("%R${ticksToSeconds(nextStart - GameWorld.ticks) / 60} minutes until next game."))
+                        player.sendMessage (colorize("%R${ticksToSeconds(nextStart - World.ticks) / 60} minutes until next game."))
                     }
                 }
-                if(GameWorld.ticks >= nextStart && waitingPlayers.isNotEmpty()){
+                if(World.ticks >= nextStart && waitingPlayers.isNotEmpty()){
                     val session = FishingTrawlerSession(DynamicRegion.create(8011), activity!!)
                     session.start(waitingPlayers)
                     sessions.add(session)
                     waitingPlayers.clear()
-                    nextStart = GameWorld.ticks + WAIT_TIME
+                    nextStart = World.ticks + WAIT_TIME
                 }
                 sessions.removeIf { session ->
                     if(!session.isActive && session.inactiveTicks >= 100){
@@ -68,7 +68,7 @@ class FishingTrawlerActivity : ActivityPlugin("fishing trawler",false,false,true
 
     fun addPlayer(player: Player){
         if(waitingPlayers.isEmpty()) {
-            nextStart = GameWorld.ticks + WAIT_TIME
+            nextStart = World.ticks + WAIT_TIME
             player.dialogueInterpreter.sendDialogue("Trawler will leave in 2 minutes.","If you have a team get them on board now!")
         }
         waitingPlayers.add(player)

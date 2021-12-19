@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
@@ -69,7 +69,7 @@ public final class DreamSpell extends MagicSpell {
 		}
 		p.animate(START);
 		p.lock();
-		GameWorld.getPulser().submit(new Pulse(4, p) {
+		World.getPulser().submit(new Pulse(4, p) {
 			@Override
 			public boolean pulse() {
 				p.animate(DREAMING);

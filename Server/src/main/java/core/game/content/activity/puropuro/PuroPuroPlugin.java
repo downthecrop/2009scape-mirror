@@ -20,7 +20,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -97,7 +97,7 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 			spawnWheat();
 			PULSE.restart();
 			PULSE.start();
-			GameWorld.getPulser().submit(PULSE);
+			World.getPulser().submit(PULSE);
 		}
 		return super.enter(e);
 	}
@@ -161,7 +161,7 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 			player.sendMessage("You use your strength to push through the wheat. It's hard work though.");
 		}
 		player.setAttribute("cantMove", true);
-		GameWorld.getPulser().submit(new Pulse(1) {
+		World.getPulser().submit(new Pulse(1) {
 			@Override
 			public boolean pulse() {
 				ForceMovement.run(player, player.getLocation(), dest, Animation.create(6594), Animation.create(6594), Direction.getLogicalDirection(player.getLocation(), object.getLocation()), 3, 3);
@@ -427,7 +427,7 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 		 * Whilts the wheat.
 		 */
 		public void whilt() {
-			busyTicks = GameWorld.getTicks() + 5;
+			busyTicks = World.getTicks() + 5;
 			for (Scenery object : objects) {
 				if (object == null) {
 					continue;
@@ -455,7 +455,7 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 		 * Sets the next whilt.
 		 */
 		public void setNextWhilt() {
-			this.nextWhilt = GameWorld.getTicks() + RandomFunction.random(40, 300);
+			this.nextWhilt = World.getTicks() + RandomFunction.random(40, 300);
 		}
 
 		/**
@@ -463,7 +463,7 @@ public final class PuroPuroPlugin extends MapZone implements Plugin<Object> {
 		 * @return {@code True} if so.
 		 */
 		public boolean canWhilt() {
-			return GameWorld.getTicks() > nextWhilt && GameWorld.getTicks() > busyTicks;
+			return World.getTicks() > nextWhilt && World.getTicks() > busyTicks;
 		}
 
 		/**

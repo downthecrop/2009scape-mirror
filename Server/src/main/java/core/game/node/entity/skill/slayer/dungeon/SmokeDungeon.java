@@ -9,7 +9,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
@@ -54,7 +54,7 @@ public final class SmokeDungeon extends MapZone implements Plugin<Object> {
 				if (player.getInterfaceManager().isOpened() || player.getInterfaceManager().hasChatbox() || player.getLocks().isMovementLocked()) {
 					continue;
 				}
-				if (SmokeDungeon.getDelay(player) < GameWorld.getTicks() && !isProtected(player)) {
+				if (SmokeDungeon.getDelay(player) < World.getTicks() && !isProtected(player)) {
 					effect(player);
 				}
 			}
@@ -109,7 +109,7 @@ public final class SmokeDungeon extends MapZone implements Plugin<Object> {
 			if (!pulse.isRunning()) {
 				pulse.restart();
 				pulse.start();
-				GameWorld.getPulser().submit(pulse);
+				World.getPulser().submit(pulse);
 			}
 			p.getInterfaceManager().openOverlay(new Component(118));
 		}
@@ -146,7 +146,7 @@ public final class SmokeDungeon extends MapZone implements Plugin<Object> {
 	 * @param player the player.
 	 */
 	private static void setDelay(Player player) {
-		player.setAttribute("smoke-delay", GameWorld.getTicks() + DELAY);
+		player.setAttribute("smoke-delay", World.getTicks() + DELAY);
 	}
 
 	/**

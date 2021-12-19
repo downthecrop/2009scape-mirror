@@ -3,7 +3,7 @@ package core.game.content.activity.magearena;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 
 /**
@@ -56,7 +56,7 @@ public final class KolodionSession {
 			player.getAnimator().reset();
 			return;
 		}
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
 			int count;
 
 			@Override

@@ -13,7 +13,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -142,7 +142,7 @@ public final class RestlessGhostPlugin extends OptionHandler {
 			return;
 		}
 		GHOST.setInvisible(false);
-		GameWorld.getPulser().submit(new Pulse(100, GHOST) {
+		World.getPulser().submit(new Pulse(100, GHOST) {
 			@Override
 			public boolean pulse() {
 				GHOST.setInvisible(true);
@@ -253,7 +253,7 @@ public final class RestlessGhostPlugin extends OptionHandler {
 		@Override
 		public boolean isHidden(final Player player) {
 			final Player pl = getAttribute("player", null);
-			if (this.getRespawnTick() > GameWorld.getTicks()) {
+			if (this.getRespawnTick() > World.getTicks()) {
 				return true;
 			}
 			return player.getQuestRepository().isComplete(RestlessGhost.NAME) || (pl != null && player != pl);

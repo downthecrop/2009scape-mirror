@@ -2,7 +2,7 @@ package core.game.node.entity.skill.slayer;
 
 import org.json.simple.JSONObject;
 import rs09.ServerStore;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
 import core.game.content.global.Skillcape;
@@ -516,7 +516,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                 }
                 break;
             case 844:
-                if (GameWorld.getSettings().getAllow_slayer_reroll()) {
+                if (World.getSettings().getAllow_slayer_reroll()) {
                     options("Got any tips for me?", "Okay, great!", "I'd like to re-roll that task.");
                 } else {
                     options("Got any tips for me?", "Okay, great!");

@@ -6,7 +6,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -50,7 +50,7 @@ public final class CanafisWereWolfPlugin extends OptionHandler {
 			newN.setRespawn(false);
 			newN.setAttribute("original", n.getId());
 			newN.setAttribute("loc", n.getProperties().getSpawnLocation());
-			GameWorld.getPulser().submit(new Pulse(2) {
+			World.getPulser().submit(new Pulse(2) {
 				@Override
 				public boolean pulse() {
 					newN.getProperties().getCombatPulse().attack(player);

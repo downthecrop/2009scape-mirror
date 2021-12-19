@@ -10,7 +10,7 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs09.consts.Items
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 
 @Initializable
 class GnomeBowlCooker : UseWithHandler(Items.RAW_GNOMEBOWL_2178,9558,9559,9561,9563) {
@@ -38,7 +38,7 @@ class GnomeBowlCooker : UseWithHandler(Items.RAW_GNOMEBOWL_2178,9558,9559,9561,9
     }
 
     fun cook(player: Player, raw: Item, product: Item){
-        GameWorld.Pulser.submit(object : Pulse(){
+        World.Pulser.submit(object : Pulse(){
             var counter = 0
             override fun pulse(): Boolean {
                 when(counter++){

@@ -9,7 +9,7 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
@@ -143,7 +143,7 @@ public final class LumbridgeDungeon extends MapZone implements Plugin<Object> {
 			if (!isProtected) {
 				animate(NPCDefinition.forId(7823).getCombatAnimation(3));
 				player.animate(Animation.create(1810));
-				GameWorld.getPulser().submit(new Pulse(8, player) {
+				World.getPulser().submit(new Pulse(8, player) {
 					@Override
 					public boolean pulse() {
 						getAnimator().reset();

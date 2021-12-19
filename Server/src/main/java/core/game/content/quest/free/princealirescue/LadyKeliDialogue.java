@@ -8,7 +8,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.RegionManager;
 
 /**
@@ -90,13 +90,13 @@ public final class LadyKeliDialogue extends DialoguePlugin {
 				stage = 1;
 				break;
 			case 1:
-				interpreter.sendOptions("Select an Option", "Heard of you? You are famous in " + GameWorld.getSettings().getName() + "!", "I have heard a little, but I think Katrine is tougher.", "I have heard rumours that you kill people.", "No I have never really heard of you.");
+				interpreter.sendOptions("Select an Option", "Heard of you? You are famous in " + World.getSettings().getName() + "!", "I have heard a little, but I think Katrine is tougher.", "I have heard rumours that you kill people.", "No I have never really heard of you.");
 				stage = 2;
 				break;
 			case 2:
 				switch (buttonId) {
 				case 1:
-					interpreter.sendDialogues(player, null, "The great Lady Keli, of course I have heard of you.", "You are famous in " + GameWorld.getSettings().getName() + "!");
+					interpreter.sendDialogues(player, null, "The great Lady Keli, of course I have heard of you.", "You are famous in " + World.getSettings().getName() + "!");
 					stage = 10;
 					break;
 				case 2:

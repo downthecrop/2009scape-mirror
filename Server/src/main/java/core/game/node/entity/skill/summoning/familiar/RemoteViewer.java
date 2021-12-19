@@ -2,7 +2,7 @@ package core.game.node.entity.skill.summoning.familiar;
 
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -80,7 +80,7 @@ public final class RemoteViewer {
 		player.lock();
 		familiar.animate(animation);
 		player.getPacketDispatch().sendMessage("You send the " + familiar.getName().toLowerCase() + " to fly " + (type == ViewType.STRAIGHT_UP ? "directly up" : "to the " + type.name().toLowerCase()) + "...");
-		GameWorld.getPulser().submit(new Pulse(5) {
+		World.getPulser().submit(new Pulse(5) {
 			@Override
 			public boolean pulse() {
 				view();
@@ -97,7 +97,7 @@ public final class RemoteViewer {
 			return;
 		}
 		sendCamera(type.getXOffset(), type.getYOffset(), type.getXRot(), type.getYRot());
-		GameWorld.getPulser().submit(new Pulse(13) {
+		World.getPulser().submit(new Pulse(13) {
 			@Override
 			public boolean pulse() {
 				reset();

@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
@@ -677,7 +677,7 @@ public final class RJCutscenePlugin extends CutscenePlugin {
 				rot = new CameraContext(player, CameraType.ROTATION, x - 1, y - 2, height, other, speed);
 				PacketRepository.send(CameraViewPacket.class, pos);
 				PacketRepository.send(CameraViewPacket.class, rot);
-				GameWorld.getPulser().submit(new Pulse(5) {
+				World.getPulser().submit(new Pulse(5) {
 					@Override
 					public boolean pulse() {
 						int x = player.getLocation().getX();
@@ -715,7 +715,7 @@ public final class RJCutscenePlugin extends CutscenePlugin {
 				close();
 				npc.getWalkingQueue().reset();
 				npc.getWalkingQueue().addPath(cutscene.getBase().transform(19, 35, 0).getX(), cutscene.getBase().transform(19, 35, 0).getY());
-				GameWorld.getPulser().submit(new Pulse(12) {
+				World.getPulser().submit(new Pulse(12) {
 					@Override
 					public boolean pulse() {
 						interpreter.sendDialogues(npc, null, "Hey...Juliet...");

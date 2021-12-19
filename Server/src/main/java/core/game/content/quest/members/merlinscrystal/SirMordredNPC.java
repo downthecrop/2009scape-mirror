@@ -6,7 +6,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Graphics;
 
@@ -61,7 +61,7 @@ public class SirMordredNPC extends AbstractNPC {
 				npc.graphics(Graphics.create(86));
 				npc.moveStep();
 				npc.face(p);
-				GameWorld.getPulser().submit(new Pulse(100, p, npc) {
+				World.getPulser().submit(new Pulse(100, p, npc) {
 
 					@Override
 					public boolean pulse() {

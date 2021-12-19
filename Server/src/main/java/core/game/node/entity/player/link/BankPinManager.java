@@ -1,11 +1,10 @@
 package core.game.node.entity.player.link;
 
-import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ChildPositionContext;
 import core.net.packet.context.StringContext;
@@ -14,7 +13,6 @@ import core.net.packet.out.StringPacket;
 import core.tools.RandomFunction;
 import org.json.simple.JSONObject;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -309,7 +307,7 @@ public class BankPinManager {
 			return;
 		}
 		tempPin = "";
-		player.getPacketDispatch().sendString("Bank of " + GameWorld.getSettings().getName(), 13, 31);
+		player.getPacketDispatch().sendString("Bank of " + World.getSettings().getName(), 13, 31);
 		if (!hasPin()) {
 			player.getPacketDispatch().sendInterfaceConfig(13, 29, true);
 			player.getPacketDispatch().sendString("Please choose a new FOUR DIGIT PIN using the buttons below.", 13, 28);
@@ -452,7 +450,7 @@ public class BankPinManager {
 	 */
 	private void setPin() {
 		status = PinStatus.PENDING;
-		pendingDelay = System.currentTimeMillis() + (GameWorld.getSettings().isDevMode() ? TimeUnit.SECONDS.toMillis(30) : TimeUnit.DAYS.toMillis(this.getRecoveryDelay()));
+		pendingDelay = System.currentTimeMillis() + (World.getSettings().isDevMode() ? TimeUnit.SECONDS.toMillis(30) : TimeUnit.DAYS.toMillis(this.getRecoveryDelay()));
 		pin = new String(Arrays.copyOf(tempPin.toCharArray(), 4));
 	}
 
@@ -524,7 +522,7 @@ public class BankPinManager {
 		if (pendingDelay < System.currentTimeMillis()) {
 			return 0;
 		}
-		return (int) (pendingDelay - System.currentTimeMillis()) / (GameWorld.getSettings().isDevMode() ? 1000 : 86400000);
+		return (int) (pendingDelay - System.currentTimeMillis()) / (World.getSettings().isDevMode() ? 1000 : 86400000);
 	}
 
 	/**

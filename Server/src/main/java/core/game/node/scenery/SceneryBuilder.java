@@ -4,7 +4,7 @@ import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import rs09.game.system.SystemLogger;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.LandscapeParser;
@@ -43,7 +43,7 @@ public final class SceneryBuilder {
 		remove = remove.getWrapper();
 		Scenery current = LandscapeParser.removeScenery(remove);
 		if (current == null) {
-			if (GameWorld.getSettings().isDevMode()) {
+			if (World.getSettings().isDevMode()) {
 				SystemLogger.logErr("Object could not be replaced - object to remove is invalid.");
 			}
 			return false;
@@ -81,7 +81,7 @@ public final class SceneryBuilder {
 		RegionManager.getRegionChunk(remove.getLocation()).flag(new ObjectUpdateFlag(remove, true));
 		RegionManager.getRegionChunk(construct.getLocation()).flag(new ObjectUpdateFlag(construct, false));
 		if (restoreTicks > 0) {
-			GameWorld.getPulser().submit(new Pulse(restoreTicks) {
+			World.getPulser().submit(new Pulse(restoreTicks) {
 				@Override
 				public boolean pulse() {
 					return replaceClientSide(construct, remove, -1);
@@ -118,7 +118,7 @@ public final class SceneryBuilder {
 		remove = remove.getWrapper();
 		Scenery current = LandscapeParser.removeScenery(remove);
 		if (current == null) {
-			if (GameWorld.getSettings().isDevMode()) {
+			if (World.getSettings().isDevMode()) {
 				SystemLogger.logErr("Object could not be replaced - object to remove is invalid.");
 			}
 			return false;
@@ -148,7 +148,7 @@ public final class SceneryBuilder {
 				return true;
 			}
 		});
-		GameWorld.getPulser().submit(constructed.getRestorePulse());
+		World.getPulser().submit(constructed.getRestorePulse());
 		return true;
 	}
 
@@ -176,7 +176,7 @@ public final class SceneryBuilder {
 		LandscapeParser.addScenery(constructed);
 		update(constructed);
 		if (ticks > -1) {
-			GameWorld.getPulser().submit(new Pulse(ticks, object) {
+			World.getPulser().submit(new Pulse(ticks, object) {
 				@Override
 				public boolean pulse() {
 					remove(constructed);
@@ -243,7 +243,7 @@ public final class SceneryBuilder {
 	 */
 	public static boolean remove(final Scenery object, int respawnTicks) {
 		if (remove(object)) {
-			GameWorld.getPulser().submit(new Pulse(respawnTicks) {
+			World.getPulser().submit(new Pulse(respawnTicks) {
 
 				@Override
 				public boolean pulse() {

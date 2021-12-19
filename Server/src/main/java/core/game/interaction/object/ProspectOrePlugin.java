@@ -11,7 +11,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.plugin.Plugin;
 
 /**
@@ -26,7 +26,7 @@ public class ProspectOrePlugin extends OptionHandler {
 		final Scenery object = (Scenery) node;
 		int tut_stage = TutorialSession.getExtension(player).getStage();
 		if (tut_stage == 31 && object.getId() == 3043) {
-			GameWorld.getPulser().submit(new Pulse(1) {
+			World.getPulser().submit(new Pulse(1) {
 				int count = 0;
 
 				@Override
@@ -43,7 +43,7 @@ public class ProspectOrePlugin extends OptionHandler {
 			});
 		}
 		if (tut_stage == 33 && object.getId() == 3042) {
-			GameWorld.getPulser().submit(new Pulse(1) {
+			World.getPulser().submit(new Pulse(1) {
 				int count = 0;
 
 				@Override
