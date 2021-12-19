@@ -70,8 +70,9 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
             stop()
             return false
         }
-        if (player.skills.getLevel(Skills.FISHING) < fish!!.level) {
-            player.dialogueInterpreter.sendDialogue("You need a fishing level of " + fish!!.level + " to catch " + (if (fish == Fish.SHRIMP || fish == Fish.ANCHOVIE) "" else "a") + " " + fish!!.item.name.toLowerCase() + ".".trim { it <= ' ' })
+        if (player.skills.getLevel(Skills.FISHING) < option!!.level) {
+            val f = option!!.fish[option!!.fish.size - 1]
+            player.dialogueInterpreter.sendDialogue("You need a fishing level of " + f.level + " to catch " + (if (f == Fish.SHRIMP || f == Fish.ANCHOVIE) "" else "a") + " " + f.item.name.toLowerCase() + ".".trim { it <= ' ' })
             stop()
             return false
         }
@@ -135,7 +136,6 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
                     stop()
                     return true
                 }
-                fish = option!!.getRandomFish(player)
             }
         }
         return player.inventory.freeSlots() == 0
@@ -415,10 +415,8 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
         if (delay == 1) {
             return false
         }
-        val level = 1 + player.skills.getLevel(Skills.FISHING) + player.familiarManager.getBoost(Skills.FISHING)
-        val hostRatio = Math.random() * fish!!.level
-        val clientRatio = Math.random() * (level * 1.25 - fish!!.level)
-        return hostRatio < clientRatio
+        fish = option!!.rollFish(player)
+        return fish != null
     }
 
     companion object {
@@ -441,8 +439,5 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
      * @param option The fishing option.
      */
     init {
-        if (option != null) {
-            fish = option.getRandomFish(player)
-        }
     }
 }
