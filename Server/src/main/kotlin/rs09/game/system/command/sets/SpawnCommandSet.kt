@@ -70,5 +70,27 @@ class SpawnCommandSet : CommandSet(Command.Privilege.ADMIN){
             SceneryBuilder.add(`object`)
             SystemLogger.logInfo("object = $`object`")
         }
+
+        define("objectgrid") { player, args ->
+            if(args!!.size != 5) {
+                reject(player, "Usage: objectgrid beginId endId type rotation")
+                return@define
+            }
+            val beginId = args[1].toIntOrNull() ?: return@define
+            val endId = args[2].toIntOrNull() ?: return@define
+            val type = args[3].toIntOrNull() ?: return@define
+            val rotation = args[4].toIntOrNull() ?: return@define
+            for(i in 0..10) {
+                SceneryBuilder.add(Scenery(29447 + i, player.location.transform(i, -1, 0)))
+            }
+            for(i in beginId..endId) {
+                val j = i - beginId
+                val scenery = Scenery(i, player.location.transform(j % 10, j / 10, 0), type, rotation)
+                SceneryBuilder.add(scenery)
+                if(j % 10 == 0) {
+                    SceneryBuilder.add(Scenery(29447 + (j / 10) % 10, player.location.transform(-1, j/10, 0)))
+                }
+            }
+        }
     }
 }

@@ -49,6 +49,10 @@ public final class PacketDispatch {
 		PacketRepository.send(Config.class, new ConfigContext(player, varp.getIndex(), varp.getValue()));
 	}
 
+    public void sendVarcUpdate(short index, int value) {
+        PacketRepository.send(VarcUpdate.class, new VarcUpdateContext(player, index, value));
+    }
+
 	/**
 	 * Send a game message.
 	 * @param message The game message.
