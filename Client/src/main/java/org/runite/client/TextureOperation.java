@@ -130,7 +130,7 @@ public abstract class TextureOperation extends Linkable {
                 return null;
             } else {
 
-                Class3_Sub28_Sub17_Sub1 var2 = new Class3_Sub28_Sub17_Sub1(var0, Class164.anIntArray2048, Unsorted.anIntArray2591, Class140_Sub7.anIntArray2931, Unsorted.anIntArray3076, Class163_Sub1.aByteArrayArray2987);
+                Class3_Sub28_Sub17_Sub1 var2 = new Class3_Sub28_Sub17_Sub1(var0, Class164.anIntArray2048, Unsorted.anIntArray2591, GroundItem.anIntArray2931, Unsorted.anIntArray3076, Class163_Sub1.aByteArrayArray2987);
                 Class39.method1035((byte) 126);
                 return var2;
             }

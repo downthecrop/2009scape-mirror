@@ -2,7 +2,7 @@ package org.runite.client;
 
 import java.util.Objects;
 
-public final class Player extends Class140_Sub4 {
+public final class Player extends Entity {
 
     static int[] anIntArray3951 = new int[4];
     static int rights = 0;
@@ -119,7 +119,7 @@ public final class Player extends Class140_Sub4 {
             this.setSize(1 + (var3 >> 3 & 7), 2);
             this.anInt3958 = 3 & var3 >> 6;
             this.xAxis += (-var7 + this.getSize()) * 64;
-            this.zAxis += 64 * (this.getSize() + -var7);
+            this.yAxis += 64 * (this.getSize() + -var7);
             this.skullIcon = buffer.readSignedByte();
             this.headIcon = buffer.readSignedByte();
             this.teamId = 0;
@@ -212,8 +212,8 @@ public final class Player extends Class140_Sub4 {
             var14 = this.class52.pnpcId;
             this.class52.method1161(colors, npcId, var4 == 1, look, this.renderAnimationId);
             if (npcId != var14) {
-                this.xAxis = 128 * this.anIntArray2767[0] + this.getSize() * 64;
-                this.zAxis = 128 * this.anIntArray2755[0] - -(64 * this.getSize());
+                this.xAxis = 128 * this.xOffsets2767[0] + this.getSize() * 64;
+                this.yAxis = 128 * this.yOffsets2755[0] - -(64 * this.getSize());
             }
         } catch (RuntimeException var18) {
             throw ClientErrorException.clientError(var18, "e.P(" + var1 + ',' + (buffer != null ? "{...}" : "null") + ')');
@@ -247,7 +247,7 @@ public final class Player extends Class140_Sub4 {
                     this.anInt2820 = var15.method1871();
                     Model var23;
                     if (Class140_Sub6.aBoolean2910 && (-1 == this.class52.pnpcId || NPCDefinition.getNPCDefinition(this.class52.pnpcId).aBoolean1249)) {
-                        var23 = Class140_Sub3.method1957(160, this.aBoolean2810, var14 == null ? var13 : var14, this.xAxis, 0, this.zAxis, 0, 1, var15, var1, null != var14 ? this.anInt2813 : this.anInt2832, this.anInt2831, 240);
+                        var23 = Class140_Sub3.method1957(160, this.aBoolean2810, var14 == null ? var13 : var14, this.xAxis, 0, this.yAxis, 0, 1, var15, var1, null != var14 ? this.anInt2813 : this.anInt2832, this.anInt2831, 240);
                         if (HDToolKit.highDetail) {
                             float var18 = HDToolKit.method1852();
                             float var19 = HDToolKit.method1839();
@@ -271,14 +271,14 @@ public final class Player extends Class140_Sub4 {
                                     NPC var24 = NPC.npcs[var27.anInt1359];
                                     if (null != var24) {
                                         var20 = var24.xAxis / 32 - Class102.player.xAxis / 32;
-                                        var21 = -(Class102.player.zAxis / 32) + var24.zAxis / 32;
+                                        var21 = -(Class102.player.yAxis / 32) + var24.yAxis / 32;
                                         this.method1979(null, var21, var15, var20, var6, var11, var1, var8, var5, var4, var2, var27.anInt1355, var3, var7);
                                     }
                                 }
 
                                 if (var27.anInt1360 == 2) {
-                                    int var29 = 4 * (-Class131.anInt1716 + var27.anInt1356) + 2 + -(Class102.player.xAxis / 32);
-                                    var20 = 2 + (4 * (var27.anInt1347 - Texture.anInt1152) - Class102.player.zAxis / 32);
+                                    int var29 = 4 * (-Class131.x1716 + var27.anInt1356) + 2 + -(Class102.player.xAxis / 32);
+                                    var20 = 2 + (4 * (var27.anInt1347 - Texture.y1152) - Class102.player.yAxis / 32);
                                     this.method1979(null, var20, var15, var29, var6, var11, var1, var8, var5, var4, var2, var27.anInt1355, var3, var7);
                                 }
 
@@ -286,7 +286,7 @@ public final class Player extends Class140_Sub4 {
                                     Player var28 = Unsorted.players[var27.anInt1359];
                                     if (null != var28) {
                                         var20 = -(Class102.player.xAxis / 32) + var28.xAxis / 32;
-                                        var21 = var28.zAxis / 32 + -(Class102.player.zAxis / 32);
+                                        var21 = var28.yAxis / 32 + -(Class102.player.yAxis / 32);
                                         this.method1979(null, var21, var15, var20, var6, var11, var1, var8, var5, var4, var2, var27.anInt1355, var3, var7);
                                     }
                                 }
@@ -331,7 +331,7 @@ public final class Player extends Class140_Sub4 {
                                 var25 = (Model) this.anObject2796;
                             }
 
-                            Objects.requireNonNull(var25).method1897(this.anInt2782 + -this.xAxis, this.anInt2812 + -this.anInt2831, this.anInt2833 + -this.zAxis);
+                            Objects.requireNonNull(var25).method1897(this.anInt2782 + -this.xAxis, this.anInt2812 + -this.anInt2831, this.anInt2833 + -this.yAxis);
                             if (this.anInt2806 == 512) {
                                 var25.method1900();
                             } else if (this.anInt2806 == 1024) {
@@ -371,7 +371,7 @@ public final class Player extends Class140_Sub4 {
                             var25.method1900();
                         }
 
-                        var25.method1897(-this.anInt2782 + this.xAxis, -this.anInt2812 + this.anInt2831, -this.anInt2833 + this.zAxis);
+                        var25.method1897(-this.anInt2782 + this.xAxis, -this.anInt2812 + this.anInt2831, -this.anInt2833 + this.yAxis);
                     }
 
                 }
@@ -386,7 +386,7 @@ public final class Player extends Class140_Sub4 {
             int var16 = var4 * var4 - -(var2 * var2);
             if (var16 >= 16 && var16 <= 360000) {
                 int var17 = (int) (325.949D * Math.atan2(var4, var2)) & 0x7FF;
-                Model var18 = Class128.method1763(var17, this.zAxis, var13, this.xAxis, var3, this.anInt2831);
+                Model var18 = Class128.method1763(var17, this.yAxis, var13, this.xAxis, var3, this.anInt2831);
                 if (var18 != null) {
                     if (HDToolKit.highDetail) {
                         float var19 = HDToolKit.method1852();
@@ -420,12 +420,12 @@ public final class Player extends Class140_Sub4 {
         try {
             RSString var2 = this.displayName;
 
-            if (BufferedDataStream.aClass94Array3802 != null) {
-                var2 = RSString.stringCombiner(new RSString[]{BufferedDataStream.aClass94Array3802[this.anInt3958], var2});
+            if (BufferedDataStream.aStringArray3802 != null) {
+                var2 = RSString.stringCombiner(new RSString[]{BufferedDataStream.aStringArray3802[this.anInt3958], var2});
             }
 
-            if (null != Unsorted.aClass94Array45) {
-                var2 = RSString.stringCombiner(new RSString[]{var2, Unsorted.aClass94Array45[this.anInt3958]});
+            if (null != Unsorted.aStringArray45) {
+                var2 = RSString.stringCombiner(new RSString[]{var2, Unsorted.aStringArray45[this.anInt3958]});
             }
 
             return var2;
@@ -437,12 +437,12 @@ public final class Player extends Class140_Sub4 {
     final void method1867(int var1, int var2, int var3, int var4, int var5) {
     }
 
-    final void method1981(int var2, boolean var3, int var4) {
+    final void updatePlayerPosition(int newX, boolean var3, int newY) {
         try {
-            super.method1967(this.getSize(), var2, var4, var3);
+            super.updateAnimationPosition(this.getSize(), newX, newY, var3);
 
         } catch (RuntimeException var6) {
-            throw ClientErrorException.clientError(var6, "e.O(" + (byte) 126 + ',' + var2 + ',' + var3 + ',' + var4 + ')');
+            throw ClientErrorException.clientError(var6, "e.O(" + (byte) 126 + ',' + newX + ',' + var3 + ',' + newY + ')');
         }
     }
 

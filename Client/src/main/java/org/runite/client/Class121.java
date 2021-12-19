@@ -220,33 +220,6 @@ final class Class121 {
         }
     }
 
-    static int method1736(int var0, int var1, int var2, int var3) {
-        try {
-            if (null == Class44.anIntArrayArrayArray723) {
-                return 0;
-            } else {
-                int var4 = var2 >> 7;
-                int var5 = var3 >> 7;
-                if (var4 >= 0 && 0 <= var5 && var4 <= 103 && 103 >= var5) {
-                    int var7 = 127 & var2;
-                    int var8 = var3 & 127;
-                    int var6 = var0;
-                    if (3 > var0 && (2 & Unsorted.aByteArrayArrayArray113[1][var4][var5]) == 2) {
-                        var6 = var0 + 1;
-                    }
-
-                    int var10 = var7 * Class44.anIntArrayArrayArray723[var6][var1 + var4][1 + var5] + Class44.anIntArrayArrayArray723[var6][var4][var5 + 1] * (-var7 + 128) >> 7;
-                    int var9 = var7 * Class44.anIntArrayArrayArray723[var6][var4 + 1][var5] + (-var7 + 128) * Class44.anIntArrayArrayArray723[var6][var4][var5] >> 7;
-                    return var8 * var10 + (128 - var8) * var9 >> 7;
-                } else {
-                    return 0;
-                }
-            }
-        } catch (RuntimeException var11) {
-            throw ClientErrorException.clientError(var11, "ql.B(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ')');
-        }
-    }
-
     static int method179(byte var0, int var1) {
        try {
           if (var0 == 92) {

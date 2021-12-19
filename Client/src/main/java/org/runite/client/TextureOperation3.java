@@ -107,7 +107,7 @@ final class TextureOperation3 extends TextureOperation {
             }
          }
 
-         Class3_Sub26.aLinkedList_2557.method1215(var4);
+         Class3_Sub26.aLinkedList_2557.pushBack(var4);
       } catch (RuntimeException var20) {
          throw ClientErrorException.clientError(var20, "qg.E(" + (var0 != null?"{...}":"null") + ',' + (var1 != null?"{...}":"null") + ',' + var2 + ',' + (byte) -126 + ')');
       }
@@ -159,7 +159,7 @@ final class TextureOperation3 extends TextureOperation {
             return var3;
          } else {
             if(var1 >= -17) {
-               TextCore.aClass94_3357 = null;
+               TextCore.aString_3357 = null;
             }
 
             return var0 == 1?7 + -var2:(var0 == 2 ?-var3 + 7:var2);
@@ -173,7 +173,7 @@ final class TextureOperation3 extends TextureOperation {
       try {
          CursorDefinition var2 = (CursorDefinition) Unsorted.aReferenceCache_684.get(var0);
          if(var2 == null) {
-            byte[] var3 = TextureOperation4.aClass153_3227.getFile(33, var0);
+            byte[] var3 = TextureOperation4.configurationsIndex_3227.getFile(33, var0);
 
             var2 = new CursorDefinition();
             if(var3 != null) {

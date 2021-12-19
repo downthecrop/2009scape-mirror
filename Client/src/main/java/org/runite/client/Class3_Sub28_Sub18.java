@@ -35,10 +35,10 @@ final class Class3_Sub28_Sub18 extends Node {
    }
 
    static void method709(int var0, int var1) {
-      Class3_Sub2 var2 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[0][var0][var1];
+      TileData var2 = TileData.aTileDataArrayArrayArray2638[0][var0][var1];
 
       for(int var3 = 0; var3 < 3; ++var3) {
-         Class3_Sub2 var4 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var3][var0][var1] = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var3 + 1][var0][var1];
+         TileData var4 = TileData.aTileDataArrayArrayArray2638[var3][var0][var1] = TileData.aTileDataArrayArrayArray2638[var3 + 1][var0][var1];
          if(var4 != null) {
             --var4.anInt2244;
 
@@ -51,12 +51,12 @@ final class Class3_Sub28_Sub18 extends Node {
          }
       }
 
-      if(Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[0][var0][var1] == null) {
-         Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[0][var0][var1] = new Class3_Sub2(0, var0, var1);
+      if(TileData.aTileDataArrayArrayArray2638[0][var0][var1] == null) {
+         TileData.aTileDataArrayArrayArray2638[0][var0][var1] = new TileData(0, var0, var1);
       }
 
-      Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[0][var0][var1].aClass3_Sub2_2235 = var2;
-      Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[3][var0][var1] = null;
+      TileData.aTileDataArrayArrayArray2638[0][var0][var1].aClass3_Sub2_2235 = var2;
+      TileData.aTileDataArrayArrayArray2638[3][var0][var1] = null;
    }
 
 //   static void method710() {

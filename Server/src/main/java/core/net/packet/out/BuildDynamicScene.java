@@ -39,7 +39,7 @@ public final class BuildDynamicScene implements OutgoingPacket<DynamicSceneConte
 					r = RegionManager.forId((x >> 3) << 8 | (y >> 3));
 					if (r instanceof DynamicRegion) {
 						DynamicRegion dr = (DynamicRegion) r;
-						chunks[z][x - baseX][y - baseY] = dr.getChunks()[z][x - (dr.getX() << 3)][y - (dr.getY() << 3)];
+						chunks[z][x - baseX][y - baseY] = dr.getPlanes()[z].getChunks()[x - (dr.getX() << 3)][y - (dr.getY() << 3)];
 					}
 				}
 			}

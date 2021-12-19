@@ -13,7 +13,7 @@ public final class NPCDefinition {
 
    static SequenceDefinition[] aClass142Array1168 = new SequenceDefinition[14];
     static Class3_Sub28_Sub5[] aClass3_Sub28_Sub5Array3041 = new Class3_Sub28_Sub5[14];
-    static CacheIndex aClass153_3173;
+    static CacheIndex modelsIndex_3137;
     static Class3_Sub28_Sub5[] aClass3_Sub28_Sub5Array4031 = new Class3_Sub28_Sub5[14];
     static int[] anIntArray912 = new int[14];
     int size = 1;
@@ -28,7 +28,7 @@ public final class NPCDefinition {
    private short[] aShortArray1254;
    boolean aBoolean1255 = true;
    short aShort1256 = 0;
-   private int configId;
+   public int configId;
    private int[][] anIntArrayArray1258;
    public RSString[] options;
    int anInt1260;
@@ -44,11 +44,11 @@ public final class NPCDefinition {
    public boolean aBoolean1270 = true;
    private short[] aShortArray1271;
    private HashTable aHashTable_1272;
-   RSString NPCName;
+   public RSString NPCName;
    int anInt1274;
    byte aByte1275;
    int anInt1276 = -1;
-   static int[] anIntArray1277 = new int[2000];
+   static int[] varcArray = new int[2000];
    int anInt1278;
    int anInt1279;
    int renderAnimationId;
@@ -69,11 +69,11 @@ public final class NPCDefinition {
    static int anInt1297;
    int anInt1298;
 
-   static NPCDefinition getNPCDefinition(int npcID) {
+   public static NPCDefinition getNPCDefinition(int npcID) {
        try {
            NPCDefinition def = (NPCDefinition) Unsorted.aReferenceCache_4043.get(npcID);
            if (null == def) {
-               byte[] var3 = Class29.aClass153_557.getFile(Class38_Sub1.method1031(npcID), Unsorted.method54(npcID));
+               byte[] var3 = Class29.npcConfigIndex_557.getFile(Class38_Sub1.method1031(npcID), Unsorted.method54(npcID));
                def = new NPCDefinition();
 
                def.npcId = npcID;
@@ -97,7 +97,7 @@ public final class NPCDefinition {
                var2 = ItemDefinition.ram[this.configFileId];
             }
          } else {
-            var2 = method1484(this.configId);
+            var2 = lookupVarbit(this.configId);
          }
 
          int var3;
@@ -123,7 +123,7 @@ public final class NPCDefinition {
                   var2 = ItemDefinition.ram[this.configFileId];
                }
             } else {
-               var2 = method1484(this.configId);
+               var2 = lookupVarbit(this.configId);
             }
 
             if(var2 >= 0 && var2 < -1 + this.childNPCs.length && -1 != this.childNPCs[var2]) {
@@ -193,7 +193,7 @@ public final class NPCDefinition {
                var12 = false;
 
                for (int model : this.models) {
-                  if (model != -1 && !aClass153_3173.method2129((byte) 102, 0, model)) {
+                  if (model != -1 && !modelsIndex_3137.method2129((byte) 102, 0, model)) {
                      var12 = true;
                   }
                }
@@ -206,7 +206,7 @@ public final class NPCDefinition {
 
                for(int var15 = 0; var15 < this.models.length; ++var15) {
                   if(this.models[var15] != -1) {
-                     var14[var15] = Model_Sub1.method2015(aClass153_3173, this.models[var15]);
+                     var14[var15] = Model_Sub1.method2015(modelsIndex_3137, this.models[var15]);
                      if(null != this.anIntArrayArray1261 && this.anIntArrayArray1261[var15] != null && var14[var15] != null) {
                         var14[var15].method2001(this.anIntArrayArray1261[var15][0], this.anIntArrayArray1261[var15][1], this.anIntArrayArray1261[var15][2]);
                      }
@@ -551,7 +551,7 @@ public final class NPCDefinition {
          }
 
          Class99.aShortArray1398 = var3;
-         Class140_Sub4.anInt2756 = 0;
+         Entity.anInt2756 = 0;
          Unsorted.anInt952 = var4;
          RSString[] var10 = new RSString[Unsorted.anInt952];
 
@@ -576,7 +576,7 @@ public final class NPCDefinition {
                   boolean var7 = false;
 
                   for(int var8 = 0; this.anIntArray1250.length > var8; ++var8) {
-                     if(!aClass153_3173.method2129((byte)-69, 0, this.anIntArray1250[var8])) {
+                     if(!modelsIndex_3137.method2129((byte)-69, 0, this.anIntArray1250[var8])) {
                         var7 = true;
                      }
                   }
@@ -588,7 +588,7 @@ public final class NPCDefinition {
                   Model_Sub1[] var14 = new Model_Sub1[this.anIntArray1250.length];
 
                   for(int var9 = 0; this.anIntArray1250.length > var9; ++var9) {
-                     var14[var9] = Model_Sub1.method2015(aClass153_3173, this.anIntArray1250[var9]);
+                     var14[var9] = Model_Sub1.method2015(modelsIndex_3137, this.anIntArray1250[var9]);
                   }
 
                   Model_Sub1 var15;
@@ -866,7 +866,7 @@ public final class NPCDefinition {
    }
 
    public NPCDefinition() {
-      this.NPCName = TextCore.aClass94_2006;
+      this.NPCName = TextCore.aString_2006;
       this.anInt1260 = -1;
       this.aBoolean1285 = true;
       this.anInt1253 = -1;
@@ -899,7 +899,7 @@ public final class NPCDefinition {
       this.anInt1298 = -1;
    }
 
-   static int method1484(int var1) {
+   static int lookupVarbit(int var1) {
       try {
 
          CSConfigCachefile var2 = CSConfigCachefile.getCSConfigFileFromVarbitID(var1);

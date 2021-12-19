@@ -7,7 +7,7 @@ public class CS2Methods {
         try {
 
             int var2 = Unsorted.method1602(var0);
-            return var2 != -1 ? Class119.aClass131_1624.aClass94Array1721[var2].method1560(RSString.parse(" "), TextCore.aClass94_4066) : TextCore.aClass94_4049;
+            return var2 != -1 ? Class119.aClass131_1624.aStringArray1721[var2].method1560(RSString.parse(" "), TextCore.aString_4066) : TextCore.aString_4049;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "rc.V(" + (var0 != null ? "{...}" : "null") + ',' + true + ')');
         }
@@ -24,7 +24,7 @@ public class CS2Methods {
 
     static void method852(int var1) {
         try {
-            Class3_Sub25 var2 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var1);
+            Class3_Sub25 var2 = (Class3_Sub25) TileData.aHashTable_2220.get(var1);
             if (var2 != null) {
 
                 for (int var3 = 0; var2.anIntArray2547.length > var3; ++var3) {
@@ -40,7 +40,7 @@ public class CS2Methods {
 
     static void method532(int var0) {
         try {
-            Class3_Sub25 var2 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var0);
+            Class3_Sub25 var2 = (Class3_Sub25) TileData.aHashTable_2220.get(var0);
             if (null != var2) {
                 var2.unlink();
             }
@@ -66,7 +66,7 @@ public class CS2Methods {
         int windowWidth;
         int windowHeight;
         if (var2 == null) {
-            windowHeight = Class140_Sub7.canvasHeight;
+            windowHeight = GroundItem.canvasHeight;
             windowWidth = Class23.canvasWidth;
         } else {
             windowHeight = var2.height;

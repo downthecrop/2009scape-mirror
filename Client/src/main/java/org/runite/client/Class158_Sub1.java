@@ -7,7 +7,7 @@ import java.awt.image.*;
 
 final class Class158_Sub1 extends Class158 implements ImageProducer, ImageObserver {
 
-    static RSString[] aClass94Array2977 = new RSString[5];
+    static RSString[] aStringArray2977 = new RSString[5];
     static int anInt3158 = -8 + (int) (17.0D * Math.random());
     static int anInt1463 = -16 + (int) (Math.random() * 33.0D);
     static byte[][][] aByteArrayArrayArray1828;

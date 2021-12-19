@@ -6,21 +6,21 @@ import org.rs09.client.data.ReferenceCache;
 public final class LinkedList {
 
     static ReferenceCache aReferenceCache_939 = new ReferenceCache(4);
-    Linkable aClass3_940 = new Linkable();
-    private Linkable aClass3_941;
+    Linkable head = new Linkable();
+    private Linkable current;
 
 
     public LinkedList() {
         try {
-            this.aClass3_940.previous = this.aClass3_940;
-            this.aClass3_940.next = this.aClass3_940;
+            this.head.previous = this.head;
+            this.head.next = this.head;
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "ih.<init>()");
         }
     }
 
     static Class70 method1209(int var0, int var1, int var2) {
-        Class3_Sub2 var3 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2];
+        TileData var3 = TileData.aTileDataArrayArrayArray2638[var0][var1][var2];
         if (var3 == null) {
             return null;
         } else {
@@ -35,7 +35,7 @@ public final class LinkedList {
             Class3_Sub28_Sub9 var2 = (Class3_Sub28_Sub9) Class163.aClass47_2041.get(var1);
 
             if (null == var2) {
-                byte[] var3 = TextureOperation27.aClass153_3098.getFile(11, var1);
+                byte[] var3 = TextureOperation27.configurationsIndex_3098.getFile(11, var1);
                 var2 = new Class3_Sub28_Sub9();
                 if (var3 != null) {
                     var2.method583(new DataBuffer(var3));
@@ -56,20 +56,20 @@ public final class LinkedList {
     static void method1214(int var0, int var1, int var2, int var3) {
         try {
             Class3_Sub9 var5;
-            for (var5 = (Class3_Sub9) Unsorted.aLinkedList_78.method1222(); var5 != null; var5 = (Class3_Sub9) Unsorted.aLinkedList_78.method1221()) {
+            for (var5 = (Class3_Sub9) Unsorted.aLinkedList_78.startIteration(); var5 != null; var5 = (Class3_Sub9) Unsorted.aLinkedList_78.nextIteration()) {
                 Unsorted.method606(var1, var5, var3, var0, var2, 126);
             }
 
             byte var6;
             RenderAnimationDefinition var7;
             int var8;
-            for (var5 = (Class3_Sub9) Unsorted.aLinkedList_1242.method1222(); var5 != null; var5 = (Class3_Sub9) Unsorted.aLinkedList_1242.method1221()) {
+            for (var5 = (Class3_Sub9) Unsorted.aLinkedList_1242.startIteration(); var5 != null; var5 = (Class3_Sub9) Unsorted.aLinkedList_1242.nextIteration()) {
                 var6 = 1;
-                var7 = var5.aClass140_Sub4_Sub2_2324.getRenderAnimationType();
-                if (var5.aClass140_Sub4_Sub2_2324.anInt2764 == var7.stand_animation) {
+                var7 = var5.aEntity_Sub2_2324.getRenderAnimationType();
+                if (var5.aEntity_Sub2_2324.anInt2764 == var7.stand_animation) {
                     var6 = 0;
-                } else if (var5.aClass140_Sub4_Sub2_2324.anInt2764 != var7.run_anim && var5.aClass140_Sub4_Sub2_2324.anInt2764 != var7.run_follow_full_turn_anim && var5.aClass140_Sub4_Sub2_2324.anInt2764 != var7.run_follow_cw_turn_anim && var5.aClass140_Sub4_Sub2_2324.anInt2764 != var7.run_follow_ccw_turn_anim) {
-                    if (var7.slow_walk_anim == var5.aClass140_Sub4_Sub2_2324.anInt2764 || var7.slow_walk_follow_full_turn_anim == var5.aClass140_Sub4_Sub2_2324.anInt2764 || var5.aClass140_Sub4_Sub2_2324.anInt2764 == var7.slow_walk_follow_cw_turn_anim || var5.aClass140_Sub4_Sub2_2324.anInt2764 == var7.slow_walk_follow_ccw_turn_anim) {
+                } else if (var5.aEntity_Sub2_2324.anInt2764 != var7.run_anim && var5.aEntity_Sub2_2324.anInt2764 != var7.run_follow_full_turn_anim && var5.aEntity_Sub2_2324.anInt2764 != var7.run_follow_cw_turn_anim && var5.aEntity_Sub2_2324.anInt2764 != var7.run_follow_ccw_turn_anim) {
+                    if (var7.slow_walk_anim == var5.aEntity_Sub2_2324.anInt2764 || var7.slow_walk_follow_full_turn_anim == var5.aEntity_Sub2_2324.anInt2764 || var5.aEntity_Sub2_2324.anInt2764 == var7.slow_walk_follow_cw_turn_anim || var5.aEntity_Sub2_2324.anInt2764 == var7.slow_walk_follow_ccw_turn_anim) {
                         var6 = 3;
                     }
                 } else {
@@ -77,7 +77,7 @@ public final class LinkedList {
                 }
 
                 if (var5.anInt2322 != var6) {
-                    var8 = Class70.method1232(var5.aClass140_Sub4_Sub2_2324);
+                    var8 = Class70.method1232(var5.aEntity_Sub2_2324);
                     if (var8 != var5.anInt2332) {
                         if (var5.aClass3_Sub24_Sub1_2312 != null) {
                             Class3_Sub26.aClass3_Sub24_Sub2_2563.method461(var5.aClass3_Sub24_Sub1_2312);
@@ -90,20 +90,20 @@ public final class LinkedList {
                     var5.anInt2322 = var6;
                 }
 
-                var5.anInt2326 = var5.aClass140_Sub4_Sub2_2324.xAxis;
-                var5.anInt2321 = var5.aClass140_Sub4_Sub2_2324.xAxis + var5.aClass140_Sub4_Sub2_2324.getSize() * 64;
-                var5.anInt2308 = var5.aClass140_Sub4_Sub2_2324.zAxis;
-                var5.anInt2307 = var5.aClass140_Sub4_Sub2_2324.zAxis + var5.aClass140_Sub4_Sub2_2324.getSize() * 64;
+                var5.anInt2326 = var5.aEntity_Sub2_2324.xAxis;
+                var5.anInt2321 = var5.aEntity_Sub2_2324.xAxis + var5.aEntity_Sub2_2324.getSize() * 64;
+                var5.anInt2308 = var5.aEntity_Sub2_2324.yAxis;
+                var5.anInt2307 = var5.aEntity_Sub2_2324.yAxis + var5.aEntity_Sub2_2324.getSize() * 64;
                 Unsorted.method606(var1, var5, var3, var0, var2, 1 ^ 113);
             }
 
             for (var5 = (Class3_Sub9) Unsorted.aHashTable_4046.first(); var5 != null; var5 = (Class3_Sub9) Unsorted.aHashTable_4046.next()) {
                 var6 = 1;
-                var7 = var5.aClass140_Sub4_Sub1_2327.getRenderAnimationType();
-                if (var5.aClass140_Sub4_Sub1_2327.anInt2764 == var7.stand_animation) {
+                var7 = var5.aEntity_Sub1_2327.getRenderAnimationType();
+                if (var5.aEntity_Sub1_2327.anInt2764 == var7.stand_animation) {
                     var6 = 0;
-                } else if (var5.aClass140_Sub4_Sub1_2327.anInt2764 != var7.run_anim && var5.aClass140_Sub4_Sub1_2327.anInt2764 != var7.run_follow_full_turn_anim && var7.run_follow_cw_turn_anim != var5.aClass140_Sub4_Sub1_2327.anInt2764 && var7.run_follow_ccw_turn_anim != var5.aClass140_Sub4_Sub1_2327.anInt2764) {
-                    if (var7.slow_walk_anim == var5.aClass140_Sub4_Sub1_2327.anInt2764 || var5.aClass140_Sub4_Sub1_2327.anInt2764 == var7.slow_walk_follow_full_turn_anim || var7.slow_walk_follow_cw_turn_anim == var5.aClass140_Sub4_Sub1_2327.anInt2764 || var7.slow_walk_follow_ccw_turn_anim == var5.aClass140_Sub4_Sub1_2327.anInt2764) {
+                } else if (var5.aEntity_Sub1_2327.anInt2764 != var7.run_anim && var5.aEntity_Sub1_2327.anInt2764 != var7.run_follow_full_turn_anim && var7.run_follow_cw_turn_anim != var5.aEntity_Sub1_2327.anInt2764 && var7.run_follow_ccw_turn_anim != var5.aEntity_Sub1_2327.anInt2764) {
+                    if (var7.slow_walk_anim == var5.aEntity_Sub1_2327.anInt2764 || var5.aEntity_Sub1_2327.anInt2764 == var7.slow_walk_follow_full_turn_anim || var7.slow_walk_follow_cw_turn_anim == var5.aEntity_Sub1_2327.anInt2764 || var7.slow_walk_follow_ccw_turn_anim == var5.aEntity_Sub1_2327.anInt2764) {
                         var6 = 3;
                     }
                 } else {
@@ -111,7 +111,7 @@ public final class LinkedList {
                 }
 
                 if (var6 != var5.anInt2322) {
-                    var8 = Class81.method1398(var5.aClass140_Sub4_Sub1_2327);
+                    var8 = Class81.method1398(var5.aEntity_Sub1_2327);
                     if (var8 != var5.anInt2332) {
                         if (var5.aClass3_Sub24_Sub1_2312 != null) {
                             Class3_Sub26.aClass3_Sub24_Sub2_2563.method461(var5.aClass3_Sub24_Sub1_2312);
@@ -124,10 +124,10 @@ public final class LinkedList {
                     var5.anInt2322 = var6;
                 }
 
-                var5.anInt2326 = var5.aClass140_Sub4_Sub1_2327.xAxis;
-                var5.anInt2321 = var5.aClass140_Sub4_Sub1_2327.xAxis + 64 * var5.aClass140_Sub4_Sub1_2327.getSize();
-                var5.anInt2308 = var5.aClass140_Sub4_Sub1_2327.zAxis;
-                var5.anInt2307 = var5.aClass140_Sub4_Sub1_2327.zAxis + var5.aClass140_Sub4_Sub1_2327.getSize() * 64;
+                var5.anInt2326 = var5.aEntity_Sub1_2327.xAxis;
+                var5.anInt2321 = var5.aEntity_Sub1_2327.xAxis + 64 * var5.aEntity_Sub1_2327.getSize();
+                var5.anInt2308 = var5.aEntity_Sub1_2327.yAxis;
+                var5.anInt2307 = var5.aEntity_Sub1_2327.yAxis + var5.aEntity_Sub1_2327.getSize() * 64;
                 Unsorted.method606(var1, var5, var3, var0, var2, 110);
             }
 
@@ -144,35 +144,31 @@ public final class LinkedList {
         }
     }
 
-    final void method1211(int var1) {
+    final void clear() {
         try {
             while (true) {
-                Linkable var2 = this.aClass3_940.next;
-                if (var2 == this.aClass3_940) {
-                    if (var1 > -47) {
-                        this.aClass3_940 = null;
-                    }
-
-                    this.aClass3_941 = null;
+                Linkable var2 = this.head.next;
+                if (var2 == this.head) {
+                    this.current = null;
                     return;
                 }
 
                 var2.unlink();
             }
         } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "ih.C(" + var1 + ')');
+            throw ClientErrorException.clientError(var3, "ih.C()");
         }
     }
 
     final Linkable method1212() {
         try {
-            Linkable var2 = this.aClass3_940.previous;
+            Linkable var2 = this.head.previous;
 
-            if (this.aClass3_940 == var2) {
-                this.aClass3_941 = null;
+            if (this.head == var2) {
+                this.current = null;
                 return null;
             } else {
-                this.aClass3_941 = var2.previous;
+                this.current = var2.previous;
                 return var2;
             }
         } catch (RuntimeException var3) {
@@ -180,14 +176,14 @@ public final class LinkedList {
         }
     }
 
-    final void method1215(Linkable var2) {
+    final void pushBack(Linkable var2) {
         try {
             if (null != var2.previous) {
                 var2.unlink();
             }
 
-            var2.next = this.aClass3_940;
-            var2.previous = this.aClass3_940.previous;
+            var2.next = this.head;
+            var2.previous = this.head.previous;
             var2.previous.next = var2;
             var2.next.previous = var2;
         } catch (RuntimeException var4) {
@@ -201,8 +197,8 @@ public final class LinkedList {
                 var2.unlink();
             }
 
-            var2.next = this.aClass3_940.next;
-            var2.previous = this.aClass3_940;
+            var2.next = this.head.next;
+            var2.previous = this.head;
             var2.previous.next = var2;
             var2.next.previous = var2;
 
@@ -214,15 +210,15 @@ public final class LinkedList {
     final Linkable method1219(int var1) {
         try {
             if (var1 < 13) {
-                this.aClass3_940 = null;
+                this.head = null;
             }
 
-            Linkable var2 = this.aClass3_941;
-            if (this.aClass3_940 == var2) {
-                this.aClass3_941 = null;
+            Linkable var2 = this.current;
+            if (this.head == var2) {
+                this.current = null;
                 return null;
             } else {
-                this.aClass3_941 = var2.previous;
+                this.current = var2.previous;
                 return var2;
             }
         } catch (RuntimeException var3) {
@@ -232,8 +228,8 @@ public final class LinkedList {
 
     final Linkable method1220() {
         try {
-            Linkable var2 = this.aClass3_940.next;
-            if (this.aClass3_940 == var2) {
+            Linkable var2 = this.head.next;
+            if (this.head == var2) {
                 return null;
             } else {
                 var2.unlink();
@@ -244,14 +240,14 @@ public final class LinkedList {
         }
     }
 
-    final Linkable method1221() {
+    final Linkable nextIteration() {
         try {
-            Linkable var2 = this.aClass3_941;
-            if (var2 == this.aClass3_940) {
-                this.aClass3_941 = null;
+            Linkable var2 = this.current;
+            if (var2 == this.head) {
+                this.current = null;
                 return null;
             } else {
-                this.aClass3_941 = var2.next;
+                this.current = var2.next;
                 return var2;
             }
         } catch (RuntimeException var3) {
@@ -259,14 +255,14 @@ public final class LinkedList {
         }
     }
 
-    final Linkable method1222() {
+    final Linkable startIteration() {
         try {
-            Linkable var2 = this.aClass3_940.next;
-            if (this.aClass3_940 == var2) {
-                this.aClass3_941 = null;
+            Linkable var2 = this.head.next;
+            if (this.head == var2) {
+                this.current = null;
                 return null;
             } else {
-                this.aClass3_941 = var2.next;
+                this.current = var2.next;
                 return var2;
             }
         } catch (RuntimeException var3) {

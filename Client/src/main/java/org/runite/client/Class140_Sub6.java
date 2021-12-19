@@ -25,7 +25,7 @@ final class Class140_Sub6 extends GameObject {
    private final int anInt2916;
    private int anInt2917;
    private double aDouble2918;
-   int anInt2919;
+   int entityIndex;
    double aDouble2920;
    private double aDouble2921;
    private int anInt2922 = 0;
@@ -38,7 +38,7 @@ final class Class140_Sub6 extends GameObject {
 
    static void method2020(int var0, ObjectDefinition var1, int var3, int var4) {
       try {
-         Class3_Sub9 var5 = (Class3_Sub9) Unsorted.aLinkedList_78.method1222();
+         Class3_Sub9 var5 = (Class3_Sub9) Unsorted.aLinkedList_78.startIteration();
 
           while(null != var5) {
             if(var4 == var5.anInt2314 && 128 * var0 == var5.anInt2326 && var5.anInt2308 == 128 * var3 && var5.aClass111_2320.objectId == var1.objectId) {
@@ -56,7 +56,7 @@ final class Class140_Sub6 extends GameObject {
                return;
             }
 
-            var5 = (Class3_Sub9) Unsorted.aLinkedList_78.method1221();
+            var5 = (Class3_Sub9) Unsorted.aLinkedList_78.nextIteration();
          }
 
       } catch (RuntimeException var6) {
@@ -232,7 +232,7 @@ final class Class140_Sub6 extends GameObject {
       try {
          this.anInt2899 = var7;
          this.anInt2902 = var3;
-         this.anInt2919 = var10;
+         this.entityIndex = var10;
          this.anInt2915 = var1;
          this.anInt2907 = var2;
          this.anInt2927 = var8;

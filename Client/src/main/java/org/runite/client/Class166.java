@@ -2,7 +2,7 @@ package org.runite.client;
 
 final class Class166 {
 
-    static Class3_Sub2[][][] aClass3_Sub2ArrayArrayArray2065;
+    static TileData[][][] aTileDataArrayArrayArray2065;
     static Class3_Sub28_Sub5[] aClass3_Sub28_Sub5Array2070 = new Class3_Sub28_Sub5[14];
     static AbstractSprite[] aAbstractSpriteArray2072;
     static int[] anIntArray2073 = new int[5];
@@ -45,7 +45,7 @@ final class Class166 {
                 Player var6 = Unsorted.players[Class56.localPlayerIndexes[var5]];
                 if (null != var6 && null != var6.displayName && var6.displayName.equalsStringIgnoreCase(var3)) {
                     var4 = true;
-                    Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, 1, false, 0, 2, var6.anIntArray2767[0], 1, 0, 2, var6.anIntArray2755[0], Class102.player.anIntArray2767[0]);
+                    Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, 1, false, 0, 2, var6.xOffsets2767[0], 1, 0, 2, var6.yOffsets2755[0], Class102.player.xOffsets2767[0]);
                     if (1 == var0) {
                         TextureOperation12.outgoingBuffer.putOpcode(68);
                         TextureOperation12.outgoingBuffer.writeShort128LE(Class56.localPlayerIndexes[var5]);
@@ -79,9 +79,9 @@ final class Class166 {
         try {
             Object var1;
             if (HDToolKit.highDetail) {
-                var1 = new HDIndexedSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], Class163_Sub1.aByteArrayArray2987[0], TextureOperation38.spritePalette);
+                var1 = new HDIndexedSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], GroundItem.anIntArray2931[0], Unsorted.anIntArray3076[0], Class163_Sub1.aByteArrayArray2987[0], TextureOperation38.spritePalette);
             } else {
-                var1 = new LDIndexedSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], Class163_Sub1.aByteArrayArray2987[0], TextureOperation38.spritePalette);
+                var1 = new LDIndexedSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], GroundItem.anIntArray2931[0], Unsorted.anIntArray3076[0], Class163_Sub1.aByteArrayArray2987[0], TextureOperation38.spritePalette);
             }
 
             Class39.method1035((byte) 116);

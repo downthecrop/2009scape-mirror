@@ -17,7 +17,7 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
    static Connection aClass89_4012;
    static int anInt4014;
    static ReferenceCache aReferenceCache_4015 = new ReferenceCache(64);
-   static RSString[] aClass94Array4016 = new RSString[500];
+   static RSString[] aStringArray4016 = new RSString[500];
    static long[] aLongArray4017 = new long[100];
    static boolean paramObjectTagEnabled = false;
    static int anInt4019 = 0;
@@ -30,7 +30,7 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
 
    static void method2220() {
       try {
-          Class140_Sub4.aReferenceCache_2792.clear();
+          Entity.aReferenceCache_2792.clear();
       } catch (RuntimeException var2) {
          throw ClientErrorException.clientError(var2, "t.H(" + 0 + ')');
       }
@@ -43,7 +43,7 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
          for(Class96[] var7 = ClientErrorException.aClass96Array2114; var8 < var7.length; ++var8) {
             Class96 var9 = var7[var8];
             if(null != var9 && var9.anInt1360 == 2) {
-               Unsorted.method1724(var0 >> 1, var5, (-Texture.anInt1152 + var9.anInt1347 << 7) - -var9.anInt1350, var9.anInt1353 * 2, var2 >> 1, var9.anInt1346 + (var9.anInt1356 + -Class131.anInt1716 << 7), (byte)-114, var4);
+               Unsorted.method1724(var0 >> 1, var5, (-Texture.y1152 + var9.anInt1347 << 7) - -var9.anInt1350, var9.anInt1353 * 2, var2 >> 1, var9.anInt1346 + (var9.anInt1356 + -Class131.x1716 << 7), (byte)-114, var4);
                if(-1 < Class32.anInt590 && Class44.anInt719 % 20 < 10) {
                   Class166.aAbstractSpriteArray2072[var9.anInt1351].drawAt(-12 + var1 + Class32.anInt590, -28 + var6 - -Texture.anInt2208);
                }
@@ -72,7 +72,7 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
 
             for(int var6 = 0; var6 < 13; ++var6) {
                for(int var7 = 0; var7 < 13; ++var7) {
-                  int var8 = ObjectDefinition.anIntArrayArrayArray1497[var5][var6][var7];
+                  int var8 = ObjectDefinition.rawChunkData[var5][var6][var7];
                   if(var8 != -1) {
                      int var9 = var8 >> 24 & 3;
                      if(!var0 || var9 == 0) {
@@ -81,8 +81,8 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
                         int var12 = 2047 & var8 >> 3;
                         int var13 = var12 / 8 + (var11 / 8 << 8);
 
-                        for(int var14 = 0; Class3_Sub24_Sub3.anIntArray3494.length > var14; ++var14) {
-                           if(var13 == Class3_Sub24_Sub3.anIntArray3494[var14] && var4[var14] != null) {
+                        for(int var14 = 0; Class3_Sub24_Sub3.regionIds.length > var14; ++var14) {
+                           if(var13 == Class3_Sub24_Sub3.regionIds[var14] && var4[var14] != null) {
                               TextureOperation13.parseObjectMapping(AtmosphereParser.aClass91Array1182, var5, var4[var14], var9, var10, 8 * var6, var7 * 8, var0, (var11 & 7) * 8, 8 * (7 & var12));
                               break;
                            }
@@ -121,9 +121,9 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
                var11 = (var11 << var6 & 15) - -(var11 >> -var6 + 4);
             }
 
-            Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], 0, var10, true, var11, 2, var4, var9, 0, 2, var3, Class102.player.anIntArray2767[0]);
+            Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], 0, var10, true, var11, 2, var4, var9, 0, 2, var3, Class102.player.xOffsets2767[0]);
          } else {
-            Class3_Sub28_Sub9.method582(Class102.player.anIntArray2755[0], var6, 0, true, 0, 2, var4, 0, 1 + var5, 2, var3, Class102.player.anIntArray2767[0]);
+            Class3_Sub28_Sub9.method582(Class102.player.yOffsets2755[0], var6, 0, true, 0, 2, var4, 0, 1 + var5, 2, var3, Class102.player.xOffsets2767[0]);
          }
 
          Unsorted.anInt4062 = Class38_Sub1.anInt2614;
@@ -142,7 +142,7 @@ final class Class163_Sub2_Sub1 extends Class163_Sub2 {
          }
 
          while(true) {
-            Class3_Sub8 var3 = (Class3_Sub8)Class3_Sub26.aLinkedList_2557.method1222();
+            Class3_Sub8 var3 = (Class3_Sub8)Class3_Sub26.aLinkedList_2557.startIteration();
             if(var3 == null) {
                return;
             }

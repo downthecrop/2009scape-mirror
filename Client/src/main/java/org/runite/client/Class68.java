@@ -371,7 +371,7 @@ final class Class68 {
         anIntArrayArrayArray1027 = new int[anInt1030][anInt1036][anInt1035];
     }
 
-    static void method1277(Class3_Sub2[][][] var2) {
+    static void method1277(TileData[][][] var2) {
         if (Class106.aBoolean1441) {
             GL var3 = HDToolKit.gl;
             Unsorted.method551(0, 0);
@@ -424,7 +424,7 @@ final class Class68 {
 
                         while (true) {
                             if (var14 <= var13) {
-                                Class3_Sub2 var15 = null;
+                                TileData var15 = null;
                                 if (var6 >= 0) {
                                     var15 = var2[var6][var14][var10];
                                 }

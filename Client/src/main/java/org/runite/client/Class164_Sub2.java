@@ -184,15 +184,15 @@ public class Class164_Sub2 extends Class164 {
 
                   if(var8 == 14) {
                      var11 = var4[var6++];
-                     var9 = NPCDefinition.method1484(var11);
+                     var9 = NPCDefinition.lookupVarbit(var11);
                   }
 
                   if(var8 == 18) {
-                     var9 = (Class102.player.xAxis >> 7) - -Class131.anInt1716;
+                     var9 = (Class102.player.xAxis >> 7) - -Class131.x1716;
                   }
 
                   if(var8 == 19) {
-                     var9 = (Class102.player.zAxis >> 7) - -Texture.anInt1152;
+                     var9 = (Class102.player.yAxis >> 7) - -Texture.y1152;
                   }
 
                   if(var8 == 20) {

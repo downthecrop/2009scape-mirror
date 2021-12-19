@@ -125,7 +125,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
             var2.setLayout(null);
             canvas = new ComponentWrappedCanvas(this);
             var2.add(canvas);
-            canvas.setSize(Class23.canvasWidth, Class140_Sub7.canvasHeight);
+            canvas.setSize(Class23.canvasWidth, GroundItem.canvasHeight);
             canvas.setVisible(true);
             if (var2 == frame) {
                 Insets var3 = frame.getInsets();
@@ -291,7 +291,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
             if (50 < TextureOperation28.anInt3313++) {
                 TextureOperation30.fullRedraw = true;
                 TextureOperation28.anInt3313 -= 50;
-                canvas.setSize(Class23.canvasWidth, Class140_Sub7.canvasHeight);
+                canvas.setSize(Class23.canvasWidth, GroundItem.canvasHeight);
                 canvas.setVisible(true);
                 if (frame != null && null == TextureOperation30.fullScreenFrame) {
                     Insets var8 = frame.getInsets();
@@ -367,7 +367,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
                 getMaxMemory();
                 this.addCanvas();
-                Unsorted.aClass158_3009 = TextureOperation18.method285(Class140_Sub7.canvasHeight, Class23.canvasWidth, canvas);
+                Unsorted.aClass158_3009 = TextureOperation18.method285(GroundItem.canvasHeight, Class23.canvasWidth, canvas);
                 this.method39();
                 Class3_Sub25.aClass129_2552 = Class36.method1012();
 
@@ -417,7 +417,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
 
     final void launch() {
         try {
-            Class140_Sub7.canvasHeight = 768;
+            GroundItem.canvasHeight = 768;
             Class70.frameHeight = 768;
             Class84.leftMargin = 0;
             Class23.canvasWidth = 1024;
@@ -477,7 +477,7 @@ public abstract class GameShell extends Applet implements Runnable, FocusListene
                 Class23.canvasWidth = 765;
                 Unsorted.frameWidth = 765;
                 Class84.leftMargin = 0;
-                Class140_Sub7.canvasHeight = 503;
+                GroundItem.canvasHeight = 503;
                 Class70.frameHeight = 503;
                 String var6 = this.getParameter("openwinjs");
                 InterfaceWidget.aBoolean3594 = var6 != null && var6.equals("1");

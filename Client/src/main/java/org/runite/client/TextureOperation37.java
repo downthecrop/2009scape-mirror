@@ -121,20 +121,20 @@ final class TextureOperation37 extends TextureOperation {
                      return;
                   }
 
-                  TextureOperation29.aClass94Array3391 = new RSString[Class3_Sub15.activeConnection.readByte()];
+                  TextureOperation29.aStringArray3391 = new RSString[Class3_Sub15.activeConnection.readByte()];
                   Unsorted.registryStage = 4;
                }
 
                if(Unsorted.registryStage == 4) {
-                  if(8 * TextureOperation29.aClass94Array3391.length > Class3_Sub15.activeConnection.availableBytes()) {
+                  if(8 * TextureOperation29.aStringArray3391.length > Class3_Sub15.activeConnection.availableBytes()) {
                      return;
                   }
 
                   BufferedDataStream.incomingBuffer.index = 0;
-                  Class3_Sub15.activeConnection.readBytes(BufferedDataStream.incomingBuffer.buffer, 0, 8 * TextureOperation29.aClass94Array3391.length);
+                  Class3_Sub15.activeConnection.readBytes(BufferedDataStream.incomingBuffer.buffer, 0, 8 * TextureOperation29.aStringArray3391.length);
 
-                  for(response = 0; response < TextureOperation29.aClass94Array3391.length; ++response) {
-                     TextureOperation29.aClass94Array3391[response] = Unsorted.method1052(BufferedDataStream.incomingBuffer.readLong());
+                  for(response = 0; response < TextureOperation29.aStringArray3391.length; ++response) {
+                     TextureOperation29.aStringArray3391[response] = Unsorted.method1052(BufferedDataStream.incomingBuffer.readLong());
                   }
 
                   Unsorted.anInt1711 = 21;
@@ -251,14 +251,14 @@ final class TextureOperation37 extends TextureOperation {
                int var3 = -1;
 
                for(int var4 = 0; TextureOperation11.anInt3244 > var4; ++var4) {
-                  if(TextureOperation13.anIntArray3367[var4] == Class3_Sub24_Sub3.anIntArray3494[var2]) {
+                  if(TextureOperation13.anIntArray3367[var4] == Class3_Sub24_Sub3.regionIds[var2]) {
                      var3 = var4;
                      break;
                   }
                }
 
                if(var3 == -1) {
-                  TextureOperation13.anIntArray3367[TextureOperation11.anInt3244] = Class3_Sub24_Sub3.anIntArray3494[var2];
+                  TextureOperation13.anIntArray3367[TextureOperation11.anInt3244] = Class3_Sub24_Sub3.regionIds[var2];
                   var3 = TextureOperation11.anInt3244++;
                }
 
@@ -270,9 +270,9 @@ final class TextureOperation37 extends TextureOperation {
                   int var7 = var16.readUnsignedShort();
                   int var8 = var7 >> 14;
                   int var9 = 63 & var7 >> 7;
-                  int var11 = var9 + 64 * (Class3_Sub24_Sub3.anIntArray3494[var2] >> 8) - Class131.anInt1716;
+                  int var11 = var9 + 64 * (Class3_Sub24_Sub3.regionIds[var2] >> 8) - Class131.x1716;
                   int var10 = var7 & 63;
-                  int var12 = var10 + -Texture.anInt1152 + 64 * (255 & Class3_Sub24_Sub3.anIntArray3494[var2]);
+                  int var12 = var10 + -Texture.y1152 + 64 * (255 & Class3_Sub24_Sub3.regionIds[var2]);
                   int npcID = var16.readUnsignedShort();
 
                   if (GameConfig.EASTER_EVENT_ENABLED) {
@@ -280,7 +280,7 @@ final class TextureOperation37 extends TextureOperation {
                   }
 
                   NPCDefinition var13 = NPCDefinition.getNPCDefinition(npcID);
-                  if(NPC.npcs[var6] == null && (var13.aByte1267 & 1) > 0 && Class140_Sub3.anInt2745 == var8 && var11 >= 0 && 104 > var13.size + var11 && var12 >= 0 && 104 > var12 - -var13.size) {
+                  if(NPC.npcs[var6] == null && (var13.aByte1267 & 1) > 0 && Class140_Sub3.viewportZ == var8 && var11 >= 0 && 104 > var13.size + var11 && var12 >= 0 && 104 > var12 - -var13.size) {
                      NPC.npcs[var6] = new NPC();
                      NPC npc = NPC.npcs[var6];
                      AudioThread.localNPCIndexes[Class163.localNPCCount++] = var6;
@@ -294,7 +294,7 @@ final class TextureOperation37 extends TextureOperation {
                      }
 
                      npc.renderAnimationId = npc.definition.renderAnimationId;
-                     npc.method1967(npc.getSize(), var11, var12, true);
+                     npc.updateAnimationPosition(npc.getSize(), var11, var12, true);
                   }
                }
             }

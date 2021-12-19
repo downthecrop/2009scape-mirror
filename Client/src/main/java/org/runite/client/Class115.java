@@ -12,7 +12,7 @@ final class Class115 {
                     return;
                 }
 
-                Class140_Sub4 var2;
+                Entity var2;
                 int var3;
                 if (0 > var1.anInt2273) {
                     var3 = -var1.anInt2273 - 1;
@@ -70,7 +70,7 @@ final class Class115 {
                     }
 
                     if (null != var12) {
-                        Unsorted.method881(WorldListCountry.localPlane, var1.anInt2282, -96, 0, var1.anInt2271, var1.anInt2283 - -1, -1, var13, 0, var1.anInt2266 - -1);
+                        Unsorted.constructScenery(WorldListCountry.localPlane, var1.anInt2282, -96, 0, var1.anInt2271, var1.anInt2283 - -1, -1, var13, 0, var1.anInt2266 - -1);
                         var2.anInt2778 = var1.anInt2283 + Class44.anInt719;
                         var2.anInt2833 = 64 * var5 + var1.anInt2282 * 128;
                         var2.anInt2782 = var4 * 64 + 128 * var1.anInt2271;

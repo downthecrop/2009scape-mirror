@@ -25,7 +25,7 @@ final class Class52 {
                     method1168(52);
                 }
 
-                Class67.method1260(23206, -1, GameObject.aClass11ArrayArray1834[var1]);
+                Class67.method1260(23206, -1, GameObject.interfaces1834[var1]);
             }
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "hh.B(" + var0 + ',' + var1 + ')');
@@ -336,8 +336,8 @@ final class Class52 {
 
     public static void method1168(int var0) {
         try {
-            TextCore.aClass94_853 = null;
-            TextCore.aClass94_852 = null;
+            TextCore.aString_853 = null;
+            TextCore.aString_852 = null;
             if (var0 == 8160) {
                 anIntArray859 = null;
                 TextCore.COMMAND_LOWRES_GRAPHICS = null;

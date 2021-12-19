@@ -1,14 +1,14 @@
 package org.runite.client;
 
-public final class Class140_Sub7 extends GameObject {
+public final class GroundItem extends GameObject {
 
-   int anInt2930;
+   int quantity;
    static int[] anIntArray2931;
    private int anInt2932 = -32768;
    static int[] anIntArray2933 = new int[]{2, 0, 0, 2, 0, 0, 0, 4, 4};
    public static int canvasHeight;
-   static RSString[] aClass94Array2935 = new RSString[500];
-   int anInt2936;
+   static RSString[] aStringArray2935 = new RSString[500];
+   int itemId;
    static int anInt2938;
 
 
@@ -30,12 +30,12 @@ public final class Class140_Sub7 extends GameObject {
       }
    }
 
-   static boolean method2031(byte var0, boolean var1, int var2, int var3, Class3_Sub2[][][] var4, int var5) {
+   static boolean method2031(byte var0, boolean var1, int var2, int var3, TileData[][][] var4, int var5) {
       try {
          byte var6 = !var1?(byte)(255 & CSConfigCachefile.anInt1127):1;
          if(Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][var2][var3] == var6) {
             return false;
-         } else if((Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][var2][var3] & 4) == 0) {
+         } else if((Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][var2][var3] & 4) == 0) {
             return false;
          } else {
             int var8 = 0;
@@ -58,7 +58,7 @@ public final class Class140_Sub7 extends GameObject {
                var8 = 4095 & 1 + var8;
                boolean var14 = false;
                boolean var15 = false;
-               if(0 == (Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][var9][var12] & 4)) {
+               if(0 == (Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][var9][var12] & 4)) {
                   var14 = true;
                }
 
@@ -66,7 +66,7 @@ public final class Class140_Sub7 extends GameObject {
                int var16;
                label257:
                for(var16 = 1 + WorldListCountry.localPlane; 3 >= var16; ++var16) {
-                  if((Unsorted.aByteArrayArrayArray113[var16][var9][var12] & 8) == 0) {
+                  if((Unsorted.sceneryTypeMaskGrid[var16][var9][var12] & 8) == 0) {
                      int var18;
                      int var20;
                      if(var14 && var4[var16][var9][var12] != null) {
@@ -108,7 +108,7 @@ public final class Class140_Sub7 extends GameObject {
                      }
 
                      var15 = true;
-                     Class3_Sub2 var24 = var4[var16][var9][var12];
+                     TileData var24 = var4[var16][var9][var12];
                      if(var24 != null && var24.anInt2223 > 0) {
                         for(var18 = 0; var18 < var24.anInt2223; ++var18) {
                            Class25 var25 = var24.aClass25Array2221[var18];
@@ -158,7 +158,7 @@ public final class Class140_Sub7 extends GameObject {
 
                   ++var12;
                   if(104 > var12) {
-                     if(var9 + -1 >= 0 && Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][-1 + var9][var12] != var6 && (Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][var9][var12] & 4) == 0 && (Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][-1 + var9][var12 + -1] & 4) == 0) {
+                     if(var9 + -1 >= 0 && Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][-1 + var9][var12] != var6 && (Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][var9][var12] & 4) == 0 && (Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][-1 + var9][var12 + -1] & 4) == 0) {
                         TextureOperation38.anIntArray3456[var23] = TextureOperation3.bitwiseOr(1375731712, TextureOperation3.bitwiseOr(1179648, -1 + var9));
                         Class45.anIntArray729[var23] = TextureOperation3.bitwiseOr(var12, 1245184);
                         Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][-1 + var9][var12] = var6;
@@ -172,7 +172,7 @@ public final class Class140_Sub7 extends GameObject {
                         Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][var9][var12] = var6;
                      }
 
-                     if(1 + var9 < 104 && Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][var9 + 1][var12] != var6 && 0 == (Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][var9][var12] & 4) && (Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][1 + var9][var12 - 1] & 4) == 0) {
+                     if(1 + var9 < 104 && Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][var9 + 1][var12] != var6 && 0 == (Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][var9][var12] & 4) && (Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][1 + var9][var12 - 1] & 4) == 0) {
                         TextureOperation38.anIntArray3456[var23] = TextureOperation3.bitwiseOr(-1845493760, TextureOperation3.bitwiseOr(5373952, var9 + 1));
                         Class45.anIntArray729[var23] = TextureOperation3.bitwiseOr(5439488, var12);
                         Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][var9 - -1][var12] = var6;
@@ -190,7 +190,7 @@ public final class Class140_Sub7 extends GameObject {
 
                   --var12;
                   if(var12 >= 0) {
-                     if(0 <= var9 + -1 && Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][-1 + var9][var12] != var6 && (Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][var9][var12] & 4) == 0 && (Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][var9 + -1][1 + var12] & 4) == 0) {
+                     if(0 <= var9 + -1 && Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][-1 + var9][var12] != var6 && (Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][var9][var12] & 4) == 0 && (Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][var9 + -1][1 + var12] & 4) == 0) {
                         TextureOperation38.anIntArray3456[var23] = TextureOperation3.bitwiseOr(TextureOperation3.bitwiseOr(-1 + var9, 13762560), 301989888);
                         Class45.anIntArray729[var23] = TextureOperation3.bitwiseOr(var12, 13828096);
                         Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][-1 + var9][var12] = var6;
@@ -204,7 +204,7 @@ public final class Class140_Sub7 extends GameObject {
                         Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][var9][var12] = var6;
                      }
 
-                     if(var9 - -1 < 104 && Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][var9 + 1][var12] != var6 && (4 & Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][var9][var12]) == 0 && (Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][1 + var9][1 + var12] & 4) == 0) {
+                     if(var9 - -1 < 104 && Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][var9 + 1][var12] != var6 && (4 & Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][var9][var12]) == 0 && (Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][1 + var9][1 + var12] & 4) == 0) {
                         TextureOperation38.anIntArray3456[var23] = TextureOperation3.bitwiseOr(-771751936, TextureOperation3.bitwiseOr(var9 - -1, 9568256));
                         Class45.anIntArray729[var23] = TextureOperation3.bitwiseOr(9633792, var12);
                         Class158.aByteArrayArrayArray2008[WorldListCountry.localPlane][var9 + 1][var12] = var6;
@@ -252,7 +252,7 @@ public final class Class140_Sub7 extends GameObject {
             var0.index += TextureOperation16.aClass36_3112.method1017(0, var3, var4, var0.buffer, var0.index);
             return TextureOperation33.bufferToString(var4, var3, 0);
          } catch (Exception var6) {
-            return TextCore.aClass94_2018;
+            return TextCore.aString_2018;
          }
       } catch (RuntimeException var7) {
          throw ClientErrorException.clientError(var7, "uj.D(" + (var0 != null?"{...}":"null") + ',' + 1 + ',' + 32767 + ')');
@@ -261,7 +261,7 @@ public final class Class140_Sub7 extends GameObject {
 
    final void animate(int var1, int var2, int var3, int var4, int var5, int var6, int var7, int var8, long var9, int var11, Class127_Sub1 var12) {
       try {
-         Model var13 = ItemDefinition.getItemDefinition(this.anInt2936).method1110(-1, 0, null, this.anInt2930, 0);
+         Model var13 = ItemDefinition.getItemDefinition(this.itemId).method1110(-1, 0, null, this.quantity, 0);
          if(null != var13) {
             var13.animate(var1, var2, var3, var4, var5, var6, var7, var8, var9, var11, var12);
             this.anInt2932 = var13.method1871();

@@ -41,8 +41,8 @@ final class TextureOperation15 extends TextureOperation {
    static int compareEnteredLanguageArgument(RSString var0) {
       try {
 
-          for(int var2 = 0; TextureOperation4.aClass94Array3238.length > var2; ++var2) {
-            if(TextureOperation4.aClass94Array3238[var2].equalsStringIgnoreCase(var0)) {
+          for(int var2 = 0; TextureOperation4.aStringArray3238.length > var2; ++var2) {
+            if(TextureOperation4.aStringArray3238[var2].equalsStringIgnoreCase(var0)) {
                return var2;
             }
          }

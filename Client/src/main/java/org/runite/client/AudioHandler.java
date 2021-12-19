@@ -82,7 +82,7 @@ public final class AudioHandler {
                             int var4 = (soundEffectCoordinates[var1] & 0xFF) * 128;
                             int var7 = soundEffectCoordinates[var1] >> 8 & 0xFF;
                             int var5 = soundEffectCoordinates[var1] >> 16 & 0xFF;
-                            int var8 = -Class102.player.zAxis + 64 + 128 * var7;
+                            int var8 = -Class102.player.yAxis + 64 + 128 * var7;
                             if (var8 < 0) {
                                 var8 = -var8;
                             }
@@ -136,7 +136,7 @@ public final class AudioHandler {
 
     public static void method2099(int var1, CacheIndex var3, int var5) {
         try {
-            Class101.aClass153_1423 = var3;
+            Class101.musicIndex_1423 = var3;
             Class132.anInt1741 = 0;
             TextureOperation8.anInt3463 = var1;
             Unsorted.aBoolean2311 = false;
@@ -151,9 +151,9 @@ public final class AudioHandler {
 
     static void method897(Class3_Sub24_Sub4 var1, CacheIndex var2, CacheIndex var3, CacheIndex var4) {
         try {
-            Class124.aClass153_1661 = var2;
-            Class40.aClass153_679 = var4;
-            Class3_Sub28_Sub20.aClass153_3786 = var3;
+            Class124.soundFX3Index_1661 = var2;
+            Class40.soundFXIndex_679 = var4;
+            Class3_Sub28_Sub20.soundFX2Index_3786 = var3;
             Class101.aClass3_Sub24_Sub4_1421 = var1;
         } catch (RuntimeException var6) {
             throw ClientErrorException.clientError(var6, "ck.C(" + (var1 != null ? "{...}" : "null") + ',' + (var2 != null ? "{...}" : "null") + ',' + (var3 != null ? "{...}" : "null") + ',' + (var4 != null ? "{...}" : "null") + ')');

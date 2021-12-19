@@ -4,14 +4,14 @@ import java.util.Objects;
 
 public final class Class97 {
 
-    public static CacheIndex aClass153_1378;
+    public static CacheIndex fontsIndex_1378;
     static byte[] aByteArray1364 = new byte['\u8080'];
-    static CacheIndex aClass153_1370;
-    static CacheIndex aClass153_1372;
+    static CacheIndex itemConfigIndex_1370;
+    static CacheIndex configurationsIndex_1372;
     static int[][] anIntArrayArray1373;
-    static RSString aClass94_1374;
+    static RSString aString_1374;
     static int anInt1375;
-    static RSString aClass94_1380;
+    static RSString aString_1380;
 
     static {
         int var0 = 0;
@@ -22,9 +22,9 @@ public final class Class97 {
             }
         }
 
-        aClass94_1374 = RSString.parse("zap");
+        aString_1374 = RSString.parse("zap");
         anIntArrayArray1373 = new int[104][104];
-        aClass94_1380 = RSString.parse(")4p=");
+        aString_1380 = RSString.parse(")4p=");
     }
 
     private final int anInt1367;
@@ -66,8 +66,8 @@ public final class Class97 {
 
     static void method1593(int var0, CacheIndex var1) {
         try {
-            Class154.anInt1966 = var1.getArchiveForName(TextCore.aClass94_3574);
-            CSConfigCachefile.anInt1124 = var1.getArchiveForName(TextCore.aClass94_1341);
+            Class154.anInt1966 = var1.getArchiveForName(TextCore.aString_3574);
+            CSConfigCachefile.anInt1124 = var1.getArchiveForName(TextCore.aString_1341);
             if (var0 <= 108) {
                 method1593(14, null);
             }
@@ -105,7 +105,7 @@ public final class Class97 {
 
             this.aClass3_Sub20Array1371 = null;
             this.anIntArrayArrayArray1362 = null;
-            this.aLinkedList_1366.method1211(-118);
+            this.aLinkedList_1366.clear();
             this.aLinkedList_1366 = null;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "nd.E(" + (byte) -22 + ')');

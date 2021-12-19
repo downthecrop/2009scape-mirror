@@ -89,7 +89,7 @@ public final class Class43 {
     static AbstractSprite method1062(int var0) {
         try {
             byte[] var2 = Class163_Sub1.aByteArrayArray2987[0];
-            int var1 = Class140_Sub7.anIntArray2931[0] * Unsorted.anIntArray3076[0];
+            int var1 = GroundItem.anIntArray2931[0] * Unsorted.anIntArray3076[0];
             int[] var3 = new int[var1];
             if (var0 < 70) {
                 method1062(67);
@@ -101,9 +101,9 @@ public final class Class43 {
 
             Object var6;
             if (HDToolKit.highDetail) {
-                var6 = new HDSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], var3);
+                var6 = new HDSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], GroundItem.anIntArray2931[0], Unsorted.anIntArray3076[0], var3);
             } else {
-                var6 = new SoftwareSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], Class140_Sub7.anIntArray2931[0], Unsorted.anIntArray3076[0], var3);
+                var6 = new SoftwareSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[0], Unsorted.anIntArray2591[0], GroundItem.anIntArray2931[0], Unsorted.anIntArray3076[0], var3);
             }
 
             Class39.method1035((byte) 111);

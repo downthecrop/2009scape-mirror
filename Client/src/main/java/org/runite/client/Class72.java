@@ -20,7 +20,7 @@ final class Class72 {
         try {
             if (!Client.paramAdvertisementSuppressed && Class44.paramModeWhere != 2) {
                 try {
-                    TextCore.aClass94_38.method1577(Client.clientInstance);
+                    TextCore.aString_38.method1577(Client.clientInstance);
                 } catch (Throwable var2) {
                 }
 
@@ -34,7 +34,7 @@ final class Class72 {
         anInt1672 = 0;
 
         label188:
-        for (int var0 = 0; var0 < Class3_Sub4.anInt2249; ++var0) {
+        for (int var0 = 0; var0 < Scenery.anInt2249; ++var0) {
             Class113 var1 = Class3_Sub28_Sub8.aClass113Array3610[var0];
             int var2;
             if (anIntArray3045 != null) {
@@ -50,16 +50,16 @@ final class Class72 {
             boolean var5;
             int var6;
             if (var1.anInt1554 == 1) {
-                var2 = var1.anInt1553 - Class97.anInt1375 + TextureOperation8.anInt3466;
-                if (var2 >= 0 && var2 <= TextureOperation8.anInt3466 + TextureOperation8.anInt3466) {
-                    var3 = var1.anInt1563 - Class145.anInt3340 + TextureOperation8.anInt3466;
+                var2 = var1.anInt1553 - Class97.anInt1375 + TextureOperation8.renderDistanceTiles;
+                if (var2 >= 0 && var2 <= TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles) {
+                    var3 = var1.anInt1563 - Class145.anInt3340 + TextureOperation8.renderDistanceTiles;
                     if (var3 < 0) {
                         var3 = 0;
                     }
 
-                    var4 = var1.anInt1566 - Class145.anInt3340 + TextureOperation8.anInt3466;
-                    if (var4 > TextureOperation8.anInt3466 + TextureOperation8.anInt3466) {
-                        var4 = TextureOperation8.anInt3466 + TextureOperation8.anInt3466;
+                    var4 = var1.anInt1566 - Class145.anInt3340 + TextureOperation8.renderDistanceTiles;
+                    if (var4 > TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles) {
+                        var4 = TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles;
                     }
 
                     var5 = false;
@@ -92,16 +92,16 @@ final class Class72 {
                     }
                 }
             } else if (var1.anInt1554 == 2) {
-                var2 = var1.anInt1563 - Class145.anInt3340 + TextureOperation8.anInt3466;
-                if (var2 >= 0 && var2 <= TextureOperation8.anInt3466 + TextureOperation8.anInt3466) {
-                    var3 = var1.anInt1553 - Class97.anInt1375 + TextureOperation8.anInt3466;
+                var2 = var1.anInt1563 - Class145.anInt3340 + TextureOperation8.renderDistanceTiles;
+                if (var2 >= 0 && var2 <= TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles) {
+                    var3 = var1.anInt1553 - Class97.anInt1375 + TextureOperation8.renderDistanceTiles;
                     if (var3 < 0) {
                         var3 = 0;
                     }
 
-                    var4 = var1.anInt1547 - Class97.anInt1375 + TextureOperation8.anInt3466;
-                    if (var4 > TextureOperation8.anInt3466 + TextureOperation8.anInt3466) {
-                        var4 = TextureOperation8.anInt3466 + TextureOperation8.anInt3466;
+                    var4 = var1.anInt1547 - Class97.anInt1375 + TextureOperation8.renderDistanceTiles;
+                    if (var4 > TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles) {
+                        var4 = TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles;
                     }
 
                     var5 = false;
@@ -136,25 +136,25 @@ final class Class72 {
             } else if (var1.anInt1554 == 4) {
                 var2 = var1.anInt1544 - Unsorted.anInt3657;
                 if (var2 > 128) {
-                    var3 = var1.anInt1563 - Class145.anInt3340 + TextureOperation8.anInt3466;
+                    var3 = var1.anInt1563 - Class145.anInt3340 + TextureOperation8.renderDistanceTiles;
                     if (var3 < 0) {
                         var3 = 0;
                     }
 
-                    var4 = var1.anInt1566 - Class145.anInt3340 + TextureOperation8.anInt3466;
-                    if (var4 > TextureOperation8.anInt3466 + TextureOperation8.anInt3466) {
-                        var4 = TextureOperation8.anInt3466 + TextureOperation8.anInt3466;
+                    var4 = var1.anInt1566 - Class145.anInt3340 + TextureOperation8.renderDistanceTiles;
+                    if (var4 > TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles) {
+                        var4 = TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles;
                     }
 
                     if (var3 <= var4) {
-                        int var10 = var1.anInt1553 - Class97.anInt1375 + TextureOperation8.anInt3466;
+                        int var10 = var1.anInt1553 - Class97.anInt1375 + TextureOperation8.renderDistanceTiles;
                         if (var10 < 0) {
                             var10 = 0;
                         }
 
-                        var6 = var1.anInt1547 - Class97.anInt1375 + TextureOperation8.anInt3466;
-                        if (var6 > TextureOperation8.anInt3466 + TextureOperation8.anInt3466) {
-                            var6 = TextureOperation8.anInt3466 + TextureOperation8.anInt3466;
+                        var6 = var1.anInt1547 - Class97.anInt1375 + TextureOperation8.renderDistanceTiles;
+                        if (var6 > TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles) {
+                            var6 = TextureOperation8.renderDistanceTiles + TextureOperation8.renderDistanceTiles;
                         }
 
                         boolean var7 = false;

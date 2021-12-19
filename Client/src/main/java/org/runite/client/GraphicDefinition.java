@@ -25,7 +25,7 @@ public final class GraphicDefinition {
 		try {
 			GraphicDefinition def = (GraphicDefinition) Class3_Sub31.aReferenceCache_2604.get(graphicId);
 			if (def == null) {
-				byte[] var3 = TextureOperation19.aClass153_3214.getFile(graphicId >>> 8, graphicId & 0xFF);
+				byte[] var3 = TextureOperation19.graphicFXIndex_3214.getFile(graphicId >>> 8, graphicId & 0xFF);
 				def = new GraphicDefinition();
 				def.graphicId = graphicId;
 
@@ -108,7 +108,7 @@ public final class GraphicDefinition {
 		try {
 			Model var5 = (Model)Class27.aReferenceCache_511.get(this.graphicId);
             if(var5 == null) {
-                Model_Sub1 var6 = Model_Sub1.method2015(Unsorted.aClass153_4048, this.anInt541);
+                Model_Sub1 var6 = Model_Sub1.method2015(Unsorted.modelsIndex_4048, this.anInt541);
                 if(null == var6) {
                     return null;
                 }
@@ -164,7 +164,7 @@ public final class GraphicDefinition {
 	static void method967(int var0, int var1, int var3, int var4, int var5, int var6, int var7) {
 		try {
 			if(Unsorted.loadInterface(var5)) {
-                Client.handleItemSwitch(GameObject.aClass11ArrayArray1834[var5], -1, var6, var1, var4, var7, var0, var3);
+                Client.handleItemSwitch(GameObject.interfaces1834[var5], -1, var6, var1, var4, var7, var0, var3);
             }
 		} catch (RuntimeException var9) {
 			throw ClientErrorException.clientError(var9, "eg.B(" + var0 + ',' + var1 + ',' + 2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ')');

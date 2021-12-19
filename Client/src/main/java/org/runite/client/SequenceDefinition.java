@@ -9,11 +9,11 @@ public final class SequenceDefinition {
 	boolean aBoolean1846 = false;
 	static volatile long aLong1847 = 0L;
 	boolean aBoolean1848 = false;
-	int rightHandItem = -1;
+	public int rightHandItem = -1;
 	int priority = -1;
-	int[] frames;
-	public static CacheIndex aClass153_1852;
-	int leftHandItem = -1;
+	public int[] frames;
+	public static CacheIndex spritesIndex_1852;
+	public int leftHandItem = -1;
 	boolean[] aBooleanArray1855;
 	public static AbstractIndexedSprite aClass109_1856;
 	int forcedPriority = 5;
@@ -27,11 +27,11 @@ public final class SequenceDefinition {
 	int[][] sounds;
 	static Class25[] aClass25Array1868;
 	int[] duration;
-	private int[] baseIds;
+	public int[] baseIds;
 	static int[] anIntArray1871 = new int[2];
 	boolean aBoolean1872 = false;
 
-	static SequenceDefinition getAnimationDefinition(int var0) {
+	public static SequenceDefinition getAnimationDefinition(int var0) {
 		try {
 
 			SequenceDefinition var2 = (SequenceDefinition) Texture.aReferenceCache_1146.get(var0);
@@ -434,7 +434,7 @@ public final class SequenceDefinition {
 			Class23.method940(119, 0);
 
 			for(var1 = 0; var1 < 100; ++var1) {
-				LinkableRSString.aClass94Array2580[var1] = null;
+				LinkableRSString.aStringArray2580[var1] = null;
 			}
 
 			Class164_Sub1.anInt3012 = 0;
@@ -464,23 +464,23 @@ public final class SequenceDefinition {
 			}
 
 			Class102.player = Unsorted.players[2047] = new Player();
-			TextureOperation13.aLinkedList_3364.method1211(-112);
-			TextureOperation17.aLinkedList_3177.method1211(-58);
-			if(null != Class39.aLinkedListArrayArrayArray3273) {
+			TextureOperation13.aLinkedList_3364.clear();
+			TextureOperation17.aLinkedList_3177.clear();
+			if(null != Class39.groundItems) {
 				for(var1 = 0; 4 > var1; ++var1) {
 					for(int var2 = 0; var2 < 104; ++var2) {
 						for(int var3 = 0; var3 < 104; ++var3) {
-							Class39.aLinkedListArrayArrayArray3273[var1][var2][var3] = null;
+							Class39.groundItems[var1][var2][var3] = null;
 						}
 					}
 				}
 			}
 
-			TextureOperation26.aLinkedList_3075 = new LinkedList();
+			Scenery.sceneryList = new LinkedList();
 			CS2Script.anInt1357 = 0;
 			Class8.anInt104 = 0;
 			TextureOperation6.method176(-114);
-			Class3_Sub2.method103();
+			TileData.method103();
 			Class75.anInt1105 = 0;
 			Class163_Sub2_Sub1.anInt4014 = 0;
 			Class157.anInt1996 = 0;
@@ -492,8 +492,8 @@ public final class SequenceDefinition {
 			Unsorted.anInt3631 = 0;
 			Class163_Sub2_Sub1.anInt4021 = 0;
 
-			for(var1 = 0; var1 < NPCDefinition.anIntArray1277.length; ++var1) {
-				NPCDefinition.anIntArray1277[var1] = -1;
+			for(var1 = 0; var1 < NPCDefinition.varcArray.length; ++var1) {
+				NPCDefinition.varcArray[var1] = -1;
 			}
 
 			if(ConfigInventoryDefinition.anInt3655 != -1) {
@@ -513,7 +513,7 @@ public final class SequenceDefinition {
 			Unsorted.aClass52_1112.method1161(new int[]{0, 0, 0, 0, 0}, -1, false, null, -1);
 
 			for(var1 = 0; 8 > var1; ++var1) {
-				Class91.aClass94Array1299[var1] = null;
+				Class91.aStringArray1299[var1] = null;
 				Class1.aBooleanArray54[var1] = false;
 				TextureOperation35.anIntArray3328[var1] = -1;
 			}
@@ -527,7 +527,7 @@ public final class SequenceDefinition {
 
 			Unsorted.clanSize = 0;
 			PacketParser.aClass3_Sub19Array3694 = null;
-			RSInterface.aClass94_251 = null;
+			RSInterface.aString_251 = null;
 
 			for(var1 = 0; 6 > var1; ++var1) {
 				TextureOperation29.aClass133Array3393[var1] = new Class133();
@@ -545,7 +545,7 @@ public final class SequenceDefinition {
 
 			Unsorted.aBoolean4068 = true;
 			Class113.interfacePacketCounter = 0;
-			TextureOperation32.aClass94_3353 = TextCore.HasWalkHere;
+			TextureOperation32.aString_3353 = TextCore.HasWalkHere;
 			Unsorted.aBoolean1084 = false;
 			TextureOperation38.aShortArray3455 = TextureOperation16.aShortArray3110 = Class136.aShortArray1779 = TextureOperation38.aShortArray3453 = new short[256];
 			InvalidateData.method165();

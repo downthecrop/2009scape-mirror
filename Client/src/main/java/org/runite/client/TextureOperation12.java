@@ -130,7 +130,7 @@ public final class TextureOperation12 extends TextureOperation {
 			}
 
 			if(Unsorted.loadInterface(var1)) {
-				Unsorted.method1095(var2, var8, var4, GameObject.aClass11ArrayArray1834[var1], var3, -1, var7, var6, (byte)119, var5);
+				Unsorted.method1095(var2, var8, var4, GameObject.interfaces1834[var1], var3, -1, var7, var6, (byte)119, var5);
 			} else if (var5 == -1) {
 				for (int var9 = 0; var9 < 100; ++var9) {
 					Unsorted.aBooleanArray3674[var9] = true;

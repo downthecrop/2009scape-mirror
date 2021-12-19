@@ -17,7 +17,45 @@ import javax.sound.sampled.AudioFileFormat;
 import javax.sound.sampled.AudioFormat;
 import javax.sound.sampled.AudioInputStream
 import javax.sound.sampled.AudioSystem;
+import java.lang.reflect.*;
 
+fun reflectFields(o: Any?, depth: Int): StringBuilder {
+    if(o == null) {
+        return StringBuilder("null")
+    }
+    if(depth == 0) {
+        return StringBuilder("${o}")
+    }
+    val clazz = (o as Object).getClass()
+    if(clazz.isArray()) {
+        val len = java.lang.reflect.Array.getLength(o)
+        var ret = StringBuilder("[")
+        for(i in 0 until len) {
+            ret.append(reflectFields(java.lang.reflect.Array.get(o, i), depth-1))
+            if(i != len-1) {
+                ret.append(", ")
+            }
+        }
+        ret.append("]")
+        return ret
+    } else if(clazz.isPrimitive() || o is Number || o is Boolean) {
+        return StringBuilder("${o}")
+    } else {
+        var ret = StringBuilder("${clazz.getName()} {")
+        val fields = clazz.getDeclaredFields()
+        for(i in 0 until fields.size) {
+            if(!fields[i].isAccessible()) {
+                fields[i].setAccessible(true)
+            }
+            ret.append("${fields[i].name}: ${reflectFields(fields[i].get(o), depth-1)}")
+            if(i != fields.size - 1) {
+                ret.append(", ")
+            }
+        }
+        ret.append("}")
+        return ret
+    }
+}
 
 // TODO Escape characters in the string rendering - is this something we can do using RSString / the text renders?
 object DeveloperConsole {
@@ -249,6 +287,27 @@ object DeveloperConsole {
                     println("Error. Displays error message on login, account creation. Use: errormsg #")
                 }
             }
+            "reflectstatic" -> {
+                if(argSize == 3) {
+                    try {
+                        val className = "org.runite.client.${clientCommand[1]}"
+                        val fieldName = clientCommand[2];
+                        val clazz = Class.forName(className);
+                        val field = clazz.getDeclaredField(fieldName)
+                        if(!field.isAccessible()) {
+                            field.setAccessible(true)
+                        }
+                        val value = field.get(null);
+                        val line = "${className}.${fieldName} == ${value} / ${reflectFields(value, 1)}"
+                        System.out.println(line)
+                        //println(line)
+                    } catch(e: Exception) {
+                        e.printStackTrace()
+                    }
+                } else {
+                    println("Usage: reflectstatic classname fieldname")
+                }
+            }
             "dumpscript" -> {
                 if (argSize == 2) {
                     val i = clientCommand[1].toIntOrNull()
@@ -257,6 +316,92 @@ object DeveloperConsole {
                     }
                 } else {
                     println("Error. Dumps a cs2 script. Use: dumpscript #")
+                }
+            }
+            "dumpobjs" -> {
+                if (argSize == 3) {
+                    var beginID = if (clientCommand[1].toIntOrNull() == null) 0 else clientCommand[1].toInt()
+                    var endID = if (clientCommand[2].toIntOrNull() == null) 0 else clientCommand[2].toInt()
+                    if (beginID > endID) {
+                        val tmp = endID;
+                        endID = beginID;
+                        beginID = tmp;
+                    }
+                    try {
+                        for(i in beginID..endID) {
+                            val obj = ObjectDefinition.getObjectDefinition(i)
+                            var line = "Object ${i} - ${obj.name} - ["
+                            for(j in 0 until obj.options.size) {
+                                line += "${obj.options[j]}"
+                                if(j != obj.options.size - 1) {
+                                    line += ", "
+                                }
+                            }
+                            line += "]"
+                            line += " - ${obj.ConfigFileId} - ${obj.ConfigId}"
+                            if(obj.ChildrenIds != null) {
+                                line += " - ["
+                                for(j in 0 until obj.ChildrenIds.size) {
+                                    line += "${obj.ChildrenIds[j]}"
+                                    if(j != obj.ChildrenIds.size - 1) {
+                                        line += ", "
+                                    }
+                                }
+                                line += "]"
+                            }
+                            println(line)
+                            System.out.println(line)
+                        }
+                    } catch(e: Throwable) {
+                        e.printStackTrace()
+                    }
+                } else {
+                    println("Usage: dumpobjs beginID endID")
+                }
+            }
+            "dumpanimsforitem" -> {
+                if (argSize >= 2) {
+                    var beginID = if (clientCommand[1].toIntOrNull() == null) 0 else clientCommand[1].toInt()
+                    var endID = if(argSize > 2) clientCommand[2].toInt() else beginID
+                    for(i in 0 until 16384) {
+                        val anim = SequenceDefinition.getAnimationDefinition(i)
+                        if((beginID <= anim.leftHandItem && anim.leftHandItem <= endID) ||
+                            (beginID <= anim.rightHandItem && anim.rightHandItem <= endID)) {
+                            //System.out.println("anim ${i}, item ${anim.rightHandItem}, ${reflectFields(anim, 2)}")
+                            val frameStr = if(anim.frames != null && anim.frames.size > 0) { anim.frames[0] shr 16 } else { "null" }
+                            System.out.println("anim ${i}, item ${anim.rightHandItem} ${anim.leftHandItem}, ${frameStr}")
+                        }
+                    }
+                }
+
+            }
+            "dumpnpcs" -> {
+                if (argSize == 3) {
+                    var beginID = if (clientCommand[1].toIntOrNull() == null) 0 else clientCommand[1].toInt()
+                    var endID = if (clientCommand[2].toIntOrNull() == null) 0 else clientCommand[2].toInt()
+                    if (beginID > endID) {
+                        val tmp = endID;
+                        endID = beginID;
+                        beginID = tmp;
+                    }
+                    try {
+                        for(i in beginID..endID) {
+                            val npc = NPCDefinition.getNPCDefinition(i)
+                            var line = "NPC ${i} - ${npc.NPCName} - ["
+                            for(j in 0 until npc.options.size) {
+                                line += "${npc.options[j]}"
+                                if(j != npc.options.size - 1) {
+                                    line += ", "
+                                }
+                            }
+                            line += "]"
+                            line += " - ${npc.configId}"
+                            println(line)
+                            System.out.println(line)
+                        }
+                    } catch(e: Throwable) {}
+                } else {
+                    println("Usage: dumpnpcs beginID endID")
                 }
             }
             "playsound" -> {

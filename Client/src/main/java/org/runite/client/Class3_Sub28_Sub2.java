@@ -4,7 +4,7 @@ import org.rs09.client.Node;
 
 final class Class3_Sub28_Sub2 extends Node {
 
-   Class140_Sub2 aClass140_Sub2_3545;
+   PositionedGraphicObject aPositionedGraphicObject_3545;
 
    static void method535(byte var0, int var1) {
       try {
@@ -31,9 +31,9 @@ final class Class3_Sub28_Sub2 extends Node {
       }
    }
 
-   Class3_Sub28_Sub2(Class140_Sub2 var1) {
+   Class3_Sub28_Sub2(PositionedGraphicObject var1) {
       try {
-         this.aClass140_Sub2_3545 = var1;
+         this.aPositionedGraphicObject_3545 = var1;
       } catch (RuntimeException var3) {
          throw ClientErrorException.clientError(var3, "bk.<init>(" + (var1 != null?"{...}":"null") + ')');
       }

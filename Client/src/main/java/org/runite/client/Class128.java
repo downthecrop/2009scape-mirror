@@ -33,19 +33,19 @@ final class Class128 {
                 System.err.println("Local plane " + WorldListCountry.localPlane + " is out of bounds - rendering log=" + Arrays.toString(PlayerRendering.PLAYER_RENDER_LOG) + "!");
                 WorldListCountry.localPlane %= 4;
             }
-            LinkedList var3 = Class39.aLinkedListArrayArrayArray3273[WorldListCountry.localPlane][var2][var0];
+            LinkedList var3 = Class39.groundItems[WorldListCountry.localPlane][var2][var0];
             if (var3 == null) {
                 ObjectDefinition.method1688(WorldListCountry.localPlane, var2, var0);
             } else {
                 int var4 = -99999999;
-                WorldMap var5 = null;
+                GroundItemLink var5 = null;
 
-                WorldMap var6;
-                for (var6 = (WorldMap) var3.method1222(); null != var6; var6 = (WorldMap) var3.method1221()) {
-                    ItemDefinition var7 = ItemDefinition.getItemDefinition(var6.aClass140_Sub7_3676.anInt2936);
+                GroundItemLink var6;
+                for (var6 = (GroundItemLink) var3.startIteration(); null != var6; var6 = (GroundItemLink) var3.nextIteration()) {
+                    ItemDefinition var7 = ItemDefinition.getItemDefinition(var6.aGroundItem_3676.itemId);
                     int var8 = var7.value;
                     if (var7.stackingType == 1) {
-                        var8 *= 1 + var6.aClass140_Sub7_3676.anInt2930;
+                        var8 *= 1 + var6.aGroundItem_3676.quantity;
                     }
 
                     if (var4 < var8) {
@@ -58,24 +58,24 @@ final class Class128 {
                     ObjectDefinition.method1688(WorldListCountry.localPlane, var2, var0);
                 } else {
                     var3.method1216(var5);
-                    Class140_Sub7 var12 = null;
-                    Class140_Sub7 var14 = null;
+                    GroundItem var12 = null;
+                    GroundItem var14 = null;
 
-                    for (var6 = (WorldMap) var3.method1222(); var6 != null; var6 = (WorldMap) var3.method1221()) {
-                        Class140_Sub7 var9 = var6.aClass140_Sub7_3676;
-                        if (var5.aClass140_Sub7_3676.anInt2936 != var9.anInt2936) {
+                    for (var6 = (GroundItemLink) var3.startIteration(); var6 != null; var6 = (GroundItemLink) var3.nextIteration()) {
+                        GroundItem var9 = var6.aGroundItem_3676;
+                        if (var5.aGroundItem_3676.itemId != var9.itemId) {
                             if (null == var12) {
                                 var12 = var9;
                             }
 
-                            if (var12.anInt2936 != var9.anInt2936 && null == var14) {
+                            if (var12.itemId != var9.itemId && null == var14) {
                                 var14 = var9;
                             }
                         }
                     }
 
                     long var13 = 1610612736 + (var0 << 7) + var2;
-                    TextureOperation30.method213(WorldListCountry.localPlane, var2, var0, Class121.method1736(WorldListCountry.localPlane, 1, 64 + 128 * var2, 64 + var0 * 128), var5.aClass140_Sub7_3676, var13, var12, var14);
+                    TextureOperation30.method213(WorldListCountry.localPlane, var2, var0, Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, 64 + 128 * var2, 64 + var0 * 128), var5.aGroundItem_3676, var13, var12, var14);
                 }
             }
         } catch (RuntimeException var11) {
@@ -108,9 +108,9 @@ final class Class128 {
             int var15;
             if (HDToolKit.highDetail) {
                 Class140_Sub1_Sub1 var14 = (Class140_Sub1_Sub1) var9;
-                if (var6 != Class121.method1736(WorldListCountry.localPlane, 1, var4 + var17, var2 + var12) || var6 != Class121.method1736(WorldListCountry.localPlane, 1, var4 - -var11, var13 + var2)) {
+                if (var6 != Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var4 + var17, var2 + var12) || var6 != Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var4 - -var11, var13 + var2)) {
                     for (var15 = 0; var14.anInt3823 > var15; ++var15) {
-                        var14.anIntArray3845[var15] += Class121.method1736(WorldListCountry.localPlane, 1, var14.anIntArray3822[var15] + var4, var14.anIntArray3848[var15] + var2) - var6;
+                        var14.anIntArray3845[var15] += Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var14.anIntArray3822[var15] + var4, var14.anIntArray3848[var15] + var2) - var6;
                     }
 
                     var14.aClass121_3839.aBoolean1640 = false;
@@ -118,9 +118,9 @@ final class Class128 {
                 }
             } else {
                 Class140_Sub1_Sub2 var18 = (Class140_Sub1_Sub2) var9;
-                if (var6 != Class121.method1736(WorldListCountry.localPlane, 1, var17 + var4, var12 + var2) || var6 != Class121.method1736(WorldListCountry.localPlane, 1, var4 - -var11, var13 + var2)) {
+                if (var6 != Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var17 + var4, var12 + var2) || var6 != Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var4 - -var11, var13 + var2)) {
                     for (var15 = 0; var18.anInt3891 > var15; ++var15) {
-                        var18.anIntArray3883[var15] += Class121.method1736(WorldListCountry.localPlane, 1, var4 + var18.anIntArray3885[var15], var18.anIntArray3895[var15] + var2) - var6;
+                        var18.anIntArray3883[var15] += Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var4 + var18.anIntArray3885[var15], var18.anIntArray3895[var15] + var2) - var6;
                     }
 
                     var18.aBoolean3897 = false;
@@ -135,9 +135,9 @@ final class Class128 {
 
     static void method1764() {
         for (int var3 = 0; var3 < Class3_Sub17.anInt2456; ++var3) {
-            for (int var4 = 0; var4 < Unsorted.anInt1234; ++var4) {
-                for (int var5 = 0; var5 < TextureOperation17.anInt3179; ++var5) {
-                    Class3_Sub2 var6 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var3][var4][var5];
+            for (int var4 = 0; var4 < Unsorted.width1234; ++var4) {
+                for (int var5 = 0; var5 < TextureOperation17.height3179; ++var5) {
+                    TileData var6 = TileData.aTileDataArrayArrayArray2638[var3][var4][var5];
                     if (var6 != null) {
                         Class70 var7 = var6.aClass70_2234;
                         if (var7 != null && var7.aClass140_1049.method1865()) {
