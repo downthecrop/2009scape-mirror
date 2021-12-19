@@ -14,7 +14,7 @@ object ServerStore {
     var counter = 0
 
     fun init(){
-        val dir = File(ServerConstants.DATA_PATH + File.separator + "serverstore")
+        val dir = File(ServerConstants.STORE_PATH!!)
         if(!dir.exists()){
             dir.mkdirs()
             return
