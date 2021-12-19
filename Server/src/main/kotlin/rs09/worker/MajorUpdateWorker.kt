@@ -5,12 +5,15 @@ import core.game.system.SystemManager
 import core.game.system.SystemState
 import core.game.system.task.Pulse
 import core.plugin.CorePluginTypes.Managers
+import gui.GuiEvent
+import gui.ServerMonitor
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import rs09.Server
 import rs09.ServerConstants
 import rs09.ServerStore
+import rs09.game.ai.general.GeneralBotCreator
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
@@ -44,7 +47,25 @@ class MajorUpdateWorker {
 
             //run our pulses
             for(pulse in list) {
+                val b = System.currentTimeMillis()
                 if (pulse == null || pulse.update()) rmlist.add(pulse)
+
+                val time = System.currentTimeMillis() - b
+
+                if(time >= 100){
+                    if(pulse is GeneralBotCreator.BotScriptPulse){
+                        SystemLogger.logWarn("CRITICALLY Long Botscript Tick: ${pulse.botScript.javaClass.name} - $time ms")
+                    } else {
+                        SystemLogger.logWarn("CRITICALLY long running pulse: ${pulse.javaClass.name} - $time ms")
+                    }
+                }
+                else if(time >= 30){
+                    if(pulse is GeneralBotCreator.BotScriptPulse){
+                        SystemLogger.logWarn("Long Botscript Tick: ${pulse.botScript.javaClass.name} - $time ms")
+                    } else {
+                        SystemLogger.logWarn("Long Running Pulse: ${pulse.javaClass.name} - $time ms")
+                    }
+                }
             }
 
             //remove all null or finished pulses from the list
@@ -58,7 +79,9 @@ class MajorUpdateWorker {
                 sequence.start()
                 sequence.run()
                 sequence.end()
-                PacketWriteQueue.flush()
+                GlobalScope.launch {
+                    PacketWriteQueue.flush()
+                }
             } catch (e: Exception){
                 e.printStackTrace()
             }
@@ -95,12 +118,18 @@ class MajorUpdateWorker {
             }
 
             val end = System.currentTimeMillis()
+            ServerMonitor.eventQueue.add(GuiEvent.UpdateTickTime(end - start))
+            ServerMonitor.eventQueue.add(GuiEvent.UpdatePulseCount(GameWorld.Pulser.TASKS.size))
             Thread.sleep(max(600 - (end - start), 0))
         }
     }
+
     fun start() {
         if(!started){
             worker.start()
         }
+
+        if (ServerConstants.ALLOW_GUI)
+            ServerMonitor.open()
     }
 }
