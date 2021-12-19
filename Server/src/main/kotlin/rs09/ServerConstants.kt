@@ -27,7 +27,7 @@ class ServerConstants {
 		@JvmField
 		var CACHE_PATH: String? = null
 
-		//path for the server store (obsolete, but kept for the sake of system sanity.)
+		//path for the server store
 		@JvmField
 		var STORE_PATH: String? = null
 
@@ -64,11 +64,11 @@ class ServerConstants {
 
 		//the max number of players.
 		@JvmField
-		var MAX_PLAYERS = 0
+		var MAX_PLAYERS = 2000
 
 		//the max number of NPCs
 		@JvmField
-		var MAX_NPCS = 0
+		var MAX_NPCS = 32000
 
 		//the location where new players are placed on login.
 		@JvmField
@@ -181,55 +181,5 @@ class ServerConstants {
 
 		@JvmField
 		var DAILY_RESTART = false
-
-		/**
-		 * Parses a JSONObject and retrieves the values for all settings in this file.
-		 * @author Ceikry
-		 * @param data : The JSONObject to parse.
-		 */
-		fun parse(data: JSONObject) {
-			MAX_PLAYERS = data["max_players"].toString().toInt()
-			MAX_NPCS = data["max_npcs"].toString().toInt()
-
-			START_LOCATION = rs09.JSONUtils.parseLocation(data["new_player_location"].toString())
-			HOME_LOCATION = rs09.JSONUtils.parseLocation(data["home_location"].toString())
-
-			DATA_PATH = rs09.JSONUtils.parsePath(data["data_path"].toString())
-			CACHE_PATH = rs09.JSONUtils.parsePath(data["cache_path"].toString())
-			STORE_PATH = rs09.JSONUtils.parsePath(data["store_path"].toString())
-			PLAYER_SAVE_PATH = rs09.JSONUtils.parsePath(data["save_path"].toString())
-			CONFIG_PATH = rs09.JSONUtils.parsePath(data["configs_path"].toString())
-			PLAYER_ATTRIBUTE_PATH = PLAYER_SAVE_PATH + "attributes" + File.separator
-			GRAND_EXCHANGE_DATA_PATH = rs09.JSONUtils.parsePath(data["grand_exchange_data_path"].toString())
-			BOT_DATA_PATH = rs09.JSONUtils.parsePath(data["bot_data_path"].toString())
-			RDT_DATA_PATH = rs09.JSONUtils.parsePath(data["rare_drop_table_path"].toString())
-			OBJECT_PARSER_PATH = rs09.JSONUtils.parsePath(data["object_parser_path"].toString())
-			SCRIPTS_PATH = rs09.JSONUtils.parsePath(data["scripts_path"].toString())
-			DIALOGUE_SCRIPTS_PATH = rs09.JSONUtils.parsePath(data["dialogue_scripts_path"].toString())
-			if(data.containsKey("logs_path")){
-				LOGS_PATH = data["logs_path"].toString()
-			}
-			if(data.containsKey("writeLogs")){
-				WRITE_LOGS = data["writeLogs"] as Boolean
-			}
-			if(data.containsKey("enable_gui")){
-				ALLOW_GUI = data["enable_gui"] as Boolean
-			}
-
-			DATABASE_NAME = data["database_name"].toString()
-			DATABASE_USER = data["database_username"].toString()
-			DATABASE_PASS = data["database_password"].toString()
-			DATABASE_ADDRESS = data["database_address"].toString()
-			DATABASE_PORT = data["database_port"].toString()
-
-			DATABASE = Database(DATABASE_ADDRESS, DATABASE_NAME, DATABASE_USER, DATABASE_PASS)
-
-			if(data.containsKey("daily_restart")){
-				DAILY_RESTART = data["daily_restart"] as Boolean
-			}
-
-			if(data.containsKey("ms_secret_key")) MS_SECRET_KEY = data["ms_secret_key"].toString()
-			else MS_SECRET_KEY = "2009scape_development"
-		}
 	}
 }

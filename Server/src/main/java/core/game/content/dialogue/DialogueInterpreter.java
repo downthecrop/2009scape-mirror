@@ -8,9 +8,6 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import core.game.system.script.ScriptContext;
-import core.game.system.script.ScriptManager;
-import core.game.system.script.context.*;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
@@ -42,11 +39,6 @@ public final class DialogueInterpreter {
     private static final Map<Integer, DialoguePlugin> PLUGINS = new HashMap<>();
 
     /**
-     * The dialogue scripts.
-     */
-    private static final Map<Integer, ScriptContext> SCRIPTS = new HashMap<>();
-
-    /**
      * a List of dialogue actions.
      */
     private final List<DialogueAction> actions = new ArrayList<>(10);
@@ -55,11 +47,6 @@ public final class DialogueInterpreter {
      * The currently opened dialogue.
      */
     private DialoguePlugin dialogue;
-
-    /**
-     * Scripted dialogue current stage.
-     */
-    private ScriptContext dialogueStage;
 
     /**
      * The current dialogue key.
@@ -116,16 +103,6 @@ public final class DialogueInterpreter {
         } else if (args.length < 1) {
             args = new Object[] { dialogueKey };
         }
-        ScriptContext script = SCRIPTS.get(dialogueKey);
-        if (script != null) {
-            Object[] arguments = new Object[args.length + 1];
-            for (int i = 0; i < args.length; i++) {
-                arguments[i + 1] = args[i];
-            }
-            arguments[0] = player;
-            startScript(script, arguments);
-            return true;
-        }
         DialoguePlugin plugin = PLUGINS.get(dialogueKey);
         if (plugin == null) {
             return false;
@@ -147,41 +124,11 @@ public final class DialogueInterpreter {
     }
 
     /**
-     * Starts a dialogue script.
-     * @param script The script.
-     * @param args The arguments.
-     */
-    public void startScript(ScriptContext script, Object... args) {
-        startScript(key, script, args);
-    }
-
-    /**
-     * Starts a dialogue script.
-     * @param dialogueKey The dialogue key.
-     * @param script The script.
-     * @param args The arguments.
-     */
-    public void startScript(int dialogueKey, ScriptContext script, Object... args) {
-        key = dialogueKey;
-        (dialogueStage = script).execute(args);
-        if (script.isInstant()) {
-            dialogueStage = script = ScriptManager.run(script, args);
-        }
-    }
-
-    /**
      * Handles an dialogue input.
      * @param componentId The id of the chatbox component.
      * @param buttonId The button id.
      */
     public void handle(int componentId, int buttonId) {
-        if (dialogueStage != null) {
-            dialogueStage = ScriptManager.run(dialogueStage, player, key, buttonId);
-            if (!(dialogueStage instanceof PDialInstruction || dialogueStage instanceof NPCDialInstruction || dialogueStage instanceof OptionDialInstruction || dialogueStage instanceof PlainMessageInstruction || dialogueStage instanceof ItemMessageInstruction)) {
-                player.getInterfaceManager().closeChatbox();
-            }
-            return;
-        }
         player.setAttribute("chatbox-buttonid",buttonId);
         if((player.getDialogueInterpreter().getDialogue().file != null && player.getDialogueInterpreter().getDialogue().file.getCurrentStage() == END_DIALOGUE) || player.getDialogueInterpreter().getDialogue().stage == END_DIALOGUE){
             player.getInterfaceManager().closeChatbox();
@@ -202,15 +149,11 @@ public final class DialogueInterpreter {
      * @return {@code True} if successful.
      */
     public boolean close() {
-        if (dialogue != null || dialogueStage != null) {
+        if (dialogue != null) {
             actions.clear();
 
             if (player.getInterfaceManager().getChatbox() != null && player.getInterfaceManager().getChatbox().getCloseEvent() != null) {
                 return true;
-            }
-            if (dialogueStage != null) {
-                dialogueStage = null;
-                player.getInterfaceManager().closeChatbox();
             }
             if (dialogue != null) {
                 DialoguePlugin d = dialogue;
@@ -218,7 +161,7 @@ public final class DialogueInterpreter {
                 d.close();
             }
         }
-        return dialogue == null && dialogueStage == null;
+        return dialogue == null;
     }
 
     /**
@@ -232,30 +175,6 @@ public final class DialogueInterpreter {
             throw new IllegalArgumentException("Dialogue " + (id & 0xFFFF) + " is already in use - [old=" + PLUGINS.get(id).getClass().getSimpleName() + ", new=" + plugin.getClass().getSimpleName() + "]!");
         }
         PLUGINS.put(id, plugin);
-    }
-
-    /**
-     * Adds a dialogue script for the given key.
-     * @param dialogueKey The dialogue key.
-     * @param context The dialogue script.
-     */
-    public static void add(int dialogueKey, ScriptContext context) {
-        if (SCRIPTS.containsKey(dialogueKey)) {
-            // throw new IllegalArgumentException("Dialogue " + dialogueKey +
-            // " is already in use - [old=" +
-            // SCRIPTS.get(dialogueKey).getClass().getSimpleName() + ", new=" +
-            // context.getClass().getSimpleName() + "]!");
-        }
-        SCRIPTS.put(dialogueKey, context);
-    }
-
-    /**
-     * Gets the script context for the given dialogue key.
-     * @param key The dialogue key.
-     * @return The script context.
-     */
-    public static ScriptContext getScript(int key) {
-        return SCRIPTS.get(key);
     }
 
     /**
@@ -601,22 +520,6 @@ public final class DialogueInterpreter {
      */
     public static int getDialogueKey(String name) {
         return 1 << 16 | name.hashCode();
-    }
-
-    /**
-     * Gets the dialogueStage.
-     * @return The dialogueStage.
-     */
-    public ScriptContext getDialogueStage() {
-        return dialogueStage;
-    }
-
-    /**
-     * Sets the dialogueStage.
-     * @param dialogueStage The dialogueStage to set.
-     */
-    public void setDialogueStage(ScriptContext dialogueStage) {
-        this.dialogueStage = dialogueStage;
     }
 
     /**
