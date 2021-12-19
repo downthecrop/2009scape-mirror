@@ -129,7 +129,7 @@ fun amountInEquipment(player: Player, id: Int): Int{
  * @param container the Container to remove the items from. An enum exists for this in the api package called Container. Ex: api.Container.BANK
  */
 
-fun <T> removeItem(player: Player, item: T, container: Container): Boolean {
+fun <T> removeItem(player: Player, item: T, container: Container = Container.INVENTORY): Boolean {
     item ?: return false
     val it = when (item) {
         is Item -> item
@@ -153,7 +153,43 @@ fun <T> removeItem(player: Player, item: T, container: Container): Boolean {
  */
 
 fun addItem(player: Player, id: Int, amount: Int = 1): Boolean{
-    return player.inventory.add(Item(id,amount))
+    return addItem(player, id, amount)
+}
+
+/**
+ * Add an item to the given player's given container
+ * @param player the player whose container to modify
+ * @param id the ID of the item to add
+ * @param amount the amount of the item to add
+ * @param container the Container to modify
+ * @return true if the item was successfully added
+ */
+fun addItem(player: Player, id: Int, amount: Int = 1, container: Container = Container.INVENTORY): Boolean {
+    val cont = when(container){
+        Container.INVENTORY -> player.inventory
+        Container.BANK -> player.bank
+        Container.EQUIPMENT -> player.equipment
+    }
+
+    return cont.add(Item(id, amount))
+}
+
+/**
+ * Replaces the item in the given slot in the given container with the given item.
+ * @param player the player whose container to modify
+ * @param slot the slot to use
+ * @param item the item to replace the slot with
+ * @param container the Container to modify
+ * @return the item that was previously in the slot, or null if none.
+ */
+fun replaceSlot(player: Player, slot: Int, item: Item, container: Container = Container.INVENTORY): Item? {
+    val cont = when(container) {
+        Container.INVENTORY -> player.inventory
+        Container.EQUIPMENT -> player.equipment
+        Container.BANK -> player.bank
+    }
+
+    return cont.replace(item, slot)
 }
 
 /**
@@ -755,8 +791,9 @@ fun heal(entity: Entity, amount: Int){
  * @param value the value to set the varbit to
  */
 
-fun setVarbit(player: Player, varpIndex: Int, offset: Int, value: Int){
+fun setVarbit(player: Player, varpIndex: Int, offset: Int, value: Int, save: Boolean = false){
     player.varpManager.get(varpIndex).setVarbit(offset,value).send(player)
+    if(save) player.varpManager.flagSave(varpIndex)
 }
 
 /**
@@ -830,6 +867,13 @@ fun stopWalk(entity: Entity){
 
 fun getItemFromEquipment(player: Player, slot: EquipmentSlot): Item? {
     return player.equipment.get(slot.ordinal)
+}
+
+/**
+ * Returns a list of all valid children IDs for a given scenery ID
+ */
+fun getChildren(scenery: Int): IntArray {
+    return SceneryDefinition.forId(scenery).getChildrenIds().filter { it != -1 }.toIntArray()
 }
 
 /**
