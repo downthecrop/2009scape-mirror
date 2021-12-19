@@ -374,7 +374,9 @@ class ScriptAPI(private val bot: Player) {
             diffX /= 2
             diffY /= 2
         }
-        GameWorld.Pulser.submit(object : MovementPulse(bot, bot.location.transform(diffX, diffY, 0), Pathfinder.SMART) {
+        val dest = bot.location.transform(diffX,diffY,0)
+        bot.pulseManager.run(object :
+            MovementPulse(bot, dest, Pathfinder.SMART) {
             override fun pulse(): Boolean {
                 return true
             }

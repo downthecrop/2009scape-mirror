@@ -17,6 +17,9 @@ class ServerConstants {
 		@JvmField
 		var SHUTDOWN_HOOK: Thread = Thread(SystemShutdownHook())
 
+		@JvmField
+		var ALLOW_GUI: Boolean = false
+
         @JvmField
 		var DATA_PATH: String? = null
 
@@ -208,6 +211,9 @@ class ServerConstants {
 			}
 			if(data.containsKey("writeLogs")){
 				WRITE_LOGS = data["writeLogs"] as Boolean
+			}
+			if(data.containsKey("enable_gui")){
+				ALLOW_GUI = data["enable_gui"] as Boolean
 			}
 
 			DATABASE_NAME = data["database_name"].toString()

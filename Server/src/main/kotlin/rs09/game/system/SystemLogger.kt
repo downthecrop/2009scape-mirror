@@ -2,6 +2,8 @@ package rs09.game.system
 
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
+import gui.GuiEvent
+import gui.ServerMonitor
 import rs09.ServerConstants
 import java.io.*
 import java.text.SimpleDateFormat
@@ -42,28 +44,48 @@ object SystemLogger {
     @JvmStatic
     fun logInfo(vararg messages: String){
         for(m in messages){
-            if(m.isNotBlank()) t.println("${getTime()}: [INFO] $m")
+            val msg = "${getTime()}: [INFO] $m"
+            if(m.isNotBlank()) {
+                t.println(msg)
+                ServerMonitor.eventQueue.add(GuiEvent.AddDefaultMessage(msg))
+            }
         }
     }
 
     @JvmStatic
     fun logErr(message: String){
-        if(message.isNotBlank()) t.println("${getTime()}: ${TextColors.brightRed("[ ERR] $message")}")
+        val msg = "${getTime()}: [ ERR] $message"
+        if(message.isNotBlank()) {
+            t.println(msg)
+            ServerMonitor.eventQueue.add(GuiEvent.AddDebugMessage(msg))
+        }
     }
 
     @JvmStatic
     fun logWarn(message: String){
-        if(message.isNotBlank()) t.println("${getTime()}: ${TextColors.yellow("[WARN] $message")}")
+        val msg = "${getTime()}: [WARN] $message"
+        if(message.isNotBlank()) {
+            t.println(msg)
+            ServerMonitor.eventQueue.add(GuiEvent.AddDebugMessage(msg))
+        }
     }
 
     @JvmStatic
     fun logAlert(message: String){
-        if(message.isNotBlank()) t.println("${getTime()}: ${TextColors.brightYellow("[ALRT] $message")}")
+        val msg = "${getTime()}: [ALRT] $message"
+        if(message.isNotBlank()) {
+            t.println(msg)
+            ServerMonitor.eventQueue.add(GuiEvent.AddDebugMessage(msg))
+        }
     }
 
     @JvmStatic
     fun logAI(message: String){
-        if(message.isNotBlank()) t.println("${getTime()}: ${TextColors.gray("[AIPL] $message")}")
+        val msg = "${getTime()}: [AIPL] $message"
+        if(message.isNotBlank()) {
+            t.println(msg)
+            ServerMonitor.eventQueue.add(GuiEvent.AddAIPMessage(msg))
+        }
     }
 
     @JvmStatic
