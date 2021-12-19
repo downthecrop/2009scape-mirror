@@ -72,6 +72,7 @@ public final class ChainhitSpecialHandler extends RangeSwingHandler implements P
 		if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
+        state.setStyle(CombatStyle.RANGE);
 		if (victim instanceof NPC) {
 			NPC npc = victim.asNpc();
 			if (npc.getId() == 2440) {

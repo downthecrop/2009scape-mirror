@@ -125,6 +125,7 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 		player.getInventory().replace(new Item(4252), item.getSlot());
 		player.sendMessage("...and the world changes around you.", 4);
 		player.getTeleporter().send(Location.create(3658, 3517, 0), TeleportType.ECTOPHIAL);
+		player.getAudioManager().send(4580);
 		player.sendMessage("You empty the ectoplasm onto the ground around your feet...");
 		player.getPulseManager().run(new Pulse(9, player) {
 			@Override
@@ -132,9 +133,10 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 				player.faceLocation(new Location(3659, 3519, 0));
 				if (player.getInventory().containsItem(new Item(4252))) {
 					player.animate(Animation.create(1652));
+                    player.getAudioManager().send(1132);
 					player.getInventory().remove(new Item(4252));
 					player.getInventory().add(item);
-					player.sendMessage("Your ectophial vial automatically refills.");
+					player.sendMessage("You refill the ectophial from the Ectofuntus.");
 				}
 				return true;
 			}

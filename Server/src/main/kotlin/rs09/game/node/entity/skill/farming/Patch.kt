@@ -2,6 +2,7 @@ package rs09.game.node.entity.skill.farming
 
 import core.game.node.entity.player.Player
 import core.tools.RandomFunction
+import org.rs09.consts.Items
 import rs09.game.system.SystemLogger
 import java.util.concurrent.TimeUnit
 import kotlin.math.ceil
@@ -16,11 +17,21 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
     var cropLives = 3
 
     fun setNewHarvestAmount() {
+        val compostMod = when(compost) {
+            CompostType.NONE -> 0
+            CompostType.NORMAL -> 1
+            CompostType.SUPER -> 2
+        }
         harvestAmt = when (plantable) {
             Plantable.LIMPWURT_SEED, Plantable.WOAD_SEED -> 3
+            Plantable.MUSHROOM_SPORE -> 6
+            Plantable.WILLOW_SAPLING -> 0
             else -> 1
         }
-        cropLives = 3
+        if(plantable != null && plantable?.applicablePatch != PatchType.FLOWER) {
+            harvestAmt += compostMod
+        }
+        cropLives = 3 + compostMod
     }
 
     fun rollLivesDecrement(farmingLevel: Int, magicSecateurs: Boolean){
@@ -59,14 +70,14 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 PatchType.ALLOTMENT -> 8 //average of 8 per life times 3 lives = average 24
                 PatchType.HOPS -> 6 //average of 6 per life times 3 lives = 18
                 PatchType.BELLADONNA -> 2 //average of 2 per life times 3 lives = 6
+                PatchType.EVIL_TURNIP -> 2 //average 2 per, same as BELLADONNA
                 PatchType.CACTUS -> 3 //average of 3 per life times 3 lives = 9
-                PatchType.EVIL_TURNIP -> 1
-                else -> return
+                else -> 0 // nothing should go here, but if it does, do not give extra crops amd decrement cropLives
             }
 
             if(magicSecateurs) chance += ceil(1.10 * chance).toInt() //will increase average yield by roughly 3.
 
-            if(RandomFunction.roll(chance) || chance == 1) cropLives -= 1
+            if(RandomFunction.roll(chance)) cropLives -= 1
         }
 
         if(cropLives <= 0) clear()
@@ -227,7 +238,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             CompostType.SUPER -> 13
         }
 
-        if(RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid && !isFlowerProtected() && patch.type != PatchType.EVIL_TURNIP){
+        if(patch != FarmingPatch.TROLL_STRONGHOLD_HERB && RandomFunction.random(128) <= (17 - diseaseMod) && !isWatered && !isGrown() && !protectionPaid && !isFlowerProtected() && patch.type != PatchType.EVIL_TURNIP ){
             //bush, tree, fruit tree, herb and cactus can not disease on stage 1(0) of growth.
             if(!((patch.type == PatchType.BUSH || patch.type == PatchType.TREE || patch.type == PatchType.FRUIT_TREE || patch.type == PatchType.CACTUS || patch.type == PatchType.HERB) && currentGrowthStage == 0)) {
                 isDiseased = true
@@ -244,11 +255,29 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
                 setCurrentState(getCurrentState() + 1)
             }
         }
+        if(patch.type == PatchType.TREE) {
+            // Willow branches
+            if(harvestAmt < 6) {
+                harvestAmt++;
+            }
+        }
 
         if(plantable?.stages ?: 0 > currentGrowthStage && !isGrown()){
             currentGrowthStage++
             setCurrentState(getCurrentState() + 1)
             isWatered = false
+        }
+
+        regrowIfTreeStump()
+    }
+
+    fun regrowIfTreeStump() {
+        if(patch.type == PatchType.TREE && plantable != null) {
+            // plantable.value + plantable.stages is the check-health stage, so +1 is the choppable tree, and +2 is the stump
+            if(getCurrentState() == plantable!!.value + plantable!!.stages + 2) {
+                setCurrentState(getCurrentState() - 1)
+                isWatered = false
+            }
         }
     }
 
@@ -272,6 +301,7 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
         isDead = false
         plantable = null
         player.varpManager.get(patch.varpIndex).clearBitRange(patch.varpOffset,patch.varpOffset + 7)
+        nextGrowth = 0L
         currentGrowthStage = 3
         setCurrentState(3)
         compost = CompostType.NONE
@@ -294,6 +324,8 @@ class Patch(val player: Player, val patch: FarmingPatch, var plantable: Plantabl
             else -> return false
         }.getPatchFor(player)
 
-        return (fpatch.plantable != null && fpatch.plantable == plantable?.protectionFlower && fpatch.isGrown())
+        return (fpatch.plantable != null &&
+            (fpatch.plantable == plantable?.protectionFlower || fpatch.plantable == Plantable.forItemID(Items.WHITE_LILY_SEED_14589))
+            && fpatch.isGrown())
     }
 }

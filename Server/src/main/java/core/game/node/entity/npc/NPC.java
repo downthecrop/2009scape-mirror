@@ -31,12 +31,15 @@ import core.game.world.update.flag.npc.NPCFaceLocation;
 import core.game.world.update.flag.npc.NPCForceChat;
 import core.game.world.update.flag.npc.NPCSwitchId;
 import core.tools.RandomFunction;
+import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.content.jobs.JobManager;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.system.config.NPCConfigParser;
 import rs09.game.system.config.ShopParser;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
+
+import java.util.Map;
 
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_ENEMIES_KILLED;
@@ -493,6 +496,11 @@ public class NPC extends Entity {
 		nextWalk = GameWorld.getTicks() + 5 + RandomFunction.randomize(10);
 	}
 
+    public void resetWalk() {
+        nextWalk = GameWorld.getTicks() - 1;
+        getWalkingQueue().reset();
+    }
+
 	/**
 	 * Called when the region goes inactive.
 	 */
@@ -527,6 +535,7 @@ public class NPC extends Entity {
 		Player p = !(killer instanceof Player) ? null : (Player) killer;
 		if (p != null) {
 			p.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_ENEMIES_KILLED);
+            GlobalKillCounter.incrementKills(p, originalId);
 		}
 		handleDrops(p, killer);
 		if (!isRespawn()) {
@@ -543,7 +552,7 @@ public class NPC extends Entity {
 		if (getAttribute("disable:drop", false)) {
 			return;
 		}
-		if (killer instanceof Player && p != null && p.getIronmanManager().isIronman() && getImpactHandler().getImpactLog().size() > 1) {
+		if (killer instanceof Player && p != null && p.getIronmanManager().isIronman() && getImpactHandler().getPlayerImpactLog().size() > 1) {
 			return;
 		}
 		if (definition == null || definition.getDropTables() == null) {
@@ -628,10 +637,10 @@ public class NPC extends Entity {
 		}
 		getProperties().setAttackStyle(new WeaponInterface.AttackStyle(WeaponInterface.STYLE_CONTROLLED, index));
 		CombatStyle style = getDefinition().getConfiguration(NPCConfigParser.COMBAT_STYLE);
-		if (style == CombatStyle.RANGE) {
-			getProperties().getCombatPulse().setStyle(style);
-		} else if (style == CombatStyle.MAGIC) {
-			getProperties().getCombatPulse().setStyle(style);
+        if (style != null) {
+            getProperties().getCombatPulse().setStyle(style);
+        }
+		if (style == CombatStyle.MAGIC) {
 			getProperties().setAutocastSpell(new DefaultCombatSpell(this));
 			int spell = definition.getConfiguration("spell_id", -1);
 			if (spell != -1) {
@@ -653,7 +662,7 @@ public class NPC extends Entity {
 
 	@Override
 	public boolean hasProtectionPrayer(CombatStyle style) {
-		return false;
+		return getProperties().getProtectStyle() == style;
 	}
 
 	/**

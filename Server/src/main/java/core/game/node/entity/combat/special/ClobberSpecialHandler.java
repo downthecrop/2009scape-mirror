@@ -52,6 +52,7 @@ public final class ClobberSpecialHandler extends MeleeSwingHandler implements Pl
 		if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
+        state.setStyle(CombatStyle.MELEE);
 		int hit = 0;
 		if (entity instanceof Player) {
 			entity.asPlayer().sendChat("Chop chop!");

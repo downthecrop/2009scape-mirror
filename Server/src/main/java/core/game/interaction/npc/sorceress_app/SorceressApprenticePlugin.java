@@ -21,8 +21,6 @@ import rs09.plugin.PluginManager;
 @Initializable
 public class SorceressApprenticePlugin extends OptionHandler {
 
-	private static final Location TOP = Location.create(3322, 3138, 1);
-
 	@Override
 	public boolean handle(Player player, Node node, String option) {
 		switch (option) {
@@ -33,15 +31,6 @@ public class SorceressApprenticePlugin extends OptionHandler {
 			} else {
 				player.getDialogueInterpreter().sendDialogues(((NPC) node), null, "I can't do that now, I'm far too busy sweeping.");
 			}
-			break;
-		case "climb-up":
-			if (node.getLocation().getX() == 3322) {
-				ClimbActionHandler.climb(player, new Animation(828), TOP);
-			} else {
-				ClimbActionHandler.climbLadder(player, (Scenery) node, option);
-				return true;
-			}
-			break;
 		}
 		return true;
 	}
@@ -50,29 +39,8 @@ public class SorceressApprenticePlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		NPCDefinition.forId(5532).getHandlers().put("option:teleport", this);
 		SceneryDefinition.forId(21781).getHandlers().put("option:climb-up", this);
-		new SorceressStairs().newInstance(arg);
 		PluginManager.definePlugin(new SorceressApprenticeDialogue());
 		return this;
 	}
 
-	/**
-	 * Represents the option handler used for the sorcceress stairs.
-	 * @author 'Vexia
-	 * @version 1.0
-	 */
-	public final static class SorceressStairs extends OptionHandler {
-
-		@Override
-		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			SceneryDefinition.forId(35645).getHandlers().put("option:climb-down", this);
-			return this;
-		}
-
-		@Override
-		public boolean handle(Player player, Node node, String option) {
-			player.getProperties().setTeleportLocation(Location.create(3325, 3143, 0));
-			return true;
-		}
-
-	}
 }

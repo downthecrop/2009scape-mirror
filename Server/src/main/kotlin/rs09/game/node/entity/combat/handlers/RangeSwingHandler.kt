@@ -99,7 +99,6 @@ open class RangeSwingHandler
         if(state.estimatedHit > victim.skills.lifepoints) state.estimatedHit = victim.skills.lifepoints
         if(state.estimatedHit + state.secondaryHit > victim.skills.lifepoints) state.secondaryHit -= ((state.estimatedHit + state.secondaryHit) - victim.skills.lifepoints)
         useAmmo(entity, state, victim.location)
-        addExperience(entity, victim, state)
         return 1 + ceil(entity.location.getDistance(victim.location) * 0.3).toInt()
     }
 
@@ -135,51 +134,6 @@ open class RangeSwingHandler
             }
         }
         super.adjustBattleState(entity, victim, state)
-    }
-
-    override fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {
-        if (entity is Player) {
-            if (victim is Player && entity.asPlayer().ironmanManager.isIronman) {
-                return
-            }
-            var hit = state!!.estimatedHit
-            if (hit < 0) {
-                hit = 0
-            }
-            if (state.secondaryHit > 0) {
-                hit += state.secondaryHit
-            }
-            val p = entity.asPlayer()
-            val famExp = entity.getAttribute("fam-exp", false) && p.familiarManager.hasFamiliar()
-            if (famExp) {
-                val fam = p.familiarManager.familiar
-                var skill = Skills.RANGE
-                when (fam.attackStyle) {
-                    WeaponInterface.STYLE_DEFENSIVE -> skill = Skills.DEFENCE
-                    WeaponInterface.STYLE_ACCURATE -> skill = Skills.ATTACK
-                    WeaponInterface.STYLE_AGGRESSIVE -> skill = Skills.STRENGTH
-                    WeaponInterface.STYLE_RANGE_ACCURATE -> skill = Skills.RANGE
-                    WeaponInterface.STYLE_CONTROLLED -> {
-                        var experience = hit * EXPERIENCE_MOD
-                        experience /= 3.0
-                        entity.getSkills().addExperience(Skills.ATTACK, experience, true)
-                        entity.getSkills().addExperience(Skills.STRENGTH, experience, true)
-                        entity.getSkills().addExperience(Skills.DEFENCE, experience, true)
-                        return
-                    }
-                    WeaponInterface.STYLE_CAST -> skill = Skills.MAGIC
-                }
-                entity.getSkills().addExperience(skill, hit * EXPERIENCE_MOD, true)
-                return
-            }
-            entity.getSkills().addExperience(Skills.HITPOINTS, hit * 1.33, true)
-            if (entity.getProperties().attackStyle.style == WeaponInterface.STYLE_LONG_RANGE) {
-                entity.getSkills().addExperience(Skills.RANGE, hit * (EXPERIENCE_MOD / 2), true)
-                entity.getSkills().addExperience(Skills.DEFENCE, hit * (EXPERIENCE_MOD / 2), true)
-            } else {
-                entity.getSkills().addExperience(Skills.RANGE, hit * EXPERIENCE_MOD, true)
-            }
-        }
     }
 
     override fun visualize(entity: Entity, victim: Entity?, state: BattleState?) {
@@ -247,7 +201,7 @@ open class RangeSwingHandler
         if(entity is Player) effectiveRangedLevel = floor(effectiveRangedLevel + (entity.prayer.getSkillBonus(Skills.RANGE) * effectiveRangedLevel))
         if(entity.properties.attackStyle.style == WeaponInterface.STYLE_RANGE_ACCURATE) effectiveRangedLevel += 3
         effectiveRangedLevel += 8
-        if(entity is Player && entity.isWearingVoid(false)) effectiveRangedLevel *= 1.1
+        effectiveRangedLevel *= getSetMultiplier(entity, Skills.RANGE)
         if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.ACCURATE_MARKSMAN,entity)) effectiveRangedLevel *= 1.1
 
         effectiveRangedLevel = floor(effectiveRangedLevel)
@@ -283,9 +237,8 @@ open class RangeSwingHandler
     }
 
     override fun getSetMultiplier(e: Entity?, skillId: Int): Double {
-        if (e is Player) {
-            val c: Container = e.equipment
-            if (containsVoidSet(c) && c.getNew(EquipmentContainer.SLOT_HAT).id == 11664) {
+        if(skillId == Skills.RANGE) {
+            if(e is Player && e.isWearingVoid(CombatStyle.RANGE)) {
                 return 1.1
             }
         }
@@ -355,6 +308,7 @@ open class RangeSwingHandler
             if (dropRate == -1.0) {
                 return
             }
+            e.equipment.replace(Item(ammo.id, ammo.amount - amount, ammo.charge), state.weapon.ammunitionSlot)
             if (dropLocation == null) {
                 return
             }
@@ -362,7 +316,6 @@ open class RangeSwingHandler
             if (flag and 0x200000 != 0) { //Water
                 dropLocation = null
             }
-            e.equipment.replace(Item(ammo.id, ammo.amount - amount, ammo.charge), state.weapon.ammunitionSlot)
             if (dropLocation != null && state.rangeWeapon.isDropAmmo) {
                 val rate = 5 * (1.0 + e.skills.getLevel(Skills.RANGE) * 0.01) * dropRate
                 if (RandomFunction.randomize(rate.toInt()) != 0) {

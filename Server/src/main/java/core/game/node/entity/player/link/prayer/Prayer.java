@@ -8,11 +8,13 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
+import rs09.game.world.GameWorld;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -41,6 +43,10 @@ public final class Prayer {
 	 */
 	public Prayer(Player player) {
 		this.player = player;
+
+        // 1050 is checked client-side for making piety/chivalry disallowed sfx, likely due to the minigame requirement.
+        // Set it here unconditionally until the minigame is implemented.
+        player.varpManager.get(1050).setVarbit(1, 8);
 	}
 
 	/**
@@ -62,8 +68,15 @@ public final class Prayer {
 			player.getConfigManager().set(type.getConfig(), 0);
 		}
 		getActive().clear();
-		player.getAppearance().setHeadIcon(-1);
-		player.getAppearance().sync();
+        // Clear the overhead prayer icon a tick later
+        GameWorld.getPulser().submit(new Pulse(1) {
+            @Override
+            public boolean pulse() {
+                player.getAppearance().setHeadIcon(-1);
+                player.getAppearance().sync();
+                return true;
+            }
+        });
 	}
 
 	/**
@@ -119,6 +132,7 @@ public final class Prayer {
 
 		if(prayerActiveTicks > 0 && prayerActiveTicks % 2 == 0){
 			if(getPlayer().getSkills().getPrayerPoints() == 0){
+                getPlayer().getAudioManager().send(2672);
 				reset();
 				return;
 			}

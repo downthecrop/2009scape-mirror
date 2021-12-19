@@ -48,6 +48,7 @@ class PlayerSaveParser(val player: Player) {
         if (read) {
             launch {
                 parseCore()
+                parseAttributes()
                 parseSkills()
                 parseSettings()
                 parseSlayer()
@@ -80,7 +81,6 @@ class PlayerSaveParser(val player: Player) {
                 parseEmoteManager()
                 parseStatistics()
                 parseBrawlingGloves()
-                parseAttributes()
                 parseAchievements()
                 parsePouches()
             }
@@ -371,6 +371,11 @@ class PlayerSaveParser(val player: Player) {
         player.skills.experienceMutiplier = saveFile!!["exp_multiplier"].toString().toDouble()
         if (GameWorld.settings?.default_xp_rate != 5.0) {
             player.skills.experienceMutiplier = GameWorld.settings?.default_xp_rate!!
+        }
+        val divisor: Double
+        if(player.skills.experienceMutiplier >= 10 && !player.attributes.containsKey("permadeath")){ //exclude permadeath HCIMs from XP squish
+            divisor = player.skills.experienceMutiplier / 5.0
+            player.skills.correct(divisor)
         }
         if (saveFile!!.containsKey("milestone")) {
             val milestone: JSONObject = saveFile!!["milestone"] as JSONObject

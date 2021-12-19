@@ -18,6 +18,7 @@ import core.game.node.item.Item;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
+import org.rs09.consts.Items;
 
 /**
  * Handles the god spells.
@@ -131,10 +132,8 @@ public final class GodSpells extends CombatSpell {
 				p.sendMessage("You need to cast " + NAMES[index] + " " + (100 - p.getSavedData().getActivityData().getGodCasts()[index]) + " more times inside the Mage Arena.");
 				return false;
 			}
-			if (staffId == 8841 && index == 1) {// Void Knight Mace
-				return true;
-			}
-			if (staffId != required) {
+
+			if (staffId != required && !(index == 1 && staffId == Items.VOID_KNIGHT_MACE_8841)) {
 				if (message) {
 					((Player) caster).getPacketDispatch().sendMessage("You need to wear a " + ItemDefinition.forId(required).getName() + "  to cast this spell.");
 				}

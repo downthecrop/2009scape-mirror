@@ -24,6 +24,13 @@ public enum SpecialLadders implements LadderAchievementCheck {
     JATIZSO_SHOUT_TOWER_UP(Location.create(2373, 3800, 2),Location.create(2374, 3800, 0)),
     JATIZSO_SHOUT_TOWER_DOWN(Location.create(2373, 3800, 0),Location.create(2374, 3800, 2)),
 
+    ALKHARID_ZEKE_UP(Location.create(3284,3186,0), Location.create(3284,3190,1)),
+    ALKHARID_ZEKE_DOWN(Location.create(3284,3190,1), Location.create(3284,3186,0)),
+    ALKHARID_CRAFTING_UP(Location.create(3311,3187,0),Location.create(3314,3187,1)),
+    ALKHARID_CRAFTING_DOWN(Location.create(3314,3187,1),Location.create(3310,3187,0)),
+    ALKHARID_SOCRCERESS_UP(Location.create(3325,3142,0),Location.create(3325,3139,1)),
+    ALKHARID_SOCRCERESS_DOWN(Location.create(3325,3139,1),Location.create(3325,3143,0)),
+
     DRAYNOR_SEWER_SOUTHEAST_DOWN(new Location(3118, 3244, 0), new Location(3118, 9643, 0)),
     DRAYNOR_SEWER_SOUTHEAST_UP(new Location(3118, 9643, 0), new Location(3118, 3243, 0)),
     DRAYNOR_SEWER_NORTHWEST_DOWN(new Location(3084, 3272, 0), new Location(3085, 9672, 0)),
@@ -46,8 +53,7 @@ public enum SpecialLadders implements LadderAchievementCheck {
     },
     SEERS_VILLAGE_SPINNING_HOUSE_ROOFTOP_DOWN(new Location(2715,3472,3), new Location(2714,3472,1)),
     ELEMENTAL_WORKSHOP_STAIRS_DOWN(Location.create(2710,3497, 0), Location.create(2713,9887, 0)),
-    ELEMENTAL_WORKSHOP_STAIRS_UP(Location.create(2714,9887, 0), Location.create(2709,3498, 0)),
-    TORMENTED_DEMONS_ENTER(Location.create(3353,3951,0),Location.create(3218, 9532, 2));
+    ELEMENTAL_WORKSHOP_STAIRS_UP(Location.create(2714,9887, 0), Location.create(2709,3498, 0));
 
     private static HashMap<Location,Location> destinationMap = new HashMap<>();
     private static HashMap<Location,SpecialLadders> ladderMap = new HashMap<>();

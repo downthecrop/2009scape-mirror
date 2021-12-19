@@ -61,6 +61,7 @@ public final class SweepSpecialHandler extends MeleeSwingHandler implements Plug
 		BattleState[] targets = getTargets(entity, victim, state);
 		state.setTargets(targets);
 		for (BattleState s : targets) {
+            s.setStyle(CombatStyle.MELEE);
 			int hit = 0;
 			if (isAccurateImpact(entity, s.getVictim(), CombatStyle.MELEE, 1, 0.94)) {
 				hit = RandomFunction.random(calculateHit(entity, s.getVictim(), 1.1));

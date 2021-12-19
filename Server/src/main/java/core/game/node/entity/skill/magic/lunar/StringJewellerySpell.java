@@ -118,7 +118,7 @@ public final class StringJewellerySpell extends MagicSpell {
 			if (meetsRequirements(player, true, true) && player.getInventory().remove(node)) {
 				player.getInventory().add(new Item(STRUNG[getIndex()]));
 				player.getSkills().addExperience(Skills.CRAFTING, 4, true);
-				player.getSkills().addExperience(Skills.CRAFTING, 87, true);
+				player.getSkills().addExperience(Skills.MAGIC, 83, true);
 			} else {
 				return true;
 			}

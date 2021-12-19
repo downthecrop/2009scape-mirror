@@ -1,16 +1,18 @@
 package core.game.node.entity.skill.runecrafting;
 
 import core.game.container.impl.EquipmentContainer;
-import core.game.node.entity.skill.SkillPulse;
-import core.game.node.entity.skill.Skills;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
+import core.game.node.entity.skill.SkillPulse;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
+import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
+import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_RC;
+import rs09.game.world.GameWorld;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -133,6 +135,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
     public void animate() {
         player.animate(ANIMATION);
         player.graphics(GRAPHICS);
+        player.getAudioManager().send(2710);
     }
 
     @Override
@@ -175,6 +178,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
 
             if (player.getInventory().remove(item) && player.getInventory().hasSpaceFor(i)) {
                 player.getInventory().add(i);
+                player.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_RC, amount);
                 player.getSkills().addExperience(Skills.RUNECRAFTING, rune.getExperience() * amount, true);
 
                 // Achievement Diary handling
@@ -194,6 +198,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
             }
         } else {
             if (player.getInventory().remove(item)) {
+                player.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_RC, amount);
                 for (int i = 0; i < amount; i++) {
                     Rune rune = null;
                     while (rune == null) {
@@ -234,14 +239,14 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
             }
             if (player.getInventory().remove(new Item(PURE_ESSENCE.getId(), amount)) && player.getInventory().remove(new Item(rune.getId(), amount))) {
                 for (int i = 0; i < amount; i++) {
-                    if (RandomFunction.random(1, 3) == 1 || hasBindingNeckalce()) {
+                    if (RandomFunction.random(1, 3) == 1 || hasBindingNecklace()) {
                         player.getInventory().add(new Item(combo.getRune().getId(), 1));
                         player.getSkills().addExperience(Skills.RUNECRAFTING, combo.getExperience(), true);
                     }
                 }
-                if (hasBindingNeckalce()) {
-                    player.getEquipment().get(EquipmentContainer.SLOT_HAT).setCharge(player.getEquipment().get(EquipmentContainer.SLOT_HAT).getCharge() - 1);
-                    if (1000 - player.getEquipment().get(EquipmentContainer.SLOT_HAT).getCharge() > 14) {
+                if (hasBindingNecklace()) {
+                    player.getEquipment().get(EquipmentContainer.SLOT_AMULET).setCharge(player.getEquipment().get(EquipmentContainer.SLOT_AMULET).getCharge() - 1);
+                    if (1000 - player.getEquipment().get(EquipmentContainer.SLOT_AMULET).getCharge() > 14) {
                         player.getEquipment().remove(BINDING_NECKLACE, true);
                         player.getPacketDispatch().sendMessage("Your binding necklace crumbles into dust.");
                     }
@@ -325,7 +330,7 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
      *
      * @return <code>True</code> if so.
      */
-    public boolean hasBindingNeckalce() {
+    public boolean hasBindingNecklace() {
         return player.getEquipment().containsItem(BINDING_NECKLACE);
     }
 

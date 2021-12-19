@@ -55,7 +55,7 @@ public abstract class Entity extends Node {
 	/**
 	 * The entity's skills.
 	 */
-	private final Skills skills = new Skills(this);
+	public Skills skills = new Skills(this);
 
 	/**
 	 * The entity's extension classes.
@@ -248,6 +248,13 @@ public abstract class Entity extends Node {
 	public boolean isIgnoreMultiBoundaries(Entity victim) {
 		return false;
 	}
+
+    /**
+     * Should this entity prevent the mover from moving through it?
+     */
+    public boolean shouldPreventStacking(Entity mover) {
+        return false;
+    }
 
 	/**
 	 * Checks an impact before receiving it.
@@ -507,7 +514,7 @@ public abstract class Entity extends Node {
 	 * @param hit the hit.
 	 * @return {@code True} if so.
 	 */
-	public double getFormatedHit(BattleState state, int hit) {
+	public double getFormattedHit(BattleState state, int hit) {
 		if (state.getAttacker() == null || state.getVictim() == null || state.getStyle() == null) {
 			return hit;
 		}
@@ -515,7 +522,7 @@ public abstract class Entity extends Node {
 		Entity victim = state.getVictim();
 		CombatStyle type = state.getStyle();
 		if (state.getArmourEffect() != ArmourSet.VERAC && !entity.isIgnoreProtection(type) && victim.hasProtectionPrayer(type)) {
-			return hit *= entity instanceof Player ? 0.6 : 0;
+			return hit *= (entity instanceof Player && victim instanceof Player) ? 0.6 : 0;
 		}
 		return hit;
 	}
@@ -694,6 +701,11 @@ public abstract class Entity extends Node {
 	 */
 	public Map<String, Object> getAttributes() {
 		return attributes.getAttributes();
+	}
+
+	public void clearAttributes() {
+		this.attributes.getAttributes().clear();
+		this.attributes.getSavedAttributes().clear();
 	}
 
 	/**

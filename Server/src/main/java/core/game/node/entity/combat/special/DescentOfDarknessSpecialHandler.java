@@ -81,6 +81,7 @@ public final class DescentOfDarknessSpecialHandler extends RangeSwingHandler imp
 		}
 		Weapon w = new Weapon(p.getEquipment().get(3), rw.getAmmunitionSlot(), p.getEquipment().getNew(rw.getAmmunitionSlot()));
 		w.setType(rw.getWeaponType());
+        state.setStyle(CombatStyle.RANGE);
 		state.setRangeWeapon(rw);
 		state.setAmmunition(Ammunition.get(w.getAmmunition().getId()));
 		state.setWeapon(w);

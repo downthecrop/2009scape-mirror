@@ -8,11 +8,12 @@ import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
 import core.game.ge.OfferState
-import core.game.node.scenery.Scenery
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.game.node.scenery.Scenery
 import core.game.system.communication.CommunicationInfo
 import core.game.world.map.RegionManager
 import core.game.world.map.build.DynamicRegion
@@ -34,7 +35,6 @@ import rs09.tools.stringtools.colorize
 import java.awt.Toolkit
 import java.awt.datatransfer.StringSelection
 import java.util.*
-import kotlin.collections.ArrayList
 
 @Initializable
 class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
@@ -45,6 +45,21 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
          */
         define("debug", Command.Privilege.STANDARD){ player, _ ->
             player.toggleDebug()
+        }
+
+        define("calc_accuracy", Command.Privilege.STANDARD){ player, args ->
+            val handler = player.getSwingHandler(false)
+            player.sendMessage("handler type: ${handler.type}")
+            player.sendMessage("calculateAccuracy: ${handler.calculateAccuracy(player)}")
+
+            if (args.size > 1)
+            {
+                val npcId: Int = args[1].toInt()
+                val npc = NPC(npcId)
+                npc.initConfig()
+                player.sendMessage("npc: ${npc.name}. npc defence: ${npc.skills.getLevel(Skills.DEFENCE)}")
+                player.sendMessage("calculateDefence: ${handler.calculateDefence(npc, player)}")
+            }
         }
 
         /**
@@ -78,6 +93,12 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
          */
         define("coords", Command.Privilege.STANDARD){ player, _->
             notify(player, "Do you mean ::loc?")
+        }
+
+        define("calcmaxhit", Command.Privilege.STANDARD) { player, _ ->
+            val swingHandler = player.getSwingHandler(false)
+            val hit = swingHandler.calculateHit(player, player, 1.0)
+            notify(player, "max hit (${(swingHandler as Object).getClass().getName()}): ${hit}")
         }
 
         /**
@@ -312,6 +333,13 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             notify(player, "${VarbitDefinition.forObjectID(SceneryDefinition.forId(objectID).varbitID).configId}")
         }
 
+        define("define_varbit"){ player, args ->
+            if(args.size < 2) {
+                reject(player, "Syntax: ::define_varbit varbitId")
+            }
+            val varbitID = args[1].toInt()
+            notify(player, "${varbitID}: ${VarbitDefinition.forId(varbitID, 0)}")
+        }
         define("togglexp",Command.Privilege.STANDARD){ player, args ->
             val enabled = player.varpManager.get(2501).getVarbit(0)?.value == 1
             player.varpManager.get(2501).setVarbit(0,if(enabled) 0 else 1).send(player)
@@ -417,7 +445,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         }
 
         define("testlady",Command.Privilege.ADMIN){player,_ ->
-            player.antiMacroHandler.event = RandomEvents.SURPRISE_EXAM.npc.create(player,null,"sexam")
+            player.antiMacroHandler.event = RandomEvents.EVIL_CHICKEN.npc.create(player,null,"sexam")
             player.antiMacroHandler.event!!.init()
         }
 
@@ -453,6 +481,29 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                     }
                 }
                 notify(player,"No parent NPC found.")
+            }
+        }
+        define("infinitespecial",Command.Privilege.ADMIN){player,args ->
+            val usageStr = "Usage: ::infinitespecial true|false"
+            if(args.size < 2){
+                reject(player, usageStr)
+            }
+            when(args[1]){
+                "true" -> player.setAttribute("infinite-special", true)
+                "false" -> player.removeAttribute("infinite-special")
+                else -> reject(player, usageStr)
+            }
+        }
+        define("allow_aggro", Command.Privilege.ADMIN) { player, args ->
+            val usageStr = "Usage: ::allow_aggro true | false"
+            if(args.size < 2) {
+                reject(player, usageStr)
+            }
+            when(args[1]) {
+                "true" -> player.setAttribute("allow_admin_aggression", true)
+                "false" -> player.removeAttribute("allow_admin_aggression")
+                else -> reject(player, usageStr)
+
             }
         }
     }

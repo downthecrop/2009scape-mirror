@@ -19,6 +19,7 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
+import java.util.stream.Collectors;
 
 /**
  * Class used for handling combat impacts.
@@ -260,6 +261,15 @@ public final class ImpactHandler {
 	 */
 	public Map<Entity, Integer> getImpactLog() {
 		return impactLog;
+	}
+
+	/**
+	 * Gets the impact log filtered for Player objects
+	 * @return The impact log of each Player and their damage
+	 */
+	public  Map<Player, Integer> getPlayerImpactLog() {
+		return impactLog.entrySet().stream().filter(entry -> entry.getKey() instanceof Player).collect(
+				Collectors.toMap(m -> m.getKey().asPlayer(), m -> m.getValue()));
 	}
 
 	/**

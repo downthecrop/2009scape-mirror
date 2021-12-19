@@ -19,9 +19,10 @@ class NPCDropTable : WeightBasedTable() {
         val items= ArrayList<Item>(3)
         items.addAll(guaranteedItems.map { it.getItem() }.toList())
 
-        if(RandomFunction.random(1,15) == 5){
-            items.addAll(charmDrops.roll(null))
-        }
+        // Charms table is always rolled, and should contain explicit "Nothing" 
+        // entries at the data level to account for the chance to not drop a charm.
+        items.addAll(charmDrops.roll(null))
+
         if(size == 1){
             items.add(get(0).getItem())
             return items

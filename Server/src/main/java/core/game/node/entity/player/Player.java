@@ -9,6 +9,7 @@ import core.game.container.impl.InventoryListener;
 import core.game.content.activity.pyramidplunder.PlunderObjectManager;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.quest.miniquest.barcrawl.BarcrawlManager;
+import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.content.ttrail.TreasureTrailManager;
 import core.game.interaction.Interaction;
 import core.game.interaction.item.brawling_gloves.BrawlingGlovesManager;
@@ -79,10 +80,12 @@ import rs09.game.content.ame.RandomEventManager;
 import rs09.game.ge.PlayerGrandExchange;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
+import rs09.game.node.entity.player.info.login.PlayerSaver;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
 import rs09.game.node.entity.state.newsys.State;
 import rs09.game.node.entity.state.newsys.StateRepository;
 import rs09.game.world.GameWorld;
+import rs09.game.world.repository.DisconnectionQueue;
 import rs09.game.world.repository.Repository;
 import rs09.game.world.update.MapChunkRenderer;
 import rs09.game.world.update.NPCRenderer;
@@ -201,7 +204,7 @@ public class Player extends Entity {
 	/**
 	 * The quest repository.
 	 */
-	private final QuestRepository questRepository = new QuestRepository(this);
+	private QuestRepository questRepository = new QuestRepository(this);
 
 	/**
 	 * The prayer manager.
@@ -241,7 +244,7 @@ public class Player extends Entity {
 	/**
 	 * The saved data.
 	 */
-	private final SavedData savedData = new SavedData(this);
+	private SavedData savedData = new SavedData(this);
 
 	/**
 	 * The request manager.
@@ -476,10 +479,12 @@ public class Player extends Entity {
 			int time = getAttribute("fire:immune",0) - GameWorld.getTicks();
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antifire potion."));
+                getAudioManager().send(3120);
 			}
 			if(time == 0){
 				sendMessage(colorize("%RYour antifire potion has expired."));
 				removeAttribute("fire:immune");
+                getAudioManager().send(2607);
 			}
 		}
 		if(getAttribute("poison:immunity",0) > 0){
@@ -487,16 +492,21 @@ public class Player extends Entity {
 			debug(time + "");
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antipoison potion."));
+                getAudioManager().send(3120);
 			}
 			if(time == 0){
 				sendMessage(colorize("%RYour antipoison potion has expired."));
 				removeAttribute("poison:immunity");
+                getAudioManager().send(2607);
 			}
 		}
 		if (!artificial && (System.currentTimeMillis() - getSession().getLastPing()) > 20_000L) {
 			details.getSession().disconnect();
 			getSession().setLastPing(Long.MAX_VALUE);
 		}
+        if(getAttribute("infinite-special", false)) {
+            settings.setSpecialEnergy(100);
+        }
 
 		//Decrements prayer points
 		getPrayer().tick();
@@ -570,7 +580,7 @@ public class Player extends Entity {
 				packetDispatch.sendMessage("Unhandled special attack for item " + weaponId + "!");
 			}
 		}
-		if (style == CombatStyle.RANGE && equipment.getNew(3).getId() == 10034) {
+		if (style == CombatStyle.RANGE && equipment.getNew(3).getId() == 10033 || equipment.getNew(3).getId() == 10034) {
 			return ChinchompaSwingHandler.getInstance();
 		}
 		return style.getSwingHandler();
@@ -606,11 +616,27 @@ public class Player extends Entity {
 		if (!getZoneMonitor().handleDeath(killer) && (!getProperties().isSafeZone() && getZoneMonitor().getType() != ZoneType.SAFE.getId()) && getDetails().getRights() != Rights.ADMINISTRATOR) {
 			//If player was a Hardcore Ironman, announce that they died
 			if (this.getIronmanManager().getMode().equals(IronmanMode.HARDCORE)){ //if this was checkRestriction, ultimate irons would be moved to HARDCORE_DEAD as well
-				String gender = this.isMale() ? "Man " : "Woman ";
-				Repository.sendNews("Hardcore Iron " + gender + " " + this.getUsername() +" has fallen. Total Level: " + this.getSkills().getTotalLevel()); // Not enough room for XP
-				this.getIronmanManager().setMode(IronmanMode.STANDARD);
-				asPlayer().getSavedData().getActivityData().setHardcoreDeath(true);
-				this.sendMessage("You have fallen as a Hardcore Iron Man, your Hardcore status has been revoked.");
+				String gender = this.isMale() ? "man " : "woman ";
+				if (getAttributes().containsKey("permadeath")) {
+					Repository.sendNews("Permadeath Hardcore Iron" + gender + " " + this.getUsername() + " has fallen. Total Level: " + this.getSkills().getTotalLevel()); // Not enough room for XP
+					TutorialSession.getExtension(this).setStage(0);
+					equipment.clear();
+					inventory.clear();
+					bank.clear();
+					skills = new Skills(this);
+					clearAttributes();
+					setAttribute("/save:permadeath", true);
+					savedData = new SavedData(this);
+					questRepository = new QuestRepository(this);
+					new PlayerSaver(this).save();
+					clear(true);
+					return;
+				} else {
+					Repository.sendNews("Hardcore Iron " + gender + " " + this.getUsername() + " has fallen. Total Level: " + this.getSkills().getTotalLevel()); // Not enough room for XP
+					this.getIronmanManager().setMode(IronmanMode.STANDARD);
+					asPlayer().getSavedData().getActivityData().setHardcoreDeath(true);
+					this.sendMessage("You have fallen as a Hardcore Iron Man, your Hardcore status has been revoked.");
+				}
 			}
 			GroundItemManager.create(new Item(526), getLocation(), k);
 			final Container[] c = DeathTask.getContainers(this);
@@ -765,9 +791,22 @@ public class Player extends Entity {
 	/**
 	 * Checks if the player is wearing void.
 	 */
-	public boolean isWearingVoid(boolean melee){
-		int helm = melee ? Items.VOID_MELEE_HELM_11665 : Items.VOID_RANGER_HELM_11664;
-		return ContentAPI.inEquipment(this, helm, 1) && ContentAPI.inEquipment(this, Items.VOID_KNIGHT_ROBE_8840, 1) && ContentAPI.inEquipment(this, Items.VOID_KNIGHT_TOP_8839, 1);
+	public boolean isWearingVoid(CombatStyle style) {
+		int helm;
+        if(style == CombatStyle.MELEE) {
+            helm = Items.VOID_MELEE_HELM_11665;
+        } else if(style == CombatStyle.RANGE) {
+            helm = Items.VOID_RANGER_HELM_11664;
+        } else if(style == CombatStyle.MAGIC) {
+            helm = Items.VOID_MAGE_HELM_11663;
+        } else {
+            return false;
+        }
+        boolean legs = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_ROBE_8840, 1);
+        boolean top = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_TOP_8839, 1)
+            || ContentAPI.inEquipment(this, Items.VOID_KNIGHT_TOP_10611, 1);
+        boolean gloves = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_GLOVES_8842, 1);
+		return ContentAPI.inEquipment(this, helm, 1) && legs && top && gloves;
 	}
 
 	/**
@@ -1381,7 +1420,10 @@ public class Player extends Entity {
 	public void clearState(String key){
 		State state = states.get(key);
 		if(state == null) return;
-		state.getPulse().stop();
+        Pulse pulse = state.getPulse();
+        if(pulse != null) {
+            pulse.stop();
+        }
 		states.remove(key);
 	}
 }

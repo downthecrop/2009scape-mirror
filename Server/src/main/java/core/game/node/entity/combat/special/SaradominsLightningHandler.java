@@ -46,6 +46,8 @@ public final class SaradominsLightningHandler extends MeleeSwingHandler implemen
 		if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
+        // TODO: target states to make the first hit melee and the second hit magic
+        state.setStyle(CombatStyle.MAGIC);
 		int hit = 0;
 		int secondary = 0;
 		if (isAccurateImpact(entity, victim, CombatStyle.MELEE, 1.10, 0.98)) {

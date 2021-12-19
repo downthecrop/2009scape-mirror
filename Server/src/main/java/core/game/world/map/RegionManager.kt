@@ -295,21 +295,19 @@ object RegionManager {
             return null
         }
         var destination: Location? = null
-        for (i in 0..3) {
+        outer@ for (i in 0..7) {
             val dir = Direction.get(i)
-            val l = owner.location.transform(dir, if (dir.toInteger() < 2) 1 else node.size())
-            var success = true
-            for (x in 0 until node.size()) {
-                for (y in 0 until node.size()) {
-                    if (isClipped(l.transform(x, y, 0))) {
-                        success = false
-                        break
+            inner@for(j in 0 until node.size()) {
+                val l = owner.location.transform(dir, j)
+                for (x in 0 until node.size()) {
+                    for (y in 0 until node.size()) {
+                        if (isClipped(l.transform(x, y, 0))) {
+                            continue@inner
+                        }
                     }
                 }
-            }
-            if (success) {
                 destination = l
-                break
+                break@outer
             }
         }
         return destination
@@ -538,11 +536,18 @@ object RegionManager {
      */
     @JvmStatic
     fun getSurroundingPlayers(n: Node, maximum: Int, vararg ignore: Node): List<Player> {
-        val players = getLocalPlayers(n.location, 1)
+        val players = getLocalPlayers(n.location, 2)
         var count = 0
         val it = players.iterator()
         while (it.hasNext()) {
             val p = it.next()
+            if(p.isInvisible()) {
+                it.remove()
+            }
+            if(!p.location.withinMaxnormDistance(n.location, 1)) {
+                it.remove()
+                continue
+            }
             if (++count >= maximum) {
                 it.remove()
                 continue
@@ -577,11 +582,18 @@ object RegionManager {
      */
     @JvmStatic
     fun getSurroundingNPCs(n: Node, maximum: Int, vararg ignore: Node): List<NPC> {
-        val npcs = getLocalNpcs(n.location, 1)
+        val npcs = getLocalNpcs(n.location, 2)
         var count = 0
         val it = npcs.iterator()
         while (it.hasNext()) {
             val p = it.next()
+            if(p.isInvisible()) {
+                it.remove()
+            }
+            if(!p.location.withinMaxnormDistance(n.location, 1)) {
+                it.remove()
+                continue
+            }
             if (++count > maximum) {
                 it.remove()
                 continue

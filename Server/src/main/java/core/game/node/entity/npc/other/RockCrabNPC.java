@@ -17,32 +17,34 @@ import core.tools.RandomFunction;
  */
 @Initializable
 public final class RockCrabNPC extends AbstractNPC {
-
 	/**
 	 * The aggresive behavior.
 	 */
 	private static final AggressiveBehavior AGGRO_BEHAVIOR = new AggressiveBehavior() {
+        @Override
+        public boolean ignoreCombatLevelDifference() {
+            return true;
+        }
 		@Override
 		public boolean canSelectTarget(Entity entity, Entity target) {
-			int regionId = target.getLocation().getRegionId();
-			if(target instanceof Player){
-				if(RegionManager.forId(regionId).isTolerated(target.asPlayer())) return false;
-			}
-			RockCrabNPC npc = (RockCrabNPC) entity;
-			if (entity.getLocation().withinDistance(target.getLocation(), 3)) {
-				npc.aggresor = true;
-				npc.target = target;
-				npc.transform(npc.getTransformId());
-				return true;
-			}
-			return super.canSelectTarget(entity, target);
+			return super.canSelectTarget(entity, target) &&
+                entity.getLocation().withinDistance(target.getLocation(), 3);
 		}
 	};
 
+    @Override
+    public void onAttack(Entity target) {
+        this.aggressor = true;
+        this.target = target;
+        if(getId() == getOriginalId()) {
+            this.transform(getOriginalId() - 1);
+        }
+    }
+
 	/**
-	 * If currently an aggresor.
+	 * If currently an aggressor.
 	 */
-	private boolean aggresor;
+	private boolean aggressor;
 
 	/**
 	 * The target.
@@ -71,9 +73,10 @@ public final class RockCrabNPC extends AbstractNPC {
 	@Override
 	public void handleTickActions() {
 		super.handleTickActions();
-		if (aggresor && !inCombat() && target.getLocation().getDistance(this.getLocation()) > 12) {
+		if ((aggressor && !inCombat() && target.getLocation().getDistance(this.getLocation()) > 12) || isInvisible()) {
 			reTransform();
-			aggresor = false;
+			aggressor = false;
+            target = null;
 			getWalkingQueue().reset();
 			setWalks(false);
 		}

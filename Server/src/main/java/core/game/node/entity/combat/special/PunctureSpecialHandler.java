@@ -57,6 +57,7 @@ public final class PunctureSpecialHandler extends MeleeSwingHandler implements P
 		if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
+        state.setStyle(CombatStyle.MELEE);
 		// First hit
 		//double accuracyMod, double defenceMod
 		int hit = 0;

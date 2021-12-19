@@ -62,9 +62,10 @@ public class IoEventHandler {
 		ByteBuffer buffer = ByteBuffer.allocate(100_000);
 		IoSession session = (IoSession) key.attachment();
 		if (channel.read(buffer) == -1) {
-			if(session.getPlayer() != null) {
+			if(session != null && session.getPlayer() != null){
 				Repository.getDisconnectionQueue().add(session.getPlayer());
 			}
+			key.cancel();
 			return;
 		}
 		buffer.flip();

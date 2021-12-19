@@ -26,13 +26,18 @@ import rs09.game.interaction.InteractionListener;
 import rs09.game.interaction.InteractionListeners;
 import rs09.game.world.repository.Repository;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.function.IntPredicate;
 
 /**
  * Handles the incoming interaction packets.
  * @author Emperor
  */
 public final class InteractionPacket implements IncomingPacket {
+
+	static int[] hweenNPCs = new int[] {307, 375, 743, 744, 755, 2634, 2690, 2691, 2692, 530, 531, 556, 557, 558, 559, 583, 585, 1860, 3299, 3671, 922, 970};
 
 	@Override
 	public void decode(Player player, int opcode, IoBuffer buffer) {
@@ -176,8 +181,13 @@ public final class InteractionPacket implements IncomingPacket {
 			return;
 		}
 		NPC shown = npc.getShownNPC(player);
-		final Option option = shown.getInteraction().get(optionIndex);
+		Option option = shown.getInteraction().get(optionIndex);
 		if (option == null) {
+			if (Arrays.stream(hweenNPCs).anyMatch(i -> i == shown.getId())) {
+				option = new Option("trick-or-treat", -1);
+			}
+		}
+		if(option == null) {
 			PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));
 			Interaction.handleInvalidInteraction(player, npc, Option.NULL);
 			return;

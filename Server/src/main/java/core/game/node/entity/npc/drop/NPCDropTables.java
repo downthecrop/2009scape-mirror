@@ -1,5 +1,6 @@
 package core.game.node.entity.npc.drop;
 
+import api.ContentAPI;
 import core.cache.def.impl.NPCDefinition;
 import core.game.content.global.Bones;
 import core.game.ge.GrandExchangeDatabase;
@@ -10,7 +11,6 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import core.game.node.item.WeightedChanceItem;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.tools.RandomFunction;
@@ -18,6 +18,7 @@ import core.tools.StringUtils;
 import rs09.game.ai.AIPlayer;
 import rs09.game.ai.AIRepository;
 import rs09.game.ai.general.GeneralBotCreator;
+import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.content.global.NPCDropTable;
 import rs09.game.ge.OfferManager;
 import rs09.game.system.config.ItemConfigParser;
@@ -41,21 +42,6 @@ public final class NPCDropTables {
 	 * The npcs that will display drop messages
 	 */
 	public static final int[] MESSAGE_NPCS = { 50, 7133, 7134, 2881, 2882, 2883, 3200, 3340, 6247, 6203, 6260, 6222, 2745, 1160, 8133, 8610, 8611, 8612, 8613, 8614, 6204, 6206, 6208, 6261, 6263, 6265, 6223, 6225, 6227 };
-	
-	/**
-	 * The default drop table (holding the 100% drops).
-	 */
-	private final List<WeightedChanceItem> defaultTable = new ArrayList<>(20);
-
-	/**
-	 * The charms drop table (holding the charm drops).
-	 */
-	private final List<WeightedChanceItem> charmTable = new ArrayList<>(20);
-
-	/**
-	 * The main drop table (holding the main drops).
-	 */
-	private final List<WeightedChanceItem> mainTable = new ArrayList<>(20);
 
 	public final NPCDropTable table = new NPCDropTable();
 
@@ -127,9 +113,7 @@ public final class NPCDropTables {
 			}
 			return;
 		}
-		if (item.getDefinition().getConfiguration(ItemConfigParser.RARE_ITEM, false)) {
-			Repository.sendNews(player.getUsername() + " has just received: " + item.getAmount() + " x " + item.getName() + ".");
-		}
+        ContentAPI.announceIfRare(player, item);
 		if(item.getId() == 6199 && player instanceof Player){
 		    player.sendMessage("<col=990000>A mystery box has fallen on the ground.</col>");
 		}
@@ -237,41 +221,6 @@ public final class NPCDropTables {
 	 */
 	public double getStabilizerRatio() {
 		return (1 / (1 + def.getCombatLevel())) * 10;
-	}
-
-	/**
-	 * @return the defaultTable.
-	 */
-	public List<WeightedChanceItem> getDefaultTable() {
-		return defaultTable;
-	}
-
-	/**
-	 * @return the charmTable.
-	 */
-	public List<WeightedChanceItem> getCharmTable() {
-		return charmTable;
-	}
-
-	/**
-	 * @return the mainTable.
-	 */
-	public List<WeightedChanceItem> getMainTable() {
-		return mainTable;
-	}
-
-	/**
-	 * @return the mainTableSize.
-	 */
-	public int getMainTableSize() {
-		return mainTableSize;
-	}
-
-	/**
-	 * @param mainTableSize the mainTableSize to set.
-	 */
-	public void setMainTableSize(int mainTableSize) {
-		this.mainTableSize = mainTableSize;
 	}
 
 	/**

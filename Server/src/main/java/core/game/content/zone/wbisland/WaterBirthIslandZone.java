@@ -29,7 +29,6 @@ public final class WaterBirthIslandZone extends MapZone implements Plugin<Object
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ZoneBuilder.configure(this);
-		ZoneBuilder.configure(new WaterBirthDungeonZone());
 		return this;
 	}
 

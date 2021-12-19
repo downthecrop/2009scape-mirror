@@ -4,11 +4,19 @@ import core.cache.def.impl.VarbitDefinition
 import core.game.content.global.travel.canoe.Canoe
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
+import core.game.node.entity.skill.gather.SkillingTool
 import core.game.world.map.Location
+import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Components
 
 object CanoeUtils {
-    val SHAPE_INTERFACE = Components.CANOE_52
+    private const val SHAPE_INTERFACE = Components.CANOE_52
+
+    private val FROM_LUMBRIDGE = mapOf(4 to 9887, 3 to 9888, 2 to 9889, 1 to 9890)
+    private val FROM_CHAMPIONS = mapOf(4 to 9891, 3 to 9892, 2 to 9893, 0 to 9906)
+    private val FROM_BARBARIAN = mapOf(4 to 9894, 3 to 9895, 1 to 9905, 0 to 9906)
+    private val FROM_EDGE = mapOf(4 to 9896, 2 to 9903, 1 to 9902, 0 to 9901)
+    private val FROM_WILDERNESS = mapOf(3 to 9900, 2 to 9899, 1 to 9898, 0 to 9897)
 
     fun checkCanoe(player: Player, canoe: Canoe){
         if(player.skills.getLevel(Skills.WOODCUTTING) < canoe.requiredLevel) return
@@ -34,6 +42,31 @@ object CanoeUtils {
             12342 -> 3
             12603 -> 4
             else -> 0
+        }
+    }
+
+    fun getTravelAnimation(stationId: Int, destId: Int): Int {
+        return when(stationId){
+            0 -> FROM_LUMBRIDGE.getOrDefault(destId,0)
+            1 -> FROM_CHAMPIONS.getOrDefault(destId,0)
+            2 -> FROM_BARBARIAN.getOrDefault(destId,0)
+            3 -> FROM_EDGE.getOrDefault(destId,0)
+            4 -> FROM_WILDERNESS.getOrDefault(destId,0)
+            else -> 0;
+        }
+    }
+
+    fun getShapeAnimation(axe: SkillingTool): Animation{
+        return when(axe){
+            SkillingTool.BRONZE_AXE -> Animation(6744);
+            SkillingTool.IRON_AXE -> Animation(6743);
+            SkillingTool.STEEL_AXE -> Animation(6742);
+            SkillingTool.BLACK_AXE -> Animation(6741);
+            SkillingTool.MITHRIL_AXE -> Animation(6740);
+            SkillingTool.ADAMANT_AXE -> Animation(6739);
+            SkillingTool.RUNE_AXE -> Animation(6738);
+            SkillingTool.DRAGON_AXE -> Animation(6745);
+            else -> axe.animation;
         }
     }
 

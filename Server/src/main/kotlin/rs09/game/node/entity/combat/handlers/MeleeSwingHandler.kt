@@ -44,7 +44,7 @@ open class MeleeSwingHandler
             distance += if (entity.walkingQueue.isRunningBoth) 2 else 1
             goodRange = canMelee(entity, victim, distance)
         }
-        if (!isProjectileClipped(entity, victim, true)) {
+        if (!isProjectileClipped(entity, victim, !usingHalberd(entity))) {
             return InteractionType.NO_INTERACT
         }
         val isRunning = entity.walkingQueue.runDir != -1
@@ -82,7 +82,6 @@ open class MeleeSwingHandler
             if (state.estimatedHit > victim.skills.lifepoints) state.estimatedHit = victim.skills.lifepoints
             if (state.estimatedHit + state.secondaryHit > victim.skills.lifepoints) state.secondaryHit -= ((state.estimatedHit + state.secondaryHit) - victim.skills.lifepoints)
         }
-        addExperience(entity, victim, state)
         return 1
     }
 
@@ -147,16 +146,15 @@ open class MeleeSwingHandler
         if(entity.properties.attackStyle.style == WeaponInterface.STYLE_ACCURATE) effectiveAttackLevel += 3
         else if(entity.properties.attackStyle.style == WeaponInterface.STYLE_CONTROLLED) effectiveAttackLevel += 1
         effectiveAttackLevel += 8
-        if(entity is Player && entity.isWearingVoid(true)) effectiveAttackLevel *= 1.1
+        if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.PRECISION_STRIKES, entity)){ //Attack skillcape perk
+            effectiveAttackLevel += 6
+        }
+        effectiveAttackLevel *= getSetMultiplier(entity, Skills.ATTACK);
         effectiveAttackLevel = floor(effectiveAttackLevel)
         effectiveAttackLevel *= (entity.properties.bonuses[entity.properties.attackStyle.bonusType] + 64)
 
         val amuletName = (if(entity is Player) ContentAPI.getItemFromEquipment(entity, EquipmentSlot.AMULET)?.name ?: "null" else "null").toLowerCase()
         val victimName = entity.properties.combatPulse.getVictim()?.name ?: "none"
-
-        if(entity is Player && SkillcapePerks.isActive(SkillcapePerks.PRECISION_STRIKES, entity)){ //Attack skillcape perk
-            effectiveAttackLevel += 6
-        }
 
         if(entity is Player && entity.slayer.task?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true)
             effectiveAttackLevel *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer Helm/ Black Mask/ Slayer cape
@@ -229,39 +227,10 @@ open class MeleeSwingHandler
 //			System.out.println("Fiist number -> " + 1.0 + ((e.getSkills().getMaximumLifepoints() - e.getSkills().getLifepoints()) * 0.01));
             return 1.0 + (e!!.skills.maximumLifepoints - e.skills.lifepoints) * 0.01
         }
-        return 1.0
-    }
-
-    override fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {
-        if (entity is Player && state != null) {
-            if (victim is Player && entity.asPlayer().ironmanManager.isIronman) {
-                return
-            }
-            var hit = state.estimatedHit
-            if (hit < 0) {
-                hit = 0
-            }
-            if (state.secondaryHit > 0) {
-                hit += state.secondaryHit
-            }
-            var experience = hit * EXPERIENCE_MOD
-            val famExp = entity.getAttribute("fam-exp", false) && entity.familiarManager.hasFamiliar()
-            if (!famExp) {
-                entity.getSkills().addExperience(Skills.HITPOINTS, hit * 1.33, true)
-            }
-            when (if (famExp) entity.familiarManager.familiar.attackStyle else entity.properties.attackStyle.style) {
-                WeaponInterface.STYLE_ACCURATE -> entity.skills.addExperience(Skills.ATTACK, experience, true)
-                WeaponInterface.STYLE_AGGRESSIVE -> entity.skills.addExperience(Skills.STRENGTH, experience, true)
-                WeaponInterface.STYLE_DEFENSIVE -> entity.skills.addExperience(Skills.DEFENCE, experience, true)
-                WeaponInterface.STYLE_CONTROLLED -> {
-                    experience /= 3.0
-                    entity.skills.addExperience(Skills.ATTACK, experience, true)
-                    entity.skills.addExperience(Skills.STRENGTH, experience, true)
-                    entity.skills.addExperience(Skills.DEFENCE, experience, true)
-                }
-                WeaponInterface.STYLE_CAST -> entity.skills.addExperience(Skills.MAGIC, experience, true)
-            }
+        if(e is Player && e.isWearingVoid(CombatStyle.MELEE) && (skillId == Skills.ATTACK || skillId == Skills.STRENGTH)) {
+            return 1.1
         }
+        return 1.0
     }
 
     override fun getArmourSet(e: Entity?): ArmourSet? {

@@ -84,6 +84,7 @@ public final class PowerstabSpecialHandler extends MeleeSwingHandler implements 
 				if (isAccurateImpact(entity, e)) {
 					hit = RandomFunction.random(calculateHit(entity, e, 1.0));
 				}
+                s.setStyle(CombatStyle.MELEE);
 				s.setEstimatedHit(hit);
 			}
 		}

@@ -88,7 +88,6 @@ open class MagicSwingHandler
         }
         if(state.estimatedHit > victim.skills.lifepoints) state.estimatedHit = victim.skills.lifepoints
         if(state.estimatedHit + state.secondaryHit > victim.skills.lifepoints) state.secondaryHit -= ((state.estimatedHit + state.secondaryHit) - victim.skills.lifepoints)
-        addExperience(entity, victim, state)
         return ticks
     }
 
@@ -115,10 +114,7 @@ open class MagicSwingHandler
     }
 
     override fun impact(entity: Entity?, victim: Entity?, state: BattleState?) {
-        if (state!!.spell != null && entity is Player) {
-            entity.getSkills().addExperience(Skills.MAGIC, state.spell.experience)
-        }
-        if (state.targets == null) {
+        if (state!!.targets == null) {
             if (state.estimatedHit > -1) {
                 victim!!.impactHandler.handleImpact(entity, state.estimatedHit, CombatStyle.MAGIC, state)
             }
@@ -177,7 +173,7 @@ open class MagicSwingHandler
         if (entity is Player) {
             prayer += entity.prayer.getSkillBonus(Skills.MAGIC)
         }
-        val additional = 1.0 // Slayer helmet/salve/...
+        val additional = getSetMultiplier(entity, Skills.MAGIC);
         val effective = floor(level * prayer * additional + spellBonus)
         val bonus = entity.properties.bonuses[WeaponInterface.BONUS_MAGIC]
         return floor((effective + 8) * (bonus + 64) / 10).toInt()
@@ -214,9 +210,8 @@ open class MagicSwingHandler
     }
 
     override fun getSetMultiplier(e: Entity?, skillId: Int): Double {
-        if (e is Player) {
-            val c: Container = e.equipment
-            if (containsVoidSet(c) && c.getNew(EquipmentContainer.SLOT_HAT).id == 11663) {
+        if(skillId == Skills.MAGIC) {
+            if(e is Player && e.isWearingVoid(CombatStyle.MAGIC)) {
                 return 1.3
             }
         }
@@ -224,50 +219,14 @@ open class MagicSwingHandler
     }
 
     override fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {
-        if (entity is Player) {
-            if (victim is Player && entity.asPlayer().ironmanManager.isIronman) {
-                return
-            }
-            var hit = 0
-            if (state!!.targets != null) {
-                for (s in state.targets) {
-                    if (s != null && s.estimatedHit > 0) {
-                        hit += s.estimatedHit
-                    }
-                }
-            } else if (state.estimatedHit > 0) {
-                hit += state.estimatedHit
-            }
-            if (state.spell != null) {
-                state.spell.addExperience(entity, hit)
-            } else {
-                val famExp = entity.getAttribute("fam-exp", false) && entity.familiarManager.hasFamiliar()
-                if (!famExp) {
-                    entity.getSkills().addExperience(Skills.HITPOINTS, hit * 1.33, true)
-                } else {
-                    val fam = entity.familiarManager.familiar
-                    var skill = Skills.MAGIC
-                    when (fam.attackStyle) {
-                        WeaponInterface.STYLE_DEFENSIVE -> skill = Skills.DEFENCE
-                        WeaponInterface.STYLE_ACCURATE -> skill = Skills.ATTACK
-                        WeaponInterface.STYLE_AGGRESSIVE -> skill = Skills.STRENGTH
-                        WeaponInterface.STYLE_RANGE_ACCURATE -> skill = Skills.RANGE
-                        WeaponInterface.STYLE_CONTROLLED -> {
-                            var experience = hit * EXPERIENCE_MOD
-                            experience /= 3.0
-                            entity.getSkills().addExperience(Skills.ATTACK, experience, true)
-                            entity.getSkills().addExperience(Skills.STRENGTH, experience, true)
-                            entity.getSkills().addExperience(Skills.DEFENCE, experience, true)
-                            return
-                        }
-                    }
-                    entity.getSkills().addExperience(skill, hit * EXPERIENCE_MOD, true)
-                    return
-                }
-                entity.getSkills().addExperience(Skills.MAGIC, hit * EXPERIENCE_MOD, true)
-            }
+        if (state?.spell != null && entity is Player) {
+            state.spell.addExperience(entity, state.totalDamage)
+            return
         }
+
+        super.addExperience(entity, victim, state)
     }
+
 
     override fun getArmourSet(e: Entity?): ArmourSet? {
         return if (ArmourSet.AHRIM.isUsing(e)) {

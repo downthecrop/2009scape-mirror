@@ -123,7 +123,7 @@ public final class SummoningCreator {
 		@Override
 		public boolean checkRequirements() {
 			player.getInterfaceManager().close();
-			if (player.getSkills().getLevel(Skills.SUMMONING) < type.getLevel()) {
+			if (player.getSkills().getStaticLevel(Skills.SUMMONING) < type.getLevel()) {
 				player.getPacketDispatch().sendMessage("You need a Summoning level of at least " + type.getLevel() + " in order to do this.");
 				return false;
 			}
@@ -157,6 +157,7 @@ public final class SummoningCreator {
 			if (getDelay() == 1) {
 				setDelay(4);
 				player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(8509));
+                player.getAudioManager().send(4164); // 4277 also sounds the same
 				return false;
 			}
 			player.getPacketDispatch().sendSceneryAnimation(object, Animation.create(8510));

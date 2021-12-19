@@ -113,7 +113,7 @@ public abstract class CombatSpell extends MagicSpell {
 		List<Entity> list = new ArrayList<>(20);
 		list.add(target);
 		boolean npc = target instanceof NPC;
-		for (Entity e : npc ? RegionManager.getLocalNpcs(target, 1) : RegionManager.getLocalPlayers(target, 1)) {
+		for (Entity e : npc ? RegionManager.getSurroundingNPCs(target) : RegionManager.getSurroundingPlayers(target)) {
 			if (e != target && e != entity && CombatStyle.MAGIC.getSwingHandler().canSwing(entity, e) != InteractionType.NO_INTERACT) {
 				list.add(e);
 			}

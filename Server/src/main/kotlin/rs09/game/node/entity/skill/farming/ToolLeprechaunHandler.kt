@@ -5,13 +5,14 @@ import core.game.component.Component
 import core.game.content.dialogue.FacialExpression
 import core.game.interaction.OptionHandler
 import core.game.node.Node
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs09.consts.Components
 import org.rs09.consts.NPCs
 
-val TL_IDS = arrayOf(NPCs.TOOL_LEPRECHAUN_3021,NPCs.GOTH_LEPRECHAUN_8000,NPCs.TOOL_LEPRECHAUN_4965)
+val TL_IDS = arrayOf(NPCs.TOOL_LEPRECHAUN_3021,NPCs.GOTH_LEPRECHAUN_8000,NPCs.TOOL_LEPRECHAUN_4965,NPCs.TECLYN_2861)
 @Initializable
 class ToolLeprechaunHandler : OptionHandler() {
     override fun newInstance(arg: Any?): Plugin<Any> {
@@ -27,7 +28,7 @@ class ToolLeprechaunHandler : OptionHandler() {
         node ?: return false
         when(option){
             "exchange" -> player?.interfaceManager?.open(Component(Components.FARMING_TOOLS_125))
-            "teleport" -> player?.dialogueInterpreter?.sendDialogues(node.id,if(node.id == 4965) FacialExpression.FRIENDLY else FacialExpression.OLD_NORMAL, "I forgot how to do that it seems.")
+            "teleport" -> VinesweeperTeleport.teleport(node!! as NPC, player!!)
         }
         return true
     }

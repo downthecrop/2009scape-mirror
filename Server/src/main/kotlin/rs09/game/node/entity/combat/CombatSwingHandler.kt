@@ -15,6 +15,7 @@ import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.prayer.PrayerType
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.summoning.familiar.Familiar
+import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
@@ -137,18 +138,6 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
     }
 
     /**
-     * Checks if the container contains a void knight set.
-     * @param c The container to check.
-     * @return `True` if so.
-     */
-    fun containsVoidSet(c: Container): Boolean {
-        val top = c.getNew(EquipmentContainer.SLOT_CHEST)
-        return if (top.id != 8839 && top.id != 10611) {
-            false
-        } else c.getNew(EquipmentContainer.SLOT_LEGS).id == 8840 && c.getNew(EquipmentContainer.SLOT_HANDS).id == 8842
-    }
-
-    /**
      * Checks if the hit will be accurate.
      * @param entity The entity.
      * @param victim The victim.
@@ -241,10 +230,6 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         val vl = victim.location
         val evl = vl.transform(victim.size(), victim.size(), 0)
         if (el.x >= vl.x && el.x < evl.x && el.y >= vl.y && el.y < evl.y || el.z != vl.z) {
-            return InteractionType.NO_INTERACT
-        }
-        if (!victim.isAttackable(entity, type)) {
-            entity.properties.combatPulse.stop()
             return InteractionType.NO_INTERACT
         }
         return InteractionType.STILL_INTERACT
@@ -370,6 +355,16 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         if (victim.id == 757) {
             EXPERIENCE_MOD = 0.01
         }
+        // Recursively adjustBattleState targets so that multi-target attacks have protection prayers applied.
+        if (state.targets != null && state.targets.isNotEmpty()) {
+            if (!(state.targets.size == 1 && state.targets[0] == state)) {
+                for (s in state.targets) {
+                    if (s != null && s != state) {
+                        adjustBattleState(entity, victim, s);
+                    }
+                }
+            }
+        }
         if (state.estimatedHit > 0) {
             state.estimatedHit = getFormattedHit(entity, victim, state, state.estimatedHit)
             totalHit += state.estimatedHit
@@ -400,7 +395,58 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      * @param victim The victim.
      * @param state The battle state.
      */
-    open fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {}
+    open fun addExperience(entity: Entity?, victim: Entity?, state: BattleState?) {
+        if (entity == null || (victim is Player && entity is Player && entity.asPlayer().ironmanManager.isIronman)) {
+            return
+        }
+        var player: Player
+        var attStyle: Int
+
+        when(entity)
+        {
+            is Familiar -> {player = entity.owner; attStyle = entity.attackStyle}
+            is Player -> {player = entity; attStyle = entity.properties.attackStyle.style}
+            else -> return
+        }
+        if (state != null) {
+            val hit = state.totalDamage
+            if (entity is Player) {
+                player.skills.addExperience(Skills.HITPOINTS, hit * 1.33, true)
+            }
+
+            var skill = -1
+            when (attStyle) {
+                WeaponInterface.STYLE_DEFENSIVE -> skill = Skills.DEFENCE
+                WeaponInterface.STYLE_ACCURATE -> skill = Skills.ATTACK
+                WeaponInterface.STYLE_AGGRESSIVE -> skill = Skills.STRENGTH
+                WeaponInterface.STYLE_CONTROLLED -> {
+                    var experience = hit * EXPERIENCE_MOD
+                    experience /= 3.0
+                    player.skills.addExperience(Skills.ATTACK, experience, true)
+                    player.skills.addExperience(Skills.STRENGTH, experience, true)
+                    player.skills.addExperience(Skills.DEFENCE, experience, true)
+                    return
+                }
+
+                WeaponInterface.STYLE_RANGE_ACCURATE -> skill = Skills.RANGE
+                WeaponInterface.STYLE_RAPID -> skill = Skills.RANGE
+                WeaponInterface.STYLE_LONG_RANGE -> {
+                    player.skills.addExperience(Skills.RANGE, hit * (EXPERIENCE_MOD / 2), true)
+                    player.skills.addExperience(Skills.DEFENCE, hit * (EXPERIENCE_MOD / 2), true)
+                    return
+                }
+
+                WeaponInterface.STYLE_CAST -> skill = Skills.MAGIC
+                WeaponInterface.STYLE_DEFENSIVE_CAST -> {
+                    player.skills.addExperience(Skills.MAGIC, hit * 1.33, true)
+                    player.skills.addExperience(Skills.DEFENCE, hit.toDouble(), true)
+                    return
+                }
+            }
+            if (skill < 0) return
+            player.skills.addExperience(skill, hit * EXPERIENCE_MOD, true)
+        }
+    }
 
     /**
      * Gets the formated hit.
@@ -412,7 +458,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
      */
     protected open fun getFormattedHit(attacker: Entity, victim: Entity, state: BattleState, rawHit: Int): Int {
         var hit = rawHit
-        hit = attacker.getFormatedHit(state, hit).toInt()
+        hit = attacker.getFormattedHit(state, hit).toInt()
         if (victim is Player) {
             val player = victim.asPlayer()
             val shield = player.equipment[EquipmentContainer.SLOT_SHIELD]
@@ -515,11 +561,21 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
          */
 		@JvmStatic
 		fun isProjectileClipped(entity: Node, victim: Node?, checkClose: Boolean): Boolean {
-            return if (checkClose) {
-                if (entity.id == 54) { // /temp until emp is back.
-                    Pathfinder.find(entity as Entity, victim!!, false, Pathfinder.SMART).isSuccessful
-                } else Pathfinder.find(entity as Entity, victim!!, false, Pathfinder.DUMB).isSuccessful
-            } else Pathfinder.find(entity as Entity, victim!!, false, Pathfinder.PROJECTILE).isSuccessful
+            for(x1 in 0 until entity.size()) {
+                for(y1 in 0 until entity.size()) {
+                    val src = entity.location.transform(x1, y1, 0)
+                    for(x2 in 0 until victim!!.size()) {
+                        for(y2 in 0 until victim!!.size()) {
+                            val dst = victim!!.location.transform(x2, y2, 0)
+                            val path = Pathfinder.PROJECTILE.find(src, 1, dst, 1, 1, 0, 0, 0, false, RegionManager::getClippingFlag)
+                            if(path.isSuccessful && (!checkClose || path.points.size <= 1)) {
+                                return true
+                            }
+                        }
+                    }
+                }
+            }
+            return false
         }
     }
 

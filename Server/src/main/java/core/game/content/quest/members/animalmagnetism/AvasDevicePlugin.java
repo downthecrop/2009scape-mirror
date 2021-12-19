@@ -34,18 +34,16 @@ public final class AvasDevicePlugin implements Plugin<Object> {
 			state.init();
 			break;
 		case "unequip":
+            player.clearState("avadevice");
 			if (args.length == 3) {
 				Item second = (Item) args[2];
 				if (second.getId() == 10498 || second.getId() == 10499) {
-					player.clearState("avadevice");
 					AvaDeviceState newState = (AvaDeviceState) player.registerState("avadevice");
 					newState.setDevice(second.getId());
 					newState.init();
 					break;
 				}
 			}
-			if(player.hasActiveState("avadevice")) player.clearState("avadevice");
-			break;
 		}
 		return true;
 	}

@@ -35,7 +35,9 @@ import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import rs09.game.content.dialogue.DialogueFile
+import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.system.SystemLogger
+import rs09.game.system.config.ItemConfigParser;
 import rs09.game.world.GameWorld
 import rs09.game.world.GameWorld.Pulser
 import rs09.game.world.repository.Repository
@@ -652,6 +654,17 @@ object ContentAPI {
     }
 
     /**
+     * Gets a list of nearby NPCs that match the given IDs.
+     * @param entity the entity to check around
+     * @param ids the IDs of the NPCs to look for
+     * @param distance The maximum distance to the entity.
+     */
+    @JvmStatic
+    fun findLocalNPCs(entity: Entity, ids: IntArray, distance: Int): List<NPC>{
+        return RegionManager.getLocalNpcs(entity, distance).filter { it.id in ids }.toList()
+    }
+
+    /**
      * Gets the value of an attribute key from the Entity's attributes store
      * @param entity the entity to get the attribute from
      * @param attribute the attribute key to use
@@ -1241,6 +1254,14 @@ object ContentAPI {
         when(gfx){
             is Int -> Graphics.send(Graphics(gfx),location)
             is Graphics -> Graphics.send(gfx, location)
+        }
+    }
+
+    @JvmStatic
+    fun announceIfRare(player: Player, item: Item) {
+        if (item.definition.getConfiguration(ItemConfigParser.RARE_ITEM, false)) {
+            ContentAPI.sendNews("${player.username} has just received: ${item.amount} x ${item.name}.");
+            GlobalKillCounter.incrementRareDrop(player, item);
         }
     }
 }

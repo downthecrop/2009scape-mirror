@@ -60,6 +60,7 @@ public final class SnapshotSpecialHandler extends RangeSwingHandler implements P
 		if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
+        state.setStyle(CombatStyle.RANGE);
 		int max = calculateHit(entity, victim, 1.0);
 		state.setMaximumHit(max);
 		int hit = 0;

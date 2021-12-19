@@ -55,6 +55,7 @@ public final class SnipeSpecialHandler extends RangeSwingHandler implements Plug
 		if (!((Player) entity).getSettings().drainSpecial(SPECIAL_ENERGY)) {
 			return -1;
 		}
+        state.setStyle(CombatStyle.RANGE);
 		int hit = 0;
 		if (isAccurateImpact(entity, victim, CombatStyle.RANGE, 1.05, 1.0)) {
 			hit = RandomFunction.random(calculateHit(entity, victim, 1.0));

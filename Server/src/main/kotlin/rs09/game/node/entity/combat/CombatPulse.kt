@@ -129,6 +129,9 @@ class CombatPulse(
             if (handler == null) {
                 handler = entity.getSwingHandler(true)
             }
+            if (!v.isAttackable(entity, handler!!.type)) {
+                return true
+            }
             if (!swing(entity, victim, handler)) {
                 temporaryHandler = null
                 updateStyle()
@@ -414,6 +417,7 @@ class CombatPulse(
                 entity.faceTemporary(victim, 1) // face back to entity.
             }
             handler.adjustBattleState(entity, victim!!, state)
+            handler.addExperience(entity, victim, state)
             handler.visualize(entity, victim, state)
             if (delay - 1 < 1) {
                 handler.visualizeImpact(entity, victim, state)

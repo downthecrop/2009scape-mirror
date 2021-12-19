@@ -35,13 +35,14 @@ public class EctophialFillPlugin extends UseWithHandler {
 		final Player player = event.getPlayer();
 		player.lock(3);
 		player.animate(Animation.create(1652));
+        player.getAudioManager().send(1132);
 		GameWorld.getPulser().submit(new Pulse(3, player) {
 			@Override
 			public boolean pulse() {
 				if (player.getInventory().remove(new Item(4252))) {
 					player.getInventory().add(new Item(4251));
 				}
-				player.sendMessage("You refill the ectophial.");
+				player.sendMessage("You refill the ectophial from the Ectofuntus.");
 				return true;
 			}
 		});
