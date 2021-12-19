@@ -18,6 +18,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
+import core.game.node.entity.player.link.quest.QuestRepository
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
@@ -776,6 +777,20 @@ fun location(x: Int, y: Int, z: Int): Location{
 }
 
 /**
+ * Checks if the given entity is within the given ZoneBorders
+ */
+fun inBorders(entity: Entity, borders: ZoneBorders): Boolean{
+    return borders.insideBorder(entity)
+}
+
+/**
+ * Checks if the given entity is within the given borders
+ */
+fun inBorders(entity: Entity, swX: Int, swY: Int, neX: Int, neY: Int): Boolean {
+    return ZoneBorders(swX,swY,neX,neY).insideBorder(entity)
+}
+
+/**
  * AHeals the given entity for the given number of hitpoints
  */
 
@@ -1246,6 +1261,20 @@ fun runTask(entity: Entity, delay: Int = 0, task: () -> Unit){
 
 fun getQP(player: Player): Int{
     return player.questRepository.points
+}
+
+/**
+ * Gets the stage for the given quest for the given player
+ */
+fun questStage(player: Player, quest: String): Int{
+    return player.questRepository.getStage(quest)
+}
+
+/**
+ * Sets the stage for the given quest for the given player
+ */
+fun setQuestStage(player: Player, quest: String, stage: Int) {
+    player.questRepository.setStage(QuestRepository.getQuests()[quest]!!, stage)
 }
 
 /**
