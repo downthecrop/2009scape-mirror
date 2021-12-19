@@ -2,13 +2,11 @@ package rs09.game.system.config
 
 import com.moandjiezana.toml.Toml
 import core.game.world.map.Location
-import core.tools.StringUtils
 import core.tools.mysql.Database
-import rs09.JSONUtils.Companion.parsePath
 import rs09.ServerConstants
 import rs09.game.system.SystemLogger
-import rs09.game.world.GameSettings
-import rs09.game.world.GameWorld
+import rs09.game.world.WorldSettings
+import rs09.game.world.World
 import java.io.File
 import kotlin.system.exitProcess
 
@@ -29,8 +27,8 @@ object ServerConfigParser {
         } else {
             try {
                 tomlData = Toml().read(confFile)
-                parseGameSettings()
                 parseServerSettings()
+                parseGameSettings()
             } catch (e: java.lang.IllegalStateException) {
                 SystemLogger.logErr("Passed config file is not a TOML file. Path: ${confFile!!.canonicalPath}")
                 SystemLogger.logErr("Exception received: $e")
@@ -44,7 +42,7 @@ object ServerConfigParser {
         tomlData ?: return
         val data = tomlData!!
 
-        GameWorld.settings = GameSettings(
+        World.settings = WorldSettings(
             name = ServerConstants.SERVER_NAME,
             isBeta = data.getBoolean("world.debug"),
             isDevMode = data.getBoolean("world.dev"),
@@ -98,6 +96,7 @@ object ServerConfigParser {
         ServerConstants.HOME_LOCATION = parseLocation(data.getString("world.home_location"))
         ServerConstants.START_LOCATION = parseLocation(data.getString("world.new_player_location"))
         ServerConstants.DAILY_RESTART = data.getBoolean("world.daily_restart")
+        ServerConstants.ALLOW_GUI = data.getBoolean("world.start_gui")
     }
 
 

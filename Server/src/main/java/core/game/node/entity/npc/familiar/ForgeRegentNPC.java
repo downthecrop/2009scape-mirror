@@ -9,7 +9,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.player.FaceLocationFlag;
@@ -143,7 +143,7 @@ public class ForgeRegentNPC extends Familiar {
 			familiar.animate(FIREMAKE_ANIMATION);
 			if (player.getInventory().remove(event.getUsedItem())) {
 				final GroundItem ground = GroundItemManager.create(event.getUsedItem(), familiar.getLocation(), player);
-				GameWorld.getPulser().submit(new Pulse(ticks, player, familiar) {
+				World.getPulser().submit(new Pulse(ticks, player, familiar) {
 					@Override
 					public boolean pulse() {
 						if (!ground.isActive()) {

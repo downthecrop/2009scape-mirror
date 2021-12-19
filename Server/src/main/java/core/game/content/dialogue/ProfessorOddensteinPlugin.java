@@ -6,7 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
@@ -262,7 +262,7 @@ public class ProfessorOddensteinPlugin extends DialoguePlugin {
 				player.getPacketDispatch().sendMessage("and a can of oil to the professor.");
 				player.getPacketDispatch().sendMessage("Oddenstein starts up the machine.");
 				final NPC chicken = Repository.findNPC(288);
-				GameWorld.getPulser().submit(new Pulse(1, player) {
+				World.getPulser().submit(new Pulse(1, player) {
 					int counter = 0;
 
 					@Override

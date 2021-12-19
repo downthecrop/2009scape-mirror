@@ -6,7 +6,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Represents the dialogue plugin used for the doric npc.
@@ -165,7 +165,7 @@ public final class DoricDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 50:
-			interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "I make pickaxes. I am the best maker of pickaxes in the", "whole of " + GameWorld.getSettings().getName() + ".");
+			interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "I make pickaxes. I am the best maker of pickaxes in the", "whole of " + World.getSettings().getName() + ".");
 			stage = 51;
 			break;
 		case 51:

@@ -8,7 +8,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.IronmanMode;
 import core.game.node.item.Item;
 import rs09.game.system.config.ItemConfigParser;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
@@ -91,7 +91,7 @@ public final class BankContainer extends Container {
 		if (player.getIronmanManager().checkRestriction(IronmanMode.ULTIMATE)) {
 			return;
 		}
-		if (!player.getBankPinManager().isUnlocked() && !GameWorld.getSettings().isDevMode()) {
+		if (!player.getBankPinManager().isUnlocked() && !World.getSettings().isDevMode()) {
 			player.getBankPinManager().openType(1);
 			return;
 		}
@@ -122,7 +122,7 @@ public final class BankContainer extends Container {
 		if (player.getIronmanManager().checkRestriction(IronmanMode.ULTIMATE)) {
 			return;
 		}
-		if (!player.getBankPinManager().isUnlocked() && !GameWorld.getSettings().isDevMode()) {
+		if (!player.getBankPinManager().isUnlocked() && !World.getSettings().isDevMode()) {
 			player.getBankPinManager().openType(1);
 			return;
 		}

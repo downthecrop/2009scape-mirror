@@ -4,15 +4,13 @@ import core.game.component.Component;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 
-import core.game.node.entity.player.link.SavedData;
 import core.game.node.entity.player.link.SpellBookManager;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import rs09.game.world.repository.Repository;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ChildPositionContext;
 import core.net.packet.out.RepositionChild;
 
-import java.nio.ByteBuffer;
 import java.text.DecimalFormat;
 
 /**
@@ -73,7 +71,7 @@ public class SpawnData {
 	 * @param player the player.
 	 */
 	public void drawStatsTab(Player player) {
-		if (GameWorld.isEconomyWorld()) {
+		if (World.isEconomyWorld()) {
 			return;
 		}
 		player.getPacketDispatch().sendInterfaceConfig(274, 3, true);
@@ -147,7 +145,7 @@ public class SpawnData {
 	 * @param button the button.
 	 */
 	public void handleButton(Player p, int button) {
-		if (GameWorld.isEconomyWorld()) {
+		if (World.isEconomyWorld()) {
 			return;
 		}
 		drawStatsTab(p);
@@ -416,7 +414,7 @@ public class SpawnData {
 	 * @param killed
 	 */
 	public void onDeath(Player killer, Player killed) {
-		if (GameWorld.isEconomyWorld()) {
+		if (World.isEconomyWorld()) {
 			return;
 		}
 		if (killer.isArtificial() || killed.isArtificial() || killer.getDetails().getInfo().getIp().equals(killed.getDetails().getInfo().getIp()) || killed.getDetails().getInfo().getMac().equals(killer.getDetails().getInfo().getMac())) {

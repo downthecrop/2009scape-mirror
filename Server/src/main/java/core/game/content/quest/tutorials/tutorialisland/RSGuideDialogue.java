@@ -5,7 +5,7 @@ import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.plugin.Initializable;
 
 /**
@@ -52,9 +52,9 @@ public class RSGuideDialogue extends DialoguePlugin {
 			}	
 		} else {
 			if(player.getSkills().getTotalLevel() < 300){
-				interpreter.sendDialogues(npc, null, "Greetings, "+player.getUsername()+". Welcome to "+GameWorld.getSettings().getName()+".", "The flashing icon above my head will disappear once", "you've reached a total level of three hundred.");
+				interpreter.sendDialogues(npc, null, "Greetings, "+player.getUsername()+". Welcome to "+ World.getSettings().getName()+".", "The flashing icon above my head will disappear once", "you've reached a total level of three hundred.");
 			} else {
-				interpreter.sendDialogues(npc, null, "Greetings, "+player.getUsername()+". Welcome to "+GameWorld.getSettings().getName()+".");
+				interpreter.sendDialogues(npc, null, "Greetings, "+player.getUsername()+". Welcome to "+ World.getSettings().getName()+".");
 			}
 			stage = 10;
 		}
@@ -117,7 +117,7 @@ public class RSGuideDialogue extends DialoguePlugin {
 		} else {
 			switch(stage){
 			case 10:
-				interpreter.sendDialogues(npc, null, "I am the "+GameWorld.getSettings().getName()+" guide. I offer free and helpful assistance", "for newcomers. What would you like to ask about?");
+				interpreter.sendDialogues(npc, null, "I am the "+ World.getSettings().getName()+" guide. I offer free and helpful assistance", "for newcomers. What would you like to ask about?");
 				stage++;
 				break;
 			case 11:
@@ -131,17 +131,17 @@ public class RSGuideDialogue extends DialoguePlugin {
 					stage = 13;
 					break;
 				case 2:
-					interpreter.sendDialogues(player, null, "I'd like to know how to get around on "+GameWorld.getSettings().getName()+".");
+					interpreter.sendDialogues(player, null, "I'd like to know how to get around on "+ World.getSettings().getName()+".");
 					stage = 18;
 					break;
 				case 3:
-					interpreter.sendDialogues(player, null, "I'd like to know about all the content in "+GameWorld.getSettings().getName()+".");
+					interpreter.sendDialogues(player, null, "I'd like to know about all the content in "+ World.getSettings().getName()+".");
 					stage = 25;
 					break;
 				}
 				break;
 			case 13:
-				interpreter.sendDialogues(npc, null, "That is one of the most commonly asked questions.", "First of all, there are many different ways to make large", "amounts of coins in "+GameWorld.getSettings().getName()+". There's hundreds", "of hours of emulated content awaiting you.");
+				interpreter.sendDialogues(npc, null, "That is one of the most commonly asked questions.", "First of all, there are many different ways to make large", "amounts of coins in "+ World.getSettings().getName()+". There's hundreds", "of hours of emulated content awaiting you.");
 				stage = 14;
 				break;
 			case 14:
@@ -157,11 +157,11 @@ public class RSGuideDialogue extends DialoguePlugin {
 				stage = 17;
 				break;
 			case 17:
-				interpreter.sendDialogues(npc, null, GameWorld.getSettings().getName()+" is an economy-driven server. All gathering skills", "are highly profitable and sought after. Herblore and", "Farming, for example, are guaranteed to make you", "profit.");
+				interpreter.sendDialogues(npc, null, World.getSettings().getName()+" is an economy-driven server. All gathering skills", "are highly profitable and sought after. Herblore and", "Farming, for example, are guaranteed to make you", "profit.");
 				stage = 11;
 				break;
 			case 18:
-				interpreter.sendDialogues(npc, null, "A good question indeed. Traveling is the key to"," experiencing all the game content that "+GameWorld.getSettings().getName()+" has to offer.");
+				interpreter.sendDialogues(npc, null, "A good question indeed. Traveling is the key to"," experiencing all the game content that "+ World.getSettings().getName()+" has to offer.");
 				stage = 19;
 				break;
 			case 19:
@@ -181,11 +181,11 @@ public class RSGuideDialogue extends DialoguePlugin {
 				stage = 23;
 				break;
 			case 23:
-				interpreter.sendDialogues(npc, null, "We also have the convenient Gnome glider system.", "The friendly Gnomes of "+GameWorld.getSettings().getName()+" offer their services","completely free of charge.");
+				interpreter.sendDialogues(npc, null, "We also have the convenient Gnome glider system.", "The friendly Gnomes of "+ World.getSettings().getName()+" offer their services","completely free of charge.");
 				stage = 24;
 				break;
 			case 24:
-				interpreter.sendDialogues(npc, null, "Finally, we have the green teleporter located in the", "Grand Exchange and Fairy rings.", "All of these teleportation methods should assist you", "in traveling the wide-open world of "+GameWorld.getSettings().getName()+".");
+				interpreter.sendDialogues(npc, null, "Finally, we have the green teleporter located in the", "Grand Exchange and Fairy rings.", "All of these teleportation methods should assist you", "in traveling the wide-open world of "+ World.getSettings().getName()+".");
 				stage = 50;
 				break;
 			case 25:

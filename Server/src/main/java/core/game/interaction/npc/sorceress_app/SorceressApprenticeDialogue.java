@@ -6,7 +6,7 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Graphics;
 
@@ -241,7 +241,7 @@ public class SorceressApprenticeDialogue extends DialoguePlugin {
 		player.lock();
 		Projectile.create(npc, player, 109).send();
 		npc.sendChat("Senventior Disthinte Molesko!");
-		GameWorld.getPulser().submit(new Pulse(1) {
+		World.getPulser().submit(new Pulse(1) {
 			int counter = 0;
 
 			@Override

@@ -4,7 +4,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.RegionManager;
 
 import java.util.ArrayList;
@@ -75,9 +75,9 @@ public class AggressiveBehavior {
                 if (RegionManager.forId(regionId).isTolerated(target.asPlayer())) {
                     return false;
                 }
-				int ticks = GameWorld.getTicks() - npc.getAggressiveHandler().getPlayerTolerance()[target.getIndex()];
+				int ticks = World.getTicks() - npc.getAggressiveHandler().getPlayerTolerance()[target.getIndex()];
 				if (ticks > 3000) {
-					npc.getAggressiveHandler().getPlayerTolerance()[target.getIndex()] = GameWorld.getTicks();
+					npc.getAggressiveHandler().getPlayerTolerance()[target.getIndex()] = World.getTicks();
 				} else if (ticks > 1500) {
 					return false;
 				}

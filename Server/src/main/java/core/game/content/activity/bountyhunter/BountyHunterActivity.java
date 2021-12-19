@@ -18,7 +18,7 @@ import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.node.item.GroundItem;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.Point;
 import core.game.world.map.zone.ZoneBorders;
@@ -237,10 +237,10 @@ public final class BountyHunterActivity extends ActivityPlugin {
 			player.getInterfaceManager().openOverlay(GAME_OVERLAY);
 			int penalty;
 			if ((penalty = player.getAttribute("pickup_penalty", 0)) != 0) {
-				player.setAttribute("/save:pickup_penalty", GameWorld.getTicks() + penalty);
+				player.setAttribute("/save:pickup_penalty", World.getTicks() + penalty);
 			}
 			if ((penalty = player.getAttribute("exit_penalty", 0)) != 0) {
-				player.setAttribute("/save:exit_penalty", GameWorld.getTicks() + penalty);
+				player.setAttribute("/save:exit_penalty", World.getTicks() + penalty);
 				if (player.getPrayer().get(PrayerType.PROTECT_ITEMS)) {
 					player.getPrayer().toggle(PrayerType.PROTECT_ITEMS);
 				}
@@ -251,11 +251,11 @@ public final class BountyHunterActivity extends ActivityPlugin {
 			player.getInteraction().remove(Option._P_ASSIST);
 			player.getSkullManager().setSkullCheckDisabled(true);
 			player.getSkullManager().setWilderness(true);
-			player.setAttribute("bh_joined", GameWorld.getTicks() + 10);
+			player.setAttribute("bh_joined", World.getTicks() + 10);
 			updateSkull(player);
 			if (!gamePulse.isRunning()) {
 				gamePulse.start();
-				GameWorld.getPulser().submit(gamePulse);
+				World.getPulser().submit(gamePulse);
 			}
 		}
 		return super.enter(e);
@@ -305,17 +305,17 @@ public final class BountyHunterActivity extends ActivityPlugin {
 	public boolean actionButton(Player player, int interfaceId, int buttonId, int slot, int itemId, int opcode) {
 		if (interfaceId == 192 && buttonId == 19) {
 			BountyEntry entry = players.get(player);
-			if (entry != null && player.getAttribute("pickup_penalty", 0) > GameWorld.getTicks()) {
+			if (entry != null && player.getAttribute("pickup_penalty", 0) > World.getTicks()) {
 				player.getPacketDispatch().sendMessage("You should not be picking up items. Now you must wait before you can leave.");
 				player.removeAttribute("pickup_penalty");
-				player.setAttribute("/save:exit_penalty", GameWorld.getTicks() + 300);
+				player.setAttribute("/save:exit_penalty", World.getTicks() + 300);
 				entry.updatePenalty(player, true);
 				if (player.getPrayer().get(PrayerType.PROTECT_ITEMS)) {
 					player.getPrayer().toggle(PrayerType.PROTECT_ITEMS);
 				}
 			}
 		} else if (interfaceId == 271 && buttonId == 25) {
-			if (player.getAttribute("exit_penalty", 0) > GameWorld.getTicks()) {
+			if (player.getAttribute("exit_penalty", 0) > World.getTicks()) {
 				player.getPacketDispatch().sendMessage("You can't use the protect item prayer until your penalty has passed.");
 				player.getConfigManager().send(PrayerType.PROTECT_ITEMS.getConfig(), 0);
 				return true;
@@ -327,7 +327,7 @@ public final class BountyHunterActivity extends ActivityPlugin {
 	@Override
 	public boolean continueAttack(Entity e, Node target, CombatStyle style, boolean message) {
 		if (e instanceof Player && target instanceof Player) {
-			if (((Player) target).getAttribute("bh_joined", -1) > GameWorld.getTicks()) {
+			if (((Player) target).getAttribute("bh_joined", -1) > World.getTicks()) {
 				((Player) e).getPacketDispatch().sendMessage("This player has only just entered and is temporarily invulnerable to attacks.");
 				return false;
 			}
@@ -432,13 +432,13 @@ public final class BountyHunterActivity extends ActivityPlugin {
 			gamePulse.stop();
 		}
 		int penalty;
-		if ((penalty = player.getAttribute("pickup_penalty", 0)) > GameWorld.getTicks()) {
-			player.setAttribute("/save:pickup_penalty", penalty - GameWorld.getTicks());
+		if ((penalty = player.getAttribute("pickup_penalty", 0)) > World.getTicks()) {
+			player.setAttribute("/save:pickup_penalty", penalty - World.getTicks());
 		} else {
 			player.removeAttribute("pickup_penalty");
 		}
-		if ((penalty = player.getAttribute("exit_penalty", 0)) > GameWorld.getTicks()) {
-			player.setAttribute("/save:exit_penalty", penalty - GameWorld.getTicks());
+		if ((penalty = player.getAttribute("exit_penalty", 0)) > World.getTicks()) {
+			player.setAttribute("/save:exit_penalty", penalty - World.getTicks());
 		} else {
 			player.removeAttribute("exit_penalty");
 		}
@@ -464,7 +464,7 @@ public final class BountyHunterActivity extends ActivityPlugin {
 			}
 			if (!waitRoomPulse.isRunning()) {
 				waitRoomPulse.start();
-				GameWorld.getPulser().submit(waitRoomPulse);
+				World.getPulser().submit(waitRoomPulse);
 			}
 		} else if (waitingRoom.size() > MINIMUM_PLAYERS) {
 			player.getPacketDispatch().sendString((int) Math.round(waitingTime * 0.6) + " Sec", 656, 10);
@@ -540,7 +540,7 @@ public final class BountyHunterActivity extends ActivityPlugin {
 
 	@Override
 	public boolean canLogout(Player player) {
-		if (player.getAttribute("exit_penalty", 0) > GameWorld.getTicks()) {
+		if (player.getAttribute("exit_penalty", 0) > World.getTicks()) {
 			player.getPacketDispatch().sendMessage("You can't logout until the exit penalty is over.");
 			return false;
 		}
@@ -574,10 +574,10 @@ public final class BountyHunterActivity extends ActivityPlugin {
 				}
 				player.getHintIconManager().clear();
 				if (player.getAttribute("pickup_penalty", 0) != 0) {
-					player.setAttribute("pickup_penalty", GameWorld.getTicks() - 5);
+					player.setAttribute("pickup_penalty", World.getTicks() - 5);
 				}
 				if (player.getAttribute("exit_penalty", 0) != 0) {
-					player.setAttribute("exit_penalty", GameWorld.getTicks() - 5);
+					player.setAttribute("exit_penalty", World.getTicks() - 5);
 				}
 				entry.updatePenalty((Player) e, true);
 			}
@@ -596,7 +596,7 @@ public final class BountyHunterActivity extends ActivityPlugin {
 		player.getPacketDispatch().sendMessage("This means you get the pick-up penalty: pick anything up and you can't leave!");
 		player.getSavedData().getActivityData().updateBountyRogueRate(1);
 		BHScoreBoard.getRogues().check(player);
-		player.setAttribute("/save:pickup_penalty", GameWorld.getTicks() + 300);
+		player.setAttribute("/save:pickup_penalty", World.getTicks() + 300);
 		entry.updatePenalty(player, true);
 	}
 

@@ -8,7 +8,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.player.FaceLocationFlag;
@@ -52,7 +52,7 @@ public final class MithrilSeedsPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		if (player.getAttribute("delay:plant", -1) > GameWorld.getTicks()) {
+		if (player.getAttribute("delay:plant", -1) > World.getTicks()) {
 			return true;
 		}
 		if (RegionManager.getObject(player.getLocation()) != null) {
@@ -72,7 +72,7 @@ public final class MithrilSeedsPlugin extends OptionHandler {
 				return true;
 			}
 		});
-		player.setAttribute("delay:plant", GameWorld.getTicks() + 3);
+		player.setAttribute("delay:plant", World.getTicks() + 3);
 		player.getPacketDispatch().sendMessage("You open the small mithril case and drop a seed by your feet.");
 		return true;
 	}

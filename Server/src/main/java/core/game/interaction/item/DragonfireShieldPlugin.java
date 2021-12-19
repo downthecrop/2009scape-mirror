@@ -18,7 +18,7 @@ import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.node.entity.combat.CombatPulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import rs09.plugin.PluginManager;
 
 import java.util.concurrent.TimeUnit;
@@ -60,7 +60,7 @@ public final class DragonfireShieldPlugin extends OptionHandler {
 				item.setCharge(1020);
 				player.sendMessage("You use the power from the overcharge lords & charge your shield.");
 				notCharged = false;
-				player.getSavedData().getGlobalData().setOverChargeDelay(System.currentTimeMillis() + (GameWorld.getSettings().isDevMode() ? TimeUnit.SECONDS.toMillis(10) : TimeUnit.MINUTES.toMicros(10)));
+				player.getSavedData().getGlobalData().setOverChargeDelay(System.currentTimeMillis() + (World.getSettings().isDevMode() ? TimeUnit.SECONDS.toMillis(10) : TimeUnit.MINUTES.toMicros(10)));
 			}
 			if (notCharged) {
 				player.getPacketDispatch().sendMessage("Your shield has no charges left.");

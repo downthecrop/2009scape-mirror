@@ -5,7 +5,7 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Initializable;
@@ -119,7 +119,7 @@ public class WitchsExperimentNPC extends AbstractNPC {
             npc.getPulseManager().clear();
             npc.getWalkingQueue().reset();
             player.setAttribute("/save:witchs_house:experiment_id",this.id);
-            GameWorld.getPulser().submit(new Pulse(1, npc, player) {
+            World.getPulser().submit(new Pulse(1, npc, player) {
                 int counter;
 
                 @Override

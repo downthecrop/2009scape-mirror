@@ -3,7 +3,7 @@ package core.game.content.quest.tutorials.tutorialisland;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.plugin.Initializable;
 
 /**
@@ -73,7 +73,7 @@ public final class FinancialAdvisorDialogue extends DialoguePlugin {
 				stage = 5;
 				break;
 			case 5:
-				interpreter.sendDialogues(npc, null, "Now, the next way to earn money quickly is by quests", "Many people on " + GameWorld.getSettings().getName() + " have things they need", "doing, which they will reward you for.");
+				interpreter.sendDialogues(npc, null, "Now, the next way to earn money quickly is by quests", "Many people on " + World.getSettings().getName() + " have things they need", "doing, which they will reward you for.");
 				stage = 6;
 				break;
 			case 6:

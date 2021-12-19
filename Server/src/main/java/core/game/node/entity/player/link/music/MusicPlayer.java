@@ -3,14 +3,13 @@ package core.game.node.entity.player.link.music;
 import core.game.node.entity.player.Player;
 
 import core.game.node.entity.player.link.emote.Emotes;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.MusicContext;
 import core.net.packet.context.StringContext;
 import core.net.packet.out.MusicPacket;
 import core.net.packet.out.StringPacket;
 
-import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -211,7 +210,7 @@ public final class MusicPlayer {
 	}
 
 	public void tick(){
-		if(GameWorld.getTicks() % 20 == 0){
+		if(World.getTicks() % 20 == 0){
 			if(!isPlaying()){
 				try {
 					play((MusicEntry) unlocked.values().toArray()[new Random().nextInt(unlocked.values().size())]);

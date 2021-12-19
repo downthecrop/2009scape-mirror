@@ -7,7 +7,6 @@ import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
 import rs09.tools.END_DIALOGUE
 
 class LarryHandler(player: Player? = null) : DialoguePlugin(player){

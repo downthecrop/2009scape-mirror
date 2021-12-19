@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import rs09.game.world.repository.Repository;
 import core.net.packet.PacketRepository;
@@ -300,7 +300,7 @@ public final class ShipCharter {
 		public void sail(final Player player) {
 			player.lock(7);
 			Location start = player.getLocation();
-			GameWorld.getPulser().submit(new Pulse(1) {
+			World.getPulser().submit(new Pulse(1) {
 				int count = 0;
 
 				@Override

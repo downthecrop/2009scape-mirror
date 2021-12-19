@@ -13,7 +13,7 @@ import core.net.packet.context.InteractionOptionContext;
 import core.net.packet.out.InteractionOption;
 import rs09.game.interaction.InteractionListeners;
 import rs09.game.system.SystemLogger;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Handles interaction between nodes.
@@ -99,7 +99,7 @@ public class Interaction {
 			return;
 		}
 		player.getPulseManager().clear("interaction:" + option.getName() + ":" + node.hashCode());
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
 			@Override
 			public boolean pulse() {
 				try {

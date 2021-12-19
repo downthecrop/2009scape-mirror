@@ -11,7 +11,7 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import core.tools.RandomFunction
 import org.rs09.consts.Items
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 
 val gnomeItems = arrayOf(
     Items.FRUIT_BATTA_2277, Items.TOAD_BATTA_2255, Items.CHEESE_PLUSTOM_BATTA_2259, Items.WORM_BATTA_2253, Items.VEGETABLE_BATTA_2281,
@@ -87,7 +87,7 @@ class GCRewardTokenHandler : OptionHandler() {
             }
 
             player.dialogueInterpreter.sendDialogue("You put in for delivery of $amount items. Wait a bit...")
-            GameWorld.Pulser.submit(DeliveryPulse(player,itemList))
+            World.Pulser.submit(DeliveryPulse(player,itemList))
             player.setAttribute("/save:$GC_BASE_ATTRIBUTE:$GC_REDEEMABLE_FOOD", playerCharges - amount)
         }
 

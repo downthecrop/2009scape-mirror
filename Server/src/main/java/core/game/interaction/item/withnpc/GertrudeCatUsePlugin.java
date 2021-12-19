@@ -7,7 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
@@ -70,7 +70,7 @@ public final class GertrudeCatUsePlugin extends UseWithHandler {
 			if (player.getInventory().remove(event.getUsedItem())) {
 				quest.setStage(player, 60);
 				player.lock(5);
-				GameWorld.getPulser().submit(new Pulse(1) {
+				World.getPulser().submit(new Pulse(1) {
 					int count = 0;
 					final NPC kitten = NPC.create(761, player.getLocation());
 

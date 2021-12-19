@@ -10,7 +10,7 @@ import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import rs09.game.node.entity.skill.magic.SpellListener;
 import rs09.game.node.entity.skill.magic.SpellListeners;
 import rs09.game.node.entity.skill.magic.SpellUtils;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.plugin.Plugin;
 
 /**
@@ -31,7 +31,7 @@ public final class MagicBookInterface extends ComponentPlugin {
 
 	@Override
 	public boolean handle(final Player player, Component component, int opcode, int button, int slot, int itemId) {
-		if (GameWorld.getTicks() < player.getAttribute("magic:delay", -1)) {
+		if (World.getTicks() < player.getAttribute("magic:delay", -1)) {
 			return true;
 		}
 		SpellListeners.run(button, SpellListener.NONE, SpellUtils.getBookFromInterface(component.getId()),player,null);

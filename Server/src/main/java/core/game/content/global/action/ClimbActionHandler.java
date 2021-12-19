@@ -7,7 +7,7 @@ import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -191,7 +191,7 @@ public final class ClimbActionHandler {
     public static void climb(final Player player, Animation animation, final Location destination, final String... messages) {
         player.lock(2);
         player.animate(animation);
-		GameWorld.getPulser().submit(new Pulse(1) {
+		World.getPulser().submit(new Pulse(1) {
             @Override
             public boolean pulse() {
                 player.getProperties().setTeleportLocation(destination);
@@ -359,7 +359,7 @@ public final class ClimbActionHandler {
                     switch (buttonId) {
                         case 1:
                             player.lock(1);
-					GameWorld.getPulser().submit(new Pulse(1) {
+					World.getPulser().submit(new Pulse(1) {
                                 @Override
                                 public boolean pulse() {
                                     climbLadder(player, object, "climb-up");
@@ -370,7 +370,7 @@ public final class ClimbActionHandler {
                             break;
                         case 2:
                             player.lock(1);
-					GameWorld.getPulser().submit(new Pulse(1) {
+					World.getPulser().submit(new Pulse(1) {
                                 @Override
                                 public boolean pulse() {
                                     climbLadder(player, object, "climb-down");

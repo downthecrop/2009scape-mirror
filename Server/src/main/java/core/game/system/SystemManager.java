@@ -1,8 +1,7 @@
 package core.game.system;
 
 import core.game.system.security.EncryptionManager;
-import gui.ServerMonitor;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Manages the "game system" states, such as updating or terminating.
@@ -56,8 +55,8 @@ public final class SystemManager {
 		switch (state) {
 		case ACTIVE:
 		case PRIVATE:
-			GameWorld.getMajorUpdateWorker().setStarted(false);
-			GameWorld.getMajorUpdateWorker().start();
+			World.getClock().setStarted(false);
+			World.getClock().start();
 			break;
 		case UPDATING:
 			UPDATER.schedule();

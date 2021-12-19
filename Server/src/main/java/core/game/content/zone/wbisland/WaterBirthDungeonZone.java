@@ -19,7 +19,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.zone.MapZone;
@@ -100,12 +100,12 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 					return true;
 				}
 				for (NPC npc : eggs) {
-					if (npc.getAttribute("transforming", 0) > GameWorld.getTicks()) {
+					if (npc.getAttribute("transforming", 0) > World.getTicks()) {
 						return true;
 					}
-					npc.setAttribute("transforming", GameWorld.getTicks() + 3);
+					npc.setAttribute("transforming", World.getTicks() + 3);
 				}
-				GameWorld.getPulser().submit(new Pulse(1) {
+				World.getPulser().submit(new Pulse(1) {
 					int counter;
 
 					@Override
@@ -128,7 +128,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 								spawn.attack(p);
 								spawns.add(spawn);
 							}
-							GameWorld.getPulser().submit(new Pulse(GameWorld.getSettings().isDevMode() ? 10 : 45) {
+							World.getPulser().submit(new Pulse(World.getSettings().isDevMode() ? 10 : 45) {
 
 								@Override
 								public boolean pulse() {
@@ -335,7 +335,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 
 		@Override
 		public void handleTickActions() {
-			if (deathSpawn != -1 && deathSpawn < GameWorld.getTicks()) {
+			if (deathSpawn != -1 && deathSpawn < World.getTicks()) {
 				deathSpawn = -1;
 				transform(getOriginalId());
 				getSkills().setStaticLevel(Skills.HITPOINTS, 1);
@@ -383,7 +383,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 		public void finalizeDeath(Entity killer) {
 			getAnimator().reset();
 			transform(getOriginalId() + 2);
-			deathSpawn = GameWorld.getTicks() + 55;
+			deathSpawn = World.getTicks() + 55;
 			lock();
 
 		}

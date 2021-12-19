@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
@@ -72,7 +72,7 @@ public final class BKFortressPlugin extends OptionHandler {
 		switch (id) {
 		case 2342:// listen at grill.
 			player.animate(LISTEN_ANIM);
-			GameWorld.getPulser().submit(new Pulse(2, player) {
+			World.getPulser().submit(new Pulse(2, player) {
 				@Override
 				public boolean pulse() {
 					player.animate(LOWER_ANIM);
@@ -150,7 +150,7 @@ public final class BKFortressPlugin extends OptionHandler {
 			case "read":// 4549, 4551
 				if (player.getInventory().remove((Item) node)) {
 					player.lock();
-					GameWorld.getPulser().submit(new Pulse(1) {
+					World.getPulser().submit(new Pulse(1) {
 						int counter = 0;
 
 						@Override

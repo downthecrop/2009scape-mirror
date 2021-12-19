@@ -3,7 +3,7 @@ package rs09.game.node.entity.state.newsys
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
 import org.json.simple.JSONObject
-import rs09.game.world.GameWorld.Pulser
+import rs09.game.world.World.Pulser
 
 /**
  * A class representing a state that the player or some associated thing can be in.

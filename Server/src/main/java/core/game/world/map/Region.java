@@ -4,8 +4,6 @@ import core.cache.Cache;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.music.MusicZone;
-import core.game.node.scenery.Scenery;
-import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.build.LandscapeParser;
@@ -13,7 +11,7 @@ import core.game.world.map.build.MapscapeParser;
 import core.game.world.map.zone.RegionZone;
 import rs09.game.system.SystemLogger;
 import rs09.game.system.config.XteaParser;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import rs09.game.world.repository.Repository;
 
 import java.nio.ByteBuffer;
@@ -223,7 +221,7 @@ public class Region {
 			if (!activityPulse.isRunning()) {
 				activityPulse.restart();
 				activityPulse.start();
-				GameWorld.getPulser().submit(activityPulse);
+				World.getPulser().submit(activityPulse);
 			}
 		}
 		return true;

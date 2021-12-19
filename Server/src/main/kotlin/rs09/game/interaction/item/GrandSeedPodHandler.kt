@@ -1,23 +1,14 @@
 package rs09.game.interaction.item
 
 import api.ContentAPI
-import core.cache.def.impl.ItemDefinition
 import core.game.content.global.travel.glider.GliderPulse
 import core.game.content.global.travel.glider.Gliders
-import core.game.interaction.OptionHandler
-import core.game.node.Node
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
-import core.game.node.item.Item
 import core.game.system.task.Pulse
 import core.game.world.map.Location
-import core.game.world.update.flag.context.Animation
-import core.game.world.update.flag.context.Graphics
-import core.plugin.Initializable
-import core.plugin.Plugin
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
-import rs09.game.world.GameWorld
 
 private const val SQUASH_GRAPHICS_BEGIN = 767
 private const val SQUASH_GRAPHICS_END = 769

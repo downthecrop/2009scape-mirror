@@ -11,7 +11,7 @@ import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
 import core.game.world.map.path.Pathfinder;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -76,7 +76,7 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
 		object.setCharge(88);
 		SceneryBuilder.replace(object, object.transform(object.getId() == 1967 ? 1969 : 1970), 4);
 		AgilityHandler.walk(player, -1, player.getLocation(), player.getLocation().transform(0, player.getLocation().getY() <= 3491 ? 2 : -2, 0), new Animation(1426), 0, null);
-		GameWorld.getPulser().submit(new Pulse(4) {
+		World.getPulser().submit(new Pulse(4) {
 			@Override
 			public boolean pulse() {
 				object.setCharge(1000);
@@ -105,7 +105,7 @@ public final class GnomeStrongholdPlugin extends OptionHandler {
 			end = s;
 		}
 		Pathfinder.find(player, end).walk(player);
-		GameWorld.getPulser().submit(new Pulse(4) {
+		World.getPulser().submit(new Pulse(4) {
 			@Override
 			public boolean pulse() {
 				object.setCharge(1000);

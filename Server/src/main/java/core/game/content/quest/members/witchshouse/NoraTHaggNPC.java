@@ -6,7 +6,7 @@ import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -90,7 +90,7 @@ public class NoraTHaggNPC extends AbstractNPC {
 
     private void sendTeleport(final Player player) {
         player.lock();
-        GameWorld.getPulser().submit(new Pulse(1) {
+        World.getPulser().submit(new Pulse(1) {
             int delay = 0;
 
             @Override

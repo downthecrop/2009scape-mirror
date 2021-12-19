@@ -20,7 +20,7 @@ import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
@@ -233,7 +233,7 @@ public class WildernessAreaZone extends MapZone implements Plugin<Object> {
 				return false;
 			}
 			node.transform(8667);
-			node.setAttribute("reward-tick", GameWorld.getTicks() + resource.getRespawnDuration());
+			node.setAttribute("reward-tick", World.getTicks() + resource.getRespawnDuration());
 			final Item item = new Item(resource.getReward());
 		    player.getInventory().add(item);
 			player.getSkills().addExperience(resource.getSkillId(), resource.getExperience(), true);
@@ -306,13 +306,13 @@ public class WildernessAreaZone extends MapZone implements Plugin<Object> {
 			if (isAggressive()) {
 				setAggressive(false);
 			}
-			if (respawn != -1 && respawn < GameWorld.getTicks() && getId() > 8664) {
+			if (respawn != -1 && respawn < World.getTicks() && getId() > 8664) {
 				transform(8664);
 				unlock();
 			}
 			if (getId() == 8667) {
 				int rewardTick = getAttribute("reward-tick", -1);
-				if (rewardTick != -1 && rewardTick < GameWorld.getTicks()) {
+				if (rewardTick != -1 && rewardTick < World.getTicks()) {
 					transform(8666);
 				}
 			}
@@ -320,7 +320,7 @@ public class WildernessAreaZone extends MapZone implements Plugin<Object> {
 
 		@Override
 		public void finalizeDeath(Entity killer) {
-			respawn = GameWorld.getTicks() + 500;
+			respawn = World.getTicks() + 500;
 			fullRestore();
 			getProperties().setTeleportLocation(getLocation());
 			setRespawnTick(0);

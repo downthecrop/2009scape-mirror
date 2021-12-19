@@ -8,7 +8,7 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.plugin.Initializable
 import org.rs09.consts.Components
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 
 @Initializable
 class DwarvenBoatmanDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -28,7 +28,7 @@ class DwarvenBoatmanDialogue(player: Player? = null) : DialoguePlugin(player) {
             11 -> npc("How do you even know about-")
             12 -> npc("Gah, nevermind! Just climb","on board!")
             13 -> player("Thank you!")
-            14 -> end().also { GameWorld.Pulser.submit(travelPulse(player)) }
+            14 -> end().also { World.Pulser.submit(travelPulse(player)) }
         }
         return true
     }

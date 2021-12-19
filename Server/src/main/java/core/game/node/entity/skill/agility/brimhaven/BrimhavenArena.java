@@ -15,7 +15,7 @@ import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.MovementHook;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.*;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBuilder;
@@ -227,14 +227,14 @@ public final class BrimhavenArena extends MapZone implements Plugin<Object> {
                 DISPENSERS[index++] = Location.create(x, y, 3);
             }
         }
-		GameWorld.getPulser().submit(new Pulse(1) {
+		World.getPulser().submit(new Pulse(1) {
             @Override
             public boolean pulse() {
                 Region r = RegionManager.forId(11157);
                 if (!r.isActive()) {
                     return false;
                 }
-                if (GameWorld.getTicks() % 100 == 0) {
+                if (World.getTicks() % 100 == 0) {
                     for (RegionPlane plane : r.getPlanes()) {
                         for (Player player : plane.getPlayers()) {
                             setDispenser(player);
@@ -243,7 +243,7 @@ public final class BrimhavenArena extends MapZone implements Plugin<Object> {
                     handlePlankSwitching();
                 }
                 int ticks = 3;
-                if (GameWorld.getTicks() % ticks == 0) {
+                if (World.getTicks() % ticks == 0) {
                     sawBladeActive = !sawBladeActive;
                     if (sawBladeActive) {
                         Scenery object = RegionManager.getObject(3, 2788, 9579);

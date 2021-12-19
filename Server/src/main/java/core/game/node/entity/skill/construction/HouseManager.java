@@ -19,7 +19,7 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import rs09.game.node.entity.skill.construction.Hotspot;
 import rs09.game.system.SystemLogger;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.awt.*;
 import java.nio.ByteBuffer;
@@ -203,7 +203,7 @@ public final class HouseManager {
 		player.getConfigManager().set(262, getRoomAmount());
 		player.getAudioManager().send(new Audio(984));
 //		player.getMusicPlayer().unlock(454, true);
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
 			@Override
 			public boolean pulse() {
 				if (hasServant()){

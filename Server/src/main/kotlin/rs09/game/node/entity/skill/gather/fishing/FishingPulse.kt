@@ -3,7 +3,6 @@ package rs09.game.node.entity.skill.gather.fishing
 import core.game.content.global.SkillingPets
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage
-import core.game.container.Container
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
@@ -23,7 +22,7 @@ import rs09.game.node.entity.player.info.stats.STATS_BASE
 import rs09.game.node.entity.player.info.stats.STATS_FISH
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks.Companion.isActive
-import rs09.game.world.GameWorld.Pulser
+import rs09.game.world.World.Pulser
 import rs09.tools.stringtools.colorize
 
 /**

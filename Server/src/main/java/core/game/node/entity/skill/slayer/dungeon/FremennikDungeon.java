@@ -10,7 +10,7 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
@@ -58,7 +58,7 @@ public final class FremennikDungeon extends MapZone implements Plugin<Object> {
 					return true;
 				}
 				player.lock();
-				GameWorld.getPulser().submit(new Pulse(1, player) {
+				World.getPulser().submit(new Pulse(1, player) {
 					int count;
 
 					@Override
