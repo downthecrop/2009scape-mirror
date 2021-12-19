@@ -167,7 +167,7 @@ public class ActionButtonPacket implements IncomingPacket {
 			slot = buffer.getLEShort();
 			componentId = data >> 16;
 			buttonId = data & 0xffff;
-			if (player.getDialogueInterpreter().getDialogue() == null && player.getDialogueInterpreter().getDialogueStage() == null) {
+			if (player.getDialogueInterpreter().getDialogue() == null) {
 				player.getInterfaceManager().closeChatbox();
 				List<DialogueAction> actions = player.getDialogueInterpreter().getActions();
 				if (actions.size() > 0) {
@@ -207,7 +207,7 @@ public class ActionButtonPacket implements IncomingPacket {
 				slot = buffer.getShort();
 			}
 			if (componentId == 49) {
-				if (player.getDialogueInterpreter().getDialogue() == null && player.getDialogueInterpreter().getDialogueStage() == null) {
+				if (player.getDialogueInterpreter().getDialogue() == null) {
 					player.setAttribute("chatbox-buttonid",buttonId);
 					player.getInterfaceManager().closeChatbox();
 					return null;

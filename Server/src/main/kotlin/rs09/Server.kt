@@ -60,17 +60,10 @@ object Server {
     fun main(args: Array<String>) {
         if (args.isNotEmpty()) {
             SystemLogger.logInfo("Using config file: ${args[0]}")
-            ServerConfigParser(args[0])
+            ServerConfigParser.parse(args[0])
         } else {
-            SystemLogger.logInfo("Using config file: ${"worldprops" + File.separator + "default.json"}")
-            ServerConfigParser("worldprops" + File.separator + "default.json")
-        }
-        if (GameWorld.settings?.isGui == true) {
-            try {
-                ConsoleFrame.getInstance().init()
-            } catch (e: Exception) {
-                SystemLogger.logWarn("X11 server missing - launching server with no GUI!")
-            }
+            SystemLogger.logInfo("Using config file: ${"worldprops" + File.separator + "default.conf"}")
+            ServerConfigParser.parse("worldprops" + File.separator + "default.conf")
         }
         startTime = System.currentTimeMillis()
         val t = TimeStamp()

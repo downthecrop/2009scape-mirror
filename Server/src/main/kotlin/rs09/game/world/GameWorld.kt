@@ -1,7 +1,6 @@
 package rs09.game.world
 
 import core.cache.Cache
-import core.cache.AriosStore
 import core.cache.def.impl.SceneryDefinition
 import core.game.ge.GrandExchangeDatabase
 import core.game.node.entity.npc.drop.RareDropTable
@@ -130,7 +129,6 @@ object GameWorld {
     fun prompt(run: Boolean, directory: String?){
         SystemLogger.logInfo("Prompting ${settings?.name} Game World...")
         Cache.init(ServerConstants.CACHE_PATH)
-        AriosStore.init(ServerConstants.STORE_PATH)
         databaseManager = DatabaseManager(ServerConstants.DATABASE)
         databaseManager!!.connect()
         GrandExchangeDatabase.init()

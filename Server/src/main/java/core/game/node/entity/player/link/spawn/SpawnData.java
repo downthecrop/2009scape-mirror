@@ -442,7 +442,6 @@ public class SpawnData {
 		if (killStreak > 4) {
 			Repository.sendNews("<img=10><col=CC6600>News: " + getStreakMessage(killer, killed));
 		}
-		PKScoreBoard.check(killer);
 	}
 
 	/**
