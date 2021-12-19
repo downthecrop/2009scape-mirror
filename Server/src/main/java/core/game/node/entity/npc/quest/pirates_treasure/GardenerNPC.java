@@ -5,7 +5,7 @@ import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.plugin.Initializable;
 import core.game.world.map.Location;
 
@@ -52,7 +52,7 @@ public final class GardenerNPC extends AbstractNPC {
 				getProperties().getCombatPulse().attack(target);
 			}
 			if (!target.isActive() || target.getLocation().getDistance(getLocation()) > 16) {
-				GameWorld.getPulser().submit(new Pulse(2) {
+				World.getPulser().submit(new Pulse(2) {
 					@Override
 					public boolean pulse() {
 						clear();

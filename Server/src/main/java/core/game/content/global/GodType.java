@@ -7,7 +7,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.tools.StringUtils;
@@ -77,7 +77,7 @@ public enum GodType {
 			public void handle(final Player player, int buttonId) {
 				player.lock();
 				player.animate(Animation.create(645));
-				GameWorld.getPulser().submit(new Pulse(3, player) {
+				World.getPulser().submit(new Pulse(3, player) {
 					@Override
 					public boolean pulse() {
 						Location loc = statue.getLocation().transform(0, -1, 0);

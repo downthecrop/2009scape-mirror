@@ -4,7 +4,7 @@ import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
@@ -120,7 +120,7 @@ public final class KolodionDialogue extends DialoguePlugin {
 				npc("Do not waste my time with trivial questions. I am the", "Great Kolodion, master of battle magic. I have an arena", "to run.");
 				stage++;
 			} else {
-				npc("I am the great Kolodion, master of battle magic, and", "this is my battle arena. Top wizards travel from all over", GameWorld.getSettings().getName() + " to fight here.");
+				npc("I am the great Kolodion, master of battle magic, and", "this is my battle arena. Top wizards travel from all over", World.getSettings().getName() + " to fight here.");
 				stage = 4;
 			}
 			break;
@@ -183,7 +183,7 @@ public final class KolodionDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 15:
-			npc("Remember, traveller - in my arena, hand-to-hand", "combat is useless. Your strength will diminish as you", "enter the arena, but the spells you can learn are", "amongst the most powerful in all of " + GameWorld.getSettings().getName() + ".");
+			npc("Remember, traveller - in my arena, hand-to-hand", "combat is useless. Your strength will diminish as you", "enter the arena, but the spells you can learn are", "amongst the most powerful in all of " + World.getSettings().getName() + ".");
 			stage++;
 			break;
 		case 16:
@@ -222,7 +222,7 @@ public final class KolodionDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 20:
-			npc("They want to crown themselves the best", "mage in all of " + GameWorld.getSettings().getName() + "!");
+			npc("They want to crown themselves the best", "mage in all of " + World.getSettings().getName() + "!");
 			stage = 30;
 			break;
 		case 30:

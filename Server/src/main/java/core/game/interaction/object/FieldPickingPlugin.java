@@ -11,7 +11,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
@@ -41,7 +41,7 @@ public final class FieldPickingPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		if (player.getAttribute("delay:picking", -1) > GameWorld.getTicks()) {
+		if (player.getAttribute("delay:picking", -1) > World.getTicks()) {
 			return true;
 		}
 		final Scenery object = (Scenery) node;
@@ -61,7 +61,7 @@ public final class FieldPickingPlugin extends OptionHandler {
 			return true;
 		}
 		player.lock(1);
-		player.setAttribute("delay:picking", GameWorld.getTicks() + (plant == PickingPlant.FLAX ? 2 : 3));
+		player.setAttribute("delay:picking", World.getTicks() + (plant == PickingPlant.FLAX ? 2 : 3));
 		player.animate(ANIMATION);
 		if (plant.name().startsWith("NETTLES") && (player.getEquipment().get(EquipmentContainer.SLOT_HANDS) == null || player.getEquipment().get(EquipmentContainer.SLOT_HANDS) != null && !player.getEquipment().get(EquipmentContainer.SLOT_HANDS).getName().contains("glove"))) {
 			player.getPacketDispatch().sendMessage("You have been stung by the nettles!");
@@ -71,7 +71,7 @@ public final class FieldPickingPlugin extends OptionHandler {
 		if (plant.respawn != -1 && plant != PickingPlant.FLAX) {
 			object.setActive(false);
 		}
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
 			@Override
 			public boolean pulse() {
 				if (!player.getInventory().add(reward)) {

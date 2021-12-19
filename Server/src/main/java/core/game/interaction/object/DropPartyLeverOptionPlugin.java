@@ -6,7 +6,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
@@ -31,13 +31,13 @@ public final class DropPartyLeverOptionPlugin extends OptionHandler {
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
 		final Scenery object = (Scenery) node;
-		if (player.getAttribute("delay:lever", -1) > GameWorld.getTicks())
+		if (player.getAttribute("delay:lever", -1) > World.getTicks())
 			return true;
-		player.setAttribute("delay:picking", GameWorld.getTicks() + 3);
+		player.setAttribute("delay:picking", World.getTicks() + 3);
 		player.lock(2);
 		player.faceLocation(object.getLocation());
 		player.getDialogueInterpreter().open(1 << 16 | 2);
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
 			@Override
 			public boolean pulse() {
 				player.animate(ANIMATION);

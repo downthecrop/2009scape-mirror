@@ -6,7 +6,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
@@ -41,7 +41,7 @@ object EssenceTeleport {
         player.audioManager.send(125)
         Projectile.create(npc, player, 109).send()
         npc.sendChat("Senventior Disthinte Molesko!")
-        GameWorld.Pulser.submit(object : Pulse(1) {
+        World.Pulser.submit(object : Pulse(1) {
             var counter = 0
             override fun pulse(): Boolean {
                 when (counter++) {

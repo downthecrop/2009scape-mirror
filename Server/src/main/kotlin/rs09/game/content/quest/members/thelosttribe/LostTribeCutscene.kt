@@ -15,7 +15,7 @@ import core.game.world.map.build.DynamicRegion
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import rs09.game.camerautils.PlayerCamera
-import rs09.game.world.GameWorld.Pulser
+import rs09.game.world.World.Pulser
 
 private const val DUKE = 2088
 private const val MISTAG = 2089

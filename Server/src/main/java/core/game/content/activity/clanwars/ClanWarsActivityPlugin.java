@@ -21,7 +21,7 @@ import core.game.node.scenery.SceneryBuilder;
 import core.game.system.communication.ClanEntry;
 import core.game.system.communication.ClanRepository;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;
@@ -136,7 +136,7 @@ public final class ClanWarsActivityPlugin extends ActivityPlugin {
 			offset = (offset + 1) % 3;
 			SceneryBuilder.add(new Scenery(28174 + offset, base.transform(x, 64, 0)));
 		}
-		GameWorld.getPulser().submit(pulse = new Pulse(200) {
+		World.getPulser().submit(pulse = new Pulse(200) {
 			@Override
 			public boolean pulse() {
 				for (int x = 5; x < 54; x++) {
@@ -148,7 +148,7 @@ public final class ClanWarsActivityPlugin extends ActivityPlugin {
 						RegionManager.getRegionChunk(l).flag(new AnimateObjectUpdateFlag(anim));
 					}
 				}
-				GameWorld.getPulser().submit(new Pulse(5) {
+				World.getPulser().submit(new Pulse(5) {
 					@Override
 					public boolean pulse() {
 						for (int x = 5; x < 54; x++) {

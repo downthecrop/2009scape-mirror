@@ -9,7 +9,7 @@ import core.game.node.entity.combat.equipment.SpellType;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
@@ -50,14 +50,14 @@ public class MagicImbueSpell extends MagicSpell {
 		if (player == null) {
 			return false;
 		}
-		if (player.getAttribute("spell:imbue", 0) > GameWorld.getTicks()) {
+		if (player.getAttribute("spell:imbue", 0) > World.getTicks()) {
 			player.sendMessage("You already have this activated.");
 			return false;
 		}
 		if (!super.meetsRequirements(player, true, true)) {
 			return false;
 		}
-		player.setAttribute("spell:imbue", GameWorld.getTicks() + 20);
+		player.setAttribute("spell:imbue", World.getTicks() + 20);
 		player.lock(ANIMATION.getDuration() + 1);
 		player.graphics(GRAPHIC);
 		player.animate(ANIMATION);

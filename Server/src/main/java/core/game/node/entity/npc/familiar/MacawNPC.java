@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
@@ -65,21 +65,21 @@ public class MacawNPC extends Forager {
 
 	@Override
 	protected boolean specialMove(FamiliarSpecial special) {
-		if (specialDelay > GameWorld.getTicks()) {
+		if (specialDelay > World.getTicks()) {
 			owner.getPacketDispatch().sendMessage("You must wait one minute until using the macaws special again.");
 			return false;
 		}
 		final Item herb = HERBS[RandomFunction.random(HERBS.length)];
 		animate(Animation.create(8013));
 		graphics(Graphics.create(1321), 2);
-		GameWorld.getPulser().submit(new Pulse(5, owner) {
+		World.getPulser().submit(new Pulse(5, owner) {
 			@Override
 			public boolean pulse() {
 				GroundItemManager.create(herb, getLocation(), owner);
 				return true;
 			}
 		});
-		specialDelay = GameWorld.getTicks() + 100;
+		specialDelay = World.getTicks() + 100;
 		return true;
 	}
 

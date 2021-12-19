@@ -13,9 +13,6 @@ import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.Item
 import rs09.game.system.SystemLogger
-import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
-import core.game.world.callback.CallBack
 import rs09.game.world.repository.Repository
 import core.net.packet.PacketRepository
 import core.net.packet.context.ContainerContext
@@ -34,7 +31,6 @@ import java.lang.Integer.min
 import java.util.*
 import java.util.concurrent.locks.ReentrantLock
 import javax.script.ScriptEngineManager
-import kotlin.collections.ArrayList
 
 object OfferManager {
     /**

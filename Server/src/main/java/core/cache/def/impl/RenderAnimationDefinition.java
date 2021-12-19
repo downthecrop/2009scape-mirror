@@ -2,7 +2,7 @@ package core.cache.def.impl;
 
 import core.cache.Cache;
 import rs09.game.system.SystemLogger;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
@@ -286,43 +286,5 @@ public class RenderAnimationDefinition {
 		anInt994 = 0;
 		anInt990 = -1;
 		anInt993 = 0;
-	}
-
-	public static void main(String...args) throws Throwable {
-		GameWorld.prompt(false);
-		RenderAnimationDefinition def = RenderAnimationDefinition.forId(1426);
-		System.out.println("size: " + def.getClass().getDeclaredFields().length);
-		for (Field f : def.getClass().getDeclaredFields()) {
-			if (!Modifier.isStatic(f.getModifiers())) {
-				if (f.getType().isArray()) {
-					Object object = f.get(def);
-					if (object != null) {
-						int length = Array.getLength(object);
-						System.out.print(f.getName() + ", [");
-						for (int i = 0; i < length; i++) {
-							System.out.print(Array.get(object, i) + (i < (length - 1) ? ", " : "]"));
-						}
-						continue;
-					}
-				}
-				System.out.println(f.getName() + ", " + f.get(def));
-			}
-		}
-		for (Field f : def.getClass().getSuperclass().getDeclaredFields()) {
-			if (!Modifier.isStatic(f.getModifiers())) {
-				if (f.getType().isArray()) {
-					Object object = f.get(def);
-					if (object != null) {
-						int length = Array.getLength(object);
-						System.out.print(f.getName() + ", [");
-						for (int i = 0; i < length; i++) {
-							System.out.print(Array.get(object, i) + (i < (length - 1) ? ", " : "]"));
-						}
-						continue;
-					}
-				}
-				System.out.println(f.getName() + ", " + f.get(def));
-			}
-		}
 	}
 }

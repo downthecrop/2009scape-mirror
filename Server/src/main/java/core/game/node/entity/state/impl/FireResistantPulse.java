@@ -3,7 +3,7 @@ package core.game.node.entity.state.impl;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.state.StatePulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.nio.ByteBuffer;
 
@@ -16,7 +16,7 @@ public class FireResistantPulse extends StatePulse {
 	/**
 	 * The time to finish.
 	 */
-	private static int END_TIME = GameWorld.getSettings().isDevMode() ? 30 : 600;
+	private static int END_TIME = World.getSettings().isDevMode() ? 30 : 600;
 
 	/**
 	 * The current tick.

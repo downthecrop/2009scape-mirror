@@ -3,7 +3,7 @@ package core.game.node.entity.state.impl;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.state.StatePulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.nio.ByteBuffer;
 
@@ -44,7 +44,7 @@ public final class FrozenStatePulse extends StatePulse {
 
 	@Override
 	public boolean canRun(Entity entity) {
-		return entity.getAttribute("freeze_immunity", -1) < GameWorld.getTicks();
+		return entity.getAttribute("freeze_immunity", -1) < World.getTicks();
 	}
 
 	@Override
@@ -55,7 +55,7 @@ public final class FrozenStatePulse extends StatePulse {
 		}
 		entity.getWalkingQueue().reset();
 		entity.getLocks().lockMovement(getDelay());
-		entity.setAttribute("freeze_immunity", GameWorld.getTicks() + getDelay() + IMMUNITY_TICK);
+		entity.setAttribute("freeze_immunity", World.getTicks() + getDelay() + IMMUNITY_TICK);
 		if (entity instanceof Player) {
 			((Player) entity).getPacketDispatch().sendMessage(message);
 		}

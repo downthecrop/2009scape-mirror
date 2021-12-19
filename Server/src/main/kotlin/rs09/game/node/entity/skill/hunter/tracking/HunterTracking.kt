@@ -13,7 +13,7 @@ import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import org.rs09.consts.Items
 import rs09.game.system.SystemLogger
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import java.util.*
 
 /**
@@ -163,7 +163,7 @@ abstract class HunterTracking : OptionHandler(){
     fun reward(player: Player, success: Boolean) {
         player.lock()
         player.animator.animate(if(success) KEBBIT_ANIM else MISS_ANIM)
-        GameWorld.Pulser.submit(object : Pulse(KEBBIT_ANIM.duration){
+        World.Pulser.submit(object : Pulse(KEBBIT_ANIM.duration){
             override fun pulse(): Boolean {
                 if(hasTrail(player) && success){
                     for(item in rewards){

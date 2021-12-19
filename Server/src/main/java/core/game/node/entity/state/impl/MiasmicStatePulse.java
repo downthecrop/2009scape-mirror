@@ -3,7 +3,7 @@ package core.game.node.entity.state.impl;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.state.StatePulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.nio.ByteBuffer;
 
@@ -44,13 +44,13 @@ public final class MiasmicStatePulse extends StatePulse {
 
 	@Override
 	public boolean canRun(Entity entity) {
-		return entity.getAttribute("miasmic_immunity", -1) < GameWorld.getTicks();
+		return entity.getAttribute("miasmic_immunity", -1) < World.getTicks();
 	}
 
 	@Override
 	public void start() {
 		super.start();
-		entity.setAttribute("miasmic_immunity", GameWorld.getTicks() + getDelay() + IMMUNITY_TICK);
+		entity.setAttribute("miasmic_immunity", World.getTicks() + getDelay() + IMMUNITY_TICK);
 		if (entity instanceof Player) {
 			((Player) entity).getPacketDispatch().sendMessage(message);
 		}

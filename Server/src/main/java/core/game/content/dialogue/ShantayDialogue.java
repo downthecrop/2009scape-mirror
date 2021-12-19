@@ -4,7 +4,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.plugin.Initializable;
 import core.game.world.map.Location;
 
@@ -161,7 +161,7 @@ public final class ShantayDialogue extends DialoguePlugin {
 			player.getPacketDispatch().sendMessage("The guards arrest you and place you in the jail.");
 			close();
 			player.lock(10);
-			GameWorld.getPulser().submit(new Pulse(3, player) {
+			World.getPulser().submit(new Pulse(3, player) {
 				@Override
 				public boolean pulse() {
 					player.setAttribute("/save:shantay-jail", true);

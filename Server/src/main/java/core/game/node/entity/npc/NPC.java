@@ -36,10 +36,8 @@ import rs09.game.content.jobs.JobManager;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.system.config.NPCConfigParser;
 import rs09.game.system.config.ShopParser;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import rs09.game.world.repository.Repository;
-
-import java.util.Map;
 
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_ENEMIES_KILLED;
@@ -347,7 +345,7 @@ public class NPC extends Entity {
 
 	@Override
 	public boolean isInvisible() {
-		if (!isActive() || getRespawnTick() > GameWorld.getTicks()) {
+		if (!isActive() || getRespawnTick() > World.getTicks()) {
 			return true;
 		}
 		return super.isInvisible();
@@ -413,10 +411,10 @@ public class NPC extends Entity {
 			onRegionInactivity();
 			return;
 		}
-		if (respawnTick > GameWorld.getTicks()) {
+		if (respawnTick > World.getTicks()) {
 			return;
 		}
-		if (respawnTick == GameWorld.getTicks()) {
+		if (respawnTick == World.getTicks()) {
 			onRespawn();
 		}
 		handleTickActions();
@@ -449,7 +447,7 @@ public class NPC extends Entity {
 				if (aggressiveHandler != null) {
 					aggressiveHandler.setPauseTicks(walkRadius + 1);
 				}
-				nextWalk = GameWorld.getTicks() + walkRadius + 1;
+				nextWalk = World.getTicks() + walkRadius + 1;
 				return;
 			}
 			if (aggressive && aggressiveHandler != null && aggressiveHandler.selectTarget()) {
@@ -462,7 +460,7 @@ public class NPC extends Entity {
 		if (!getLocks().isMovementLocked()) {
 			if (dialoguePlayer == null || !dialoguePlayer.isActive() || !dialoguePlayer.getInterfaceManager().hasChatbox()) {
 				dialoguePlayer = null;
-				if (walks && !getPulseManager().hasPulseRunning() && !getProperties().getCombatPulse().isAttacking() && !getProperties().getCombatPulse().isInCombat() && nextWalk < GameWorld.getTicks()) {
+				if (walks && !getPulseManager().hasPulseRunning() && !getProperties().getCombatPulse().isAttacking() && !getProperties().getCombatPulse().isInCombat() && nextWalk < World.getTicks()) {
 					setNextWalk();
 					Location l = getMovementDestination();
 					if (canMove(l)) {
@@ -476,16 +474,16 @@ public class NPC extends Entity {
 			}
 		}
 		if (shop != null) {
-			if (shop.getLastRestock() < GameWorld.getTicks()) {
+			if (shop.getLastRestock() < World.getTicks()) {
 				if (shop.isRestock()) {
 					shop.restock();
-					shop.setLastRestock(GameWorld.getTicks() + 100);
+					shop.setLastRestock(World.getTicks() + 100);
 				}
 			}
 		}
-		if (forceTalk != null && getAttribute("lastForceTalk", 0) < GameWorld.getTicks()) {
+		if (forceTalk != null && getAttribute("lastForceTalk", 0) < World.getTicks()) {
 			sendChat(forceTalk);
-			setAttribute("lastForceTalk", GameWorld.getTicks() + RandomFunction.random(15, 30));
+			setAttribute("lastForceTalk", World.getTicks() + RandomFunction.random(15, 30));
 		}
 	}
 
@@ -493,11 +491,11 @@ public class NPC extends Entity {
 	 * Sets the next walk.
 	 */
 	public void setNextWalk() {
-		nextWalk = GameWorld.getTicks() + 5 + RandomFunction.randomize(10);
+		nextWalk = World.getTicks() + 5 + RandomFunction.randomize(10);
 	}
 
     public void resetWalk() {
-        nextWalk = GameWorld.getTicks() - 1;
+        nextWalk = World.getTicks() - 1;
         getWalkingQueue().reset();
     }
 
@@ -531,7 +529,7 @@ public class NPC extends Entity {
 		if (killer instanceof Player && killer.getAttribute("jobs:id",null) != null) {
 			JobManager.handleDeath(id,(Player) killer);
 		}
-		setRespawnTick(GameWorld.getTicks() + definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));
+		setRespawnTick(World.getTicks() + definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));
 		Player p = !(killer instanceof Player) ? null : (Player) killer;
 		if (p != null) {
 			p.incrementAttribute("/save:" + STATS_BASE + ":" + STATS_ENEMIES_KILLED);

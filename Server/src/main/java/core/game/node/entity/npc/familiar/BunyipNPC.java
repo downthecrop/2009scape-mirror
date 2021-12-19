@@ -14,7 +14,7 @@ import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
@@ -64,7 +64,7 @@ public class BunyipNPC extends Familiar {
 	@Override
 	public void tick() {
 		super.tick();
-		if (lastHeal < GameWorld.getTicks()) {
+		if (lastHeal < World.getTicks()) {
 			setLastHeal();
 			owner.graphics(Graphics.create(1507), 1);
             // Since https://runescape.wiki/w/Bunyip?oldid=391088 (2008-04-02)
@@ -85,7 +85,7 @@ public class BunyipNPC extends Familiar {
 	 * Sets the last heal.
 	 */
 	public void setLastHeal() {
-		this.lastHeal = GameWorld.getTicks() + (int) (15 / 0.6);
+		this.lastHeal = World.getTicks() + (int) (15 / 0.6);
 	}
 
 	@Override

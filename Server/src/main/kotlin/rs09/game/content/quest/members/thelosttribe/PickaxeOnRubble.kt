@@ -5,7 +5,7 @@ import core.game.interaction.UseWithHandler
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import core.plugin.Initializable
 import core.plugin.Plugin
 
@@ -40,7 +40,7 @@ class PickaxeOnRubble : UseWithHandler(1265,1267,1269,1271,1273,1275){
         }
 
         player.lock()
-        GameWorld.Pulser.submit(object : Pulse(){
+        World.Pulser.submit(object : Pulse(){
             var counter = 0
             override fun pulse(): Boolean {
                 when(counter++){

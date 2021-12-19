@@ -3,7 +3,7 @@ package core.game.content.dialogue;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Represents the dialogue plugin used for the donie npc.
@@ -75,7 +75,7 @@ public final class DonieDialogue extends DialoguePlugin {
 			stage = 1;
 			break;
 		case 20:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Aye, not too bad thank you. Lovely weather in", "" + GameWorld.getSettings().getName() + " this fine day.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Aye, not too bad thank you. Lovely weather in", "" + World.getSettings().getName() + " this fine day.");
 			stage = 21;
 			break;
 		case 21:

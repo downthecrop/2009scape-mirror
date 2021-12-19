@@ -1,10 +1,6 @@
 import java.util.concurrent.TimeUnit;
 
 import api.ContentAPI
-import core.cache.def.impl.NPCDefinition
-import core.cache.def.impl.SceneryDefinition
-import core.game.interaction.OptionHandler
-import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.impl.Animator.Priority;
@@ -18,14 +14,12 @@ import core.game.system.task.Pulse
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
-import core.plugin.Plugin
 import core.tools.RandomFunction
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 
 /*@Initializable
 class HunterPitfall : OptionHandler() {
@@ -201,7 +195,7 @@ class PitfallListeners : InteractionListener() {
                     return true
                 }
             }
-            GameWorld.Pulser.submit(collapsePulse)
+            World.Pulser.submit(collapsePulse)
             return@on true
         }
         on(SPIKED_PIT, SCENERY, "jump") { player, node ->

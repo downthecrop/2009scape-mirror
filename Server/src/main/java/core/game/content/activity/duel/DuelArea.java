@@ -28,7 +28,7 @@ import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 import rs09.ServerConstants;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -126,7 +126,7 @@ public class DuelArea extends MapZone {
 		session.getOther().setAttribute("duel:ammo", new ArrayList<GroundItem>(100));
 		session.getPlayer().setAttribute("vengeance", false);
 		session.getOther().setAttribute("vengeance", false);
-		GameWorld.getPulser().submit(new Pulse(4, session.getPlayer(), session.getOther()) {
+		World.getPulser().submit(new Pulse(4, session.getPlayer(), session.getOther()) {
 			int count;
 
 			@Override

@@ -5,7 +5,7 @@ import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -36,7 +36,7 @@ public class EctophialFillPlugin extends UseWithHandler {
 		player.lock(3);
 		player.animate(Animation.create(1652));
         player.getAudioManager().send(1132);
-		GameWorld.getPulser().submit(new Pulse(3, player) {
+		World.getPulser().submit(new Pulse(3, player) {
 			@Override
 			public boolean pulse() {
 				if (player.getInventory().remove(new Item(4252))) {

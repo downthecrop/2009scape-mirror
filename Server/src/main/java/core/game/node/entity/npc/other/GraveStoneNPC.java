@@ -15,7 +15,7 @@ import core.game.node.entity.player.link.HintIconManager;
 import core.game.node.entity.player.link.grave.GraveManager;
 import core.game.node.entity.player.link.grave.GraveType;
 import core.game.node.item.GroundItem;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
@@ -95,7 +95,7 @@ public class GraveStoneNPC extends AbstractNPC {
 		if (life == -1) {
 			return;
 		}
-		if (life < GameWorld.getTicks()) {
+		if (life < World.getTicks()) {
 			clear();
 			message("Your gravestone has collapsed.");
 			return;
@@ -218,7 +218,7 @@ public class GraveStoneNPC extends AbstractNPC {
 		int ticks = (1000 * seconds) / 600;
 		reTransform();
 		updateItems(ticks);
-		setLife(GameWorld.getTicks() + ticks);
+		setLife(World.getTicks() + ticks);
 	}
 
 	/**
@@ -248,7 +248,7 @@ public class GraveStoneNPC extends AbstractNPC {
 		updateItems(6100);
 		player.animate(Animation.create(645));
 		graphics(Graphics.create(1274));
-		setLife(GameWorld.getTicks() + 6000);
+		setLife(World.getTicks() + 6000);
 		message(player.getUsername() + " has blessed your grave, it will remain for another 60 minutes.");
 	}
 
@@ -298,7 +298,7 @@ public class GraveStoneNPC extends AbstractNPC {
 	 * @return the minutes.
 	 */
 	public int getMinutes() {
-		return (life - GameWorld.getTicks()) / 100;
+		return (life - World.getTicks()) / 100;
 	}
 
 	/**
@@ -306,7 +306,7 @@ public class GraveStoneNPC extends AbstractNPC {
 	 * @return the seconds.
 	 */
 	public int getSeconds() {
-		return (life - GameWorld.getTicks()) * 600 / 1000;
+		return (life - World.getTicks()) * 600 / 1000;
 	}
 
 	/**

@@ -2,7 +2,7 @@ package core.game.node.entity.state;
 
 import core.game.node.entity.Entity;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.nio.ByteBuffer;
 
@@ -83,7 +83,7 @@ public abstract class StatePulse extends Pulse {
 		}
 		restart();
 		start();
-		GameWorld.getPulser().submit(this);
+		World.getPulser().submit(this);
 	}
 
 }

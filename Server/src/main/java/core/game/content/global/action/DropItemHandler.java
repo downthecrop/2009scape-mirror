@@ -8,7 +8,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import rs09.game.system.SystemLogger;
 import rs09.game.system.config.ItemConfigParser;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Handles the dropping of an item.
@@ -42,7 +42,7 @@ public final class DropItemHandler {
 				player.getDialogueInterpreter().open(9878, item);
 				return true;
 			}
-			if (player.getAttribute("equipLock:" + item.getId(), 0) > GameWorld.getTicks()) {
+			if (player.getAttribute("equipLock:" + item.getId(), 0) > World.getTicks()) {
 				SystemLogger.logAlert(player + ", tried to do the drop & equip dupe.");
 				return true;
 			}
@@ -52,7 +52,7 @@ public final class DropItemHandler {
 				GroundItemManager.create(item, player.getLocation(), player);
 				PlayerParser.save(player);
 			}
-			player.setAttribute("droppedItem:" + item.getId(), GameWorld.getTicks() + 2);
+			player.setAttribute("droppedItem:" + item.getId(), World.getTicks() + 2);
 			return true;
 		}
 		return false;

@@ -12,7 +12,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.path.Pathfinder;
@@ -411,7 +411,7 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 				player.face(scene.chicken);
 				scene.walk(scene.husband, 46, 9);
 				scene.walk(scene.chicken, 46, 9);
-				GameWorld.getPulser().submit(new Pulse(1, player) {
+				World.getPulser().submit(new Pulse(1, player) {
 					int counter;
 
 					@Override
@@ -440,7 +440,7 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 				scene.husband.getAnimator().forceAnimation(new Animation(5377, Priority.HIGH));
 				scene.walk(scene.husband, 51, 8);
 				scene.walk(scene.chicken, 45, 10);
-				GameWorld.getPulser().submit(new Pulse(1, player) {
+				World.getPulser().submit(new Pulse(1, player) {
 					int counter;
 
 					@Override
@@ -479,7 +479,7 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 				scene.walk(scene.cowKiller, 46, 9);
 				scene.walk(scene.cow, 46, 10);
 				scene.walk(scene.husband, 44, 10);
-				GameWorld.getPulser().submit(new Pulse(1, player) {
+				World.getPulser().submit(new Pulse(1, player) {
 					int counter;
 
 					@Override
@@ -524,7 +524,7 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 				stage++;
 				scene.allice.face(scene.husband);
 				scene.walk(scene.cowKiller, 46, 10);
-				GameWorld.getPulser().submit(new Pulse(1, player) {
+				World.getPulser().submit(new Pulse(1, player) {
 					int count;
 
 					@Override
@@ -558,7 +558,7 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 			case 23:
 				close();
 				stage++;
-				GameWorld.getPulser().submit(new Pulse(1, player) {
+				World.getPulser().submit(new Pulse(1, player) {
 					int counter;
 
 					@Override
@@ -663,7 +663,7 @@ public final class AliceHusbandDialogue extends DialoguePlugin {
 			PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, loc.getX() + 2, loc.getY() + 3, height, 1, 100));
 			PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, loc.getX() + xRot, loc.getY() + yRot, height, 1, 100));
 			player.faceTemporary(chicken, 1);
-			player.getLocks().lockMovement(GameWorld.getTicks() + 1000000);
+			player.getLocks().lockMovement(World.getTicks() + 1000000);
 			player.getDialogueInterpreter().sendDialogues(5202, null, "Here, chicky chicky!");
 		}
 

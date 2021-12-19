@@ -5,7 +5,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.game.world.update.flag.player.FaceLocationFlag;
@@ -65,7 +65,7 @@ public final class MithrilSeedsDialogue extends DialoguePlugin {
 				player.lock(2);
 				player.faceLocation(FaceLocationFlag.getFaceLocation(player, flower));
 				player.animate(ANIMATION);
-				GameWorld.getPulser().submit(new Pulse(2, player, flower) {
+				World.getPulser().submit(new Pulse(2, player, flower) {
 					@Override
 					public boolean pulse() {
 						Item reward = new Item(2460 + ((flower.getId() - 2980) << 1));

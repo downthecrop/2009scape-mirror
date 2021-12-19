@@ -8,7 +8,7 @@ import core.game.node.entity.player.link.TeleportManager.TeleportType;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.chunk.GraphicUpdateFlag;
@@ -71,7 +71,7 @@ public final class WildernessObeliskPlugin extends OptionHandler {
 			}
 		}
 		player.getAudioManager().send(204);
-		GameWorld.getPulser().submit(new Pulse(6, player) {
+		World.getPulser().submit(new Pulse(6, player) {
 			@Override
 			public boolean pulse() {
 				final Location center = stationObelisk.getLocation();

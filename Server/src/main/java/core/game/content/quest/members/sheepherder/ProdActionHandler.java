@@ -6,9 +6,8 @@ import core.game.interaction.Option;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import rs09.game.system.SystemLogger;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -55,7 +54,7 @@ public class ProdActionHandler extends PluginInteraction {
                     n.sendChat("BAAAAA!");
                     n.moveTo(destination);
                     n.setAttribute("recently-prodded",true);
-                    n.ticksTilReturn = GameWorld.getTicks() + 20;
+                    n.ticksTilReturn = World.getTicks() + 20;
                     return true;
                 } else {
                     p.sendMessage("You can't prod a sheep with your bare hands.");

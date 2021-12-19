@@ -4,7 +4,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import org.rs09.consts.Items;
 
 /**
@@ -110,7 +110,7 @@ public final class InformationclerkMuseumDialogue extends DialoguePlugin {
                 stage = 153;
                 break;
             case 180:
-                npc("Why, yes. The Natural History exhibit has displays of", "various creatures you can find around " + GameWorld.getSettings().getName() + ".");
+                npc("Why, yes. The Natural History exhibit has displays of", "various creatures you can find around " + World.getSettings().getName() + ".");
                 stage = 181;
                 break;
             case 181:

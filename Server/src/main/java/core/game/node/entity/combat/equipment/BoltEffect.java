@@ -8,7 +8,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.state.EntityState;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 
@@ -176,13 +176,13 @@ public enum BoltEffect {
 			int newDamage = (int) (state.getEstimatedHit() * 0.25);
 			state.setEstimatedHit(state.getEstimatedHit() + newDamage);
 			state.getAttacker().getSkills().heal((int) (state.getEstimatedHit() * 0.25));
-			state.getAttacker().setAttribute("onyx-effect", GameWorld.getTicks() + 12);
+			state.getAttacker().setAttribute("onyx-effect", World.getTicks() + 12);
 			super.impact(state);
 		}
 
 		@Override
 		public boolean canFire(BattleState state) {
-			if (state.getAttacker().getAttribute("onyx-effect", 0) > GameWorld.getTicks()) {
+			if (state.getAttacker().getAttribute("onyx-effect", 0) > World.getTicks()) {
 				return false;
 			}
 			if (state.getVictim() instanceof NPC) {

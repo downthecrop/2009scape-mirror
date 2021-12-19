@@ -17,8 +17,8 @@ import org.rs09.consts.NPCs
 import org.rs09.primextends.getNext
 import org.rs09.primextends.isLast
 import rs09.game.interaction.InteractionListener
-import rs09.game.world.GameWorld
-import rs09.game.world.GameWorld.Pulser
+import rs09.game.world.World
+import rs09.game.world.World.Pulser
 
 class TFTInteractionListeners : InteractionListener(){
 
@@ -81,7 +81,7 @@ class TFTInteractionListeners : InteractionListener(){
 
         onUseWith(ITEM,KNIFE,TREE_BRANCH){player,knife,_ ->
             if (player.inventory.containsItem(knife.asItem())) {
-                GameWorld.submit(BranchFletchingPulse(player))
+                World.submit(BranchFletchingPulse(player))
             } else {
                 player.sendMessage("You need a knife to do this.")
             }

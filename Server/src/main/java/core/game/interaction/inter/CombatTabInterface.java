@@ -9,7 +9,7 @@ import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.combat.equipment.WeaponInterface.WeaponInterfaces;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -39,7 +39,7 @@ public class CombatTabInterface extends ComponentPlugin {
 		case 24:
 		case 26:
 		case 27:
-			GameWorld.getPulser().submit(new Pulse(1, p) {
+			World.getPulser().submit(new Pulse(1, p) {
 				@Override
 				public boolean pulse() {
 					p.getSettings().toggleRetaliating();
@@ -51,7 +51,7 @@ public class CombatTabInterface extends ComponentPlugin {
 		case 10:
 		case 8:
 		case 85:
-			GameWorld.getPulser().submit(new Pulse(1, p) {
+			World.getPulser().submit(new Pulse(1, p) {
 				@Override
 				public boolean pulse() {
 					WeaponInterface inter = p.getExtension(WeaponInterface.class);

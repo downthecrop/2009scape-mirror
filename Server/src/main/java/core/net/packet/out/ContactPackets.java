@@ -2,12 +2,12 @@ package core.net.packet.out;
 
 import core.game.node.entity.player.Player;
 import core.game.system.communication.Contact;
-import core.net.amsc.WorldCommunicator;
 import core.net.packet.IoBuffer;
 import core.net.packet.OutgoingPacket;
 import core.net.packet.PacketHeader;
 import core.net.packet.context.ContactContext;
 import core.tools.StringUtils;
+import rs09.net.ms.ManagementServer;
 
 /**
  * Handles the contact packet sending.
@@ -21,7 +21,7 @@ public final class ContactPackets implements OutgoingPacket<ContactContext> {
 		Player player = context.getPlayer();
 		switch (context.getType()) {
 		case ContactContext.UPDATE_STATE_TYPE:
-			buffer = new IoBuffer(197).put(WorldCommunicator.getState().value());
+			buffer = new IoBuffer(197).put(ManagementServer.getStateValue());
 			break;
 		case ContactContext.IGNORE_LIST_TYPE:
 			buffer = new IoBuffer(126, PacketHeader.SHORT);

@@ -15,7 +15,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import org.json.simple.JSONObject;
 import rs09.ServerStore;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
@@ -263,7 +263,7 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 	 * @param player The player.
 	 */
 	private void commenceBorkBattle(Player player) {
-		if (ServerStore.getBoolean(getStoreFile(), player.getUsername().toLowerCase()) && GameWorld.getSettings().isHosted()) {
+		if (ServerStore.getBoolean(getStoreFile(), player.getUsername().toLowerCase()) && World.getSettings().isHosted()) {
 			player.getPacketDispatch().sendMessage("The portal's magic is too weak to teleport you right now.");
 			return;
 		}
@@ -287,7 +287,7 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 	 * @return {@code True} if so.
 	 */
 	private boolean isStained(Scenery object) {
-		return getStainedTime(object) > GameWorld.getTicks();
+		return getStainedTime(object) > World.getTicks();
 	}
 
 	/**
@@ -295,7 +295,7 @@ public final class ChaosTunnelZone extends MapZone implements Plugin<Object> {
 	 * @param object the object.
 	 */
 	private void setStainedTime(Scenery object) {
-		object.getAttributes().setAttribute("stained", (int) GameWorld.getTicks() + RandomFunction.random(50, 150));
+		object.getAttributes().setAttribute("stained", (int) World.getTicks() + RandomFunction.random(50, 150));
 	}
 
 	/**

@@ -7,7 +7,7 @@ import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
@@ -29,7 +29,7 @@ public class SpiritSpiderNPC extends Familiar {
 	/**
 	 * The delay until the next chance of random eggs.
 	 */
-	private int eggDelay = GameWorld.getTicks() + 500;
+	private int eggDelay = World.getTicks() + 500;
 
 	/**
 	 * Constructs a new {@code SpiritSpiderNPC} {@code Object}.
@@ -50,11 +50,11 @@ public class SpiritSpiderNPC extends Familiar {
 	@Override
 	public void handleFamiliarTick() {
 		super.handleFamiliarTick();
-		if (eggDelay < GameWorld.getTicks()) {
+		if (eggDelay < World.getTicks()) {
 			if (RandomFunction.random(25) == 5) {
 				createEggs();
 				sendChat("Clicketyclack");
-				eggDelay = GameWorld.getTicks() + 500;
+				eggDelay = World.getTicks() + 500;
 			}
 		}
 	}

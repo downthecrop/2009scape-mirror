@@ -11,9 +11,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import rs09.game.content.activity.pestcontrol.PestControlHelper.GATE_ENTRIES
 import rs09.game.content.activity.pestcontrol.PestControlHelper.getMyPestControlSession2
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import java.util.*
-import java.util.concurrent.Executors
 
 class CombatStateIntermediate(val bot: PestControlTestBot2) {
     private val Random = Random()
@@ -117,7 +116,7 @@ class CombatStateIntermediate(val bot: PestControlTestBot2) {
             diffX /= 2
             diffY /= 2
         }
-        GameWorld.Pulser.submit(object : MovementPulse(bot, bot.location.transform(diffX, diffY, 0), Pathfinder.SMART) {
+        World.Pulser.submit(object : MovementPulse(bot, bot.location.transform(diffX, diffY, 0), Pathfinder.SMART) {
             override fun pulse(): Boolean {
                 return true
             }

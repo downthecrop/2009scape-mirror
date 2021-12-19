@@ -4,7 +4,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.plugin.Initializable;
 import core.game.world.map.RegionManager;
 
@@ -193,7 +193,7 @@ public class SilkMerchantPlugin extends DialoguePlugin {
 					break;
 				}
 			}
-			GameWorld.getPulser().submit(new Pulse(1) {
+			World.getPulser().submit(new Pulse(1) {
 				int count = 0;
 
 				@Override

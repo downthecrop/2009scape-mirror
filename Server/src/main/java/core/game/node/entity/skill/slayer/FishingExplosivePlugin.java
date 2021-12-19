@@ -17,7 +17,7 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -117,7 +117,7 @@ public final class FishingExplosivePlugin extends OptionHandler {
 			player.animate(ANIMATION);
 			player.getPacketDispatch().sendMessage("You hurl the shuddering vial into the water...");
 			sendProjectile(player, (Scenery) event.getUsedWith());
-			GameWorld.getPulser().submit(new Pulse(delay, player) {
+			World.getPulser().submit(new Pulse(delay, player) {
 				@Override
 				public boolean pulse() {
 					Direction dir = event.getUsedWith().getDirection();

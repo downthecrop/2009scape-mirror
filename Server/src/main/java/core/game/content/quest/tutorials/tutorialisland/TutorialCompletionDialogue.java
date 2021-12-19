@@ -8,10 +8,9 @@ import core.game.node.entity.player.link.HintIconManager;
 import core.game.node.entity.player.link.IronmanMode;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
-import core.net.amsc.MSPacketRepository;
-import core.net.amsc.WorldCommunicator;
+import core.net.ms.MSPacketRepository;
 import core.plugin.Initializable;
 
 /**
@@ -273,14 +272,14 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 					stage++;
 					break;
 				case 1203:
-					interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "If all else fails, visit the "+ GameWorld.getSettings().getName()+ " website for a whole","chestload of information on quests, skills, and minigames","as well as a very good starter's guide.");
+					interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "If all else fails, visit the "+ World.getSettings().getName()+ " website for a whole","chestload of information on quests, skills, and minigames","as well as a very good starter's guide.");
 					stage++;
 					break;
 
 				//Final words, if using Skippy it should go straight to this
 				//Could be removed to try and keep the 'nostalgic' feeling of Tutorial Island.
 				case 1204:
-					npc("Keep in mind: our server has more content than any other", "server ever released. There's hundreds of hours of", "exciting and flawless gameplay awaiting you, "+player.getUsername()+".", "Enjoy your time playing "+GameWorld.getSettings().getName()+"!");
+					npc("Keep in mind: our server has more content than any other", "server ever released. There's hundreds of hours of", "exciting and flawless gameplay awaiting you, "+player.getUsername()+".", "Enjoy your time playing "+ World.getSettings().getName()+"!");
 					stage++;
 					break;
 
@@ -310,7 +309,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 					interpreter.sendDialogue("Welcome to Lumbridge! To get more help, simply click on the","Lumbridge Guide or one of the Tutors - these can be found by looking","for the question mark icon on your mini-map. If you find you are","lost at any time, look for a signpost or use the Lumbridge Home Port Spell.");
 
 					//Appending the welcome message and some other stuff
-					player.getPacketDispatch().sendMessage("Welcome to " + GameWorld.getSettings().getName() + ".");
+					player.getPacketDispatch().sendMessage("Welcome to " + World.getSettings().getName() + ".");
 
 
 
@@ -319,9 +318,7 @@ public class TutorialCompletionDialogue extends DialoguePlugin {
 					if (player.getIronmanManager().isIronman() && player.getSettings().isAcceptAid()) {
 						player.getSettings().toggleAcceptAid();
 					}
-					if (WorldCommunicator.isEnabled()) {
-						MSPacketRepository.sendInfoUpdate(player);
-					}
+					MSPacketRepository.sendInfoUpdate(player);
 					int slot = player.getAttribute("tut-island:hi_slot", -1);
 					if (slot < 0 || slot >= HintIconManager.MAXIMUM_SIZE) {
 						break;

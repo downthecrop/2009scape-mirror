@@ -2,7 +2,7 @@ package core.game.content.quest.free.princealirescue;
 
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 
 /**
@@ -40,7 +40,7 @@ public final class LadyKeliNPC extends AbstractNPC {
 
 	@Override
 	public boolean isHidden(final Player player) {
-		return player.getAttribute("keli-gone", 0) > GameWorld.getTicks();
+		return player.getAttribute("keli-gone", 0) > World.getTicks();
 	}
 
 	@Override

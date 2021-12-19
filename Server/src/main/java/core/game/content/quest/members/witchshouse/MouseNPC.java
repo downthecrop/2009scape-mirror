@@ -2,7 +2,7 @@ package core.game.content.quest.members.witchshouse;
 
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 
 /**
@@ -43,7 +43,7 @@ public class MouseNPC extends AbstractNPC {
      */
     private MouseNPC(int id, Location location) {
         super(id, location);
-        this.endTime = (int) (GameWorld.getTicks() + (4 / 0.6));
+        this.endTime = (int) (World.getTicks() + (4 / 0.6));
     }
 
     @Override
@@ -57,7 +57,7 @@ public class MouseNPC extends AbstractNPC {
         if (player.getAttribute("mouse_out") == null) {
             clear();
         }
-        if (GameWorld.getTicks() > endTime) {
+        if (World.getTicks() > endTime) {
             clear();
         }
         if (!player.isActive() || player.getLocation().getDistance(getLocation()) > 8) {

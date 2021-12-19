@@ -10,7 +10,7 @@ import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -52,7 +52,7 @@ public class SpiritKalphiteNPC extends BurdenBeast {
 		}
 		final List<Entity> entitys = RegionManager.getLocalEntitys(owner, 6);
 		visualize(Animation.create(8517), Graphics.create(1350));
-		GameWorld.getPulser().submit(new Pulse(1, owner) {
+		World.getPulser().submit(new Pulse(1, owner) {
 			@Override
 			public boolean pulse() {
 				int count = 0;

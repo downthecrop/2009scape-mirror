@@ -2,7 +2,7 @@ package core.game.node.entity.impl;
 
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.game.world.update.flag.npc.NPCAnimation;
@@ -114,14 +114,14 @@ public final class Animator {
 	 */
 	public boolean animate(Animation animation, Graphics graphic) {
 		if (animation != null) {
-			if (ticks > GameWorld.getTicks() && priority.ordinal() > animation.getPriority().ordinal()) {
+			if (ticks > World.getTicks() && priority.ordinal() > animation.getPriority().ordinal()) {
 				return false;
 			}
 			if (animation.getId() == 0) {
 				animation.setId(-1);
 			}
 			this.animation = animation;
-			ticks = GameWorld.getTicks() + animation.getDuration();
+			ticks = World.getTicks() + animation.getDuration();
 			entity.getUpdateMasks().register(entity instanceof NPC ? new NPCAnimation(animation) : new AnimationFlag(animation));
 			priority = animation.getPriority();
 		}
@@ -158,7 +158,7 @@ public final class Animator {
 	 * @return {@code True} if so.
 	 */
 	public boolean isAnimating() {
-		return animation != null && ticks > GameWorld.getTicks();
+		return animation != null && ticks > World.getTicks();
 	}
 
 	/**

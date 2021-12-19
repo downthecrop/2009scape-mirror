@@ -7,7 +7,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 
@@ -215,7 +215,7 @@ public class TraibornDialogue extends DialoguePlugin {
 					interpreter.sendItemMessage(DemonSlayer.THIRD_KEY.getId(), "Traiborn hands you a key.");
 					stage = 387;
 				}
-				GameWorld.getPulser().submit(new Pulse(1) {
+				World.getPulser().submit(new Pulse(1) {
 					int counter = 0;
 
 					@Override

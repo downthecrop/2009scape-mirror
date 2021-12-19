@@ -12,7 +12,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.zone.ZoneType;
 
 import java.util.HashMap;
@@ -80,7 +80,7 @@ public final class ImpactHandler {
 	public Impact manualHit(final Entity source, int hit, final HitsplatType type, int ticks) {
 		if (ticks > 0) {
 			final int damage = hit;
-			GameWorld.getPulser().submit(new Pulse(ticks, entity) {
+			World.getPulser().submit(new Pulse(ticks, entity) {
 				@Override
 				public boolean pulse() {
 					manualHit(source, damage, type);
@@ -142,7 +142,7 @@ public final class ImpactHandler {
 		if (fam) {
 			source = ((Familiar) source).getOwner();
 		}
-		if (disabledTicks > GameWorld.getTicks()) {
+		if (disabledTicks > World.getTicks()) {
 			return null;
 		}
 		if (entity instanceof Player && TutorialSession.getExtension((Player) entity).getStage() < TutorialSession.MAX_STAGE) {
@@ -300,7 +300,7 @@ public final class ImpactHandler {
 	 * Sets the disabledTicks.
 	 */
 	public void setDisabledTicks(int ticks) {
-		this.disabledTicks = GameWorld.getTicks() + ticks;
+		this.disabledTicks = World.getTicks() + ticks;
 	}
 
 	/**

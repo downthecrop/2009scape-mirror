@@ -10,7 +10,7 @@ import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import rs09.ServerConstants
 import rs09.game.system.SystemLogger
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import rs09.game.world.repository.Repository
 import java.io.FileReader
 import java.nio.ByteBuffer
@@ -86,7 +86,7 @@ class GroundSpawnLoader {
         }
 
         override fun respawn() {
-            GameWorld.Pulser.submit(object : Pulse(respawnDuration) {
+            World.Pulser.submit(object : Pulse(respawnDuration) {
                 override fun pulse(): Boolean {
                     GroundItemManager.create(this@GroundSpawn)
                     return true

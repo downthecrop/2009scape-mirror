@@ -5,7 +5,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
 import core.net.packet.PacketRepository;
@@ -74,7 +74,7 @@ public abstract class CutscenePlugin extends ActivityPlugin {
 		player.removeAttribute("real-end");
 		player.setAttribute("real-end", player.getLocation());
 		if (isFade()) {
-			GameWorld.getPulser().submit(getStartPulse());
+			World.getPulser().submit(getStartPulse());
 		} else {
 			PacketRepository.send(MinimapState.class, new MinimapStateContext(player, getMapState()));
 			player.getInterfaceManager().hideTabs(getRemovedTabs());
@@ -118,7 +118,7 @@ public abstract class CutscenePlugin extends ActivityPlugin {
 	 */
 	public void stop(boolean fade) {
 		if (fade) {
-			GameWorld.getPulser().submit(endPulse);
+			World.getPulser().submit(endPulse);
 		} else {
 			end();
 		}

@@ -5,7 +5,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
@@ -60,7 +60,7 @@ public final class IcePathZone extends MapZone implements Plugin<Object> {
 				}
 			};
 			player.setAttribute("ice_path_pulse", pulse);
-			GameWorld.getPulser().submit(pulse);
+			World.getPulser().submit(pulse);
 		}
 		return true;
 	}

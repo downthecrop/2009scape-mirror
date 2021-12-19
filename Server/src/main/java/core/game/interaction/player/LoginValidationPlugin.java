@@ -8,7 +8,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.plugin.PluginManifest;
 import core.plugin.PluginType;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.util.concurrent.TimeUnit;
 
@@ -50,7 +50,7 @@ public final class LoginValidationPlugin implements Plugin<Player> {
 		if (!SystemManager.getSystemConfig().validLogin(player)) {
 			return this;
 		}
-		if (GameWorld.getSettings().isDevMode()) {
+		if (World.getSettings().isDevMode()) {
 			player.toggleDebug();
 		}
 		if (player.getAttribute("fc_wave", -1) > -1) {

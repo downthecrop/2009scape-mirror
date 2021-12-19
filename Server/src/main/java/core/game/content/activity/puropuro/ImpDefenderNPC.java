@@ -9,7 +9,7 @@ import core.game.node.entity.skill.hunter.bnet.ImplingNode;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.tools.RandomFunction;
@@ -70,7 +70,7 @@ public final class ImpDefenderNPC extends AbstractNPC {
 			faceTemporary(player, 1);
 			sendChat("Be free!");
 			player.getInventory().remove(node.getReward());
-			player.setAttribute("imp-steal", GameWorld.getTicks() + 500);
+			player.setAttribute("imp-steal", World.getTicks() + 500);
 		}
 	}
 
@@ -80,7 +80,7 @@ public final class ImpDefenderNPC extends AbstractNPC {
 	 * @return {@code True} if so.
 	 */
 	private boolean canSteal(Player player) {
-		if (!GameWorld.getSettings().isDevMode() && player.getAttribute("imp-steal", 0) > GameWorld.getTicks()) {
+		if (!World.getSettings().isDevMode() && player.getAttribute("imp-steal", 0) > World.getTicks()) {
 			return false;
 		}
 		int thievingLevel = player.getSkills().getLevel(Skills.THIEVING);

@@ -7,7 +7,7 @@ import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 
 /**
  * handles pickpocketing sigmund during the lost tribe quest
@@ -19,7 +19,7 @@ class PickpocketSigmund : InteractionListener(){
     override fun defineListeners() {
         on(SIGMUND,NPC,"pickpocket"){player, node ->
             player.lock()
-            GameWorld.Pulser.submit(object : Pulse(){
+            World.Pulser.submit(object : Pulse(){
                 var counter = 0
                 override fun pulse(): Boolean {
                     when(counter++){
