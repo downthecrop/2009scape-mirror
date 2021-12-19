@@ -1,6 +1,6 @@
 package core.game.interaction.inter;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -74,7 +74,7 @@ public final class GlassInterface extends ComponentPlugin {
 			real = p.getInventory().getAmount(MOLTEN_GLASS);
 			break;
 		case 211:
-			ContentAPI.sendInputDialogue(p, true, "Enter the amount:", (value) -> {
+			sendInputDialogue(p, true, "Enter the amount:", (value) -> {
 				make(p, def, (int) value);
 				return Unit.INSTANCE;
 			});

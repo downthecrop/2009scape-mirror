@@ -1,6 +1,6 @@
 package rs09.game.ge
 
-import api.ContentAPI
+import api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.component.CloseEvent
 import core.game.component.Component
@@ -318,7 +318,7 @@ class PlayerGrandExchange(private val player: Player) {
         temporaryOffer!!.itemID = itemId
         temporaryOffer!!.sell = false
         var itemDb = GrandExchangeDatabase.getDatabase()[itemId]
-        if (itemDb == null || !ContentAPI.itemDefinition(itemId).isTradeable) {
+        if (itemDb == null || !itemDefinition(itemId).isTradeable) {
             player.packetDispatch.sendMessage("This item has been blacklisted from the Grand Exchange.")
             return
         }

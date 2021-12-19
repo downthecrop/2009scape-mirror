@@ -1,6 +1,6 @@
 package rs09.game.interaction.inter
 
-import api.ContentAPI
+import api.*
 import core.game.component.Component
 import core.game.component.ComponentDefinition
 import core.game.component.ComponentPlugin
@@ -97,8 +97,8 @@ class FurClothingInterface : ComponentPlugin(){
             val checkedFurs = arrayListOf<String>()
             for(CLOTHING in FUR_CLOTHING.values()){
                 if(checkedFurs.contains(CLOTHING.textContent)) continue
-                if(ContentAPI.inInventory(player, CLOTHING.requiredFur.id, CLOTHING.requiredFur.amount)){
-                    ContentAPI.setInterfaceText(player, colorize("%G${CLOTHING.textContent}"), FUR_CLOTHING_COMPONENT_ID, CLOTHING.textChildID)
+                if(inInventory(player, CLOTHING.requiredFur.id, CLOTHING.requiredFur.amount)){
+                    setInterfaceText(player, colorize("%G${CLOTHING.textContent}"), FUR_CLOTHING_COMPONENT_ID, CLOTHING.textChildID)
                     checkedFurs.add(CLOTHING.textContent)
                 }
             }
@@ -144,7 +144,7 @@ class FurClothingInterface : ComponentPlugin(){
     }
 
     private fun value(player: Player, clothing: FUR_CLOTHING){
-        ContentAPI.sendMessage(player,"${clothing.product.name} requires ${clothing.requiredFur.amount} ${clothing.requiredFur.name.toLowerCase()} and costs ${clothing.price} coins.")
+        sendMessage(player,"${clothing.product.name} requires ${clothing.requiredFur.amount} ${clothing.requiredFur.name.toLowerCase()} and costs ${clothing.price} coins.")
     }
 
     private fun buy(player: Player, clothing: FUR_CLOTHING, amount: Int){
@@ -152,19 +152,19 @@ class FurClothingInterface : ComponentPlugin(){
         val amtFurRequired = clothing.requiredFur.amount * amount
         val requiredFur = Item(clothing.requiredFur.id,amtFurRequired)
 
-        if(!ContentAPI.inInventory(player, requiredFur.id, requiredFur.amount)){
-            ContentAPI.sendDialogue(player, "You don't have enough fur for that.")
+        if(!inInventory(player, requiredFur.id, requiredFur.amount)){
+            sendDialogue(player, "You don't have enough fur for that.")
             return
         }
 
-        if(!ContentAPI.inInventory(player, coins.id, coins.amount)){
-            ContentAPI.sendDialogue(player,"You can't afford that.")
+        if(!inInventory(player, coins.id, coins.amount)){
+            sendDialogue(player,"You can't afford that.")
             return
         }
 
-        ContentAPI.removeItem(player, requiredFur, api.Container.INVENTORY)
-        ContentAPI.removeItem(player, coins, api.Container.INVENTORY)
-        ContentAPI.addItem(player, clothing.product.id, amount)
+        removeItem(player, requiredFur, api.Container.INVENTORY)
+        removeItem(player, coins, api.Container.INVENTORY)
+        addItem(player, clothing.product.id, amount)
     }
 
     override fun newInstance(arg: Any?): Plugin<Any> {

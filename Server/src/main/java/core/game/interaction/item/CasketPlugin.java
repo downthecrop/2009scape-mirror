@@ -3,7 +3,7 @@ package core.game.interaction.item;
 import java.util.ArrayList;
 import java.util.List;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.ItemDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
@@ -51,7 +51,7 @@ public final class CasketPlugin extends OptionHandler {
 		final Item reward = table.roll().get(0);
 		player.getInventory().remove((Item) node);
 		player.getDialogueInterpreter().sendItemMessage(reward, "You open the casket. Inside you find " + (reward.getAmount() > 1 ? "some" : (StringUtils.isPlusN(reward.getName()) ? "an" : "a")) + " " + reward.getName().toLowerCase() + ".");
-		ContentAPI.addItemOrDrop(player, reward.getId(), reward.getAmount());
+		addItemOrDrop(player, reward.getId(), reward.getAmount());
 		return true;
 	}
 

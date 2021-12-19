@@ -1,6 +1,6 @@
 package rs09.game.interaction.npc
 
-import api.ContentAPI
+import api.*
 import core.game.component.Component
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.RunScript
@@ -39,7 +39,7 @@ object BogrogPouchSwapper {
             OP_SWAP_5  -> swap(player, 5, player.inventory.get(slot).id)
             OP_SWAP_10 -> swap(player,10,player.inventory.get(slot).id)
             OP_SWAP_X  -> true.also{
-                ContentAPI.sendInputDialogue(player, true, "Enter the amount:"){value ->
+                sendInputDialogue(player, true, "Enter the amount:"){value ->
                     swap(player, value as Int, player.inventory.get(slot).id)
                 }
             }

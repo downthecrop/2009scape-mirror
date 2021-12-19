@@ -1,6 +1,6 @@
 package rs09.game.node.entity.npc.other
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.npc.AbstractNPC
 import core.game.world.map.Location
 import core.plugin.Initializable
@@ -23,7 +23,7 @@ class IceTrollJatizsoCaves : AbstractNPC {
     }
 
     override fun tick() {
-        val nearbyMiner = ContentAPI.findLocalNPC(this, NPCs.MINER_5497) ?: return super.tick()
+        val nearbyMiner = findLocalNPC(this, NPCs.MINER_5497) ?: return super.tick()
         if(!inCombat() && nearbyMiner.location.withinDistance(location, 8)){
             attack(nearbyMiner)
         }

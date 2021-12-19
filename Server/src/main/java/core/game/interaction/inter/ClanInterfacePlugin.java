@@ -1,6 +1,6 @@
 package core.game.interaction.inter;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -89,9 +89,9 @@ public final class ClanInterfacePlugin extends ComponentPlugin {
 					MSPacketRepository.sendClanRename(player, "");
 					break;
 				default:
-					ContentAPI.sendInputDialogue(player, false, "Enter clan prefix:", (value) -> {
+					sendInputDialogue(player, false, "Enter clan prefix:", (value) -> {
 						String name = StringUtils.formatDisplayName((String) value);
-						ContentAPI.setInterfaceText(player, name, 590, 22);
+						setInterfaceText(player, name, 590, 22);
 						MSPacketRepository.sendClanRename(player, name);
 						clan.setName(name);
 						return Unit.INSTANCE;

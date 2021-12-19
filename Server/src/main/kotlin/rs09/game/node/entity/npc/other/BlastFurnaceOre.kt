@@ -1,6 +1,6 @@
 package rs09.game.node.entity.npc.other
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.npc.AbstractNPC
 import core.game.node.entity.player.Player
 import core.game.world.map.Location
@@ -50,7 +50,7 @@ class BlastFurnaceOre : AbstractNPC {
 
     override fun handleTickActions() {
         delay--
-        if(delay <= 0 && ContentAPI.getWorldTicks() % 2 == 0) { //run every other tick
+        if(delay <= 0 && getWorldTicks() % 2 == 0) { //run every other tick
             if(counter > 0){
                 properties.teleportLocation = location.transform(0, -1, 0)
                 counter--

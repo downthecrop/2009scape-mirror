@@ -1,6 +1,6 @@
 package rs09.game.content.quest.free.dragonslayer
 
-import api.ContentAPI
+import api.*
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 
@@ -28,7 +28,7 @@ class DSEquipListeners : InteractionListener() {
         for(id in restrictedItems){
             onEquip(id){ player, _ ->
                 if(!player.questRepository.isComplete("Dragon Slayer")){
-                    ContentAPI.sendMessage(player, "You must have completed Dragon Slayer to equip this.")
+                    sendMessage(player, "You must have completed Dragon Slayer to equip this.")
                     return@onEquip false
                 }
                 return@onEquip true

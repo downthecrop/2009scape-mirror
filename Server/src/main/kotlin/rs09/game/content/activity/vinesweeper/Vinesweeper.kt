@@ -1,4 +1,4 @@
-import api.ContentAPI
+import api.*
 import core.game.component.Component
 import core.game.node.entity.Entity
 import core.game.node.entity.impl.Projectile
@@ -68,14 +68,14 @@ data class SeedDestination(val player: Player, val loc: Location, val alive: Boo
 var SEED_LOCS: HashSet<Location> = HashSet()
 
 fun isSeed(loc: Location): Boolean {
-    val scenery = ContentAPI.getScenery(loc)
+    val scenery = getScenery(loc)
     return scenery != null && SEED_LOCS.contains(scenery.location)
 }
 
 fun populateSeeds() {
     while(SEED_LOCS.size < MAX_SEEDS) {
         val loc = VINESWEEPER_BORDERS.getRandomLoc()
-        val scenery = ContentAPI.getScenery(loc)
+        val scenery = getScenery(loc)
         if(scenery != null && HOLES.contains(scenery.id)) {
             SEED_LOCS.add(loc)
         }
@@ -83,14 +83,14 @@ fun populateSeeds() {
 }
 
 fun isHole(loc: Location): Boolean {
-    val scenery = ContentAPI.getScenery(loc)
+    val scenery = getScenery(loc)
     return scenery != null && HOLES.contains(scenery.id)
 }
 
 fun scheduleNPCs(player: Player, loc: Location, alive: Boolean, rabbit: Boolean) {
     val dest = SeedDestination(player, loc, alive)
     val ids = if(rabbit) { intArrayOf(RABBIT, *FARMERS) } else { FARMERS }
-    for(npc in ContentAPI.findLocalNPCs(player, ids, 30)) {
+    for(npc in findLocalNPCs(player, ids, 30)) {
         if(npc is VinesweeperNPC) {
             npc.seedDestinations.add(dest)
             npc.resetWalk()
@@ -138,7 +138,7 @@ class VinesweeperListener : InteractionListener() {
             sendUpdatedPoints(player)
             player.sendMessage("Oh dear! It looks like you dug up a potato seed by mistake.");
             scheduleNPCs(player, loc, false, false)
-            val scenery = ContentAPI.getScenery(loc)
+            val scenery = getScenery(loc)
             if(scenery != null) {
                 SceneryBuilder.replace(scenery, scenery.transform(DEAD_PLANT_OBJ))
             }
@@ -153,7 +153,7 @@ class VinesweeperListener : InteractionListener() {
                     }
                 }
             }
-            val scenery = ContentAPI.getScenery(loc)
+            val scenery = getScenery(loc)
             if(scenery != null) {
                 SceneryBuilder.replace(scenery, scenery.transform(NUMBERS[count]))
             }
@@ -174,7 +174,7 @@ class VinesweeperListener : InteractionListener() {
         on(PORTAL, SCENERY, "enter") { player, _ ->
             val x = player.getAttribute("vinesweeper:return-tele:x", 3052)
             val y = player.getAttribute("vinesweeper:return-tele:y", 3304)
-            ContentAPI.teleport(player, Location(x, y))
+            teleport(player, Location(x, y))
             return@on true
         }
         on(SIGNS, SCENERY, "read") { player, node ->
@@ -219,14 +219,14 @@ class VinesweeperListener : InteractionListener() {
                             "You are certain there is no seed planted here."
                         }
                     }
-                    ContentAPI.sendDialogue(player, msg)
+                    sendDialogue(player, msg)
                     return true
                 }
             })
             return@on true
         }
         on(MRS_WINKIN, NPC, "talk-to") { player, npc ->
-			ContentAPI.openDialogue(player, WinkinDialogue(), npc)
+			openDialogue(player, WinkinDialogue(), npc)
             return@on true
         }
         on(MRS_WINKIN, NPC, "trade") { player, _ ->
@@ -236,7 +236,7 @@ class VinesweeperListener : InteractionListener() {
         on(MRS_WINKIN, NPC, "buy flags") { player, npc ->
             val dialogue = WinkinDialogue()
             dialogue.stage = 20
-            ContentAPI.openDialogue(player, dialogue, npc)
+            openDialogue(player, dialogue, npc)
             return@on true
         }
         on(RABBIT, NPC, "feed") { player, node ->
@@ -263,19 +263,19 @@ class VinesweeperListener : InteractionListener() {
         }
         on(FARMER_BLINKIN, NPC, "talk-to") { player, npc ->
             //player.interfaceManager.open(Component(TUTORIAL))
-			ContentAPI.openDialogue(player, BlinkinDialogue(), npc)
+			openDialogue(player, BlinkinDialogue(), npc)
             return@on true
         }
         on(FARMER_BLINKIN, NPC, "buy-flags") { player, npc ->
             val dialogue = BlinkinDialogue()
             dialogue.stage = 21
-            ContentAPI.openDialogue(player, dialogue, npc)
+            openDialogue(player, dialogue, npc)
             return@on true
         }
         on(FARMER_BLINKIN, NPC, "buy-roots") { player, npc ->
             val dialogue = BlinkinDialogue()
             dialogue.stage = 40
-            ContentAPI.openDialogue(player, dialogue, npc)
+            openDialogue(player, dialogue, npc)
             return@on true
         }
     }
@@ -306,13 +306,13 @@ class VinesweeperNPC : AbstractNPC {
     override fun handleTickActions() {
         val dest = seedDestinations.find({sd -> sd.loc == location})
         if(dest != null) {
-            for(npc in ContentAPI.findLocalNPCs(this, intArrayOf(RABBIT, *FARMERS), 30)) {
+            for(npc in findLocalNPCs(this, intArrayOf(RABBIT, *FARMERS), 30)) {
                 if(npc is VinesweeperNPC) {
                     npc.seedDestinations.remove(dest)
                     npc.resetWalk()
                 }
             }
-            val scenery = ContentAPI.getScenery(dest.loc)
+            val scenery = getScenery(dest.loc)
             if(scenery != null) {
                 if(id == RABBIT) {
                     val replacement = if(SEED_LOCS.contains(dest.loc)) { DEAD_PLANT_OBJ } else { HOLES[0] }
@@ -389,7 +389,7 @@ class VinesweeperNPC : AbstractNPC {
     fun farmerClear(dest: SeedDestination) {
         for(dx in -FARMER_CLEAR_RADIUS..FARMER_CLEAR_RADIUS) {
             for(dy in -FARMER_CLEAR_RADIUS..FARMER_CLEAR_RADIUS) {
-                val toClear = ContentAPI.getScenery(dest.loc.transform(dx, dy, 0))
+                val toClear = getScenery(dest.loc.transform(dx, dy, 0))
                 if(toClear != null && intArrayOf(DEAD_PLANT_OBJ, *NUMBERS).contains(toClear.id)) {
                     SceneryBuilder.replace(toClear, toClear.transform(HOLES[0]))
                 }
@@ -508,7 +508,7 @@ class VinesweeperRewards : InterfaceListener() {
     override fun defineListeners() {
         onOpen(IFACE) { _, _ ->
             /*for((buttonID, reward) in REWARDS) {
-                ContentAPI.sendItemOnInterface(player, IFACE, buttonID, reward.itemID, 5)
+                sendItemOnInterface(player, IFACE, buttonID, reward.itemID, 5)
             }*/
             //player.packetDispatch.sendRunScript(2003, "")
             return@onOpen true

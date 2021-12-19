@@ -1,6 +1,6 @@
 package rs09.game.content.global.worldevents.shootingstar
 
-import api.ContentAPI
+import api.*
 import core.game.content.global.worldevents.shootingstar.ScoreboardManager
 import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
@@ -101,7 +101,7 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
         if (ShootingStarOptionHandler.getStarDust(player) < 200) {
             player.inventory.add(Item(ShootingStarOptionHandler.STAR_DUST, 1))
         }
-        if(!ContentAPI.inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && !ContentAPI.inBank(player, Items.ANCIENT_BLUEPRINT_14651)){
+        if(!inInventory(player, Items.ANCIENT_BLUEPRINT_14651) && !inBank(player, Items.ANCIENT_BLUEPRINT_14651)){
             rollBlueprint(player)
         }
         return false
@@ -121,9 +121,9 @@ class ShootingStarMiningPulse(player: Player?, node: Scenery?, val star: Shootin
         }
 
         if(RandomFunction.roll(chance)){
-            ContentAPI.addItemOrDrop(player, Items.ANCIENT_BLUEPRINT_14651, 1)
-            ContentAPI.sendMessage(player, colorize("%RWhile mining the star you find an ancient-looking blueprint."))
-            ContentAPI.sendNews("${player.username} found an Ancient Blueprint while mining a shooting star!")
+            addItemOrDrop(player, Items.ANCIENT_BLUEPRINT_14651, 1)
+            sendMessage(player, colorize("%RWhile mining the star you find an ancient-looking blueprint."))
+            sendNews("${player.username} found an Ancient Blueprint while mining a shooting star!")
         }
     }
 

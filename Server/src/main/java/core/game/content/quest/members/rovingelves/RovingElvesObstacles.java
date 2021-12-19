@@ -1,6 +1,6 @@
 package core.game.content.quest.members.rovingelves;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.interaction.OptionHandler;
@@ -200,7 +200,7 @@ public final class RovingElvesObstacles extends OptionHandler {
 				break;
 			case 3927:
 				player.teleport(LEAF_TRAP_CLIMB);
-				ContentAPI.sendMessage(player,LEAF_LADDER_MSG);
+				sendMessage(player,LEAF_LADDER_MSG);
 				break;
 			}
 

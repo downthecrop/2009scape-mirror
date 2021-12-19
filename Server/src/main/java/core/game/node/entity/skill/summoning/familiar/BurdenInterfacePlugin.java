@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.summoning.familiar;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -56,7 +56,7 @@ public final class BurdenInterfacePlugin extends ComponentPlugin {
 			beast.transfer(item, container.getAmount(item), withdraw);
 			return true;
 		case 234:
-			ContentAPI.sendInputDialogue(player, true, "Enter the amount:", (value) -> {
+			sendInputDialogue(player, true, "Enter the amount:", (value) -> {
 				beast.transfer(item, (int) value, withdraw);
 				return Unit.INSTANCE;
 			});

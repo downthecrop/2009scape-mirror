@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.runecrafting.abyss
 
-import api.ContentAPI
+import api.*
 import rs09.plugin.PluginManager.definePlugin
 import rs09.tools.stringtools.colorize
 import rs09.game.system.SystemLogger.logInfo
@@ -99,8 +99,8 @@ class AbyssPlugin : InteractionListener() {
         BOIL("burn-down", arrayOf(Location.create(3024, 4833, 0), Location.create(3053, 4830, 0)), 7165) {
             override fun handle(player: Player, `object`: Scenery?) {
                 `object` ?: return
-                if (!ContentAPI.inInventory(player, 590, 1)) {
-                    ContentAPI.sendMessage(player, "You don't have a tinderbox to burn it.")
+                if (!inInventory(player, 590, 1)) {
+                    sendMessage(player, "You don't have a tinderbox to burn it.")
                     return
                 }
                 player.animate(Animation(733))
@@ -109,13 +109,13 @@ class AbyssPlugin : InteractionListener() {
                     var count = 0
                     override fun pulse(): Boolean {
                         when (count) {
-                            1 -> ContentAPI.sendMessage(player, "You attempt to burn your way through..")
-                            4 -> return if (RandomFunction.random(100) < ContentAPI.getStatLevel(
+                            1 -> sendMessage(player, "You attempt to burn your way through..")
+                            4 -> return if (RandomFunction.random(100) < getStatLevel(
                                     player,
                                     Skills.FIREMAKING
                                 )
                             ) {
-                                ContentAPI.sendMessage(
+                                sendMessage(
                                     player,
                                     colorize("%G...and manage to burn it down and get past.")
                                 )
@@ -123,7 +123,7 @@ class AbyssPlugin : InteractionListener() {
                                 player.unlock()
                                 true
                             } else {
-                                ContentAPI.sendMessage(player, colorize("%RYou fail to set it on fire."))
+                                sendMessage(player, colorize("%RYou fail to set it on fire."))
                                 player.unlock()
                                 true
                             }
@@ -143,9 +143,9 @@ class AbyssPlugin : InteractionListener() {
             override fun handle(player: Player, `object`: Scenery?) {
                 `object` ?: return
                 logInfo("handled abyss mine")
-                val tool: SkillingTool = ContentAPI.getTool(player, true) ?: return
+                val tool: SkillingTool = getTool(player, true) ?: return
                 if (tool == null) {
-                    ContentAPI.sendMessage(player, "You need a pickaxe in order to do that.")
+                    sendMessage(player, "You need a pickaxe in order to do that.")
                     return
                 }
                 player.animate(tool.getAnimation())
@@ -154,18 +154,18 @@ class AbyssPlugin : InteractionListener() {
                     var count = 0
                     override fun pulse(): Boolean {
                         when (count) {
-                            1 -> ContentAPI.sendMessage(player, "You attempt to mine your way through..")
-                            4 -> return if (RandomFunction.random(100) < ContentAPI.getStatLevel(
+                            1 -> sendMessage(player, "You attempt to mine your way through..")
+                            4 -> return if (RandomFunction.random(100) < getStatLevel(
                                     player,
                                     Skills.MINING
                                 )
                             ) {
-                                ContentAPI.sendMessage(player, colorize("%G...and manage to break through the rock."))
+                                sendMessage(player, colorize("%G...and manage to break through the rock."))
                                 player.properties.teleportLocation = locations[getIndex(`object`)]
                                 player.unlock()
                                 true
                             } else {
-                                ContentAPI.sendMessage(player, colorize("%R...but fail to break-up the rock."))
+                                sendMessage(player, colorize("%R...but fail to break-up the rock."))
                                 player.unlock()
                                 true
                             }
@@ -195,18 +195,18 @@ class AbyssPlugin : InteractionListener() {
                     var count = 0
                     override fun pulse(): Boolean {
                         when (count) {
-                            1 -> ContentAPI.sendMessage(player, "You attempt to chop your way through...")
-                            4 -> return if (RandomFunction.random(100) < ContentAPI.getStatLevel(
+                            1 -> sendMessage(player, "You attempt to chop your way through...")
+                            4 -> return if (RandomFunction.random(100) < getStatLevel(
                                     player,
                                     Skills.WOODCUTTING
                                 )
                             ) {
-                                ContentAPI.sendMessage(player, colorize("%G...and manage to chop down the tendrils."))
+                                sendMessage(player, colorize("%G...and manage to chop down the tendrils."))
                                 player.properties.teleportLocation = locations[getIndex(`object`)]
                                 player.unlock()
                                 true
                             } else {
-                                ContentAPI.sendMessage(player, colorize("%RYou fail to cut through the tendrils."))
+                                sendMessage(player, colorize("%RYou fail to cut through the tendrils."))
                                 player.unlock()
                                 true
                             }
@@ -236,18 +236,18 @@ class AbyssPlugin : InteractionListener() {
                     var count = 0
                     override fun pulse(): Boolean {
                         when (count) {
-                            1 -> ContentAPI.sendMessage(player, "You attempt to squeeze through the narrow gap...")
-                            4 -> return if (RandomFunction.random(100) < ContentAPI.getStatLevel(
+                            1 -> sendMessage(player, "You attempt to squeeze through the narrow gap...")
+                            4 -> return if (RandomFunction.random(100) < getStatLevel(
                                     player,
                                     Skills.AGILITY
                                 )
                             ) {
-                                ContentAPI.sendMessage(player, colorize("%G...and you manage to crawl through."))
+                                sendMessage(player, colorize("%G...and you manage to crawl through."))
                                 player.properties.teleportLocation = locations[getIndex(`object`)]
                                 player.unlock()
                                 true
                             } else {
-                                ContentAPI.sendMessage(player, colorize("%RYou fail to squeeze through the narrow gap"))
+                                sendMessage(player, colorize("%RYou fail to squeeze through the narrow gap"))
                                 player.unlock()
                                 true
                             }
@@ -307,13 +307,13 @@ class AbyssPlugin : InteractionListener() {
                     var count = 0
                     override fun pulse(): Boolean {
                         when (count) {
-                            1 -> ContentAPI.sendMessage(player, "You use your thieving skills to misdirect the eyes...")
-                            4 -> return if (RandomFunction.random(100) < ContentAPI.getStatLevel(
+                            1 -> sendMessage(player, "You use your thieving skills to misdirect the eyes...")
+                            4 -> return if (RandomFunction.random(100) < getStatLevel(
                                     player,
                                     Skills.THIEVING
                                 )
                             ) {
-                                ContentAPI.sendMessage(
+                                sendMessage(
                                     player,
                                     colorize("%G...and sneak past while they're not looking.")
                                 )
@@ -321,7 +321,7 @@ class AbyssPlugin : InteractionListener() {
                                 player.unlock()
                                 true
                             } else {
-                                ContentAPI.sendMessage(player, colorize("%RYou fail to distract the eyes."))
+                                sendMessage(player, colorize("%RYou fail to distract the eyes."))
                                 player.unlock()
                                 true
                             }

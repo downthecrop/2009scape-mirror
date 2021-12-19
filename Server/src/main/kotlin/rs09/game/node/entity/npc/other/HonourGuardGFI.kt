@@ -1,6 +1,6 @@
 package rs09.game.node.entity.npc.other
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.npc.AbstractNPC
 import core.game.world.map.Location
 import core.plugin.Initializable
@@ -23,7 +23,7 @@ class HonourGuardGFI : AbstractNPC {
 
     override fun tick() {
         if(isActive && !inCombat() && RandomFunction.roll(10)){
-            val localTrolls = ContentAPI.findLocalNPCs(this, intArrayOf(NPCs.ICE_TROLL_FEMALE_5523, NPCs.ICE_TROLL_MALE_5522, NPCs.ICE_TROLL_RUNT_5521, NPCs.ICE_TROLL_GRUNT_5524))
+            val localTrolls = findLocalNPCs(this, intArrayOf(NPCs.ICE_TROLL_FEMALE_5523, NPCs.ICE_TROLL_MALE_5522, NPCs.ICE_TROLL_RUNT_5521, NPCs.ICE_TROLL_GRUNT_5524))
             localTrolls.forEach{troll ->
                 if(troll.location.withinDistance(location,6)) {
                     attack(troll)

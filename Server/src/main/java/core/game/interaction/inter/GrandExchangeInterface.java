@@ -1,6 +1,6 @@
 package core.game.interaction.inter;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.CS2Mapping;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
@@ -334,7 +334,7 @@ public class GrandExchangeInterface extends ComponentPlugin {
 			setOfferAmount(player, offer, amount + 1000);
 			return true;
 		case 170: // value x
-			ContentAPI.sendInputDialogue(player, false, "Enter the amount:", (value) -> {
+			sendInputDialogue(player, false, "Enter the amount:", (value) -> {
 				if (player.getInterfaceManager().getChatbox().getId() == 389) {
 					player.getPlayerGrandExchange().openSearch();
 				}
@@ -372,7 +372,7 @@ public class GrandExchangeInterface extends ComponentPlugin {
 				player.getPacketDispatch().sendMessage("Please select an offer first.");
 				return true;
 			}
-			ContentAPI.sendInputDialogue(player, false, "Enter the amount:", (value) -> {
+			sendInputDialogue(player, false, "Enter the amount:", (value) -> {
 				if (player.getInterfaceManager().getChatbox().getId() == 389) {
 					player.getPlayerGrandExchange().openSearch();
 				}

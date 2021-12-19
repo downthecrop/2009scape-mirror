@@ -1,6 +1,6 @@
 package core.game.interaction.inter;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -68,7 +68,7 @@ public final class TradeInterfacePlugin extends ComponentPlugin {
 				module.getContainer().withdraw(slot, module.getContainer().getAmount(module.getContainer().get(slot)));
 				break;
 			case 234:
-				ContentAPI.sendInputDialogue(player, false, "Enter the amount:", (value) -> {
+				sendInputDialogue(player, false, "Enter the amount:", (value) -> {
 					String s = value.toString();
 					s = s.replace("k","000");
 					s = s.replace("K","000");
@@ -102,7 +102,7 @@ public final class TradeInterfacePlugin extends ComponentPlugin {
 				module.getContainer().offer(slot, player.getInventory().getAmount(player.getInventory().get(slot)));
 				break;
 			case 234:
-				ContentAPI.sendInputDialogue(player, false, "Enter the amount:", (value) -> {
+				sendInputDialogue(player, false, "Enter the amount:", (value) -> {
 					String s = value.toString();
 					s = s.replace("k","000");
 					s = s.replace("K","000");

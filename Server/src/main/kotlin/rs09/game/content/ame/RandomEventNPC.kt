@@ -1,6 +1,6 @@
 package rs09.game.content.ame
 
-import api.ContentAPI
+import api.*
 import core.game.interaction.MovementPulse
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -35,7 +35,7 @@ abstract class RandomEventNPC(id: Int) : NPC(id) {
     open fun terminate(){
         player.antiMacroHandler.event = null
         if(initialized){
-            ContentAPI.poofClear(this)
+            poofClear(this)
         }
     }
 

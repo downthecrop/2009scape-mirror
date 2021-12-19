@@ -1,6 +1,6 @@
 package core.game.interaction.npc
 
-import api.ContentAPI
+import api.*
 import core.cache.def.impl.NPCDefinition
 import core.game.component.Component
 import core.plugin.Initializable
@@ -27,16 +27,16 @@ class NPCTradePlugin : InteractionListener() {
                 return@on true
             }
             if (npc.id == 7601) {
-                ContentAPI.openInterface(player, 732)
+                openInterface(player, 732)
                 return@on true
             }
             return@on npc.openShop(player)
         }
 
         on(NPCs.SIEGFRIED_ERKLE_933, NPC, "trade"){player, node ->
-            val points = ContentAPI.getQP(player)
+            val points = getQP(player)
             if(points < 40){
-                ContentAPI.sendNPCDialogue(player, NPCs.SIEGFRIED_ERKLE_933, "I'm sorry, adventurer, but you need 40 quest points to buy from me.")
+                sendNPCDialogue(player, NPCs.SIEGFRIED_ERKLE_933, "I'm sorry, adventurer, but you need 40 quest points to buy from me.")
                 return@on true
             }
             node.asNpc().openShop(player)

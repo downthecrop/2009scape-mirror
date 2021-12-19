@@ -1,6 +1,6 @@
 package rs09.game.ai.general.scriptrepository
 
-import api.ContentAPI
+import api.*
 import core.game.world.map.zone.ZoneBorders
 import rs09.game.ai.general.ScriptAPI
 import rs09.game.ai.skillingbot.SkillingBotAssembler

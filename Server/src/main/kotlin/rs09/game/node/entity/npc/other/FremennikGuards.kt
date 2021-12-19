@@ -1,6 +1,6 @@
 package rs09.game.node.entity.npc.other
 
-import api.ContentAPI
+import api.*
 import core.game.node.entity.npc.AbstractNPC
 import core.game.world.map.Location
 import core.plugin.Initializable
@@ -23,8 +23,8 @@ class FremennikGuards : AbstractNPC {
     override fun tick() {
         if(this.isRespawn) {
             when (id) {
-                NPCs.GUARD_5489 -> if (ContentAPI.getWorldTicks() % 5 == 0) ContentAPI.sendChat(this, "JATIZSO!")
-                NPCs.GUARD_5490 -> if (ContentAPI.getWorldTicks() % 8 == 0) ContentAPI.sendChat(this, "NEITIZNOT!")
+                NPCs.GUARD_5489 -> if (getWorldTicks() % 5 == 0) sendChat(this, "JATIZSO!")
+                NPCs.GUARD_5490 -> if (getWorldTicks() % 8 == 0) sendChat(this, "NEITIZNOT!")
             }
         }
         super.tick()

@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.agility;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.node.entity.player.link.TeleportManager;
 import core.game.node.entity.skill.Skills;
 import core.game.interaction.MovementPulse;
@@ -102,21 +102,21 @@ public final class AgilityHandler {
 	 */
 	public static void fail(final Player player, int delay, final Location dest, Animation anim, final int hit, final String message) {
 		if (anim != null) {
-			ContentAPI.animate(player, anim, true);
-			ContentAPI.submitWorldPulse(new Pulse(ContentAPI.animationDuration(anim), player) {
+			animate(player, anim, true);
+			submitWorldPulse(new Pulse(animationDuration(anim), player) {
 				boolean dmg = false;
 
 				@Override
 				public boolean pulse() {
-					ContentAPI.teleport(player, dest, TeleportManager.TeleportType.INSTANT);
-					ContentAPI.animate(player, Animation.RESET, true);
+					teleport(player, dest, TeleportManager.TeleportType.INSTANT);
+					animate(player, Animation.RESET, true);
 					if (!dmg) {
 						if (hit > 0) {
 							player.getImpactHandler().setDisabledTicks(0);
-							ContentAPI.impact(player, hit, HitsplatType.NORMAL);
+							impact(player, hit, HitsplatType.NORMAL);
 						}
 						if (message != null) {
-							ContentAPI.sendMessage(player, message);
+							sendMessage(player, message);
 						}
 						dmg = true;
 					}

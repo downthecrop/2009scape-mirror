@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.gather.mining
 
-import api.ContentAPI
+import api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.container.impl.EquipmentContainer
 import core.game.content.dialogue.FacialExpression
@@ -174,7 +174,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             if (!isMiningEssence) {
                 var chance = 282
                 var altered = false
-                if (Item(player.equipment.getId(12)).name.toLowerCase().contains("ring of wealth") || ContentAPI.inEquipment(player, Items.RING_OF_THE_STAR_SPRITE_14652)) {
+                if (Item(player.equipment.getId(12)).name.toLowerCase().contains("ring of wealth") || inEquipment(player, Items.RING_OF_THE_STAR_SPRITE_14652)) {
                     chance = (chance / 1.5).toInt()
                     altered = true
                 }

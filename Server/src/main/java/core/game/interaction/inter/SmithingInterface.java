@@ -1,6 +1,6 @@
 package core.game.interaction.inter;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -38,7 +38,7 @@ public class SmithingInterface extends ComponentPlugin {
 		p.getGameAttributes().setAttribute("smith-bar", bar);
 		p.getGameAttributes().setAttribute("smith-item", item);
 		if (amount == -1) {
-			ContentAPI.sendInputDialogue(p, true, "Enter the amount:", (value) -> {
+			sendInputDialogue(p, true, "Enter the amount:", (value) -> {
 				p.getPulseManager().run(new SmithingPulse(p, new Item((int) p.getGameAttributes().getAttribute("smith-item"), (int) value), (Bars) p.getGameAttributes().getAttribute("smith-bar"), (int) value));
 				return Unit.INSTANCE;
 			});

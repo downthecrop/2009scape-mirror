@@ -1,6 +1,6 @@
 package rs09.game.content.ame.events.genie
 
-import api.ContentAPI
+import api.*
 import core.game.content.dialogue.FacialExpression
 import core.cache.def.impl.ItemDefinition
 import core.game.component.Component
@@ -14,7 +14,7 @@ class GenieDialogue : DialogueFile() {
     override fun handle(componentID: Int, buttonID: Int) {
         val assigned = player!!.getAttribute("genie:item",0)
         npcl(FacialExpression.NEUTRAL, "Ah, so you are there, ${player!!.name.capitalize()}. I'm so glad you summoned me. Please take this lamp and make your wish.")
-		ContentAPI.addItemOrDrop(player!!, assigned)
+		addItemOrDrop(player!!, assigned)
         player!!.antiMacroHandler.event?.terminate()
         stage = END_DIALOGUE
     }

@@ -1,6 +1,6 @@
 package rs09.game.world
 
-import api.ContentAPI
+import api.*
 import core.cache.Cache
 import core.cache.def.impl.SceneryDefinition
 import core.game.ge.GrandExchangeDatabase

@@ -1,6 +1,6 @@
 package rs09.game.interaction.item.withobject
 
-import api.ContentAPI
+import api.*
 import api.EquipmentSlot
 import core.cache.def.impl.ItemDefinition
 import rs09.game.interaction.InteractionListener
@@ -13,7 +13,7 @@ class HatStand : InteractionListener() {
 
     override fun defineListeners() {
         onUseWith(SCENERY, hats, hat_stand){player, used, with ->
-            ContentAPI.sendDialogue(player, "It'd probably fall off if I tried to do that.")
+            sendDialogue(player, "It'd probably fall off if I tried to do that.")
             return@onUseWith true
         }
     }

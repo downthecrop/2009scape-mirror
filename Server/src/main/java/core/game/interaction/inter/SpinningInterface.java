@@ -1,6 +1,6 @@
 package core.game.interaction.inter;
 
-import api.ContentAPI;
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.ItemDefinition;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
@@ -45,8 +45,8 @@ public class SpinningInterface extends ComponentPlugin {
 			amt = p.getInventory().getAmount(new Item(spin.getNeed()));
 			break;
 		case 199:
-			ContentAPI.sendInputDialogue(p, true, "Enter the amount:", (value) -> {
-				ContentAPI.submitIndividualPulse(p, new SpinningPulse(p, new Item(spin.getNeed(), 1), (int) value, spin));
+			sendInputDialogue(p, true, "Enter the amount:", (value) -> {
+				submitIndividualPulse(p, new SpinningPulse(p, new Item(spin.getNeed(), 1), (int) value, spin));
 				return Unit.INSTANCE;
 			});
 			break;

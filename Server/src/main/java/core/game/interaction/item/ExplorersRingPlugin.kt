@@ -1,6 +1,6 @@
 package core.game.interaction.item
 
-import api.ContentAPI
+import api.*
 import core.Util
 import core.cache.def.impl.ItemDefinition
 import core.plugin.Initializable
@@ -36,28 +36,28 @@ class ExplorersRingPlugin : InteractionListener() {
         on(RINGS, ITEM, "run-replenish"){player, node ->
             val charges = getStoreFile().getInt(player.username.toLowerCase() + ":run")
             if (charges >= getRingLevel(node.id)) {
-                ContentAPI.sendMessage(player,"You have used all the charges you can for one day.")
+                sendMessage(player,"You have used all the charges you can for one day.")
                 return@on true
             }
             player.settings.updateRunEnergy(-50.0)
 
             getStoreFile()[player.username.toLowerCase() + ":run"] = charges + 1
 
-            ContentAPI.sendMessage(player,"You feel refreshed as the ring revitalises you and a charge is used up.")
-            ContentAPI.visualize(player, 9988, 1733)
+            sendMessage(player,"You feel refreshed as the ring revitalises you and a charge is used up.")
+            visualize(player, 9988, 1733)
             return@on true
         }
 
         on(RINGS, ITEM, "low-alchemy"){player, _ ->
-            if (!ContentAPI.hasLevelStat(player, Skills.MAGIC, 21)) {
-                ContentAPI.sendMessage(player,"You need a Magic level of 21 in order to do that.")
+            if (!hasLevelStat(player, Skills.MAGIC, 21)) {
+                sendMessage(player,"You need a Magic level of 21 in order to do that.")
                 return@on true
             }
             if(getStoreFile().getBoolean(player.username.toLowerCase() + ":alchs")){
-                ContentAPI.sendMessage(player, "You have claimed all the charges you can for one day.")
+                sendMessage(player, "You have claimed all the charges you can for one day.")
                 return@on true
             }
-            ContentAPI.sendMessage(player,"You grant yourself with 30 free low alchemy charges.") // todo this implementation is not correct, see https://www.youtube.com/watch?v=UbUIF2Kw_Dw
+            sendMessage(player,"You grant yourself with 30 free low alchemy charges.") // todo this implementation is not correct, see https://www.youtube.com/watch?v=UbUIF2Kw_Dw
 
             getStoreFile()[player.username.toLowerCase() + ":alchs"] = true
 
@@ -71,7 +71,7 @@ class ExplorersRingPlugin : InteractionListener() {
 
         on(RINGS, ITEM, "operate", "rub"){player, node ->
             if(getRingLevel(node.id) < 3){
-                ContentAPI.sendMessage(player, "This item can not be operated.")
+                sendMessage(player, "This item can not be operated.")
                 return@on true
             }
 
@@ -81,7 +81,7 @@ class ExplorersRingPlugin : InteractionListener() {
     }
 
     fun teleport(player: Player){
-        ContentAPI.teleport(player, CABBAGE_PORT, TeleportType.CABBAGE)
+        teleport(player, CABBAGE_PORT, TeleportType.CABBAGE)
     }
 
     fun getRingLevel(id: Int): Int{

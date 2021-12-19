@@ -1,6 +1,6 @@
 package rs09.worker
 
-import api.ContentAPI
+import api.*
 import core.game.system.task.Pulse
 import core.plugin.CorePluginTypes.Managers
 import gui.GuiEvent
@@ -50,16 +50,16 @@ class WorldClock {
 
                 ServerStore.clearDailyEntries()
                 if(ServerConstants.DAILY_RESTART) {
-                    ContentAPI.sendNews(colorize("%RSERVER GOING DOWN FOR DAILY RESTART IN 5 MINUTES!"))
+                    sendNews(colorize("%RSERVER GOING DOWN FOR DAILY RESTART IN 5 MINUTES!"))
                     ServerConstants.DAILY_RESTART = false
-                    ContentAPI.submitWorldPulse(object : Pulse(100) {
+                    submitWorldPulse(object : Pulse(100) {
                         var counter = 0
                         override fun pulse(): Boolean {
                             counter++
                             if (counter == 5) {
                                 exitProcess(0)
                             }
-                            ContentAPI.sendNews(colorize("%RSERVER GOING DOWN FOR DAILY RESTART IN ${5 - counter} MINUTE${if (counter < 4) "S" else ""}!"))
+                            sendNews(colorize("%RSERVER GOING DOWN FOR DAILY RESTART IN ${5 - counter} MINUTE${if (counter < 4) "S" else ""}!"))
                             return false
                         }
                     })

@@ -1,6 +1,6 @@
 package rs09.game.interaction.region.dungeons.brimhaven
 
-import api.ContentAPI
+import api.*
 import core.game.content.global.action.ClimbActionHandler
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
@@ -49,8 +49,8 @@ object BrimhavenUtils {
         val dir = AgilityHandler.forceWalk(player, -1, player.location, node.location, Animation.create(769), 10, 0.0, null).direction
         val loc = player.location
 
-        ContentAPI.registerLogoutListener(player, "steppingstone"){p ->
-            ContentAPI.teleport(p, loc)
+        registerLogoutListener(player, "steppingstone"){p ->
+            teleport(p, loc)
         }
 
         World.Pulser.submit(object : Pulse(3, player) {
@@ -73,7 +73,7 @@ object BrimhavenUtils {
             }
 
             override fun stop() {
-                ContentAPI.clearLogoutListener(player, "steppingstone")
+                clearLogoutListener(player, "steppingstone")
                 super.stop()
             }
         })
