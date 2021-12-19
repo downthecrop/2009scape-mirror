@@ -1,18 +1,18 @@
 package org.runite.client;
 
-final class Class140_Sub2 extends GameObject {
+final class PositionedGraphicObject extends GameObject {
 
    int anInt2703;
    private Class127_Sub1 aClass127_Sub1_2704;
    private int anInt2706 = 0;
    private final int anInt2708;
-   int anInt2710;
+   int y2710;
    private SequenceDefinition aClass142_2711;
    int anInt2712;
    static boolean aBoolean2713;
    private int anInt2715 = -32768;
-   int anInt2716;
-   int anInt2717;
+   int x2716;
+   int plane2717;
    boolean aBoolean2718;
    private int anInt2719 = 0;
 
@@ -35,7 +35,7 @@ final class Class140_Sub2 extends GameObject {
       }
    }
 
-   static void method1950(Class140_Sub4 var0) {
+   static void method1950(Entity var0) {
       try {
          int var2 = var0.anInt2800 - Class44.anInt719;
          int var3 = 128 * var0.anInt2784 - -(64 * var0.getSize());
@@ -45,7 +45,7 @@ final class Class140_Sub2 extends GameObject {
           }
 
           var0.xAxis += (-var0.xAxis + var3) / var2;
-          var0.zAxis += (var4 + -var0.zAxis) / var2;
+          var0.yAxis += (var4 + -var0.yAxis) / var2;
           if(var0.anInt2840 == 1) {
              var0.anInt2806 = 1536;
           }
@@ -174,7 +174,7 @@ final class Class140_Sub2 extends GameObject {
    }
 
    static void method1956(int var0, int var1, int var2, int var3) {
-      Class3_Sub2 var4 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2];
+      TileData var4 = TileData.aTileDataArrayArrayArray2638[var0][var1][var2];
       if(var4 != null) {
          Class19 var5 = var4.aClass19_2233;
          if(var5 != null) {
@@ -186,11 +186,11 @@ final class Class140_Sub2 extends GameObject {
 
    final void method1867(int var1, int var2, int var3, int var4, int var5) {}
 
-   Class140_Sub2(int var1, int var2, int var3, int var4, int var5, int var6, int var7) {
+   PositionedGraphicObject(int var1, int plane, int x, int y, int var5, int var6, int var7) {
       try {
-         this.anInt2710 = var4;
-         this.anInt2716 = var3;
-         this.anInt2717 = var2;
+         this.y2710 = y;
+         this.x2716 = x;
+         this.plane2717 = plane;
          this.anInt2703 = var7 + var6;
          this.anInt2708 = var1;
          this.anInt2712 = var5;
@@ -203,8 +203,30 @@ final class Class140_Sub2 extends GameObject {
          }
 
       } catch (RuntimeException var9) {
-         throw ClientErrorException.clientError(var9, "bh.<init>(" + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ')');
+         throw ClientErrorException.clientError(var9, "bh.<init>(" + var1 + ',' + plane + ',' + x + ',' + y + ',' + var5 + ',' + var6 + ',' + var7 + ')');
       }
    }
 
+    public static void method2067() {
+        try {
+            for (Class3_Sub28_Sub2 var1 = (Class3_Sub28_Sub2) TextureOperation17.aLinkedList_3177.startIteration(); null != var1; var1 = (Class3_Sub28_Sub2) TextureOperation17.aLinkedList_3177.nextIteration()) {
+                PositionedGraphicObject var2 = var1.aPositionedGraphicObject_3545;
+                if (WorldListCountry.localPlane == var2.plane2717 && !var2.aBoolean2718) {
+                    if (Class44.anInt719 >= var2.anInt2703) {
+                        var2.method1955(Class106.anInt1446);
+                        if (var2.aBoolean2718) {
+                            var1.unlink();
+                        } else {
+                            Class20.method907(var2.plane2717, var2.x2716, var2.y2710, var2.anInt2712, 60, var2, 0, -1L, false);
+                        }
+                    }
+                } else {
+                    var1.unlink();
+                }
+            }
+
+        } catch (RuntimeException var3) {
+            throw ClientErrorException.clientError(var3, "u.G(" + false + ')');
+        }
+    }
 }

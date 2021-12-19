@@ -89,8 +89,8 @@ final class InterfaceWidget extends Node {
                }
 
                Class7.anInt2162 = -1 * (int)var3[1];
-               NPC.anInt3995 = (int)var3[0] + -(128 * Class131.anInt1716);
-               Class77.anInt1111 = (int)var3[2] + -(Texture.anInt1152 * 128);
+               NPC.anInt3995 = (int)var3[0] + -(128 * Class131.x1716);
+               Class77.anInt1111 = (int)var3[2] + -(Texture.y1152 * 128);
                float[] var16 = new float[3];
                var6 = Class39.anInt670 * 2;
 
@@ -131,7 +131,7 @@ final class InterfaceWidget extends Node {
 
    static AbstractIndexedSprite a(int var0, CacheIndex var1) {
       try {
-         return !Class140_Sub7.method2029((byte)-127, var1, var0)?null:(Class166.method2259());
+         return !GroundItem.method2029((byte)-127, var1, var0)?null:(Class166.method2259());
       } catch (RuntimeException var4) {
          throw ClientErrorException.clientError(var4, "da.C(" + var0 + ',' + (var1 != null?"{...}":"null") + ',' + true + ')');
       }
@@ -157,7 +157,7 @@ final class InterfaceWidget extends Node {
       try {
          MapSceneDefinition var2 = (MapSceneDefinition) TextureOperation25.aReferenceCache_3412.get(var0);
          if(var2 == null) {
-            byte[] var3 = Class107.aClass153_878.getFile(34, var0);
+            byte[] var3 = Class107.configurationsIndex_878.getFile(34, var0);
 
             var2 = new MapSceneDefinition();
             if(var3 != null) {

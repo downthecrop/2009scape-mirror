@@ -159,7 +159,7 @@ object XPGainDraw {
     fun getSprite(archiveIndex: Int): AbstractSprite? {
         var rawSprite: AbstractSprite? = null
         if(CacheIndex.spritesIndex.retrieveSpriteFile(archiveIndex)){
-            rawSprite = Unsorted.method562(CacheIndex.spritesIndex, archiveIndex)
+            rawSprite = Unsorted.loadSoftwareSprite(CacheIndex.spritesIndex, archiveIndex)
             if(HDToolKit.highDetail){
                 if(rawSprite is Class3_Sub28_Sub16_Sub2_Sub1){
                     rawSprite = Class3_Sub28_Sub16_Sub1_Sub1(rawSprite as SoftwareSprite)

@@ -30,11 +30,11 @@ class TextureOperation39 extends TextureOperation {
          var8.anInt326 = var3;
          var8.aLong328 = var5;
          var8.aBoolean329 = var7;
-         if(Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2] == null) {
-            Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2] = new Class3_Sub2(var0, var1, var2);
+         if(TileData.aTileDataArrayArrayArray2638[var0][var1][var2] == null) {
+            TileData.aTileDataArrayArrayArray2638[var0][var1][var2] = new TileData(var0, var1, var2);
          }
 
-         Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2].aClass12_2230 = var8;
+         TileData.aTileDataArrayArrayArray2638[var0][var1][var2].aClass12_2230 = var8;
       }
    }
 
@@ -65,7 +65,7 @@ class TextureOperation39 extends TextureOperation {
             if(this.anInt3278 < 0) {
                return false;
             } else {
-               SoftwareSprite var3 = Texture.anInt1668 < 0 ? Unsorted.method1537(WaterfallShader.aClass153_2172, this.anInt3278):Class40.method1043(this.anInt3278, WaterfallShader.aClass153_2172, Texture.anInt1668);
+               SoftwareSprite var3 = Texture.anInt1668 < 0 ? Unsorted.method1537(WaterfallShader.spritesIndex_probably_2172, this.anInt3278):Class40.method1043(this.anInt3278, WaterfallShader.spritesIndex_probably_2172, Texture.anInt1668);
                Objects.requireNonNull(var3).method665();
                this.anInt3283 = var3.height;
                this.anInt3280 = var3.width;
@@ -107,7 +107,7 @@ class TextureOperation39 extends TextureOperation {
          var13.anInt2268 = var7;
          var13.anInt2272 = var0;
          var13.anInt2278 = var9;
-         Unsorted.aLinkedList_2468.method1215(var13);
+         Unsorted.aLinkedList_2468.pushBack(var13);
       } catch (RuntimeException var14) {
          throw ClientErrorException.clientError(var14, "nh.V(" + var0 + ',' + var1 + ',' + var2 + ',' + var3 + ',' + var4 + ',' + var5 + ',' + var6 + ',' + var7 + ',' + var8 + ',' + var9 + ',' + -745213428 + ',' + var11 + ',' + var12 + ')');
       }

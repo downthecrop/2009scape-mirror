@@ -52,11 +52,6 @@ final class Class157 {
         }
     }
 
-    static long method2174(int var0, int var1, int var2) {
-        Class3_Sub2 var3 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2];
-        return var3 != null && var3.aClass70_2234 != null ? var3.aClass70_2234.aLong1048 : 0L;
-    }
-
     static SoftwareSprite[] method2176(int var0, CacheIndex var1) {
         try {
             //System.out.println("Class 157 " + var2);
@@ -75,7 +70,7 @@ final class Class157 {
             SoftwareSprite[] var1 = new SoftwareSprite[Class95.anInt1338];
 
             for (int var2 = 0; Class95.anInt1338 > var2; ++var2) {
-                int var3 = Unsorted.anIntArray3076[var2] * Class140_Sub7.anIntArray2931[var2];
+                int var3 = Unsorted.anIntArray3076[var2] * GroundItem.anIntArray2931[var2];
                 byte[] var4 = Class163_Sub1.aByteArrayArray2987[var2];
                 int[] var5 = new int[var3];
 
@@ -83,7 +78,7 @@ final class Class157 {
                     var5[var6] = TextureOperation38.spritePalette[Unsorted.bitwiseAnd(255, var4[var6])];
                 }
 
-                var1[var2] = new SoftwareSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], Class140_Sub7.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var5);
+                var1[var2] = new SoftwareSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], GroundItem.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var5);
             }
 
             Class39.method1035((byte) 113);

@@ -42,8 +42,8 @@ public final class Class3_Sub15 extends Linkable {
     static Class3_Sub28_Sub3 method371(RSString var1) {
         try {
 
-            for (Class3_Sub28_Sub3 var2 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.method1222(); var2 != null; var2 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.method1221()) {
-                if (var2.aClass94_3561.equalsString(var1)) {
+            for (Class3_Sub28_Sub3 var2 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.startIteration(); var2 != null; var2 = (Class3_Sub28_Sub3) Class134.aLinkedList_1758.nextIteration()) {
+                if (var2.aString_3561.equalsString(var1)) {
                     return var2;
                 }
             }
@@ -125,7 +125,7 @@ public final class Class3_Sub15 extends Linkable {
                         Class91 var19 = null;
                         if (!var1) {
                             int var20 = var13;
-                            if ((2 & Unsorted.aByteArrayArrayArray113[1][var17][var18]) == 2) {
+                            if ((2 & Unsorted.sceneryTypeMaskGrid[1][var17][var18]) == 2) {
                                 var20 = var13 - 1;
                             }
 
@@ -134,7 +134,7 @@ public final class Class3_Sub15 extends Linkable {
                             }
                         }
 
-                        Class110.method1683(var13 % 4, !var1, var13, var1, var19, objectId, var15, var17, var18, var16);
+                        Scenery.method1683(var13 % 4, !var1, var13, var1, var19, objectId, var15, var17, var18, var16);
                     }
                 }
             }

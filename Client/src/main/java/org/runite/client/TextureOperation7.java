@@ -6,7 +6,7 @@ import java.util.Objects;
 
 final class TextureOperation7 extends TextureOperation {
 
-   static RSString[] aClass94Array3341 = new RSString[100];
+   static RSString[] aStringArray3341 = new RSString[100];
    static int anInt3342;
    private int anInt3343 = 6;
 
@@ -242,9 +242,9 @@ final class TextureOperation7 extends TextureOperation {
                   --Class8.anInt104;
 
                   for(int var4 = var3; var4 < Class8.anInt104; ++var4) {
-                     Class70.aClass94Array1046[var4] = Class70.aClass94Array1046[var4 - -1];
+                     Class70.aStringArray1046[var4] = Class70.aStringArray1046[var4 - -1];
                      Unsorted.anIntArray882[var4] = Unsorted.anIntArray882[var4 + 1];
-                     Unsorted.aClass94Array2566[var4] = Unsorted.aClass94Array2566[1 + var4];
+                     Unsorted.aStringArray2566[var4] = Unsorted.aStringArray2566[1 + var4];
                      Class50.aLongArray826[var4] = Class50.aLongArray826[1 + var4];
                      Class57.anIntArray904[var4] = Class57.anIntArray904[var4 - -1];
                      Unsorted.aBooleanArray73[var4] = Unsorted.aBooleanArray73[1 + var4];
@@ -258,7 +258,7 @@ final class TextureOperation7 extends TextureOperation {
             }
 
             if(var2 != 1) {
-               aClass94Array3341 = null;
+               aStringArray3341 = null;
             }
 
          }
@@ -569,8 +569,8 @@ final class TextureOperation7 extends TextureOperation {
          }
 
          TextureOperation12.outgoingBuffer.writeByte128(ObjectDefinition.aBooleanArray1490[82]?1:0);
-         TextureOperation12.outgoingBuffer.writeShort(Class131.anInt1716 + var4);
-         TextureOperation12.outgoingBuffer.putShortA(Texture.anInt1152 + var5);
+         TextureOperation12.outgoingBuffer.writeShort(Class131.x1716 + var4);
+         TextureOperation12.outgoingBuffer.putShortA(Texture.y1152 + var5);
          Class45.anInt733 = Class45.anIntArray729[0];
          Class65.anInt987 = TextureOperation38.anIntArray3456[0];
 
@@ -594,7 +594,7 @@ final class TextureOperation7 extends TextureOperation {
          }
 
          if(!true) {
-            TextCore.aClass94_3339 = null;
+            TextCore.aString_3339 = null;
          }
 
       } catch (RuntimeException var5) {

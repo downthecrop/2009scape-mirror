@@ -8,7 +8,6 @@ public final class Class65 {
     static LinkedList aLinkedList_983 = new LinkedList();
     static DataBuffer[] aClass3_Sub30Array986 = new DataBuffer[2048];
     public static int anInt987 = 0;
-    static int currentChunkX;
     static int anInt991 = -1;
     static AbstractSprite[] aAbstractSpriteArray1825;
 
@@ -158,12 +157,12 @@ public final class Class65 {
             Sprites.nameIconsSpriteArray = null;
             Class157.aClass3_Sub28_Sub17_Sub1_2000 = null;
             Sprites.aSoftwareSpriteArray2140 = null;
-            Class140_Sub4.aAbstractSpriteArray2839 = null;
+            Entity.aAbstractSpriteArray2839 = null;
             Class129_Sub1.aAbstractSpriteArray2690 = null;
             NPC.aAbstractSpriteArray3977 = null;
             FontType.bold = null;
             Class57.aAbstractSprite_895 = null;
-            Unsorted.aAbstractSpriteArray1136 = null;
+            Unsorted.minimapDotSprites = null;
             FontType.smallFont = null;
             Class45.aAbstractSprite_736 = null;
             Unsorted.aAbstractSpriteArray996 = null;

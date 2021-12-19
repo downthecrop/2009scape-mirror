@@ -21,11 +21,11 @@ final class Class3_Sub8 extends Linkable {
    static void method124(int var0, int var1, int var2) {
       try {
          if(var0 <= 23) {
-            TextCore.aClass94_2306 = null;
+            TextCore.aString_2306 = null;
          }
 
          if(Unsorted.loadInterface(var2)) {
-            Unsorted.method75(GameObject.aClass11ArrayArray1834[var2], var1);
+            Unsorted.method75(GameObject.interfaces1834[var2], var1);
          }
       } catch (RuntimeException var4) {
          throw ClientErrorException.clientError(var4, "ed.A(" + var0 + ',' + var1 + ',' + var2 + ')');

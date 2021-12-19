@@ -7,7 +7,7 @@ public final class ClientErrorException extends RuntimeException {
    static int anInt2115 = -1;
    String aString2117;
    Throwable aThrowable2118;
-   static RSString[] aClass94Array2119 = null;
+   static RSString[] aStringArray2119 = null;
    static int anInt2120 = 0;
    static String worldListHost;
 
@@ -16,7 +16,7 @@ public final class ClientErrorException extends RuntimeException {
       try {
          LinkableRSString.anInt2587 = var1;
          TextureOperation9.anInt3103 = var5;
-         Class140_Sub7.anInt2938 = var0;
+         GroundItem.anInt2938 = var0;
          Unsorted.anInt144 = var3;
          Unsorted.anInt3695 = var2;
       } catch (RuntimeException var7) {

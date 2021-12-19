@@ -16,7 +16,7 @@ final class KeyboardListener implements KeyListener, FocusListener {
    static ReferenceCache aReferenceCache_1911 = new ReferenceCache(260);
    static int loginThemeSongArchiveID;
    static int anInt1914;
-   static CacheIndex aClass153_1916;
+   static CacheIndex spritesIndex_1916;
    static int anInt1918 = 0;
     static int anInt2384 = 0;
     static int[] anIntArray1978 = new int[128];

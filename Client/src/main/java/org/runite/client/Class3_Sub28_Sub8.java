@@ -18,8 +18,8 @@ final class Class3_Sub28_Sub8 extends Node {
 
    static void method574(NPC var0) {
       try {
-         for(Class3_Sub9 var2 = (Class3_Sub9) Unsorted.aLinkedList_1242.method1222(); var2 != null; var2 = (Class3_Sub9) Unsorted.aLinkedList_1242.method1221()) {
-            if(var0 == var2.aClass140_Sub4_Sub2_2324) {
+         for(Class3_Sub9 var2 = (Class3_Sub9) Unsorted.aLinkedList_1242.startIteration(); var2 != null; var2 = (Class3_Sub9) Unsorted.aLinkedList_1242.nextIteration()) {
+            if(var0 == var2.aEntity_Sub2_2324) {
                if(var2.aClass3_Sub24_Sub1_2312 != null) {
                   Class3_Sub26.aClass3_Sub24_Sub2_2563.method461(var2.aClass3_Sub24_Sub1_2312);
                   var2.aClass3_Sub24_Sub1_2312 = null;
@@ -41,7 +41,7 @@ final class Class3_Sub28_Sub8 extends Node {
             method575(null, -38);
          }
 
-         Class3_Sub23.aClass153_2536 = var0;
+         Class3_Sub23.configurationsIndex_2536 = var0;
       } catch (RuntimeException var3) {
          throw ClientErrorException.clientError(var3, "hc.C(" + (var0 != null?"{...}":"null") + ',' + var1 + ')');
       }
@@ -53,7 +53,7 @@ final class Class3_Sub28_Sub8 extends Node {
             return -1;
          } else {
             for (int var2 = 0; var2 < Class119.aClass131_1624.anInt1720; ++var2) {
-               if (Class119.aClass131_1624.aClass94Array1721[var2].method1560(RSString.parse(" "), TextCore.aClass94_4066).equalsString(var0)) {
+               if (Class119.aClass131_1624.aStringArray1721[var2].method1560(RSString.parse(" "), TextCore.aString_4066).equalsString(var0)) {
                   return var2;
                }
             }
@@ -88,12 +88,12 @@ final class Class3_Sub28_Sub8 extends Node {
          var12.anInt426 = var9;
 
          for(int var13 = var0; var13 >= 0; --var13) {
-            if(Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var13][var1][var2] == null) {
-               Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var13][var1][var2] = new Class3_Sub2(var13, var1, var2);
+            if(TileData.aTileDataArrayArrayArray2638[var13][var1][var2] == null) {
+               TileData.aTileDataArrayArrayArray2638[var13][var1][var2] = new TileData(var13, var1, var2);
             }
          }
 
-         Class75_Sub2.aClass3_Sub2ArrayArrayArray2638[var0][var1][var2].aClass19_2233 = var12;
+         TileData.aTileDataArrayArrayArray2638[var0][var1][var2].aClass19_2233 = var12;
       }
    }
 

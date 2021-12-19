@@ -1063,7 +1063,7 @@ public final class RSString implements Interface3 {
     final RSString method1579() {
         try {
             RSString var2 = Unsorted.method1052(this.toLong());
-            return null == var2 ? TextCore.aClass94_1760 : var2;
+            return null == var2 ? TextCore.aString_1760 : var2;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "na.Q(" + -17 + ')');
         }

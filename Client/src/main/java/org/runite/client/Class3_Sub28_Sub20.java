@@ -14,7 +14,7 @@ final class Class3_Sub28_Sub20 extends Node {
    private float aFloat3782;
    private final int anInt3783;
    private final int anInt3784;
-   static CacheIndex aClass153_3786;
+   static CacheIndex soundFX2Index_3786;
    private final boolean aBoolean3787;
    private final int anInt3788;
    private final boolean aBoolean3789;
@@ -310,12 +310,12 @@ final class Class3_Sub28_Sub20 extends Node {
                }
 
                if(1 == Class133.anInt1753) {
-                  if((4 & Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][Class102.player.xAxis >> 7][Class102.player.zAxis >> 7]) != 0) {
-                     Class140_Sub7.method2031((byte)-85, false, Class102.player.xAxis >> 7, Class102.player.zAxis >> 7, Class75_Sub2.aClass3_Sub2ArrayArrayArray2638, 0);
+                  if((4 & Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][Class102.player.xAxis >> 7][Class102.player.yAxis >> 7]) != 0) {
+                     GroundItem.method2031((byte)-85, false, Class102.player.xAxis >> 7, Class102.player.yAxis >> 7, TileData.aTileDataArrayArrayArray2638, 0);
                   }
 
                   if(Class139.anInt1823 < 310) {
-                     int var7 = Class102.player.zAxis >> 7;
+                     int var7 = Class102.player.yAxis >> 7;
                      var5 = Class77.anInt1111 >> 7;
                      int var9;
                      if(var5 < var7) {
@@ -346,8 +346,8 @@ final class Class3_Sub28_Sub20 extends Node {
                               ++var4;
                            }
 
-                           if((Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][var4][var5] & 4) != 0) {
-                              Class140_Sub7.method2031((byte)-29, false, var4, var5, Class75_Sub2.aClass3_Sub2ArrayArrayArray2638, 1);
+                           if((Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][var4][var5] & 4) != 0) {
+                              GroundItem.method2031((byte)-29, false, var4, var5, TileData.aTileDataArrayArrayArray2638, 1);
                               break;
                            }
 
@@ -362,8 +362,8 @@ final class Class3_Sub28_Sub20 extends Node {
                               }
 
                               var11 -= 65536;
-                              if((4 & Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][var4][var5]) != 0) {
-                                 Class140_Sub7.method2031((byte)-120, false, var4, var5, Class75_Sub2.aClass3_Sub2ArrayArrayArray2638, 1);
+                              if((4 & Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][var4][var5]) != 0) {
+                                 GroundItem.method2031((byte)-120, false, var4, var5, TileData.aTileDataArrayArrayArray2638, 1);
                                  break;
                               }
                            }
@@ -379,8 +379,8 @@ final class Class3_Sub28_Sub20 extends Node {
                               --var5;
                            }
 
-                           if((4 & Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][var4][var5]) != 0) {
-                              Class140_Sub7.method2031((byte)-13, false, var4, var5, Class75_Sub2.aClass3_Sub2ArrayArrayArray2638, 1);
+                           if((4 & Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][var4][var5]) != 0) {
+                              GroundItem.method2031((byte)-13, false, var4, var5, TileData.aTileDataArrayArrayArray2638, 1);
                               break;
                            }
 
@@ -393,8 +393,8 @@ final class Class3_Sub28_Sub20 extends Node {
                               }
 
                               var11 -= 65536;
-                              if((4 & Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][var4][var5]) != 0) {
-                                 Class140_Sub7.method2031((byte)-37, false, var4, var5, Class75_Sub2.aClass3_Sub2ArrayArrayArray2638, 1);
+                              if((4 & Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][var4][var5]) != 0) {
+                                 GroundItem.method2031((byte)-37, false, var4, var5, TileData.aTileDataArrayArrayArray2638, 1);
                                  break;
                               }
                            }
@@ -402,9 +402,9 @@ final class Class3_Sub28_Sub20 extends Node {
                      }
                   }
                } else {
-                  var4 = Class121.method1736(WorldListCountry.localPlane, 1, NPC.anInt3995, Class77.anInt1111);
-                  if(800 > var4 + -Class7.anInt2162 && (4 & Unsorted.aByteArrayArrayArray113[WorldListCountry.localPlane][NPC.anInt3995 >> 7][Class77.anInt1111 >> 7]) != 0) {
-                     Class140_Sub7.method2031((byte)-107, false, NPC.anInt3995 >> 7, Class77.anInt1111 >> 7, Class75_Sub2.aClass3_Sub2ArrayArrayArray2638, 1);
+                  var4 = Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, NPC.anInt3995, Class77.anInt1111);
+                  if(800 > var4 + -Class7.anInt2162 && (4 & Unsorted.sceneryTypeMaskGrid[WorldListCountry.localPlane][NPC.anInt3995 >> 7][Class77.anInt1111 >> 7]) != 0) {
+                     GroundItem.method2031((byte)-107, false, NPC.anInt3995 >> 7, Class77.anInt1111 >> 7, TileData.aTileDataArrayArrayArray2638, 1);
                   }
                }
 

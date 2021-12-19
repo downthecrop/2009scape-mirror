@@ -170,15 +170,15 @@ public final class NPCRendering {
                            var3.anInt2785 = 0;
                        }
 
-                       var3.method1967(var3.getSize(), Class102.player.anIntArray2767[0] + var8, var7 + Class102.player.anIntArray2755[0], var4 == 1);
+                       var3.updateAnimationPosition(var3.getSize(), Class102.player.xOffsets2767[0] + var8, var7 + Class102.player.yOffsets2755[0], var4 == 1);
                        if (var3.definition.method1474()) {
-                           Class70.method1286(var3.anIntArray2755[0], null, 0, var3, var3.anIntArray2767[0], WorldListCountry.localPlane, null);
+                           Class70.method1286(var3.yOffsets2755[0], null, 0, var3, var3.xOffsets2767[0], WorldListCountry.localPlane, null);
                        }
                        continue;
                    }
                }
 
-               BufferedDataStream.incomingBuffer.method818();
+               BufferedDataStream.incomingBuffer.setByteAccess();
 
                return;
            }
@@ -264,7 +264,7 @@ public final class NPCRendering {
                            if (var8 != -1) {
                                SequenceDefinition var9 = SequenceDefinition.getAnimationDefinition(var8);
                                if (var9.frames != null) {
-                                   Unsorted.method1470(npc.zAxis, var9, npc.xAxis, false, 0);
+                                   Unsorted.method1470(npc.yAxis, var9, npc.xAxis, false, 0);
                                }
                            }
                        }
@@ -281,7 +281,7 @@ public final class NPCRendering {
                    npc.setSize(npc.definition.size, 2);
                    npc.renderAnimationId = npc.definition.renderAnimationId;
                    if (npc.definition.method1474()) {
-                       Class70.method1286(npc.anIntArray2755[0], null, 0, npc, npc.anIntArray2767[0], WorldListCountry.localPlane, null);
+                       Class70.method1286(npc.yOffsets2755[0], null, 0, npc, npc.xOffsets2767[0], WorldListCountry.localPlane, null);
                    }
                }
 

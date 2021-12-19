@@ -6,7 +6,7 @@ final class Class17 {
     static int anInt410;
     static Class64 aClass64_413;
 
-    static void method904(int var0, Class140_Sub4 var1) {
+    static void method904(int var0, Entity var1) {
         try {
             if (var1.anInt2779 != 0) {
                 RenderAnimationDefinition var2 = var1.getRenderAnimationType();
@@ -15,7 +15,7 @@ final class Class17 {
                 if (var1.anInt2772 != -1 && 32768 > var1.anInt2772) {
                     NPC var3 = NPC.npcs[var1.anInt2772];
                     if (var3 != null) {
-                        var5 = -var3.zAxis + var1.zAxis;
+                        var5 = -var3.yAxis + var1.yAxis;
                         var4 = -var3.xAxis + var1.xAxis;
                         if (0 != var4 || 0 != var5) {
                             var1.anInt2806 = (int) (Math.atan2(var4, var5) * 325.949D) & 0x7FF;
@@ -33,7 +33,7 @@ final class Class17 {
 
                     Player var10 = Unsorted.players[var9];
                     if (null != var10) {
-                        var6 = -var10.zAxis + var1.zAxis;
+                        var6 = -var10.yAxis + var1.yAxis;
                         var5 = -var10.xAxis + var1.xAxis;
                         if (var5 != 0 || var6 != 0) {
                             var1.anInt2806 = (int) (Math.atan2(var5, var6) * 325.949D) & 0x7FF;
@@ -42,8 +42,8 @@ final class Class17 {
                 }
 
                 if ((0 != var1.anInt2786 || 0 != var1.anInt2762) && (var1.anInt2816 == 0 || var1.anInt2824 > 0)) {
-                    var9 = var1.xAxis + -((-Class131.anInt1716 + (var1.anInt2786 - Class131.anInt1716)) * 64);
-                    var4 = -((-Texture.anInt1152 + (var1.anInt2762 - Texture.anInt1152)) * 64) + var1.zAxis;
+                    var9 = var1.xAxis + -((-Class131.x1716 + (var1.anInt2786 - Class131.x1716)) * 64);
+                    var4 = -((-Texture.y1152 + (var1.anInt2762 - Texture.y1152)) * 64) + var1.yAxis;
                     if (var9 != 0 || var4 != 0) {
                         var1.anInt2806 = (int) (Math.atan2(var9, var4) * 325.949D) & 0x7FF;
                     }

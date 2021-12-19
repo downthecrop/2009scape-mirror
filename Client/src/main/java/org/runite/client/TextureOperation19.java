@@ -6,7 +6,7 @@ import java.util.Objects;
 
 final class TextureOperation19 extends TextureOperation {
 
-   static CacheIndex aClass153_3214;
+   static CacheIndex graphicFXIndex_3214;
    static int[][] anIntArrayArray3215 = new int[][]{{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 0, 0, 0, 1, 1, 0, 0, 1, 1, 1, 0, 1, 1, 1, 1}, {1, 1, 0, 0, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0}, {0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 0, 1, 0, 0, 0, 1}, {0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1}, {1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0, 1, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0}, {1, 1, 1, 1, 1, 1, 1, 1, 0, 1, 1, 1, 0, 0, 1, 1}, {1, 1, 1, 1, 1, 1, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 0, 1, 1, 1}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 1, 0, 1, 1, 1, 1}};
    private int anInt3217 = 32768;
    static int[] anIntArray3218 = new int[]{1, 4};
@@ -81,7 +81,7 @@ final class TextureOperation19 extends TextureOperation {
    final int[][] method166(int var2) {
       try {
          if(-1 != -1) {
-            aClass153_3214 = null;
+            graphicFXIndex_3214 = null;
          }
 
          int[][] var3 = this.aClass97_2376.method1594((byte)4, var2);
@@ -160,7 +160,7 @@ final class TextureOperation19 extends TextureOperation {
 
          for(int var2 = 0; var2 < 104; ++var2) {
             for(int var3 = 0; var3 < 104; ++var3) {
-               if(Class140_Sub7.method2031((byte)-106, true, var2, var3, Class75_Sub2.aClass3_Sub2ArrayArrayArray2638, var1)) {
+               if(GroundItem.method2031((byte)-106, true, var2, var3, TileData.aTileDataArrayArrayArray2638, var1)) {
                   ++var1;
                }
 

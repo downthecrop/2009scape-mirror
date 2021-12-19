@@ -69,7 +69,7 @@ public final class AudioThread implements Runnable {
             }
 
             for (int var2 = 0; var2 < Class95.anInt1338; ++var2) {
-                int var3 = Class140_Sub7.anIntArray2931[var2] * Unsorted.anIntArray3076[var2];
+                int var3 = GroundItem.anIntArray2931[var2] * Unsorted.anIntArray3076[var2];
                 byte[] var4 = Class163_Sub1.aByteArrayArray2987[var2];
                 int[] var5 = new int[var3];
 
@@ -78,9 +78,9 @@ public final class AudioThread implements Runnable {
                 }
 
                 if (HDToolKit.highDetail) {
-                    var1[var2] = new HDSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], Class140_Sub7.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var5);
+                    var1[var2] = new HDSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], GroundItem.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var5);
                 } else {
-                    var1[var2] = new SoftwareSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], Class140_Sub7.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var5);
+                    var1[var2] = new SoftwareSprite(Class3_Sub15.anInt2426, Class133.anInt1748, Class164.anIntArray2048[var2], Unsorted.anIntArray2591[var2], GroundItem.anIntArray2931[var2], Unsorted.anIntArray3076[var2], var5);
                 }
             }
 
@@ -101,7 +101,7 @@ public final class AudioThread implements Runnable {
             int var7 = Class3_Sub28_Sub5.aCalendar3581.get(Calendar.HOUR_OF_DAY);
             int var8 = Class3_Sub28_Sub5.aCalendar3581.get(Calendar.MINUTE);
             int var9 = Class3_Sub28_Sub5.aCalendar3581.get(Calendar.SECOND);
-            return RSString.stringCombiner(new RSString[]{TextCore.DaysOfTheWeek[var3 + -1], RSString.parse(")1 "), RSString.stringAnimator(var4 / 10), RSString.stringAnimator(var4 % 10), TextCore.aClass94_2025, TextCore.MonthsOfTheYear[var5], TextCore.aClass94_2025, RSString.stringAnimator(var6), RSString.parse(" "), RSString.stringAnimator(var7 / 10), RSString.stringAnimator(var7 % 10), RSString.parse(":"), RSString.stringAnimator(var8 / 10), RSString.stringAnimator(var8 % 10), RSString.parse(":"), RSString.stringAnimator(var9 / 10), RSString.stringAnimator(var9 % 10), RSString.parse(" GMT")});
+            return RSString.stringCombiner(new RSString[]{TextCore.DaysOfTheWeek[var3 + -1], RSString.parse(")1 "), RSString.stringAnimator(var4 / 10), RSString.stringAnimator(var4 % 10), TextCore.aString_2025, TextCore.MonthsOfTheYear[var5], TextCore.aString_2025, RSString.stringAnimator(var6), RSString.parse(" "), RSString.stringAnimator(var7 / 10), RSString.stringAnimator(var7 % 10), RSString.parse(":"), RSString.stringAnimator(var8 / 10), RSString.stringAnimator(var8 % 10), RSString.parse(":"), RSString.stringAnimator(var9 / 10), RSString.stringAnimator(var9 % 10), RSString.parse(" GMT")});
         } catch (RuntimeException var10) {
             throw ClientErrorException.clientError(var10, "cj.F(" + var0 + ')');
         }

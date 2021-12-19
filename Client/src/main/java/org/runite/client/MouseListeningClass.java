@@ -27,36 +27,6 @@ public final class MouseListeningClass implements MouseListener, MouseMotionList
         }
     }
 
-    static void method2087() {
-        try {
-            Class3_Sub4 var1 = (Class3_Sub4) TextureOperation26.aLinkedList_3075.method1222();
-            for (; var1 != null; var1 = (Class3_Sub4) TextureOperation26.aLinkedList_3075.method1221()) {
-                if (var1.anInt2259 > 0) {
-                    var1.anInt2259 -= 1;
-                }
-                if (var1.anInt2259 != 0) {
-                    if (var1.anInt2261 > 0) {
-                        var1.anInt2261 -= 1;
-                    }
-                    if ((var1.anInt2261 == 0) && (1 <= var1.anInt2264) && (1 <= var1.anInt2248) && (102 >= var1.anInt2264) && (var1.anInt2248 <= 102) && ((var1.anInt2265 < 0) || (Unsorted.method590((byte) -34, var1.anInt2265, var1.anInt2262)))) {
-                        Unsorted.method1048(var1.anInt2265, var1.anInt2264, var1.anInt2250, var1.anInt2256, var1.anInt2248, -65, var1.anInt2262, var1.anInt2263);
-                        var1.anInt2261 = -1;
-                        if ((var1.anInt2265 == var1.anInt2254) && (var1.anInt2254 == -1)) {
-                            var1.unlink();
-                        } else if ((var1.anInt2254 == var1.anInt2265) && (var1.anInt2256 == var1.anInt2257) && (var1.anInt2262 == var1.anInt2253)) {
-                            var1.unlink();
-                        }
-                    }
-                } else if ((var1.anInt2254 < 0) || (Unsorted.method590((byte) -66, var1.anInt2254, var1.anInt2253))) {
-                    Unsorted.method1048(var1.anInt2254, var1.anInt2264, var1.anInt2250, var1.anInt2257, var1.anInt2248, -71, var1.anInt2253, var1.anInt2263);
-                    var1.unlink();
-                }
-            }
-        } catch (RuntimeException var3) {
-            throw ClientErrorException.clientError(var3, "ug.A(" + (byte) -82 + ')');
-        }
-    }
-
     public final synchronized void focusLost(FocusEvent var1) {
         try {
             if (Unsorted.aClass149_4047 != null) {

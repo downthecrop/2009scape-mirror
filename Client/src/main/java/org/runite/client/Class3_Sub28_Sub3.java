@@ -8,14 +8,14 @@ final class Class3_Sub28_Sub3 extends Node {
    int anInt3550;
    static RSInterface aClass11_3551;
    boolean aBoolean3553;
-   RSString aClass94_3554;
+   RSString aString_3554;
    int anInt3555 = 12800;
    int anInt3556;
    static int anInt3557 = 0;
    int anInt3558;
    int anInt3559 = 0;
    LinkedList aLinkedList_3560;
-   RSString aClass94_3561;
+   RSString aString_3561;
    int anInt3562 = 12800;
    int anInt3563;
    static int anInt3564 = 0;
@@ -24,7 +24,7 @@ final class Class3_Sub28_Sub3 extends Node {
    final boolean method537(int var1, int var3) {
       try {
          if(var3 >= this.anInt3555 && var3 <= this.anInt3559 && var1 >= this.anInt3562 && var1 <= this.anInt3549) {
-            for(Class3_Sub21 var4 = (Class3_Sub21)this.aLinkedList_3560.method1222(); var4 != null; var4 = (Class3_Sub21)this.aLinkedList_3560.method1221()) {
+            for(Class3_Sub21 var4 = (Class3_Sub21)this.aLinkedList_3560.startIteration(); var4 != null; var4 = (Class3_Sub21)this.aLinkedList_3560.nextIteration()) {
                if(var4.method393(var1, var3)) {
                   return true;
                }
@@ -45,7 +45,7 @@ final class Class3_Sub28_Sub3 extends Node {
          this.anInt3549 = 0;
          this.anInt3555 = 12800;
 
-         for(Class3_Sub21 var2 = (Class3_Sub21)this.aLinkedList_3560.method1222(); null != var2; var2 = (Class3_Sub21)this.aLinkedList_3560.method1221()) {
+         for(Class3_Sub21 var2 = (Class3_Sub21)this.aLinkedList_3560.startIteration(); null != var2; var2 = (Class3_Sub21)this.aLinkedList_3560.nextIteration()) {
             if(this.anInt3562 > var2.anInt2494) {
                this.anInt3562 = var2.anInt2494;
             }
@@ -113,7 +113,7 @@ final class Class3_Sub28_Sub3 extends Node {
 
          Class99.aShortArray1398 = var3;
          Unsorted.anInt952 = var4;
-         Class140_Sub4.anInt2756 = 0;
+         Entity.anInt2756 = 0;
          RSString[] var13 = new RSString[Unsorted.anInt952];
 
          for(int var14 = 0; Unsorted.anInt952 > var14; ++var14) {
@@ -154,8 +154,8 @@ final class Class3_Sub28_Sub3 extends Node {
          this.anInt3556 = var4;
          this.anInt3550 = var5;
          this.aBoolean3553 = var6;
-         this.aClass94_3561 = var1;
-         this.aClass94_3554 = var2;
+         this.aString_3561 = var1;
+         this.aString_3554 = var2;
          this.anInt3563 = var7;
          this.anInt3558 = var3;
          if(this.anInt3563 == 255) {

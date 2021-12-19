@@ -53,7 +53,7 @@ public class ColorCore {
     static RSString ContextColor = RSString.parse("<col=ffffff>");//White
 
 
-    //private message Class3_Sub28_Sub4.aClass94_3573
+    //private message Class3_Sub28_Sub4.aString_3573
     static RSString ObjectNameColor = RSString.parse("<col=00ffff>");//Light blue <col=00ffff>
     static RSString PMColor = RSString.parse(" )2> <col=00ffff>");
 

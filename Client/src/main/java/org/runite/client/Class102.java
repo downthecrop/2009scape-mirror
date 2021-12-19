@@ -8,10 +8,10 @@ public final class Class102 implements Interface2 {
     static int anInt2136;
     public static Player player;
     private final boolean[] aBooleanArray2122;
-    private final CacheIndex aClass153_2123;
+    private final CacheIndex spritesIndex_2123;
     private final boolean[] aBooleanArray2124;
     private final byte[] aByteArray2126;
-    private final CacheIndex aClass153_2127;
+    private final CacheIndex texturesIndex_2127;
     private final boolean[] aBooleanArray2128;
     private final byte[] aByteArray2129;
     private final boolean[] aBooleanArray2135;
@@ -26,10 +26,10 @@ public final class Class102 implements Interface2 {
 
     Class102(CacheIndex var1, CacheIndex var2, CacheIndex var3, boolean var5) {
         try {
-            this.aClass153_2123 = var3;
+            this.spritesIndex_2123 = var3;
             this.aBoolean2134 = var5;
             this.anInt2139 = 20;
-            this.aClass153_2127 = var1;
+            this.texturesIndex_2127 = var1;
             this.aClass47_2142 = new NodeCache(this.anInt2139);
             if (HDToolKit.highDetail) {
                 this.aClass47_2138 = new NodeCache(this.anInt2139);
@@ -129,9 +129,9 @@ public final class Class102 implements Interface2 {
                     int var4 = var3.getSize();
                     int var5;
                     if (1 != var4) {
-                        if (((1 & var4) != 0 || (127 & var3.xAxis) == 0 && 0 == (127 & var3.zAxis)) && ((var4 & 1) != 1 || (127 & var3.xAxis) == 64 && 64 == (127 & var3.zAxis))) {
+                        if (((1 & var4) != 0 || (127 & var3.xAxis) == 0 && 0 == (127 & var3.yAxis)) && ((var4 & 1) != 1 || (127 & var3.xAxis) == 64 && 64 == (127 & var3.yAxis))) {
                             var5 = var3.xAxis + -(var4 * 64) >> 7;
-                            var6 = -(var4 * 64) + var3.zAxis >> 7;
+                            var6 = -(var4 * 64) + var3.yAxis >> 7;
                             var7 = var3.getSize() + var5;
                             if (var5 < 0) {
                                 var5 = 0;
@@ -156,9 +156,9 @@ public final class Class102 implements Interface2 {
                                 }
                             }
                         }
-                    } else if ((127 & var3.xAxis) == 64 && (var3.zAxis & 127) == 64) {
+                    } else if ((127 & var3.xAxis) == 64 && (var3.yAxis & 127) == 64) {
                         var5 = var3.xAxis >> 7;
-                        var6 = var3.zAxis >> 7;
+                        var6 = var3.yAxis >> 7;
                         if (var5 >= 0 && var5 < 104 && var6 >= 0 && var6 < 104) {
                             ++Class163_Sub1_Sub1.anIntArrayArray4010[var5][var6];
                         }
@@ -173,9 +173,9 @@ public final class Class102 implements Interface2 {
                 if (var3 != null && var3.hasDefinitions() && !var3.definition.aBoolean1263 == !var1 && var3.definition.method1472()) {
                     var6 = var3.getSize();
                     if (var6 != 1) {
-                        if ((var6 & 1) == 0 && (var3.xAxis & 127) == 0 && (127 & var3.zAxis) == 0 || (var6 & 1) == 1 && (var3.xAxis & 127) == 64 && (127 & var3.zAxis) == 64) {
+                        if ((var6 & 1) == 0 && (var3.xAxis & 127) == 0 && (127 & var3.yAxis) == 0 || (var6 & 1) == 1 && (var3.xAxis & 127) == 64 && (127 & var3.yAxis) == 64) {
                             var7 = -(64 * var6) + var3.xAxis >> 7;
-                            var8 = -(var6 * 64) + var3.zAxis >> 7;
+                            var8 = -(var6 * 64) + var3.yAxis >> 7;
                             var10 = var8 - -var6;
                             if (var8 < 0) {
                                 var8 = 0;
@@ -222,9 +222,9 @@ public final class Class102 implements Interface2 {
                                 }
                             }
                         }
-                    } else if ((127 & var3.xAxis) == 64 && (127 & var3.zAxis) == 64) {
+                    } else if ((127 & var3.xAxis) == 64 && (127 & var3.yAxis) == 64) {
                         var7 = var3.xAxis >> 7;
-                        var8 = var3.zAxis >> 7;
+                        var8 = var3.yAxis >> 7;
                         if (0 > var7 || var7 >= 104 || var8 < 0 || var8 >= 104) {
                             continue;
                         }
@@ -239,8 +239,8 @@ public final class Class102 implements Interface2 {
                         var15 |= Long.MIN_VALUE;
                     }
 
-                    var3.anInt2831 = Class121.method1736(WorldListCountry.localPlane, 1, var3.xAxis, var3.zAxis);
-                    Class20.method907(WorldListCountry.localPlane, var3.xAxis, var3.zAxis, var3.anInt2831, -64 + 64 * var6 + 60, var3, var3.anInt2785, var15, var3.aBoolean2810);
+                    var3.anInt2831 = Scenery.sceneryPositionHash(WorldListCountry.localPlane, 1, var3.xAxis, var3.yAxis);
+                    Class20.method907(WorldListCountry.localPlane, var3.xAxis, var3.yAxis, var3.anInt2831, -64 + 64 * var6 + 60, var3, var3.anInt2785, var15, var3.aBoolean2810);
                 }
             }
 
@@ -359,7 +359,7 @@ public final class Class102 implements Interface2 {
             }
 
             Class3_Sub28_Sub20 var3 = this.method1613(var2);
-            return null == var3 ? null : var3.method720(this.aBoolean2134 || this.aBooleanArray2122[var2], this, this.aClass153_2123);
+            return null == var3 ? null : var3.method720(this.aBoolean2134 || this.aBooleanArray2122[var2], this, this.spritesIndex_2123);
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "nk.F(" + var1 + ',' + var2 + ')');
         }
@@ -372,7 +372,7 @@ public final class Class102 implements Interface2 {
                 boolean var3 = false;
                 Class3_Sub28_Sub20 var4 = this.method1613(var1);
                 if (var4 != null) {
-                    var3 = var4.method719(this.aClass153_2123, this, this.aBoolean2134 || this.aBooleanArray2122[var1]);
+                    var3 = var4.method719(this.spritesIndex_2123, this, this.aBoolean2134 || this.aBooleanArray2122[var1]);
                 }
 
                 if (!var3) {
@@ -391,7 +391,7 @@ public final class Class102 implements Interface2 {
 
             Class3_Sub28_Sub20 var3 = (Class3_Sub28_Sub20) this.aClass47_2142.get(var1);
             if (null == var3) {
-                byte[] var4 = this.aClass153_2127.getFile(var1, 0);
+                byte[] var4 = this.texturesIndex_2127.getFile(var1, 0);
                 if (null == var4) {
                     return null;
                 } else {
@@ -468,7 +468,7 @@ public final class Class102 implements Interface2 {
             }
 
             Class3_Sub28_Sub20 var3 = this.method1613(var2);
-            return null != var3 && var3.method722(this, this.aClass153_2123);
+            return null != var3 && var3.method722(this, this.spritesIndex_2123);
         } catch (RuntimeException var4) {
             throw ClientErrorException.clientError(var4, "nk.H(" + var1 + ',' + var2 + ')');
         }
@@ -566,7 +566,7 @@ public final class Class102 implements Interface2 {
                 return null;
             } else {
                 var4.aBoolean3797 = var2;
-                return var4.method718(this, var3, this.aClass153_2123, this.aBoolean2134 || this.aBooleanArray2122[var1]);
+                return var4.method718(this, var3, this.spritesIndex_2123, this.aBoolean2134 || this.aBooleanArray2122[var1]);
             }
         } catch (RuntimeException var5) {
             throw ClientErrorException.clientError(var5, "nk.L(" + var1 + ',' + var2 + ',' + var3 + ')');

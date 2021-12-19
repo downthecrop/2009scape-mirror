@@ -9,7 +9,7 @@ public final class Class24 {
     static Random aRandom3088 = new Random();
     static int anInt467 = 0;
     static int anInt472 = 0;
-    static CacheIndex aClass153_152;
+    static CacheIndex modelsIndex_152;
     private final int[] anIntArray475 = new int[]{-1, -1, -1, -1, -1};
     int anInt466 = -1;
     boolean aBoolean476 = false;
@@ -160,9 +160,9 @@ public final class Class24 {
     static RSString method531() {
         RSString var1;
         if (Class164_Sub1.anInt3012 == 1 && Unsorted.menuOptionCount < 2) {
-            var1 = RSString.stringCombiner(new RSString[]{TextCore.HasUse, TextCore.Spacer, RenderAnimationDefinition.aClass94_378, TextCore.aClass94_1724});
+            var1 = RSString.stringCombiner(new RSString[]{TextCore.HasUse, TextCore.Spacer, RenderAnimationDefinition.aString_378, TextCore.aString_1724});
         } else if (GameObject.aBoolean1837 && 2 > Unsorted.menuOptionCount) {
-            var1 = RSString.stringCombiner(new RSString[]{Class3_Sub28_Sub9.aClass94_3621, TextCore.Spacer, TextCore.aClass94_676, TextCore.aClass94_1724});
+            var1 = RSString.stringCombiner(new RSString[]{Class3_Sub28_Sub9.aString_3621, TextCore.Spacer, TextCore.aString_676, TextCore.aString_1724});
 
         } else if (ClientCommands.shiftClickEnabled && ObjectDefinition.aBooleanArray1490[81] && Unsorted.menuOptionCount > 2 && !ObjectDefinition.aBooleanArray1490[82]) {
             for (Class3_Sub28_Sub1.counter = 2; Class3_Sub28_Sub1.counter < Unsorted.menuOptionCount; Class3_Sub28_Sub1.counter++) {
@@ -185,7 +185,7 @@ public final class Class24 {
         }
 
         if (Unsorted.menuOptionCount > 2) {
-            var1 = RSString.stringCombiner(new RSString[]{var1, Class1.aClass94_58, RSString.stringAnimator(Unsorted.menuOptionCount - 2), TextCore.HasMoreOptions});
+            var1 = RSString.stringCombiner(new RSString[]{var1, Class1.aString_58, RSString.stringAnimator(Unsorted.menuOptionCount - 2), TextCore.HasMoreOptions});
         }
         return var1;
     }
@@ -197,7 +197,7 @@ public final class Class24 {
 
             for (int var4 = 0; var4 < 5; ++var4) {
                 if (this.anIntArray475[var4] != -1) {
-                    var2[var3++] = Model_Sub1.method2015(aClass153_152, this.anIntArray475[var4]);
+                    var2[var3++] = Model_Sub1.method2015(modelsIndex_152, this.anIntArray475[var4]);
                 }
             }
 
@@ -229,7 +229,7 @@ public final class Class24 {
                 boolean var2 = true;
 
                 for (int var3 = 0; this.anIntArray474.length > var3; ++var3) {
-                    if (!aClass153_152.method2129((byte) -90, 0, this.anIntArray474[var3])) {
+                    if (!modelsIndex_152.method2129((byte) -90, 0, this.anIntArray474[var3])) {
                         var2 = false;
                     }
                 }
@@ -294,7 +294,7 @@ public final class Class24 {
                 Model_Sub1[] var2 = new Model_Sub1[this.anIntArray474.length];
 
                 for (int var3 = 0; this.anIntArray474.length > var3; ++var3) {
-                    var2[var3] = Model_Sub1.method2015(aClass153_152, this.anIntArray474[var3]);
+                    var2[var3] = Model_Sub1.method2015(modelsIndex_152, this.anIntArray474[var3]);
                 }
                 Model_Sub1 var7;
                 if (var2.length == 1) {
@@ -328,7 +328,7 @@ public final class Class24 {
             boolean var2 = true;
 
             for (int var3 = 0; var3 < 5; ++var3) {
-                if (-1 != this.anIntArray475[var3] && !aClass153_152.method2129((byte) 95, 0, this.anIntArray475[var3])) {
+                if (-1 != this.anIntArray475[var3] && !modelsIndex_152.method2129((byte) 95, 0, this.anIntArray475[var3])) {
                     var2 = false;
                 }
             }

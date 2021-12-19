@@ -82,8 +82,8 @@ public final class WorldListEntry extends Class44 {
             int var3 = Class21.anInt3552;
             if (aAbstractSprite_3099 == null || null == aAbstractSprite_1457) {
                 if (CacheIndex.spritesIndex.retrieveSpriteFile(archiveID) && CacheIndex.spritesIndex.retrieveSpriteFile(anInt1400)) {
-                    aAbstractSprite_3099 = Unsorted.method562(CacheIndex.spritesIndex, archiveID);
-                    aAbstractSprite_1457 = Unsorted.method562(CacheIndex.spritesIndex, anInt1400);
+                    aAbstractSprite_3099 = Unsorted.loadSoftwareSprite(CacheIndex.spritesIndex, archiveID);
+                    aAbstractSprite_1457 = Unsorted.loadSoftwareSprite(CacheIndex.spritesIndex, anInt1400);
                     if (HDToolKit.highDetail) {
                         if (aAbstractSprite_3099 instanceof Class3_Sub28_Sub16_Sub2_Sub1) {
                             aAbstractSprite_3099 = new Class3_Sub28_Sub16_Sub1_Sub1((SoftwareSprite) aAbstractSprite_3099);
@@ -130,9 +130,9 @@ public final class WorldListEntry extends Class44 {
             }
 
             if ((aAbstractSprite_1339 == null || Class50.aAbstractSprite_824 == null || null == Class3_Sub26.aAbstractSprite_2560) && CacheIndex.spritesIndex.retrieveSpriteFile(anInt739) && CacheIndex.spritesIndex.retrieveSpriteFile(anInt1126) && CacheIndex.spritesIndex.retrieveSpriteFile(anInt2937)) {
-                aAbstractSprite_1339 = Unsorted.method562(CacheIndex.spritesIndex, anInt739);
-                Class50.aAbstractSprite_824 = Unsorted.method562(CacheIndex.spritesIndex, anInt1126);
-                Class3_Sub26.aAbstractSprite_2560 = Unsorted.method562(CacheIndex.spritesIndex, anInt2937);
+                aAbstractSprite_1339 = Unsorted.loadSoftwareSprite(CacheIndex.spritesIndex, anInt739);
+                Class50.aAbstractSprite_824 = Unsorted.loadSoftwareSprite(CacheIndex.spritesIndex, anInt1126);
+                Class3_Sub26.aAbstractSprite_2560 = Unsorted.loadSoftwareSprite(CacheIndex.spritesIndex, anInt2937);
                 if (HDToolKit.highDetail) {
                     if (aAbstractSprite_1339 instanceof Class3_Sub28_Sub16_Sub2_Sub1) {
                         aAbstractSprite_1339 = new Class3_Sub28_Sub16_Sub1_Sub1((SoftwareSprite) aAbstractSprite_1339);
@@ -202,7 +202,7 @@ public final class WorldListEntry extends Class44 {
             if (0 > var0) {
                 return 0;
             } else {
-                Class3_Sub25 var2 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var0);
+                Class3_Sub25 var2 = (Class3_Sub25) TileData.aHashTable_2220.get(var0);
                 if (var2 == null) {
                     return Objects.requireNonNull(ConfigInventoryDefinition.retrieveConfigurationInventoryFile(var0)).size;
                 } else {

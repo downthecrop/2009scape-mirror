@@ -85,7 +85,7 @@ final class Class114 {
 
             this.anIntArrayArray1573 = null;
             this.aClass3_Sub26Array1571 = null;
-            this.aLinkedList_1577.method1211(-85);
+            this.aLinkedList_1577.clear();
             this.aLinkedList_1577 = null;
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "pf.A(" + 1127165736 + ')');

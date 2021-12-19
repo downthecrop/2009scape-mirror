@@ -2,7 +2,7 @@ package org.runite.client;
 
 public final class Class167 {
 
-    public static RSString aClass94_2083 = null;
+    public static RSString aString_2083 = null;
     static int anInt2087 = 0;
 
 
@@ -19,21 +19,21 @@ public final class Class167 {
         var7.anInt1550 = var4;
         var7.anInt1544 = var5;
         var7.anInt1548 = var6;
-        Class3_Sub28_Sub8.aClass113Array3610[Class3_Sub4.anInt2249++] = var7;
+        Class3_Sub28_Sub8.aClass113Array3610[Scenery.anInt2249++] = var7;
     }
 
     static void method2264(boolean var0) {
         if (var0) {
-            Class75_Sub2.aClass3_Sub2ArrayArrayArray2638 = Class166.aClass3_Sub2ArrayArrayArray2065;
+            TileData.aTileDataArrayArrayArray2638 = Class166.aTileDataArrayArrayArray2065;
             Class44.anIntArrayArrayArray723 = Unsorted.anIntArrayArrayArray3605;
             Class3_Sub23.aClass3_Sub11ArrayArray2542 = TextureOperation32.aClass3_Sub11ArrayArray3346;
         } else {
-            Class75_Sub2.aClass3_Sub2ArrayArrayArray2638 = Unsorted.aClass3_Sub2ArrayArrayArray4070;
+            TileData.aTileDataArrayArrayArray2638 = Unsorted.aTileDataArrayArrayArray4070;
             Class44.anIntArrayArrayArray723 = Class58.anIntArrayArrayArray914;
             Class3_Sub23.aClass3_Sub11ArrayArray2542 = Client.aClass3_Sub11ArrayArray2199;
         }
 
-        Class3_Sub17.anInt2456 = Class75_Sub2.aClass3_Sub2ArrayArrayArray2638.length;
+        Class3_Sub17.anInt2456 = TileData.aTileDataArrayArrayArray2638.length;
     }
 
     static void method2265() {
@@ -49,7 +49,7 @@ public final class Class167 {
             int var9;
             if (var5 >= 0 && var5 < 104 && var4 >= 0 && var4 < 104) {
                 if (!var2) {
-                    Unsorted.aByteArrayArrayArray113[var8][var5][var4] = 0;
+                    Unsorted.sceneryTypeMaskGrid[var8][var5][var4] = 0;
                 }
 
                 while (true) {
@@ -90,7 +90,7 @@ public final class Class167 {
                     } else if (var9 > 81) {
                         TextureOperation36.aByteArrayArrayArray3430[var8][var5][var4] = (byte) (-81 + var9);
                     } else if (!var2) {
-                        Unsorted.aByteArrayArrayArray113[var8][var5][var4] = (byte) (var9 - 49);
+                        Unsorted.sceneryTypeMaskGrid[var8][var5][var4] = (byte) (var9 - 49);
                     }
                 }
             } else {
@@ -122,7 +122,7 @@ public final class Class167 {
 
     static int method2268(byte var0, int var1, int var2) {
         try {
-            Class3_Sub25 var3 = (Class3_Sub25) Class3_Sub2.aHashTable_2220.get(var1);
+            Class3_Sub25 var3 = (Class3_Sub25) TileData.aHashTable_2220.get(var1);
             if (var3 == null) {
                 return 0;
             } else if (var2 == -1) {
@@ -164,10 +164,10 @@ public final class Class167 {
             AudioHandler.currentTrack = -1;
             Class164_Sub1.method2241((byte) -77, true);
             LinkableRSString.isDynamicSceneGraph = false;
-            Texture.anInt1152 = 0;
-            Unsorted.anInt3606 = 0;
-            Class3_Sub7.anInt2294 = 0;
-            Class131.anInt1716 = 0;
+            Texture.y1152 = 0;
+            Unsorted.viewportX = 0;
+            Class3_Sub7.viewportY = 0;
+            Class131.x1716 = 0;
 
             for (var1 = 0; ClientErrorException.aClass96Array2114.length > var1; ++var1) {
                 ClientErrorException.aClass96Array2114[var1] = null;
@@ -191,7 +191,7 @@ public final class Class167 {
             for (var1 = 0; 4 > var1; ++var1) {
                 for (int var2 = 0; var2 < 104; ++var2) {
                     for (int var3 = 0; var3 < 104; ++var3) {
-                        Class39.aLinkedListArrayArrayArray3273[var1][var2][var3] = null;
+                        Class39.groundItems[var1][var2][var3] = null;
                     }
                 }
             }

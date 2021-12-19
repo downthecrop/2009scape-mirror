@@ -9,7 +9,7 @@ final class TextureOperation17 extends TextureOperation {
    private int anInt3176 = 0;
    static LinkedList aLinkedList_3177 = new LinkedList();
    private int anInt3178 = 0;
-   static int anInt3179;
+   static int height3179;
    private int anInt3180;
    static int[] anIntArray3181;
    private int anInt3182;

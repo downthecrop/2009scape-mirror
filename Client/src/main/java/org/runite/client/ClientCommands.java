@@ -59,11 +59,11 @@ public class ClientCommands {
                 }
 
                 var3 = (int) ((runtime.totalMemory() + -runtime.freeMemory()) / 1024L);
-                BufferedDataStream.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.aClass94_2033, RSString.stringAnimator(var3), TextCore.Memoryk}), -1);
+                BufferedDataStream.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.aString_2033, RSString.stringAnimator(var3), TextCore.Memoryk}), -1);
             }
 
             if (command.equalsStringIgnoreCase(TextCore.COMMAND_PC_CACHE_SIZE)) {
-                BufferedDataStream.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.aClass94_442, RSString.stringAnimator(Unsorted.method1727((byte) 123))}), -1);
+                BufferedDataStream.addChatMessage(null, 0, RSString.stringCombiner(new RSString[]{TextCore.aString_442, RSString.stringAnimator(Unsorted.method1727((byte) 123))}), -1);
             }
 
             if (HDToolKit.highDetail && command.equalsStringIgnoreCase(TextCore.COMMAND_GRAPHICS_CARD_MEMORY)) {
@@ -232,7 +232,7 @@ public class ClientCommands {
        try {
           Class163_Sub2_Sub1.aReferenceCache_4015.clearSoftReferences();//Class3_Sub28_Sub20.method724();
           Class44.aReferenceCache_725.clearSoftReferences();//Class3_Sub28_Sub18.method710();
-          Class140_Sub4.aReferenceCache_2792.clearSoftReferences();
+          Entity.aReferenceCache_2792.clearSoftReferences();
           Unsorted.aReferenceCache_21.clearSoftReferences();//Unsorted.method55();
           ObjectDefinition.aReferenceCache_1401.clearSoftReferences();//Unsorted.method55();
           Unsorted.aReferenceCache_4051.clearSoftReferences();//Unsorted.method55();

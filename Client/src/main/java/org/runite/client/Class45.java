@@ -16,7 +16,7 @@ public final class Class45 {
             var2.index = -2 + var0.length;
             Class95.anInt1338 = var2.readUnsignedShort();
             Unsorted.anIntArray3076 = new int[Class95.anInt1338];
-            Class140_Sub7.anIntArray2931 = new int[Class95.anInt1338];
+            GroundItem.anIntArray2931 = new int[Class95.anInt1338];
             Class164.anIntArray2048 = new int[Class95.anInt1338];
             aBooleanArray3272 = new boolean[Class95.anInt1338];
             Class163_Sub3.aByteArrayArray3005 = new byte[Class95.anInt1338][];
@@ -37,7 +37,7 @@ public final class Class45 {
             }
 
             for (var4 = 0; Class95.anInt1338 > var4; ++var4) {
-                Class140_Sub7.anIntArray2931[var4] = var2.readUnsignedShort();
+                GroundItem.anIntArray2931[var4] = var2.readUnsignedShort();
             }
 
             for (var4 = 0; Class95.anInt1338 > var4; ++var4) {
@@ -57,7 +57,7 @@ public final class Class45 {
             var2.index = 0;
 
             for (var4 = 0; var4 < Class95.anInt1338; ++var4) {
-                int var5 = Class140_Sub7.anIntArray2931[var4];
+                int var5 = GroundItem.anIntArray2931[var4];
                 int var6 = Unsorted.anIntArray3076[var4];
                 int var7 = var5 * var6;
                 byte[] var8 = new byte[var7];

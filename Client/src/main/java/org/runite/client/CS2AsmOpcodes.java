@@ -55,8 +55,9 @@ public enum CS2AsmOpcodes {
     // Also It adds the previous method to the method stack. SEE RETURN(21)
     CALL(40),
 
-    // TODO: Opcodes 42 and 43. 42 saves to a special different kind of ram that only 43 can load from. 43
-    // does some weird shit with this number
+    // Opcodes 42 and 43 load and store from the VARC array, respectively. Writing to the VARC array emits and processes a component modification request, which scripts can set listeners for (e.g. to update highlights in an interface when an item quantity changes).
+    LOAD_VARC(42),
+    STORE_VARC(43),
 
     // allocates one of the five paged ram pages as selected by the top 16 bits of the operand.
     // If the bottom 16 bits equal 105, this will be allocated as all zeroes.

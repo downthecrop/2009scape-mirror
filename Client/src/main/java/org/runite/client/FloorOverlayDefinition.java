@@ -18,7 +18,7 @@ final class FloorOverlayDefinition {
             FloorOverlayDefinition var2 = (FloorOverlayDefinition) Class163_Sub2_Sub1.aReferenceCache_4015.get(var1);
             if (null == var2) {
                 System.out.println("Retrieving file " + var1);
-                byte[] var4 = Class3_Sub28_Sub5.aClass153_3580.getFile(4, var1);
+                byte[] var4 = Class3_Sub28_Sub5.configurationsIndex_3580.getFile(4, var1);
                 var2 = new FloorOverlayDefinition();
                 if (var4 != null) {
                     var2.parseDefinition(new DataBuffer(var4), var1);
@@ -88,8 +88,8 @@ final class FloorOverlayDefinition {
 
     static void method631(CacheIndex var1) {
         try {
-            Class3_Sub28_Sub5.aClass153_3580 = var1;
-            Client.anInt869 = Class3_Sub28_Sub5.aClass153_3580.getFileAmount(4);
+            Class3_Sub28_Sub5.configurationsIndex_3580 = var1;
+            Client.anInt869 = Class3_Sub28_Sub5.configurationsIndex_3580.getFileAmount(4);
         } catch (RuntimeException var3) {
             throw ClientErrorException.clientError(var3, "qc.D(" + false + ',' + (var1 != null ? "{...}" : "null") + ')');
         }

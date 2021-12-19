@@ -3,7 +3,7 @@ package org.runite.client;
 abstract class GameObject {
 
     static AbstractIndexedSprite[] aClass109Array1831;
-    static RSInterface[][] aClass11ArrayArray1834;
+    static RSInterface[][] interfaces1834;
     static boolean aBoolean1837 = false;
     static int[] anIntArray1838;
     static SoftwareSprite[] aSoftwareSpriteArray1839;
@@ -71,12 +71,12 @@ abstract class GameObject {
     static void method1864(CacheIndex var2, Class3_Sub28_Sub17_Sub1 var3, CacheIndex var4) {
         try {
             Class139.aBoolean1827 = true;
-            LinkableRSString.aClass153_2581 = var4;
-            Class97.aClass153_1370 = var2;
-            int var5 = Class97.aClass153_1370.method2121() - 1;
-            TextureOperation39.itemDefinitionSize = Class97.aClass153_1370.getFileAmount(var5) + var5 * 256;
-            ClientErrorException.aClass94Array2119 = new RSString[]{null, null, null, null, TextCore.HasDrop};
-            Unsorted.aClass94Array2596 = new RSString[]{null, null, TextCore.HasTake, null, null};
+            LinkableRSString.modelsIndex_2581 = var4;
+            Class97.itemConfigIndex_1370 = var2;
+            int var5 = Class97.itemConfigIndex_1370.method2121() - 1;
+            TextureOperation39.itemDefinitionSize = Class97.itemConfigIndex_1370.getFileAmount(var5) + var5 * 256;
+            ClientErrorException.aStringArray2119 = new RSString[]{null, null, null, null, TextCore.HasDrop};
+            Unsorted.aStringArray2596 = new RSString[]{null, null, TextCore.HasTake, null, null};
             TextureOperation10.aClass3_Sub28_Sub17_Sub1_3440 = var3;
         } catch (RuntimeException var7) {
             throw ClientErrorException.clientError(var7, "th.FC(" + true + ',' + (byte) -126 + ',' + (var2 != null ? "{...}" : "null") + ',' + (var3 != null ? "{...}" : "null") + ',' + (var4 != null ? "{...}" : "null") + ')');
@@ -164,7 +164,7 @@ abstract class GameObject {
         try {
             Class101.aClass3_Sub24_Sub4_1421.method505((byte) -128);
             Unsorted.anInt154 = 1;
-            Class101.aClass153_1423 = null;
+            Class101.musicIndex_1423 = null;
         } catch (RuntimeException var2) {
             throw ClientErrorException.clientError(var2, "th.GC(" + false + ')');
         }

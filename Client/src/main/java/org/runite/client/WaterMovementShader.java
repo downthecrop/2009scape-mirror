@@ -134,7 +134,7 @@ final class WaterMovementShader implements ShaderInterface {
       HDToolKit.method1823();
       var1.glCallList(this.anInt2177);
       float var2 = 2662.4001F;
-      var2 += (float)(Class140_Sub7.anInt2938 - 128) * 0.5F;
+      var2 += (float)(GroundItem.anInt2938 - 128) * 0.5F;
       if(var2 >= 3328.0F) {
          var2 = 3327.0F;
       }

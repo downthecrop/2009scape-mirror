@@ -6,15 +6,14 @@ final class TextureOperation26 extends TextureOperation {
 
    private int anInt3073 = 0;
    private int anInt3074 = 4096;
-   static LinkedList aLinkedList_3075 = new LinkedList();
    static boolean aBoolean3078;
    static int anInt3081 = 0;
 
 
    static void method195() {
       try {
-         int regionX = (NPC.anInt3995 >> 10) - -(Class131.anInt1716 >> 3);
-         int regionY = (Class77.anInt1111 >> 10) - -(Texture.anInt1152 >> 3);
+         int regionX = (NPC.anInt3995 >> 10) - -(Class131.x1716 >> 3);
+         int regionY = (Class77.anInt1111 >> 10) - -(Texture.y1152 >> 3);
          byte plane = 0;
          byte sceneX = 8;
          byte var6 = 18;
@@ -24,7 +23,7 @@ final class TextureOperation26 extends TextureOperation {
          Client.anIntArray2200 = new int[var6];
          Class39.regionXteaKeys = new int[var6][4];
          Class40.aByteArrayArray3669 = new byte[var6][];
-         Class3_Sub24_Sub3.anIntArray3494 = new int[var6];
+         Class3_Sub24_Sub3.regionIds = new int[var6];
          Class164_Sub2.aByteArrayArray3027 = new byte[var6][];
          NPC.npcSpawnCacheIndices = new int[var6];
          TextureOperation17.anIntArray3181 = new int[var6];
@@ -37,7 +36,7 @@ final class TextureOperation26 extends TextureOperation {
          for(var7 = (-6 + regionX) / 8; (6 + regionX) / 8 >= var7; ++var7) {
             for(int var8 = (-6 + regionY) / 8; var8 <= (regionY + 6) / 8; ++var8) {
                int var9 = (var7 << 8) - -var8;
-               Class3_Sub24_Sub3.anIntArray3494[var11] = var9;
+               Class3_Sub24_Sub3.regionIds[var11] = var9;
 
                /**
                 * This block is used to control what is displayed on the HD login screen fly over
@@ -181,8 +180,8 @@ final class TextureOperation26 extends TextureOperation {
          for(int var4 = 0; var4 < var3; ++var4) {
             byte[] var5 = var2[var4];
             if(var5 != null) {
-               int var6 = -Class131.anInt1716 + 64 * (Class3_Sub24_Sub3.anIntArray3494[var4] >> 8);
-               int var7 = (Class3_Sub24_Sub3.anIntArray3494[var4] & 0xFF) * 64 + -Texture.anInt1152;
+               int var6 = -Class131.x1716 + 64 * (Class3_Sub24_Sub3.regionIds[var4] >> 8);
+               int var7 = (Class3_Sub24_Sub3.regionIds[var4] & 0xFF) * 64 + -Texture.y1152;
                Class58.method1194();
                Class3_Sub15.method374(var6, var0, var5, var7, AtmosphereParser.aClass91Array1182);
             }

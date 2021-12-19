@@ -4,7 +4,6 @@ final class Class75_Sub2 extends Class75 {
 
    private final int anInt2636;
    static Class33 aClass33_2637;
-   static Class3_Sub2[][][] aClass3_Sub2ArrayArrayArray2638;
    static int[] anIntArray2639;
    private int anInt2644;
    private final int anInt2646;
@@ -26,7 +25,7 @@ final class Class75_Sub2 extends Class75 {
 
    static AbstractSprite method1344(CacheIndex var0, int var1) {
       try {
-         return !Class140_Sub7.method2029((byte)-121, var0, var1)?null:Class43.method1062(99);
+         return !GroundItem.method2029((byte)-121, var0, var1)?null:Class43.method1062(99);
       } catch (RuntimeException var4) {
          throw ClientErrorException.clientError(var4, "kc.C(" + (var0 != null?"{...}":"null") + ',' + var1 + ')');
       }

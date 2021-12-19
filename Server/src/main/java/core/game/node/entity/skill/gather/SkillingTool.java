@@ -1,15 +1,15 @@
 package core.game.node.entity.skill.gather;
 
-import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
 import core.game.world.update.flag.context.Animation;
+import org.rs09.consts.Items;
 
 /**
  * Represents a skilling tool (such as knife, axe, needle, ...)
  * @author Emperor
  */
 public enum SkillingTool {
-
 	/**
 	 * Represents a bronze axe (woodcutting).
 	 */
@@ -88,7 +88,29 @@ public enum SkillingTool {
 	/**
 	 * Represents the Inferno Adze (mining)
 	 */
-	INFERNO_ADZE2(13661, 61, 1.0D, new Animation(10222));
+	INFERNO_ADZE2(13661, 61, 1.0D, new Animation(10222)),
+
+    HATCHET_CLASS1(Items.HATCHET_CLASS_1_14132, 1, 0.1, new Animation(10603)),
+    HATCHET_CLASS2(Items.HATCHET_CLASS_2_14134, 20, 0.3, new Animation(10604)),
+    HATCHET_CLASS3(Items.HATCHET_CLASS_3_14136, 40, 0.65, new Animation(10605)),
+    HATCHET_CLASS4(Items.HATCHET_CLASS_4_14138, 60, 0.85, new Animation(10606)),
+    HATCHET_CLASS5(Items.HATCHET_CLASS_5_14140, 80, 1.0, new Animation(10607)),
+    PICKAXE_CLASS1(Items.PICKAXE_CLASS_1_14122, 1, 0.1, new Animation(10608)),
+    PICKAXE_CLASS2(Items.PICKAXE_CLASS_2_14124, 20, 0.3, new Animation(10609)),
+    PICKAXE_CLASS3(Items.PICKAXE_CLASS_3_14126, 40, 0.65, new Animation(10610)),
+    PICKAXE_CLASS4(Items.PICKAXE_CLASS_4_14128, 60, 0.85, new Animation(10611)),
+    PICKAXE_CLASS5(Items.PICKAXE_CLASS_5_14130, 80, 1.0, new Animation(10612)),
+    HARPOON_CLASS1(Items.HARPOON_CLASS_1_14142, 1, 0.1, new Animation(10613)),
+    HARPOON_CLASS2(Items.HARPOON_CLASS_2_14144, 20, 0.3, new Animation(10614)),
+    HARPOON_CLASS3(Items.HARPOON_CLASS_3_14146, 40, 0.65, new Animation(10615)),
+    HARPOON_CLASS4(Items.HARPOON_CLASS_4_14148, 60, 0.85, new Animation(10616)),
+    HARPOON_CLASS5(Items.HARPOON_CLASS_5_14150, 80, 1.0, new Animation(10617)),
+    BUTTERFLY_NET_CLASS1(Items.BUTTERFLY_NET_CLASS_1_14152, 1, 0.1, new Animation(10618)),
+    BUTTERFLY_NET_CLASS2(Items.BUTTERFLY_NET_CLASS_2_14154, 20, 0.3, new Animation(10619)),
+    BUTTERFLY_NET_CLASS3(Items.BUTTERFLY_NET_CLASS_3_14156, 40, 0.65, new Animation(10620)),
+    BUTTERFLY_NET_CLASS4(Items.BUTTERFLY_NET_CLASS_4_14158, 60, 0.85, new Animation(10621)),
+    BUTTERFLY_NET_CLASS5(Items.BUTTERFLY_NET_CLASS_5_14160, 80, 1.0, new Animation(10622));
+
 
 	/**
 	 * The tool id.
@@ -145,23 +167,28 @@ public enum SkillingTool {
 	 */
 	public static SkillingTool getHatchet(Player player) {
 		SkillingTool tool = null;
-		if (checkTool(player, Skills.WOODCUTTING, SkillingTool.DRAGON_AXE)) {
-			tool = SkillingTool.DRAGON_AXE;
-		} else if (checkTool(player, Skills.WOODCUTTING, SkillingTool.RUNE_AXE)) {
-			tool = SkillingTool.RUNE_AXE;
-		} else if (checkTool(player, Skills.WOODCUTTING, SkillingTool.ADAMANT_AXE)) {
-			tool = SkillingTool.ADAMANT_AXE;
-		} else if (checkTool(player, Skills.WOODCUTTING, SkillingTool.MITHRIL_AXE)) {
-			tool = SkillingTool.MITHRIL_AXE;
-		} else if (checkTool(player, Skills.WOODCUTTING, SkillingTool.BLACK_AXE)) {
-			tool = SkillingTool.BLACK_AXE;
-		} else if (checkTool(player, Skills.WOODCUTTING, SkillingTool.STEEL_AXE)) {
-			tool = SkillingTool.STEEL_AXE;
-		} else if (checkTool(player, Skills.WOODCUTTING, SkillingTool.IRON_AXE)) {
-			tool = SkillingTool.IRON_AXE;
-		} else if (checkTool(player, Skills.WOODCUTTING, SkillingTool.BRONZE_AXE)) {
-			tool = SkillingTool.BRONZE_AXE;
-		} else if (checkTool(player, Skills.WOODCUTTING, SkillingTool.INFERNO_ADZE)) {
+        SkillingTool[] hatchetPriority = new SkillingTool[] {
+            SkillingTool.HATCHET_CLASS5,
+            SkillingTool.HATCHET_CLASS4,
+            SkillingTool.DRAGON_AXE,
+            SkillingTool.HATCHET_CLASS3,
+            SkillingTool.RUNE_AXE,
+            SkillingTool.ADAMANT_AXE,
+            SkillingTool.HATCHET_CLASS2,
+            SkillingTool.MITHRIL_AXE,
+            SkillingTool.BLACK_AXE,
+            SkillingTool.STEEL_AXE,
+            SkillingTool.HATCHET_CLASS1,
+            SkillingTool.IRON_AXE,
+            SkillingTool.BRONZE_AXE
+        };
+        for(SkillingTool hatchet : hatchetPriority) {
+            if (checkTool(player, Skills.WOODCUTTING, hatchet)) {
+                tool = hatchet;
+                break;
+            }
+        }
+		if (checkTool(player, Skills.WOODCUTTING, SkillingTool.INFERNO_ADZE)) {
 			if(player.getSkills().getLevel(Skills.FIREMAKING) >= 92) {
 				tool = SkillingTool.INFERNO_ADZE;
 			}
@@ -176,25 +203,83 @@ public enum SkillingTool {
 	 */
 	public static SkillingTool getPickaxe(Player player) {
 		SkillingTool tool = null;
+        SkillingTool[] pickaxePriority = new SkillingTool[] {
+            SkillingTool.PICKAXE_CLASS5,
+            SkillingTool.PICKAXE_CLASS4,
+            SkillingTool.RUNE_PICKAXE,
+            SkillingTool.PICKAXE_CLASS3,
+            SkillingTool.ADAMANT_PICKAXE,
+            SkillingTool.PICKAXE_CLASS2,
+            SkillingTool.MITHRIL_PICKAXE,
+            SkillingTool.STEEL_PICKAXE,
+            SkillingTool.PICKAXE_CLASS1,
+            SkillingTool.IRON_PICKAXE,
+            SkillingTool.BRONZE_PICKAXE,
+        };
+        for(SkillingTool pickaxe : pickaxePriority) {
+            if (checkTool(player, Skills.MINING, pickaxe)) {
+                tool = pickaxe;
+                break;
+            }
+        }
 		if (checkTool(player, Skills.MINING, SkillingTool.INFERNO_ADZE2)) {
 			if (player.getSkills().getLevel(Skills.FIREMAKING) >= 92) {
 				tool = SkillingTool.INFERNO_ADZE2;
 			}
-		} else if (checkTool(player, Skills.MINING, SkillingTool.RUNE_PICKAXE)) {
-			tool = SkillingTool.RUNE_PICKAXE;
-		} else if (checkTool(player, Skills.MINING, SkillingTool.ADAMANT_PICKAXE)) {
-			tool = SkillingTool.ADAMANT_PICKAXE;
-		} else if (checkTool(player, Skills.MINING, SkillingTool.MITHRIL_PICKAXE)) {
-			tool = SkillingTool.MITHRIL_PICKAXE;
-		} else if (checkTool(player, Skills.MINING, SkillingTool.STEEL_PICKAXE)) {
-			tool = SkillingTool.STEEL_PICKAXE;
-		} else if (checkTool(player, Skills.MINING, SkillingTool.IRON_PICKAXE)) {
-			tool = SkillingTool.IRON_PICKAXE;
-		} else if (checkTool(player, Skills.MINING, SkillingTool.BRONZE_PICKAXE)) {
-			tool = SkillingTool.BRONZE_PICKAXE;
 		} 
 		return tool;
 	}
+
+	public static SkillingTool getHarpoon(Player player) {
+		SkillingTool tool = null;
+        SkillingTool[] harpoonPriority = new SkillingTool[] {
+            SkillingTool.BUTTERFLY_NET_CLASS5,
+            SkillingTool.BUTTERFLY_NET_CLASS4,
+            SkillingTool.BUTTERFLY_NET_CLASS3,
+            SkillingTool.BUTTERFLY_NET_CLASS2,
+            SkillingTool.BUTTERFLY_NET_CLASS1,
+        };
+        for(SkillingTool harpoon : harpoonPriority) {
+            if (checkTool(player, Skills.FISHING, harpoon)) {
+                tool = harpoon;
+                break;
+            }
+        }
+		return tool;
+	}
+
+	public static SkillingTool getButterflyNet(Player player) {
+		SkillingTool tool = null;
+        SkillingTool[] butterflyNetPriority = new SkillingTool[] {
+            SkillingTool.BUTTERFLY_NET_CLASS5,
+            SkillingTool.BUTTERFLY_NET_CLASS4,
+            SkillingTool.BUTTERFLY_NET_CLASS3,
+            SkillingTool.BUTTERFLY_NET_CLASS2,
+            SkillingTool.BUTTERFLY_NET_CLASS1,
+        };
+        for(SkillingTool butterflyNet : butterflyNetPriority) {
+            if (checkTool(player, Skills.HUNTER, butterflyNet)) {
+                tool = butterflyNet;
+                break;
+            }
+        }
+		return tool;
+	}
+
+    public static SkillingTool getToolForSkill(Player player, int skill) {
+        switch(skill) {
+            case Skills.MINING:
+                return getPickaxe(player);
+            case Skills.WOODCUTTING:
+                return getHatchet(player);
+            case Skills.FISHING:
+                return getHarpoon(player);
+            case Skills.HUNTER:
+                return getButterflyNet(player);
+            default:
+                return null;
+        }
+    }
 
 	/**
 	 * Checks if the player has a tool and if he can use it.

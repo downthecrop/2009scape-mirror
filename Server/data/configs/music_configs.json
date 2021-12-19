@@ -2296,5 +2296,11 @@
     "name": "Charmin' Farmin'",
     "indexId": "516",
     "borders": "{1600,4672,1663,4735}"
+  },
+  {
+    "id": "578",
+    "name": "Stealing Creation",
+    "indexId": "620",
+    "borders": ""
   }
 ]
