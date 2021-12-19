@@ -123,7 +123,9 @@ public final class LoginConfiguration {
      */
     public static void configureGameWorld(final Player player) {
         player.getConfigManager().reset();
-        sendGameConfiguration(player);
+        if(!player.isArtificial()){
+            sendGameConfiguration(player);
+        }
         Repository.getLobbyPlayers().remove(player);
         Repository.getPlayerNames().putIfAbsent(player.getName().toLowerCase(),player);
         player.setPlaying(true);
