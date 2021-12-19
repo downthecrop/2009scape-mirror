@@ -348,7 +348,17 @@ public enum Consumables {
 	FISH_MIX(new BarbarianMix(new int[] {11477, 11479}, new MultiEffect(new SkillEffect(Skills.FISHING, 3, 0), new HealingEffect(6)))),
 	SUPER_ENERGY_MIX(new BarbarianMix(new int[] {11481, 11483}, new MultiEffect(new EnergyEffect(20), new HealingEffect(6)))),
 	HUNTING_MIX(new BarbarianMix(new int[] {11517, 11519}, new MultiEffect(new SkillEffect(Skills.HUNTER, 3, 0), new HealingEffect(6)))),
-	SUPER_STR_MIX(new BarbarianMix(new int[] {11485, 11487}, new MultiEffect(new SkillEffect(Skills.STRENGTH, 5, 0.15), new HealingEffect(6))));
+	SUPER_STR_MIX(new BarbarianMix(new int[] {11485, 11487}, new MultiEffect(new SkillEffect(Skills.STRENGTH, 5, 0.15), new HealingEffect(6)))),
+
+    /** Stealing creation potions */
+	SC_PRAYER(new Potion(new int[] {14207, 14209, 14211, 14213, 14215}, new PrayerEffect(7, 0.25))),
+	SC_ENERGY(new Potion(new int[] {14217, 14219, 14221, 14223, 14225}, new EnergyEffect(20))),
+	SC_ATTACK(new Potion(new int[] {14227, 14229, 14231, 14233, 14235}, new SkillEffect(Skills.ATTACK, 3, 0.2))),
+	SC_STRENGTH(new Potion(new int[] {14237, 14239, 14241, 14243, 14245}, new SkillEffect(Skills.STRENGTH, 3, 0.2))),
+	SC_RANGE(new Potion(new int[] {14247, 14249, 14251, 14253, 14255}, new SkillEffect(Skills.RANGE, 3, 0.1))),
+	SC_DEFENCE(new Potion(new int[] {14257, 14259, 14261, 14263, 14265}, new SkillEffect(Skills.DEFENCE, 3, 0.1))),
+	SC_MAGIC(new Potion(new int[] {14267, 14269, 14271, 14273, 14275}, new SkillEffect(Skills.MAGIC, 3, 0.1))),
+	SC_SUMMONING(new Potion(new int[] {14277, 14279, 14281, 14283, 14285}, new SummoningEffect(7, 0.25)));
 
 	public static HashMap<Integer,Consumable> consumables = new HashMap<>();
 

@@ -24,7 +24,7 @@ public class StileShortcut extends AgilityShortcut {
 	 * Constructs a new {@Code StileShortcut} {@Code Object}
 	 */
 	public StileShortcut() {
-		super(new int[] { 993, 3730, 7527, 12982, 19222, 22302, 29460, 33842, 34776 }, 1, 0.0, false, 0.0, new String[] { "climb-over" });
+		super(new int[] { 993, 3730, 7527, 12982, 19222, 22302, 29460, 33842, 34776, 39508, 39509, 39510 }, 1, 0.0, false, 0.0, new String[] { "climb-over" });
 
 	}
 

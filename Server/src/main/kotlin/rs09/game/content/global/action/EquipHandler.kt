@@ -120,7 +120,9 @@ class EquipHandler : InteractionListener() {
                     return
                 }
             }
-            InteractionListeners.run(itemId,player,item,false)
+            if(!InteractionListeners.run(itemId,player,item,false)) {
+                return
+            }
             if (player.equipment.remove(item)) {
                 player.audioManager.send(Audio(2238, 10, 1))
                 player.dialogueInterpreter.close()

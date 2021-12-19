@@ -427,6 +427,19 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
 
             player.varpManager.get(index!!).setVarbit(offset!!, value!!).send(player)
         }
+        define("setvarc", Command.Privilege.ADMIN) { player, args ->
+            if(args.size < 3){
+                reject(player,"Usage: ::setvarc index value")
+            }
+            val index = args[1].toShortOrNull()
+            val value = args[2].toIntOrNull()
+
+            if(index == null || value == null) {
+                reject(player,"Usage ::setvarc index value")
+            }
+
+            player.packetDispatch.sendVarcUpdate(index!!, value!!)
+        }
 
         define("grow",Command.Privilege.ADMIN){player,_ ->
             val state: FarmingState = player.states.get("farming") as FarmingState? ?: return@define

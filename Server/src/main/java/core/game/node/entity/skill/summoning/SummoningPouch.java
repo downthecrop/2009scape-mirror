@@ -399,7 +399,13 @@ public enum SummoningPouch {
 	/**
 	 * Represents a steel titan pouch.
 	 */
-	STEEL_TITAN_POUCH(76, 12790, 99, 435.2, 7343, 4.9, 10, new Item(12160), new Item(1119), new Item(12155), new Item(12183, 178));
+	STEEL_TITAN_POUCH(76, 12790, 99, 435.2, 7343, 4.9, 10, new Item(12160), new Item(1119), new Item(12155), new Item(12183, 178)),
+
+    SACRED_CLAY_POUCH_1(-1, 14422, 1, 0, 8240, 0, 1, new Item(14182)),
+    SACRED_CLAY_POUCH_2(-1, 14424, 20, 0, 8242, 0, 3, new Item(14184)),
+    SACRED_CLAY_POUCH_3(-1, 14426, 40, 0, 8244, 0, 5, new Item(14186)),
+    SACRED_CLAY_POUCH_4(-1, 14428, 60, 0, 8246, 0, 7, new Item(14188)),
+    SACRED_CLAY_POUCH_5(-1, 14430, 80, 0, 8248, 0, 9, new Item(14190));
 
 	/**
 	 * The mapping.
