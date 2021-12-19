@@ -5,7 +5,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.tools.RandomFunction;
 
 /**
@@ -69,7 +69,7 @@ public final class AggressiveHandler {
 	 * @return {@code True} if the entity has selected a target.
 	 */
 	public boolean selectTarget() {
-		if (pauseTicks > GameWorld.getTicks() || entity.getLocks().isInteractionLocked()) {
+		if (pauseTicks > World.getTicks() || entity.getLocks().isInteractionLocked()) {
 			return false;
 		}
 		if ((!targetSwitching && entity.getProperties().getCombatPulse().isAttacking()) || DeathTask.isDead(entity)) {
@@ -139,7 +139,7 @@ public final class AggressiveHandler {
 	 * @param pauseTicks The amount of ticks to pause for.
 	 */
 	public void setPauseTicks(int pauseTicks) {
-		this.pauseTicks = GameWorld.getTicks() + pauseTicks;
+		this.pauseTicks = World.getTicks() + pauseTicks;
 	}
 
 	/**

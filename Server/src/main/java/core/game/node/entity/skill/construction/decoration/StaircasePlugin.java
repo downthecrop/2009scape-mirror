@@ -18,7 +18,7 @@ import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.node.entity.skill.construction.Hotspot;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import rs09.plugin.PluginManager;
 
 /**
@@ -199,7 +199,7 @@ public final class StaircasePlugin extends OptionHandler {
 				switch (buttonId) {
 				case 1:
 					player.lock(1);
-					GameWorld.getPulser().submit(new Pulse(1) {
+					World.getPulser().submit(new Pulse(1) {
 						@Override
 						public boolean pulse() {
 							climb(player, 1, house, ladder);
@@ -210,7 +210,7 @@ public final class StaircasePlugin extends OptionHandler {
 					break;
 				case 2:
 					player.lock(1);
-					GameWorld.getPulser().submit(new Pulse(1) {
+					World.getPulser().submit(new Pulse(1) {
 						@Override
 						public boolean pulse() {
 							climb(player, -1, house, ladder);

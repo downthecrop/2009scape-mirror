@@ -6,7 +6,7 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import rs09.game.system.command.Command
 import rs09.game.system.command.CommandPlugin.Companion.toInteger
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import java.util.*
 
 @Initializable
@@ -40,7 +40,7 @@ class AnimationCommandSet : CommandSet(Command.Privilege.ADMIN) {
                 notify(player, "Really...? $end times...? Looping 25 times instead.")
                 end = 25
             }
-            GameWorld.Pulser.submit(object : Pulse(3, player) {
+            World.Pulser.submit(object : Pulse(3, player) {
                 var id = start
                 override fun pulse(): Boolean {
                     player.animate(Animation.create(id))

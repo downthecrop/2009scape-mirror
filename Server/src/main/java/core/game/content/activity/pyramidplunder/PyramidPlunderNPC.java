@@ -5,7 +5,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.path.Pathfinder;
@@ -56,7 +56,7 @@ public abstract class PyramidPlunderNPC extends AbstractNPC {
     public PyramidPlunderNPC(int id, Location location, Player player) {
         super(id, location);
         this.player = player;
-        this.endTime = (int) (GameWorld.getTicks() + (1000 / 0.6));
+        this.endTime = (int) (World.getTicks() + (1000 / 0.6));
     }
 
     @Override
@@ -72,7 +72,7 @@ public abstract class PyramidPlunderNPC extends AbstractNPC {
 
     @Override
     public void handleTickActions() {
-        if (GameWorld.getTicks() > endTime) {
+        if (World.getTicks() > endTime) {
             clear();
         }
         if (!getLocks().isMovementLocked()) {
@@ -87,11 +87,11 @@ public abstract class PyramidPlunderNPC extends AbstractNPC {
             startFollowing();
         }
         if (quotes != null) {
-            if (nextSpeech < GameWorld.getTicks() && this.getDialoguePlayer() == null && !this.getLocks().isMovementLocked()) {
+            if (nextSpeech < World.getTicks() && this.getDialoguePlayer() == null && !this.getLocks().isMovementLocked()) {
                 if (count > quotes.length - 1) {
                     return;
                 }
-                nextSpeech = (int) (GameWorld.getTicks() + (20 / 0.5));
+                nextSpeech = (int) (World.getTicks() + (20 / 0.5));
                 if (++count >= quotes.length) {
                     setTimeUp(true);
                     handleTimeUp();

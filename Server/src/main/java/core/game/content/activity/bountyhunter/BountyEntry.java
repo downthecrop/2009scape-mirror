@@ -1,7 +1,7 @@
 package core.game.content.activity.bountyhunter;
 
 import core.game.node.entity.player.Player;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Holds a player's bounty hunter data.
@@ -49,21 +49,21 @@ public final class BountyEntry {
 	public void updatePenalty(Player player, boolean unlock) {
 		int penalty = player.getAttribute("pickup_penalty", 0);
 		int child = -1;
-		if (GameWorld.getTicks() > penalty) {
+		if (World.getTicks() > penalty) {
 			player.removeAttribute("pickup_penalty");
 			player.getPacketDispatch().sendInterfaceConfig(653, 8, true);
 		} else if (penalty != 0) {
 			child = 8;
-			int seconds = (int) Math.round((penalty - GameWorld.getTicks()) * 0.6);
+			int seconds = (int) Math.round((penalty - World.getTicks()) * 0.6);
 			player.getPacketDispatch().sendString(seconds + " Sec", 653, 10);
 		}
 		penalty = player.getAttribute("exit_penalty", 0);
-		if (GameWorld.getTicks() > penalty) {
+		if (World.getTicks() > penalty) {
 			player.removeAttribute("exit_penalty");
 			player.getPacketDispatch().sendInterfaceConfig(653, 11, true);
 		} else if (penalty != 0) {
 			child = 11;
-			int seconds = (int) Math.round((penalty - GameWorld.getTicks()) * 0.6);
+			int seconds = (int) Math.round((penalty - World.getTicks()) * 0.6);
 			player.getPacketDispatch().sendString(seconds + " Sec", 653, 13);
 		}
 		if (unlock && child > -1) {

@@ -6,7 +6,7 @@ import core.game.container.*;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
@@ -47,7 +47,7 @@ public final class TradeContainer extends Container {
 		if (!validatedItem(item, slot, amount, player.getInventory())) {
 			return;
 		}
-		if (!tradeable(item) && !GameWorld.getSettings().isDevMode()) {
+		if (!tradeable(item) && !World.getSettings().isDevMode()) {
 			player.getPacketDispatch().sendMessage("You can't trade this item.");
 			return;
 		}
@@ -209,7 +209,7 @@ public final class TradeContainer extends Container {
 	 * @param save if we should cache the icon.
 	 */
 	private void alert(final int slot, final boolean save) {
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
 			@Override
 			public boolean pulse() {
 				if (TradeModule.getExtension(player) != null) {
@@ -219,7 +219,7 @@ public final class TradeContainer extends Container {
 			}
 		});
 		if (save) {
-			player.setAttribute("alert", GameWorld.getTicks() + 8);
+			player.setAttribute("alert", World.getTicks() + 8);
 			player.setAttribute("alertSlot", slot);
 		}
 	}
@@ -228,7 +228,7 @@ public final class TradeContainer extends Container {
 	 * Method used to check the alert.
 	 */
 	private void checkAlert() {
-		if (player.getAttribute("alert", 0) > GameWorld.getTicks()) {
+		if (player.getAttribute("alert", 0) > World.getTicks()) {
 			alert(player.getAttribute("alertSlot", 0), false);
 		}
 	}

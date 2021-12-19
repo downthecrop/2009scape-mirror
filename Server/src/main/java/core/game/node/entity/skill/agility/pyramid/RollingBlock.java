@@ -8,7 +8,7 @@ import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.MovementHook;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -32,7 +32,7 @@ public final class RollingBlock implements MovementHook {
 		AgilityPyramidCourse.addConfig(player, stone, 1, false);
 		e.addExtension(LogoutTask.class, new LocationLogoutTask(5, player.getLocation()));
 		if (fail) {
-			GameWorld.getPulser().submit(new Pulse(1, player) {
+			World.getPulser().submit(new Pulse(1, player) {
 				int counter;
 
 				@Override
@@ -57,7 +57,7 @@ public final class RollingBlock implements MovementHook {
 			return false;
 		}
 		AgilityHandler.forceWalk(player, -1, dest, dest.transform(player.getDirection(), 2), Animation.create(1115), 20, 12, null);
-		GameWorld.getPulser().submit(new Pulse(3, player) {
+		World.getPulser().submit(new Pulse(3, player) {
 			@Override
 			public boolean pulse() {
 				AgilityPyramidCourse.addConfig(player, stone, 0, true);

@@ -33,7 +33,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import rs09.game.world.repository.Repository;
@@ -310,7 +310,7 @@ public class ChristmasEvent extends HolidayEvent {
 				player.lock(16);
 				player.animate(Animation.create(7535));
 				player.sendMessage("You shake the snow globe.");
-				GameWorld.getPulser().submit(new Pulse(1, player) {
+				World.getPulser().submit(new Pulse(1, player) {
 					int ticks;
 					@Override
 					public boolean pulse() {
@@ -376,7 +376,7 @@ public class ChristmasEvent extends HolidayEvent {
 					int distance = (int) Location.getDistance(player.getLocation(), target.getLocation());
 					int projectileSpeed = delay + speed + distance * 5;
 					double hitDelay = projectileSpeed * .02857;
-					GameWorld.getPulser().submit(new Pulse((int) hitDelay, target) {
+					World.getPulser().submit(new Pulse((int) hitDelay, target) {
 						@Override
 						public boolean pulse() {
 							target.getImpactHandler().manualHit(player, node instanceof NPC ? 1 : 0, HitsplatType.MISS);
@@ -448,7 +448,7 @@ public class ChristmasEvent extends HolidayEvent {
 					HolidayEvent.getCurrent().setStage(player, 2);
 				}
 				if (!weapon) {
-					GameWorld.getPulser().submit(new Pulse(200) {
+					World.getPulser().submit(new Pulse(200) {
 						@Override
 						public boolean pulse() {
 							snowman.clear();

@@ -7,7 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.player.link.TeleportManager.TeleportType;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
@@ -43,7 +43,7 @@ public class HouseTeleportPlugin extends MagicSpell {
 		}
 		if (entity.getTeleporter().send(location.transform(0, RandomFunction.random(3), 0), TeleportType.NORMAL)) {
 			entity.setAttribute("teleport:items", super.runes);
-			entity.setAttribute("magic-delay", GameWorld.getTicks() + 5);
+			entity.setAttribute("magic-delay", World.getTicks() + 5);
 			((Player) entity).getInventory().remove(super.runes);
 			return true;
 		}

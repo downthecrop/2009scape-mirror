@@ -12,7 +12,7 @@ import core.game.node.entity.player.Player;
 import rs09.game.ai.AIPlayer;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.path.Pathfinder;
 import core.game.world.update.flag.context.ChatMessage;
 import core.game.world.update.flag.player.ChatFlag;
@@ -56,7 +56,7 @@ public class PVPAIPActions {
 			};
 			bot.getProperties().setRetaliating(true);
 			bot.setAttribute("dead", false);
-			GameWorld.getPulser().submit(new Pulse(1, bot) {
+			World.getPulser().submit(new Pulse(1, bot) {
 				int ticks;
 				@Override
 				public boolean pulse() {
@@ -131,7 +131,7 @@ public class PVPAIPActions {
 		bot.sendChat("Ahh!");
 		bot.sendChat("GTFO M8");
 		bot.sendChat("Someone spec him!");
-		GameWorld.getPulser().submit(new Pulse(1, bot) {
+		World.getPulser().submit(new Pulse(1, bot) {
 			int ticks;
 			@Override
 			public boolean pulse() {

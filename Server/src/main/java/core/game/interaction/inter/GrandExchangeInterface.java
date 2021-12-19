@@ -8,10 +8,8 @@ import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
 import core.game.ge.GEGuidePrice;
 import core.game.ge.GEItemSet;
-import core.game.ge.GrandExchangeDatabase;
 import core.game.ge.OfferState;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.RunScript;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
@@ -25,7 +23,7 @@ import rs09.game.ge.GrandExchangeOffer;
 import rs09.game.ge.OfferManager;
 import rs09.game.ge.PlayerGrandExchange;
 import rs09.game.interaction.npc.BogrogPouchSwapper;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 /**
  * Handles the Grand Exchange interface options.
@@ -83,7 +81,7 @@ public class GrandExchangeInterface extends ComponentPlugin {
 
 	@Override
 	public boolean handle(final Player player, final Component component, final int opcode, final int button, final int slot, final int itemId) {
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
 			@Override
 			public boolean pulse() {
 				switch (component.getId()) {

@@ -16,7 +16,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
@@ -119,7 +119,7 @@ public final class MiasmicSpells extends CombatSpell {
 
 	@Override
 	public void fireEffect(Entity entity, Entity victim, BattleState state) {
-		if (victim.getAttribute("miasmic_immunity", -1) < GameWorld.getTicks()) {
+		if (victim.getAttribute("miasmic_immunity", -1) < World.getTicks()) {
 			victim.getStateManager().register(EntityState.MIASMIC, true, (getSpellId() - 15) * 20);
 		}
 	}
@@ -140,7 +140,7 @@ public final class MiasmicSpells extends CombatSpell {
 	
 	@Override
 	public boolean cast(Entity entity, Node target) {
-		if (!validStaffEquipped(entity) && !GameWorld.getSettings().isDevMode()) {
+		if (!validStaffEquipped(entity) && !World.getSettings().isDevMode()) {
 		    ((Player) entity).getPacketDispatch().sendMessage("You need to be wielding Zuriel's staff in order to cast this spell.");
 		    return false;
 		}

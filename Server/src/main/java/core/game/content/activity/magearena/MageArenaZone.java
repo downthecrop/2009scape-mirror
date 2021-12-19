@@ -5,7 +5,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
@@ -48,7 +48,7 @@ public final class MageArenaZone extends MapZone implements Plugin<Object> {
 		if (e instanceof Player) {
 			final Player p = (Player) e;
 			if (!logout) {
-				GameWorld.getPulser().submit(new Pulse(1, e) {
+				World.getPulser().submit(new Pulse(1, e) {
 					@Override
 					public boolean pulse() {
 						if (!p.getZoneMonitor().isInZone("mage arena")) {

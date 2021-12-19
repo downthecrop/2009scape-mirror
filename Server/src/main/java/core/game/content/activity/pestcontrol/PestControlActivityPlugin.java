@@ -18,8 +18,7 @@ import core.game.node.entity.state.EntityState;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.ai.AIPlayer;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.zone.RegionZone;
@@ -152,7 +151,7 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 				p.getStateManager().remove(EntityState.POISONED);
 			}
 			PulseManager.cancelDeathTask(p);
-			GameWorld.getPulser().submit(new Pulse(1, p) {
+			World.getPulser().submit(new Pulse(1, p) {
 				@Override
 				public boolean pulse() {
 					p.getSkills().restore();
@@ -235,7 +234,7 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 			ZoneBuilder.configure(new PCIslandZone());
 		}
 		pulse.start();
-		GameWorld.getPulser().submit(pulse);
+		World.getPulser().submit(pulse);
 	}
 
 	@Override

@@ -7,14 +7,12 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.slayer.SlayerEquipmentFlags
-import core.game.system.task.Pulse
 import core.game.world.map.zone.ZoneBorders
 import core.plugin.Plugin
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InteractionListeners
 import rs09.game.system.config.ItemConfigParser
-import rs09.game.world.GameWorld
 
 /**
  * Represents the equipment equipping handler plugin.

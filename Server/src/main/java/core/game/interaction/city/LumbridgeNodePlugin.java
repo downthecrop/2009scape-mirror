@@ -16,7 +16,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -73,7 +73,7 @@ public final class LumbridgeNodePlugin extends OptionHandler {
             case 37335:
                 if (!FLAG_IN_USE) {
                     FLAG_IN_USE = true;
-				GameWorld.getPulser().submit(new Pulse(1, player) {
+				World.getPulser().submit(new Pulse(1, player) {
                         int counter = 0;
 
                         @Override

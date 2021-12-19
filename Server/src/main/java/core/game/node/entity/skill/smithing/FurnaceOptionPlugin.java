@@ -14,7 +14,7 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -92,7 +92,7 @@ public final class FurnaceOptionPlugin extends OptionHandler {
 	private final void handleTutorialIsland(final Player player) {
 		if (player.getInventory().containItems(438, 436)) {
 			player.animate(ANIMATION);
-			GameWorld.getPulser().submit(new Pulse(2, player) {
+			World.getPulser().submit(new Pulse(2, player) {
 				@Override
 				public boolean pulse() {
 					player.getInventory().remove(ITEMS);

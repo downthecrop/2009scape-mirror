@@ -16,7 +16,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -93,7 +93,7 @@ public class ThievingGuidePlugin extends OptionHandler {
 			player.lock(4);
 			player.getPacketDispatch().sendMessage("You start cracking the safe.");
 			player.animate(animations[success ? 1 : 0]);
-			GameWorld.getPulser().submit(new Pulse(3, player) {
+			World.getPulser().submit(new Pulse(3, player) {
 				@Override
 				public boolean pulse() {
 					if (success) {
@@ -105,7 +105,7 @@ public class ThievingGuidePlugin extends OptionHandler {
 						player.getPacketDispatch().sendMessage("You slip and trigger a trap!");
 						player.animate(animations[2]);
 						player.getImpactHandler().manualHit(player, RandomFunction.random(2, 6), HitsplatType.NORMAL);
-						GameWorld.getPulser().submit(new Pulse(1) {
+						World.getPulser().submit(new Pulse(1) {
 							@Override
 							public boolean pulse() {
 								player.animate(new Animation(-1, Priority.HIGH));

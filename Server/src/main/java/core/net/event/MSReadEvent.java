@@ -3,7 +3,7 @@ package core.net.event;
 import rs09.game.system.SystemLogger;
 import core.net.IoReadEvent;
 import core.net.IoSession;
-import core.net.amsc.MSPacketRepository;
+import core.net.ms.MSPacketRepository;
 
 import java.nio.ByteBuffer;
 

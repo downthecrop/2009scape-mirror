@@ -26,7 +26,7 @@ import core.tools.RandomFunction;
 import rs09.game.node.entity.combat.CombatPulse;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.system.SystemLogger;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -346,7 +346,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 			return;
 		}
 		if (specialMove(special)) {
-			setAttribute("special-delay", GameWorld.getTicks() + 3);
+			setAttribute("special-delay", World.getTicks() + 3);
 			owner.getInventory().remove(new Item(scroll.getItemId()));
             owner.getAudioManager().send(4161);
 			visualizeSpecialMove();
@@ -371,7 +371,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	public void sendFamiliarHit(final Entity target, final int maxHit, final Graphics graphics) {
 		final int ticks = 2 + (int) Math.floor(getLocation().getDistance(target.getLocation()) * 0.5);
 		getProperties().getCombatPulse().setNextAttack(4);
-		GameWorld.getPulser().submit(new Pulse(ticks, this, target) {
+		World.getPulser().submit(new Pulse(ticks, this, target) {
 			@Override
 			public boolean pulse() {
 				BattleState state = new BattleState(Familiar.this, target);
@@ -444,7 +444,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		if (!isOwnerAttackable()) {
 			return false;
 		}
-		if (getAttribute("special-delay", 0) > GameWorld.getTicks()) {
+		if (getAttribute("special-delay", 0) > World.getTicks()) {
 			return false;
 		}
 		return true;

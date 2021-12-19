@@ -4,11 +4,10 @@ import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.node.scenery.Scenery
 import core.game.node.entity.combat.CombatStyle
-import rs09.game.node.entity.combat.CombatSwingHandler
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.zone.ZoneBorders
@@ -494,7 +493,7 @@ class Adventurer(val style: CombatStyle): Script() {
                 if (ge != null && !bot.bank.isEmpty) {
                     counter = 0
                     scriptAPI.randomWalkTo(geloc, 3)
-                    GameWorld.Pulser.submit(GEPulse())
+                    World.Pulser.submit(GEPulse())
                 }
                 return
             }

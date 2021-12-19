@@ -23,7 +23,7 @@ import core.game.node.entity.player.link.TeleportManager.TeleportType;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
@@ -178,7 +178,7 @@ public final class AnimalMagnetismPlugin extends OptionHandler {
 			final Player player = event.getPlayer();
 			player.animate(ANIMATION);
 			player.lock(ANIMATION.getDefinition().getDurationTicks());
-			GameWorld.getPulser().submit(new Pulse(ANIMATION.getDefinition().getDurationTicks(), player) {
+			World.getPulser().submit(new Pulse(ANIMATION.getDefinition().getDurationTicks(), player) {
 				@Override
 				public boolean pulse() {
 					if (!player.getZoneMonitor().isInZone("rimmington mine")) {

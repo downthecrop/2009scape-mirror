@@ -12,7 +12,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;
@@ -94,7 +94,7 @@ public class WLBelowCutscene extends CutscenePlugin {
 		king.sendChat("What's going on?", 6);
 		king.sendChat("I...must...kill..." + player.getUsername() + "!!", 9);
 		player.sendChat("Uh oh! King Roald looks evil!", 13);
-		GameWorld.getPulser().submit(new Pulse(13) {
+		World.getPulser().submit(new Pulse(13) {
 			@Override
 			public boolean pulse() {
 				reset();
@@ -133,7 +133,7 @@ public class WLBelowCutscene extends CutscenePlugin {
 					player.sendMessage("Surok looks like he's trying to teleport away!");
 					zaff.sendChat("Stop!!", 3);
 					surok.sendChat("Nooooooooooooo!", 6);
-					GameWorld.getPulser().submit(new Pulse(3, player) {
+					World.getPulser().submit(new Pulse(3, player) {
 
 						@Override
 						public boolean pulse() {
@@ -144,7 +144,7 @@ public class WLBelowCutscene extends CutscenePlugin {
 						}
 
 					});
-					GameWorld.getPulser().submit(new Pulse(9, player) {
+					World.getPulser().submit(new Pulse(9, player) {
 
 						@Override
 						public boolean pulse() {
@@ -210,7 +210,7 @@ public class WLBelowCutscene extends CutscenePlugin {
 		zaff.graphics(Graphics.create(108), 3);
 		king.graphics(Graphics.create(110), 8);
 		king.sendChat("Wh...!", 7);
-		GameWorld.getPulser().submit(new Pulse(9, player) {
+		World.getPulser().submit(new Pulse(9, player) {
 
 			@Override
 			public boolean pulse() {
@@ -235,7 +235,7 @@ public class WLBelowCutscene extends CutscenePlugin {
 	 * @param ticks the ticks.
 	 */
 	public void sendCamera(final int x1, final int y1, final int x2, final int y2, final int height, final int speed, int ticks) {
-		GameWorld.getPulser().submit(new Pulse(ticks, player) {
+		World.getPulser().submit(new Pulse(ticks, player) {
 
 			@Override
 			public boolean pulse() {
@@ -261,7 +261,7 @@ public class WLBelowCutscene extends CutscenePlugin {
 	 * @param ticks the ticks.
 	 */
 	public void reset(int ticks) {
-		GameWorld.getPulser().submit(new Pulse(1, player) {
+		World.getPulser().submit(new Pulse(1, player) {
 
 			@Override
 			public boolean pulse() {

@@ -37,7 +37,7 @@ import core.tools.RandomFunction;
 import core.tools.StringUtils;
 import kotlin.Unit;
 import rs09.game.content.global.travel.EssenceTeleport;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import rs09.plugin.PluginManager;
 
 /**
@@ -477,7 +477,7 @@ public final class WizardTowerPlugin extends OptionHandler {
                                 player.lock(7);
                                 npc.faceLocation(Location.create(3102, 3163, 2));
                                 npc.animate(ANIMATION);
-						GameWorld.getPulser().submit(new Pulse(3, player) {
+						World.getPulser().submit(new Pulse(3, player) {
                                     @Override
                                     public boolean pulse() {
                                         quest.finish(player);
@@ -1272,7 +1272,7 @@ public final class WizardTowerPlugin extends OptionHandler {
                     close();
                     npc.graphics(GRAPHIC);
                     player.lock(3);
-				GameWorld.getPulser().submit(new Pulse(2) {
+				World.getPulser().submit(new Pulse(2) {
                         @Override
                         public boolean pulse() {
                             npc("Ok, I have retrieved it. Luckily it doesn't appear to", "have been damaged. Now please take it to Aubury, ", "and try not to lose it again.");

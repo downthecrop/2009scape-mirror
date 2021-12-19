@@ -3,7 +3,7 @@ package core.game.content.quest.members.sheepherder;
 import core.game.interaction.MovementPulse;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.NPC;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.path.Pathfinder;
 
@@ -25,7 +25,7 @@ public class HerderSheepNPC extends NPC {
             if(getLocation().withinDistance(Location.create(2593, 3362, 0),2)){
                 getProperties().setTeleportLocation(Location.create(2599, 3360, 0));
             }
-            if (ticksTilReturn < GameWorld.getTicks()) {
+            if (ticksTilReturn < World.getTicks()) {
                 sendChat("Baa");
                 this.getPulseManager().run(new MovementPulse(this, spawnLocation) {
                     @Override
@@ -36,7 +36,7 @@ public class HerderSheepNPC extends NPC {
                 this.removeAttribute("recently-prodded");
             }
         } else {
-            if(nextWalk < GameWorld.getTicks() && !getPulseManager().hasPulseRunning()){
+            if(nextWalk < World.getTicks() && !getPulseManager().hasPulseRunning()){
                 setNextWalk();
                 Location to = getMovementDestination();
                 if (canMove(to)) {
@@ -57,7 +57,7 @@ public class HerderSheepNPC extends NPC {
 
     @Override
     public void finalizeDeath(Entity killer) {
-        this.setRespawnTick(GameWorld.getTicks() + 100);
+        this.setRespawnTick(World.getTicks() + 100);
         super.finalizeDeath(killer);
     }
 }

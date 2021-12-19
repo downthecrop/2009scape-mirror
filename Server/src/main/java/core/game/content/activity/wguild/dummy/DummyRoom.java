@@ -11,7 +11,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag;
@@ -101,7 +101,7 @@ public final class DummyRoom extends OptionHandler {
 		for (Dummy dummy : Dummy.values()) {
 			SceneryDefinition.forId(dummy.getObject().getId()).getHandlers().put("option:hit", this);
 		}
-		GameWorld.getPulser().submit(new Pulse(10) {
+		World.getPulser().submit(new Pulse(10) {
 			boolean activeDummy;
 			Scenery controlled;
 
@@ -109,7 +109,7 @@ public final class DummyRoom extends OptionHandler {
 			public boolean pulse() {
 				if (!activeDummy) {
 					setDelay(10);
-					timeStamp = GameWorld.getTicks();
+					timeStamp = World.getTicks();
 					dummy = RandomFunction.getRandomElement(Dummy.values());
 					SceneryBuilder.replace(RegionManager.getObject(dummy.getObject().getLocation()), dummy.getObject(), 11);
 					activeDummy = true;

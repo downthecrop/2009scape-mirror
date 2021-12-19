@@ -2,7 +2,7 @@ package rs09.game.ai.general
 
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
-import rs09.game.world.GameWorld
+import rs09.game.world.World
 import core.game.world.map.Location
 import core.tools.RandomFunction
 import rs09.game.ai.AIPBuilder
@@ -15,18 +15,18 @@ class GeneralBotCreator {
     //org/crandor/net/packet/in/InteractionPacket.java <<< This is a very useful class for learning to code bots
     constructor(loc: Location?, botScript: Script) {
         botScript.bot = AIPBuilder.create(loc)
-        GameWorld.Pulser.submit(BotScriptPulse(botScript))
+        World.Pulser.submit(BotScriptPulse(botScript))
     }
 
     constructor(botScript: Script, bot: AIPlayer?) {
         botScript.bot = bot
-        GameWorld.Pulser.submit(BotScriptPulse(botScript).also { AIRepository.PulseRepository.add(it) })
+        World.Pulser.submit(BotScriptPulse(botScript).also { AIRepository.PulseRepository.add(it) })
     }
 
     constructor(botScript: Script, player: Player, isPlayer: Boolean){
         botScript.bot = player
         val pulse = BotScriptPulse(botScript,isPlayer)
-        GameWorld.Pulser.submit(pulse)
+        World.Pulser.submit(pulse)
         player.setAttribute("/save:not_on_highscores",true)
         player.setAttribute("botting:script",pulse)
     }
@@ -75,7 +75,7 @@ class GeneralBotCreator {
 
     inner class TransitionPulse(val script: Script) : Pulse(RandomFunction.random(60,200)){
         override fun pulse(): Boolean {
-            GameWorld.Pulser.submit(BotScriptPulse(script.newInstance()).also { AIRepository.PulseRepository.add(it) })
+            World.Pulser.submit(BotScriptPulse(script.newInstance()).also { AIRepository.PulseRepository.add(it) })
             return true
         }
     }

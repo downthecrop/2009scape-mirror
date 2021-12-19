@@ -6,7 +6,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -33,7 +33,7 @@ public class BarrowsBoatPlugin extends OptionHandler {
 			final String name = node.getId() == 6970 ? "Mort'ton." : "the swamp";
 			player.lock();
 			player.getInterfaceManager().open(new Component(321));
-			GameWorld.getPulser().submit(new Pulse(7, player) {
+			World.getPulser().submit(new Pulse(7, player) {
 
 				@Override
 				public boolean pulse() {

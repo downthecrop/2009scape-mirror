@@ -9,7 +9,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.state.EntityState;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
@@ -96,7 +96,7 @@ public class LTRDragonFightCutscene extends CutscenePlugin {
     public void open() {
         ZoneBuilder.configure(CellarMapZone.get());
         setNpcs();
-        GameWorld.getPulser().submit(fightPulse);
+        World.getPulser().submit(fightPulse);
         player.lock();
         player.getLocks().lockMovement(1000000);
         camera(31, 12, -45, 0, 300, 95);
@@ -310,7 +310,7 @@ public class LTRDragonFightCutscene extends CutscenePlugin {
      * Method used to clear all the npcs.
      */
     private void clearNpcs() {
-        GameWorld.getPulser().submit(new Pulse(5) {
+        World.getPulser().submit(new Pulse(5) {
             @Override
             public boolean pulse() {
                 for (NPC n : region.getPlanes()[0].getNpcs()) {

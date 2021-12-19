@@ -10,7 +10,7 @@ import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.path.Path;
 import core.game.world.map.path.Pathfinder;
 import rs09.game.world.repository.Repository;
@@ -141,7 +141,7 @@ public final class JulietDialogue extends DialoguePlugin {
 			break;
 		case 2003:
 			close();
-			GameWorld.getPulser().submit(new Pulse(1) {
+			World.getPulser().submit(new Pulse(1) {
 				int counter = 0;
 
 				@Override
@@ -163,7 +163,7 @@ public final class JulietDialogue extends DialoguePlugin {
 		case 2004:
 			close();
 			npc.animate(new Animation(836));
-			GameWorld.getPulser().submit(new Pulse(1) {
+			World.getPulser().submit(new Pulse(1) {
 				int counter = 0;
 
 				@Override

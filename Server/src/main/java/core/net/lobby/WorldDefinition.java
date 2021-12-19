@@ -1,6 +1,6 @@
 package core.net.lobby;
 
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import rs09.game.world.repository.Repository;
 
 /**
@@ -124,7 +124,7 @@ public class WorldDefinition {
 	 * @return The player count.
 	 */
 	public int getPlayerCount() {
-		if (worldId == GameWorld.getSettings().getWorldId()) {
+		if (worldId == World.getSettings().getWorldId()) {
 			return Repository.getPlayers().size();
 		}
 		return players;

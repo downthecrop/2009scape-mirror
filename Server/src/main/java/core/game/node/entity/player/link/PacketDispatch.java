@@ -6,7 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import rs09.game.system.SystemLogger;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag;
@@ -87,7 +87,7 @@ public final class PacketDispatch {
 	 * @param ticks the ticks.
 	 */
 	public void sendMessage(final String message, int ticks) {
-		GameWorld.getPulser().submit(new Pulse(ticks, player) {
+		World.getPulser().submit(new Pulse(ticks, player) {
 			@Override
 			public boolean pulse() {
 				sendMessage(message);

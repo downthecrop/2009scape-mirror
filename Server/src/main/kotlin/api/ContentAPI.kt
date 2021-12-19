@@ -38,8 +38,8 @@ import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ItemConfigParser;
-import rs09.game.world.GameWorld
-import rs09.game.world.GameWorld.Pulser
+import rs09.game.world.World
+import rs09.game.world.World.Pulser
 import rs09.game.world.repository.Repository
 
 object ContentAPI {
@@ -372,7 +372,7 @@ object ContentAPI {
      */
     @JvmStatic
     fun getWorldTicks(): Int {
-        return GameWorld.ticks
+        return World.ticks
     }
 
     /**
@@ -914,7 +914,7 @@ object ContentAPI {
      */
     @JvmStatic
     fun submitWorldPulse(pulse: Pulse){
-        GameWorld.Pulser.submit(pulse)
+        World.Pulser.submit(pulse)
     }
 
     /**

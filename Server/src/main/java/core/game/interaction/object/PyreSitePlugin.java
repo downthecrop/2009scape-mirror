@@ -22,7 +22,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import rs09.game.world.repository.Repository;
 import rs09.plugin.PluginManager;
 
@@ -112,7 +112,7 @@ public final class PyreSitePlugin extends OptionHandler {
 		player.lock();
 		USED_LOCATIONS.add(object.getLocation());
 		player.faceLocation(object.getLocation());
-		GameWorld.getPulser().submit(getPulse(player, object));
+		World.getPulser().submit(getPulse(player, object));
 	}
 
 	/**

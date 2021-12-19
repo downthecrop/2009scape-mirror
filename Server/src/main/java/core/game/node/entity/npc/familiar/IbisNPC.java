@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
+import rs09.game.world.World;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
@@ -73,7 +73,7 @@ public class IbisNPC extends Forager {
 	@Override
 	protected boolean specialMove(FamiliarSpecial special) {
 		animate(Animation.create(8201));
-		GameWorld.getPulser().submit(new Pulse(3, owner, this) {
+		World.getPulser().submit(new Pulse(3, owner, this) {
 			@Override
 			public boolean pulse() {
 				Location loc = null;
