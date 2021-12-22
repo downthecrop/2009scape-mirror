@@ -77,3 +77,4 @@
 - Implemented server performance monitor, many performance improvements
 - Fishing and fishing trawler now use closer-to-empirical formulae.
 - Server configuration language has been changed from JSON to TOML.
+- Add Family Crest quest.
