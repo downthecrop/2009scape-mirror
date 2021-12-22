@@ -253,6 +253,13 @@ public final class InteractionPacket implements IncomingPacket {
 		} else if (objectId == 6899) {
 			object = new Scenery(6899, new Location(3221, 9618));
 		}
+
+        // Family crest levers don't have varps associated with them, so their state is validated with attributes
+        // instead, and they always appear as their down/odd variant in the server's map
+        if(2421 <= objectId && objectId <= 2426 && objectId % 2 == 0) {
+            object = new Scenery(objectId - 1, new Location(x, y, player.getLocation().getZ()));
+            objectId -= 1;
+        }
 		if (object == null || object.getId() != objectId) {
 			player.debug("Scenery("  + objectId + ") interaction was " + object + " at location " + x + ", " + y + ".");
 			PacketRepository.send(ClearMinimapFlag.class, new PlayerContext(player));

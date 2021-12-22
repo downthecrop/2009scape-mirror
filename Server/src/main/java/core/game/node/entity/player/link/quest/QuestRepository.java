@@ -8,6 +8,7 @@ import org.json.simple.JSONObject;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
+import java.util.TreeMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -21,7 +22,7 @@ public final class QuestRepository {
     /**
      * The static mapping of instanced quests.
      */
-    private static final Map<String, Quest> QUESTS = new HashMap<>();
+    private static final Map<String, Quest> QUESTS = new TreeMap<>();
 
     /**
      * The mapping of quest indexes with related stages.

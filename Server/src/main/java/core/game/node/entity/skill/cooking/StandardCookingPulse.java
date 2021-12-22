@@ -116,14 +116,16 @@ public class StandardCookingPulse extends Pulse {
     public boolean isBurned(final Player player, final Scenery object, int food) {
         boolean hasGauntlets = player.getEquipment().containsItem(new Item(Items.COOKING_GAUNTLETS_775));
         double burn_stop = (double) CookableItems.getBurnLevel(food);
+        int gauntlets_boost = 0;
         CookableItems item = CookableItems.forId(food);
-        if (hasGauntlets && (food == Items.RAW_SWORDFISH_371 || food == Items.RAW_LOBSTER_377 || food == Items.RAW_SHARK_383)) {
+        if (hasGauntlets && (food == Items.RAW_SWORDFISH_371 || food == Items.RAW_LOBSTER_377 || food == Items.RAW_MONKFISH_7944 || food == Items.RAW_SHARK_383)) {
             burn_stop -= 6;
+            gauntlets_boost += 6;
         }
         if (player.getSkills().getLevel(Skills.COOKING) > burn_stop) {
             return false;
         }
-        int cook_level = player.getSkills().getLevel(Skills.COOKING);
+        int cook_level = player.getSkills().getLevel(Skills.COOKING) + gauntlets_boost;
         double host_ratio = RandomFunction.randomDouble(100.0);
         double low = item.low + (object.getName().contains("fire") ? 0 : (0.1 * item.low));
         double high = item.high + (object.getName().contains("fire") ? 0 : (0.1 * item.high));
