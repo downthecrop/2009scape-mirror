@@ -26,7 +26,7 @@ class AvanDialogue (player: Player? = null): DialoguePlugin(player) {
         }
 
         if(qstage < 13){
-            npc("What? Can't you see I'm busy?")
+            npc("What? Can't you see I'm busy?").also { stage = 1000 }
         }else{
             when(qstage){
                 13 -> options("Why are you lurking around a scorpion pit?", "I'm looking for a man... his name is Avan Fitzharmon.").also{stage = 2}

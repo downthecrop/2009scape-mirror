@@ -38,7 +38,7 @@ class DimintheisDialogue(player: Player? = null): DialoguePlugin(player) {
             stage = 6000
         }
 
-        if(qstage == 19 && player.inventory.containItems(782)){
+        if(qstage == 20 && player.inventory.containItems(782)){
             player("I have retrieved your crest.").also{stage = 5000}
             return true;
         }
@@ -127,13 +127,11 @@ class DimintheisDialogue(player: Player? = null): DialoguePlugin(player) {
             2008 -> npc("For many years I had assumed them all dead, " ,
                     "as I had heard no word from them.").also { stage++}
             2009 -> npc("Recently I heard that my son Caleb is alive and well, " ,
-                    "trying to earn his fortune as a great fish chef.").also { stage++ }
-            2010 -> npc("I believe he is staying with a friend ",
-                    "who lives just outside the west gates of Varrock.").also { stage++}
-            2011 -> options("Ok, I will help you", "I'm not interested in an adventure right now").also { stage++}
-            2012 -> when(buttonId){
+                    "trying to earn his fortune as a great fish chef in Catherby.").also { stage++ }
+            2010 -> options("Ok, I will help you", "I'm not interested in an adventure right now").also { stage++ }
+            2011 -> when(buttonId){
                 1 -> npc("I thank you greatly adventurer!").also { stage++}
-                2 -> npc("I realise it was a lot to ask of a stranger.").also { stage  = 1000}
+                2 -> npc("I realise it was a lot to ask of a stranger.").also { stage  = 1000 }
             }
             2013 -> if(player.questRepository.getQuest("Family Crest").hasRequirements(player)) {
                 npc("If you find Caleb, or my other sons... please... ",

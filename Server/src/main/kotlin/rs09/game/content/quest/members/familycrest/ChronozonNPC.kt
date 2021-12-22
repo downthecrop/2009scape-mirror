@@ -39,58 +39,49 @@ class ChronozonNPC(id: Int, location: Location?) : AbstractNPC(667, Location(308
 
     override fun checkImpact(state: BattleState?) {
         if (state != null) {
-            if(state.style != CombatStyle.MAGIC){
-                state.neutralizeHits()
-            }
-            else{
-                if(state.spell.spellId == 24 ||state.spell.spellId == 45) {
-                    if (m_amountOfAirDamageTaken < 23) {
-                        m_amountOfAirDamageTaken += state.estimatedHit
-                    } else {
-                        state.neutralizeHits()
-                        m_targetPlayer.sendMessage("Air Blast seems to have done all it will to Chronozon")
-                    }
+            if(m_amountOfAirDamageTaken == 0 || m_amountOfWaterDamageTaken == 0 ||
+                m_amountOfEarthDamageTaken == 0 || m_amountOfFireDamageTaken == 0) {
+                if(state.style != CombatStyle.MAGIC || state.totalDamage >= skills.lifepoints) {
+                    state.neutralizeHits()
                 }
-
-                if(state.spell.spellId == 33 ||state.spell.spellId == 52) {
-                    if (m_amountOfEarthDamageTaken < 23) {
-                        m_amountOfEarthDamageTaken += state.estimatedHit
-                    }
-                    else {
-                        state.neutralizeHits()
-                        m_targetPlayer.sendMessage("Earth Blast seems to have done all it will to Chronozon")
-                    }
-                }
-
-                if(state.spell.spellId == 38 || state.spell.spellId == 55) {
-                    if (m_amountOfFireDamageTaken < 23) {
-                        m_amountOfFireDamageTaken += state.estimatedHit
-                    } else {
-                        state.neutralizeHits()
-                        m_targetPlayer.sendMessage("Fire Blast seems to have done all it will to Chronozon")
-                    }
-                }
-
-                if(state.spell.spellId == 27 ||state.spell.spellId == 48)
-                    if(m_amountOfWaterDamageTaken < 23){
-                        m_amountOfWaterDamageTaken += state.estimatedHit
-                    }
-                    else{
-                        state.neutralizeHits()
-                        m_targetPlayer.sendMessage("Water Blast seems to have done all it will to Chronozon")
-                    }
-
             }
 
+            if(state.spell != null) {
+                if(state.spell.spellId == 24) {
+                    if(state.totalDamage > 0 && m_amountOfAirDamageTaken == 0) {
+                        m_targetPlayer.sendMessage("Chronozon weakens...")
+                    }
+                    m_amountOfAirDamageTaken += state.totalDamage
+                }
+
+                if(state.spell.spellId == 27) {
+                    if(state.totalDamage > 0 && m_amountOfWaterDamageTaken == 0) {
+                        m_targetPlayer.sendMessage("Chronozon weakens...")
+                    }
+                    m_amountOfWaterDamageTaken += state.totalDamage
+                }
+
+                if(state.spell.spellId == 33) {
+                    if(state.totalDamage > 0 && m_amountOfEarthDamageTaken == 0) {
+                        m_targetPlayer.sendMessage("Chronozon weakens...")
+                    }
+                    m_amountOfEarthDamageTaken += state.totalDamage
+                }
+
+                if(state.spell.spellId == 38) {
+                    if(state.totalDamage > 0 && m_amountOfFireDamageTaken == 0) {
+                        m_targetPlayer.sendMessage("Chronozon weakens...")
+                    }
+                    m_amountOfFireDamageTaken += state.totalDamage
+                }
+            }
         }
     }
 
     override fun isAttackable(entity: Entity, style: CombatStyle?): Boolean {
-        return if (entity != m_targetPlayer) {
-            false
-        }
-
-        else super.isAttackable(entity, style)
+        return entity == m_targetPlayer &&
+            m_targetPlayer.questRepository.getQuest("Family Crest").getStage(m_targetPlayer) == 19 &&
+            super.isAttackable(entity, style)
     }
 
     override fun clear() {
@@ -98,6 +89,9 @@ class ChronozonNPC(id: Int, location: Location?) : AbstractNPC(667, Location(308
     }
 
     override fun finalizeDeath(killer: Entity?) {
+        if(killer == m_targetPlayer) {
+            m_targetPlayer.questRepository.getQuest("Family Crest").setStage(m_targetPlayer, 20)
+        }
         clear()
         super.finalizeDeath(killer)
 

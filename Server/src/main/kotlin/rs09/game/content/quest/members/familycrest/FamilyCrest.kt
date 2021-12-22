@@ -13,9 +13,9 @@ import org.rs09.consts.Items
 * Represents the "Family Crest" quest.
 * @author Plex
 */
-@Initializable
 
-class FamilyCrest: Quest("Family Crest", 59, 58, 1) {
+@Initializable
+class FamilyCrest: Quest("Family Crest", 59, 58, 1, 148, 0, 1, 11) {
 
     override fun newInstance(`object`: Any?): Quest {
         return this
@@ -26,7 +26,7 @@ class FamilyCrest: Quest("Family Crest", 59, 58, 1) {
         var line = 11
         player?: return
         if(stage == 0){
-            line(player, "I can start this quest by speaking to !!Demintheis??", line++)
+            line(player, "I can start this quest by speaking to !!Dimintheis??", line++)
             line(player, "in east Varrock", line++)
             line++
             line(player, "To start this quest I require:", line++)
@@ -41,7 +41,7 @@ class FamilyCrest: Quest("Family Crest", 59, 58, 1) {
         }
 
         if(stage >= 11){
-            line(player, "I found !!Caleb?? at !!Gertrude's house?? outside !!Varrock??", line++,  stage >11)
+            line(player, "I found !!Caleb?? at his house?? in !!Catherby??", line++,  stage >11)
             line(player, "and told him of my Quest for his father to restore his Family Crest.", line++,  stage >11)
             line(player, "I gave !!Caleb?? the Swordfish, Bass, Tuna, Salmon and Shrimp he needed for his salad in return for his crest piece", line++,  stage >11)
 
@@ -73,6 +73,9 @@ class FamilyCrest: Quest("Family Crest", 59, 58, 1) {
         }
         if(stage >= 19){
             line(player, "He has told me about the Demon !!Chronozon?? located in the !!Edgeville dungeon??", line++, stage > 19)
+        }
+        if(stage >= 20){
+            line(player, "I defeated the Demon !!Chronozon?? and obtained !!Johnathon??'s crest piece", line++, stage > 20)
         }
         if(stage == 100){
             line(player, "I took all three pieces of the crest back to !!Dimintheis?? in !!Varrock??", line++)
@@ -118,9 +121,10 @@ class FamilyCrest: Quest("Family Crest", 59, 58, 1) {
         }
 
     }
-    override fun getConfig(player: Player?, stage: Int): IntArray {
+
+    /*override fun getConfig(player: Player?, stage: Int): IntArray {
         if(stage == 100) return intArrayOf(1282, 90)
         if(stage > 0) return intArrayOf(1282, 1)
         else return intArrayOf(1282, 0)
-    }
+    }*/
 }
