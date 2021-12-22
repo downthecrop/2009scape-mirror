@@ -146,18 +146,6 @@ fun <T> removeItem(player: Player, item: T, container: Container = Container.INV
 }
 
 /**
- * Add an item to a player's inventory
- * @param player the player whose inventory to add an item to
- * @param id the ID of the item to add
- * @param amount the amount of the item to add, defaults to 1
- * @return true if the item exists in the given amount in the player's inventory
- */
-
-fun addItem(player: Player, id: Int, amount: Int = 1): Boolean{
-    return addItem(player, id, amount)
-}
-
-/**
  * Add an item to the given player's given container
  * @param player the player whose container to modify
  * @param id the ID of the item to add

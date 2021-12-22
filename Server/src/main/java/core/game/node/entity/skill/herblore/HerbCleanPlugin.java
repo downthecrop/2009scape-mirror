@@ -41,7 +41,7 @@ public final class HerbCleanPlugin extends OptionHandler {
 		double exp = herb.getExperience();
 		if (removeItem(player, node.asItem(), Container.INVENTORY)){
 			player.getSkills().addExperience(Skills.HERBLORE, exp, true);
-			addItem(player, herb.getProduct().getId(), 1);
+			addItem(player, herb.getProduct().getId(), 1, Container.INVENTORY);
             player.getAudioManager().send(SFX_IDS[RandomFunction.random(SFX_IDS.length)], 1);
 			player.getPacketDispatch().sendMessage("You clean the dirt from the " + herb.getProduct().getName().toLowerCase().replace("clean", "").trim() + " leaf.");
 		}

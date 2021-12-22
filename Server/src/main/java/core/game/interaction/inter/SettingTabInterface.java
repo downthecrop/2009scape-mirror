@@ -8,6 +8,7 @@ import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
+import org.rs09.consts.Items;
 
 /**
  * @author 'Vexia

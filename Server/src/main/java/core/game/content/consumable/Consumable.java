@@ -54,7 +54,7 @@ public abstract class Consumable implements Plugin<Object> {
 		} else 	removeItem(player, item, Container.INVENTORY);
 
 		if (nextItemId != -1) {
-			addItem(player, nextItemId, 1);
+			addItem(player, nextItemId, 1, Container.INVENTORY);
 		}
 		final int initialLifePoints = player.getSkills().getLifepoints();
 		Consumables.getConsumableById(item.getId()).effect.activate(player);
