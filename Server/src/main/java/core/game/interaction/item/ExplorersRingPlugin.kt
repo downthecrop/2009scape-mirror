@@ -40,6 +40,7 @@ class ExplorersRingPlugin : InteractionListener() {
                 return@on true
             }
             player.settings.updateRunEnergy(-50.0)
+            player.audioManager.send(5035)
 
             getStoreFile()[player.username.toLowerCase() + ":run"] = charges + 1
 
