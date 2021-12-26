@@ -121199,7 +121199,7 @@
     "high_alchemy": "40800",
     "destroy": "false",
     "weapon_interface": "5",
-    "attack_audios": "2500,2500,2517,2500",
+    "attack_audios": "2517,2517,2500,2517",
     "name": "Leaf-bladed sword"
   },
   {
