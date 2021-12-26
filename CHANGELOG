@@ -78,3 +78,4 @@
 - Fishing and fishing trawler now use closer-to-empirical formulae.
 - Server configuration language has been changed from JSON to TOML.
 - Add Family Crest quest.
+- Add mort myre stems and pears to bloom's effect, and add the sound effect for bloom.
