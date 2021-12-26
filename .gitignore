@@ -45,3 +45,5 @@ gradle
 Server/worldprops/
 Management-Server/managementprops/
 /Development-Client/
+**/*.swp
+**/*.swo
