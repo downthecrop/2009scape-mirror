@@ -35,6 +35,8 @@ class NSListeners : InteractionListener() {
     val SPELLCARD = Items.DRUIDIC_SPELL_2968
     val USED_SPELLCARD = Items.A_USED_SPELL_2969
     val FUNGUS = Items.MORT_MYRE_FUNGUS_2970
+    val STEM = Items.MORT_MYRE_STEM_2972
+    val PEAR = Items.MORT_MYRE_PEAR_2974
     val MIRROR_TAKEN = "/save:ns:mirror_taken"
     val GROTTO_SEARCHED = "/save:ns:grotto_searched"
     val WISHING_WELL = 28715
@@ -139,11 +141,23 @@ class NSListeners : InteractionListener() {
         on(intArrayOf(DRUID_POUCH, DRUID_POUCH_EMPTY), ITEM, "fill"){player, node ->
 
             if(player.questRepository.getStage("Nature Spirit") >= 75) {
-                if (amountInInventory(player, Items.MORT_MYRE_FUNGUS_2970) >= 3) {
+                if (amountInInventory(player, PEAR) >= 3) {
                     if (node.id != Items.DRUID_POUCH_2958) {
                         removeItem(player, node, Container.INVENTORY)
                     }
-                    removeItem(player, Item(Items.MORT_MYRE_FUNGUS_2970, 3), Container.INVENTORY)
+                    removeItem(player, Item(PEAR, 3), Container.INVENTORY)
+                    addItem(player, Items.DRUID_POUCH_2958, 9 )
+                } else if (amountInInventory(player, STEM) >= 3) {
+                    if (node.id != Items.DRUID_POUCH_2958) {
+                        removeItem(player, node, Container.INVENTORY)
+                    }
+                    removeItem(player, Item(STEM, 3), Container.INVENTORY)
+                    addItem(player, Items.DRUID_POUCH_2958, 6)
+                } else if (amountInInventory(player, FUNGUS) >= 3) {
+                    if (node.id != Items.DRUID_POUCH_2958) {
+                        removeItem(player, node, Container.INVENTORY)
+                    }
+                    removeItem(player, Item(FUNGUS, 3), Container.INVENTORY)
                     addItem(player, Items.DRUID_POUCH_2958, 3)
                 } else {
                     sendDialogue(player, "You need 3 fungus before you can do that.")

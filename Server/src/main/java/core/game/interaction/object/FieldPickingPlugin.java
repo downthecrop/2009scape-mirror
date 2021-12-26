@@ -36,6 +36,7 @@ public final class FieldPickingPlugin extends OptionHandler {
 		for(PickingPlant p : PickingPlant.values()){
 			SceneryDefinition.forId(p.objectId).getHandlers().put("option:pick",this);
 		}
+        SceneryDefinition.forId(3511).getHandlers().put("option:take-cutting",this);
 		return this;
 	}
 
@@ -88,11 +89,14 @@ public final class FieldPickingPlugin extends OptionHandler {
 					full = object.transform(2073);
 					SceneryBuilder.replace(object, full);
 				}
-				if (plant == PickingPlant.FUNGI_ON_LOG) {
-					full = object.transform(3508);
+                boolean isBloomPlant = plant == PickingPlant.FUNGI_ON_LOG
+                    || plant == PickingPlant.BUDDING_BRANCH
+                    || plant == PickingPlant.GOLDEN_PEAR_BUSH;
+				if (isBloomPlant) {
+					full = object.transform(object.getId() - 1);
 					SceneryBuilder.replace(object, full);
 				}
-				if (plant != PickingPlant.FUNGI_ON_LOG) {
+				if (!isBloomPlant) {
 					SceneryBuilder.replace(plant == PickingPlant.BANANA_TREE_4 ? full : object, object.transform(banana ? plant.respawn : 0), banana ? 300 : plant.respawn);
 				}
 				if (!plant.name().startsWith("NETTLES")) {
@@ -189,7 +193,8 @@ public final class FieldPickingPlugin extends OptionHandler {
 		ONION_0(3366, 1957, 30),
 		ONION_1(5538, 1957, 30),
 		FUNGI_ON_LOG(3509, 2970, -1),
-		GOLDEN_PEAR_BUSH(3513, 2974, 30),
+		BUDDING_BRANCH(3511, 2972, -1),
+		GOLDEN_PEAR_BUSH(3513, 2974, -1),
 		GLOWING_FUNGUS_0(4932, 4075, 30),
 		GLOWING_FUNGUS_1(4933, 4075, 30),
 		RARE_FLOWERS(5006, 2460, 30),
