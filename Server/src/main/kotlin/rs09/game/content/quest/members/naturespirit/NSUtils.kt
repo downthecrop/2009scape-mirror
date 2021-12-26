@@ -104,6 +104,18 @@ object NSUtils {
                         success = true
                     }
                 }
+                if (obj.name.equals("Rotting branch", ignoreCase = true) && player.skills.prayerPoints >= 1) {
+                    if (player.location.withinDistance(obj.location, 2)) {
+                        SceneryBuilder.replace(obj, obj.transform(3511))
+                        success = true
+                    }
+                }
+                if (obj.name.equals("A small bush", ignoreCase = true) && player.skills.prayerPoints >= 1) {
+                    if (player.location.withinDistance(obj.location, 2)) {
+                        SceneryBuilder.replace(obj, obj.transform(3513))
+                        success = true
+                    }
+                }
             }
         }
         return success
@@ -115,6 +127,7 @@ object NSUtils {
      */
     private fun handleVisuals(player: Player) {
         player.skills.decrementPrayerPoints(RandomFunction.random(1, 3).toDouble())
+        player.audioManager.send(1493)
         val AROUND_YOU = player.location.surroundingTiles
         for (location in AROUND_YOU) {
             // The graphic is meant to play on a 3x3 radius around you, but not
