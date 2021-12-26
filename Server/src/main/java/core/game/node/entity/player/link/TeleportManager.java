@@ -582,7 +582,7 @@ public class TeleportManager {
 					public boolean pulse() {
 						if (delay == 0) {
 							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(200);
+								entity.asPlayer().getAudioManager().send(5036);
 							}
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
 							entity.graphics(new Graphics(getSettings().getStartGfx()));
@@ -590,7 +590,7 @@ public class TeleportManager {
 							entity.getProperties().setTeleportLocation(Location.create(location));
 							fireRandom(entity, location);
 							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(201);
+								entity.asPlayer().getAudioManager().send(5034);
 							}
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getEndEmote(), Priority.HIGH));
 							entity.graphics(new Graphics(getSettings().getEndGfx()));
