@@ -10,7 +10,7 @@ import core.game.world.map.zone.impl.*;
  */
 public class ZoneBuilder {
 	public static void init() {
-		//configure(WildernessZone.getInstance());
+		configure(WildernessZone.getInstance());
 		configure(MultiwayCombatZone.getInstance());
 		configure(new ModeratorZone());
 		//configure(new DarkZone());
