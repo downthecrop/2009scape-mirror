@@ -61,7 +61,6 @@ public final class FaladorNodePlugin extends OptionHandler {
 		// dwarven mine
 		SceneryDefinition.forId(30868).getHandlers().put("option:squeeze-through", this);
 		SceneryDefinition.forId(5020).getHandlers().put("option:ride", this);
-		ItemDefinition.forId(245).getHandlers().put("option:take", this);
 		// fally park.
 		NPCDefinition.forId(2290).getHandlers().put("option:talk-to", this);
 		SceneryDefinition.forId(11708).getHandlers().put("option:close", this);
