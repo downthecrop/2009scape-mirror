@@ -137,7 +137,7 @@ public final class TreasureTrailPlugin extends OptionHandler {
 
 		@Override
 		public Item getItem(Item item, NPC npc) {
-			return ClueScrollPlugin.getClue(npc.getDefinition().getConfiguration(NPCConfigParser.CLUE_LEVEL, ClueLevel.EASY)).copy();
+			return item;
 		}
 
 		/**
