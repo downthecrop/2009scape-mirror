@@ -83,3 +83,5 @@
 - Fix wine of zamorak pickup interaction.
 - Static clue drop ids replaced with their level appropriate proxy values
 - Fix a bug where clue scrolls were rerolled to easy for most NPCs
+- Fix Edgeville Dungeon Wilderness gate getting stuck.
+- Fishing guild is able to be entered with a fishing skill boost.
