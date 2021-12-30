@@ -9,7 +9,7 @@ import rs09.game.interaction.InteractionListener
 class WineOfZamorakInteraction : InteractionListener() {
 
     override fun defineListeners() {
-        on(Items.WINE_OF_ZAMORAK_245,ITEM,"take"){player, wine ->
+        on(Items.WINE_OF_ZAMORAK_245,GROUNDITEM,"take"){player, wine ->
             if(player.location.regionId != 11574){
                 PickupHandler.take(player, wine as GroundItem)
                 return@on true
