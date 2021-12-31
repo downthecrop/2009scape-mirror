@@ -388,7 +388,7 @@ class ZaffPlugin : OptionHandler() {
                     interpreter.sendDialogues(
                         546,
                         FacialExpression.HALF_GUILTY,
-                        "Battlestaves cost 8,000 gold pieces each. I have ${maxStaffs - ammount} left.",
+                        "Battlestaves cost 7,000 gold pieces each. I have ${maxStaffs - ammount} left.",
                         "How many would you like to buy?"
                     )
                     stage = 1
@@ -397,7 +397,7 @@ class ZaffPlugin : OptionHandler() {
                     ammount = getStoreFile().getInt(player.username.toLowerCase())
                     var amt = value as Int
                     if(amt > maxStaffs - ammount) amt = maxStaffs - ammount
-                    val coinage = amt * 8000
+                    val coinage = amt * 7000
                     if(!inInventory(player, Items.COINS_995, coinage)){
                         sendDialogue(player, "You can't afford that many.")
                         return@sendInputDialogue
