@@ -51,7 +51,6 @@ public class DwarfCannon extends Quest {
 		PluginManager.definePlugin(new LollkDialogue());
 		PluginManager.definePlugin(new NulodionDialogue());
 		PluginManager.definePlugin(new CaptainLawgofNPC());
-		PluginManager.definePlugin(new CannonBallPlugin());
 		PluginManager.definePlugin(new CaptainLawgofDialogue());
 		PluginManager.definePlugin(new DwarfCannonPlugin());
 		return this;
