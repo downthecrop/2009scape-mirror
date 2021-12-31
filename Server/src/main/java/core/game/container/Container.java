@@ -659,14 +659,14 @@ public class Container {
     }
 
     /**
-     * Checks if the containers contains ONE item.
+     * Checks if the containers contains at least ONE item.
      *
      * @param itemId
      * @return
      */
     public boolean containsAtLeastOneItem(int itemId) {
         for (Item item : items) {
-            if (item != null && item.getId() == itemId && item.getAmount() == 1) {
+            if (item != null && item.getId() == itemId && item.getAmount() > 0) {
                 return true;
             }
         }
@@ -680,7 +680,7 @@ public class Container {
      */
     public boolean containsAtLeastOneItem(int[] itemIds) {
         for (int id : itemIds) {
-            if (getAmount(id) >= 1)
+            if (getAmount(id) > 0)
                 return true;
         }
         return false;
