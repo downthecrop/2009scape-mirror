@@ -83,3 +83,4 @@
 - Fix wine of zamorak pickup interaction.
 - Static clue drop ids replaced with their level appropriate proxy values
 - Fix a bug where clue scrolls were rerolled to easy for most NPCs
+- Allow renewing summoning familiars, and make bobs drop items on dismissal even if their owners are ironmen.

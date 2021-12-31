@@ -55,13 +55,13 @@ public abstract class BurdenBeast extends Familiar {
 		if (owner.getInterfaceManager().hasMainComponent(671)) {
 			owner.getInterfaceManager().close();
 		}
-		if (!owner.getIronmanManager().isIronman()) {
-			for (Item item : container.toArray()) {
-				if (item != null) {
-					GroundItemManager.create(new GroundItem(item, location, 500, owner));
-				}
-			}
-		}
+
+        for (Item item : container.toArray()) {
+            if (item != null) {
+                GroundItemManager.create(new GroundItem(item, location, 500, owner));
+            }
+        }
+
 		container.clear();
 		super.dismiss();
 	}
