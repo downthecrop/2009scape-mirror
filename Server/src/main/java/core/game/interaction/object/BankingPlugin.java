@@ -1,6 +1,8 @@
 package core.game.interaction.object;
 
 import static api.ContentAPIKt.*;
+
+import api.Container;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.CloseEvent;
@@ -30,6 +32,7 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import kotlin.Unit;
+import org.rs09.consts.Items;
 import rs09.game.content.dialogue.DumpContainer;
 import rs09.game.ge.GrandExchangeOffer;
 import rs09.game.world.World;
@@ -188,8 +191,14 @@ public final class BankingPlugin extends OptionHandler {
                     stage = 0;
                     break;
                 case 0:
-                    interpreter.sendOptions("What would you like to say?", "I'd like to access my bank account, please.", "I'd like to check my PIN settings.", "I'd like to see my collection box.", "What is this place?");
-                    stage = 10;
+                    if(player.getAttribute("UnlockedSecondaryBank",false)){
+                        interpreter.sendOptions("What would you like to say?", "I'd like to access my bank account, please.", "I'd like to check my PIN settings.", "I'd like to see my collection box.", "I'd like to switch to my " + (player.useSecondaryBank ? "primary": "secondary") + " bank account.", "What is this place?");
+                        stage = 10;
+                    }
+                    else if(!player.getAttribute("UnlockedSecondaryBank",false)){
+                        interpreter.sendOptions("What would you like to say?", "I'd like to access my bank account, please.", "I'd like to check my PIN settings.", "I'd like to see my collection box.", "Can I open a second bank account?", "What is this place?");
+                        stage = 20;
+                    }
                     break;
                 case 1:
 				interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "This is a branch of the Bank of " + World.getSettings().getName() + ". We have", "branches in many towns.");
@@ -204,7 +213,7 @@ public final class BankingPlugin extends OptionHandler {
                         player("And what do you do?");
                         stage = 4;
                     } else if (buttonId == 2) {
-                        player("Didnt you used to be called the Bank of Varrock?");
+                        player("Didn't you used to be called the Bank of Varrock?");
                         stage = 5;
                     }
                     break;
@@ -214,6 +223,71 @@ public final class BankingPlugin extends OptionHandler {
                     break;
                 case 5:
                     interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "Yes we did, but people kept on coming into our", "signs were wrong. They acted as if we didn't know", "what town we were in or something.");
+                    stage = 100;
+                    break;
+                case 6:
+                    player.useSecondaryBank = !player.useSecondaryBank;
+                    interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "I've switched you over to your " + (player.useSecondaryBank ? "secondary" : "primary") + " bank account");
+                    stage = 100;
+                    break;
+                case 7:
+                    interpreter.sendDialogues(id, FacialExpression.WORRIED, "A second account??? What is four hundred and ninety","six slots not enough for you??? What are","you even hoarding?");
+                    stage = 8;
+                    break;
+                case 8:
+                    player(FacialExpression.ANNOYED,"Listen, an entrepreneur like me needs","a lot of space for my business ventures");
+                    stage = 9;
+                    break;
+                case 9:
+                    interpreter.sendDialogues(id, FacialExpression.ANNOYED,"Oh an entrepreneur eh? Well I guess a rich","entrepreneur like you can afford the fee","for opening a second bank account");
+                    stage = 11;
+                    break;
+                case 11:
+                    player(FacialExpression.LAUGH,"Well of course I can, a man of my","status could afford a measly bank fee");
+                    stage = 12;
+                    break;
+                case 12:
+                    interpreter.sendDialogues(id,FacialExpression.FRIENDLY,"Okay then, that'll be a one time","fee of five million gold coins, we just need","your payment and for you to sign here");
+                    stage = 13;
+                    break;
+                case 13:
+                    player(FacialExpression.ANGRY,"FIVE MILLION!?!");
+                    stage = 14;
+                    break;
+                case 14:
+                    interpreter.sendDialogues(id,FacialExpression.FRIENDLY,"Yes, Five million. These banks are very","to upkeep and maintain, but that is the final price","can't someone with your stature and wealth","afford such a trivial fee?");
+                    stage = 15;
+                    break;
+                case 15:
+                    interpreter.sendOptions("Put your money where your mouth is?","Yes","No");
+                    stage = 16;
+                    break;
+                case 16:
+                    if(buttonId == 1 && player.getInventory().contains(995,5000000)){
+                        player(FacialExpression.ANGRY_WITH_SMILE,"Haha yes, just a trivial fee haha.","just a drop in the bucket...");
+                        stage = 21;
+                    }
+                    if(buttonId == 2 || !player.getInventory().contains(995,5000000)){
+                        player(FacialExpression.AFRAID,"Well of course I can, let me just get it out of... my bank","uhhhhhh... haha...");
+                        stage = 17;
+                    }
+                    break;
+                case 17:
+                    interpreter.sendDialogues(id,FacialExpression.HALF_ROLLING_EYES,"You know I can see your bank, right?");
+                    stage = 18;
+                    break;
+                case 18:
+                    player("Yeah... I'll uhh, I'll be back later");
+                    stage = 100;
+                    break;
+                case 21:
+                    interpreter.sendDialogues(id,FacialExpression.AMAZED,"Wow I've never even SEEN thi- I mean *ahem*","give me one minute while I process this.");
+                    stage = 22;
+                    break;
+                case 22:
+                    player.getInventory().remove(new Item(995,5000000));
+                    player.getGameAttributes().setAttribute("/save:UnlockedSecondaryBank",true);
+                    interpreter.sendDialogues(id,FacialExpression.FRIENDLY,"You're all set! Whenever you want to switch to","your second bank account just ask","a teller and we'll swap it over for","you");
                     stage = 100;
                     break;
                 case 100:
@@ -243,7 +317,7 @@ public final class BankingPlugin extends OptionHandler {
                     break;
                 case 10:
                     switch (interfaceId) {
-                        case 232:
+                        case 234:
                             switch (buttonId) {
                                 case 1:
                                 case 2:
@@ -253,6 +327,10 @@ public final class BankingPlugin extends OptionHandler {
                                     end();
                                     break;
                                 case 4:
+                                    player("I'd like to switch to my " + (player.useSecondaryBank ? "primary": "secondary") + " bank account");
+                                    stage = 6;
+                                    break;
+                                case 5:
                                     player("What is this place?");
                                     stage = 1;
                                     break;
@@ -260,6 +338,27 @@ public final class BankingPlugin extends OptionHandler {
                             break;
                     }
                     break;
+                case 20:
+                    switch (interfaceId) {
+                        case 234:
+                            switch (buttonId) {
+                                case 1:
+                                case 2:
+                                case 3:
+                                    player.getBankPinManager().openType(buttonId);
+                                    checkAchievements(player);
+                                    end();
+                                    break;
+                                case 4:
+                                    player("Can I open a second bank account?");
+                                    stage = 7;
+                                    break;
+                                case 5:
+                                    player("What is this place?");
+                                    stage = 1;
+                                    break;
+                            }
+                    }
             }
             return true;
         }
