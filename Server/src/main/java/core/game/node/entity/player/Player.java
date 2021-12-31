@@ -2,6 +2,7 @@ package core.game.node.entity.player;
 
 import core.game.component.Component;
 import core.game.container.Container;
+import core.game.container.ContainerType;
 import core.game.container.impl.BankContainer;
 import core.game.container.impl.EquipmentContainer;
 import core.game.container.impl.InventoryListener;
@@ -84,6 +85,7 @@ import rs09.game.node.entity.skill.runecrafting.PouchManager;
 import rs09.game.node.entity.state.newsys.State;
 import rs09.game.node.entity.state.newsys.StateRepository;
 import rs09.game.world.World;
+import rs09.game.world.repository.DisconnectionQueue;
 import rs09.game.world.repository.Repository;
 import rs09.game.world.update.MapChunkRenderer;
 import rs09.game.world.update.NPCRenderer;
@@ -144,6 +146,31 @@ public class Player extends Entity {
 	 * The bank container.
 	 */
 	private final BankContainer bank = new BankContainer(this);
+
+	/**
+	 * The secondary bank container.
+	 */
+	private final BankContainer bankSecondary = new BankContainer(this);
+
+	/**
+	 * Is secondary bank in use or not
+	 */
+	public boolean useSecondaryBank = false;
+
+	/**
+	 * The Blast Furnace Coal Container.
+	 */
+	public final Container blastCoal = new Container(225, ContainerType.NEVER_STACK);
+
+	/**
+	 * The Blast Furnace Ore Container.
+	 */
+	public final Container blastOre = new Container(28, ContainerType.NEVER_STACK);
+
+	/**
+	 * The Blast Furnace Bars Container.
+	 */
+	public final Container blastBars = new Container(28, ContainerType.NEVER_STACK);
 
 	/**
 	 * The packet dispatcher.
@@ -1008,12 +1035,28 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * Gets the bank.
-	 * @return The bank.
+	 * Gets the current active bank.
+	 * @return Current active bank.
 	 */
 	public BankContainer getBank() {
+		return useSecondaryBank ? bankSecondary : bank;
+	}
+
+	/**
+	 * Gets the primary bank.
+	 * @return Primary bank
+	 */
+	public BankContainer getBankPrimary() {
 		return bank;
 	}
+
+	/**
+	 * Gets the Secondary bank.
+	 * @return Secondary bank
+	 */
+	public BankContainer getBankSecondary() {
+		return bankSecondary;
+	}	
 
 	public BankContainer getDropLog() {return dropLog;}
 

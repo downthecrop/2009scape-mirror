@@ -116,12 +116,9 @@ public enum BoltEffect {
 		public void impact(BattleState state) {
 			int victimPoints = (int) (state.getVictim().getSkills().getLifepoints() * 0.20);
 			int playerPoints = (int) (state.getAttacker().getSkills().getLifepoints() * 0.10);
-			if (victimPoints >= 35) {
-				victimPoints = 35;
-			}
 			int total = state.getEstimatedHit() + victimPoints;
-			if (total >= 35) {
-				total = 35;
+			if (total >= 100 && state.getVictim().getId() == 8133) {
+				total = 100;
 			}
 			state.setEstimatedHit(total);
 			state.getAttacker().getImpactHandler().manualHit(state.getVictim(), playerPoints, HitsplatType.NORMAL);

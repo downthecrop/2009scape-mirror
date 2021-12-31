@@ -36,7 +36,12 @@ public enum EntityState {
 	/**
 	 * The entity has decreased weapon speeds.
 	 */
-	MIASMIC(new MiasmicStatePulse(null, 0));
+	MIASMIC(new MiasmicStatePulse(null, 0)),
+
+	/**
+	 * The entity is healing over time
+	 */
+	HEALOVERTIME(new HealOverTimePulse(null,0,0,0,0));
 
 	/**
 	 * The state pulse used for this state.

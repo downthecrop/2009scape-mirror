@@ -5,6 +5,7 @@ import core.game.component.Component
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -134,7 +135,22 @@ class FairyRingInterface : InterfaceListener(){
             }
         }
         closeInterface(player)
-        teleport(player, tile!!, TeleportManager.TeleportType.FAIRY_RING)
+        if(ring == FairyRing.ALS && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE,2,4)){
+            player.achievementDiaryManager.finishTask(player,DiaryType.SEERS_VILLAGE,2,4)
+            teleport(player, tile!!, TeleportManager.TeleportType.FAIRY_RING)
+        }
+        else if(ring == FairyRing.DKS && !player.achievementDiaryManager.hasCompletedTask(DiaryType.FREMENNIK,1,7)){
+            player.achievementDiaryManager.finishTask(player,DiaryType.FREMENNIK,1,7)
+            teleport(player, tile!!, TeleportManager.TeleportType.FAIRY_RING)
+        }
+        else if(ring == FairyRing.AIQ && !player.achievementDiaryManager.hasCompletedTask(DiaryType.FALADOR,2,4)){
+            player.achievementDiaryManager.finishTask(player,DiaryType.FALADOR,2,4)
+            teleport(player, tile!!, TeleportManager.TeleportType.FAIRY_RING)
+        }
+        else if(ring == FairyRing.DKR && !player.achievementDiaryManager.hasCompletedTask(DiaryType.VARROCK,1,19)){
+            player.achievementDiaryManager.finishTask(player,DiaryType.VARROCK,1,19)
+            teleport(player, tile!!, TeleportManager.TeleportType.FAIRY_RING)
+        }else teleport(player, tile!!, TeleportManager.TeleportType.FAIRY_RING)
     }
 }
 
