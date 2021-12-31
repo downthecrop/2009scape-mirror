@@ -24,7 +24,7 @@ class AmmoMouldOnFurnace : InteractionListener(){
             return true
         }
         if (getDynLevel(player, Skills.SMITHING) < levelRequirement) {
-            player.dialogueInterpreter.sendDialogue("You need a Smithing level of at least $levelRequirement in order to do this.")
+            sendDialogue(player,"You need a Smithing level of at least $levelRequirement in order to do this.")
             return true
         }
         if (!inInventory(player, Items.AMMO_MOULD_4)) {
