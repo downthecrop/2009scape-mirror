@@ -311,13 +311,20 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 		}
 	}
 
+    public void refreshTimer() {
+        ticks = maximumTicks;
+    }
+
 	/**
 	 * Sends the time remaining.
 	 */
 	private void sendTimeRemaining() {
-		int minutes = (int) Math.ceil(ticks * 0.01);
-		int hash = minutes << 7 | ((ticks - (minutes * 100)) > 49 ? 1 : 0) << 6;
-		owner.getConfigManager().set(1176, hash);
+		int minutes = ticks / 100;
+        int centiminutes = ticks % 100;
+        owner.varpManager.get(1176)
+            .setVarbit(7, minutes)
+            .setVarbit(6, centiminutes > 49 ? 1 : 0)
+            .send(owner);
 	}
 
 	/**

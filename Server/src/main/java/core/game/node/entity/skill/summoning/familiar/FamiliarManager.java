@@ -126,9 +126,14 @@ public final class FamiliarManager {
 	 * @param deleteItem we should delete the item.
 	 */
 	public void summon(Item item, boolean pet, boolean deleteItem) {
+        boolean renew = false;
 		if (hasFamiliar()) {
-			player.getPacketDispatch().sendMessage("You already have a follower.");
-			return;
+            if(familiar.getPouchId() == item.getId()) {
+                renew = true;
+            } else {
+                player.getPacketDispatch().sendMessage("You already have a follower.");
+                return;
+            }
 		}
 		if (player.getZoneMonitor().isRestricted(ZoneRestriction.FOLLOWERS) && !player.getLocks().isLocked("enable_summoning")) {
 			player.getPacketDispatch().sendMessage("This is a Summoning-free area.");
@@ -151,24 +156,30 @@ public final class FamiliarManager {
 			return;
 		}
 		final int npcId = pouch.getNpcId();
-		Familiar fam = FAMILIARS.get(npcId);
+		Familiar fam = !renew ? FAMILIARS.get(npcId) : familiar;
 		if (fam == null) {
 			player.getPacketDispatch().sendMessage("Invalid familiar " + npcId + " - report on 2009scape github");
 			return;
 		}
-		fam = fam.construct(player, npcId);
-		if (fam.getSpawnLocation() == null) {
-			player.getPacketDispatch().sendMessage("The spirit in this pouch is too big to summon here. You will need to move to a larger");
-			player.getPacketDispatch().sendMessage("area.");
-			return;
-		}
+        if(!renew) {
+            fam = fam.construct(player, npcId);
+            if (fam.getSpawnLocation() == null) {
+                player.getPacketDispatch().sendMessage("The spirit in this pouch is too big to summon here. You will need to move to a larger");
+                player.getPacketDispatch().sendMessage("area.");
+                return;
+            }
+        }
 		if (!player.getInventory().remove(item)) {
 			return;
 		}
 		player.getSkills().updateLevel(Skills.SUMMONING, -pouch.getSummonCost(), 0);
 		player.getSkills().addExperience(Skills.SUMMONING, pouch.getSummonExperience());
-		familiar = fam;
-		spawnFamiliar();
+        if(!renew) {
+            familiar = fam;
+            spawnFamiliar();
+        } else {
+            familiar.refreshTimer();
+        }
 		if (player.getSkullManager().isWilderness()) {
 			player.getAppearance().sync();
 		}
