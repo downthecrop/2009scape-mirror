@@ -785,17 +785,40 @@ class PlayerSaver (val player: Player){
         val inventory = saveContainer(player.inventory)
         coreData.put("inventory",inventory)
 
-        val bank = saveContainer(player.bank)
+        val bank = saveContainer(player.bankPrimary)
         coreData.put("bank",bank)
 
+        val bankSecondary = saveContainer(player.bankSecondary)
+        coreData.put("bankSecondary",bankSecondary)
+
+        val bBars = saveContainer(player.blastBars)
+        coreData.put("blastBars",bBars)
+
+        val bOre = saveContainer(player.blastOre)
+        coreData.put("blastOre",bOre)
+
+        val bCoal = saveContainer(player.blastCoal)
+        coreData.put("blastCoal",bCoal)
+
         val bankTabs = JSONArray()
-        for(i in player.bank.tabStartSlot.indices){
+        for(i in player.bankPrimary.tabStartSlot.indices){
             val tab = JSONObject()
             tab.put("index",i.toString())
-            tab.put("startSlot",player.bank.tabStartSlot[i].toString())
+            tab.put("startSlot",player.bankPrimary.tabStartSlot[i].toString())
             bankTabs.add(tab)
         }
         coreData.put("bankTabs",bankTabs)
+
+        val bankTabsSecondary = JSONArray()
+        for(i in player.bankSecondary.tabStartSlot.indices){
+            val tab = JSONObject()
+            tab.put("index",i.toString())
+            tab.put("startSlot",player.bankSecondary.tabStartSlot[i].toString())
+            bankTabsSecondary.add(tab)
+        }
+        coreData.put("bankTabsSecondary",bankTabsSecondary)
+
+        coreData.put("useSecondaryBank",player.useSecondaryBank)
 
         val equipment = saveContainer(player.equipment)
         coreData.put("equipment",equipment)
