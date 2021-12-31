@@ -11,6 +11,7 @@ import core.game.node.entity.state.EntityState;
 import rs09.game.world.World;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
+import org.rs09.consts.NPCs;
 
 /**
  * Represents a bolt effect.
@@ -117,7 +118,7 @@ public enum BoltEffect {
 			int victimPoints = (int) (state.getVictim().getSkills().getLifepoints() * 0.20);
 			int playerPoints = (int) (state.getAttacker().getSkills().getLifepoints() * 0.10);
 			int total = state.getEstimatedHit() + victimPoints;
-			if (total >= 100 && state.getVictim().getId() == 8133) {
+			if (total >= 100 && state.getVictim().getId() == NPCs.CORPOREAL_BEAST_8133) {
 				total = 100;
 			}
 			state.setEstimatedHit(total);

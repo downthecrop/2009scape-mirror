@@ -255,7 +255,7 @@ public final class BankingPlugin extends OptionHandler {
                     stage = 14;
                     break;
                 case 14:
-                    interpreter.sendDialogues(id,FacialExpression.FRIENDLY,"Yes, Five million. These banks are very","to upkeep and maintain, but that is the final price","can't someone with your stature and wealth","afford such a trivial fee?");
+                    npcl(FacialExpression.FRIENDLY, "Yes, Five million. These banks are very expensive to upkeep and maintain, but that is the final price. Can't someone with your stature and wealth afford such a trivial fee?");
                     stage = 15;
                     break;
                 case 15:
@@ -285,10 +285,13 @@ public final class BankingPlugin extends OptionHandler {
                     stage = 22;
                     break;
                 case 22:
-                    player.getInventory().remove(new Item(995,5000000));
-                    player.getGameAttributes().setAttribute("/save:UnlockedSecondaryBank",true);
-                    interpreter.sendDialogues(id,FacialExpression.FRIENDLY,"You're all set! Whenever you want to switch to","your second bank account just ask","a teller and we'll swap it over for","you");
-                    stage = 100;
+                    if(player.getInventory().remove(new Item(995,5000000))) {
+                        player.getGameAttributes().setAttribute("/save:UnlockedSecondaryBank",true);
+                        interpreter.sendDialogues(id,FacialExpression.FRIENDLY,"You're all set! Whenever you want to switch to","your second bank account just ask","a teller and we'll swap it over for","you");
+                        stage = 100;
+                    } else {
+                        end();
+                    }
                     break;
                 case 100:
                     end();
