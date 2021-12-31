@@ -1266,6 +1266,13 @@ fun setQuestStage(player: Player, quest: String, stage: Int) {
 }
 
 /**
+ * Check if a quest is complete
+ */
+fun isQuestComplete(player: Player, quest: String): Boolean {
+    return player.questRepository.getStage(quest) == 100
+}
+
+/**
  * Gets a scenery definition from the given ID
  * @param id the ID of the scenery to get the definition for.
  * @return the scenery definition
