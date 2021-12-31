@@ -1,13 +1,18 @@
 package rs09.game.content.zone.keldagrim
 
+import api.*
 import core.cache.def.impl.SceneryDefinition
 import core.game.content.dialogue.DialoguePlugin
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
+import core.game.node.item.Item
+import core.game.node.scenery.Scenery
 import core.game.world.map.Location
 import core.plugin.Initializable
 import core.plugin.Plugin
+import rs09.game.content.dialogue.DialogueFile
 
 /**
  * File that contains several plugins relating to Keldagrim,
@@ -23,6 +28,7 @@ const val GETrapdoorDialogueID = 22381232
  */
 @Initializable
 class KeldagrimOptionHandlers : OptionHandler() {
+
     override fun handle(player: Player?, node: Node?, option: String?): Boolean {
         player ?: return false
         node ?: return false
@@ -36,12 +42,12 @@ class KeldagrimOptionHandlers : OptionHandler() {
             }
             "climb-up" -> {
                 when(node.id){
-                    9138 -> player.properties.teleportLocation = Location.create(2931, 10196, 0)
+                    9138 -> player.properties.teleportLocation = Location.create(2930, 10197, 0)
                 }
             }
             "climb-down" -> {
                 when(node.id){
-                    9084 -> player.properties.teleportLocation = Location.create(1940, 4958, 0)
+                    9084 -> player.dialogueInterpreter.open(BlastFurnaceDoorDialogue(),Scenery(9084, location(2929,10196,0)))
                 }
             }
             "open" -> {
@@ -103,5 +109,42 @@ class GETrapdoorDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun getIds(): IntArray {
         return intArrayOf(GETrapdoorDialogueID)
+    }
+}
+
+
+class BlastFurnaceDoorDialogue : DialogueFile(){
+    var init = true
+    override fun handle(componentID: Int, buttonID: Int) {
+        if (init) {
+            stage = if (player!!.getSkills().getLevel(Skills.SMITHING) >= 60) {
+                100
+            }else{
+                5
+            }
+            init = false
+        }
+        when(stage){
+            5 -> sendDialogue(player!!,"You must be Smithing Level 60 or higher in order to enter the Blast Furnace").also { stage = 10 }
+            10 -> sendDialogue(player!!,"However, you may enter if you pay the entrance fee").also { stage = 20 }
+            20 -> options("Yes","No").also { stage = 30 }
+            30 -> when(buttonID){
+                1 -> {
+                    if(player!!.equipment.contains(6465,1) && player!!.inventory.contains(995, 1250)){
+                        removeItem(player!!, Item(995, 1250), Container.INVENTORY)
+                        player!!.setAttribute("BlastTimer",1000)
+                        player?.properties?.teleportLocation = Location.create(1940, 4958, 0).also { end() }
+                    }
+                    else if (player!!.inventory.contains(995, 2500)) {
+                        removeItem(player!!, Item(995, 2500), Container.INVENTORY)
+                        player!!.setAttribute("BlastTimer",1000)
+                        player?.properties?.teleportLocation = Location.create(1940, 4958, 0).also { end() }
+                    } else sendDialogue(player!!, "You don't have enough gold to pay the fee!").also { stage = 40 }
+                }
+                20 -> sendDialogue(player!!,"Then get out of here!").also { stage = 40 }
+            }
+            40 -> end()
+            100 -> player?.properties?.teleportLocation = Location.create(1940, 4958, 0).also { stage = 40 }
+        }
     }
 }

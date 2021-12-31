@@ -343,7 +343,11 @@ class PlayerSaveParser(val player: Player) {
         val coreData = saveFile!!["core_data"] as JSONObject
         val inventory = coreData["inventory"] as JSONArray
         val bank = coreData["bank"] as JSONArray
+        val bankSecondary = coreData.getOrDefault("bankSecondary", JSONArray()) as JSONArray
         val equipment = coreData["equipment"] as JSONArray
+        val bBars = coreData["blastBars"] as? JSONArray
+        val bOre = coreData["blastOre"] as? JSONArray
+        val bCoal = coreData["blastCoal"] as? JSONArray
         val location = coreData["location"] as String
         val bankTabData = coreData["bankTabs"]
         if (bankTabData != null) {
@@ -353,12 +357,28 @@ class PlayerSaveParser(val player: Player) {
                 val tab = i as JSONObject
                 val index = tab["index"].toString().toInt()
                 val startSlot = tab["startSlot"].toString().toInt()
-                player.bank.tabStartSlot[index] = startSlot
+                player.bankPrimary.tabStartSlot[index] = startSlot
             }
         }
+        val bankTabSecondaryData = coreData["bankTabsSecondary"]
+        if (bankTabSecondaryData != null) {
+            val tabData = bankTabSecondaryData as JSONArray
+            for (i in tabData) {
+                i ?: continue
+                val tab = i as JSONObject
+                val index = tab["index"].toString().toInt()
+                val startSlot = tab["startSlot"].toString().toInt()
+                player.bankSecondary.tabStartSlot[index] = startSlot
+            }
+        }
+        player.useSecondaryBank = coreData.getOrDefault("useSecondaryBank", false) as Boolean
         player.inventory.parse(inventory)
-        player.bank.parse(bank)
+        player.bankPrimary.parse(bank)
+        player.bankSecondary.parse(bankSecondary)
         player.equipment.parse(equipment)
+        bBars?.let{player.blastBars.parse(it)}
+        bOre?.let{player.blastOre.parse(bOre)}
+        bCoal?.let{player.blastCoal.parse(bCoal)}
         player.location = rs09.JSONUtils.parseLocation(location)
     }
 
@@ -368,14 +388,6 @@ class PlayerSaveParser(val player: Player) {
         player.skills.parse(skillData)
         player.skills.experienceGained = saveFile!!["totalEXP"].toString().toDouble()
         player.skills.experienceMutiplier = saveFile!!["exp_multiplier"].toString().toDouble()
-        if (World.settings?.default_xp_rate != 5.0) {
-            player.skills.experienceMutiplier = World.settings?.default_xp_rate!!
-        }
-        val divisor: Double
-        if(player.skills.experienceMutiplier >= 10 && !player.attributes.containsKey("permadeath")){ //exclude permadeath HCIMs from XP squish
-            divisor = player.skills.experienceMutiplier / 5.0
-            player.skills.correct(divisor)
-        }
         if (saveFile!!.containsKey("milestone")) {
             val milestone: JSONObject = saveFile!!["milestone"] as JSONObject
             player.skills.combatMilestone = (milestone.get("combatMilestone")).toString().toInt()

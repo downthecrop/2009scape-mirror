@@ -2,6 +2,7 @@ package rs09.game.node.entity.skill.farming
 
 import api.*
 import core.game.interaction.NodeUsageEvent
+import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -209,6 +210,9 @@ object UseWithPatchHandler{
                     player.animator.animate(Animation(2291))
                     player.pulseManager.run(object : Pulse(3) {
                         override fun pulse(): Boolean {
+                            if(plantable == Plantable.JUTE_SEED && patch == FarmingPatch.MCGRUBOR_HOPS && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE,0,7)){
+                                player.achievementDiaryManager.finishTask(player,DiaryType.SEERS_VILLAGE,0,7)
+                            }
                             p.plant(plantable)
                             player.skills.addExperience(Skills.FARMING, plantable.plantingXP)
                             p.setNewHarvestAmount()
