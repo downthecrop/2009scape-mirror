@@ -4,7 +4,6 @@ import api.*
 import core.game.system.task.Pulse
 import core.plugin.CorePluginTypes.Managers
 import gui.GuiEvent
-import gui.ServerMonitor
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import rs09.Server
@@ -66,8 +65,8 @@ class WorldClock {
                 }
             }
             val end = System.currentTimeMillis()
-            ServerMonitor.eventQueue.add(GuiEvent.UpdateTickTime(end - start))
-            ServerMonitor.eventQueue.add(GuiEvent.UpdatePulseCount(World.Pulser.TASKS.size))
+            //ServerMonitor.eventQueue.add(GuiEvent.UpdateTickTime(end - start))
+            //ServerMonitor.eventQueue.add(GuiEvent.UpdatePulseCount(World.Pulser.TASKS.size))
             Thread.sleep(max(600 - (end - start), 0))
         }
     }
