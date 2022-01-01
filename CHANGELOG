@@ -85,4 +85,10 @@
 - Fix a bug where clue scrolls were rerolled to easy for most NPCs
 - Allow renewing summoning familiars, and make bobs drop items on dismissal even if their owners are ironmen.
 - Battlestaves cost 7k from zaff.
+- Added Blast Furnace
+- Added secondary bank account
+- Cleaned up a lot of Seer's Diary tasks
+- Corrected timings & animations for producing cannonballs
+- Corrected special attack for the enhanced excalibur
+- Corrected damage calculations for Ruby Bolts (e) special effect
 < --- ABOVE Released January 1st, 2022 https://gitlab.com/2009scape/2009scape/-/tags/Jan-1-2022 ---- >
