@@ -18,7 +18,6 @@ import rs09.tools.stringtools.colorize
 import java.time.Month
 import java.util.*
 
-@Initializable
 class GiftRollPlugin : XPGainPlugin() {
     override fun run(player: Player, skill: Int, amount: Double) {
         val numDaily = getDailyGifts(player)
