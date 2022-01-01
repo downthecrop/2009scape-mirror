@@ -13,6 +13,7 @@ import core.plugin.CorePluginTypes.StartupPlugin
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
+import rs09.game.content.global.GlobalKillCounter
 import rs09.game.node.entity.state.newsys.StateRepository
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ConfigParser
@@ -107,6 +108,7 @@ object Server {
                     ZoneBuilder.init()
                     ServerStore.init()
                     RareDropTable.init()
+                    GlobalKillCounter.init()
                     if(World.settings!!.enable_bots) {
                         ImmerseWorld.init()
                     }
