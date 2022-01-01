@@ -1,42 +1,32 @@
-package plugin.quest.members.familycrest
+package rs09.game.content.quest.members.familycrest
 
 
-import  core.game.interaction.NodeUsageEvent;
-import core.game.interaction.UseWithHandler;
-import core.game.node.entity.npc.NPC
-import core.game.node.item.Item;
-import core.plugin.Initializable
-import core.plugin.Plugin;
+import api.*
+import org.rs09.consts.Items
+import org.rs09.consts.NPCs
+import rs09.game.interaction.InteractionListener
 
-@Initializable
-class JohnathonAntiPosionInteraction: UseWithHandler(175, 177, 179, 2446 ) {
+class JohnathonAntiPosionInteraction: InteractionListener() {
+    override fun defineListeners() {
+        val poisons = intArrayOf(Items.ANTIPOISON4_2446, Items.ANTIPOISON3_175, Items.ANTIPOISON2_177, Items.ANTIPOISON1_179)
 
-    override fun newInstance(arg: Any?): Plugin<Any> {
-        addHandler(668, NPC_TYPE, this)
-        return this
-    }
+        onUseWith(NPC, poisons, NPCs.JOHNATHON_668){player, used, with ->
+            val npc = with.asNpc()
+            val antip = used.asItem()
+            val stage = questStage(player, "Family Crest")
 
-    override fun handle(event: NodeUsageEvent?): Boolean {
-        if (event != null) {
-            val qstage = event.player.questRepository.getQuest("Family Crest").getStage(event.player)
-            val itemUsed = event.usedItem.id
-            if(qstage == 17){
-                event.player.questRepository.getQuest("Family Crest").setStage(event.player, 18)
+            val index = poisons.indexOf(used.id)
+            val returnItem = if(index + 1 == poisons.size) Items.VIAL_229 else poisons[index + 1]
 
-                when(itemUsed){
-                    2446 -> event.player.inventory.remove(Item(2446)).also{event.player.inventory.add(Item(175))}
-                    175 -> event.player.inventory.remove(Item(175)).also{event.player.inventory.add(Item(177))}
-                    177 -> event.player.inventory.remove(Item(177)).also{event.player.inventory.add(Item(179))}
-                    179 -> event.player.inventory.remove(Item(179)).also{event.player.inventory.add(Item(229))}
-                }
-
-                event.player.getDialogueInterpreter().open(668, NPC(668))
-            }else{
-                event.player.sendMessage("Nothing interesting happened.")
+            if(stage == 17 && removeItem(player, antip)){
+                addItem(player, returnItem)
+                setQuestStage(player, "Family Crest", 18)
+                openDialogue(player, NPCs.JOHNATHON_668, npc)
+            } else {
+                sendMessage(player, "Nothing interesting happens.")
             }
+
+            return@onUseWith true
         }
-        return true;
     }
-
-
 }
