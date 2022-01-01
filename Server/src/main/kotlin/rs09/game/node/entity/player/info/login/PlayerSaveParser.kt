@@ -388,6 +388,14 @@ class PlayerSaveParser(val player: Player) {
         player.skills.parse(skillData)
         player.skills.experienceGained = saveFile!!["totalEXP"].toString().toDouble()
         player.skills.experienceMutiplier = saveFile!!["exp_multiplier"].toString().toDouble()
+        if (World.settings?.default_xp_rate != 5.0) {
+            player.skills.experienceMutiplier = World.settings?.default_xp_rate!!
+        }
+        val divisor: Double
+        if(player.skills.experienceMutiplier >= 10 && !player.attributes.containsKey("permadeath")){ //exclude permadeath HCIMs from XP squish
+            divisor = player.skills.experienceMutiplier / 5.0
+            player.skills.correct(divisor)
+        }
         if (saveFile!!.containsKey("milestone")) {
             val milestone: JSONObject = saveFile!!["milestone"] as JSONObject
             player.skills.combatMilestone = (milestone.get("combatMilestone")).toString().toInt()
