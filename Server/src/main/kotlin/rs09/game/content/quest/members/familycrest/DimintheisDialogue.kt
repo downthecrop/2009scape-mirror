@@ -133,7 +133,7 @@ class DimintheisDialogue(player: Player? = null): DialoguePlugin(player) {
                 1 -> npc("I thank you greatly adventurer!").also { stage++}
                 2 -> npc("I realise it was a lot to ask of a stranger.").also { stage  = 1000 }
             }
-            2013 -> if(player.questRepository.getQuest("Family Crest").hasRequirements(player)) {
+            2012 -> if(player.questRepository.getQuest("Family Crest").hasRequirements(player)) {
                 npc("If you find Caleb, or my other sons... please... ",
                         "let them know their father still loves them...").also { stage = 1000 }.also { player.questRepository.getQuest("Family Crest").start(player) }.also { player.questRepository.syncronizeTab(player) }
             }else{
