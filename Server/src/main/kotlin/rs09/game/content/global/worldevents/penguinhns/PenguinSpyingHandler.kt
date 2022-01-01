@@ -41,5 +41,10 @@ class PenguinSpyingHandler : InteractionListener(){
             }
             return false
         }
+
+        override fun stop() {
+            super.stop()
+            player.unlock()
+        }
     }
 }
