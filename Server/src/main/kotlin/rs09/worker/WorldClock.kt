@@ -67,6 +67,7 @@ class WorldClock {
             val end = System.currentTimeMillis()
             //ServerMonitor.eventQueue.add(GuiEvent.UpdateTickTime(end - start))
             //ServerMonitor.eventQueue.add(GuiEvent.UpdatePulseCount(World.Pulser.TASKS.size))
+            Server.lastHeartbeat = System.currentTimeMillis()
             Thread.sleep(max(600 - (end - start), 0))
         }
     }

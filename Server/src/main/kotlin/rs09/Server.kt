@@ -10,6 +10,9 @@ import core.net.IoEventHandler
 import core.net.IoSession
 import core.net.ServerSocketConnection
 import core.plugin.CorePluginTypes.StartupPlugin
+import kotlinx.coroutines.GlobalScope
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import rs09.game.node.entity.state.newsys.StateRepository
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ConfigParser
@@ -22,7 +25,10 @@ import rs09.game.world.repository.Repository.players
 import rs09.net.ms.ManagementServer
 import rs09.plugin.PluginManager
 import java.io.File
+import java.io.FileWriter
 import java.io.IOException
+import java.lang.management.ManagementFactory
+import java.lang.management.ThreadMXBean
 import java.net.InetSocketAddress
 import java.nio.channels.SelectionKey
 import java.nio.channels.Selector
@@ -42,6 +48,7 @@ object Server {
     private var service: ExecutorService? = null
     private var channel: ServerSocketConnection? = null
     private var eventHandler: IoEventHandler? = null
+    var lastHeartbeat = System.currentTimeMillis()
 
     /**
      * The current server state.
@@ -67,6 +74,25 @@ object Server {
         } else {
             SystemLogger.logInfo("Using config file: ${"worldprops" + File.separator + "default.conf"}")
             ServerConfigParser.parse("worldprops" + File.separator + "default.conf")
+        }
+
+        GlobalScope.launch {
+            delay(20000)
+            lastHeartbeat = System.currentTimeMillis()
+            while(true){
+                if(System.currentTimeMillis() - lastHeartbeat > 7200 && state == ServerState.RUNNING){
+                    SystemLogger.logErr("Triggering reboot due to heartbeat timeout")
+                    SystemLogger.logErr("Creating thread dump...")
+                    val dump = threadDump(true, true)
+                    FileWriter("latestdump.txt").use {
+                        it.write(dump)
+                        it.flush()
+                        it.close()
+                    }
+                    exitProcess(0)
+                }
+                delay(625)
+            }
         }
 
         while (state != ServerState.CLOSED) {
@@ -171,5 +197,15 @@ object Server {
 
         Runtime.getRuntime().removeShutdownHook(ServerConstants.SHUTDOWN_HOOK)
         exitProcess(0)
+    }
+
+
+    private fun threadDump(lockedMonitors: Boolean, lockedSynchronizers: Boolean): String? {
+        val threadDump = StringBuffer(System.lineSeparator())
+        val threadMXBean: ThreadMXBean = ManagementFactory.getThreadMXBean()
+        for (threadInfo in threadMXBean.dumpAllThreads(lockedMonitors, lockedSynchronizers)) {
+            threadDump.append(threadInfo.toString())
+        }
+        return threadDump.toString()
     }
 }
