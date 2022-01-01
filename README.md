@@ -81,16 +81,21 @@ There are many ways everyone can contribute! From the most seasoned programmers 
 * **Content Developers**: As a remake, we have massive amounts of content that need to be implemented or corrected. If you know how to program or are willing to learn, this is where you could be extremely helpful! We need everything from quests to dialogue to minigames to skills that still need to be corrected or implemented, and this is perhaps one of the most valuable ways someone could help out the project! If you are interested in developing content, reach out in the development channel of the Discord.
 
 ## Content Developers: Setting Up the Project.
-### Github Setup
+### Gitlab Setup
 
 <h4>Note: This allows you to commit changes to the main repo (with approval)! Also, always stay up to date with the most recent updates by pulling into your copy when 2009Scape updates!</h4>
 
 1. Create a gitlab account if you haven't done so already
 
-3. Click "Fork" in the top right hand side of our  gitlab page.
+3. Click "Fork" in the top right hand side of our gitlab page.
 
 **If at anytime you have an issue with gitlab please refer to the** <a href="https://gitlab.com/help">Gitlab help center.</a>
 
+### Git LFS Setup
+
+To obtain large binary files for the repo such as the cache, make sure you have git lfs installed: https://git-lfs.github.com/
+
+After setting up git lfs, you may need to run `git lfs pull` in the root of the cloned repo to download essential binaries.
 
 ### Prerequisites
 
@@ -168,7 +173,7 @@ There are many ways everyone can contribute! From the most seasoned programmers 
 1. Install JDK version 1.8 through <a href="https://www.oracle.com/java/technologies/javase/javase-jdk8-downloads.html">Oracle</a> or through <a href="https://openjdk.java.net/install/">command line</a>
     * Debian, Ubuntu, etc.
     ```sh
-    sudo apt-get install jre8-openjdk
+    sudo apt install openjdk-8-jdk
     ```
     * Fedora, Oracle Linux, Red Hat Enterprise Linux, etc.
     ```sh
@@ -226,7 +231,7 @@ There are many ways everyone can contribute! From the most seasoned programmers 
 
 1. Navigate to the right hand side of Intellij where it says "Gradle"
     * Gradle is very useful when it comes to running and compiling the project
-    * The only tabs we are concerned about are "Client", "Management-Server", and "Server"
+    * The only tabs we are concerned about are "Management-Server" and "Server"
     * Each of these have a "Tasks" folder and an "application" folder inside of "Tasks"
     <br>
 2. Click on the "application" folder for the Management-Server and double-click "run"
@@ -235,13 +240,10 @@ There are many ways everyone can contribute! From the most seasoned programmers 
 3. Click on the "application" folder for the Server and double-click "run"
     * Please note this may take a minute or two to build, it is compiling a lot of files!
     * If you receive an error on server start, check and make sure that your worldprops/default.json is pointing to the correct paths
+    * * Server debug mode/other information can be changed in worldprops/default.json
     <br>
-4. Copy your cache from 2009Scape/Server/data/cache (.dat2/.idx0-255) to C:/Users/(your_name)/.runite_rs/runescape/
-    * As of the writing of this readme, cache downloading is still broken. It is on the agenda to be fixed in the future
-    * **If you don't have those folders then create them**
-    * Server debug mode/other information can be changed in worldprops/default.json
-    <br>
-5. Click on the "application" folder for the Client and double-click "run"
+4. Clone the <a href="https://gitlab.com/2009scape/legacy-client">legacy-client</a> repo and follow the same Intellij setup steps
+    * Click on the "application" folder for the Client and double-click "run"
     * If you receive an error on client run open your build.gradle to verify that the mainClassName is set to the correct location
     * Due to client work that is on going a lot of files get changed and new paths for the main class are created
     * **FIX** In your build.gradle change the mainClassName and Main-Class attributes to 'org.runite.jagex.Client'
@@ -255,11 +257,10 @@ We use the AGPL 3.0 license, which can be found <a href="https://www.gnu.org/lic
 
 ### Contact
 
-<h4>Reminder: Developer support for setting up your own server ended October 5th, 2020. Do not ping/dm developers about setting up your server.</h4>
-
+<h4>Reminder: There is no official support for setting up your own server. Do not ping/dm developers about setting up your server. Community support is available in the discord server.</h4>
 
 ### Video Setup Tutorial
-Occexe made a nice video showing you how to set it up if you'd prefer that. Check it out here:
+Occexe made a nice video showing you how to set it up if you'd prefer that. Please note many things have changed since this was filmed and the steps are no longer strictly accurate. Check it out here:
 
 [![View Tutorial](http://img.youtube.com/vi/3oQcsZdrRcE/0.jpg)](http://www.youtube.com/watch?v=3oQcsZdrRcE "2009Scape Setup")
 
