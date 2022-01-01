@@ -14,7 +14,7 @@ public class TokenCollectOption extends OptionHandler {
     @Override
     public boolean handle(Player player, Node node, String option) {
         if(option.equals("collect")){
-            player.getDialogueInterpreter().open(1686,new NPC(1686),true);
+            player.getDialogueInterpreter().open(1686,node.asNpc() ,true);
         }
         return true;
     }
