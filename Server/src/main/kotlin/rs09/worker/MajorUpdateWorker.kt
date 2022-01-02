@@ -1,6 +1,6 @@
 package rs09.worker
 
-import api.ContentAPI
+import api.submitWorldPulse
 import core.game.system.SystemManager
 import core.game.system.SystemState
 import core.game.system.task.Pulse
@@ -103,7 +103,7 @@ class MajorUpdateWorker {
                 if(ServerConstants.DAILY_RESTART ) {
                     Repository.sendNews(colorize("%RSERVER GOING DOWN FOR DAILY RESTART IN 5 MINUTES!"))
                     ServerConstants.DAILY_RESTART = false
-                    ContentAPI.submitWorldPulse(object : Pulse(100) {
+                    submitWorldPulse(object : Pulse(100) {
                         var counter = 0
                         override fun pulse(): Boolean {
                             counter++

@@ -1,6 +1,5 @@
 package rs09.game.node.entity.combat.handlers
 
-import api.ContentAPI
 import api.EquipmentSlot
 import core.game.container.Container
 import core.game.container.impl.EquipmentContainer

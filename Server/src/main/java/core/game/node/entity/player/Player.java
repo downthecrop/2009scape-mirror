@@ -1,8 +1,8 @@
 package core.game.node.entity.player;
 
-import api.ContentAPI;
 import core.game.component.Component;
 import core.game.container.Container;
+import core.game.container.ContainerType;
 import core.game.container.impl.BankContainer;
 import core.game.container.impl.EquipmentContainer;
 import core.game.container.impl.InventoryListener;
@@ -95,6 +95,7 @@ import rs09.tools.TickUtilsKt;
 
 import java.util.*;
 
+import static api.ContentAPIKt.*;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_DEATHS;
 import static rs09.tools.stringtools.GlobalsKt.colorize;
@@ -145,6 +146,31 @@ public class Player extends Entity {
 	 * The bank container.
 	 */
 	private final BankContainer bank = new BankContainer(this);
+
+	/**
+	 * The secondary bank container.
+	 */
+	private final BankContainer bankSecondary = new BankContainer(this);
+
+	/**
+	 * Is secondary bank in use or not
+	 */
+	public boolean useSecondaryBank = false;
+
+	/**
+	 * The Blast Furnace Coal Container.
+	 */
+	public final Container blastCoal = new Container(225, ContainerType.NEVER_STACK);
+
+	/**
+	 * The Blast Furnace Ore Container.
+	 */
+	public final Container blastOre = new Container(28, ContainerType.NEVER_STACK);
+
+	/**
+	 * The Blast Furnace Bars Container.
+	 */
+	public final Container blastBars = new Container(28, ContainerType.NEVER_STACK);
 
 	/**
 	 * The packet dispatcher.
@@ -349,12 +375,12 @@ public class Player extends Entity {
 	 * A custom state for bot debugging
 	 */
 	private String customState = "";
-	
+
 	/**
 	 * The amount of targets that the player can shoot left for the archery minigame.
 	 */
 	private int archeryTargets = 0;
-	
+
 	private int archeryTotal = 0;
 
 	/**
@@ -479,12 +505,12 @@ public class Player extends Entity {
 			int time = getAttribute("fire:immune",0) - GameWorld.getTicks();
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antifire potion."));
-                getAudioManager().send(3120);
+				getAudioManager().send(3120);
 			}
 			if(time == 0){
 				sendMessage(colorize("%RYour antifire potion has expired."));
 				removeAttribute("fire:immune");
-                getAudioManager().send(2607);
+				getAudioManager().send(2607);
 			}
 		}
 		if(getAttribute("poison:immunity",0) > 0){
@@ -492,21 +518,21 @@ public class Player extends Entity {
 			debug(time + "");
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antipoison potion."));
-                getAudioManager().send(3120);
+				getAudioManager().send(3120);
 			}
 			if(time == 0){
 				sendMessage(colorize("%RYour antipoison potion has expired."));
 				removeAttribute("poison:immunity");
-                getAudioManager().send(2607);
+				getAudioManager().send(2607);
 			}
 		}
 		if (!artificial && (System.currentTimeMillis() - getSession().getLastPing()) > 20_000L) {
 			details.getSession().disconnect();
 			getSession().setLastPing(Long.MAX_VALUE);
 		}
-        if(getAttribute("infinite-special", false)) {
-            settings.setSpecialEnergy(100);
-        }
+		if(getAttribute("infinite-special", false)) {
+			settings.setSpecialEnergy(100);
+		}
 
 		//Decrements prayer points
 		getPrayer().tick();
@@ -793,20 +819,20 @@ public class Player extends Entity {
 	 */
 	public boolean isWearingVoid(CombatStyle style) {
 		int helm;
-        if(style == CombatStyle.MELEE) {
-            helm = Items.VOID_MELEE_HELM_11665;
-        } else if(style == CombatStyle.RANGE) {
-            helm = Items.VOID_RANGER_HELM_11664;
-        } else if(style == CombatStyle.MAGIC) {
-            helm = Items.VOID_MAGE_HELM_11663;
-        } else {
-            return false;
-        }
-        boolean legs = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_ROBE_8840, 1);
-        boolean top = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_TOP_8839, 1)
-            || ContentAPI.inEquipment(this, Items.VOID_KNIGHT_TOP_10611, 1);
-        boolean gloves = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_GLOVES_8842, 1);
-		return ContentAPI.inEquipment(this, helm, 1) && legs && top && gloves;
+		if(style == CombatStyle.MELEE) {
+			helm = Items.VOID_MELEE_HELM_11665;
+		} else if(style == CombatStyle.RANGE) {
+			helm = Items.VOID_RANGER_HELM_11664;
+		} else if(style == CombatStyle.MAGIC) {
+			helm = Items.VOID_MAGE_HELM_11663;
+		} else {
+			return false;
+		}
+		boolean legs = inEquipment(this, Items.VOID_KNIGHT_ROBE_8840, 1);
+		boolean top = inEquipment(this, Items.VOID_KNIGHT_TOP_8839, 1)
+				|| inEquipment(this, Items.VOID_KNIGHT_TOP_10611, 1);
+		boolean gloves = inEquipment(this, Items.VOID_KNIGHT_GLOVES_8842, 1);
+		return inEquipment(this, helm, 1) && legs && top && gloves;
 	}
 
 	/**
@@ -1009,11 +1035,27 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * Gets the bank.
-	 * @return The bank.
+	 * Gets the current active bank.
+	 * @return Current active bank.
 	 */
 	public BankContainer getBank() {
+		return useSecondaryBank ? bankSecondary : bank;
+	}
+
+	/**
+	 * Gets the primary bank.
+	 * @return Primary bank
+	 */
+	public BankContainer getBankPrimary() {
 		return bank;
+	}
+
+	/**
+	 * Gets the Secondary bank.
+	 * @return Secondary bank
+	 */
+	public BankContainer getBankSecondary() {
+		return bankSecondary;
 	}
 
 	public BankContainer getDropLog() {return dropLog;}
@@ -1420,10 +1462,10 @@ public class Player extends Entity {
 	public void clearState(String key){
 		State state = states.get(key);
 		if(state == null) return;
-        Pulse pulse = state.getPulse();
-        if(pulse != null) {
-            pulse.stop();
-        }
+		Pulse pulse = state.getPulse();
+		if(pulse != null) {
+			pulse.stop();
+		}
 		states.remove(key);
 	}
 }

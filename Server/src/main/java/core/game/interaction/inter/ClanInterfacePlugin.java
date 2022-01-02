@@ -1,6 +1,5 @@
 package core.game.interaction.inter;
 
-import api.ContentAPI;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
@@ -14,6 +13,9 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.StringUtils;
 import kotlin.Unit;
+
+import static api.ContentAPIKt.sendInputDialogue;
+import static api.ContentAPIKt.setInterfaceText;
 
 /**
  * Represents the plugin used to handle the clan interfaces.
@@ -95,9 +97,9 @@ public final class ClanInterfacePlugin extends ComponentPlugin {
 					clan.clean(true);
 					break;
 				default:
-					ContentAPI.sendInputDialogue(player, false, "Enter clan prefix:", (value) -> {
+					sendInputDialogue(player, false, "Enter clan prefix:", (value) -> {
 						String name = StringUtils.formatDisplayName((String) value);
-						ContentAPI.setInterfaceText(player, name, 590, 22);
+						setInterfaceText(player, name, 590, 22);
 						if(WorldCommunicator.isEnabled()){
 							MSPacketRepository.sendClanRename(player, name);
 							clan.setName(name);
