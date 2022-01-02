@@ -76,6 +76,8 @@ class WorldClock {
             worker.start()
         }
 
+        if (ServerConstants.ALLOW_GUI)
+            ServerMonitor.open()
     }
 
     fun checkDay(): Int {
