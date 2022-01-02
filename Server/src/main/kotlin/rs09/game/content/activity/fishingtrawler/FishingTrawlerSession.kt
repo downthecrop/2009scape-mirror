@@ -8,7 +8,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.state.EntityState
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.build.DynamicRegion
 import core.game.world.update.flag.context.Animation
@@ -64,7 +64,7 @@ class FishingTrawlerSession(var region: DynamicRegion, val activity: FishingTraw
         initHoles()
         initMurphy(29,25)
         initGulls()
-        World.Pulser.submit(TrawlerPulse(this))
+        GameWorld.Pulser.submit(TrawlerPulse(this))
         for(player in pl){
             player.interfaceManager.openOverlay(Component(OVERLAY_ID))
             player.interfaceManager.open(Component(TUTORIAL_ID))
@@ -78,7 +78,7 @@ class FishingTrawlerSession(var region: DynamicRegion, val activity: FishingTraw
 
     fun swapBoatType(fromRegion: Int){
         val newRegion = DynamicRegion.create(fromRegion)
-        World.Pulser.submit(SwapBoatPulse(players,newRegion))
+        GameWorld.Pulser.submit(SwapBoatPulse(players,newRegion))
     }
 
     class SwapBoatPulse(val playerList: ArrayList<Player>,val newRegion: DynamicRegion) : Pulse(3){

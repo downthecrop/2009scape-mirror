@@ -22,7 +22,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.zone.MapZone;
@@ -115,7 +115,7 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 		@Override
 		public boolean pulse() {
 			attack = RandomFunction.getRandomElement(CatapultAttack.values());
-			World.getPulser().submit(new Pulse(7) {
+			GameWorld.getPulser().submit(new Pulse(7) {
 				@Override
 				public boolean pulse() {
 					for (Player p : players) {
@@ -235,7 +235,7 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 			if (!pulse.isRunning()) {
 				pulse.restart();
 				pulse.start();
-				World.getPulser().submit(pulse);
+				GameWorld.getPulser().submit(pulse);
 			}
 		}
 		return super.enter(e);

@@ -12,7 +12,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.player.FaceLocationFlag;
@@ -99,7 +99,7 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 
 	@Override
 	public boolean reward() {
-		if (getLastFire() >= World.getTicks()) {
+		if (getLastFire() >= GameWorld.getTicks()) {
 			createFire();
 			return true;
 		}
@@ -181,7 +181,7 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 	 * Sets the last fire.
 	 */
 	public void setLastFire() {
-		player.setAttribute("last-firemake", World.getTicks() + 2);
+		player.setAttribute("last-firemake", GameWorld.getTicks() + 2);
 	}
 
 	/**

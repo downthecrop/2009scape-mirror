@@ -12,7 +12,7 @@ import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -160,7 +160,7 @@ public final class DMCHandler {
 		}
 		firingPulse.restart();
 		firingPulse.start();
-		World.getPulser().submit(firingPulse);
+		GameWorld.getPulser().submit(firingPulse);
 	}
 
 	/**
@@ -200,7 +200,7 @@ public final class DMCHandler {
 		player.getWalkingQueue().reset();
 		player.lock(9);
 		player.faceLocation(spawn.transform(Direction.NORTH_EAST));
-		World.getPulser().submit(new Pulse(2, player) {
+		GameWorld.getPulser().submit(new Pulse(2, player) {
 			int count = 0;
 			Scenery object = null;
 

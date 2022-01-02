@@ -9,7 +9,7 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.state.EntityState;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
@@ -57,7 +57,7 @@ public final class MinotaurFamiliarNPC implements Plugin<Object> {
 		familiar.visualize(Animation.create(8026), Graphics.create(1496));
 		if (!(familiar instanceof BronzeMinotaurNPC || familiar instanceof RuneMinotaurNPC) && RandomFunction.random(10) < 6) {
 			final int ticks = 2 + (int) Math.floor(familiar.getLocation().getDistance(target.getLocation()) * 0.5);
-			World.getPulser().submit(new Pulse(ticks) {
+			GameWorld.getPulser().submit(new Pulse(ticks) {
 				@Override
 				public boolean pulse() {
 					target.getStateManager().set(EntityState.STUNNED, 4);

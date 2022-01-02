@@ -9,7 +9,7 @@ import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 
@@ -40,14 +40,14 @@ public class StrangeFloorShortcut extends AgilityShortcut {
 
 	@Override
 	public void run(final Player player, Scenery object, String option, boolean failed) {
-		World.getPulser().submit(new Pulse(1, player) {
+		GameWorld.getPulser().submit(new Pulse(1, player) {
 			@Override
 			public boolean pulse() {
 				player.getAnimator().forceAnimation(JUMP_ANIM);
 				return true;
 			}
 		});
-		World.getPulser().submit(new Pulse(2, player) {
+		GameWorld.getPulser().submit(new Pulse(2, player) {
 
 			@Override
 			public boolean pulse() {

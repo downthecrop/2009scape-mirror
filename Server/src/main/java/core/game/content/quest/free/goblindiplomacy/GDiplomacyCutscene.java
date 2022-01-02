@@ -11,7 +11,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -646,7 +646,7 @@ public final class GDiplomacyCutscene extends CutscenePlugin {
 		 */
 		public void sendGrubFoot(final GrubFoot grubFoot, final int endStage) {
 			Pathfinder.find(grubfoot, grubfoot.getLocation().transform(-4, 0, 0)).walk(grubfoot);
-			World.getPulser().submit(new Pulse(1, player) {
+			GameWorld.getPulser().submit(new Pulse(1, player) {
 				int counter;
 
 				@Override

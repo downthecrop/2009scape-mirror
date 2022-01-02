@@ -11,7 +11,7 @@ import core.game.node.scenery.Scenery;
 import core.game.system.task.ItemLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
@@ -122,7 +122,7 @@ public final class AnimationRoom extends MapZone implements Plugin<Object> {
 		player.lock(10);
 		player.animate(Animation.create(827));
 		player.getDialogueInterpreter().sendPlainMessage(true, "You place your armour on the platform where it", "disappears...");
-		World.getPulser().submit(new Pulse(5, player) {
+		GameWorld.getPulser().submit(new Pulse(5, player) {
 			boolean spawn;
 
 			@Override

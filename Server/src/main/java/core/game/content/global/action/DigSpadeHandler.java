@@ -4,7 +4,7 @@ import core.game.node.entity.player.Player;
 import rs09.game.interaction.SpadeDigListener;
 import rs09.game.system.SystemLogger;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 
@@ -42,7 +42,7 @@ public final class DigSpadeHandler {
 		}
 
 		if (action != null) {
-			World.getPulser().submit(new Pulse(1, player) {
+			GameWorld.getPulser().submit(new Pulse(1, player) {
 				@Override
 				public boolean pulse() {
 					action.run(player);

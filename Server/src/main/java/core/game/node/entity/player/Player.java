@@ -1,8 +1,8 @@
 package core.game.node.entity.player;
 
+import api.ContentAPI;
 import core.game.component.Component;
 import core.game.container.Container;
-import core.game.container.ContainerType;
 import core.game.container.impl.BankContainer;
 import core.game.container.impl.EquipmentContainer;
 import core.game.container.impl.InventoryListener;
@@ -84,7 +84,7 @@ import rs09.game.node.entity.player.info.login.PlayerSaver;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
 import rs09.game.node.entity.state.newsys.State;
 import rs09.game.node.entity.state.newsys.StateRepository;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import rs09.game.world.repository.DisconnectionQueue;
 import rs09.game.world.repository.Repository;
 import rs09.game.world.update.MapChunkRenderer;
@@ -95,7 +95,6 @@ import rs09.tools.TickUtilsKt;
 
 import java.util.*;
 
-import static api.ContentAPIKt.*;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_DEATHS;
 import static rs09.tools.stringtools.GlobalsKt.colorize;
@@ -146,31 +145,6 @@ public class Player extends Entity {
 	 * The bank container.
 	 */
 	private final BankContainer bank = new BankContainer(this);
-
-	/**
-	 * The secondary bank container.
-	 */
-	private final BankContainer bankSecondary = new BankContainer(this);
-
-	/**
-	 * Is secondary bank in use or not
-	 */
-	public boolean useSecondaryBank = false;
-
-	/**
-	 * The Blast Furnace Coal Container.
-	 */
-	public final Container blastCoal = new Container(225, ContainerType.NEVER_STACK);
-
-	/**
-	 * The Blast Furnace Ore Container.
-	 */
-	public final Container blastOre = new Container(28, ContainerType.NEVER_STACK);
-
-	/**
-	 * The Blast Furnace Bars Container.
-	 */
-	public final Container blastBars = new Container(28, ContainerType.NEVER_STACK);
 
 	/**
 	 * The packet dispatcher.
@@ -488,7 +462,7 @@ public class Player extends Entity {
 		}
 		if(intoWardrobe){
 			packetDispatch.sendInterfaceConfig(548,69,true);
-			World.getPulser().submit(new wardrobePulse(this));
+			GameWorld.getPulser().submit(new wardrobePulse(this));
 			inWardrobe = true;
 		} else {
 			inWardrobe = false;
@@ -502,7 +476,7 @@ public class Player extends Entity {
 		hunterManager.pulse();
 		musicPlayer.tick();
 		if(getAttribute("fire:immune",0) > 0){
-			int time = getAttribute("fire:immune",0) - World.getTicks();
+			int time = getAttribute("fire:immune",0) - GameWorld.getTicks();
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antifire potion."));
                 getAudioManager().send(3120);
@@ -514,7 +488,7 @@ public class Player extends Entity {
 			}
 		}
 		if(getAttribute("poison:immunity",0) > 0){
-			int time = getAttribute("poison:immunity",0) - World.getTicks();
+			int time = getAttribute("poison:immunity",0) - GameWorld.getTicks();
 			debug(time + "");
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antipoison potion."));
@@ -701,10 +675,10 @@ public class Player extends Entity {
 		getPrayer().reset();
 		super.finalizeDeath(killer);
 		appearance.sync();
-		if (killer instanceof Player && !World.isEconomyWorld() && getSkullManager().isWilderness() && killer.asPlayer().getSkullManager().isWilderness()) {
+		if (killer instanceof Player && !GameWorld.isEconomyWorld() && getSkullManager().isWilderness() && killer.asPlayer().getSkullManager().isWilderness()) {
 			killer.asPlayer().getSavedData().getSpawnData().onDeath(killer.asPlayer(), this);
 		}
-		if (World.isEconomyWorld() && !getSavedData().getGlobalData().isDeathScreenDisabled()) {
+		if (GameWorld.isEconomyWorld() && !getSavedData().getGlobalData().isDeathScreenDisabled()) {
 			getInterfaceManager().open(new Component(153));
 		}
 		if (!getSavedData().getGlobalData().isDeathScreenDisabled()) {
@@ -763,7 +737,7 @@ public class Player extends Entity {
 
 	@Override
 	public boolean isPoisonImmune() {
-		return getAttribute("poison:immunity", -1) > World.getTicks();
+		return getAttribute("poison:immunity", -1) > GameWorld.getTicks();
 	}
 
 	@Override
@@ -828,11 +802,11 @@ public class Player extends Entity {
         } else {
             return false;
         }
-        boolean legs = inEquipment(this, Items.VOID_KNIGHT_ROBE_8840, 1);
-        boolean top = inEquipment(this, Items.VOID_KNIGHT_TOP_8839, 1)
-            || inEquipment(this, Items.VOID_KNIGHT_TOP_10611, 1);
-        boolean gloves = inEquipment(this, Items.VOID_KNIGHT_GLOVES_8842, 1);
-		return inEquipment(this, helm, 1) && legs && top && gloves;
+        boolean legs = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_ROBE_8840, 1);
+        boolean top = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_TOP_8839, 1)
+            || ContentAPI.inEquipment(this, Items.VOID_KNIGHT_TOP_10611, 1);
+        boolean gloves = ContentAPI.inEquipment(this, Items.VOID_KNIGHT_GLOVES_8842, 1);
+		return ContentAPI.inEquipment(this, helm, 1) && legs && top && gloves;
 	}
 
 	/**
@@ -1035,28 +1009,12 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * Gets the current active bank.
-	 * @return Current active bank.
+	 * Gets the bank.
+	 * @return The bank.
 	 */
 	public BankContainer getBank() {
-		return useSecondaryBank ? bankSecondary : bank;
-	}
-
-	/**
-	 * Gets the primary bank.
-	 * @return Primary bank
-	 */
-	public BankContainer getBankPrimary() {
 		return bank;
 	}
-
-	/**
-	 * Gets the Secondary bank.
-	 * @return Secondary bank
-	 */
-	public BankContainer getBankSecondary() {
-		return bankSecondary;
-	}	
 
 	public BankContainer getDropLog() {return dropLog;}
 

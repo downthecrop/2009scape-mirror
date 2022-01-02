@@ -5,7 +5,7 @@ import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -80,7 +80,7 @@ public final class NechryaelNPC extends AbstractNPC {
 	 * Sets the next spawn time.
 	 */
 	private void setSpawnTime() {
-		nextSpawn = World.getTicks() + 50;
+		nextSpawn = GameWorld.getTicks() + 50;
 	}
 
 	/**
@@ -92,7 +92,7 @@ public final class NechryaelNPC extends AbstractNPC {
 			setSpawnTime();
 			return false;
 		}
-		return nextSpawn < World.getTicks();
+		return nextSpawn < GameWorld.getTicks();
 	}
 
 	@Override
@@ -136,7 +136,7 @@ public final class NechryaelNPC extends AbstractNPC {
 			this.player = player;
 			this.parent = parent;
 			this.setRespawn(false);
-			this.time = World.getTicks() + 120;
+			this.time = GameWorld.getTicks() + 120;
 		}
 
 		@Override
@@ -145,7 +145,7 @@ public final class NechryaelNPC extends AbstractNPC {
 			if (!inCombat() || !player.inCombat()) {
 				getProperties().getCombatPulse().attack(player);
 			}
-			if (time < World.getTicks() || !player.isActive() || player.getLocation().getDistance(getLocation()) > 15) {
+			if (time < GameWorld.getTicks() || !player.isActive() || player.getLocation().getDistance(getLocation()) > 15) {
 				clear();
 			}
 		}

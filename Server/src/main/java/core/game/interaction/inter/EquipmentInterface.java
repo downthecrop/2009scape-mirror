@@ -23,7 +23,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.content.global.action.EquipHandler;
 import rs09.game.interaction.InteractionListeners;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents the equipment interface.
@@ -50,7 +50,7 @@ public final class EquipmentInterface extends ComponentPlugin {
 			switch (opcode) {
 			case 155:
 				p.getPulseManager().clear();
-				World.getPulser().submit(new Pulse(1, p) {
+				GameWorld.getPulser().submit(new Pulse(1, p) {
 					@Override
 					public boolean pulse() {
 						EquipHandler.unequip(p, slot, itemId);
@@ -62,7 +62,7 @@ public final class EquipmentInterface extends ComponentPlugin {
 				p.sendMessage(p.getEquipment().get(slot).getDefinition().getExamine());
 				return true;
 			case 196:
-				World.getPulser().submit(new Pulse(1, p) {
+				GameWorld.getPulser().submit(new Pulse(1, p) {
 					@Override
 					public boolean pulse() {
 						operate(p, slot, itemId);
@@ -78,7 +78,7 @@ public final class EquipmentInterface extends ComponentPlugin {
 			case 155:
 				p.getPulseManager().clear();
 				final Item item = p.getInventory().get(slot);
-				World.getPulser().submit(new Pulse(1, p) {
+				GameWorld.getPulser().submit(new Pulse(1, p) {
 					@Override
 					public boolean pulse() {
 						InteractionListeners.run(item.getId(),0,"equip",p, item);
@@ -96,7 +96,7 @@ public final class EquipmentInterface extends ComponentPlugin {
 			if (button != 28) {
 				return false;
 			}
-			World.getPulser().submit(new Pulse(1, p) {
+			GameWorld.getPulser().submit(new Pulse(1, p) {
 				@Override
 				public boolean pulse() {
 					operate(p, slot, itemId);
@@ -128,7 +128,7 @@ public final class EquipmentInterface extends ComponentPlugin {
 			case 28:
 				if (opcode == 81) {
 					p.getPulseManager().clear();
-					World.getPulser().submit(new Pulse(1, p) {
+					GameWorld.getPulser().submit(new Pulse(1, p) {
 						@Override
 						public boolean pulse() {
 							EquipHandler.unequip(p, slot, itemId);

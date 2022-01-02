@@ -13,7 +13,7 @@ import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.handlers.MagicSwingHandler;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the kolodion npc.
@@ -254,7 +254,7 @@ public final class KolodionNPC extends AbstractNPC {
 				player.lock();
 			}
 			player.lock(2);
-			World.getPulser().submit(new Pulse(1, kolodion, player) {
+			GameWorld.getPulser().submit(new Pulse(1, kolodion, player) {
 				int counter;
 
 				@Override

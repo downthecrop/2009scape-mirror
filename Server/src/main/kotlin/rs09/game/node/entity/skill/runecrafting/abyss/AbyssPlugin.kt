@@ -18,7 +18,7 @@ import core.game.world.update.flag.context.Graphics
 import core.tools.RandomFunction
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 /**
  * A plugin used to handle the abyss.
@@ -105,7 +105,7 @@ class AbyssPlugin : InteractionListener() {
                 }
                 player.animate(Animation(733))
                 player.lock()
-                World.Pulser.submit(object : Pulse(1, player) {
+                GameWorld.Pulser.submit(object : Pulse(1, player) {
                     var count = 0
                     override fun pulse(): Boolean {
                         when (count) {
@@ -150,7 +150,7 @@ class AbyssPlugin : InteractionListener() {
                 }
                 player.animate(tool.getAnimation())
                 player.lock()
-                World.Pulser.submit(object : Pulse(1, player) {
+                GameWorld.Pulser.submit(object : Pulse(1, player) {
                     var count = 0
                     override fun pulse(): Boolean {
                         when (count) {
@@ -191,7 +191,7 @@ class AbyssPlugin : InteractionListener() {
                 }
                 player.animate(tool.getAnimation())
                 player.lock()
-                World.Pulser.submit(object : Pulse(1, player) {
+                GameWorld.Pulser.submit(object : Pulse(1, player) {
                     var count = 0
                     override fun pulse(): Boolean {
                         when (count) {
@@ -232,7 +232,7 @@ class AbyssPlugin : InteractionListener() {
                 `object` ?: return
                 player.animate(Animation(1331))
                 player.lock()
-                World.Pulser.submit(object : Pulse(1, player) {
+                GameWorld.Pulser.submit(object : Pulse(1, player) {
                     var count = 0
                     override fun pulse(): Boolean {
                         when (count) {
@@ -303,7 +303,7 @@ class AbyssPlugin : InteractionListener() {
                 val index: Int = RandomFunction.random(emotes.size)
                 player.animate(Animation(emotes[index]))
                 player.lock()
-                World.Pulser.submit(object : Pulse(1, player) {
+                GameWorld.Pulser.submit(object : Pulse(1, player) {
                     var count = 0
                     override fun pulse(): Boolean {
                         when (count) {
@@ -458,7 +458,7 @@ class AbyssPlugin : InteractionListener() {
             npc.sendChat("Veniens! Sallakar! Rinnesset!")
             player.skills.decrementPrayerPoints(100.0)
             player.skullManager.checkSkull(player)
-            World.Pulser.submit(object : Pulse(2, player) {
+            GameWorld.Pulser.submit(object : Pulse(2, player) {
                 override fun pulse(): Boolean {
                     player.properties.teleportLocation = Location.create(3021, 4847, 0)
                     npc.updateMasks.reset()

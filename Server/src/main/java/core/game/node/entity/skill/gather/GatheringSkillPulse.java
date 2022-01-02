@@ -17,7 +17,7 @@ import core.game.node.scenery.SceneryBuilder;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -168,7 +168,7 @@ public final class GatheringSkillPulse extends SkillPulse<Scenery> {
 			// Calculate if the player should receive a bonus gem or bonus ore or both
 			if (!isMiningEssence && isMining) {
 				//check for bonus ore from shooting star buff
-				if(isMining && (player.getAttribute("SS Mining Bonus", World.getTicks()) > World.getTicks())){
+				if(isMining && (player.getAttribute("SS Mining Bonus", GameWorld.getTicks()) > GameWorld.getTicks())){
 					if(RandomFunction.getRandom(7) == 5) {
 						player.getPacketDispatch().sendMessage("...you manage to mine a second ore thanks to the Star Sprite.");
 						player.getInventory().add(item);

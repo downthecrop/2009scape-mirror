@@ -1,6 +1,10 @@
 import java.util.concurrent.TimeUnit;
 
-import api.*
+import api.ContentAPI
+import core.cache.def.impl.NPCDefinition
+import core.cache.def.impl.SceneryDefinition
+import core.game.interaction.OptionHandler
+import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.CombatStyle
 import core.game.node.entity.impl.Animator.Priority;
@@ -14,12 +18,14 @@ import core.game.system.task.Pulse
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
+import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
+import core.plugin.Plugin
 import core.tools.RandomFunction
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 /*@Initializable
 class HunterPitfall : OptionHandler() {
@@ -195,7 +201,7 @@ class PitfallListeners : InteractionListener() {
                     return true
                 }
             }
-            World.Pulser.submit(collapsePulse)
+            GameWorld.Pulser.submit(collapsePulse)
             return@on true
         }
         on(SPIKED_PIT, SCENERY, "jump") { player, node ->
@@ -218,7 +224,7 @@ class PitfallListeners : InteractionListener() {
                         //ForceMovement.run(pitfall_npc, pitfall_npc.getLocation(), pit.getLocation(), ForceMovement.WALK_ANIMATION, Animation(ANIM), dir, 8);
                         //pitfall_npc.setLocation(pit.getLocation());
                         //pitfall_npc.walkingQueue.addPath(pit.location.x, pit.location.y);
-                        teleport(pitfall_npc, pit.location)
+                        ContentAPI.teleport(pitfall_npc, pit.location)
                         pitfall_npc.startDeath(null)
                         player.removeAttribute("pitfall:timestamp:${pit.location.x}:${pit.location.y}")
                         player.incrementAttribute("pitfall:count", -1)
@@ -228,7 +234,7 @@ class PitfallListeners : InteractionListener() {
                         //ForceMovement.run(pitfall_npc, pitfall_npc.getLocation(), dst, ForceMovement.WALK_ANIMATION, Animation(ANIM), dir, 8);
                         //pitfall_npc.walkingQueue.addPath(npcdst.x, npcdst.y)
                         val npcdst = dst.transform(dir, if(dir == Direction.SOUTH || dir == Direction.WEST) 1 else 0)
-                        teleport(pitfall_npc, npcdst)
+                        ContentAPI.teleport(pitfall_npc, npcdst)
                         pitfall_npc.animate(Animation(5232, Priority.HIGH))
                         pitfall_npc.attack(player)
                         pitfall_npc.setAttribute("last_pit_loc", pit.location)

@@ -7,8 +7,9 @@ import core.game.node.entity.player.link.appearance.Gender;
 import core.game.node.entity.player.link.music.MusicEntry;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
-import core.net.ms.MSPacketRepository;
+import rs09.game.world.GameWorld;
+import core.net.amsc.MSPacketRepository;
+import core.net.amsc.WorldCommunicator;
 import core.tools.RandomFunction;
 
 /**
@@ -326,15 +327,17 @@ public final class CharacterDesign {
 					if (player.getIronmanManager().isIronman() && player.getSettings().isAcceptAid()) {
 						player.getSettings().toggleAcceptAid();
 					}
-					MSPacketRepository.sendInfoUpdate(player);
+					if (WorldCommunicator.isEnabled()) {
+						MSPacketRepository.sendInfoUpdate(player);
+					}
 					//This overwrites the stuck dialogue after teleporting to Lumbridge for some reason
 					//Dialogue from 2007 or thereabouts
 					//Original is five lines, but if the same is done here it will break. Need to find another way of showing all this information.
 					//player.getDialogueInterpreter().sendDialogue("Welcome to Lumbridge! To get more help, simply click on the", "Lumbridge Guide or one of the Tutors - these can be found by looking", "for the question mark icon on your mini-map. If you find you are", "lost at any time, look for a signpost or use the Lumbridge Home Port Spell.");
-					player.getDialogueInterpreter().sendPlaneMessageWithBlueTitle("Welcome to " + World.getSettings().getName() + "!","Hans at the castle in Lumbridge can","enable ironman mode, modify xp rate settings,","toggle random events, and more!","Use the ladder to leave.");
+					player.getDialogueInterpreter().sendPlaneMessageWithBlueTitle("Welcome to " + GameWorld.getSettings().getName() + "!","Hans at the castle in Lumbridge can","enable ironman mode, modify xp rate settings,","toggle random events, and more!","Use the ladder to leave.");
 
 					//Appending the welcome message and some other stuff
-					player.getPacketDispatch().sendMessage("Welcome to " + World.getSettings().getName() + ".");
+					player.getPacketDispatch().sendMessage("Welcome to " + GameWorld.getSettings().getName() + ".");
 					return true;
 				}
 			});

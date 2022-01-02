@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.agility
 
-import api.*
+import api.ContentAPI
 import core.cache.def.impl.SceneryDefinition
 import core.game.content.global.action.DoorActionHandler
 import core.game.node.Node
@@ -15,7 +15,7 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 /**
  * Handles the wilderness agility course.
@@ -68,7 +68,7 @@ class WildernessCourse
      * @param object the object.
      */
     private fun handleEntranceObstacle(player: Player, `object`: Scenery) {
-        World.Pulser.submit(object : Pulse(1, player) {
+        GameWorld.Pulser.submit(object : Pulse(1, player) {
             var counter = 0
             val fail = AgilityHandler.hasFailed(player, 1, 0.3)
             override fun pulse(): Boolean {
@@ -76,7 +76,7 @@ class WildernessCourse
                     2 -> {
                         val end = if (fail) Location.create(2998, 3924, 0) else if (`object`.id < 2309) Location.create(2998, 3917, 0) else Location.create(2998, 3930, 0)
                         val start = if (`object`.id < 2309) player.location else Location.create(2998, 3917, 0)
-						sendMessage(player, "You go through the gate and try to edge over the ridge...")
+						ContentAPI.sendMessage(player, "You go through the gate and try to edge over the ridge...")
                         AgilityHandler.walk(player, -1, start, end, Animation.create(155), if (fail) 0.0 else 15.00, if (fail) "You lose your footing and fail into the wolf pit." else "You skillfully balance across the ridge...")
                     }
                     9 -> {
@@ -104,7 +104,7 @@ class WildernessCourse
      */
     private fun handlePipe(player: Player, `object`: Scenery) {
         if (`object`.location.y == 3948) {
-			sendMessage(player, "You can't do that from here.")
+			ContentAPI.sendMessage(player, "You can't do that from here.")
             return
         }
         if (player.skills.getLevel(Skills.AGILITY) < 49) {
@@ -112,7 +112,7 @@ class WildernessCourse
             return
         }
         player.lock(10)
-        World.Pulser.submit(object : Pulse(1, player) {
+        GameWorld.Pulser.submit(object : Pulse(1, player) {
             var counter = 0
             override fun pulse(): Boolean {
                 val x = 3004
@@ -153,18 +153,18 @@ class WildernessCourse
      */
     private fun handleRopeSwing(player: Player, `object`: Scenery) {
         if (player.location.y < 3554) {
-			sendMessage(player, "You cannot do that from here.")
+			ContentAPI.sendMessage(player, "You cannot do that from here.")
             return
         }
-        if (ropeDelay > World.ticks) {
-			sendMessage(player, "The rope is being used.")
+        if (ropeDelay > GameWorld.ticks) {
+			ContentAPI.sendMessage(player, "The rope is being used.")
             return
         }
         if (AgilityHandler.hasFailed(player, 1, 0.1)) {
             AgilityHandler.fail(player, 0, Location.create(3005, 10357, 0), null, getHitAmount(player), "You slip and fall to the pit below.")
             return
         }
-        ropeDelay = World.ticks + 2
+        ropeDelay = GameWorld.ticks + 2
         player.packetDispatch.sendSceneryAnimation(`object`, Animation.create(497), true)
         AgilityHandler.forceWalk(player, 1, player.location, Location.create(3005, 3958, 0), Animation.create(751), 50, 20.0, "You skillfully swing across.", 1)
     }
@@ -175,13 +175,13 @@ class WildernessCourse
      * @param object the object.
      */
     private fun handleSteppingStones(player: Player, `object`: Scenery) {
-        lock(player, 50)
+        ContentAPI.lock(player, 50)
         val fail = AgilityHandler.hasFailed(player, 1, 0.3)
         val origLoc = player.location
-        registerLogoutListener(player, "steppingstone"){p ->
-            teleport(p, origLoc)
+        ContentAPI.registerLogoutListener(player, "steppingstone"){p ->
+            ContentAPI.teleport(p, origLoc)
         }
-        submitWorldPulse(object : Pulse(2, player){
+        ContentAPI.submitWorldPulse(object : Pulse(2, player){
             var counter = 0
             override fun pulse(): Boolean {
                 if (counter == 3 && fail) {
@@ -190,8 +190,8 @@ class WildernessCourse
                 }
                 AgilityHandler.forceWalk(player, if (counter == 5) 2 else -1, player.location, player.location.transform(-1, 0, 0), Animation.create(741), 10, if (counter == 5) 20.0 else 0.0, if (counter != 0) null else "You carefully start crossing the stepping stones...")
                 if(++counter == 6){
-                    unlock(player)
-                    clearLogoutListener(player, "steppingstone")
+                    ContentAPI.unlock(player)
+                    ContentAPI.clearLogoutListener(player, "steppingstone")
                 }
                 return counter == 6
             }
@@ -206,10 +206,10 @@ class WildernessCourse
     private fun handleLogBalance(player: Player, `object`: Scenery) {
         val failed = AgilityHandler.hasFailed(player, 1, 0.5)
         val end = if (failed) Location.create(2998, 3945, 0) else Location.create(2994, 3945, 0)
-		sendMessage(player, "You walk carefully across the slippery log...")
+		ContentAPI.sendMessage(player, "You walk carefully across the slippery log...")
         AgilityHandler.walk(player, if (failed) -1 else 3, player.location, end, Animation.create(155), if (failed) 0.0 else 20.0, if (failed) null else "You skillfully edge across the gap.")
         if (failed) {
-            World.Pulser.submit(object : Pulse(5, player) {
+            GameWorld.Pulser.submit(object : Pulse(5, player) {
                 override fun pulse(): Boolean {
                     player.faceLocation(Location.create(2998, 3944, 0))
                     AgilityHandler.fail(player, 3, Location.create(2998, 10345, 0), Animation.create(770), getHitAmount(player), "You slip and fall onto the spikes below.")
@@ -227,7 +227,7 @@ class WildernessCourse
      */
     private fun handleRockClimb(player: Player, `object`: Scenery) {
         AgilityHandler.forceWalk(player, 4, Location.create(2994, 3937, 0), Location.create(2994, 3933, 0), Animation.create(740), 8, 0.0, "You reach the top.")
-        World.Pulser.submit(object : Pulse(4, player) {
+        GameWorld.Pulser.submit(object : Pulse(4, player) {
             override fun pulse(): Boolean {
                 player.animator.reset()
                 return true

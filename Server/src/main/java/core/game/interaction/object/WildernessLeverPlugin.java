@@ -12,7 +12,7 @@ import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -65,7 +65,7 @@ public final class WildernessLeverPlugin extends OptionHandler {
 		player.lock(2);
 		player.animate(lever.getAnimation());
 		player.getAudioManager().send(new Audio(2400));
-		World.getPulser().submit(new Pulse(2, player) {
+		GameWorld.getPulser().submit(new Pulse(2, player) {
 			@Override
 			public boolean pulse() {
 				lever.message(player, index);

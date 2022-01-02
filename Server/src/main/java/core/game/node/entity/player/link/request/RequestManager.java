@@ -2,7 +2,7 @@ package core.game.node.entity.player.link.request;
 
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.player.Player;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents a managing class for requests of a player.
@@ -69,7 +69,7 @@ public final class RequestManager {
 			player.getPacketDispatch().sendMessage("Other player is busy at the moment.");
 			return false;
 		}
-		if (target.getAttribute("busy", 0) > World.getTicks() || player.getAttribute("busy", 0) > World.getTicks()) {
+		if (target.getAttribute("busy", 0) > GameWorld.getTicks() || player.getAttribute("busy", 0) > GameWorld.getTicks()) {
 			player.getPacketDispatch().sendMessage("Other player is busy at the moment.");
 			return false;
 		}
@@ -91,8 +91,8 @@ public final class RequestManager {
 			close(player);
 			clear();
 			target.getRequestManager().clear();
-			player.setAttribute("busy", World.getTicks() + 2);
-			target.setAttribute("busy", World.getTicks() + 2);
+			player.setAttribute("busy", GameWorld.getTicks() + 2);
+			target.setAttribute("busy", GameWorld.getTicks() + 2);
 			type.getModule().open(player, target);
 			return true;
 		}

@@ -9,7 +9,7 @@ import rs09.ServerStore
 import rs09.game.content.global.worldevents.PluginSet
 import rs09.game.content.global.worldevents.WorldEvent
 import rs09.game.content.global.worldevents.WorldEvents
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 
 /**
@@ -19,7 +19,7 @@ import rs09.game.world.World
  */
 class ShootingStarEvent : WorldEvent("shooting-stars") {
     val star = ShootingStar()
-    val tickDelay = if(World.settings?.isDevMode == true) 200 else 25000
+    val tickDelay = if(GameWorld.settings?.isDevMode == true) 200 else 25000
 
 
     override fun initialize() {
@@ -32,7 +32,7 @@ class ShootingStarEvent : WorldEvent("shooting-stars") {
                 ShootingStarLogin()
         )
         super.initialize()
-        World.Pulser.submit(StarPulse())
+        GameWorld.Pulser.submit(StarPulse())
         log("Shooting Star event has been initialized.")
     }
 

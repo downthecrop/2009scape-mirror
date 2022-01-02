@@ -6,7 +6,7 @@ import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
 import rs09.game.node.entity.combat.CombatPulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents an entity's pulse manager.
@@ -35,9 +35,9 @@ public final class PulseManager {
 		pulse.start();
 		if (pulse.isRunning()) {
 			if (fast) {
-				World.getPulser().submit(current = pulse);
+				GameWorld.getPulser().submit(current = pulse);
 			} else {
-				World.getPulser().submit(current = pulse);
+				GameWorld.getPulser().submit(current = pulse);
 			}
 		}
 	}

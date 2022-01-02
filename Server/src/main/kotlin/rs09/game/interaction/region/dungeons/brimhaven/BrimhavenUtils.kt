@@ -13,7 +13,7 @@ import core.game.system.task.Pulse
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 object BrimhavenUtils {
     fun getVineDestination(player: Player, node: Scenery): Location {
@@ -53,7 +53,7 @@ object BrimhavenUtils {
             teleport(p, loc)
         }
 
-        World.Pulser.submit(object : Pulse(3, player) {
+        GameWorld.Pulser.submit(object : Pulse(3, player) {
             var stage = if (dir == Direction.NORTH) -1 else 0
             var direction = dir
             override fun pulse(): Boolean {

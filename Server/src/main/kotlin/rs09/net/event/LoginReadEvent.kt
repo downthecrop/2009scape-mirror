@@ -14,12 +14,12 @@ import core.game.system.task.TaskExecutor
 import core.net.Constants
 import core.net.IoReadEvent
 import core.net.IoSession
+import core.net.amsc.WorldCommunicator
 import core.tools.StringUtils
 import rs09.ServerConstants
 import rs09.game.node.entity.player.info.login.LoginParser
 import rs09.game.system.SystemLogger
 import rs09.game.world.repository.Repository
-import rs09.net.ms.ManagementServer
 import java.lang.Runnable
 import java.math.BigInteger
 import java.nio.ByteBuffer
@@ -136,7 +136,11 @@ class LoginReadEvent
             val parser = LoginParser(details, LoginType.fromType(opcode))
             details.session = session
             details.info.translate(UIDInfo(details.ipAddress, ByteBufferUtils.getString(buffer), ByteBufferUtils.getString(buffer), ByteBufferUtils.getString(buffer)))
-            ManagementServer.attemptLogin(parser)
+            if (WorldCommunicator.isEnabled()) {
+                WorldCommunicator.register(parser)
+            } else {
+                TaskExecutor.executeSQL {parser.run()}
+            }
         }
 
         /**

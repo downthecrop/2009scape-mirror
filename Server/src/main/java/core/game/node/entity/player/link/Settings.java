@@ -6,7 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.communication.CommunicationInfo;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.net.packet.IoBuffer;
 
 import java.nio.ByteBuffer;
@@ -158,7 +158,7 @@ public final class Settings {
 				}
 			};
 			pulse.setTicksPassed(1);
-			World.getPulser().submit(pulse);
+			GameWorld.getPulser().submit(pulse);
 			player.setAttribute("energy-restore", pulse);
 		}
 	}

@@ -12,7 +12,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
@@ -109,7 +109,7 @@ public class DragonfireSwingHandler extends CombatSwingHandler {
 			return 1;
 		}
 		int ticks = 2 + (int) Math.floor(entity.getLocation().getDistance(victim.getLocation()) * 0.5);
-		entity.setAttribute("fireBreath", World.getTicks() + (ticks + 2));
+		entity.setAttribute("fireBreath", GameWorld.getTicks() + (ticks + 2));
 		return ticks;
 	}
 
@@ -145,7 +145,7 @@ public class DragonfireSwingHandler extends CombatSwingHandler {
 				return;
 			}
 		}
-		if (!fire && victim.getAttribute("freeze_immunity", -1) < World.getTicks() && RandomFunction.random(4) == 2) {
+		if (!fire && victim.getAttribute("freeze_immunity", -1) < GameWorld.getTicks() && RandomFunction.random(4) == 2) {
 			victim.getStateManager().set(EntityState.FROZEN, 16);
 			victim.graphics(Graphics.create(502));
 		}

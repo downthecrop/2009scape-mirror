@@ -11,7 +11,7 @@ import core.net.IoSession;
 import kotlin.Unit;
 import rs09.ServerConstants;
 import rs09.game.system.SystemLogger;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import rs09.net.event.LoginReadEvent;
 
 import java.nio.ByteBuffer;
@@ -165,7 +165,7 @@ public class AccountRegister extends SQLEntryHandler<RegistryDetails> {
 		statement.setInt(5, entry.getCountry());
 		statement.setTimestamp(6, new Timestamp(System.currentTimeMillis()));
 
-		statement.setString(7, World.getSettings().getEnable_default_clan() ? ServerConstants.SERVER_NAME.toLowerCase(): null);
+		statement.setString(7, GameWorld.getSettings().getEnable_default_clan() ? ServerConstants.SERVER_NAME.toLowerCase(): null);
 
 		statement.executeUpdate();
 		SQLManager.close(statement.getConnection());

@@ -19,7 +19,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
@@ -658,7 +658,7 @@ public final class TrollheimPlugin extends OptionHandler {
 			Location loc = Location.create(2849, 3597, 0);
 			PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, loc.getX() - 2, loc.getY(), 1300, 1, 30));
 			PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, loc.getX() + 22, loc.getY() + 10, 1300, 1, 30));
-			World.getPulser().submit(new Pulse(1, player) {
+			GameWorld.getPulser().submit(new Pulse(1, player) {
 				int count = 0;
 
 				@Override

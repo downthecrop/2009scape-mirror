@@ -11,7 +11,7 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
@@ -57,7 +57,7 @@ public class ThornySnailNPC extends BurdenBeast {
 		int ticks = 2 + (int) Math.floor(getLocation().getDistance(target.getLocation()) * 0.5);
 		getProperties().getCombatPulse().setNextAttack(4);
 		faceTemporary(target, 2);
-		World.getPulser().submit(new Pulse(ticks, this, target) {
+		GameWorld.getPulser().submit(new Pulse(ticks, this, target) {
 			@Override
 			public boolean pulse() {
 				BattleState state = new BattleState(ThornySnailNPC.this, target);

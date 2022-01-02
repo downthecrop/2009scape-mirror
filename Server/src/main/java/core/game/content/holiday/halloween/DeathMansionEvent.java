@@ -37,7 +37,7 @@ import core.game.node.scenery.Scenery;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -169,7 +169,7 @@ public class DeathMansionEvent extends HolidayEvent {
 		if (e instanceof Player) {
 			Player player = e.asPlayer();
 			if (!logout) {
-				if (player.getAttribute("grimDis", 0) > World.getTicks()) {
+				if (player.getAttribute("grimDis", 0) > GameWorld.getTicks()) {
 					return super.leave(player, logout);
 				}
 				int stage = getStage(player);
@@ -231,7 +231,7 @@ public class DeathMansionEvent extends HolidayEvent {
 			case 27242:
 			case 27243:
 				if (getStage(player) >= 6) {
-					player.setAttribute("grimDis", World.getTicks() + 2);
+					player.setAttribute("grimDis", GameWorld.getTicks() + 2);
 					player.teleport(target.getId() == 27243 ? Location.create(1703, 4826, 0) : Location.create(1639, 4835, 0));
 					return true;
 				}
@@ -339,7 +339,7 @@ public class DeathMansionEvent extends HolidayEvent {
 				player.lock(3);
 				if (target.getLocation().equals(1624, 4822, 0)) {
 					player.sendChat("Weeeeee");
-					World.getPulser().submit(new Pulse(1, player) {
+					GameWorld.getPulser().submit(new Pulse(1, player) {
 
 						@Override
 						public boolean pulse() {
@@ -361,7 +361,7 @@ public class DeathMansionEvent extends HolidayEvent {
 				}
 				player.getPacketDispatch().sendSceneryAnimation(target.asScenery(), Animation.create(7296));
 				AgilityHandler.walk(player, -1, player.getLocation(), target.getLocation(), null, 0.0, null);
-				World.getPulser().submit(new Pulse(1, player) {
+				GameWorld.getPulser().submit(new Pulse(1, player) {
 
 					@Override
 					public boolean pulse() {
@@ -386,7 +386,7 @@ public class DeathMansionEvent extends HolidayEvent {
 				player.lock(10);
 				Location strt = player.getLocation().transform(0, -1, 0);
 				AgilityHandler.forceWalk(player, -1, player.getLocation(), strt, Animation.create(7274), 5, 0.0, null);
-				World.getPulser().submit(new Pulse(1, player) {
+				GameWorld.getPulser().submit(new Pulse(1, player) {
 					int ticks;
 					int x = 1636;
 					int y = 4829;
@@ -455,7 +455,7 @@ public class DeathMansionEvent extends HolidayEvent {
 					p.getWalkingQueue().reset();
 					p.getLocks().lock();
 					p.sendMessage("You accidentally trigger a trap.");
-					World.getPulser().submit(new Pulse(1, p) {
+					GameWorld.getPulser().submit(new Pulse(1, p) {
 						int ticks;
 
 						@Override
@@ -617,7 +617,7 @@ public class DeathMansionEvent extends HolidayEvent {
 			player.getPacketDispatch().sendSceneryAnimation(second, Animation.create(7285));
 		}
 		player.sendMessage("You fail to pass through the gargoyles' judgement");
-		World.getPulser().submit(new Pulse(1, player) {
+		GameWorld.getPulser().submit(new Pulse(1, player) {
 			@Override
 			public boolean pulse() {
 				player.getImpactHandler().manualHit(player, player.getSkills().getLifepoints(), HitsplatType.NORMAL);
@@ -650,10 +650,10 @@ public class DeathMansionEvent extends HolidayEvent {
 		if (skill <= Skills.MAGIC && skill != Skills.PRAYER) {
 			return;
 		}
-		if (World.getTicks() - lastPumpkinReward < 1000 && RandomFunction.random(2500) == 0 && ItemLimitation.getAmountLeft(pumpkin.getId()) > 0) {
+		if (GameWorld.getTicks() - lastPumpkinReward < 1000 && RandomFunction.random(2500) == 0 && ItemLimitation.getAmountLeft(pumpkin.getId()) > 0) {
 			if (player.getInventory().add(pumpkin)) {
 				player.getPacketDispatch().sendMessage("You found a pumpkin!");
-				lastPumpkinReward = World.getTicks();
+				lastPumpkinReward = GameWorld.getTicks();
 				ItemLimitation.decreaseAmount(pumpkin.getId());
 			}
 		}
@@ -677,7 +677,7 @@ public class DeathMansionEvent extends HolidayEvent {
 		reaper.setAggressive(false);
 		reaper.animate(Animation.create(392));
 		reaper.sendChat(RandomFunction.getRandomElement(GRIM_CHATS).replace("@name", player.getUsername()));
-		World.getPulser().submit(new Pulse(4, reaper) {
+		GameWorld.getPulser().submit(new Pulse(4, reaper) {
 			@Override
 			public boolean pulse() {
 				reaper.clear();
@@ -1354,7 +1354,7 @@ public class DeathMansionEvent extends HolidayEvent {
 					player.getImpactHandler().manualHit(player, player.getSkills().getLifepoints(), HitsplatType.NORMAL);
 					close();
 					player.setAttribute("lo", true);
-					World.getPulser().submit(new Pulse(5, player) {
+					GameWorld.getPulser().submit(new Pulse(5, player) {
 						@Override
 						public boolean pulse() {
 							player.setAttribute("lo", true);
@@ -1543,7 +1543,7 @@ public class DeathMansionEvent extends HolidayEvent {
 					switch (stage) {
 					case 0:
 						player.teleport(START);
-						World.getPulser().submit(new Pulse(1, player) {
+						GameWorld.getPulser().submit(new Pulse(1, player) {
 
 							@Override
 							public boolean pulse() {
@@ -1673,7 +1673,7 @@ public class DeathMansionEvent extends HolidayEvent {
 					player.lock(a.getDuration());
 					npc.faceTemporary(player, 2);
 					npc.animate(Animation.create(6578));
-					World.getPulser().submit(new Pulse(a.getDuration(), player) {
+					GameWorld.getPulser().submit(new Pulse(a.getDuration(), player) {
 						@Override
 						public boolean pulse() {
 							player("Okay, touching him seems to be a bad idea.");
@@ -1686,7 +1686,7 @@ public class DeathMansionEvent extends HolidayEvent {
 					Animation anim = new Animation(866);
 					player.animate(anim);
 					player.lock(anim.getDuration());
-					World.getPulser().submit(new Pulse(anim.getDuration(), player) {
+					GameWorld.getPulser().submit(new Pulse(anim.getDuration(), player) {
 						@Override
 						public boolean pulse() {
 							player("If it's possible for a skeletal dog to smile, I think he", "would be now.");
@@ -1699,7 +1699,7 @@ public class DeathMansionEvent extends HolidayEvent {
 					player.animate(Animation.create(2110));
 					npc.faceTemporary(player, 3);
 					player.lock(4);
-					World.getPulser().submit(new Pulse(3, player) {
+					GameWorld.getPulser().submit(new Pulse(3, player) {
 						@Override
 						public boolean pulse() {
 							npc.animate(Animation.create(6579));
