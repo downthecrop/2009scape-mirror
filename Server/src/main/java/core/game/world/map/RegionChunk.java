@@ -4,7 +4,6 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItem;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
-import core.game.node.scenery.SceneryBuilder;
 import rs09.game.system.SystemLogger;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.build.LandscapeParser;
@@ -16,9 +15,7 @@ import core.net.packet.out.ConstructScenery;
 import core.net.packet.out.UpdateAreaPosition;
 
 import java.util.ArrayList;
-import java.util.function.Function;
 import java.util.List;
-import kotlin.Pair;
 
 /**
  * Represents a region chunk.
@@ -368,38 +365,4 @@ public class RegionChunk {
 		this.currentBase = currentBase;
 	}
 
-    public void transformAllSceneryById(Pair<Integer, Integer>[] ids, boolean clip, boolean permanent) {
-        /*for(int i = 0; i < 8; i++) {
-            for(int j = 0; j < 8; j++) {
-                for(Scenery s : getObjects(i, j)) {
-                    for(Pair<Integer, Integer> id : ids) {
-                        if(s != null && s.getId() == id.getFirst()) {
-                            SceneryBuilder.replace(s, s.transform(id.getSecond()), clip, permanent);
-                        }
-                    }
-                }
-            }
-        }*/
-        transformAllSceneryByFunction(clip, permanent, (Scenery s) -> {
-            for(Pair<Integer, Integer> id : ids) {
-                if(s != null && s.getId() == id.getFirst()) {
-                    return s.transform(id.getSecond());
-                }
-            }
-            return s;
-        });
-    }
-
-    public void transformAllSceneryByFunction(boolean clip, boolean permanent, Function<Scenery, Scenery> f) {
-        for(int i = 0; i < 8; i++) {
-            for(int j = 0; j < 8; j++) {
-                for(Scenery s : getObjects(i, j)) {
-                    Scenery t = f.apply(s);
-                    if(s != t) {
-                        SceneryBuilder.replace(s, t, clip, permanent);
-                    }
-                }
-            }
-        }
-    }
 }
