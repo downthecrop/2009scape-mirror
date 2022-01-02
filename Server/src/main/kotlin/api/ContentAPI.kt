@@ -36,6 +36,7 @@ import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import rs09.game.content.dialogue.DialogueFile
+import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ItemConfigParser;
@@ -611,6 +612,7 @@ fun openDialogue(player: Player, dialogue: Any, vararg args: Any) {
     when (dialogue) {
         is Int -> player.dialogueInterpreter.open(dialogue, *args)
         is DialogueFile -> player.dialogueInterpreter.open(dialogue, *args)
+        is SkillDialogueHandler -> dialogue.open()
         else -> SystemLogger.logErr("Invalid object type passed to openDialogue() -> ${dialogue.javaClass.simpleName}")
     }
 }

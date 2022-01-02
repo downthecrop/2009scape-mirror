@@ -19,7 +19,7 @@ class AmmoMouldOnFurnace : InteractionListener(){
     private fun cannonBallOnUseWithHandler(player: Player, used: Node, with: Node): Boolean {
         face(player, with.centerLocation)
 
-        if(isQuestComplete(player, DwarfCannon.NAME)) {
+        if(!isQuestComplete(player, DwarfCannon.NAME)) {
             sendDialogue(player, "You need to complete the ${DwarfCannon.NAME} quest in order to do this.")
             return true
         }
