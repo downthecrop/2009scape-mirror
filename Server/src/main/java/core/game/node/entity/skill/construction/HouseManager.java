@@ -389,16 +389,17 @@ public final class HouseManager {
 			for (int x = 0; x < 8; x++) {
 				for (int y = 0; y < 8; y++) {
 					if(z == 3){
-						region.replaceChunk(z, x, y, defaultSkyChunk/*.copy(region.getPlanes()[z])*/, from);
-						continue;
+						region.replaceChunk(z, x, y, defaultSkyChunk.copy(region.getPlanes()[z]), from);
+						 continue;
 					}
 					Room room = rooms[z][x][y];
 					if (room != null) {
 						if (room.getProperties().isRoof() && buildingMode) {
 							continue;
 						}
-						region.replaceChunk(z, x, y, room.getChunk(), from);
-						room.loadDecorations(z, (BuildRegionChunk)region.getPlanes()[z].getChunks()[x][y], this);
+						BuildRegionChunk copy = room.getChunk().copy(region.getPlanes()[z]);
+						region.replaceChunk(z, x, y, copy, from);
+						room.loadDecorations(z, copy, this);
 					} else {
 						region.replaceChunk(z, x, y, z != 0 ? defaultSkyChunk.copy(region.getPlanes()[z]) : defaultChunk.copy(region.getPlanes()[0]), from);
 					}

@@ -19,7 +19,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import kotlin.Pair;
 
 /**
  * Represents a region.
@@ -46,7 +45,7 @@ public class Region {
 	/**
 	 * The region planes.
 	 */
-	protected final RegionPlane[] planes = new RegionPlane[4];
+	private final RegionPlane[] planes = new RegionPlane[4];
 
 	/**
 	 * The activity pulse.
@@ -226,15 +225,6 @@ public class Region {
 		}
 		return true;
 	}
-
-    public void sendUpdateSceneGraph(boolean login) {
-        for (int z = 0; z < 4; z++) {
-            for (Player p : this.getPlanes()[z].getPlayers()) {
-                p.updateSceneGraph(login);
-            }
-        }
-    }
-
 
 	/**
 	 * Checks if this region has the inactivity flagging pulse running.
@@ -556,10 +546,4 @@ public class Region {
 	public void setUpdateAllPlanes(boolean updateAllPlanes) {
 		this.updateAllPlanes = updateAllPlanes;
 	}
-
-    public void transformAllSceneryById(Pair<Integer, Integer>[] ids, boolean clip, boolean permanent) {
-        for(RegionPlane rp : getPlanes()) {
-            rp.transformAllSceneryById(ids, clip, permanent);
-        }
-    }
 }
