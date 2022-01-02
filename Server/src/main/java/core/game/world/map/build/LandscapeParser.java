@@ -75,8 +75,7 @@ public final class LandscapeParser {
 	 */
 	public static void addScenery(Scenery object, boolean landscape) {
 		Location l = object.getLocation();
-        RegionPlane rp = RegionManager.getRegionPlane(l);
-		flagScenery(rp, l.getLocalX(), l.getLocalY(), object, landscape, false);
+		flagScenery(RegionManager.getRegionPlane(l), l.getLocalX(), l.getLocalY(), object, landscape, false);
 	}
 
 	/**
