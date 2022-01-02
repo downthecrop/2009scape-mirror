@@ -19,7 +19,6 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.CopyOnWriteArrayList;
-import kotlin.Pair;
 
 /**
  * Represents one of the 4 planes of a region.
@@ -419,12 +418,4 @@ public final class RegionPlane {
 		return chunks;
 	}
 
-    public void transformAllSceneryById(Pair<Integer, Integer>[] ids, boolean clip, boolean permanent) {
-        for(int x = 0; x < 8; x++) {
-            for(int y = 0; y < 8; y++) {
-                RegionChunk rc = getChunks()[x][y];
-                rc.transformAllSceneryById(ids, clip, permanent);
-            }
-        }
-    }
 }
