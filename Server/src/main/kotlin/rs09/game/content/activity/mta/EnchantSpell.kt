@@ -133,7 +133,7 @@ class EnchantSpell : MagicSpell {
                         Items.EMERALD_RING_1639 to Item(Items.RING_OF_DUELLING8_2552),
                         Items.EMERALD_NECKLACE_1658 to Item(Items.BINDING_NECKLACE_5521),
                         Items.EMERALD_AMULET_1696 to Item(Items.AMULET_OF_DEFENCE_1729),
-                        Items.EMERALD_BRACELET_11076 to Item(Items.CASTLEWAR_BRACE3_11080),
+                        Items.EMERALD_BRACELET_11076 to Item(Items.CASTLEWAR_BRACE3_11079),
                         //Begin MTA-Specific Enchantments
                         Items.CUBE_6899 to Item(Items.ORB_6902),
                         Items.CYLINDER_6898 to Item(Items.ORB_6902),
@@ -170,7 +170,7 @@ class EnchantSpell : MagicSpell {
                         Items.DIAMOND_RING_1643 to Item(Items.RING_OF_LIFE_2570),
                         Items.DIAMOND_NECKLACE_1662 to Item(Items.PHOENIX_NECKLACE_11090),
                         Items.DIAMOND_AMULET_1700 to Item(Items.AMULET_OF_POWER_1731),
-                        Items.DIAMOND_BRACELET_11092 to Item(Items.FORINTHRY_BRACE5_11096),
+                        Items.DIAMOND_BRACELET_11092 to Item(Items.FORINTHRY_BRACE5_11095),
                         //Begin MTA-Specific Enchantments
                         Items.CUBE_6899 to Item(Items.ORB_6902),
                         Items.CYLINDER_6898 to Item(Items.ORB_6902),
