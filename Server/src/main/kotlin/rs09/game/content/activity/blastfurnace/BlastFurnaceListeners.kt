@@ -4,6 +4,7 @@ import api.Container
 import api.*
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.game.node.entity.skill.smithing.smelting.Bar
 import core.game.system.task.Pulse
 import rs09.game.interaction.InteractionListener
 import core.game.world.map.Location
@@ -195,100 +196,27 @@ class BlastFurnaceListeners : InteractionListener() {
                                     oreToActuallyAdd--
                                 }
                             }
-                            when(oreID){
-                                Items.COAL_453 -> {
-                                    if (coalToActuallyAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 30) {
-                                        player.blastCoal.add(Item(Items.COAL_453,coalToActuallyAdd))
-                                        removeItem(player, Item(oreID, coalToActuallyAdd), Container.INVENTORY)
-                                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],coalToActuallyAdd).init()
-                                    }
-                                    else if(getStatLevel(player, Skills.SMITHING) < 30){
-                                        sendDialogue(player, "My Smithing level is not high enough to use Coal!")
-                                    }
-                                    else sendDialogue(player, "It looks like the melting pot is already full of coal!")
+                            val bar = Bar.forOre(oreID)
+                            if(oreID == Items.COAL_453) {
+                                if (coalToActuallyAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 30) {
+                                    player.blastCoal.add(Item(Items.COAL_453,coalToActuallyAdd))
+                                    removeItem(player, Item(oreID, coalToActuallyAdd), Container.INVENTORY)
+                                    BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],coalToActuallyAdd).init()
                                 }
-                                Items.RUNITE_ORE_451 -> {
-                                    if (oreToActuallyAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 85) {
-                                        player.blastOre.add(Item(oreID,oreToActuallyAdd))
-                                        removeItem(player, Item(oreID, oreToActuallyAdd), Container.INVENTORY)
-                                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],oreToActuallyAdd).init()
-                                    }
-                                    else if(getStatLevel(player, Skills.SMITHING) < 85){
-                                        sendDialogue(player, "My Smithing level is not high enough to smelt Runite!")
-                                    }
-                                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
+                                else if(getStatLevel(player, Skills.SMITHING) < 30){
+                                    sendDialogue(player, "My Smithing level is not high enough to use Coal!")
                                 }
-                                Items.ADAMANTITE_ORE_449 -> {
-                                    if (oreToActuallyAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 70) {
-                                        player.blastOre.add(Item(oreID,oreToActuallyAdd))
-                                        removeItem(player, Item(oreID, oreToActuallyAdd), Container.INVENTORY)
-                                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],oreToActuallyAdd).init()
-                                    }
-                                    else if(getStatLevel(player, Skills.SMITHING) < 70){
-                                        sendDialogue(player, "My Smithing level is not high enough to smelt Adamantite!")
-                                    }
-                                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
+                                else sendDialogue(player, "It looks like the melting pot is already full of coal!")
+                            } else if (bar != null) {
+                                if (oreToActuallyAdd > 0 && getStatLevel(player, Skills.SMITHING) >= bar.level) {
+                                    player.blastOre.add(Item(oreID,oreToActuallyAdd))
+                                    removeItem(player, Item(oreID, oreToActuallyAdd), Container.INVENTORY)
+                                    BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],oreToActuallyAdd).init()
                                 }
-                                Items.MITHRIL_ORE_447 -> {
-                                    if (oreToActuallyAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 50) {
-                                        player.blastOre.add(Item(oreID,oreToActuallyAdd))
-                                        removeItem(player, Item(oreID, oreToActuallyAdd), Container.INVENTORY)
-                                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],oreToActuallyAdd).init()
-                                    }
-                                    else if(getStatLevel(player, Skills.SMITHING) < 50){
-                                        sendDialogue(player, "My Smithing level is not high enough to smelt Mithril!")
-                                    }
-                                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
+                                else if(getStatLevel(player, Skills.SMITHING) < bar.level){
+                                    sendDialogue(player, "My Smithing level is not high enough to smelt ${bar.name.toLowerCase()}!")
                                 }
-                                Items.IRON_ORE_440 -> {
-                                    if (oreToActuallyAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 15) {
-                                        player.blastOre.add(Item(oreID,oreToActuallyAdd))
-                                        removeItem(player, Item(oreID, oreToActuallyAdd), Container.INVENTORY)
-                                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],oreToActuallyAdd).init()
-                                    }
-                                    else if(getStatLevel(player, Skills.SMITHING) < 15){
-                                        sendDialogue(player, "My Smithing level is not high enough to smelt Iron!")
-                                    }
-                                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
-                                }
-                                Items.SILVER_ORE_442 -> {
-                                    if (oreToActuallyAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 20) {
-                                        player.blastOre.add(Item(oreID,oreToActuallyAdd))
-                                        removeItem(player, Item(oreID, oreToActuallyAdd), Container.INVENTORY)
-                                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],oreToActuallyAdd).init()
-                                    }
-                                    else if(getStatLevel(player, Skills.SMITHING) < 20){
-                                        sendDialogue(player, "My Smithing level is not high enough to smelt Silver!")
-                                    }
-                                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
-                                }
-                                Items.GOLD_ORE_444 -> {
-                                    if (oreToActuallyAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 40) {
-                                        player.blastOre.add(Item(oreID,oreToActuallyAdd))
-                                        removeItem(player, Item(oreID, oreToActuallyAdd), Container.INVENTORY)
-                                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],oreToActuallyAdd).init()
-                                    }
-                                    else if(getStatLevel(player, Skills.SMITHING) < 40){
-                                        sendDialogue(player, "My Smithing level is not high enough to smelt Gold!")
-                                    }
-                                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
-                                }
-                                Items.COPPER_ORE_436 -> {
-                                    if (oreToActuallyAdd > 0) {
-                                        player.blastOre.add(Item(oreID,oreToActuallyAdd))
-                                        removeItem(player, Item(oreID, oreToActuallyAdd), Container.INVENTORY)
-                                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],oreToActuallyAdd).init()
-                                    }
-                                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
-                                }
-                                Items.TIN_ORE_438 -> {
-                                    if (oreToActuallyAdd > 0) {
-                                        player.blastOre.add(Item(oreID,oreToActuallyAdd))
-                                        removeItem(player, Item(oreID, oreToActuallyAdd), Container.INVENTORY)
-                                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreID)],oreToActuallyAdd).init()
-                                    }
-                                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
-                                }
+                                else sendDialogue(player, "It looks like the melting pot is already full of ore!")
                             }
                         }
                     }else if (button == 2 && rocksInInven.isEmpty()){
@@ -329,93 +257,25 @@ class BlastFurnaceListeners : InteractionListener() {
                     amountToAdd--
                 }
             }
-            when(oreType.id){
-                Items.TIN_ORE_438 ->{
-                    if (amountToAdd > 0) {
-                        player.blastOre.add(Item(oreType.id,amountToAdd))
-                        removeItem(player, Item(oreType.id, amountToAdd), Container.INVENTORY)
-                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreType.id)],amountToAdd).init()
-                    }
-                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
+            val bar = Bar.forOre(oreType.id)
+            if(oreType.id == Items.COAL_453) {
+                if (amountToAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 30) {
+                    player.blastCoal.add(Item(oreType.id,amountToAdd))
+                    removeItem(player, Item(oreType.id, amountToAdd), Container.INVENTORY)
+                    BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreType.id)],amountToAdd).init()
+                }else if(getStatLevel(player,Skills.SMITHING) < 30){
+                    sendDialogue(player,"My Smithing level is not high enough to use Coal!")
                 }
-                Items.COPPER_ORE_436 ->{
-                    if (amountToAdd > 0) {
-                        player.blastOre.add(Item(oreType.id,amountToAdd))
-                        removeItem(player, Item(oreType.id, amountToAdd), Container.INVENTORY)
-                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreType.id)],amountToAdd).init()
-                    }
-                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
+                else sendDialogue(player, "It looks like the melting pot is already full of ore!")
+            } else if(bar != null) {
+                if (amountToAdd > 0 && getStatLevel(player, Skills.SMITHING) >= bar.level) {
+                    player.blastOre.add(Item(oreType.id,amountToAdd))
+                    removeItem(player, Item(oreType.id, amountToAdd), Container.INVENTORY)
+                    BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreType.id)],amountToAdd).init()
+                }else if(getStatLevel(player,Skills.SMITHING) < bar.level){
+                    sendDialogue(player,"My Smithing level is not high enough to smelt Iron!")
                 }
-                Items.IRON_ORE_440 ->{
-                    if (amountToAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 15) {
-                        player.blastOre.add(Item(oreType.id,amountToAdd))
-                        removeItem(player, Item(oreType.id, amountToAdd), Container.INVENTORY)
-                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreType.id)],amountToAdd).init()
-                    }else if(getStatLevel(player,Skills.SMITHING) < 15){
-                        sendDialogue(player,"My Smithing level is not high enough to smelt Iron!")
-                    }
-                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
-                }
-                Items.MITHRIL_ORE_447 ->{
-                    if (amountToAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 50) {
-                        player.blastOre.add(Item(oreType.id,amountToAdd))
-                        removeItem(player, Item(oreType.id, amountToAdd), Container.INVENTORY)
-                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreType.id)],amountToAdd).init()
-                    }else if(getStatLevel(player,Skills.SMITHING) < 50){
-                        sendDialogue(player,"My Smithing level is not high enough to smelt Mithril!")
-                    }
-                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
-                }
-                Items.GOLD_ORE_444 ->{
-                    if (amountToAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 40) {
-                        player.blastOre.add(Item(oreType.id,amountToAdd))
-                        removeItem(player, Item(oreType.id, amountToAdd), Container.INVENTORY)
-                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreType.id)],amountToAdd).init()
-                    }else if(getStatLevel(player,Skills.SMITHING) < 40){
-                        sendDialogue(player,"My Smithing level is not high enough to smelt Gold!")
-                    }
-                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
-                }
-                Items.SILVER_ORE_442 ->{
-                    if (amountToAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 20) {
-                        player.blastOre.add(Item(oreType.id,amountToAdd))
-                        removeItem(player, Item(oreType.id, amountToAdd), Container.INVENTORY)
-                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreType.id)],amountToAdd).init()
-                    }else if(getStatLevel(player,Skills.SMITHING) < 20){
-                        sendDialogue(player,"My Smithing level is not high enough to smelt Silver!")
-                    }
-                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
-                }
-                Items.ADAMANTITE_ORE_449 ->{
-                    if (amountToAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 70) {
-                        player.blastOre.add(Item(oreType.id,amountToAdd))
-                        removeItem(player, Item(oreType.id, amountToAdd), Container.INVENTORY)
-                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreType.id)],amountToAdd).init()
-                    }else if(getStatLevel(player,Skills.SMITHING) < 70){
-                        sendDialogue(player,"My Smithing level is not high enough to smelt Adamantite!")
-                    }
-                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
-                }
-                Items.RUNITE_ORE_451 ->{
-                    if (amountToAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 85) {
-                        player.blastOre.add(Item(oreType.id,amountToAdd))
-                        removeItem(player, Item(oreType.id, amountToAdd), Container.INVENTORY)
-                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreType.id)],amountToAdd).init()
-                    }else if(getStatLevel(player,Skills.SMITHING) < 85){
-                        sendDialogue(player,"My Smithing level is not high enough to smelt Runite!")
-                    }
-                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
-                }
-                Items.COAL_453 ->{
-                    if (amountToAdd > 0 && getStatLevel(player, Skills.SMITHING) >= 30) {
-                        player.blastOre.add(Item(oreType.id,amountToAdd))
-                        removeItem(player, Item(oreType.id, amountToAdd), Container.INVENTORY)
-                        BlastFurnaceOre(player, BFOreVariant.values()[playerOre.indexOf(oreType.id)],amountToAdd).init()
-                    }else if(getStatLevel(player,Skills.SMITHING) < 30){
-                        sendDialogue(player,"My Smithing level is not high enough to use Coal!")
-                    }
-                    else sendDialogue(player, "It looks like the melting pot is already full of ore!")
-                }
+                else sendDialogue(player, "It looks like the melting pot is already full of ore!")
             }
             return@onUseWith true
         }
