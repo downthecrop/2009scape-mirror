@@ -92,3 +92,8 @@
 - Corrected special attack for the enhanced excalibur
 - Corrected damage calculations for Ruby Bolts (e) special effect
 < --- ABOVE Released January 1st, 2022 https://gitlab.com/2009scape/2009scape/-/tags/Jan-1-2022 ---- >
+- Set magic dart base xp to 30 (authenticity fix)
+- Removed range strength and prayer bonus from god armour (authenticity fix)
+- Can now pickpocket women in ardy (npc ID 25)
+- Can now travel on free charter boats without having money in inventory
+- Emerald and diamond bracelet enchants no longer produce noted items
