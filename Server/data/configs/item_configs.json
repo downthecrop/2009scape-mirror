@@ -28809,7 +28809,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2653",
-    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,1,0,1"
+    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -28836,7 +28836,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2655",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,1"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -28865,7 +28865,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2657",
-    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,1,0,1"
+    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -28920,7 +28920,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2661",
-    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,1,0,1"
+    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -28947,7 +28947,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2663",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,1"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -28976,7 +28976,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2665",
-    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,1,0,1"
+    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -29031,7 +29031,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2669",
-    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,1,0,0"
+    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -29058,7 +29058,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2671",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,1"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -29087,7 +29087,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2673",
-    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,1,0,0"
+    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -36008,7 +36008,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3478",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,1"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -36026,7 +36026,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3479",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,1"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -36044,7 +36044,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3480",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,0"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -40567,6 +40567,7 @@
     "examine": "Simplicity is the best weapon.",
     "walk_anim": "1663",
     "has_special": "true",
+    "rare_item": "true",
     "low_alchemy": "20000",
     "turn90ccw_anim": "1663",
     "attack_speed": "7",
@@ -40578,7 +40579,6 @@
     "grand_exchange_price": "29900",
     "stand_anim": "1662",
     "tradeable": "true",
-    "rare_item": "true",
     "run_anim": "1664",
     "archery_ticket_price": "0",
     "id": "4153",
@@ -45812,6 +45812,7 @@
     "ge_buy_limit": "10",
     "examine": "Ahrim the Blighted's leather hood.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "5200",
     "high_alchemy": "7800",
     "weight": "0.9",
@@ -45820,7 +45821,6 @@
     "grand_exchange_price": "94300",
     "name": "Ahrim's hood",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4708",
     "bonuses": "0,0,0,6,-2,15,13,16,6,0,15,0,0,0,0"
@@ -45840,6 +45840,7 @@
     "turn90cw_anim": "1207",
     "examine": "Ahrim the Blighted's quarterstaff.",
     "walk_anim": "1205",
+    "rare_item": "true",
     "low_alchemy": "34000",
     "turn90ccw_anim": "1208",
     "attack_speed": "6",
@@ -45851,7 +45852,6 @@
     "grand_exchange_price": "69500",
     "stand_anim": "813",
     "tradeable": "true",
-    "rare_item": "true",
     "run_anim": "1210",
     "archery_ticket_price": "0",
     "id": "4710",
@@ -45881,6 +45881,7 @@
     "ge_buy_limit": "10",
     "examine": "Ahrim the Blighted's armoured robe top.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "20000",
     "high_alchemy": "30000",
     "weight": "5",
@@ -45890,7 +45891,6 @@
     "grand_exchange_price": "1000000",
     "name": "Ahrim's robetop",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4712",
     "bonuses": "0,0,0,30,-10,52,37,63,30,0,60,0,0,0,0"
@@ -45910,6 +45910,7 @@
     "ge_buy_limit": "10",
     "examine": "Ahrim the Blighted's armoured robe skirt.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "18800",
     "high_alchemy": "28200",
     "weight": "12",
@@ -45918,7 +45919,6 @@
     "grand_exchange_price": "1700000",
     "name": "Ahrim's robeskirt",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4714",
     "bonuses": "0,0,0,22,-7,33,30,36,22,0,30,0,0,0,0"
@@ -45939,6 +45939,7 @@
     "ge_buy_limit": "10",
     "examine": "Dharok the Wretched's helm.",
     "durability": "1",
+    "rare_item": "true",
     "low_alchemy": "41200",
     "high_alchemy": "61800",
     "weight": "1",
@@ -45947,7 +45948,6 @@
     "grand_exchange_price": "1300000",
     "name": "Dharok's helm",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4716",
     "bonuses": "0,0,0,-3,-1,45,48,44,-1,51,15,0,0,0,0"
@@ -45967,6 +45967,7 @@
     "turn90cw_anim": "821",
     "examine": "Dharok the Wretched's greataxe.",
     "walk_anim": "2064",
+    "rare_item": "true",
     "low_alchemy": "83200",
     "turn90ccw_anim": "822",
     "attack_speed": "7",
@@ -45978,7 +45979,6 @@
     "grand_exchange_price": "516900",
     "stand_anim": "2065",
     "tradeable": "true",
-    "rare_item": "true",
     "run_anim": "824",
     "archery_ticket_price": "0",
     "id": "4718",
@@ -46007,6 +46007,7 @@
     "ge_buy_limit": "10",
     "examine": "Dharok the Wretched's platebody armour.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "112000",
     "high_alchemy": "168000",
     "weight": "9.9",
@@ -46016,7 +46017,6 @@
     "grand_exchange_price": "511400",
     "name": "Dharok's platebody",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4720",
     "bonuses": "0,0,0,-30,-10,122,120,107,-6,132,60,0,0,0,0"
@@ -46036,6 +46036,7 @@
     "ge_buy_limit": "10",
     "examine": "Dharok the Wretched's plate leg armour.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "110000",
     "high_alchemy": "165000",
     "weight": "10",
@@ -46044,7 +46045,6 @@
     "grand_exchange_price": "748800",
     "name": "Dharok's platelegs",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4722",
     "bonuses": "0,0,0,-21,-7,85,82,83,-4,92,30,0,0,0,0"
@@ -46065,6 +46065,7 @@
     "ge_buy_limit": "10",
     "examine": "Guthan the Infested's helm",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "41200",
     "high_alchemy": "61800",
     "weight": "2",
@@ -46074,7 +46075,6 @@
     "grand_exchange_price": "396300",
     "name": "Guthan's helm",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4724",
     "bonuses": "0,0,0,-6,-2,55,58,54,-1,62,15,0,0,0,0"
@@ -46094,6 +46094,7 @@
     "turn90cw_anim": "1207",
     "examine": "Guthan the Infested's warspear.",
     "walk_anim": "1205",
+    "rare_item": "true",
     "low_alchemy": "40000",
     "turn90ccw_anim": "1208",
     "attack_speed": "5",
@@ -46105,7 +46106,6 @@
     "grand_exchange_price": "588400",
     "stand_anim": "813",
     "tradeable": "true",
-    "rare_item": "true",
     "run_anim": "1210",
     "archery_ticket_price": "0",
     "id": "4726",
@@ -46134,6 +46134,7 @@
     "ge_buy_limit": "10",
     "examine": "Guthan the Infested's platebody armour.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "112000",
     "high_alchemy": "168000",
     "weight": "9",
@@ -46143,7 +46144,6 @@
     "grand_exchange_price": "316800",
     "name": "Guthan's platebody",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4728",
     "bonuses": "0,0,0,-30,-10,122,120,107,-6,132,60,0,0,0,0"
@@ -46163,6 +46163,7 @@
     "ge_buy_limit": "10",
     "examine": "Guthan the Infested's chainskirt.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "110000",
     "high_alchemy": "165000",
     "weight": "8",
@@ -46171,7 +46172,6 @@
     "grand_exchange_price": "315600",
     "name": "Guthan's chainskirt",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4730",
     "bonuses": "0,0,0,-14,-7,75,72,73,-4,82,30,0,0,0,0"
@@ -46192,6 +46192,7 @@
     "ge_buy_limit": "1",
     "examine": "Karil the Tainted's coif.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "5200",
     "high_alchemy": "7800",
     "absorb": "0,5,2",
@@ -46200,7 +46201,6 @@
     "grand_exchange_price": "38900",
     "name": "Karil's coif",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4732",
     "bonuses": "0,0,0,-1,3,6,9,12,6,10,15,0,0,0,0"
@@ -46220,6 +46220,7 @@
     "turn90cw_anim": "2076",
     "examine": "Karil the Tainted's repeating crossbow.",
     "walk_anim": "2076",
+    "rare_item": "true",
     "low_alchemy": "64000",
     "turn90ccw_anim": "2076",
     "attack_speed": "4",
@@ -46231,7 +46232,6 @@
     "grand_exchange_price": "188000",
     "stand_anim": "2074",
     "tradeable": "true",
-    "rare_item": "true",
     "run_anim": "2077",
     "archery_ticket_price": "0",
     "id": "4734",
@@ -46261,6 +46261,7 @@
     "ge_buy_limit": "10000",
     "examine": "Karil the Tainted's leather body armour.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "20000",
     "high_alchemy": "30000",
     "weight": "6",
@@ -46270,7 +46271,6 @@
     "grand_exchange_price": "1800000",
     "name": "Karil's leathertop",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4736",
     "bonuses": "0,0,0,-15,30,47,42,50,65,57,60,0,0,0,0"
@@ -46290,6 +46290,7 @@
     "ge_buy_limit": "10000",
     "examine": "Karil the Tainted's leather skirt.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "18800",
     "high_alchemy": "28200",
     "weight": "2",
@@ -46298,7 +46299,6 @@
     "grand_exchange_price": "217000",
     "name": "Karil's leatherskirt",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4738",
     "bonuses": "0,0,0,-10,17,26,20,28,35,33,30,0,0,0,0"
@@ -46335,6 +46335,7 @@
     "ge_buy_limit": "10",
     "examine": "Torag the Corrupted's helm.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "41200",
     "high_alchemy": "61800",
     "weight": "5",
@@ -46344,7 +46345,6 @@
     "grand_exchange_price": "139000",
     "name": "Torag's helm",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4745",
     "bonuses": "0,0,0,-6,-2,55,58,54,-1,62,15,0,0,0,0"
@@ -46364,6 +46364,7 @@
     "ge_buy_limit": "1000",
     "examine": "Torag the Corrupted's twin hammers.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "64000",
     "high_alchemy": "96000",
     "weight": "3",
@@ -46377,7 +46378,6 @@
     "attack_audios": "1332,0,0,0",
     "name": "Torag's hammers",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4747",
     "bonuses": "-4,-4,85,-4,0,0,0,0,0,0,0,72,0,0,0"
@@ -46397,6 +46397,7 @@
     "ge_buy_limit": "10",
     "examine": "Torag the Corrupted's platebody armour.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "112000",
     "high_alchemy": "168000",
     "weight": "9",
@@ -46406,7 +46407,6 @@
     "grand_exchange_price": "346200",
     "name": "Torag's platebody",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4749",
     "bonuses": "0,0,0,-30,-10,122,120,107,-6,132,60,0,0,0,0"
@@ -46426,6 +46426,7 @@
     "ge_buy_limit": "10",
     "examine": "Torag the Corrupted's plate leg armour.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "110000",
     "high_alchemy": "165000",
     "weight": "9",
@@ -46434,7 +46435,6 @@
     "grand_exchange_price": "427200",
     "name": "Torag's platelegs",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4751",
     "bonuses": "0,0,0,-21,-7,85,82,83,-4,92,30,0,0,0,0"
@@ -46455,6 +46455,7 @@
     "ge_buy_limit": "10",
     "examine": "Verac the Defiled's helm.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "41200",
     "high_alchemy": "61800",
     "weight": "1",
@@ -46464,7 +46465,6 @@
     "grand_exchange_price": "687200",
     "name": "Verac's helm",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4753",
     "bonuses": "0,0,0,-6,-2,55,58,54,0,56,15,0,3,0,0"
@@ -46484,6 +46484,7 @@
     "turn90cw_anim": "2060",
     "examine": "Verac the Defiled's flail.",
     "walk_anim": "1830",
+    "rare_item": "true",
     "low_alchemy": "64000",
     "turn90ccw_anim": "2060",
     "attack_speed": "5",
@@ -46495,7 +46496,6 @@
     "grand_exchange_price": "135500",
     "stand_anim": "1832",
     "tradeable": "true",
-    "rare_item": "true",
     "run_anim": "1831",
     "archery_ticket_price": "0",
     "id": "4755",
@@ -46525,6 +46525,7 @@
     "ge_buy_limit": "10",
     "examine": "Verac the Defiled's brassard.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "112000",
     "high_alchemy": "168000",
     "weight": "5",
@@ -46534,7 +46535,6 @@
     "grand_exchange_price": "270000",
     "name": "Verac's brassard",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4757",
     "bonuses": "0,0,0,-6,-2,81,95,85,0,81,60,0,5,0,0"
@@ -46554,6 +46554,7 @@
     "ge_buy_limit": "10",
     "examine": "Verac the Defiled's plate skirt.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "110000",
     "high_alchemy": "165000",
     "weight": "5",
@@ -46562,7 +46563,6 @@
     "grand_exchange_price": "411400",
     "name": "Verac's plateskirt",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "4759",
     "bonuses": "0,0,0,-21,-7,85,82,83,0,84,30,0,4,0,0"
@@ -106118,6 +106118,7 @@
     "ge_buy_limit": "10",
     "examine": "These will protect my feet.",
     "durability": null,
+    "rare_item": "true",
     "low_alchemy": "8000",
     "high_alchemy": "12000",
     "weight": "1",
@@ -106126,7 +106127,6 @@
     "grand_exchange_price": "95400",
     "name": "Dragon boots",
     "tradeable": "true",
-    "rare_item": "true",
     "archery_ticket_price": "0",
     "id": "11732",
     "bonuses": "0,0,0,-3,-1,16,17,18,0,0,15,4,0,0,0"
@@ -121175,6 +121175,7 @@
     "turn90cw_anim": "1207",
     "examine": "A razor-sharp sword.",
     "walk_anim": "1205",
+    "rare_item": "true",
     "low_alchemy": "27200",
     "turn90ccw_anim": "1208",
     "attack_speed": "4",
@@ -121187,7 +121188,6 @@
     "grand_exchange_price": "43082",
     "stand_anim": "813",
     "tradeable": "true",
-    "rare_item": "true",
     "run_anim": "824",
     "archery_ticket_price": "0",
     "id": "13290",
@@ -135428,11 +135428,11 @@
     "absorb": "0,0,0",
     "render_anim": "1629",
     "equipment_slot": "3",
+    "attack_anims": "390,390,381,390",
     "destroy_message": "Drop",
+    "attack_audios": "2500,0,2517,0",
     "name": "Scimitar (class 1)",
     "archery_ticket_price": "0",
-    "attack_anims": "390,390,381,390",
-    "attack_audios": "2500,0,2517,0",
     "id": "14287",
     "bonuses": "0,55,0,0,0,0,0,0,0,0,0,15,0,0,0"
   },
@@ -135458,11 +135458,11 @@
     "absorb": "0,0,0",
     "render_anim": "1629",
     "equipment_slot": "3",
+    "attack_anims": "390,390,381,390",
     "destroy_message": "Drop",
+    "attack_audios": "2500,0,2517,0",
     "name": "Scimitar (class 2)",
     "archery_ticket_price": "0",
-    "attack_anims": "390,390,381,390",
-    "attack_audios": "2500,0,2517,0",
     "id": "14289",
     "bonuses": "0,90,0,0,0,0,0,0,0,0,0,30,0,0,0"
   },
@@ -135488,11 +135488,11 @@
     "absorb": "0,0,0",
     "render_anim": "1629",
     "equipment_slot": "3",
+    "attack_anims": "390,390,381,390",
     "destroy_message": "Drop",
+    "attack_audios": "2500,0,2517,0",
     "name": "Scimitar (class 3)",
     "archery_ticket_price": "0",
-    "attack_anims": "390,390,381,390",
-    "attack_audios": "2500,0,2517,0",
     "id": "14291",
     "bonuses": "0,145,0,0,0,0,0,0,0,0,0,45,0,0,0"
   },
@@ -135518,11 +135518,11 @@
     "absorb": "0,0,0",
     "render_anim": "1629",
     "equipment_slot": "3",
+    "attack_anims": "390,390,381,390",
     "destroy_message": "Drop",
+    "attack_audios": "2500,0,2517,0",
     "name": "Scimitar (class 4)",
     "archery_ticket_price": "0",
-    "attack_anims": "390,390,381,390",
-    "attack_audios": "2500,0,2517,0",
     "id": "14293",
     "bonuses": "0,180,0,0,0,0,0,0,0,0,0,60,0,0,0"
   },
@@ -135548,11 +135548,11 @@
     "absorb": "0,0,0",
     "render_anim": "1629",
     "equipment_slot": "3",
+    "attack_anims": "390,390,381,390",
     "destroy_message": "Drop",
+    "attack_audios": "2500,0,2517,0",
     "name": "Scimitar (class 5)",
     "archery_ticket_price": "0",
-    "attack_anims": "390,390,381,390",
-    "attack_audios": "2500,0,2517,0",
     "id": "14295",
     "bonuses": "0,225,0,0,0,0,0,0,0,0,0,75,0,0,0"
   },
@@ -135577,11 +135577,11 @@
     "weapon_interface": "5",
     "absorb": "0,0,0",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "destroy_message": "Drop",
+    "attack_audios": "2517,2517,2500,2517",
     "name": "Dagger (class 1)",
     "archery_ticket_price": "0",
-    "attack_anims": "400,400,401,400",
-    "attack_audios": "2517,2517,2500,2517",
     "id": "14297",
     "bonuses": "41,0,0,0,0,0,0,0,0,0,0,15,0,0,0"
   },
@@ -135606,11 +135606,11 @@
     "weapon_interface": "5",
     "absorb": "0,0,0",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "destroy_message": "Drop",
+    "attack_audios": "2517,2517,2500,2517",
     "name": "Dagger (class 2)",
     "archery_ticket_price": "0",
-    "attack_anims": "400,400,401,400",
-    "attack_audios": "2517,2517,2500,2517",
     "id": "14299",
     "bonuses": "68,0,0,0,0,0,0,0,0,0,0,30,0,0,0"
   },
@@ -135635,11 +135635,11 @@
     "weapon_interface": "5",
     "absorb": "0,0,0",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "destroy_message": "Drop",
+    "attack_audios": "2517,2517,2500,2517",
     "name": "Dagger (class 3)",
     "archery_ticket_price": "0",
-    "attack_anims": "400,400,401,400",
-    "attack_audios": "2517,2517,2500,2517",
     "id": "14301",
     "bonuses": "101,0,0,0,0,0,0,0,0,0,0,45,0,0,0"
   },
@@ -135664,11 +135664,11 @@
     "weapon_interface": "5",
     "absorb": "0,0,0",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "destroy_message": "Drop",
+    "attack_audios": "2517,2517,2500,2517",
     "name": "Dagger (class 4)",
     "archery_ticket_price": "0",
-    "attack_anims": "400,400,401,400",
-    "attack_audios": "2517,2517,2500,2517",
     "id": "14303",
     "bonuses": "135,0,0,0,0,0,0,0,0,0,0,60,0,0,0"
   },
@@ -135693,11 +135693,11 @@
     "weapon_interface": "5",
     "absorb": "0,0,0",
     "equipment_slot": "3",
+    "attack_anims": "400,400,401,400",
     "destroy_message": "Drop",
+    "attack_audios": "2517,2517,2500,2517",
     "name": "Dagger (class 5)",
     "archery_ticket_price": "0",
-    "attack_anims": "400,400,401,400",
-    "attack_audios": "2517,2517,2500,2517",
     "id": "14305",
     "bonuses": "168,0,0,0,0,0,0,0,0,0,0,75,0,0,0"
   },
@@ -139503,7 +139503,6 @@
     "id": "1480"
   },
   {
-    "destroy": "true",
     "turn90cw_anim": "1207",
     "examine": "A staff with a spooky raven head attached.",
     "walk_anim": "1205",
@@ -139523,6 +139522,7 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
     "shop_price": "200",
     "durability": null,
+    "destroy": "true",
     "high_alchemy": "120",
     "weight": "2.2",
     "weapon_interface": "1",
@@ -139531,7 +139531,6 @@
     "name": "Staff of the raven"
   },
   {
-    "destroy": "true",
     "turn90cw_anim": "1207",
     "examine": "A staff with a spooky raven head attached.",
     "walk_anim": "1205",
@@ -139551,6 +139550,7 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
     "shop_price": "200",
     "durability": null,
+    "destroy": "true",
     "high_alchemy": "120",
     "weight": "2.2",
     "weapon_interface": "1",
@@ -139559,7 +139559,6 @@
     "name": "Staff of the raven"
   },
   {
-    "destroy": "true",
     "turn90cw_anim": "1207",
     "examine": "A staff with a spooky raven head attached.",
     "walk_anim": "1205",
@@ -139579,6 +139578,7 @@
     "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
     "shop_price": "200",
     "durability": null,
+    "destroy": "true",
     "high_alchemy": "120",
     "weight": "2.2",
     "weapon_interface": "1",
