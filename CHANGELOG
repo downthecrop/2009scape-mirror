@@ -97,3 +97,4 @@
 - Can now pickpocket women in ardy (npc ID 25)
 - Can now travel on free charter boats without having money in inventory
 - Emerald and diamond bracelet enchants no longer produce noted items
+- Prevent furnace temperature from going negative and deduplicate bar handling.

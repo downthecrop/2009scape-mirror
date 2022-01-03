@@ -5,6 +5,7 @@ import core.game.container.impl.EquipmentContainer
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
+import core.game.node.entity.skill.smithing.smelting.Bar
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.tools.RandomFunction
@@ -125,8 +126,8 @@ object BlastFurnace {
             furnaceTemp += 2
         } else if (stoveTemp > 0 && pumping && furnaceTemp < 100 && (!pumpPipeBroken || !pumpPipeBroken)) {
             furnaceTemp += 1
-        } else if (furnaceTemp > 0 && getWorldTicks() % 2 == 0) {
-            furnaceTemp -= 2
+        } else if (furnaceTemp > 0) {
+            furnaceTemp -= 1
         }
     }
 
@@ -148,96 +149,50 @@ object BlastFurnace {
             }else if (makeBars && playerOre.isNotEmpty() && barsAmountFree > 0 && totalAmount < 56 && player.getAttribute("OreInPot",false) == true) {
                 playerOre.forEach { oreID ->
                     playerCoal = player.blastCoal.getAmount(Items.COAL_453)
-                    if (oreID.id == Items.RUNITE_ORE_451 && player.blastOre.getAmount(451) * 4 <= playerCoal) {
-                        player.varpManager.get(543).setVarbit(8, 1).send(player)
-                        barsHot = true
-                        player.blastBars.add(Item(Items.RUNITE_BAR_2363, 1))
-                        player.blastOre.remove(Item(Items.RUNITE_ORE_451, 1))
-                        rewardXP(player, Skills.SMITHING,50.0)
-                        player.blastCoal.remove(Item(453, 4))
-                        totalAmount = barsAmount + oreAmount
-                        giveSmithXp++
+                    var bars = arrayOf(Bar.forOre(oreID.id)!!)
+                    if(oreID.id == Items.IRON_ORE_440) {
+                        bars = arrayOf(Bar.STEEL, Bar.IRON)
                     }
-                    else if (oreID.id == Items.ADAMANTITE_ORE_449 && player.blastOre.getAmount(449) * 3 <= playerCoal) {
-                        player.varpManager.get(543).setVarbit(8, 1).send(player)
-                        barsHot = true
-                        player.blastBars.add(Item(Items.ADAMANTITE_BAR_2361, 1))
-                        player.blastOre.remove(Item(Items.ADAMANTITE_ORE_449, 1))
-                        rewardXP(player, Skills.SMITHING,37.5)
-                        player.blastCoal.remove(Item(453, 3))
-                        totalAmount = barsAmount + oreAmount
-                        giveSmithXp++
-                    }
-                    else if (oreID.id == Items.MITHRIL_ORE_447 && player.blastOre.getAmount(447) * 2 <= playerCoal) {
-                        player.varpManager.get(543).setVarbit(8, 1).send(player)
-                        barsHot = true
-                        player.blastBars.add(Item(Items.MITHRIL_BAR_2359, 1))
-                        player.blastOre.remove(Item(Items.MITHRIL_ORE_447, 1))
-                        rewardXP(player, Skills.SMITHING,30.0)
-                        player.blastCoal.remove(Item(453, 2))
-                        totalAmount = barsAmount + oreAmount
-                        giveSmithXp++
-                    }
-                    else if (oreID.id == Items.IRON_ORE_440 && player.blastOre.getAmount(447) <= playerCoal) {
-                        player.varpManager.get(543).setVarbit(8, 1).send(player)
-                        barsHot = true
-                        player.blastBars.add(Item(Items.STEEL_BAR_2353, 1))
-                        player.blastOre.remove(Item(Items.MITHRIL_ORE_447, 1))
-                        rewardXP(player, Skills.SMITHING,17.5)
-                        player.blastCoal.remove(Item(453, 1))
-                        totalAmount = barsAmount + oreAmount
-                        giveSmithXp++
-                    }
-                    else if (oreID.id == Items.IRON_ORE_440) {
-                        player.varpManager.get(543).setVarbit(8, 1).send(player)
-                        barsHot = true
-                        player.blastBars.add(Item(Items.IRON_BAR_2351, 1))
-                        player.blastOre.remove(Item(Items.IRON_ORE_440, 1))
-                        rewardXP(player, Skills.SMITHING,12.5)
-                        totalAmount = barsAmount + oreAmount
-                        giveSmithXp++
-                    }
-                    else if (oreID.id == Items.SILVER_ORE_442) {
-                        player.varpManager.get(543).setVarbit(8, 1).send(player)
-                        barsHot = true
-                        player.blastBars.add(Item(Items.SILVER_BAR_2355, 1))
-                        rewardXP(player, Skills.SMITHING,13.6)
-                        player.blastOre.remove(Item(Items.SILVER_ORE_442, 1))
-                        totalAmount = barsAmount + oreAmount
-                        giveSmithXp++
-                    }
-                    else if (oreID.id == Items.GOLD_ORE_444) {
-                        player.varpManager.get(543).setVarbit(8, 1).send(player)
-                        barsHot = true
-                        player.blastBars.add(Item(Items.GOLD_BAR_2357, 1))
-                        if((player.equipment[EquipmentContainer.SLOT_HANDS] != null && player.equipment[EquipmentContainer.SLOT_HANDS].id == GOLDSMITH_GAUNTLETS_776)){
-                            rewardXP(player, Skills.SMITHING,56.2)
-                        }else{
-                            rewardXP(player, Skills.SMITHING,22.5)
+                    inner@ for(bar in bars) {
+                        var hasRequirements = true
+                        for(required in bar.ores) {
+                            if(required.id == Items.COAL_453) {
+                                if(!player.blastCoal.contains(Items.COAL_453, required.amount / 2)) {
+                                    hasRequirements = false
+                                }
+                            } else if(!player.blastOre.containsItem(required)) {
+                                hasRequirements = false
+                            }
                         }
-                        player.blastOre.remove(Item(Items.GOLD_ORE_444, 1))
-                        totalAmount = barsAmount + oreAmount
-                        giveSmithXp++
-                    }
-                    else if (oreID.id == Items.COPPER_ORE_436 && player.blastOre.containsAtLeastOneItem(438)) {
-                        player.varpManager.get(543).setVarbit(8, 1).send(player)
-                        barsHot = true
-                        player.blastOre.remove(Item(Items.TIN_ORE_438, 1))
-                        player.blastOre.remove(Item(Items.COPPER_ORE_436, 1))
-                        player.blastBars.add(Item(Items.BRONZE_BAR_2349, 1))
-                        rewardXP(player, Skills.SMITHING,6.2)
-                        totalAmount = barsAmount + oreAmount
-                        giveSmithXp++
-                    }
-                    else if(oreID.id == Items.TIN_ORE_438 && player.blastOre.containsAtLeastOneItem(436)){
-                        player.varpManager.get(543).setVarbit(8, 1).send(player)
-                        barsHot = true
-                        player.blastOre.remove(Item(Items.COPPER_ORE_436, 1))
-                        player.blastOre.remove(Item(Items.TIN_ORE_438, 1))
-                        player.blastBars.add(Item(Items.BRONZE_BAR_2349, 1))
-                        rewardXP(player, Skills.SMITHING,6.2)
-                        totalAmount = barsAmount + oreAmount
-                        giveSmithXp++
+                        if(hasRequirements) {
+                            var removed = true
+                            for(required in bar.ores) {
+                                if(required.id == Items.COAL_453) {
+                                    if(!player.blastCoal.remove(Item(Items.COAL_453, required.amount / 2))) {
+                                        removed = false
+                                    }
+                                } else {
+                                    if(!player.blastOre.remove(required)) {
+                                        removed = false
+                                    }
+                                }
+                            }
+                            if(removed) {
+                                player.varpManager.get(543).setVarbit(8, 1).send(player)
+                                barsHot = true
+                                player.blastBars.add(bar.product)
+                                var experience = bar.experience
+                                if(bar.product.id == Items.GOLD_BAR_2357 &&
+                                    player.equipment[EquipmentContainer.SLOT_HANDS] != null &&
+                                    player.equipment[EquipmentContainer.SLOT_HANDS].id == GOLDSMITH_GAUNTLETS_776) {
+                                    experience *= 2.5;
+                                }
+                                rewardXP(player, Skills.SMITHING, experience)
+                                totalAmount = barsAmount + oreAmount
+                                giveSmithXp++
+                                break@inner
+                            }
+                        }
                     }
                 }
             }
