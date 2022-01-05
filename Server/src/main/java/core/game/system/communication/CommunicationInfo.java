@@ -6,12 +6,16 @@ import rs09.game.system.SystemLogger;
 import core.game.system.monitor.PlayerMonitor;
 import core.game.system.mysql.SQLTable;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
-import core.net.ms.MSPacketRepository;
+import core.net.amsc.MSPacketRepository;
+import core.net.amsc.WorldCommunicator;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ContactContext;
+import core.net.packet.context.MessageContext;
+import core.net.packet.out.CommunicationMessage;
 import core.net.packet.out.ContactPackets;
+import core.tools.StringUtils;
 
 import java.nio.ByteBuffer;
 import java.util.ArrayList;
@@ -196,7 +200,7 @@ public final class CommunicationInfo {
 			player.getConfigManager().set(1083, 0);
 		} else if (!lootShare) {
 			player.getConfigManager().set(1083, 2);
-			lootSharePulse = new Pulse(World.getSettings().isDevMode() ? 5 : 200, player) {
+			lootSharePulse = new Pulse(GameWorld.getSettings().isDevMode() ? 5 : 200, player) {
 				@Override
 				public boolean pulse() {
 					lootShare = true;
@@ -205,7 +209,7 @@ public final class CommunicationInfo {
 					return true;
 				}
 			};
-			World.getPulser().submit(lootSharePulse);
+			GameWorld.getPulser().submit(lootSharePulse);
 		}
 	}
 
@@ -234,8 +238,27 @@ public final class CommunicationInfo {
 	 * Synchronizes the contact lists.
 	 */
 	public void sync(Player player) {
-		if (!player.isArtificial()) {
-			MSPacketRepository.requestCommunicationInfo(player.getName());
+		if (WorldCommunicator.isEnabled()) {
+			if (!player.isArtificial()) {
+				MSPacketRepository.requestCommunicationInfo(player.getName());
+			}
+			return;
+		}
+		if (player.getSettings().getPrivateChatSetting() != 2) {
+			notifyPlayers(player, true, false);
+		}
+		PacketRepository.send(ContactPackets.class, new ContactContext(player, ContactContext.UPDATE_STATE_TYPE));
+		PacketRepository.send(ContactPackets.class, new ContactContext(player, ContactContext.IGNORE_LIST_TYPE));
+		for (String name : contacts.keySet()) {
+			Player p = Repository.getPlayerByName(name);
+			int worldId = 0;
+			if (p != null && showActive(player, p)) {
+				worldId = GameWorld.getSettings().getWorldId();
+			}
+			PacketRepository.send(ContactPackets.class, new ContactContext(player, name, worldId));
+		}
+		if (currentClan != null && !player.isArtificial() && (clan = ClanRepository.get(currentClan)) != null) {
+			clan.enter(player);
 		}
 	}
 
@@ -245,8 +268,27 @@ public final class CommunicationInfo {
 	 * @param chatSetting If it was a chat setting change.
 	 */
 	public static void notifyPlayers(Player player, boolean online, boolean chatSetting) {
-		if (!online && !chatSetting) {
-			MSPacketRepository.sendPlayerRemoval(player.getName());
+		if (WorldCommunicator.isEnabled()) {
+			if (!online && !chatSetting) {
+				MSPacketRepository.sendPlayerRemoval(player.getName());
+			}
+			return;
+		}
+		for (Player p : Repository.getPlayers()) {
+			if (p == player || !p.isActive()) {
+				continue;
+			}
+			if (hasContact(p, player.getName())) {
+				int worldId = 0;
+				if (online && showActive(p, player)) {
+					worldId = GameWorld.getSettings().getWorldId();
+				}
+				p.getCommunication().getContacts().get(player.getName()).setWorldId(worldId);
+				PacketRepository.send(ContactPackets.class, new ContactContext(p, player.getName(), worldId));
+			}
+		}
+		if (!online && !chatSetting && player.getCommunication().getClan() != null) {
+			player.getCommunication().getClan().leave(player, true);
 		}
 	}
 
@@ -257,8 +299,28 @@ public final class CommunicationInfo {
 	 * @param message The message to send.
 	 */
 	public static void sendMessage(Player player, String target, String message) {
-		player.getMonitor().log(message + " => " + target, PlayerMonitor.PRIVATE_CHAT_LOG);
-		MSPacketRepository.sendPrivateMessage(player, target, message);
+		if (WorldCommunicator.isEnabled()) {
+			StringBuilder sb = new StringBuilder(message);
+			sb.append(" => ").append(target);
+			player.getMonitor().log(sb.toString(), PlayerMonitor.PRIVATE_CHAT_LOG);
+			MSPacketRepository.sendPrivateMessage(player, target, message);
+			return;
+		}
+		if (!player.getDetails().getCommunication().contacts.containsKey(target)) {
+			return;
+		}
+		Player p = Repository.getPlayerByName(target);
+		if (p == null || !p.isActive() || !showActive(p, player)) {
+			player.getPacketDispatch().sendMessage("That player is currently offline.");
+			return;
+		}
+		if (!GameWorld.getSettings().isDevMode()) {
+			StringBuilder sb = new StringBuilder(message);
+			sb.append(" => ").append(target);
+			player.getMonitor().log(sb.toString(), PlayerMonitor.PRIVATE_CHAT_LOG);
+		}
+		PacketRepository.send(CommunicationMessage.class, new MessageContext(player, p, MessageContext.SEND_MESSAGE, message));
+		PacketRepository.send(CommunicationMessage.class, new MessageContext(p, player, MessageContext.RECIEVE_MESSAGE, message));
 	}
 
 	/**
@@ -267,7 +329,32 @@ public final class CommunicationInfo {
 	 */
 	public static void add(Player player, String contact) {
 		CommunicationInfo info = player.getDetails().getCommunication();
-		MSPacketRepository.sendContactUpdate(player.getName(), contact, false, false, null);
+		if (WorldCommunicator.isEnabled()) {
+			MSPacketRepository.sendContactUpdate(player.getName(), contact, false, false, null);
+			return;
+		}
+		if (info.contacts.size() >= MAX_LIST_SIZE) {
+			player.getPacketDispatch().sendMessage("Your friend list is full.");
+			return;
+		}
+		if (info.contacts.containsKey(contact)) {
+			player.getPacketDispatch().sendMessage(StringUtils.formatDisplayName(contact) + " is already on your friend list.");
+			return;
+		}
+		ClanRepository clan = ClanRepository.get(player.getName(), false);
+		if (clan != null) {
+			clan.rank(contact, ClanRank.FRIEND);
+		}
+		info.contacts.put(contact, new Contact(contact));
+		Player target = Repository.getPlayerByName(contact);
+		if (target != null) {
+			if (showActive(player, target)) {
+				PacketRepository.send(ContactPackets.class, new ContactContext(player, contact, GameWorld.getSettings().getWorldId()));
+			}
+			if (player.getSettings().getPrivateChatSetting() == 1 && showActive(target, player)) {
+				PacketRepository.send(ContactPackets.class, new ContactContext(target, player.getName(), GameWorld.getSettings().getWorldId()));
+			}
+		}
 	}
 
 	/**
@@ -276,7 +363,34 @@ public final class CommunicationInfo {
 	 * @param block If the contact should be removed from the block list.
 	 */
 	public static void remove(Player player, String contact, boolean block) {
-		MSPacketRepository.sendContactUpdate(player.getName(), contact, true, block, null);
+		if (WorldCommunicator.isEnabled()) {
+			MSPacketRepository.sendContactUpdate(player.getName(), contact, true, block, null);
+			return;
+		}
+		CommunicationInfo info = player.getDetails().getCommunication();
+		if (block) {
+			info.blocked.remove(contact);
+			Player target = Repository.getPlayerByName(contact);
+			if (target != null && hasContact(target, player.getName())) {
+				int worldId = 0;
+				if (showActive(target, player)) {
+					worldId = GameWorld.getSettings().getWorldId();
+				}
+				PacketRepository.send(ContactPackets.class, new ContactContext(target, player.getName(), worldId));
+			}
+		} else {
+			info.contacts.remove(contact);
+			ClanRepository clan = ClanRepository.get(player.getName(), false);
+			if (clan != null) {
+				clan.rank(contact, ClanRank.NONE);
+			}
+			if (player.getSettings().getPrivateChatSetting() == 1) {
+				Player target = Repository.getPlayerByName(contact);
+				if (target != null) {
+					PacketRepository.send(ContactPackets.class, new ContactContext(target, player.getName(), 0));
+				}
+			}
+		}
 	}
 
 	/**
@@ -284,7 +398,24 @@ public final class CommunicationInfo {
 	 * @param contact The contact to block.
 	 */
 	public static void block(Player player, String contact) {
-		MSPacketRepository.sendContactUpdate(player.getName(), contact, false, true, null);
+		if (WorldCommunicator.isEnabled()) {
+			MSPacketRepository.sendContactUpdate(player.getName(), contact, false, true, null);
+			return;
+		}
+		CommunicationInfo info = player.getDetails().getCommunication();
+		if (info.blocked.size() >= MAX_LIST_SIZE) {
+			player.getPacketDispatch().sendMessage("Your ignore list is full.");
+			return;
+		}
+		if (info.blocked.contains(contact)) {
+			player.getPacketDispatch().sendMessage(StringUtils.formatDisplayName(contact) + " is already on your ignore list.");
+			return;
+		}
+		info.blocked.add(contact);
+		Player target = Repository.getPlayerByName(contact);
+		if (target != null && hasContact(target, player.getName())) {
+			PacketRepository.send(ContactPackets.class, new ContactContext(target, player.getName(), 0));
+		}
 	}
 
 	/**

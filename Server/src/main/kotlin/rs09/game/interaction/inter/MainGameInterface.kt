@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import org.rs09.consts.Components
 import rs09.game.interaction.InterfaceListener
-import rs09.game.world.World.settings
+import rs09.game.world.GameWorld.settings
 
 class MainGameInterface : InterfaceListener() {
     val TOPLEVEL = Components.TOPLEVEL_548

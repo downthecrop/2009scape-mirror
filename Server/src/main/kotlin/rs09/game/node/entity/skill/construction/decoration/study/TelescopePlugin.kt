@@ -13,7 +13,7 @@ import core.plugin.Plugin
 import core.tools.RandomFunction
 import rs09.game.content.global.worldevents.WorldEvents
 import rs09.game.content.global.worldevents.shootingstar.ShootingStarEvent
-import rs09.game.world.World.Pulser
+import rs09.game.world.GameWorld.Pulser
 import java.util.concurrent.TimeUnit
 
 @Initializable

@@ -1,12 +1,14 @@
 package core.game.interaction.inter;
 
+import api.ContentAPIKt.*;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
 import core.game.node.entity.skill.LevelUp;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
-import rs09.game.world.World;
+import core.game.node.entity.player.link.RunScript;
+import rs09.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -31,7 +33,7 @@ public final class SkillTabInterface extends ComponentPlugin {
 		if (config == null) {
 			return true;
 		}
-		if (!World.getSettings().isPvp()) {
+		if (!GameWorld.getSettings().isPvp()) {
 			if (p.getAttribute("levelup:" + config.getSkillId(), false)) {
 				p.removeAttribute("levelup:" + config.getSkillId());
 				LevelUp.sendFlashingIcons(p, -1);

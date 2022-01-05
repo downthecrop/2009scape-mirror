@@ -8,7 +8,7 @@ import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -50,7 +50,7 @@ public class StileShortcut extends AgilityShortcut {
 	public static void climb(final Player player, final Scenery object) {
 		player.lock(1);
 		int delay = 0;
-		World.getPulser().submit(new Pulse(delay, player) {
+		GameWorld.getPulser().submit(new Pulse(delay, player) {
 			@Override
 			public boolean pulse() {
 				ForceMovement movement = new ForceMovement(player, getLocation(player, object, true), getLocation(player, object, false), Animation.create(839)) {

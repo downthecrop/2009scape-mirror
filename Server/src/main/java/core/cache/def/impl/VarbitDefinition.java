@@ -2,7 +2,8 @@ package core.cache.def.impl;
 
 import core.cache.Cache;
 import core.game.node.entity.player.Player;
-import rs09.game.world.World;
+import rs09.game.system.SystemLogger;
+import rs09.game.world.GameWorld;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -101,6 +102,16 @@ public final class VarbitDefinition {
 		}
 		MAPPING.put(id, def);
 		return def;
+	}
+
+	public static void main(String... args) throws Throwable {
+		GameWorld.prompt(false);
+		for (int i = 0; i < 15000; i++) {
+			VarbitDefinition def = forObjectID(i);
+			if (def != null && def.configId == 33) {
+				System.out.println("Config file [id=" + i + ", shift=" + def.bitShift + "]!");
+			}
+		}
 	}
 
 	/**

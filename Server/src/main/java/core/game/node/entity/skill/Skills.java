@@ -15,7 +15,7 @@ import core.net.packet.out.SkillLevel;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 import rs09.plugin.CorePluginTypes.XPGainPlugins;
 import org.rs09.consts.Items;
@@ -419,8 +419,8 @@ public final class Skills {
 
 	public void parseExpRate(ByteBuffer buffer) {
 		experienceMutiplier = buffer.getDouble();
-		if(World.getSettings().getDefault_xp_rate() != experienceMutiplier){
-			experienceMutiplier = World.getSettings().getDefault_xp_rate();
+		if(GameWorld.getSettings().getDefault_xp_rate() != experienceMutiplier){
+			experienceMutiplier = GameWorld.getSettings().getDefault_xp_rate();
 		}
 	}
 

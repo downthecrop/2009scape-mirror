@@ -15,7 +15,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.zone.ZoneBorders;
@@ -59,7 +59,7 @@ public class AlchemistZone extends MTAZone {
 	/**
 	 * The pulse.
 	 */
-	private static final Pulse PULSE = new Pulse(World.getSettings().isDevMode() ? 15 : 53) {
+	private static final Pulse PULSE = new Pulse(GameWorld.getSettings().isDevMode() ? 15 : 53) {
 		@Override
 		public boolean pulse() {
 			if (PLAYERS.isEmpty()) {
@@ -123,7 +123,7 @@ public class AlchemistZone extends MTAZone {
 			if (!PULSE.isRunning()) {
 				PULSE.restart();
 				PULSE.start();
-				World.getPulser().submit(PULSE);
+				GameWorld.getPulser().submit(PULSE);
 			}
 			e.asPlayer().removeAttribute("alch-earn");
 			setSession(e.asPlayer());

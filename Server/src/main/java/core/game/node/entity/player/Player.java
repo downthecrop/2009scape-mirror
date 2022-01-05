@@ -84,7 +84,7 @@ import rs09.game.node.entity.player.info.login.PlayerSaver;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
 import rs09.game.node.entity.state.newsys.State;
 import rs09.game.node.entity.state.newsys.StateRepository;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import rs09.game.world.repository.DisconnectionQueue;
 import rs09.game.world.repository.Repository;
 import rs09.game.world.update.MapChunkRenderer;
@@ -375,12 +375,12 @@ public class Player extends Entity {
 	 * A custom state for bot debugging
 	 */
 	private String customState = "";
-	
+
 	/**
 	 * The amount of targets that the player can shoot left for the archery minigame.
 	 */
 	private int archeryTargets = 0;
-	
+
 	private int archeryTotal = 0;
 
 	/**
@@ -488,7 +488,7 @@ public class Player extends Entity {
 		}
 		if(intoWardrobe){
 			packetDispatch.sendInterfaceConfig(548,69,true);
-			World.getPulser().submit(new wardrobePulse(this));
+			GameWorld.getPulser().submit(new wardrobePulse(this));
 			inWardrobe = true;
 		} else {
 			inWardrobe = false;
@@ -502,37 +502,37 @@ public class Player extends Entity {
 		hunterManager.pulse();
 		musicPlayer.tick();
 		if(getAttribute("fire:immune",0) > 0){
-			int time = getAttribute("fire:immune",0) - World.getTicks();
+			int time = getAttribute("fire:immune",0) - GameWorld.getTicks();
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antifire potion."));
-                getAudioManager().send(3120);
+				getAudioManager().send(3120);
 			}
 			if(time == 0){
 				sendMessage(colorize("%RYour antifire potion has expired."));
 				removeAttribute("fire:immune");
-                getAudioManager().send(2607);
+				getAudioManager().send(2607);
 			}
 		}
 		if(getAttribute("poison:immunity",0) > 0){
-			int time = getAttribute("poison:immunity",0) - World.getTicks();
+			int time = getAttribute("poison:immunity",0) - GameWorld.getTicks();
 			debug(time + "");
 			if(time == TickUtilsKt.secondsToTicks(30)){
 				sendMessage(colorize("%RYou have 30 seconds remaining on your antipoison potion."));
-                getAudioManager().send(3120);
+				getAudioManager().send(3120);
 			}
 			if(time == 0){
 				sendMessage(colorize("%RYour antipoison potion has expired."));
 				removeAttribute("poison:immunity");
-                getAudioManager().send(2607);
+				getAudioManager().send(2607);
 			}
 		}
 		if (!artificial && (System.currentTimeMillis() - getSession().getLastPing()) > 20_000L) {
 			details.getSession().disconnect();
 			getSession().setLastPing(Long.MAX_VALUE);
 		}
-        if(getAttribute("infinite-special", false)) {
-            settings.setSpecialEnergy(100);
-        }
+		if(getAttribute("infinite-special", false)) {
+			settings.setSpecialEnergy(100);
+		}
 
 		//Decrements prayer points
 		getPrayer().tick();
@@ -701,10 +701,10 @@ public class Player extends Entity {
 		getPrayer().reset();
 		super.finalizeDeath(killer);
 		appearance.sync();
-		if (killer instanceof Player && !World.isEconomyWorld() && getSkullManager().isWilderness() && killer.asPlayer().getSkullManager().isWilderness()) {
+		if (killer instanceof Player && !GameWorld.isEconomyWorld() && getSkullManager().isWilderness() && killer.asPlayer().getSkullManager().isWilderness()) {
 			killer.asPlayer().getSavedData().getSpawnData().onDeath(killer.asPlayer(), this);
 		}
-		if (World.isEconomyWorld() && !getSavedData().getGlobalData().isDeathScreenDisabled()) {
+		if (GameWorld.isEconomyWorld() && !getSavedData().getGlobalData().isDeathScreenDisabled()) {
 			getInterfaceManager().open(new Component(153));
 		}
 		if (!getSavedData().getGlobalData().isDeathScreenDisabled()) {
@@ -763,7 +763,7 @@ public class Player extends Entity {
 
 	@Override
 	public boolean isPoisonImmune() {
-		return getAttribute("poison:immunity", -1) > World.getTicks();
+		return getAttribute("poison:immunity", -1) > GameWorld.getTicks();
 	}
 
 	@Override
@@ -819,19 +819,19 @@ public class Player extends Entity {
 	 */
 	public boolean isWearingVoid(CombatStyle style) {
 		int helm;
-        if(style == CombatStyle.MELEE) {
-            helm = Items.VOID_MELEE_HELM_11665;
-        } else if(style == CombatStyle.RANGE) {
-            helm = Items.VOID_RANGER_HELM_11664;
-        } else if(style == CombatStyle.MAGIC) {
-            helm = Items.VOID_MAGE_HELM_11663;
-        } else {
-            return false;
-        }
-        boolean legs = inEquipment(this, Items.VOID_KNIGHT_ROBE_8840, 1);
-        boolean top = inEquipment(this, Items.VOID_KNIGHT_TOP_8839, 1)
-            || inEquipment(this, Items.VOID_KNIGHT_TOP_10611, 1);
-        boolean gloves = inEquipment(this, Items.VOID_KNIGHT_GLOVES_8842, 1);
+		if(style == CombatStyle.MELEE) {
+			helm = Items.VOID_MELEE_HELM_11665;
+		} else if(style == CombatStyle.RANGE) {
+			helm = Items.VOID_RANGER_HELM_11664;
+		} else if(style == CombatStyle.MAGIC) {
+			helm = Items.VOID_MAGE_HELM_11663;
+		} else {
+			return false;
+		}
+		boolean legs = inEquipment(this, Items.VOID_KNIGHT_ROBE_8840, 1);
+		boolean top = inEquipment(this, Items.VOID_KNIGHT_TOP_8839, 1)
+				|| inEquipment(this, Items.VOID_KNIGHT_TOP_10611, 1);
+		boolean gloves = inEquipment(this, Items.VOID_KNIGHT_GLOVES_8842, 1);
 		return inEquipment(this, helm, 1) && legs && top && gloves;
 	}
 
@@ -1056,7 +1056,7 @@ public class Player extends Entity {
 	 */
 	public BankContainer getBankSecondary() {
 		return bankSecondary;
-	}	
+	}
 
 	public BankContainer getDropLog() {return dropLog;}
 
@@ -1462,10 +1462,10 @@ public class Player extends Entity {
 	public void clearState(String key){
 		State state = states.get(key);
 		if(state == null) return;
-        Pulse pulse = state.getPulse();
-        if(pulse != null) {
-            pulse.stop();
-        }
+		Pulse pulse = state.getPulse();
+		if(pulse != null) {
+			pulse.stop();
+		}
 		states.remove(key);
 	}
 }

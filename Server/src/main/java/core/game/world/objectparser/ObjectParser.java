@@ -2,7 +2,7 @@ package core.game.world.objectparser;
 
 import rs09.ServerConstants;
 import core.game.node.scenery.Scenery;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.build.LandscapeParser;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -107,7 +107,7 @@ public class ObjectParser extends StartupPlugin {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        World.getSTARTUP_PLUGINS().add(this);
+        GameWorld.getSTARTUP_PLUGINS().add(this);
         return this;
     }
 

@@ -12,7 +12,7 @@ import core.game.world.map.zone.impl.WildernessZone;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import rs09.game.node.entity.combat.handlers.MultiSwingHandler;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the multi swing combat handler for revenants.
@@ -55,7 +55,7 @@ public class RevenantCombatHandler extends MultiSwingHandler {
 		if (victim instanceof Player) {
 			SwitchAttack attack = getCurrent();
 			if (attack != null) {
-				if (attack.getStyle() == CombatStyle.RANGE && victim.getAttribute("freeze_immunity", -1) < World.getTicks()) {
+				if (attack.getStyle() == CombatStyle.RANGE && victim.getAttribute("freeze_immunity", -1) < GameWorld.getTicks()) {
 					victim.getStateManager().set(EntityState.FROZEN, 16, "The icy darts freeze your muscles!");
 					victim.asPlayer().getAudioManager().send(4059, true);
 				} else if (attack.getStyle() == CombatStyle.MAGIC) {

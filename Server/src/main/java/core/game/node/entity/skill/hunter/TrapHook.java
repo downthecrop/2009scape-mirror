@@ -1,6 +1,6 @@
 package core.game.node.entity.skill.hunter;
 
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
 
@@ -37,7 +37,7 @@ public class TrapHook {
 	public Location getChanceLocation() {
 		final double chance = wrapper.getChanceRate();
 		final int roll = RandomFunction.random(99);
-		final double successChance = (World.getSettings().isDevMode() ? 100 : 55.0) + chance;
+		final double successChance = (GameWorld.getSettings().isDevMode() ? 100 : 55.0) + chance;
 		if (successChance > roll) {
 			return RandomFunction.getRandomElement(locations);
 		}

@@ -16,6 +16,7 @@ object CallbackHub {
     private var calls: MutableList<CallBack> = ArrayList()
 
     fun call(): Boolean {
+        calls.add(ZoneBuilder())
         calls.add(GrandExchange)
         calls.add(ImpetuousImpulses())
         for (call in calls) {

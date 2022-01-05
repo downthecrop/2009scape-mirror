@@ -3,7 +3,7 @@ package core.game.content.dialogue;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents the dialogue plugin used for the grand exchange tutor.
@@ -95,7 +95,7 @@ public final class GrandExchangeTutor extends DialoguePlugin {
 			stage = 17;
 			break;
 		case 17:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, getRed() + "Step 4</col>: When the trade is complete, we will send you a", "message. You can collect your stuff by talking to the", "clerks or by visiting any banker in " + World.getSettings().getName() + ".");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, getRed() + "Step 4</col>: When the trade is complete, we will send you a", "message. You can collect your stuff by talking to the", "clerks or by visiting any banker in " + GameWorld.getSettings().getName() + ".");
 			stage = 18;
 			break;
 		case 18:

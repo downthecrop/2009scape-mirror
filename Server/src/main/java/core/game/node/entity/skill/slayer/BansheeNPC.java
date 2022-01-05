@@ -11,7 +11,7 @@ import rs09.game.node.entity.combat.handlers.MeleeSwingHandler;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
@@ -37,7 +37,7 @@ public final class BansheeNPC extends AbstractNPC {
 			if (victim instanceof Player) {
 				final Player player = (Player) victim;
 				if (!hasEarMuffs(player)) {
-					if (RandomFunction.random(10) < 4 && player.getProperties().getCombatPulse().getNextAttack() <= World.getTicks()) {
+					if (RandomFunction.random(10) < 4 && player.getProperties().getCombatPulse().getNextAttack() <= GameWorld.getTicks()) {
 						player.getWalkingQueue().reset();
 						player.getLocks().lockMovement(3);
 						player.getProperties().getCombatPulse().setNextAttack(3);

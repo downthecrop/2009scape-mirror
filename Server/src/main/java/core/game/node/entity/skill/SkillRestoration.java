@@ -4,7 +4,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.prayer.PrayerType;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the skill restoration data.
@@ -44,7 +44,7 @@ public final class SkillRestoration {
 		if(skillId == Skills.HITPOINTS && entity instanceof Player && SkillcapePerks.isActive(SkillcapePerks.DAMAGE_SPONG,entity.asPlayer())){
 			max = 110;
 		}
-		if(hpSummPrayTick < World.getTicks()){
+		if(hpSummPrayTick < GameWorld.getTicks()){
 			if(skillId == Skills.HITPOINTS || skillId == Skills.SUMMONING || skillId == Skills.PRAYER){
 				if(skillId == Skills.HITPOINTS){
 					if(skills.getLifepoints() >= max){
@@ -58,7 +58,7 @@ public final class SkillRestoration {
 				restartHpSummPray(entity.asPlayer().getPrayer().getActive().contains(PrayerType.RAPID_HEAL));
 			}
 		}
-		if(statTick < World.getTicks()) {
+		if(statTick < GameWorld.getTicks()) {
 			if (skillId != Skills.HITPOINTS && skillId != Skills.SUMMONING && skillId != Skills.PRAYER) {
 				int current = skills.getLevel(skillId);
 				skills.updateLevel(skillId,current < max ? 1 : -1,max);
@@ -100,7 +100,7 @@ public final class SkillRestoration {
 		if(half){
 			ticks /= 2;
 		}
-		this.hpSummPrayTick = World.getTicks() + ticks;
+		this.hpSummPrayTick = GameWorld.getTicks() + ticks;
 	}
 
 	public void restartStat(boolean half) {
@@ -108,6 +108,6 @@ public final class SkillRestoration {
 		if(half){
 			ticks /= 2;
 		}
-		this.statTick = World.getTicks() + ticks;
+		this.statTick = GameWorld.getTicks() + ticks;
 	}
 }

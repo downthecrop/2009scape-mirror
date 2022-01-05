@@ -9,7 +9,7 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 private val VALID_LOGS = intArrayOf(Items.LOGS_1511, Items.OAK_LOGS_1521,Items.WILLOW_LOGS_1519,Items.MAPLE_LOGS_1517,Items.YEW_LOGS_1515,Items.MAGIC_LOGS_1513)
 private val FILL_ANIM = Animation(9136)
@@ -94,7 +94,7 @@ class AFUBeaconListeners : InteractionListener(){
                 }
             }
 
-            World.Pulser.submit(object : Pulse() {
+            GameWorld.Pulser.submit(object : Pulse() {
                 var counter = 0
                 override fun pulse(): Boolean {
                     when (counter++) {
@@ -125,7 +125,7 @@ class AFUBeaconListeners : InteractionListener(){
 
         if(player.inventory.contains(Items.TINDERBOX_590,1)){
             player.lock()
-            World.Pulser.submit(object: Pulse(){
+            GameWorld.Pulser.submit(object: Pulse(){
                 var counter = 0
                 override fun pulse(): Boolean {
                     when(counter++){
@@ -173,7 +173,7 @@ class AFUBeaconListeners : InteractionListener(){
         val logs = getLogs(player, 5)
         if (logs.id != 0 && player.inventory.remove(logs)) {
             player.lock()
-            World.Pulser.submit(object: Pulse(){
+            GameWorld.Pulser.submit(object: Pulse(){
                 var counter = 0
                 override fun pulse(): Boolean {
                     when(counter++){

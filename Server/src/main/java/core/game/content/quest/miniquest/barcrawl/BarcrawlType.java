@@ -9,7 +9,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.CameraContext;
 import core.net.packet.out.CameraViewPacket;
 import core.tools.StringUtils;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * A barcrawl type npc.
@@ -162,7 +162,7 @@ public enum BarcrawlType {
                 player.getPacketDispatch().sendMessages("The barmaid giggles.", "The barmaid signs your card.");
             } else {
                 PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.SHAKE, 4, 4, 1, 4, 4));
-                World.getPulser().submit(new Pulse(3, player) {
+                GameWorld.getPulser().submit(new Pulse(3, player) {
                     @Override
                     public boolean pulse() {
                         PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraContext.CameraType.RESET, 4, 4, 1, 4, 4));

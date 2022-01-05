@@ -10,7 +10,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -161,7 +161,7 @@ public final class ThievableChestPlugin extends OptionHandler {
 			}
 			player.sendMessage("You find a trap on the chest...");
 			player.getImpactHandler().setDisabledTicks(6);
-			World.getPulser().submit(new Pulse(1, player) {
+			GameWorld.getPulser().submit(new Pulse(1, player) {
 				int counter;
 
 				@Override
@@ -196,7 +196,7 @@ public final class ThievableChestPlugin extends OptionHandler {
 		 * Sets the respawn delay.
 		 */
 		public void setRespawn() {
-			currentRespawn = World.getTicks() + (int) (respawn / 0.6);
+			currentRespawn = GameWorld.getTicks() + (int) (respawn / 0.6);
 		}
 
 		/**
@@ -204,7 +204,7 @@ public final class ThievableChestPlugin extends OptionHandler {
 		 * @return {@code True} if so.
 		 */
 		public boolean isRespawning() {
-			return currentRespawn > World.getTicks();
+			return currentRespawn > GameWorld.getTicks();
 		}
 
 		/**

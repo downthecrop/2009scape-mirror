@@ -10,7 +10,7 @@ import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
@@ -58,7 +58,7 @@ public final class CockatriceFamiliarNPC implements Plugin<Object> {
 		}
 		familiar.faceTemporary(target, 2);
 		familiar.visualize(Animation.create(7762), Graphics.create(1467));
-		World.getPulser().submit(new Pulse(1, familiar.getOwner(), familiar, target) {
+		GameWorld.getPulser().submit(new Pulse(1, familiar.getOwner(), familiar, target) {
 			@Override
 			public boolean pulse() {
 				target.getSkills().updateLevel(skill, -3, 0);

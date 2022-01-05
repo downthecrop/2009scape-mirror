@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
 import core.plugin.Plugin;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +68,7 @@ public class MTAShop {
 	public MTAShop() {
 		container.add(ITEMS);
 		component.setPlugin(shopPlugin);
-		World.getPulser().submit(new Pulse(100) {
+		GameWorld.getPulser().submit(new Pulse(100) {
 			@Override
 			public boolean pulse() {
 				for (int i = 0; i < container.toArray().length; i++) {
@@ -98,7 +98,7 @@ public class MTAShop {
 		player.getInterfaceManager().open(component);
 		update();
 		updatePoints(player);
-		World.getPulser().submit(new Pulse(1, player) {
+		GameWorld.getPulser().submit(new Pulse(1, player) {
 
 			@Override
 			public boolean pulse() {

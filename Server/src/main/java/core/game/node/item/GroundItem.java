@@ -1,7 +1,7 @@
 package core.game.node.item;
 
 import core.game.node.entity.player.Player;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 
 /**
@@ -74,7 +74,7 @@ public class GroundItem extends Item {
 		super.index = -1;
 		super.interaction.setDefault();
 		this.dropper = player;
-		this.ticks = World.getTicks();
+		this.ticks = GameWorld.getTicks();
 		this.decayTime = ticks + decay;
 	}
 
@@ -90,12 +90,12 @@ public class GroundItem extends Item {
 	 * @return {@code True} if so.
 	 */
 	public boolean isPrivate() {
-		return remainPrivate || (decayTime - World.getTicks() > 100);
+		return remainPrivate || (decayTime - GameWorld.getTicks() > 100);
 	}
 
 	@Override
 	public boolean isActive() {
-		return removed || World.getTicks() < decayTime;
+		return removed || GameWorld.getTicks() < decayTime;
 	}
 
 	/**
@@ -148,7 +148,7 @@ public class GroundItem extends Item {
 	 * @param decayTime The decayTime to set.
 	 */
 	public void setDecayTime(int decayTime) {
-		this.decayTime = World.getTicks() + decayTime;
+		this.decayTime = GameWorld.getTicks() + decayTime;
 	}
 
 	/**

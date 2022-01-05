@@ -22,7 +22,7 @@ import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
 import kotlin.Unit;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -144,7 +144,7 @@ public final class PartyRoomPlugin extends OptionHandler {
 			npc.init();
 			npcs.add(npc);
 		}
-		World.getPulser().submit(new Pulse(1) {
+		GameWorld.getPulser().submit(new Pulse(1) {
 			int count = 0;
 
 			@Override

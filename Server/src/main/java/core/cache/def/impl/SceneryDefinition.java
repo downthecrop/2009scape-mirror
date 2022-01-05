@@ -7,7 +7,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import rs09.game.system.SystemLogger;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 import java.nio.ByteBuffer;
 import java.util.HashMap;
@@ -509,6 +509,61 @@ public class SceneryDefinition extends Definition<Scenery> {
 		mapIcon = -1;
 	}
 
+	/**
+	 * Main method, used for debugging object definitions.
+	 * @param args The arguments cast on runtime.
+	 * @throws Throwable When an exception occurs.
+	 */
+	public static void main(String... args) throws Throwable {
+		GameWorld.prompt(false);
+		// if (true) {
+		// for (int id = 0; id <= 27325; id++) {
+		// ObjectDefinition def = ObjectDefinition.forId(id);
+		// if (def.mapIcon > 69) {
+		// System.out.println(id + " - " + def.getName() + " has map icon " +
+		// def.mapIcon);
+		// }
+		// }
+		// return; 2105
+		// }
+		/*ObjectDefinition def = ObjectDefinition.forId(2105);
+		System.out.println("size: " + def.getClass().getDeclaredFields().length);
+		for (Field f : def.getClass().getDeclaredFields()) {
+			if (!Modifier.isStatic(f.getModifiers())) {
+				if (f.getType().isArray()) {
+					Object object = f.get(def);
+					if (object != null) {
+						int length = Array.getLength(object);
+						System.out.print(f.getName() + ", [");
+						for (int i = 0; i < length; i++) {
+							System.out.print(Array.get(object, i) + (i < (length - 1) ? ", " : "]"));
+						}
+						System.out.println();
+						continue;
+					}
+				}
+				System.out.println(f.getName() + ", " + f.get(def));
+			}
+		}
+		for (Field f : def.getClass().getSuperclass().getDeclaredFields()) {
+			if (!Modifier.isStatic(f.getModifiers())) {
+				if (f.getType().isArray()) {
+					Object object = f.get(def);
+					if (object != null) {
+						int length = Array.getLength(object);
+						System.out.print(f.getName() + ", [");
+						for (int i = 0; i < length; i++) {
+							System.out.print(Array.get(object, i) + (i < (length - 1) ? ", " : "]"));
+						}
+						System.out.println();
+						continue;
+					}
+				}
+				System.out.println(f.getName() + ", " + f.get(def));
+			}
+		}*/
+	}
+	
 	/**
 	 * Parses the definitions.
 	 * @throws Throwable the throwable.

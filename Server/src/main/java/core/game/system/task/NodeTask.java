@@ -1,7 +1,7 @@
 package core.game.system.task;
 
 import core.game.node.Node;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents "Node pulse", which is used to execute methods with node
@@ -79,7 +79,7 @@ public abstract class NodeTask {
 	 * @return The pulse used for this task.
 	 */
 	public Pulse schedule(final Node node, final Node... n) {
-		World.getPulser().submit(pulse = new Pulse(ticks, node) {
+		GameWorld.getPulser().submit(pulse = new Pulse(ticks, node) {
 
 			@Override
 			public void start() {
