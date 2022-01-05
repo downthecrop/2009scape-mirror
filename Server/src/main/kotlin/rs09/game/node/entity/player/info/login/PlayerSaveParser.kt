@@ -21,6 +21,8 @@ import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
 import java.io.FileReader
 import java.util.*
+import core.game.node.item.Item;
+import org.rs09.consts.Items;
 
 /**
  * Class used for parsing JSON player saves.
@@ -380,6 +382,7 @@ class PlayerSaveParser(val player: Player) {
         bBars?.let{player.blastBars.parse(it)}
         bOre?.let{player.blastOre.parse(bOre)}
         bCoal?.let{player.blastCoal.parse(bCoal)}
+        migrateBlastCoal()
         player.location = rs09.JSONUtils.parseLocation(location)
     }
 
@@ -410,5 +413,10 @@ class PlayerSaveParser(val player: Player) {
         player.settings.parse(settingsData)
     }
 
-
+    fun migrateBlastCoal() {
+        val amount = player.blastOre.getAmount(Items.COAL_453)
+        if(amount > 0 && player.blastOre.remove(Item(Items.COAL_453, amount))) {
+            player.blastCoal.add(Item(Items.COAL_453, amount))
+        }
+    }
 }
