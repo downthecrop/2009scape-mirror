@@ -29,8 +29,8 @@ object ServerConfigParser {
         } else {
             try {
                 tomlData = Toml().read(confFile)
-                parseGameSettings()
                 parseServerSettings()
+                parseGameSettings()
             } catch (e: java.lang.IllegalStateException) {
                 SystemLogger.logErr("Passed config file is not a TOML file. Path: ${confFile!!.canonicalPath}")
                 SystemLogger.logErr("Exception received: $e")
