@@ -16,7 +16,7 @@ class FullangrDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FacialExpression.CHILD_NORMAL,"Good day, sir.").also { stage = 0 }
+        npc(FacialExpression.OLD_DEFAULT,"Good day, sir.").also { stage = 0 }
         return true
     }
 
@@ -37,7 +37,7 @@ class FullangrDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             10 -> {
-                npc(FacialExpression.CHILD_NORMAL,"I'm working on the digging, of course.",
+                npc(FacialExpression.OLD_DEFAULT,"I'm working on the digging, of course.",
                     "It's a small excavation, so only two of us ",
                     "can work on it at a time.").also { stage = 99 }
             }

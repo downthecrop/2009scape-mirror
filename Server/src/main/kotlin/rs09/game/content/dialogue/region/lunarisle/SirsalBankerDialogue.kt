@@ -41,7 +41,7 @@ class SirsalBankerDialogue(player: Player? = null) : DialoguePlugin(player){
                 4 -> player(FacialExpression.HALF_ASKING, "What is this place?").also { stage = 5 }
             }
 
-            2 -> npcl(FacialExpression.ANNOYED, "What are you doing here, Fremennik?!").also { stage++ }
+            2 -> npc(FacialExpression.ANNOYED, "What are you doing here, Fremennik?!").also { stage++ }
             3 -> player(FacialExpression.WORRIED, "I have a seal of pass...").also { stage++ }
             4 -> npc(FacialExpression.ANNOYED, "No you do not! Begone!").also { stage = 99}
 

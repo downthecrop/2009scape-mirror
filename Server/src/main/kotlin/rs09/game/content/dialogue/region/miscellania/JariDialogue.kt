@@ -16,7 +16,7 @@ class JariDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FacialExpression.CHILD_NORMAL,"Good day, sir.").also { stage = 0 }
+        npc(FacialExpression.OLD_DEFAULT,"Good day, sir.").also { stage = 0 }
         return true
     }
 
@@ -37,11 +37,11 @@ class JariDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             10 -> {
-                npc(FacialExpression.CHILD_NORMAL,"I'm waiting to work on the digging.").also { stage++ }
+                npc(FacialExpression.OLD_DEFAULT,"I'm waiting to work on the digging.").also { stage++ }
             }
 
             11 -> {
-                npc(FacialExpression.CHILD_NORMAL,"It's the first excavation I've worked on, ",
+                npc(FacialExpression.OLD_HAPPY,"It's the first excavation I've worked on, ",
                     "and I'm looking forward to it.").also { stage = 99 }
             }
 

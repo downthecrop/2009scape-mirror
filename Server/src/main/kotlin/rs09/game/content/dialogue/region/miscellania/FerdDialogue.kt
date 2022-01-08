@@ -16,7 +16,7 @@ class FerdDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FacialExpression.CHILD_NORMAL,"Good day, sir.").also { stage = 0 }
+        npc(FacialExpression.OLD_DEFAULT,"Good day, sir.").also { stage = 0 }
         return true
     }
 
@@ -27,7 +27,7 @@ class FerdDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             1 -> {
-                npc(FacialExpression.CHILD_NORMAL, "Shoring up the walls.").also { stage++ }
+                npc(FacialExpression.OLD_DEFAULT, "Shoring up the walls.").also { stage++ }
             }
 
             2 -> {
@@ -35,7 +35,7 @@ class FerdDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             3 -> {
-                npc(FacialExpression.CHILD_NORMAL, "Stops them falling down.").also { stage = 99 }
+                npc(FacialExpression.OLD_DEFAULT, "Stops them falling down.").also { stage = 99 }
             }
 
             4 -> {
@@ -43,7 +43,7 @@ class FerdDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             5 -> {
-                npc(FacialExpression.CHILD_NORMAL, "Aye.",
+                npc(FacialExpression.OLD_NOT_INTERESTED, "Aye.",
                     "If you want to chatter, you'd better talk to ",
                     "Thorodin over there. I'm working.").also { stage = 99 }
             }

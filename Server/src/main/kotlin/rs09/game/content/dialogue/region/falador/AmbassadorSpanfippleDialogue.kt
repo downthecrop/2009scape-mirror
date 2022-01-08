@@ -17,7 +17,7 @@ class AmbassadorSpanfippleDialogue(player: Player? = null) : DialoguePlugin(play
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FacialExpression.CHILD_NORMAL,"It's all very white round here, isn't it?").also { stage = 0 }
+        npc(FacialExpression.OLD_DEFAULT,"It's all very white round here, isn't it?").also { stage = 0 }
         return true
     }
 
@@ -28,7 +28,7 @@ class AmbassadorSpanfippleDialogue(player: Player? = null) : DialoguePlugin(play
             }
 
             1 -> {
-                npcl(FacialExpression.CHILD_NORMAL, "I think it would all look better in pink. At least then I wouldn't be squinting all the time.").also { stage++ }
+                npcl(FacialExpression.OLD_DEFAULT, "I think it would all look better in pink. At least then I wouldn't be squinting all the time.").also { stage++ }
             }
 
             2 -> {
@@ -36,7 +36,7 @@ class AmbassadorSpanfippleDialogue(player: Player? = null) : DialoguePlugin(play
             }
 
             3 -> {
-                npc(FacialExpression.CHILD_NORMAL, "You're probably right. Maybe brown, then.").also { stage++ }
+                npc(FacialExpression.OLD_DEFAULT, "You're probably right. Maybe brown, then.").also { stage++ }
             }
 
             4 -> {
@@ -44,7 +44,7 @@ class AmbassadorSpanfippleDialogue(player: Player? = null) : DialoguePlugin(play
             }
 
             5 -> {
-                npc(FacialExpression.CHILD_NORMAL, "Bah, humans have no sense of style...").also { stage = 99 }
+                npc(FacialExpression.OLD_ANGRY1, "Bah, humans have no sense of style...").also { stage = 99 }
             }
 
             99 -> end()

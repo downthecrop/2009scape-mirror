@@ -16,7 +16,7 @@ class DonalDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FacialExpression.CHILD_NORMAL,"What do you want?").also { stage = 0 }
+        npc(FacialExpression.OLD_DEFAULT,"What do you want?").also { stage = 0 }
         return true
     }
 
@@ -27,15 +27,15 @@ class DonalDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             1 -> {
-                npc(FacialExpression.CHILD_NORMAL, "Of course I'm still here.").also { stage++ }
+                npc(FacialExpression.OLD_DEFAULT, "Of course I'm still here.").also { stage++ }
             }
 
             2 -> {
-                npc(FacialExpression.CHILD_NORMAL, "I'm not going near that crack in the wall again.").also { stage++ }
+                npc(FacialExpression.OLD_DISTRESSED, "I'm not going near that crack in the wall again.").also { stage++ }
             }
 
             3 -> {
-                npc(FacialExpression.CHILD_NORMAL, "Rock falls and so on are fine, ", "but sea monsters in caves - never!").also { stage = 99 }
+                npc(FacialExpression.OLD_DISTRESSED, "Rock falls and so on are fine, ", "but sea monsters in caves - never!").also { stage = 99 }
             }
             99 -> end()
         }

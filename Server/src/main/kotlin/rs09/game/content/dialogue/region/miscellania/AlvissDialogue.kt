@@ -16,7 +16,7 @@ class AlvissDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FacialExpression.CHILD_NORMAL,"Good day, sir.").also { stage = 0 }
+        npc(FacialExpression.OLD_DEFAULT,"Good day, sir.").also { stage = 0 }
         return true
     }
 
@@ -37,17 +37,17 @@ class AlvissDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             10 -> {
-                npc(FacialExpression.CHILD_NORMAL,"I'm waiting for my shift, of course.",
+                npc(FacialExpression.OLD_DEFAULT,"I'm waiting for my shift, of course.",
                     "We can't dig all the time, you know.").also { stage++ }
             }
 
             11 -> {
-                npc(FacialExpression.CHILD_NORMAL," I'm also researching the links between the ",
+                npc(FacialExpression.OLD_DEFAULT," I'm also researching the links between the ",
                     "Fremenniks and the Dwarves.").also { stage++ }
             }
 
             12 -> {
-                npc(FacialExpression.CHILD_NORMAL,"I've found that we have some mythology in common.").also { stage = 99 }
+                npc(FacialExpression.OLD_DEFAULT,"I've found that we have some mythology in common.").also { stage = 99 }
             }
 
             99 -> end()

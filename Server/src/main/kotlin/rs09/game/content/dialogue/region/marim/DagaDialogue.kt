@@ -21,7 +21,7 @@ class DagaDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FacialExpression.CHILD_FRIENDLY,"Would you like to buy or sell some scimitars?").also { stage = 0 }
+        npc(FacialExpression.OLD_DEFAULT,"Would you like to buy or sell some scimitars?").also { stage = 0 }
         return true
     }
 
@@ -37,7 +37,7 @@ class DagaDialogue(player: Player? = null) : DialoguePlugin(player){
 
             10 -> end().also { npc.openShop(player) }
 
-            30 -> npcl(FacialExpression.CHILD_FRIENDLY, "It just so happens I recently got a fresh delivery, do you want to buy one?").also { stage++ }
+            30 -> npcl(FacialExpression.OLD_DEFAULT, "It just so happens I recently got a fresh delivery, do you want to buy one?").also { stage++ }
             31 -> options("Yes, please.", "No, thanks.").also { stage++ }
 
             32 -> when (buttonId) {
@@ -45,7 +45,7 @@ class DagaDialogue(player: Player? = null) : DialoguePlugin(player){
                     player.inventory.remove(Item(995,100000))
                     addItemOrDrop(player, Items.DRAGON_SCIMITAR_4587, 1)
                 } else {
-                    npcl(FacialExpression.CHILD_FRIENDLY, "Sorry but you don't have enough to buy one, at the moment it costs 100,000 gold coins.").also { stage = 99 }
+                    npcl(FacialExpression.OLD_NORMAL, "Sorry but you don't have enough to buy one, at the moment it costs 100,000 gold coins.").also { stage = 99 }
                 }
                 2 -> player(FacialExpression.FRIENDLY, "No thanks.").also { stage = 99 }
             }

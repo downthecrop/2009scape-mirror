@@ -32,14 +32,14 @@ class MelenaMoonlanderDialogue(player: Player? = null) : DialoguePlugin(player){
                 3 -> player(FacialExpression.FRIENDLY, "I'm good thanks, bye.").also { stage = 99 }
             }
 
-            11 -> npcl(FacialExpression.FRIENDLY, "About magic of course.").also { stage++ }
+            11 -> npc(FacialExpression.FRIENDLY, "About magic of course.").also { stage++ }
             12 -> player(FacialExpression.SUSPICIOUS, "Sorry?").also { stage++ }
             13 -> npcl(FacialExpression.FRIENDLY, "I said about magic of course. You know, in response to your question.").also { stage++ }
             14 -> player(FacialExpression.HALF_THINKING, "But I didn't ask anything yet.").also { stage++ }
             15 -> npcl(FacialExpression.FRIENDLY, "Yes, but you were thinking of asking me how I was floating.").also { stage++ }
             16 -> player(FacialExpression.AMAZED, "That's true! How could you possibly know that?").also { stage++ }
-            17 -> npcl(FacialExpression.HALF_THINKING, "Don't you realise we can read your mind.").also { stage++ }
-            18 -> playerl(FacialExpression.SUSPICIOUS, "Oh, of course. How do you manage to do that?").also { stage++ }
+            17 -> npc(FacialExpression.HALF_THINKING, "Don't you realise we can read your mind.").also { stage++ }
+            18 -> player(FacialExpression.SUSPICIOUS, "Oh, of course. How do you manage to do that?").also { stage++ }
             19 -> npcl(FacialExpression.FRIENDLY, "It's quite simple, everyone has a resonance that is responded to by the moon. This resonance changes depending on what we are thinking. You can tune yourself in to listen to this").also { stage++ }
             20 -> npcl(FacialExpression.FRIENDLY, "resonance with practice - it's a life long quest for the members of the Moon Clan, but its especially easy to read with outsiders like yourself,").also { stage++ }
             21 -> npc(FacialExpression.FRIENDLY, "as you are far louder and unguarded.").also { stage++ }

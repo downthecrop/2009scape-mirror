@@ -44,7 +44,7 @@ class BouquetMacHyacinthDialogue(player: Player? = null) : DialoguePlugin(player
             3 -> player(FacialExpression.NEUTRAL, "I'm not a simple person.").also { stage++ }
             4 -> npc(FacialExpression.LAUGH, "So it seems.").also { stage = 99 }
 
-            5 -> npcl(FacialExpression.ANNOYED, "What are you doing here, Fremennik?!").also { stage++ }
+            5 -> npc(FacialExpression.ANNOYED, "What are you doing here, Fremennik?!").also { stage++ }
             6 -> player(FacialExpression.WORRIED, "I have a seal of pass...").also { stage++ }
             7 -> npc(FacialExpression.ANNOYED, "No you do not! Begone!").also { stage++ }
             8 -> teleport(player, Rellekka, TeleportManager.TeleportType.LUNAR).also { wait1() }

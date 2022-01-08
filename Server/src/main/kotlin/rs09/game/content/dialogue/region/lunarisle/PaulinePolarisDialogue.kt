@@ -23,7 +23,7 @@ class PaulinePolarisDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> npcl(FacialExpression.ASKING, "Ah, a stranger to our island. How can I help?").also { stage ++ }
+            0 -> npc(FacialExpression.ASKING, "Ah, a stranger to our island. How can I help?").also { stage ++ }
             1 -> playerl(FacialExpression.FRIENDLY, "Well, I've actually come here on a diplomatic mission. I want to try and settle some of the disputes between the Fremenniks and your clan.").also { stage++ }
             2 -> npcl(FacialExpression.FRIENDLY, "The Rremenniks? Pah! They are just too ignorant and stubborn to listen to anything we have to say - how can we possibly associate with a race that won't listen?").also { stage++ }
             3 -> playerl(FacialExpression.FRIENDLY, "I think they are very eager to listen, but they feel like you are keeping secrets from them.").also { stage++ }

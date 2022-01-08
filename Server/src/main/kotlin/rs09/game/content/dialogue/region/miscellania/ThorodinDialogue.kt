@@ -16,7 +16,7 @@ class ThorodinDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        npc(FacialExpression.CHILD_NORMAL,"Good day, sir.").also { stage = 0 }
+        npc(FacialExpression.OLD_DEFAULT,"Good day, sir.").also { stage = 0 }
         return true
     }
 
@@ -37,7 +37,7 @@ class ThorodinDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             10 -> {
-                npc(FacialExpression.CHILD_NORMAL,"We're extending the cave so more people can live in it.",
+                npc(FacialExpression.OLD_DEFAULT,"We're extending the cave so more people can live in it.",
                     "These Miscellanians aren't so bad.",
                     "They appreciate the benefits of living underground.").also { stage++ }
             }
@@ -47,7 +47,7 @@ class ThorodinDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             12 -> {
-                npc(FacialExpression.CHILD_NORMAL,"Not getting rained on, for example.",
+                npc(FacialExpression.OLD_DEFAULT,"Not getting rained on, for example.",
                     "Did you do anything about that monster Donal", "was talking about?").also { stage++ }
             }
 
@@ -56,7 +56,7 @@ class ThorodinDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             12 -> {
-                npc(FacialExpression.CHILD_NORMAL,"Glad to hear it.",
+                npc(FacialExpression.OLD_HAPPY,"Glad to hear it.",
                     "Now we can get on with excavating.").also { stage = 99 }
             }
 

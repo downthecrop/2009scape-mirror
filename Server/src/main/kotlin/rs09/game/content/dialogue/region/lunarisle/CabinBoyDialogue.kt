@@ -31,7 +31,7 @@ class CabinBoyDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> npcl(FacialExpression.CHILD_FRIENDLY, "That I did, that I did!").also { stage++ }
+            0 -> npc(FacialExpression.CHILD_FRIENDLY, "That I did, that I did!").also { stage++ }
             1 -> player(FacialExpression.ASKING, "And?").also { stage++ }
             2 -> npcl(FacialExpression.CHILD_FRIENDLY, "She turned out to be really nice! She's joining us to become a pirate!").also { stage++ }
             3 -> playerl(FacialExpression.HALF_WORRIED, "Really? And you're not sceptical about this? You know, after what she did last time?").also { stage++ }
