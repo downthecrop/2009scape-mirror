@@ -77,6 +77,6 @@ class ZookeeperDialogue(player: Player? = null) : DialoguePlugin(player){
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.MAN_1)
+        return intArrayOf(NPCs.ZOO_KEEPER_28)
     }
 }
