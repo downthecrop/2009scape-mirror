@@ -17,9 +17,7 @@ class DaveyBoyDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-
-
-        when (conversations.random()) {
+        when ((1..2).random()) {
             1 -> playerl(FacialExpression.HALF_ASKING, "What does it take to become first mate on a ship?").also { stage = 0 }
             2 -> npcl(FacialExpression.ANNOYED, "It is customary when stowing away on a vessel to not introduce yourself to the Captains First Mate, oh foolish one.").also { stage = 10 }
         }
