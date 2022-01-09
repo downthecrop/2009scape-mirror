@@ -61,10 +61,15 @@ public final class BarkerDialogue extends DialoguePlugin {
 				break;
 			case 2:
 				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No thanks.");
-				stage = 20;
+				stage = 15;
 				break;
 			}
 			break;
+
+			case 15:
+				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Unfortunate for you, yes?", "Many bargains, won't find elsewhere!");
+				stage = 20;
+				break;
 		case 20:
 			end();
 			break;

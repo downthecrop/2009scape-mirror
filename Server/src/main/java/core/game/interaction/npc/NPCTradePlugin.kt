@@ -3,6 +3,7 @@ package core.game.interaction.npc
 import api.*
 import core.cache.def.impl.NPCDefinition
 import core.game.component.Component
+import core.game.content.dialogue.FacialExpression
 import core.plugin.Initializable
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -37,6 +38,15 @@ class NPCTradePlugin : InteractionListener() {
             val points = getQP(player)
             if(points < 40){
                 sendNPCDialogue(player, NPCs.SIEGFRIED_ERKLE_933, "I'm sorry, adventurer, but you need 40 quest points to buy from me.")
+                return@on true
+            }
+            node.asNpc().openShop(player)
+            return@on true
+        }
+
+        on(NPCs.FUR_TRADER_1316, NPC, "trade"){player, node ->
+            if(!player.questRepository.isComplete("The Fremennik Trials")){
+                sendNPCDialogue(player, NPCs.FUR_TRADER_1316, "Only Fremenniks may purchase furs here.", FacialExpression.ANNOYED)
                 return@on true
             }
             node.asNpc().openShop(player)
