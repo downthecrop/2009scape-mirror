@@ -374,9 +374,7 @@ class ScriptAPI(private val bot: Player) {
             diffX /= 2
             diffY /= 2
         }
-        val dest = bot.location.transform(diffX,diffY,0)
-        bot.pulseManager.run(object :
-            MovementPulse(bot, dest, Pathfinder.SMART) {
+        GameWorld.Pulser.submit(object : MovementPulse(bot, bot.location.transform(diffX, diffY, 0), Pathfinder.SMART) { // if this uses bot.pulseManager.run, it will get cleared when the bot dies and then the bot gets stuck in lumby
             override fun pulse(): Boolean {
                 return true
             }
