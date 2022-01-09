@@ -16,7 +16,7 @@ public enum FacialExpression {
     //Names based off https://2009scape.wiki/w/Chathead/Animations
 
     //Chat heads from oldschool 2009scape?
-    //Maybe for gnomes or dwarves? Chat heads are frozen when used on Human NPCs
+    //Works for Dwarves. Chat heads are frozen when used on Human NPCs
     OLD_HAPPY(588),
     OLD_CALM_TALK1(589),
     OLD_CALM_TALK2(590),

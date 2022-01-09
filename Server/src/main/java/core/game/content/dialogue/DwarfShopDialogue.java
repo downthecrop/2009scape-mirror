@@ -37,7 +37,7 @@ public final class DwarfShopDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Can I help you at all?");
+		interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "Can I help you at all?");
 		stage = 0;
 		return true;
 	}
