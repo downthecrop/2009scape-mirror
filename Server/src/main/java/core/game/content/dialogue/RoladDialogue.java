@@ -32,7 +32,7 @@ public class RoladDialogue extends DialoguePlugin {
 			stage = 1;
 			break;
 		case 1:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "No, never heard of you.");
+			interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "No, never heard of you.");
 			stage = 2;
 			break;
 		case 2:
@@ -51,7 +51,7 @@ public class RoladDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Oh, hello... do I know you?");
+		interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "Oh, hello... do I know you?");
 		stage = 0;
 		return true;
 	}

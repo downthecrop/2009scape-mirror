@@ -40,12 +40,12 @@ public final class MiningGuildDwarf extends DialoguePlugin {
 		npc = (NPC) args[0];
 		if (args.length == 2) {
 			if (player.getSkills().getStaticLevel(Skills.MINING) < 60) {
-				interpreter.sendDialogues(npc, null, "Sorry, but you need level 60 Mining to go in there.");
+				interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "Sorry, but you need level 60 Mining to go in there.");
 				stage = 69;
 				return true;
 			}
 		}
-		interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Welcome to the Mining Guild.", "Can I help you with anything?");
+		interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "Welcome to the Mining Guild.", "Can I help you with anything?");
 		stage = 0;
 		return true;
 	}
@@ -78,7 +78,7 @@ public final class MiningGuildDwarf extends DialoguePlugin {
 			}
 			break;
 		case 10:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Ooh, it's WONDEFRFUL! There are lots of coal rocks,", "and even a few mithril rocks in the guild,", "all exclusively for people with at least level 60 mining", "There's no better mining site anywhere near here.");
+			interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "Ooh, it's WONDEFRFUL! There are lots of coal rocks,", "and even a few mithril rocks in the guild,", "all exclusively for people with at least level 60 mining", "There's no better mining site anywhere near here.");
 			stage = 11;
 			break;
 		case 11:
@@ -87,10 +87,10 @@ public final class MiningGuildDwarf extends DialoguePlugin {
 			break;
 		case 12:
 			if (player.getSkills().getStaticLevel(Skills.MINING) < 60) {
-				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Sorry, but the rules are rules. Do some more training", "first.");
+				interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "Sorry, but the rules are rules. Do some more training", "first.");
 				stage = 13;
 			} else {
-				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Yes, you can enter if you wish.");
+				interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "Yes, you can enter if you wish.");
 				stage = 14;
 			}
 			break;
@@ -101,7 +101,7 @@ public final class MiningGuildDwarf extends DialoguePlugin {
 			end();
 			break;
 		case 20:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "What do you think? We smelt it into bars, smith the", "metal to make armour and weapons, then we exchange", "them for goods and services.");
+			interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "What do you think? We smelt it into bars, smith the", "metal to make armour and weapons, then we exchange", "them for goods and services.");
 			stage = 21;
 			break;
 		case 21:
@@ -109,11 +109,11 @@ public final class MiningGuildDwarf extends DialoguePlugin {
 			stage = 22;
 			break;
 		case 22:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "No, this is only a mining outpost. We dwarves don't", "much like to settle in human cities. Most of the ore is", "carted off to Keldagrim, the great dwarven city-", "They've got a special blast furnace up there - it makes");
+			interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "No, this is only a mining outpost. We dwarves don't", "much like to settle in human cities. Most of the ore is", "carted off to Keldagrim, the great dwarven city-", "They've got a special blast furnace up there - it makes");
 			stage = 23;
 			break;
 		case 23:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "smelting the ore so much easier. There are plenty of", "dwarven traders working in Keldagrim.");
+			interpreter.sendDialogues(npc, FacialExpression.OLD_NORMAL, "smelting the ore so much easier. There are plenty of", "dwarven traders working in Keldagrim.");
 			stage = 24;
 			break;
 		case 24:

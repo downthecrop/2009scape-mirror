@@ -74,6 +74,6 @@ public final class BettyDialogue extends DialoguePlugin {
 
 	@Override
 	public int[] getIds() {
-		return new int[] { 583 };
+		return new int[] { 583, 2718 };
 	}
 }
