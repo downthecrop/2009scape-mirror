@@ -45,8 +45,7 @@ public final class EdgevilleNodePlugin extends OptionHandler {
 
     @Override
     public boolean handle(Player player, Node node, String option) {
-        int id = ((Scenery) node).getId();
-        switch (id) {
+        switch (node.getId()) {
             case 9262:
             case 9261:
             case 30806:
@@ -82,14 +81,14 @@ public final class EdgevilleNodePlugin extends OptionHandler {
             case 29319:
             case 29320: // Edgeville Dungeon wilderness entrance
                 if (option.equalsIgnoreCase("open") && player.getLocation().getY() < 9918) {
-                    Location endLocation = new Location(player.getLocation().getX(),player.getLocation().getY()+1);
-                    player.getInterfaceManager().open(new Component(382));
+                    player.getInterfaceManager().openComponent(382);
                     player.setAttribute("wildy_gate", node);
-                    player.setAttribute("wildy_gate_loc",endLocation);
+                    player.setAttribute("wildy_gate_loc",
+                            Location.create(player.getLocation().getX(),player.getLocation().getY()+1));
                 }
                 else{ // Leaving the wilderness
-                    Location endLocation = new Location(player.getLocation().getX(),player.getLocation().getY()-1);
-                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node,endLocation);
+                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node,
+                            Location.create(player.getLocation().getX(),player.getLocation().getY()-1));
                 }
         }
         return true;
