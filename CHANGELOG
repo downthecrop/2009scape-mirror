@@ -97,5 +97,9 @@
 - Can now pickpocket women in ardy (npc ID 25)
 - Can now travel on free charter boats without having money in inventory
 - Emerald and diamond bracelet enchants no longer produce noted items
-- Prevent furnace temperature from going negative and deduplicate bar handling.
-- Fix player saves for players who used coal on the conveyer belt before bf-fixes.
+- Prevent Blast Furnace temperature from going negative and deduplicate bar handling.
+- Fix player saves for players who used coal on the conveyor belt before bf-fixes.
+- Carefully revert some of the core changes introduced after Dec 15 release, this should resolve current stability issues
+- Fix incorrect message when trying to repair blast furnace without a hammer
+- Fix Pest Control bots and a number of other potential issues with various bot functionalities
+- Fix adventure bots pooling/stuck in Lumbridge after death
