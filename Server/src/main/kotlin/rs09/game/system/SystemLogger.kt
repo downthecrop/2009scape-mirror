@@ -3,7 +3,6 @@ package rs09.game.system
 import com.github.ajalt.mordant.rendering.TextColors
 import com.github.ajalt.mordant.terminal.Terminal
 import gui.GuiEvent
-import gui.ServerMonitor
 import rs09.ServerConstants
 import java.io.*
 import java.text.SimpleDateFormat
@@ -47,7 +46,6 @@ object SystemLogger {
             val msg = "${getTime()}: [INFO] $m"
             if(m.isNotBlank()) {
                 t.println(msg)
-                ServerMonitor.eventQueue.add(GuiEvent.AddDefaultMessage(msg))
             }
         }
     }
@@ -57,7 +55,6 @@ object SystemLogger {
         val msg = "${getTime()}: [ ERR] $message"
         if(message.isNotBlank()) {
             t.println(msg)
-            ServerMonitor.eventQueue.add(GuiEvent.AddDebugMessage(msg))
         }
     }
 
@@ -66,7 +63,6 @@ object SystemLogger {
         val msg = "${getTime()}: [WARN] $message"
         if(message.isNotBlank()) {
             t.println(msg)
-            ServerMonitor.eventQueue.add(GuiEvent.AddDebugMessage(msg))
         }
     }
 
@@ -75,7 +71,6 @@ object SystemLogger {
         val msg = "${getTime()}: [ALRT] $message"
         if(message.isNotBlank()) {
             t.println(msg)
-            ServerMonitor.eventQueue.add(GuiEvent.AddDebugMessage(msg))
         }
     }
 
@@ -84,7 +79,6 @@ object SystemLogger {
         val msg = "${getTime()}: [AIPL] $message"
         if(message.isNotBlank()) {
             t.println(msg)
-            ServerMonitor.eventQueue.add(GuiEvent.AddAIPMessage(msg))
         }
     }
 

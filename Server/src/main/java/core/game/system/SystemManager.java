@@ -1,7 +1,6 @@
 package core.game.system;
 
 import core.game.system.security.EncryptionManager;
-import gui.ServerMonitor;
 import rs09.game.world.GameWorld;
 
 /**
