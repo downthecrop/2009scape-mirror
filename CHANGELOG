@@ -106,3 +106,5 @@
 - Fix incorrect message when trying to repair blast furnace without a hammer - ryannathans
 - Fix Pest Control bots and a number of other potential issues with various bot functionalities - ryannathans
 - Fix adventure bots pooling/stuck in Lumbridge after death - ryannathans
+- Removed server monitor as it was blowing up in headless environments - ryannathans
+< --- ABOVE Released January 11th, 2022 https://gitlab.com/2009scape/2009scape/-/tags/Jan-11-2022 ---- >
