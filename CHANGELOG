@@ -99,3 +99,6 @@
 - Emerald and diamond bracelet enchants no longer produce noted items
 - Prevent furnace temperature from going negative and deduplicate bar handling.
 - Fix player saves for players who used coal on the conveyer belt before bf-fixes.
+- Fix Edgeville canoe -> wilderness pond.
+- Fix Edgeville Dungeon Wilderness gate getting stuck.
+- Fishing guild is able to be entered with a fishing skill boost.
