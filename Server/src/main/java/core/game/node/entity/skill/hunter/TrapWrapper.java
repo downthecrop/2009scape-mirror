@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 
@@ -99,7 +99,7 @@ public final class TrapWrapper {
 		this.type = type;
 		this.object = object;
 		this.originalId = object.getId();
-		this.ticks = World.getTicks() + (100);
+		this.ticks = GameWorld.getTicks() + (100);
 		this.object.getAttributes().setAttribute("trap-uid", player.getHunterManager().getUid());
 	}
 
@@ -202,7 +202,7 @@ public final class TrapWrapper {
 	 * @return {@code True} if o.
 	 */
 	private boolean isTimeUp() {
-		return ticks < World.getTicks();
+		return ticks < GameWorld.getTicks();
 	}
 
 	/**
@@ -331,7 +331,7 @@ public final class TrapWrapper {
 	 * @return {@code True} if so.
 	 */
 	public boolean isBusy() {
-		return getBusyTicks() > World.getTicks();
+		return getBusyTicks() > GameWorld.getTicks();
 	}
 
 	/**
@@ -347,7 +347,7 @@ public final class TrapWrapper {
 	 * @param busyTicks The busyTicks to set.
 	 */
 	public void setBusyTicks(int busyTicks) {
-		this.busyTicks = World.getTicks() + busyTicks;
+		this.busyTicks = GameWorld.getTicks() + busyTicks;
 	}
 
 	/**

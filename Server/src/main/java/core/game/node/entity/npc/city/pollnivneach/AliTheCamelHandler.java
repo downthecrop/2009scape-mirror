@@ -9,7 +9,7 @@ import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
@@ -70,7 +70,7 @@ public class AliTheCamelHandler extends OptionHandler {
                     player.lock();
                     player.animate(new Animation(7299));
                     player.getImpactHandler().setDisabledTicks(3);
-                    World.getPulser().submit(new Pulse(4, player) {
+                    GameWorld.getPulser().submit(new Pulse(4, player) {
                         @Override
                         public boolean pulse() {
                             player.unlock();

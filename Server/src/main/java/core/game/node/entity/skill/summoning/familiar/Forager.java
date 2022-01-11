@@ -3,7 +3,7 @@ package core.game.node.entity.skill.summoning.familiar;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.tools.RandomFunction;
 
 /**
@@ -51,7 +51,7 @@ public abstract class Forager extends BurdenBeast {
 	@Override
 	public void handleFamiliarTick() {
 		super.handleFamiliarTick();
-		if (items != null && items.length > 0 && passiveDelay < World.getTicks()) {
+		if (items != null && items.length > 0 && passiveDelay < GameWorld.getTicks()) {
 			if (RandomFunction.random(getRandom()) < 4) {
 				produceItem(items[RandomFunction.random(items.length)]);
 			}
@@ -103,6 +103,6 @@ public abstract class Forager extends BurdenBeast {
 	 * Sets a random passive delay.
 	 */
 	public void setRandomPassive() {
-		passiveDelay = World.getTicks() + RandomFunction.random(100, 440);
+		passiveDelay = GameWorld.getTicks() + RandomFunction.random(100, 440);
 	}
 }

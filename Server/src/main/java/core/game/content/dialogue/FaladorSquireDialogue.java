@@ -8,7 +8,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents the falador squire dialogue plugin.
@@ -521,7 +521,7 @@ public final class FaladorSquireDialogue extends DialoguePlugin {
                             }
                             break;
                         case 160:
-                            npc("I'm not a hundred percent sure the Imcando tribe", "exists anymore. I should think Reldo, the palace", "librarian in Varrock, will know; he has done a lot of", "research on the races of " + World.getSettings().getName() + ".");
+                            npc("I'm not a hundred percent sure the Imcando tribe", "exists anymore. I should think Reldo, the palace", "librarian in Varrock, will know; he has done a lot of", "research on the races of " + GameWorld.getSettings().getName() + ".");
                             stage = 161;
                             break;
                         case 161:

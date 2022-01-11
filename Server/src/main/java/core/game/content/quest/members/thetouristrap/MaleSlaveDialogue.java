@@ -6,7 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
 
@@ -257,7 +257,7 @@ public final class MaleSlaveDialogue extends DialoguePlugin {
 				case 24:
 					player.lock();
 					interpreter.sendDialogues(getIds()[0], null, true, "Oh oh!");
-					World.getPulser().submit(new Pulse(4, player) {
+					GameWorld.getPulser().submit(new Pulse(4, player) {
 						int counter;
 
 						@Override

@@ -9,7 +9,7 @@ import core.game.node.entity.combat.DeathTask;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -226,7 +226,7 @@ public final class SorceressElementalNPC extends AbstractNPC {
 	 */
 	public void sendTeleport(final Player player) {
 		player.lock();
-		World.getPulser().submit(new Pulse(1) {
+		GameWorld.getPulser().submit(new Pulse(1) {
 			int delay = 0;
 
 			@Override

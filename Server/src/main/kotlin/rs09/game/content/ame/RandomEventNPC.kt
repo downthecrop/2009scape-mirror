@@ -5,12 +5,14 @@ import core.game.interaction.MovementPulse
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.map.path.Pathfinder
 import core.game.world.update.flag.context.Graphics
 import rs09.game.content.ame.events.MysteriousOldManNPC
 import rs09.game.content.global.WeightBasedTable
+import rs09.game.world.GameWorld.Pulser
 import rs09.tools.secondsToTicks
 import kotlin.random.Random
 import kotlin.reflect.full.createInstance

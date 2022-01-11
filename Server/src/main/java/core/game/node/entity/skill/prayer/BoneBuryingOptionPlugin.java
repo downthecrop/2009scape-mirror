@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
@@ -33,10 +33,10 @@ public final class BoneBuryingOptionPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		if (player.getAttribute("delay:bury", -1) > World.getTicks()) {
+		if (player.getAttribute("delay:bury", -1) > GameWorld.getTicks()) {
 			return true;
 		}
-		player.setAttribute("delay:bury", World.getTicks() + 2);
+		player.setAttribute("delay:bury", GameWorld.getTicks() + 2);
 		final Item item = (Item) node;
 		Bones bone = Bones.forId(item.getId());
 		if (bone == null) {
@@ -59,7 +59,7 @@ public final class BoneBuryingOptionPlugin extends OptionHandler {
 		player.getPacketDispatch().sendMessage("You dig a hole in the ground...");
 		player.getAudioManager().send(SOUND);
 		final Bones bonee = bone;
-		World.getPulser().submit(new Pulse(2, player) {
+		GameWorld.getPulser().submit(new Pulse(2, player) {
 			@Override
 			public boolean pulse() {
 				player.getPacketDispatch().sendMessage("You bury the bones.");

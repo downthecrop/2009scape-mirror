@@ -1,10 +1,16 @@
 package rs09.game.content.global.worldevents.penguinhns
 
+import core.game.interaction.DestinationFlag
+import core.game.interaction.MovementPulse
+import core.game.interaction.Option
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import core.game.world.update.flag.context.Animation
+import core.plugin.Plugin
+import core.game.content.quest.PluginInteraction
+import core.game.content.quest.PluginInteractionManager
 import rs09.game.interaction.InteractionListener
 
 class PenguinSpyingHandler : InteractionListener(){
@@ -15,7 +21,7 @@ class PenguinSpyingHandler : InteractionListener(){
             if(PenguinManager.hasTagged(player, npc.location)){
                 player.sendMessage("You've already tagged this penguin.")
             } else {
-                World.submit(SpyPulse(player, npc))
+                GameWorld.submit(SpyPulse(player, npc))
             }
             return@on true
         }

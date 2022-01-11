@@ -8,7 +8,7 @@ import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 /**
  * Handles the chopping down of dense jungle, mainly to grant access to the Kharazi Jungle.
@@ -25,7 +25,7 @@ class JungleBushHandler : InteractionListener(){
         on(ids,SCENERY,"chop-down"){ player, node ->
             val toChop = node.asScenery()
             if(checkRequirement(player)){
-                World.Pulser.submit(object : Pulse(0){
+                GameWorld.Pulser.submit(object : Pulse(0){
                     var ticks = 0
                     override fun pulse(): Boolean {
                         when(ticks++){

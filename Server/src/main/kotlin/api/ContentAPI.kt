@@ -40,8 +40,8 @@ import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ItemConfigParser;
-import rs09.game.world.World
-import rs09.game.world.World.Pulser
+import rs09.game.world.GameWorld
+import rs09.game.world.GameWorld.Pulser
 import rs09.game.world.repository.Repository
 
 /**
@@ -397,7 +397,7 @@ fun hasSpaceFor(player: Player, item: Item): Boolean {
  */
 
 fun getWorldTicks(): Int {
-    return World.ticks
+    return GameWorld.ticks
 }
 
 /**
@@ -962,7 +962,7 @@ fun <A,G> visualize(entity: Entity, anim: A, gfx: G){
  */
 
 fun submitWorldPulse(pulse: Pulse){
-    World.Pulser.submit(pulse)
+    GameWorld.Pulser.submit(pulse)
 }
 
 /**

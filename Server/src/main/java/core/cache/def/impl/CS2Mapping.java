@@ -1,6 +1,7 @@
 package core.cache.def.impl;
 
 import java.io.BufferedWriter;
+import java.io.FileWriter;
 import java.nio.ByteBuffer;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -9,7 +10,7 @@ import java.util.Map;
 
 import core.cache.Cache;
 import core.cache.misc.buffer.ByteBufferUtils;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * The CS2 mapping.
@@ -63,6 +64,33 @@ public final class CS2Mapping {
 	 */
 	public CS2Mapping(int scriptId) {
 		this.scriptId = scriptId;
+	}
+
+	/**
+	 * The main method.
+	 * @param args The arguments cast on runtime.
+	 * @throws Throwable When an exception occurs.
+	 */
+	public static void main(String... args) throws Throwable {
+		GameWorld.prompt(false);
+		BufferedWriter bw = Files.newBufferedWriter(Paths.get("./cs2.txt"));
+		for (int i = 0; i < 10000; i++) {
+			CS2Mapping mapping = forId(i);
+			if (mapping == null) {
+				continue;
+			}
+			if (mapping.map == null) {
+				continue;
+			}
+			bw.append("ScriptAPI - " + i + " [");
+			for (int index : mapping.map.keySet()) {
+				bw.append(mapping.map.get(index) + ": " + index + " ");
+			}
+			bw.append("]");
+			bw.newLine();
+		}
+		bw.flush();
+		bw.close();
 	}
 
 	/**

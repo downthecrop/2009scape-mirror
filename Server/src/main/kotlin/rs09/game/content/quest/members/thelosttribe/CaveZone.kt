@@ -4,7 +4,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.player.Player
 import core.game.system.task.Pulse
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.map.zone.MapZone
 import core.game.world.map.zone.ZoneBorders
@@ -50,7 +50,7 @@ class CaveZone : MapZone("TLT Cave Zone", true), Plugin<Unit> {
     fun trigger(player: Player){
         if(RandomFunction.random(1,6) <= 2) {
             player.animator.animate(Animation(1950), Graphics(572,1,3))
-            World.Pulser.submit(object : Pulse(5) {
+            GameWorld.Pulser.submit(object : Pulse(5) {
                 override fun pulse(): Boolean {
                     player.unlock()
                     player.properties.teleportLocation = Location.create(3159, 9546, 0)

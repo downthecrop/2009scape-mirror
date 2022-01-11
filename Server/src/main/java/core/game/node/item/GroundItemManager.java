@@ -1,7 +1,7 @@
 package core.game.node.item;
 
 import core.game.node.entity.player.Player;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.chunk.ItemUpdateFlag;
@@ -153,7 +153,7 @@ public final class GroundItemManager {
 				if (!item.isRemoved()) {
 					RegionManager.getRegionPlane(item.getLocation()).remove(item);
 				}
-			} else if (!item.isRemainPrivate() && item.getDecayTime() - World.getTicks() == 100) {
+			} else if (!item.isRemainPrivate() && item.getDecayTime() - GameWorld.getTicks() == 100) {
 				RegionManager.getRegionChunk(item.getLocation()).flag(new ItemUpdateFlag(item, ItemUpdateFlag.CONSTRUCT_TYPE));
 			}
 		}

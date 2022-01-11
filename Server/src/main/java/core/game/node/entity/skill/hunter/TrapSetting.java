@@ -11,7 +11,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
@@ -253,7 +253,7 @@ public class TrapSetting {
 		npc.getWalkingQueue().reset();
 		npc.getPulseManager().clear();
 		wrapper.setTicks(wrapper.getTicks() + 4);
-		World.getPulser().submit(getCatchPulse(wrapper, node, npc, success));
+		GameWorld.getPulser().submit(getCatchPulse(wrapper, node, npc, success));
 	}
 
 	/**
@@ -287,7 +287,7 @@ public class TrapSetting {
 					handleCatch(counter, wrapper, node, npc, success);
 					if (success) {
 						int transformId = getTransformId(wrapper, node);
-						npc.setAttribute("hunter", World.getTicks() + 6);
+						npc.setAttribute("hunter", GameWorld.getTicks() + 6);
 						npc.finalizeDeath(player);
 						if (transformId != -1) {
 							wrapper.setObject(getTransformId(wrapper, node));
@@ -301,7 +301,7 @@ public class TrapSetting {
 				case 3:
 					handleCatch(counter, wrapper, node, npc, success);
 					if (success) {
-						wrapper.setTicks(World.getTicks() + 100);
+						wrapper.setTicks(GameWorld.getTicks() + 100);
 						wrapper.setReward(node);
 						wrapper.setObject(getFinalId(wrapper, node));
 						return true;

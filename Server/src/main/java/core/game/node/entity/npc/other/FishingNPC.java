@@ -2,7 +2,7 @@ package core.game.node.entity.npc.other;
 
 import core.game.node.entity.skill.fishing.FishSpots;
 import core.game.node.entity.npc.AbstractNPC;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Initializable;
@@ -54,7 +54,7 @@ public final class FishingNPC extends AbstractNPC {
 		if (spot == null) {
 			return;
 		}
-		if (switchDelay < World.getTicks()) {
+		if (switchDelay < GameWorld.getTicks()) {
 			moveSpot();
 		}
 	}
@@ -75,7 +75,7 @@ public final class FishingNPC extends AbstractNPC {
 			} else {
 				setInvisible(true);
 			}
-			switchDelay = World.getTicks() + RandomFunction.random(200, 390);
+			switchDelay = GameWorld.getTicks() + RandomFunction.random(200, 390);
 			return;
 		}
 		if (spot == FishSpots.TUTORIAL_ISLAND) {
@@ -85,7 +85,7 @@ public final class FishingNPC extends AbstractNPC {
 		if (RegionManager.getLocalNpcs(rand, 0).size() == 0) {
 			getProperties().setTeleportLocation(rand);
 		}
-		switchDelay = World.getTicks() + getRandomDelay();
+		switchDelay = GameWorld.getTicks() + getRandomDelay();
 	}
 
 	/**

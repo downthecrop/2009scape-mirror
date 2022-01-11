@@ -6,7 +6,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.agility.AgilityHandler
 import core.game.node.entity.skill.agility.AgilityShortcut
 import core.game.system.task.Pulse
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.player.FaceLocationFlag
@@ -87,7 +87,7 @@ class BasaltRockShortcut : AgilityShortcut {
     }
 
     override fun run(player: Player, obj: Scenery, option: String, failed: Boolean) {
-        World.Pulser.submit(object : Pulse(1, player) {
+        GameWorld.Pulser.submit(object : Pulse(1, player) {
             override fun pulse(): Boolean {
                 when (obj.id) {
 

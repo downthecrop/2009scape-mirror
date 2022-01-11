@@ -5,7 +5,7 @@ import core.game.system.task.Pulse
 import org.json.simple.JSONObject
 import rs09.game.node.entity.state.newsys.PlayerState
 import rs09.game.node.entity.state.newsys.State
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 @PlayerState("godcharge")
 class GodspellChargedState(player: Player? = null) : State(player) {
@@ -13,24 +13,24 @@ class GodspellChargedState(player: Player? = null) : State(player) {
     var startTick: Int = 0
 
     override fun save(root: JSONObject) {
-        root.put("ticks_elapsed", World.ticks - startTick)
+        root.put("ticks_elapsed", GameWorld.ticks - startTick)
     }
 
     override fun parse(_data: JSONObject) {
         if(_data.containsKey("ticks_elapsed")){
-            startTick = World.ticks - _data["ticks_elapsed"].toString().toInt()
+            startTick = GameWorld.ticks - _data["ticks_elapsed"].toString().toInt()
         }
     }
 
     override fun newInstance(player: Player?): State {
         var ret = GodspellChargedState(player)
-        ret.startTick = World.ticks
+        ret.startTick = GameWorld.ticks
         return ret
     }
 
     override fun createPulse() {
         player ?: return
-        if(World.ticks - startTick >= DURATION) return
+        if(GameWorld.ticks - startTick >= DURATION) return
         pulse = object : Pulse(DURATION) {
             override fun pulse(): Boolean {
                 player.sendMessage("Your magical charge fades away.")

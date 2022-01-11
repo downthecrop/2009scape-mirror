@@ -11,7 +11,7 @@ import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.content.global.worldevents.WorldEvent
 import rs09.game.system.config.GroundSpawnLoader
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import rs09.tools.secondsToTicks
 import java.util.*
@@ -77,12 +77,12 @@ class EasterEvent : WorldEvent("easter") {
             bunny.init()
         }
         easterBunny.init()
-        World.settings?.message_model = 715
-        World.settings?.message_string = "Happy Easter!"
-        World.Pulser.submit(object : Pulse(){
+        GameWorld.settings?.message_model = 715
+        GameWorld.settings?.message_string = "Happy Easter!"
+        GameWorld.Pulser.submit(object : Pulse(){
             override fun pulse(): Boolean {
                 if(delay == 1){
-                    delay = secondsToTicks(if(World.settings?.isDevMode == true) 60 else 3600)
+                    delay = secondsToTicks(if(GameWorld.settings?.isDevMode == true) 60 else 3600)
                 }
                 for(item in spawnedItems){
                     GroundItemManager.destroy(item)

@@ -9,12 +9,12 @@ import core.game.node.entity.player.info.login.Response
 import core.game.system.SystemManager
 import core.game.system.monitor.PlayerMonitor
 import core.game.system.task.Pulse
-import core.net.ms.MSPacketRepository
+import core.net.amsc.MSPacketRepository
+import core.net.amsc.ManagementServerState
+import core.net.amsc.WorldCommunicator
 import rs09.game.system.SystemLogger
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
-import rs09.net.ms.ManagementServer
-import rs09.net.ms.ManagementState
 import java.util.concurrent.TimeUnit
 import java.util.concurrent.locks.Lock
 import java.util.concurrent.locks.ReentrantLock
@@ -115,7 +115,7 @@ class LoginParser(
             return
         }
         //Repository.getPlayerNames().put(player.getName(), player);
-        World.Pulser.submit(object : Pulse(1) {
+        GameWorld.Pulser.submit(object : Pulse(1) {
             override fun pulse(): Boolean {
                 try {
                     if (details.session.isActive) {
@@ -176,7 +176,7 @@ class LoginParser(
         player.configManager.init()
         LoginConfiguration.configureGameWorld(player)
         Repository.playerNames[player.name] = player
-        World.Pulser.submit(object : Pulse(1) {
+        GameWorld.Pulser.submit(object : Pulse(1) {
             override fun pulse(): Boolean {
                 if (!Repository.players.contains(player)) {
                     Repository.players.add(player)
@@ -196,7 +196,7 @@ class LoginParser(
             SystemLogger.logWarn("LOGGED_IN_PLAYERS contains ${details.username}")
             return flag(Response.ALREADY_ONLINE)
         }
-        if (ManagementServer.state == ManagementState.CONNECTING) {
+        if (WorldCommunicator.getState() == ManagementServerState.CONNECTING) {
             return flag(Response.LOGIN_SERVER_OFFLINE)
         }
         if (!details.session.isActive) {
@@ -236,6 +236,6 @@ class LoginParser(
      * @param type The login type.
      */
     init {
-        timeStamp = World.ticks
+        timeStamp = GameWorld.ticks
     }
 }

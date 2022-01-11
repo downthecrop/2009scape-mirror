@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.MapDistance;
 import core.game.world.map.path.Pathfinder;
@@ -98,7 +98,7 @@ public class PCRavagerNPC extends AbstractNPC {
 			} else {
 				if (!target.isActive() || !session.getBarricades().contains(target)) {
 					attack(null);
-				} else if (nextAttack < World.getTicks() && getLocation().withinDistance(target.getLocation(), 1)) {
+				} else if (nextAttack < GameWorld.getTicks() && getLocation().withinDistance(target.getLocation(), 1)) {
 					getPulseManager().clear();
 					setWalks(false);
 					super.getWalkingQueue().reset();
@@ -110,7 +110,7 @@ public class PCRavagerNPC extends AbstractNPC {
 					int type = destroyed ? 22 : target.getType();
 					final Scenery o = target;
 					final Scenery newTarget = o.transform(newId, o.getRotation(), type);
-					World.getPulser().submit(new Pulse(1, this, o) {
+					GameWorld.getPulser().submit(new Pulse(1, this, o) {
 						@Override
 						public boolean pulse() {
 							if (getViewport().getRegion().isActive() && session.getBarricades().remove(o)) {
@@ -124,7 +124,7 @@ public class PCRavagerNPC extends AbstractNPC {
 					if (destroyed) {
 						attack(null);
 					}
-					nextAttack = World.getTicks() + 5;
+					nextAttack = GameWorld.getTicks() + 5;
 				}
 			}
 		} else {

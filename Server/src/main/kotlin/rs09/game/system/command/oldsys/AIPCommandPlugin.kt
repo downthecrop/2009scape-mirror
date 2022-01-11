@@ -9,7 +9,7 @@ import core.game.node.entity.skill.Skills
 import rs09.game.system.command.CommandPlugin
 import core.game.system.command.CommandSet
 import core.game.system.task.Pulse
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import rs09.game.world.ImmerseWorld
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
@@ -119,7 +119,7 @@ class AIPCommandPlugin : CommandPlugin() {
                             player.communication.clan.clanWar.fireEvent("join", aip)
                         }
                     }
-                    World.Pulser.submit(object : Pulse(1) {
+                    GameWorld.Pulser.submit(object : Pulse(1) {
                         override fun pulse(): Boolean {
                             aip.follow(l)
                             return true

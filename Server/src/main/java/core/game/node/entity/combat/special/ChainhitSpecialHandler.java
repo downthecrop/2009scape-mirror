@@ -18,7 +18,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import rs09.game.node.entity.combat.handlers.RangeSwingHandler;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 
 import java.util.Iterator;
@@ -87,7 +87,7 @@ public final class ChainhitSpecialHandler extends RangeSwingHandler implements P
 					int speed = (int) (32 + (victim.getLocation().getDistance(n.getLocation()) * 5));
 					Projectile.create(victim, n, 258, 40, 36, 32, speed, 5, 11).send();
 					n.getSkills().heal(100);
-					World.getPulser().submit(new Pulse(3) {
+					GameWorld.getPulser().submit(new Pulse(3) {
 
 						@Override
 						public boolean pulse() {
@@ -128,7 +128,7 @@ public final class ChainhitSpecialHandler extends RangeSwingHandler implements P
 	 * @param state The battle state.
 	 */
 	public void handleHit(final Entity entity, final Entity victim, final Player player, final BattleState state) {
-		World.getPulser().submit(new Pulse(1, player, victim) {
+		GameWorld.getPulser().submit(new Pulse(1, player, victim) {
 			@Override
 			public boolean pulse() {
 				ChainhitSpecialHandler.super.onImpact(player, victim, state);
@@ -150,7 +150,7 @@ public final class ChainhitSpecialHandler extends RangeSwingHandler implements P
 				double distance = victim.getLocation().getDistance(e.getLocation());
 				int speed = (int) (32 + (distance * 5));
 				Projectile.create(victim, e, 258, 40, 36, 32, speed, 5, 11).send();
-				World.getPulser().submit(new Pulse((int) (distance / 3), entity, victim, e) {
+				GameWorld.getPulser().submit(new Pulse((int) (distance / 3), entity, victim, e) {
 					@Override
 					public boolean pulse() {
 						BattleState bs = new BattleState(entity, e);

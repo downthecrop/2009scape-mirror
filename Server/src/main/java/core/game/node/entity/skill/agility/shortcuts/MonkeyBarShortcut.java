@@ -10,7 +10,7 @@ import core.game.node.scenery.Scenery;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -75,7 +75,7 @@ public class MonkeyBarShortcut extends AgilityShortcut {
 		final Direction dir = direct;
 		ForceMovement.run(player, start.transform(dir), start.transform(dir.getStepX() << 1, dir.getStepY() << 1, 0), Animation.create(742), Animation.create(744));
 		player.addExtension(LogoutTask.class, new LocationLogoutTask(5, start));
-		World.getPulser().submit(new Pulse(2, player) {
+		GameWorld.getPulser().submit(new Pulse(2, player) {
 			int count;
 			boolean failed;
 

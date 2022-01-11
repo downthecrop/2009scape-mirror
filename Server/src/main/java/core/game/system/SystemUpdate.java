@@ -3,7 +3,7 @@ package core.game.system;
 import rs09.ServerConstants;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 
 import java.util.Iterator;
@@ -76,9 +76,9 @@ public final class SystemUpdate extends Pulse {
 	public void schedule() {
 		super.setTicksPassed(0);
 		super.start();
-		if (World.getClock().getStarted()) {
+		if (GameWorld.getMajorUpdateWorker().getStarted()) {
 			notifyPlayers();
-			World.getPulser().submit(this);
+			GameWorld.getPulser().submit(this);
 			return;
 		}
 		Executors.newSingleThreadExecutor().submit(new Runnable() {

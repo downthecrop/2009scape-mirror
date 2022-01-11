@@ -13,7 +13,7 @@ import core.game.system.task.LogoutTask
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 /**
  * Handles the gnome stronghold agility course.
@@ -80,11 +80,11 @@ class GnomeStrongholdCourse
 					sendMessage(player, "You can't do that from here.")
                     return true
                 }
-                if (USED_PIPES[index] > World.ticks) {
+                if (USED_PIPES[index] > GameWorld.ticks) {
 					sendMessage(player, "The pipe is being used.")
                     return true
                 }
-                USED_PIPES[index] = World.ticks + 10
+                USED_PIPES[index] = GameWorld.ticks + 10
 
                 player.lock()
                 //Animations and force walking

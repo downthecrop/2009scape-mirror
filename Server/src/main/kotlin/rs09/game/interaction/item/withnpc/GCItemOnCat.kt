@@ -8,7 +8,7 @@ import core.game.world.map.path.Pathfinder
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
-import rs09.game.world.World.Pulser
+import rs09.game.world.GameWorld.Pulser
 
 class GCItemOnCat : InteractionListener() {
     override fun defineListeners() {

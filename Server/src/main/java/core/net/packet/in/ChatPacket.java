@@ -3,10 +3,11 @@ package core.net.packet.in;
 import core.game.node.entity.player.Player;
 import core.game.system.monitor.PlayerMonitor;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.ChatMessage;
 import core.game.world.update.flag.player.ChatFlag;
-import core.net.ms.MSPacketRepository;
+import core.net.amsc.MSPacketRepository;
+import core.net.amsc.WorldCommunicator;
 import core.net.packet.IncomingPacket;
 import core.net.packet.IoBuffer;
 import core.tools.StringUtils;
@@ -32,12 +33,16 @@ public class ChatPacket implements IncomingPacket {
 				sb.append(" => ").append(player.getName()).append(" (owned by ").append(player.getCommunication().getClan().getOwner()).append(")");
 				String m = sb.toString();
 				player.getMonitor().log(m.replace(m.charAt(0), ' ').trim(), PlayerMonitor.CLAN_CHAT_LOG);
-				MSPacketRepository.sendClanMessage(player, message.substring(1));
+				if (WorldCommunicator.isEnabled()) {
+					MSPacketRepository.sendClanMessage(player, message.substring(1));
+				} else {
+					player.getCommunication().getClan().message(player, message.substring(1));
+				}
 				return;
 			}
 			player.getMonitor().log(message, PlayerMonitor.PUBLIC_CHAT_LOG);
 			ChatMessage ctx = new ChatMessage(player, message, effects, numChars);
-			World.getPulser().submit(new Pulse(0, player) {
+			GameWorld.getPulser().submit(new Pulse(0, player) {
 				@Override
 				public boolean pulse() {
 					player.getUpdateMasks().register(new ChatFlag(ctx));

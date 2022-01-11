@@ -3,7 +3,7 @@ package core.game.content.dialogue;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.game.world.map.Location;
 
@@ -132,7 +132,7 @@ public class SorcceresDialouge extends DialoguePlugin {
 	public void tele() {
 		npc.sendChat("Be gone intruder!");
 		player.lock();
-		World.getPulser().submit(new Pulse(2, player) {
+		GameWorld.getPulser().submit(new Pulse(2, player) {
 			@Override
 			public boolean pulse() {
 				player.unlock();

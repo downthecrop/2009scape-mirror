@@ -12,7 +12,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.MapDistance;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
@@ -101,7 +101,7 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 	 * @param target The target.
 	 */
 	public static boolean castSpell(final Player p, SpellBook book, int spellId, Node target) {
-		if (p.getAttribute("magic-delay", 0) > World.getTicks()) {
+		if (p.getAttribute("magic-delay", 0) > GameWorld.getTicks()) {
 			return false;
 		}
 		MagicSpell spell = book.getSpell(spellId);
@@ -130,8 +130,8 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 			if (!combatSpell) {
 				p.getSkills().addExperience(Skills.MAGIC, spell.getExperience(p), true);
 			}
-			if (p.getAttribute("magic-delay", 0) <= World.getTicks()) {
-				p.setAttribute("magic-delay", World.getTicks() + spell.getDelay());
+			if (p.getAttribute("magic-delay", 0) <= GameWorld.getTicks()) {
+				p.setAttribute("magic-delay", GameWorld.getTicks() + spell.getDelay());
 			}
 			return true;
 		}
@@ -213,7 +213,7 @@ public abstract class MagicSpell implements Plugin<SpellType> {
 			}
 		}
 		if((spellId == 12 || spellId == 30 || spellId == 56) && caster instanceof Player){
-			if (caster.getAttribute("entangleDelay", 0) > World.getTicks()) {
+			if (caster.getAttribute("entangleDelay", 0) > GameWorld.getTicks()) {
 				caster.asPlayer().sendMessage("You have recently cast a binding spell.");
 				return false;
 			}

@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Initializable;
@@ -59,7 +59,7 @@ public class SpellbookSwapSpell extends MagicSpell {
 		player.getDialogueInterpreter().open(3264731);
 		final int id = RandomFunction.random(1, 500000);
 		player.setAttribute("spell:swap", id);
-		World.getPulser().submit(new Pulse(20, player) {
+		GameWorld.getPulser().submit(new Pulse(20, player) {
 			@Override
 			public boolean pulse() {
 				if (player.getAttribute("spell:swap", 0) == id) {

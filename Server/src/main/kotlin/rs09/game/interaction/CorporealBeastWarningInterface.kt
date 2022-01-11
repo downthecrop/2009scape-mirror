@@ -2,7 +2,7 @@ package rs09.game.interaction
 
 import core.game.component.Component
 import core.game.node.entity.player.Player
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 /**
  * Handles the corporeal beast warning interface
@@ -14,9 +14,9 @@ class CorporealBeastWarningInterface : InterfaceListener(){
 
     override fun defineListeners() {
         on(COMPONENT_ID,17){player,component,_,_,_,_ ->
-            if(player.getAttribute("corp-beast-cave-delay",0) <= World.ticks) {
+            if(player.getAttribute("corp-beast-cave-delay",0) <= GameWorld.ticks) {
                 player.properties.teleportLocation = player.location.transform(4, 0, 0).also { close(player,component) }
-                player.setAttribute("corp-beast-cave-delay",World.ticks + 5)
+                player.setAttribute("corp-beast-cave-delay",GameWorld.ticks + 5)
             } else {
                 close(player,component)
             }

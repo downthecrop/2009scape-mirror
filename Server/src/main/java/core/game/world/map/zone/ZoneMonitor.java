@@ -248,7 +248,7 @@ public final class ZoneMonitor {
 	 * @return {@code True} if the entity successfully left all regions.
 	 */
 	public boolean clear() {
-		for (RegionZone z : zones.toArray(new RegionZone[]{})) {
+		for (RegionZone z : zones) {
 			if (!z.getZone().leave(entity, true)) {
 				return false;
 			}

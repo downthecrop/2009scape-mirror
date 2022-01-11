@@ -13,7 +13,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.IronmanMode;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.path.Pathfinder;
 import core.game.interaction.inter.SawmillPlankInterface.Plank;
@@ -481,7 +481,7 @@ public class HouseServantDialogue extends DialoguePlugin {
 					manager.getServant().setItem(new Item(plank.getPlank().getId(), amt));
 					servant.setInvisible(true);
 					servant.getLocks().lockMovement(100);
-					World.getPulser().submit(new Pulse((int) (type.getTimer() / 0.6)){
+					GameWorld.getPulser().submit(new Pulse((int) (type.getTimer() / 0.6)){
 
 						@Override
 						public boolean pulse() {
@@ -519,7 +519,7 @@ public class HouseServantDialogue extends DialoguePlugin {
 		end();
 		servant.setInvisible(true);
 		servant.getLocks().lockMovement(100);
-		World.getPulser().submit(new Pulse((int) (type.getTimer() / 0.6)) {
+		GameWorld.getPulser().submit(new Pulse((int) (type.getTimer() / 0.6)) {
 
 			@Override
 			public boolean pulse() {

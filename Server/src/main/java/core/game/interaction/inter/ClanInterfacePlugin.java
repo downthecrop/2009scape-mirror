@@ -1,17 +1,21 @@
 package core.game.interaction.inter;
 
-import static api.ContentAPIKt.*;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.RunScript;
 import core.game.system.communication.ClanRank;
 import core.game.system.communication.ClanRepository;
-import core.net.ms.MSPacketRepository;
+import core.net.amsc.MSPacketRepository;
+import core.net.amsc.WorldCommunicator;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.StringUtils;
 import kotlin.Unit;
+
+import static api.ContentAPIKt.sendInputDialogue;
+import static api.ContentAPIKt.setInterfaceText;
 
 /**
  * Represents the plugin used to handle the clan interfaces.
@@ -86,14 +90,28 @@ public final class ClanInterfacePlugin extends ComponentPlugin {
 					clan.setName("Chat disabled");
 					player.getCommunication().setClanName("");
 					player.getPacketDispatch().sendString(clan.getName(), 590, 22);
-					MSPacketRepository.sendClanRename(player, "");
+					if (WorldCommunicator.isEnabled()) {
+						MSPacketRepository.sendClanRename(player, "");
+						break;
+					}
+					clan.clean(true);
 					break;
 				default:
 					sendInputDialogue(player, false, "Enter clan prefix:", (value) -> {
 						String name = StringUtils.formatDisplayName((String) value);
 						setInterfaceText(player, name, 590, 22);
-						MSPacketRepository.sendClanRename(player, name);
+						if(WorldCommunicator.isEnabled()){
+							MSPacketRepository.sendClanRename(player, name);
+							clan.setName(name);
+							return Unit.INSTANCE;
+						}
+						if (clan.getName().equals("Chat disabled")) {
+							player.getPacketDispatch().sendMessage("Your clan channel has now been enabled!");
+							player.getPacketDispatch().sendMessage("Join your channel by clicking 'Join Chat' and typing: " + player.getUsername());
+						}
 						clan.setName(name);
+						player.getCommunication().setClanName(name);
+						clan.update();
 						return Unit.INSTANCE;
 					});
 					break;

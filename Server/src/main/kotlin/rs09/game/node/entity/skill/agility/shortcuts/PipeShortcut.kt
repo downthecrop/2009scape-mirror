@@ -6,7 +6,7 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.agility.AgilityHandler
 import core.game.node.entity.skill.agility.AgilityShortcut
 import core.game.system.task.Pulse
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
@@ -66,7 +66,7 @@ class PipeShortcut : AgilityShortcut {
         /**
          * Pulse that starts the object interaction when clicked on one of these shortcuts
          */
-        World.Pulser.submit(object : Pulse(1, player) {
+        GameWorld.Pulser.submit(object : Pulse(1, player) {
             override fun pulse(): Boolean {
                 when (obj.id) {
 

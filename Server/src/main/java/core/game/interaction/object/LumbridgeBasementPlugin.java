@@ -13,7 +13,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.path.Pathfinder;
@@ -91,7 +91,7 @@ public class LumbridgeBasementPlugin extends OptionHandler {
 			final Location first = f;
 			final Location second = s;
 			player.lock();
-			World.getPulser().submit(new Pulse(2, player) {
+			GameWorld.getPulser().submit(new Pulse(2, player) {
 				int counter = 1;
 
 				@Override
@@ -240,7 +240,7 @@ public class LumbridgeBasementPlugin extends OptionHandler {
 		@Override
 		public void handleTickActions() {
 			if (!getLocks().isMovementLocked()) {
-				if (isWalks() && !getPulseManager().hasPulseRunning() && nextWalk < World.getTicks()) {
+				if (isWalks() && !getPulseManager().hasPulseRunning() && nextWalk < GameWorld.getTicks()) {
 					setNextWalk();
 					Location l = getLocation().transform(-5 + RandomFunction.random(getWalkRadius()), -5 + RandomFunction.random(getWalkRadius()), 0);
 					if (canMove(l)) {

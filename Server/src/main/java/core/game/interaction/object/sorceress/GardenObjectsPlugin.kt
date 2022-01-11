@@ -1,12 +1,17 @@
 package core.game.interaction.`object`.sorceress
 
+import rs09.plugin.PluginManager.definePlugin
+import rs09.game.world.GameWorld.Pulser
 import core.plugin.Initializable
+import core.game.interaction.OptionHandler
 import core.plugin.Plugin
+import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
+import core.game.node.Node
 import core.game.node.scenery.Scenery
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -24,7 +29,7 @@ import core.net.packet.context.MinimapStateContext
 import core.net.packet.out.MinimapState
 import core.tools.RandomFunction
 import rs09.game.interaction.InteractionListener
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import rs09.plugin.PluginManager
 
 
@@ -49,7 +54,7 @@ class GardenObjectsPlugin : InteractionListener() {
                 player.animate(PICK_FRUIT)
                 player.skills.addExperience(Skills.THIEVING, def.exp, true)
                 player.skills.addExperience(Skills.FARMING, def.farmExp, true)
-                World.Pulser.submit(object : Pulse(2, player) {
+                GameWorld.Pulser.submit(object : Pulse(2, player) {
                     var counter = 0
                     override fun pulse(): Boolean {
                         if (counter == 1) {
@@ -77,7 +82,7 @@ class GardenObjectsPlugin : InteractionListener() {
 
         on(FOUNTAIN, SCENERY, "drink-from"){player, _ ->
             player.lock()
-            World.Pulser.submit(object : Pulse(1, player) {
+            GameWorld.Pulser.submit(object : Pulse(1, player) {
                 var counter = 0
                 override fun pulse(): Boolean {
                     when (counter++) {
@@ -135,7 +140,7 @@ class GardenObjectsPlugin : InteractionListener() {
         player.addExtension(LogoutTask::class.java, LocationLogoutTask(99, herbDef.respawn))
         player.animate(ANIMATION)
         player.skills.addExperience(Skills.FARMING, herbDef.exp, true)
-        World.Pulser.submit(object : Pulse(2, player) {
+        GameWorld.Pulser.submit(object : Pulse(2, player) {
             var counter = 0
             override fun pulse(): Boolean {
                 if (counter == 1) {

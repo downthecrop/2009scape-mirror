@@ -14,7 +14,7 @@ import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.RegionZone;
 import core.game.world.map.zone.ZoneBorders;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles a dark area.
@@ -48,7 +48,7 @@ public final class DarkZone extends MapZone {
 					return false;
 				}
 			};
-			World.getPulser().submit(pulse);
+			GameWorld.getPulser().submit(pulse);
 			player.addExtension(DarkZone.class, pulse);
 			super.open(player);
 		}

@@ -7,7 +7,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -57,7 +57,7 @@ public final class HamHideoutPlugin extends OptionHandler {
 				} else {
 					player.getConfigManager().set(346, 272731282);
 					ClimbActionHandler.climb(player, new Animation(827), new Location(3149, 9652, 0));
-					World.getPulser().submit(new Pulse(2, player) {
+					GameWorld.getPulser().submit(new Pulse(2, player) {
 						@Override
 						public boolean pulse() {
 							player.getConfigManager().set(174, 0);
@@ -80,7 +80,7 @@ public final class HamHideoutPlugin extends OptionHandler {
 				player.lock(3);
 				player.animate(ANIMATION);
 				player.getPacketDispatch().sendMessage("You attempt to pick the lock on the trap door.");
-				World.getPulser().submit(new Pulse(2, player) {
+				GameWorld.getPulser().submit(new Pulse(2, player) {
 					@Override
 					public boolean pulse() {
 						player.animate(ANIMATION);
@@ -90,7 +90,7 @@ public final class HamHideoutPlugin extends OptionHandler {
 						player.unlock();
 						if (success) {
 							player.getConfigManager().set(174, 1 << 14);
-							World.getPulser().submit(new Pulse(40, player) {
+							GameWorld.getPulser().submit(new Pulse(40, player) {
 								@Override
 								public boolean pulse() {
 									player.getConfigManager().set(174, 0);

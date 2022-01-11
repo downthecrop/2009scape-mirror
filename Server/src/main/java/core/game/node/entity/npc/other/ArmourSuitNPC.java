@@ -4,7 +4,7 @@ import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.game.world.map.Location;
 
@@ -36,7 +36,7 @@ public final class ArmourSuitNPC extends AbstractNPC {
 	public void init() {
 		super.init();
 		super.setRespawn(false);
-		World.getPulser().submit(new Pulse(50, this) {
+		GameWorld.getPulser().submit(new Pulse(50, this) {
 			@Override
 			public boolean pulse() {
 				if (!getProperties().getCombatPulse().isAttacking() && !inCombat()) {

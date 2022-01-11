@@ -3,9 +3,10 @@ package rs09.game.content.quest.members.thefremenniktrials
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.info.PlayerDetails
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
@@ -72,7 +73,7 @@ class ManniDialogue(player: Player? = null) : DialoguePlugin(player){
                     2 -> {player("No, I don't think I am.");stage = 1000}
                   }
             103 -> {npc("As you wish outerlander; I will drink first, then you will","drink.");stage++}
-            104 -> {World.submit(DrinkingPulse(player,curNPC,player?.getAttribute("fremtrials:keg-mixed",false))); end()}
+            104 -> {GameWorld.submit(DrinkingPulse(player,curNPC,player?.getAttribute("fremtrials:keg-mixed",false))); end()}
 
             1000 -> end()
         }

@@ -3,7 +3,7 @@ package core.game.node.entity.npc.other;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
@@ -60,17 +60,17 @@ public final class LumberKittenNPC extends AbstractNPC {
 
 	@Override
 	public void tick() {
-		if (nextSpeak < World.getTicks()) {
+		if (nextSpeak < GameWorld.getTicks()) {
 			hidden = false;
-			nextSpeak = World.getTicks() + RandomFunction.random(10, 40);
-			hideDelay = World.getTicks() + 4;
+			nextSpeak = GameWorld.getTicks() + RandomFunction.random(10, 40);
+			hideDelay = GameWorld.getTicks() + 4;
 			sendChat("Mew!");
 		}
-		if (hideDelay < World.getTicks()) {
+		if (hideDelay < GameWorld.getTicks()) {
 			hidden = true;
 			int rand = RandomFunction.random(20, 40);
-			hideDelay = World.getTicks() + rand;
-			nextSpeak = World.getTicks() + rand;
+			hideDelay = GameWorld.getTicks() + rand;
+			nextSpeak = GameWorld.getTicks() + rand;
 		}
 		super.tick();
 	}

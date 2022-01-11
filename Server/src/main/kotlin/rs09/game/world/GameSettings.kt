@@ -9,7 +9,7 @@ import java.util.*
  * Represents the game settings used for this game instance.
  * @author Vexia
  */
-class WorldSettings
+class GameSettings
 /**
  * Constructs a new `GameSettings` `Object`.
  * @param name the name.
@@ -112,7 +112,7 @@ class WorldSettings
          * @return the settings object.
          * @author Ceikry
          */
-        fun parse(data: JSONObject): WorldSettings? {
+        fun parse(data: JSONObject): GameSettings? {
             val name = ServerConstants.SERVER_NAME
             val debug = data["debug"] as Boolean
             val dev = data["dev"] as Boolean
@@ -135,7 +135,7 @@ class WorldSettings
             val allow_token_purchase = data["allow_token_purchase"] as Boolean
             val message_of_the_week_identifier = data["message_of_the_week_identifier"].toString().toInt()
             val message_of_the_week_text = data["message_of_the_week_text"].toString()
-            return WorldSettings(
+            return GameSettings(
                     name,
                     debug,
                     dev,

@@ -92,13 +92,17 @@
 - Corrected special attack for the enhanced excalibur
 - Corrected damage calculations for Ruby Bolts (e) special effect
 < --- ABOVE Released January 1st, 2022 https://gitlab.com/2009scape/2009scape/-/tags/Jan-1-2022 ---- >
-- Set magic dart base xp to 30 (authenticity fix)
-- Removed range strength and prayer bonus from god armour (authenticity fix)
-- Can now pickpocket women in ardy (npc ID 25)
-- Can now travel on free charter boats without having money in inventory
-- Emerald and diamond bracelet enchants no longer produce noted items
-- Prevent furnace temperature from going negative and deduplicate bar handling.
-- Fix player saves for players who used coal on the conveyer belt before bf-fixes.
-- Fix Edgeville canoe -> wilderness pond.
-- Fix Edgeville Dungeon Wilderness gate getting stuck.
-- Fishing guild is able to be entered with a fishing skill boost.
+- Set magic dart base xp to 30 (authenticity fix) - ryannathans
+- Removed range strength and prayer bonus from god armour (authenticity fix) - ryannathans
+- Can now pickpocket women in ardy (npc ID 25) - ryannathans
+- Can now travel on free charter boats without having money in inventory - ryannathans
+- Emerald and diamond bracelet enchants no longer produce noted items - ryannathans
+- Prevent Blast Furnace temperature from going negative and deduplicate bar handling - aweinstock
+- Fix player saves for players who used coal on the conveyor belt before bf-fixes - aweinstock
+- Fix Edgeville canoe -> wilderness pond - downthecrop
+- Fix Edgeville Dungeon Wilderness gate getting stuck - downthecrop
+- Fishing guild is able to be entered with a fishing skill boost - downthecrop
+- Carefully revert some of the core changes introduced after Dec 15 release, this should resolve current stability issues - ceikry/ryannathans
+- Fix incorrect message when trying to repair blast furnace without a hammer - ryannathans
+- Fix Pest Control bots and a number of other potential issues with various bot functionalities - ryannathans
+- Fix adventure bots pooling/stuck in Lumbridge after death - ryannathans

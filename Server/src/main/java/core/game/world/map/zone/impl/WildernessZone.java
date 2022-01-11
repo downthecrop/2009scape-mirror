@@ -27,7 +27,7 @@ import core.game.world.map.zone.ZoneRestriction;
 import core.tools.RandomFunction;
 import org.rs09.consts.NPCs;
 import rs09.game.system.config.NPCConfigParser;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 
 import java.util.ArrayList;
@@ -155,7 +155,7 @@ public final class WildernessZone extends MapZone {
 				player.removeAttribute("combat-time");
 				player.getPrayer().reset();
 				player.getAppearance().sync();
-				if (World.isEconomyWorld() && !player.getSavedData().getGlobalData().isDeathScreenDisabled()) {
+				if (GameWorld.isEconomyWorld() && !player.getSavedData().getGlobalData().isDeathScreenDisabled()) {
 					player.getInterfaceManager().open(new Component(153));
 				}
 				if (!player.getSavedData().getGlobalData().isDeathScreenDisabled()) {
@@ -197,7 +197,7 @@ public final class WildernessZone extends MapZone {
 				if (((NPC) e).getTask() != null && ((Player) killer).getSlayer().getTask() == e.asNpc().getTask()) {
 					((Player) killer).getSlayer().finalizeDeath(killer.asPlayer(), e.asNpc());
 				}
-				e.asNpc().setRespawnTick(World.getTicks() + e.asNpc().getDefinition().getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));
+				e.asNpc().setRespawnTick(GameWorld.getTicks() + e.asNpc().getDefinition().getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));
 				if (!e.asNpc().isRespawn()) {
 					e.asNpc().clear();
 				}
@@ -305,7 +305,7 @@ public final class WildernessZone extends MapZone {
 		p.getInterfaceManager().openWildernessOverlay(new Component(381));
 		p.getSkullManager().setLevel(getWilderness(p));
 		p.getPacketDispatch().sendString("Level: " + p.getSkullManager().getLevel(), 381, 1);
-		if(World.getSettings().getWild_pvp_enabled()) {
+		if(GameWorld.getSettings().getWild_pvp_enabled()) {
 			p.getInteraction().set(Option._P_ATTACK);
 		}
 		p.getSkullManager().setWilderness(true);
