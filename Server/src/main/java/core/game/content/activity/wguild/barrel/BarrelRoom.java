@@ -15,7 +15,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
@@ -118,7 +118,7 @@ public final class BarrelRoom extends MapZone implements Plugin<Object> {
 				lock.lock();
 				player.getLocks().setEquipmentLock(lock);
 				player.getPacketDispatch().sendMessage("You pick up the keg and balance it on your head carefully.");
-				World.getPulser().submit(new Pulse(3, player) {
+				GameWorld.getPulser().submit(new Pulse(3, player) {
 					@Override
 					public boolean pulse() {
 						player.getEquipment().replace(new Item(barrelId), EquipmentContainer.SLOT_HAT);
@@ -133,7 +133,7 @@ public final class BarrelRoom extends MapZone implements Plugin<Object> {
 							if (!pulse.isRunning()) {
 								pulse.restart();
 								pulse.start();
-								World.getPulser().submit(pulse);
+								GameWorld.getPulser().submit(pulse);
 							}
 						}
 						return true;

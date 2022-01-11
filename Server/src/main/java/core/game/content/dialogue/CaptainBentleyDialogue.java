@@ -4,7 +4,7 @@ import core.game.component.Component;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.MinimapStateContext;
@@ -79,7 +79,7 @@ public class CaptainBentleyDialogue extends DialoguePlugin {
 	 */
 	private void travel(final Player player, final Location location) {
 		player.lock();
-		World.getPulser().submit(new Pulse(1, player) {
+		GameWorld.getPulser().submit(new Pulse(1, player) {
 			int counter;
 
 			@Override

@@ -15,7 +15,7 @@ import org.rs09.consts.Items
 import rs09.game.ai.AIRepository.Companion.getItems
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.GroundSpawnLoader
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 /**
  * A class used to handle the picking up of ground items.
@@ -38,7 +38,7 @@ object PickupHandler {
             player.packetDispatch.sendMessage("Too late!")
             return true
         }
-        if (player.getAttribute("droppedItem:" + item.id, 0) > World.ticks) { //Splinter
+        if (player.getAttribute("droppedItem:" + item.id, 0) > GameWorld.ticks) { //Splinter
             SystemLogger.logAlert("$player tried to do the drop & quick pick-up Ground Item dupe.")
             return true
         }

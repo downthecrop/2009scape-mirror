@@ -17,7 +17,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
@@ -70,7 +70,7 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 			public boolean handle(final Player player, Node node, String option) {
 				lock(player, 30);
 				AgilityHandler.forceWalk(player, -1, player.getLocation(), player.getLocation().transform(0, -6, 0), Animation.create(6723), 10, 0.0, null);
-				World.getPulser().submit(new Pulse(1, player) {
+				GameWorld.getPulser().submit(new Pulse(1, player) {
 					int count;
 
 					@Override
@@ -133,7 +133,7 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 		player.removeAttribute("canClose");
 		player.lock(14);
 		player.getImpactHandler().setDisabledTicks(14);
-		World.getPulser().submit(new Pulse(1) {
+		GameWorld.getPulser().submit(new Pulse(1) {
 			int count = 0;
 
 			@Override
@@ -214,7 +214,7 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 	 */
 	private void removeSkeleton(final Scenery object, final NPC spawn) {
 		SceneryBuilder.remove(object);
-		World.getPulser().submit(new Pulse(200) {
+		GameWorld.getPulser().submit(new Pulse(200) {
 			@Override
 			public boolean pulse() {
 				if (spawn != null && spawn.isActive()) {

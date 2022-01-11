@@ -8,7 +8,7 @@ import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
@@ -80,7 +80,7 @@ public class MountedGloryPlugin extends OptionHandler {
 		player.visualize(ANIMATION, GRAPHICS);
 		player.getAudioManager().send(200);		
 		player.getImpactHandler().setDisabledTicks(4);
-		World.getPulser().submit(new Pulse(4, player) {
+		GameWorld.getPulser().submit(new Pulse(4, player) {
 			@Override
 			public boolean pulse() {
 				player.unlock();

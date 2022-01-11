@@ -13,7 +13,7 @@ import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
@@ -55,7 +55,7 @@ public final class VoidFamiliarNPC implements Plugin<Object> {
 	public boolean callToArms(Familiar familiar, FamiliarSpecial special) {
 		final Player owner = familiar.getOwner();
 		owner.lock();
-		World.getPulser().submit(new Pulse(1, owner) {
+		GameWorld.getPulser().submit(new Pulse(1, owner) {
 			int counter;
 
 			@Override
@@ -195,9 +195,9 @@ public final class VoidFamiliarNPC implements Plugin<Object> {
 		@Override
 		public void handleFamiliarTick() {
 			super.handleFamiliarTick();
-			if (healDelay < World.getTicks()) {
+			if (healDelay < GameWorld.getTicks()) {
 				getSkills().heal(1);
-				healDelay = World.getTicks() + 25;
+				healDelay = GameWorld.getTicks() + 25;
 			}
 		}
 

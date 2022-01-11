@@ -16,7 +16,7 @@ import rs09.ServerStore.getInt
 import rs09.ServerStore.getString
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import rs09.tools.END_DIALOGUE
 
 class TrickOrTreatHandler : InteractionListener() {
@@ -48,7 +48,7 @@ class TrickOrTreatHandler : InteractionListener() {
                             stage = END_DIALOGUE
                         }
 
-                        10 -> npcl(FacialExpression.EVIL_LAUGH, "I CHOOSE TRICK!").also { player.lock(); World.submit(object : Pulse() {
+                        10 -> npcl(FacialExpression.EVIL_LAUGH, "I CHOOSE TRICK!").also { player.lock(); GameWorld.submit(object : Pulse() {
                             var counter = 0
                             override fun pulse(): Boolean {
                                 //gfx 1898

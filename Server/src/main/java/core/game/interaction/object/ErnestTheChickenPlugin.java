@@ -13,7 +13,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBuilder;
@@ -131,7 +131,7 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
 			final boolean up = isUp(lever);
 			levers[lever.ordinal()] = !up;
 			player.animate(!up ? UP_ANIMATION : DOWN_ANIMATION);
-			World.getPulser().submit(new Pulse(1) {
+			GameWorld.getPulser().submit(new Pulse(1) {
 				@Override
 				public boolean pulse() {
 					updateConfigs();
@@ -156,7 +156,7 @@ public final class ErnestTheChickenPlugin extends OptionHandler {
 		 */
 		public final void walk(final Scenery object) {
 			player.lock(4);
-			World.getPulser().submit(new Pulse(1, player, object) {
+			GameWorld.getPulser().submit(new Pulse(1, player, object) {
 				@Override
 				public boolean pulse() {
 					Point p = (Point) getWalkData()[0];

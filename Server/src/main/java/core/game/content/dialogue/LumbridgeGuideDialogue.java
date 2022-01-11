@@ -6,9 +6,9 @@ import core.game.node.entity.player.info.Rights;
 import core.game.node.entity.player.link.IronmanMode;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.world.map.zone.impl.ModeratorZone;
-import core.net.ms.MSPacketRepository;
+import core.net.amsc.MSPacketRepository;
 import core.plugin.Initializable;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -149,7 +149,7 @@ public final class LumbridgeGuideDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 100:
-			npc("First I must warn you to take every precaution to", "keep your " + World.getSettings().getName() + " password and PIN secure. The", "most important thing to remember is to never give your", "password to, or share you account with, anyone.");
+			npc("First I must warn you to take every precaution to", "keep your " + GameWorld.getSettings().getName() + " password and PIN secure. The", "most important thing to remember is to never give your", "password to, or share you account with, anyone.");
 			stage = 101;
 			break;
 		case 101:

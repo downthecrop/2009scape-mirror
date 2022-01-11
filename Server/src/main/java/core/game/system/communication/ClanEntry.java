@@ -1,7 +1,7 @@
 package core.game.system.communication;
 
 import core.game.node.entity.player.Player;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents a player in a clan chat.
@@ -31,7 +31,7 @@ public class ClanEntry {
 	public ClanEntry(Player player) {
 		this.player = player;
 		this.name = player.getName();
-		this.worldId = World.getSettings().getWorldId();
+		this.worldId = GameWorld.getSettings().getWorldId();
 	}
 
 	/**

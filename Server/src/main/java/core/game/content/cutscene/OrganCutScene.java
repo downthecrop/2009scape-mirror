@@ -7,7 +7,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;
@@ -50,7 +50,7 @@ public final class OrganCutScene extends CutscenePlugin {
 		PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.POSITION, player.getLocation().getX() + 2, player.getLocation().getY() - 7, 405, 1, 100));
 		PacketRepository.send(CameraViewPacket.class, new CameraContext(player, CameraType.ROTATION, player.getLocation().getX() + 1, player.getLocation().getY(), 405, 1, 100));
 		player.lock();
-		World.getPulser().submit(new Pulse(3) {
+		GameWorld.getPulser().submit(new Pulse(3) {
 			@Override
 			public boolean pulse() {
 				player.getPacketDispatch().sendSceneryAnimation(RegionManager.getObject(base.transform(42, 14, 0)), new Animation(9841));
@@ -59,7 +59,7 @@ public final class OrganCutScene extends CutscenePlugin {
 				return true;
 			}
 		});
-		World.getPulser().submit(new Pulse(30) {
+		GameWorld.getPulser().submit(new Pulse(30) {
 			@Override
 			public boolean pulse() {
 				unpause();

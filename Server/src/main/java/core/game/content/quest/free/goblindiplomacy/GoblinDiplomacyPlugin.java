@@ -10,7 +10,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.plugin.Plugin;
 import rs09.plugin.PluginManager;
 import core.tools.StringUtils;
@@ -59,8 +59,8 @@ public final class GoblinDiplomacyPlugin extends OptionHandler {
 		case 16557:
 		case 16561:
 		case 16560:
-			if (player.getAttribute("crate:" + id, 0) < World.getTicks()) {
-				player.setAttribute("crate:" + id, World.getTicks() + 500);
+			if (player.getAttribute("crate:" + id, 0) < GameWorld.getTicks()) {
+				player.setAttribute("crate:" + id, GameWorld.getTicks() + 500);
 				if (!player.getInventory().add(GOBLIN_MAIL)) {
 					GroundItemManager.create(GOBLIN_MAIL, player);
 				}

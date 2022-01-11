@@ -1,6 +1,6 @@
 package core.game.node.entity.lock;
 
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents a lock.
@@ -43,7 +43,7 @@ public class Lock {
 	 * Locks for an indefinite time.
 	 */
 	public void lock() {
-		lock(Integer.MAX_VALUE - World.getTicks());
+		lock(Integer.MAX_VALUE - GameWorld.getTicks());
 	}
 
 	/**
@@ -51,8 +51,8 @@ public class Lock {
 	 * @param ticks The amount of ticks to lock for.
 	 */
 	public void lock(int ticks) {
-		if (ticks > expiration - World.getTicks()) {
-			this.expiration = World.getTicks() + ticks;
+		if (ticks > expiration - GameWorld.getTicks()) {
+			this.expiration = GameWorld.getTicks() + ticks;
 		}
 	}
 
@@ -68,7 +68,7 @@ public class Lock {
 	 * @return {@code True} if so.
 	 */
 	public boolean isLocked() {
-		return expiration > World.getTicks();
+		return expiration > GameWorld.getTicks();
 	}
 
 	/**

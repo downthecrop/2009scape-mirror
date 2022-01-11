@@ -31,7 +31,7 @@ import core.net.packet.out.MinimapState;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import rs09.game.content.activity.barrows.RewardChest;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import rs09.plugin.PluginManager;
 
 /**
@@ -153,7 +153,7 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 			if (!PULSE.isRunning()) {
 				PULSE.restart();
 				PULSE.start();
-				World.getPulser().submit(PULSE);
+				GameWorld.getPulser().submit(PULSE);
 			}
 		} else {
 			((NPC) e).setAggressive(true);

@@ -10,7 +10,7 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -92,7 +92,7 @@ public class KaramjaGrapple extends OptionHandler {
                 }
 
                 player.lock();
-                World.getPulser().submit(new Pulse(1, player) {
+                GameWorld.getPulser().submit(new Pulse(1, player) {
                     int counter = 1;
                     Component tab;
 

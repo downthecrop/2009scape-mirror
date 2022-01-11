@@ -321,40 +321,60 @@ class BlastFurnaceListeners : InteractionListener() {
 
         /**The sequel to Limp Bizkits hit single, "Fix shit"*/
 
-        on(brokenPotPipe,SCENERY,"repair"){ player, node ->
-            if(inInventory(player,Items.HAMMER_2347,1) && player.getSkills().getLevel(Skills.CRAFTING) >= 30){
-                rewardXP(player,Skills.CRAFTING, 50.0)
-                BlastFurnace.potPipeBroken = false
+        on(brokenPotPipe,SCENERY,"repair"){ player, _ ->
+            if(player.getSkills().getLevel(Skills.CRAFTING) >= 30){
+                if(inInventory(player,Items.HAMMER_2347,1)) {
+                    rewardXP(player, Skills.CRAFTING, 50.0)
+                    BlastFurnace.potPipeBroken = false
+                }
+                else {
+                    sendMessage(player, "I need a hammer to do this!")
+                }
             }else{
                 sendDialogue(player,"I need 30 Craft in order to do this")
             }
             return@on true
         }
 
-        on(brokenPumpPipe,SCENERY, "repair"){ player, node ->
-            if(inInventory(player,Items.HAMMER_2347,1) && player.getSkills().getLevel(Skills.CRAFTING) >= 30){
-                rewardXP(player,Skills.CRAFTING, 50.0)
-                BlastFurnace.pumpPipeBroken = false
+        on(brokenPumpPipe,SCENERY, "repair"){ player, _ ->
+            if(player.getSkills().getLevel(Skills.CRAFTING) >= 30){
+                if(inInventory(player,Items.HAMMER_2347,1)) {
+                    rewardXP(player, Skills.CRAFTING, 50.0)
+                    BlastFurnace.pumpPipeBroken = false
+                }
+                else {
+                    sendMessage(player, "I need a hammer to do this!")
+                }
             }else{
                 sendDialogue(player,"I need 30 Craft in order to do this")
             }
             return@on true
         }
 
-        on(brokenBelt,SCENERY,"repair"){ player, node ->
-            if(inInventory(player,Items.HAMMER_2347,1) && player.getSkills().getLevel(Skills.CRAFTING) >= 30){
-                rewardXP(player,Skills.CRAFTING, 50.0)
-                BlastFurnace.beltBroken = false
+        on(brokenBelt,SCENERY,"repair"){ player, _ ->
+            if(player.getSkills().getLevel(Skills.CRAFTING) >= 30){
+                if(inInventory(player,Items.HAMMER_2347,1)) {
+                    rewardXP(player, Skills.CRAFTING, 50.0)
+                    BlastFurnace.beltBroken = false
+                }
+                else {
+                    sendMessage(player, "I need a hammer to do this!")
+                }
             }else{
                 sendDialogue(player,"I need 30 Craft in order to do this")
             }
             return@on true
         }
 
-        on(brokenCog,SCENERY,"repair"){ player, node ->
-            if(inInventory(player,Items.HAMMER_2347,1) && player.getSkills().getLevel(Skills.CRAFTING) >= 30){
-                rewardXP(player,Skills.CRAFTING, 50.0)
-                BlastFurnace.cogBroken = false
+        on(brokenCog,SCENERY,"repair"){ player, _ ->
+            if(player.getSkills().getLevel(Skills.CRAFTING) >= 30){
+                if(inInventory(player,Items.HAMMER_2347,1)) {
+                    rewardXP(player, Skills.CRAFTING, 50.0)
+                    BlastFurnace.cogBroken = false
+                }
+                else {
+                    sendMessage(player, "I need a hammer to do this!")
+                }
             }else{
                 sendDialogue(player,"I need 30 Craft in order to do this")
             }

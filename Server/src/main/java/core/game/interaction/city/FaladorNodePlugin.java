@@ -16,7 +16,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -94,7 +94,7 @@ public final class FaladorNodePlugin extends OptionHandler {
 				}
 			};
 			movement.run(player, 8);
-			World.getPulser().submit(new Pulse(7, player) {
+			GameWorld.getPulser().submit(new Pulse(7, player) {
 
 				@Override
 				public boolean pulse() {

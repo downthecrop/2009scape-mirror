@@ -8,7 +8,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.state.EntityState;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
@@ -106,7 +106,7 @@ public final class DarkEnergyCoreNPC extends AbstractNPC {
 	private void jump(final Location location) {
 		setInvisible(true);
 		Projectile.create(getLocation(), location, 1828, 0, 0, 0, 60, 20, 0).send();
-		World.getPulser().submit(new Pulse(2, this) {
+		GameWorld.getPulser().submit(new Pulse(2, this) {
 			@Override
 			public boolean pulse() {
 				getProperties().setTeleportLocation(location);

@@ -3,7 +3,7 @@ package core.game.content.activity.magearena;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the lundail dialogue.
@@ -73,7 +73,7 @@ public final class LundailDialogue extends DialoguePlugin {
 			end();
 			break;
 		case 20:
-			npc("That, my friend is the mage battle arena. Top mages", "come from all over " + World.getSettings().getName() + " to compete in the arena.");
+			npc("That, my friend is the mage battle arena. Top mages", "come from all over " + GameWorld.getSettings().getName() + " to compete in the arena.");
 			stage++;
 			break;
 		case 21:

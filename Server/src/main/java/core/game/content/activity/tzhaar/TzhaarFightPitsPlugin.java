@@ -24,7 +24,7 @@ import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.zone.ZoneBorders;
@@ -279,7 +279,7 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 	public void configure() {
 		register(new ZoneBorders(2368, 5120, 2420, 5176));
 		PULSE.start();
-		World.getPulser().submit(PULSE);
+		GameWorld.getPulser().submit(PULSE);
 	}
 
 	@Override
@@ -329,7 +329,7 @@ public final class TzhaarFightPitsPlugin extends ActivityPlugin {
 					}
 				};
 				p.setAttribute("fp_pulse", pl);
-				World.getPulser().submit(pl);
+				GameWorld.getPulser().submit(pl);
 			}
 			break;
 		}

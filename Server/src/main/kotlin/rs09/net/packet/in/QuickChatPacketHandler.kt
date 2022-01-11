@@ -5,7 +5,7 @@ import core.net.packet.IncomingPacket
 import core.net.packet.IoBuffer
 import rs09.game.interaction.QCRepository
 import rs09.game.system.SystemLogger
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 /**
  * Decodes the quick chat packet
@@ -56,7 +56,7 @@ class QuickChatPacketHandler : IncomingPacket {
 
         //Prints the values of each byte in the buffer to server log
         //If the world is in dev mode
-        if(World.settings?.isDevMode == true) {
+        if(GameWorld.settings?.isDevMode == true) {
             SystemLogger.logInfo("Begin QuickChat Packet Buffer Dump---------")
             SystemLogger.logInfo("Packet Type: ${packetType.name} Chat Type: ${if(forClan) "Clan" else "Public"}")
             x?.array()?.forEach {

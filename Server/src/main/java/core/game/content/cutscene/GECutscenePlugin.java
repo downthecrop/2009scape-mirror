@@ -11,7 +11,7 @@ import core.game.ge.GEGuidePrice;
 import core.game.ge.GEGuidePrice.GuideType;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.CameraContext;
@@ -222,7 +222,7 @@ public final class GECutscenePlugin extends CutscenePlugin {
 			case 100:
 				close();
 				camera(player, 3149, 3470, 1, 1, 870, 10);
-				World.getPulser().submit(new Pulse(16, player) {
+				GameWorld.getPulser().submit(new Pulse(16, player) {
 					@Override
 					public boolean pulse() {
 						npc("Welcome, my friend to the Grand Exchange! From", "here you can simply tell us what you want to buy or", "sell and for how much, and we'll pair you up with", "another player and make the trade!");
@@ -450,7 +450,7 @@ public final class GECutscenePlugin extends CutscenePlugin {
 				stage = 252;
 				break;
 			case 252:
-				npc("So, in the end, I decided why not make this a " + World.getSettings().getName() + "-", "wide phenomenon? Make it public and allow anyone to join", "in. Up to this point, it catered for people buying and selling", "large quantities, but I knew it would work on a smaller");
+				npc("So, in the end, I decided why not make this a " + GameWorld.getSettings().getName() + "-", "wide phenomenon? Make it public and allow anyone to join", "in. Up to this point, it catered for people buying and selling", "large quantities, but I knew it would work on a smaller");
 				stage = 253;
 				break;
 			case 253:
@@ -458,7 +458,7 @@ public final class GECutscenePlugin extends CutscenePlugin {
 				stage = 254;
 				break;
 			case 254:
-				npc("And I was also in for a bit of luck. You see, one of the", "initial patrons had deep connections to the banks of", "" + World.getSettings().getName() + ". Together, I think you'll agree we have a most", "friendly system.");
+				npc("And I was also in for a bit of luck. You see, one of the", "initial patrons had deep connections to the banks of", "" + GameWorld.getSettings().getName() + ". Together, I think you'll agree we have a most", "friendly system.");
 				stage = 255;
 				break;
 			case 255:
@@ -543,7 +543,7 @@ public final class GECutscenePlugin extends CutscenePlugin {
 				case 13:
 					player.getInterfaceManager().close();
 					player.setAttribute("ge-stage", 5);
-					player.getDialogueInterpreter().sendDialogues(6522, null, "<col=8A0808>Step 5</col>: When the trade is complete, we will let you", "know with a message and you can pick up your", "winnings by talking to the clerks or by visiting any", "banker in " + World.getSettings().getName() + ".");
+					player.getDialogueInterpreter().sendDialogues(6522, null, "<col=8A0808>Step 5</col>: When the trade is complete, we will let you", "know with a message and you can pick up your", "winnings by talking to the clerks or by visiting any", "banker in " + GameWorld.getSettings().getName() + ".");
 					break;
 				}
 				break;

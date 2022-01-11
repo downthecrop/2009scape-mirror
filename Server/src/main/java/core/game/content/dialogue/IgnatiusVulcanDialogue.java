@@ -8,7 +8,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
@@ -233,9 +233,9 @@ public final class IgnatiusVulcanDialogue extends DialoguePlugin {
 
 		@Override
 		public void tick() {
-			if (lastFire < World.getTicks()) {
+			if (lastFire < GameWorld.getTicks()) {
 				createFire(this, getLocation());
-				lastFire = World.getTicks() + RandomFunction.random(50, 200);
+				lastFire = GameWorld.getTicks() + RandomFunction.random(50, 200);
 			}
 			super.tick();
 		}

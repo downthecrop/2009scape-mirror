@@ -15,7 +15,7 @@ import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.node.item.Item;
 import core.game.system.task.NodeTask;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 
 /**
@@ -41,7 +41,7 @@ public final class DeathTask extends NodeTask {
 		Entity e = (Entity) node;
 		e.getWalkingQueue().reset();
 		e.setAttribute("state:death", true);
-		e.setAttribute("tick:death", World.getTicks());
+		e.setAttribute("tick:death", GameWorld.getTicks());
 		e.lock(50);
 		e.face(null);
 		Entity killer = n.length > 0 ? (Entity) n[0] : e;
@@ -77,7 +77,7 @@ public final class DeathTask extends NodeTask {
 				TutorialStage.load(((Player) node), 55, false);
 			}
 		}
-		return e.getAttribute("tick:death", -1) <= World.getTicks() - ticks;
+		return e.getAttribute("tick:death", -1) <= GameWorld.getTicks() - ticks;
 	}
 
 	@Override

@@ -10,7 +10,7 @@ import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
@@ -34,7 +34,7 @@ public class TutorialItemHandler extends UseWithHandler {
 		final Player player = event.getPlayer();
 		if (player.getInventory().containItems(438, 436)) {
 			player.animate(new Animation(833));
-			World.getPulser().submit(new Pulse(2) {
+			GameWorld.getPulser().submit(new Pulse(2) {
 				@Override
 				public boolean pulse() {
 					player.getInventory().remove(new Item(438, 1));

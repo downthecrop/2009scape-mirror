@@ -6,7 +6,7 @@ import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.MovementHook;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -53,7 +53,7 @@ public final class MovingBlockNPC extends AbstractNPC {
 	@Override
 	public void tick() {
 		super.tick();
-		if (nextMove < World.getTicks() && nextMove != -1) {
+		if (nextMove < GameWorld.getTicks() && nextMove != -1) {
 			Direction dir = getId() == 3124 ? Direction.EAST : Direction.NORTH;
 			Location loc = getLocation().transform(dir, 2);
 			getWalkingQueue().reset();
@@ -62,7 +62,7 @@ public final class MovingBlockNPC extends AbstractNPC {
 				checkBlock(p);
 			}
 			moving = true;
-			World.getPulser().submit(new Pulse(1, this) {
+			GameWorld.getPulser().submit(new Pulse(1, this) {
 				int counter;
 
 				@Override
@@ -76,7 +76,7 @@ public final class MovingBlockNPC extends AbstractNPC {
 					case 3:
 						getWalkingQueue().reset();
 						getWalkingQueue().addPath(getProperties().getSpawnLocation().getX(), getProperties().getSpawnLocation().getY());
-						nextMove = World.getTicks() + 13;
+						nextMove = GameWorld.getTicks() + 13;
 						break;
 					case 5:
 						moving = false;
@@ -108,13 +108,13 @@ public final class MovingBlockNPC extends AbstractNPC {
 	 * @param player the player.
 	 */
 	public void checkBlock(final Player player) {
-		if (player.getAttribute("block-move", -1) > World.getTicks()) {
+		if (player.getAttribute("block-move", -1) > GameWorld.getTicks()) {
 			return;
 		}
 		Location[] locs = getTileLocations();
 		for (int i = 0; i < 4; i++) {
 			if (locs[i].equals(player.getLocation())) {
-				World.getPulser().submit(new Pulse(1, player) {
+				GameWorld.getPulser().submit(new Pulse(1, player) {
 					@Override
 					public boolean pulse() {
 						boolean close = getProperties().getSpawnLocation().getDistance(player.getLocation()) > (getId() == 3124 ? 2 : 2.3);
@@ -133,7 +133,7 @@ public final class MovingBlockNPC extends AbstractNPC {
 							}
 						}
 						player.lock(4);
-						player.setAttribute("block-move", World.getTicks() + 4);
+						player.setAttribute("block-move", GameWorld.getTicks() + 4);
 						if(dest != null) {
 							AgilityHandler.failWalk(player, close ? 1 : 3, player.getLocation(), dest, AgilityPyramidCourse.transformLevel(dest), Animation.create(3066), 10, 8, null, getId() == 3124 ? Direction.WEST : Direction.SOUTH);
 						}

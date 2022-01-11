@@ -6,7 +6,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
 import core.plugin.Initializable;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Represents the dialogue used to handle the Pricne Ali NPC.
@@ -106,7 +106,7 @@ public class PrinceAliDialogue extends DialoguePlugin {
 		case 4:
 			// NPC 921 start dialogue.921
 			npc.transform(921);
-			World.getPulser().submit(new Pulse(50) {
+			GameWorld.getPulser().submit(new Pulse(50) {
 				@Override
 				public boolean pulse() {
 					npc.transform(920);
@@ -122,7 +122,7 @@ public class PrinceAliDialogue extends DialoguePlugin {
 			break;
 		case 6:
 			npc.setInvisible(true);
-			World.getPulser().submit(new Pulse(20) {
+			GameWorld.getPulser().submit(new Pulse(20) {
 				@Override
 				public boolean pulse() {
 					npc.transform(920);

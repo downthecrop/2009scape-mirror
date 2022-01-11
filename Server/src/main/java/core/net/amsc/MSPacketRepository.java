@@ -1,4 +1,4 @@
-package core.net.ms;
+package core.net.amsc;
 
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.PlayerDetails;
@@ -18,9 +18,8 @@ import core.net.packet.out.ContactPackets;
 import core.net.packet.out.UpdateClanChat;
 import rs09.game.node.entity.player.info.login.LoginParser;
 import rs09.game.system.SystemLogger;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
-import rs09.net.ms.ManagementServer;
 
 import java.nio.ByteBuffer;
 
@@ -38,7 +37,7 @@ public final class MSPacketRepository {
 		IoBuffer buffer = new IoBuffer(14, PacketHeader.BYTE);
 		buffer.putString(player.getName());
 		buffer.put(Rights.getChatIcon(player));
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 		player.getAppearance().sync();
 	}
 
@@ -58,7 +57,7 @@ public final class MSPacketRepository {
 		buffer.putString(d.getSerial());
 		buffer.putInt(d.getRights().toInteger());
 		buffer.put((byte) getIcon(d));
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -67,9 +66,12 @@ public final class MSPacketRepository {
 	 * @param username The name of the player to remove.
 	 */
 	public static void sendPlayerRemoval(String username) {
+		if (!WorldCommunicator.isEnabled()) {
+			return;
+		}
 		IoBuffer buffer = new IoBuffer(1, PacketHeader.BYTE);
 		buffer.putString(username);
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -88,7 +90,7 @@ public final class MSPacketRepository {
 		buffer.putString(name);
 		buffer.putLong(duration);
 		buffer.putString(player.getName());
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -99,7 +101,7 @@ public final class MSPacketRepository {
 	public static void requestCommunicationInfo(String username) {
 		IoBuffer buffer = new IoBuffer(3, PacketHeader.BYTE);
 		buffer.putString(username);
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -121,7 +123,7 @@ public final class MSPacketRepository {
 		} else {
 			buffer.put((byte) (remove ? 1 : 0));
 		}
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -137,7 +139,7 @@ public final class MSPacketRepository {
 		IoBuffer buffer = new IoBuffer(6, PacketHeader.BYTE);
 		buffer.putString(player.getName());
 		buffer.putString(name);
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -150,7 +152,7 @@ public final class MSPacketRepository {
 		IoBuffer buffer = new IoBuffer(7, PacketHeader.BYTE);
 		buffer.putString(player.getName());
 		buffer.putString(clanName);
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -161,13 +163,16 @@ public final class MSPacketRepository {
 	 * @param rank   The rank to set.
 	 */
 	public static void setClanSetting(Player player, int type, ClanRank rank) {
+		if (!WorldCommunicator.isEnabled()) {
+			return;
+		}
 		IoBuffer buffer = new IoBuffer(8, PacketHeader.BYTE);
 		buffer.putString(player.getName());
 		buffer.put((byte) type);
 		if (rank != null) {
 			buffer.put((byte) rank.ordinal());
 		}
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -180,7 +185,7 @@ public final class MSPacketRepository {
 		IoBuffer buffer = new IoBuffer(9, PacketHeader.BYTE);
 		buffer.putString(username);
 		buffer.putString(name);
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -193,7 +198,7 @@ public final class MSPacketRepository {
 		IoBuffer buffer = new IoBuffer(10, PacketHeader.BYTE);
 		buffer.putString(player.getName());
 		buffer.putString(message);
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -208,7 +213,7 @@ public final class MSPacketRepository {
 		buffer.putString(player.getName());
 		buffer.putString(name);
 		buffer.putString(message);
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -219,7 +224,7 @@ public final class MSPacketRepository {
 	public static void requestClanInfo(String name) {
 		IoBuffer buffer = new IoBuffer(12, PacketHeader.BYTE);
 		buffer.putString(name);
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -236,7 +241,7 @@ public final class MSPacketRepository {
 		buffer.put(publicSetting);
 		buffer.put(privateSetting);
 		buffer.put(tradeSetting);
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -298,7 +303,7 @@ public final class MSPacketRepository {
 	private static void handleRegistryResponse(IoBuffer buffer) {
 		String username = buffer.getString();
 		int opcode = buffer.get() & 0xFF;
-		LoginParser parser = ManagementServer.finishLoginAttempt(username);
+		LoginParser parser = WorldCommunicator.finishLoginAttempt(username);
 		if (parser != null) {
 			PlayerDetails details = parser.getDetails();
 			Response response = Response.get(opcode);
@@ -341,7 +346,7 @@ public final class MSPacketRepository {
 	public static void sendWorldMessage(String message) {
 		IoBuffer buffer = new IoBuffer(12, PacketHeader.BYTE);
 		buffer.putString(message);
-		ManagementServer.session.write(buffer);
+		WorldCommunicator.getSession().write(buffer);
 	}
 
 	/**
@@ -493,7 +498,7 @@ public final class MSPacketRepository {
 			int worldId = buffer.get() & 0xFF;
 			clan.getRanks().put(name, ClanRank.values()[buffer.get() & 0xFF]);
 			ClanEntry entry = new ClanEntry(name, worldId);
-			if (worldId == World.getSettings().getWorldId()) {
+			if (worldId == GameWorld.getSettings().getWorldId()) {
 				Player player = Repository.getPlayerByName(name);
 				entry.setPlayer(player);
 				if (player != null) {

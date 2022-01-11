@@ -8,7 +8,7 @@ import core.game.node.item.Item;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 
 /**
@@ -200,7 +200,7 @@ public final class JarvaldDialogue extends DialoguePlugin {
 		player.lock();
 		player.getInterfaceManager().open(new Component(224));
 		player.addExtension(LogoutTask.class, new LocationLogoutTask(5, to ? Location.create(2544, 3759, 0) : Location.create(2620, 3685, 0)));
-		World.getPulser().submit(new Pulse(1, player) {
+		GameWorld.getPulser().submit(new Pulse(1, player) {
 			int count;
 
 			@Override

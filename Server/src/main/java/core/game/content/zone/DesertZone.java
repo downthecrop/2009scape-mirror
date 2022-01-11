@@ -10,7 +10,7 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
@@ -58,7 +58,7 @@ public final class DesertZone extends MapZone implements Plugin<Object> {
                 if (player.getInterfaceManager().isOpened() || player.getInterfaceManager().hasChatbox() || player.getLocks().isMovementLocked()) {
                     continue;
                 }
-                if (player.getAttribute("desert-delay", -1) < World.getTicks()) {
+                if (player.getAttribute("desert-delay", -1) < GameWorld.getTicks()) {
                     effect(player);
                 }
             }
@@ -71,7 +71,7 @@ public final class DesertZone extends MapZone implements Plugin<Object> {
      * @param p the <code>Player</code>.
      */
     private static void effect(Player p) {
-        p.setAttribute("desert-delay", World.getTicks() + getDelay(p));
+        p.setAttribute("desert-delay", GameWorld.getTicks() + getDelay(p));
         evaporate(p);
         if (drink(p)) {
             return;
@@ -181,12 +181,12 @@ public final class DesertZone extends MapZone implements Plugin<Object> {
             if (TutorialSession.getExtension(p).getStage() < TutorialSession.MAX_STAGE) {
                 return true;
             }
-            p.setAttribute("desert-delay", World.getTicks() + getDelay(p));
+            p.setAttribute("desert-delay", GameWorld.getTicks() + getDelay(p));
             PLAYERS.add(p);
             if (!pulse.isRunning()) {
                 pulse.restart();
                 pulse.start();
-                World.getPulser().submit(pulse);
+                GameWorld.getPulser().submit(pulse);
             }
         }
         return true;

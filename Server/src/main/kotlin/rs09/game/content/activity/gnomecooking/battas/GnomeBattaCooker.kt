@@ -10,7 +10,7 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs09.consts.Items
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 /**
  * Handles cook options for battas
@@ -43,7 +43,7 @@ class GnomeBattaCooker : UseWithHandler(Items.RAW_BATTA_2250,9478,9480,9482,9483
     }
 
     fun cook(player: Player, raw: Item, product: Item){
-        World.Pulser.submit(object : Pulse(){
+        GameWorld.Pulser.submit(object : Pulse(){
             var counter = 0
             override fun pulse(): Boolean {
                 when(counter++){

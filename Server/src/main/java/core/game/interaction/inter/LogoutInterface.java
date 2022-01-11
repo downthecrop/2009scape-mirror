@@ -4,7 +4,7 @@ import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
 import core.game.node.entity.player.Player;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 
@@ -31,9 +31,9 @@ public final class LogoutInterface extends ComponentPlugin {
 			player.getPacketDispatch().sendMessage("You can't log out until 10 seconds after the end of combat.");
 			return true;
 		}
-		if (player.getAttribute("logoutDelay", 0) < World.getTicks()) {
+		if (player.getAttribute("logoutDelay", 0) < GameWorld.getTicks()) {
 			player.getPacketDispatch().sendLogout();
-			player.setAttribute("logoutDelay", World.getTicks() + 3);
+			player.setAttribute("logoutDelay", GameWorld.getTicks() + 3);
 		}
 		return true;
 	}

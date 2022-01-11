@@ -9,7 +9,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.scenery.Scenery;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -47,7 +47,7 @@ public class PrinceAliRescuePlugin extends OptionHandler {
 				DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
 				break;
 			case 50:
-				if (player.getAttribute("keli-gone", 0) > World.getTicks()) {
+				if (player.getAttribute("keli-gone", 0) > GameWorld.getTicks()) {
 					if (player.getInventory().contains(2418, 1)) {
 						player.getPacketDispatch().sendMessage("You unlock the door.");
 						DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);

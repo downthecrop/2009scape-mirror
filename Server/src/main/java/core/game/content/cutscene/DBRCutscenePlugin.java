@@ -22,7 +22,7 @@ import core.game.node.item.ItemPlugin;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -209,7 +209,7 @@ public final class DBRCutscenePlugin extends CutscenePlugin {
 	@Override
 	public void open() {
 		setNpcs();
-		World.getPulser().submit(recordingPulse);
+		GameWorld.getPulser().submit(recordingPulse);
 		player.lock();
 		player.getLocks().lockMovement(10000000);
 		camera(27, 45, -14, 2, 700, 100);
@@ -459,7 +459,7 @@ public final class DBRCutscenePlugin extends CutscenePlugin {
 	 * Method used to clear all the npcs.
 	 */
 	private void clearNpcs() {
-		World.getPulser().submit(new Pulse(5) {
+		GameWorld.getPulser().submit(new Pulse(5) {
 			@Override
 			public boolean pulse() {
 				for (NPC n : region.getPlanes()[0].getNpcs()) {

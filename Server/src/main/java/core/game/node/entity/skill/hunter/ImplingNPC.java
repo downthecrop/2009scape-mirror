@@ -12,7 +12,7 @@ import core.game.world.map.path.Pathfinder;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
 import rs09.game.system.config.NPCConfigParser;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles an impling npc.
@@ -56,7 +56,7 @@ public final class ImplingNPC extends AbstractNPC {
 	@Override
 	public void handleTickActions() {
 		if (!getLocks().isMovementLocked()) {
-			if (isWalks() && !getPulseManager().hasPulseRunning() && nextWalk < World.getTicks()) {
+			if (isWalks() && !getPulseManager().hasPulseRunning() && nextWalk < GameWorld.getTicks()) {
 				setNextWalk();
 				Location l = getLocation().transform(-5 + RandomFunction.random(getWalkRadius()), -5 + RandomFunction.random(getWalkRadius()), 0);
 				if (canMove(l)) {
@@ -68,10 +68,10 @@ public final class ImplingNPC extends AbstractNPC {
 			sendChat("Tee hee!");
 		}
 		int nextTeleport = getAttribute("nextTeleport", -1);
-		if (nextTeleport > -1 && World.getTicks() > nextTeleport) {
-			setAttribute("nextTeleport", World.getTicks() + 600);
+		if (nextTeleport > -1 && GameWorld.getTicks() > nextTeleport) {
+			setAttribute("nextTeleport", GameWorld.getTicks() + 600);
 			graphics(new Graphics(590));
-			World.getPulser().submit(new Pulse(1) {
+			GameWorld.getPulser().submit(new Pulse(1) {
 				@Override
 				public boolean pulse() {
 					teleport(ImpetuousImpulses.LOCATIONS[RandomFunction.random(ImpetuousImpulses.LOCATIONS.length)]);

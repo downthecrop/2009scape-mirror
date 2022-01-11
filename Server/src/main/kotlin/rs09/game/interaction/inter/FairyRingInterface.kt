@@ -11,7 +11,7 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.tools.RandomFunction
 import rs09.game.interaction.InterfaceListener
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 val RING_1 = arrayOf('a','d','c','b')
 val RING_2 = arrayOf('i','l','k','j')
@@ -123,7 +123,7 @@ class FairyRingInterface : InterfaceListener(){
             if (!RegionManager.isTeleportPermitted(tile) || RegionManager.getObject(tile) != null) {
                 tile = Location.create(2412, 4431, 0)
             }
-            World.Pulser.submit(object : Pulse(4, player) {
+            GameWorld.Pulser.submit(object : Pulse(4, player) {
                 override fun pulse(): Boolean {
                     sendPlayerDialogue(player, "Wow, fairy magic sure is useful, I hardly moved at all!", FacialExpression.AMAZED)
                     return true

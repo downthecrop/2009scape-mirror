@@ -8,7 +8,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import rs09.plugin.PluginManager;
@@ -293,8 +293,8 @@ public final class DesertGuardDialogue extends DialoguePlugin {
 
 		@Override
 		public void tick() {
-			if (lastCheck < World.getTicks()) {
-				lastCheck = World.getTicks() + RandomFunction.random(50, 150);
+			if (lastCheck < GameWorld.getTicks()) {
+				lastCheck = GameWorld.getTicks() + RandomFunction.random(50, 150);
 				if (!inCombat()) {
 					warn();
 				}
@@ -308,16 +308,16 @@ public final class DesertGuardDialogue extends DialoguePlugin {
 		private void warn() {
 			final List<Player> players = RegionManager.getLocalPlayers(this);
 			for (final Player player : players) {
-				if (player.getAttribute("guard-warning", 0) > World.getTicks() || !player.getZoneMonitor().isInZone("mining camp") || player.inCombat() || !player.getLocation().withinDistance(this.getLocation(), 8)) {
+				if (player.getAttribute("guard-warning", 0) > GameWorld.getTicks() || !player.getZoneMonitor().isInZone("mining camp") || player.inCombat() || !player.getLocation().withinDistance(this.getLocation(), 8)) {
 					continue;
 				}
 				if (TouristTrap.inJail(player)) {
 					continue;
 				}
 				if (!TouristTrap.hasSlaveClothes(player)) {
-					player.setAttribute("guard-warning", World.getTicks() + 300);
+					player.setAttribute("guard-warning", GameWorld.getTicks() + 300);
 					player.lock();
-					World.getPulser().submit(new Pulse(1, this, player) {
+					GameWorld.getPulser().submit(new Pulse(1, this, player) {
 						int count;
 
 						@Override

@@ -15,7 +15,7 @@ import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
@@ -295,7 +295,7 @@ public class TelekineticZone extends MTAZone {
 			return;
 		}
 		player.lock();
-		World.getPulser().submit(new Pulse(1, player) {
+		GameWorld.getPulser().submit(new Pulse(1, player) {
 			boolean win = false;
 
 			@Override

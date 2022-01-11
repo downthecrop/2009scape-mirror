@@ -4,7 +4,7 @@ import core.cache.def.impl.SceneryDefinition;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.plugin.Plugin;
 
 public class ScoreboardHandler extends OptionHandler {
@@ -13,7 +13,7 @@ public class ScoreboardHandler extends OptionHandler {
     @Override
     public boolean handle(Player player, Node node, String option) {
         ScoreboardManager.getEntries().forEach(e -> {
-            player.getPacketDispatch().sendString("" + Math.floor(((World.getTicks() - e.time) / 0.6) / 60) + " minutes ago",ifaceid,index + 6);
+            player.getPacketDispatch().sendString("" + Math.floor(((GameWorld.getTicks() - e.time) / 0.6) / 60) + " minutes ago",ifaceid,index + 6);
             player.getPacketDispatch().sendString(e.playerName,ifaceid,index + 11);
             index++;
         });

@@ -8,6 +8,7 @@ import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.entity.player.link.grave.GraveType
 import core.game.node.entity.player.link.music.MusicEntry
+import core.game.node.entity.skill.slayer.SlayerEquipmentFlags
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.simple.JSONArray
@@ -17,7 +18,7 @@ import rs09.ServerConstants
 import rs09.game.node.entity.skill.farming.CompostBins
 import rs09.game.node.entity.skill.farming.FarmingPatch
 import rs09.game.system.SystemLogger
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import java.io.FileReader
 import java.util.*
 import core.game.node.item.Item;
@@ -391,8 +392,8 @@ class PlayerSaveParser(val player: Player) {
         player.skills.parse(skillData)
         player.skills.experienceGained = saveFile!!["totalEXP"].toString().toDouble()
         player.skills.experienceMutiplier = saveFile!!["exp_multiplier"].toString().toDouble()
-        if (World.settings?.default_xp_rate != 5.0) {
-            player.skills.experienceMutiplier = World.settings?.default_xp_rate!!
+        if (GameWorld.settings?.default_xp_rate != 5.0) {
+            player.skills.experienceMutiplier = GameWorld.settings?.default_xp_rate!!
         }
         val divisor: Double
         if(player.skills.experienceMutiplier >= 10 && !player.attributes.containsKey("permadeath")){ //exclude permadeath HCIMs from XP squish

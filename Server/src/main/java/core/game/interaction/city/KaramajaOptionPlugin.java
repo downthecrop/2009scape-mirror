@@ -6,7 +6,7 @@ import core.game.component.Component;
 import core.plugin.Initializable;
 import org.rs09.consts.Items;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.content.dialogue.FacialExpression;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DoorActionHandler;
@@ -263,7 +263,7 @@ public final class KaramajaOptionPlugin extends OptionHandler {
                             return true;
                         }
                     };
-                    World.getPulser().submit(palmPulse);
+                    GameWorld.getPulser().submit(palmPulse);
                 } else {
                     player.getPacketDispatch().sendMessage("You don't have enough inventory space.");
                 }

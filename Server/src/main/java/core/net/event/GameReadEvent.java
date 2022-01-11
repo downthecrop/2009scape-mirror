@@ -1,7 +1,7 @@
 package core.net.event;
 
 import rs09.game.system.SystemLogger;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.net.IoReadEvent;
 import core.net.IoSession;
 import core.net.packet.IncomingPacket;
@@ -97,7 +97,7 @@ public final class GameReadEvent extends IoReadEvent {
 			IncomingPacket packet = PacketRepository.getIncoming(opcode);
 			session.setLastPing(System.currentTimeMillis());
 			if (packet == null) {
-				if (World.getSettings().isDevMode()) {
+				if (GameWorld.getSettings().isDevMode()) {
 					SystemLogger.logErr("Unhandled packet [opcode=" + opcode + ", previous=" + last + ", size=" + size + ", header=" + header + "]");
 				}
 				continue;

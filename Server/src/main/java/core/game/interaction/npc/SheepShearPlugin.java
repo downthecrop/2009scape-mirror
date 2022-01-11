@@ -7,7 +7,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
@@ -63,7 +63,7 @@ public final class SheepShearPlugin extends OptionHandler {
 			sheep.transform(5153);
 			player.getPacketDispatch().sendMessage("You get some wool.");
 			player.getInventory().add(new Item(1737, 1));// 5160
-			World.getPulser().submit(new Pulse(80, sheep) {
+			GameWorld.getPulser().submit(new Pulse(80, sheep) {
 				@Override
 				public boolean pulse() {
 					sheep.reTransform();

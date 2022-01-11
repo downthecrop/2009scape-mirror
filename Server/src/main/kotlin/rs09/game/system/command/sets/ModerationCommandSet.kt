@@ -4,7 +4,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
 import rs09.game.system.command.Command
 import core.game.system.task.Pulse
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import core.game.world.map.Location
 import rs09.game.world.repository.Repository
 import core.plugin.Initializable
@@ -66,7 +66,7 @@ class ModerationCommandSet : CommandSet(Command.Privilege.MODERATOR){
 
             notify(player, "Jailing ${otherPlayer!!.username} for $timeSeconds seconds.")
             notify(otherPlayer, "${player.username} has jailed you for $timeSeconds seconds.")
-            World.Pulser.submit(object : Pulse(3){
+            GameWorld.Pulser.submit(object : Pulse(3){
                 val originalLoc = otherPlayer.location
                 val releaseTime = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(timeSeconds.toLong())
                 override fun pulse(): Boolean {

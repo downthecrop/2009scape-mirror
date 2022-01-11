@@ -35,7 +35,7 @@ import kotlin.Unit;
 import org.rs09.consts.Items;
 import rs09.game.content.dialogue.DumpContainer;
 import rs09.game.ge.GrandExchangeOffer;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 import java.text.NumberFormat;
 
@@ -201,7 +201,7 @@ public final class BankingPlugin extends OptionHandler {
                     }
                     break;
                 case 1:
-				interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "This is a branch of the Bank of " + World.getSettings().getName() + ". We have", "branches in many towns.");
+				interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "This is a branch of the Bank of " + GameWorld.getSettings().getName() + ". We have", "branches in many towns.");
                     stage = 2;
                     break;
                 case 2:
@@ -500,7 +500,7 @@ public final class BankingPlugin extends OptionHandler {
                             }
                             if (amount > 0) {
                                 final int withdraw = amount;
-						World.getPulser().submit(new Pulse(1, p) {
+						GameWorld.getPulser().submit(new Pulse(1, p) {
                                     @Override
                                     public boolean pulse() {
                                         if (item == null) {

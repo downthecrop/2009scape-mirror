@@ -8,7 +8,7 @@ import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import rs09.game.content.quest.free.princealirescue.NedPARDialogue
-import rs09.game.world.World.settings
+import rs09.game.world.GameWorld.settings
 import rs09.tools.DIALOGUE_INITIAL_OPTIONS_HANDLE
 import rs09.tools.END_DIALOGUE
 

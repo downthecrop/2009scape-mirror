@@ -3,7 +3,7 @@ package core.game.node.entity.impl;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -237,7 +237,7 @@ public class ForceMovement extends Pulse {
 		ForceMovement fm = new ForceMovement(e, start, destination, startAnim, animation, direction, commenceSpeed, pathSpeed);
 		fm.start();
 		e.lock();
-		World.getPulser().submit(fm);
+		GameWorld.getPulser().submit(fm);
 		return fm;
 	}
 
@@ -260,7 +260,7 @@ public class ForceMovement extends Pulse {
 		this.commenceSpeed = commence;
 		start();
 		e.lock();
-		World.getPulser().submit(this);
+		GameWorld.getPulser().submit(this);
 	}
 
 	/**

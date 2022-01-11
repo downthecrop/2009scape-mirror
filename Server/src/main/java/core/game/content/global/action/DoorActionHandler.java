@@ -15,7 +15,7 @@ import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.path.Pathfinder;
 import rs09.game.system.config.DoorConfigLoader;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 import java.awt.*;
 
@@ -105,7 +105,7 @@ public final class DoorActionHandler {
         if (entity instanceof Player) {
             ((Player) entity).getAudioManager().send(new Audio(3419));
         }
-		World.getPulser().submit(new Pulse(1) {
+		GameWorld.getPulser().submit(new Pulse(1) {
             boolean opened = false;
 
             @Override
@@ -378,7 +378,7 @@ public final class DoorActionHandler {
         entity.addExtension(LogoutTask.class, new LocationLogoutTask(4, loc));
         object.setCharge(IN_USE_CHARGE);
         second.setCharge(IN_USE_CHARGE);
-		World.getPulser().submit(new Pulse(1) {
+		GameWorld.getPulser().submit(new Pulse(1) {
             boolean opened = false;
 
             @Override

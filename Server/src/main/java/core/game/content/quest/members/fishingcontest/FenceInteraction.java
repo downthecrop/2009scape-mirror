@@ -4,7 +4,7 @@ import core.game.interaction.MovementPulse;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
@@ -26,7 +26,7 @@ public class FenceInteraction extends PluginInteraction {
         player.getPulseManager().run(new MovementPulse(player, node.asScenery().getLocation().transform(player.getLocation().getX() == node.getLocation().getX() ? 0 : -1, 0, 0)) {
             @Override
             public boolean pulse() {
-                World.getPulser().submit(new SqueezePulse(player));
+                GameWorld.getPulser().submit(new SqueezePulse(player));
                 return true;
             }
         }, "movement");
