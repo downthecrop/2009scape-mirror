@@ -36,7 +36,7 @@ import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InteractionListeners
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ItemConfigParser
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
 import java.util.*
@@ -374,9 +374,7 @@ class ScriptAPI(private val bot: Player) {
             diffX /= 2
             diffY /= 2
         }
-        val dest = bot.location.transform(diffX,diffY,0)
-        bot.pulseManager.run(object :
-            MovementPulse(bot, dest, Pathfinder.SMART) {
+        GameWorld.Pulser.submit(object : MovementPulse(bot, bot.location.transform(diffX, diffY, 0), Pathfinder.SMART) { // if this uses bot.pulseManager.run, it will get cleared when the bot dies and then the bot gets stuck in lumby
             override fun pulse(): Boolean {
                 return true
             }
@@ -552,7 +550,7 @@ class ScriptAPI(private val bot: Player) {
         bot.visualize(ANIMATIONUP, GRAPHICSUP)
         bot.impactHandler.disabledTicks = 4
         val location = loc
-        World.Pulser.submit(object : Pulse(4, bot) {
+        GameWorld.Pulser.submit(object : Pulse(4, bot) {
             override fun pulse(): Boolean {
                 bot.unlock()
                 bot.properties.teleportLocation = location

@@ -26,7 +26,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.map.build.DynamicRegion;
@@ -194,7 +194,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                         if (quest.getStage(player) <= 54 && quest.getStage(player) != 53) {
                             player.getPacketDispatch().sendMessage("The captain spots you before you manage to open the chest...");
                             player.lock(3);
-                            World.getPulser().submit(new Pulse(2, player) {
+                            GameWorld.getPulser().submit(new Pulse(2, player) {
                                 @Override
                                 public boolean pulse() {
                                     player.getDialogueInterpreter().open(831, RegionManager.getNpc(player, 831));
@@ -210,7 +210,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                         break;
                     case 2690:
                     case 2691:
-                        player.setAttribute("ana-delay", World.getTicks() + 2);
+                        player.setAttribute("ana-delay", GameWorld.getTicks() + 2);
                         player.getProperties().setTeleportLocation(Location.create(3301, 3035, 0));
                         break;
                     case 2676:
@@ -219,7 +219,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                             player.getDialogueInterpreter().sendDialogues(4997, null, "Watch it! Only slaves can travel into the mine.");
                             break;
                         }
-                        player.setAttribute("ana-delay", World.getTicks() + 2);
+                        player.setAttribute("ana-delay", GameWorld.getTicks() + 2);
                         player.getProperties().setTeleportLocation(Location.create(3278, 9427, 0));
                         player.getDialogueInterpreter().sendDialogue("The huge doors open into a dark, dank and smelly tunnel. The", "associated smells of a hundred sweaty miners greets your nostrils.", "And your ears ring with the 'CLANG CLANG CLANG' as metal hits", "rock.");
                         break;
@@ -228,7 +228,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                         if (quest.getStage(player) > 60 && quest.getStage(player) < 98 && player.getInventory().containsItem(TouristTrap.ANNA_BARREL)) {
                             player.lock();
                             player.getDialogueInterpreter().sendDialogues(4999, null, true, "Would you like me to take that heavy barrel", "for you?");
-                            World.getPulser().submit(new Pulse(4, player) {
+                            GameWorld.getPulser().submit(new Pulse(4, player) {
                                 int counter;
 
                                 @Override
@@ -425,7 +425,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                 break;
             case "bend":
                 player.animate(Animation.create(5037));
-                World.getPulser().submit(new Pulse(5, player) {
+                GameWorld.getPulser().submit(new Pulse(5, player) {
                     @Override
                     public boolean pulse() {
                         player.getPacketDispatch().sendMessage("You bend the bars back.");
@@ -441,7 +441,7 @@ public final class TouristTrapPlugin extends OptionHandler {
             case "climb":
                 player.getPacketDispatch().sendMessage("You scrape your hands and knees as you climb up.");
                 AgilityHandler.forceWalk(player, 0, player.getLocation(), Location.create(3279, 3037, 0), Animation.create(5041), 10, 0, null);
-                World.getPulser().submit(new Pulse(3, player) {
+                GameWorld.getPulser().submit(new Pulse(3, player) {
                     @Override
                     public boolean pulse() {
                         player.getAnimator().reset();
@@ -455,7 +455,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                         return true;
                     }
                     player.animate(Animation.create(5039));
-                    World.getPulser().submit(new Pulse(6, player) {
+                    GameWorld.getPulser().submit(new Pulse(6, player) {
                         @Override
                         public boolean pulse() {
                             player.getAnimator().reset();
@@ -471,7 +471,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                         return true;
                     }
                     AgilityHandler.forceWalk(player, 0, player.getLocation(), Location.create(3270, 3039, 0), Animation.create(5040), 20, 0, null);
-                    World.getPulser().submit(new Pulse(3, player) {
+                    GameWorld.getPulser().submit(new Pulse(3, player) {
                         @Override
                         public boolean pulse() {
                             player.getAnimator().reset();
@@ -697,7 +697,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                 if (quest.getStage(player) == 72) {
                     player.lock(4);
                     player.animate(Animation.create(5050));
-                    World.getPulser().submit(new Pulse(3, player) {
+                    GameWorld.getPulser().submit(new Pulse(3, player) {
                         @Override
                         public boolean pulse() {
                             player.getInventory().remove(event.getUsedItem());
@@ -717,7 +717,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                 return false;
             }
             player.getDialogueInterpreter().sendDialogue("You carefully place Ana in the barrel into the mine", "cart. Soon the cart moves out of sight and then it", "returns.");
-            player.setAttribute("ana-delay", World.getTicks() + 100000000);
+            player.setAttribute("ana-delay", GameWorld.getTicks() + 100000000);
             ActivityManager.start(player, "ana cart", false);
             return true;
         }
@@ -755,9 +755,9 @@ public final class TouristTrapPlugin extends OptionHandler {
             @Override
             public void open() {
                 super.open();
-                player.setAttribute("ana-delay", World.getTicks() + 100000000);
+                player.setAttribute("ana-delay", GameWorld.getTicks() + 100000000);
                 player.faceLocation(base.transform(54, 22, 0));
-                World.getPulser().submit(new Pulse(1, player) {
+                GameWorld.getPulser().submit(new Pulse(1, player) {
                     int counter;
                     NPC cart;
 
@@ -882,7 +882,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                 case 2:
                     player.lock();
                     player.animate(ClimbActionHandler.CLIMB_UP);
-                    World.getPulser().submit(new Pulse(1, player) {
+                    GameWorld.getPulser().submit(new Pulse(1, player) {
                         int counter;
 
                         @Override
@@ -1024,7 +1024,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                 player.getImpactHandler().manualHit(player, 2, HitsplatType.NORMAL);
                 player.getPacketDispatch().sendMessages("You fail to fit yourself into the cart in time before it starts its journey.", "You bang your head on the cart as you try to jump in.");
             } else {
-                World.getPulser().submit(new Pulse(3, player) {
+                GameWorld.getPulser().submit(new Pulse(3, player) {
                     @Override
                     public boolean pulse() {
                         player.animate(JUMP_ANIMATION);
@@ -1088,7 +1088,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                     Location loc = base.transform(l.getLocalX(), l.getLocalY(), 0);
                     player.getWalkingQueue().addPath(loc.getX(), loc.getY(), true);
                 }
-                World.getPulser().submit(new Pulse(22, player) {
+                GameWorld.getPulser().submit(new Pulse(22, player) {
                     @Override
                     public boolean pulse() {
                         player.setAttribute("real-end", index == 0 ? Location.create(3319, 9431, 0) : Location.create(3303, 9416, 0));
@@ -1191,7 +1191,7 @@ public final class TouristTrapPlugin extends OptionHandler {
             player.getPacketDispatch().sendMessage("You try to operate the winch.");
             player.faceLocation(base.transform(15, 9, 0));
             player.animate(Animation.create(5054));
-            World.getPulser().submit(new Pulse(AnimationDefinition.forId(5054).getDurationTicks(), player) {
+            GameWorld.getPulser().submit(new Pulse(AnimationDefinition.forId(5054).getDurationTicks(), player) {
                 @Override
                 public boolean pulse() {
                     TouristTrap.addConfig(player, 2048 + (1 << 4));
@@ -1348,7 +1348,7 @@ public final class TouristTrapPlugin extends OptionHandler {
                     end();
                     player.getInventory().add(TouristTrap.BARREL, player);
                     SceneryBuilder.remove(barrel);
-                    World.getPulser().submit(new Pulse(40) {
+                    GameWorld.getPulser().submit(new Pulse(40) {
                         @Override
                         public boolean pulse() {
                             SceneryBuilder.add(barrel);

@@ -13,7 +13,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.world.update.flag.context.Animation;
@@ -121,7 +121,7 @@ public class GraveyardZone extends MTAZone {
 			if (!PULSE.isRunning()) {
 				PULSE.restart();
 				PULSE.start();
-				World.getPulser().submit(PULSE);
+				GameWorld.getPulser().submit(PULSE);
 			}
 		}
 		return super.enter(e);

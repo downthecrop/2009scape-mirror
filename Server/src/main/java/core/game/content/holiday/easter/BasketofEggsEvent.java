@@ -18,7 +18,7 @@ import core.game.node.entity.player.link.emote.Emotes;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
@@ -216,7 +216,7 @@ public class BasketofEggsEvent extends HolidayEvent {
 						stage = 10;
 						break;
 					case 2:
-						npc("I am the easter bunny, and since it is easter", "I must begin handing out chocolate eggs to all", "of " + World.getSettings().getName() + ".");
+						npc("I am the easter bunny, and since it is easter", "I must begin handing out chocolate eggs to all", "of " + GameWorld.getSettings().getName() + ".");
 						stage = 20;
 						break;
 					case 3:
@@ -230,7 +230,7 @@ public class BasketofEggsEvent extends HolidayEvent {
 					}
 					break;
 				case 10:
-					npc("Being the easter bunny is no simple task and", "I have found myself very overwhelmed this year.", "I have no clue how I must deliver all of these basket", "of eggs to all the people of " + World.getSettings().getName() + ".");
+					npc("Being the easter bunny is no simple task and", "I have found myself very overwhelmed this year.", "I have no clue how I must deliver all of these basket", "of eggs to all the people of " + GameWorld.getSettings().getName() + ".");
 					stage = 21;
 					break;
 				case 20:
@@ -287,7 +287,7 @@ public class BasketofEggsEvent extends HolidayEvent {
 						}
 					};
 					player.setAttribute("egg-pulse", pulse);
-					World.getPulser().submit(pulse);
+					GameWorld.getPulser().submit(pulse);
 					break;
 				case 30:
 					npc("No you fool! I am an easter bunny!!");
@@ -342,7 +342,7 @@ public class BasketofEggsEvent extends HolidayEvent {
 						}
 					};
 					player.setAttribute("egg-pulse", pulse);
-					World.getPulser().submit(pulse);
+					GameWorld.getPulser().submit(pulse);
 					break;
 				case 4:
 					end();
@@ -399,7 +399,7 @@ public class BasketofEggsEvent extends HolidayEvent {
 				return true;
 			}
 			Player target = node.asPlayer();
-			if (getEggs(target) >= 4 && !World.getSettings().isDevMode()) {
+			if (getEggs(target) >= 4 && !GameWorld.getSettings().isDevMode()) {
 				player.sendMessage("That player already has enough chocolate eggs.");
 				return true;
 			}
@@ -481,10 +481,10 @@ public class BasketofEggsEvent extends HolidayEvent {
 				return true;
 			case "dance":
 			case "operate":
-				if (player.getAttribute("chicken-delay", 0) > World.getTicks()) {
+				if (player.getAttribute("chicken-delay", 0) > GameWorld.getTicks()) {
 					return true;
 				}
-				player.setAttribute("chicken-delay", World.getTicks() + 8);
+				player.setAttribute("chicken-delay", GameWorld.getTicks() + 8);
 				player.animate(Animation.create(1835));
 				return true;
 			}

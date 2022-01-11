@@ -4,7 +4,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.plugin.Initializable;
 import core.game.world.update.flag.context.Animation;
 
@@ -144,7 +144,7 @@ public final class GertrudesCatDialogue extends DialoguePlugin {
 				if (quest.getStage(player) == 40) {
 					return true;
 				}
-				World.getPulser().submit(new Pulse(7, player) {
+				GameWorld.getPulser().submit(new Pulse(7, player) {
 					@Override
 					public boolean pulse() {
 						end();

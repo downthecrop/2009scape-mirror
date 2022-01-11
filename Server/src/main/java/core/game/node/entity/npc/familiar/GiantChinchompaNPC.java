@@ -10,7 +10,7 @@ import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
@@ -64,7 +64,7 @@ public class GiantChinchompaNPC extends Familiar {
 		sendChat("Squeak!");
 		animate(Animation.create(7758));
 		graphics(Graphics.create(1364));
-		World.getPulser().submit(new Pulse(3, owner, this) {
+		GameWorld.getPulser().submit(new Pulse(3, owner, this) {
 			@Override
 			public boolean pulse() {
 				for (Entity entity : entitys) {

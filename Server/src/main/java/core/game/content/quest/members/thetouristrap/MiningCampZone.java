@@ -6,7 +6,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.zone.MapZone;
 import core.game.world.map.zone.ZoneBorders;
@@ -54,7 +54,7 @@ public final class MiningCampZone extends MapZone implements Plugin<Object> {
 		case "Equip":
 		case "Wear":
 			final Player player = (Player) e;
-			World.getPulser().submit(new Pulse(1, player) {
+			GameWorld.getPulser().submit(new Pulse(1, player) {
 				@Override
 				public boolean pulse() {
 					if (TouristTrap.isJailable(player)) {
@@ -84,7 +84,7 @@ public final class MiningCampZone extends MapZone implements Plugin<Object> {
 	 */
 	public boolean checkAnna(final Player p) {
 		final Quest quest = p.getQuestRepository().getQuest(TouristTrap.NAME);
-		if (p.getAttribute("ana-delay", 0) > World.getTicks()) {
+		if (p.getAttribute("ana-delay", 0) > GameWorld.getTicks()) {
 			return false;
 		}
 		if (quest.getStage(p) > 60 && quest.getStage(p) < 95 && p.getInventory().containsItem(TouristTrap.ANNA_BARREL)) {

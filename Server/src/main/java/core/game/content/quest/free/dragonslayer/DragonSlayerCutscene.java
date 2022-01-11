@@ -14,7 +14,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.build.DynamicRegion;
 import core.game.world.update.flag.context.Animation;
@@ -124,7 +124,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
 		PacketRepository.send(CameraViewPacket.class, position);
 		PacketRepository.send(CameraViewPacket.class, rotation);
 		if (bobinPulse.position == null || bobinPulse.rotation == null) {
-			World.getPulser().submit(bobinPulse);
+			GameWorld.getPulser().submit(bobinPulse);
 		}
 		bobinPulse.position = position;
 		bobinPulse.rotation = rotation;
@@ -341,7 +341,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
 				case 503:
 					player.getInterfaceManager().open(new Component(543));
 					interpreter.sendPlainMessage(true, "Clouds surround the ship.");
-					World.getPulser().submit(new Pulse(6, player) {
+					GameWorld.getPulser().submit(new Pulse(6, player) {
 						@Override
 						public boolean pulse() {
 							player.getInterfaceManager().close();
@@ -361,7 +361,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
 					break;
 				case 505:
 					player.getInterfaceManager().open(new Component(545));
-					World.getPulser().submit(new Pulse(2, player) {
+					GameWorld.getPulser().submit(new Pulse(2, player) {
 						@Override
 						public boolean pulse() {
 							player("Did you see that?");
@@ -387,7 +387,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
 					player.getPacketDispatch().sendPositionedGraphic(446, 70, 1, cutscene.getBase().transform(37, 5, 1));
 					player.getPacketDispatch().sendPositionedGraphic(446, 70, 2, cutscene.getBase().transform(36, 5, 1));
 					player.getPacketDispatch().sendPositionedGraphic(446, 70, 3, cutscene.getBase().transform(35, 5, 1));
-					World.getPulser().submit(new Pulse(1, player) {
+					GameWorld.getPulser().submit(new Pulse(1, player) {
 
 						@Override
 						public boolean pulse() {
@@ -412,7 +412,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
 				case 509:
 					close();
 					player.getInterfaceManager().open(new Component(546));
-					World.getPulser().submit(new Pulse(1, player) {
+					GameWorld.getPulser().submit(new Pulse(1, player) {
 						int counter = 0;
 
 						@Override
@@ -504,7 +504,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
 				case 10:
 					end();
 					Ships.PORT_SARIM_TO_CRANDOR.sail(player);
-					World.getPulser().submit(new Pulse(17) {
+					GameWorld.getPulser().submit(new Pulse(17) {
 						@Override
 						public boolean pulse() {
 							player.getInterfaceManager().open(new Component(317));
@@ -536,7 +536,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
 			for (Location fire : fires) {
 				player.getPacketDispatch().sendPositionedGraphic(453, 0, 1, fire);
 			}
-			World.getPulser().submit(new Pulse(2, player) {
+			GameWorld.getPulser().submit(new Pulse(2, player) {
 				@Override
 				public boolean pulse() {
 					for (Location fire : fires) {

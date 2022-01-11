@@ -9,7 +9,7 @@ import core.game.node.item.ChanceItem;
 import core.game.node.item.Item;
 import core.game.node.item.WeightedChanceItem;
 import org.rs09.consts.Items;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.tools.RandomFunction;
 
 import java.text.NumberFormat;
@@ -496,7 +496,7 @@ public enum ClueLevel {
 				return;
 			}
 		}
-		if (player.getTreasureTrailManager().isCompleted() || World.getSettings().isDevMode()) {
+		if (player.getTreasureTrailManager().isCompleted() || GameWorld.getSettings().isDevMode()) {
 			final List<Item> rewards = getLoot(player);
 			player.getInterfaceManager().open(new Component(364).setCloseEvent(new CloseEvent() {
 				private boolean given;

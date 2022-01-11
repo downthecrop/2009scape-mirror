@@ -8,8 +8,9 @@ import core.game.node.entity.player.info.Rights;
 import core.game.node.entity.player.link.HintIconManager;
 import core.game.node.entity.player.link.prayer.PrayerType;
 import core.game.node.item.GroundItem;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
+import java.nio.ByteBuffer;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +59,7 @@ public class GraveManager {
 			grave.clear();
 			player.sendMessage("Your previous gravestone has collapsed.");
 		}
-		NPC npc = NPC.create(type.getNpcId(), player.getLocation(), player.getName(), World.getTicks() + ticks, items, type, player.getUsername());
+		NPC npc = NPC.create(type.getNpcId(), player.getLocation(), player.getName(), GameWorld.getTicks() + ticks, items, type, player.getUsername());
 		npc.init();
 		setGrave(npc);
 	}
@@ -80,7 +81,7 @@ public class GraveManager {
 	 * @return {@code True} if so.
 	 */
 	public boolean generateable() {
-		if (player.getDetails().getRights() == Rights.ADMINISTRATOR && World.getSettings().isHosted()) {
+		if (player.getDetails().getRights() == Rights.ADMINISTRATOR && GameWorld.getSettings().isHosted()) {
 			return false;
 		}
 		if (player.getSkullManager().isWilderness()) {

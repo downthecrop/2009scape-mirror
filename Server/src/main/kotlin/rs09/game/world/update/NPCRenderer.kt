@@ -5,7 +5,7 @@ import core.game.node.entity.player.Player
 import core.game.world.map.RegionManager
 import core.net.packet.IoBuffer
 import core.net.packet.PacketHeader
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import java.nio.ByteBuffer
 import java.util.*
 
@@ -72,7 +72,7 @@ object NPCRenderer {
             buffer.putBits(14, npc.id)
             buffer.putBits(5, offsetX)
             if (npc.aggressiveHandler != null) {
-                npc.aggressiveHandler.playerTolerance[player.index] = World.ticks
+                npc.aggressiveHandler.playerTolerance[player.index] = GameWorld.ticks
             }
             localNPCs.add(npc)
         }

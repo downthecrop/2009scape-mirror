@@ -18,7 +18,7 @@ import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
 import rs09.game.interaction.InteractionListeners;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the lost city quest.
@@ -128,7 +128,7 @@ public final class LostCityPlugin extends OptionHandler {
 		}
 		SHAMUS.setInvisible(false);
 		SHAMUS.getProperties().setTeleportLocation(SHAMUS.getProperties().getSpawnLocation());
-		World.getPulser().submit(new Pulse(100, SHAMUS) {
+		GameWorld.getPulser().submit(new Pulse(100, SHAMUS) {
 			@Override
 			public boolean pulse() {
 				if (SHAMUS.getDialoguePlayer() != null) {

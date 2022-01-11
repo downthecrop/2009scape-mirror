@@ -19,7 +19,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import core.plugin.Initializable
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import rs09.plugin.PluginManager
 
 /**
@@ -92,7 +92,7 @@ class BarbarianOutpostCourse
 			sendMessage(player, "You cannot do that from here.")
             return
         }
-        if (ropeDelay > World.ticks) {
+        if (ropeDelay > GameWorld.ticks) {
 			sendMessage(player, "The rope is being used.")
             return
         }
@@ -100,7 +100,7 @@ class BarbarianOutpostCourse
             AgilityHandler.fail(player, 0, Location.create(2549, 9951, 0), null, getHitAmount(player), "You slip and fall to the pit below.")
             return
         }
-        ropeDelay = World.ticks + 2
+        ropeDelay = GameWorld.ticks + 2
         player.packetDispatch.sendSceneryAnimation(`object`, Animation.create(497), true)
         AgilityHandler.forceWalk(player, 0, player.location, Location.create(2551, 3549, 0), Animation.create(751), 50, 22.0, "You skillfully swing across.", 1)
     }
@@ -117,7 +117,7 @@ class BarbarianOutpostCourse
         AgilityHandler.walk(player, if (failed) -1 else 1, Location.create(2551, 3546, 0), end, Animation.create(155), if (failed) 0.0 else 13.5, if (failed) null else "...You make it safely to the other side.")
         if (failed) {
             AgilityHandler.walk(player, -1, player.location, Location.create(2545, 3546, 0), Animation.create(155), 0.0, null)
-            World.Pulser.submit(getSwimPulse(player))
+            GameWorld.Pulser.submit(getSwimPulse(player))
             return
         }
     }

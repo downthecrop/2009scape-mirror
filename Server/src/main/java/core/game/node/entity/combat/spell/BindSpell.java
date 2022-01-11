@@ -12,7 +12,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.SpellBookManager.SpellBook;
 import core.game.node.item.Item;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
@@ -124,7 +124,7 @@ public final class BindSpell extends CombatSpell {
 		}
 		victim.getWalkingQueue().reset();
 		victim.getLocks().lockMovement(tick);
-		entity.setAttribute("entangleDelay", World.getTicks() + tick + 2);
+		entity.setAttribute("entangleDelay", GameWorld.getTicks() + tick + 2);
 	}
 
 	@Override

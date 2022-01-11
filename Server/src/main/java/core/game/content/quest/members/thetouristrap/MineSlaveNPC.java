@@ -1,7 +1,7 @@
 package core.game.content.quest.members.thetouristrap;
 
 import core.game.node.entity.npc.AbstractNPC;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
 
@@ -35,7 +35,7 @@ public final class MineSlaveNPC extends AbstractNPC {
 	 */
 	public MineSlaveNPC(int id, Location location) {
 		super(id, location);
-		delay = World.getTicks() + RandomFunction.random(20, 100);
+		delay = GameWorld.getTicks() + RandomFunction.random(20, 100);
 	}
 
 	@Override
@@ -45,9 +45,9 @@ public final class MineSlaveNPC extends AbstractNPC {
 
 	@Override
 	public void tick() {
-		if (delay < World.getTicks()) {
+		if (delay < GameWorld.getTicks()) {
 			sendChat(CHATS[RandomFunction.random(CHATS.length)]);
-			delay = World.getTicks() + RandomFunction.random(20, 100);
+			delay = GameWorld.getTicks() + RandomFunction.random(20, 100);
 		}
 		super.tick();
 	}

@@ -4,7 +4,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
@@ -41,7 +41,7 @@ public final class TownCrierDialogue extends DialoguePlugin {
 	@Override
 	public boolean open(Object... args) {
 		npc = (NPC) args[0];
-		npc("Hear ye! Hear ye! Player Moderators massive help to ", World.getSettings().getName().substring(0, World.getSettings().getName().length() - 3) + "-");
+		npc("Hear ye! Hear ye! Player Moderators massive help to ", GameWorld.getSettings().getName().substring(0, GameWorld.getSettings().getName().length() - 3) + "-");
 		stage = 1;
 		return true;
 	}
@@ -55,7 +55,7 @@ public final class TownCrierDialogue extends DialoguePlugin {
 			stage = 2;
 			break;
 		case 2:
-			options("Tell me about Player Moderators.", "Tell me about the Rules of " + World.getSettings().getName() + ".", "Can you give me a handy tip please?", "Bye!");
+			options("Tell me about Player Moderators.", "Tell me about the Rules of " + GameWorld.getSettings().getName() + ".", "Can you give me a handy tip please?", "Bye!");
 			stage = 3;
 			break;
 		case 3:
@@ -65,7 +65,7 @@ public final class TownCrierDialogue extends DialoguePlugin {
 				stage = 50;
 				break;
 			case 2:
-				player("Tell me about the Rules of " + World.getSettings().getName() + ".");
+				player("Tell me about the Rules of " + GameWorld.getSettings().getName() + ".");
 				stage = 70;
 				break;
 			case 3:
@@ -118,7 +118,7 @@ public final class TownCrierDialogue extends DialoguePlugin {
 			player.lock(4);
 			npc("At once. Take a look at my book here.");
 			npc.animate(new Animation(6866));
-			World.getPulser().submit(new Pulse(4) {
+			GameWorld.getPulser().submit(new Pulse(4) {
 				@Override
 				public boolean pulse() {
 					//player.getDialogueInterpreter().open(496107759); // TODO rulebook broken
@@ -155,7 +155,7 @@ public final class TownCrierDialogue extends DialoguePlugin {
 				stage = 2;
 				break;
 			default:
-				npc("" + World.getSettings().getName() + " will never email you asking for your log-in details.");
+				npc("" + GameWorld.getSettings().getName() + " will never email you asking for your log-in details.");
 				stage = 2;
 				break;
 			}
@@ -181,15 +181,15 @@ public final class TownCrierDialogue extends DialoguePlugin {
 			stage = 51;
 			break;
 		case 160:
-			npc("Player Moderators, or 'P-mods', have the ability to mute", "rule breakers and " + World.getSettings().getName() + " view their reports as a priority so", "that reward is taken as quickly as possible. P-Mods also", "have acces to the Player Moderator Centre. Within the");
+			npc("Player Moderators, or 'P-mods', have the ability to mute", "rule breakers and " + GameWorld.getSettings().getName() + " view their reports as a priority so", "that reward is taken as quickly as possible. P-Mods also", "have acces to the Player Moderator Centre. Within the");
 			stage = 161;
 			break;
 		case 161:
-			npc("Centre are tools to help them Moderate " + World.getSettings().getName() + ".", "These tools include dedicated forums, the Player", "Moderator Guidelines and the Player Moderator Code of", "Conduct.");
+			npc("Centre are tools to help them Moderate " + GameWorld.getSettings().getName() + ".", "These tools include dedicated forums, the Player", "Moderator Guidelines and the Player Moderator Code of", "Conduct.");
 			stage = 153;
 			break;
 		case 170:
-			npc("" + World.getSettings().getName() + " picks players who spend their time and effort to", "help better the " + World.getSettings().getName() + " community. To increase your", "chances of becoming a Player Moderator:");
+			npc("" + GameWorld.getSettings().getName() + " picks players who spend their time and effort to", "help better the " + GameWorld.getSettings().getName() + " community. To increase your", "chances of becoming a Player Moderator:");
 			stage = 171;
 			break;
 		case 171:
@@ -197,11 +197,11 @@ public final class TownCrierDialogue extends DialoguePlugin {
 			stage = 173;
 			break;
 		case 173:
-			npc("Play by the rules! The rules of " + World.getSettings().getName() + " are enforced", "for a reason, to make the game a fair and enjoyable", "environment for all.");
+			npc("Play by the rules! The rules of " + GameWorld.getSettings().getName() + " are enforced", "for a reason, to make the game a fair and enjoyable", "environment for all.");
 			stage = 174;
 			break;
 		case 174:
-			npc("Report accuratley! When " + World.getSettings().getName() + " consider an account for", "review they look for quality, not quantity. Ensure your", "reports are of a high quality by following the report", "guidelines.");
+			npc("Report accuratley! When " + GameWorld.getSettings().getName() + " consider an account for", "review they look for quality, not quantity. Ensure your", "reports are of a high quality by following the report", "guidelines.");
 			stage = 175;
 			break;
 		case 175:
@@ -209,15 +209,15 @@ public final class TownCrierDialogue extends DialoguePlugin {
 			stage = 153;
 			break;
 		case 180:
-			npc("P-Mods cannot ban your account - they can only report", "offences. " + World.getSettings().getName() + " then take reward based on the evidence", "received. If you lose your password or get scamme dby", "another player, P_Mods cannot help you get your account");
+			npc("P-Mods cannot ban your account - they can only report", "offences. " + GameWorld.getSettings().getName() + " then take reward based on the evidence", "received. If you lose your password or get scamme dby", "another player, P_Mods cannot help you get your account");
 			stage = 181;
 			break;
 		case 181:
-			npc("back. All they can do is recommend you to go to Player", "Support. They cannot retrieve any items you may have", "lost and they certainly do not recieve any free items", "from " + World.getSettings().getName() + " for moderating the game. They are players");
+			npc("back. All they can do is recommend you to go to Player", "Support. They cannot retrieve any items you may have", "lost and they certainly do not recieve any free items", "from " + GameWorld.getSettings().getName() + " for moderating the game. They are players");
 			stage = 182;
 			break;
 		case 182:
-			npc("who give their all to help the community, out of the", "goodness of their hearts! P-mods do not work for " + World.getSettings().getName() + "", "and so cannot make you a Moderator, or recommend", "other accounts to become Moderators. If you wish yo");
+			npc("who give their all to help the community, out of the", "goodness of their hearts! P-mods do not work for " + GameWorld.getSettings().getName() + "", "and so cannot make you a Moderator, or recommend", "other accounts to become Moderators. If you wish yo");
 			stage = 183;
 			break;
 		case 183:

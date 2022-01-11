@@ -19,7 +19,7 @@ import core.game.world.map.build.DynamicRegion;
 import core.game.world.map.zone.ZoneRestriction;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 
 import java.util.ArrayList;
@@ -129,7 +129,7 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 			};
 		}
 		player.setAttribute("fc:pulse", pulse);
-		World.getPulser().submit(pulse);
+		GameWorld.getPulser().submit(pulse);
 		return true;
 	}
 
@@ -222,7 +222,7 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 							}
 						};
 						player.setAttribute("fc:pulse", pulse);
-						World.getPulser().submit(pulse);
+						GameWorld.getPulser().submit(pulse);
 					}
 				}
 			}

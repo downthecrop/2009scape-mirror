@@ -3,7 +3,7 @@ package core.game.node.entity.skill.hunter;
 import core.game.node.entity.Entity;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.tools.RandomFunction;
 
@@ -77,7 +77,7 @@ public final class HunterNPC extends AbstractNPC {
 	@Override
 	public void handleDrops(Player p, Entity killer) {
 		int ticks = getAttribute("hunter", 0);
-		if (ticks < World.getTicks()) {
+		if (ticks < GameWorld.getTicks()) {
 			super.handleDrops(p, killer);
 		}
 	}

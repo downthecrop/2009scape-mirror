@@ -7,7 +7,7 @@ import core.tools.RandomFunction
 import org.json.simple.JSONObject
 import rs09.game.node.entity.state.newsys.PlayerState
 import rs09.game.node.entity.state.newsys.State
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 @PlayerState("disease")
 class DiseasedState(player: Player? = null) : State(player){
@@ -31,7 +31,7 @@ class DiseasedState(player: Player? = null) : State(player){
 
     override fun createPulse() {
         player ?: return
-        if(player.getAttribute("immunity:disease",0) > World.ticks){
+        if(player.getAttribute("immunity:disease",0) > GameWorld.ticks){
             return
         }
         if(hitsLeft <= 0) return

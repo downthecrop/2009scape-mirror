@@ -7,7 +7,7 @@ import core.game.node.entity.player.info.Rights;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 
@@ -69,7 +69,7 @@ public final class MysteriousRuinPlugin extends UseWithHandler {
 		player.animate(ANIMATION);
 		player.getPacketDispatch().sendMessage("You hold the " + event.getUsedItem().getName() + " towards the mysterious ruins.");
 		player.getPacketDispatch().sendMessage("You feel a powerful force take hold of you.");
-		World.getPulser().submit(new Pulse(3, player) {
+		GameWorld.getPulser().submit(new Pulse(3, player) {
 			@Override
 			public boolean pulse() {
 				player.getProperties().setTeleportLocation(ruin.getEnd());

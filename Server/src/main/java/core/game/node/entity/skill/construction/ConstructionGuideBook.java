@@ -7,7 +7,7 @@ import core.game.content.dialogue.book.Book;
 import core.game.content.dialogue.book.Page;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.plugin.Initializable;
 
 /**
@@ -70,7 +70,7 @@ public class ConstructionGuideBook extends Book {
 	
 	@Override
 	public boolean open(final Player player) {
-    	if (World.getSettings().isDevMode() && World.getSettings().isBeta()) {
+    	if (GameWorld.getSettings().isDevMode() && GameWorld.getSettings().isBeta()) {
 	    	for (Item item : RESOURCES) {
 	    		if (!player.getInventory().contains(item.getId(), item.getAmount())) {
 	    			player.getInventory().add(item, player);

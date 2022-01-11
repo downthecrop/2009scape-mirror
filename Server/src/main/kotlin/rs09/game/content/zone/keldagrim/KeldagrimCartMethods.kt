@@ -7,17 +7,17 @@ import core.game.system.task.Pulse
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import org.rs09.consts.Components
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 
 object KeldagrimCartMethods {
     @JvmStatic
     fun goToKeldagrim(player: Player){
-        World.Pulser.submit(TravelToKeldagrimPulse(player))
+        GameWorld.Pulser.submit(TravelToKeldagrimPulse(player))
     }
 
     @JvmStatic
     fun leaveKeldagrimTo(player: Player, dest: Location){
-        World.Pulser.submit(TravelFromKeldagrimPulse(player,dest))
+        GameWorld.Pulser.submit(TravelFromKeldagrimPulse(player,dest))
     }
 }
 

@@ -21,7 +21,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.content.global.travel.EssenceTeleport;
 import rs09.game.node.entity.skill.runecrafting.RunePouchPlugin;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import rs09.plugin.PluginManager;
 
 /**
@@ -66,7 +66,7 @@ public class RunecraftingPlugin extends OptionHandler {
 			player.lock(4);
 			player.getInterfaceManager().openOverlay(new Component(115));
 			PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 1));
-			World.getPulser().submit(new Pulse(4, player) {
+			GameWorld.getPulser().submit(new Pulse(4, player) {
 
 				@Override
 				public boolean pulse() {

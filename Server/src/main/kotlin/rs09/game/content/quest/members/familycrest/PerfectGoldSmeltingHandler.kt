@@ -6,10 +6,10 @@ import core.game.interaction.UseWithHandler
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import rs09.game.world.World.Pulser
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs09.consts.Items
+import rs09.game.world.GameWorld.Pulser
 
 
 @Initializable

@@ -1,10 +1,12 @@
 package gui
 
-import rs09.game.world.World
+import rs09.game.system.SystemLogger
+import rs09.game.world.GameWorld
 import java.awt.BorderLayout
 import java.awt.Component
 import java.awt.Dimension
 import javax.swing.*
+import javax.swing.border.Border
 
 object ServerMonitor : JFrame("Server Monitor"){
 
@@ -157,7 +159,7 @@ object ServerMonitor : JFrame("Server Monitor"){
                         removeList.add(event)
                     }
 
-                    pulseList.text = World.Pulser.TASKS.toArray().filterNotNull().map { it.javaClass.simpleName + "\n" }
+                    pulseList.text = GameWorld.Pulser.TASKS.toArray().filterNotNull().map { it.javaClass.simpleName + "\n" }
                         .filter { it.replace("\n", "").isNotEmpty() }.sorted().joinToString("")
                     eventQueue.removeAll(removeList)
                     repaint()

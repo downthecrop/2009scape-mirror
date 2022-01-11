@@ -17,7 +17,7 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.state.EntityState;
 import core.game.node.entity.state.StateManager;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.Viewport;
 import core.game.world.map.path.Path;
@@ -260,8 +260,8 @@ public abstract class Entity extends Node {
 	 * Checks an impact before receiving it.
 	 */
 	public void checkImpact(BattleState state) {
-		getProperties().getCombatPulse().setLastReceivedAttack(World.getTicks());
-		int ticks = World.getTicks() - getProperties().getCombatPulse().getLastSentAttack();
+		getProperties().getCombatPulse().setLastReceivedAttack(GameWorld.getTicks());
+		int ticks = GameWorld.getTicks() - getProperties().getCombatPulse().getLastSentAttack();
 		if (ticks > 10 && this instanceof NPC && ((NPC) this).getDefinition().getConfiguration("safespot", false)) {
 			Pathfinder.find(state.getAttacker(), getLocation()).walk(state.getAttacker());
 			Pathfinder.find(state.getVictim(), state.getAttacker().getLocation()).walk(state.getVictim());
@@ -280,7 +280,7 @@ public abstract class Entity extends Node {
 	 * @param state The battle state.
 	 */
 	public void onImpact(final Entity entity, BattleState state) {
-		if (properties.isRetaliating() && !properties.getCombatPulse().isAttacking() && !getLocks().isInteractionLocked() && properties.getCombatPulse().getNextAttack() < World.getTicks()) {
+		if (properties.isRetaliating() && !properties.getCombatPulse().isAttacking() && !getLocks().isInteractionLocked() && properties.getCombatPulse().getNextAttack() < GameWorld.getTicks()) {
 			if (!getWalkingQueue().hasPath() && !getPulseManager().isMovingPulse() || (this instanceof NPC)) {
 				properties.getCombatPulse().attack(entity);
 			}
@@ -327,7 +327,7 @@ public abstract class Entity extends Node {
 	 * @param ticks the ticks.
 	 */
 	public void teleport(final Location location, int ticks) {
-		World.getPulser().submit(new Pulse(ticks, this) {
+		GameWorld.getPulser().submit(new Pulse(ticks, this) {
 			@Override
 			public boolean pulse() {
 				teleport(location);
@@ -413,7 +413,7 @@ public abstract class Entity extends Node {
 	 * @return {@code True} if so.
 	 */
 	public boolean graphics(final Graphics graphics, int delay) {
-		World.getPulser().submit(new Pulse(delay, this) {
+		GameWorld.getPulser().submit(new Pulse(delay, this) {
 			@Override
 			public boolean pulse() {
 				graphics(graphics);
@@ -440,7 +440,7 @@ public abstract class Entity extends Node {
 	 * @return {@code True} if succesful.
 	 */
 	public boolean animate(final Animation animation, int delay) {
-		World.getPulser().submit(new Pulse(delay, this) {
+		GameWorld.getPulser().submit(new Pulse(delay, this) {
 			@Override
 			public boolean pulse() {
 				animate(animation);
@@ -455,7 +455,7 @@ public abstract class Entity extends Node {
 	 * @param state the state.
 	 */
 	public void sendImpact(BattleState state) {
-		getProperties().getCombatPulse().setLastSentAttack(World.getTicks());
+		getProperties().getCombatPulse().setLastSentAttack(GameWorld.getTicks());
 	}
 
 	/**
@@ -496,7 +496,7 @@ public abstract class Entity extends Node {
 	 */
 	public boolean faceTemporary(Entity entity, final Entity reset, int ticks) {
 		if (face(entity)) {
-			World.getPulser().submit(new Pulse(ticks + 1, this) {
+			GameWorld.getPulser().submit(new Pulse(ticks + 1, this) {
 				@Override
 				public boolean pulse() {
 					face(reset);
@@ -603,7 +603,7 @@ public abstract class Entity extends Node {
 	 * @param ticks the ticks.
 	 */
 	public void sendChat(final String string, int ticks) {
-		World.getPulser().submit(new Pulse(ticks, this) {
+		GameWorld.getPulser().submit(new Pulse(ticks, this) {
 			@Override
 			public boolean pulse() {
 				sendChat(string);
@@ -848,7 +848,7 @@ public abstract class Entity extends Node {
 	 * @return {@code True} if so.
 	 */
 	public boolean hasFireResistance() {
-		return getAttribute("fire:immune",0) >= World.getTicks();
+		return getAttribute("fire:immune",0) >= GameWorld.getTicks();
 	}
 
 	/**

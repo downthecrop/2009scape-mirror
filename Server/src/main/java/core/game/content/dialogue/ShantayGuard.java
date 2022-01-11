@@ -6,7 +6,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.path.Pathfinder;
 import rs09.game.world.repository.Repository;
@@ -122,7 +122,7 @@ public final class ShantayGuard extends DialoguePlugin {
 				final Location dest = player.getLocation().getY() < 3304 ? Location.create(3303, 3117, 0) : Location.create(3305, 3117, 0);
 				Pathfinder.find(player, dest).walk(player);
 				player.lock();
-				World.getPulser().submit(new Pulse(1, player) {
+				GameWorld.getPulser().submit(new Pulse(1, player) {
 					@Override
 					public boolean pulse() {
 						if (player.getLocation().equals(dest)) {

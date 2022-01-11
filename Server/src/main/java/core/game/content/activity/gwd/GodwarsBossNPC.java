@@ -17,7 +17,7 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import rs09.game.node.entity.combat.CombatPulse;
 import rs09.game.node.entity.combat.CombatSwingHandler;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles a god wars boss NPC.
@@ -174,14 +174,14 @@ public final class GodwarsBossNPC extends AbstractNPC {
 			if (!chamber.insideBorder(e.getLocation().getX(), e.getLocation().getY())) {
 				getPulseManager().clear();
 			}
-			if (nextBattleCry < World.getTicks()) {
+			if (nextBattleCry < GameWorld.getTicks()) {
 				String[] cries = BATTLE_CRIES[(getId() - 6203) >> 4];
 				sendChat(cries[RandomFunction.randomize(cries.length)]);
-				nextBattleCry = World.getTicks() + 7 + RandomFunction.randomize(20);
+				nextBattleCry = GameWorld.getTicks() + 7 + RandomFunction.randomize(20);
 			}
 		}
 		super.tick();
-		if (getRespawnTick() == World.getTicks() && minions != null) {
+		if (getRespawnTick() == GameWorld.getTicks() && minions != null) {
 			for (NPC npc : minions) {
 				npc.setRespawnTick(-1);
 			}
@@ -191,7 +191,7 @@ public final class GodwarsBossNPC extends AbstractNPC {
 	@Override
 	public void onImpact(final Entity entity, BattleState state) {
 		if (targetFocus) {
-			if (getProperties().getCombatPulse().getNextAttack() < World.getTicks() - 3) {
+			if (getProperties().getCombatPulse().getNextAttack() < GameWorld.getTicks() - 3) {
 				getProperties().getCombatPulse().attack(entity);
 				return;
 			}
@@ -237,7 +237,7 @@ public final class GodwarsBossNPC extends AbstractNPC {
 			return;
 		}
 		for (NPC minion : minions) {
-			if (minion.getRespawnTick() >= World.getTicks()) {
+			if (minion.getRespawnTick() >= GameWorld.getTicks()) {
 				minion.setRespawnTick(getRespawnTick());
 			}
 		}

@@ -5,7 +5,7 @@ import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
@@ -53,7 +53,7 @@ public class PoisonFountainPlugin extends UseWithHandler {
 			player.setAttribute("/save:piranhas-killed", true);
 			player.animate(SEARCH_ANIM);
 			player.getPacketDispatch().sendMessage("You pour the poisoned fish food into the fountain.");
-			World.getPulser().submit(new Pulse(1) {
+			GameWorld.getPulser().submit(new Pulse(1) {
 				int counter = 0;
 
 				@Override

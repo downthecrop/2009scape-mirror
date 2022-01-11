@@ -3,10 +3,12 @@ package core.game.node.entity.player.link;
 import core.game.node.entity.player.Player;
 
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ConfigContext;
 import core.net.packet.out.Config;
+
+import java.nio.ByteBuffer;
 
 /**
  * Manages a player's configurations.
@@ -123,7 +125,7 @@ public final class ConfigurationManager {
 	public void set(final int id, final int value, int delay) {
 		set(id, value);
 		player.varpManager.get(id).setVarbit(0,value).send(player);
-		World.getPulser().submit(new Pulse(delay, player) {
+		GameWorld.getPulser().submit(new Pulse(delay, player) {
 			@Override
 			public boolean pulse() {
 				player.varpManager.get(id).setVarbit(0,0).send(player);

@@ -4,7 +4,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.login.PlayerParser
 import core.game.system.task.TaskExecutor
 import rs09.game.system.SystemLogger
-import rs09.game.world.World
+import rs09.game.world.GameWorld
 import java.util.*
 import java.util.concurrent.ConcurrentHashMap
 
@@ -22,7 +22,7 @@ class DisconnectionQueue {
      * Updates all entries.
      */
     fun update() {
-        if (queue.isEmpty() || World.ticks % 3 != 0 && World.settings?.isDevMode != true) {
+        if (queue.isEmpty() || GameWorld.ticks % 3 != 0 && GameWorld.settings?.isDevMode != true) {
             return
         }
         //make a copy of current entries as to avoid concurrency exceptions
@@ -183,7 +183,7 @@ class DisconnectionQueue {
          * @param clear If the player should be cleared.
          */
         init {
-            timeStamp = World.ticks
+            timeStamp = GameWorld.ticks
         }
     }
 

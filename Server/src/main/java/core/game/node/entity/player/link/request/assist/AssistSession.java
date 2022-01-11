@@ -6,7 +6,7 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.request.RequestModule;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 
@@ -155,7 +155,7 @@ public final class AssistSession extends Pulse implements RequestModule {
 		player.getAudioManager().send(4010);
 		toggleIcon(player, false);
 		toggleIcon(partener, false);
-		World.getPulser().submit(this);
+		GameWorld.getPulser().submit(this);
 		refresh();
 	}
 

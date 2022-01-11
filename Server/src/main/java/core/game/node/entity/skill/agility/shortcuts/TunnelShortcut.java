@@ -7,7 +7,7 @@ import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
@@ -78,7 +78,7 @@ public class TunnelShortcut extends AgilityShortcut {
 			offset = 1;
 		}
 		ForceMovement.run(player, start, o.getLocation(), CLIMB_DOWN, 8);
-		World.getPulser().submit(new Pulse(1, player) {
+		GameWorld.getPulser().submit(new Pulse(1, player) {
 			int count;
 
 			@Override

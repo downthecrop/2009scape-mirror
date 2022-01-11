@@ -3,7 +3,7 @@ package core.game.system.command;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.Rights;
 import rs09.game.system.command.CommandPlugin;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,7 +35,7 @@ public enum CommandSet {
 	BETA() {
 		@Override
 		public boolean validate(Player player) {
-			return World.getSettings().isBeta() || ADMINISTRATOR.validate(player) || World.getSettings().isDevMode();
+			return GameWorld.getSettings().isBeta() || ADMINISTRATOR.validate(player) || GameWorld.getSettings().isDevMode();
 		}
 	};
 

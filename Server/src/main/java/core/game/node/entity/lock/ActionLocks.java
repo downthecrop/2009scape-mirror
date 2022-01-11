@@ -1,7 +1,7 @@
 package core.game.node.entity.lock;
 
 import core.game.node.Node;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,7 +55,7 @@ public final class ActionLocks {
 	 * indefinite time.
 	 */
 	public void lock() {
-		lock(Integer.MAX_VALUE - World.getTicks());
+		lock(Integer.MAX_VALUE - GameWorld.getTicks());
 	}
 
 	/**

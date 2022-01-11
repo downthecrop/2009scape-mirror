@@ -15,7 +15,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -69,7 +69,7 @@ public final class ElvargNPC extends AbstractNPC {
 	@Override
 	public void commenceDeath(Entity killer) {
 		final Direction direction = Direction.getLogicalDirection(getLocation(), killer.getLocation());
-		World.getPulser().submit(new Pulse(1, this) {
+		GameWorld.getPulser().submit(new Pulse(1, this) {
 			@Override
 			public boolean pulse() {
 				faceLocation(getCenterLocation().transform(direction.getStepX() * 3, direction.getStepY() * 3, 0));
@@ -86,7 +86,7 @@ public final class ElvargNPC extends AbstractNPC {
 		SceneryBuilder.add(object);
 		killer.faceLocation(object.getCenterLocation());
 		killer.lock();
-		World.getPulser().submit(new Pulse(1) {
+		GameWorld.getPulser().submit(new Pulse(1) {
 			int counter = 0;
 
 			@Override

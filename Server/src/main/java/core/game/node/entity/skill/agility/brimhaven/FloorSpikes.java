@@ -8,7 +8,7 @@ import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.MovementHook;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -27,7 +27,7 @@ public final class FloorSpikes implements MovementHook {
 		final Location start = l.transform(-dir.getStepX(), -dir.getStepY(), 0);
 		e.lock(5);
 		e.addExtension(LogoutTask.class, new LocationLogoutTask(5, start));
-		World.getPulser().submit(new Pulse(3, e) {
+		GameWorld.getPulser().submit(new Pulse(3, e) {
 			@Override
 			public boolean pulse() {
 				player.getPacketDispatch().sendSceneryAnimation(RegionManager.getObject(l), Animation.create(1111));

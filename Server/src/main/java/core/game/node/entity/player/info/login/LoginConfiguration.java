@@ -7,12 +7,13 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.player.AppearanceFlag;
-import core.net.ms.MSPacketRepository;
+import core.net.amsc.MSPacketRepository;
+import core.net.amsc.WorldCommunicator;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.InterfaceContext;
 import core.net.packet.out.Interface;
 import core.plugin.Plugin;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 import rs09.game.world.update.UpdateSequence;
 
@@ -96,7 +97,7 @@ public final class LoginConfiguration {
         }
         Repository.getLobbyPlayers().add(player);
         player.getPacketDispatch().sendString(getLastLogin(player), 378, 116);
-        player.getPacketDispatch().sendString("Welcome to " + World.getSettings().getName(), 378, 115);
+        player.getPacketDispatch().sendString("Welcome to " + GameWorld.getSettings().getName(), 378, 115);
         player.getPacketDispatch().sendString(" ", 378, 37);
         player.getPacketDispatch().sendString("Want to stay up to date with the latest news and updates? Join our <br>discord by using the link below!", 378, 38);
         player.getPacketDispatch().sendString(" ", 378, 39);
@@ -108,7 +109,7 @@ public final class LoginConfiguration {
         player.getPacketDispatch().sendString("Want to contribute to 2009scape? <br>Visit the github using the link below!", 378, 230);
         player.getPacketDispatch().sendString(" ", 378, 231);
         player.getPacketDispatch().sendString("Github", 378, 240);
-        player.getPacketDispatch().sendString(World.getSettings().getMessage_string(), messModel, getMessageChild(messModel));
+        player.getPacketDispatch().sendString(GameWorld.getSettings().getMessage_string(), messModel, getMessageChild(messModel));
         player.getPacketDispatch().sendString("You can gain more credits by voting, reporting bugs and various other methods of contribution.", 378, 93);
         player.getInterfaceManager().openWindowsPane(LOBBY_PANE);
         player.getInterfaceManager().setOpened(LOBBY_INTERFACE);
@@ -123,9 +124,7 @@ public final class LoginConfiguration {
      */
     public static void configureGameWorld(final Player player) {
         player.getConfigManager().reset();
-        if(!player.isArtificial()){
-            sendGameConfiguration(player);
-        }
+        sendGameConfiguration(player);
         Repository.getLobbyPlayers().remove(player);
         Repository.getPlayerNames().putIfAbsent(player.getName().toLowerCase(),player);
         player.setPlaying(true);
@@ -169,7 +168,9 @@ public final class LoginConfiguration {
             }
         }
         player.getCommunication().sync(player);
-        MSPacketRepository.sendInfoUpdate(player);
+        if (WorldCommunicator.isEnabled()) {
+            MSPacketRepository.sendInfoUpdate(player);
+        }
     }
 
     /**
@@ -178,14 +179,14 @@ public final class LoginConfiguration {
      * @param player the player. Fullscreen mode Object id:
      */
     public static final void welcome(final Player player) {
-        if (World.getSettings().isPvp()) {
+        if (GameWorld.getSettings().isPvp()) {
             player.getPacketDispatch().sendString("", 226, 0);
         }
         if (player.isArtificial()) {
 
             return;
         }
-        player.getPacketDispatch().sendMessage("Welcome to " + World.getSettings().getName() + ".");
+        player.getPacketDispatch().sendMessage("Welcome to " + GameWorld.getSettings().getName() + ".");
         //player.getPacketDispatch().sendMessage("You are currently playing in beta version 1.2");
         if (player.getDetails().isMuted()) {
             player.getPacketDispatch().sendMessage("You are muted.");
@@ -211,7 +212,7 @@ public final class LoginConfiguration {
         player.getFamiliarManager().login();
         player.getInterfaceManager().openDefaultTabs();
         player.getPlayerGrandExchange().init();
-        player.getPacketDispatch().sendString("Friends List - World " + World.getSettings().getWorldId(), 550, 3);
+        player.getPacketDispatch().sendString("Friends List - World " + GameWorld.getSettings().getWorldId(), 550, 3);
         player.getConfigManager().init();
         player.getAntiMacroHandler().init();
         player.getQuestRepository().syncronizeTab(player);
@@ -250,8 +251,8 @@ public final class LoginConfiguration {
      * Sets a random interface id for the "message of the week" models
      */
     private final static int autoSelect() {
-        boolean contains = IntStream.of(MESSAGE_MODEL).anyMatch(x -> x == World.getSettings().getMessage_model());
-        return contains ? World.getSettings().getMessage_model():MESSAGE_MODEL[new Random().nextInt(MESSAGE_MODEL.length)];
+        boolean contains = IntStream.of(MESSAGE_MODEL).anyMatch(x -> x == GameWorld.getSettings().getMessage_model());
+        return contains ? GameWorld.getSettings().getMessage_model():MESSAGE_MODEL[new Random().nextInt(MESSAGE_MODEL.length)];
     }
 
     /**

@@ -20,7 +20,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -120,7 +120,7 @@ public final class GiantMoleNPC extends AbstractNPC {
 			dest = DIG_LOCATIONS[(index + 1) % DIG_LOCATIONS.length];
 		}
 		final Location destination = dest;
-		World.getPulser().submit(new Pulse(1, this) {
+		GameWorld.getPulser().submit(new Pulse(1, this) {
 			int count = 0;
 			Location hole;
 
@@ -280,7 +280,7 @@ public final class GiantMoleNPC extends AbstractNPC {
 			public boolean handle(final Player player, Node node, String option) {
 				player.animate(Animation.create(828));
 				player.lock(2);
-				World.getPulser().submit(new Pulse(1, player) {
+				GameWorld.getPulser().submit(new Pulse(1, player) {
 					@Override
 					public boolean pulse() {
 						player.getProperties().setTeleportLocation(Location.create(2985, 3316, 0));

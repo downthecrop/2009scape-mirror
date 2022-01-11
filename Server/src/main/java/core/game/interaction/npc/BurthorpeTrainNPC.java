@@ -5,7 +5,7 @@ import java.util.List;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.npc.NPC;
 import core.game.system.task.Pulse;
-import rs09.game.world.World;
+import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -135,7 +135,7 @@ public class BurthorpeTrainNPC extends AbstractNPC {
 				}
 			}
 			final NPC sol = soldier;
-			World.getPulser().submit(new Pulse(1) {
+			GameWorld.getPulser().submit(new Pulse(1) {
 				final NPC sold = sol;
 				@Override
 				public boolean pulse() {
@@ -161,7 +161,7 @@ public class BurthorpeTrainNPC extends AbstractNPC {
 			animate(animation);
 			delay = System.currentTimeMillis() + 3500;
 			faceLocation(getLocation().transform(0, -1, 0));
-			World.getPulser().submit(new Pulse(2) {
+			GameWorld.getPulser().submit(new Pulse(2) {
 				@Override
 				public boolean pulse() {
 					final List<NPC> soldiers = RegionManager.getLocalNpcs(BurthorpeTrainNPC.this, 12);
