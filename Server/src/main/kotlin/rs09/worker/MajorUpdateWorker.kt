@@ -129,7 +129,7 @@ class MajorUpdateWorker {
             worker.start()
         }
 
-        if (ServerConstants.ALLOW_GUI)
-            ServerMonitor.open()
+        //if (ServerConstants.ALLOW_GUI)
+        //    ServerMonitor.open()
     }
 }
