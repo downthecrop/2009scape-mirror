@@ -5328,12 +5328,6 @@
       {
         "minAmount": "1",
         "weight": "100.0",
-        "id": "526",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "100.0",
         "id": "2859",
         "maxAmount": "1"
       }

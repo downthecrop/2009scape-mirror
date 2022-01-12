@@ -108,3 +108,4 @@
 - Fix adventure bots pooling/stuck in Lumbridge after death - ryannathans
 - Removed server monitor as it was blowing up in headless environments - ryannathans
 < --- ABOVE Released January 11th, 2022 https://gitlab.com/2009scape/2009scape/-/tags/Jan-11-2022 ---- >
+- Removed regular bones from wolf drop table-
