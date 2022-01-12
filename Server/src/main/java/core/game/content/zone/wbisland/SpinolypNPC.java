@@ -122,6 +122,12 @@ public final class SpinolypNPC extends AbstractNPC {
 			return 12;
 		}
 
+        @Override
+        public int calculateDefence(Entity v, Entity e) {
+            // Spinolyps' attack always targets ranged defence
+            return CombatStyle.RANGE.getSwingHandler().calculateDefence(v, e);
+        }
+
 		@Override
 		public void visualize(Entity entity, Entity victim, BattleState state) {
 			super.visualize(entity, victim, state);
@@ -137,7 +143,7 @@ public final class SpinolypNPC extends AbstractNPC {
 		@Override
 		public void impact(Entity entity, Entity victim, BattleState state) {
 			super.impact(entity, victim, state);
-			if (super.getType() == CombatStyle.MAGIC) {
+			if (super.getType() == CombatStyle.MAGIC && state.getEstimatedHit() > 0) {
 				victim.getSkills().decrementPrayerPoints(1);
 			} else {
 				if (RandomFunction.random(20) == 5) {

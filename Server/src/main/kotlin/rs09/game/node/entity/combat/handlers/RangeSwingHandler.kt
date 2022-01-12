@@ -154,7 +154,7 @@ open class RangeSwingHandler
                 Projectile.ranged(entity, victim, g.id, g.height, 36, 41, 5).send()
             }
         }
-        val weapon: RangeWeapon? = RangeWeapon.get(state.weapon.id)
+        val weapon: RangeWeapon? = state.weapon?.let { RangeWeapon.get(it.id) }
         val anim = entity.properties.attackAnimation.id
         weapon?.let {
             if ((anim == 422 || anim == 423)) {
