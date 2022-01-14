@@ -14,9 +14,12 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
     private val guaranteedItems = ArrayList<WeightedItem>()
 
     override fun add(element: WeightedItem): Boolean {
-        totalWeight += element.weight
-        return if(element.guaranteed) guaranteedItems.add(element)
-        else super.add(element)
+        return if (element.guaranteed) {
+            guaranteedItems.add(element)
+        } else {
+            totalWeight += element.weight
+            super.add(element)
+        }
     }
 
     open fun roll(): ArrayList<Item>{
