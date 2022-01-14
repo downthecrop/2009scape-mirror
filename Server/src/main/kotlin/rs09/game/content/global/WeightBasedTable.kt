@@ -10,8 +10,8 @@ import core.tools.RandomFunction
 import org.rs09.consts.Items
 
 open class WeightBasedTable : ArrayList<WeightedItem>() {
-    var totalWeight = 0.0
-    val guaranteedItems = ArrayList<WeightedItem>(5)
+    private var totalWeight = 0.0
+    private val guaranteedItems = ArrayList<WeightedItem>()
 
     override fun add(element: WeightedItem): Boolean {
         totalWeight += element.weight
@@ -19,42 +19,43 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         else super.add(element)
     }
 
-    fun roll(): ArrayList<Item>{
-        return roll(null)
-    }
+    open fun roll(): ArrayList<Item>{
+        val items = ArrayList<WeightedItem>()
+        items.addAll(guaranteedItems)
 
-    open fun roll(player: Player?): ArrayList<Item>{
-        val items= ArrayList<Item>(3)
-        items.addAll(guaranteedItems.map { it.getItem() }.toList())
-
-        if(player?.inventory?.isFull == true){
-            return items
-        }
-
-        if(isNotEmpty()) {
-            var tempWeight = RandomFunction.randomDouble(totalWeight)
+        if (isNotEmpty()) {
+            var rngWeight = RandomFunction.randomDouble(totalWeight)
             for (item in shuffled()) {
-                tempWeight -= item.weight
-                if (tempWeight <= 0) {
-                    when(item.id){
-                        SLOT_CLUE_EASY -> items.add(ClueScrollPlugin.getClue(ClueLevel.EASY))
-                        SLOT_CLUE_MEDIUM -> items.add(ClueScrollPlugin.getClue(ClueLevel.MEDIUM))
-                        SLOT_CLUE_HARD -> items.add(ClueScrollPlugin.getClue(ClueLevel.HARD))
-                        SLOT_RDT -> items.add(RareDropTable.retrieve())
-                        else -> items.add(item.getItem())
-                    }
+                rngWeight -= item.weight
+                if (rngWeight <= 0) {
+                    items.add(item)
                     break
                 }
             }
         }
-        return items
+
+        return convertWeightedItems(items)
+    }
+
+    private fun convertWeightedItems(weightedItems: ArrayList<WeightedItem>): ArrayList<Item> {
+        val safeItems = ArrayList<Item>(weightedItems.size)
+        weightedItems.forEach { e ->
+            val safeItem = when (e.id) {
+                SLOT_CLUE_EASY -> ClueScrollPlugin.getClue(ClueLevel.EASY)
+                SLOT_CLUE_MEDIUM -> ClueScrollPlugin.getClue(ClueLevel.MEDIUM)
+                SLOT_CLUE_HARD -> ClueScrollPlugin.getClue(ClueLevel.HARD)
+                SLOT_RDT -> RareDropTable.retrieve()
+                else -> e.getItem()
+            }
+            safeItems.add(safeItem)
+        }
+        return safeItems
     }
 
     open fun canRoll(player: Player): Boolean{
         val guaranteed = guaranteedItems.map { it.getItem() }.toTypedArray()
-        return (player.inventory.hasSpaceFor(*guaranteed) && guaranteed.isNotEmpty()) || !player.inventory.isFull
+        return (guaranteed.isNotEmpty() && player.inventory.hasSpaceFor(*guaranteed)) || !player.inventory.isFull
     }
-
 
     fun insertEasyClue(weight: Double): WeightBasedTable{
         this.add(WeightedItem(SLOT_CLUE_EASY,1,1,weight,false))
@@ -75,7 +76,6 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         this.add(WeightedItem(SLOT_RDT,1,1,weight,false))
         return this
     }
-
 
     companion object {
         @JvmStatic
