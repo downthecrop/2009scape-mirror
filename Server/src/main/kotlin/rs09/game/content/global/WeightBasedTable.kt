@@ -23,7 +23,10 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         val items = ArrayList<WeightedItem>()
         items.addAll(guaranteedItems)
 
-        if (isNotEmpty()) {
+        if (size == 1) {
+            items.add(get(0))
+        }
+        else if (isNotEmpty()) {
             var rngWeight = RandomFunction.randomDouble(totalWeight)
             for (item in shuffled()) {
                 rngWeight -= item.weight
