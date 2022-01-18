@@ -41,6 +41,7 @@ class GCItemOnCat : InteractionListener() {
 
         onUseWith(NPC, Items.THREE_LITTLE_KITTENS_13236, NPCs.GERTRUDES_CAT_2997){player, used, with ->
             if(removeItem(player, used.asItem())){
+                setQuestStage(player, GERTCAT, 60)
                 //below copied verbatim from original, I don't like it.
                 Pulser.submit(object : Pulse(1) {
                     var count = 0
