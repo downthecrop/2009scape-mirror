@@ -48,7 +48,7 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 	 * Constructs a new {@code WaterBirthDungeonZone} {@code Object}.
 	 */
 	public WaterBirthDungeonZone() {
-		super("Water birth dungeon", true, ZoneRestriction.CANNON, ZoneRestriction.RANDOM_EVENTS);
+		super("Water birth dungeon", true, ZoneRestriction.RANDOM_EVENTS);
 		PluginManager.definePlugin(new DagannothKingNPC());
 		PluginManager.definePlugin(new DoorSupportNPC());
 		PluginManager.definePlugin(new DungeonOptionHandler());

@@ -111,3 +111,5 @@
 - Removed regular bones from wolf drop table - Lethimyr
 - Fix Gertrude's Cat quest not completing - ryannathans
 - Fix missing special attack damage modifiers for range and melee attacks - vk
+- Waterbirth Dungeon is now cannonable - aweinstock
+- Spinolyps only drain prayer if they hit, and always target ranged defence (plus null reference fix) - aweinstock
