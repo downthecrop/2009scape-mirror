@@ -7,7 +7,9 @@ import rs09.game.ai.general.GeneralBotCreator
 import rs09.game.ai.general.scriptrepository.*
 import rs09.game.ai.pvmbots.CombatBotAssembler
 import rs09.game.ai.skillingbot.SkillingBotAssembler
+import java.util.Timer
 import java.util.concurrent.Executors
+import kotlin.concurrent.schedule
 
 object ImmerseWorld {
     var assembler = CombatBotAssembler()
@@ -25,13 +27,27 @@ object ImmerseWorld {
            // immerseSlayer()
         }
     }
+
     fun immerseAdventurer(){
-        val lumbridge = Location.create(3221, 3219, 0)
-        for(i in (0..(GameWorld.settings?.max_adv_bots ?: 50))){
-            GeneralBotCreator(Adventurer(CombatStyle.MELEE), assembler.MeleeAdventurer(CombatBotAssembler.Tier.LOW,lumbridge))
-            GeneralBotCreator(Adventurer(CombatStyle.MELEE), assembler.MeleeAdventurer(CombatBotAssembler.Tier.MED,lumbridge))
-            GeneralBotCreator(Adventurer(CombatStyle.RANGE), assembler.RangeAdventurer(CombatBotAssembler.Tier.MED,lumbridge))
+        for (i in 0..(GameWorld.settings?.max_adv_bots ?: 50)){
+            var random: Long = (10000..300000).random().toLong()
+            Timer().schedule(random){
+                spawn_adventurers()
+            }
         }
+    }
+
+    fun spawn_adventurers(){
+        val lumbridge = Location.create(3221, 3219, 0)
+        val tiers = listOf<CombatBotAssembler.Tier>(CombatBotAssembler.Tier.LOW,CombatBotAssembler.Tier.MED)
+        GeneralBotCreator(
+            Adventurer(CombatStyle.MELEE),
+            assembler.MeleeAdventurer(tiers.random(), lumbridge)
+        )
+        GeneralBotCreator(
+            Adventurer(CombatStyle.RANGE),
+            assembler.RangeAdventurer(tiers.random(), lumbridge)
+        )
     }
 
     fun immerseFishingGuild(){
