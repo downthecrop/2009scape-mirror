@@ -113,3 +113,5 @@
 - Fix missing special attack damage modifiers for range and melee attacks - vk
 - Waterbirth Dungeon is now cannonable - aweinstock
 - Spinolyps only drain prayer if they hit, and always target ranged defence (plus null reference fix) - aweinstock
+- Increase drop rate of Sinister Key to 1/12 - aweinstock
+- Strike spells now always max on Salarin, convert Yanille Agility Dungeon to kotlin + listener - aweinstock
