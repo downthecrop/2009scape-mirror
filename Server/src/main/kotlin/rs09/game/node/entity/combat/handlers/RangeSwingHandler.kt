@@ -154,7 +154,7 @@ open class RangeSwingHandler
                 Projectile.ranged(entity, victim, g.id, g.height, 36, 41, 5).send()
             }
         }
-        val weapon: RangeWeapon? = RangeWeapon.get(state.weapon.id)
+        val weapon: RangeWeapon? = state.weapon?.let { RangeWeapon.get(it.id) }
         val anim = entity.properties.attackAnimation.id
         weapon?.let {
             if ((anim == 422 || anim == 423)) {
@@ -222,7 +222,7 @@ open class RangeSwingHandler
         }
         cumulativeStr *= getSetMultiplier(entity, Skills.RANGE)
         cumulativeStr *= (bonus + 64)
-        return floor(1.5 + (ceil(cumulativeStr) / 640.0)).toInt()
+        return floor((1.5 + (ceil(cumulativeStr) / 640.0)) * modifier).toInt()
         //return ((14 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier).toInt() / 10 + 1
     }
 
