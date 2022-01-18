@@ -65,7 +65,7 @@ class ThievingListeners : InteractionListener() {
                 node.asNpc().face(null)
             } else {
                 player.lock(2)
-                pickpocketData.table.roll(player).forEach { player.inventory.add(it) }
+                pickpocketData.table.roll().forEach { player.inventory.add(it) }
                 player.skills.addExperience(Skills.THIEVING,pickpocketData.experience)
             }
 
