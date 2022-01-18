@@ -108,5 +108,12 @@
 - Fix adventure bots pooling/stuck in Lumbridge after death - ryannathans
 - Removed server monitor as it was blowing up in headless environments - ryannathans
 < --- ABOVE Released January 11th, 2022 https://gitlab.com/2009scape/2009scape/-/tags/Jan-11-2022 ---- >
-- Removed regular bones from wolf drop table-
+- Removed regular bones from wolf drop table - ryannathans
+- Fix Gertrude's Cat quest not completing - ryannathans
+- Fix missing special attack damage modifiers for range and melee attacks - vk
+- Waterbirth Dungeon is now cannonable - aweinstock
+- Spinolyps only drain prayer if they hit, and always target ranged defence (plus null reference fix) - aweinstock
+- Increase drop rate of Sinister Key to 1/12 - aweinstock
+- Strike spells now always max on Salarin, convert Yanille Agility Dungeon to kotlin + listener - aweinstock
+- Refactor NPCDropTable, WeightBasedTable and fixed bug where special items weren't processed in some cases - ryannathans
 - Fixed issues with Adventure bot assembly and initial spawning into game world - Sir Kermit
