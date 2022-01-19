@@ -1,7 +1,6 @@
 package rs09.game.system.command.sets
 
 import api.*
-import api.InputType
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
@@ -32,9 +31,6 @@ import rs09.game.system.command.Command
 import rs09.game.system.command.CommandMapping
 import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
-import java.awt.Toolkit
-import java.awt.datatransfer.StringSelection
-import java.util.*
 
 @Initializable
 class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
@@ -76,9 +72,6 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             SystemLogger.logInfo("Viewport: " + l.getSceneX(player.playerFlags.lastSceneGraph) + "," + l.getSceneY(player.playerFlags.lastSceneGraph))
             val loc = "Location.create(" + l.x + ", " + l.y + ", " + l.z + ")"
             SystemLogger.logInfo(loc + "; " + player.playerFlags.lastSceneGraph + ", " + l.localX + ", " + l.localY)
-            val stringSelection = StringSelection(loc)
-            val clpbrd = Toolkit.getDefaultToolkit().systemClipboard
-            clpbrd.setContents(stringSelection, null)
         }
 
         /**
@@ -287,10 +280,6 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 sb.append(entry)
                 first = false
             }
-
-            val stringSelection = StringSelection(sb.toString())
-            val clpbrd = Toolkit.getDefaultToolkit().systemClipboard
-            clpbrd.setContents(stringSelection, null)
 
             log.clear()
             player.setAttribute("loc-log",log)

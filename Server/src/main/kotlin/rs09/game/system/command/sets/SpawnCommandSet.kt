@@ -1,16 +1,14 @@
 package rs09.game.system.command.sets
 
 import core.cache.Cache
-import core.game.node.scenery.Scenery
-import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.npc.NPC
 import core.game.node.item.Item
+import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryBuilder
+import core.plugin.Initializable
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Command
 import rs09.game.system.command.CommandPlugin
-import core.plugin.Initializable
-import java.awt.Toolkit
-import java.awt.datatransfer.StringSelection
 
 @Initializable
 class SpawnCommandSet : CommandSet(Command.Privilege.ADMIN){
@@ -29,9 +27,7 @@ class SpawnCommandSet : CommandSet(Command.Privilege.ADMIN){
             npc.direction = player.direction
             npc.init()
             npc.isWalks = args.size > 2
-            val npcString = "{" + npc.location.x + "," + npc.location.y + "," + npc.location.z + "," + (if (npc.isWalks) "1" else "0") + "," + npc.direction.ordinal + "}"
-            val clpbrd = Toolkit.getDefaultToolkit().systemClipboard
-            clpbrd.setContents(StringSelection(npcString), null)
+            val npcString = "{" + player!!.username + "," + npc.id + "," + npc.location.x + "," + npc.location.y + "," + npc.location.z + "}"
             println(npcString)
         }
 
