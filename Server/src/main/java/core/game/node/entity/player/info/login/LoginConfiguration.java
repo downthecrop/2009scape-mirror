@@ -13,6 +13,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.InterfaceContext;
 import core.net.packet.out.Interface;
 import core.plugin.Plugin;
+import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
 import rs09.game.world.update.UpdateSequence;
@@ -202,6 +203,7 @@ public final class LoginConfiguration {
      * @param player the player.
      */
     public static final void config(final Player player) {
+        SystemLogger.logInfo("configuring player " + player.getUsername());
         player.getInventory().refresh();
         player.getEquipment().refresh();
         player.getSkills().refresh();
@@ -220,6 +222,7 @@ public final class LoginConfiguration {
         player.getInterfaceManager().close();
         player.getEmoteManager().refresh();
         player.getInterfaceManager().openInfoBars();
+        SystemLogger.logInfo("finished configuring player " + player.getUsername());
     }
 
     /**
