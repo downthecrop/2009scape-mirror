@@ -37,7 +37,7 @@ class LoginReadEvent
  */
 (session: IoSession?, buffer: ByteBuffer?) : IoReadEvent(session, buffer) {
     override fun read(session: IoSession, buffer: ByteBuffer) {
-        println("login read")
+        SystemLogger.logInfo("login read")
         val opcode: Int = buffer.get().toInt()
         if (buffer.short.toInt() != buffer.remaining()) {
             session.write(Response.BAD_SESSION_ID)
@@ -66,7 +66,7 @@ class LoginReadEvent
          * @param buffer The buffer to read from.
          */
         private fun decodeWorld(opcode: Int, session: IoSession, buffer: ByteBuffer) {
-            println("decodeWorld")
+            SystemLogger.logInfo("decodeWorld")
             var buffer = buffer
             val d = buffer.get() // Memory?
             val e = buffer.get() // no advertisement = 1
@@ -106,7 +106,7 @@ class LoginReadEvent
             session.isaacPair = ISAACPair(inCipher, outCipher)
             session.clientInfo = ClientInfo(displayMode, windowMode, screenWidth, screenHeight)
             val b = buffer
-            println("spawning thread to handle login")
+            SystemLogger.logInfo("spawning thread to handle login")
             TaskExecutor.executeSQL {
                 Thread.currentThread().name = "Login Password Response"
                 try {
@@ -136,7 +136,7 @@ class LoginReadEvent
          */
         @JvmStatic
         private fun login(details: PlayerDetails, session: IoSession, buffer: ByteBuffer, opcode: Int) {
-            println("login")
+            SystemLogger.logInfo("login")
             if(!Repository.LOGGED_IN_PLAYERS.contains(details.username))
                 Repository.LOGGED_IN_PLAYERS.add(details.username)
             val parser = LoginParser(details, LoginType.fromType(opcode))
@@ -156,7 +156,7 @@ class LoginReadEvent
          */
         @JvmStatic
         fun getISAACSeed(buffer: ByteBuffer): IntArray {
-            println("getISAACSeed")
+            SystemLogger.logInfo("getISAACSeed")
             val seed = IntArray(4)
             for (i in 0..3) {
                 seed[i] = buffer.int
@@ -171,9 +171,9 @@ class LoginReadEvent
          */
         @JvmStatic
         fun getRSABlock(buffer: ByteBuffer): ByteBuffer {
-            println("getRSABlock")
+            SystemLogger.logInfo("getRSABlock")
             fun ByteArray.toHex(): String = joinToString(separator = "") { eachByte -> "%02x".format(eachByte) }
-            println(buffer.array().sliceArray(0..1500).toHex())
+            SystemLogger.logInfo(buffer.array().sliceArray(0..1500).toHex())
             val numBytes = 256 + buffer.get()
             val encryptedByteArray = ByteArray(numBytes)
             buffer.get(encryptedByteArray)
