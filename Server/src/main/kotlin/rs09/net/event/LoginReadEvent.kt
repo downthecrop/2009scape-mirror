@@ -122,7 +122,7 @@ class LoginReadEvent
                     e.printStackTrace()
                     session.write(Response.COULD_NOT_LOGIN)
                 }
-                println("end login thread")
+                SystemLogger.logInfo("end login thread")
             }
         }
 
