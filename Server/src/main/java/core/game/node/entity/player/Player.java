@@ -84,6 +84,7 @@ import rs09.game.node.entity.player.info.login.PlayerSaver;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
 import rs09.game.node.entity.state.newsys.State;
 import rs09.game.node.entity.state.newsys.StateRepository;
+import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.DisconnectionQueue;
 import rs09.game.world.repository.Repository;
@@ -397,11 +398,11 @@ public class Player extends Entity {
 
 	@Override
 	public void init() {
+		SystemLogger.logInfo(getUsername() + " initialising...");
 		if (!artificial) {
 			getProperties().setSpawnLocation(ServerConstants.HOME_LOCATION);
 			getDetails().getSession().setObject(this);
 			getDetails().getSession().setLastPing(System.currentTimeMillis() + 10_000L);
-			antiMacroHandler.init();
 		}
 		super.init();
 		LoginConfiguration.configureLobby(this);
