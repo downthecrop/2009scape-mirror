@@ -8,6 +8,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.state.EntityState;
+import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
@@ -111,17 +112,17 @@ public enum BoltEffect {
 			super.impact(state);
 		}
 	},
-	RUBY(9242, new Graphics(754), new Audio(2915)) {
+	RUBY(9242, new Graphics(754), new Audio(2915)) {  // should be sound 2911 but it bugs out
 
 		@Override
-		public void impact(BattleState state) {
+		public void impact(BattleState state) {  // hit target for 20% of their HP, hit self for 10% of HP
+			SystemLogger.logInfo("PROC");
 			int victimPoints = (int) (state.getVictim().getSkills().getLifepoints() * 0.20);
 			int playerPoints = (int) (state.getAttacker().getSkills().getLifepoints() * 0.10);
-			int total = state.getEstimatedHit() + victimPoints;
-			if (total >= 100 && state.getVictim().getId() == NPCs.CORPOREAL_BEAST_8133) {
-				total = 100;
+			if (victimPoints >= 100 && state.getVictim().getId() == NPCs.CORPOREAL_BEAST_8133) {
+				victimPoints = 100;
 			}
-			state.setEstimatedHit(total);
+			state.setEstimatedHit(victimPoints);
 			state.getAttacker().getImpactHandler().manualHit(state.getVictim(), playerPoints, HitsplatType.NORMAL);
 			super.impact(state);
 		}
@@ -138,7 +139,7 @@ public enum BoltEffect {
 	DIAMOND(9243, new Graphics(758), new Audio(2913)) {
 		@Override
 		public void impact(BattleState state) {
-			state.setEstimatedHit(state.getEstimatedHit() + RandomFunction.random(5, 14));
+			state.setEstimatedHit(state.getEstimatedHit() + RandomFunction.random(5, 14));  // unauthentic, needs fixing
 			super.impact(state);
 		}
 	},
@@ -233,11 +234,16 @@ public enum BoltEffect {
 	 * Handles the impact.
 	 * @param state the battle state.
 	 */
-	@SuppressWarnings("unused")
 	public void impact(BattleState state) {
 		Entity victim = state.getVictim();
-		if (sound != null && victim instanceof Player) {
-			sound.send(victim.asPlayer(), true);
+		if (sound != null) {
+			Entity attacker = state.getAttacker();
+			if (attacker instanceof Player) {
+				sound.send(attacker.asPlayer(), true);
+			}
+			if (victim instanceof Player) {
+				sound.send(victim.asPlayer(), true);
+			}
 		}
 		if (graphics != null) {
 			victim.graphics(graphics);
