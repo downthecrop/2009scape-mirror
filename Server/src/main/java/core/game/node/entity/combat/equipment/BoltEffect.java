@@ -8,7 +8,6 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.state.EntityState;
-import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Graphics;
 import core.tools.RandomFunction;
@@ -116,7 +115,6 @@ public enum BoltEffect {
 
 		@Override
 		public void impact(BattleState state) {  // hit target for 20% of their HP, hit self for 10% of HP
-			SystemLogger.logInfo("PROC");
 			int victimPoints = (int) (state.getVictim().getSkills().getLifepoints() * 0.20);
 			int playerPoints = (int) (state.getAttacker().getSkills().getLifepoints() * 0.10);
 			if (victimPoints >= 100 && state.getVictim().getId() == NPCs.CORPOREAL_BEAST_8133) {
