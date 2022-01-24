@@ -111,7 +111,7 @@ public enum BoltEffect {
 			super.impact(state);
 		}
 	},
-	RUBY(9242, new Graphics(754), new Audio(2915)) {  // should be sound 2911 but it bugs out
+	RUBY(9242, new Graphics(754), new Audio(2911, 1)) {   // in this case, volume is the number of times to play the sound...
 
 		@Override
 		public void impact(BattleState state) {  // hit target for 20% of their HP, hit self for 10% of HP
@@ -213,19 +213,10 @@ public enum BoltEffect {
 	 * @param graphics the graphics.
 	 * @param sound the sound.
 	 */
-	private BoltEffect(int itemId, Graphics graphics, Audio sound) {
+	BoltEffect(int itemId, Graphics graphics, Audio sound) {
 		this.itemId = itemId;
 		this.graphics = graphics;
 		this.sound = sound;
-	}
-
-	/**
-	 * Constructs a new {@Code BoltEffect} {@Code Object}
-	 * @param itemId the id.
-	 * @param graphics the graphics.
-	 */
-	private BoltEffect(int itemId, Graphics graphics) {
-		this(itemId, graphics, null);
 	}
 
 	/**
