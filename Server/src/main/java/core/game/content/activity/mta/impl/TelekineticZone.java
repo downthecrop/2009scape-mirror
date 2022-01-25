@@ -122,11 +122,6 @@ public class TelekineticZone extends MTAZone {
 			if (player == null || player != this.player) {
 				return super.leave(entity, logout);
 			}
-			if (logout) {
-				player.getSavedData().getActivityData().setSolvedMazes(solved);
-			} else {
-				player.getSavedData().getActivityData().setSolvedMazes(0);
-			}
 			if (statue != null) {
 				GroundItemManager.destroy(statue);
 			}
@@ -277,6 +272,7 @@ public class TelekineticZone extends MTAZone {
 				}
 			});
 		}
+        player.getSavedData().getActivityData().setSolvedMazes(solved);
 		incrementPoints(player, MTAType.TELEKINETIC.ordinal(), points);
 		TelekineticZone.this.update(player);
 		player.setAttribute("camera", false);

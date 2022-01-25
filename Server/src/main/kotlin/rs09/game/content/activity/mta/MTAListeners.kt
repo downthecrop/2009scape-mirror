@@ -2,6 +2,7 @@ package rs09.game.content.activity.mta
 
 import core.game.content.activity.mta.impl.AlchemistZone
 import core.game.node.item.Item
+import core.game.world.map.Direction
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import org.rs09.consts.Items
@@ -15,6 +16,9 @@ class MTAListeners : InteractionListener() {
         on(NPCs.MAZE_GUARDIAN_3102,NPC,"talk-to"){player,node ->
             player.dialogueInterpreter.open(node.id, node)
             return@on true
+        }
+        setDest(NPC, intArrayOf(NPCs.MAZE_GUARDIAN_3102), "talk-to") { player, node ->
+			return@setDest node.location.transform(Direction.getDirection(player.location, node.location), -1);
         }
     }
 }

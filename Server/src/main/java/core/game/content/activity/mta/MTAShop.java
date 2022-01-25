@@ -241,9 +241,9 @@ public class MTAShop {
 			if (item == null) {
 				return true;
 			}
-			if (opcode == 230) {
+			if (opcode == 155) {
 				value(player, item, slot);
-			} else {
+			} else if (opcode == 196) {
 				buy(player, item, slot);
 			}
 			return true;

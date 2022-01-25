@@ -154,7 +154,7 @@ class ModernListeners : SpellListener("modern"){
             if(isInMTA){
                 if(bones.contains(item.id)){
                     val inInventory = player.inventory.getAmount(item.id)
-                    val amount = inInventory * GraveyardZone.BoneType.forItem(Item(item.id)).ordinal + 1
+                    val amount = inInventory * (GraveyardZone.BoneType.forItem(Item(item.id)).ordinal + 1)
                     if(amount > 0){
                         player.inventory.remove(Item(item.id,inInventory))
                         player.inventory.add(Item(if(bananas) Items.BANANA_1963 else Items.PEACH_6883,amount))
