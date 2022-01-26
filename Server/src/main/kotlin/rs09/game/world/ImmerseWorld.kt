@@ -21,7 +21,7 @@ object ImmerseWorld {
             immerseSeersAndCatherby()
             immerseLumbridgeDraynor()
             immerseVarrock()
-            immerseWilderness()
+            // immerseWilderness() temp disabled due to unbalanced exchange rates
             immerseFishingGuild()
             immerseAdventurer()
            // immerseSlayer()
