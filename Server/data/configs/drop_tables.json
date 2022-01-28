@@ -23976,6 +23976,12 @@
         "weight": "2.0",
         "id": "12163",
         "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "120.0",
+        "id": "0",
+        "maxAmount": "1"
       }
     ],
     "ids": "2455,2456",
@@ -24303,12 +24309,6 @@
         "minAmount": "1",
         "weight": "16.0",
         "id": "5733",
-        "maxAmount": "1"
-      },
-      {
-        "minAmount": "1",
-        "weight": "1400.0",
-        "id": "0",
         "maxAmount": "1"
       }
     ]
