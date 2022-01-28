@@ -66,7 +66,7 @@ class SilverInterface : InterfaceListener() {
     fun make(player: Player, product: SilverProduct, amount: Int){
         var amt = amount
         closeInterface(player)
-        submitWorldPulse(object : Pulse(){
+        submitIndividualPulse(player, object : Pulse(){
             override fun pulse(): Boolean {
                 if(amt < 1) return true
                 if(!inInventory(player, product.needed) || !inInventory(player, Items.SILVER_BAR_2355)) return true;
