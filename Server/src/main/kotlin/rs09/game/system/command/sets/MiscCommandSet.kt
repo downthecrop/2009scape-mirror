@@ -177,7 +177,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             }
             var lineid = 11
             player.packetDispatch.sendString("Commands",Components.QUESTJOURNAL_SCROLL_275,2)
-            for(line in CommandMapping.getNames())
+            for(line in CommandMapping.getNames().sorted())
                 player.packetDispatch.sendString(line,Components.QUESTJOURNAL_SCROLL_275,lineid++)
             player.interfaceManager.open(Component(Components.QUESTJOURNAL_SCROLL_275))
         }
