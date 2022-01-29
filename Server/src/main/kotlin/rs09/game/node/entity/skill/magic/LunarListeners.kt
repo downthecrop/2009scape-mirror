@@ -161,6 +161,7 @@ class LunarListeners : SpellListener("lunar") {
         lock(player, 3)
         setDelay(player, false)
         visualizeSpell(player, PLANK_MAKE_ANIM, PLANK_MAKE_GFX, 3617)
+        removeRunes(player)
         replaceSlot(player, item.slot, plankType.plank)
         addXP(player, 90.0)
         showMagicTab(player)
