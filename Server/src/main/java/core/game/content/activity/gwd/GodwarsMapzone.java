@@ -16,6 +16,7 @@ import core.game.node.entity.player.info.Rights;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
+import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -365,8 +366,11 @@ public final class GodwarsMapzone extends MapZone implements Plugin<Object> {
 			player.getPacketDispatch().sendMessage("You need " + required + " " + StringUtils.formatDisplayName(name) + " kills to enter this.");
 			return true;
 		}
-		increaseKillcount(player, faction, -required);
-		DoorActionHandler.handleAutowalkDoor(player, object);
+
+		if (DoorActionHandler.handleAutowalkDoor(player, object)) {
+			SystemLogger.logInfo(player.getUsername() + " entered " + faction.name() + " gwd boss room");
+			increaseKillcount(player, faction, -required);
+		}
 		return true;
 	}
 
