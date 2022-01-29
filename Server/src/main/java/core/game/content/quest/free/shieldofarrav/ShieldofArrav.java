@@ -4,7 +4,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
-import rs09.game.content.dialogue.KingRoaldDialogue;
+import rs09.game.content.dialogue.region.varrock.KingRoaldDialogue;
 import rs09.plugin.PluginManager;
 
 /**

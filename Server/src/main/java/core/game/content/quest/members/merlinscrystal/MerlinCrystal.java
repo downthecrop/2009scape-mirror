@@ -3,6 +3,7 @@ package core.game.content.quest.members.merlinscrystal;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.plugin.Initializable;
+import rs09.game.content.quest.members.merlinsquest.TheLadyOfTheLake;
 import rs09.plugin.PluginManager;
 
 /**

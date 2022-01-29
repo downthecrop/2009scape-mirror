@@ -10,6 +10,8 @@ import core.game.world.update.flag.context.Animation;
 /**
  * Handles the surok magis dialogue.
  * @author Vexia
+ * @editor Nuggles
+ * fixed the default dialogue, the NPC and Player tags were swapped.
  */
 public class SurokMagisDialogue extends DialoguePlugin {
 
@@ -105,31 +107,31 @@ public class SurokMagisDialogue extends DialoguePlugin {
 		default:
 			switch (stage) {
 			case 0:
-				player("What do you want? ...Oh, wait. I know! You're", "probably just like all the others, aren't you? After some", "fancy spell or potion from me, I bet!");
+				npc("What do you want? ...Oh, wait. I know! You're", "probably just like all the others, aren't you? After some", "fancy spell or potion from me, I bet!");
 				stage = 1;
 				break;
 			case 1:
-				npc("No! at least, I don't think so. What sort of spells", "do you have?");
+				player("No! at least, I don't think so. What sort of spells", "do you have?");
 				stage = 2;
 				break;
 			case 2:
-				player("Hah! I knew it! I expect you want my Aphro-Dizzy-", "Yak spell! Want someone to fall madly in love with you,", "eh?");
+				npc("Hah! I knew it! I expect you want my Aphro-Dizzy-", "Yak spell! Want someone to fall madly in love with you,", "eh?");
 				stage = 3;
 				break;
 			case 3:
-				npc("That spell sounds very interesting, but I didn't mean to", "disturb you!");
+				player("That spell sounds very interesting, but I didn't mean to", "disturb you!");
 				stage = 4;
 				break;
 			case 4:
-				player("Well, I see that you do have some manners. I'm glad", "to see that you use them.");
+				npc("Well, I see that you do have some manners. I'm glad", "to see that you use them.");
 				stage = 5;
 				break;
 			case 5:
-				player("Now, if it's all the same, I am very bust at the", "moment. Come back another time", "please and thank you.");
+				npc("Now, if it's all the same, I am very busy at the", "moment. Come back another time", "please and thank you.");
 				stage = 6;
 				break;
 			case 6:
-				npc("Yes, of course!");
+				player("Yes, of course!");
 				stage = 7;
 				break;
 			case 7:

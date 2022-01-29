@@ -1,6 +1,7 @@
 package core.game.content.quest.members.familycrest
 
 import core.game.content.dialogue.DialoguePlugin
+import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
@@ -17,11 +18,11 @@ class BootDialogue (player: Player? = null): DialoguePlugin(player){
         val qstage = player?.questRepository?.getStage("Family Crest") ?: -1
 
         if(qstage < 14 || qstage > 14){
-            npc("Hello tall person.")
+            npc(FacialExpression.OLD_NORMAL,"Hello tall person.")
             stage = 1
         }
         else{
-            npc("Hello tall person.")
+            npc(FacialExpression.OLD_NORMAL,"Hello tall person.")
             stage = 2
         }
 
@@ -37,7 +38,7 @@ class BootDialogue (player: Player? = null): DialoguePlugin(player){
 
             10 ->when(buttonId){
                 1-> player("Hello short person.").also { stage = 1000 }
-                2 -> npc("I'm called Boot, because when I was very young, ",
+                2 -> npc(FacialExpression.OLD_ANGRY1,"I'm called Boot, because when I was very young, ",
                         "I used to sleep, in a large boot.").also{stage++}
 
             }
@@ -45,13 +46,13 @@ class BootDialogue (player: Player? = null): DialoguePlugin(player){
             11 -> player("Yeah, great, I didn't want your life story.").also { stage = 1000}
 
             20 -> when (buttonId){
-                1 -> npc("High quality gold eh? Hmmm... " ,
+                1 -> npc(FacialExpression.OLD_DEFAULT,"High quality gold eh? Hmmm... " ,
                         "Well, the very best quality gold that I know of " ,
                         "can be found in an underground ruin near Witchaven.").also{stage++}
 
                 2-> player("Hello short person.").also { stage = 1000 }
 
-                3 -> npc("I'm called Boot, because when I was very young, ",
+                3 -> npc(FacialExpression.OLD_ANGRY1,"I'm called Boot, because when I was very young, ",
                         "I used to sleep, in a large boot.").also{stage = 11}
             }
 

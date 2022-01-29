@@ -2,6 +2,7 @@ package core.game.node.entity.npc.familiar;
 
 import core.cache.def.impl.NPCDefinition;
 import core.plugin.Initializable;
+import core.game.node.entity.skill.SkillBonus;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
@@ -97,6 +98,7 @@ public final class VoidFamiliarNPC implements Plugin<Object> {
 		 */
 		public VoidRavagerNPC(Player owner, int id) {
 			super(owner, id, 2700, 12818, 3, WeaponInterface.STYLE_AGGRESSIVE, ITEMS);
+			boosts.add(new SkillBonus(Skills.MINING, 1));				
 		}
 
 		@Override

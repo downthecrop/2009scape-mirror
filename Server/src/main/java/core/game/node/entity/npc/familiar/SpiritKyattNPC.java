@@ -1,5 +1,7 @@
 package core.game.node.entity.npc.familiar;
 
+import core.game.node.entity.skill.SkillBonus;
+import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
 import core.game.node.entity.combat.equipment.WeaponInterface;
@@ -27,6 +29,7 @@ public class SpiritKyattNPC extends Familiar {
 	 */
 	public SpiritKyattNPC(Player owner, int id) {
 		super(owner, id, 4900, 12812, 3, WeaponInterface.STYLE_ACCURATE);
+		boosts.add(new SkillBonus(Skills.HUNTER, 5));		
 	}
 
 	@Override

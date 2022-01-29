@@ -180,6 +180,11 @@ public final class PotionDecantingPlugin extends UseWithHandler {
 		if (flagged(itemDose, otherDose)) {
 			return false;
 		}
+
+		if (item.getId() == item.getNoteChange() || other.getId() == item.getNoteChange()) {
+			return false;
+		}
+
 		final int[] newDoses = getDoses(itemDose, otherDose);
 		if (itemDose == 4 && otherDose == 0 || otherDose == 4 && itemDose == 0) {
 			player.getInventory().replace(getItem(item.getName().contains("Vial") ? otherName : itemName, newDoses[1]), item.getSlot());

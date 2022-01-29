@@ -1,5 +1,7 @@
 package core.game.node.entity.npc.familiar;
 
+import core.game.node.entity.skill.SkillBonus;
+import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
 import core.game.node.entity.Entity;
@@ -31,6 +33,7 @@ public class ArcticBearNPC extends Familiar {
 	 */
 	public ArcticBearNPC(Player owner, int id) {
 		super(owner, id, 2800, 12057, 6, WeaponInterface.STYLE_CONTROLLED);
+		boosts.add(new SkillBonus(Skills.HUNTER, 7));		
 	}
 
 	@Override

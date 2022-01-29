@@ -2,6 +2,7 @@ package rs09.game.node.entity.skill.farming
 
 import api.*
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.tools.RandomFunction
@@ -25,12 +26,14 @@ class CompostBin(val player: Player, val bin: CompostBins) {
 
     fun close() {
         isClosed = true
+        player.audioManager.send(2428)          
         finishedTime = System.currentTimeMillis() + TimeUnit.MINUTES.toMillis(RandomFunction.random(35,50).toLong())
         updateBit()
     }
 
     fun open(){
         isClosed = false
+        player.audioManager.send(2429)        
         updateBit()
     }
 
@@ -45,6 +48,7 @@ class CompostBin(val player: Player, val bin: CompostBins) {
             isSuperCompost = true
             isClosed = false
         }
+        player.audioManager.send(Audio (2443, 1, 1))
         updateBit()
         if(isSuperCompost) rewardXP(player, Skills.FARMING, 8.5)
         else rewardXP(player, Skills.FARMING, 4.5)
@@ -108,6 +112,8 @@ class CompostBin(val player: Player, val bin: CompostBins) {
             remaining
         } else item.amount
         for(i in 0 until amount) {
+
+            player.audioManager.send(2441)
             addItem(item.id)
         }
     }
