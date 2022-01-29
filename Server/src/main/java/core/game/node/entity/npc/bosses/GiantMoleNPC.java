@@ -211,11 +211,7 @@ public final class GiantMoleNPC extends AbstractNPC {
 	@Override
 	public void onImpact(final Entity entity, BattleState state) {
 		if (!getLocks().isInteractionLocked()) {
-			int chance = 15;
-			if (getSkills().getLifepoints() < getSkills().getMaximumLifepoints() >> 1) {
-				chance *= 3;
-			}
-			if (RandomFunction.randomize(100) < chance && inCombat()) {
+			if (RandomFunction.randomize(100) < 24 && inCombat() && getSkills().getLifepoints() < 100 && getSkills().getLifepoints() > 5){
 				dig();
 				return;
 			}

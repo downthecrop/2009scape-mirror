@@ -7,7 +7,25 @@ import core.game.node.item.Item;
  * @author 'Vexia
  */
 public enum UnfinishedPotion {
-	GUAM(Herbs.GUAM.getProduct(), 3, new Item(91)), MARRENTILL(Herbs.MARRENTILL.getProduct(), 5, new Item(93)), TARROMIN(Herbs.TARROMIN.getProduct(), 12, new Item(95)), HARRALANDER(Herbs.HARRALANDER.getProduct(), 22, new Item(97)), RANARR(Herbs.RANARR.getProduct(), 30, new Item(99)), TOADFLAX(Herbs.TOADFLAX.getProduct(), 34, new Item(3002)), SPIRIT_WEED(Herbs.SPIRIT_WEED.getProduct(), 40, new Item(12181)), IRIT(Herbs.IRIT.getProduct(), 45, new Item(101)), AVANTOE(Herbs.AVANTOE.getProduct(), 50, new Item(103)), KWUARM(Herbs.KWUARM.getProduct(), 55, new Item(105)), SNAPDRAGON(Herbs.SNAPDRAGON.getProduct(), 63, new Item(3004)), CADANTINE(Herbs.CADANTINE.getProduct(), 66, new Item(107)), LANTADYME(Herbs.LANTADYME.getProduct(), 69, new Item(2483)), DWARF_WEED(Herbs.DWARF_WEED.getProduct(), 72, new Item(109)), TORSTOL(Herbs.TORSTOL.getProduct(), 75, new Item(111)), STRONG_WEAPON_POISON(HerblorePulse.COCONUT_MILK, new Item(6016), 73, new Item(5936)), SUPER_STRONG_WEAPON_POISON(HerblorePulse.COCONUT_MILK, new Item(2398), 82, new Item(5939)), STRONG_ANTIPOISON(HerblorePulse.COCONUT_MILK, Herbs.TOADFLAX.getProduct(), 68, new Item(5942)), SUPER_STRONG_ANTIPOISON(HerblorePulse.COCONUT_MILK, Herbs.IRIT.getProduct(), 79, new Item(5951));
+	GUAM(Herbs.GUAM.getProduct(), 3, new Item(91)),
+	MARRENTILL(Herbs.MARRENTILL.getProduct(), 5, new Item(93)),
+	TARROMIN(Herbs.TARROMIN.getProduct(), 12, new Item(95)),
+	HARRALANDER(Herbs.HARRALANDER.getProduct(), 22, new Item(97)),
+	RANARR(Herbs.RANARR.getProduct(), 30, new Item(99)),
+	TOADFLAX(Herbs.TOADFLAX.getProduct(), 34, new Item(3002)),
+	SPIRIT_WEED(Herbs.SPIRIT_WEED.getProduct(), 40, new Item(12181)),
+	IRIT(Herbs.IRIT.getProduct(), 45, new Item(101)),
+	AVANTOE(Herbs.AVANTOE.getProduct(), 50, new Item(103)),
+	KWUARM(Herbs.KWUARM.getProduct(), 55, new Item(105)),
+	SNAPDRAGON(Herbs.SNAPDRAGON.getProduct(), 63, new Item(3004)),
+	CADANTINE(Herbs.CADANTINE.getProduct(), 66, new Item(107)),
+	LANTADYME(Herbs.LANTADYME.getProduct(), 69, new Item(2483)),
+	DWARF_WEED(Herbs.DWARF_WEED.getProduct(), 72, new Item(109)),
+	TORSTOL(Herbs.TORSTOL.getProduct(), 75, new Item(111)),
+	STRONG_WEAPON_POISON(HerblorePulse.COCONUT_MILK, new Item(6016), 73, new Item(5936)),
+	SUPER_STRONG_WEAPON_POISON(HerblorePulse.COCONUT_MILK, new Item(2398), 82, new Item(5939)),
+	STRONG_ANTIPOISON(HerblorePulse.COCONUT_MILK, Herbs.TOADFLAX.getProduct(), 68, new Item(5942)),
+	SUPER_STRONG_ANTIPOISON(HerblorePulse.COCONUT_MILK, Herbs.IRIT.getProduct(), 79, new Item(5951));
 
 	/**
 	 * Represents the base item.

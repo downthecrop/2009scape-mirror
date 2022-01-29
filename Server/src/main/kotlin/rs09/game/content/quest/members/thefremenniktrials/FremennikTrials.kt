@@ -1,10 +1,13 @@
-/*
 package core.game.content.quest.fremtrials
 
 import core.game.node.entity.player.Player
+import api.*
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
+import core.game.node.item.Item
 import core.plugin.Initializable
+import org.rs09.consts.Items
+import rs09.game.content.activity.allfiredup.AFUBeacon
 
 @Initializable
 class FremennikTrials : Quest("Fremennik Trials",64,63,3,347,0,1,10){
@@ -38,8 +41,34 @@ class FremennikTrials : Quest("Fremennik Trials",64,63,3,347,0,1,10){
             line(player,"Swensen the Navigator",line++,player.getAttribute("fremtrials:swensen-vote",false))
             line(player,"Sigli the Huntsman",line++,player.getAttribute("fremtrials:sigli-vote",false))
             line(player,"Olaf the Bard",line++,player.getAttribute("fremtrials:olaf-vote",false))
+            line(player,"Thorvald the Warrior",line++,player.getAttribute("fremtrials:thorvald-vote",false))
+            line(player,"Sigmund the Merchant",line++,player.getAttribute("fremtrials:sigmund-vote",false))
+            line(player,"Peer the Seer",line++,player.getAttribute("fremtrials:peer-vote",false))
             line(player,"So far I have gotten ${player.getAttribute("fremtrials:votes",0)} votes.",line++)
         }
+    }
+
+    override fun finish(player: Player?) {
+        super.finish(player)
+        player ?: return
+        var ln = 10
+        player.packetDispatch.sendItemZoomOnInterface(Items.FREMENNIK_HELM_3748, 235, 277, 5)
+        drawReward(player, "3 Quest points, 2.8k XP in:", ln++)
+        drawReward(player, "Strength, Defence, Attack,",ln++)
+        drawReward(player, "Hitpoints, Fishing, Thieving,", ln++)
+        drawReward(player, "Agility,Crafting, Fletching,", ln++)
+        drawReward(player, "Woodcutting",ln++)
+        player.skills.addExperience(Skills.STRENGTH, 2812.4)
+        player.skills.addExperience(Skills.DEFENCE, 2812.4)
+        player.skills.addExperience(Skills.ATTACK, 2812.4)
+        player.skills.addExperience(Skills.HITPOINTS, 2812.4)
+        player.skills.addExperience(Skills.FISHING, 2812.4)
+        player.skills.addExperience(Skills.THIEVING, 2812.4)
+        player.skills.addExperience(Skills.AGILITY, 2812.4)
+        player.skills.addExperience(Skills.CRAFTING, 2812.4)
+        player.skills.addExperience(Skills.FLETCHING, 2812.4)
+        player.skills.addExperience(Skills.WOODCUTTING, 2812.4)
+        player.questRepository.syncronizeTab(player)
     }
 
     override fun newInstance(`object`: Any?): Quest {
@@ -49,4 +78,4 @@ class FremennikTrials : Quest("Fremennik Trials",64,63,3,347,0,1,10){
         return this
     }
 
-}*/
+}

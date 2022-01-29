@@ -34,7 +34,7 @@ public final class MonkeyDialogue extends DialoguePlugin {
 
 	@Override
 	public boolean open(Object... args) {
-		player("Who's a cute little monkey?");
+		player("Hey little man, how's it goin'?");
 		return true;
 	}
 
@@ -46,12 +46,15 @@ public final class MonkeyDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 1:
+			player(FacialExpression.HALF_GUILTY,"Yeah.");
+			stage = 5;
+			break;
+		case 5:
 			end();
 			break;
 		}
 		return true;
 	}
-
 	@Override
 	public int[] getIds() {
 		return new int[] { 2301 };

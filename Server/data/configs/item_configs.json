@@ -5862,6 +5862,7 @@
     "name": "Wizard hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "579",
     "bonuses": "0,0,0,2,0,0,0,0,2,0,0,0,0,0,0"
   },
@@ -6590,9 +6591,11 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "677",
+    "examine": "A silly pointed hat.",
     "durability": null,
     "name": "Hat",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "656",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
     "equipment_slot": "0"
@@ -6609,9 +6612,11 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "480",
+    "examine": "A silly pointed hat.",
     "durability": null,
     "name": "Hat",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "658",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
     "equipment_slot": "0"
@@ -6628,9 +6633,11 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "421",
+    "examine": "A silly pointed hat.",
     "durability": null,
     "name": "Hat",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "660",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
     "equipment_slot": "0"
@@ -6647,9 +6654,11 @@
   {
     "ge_buy_limit": "100",
     "grand_exchange_price": "1102",
+    "examine": "A silly pointed hat.",
     "durability": null,
     "name": "Hat",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "662",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
     "equipment_slot": "0"
@@ -6669,12 +6678,14 @@
     "durability": null,
     "name": "Hat",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "664",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
     "equipment_slot": "0"
   },
   {
     "ge_buy_limit": "100",
+    "examine": "A silly pointed hat.",
     "grand_exchange_price": "295",
     "durability": null,
     "name": "Hat",
@@ -6794,7 +6805,7 @@
     "id": "676"
   },
   {
-    "examine": "An empty tray for panning./This tray contains mud.",
+    "examine": "An empty tray for panning.",
     "durability": null,
     "name": "Panning tray",
     "high_alchemy": "1",
@@ -6802,7 +6813,7 @@
     "id": "677"
   },
   {
-    "examine": "An empty tray for panning./This tray contains mud.",
+    "examine": "This tray contains gold nuggets.",
     "durability": null,
     "name": "Panning tray",
     "high_alchemy": "1",
@@ -6810,7 +6821,7 @@
     "id": "678"
   },
   {
-    "examine": "An empty tray for panning./This tray contains mud.",
+    "examine": "This tray contains mud.",
     "durability": null,
     "name": "Panning tray",
     "high_alchemy": "1",
@@ -7275,6 +7286,7 @@
     "name": "Blue hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "740",
     "bonuses": "0,0,0,2,0,0,0,0,2,0,0,0,0,0,0"
   },
@@ -10047,6 +10059,7 @@
     "name": "Wizard hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "1017",
     "bonuses": "0,0,0,2,0,0,0,0,2,0,0,0,0,0,0"
   },
@@ -10458,6 +10471,7 @@
     "name": "Santa hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "1050"
   },
   {
@@ -15839,7 +15853,7 @@
     "archery_ticket_price": "0",
     "id": "1391",
     "stand_turn_anim": "1209",
-    "bonuses": "7,-1,25,10,0,2,3,1,10,0,0,32,0,0,0",
+    "bonuses": "7,-1,25,12,0,2,3,1,12,0,0,32,0,0,0",
     "requirements": "{0,30}-{6,30}",
     "shop_price": "7000",
     "durability": null,
@@ -15878,7 +15892,7 @@
     "archery_ticket_price": "0",
     "id": "1393",
     "stand_turn_anim": "1209",
-    "bonuses": "7,-1,28,10,0,2,3,1,10,0,0,35,0,0,0",
+    "bonuses": "7,-1,28,12,0,2,3,1,12,0,0,35,0,0,0",
     "requirements": "{0,30}-{6,30}",
     "shop_price": "19600",
     "durability": null,
@@ -15917,7 +15931,7 @@
     "archery_ticket_price": "0",
     "id": "1395",
     "stand_turn_anim": "1209",
-    "bonuses": "7,-1,28,10,0,2,3,1,10,0,0,35,0,0,0",
+    "bonuses": "7,-1,28,12,0,2,3,1,12,0,0,35,0,0,0",
     "requirements": "{0,30}-{6,30}",
     "durability": null,
     "high_alchemy": "9300",
@@ -15955,7 +15969,7 @@
     "archery_ticket_price": "0",
     "id": "1397",
     "stand_turn_anim": "1209",
-    "bonuses": "7,-1,28,10,0,2,3,1,10,0,0,35,0,0,0",
+    "bonuses": "7,-1,28,12,0,2,3,1,12,0,0,35,0,0,0",
     "requirements": "{0,30}-{6,30}",
     "shop_price": "7000",
     "durability": null,
@@ -15994,7 +16008,7 @@
     "archery_ticket_price": "0",
     "id": "1399",
     "stand_turn_anim": "1209",
-    "bonuses": "7,-1,28,10,0,2,3,1,10,0,0,35,0,0,0",
+    "bonuses": "7,-1,28,12,0,2,3,1,12,0,0,35,0,0,0",
     "requirements": "{0,30}-{6,30}",
     "shop_price": "1500",
     "durability": null,
@@ -16033,7 +16047,7 @@
     "archery_ticket_price": "0",
     "id": "1401",
     "stand_turn_anim": "1209",
-    "bonuses": "10,-1,40,10,0,2,3,1,10,0,0,50,0,0,0",
+    "bonuses": "10,-1,40,14,0,2,3,1,14,0,0,50,0,0,0",
     "requirements": "{0,40}-{6,40}",
     "durability": null,
     "high_alchemy": "25500",
@@ -16071,7 +16085,7 @@
     "archery_ticket_price": "0",
     "id": "1403",
     "stand_turn_anim": "1209",
-    "bonuses": "10,-1,40,10,0,2,3,1,10,0,0,50,0,0,0",
+    "bonuses": "10,-1,40,14,0,2,3,1,14,0,0,50,0,0,0",
     "requirements": "{0,40}-{6,40}",
     "durability": null,
     "high_alchemy": "25500",
@@ -16108,7 +16122,7 @@
     "archery_ticket_price": "0",
     "id": "1405",
     "stand_turn_anim": "1209",
-    "bonuses": "10,-1,40,10,0,2,3,1,10,0,0,50,0,0,0",
+    "bonuses": "10,-1,40,14,0,2,3,1,14,0,0,50,0,0,0",
     "requirements": "{0,40}-{6,40}",
     "durability": null,
     "high_alchemy": "25500",
@@ -16146,7 +16160,7 @@
     "archery_ticket_price": "0",
     "id": "1407",
     "stand_turn_anim": "1209",
-    "bonuses": "10,-1,40,10,0,2,3,1,10,0,0,50,0,0,0",
+    "bonuses": "10,-1,40,14,0,2,3,1,14,0,0,50,0,0,0",
     "requirements": "{0,40}-{6,40}",
     "shop_price": "40000",
     "durability": null,
@@ -27871,6 +27885,7 @@
     "name": "Robin hood hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "2581",
     "bonuses": "0,0,0,-10,8,4,6,8,4,4,7,0,0,0,0"
   },
@@ -28780,6 +28795,7 @@
     "low_alchemy": "72",
     "high_alchemy": "108",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "2651",
     "equipment_slot": "0"
   },
@@ -28809,7 +28825,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2653",
-    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,0,0,0"
+    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -28836,7 +28852,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2655",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -28865,7 +28881,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2657",
-    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,0,0,0"
+    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,1,0,1"
   },
   {
     "ge_buy_limit": "2",
@@ -28920,7 +28936,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2661",
-    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,0,0,0"
+    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -28934,7 +28950,7 @@
   {
     "requirements": "{1,40}",
     "ge_buy_limit": "2",
-    "examine": "Rune platelegs in the colours of Saradomin!",
+    "examine": "Rune platelegs in the colours of Saradomin.",
     "durability": null,
     "low_alchemy": "25600",
     "high_alchemy": "38400",
@@ -28947,7 +28963,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2663",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -28976,7 +28992,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2665",
-    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,0,0,0"
+    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,1,0,1"
   },
   {
     "ge_buy_limit": "2",
@@ -29031,7 +29047,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2669",
-    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,0,0,0"
+    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -29058,7 +29074,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2671",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -29087,7 +29103,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2673",
-    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,0,0,0"
+    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -30874,6 +30890,7 @@
     "name": "Hat",
     "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "2900",
     "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
     "equipment_slot": "0"
@@ -32487,7 +32504,7 @@
     "archery_ticket_price": "0",
     "id": "3053",
     "stand_turn_anim": "1209",
-    "bonuses": "7,-1,28,10,0,2,3,1,10,0,0,35,0,0,0",
+    "bonuses": "7,-1,28,12,0,2,3,1,12,0,0,35,0,0,0",
     "requirements": "{0,30}-{6,30}",
     "durability": null,
     "high_alchemy": "10200",
@@ -32516,7 +32533,7 @@
     "archery_ticket_price": "0",
     "id": "3054",
     "stand_turn_anim": "1209",
-    "bonuses": "10,-1,40,10,0,2,3,1,10,0,0,50,0,0,0",
+    "bonuses": "10,-1,40,14,0,2,3,1,14,0,0,50,0,0,0",
     "requirements": "{0,40}-{6,40}",
     "shop_price": "160",
     "durability": null,
@@ -36008,7 +36025,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3478",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -36026,7 +36043,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3479",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -36044,7 +36061,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3480",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -39275,7 +39292,7 @@
     "id": "4020"
   },
   {
-    "examine": "It's an unstrung Amulet of Monkey Speak. It makes vague chattering noises.",
+    "examine": "It's an Amulet of Monkey Speak. It makes vague chattering noises.",
     "durability": null,
     "name": "M'speak amulet",
     "weight": "1.3",
@@ -63451,7 +63468,7 @@
     "archery_ticket_price": "0",
     "id": "6562",
     "stand_turn_anim": "1209",
-    "bonuses": "7,-1,28,10,0,2,3,1,10,0,0,35,0,0,0",
+    "bonuses": "7,-1,28,12,0,2,3,1,12,0,0,35,0,0,0",
     "requirements": "{0,30}-{6,30}",
     "durability": null,
     "high_alchemy": "10200",
@@ -63478,7 +63495,7 @@
     "archery_ticket_price": "0",
     "id": "6563",
     "stand_turn_anim": "1209",
-    "bonuses": "10,-1,40,10,0,2,3,1,10,0,0,50,0,0,0",
+    "bonuses": "10,-1,40,14,0,2,3,1,14,0,0,50,0,0,0",
     "requirements": "{0,40}-{6,40}",
     "shop_price": "40000",
     "durability": null,
@@ -71211,16 +71228,17 @@
   {
     "ge_buy_limit": "2",
     "examine": "A silly pointed hat with colourful trim.",
-    "grand_exchange_price": "1400000",
     "durability": null,
-    "name": "Wizard hat (g)",
-    "tradeable": "true",
     "high_alchemy": "1",
     "weight": "1",
+    "equipment_slot": "0",
+    "grand_exchange_price": "1400000",
+    "name": "Wizard hat (g)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "7394",
-    "bonuses": "0,0,0,2,0,0,0,0,2,0,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,2,0,0,0,0,2,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -71234,16 +71252,17 @@
   {
     "ge_buy_limit": "2",
     "examine": "A silly pointed hat, with colourful trim.",
-    "grand_exchange_price": "352700",
     "durability": null,
-    "name": "Wizard hat (t)",
-    "tradeable": "true",
     "high_alchemy": "1",
     "weight": "0.4",
+    "equipment_slot": "0",
+    "grand_exchange_price": "352700",
+    "name": "Wizard hat (t)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
+    "hat": "true",
     "id": "7396",
-    "bonuses": "0,0,0,2,0,0,0,0,2,0,0,0,0,0,0",
-    "equipment_slot": "0"
+    "bonuses": "0,0,0,2,0,0,0,0,2,0,0,0,0,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93617,7 +93636,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10368",
-    "bonuses": "0,0,0,-10,11,6,5,7,8,0,6,0,0,0,0"
+    "bonuses": "0,0,0,-10,11,6,5,7,8,0,6,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93644,7 +93663,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10370",
-    "bonuses": "0,0,0,-15,30,55,47,60,50,55,55,0,0,0,0"
+    "bonuses": "0,0,0,-15,30,55,47,60,50,55,55,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93656,7 +93675,7 @@
     "id": "10371"
   },
   {
-    "requirements": "{1,40}-{4,70}",
+    "requirements": "{4,70}",
     "ge_buy_limit": "2",
     "examine": "Zamorak blessed dragonhide chaps.",
     "durability": null,
@@ -93670,7 +93689,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10372",
-    "bonuses": "0,0,0,-10,17,31,25,33,28,31,30,0,0,0,0"
+    "bonuses": "0,0,0,-10,17,31,25,33,28,31,30,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93696,7 +93715,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10374",
-    "bonuses": "0,0,0,-1,7,4,7,10,4,8,8,0,0,0,0"
+    "bonuses": "0,0,0,-1,7,4,7,10,4,8,8,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93721,7 +93740,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10376",
-    "bonuses": "0,0,0,-10,11,6,5,7,8,0,6,0,0,0,0"
+    "bonuses": "0,0,0,-10,11,6,5,7,8,0,6,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93749,7 +93768,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10378",
-    "bonuses": "0,0,0,-15,30,55,47,60,50,55,55,0,0,0,0"
+    "bonuses": "0,0,0,-15,30,55,47,60,50,55,55,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93761,7 +93780,7 @@
     "id": "10379"
   },
   {
-    "requirements": "{1,40}-{4,70}",
+    "requirements": "{4,70}",
     "ge_buy_limit": "2",
     "examine": "Guthix blessed dragonhide chaps.",
     "durability": null,
@@ -93775,7 +93794,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10380",
-    "bonuses": "0,0,0,-10,17,31,25,33,28,31,30,0,0,0,0"
+    "bonuses": "0,0,0,-10,17,31,25,33,28,31,30,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93802,7 +93821,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10382",
-    "bonuses": "0,0,0,-1,7,4,7,10,4,8,8,0,0,0,0"
+    "bonuses": "0,0,0,-1,7,4,7,10,4,8,8,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93827,7 +93846,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10384",
-    "bonuses": "0,0,0,-10,11,6,5,7,8,0,6,0,0,0,0"
+    "bonuses": "0,0,0,-10,11,6,5,7,8,0,6,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93856,7 +93875,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10386",
-    "bonuses": "0,0,0,-15,30,55,47,60,50,55,55,0,0,0,0"
+    "bonuses": "0,0,0,-15,30,55,47,60,50,55,55,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93868,7 +93887,7 @@
     "id": "10387"
   },
   {
-    "requirements": "{1,40}-{4,70}",
+    "requirements": "{4,70}",
     "ge_buy_limit": "2",
     "examine": "Saradomin blessed dragonhide chaps.",
     "durability": null,
@@ -93881,7 +93900,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10388",
-    "bonuses": "0,0,0,-10,17,31,25,33,28,31,30,0,0,0,0"
+    "bonuses": "0,0,0,-10,17,31,25,33,28,31,30,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93907,7 +93926,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10390",
-    "bonuses": "0,0,0,-1,7,4,7,10,4,8,8,0,0,0,0"
+    "bonuses": "0,0,0,-1,7,4,7,10,4,8,8,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -105799,9 +105818,9 @@
     "examine": "Part of the Godsword blade.",
     "grand_exchange_price": "150200",
     "durability": null,
+    "rare_item": "true",
     "name": "Godsword shard 1",
     "tradeable": "true",
-    "rare_item": "true",
     "low_alchemy": "100000",
     "high_alchemy": "150000",
     "weight": "2",
@@ -105820,15 +105839,15 @@
   {
     "ge_buy_limit": "10",
     "examine": "Part of the Godsword blade.",
-    "grand_exchange_price": "149100",
     "durability": null,
-    "name": "Godsword shard 2",
-    "tradeable": "true",
     "rare_item": "true",
     "low_alchemy": "100000",
     "high_alchemy": "150000",
     "destroy": "true",
     "weight": "2",
+    "grand_exchange_price": "149100",
+    "name": "Godsword shard 2",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "11712"
   },
@@ -105846,9 +105865,9 @@
     "examine": "Part of the Godsword blade.",
     "grand_exchange_price": "149800",
     "durability": null,
+    "rare_item": "true",
     "name": "Godsword shard 3",
     "tradeable": "true",
-    "rare_item": "true",
     "low_alchemy": "100000",
     "high_alchemy": "150000",
     "weight": "2",
@@ -106182,7 +106201,7 @@
     "archery_ticket_price": "0",
     "id": "11736",
     "stand_turn_anim": "1209",
-    "bonuses": "7,-1,28,10,0,2,3,1,10,0,0,35,0,0,0",
+    "bonuses": "7,-1,28,12,0,2,3,1,12,0,0,35,0,0,0",
     "requirements": "{0,30}-{6,30}",
     "durability": null,
     "high_alchemy": "10200",
@@ -106218,7 +106237,7 @@
     "archery_ticket_price": "0",
     "id": "11738",
     "stand_turn_anim": "1209",
-    "bonuses": "10,-1,40,10,0,2,3,1,10,0,0,50,0,0,0",
+    "bonuses": "10,-1,40,14,0,2,3,1,14,0,0,50,0,0,0",
     "requirements": "{0,40}-{6,40}",
     "durability": null,
     "high_alchemy": "27000",
@@ -129195,7 +129214,7 @@
     "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,0,0,0"
   },
   {
-    "examine": "Rune platelegs in the colours of Saradomin!",
+    "examine": "Rune platelegs in the colours of Saradomin.",
     "durability": null,
     "low_alchemy": "25600",
     "high_alchemy": "38400",
@@ -129633,7 +129652,7 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "12,6,0",
     "equipment_slot": "4",
@@ -129641,6 +129660,7 @@
     "remove_sleeves": "true",
     "grand_exchange_price": "1412812",
     "name": "Zuriel's robe top",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13858",
     "bonuses": "0,0,0,35,-10,63,45,74,35,0,60,0,0,0,0"
@@ -129652,7 +129672,7 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "1412812",
@@ -129687,13 +129707,14 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "8,4,0",
     "equipment_slot": "7",
     "destroy_message": "Drop",
     "grand_exchange_price": "986668",
     "name": "Zuriel's robe bottom",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13861",
     "bonuses": "0,0,0,25,-7,38,35,44,24,0,30,0,0,0,0"
@@ -129705,7 +129726,7 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "986668",
@@ -129740,13 +129761,14 @@
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "6,3,0",
     "equipment_slot": "0",
     "destroy_message": "Drop",
     "grand_exchange_price": "361542",
     "name": "Zuriel's hood",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13864",
     "bonuses": "0,0,0,8,-2,20,16,22,8,0,15,0,0,0,0"
@@ -129758,7 +129780,7 @@
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "361542",
@@ -129802,6 +129824,7 @@
     "destroy_message": "Drop",
     "grand_exchange_price": "2116989",
     "stand_anim": "813",
+    "tradeable": "true",
     "run_anim": "1210",
     "archery_ticket_price": "0",
     "id": "13867",
@@ -129811,7 +129834,7 @@
     "shop_price": "300000",
     "durability": null,
     "high_alchemy": "180000",
-    "destroy": "true",
+    "destroy": "false",
     "weapon_interface": "1",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
@@ -129824,7 +129847,7 @@
     "durability": null,
     "low_alchemy": "120000",
     "high_alchemy": "180000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "2116989",
@@ -129871,7 +129894,7 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "0,12,6",
     "equipment_slot": "4",
@@ -129879,6 +129902,7 @@
     "remove_sleeves": "true",
     "grand_exchange_price": "926341",
     "name": "Morrigan's leather body",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13870",
     "bonuses": "0,0,0,-15,36,61,53,66,75,62,60,0,0,0,0"
@@ -129890,7 +129914,7 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "926341",
@@ -129925,13 +129949,14 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "0,8,4",
     "equipment_slot": "7",
     "destroy_message": "Drop, Destroy after degrading.",
     "grand_exchange_price": "510395",
     "name": "Morrigan's leather chaps",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13873",
     "bonuses": "0,0,0,-10,23,35,29,37,46,35,30,0,0,0,0"
@@ -129943,7 +129968,7 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop, Destroy after degrading.",
     "grand_exchange_price": "510395",
@@ -129978,13 +130003,14 @@
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "0,6,3",
     "equipment_slot": "0",
     "destroy_message": "Drop",
     "grand_exchange_price": "236411",
     "name": "Morrigan's coif",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13876",
     "bonuses": "0,0,0,-5,13,8,11,14,8,12,15,0,0,0,0"
@@ -129996,7 +130022,7 @@
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "236411",
@@ -130032,7 +130058,7 @@
     "durability": null,
     "low_alchemy": "1600",
     "high_alchemy": "2400",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "6",
     "weapon_interface": "18",
     "absorb": "0,0,0",
@@ -130041,6 +130067,7 @@
     "destroy_message": "Drop",
     "grand_exchange_price": "19944",
     "name": "Morrigan's javelin",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13879",
     "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,0,0,0"
@@ -130053,7 +130080,7 @@
     "durability": null,
     "low_alchemy": "1600",
     "high_alchemy": "2400",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "6",
     "weapon_interface": "18",
     "absorb": "0,0,0",
@@ -130062,6 +130089,7 @@
     "destroy_message": "Drop",
     "grand_exchange_price": "19944",
     "name": "Morrigan's javelin(p)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13880",
     "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,0,0,0"
@@ -130074,7 +130102,7 @@
     "durability": null,
     "low_alchemy": "1600",
     "high_alchemy": "2400",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "6",
     "weapon_interface": "18",
     "absorb": "0,0,0",
@@ -130083,6 +130111,7 @@
     "destroy_message": "Drop",
     "grand_exchange_price": "19944",
     "name": "Morrigan's javelin(p+)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13881",
     "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,0,0,0"
@@ -130095,7 +130124,7 @@
     "durability": null,
     "low_alchemy": "1600",
     "high_alchemy": "2400",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "6",
     "weapon_interface": "18",
     "absorb": "0,0,0",
@@ -130104,6 +130133,7 @@
     "destroy_message": "Drop",
     "grand_exchange_price": "19944",
     "name": "Morrigan's javelin(p++)",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13882",
     "bonuses": "0,0,0,0,105,0,0,0,0,0,0,0,0,0,0"
@@ -130116,7 +130146,7 @@
     "durability": null,
     "low_alchemy": "1600",
     "high_alchemy": "2400",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "5",
     "weapon_interface": "18",
     "absorb": "0,0,0",
@@ -130124,6 +130154,7 @@
     "destroy_message": "Drop",
     "grand_exchange_price": "9994",
     "name": "Morrigan's throwing axe",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13883",
     "bonuses": "0,0,0,0,93,0,0,0,0,0,0,0,0,0,0"
@@ -130135,7 +130166,7 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "6,0,12",
     "equipment_slot": "4",
@@ -130143,6 +130174,7 @@
     "remove_sleeves": "true",
     "grand_exchange_price": "1619096",
     "name": "Statius's platebody",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13884",
     "bonuses": "5,5,7,-30,-10,154,145,121,-6,157,60,5,0,0,0"
@@ -130154,7 +130186,7 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "1619096",
@@ -130189,7 +130221,7 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "6,0,12",
     "equipment_slot": "4",
@@ -130197,6 +130229,7 @@
     "remove_sleeves": "true",
     "grand_exchange_price": "2154168",
     "name": "Vesta's chainbody",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13887",
     "bonuses": "5,7,7,-15,0,120,131,145,-3,140,60,6,0,0,0"
@@ -130208,7 +130241,7 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop, Destroy once it has been degraded.",
     "grand_exchange_price": "2154168",
@@ -130243,13 +130276,14 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "4,0,8",
     "equipment_slot": "7",
     "destroy_message": "Drop",
     "grand_exchange_price": "1735029",
     "name": "Statius's platelegs",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13890",
     "bonuses": "3,3,5,-21,-7,110,106,97,-4,121,30,3,0,0,0"
@@ -130261,7 +130295,7 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "1735029",
@@ -130295,13 +130329,14 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "4,0,8",
     "equipment_slot": "7",
     "destroy_message": "Drop",
     "grand_exchange_price": "1860767",
     "name": "Vesta's plateskirt",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13893",
     "bonuses": "3,5,5,-17,-4,86,100,112,-2,118,30,3,0,0,0"
@@ -130313,7 +130348,7 @@
     "durability": null,
     "low_alchemy": "200000",
     "high_alchemy": "300000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "1860767",
@@ -130348,13 +130383,14 @@
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "absorb": "3,0,6",
     "equipment_slot": "0",
     "destroy_message": "Drop",
     "grand_exchange_price": "1301986",
     "name": "Statius's full helm",
+    "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "13896",
     "bonuses": "3,3,4,-6,-2,65,70,63,-1,71,15,3,0,0,0"
@@ -130366,7 +130402,7 @@
     "durability": null,
     "low_alchemy": "100000",
     "high_alchemy": "150000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "1301986",
@@ -130410,6 +130446,7 @@
     "attack_anims": "381,390,390,390",
     "destroy_message": "Drop",
     "grand_exchange_price": "10464249",
+    "tradeable": "true",
     "run_anim": "824",
     "archery_ticket_price": "0",
     "id": "13899",
@@ -130419,7 +130456,7 @@
     "shop_price": "300000",
     "durability": null,
     "high_alchemy": "180000",
-    "destroy": "true",
+    "destroy": "false",
     "weapon_interface": "5",
     "render_anim": "1426",
     "attack_audios": "2500,2500,2517,2500",
@@ -130432,7 +130469,7 @@
     "durability": null,
     "low_alchemy": "120000",
     "high_alchemy": "180000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop",
     "grand_exchange_price": "10464249",
@@ -130488,6 +130525,7 @@
     "destroy_message": "Drop, Destroy once it has been degraded.",
     "grand_exchange_price": "7424450",
     "stand_anim": "808",
+    "tradeable": "true",
     "run_anim": "1210",
     "archery_ticket_price": "0",
     "id": "13902",
@@ -130497,7 +130535,7 @@
     "shop_price": "300000",
     "durability": null,
     "high_alchemy": "180000",
-    "destroy": "true",
+    "destroy": "false",
     "weapon_interface": "10",
     "attack_audios": "2504,0,0,0",
     "name": "Statius's warhammer"
@@ -130509,7 +130547,7 @@
     "durability": null,
     "low_alchemy": "120000",
     "high_alchemy": "180000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "destroy_message": "Drop, Destroy once it has been degraded.",
     "grand_exchange_price": "7424450",
@@ -130565,6 +130603,7 @@
     "destroy_message": "Drop",
     "grand_exchange_price": "5264612",
     "stand_anim": "813",
+    "tradeable": "true",
     "run_anim": "1210",
     "archery_ticket_price": "0",
     "id": "13905",
@@ -130574,7 +130613,7 @@
     "shop_price": "300000",
     "durability": null,
     "high_alchemy": "180000",
-    "destroy": "true",
+    "destroy": "false",
     "weight": "4.2",
     "weapon_interface": "14",
     "render_anim": "28",
@@ -130587,7 +130626,7 @@
     "durability": null,
     "low_alchemy": "120000",
     "high_alchemy": "180000",
-    "destroy": "true",
+    "destroy": "false",
     "attack_speed": "4",
     "two_handed": "true",
     "destroy_message": "Drop",
