@@ -4,6 +4,7 @@ object Lunar {
     const val BARBARIAN_TELEPORT = 0
     const val NPC_CONTACT = 4
     const val MONSTER_EXAMINE = 6
+    const val PLANK_MAKE = 11
     const val BAKE_PIE = 15
     const val HOME_TELEPORT = 16
     const val FISHING_GUILD_TELEPORT = 17
