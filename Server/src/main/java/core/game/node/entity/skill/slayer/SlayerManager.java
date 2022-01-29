@@ -126,11 +126,13 @@ public final class SlayerManager {
 				} else if(flags.getCompletedTasks() == 4){
 					player.sendMessage("You've completed your task; you will start gaining points on your next task!");
 					flags.flagCanEarnPoints();
-				} else {
+				} else if (flags.getMaster() == Master.TURAEL){
+					player.sendMessages("You've completed your task; Tasks from Turael do not award points.", "Return to a Slayer master.");
+				}
+				else
+				{
 					player.sendMessages("You've completed your task; Complete " + (4 - flags.getCompletedTasks()) + " more task(s) to start gaining points.", "Return to a Slayer master.");
 				}
-			} else {
-				//player.sendMessage("You're assigned to kill " + NPCDefinition.forId((player.getSlayer().getTask().getNpcs()[0])).getName().toLowerCase() + "s; Only " + getAmount() + " more to go.");
 			}
 		}
 	}
