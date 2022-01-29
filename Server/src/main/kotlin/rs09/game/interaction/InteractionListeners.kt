@@ -12,6 +12,7 @@ import rs09.game.system.SystemLogger
 object InteractionListeners {
     private val listeners = HashMap<String,(Player, Node) -> Boolean>(1000)
     private val useWithListeners = HashMap<String,(Player,Node,Node) -> Boolean>(1000)
+    private val useWithWildcardListeners = HashMap<Int, ArrayList<Pair<(Int, Int) -> Boolean, (Player, Node, Node) -> Boolean>>>(10)
     private val destinationOverrides = HashMap<String,(Entity, Node) -> Location>(100)
     private val equipListeners = HashMap<String,(Player,Node) -> Boolean>(10)
 
@@ -56,6 +57,14 @@ object InteractionListeners {
     }
 
     @JvmStatic
+    fun addWildcard(type: Int, predicate: (used: Int, with: Int) -> Boolean, handler: (player: Player, used: Node, with: Node) -> Boolean) {
+        if(!useWithWildcardListeners.containsKey(type)) {
+            useWithWildcardListeners.put(type, ArrayList())
+        }
+        useWithWildcardListeners[type]!!.add(Pair(predicate, handler))
+    }
+
+    @JvmStatic
     fun addEquip(id: Int,method: (Player, Node) -> Boolean){
         equipListeners["equip:$id"] = method
     }
@@ -76,8 +85,18 @@ object InteractionListeners {
     }
 
     @JvmStatic
-    fun get(used: Int, with: Int, type: Int): ((Player,Node,Node) -> Boolean)?{
-        return useWithListeners["$used:$with:$type"]
+    fun get(used: Int, with: Int, type: Int): ((Player,Node,Node) -> Boolean)? {
+        var method = useWithListeners["$used:$with:$type"]
+        if(method != null) {
+            return method
+        }
+        val handlers = useWithWildcardListeners[type] ?: return null
+        for(pair in handlers) {
+            if(pair.first(used, with)) {
+                return pair.second
+            }
+        }
+        return null
     }
 
     @JvmStatic

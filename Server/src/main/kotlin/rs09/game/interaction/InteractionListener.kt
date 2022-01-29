@@ -30,6 +30,11 @@ abstract class InteractionListener : Listener{
     fun onUseWith(type: Int, used: IntArray, vararg with: Int, handler: (player: Player, used: Node, with: Node) -> Boolean){
         InteractionListeners.add(type,used,with,handler)
     }
+    // Note: wildcard listeners incur overhead on every use-with interaction, only use them as a space-time tradeoff when something
+    // is actually supposed to have a response to every item used with it (e.g. imp boxes, certain quest npcs)
+    fun onUseWithWildcard(type: Int, predicate: (used: Int, with: Int) -> Boolean, handler: (player: Player, used: Node, with: Node) -> Boolean) {
+        InteractionListeners.addWildcard(type, predicate, handler)
+    }
     fun onEquip(id: Int, handler: (player: Player, node: Node) -> Boolean){
         InteractionListeners.addEquip(id,handler)
     }
