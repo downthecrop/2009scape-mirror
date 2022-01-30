@@ -83,12 +83,9 @@ public final class EdgevilleNodePlugin extends OptionHandler {
                 if (option.equalsIgnoreCase("open") && player.getLocation().getY() < 9918) {
                     player.getInterfaceManager().openComponent(382);
                     player.setAttribute("wildy_gate", node);
-                    player.setAttribute("wildy_gate_loc",
-                            Location.create(player.getLocation().getX(),player.getLocation().getY()+1));
                 }
                 else{ // Leaving the wilderness
-                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node,
-                            Location.create(player.getLocation().getX(),player.getLocation().getY()-1));
+                    DoorActionHandler.handleAutowalkDoor(player, (Scenery) node);
                 }
         }
         return true;

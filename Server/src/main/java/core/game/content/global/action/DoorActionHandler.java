@@ -1,5 +1,6 @@
 package core.game.content.global.action;
 
+import api.ContentAPIKt;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
@@ -98,16 +99,11 @@ public final class DoorActionHandler {
         entity.lock(4);
         final Location loc = entity.getLocation();
         entity.addExtension(LogoutTask.class, new LocationLogoutTask(4, loc));
-        object.setCharge(IN_USE_CHARGE);
-        if (second != null) {
-            second.setCharge(IN_USE_CHARGE);
-        }
         if (entity instanceof Player) {
             ((Player) entity).getAudioManager().send(new Audio(3419));
         }
 		GameWorld.getPulser().submit(new Pulse(1) {
             boolean opened = false;
-
             @Override
             public boolean pulse() {
                 if (!opened) {
@@ -115,11 +111,13 @@ public final class DoorActionHandler {
                     entity.getWalkingQueue().reset();
                     entity.getWalkingQueue().addPath(endLocation.getX(), endLocation.getY());
                     opened = true;
+
+                    // Set the door in_use
+                    object.setCharge(IN_USE_CHARGE);
+                    if (second != null) {
+                        second.setCharge(IN_USE_CHARGE);
+                    }
                     return false;
-                }
-                object.setCharge(1000);
-                if (second != null) {
-                    second.setCharge(1000);
                 }
                 if (entity instanceof Player) {
                     Player player = entity.asPlayer();
@@ -136,6 +134,12 @@ public final class DoorActionHandler {
                     if (object.getId() == 2406 && player.getLocation().withinDistance(Location.create(3202,3169,0))) {
                         player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 1, 6);
                     }
+                }
+
+                // Reset door to inactive
+                object.setCharge(1000);
+                if (second != null) {
+                    second.setCharge(1000);
                 }
                 return true;
             }

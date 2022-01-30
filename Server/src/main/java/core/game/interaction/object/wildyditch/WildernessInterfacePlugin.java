@@ -74,13 +74,9 @@ public final class WildernessInterfacePlugin extends ComponentPlugin {
 	}
 	public static void handleGate(final Player player){
 		Scenery gate = player.getAttribute("wildy_gate");
-		Location endLocation = player.getAttribute("wildy_gate_loc");
-
 		// Cleanup
 		player.removeAttribute("wildy_gate");
-		player.removeAttribute("wildy_gate_loc");
-
 		// Move player through gate/door
-		DoorActionHandler.handleAutowalkDoor(player,gate,endLocation);
+		DoorActionHandler.handleAutowalkDoor(player,gate);
 	}
 }
