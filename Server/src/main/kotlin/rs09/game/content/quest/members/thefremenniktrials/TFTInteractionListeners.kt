@@ -62,7 +62,7 @@ class TFTInteractionListeners : InteractionListener(){
     val LONGHALL_BACKDOOR = 4148
     val SPINNING_WHEEL_IDS = intArrayOf(2644,4309,8748,20365,21304,25824,26143,34497,36970,37476)
     val STEW_INGREDIENT_IDS = intArrayOf(Items.POTATO_1942,Items.ONION_1957,Items.CABBAGE_1965,Items.PET_ROCK_3695)
-    var FREMENNIK_HELMS = intArrayOf(Items.ARCHER_HELM_3749, Items.BERSERKER_HELM_3751, Items.WARRIOR_HELM_3753, Items.FARSEER_HELM_3755/*, Items.HELM_OF_NEITIZNOT_10828 Should this be included?*/)
+    var FREMENNIK_HELMS = intArrayOf(Items.ARCHER_HELM_3749, Items.BERSERKER_HELM_3751, Items.WARRIOR_HELM_3753, Items.FARSEER_HELM_3755, Items.HELM_OF_NEITIZNOT_10828 /*Remove Helm of Neitiznot from this check when The Fremennik Isles is completed - Crash*/)
 
 
     override fun defineListeners() {
