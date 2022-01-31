@@ -4,18 +4,46 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
+import core.game.node.item.Item
+import org.rs09.consts.Items
 
 @Initializable
 class LalliDialogue(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
         player?.let {
-            if (it.questRepository.getStage("Fremennik Trials") > 0) {
-                player("Hello there.").also { stage = 0; return true }
+            println(it.getAttribute("lalliEatStew", false))
+            if (it.questRepository.isComplete("Fremennik Trials")){
+                playerl(FacialExpression.NEUTRAL,"Hello there.")
+                stage = 100
+                return true
+            }
+            if (it.getAttribute("lalliStewCabbageAdded", false)!! && it.getAttribute("lalliStewOnionAdded", false)!! && it.getAttribute("lalliStewPotatoAdded", false)!! && it.getAttribute("lalliStewRockAdded", false)!!){
+                npcl(FacialExpression.OLD_NORMAL,"It am ready now?")
+                stage = 60
+                return true
+            }
+            if(it.getAttribute("lalliStewCabbageAdded", false)!! || it.getAttribute("lalliStewOnionAdded", false)!! || it.getAttribute("lalliStewPotatoAdded", false)!! || it.getAttribute("lalliStewRockAdded", false)!!){
+                npcl(FacialExpression.OLD_NORMAL,"It am ready now?")
+                stage = 58
+                return true
+            }
+            if (it.getAttribute("lalliEatStew", false)!!){
+                playerl(FacialExpression.NEUTRAL,"Hello there.")
+                stage = 65
+                return true
+            }
+            if (it.getAttribute("hasWool", false)!!){
+                playerl(FacialExpression.NEUTRAL,"Hello there.")
+                stage = 75
+                return true
             }
             if (it.getAttribute("fremtrials:askeladden-talkedto", false)!!) {
                 player("Hello there.")
                 stage = 50
                 return true
+            }
+            if (it.questRepository.getStage("Fremennik Trials") > 0) {
+                player("Hello there.").also { stage = 0; return true }
             }
         }
         return true
@@ -44,7 +72,7 @@ class LalliDialogue(player: Player? = null) : DialoguePlugin(player){
 
                 //Other human?
                 10 -> npc(FacialExpression.OLD_SNEAKY,"Human call itself Askeladden! It not trick Lalli. Lalli do","good deal with human! Stupid human get some dumb","wool, but did not get golden apples!").also { stage++ }
-                11 -> player("I see... okay, well, bye!").also { player.setAttribute("/save:fremtrials:lalli-talkedto",true); stage++ }
+                11 -> player("I see... okay, well, bye!").also { player.setAttribute("/save:fremtrials:lalli-talkedto",true); stage = 1000 }
 
                 //Honest, you're clever
                 20 -> npc(FacialExpression.OLD_SNEAKY,"Me no believe you tell truth. Go away.").also { stage = 1000 }
@@ -60,7 +88,40 @@ class LalliDialogue(player: Player? = null) : DialoguePlugin(player){
             55 -> player(FacialExpression.HALF_THINKING, "Hmm... So you're hungry? I think I will have the", "perfect thing for you to eat... I just need to get myself", "an onion, a potato, and a cabbage...").also { stage++ }
             56 -> interpreter.sendDialogue("You have a cunning plan to trick this troll. You need your pet rock,", "a cabbage, a potato and an onion.").also { player.removeAttribute("fremtrials:fremtrials:lalli-talkedto");stage = 1000 }
 
+            58 -> playerl(FacialExpression.NEUTRAL,"Not just yet...").also { stage = 1000 }
 
+            60 -> playerl(FacialExpression.HAPPY,"Indeed it is. Try it and see.").also { stage++ }
+            61 -> npcl(FacialExpression.OLD_HAPPY,"Hmm... YUM! That are delicious! Me never know human know to make soup out of stone? It some special stone?").also { stage++ }
+            62 -> playerl(FacialExpression.NEUTRAL,"Indeed it is. But I'm willing to trade it.").also { stage++ }
+            63 -> npcl(FacialExpression.OLD_SNEAKY,"Let me think about that, me like to think.").also {
+                player.setAttribute("/save:lalliEatStew",true)
+                player.removeAttribute("lalliStewOnionAdded")
+                player.removeAttribute("lalliStewPotatoAdded")
+                player.removeAttribute("lalliStewCabbageAdded")
+                player.removeAttribute("lalliStewRockAdded")
+                stage = 1000
+            }
+
+            65 -> npcl(FacialExpression.OLD_HAPPY,"Your soup very tasty, human! But me still not want trade golden apples for your stone. Me think pet rock get jealous.").also { stage++ }
+            66 -> playerl(FacialExpression.ANGRY,"I. DON'T. WANT. ANY. GOLDEN. APPLES. ALL. I. WANT. IS. A. GOLDEN. FLEECE.").also { stage++ }
+            67 -> npcl(FacialExpression.OLD_ALMOST_CRYING,"Gee, sorry human, all you have do is ask, me not need you to shout. You act like you think Lalli am stupid or something...").also {
+                if(player.inventory.isFull){
+                    stage = 68
+                }else{
+                    stage = 70
+                }
+            }
+            68 -> npcl(FacialExpression.OLD_NORMAL,"Me would give you golden fleece if me think you have enough room in your inventory.").also { stage = 1000 }
+            70 -> npcl(FacialExpression.OLD_HAPPY,"Here you go. Hah! Me trick you Human! All you got is worthless golden fleece! Me got very rare soup-making stone!").also { stage = 71 }
+            71 -> playerl(FacialExpression.HAPPY,"Glad you're happy Lalli!").also {
+                player.inventory.add(Item(Items.GOLDEN_FLEECE_3693))
+                player.setAttribute("/save:hasWool",true)
+                player.removeAttribute("lalliEatStew")
+                stage = 1000
+            }
+            75 -> npcl(FacialExpression.OLD_HAPPY,"Hah! How you like worthless golden fleece! Me very like rare soup-making stone!").also { stage++ }
+            76 -> playerl(FacialExpression.HAPPY,"Oh it's great, thank you again for the fleece Lalli, I hope you're enjoying your soup").also { stage = 1000 }
+            100 -> npcl(FacialExpression.OLD_DEFAULT,"bruh finish the post fremennik trials dialogue for me cuz fr fr no cap on god.").also { stage = 1000 }
             1000 -> end()
         }
         return true

@@ -28,14 +28,18 @@ class PoisonSalesman(player: Player? = null) : DialoguePlugin(player) {
 
             //Fremennik Trials
             10 -> {
-                when (fremennikTrialsStage) {
+                /**when (fremennikTrialsStage) {
                     0 -> { npc("Come see me if you ever need low-alcohol beer!"); stage = END_DIALOGUE }
+                }*/
+                if(fremennikTrialsStage == 0){
+                    npc("Come see me if you ever need low-alcohol beer!"); stage = END_DIALOGUE
+                }
+                else if(fremennikTrialsStage > 30){
+                    npc("Thanks for buying out all that low-alcohol beer!"); stage = END_DIALOGUE
+                } else if(fremennikTrialsStage > 0){
+                    npc("Howdy! You seem like someone with discerning taste!","Howsabout you try my brand new range of alcohol?"); stage++
                 }
             }
-//                if (fremennikTrialsStage == 0)
-//                  else if(fremennikTrialsStage > 30) { npc("Thanks for buying out all that low-alcohol beer!"); stage = END_DIALOGUE }
-//                  else if(fremennikTrialsStage > 0) { npc("Howdy! You seem like someone with discerning taste!","Howsabout you try my brand new range of alcohol?"); stage++ }
-
             11 -> { player("Didn't you used to sell poison?"); stage++ }
             12 -> { npc("That I did indeed! Peter Potter's Patented","Multipurpose poison! A miracle of modern apothecarys!","My exclusive concoction has been test on..."); stage++ }
             13 -> { player("Uh, yeah. I've already heard the sales pitch."); stage++ }
@@ -83,8 +87,6 @@ class PoisonSalesman(player: Player? = null) : DialoguePlugin(player) {
                             stage++
                        }
                 45 -> { npc("Well come back when you do!"); stage = END_DIALOGUE }
-
-
             END_DIALOGUE -> end()
         }
         return true
