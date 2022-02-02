@@ -293,7 +293,8 @@ public final class Location extends Node {
 	 */
 	public int getChunkOffsetX() {
 		int x = getLocalX();
-		return x - ((x / RegionChunk.SIZE) * RegionChunk.SIZE);
+		//return x - ((x / RegionChunk.SIZE) * RegionChunk.SIZE);
+        return x & 7;
 	}
 
 	/**
@@ -302,7 +303,8 @@ public final class Location extends Node {
 	 */
 	public int getChunkOffsetY() {
 		int y = getLocalY();
-		return y - ((y / RegionChunk.SIZE) * RegionChunk.SIZE);
+		//return y - ((y / RegionChunk.SIZE) * RegionChunk.SIZE);
+        return y & 7;
 	}
 
 	/**
@@ -330,23 +332,23 @@ public final class Location extends Node {
 	}
 
 	/**
-	 * Gets the local x-coordinate on the current region.
+	 * Gets the local x-coordinate on the current region in [0, 64).
 	 * @return The local x-coordinate.
 	 */
 	public int getLocalX() {
-		return x - ((x >> 6) << 6);
+		return x & 63;
 	}
 
 	/**
-	 * Gets the local y-coordinate on the current region.
+	 * Gets the local y-coordinate on the current region in [0, 64).
 	 * @return The local y-coordinate.
 	 */
 	public int getLocalY() {
-		return y - ((y >> 6) << 6);
+		return y & 63;
 	}
 
 	/**
-	 * Gets the local x-coordinate.
+	 * Gets the scene x-coordinate in [48, 55] (note that 104/2 = 52).
 	 * @return The local x-coordinate.
 	 */
 	public int getSceneX() {
@@ -354,7 +356,7 @@ public final class Location extends Node {
 	}
 
 	/**
-	 * Gets the local y-coordinate.
+	 * Gets the local y-coordinate in [48, 55] (note that 104/2 = 52).
 	 * @return The local y-coordinate.
 	 */
 	public int getSceneY() {

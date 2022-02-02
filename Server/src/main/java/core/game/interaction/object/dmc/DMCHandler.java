@@ -1,18 +1,17 @@
 package core.game.interaction.object.dmc;
 
-import core.game.node.entity.skill.Skills;
 import core.game.node.entity.combat.CombatStyle;
-import rs09.game.node.entity.combat.CombatSwingHandler;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
-import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -20,6 +19,8 @@ import core.game.world.map.zone.ZoneRestriction;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.combat.CombatSwingHandler;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles a player's Dwarf Multi-cannon.
@@ -109,11 +110,13 @@ public final class DMCHandler {
 		}
 		player.getPacketDispatch().sendSceneryAnimation(cannon, Animation.create(direction.getAnimationId()));
 		Location l = cannon.getLocation().transform(1, 1, 0);
+        player.getAudioManager().send(new Audio(2877), true, l);
 		direction = DMCRevolution.values()[(direction.ordinal() + 1) % DMCRevolution.values().length];
 		for (NPC npc : RegionManager.getLocalNpcs(l, 10)) {
 			if (direction.isInSight(npc.getLocation().getX() - l.getX(), npc.getLocation().getY() - l.getY()) && npc.isAttackable(player, CombatStyle.RANGE) && CombatSwingHandler.isProjectileClipped(npc, l, false)) {
 				int speed = (int) (25 + (l.getDistance(npc.getLocation()) * 10));
 				Projectile.create(l, npc.getLocation(), 53, 40, 36, 20, speed, 0, 128).send();
+                player.getAudioManager().send(new Audio(1667), true, l);
 				cannonballs--;
 				int hit = 0;
 				if (player.getSwingHandler(false).isAccurateImpact(player, npc, CombatStyle.RANGE, 1.2, 1.0)) {
@@ -233,7 +236,7 @@ public final class DMCHandler {
 				case 0:
 					object = SceneryBuilder.add(new Scenery(7, spawn));
 					player.getPacketDispatch().sendMessage("You place the cannon base on the ground.");
-					return count++ == 666;
+					break;
 				case 1:
 					player.getPacketDispatch().sendMessage("You add the stand.");
 					break;
@@ -246,8 +249,11 @@ public final class DMCHandler {
 					handler.configure(SceneryBuilder.add(object = object.transform(6)));
 					return true;
 				}
-				SceneryBuilder.remove(object);
-				SceneryBuilder.add(object = object.transform(object.getId() + 1));
+                player.getAudioManager().send(new Audio(2876), true);
+                if(count != 0) {
+                    SceneryBuilder.remove(object);
+                    SceneryBuilder.add(object = object.transform(object.getId() + 1));
+                }
 				return ++count == 4;
 			}
 		});

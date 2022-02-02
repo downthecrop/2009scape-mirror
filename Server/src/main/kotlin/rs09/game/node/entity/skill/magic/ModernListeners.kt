@@ -6,6 +6,7 @@ import core.game.node.entity.Entity
 import core.game.node.entity.impl.Animator.Priority
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.skill.Skills
@@ -169,6 +170,7 @@ class ModernListeners : SpellListener("modern"){
             }
         }
         visualizeSpell(player,BONE_CONVERT_ANIM, BONE_CONVERT_GFX)
+        player.audioManager.send(Audio(114))
         removeRunes(player)
         addXP(player,if(bananas) 25.0 else 65.0)
         setDelay(player,false)
