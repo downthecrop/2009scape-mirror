@@ -60,6 +60,9 @@ class ServerConstants {
 		@JvmField
 		var BOT_DATA_PATH: String? = null
 
+		@JvmField
+		var CELEDT_DATA_PATH: String? = null
+
 		//the max number of players.
 		@JvmField
 		var MAX_PLAYERS = 2000

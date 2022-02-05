@@ -139632,5 +139632,10 @@
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
     "name": "Staff of the raven"
+  },
+  {
+    "examine": "Item container for C. Ele Minor Drop Table. You should not be able to obtain this item.",
+    "name": "C. Ele Minor Drop Table",
+    "id": "799"
   }
 ]
