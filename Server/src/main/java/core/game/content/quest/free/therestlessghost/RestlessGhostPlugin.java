@@ -238,7 +238,7 @@ public final class RestlessGhostPlugin extends OptionHandler {
 		}
 
 		@Override
-		public boolean isAttackable(final Entity entity, final CombatStyle style) {
+		public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 			final Player player = ((Player) entity);
 			final Player pl = getAttribute("player", null);
 			return pl == null ? false : pl == player ? true : false;

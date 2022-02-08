@@ -200,9 +200,9 @@ public final class FishingExplosivePlugin extends OptionHandler {
 		}
 
 		@Override
-		public boolean isAttackable(final Entity entity, CombatStyle style) {
+		public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 			final Player pl = getAttribute("player", null);
-			return pl != null && pl == entity && super.isAttackable(entity, style);
+			return pl != null && pl == entity && super.isAttackable(entity, style, message);
 		}
 
 		@Override

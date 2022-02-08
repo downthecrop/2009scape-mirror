@@ -52,11 +52,11 @@ public final class TreeSpiritNPC extends AbstractNPC {
 	}
 
 	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (entity != player) {
 			return false;
 		}
-		return super.isAttackable(entity, style);
+		return super.isAttackable(entity, style, message);
 	}
 
 	@Override

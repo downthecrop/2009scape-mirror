@@ -376,13 +376,14 @@ public abstract class Entity extends Node {
 	 * Checks if this entity is attackable by the attacking entity.
 	 * @param entity The attacking entity.
 	 * @param style The combat style used.
+     * @param message Whether to send the player a message indicating why the entity isn't attackable.
 	 * @return {@code True} if the attacking entity can attack this entity.
 	 */
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (DeathTask.isDead(this)) {
 			return false;
 		}
-		if (!entity.getZoneMonitor().continueAttack(this, style)) {
+		if (!entity.getZoneMonitor().continueAttack(this, style, message)) {
 			return false;
 		}
 		return true;
@@ -429,7 +430,7 @@ public abstract class Entity extends Node {
 	 * @param style the style.
 	 * @return {@code True} if so.
 	 */
-	public boolean continueAttack(Entity target, CombatStyle style) {
+	public boolean continueAttack(Entity target, CombatStyle style, boolean message) {
 		return true;
 	}
 

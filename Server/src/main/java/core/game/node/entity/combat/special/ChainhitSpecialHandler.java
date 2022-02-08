@@ -144,7 +144,7 @@ public final class ChainhitSpecialHandler extends RangeSwingHandler implements P
 			for (Iterator<? extends Entity> it = list.iterator(); it.hasNext();) {
 				final Entity e = it.next();
 				it.remove();
-				if (!e.isAttackable(player, CombatStyle.RANGE) || !e.getProperties().isMultiZone()) {
+				if (!e.isAttackable(player, CombatStyle.RANGE, false) || !e.getProperties().isMultiZone()) {
 					continue;
 				}
 				double distance = victim.getLocation().getDistance(e.getLocation());

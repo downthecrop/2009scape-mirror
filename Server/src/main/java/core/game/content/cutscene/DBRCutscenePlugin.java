@@ -867,7 +867,7 @@ public final class DBRCutscenePlugin extends CutscenePlugin {
 		}
 
 		@Override
-		public boolean isAttackable(Entity entity, CombatStyle style) {
+		public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 			return true;
 		}
 

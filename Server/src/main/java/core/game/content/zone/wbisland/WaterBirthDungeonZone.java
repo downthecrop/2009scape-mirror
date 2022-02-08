@@ -389,14 +389,16 @@ public final class WaterBirthDungeonZone extends MapZone implements Plugin<Objec
 		}
 
 		@Override
-		public boolean isAttackable(Entity entity, CombatStyle style) {
+		public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 			if (getId() != getOriginalId()) {
 				return false;
 			}
 			if (entity.getLocation().getDistance(getLocation()) <= 3) {
 				if (entity instanceof Player) {
 					Player player = entity.asPlayer();
-					player.sendMessage("The door is propped securely shut from this side...");
+                    if(message) {
+                        player.sendMessage("The door is propped securely shut from this side...");
+                    }
 				}
 				return false;
 			}

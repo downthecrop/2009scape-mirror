@@ -392,14 +392,16 @@ public class NPC extends Entity {
 	}
 
 	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if ((entity instanceof Player && !definition.hasAction("attack")) || isInvisible()) {
 			return false;
 		}
 		if (task != null && entity instanceof Player && task.levelReq > entity.getSkills().getStaticLevel(Skills.SLAYER)) {
-			((Player) entity).getPacketDispatch().sendMessage("You need a higher slayer level to know how to wound this monster.");
+            if(message) {
+                ((Player) entity).getPacketDispatch().sendMessage("You need a higher slayer level to know how to wound this monster.");
+            }
 		}
-		return super.isAttackable(entity, style);
+		return super.isAttackable(entity, style, message);
 	}
 
 	@Override
