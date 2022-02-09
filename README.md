@@ -239,8 +239,8 @@ After setting up git lfs, you may need to run `git lfs pull` in the root of the 
     <br>
 3. Click on the "application" folder for the Server and double-click "run"
     * Please note this may take a minute or two to build, it is compiling a lot of files!
-    * If you receive an error on server start, check and make sure that your worldprops/default.json is pointing to the correct paths
-    * * Server debug mode/other information can be changed in worldprops/default.json
+    * If you receive an error on server start, check and make sure that your worldprops/default.conf is pointing to the correct paths
+    * * Server debug mode/other information can be changed in worldprops/default.conf
     <br>
 4. Clone the <a href="https://gitlab.com/2009scape/legacy-client">legacy-client</a> repo and follow the same Intellij setup steps
     * Click on the "application" folder for the Client and double-click "run"
