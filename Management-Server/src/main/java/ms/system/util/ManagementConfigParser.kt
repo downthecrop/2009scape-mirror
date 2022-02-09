@@ -7,7 +7,7 @@ import java.io.FileReader
 import kotlin.system.exitProcess
 
 /**
- * Class for parsing the server config, I.E default.json
+ * Class for parsing the server config, I.E default.conf
  * @param path the path to the JSON file to parse.
  * @author Ceikry
  */
