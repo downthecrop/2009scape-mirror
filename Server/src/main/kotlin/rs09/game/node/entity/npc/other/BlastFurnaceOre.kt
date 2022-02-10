@@ -65,7 +65,7 @@ class BlastFurnaceOre : AbstractNPC {
                     if (counter == 0) {
                         val animation = Animation(2434)
                         animate(animation)
-                        owner?.setAttribute("OreInPot",true)
+                        owner?.setAttribute("/save:OreInPot",true)
                         submitIndividualPulse(this, object : Pulse(animationDuration(animation)) {
                             override fun pulse(): Boolean {
                                 clear()
