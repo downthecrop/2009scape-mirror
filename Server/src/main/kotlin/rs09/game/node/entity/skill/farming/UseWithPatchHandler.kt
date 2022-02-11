@@ -102,6 +102,7 @@ object UseWithPatchHandler{
                     player.pulseManager.run(object: Pulse(){
                         override fun pulse(): Boolean {
                             player.animator.animate(plantCureAnim)
+                            player.audioManager.send(2438)
                             if(player.inventory.remove(event.usedItem)){
                                 player.inventory.add(Item(Items.VIAL_229))
                                 p.cureDisease()
@@ -125,6 +126,7 @@ object UseWithPatchHandler{
                                 return true
                             }
                             player.animator.animate(wateringCanAnim)
+                            player.audioManager.send(2446)                            
                             if(player.inventory.remove(event.usedItem)){
                                 player.inventory.add(Item(usedItem.id.getNext()))
                                 p.water()
@@ -139,6 +141,7 @@ object UseWithPatchHandler{
                 val p = patch.getPatchFor(player)
                 if(p.compost == CompostType.NONE) {
                     player.animator.animate(pourBucketAnim)
+                    player.audioManager.send(2427)
                     player.pulseManager.run(object : Pulse(){
                         override fun pulse(): Boolean {
                             if(player.inventory.remove(event.usedItem,false)){
@@ -208,6 +211,7 @@ object UseWithPatchHandler{
                 player.lock()
                 if(player.inventory.remove(plantItem)) {
                     player.animator.animate(Animation(2291))
+                    player.audioManager.send(2432)                    
                     player.pulseManager.run(object : Pulse(3) {
                         override fun pulse(): Boolean {
                             if(plantable == Plantable.JUTE_SEED && patch == FarmingPatch.MCGRUBOR_HOPS && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE,0,7)){

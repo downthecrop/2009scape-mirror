@@ -6,6 +6,7 @@ import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.npc.familiar.GiantEntNPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -66,11 +67,18 @@ class CropHarvester : OptionHandler() {
                         Items.MAGIC_SECATEURS_7409 -> Animation(7228)
                         else -> Animation(0)
                     }
+                    val sound = when(requiredItem){
+                        Items.SPADE_952 -> Audio(1470, 1, 1)
+                        Items.SECATEURS_5329 -> Audio(2437, 1, 1)
+                        Items.MAGIC_SECATEURS_7409 -> Audio(2437, 1, 1)
+                        else -> Audio(0)
+                    }
                     if(!player.inventory.containsItem(Item(requiredItem))){
                         player.sendMessage("You lack the needed tool to harvest these crops.")
                         return true
                     }
                     player.animator.animate(anim)
+                    player.audioManager.send(sound)
                     delay = 2
                     player.inventory.add(reward)
                     player.skills.addExperience(Skills.FARMING,plantable.harvestXP)

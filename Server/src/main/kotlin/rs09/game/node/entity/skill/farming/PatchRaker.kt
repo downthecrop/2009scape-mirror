@@ -17,6 +17,7 @@ object PatchRaker {
                 var patchStage = patch.getPatchFor(player).getCurrentState()
                 if(patchStage <= 2){
                     player.animator.animate(RAKE_ANIM)
+                    player.audioManager.send(2442)                         
                 }
                 if(delay < 5) {
                     delay = 5
