@@ -4048,7 +4048,7 @@
       }
     ],
     "charm": [],
-    "ids": "77,281,283",
+    "ids": "77"
     "description": "",
     "main": []
   },
@@ -14301,6 +14301,34 @@
         "maxAmount": "1"
       }
     ]
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "100.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "281",
+    "description": "",
+    "main": []
+  },
+  {
+    "default": [
+      {
+        "minAmount": "1",
+        "weight": "100.0",
+        "id": "526",
+        "maxAmount": "1"
+      }
+    ],
+    "charm": [],
+    "ids": "283",
+    "description": "",
+    "main": []
   },
   {
     "default": [
