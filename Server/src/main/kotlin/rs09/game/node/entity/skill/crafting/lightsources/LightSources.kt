@@ -7,7 +7,7 @@ enum class LightSources(val emptyID: Int, val fullID: Int, val litID: Int, val l
     WHITE_CANDLE_LANTERN(4527,4529,4531,4,true),
     BLACK_CANDLE_LANTERN(4527,4532,4534,4,true),
     OIL_LAMP(4525,4522,4524,12,true),
-    OIL_LANTERN(4535,4537,4539,29,false),
+    OIL_LANTERN(4535,4537,4539,26,false),
     BULLSEYE_LANTERN(4546,4548,4550,49,false),
     SAPPHIRE_LANTERN(0,4701,4702,49,false),
     EMERALD_LANTERN(0,9064,9065,49,false);
