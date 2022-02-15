@@ -324,7 +324,7 @@ public enum Consumables {
 	FISHING(new Potion(new int[] {2438, 151, 153, 155}, new SkillEffect(Skills.FISHING, 3, 0))),
 	PRAYER(new Potion(new int[] {2434, 139, 141, 143}, new PrayerEffect(7, 0.25))),
 	SUPER_RESTO(new Potion(new int[] {3024, 3026, 3028, 3030}, new MultiEffect(new RestoreEffect(8, 0.25), new PrayerEffect(8, 0.25), new SummoningEffect(8, 0.25)))),
-	ZAMMY_BREW(new Potion(new int[] {2450, 189, 191, 193}, new MultiEffect(new DamageEffect(0.1, true), new SkillEffect(Skills.ATTACK, 0, 0.15), new SkillEffect(Skills.STRENGTH, 0, 0.25), new SkillEffect(Skills.DEFENCE, 0, -0.1), new RandomPrayerEffect(0, 10)))),
+	ZAMMY_BREW(new Potion(new int[] {2450, 189, 191, 193}, new MultiEffect(new DamageEffect(10, true), new SkillEffect(Skills.ATTACK, 0, 0.15), new SkillEffect(Skills.STRENGTH, 0, 0.25), new SkillEffect(Skills.DEFENCE, 0, -0.1), new RandomPrayerEffect(0, 10)))),
 	ANTIFIRE(new Potion(new int[] {2452, 2454, 2456, 2458}, new SetAttributeEffect("fire:immune", 600, true))),
 	GUTH_REST(new Potion(new int[] {4417, 4419, 4421, 4423}, new MultiEffect(new RemoveStateEffect(EntityState.POISONED.ordinal()), new EnergyEffect(5), new HealingEffect(5)))),
 	MAGIC_ESS(new Potion(new int[] {11491, 11489}, new SkillEffect(Skills.MAGIC,3,0))),
@@ -334,7 +334,7 @@ public enum Consumables {
 
 	/** Barbarian Mixes */
 	PRAYERMIX(new BarbarianMix(new int[] {11465, 11467}, new MultiEffect(new PrayerEffect(7, 0.25), new HealingEffect(6)))),
-	ZAMMY_MIX(new BarbarianMix(new int[] {11521, 11523}, new MultiEffect(new SkillEffect(Skills.HITPOINTS, 0, -0.10), new SkillEffect(Skills.ATTACK, 0, 0.15), new SkillEffect(Skills.STRENGTH, 0, 0.25), new SkillEffect(Skills.DEFENCE, 0, -0.1), new RandomPrayerEffect(0, 10)))),
+	ZAMMY_MIX(new BarbarianMix(new int[] {11521, 11523}, new MultiEffect(new DamageEffect(10, true), new SkillEffect(Skills.ATTACK, 0, 0.15), new SkillEffect(Skills.STRENGTH, 0, 0.25), new SkillEffect(Skills.DEFENCE, 0, -0.1), new RandomPrayerEffect(0, 10)))),
 	ATT_MIX(new BarbarianMix(new int[] {11429, 11431}, new MultiEffect(new SkillEffect(Skills.ATTACK, 3, 0.1), new HealingEffect(3)))),
 	ANTIP_MIX(new BarbarianMix(new int[] {11433, 11435}, new MultiEffect(new RemoveStateEffect(EntityState.POISONED.ordinal()), new SetAttributeEffect("poison:immunity", 143), new HealingEffect(3)))),
 	RELIC_MIX(new BarbarianMix(new int[] {11437, 11439}, new MultiEffect(new RemoveStateEffect("disease"), new SetAttributeEffect("disease:immunity", 300), new HealingEffect(3)))),
