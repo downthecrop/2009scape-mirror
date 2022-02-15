@@ -49772,7 +49772,7 @@
     "low_alchemy": "240",
     "turn90ccw_anim": "1208",
     "attack_speed": "6",
-    "two_handed": "true",
+    "two_handed": "false",
     "turn180_anim": "1206",
     "equipment_slot": "3",
     "grand_exchange_price": "219",
