@@ -36,7 +36,7 @@ class MonasteryMonkDialogue : DialogueFile() {
  */
 class MonasteryMonkListener : InteractionListener() {
     override fun defineListeners() {
-        on(NPCs.MONK_281, NPC, "talk-to"){ player, node ->
+        on(NPCs.MONK_281, NPC, "talk-to"){ player, _ ->
             player.dialogueInterpreter.open(MonasteryMonkDialogue(), NPC(NPCs.MONK_281))
             return@on true
         }
