@@ -129,7 +129,7 @@ public enum Master {
 			new Task(Tasks.NECHRYAELS, 5),
 			new Task(Tasks.ABYSSAL_DEMONS, 5)),
 
-	CHAELDAR(1598, 70, 25, new int[]{110, 170}, new int[]{10, 50, 150},
+	CHAELDAR(1598, 70, 0, new int[]{110, 170}, new int[]{10, 50, 150},
 			new Task(Tasks.ABYSSAL_DEMONS,12),
 			new Task(Tasks.IRON_DRAGONS,12),
 			new Task(Tasks.NECHRYAELS, 12),
