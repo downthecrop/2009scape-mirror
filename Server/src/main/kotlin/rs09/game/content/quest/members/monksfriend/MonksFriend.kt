@@ -49,8 +49,6 @@ class MonksFriend: Quest("Monk's Friend", 89, 88, 1, 30, 0, 1, 80) {
         if(stage == 100){
             line(player, "I had a party with the Monks. There were party balloons and we danced the night away!", line++, true)
         }
-
-
     }
 
     override fun finish(player: Player?) {
@@ -60,11 +58,10 @@ class MonksFriend: Quest("Monk's Friend", 89, 88, 1, 30, 0, 1, 80) {
         player.packetDispatch.sendItemZoomOnInterface(Items.LAW_RUNE_563, 230, 277, 5)
         drawReward(player,"1 Quest Point", ln++)
         drawReward(player,"8 Law Runes", ln++)
-        drawReward(player,"2000 Woodcutting XP",ln++)
+        drawReward(player,"2000 Woodcutting XP", ln++)
 
         rewardXP(player, Skills.WOODCUTTING, 2000.0)
-        player.inventory.add(Item(563,8))
-
+        player.inventory.add(Item(563, 8))
     }
 }
 
