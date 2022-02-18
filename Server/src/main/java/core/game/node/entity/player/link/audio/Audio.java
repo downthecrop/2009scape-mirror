@@ -1,6 +1,7 @@
 package core.game.node.entity.player.link.audio;
 
 import core.game.node.entity.player.Player;
+import core.game.world.map.Location;
 
 import java.util.List;
 
@@ -14,6 +15,16 @@ public class Audio {
 	 * The default volume.
 	 */
 	public static final int VOLUME = 10;
+
+	/**
+	 * The default delay.
+	 */
+	public static final int DELAY = 0;
+
+    /**
+     * The default radius in tiles of positional audio in [0,16).
+     */
+    public static final int RADIUS = 15;
 
 	/**
 	 * The id of the audio piece.
@@ -30,6 +41,25 @@ public class Audio {
 	 */
 	private final int delay;
 
+    /**
+     * The radius.
+     */
+    private final int radius;
+
+	/**
+	 * Constructs a new {@Code Audio} {@Code Object}
+	 * @param id the id.
+	 * @param volume the volume.
+	 * @param delay the delay.
+	 * @param radius the radius.
+	 */
+	public Audio(int id, int volume, int delay, int radius) {
+		this.id = id;
+		this.volume = volume;
+		this.delay = delay;
+		this.radius = radius;
+	}
+
 	/**
 	 * Constructs a new {@Code Audio} {@Code Object}
 	 * @param id the id.
@@ -37,9 +67,7 @@ public class Audio {
 	 * @param delay the delay.
 	 */
 	public Audio(int id, int volume, int delay) {
-		this.id = id;
-		this.volume = volume;
-		this.delay = delay;
+		this(id, volume, delay, RADIUS);
 	}
 
 	/**
@@ -48,7 +76,7 @@ public class Audio {
 	 * @param volume the volume.
 	 */
 	public Audio(int id, int volume) {
-		this(id, volume, 0);
+		this(id, volume, DELAY);
 	}
 
 	/**
@@ -65,7 +93,11 @@ public class Audio {
 	 * @param global the global.
 	 */
 	public void send(Player player, boolean global) {
-		player.getAudioManager().send(this, global);
+        send(player, global, null);
+    }
+
+	public void send(Player player, boolean global, Location loc) {
+		player.getAudioManager().send(this, global, loc);
 	}
 
 	/**
@@ -113,4 +145,11 @@ public class Audio {
 		return delay;
 	}
 
+	/**
+	 * Gets the radius.
+	 * @return the radius
+	 */
+	public int getRadius() {
+		return radius;
+	}
 }

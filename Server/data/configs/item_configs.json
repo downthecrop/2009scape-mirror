@@ -15657,6 +15657,7 @@
     "weapon_interface": "1",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
+    "equip_audio": "2230",
     "name": "Staff of air"
   },
   {
@@ -15695,6 +15696,7 @@
     "weapon_interface": "1",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
+    "equip_audio": "2230",
     "name": "Staff of water"
   },
   {
@@ -15733,6 +15735,7 @@
     "weapon_interface": "1",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
+    "equip_audio": "2230",
     "name": "Staff of earth"
   },
   {
@@ -15771,6 +15774,7 @@
     "weapon_interface": "1",
     "render_anim": "1426",
     "attack_audios": "2555,0,0,0",
+    "equip_audio": "2230",
     "name": "Staff of fire"
   },
   {
@@ -15887,6 +15891,7 @@
     "weapon_interface": "1",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
+    "equip_audio": "2230",
     "name": "Fire battlestaff"
   },
   {
@@ -15925,6 +15930,7 @@
     "weapon_interface": "1",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
+    "equip_audio": "2230",
     "name": "Water battlestaff"
   },
   {
@@ -15964,6 +15970,7 @@
     "weapon_interface": "1",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
+    "equip_audio": "2230",
     "name": "Air battlestaff"
   },
   {
@@ -16003,6 +16010,7 @@
     "weapon_interface": "1",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
+    "equip_audio": "2230",
     "name": "Earth battlestaff"
   },
   {
@@ -32495,6 +32503,7 @@
     "weapon_interface": "1",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
+    "equip_audio": "2230",
     "name": "Lava battlestaff"
   },
   {
@@ -32525,6 +32534,7 @@
     "weapon_interface": "1",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
+    "equip_audio": "2230",
     "name": "Mystic lava staff"
   },
   {
@@ -32649,6 +32659,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3095",
+    "equip_audio": "1003",
     "bonuses": "3,4,-4,0,0,1,2,1,0,0,0,5,0,0,0"
   },
   {
@@ -32671,6 +32682,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3096",
+    "equip_audio": "1003",
     "bonuses": "4,6,-4,0,0,2,3,1,0,0,0,7,0,0,0"
   },
   {
@@ -32694,6 +32706,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3097",
+    "equip_audio": "1003",
     "bonuses": "8,11,-4,0,0,3,6,2,0,0,0,12,0,0,0"
   },
   {
@@ -32716,6 +32729,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3098",
+    "equip_audio": "1003",
     "bonuses": "10,14,-4,0,0,4,7,2,0,0,0,14,0,0,0"
   },
   {
@@ -32738,6 +32752,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3099",
+    "equip_audio": "1003",
     "bonuses": "11,16,-4,0,0,4,8,2,0,0,0,17,0,0,0"
   },
   {
@@ -32759,6 +32774,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3100",
+    "equip_audio": "1003",
     "bonuses": "18,23,-4,0,0,6,12,3,0,0,0,24,0,0,0"
   },
   {
@@ -32783,6 +32799,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3101",
+    "equip_audio": "1003",
     "bonuses": "26,38,-4,0,0,10,19,5,0,0,0,39,0,0,0"
   },
   {
@@ -40550,6 +40567,7 @@
     "render_anim": "620",
     "lendable": "true",
     "attack_audios": "2720,0,0,0",
+    "equip_audio": "2249",
     "name": "Abyssal whip"
   },
   {
@@ -63459,6 +63477,7 @@
     "weapon_interface": "1",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
+    "equip_audio": "2230",
     "name": "Mud battlestaff"
   },
   {
@@ -63755,6 +63774,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "6587",
+    "equip_audio": "1003",
     "bonuses": "10,14,-4,0,0,4,7,2,0,0,0,14,1,0,0"
   },
   {
@@ -95011,6 +95031,7 @@
     "archery_ticket_price": "0",
     "id": "10487",
     "stand_turn_anim": "823",
+    "equip_audio": "3277",
     "bonuses": "-100,-100,-50,0,0,0,0,0,0,0,0,-10,0,0,0"
   },
   {
@@ -95127,6 +95148,7 @@
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "10498",
+    "equip_audio": "3284",
     "bonuses": "0,0,0,0,2,0,0,0,2,0,0,0,0,0,0"
   },
   {
@@ -95141,6 +95163,7 @@
     "archery_ticket_price": "0",
     "id": "10499",
     "bonuses": "0,0,0,0,4,0,1,0,4,0,0,0,0,0,0",
+    "equip_audio": "3284",
     "equipment_slot": "1"
   },
   {
@@ -102188,6 +102211,7 @@
     "render_anim": "1",
     "lendable": "true",
     "attack_audios": "3731,0,0,0",
+    "equip_audio": "3738",
     "name": "Dark bow"
   },
   {
@@ -106190,6 +106214,7 @@
     "weapon_interface": "1",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
+    "equip_audio": "2230",
     "name": "Steam battlestaff"
   },
   {
@@ -122850,6 +122875,8 @@
     "name": "Dark bow",
     "archery_ticket_price": "0",
     "id": "13405",
+    "attack_audios": "3731,0,0,0",
+    "equip_audio": "3738",
     "bonuses": "0,0,0,0,95,0,0,0,0,0,0,0,0,0,0"
   },
   {
@@ -128199,6 +128226,7 @@
     "name": "Rune claws",
     "archery_ticket_price": "0",
     "id": "13764",
+    "equip_audio": "1003",
     "bonuses": "26,38,-4,0,0,10,19,5,0,0,0,39,0,0,0"
   },
   {
@@ -137717,6 +137745,7 @@
     "weapon_interface": "9",
     "render_anim": "2583",
     "lendable": "true",
+    "equip_audio": "1003",
     "name": "Dragon claws"
   },
   {
@@ -137753,6 +137782,7 @@
     "name": "Dragon claws",
     "archery_ticket_price": "0",
     "id": "14486",
+    "equip_audio": "1003",
     "bonuses": "41,57,-4,0,0,13,26,7,0,0,0,56,0,0,0"
   },
   {

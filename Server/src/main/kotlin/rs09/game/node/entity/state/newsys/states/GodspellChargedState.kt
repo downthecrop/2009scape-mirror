@@ -1,6 +1,7 @@
 package rs09.game.node.entity.state.newsys.states
 
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.audio.Audio
 import core.game.system.task.Pulse
 import org.json.simple.JSONObject
 import rs09.game.node.entity.state.newsys.PlayerState
@@ -35,6 +36,7 @@ class GodspellChargedState(player: Player? = null) : State(player) {
             override fun pulse(): Boolean {
                 player.sendMessage("Your magical charge fades away.")
                 player.clearState("godcharge")
+                player.audioManager.send(Audio(1650))
                 pulse = null
                 return true
             }
