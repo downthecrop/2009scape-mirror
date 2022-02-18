@@ -101,7 +101,7 @@ class KoscheiNPC constructor(id: Int = 0, location: Location? = null, session: K
         return KoscheiNPC(id, location, null)
     }
 
-    override fun isAttackable(entity: Entity, style: CombatStyle): Boolean {
+    override fun isAttackable(entity: Entity, style: CombatStyle, message: Boolean): Boolean {
         if (session == null) {
             return false
         }
