@@ -1,6 +1,7 @@
 package core.game.node.entity.player.link.audio;
 
 import core.game.node.entity.player.Player;
+import core.game.world.map.Location;
 import core.game.world.map.MapDistance;
 import core.game.world.map.RegionManager;
 import core.net.packet.PacketRepository;
@@ -72,17 +73,21 @@ public class AudioManager {
 		send(audio, false);
 	}
 
+    public void send(Audio audio, boolean global) {
+        send(audio, global, null);
+    }
+
 	/**
 	 * Sends an audio packet.
 	 * @param audio the audio.
 	 * @param global if globally heard.
 	 */
-	public void send(Audio audio, boolean global) {
+	public void send(Audio audio, boolean global, Location loc) {
 		if (global) {
-			send(audio, RegionManager.getLocalPlayers(player, MapDistance.SOUND.getDistance()));
+			send(audio, RegionManager.getLocalPlayers(player, MapDistance.SOUND.getDistance()), loc);
 			return;
 		}
-		PacketRepository.send(AudioPacket.class, new DefaultContext(player, audio));
+		PacketRepository.send(AudioPacket.class, new DefaultContext(player, audio, loc));
 	}
 
 	/**
@@ -90,12 +95,12 @@ public class AudioManager {
 	 * @param audio the audio.
 	 * @param players the players.
 	 */
-	public void send(Audio audio, List<Player> players) {
+	public void send(Audio audio, List<Player> players, Location loc) {
 		for (Player p : players) {
 			if (p == null) {
 				continue;
 			}
-			p.getAudioManager().send(audio);
+			p.getAudioManager().send(audio, false, loc);
 		}
 	}
 

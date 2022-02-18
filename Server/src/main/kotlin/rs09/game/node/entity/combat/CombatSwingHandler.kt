@@ -280,7 +280,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
                     if (audio == null || audio.id == 0) {
                         audio = audios[0]
                     }
-                    entity.asPlayer().audioManager.send(audio, true)
+                    entity.asPlayer().audioManager.send(audio, true, entity.location)
                 }
             } else {
                 entity.asPlayer().audioManager.send(2564)
@@ -288,7 +288,7 @@ abstract class CombatSwingHandler(var type: CombatStyle?) {
         } else if (entity is NPC && victim is Player) {
             val npc = entity.asNpc()
             val audio = npc.getAudio(0)
-            audio?.send(victim.asPlayer(), true)
+            audio?.send(victim.asPlayer(), true, entity.location)
         }
     }
 
