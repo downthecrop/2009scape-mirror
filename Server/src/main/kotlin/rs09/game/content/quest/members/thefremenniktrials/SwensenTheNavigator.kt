@@ -10,6 +10,8 @@ import core.game.content.dialogue.FacialExpression
 
 @Initializable
 class SwensenTheNavigator(player: Player? = null) : DialoguePlugin(player){
+    val gender = if (player?.isMale == true){"brother"} else "sister"
+    val fName = player?.getAttribute("fremennikname","doug hug'em")
     override fun open(vararg args: Any?): Boolean {
         if(player?.inventory?.contains(3705,1) == true){
             playerl(FacialExpression.HAPPY,"I would like your map of fishing spots.")
@@ -45,9 +47,21 @@ class SwensenTheNavigator(player: Player? = null) : DialoguePlugin(player){
             stage = 1000
             return true
         }
-        player("Hello!")
-        stage = 0
-        return true
+        else if(player.questRepository.isComplete("Fremennik Trials")){
+            playerl(FacialExpression.HAPPY,"Hello!")
+            stage = 140
+            return true
+        }
+        else if(player.questRepository.hasStarted("Fremennik Trials")){
+            player("Hello!")
+            stage = 0
+            return true
+        }
+        else{
+            playerl(FacialExpression.HAPPY,"Hello!")
+            stage = 145
+            return true
+        }
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
@@ -115,6 +129,13 @@ class SwensenTheNavigator(player: Player? = null) : DialoguePlugin(player){
 
             130 -> npcl(FacialExpression.ANNOYED,"It isn't for me, I'm afraid.").also { stage = 1000 }
 
+            140 -> npcl(FacialExpression.HAPPY,"Greetings to you $gender $fName. How fare you today?").also { stage++ }
+            141 -> playerl(FacialExpression.HAPPY,"I am fine thanks Swensen. How are you doing?").also { stage++ }
+            142 -> npcl(FacialExpression.HAPPY,"I am fine too!").also { stage = 1000 }
+
+            145 -> npcl(FacialExpression.HAPPY,"Hello outerlander. This is my home, I would be grateful if you would leave.").also { stage++ }
+            146 -> playerl(FacialExpression.THINKING,"Oh. Okay.").also { stage++ }
+            147 -> npcl(FacialExpression.HAPPY,"I am sorry outerlander, I will not offer you hospitality until my Chieftain has vouched for your honesty. This is our way.").also { stage = 1000 }
 
             1000 -> end()
         }

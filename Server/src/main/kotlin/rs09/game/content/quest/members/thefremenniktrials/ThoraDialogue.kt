@@ -11,9 +11,11 @@ import org.rs09.consts.Items
 
 @Initializable
 class ThoraDialogue(player: Player? = null) : DialoguePlugin(player){
+    val fName = player?.getAttribute("fremennikname","name jeff")
     var curNPC: NPC? = NPC(0, Location(0,0,0))
     override fun open(vararg args: Any?): Boolean {
         curNPC = args[0] as? NPC
+        npc = args[0] as NPC
         if(player.inventory.contains(3707,1)){
             playerl(FacialExpression.ASKING,"Thanks for making me this cocktail. Why don't you make them anymore normally?")
             stage = 35
@@ -33,6 +35,14 @@ class ThoraDialogue(player: Player? = null) : DialoguePlugin(player){
         else if(player?.getAttribute("sigmund-steps", 0) == 12){
             playerl(FacialExpression.ASKING,"I don't suppose you have any idea where I could find the longhall barkeeps' legendary cocktail, do you?")
             stage = 1
+        }
+        else if(player.questRepository.isComplete("Fremennik Trials")){
+            npcl(FacialExpression.HAPPY,"Hello again, $fName. I suppose you want a drink? Or are you going to try another scam with that terrible Askeladden again?")
+            stage = 50
+        }
+        else{
+            playerl(FacialExpression.HAPPY,"Hello there.")
+            stage = 60
         }
         return true
     }
@@ -84,6 +94,25 @@ class ThoraDialogue(player: Player? = null) : DialoguePlugin(player){
             41 -> npcl(FacialExpression.HAPPY,"I wish you all the best of luck with your trials, outerlander.").also { stage++ }
             42 -> npcl(FacialExpression.HAPPY,"When you have finished, perhaps you will come back here, and we can share a drink over tales of the outside world?").also { stage++ }
             43 -> playerl(FacialExpression.HAPPY,"Thanks, I'd like that.").also { stage = 1000 }
+
+            50 -> playerl(FacialExpression.THINKING,"Scam? Oh... You mean his promise to not come in here anymore?").also { stage++ }
+            51 -> npcl(FacialExpression.ANNOYED,"Yes. Yes I do. I should have never trusted him not to come in here, even with that written promise. Anyway, do you want a drink or not?").also { stage++ }
+            52 -> options("Yes please","No thanks").also { stage++ }
+            53 -> when(buttonId){
+                1 -> playerl(FacialExpression.HAPPY,"Yes please").also {
+                    npc.openShop(player)
+                    stage = 1000
+                }
+                2 -> playerl(FacialExpression.HAPPY,"No thanks.").also { stage++ }
+            }
+            54 -> npcl(FacialExpression.HAPPY,"Okay then.").also { stage = 1000 }
+
+            60 -> npcl(FacialExpression.HAPPY,"Hello yourself, outerlander. A little out of the way up here, aren't you?").also { stage++ }
+            61 -> npcl(FacialExpression.HAPPY,"I would love to stop and chat with you, but unfortunately we have a custom that no Fremennik may speak with the outerlanders without the permission of our chieftain. Don't take it personally.").also { stage++ }
+            62 -> npcl(FacialExpression.HAPPY,"The Chieftain is stood just over there, his name is Brundt. I suggest you go and introduce yourself.").also { stage++ }
+            63 -> npcl(FacialExpression.ASKING,"You wouldn't want to go making any enemies because you weren't aware of our customs now, would you?").also { stage++ }
+            64 -> playerl(FacialExpression.THINKING,"No, I guess not. Thanks anyway.").also { stage++ }
+            65 -> npcl(FacialExpression.HAPPY,"Not a problem, outerlander. It's always nice to see a new face in the long hall; it happens so rarely.").also { stage = 1000 }
 
             1000 -> end()
         }

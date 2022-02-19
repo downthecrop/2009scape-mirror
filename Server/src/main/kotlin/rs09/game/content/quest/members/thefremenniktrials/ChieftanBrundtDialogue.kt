@@ -10,6 +10,9 @@ import kotlin.random.Random
 
 @Initializable
 class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
+    val gender = if (player?.isMale == true){"brother"} else "sister"
+    val fName = player?.getAttribute("fremennikname","bringle")
+
     override fun open(vararg args: Any?): Boolean {
         if(player?.inventory?.contains(3701,1) == true){
             playerl(FacialExpression.HAPPY,"I got Sigli's hunting map for you.")
@@ -56,6 +59,11 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
             stage = 530
             return true
         }
+        else if(player.questRepository.isComplete("Fremennik Trials")){
+            npcl(FacialExpression.HAPPY,"Hello again, $gender $fName. I hope your travels have brought you wealth and joy! What compels you to visit me on this day?")
+            stage = 600
+            return true
+        }
         else if(player?.questRepository?.getStage("Fremennik Trials")!! == 0) {
             npc("Greetings outlander!")
             stage = 0
@@ -68,11 +76,24 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
             //Pre-Quest
             0 -> { options("What is this place?", "Why will no-one talk to me?", "Do you have any quests?", "Nice hat!");stage++}
             1 -> when(buttonId){
-                    1 -> TODO("Not yet implemented")
-                    2 -> TODO("Not yet implemented")
-                    3 -> {player("Do you have any quests?");stage = 300}
-                    4 -> TODO("Not yet implemented")
+                    1 -> playerl(FacialExpression.HAPPY,"What is this place?").also { stage ++ }
+                    2 -> playerl(FacialExpression.ASKING,"Why will no-one talk to me?").also { stage = 5 }
+                    3 -> player("Do you have any quests?").also {stage = 300}
+                    4 -> playerl(FacialExpression.HAPPY,"Nice hat!").also { stage = 15 }
                  }
+            2 -> npcl(FacialExpression.HAPPY,"This place? Why, this is Relleka! Homeland of all Fremennik! I do not recognise your face outerlander; Where do you come from?").also { stage++ }
+            3 -> playerl(FacialExpression.HAPPY,"Hmmm... I will not press the issue then outerlander. How may my tribe and I help you?").also { stage = 0 }
+
+            5 -> npcl(FacialExpression.HAPPY,"Do not take it personally, outerlander! We are a simple people, and it is our experience that keeping ourselves to ourselves is best.").also { stage++ }
+            6 -> npcl(FacialExpression.HAPPY,"This is why speaking to outerlanders is forbidden.").also { stage++ }
+            7 -> npcl(FacialExpression.HAPPY,"We do not wish to enter war with the outerlanders and their strange magics, so we limit all unauthorised communication.").also { stage++ }
+            8 -> playerl(FacialExpression.ASKING,"Then how come you're talking to me?").also { stage++ }
+            9 -> npcl(FacialExpression.HAPPY,"Ah, this is because I am the chieftan. I am the one who authorised contact. You will not find many of my tribe so forthcoming with you, as I.").also { stage++ }
+            10 -> playerl(FacialExpression.ASKING,"Is there a way for you to authorise your tribe to talk to me then?").also { stage++ }
+            11 -> npcl(FacialExpression.HAPPY,"Well, there is one way... but I doubt it is of any interest to you.").also { stage = 0 }
+
+            15 -> npcl(FacialExpression.ANNOYED,"Don't mock me outerlander; this helm has saved my life more times than I care to recall right now.").also { stage = 1000 }
+
 
             //Do you have any quests?
             300 -> {npc("Quests, you say outlander? Well, I would not call it a","quest as such, but if you are brave of heart and strong","of body, perhaps..."); stage++}
@@ -166,6 +187,75 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
                 stage = 1000
             }
 
+            600 -> options("I just came to say hello.","Do you have any quests?","Nice hat!","Can I hear the history of your people?").also { stage++ }
+            601 -> when(buttonId){
+                1 -> playerl(FacialExpression.HAPPY,"I just came by to say hello.").also { stage++ }
+                2 -> playerl(FacialExpression.ASKING,"Do you have any quests?").also { stage = 605 }
+                3 -> playerl(FacialExpression.HAPPY,"Nice hat!").also { stage = 610 }
+                4 -> playerl(FacialExpression.ASKING,"Can I hear the history of your people?").also { stage = 615 }
+            }
+            602 -> npcl(FacialExpression.HAPPY,"Well met, $gender $fName. it is always good to see your face in glorious Rellekka once more!").also { stage = 1000 }
+
+            605 -> npcl(FacialExpression.HAPPY,"Not at the moment, $fName. Rest assured, should your services to the Fremennik be required, I will call upon you").also { stage = 1000 }
+
+            610 -> npcl(FacialExpression.HAPPY,"Aye that it is, $gender $fName. Should you desire one of your own, you should go to Skulgrimen's shop and see what they have available!").also { stage = 1000 }
+
+            615 -> npcl(FacialExpression.HAPPY,"Why, of course, $fName! Do not say 'your people' like that, for you are now a Fremennik yourself! What did you want to hear of?").also { stage++ }
+            616 -> options("Tell me of the finding of Koschei","Tell me of the lands to the North","Tell me of the outerlanders","Don't tell me anything").also { stage++ }
+            617 -> when(buttonId){
+                1 -> playerl(FacialExpression.HAPPY,"I'm interested in finding out about that mysterious warrior I fought as part of Thorvalds' combat trial. His name is Koschei I believe.").also { stage++ }
+                2 -> playerl(FacialExpression.HAPPY,"I would like to hear of the lands across the ocean to the North.").also { stage = 635 }
+                3 -> playerl(FacialExpression.HAPPY,"I would like to hear a little of the history between the Fremenniks and the outerlanders.").also { stage = 645 }
+                4 -> playerl(FacialExpression.HAPPY,"Actually, history isn't really my thing.").also { stage = 665 }
+            }
+
+            618 -> npcl(FacialExpression.HAPPY,"Ah... the deathless one... We do not even know if Koschei is his name, when we found him he had no memory,").also { stage++ }
+            619 -> npcl(FacialExpression.HAPPY,"he was simply repeating that single word. Whatever happened to him must have rattled his soul so hard that his memory ran away from him,").also { stage++ }
+            620 -> npcl(FacialExpression.HAPPY,"and he has not yet found its hiding place.").also { stage++ }
+            621 -> playerl(FacialExpression.ASKING,"So how exactly did you find him?").also { stage++ }
+            622 -> npcl(FacialExpression.HAPPY,"Well, it was a raiding party like any other. We had just struck one of the smaller northern islands to harvest supplies by combat, as our laws allow,").also { stage++ }
+            623 -> npcl(FacialExpression.HAPPY,"when we saw a figure in the icey waters. As we were at least a 3 week sail from any port, and saw no other ships nearby, he must have been there some time.").also { stage++ }
+            624 -> npcl(FacialExpression.HAPPY,"We could not leave someone to the cold death of the ocean, even an outerlander, so we fished him aboard. He muttered continually, but his words made no sense.").also { stage++ }
+            625 -> npcl(FacialExpression.HAPPY,"He had no clothes or possessions with him, and seemed to have been burnt somehow before he had landed in the water. I cannot help but wonder what burnt him,").also { stage++ }
+            626 -> npcl(FacialExpression.HAPPY,"for as you may have seen, he is incredibly powerful and resistant to damage by any means I know of! Anyway, we decided to bring him back to Rellekka,").also { stage++ }
+            627 -> npcl(FacialExpression.HAPPY,"for he did not seem of good health or sound mind, and simply repeated the word Koschei over and over. Yrsa tended to him for many weeks, until one day it was as though a new soul had entered his burnt and broken body.").also { stage++ }
+            628 -> npcl(FacialExpression.HAPPY,"He suddenly left her house one day, fully healed, and able to speak to us as though nothing had happened to him.").also { stage++ }
+            629 -> npcl(FacialExpression.HAPPY,"He still had no recollection of how he had come to be in the icey ocean, or of who he was, or where he had come from, but this did not matter to us or him.").also { stage++ }
+            630 -> npcl(FacialExpression.HAPPY,"He took his trials of adulthood, as you did, and has been a boon to our clan ever since. Someday I fear he may regain his memory, and leave us for his past...").also { stage++ }
+            631 -> npcl(FacialExpression.HAPPY,"But I will always respect any decision he decides to make should that day ever come upon us. Until then, he is more than welcome to stay here.").also { stage++ }
+            632 -> npcl(FacialExpression.HAPPY,"So, $fName, was there anything more you wished to hear?").also { stage = 616 }
+
+            635 -> npcl(FacialExpression.HAPPY,"Well, I think the best thing for you would be to go to the docks and ask to join one of our longboats on a journey. My affairs are concentrated mostly on Rellekka,").also { stage++ }
+            636 -> npcl(FacialExpression.HAPPY,"So my knowledge is not great, but I will happily share what little I do know with you, $fName. North of this town the atmosphere becomes bitterly cold.").also { stage++ }
+            637 -> npcl(FacialExpression.HAPPY,"There are a number of small inhabited islands that we have sea routes with. The largest of these is possibly Miscellania,").also { stage++ }
+            638 -> npcl(FacialExpression.HAPPY,"Although I hear that there has been some recent incident with their monarch, but I don't know the details.").also { stage++ }
+            639 -> npcl(FacialExpression.HAPPY,"There is also of course the island of the moon clan, who change with the tides. They are our bitterest enemies, and we are currently at war with them.").also { stage++ }
+            640 -> npcl(FacialExpression.HAPPY,"They are an evil people, equally cursed and blessed by the magic in their blood. Beyond those islands, there is the large frozen wasteland we call Acheron.").also { stage++ }
+            641 -> npcl(FacialExpression.HAPPY,"It is an inhospitable land, and you will need an agile and sturdy body just to keep alive in its perils.").also { stage++ }
+            642 -> npcl(FacialExpression.HAPPY,"As I say, my knowledge outside of this town is rather limited, and I know no more than this.").also { stage++ }
+            643 -> npcl(FacialExpression.HAPPY,"Was there anything else you wished to hear tell of?").also { stage = 616 }
+
+            645 -> npcl(FacialExpression.HAPPY,"Ah, now that is something I know a great deal about. Believe it or not, all outerlanders were once orginally Fremenniks.").also { stage++ }
+            646 -> npcl(FacialExpression.HAPPY,"When first man came to these lands all were Fremenniks, and followed our ways. We lived a happy life, and never settled in one place for long.").also { stage++ }
+            647 -> npcl(FacialExpression.HAPPY,"We travelled by boat along the coastlines, never taking more from the land than could be regrown by the same time in the following year.").also { stage++ }
+            648 -> npcl(FacialExpression.HAPPY,"However, many moons past, some of our tribesmen were weary of constantly travelling the lands, and decided to build themselves permanent homes.").also { stage++ }
+            649 -> npcl(FacialExpression.HAPPY,"Unfortunately, the other races that had also migrated here did not like this. They waged war against us at every opportunity.").also { stage++ }
+            650 -> npcl(FacialExpression.HAPPY,"We were driven mostly to the coastlines, where we could escape by boat when attacked. Remember, at this time we had no real way to defend against constant attack.").also { stage++ }
+            651 -> npcl(FacialExpression.HAPPY,"Then one day one of our Seers, whose full name has been lost in the telling of this tale, discovered a cave full of strange rocks.").also { stage++ }
+            652 -> npcl(FacialExpression.HAPPY,"This rock would never be consumed, no matter how much we took, and sparkled at its peak, and broke off in small and regular sized chunks when mined.").also { stage++ }
+            653 -> npcl(FacialExpression.HAPPY,"Stranger than this, we found that these rocks would become filled with power when taken to certain places across this land! There was a terrible argument in our tribe!").also { stage++ }
+            654 -> npcl(FacialExpression.HAPPY,"Some said that we should take as many of these rocks as we could, and use them in defending against our enemies' attacks!").also { stage++ }
+            655 -> npcl(FacialExpression.HAPPY,"Others said that we had found a place that belonged only to the gods, and that should we steal what was not ours we would find only torment and misery.").also { stage++ }
+            656 -> npcl(FacialExpression.HAPPY,"We voted on this, and decided that it was in the best interests of the tribe to leave these strange rocks where they lay, for the gods can be spiteful and cruel,").also { stage++ }
+            657 -> npcl(FacialExpression.HAPPY,"especially to those who do not treat them with the respect they desire. Some of our number refused to accept this ruling by our council however.").also { stage++ }
+            658 -> npcl(FacialExpression.HAPPY,"They began to mine these rocks, and set up transport systems to the various places of power that enchanted them. They even created temples at each of these places!").also { stage++ }
+            659 -> npcl(FacialExpression.HAPPY,"This was going too far! We had no choice, but to expel them from our tribe forever!").also { stage++ }
+            660 -> npcl(FacialExpression.HAPPY,"We turned our backs upon them, and let them know they would never be welcome back to our tribes until they had released themselves from the rocks.").also { stage++ }
+            661 -> npcl(FacialExpression.HAPPY,"This is the tale of how the outerlanders came about; through stealing from the gods, and from betraying our ideals. This is why we show them no trust.").also { stage++ }
+            662 -> npcl(FacialExpression.HAPPY,"Was there something else you wished to hear?").also { stage = 616 }
+
+            665 -> npcl(FacialExpression.HAPPY,"Well let me know should you wish to hear our lore and histories. We value them highly.").also { stage = 1000 }
+
             1000 -> end()
         }
         return true
@@ -242,5 +332,6 @@ fun cleanupAttributes(player: Player){
     player.removeAttribute("fremtrials:olaf-vote")
     player.removeAttribute("fremtrials:sigli-accepted")
     player.removeAttribute("fremtrials:thorvald-vote")
-
+    player.removeAttribute("fremtrials:sigli-vote")
+    player.removeAttribute("riddlesolved")
 }

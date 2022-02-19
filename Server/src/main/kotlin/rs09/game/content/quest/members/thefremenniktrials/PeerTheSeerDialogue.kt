@@ -3,13 +3,30 @@ package rs09.game.content.quest.members.thefremenniktrials
 import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
+import core.game.interaction.`object`.BankingPlugin
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable
+import core.tools.RandomFunction
 import rs09.game.content.dialogue.DumpContainer
 import kotlin.random.Random
 
 @Initializable
 class PeerTheSeerDialogue(player: Player? = null) : DialoguePlugin(player) {
+    val predictionOne = arrayOf("one","two","three","four","five","six","seven","eight","ten")
+    val predictionTwo = arrayOf("black","blue","brown","cyan","green","pink","purple","red","yellow")
+    val predictionThree = arrayOf("fire giant","ghosts","giant","goblin","green dragon","hobgoblin","lesser demon","moss giant","ogre","zombie")
+    val predictionFour = arrayOf("Al Kharid","Ardougne","Burthorpe","Canifis","Catherby","Falador","Karamja","Varrock","The Wilderness","Yanille")
+    val predictionFive = arrayOf("battleaxe","crossbow","dagger","javelin","long sword","mace","scimitar","spear","warhammer")
+    val predictionSix = arrayOf("Agility","Cooking","Crafting","Fishing","Fletching","Herblore","Mining","Runecrafting","Thieving")
+    val PREDICTIONS = arrayOf(
+        "You will find luck today with the number ${predictionOne[RandomFunction.getRandom(8)]}.",
+        "The colour ${predictionTwo[RandomFunction.getRandom(8)]} will bring you luck this day.",
+        "The enemy called ${predictionThree[RandomFunction.getRandom(9)]} is your lucky totem this day.",
+        "The place called ${predictionFour[RandomFunction.getRandom(9)]} will be worth your time to visit.",
+        "The stars tell me that you should use a ${predictionFive[RandomFunction.getRandom(8)]} in combat today.",
+        "You would be wise to train the skill ${predictionSix[RandomFunction.getRandom(8)]}")
+    var prediction = RandomFunction.getRandom(5)
 
     override fun open(vararg args: Any?): Boolean {
         if(player.inventory.contains(3710,1)){
@@ -50,6 +67,11 @@ class PeerTheSeerDialogue(player: Player? = null) : DialoguePlugin(player) {
         else if(player.getAttribute("fremtrials:peer-vote",false)){
             npcl(FacialExpression.SAD,"Uuuh... What was that dark presence I felt?")
             stage = 120
+            return true
+        }
+        else if(player.questRepository.isComplete("Fremennik Trials")){
+            npcl(FacialExpression.SAD,"Uuuh... What was that dark presence I felt?")
+            stage = 150
             return true
         }
         else if(player.questRepository.hasStarted("Fremennik Trials")){
@@ -184,6 +206,39 @@ class PeerTheSeerDialogue(player: Player? = null) : DialoguePlugin(player) {
             122 -> playerl(FacialExpression.HAPPY,"So you will vote for me at the council?").also { stage++ }
             123 -> npcl(FacialExpression.HAPPY,"Absolutely, outerlander. Your wisdom in passing my test marks you as worthy in my eyes.").also { stage = 1000 }
 
+
+            //After Fremennik Trials
+            150 -> npcl(FacialExpression.AMAZED,"!").also { stage++ }
+            151 -> npcl(FacialExpression.HAPPY,"Ahem, sorry about that.").also {
+                stage = if(player.achievementDiaryManager.getDiary(DiaryType.FREMENNIK).isComplete(0)){
+                    200
+                }else 152
+            }
+            152 -> playerl(FacialExpression.HAPPY,"Hello Peer.").also { stage++ }
+            153 -> npcl(FacialExpression.HAPPY,"Greetings to you, brother ${player.getAttribute("fremennikname","dingle")}! What brings you to see me again?").also { stage++ }
+            154 -> options("Can you tell my future?","Nothing really.").also{stage++}
+            155 -> when(buttonId){
+                    1 -> playerl(FacialExpression.ASKING,"I was wondering if you could give me a reading on my future...?").also { stage++ }
+                    2 -> playerl(FacialExpression.HAPPY,"Nothing really, I just stopped by to say hello").also { stage = 160 }
+                }
+            156 -> npcl(FacialExpression.HAPPY,"Ah, you would like a prediction? I do not see that that would be so difficult... Wait a moment...").also {
+                stage++
+            }
+            157 -> npcl(FacialExpression.HAPPY,"Here is your prediction: ${PREDICTIONS[prediction]}").also { stage = 1000 }
+
+            160 -> npcl(FacialExpression.HAPPY,"Well, hello to you too!").also { stage = 1000 }
+
+
+            200 -> options("Deposit service","Can you tell my future?","Nothing really.").also{ stage++ }
+            201 -> when(buttonId){
+                1 -> playerl(FacialExpression.HAPPY,"Could you deposit some things for me, please?").also { stage++ }
+                2 -> playerl(FacialExpression.ASKING,"I was wondering if you could give me a reading on my future...?").also { stage = 156 }
+                3 -> playerl(FacialExpression.HAPPY,"Nothing really, I just stopped by to say hello").also { stage = 160 }
+            }
+            202 -> npcl(FacialExpression.HAPPY,"Of course, ${player.getAttribute("fremennikname","dingle")}. I am always happy to aid those who have earned the right to wear Fremennik sea boots.").also {
+                BankingPlugin.BankDepositInterface()
+                stage = 1000
+            }
 
             1000 -> end()
         }

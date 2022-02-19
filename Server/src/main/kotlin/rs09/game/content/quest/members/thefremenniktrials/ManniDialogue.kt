@@ -13,6 +13,7 @@ import core.game.world.update.flag.context.Animation
 import core.plugin.Initializable
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
+import org.rs09.consts.Items
 
 @Initializable
 class ManniDialogue(player: Player? = null) : DialoguePlugin(player){
@@ -61,12 +62,19 @@ class ManniDialogue(player: Player? = null) : DialoguePlugin(player){
                 stage = 1000
                 return true
             }
+            else if(player.questRepository.isComplete("Fremennik Trials")){
+                playerl(FacialExpression.HAPPY,"Howdy!")
+                stage = 190
+                return true
+            }
             player("Hello there!")
             stage = 0
             return true
         }
         else {
-            TODO("Uncertain what should go here")
+            playerl(FacialExpression.HAPPY,"Hello there!")
+            stage = 200
+            return true
         }
     }
 
@@ -139,6 +147,14 @@ class ManniDialogue(player: Player? = null) : DialoguePlugin(player){
             183 -> playerl(FacialExpression.ASKING,"What did it taste of, then?").also { stage++ }
             184 -> npcl(FacialExpression.HAPPY,"Mostly tomato juice.").also { stage = 1000 }
 
+            190 -> npcl(FacialExpression.HAPPY,"Hey! It's ${player.getAttribute("fremennikname","clyde smilers")}! Let me buy you a drink!").also {
+                addItem(player, Items.BEER_1917)
+                stage++ }
+            191 -> npcl(FacialExpression.HAPPY,"There ya go! Anyone who can drink like you earns my respect!").also { stage = 1000 }
+
+            200 -> npcl(FacialExpression.HAPPY,"Do not think me rude outerlander, but our customs forbid me talking to you. All contact with outerlanders must be vetted by our chieftain, Brundt.").also { stage++ }
+            201 -> playerl(FacialExpression.ASKING,"Where is this Brundt?").also { stage++ }
+            202 -> npcl(FacialExpression.HAPPY,"He is standing just over there. He will speak for the tribe.").also { stage = 1000 }
 
 
             1000 -> end()

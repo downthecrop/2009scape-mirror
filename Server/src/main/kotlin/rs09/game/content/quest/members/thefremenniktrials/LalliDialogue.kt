@@ -1,5 +1,8 @@
 package rs09.game.content.quest.members.thefremenniktrials
 
+import api.addItem
+import api.inInventory
+import api.removeItem
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.game.content.dialogue.DialoguePlugin
@@ -40,6 +43,11 @@ class LalliDialogue(player: Player? = null) : DialoguePlugin(player){
             if (it.getAttribute("fremtrials:askeladden-talkedto", false)!!) {
                 player("Hello there.")
                 stage = 50
+                return true
+            }
+            if(player.questRepository.isComplete("Fremennik Trials")){
+                playerl(FacialExpression.HAPPY,"Hello there.")
+                stage = 100
                 return true
             }
             if (it.questRepository.getStage("Fremennik Trials") > 0) {
@@ -121,7 +129,31 @@ class LalliDialogue(player: Player? = null) : DialoguePlugin(player){
             }
             75 -> npcl(FacialExpression.OLD_HAPPY,"Hah! How you like worthless golden fleece! Me very like rare soup-making stone!").also { stage++ }
             76 -> playerl(FacialExpression.HAPPY,"Oh it's great, thank you again for the fleece Lalli, I hope you're enjoying your soup").also { stage = 1000 }
-            100 -> npcl(FacialExpression.OLD_DEFAULT,"bruh finish the post fremennik trials dialogue for me cuz fr fr no cap on god.").also { stage = 1000 }
+
+            100 -> npcl(FacialExpression.OLD_HAPPY,"Ha! Stupid human! You no get any golden apples! Even though me much like stone soup!").also { stage++ }
+            101 -> playerl(FacialExpression.ASKING,"Can I please have some more golden wool?").also { stage++ }
+            102 -> npcl(FacialExpression.OLD_HAPPY,"Me will sell you some golden wool, but me no sell you any golden apples!").also { stage++ }
+            103 -> playerl(FacialExpression.HAPPY,"How much for the golden wool?").also { stage++ }
+            104 -> npcl(FacialExpression.OLD_HAPPY,"Me want 1000 coins! You pay or go!").also {
+                stage = if(inInventory(player,Items.COINS_995,1000)){
+                    105
+                }
+                else 115
+            }
+            105 -> options("Pay","Don't pay").also { stage++ }
+            106 -> when(buttonId){
+                1 -> playerl(FacialExpression.HAPPY,"Is that all? Here you go!").also {
+                    removeItem(player,Item(Items.COINS_995,1000))
+                    addItem(player,Items.GOLDEN_FLEECE_3693)
+                    stage++
+                }
+                2 -> npcl(FacialExpression.OLD_HAPPY,"You no pay, then you go! You no get any golden apples!").also { stage = 1000 }
+            }
+            107 -> npcl(FacialExpression.OLD_HAPPY,"Ha! Stupid human think he buy golden apples, but he actually get stupid wool! Hahaha!").also { stage = 1000 }
+
+            115 -> playerl(FacialExpression.THINKING,"I don't even have that much cash on me...").also { stage++ }
+            116 -> npcl(FacialExpression.OLD_NORMAL,"Well stupid bad trade human don't get no wool then! Or any golden apples!").also { stage = 1000 }
+
             1000 -> end()
         }
         return true

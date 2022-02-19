@@ -4,6 +4,7 @@ import api.addItem
 import api.removeItem
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.Items
@@ -13,7 +14,24 @@ class SigmundDialogue (player: Player? = null) : DialoguePlugin(player) {
 
     private val QUEST_ITEMS = intArrayOf(3709,3707,3706,3710,3705,3704,3703,3702,3701,3708,3700,3699,3698)
 
+    val gender = if(player?.isMale == true){
+        "brother"
+    }else "sister"
+
+    val fName = player?.getAttribute("fremennikname","uhhh fucking uhhh geoff lol")
+
     override fun open(vararg args: Any?): Boolean {
+        npc = args[0] as NPC
+        if(player.questRepository.isComplete("Fremennik Trials")){
+            playerl(FacialExpression.HAPPY,"Hello there!")
+            stage = 50
+            return true
+        }
+        else if(!player.questRepository.hasStarted("Fremennik Trials")){
+            playerl(FacialExpression.HAPPY,"Hello there!")
+            stage = 60
+            return true
+        }
         if(player?.inventory?.contains(3698,1) == true){
             playerl(FacialExpression.HAPPY,"Here's that flower you wanted.")
             stage = 30
@@ -95,6 +113,23 @@ class SigmundDialogue (player: Player? = null) : DialoguePlugin(player) {
             40 -> npcl(FacialExpression.HAPPY,"Hello again outerlander! I am amazed once more at your apparent skill at merchanting!").also { stage++ }
             41 -> playerl(FacialExpression.HAPPY,"So I can count on your vote at the council of elders?").also { stage++ }
             42 -> npcl(FacialExpression.HAPPY,"Absolutely, outerlander. Your merchanting skills will be a real boon to the Fremennik.").also { stage = 1000 }
+
+            50 -> npcl(FacialExpression.HAPPY,"Greetings again $gender $fName! What can I do for you this day?").also { stage++ }
+            51 -> options("Can I see your wares?","Nothing thanks").also { stage++ }
+            52 -> when(buttonId){
+                1 -> playerl(FacialExpression.HAPPY,"Can I see your wares?").also { stage++ }
+                2 -> playerl(FacialExpression.HAPPY,"Nothing thanks").also { stage = 55 }
+            }
+            53 -> npcl(FacialExpression.HAPPY,"Certainly, $fName.").also {
+                npc.openShop(player)
+                stage = 1000
+            }
+
+            55 -> npcl(FacialExpression.HAPPY,"Well, feel free to stop by anytime you wish $fName. You are always welcome here!").also { stage = 1000 }
+
+            60 -> npcl(FacialExpression.HAPPY,"Hello outerlander. By the laws of our tribe, I am afraid I may not speak to you without the express permission of the chieftain.").also { stage++ }
+            61 -> playerl(FacialExpression.ASKING,"Where would I find him?").also { stage++ }
+            62 -> npcl(FacialExpression.HAPPY,"In the longhall, outerlander.").also { stage = 1000 }
 
             1000 -> end()
         }

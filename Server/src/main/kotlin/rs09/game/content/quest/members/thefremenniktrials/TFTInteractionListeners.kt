@@ -5,7 +5,6 @@ import core.game.container.impl.EquipmentContainer.SLOT_WEAPON
 import core.game.content.dialogue.FacialExpression
 import core.game.content.global.action.ClimbActionHandler
 import core.game.content.global.action.DoorActionHandler
-import core.game.content.quest.members.familycrest.doDoor
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -22,17 +21,14 @@ import core.game.world.update.flag.context.Graphics
 import core.net.packet.PacketRepository
 import core.net.packet.context.MusicContext
 import core.net.packet.out.MusicPacket
-import jdk.nashorn.internal.objects.NativeArray.forEach
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.primextends.getNext
 import org.rs09.primextends.isLast
-import rs09.game.content.ame.events.evilchicken.ids
 import rs09.game.interaction.InteractionListener
 import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.GameWorld
 import rs09.game.world.GameWorld.Pulser
-import kotlin.random.Random
 
 class TFTInteractionListeners : InteractionListener(){
 
@@ -60,9 +56,10 @@ class TFTInteractionListeners : InteractionListener(){
     val GOLDEN_FLEECE = Items.GOLDEN_FLEECE_3693
     val GOLDEN_WOOL = Items.GOLDEN_WOOL_3694
     val LONGHALL_BACKDOOR = 4148
+    val SHOPNPCS = intArrayOf(NPCs.YRSA_1301,NPCs.SKULGRIMEN_1303,NPCs.THORA_THE_BARKEEP_1300,NPCs.SIGMUND_THE_MERCHANT_1282,NPCs.FISH_MONGER_1315)
     val SPINNING_WHEEL_IDS = intArrayOf(2644,4309,8748,20365,21304,25824,26143,34497,36970,37476)
     val STEW_INGREDIENT_IDS = intArrayOf(Items.POTATO_1942,Items.ONION_1957,Items.CABBAGE_1965,Items.PET_ROCK_3695)
-    var FREMENNIK_HELMS = intArrayOf(Items.ARCHER_HELM_3749, Items.BERSERKER_HELM_3751, Items.WARRIOR_HELM_3753, Items.FARSEER_HELM_3755, Items.HELM_OF_NEITIZNOT_10828 /*Remove Helm of Neitiznot from this check when The Fremennik Isles is completed - Crash*/)
+    var FREMENNIK_HELMS = intArrayOf(Items.ARCHER_HELM_3749, Items.BERSERKER_HELM_3751, Items.WARRIOR_HELM_3753, Items.FARSEER_HELM_3755/*, Items.HELM_OF_NEITIZNOT_10828 Should this be included?*/)
 
 
     override fun defineListeners() {
@@ -266,6 +263,22 @@ class TFTInteractionListeners : InteractionListener(){
             SkillingTool.getHatchet(player)?.let { Pulser.submit(ChoppingPulse(player)).also { return@on true } }
 
             player.sendMessage("You need an axe which you have the woodcutting level to use to do this.")
+            return@on true
+        }
+
+        on(SHOPNPCS,NPC,"Trade") { player, npc ->
+            if(player.questRepository.isComplete("Fremennik Trials")){
+                npc.asNpc().openShop(player)
+            }
+            else {
+                when(npc.id){
+                    NPCs.THORA_THE_BARKEEP_1300 -> sendMessage(player,"Only Fremenniks may buy drinks here.")
+                    NPCs.SKULGRIMEN_1303 -> sendMessage(player,"Only Fremenniks may purchase weapons and armour here.")
+                    NPCs.SIGMUND_THE_MERCHANT_1282 -> sendMessage(player,"Only Fremenniks may trade with this merchant.")
+                    NPCs.YRSA_1301 -> sendMessage(player,"Only Fremenniks may buy clothes here.")
+                    NPCs.FISH_MONGER_1315 -> sendMessage(player,"Only Fremenniks may purchase fish here.")
+                }
+            }
             return@on true
         }
 

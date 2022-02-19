@@ -10,7 +10,7 @@ import org.rs09.consts.Items
 import rs09.game.content.activity.allfiredup.AFUBeacon
 
 @Initializable
-class FremennikTrials : Quest("Fremennik Trials",64,63,3,347,0,1,10){
+class FremennikTrials : Quest("Fremennik Trials",62,63,3,347,0,1,10){
 
     class SkillRequirement(val skill: Int?, val level: Int?)
 
@@ -33,7 +33,8 @@ class FremennikTrials : Quest("Fremennik Trials",64,63,3,347,0,1,10){
             line(player,"I can start this quest by speaking to !!Chieftan Brundt?? on",line++)
             line(player,"the !!Fremennik Longhall,?? which is in the town of !!Rellekka?? to",line++)
             line(player,"the north of !!Sinclair Mansion??.",line)
-        } else {
+        }
+        else if(started && stage != 100){
             line(player,"In order to join the Fremenniks, I need to",line++)
             line(player,"!!earn the approval?? of !!7 members?? of the elder council.",line++)
             line(player,"I've written down the members who I can try to help:",line++)
@@ -45,6 +46,20 @@ class FremennikTrials : Quest("Fremennik Trials",64,63,3,347,0,1,10){
             line(player,"Sigmund the Merchant",line++,player.getAttribute("fremtrials:sigmund-vote",false))
             line(player,"Peer the Seer",line++,player.getAttribute("fremtrials:peer-vote",false))
             line(player,"So far I have gotten ${player.getAttribute("fremtrials:votes",0)} votes.",line++)
+        }
+        else if(stage == 100){
+            line(player,"I made my way to the far north of !!Kandarin?? and found",line++)
+            line(player,"the Barbarian hometown of !!Rellekka??. The tribe that live",line++)
+            line(player,"there call themselves the !!Fremennik??, and offerred me the",line++)
+            line(player,"chance to join them if I could pass their trials.",line++)
+            line += 1
+            line(player,"I managed to persuade !!seven?? of the !!twelve?? council of",line++)
+            line(player,"elders to vote for me at their next meeting. and become an",line++)
+            line(player,"honorary member of the !!Fremennik??.",line++)
+            line += 1
+            line(player,"---QUEST COMPLETE---",line++)
+            line(player,"They also gave me a new name:",line++)
+            line(player,player.getAttribute("fremennikname","hingerdinger lmao"),line++)
         }
     }
 

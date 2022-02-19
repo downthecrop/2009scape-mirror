@@ -47,9 +47,21 @@ class SigliTheHuntsman(player: Player? = null) : DialoguePlugin(player){
             stage = 100
             return true
         }
-        npc("What do you want outerlander?")
-        stage = 0
-        return true
+        else if(player.questRepository.isComplete("Fremennik Trials")){
+            playerl(FacialExpression.HAPPY,"Hello again Sigli.")
+            stage = 180
+            return true
+        }
+        else if(player.questRepository.hasStarted("Fremennik Trials")){
+            npc("What do you want outerlander?")
+            stage = 0
+            return true
+        }
+        else{
+            npcl(FacialExpression.HAPPY,"I do not speak to outerlanders. If you have anything of import to say, go and speak to the Chieftain.")
+            stage = 1000
+            return true
+        }
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
@@ -123,7 +135,11 @@ class SigliTheHuntsman(player: Player? = null) : DialoguePlugin(player){
             170 -> npcl(FacialExpression.HAPPY,"No outerlander... it is hard to explain. That map makes my role as huntsman too easy. I fear my skills are becoming dulled.").also { stage++ }
             171 -> npcl(FacialExpression.HAPPY,"Now I must track my prey once more. To begin again from scratch... I feel this may keep me sharp.").also { stage = 1000 }
 
-            175 -> npcl(FacialExpression.ANNOYED,"Not the one I want, outerlander.")
+            175 -> npcl(FacialExpression.ANNOYED,"Not the one I want, outerlander.").also { stage = 1000 }
+
+            180 -> npcl(FacialExpression.HAPPY,"Hello again to you ${player.getAttribute("fremennikname","spinky")}. How goes the hunt?").also { stage++ }
+            181 -> playerl(FacialExpression.ASKING,"They hunt? I've already done your task! That's why I'm a Fremennik now!").also { stage++ }
+            182 -> npcl(FacialExpression.HAPPY,"You think so do you? The Draugen is always out there, just as I and my hunters are always on its trail to keep it at bay. The hunt will never end until I do.").also { stage = 1000 }
 
             1000 -> end()
         }

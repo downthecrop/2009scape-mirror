@@ -4,6 +4,7 @@ import api.addItem
 import api.removeItem
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
+import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 
@@ -11,6 +12,7 @@ import core.plugin.Initializable
 class SkulgrimenDialogue(player: Player? = null) : DialoguePlugin(player) {
 
     override fun open(vararg args: Any?): Boolean {
+        npc = args[0] as NPC
         if(player?.inventory?.contains(3703,1) == true){
             playerl(FacialExpression.HAPPY,"Hi there. I got your fish, so can I have that bowstring for Sigli now?")
             stage = 20
@@ -34,6 +36,16 @@ class SkulgrimenDialogue(player: Player? = null) : DialoguePlugin(player) {
         else if(player?.getAttribute("sigmund-steps", 0) == 6){
             playerl(FacialExpression.ASKING,"I don't suppose you have any idea where I could find a finely balanced custom bowstring, do you?")
             stage = 1
+            return true
+        }
+        else if(player.questRepository.isComplete("Fremennik Trials")){
+            npcl(FacialExpression.HAPPY,"Hello again, ${player.getAttribute("fremennikname","ringo")}. Come to see what's for sale?")
+            stage = 1001
+            return true
+        }
+        else{
+            playerl(FacialExpression.HAPPY,"Hello!")
+            stage = 100
         }
         return true
     }
@@ -69,7 +81,13 @@ class SkulgrimenDialogue(player: Player? = null) : DialoguePlugin(player) {
 
             26 -> npcl(FacialExpression.ANNOYED,"Not for me, I'm afraid.").also { stage = 1000 }
 
+            100 -> npcl(FacialExpression.HAPPY,"Sorry. I can't sell weapons to outerlanders. Wouldn't be right. Against our beliefs.").also { stage = 1000 }
+
             1000 -> end()
+            1001 ->{
+                end()
+                npc.openShop(player)
+            }
         }
         return true
     }

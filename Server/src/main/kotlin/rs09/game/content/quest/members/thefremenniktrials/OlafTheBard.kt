@@ -44,9 +44,19 @@ class OlafTheBard(player: Player? = null) : DialoguePlugin(player){
             stage = 1000
             return true
         }
-        else {
+        else if(player.questRepository.isComplete("Fremennik Trials")){
+            npcl(FacialExpression.HAPPY,"Hello again to you, ${player.getAttribute("fremennikname","schlonko")}. Us bards should stick together, what can I do for you?")
+            stage = 98
+            return true
+        }
+        else if(player.questRepository.hasStarted("Fremennik Trials")){
             npc("Hello? Yes? You want something outerlander?")
             stage = 0
+            return true
+        }
+        else{
+            playerl(FacialExpression.HAPPY,"Hello there. So you're a bard?")
+            stage = 150
             return true
         }
         return true
@@ -126,6 +136,20 @@ class OlafTheBard(player: Player? = null) : DialoguePlugin(player){
             72 -> playerl(FacialExpression.HAPPY,"Thanks! That sounds perfect!").also { stage = 1000 }
 
             75 -> npcl(FacialExpression.HAPPY,"Only if it's a new pair of boots.").also { stage = 1000 }
+
+            98 -> options("I was wondering...","I forget now...").also { stage++ }
+            99 -> when(buttonId){
+                1 -> playerl(FacialExpression.ASKING,"I was wondering... Can I learn to play my lyre again?").also { stage++ }
+                2 -> playerl(FacialExpression.THINKING,"I forget now...").also { stage = 1000 }
+            }
+
+            100 -> npcl(FacialExpression.HAPPY, "Well that is an interesting question. Let me let you into a little secret. If you make another offering to the Fossegrimen you will learn a secret melody.").also { stage++ }
+            101 -> playerl(FacialExpression.ASKING,"What kind of melody?").also { stage++ }
+            102 -> npcl(FacialExpression.HAPPY,"It is the song of Rellekka. When you play it, it will bring you back to this town where you are in this world.").also { stage++ }
+            103 -> npcl(FacialExpression.HAPPY,"We often go adventuring with bards for precisely this reason. No matter where we have ended up we can return safe and sound to home.").also { stage++ }
+            104 -> playerl(FacialExpression.HAPPY,"Thanks, Olaf!").also { stage = 1000 }
+
+            150 -> npcl(FacialExpression.HAPPY,"I am afraid I cannot speak to outerlanders. Besides, I am busy composing an epic.").also { stage = 1000 }
 
             1000 -> end()
         }

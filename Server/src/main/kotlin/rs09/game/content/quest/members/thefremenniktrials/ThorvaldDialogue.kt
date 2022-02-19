@@ -50,14 +50,24 @@ class ThorvaldDialogue(player: Player? = null) : DialoguePlugin(player){
             stage = 150
             return true
         }
-        else if (!player?.questRepository?.hasStarted("Fremennik Trials")!!) {
-            npcl(FacialExpression.ANNOYED, "Leave me be, outerlander. I have nothing to say to the likes of you.")
-            stage = 1000
-            return true
-        }
         else if (player?.questRepository?.isComplete("Fremennik Trials")!!) {
             playerl(FacialExpression.FRIENDLY, "Howdy Thorvald!")
             stage = 0
+            return true
+        }
+        else if(player!!.getAttribute("fremtrials:thorvald-vote", false)!!){
+            playerl(FacialExpression.FRIENDLY, "So can I count on your vote at the council of elders now Thorvald?")
+            stage = 160
+            return true
+        }
+        else if(player.questRepository.isComplete("Fremennik Trials")){
+            playerl(FacialExpression.HAPPY,"Howdy Thorvald!")
+            stage = 250
+            return true
+        }
+        else if(!player.questRepository.hasStarted("Fremennik Trials")){
+            npcl(FacialExpression.ANNOYED, "Leave me be, outerlander. I have nothing to say to the likes of you.")
+            stage = 1000
             return true
         }
         else if (!player!!.getAttribute("fremtrials:thorvald-vote", false)!!) {
@@ -71,11 +81,7 @@ class ThorvaldDialogue(player: Player? = null) : DialoguePlugin(player){
                 return true
             }
         }
-        else {
-            playerl(FacialExpression.FRIENDLY, "So can I count on your vote at the council of elders now Thorvald?")
-            stage = 160
-            return true
-        }
+        return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
@@ -191,6 +197,7 @@ class ThorvaldDialogue(player: Player? = null) : DialoguePlugin(player){
             220 -> npcl(FacialExpression.HAPPY,"You misunderstand, outerlander. Normally I will only battle for a noble cause, but have never been recognised as a true champion here.").also { stage++ }
             221 -> npcl(FacialExpression.HAPPY,"With this Champion's token, I can stand alongside my warrior brethren in the Long Hall, and revel in the glories of past victories together!").also { stage = 1000 }
 
+            250 -> npcl(FacialExpression.HAPPY,"And greetings to you too. It is good to see new blood entering the Fremennik; we gain our strength by bringing new warriors into the tribe.").also { stage = 1000 }
 
 
             1000 -> end()
