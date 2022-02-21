@@ -174,7 +174,12 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
         final Item item = new Item(getEssence().getId(), getEssenceAmount());
         int amount = player.getInventory().getAmount(item);
         if (!altar.isOurania()) {
-            Item i = new Item(rune.getRune().getId(), amount * getMultiplier());
+            int total = 0;
+            for(int j = 0; j < amount; j++) {
+                // since getMultiplier is stochastic, roll `amount` independent copies
+                total += getMultiplier();
+            }
+            Item i = new Item(rune.getRune().getId(), total);
 
             if (player.getInventory().remove(item) && player.getInventory().hasSpaceFor(i)) {
                 player.getInventory().add(i);
@@ -309,16 +314,28 @@ public final class RuneCraftPulse extends SkillPulse<Item> {
         if (altar.isOurania()) {
             return 1;
         }
+        int rcLevel = player.getSkills().getLevel(Skills.RUNECRAFTING);
+        int[] multipleLevels = rune.getMultiple();
         int i = 0;
-        for (int level : rune.getMultiple()) {
-            if (player.getSkills().getLevel(Skills.RUNECRAFTING) >= level) {
+        for (int level : multipleLevels) {
+            if (rcLevel >= level) {
                 i++;
+            }
+        }
+
+        if(multipleLevels.length > i) {
+            int a = Math.max(multipleLevels[i-1], rune.getLevel());
+            int b = multipleLevels[i];
+            double chance = ((double)rcLevel - (double)a) / ((double)b - (double)a);
+            player.debug(String.format("%d %d %d, %f", a, b, rcLevel, chance));
+            if(RandomFunction.random(0.0, 1.0) < chance) {
+                i += 1;
             }
         }
 
         if (player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).isComplete(1)
                 && new ArrayList<>(Arrays.asList(Rune.AIR, Rune.WATER, Rune.FIRE, Rune.EARTH)).contains(rune)
-                && RandomFunction.getRandom(10) == 0) { //approximately 10% chance //TODO fix RandomFunction to be more random, should be uniformly distributed but isn't
+                && RandomFunction.getRandom(10) == 0) { //approximately 10% chance
             i += 1;
         }
 
