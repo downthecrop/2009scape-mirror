@@ -1,12 +1,14 @@
 package rs09.game.interaction.inter
 
 import core.game.node.entity.npc.NPC
+import core.game.world.map.Location
 import core.tools.RandomFunction
+import org.rs09.consts.NPCs
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InterfaceListener
 
 class NPCContactInterface : InterfaceListener() {
-    val NPCs = arrayOf(org.rs09.consts.NPCs.HONEST_JIMMY_4362, org.rs09.consts.NPCs.BERT_3108, org.rs09.consts.NPCs.ADVISOR_GHRIM_1375, org.rs09.consts.NPCs.TURAEL_8273, org.rs09.consts.NPCs.LANTHUS_1526, org.rs09.consts.NPCs.SUMONA_7780, org.rs09.consts.NPCs.MAZCHNA_8274, org.rs09.consts.NPCs.DURADEL_8275, org.rs09.consts.NPCs.VANNAKA_1597, org.rs09.consts.NPCs.MURPHY_463, org.rs09.consts.NPCs.CHAELDAR_1598, org.rs09.consts.NPCs.CYRISUS_432, org.rs09.consts.NPCs.LARRY_5424)
+    val contactNPCs = arrayOf(NPCs.HONEST_JIMMY_4362, NPCs.BERT_3108, NPCs.ADVISOR_GHRIM_1375, NPCs.TURAEL_8273, NPCs.LANTHUS_1526, NPCs.SUMONA_7780, NPCs.MAZCHNA_8274, NPCs.DURADEL_8275, NPCs.VANNAKA_1597, NPCs.DARK_MAGE_2262, NPCs.CHAELDAR_1598, NPCs.CYRISUS_432, NPCs.LARRY_5424)
     val DialogueFiles = arrayOf<DialogueFile?>(
         /*TODO("Honest Jimmy"),
         TODO("Bert"),
@@ -49,6 +51,10 @@ class NPCContactInterface : InterfaceListener() {
             player.packetDispatch.sendInterfaceConfig(429,27,true)
             player.packetDispatch.sendInterfaceConfig(429,42,true)
 
+            // Replace Murphy's icon with the Abyss's Dark Mage
+            player.packetDispatch.sendNpcOnInterface(NPCs.DARK_MAGE_2262, 429, 30)
+            player.packetDispatch.sendString("Dark mage", 429, 47)
+
             return@onOpen true
         }
 
@@ -69,14 +75,14 @@ class NPCContactInterface : InterfaceListener() {
                 34,49 -> 12
                 else -> -1
             }
-            if(index == -1) index = RandomFunction.random(NPCs.size)
+            if(index == -1) index = RandomFunction.random(contactNPCs.size)
             val dialogueFile = DialogueFiles.getOrNull(index)
             player.getAttribute<() -> Unit>("contact-caller")?.invoke()
             player.interfaceManager.close()
             if(dialogueFile != null){
-                player.dialogueInterpreter.open(dialogueFile, NPC(NPCs[index]))
+                player.dialogueInterpreter.open(dialogueFile, NPC(contactNPCs[index]))
             } else {
-                player.dialogueInterpreter.open(NPCs[index])
+                player.dialogueInterpreter.open(contactNPCs[index], NPC(contactNPCs[index], Location(0, 0)))
             }
             return@on true
         }
