@@ -85,21 +85,21 @@ public final class BuildingUtils {
 
 		int c261Value = 0;
 
-		for (int i = 0; i < 7; i++) {
-			int itemsStringOffset = 97 + (i * 5);
+		for (int menuIndex = 0; menuIndex < 7; menuIndex++) {
+			int itemsStringOffset = 97 + (menuIndex * 5);
 
 			//97 +
-			if (i >= hotspot.getDecorations().length || (hotspot.getDecorations()[i] != null && hotspot.getDecorations()[i].isInvisibleNode())) {
+			if (menuIndex >= hotspot.getDecorations().length || (hotspot.getDecorations()[menuIndex] != null && hotspot.getDecorations()[menuIndex].isInvisibleNode())) {
 				for (int j = 0; j < 5; j++) {
 					player.getPacketDispatch().sendString("", 396, itemsStringOffset + j);
 				}
-				player.getPacketDispatch().sendString("", 396, 140 + i);
-				c261Value += (1 << (i + 1));
+				player.getPacketDispatch().sendString("", 396, 140 + menuIndex);
+				c261Value += (1 << (menuIndex + 1));
 				continue;
 			}
 
-			Decoration decoration = hotspot.getDecorations()[i];
-			items[BUILD_INDEXES[i]] = new Item(decoration.getInterfaceItem());
+			Decoration decoration = hotspot.getDecorations()[menuIndex];
+			items[BUILD_INDEXES[menuIndex]] = new Item(decoration.getInterfaceItem());
 			player.getPacketDispatch().sendString(ItemDefinition.forId(decoration.getInterfaceItem()).getName(), 396, itemsStringOffset);
 			boolean hasRequirements = player.getSkills().getLevel(Skills.CONSTRUCTION) >= decoration.getLevel();
 			for (int j = 0; j < 4; j++) {
@@ -127,14 +127,16 @@ public final class BuildingUtils {
                         continue;
                     }*/
 					player.getPacketDispatch().sendString(s, 396, (itemsStringOffset + 1) + j);
-					if (hasRequirements)
-						c261Value += (1 << (i + 1));
 				}
 			}
-			player.getConfigManager().set(1485 + i, hasRequirements || player.isStaff() ? 1 : 0);
-			player.getPacketDispatch().sendString("Lvl " + decoration.getLevel(), 396, 140 + i);
+			if (hasRequirements) {
+				c261Value += (1 << (menuIndex + 1));
+			}
+			player.getConfigManager().set(1485 + menuIndex, hasRequirements || player.isStaff() ? 1 : 0);
+			player.getPacketDispatch().sendString("Level " + decoration.getLevel(), 396, 140 + menuIndex);
 			//player.getPacketDispatch().sendItemZoomOnInterface(items[i].protocol(), 50000, 396, 49 + i);
 		}
+		System.out.println(c261Value);
 		player.getConfigManager().set(261, c261Value);
 		PacketRepository.send(ContainerPacket.class, new ContainerContext(player, 396, 132, 8, items, false));
 	}

@@ -45,6 +45,7 @@ public final class EdgevilleNodePlugin extends OptionHandler {
 
     @Override
     public boolean handle(Player player, Node node, String option) {
+        int id = ((Scenery) node).getId();
         switch (node.getId()) {
             case 9262:
             case 9261:
@@ -84,12 +85,15 @@ public final class EdgevilleNodePlugin extends OptionHandler {
                     player.getInterfaceManager().openComponent(382);
                     player.setAttribute("wildy_gate", node);
                     player.setAttribute("wildy_gate_loc",
-                            Location.create(player.getLocation().getX(),player.getLocation().getY()+1));
+                            Location.create(player.getLocation().getX(),player.getLocation().getY()+1)
+                    );
                 }
                 else{ // Leaving the wilderness
                     DoorActionHandler.handleAutowalkDoor(player, (Scenery) node,
-                            Location.create(player.getLocation().getX(),player.getLocation().getY()-1));
+                            Location.create(player.getLocation().getX(),player.getLocation().getY()-1)
+                    );
                 }
+                break;
         }
         return true;
     }

@@ -4,6 +4,7 @@ import core.cache.Cache
 import core.cache.def.impl.SceneryDefinition
 import core.game.ge.GrandExchangeDatabase
 import core.game.node.entity.npc.drop.RareDropTable
+import core.game.node.entity.npc.drop.CELEMinorTable
 import core.game.node.entity.player.Player
 import core.game.system.SystemManager
 import core.game.system.SystemState
@@ -137,6 +138,8 @@ object GameWorld {
         configParser.postPlugin()
         RareDropTable.init()
         logInfo("Initialized Rare Drop Table from " + ServerConstants.RDT_DATA_PATH)
+        CELEMinorTable.init()
+        logInfo("Initialized Chaos Elemental (Minor) Drop Table from " + ServerConstants.CELEDT_DATA_PATH)        
         if (settings!!.enable_bots) {
             ImmerseWorld.init()
         }

@@ -65,6 +65,7 @@ public enum Consumables {
 	TRIANGLE_SANDWICH(new Food(new int[] {6962}, new HealingEffect(6))),
 	SQUARE_SANDWICH(new Food(new int[] {6965}, new HealingEffect(6))),
 	SEAWEED_SANDWICH(new FakeConsumable(3168, new String[] {"You really, really do not want to eat that."})),
+	FROGBURGER(new Food(new int[] {10962}, new HealingEffect(2))),
 
 	/** Kebabs */
 	UGTHANKI_KEBAB(new Food(new int[] {1883}, new UgthankiKebabEffect())),
@@ -86,7 +87,7 @@ public enum Consumables {
 	STEW(new Food(new int[] {2003, 1923}, new HealingEffect(11))),
 	SPICY_STEW(new Food(new int[] {7479, 1923}, new HealingEffect(11))),
 	CURRY(new Food(new int[] {2011, 1923}, new HealingEffect(19))),
-	BANANA_STEW(new Food(new int[] {4016}, new HealingEffect(11))),
+	BANANA_STEW(new Food(new int[] {4016, 1923}, new HealingEffect(11))),
 
 	/** Pizzas */
 	PLAIN_PIZZA(new HalfableFood(new int[] {2289, 2291}, new HealingEffect(7))),

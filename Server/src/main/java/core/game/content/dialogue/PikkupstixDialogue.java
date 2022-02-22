@@ -15,6 +15,7 @@ import core.game.node.item.Item;
  * @notice Modified March 2nd, 2015 to allow the bulk buying of shards.
  * @notice The previous notice is dubious
  * @notice Spirit shard packs were released 9 September 2009, outside of 530. Option removed.
+ * Fixed multiple typos -Nuggles
  */
 @Initializable
 public final class PikkupstixDialogue extends DialoguePlugin {
@@ -438,7 +439,7 @@ public final class PikkupstixDialogue extends DialoguePlugin {
 				stage = 6;
 				break;
 			case 6:
-				npc("Well, for a start, it has the ability to perform a", "Summoning scroll that forces the oppnents to flee. That is", "what it will use on the giant wolpertinger, with the", "difference being that the giant wolpertinger will be so");
+				npc("Well, for a start, it has the ability to perform a", "Summoning scroll that forces the opponents to flee. That is", "what it will use on the giant wolpertinger, with the", "difference being that the giant wolpertinger will be so");
 				stage = 7;
 				break;
 			case 7:
@@ -624,10 +625,10 @@ public final class PikkupstixDialogue extends DialoguePlugin {
 			switch (stage) {
 			case 0:
 				if (player.getSkills().getStaticLevel(Skills.SUMMONING) == 99) {
-					options("So, what's Summmoning all about, then?", "Can I buy some Summoning supplies?", "Can I buy a Summoning skillcape?");
+					options("So, what's Summoning all about, then?", "Can I buy some Summoning supplies?", "Can I buy a Summoning skillcape?");
 					stage = 600;
 				} else {
-					options("So, what's Summmoning all about, then?", "Can I buy some Summoning supplies?", "Please tell me about skillcapes.");
+					options("So, what's Summoning all about, then?", "Can I buy some Summoning supplies?", "Please tell me about skillcapes.");
 					stage = 1;
 				}
 				break;
@@ -685,7 +686,7 @@ public final class PikkupstixDialogue extends DialoguePlugin {
 				stage = 102;
 				break;
 			case 102:
-				npc("These animals can also perform a special move, wich is", "specific to the species. For example, a spirit wolf can", "perform the Howl special move if you are holding the", "correct Howl scroll.");
+				npc("These animals can also perform a special move, which is", "specific to the species. For example, a spirit wolf can", "perform the Howl special move if you are holding the", "correct Howl scroll.");
 				stage = 103;
 				break;
 			case 103:
@@ -743,7 +744,7 @@ public final class PikkupstixDialogue extends DialoguePlugin {
 				stage = 401;
 				break;
 			case 401:
-				interpreter.sendOptions("Choose an option:", "So, what's Summmoning all about, then?", "Can I buy some Summoning supplies?", "Please tell me about skillcapes.");
+				interpreter.sendOptions("Choose an option:", "So, what's Summoning all about, then?", "Can I buy some Summoning supplies?", "Please tell me about skillcapes.");
 				stage = 1;
 				break;
 			case 600:

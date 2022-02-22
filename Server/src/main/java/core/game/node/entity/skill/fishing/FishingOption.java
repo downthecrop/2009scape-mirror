@@ -20,7 +20,7 @@ public enum FishingOption {
 
 	CRAYFISH_CAGE(new Item(13431), 1, Animation.create(619), null, "cage", Fish.CRAYFISH),
 	SMALL_NET(new Item(303), 1, Animation.create(621), null, "net", Fish.SHRIMP, Fish.ANCHOVIE),
-	BAIT(new Item(307), 5, Animation.create(622), new Item[]{new Item(313)}, "bait", Fish.SARDINE, Fish.HERRING), 
+	BAIT(new Item(307), 5, Animation.create(622), new Item[]{new Item(313)}, "bait", Fish.SARDINE, Fish.HERRING),
 	LURE(new Item(309), 20, new Animation(622), new Item[]{new Item(Items.FEATHER_314), new Item(Items.STRIPY_FEATHER_10087)}, "lure", Fish.TROUT, Fish.SALMON, Fish.RAINBOW_FISH), 
 	L_BAIT(new Item(307), 25, Animation.create(622), new Item[]{new Item(313)}, "bait", Fish.PIKE), 
 	CAGE(new Item(301), 40, Animation.create(619), null, "cage", Fish.LOBSTER), 
@@ -29,10 +29,13 @@ public enum FishingOption {
 	BIG_NET(new Item(305), 16, Animation.create(620), null, "net", Fish.MACKEREL, Fish.COD, Fish.BASS, Fish.SEAWEED),
 	N_HARPOON(new Item(311), 76, Animation.create(618), null, "harpoon", Fish.SHARK), 
 	H_NET(new Item(303), 62, Animation.create(621), null, "net", Fish.MONKFISH),
+	MORTMYRE_ROD(new Item(307), 5, Animation.create(622), new Item[]{new Item(313)},"bait", Fish.SLIMY_EEL),
+	LUMBDSWAMP_ROD(new Item(307), 5, Animation.create(622), new Item[]{new Item(313)}, "bait", Fish.SLIMY_EEL, Fish.FROG_SPAWN),
 	KBWANJI_NET(new Item(Items.SMALL_FISHING_NET_303), 5, Animation.create(621), null, "net", Fish.KARAMBWANJI),
-	KARAMBWAN_VES(new Item(Items.KARAMBWAN_VESSEL_3157), 65, Animation.create(1193), new Item[]{new Item(Items.RAW_KARAMBWANJI_3150)}, "fish", Fish.KARAMBWAN);
+	KARAMBWAN_VES(new Item(Items.KARAMBWAN_VESSEL_3157), 65, Animation.create(1193), new Item[]{new Item(Items.RAW_KARAMBWANJI_3150)}, "fish", Fish.KARAMBWAN),
+	OILY_FISHING_ROD(new Item(Items.OILY_FISHING_ROD_1585), 53, Animation.create(622), new Item[]{new Item(313)}, "bait", Fish.LAVA_EEL);
 
-	public static HashMap<String,FishingOption> nameMap = new HashMap<>();
+	public static final HashMap<String,FishingOption> nameMap = new HashMap<>();
 	static{
 		for(FishingOption option : FishingOption.values()){
 			nameMap.putIfAbsent(option.name,option);
@@ -79,18 +82,13 @@ public enum FishingOption {
 	 * @param animation The animation.
 	 * @param fish The fish to catch.
 	 */
-	private FishingOption(Item tool, int level, Animation animation, Item[] bait, String name, Fish... fish) {
+	FishingOption(Item tool, int level, Animation animation, Item[] bait, String name, Fish... fish) {
 		this.tool = tool;
 		this.level = level;
 		this.animation = animation;
 		this.bait = bait;
 		this.name = name;
-        Arrays.sort(fish, new Comparator<Fish>() {
-            @Override
-            public int compare(Fish x, Fish y) {
-                return y.getLevel() - x.getLevel();
-            }
-        });
+        Arrays.sort(fish, (x, y) -> y.getLevel() - x.getLevel());
 		this.fish = fish;
 	}
 

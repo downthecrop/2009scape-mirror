@@ -1,5 +1,6 @@
 package core.game.content.activity.guild;
 
+import static api.ContentAPIKt.*;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.content.global.action.ClimbActionHandler;
 import core.game.content.global.action.DoorActionHandler;
@@ -13,6 +14,8 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+
+import static api.ContentAPIKt.getDynLevel;
 
 /**
  * Represents the plugin used for the mining guild.
@@ -34,7 +37,7 @@ public final class MiningGuildPlugin extends OptionHandler {
 	public boolean handle(Player player, Node node, String option) {
 		if (option.equals("climb-down")) {
 			if (player.getLocation().withinDistance(Location.create(3019, 3339, 0), 4)) {
-				if (player.getSkills().getStaticLevel(Skills.MINING) < 60) {
+				if (getDynLevel(player, Skills.MINING) < 60) {
 					player.getDialogueInterpreter().open(382, NPC.create(382, Location.create(0, 0, 0)), 1);
 					return true;
 				}
@@ -45,7 +48,7 @@ public final class MiningGuildPlugin extends OptionHandler {
 			return true;
 		}
 		if (option.equals("open")) {
-			if (player.getSkills().getStaticLevel(Skills.MINING) < 60) {
+			if (getDynLevel(player, Skills.MINING) < 60) {
 				player.getDialogueInterpreter().open(382, NPC.create(382, Location.create(0, 0, 0)), 1);
 				return true;
 			}

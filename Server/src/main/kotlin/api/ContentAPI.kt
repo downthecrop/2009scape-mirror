@@ -3,6 +3,8 @@ package api
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
+import core.game.container.impl.EquipmentContainer
+import core.game.container.impl.InventoryListener
 import core.game.content.dialogue.FacialExpression
 import core.game.content.global.action.SpecialLadders
 import core.game.node.Node
@@ -19,6 +21,7 @@ import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.entity.player.link.quest.QuestRepository
+import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
@@ -35,6 +38,7 @@ import core.game.world.map.zone.ZoneBuilder
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import core.plugin.Plugin
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.content.global.GlobalKillCounter;
@@ -144,6 +148,18 @@ fun <T> removeItem(player: Player, item: T, container: Container = Container.INV
         Container.BANK -> player.bank.remove(it)
         Container.EQUIPMENT -> player.equipment.remove(it)
     }
+}
+
+/**
+ * Add an item to a player's inventory
+ * @param player the player whose inventory to add an item to
+ * @param id the ID of the item to add
+ * @param amount the amount of the item to add, defaults to 1
+ * @return true if the item exists in the given amount in the player's inventory
+ */
+
+fun addItem(player: Player, id: Int, amount: Int = 1): Boolean{
+    return addItem(player, id, amount, Container.INVENTORY)
 }
 
 /**
@@ -1344,4 +1360,57 @@ fun announceIfRare(player: Player, item: Item) {
         sendNews("${player.username} has just received: ${item.amount} x ${item.name}.");
         GlobalKillCounter.incrementRareDrop(player, item);
     }
+}
+
+/**
+ * Returns a Mutable List of player skills that are at 99, returns false if player has no 99s
+ * @param player the player
+ */
+
+fun getMasteredSkills(player: Player): MutableList<String> {
+    val SKILL_LIST = Skills.SKILL_NAME
+    val hasMastered = player.getSkills().masteredSkills > 0
+    val MASTERED_SKILLS = mutableListOf<String>()
+
+    if(hasMastered){
+        SKILL_LIST.forEach {
+            when(player.getSkills().getLevel(Skills.getSkillByName(it))){
+                99 -> MASTERED_SKILLS.add(it)
+            }
+        }
+    }
+    return MASTERED_SKILLS
+}
+
+/**
+ * Dumps a container.
+ * @param player the player
+ * @param inventory the player's inventory.
+ * @param boolean true to send message stating why it can't bank, false for no message
+ * @author ceik
+ * @author James Triantafylos
+ */
+fun dumpContainer(player: Player, inventory: core.game.container.Container) {
+    val bank = player.bank
+    for (item: Item in inventory.toArray().filterNotNull()) {
+        if (!bank.hasSpaceFor(item)) {
+            player.packetDispatch.sendMessage("You have no more space in your bank.")
+            return
+        }
+        if (!bank.canAdd(item)) {
+            player.packetDispatch.sendMessage("A magical force prevents you from banking your " + item.name + ".")
+            return
+        } else {
+            if (inventory is EquipmentContainer) {
+                val plugin = item.definition.handlers["equipment"]
+                if (plugin != null && plugin is Plugin<*>) {
+                    plugin.fireEvent("unequip", player, item)
+                }
+            }
+            inventory.remove(item)
+            bank.add(if (item.definition.isUnnoted) item else Item(item.noteChange, item.amount))
+        }
+    }
+    inventory.update()
+    bank.update()
 }

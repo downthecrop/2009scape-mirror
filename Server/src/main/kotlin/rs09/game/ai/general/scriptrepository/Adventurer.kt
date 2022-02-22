@@ -428,6 +428,9 @@ class Adventurer(val style: CombatStyle): Script() {
         var lineAlt = ""
 
         when {
+            //Celebrates Halloween!
+            dateCode == 1031  -> lineAlt = dialogue.getLines("halloween").rand()
+
             //Celebrates lead up to Christmas!
             until in 2..23 -> lineAlt = dialogue.getLines("approaching_christmas").rand()
 

@@ -1,10 +1,14 @@
 package core.game.content.zone.rellekka;
 
 import core.cache.def.impl.SceneryDefinition;
+import core.game.system.task.LocationLogoutTask;
+import core.game.system.task.LogoutTask;
+import core.game.system.task.Pulse;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.interaction.Option;
 import core.game.interaction.OptionHandler;
+import core.game.component.Component;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.ForceMovement;
@@ -17,6 +21,7 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
+import rs09.game.world.GameWorld;
 import rs09.plugin.PluginManager;
 
 /**
@@ -36,7 +41,6 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ZoneBuilder.configure(this);
-		PluginManager.definePlugin(new SailorDialogue());
 		PluginManager.definePlugin(new JarvaldDialogue());
 		PluginManager.definePlugins(new RellekaOptionHandler(), new MariaGunnarsDialogue());
 		PluginManager.definePlugin(new OptionHandler() {
@@ -72,21 +76,9 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 				 * (option.equals("Trade") ? "buy clothes here" :
 				 * "change their shoes here") + "."); return true;
 				 */
-			case 4165:
-				player.getDialogueInterpreter().open(1288);
-				return true;
-			case 4166:
-				player.sendMessage("This door is locked tightly shut.");
-				return true;
-			case 1288:
-				player.getDialogueInterpreter().sendDialogues((NPC) target, null, "I have no interest in talking to you just now", "outerlander.");
-				return true;
-			case 34286:
-				player.getDialogueInterpreter().sendDialogues(1289, null, "Outerlander... do not test my patience. I do not take", "kindly to people wandering in here and acting as though", "they own the place.");
-				return true;
-			case 4148:
-				player.getDialogueInterpreter().sendDialogues(1278, null, "Hey, outerlander. You can't go through there. Talent", "only, backstage.");
-				return true;
+			//case 4148:
+			//	player.getDialogueInterpreter().sendDialogues(1278, null, "Hey, outerlander. You can't go through there. Talent", "only, backstage.");
+			//	return true;
 			case 100:
 				player.getDialogueInterpreter().sendDialogue("You try to open the trapdoor but it won't budge! It looks like the", "trapdoor can only be opened from the other side.");
 				return true;
@@ -115,6 +107,35 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 	}
 
 	/**
+	 * Sails a player using the relleka ships.
+	 * @param player the player.
+	 * @param name the name.
+	 * @param destination the destination.
+	 */
+	public static void sail(final Player player, final String name, final Location destination) {
+		player.lock();
+		player.getInterfaceManager().open(new Component(224));
+		player.addExtension(LogoutTask.class, new LocationLogoutTask(5, destination));
+		GameWorld.getPulser().submit(new Pulse(1, player) {
+			int count;
+
+			@Override
+			public boolean pulse() {
+				switch (++count) {
+				case 5:
+					player.unlock();
+					player.getInterfaceManager().close();
+					player.getProperties().setTeleportLocation(destination);
+					player.getDialogueInterpreter().sendDialogue("The ship arrives at " + name + ".");
+					return true;
+				}
+				return false;
+			}
+
+		});
+	}
+
+	/**
 	 * Handles options related to relleka.
 	 * @author Vexia
 	 */
@@ -126,6 +147,7 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 			SceneryDefinition.forId(4615).getHandlers().put("option:cross", this);
 			SceneryDefinition.forId(5847).getHandlers().put("option:climb-over", this);
 			SceneryDefinition.forId(5008).getHandlers().put("option:enter",this);
+			SceneryDefinition.forId(15116).getHandlers().put("option:climb-down", this);
 			return this;
 		}
 
@@ -154,6 +176,13 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 						break;
 				}
 				break;
+			case "climb-down":
+				switch(node.getId()){
+					case 15116:
+						player.getProperties().setTeleportLocation(Location.create(2509, 10245, 0));
+						break;
+				}
+				break;				
 			}
 			return true;
 		}

@@ -211,11 +211,7 @@ public final class GiantMoleNPC extends AbstractNPC {
 	@Override
 	public void onImpact(final Entity entity, BattleState state) {
 		if (!getLocks().isInteractionLocked()) {
-			int chance = 15;
-			if (getSkills().getLifepoints() < getSkills().getMaximumLifepoints() >> 1) {
-				chance *= 3;
-			}
-			if (RandomFunction.randomize(100) < chance && inCombat()) {
+			if (RandomFunction.randomize(100) < 24 && inCombat() && getSkills().getLifepoints() < 100 && getSkills().getLifepoints() > 5){
 				dig();
 				return;
 			}
@@ -243,6 +239,7 @@ public final class GiantMoleNPC extends AbstractNPC {
 			public boolean handle(Player player, Component component, int opcode, int button, int slot, int itemId) {
 				if (button == 17) {
 					player.getProperties().setTeleportLocation(Location.create(1752, 5237, 0));
+					player.getAudioManager().send(1384);
 					player.getPacketDispatch().sendMessage("You seem to have dropped down into a network of mole tunnels.");
 
 					if (!player.getAchievementDiaryManager().getDiary(DiaryType.FALADOR).isComplete(0, 5)) {

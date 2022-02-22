@@ -101,7 +101,7 @@ public final class MissSchismDialogue extends DialoguePlugin {
 			stage = 112;
 			break;
 		case 112:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I'm sure I could, but I don't see why. The vampie wasn't", "bothering me.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I'm sure I could, but I don't see why. The vampire wasn't", "bothering me.");
 			stage = 113;
 			break;
 		case 113:
@@ -127,7 +127,7 @@ public final class MissSchismDialogue extends DialoguePlugin {
 			stage = 212;
 			break;
 		case 212:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "And who'd have ever thought such a sweet old genleman", "would do such a thing?");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "And who'd have ever thought such a sweet old gentleman", "would do such a thing?");
 			stage = 213;
 			break;
 		case 213:
@@ -150,12 +150,12 @@ public final class MissSchismDialogue extends DialoguePlugin {
 			stage = 22;
 			break;
 		case 22:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I also do voluntary work for the Draynor Manor", "Restoration Fund. We're campagning to have", "Draynor manor turned into a museum before the wet-rot", "destroys it completely.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "I also do voluntary work for the Draynor Manor", "Restoration Fund. We're campaigning to have", "Draynor manor turned into a museum before the wet-rot", "destroys it completely.");
 			stage = 23;
 			break;
 		case 23:
 			if(player.getQuestRepository().isComplete("Vampire Slayer")) {
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Well, now that I've cleared the vampire out of the manor,", "I guess you won't have to mutch trouble turning it into a", "museum.");
+				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Well, now that I've cleared the vampire out of the manor,", "I guess you won't have too much trouble turning it into a", "museum.");
 				stage = 24;
 			} else {
 				end();
@@ -185,3 +185,6 @@ public final class MissSchismDialogue extends DialoguePlugin {
 		return new int[] { 2634 };
 	}
 }
+/**
+ * Fixed Vexia's crappy English in some sentences
+ */
