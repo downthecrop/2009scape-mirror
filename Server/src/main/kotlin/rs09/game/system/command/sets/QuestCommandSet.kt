@@ -34,7 +34,7 @@ class QuestCommandSet : CommandSet(Command.Privilege.ADMIN){
             }
             val quest = args[1].toIntOrNull() ?: reject(player,"INVALID QUEST")
             val stage = args[2].toIntOrNull() ?: reject(player,"INVALID STAGE")
-            player.questRepository.setStage(player.questRepository.forIndex(quest as Int), stage as Int)
+            player.questRepository.setStageNonmonotonic(player.questRepository.forIndex(quest as Int), stage as Int)
             notify(player, "<col=209dff>Setting " + player.questRepository.forIndex(quest).name + " to stage $stage</col>")
         }
 

@@ -95,6 +95,21 @@ public final class QuestRepository {
      * @param stage The stage.
      */
     public void setStage(Quest quest, int stage) {
+        int oldStage = getStage(quest);
+        if(oldStage < stage) {
+            quests.put(quest.getIndex(), stage);
+        } else {
+            SystemLogger.logWarn(String.format("Nonmonotonic QuestRepository.setStage call for player \"%s\", quest \"%s\", old stage %d, new stage %d", player.getName(), quest.getName(), oldStage, stage));
+        }
+    }
+
+    /**
+     * Sets the stage of a quest, permitting non-monotonic updates.
+     *
+     * @param quest The quest.
+     * @param stage The stage.
+     */
+    public void setStageNonmonotonic(Quest quest, int stage) {
         quests.put(quest.getIndex(), stage);
     }
 
