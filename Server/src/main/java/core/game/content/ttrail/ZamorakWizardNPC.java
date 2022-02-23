@@ -99,7 +99,7 @@ public final class ZamorakWizardNPC extends AbstractNPC {
 	}
 
 	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (!(entity instanceof Player)) {
 			return false;
 		}
@@ -107,7 +107,7 @@ public final class ZamorakWizardNPC extends AbstractNPC {
 			Player p = entity.asPlayer();
 			return p == player;
 		}
-		return super.isAttackable(entity, style);
+		return super.isAttackable(entity, style, message);
 	}
 
 	@Override

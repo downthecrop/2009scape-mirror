@@ -391,12 +391,14 @@ public final class PyreSitePlugin extends OptionHandler {
 		}
 
 		@Override
-		public boolean isAttackable(Entity entity, CombatStyle style) {
+		public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 			if (entity instanceof Player && entity != target) {
-				((Player) entity).getPacketDispatch().sendMessage("It's not after you.");
+                if(message) {
+                    ((Player) entity).getPacketDispatch().sendMessage("It's not after you.");
+                }
 				return false;
 			}
-			return super.isAttackable(entity, style);
+			return super.isAttackable(entity, style, message);
 		}
 
 		@Override

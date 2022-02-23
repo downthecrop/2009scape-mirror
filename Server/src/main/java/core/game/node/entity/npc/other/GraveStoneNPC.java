@@ -128,7 +128,7 @@ public class GraveStoneNPC extends AbstractNPC {
 	}
 
 	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		return false;
 	}
 

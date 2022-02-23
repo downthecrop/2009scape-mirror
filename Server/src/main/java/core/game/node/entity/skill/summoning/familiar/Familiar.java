@@ -220,37 +220,47 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	}
 
 	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (entity == owner) {
-			owner.getPacketDispatch().sendMessage("You can't just betray your own familiar like that!");
+            if(message) {
+                owner.getPacketDispatch().sendMessage("You can't just betray your own familiar like that!");
+            }
 			return false;
 		}
 		if (entity instanceof Player) {
-			if (!owner.isAttackable(entity, style)) {
+			if (!owner.isAttackable(entity, style, message)) {
 				return false;
 			}
 		}
 		if (!getProperties().isMultiZone()) {
 			if (entity instanceof Player && !((Player) entity).getProperties().isMultiZone()) {
-				((Player) entity).getPacketDispatch().sendMessage("You have to be in multicombat to attack a player's familiar.");
+                if(message) {
+                    ((Player) entity).getPacketDispatch().sendMessage("You have to be in multicombat to attack a player's familiar.");
+                }
 				return false;
 			}
 			if (entity instanceof Player) {
-				((Player) entity).getPacketDispatch().sendMessage("This familiar is not in the a multicombat zone.");
+                if(message) {
+                    ((Player) entity).getPacketDispatch().sendMessage("This familiar is not in the a multicombat zone.");
+                }
 			}
 			return false;
 		}
 		if (entity instanceof Player) {
 			if (!((Player) entity).getSkullManager().isWilderness()) {
-				((Player) entity).getPacketDispatch().sendMessage("You have to be in the wilderness to attack a player's familiar.");
+                if(message) {
+                    ((Player) entity).getPacketDispatch().sendMessage("You have to be in the wilderness to attack a player's familiar.");
+                }
 				return false;
 			}
 			if (!owner.getSkullManager().isWilderness()) {
-				((Player) entity).getPacketDispatch().sendMessage("This familiar's owner is not in the wilderness.");
+                if(message) {
+                    ((Player) entity).getPacketDispatch().sendMessage("This familiar's owner is not in the wilderness.");
+                }
 				return false;
 			}
 		}
-		return super.isAttackable(entity, style);
+		return super.isAttackable(entity, style, message);
 	}
 
 	@Override
@@ -418,7 +428,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	 * moves).
 	 */
 	public boolean canAttack(Entity target, boolean message) {
-		if (!target.isAttackable(owner, owner.getProperties().getCombatPulse().getStyle())) {
+		if (!target.isAttackable(owner, owner.getProperties().getCombatPulse().getStyle(), true)) {
 			return false;
 		}
 		if (target.getLocation().getDistance(getLocation()) > 8) {
@@ -427,7 +437,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 			}
 			return false;
 		}
-		if (target.getLocks().isInteractionLocked() || !target.isAttackable(this, CombatStyle.MAGIC)) {
+		if (target.getLocks().isInteractionLocked() || !target.isAttackable(this, CombatStyle.MAGIC, true)) {
 			return false;
 		}
 		return isCombatFamiliar();

@@ -57,17 +57,19 @@ public abstract class IdleAbstractNPC extends AbstractNPC {
 	}
 	
 	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (isInvisible()) {
 			return false;
 		}
 		if (getTask() != null && entity instanceof Player && getTask().levelReq > entity.getSkills().getStaticLevel(Skills.SLAYER)) {
-			((Player) entity).getPacketDispatch().sendMessage("You need a higher slayer level to know how to wound this monster.");
+            if(message) {
+                ((Player) entity).getPacketDispatch().sendMessage("You need a higher slayer level to know how to wound this monster.");
+            }
 		}
 		if (DeathTask.isDead(this)) {
 			return false;
 		}
-		if (!entity.getZoneMonitor().continueAttack(this, style)) {
+		if (!entity.getZoneMonitor().continueAttack(this, style, message)) {
 			return false;
 		}
 		return true;

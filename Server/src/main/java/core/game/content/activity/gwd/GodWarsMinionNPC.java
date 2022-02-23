@@ -84,12 +84,14 @@ public final class GodWarsMinionNPC extends AbstractNPC {
 	}
 
 	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (boss != null && boss.getId() == 6222 && style == CombatStyle.MELEE && entity instanceof Player) {
-			((Player) entity).getPacketDispatch().sendMessage("The aviansie is flying too high for you to attack using melee.");
+            if(message) {
+                ((Player) entity).getPacketDispatch().sendMessage("The aviansie is flying too high for you to attack using melee.");
+            }
 			return false;
 		}
-		return super.isAttackable(entity, style);
+		return super.isAttackable(entity, style, message);
 	}
 
 	@Override

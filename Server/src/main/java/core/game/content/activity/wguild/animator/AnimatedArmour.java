@@ -84,14 +84,14 @@ public final class AnimatedArmour extends NPC {
 	}
 
 	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (entity != player) {
 			if (entity instanceof Player) {
 				((Player) entity).getPacketDispatch().sendMessage("This isn't your armour to attack.");
 			}
 			return false;
 		}
-		return super.isAttackable(entity, style);
+		return super.isAttackable(entity, style, message);
 	}
 
 	@Override

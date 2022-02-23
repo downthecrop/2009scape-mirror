@@ -126,7 +126,7 @@ public final class KolodionNPC extends AbstractNPC {
 	}
 
 	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (style != CombatStyle.MAGIC) {
 			return false;
 		}

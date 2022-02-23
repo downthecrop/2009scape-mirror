@@ -83,14 +83,14 @@ public final class ImplingNPC extends AbstractNPC {
 	}
 
 	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (style != CombatStyle.MAGIC) {
 			return false;
 		}
 		if (entity.getProperties().getSpell().getSpellId() == 12 || entity.getProperties().getSpell().getSpellId() == 30 || entity.getProperties().getSpell().getSpellId() == 56) {
 			return true;
 		}
-		return super.isAttackable(entity, style);
+		return super.isAttackable(entity, style, message);
 	}
 
 	@Override

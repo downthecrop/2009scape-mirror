@@ -113,7 +113,7 @@ public final class DMCHandler {
         player.getAudioManager().send(new Audio(2877), true, l);
 		direction = DMCRevolution.values()[(direction.ordinal() + 1) % DMCRevolution.values().length];
 		for (NPC npc : RegionManager.getLocalNpcs(l, 10)) {
-			if (direction.isInSight(npc.getLocation().getX() - l.getX(), npc.getLocation().getY() - l.getY()) && npc.isAttackable(player, CombatStyle.RANGE) && CombatSwingHandler.isProjectileClipped(npc, l, false)) {
+			if (direction.isInSight(npc.getLocation().getX() - l.getX(), npc.getLocation().getY() - l.getY()) && npc.isAttackable(player, CombatStyle.RANGE, false) && CombatSwingHandler.isProjectileClipped(npc, l, false)) {
 				int speed = (int) (25 + (l.getDistance(npc.getLocation()) * 10));
 				Projectile.create(l, npc.getLocation(), 53, 40, 36, 20, speed, 0, 128).send();
                 player.getAudioManager().send(new Audio(1667), true, l);
