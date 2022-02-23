@@ -71,7 +71,7 @@ public final class GWDGraardorSwingHandler extends CombatSwingHandler {
 				if (!CHAMBER.insideBorder(t.getLocation())) {
 					continue;
 				}
-				if (t.isAttackable(npc, CombatStyle.RANGE)) {
+				if (t.isAttackable(npc, CombatStyle.RANGE, false)) {
 					list.add(new BattleState(entity, t));
 				}
 			}

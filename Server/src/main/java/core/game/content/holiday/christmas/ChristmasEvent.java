@@ -1063,9 +1063,11 @@ public class ChristmasEvent extends HolidayEvent {
 		}
 
 		@Override
-		public boolean isAttackable(Entity entity, CombatStyle style) {
+		public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 			if (entity instanceof Player) {
-				((Player) entity).sendMessage("You can't attack a snowman.");
+                if(message) {
+                    ((Player) entity).sendMessage("You can't attack a snowman.");
+                }
 				return false;
 			}
 			return true;

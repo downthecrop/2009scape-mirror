@@ -730,7 +730,7 @@ public class Player extends Entity {
 			}
 		}
 		Item item = equipment.get(EquipmentContainer.SLOT_SHIELD);
-		if (item != null && (fire && (item.getId() == 11283 || item.getId() == 11284 || item.getId() == 1540) || (!fire && (item.getId() == 2890 || item.getId() == 9731)))) {
+		if (item != null && (item.getId() == 11283 || item.getId() == 11284 || (fire && (item.getId() == 1540) || (!fire && (item.getId() == 2890 || item.getId() == 9731))))) {
 			value |= 0x4;
 		}
 		if (prayer.get(PrayerType.PROTECT_FROM_MAGIC)) {
@@ -755,11 +755,11 @@ public class Player extends Entity {
 	}
 
 	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (entity instanceof NPC && !((NPC) entity).getDefinition().hasAction("attack") && !((NPC) entity).isIgnoreAttackRestrictions(this)) {
 			return false;
 		}
-		return super.isAttackable(entity, style);
+		return super.isAttackable(entity, style, message);
 	}
 
 	@Override

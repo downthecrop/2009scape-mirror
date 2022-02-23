@@ -78,10 +78,10 @@ class ChronozonNPC(id: Int, location: Location?) : AbstractNPC(667, Location(308
         }
     }
 
-    override fun isAttackable(entity: Entity, style: CombatStyle?): Boolean {
+    override fun isAttackable(entity: Entity, style: CombatStyle?, message: Boolean): Boolean {
         return entity == m_targetPlayer &&
             m_targetPlayer.questRepository.getQuest("Family Crest").getStage(m_targetPlayer) == 19 &&
-            super.isAttackable(entity, style)
+            super.isAttackable(entity, style, message)
     }
 
     override fun clear() {

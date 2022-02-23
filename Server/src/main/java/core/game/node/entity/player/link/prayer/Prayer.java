@@ -119,7 +119,7 @@ public final class Prayer {
 			}
 			for (Object o : targets) {
 				Entity entity = (Entity) o;
-				if (entity.isAttackable(player, CombatStyle.MAGIC)) {
+				if (entity.isAttackable(player, CombatStyle.MAGIC, false)) {
 					entity.getImpactHandler().manualHit(player, 1 + RandomFunction.randomize(maximum), HitsplatType.NORMAL);
 				}
 			}

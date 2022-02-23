@@ -52,15 +52,17 @@ public final class WormbrainNPC extends AbstractNPC {
 	}
 
 	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (entity instanceof Player) {
 			final Player player = (Player) entity;
 			if (player.getQuestRepository().getQuest("Dragon Slayer").getStage(player) != 20) {
-				player.getPacketDispatch().sendMessage("The goblin is already in prison. You have no reason to attack him.");
+                if(message) {
+                    player.getPacketDispatch().sendMessage("The goblin is already in prison. You have no reason to attack him.");
+                }
 				return false;
 			}
 		}
-		return super.isAttackable(entity, style);
+		return super.isAttackable(entity, style, message);
 	}
 
 	@Override

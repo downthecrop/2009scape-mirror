@@ -155,7 +155,7 @@ public class VampireSlayerNPC extends AbstractNPC {
 	}
 
 	@Override
-	public boolean isAttackable(final Entity entity, final CombatStyle style) {
+	public boolean isAttackable(final Entity entity, final CombatStyle style, boolean message) {
 		final Player player = ((Player) entity);
 		final Player pl = getAttribute("player", null);
 		return pl == null ? false : pl == player ? true : false;

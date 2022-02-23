@@ -373,7 +373,7 @@ public class BorkNPC extends AbstractNPC {
 		}
 
 		@Override
-		public boolean isAttackable(Entity e, CombatStyle style) {
+		public boolean isAttackable(Entity e, CombatStyle style, boolean message) {
 			return false;
 		}
 

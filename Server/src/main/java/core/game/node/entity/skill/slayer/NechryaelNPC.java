@@ -162,16 +162,23 @@ public final class NechryaelNPC extends AbstractNPC {
 		}
 
 		@Override
-		public boolean isAttackable(Entity entity, CombatStyle style) {
+		public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 			if (entity instanceof Player) {
 				final Player t = (Player) entity;
 				if (t != player) {
-					t.getPacketDispatch().sendMessage("This isn't spawned for you.");
+                    if(message) {
+                        t.getPacketDispatch().sendMessage("This isn't spawned for you.");
+                    }
 					return false;
 				}
 			}
-			return super.isAttackable(entity, style);
+			return super.isAttackable(entity, style, message);
 		}
+        
+        @Override
+        public boolean isIgnoreMultiBoundaries(Entity victim) {
+            return victim == player;
+        }
 
 		@Override
 		public boolean isPoisonImmune() {
@@ -182,6 +189,5 @@ public final class NechryaelNPC extends AbstractNPC {
 		public int[] getIds() {
 			return new int[] { DEATH_SPAWN };
 		}
-
 	}
 }

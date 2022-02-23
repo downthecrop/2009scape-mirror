@@ -60,7 +60,7 @@ public class GWDZilyanaSwingHandler extends CombatSwingHandler {
 			NPC npc = (NPC) entity;
 			List<BattleState> list = new ArrayList<>(20);
 			for (Entity t : RegionManager.getLocalPlayers(npc.getCenterLocation(), (npc.size() >> 1) + 2)) {
-				if (t.getLocation().getX() < 2908 && t.isAttackable(npc, CombatStyle.MAGIC)) {
+				if (t.getLocation().getX() < 2908 && t.isAttackable(npc, CombatStyle.MAGIC, false)) {
 					list.add(new BattleState(entity, t));
 				}
 			}

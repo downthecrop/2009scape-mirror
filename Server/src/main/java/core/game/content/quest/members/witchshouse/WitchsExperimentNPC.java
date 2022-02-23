@@ -57,7 +57,7 @@ public class WitchsExperimentNPC extends AbstractNPC {
     }
 
     @Override
-    public boolean isAttackable(Entity entity, CombatStyle style) {
+    public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
         return p == entity;
     }
 

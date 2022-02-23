@@ -190,18 +190,20 @@ public class RevenantNPC extends AbstractNPC {
 	}
 
 	@Override
-	public boolean continueAttack(Entity target, CombatStyle style) {
+	public boolean continueAttack(Entity target, CombatStyle style, boolean message) {
 		return target instanceof Player ? checkCombatLevel(target.asPlayer()) : true;
 	}
 
 	@Override
-	public boolean isAttackable(Entity entity, CombatStyle style) {
+	public boolean isAttackable(Entity entity, CombatStyle style, boolean message) {
 		if (entity.asPlayer().isArtificial()) {
 			return false;
 		}
 		if (entity instanceof Player) {
 			if (!checkCombatLevel(entity.asPlayer()) && !entity.asPlayer().isAdmin()) {
-				entity.asPlayer().sendMessage("The level difference between you and your opponent is too great.");
+                if(message) {
+                    entity.asPlayer().sendMessage("The level difference between you and your opponent is too great.");
+                }
 				return false;
 			}
 		}
@@ -214,7 +216,7 @@ public class RevenantNPC extends AbstractNPC {
 				return false;
 			}
 		}
-		return super.isAttackable(entity, style);
+		return super.isAttackable(entity, style, message);
 	}
 
 	@Override

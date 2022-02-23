@@ -112,24 +112,26 @@ public final class ZoneMonitor {
 	 * @param style The combat style used.
 	 * @return {@code True} if so.
 	 */
-	public boolean continueAttack(Node target, CombatStyle style) {
+	public boolean continueAttack(Node target, CombatStyle style, boolean message) {
 		if (target instanceof Entity) {
-			if (!entity.continueAttack((Entity) target, style)) {
+			if (!entity.continueAttack((Entity) target, style, message)) {
 				return false;
 			}
 		}
 		for (RegionZone z : zones) {
-			if (!z.getZone().continueAttack(entity, target, style, true)) {
+			if (!z.getZone().continueAttack(entity, target, style, message)) {
 				return false;
 			}
 		}
 		if (entity instanceof Player && target instanceof Player) {
 			if (!((Player) entity).getSkullManager().isWilderness() || !((Player) target).getSkullManager().isWilderness()) {
-				((Player) entity).getPacketDispatch().sendMessage("You can only attack other players in the wilderness.");
+                if(message) {
+                    ((Player) entity).getPacketDispatch().sendMessage("You can only attack other players in the wilderness.");
+                }
 				return false;
 			}
 		}
-		if (target instanceof Entity && !MapZone.checkMulti(entity, (Entity) target, true)) {
+		if (target instanceof Entity && !MapZone.checkMulti(entity, (Entity) target, message)) {
 			return false;
 		}
 		return true;

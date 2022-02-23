@@ -318,7 +318,7 @@ class PitfallNPC : AbstractNPC {
         return BEAST_IDS
     }
 
-    override fun isAttackable(entity: Entity, style: CombatStyle): Boolean {
+    override fun isAttackable(entity: Entity, style: CombatStyle, message: Boolean): Boolean {
         return false
     }
 
