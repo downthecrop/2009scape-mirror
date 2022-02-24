@@ -18,11 +18,14 @@ import core.plugin.Plugin;
 import core.tools.StringUtils;
 import rs09.game.system.SystemLogger;
 import rs09.game.system.config.ItemConfigParser;
+import org.rs09.consts.Items;
 
 import java.nio.ByteBuffer;
 import java.text.DecimalFormat;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Arrays;
 
 /**
  * Represents an item's definitions.
@@ -678,39 +681,72 @@ public class ItemDefinition extends Definition<Item> {
 	}
 
 	/**
-	 * The allowed names.
+	 * The allowed ids.
 	 */
-	private static final String[] allowedNames = new String[] { "cape", "robe", "hat", "potion" };
+	private static final HashSet<Integer> allowedItems = new HashSet(Arrays.asList(
+			Items.PENANCE_GLOVES_10553,
+			Items.ICE_GLOVES_1580,
+			Items.BOOTS_OF_LIGHTNESS_88,
+			Items.CLIMBING_BOOTS_3105,
+			Items.SPOTTED_CAPE_10069,
+			Items.SPOTTIER_CAPE_10071,
+			Items.SARADOMIN_CAPE_2412,
+			Items.ZAMORAK_CAPE_2414,
+			Items.GUTHIX_CAPE_2413,
+			Items.SARADOMIN_CLOAK_10446,
+			Items.ZAMORAK_CLOAK_10450,
+			Items.GUTHIX_CLOAK_10448,
+			Items.HOLY_BOOK_3840,
+			Items.DAMAGED_BOOK_3839,
+			Items.UNHOLY_BOOK_3842,
+			Items.DAMAGED_BOOK_3841,
+			Items.BOOK_OF_BALANCE_3844,
+			Items.DAMAGED_BOOK_3843,
+			Items.WIZARD_BOOTS_2579,
+			Items.COMBAT_BRACELET1_11124,
+			Items.COMBAT_BRACELET2_11122,
+			Items.COMBAT_BRACELET3_11120,
+			Items.COMBAT_BRACELET4_11118,
+            Items.REGEN_BRACELET_11133,
+			Items.WARLOCK_CLOAK_14081,
+			Items.WARLOCK_LEGS_14077,
+			Items.WARLOCK_TOP_14076
+	));
+	private static final HashSet<Integer> bannedItems = new HashSet(Arrays.asList(
+			/**Items.BUTTERFLY_NET_10010, easing the restriction until barehanded implementation**/
+			Items.DWARF_CANNON_SET_11967,
+			Items.CANNON_BARRELS_10,
+			Items.CANNON_BASE_6,
+			Items.CANNON_STAND_8,
+			Items.CANNON_FURNACE_12,
+			Items.COOKING_GAUNTLETS_775,
+			Items.CHAOS_GAUNTLETS_777,
+			Items.GOLDSMITH_GAUNTLETS_776,
+			Items.KARAMJA_GLOVES_1_11136,
+			Items.KARAMJA_GLOVES_2_11138,
+			Items.KARAMJA_GLOVES_3_11140,
+			Items.VYREWATCH_TOP_9634,
+			Items.VYREWATCH_LEGS_9636,
+			Items.VYREWATCH_SHOES_9638
+	));
+
 
 	/**
 	 * Checks if the item is allowed on entrana.
 	 * @return {@code True} if so.
 	 */
 	public boolean isAllowedOnEntrana() {
-		if (getId() == 946) {
+		if(allowedItems.contains(getId())) {
 			return true;
 		}
-		if (getName().equals("Boots")) {
-			return true;
+		if(bannedItems.contains(getId())) {
+			return false;
 		}
 		if (getName().toLowerCase().startsWith("ring") || getName().toLowerCase().startsWith("amulet")) {
 			return true;
 		}
-		if (getName().toLowerCase().contains("spotted") || getName().toLowerCase().equals("spottier")) {
-			return true;
-		}
-		if (getName().equals("Boots of lightness")) {
-			return true;
-		}
-		if(getName().toLowerCase().contains("arrow") || getName().toLowerCase().contains("bolt")){
-			return false;
-		}
-		for (String name : allowedNames) {
-			if (getName().toLowerCase().contains(name)) {
-				return true;
-			}
-		}
-		return getConfiguration(ItemConfigParser.BONUS) == null;
+		int[] bonuses = getConfiguration(ItemConfigParser.BONUS);
+        return bonuses == null || Arrays.stream(bonuses).allMatch(x -> x == 0);
 	}
 
 	/**
