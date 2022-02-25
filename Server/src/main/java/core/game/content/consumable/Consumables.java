@@ -317,7 +317,7 @@ public enum Consumables {
 	AGILITY(new Potion(new int[] {3032, 3034, 3036, 3038}, new SkillEffect(Skills.AGILITY, 3, 0))),
 	HUNTER(new Potion(new int[] {9998, 10000, 10002, 10004}, new SkillEffect(Skills.HUNTER, 3, 0))),
 	RESTORE(new Potion(new int[] {2430, 127, 129, 131}, new RestoreEffect(10, 0.3))),
-	SARA_BREW(new Potion(new int[] {6685, 6687, 6689, 6691}, new MultiEffect(new PercentHeal(.15), new SkillEffect(Skills.ATTACK, 0, -0.10), new SkillEffect(Skills.STRENGTH, 0, -0.10), new SkillEffect(Skills.MAGIC, 0, -0.10), new SkillEffect(Skills.RANGE, 0, -0.10), new SkillEffect(Skills.DEFENCE, 2, 0.2)))),
+	SARA_BREW(new Potion(new int[] {6685, 6687, 6689, 6691}, new MultiEffect(new PercentHeal(2, .15), new SkillEffect(Skills.ATTACK, 0, -0.10), new SkillEffect(Skills.STRENGTH, 0, -0.10), new SkillEffect(Skills.MAGIC, 0, -0.10), new SkillEffect(Skills.RANGE, 0, -0.10), new SkillEffect(Skills.DEFENCE, 2, 0.2)))),
 	SUMMONING(new Potion(new int[] {12140, 12142, 12144, 12146}, new SummoningEffect(7, 0.25))),
 	COMBAT(new Potion(new int[] {9739, 9741, 9743, 9745}, new MultiEffect(new SkillEffect(Skills.STRENGTH, 3, .1), new SkillEffect(Skills.ATTACK, 3, .1)))),
 	ENERGY(new Potion(new int[] {3008, 3010, 3012, 3014}, new MultiEffect(new EnergyEffect(10), new HealingEffect(3)))),
