@@ -57,6 +57,11 @@ class GrindItemPlugin : UseWithHandler(233) {
                         return amt <= 0
                     }
                 })
+
+            }
+
+            override fun getAll(index: Int): Int {
+                return player.inventory.getAmount(event.usedItem)
             }
         }
         handler.open()
