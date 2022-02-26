@@ -17,6 +17,7 @@ public class SkillEffect extends ConsumableEffect {
     public void activate(Player p) {
         Skills skills = p.getSkills();
         int slevel = skills.getStaticLevel(skill_slot);
-        skills.updateLevel(skill_slot,(int)(base + (bonus * slevel)),slevel + (int)(base + (bonus * slevel)));
+        int delta = (int)(base + (bonus * slevel));
+        skills.updateLevel(skill_slot, delta, delta >= 0 ? slevel + delta : 0);
     }
 }
