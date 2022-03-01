@@ -136,7 +136,7 @@ public class BNetNode {
 	 * @return {@code} True if so.
 	 */
 	public boolean isBareHand(Player player) {
-		return !hasNet(player) && player.getSkills().getStaticLevel(Skills.HUNTER) >= getBareHandLevel() && player.getSkills().getStaticLevel(Skills.AGILITY) >= getAgilityLevel();
+		return !hasNet(player) && player.getSkills().getLevel(Skills.HUNTER) >= getBareHandLevel() && player.getSkills().getLevel(Skills.AGILITY) >= getAgilityLevel();
 	}
 
 	/**
