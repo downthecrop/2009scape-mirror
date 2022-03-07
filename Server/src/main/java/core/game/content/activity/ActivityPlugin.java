@@ -45,6 +45,12 @@ public abstract class ActivityPlugin extends MapZone implements Plugin<Player> {
 	protected Location base;
 
 	/**
+	 * A location which the player is teleported to in the case of death, if this activity is safe.
+	 * Defaults to the home location of the server.
+	 */
+	protected Location safeRespawn = ServerConstants.HOME_LOCATION;
+
+	/**
 	 * The player.
 	 */
 	protected Player player;
@@ -134,6 +140,7 @@ public abstract class ActivityPlugin extends MapZone implements Plugin<Player> {
 			e.getProperties().setSpawnLocation(l);
 		}
 		e.getProperties().setSafeZone(safe);
+		e.getProperties().safeRespawn = this.safeRespawn;
 		e.setAttribute("activity", this);
 		return super.enter(e);
 	}
@@ -148,6 +155,7 @@ public abstract class ActivityPlugin extends MapZone implements Plugin<Player> {
 			e.setLocation(l);
 		}
 		e.getProperties().setSafeZone(false);
+		e.getProperties().safeRespawn = ServerConstants.HOME_LOCATION;
 		e.removeAttribute("activity");
 		return super.leave(e, logout);
 	}
