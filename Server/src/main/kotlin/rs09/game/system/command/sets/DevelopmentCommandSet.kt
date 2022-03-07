@@ -1,5 +1,6 @@
 package rs09.game.system.command.sets
 
+import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.item.Item
 import core.plugin.Initializable
@@ -30,6 +31,9 @@ class DevelopmentCommandSet : CommandSet(Command.Privilege.ADMIN) {
             player.spellBookManager.update(player)
         }
 
+        define("killme") { player, _ ->
+            player.impactHandler.manualHit(player, player.skills.lifepoints, HitsplatType.NORMAL)
+        }
 
     }
 }
