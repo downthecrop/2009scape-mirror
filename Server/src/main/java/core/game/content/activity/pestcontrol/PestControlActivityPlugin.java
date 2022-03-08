@@ -193,6 +193,7 @@ public final class PestControlActivityPlugin extends ActivityPlugin {
 	 */
 	public PestControlActivityPlugin(BoatType type) {
 		super("pest control " + type.name().toLowerCase(), false, true, true, ZoneRestriction.CANNON);
+		this.safeRespawn = Location.create(2657, 2646, 0);
 		this.type = type;
 	}
 
