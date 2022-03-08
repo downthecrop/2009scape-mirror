@@ -86,7 +86,7 @@ public final class DeathTask extends NodeTask {
 		Entity killer = n.length > 0 ? (Entity) n[0] : e;
 		e.removeAttribute("state:death");
 		e.removeAttribute("tick:death");
-		Location spawn = e.getProperties().getSpawnLocation();
+		Location spawn = e.getProperties().isSafeZone() ? e.getProperties().safeRespawn : e.getProperties().getSpawnLocation();
 		e.getAnimator().forceAnimation(Animator.RESET_A);
 		e.getProperties().setTeleportLocation(spawn);
 		e.unlock();

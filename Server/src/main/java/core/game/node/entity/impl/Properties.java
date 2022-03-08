@@ -131,6 +131,11 @@ public final class Properties {
 	private boolean safeZone;
 
 	/**
+	 * The location which the player respawns at the event of death while safeZone = true
+	 */
+	public Location safeRespawn;
+
+	/**
 	 * The combat time out ticks.
 	 */
 	private int combatTimeOut = 10;
