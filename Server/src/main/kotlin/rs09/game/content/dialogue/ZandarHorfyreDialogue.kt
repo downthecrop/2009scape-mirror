@@ -33,8 +33,7 @@ class ZandarHorfyreDialogue(player: Player? = null) : DialoguePlugin(player) {
                 2 -> player("No, I think I'll stay for a bit.").also{ stage = 20 }
             }
 
-            10 -> npcl(FacialExpression.NEUTRAL,"Good! And don't forget to close the door behind you!").also{ stage++ }
-            11 -> stage = END_DIALOGUE
+            10 -> npcl(FacialExpression.NEUTRAL,"Good! And don't forget to close the door behind you!").also{ stage = END_DIALOGUE }
 
             20 -> npcl(FacialExpression.ANNOYED,"Actually, that wasn't an invitation. I've tried being polite, now we'll do it the hard way!").also{ teleport(player, Location.create(3217, 3177, 0), TeleportManager.TeleportType.INSTANT) }.also{ stage++ }
             21 -> player(FacialExpression.ANGRY, "Zamorak curse that mage!").also{ stage++ }
