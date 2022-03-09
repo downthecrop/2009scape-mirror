@@ -7,6 +7,7 @@ import core.plugin.Initializable;
 /**
  * Represents the dialogue plugin used for the goblin village guard npc.
  * @author jamix77
+ * Fixed a typo -Nuggles
  */
 @Initializable
 public final class GoblinVillageGuardDialogue extends DialoguePlugin {
@@ -47,7 +48,7 @@ public final class GoblinVillageGuardDialogue extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			npc("I know. We guards uaully stay by banks and shops,", "but I got sent all the way out here to keep an eye on","the brigands loitering just south of here.");
+			npc("I know. We guards usually stay by banks and shops,", "but I got sent all the way out here to keep an eye on","the brigands loitering just south of here.");
 			stage = 1;
 			break;
 		case 1:
@@ -59,7 +60,7 @@ public final class GoblinVillageGuardDialogue extends DialoguePlugin {
 			stage++;
 			break;
 		case 3:
-			player("Honestly people these days just don't know how to behave!");
+			player("Honestly, people these days just don't know how to behave!");
 			stage++;
 			break;
 		case 4:

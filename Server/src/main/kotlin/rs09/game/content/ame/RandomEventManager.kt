@@ -5,6 +5,7 @@ import core.game.world.map.zone.ZoneRestriction
 import core.tools.RandomFunction
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
+import kotlin.random.Random
 
 private const val AVG_DELAY_TICKS = 6000 // 60 minutes
 private const val MIN_DELAY_TICKS = AVG_DELAY_TICKS / 2
@@ -12,6 +13,7 @@ private const val MAX_DELAY_TICKS = MIN_DELAY_TICKS + AVG_DELAY_TICKS // window 
 class RandomEventManager(val player: Player) {
     var event: RandomEventNPC? = null
     var nextSpawn = 0
+    val skills = arrayOf("WoodcuttingSkillPulse","FishingPulse","MiningSkillPulse","BoneBuryingOptionPlugin")
 
     fun tick() {
         if (player.isArtificial) return
@@ -23,7 +25,26 @@ class RandomEventManager(val player: Player) {
             nextSpawn = GameWorld.ticks + 3000
             return
         }
-        val ame = RandomEvents.values().random()
+        val currentAction = player.pulseManager.current.toString()
+        var ame = RandomEvents.values().random()
+        if(currentAction.contains("WoodcuttingSkillPulse") && Random.nextBoolean()){
+            ame = RandomEvents.TREE_SPIRIT
+        }
+        else if(currentAction.contains("FishingPulse") && Random.nextBoolean()){
+            ame = RandomEvents.RIVER_TROLL
+        }
+        else if(currentAction.contains("MiningSkillPulse") && Random.nextBoolean()){
+            ame = RandomEvents.ROCK_GOLEM
+        }
+        else if(currentAction.contains("BoneBuryingOptionPlugin") && Random.nextBoolean()){
+            ame = RandomEvents.SHADE
+        }
+        else {
+            ame = RandomEvents.values().random()
+            while(ame.type == "skill"){
+                ame = RandomEvents.values().random()
+            }
+        }
         event = ame.npc.create(player,ame.loot,ame.type)
         if (event!!.spawnLocation == null) {
             nextSpawn = GameWorld.ticks + 3000

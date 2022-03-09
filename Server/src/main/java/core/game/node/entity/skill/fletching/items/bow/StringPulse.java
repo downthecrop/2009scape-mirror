@@ -40,7 +40,7 @@ public class StringPulse extends SkillPulse<Item> {
     @Override
     public boolean checkRequirements() {
         if (getDelay() == 1) {
-            setDelay(bow.string == 1777 ? 9 : 7);
+            setDelay(bow.string == 1777 ? 2 : 1);
         }
         if (player.getSkills().getLevel(Skills.FLETCHING) < bow.level) {
             player.getDialogueInterpreter().sendDialogue("You need a fletching level of " + bow.level + " to string this bow.");

@@ -1,6 +1,7 @@
 package core.game.node.entity.npc.familiar;
 
 import core.plugin.Initializable;
+import core.game.node.entity.skill.SkillBonus;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
@@ -31,6 +32,7 @@ public class SpiritLarupiaNPC extends Familiar {
 	 */
 	public SpiritLarupiaNPC(Player owner, int id) {
 		super(owner, id, 4900, 12784, 6, WeaponInterface.STYLE_CONTROLLED);
+		boosts.add(new SkillBonus(Skills.HUNTER, 5));		
 	}
 
 	@Override

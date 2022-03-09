@@ -34,6 +34,8 @@ import rs09.game.content.activity.barrows.RewardChest;
 import rs09.game.world.GameWorld;
 import rs09.plugin.PluginManager;
 
+import static api.ContentAPIKt.getWorldTicks;
+
 /**
  * Handles the barrows activity plugin.
  * @author Emperor
@@ -77,7 +79,7 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 	/**
 	 * The activity handling pulse.
 	 */
-	private static final Pulse PULSE = new Pulse(3) {
+	private static final Pulse PULSE = new Pulse(0) {
 		@Override
 		public boolean pulse() {
 			boolean end = true;
@@ -89,27 +91,30 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 					p.getPacketDispatch().sendItemOnInterface(-1, 1, 24, index);
 					continue;
 				}
-				if (p.getLocation().getZ() == 0 && p.getAttribute("barrow:looted", false)) {
+				if (p.getLocation().getZ() == 0 && p.getAttribute("barrow:looted", false) && getWorldTicks() % 3 == 0) {
 					if (RandomFunction.random(15) == 0) {
 						p.getImpactHandler().manualHit(p, RandomFunction.random(5), HitsplatType.NORMAL);
 						Graphics.send(Graphics.create(405), p.getLocation());
 					}
 				}
-				if (p.getLocks().isLocked("barrow:drain") || RandomFunction.random(100) % 2 == 0) {
-					continue;
-				}
 				int drain = 8;
+				System.out.println(getWorldTicks() % 30);
+				//if (p.getLocks().isLocked("barrow:drain") || RandomFunction.random(100) % 2 == 0) {
+				//	continue;
+				//}
 				for (boolean killed : p.getSavedData().getActivityData().getBarrowBrothers()) {
 					if (killed) {
 						drain += 1;
 					}
 				}
-				p.getSkills().decrementPrayerPoints(drain);
-				p.getLocks().lock("barrow:drain", (3 + RandomFunction.random(15)) * 3);
-				index = 1 + RandomFunction.random(6);
-				p.setAttribute("barrow:drain-index", index);
-				p.getPacketDispatch().sendItemZoomOnInterface(4761 + RandomFunction.random(12), 100, 24, index);
-				p.getPacketDispatch().sendAnimationInterface(9810, 24, index);
+				if(getWorldTicks() % 30 == 0){
+					p.getSkills().decrementPrayerPoints(drain);
+					p.getLocks().lock("barrow:drain", (3 + RandomFunction.random(15)) * 3);
+					index = 1 + RandomFunction.random(6);
+					p.setAttribute("barrow:drain-index", index);
+					p.getPacketDispatch().sendItemZoomOnInterface(4761 + RandomFunction.random(12), 100, 24, index);
+					p.getPacketDispatch().sendAnimationInterface(9810, 24, index);
+				}
 			}
 			return end;
 		}

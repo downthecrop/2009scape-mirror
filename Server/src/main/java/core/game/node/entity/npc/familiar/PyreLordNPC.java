@@ -2,6 +2,7 @@ package core.game.node.entity.npc.familiar;
 
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.plugin.Initializable;
+import core.game.node.entity.skill.SkillBonus;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.crafting.jewellery.JewelleryCrafting;
 import core.game.node.entity.skill.firemaking.FireMakingPulse;
@@ -53,6 +54,7 @@ public class PyreLordNPC extends Familiar {
 	 */
 	public PyreLordNPC(Player owner, int id) {
 		super(owner, id, 3200, 12816, 6, WeaponInterface.STYLE_AGGRESSIVE);
+		boosts.add(new SkillBonus(Skills.FIREMAKING, 3));		
 	}
 
 	@Override

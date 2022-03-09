@@ -4,6 +4,7 @@ import core.cache.def.impl.ItemDefinition
 import core.game.content.ttrail.ClueLevel
 import core.game.content.ttrail.ClueScrollPlugin
 import core.game.node.entity.npc.drop.RareDropTable
+import core.game.node.entity.npc.drop.CELEMinorTable
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import core.tools.RandomFunction
@@ -51,6 +52,7 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
                 SLOT_CLUE_MEDIUM -> ClueScrollPlugin.getClue(ClueLevel.MEDIUM)
                 SLOT_CLUE_HARD -> ClueScrollPlugin.getClue(ClueLevel.HARD)
                 SLOT_RDT -> RareDropTable.retrieve()
+                SLOT_CELEDT -> CELEMinorTable.retrieve()
                 else -> e.getItem()
             }
             safeItems.add(safeItem)
@@ -83,6 +85,11 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         return this
     }
 
+    fun insertCELEDTRoll(weight: Double): WeightBasedTable{
+        this.add(WeightedItem(SLOT_CELEDT,1,1,weight,false))
+        return this
+    }    
+
     companion object {
         @JvmStatic
         fun create(vararg items: WeightedItem): WeightBasedTable{
@@ -98,6 +105,7 @@ open class WeightBasedTable : ArrayList<WeightedItem>() {
         val SLOT_CLUE_EASY = Items.TOOLKIT_1
         val SLOT_CLUE_MEDIUM = Items.ROTTEN_POTATO_5733
         val SLOT_CLUE_HARD = Items.GRANITE_LOBSTER_POUCH_12070
+        val SLOT_CELEDT = Items.NULL_799
     }
 
     override fun toString(): String {

@@ -68,6 +68,7 @@ class FruitAndBerryPicker : OptionHandler() {
 				}
 
                 player.animator.animate(animation)
+                player.audioManager.send(2437)        
                 addItemOrDrop(player,reward.id,reward.amount)
                 player.skills.addExperience(Skills.FARMING,plantable.harvestXP)
                 patch.setCurrentState(patch.getCurrentState() - 1)

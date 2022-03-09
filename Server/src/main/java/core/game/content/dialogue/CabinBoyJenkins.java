@@ -45,7 +45,7 @@ public class CabinBoyJenkins extends DialoguePlugin {
 		quest = player.getQuestRepository().getQuest("Dragon Slayer");
 		switch (quest.getStage(player)) {
 		case 20:
-			npc("Ahoy ! Whay d'ye think of yer ship then?");
+			npc("Ahoy! Whay d'ye think of yer ship then?");
 			stage = 0;
 			break;
 		case 40:
