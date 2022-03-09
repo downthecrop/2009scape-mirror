@@ -46,3 +46,5 @@ Management-Server/managementprops/
 /Development-Client/
 **/*.swp
 **/*.swo
+
+build/kotlin/sessions/
