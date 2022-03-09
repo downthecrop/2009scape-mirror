@@ -1,6 +1,9 @@
 package rs09.game.system.command.sets
 
 import core.game.node.entity.player.link.music.MusicEntry
+import core.net.packet.PacketRepository
+import core.net.packet.context.MusicContext
+import core.net.packet.out.MusicPacket
 import core.plugin.Initializable
 import rs09.game.system.command.Command
 
@@ -21,6 +24,19 @@ class MusicCommandSet : CommandSet(Command.Privilege.STANDARD){
             }
             player.musicPlayer.play(MusicEntry.forId(id!!))
             notify(player,"Now playing song $id")
+        }
+
+        /**
+         * Command that lets you play a song via the ID instead of the song name
+         * this is mostly useful for custom tracks that aren't in the ingame
+         * music player yet.
+         */
+        define("playid"){player,arg ->
+            val id = arg[1].toIntOrNull()
+            if(id != null){
+                PacketRepository.send(MusicPacket::class.java, MusicContext(player, id))
+                notify(player,"Now playing song $id")
+            }
         }
 
         /**

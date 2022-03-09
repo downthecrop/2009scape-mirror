@@ -1,5 +1,6 @@
 package core.game.node.entity.npc.familiar;
 
+import core.game.node.entity.skill.SkillBonus;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.crafting.gem.Gems;
 import core.game.node.entity.skill.summoning.familiar.Familiar;
@@ -38,6 +39,7 @@ public class MagpieNPC extends Forager {
 	 */
 	public MagpieNPC(Player owner, int id) {
 		super(owner, id, 3400, 12041, 3, ITEMS);
+		boosts.add(new SkillBonus(Skills.THIEVING, 3));			
 	}
 
 	@Override

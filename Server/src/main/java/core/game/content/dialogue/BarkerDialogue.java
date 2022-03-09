@@ -45,33 +45,38 @@ public final class BarkerDialogue extends DialoguePlugin {
 	@Override
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
-		case 0:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "You are looking for clothes, yes? You look at my", "products! I have very many nice clothes, yes?");
-			stage = 1;
-			break;
-		case 1:
-			interpreter.sendOptions("Select an Option", "Yes, please.", "No, thanks.");
-			stage = 2;
-			break;
-		case 2:
-			switch (buttonId) {
+			case 0:
+				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "You are looking for clothes, yes? You look at my", "products! I have very many nice clothes, yes?");
+				stage = 1;
+				break;
 			case 1:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Yes, please.");
-				stage = 10;
+				interpreter.sendOptions("Select an Option", "Yes, please.", "No, thanks.");
+				stage = 2;
 				break;
 			case 2:
-				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No thanks.");
+				switch (buttonId) {
+					case 1:
+						interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Yes, please.");
+						stage = 10;
+						break;
+					case 2:
+						interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No thanks.");
+						stage = 15;
+						break;
+				}
+				break;
+
+			case 15:
+				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Unfortunate for you, yes?", "Many bargains, won't find elsewhere!");
 				stage = 20;
 				break;
-			}
-			break;
-		case 20:
-			end();
-			break;
-		case 10:
-			end();
-			npc.openShop(player);
-			break;
+			case 20:
+				end();
+				break;
+			case 10:
+				end();
+				npc.openShop(player);
+				break;
 		}
 		return true;
 	}

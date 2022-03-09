@@ -45,6 +45,7 @@ public final class EmptyOptionPlugin extends OptionHandler {
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ItemDefinition.setOptionHandler("empty", this);
 		ItemDefinition.setOptionHandler("empty dish", this);
+		ItemDefinition.setOptionHandler("empty bowl", this);	
 		return this;
 	}
 	public enum EmptyItem{
@@ -57,10 +58,19 @@ public final class EmptyOptionPlugin extends OptionHandler {
 		BUCKET_OF_SUPERCOMPOST(6034, BUCKET, "You empty the bucket of supercompost."),
 		BUCKET_OF_SLIME(4286, BUCKET, "You empty the contents of the bucket on the floor."),
 		VIAL_OF_WATER(227, VIAL, "You empty the vial."),
-		BOWL_OF_SAND(1921, 1923, "You empty the contents of the bowl onto the floor."),
+		BOWL_OF_WATER(1921, 1923, "You empty the contents of the bowl onto the floor."),
 		JUG_OF_WATER(1937, 1935, "You empty the contents of the jug onto the floor."),
 		BURNT_PIE(2329, 2313, "You empty the pie dish."),
-        POTION(91, VIAL,null);
+        POTION(91, VIAL,null),
+		BURNT_STEW(2005, 1923, "You empty the contents of the bowl onto the floor."),
+		NETTLE_TEA(4239, 1923, "You empty the contents of the bowl onto the floor."),
+		NETTLE_WATER(4237, 1923, "You empty the contents of the bowl onto the floor."),
+		NETTLE_TEA_MILKY(4240, 1923, "You empty the contents of the bowl onto the floor."),
+		BURNT_CURRY(2013, 1923, "You empty the contents of the bowl onto the floor."),
+		BURNT_GNOMEBOWL(2175, 2166, "You empty the contents of the gnomebowl onto the floor."),
+		BURNT_EGG(7090, 1923, "You empty the contents of the bowl onto the floor."),
+		BURNT_ONION(7092, 1923, "You empty the contents of the bowl onto the floor."),
+		BURNT_MUSHROOM(7094, 1923, "You empty the contents of the bowl onto the floor.");
 
 		int fullId, emptyId;
 		String emptyMessage;

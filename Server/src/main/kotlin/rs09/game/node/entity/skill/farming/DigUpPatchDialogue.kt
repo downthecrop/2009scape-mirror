@@ -2,6 +2,7 @@ package rs09.game.node.entity.skill.farming
 
 import core.game.content.dialogue.DialoguePlugin
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
 import core.game.system.task.Pulse
@@ -34,6 +35,7 @@ class DigUpPatchDialogue(player: Player? = null) : DialoguePlugin(player) {
                 1 -> {
                     end()
                     player.animator.animate(Animation(830))
+                    player.audioManager.send(Audio(1470, 1, 1))
                     player.pulseManager.run(object : Pulse(){
                         override fun pulse(): Boolean {
                             if(patch?.patch?.type == PatchType.TREE){

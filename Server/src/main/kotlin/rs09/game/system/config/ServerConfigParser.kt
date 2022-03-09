@@ -99,6 +99,7 @@ object ServerConfigParser {
         ServerConstants.START_LOCATION = parseLocation(data.getString("world.new_player_location"))
         ServerConstants.DAILY_RESTART = data.getBoolean("world.daily_restart")
         ServerConstants.GRAND_EXCHANGE_DATA_PATH = data.getPath("paths.eco_data")
+        ServerConstants.CELEDT_DATA_PATH = data.getPath("paths.cele_drop_table_path")
     }
 
 

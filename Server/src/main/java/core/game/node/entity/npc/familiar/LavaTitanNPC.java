@@ -30,6 +30,7 @@ public class LavaTitanNPC extends Familiar {
 	public LavaTitanNPC(Player owner, int id) {
 		super(owner, id, 6100, 12788, 4, WeaponInterface.STYLE_AGGRESSIVE);
 		boosts.add(new SkillBonus(Skills.MINING, 10));
+		boosts.add(new SkillBonus(Skills.FIREMAKING, 10));		
 	}
 
 	@Override

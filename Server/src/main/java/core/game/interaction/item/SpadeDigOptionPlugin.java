@@ -24,6 +24,7 @@ public class SpadeDigOptionPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
+		player.getAudioManager().send(1470,1,1);
 		if (!DigSpadeHandler.dig(player)) {
 			player.sendMessage("You dig but find nothing.");
 		}
