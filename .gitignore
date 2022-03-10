@@ -47,5 +47,8 @@ Management-Server/managementprops/
 **/*.swp
 **/*.swo
 build/kotlin/sessions/
+<<<<<<< HEAD
 
 build/kotlin/sessions/
+=======
+>>>>>>> master
