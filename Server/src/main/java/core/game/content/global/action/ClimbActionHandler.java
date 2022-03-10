@@ -1,5 +1,6 @@
 package core.game.content.global.action;
 
+import api.ContentAPIKt;
 import core.game.container.impl.EquipmentContainer;
 import org.rs09.consts.Items;
 import core.game.node.entity.player.link.diary.DiaryType;
@@ -12,6 +13,8 @@ import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.game.world.update.flag.context.Animation;
+
+import static api.ContentAPIKt.isEquipped;
 
 /**
  * Handles a ladder climbing reward.
@@ -207,9 +210,9 @@ public final class ClimbActionHandler {
                 }
                 // falador dark wizards tower proselyte
                 if (destination.equals(2908, 3336, 2)
-                        && player.getEquipment().get(EquipmentContainer.SLOT_HAT).getId() == Items.PROSELYTE_SALLET_9672
-                        && player.getEquipment().get(EquipmentContainer.SLOT_CHEST).getId() == Items.PROSELYTE_HAUBERK_9674
-                        && player.getEquipment().get(EquipmentContainer.SLOT_LEGS).getId() == Items.PROSELYTE_CUISSE_9676) {
+                        && isEquipped(player, Items.PROSELYTE_SALLET_9672)
+                        && isEquipped(player, Items.PROSELYTE_HAUBERK_9674)
+                        && isEquipped(player, Items.PROSELYTE_CUISSE_9676)) {
                     player.getAchievementDiaryManager().finishTask(player, DiaryType.FALADOR, 2, 0);
                 }
                 // falador enter the mining guild
