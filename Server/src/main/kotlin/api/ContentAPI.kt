@@ -129,6 +129,13 @@ fun amountInEquipment(player: Player, id: Int): Int{
 }
 
 /**
+ * Check that an item is equipped by the given player
+ */
+fun isEquipped(player: Player, id: Int): Boolean {
+    return amountInEquipment(player, id) > 0
+}
+
+/**
  * Remove an item from a player's inventory
  * @param player the player whose inventory to remove the item from
  * @param item the ID or Item object to remove from the player's inventory
