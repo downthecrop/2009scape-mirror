@@ -4,7 +4,6 @@ import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.container.impl.EquipmentContainer
-import core.game.container.impl.InventoryListener
 import core.game.content.dialogue.FacialExpression
 import core.game.content.global.action.SpecialLadders
 import core.game.node.Node
@@ -38,10 +37,10 @@ import core.game.world.map.zone.ZoneBuilder
 import core.game.world.update.flag.chunk.AnimateObjectUpdateFlag
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
-import core.plugin.Plugin
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.game.content.global.GlobalKillCounter;
+import rs09.game.interaction.InteractionListeners
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ItemConfigParser;
 import rs09.game.world.GameWorld
@@ -136,6 +135,18 @@ fun isEquipped(player: Player, id: Int): Boolean {
 }
 
 /**
+ * Check if a player has an item equipped which corresponds to the given God
+ * @param player the player to check
+ * @param god the God whose equipment we are checking for
+ * @return true if the player has an item corresponding to the given god, false otherwise
+ */
+fun hasGodItem(player: Player, god: God): Boolean
+{
+    god.validItems.forEach { if(amountInEquipment(player, it) > 0) return true }
+    return false
+}
+
+/**
  * Remove an item from a player's inventory
  * @param player the player whose inventory to remove the item from
  * @param item the ID or Item object to remove from the player's inventory
@@ -155,18 +166,6 @@ fun <T> removeItem(player: Player, item: T, container: Container = Container.INV
         Container.BANK -> player.bank.remove(it)
         Container.EQUIPMENT -> player.equipment.remove(it)
     }
-}
-
-/**
- * Add an item to a player's inventory
- * @param player the player whose inventory to add an item to
- * @param id the ID of the item to add
- * @param amount the amount of the item to add, defaults to 1
- * @return true if the item exists in the given amount in the player's inventory
- */
-
-fun addItem(player: Player, id: Int, amount: Int = 1): Boolean{
-    return addItem(player, id, amount, Container.INVENTORY)
 }
 
 /**
@@ -259,18 +258,6 @@ fun inBank(player: Player, item: Int, amount: Int = 1): Boolean {
 
 fun inEquipment(player: Player, item: Int, amount: Int = 1): Boolean {
     return player.equipment.contains(item, amount)
-}
-
-/**
- * Check if a player has an item equipped which corresponds to the given God
- * @param player the player to check
- * @param god the God whose equipment we are checking for
- * @return true if the player has an item corresponding to the given god, false otherwise
- */
-fun hasGodItem(player: Player, god: God): Boolean
-{
-    god.validItems.forEach { if(amountInEquipment(player, it) > 0) return true }
-    return false
 }
 
 /**
@@ -1382,36 +1369,32 @@ fun announceIfRare(player: Player, item: Item) {
 }
 
 /**
- * Returns a Mutable List of player skills that are at 99, returns false if player has no 99s
+ * Generates a list of skill names which the player has mastered
  * @param player the player
+ * @return a List<String> of skill names
  */
 
-fun getMasteredSkills(player: Player): MutableList<String> {
-    val SKILL_LIST = Skills.SKILL_NAME
-    val hasMastered = player.getSkills().masteredSkills > 0
-    val MASTERED_SKILLS = mutableListOf<String>()
+fun getMasteredSkillNames(player: Player): List<String> {
+    val masteredSkills = ArrayList<String>()
 
-    if(hasMastered){
-        SKILL_LIST.forEach {
-            when(player.getSkills().getLevel(Skills.getSkillByName(it))){
-                99 -> MASTERED_SKILLS.add(it)
-            }
+    for ((skillId, skillName) in Skills.SKILL_NAME.withIndex()) {
+        if(hasLevelStat(player, skillId, 99)){
+            masteredSkills.add(skillName)
         }
     }
-    return MASTERED_SKILLS
+    return masteredSkills
 }
 
 /**
- * Dumps a container.
+ * Dumps the given player's given container into that player's bank.
  * @param player the player
- * @param inventory the player's inventory.
- * @param boolean true to send message stating why it can't bank, false for no message
+ * @param container the player's container to dump.
  * @author ceik
  * @author James Triantafylos
  */
-fun dumpContainer(player: Player, inventory: core.game.container.Container) {
+fun dumpContainer(player: Player, container: core.game.container.Container) {
     val bank = player.bank
-    for (item: Item in inventory.toArray().filterNotNull()) {
+    container.toArray().filterNotNull().forEach { item ->
         if (!bank.hasSpaceFor(item)) {
             player.packetDispatch.sendMessage("You have no more space in your bank.")
             return
@@ -1420,16 +1403,16 @@ fun dumpContainer(player: Player, inventory: core.game.container.Container) {
             player.packetDispatch.sendMessage("A magical force prevents you from banking your " + item.name + ".")
             return
         } else {
-            if (inventory is EquipmentContainer) {
-                val plugin = item.definition.handlers["equipment"]
-                if (plugin != null && plugin is Plugin<*>) {
-                    plugin.fireEvent("unequip", player, item)
+            if (container is EquipmentContainer) {
+                if(!InteractionListeners.run(item.id,player,item,false)) {
+                    player.packetDispatch.sendMessage("A magical force prevents you from removing that item.")
+                    return
                 }
             }
-            inventory.remove(item)
+            container.remove(item)
             bank.add(if (item.definition.isUnnoted) item else Item(item.noteChange, item.amount))
         }
     }
-    inventory.update()
+    container.update()
     bank.update()
 }
