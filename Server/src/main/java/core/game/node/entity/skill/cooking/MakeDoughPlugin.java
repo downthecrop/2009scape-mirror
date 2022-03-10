@@ -1,6 +1,5 @@
 package core.game.node.entity.skill.cooking;
 
-import core.plugin.Initializable;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
@@ -8,7 +7,11 @@ import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+import core.game.system.task.Pulse;
+import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
+import rs09.game.content.dialogue.SkillDialogueHandler;
 
 /**
  * Represents the plugin used to make dough.
@@ -130,12 +133,46 @@ public final class MakeDoughPlugin extends UseWithHandler {
 		public boolean handle(int interfaceId, int buttonId) {
 			switch (stage) {
 			case 0:
-				makeDough(DOUGHS[buttonId - 1]);
+				makeDoughPulse(DOUGHS[buttonId - 1]);
 				end();
 				break;
 			}
 			return true;
 		}
+
+        private void makeDoughPulse(final Item dough) {
+            SkillDialogueHandler handler = new SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, dough) {
+                @Override
+                public void create(final int amount, int index) {
+                    player.getPulseManager().run(new Pulse(2) {
+                        int count = 0;
+                        @Override
+                        public boolean pulse() {
+                            makeDough(dough);
+                            return ++count >= amount;
+                        }
+                    });
+                }
+
+                @Override
+                public int getAll(int index) {
+                    return player.getInventory().getAmount(waterData[0]);
+                }
+            };
+            if (player.getInventory().getAmount(waterData[0]) == 1) {
+                makeDough(dough);
+            } else {
+                // Defer the creation of the SkillDialogueHandler creation to a pulse since otherwise the dialogue doesn't open (is this dialogue in the way?)
+                player.getPulseManager().run(new Pulse(0) {
+                    @Override
+                    public boolean pulse() {
+                        handler.open();
+                        return true;
+                    }
+                });
+                end();
+            }
+        }
 
 		/**
 		 * Method used to make a dough item.
