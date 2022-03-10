@@ -2,6 +2,7 @@ package core.game.interaction;
 
 import core.game.node.Node;
 import core.game.node.entity.Entity;
+import core.game.node.entity.impl.WalkingQueue;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.system.task.Pulse;
@@ -191,7 +192,10 @@ public abstract class MovementPulse extends Pulse {
             return true;
         }
         findPath();
-        if (mover.getLocation().equals(interactLocation)) {
+        Location ml = mover.getLocation();
+        // Allow being within 1 square of moving entities to interact with them.
+        int radius = destination instanceof Entity && ((Entity)destination).getWalkingQueue().hasPath() ? 1 : 0;
+        if (Math.max(Math.abs(ml.getX() - interactLocation.getX()), Math.abs(ml.getY() - interactLocation.getY())) <= radius) {
             try {
                 if (near || pulse()) {
                     if (mover instanceof Player) {
@@ -256,6 +260,27 @@ public abstract class MovementPulse extends Pulse {
         }
         if (destination == null) {
             return;
+        }
+        Location ml = mover.getLocation();
+        Location dl = destination.getLocation();
+        // Lead the target if they're walking/running, unless they're already within interaction range
+        if(loc != null && destination instanceof Entity && Math.max(Math.abs(ml.getX() - dl.getX()), Math.abs(ml.getY() - dl.getY())) > 1) {
+            WalkingQueue wq = ((Entity)destination).getWalkingQueue();
+            if(wq.hasPath()) {
+                Point[] points = wq.getQueue().toArray(new Point[0]);
+                if(points.length > 0) {
+                    Point p = points[0];
+                    for(int i=0; i<points.length; i++) {
+                        // Target the farthest point along target's planned movement that's within 1 tick's running,
+                        // this ensures the player will run to catch up to the target if able.
+                        if(Math.max(Math.abs(ml.getX() - points[i].getX()), Math.abs(ml.getY() - points[i].getY())) <= 2) {
+                            p = points[i];
+                        }
+                    }
+                    loc.setX(p.getX());
+                    loc.setY(p.getY());
+                }
+            }
         }
         Path path = Pathfinder.find(mover, loc != null ? loc : destination, true, pathfinder);
         near = !path.isSuccessful() || path.isMoveNear();
