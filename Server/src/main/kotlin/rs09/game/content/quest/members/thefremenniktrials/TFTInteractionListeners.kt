@@ -402,7 +402,7 @@ class TFTInteractionListeners : InteractionListener(){
         val legGuild = questPoints!! >= 111
         val heroGuild = questPoints!! >= 5
         val masteredAmount = player?.getSkills()?.masteredSkills!! > 0
-        var SKILLNAME = getMasteredSkills(player!!)
+        var SKILLNAME = getMasteredSkillNames(player!!)
 
         val SKILLER_LYRICS = if(masteredAmount){arrayOf(
             "When people speak of training,",
