@@ -262,6 +262,18 @@ fun inEquipment(player: Player, item: Int, amount: Int = 1): Boolean {
 }
 
 /**
+ * Check if a player has an item equipped which corresponds to the given God
+ * @param player the player to check
+ * @param god the God whose equipment we are checking for
+ * @return true if the player has an item corresponding to the given god, false otherwise
+ */
+fun hasGodItem(player: Player, god: God): Boolean
+{
+    god.validItems.forEach { if(amountInEquipment(player, it) > 0) return true }
+    return false
+}
+
+/**
  * Get number of free slots in a player's inventory
  * @param player the player to check
  * @return the number of free slots in the player's inventory

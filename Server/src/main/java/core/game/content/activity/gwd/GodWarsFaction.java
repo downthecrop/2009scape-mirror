@@ -1,17 +1,21 @@
 package core.game.content.activity.gwd;
 
+import api.ContentAPIKt;
+import api.God;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
+
+import static api.ContentAPIKt.hasGodItem;
 
 /**
  * The god wars factions.
  * @author Emperor
  */
 public enum GodWarsFaction {
-	ARMADYL(6222, 6246, 87, 11694, 11718, 11720, 11722, 12670, 12671, 14671),
-	BANDOS(6260, 6283, 11061, 11696, 11724, 11726, 11728), 
-	SARADOMIN(6247, 6259, 1718, 2412, 2415, 2661, 2663, 2665, 2667, 3479, 3675, 3489, 3840, 4682, 6762, 8055, 10384, 10386, 10388, 10390, 10440, 10446, 10452, 10458, 10464, 10470, 11181, 11698, 11730,542,544),
-	ZAMORAK(6203, 6221, 11716, 11700, 1724, 2414, 2417, 2653, 2655, 2657, 2659, 3478, 3674, 3841, 3842, 3852, 4683, 6764, 8056, 10368, 10370, 10372, 10374, 10444, 10450, 10456, 10460, 10468, 10474, 10776, 10786, 10790, 14662);
+	ARMADYL(6222, 6246, God.ARMADYL),
+	BANDOS(6260, 6283, God.BANDOS),
+	SARADOMIN(6247, 6259, God.SARADOMIN),
+	ZAMORAK(6203, 6221, God.ZAMORAK);
 
 	/**
 	 * The start NPC id.
@@ -24,20 +28,20 @@ public enum GodWarsFaction {
 	private final int endId;
 
 	/**
-	 * The protection items.
+	 * The god this faction represents
 	 */
-	private final int[] protectionItems;
+	private final God god;
 
 	/**
 	 * Constructs a new {@code GodWarsFaction} {@code Object}.
 	 * @param startId The start NPC id.
 	 * @param endId The end NPC id.
-	 * @param protectionItems The protection items for this faction.
+	 * @param god The god this faction represents.
 	 */
-	private GodWarsFaction(int startId, int endId, int... protectionItems) {
+	private GodWarsFaction(int startId, int endId, God god) {
 		this.startId = startId;
 		this.endId = endId;
-		this.protectionItems = protectionItems;
+		this.god = god;
 	}
 
 	/**
@@ -61,16 +65,7 @@ public enum GodWarsFaction {
 	 * player.
 	 */
 	public boolean isProtected(Player player) {
-		for (Item item : player.getEquipment().toArray()) {
-			if (item != null) {
-				for (int id : protectionItems) {
-					if (item.getId() == id) {
-						return true;
-					}
-				}
-			}
-		}
-		return false;
+		return hasGodItem(player, god);
 	}
 
 	/**
@@ -87,13 +82,5 @@ public enum GodWarsFaction {
 	 */
 	public int getEndId() {
 		return endId;
-	}
-
-	/**
-	 * Gets the protectionItems.
-	 * @return The protectionItems.
-	 */
-	public int[] getProtectionItems() {
-		return protectionItems;
 	}
 }
