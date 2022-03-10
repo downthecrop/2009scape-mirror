@@ -16,6 +16,7 @@ data/players/**
 data/eco/offer_dispatch_db.emp
 /build/
 /build/kotlin/
+/build/kotlin/sessions/
 /build/classes/
 /build/generated/
 /build/tmp/
