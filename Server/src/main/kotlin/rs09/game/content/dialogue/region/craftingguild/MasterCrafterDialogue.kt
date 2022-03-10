@@ -3,12 +3,12 @@ package rs09.game.content.dialogue.region.craftingguild
 import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
-import core.game.content.global.Skillcape
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
+import org.rs09.consts.NPCs
 import rs09.tools.END_DIALOGUE
 
 /**
@@ -49,16 +49,16 @@ class MasterCrafterDialogue(player: Player? = null) : DialoguePlugin(player) {
                 addItem(player, 9780, 1)
                 npcl(FacialExpression.HAPPY, "There you go! Enjoy.").also{ stage = END_DIALOGUE }
             } else {
-                npcl(FacialExpression.DISAGREE, "You don't have enough coins for a cape.").also{ stage = END_DIALOGUE }
+                npcl(FacialExpression.NEUTRAL, "You don't have enough coins for a cape.").also{ stage = END_DIALOGUE }
             }
-            20 -> npcl(FacialExpression.DISAGREE, "Where's your brown apron? You can't come in here unless you're wearing one.").also{ stage++ }
+            20 -> npcl(FacialExpression.NEUTRAL, "Where's your brown apron? You can't come in here unless you're wearing one.").also{ stage++ }
             21 -> player(FacialExpression.HALF_GUILTY, "Err... I haven't got one.").also{ stage = END_DIALOGUE }
         }
         return true
     }
 
     override fun getIds() : IntArray {
-        return intArrayOf(805)
+        return intArrayOf(NPCs.MASTER_CRAFTER_805)
     }
 
 }

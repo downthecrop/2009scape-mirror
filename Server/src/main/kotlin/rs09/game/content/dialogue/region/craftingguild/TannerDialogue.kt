@@ -5,6 +5,7 @@ import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
+import org.rs09.consts.NPCs
 import rs09.tools.END_DIALOGUE
 
 /**
@@ -46,7 +47,7 @@ class TannerDialogue(player: Player? = null) : DialoguePlugin(player) {
         return true
     }
     override fun getIds() : IntArray {
-        return intArrayOf(804)
+        return intArrayOf(NPCs.TANNER_804)
     }
 
 }
