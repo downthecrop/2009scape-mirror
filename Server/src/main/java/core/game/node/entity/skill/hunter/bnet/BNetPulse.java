@@ -69,7 +69,7 @@ public final class BNetPulse extends SkillPulse<NPC> {
 
 	@Override
 	public boolean checkRequirements() {
-		if (player.getHunterManager().getStaticLevel() < type.getLevel()) {
+		if (player.getSkills().getLevel(Skills.HUNTER) < type.getLevel()) {
 			player.sendMessage("You need a Hunter level of at least " + type.getLevel() + " in order to do that.");
 			return false;
 		}
