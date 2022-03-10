@@ -1,5 +1,6 @@
 package rs09.game.content.dialogue
 
+import api.*
 import core.game.container.Container
 import core.game.container.impl.EquipmentContainer
 import core.game.content.dialogue.DialoguePlugin
@@ -32,14 +33,14 @@ class DumpContainer(player: Player? = null) : DialoguePlugin(player) {
                 if (player.inventory.isEmpty) {
                     player.packetDispatch.sendMessage("You have nothing in your inventory to deposit.")
                 } else {
-                    dump(player.inventory)
+                    dumpContainer(player, player.inventory)
                 }
             }
             2 -> {
                 if (player.equipment.isEmpty) {
                     player.packetDispatch.sendMessage("You have no equipment to deposit.")
                 } else {
-                    dump(player.equipment)
+                    dumpContainer(player, player.equipment)
                 }
             }
             3 -> {
@@ -55,35 +56,4 @@ class DumpContainer(player: Player? = null) : DialoguePlugin(player) {
     override fun getIds(): IntArray {
         return intArrayOf(ID)
     }
-
-    /**
-     * Dumps a container.
-     * @param inventory the player's inventory.
-     * @author ceik
-     * @author James Triantafylos
-     */
-    fun dump(inventory: Container) {
-        val bank = player.bank
-        for (item: Item in inventory.toArray().filterNotNull()) {
-            if (!bank.hasSpaceFor(item)) {
-                player.packetDispatch.sendMessage("You have no more space in your bank.")
-                return
-            }
-            if (!bank.canAdd(item)) {
-                player.packetDispatch.sendMessage("A magical force prevents you from banking your " + item.name + ".")
-            } else {
-                if (inventory is EquipmentContainer) {
-                    val plugin = item.definition.handlers["equipment"]
-                    if (plugin != null && plugin is Plugin<*>) {
-                        plugin.fireEvent("unequip", player, item)
-                    }
-                }
-                inventory.remove(item)
-                bank.add(if (item.definition.isUnnoted) item else Item(item.noteChange, item.amount))
-            }
-        }
-        inventory.update()
-        bank.update()
-    }
-
 }

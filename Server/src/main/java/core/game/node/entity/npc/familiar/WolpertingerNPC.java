@@ -1,6 +1,7 @@
 package core.game.node.entity.npc.familiar;
 
 import core.plugin.Initializable;
+import core.game.node.entity.skill.SkillBonus;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.node.entity.skill.summoning.familiar.FamiliarSpecial;
@@ -30,6 +31,7 @@ public class WolpertingerNPC extends Familiar {
 	 */
 	public WolpertingerNPC(Player owner, int id) {
 		super(owner, id, 6200, 12089, 1, WeaponInterface.STYLE_CAST);
+		boosts.add(new SkillBonus(Skills.HUNTER, 5));			
 	}
 
 	@Override

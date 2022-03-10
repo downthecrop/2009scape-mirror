@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player;
  * Represents the dialogue plugin used for the cuffs npc.
  * @author 'Vexia
  * @version 1.0
+ * Fixed a typo -Nuggles
  */
 @Initializable
 public final class CuffsDialogue extends DialoguePlugin {
@@ -54,7 +55,7 @@ public final class CuffsDialogue extends DialoguePlugin {
 			stage = 2;
 			break;
 		case 2:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Nope, we'd never do anuthing like that.", "Just a band of innocent walkers, that's us.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Nope, we'd never do anything like that.", "Just a band of innocent walkers, that's us.");
 			stage = 3;
 			break;
 		case 3:

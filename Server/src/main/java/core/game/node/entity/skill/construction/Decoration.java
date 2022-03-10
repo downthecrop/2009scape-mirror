@@ -21,6 +21,7 @@ public enum Decoration {
 	ROCK(13406, 8169, 5, 100.0, new Item(3420, 5)),
 	POND(13407, 8170, 10, 100.0, new Item(1761, 10)),
 	IMP_STATUE(13408, 8171, 15, 150.0, new Item(3420, 5), new Item(1761, 5)),
+	SMALL_OBELISK(42004, 14657, 41, 676, new Item(8786, 1), new Item(12183, 1000), new Item(12160, 10), new Item(12163, 10)),
 	DUNGEON_ENTRANCE(13409, 8172, 70, 500.0, new Item(8786)),
 
 	

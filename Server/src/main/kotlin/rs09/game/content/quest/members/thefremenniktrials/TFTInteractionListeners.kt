@@ -1,22 +1,32 @@
 package rs09.game.content.quest.members.thefremenniktrials
 
+import api.*
+import core.game.container.impl.EquipmentContainer.SLOT_WEAPON
 import core.game.content.dialogue.FacialExpression
-import core.game.node.scenery.Scenery
+import core.game.content.global.action.ClimbActionHandler
+import core.game.content.global.action.DoorActionHandler
 import core.game.node.entity.impl.Animator
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.diary.DiaryType
+import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.item.Item
+import core.game.node.scenery.Scenery
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
+import core.net.packet.PacketRepository
+import core.net.packet.context.MusicContext
+import core.net.packet.out.MusicPacket
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import org.rs09.primextends.getNext
 import org.rs09.primextends.isLast
 import rs09.game.interaction.InteractionListener
+import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.GameWorld
 import rs09.game.world.GameWorld.Pulser
 
@@ -39,6 +49,17 @@ class TFTInteractionListeners : InteractionListener(){
     val KNIFE = Items.KNIFE_946
     val TREE_BRANCH = Items.BRANCH_3692
     val LYRE_IDs = intArrayOf(14591,14590,6127,6126,6125,3691,3690)
+    val THORVALD_LADDER = 34286
+    val THORVALD_LADDER_LOWER = 4188
+    val LALLIS_STEW = 4149
+    val UNSTRUNG_LYRE = Items.UNSTRUNG_LYRE_3688
+    val GOLDEN_FLEECE = Items.GOLDEN_FLEECE_3693
+    val GOLDEN_WOOL = Items.GOLDEN_WOOL_3694
+    val LONGHALL_BACKDOOR = 4148
+    val SHOPNPCS = intArrayOf(NPCs.YRSA_1301,NPCs.SKULGRIMEN_1303,NPCs.THORA_THE_BARKEEP_1300,NPCs.SIGMUND_THE_MERCHANT_1282,NPCs.FISH_MONGER_1315)
+    val SPINNING_WHEEL_IDS = intArrayOf(2644,4309,8748,20365,21304,25824,26143,34497,36970,37476)
+    val STEW_INGREDIENT_IDS = intArrayOf(Items.POTATO_1942,Items.ONION_1957,Items.CABBAGE_1965,Items.PET_ROCK_3695)
+    var FREMENNIK_HELMS = intArrayOf(Items.ARCHER_HELM_3749, Items.BERSERKER_HELM_3751, Items.WARRIOR_HELM_3753, Items.FARSEER_HELM_3755/*, Items.HELM_OF_NEITIZNOT_10828 Should this be included?*/)
 
 
     override fun defineListeners() {
@@ -88,12 +109,74 @@ class TFTInteractionListeners : InteractionListener(){
             return@onUseWith true
         }
 
+        onUseWith(SCENERY,LALLIS_STEW,*STEW_INGREDIENT_IDS){player,_,stewIngredient ->
+            when(stewIngredient.id){
+                Items.ONION_1957 -> {
+                    sendDialogue(player,"You added an onion to the stew")
+                    player.setAttribute("/save:lalliStewOnionAdded",true)
+                    removeItem(player,Items.ONION_1957)
+                }
+                Items.POTATO_1942 -> {
+                    sendDialogue(player,"You added a potato to the stew")
+                    player.setAttribute("/save:lalliStewPotatoAdded",true)
+                    removeItem(player,Items.POTATO_1942)
+                }
+                Items.CABBAGE_1965 -> {
+                    sendDialogue(player,"You added a cabbage to the stew")
+                    player.setAttribute("/save:lalliStewCabbageAdded",true)
+                    removeItem(player,Items.CABBAGE_1965)
+                }
+                Items.PET_ROCK_3695 -> {
+                    sendDialogue(player,"You added your dear pet rock to the stew")
+                    player.setAttribute("/save:lalliStewRockAdded",true)
+                    removeItem(player,Items.PET_ROCK_3695)
+                }
+            }
+            return@onUseWith true
+        }
+
+        onUseWith(SCENERY,SPINNING_WHEEL_IDS,GOLDEN_FLEECE){player,_,item ->
+            animate(player,896)
+            sendDialogue(player,"You spin the Golden Fleece into a ball of Golden Wool")
+            removeItem(player,GOLDEN_FLEECE)
+            addItem(player,Items.GOLDEN_WOOL_3694)
+            return@onUseWith true
+        }
+
+        onUseWith(ITEM,UNSTRUNG_LYRE,GOLDEN_WOOL){player,lyre,wool ->
+            if(player.getSkills().getLevel(Skills.FLETCHING) >= 25){
+                animate(player,1248)
+                removeItem(player,Items.GOLDEN_WOOL_3694)
+                removeItem(player,Items.UNSTRUNG_LYRE_3688)
+                addItem(player,Items.LYRE_3689)
+                sendDialogue(player,"You string the Lyre with the Golden Wool.")
+            }
+            else{
+                sendDialogue(player,"You need 25 fletching to do this!")
+            }
+            return@onUseWith true
+        }
+
+        on(LONGHALL_BACKDOOR, SCENERY,"open"){player,door ->
+            if(player.getAttribute("LyreEnchanted",false)){
+                sendNPCDialogue(player,1278,"Yeah you're good to go through. Olaf tells me you're some kind of outerlander bard here on tour. I doubt you're worse than Olaf is.")
+                DoorActionHandler.handleAutowalkDoor(player,door.asScenery())
+            }
+            else if(player.getAttribute("lyreConcertPlayed")){
+                DoorActionHandler.handleAutowalkDoor(player,door.asScenery())
+            }
+            return@on true
+        }
+
         on(LYRE_IDs,ITEM,"play"){player,lyre ->
-            if(player.questRepository?.getStage("Fremennik Trials")!! < 20){
+            if(player.getAttribute("onStage",false) && player.getAttribute("lyreConcertPlayed",false) == false){
+                Pulser.submit(LyreConcertPulse(player,lyre.id))
+            }
+            else if(player.questRepository?.getStage("Fremennik Trials")!! < 20 || !player.questRepository?.isComplete("Fremennik Trials")!!){
                 player.sendMessage("You lack the knowledge to play this.")
                 return@on true
             }
-            if(LYRE_IDs.isLast(lyre.id)){
+            else if(LYRE_IDs.isLast(lyre.id)){
                 player.sendMessage("Your lyre is out of charges!")
             } else {
                 player.inventory?.remove(lyre.asItem())
@@ -140,11 +223,73 @@ class TFTInteractionListeners : InteractionListener(){
             return@on true
         }
 
-        on(SWAYING_TREE,SCENERY,"chop down"){ player, _ ->
+        on(THORVALD_LADDER, SCENERY, "climb-down") { player, _ ->
+            if (player.questRepository.isComplete("Fremennik Trials") || player.getAttribute("fremtrials:thorvald-vote",false)!!) {
+                player.sendMessage("You have no reason to go back down there.")
+                return@on true
+            } else if (!player.getAttribute("fremtrials:warrior-accepted",false)!!) {
+                player.dialogueInterpreter?.sendDialogues(NPCs.THORVALD_THE_WARRIOR_1289, FacialExpression.ANGRY,
+                    "Outerlander... do not test my patience. I do not take",
+                    "kindly to people wandering in here and acting as though",
+                    "they own the place."
+                )
+                return@on true
+            } else if (hasEquippableItems(player)) {
+                player.dialogueInterpreter?.sendDialogues(NPCs.THORVALD_THE_WARRIOR_1289, FacialExpression.ANGRY,
+                    "You may not enter the battleground with any armour",
+                    "or weaponry of any kind."
+                )
+                player.dialogueInterpreter.addAction { player, buttonId ->
+                    player.dialogueInterpreter?.sendDialogues(NPCs.THORVALD_THE_WARRIOR_1289, FacialExpression.ANGRY,
+                        "If you need to place your equipment into your bank",
+                        "account, I recommend that you speak to the seer. He",
+                        "knows a spell that will do that for you."
+                    )
+                }
+                return@on true
+            }
+
+            ClimbActionHandler.climb(player, Animation(828), Location.create(2671, 10099, 2))
+            Pulser.submit(KoscheiPulse(player))
+            return@on true
+        }
+
+        on(THORVALD_LADDER_LOWER, SCENERY, "climb-up") { player, _ ->
+            ClimbActionHandler.climb(player, Animation(828), Location.create(2666, 3694, 0))
+            return@on true
+        }
+
+        on(SWAYING_TREE,SCENERY,"cut-branch"){ player, _ ->
             SkillingTool.getHatchet(player)?.let { Pulser.submit(ChoppingPulse(player)).also { return@on true } }
 
             player.sendMessage("You need an axe which you have the woodcutting level to use to do this.")
             return@on true
+        }
+
+        on(SHOPNPCS,NPC,"Trade") { player, npc ->
+            if(player.questRepository.isComplete("Fremennik Trials")){
+                npc.asNpc().openShop(player)
+            }
+            else {
+                when(npc.id){
+                    NPCs.THORA_THE_BARKEEP_1300 -> sendMessage(player,"Only Fremenniks may buy drinks here.")
+                    NPCs.SKULGRIMEN_1303 -> sendMessage(player,"Only Fremenniks may purchase weapons and armour here.")
+                    NPCs.SIGMUND_THE_MERCHANT_1282 -> sendMessage(player,"Only Fremenniks may trade with this merchant.")
+                    NPCs.YRSA_1301 -> sendMessage(player,"Only Fremenniks may buy clothes here.")
+                    NPCs.FISH_MONGER_1315 -> sendMessage(player,"Only Fremenniks may purchase fish here.")
+                }
+            }
+            return@on true
+        }
+
+        for(id in FREMENNIK_HELMS){
+            onEquip(id){ player, _ ->
+                if(!player.questRepository.isComplete("Fremennik Trials")){
+                    sendMessage(player, "You must have completed The Fremennik Trials to equip this.")
+                    return@onEquip false
+                }
+                return@onEquip true
+            }
         }
     }
 
@@ -167,6 +312,28 @@ class TFTInteractionListeners : InteractionListener(){
         return obj.location
     }
 
+    fun hasEquippableItems(player: Player?): Boolean {
+        val container = arrayOf(player!!.inventory, player.equipment)
+        for (c in container) {
+            for (i in c.toArray()) {
+                if (i == null) {
+                    continue
+                }
+                if (i.name.toLowerCase().contains(" rune")) {
+                    return true
+                }
+                var slot: Int = i.definition.getConfiguration(ItemConfigParser.EQUIP_SLOT, -1)
+                if (slot == -1 && i.definition.getConfiguration(ItemConfigParser.WEAPON_INTERFACE, -1) != -1) {
+                    slot = SLOT_WEAPON
+                }
+                if (slot >= 0) {
+                    return true
+                }
+            }
+        }
+        return false
+    }
+
     class spiritPulse(val player: Player?, val fish: Int) : Pulse(){
         var counter = 0
         val npc = NPC(1273,player?.location)
@@ -184,7 +351,9 @@ class TFTInteractionListeners : InteractionListener(){
                     395 -> player?.inventory?.add(Item(6127))
                 }
                 6 -> player?.unlock()
-                10 -> npc.clear().also { return true }
+                10 -> npc.clear().also {
+                    player?.setAttribute("/save:LyreEnchanted",true)
+                    return true }
             }
             return false
         }
@@ -196,6 +365,100 @@ class TFTInteractionListeners : InteractionListener(){
             when(counter++){
                 0 -> player.animator.animate(SkillingTool.getHatchet(player).animation)
                 4 -> player.animator.reset().also { player.inventory.add(Item(3692));return true}
+            }
+            return false
+        }
+    }
+
+    class LyreConcertPulse(val player: Player?, val Lyre: Int) : Pulse(){
+        val GENERIC_LYRICS = arrayOf(
+            "${player?.name?.capitalize()} is my name,",
+            "I haven't much to say",
+            "But since I have to sing this song.",
+            "I'll just go ahead and play."
+        )
+        val CHAMPS_LYRICS = arrayOf(
+            "The thought of lots of questing,",
+            "Leaves some people unfulfilled,",
+            "But I have done my simple best, in",
+            "Entering the Champions Guild."
+        )
+        val HEROES_LYRICS = arrayOf(
+            "When it comes to fighting",
+            "I hit my share of zeroes",
+            "But I'm well respected at",
+            "the Guild reserved for Heroes,"
+        )
+        val LEGENDS_LYRICS = arrayOf(
+            "I cannot even start to list",
+            "The amount of foes I've killed.",
+            "I will simply tell you this:",
+            "I've joined the Legends' Guild!"
+        )
+        val SKILLS = mutableListOf(Skills.SKILL_NAME)
+        var counter = 0
+        val questPoints = player?.questRepository?.points
+        val champGuild = player?.getAchievementDiaryManager()?.hasCompletedTask(DiaryType.VARROCK, 1, 1)?: false
+        val legGuild = questPoints!! >= 111
+        val heroGuild = questPoints!! >= 5
+        val masteredAmount = player?.getSkills()?.masteredSkills!! > 0
+        var SKILLNAME = getMasteredSkills(player!!)
+
+        val SKILLER_LYRICS = if(masteredAmount){arrayOf(
+            "When people speak of training,",
+            "Some people think they're fine.",
+            "But they just all seem jealous that",
+            "My ${SKILLNAME.random()}'s ninety-nine!"
+        )} else arrayOf("Pee pee poo poo pee","I really have to pee","If you sing this song","Let me know that this is what you see")
+
+        val LYRICS = if(masteredAmount){
+            println(masteredAmount)
+            SKILLER_LYRICS
+        } else if(legGuild){
+            LEGENDS_LYRICS
+        }else if(heroGuild){
+            HEROES_LYRICS
+        }else if(champGuild){
+            CHAMPS_LYRICS
+        }else{GENERIC_LYRICS}
+
+        override fun pulse(): Boolean {
+            when(counter++){
+                0 -> {
+                    player?.lock()
+                    animate(player!!,1318,true)
+                }
+                2 -> {
+                    animate(player!!,1320,true)
+                    PacketRepository.send(MusicPacket::class.java, MusicContext(player, 165, true))
+                }
+                4 -> {
+                    animate(player!!,1320,true)
+                    PacketRepository.send(MusicPacket::class.java, MusicContext(player, 164, true))
+                    sendChat(player,LYRICS[0])
+                }
+                6 -> {
+                    animate(player!!,1320,true)
+                    PacketRepository.send(MusicPacket::class.java, MusicContext(player, 164, true))
+                    sendChat(player,LYRICS[1])
+                }
+                8 -> {
+                    animate(player!!,1320,true)
+                    PacketRepository.send(MusicPacket::class.java, MusicContext(player, 164, true))
+                    sendChat(player,LYRICS[2])
+                }
+                10 ->{
+                    animate(player!!,1320,true)
+                    PacketRepository.send(MusicPacket::class.java, MusicContext(player, 163, true))
+                    sendChat(player,LYRICS[3])
+                }
+                12 ->{
+                    player?.setAttribute("/save:lyreConcertPlayed",true)
+                    player?.removeAttribute("LyreEnchanted")
+                    player?.inventory?.remove(Item(Lyre))
+                    addItem(player!!,3689)
+                    player?.unlock()
+                }
             }
             return false
         }
@@ -219,6 +482,17 @@ class TFTInteractionListeners : InteractionListener(){
                 0 -> player.animator.animate(Animation(9600, Animator.Priority.VERY_HIGH), Graphics(1682))
                 6 -> player.properties.teleportLocation = Location.create(2661, 3646, 0)
                 7 -> player.unlock().also { return true }
+            }
+            return false
+        }
+    }
+
+    class KoscheiPulse(val player: Player) : Pulse() {
+        var counter = 0
+        override fun pulse(): Boolean {
+            when(counter++) {
+                0 -> player.sendMessage("Explore this battleground and find your foe...")
+                20 -> KoscheiSession.create(player).start().also { return true }
             }
             return false
         }

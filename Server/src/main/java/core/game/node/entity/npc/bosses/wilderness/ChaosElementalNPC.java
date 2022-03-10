@@ -8,6 +8,7 @@ import core.game.node.entity.combat.equipment.SwitchAttack;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
@@ -62,7 +63,7 @@ public class ChaosElementalNPC extends AbstractNPC {
 	@Override
 	public void sendImpact(BattleState state) {
 		if (state.getEstimatedHit() > 28) {
-			state.setEstimatedHit(RandomFunction.random(20, 28));
+			state.setEstimatedHit(RandomFunction.random(20, 28)); //possibly absolutely mental "haha random" damage adjustment. not sure. - crash
 		}
 		super.sendImpact(state);
 	}
@@ -135,7 +136,11 @@ public class ChaosElementalNPC extends AbstractNPC {
 				if (player == null) {
 					return;
 				}
-				if (attack.getProjectile().getProjectileId() == 554) {
+				if (attack.getProjectile().getProjectileId() == 557) {
+					player.getAudioManager().send(new Audio(350), true); // C. Elemental Discord Impact SFX
+				}
+				else if (attack.getProjectile().getProjectileId() == 554) {
+					player.getAudioManager().send(new Audio(346), true); // C. Elemental Confusion Impact SFX
 					Location loc = getRandomLoc(entity);
 					while (!RegionManager.isTeleportPermitted(loc) || RegionManager.getObject(loc) != null) {
 						loc = getRandomLoc(entity);
@@ -145,6 +150,7 @@ public class ChaosElementalNPC extends AbstractNPC {
 					}
 					player.teleport(loc);
 				} else if (attack.getProjectile().getProjectileId() == 551) {
+					player.getAudioManager().send(new Audio(353), true); // C. Elemental Madness Impact SFX
 					if (player.getInventory().freeSlots() < 1 || player.getEquipment().itemCount() < 1) {
 						return;
 					}

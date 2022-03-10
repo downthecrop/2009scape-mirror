@@ -52,7 +52,7 @@ public final class LongbowBenDialogue extends DialoguePlugin {
 		case 1:
 			switch (buttonId) {
 			case 1:
-				interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Why are you called Longbow Ben?");
+				interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "Why are you called Longbow Ben?");
 				stage = 100;
 				break;
 			case 2:

@@ -16,6 +16,7 @@ import core.game.world.update.flag.player.FaceLocationFlag;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.plugin.PluginManager;
+import core.game.node.entity.skill.SkillBonus;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.firemaking.FireMakingPulse;
 import core.game.node.entity.skill.firemaking.Log;
@@ -53,6 +54,7 @@ public class ForgeRegentNPC extends Familiar {
 	 */
 	public ForgeRegentNPC(Player owner, int id) {
 		super(owner, id, 4500, 12782, 6, WeaponInterface.STYLE_RANGE_ACCURATE);
+		boosts.add(new SkillBonus(Skills.FIREMAKING, 4));		
 	}
 
 	@Override

@@ -180,7 +180,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 						} else {
 							stage = 15;
 						}
-						break;
+						break;					
 				}
 				npc("One moment, please...");
 				break;
