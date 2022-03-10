@@ -129,6 +129,13 @@ fun amountInEquipment(player: Player, id: Int): Int{
 }
 
 /**
+ * Check that an item is equipped by the given player
+ */
+fun isEquipped(player: Player, id: Int): Boolean {
+    return amountInEquipment(player, id) > 0
+}
+
+/**
  * Remove an item from a player's inventory
  * @param player the player whose inventory to remove the item from
  * @param item the ID or Item object to remove from the player's inventory
@@ -252,6 +259,18 @@ fun inBank(player: Player, item: Int, amount: Int = 1): Boolean {
 
 fun inEquipment(player: Player, item: Int, amount: Int = 1): Boolean {
     return player.equipment.contains(item, amount)
+}
+
+/**
+ * Check if a player has an item equipped which corresponds to the given God
+ * @param player the player to check
+ * @param god the God whose equipment we are checking for
+ * @return true if the player has an item corresponding to the given god, false otherwise
+ */
+fun hasGodItem(player: Player, god: God): Boolean
+{
+    god.validItems.forEach { if(amountInEquipment(player, it) > 0) return true }
+    return false
 }
 
 /**

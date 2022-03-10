@@ -1,11 +1,15 @@
 package core.game.node.entity.skill.cooking;
 
-import core.plugin.Initializable;
-import core.game.node.entity.skill.cooking.recipe.Recipe;
 import core.game.interaction.NodeUsageEvent;
 import core.game.interaction.UseWithHandler;
+import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.cooking.recipe.Recipe;
 import core.game.node.item.Item;
+import core.game.system.task.Pulse;
+import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.content.dialogue.SkillDialogueHandler.SkillDialogue;
+import rs09.game.content.dialogue.SkillDialogueHandler;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,6 +44,7 @@ public final class CookingRecipePlugin extends UseWithHandler {
 	@Override
 	public boolean handle(NodeUsageEvent event) {
 		Recipe recipe = null;
+        // TODO: Transitioning to a Listener would save an O(n) pass through the recipes list on every use-with
 		for (Recipe temp : Recipe.RECIPES) {
 			if (temp.isSingular()) {
 				if (temp.getBase().getId() == event.getUsedItem().getId() || temp.getBase().getId() == event.getBaseItem().getId()) {
@@ -69,7 +74,31 @@ public final class CookingRecipePlugin extends UseWithHandler {
 			}
 		}
 		if (recipe != null) {
-			recipe.mix(event.getPlayer(), event);
+            final Player player = event.getPlayer();
+            final Recipe recipe_ = recipe;
+            SkillDialogueHandler handler = new SkillDialogueHandler(player, SkillDialogue.ONE_OPTION, recipe.getProduct()) {
+                @Override
+                public void create(final int amount, int index) {
+                    player.getPulseManager().run(new Pulse(2) {
+                        int count = 0;
+                        @Override
+                        public boolean pulse() {
+                            recipe_.mix(player, event);
+                            return ++count >= amount;
+                        }
+                    });
+                }
+
+                @Override
+                public int getAll(int index) {
+                    return player.getInventory().getAmount(recipe_.getBase());
+                }
+            };
+            if (player.getInventory().getAmount(recipe.getBase()) == 1) {
+                recipe_.mix(player, event);
+            } else {
+                handler.open();
+            }
 			return true;
 		}
 		return false;

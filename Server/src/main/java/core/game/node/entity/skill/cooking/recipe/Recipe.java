@@ -25,6 +25,10 @@ public abstract class Recipe {
 	/**
 	 * Represents the array of active recipes in Keldagrim..
 	 */
+    // TODO:
+    // - Making this an enum would drastically save on file/line count, since the recipes seem to mostly be plain-old-data classes
+    // - Making pie shells a recipe would make make-x for them just work
+    // - Making pineapple cutting a recipe would probably fix their make-x making all with any option
 	public static final Recipe[] RECIPES = new Recipe[] {
 			new RedberryPie(), new MeatPie(), new ApplePie(), new MudPie(), new GardenPie(), new FishPie(), new AdmiralPie(), new WildPie(), new SummerPie(),
 			new StewRecipe(), new CurryRecipe(),
