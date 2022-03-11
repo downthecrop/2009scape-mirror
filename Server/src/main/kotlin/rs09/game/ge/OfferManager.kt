@@ -342,16 +342,13 @@ object OfferManager {
     fun dispatch(player: Player, offer: GrandExchangeOffer): Boolean {
         if (offer.amount < 1) {
             player.packetDispatch.sendMessage("You must choose the quantity you wish to buy!")
-            println("amountthing")
             return false
         }
         if (offer.offeredValue < 1) {
             player.packetDispatch.sendMessage("You must choose the price you wish to buy for!")
-            println("pricethng")
             return false
         }
         if (offer.offerState != OfferState.PENDING || offer.uid != 0L) {
-            println("pendingthing")
             return false
         }
         if (player.isArtificial) {

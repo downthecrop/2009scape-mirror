@@ -106,7 +106,7 @@ class LoginParser(
             return
         }
         if(!PlayerParser.parse(player)){
-            Repository.players.remove(player)
+            Repository.removePlayer(player)
             Repository.LOGGED_IN_PLAYERS.remove(player.username)
             Repository.lobbyPlayers.remove(player)
             Repository.playerNames.remove(player.name)
@@ -124,10 +124,10 @@ class LoginParser(
                             p.clear()
                             Repository.playerNames.remove(p.name)
                             Repository.lobbyPlayers.remove(p)
-                            Repository.players.remove(p)
+                            Repository.removePlayer(p)
                         }
                         if (!Repository.players.contains(player)) {
-                            Repository.players.add(player)
+                            Repository.addPlayer(player)
                         }
                         player.details.session.setObject(player)
                         flag(Response.SUCCESSFUL)
@@ -179,7 +179,7 @@ class LoginParser(
         GameWorld.Pulser.submit(object : Pulse(1) {
             override fun pulse(): Boolean {
                 if (!Repository.players.contains(player)) {
-                    Repository.players.add(player)
+                    Repository.addPlayer(player)
                 }
                 return true
             }

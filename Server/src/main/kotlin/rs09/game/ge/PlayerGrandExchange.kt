@@ -296,13 +296,7 @@ class PlayerGrandExchange(private val player: Player) {
      * @param offer The offer to update.
      */
     fun update(offer: GrandExchangeOffer?) {
-        if (offer != null) {
-            PacketRepository.send(
-                GrandExchangePacket::class.java,
-                GrandExchangeContext(player, offer.index.toByte(), offer.offerState.ordinal.toByte(), offer.itemID.toShort(),
-                    offer.sell, offer.offeredValue, offer.amount, offer.completedAmount, offer.totalCoinExchange)
-            )
-        }
+        offer?.visualize(player)
     }
 
     /**

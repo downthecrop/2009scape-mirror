@@ -12,6 +12,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.ge.GEAutoStock
+import rs09.game.ge.GEDB
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ServerConfigParser
 import rs09.game.world.GameWorld
@@ -64,6 +65,7 @@ object Server {
             SystemLogger.logInfo("Using config file: ${"worldprops" + File.separator + "default.conf"}")
             ServerConfigParser.parse("worldprops" + File.separator + "default.conf")
         }
+        GEDB.init()
         startTime = System.currentTimeMillis()
         val t = TimeStamp()
         SystemLogger.logInfo("Initializing Server Store...")
