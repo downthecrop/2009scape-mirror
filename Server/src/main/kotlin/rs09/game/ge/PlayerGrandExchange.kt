@@ -21,13 +21,12 @@ import core.game.system.monitor.PlayerMonitor
 import core.net.packet.PacketRepository
 import core.net.packet.context.ConfigContext
 import core.net.packet.context.ContainerContext
-import core.net.packet.context.GrandExchangeContext
 import core.net.packet.out.Config
 import core.net.packet.out.ContainerPacket
-import core.net.packet.out.GrandExchangePacket
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.rs09.consts.Components
+import org.rs09.consts.Items
 import rs09.game.system.SystemLogger
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -45,7 +44,7 @@ class PlayerGrandExchange(private val player: Player) {
 
     var history = arrayOfNulls<GrandExchangeOffer>(5)
 
-    public val offers = arrayOfNulls<GrandExchangeOffer>(6)
+    public val offerRecords = arrayOfNulls<OfferRecord>(6)
 
     private var openedIndex = -1
 
@@ -93,14 +92,39 @@ class PlayerGrandExchange(private val player: Player) {
         player.packetDispatch.sendAccessMask(6, 36, 109, 0, 2)
         player.packetDispatch.sendAccessMask(6, 44, 109, 0, 2)
         player.packetDispatch.sendAccessMask(6, 52, 109, 0, 2)
-        for (offer in offers) {
-            if (offer != null) {
-                PacketRepository.send(
-                    ContainerPacket::class.java,
-                    ContainerContext(player, -1, -1757, 523 + offer.index, offer.withdraw, false)
-                )
+
+        visualizeRecords()
+    }
+
+    fun visualizeRecords()
+    {
+        val conn = GEDB.connect()
+        val stmt = conn.createStatement()
+
+        for (record in offerRecords) {
+            if (record != null) {
+                val offer_raw = stmt.executeQuery("select * from player_offers where uid = ${record.uid}")
+                if(offer_raw.next())
+                {
+                    val offer = GrandExchangeOffer.fromQuery(offer_raw)
+                    offer.index = record.slot
+                    offer.visualize(player)
+                }
             }
         }
+    }
+
+    fun getOffer(record: OfferRecord) : GrandExchangeOffer?
+    {
+        val conn = GEDB.connect()
+        val stmt = conn.createStatement()
+        val offer_raw = stmt.executeQuery("select * from player_offers where uid = ${record.uid}")
+        if(offer_raw.next())
+        {
+            val offer = GrandExchangeOffer.fromQuery(offer_raw)
+            return offer
+        }
+        return null
     }
 
     /**
@@ -228,24 +252,36 @@ class PlayerGrandExchange(private val player: Player) {
     }
 
     fun parse(geData: JSONObject) {
-        val offersRaw = geData["offers"]
+        val recordsRaw = geData["records"]
 
-        if (offersRaw != null) {
-            val offersJSON = offersRaw as JSONArray
-            for (i in offersJSON.indices) {
-                val offer = offersJSON[i] as JSONObject
-                val index = offer["offerIndex"].toString().toInt()
-                if (index > offers.size - 1) {
-                    SystemLogger.logAlert("Grand Exchange: INVALID OFFER INDEX FOR " + player.name + " INDEX: " + index + ", SKIPPING!")
-                    SystemLogger.logAlert("IF YOU SEE THIS MESSAGE, THE GRAND EXCHANGE NEEDS TO BE FIXED.")
-                    SystemLogger.logAlert("Check your logs, AVENGING ANGLE might have fucked up HARD and now " + player.name + "'s trade with index " + index + "is gone :(")
-                    continue
-                }
-                OfferManager.setIndex(offer["offerUID"].toString().toLong(), index)
-                offers[index] = OfferManager.OFFER_MAPPING[offer["offerUID"].toString().toLong()]
-                update(offers[index])
+        if(recordsRaw != null)
+        {
+            val recordsJSON = recordsRaw as JSONArray
+
+            for((index,recordRaw) in recordsJSON.withIndex())
+            {
+                val record = recordRaw as JSONObject
+                val recordIndex = record["index"].toString().toInt()
+                val recordUid = record["uid"].toString().toLong()
+                offerRecords[index] = OfferRecord(recordUid,recordIndex)
             }
         }
+        else //offer records null, as a safety fallback just get all offers belonging to this player and reindex
+        {
+            val conn = GEDB.connect()
+            val stmt = conn.createStatement()
+            val offer_records = stmt.executeQuery("SELECT * from player_offers where player_uid = ${player.details.uid}")
+
+            var index = 0
+            while(offer_records.next())
+            {
+                val offer = GrandExchangeOffer.fromQuery(offer_records)
+                offerRecords[index] = OfferRecord(offer.uid, index++)
+            }
+        }
+
+        visualizeRecords()
+
         val historyRaw = geData["history"]
         if(historyRaw != null){
             val history = historyRaw as JSONArray
@@ -267,17 +303,17 @@ class PlayerGrandExchange(private val player: Player) {
     fun init() {
         // Were trades made while gone?
         var updated = false
-        for (offer in offers) {
-            if (offer != null) {
-                offer.player = player
+        for (record in offerRecords) {
+            if (record != null) {
+                val offer = getOffer(record) ?: continue
                 if (!updated && (offer.withdraw[0] != null || offer.withdraw[1] != null)) {
                     updated = true
                 }
-                update(offer)
+                offer.visualize(player)
             }
         }
         if (updated) {
-            player.packetDispatch.sendMessage("You have items from the Grand Exchange waiting in your collection box.")
+            sendMessage(player, "You have items from the Grand Exchange waiting in your collection box.")
         }
     }
 
@@ -285,9 +321,7 @@ class PlayerGrandExchange(private val player: Player) {
      * Updates the client with the grand exchange data.
      */
     fun update() {
-        for (offer in offers) {
-            update(offer)
-        }
+        visualizeRecords()
     }
 
     /**
@@ -331,7 +365,7 @@ class PlayerGrandExchange(private val player: Player) {
      * @param item The item to sell.
      */
     fun constructSale(item: Item) {
-        if (openedIndex < 0 || offers[openedIndex] != null) {
+        if (openedIndex < 0 || offerRecords[openedIndex] != null) {
             return
         }
         if (item.id == 995) {
@@ -419,19 +453,17 @@ class PlayerGrandExchange(private val player: Player) {
                 }
             }
             if (OfferManager.dispatch(player, temporaryOffer!!)) {
-                offers[openedIndex] = temporaryOffer
-                OfferManager.updateOffer(temporaryOffer!!)
+                offerRecords[openedIndex] = OfferRecord(temporaryOffer!!.uid, openedIndex)
             }
         } else {
             val total: Int = temporaryOffer!!.amount * temporaryOffer!!.offeredValue
-            if (total > player.inventory.getAmount(Item(995))) {
-                player.audioManager.send(Audio(4039, 1, 1))
-                player.packetDispatch.sendMessage("You do not have enough coins to cover the offer.")
+            if (total > amountInInventory(player, Items.COINS_995)) {
+                playAudio(player, Audio(4039, 1, 1))
+                sendMessage(player, "You do not have enough coins to cover the offer.")
                 return
             }
             if (OfferManager.dispatch(player, temporaryOffer!!) && player.inventory.remove(Item(995, total))) {
-                offers[openedIndex] = temporaryOffer
-                OfferManager.updateOffer(temporaryOffer!!)
+                offerRecords[openedIndex] = OfferRecord(temporaryOffer!!.uid, openedIndex)
             }
         }
         player.monitor.log(
@@ -443,6 +475,7 @@ class PlayerGrandExchange(private val player: Player) {
         toMainInterface()
         player.audioManager.send(Audio(4043, 1, 1))
         temporaryOffer = null
+        visualizeRecords()
     }
 
     /**
@@ -451,7 +484,7 @@ class PlayerGrandExchange(private val player: Player) {
      * @param index The offer index.
      */
     fun abort(index: Int) {
-        val offer: GrandExchangeOffer? = offers[index]
+        val offer: GrandExchangeOffer? = getOffer(offerRecords[index] ?: return)
         player.packetDispatch.sendMessage("Abort request acknowledged. Please be aware that your offer may")
         player.packetDispatch.sendMessage("have already been completed.")
         if (offer == null || !offer.isActive) {
@@ -459,10 +492,11 @@ class PlayerGrandExchange(private val player: Player) {
         }
         offer.offerState = OfferState.ABORTED
         if (offer.sell) {
-            OfferManager.addWithdraw(offer, offer.itemID, offer.amountLeft, true)
+            offer.addWithdrawItem(offer.itemID, offer.amountLeft)
         } else {
-            OfferManager.addWithdraw(offer, 995, offer.amountLeft * offer.offeredValue, true)
+            offer.addWithdrawItem(995, offer.amountLeft * offer.offeredValue)
         }
+        offer.update()
         update(offer)
         player.monitor.log(
             "aborted offer => item => " + ItemDefinition.forId(offer.itemID).name + " => amount => " + offer.amount + "",
@@ -477,10 +511,10 @@ class PlayerGrandExchange(private val player: Player) {
      * @param index The offer index.
      */
     fun remove(index: Int): Boolean {
-        if (offers[index] == null) {
+        if (offerRecords[index] == null) {
             return false
         }
-        var offer: GrandExchangeOffer = offers[index]!!
+        val offer: GrandExchangeOffer = getOffer(offerRecords[index] ?: return false)!!
         if (offer.completedAmount > 0) {
             val newHistory = arrayOfNulls<GrandExchangeOffer>(5)
             newHistory[0] = offer
@@ -492,17 +526,16 @@ class PlayerGrandExchange(private val player: Player) {
             )
         }
         offer.withdraw = arrayOfNulls(2)
-        var didExist = OfferManager.removeEntry(offer)
         offer.uid = 0
         offer.offerState = OfferState.REMOVED
-        offers[index] = null
+        offerRecords[index] = null
         update(offer)
         toMainInterface()
-        return didExist
+        return true
     }
 
     fun hasActiveOffer(): Boolean {
-        for (i in offers) {
+        for (i in offerRecords) {
             if (i != null)
                 return true
         }
@@ -520,7 +553,7 @@ class PlayerGrandExchange(private val player: Player) {
         var entry: GrandExchangeEntry? = GrandExchangeDatabase.getDatabase()[offer?.itemID]
         var examine: String? = ""
         val formatter = DecimalFormat("###,###,###,###")
-        val text = StringBuilder()
+/*        val text = StringBuilder()
         var lowestOfferValue = 0
         var totalAmounts = 0
         val foundOffers: MutableList<Int> = ArrayList()
@@ -554,7 +587,7 @@ class PlayerGrandExchange(private val player: Player) {
                      .append(formatter.format(count.toLong()))
             }
         }
-        player.packetDispatch.sendString(if (offer != null && !offer.sell) text.toString() else examine, 105, 142)
+        player.packetDispatch.sendString(if (offer != null && !offer.sell) text.toString() else examine, 105, 142)*/
         var lowPrice = 0
         var highPrice = 0
         val recommendedPrice = OfferManager.getRecommendedPrice(entry?.itemId ?: 0)
@@ -599,7 +632,7 @@ class PlayerGrandExchange(private val player: Player) {
      */
     fun openBuy(index: Int) {
         openedIndex = index
-        sendConfiguration(offers[index], false)
+        sendConfiguration(getOffer(offerRecords[index] ?: return), false)
         openSearch()
     }
 
@@ -608,7 +641,7 @@ class PlayerGrandExchange(private val player: Player) {
      */
     fun openSell(index: Int) {
         openedIndex = index
-        sendConfiguration(offers[index], true)
+        sendConfiguration(getOffer(offerRecords[index] ?: return), true)
         player.interfaceManager.openSingleTab(Component(Components.STOCKSIDE_107)).open(player)
         player.packetDispatch.sendRunScript(
             149, "IviiiIsssss", "", "", "", "Examine", "Offer",
@@ -645,7 +678,7 @@ class PlayerGrandExchange(private val player: Player) {
             ContainerPacket::class.java,
             ContainerContext(player, -1, -1757, 523 + offer.index, offer.withdraw, false)
         )
-        OfferManager.dumpDatabase = true
+        offer.update()
     }
 
     /**
@@ -656,7 +689,7 @@ class PlayerGrandExchange(private val player: Player) {
     fun getOpenedOffer(): GrandExchangeOffer? {
         return if (openedIndex < 0) {
             null
-        } else offers[openedIndex]
+        } else getOffer(offerRecords[openedIndex] ?: return null)
     }
 
     /**
@@ -665,11 +698,11 @@ class PlayerGrandExchange(private val player: Player) {
      * @param index The index.
      */
     fun view(index: Int) {
-        if (offers[index] == null) {
+        if (offerRecords[index] == null) {
             return
         }
         openedIndex = index
-        sendConfiguration(offers[index], false)
+        sendConfiguration(getOffer(offerRecords[index] ?: return), false)
     }
 
     /**
@@ -679,8 +712,9 @@ class PlayerGrandExchange(private val player: Player) {
      */
     fun format(): String? {
         var log = ""
-        for (offer in offers) {
-            if (offer != null) {
+        for (record in offerRecords) {
+            if (record != null) {
+                val offer = getOffer(record) ?: continue
                 log += offer.itemID.toString() + "," + offer.amount + "," + offer.sell + "|"
             }
         }
@@ -691,4 +725,5 @@ class PlayerGrandExchange(private val player: Player) {
     }
 
 
+    data class OfferRecord(val uid: Long, val slot: Int)
 }

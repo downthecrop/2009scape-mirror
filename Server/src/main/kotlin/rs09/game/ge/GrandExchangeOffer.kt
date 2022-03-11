@@ -80,8 +80,9 @@ class GrandExchangeOffer() {
             PacketRepository.send(ContainerPacket::class.java, ContainerContext(player, -1, -1757, 523 + index, withdraw, false))
     }
 
-    fun visualize(player: Player)
+    fun visualize(player: Player?)
     {
+        player ?: return
         PacketRepository.send(
                 GrandExchangePacket::class.java,
                 GrandExchangeContext(player, index.toByte(), offerState.ordinal.toByte(), itemID.toShort(),
@@ -109,6 +110,7 @@ class GrandExchangeOffer() {
             stmt.setString(3, encodeWithdraw())
             stmt.setLong(4, uid)
             stmt.executeUpdate()
+            visualize(player)
         }
     }
 
@@ -142,6 +144,7 @@ class GrandExchangeOffer() {
             stmt.setInt(5, offerState.ordinal)
             stmt.setInt(6, if(sell) 1 else 0)
             stmt.executeUpdate()
+            visualize(player)
         }
     }
 

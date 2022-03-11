@@ -2,7 +2,6 @@ package core.game.interaction.object;
 
 import static api.ContentAPIKt.*;
 
-import api.Container;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.CloseEvent;
@@ -32,7 +31,6 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import kotlin.Unit;
-import org.rs09.consts.Items;
 import rs09.game.content.dialogue.DumpContainer;
 import rs09.game.ge.GrandExchangeOffer;
 import rs09.game.world.GameWorld;
@@ -174,7 +172,7 @@ public final class BankingPlugin extends OptionHandler {
                 return true;
             }
             interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "Good day, How may I help you?");
-            for (GrandExchangeOffer o : player.getPlayerGrandExchange().getOffers()) {
+            for (GrandExchangeOffer o : player.getPlayerGrandExchange().getOfferRecords()) {
                 if (o != null && (o.getWithdraw()[0] != null || o.getWithdraw()[1] != null)) {
                     stage = -1;
                     break;

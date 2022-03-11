@@ -636,7 +636,7 @@ class PlayerSaver (val player: Player){
         val grandExchange = JSONObject()
         if(player.playerGrandExchange.hasActiveOffer()){
             val offers = JSONArray()
-            player.playerGrandExchange.offers.map {
+            player.playerGrandExchange.offerRecords.map {
                 if(it != null){
                     val offer = JSONObject()
                     offer["offerIndex"] = it.index.toString()

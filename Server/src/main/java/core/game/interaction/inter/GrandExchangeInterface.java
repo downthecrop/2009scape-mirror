@@ -8,10 +8,8 @@ import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
 import core.game.ge.GEGuidePrice;
 import core.game.ge.GEItemSet;
-import core.game.ge.GrandExchangeDatabase;
 import core.game.ge.OfferState;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.RunScript;
 import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
@@ -181,7 +179,7 @@ public class GrandExchangeInterface extends ComponentPlugin {
 			break;
 		}
 		GrandExchangeOffer offer;
-		if (index > -1 && (offer = player.getPlayerGrandExchange().getOffers()[index]) != null) {
+		if (index > -1 && (offer = player.getPlayerGrandExchange().getOffer(player.getPlayerGrandExchange().getOfferRecords()[index])) != null) {
 			player.getPlayerGrandExchange().withdraw(offer, slot >> 1);
 		}
 		return true;

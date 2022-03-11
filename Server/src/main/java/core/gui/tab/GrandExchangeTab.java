@@ -142,7 +142,7 @@ public class GrandExchangeTab extends ConsoleTab {
             JOptionPane.showMessageDialog(null, "Error! No player found.");
             return;
         }
-        for (GrandExchangeOffer o : player.getPlayerGrandExchange().getOffers()) {
+        for (GrandExchangeOffer o : player.getPlayerGrandExchange().getOfferRecords()) {
             if (o == null) {
                 continue;
             }
