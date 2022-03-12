@@ -41,15 +41,13 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
         var playerMeetsBoneReqs = getDynLevel(player, Skills.CONSTRUCTION) >= 30 && hasHouse(player)
-        var longBoneInInv = inInventory(player, Items.LONG_BONE_10976, 1)
-        var curvedBoneInInv = inInventory(player, Items.CURVED_BONE_10977, 1)
-        if (!playerMeetsBoneReqs && (longBoneInInv || curvedBoneInInv)) {
+        if (!playerMeetsBoneReqs) {
             sendMessage(player, "You require at least level 30 construction and a house to speak to Barlak about bones.")
         }
-        if (playerMeetsBoneReqs && longBoneInInv) {
+        if (playerMeetsBoneReqs && inInventory(player, Items.LONG_BONE_10976, 1)) {
             curItem = 0
             npcl(nhap, "Those bones! Those are exactly the sort of thing I need! Will you sell them?").also { stage = 0 }
-        } else if (playerMeetsBoneReqs && curvedBoneInInv) {
+        } else if (playerMeetsBoneReqs && inInventory(player, Items.CURVED_BONE_10977, 1)) {
             curItem = 1
             npcl(nhap, "Those bones! Those are exactly the sort of thing I need! Will you sell them?").also { stage = 0 }
         } else if (inInventory(player, Items.PERFECT_SHELL_10995, 1)) {
