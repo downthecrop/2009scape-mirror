@@ -86,7 +86,7 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
             50 -> player(pfr, "It's a giant snail shell!").also { stage++ }
             51 -> npcl(ntalk1, "Hmm... I think I might be able to make something out of them.").also { stage++ }
             52 -> npcl(ntalk2, "I'll give you ${getTotalCoinsForCurItem()} gp for the snail shells you're carrying.").also { stage++ }
-            53 -> options("Okay.", "No. I'll keep the shells.").also { stage++ }
+            53 -> options("Okay.", "No. I'll keep the bones.").also { stage++ }
             54 -> when (buttonId) {
                 1 -> player(pfr, "Okay.").also { stage = 55 }
                 2 -> player(pneu, "No thanks.").also { stage = 99 }
@@ -104,7 +104,7 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             62 -> npcl(ntalk2, "I'll give you ${getTotalCoinsForCurItem()} gp for the snail shell you're carrying, and I'll try to give you some advice on Crafting while I'm at it.").also { stage++ }
-            63 -> options("Okay.", "No. I'll keep the shells.").also { stage++ }
+            63 -> options("Okay.", "No. I'll keep the bones.").also { stage++ }
             64 -> when (buttonId) {
                 1 -> player(pfr, "Okay.").also { stage = 65 }
                 2 -> player(pneu, "No thanks.").also { stage = 99 }
@@ -115,7 +115,7 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             70 -> npcl(ntalk2, "I'll give you ${getTotalCoinsForCurItem()} gp for the snail shells you're carrying, and I'll try to give you some advice on Crafting while I'm at it.").also { stage++ }
-            71 -> options("Okay.", "No. I'll keep the shells.").also { stage++ }
+            71 -> options("Okay.", "No. I'll keep the bones.").also { stage++ }
             72 -> when (buttonId) {
                 1 -> player(pfr, "Okay.").also { stage = 75 }
                 2 -> player(pneu, "No thanks.").also { stage = 99 }
@@ -128,7 +128,7 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
             100 -> player(pfr, "It's a giant battle tortoise shell!").also { stage++ }
             101 -> npcl(ntalk1, "Hmm... I think I might be able to make something out of them.").also { stage++ }
             102 -> npcl(ntalk2, "I'll give you ${getTotalCoinsForCurItem()} gp for the tortoise shells you're carrying.").also { stage++ }
-            103 -> options("Okay.", "No. I'll keep the shells.").also { stage++ }
+            103 -> options("Okay.", "No. I'll keep the bones.").also { stage++ }
             104 -> when (buttonId) {
                 1 -> player(pfr, "Okay.").also { stage = 105 }
                 2 -> player(pneu, "No thanks.").also { stage = 99 }
@@ -146,7 +146,7 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
                 }
             }
             122 -> npcl(ntalk2, "I'll give you ${getTotalCoinsForCurItem()} gp for the perfect shell you're carrying, and I'll try to give you some advice on Crafting while I'm at it.").also { stage++ }
-            123 -> options("Okay.", "No. I'll keep the shells.").also { stage++ }
+            123 -> options("Okay.", "No. I'll keep the bones.").also { stage++ }
             124 -> when (buttonId) {
                 1 -> player(pfr, "Okay.").also { stage = 125 }
                 2 -> player(pneu, "No thanks.").also { stage = 99 }
