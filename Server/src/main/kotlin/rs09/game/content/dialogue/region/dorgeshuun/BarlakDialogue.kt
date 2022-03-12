@@ -64,7 +64,7 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
         } else if (inInventory(player, Items.SNAIL_SHELL_7800, 1)) {
             curItem = 2
             npc(ntalk1, "That giant shell... what is it?").also { stage = 50 }
-        } else {
+        } else if (playerMeetsBoneReqs) {
             npc(nhap, "Bones!").also { stage = 150 }
         }
         return true
