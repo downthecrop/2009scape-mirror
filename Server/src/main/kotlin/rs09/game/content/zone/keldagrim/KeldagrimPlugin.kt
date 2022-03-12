@@ -117,12 +117,14 @@ class BlastFurnaceDoorDialogue : DialogueFile(){
     var init = true
     override fun handle(componentID: Int, buttonID: Int) {
         if (init) {
-            stage = if (player!!.getSkills().getLevel(Skills.SMITHING) >= 60) {
-                100
-            }else{
-                5
-            }
-            init = false
+            //stage = if (player!!.getSkills().getLevel(Skills.SMITHING) >= 60) {
+            //    100
+            //}else{
+            //    5
+            //}
+            //init = false
+            //uncomment the above out when BF gets fixed.
+            stage = 69
         }
         when(stage){
             5 -> sendDialogue(player!!,"You must be Smithing Level 60 or higher in order to enter the Blast Furnace").also { stage = 10 }
@@ -144,6 +146,7 @@ class BlastFurnaceDoorDialogue : DialogueFile(){
                 20 -> sendDialogue(player!!,"Then get out of here!").also { stage = 40 }
             }
             40 -> end()
+            69 -> sendDialogue(player!!,"The Blast Furnace is temporarily closed down for maintenance.").also { end() } //Remove this line when BF gets fixed
             100 -> player?.properties?.teleportLocation = Location.create(1940, 4958, 0).also { stage = 40 }
         }
     }
