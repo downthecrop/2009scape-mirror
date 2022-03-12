@@ -138,14 +138,14 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
                 exchange()
             }
 
-            120 -> player(pfr, "It's a giant battle tortoise shell!").also { stage++ }
+            120 -> player(pfr, "It's a perfect shell!").also { stage++ }
             121 -> {
                 when (amountInInventory(player, Items.PERFECT_SHELL_10995)) {
                     1 -> npcl(ntalk2, "Hmm... I think I might be able to make something out of them, especially that perfect one.").also { stage++ }
-                    else -> npcl(ntalk1, "Hmm... I think I might be able to make something out of them, especially those perfect ones.").also { stage = 130 }
+                    else -> npcl(ntalk1, "Hmm... I think I might be able to make something out of them, especially those perfect ones.").also { stage++ }
                 }
             }
-            122 -> npcl(ntalk2, "I'll give you ${getTotalCoinsForCurItem()} gp for the tortoise shell you're carrying, and I'll try to give you some advice on Crafting while I'm at it.").also { stage++ }
+            122 -> npcl(ntalk2, "I'll give you ${getTotalCoinsForCurItem()} gp for the perfect shell you're carrying, and I'll try to give you some advice on Crafting while I'm at it.").also { stage++ }
             123 -> options("Okay.", "No. I'll keep the bones.").also { stage++ }
             124 -> when (buttonId) {
                 1 -> player(pfr, "Okay.").also { stage = 125 }
