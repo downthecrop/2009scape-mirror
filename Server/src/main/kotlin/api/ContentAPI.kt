@@ -1278,6 +1278,7 @@ fun getQP(player: Player): Int{
 /**
  * Gets the stage for the given quest for the given player
  */
+
 fun questStage(player: Player, quest: String): Int{
     return player.questRepository.getStage(quest)
 }
@@ -1285,6 +1286,7 @@ fun questStage(player: Player, quest: String): Int{
 /**
  * Sets the stage for the given quest for the given player
  */
+
 fun setQuestStage(player: Player, quest: String, stage: Int) {
     player.questRepository.setStage(QuestRepository.getQuests()[quest]!!, stage)
 }
@@ -1292,6 +1294,7 @@ fun setQuestStage(player: Player, quest: String, stage: Int) {
 /**
  * Check if a quest is complete
  */
+
 fun isQuestComplete(player: Player, quest: String): Boolean {
     return player.questRepository.getStage(quest) == 100
 }
@@ -1324,6 +1327,7 @@ fun registerMapZone(zone: MapZone, borders: ZoneBorders){
  * @param child the child on the interface to animate.
  * @param anim the ID of the animation to use.
  */
+
 fun animateInterface(player: Player, iface: Int, child: Int, anim: Int){
     player.packetDispatch.sendAnimationInterface(anim,iface,child)
 }
@@ -1392,6 +1396,7 @@ fun getMasteredSkillNames(player: Player): List<String> {
  * @author ceik
  * @author James Triantafylos
  */
+
 fun dumpContainer(player: Player, container: core.game.container.Container) {
     val bank = player.bank
     container.toArray().filterNotNull().forEach { item ->
@@ -1415,4 +1420,14 @@ fun dumpContainer(player: Player, container: core.game.container.Container) {
     }
     container.update()
     bank.update()
+}
+
+/**
+ * Returns a boolean indicating if the player has a house.
+ * @param player the player.
+ * @return boolean indicating presence of house.
+ */
+
+fun hasHouse(player: Player): Boolean {
+    return player.houseManager.hasHouse()
 }
