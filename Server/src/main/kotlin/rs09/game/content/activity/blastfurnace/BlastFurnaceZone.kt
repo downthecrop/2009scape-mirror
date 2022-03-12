@@ -14,7 +14,9 @@ import core.plugin.Plugin
  * operate and run its logic if there are actual players in this zone
  * @author phil lips*/
 
-@Initializable
+
+//Remove this once the funny dupe gets fixed
+//@Initializable
 class BlastFurnaceZone : MapZone("Blast Furnace Zone",true), Plugin<Any> {
 
     var pulseStarted = false
