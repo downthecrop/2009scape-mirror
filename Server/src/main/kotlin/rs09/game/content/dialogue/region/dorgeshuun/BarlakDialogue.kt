@@ -40,32 +40,32 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-
-        if (getDynLevel(player, Skills.CONSTRUCTION) >= 30 && hasHouse(player)) {
-            if (inInventory(player, Items.LONG_BONE_10976, 1)) {
-                curItem = 0
-                npcl(nhap, "Those bones! Those are exactly the sort of thing I need! Will you sell them?").also { stage = 0 }
-            } else if (inInventory(player, Items.CURVED_BONE_10977, 1)) {
-                curItem = 1
-                npcl(nhap, "Those bones! Those are exactly the sort of thing I need! Will you sell them?").also { stage = 0 }
-            } else if (inInventory(player, Items.PERFECT_SHELL_10995, 1)) {
-                curItem = 5
-                npc(ntalk2, "That giant shell... what is it?").also { stage = 120 }
-            } else if (inInventory(player, Items.TORTOISE_SHELL_7939, 1)) {
-                curItem = 4
-                npc(ntalk2, "That giant shell... what is it?").also { stage = 100 }
-            } else if (inInventory(player, Items.PERFECT_SNAIL_SHELL_10996, 1)) {
-                curItem = 3
-                npc(ntalk1, "That giant shell... what is it?").also { stage = 60 }
-            } else if (inInventory(player, Items.SNAIL_SHELL_7800, 1)) {
-                curItem = 2
-                npc(ntalk1, "That giant shell... what is it?").also { stage = 50 }
-            } else {
-                npc(nhap, "Bones!").also { stage = 150 }
-            }
+        var playerMeetsBoneReqs = getDynLevel(player, Skills.CONSTRUCTION) >= 30 && hasHouse(player)
+        var longBoneInInv = inInventory(player, Items.LONG_BONE_10976, 1)
+        var curvedBoneInInv = inInventory(player, Items.CURVED_BONE_10977, 1)
+        if (!playerMeetsBoneReqs && (longBoneInInv || curvedBoneInInv)) {
+            sendMessage(player, "You require at least level 30 construction and a house to speak to Barlak about bones.")
         }
-        else {
-            sendMessage(player, "You require at least level 30 construction and a house to speak to Barlak")
+        if (playerMeetsBoneReqs && longBoneInInv) {
+            curItem = 0
+            npcl(nhap, "Those bones! Those are exactly the sort of thing I need! Will you sell them?").also { stage = 0 }
+        } else if (playerMeetsBoneReqs && curvedBoneInInv) {
+            curItem = 1
+            npcl(nhap, "Those bones! Those are exactly the sort of thing I need! Will you sell them?").also { stage = 0 }
+        } else if (inInventory(player, Items.PERFECT_SHELL_10995, 1)) {
+            curItem = 5
+            npc(ntalk2, "That giant shell... what is it?").also { stage = 120 }
+        } else if (inInventory(player, Items.TORTOISE_SHELL_7939, 1)) {
+            curItem = 4
+            npc(ntalk2, "That giant shell... what is it?").also { stage = 100 }
+        } else if (inInventory(player, Items.PERFECT_SNAIL_SHELL_10996, 1)) {
+            curItem = 3
+            npc(ntalk1, "That giant shell... what is it?").also { stage = 60 }
+        } else if (inInventory(player, Items.SNAIL_SHELL_7800, 1)) {
+            curItem = 2
+            npc(ntalk1, "That giant shell... what is it?").also { stage = 50 }
+        } else {
+            npc(nhap, "Bones!").also { stage = 150 }
         }
         return true
     }
