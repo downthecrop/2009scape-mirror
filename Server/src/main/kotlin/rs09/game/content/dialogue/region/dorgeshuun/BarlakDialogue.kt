@@ -17,17 +17,14 @@ import java.text.NumberFormat
 
 @Initializable
 class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
-    var pask = FacialExpression.ASKING
-    var pfr = FacialExpression.FRIENDLY
-    var pneu = FacialExpression.NEUTRAL
-
-    var nhap = FacialExpression.OLD_HAPPY
+    private var pask = FacialExpression.ASKING
+    private var pfr = FacialExpression.FRIENDLY
+    private var pneu = FacialExpression.NEUTRAL
+    private var nhap = FacialExpression.OLD_HAPPY
     private var ntalk1 = FacialExpression.OLD_CALM_TALK1
     private var ntalk2 = FacialExpression.OLD_CALM_TALK2
 
-    var f = NumberFormat.getIntegerInstance()
-    var curItem = 0
-    var toAddFromBank = 0
+    private var curItem = 0
 
     val sets = arrayOf(
         intArrayOf(Items.LONG_BONE_10976, 1000, 1500, Skills.CONSTRUCTION),
@@ -40,7 +37,7 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        var playerMeetsBoneReqs = getDynLevel(player, Skills.CONSTRUCTION) >= 30 && hasHouse(player)
+        val playerMeetsBoneReqs = getDynLevel(player, Skills.CONSTRUCTION) >= 30 && hasHouse(player)
         if (!playerMeetsBoneReqs) {
             sendMessage(player, "You require at least level 30 construction and a house to speak to Barlak about bones.")
         }
@@ -204,8 +201,8 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
 
 
     private fun exchange() {
-        var item = getItemForCurItem()
-        var numToExchange = getNumToExchange()
+        val item = getItemForCurItem()
+        val numToExchange = getNumToExchange()
         removeAll(player, item, Container.INVENTORY)
         removeAll(player, item, Container.BANK)
         addItemOrDrop(player, Items.COINS_995, getCoinsForCurItem() * numToExchange)
@@ -213,7 +210,7 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
     }
 
     private fun getNumToExchange(): Int {
-        var itemId = getItemIdForCurItem()
+        val itemId = getItemIdForCurItem()
         return amountInInventory(player, itemId) + amountInBank(player, itemId)
     }
 
