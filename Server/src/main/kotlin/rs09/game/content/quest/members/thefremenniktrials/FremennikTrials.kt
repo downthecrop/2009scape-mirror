@@ -10,7 +10,7 @@ import org.rs09.consts.Items
 import rs09.game.content.activity.allfiredup.AFUBeacon
 
 @Initializable
-class FremennikTrials : Quest("Fremennik Trials",62,63,3,347,0,1,10){
+class FremennikTrials : Quest("Fremennik Trials",64,63,3,347,0,1,10){
 
     class SkillRequirement(val skill: Int?, val level: Int?)
 
