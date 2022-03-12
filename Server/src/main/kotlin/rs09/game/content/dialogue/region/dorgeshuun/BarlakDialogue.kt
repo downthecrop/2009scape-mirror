@@ -1,5 +1,3 @@
-@file:Suppress("UNUSED_PARAMETER")
-
 package rs09.game.content.dialogue.region.dorgeshuun
 import api.*
 import core.game.content.dialogue.DialoguePlugin
@@ -19,17 +17,14 @@ import java.text.NumberFormat
 
 @Initializable
 class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
-    var pask = FacialExpression.ASKING
-    var pfr = FacialExpression.FRIENDLY
-    var pneu = FacialExpression.NEUTRAL
+    private var pask = FacialExpression.ASKING
+    private var pfr = FacialExpression.FRIENDLY
+    private var pneu = FacialExpression.NEUTRAL
+    private var nhap = FacialExpression.OLD_HAPPY
+    private var ntalk1 = FacialExpression.OLD_CALM_TALK1
+    private var ntalk2 = FacialExpression.OLD_CALM_TALK2
 
-    var nhap = FacialExpression.OLD_HAPPY
-    var ntalk1 = FacialExpression.OLD_CALM_TALK1
-    var ntalk2 = FacialExpression.OLD_CALM_TALK2
-
-    var f = NumberFormat.getIntegerInstance()
-    var curItem = 0
-    var toAddFromBank = 0
+    private var curItem = 0
 
     val sets = arrayOf(
         intArrayOf(Items.LONG_BONE_10976, 1000, 1500, Skills.CONSTRUCTION),
@@ -42,36 +37,37 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-
-       if (player.skills.getStaticLevel(Skills.CONSTRUCTION) >= 30 && player.houseManager.hasHouse()) {
-            if (player.inventory.contains(Items.LONG_BONE_10976, 1)) {
-                curItem = 0
-                npcl(nhap, "Those bones! Those are exactly the sort of thing I need! Will you sell them?").also { stage = 0 }
-            } else if (player.inventory.contains(Items.CURVED_BONE_10977, 1)) {
-                curItem = 1
-                npcl(nhap, "Those bones! Those are exactly the sort of thing I need! Will you sell them?").also { stage = 0 }
-            } else if (player.inventory.contains(Items.PERFECT_SHELL_10995, 1)) {
-                curItem = 5
-                npc(ntalk2, "That giant shell... what is it?").also { stage = 120 }
-            } else if (player.inventory.contains(Items.TORTOISE_SHELL_7939, 1)) {
-                curItem = 4
-                npc(ntalk2, "That giant shell... what is it?").also { stage = 100 }
-            } else if (player.inventory.contains(Items.PERFECT_SNAIL_SHELL_10996, 1)) {
-                curItem = 3
-                npc(ntalk1, "That giant shell... what is it?").also { stage = 60 }
-            } else if (player.inventory.contains(Items.SNAIL_SHELL_7800, 1)) {
-                curItem = 2
-                npc(ntalk1, "That giant shell... what is it?").also { stage = 50 }
-            } else {
-                npc(nhap, "Bones!").also { stage = 150 }
-            }
+        val playerMeetsBoneReqs = getDynLevel(player, Skills.CONSTRUCTION) >= 30 && hasHouse(player)
+        if (!playerMeetsBoneReqs) {
+            sendMessage(player, "You require at least level 30 construction and a house to speak to Barlak about bones.")
+        }
+        if (playerMeetsBoneReqs && inInventory(player, Items.LONG_BONE_10976, 1)) {
+            curItem = 0
+            npcl(nhap, "Those bones! Those are exactly the sort of thing I need! Will you sell them?").also { stage = 0 }
+        } else if (playerMeetsBoneReqs && inInventory(player, Items.CURVED_BONE_10977, 1)) {
+            curItem = 1
+            npcl(nhap, "Those bones! Those are exactly the sort of thing I need! Will you sell them?").also { stage = 0 }
+        } else if (inInventory(player, Items.PERFECT_SHELL_10995, 1)) {
+            curItem = 5
+            npc(ntalk2, "That giant shell... what is it?").also { stage = 120 }
+        } else if (inInventory(player, Items.TORTOISE_SHELL_7939, 1)) {
+            curItem = 4
+            npc(ntalk2, "That giant shell... what is it?").also { stage = 100 }
+        } else if (inInventory(player, Items.PERFECT_SNAIL_SHELL_10996, 1)) {
+            curItem = 3
+            npc(ntalk1, "That giant shell... what is it?").also { stage = 60 }
+        } else if (inInventory(player, Items.SNAIL_SHELL_7800, 1)) {
+            curItem = 2
+            npc(ntalk1, "That giant shell... what is it?").also { stage = 50 }
+        } else if (playerMeetsBoneReqs) {
+            npc(nhap, "Bones!").also { stage = 150 }
         }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> npcl(ntalk1, "I'll give you " + f.format(gibMeDaCoinz(curItem))  + " gp for the bones you're carrying and for any you have in your bank.").also { stage++ }
+            0 -> npcl(ntalk1, "I'll give you ${getTotalCoinsForCurItem()} gp for the bones you're carrying and for any you have in your bank.").also { stage++ }
             1 -> npcl(ntalk2, "I'll try to teach you something about Construction as well, but it's highly technical so you won't understand if you don't already have level 30 Construction.").also { stage++ }
             2 -> options("Okay.", "No, I'll keep the bones.").also { stage++ }
             3 -> when (buttonId) {
@@ -80,31 +76,31 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
             }
 
             10 -> {
-                doDaMaffBish()
+                exchange()
                 npc(ntalk1, "Thanks! Now, let me explain...").also { stage = 999 }
             }
 
             50 -> player(pfr, "It's a giant snail shell!").also { stage++ }
             51 -> npcl(ntalk1, "Hmm... I think I might be able to make something out of them.").also { stage++ }
-            52 -> npcl(ntalk2, "I'll give you " + f.format(gibMeDaCoinz(curItem))  + " gp for the snail shells you're carrying.").also { stage++ }
+            52 -> npcl(ntalk2, "I'll give you ${getTotalCoinsForCurItem()} gp for the snail shells you're carrying.").also { stage++ }
             53 -> options("Okay.", "No. I'll keep the bones.").also { stage++ }
             54 -> when (buttonId) {
                 1 -> player(pfr, "Okay.").also { stage = 55 }
                 2 -> player(pneu, "No thanks.").also { stage = 99 }
             }
             55 -> {
-                doDaMaffBish()
+                exchange()
                 npcl(ntalk1, "Thanks. If you find any more shells like these, please bring them to me!").also { stage = 99 }
             }
             60 -> player(pfr, "It's a giant snail shell!").also { stage++ }
             61 -> {
-                when (player.inventory.getAmount(Items.PERFECT_SNAIL_SHELL_10996)) {
+                when (amountInInventory(player, Items.PERFECT_SNAIL_SHELL_10996)) {
                     1 -> npcl(ntalk2, "Hmm... I think I might be able to make something out of them, especially that perfect one.").also { stage++ }
                     else -> npcl(ntalk1, "Hmm... I think I might be able to make something out of them, especially those perfect ones.").also { stage = 70 }
                 }
             }
 
-            62 -> npcl(ntalk2, "I'll give you " + f.format(gibMeDaCoinz(curItem))  + " gp for the snail shell you're carrying, and I'll try to give you some advice on Crafting while I'm at it.").also { stage++ }
+            62 -> npcl(ntalk2, "I'll give you ${getTotalCoinsForCurItem()} gp for the snail shell you're carrying, and I'll try to give you some advice on Crafting while I'm at it.").also { stage++ }
             63 -> options("Okay.", "No. I'll keep the bones.").also { stage++ }
             64 -> when (buttonId) {
                 1 -> player(pfr, "Okay.").also { stage = 65 }
@@ -112,10 +108,10 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
             }
             65 -> {
                 npcl(ntalk2, "Thanks! Now, I don't think I could use that for Construction, but maybe I could make something...").also { stage = 1000 }
-                doDaMaffBish()
+                exchange()
             }
 
-            70 -> npcl(ntalk2, "I'll give you " + f.format(gibMeDaCoinz(curItem))  + " gp for the snail shells you're carrying, and I'll try to give you some advice on Crafting while I'm at it.").also { stage++ }
+            70 -> npcl(ntalk2, "I'll give you ${getTotalCoinsForCurItem()} gp for the snail shells you're carrying, and I'll try to give you some advice on Crafting while I'm at it.").also { stage++ }
             71 -> options("Okay.", "No. I'll keep the bones.").also { stage++ }
             72 -> when (buttonId) {
                 1 -> player(pfr, "Okay.").also { stage = 75 }
@@ -123,12 +119,12 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
             }
             75 -> {
                 npcl(ntalk2, "Thanks! Now, I don't think I could use that for Construction, but maybe I could make something...").also { stage = 1000 }
-                doDaMaffBish()
+                exchange()
             }
 
             100 -> player(pfr, "It's a giant battle tortoise shell!").also { stage++ }
             101 -> npcl(ntalk1, "Hmm... I think I might be able to make something out of them.").also { stage++ }
-            102 -> npcl(ntalk2, "I'll give you " + f.format(gibMeDaCoinz(curItem))  + " gp for the tortoise shells you're carrying.").also { stage++ }
+            102 -> npcl(ntalk2, "I'll give you ${getTotalCoinsForCurItem()} gp for the tortoise shells you're carrying.").also { stage++ }
             103 -> options("Okay.", "No. I'll keep the bones.").also { stage++ }
             104 -> when (buttonId) {
                 1 -> player(pfr, "Okay.").also { stage = 105 }
@@ -136,17 +132,17 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
             }
             105 -> {
                 npcl(ntalk2, "Thanks. If you find any more shells like these, please bring them to me!").also { stage = 130 }
-                doDaMaffBish()
+                exchange()
             }
 
-            120 -> player(pfr, "It's a giant battle tortoise shell!").also { stage++ }
+            120 -> player(pfr, "It's a perfect shell!").also { stage++ }
             121 -> {
-                when (player.inventory.getAmount(Items.PERFECT_SHELL_10995)) {
+                when (amountInInventory(player, Items.PERFECT_SHELL_10995)) {
                     1 -> npcl(ntalk2, "Hmm... I think I might be able to make something out of them, especially that perfect one.").also { stage++ }
-                    else -> npcl(ntalk1, "Hmm... I think I might be able to make something out of them, especially those perfect ones.").also { stage = 130 }
+                    else -> npcl(ntalk1, "Hmm... I think I might be able to make something out of them, especially those perfect ones.").also { stage++ }
                 }
             }
-            122 -> npcl(ntalk2, "I'll give you " + f.format(gibMeDaCoinz(curItem))  + " gp for the tortoise shell you're carrying, and I'll try to give you some advice on Crafting while I'm at it.").also { stage++ }
+            122 -> npcl(ntalk2, "I'll give you ${getTotalCoinsForCurItem()} gp for the perfect shell you're carrying, and I'll try to give you some advice on Crafting while I'm at it.").also { stage++ }
             123 -> options("Okay.", "No. I'll keep the bones.").also { stage++ }
             124 -> when (buttonId) {
                 1 -> player(pfr, "Okay.").also { stage = 125 }
@@ -154,14 +150,14 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
             }
             125 -> {
                 npcl(ntalk2, "Thanks! Now, I don't think I could use that for Construction, but maybe I could make something...").also { stage = 1001 }
-                doDaMaffBish()
+                exchange()
             }
 
             130 -> {
-                if (player.inventory.contains(Items.SNAIL_SHELL_7800, 1)) {
+                if (inInventory(player, Items.SNAIL_SHELL_7800, 1)) {
                     curItem = 2
                     npc(ntalk1, "That giant shell... what is it?").also { stage = 50 }
-                } else if (player.inventory.contains(Items.PERFECT_SNAIL_SHELL_10996, 1)) {
+                } else if (inInventory(player, Items.PERFECT_SNAIL_SHELL_10996, 1)) {
                     curItem = 3
                     npc(ntalk1, "That giant shell... what is it?").also { stage = 60 }
                 } else {
@@ -202,32 +198,43 @@ class BarlakDialogue(player: Player? = null) : DialoguePlugin(player){
         }
         return true
     }
-    private fun wotItem(): Item {
-        return Item(sets[curItem][0])
+
+
+    private fun exchange() {
+        val item = getItemForCurItem()
+        val numToExchange = getNumToExchange()
+        removeAll(player, item, Container.INVENTORY)
+        removeAll(player, item, Container.BANK)
+        addItemOrDrop(player, Items.COINS_995, getCoinsForCurItem() * numToExchange)
+        rewardXP(player, getSkillForCurItem(), (getXpForCurItem() * numToExchange).toDouble())
     }
 
-    private fun doDaMaffBish() {
-        addItemOrDrop(player, 995, gibMeDaCoinz(curItem))
-        removeAll(player, wotItem(), Container.INVENTORY)
-        if (inBank(player, sets[curItem][0], 1)) {
-            removeAll(player, wotItem(), Container.BANK)
-        }
-        player.skills.addExperience(gibMeDaSkill(curItem), gibMeDaExp(curItem).toDouble())
+    private fun getNumToExchange(): Int {
+        val itemId = getItemIdForCurItem()
+        return amountInInventory(player, itemId) + amountInBank(player, itemId)
     }
 
-    private fun gibMeDaCoinz(a: Int): Int {
-        if (inBank(player, sets[curItem][0], 1)) {
-            toAddFromBank = amountInBank(player, sets[curItem][0])
-        } else {
-            toAddFromBank = 0
-        }
-        return (player.inventory.getAmount(sets[curItem][0]) * sets[curItem][1]) + (toAddFromBank * sets[curItem][1])
+    private fun getTotalCoinsForCurItem(): Int {
+        return getCoinsForCurItem() * getNumToExchange()
     }
 
-    private fun gibMeDaExp(a: Int): Int {
+    private fun getItemForCurItem(): Item {
+        return Item(getItemIdForCurItem())
+    }
+
+    private fun getItemIdForCurItem(): Int {
+        return sets[curItem][0]
+    }
+
+    private fun getCoinsForCurItem(): Int {
+        return sets[curItem][1]
+    }
+
+    private fun getXpForCurItem(): Int {
         return sets[curItem][2]
     }
-    private fun gibMeDaSkill(a: Int): Int {
+
+    private fun getSkillForCurItem(): Int {
         return sets[curItem][3]
     }
 
