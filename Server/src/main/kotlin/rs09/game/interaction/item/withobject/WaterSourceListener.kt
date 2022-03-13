@@ -73,18 +73,16 @@ class WaterSourceListener : InteractionListener() {
         return sb.toString()
     }
 
-    internal enum class WaterVessel(val inputs: IntArray, val output: Int, val wellable: Boolean = false, val autofill: Boolean = false, val fillMsg: String = "You fill the @.")
+    internal enum class WaterVessel(val inputs: IntArray, val output: Int, val wellable: Boolean = false, val autofill: Boolean = true, val fillMsg: String = "You fill the @.")
     {
         BUCKET(
                 inputs = intArrayOf(Items.BUCKET_1925),
                 output = Items.BUCKET_OF_WATER_1929,
-                wellable = true,
-                autofill = true
+                wellable = true
         ),
         VIAL(
                 inputs = intArrayOf(Items.VIAL_229),
                 output = Items.VIAL_OF_WATER_227,
-                autofill = true
         ),
         JUG(
                 inputs = intArrayOf(Items.JUG_1935),
