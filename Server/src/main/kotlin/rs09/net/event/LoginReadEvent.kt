@@ -66,7 +66,6 @@ class LoginReadEvent
          * @param buffer The buffer to read from.
          */
         private fun decodeWorld(opcode: Int, session: IoSession, buffer: ByteBuffer) {
-            SystemLogger.logInfo("decodeWorld")
             var buffer = buffer
             val d = buffer.get() // Memory?
             val e = buffer.get() // no advertisement = 1
@@ -108,17 +107,26 @@ class LoginReadEvent
             val b = buffer
             SystemLogger.logInfo("spawning thread to handle login")
             TaskExecutor.executeSQL {
+                SystemLogger.logInfo("login thread start")
                 Thread.currentThread().name = "Login Password Response"
+                SystemLogger.logInfo("login thread named")
                 try {
                     val username = StringUtils.longToString(b.long)
+                    SystemLogger.logInfo("got username")
                     val password = ByteBufferUtils.getString(b)
+                    SystemLogger.logInfo("got password")
                     val response = PlayerSQLManager.getCredentialResponse(username, password)
+                    SystemLogger.logInfo("got sql response")
                     if (response != Response.SUCCESSFUL) {
+                        SystemLogger.logInfo("not success :(")
                         session.write(response, true)
                         return@executeSQL
                     }
+                    SystemLogger.logInfo("great success, attempting login")
                     login(PlayerDetails(username, password), session, b, opcode)
+                    SystemLogger.logInfo("done")
                 } catch (e: Exception) {
+                    SystemLogger.logInfo("big whoops")
                     e.printStackTrace()
                     session.write(Response.COULD_NOT_LOGIN)
                 }
@@ -128,8 +136,7 @@ class LoginReadEvent
 
         /**
          * Handles the login procedure after we check an acc is registered & certified.
-         * @param username the username.
-         * @param password the password.
+         * @param details the player's details.
          * @param session the session.
          * @param buffer the byte buffer.
          * @param opcode the opcode.
@@ -156,7 +163,6 @@ class LoginReadEvent
          */
         @JvmStatic
         fun getISAACSeed(buffer: ByteBuffer): IntArray {
-            SystemLogger.logInfo("getISAACSeed")
             val seed = IntArray(4)
             for (i in 0..3) {
                 seed[i] = buffer.int
