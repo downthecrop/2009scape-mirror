@@ -203,7 +203,6 @@ public final class LoginConfiguration {
      * @param player the player.
      */
     public static final void config(final Player player) {
-        SystemLogger.logInfo("configuring player " + player.getUsername());
         player.getInventory().refresh();
         player.getEquipment().refresh();
         player.getSkills().refresh();
@@ -222,7 +221,6 @@ public final class LoginConfiguration {
         player.getInterfaceManager().close();
         player.getEmoteManager().refresh();
         player.getInterfaceManager().openInfoBars();
-        SystemLogger.logInfo("finished configuring player " + player.getUsername());
     }
 
     /**
