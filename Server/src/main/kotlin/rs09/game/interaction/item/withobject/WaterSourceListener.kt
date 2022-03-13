@@ -78,7 +78,8 @@ class WaterSourceListener : InteractionListener() {
         BUCKET(
                 inputs = intArrayOf(Items.BUCKET_1925),
                 output = Items.BUCKET_OF_WATER_1929,
-                wellable = true
+                wellable = true,
+                autofill = true
         ),
         VIAL(
                 inputs = intArrayOf(Items.VIAL_229),
@@ -92,11 +93,6 @@ class WaterSourceListener : InteractionListener() {
         BOWL(
                 inputs = intArrayOf(Items.BOWL_1923),
                 output = Items.BOWL_OF_WATER_1921
-        ),
-        CLAY(
-                inputs = intArrayOf(Items.CLAY_434),
-                output = Items.SOFT_CLAY_1761,
-                fillMsg = "You mix the clay and water. You now have some soft, workable clay."
         ),
         WATERING_CAN(
                 inputs = intArrayOf(Items.WATERING_CAN_5331,Items.WATERING_CAN1_5333, Items.WATERING_CAN2_5334, Items.WATERING_CAN3_5335, Items.WATERING_CAN4_5336, Items.WATERING_CAN5_5337, Items.WATERING_CAN6_5338, Items.WATERING_CAN7_5339),
