@@ -47,3 +47,5 @@ Management-Server/managementprops/
 **/*.swp
 **/*.swo
 build/kotlin/sessions/
+
+build/kotlin/sessions/
