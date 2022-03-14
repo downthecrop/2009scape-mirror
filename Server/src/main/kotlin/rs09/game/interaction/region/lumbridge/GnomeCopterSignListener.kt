@@ -4,6 +4,10 @@ import api.sendMessage
 import org.rs09.consts.Scenery
 import rs09.game.interaction.InteractionListener
 
+/**
+ * @author bushtail
+ */
+
 class GnomeCopterSignListener : InteractionListener() {
     val SIGN = Scenery.ADVERTISEMENT_30037
     override fun defineListeners() {
