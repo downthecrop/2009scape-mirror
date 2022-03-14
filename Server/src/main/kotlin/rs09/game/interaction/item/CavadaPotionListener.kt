@@ -1,7 +1,6 @@
 package rs09.game.interaction.`object`
 
 import api.sendItemDialogue
-import core.plugin.Initializable
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 
