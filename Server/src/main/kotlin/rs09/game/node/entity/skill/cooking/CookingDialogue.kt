@@ -3,20 +3,28 @@ package rs09.game.node.entity.skill.cooking
 import api.*
 import core.cache.def.impl.ItemDefinition
 import core.game.node.scenery.Scenery
-import core.game.node.entity.player.link.RunScript
 import core.game.node.entity.skill.cooking.CookableItems
 import core.game.node.entity.skill.cooking.CookingRewrite.Companion.cook
+import core.game.node.item.Item
 import core.net.packet.PacketRepository
 import core.net.packet.context.ChildPositionContext
 import core.net.packet.out.RepositionChild
+import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
+import rs09.game.content.dialogue.SkillDialogueHandler
 import rs09.tools.START_DIALOGUE
+
+/**
+ * @author Ceikry
+ * @author bushtail - fixing it up
+ */
 
 class CookingDialogue(vararg val args: Any) : DialogueFile(){
     var initial = 0
     var product = 0
     var `object`: Scenery? = null
     var sinew = false
+    var itemid = 0
     override fun handle(componentID: Int, buttonID: Int) {
         when(stage){
             START_DIALOGUE -> {
@@ -30,14 +38,14 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
                         }
                         `object` = args.get(1) as Scenery
                     }
-                    4 -> {
+                    5 -> {
                         initial = args.get(0) as Int
                         product = args.get(1) as Int
                         sinew = args.get(2) as Boolean
                         `object` = args.get(3) as Scenery
+                        itemid = args.get(4) as Int
                         if (sinew) {
-                            player!!.dialogueInterpreter.sendOptions(
-                                "Select one",
+                            options(
                                 "Dry the meat into sinew",
                                 "Cook the meat"
                             )
@@ -54,9 +62,16 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
                 val amount = getAmount(buttonID)
                 when (amount) {
                     -1 -> {
-                        sendInputDialogue(player!!, true, "Enter the amount:"){value ->
-                            cook(player!!, `object`, initial, product, value as Int)
-                        }
+                        val handler: SkillDialogueHandler =
+                            object : SkillDialogueHandler(player!!, SkillDialogue.ONE_OPTION, Item(product)) {
+                                override fun create(amount: Int, index: Int) {
+                                    cook(player, `object`, initial, product, amount)
+                                }
+                                override fun getAll(index: Int) : Int {
+                                    return getAmount(amountInInventory(player, initial))
+                                }
+                            }
+                        handler.open()
                     }
                     else -> {
                         end()
@@ -67,10 +82,29 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
 
             100 -> {
                 when (buttonID) {
-                    1 -> cook(player!!, `object`, initial, product, 1)
+                    1 -> {
+                        val handler: SkillDialogueHandler =
+                            object : SkillDialogueHandler(player!!, SkillDialogue.ONE_OPTION, Item(Items.SINEW_9436)) {
+                                override fun create(amount: Int, index: Int) {
+                                    cook(player, `object`, initial, Items.SINEW_9436, amount)
+                                }
+                                override fun getAll(index: Int) : Int {
+                                    return getAmount(amountInInventory(player, initial))
+                                }
+                            }
+                        handler.open()
+                    }
                     2 -> {
-                        product = CookableItems.forId(initial).cooked
-                        display()
+                        val handler: SkillDialogueHandler =
+                            object : SkillDialogueHandler(player!!, SkillDialogue.ONE_OPTION, Item(CookableItems.forId(itemid).cooked)) {
+                                override fun create(amount: Int, index: Int) {
+                                    cook(player, `object`, initial, CookableItems.forId(itemid).cooked, amount)
+                                }
+                                override fun getAll(index: Int) : Int {
+                                    return getAmount(amountInInventory(player, itemid))
+                                }
+                            }
+                        handler.open()
                     }
                 }
             }

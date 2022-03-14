@@ -1,17 +1,22 @@
 package core.game.node.entity.skill.cooking
 
+import api.*
 import core.game.node.scenery.Scenery
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
 import org.rs09.consts.Items
 import org.rs09.consts.Items.BREAD_DOUGH_2307
+import org.rs09.consts.Items.RAW_BEAR_MEAT_2136
 import org.rs09.consts.Items.RAW_BEEF_2132
 import org.rs09.consts.Items.SEAWEED_401
 import org.rs09.consts.Items.UNCOOKED_CAKE_1889
 import rs09.game.interaction.InteractionListener
 import rs09.game.node.entity.skill.cooking.CookingDialogue
 
-//author: Ceik
+/**
+ * @author Ceikry
+ * @author bushtail - added bear meat for sinew making
+ */
 class CookingRewrite : InteractionListener() {
 
     val RAW_FOODS: IntArray
@@ -20,6 +25,7 @@ class CookingRewrite : InteractionListener() {
         val list = CookableItems.values().map { it.raw }.toMutableList()
         list.add(Items.COOKED_MEAT_2142)
         list.add(RAW_BEEF_2132)
+        list.add(RAW_BEAR_MEAT_2136)
         list.add(SEAWEED_401)
         RAW_FOODS = list.toIntArray()
     }
@@ -31,8 +37,8 @@ class CookingRewrite : InteractionListener() {
             val obj = with.asScenery()
             val range = obj.name.toLowerCase().contains("range")
             when (item.id) {
-                RAW_BEEF_2132 -> if (range) {
-                    player.dialogueInterpreter.open(CookingDialogue(item.id,9436,true,obj))
+                RAW_BEEF_2132, RAW_BEAR_MEAT_2136 -> if (range) {
+                    player.dialogueInterpreter.open(CookingDialogue(item.id,9436,true,obj,item.id))
                     return@onUseWith true
                 }
                 BREAD_DOUGH_2307, UNCOOKED_CAKE_1889 -> if (!range) {
