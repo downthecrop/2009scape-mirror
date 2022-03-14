@@ -2,15 +2,16 @@ package rs09.game.interaction.`object`
 
 import api.sendItemDialogue
 import core.plugin.Initializable
+import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
 
 /**
  * @author bushtail
  */
-@Initializable
+
 class CavadaPotionListener : InteractionListener() {
 
-    var POTION = 756
+    var POTION = Items.CADAVA_POTION_756
 
     override fun defineListeners() {
         on(POTION, ITEM, "drink") { player, node ->
