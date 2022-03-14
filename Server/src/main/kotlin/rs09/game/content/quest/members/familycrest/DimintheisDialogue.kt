@@ -1,21 +1,21 @@
-package plugin.quest.members.familycrest
+package rs09.game.content.quest.members.familycrest
 
 
 import core.game.content.dialogue.DialoguePlugin
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
+import org.rs09.consts.Items
+import org.rs09.consts.NPCs
 
-
-
+/**
+ * Handles DimintheisDialogue Dialogue
+ * @author Plex - Original author
+ * @author bushtail - Gauntlet-related maintenance
+ */
 
 @Initializable
-/**
-* Handles DimintheisDialogue Dialogue
-* @author Plex
-*/
 class DimintheisDialogue(player: Player? = null): DialoguePlugin(player) {
     override fun newInstance(player: Player?): DialoguePlugin {
         return DimintheisDialogue(player)
@@ -26,19 +26,19 @@ class DimintheisDialogue(player: Player? = null): DialoguePlugin(player) {
         npc = (args[0] as NPC).getShownNPC(player)
         val qstage = player?.questRepository?.getStage("Family Crest") ?: -1
 
-        if(qstage == 100 && !DoMissingGuantletCheck()){
+        if(qstage == 100 && DoMissingGauntletCheck()){
             npc("Thank you for saving our family honour,  ",
                     "We will never forget you")
             stage = 1000
             return true
         }
 
-        if(qstage == 100 && DoMissingGuantletCheck()){
-            player("I've lost the guantlets you gave me")
+        if(qstage == 100 && !DoMissingGauntletCheck()){
+            player("I've lost the gauntlets you gave me")
             stage = 6000
         }
 
-        if(qstage == 20 && player.inventory.containItems(782)){
+        if(qstage == 20 && player.inventory.containItems(Items.FAMILY_CREST_782)){
             player("I have retrieved your crest.").also{stage = 5000}
             return true;
         }
@@ -183,8 +183,8 @@ class DimintheisDialogue(player: Player? = null): DialoguePlugin(player) {
         return true;
     }
 
-    private fun DoMissingGuantletCheck(): Boolean{
-        var itemsToCheck = listOf(775, 776, 777, 778)
+    private fun DoMissingGauntletCheck(): Boolean{
+        var itemsToCheck = listOf(Items.COOKING_GAUNTLETS_775, Items.GOLDSMITH_GAUNTLETS_776, Items.CHAOS_GAUNTLETS_777, Items.FAMILY_GAUNTLETS_778)
         for(item in itemsToCheck){
             if(player.inventory.containItems(item))
                 return true
@@ -194,7 +194,7 @@ class DimintheisDialogue(player: Player? = null): DialoguePlugin(player) {
         return false
     }
     override fun getIds(): IntArray {
-        return intArrayOf(8171)
+        return intArrayOf(NPCs.DIMINTHEIS_8171)
     }
 
 }
