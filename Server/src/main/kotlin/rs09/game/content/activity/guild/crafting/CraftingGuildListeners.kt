@@ -5,6 +5,7 @@ import core.game.content.global.action.DoorActionHandler
 import core.game.node.entity.skill.Skills
 import core.game.world.map.Location
 import org.rs09.consts.Items
+import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.region.craftingguild.TheDoorDialogues
 import rs09.game.interaction.InteractionListener
 
@@ -13,7 +14,7 @@ import rs09.game.interaction.InteractionListener
  */
 
 class CraftingGuildListeners : InteractionListener() {
-    private val GUILD_DOOR = 2647
+    private val GUILD_DOOR = Scenery.GUILD_DOOR_2647
     private val APRON = Items.BROWN_APRON_1757
     private val CAPE = Items.CRAFTING_CAPE_9780
 
