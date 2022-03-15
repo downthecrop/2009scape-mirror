@@ -179,7 +179,7 @@ class Adventurer(val style: CombatStyle): Script() {
             State.LOOT -> {
                 val items = AIRepository.groundItems[bot]
                 if (items?.isNotEmpty() == true && !bot.inventory.isFull) {
-                    items.forEach {
+                    items.toTypedArray().forEach {
                         scriptAPI.takeNearestGroundItem(it.id)
                     }
                     return

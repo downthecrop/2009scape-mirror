@@ -51,18 +51,6 @@ public final class CowNPC extends AbstractNPC {
 	}
 
 	@Override
-	public void finalizeDeath(final Entity killer) {
-		super.finalizeDeath(killer);
-		if (killer != null) {
-			Player player = killer.asPlayer();
-			// Obtain a cow-hide from a cow in the field north-east of<br><br>Lumbridge
-			if (player.getViewport().getRegion().getId() == 12850 || player.getViewport().getRegion().getId() == 12851) {
-				player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 1, 1);
-			}
-		}
-	}
-
-	@Override
 	public int[] getIds() {
 		return new int[] { 81, 397, 955, 1766, 1767, 3309 };
 	}

@@ -1,14 +1,14 @@
 package rs09.game.node.entity.skill.cooking
 
-import api.*
+import api.sendInputDialogue
 import core.cache.def.impl.ItemDefinition
-import core.game.node.scenery.Scenery
-import core.game.node.entity.player.link.RunScript
 import core.game.node.entity.skill.cooking.CookableItems
 import core.game.node.entity.skill.cooking.CookingRewrite.Companion.cook
+import core.game.node.scenery.Scenery
 import core.net.packet.PacketRepository
 import core.net.packet.context.ChildPositionContext
 import core.net.packet.out.RepositionChild
+import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
 import rs09.tools.START_DIALOGUE
 
@@ -16,7 +16,6 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
     var initial = 0
     var product = 0
     var `object`: Scenery? = null
-    var sinew = false
     override fun handle(componentID: Int, buttonID: Int) {
         when(stage){
             START_DIALOGUE -> {
@@ -30,12 +29,11 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
                         }
                         `object` = args.get(1) as Scenery
                     }
-                    4 -> {
-                        initial = args.get(0) as Int
-                        product = args.get(1) as Int
-                        sinew = args.get(2) as Boolean
-                        `object` = args.get(3) as Scenery
-                        if (sinew) {
+                    3 -> {
+                        initial = args[0] as Int
+                        product = args[1] as Int
+                        `object` = args[2] as Scenery
+                        if (product == Items.SINEW_9436) {
                             player!!.dialogueInterpreter.sendOptions(
                                 "Select one",
                                 "Dry the meat into sinew",
@@ -67,7 +65,7 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
 
             100 -> {
                 when (buttonID) {
-                    1 -> cook(player!!, `object`, initial, product, 1)
+                    1 -> display()
                     2 -> {
                         product = CookableItems.forId(initial).cooked
                         display()
@@ -91,8 +89,8 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
         player!!.interfaceManager.openChatbox(307)
         PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 3, 60, 90))
         PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 2, 208, 20))
-        player!!.packetDispatch.sendItemZoomOnInterface(product, 160, 307, 2)
-        player!!.packetDispatch.sendString(ItemDefinition.forId(product).name, 307, 3)
+        player!!.packetDispatch.sendItemZoomOnInterface(initial, 160, 307, 2)
+        player!!.packetDispatch.sendString(ItemDefinition.forId(initial).name, 307, 3)
         stage = 1
     }
 

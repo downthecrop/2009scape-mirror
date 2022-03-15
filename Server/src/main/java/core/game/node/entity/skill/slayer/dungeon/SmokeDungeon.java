@@ -2,7 +2,7 @@ package core.game.node.entity.skill.slayer.dungeon;
 
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.Component;
-import core.game.node.entity.skill.slayer.SlayerEquipmentFlags;
+import rs09.game.node.entity.skill.slayer.SlayerEquipmentFlags;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.Entity;

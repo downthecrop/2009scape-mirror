@@ -1,5 +1,6 @@
 package core.game.node.entity.npc;
 
+import api.events.NPCKillEvent;
 import core.cache.def.impl.NPCDefinition;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.global.shop.Shop;
@@ -527,12 +528,6 @@ public class NPC extends Entity {
 		if (getZoneMonitor().handleDeath(killer)) {
 			return;
 		}
-		if (task != null && killer instanceof Player && ((Player) killer).getSlayer().getTask() == task && ((Player) killer).getSlayer().hasTask()) {
-			((Player) killer).getSlayer().finalizeDeath(killer.asPlayer(), this);
-		}
-		if (killer instanceof Player && killer.getAttribute("jobs:id",null) != null) {
-			JobManager.handleDeath(id,(Player) killer);
-		}
 		setRespawnTick(GameWorld.getTicks() + definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));
 		Player p = !(killer instanceof Player) ? null : (Player) killer;
 		if (p != null) {
@@ -543,6 +538,7 @@ public class NPC extends Entity {
 		if (!isRespawn()) {
 			clear();
 		}
+		killer.dispatch(new NPCKillEvent(this));
 	}
 
 	/**

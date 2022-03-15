@@ -43,7 +43,7 @@ public final class KuraskNPC extends AbstractNPC {
 		boolean effective = false;
 		if (state.getAttacker() instanceof Player) {
 			final Player player = (Player) state.getAttacker();
-			effective = new SlayerUtils(player).hasBroadWeaponEquipped(state);
+			effective = SlayerUtils.hasBroadWeaponEquipped(player, state);
 		}
 		if (!effective) {
 			state.setEstimatedHit(0);

@@ -3,7 +3,7 @@ package core.game.ge;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 import core.tools.StringUtils;
-import rs09.game.ge.OfferManager;
+import rs09.game.ge.GrandExchange;
 
 /**
  * Represents the glass used to open the guide prices for the different type of
@@ -140,7 +140,7 @@ public final class GEGuidePrice {
 				player.getPacketDispatch().sendInterfaceConfig(642, i, false);
 			}
 			for (GuideItem item : getItems()) {
-				player.getPacketDispatch().sendString("" + OfferManager.getRecommendedPrice(item.item, false) + " gp", COMPONENT.getId(), item.getChildData()[0]);
+				player.getPacketDispatch().sendString("" + GrandExchange.getRecommendedPrice(item.item, false) + " gp", COMPONENT.getId(), item.getChildData()[0]);
 			}
 		}
 	}

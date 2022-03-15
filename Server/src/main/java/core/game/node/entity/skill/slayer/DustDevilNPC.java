@@ -11,6 +11,7 @@ import rs09.game.node.entity.combat.handlers.MeleeSwingHandler;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
+import rs09.game.node.entity.skill.slayer.SlayerEquipmentFlags;
 
 /**
  * Handles the dust devil npc.

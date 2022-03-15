@@ -12,6 +12,8 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.plugin.Plugin;
+import rs09.game.interaction.inter.ge.ExchangeItemSets;
+import rs09.game.interaction.inter.ge.StockMarket;
 
 /**
  * Represents the plugin used for grand exchange npc and object options.
@@ -56,17 +58,17 @@ public final class GrandExchangePlugin extends OptionHandler {
 				player.getDialogueInterpreter().sendDialogue("The Grand Exchange desk seems to be closed...");
 				break;
 			}
-			player.getPlayerGrandExchange().open();
+			StockMarket.openFor(player);
 			break;
 		case "history":
-			player.getPlayerGrandExchange().openHistoryLog(player);
+			player.getExchangeRecords().openHistoryLog(player);
 			break;
 		case "collect":
 			if (!GrandExchangeDatabase.hasInitialized()) {
 				player.getDialogueInterpreter().sendDialogue("The Grand Exchange desk seems to be closed...");
 				break;
 			}
-			player.getPlayerGrandExchange().openCollectionBox();
+			player.getExchangeRecords().openCollectionBox();
 			break;
 		case "info-logs":
 			GEGuidePrice.open(player, GuideType.LOGS);
@@ -84,7 +86,7 @@ public final class GrandExchangePlugin extends OptionHandler {
 			GEGuidePrice.open(player, GuideType.WEAPONS_AND_ARMOUR);
 			break;
 		case "sets":
-			player.getPlayerGrandExchange().openItemSets();
+			ExchangeItemSets.openFor(player);
 			break;
 		}
 		return true;
@@ -137,7 +139,7 @@ public final class GrandExchangePlugin extends OptionHandler {
 				player.getBank().open();
 				break;
 			case "collect":
-				player.getPlayerGrandExchange().openCollectionBox();
+				player.getExchangeRecords().openCollectionBox();
 				break;
 			}
 			return true;

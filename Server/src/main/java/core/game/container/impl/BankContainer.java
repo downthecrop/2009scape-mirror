@@ -130,7 +130,7 @@ public final class BankContainer extends Container {
 			BankContainer.this.close();
 			return true;
 		});
-		this.player.getBank().refresh(player.getBank().listener);
+		refresh(listener);
 		player.getInterfaceManager().openSingleTab(new Component(763));
 		player.getInventory().getListeners().add(player.getBank().listener);
 		player.getInventory().refresh();

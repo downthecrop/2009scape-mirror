@@ -1,6 +1,7 @@
 package rs09.game.system.command.sets
 
 import api.*
+import api.InputType
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
@@ -24,13 +25,15 @@ import org.rs09.consts.Components
 import rs09.ServerConstants
 import rs09.game.content.activity.fishingtrawler.TrawlerLoot
 import rs09.game.content.ame.RandomEvents
-import rs09.game.ge.OfferManager
 import rs09.game.node.entity.state.newsys.states.FarmingState
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Command
 import rs09.game.system.command.CommandMapping
 import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
+import java.awt.Toolkit
+import java.awt.datatransfer.StringSelection
+import java.util.*
 
 @Initializable
 class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
@@ -72,6 +75,9 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             SystemLogger.logInfo("Viewport: " + l.getSceneX(player.playerFlags.lastSceneGraph) + "," + l.getSceneY(player.playerFlags.lastSceneGraph))
             val loc = "Location.create(" + l.x + ", " + l.y + ", " + l.z + ")"
             SystemLogger.logInfo(loc + "; " + player.playerFlags.lastSceneGraph + ", " + l.localX + ", " + l.localY)
+            val stringSelection = StringSelection(loc)
+            val clpbrd = Toolkit.getDefaultToolkit().systemClipboard
+            clpbrd.setContents(stringSelection, null)
         }
 
         /**
@@ -281,6 +287,10 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 first = false
             }
 
+            val stringSelection = StringSelection(sb.toString())
+            val clpbrd = Toolkit.getDefaultToolkit().systemClipboard
+            clpbrd.setContents(stringSelection, null)
+
             log.clear()
             player.setAttribute("loc-log",log)
         }
@@ -447,8 +457,13 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         }
 
         define("testlady",Command.Privilege.ADMIN){player,_ ->
-            player.antiMacroHandler.event = RandomEvents.EVIL_CHICKEN.npc.create(player,null,"sexam")
+            player.antiMacroHandler.event = RandomEvents.RIVER_TROLL.npc.create(player)
             player.antiMacroHandler.event!!.init()
+        }
+
+        define("revent",Command.Privilege.ADMIN){player,_ ->
+            println(player.pulseManager.current)
+            player.antiMacroHandler.fireEvent()
         }
 
         define("addcredits",Command.Privilege.ADMIN){player,_ ->
@@ -512,7 +527,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
 
     fun showGeSell(player: Player){
         val offers = HashMap<Int,Int>()
-        for (offerIDs in OfferManager.OFFERS_BY_ITEMID) {
+/*        for (offerIDs in OfferManager.OFFERS_BY_ITEMID) {
             var totalOffered = 0
             for (offer in offerIDs.value) {
                 if (offer.offerState != OfferState.PENDING && offer.sell) {
@@ -522,8 +537,8 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             if (totalOffered != 0) {
                 offers[offerIDs.key] = totalOffered
             }
-        }
-        for (offerIDs in OfferManager.BOT_OFFERS) {
+        }*/
+/*        for (offerIDs in OfferManager.BOT_OFFERS) {
             if (offerIDs.value > 0) {
                 if (offers[offerIDs.key] == null) {
                     offers[offerIDs.key] = offerIDs.value
@@ -531,7 +546,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                     offers[offerIDs.key] = offers[offerIDs.key]!! + offerIDs.value
                 }
             }
-        }
+        }*/
 
         val offerList = offers.keys.map { "${ItemDefinition.forId(it).name} - ${offers[it]}" }.sorted()
 
@@ -549,7 +564,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
 
     fun showGeBuy(player: Player){
         val offers = HashMap<Int,Int>()
-        for (offerIDs in OfferManager.OFFERS_BY_ITEMID) {
+/*        for (offerIDs in OfferManager.OFFERS_BY_ITEMID) {
             var totalOffered = 0
             for (offer in offerIDs.value) {
                 if (offer.offerState != OfferState.PENDING && !offer.sell) {
@@ -559,7 +574,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             if (totalOffered != 0) {
                 offers[offerIDs.key] = totalOffered
             }
-        }
+        }*/
         val offerList = offers.keys.map { "${itemDefinition(it).name} - ${offers[it]}" }.sorted()
 
         var lineId = 11
@@ -577,7 +592,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
     fun showOffers(player: Player, searchTerm: String){
         val fakeOffers = ArrayList<FakeOffer>()
 
-        OfferManager.OFFERS_BY_ITEMID.forEach { (id, offers) ->
+/*        OfferManager.OFFERS_BY_ITEMID.forEach { (id, offers) ->
             if(searchTerm.toLowerCase().contains(itemDefinition(id).name.toLowerCase()) || itemDefinition(id).name.toLowerCase().contains(searchTerm.toLowerCase())){
                 offers.forEach {
                     fakeOffers.add(FakeOffer(it.sell, itemDefinition(id).name, it.amount))
@@ -589,7 +604,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             val name = getItemName(id)
             if(searchTerm.toLowerCase().contains(name) || name.toLowerCase().contains(searchTerm.toLowerCase()))
                 fakeOffers.add(FakeOffer(true, getItemName(id), amount))
-        }
+        }*/
 
         val buyingList = fakeOffers.filter { !it.sell }
         val sellingList = fakeOffers.filter { it.sell }

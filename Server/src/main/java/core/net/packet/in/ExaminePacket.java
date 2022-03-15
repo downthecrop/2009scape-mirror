@@ -33,6 +33,9 @@ public final class ExaminePacket implements IncomingPacket {
 			player.debug("Object id: " + id + ", models: " + (d.getModelIds() != null ? Arrays.toString(d.getModelIds()) : null) + ", anim: " + d.animationId + ", config: " + (d.getVarbitID() != -1 ? d.getVarbitID() + " (file)" : d.getConfigId()) + ".");
 			player.debug("Varp config index: " + VarbitDefinition.forObjectID(d.getVarbitID()).getConfigId());
 			player.getPacketDispatch().sendMessage(""+name+"");
+			/*if {
+				Toolkit.getDefaultToolkit().getSystemClipboard().setContents(new StringSelection("LandscapeParser.removeGameObject(new GameObject("+coords+"));//"+ d.getName() ), null);
+			}*/
 			break;
 		case 235:
 		case 92: // Item examine
