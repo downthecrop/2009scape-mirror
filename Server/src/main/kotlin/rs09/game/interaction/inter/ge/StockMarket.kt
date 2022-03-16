@@ -31,6 +31,7 @@ class StockMarket : InterfaceListener() {
             player.packetDispatch.sendInterfaceConfig(105, 193, true)
             player.packetDispatch.sendAccessMask(6, 211, 105, -1, -1)
             player.packetDispatch.sendAccessMask(6, 209, 105, -1, -1)
+            player.varpManager.get(1112).setVarbit(0, -1).send(player)
             return@onOpen true
         }
 
@@ -95,7 +96,10 @@ class StockMarket : InterfaceListener() {
 
             when(button)
             {
-                209,211 -> if (openedOffer == null) return@on false else withdraw(player, openedOffer, (button - 209) shr 1)
+                209,211 -> if (openedOffer == null){
+                    SystemLogger.logGE("[WARN] Player tried to withdraw item with null openedOffer!")
+                    return@on false
+                } else withdraw(player, openedOffer, (button - 209) shr 1)
                 190 -> confirmOffer(player, tempOffer, openedIndex).also { return@on true }
                 194 -> player.interfaceManager.openChatbox(Components.OBJDIALOG_389)
                 203 -> abortOffer(player, openedOffer)

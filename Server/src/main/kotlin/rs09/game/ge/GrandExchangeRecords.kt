@@ -27,6 +27,7 @@ import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.rs09.consts.Components
 import org.rs09.consts.Items
+import rs09.game.ai.AIPlayer
 import rs09.game.system.SystemLogger
 import java.text.DecimalFormat
 import java.text.NumberFormat
@@ -135,36 +136,46 @@ class GrandExchangeRecords(private val player: Player) {
     }
 
     fun parse(geData: JSONObject) {
-        val recordsRaw = geData["offers"]
+        /**
+         * Read offers from the database
+         */
+        val conn = GEDB.connect()
+        val stmt = conn.createStatement()
+        val offer_records = stmt.executeQuery("SELECT * from player_offers where player_uid = ${player.details.uid} AND offer_state < 6")
 
-        if(recordsRaw != null)
-        {
-            val recordsJSON = recordsRaw as JSONArray
+        val needsIndex = ArrayDeque<GrandExchangeOffer>()
 
-            for((index,recordRaw) in recordsJSON.withIndex())
-            {
-                val record = recordRaw as JSONObject
-                val recordIndex = record["index"].toString().toInt()
-                val recordUid = record["uid"].toString().toLong()
-                offerRecords[index] = OfferRecord(recordUid,recordIndex)
-            }
+        while (offer_records.next()) {
+            val offer = GrandExchangeOffer.fromQuery(offer_records)
+            if (offer.index == -1) //used to index old (converted from JSON) offers
+                needsIndex.push(offer)
+            else
+                offerRecords[offer.index] = OfferRecord(offer.uid, offer.index)
         }
-        else //offer records null, as a safety fallback just get all offers belonging to this player and reindex
-        {
-            val conn = GEDB.connect()
-            val stmt = conn.createStatement()
-            val offer_records = stmt.executeQuery("SELECT * from player_offers where player_uid = ${player.details.uid} AND offer_state < 6")
 
-            var index = 0
-            while(offer_records.next())
+        if (needsIndex.isNotEmpty()) {
+            for ((index, offer) in offerRecords.withIndex()) {
+                if (offer == null) {
+                    val o = needsIndex.pop()
+                    o.index = index
+                    offerRecords[o.index] = OfferRecord(o.uid, o.index)
+                    o.update() //write the new index to the database
+                }
+            }
+
+            while(needsIndex.isNotEmpty()) //If we enter this loop, there were more offers than can fit inside the 6 slots. This should never happen - at least, not anymore. Can't speak for JSON offers.
             {
-                val offer = GrandExchangeOffer.fromQuery(offer_records)
-                offerRecords[index] = OfferRecord(offer.uid, index++)
+                val o = needsIndex.pop()
+                SystemLogger.logGE("[WARN] PLAYER HAD EXTRA OFFER - RECOMMEND IMMEDIATE REFUND OF CONTENTS -> OFFER UID: ${o.uid}")
+                SystemLogger.logGE("[WARN] AS PER ABOVE MESSAGE, REFUND CONTENTS OF OFFER AND MANUALLY SET offer_state = 6")
             }
         }
 
         visualizeRecords()
 
+        /**
+         * Parse history from JSON
+         */
         val historyRaw = geData["history"]
         if(historyRaw != null){
             val history = historyRaw as JSONArray

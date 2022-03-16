@@ -1,5 +1,7 @@
 package core.game.container.impl;
 
+import core.game.component.CloseEvent;
+import core.game.container.access.InterfaceContainer;
 import rs09.ServerConstants;
 import core.game.component.Component;
 import core.game.container.*;
@@ -79,6 +81,18 @@ public final class BankContainer extends Container {
 		super(SIZE, ContainerType.ALWAYS_STACK, SortType.HASH);
 		super.register(listener = new BankListener(player));
 		this.player = player;
+	}
+
+	/**
+	 * Method used to open the deposit box.
+	 */
+	public void openDepositBox() {
+		player.getInterfaceManager().open(new Component(11)).setCloseEvent((player, c) -> {
+			player.getInterfaceManager().openDefaultTabs();
+			return true;
+		});
+		player.getInterfaceManager().hideTabs(0, 1, 2, 3, 4, 5, 6);
+		InterfaceContainer.generateItems(player, player.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1"}, 11, 15, 5, 7);
 	}
 
 	/**

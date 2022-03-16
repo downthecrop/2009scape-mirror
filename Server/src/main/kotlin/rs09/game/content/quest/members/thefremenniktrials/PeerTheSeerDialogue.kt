@@ -8,7 +8,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable
 import core.tools.RandomFunction
-import rs09.game.content.dialogue.DumpContainer
 import kotlin.random.Random
 
 @Initializable

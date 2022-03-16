@@ -105,14 +105,14 @@ class GrandExchangeOffer() {
         }
         else
         {
-            val stmt = conn.prepareStatement("UPDATE player_offers SET amount_complete = ?, offer_state = ?, total_coin_xc = ?, withdraw_items = ? WHERE uid = ?")
+            val stmt = conn.prepareStatement("UPDATE player_offers SET amount_complete = ?, offer_state = ?, total_coin_xc = ?, withdraw_items = ?, slot_index = ? WHERE uid = ?")
             stmt.setInt(1, completedAmount)
             stmt.setInt(2, offerState.ordinal)
             stmt.setInt(3, totalCoinExchange)
             stmt.setString(4, encodeWithdraw())
-            stmt.setLong(5, uid)
+            stmt.setInt(5, index)
+            stmt.setLong(6, uid)
             stmt.executeUpdate()
-            visualize(player)
         }
     }
 
@@ -138,8 +138,8 @@ class GrandExchangeOffer() {
         else
         {
             val stmt = conn.createStatement()
-            stmt.executeUpdate("INSERT INTO player_offers(player_uid, item_id, amount_total, offered_value, time_stamp, offer_state, is_sale) " +
-                    "values($playerUID,$itemID,$amount,$offeredValue,${System.currentTimeMillis()},${offerState.ordinal},${if(sell) 1 else 0})")
+            stmt.executeUpdate("INSERT INTO player_offers(player_uid, item_id, amount_total, offered_value, time_stamp, offer_state, is_sale, slot_index) " +
+                    "values($playerUID,$itemID,$amount,$offeredValue,${System.currentTimeMillis()},${offerState.ordinal},${if(sell) 1 else 0}, $index)")
             val nowuid = stmt.executeQuery("SELECT last_insert_rowid()")
             uid = nowuid.getLong(1)
             visualize(player)
@@ -202,6 +202,7 @@ class GrandExchangeOffer() {
 
             o.totalCoinExchange = result.getInt("total_coin_xc")
             o.playerUID = result.getInt("player_uid")
+            o.index = result.getInt("slot_index")
 
             if(Repository.uid_map[o.playerUID] != null)
                 o.player = Repository.uid_map[o.playerUID]

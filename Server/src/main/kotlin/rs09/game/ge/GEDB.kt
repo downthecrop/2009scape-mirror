@@ -78,6 +78,7 @@ object GEDB {
                         "offer_state     INTEGER," +
                         "is_sale         INTEGER," +
                         "withdraw_items  STRING ," +
+                        "slot_index      INTEGER," +
                         "total_coin_xc   INTEGER)"
         )
 
@@ -113,7 +114,7 @@ object GEDB {
 
                 for (offer in offers) {
                     val o = offer as JSONObject
-                    statement.execute("insert into player_offers(player_uid,item_id,amount_total,amount_complete,offered_value,time_stamp,offer_state,is_sale,withdraw_items,total_coin_xc) " +
+                    statement.execute("insert into player_offers(player_uid,item_id,amount_total,amount_complete,offered_value,time_stamp,offer_state,is_sale,withdraw_items,total_coin_xc,slot_index) " +
                             "values(" +
                             "${o["playerUID"]}," +
                             "${o["itemId"]}," +
@@ -124,7 +125,8 @@ object GEDB {
                             "${o["offerState"]}," +
                             "${if (o["sale"] as Boolean) 1 else 0}," +
                             "'" + convertJsonArray(o["withdrawItems"] as JSONArray) + "'," +
-                            "${o["totalCoinExchange"]})"
+                            "${o["totalCoinExchange"]}," +
+                            "-1)"
                     )
 
                 }

@@ -443,17 +443,9 @@ public class NPC extends Entity {
 					if(walkRadius == 0)
 						walkRadius = 3;
 				}
-				getPulseManager().run(new MovementPulse(this, getProperties().getSpawnLocation(), Pathfinder.SMART) {
-					@Override
-					public boolean pulse() {
-						return true;
-					}
-				}, "movement");
 				if (aggressiveHandler != null) {
 					aggressiveHandler.setPauseTicks(walkRadius + 1);
 				}
-				nextWalk = GameWorld.getTicks() + walkRadius + 1;
-				return;
 			}
 			if (aggressive && aggressiveHandler != null && aggressiveHandler.selectTarget()) {
 				return;
@@ -713,7 +705,19 @@ public class NPC extends Entity {
 	 */
 	protected Location getMovementDestination() {
 		if (!pathBoundMovement || movementPath == null || movementPath.length < 1) {
-			return getProperties().getSpawnLocation().transform(-5 + RandomFunction.random(getWalkRadius()), -5 + RandomFunction.random(getWalkRadius()), 0);
+			Location returnToSpawnLocation = getProperties().getSpawnLocation().transform(-5 + RandomFunction.random(getWalkRadius()), -5 + RandomFunction.random(getWalkRadius()), 0);
+			int dist = (int) Location.getDistance(location, returnToSpawnLocation);
+			int pathLimit = 15;
+			if(dist > pathLimit || dist < -pathLimit)
+			{
+				int diffX = returnToSpawnLocation.getX() - location.getX();
+				int diffY = returnToSpawnLocation.getY() - location.getY();
+				returnToSpawnLocation = location.transform(
+						Math.min(Math.max(-pathLimit, diffX), pathLimit), //Try to path no more than pathLimit and no less than -pathLimit tiles away in the X and Y directions
+						Math.min(Math.max(-pathLimit, diffY), pathLimit),
+						0);
+			}
+			return returnToSpawnLocation;
 		}
 		Location l = movementPath[movementIndex++];
 		if (movementIndex == movementPath.length) {

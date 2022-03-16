@@ -107,9 +107,9 @@ object GrandExchange : CallBack {
 
     @JvmStatic
     fun getRecommendedPrice(itemID: Int, from_bot: Boolean = false): Int {
-        val base = max(GrandExchangeDatabase.getDatabase()[itemID]?.value ?: 0, getItemDefPrice(itemID))
-        return if(from_bot) (base + (base * 0.1).toInt())
-        else base
+        var base = max(GrandExchangeDatabase.getDatabase()[itemID]?.value ?: 0, getItemDefPrice(itemID))
+        if (from_bot) base = (max(BotPrices.getPrice(itemID), base) * 1.10).toInt()
+        return base
     }
 
     private fun getItemDefPrice(itemID: Int): Int {
@@ -256,6 +256,38 @@ object GrandExchange : CallBack {
         val buyerPlayer = Repository.uid_map[buyer.playerUID]
         buyerPlayer?.exchangeRecords?.visualizeRecords()
     }
+
+    fun getValidOffers(): List<GrandExchangeOffer>
+    {
+        val conn = GEDB.connect()
+        val stmt = conn.createStatement()
+        val offers = ArrayList<GrandExchangeOffer>()
+
+        val results = stmt.executeQuery("SELECT * FROM player_offers WHERE offer_state < 4 AND NOT offer_state = 2")
+        while(results.next())
+        {
+            val o = GrandExchangeOffer.fromQuery(results)
+            offers.add(o)
+        }
+        return offers
+    }
+
+    fun getBotOffers(): List<GrandExchangeOffer>
+    {
+        val conn = GEDB.connect()
+        val stmt = conn.createStatement()
+        val offers = ArrayList<GrandExchangeOffer>()
+
+        val results = stmt.executeQuery("SELECT item_id,amount FROM bot_offers WHERE amount > 0")
+        while(results.next())
+        {
+            val o = GrandExchangeOffer.fromBotQuery(results)
+            offers.add(o)
+        }
+        return offers
+    }
+
+
 
     override fun call(): Boolean {
         GEDB.init()
