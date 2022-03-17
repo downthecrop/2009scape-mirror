@@ -40,7 +40,7 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
             stage = 500
             return true
         }
-        else if(player.getAttribute("fremtrials:votes",0) == 7){
+        else if(player.getAttribute("fremtrials:votes",0) >= 7){
             npcl(FacialExpression.HAPPY," Greetings again outerlander! How goes your attempts to gain votes with the council of elders?")
             stage = 545
             return true

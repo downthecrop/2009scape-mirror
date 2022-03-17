@@ -250,7 +250,7 @@ class TFTInteractionListeners : InteractionListener(){
             }
 
             ClimbActionHandler.climb(player, Animation(828), Location.create(2671, 10099, 2))
-            Pulser.submit(KoscheiPulse(player))
+            player.pulseManager.run(KoscheiPulse(player))
             return@on true
         }
 
