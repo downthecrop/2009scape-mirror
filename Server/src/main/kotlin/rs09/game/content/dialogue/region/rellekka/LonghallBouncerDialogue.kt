@@ -29,8 +29,7 @@ class LonghallBouncerDialogue(player: Player? = null) : DialoguePlugin(player){
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
             0 -> player(FacialExpression.PANICKED, "But I'm a Bard!").also { stage++ }
-            1 -> npc(FacialExpression.FRIENDLY, "We polish them every day to get them nice and clean.").also { stage++ }
-            2 -> npcl(FacialExpression.FRIENDLY, "No you're not. I saw your performance. I was paid well to keep you from ever setting foot on stage here again.").also { stage = END_DIALOGUE }
+            1 -> npcl(FacialExpression.FRIENDLY, "No you're not. I saw your performance. I was paid well to keep you from ever setting foot on stage here again.").also { stage = END_DIALOGUE }
         }
         return true
     }
