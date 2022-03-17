@@ -12,7 +12,7 @@ public enum MagicStaff {
 	/**
 	 * Represents the fire rune staves.
 	 */
-	FIRE_RUNE(554, 1387, 1393, 1401, 3053, 3055, 3056, 11736, 11738),
+	FIRE_RUNE(554, 1387, 1393, 1401, 3053, 3054, 3055, 3056, 11736, 11738),
 
 	/**
 	 * Represents the water rune staves.
