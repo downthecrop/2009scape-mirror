@@ -1,38 +1,41 @@
 package rs09.game.content.dialogue.region.rellekka
 
-import api.questStage
+import api.isQuestComplete
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
-import rs09.game.content.quest.members.thefremenniktrials.CouncilWorkerFTDialogue
+import org.rs09.consts.NPCs
+import rs09.tools.END_DIALOGUE
+
+/**
+ * @author qmqz
+ */
 
 @Initializable
-class CouncilWorkerDialogue(player: Player? = null) : DialoguePlugin(player){
+class ReesoDialogue(player: Player? = null) : DialoguePlugin(player){
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(questStage(player, "Fremennik Trials") in 1..99){
-            loadFile(CouncilWorkerFTDialogue(1))
+        if (!isQuestComplete(player, "Fremennik Trials")) {
+            npcl(FacialExpression.ANNOYED, "Please do not disturb me, outerlander. I have much to do.").also { stage = END_DIALOGUE }
         } else {
-            npc(FacialExpression.FRIENDLY,"'Ello there.").also { stage = 0 }
+            npcl(FacialExpression.STRUGGLE, "Sorry, ${player.getAttribute("fremennikname","fremmyname")}, I must get on with my work.").also { stage = END_DIALOGUE }
         }
+
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (stage) {
-            0 -> end()
-        }
         return true
     }
 
     override fun newInstance(player: Player?): DialoguePlugin {
-        return CouncilWorkerDialogue(player)
+        return ReesoDialogue(player)
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(1287)
+        return intArrayOf(NPCs.REESO_3116)
     }
-
 }

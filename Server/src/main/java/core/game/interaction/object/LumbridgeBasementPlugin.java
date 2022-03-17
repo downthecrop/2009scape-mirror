@@ -55,7 +55,7 @@ public class LumbridgeBasementPlugin extends OptionHandler {
 		SceneryDefinition.forId(40849).getHandlers().put("option:jump-down", this);
 		SceneryDefinition.forId(40260).getHandlers().put("option:climb-through", this);
 		SceneryDefinition.forId(41077).getHandlers().put("option:crawl-through", this);
-		PluginManager.definePlugins(new LightCreatureNPC(), new LightCreatureHandler(), new FishMongerDialogue());
+		PluginManager.definePlugins(new LightCreatureNPC(), new LightCreatureHandler());
 		SceneryBuilder.add(new Scenery(40260, Location.create(2526, 5828, 2), 2));
 		return this;
 	}
@@ -255,70 +255,5 @@ public class LumbridgeBasementPlugin extends OptionHandler {
 			return new int[] {2021};
 		}
 
-	}
-	
-	/**
-	 * Handles the fish monger dialogue.
-	 * @author Vexia
-	 *
-	 */
-	public class FishMongerDialogue extends DialoguePlugin {
-
-		/**
-		 * Constructs the {@code FishMongerDialogue}
-		 */
-		public FishMongerDialogue() {
-			/*
-			 * empty.
-			 */
-		}
-		
-		/**
-		 * Constructs the {@code FishMongerDialogue}
-		 */
-		public FishMongerDialogue(Player player) {
-			super(player);
-		}
-		
-		@Override
-		public DialoguePlugin newInstance(Player player) {
-			return new FishMongerDialogue(player);
-		}
-
-		@Override
-		public boolean open(Object... args) {
-			npc = (NPC) args[0];
-			npc("Hello, "  + player.getUsername() + " would you like to look at", "my wares?");
-			stage = 0;
-			return true;
-		}
-
-		@Override
-		public boolean handle(int interfaceId, int buttonId) {
-			switch (stage) {
-			case 0:
-				options("Yes, please.", "No, thanks.");
-				stage++;
-				break;
-			case 1:
-				switch (buttonId) {
-				case 1:
-					end();
-					npc.openShop(player);
-					break;
-				case 2:
-					end();
-					break;
-				}
-				break;
-			}
-			return true;
-		}
-
-		@Override
-		public int[] getIds() {
-			return new int[] {1369};
-		}
-		
 	}
 }

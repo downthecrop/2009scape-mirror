@@ -1,11 +1,13 @@
 package rs09.game.content.quest.members.thefremenniktrials
 
 import api.addItem
+import api.isQuestComplete
 import api.removeItem
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
+import rs09.tools.END_DIALOGUE
 
 @Initializable
 class FishermanDialogue(player: Player? = null) : DialoguePlugin(player) {
@@ -35,6 +37,10 @@ class FishermanDialogue(player: Player? = null) : DialoguePlugin(player) {
             playerl(FacialExpression.ASKING,"I don't suppose you have any idea where I could find an exotic and extremely odd fish, do you?")
             stage = 1
             return true
+        } else if (isQuestComplete(player, "Fremennik Trials")){
+            player(FacialExpression.FRIENDLY, "Hello there.").also { stage = 100 }
+        } else if (!isQuestComplete(player, "Fremennik Trials")) {
+            player(FacialExpression.FRIENDLY, "Hello there.").also { stage = 200 }
         }
         return true
     }
@@ -62,6 +68,9 @@ class FishermanDialogue(player: Player? = null) : DialoguePlugin(player) {
             16 -> npcl(FacialExpression.ANNOYED,"Me neither, outerlander. That is why I gave it to you.").also { stage = 1000 }
 
             17 -> npcl(FacialExpression.ANNOYED,"I don't think so.").also { stage = 1000 }
+
+            100 -> npcl(FacialExpression.FRIENDLY, "Welcome back, ${if (player.isMale) "brother " else "sister "}${player.getAttribute("fremennikname","fremmyname")}. It has been too long since last we spoke! The fish are really biting today!").also { stage = END_DIALOGUE }
+            200 -> npcl(FacialExpression.ANNOYED, "Don't talk to me outerlander. Anything you have to say to me, you can say to the Chieftain. Goodbye.").also { stage = END_DIALOGUE }
 
             1000 -> end()
         }

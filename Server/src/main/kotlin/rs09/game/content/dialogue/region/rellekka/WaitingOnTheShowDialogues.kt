@@ -1,38 +1,35 @@
 package rs09.game.content.dialogue.region.rellekka
 
-import api.questStage
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
-import rs09.game.content.quest.members.thefremenniktrials.CouncilWorkerFTDialogue
+import org.rs09.consts.NPCs
+import rs09.tools.END_DIALOGUE
+
+/**
+ * @author qmqz
+ */
 
 @Initializable
-class CouncilWorkerDialogue(player: Player? = null) : DialoguePlugin(player){
+class WaitingOnTheShowDialogues(player: Player? = null) : DialoguePlugin(player){
+
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if(questStage(player, "Fremennik Trials") in 1..99){
-            loadFile(CouncilWorkerFTDialogue(1))
-        } else {
-            npc(FacialExpression.FRIENDLY,"'Ello there.").also { stage = 0 }
-        }
+        npc(FacialExpression.ANNOYED, "Shhh! I'm waiting for the show!").also { stage = END_DIALOGUE }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
-        when (stage) {
-            0 -> end()
-        }
         return true
     }
 
     override fun newInstance(player: Player?): DialoguePlugin {
-        return CouncilWorkerDialogue(player)
+        return WaitingOnTheShowDialogues(player)
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(1287)
+        return intArrayOf(NPCs.FRIDGEIR_1277, NPCs.OSPAK_1274, NPCs.STYRMIR_1275)
     }
-
 }

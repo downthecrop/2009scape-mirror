@@ -1,4 +1,4 @@
-package rs09.game.content.quest.members.thefremenniktrials
+package rs09.game.interaction.npc
 
 import api.isEquipped
 import api.sendNPCDialogue
@@ -9,10 +9,10 @@ import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 import rs09.tools.END_DIALOGUE
 
-class PeerTheSeerBanking : InteractionListener() {
+class NPCDepositListener : InteractionListener() {
 
     override fun defineListeners() {
-        on(NPC,"deposit") { player, _ ->
+        on(NPCs.PEER_THE_SEER_1288, NPC,"deposit") { player, _ ->
             if (isEquipped(player, Items.FREMENNIK_SEA_BOOTS_1_14571) ||
                 isEquipped(player, Items.FREMENNIK_SEA_BOOTS_2_14572) ||
                 isEquipped(player, Items.FREMENNIK_SEA_BOOTS_3_14573)) {

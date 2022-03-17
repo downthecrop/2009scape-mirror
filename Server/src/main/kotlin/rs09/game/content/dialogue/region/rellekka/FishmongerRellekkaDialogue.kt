@@ -1,4 +1,4 @@
-package rs09.game.content.dialogue.region.miscellania
+package rs09.game.content.dialogue.region.rellekka
 
 import api.isQuestComplete
 import core.game.content.dialogue.DialoguePlugin
@@ -7,20 +7,21 @@ import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
+import rs09.tools.END_DIALOGUE
 
 /**
  * @author qmqz
  */
 
 @Initializable
-class FishmongerMiscDialogue(player: Player? = null) : DialoguePlugin(player){
+class FishmongerRellekkaDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-        if (!isQuestComplete(player, "Throne of Miscellania")) {
-            npcl(FacialExpression.FRIENDLY,"Greetings, Sir. Get your fresh fish here! I've heard that the Etceterian fish is stored in a cow shed.").also { stage = 0 }
+        if (!isQuestComplete(player, "Fremennik Trials")) {
+            npc(FacialExpression.ANNOYED, "I don't sell to outerlanders.").also { stage = END_DIALOGUE }
         } else {
-            npcl(FacialExpression.FRIENDLY,"Greetings, Your Highness. Have some fresh fish! I've heard that the Etceterian fish is stored in a cow shed.").also { stage = 0 }
+            npcl(FacialExpression.FRIENDLY,"Hello there, ${player.getAttribute("fremennikname","fremmyname")}. Looking for fresh fish?").also { stage = 0 }
         }
         return true
     }
@@ -33,10 +34,10 @@ class FishmongerMiscDialogue(player: Player? = null) : DialoguePlugin(player){
     }
 
     override fun newInstance(player: Player?): DialoguePlugin {
-        return FishmongerMiscDialogue(player)
+        return FishmongerRellekkaDialogue(player)
     }
 
     override fun getIds(): IntArray {
-        return intArrayOf(NPCs.FISHMONGER_1393)
+        return intArrayOf(NPCs.FISH_MONGER_1315)
     }
 }
