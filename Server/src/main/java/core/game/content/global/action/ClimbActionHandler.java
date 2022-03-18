@@ -201,45 +201,6 @@ public final class ClimbActionHandler {
                 for (String message : messages) {
                     player.getPacketDispatch().sendMessage(message);
                 }
-
-                // Achievement Diary Handlers
-                // falador climb to top of white knight's castle
-                player.debug(destination.toString());
-                if ((destination.equals(2959, 3338, 3) || destination.equals(2983, 3350, 3) || destination.equals(2995, 3341, 3))) {
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.FALADOR, 0, 3);
-                }
-                // falador dark wizards tower proselyte
-                if (destination.equals(2908, 3336, 2)
-                        && isEquipped(player, Items.PROSELYTE_SALLET_9672)
-                        && isEquipped(player, Items.PROSELYTE_HAUBERK_9674)
-                        && isEquipped(player, Items.PROSELYTE_CUISSE_9676)) {
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.FALADOR, 2, 0);
-                }
-                // falador enter the mining guild
-                if (destination.equals(3021, 9739, 0)) {
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.FALADOR, 2, 6);
-                }
-
-                // Climb to the highest point in Lumbridge
-                if (destination.equals(3207, 3222, 3)) {
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 0, 0);
-                }
-
-                // Climb to the top of the Wizards' Tower
-                if (destination.equals(3104, 3161, 2)) {
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 0, 11);
-                }
-
-                // Enter Edgeville Dungeon using the entrance to the south of<br><br>Edgeville
-                if (destination.equals(3096, 9867, 0)) {
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.VARROCK, 0, 10);
-                }
-
-                // Find the highest point in Varrock
-                if (destination.equals(3206, 3497, 3) || destination.equals(3223, 3472, 3) || destination.equals(3258, 3486, 3)) {
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.VARROCK, 0, 18);
-                }
-
                 return true;
             }
         });

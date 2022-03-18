@@ -1,16 +1,16 @@
 package rs09.game.content.dialogue.region.rellekka
 
+import api.isQuestComplete
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import org.rs09.consts.NPCs
+import rs09.tools.END_DIALOGUE
 
 /**
  * @author qmqz
- * Needs the quest to be completed to really do anything else here
- * Trade option shouldn't work either unless it's completed
  */
 
 @Initializable
@@ -18,20 +18,17 @@ class FurTraderDialogue(player: Player? = null) : DialoguePlugin(player){
 
     override fun open(vararg args: Any?): Boolean {
         npc = args[0] as NPC
-       if (!player.questRepository.isComplete("The Fremennik Trials")) {
-           npc(FacialExpression.ANNOYED, "I don't sell to outerlanders.").also { stage = 99 }
+       if (!isQuestComplete(player, "Fremennik Trials")) {
+           npc(FacialExpression.ANNOYED, "I don't sell to outerlanders.").also { stage = END_DIALOGUE }
        } else {
-           npc(FacialExpression.FRIENDLY,"Welcome back <Fremennik Name>! Have you seen the furs I have today?").also { stage = 10 }
+           npcl(FacialExpression.FRIENDLY,"Welcome back, ${player.getAttribute("fremennikname","fremmyname")}. Have you seen the furs I have today?").also { stage = 10 }
        }
         return true
     }
 
     override fun handle(interfaceId: Int, buttonId: Int): Boolean {
         when(stage){
-            0 -> npc(FacialExpression.ANNOYED, "I don't sell to outerlanders.").also { stage = 99 }
             10 -> end().also { npc.openShop(player) }
-
-            99 -> end()
         }
         return true
     }

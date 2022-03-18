@@ -305,9 +305,9 @@ class VinesweeperNPC : AbstractNPC {
     }
 
     override fun handleTickActions() {
-        val dest = seedDestinations.find({sd -> sd.loc == location})
+        val dest = seedDestinations.find { sd -> sd.loc == location }
         if(dest != null) {
-            for(npc in findLocalNPCs(this, intArrayOf(RABBIT, *FARMERS), 30)) {
+            for(npc in RegionManager.getRegionPlane(location).npcs) {
                 if(npc is VinesweeperNPC) {
                     npc.seedDestinations.remove(dest)
                     npc.resetWalk()
@@ -343,8 +343,8 @@ class VinesweeperNPC : AbstractNPC {
 
     override fun getMovementDestination(): Location? {
         if(seedDestinations.size > 0) {
-            seedDestinations.sortBy({a -> a.loc.getDistance(location).toInt()})
-            return seedDestinations.get(0).loc
+            seedDestinations.sortBy { a -> a.loc.getDistance(location).toInt() }
+            return seedDestinations.first().loc
         } else {
             return super.getMovementDestination()
         }

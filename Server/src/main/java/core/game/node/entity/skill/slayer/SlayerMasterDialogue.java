@@ -505,7 +505,7 @@ public final class SlayerMasterDialogue extends DialoguePlugin {
                     interpreter.sendDialogues(master.getNpc(), getExpression(master), "You're still hunting something. But let me check something...");
                     stage = 847;
                 } else {
-                    player.getSlayer().setTaskCount(0);
+                    player.getSlayer().flags.setTaskStreak(0);
                     player.getSlayer().generate(master);
                     if (player.getSlayer().getTask() == Tasks.JAD) {
                         interpreter.sendDialogues(master.getNpc(), getExpression(master), "Excellent, you're doing great. Your new task is to", "defeat the almighty TzTok-Jad.");

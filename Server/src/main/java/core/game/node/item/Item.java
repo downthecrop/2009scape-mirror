@@ -8,7 +8,6 @@ import core.game.interaction.Interaction;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.combat.equipment.DegradableEquipment;
-import rs09.game.ge.OfferManager;
 
 /**
  * Represents an item.

@@ -12,7 +12,6 @@ import core.game.node.item.Item
 import core.game.world.map.RegionManager
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
-import rs09.game.ai.AIRepository.Companion.getItems
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.GroundSpawnLoader
 import rs09.game.world.GameWorld

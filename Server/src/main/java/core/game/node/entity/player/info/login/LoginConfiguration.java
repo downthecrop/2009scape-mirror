@@ -80,6 +80,11 @@ public final class LoginConfiguration {
         } else {
             configureGameWorld(player);
         }
+
+        if(!player.isArtificial())
+        {
+            GameWorld.getLoginListeners().forEach((listener) -> listener.login(player));
+        }
     }
 
     /**
@@ -203,6 +208,8 @@ public final class LoginConfiguration {
      * @param player the player.
      */
     public static final void config(final Player player) {
+        if(!player.isArtificial())
+            SystemLogger.logInfo("configuring player " + player.getUsername());
         player.getInventory().refresh();
         player.getEquipment().refresh();
         player.getSkills().refresh();
@@ -212,7 +219,7 @@ public final class LoginConfiguration {
         player.getPacketDispatch().sendRunEnergy();
         player.getFamiliarManager().login();
         player.getInterfaceManager().openDefaultTabs();
-        player.getPlayerGrandExchange().init();
+        player.getExchangeRecords().init();
         player.getPacketDispatch().sendString("Friends List - World " + GameWorld.getSettings().getWorldId(), 550, 3);
         player.getConfigManager().init();
         player.getAntiMacroHandler().init();
@@ -221,6 +228,8 @@ public final class LoginConfiguration {
         player.getInterfaceManager().close();
         player.getEmoteManager().refresh();
         player.getInterfaceManager().openInfoBars();
+        if(!player.isArtificial())
+            SystemLogger.logInfo("finished configuring player " + player.getUsername());
     }
 
     /**

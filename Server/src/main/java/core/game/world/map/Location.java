@@ -288,6 +288,23 @@ public final class Location extends Node {
 	}
 
 	/**
+	 * Gets a square of 3 x 3 tiles as an ArrayList<Location>
+	 */
+	public ArrayList<Location> get3x3Tiles() {
+		ArrayList<Location> locs = new ArrayList<>();
+		locs.add(transform(0,0,0)); //Center
+		locs.add(transform(0,1,0)); //N
+		locs.add(transform(1,1,0)); //NE
+		locs.add(transform(1,0,0)); //E
+		locs.add(transform(1,-1,0)); //SE
+		locs.add(transform(0,-1,0)); //S
+		locs.add(transform(-1,-1,0));//SW
+		locs.add(transform(-1,0,0));//W
+		locs.add(transform(-1,1,0));//NW
+		return locs;
+	}
+
+	/**
 	 * Gets the x position on the region chunk.
 	 * @return The x position on the region chunk.
 	 */

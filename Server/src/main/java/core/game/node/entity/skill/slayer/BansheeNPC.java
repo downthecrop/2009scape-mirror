@@ -11,6 +11,7 @@ import rs09.game.node.entity.combat.handlers.MeleeSwingHandler;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.npc.AbstractNPC;
 import core.game.node.entity.player.Player;
+import rs09.game.node.entity.skill.slayer.SlayerEquipmentFlags;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;

@@ -13,7 +13,7 @@ class SlayerCommandSet : CommandSet(Command.Privilege.ADMIN){
         define("finishtask"){player,_ ->
             notify(player, "Kill the npc that spawned to finish your task.")
             player.slayer.amount = 1
-            val finisher = NPC(player.slayer.task.npcs[0], player.location)
+            val finisher = NPC(player.slayer.task?.npcs?.get(0) ?: 0, player.location)
             finisher.isRespawn = false
             finisher.init()
         }

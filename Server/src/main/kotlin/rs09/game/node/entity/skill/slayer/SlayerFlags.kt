@@ -18,7 +18,7 @@ class SlayerFlags(val player: Player) {
     /**
      * The removed tasks.
      */
-    val removed: List<Tasks> = ArrayList(4)
+    val removed: ArrayList<Tasks> = ArrayList(4)
 
     /**
      * Get/set master flags

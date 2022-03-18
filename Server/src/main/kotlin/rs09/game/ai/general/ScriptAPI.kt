@@ -30,8 +30,8 @@ import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.rs09.consts.Items
 import rs09.game.ai.AIRepository
+import rs09.game.ge.GrandExchange
 import rs09.game.ge.GrandExchangeOffer
-import rs09.game.ge.OfferManager
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InteractionListeners
 import rs09.game.system.SystemLogger
@@ -374,7 +374,9 @@ class ScriptAPI(private val bot: Player) {
             diffX /= 2
             diffY /= 2
         }
-        GameWorld.Pulser.submit(object : MovementPulse(bot, bot.location.transform(diffX, diffY, 0), Pathfinder.SMART) { // if this uses bot.pulseManager.run, it will get cleared when the bot dies and then the bot gets stuck in lumby
+        GameWorld.Pulser.submit(object : MovementPulse(bot, bot.location.transform(diffX, diffY, 0), Pathfinder.SMART) {
+
+
             override fun pulse(): Boolean {
                 return true
             }
@@ -448,10 +450,10 @@ class ScriptAPI(private val bot: Player) {
                 if (ItemDefinition.forId(id).noteId == id){
                     actualId = Item(id).noteChange
                 }
-                val canSell = OfferManager.addBotOffer(actualId, itemAmt)
+                val canSell = GrandExchange.addBotOffer(actualId, itemAmt)
                 if (canSell && saleIsBigNews(actualId, itemAmt)) {
                     SystemLogger.logAI("Offered $itemAmt of $actualId on the GE.")
-                    Repository.sendNews("2009Scape just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
+                    Repository.sendNews("Fellerscape just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
                 }
                 bot.bank.remove(Item(id, itemAmt))
                 bot.bank.refresh()
@@ -479,9 +481,9 @@ class ScriptAPI(private val bot: Player) {
                     if (ItemDefinition.forId(actualId).noteId == actualId){
                         actualId = Item(actualId).noteChange
                     }
-                    val canSell = OfferManager.addBotOffer(actualId, itemAmt)
+                    val canSell = GrandExchange.addBotOffer(actualId, itemAmt)
                     if (canSell && saleIsBigNews(actualId, itemAmt)) {
-                        Repository.sendNews("2009Scape just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
+                        Repository.sendNews("FellerScape just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
                     }
                     bot.bank.remove(item)
                     bot.bank.refresh()
@@ -508,7 +510,7 @@ class ScriptAPI(private val bot: Player) {
                     if (ItemDefinition.forId(actualId).noteId == actualId){
                         actualId = Item(actualId).noteChange
                     }
-                    val canSell = OfferManager.addBotOffer(actualId, itemAmt)
+                    val canSell = GrandExchange.addBotOffer(actualId, itemAmt)
                     if (canSell && saleIsBigNews(actualId, itemAmt)) {
                         when (actualId){
                             1511 -> continue
@@ -517,7 +519,7 @@ class ScriptAPI(private val bot: Player) {
                             1517 -> continue
                             1519 -> continue
                             1521 -> continue
-                            else -> Repository.sendNews("2009Scape just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
+                            else -> Repository.sendNews("Fellerscape just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
                         }
                     }
                     bot.bank.remove(item).also { SystemLogger.logAI("$item has been listed on the GE.") }
@@ -651,7 +653,7 @@ class ScriptAPI(private val bot: Player) {
             offer.offeredValue = checkPriceOverrides(itemID) ?: ItemDefinition.forId(itemID).value
             offer.amount = amount
             offer.player = bot
-            OfferManager.dispatch(bot, offer)
+            //GrandExchange.dispatch(bot, offer)
             AIRepository.addOffer(bot, offer)
             var bought: Boolean = false
             val latch = CountDownLatch(1)

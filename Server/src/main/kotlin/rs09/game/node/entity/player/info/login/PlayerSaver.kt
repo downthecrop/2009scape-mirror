@@ -223,7 +223,7 @@ class PlayerSaver (val player: Player){
         }
         val rooms = JSONArray()
         var z = 0
-         for(room in player.houseManager.rooms){
+        for(room in player.houseManager.rooms){
             var x = 0
             for(xr in room){
                 var y = 0
@@ -634,20 +634,20 @@ class PlayerSaver (val player: Player){
 
     fun saveGrandExchangeData(root: JSONObject){
         val grandExchange = JSONObject()
-        if(player.playerGrandExchange.hasActiveOffer()){
+        if(player.exchangeRecords.hasActiveOffer()){
             val offers = JSONArray()
-            player.playerGrandExchange.offers.map {
+            player.exchangeRecords.offerRecords.map {
                 if(it != null){
                     val offer = JSONObject()
-                    offer["offerIndex"] = it.index.toString()
-                    offer["offerUID"] = it.uid.toString()
+                    offer["index"] = it.slot.toString()
+                    offer["uid"] = it.uid.toString()
                     offers.add(offer)
                 }
             }
             grandExchange["offers"] = offers
         }
         val history = JSONArray()
-        player.playerGrandExchange.history.map {
+        player.exchangeRecords.history.map {
             if(it != null){
                 val historyEntry = JSONObject()
                 historyEntry["isSell"] = it.sell
@@ -707,8 +707,8 @@ class PlayerSaver (val player: Player){
             }
             slayer.put("removedTasks",removedTasks)
         }
-        slayer.put("taskStreak",slayerManager.taskCount.toString())
-        slayer.put("totalTasks",slayerManager.totalTasks.toString())
+        slayer.put("taskStreak",slayerManager.flags.taskStreak.toString())
+        slayer.put("totalTasks",slayerManager.flags.completedTasks.toString())
         slayer.put("equipmentFlags",slayerManager.flags.equipmentFlags)
         slayer.put("taskFlags", slayerManager.flags.taskFlags)
         slayer.put("rewardFlags", slayerManager.flags.rewardFlags)

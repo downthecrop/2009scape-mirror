@@ -51,17 +51,6 @@ public final class DuckNPC extends AbstractNPC {
 	}
 
 	@Override
-	public void finalizeDeath(final Entity killer) {
-		super.finalizeDeath(killer);
-		if (killer instanceof Player) {
-			final Player player = killer.asPlayer();
-			if (this.getLocation().withinDistance(new Location(2991,3383,0))) {
-				player.getAchievementDiaryManager().finishTask(player,DiaryType.FALADOR,0, 9);
-			}
-		}
-	}
-
-	@Override
 	public int[] getIds() {
 		return new int[] { 46, 2693, 6113 };
 	}

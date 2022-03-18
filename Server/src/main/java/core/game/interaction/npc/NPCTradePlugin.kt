@@ -3,6 +3,7 @@ package core.game.interaction.npc
 import api.*
 import core.cache.def.impl.NPCDefinition
 import core.game.component.Component
+import core.game.content.dialogue.FacialExpression
 import core.plugin.Initializable
 import core.game.interaction.OptionHandler
 import core.game.node.Node
@@ -12,6 +13,7 @@ import core.plugin.Plugin
 import core.game.node.entity.skill.crafting.TanningProduct
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
+import rs09.tools.END_DIALOGUE
 
 /**
  * Represents the plugin used for an npc with the trade option.
@@ -40,6 +42,24 @@ class NPCTradePlugin : InteractionListener() {
                 return@on true
             }
             node.asNpc().openShop(player)
+            return@on true
+        }
+
+        on(NPCs.FUR_TRADER_1316, NPC,"trade") { player, node ->
+            if (!isQuestComplete(player, "Fremennik Trials")) {
+                sendNPCDialogue(player, NPCs.FUR_TRADER_1316, "I don't sell to outerlanders.", FacialExpression.ANNOYED).also { END_DIALOGUE }
+            } else {
+                END_DIALOGUE.also { node.asNpc().openShop(player) }
+            }
+            return@on true
+        }
+
+        on(NPCs.FISH_MONGER_1315, NPC,"trade") { player, node ->
+            if (!isQuestComplete(player, "Fremennik Trials")) {
+                sendNPCDialogue(player, NPCs.FISH_MONGER_1315, "I don't sell to outerlanders.", FacialExpression.ANNOYED).also { END_DIALOGUE }
+            } else {
+                END_DIALOGUE.also { node.asNpc().openShop(player) }
+            }
             return@on true
         }
     }

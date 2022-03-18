@@ -12,6 +12,7 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.ge.GEAutoStock
+import rs09.game.ge.GEDB
 import rs09.game.system.SystemLogger
 import rs09.game.system.config.ServerConfigParser
 import rs09.game.world.GameWorld
@@ -34,8 +35,8 @@ object Server {
     /**
      * The time stamp of when the server started running.
      */
-	@JvmField
-	var startTime: Long = 0
+    @JvmField
+    var startTime: Long = 0
 
     var lastHeartbeat = System.currentTimeMillis()
 

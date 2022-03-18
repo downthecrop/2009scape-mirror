@@ -1,6 +1,7 @@
 package rs09.game.node.entity.skill.gather.mining
 
 import api.*
+import api.events.ResourceGatheredEvent
 import core.cache.def.impl.ItemDefinition
 import core.game.container.impl.EquipmentContainer
 import core.game.content.dialogue.FacialExpression
@@ -116,19 +117,6 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             return false
         }
 
-        //Handle tutorial stuff
-        val tutorialStage = TutorialSession.getExtension(player).stage
-        if (tutorialStage == 36 && node.id == 3042) {
-            TutorialStage.load(player, 38, false)
-        } else if (tutorialStage == 36 && node.id == 3043) {
-            TutorialStage.load(player, 37, false)
-        }
-        if (tutorialStage == 38 && node.id == 3043) {
-            TutorialStage.load(player, 39, false)
-        } else if (tutorialStage == 37 && node.id == 3042) {
-            TutorialStage.load(player, 39, false)
-        }
-
         //actual reward calculations
         var reward = resource!!.getReward()
         var rewardAmount = 0
@@ -136,7 +124,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             reward = calculateReward(reward) // calculate rewards
             rewardAmount = calculateRewardAmount(reward) // calculate amount
 
-            applyAchievementTask(reward) // apply achievements
+            player.dispatch(ResourceGatheredEvent(reward, rewardAmount, node))
             SkillingPets.checkPetDrop(player, SkillingPets.GOLEM) // roll for pet
 
             //add experience
@@ -246,56 +234,6 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             reward = RandomFunction.rollWeightedChanceTable(MiningNode.gemRockGems).id
         }
         return reward
-    }
-
-    /**
-     * Checks if the has completed any achievements from their diary
-     */
-    private fun applyAchievementTask(reward: Int) {
-        // Mine some Iron in the south east mining patch near Varrock
-        if (reward == Items.IRON_ORE_440 && player.location.withinDistance(Location.create(3285, 3363, 0))) {
-            player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 2)
-        }
-
-        // Mine some limestone near Paterdomus, the temple to the east<br><br>of Varrock
-        if (reward == Items.LIMESTONE_3211 && player.location.withinDistance(Location.create(3372, 3500, 0))) {
-            player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 15)
-        }
-
-        // Mine some gold from the rocks on the north-west<br><br>peninsula of Karamja
-        if (reward == Items.GOLD_ORE_444 && player.location.withinDistance(Location.create(2733, 3225, 0))) {
-            player.achievementDiaryManager.finishTask(player, DiaryType.KARAMJA, 0, 2)
-        }
-
-        // Mine a red topaz from a gem rock
-        if (reward == Items.UNCUT_RED_TOPAZ_1629 && (player.viewport.region.id == 11310 || player.viewport.region.id == 11410)) {
-            player.achievementDiaryManager.finishTask(player, DiaryType.KARAMJA, 1, 18)
-        }
-
-        // Mine some clay in the Mining patch north of the Champions'<br><br>Guild
-        if (reward == Items.CLAY_434 && player.viewport.region.id == 12596) {
-            player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 0, 5)
-        }
-
-        // Mine some copper in the Mining spot to the south-east of<br><br>Lumbridge Swamp
-        if (reward == Items.COPPER_ORE_436 && player.viewport.region.id == 12849) {
-            player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 0, 12)
-        }
-
-        // Mine some iron ore from the Al Kharid Mining spot
-        if (reward == Items.IRON_ORE_440 && player.viewport.region.id == 13107) {
-            player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 1, 0)
-        }
-
-        // Mine some silver from the mining spot north of Al Kharid
-        if (reward == Items.SILVER_ORE_442 && player.viewport.region.id == 13107) {
-            player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 2, 10)
-        }
-
-        // Mine some coal in the Mining spot south-west of Lumbridge<br><br>Swamp
-        if (reward == Items.COAL_453 && player.viewport.region.id == 12593) {
-            player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 2, 11)
-        }
     }
 
     /**

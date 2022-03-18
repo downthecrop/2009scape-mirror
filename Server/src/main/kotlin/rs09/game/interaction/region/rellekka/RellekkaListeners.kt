@@ -1,6 +1,7 @@
 package rs09.game.interaction.region.rellekka
 
 import core.game.world.map.Location
+import core.plugin.Initializable
 import org.rs09.consts.NPCs
 import rs09.game.interaction.InteractionListener
 import rs09.game.util.region.rellekka.RellekkaDestination

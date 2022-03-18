@@ -85,15 +85,6 @@ public final class SkeletalWyvernNPC extends AbstractNPC {
 	}
 
 	@Override
-	public void finalizeDeath(final Entity killer) {
-		super.finalizeDeath(killer);
-		if (killer instanceof Player) {
-			final Player player = killer.asPlayer();
-			player.getAchievementDiaryManager().finishTask(player,DiaryType.FALADOR, 2, 8);
-		}
-	}
-
-	@Override
 	public int[] getIds() {
 		return Tasks.SKELETAL_WYVERN.getNpcs();
 	}

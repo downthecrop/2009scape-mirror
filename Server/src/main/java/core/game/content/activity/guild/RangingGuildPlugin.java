@@ -1073,21 +1073,6 @@ public final class RangingGuildPlugin extends OptionHandler {
             super(id, location);
         }
 
-        @Override
-        public void finalizeDeath(Entity killer) {
-            super.finalizeDeath(killer);
-            if (killer instanceof Player) {
-                Player player = (Player) killer;
-                if (!player.getAchievementDiaryManager().hasCompletedTask(DiaryType.SEERS_VILLAGE, 1, 6)) {
-                    player.setAttribute("/save:diary:seers:tower-archers",
-                            player.getAttribute("diary:seers:tower-archers", 0)
-                            | 1 << getId() - 688);
-                    if (player.getAttribute("diary:seers:tower-archers", 0) == 15) {
-                        player.getAchievementDiaryManager().finishTask(player, DiaryType.SEERS_VILLAGE, 1, 6);
-                    }
-                }
-            }
-        }
 
         @Override
         public AbstractNPC construct(int id, Location location, Object... objects) {

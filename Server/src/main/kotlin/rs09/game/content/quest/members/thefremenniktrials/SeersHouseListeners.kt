@@ -101,6 +101,11 @@ class SeersHouseListeners : InteractionListener() {
             if(!player.getAttribute("PeerStarted",false)){
                 sendDialogue(player,"You should probably talk to the owner of this home.")
             }
+            if(getAttribute(player, "fremtrials:peer-vote", false))
+            {
+                sendDialogue(player, "I don't need to go through that again.")
+                return@on true
+            }
             else if(player.getAttribute("PeerRiddle",5) < 5){
                 player.dialogueInterpreter.open(DoorRiddleDialogue(player), Scenery(WESTDOOR,node.location))
             }

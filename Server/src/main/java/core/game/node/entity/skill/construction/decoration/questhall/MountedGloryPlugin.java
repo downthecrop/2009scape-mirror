@@ -7,6 +7,7 @@ import core.game.content.dialogue.DialogueInterpreter;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -78,7 +79,7 @@ public class MountedGloryPlugin extends OptionHandler {
 		}
 		player.lock();
 		player.visualize(ANIMATION, GRAPHICS);
-		player.getAudioManager().send(200);		
+        player.getAudioManager().send(new Audio(200), true);	
 		player.getImpactHandler().setDisabledTicks(4);
 		GameWorld.getPulser().submit(new Pulse(4, player) {
 			@Override

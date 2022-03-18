@@ -8,7 +8,6 @@ import rs09.Server;
 import rs09.ServerConstants;
 import rs09.ServerStore;
 import rs09.game.content.global.GlobalKillCounter;
-import rs09.game.ge.OfferManager;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.repository.Repository;
 
@@ -94,7 +93,6 @@ public final class SystemTermination {
 		Repository.getDisconnectionQueue().update();
         GlobalKillCounter.save();
 		GrandExchangeDatabase.save();
-		OfferManager.save();
 		SystemLogger.flushLogs();
 		SystemLogger.logInfo("[SystemTerminator] Saved Grand Exchange databases!");
 		Repository.getDisconnectionQueue().clear();

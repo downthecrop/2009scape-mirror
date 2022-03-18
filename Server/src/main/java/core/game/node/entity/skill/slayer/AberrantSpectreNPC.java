@@ -9,6 +9,7 @@ import core.game.world.map.Location;
 import core.plugin.Initializable;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.handlers.MagicSwingHandler;
+import rs09.game.node.entity.skill.slayer.SlayerEquipmentFlags;
 
 /**
  * Handles the aberrant spectre npc.

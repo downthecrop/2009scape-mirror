@@ -32,6 +32,7 @@ public class StandardCookingPulse extends Pulse {
     private Player player;
     private double experience;
     private boolean burned = false;
+    public CookableItems properties;
 
     public StandardCookingPulse(Player player, Scenery object, int initial, int product, int amount) {
         this.player = player;
@@ -43,6 +44,7 @@ public class StandardCookingPulse extends Pulse {
 
     @Override
     public void start() {
+        properties = CookableItems.forId(initial);
         if (checkRequirements()) {
             super.start();
             cook(player, object, CookableItems.cookingMap.get(initial) != null && isBurned(player, object, initial), initial, product);
@@ -63,7 +65,6 @@ public class StandardCookingPulse extends Pulse {
     }
 
     public boolean checkRequirements() {
-        CookableItems properties = CookableItems.forId(initial);
         this.level = 1;
         this.experience = 0;
         if (properties != null) {
@@ -214,11 +215,8 @@ public class StandardCookingPulse extends Pulse {
         if (food.getId() == Items.RAW_OOMLIE_2337) {
             return "The meat is far too delicate to cook like this. Perhaps you should wrap something around it to protect it from the heat.";
         }
-        switch (product.getId()) {
-            case Items.SINEW_9436:
-                return "You dry the meat into sinew.";
-            case Items.SODA_ASH_1781:
-                return "You burn the seaweed into soda ash.";
+        if (product.getId() == Items.SODA_ASH_1781) {
+            return "You burn the seaweed into soda ash.";
         }
         if (CookableItems.intentionalBurn(food.getId())) {
             return "You deliberately burn the perfectly good piece of meat.";

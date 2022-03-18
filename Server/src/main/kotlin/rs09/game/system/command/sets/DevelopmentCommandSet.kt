@@ -1,10 +1,14 @@
 package rs09.game.system.command.sets
 
+import core.cache.def.impl.NPCDefinition
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
+import core.game.node.entity.npc.drop.NPCDropTables
+import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
+import rs09.game.content.global.NPCDropTable
 import rs09.game.system.command.Command
 
 @Initializable
@@ -35,5 +39,22 @@ class DevelopmentCommandSet : CommandSet(Command.Privilege.ADMIN) {
             player.impactHandler.manualHit(player, player.skills.lifepoints, HitsplatType.NORMAL)
         }
 
+        define("rolldrops") { player: Player, args: Array<String> ->
+            if(args.size < 2){
+                reject(player,"Usage: ::rolldrops npcid amount")
+            }
+
+            val container = player.dropLog
+            val npcId = args[1].toInt()
+            val amount = args[2].toInt()
+
+            for(i in 0..amount)
+            {
+                val drops = NPCDefinition.forId(npcId).dropTables.table.roll()
+                for(drop in drops) container.add(drop)
+            }
+
+            container.open(player)
+        }
     }
 }

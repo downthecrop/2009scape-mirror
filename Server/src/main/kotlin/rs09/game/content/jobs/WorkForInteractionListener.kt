@@ -3,6 +3,9 @@ package rs09.game.content.jobs
 import GatheringJobs
 import SlayingJob
 import api.*
+import api.events.EventHook
+import api.events.NPCKillEvent
+import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
@@ -11,15 +14,17 @@ import org.json.simple.JSONObject
 import org.rs09.consts.Items
 import rs09.ServerStore
 import rs09.ServerStore.getInt
+import rs09.game.Event
 import rs09.game.interaction.InteractionListener
 import rs09.game.system.SystemLogger
+import java.util.*
 import java.util.concurrent.TimeUnit
 
 /**
  * Handles the work-for actions for the NPCs
  * @author Ceikry
  */
-class WorkForInteractionListener : InteractionListener() {
+class WorkForInteractionListener : InteractionListener(), LoginListener {
     val possibleWeaponLooks = arrayListOf(
         Items.BRONZE_SCIMITAR_1321,
         Items.STEEL_SCIMITAR_1325,
@@ -57,6 +62,11 @@ class WorkForInteractionListener : InteractionListener() {
 
     val IDs = typeMap.keys.toIntArray()
 
+    override fun login(player: Player) {
+        if(getAttribute(player, "jobs:type", -1) == 1 && getAttribute(player, "jobs:amount", -1) > 0)
+            player.hook(Event.NPCKilled, JobKillHook)
+    }
+
     override fun defineListeners() {
 
         on(IDs,NPC,"work-for"){ player,node ->
@@ -93,6 +103,8 @@ class WorkForInteractionListener : InteractionListener() {
                 1 -> {
                     val job = SlayingJob.values()[jobId]
                     player.dialogueInterpreter.sendItemMessage(possibleWeaponLooks.random(),"You are assigned to kill $amount ${NPC(job.ids[0]).name.toLowerCase()}")
+                    player.unhook(JobKillHook) //try to unhook just in case they already had it hooked, unlikely but possible.
+                    player.hook(Event.NPCKilled, JobKillHook)
                 }
             }
 
@@ -112,5 +124,19 @@ class WorkForInteractionListener : InteractionListener() {
             return false
         }
         return true
+    }
+
+    private object JobKillHook : EventHook<NPCKillEvent>
+    {
+        override fun process(entity: Entity, event: NPCKillEvent) {
+            if(entity !is Player) return
+
+            val job = getAttribute(entity, "jobs:id", -1)
+            val ids = SlayingJob.values()[job].ids
+
+            if(event.npc.id in ids){
+                JobManager.updateJobRemaining(entity, 1)
+            }
+        }
     }
 }

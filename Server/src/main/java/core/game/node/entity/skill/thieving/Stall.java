@@ -18,8 +18,8 @@ public enum Stall {
 	SILK_STALL(new Integer[]{34383, 2560}, new Integer[] { 34381, 634 }, 20, new Item[]{new Item(950, 1)}, 24, 13,"silk"),
 	WINE_STALL(new Integer[]{2046}, new Integer[] { 634 }, 22, new Item[]{new Item(1935, 1), new Item(1937, 1), new Item(1993, 1), new Item(7919, 1)}, 27, 27,"wine"), //OBJECT MISSING IN CACHE
 	MARKET_SEED_STALL(new Integer[]{7053}, new Integer[] { 634 }, 27, new Item[]{new Item(5096, 1), new Item(5097, 1), new Item(5101, 1), new Item(5318, 1), new Item(5319, 1), new Item(5324, 1)}, 10, 19,"seeds"),
-	FUR_STALL(new Integer[]{34387, 2563}, new Integer[] { 34381, 634 }, 35, new Item[]{new Item(6814, 1), new Item(958, 1)}, 36, 25,"fur"),
-	FISH_STALL(new Integer[]{4277, 4705, 4707}, new Integer[] { 634 }, 42, new Item[]{new Item(331, 1), new Item(359, 1), new Item(377, 1)}, 42, 27,"fish"),
+	FUR_STALL(new Integer[]{ 34387, 2563, 4278}, new Integer[] { 34381, 634, 634 }, 35, new Item[]{new Item(6814, 1), new Item(958, 1)}, 36, 25,"fur"),
+	FISH_STALL(new Integer[]{ 4277, 4705, 4707 }, new Integer[] { 634, 634, 634 }, 42, new Item[]{new Item(331, 1), new Item(359, 1), new Item(377, 1)}, 42, 27,"fish"),
 	CROSSBOW_STALL(new Integer[]{17031}, new Integer[] { 6984 }, 49, new Item[]{new Item(877, 3), new Item(9420, 1), new Item(9440, 1)}, 52, 19,"equipment"),
 	SILVER_STALL(new Integer[]{2565, 6164, 34382}, new Integer[] { 634, 6984, 34381}, 50, new Item[]{new Item(442, 1)}, 54, 50,"jewellery"),
 	SPICE_STALL(new Integer[]{34386, 6166}, new Integer[] { 34381, 6984 }, 65, new Item[]{new Item(2007, 1)}, 81, 134,"spices"),

@@ -1379,11 +1379,17 @@ fun announceIfRare(player: Player, item: Item) {
  */
 
 fun getMasteredSkillNames(player: Player): List<String> {
+    val hasMastered = player.getSkills().masteredSkills > 0
     val masteredSkills = ArrayList<String>()
 
-    for ((skillId, skillName) in Skills.SKILL_NAME.withIndex()) {
-        if(hasLevelStat(player, skillId, 99)){
-            masteredSkills.add(skillName)
+    if(hasMastered){
+        for ((skillId, skillName) in Skills.SKILL_NAME.withIndex()) {
+            //phil you were looping every skill and performing a string comparison (another loop) for every one here.
+            //that's some real shit code bro.
+            //you were also performing a dynamic level check rather than a static.
+            if(hasLevelStat(player, skillId, 99)){
+                masteredSkills.add(skillName)
+            }
         }
     }
     return masteredSkills

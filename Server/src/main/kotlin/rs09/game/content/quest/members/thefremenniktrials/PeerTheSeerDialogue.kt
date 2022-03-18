@@ -8,7 +8,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.diary.DiaryType
 import core.plugin.Initializable
 import core.tools.RandomFunction
-import rs09.game.content.dialogue.DumpContainer
+import rs09.tools.END_DIALOGUE
 import kotlin.random.Random
 
 @Initializable
@@ -78,6 +78,9 @@ class PeerTheSeerDialogue(player: Player? = null) : DialoguePlugin(player) {
             npcl(FacialExpression.SAD,"Uuuh... What was that dark presence I felt?")
             stage = 50
             return true
+        }
+        if (questStage(player, "Fremennik Trials") == 0) {
+            npc(FacialExpression.SAD,"Uuuh... What was that dark presence I felt?").also { stage = 300 }
         }
         return true
     }
@@ -239,6 +242,9 @@ class PeerTheSeerDialogue(player: Player? = null) : DialoguePlugin(player) {
                 BankingPlugin.BankDepositInterface()
                 stage = 1000
             }
+
+            300 -> npc(FacialExpression.NEUTRAL,"!").also { stage++ }
+            301 -> npcl(FacialExpression.NEUTRAL,"Ahem, sorry about that. I have no interest in talking to you just now outerlander.").also { stage = END_DIALOGUE }
 
             1000 -> end()
         }

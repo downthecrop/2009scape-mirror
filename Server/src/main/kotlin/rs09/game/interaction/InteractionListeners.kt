@@ -1,5 +1,6 @@
 package rs09.game.interaction
 
+import api.events.InteractionEvent
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.interaction.Option
@@ -216,12 +217,14 @@ object InteractionListeners {
                 override fun pulse(): Boolean {
                     if(player.zoneMonitor.interact(node, Option(option, 0))) return true
                     player.faceLocation(node.location)
+                    player.dispatch(InteractionEvent(node, option))
                     method.invoke(player,node)
                     return true
                 }
             })
         } else {
             method.invoke(player,node)
+            player.dispatch(InteractionEvent(node, option))
         }
         return true
     }

@@ -9,7 +9,6 @@ import core.tools.RandomFunction
 import org.rs09.consts.Items
 import rs09.game.ai.AIPlayer
 import rs09.game.ai.general.ScriptAPI
-import rs09.game.ge.OfferManager
 import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InteractionListeners
 import kotlin.random.Random
@@ -89,7 +88,7 @@ class SharkCatcher : Script() {
 
             State.STOP -> {
                 val botAmount = bot.bank.getAmount(Items.RAW_SHARK_383) + 1
-                var geAmount = OfferManager.getQuantitySoldForItem(Items.RAW_SHARK_383)
+                var geAmount = 0//OfferManager.getQuantitySoldForItem(Items.RAW_SHARK_383)
                 val totalAmount = (geAmount + botAmount) + 1
                     if((totalAmount > limit) && myCounter++ == 300){
                         bot.randomWalk(5,5)
@@ -174,7 +173,7 @@ class SharkCatcher : Script() {
 
             State.SELL_GE -> {
                 val botAmount = bot.bank.getAmount(Items.RAW_SHARK_383) + 1
-                var geAmount = OfferManager.getQuantitySoldForItem(Items.RAW_SHARK_383)
+                var geAmount = 0//OfferManager.getQuantitySoldForItem(Items.RAW_SHARK_383)
                 val totalAmount = (geAmount + botAmount) + 1
                 if(totalAmount > limit){
                     scriptAPI.walkTo(Location.create(3164, 3487, 0))

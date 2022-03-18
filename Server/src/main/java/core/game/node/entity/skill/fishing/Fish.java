@@ -28,7 +28,7 @@ public enum Fish {
 	LOBSTER(new Item(377), 40, 90, 0.16, 0.375), 
 	BASS(new Item(363), 46, 100, 0.078, 0.16), 
 	SWORDFISH(new Item(371), 50, 100, 0.105, 0.191),
-	LAVA_EEL(new Item(2148), 53, 100, 0.227, 0.379), 
+	LAVA_EEL(new Item(2148), 53, 30, 0.227, 0.379),
 	MONKFISH(new Item(7944), 62, 120, 0.293, 0.356), 
 	KARAMBWAN(new Item(3142), 65, 105, 0.414, 0.629), 
 	SHARK(new Item(383), 76, 110, 0.121, 0.16), 

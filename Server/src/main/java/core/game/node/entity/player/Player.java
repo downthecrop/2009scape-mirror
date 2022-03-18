@@ -40,7 +40,7 @@ import core.game.node.entity.player.link.skillertasks.SkillerTasks;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.construction.HouseManager;
 import core.game.node.entity.skill.hunter.HunterManager;
-import core.game.node.entity.skill.slayer.SlayerManager;
+import rs09.game.node.entity.skill.slayer.SlayerManager;
 import core.game.node.entity.skill.summoning.familiar.FamiliarManager;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
@@ -77,7 +77,7 @@ import rs09.GlobalStats;
 import rs09.ServerConstants;
 import rs09.game.VarpManager;
 import rs09.game.content.ame.RandomEventManager;
-import rs09.game.ge.PlayerGrandExchange;
+import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
 import rs09.game.node.entity.player.info.login.PlayerSaver;
@@ -86,7 +86,6 @@ import rs09.game.node.entity.state.newsys.State;
 import rs09.game.node.entity.state.newsys.StateRepository;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
-import rs09.game.world.repository.DisconnectionQueue;
 import rs09.game.world.repository.Repository;
 import rs09.game.world.update.MapChunkRenderer;
 import rs09.game.world.update.NPCRenderer;
@@ -251,7 +250,7 @@ public class Player extends Entity {
 	/**
 	 * The new grand exchange interface manager.
 	 */
-	private final PlayerGrandExchange playerGrandExchange = new PlayerGrandExchange(this);
+	public final GrandExchangeRecords exchangeRecords = new GrandExchangeRecords(this);
 
 	/**
 	 * The familiar manager.
@@ -398,6 +397,8 @@ public class Player extends Entity {
 
 	@Override
 	public void init() {
+		if(!artificial)
+			SystemLogger.logInfo(getUsername() + " initialising...");
 		if (!artificial) {
 			getProperties().setSpawnLocation(ServerConstants.HOME_LOCATION);
 			getDetails().getSession().setObject(this);
@@ -1445,7 +1446,7 @@ public class Player extends Entity {
 
 	public BrawlingGlovesManager getBrawlingGlovesManager() { return brawlingGlovesManager;}
 
-	public PlayerGrandExchange getPlayerGrandExchange() { return playerGrandExchange; }
+	public GrandExchangeRecords getExchangeRecords() { return exchangeRecords; }
 
 	public boolean hasActiveState(String key){
 		State state = states.get(key);

@@ -15,6 +15,8 @@ import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 
+import static api.ContentAPIKt.*;
+
 /**
  * Represents the pulse used to thieve a stall.
  * @author 'Vexia
@@ -70,6 +72,15 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 			player.getPacketDispatch().sendMessage("You don't have enough inventory space.");
 			return false;
 		}
+		if (player.getLocation().isInRegion(10553) && !isQuestComplete(player, "Fremennik Trials") && stall.full_ids.contains(4278)) {
+			sendDialogue(player, "The fur trader is staring at you suspiciously. You cannot steal from his stall while he distrusts you.");
+			return false;
+		}
+
+		if (player.getLocation().isInRegion(10553) && !isQuestComplete(player, "Fremennik Trials") && stall.full_ids.contains(4277)) {
+			sendDialogue(player, "The fishmonger is staring at you suspiciously. You cannot steal from his stall while he distrusts you.");
+			return false;
+		}
 		return true;
 	}
 
@@ -100,7 +111,7 @@ public final class StallThiefPulse extends SkillPulse<Scenery> {
 				player.getSavedData().getGlobalData().setSilkSteal(System.currentTimeMillis() + 1800000);
 			}
 			if (node.isActive()) {
-				SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(stall.getEmpty(node.getId())), stall.getDelay());
+				SceneryBuilder.replace(node, node.transform(stall.getEmpty(node.getId())), stall.getDelay());
 			}
 			final Item item = stall.getRandomLoot();
 		    player.getInventory().add(item);

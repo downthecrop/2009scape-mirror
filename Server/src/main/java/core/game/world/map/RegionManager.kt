@@ -1,12 +1,10 @@
 package core.game.world.map
 
-import core.game.world.map.RegionManager
-import core.game.world.map.RegionPlane
-import core.game.node.scenery.Scenery
 import core.game.node.Node
 import core.game.node.entity.Entity
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
+import core.game.node.scenery.Scenery
 import core.game.world.map.zone.ZoneBorders
 import core.tools.RandomFunction
 import rs09.game.system.SystemLogger
@@ -721,6 +719,27 @@ object RegionManager {
             for (regionY in ((l.regionY - 6) shr 3)..((l.regionY + 6) shr 3)) {
                 for (player in forId((regionX shl 8) or regionY).planes[l.z].players) {
                     if (player.location.withinDistance(l, distance)) {
+                        players.add(player)
+                    }
+                }
+            }
+        }
+        return players
+    }
+
+    /**
+     * Gets a list of local players.
+     * @param l The location.
+     * @param distance The distance to that location.
+     * @return The list of players.
+     */
+    @JvmStatic
+    fun getLocalPlayersMaxNorm(l: Location, distance: Int): MutableList<Player> {
+        val players: MutableList<Player> = LinkedList()
+        for (regionX in ((l.regionX - 6) shr 3)..((l.regionX + 6) shr 3)) {
+            for (regionY in ((l.regionY - 6) shr 3)..((l.regionY + 6) shr 3)) {
+                for (player in forId((regionX shl 8) or regionY).planes[l.z].players) {
+                    if (player.location.withinMaxnormDistance(l, distance)) {
                         players.add(player)
                     }
                 }

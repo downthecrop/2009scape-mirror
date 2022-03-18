@@ -19,6 +19,8 @@ object Repository {
      */
     @JvmStatic
     val players = NodeList<Player>(ServerConstants.MAX_PLAYERS)
+    val uid_map = HashMap<Int,Player>(ServerConstants.MAX_PLAYERS)
+
     /**
      * Represents the repository of active npcs.
      */
@@ -127,6 +129,18 @@ object Repository {
             }
         }
         return null
+    }
+
+    @JvmStatic
+    fun addPlayer(player: Player){
+        players.add(player)
+        uid_map[player.details.uid] = player
+    }
+
+    @JvmStatic
+    fun removePlayer(player: Player){
+        players.remove(player)
+        uid_map.remove(player.details.uid)
     }
 
     /**

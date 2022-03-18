@@ -55,7 +55,7 @@ class DisconnectionQueue {
         }
         Repository.playerNames.remove(player.name)
         Repository.lobbyPlayers.remove(player)
-        Repository.players.remove(player)
+        Repository.removePlayer(player)
         Repository.LOGGED_IN_PLAYERS.remove(player.details.username)
         SystemLogger.logInfo("Player cleared. Removed ${player.details.username}")
         try {

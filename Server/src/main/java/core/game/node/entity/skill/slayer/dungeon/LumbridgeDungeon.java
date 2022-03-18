@@ -1,7 +1,7 @@
 package core.game.node.entity.skill.slayer.dungeon;
 
 import core.cache.def.impl.NPCDefinition;
-import core.game.node.entity.skill.slayer.SlayerEquipmentFlags;
+import rs09.game.node.entity.skill.slayer.SlayerEquipmentFlags;
 import core.game.interaction.Option;
 import core.game.node.Node;
 import core.game.node.entity.Entity;

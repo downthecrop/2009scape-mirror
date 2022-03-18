@@ -39,18 +39,6 @@ object JobManager {
     }
 
     @JvmStatic
-    fun handleDeath(npc: Int, player: Player) {
-        val jobId = player.getAttribute("jobs:id",0)
-        val type = player.getAttribute("jobs:type",0)
-        if(type == 1) {
-            val job = SlayingJob.values()[jobId]
-            if (job.ids.contains(npc)) {
-                updateJobRemaining(player, 1)
-            }
-        }
-    }
-
-    @JvmStatic
     fun rewardPlayer(player: Player, npc: NPC){
         val amt = player.getAttribute("jobs:original_amount",0)
         val type = player.getAttribute("jobs:type",0)
@@ -78,6 +66,7 @@ object JobManager {
                 player.dialogueInterpreter.sendDialogue("You still need to kill $needed more ${NPC(SlayingJob.values()[jobId].ids[0]).name.toLowerCase()}.")
                 return
             }
+            player.dialogueInterpreter.sendDialogue("Excellent work, thank you! Here's your reward.")
         }
         if(!player.inventory.add(Item(995,250 * amt))){
             GroundItemManager.create(Item(995,250 * amt),player.centerLocation,player)

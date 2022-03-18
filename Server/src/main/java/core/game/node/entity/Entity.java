@@ -1,5 +1,7 @@
 package core.game.node.entity;
 
+import api.events.Event;
+import api.events.EventHook;
 import core.game.content.holiday.HolidayEvent;
 import core.game.interaction.DestinationFlag;
 import core.game.node.Node;
@@ -28,6 +30,7 @@ import core.game.world.update.flag.context.Graphics;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.world.update.UpdateMasks;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -107,6 +110,13 @@ public abstract class Entity extends Node {
 	 */
 	private final ActionLocks locks = new ActionLocks();
 
+
+	/**
+	 * The mapping of event types to event hooks
+	 */
+	private HashMap<Class<?>, ArrayList<EventHook>> hooks = new HashMap<>();
+
+
 	/**
 	 * If the entity is invisible.
 	 */
@@ -143,6 +153,54 @@ public abstract class Entity extends Node {
 		if (path != null) {
 			path.walk(this);
 		}
+	}
+
+	/**
+	 * Dispatches an event to this entity's event hooks
+	 */
+	public void dispatch(Event event)
+	{
+		if(this.hooks.containsKey(event.getClass()))
+		{
+			this.hooks.get(event.getClass()).forEach((hook) -> { hook.process(this, event); });
+		}
+	}
+
+	/**
+	 * Unhooks an eventhook from this entity
+	 */
+	public void unhook(EventHook hook)
+	{
+		GameWorld.getPulser().submit(new Pulse() {
+			@Override
+			public boolean pulse() {
+				for(ArrayList<EventHook> s : hooks.values()) s.remove(hook);
+				return true;
+			}
+		});
+	}
+
+	/**
+	 * Hooks an eventhook to this entity
+	 */
+	public void hook(Event event, EventHook hook)
+	{
+		hook(event.getClass(), hook);
+	}
+
+	public void hook(Class<?> event, EventHook hook)
+	{
+		ArrayList<EventHook> hookList;
+		if(hooks.get(event) != null)
+		{
+			hookList = hooks.get(event);
+		}
+		else
+		{
+			hookList = new ArrayList<EventHook>();
+		}
+		hookList.add(hook);
+		hooks.put(event, hookList);
 	}
 
 	/**
