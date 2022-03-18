@@ -60,7 +60,7 @@ open class RangeSwingHandler
         }
         if (entity is Player) {
             val rw = RangeWeapon.get(entity.getEquipment().getNew(EquipmentContainer.SLOT_WEAPON).getId());
-            if(rw.weaponType == WeaponType.DOUBLE_SHOT || rw.weaponType == WeaponType.DEGRADING) {
+            if(rw != null && (rw.weaponType == WeaponType.DOUBLE_SHOT || rw.weaponType == WeaponType.DEGRADING)) {
                 // Dark bow and crystal bow have a 10-square range, independent of whether longrange stance is used
                 distance = 10
             }

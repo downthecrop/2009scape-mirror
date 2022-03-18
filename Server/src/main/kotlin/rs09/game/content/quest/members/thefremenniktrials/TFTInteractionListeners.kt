@@ -172,7 +172,7 @@ class TFTInteractionListeners : InteractionListener(){
             if(player.getAttribute("onStage",false) && player.getAttribute("lyreConcertPlayed",false) == false){
                 Pulser.submit(LyreConcertPulse(player,lyre.id))
             }
-            else if(player.questRepository?.getStage("Fremennik Trials")!! < 20 || !player.questRepository?.isComplete("Fremennik Trials")!!){
+            else if(questStage(player, "Fremennik Trials")!! < 20 || !isQuestComplete(player, "Fremennik Trials")!!){
                 player.sendMessage("You lack the knowledge to play this.")
                 return@on true
             }
@@ -224,7 +224,7 @@ class TFTInteractionListeners : InteractionListener(){
         }
 
         on(THORVALD_LADDER, SCENERY, "climb-down") { player, _ ->
-            if (player.questRepository.isComplete("Fremennik Trials") || player.getAttribute("fremtrials:thorvald-vote",false)!!) {
+            if (isQuestComplete(player, "Fremennik Trials") || player.getAttribute("fremtrials:thorvald-vote",false)!!) {
                 player.sendMessage("You have no reason to go back down there.")
                 return@on true
             } else if (!player.getAttribute("fremtrials:warrior-accepted",false)!!) {
@@ -250,7 +250,7 @@ class TFTInteractionListeners : InteractionListener(){
             }
 
             ClimbActionHandler.climb(player, Animation(828), Location.create(2671, 10099, 2))
-            Pulser.submit(KoscheiPulse(player))
+            player.pulseManager.run(KoscheiPulse(player))
             return@on true
         }
 
@@ -261,35 +261,24 @@ class TFTInteractionListeners : InteractionListener(){
 
         on(SWAYING_TREE,SCENERY,"cut-branch"){ player, _ ->
             SkillingTool.getHatchet(player)?.let { Pulser.submit(ChoppingPulse(player)).also { return@on true } }
-
             player.sendMessage("You need an axe which you have the woodcutting level to use to do this.")
             return@on true
         }
 
         on(SHOPNPCS,NPC,"Trade") { player, npc ->
-            if(player.questRepository.isComplete("Fremennik Trials")){
+            if(isQuestComplete(player, "Fremennik Trials")){
                 npc.asNpc().openShop(player)
             }
             else {
                 when(npc.id){
-                    NPCs.THORA_THE_BARKEEP_1300 -> sendMessage(player,"Only Fremenniks may buy drinks here.")
-                    NPCs.SKULGRIMEN_1303 -> sendMessage(player,"Only Fremenniks may purchase weapons and armour here.")
-                    NPCs.SIGMUND_THE_MERCHANT_1282 -> sendMessage(player,"Only Fremenniks may trade with this merchant.")
-                    NPCs.YRSA_1301 -> sendMessage(player,"Only Fremenniks may buy clothes here.")
-                    NPCs.FISH_MONGER_1315 -> sendMessage(player,"Only Fremenniks may purchase fish here.")
+                    NPCs.THORA_THE_BARKEEP_1300 -> sendDialogue(player,"Only Fremenniks may buy drinks here.")
+                    NPCs.SKULGRIMEN_1303 -> sendDialogue(player,"Only Fremenniks may purchase weapons and armour here.")
+                    NPCs.SIGMUND_THE_MERCHANT_1282 -> sendDialogue(player,"Only Fremenniks may trade with this merchant.")
+                    NPCs.YRSA_1301 -> sendDialogue(player,"Only Fremenniks may buy clothes here.")
+                    NPCs.FISH_MONGER_1315 -> sendDialogue(player,"Only Fremenniks may purchase fish here.")
                 }
             }
             return@on true
-        }
-
-        for(id in FREMENNIK_HELMS){
-            onEquip(id){ player, _ ->
-                if(!player.questRepository.isComplete("Fremennik Trials")){
-                    sendMessage(player, "You must have completed The Fremennik Trials to equip this.")
-                    return@onEquip false
-                }
-                return@onEquip true
-            }
         }
     }
 

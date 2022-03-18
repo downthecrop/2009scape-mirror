@@ -6,6 +6,7 @@ import core.game.node.entity.player.Player
 import core.plugin.Initializable
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
+import rs09.tools.END_DIALOGUE
 import kotlin.random.Random
 
 @Initializable
@@ -39,7 +40,7 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
             stage = 500
             return true
         }
-        else if(player.getAttribute("fremtrials:votes",0) == 7){
+        else if(player.getAttribute("fremtrials:votes",0) >= 7){
             npcl(FacialExpression.HAPPY," Greetings again outerlander! How goes your attempts to gain votes with the council of elders?")
             stage = 545
             return true
@@ -101,7 +102,7 @@ class ChieftanBrundt(player: Player? = null) : DialoguePlugin(player){
             302 -> {options("Yes, I am interested.","No, I'm not interested.");stage++}
             303 -> when(buttonId){
                     1 -> {player("Actually, I would be very interested to hear what you","have to offer.");stage = 310}
-                    2 -> {player("No, I'm not interested.");stage = 340}
+                    2 -> player("No, I'm not interested.").also { stage = END_DIALOGUE }
                   }
 
                 //Yes, I am interested in what you have to say.

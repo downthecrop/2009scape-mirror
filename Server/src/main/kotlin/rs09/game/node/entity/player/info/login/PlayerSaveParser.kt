@@ -8,7 +8,6 @@ import core.game.node.entity.player.link.SpellBookManager
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.entity.player.link.grave.GraveType
 import core.game.node.entity.player.link.music.MusicEntry
-import core.game.node.entity.skill.slayer.SlayerEquipmentFlags
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.json.simple.JSONArray
@@ -18,11 +17,8 @@ import rs09.ServerConstants
 import rs09.game.node.entity.skill.farming.CompostBins
 import rs09.game.node.entity.skill.farming.FarmingPatch
 import rs09.game.system.SystemLogger
-import rs09.game.world.GameWorld
 import java.io.FileReader
 import java.util.*
-import core.game.node.item.Item;
-import org.rs09.consts.Items;
 
 /**
  * Class used for parsing JSON player saves.
@@ -307,7 +303,7 @@ class PlayerSaveParser(val player: Player) {
     fun parseGrandExchange() {
         val geData: Any? = saveFile!!["grand_exchange"]
         if (geData != null) {
-            player.playerGrandExchange.parse(geData as JSONObject)
+            player.exchangeRecords.parse(geData as JSONObject)
         }
 
     }
@@ -382,7 +378,6 @@ class PlayerSaveParser(val player: Player) {
         bBars?.let{player.blastBars.parse(it)}
         bOre?.let{player.blastOre.parse(bOre)}
         bCoal?.let{player.blastCoal.parse(bCoal)}
-        migrateBlastCoal()
         player.location = rs09.JSONUtils.parseLocation(location)
     }
 
@@ -413,10 +408,5 @@ class PlayerSaveParser(val player: Player) {
         player.settings.parse(settingsData)
     }
 
-    fun migrateBlastCoal() {
-        val amount = player.blastOre.getAmount(Items.COAL_453)
-        if(amount > 0 && player.blastOre.remove(Item(Items.COAL_453, amount))) {
-            player.blastCoal.add(Item(Items.COAL_453, amount))
-        }
-    }
+
 }

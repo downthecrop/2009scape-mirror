@@ -1,5 +1,6 @@
 package core.game.node.entity.skill.firemaking;
 
+import api.events.LitFireEvent;
 import core.game.world.map.zone.ZoneBorders;
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
@@ -140,20 +141,8 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 
 		int playerRegion = player.getViewport().getRegion().getId();
 
-		if (fire == Log.MAGIC && playerRegion == 10806) {
-			player.getAchievementDiaryManager().finishTask(player,DiaryType.SEERS_VILLAGE,2, 5);
-		}
-		// Light a campfire from normal logs in Lumbridge Swamp
-		if (fire == Log.NORMAL && (playerRegion == 12593 || playerRegion == 12849)) {
-			player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 1, 9);
-		}
-		// Light a willow log fire in Lumbridge Castle courtyard
-		if (fire == Log.WILLOW
-				&& new ZoneBorders(3216, 3207, 3225, 3233, 0).insideBorder(player)) {
-			player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 2, 3);
-		}
-
 		setLastFire();
+		player.dispatch(new LitFireEvent(fire.getLogId()));
 	}
 
 	@Override

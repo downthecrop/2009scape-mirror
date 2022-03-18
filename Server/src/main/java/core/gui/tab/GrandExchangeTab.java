@@ -5,7 +5,6 @@ import core.game.node.entity.player.Player;
 import core.gui.ConsoleFrame;
 import core.gui.ConsoleTab;
 import rs09.game.ge.GrandExchangeOffer;
-import rs09.game.ge.OfferManager;
 
 import javax.swing.*;
 import java.awt.*;
@@ -142,12 +141,12 @@ public class GrandExchangeTab extends ConsoleTab {
             JOptionPane.showMessageDialog(null, "Error! No player found.");
             return;
         }
-        for (GrandExchangeOffer o : player.getPlayerGrandExchange().getOffers()) {
+/*        for (GrandExchangeOffer o : player.getPlayerGrandExchange().getOfferRecords()) {
             if (o == null) {
                 continue;
             }
             addOffer(o);
-        }
+        }*/
     }
 
     /**
@@ -161,12 +160,12 @@ public class GrandExchangeTab extends ConsoleTab {
         } catch (NumberFormatException e) {
 
         }
-        for (GrandExchangeOffer o : OfferManager.getOffersForItem(itemId)) {
+/*        for (GrandExchangeOffer o : OfferManager.getOffersForItem(itemId)) {
             if (o == null) {
                 continue;
             }
             addOffer(o);
-        }
+        }*/
     }
 
     /**
@@ -184,8 +183,8 @@ public class GrandExchangeTab extends ConsoleTab {
             JOptionPane.showMessageDialog(null, "Error! No data in DB yet. Press load.");
             return;
         }
-        for (GrandExchangeOffer offer : OfferManager.getOFFER_MAPPING().values()) {
+/*        for (GrandExchangeOffer offer : OfferManager.getOFFER_MAPPING().values()) {
             model.addElement(offer);
-        }
+        }*/
     }
 }

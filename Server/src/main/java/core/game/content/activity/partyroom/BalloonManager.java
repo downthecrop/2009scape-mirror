@@ -244,9 +244,6 @@ public final class BalloonManager extends OptionHandler {
 			getBalloons().remove(object);
 			player.animate(Animation.create(10017));
 
-			// Pop a party balloon
-			player.getAchievementDiaryManager().finishTask(player, DiaryType.FALADOR, 0, 12);
-
 			GameWorld.getPulser().submit(new Pulse(1) {
 				int counter;
 

@@ -4,14 +4,14 @@ import api.*
 import core.cache.Cache
 import core.game.container.access.InterfaceContainer
 import core.game.content.quest.tutorials.tutorialisland.CharacterDesign
+import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.combat.ImpactHandler.HitsplatType
 import core.game.node.entity.impl.Projectile
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.item.Item
-import core.game.node.scenery.Scenery
-import core.game.node.scenery.SceneryBuilder
 import core.game.system.command.CommandSet
 import core.game.system.task.Pulse
 import core.game.world.map.Location
@@ -25,6 +25,8 @@ import core.plugin.Initializable
 import core.plugin.Plugin
 import rs09.game.system.command.CommandPlugin
 import rs09.game.world.GameWorld
+import java.awt.Toolkit
+import java.awt.datatransfer.StringSelection
 
 /**
  * Represents the the command plugin used for visual commands.
@@ -131,6 +133,8 @@ class VisualCommand : CommandPlugin() {
                 npc.init()
                 npc.isWalks = if (args.size > 2) true else false
                 val npcString = "{" + npc.location.x + "," + npc.location.y + "," + npc.location.z + "," + (if (npc.isWalks) "1" else "0") + "," + npc.direction.ordinal + "}"
+                val clpbrd = Toolkit.getDefaultToolkit().systemClipboard
+                clpbrd.setContents(StringSelection(npcString), null)
                 println(npcString)
                 return true
             }

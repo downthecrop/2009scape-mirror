@@ -42,6 +42,13 @@ abstract class InteractionListener : Listener{
         InteractionListeners.addUnequip(id,handler)
     }
 
+    fun onEquip(ids: IntArray, handler: (player: Player, node: Node) -> Boolean){
+        ids.forEach { id -> InteractionListeners.addEquip(id,handler) }
+    }
+    fun onUnequip(ids:IntArray, handler: (player: Player, node: Node) -> Boolean){
+        ids.forEach{ id -> InteractionListeners.addUnequip(id,handler) }
+    }
+
     open fun defineDestinationOverrides(){}
 
     fun setDest(type: Int, id: Int,handler: (Entity, Node) -> Location){

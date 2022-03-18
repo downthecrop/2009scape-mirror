@@ -103,18 +103,6 @@ public final class TzhaarFightCaveNPC extends AbstractNPC {
         return mover instanceof TzhaarFightCaveNPC;
     }
 
-	@Override
-	public void finalizeDeath(Entity killer) {
-		if (killer.isPlayer()) {
-			Player player = killer.asPlayer();
-			// Successfully kill a Ket-Zek in the Fight Caves
-			if ((getId() == 2743 || getId() == 2744)) {
-				player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 2, 1);
-			}
-		}
-		super.finalizeDeath(killer);
-	}
-
 	/**
 	 * Heals the NPC.
 	 * @param amount The amount to heal.
