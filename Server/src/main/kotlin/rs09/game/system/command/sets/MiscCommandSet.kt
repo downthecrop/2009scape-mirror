@@ -1,12 +1,11 @@
 package rs09.game.system.command.sets
 
 import api.*
-import core.cache.def.impl.ItemDefinition
+import api.InputType
 import core.cache.def.impl.NPCDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.cache.def.impl.VarbitDefinition
 import core.game.component.Component
-import core.game.ge.OfferState
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
 import core.game.node.entity.player.info.Rights
@@ -24,13 +23,16 @@ import org.rs09.consts.Components
 import rs09.ServerConstants
 import rs09.game.content.activity.fishingtrawler.TrawlerLoot
 import rs09.game.content.ame.RandomEvents
-import rs09.game.ge.OfferManager
+import rs09.game.ge.GrandExchange
 import rs09.game.node.entity.state.newsys.states.FarmingState
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Command
 import rs09.game.system.command.CommandMapping
 import rs09.game.world.repository.Repository
 import rs09.tools.stringtools.colorize
+import java.awt.Toolkit
+import java.awt.datatransfer.StringSelection
+import java.util.*
 
 @Initializable
 class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
@@ -72,6 +74,9 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
             SystemLogger.logInfo("Viewport: " + l.getSceneX(player.playerFlags.lastSceneGraph) + "," + l.getSceneY(player.playerFlags.lastSceneGraph))
             val loc = "Location.create(" + l.x + ", " + l.y + ", " + l.z + ")"
             SystemLogger.logInfo(loc + "; " + player.playerFlags.lastSceneGraph + ", " + l.localX + ", " + l.localY)
+            val stringSelection = StringSelection(loc)
+            val clpbrd = Toolkit.getDefaultToolkit().systemClipboard
+            clpbrd.setContents(stringSelection, null)
         }
 
         /**
@@ -150,7 +155,7 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
          */
         define("ge", Command.Privilege.STANDARD) { player, args ->
             if(args.size < 2){
-                reject(player, "Usage: ::ge mode", "Available modes: buying, selling, search")
+                reject(player, "Usage: ::ge mode", "Available modes: buying, selling, search, bots, botsearch")
             }
 
             val mode = args[1]
@@ -159,6 +164,10 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 "selling" -> showGeSell(player)
                 "search" -> sendInputDialogue(player, InputType.STRING_LONG, "Enter search term:"){value ->
                     showOffers(player, value as String)
+                }
+                "bots" -> showGeBots(player)
+                "botsearch" -> sendInputDialogue(player, InputType.STRING_LONG, "Enter search term:"){value ->
+                    showGeBotsearch(player, value as String)
                 }
                 else -> reject(player, "Invalid mode used. Available modes are: buying, selling, search")
             }
@@ -280,6 +289,10 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
                 sb.append(entry)
                 first = false
             }
+
+            val stringSelection = StringSelection(sb.toString())
+            val clpbrd = Toolkit.getDefaultToolkit().systemClipboard
+            clpbrd.setContents(stringSelection, null)
 
             log.clear()
             player.setAttribute("loc-log",log)
@@ -447,8 +460,13 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         }
 
         define("testlady",Command.Privilege.ADMIN){player,_ ->
-            player.antiMacroHandler.event = RandomEvents.EVIL_CHICKEN.npc.create(player,null,"sexam")
+            player.antiMacroHandler.event = RandomEvents.RIVER_TROLL.npc.create(player)
             player.antiMacroHandler.event!!.init()
+        }
+
+        define("revent",Command.Privilege.ADMIN){player,_ ->
+            println(player.pulseManager.current)
+            player.antiMacroHandler.fireEvent()
         }
 
         define("addcredits",Command.Privilege.ADMIN){player,_ ->
@@ -510,37 +528,84 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         }
     }
 
+    fun showGeBotsearch(player: Player, searchTerm: String)
+    {
+        val offerAmounts = HashMap<Int,Int>()
+        val offerPrice = HashMap<Int,Int>()
+
+        val offers = GrandExchange.getBotOffers().filter { getItemName(it.itemID).contains(searchTerm, true) }
+
+        for(offer in offers)
+        {
+            offerAmounts[offer.itemID] = offer.amount
+            offerPrice[offer.itemID] = offer.offeredValue
+        }
+
+        val entries = offerAmounts.entries
+        var lineId = 11
+        setScrollTitle(player, "Bot Stock - \"$searchTerm\"")
+        for(i in 0..299) {
+            val offer = entries.elementAtOrNull(i)
+            if (offer != null)
+                setInterfaceText(player, "${getItemName(offer.key)} (<col=6bff89>x${offer.value}</col>) -> Price: <col=e8d151>${offerPrice[offer.key]}</col>gp", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+            else
+                setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+        }
+        openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+    }
+
+    fun showGeBots(player: Player)
+    {
+        val offerAmounts = HashMap<Int,Int>()
+        val offerPrice = HashMap<Int,Int>()
+
+        val offers = GrandExchange.getBotOffers()
+
+        for(offer in offers)
+        {
+            offerAmounts[offer.itemID] = offer.amount
+            offerPrice[offer.itemID] = offer.offeredValue
+        }
+
+        val entries = offerAmounts.entries
+        var lineId = 11
+        setScrollTitle(player, "Bot Stock")
+        for(i in 0..299) {
+            val offer = entries.elementAtOrNull(i)
+            if (offer != null)
+                setInterfaceText(player, "${getItemName(offer.key)} (<col=6bff89>x${offer.value}</col>) -> Price: <col=e8d151>${offerPrice[offer.key]}</col>gp", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+            else
+                setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+        }
+        openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
+    }
+
     fun showGeSell(player: Player){
-        val offers = HashMap<Int,Int>()
-        for (offerIDs in OfferManager.OFFERS_BY_ITEMID) {
-            var totalOffered = 0
-            for (offer in offerIDs.value) {
-                if (offer.offerState != OfferState.PENDING && offer.sell) {
-                    totalOffered += offer.amountLeft
-                }
-            }
-            if (totalOffered != 0) {
-                offers[offerIDs.key] = totalOffered
-            }
-        }
-        for (offerIDs in OfferManager.BOT_OFFERS) {
-            if (offerIDs.value > 0) {
-                if (offers[offerIDs.key] == null) {
-                    offers[offerIDs.key] = offerIDs.value
-                } else {
-                    offers[offerIDs.key] = offers[offerIDs.key]!! + offerIDs.value
-                }
-            }
+        val offerAmounts = HashMap<Int,Int>()
+        val lowestPrice = HashMap<Int,Int>()
+
+        val offers = GrandExchange.getValidOffers()
+
+        for(offer in offers)
+        {
+            if(!offer.sell) continue
+            var amount = offerAmounts[offer.itemID] ?: 0
+            amount += offer.amountLeft
+
+            var price = lowestPrice[offer.itemID] ?: Integer.MAX_VALUE
+            if(offer.offeredValue < price) price = offer.offeredValue
+
+            offerAmounts[offer.itemID] = amount
+            lowestPrice[offer.itemID] = price
         }
 
-        val offerList = offers.keys.map { "${ItemDefinition.forId(it).name} - ${offers[it]}" }.sorted()
-
+        val entries = offerAmounts.entries
         var lineId = 11
         setScrollTitle(player, "Active Sell Offers")
         for(i in 0..299) {
-            val offer = offerList.elementAtOrNull(i)
+            val offer = entries.elementAtOrNull(i)
             if (offer != null)
-                setInterfaceText(player, offer, Components.QUESTJOURNAL_SCROLL_275, lineId++)
+                setInterfaceText(player, "${getItemName(offer.key)} (<col=6bff89>x${offer.value}</col>) -> Lowest: <col=e8d151>${lowestPrice[offer.key]}</col>gp", Components.QUESTJOURNAL_SCROLL_275, lineId++)
             else
                 setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
         }
@@ -548,26 +613,31 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
     }
 
     fun showGeBuy(player: Player){
-        val offers = HashMap<Int,Int>()
-        for (offerIDs in OfferManager.OFFERS_BY_ITEMID) {
-            var totalOffered = 0
-            for (offer in offerIDs.value) {
-                if (offer.offerState != OfferState.PENDING && !offer.sell) {
-                    totalOffered += offer.amountLeft
-                }
-            }
-            if (totalOffered != 0) {
-                offers[offerIDs.key] = totalOffered
-            }
-        }
-        val offerList = offers.keys.map { "${itemDefinition(it).name} - ${offers[it]}" }.sorted()
+        val offerAmounts = HashMap<Int,Int>()
+        val highestPrice = HashMap<Int,Int>()
 
+        val offers = GrandExchange.getValidOffers()
+
+        for(offer in offers)
+        {
+            if(offer.sell) continue
+            var amount = offerAmounts[offer.itemID] ?: 0
+            amount += offer.amountLeft
+
+            var price = highestPrice[offer.itemID] ?: 0
+            if(offer.offeredValue > price) price = offer.offeredValue
+
+            offerAmounts[offer.itemID] = amount
+            highestPrice[offer.itemID] = price
+        }
+
+        val entries = offerAmounts.entries
         var lineId = 11
         setScrollTitle(player, "Active Buy Offers")
         for(i in 0..299) {
-            val offer = offerList.elementAtOrNull(i)
+            val offer = entries.elementAtOrNull(i)
             if (offer != null)
-                setInterfaceText(player, offer, Components.QUESTJOURNAL_SCROLL_275, lineId++)
+                setInterfaceText(player, "${getItemName(offer.key)} (<col=6bff89>x${offer.value}</col>) -> Highest: <col=e8d151>${highestPrice[offer.key]}</col>gp", Components.QUESTJOURNAL_SCROLL_275, lineId++)
             else
                 setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
         }
@@ -575,59 +645,64 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
     }
 
     fun showOffers(player: Player, searchTerm: String){
-        val fakeOffers = ArrayList<FakeOffer>()
+        val offers = GrandExchange.getValidOffers().filter { getItemName(it.itemID).contains(searchTerm, true) }
+        val buyingAmount = HashMap<Int, Int>()
+        val buyingHighest = HashMap<Int, Int>()
+        val sellingAmount = HashMap<Int,Int>()
+        val sellingLowest = HashMap<Int,Int>()
 
-        OfferManager.OFFERS_BY_ITEMID.forEach { (id, offers) ->
-            if(searchTerm.toLowerCase().contains(itemDefinition(id).name.toLowerCase()) || itemDefinition(id).name.toLowerCase().contains(searchTerm.toLowerCase())){
-                offers.forEach {
-                    fakeOffers.add(FakeOffer(it.sell, itemDefinition(id).name, it.amount))
-                }
+        for(offer in offers)
+        {
+            if(offer.sell)
+            {
+                var price = sellingLowest[offer.itemID] ?: Int.MAX_VALUE
+                if(offer.offeredValue < price) price = offer.offeredValue
+
+                var amount = sellingAmount[offer.itemID] ?: 0
+                amount += offer.amountLeft
+
+                sellingAmount[offer.itemID] = amount
+                sellingLowest[offer.itemID] = price
+            }
+            else
+            {
+                var price = buyingHighest[offer.itemID] ?: 0
+                if(offer.offeredValue > price) price = offer.offeredValue
+
+                var amount = buyingAmount[offer.itemID] ?: 0
+                amount += offer.amountLeft
+
+                buyingAmount[offer.itemID] = amount
+                buyingHighest[offer.itemID] = price
             }
         }
 
-        OfferManager.BOT_OFFERS.forEach{ (id, amount) ->
-            val name = getItemName(id)
-            if(searchTerm.toLowerCase().contains(name) || name.toLowerCase().contains(searchTerm.toLowerCase()))
-                fakeOffers.add(FakeOffer(true, getItemName(id), amount))
-        }
-
-        val buyingList = fakeOffers.filter { !it.sell }
-        val sellingList = fakeOffers.filter { it.sell }
-
-        val buyingMap = HashMap<String, Int>()
-        val sellingMap = HashMap<String, Int>()
-
-        buyingList.forEach {
-            if(buyingMap[it.name] == null) buyingMap[it.name] = it.amount
-            else buyingMap[it.name] = buyingMap[it.name]?.plus(it.amount) ?: 0
-        }
-
-        sellingList.forEach {
-            if(sellingMap[it.name] == null) sellingMap[it.name] = it.amount
-            else sellingMap[it.name] = sellingMap[it.name]?.plus(it.amount) ?: 0
-        }
-
-        val buyList = buyingMap.map { (name,amount) -> "[Buying] $name - $amount" }.sortedBy { it.length }.toMutableList()
-        val sellList = sellingMap.map { (name, amount) -> "[Selling] $name - $amount" }.sortedBy { it.length }.toMutableList()
-
-        sellList.reverse()
-        sellList.add("<str>                                                                                             </str>")
-        sellList.reverse()
-
-        SystemLogger.logInfo("bl: ${buyList.size} sl: ${sellList.size}")
-
         setScrollTitle(player, "Results for \"$searchTerm\"")
 
-        if(buyList.isEmpty()){
-            buyList.add("[Buying] Nothing!")
-        }
-        if(sellList.size == 1){
-            sellList.add("[Selling] Nothing!")
-        }
         var lineId = 11
         for(i in 0..299) {
-            val offer = if(i < buyList.size) buyList.getOrNull(i) else sellList.getOrNull(i - (buyList.size))
-            setInterfaceText(player, offer ?: "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+            if(i > buyingAmount.keys.size)
+            {
+                val offer = sellingAmount.entries.elementAtOrNull(i - buyingAmount.keys.size)
+                if(offer != null) {
+                    setInterfaceText(player, "[SELLING] ${getItemName(offer.key)} (<col=6bff89>x${offer.value}</col>) -> Lowest: <col=e8d151>${sellingLowest[offer.key]}</col>gp", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+                    continue
+                }
+            }
+            else if(i < buyingAmount.keys.size)
+            {
+                val offer = buyingAmount.entries.elementAtOrNull(i)
+                if(offer != null) {
+                    setInterfaceText(player, "[BUYING] ${getItemName(offer.key)} (<col=6bff89>x${offer.value}</col>) -> Highest: <col=e8d151>${buyingHighest[offer.key]}</col>gp", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+                    continue
+                }
+            }
+            else {
+                setInterfaceText(player, "<str>                                                                                                                  </str>", Components.QUESTJOURNAL_SCROLL_275, lineId++)
+                continue
+            }
+
+            setInterfaceText(player, "", Components.QUESTJOURNAL_SCROLL_275, lineId++)
         }
         openInterface(player, Components.QUESTJOURNAL_SCROLL_275)
     }
@@ -636,5 +711,4 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
         setInterfaceText(player, text, Components.QUESTJOURNAL_SCROLL_275, 2)
     }
 
-    class FakeOffer(val sell: Boolean,val name: String,val amount: Int)
 }

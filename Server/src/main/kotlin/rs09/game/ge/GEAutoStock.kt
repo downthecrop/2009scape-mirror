@@ -21,7 +21,7 @@ class GEAutoStock {
                     val offers = botSave["offers"] as JSONArray
                     for (offer in offers) {
                         val o = offer as JSONObject
-                        OfferManager.addBotOffer(o["item"].toString().toInt(), o["qty"].toString().toInt())
+                        GrandExchange.addBotOffer(o["item"].toString().toInt(), o["qty"].toString().toInt())
                     }
                 }
             }

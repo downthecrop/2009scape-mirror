@@ -6,6 +6,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -197,7 +198,7 @@ public class TeleportManager {
 					public boolean pulse() {
 						if (delay == 0) {
 							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(200);
+								entity.asPlayer().getAudioManager().send(new Audio(200), true);
 							}
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getStartEmote()));
 							entity.graphics(new Graphics(getSettings().getStartGfx()));
@@ -206,7 +207,7 @@ public class TeleportManager {
 							fireRandom(entity, location);
 						} else if (delay == 4) {
 							if (entity instanceof Player) {
-								entity.asPlayer().getAudioManager().send(201);
+								entity.asPlayer().getAudioManager().send(new Audio(201), true);
 							}
 							entity.getAnimator().forceAnimation(new Animation(getSettings().getEndEmote(), Priority.HIGH));
 							entity.graphics(new Graphics(getSettings().getEndGfx()));

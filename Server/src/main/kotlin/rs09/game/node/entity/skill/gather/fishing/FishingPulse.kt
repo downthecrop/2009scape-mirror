@@ -1,5 +1,6 @@
 package rs09.game.node.entity.skill.gather.fishing
 
+import api.events.ResourceGatheredEvent
 import core.game.content.global.SkillingPets
 import core.game.content.quest.tutorials.tutorialisland.TutorialSession
 import core.game.content.quest.tutorials.tutorialisland.TutorialStage
@@ -119,7 +120,7 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
                 if (player.skillTasks.hasTask()) {
                     updateSkillTask()
                 }
-                updateDiary()
+                player.dispatch(ResourceGatheredEvent(fish!!.item.id, fish!!.item.amount, node!!))
                 SkillingPets.checkPetDrop(player, SkillingPets.HERON)
                 val item = fish!!.item
                 if (isActive(SkillcapePerks.GREAT_AIM, player) && RandomFunction.random(100) <= 5) {
@@ -139,145 +140,6 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
             }
         }
         return player.inventory.freeSlots() == 0
-    }
-
-    fun updateDiary() {
-        when (fish) {
-            Fish.MACKEREL -> {
-                if (player.viewport.region.id == 11317) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 0, 11)
-                }
-                if (player.viewport.region.id == 11317
-                    && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE, 1, 11)
-                ) {
-                    player.setAttribute("/save:diary:seers:bass-caught", true)
-                }
-                if (player.viewport.region.id == 11317
-                    && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE, 2, 7)
-                ) {
-                    player.setAttribute(
-                        "/save:diary:seers:caught-shark",
-                        1 + player.getAttribute("diary:seers:caught-shark", 0)
-                    )
-                    if (player.getAttribute("diary:seers:caught-shark", 0) >= 5) {
-                        player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 2, 7)
-                    }
-                }
-                // Catch some shrimp in the Fishing spot to the east of<br><br>Lumbridge Swamp
-                if (player.location.withinDistance(Location.create(3241, 3149, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 0, 13)
-                }
-                // Catch a pike in the river to the east of Lumbridge Castle
-                if (player.location.withinDistance(Location.create(3240, 3247, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 1, 4)
-                }
-                // Catch a salmon in the river to the east of Lumbridge Castle
-                if (player.location.withinDistance(Location.create(3240, 3247, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 2, 9)
-                }
-                // Catch a trout in the river to the east of Barbarian Village
-                if (player.location.withinDistance(Location.create(3105, 3431, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 16)
-                }
-            }
-            Fish.BASS -> {
-                if (player.viewport.region.id == 11317
-                    && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE, 1, 11)
-                ) {
-                    player.setAttribute("/save:diary:seers:bass-caught", true)
-                }
-                if (player.viewport.region.id == 11317
-                    && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE, 2, 7)
-                ) {
-                    player.setAttribute(
-                        "/save:diary:seers:caught-shark",
-                        1 + player.getAttribute("diary:seers:caught-shark", 0)
-                    )
-                    if (player.getAttribute("diary:seers:caught-shark", 0) >= 5) {
-                        player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 2, 7)
-                    }
-                }
-                if (player.location.withinDistance(Location.create(3241, 3149, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 0, 13)
-                }
-                if (player.location.withinDistance(Location.create(3240, 3247, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 1, 4)
-                }
-                if (player.location.withinDistance(Location.create(3240, 3247, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 2, 9)
-                }
-                if (player.location.withinDistance(Location.create(3105, 3431, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 16)
-                }
-            }
-            Fish.SHARK -> {
-                if (player.viewport.region.id == 11317
-                    && !player.achievementDiaryManager.hasCompletedTask(DiaryType.SEERS_VILLAGE, 2, 7)
-                ) {
-                    player.setAttribute(
-                        "/save:diary:seers:caught-shark",
-                        1 + player.getAttribute("diary:seers:caught-shark", 0)
-                    )
-                    if (player.getAttribute("diary:seers:caught-shark", 0) >= 5) {
-                        player.achievementDiaryManager.finishTask(player, DiaryType.SEERS_VILLAGE, 2, 7)
-                    }
-                }
-                if (player.location.withinDistance(Location.create(3241, 3149, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 0, 13)
-                }
-                if (player.location.withinDistance(Location.create(3240, 3247, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 1, 4)
-                }
-                if (player.location.withinDistance(Location.create(3240, 3247, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 2, 9)
-                }
-                if (player.location.withinDistance(Location.create(3105, 3431, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 16)
-                }
-            }
-            Fish.SHRIMP -> {
-                if (player.location.withinDistance(Location.create(3241, 3149, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 0, 13)
-                }
-                if (player.location.withinDistance(Location.create(3240, 3247, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 1, 4)
-                }
-                if (player.location.withinDistance(Location.create(3240, 3247, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 2, 9)
-                }
-                if (player.location.withinDistance(Location.create(3105, 3431, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 16)
-                }
-            }
-            Fish.PIKE -> {
-                if (player.location.withinDistance(Location.create(3240, 3247, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 1, 4)
-                }
-                if (player.location.withinDistance(Location.create(3240, 3247, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 2, 9)
-                }
-                if (player.location.withinDistance(Location.create(3105, 3431, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 16)
-                }
-            }
-            Fish.SALMON -> {
-                if (player.location.withinDistance(Location.create(3240, 3247, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.LUMBRIDGE, 2, 9)
-                }
-                if (player.location.withinDistance(Location.create(3105, 3431, 0))) {
-                    player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 16)
-                }
-            }
-            Fish.TROUT -> if (player.location.withinDistance(Location.create(3105, 3431, 0))) {
-                player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 16)
-            }
-        }
-        // Use the Fishing spots north of the banana plantation
-        if (node!!.id == 333 && player.zoneMonitor.isInZone("karamja")
-            && player.location.withinDistance(Location(2924, 3178, 0), 10)
-        ) {
-            player.achievementDiaryManager.finishTask(player, DiaryType.KARAMJA, 0, 6)
-        }
     }
 
     fun updateSkillTask() {

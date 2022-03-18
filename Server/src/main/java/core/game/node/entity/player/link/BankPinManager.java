@@ -1,10 +1,10 @@
 package core.game.node.entity.player.link;
 
-import core.cache.misc.buffer.ByteBufferUtils;
 import core.game.component.CloseEvent;
 import core.game.component.Component;
 import core.game.node.entity.player.Player;
 
+import rs09.game.interaction.inter.ge.StockMarket;
 import rs09.game.world.GameWorld;
 import core.net.packet.PacketRepository;
 import core.net.packet.context.ChildPositionContext;
@@ -14,7 +14,6 @@ import core.net.packet.out.StringPacket;
 import core.tools.RandomFunction;
 import org.json.simple.JSONObject;
 
-import java.nio.ByteBuffer;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -203,9 +202,9 @@ public class BankPinManager {
 				player.getBank().open();
 			}
 		} else if (buttonId == 3) {
-			player.getPlayerGrandExchange().openCollectionBox();
+			player.getExchangeRecords().openCollectionBox();
 		} else if (buttonId == 4) {
-			player.getPlayerGrandExchange().open();
+			StockMarket.openFor(player);
 		}
 	}
 

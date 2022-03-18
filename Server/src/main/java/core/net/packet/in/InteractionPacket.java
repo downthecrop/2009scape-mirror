@@ -1,5 +1,6 @@
 package core.net.packet.in;
 
+import api.events.InteractionEvent;
 import core.cache.def.impl.SceneryDefinition;
 import core.cache.def.impl.VarbitDefinition;
 import core.game.content.quest.PluginInteractionManager;
@@ -29,6 +30,7 @@ import rs09.game.world.repository.Repository;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Locale;
 import java.util.function.IntPredicate;
 
 /**

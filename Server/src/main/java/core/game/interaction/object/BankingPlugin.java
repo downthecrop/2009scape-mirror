@@ -32,8 +32,8 @@ import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
 import kotlin.Unit;
-import org.rs09.consts.Items;
-import rs09.game.content.dialogue.DumpContainer;
+import rs09.game.content.dialogue.DepositAllDialogue;
+import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.ge.GrandExchangeOffer;
 import rs09.game.world.GameWorld;
 
@@ -92,7 +92,7 @@ public final class BankingPlugin extends OptionHandler {
                     checkAchievements(player);
                     return true;
                 case "collect":
-                    player.getPlayerGrandExchange().openCollectionBox();
+                    player.getExchangeRecords().openCollectionBox();
                     return true;
                 case "deposit":
                     openDepositBox(player);
@@ -174,7 +174,8 @@ public final class BankingPlugin extends OptionHandler {
                 return true;
             }
             interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "Good day, How may I help you?");
-            for (GrandExchangeOffer o : player.getPlayerGrandExchange().getOffers()) {
+            for (GrandExchangeRecords.OfferRecord r : player.getExchangeRecords().getOfferRecords()) {
+                GrandExchangeOffer o = player.getExchangeRecords().getOffer(r);
                 if (o != null && (o.getWithdraw()[0] != null || o.getWithdraw()[1] != null)) {
                     stage = -1;
                     break;
@@ -428,7 +429,7 @@ public final class BankingPlugin extends OptionHandler {
                 case 762:
                     switch (button) {
                         case 18:
-                            p.getDialogueInterpreter().open(new DumpContainer().getID());
+                            p.getDialogueInterpreter().open(new DepositAllDialogue().getID());
                             return true;
                         case 23:
                             p.getDialogueInterpreter().sendOptions("Select an Option", "Check bank value", "Banking assistance", "Close");
@@ -675,7 +676,7 @@ public final class BankingPlugin extends OptionHandler {
                 player.getBank().open();
                 checkAchievements(player);
             } else {
-                player.getPlayerGrandExchange().openCollectionBox();
+                player.getExchangeRecords().openCollectionBox();
             }
             return true;
         }

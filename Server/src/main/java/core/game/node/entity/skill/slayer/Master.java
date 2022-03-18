@@ -218,9 +218,9 @@ public enum Master {
 	}
 
 	int npc_id,required_combat,required_slayer;
-	int[] assignment_range;
+	public int[] assignment_range;
 	int[] streakPoints;
-	List<Task> tasks;
+	public List<Task> tasks;
 	Master(int npc_id, int required_combat, int required_slayer, int[] assignment_range, int[] streakPoints, Task... tasks) {
 		this.npc_id = npc_id;
 		this.required_combat = required_combat;
@@ -251,8 +251,8 @@ public enum Master {
 	}
 
 	public static class Task{
-		Tasks task;
-		Integer weight;
+		public Tasks task;
+		public Integer weight;
 		Task(Tasks task, Integer weight){
 			this.task = task;
 			this.weight = weight;

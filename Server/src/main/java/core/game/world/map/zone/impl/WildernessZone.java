@@ -194,9 +194,6 @@ public final class WildernessZone extends MapZone {
 
 			if (e instanceof NPC) {
 				e.asNpc().getDefinition().getDropTables().drop(e.asNpc(), killer);
-				if (((NPC) e).getTask() != null && ((Player) killer).getSlayer().getTask() == e.asNpc().getTask()) {
-					((Player) killer).getSlayer().finalizeDeath(killer.asPlayer(), e.asNpc());
-				}
 				e.asNpc().setRespawnTick(GameWorld.getTicks() + e.asNpc().getDefinition().getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));
 				if (!e.asNpc().isRespawn()) {
 					e.asNpc().clear();
