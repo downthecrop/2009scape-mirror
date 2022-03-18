@@ -1,13 +1,9 @@
 package rs09.game.content.dialogue
 
 import api.*
-import core.game.container.Container
-import core.game.container.impl.EquipmentContainer
 import core.game.content.dialogue.DialoguePlugin
 import core.game.node.entity.player.Player
-import core.game.node.item.Item
 import core.plugin.Initializable
-import core.plugin.Plugin
 
 @Initializable
 /**
@@ -15,11 +11,11 @@ import core.plugin.Plugin
  * @author Splinter
  * @author James Triantafylos
  */
-class DumpContainer(player: Player? = null) : DialoguePlugin(player) {
+class DepositAllDialogue(player: Player? = null) : DialoguePlugin(player) {
     val ID = 628371
 
     override fun newInstance(player: Player?): DialoguePlugin {
-        return DumpContainer(player)
+        return DepositAllDialogue(player)
     }
 
     override fun open(vararg args: Any?): Boolean {

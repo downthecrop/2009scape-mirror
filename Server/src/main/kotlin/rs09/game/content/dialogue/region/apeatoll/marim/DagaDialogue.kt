@@ -1,6 +1,6 @@
 package rs09.game.content.dialogue.region.apeatoll.marim
 
-import api.addItemOrDrop
+import api.*
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.node.entity.npc.NPC
@@ -9,6 +9,7 @@ import core.game.node.item.Item
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import rs09.tools.END_DIALOGUE
 
 /**
  * @author qmqz
@@ -30,7 +31,7 @@ class DagaDialogue(player: Player? = null) : DialoguePlugin(player){
 
             1 -> when (buttonId) {
                 1 -> player(FacialExpression.FRIENDLY, "Yes, please.").also { stage = 10 }
-                2 -> player(FacialExpression.FRIENDLY, "No, thanks.").also { stage = 99 }
+                2 -> player(FacialExpression.FRIENDLY, "No, thanks.").also { stage = END_DIALOGUE }
                 3 -> player(FacialExpression.HALF_ASKING, "Do you have any Dragon Scimitars in stock?").also { stage = 30 }
             }
 
@@ -40,16 +41,15 @@ class DagaDialogue(player: Player? = null) : DialoguePlugin(player){
             31 -> options("Yes, please.", "No, thanks.").also { stage++ }
 
             32 -> when (buttonId) {
-                1 -> if (player.inventory.contains(Items.COINS_995, 100000)) {
-                    player.inventory.remove(Item(995,100000))
-                    addItemOrDrop(player, Items.DRAGON_SCIMITAR_4587, 1)
+                1 -> if (inInventory(player, Items.COINS_995, 100000)) {
+                    end()
+                    removeItem(player, Item(Items.COINS_995, 100000), Container.INVENTORY)
+                    addItem(player, Items.DRAGON_SCIMITAR_4587, 1)
                 } else {
-                    npcl(FacialExpression.OLD_NORMAL, "Sorry but you don't have enough to buy one, at the moment it costs 100,000 gold coins.").also { stage = 99 }
+                    npcl(FacialExpression.OLD_NORMAL, "Sorry but you don't have enough to buy one, at the moment it costs 100,000 gold coins.").also { stage = END_DIALOGUE }
                 }
-                2 -> player(FacialExpression.FRIENDLY, "No thanks.").also { stage = 99 }
+                2 -> player(FacialExpression.FRIENDLY, "No thanks.").also { stage = END_DIALOGUE }
             }
-
-            99 -> end()
         }
         return true
     }

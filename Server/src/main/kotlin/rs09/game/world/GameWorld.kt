@@ -1,5 +1,6 @@
 package rs09.game.world
 
+import api.LoginListener
 import core.cache.Cache
 import core.cache.def.impl.SceneryDefinition
 import core.game.ge.GrandExchangeDatabase
@@ -40,6 +41,12 @@ object GameWorld {
      */
     @JvmStatic
     val majorUpdateWorker = MajorUpdateWorker()
+
+    /**
+     * Login listeners
+     */
+    @JvmStatic
+    val loginListeners = ArrayList<LoginListener>()
 
     @JvmStatic
     val STARTUP_PLUGINS: List<StartupPlugin> = ArrayList()

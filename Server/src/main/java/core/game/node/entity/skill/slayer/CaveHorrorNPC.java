@@ -11,6 +11,7 @@ import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
+import rs09.game.node.entity.skill.slayer.SlayerEquipmentFlags;
 
 /**
  * Handles the Cave Horrors on Mos'le Harmless. You technically do not need a witchwood icon to fight them.

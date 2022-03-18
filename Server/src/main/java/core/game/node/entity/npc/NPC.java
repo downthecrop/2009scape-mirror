@@ -1,5 +1,6 @@
 package core.game.node.entity.npc;
 
+import api.events.NPCKillEvent;
 import core.cache.def.impl.NPCDefinition;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.global.shop.Shop;
@@ -442,17 +443,9 @@ public class NPC extends Entity {
 					if(walkRadius == 0)
 						walkRadius = 3;
 				}
-				getPulseManager().run(new MovementPulse(this, getProperties().getSpawnLocation(), Pathfinder.SMART) {
-					@Override
-					public boolean pulse() {
-						return true;
-					}
-				}, "movement");
 				if (aggressiveHandler != null) {
 					aggressiveHandler.setPauseTicks(walkRadius + 1);
 				}
-				nextWalk = GameWorld.getTicks() + walkRadius + 1;
-				return;
 			}
 			if (aggressive && aggressiveHandler != null && aggressiveHandler.selectTarget()) {
 				return;
@@ -527,12 +520,6 @@ public class NPC extends Entity {
 		if (getZoneMonitor().handleDeath(killer)) {
 			return;
 		}
-		if (task != null && killer instanceof Player && ((Player) killer).getSlayer().getTask() == task && ((Player) killer).getSlayer().hasTask()) {
-			((Player) killer).getSlayer().finalizeDeath(killer.asPlayer(), this);
-		}
-		if (killer instanceof Player && killer.getAttribute("jobs:id",null) != null) {
-			JobManager.handleDeath(id,(Player) killer);
-		}
 		setRespawnTick(GameWorld.getTicks() + definition.getConfiguration(NPCConfigParser.RESPAWN_DELAY, 17));
 		Player p = !(killer instanceof Player) ? null : (Player) killer;
 		if (p != null) {
@@ -543,6 +530,7 @@ public class NPC extends Entity {
 		if (!isRespawn()) {
 			clear();
 		}
+		killer.dispatch(new NPCKillEvent(this));
 	}
 
 	/**
@@ -717,7 +705,19 @@ public class NPC extends Entity {
 	 */
 	protected Location getMovementDestination() {
 		if (!pathBoundMovement || movementPath == null || movementPath.length < 1) {
-			return getProperties().getSpawnLocation().transform(-5 + RandomFunction.random(getWalkRadius()), -5 + RandomFunction.random(getWalkRadius()), 0);
+			Location returnToSpawnLocation = getProperties().getSpawnLocation().transform(-5 + RandomFunction.random(getWalkRadius()), -5 + RandomFunction.random(getWalkRadius()), 0);
+			int dist = (int) Location.getDistance(location, returnToSpawnLocation);
+			int pathLimit = 15;
+			if(dist > pathLimit || dist < -pathLimit)
+			{
+				int diffX = returnToSpawnLocation.getX() - location.getX();
+				int diffY = returnToSpawnLocation.getY() - location.getY();
+				returnToSpawnLocation = location.transform(
+						Math.min(Math.max(-pathLimit, diffX), pathLimit), //Try to path no more than pathLimit and no less than -pathLimit tiles away in the X and Y directions
+						Math.min(Math.max(-pathLimit, diffY), pathLimit),
+						0);
+			}
+			return returnToSpawnLocation;
 		}
 		Location l = movementPath[movementIndex++];
 		if (movementIndex == movementPath.length) {

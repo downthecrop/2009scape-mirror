@@ -2,6 +2,7 @@ package rs09.game.node.entity.skill.construction.decoration.questhall
 
 import api.teleport
 import core.game.node.entity.player.Player
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -51,7 +52,7 @@ class MountedGlory : InteractionListener() {
                     1 -> {
                         player.lock(5)
                         player.visualize(Animation(714), Graphics(308, 100, 50))
-                        player.audioManager.send(200)
+                        player.getAudioManager().send(Audio(200), true);
                     }
                     4 -> player.animator.reset().also { teleport(player, TELEPORTS[int]) }
                 }

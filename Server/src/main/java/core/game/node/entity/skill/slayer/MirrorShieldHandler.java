@@ -5,6 +5,7 @@ import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import rs09.game.node.entity.combat.handlers.MeleeSwingHandler;
 import core.game.node.entity.player.Player;
+import rs09.game.node.entity.skill.slayer.SlayerEquipmentFlags;
 
 /**
  * The swing handler for an npc that requires a mirror shield with its victim.

@@ -1,5 +1,6 @@
 package core.game.node.entity.skill.gather.woodcutting;
 
+import api.events.ResourceGatheredEvent;
 import core.cache.def.impl.ItemDefinition;
 import core.game.container.impl.EquipmentContainer;
 import core.game.content.dialogue.FacialExpression;
@@ -159,6 +160,7 @@ public class WoodcuttingSkillPulse extends Pulse {
             }
             //give the reward
             player.getInventory().add(new Item(reward, rewardAmount));
+            player.dispatch(new ResourceGatheredEvent(reward, rewardAmount, node));
             int cutLogs = player.getAttribute(STATS_BASE + ":" + STATS_LOGS,0);
             player.setAttribute("/save:" + STATS_BASE + ":" + STATS_LOGS,++cutLogs);
 
@@ -174,7 +176,6 @@ public class WoodcuttingSkillPulse extends Pulse {
                 }
             }
 
-            applyAchievementTask(reward); // apply achievements
         }
         // Tutorial stuff, maybe?
         if (tutorialStage == 7) {
@@ -259,55 +260,6 @@ public class WoodcuttingSkillPulse extends Pulse {
 
     private int calculateReward(int reward) {
         return reward;
-    }
-
-    /**
-     * Checks if the has completed any achievements from their diary
-     */
-    private void applyAchievementTask(int reward) {
-        // Cut a log from a teak tree
-        if (reward == Items.TEAK_LOGS_6333) {
-            player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 1, 7);
-        }
-        // Cut a log from a mahogany tree
-        if (reward == Items.MAHOGANY_LOGS_6332) {
-            player.getAchievementDiaryManager().finishTask(player, DiaryType.KARAMJA, 1, 8);
-        }
-
-        int playerRegion = player.getViewport().getRegion().getId();
-
-        // Chop down a dying tree in the Lumber Yard
-        if (node.getId() == 24168 && playerRegion == 13110) {
-            player.getAchievementDiaryManager().finishTask(player, DiaryType.VARROCK, 0, 6);
-        }
-        if (resource == WoodcuttingNode.YEW && playerRegion == 10806) {
-            if (!player.getAchievementDiaryManager().hasCompletedTask(DiaryType.SEERS_VILLAGE, 2, 1)) {
-                player.setAttribute("/save:diary:seers:cut-yew", player.getAttribute("diary:seers:cut-yew", 0) + 1);
-            }
-            if (player.getAttribute("diary:seers:cut-yew", 0) >= 5) {
-                player.getAchievementDiaryManager().finishTask(player, DiaryType.SEERS_VILLAGE, 2, 1);
-            }
-        }
-
-       /* if (resource.isFarming()) {
-            PatchWrapper tree = player.getFarmingManager().getPatchWrapper(node.getWrapper().getId());
-            if (node.getId() == 8389
-                    && node.getLocation().equals(3003, 3372, 0)
-                    && Trees.forNode(tree.getNode()) != null
-                    && (Trees.forNode(tree.getNode()) == Trees.YEW || Trees.forNode(tree.getNode()) == Trees.MAGIC)) {
-                player.getAchievementDiaryManager().finishTask(player, DiaryType.FALADOR, 2, 3);
-            }
-        }
-*/
-        // Cut down a dead tree in Lumbridge Swamp
-        if (resource.name().toLowerCase().startsWith("dead") && (playerRegion == 12593 || playerRegion == 12849)) {
-            player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 1, 8);
-        }
-
-        // Cut a willow tree, east of Lumbridge Castle
-        if (resource.name().toLowerCase().startsWith("willow") && playerRegion == 12850) {
-            player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 2, 6);
-        }
     }
 
     /**

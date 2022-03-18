@@ -2,6 +2,7 @@ package core.game.content.global;
 
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
+import core.game.node.entity.player.link.audio.Audio;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
@@ -162,9 +163,9 @@ public enum EnchantedJewellery {
 		}
 		player.lock();
 		player.visualize(ANIMATION, GRAPHICS);
-		player.getAudioManager().send(200);
+        player.getAudioManager().send(new Audio(200), true);
 		player.getImpactHandler().setDisabledTicks(4);
-		GameWorld.getPulser().submit(new Pulse(4, player) {
+		GameWorld.getPulser().submit(new Pulse(4) {
 			@Override
 			public boolean pulse() {
 				player.unlock();
