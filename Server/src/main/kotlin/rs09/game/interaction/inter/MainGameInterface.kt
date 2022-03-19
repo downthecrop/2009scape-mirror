@@ -3,7 +3,6 @@ package rs09.game.interaction.inter
 import api.*
 import core.game.component.CloseEvent
 import core.game.component.Component
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.combat.equipment.WeaponInterface.WeaponInterfaces
 import core.game.node.entity.player.Player
@@ -59,13 +58,11 @@ class MainGameInterface : InterfaceListener() {
                     )
                 }
                 38 -> {
-                    if (TutorialSession.getExtension(player).stage > TutorialSession.MAX_STAGE) {
-                        if (player.getExtension<Any>(WeaponInterface::class.java) === WeaponInterfaces.STAFF) {
-                            val c = Component(WeaponInterfaces.STAFF.interfaceId)
-                            player.interfaceManager.openTab(0, c)
-                            val inter = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
-                            inter.updateInterface()
-                        }
+                    if (player.getExtension<Any>(WeaponInterface::class.java) === WeaponInterfaces.STAFF) {
+                        val c = Component(WeaponInterfaces.STAFF.interfaceId)
+                        player.interfaceManager.openTab(0, c)
+                        val inter = player.getExtension<WeaponInterface>(WeaponInterface::class.java)
+                        inter.updateInterface()
                     }
                 }
                 40 -> player.questRepository.syncronizeTab(player)

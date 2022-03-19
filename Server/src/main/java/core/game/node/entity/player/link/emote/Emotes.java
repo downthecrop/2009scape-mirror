@@ -6,8 +6,6 @@ import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import org.rs09.consts.Items;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
@@ -338,9 +336,6 @@ public enum Emotes {
                 }
             }
             player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).updateTask(player, 1, 6, good);
-        }
-        if (TutorialSession.getExtension(player).getStage() == 24) {
-            TutorialStage.load(player, 25, false);
         }
         player.getPulseManager().clear();
         emote.play(player);

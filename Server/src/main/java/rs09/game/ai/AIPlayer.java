@@ -44,9 +44,7 @@ public class AIPlayer extends Player {
      */
     private static int currentUID = 0x1;
 
-    private static List<String> botNames = new ArrayList<String>();
-
-    private static List<String> usedNames = new ArrayList<String>();
+    private static final List<String> botNames = new ArrayList<String>();
 
     /**
      * The active Artificial intelligent players mapping.
@@ -205,11 +203,7 @@ public class AIPlayer extends Player {
     public static String getRandomName(){
         int index = (RandomFunction.random(botNames.size()));
         String name = botNames.get(index);
-        while(usedNames.contains(name)){
-            index = (RandomFunction.random(botNames.size()));
-            name = botNames.get(index);
-        }
-        usedNames.add(name);
+        botNames.remove(index);
         return name;
     }
 

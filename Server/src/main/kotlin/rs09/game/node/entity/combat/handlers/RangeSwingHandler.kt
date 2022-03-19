@@ -1,10 +1,6 @@
 package rs09.game.node.entity.combat.handlers
 
-import api.EquipmentSlot
-import core.game.container.Container
 import core.game.container.impl.EquipmentContainer
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
@@ -45,11 +41,6 @@ open class RangeSwingHandler
     override fun canSwing(entity: Entity, victim: Entity): InteractionType? {
         if (!isProjectileClipped(entity, victim, false)) {
             return InteractionType.NO_INTERACT
-        }
-        if (entity.getAttribute("tut-island", false)) {
-            if (TutorialSession.getExtension(entity as Player).stage == 70) {
-                return InteractionType.NO_INTERACT
-            }
         }
         var distance = 7
         if (entity is Player && (entity.getExtension<Any>(WeaponInterface::class.java) as WeaponInterface).weaponInterface.interfaceId == 91) {
@@ -177,14 +168,6 @@ open class RangeSwingHandler
             state.ammunition.effect.impact(state)
         }
         val hit = state.estimatedHit
-        if (entity is Player) {
-            if (TutorialSession.getExtension(entity as Player?).stage == 51) {
-                TutorialStage.load(entity as Player?, 52, false)
-            }
-            if (TutorialSession.getExtension(entity as Player?).stage == 52) {
-                TutorialStage.load(entity as Player?, 53, false)
-            }
-        }
         victim!!.impactHandler.handleImpact(entity, hit, CombatStyle.RANGE, state)
         if (state.secondaryHit > -1) {
             val hitt = state.secondaryHit

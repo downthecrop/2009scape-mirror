@@ -2,7 +2,6 @@ package core.game.node.entity.player.link;
 
 import core.game.component.Component;
 import core.game.component.InterfaceType;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.combat.equipment.WeaponInterface;
 import core.game.node.entity.player.Player;
 import core.net.packet.PacketRepository;
@@ -12,6 +11,7 @@ import core.net.packet.out.CloseInterface;
 import core.net.packet.out.Interface;
 import core.net.packet.out.WindowsPane;
 import org.rs09.consts.Components;
+import rs09.game.content.tutorial.TutorialStage;
 import rs09.game.system.SystemLogger;
 
 
@@ -282,54 +282,11 @@ public final class InterfaceManager {
 	public Component getSingleTab() {
 		return singleTab;
 	}
-
-	/**
-	 * Hides the tabs.
-	 * @param tabs The tab indexes.
-	 */
-	public void hideTabs(int... tabs) {
-		if (true) {
-			removeTabs(tabs);
-			return;
-		}
-		@SuppressWarnings("unused")
-		boolean changeViewedTab = false;
-		for (int slot : tabs) {
-			if (slot == currentTabIndex) {
-				changeViewedTab = true;
-			}
-			Component tab = this.tabs[slot];
-			if (tab != null && !tab.isHidden()) {
-				int child = (slot < 7 ? 38 : 13) + slot;
-				boolean resize = isResizable();
-				player.getPacketDispatch().sendInterfaceConfig(getWindowPaneId(), child, true);
-				player.getPacketDispatch().sendInterfaceConfig(getWindowPaneId(), child + 7, true);
-				tab.setHidden(true);
-			}
-		}
-		if (changeViewedTab) {
-			int currentIndex = -1;
-			if (this.tabs[3] == null) {
-				for (int i = 0; i < this.tabs.length; i++) {
-					if (this.tabs[i] != null) {
-						currentIndex = i;
-						break;
-					}
-				}
-			} else {
-				currentIndex = 3;
-			}
-			if (currentIndex > -1) {
-				setViewedTab(currentIndex);
-			}
-		}
-	}
 	
 	/**
 	 * Removes the tabs.
 	 * @param tabs The tab indexes.
 	 */
-	@Deprecated
 	public void removeTabs(int... tabs) {
 		boolean changeViewedTab = false;
 		for (int slot : tabs) {
@@ -532,9 +489,6 @@ public final class InterfaceManager {
 			}
 			chatbox.open(player);
 		}
-		if (TutorialSession.getExtension(player).getStage() < TutorialSession.MAX_STAGE) {
-			Component.setUnclosable(player, getChatbox());
-		}
 	}
 
 	/**
@@ -545,7 +499,13 @@ public final class InterfaceManager {
 		if (windowMode != player.getSession().getClientInfo().getWindowMode()) {
 			player.getSession().getClientInfo().setWindowMode(windowMode);
 			openWindowsPane(new Component(isResizable() ? Components.TOPLEVEL_FULLSCREEN_746 : Components.TOPLEVEL_548));
-			openDefaultTabs();
+			if(!player.getAttribute("tutorial:complete", false)) {
+				TutorialStage.hideTabs(player, false);
+			}
+			else
+			{
+				openDefaultTabs();
+			}
 			openInfoBars();
 			PacketRepository.send(Interface.class, new InterfaceContext(player, getWindowPaneId(), isResizable() ? 23 : 14, Components.FILTERBUTTONS_751, true));
 			PacketRepository.send(Interface.class, new InterfaceContext(player, getWindowPaneId(), isResizable() ? 70 : 75, Components.CHATTOP_752, true));

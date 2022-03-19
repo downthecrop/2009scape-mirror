@@ -5,8 +5,6 @@ import core.game.container.impl.EquipmentContainer;
 import core.game.content.dialogue.FacialExpression;
 import core.game.content.global.BirdNest;
 import core.game.content.global.SkillingPets;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.SkillPulse;
@@ -78,9 +76,6 @@ public final class GatheringSkillPulse extends SkillPulse<Scenery> {
 		if (resource == null) {
 			return;
 		}
-		if (TutorialSession.getExtension(player).getStage() == 35) {
-			TutorialStage.load(player, 36, false);
-		}
 		isMining = resource.getSkillId() == Skills.MINING;
 		isMiningEssence = resource == SkillingResource.RUNE_ESSENCE;
 		isMiningGems = resource.getReward() == SkillingResource.GEM_ROCK_0.getReward();
@@ -125,17 +120,6 @@ public final class GatheringSkillPulse extends SkillPulse<Scenery> {
 		}
 		if (!checkReward()) {
 			return false;
-		}
-		int tutorialStage = TutorialSession.getExtension(player).getStage();
-		if (tutorialStage == 36 && node.getId() == 3042) {
-			TutorialStage.load(player, 38, false);
-		} else if (tutorialStage == 36 && node.getId() == 3043) {
-			TutorialStage.load(player, 37, false);
-		}
-		if (tutorialStage == 38 && node.getId() == 3043) {
-			TutorialStage.load(player, 39, false);
-		} else if (tutorialStage == 37 && node.getId() == 3042) {
-			TutorialStage.load(player, 39, false);
 		}
 		// 20% chance to auto burn logs when using "inferno adze" item
 		if (isWoodcutting && tool.getId() == 13661 && RandomFunction.random(100) < 20){
@@ -200,10 +184,6 @@ public final class GatheringSkillPulse extends SkillPulse<Scenery> {
 					BirdNest.drop(player);
 				}
 			}
-		}
-		// Tutorial stuff, maybe?
-		if (tutorialStage == 7) {
-			TutorialStage.load(player, 8, false);
 		}
 		// not sure what this is exactly
 		if (resource.getRespawnRate() != 0) {
@@ -340,10 +320,6 @@ public final class GatheringSkillPulse extends SkillPulse<Scenery> {
 		switch (type) {
 		case 0:
 			player.getPacketDispatch().sendMessage("You swing your " + (isMining ? "pickaxe at the rock..." : "axe at the tree..."));
-			if (TutorialSession.getExtension(player).getStage() == 6) {
-				player.lock(7);
-				TutorialStage.load(player, 7, false);
-			}
 			break;
 		}
 	}

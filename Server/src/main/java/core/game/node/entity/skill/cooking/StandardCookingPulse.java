@@ -1,8 +1,7 @@
 package core.game.node.entity.skill.cooking;
 
+import api.events.ResourceGatheredEvent;
 import core.game.container.impl.EquipmentContainer;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.impl.Animator;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
@@ -99,12 +98,6 @@ public class StandardCookingPulse extends Pulse {
             setDelay(object.getName().toLowerCase().equals("range") ? 5 : 4);
             return false;
         }
-        //handle tutorial stuff
-        if (!TutorialSession.getExtension(player).finished()) {
-            updateTutorial(player);
-            amount--;
-            return true;
-        }
 
         if (cook(player, object, burned, initial, product)) {
             amount--;
@@ -169,6 +162,7 @@ public class StandardCookingPulse extends Pulse {
         if (player.getInventory().remove(initialItem)) {
             if (!burned) {
                 player.getInventory().add(productItem);
+                player.dispatch(new ResourceGatheredEvent(productItem.getId(), 1, object));
                 player.getSkills().addExperience(Skills.COOKING, experience, true);
 
                 int playerRegion = player.getViewport().getRegion().getId();
@@ -202,6 +196,7 @@ public class StandardCookingPulse extends Pulse {
                 }
 
             } else {
+                player.dispatch(new ResourceGatheredEvent(CookableItems.getBurnt(initial).getId(), 1, object));
                 player.getInventory().add(CookableItems.getBurnt(initial));
             }
             player.getPacketDispatch().sendMessage(getMessage(initialItem, productItem, burned));
@@ -229,17 +224,6 @@ public class StandardCookingPulse extends Pulse {
     }
 
     public boolean updateTutorial(Player player) {
-        if (TutorialSession.getExtension(player).getStage() == 14) {
-            TutorialStage.load(player, 15, false);
-            return cook(player, object, true, initial, product);
-        } else if (TutorialSession.getExtension(player).getStage() == 15) {
-            TutorialStage.load(player, 16, false);
-            return cook(player, object, false, initial, product);
-        }
-        if (TutorialSession.getExtension(player).getStage() == 20) {
-            TutorialStage.load(player, 21, false);
-            return cook(player, object, false, initial, product);
-        }
         return cook(player, object, burned, initial, product);
     }
 

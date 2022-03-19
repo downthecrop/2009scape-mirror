@@ -23,7 +23,7 @@ class WGuildListeners : InteractionListener() {
                     return@onEquip false
                 }
 
-                player.interfaceManager.hideTabs(2, 3, 5, 6, 7, 11, 12)
+                player.interfaceManager.removeTabs(2, 3, 5, 6, 7, 11, 12)
                 player.interfaceManager.openTab(4, Component(411))
                 player.interfaceManager.setViewedTab(4)
                 player.interfaceManager.open(Component(410))

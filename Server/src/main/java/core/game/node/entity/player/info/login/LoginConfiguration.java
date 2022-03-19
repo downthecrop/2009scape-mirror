@@ -2,7 +2,6 @@ package core.game.node.entity.player.info.login;
 
 import core.game.component.CloseEvent;
 import core.game.component.Component;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
 import core.game.world.map.RegionManager;
@@ -75,7 +74,7 @@ public final class LoginConfiguration {
      */
     public static void configureLobby(Player player) {
         player.updateSceneGraph(true);
-        if (!player.isArtificial() && TutorialSession.getExtension(player).getStage() >= TutorialSession.MAX_STAGE && player.getAttribute("login_type", LoginType.NORMAL_LOGIN) != LoginType.RECONNECT_TYPE) {
+        if (!player.isArtificial() && player.getAttribute("tutorial:complete",false) && player.getAttribute("login_type", LoginType.NORMAL_LOGIN) != LoginType.RECONNECT_TYPE) {
             sendLobbyScreen(player);
         } else {
             configureGameWorld(player);
@@ -148,8 +147,6 @@ public final class LoginConfiguration {
 		/*if (GameWorld.getSettings().isPvp()) {
 			player.getPacketDispatch().sendString("", 226, 1);
 		}*/
-        TutorialSession.extend(player);
-        TutorialSession.getExtension(player).init();
         /*if (TutorialSession.getExtension(player).getStage() != 73) {
             TutorialStage.load(player, TutorialSession.getExtension(player).getStage(), true);
         }*/

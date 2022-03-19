@@ -4,11 +4,8 @@ import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
 import core.plugin.Initializable;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.player.Player;
 import core.plugin.Plugin;
-import org.rs09.consts.Items;
 
 /**
  * @author 'Vexia
@@ -77,15 +74,9 @@ public class SettingTabInterface extends ComponentPlugin {
 			p.getSettings().toggleAcceptAid();
 			break;
 		case 3:// run
-			if (TutorialSession.getExtension(p).getStage() == 25) {
-				TutorialStage.load(p, 26, false);
-			}
 			p.getSettings().toggleRun();
 			break;
 		case 8:// house
-			if (!TutorialSession.getExtension(p).finished()) {
-				return true;
-			}
 			p.getInterfaceManager().close();
 			p.getConfigManager().set(261, p.getConfigManager().get(261) & 0x1);
 			p.getInterfaceManager().openSingleTab(new Component(398));
