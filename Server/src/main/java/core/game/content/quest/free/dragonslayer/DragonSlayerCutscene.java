@@ -196,7 +196,7 @@ public final class DragonSlayerCutscene extends CutscenePlugin {
 	@Override
 	public Pulse getStartPulse() {
 		PacketRepository.send(MinimapState.class, new MinimapStateContext(player, getMapState()));
-		player.getInterfaceManager().hideTabs(getRemovedTabs());
+		player.getInterfaceManager().removeTabs(getRemovedTabs());
 		return new Pulse(1) {
 			int counter = 0;
 

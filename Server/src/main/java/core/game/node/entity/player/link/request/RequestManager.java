@@ -1,6 +1,5 @@
 package core.game.node.entity.player.link.request;
 
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.player.Player;
 import rs09.game.world.GameWorld;
 
@@ -56,9 +55,6 @@ public final class RequestManager {
 	 */
 	private boolean canRequest(RequestType type, Player target) {
 		if (target == player) {
-			return false;
-		}
-		if (!TutorialSession.getExtension(player).finished() || !TutorialSession.getExtension(target).finished()) {
 			return false;
 		}
 		if (!target.getLocation().withinDistance(player.getLocation(), 15)) {

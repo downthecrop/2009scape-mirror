@@ -32,7 +32,8 @@ dependencies {
             "libs/classgraph-4.8.98.jar",
             "libs/mysql-connector-java-8.0.21.jar",
             "libs/mordant-jvm-2.0.0-alpha2.jar",
-            "libs/colormath-jvm-2.0.0.jar"
+            "libs/colormath-jvm-2.0.0.jar",
+            "libs/sqlite-jdbc.jar"
     )
 }
 

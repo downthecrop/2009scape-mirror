@@ -3,8 +3,6 @@ package core.game.content.quest.tutorials.learningtheropes;
 import core.game.container.impl.EquipmentContainer;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
@@ -37,7 +35,7 @@ public class SirVantDialogue extends DialoguePlugin {
 
     @Override
     public boolean open(Object... args) {
-        int tut_stage = TutorialSession.getExtension(player).getStage();
+        int tut_stage = 0;//TutorialSession.getExtension(player).getStage();
         System.out.println("tut_stage = " + tut_stage);
         switch (tut_stage) {
             case 0:
@@ -86,7 +84,6 @@ public class SirVantDialogue extends DialoguePlugin {
                 break;
             case 7:
                 end();
-                TutorialStage.load(player, 2, false);
                 break;
             case 10:
                 npc("I think the value of this property has slumped a little.");
@@ -114,7 +111,6 @@ public class SirVantDialogue extends DialoguePlugin {
                 break;
             case 16:
                 end();
-                TutorialStage.load(player, 4, false);
                 break;
         }
         return true;

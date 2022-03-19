@@ -3,8 +3,6 @@ package rs09.game.node.entity.combat.handlers
 import api.*
 import api.EquipmentSlot
 import core.game.container.impl.EquipmentContainer
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
@@ -107,14 +105,6 @@ open class MeleeSwingHandler
     }
 
     override fun visualizeImpact(entity: Entity?, victim: Entity?, state: BattleState?) {
-        if (entity is Player) {
-            if (TutorialSession.getExtension(entity as Player?).stage == 51) {
-                TutorialStage.load(entity as Player?, 52, false)
-            }
-            if (TutorialSession.getExtension(entity as Player?).stage == 54) {
-                TutorialStage.load(entity as Player?, 55, false)
-            }
-        }
         victim!!.animate(victim.properties.defenceAnimation)
     }
 

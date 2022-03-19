@@ -1,8 +1,7 @@
 package core.game.node.entity.skill.smithing;
 
+import api.events.ResourceGatheredEvent;
 import core.cache.def.impl.ItemDefinition;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.skill.SkillPulse;
@@ -69,7 +68,8 @@ public class SmithingPulse extends SkillPulse<Item> {
             player.getDialogueInterpreter().sendDialogue("You need to complete Tourist Trap to smith dart tips.");
             return false;
         }
-        if (TutorialSession.getExtension(player).getStage() < TutorialSession.MAX_STAGE && node.getId() != Bars.BRONZE_DAGGER.getProduct()) {
+        if (!player.getQuestRepository().isComplete("Death Plateau") && bar.getSmithingType() == SmithingType.TYPE_CLAWS) {
+            player.getDialogueInterpreter().sendDialogue("You need to complete Death Plateau to smith claws.");
             return false;
         }
         return true;
@@ -93,12 +93,10 @@ public class SmithingPulse extends SkillPulse<Item> {
         player.getInventory().remove(new Item(bar.getBarType().getBarType(), bar.getSmithingType().getRequired()));
         final Item item = new Item(node.getId(), bar.getSmithingType().getProductAmount());
         player.getInventory().add(item);
+        player.dispatch(new ResourceGatheredEvent(item.getId(), 1, player));
         player.getSkills().addExperience(Skills.SMITHING, bar.getBarType().getExperience() * bar.getSmithingType().getRequired(), true);
         String message = StringUtils.isPlusN(ItemDefinition.forId(bar.getProduct()).getName().toLowerCase()) ? "an" : "a";
         player.getPacketDispatch().sendMessage("You hammer the " + bar.getBarType().getBarName().toLowerCase().replace("smithing", "") + "and make " + message + " " + ItemDefinition.forId(bar.getProduct()).getName().toLowerCase() + ".");
-        if (TutorialSession.getExtension(player).getStage() == 42) {
-            TutorialStage.load(player, 43, false);
-        }
 
         if (bar == Bars.BLURITE_CROSSBOW_LIMBS
                 && player.getLocation().withinDistance(new Location(3000, 3145, 0), 10)) { // near Thurgo's anvil

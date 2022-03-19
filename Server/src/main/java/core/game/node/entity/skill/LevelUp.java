@@ -2,7 +2,6 @@ package core.game.node.entity.skill;
 
 import core.game.component.Component;
 import core.game.content.global.Skillcape;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.emote.Emotes;
 import rs09.game.world.repository.Repository;
@@ -113,10 +112,7 @@ public final class LevelUp {
 	 * @param amount The amount of levels gained.
 	 */
 	public static void levelup(Player player, int slot, int amount) {
-		if (player.getAttribute("tut-island") != null) {
-			return;
-		}
-		if (TutorialSession.getExtension(player).getStage() < TutorialSession.MAX_STAGE) {
+		if (!player.getAttribute("tutorial:complete", false)) {
 			return;
 		}
 		int soundId = SOUND_EFFECTS[slot];

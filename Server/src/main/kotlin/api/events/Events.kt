@@ -9,3 +9,5 @@ data class NPCKillEvent(val npc: NPC) : Event
 data class TeleportEvent(val type: TeleportType, val source: Int = -1) : Event
 data class LitFireEvent(val logId: Int) : Event
 data class InteractionEvent(val target: Node, val option: String) : Event
+data class ButtonClickedEvent(val iface: Int, val buttonId: Int) : Event
+data class UsedWithEvent(val used: Int, val with: Int) : Event

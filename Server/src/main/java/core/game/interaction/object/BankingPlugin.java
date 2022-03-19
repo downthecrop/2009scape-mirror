@@ -2,7 +2,7 @@ package core.game.interaction.object;
 
 import static api.ContentAPIKt.*;
 
-import api.Container;
+import api.events.InteractionEvent;
 import core.cache.def.impl.NPCDefinition;
 import core.cache.def.impl.SceneryDefinition;
 import core.game.component.CloseEvent;
@@ -13,8 +13,6 @@ import core.game.container.access.InterfaceContainer;
 import core.game.content.dialogue.DialogueAction;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.interaction.OptionHandler;
 import core.game.node.Node;
 import core.game.node.entity.npc.AbstractNPC;
@@ -70,6 +68,8 @@ public final class BankingPlugin extends OptionHandler {
             return true;
         }
         if (object.getName().contains("Bank") || object.getName().contains("Deposit")) {
+            //TODO: REPLACE THIS ALL WITH A LISTENER. I DONT FEEL LIKE IT RIGHT NOW.
+            player.dispatch(new InteractionEvent(object, option));
             switch (option) {
                 case "use":
 //				final Location l = object.getLocation();
@@ -116,7 +116,7 @@ public final class BankingPlugin extends OptionHandler {
             }
         });
         //player.getInterfaceManager().closeDefaultTabs();
-        player.getInterfaceManager().hideTabs(0, 1, 2, 3, 4, 5, 6);
+        player.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6);
         InterfaceContainer.generateItems(player, player.getInventory().toArray(), new String[]{"Examine", "Deposit-X", "Deposit-All", "Deposit-10", "Deposit-5", "Deposit-1",}, 11, 15, 5, 7);
     }
 
@@ -167,11 +167,6 @@ public final class BankingPlugin extends OptionHandler {
                 setId(((NPC) args[0]).getId());
             } else {
                 setId((int) args[0]);
-            }
-            if (TutorialSession.getExtension(player).getStage() < TutorialSession.MAX_STAGE) {
-                Component.setUnclosable(player, interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "Good day, would you like to access your bank account?"));
-                stage = 999;
-                return true;
             }
             interpreter.sendDialogues(id, FacialExpression.HALF_GUILTY, "Good day, How may I help you?");
             for (GrandExchangeRecords.OfferRecord r : player.getExchangeRecords().getOfferRecords()) {
@@ -305,17 +300,9 @@ public final class BankingPlugin extends OptionHandler {
                     switch (buttonId) {
                         case 1:
                             end();
-                            if (TutorialSession.getExtension(player).getStage() == 56) {
-                                player.getBank().add(new Item(995, 25));
-                            }
-                            player.getBank().open();
-                            if (TutorialSession.getExtension(player).getStage() == 56) {
-                                TutorialStage.load(player, 57, false);
-                            }
                             break;
                         case 2:
                             end();
-                            TutorialStage.load(player, TutorialSession.getExtension(player).getStage(), false);
                             break;
                     }
                     break;

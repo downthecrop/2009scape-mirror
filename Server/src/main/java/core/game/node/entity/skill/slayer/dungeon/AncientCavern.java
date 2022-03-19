@@ -156,7 +156,7 @@ public final class AncientCavern extends MapZone implements Plugin<Object> {
 					break;
 				case 3:
 					PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 2));
-					player.getInterfaceManager().hideTabs(0, 1, 2, 3, 4, 5, 6, 11, 12);
+					player.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6, 11, 12);
 					break;
 				case 13:
 					player.getProperties().setTeleportLocation(Location.create(2532, 3412, 0));

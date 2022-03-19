@@ -3,7 +3,6 @@ package core.game.interaction.inter;
 import core.game.component.Component;
 import core.game.component.ComponentDefinition;
 import core.game.component.ComponentPlugin;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.AchievementDiary;
 import core.game.node.entity.player.link.diary.DiaryType;
@@ -28,9 +27,6 @@ public class QuestTabInterface extends ComponentPlugin {
 
 	@Override
 	public boolean handle(Player p, Component component, int opcode, int button, int slot, int itemId) {
-		if (TutorialSession.getExtension(p).getStage() < TutorialSession.MAX_STAGE) {
-			return true;
-		}
 		p.getPulseManager().clear();
 		switch (component.getId()) {
 			case 274:

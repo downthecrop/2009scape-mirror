@@ -1,6 +1,5 @@
 package core.game.node.entity.skill;
 
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.interaction.item.brawling_gloves.BrawlingGloves;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.ImpactHandler;
@@ -247,7 +246,7 @@ public final class Skills {
 			this.experience[slot] = 200000000;
 		}
 		if (entity instanceof Player && this.experience[slot] > 175) {
-			if (player.getSavedData().getGlobalData().getTutorialStage() < TutorialSession.MAX_STAGE && slot != HITPOINTS) {
+			if (!player.getAttribute("tutorial:complete",false) && slot != HITPOINTS) {
 				this.experience[slot] = 175;
 			}
 		}

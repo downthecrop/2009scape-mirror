@@ -2,12 +2,8 @@ package rs09.game.node.entity.skill.gather.fishing
 
 import api.events.ResourceGatheredEvent
 import core.game.content.global.SkillingPets
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage
-import core.game.container.Container
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.link.diary.DiaryType
 import core.game.node.entity.player.link.skillertasks.SkillTasks
 import core.game.node.entity.skill.SkillPulse
 import core.game.node.entity.skill.Skills
@@ -44,9 +40,6 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
     private val location: Location = npc.location
 
     override fun start() {
-        if (TutorialSession.getExtension(player).stage == 12) {
-            TutorialStage.load(player, 13, false)
-        }
         if (player.familiarManager.hasFamiliar() && player.familiarManager.familiar is Forager) {
             val forager = player.familiarManager.familiar as Forager
             val dest = player.location.transform(player.direction)
@@ -132,11 +125,6 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
                 player.setAttribute("/save:$STATS_BASE:$STATS_FISH", ++fishCaught)
                 player.skills.addExperience(Skills.FISHING, fish!!.experience, true)
                 message(2)
-                if (TutorialSession.getExtension(player).stage == 13) {
-                    TutorialStage.load(player, 14, false)
-                    stop()
-                    return true
-                }
             }
         }
         return player.inventory.freeSlots() == 0

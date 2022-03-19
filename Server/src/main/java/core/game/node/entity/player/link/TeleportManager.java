@@ -1,7 +1,6 @@
 package core.game.node.entity.player.link;
 
 import rs09.ServerConstants;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.Animator.Priority;
 import core.game.node.entity.player.Player;
@@ -355,10 +354,6 @@ public class TeleportManager {
 					@Override
 					public void start() {
 						player = ((Player) entity);
-						if (TutorialSession.getExtension(player).getStage() < TutorialSession.MAX_STAGE) {
-							stop();
-							return;
-						}
 						/*if (player.getSavedData().getGlobalData().getHomeTeleportDelay() > System.currentTimeMillis() && !player.isDonator()) {
 						    long milliseconds = player.getSavedData().getGlobalData().getHomeTeleportDelay() - System.currentTimeMillis();
 						    int minutes = (int) Math.round(milliseconds / 120000);

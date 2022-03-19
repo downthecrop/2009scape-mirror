@@ -125,7 +125,7 @@ public final class SmithingPlugin extends UseWithHandler {
 				return true;
 			}
 			if (player.getSkills().getLevel(Skills.SMITHING) < bar.getLevel()) {
-				player.getDialogueInterpreter().sendDialogue("You need a smithing level of at leat " + bar.getLevel() + " to work " + bar.getProduct().getName().toLowerCase() + "s.");
+				player.getDialogueInterpreter().sendDialogue("You need a smithing level of at least " + bar.getLevel() + " to work " + bar.getProduct().getName().toLowerCase() + "s.");
 				return true;
 			}
 			final SmithingBuilder builder = new SmithingBuilder(item);

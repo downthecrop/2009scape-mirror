@@ -2,7 +2,6 @@ package core.game.node.entity.combat;
 
 import rs09.ServerConstants;
 import core.game.container.impl.EquipmentContainer;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.summoning.familiar.Familiar;
 import core.game.node.entity.skill.summoning.pet.Pet;
@@ -145,7 +144,7 @@ public final class ImpactHandler {
 		if (disabledTicks > GameWorld.getTicks()) {
 			return null;
 		}
-		if (entity instanceof Player && TutorialSession.getExtension((Player) entity).getStage() < TutorialSession.MAX_STAGE) {
+		if (entity instanceof Player && !(entity.getAttribute("tutorial:complete",false))) {
 			Impact impact = new Impact(source, 0, style, HitsplatType.MISS);
 			impactQueue.add(impact);
 			return impact;

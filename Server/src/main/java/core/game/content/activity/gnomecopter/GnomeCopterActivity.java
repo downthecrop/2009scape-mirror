@@ -112,7 +112,7 @@ public final class GnomeCopterActivity extends ActivityPlugin {
 			@Override
 			public boolean pulse() {
 				if (++stage == 1) {
-					player.getInterfaceManager().hideTabs(0, 1, 2, 3, 4, 5, 6, 7, 11);
+					player.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 11);
 					ForceMovement.run(player, player.getLocation(), object.getLocation(), ForceMovement.WALK_ANIMATION, new Animation(8955), Direction.NORTH, 8);
 					player.lock();
 				} else if (stage == 3) {

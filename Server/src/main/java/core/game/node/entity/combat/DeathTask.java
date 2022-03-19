@@ -2,8 +2,6 @@ package core.game.node.entity.combat;
 
 import core.game.container.Container;
 import core.game.container.ContainerType;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.Animator;
@@ -68,14 +66,6 @@ public final class DeathTask extends NodeTask {
 		int ticks = e.getProperties().getDeathAnimation().getDuration();
 		if (ticks < 1 || ticks > 30) {
 			ticks = 6;
-		}
-		if (node instanceof Player) {
-			if (TutorialSession.getExtension(((Player) node)).getStage() == 52) {
-				TutorialStage.load(((Player) node), 53, false);
-			}
-			if (TutorialSession.getExtension(((Player) node)).getStage() == 54) {
-				TutorialStage.load(((Player) node), 55, false);
-			}
 		}
 		return e.getAttribute("tick:death", -1) <= GameWorld.getTicks() - ticks;
 	}

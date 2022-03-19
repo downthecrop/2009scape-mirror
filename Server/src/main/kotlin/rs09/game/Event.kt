@@ -8,4 +8,6 @@ object Event {
     val Teleport = TeleportEvent::class.java
     val FireLit = LitFireEvent::class.java
     val Interaction = InteractionEvent::class.java
+    val ButtonClicked = ButtonClickedEvent::class.java
+    val UsedWith = UsedWithEvent::class.java
 }

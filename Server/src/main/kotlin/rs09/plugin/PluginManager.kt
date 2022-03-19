@@ -1,5 +1,6 @@
 package rs09.plugin
 
+import api.LoginListener
 import core.game.content.activity.ActivityManager
 import core.game.content.activity.ActivityPlugin
 import core.game.content.dialogue.DialoguePlugin
@@ -16,6 +17,7 @@ import rs09.game.interaction.InterfaceListener
 import rs09.game.node.entity.skill.magic.SpellListener
 import rs09.game.system.SystemLogger
 import rs09.game.system.command.Command
+import rs09.game.world.GameWorld
 import java.util.*
 import java.util.function.Consumer
 
@@ -72,6 +74,10 @@ object PluginManager {
             try {
                 definePlugin(it.loadClass().newInstance() as Plugin<Command>).also { System.out.println("Initializing $it") }
             } catch (e: Exception) {e.printStackTrace()}
+        }
+        result.getClassesImplementing("api.LoginListener").forEach {
+            val clazz = it.loadClass().newInstance() as LoginListener
+            GameWorld.loginListeners.add(clazz)
         }
         result.getSubclasses("rs09.game.interaction.InteractionListener").forEach {
             val clazz = it.loadClass().newInstance() as InteractionListener

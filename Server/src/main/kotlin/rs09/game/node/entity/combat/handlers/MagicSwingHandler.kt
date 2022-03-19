@@ -1,9 +1,5 @@
 package rs09.game.node.entity.combat.handlers
 
-import core.game.container.Container
-import core.game.container.impl.EquipmentContainer
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.BattleState
 import core.game.node.entity.combat.CombatStyle
@@ -130,17 +126,6 @@ open class MagicSwingHandler
     }
 
     override fun visualizeImpact(entity: Entity?, victim: Entity?, state: BattleState?) {
-        if (entity is Player) {
-            if (TutorialSession.getExtension(entity as Player?).stage == 51) {
-                TutorialStage.load(entity as Player?, 52, false)
-            }
-            if (TutorialSession.getExtension(entity as Player?).stage == 52) {
-                TutorialStage.load(entity as Player?, 53, false)
-            }
-            if (TutorialSession.getExtension(entity as Player?).stage == 54) {
-                TutorialStage.load(entity as Player?, 55, false)
-            }
-        }
         if (state!!.targets == null) {
             if (state.spell != null) {
                 state.spell.visualizeImpact(entity, victim, state)

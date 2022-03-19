@@ -169,8 +169,10 @@ class ServerConstants {
 			arrayOf(Location.create(2711, 10132, 0), "brine rats"),
 			arrayOf(Location.create(2328, 3677, 0), "piscatoris"),
 			arrayOf(Location.create(2660, 3158, 0), "fishing trawler", "trawler"),
-			arrayOf(Location.create(2800, 3667, 0), "mountain camp")
+			arrayOf(Location.create(2800, 3667, 0), "mountain camp"),
+			arrayOf(Location.create(2575, 3250, 0), "clocktower")
 		)
+		//arrayOf(Location.create(0, 0, 0), ""),
 
 		@JvmField
 		var DATABASE: Database? = null

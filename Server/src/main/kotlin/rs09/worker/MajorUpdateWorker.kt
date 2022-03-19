@@ -6,6 +6,7 @@ import core.game.system.SystemState
 import core.game.system.task.Pulse
 import core.plugin.CorePluginTypes.Managers
 import gui.GuiEvent
+import gui.ServerMonitor
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -44,52 +45,53 @@ class MajorUpdateWorker {
             val list = ArrayList(GameWorld.Pulser.TASKS)
             Server.heartbeat()
 
-            //run our pulses
-            for(pulse in list) {
-                val b = System.currentTimeMillis()
-                if (pulse == null || pulse.update()) rmlist.add(pulse)
+            GlobalScope.launch {
+                //run our pulses
+                for (pulse in list) {
+                    val b = System.currentTimeMillis()
+                    if (pulse == null || pulse.update()) rmlist.add(pulse)
 
-                val time = System.currentTimeMillis() - b
+                    val time = System.currentTimeMillis() - b
 
-                if(time >= 100){
-                    if(pulse is GeneralBotCreator.BotScriptPulse){
-                        SystemLogger.logWarn("CRITICALLY Long Botscript Tick: ${pulse.botScript.javaClass.name} - $time ms")
-                    } else {
-                        SystemLogger.logWarn("CRITICALLY long running pulse: ${pulse.javaClass.name} - $time ms")
+                    if (time >= 100) {
+                        if (pulse is GeneralBotCreator.BotScriptPulse) {
+                            SystemLogger.logWarn("CRITICALLY Long Botscript Tick: ${pulse.botScript.javaClass.name} - $time ms")
+                        } else {
+                            SystemLogger.logWarn("CRITICALLY long running pulse: ${pulse.javaClass.name} - $time ms")
+                        }
+                    } else if (time >= 30) {
+                        if (pulse is GeneralBotCreator.BotScriptPulse) {
+                            SystemLogger.logWarn("Long Botscript Tick: ${pulse.botScript.javaClass.name} - $time ms")
+                        } else {
+                            SystemLogger.logWarn("Long Running Pulse: ${pulse.javaClass.name} - $time ms")
+                        }
                     }
                 }
-                else if(time >= 30){
-                    if(pulse is GeneralBotCreator.BotScriptPulse){
-                        SystemLogger.logWarn("Long Botscript Tick: ${pulse.botScript.javaClass.name} - $time ms")
-                    } else {
-                        SystemLogger.logWarn("Long Running Pulse: ${pulse.javaClass.name} - $time ms")
+
+                //remove all null or finished pulses from the list
+                rmlist.forEach {
+                    if (GameWorld.Pulser.TASKS.contains(it)) GameWorld.Pulser.TASKS.remove(it)
+                }
+
+                rmlist.clear()
+                //perform our update sequence where we write masks, etc
+                try {
+                    sequence.start()
+                    sequence.run()
+                    sequence.end()
+                    GlobalScope.launch {
+                        PacketWriteQueue.flush()
                     }
+                } catch (e: Exception) {
+                    e.printStackTrace()
                 }
+                //increment global ticks variable
+                GameWorld.pulse()
+                //disconnect all players waiting to be disconnected
+                Repository.disconnectionQueue.update()
+                //tick all manager plugins
+                Managers.tick()
             }
-
-            //remove all null or finished pulses from the list
-            rmlist.forEach {
-                if(GameWorld.Pulser.TASKS.contains(it)) GameWorld.Pulser.TASKS.remove(it)
-            }
-
-            rmlist.clear()
-            //perform our update sequence where we write masks, etc
-            try {
-                sequence.start()
-                sequence.run()
-                sequence.end()
-                GlobalScope.launch {
-                    PacketWriteQueue.flush()
-                }
-            } catch (e: Exception){
-                e.printStackTrace()
-            }
-            //increment global ticks variable
-            GameWorld.pulse()
-            //disconnect all players waiting to be disconnected
-            Repository.disconnectionQueue.update()
-            //tick all manager plugins
-            Managers.tick()
 
             //Handle daily restart if enabled
             if(sdf.format(Date()).toInt() == 0){
@@ -117,6 +119,8 @@ class MajorUpdateWorker {
             }
 
             val end = System.currentTimeMillis()
+            ServerMonitor.eventQueue.add(GuiEvent.UpdateTickTime(end - start))
+            ServerMonitor.eventQueue.add(GuiEvent.UpdatePulseCount(GameWorld.Pulser.TASKS.size))
             Thread.sleep(max(600 - (end - start), 0))
         }
     }

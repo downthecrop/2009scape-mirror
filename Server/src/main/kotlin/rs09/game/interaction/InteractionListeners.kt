@@ -1,6 +1,7 @@
 package rs09.game.interaction
 
 import api.events.InteractionEvent
+import api.events.UsedWithEvent
 import core.game.interaction.DestinationFlag
 import core.game.interaction.MovementPulse
 import core.game.interaction.Option
@@ -148,6 +149,7 @@ object InteractionListeners {
 
     @JvmStatic
     fun run(id: Int, player: Player, node: Node, isEquip: Boolean): Boolean{
+        player.dispatch(InteractionEvent(node, if(isEquip) "equip" else "unequip"))
         if(isEquip){
             return equipListeners["equip:$id"]?.invoke(player,node) ?: true
         } else {
@@ -168,6 +170,7 @@ object InteractionListeners {
         var flipped = false
 
         val method = get(used.id,with.id,type) ?: get(with.id,used.id,type).also { flipped = true } ?: return false
+
         val destOverride = if(flipped) {
             getOverride(type, used.id, "use") ?: getOverride(type, with.id) ?: getOverride(type, "use")
         } else {
@@ -183,12 +186,16 @@ object InteractionListeners {
                         return true
                     }
                     player.faceLocation(with.location)
+                    if(flipped) player.dispatch(UsedWithEvent(with.id, used.id))
+                    else player.dispatch(UsedWithEvent(used.id, with.id))
                     if(flipped) method.invoke(player,with,used)
                     else method.invoke(player,used,with)
                     return true
                 }
             })
         } else {
+            if(flipped) player.dispatch(UsedWithEvent(with.id, used.id))
+            else player.dispatch(UsedWithEvent(used.id, with.id))
             if(flipped) method.invoke(player,with,used)
             else method.invoke(player,used,with)
         }
@@ -211,20 +218,27 @@ object InteractionListeners {
 
         player.setAttribute("interact:option", option)
 
+        if(option.toLowerCase() == "attack") //Attack needs special handling >.>
+        {
+            player.dispatch(InteractionEvent(node, option.toLowerCase()))
+            method.invoke(player, node)
+            return true
+        }
+
         if(type != 0) {
             if(player.locks.isMovementLocked) return false
             player.pulseManager.run(object : MovementPulse(player, node, flag, destOverride) {
                 override fun pulse(): Boolean {
                     if(player.zoneMonitor.interact(node, Option(option, 0))) return true
                     player.faceLocation(node.location)
-                    player.dispatch(InteractionEvent(node, option))
+                    player.dispatch(InteractionEvent(node, option.toLowerCase()))
                     method.invoke(player,node)
                     return true
                 }
             })
         } else {
             method.invoke(player,node)
-            player.dispatch(InteractionEvent(node, option))
+            player.dispatch(InteractionEvent(node, option.toLowerCase()))
         }
         return true
     }

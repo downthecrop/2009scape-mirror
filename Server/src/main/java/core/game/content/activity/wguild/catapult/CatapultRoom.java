@@ -185,7 +185,7 @@ public final class CatapultRoom extends MapZone implements Plugin<Object> {
 					}
 					ItemDefinition.getOptionHandlers().get("wield").handle(player, node, option);
 					if (player.getEquipment().getNew(EquipmentContainer.SLOT_SHIELD).getId() == SHIELD_ID) {
-						player.getInterfaceManager().hideTabs(2, 3, 5, 6, 7, 11, 12);
+						player.getInterfaceManager().removeTabs(2, 3, 5, 6, 7, 11, 12);
 						player.getInterfaceManager().openTab(4, new Component(411));
 						player.getInterfaceManager().setViewedTab(4);
 					}

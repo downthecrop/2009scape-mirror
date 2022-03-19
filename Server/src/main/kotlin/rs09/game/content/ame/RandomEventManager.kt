@@ -1,5 +1,6 @@
 package rs09.game.content.ame
 
+import api.getAttribute
 import core.game.node.entity.player.Player
 import core.game.world.map.zone.ZoneRestriction
 import core.tools.RandomFunction
@@ -17,7 +18,7 @@ class RandomEventManager(val player: Player) {
 
     fun tick() {
         if (player.isArtificial) return
-        if (GameWorld.ticks > nextSpawn) fireEvent()
+        if (GameWorld.ticks > nextSpawn && getAttribute(player, "tutorial:complete", false)) fireEvent()
     }
 
     fun fireEvent() {

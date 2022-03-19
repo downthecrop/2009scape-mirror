@@ -83,7 +83,7 @@ class GrandExchangeRecords(private val player: Player) {
                 }
             }
         }
-        SystemLogger.logInfo(sb.toString())
+        stmt.close()
     }
 
     fun getOffer(index: Int) : GrandExchangeOffer?
@@ -102,8 +102,10 @@ class GrandExchangeRecords(private val player: Player) {
         {
             val offer = GrandExchangeOffer.fromQuery(offer_raw)
             offer.index = record.slot
+            stmt.close()
             return offer
         }
+        stmt.close()
         return null
     }
 
@@ -152,6 +154,7 @@ class GrandExchangeRecords(private val player: Player) {
             else
                 offerRecords[offer.index] = OfferRecord(offer.uid, offer.index)
         }
+        stmt.close()
 
         if (needsIndex.isNotEmpty()) {
             for ((index, offer) in offerRecords.withIndex()) {

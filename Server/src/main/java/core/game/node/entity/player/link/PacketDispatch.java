@@ -1,7 +1,6 @@
 package core.game.node.entity.player.link;
 
 import rs09.game.Varp;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import rs09.game.system.SystemLogger;
@@ -58,7 +57,7 @@ public final class PacketDispatch {
 	 * @param message The game message.
 	 */
 	public void sendMessage(String message) {
-		if (message == null || TutorialSession.getExtension(player).getStage() < TutorialSession.MAX_STAGE) {
+		if (message == null) {
 			return;
 		}
 		if (player.getAttribute("chat_filter") != null && !message.contains("<col=CC6600>") && !message.contains("<col=FFFF00>")) {

@@ -56,6 +56,8 @@ object GrandExchange : CallBack {
                 for(offer in buyOffers)
                     processOffer(offer)
 
+                stmt.close()
+
                 Thread.sleep(15_000) //sleep for 15 seconds
             }
         }.start()
@@ -102,6 +104,7 @@ object GrandExchange : CallBack {
                         SystemLogger.logGE("Purchased FROM BOT ${offer.amountLeft - before}x ${getItemName(offer.itemID)}")
                 }
             }
+            sellStmt.close()
         }
     }
 
@@ -142,6 +145,7 @@ object GrandExchange : CallBack {
                     bestPrice = o.offeredValue
             }
 
+            stmt.close()
             stmt = conn.createStatement()
             val bot_offers = stmt.executeQuery("SELECT * from bot_offers where item_id = $itemID")
             if(bot_offers.next())
@@ -174,6 +178,7 @@ object GrandExchange : CallBack {
             sb.append("</col>Highest Offer: <col=FFFFFF>$bestPrice</col>")
         }
 
+        stmt.close()
         return sb.toString()
     }
 
@@ -269,6 +274,7 @@ object GrandExchange : CallBack {
             val o = GrandExchangeOffer.fromQuery(results)
             offers.add(o)
         }
+        stmt.close()
         return offers
     }
 
@@ -284,6 +290,7 @@ object GrandExchange : CallBack {
             val o = GrandExchangeOffer.fromBotQuery(results)
             offers.add(o)
         }
+        stmt.close()
         return offers
     }
 
