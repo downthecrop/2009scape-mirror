@@ -33,6 +33,8 @@ import rs09.game.world.update.UpdateMasks;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReentrantLock;
 
 /**
  * An entity is a movable node, such as players and NPCs.

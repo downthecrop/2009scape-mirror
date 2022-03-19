@@ -36,7 +36,7 @@ public final class LampPlugin extends OptionHandler {
 			player.unlock();
 			return true;
 		}));
-		player.getInterfaceManager().hideTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13);
+		player.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 12, 13);
 		return true;
 	}
 	@Override

@@ -1,8 +1,6 @@
 package core.game.node.entity.skill.smithing;
 
 import core.cache.def.impl.SceneryDefinition;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.smithing.smelting.Bar;
 import core.game.interaction.NodeUsageEvent;
@@ -12,7 +10,6 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.Item;
-import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
@@ -52,11 +49,6 @@ public final class FurnaceOptionPlugin extends OptionHandler {
 
 	@Override
 	public boolean handle(final Player player, Node node, String option) {
-		switch (((Scenery) node).getId()) {
-		case 3044:
-			handleTutorialIsland(player);
-			return true;
-		}
 		if (node.getId() == 26814 && !player.getAchievementDiaryManager().getDiary(DiaryType.VARROCK).isComplete(0)) {
 			player.sendMessage("You need to have completed the easy tasks in the Varrock Diary in order to use this.");
 			return true;
@@ -98,9 +90,6 @@ public final class FurnaceOptionPlugin extends OptionHandler {
 					player.getInventory().remove(ITEMS);
 					player.getInventory().add(Bar.BRONZE.getProduct());
 					player.getSkills().addExperience(Skills.SMITHING, Bar.BRONZE.getExperience());
-					if (TutorialSession.getExtension(player).getStage() == 39) {
-						TutorialStage.load(player, 40, false);
-					}
 					return true;
 				}
 

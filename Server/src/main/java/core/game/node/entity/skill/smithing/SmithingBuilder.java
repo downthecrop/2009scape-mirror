@@ -2,8 +2,6 @@ package core.game.node.entity.skill.smithing;
 
 import core.game.component.Component;
 import core.game.container.access.InterfaceContainer;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.smithing.smelting.Bar;
 import core.game.node.entity.player.Player;
@@ -83,9 +81,6 @@ public final class SmithingBuilder {
 		}
 		player.getPacketDispatch().sendString(type.getBarName(), 300, 15);
 		player.getInterfaceManager().open(new Component(300));
-		if (TutorialSession.getExtension(player).getStage() == 41) {
-			TutorialStage.load(player, 42, false);
-		}
 	}
 
 	/**

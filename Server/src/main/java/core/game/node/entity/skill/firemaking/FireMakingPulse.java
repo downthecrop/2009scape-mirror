@@ -1,13 +1,9 @@
 package core.game.node.entity.skill.firemaking;
 
 import api.events.LitFireEvent;
-import core.game.world.map.zone.ZoneBorders;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
-import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
@@ -134,9 +130,6 @@ public final class FireMakingPulse extends SkillPulse<Item> {
 		GroundItemManager.destroy(groundItem);
 		player.moveStep();
 		player.faceLocation(FaceLocationFlag.getFaceLocation(player, object));
-		if (TutorialSession.getExtension(player).getStage() == 9) {
-			TutorialStage.load(player, 10, false);
-		}
 		player.getSkills().addExperience(Skills.FIREMAKING,fire.getXp());
 
 		int playerRegion = player.getViewport().getRegion().getId();

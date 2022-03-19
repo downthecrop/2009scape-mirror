@@ -64,14 +64,14 @@ public enum Tasks {
     JELLIES(57, new int[] { 1637, 1638, 1639, 1640, 1641, 1642 }, new String[] { "Jellies are nasty cube-like gelatinous creatures which", "absorb everything they come across into themselves." }, 52,  false),
     JUNGLE_HORRORS(65, new int[] { 4348, 4349, 4350, 4351, 4352 }, new String[] { "Jungle Horrors can be found all over Mos Le'Harmless.", "They are strong and aggressive, so watch out!" }, 1,  false),
     KALPHITES(15, new int[] { 1153, 1154, 1155, 1156, 1157, 1158, 1159, 1160, 1161 }, new String[] { "Kalaphite are large insects which live in great hives under the desert sands." }, 1,  false),
-    KURASKS(65, new int[] { 1608, 1609, 4229 }, new String[] { "A kurask is a very quick creature." }, 70,  false),
+    KURASKS(65, new int[] { 1608, 1609, 4229, 7805, 7797 }, new String[] { "A kurask is a very quick creature." }, 70,  false),
     LESSER_DEMONS(60, new int[] { 82, 6203, 3064, 4694, 4695, 6208, 6204, 6206, 3064, 4696, 4697, 6101 }, new String[] { "Lesser Demons are magic creatures so they are weak to magical attacks." }, 1,  false),
     MITHRIL_DRAGON(60, new int[] { 5363 }, new String[] { "Mithril dragons aren't as strong as other dragons but they're still", "very powerful, watch out for their firey breath." }, 1,  false, 5 | 9 << 16),
     MINOTAURS(7, new int[] { 4404, 4405, 4406 }, new String[] { "Minotaurs are large manlike creatures but you'll", "want to be careful of their horns." }, 1,  false),
     MONKEYS(1, new int[] { 132, 1463, 1464, 2301, 4344, 4363, 6943, 7211, 7213, 7215, 7217, 7219, 7221, 7223, 7225, 7227, 1455, 1459, 1460, 1456, 1457, 1458 }, new String[] { "Small agile creatures, watch out they pinch!" }, 1,  false),
     MOSS_GIANTS(40, new int[] { 112, 1587, 1588, 1681, 4534, 4688, 4706 }, new String[] { "They are known to carry large sticks." }, 1,  false),
     NECHRYAELS(85, new int[] { 1613 }, new String[] { "Nechryael are demons of decay which summon small winged beings which", "help them fight their victems." }, 80,  false),
-    OGRES(40, new int[] { 115, 114, 374, 3587, 6267 }, new String[] { "Ogres are brutal creatures, favouring large blunt maces and clubs", "they often attack without warning." }, 1,  false),
+    OGRES(40, new int[] { 374, 2044, 2045, 2046, 2047, 2048, 2049, 2050, 2051, 2052, 2053, 2054, 2055, 3587, 6267, 7078, 7079, 7080, 7081, 7082 }, new String[] { "Ogres are brutal creatures, favouring large blunt maces and clubs", "they often attack without warning." }, 1,  false),
     OTHERWORDLY_BEING(40, new int[] { 126 }, new String[] { "A creature filled with everlasting power." }, 1,  false),
     PYREFIENDS(25, new int[] { 1633, 1634, 1635, 1636, 6216, 6631, 6641, 6660, 6668, 6683, 6709, 6721, }, new String[] { "A scorching hot creature, watch out!" }, 30,  false),
     RATS(1, new int[] { 2682, 2980, 2981, 3007, 88, 224, 4928, 4929, 4936, 4937, 3008, 3009, 3010, 3011, 3012, 3013, 3014, 3015, 3016, 3017, 3018, 4396, 4415, 7202, 7204, 7417, 7461, 87, 446, 950, 4395, 4922, 4923, 4924, 4925, 4926, 4927, 4942, 4943, 4944, 4945, 86, 87, 446, 950, 4395, 4922, 4923, 4924, 4925, 4926, 4927, 4942, 4943, 4944, 4945 }, new String[] { "Quick little rodents!" }, 1,  false),
@@ -106,10 +106,11 @@ public enum Tasks {
     static{
         Arrays.stream(Tasks.values()).forEach(entry -> Arrays.stream(entry.ids).forEach(id -> taskMap.putIfAbsent(id,entry)));
     }
-    public int levelReq, combatCheck;
-    public String[] info;
-    public int[] ids;
-    public boolean undead;
+    public final int levelReq;
+    public final int combatCheck;
+    public final String[] info;
+    public final int[] ids;
+    public final boolean undead;
     public int amtHash;
     Tasks(int combatCheck, int[] ids, String[] info, int levelReq, boolean undead){
         this.levelReq = levelReq;

@@ -191,7 +191,7 @@ public class WLBelowCutscene extends CutscenePlugin {
 		king.lock();
 		king.getProperties().getCombatPulse().stop();
 		player.getProperties().getCombatPulse().stop();
-		player.getInterfaceManager().hideTabs(getRemovedTabs());
+		player.getInterfaceManager().removeTabs(getRemovedTabs());
 		zaff = NPC.create(5836, player.getLocation());
 		Location loc = RegionManager.getSpawnLocation(player, zaff);
 		if (loc != null) {

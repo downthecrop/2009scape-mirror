@@ -116,7 +116,7 @@ class CanoeInterfaceListeners : InterfaceListener() {
                         }
                         2 -> {
                             PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 2))
-                            player.interfaceManager.hideTabs(0, 1, 2, 3, 4, 5, 6, 11, 12)
+                            player.interfaceManager.removeTabs(0, 1, 2, 3, 4, 5, 6, 11, 12)
                         }
                         travelAnimDur+1 -> {
                             player.properties.teleportLocation = dest

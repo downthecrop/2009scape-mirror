@@ -1,5 +1,6 @@
 package core.net.packet.in;
 
+import api.events.ButtonClickedEvent;
 import core.game.component.Component;
 import core.game.component.ComponentPlugin;
 import core.game.container.Container;
@@ -61,6 +62,7 @@ public class ActionButtonPacket implements IncomingPacket {
 		}
 		int cOpcode = buffer.opcode();
 		ComponentPlugin plugin = c.getPlugin();
+		player.dispatch(new ButtonClickedEvent(c.getId(), buttonId));
 		if (plugin != null) {
 			player.debug("Component plugin = " + plugin.getClass().getSimpleName());
 			plugin.handle(player, c, cOpcode, buttonId, slot, itemId);

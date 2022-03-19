@@ -130,7 +130,7 @@ public class BorkNPC extends AbstractNPC {
 		player.lock();
 		cutscene.wizard.clear();
 		cutscene.wizard.lock();
-		player.getInterfaceManager().hideTabs(0, 1, 2, 3, 4, 5, 6, 11, 12);
+		player.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6, 11, 12);
 		PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 2));
 		player.getInterfaceManager().open(new Component(693));
 		if (player.getDialogueInterpreter().getDialogue() != null) {
@@ -183,7 +183,7 @@ public class BorkNPC extends AbstractNPC {
 	 * Spawns the legion.
 	 */
 	private void spawnLegion() {
-		player.getInterfaceManager().hideTabs(0, 1, 2, 3, 4, 5, 6, 11, 12);
+		player.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6, 11, 12);
 		PacketRepository.send(MinimapState.class, new MinimapStateContext(player, 2));
 		spawnedLegion = true;
 		player.lock();

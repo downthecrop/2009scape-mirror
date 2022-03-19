@@ -6,8 +6,6 @@ import core.cache.def.impl.ItemDefinition
 import core.game.container.impl.EquipmentContainer
 import core.game.content.dialogue.FacialExpression
 import core.game.content.global.SkillingPets
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage
 import core.game.node.Node
 import core.game.node.scenery.Scenery
 import core.game.node.scenery.SceneryBuilder
@@ -21,7 +19,6 @@ import core.game.node.entity.skill.gather.mining.MiningNode
 import core.game.node.item.ChanceItem
 import core.game.node.item.Item
 import core.game.system.task.Pulse
-import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import core.tools.StringUtils
@@ -75,9 +72,6 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
         }
         if (resource!!.identifier == MiningNode.GEM_ROCK_0.identifier) {
             isMiningGems = true
-        }
-        if (TutorialSession.getExtension(player).stage == 35) {
-            TutorialStage.load(player, 36, false)
         }
         if (checkRequirements()) {
             super.start()
