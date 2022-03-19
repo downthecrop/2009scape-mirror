@@ -55,7 +55,7 @@ class LostTribeCutscene(val pl: Player? = null) : CutscenePlugin("Lost Tribe Cut
     override fun open() {
         player.setAttribute("cutscene:original-loc",player.location)
         player.setAttribute("real-end",Location.create(3207, 3221, 0))
-        player.interfaceManager.hideTabs(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14)
+        player.interfaceManager.removeTabs(0,1,2,3,4,5,6,7,8,9,10,11,12,13,14)
         if(player.settings.isRunToggled){
             player.settings.toggleRun()
         }

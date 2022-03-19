@@ -2,7 +2,6 @@ package core.game.content.quest.tutorials.learningtheropes;
 
 import core.game.content.activity.ActivityPlugin;
 import core.game.content.activity.CutscenePlugin;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.combat.ImpactHandler;
 import core.game.node.entity.npc.NPC;
@@ -238,7 +237,6 @@ public class LTRDragonFightCutscene extends CutscenePlugin {
                 case 60:
                     System.out.println("Fight end");
                     LTRDragonFightCutscene.this.stop(true);
-                    TutorialStage.load(player, 3, false);
                     CellarMapZone.get().create(player);
                     return true;
                 case 61:

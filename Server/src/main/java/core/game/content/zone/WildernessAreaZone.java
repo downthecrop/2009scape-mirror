@@ -4,8 +4,6 @@ import core.game.content.dialogue.DialogueAction;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.content.dialogue.FacialExpression;
 import core.game.content.global.action.DoorActionHandler;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.skill.SkillPulse;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.gather.SkillingResource;
@@ -189,9 +187,6 @@ public class WildernessAreaZone extends MapZone implements Plugin<Object> {
 			}
 			if (resource == null) {
 				return;
-			}
-			if (TutorialSession.getExtension(player).getStage() == 35) {
-				TutorialStage.load(player, 36, false);
 			}
 			super.start();
 		}

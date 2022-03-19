@@ -595,7 +595,7 @@ public abstract class Familiar extends NPC implements Plugin<Object> {
 	public void dismiss() {
 		clear();
 		getPulseManager().clear();
-		owner.getInterfaceManager().hideTabs(7);
+		owner.getInterfaceManager().removeTabs(7);
 		owner.getFamiliarManager().setFamiliar(null);
 		owner.getConfigManager().set(448, -1);
 		owner.getConfigManager().set(1176, 0);

@@ -67,7 +67,7 @@ public class MorphItemPlugin implements Plugin<Object> {
 		int morphId = item.getId() == 6583 ? 2626 : EASTER_EGG_IDS[RandomFunction.random(EASTER_EGG_IDS.length)];
 		player.getInterfaceManager().close();
 		player.getAppearance().transformNPC(morphId);
-		player.getInterfaceManager().hideTabs(0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
+		player.getInterfaceManager().removeTabs(0, 1, 2, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14);
 		player.getLocks().lockMovement(GameWorld.getTicks() + 900000000);
 		player.getLocks().lockInteractions(GameWorld.getTicks() + 90000000);
 		player.getLocks().lockTeleport(GameWorld.getTicks() + 900000000);

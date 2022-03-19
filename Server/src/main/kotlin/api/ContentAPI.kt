@@ -7,8 +7,6 @@ import core.game.container.impl.EquipmentContainer
 import core.game.content.dialogue.FacialExpression
 import core.game.content.global.action.SpecialLadders
 import core.game.node.Node
-import core.game.node.scenery.Scenery
-import core.game.node.scenery.SceneryBuilder
 import core.game.node.entity.Entity
 import core.game.node.entity.combat.ImpactHandler
 import core.game.node.entity.impl.Animator
@@ -19,12 +17,15 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.TeleportManager
 import core.game.node.entity.player.link.audio.Audio
 import core.game.node.entity.player.link.emote.Emotes
+import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.player.link.quest.QuestRepository
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.skill.gather.SkillingTool
 import core.game.node.item.GroundItem
 import core.game.node.item.GroundItemManager
 import core.game.node.item.Item
+import core.game.node.scenery.Scenery
+import core.game.node.scenery.SceneryBuilder
 import core.game.system.task.Pulse
 import core.game.world.map.Direction
 import core.game.world.map.Location
@@ -39,10 +40,10 @@ import core.game.world.update.flag.context.Animation
 import core.game.world.update.flag.context.Graphics
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.content.dialogue.SkillDialogueHandler
-import rs09.game.content.global.GlobalKillCounter;
+import rs09.game.content.global.GlobalKillCounter
 import rs09.game.interaction.InteractionListeners
 import rs09.game.system.SystemLogger
-import rs09.game.system.config.ItemConfigParser;
+import rs09.game.system.config.ItemConfigParser
 import rs09.game.world.GameWorld
 import rs09.game.world.GameWorld.Pulser
 import rs09.game.world.repository.Repository
@@ -1289,6 +1290,7 @@ fun questStage(player: Player, quest: String): Int{
 
 fun setQuestStage(player: Player, quest: String, stage: Int) {
     player.questRepository.setStage(QuestRepository.getQuests()[quest]!!, stage)
+    player.questRepository.syncronizeTab(player)
 }
 
 /**

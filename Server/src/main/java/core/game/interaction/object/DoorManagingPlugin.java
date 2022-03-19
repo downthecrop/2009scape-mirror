@@ -25,6 +25,7 @@ public final class DoorManagingPlugin extends OptionHandler {
 		SceneryDefinition.setOptionHandler("open", this);
 		SceneryDefinition.setOptionHandler("close", this);
 		SceneryDefinition.setOptionHandler("shut", this);
+		SceneryDefinition.setOptionHandler("go-through", this);
 		return this;
 	}
 
@@ -38,6 +39,7 @@ public final class DoorManagingPlugin extends OptionHandler {
 		if (name.contains("drawers") || name.contains("wardrobe") || name.contains("cupboard")) {
 			switch(option) {
 				case "open":
+				case "go-through":
 					if (object.isActive()) {
 						SceneryBuilder.replace(object, object.transform(object.getId() + 1), 80);
 					}

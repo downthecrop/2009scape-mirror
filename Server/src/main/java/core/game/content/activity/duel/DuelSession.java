@@ -11,7 +11,6 @@ import core.game.container.access.InterfaceContainer;
 import core.game.container.impl.EquipmentContainer;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.info.login.PlayerParser;
-import core.game.node.entity.player.link.RunScript;
 import core.game.node.entity.state.EntityState;
 import core.game.node.item.Item;
 import core.game.system.monitor.PlayerMonitor;
@@ -363,8 +362,8 @@ public final class DuelSession extends ComponentPlugin {
 			session.setAcceptState(4);
 			session.player.getInterfaceManager().closeSingleTab();
 			session.other.getInterfaceManager().closeSingleTab();
-			session.player.getInterfaceManager().hideTabs(0, 1, 2, 3, 4, 5, 6, 7, 11, 12);
-			session.other.getInterfaceManager().hideTabs(0, 1, 2, 3, 4, 5, 6, 7, 11, 12);
+			session.player.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 11, 12);
+			session.other.getInterfaceManager().removeTabs(0, 1, 2, 3, 4, 5, 6, 7, 11, 12);
 			StringBuilder before = new StringBuilder();
 			StringBuilder during = new StringBuilder();
 			if (hasEquipmentRules()) {

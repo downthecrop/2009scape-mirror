@@ -9,7 +9,6 @@ import core.game.container.impl.InventoryListener;
 import core.game.content.activity.pyramidplunder.PlunderObjectManager;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.quest.miniquest.barcrawl.BarcrawlManager;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.content.ttrail.TreasureTrailManager;
 import core.game.interaction.Interaction;
 import core.game.interaction.item.brawling_gloves.BrawlingGlovesManager;
@@ -646,7 +645,6 @@ public class Player extends Entity {
 				String gender = this.isMale() ? "man " : "woman ";
 				if (getAttributes().containsKey("permadeath")) {
 					Repository.sendNews("Permadeath Hardcore Iron" + gender + " " + this.getUsername() + " has fallen. Total Level: " + this.getSkills().getTotalLevel()); // Not enough room for XP
-					TutorialSession.getExtension(this).setStage(0);
 					equipment.clear();
 					inventory.clear();
 					bank.clear();

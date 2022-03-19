@@ -38,50 +38,23 @@ class UpdateSequence
         playersList = renderablePlayers
         npcList = Repository.renderableNpcs
         lobbyList!!.map{ PacketRepository.send(ClearMinimapFlag::class.java, PlayerContext(it)) }
-        playersList!!.map{player ->
-            try {
-                player.tick()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
-        npcList!!.map{npc ->
-            try {
-                npc.tick()
-            } catch (e: Exception) {
-                e.printStackTrace()
-            }
-        }
+        playersList!!.forEach(Player::tick)
+        npcList!!.forEach(NPC::tick)
     }
 
     /**
      * Runs the updating part of the sequence.
      */
     fun run() {
-        val latch = CountDownLatch(renderablePlayers.size)
-        playersList!!.forEach(Consumer { player: Player ->
-            GlobalScope.launch {
-                try {
-                    player.update()
-                } catch (t: Throwable) {
-                    t.printStackTrace()
-                }
-                latch.countDown()
-            }
-        })
-        try {
-            latch.await(1000L, TimeUnit.MILLISECONDS)
-        } catch (e: InterruptedException) {
-            e.printStackTrace()
-        }
+        renderablePlayers.forEach(Player::update)
     }
 
     /**
      * Ends the sequence, calls the [Entity.reset] method..
      */
     fun end() {
-        playersList!!.forEach(Consumer { obj: Player -> obj.reset() })
-        npcList!!.forEach(Consumer { obj: NPC -> obj.reset() })
+        playersList!!.forEach(Player::reset)
+        npcList!!.forEach(NPC::reset)
         renderablePlayers.sync()
         RegionManager.pulse()
         GroundItemManager.pulse()

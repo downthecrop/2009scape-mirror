@@ -102,6 +102,7 @@ class GrandExchangeOffer() {
             stmt.setInt(1, amountLeft)
             stmt.setInt(2, itemID)
             stmt.executeUpdate()
+            stmt.close()
         }
         else
         {
@@ -113,6 +114,7 @@ class GrandExchangeOffer() {
             stmt.setInt(5, index)
             stmt.setLong(6, uid)
             stmt.executeUpdate()
+            stmt.close()
         }
     }
 
@@ -134,6 +136,7 @@ class GrandExchangeOffer() {
             }
             else
                 stmt.executeUpdate("INSERT INTO bot_offers(item_id,amount) values($itemID,$amount)")
+            stmt.close()
         }
         else
         {
@@ -143,6 +146,7 @@ class GrandExchangeOffer() {
             val nowuid = stmt.executeQuery("SELECT last_insert_rowid()")
             uid = nowuid.getLong(1)
             visualize(player)
+            stmt.close()
         }
 
     }

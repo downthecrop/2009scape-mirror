@@ -77,7 +77,7 @@ public abstract class CutscenePlugin extends ActivityPlugin {
 			GameWorld.getPulser().submit(getStartPulse());
 		} else {
 			PacketRepository.send(MinimapState.class, new MinimapStateContext(player, getMapState()));
-			player.getInterfaceManager().hideTabs(getRemovedTabs());
+			player.getInterfaceManager().removeTabs(getRemovedTabs());
 			player.getProperties().setTeleportLocation(getStartLocation());
 			player.unlock();
 			player.getWalkingQueue().reset();
@@ -174,7 +174,7 @@ public abstract class CutscenePlugin extends ActivityPlugin {
 				break;
 			case 3:
 				PacketRepository.send(MinimapState.class, new MinimapStateContext(player, getMapState()));
-				player.getInterfaceManager().hideTabs(getRemovedTabs());
+				player.getInterfaceManager().removeTabs(getRemovedTabs());
 				break;
 			case 4:
 				player.getProperties().setTeleportLocation(getStartLocation());
@@ -222,7 +222,7 @@ public abstract class CutscenePlugin extends ActivityPlugin {
 				break;
 			case 3:
 				PacketRepository.send(MinimapState.class, new MinimapStateContext(player, getMapState()));
-				player.getInterfaceManager().hideTabs(getRemovedTabs());
+				player.getInterfaceManager().removeTabs(getRemovedTabs());
 				break;
 			case 4:
 				Location loc = (Location) (player.getAttribute("real-end", player.getAttribute("cutscene:original-loc", player.getLocation())));

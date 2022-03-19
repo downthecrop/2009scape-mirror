@@ -6,8 +6,6 @@ import core.game.container.impl.EquipmentContainer;
 import core.game.content.dialogue.FacialExpression;
 import core.game.content.global.BirdNest;
 import core.game.content.global.SkillingPets;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
-import core.game.content.quest.tutorials.tutorialisland.TutorialStage;
 import core.game.node.entity.impl.Animator;
 import core.game.node.entity.impl.Projectile;
 import core.game.node.entity.player.Player;
@@ -24,7 +22,6 @@ import core.tools.RandomFunction;
 import rs09.game.node.entity.skill.farming.FarmingPatch;
 import rs09.game.node.entity.skill.farming.Patch;
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
-import org.rs09.consts.Items;
 
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_BASE;
 import static rs09.game.node.entity.player.info.stats.StatAttributeKeysKt.STATS_LOGS;
@@ -52,10 +49,6 @@ public class WoodcuttingSkillPulse extends Pulse {
     public void message(int type) {
         if (type == 0) {
             player.getPacketDispatch().sendMessage("You swing your axe at the tree...");
-            if (TutorialSession.getExtension(player).getStage() == 6) {
-                player.lock(7);
-                TutorialStage.load(player, 7, false);
-            }
         }
     }
 
@@ -121,8 +114,6 @@ public class WoodcuttingSkillPulse extends Pulse {
             return false;
         }
 
-        int tutorialStage = TutorialSession.getExtension(player).getStage();
-
 
         // If player is in donator zone
        /* if (player.getLocation().getRegionId() == 12102) {
@@ -177,11 +168,6 @@ public class WoodcuttingSkillPulse extends Pulse {
             }
 
         }
-        // Tutorial stuff, maybe?
-        if (tutorialStage == 7) {
-            TutorialStage.load(player, 8, false);
-        }
-
         //transform to depleted version
         if (resource.getRespawnRate() != 0) {
             int charge = 1000 / resource.getRewardAmount();

@@ -304,43 +304,6 @@ public final class CharacterDesign {
 		if (close) {
 			player.setAttribute("char-design:accepted", true);
 			player.getInterfaceManager().close();
-			//Removing Tutorial Island properties on the account (?) and sending the Player to Lumbridge
-			player.getMusicPlayer().play(MusicEntry.forId(62));
-			player.removeAttribute("tut-island");
-			player.getConfigManager().set(1021, 0);
-			TutorialSession.getExtension(player).setStage(72);
-			player.getInterfaceManager().closeOverlay();
-
-			//Clears and Resets the Player's account and focuses the default interface to their Inventory
-//			player.getInventory().clear();
-//			player.getEquipment().clear();
-//			player.getBank().clear();
-			player.getInterfaceManager().restoreTabs(); //This still hides the Attack (double swords) in the player menu until Player wields a weapon.
-			player.getInterfaceManager().setViewedTab(3);
-//			player.getInventory().add(STARTER_PACK);
-//			player.getBank().add(STARTER_BANK);
-
-			player.getPulseManager().run(new Pulse(1){
-				@Override
-				public boolean pulse() {
-					player.unlock();
-					if (player.getIronmanManager().isIronman() && player.getSettings().isAcceptAid()) {
-						player.getSettings().toggleAcceptAid();
-					}
-					if (WorldCommunicator.isEnabled()) {
-						MSPacketRepository.sendInfoUpdate(player);
-					}
-					//This overwrites the stuck dialogue after teleporting to Lumbridge for some reason
-					//Dialogue from 2007 or thereabouts
-					//Original is five lines, but if the same is done here it will break. Need to find another way of showing all this information.
-					//player.getDialogueInterpreter().sendDialogue("Welcome to Lumbridge! To get more help, simply click on the", "Lumbridge Guide or one of the Tutors - these can be found by looking", "for the question mark icon on your mini-map. If you find you are", "lost at any time, look for a signpost or use the Lumbridge Home Port Spell.");
-					player.getDialogueInterpreter().sendPlaneMessageWithBlueTitle("Welcome to " + GameWorld.getSettings().getName() + "!","Hans at the castle in Lumbridge can","enable ironman mode, modify xp rate settings,","toggle random events, and more!","Use the ladder to leave.");
-
-					//Appending the welcome message and some other stuff
-					player.getPacketDispatch().sendMessage("Welcome to " + GameWorld.getSettings().getName() + ".");
-					return true;
-				}
-			});
 		}
 		player.getAppearance().setGender(player.getAttribute("male", player.getAppearance().isMale()) ? Gender.MALE : Gender.FEMALE);
 		for (int i = 0; i < player.getAppearance().getAppearanceCache().length; i++) {

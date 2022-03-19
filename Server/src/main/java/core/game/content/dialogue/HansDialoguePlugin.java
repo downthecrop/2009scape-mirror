@@ -62,7 +62,7 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 
 		switch (stage) {
 			case 0:
-				interpreter.sendOptions("Select an Option", "I'm looking for whoever is in charge of this place.", "I have come to kill everyone in this castle!", "I don't know. I'm lost. Where am I?", "More Options...");
+				interpreter.sendOptions("Select an Option", "I'm looking for whoever is in charge of this place.", "I have come to kill everyone in this castle!", "I don't know. I'm lost. Where am I?", "Have you been here as long as me?");
 				stage++;
 				break;
 			case 1:
@@ -83,12 +83,8 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 						stage = 50;
 						break;
 					case 4:
-						if (!inStartDungeon) {
-							interpreter.sendOptions("Select an Option", "Have you been here as long as me?", "About my xp rate...", "About Iron Man mode...","About random events...", "Go Back...");
-						} else {
-							interpreter.sendOptions("Select an Option", "Have you been here as long as me?", "About my xp rate...", "About Iron Man mode...","About random events...");
-						}
-						stage = 10;
+						interpreter.sendDialogues(npc, FacialExpression.NEUTRAL, "I've been patrolling this castle for years!");
+						stage = 41;
 						break;
 				}
 				break;

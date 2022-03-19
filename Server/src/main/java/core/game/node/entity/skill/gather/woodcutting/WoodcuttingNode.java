@@ -136,7 +136,7 @@ public enum WoodcuttingNode {
 
     int full,empty,reward,respawnRate,level, rewardAmount;
     double experience,rate;
-    byte identifier;
+    public byte identifier;
     boolean farming;
     double baseLow = 64;
     double baseHigh = 200;

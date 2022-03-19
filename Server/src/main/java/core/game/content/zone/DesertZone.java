@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import core.cache.def.impl.ItemDefinition;
-import core.game.content.quest.tutorials.tutorialisland.TutorialSession;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.player.Player;
@@ -178,7 +177,7 @@ public final class DesertZone extends MapZone implements Plugin<Object> {
     public boolean enter(Entity e) {
         if (e instanceof Player) {
             Player p = (Player) e;
-            if (TutorialSession.getExtension(p).getStage() < TutorialSession.MAX_STAGE) {
+            if (p.getAttribute("tutorial:stage", 0) > 71) {
                 return true;
             }
             p.setAttribute("desert-delay", GameWorld.getTicks() + getDelay(p));
