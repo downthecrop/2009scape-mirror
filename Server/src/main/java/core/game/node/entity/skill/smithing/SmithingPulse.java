@@ -68,10 +68,6 @@ public class SmithingPulse extends SkillPulse<Item> {
             player.getDialogueInterpreter().sendDialogue("You need to complete Tourist Trap to smith dart tips.");
             return false;
         }
-        if (!player.getQuestRepository().isComplete("Death Plateau") && bar.getSmithingType() == SmithingType.TYPE_CLAWS) {
-            player.getDialogueInterpreter().sendDialogue("You need to complete Death Plateau to smith claws.");
-            return false;
-        }
         return true;
     }
 
