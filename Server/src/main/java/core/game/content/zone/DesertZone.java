@@ -54,7 +54,7 @@ public final class DesertZone extends MapZone implements Plugin<Object> {
         @Override
         public boolean pulse() {
             for (Player player : PLAYERS) {
-                if (player.getInterfaceManager().isOpened() || player.getInterfaceManager().hasChatbox() || player.getLocks().isMovementLocked()) {
+                if (!player.getAttribute("tutorial:complete", false) || player.getInterfaceManager().isOpened() || player.getInterfaceManager().hasChatbox() || player.getLocks().isMovementLocked()) {
                     continue;
                 }
                 if (player.getAttribute("desert-delay", -1) < GameWorld.getTicks()) {
