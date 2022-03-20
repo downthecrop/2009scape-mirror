@@ -266,11 +266,11 @@ public class Fletching {
     }
     private enum Items{
         STANDARD(1511,FletchingItems.ARROW_SHAFT, FletchingItems.SHORT_BOW, FletchingItems.LONG_BOW, FletchingItems.WOODEN_STOCK),
-        OAK(1521, FletchingItems.OAK_SHORTBOW, FletchingItems.OAK_LONGBOW, FletchingItems.OAK_STOCK),
-        WILLOW(1519, FletchingItems.WILLOW_SHORTBOW, FletchingItems.WILLOW_LONGBOW, FletchingItems.WILLOW_STOCK),
-        MAPLE(1517, FletchingItems.MAPLE_SHORTOW, FletchingItems.MAPLE_LONGBOW, FletchingItems.MAPLE_STOCK),
-        YEW(1515, FletchingItems.YEW_SHORTBOW, FletchingItems.YEW_LONGBOW, FletchingItems.YEW_STOCK),
-        MAGIC(1513, FletchingItems.MAGIC_SHORTBOW, FletchingItems.MAGIC_LONGBOW),
+        OAK(1521, FletchingItems.O_ARROW_SHAFT, FletchingItems.OAK_SHORTBOW, FletchingItems.OAK_LONGBOW, FletchingItems.OAK_STOCK),
+        WILLOW(1519, FletchingItems.W_ARROW_SHAFT, FletchingItems.WILLOW_SHORTBOW, FletchingItems.WILLOW_LONGBOW, FletchingItems.WILLOW_STOCK),
+        MAPLE(1517, FletchingItems.M_ARROW_SHAFT, FletchingItems.MAPLE_SHORTOW, FletchingItems.MAPLE_LONGBOW, FletchingItems.MAPLE_STOCK),
+        YEW(1515, FletchingItems.Y_ARROW_SHAFT, FletchingItems.YEW_SHORTBOW, FletchingItems.YEW_LONGBOW, FletchingItems.YEW_STOCK),
+        MAGIC(1513, FletchingItems.MAG_ARROW_SHAFT, FletchingItems.MAGIC_SHORTBOW, FletchingItems.MAGIC_LONGBOW),
         TEAK(6333, FletchingItems.TEAK_STOCK),
         MAHOGANY(6332, FletchingItems.MAHOGANY_STOCK);
 
@@ -302,26 +302,31 @@ public class Fletching {
         WOODEN_STOCK(9440, 6, 9, 1),
 
         //Oak logs
+        O_ARROW_SHAFT(52, 7.5, 15, 25),
         OAK_SHORTBOW(54, 16.5, 20, 1),
         OAK_LONGBOW(56,25,25,1),
         OAK_STOCK(9442, 16, 24, 1),
 
         //Willow logs
+        W_ARROW_SHAFT(52, 12.5, 30, 35),
         WILLOW_SHORTBOW(60, 33.3, 35, 1),
         WILLOW_LONGBOW(58, 41.5, 40, 1),
         WILLOW_STOCK(9444, 22, 39, 1),
 
         //Maple logs
+        M_ARROW_SHAFT(52, 25, 45, 50),
         MAPLE_SHORTOW(64, 50, 50, 1),
         MAPLE_LONGBOW(62, 58.3, 55, 1),
         MAPLE_STOCK(9448, 32, 54, 1),
 
         //Yew logs
+        Y_ARROW_SHAFT(52, 43, 60, 65),
         YEW_SHORTBOW(68, 67.5, 65, 1),
         YEW_LONGBOW(66, 75, 70, 1),
         YEW_STOCK(9452, 50, 69, 1),
 
         //Magic logs
+        MAG_ARROW_SHAFT(52, 61, 75, 80),
         MAGIC_SHORTBOW(72, 83.3, 80,1),
         MAGIC_LONGBOW(70, 91.5, 85, 1),
 

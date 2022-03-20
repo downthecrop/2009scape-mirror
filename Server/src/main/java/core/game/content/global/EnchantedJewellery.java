@@ -23,7 +23,7 @@ public enum EnchantedJewellery {
 	DIGSITE_PENDANT(new String[] {}, new Location[] { Location.create(3342, 3445, 0) }, true, 11194, 11193, 11192, 11191, 11190), 
 	COMBAT_BRACELET(new String[] { "Champions' Guild", "Monastery", "Ranging Guild", "Warriors' Guild", "Nowhere." }, new Location[] { Location.create(3191, 3365, 0), Location.create(3052, 3472, 0), Location.create(2657, 3439, 0), Location.create(2878, 3546, 0) }, 11118, 11120, 11122, 11124, 11126), 
 	SKILLS_NECKLACE(new String[] { "Fishing Guild", "Mining Guild", "Crafting Guild", "Cooking Guild", "Nowhere." }, new Location[] { Location.create(2611, 3392, 0), Location.create(3016, 3338, 0), Location.create(2933, 3290, 0), Location.create(3143, 3442, 0) }, 11105, 11107, 11109, 11111, 11113),
-	RING_OF_WEALTH(new String[] {"Grand Exchange","Nowhere."}, new Location[] {Location.create(3163, 3464, 0)},14646,14644,14642,14640,14638);
+	RING_OF_WEALTH(new String[] {"Miscellania", "Grand Exchange", "Falador Park", "Dondakan's Rock", "Nowhere."}, new Location[] {Location.create(2533, 3864, 0), Location.create(3163, 3464, 0), Location.create(2995, 3375, 0), Location.create(2829, 10166, 0)},14646,14644,14642,14640,14638);
 
 	/**
 	 * Represents the teleport animation.

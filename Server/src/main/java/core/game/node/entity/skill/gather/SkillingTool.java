@@ -79,6 +79,11 @@ public enum SkillingTool {
 	 * Represents a rune pickaxe (mining).
 	 */
 	RUNE_PICKAXE(1275, 41, 0.65D, new Animation(624)),
+
+	/**
+	 * Represents the Dragon Pickaxe (mining).
+	 */
+	DRAGON_PICKAXE(14723, 61, 1.0D, new Animation(11155)),		
 	
 	/**
 	 * Represents the Inferno Adze (woodcutting)
@@ -88,7 +93,7 @@ public enum SkillingTool {
 	/**
 	 * Represents the Inferno Adze (mining)
 	 */
-	INFERNO_ADZE2(13661, 61, 1.0D, new Animation(10222)),
+	INFERNO_ADZE2(13661, 61, 0.65D, new Animation(10222)),
 
     HATCHET_CLASS1(Items.HATCHET_CLASS_1_14132, 1, 0.1, new Animation(10603)),
     HATCHET_CLASS2(Items.HATCHET_CLASS_2_14134, 20, 0.3, new Animation(10604)),
@@ -206,6 +211,7 @@ public enum SkillingTool {
         SkillingTool[] pickaxePriority = new SkillingTool[] {
             SkillingTool.PICKAXE_CLASS5,
             SkillingTool.PICKAXE_CLASS4,
+			SkillingTool.DRAGON_PICKAXE,
             SkillingTool.RUNE_PICKAXE,
             SkillingTool.PICKAXE_CLASS3,
             SkillingTool.ADAMANT_PICKAXE,

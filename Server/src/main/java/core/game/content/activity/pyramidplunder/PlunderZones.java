@@ -9,7 +9,6 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
-import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
 import core.game.system.task.LocationLogoutTask;
 import core.game.system.task.LogoutTask;
@@ -198,9 +197,9 @@ public class PlunderZones implements Plugin<Object> {
                 }
                return true; 
             }
-            PlunderObject object = target instanceof Scenery ? new PlunderObject(target.asScenery()) : null;
+            PlunderObject object = target instanceof NPC ? null : new PlunderObject(target.asScenery()); //PlunderObject(target.getId(),target.getLocation());
             PlunderObjectManager manager = player.getPlunderObjectManager();
-            if(object == null || manager == null) return super.interact(e, target, option);
+            if(manager == null) return super.interact(e, target, option);
             boolean alreadyOpened = manager.openedMap.getOrDefault(object.getLocation(),false);
             boolean charmed = manager.charmedMap.getOrDefault(object.getLocation(),false);
             boolean success = success(player, Skills.THIEVING);
@@ -212,7 +211,7 @@ public class PlunderZones implements Plugin<Object> {
                 case 16517: //Spear trap
                     if(!checkRequirements(player,room)){
                         player.getPacketDispatch().sendMessage("You need to be at least level " + room.reqLevel + " thieving.");
-                        return true;
+                        break;
                     }
                     player.getLocks().lockInteractions(2);
                     player.animate(animations[success ? 1 : 0]);
@@ -226,18 +225,18 @@ public class PlunderZones implements Plugin<Object> {
                     } else {
                         player.getPacketDispatch().sendMessage("You fail to pass the spears.");
                     }
-                    return true;
+                    break;
                 case 16503:
                 case 16502:
                 case 16501: // Urns
                     if (optionName.equals("search")) {
                         if (!checkRequirements(player,room)){
                             player.getPacketDispatch().sendMessage("You need to be at least level " + room.reqLevel + " thieving.");
-                            return true;
+                            break;
                         }
                         if (alreadyOpened){
                             player.getPacketDispatch().sendMessage("You've already looted this.");
-                            return true;
+                            break;
                         }
 
                         player.animate(animations[success ? 1 : 0]);
@@ -260,7 +259,7 @@ public class PlunderZones implements Plugin<Object> {
                             SceneryBuilder.replace(target.asScenery(), target.asScenery().transform(object.snakeId), 5);
                         }
                     }
-                    return true;
+                    break;
                 case 16509:
                 case 16510:
                 case 16511: // Snake urns
@@ -272,17 +271,17 @@ public class PlunderZones implements Plugin<Object> {
                         player.getImpactHandler().manualHit(player, RandomFunction.random(2, 8), ImpactHandler.HitsplatType.NORMAL);
                         player.getPacketDispatch().sendMessage("The snake bites you.");
                     }
-                    return true;
+                    break;
                 case 16473: // Chest
                     if(optionName.equals("search")) {
                         boolean willSpawnSwarm = (RandomFunction.random(1,20) == 10);
                         if(!checkRequirements(player,room)){
                             player.getPacketDispatch().sendMessage("You need at least level " + room.reqLevel + " thieving to loot this.");
-                            return true;
+                            break;
                         }
                         if (alreadyOpened){
                             player.getPacketDispatch().sendMessage("You've already looted this.");
-                            return true;
+                            break;
                         }
                         player.getPacketDispatch().sendMessage("You search the chest...");
                         player.animate(animations[1]);
@@ -301,16 +300,16 @@ public class PlunderZones implements Plugin<Object> {
                         manager.registerOpened(object);
                         //ObjectBuilder.replace(target.asObject(), target.asObject().transform(object.openId), 5);
                     }
-                    return true;
+                    break;
                 case 16495: //Sarcophagus
                     if(optionName.equals("open")) {
                         if (!checkRequirements(player,room)){
                             player.getPacketDispatch().sendMessage("You need to be at least level " + room.reqLevel + " thieving.");
-                            return true;
+                            break;
                         }
                         if (alreadyOpened){
                             player.getPacketDispatch().sendMessage("You've already looted this.");
-                            return true;
+                            break;
                         }
                         boolean willSpawnMummy = (RandomFunction.random(1,5) == 3);
                         player.animate(animations[1]);
@@ -329,12 +328,12 @@ public class PlunderZones implements Plugin<Object> {
                         manager.registerOpened(object);
                         //ObjectBuilder.replace(target.asObject(), target.asObject().transform(object.openId), 5);
                     }
-                    return true;
+                    break;
                 case 16475: //doors
                     if(optionName.equals("pick-lock") && roomnum < 8) {
                         if (!checkRequirements(player,room)){
                             player.getPacketDispatch().sendMessage("You need to be at least level " + room.reqLevel + " thieving.");
-                            return true;
+                            break;
                         }
                         player.animate(animations[1]);
                         player.getLocks().lockInteractions(2);
@@ -355,13 +354,14 @@ public class PlunderZones implements Plugin<Object> {
                     } else if(roomnum == 8) {
                         ClimbActionHandler.climb(player, ClimbActionHandler.CLIMB_UP, Location.create(3288, 2801, 0));
                     }
-                    return true;
+                    break;
                 case 16476:
                     player.getDialogueInterpreter().sendDialogue("This door doesn't seem to lead","anywhere.");
-                    return true;
+                    break;
                 default:
                     return super.interact(e, target, option);
             }
+            return true;
         }
     }
 }

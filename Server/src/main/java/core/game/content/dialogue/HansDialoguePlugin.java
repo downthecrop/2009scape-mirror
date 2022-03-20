@@ -134,9 +134,9 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 				switch(buttonId){
 					case 1:
 						if(player.getAttributes().containsKey("permadeath")){
-							options("1.0x", "2.5x", "Stay 5.0x", "(HCIM Only) 10x");
+							options("1.0x", "2.5x", "Stay 5.0x", "(HCIM Only) 10x", "20x");
 						} else {
-							options("1.0x", "2.5x", "Stay 5.0x");
+							options("1.0x", "2.5x", "Stay 5.0x", "10x", "20x");
 						}
 						stage++;
 						break;
@@ -176,7 +176,14 @@ public final class HansDialoguePlugin extends DialoguePlugin {
 						} else {
 							stage = 15;
 						}
-						break;					
+						break;
+					case 5:
+						if (player.newPlayer) {
+							player.getSkills().experienceMutiplier = 20.0;
+							stage = 14;
+						} else {
+							stage = 15;
+						}						
 				}
 				npc("One moment, please...");
 				break;

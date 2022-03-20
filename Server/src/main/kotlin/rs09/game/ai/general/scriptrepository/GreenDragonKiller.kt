@@ -22,6 +22,7 @@ import rs09.game.node.entity.combat.CombatSwingHandler
 import rs09.game.node.entity.combat.handlers.MagicSwingHandler
 import rs09.game.node.entity.combat.handlers.MeleeSwingHandler
 import rs09.game.node.entity.combat.handlers.RangeSwingHandler
+import rs09.game.world.GameWorld
 import kotlin.random.Random
 
 /**
@@ -36,13 +37,8 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
     var lootDelay = 0
     var offerMade = false
 
-    var food = if (Random.nextBoolean()){
-        Items.LOBSTER_379
-    } else if(Random.nextBoolean()){
-        Items.SWORDFISH_373
-    } else {
-        Items.SHARK_385
-    }
+    var food = Items.SWORDFISH_373
+
 
     var myBorders: ZoneBorders? = null
     val type = when(style){
@@ -97,7 +93,7 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
 
             State.LOOTING -> {
                 lootDelay = 0
-                val items = AIRepository.groundItems.get(bot)
+                val items = AIRepository.groundItems[bot]
                 if(items.isNullOrEmpty()) {state = State.KILLING; return}
                 if(bot.inventory.isFull) {
                     if(bot.inventory.containsItem(Item(food))){
@@ -107,7 +103,7 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
                     }
                     return
                 }
-                items.forEach {it: Item -> scriptAPI.takeNearestGroundItem(it.id)}
+                items.toTypedArray().forEach {it: Item -> scriptAPI.takeNearestGroundItem(it.id)}
             }
 
             State.TO_BANK -> {
@@ -145,7 +141,7 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
                         bot.inventory.clear()
                         state = if(bot.bank.getAmount(food) < 10)
                             State.TO_GE
-                         else
+                        else
                             State.TO_DRAGONS
                         for(item in inventory)
                             bot.inventory.add(item)
@@ -154,28 +150,6 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
                         return true
                     }
                 })
-            }
-
-            State.BUYING_FOOD -> {
-                    if(!offerMade)
-                    {
-                        scriptAPI.buyFromGE(bot, food, 100)
-                        offerMade = true
-                    } else
-                    {
-                        val offer = AIRepository.getOffer(bot)
-                        if (offer == null) {
-                            offerMade = false
-                        } else {
-                            if (offer.completedAmount == offer.amount) {
-                                state = State.TO_DRAGONS
-                                offer.offerState = OfferState.REMOVED
-                                bot.bank.add(Item(offer.itemID, offer.completedAmount))
-                                bot.bank.refresh()
-                                scriptAPI.withdraw(food, 10)
-                            }
-                        }
-                    }
             }
 
             State.TO_DRAGONS -> {
@@ -225,14 +199,19 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
 
             State.SELL_GE -> {
                 scriptAPI.sellAllOnGe()
-                state = State.BUYING_FOOD
+                GameWorld.Pulser.submit(object : Pulse() {
+                    override fun pulse(): Boolean {
+                        bot.bank.add(Item(Items.SWORDFISH_373, 100))
+                        return true
+                    }
+                })
+                state = State.BANKING
             }
 
             State.REFRESHING -> {
                 running = false
                 return
             }
-
         }
     }
 
@@ -257,7 +236,6 @@ class GreenDragonKiller(val style: CombatStyle, area: ZoneBorders? = null) : Scr
         TO_GE,
         SELL_GE,
         REFRESHING,
-        BUYING_FOOD
 
     }
 

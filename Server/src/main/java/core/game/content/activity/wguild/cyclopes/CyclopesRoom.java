@@ -41,7 +41,7 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 	/**
 	 * The defenders.
 	 */
-	private static final int[] DEFENDERS = { 8844, 8845, 8846, 8847, 8848, 8849, 8850};
+	private static final int[] DEFENDERS = { 8844, 8845, 8846, 8847, 8848, 8849, 8850, 14725};
 
 	/**
 	 * The players in the room.
@@ -262,7 +262,7 @@ public final class CyclopesRoom extends MapZone implements Plugin<Object> {
 			case 0:
 				player.setAttribute("sent_dialogue", true);
 				if (defenderId == DEFENDERS.length - 1) {
-					npc(4289, "I'll release some cyclopes which might drop the same", "rune defender for you as there isn't any higher! Have", "fun in there.");
+					npc(4289, "I'll release some cyclopes which might drop the same", "dragon defender for you as there isn't any higher! Have", "fun in there.");
 				} else if (defenderId == -1) {
 					npc(4289, "I'll release some cyclopes which might drop bronze", "defenders for you to start off with, unless you show me", "another. Have fun in there.");
 				} else {

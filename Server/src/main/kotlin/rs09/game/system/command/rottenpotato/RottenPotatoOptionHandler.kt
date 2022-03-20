@@ -1,15 +1,12 @@
 package rs09.game.system.command.rottenpotato
 
-import api.removeItem
 import core.cache.def.impl.ItemDefinition
 import core.game.interaction.OptionHandler
 import core.game.node.Node
 import core.game.node.entity.player.Player
-import core.game.node.entity.player.info.Rights
 import core.plugin.Initializable
 import core.plugin.Plugin
 import org.rs09.consts.Items
-import rs09.game.system.SystemLogger
 import rs09.game.system.command.CommandSystem
 import rs09.tools.stringtools.colorize
 
@@ -31,14 +28,6 @@ class RottenPotatoOptionHandler : OptionHandler() {
         player ?: return false
         node ?: return false
         option ?: return false
-
-        // re-add the fucking check because some fucking moron removed it at some point
-        if(player.rights != Rights.ADMINISTRATOR)
-        {
-            removeItem(player, Items.ROTTEN_POTATO_5733)
-            SystemLogger.logAlert("Player ${player.username} had a rotten potato. It has been removed.")
-            return false
-        }
 
         when(option){
             "rs hd" -> player.dialogueInterpreter.open(RottenPotatoRSHDDialogue().ID)

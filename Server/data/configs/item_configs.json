@@ -15669,9 +15669,9 @@
     "high_alchemy": "900",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Staff of air"
   },
   {
@@ -15708,9 +15708,9 @@
     "high_alchemy": "900",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Staff of water"
   },
   {
@@ -15747,9 +15747,9 @@
     "high_alchemy": "900",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Staff of earth"
   },
   {
@@ -15786,9 +15786,9 @@
     "high_alchemy": "900",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "1426",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Staff of fire"
   },
   {
@@ -15903,9 +15903,9 @@
     "high_alchemy": "9300",
     "weight": "2.25",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Fire battlestaff"
   },
   {
@@ -15942,9 +15942,9 @@
     "high_alchemy": "9300",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Water battlestaff"
   },
   {
@@ -15982,9 +15982,9 @@
     "high_alchemy": "9300",
     "weight": "2.25",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Air battlestaff"
   },
   {
@@ -16022,9 +16022,9 @@
     "high_alchemy": "9300",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Earth battlestaff"
   },
   {
@@ -28833,7 +28833,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2653",
-    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,0,0,0"
+    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -28860,7 +28860,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2655",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -28889,7 +28889,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2657",
-    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,0,0,1"
+    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,1,0,1"
   },
   {
     "ge_buy_limit": "2",
@@ -28916,7 +28916,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2659",
-    "bonuses": "0,0,0,-8,-2,44,48,46,-1,46,40,0,0,0,0"
+    "bonuses": "0,0,0,-8,-2,44,48,46,-1,46,40,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -28944,7 +28944,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2661",
-    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,0,0,0"
+    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -28971,7 +28971,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2663",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -29000,7 +29000,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2665",
-    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,0,0,0"
+    "bonuses": "0,0,0,-6,-2,30,32,27,-1,30,7,0,1,0,1"
   },
   {
     "ge_buy_limit": "2",
@@ -29027,7 +29027,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2667",
-    "bonuses": "0,0,0,-8,-2,44,48,46,-1,46,40,0,0,0,0"
+    "bonuses": "0,0,0,-8,-2,44,48,46,-1,46,40,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -29055,7 +29055,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2669",
-    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,0,0,0"
+    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,40,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -29082,7 +29082,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2671",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -29138,7 +29138,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "2675",
-    "bonuses": "0,0,0,-8,-2,44,48,46,-1,46,40,0,0,0,0"
+    "bonuses": "0,0,0,-8,-2,44,48,46,-1,46,40,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -32518,9 +32518,9 @@
     "high_alchemy": "10200",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Lava battlestaff"
   },
   {
@@ -32549,9 +32549,9 @@
     "high_alchemy": "27000",
     "weight": "2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Mystic lava staff"
   },
   {
@@ -32667,6 +32667,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32676,7 +32677,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3095",
-    "equip_audio": "1003",
     "bonuses": "3,4,-4,0,0,1,2,1,0,0,0,5,0,0,0"
   },
   {
@@ -32690,6 +32690,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32699,7 +32700,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3096",
-    "equip_audio": "1003",
     "bonuses": "4,6,-4,0,0,2,3,1,0,0,0,7,0,0,0"
   },
   {
@@ -32714,6 +32714,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32723,7 +32724,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3097",
-    "equip_audio": "1003",
     "bonuses": "8,11,-4,0,0,3,6,2,0,0,0,12,0,0,0"
   },
   {
@@ -32737,6 +32737,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32746,7 +32747,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3098",
-    "equip_audio": "1003",
     "bonuses": "10,14,-4,0,0,4,7,2,0,0,0,14,0,0,0"
   },
   {
@@ -32760,6 +32760,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32769,7 +32770,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3099",
-    "equip_audio": "1003",
     "bonuses": "11,16,-4,0,0,4,8,2,0,0,0,17,0,0,0"
   },
   {
@@ -32782,6 +32782,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32791,7 +32792,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3100",
-    "equip_audio": "1003",
     "bonuses": "18,23,-4,0,0,6,12,3,0,0,0,24,0,0,0"
   },
   {
@@ -32806,6 +32806,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -32816,7 +32817,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3101",
-    "equip_audio": "1003",
     "bonuses": "26,38,-4,0,0,10,19,5,0,0,0,39,0,0,0"
   },
   {
@@ -36042,7 +36042,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3478",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -36060,7 +36060,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3479",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -36078,7 +36078,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "3480",
-    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,0,0,0"
+    "bonuses": "0,0,0,-21,-7,51,49,47,-4,49,15,0,1,0,0"
   },
   {
     "requirements": "{1,40}",
@@ -38104,6 +38104,7 @@
   {
     "examine": "A sword used only by Fremennik warriors.",
     "durability": null,
+    "has_special": "true",
     "low_alchemy": "2000",
     "high_alchemy": "3000",
     "weight": "1.8",
@@ -40581,10 +40582,10 @@
     "high_alchemy": "72000",
     "weight": "0.45",
     "weapon_interface": "11",
+    "equip_audio": "2249",
     "render_anim": "620",
     "lendable": "true",
     "attack_audios": "2720,0,0,0",
-    "equip_audio": "2249",
     "name": "Abyssal whip"
   },
   {
@@ -63492,9 +63493,9 @@
     "high_alchemy": "10200",
     "weight": "2.2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Mud battlestaff"
   },
   {
@@ -63782,6 +63783,7 @@
     "attack_speed": "4",
     "two_handed": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "defence_anim": "397",
     "equipment_slot": "3",
@@ -63791,7 +63793,6 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "6587",
-    "equip_audio": "1003",
     "bonuses": "10,14,-4,0,0,4,7,2,0,0,0,14,1,0,0"
   },
   {
@@ -93656,7 +93657,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10368",
-    "bonuses": "0,0,0,-10,11,6,5,7,8,0,6,0,0,0,0"
+    "bonuses": "0,0,0,-10,11,6,5,7,8,0,6,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93683,7 +93684,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10370",
-    "bonuses": "0,0,0,-15,30,55,47,60,50,55,55,0,0,0,0"
+    "bonuses": "0,0,0,-15,30,55,47,60,50,55,55,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93709,7 +93710,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10372",
-    "bonuses": "0,0,0,-10,17,31,25,33,28,31,30,0,0,0,0"
+    "bonuses": "0,0,0,-10,17,31,25,33,28,31,30,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93735,7 +93736,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10374",
-    "bonuses": "0,0,0,-1,7,4,7,10,4,8,8,0,0,0,0"
+    "bonuses": "0,0,0,-1,7,4,7,10,4,8,8,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93760,7 +93761,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10376",
-    "bonuses": "0,0,0,-10,11,6,5,7,8,0,6,0,0,0,0"
+    "bonuses": "0,0,0,-10,11,6,5,7,8,0,6,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93788,7 +93789,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10378",
-    "bonuses": "0,0,0,-15,30,55,47,60,50,55,55,0,0,0,0"
+    "bonuses": "0,0,0,-15,30,55,47,60,50,55,55,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93814,7 +93815,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10380",
-    "bonuses": "0,0,0,-10,17,31,25,33,28,31,30,0,0,0,0"
+    "bonuses": "0,0,0,-10,17,31,25,33,28,31,30,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93841,7 +93842,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10382",
-    "bonuses": "0,0,0,-1,7,4,7,10,4,8,8,0,0,0,0"
+    "bonuses": "0,0,0,-1,7,4,7,10,4,8,8,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93866,7 +93867,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10384",
-    "bonuses": "0,0,0,-10,11,6,5,7,8,0,6,0,0,0,0"
+    "bonuses": "0,0,0,-10,11,6,5,7,8,0,6,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93895,7 +93896,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10386",
-    "bonuses": "0,0,0,-15,30,55,47,60,50,55,55,0,0,0,0"
+    "bonuses": "0,0,0,-15,30,55,47,60,50,55,55,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93920,7 +93921,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10388",
-    "bonuses": "0,0,0,-10,17,31,25,33,28,31,30,0,0,0,0"
+    "bonuses": "0,0,0,-10,17,31,25,33,28,31,30,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -93946,7 +93947,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10390",
-    "bonuses": "0,0,0,-1,7,4,7,10,4,8,8,0,0,0,0"
+    "bonuses": "0,0,0,-1,7,4,7,10,4,8,8,0,1,0,0"
   },
   {
     "ge_buy_limit": "2",
@@ -95042,6 +95043,7 @@
     "turn90ccw_anim": "822",
     "weapon_interface": "12",
     "turn180_anim": "5438",
+    "equip_audio": "3277",
     "render_anim": "1171",
     "equipment_slot": "3",
     "stand_anim": "5363",
@@ -95050,7 +95052,6 @@
     "archery_ticket_price": "0",
     "id": "10487",
     "stand_turn_anim": "823",
-    "equip_audio": "3277",
     "bonuses": "-100,-100,-50,0,0,0,0,0,0,0,0,-10,0,0,0"
   },
   {
@@ -95161,29 +95162,29 @@
     "high_alchemy": "461",
     "destroy": "true",
     "weight": "4.5",
+    "equip_audio": "3284",
     "equipment_slot": "1",
     "destroy_message": "I can buy a replacement from Ava in Draynor Manor; she will charge me 999 coins for this service.",
     "name": "Ava's attractor",
     "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "10498",
-    "equip_audio": "3284",
     "bonuses": "0,0,0,0,2,0,0,0,2,0,0,0,0,0,0"
   },
   {
-    "destroy_message": "I can obtain a replacement for this from Ava in Draynor Manor. She will need 999 coins to buy the lower",
     "shop_price": "999",
     "examine": "A superior bagged chicken ready to serve you, magnet in claw.",
     "durability": null,
-    "name": "Ava's accumulator",
-    "tradeable": "false",
     "destroy": "true",
     "weight": "4.5",
+    "equip_audio": "3284",
+    "equipment_slot": "1",
+    "destroy_message": "I can obtain a replacement for this from Ava in Draynor Manor. She will need 999 coins to buy the lower",
+    "name": "Ava's accumulator",
+    "tradeable": "false",
     "archery_ticket_price": "0",
     "id": "10499",
-    "bonuses": "0,0,0,0,4,0,1,0,4,0,0,0,0,0,0",
-    "equip_audio": "3284",
-    "equipment_slot": "1"
+    "bonuses": "0,0,0,0,4,0,1,0,4,0,0,0,0,0,0"
   },
   {
     "destroy_message": "I can obtain a replacement for this from the crone who lives west of the Port Phasmatys farm.",
@@ -98248,7 +98249,7 @@
     "tradeable": "true",
     "archery_ticket_price": "0",
     "id": "10780",
-    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,0,0,0,0,0"
+    "bonuses": "0,0,0,-30,-10,82,80,72,-6,80,0,0,0,0,1"
   },
   {
     "examine": "Rune platebody with complete gold trim &amp; plating.",
@@ -102227,10 +102228,10 @@
     "high_alchemy": "72001",
     "weight": "1.9",
     "weapon_interface": "16",
+    "equip_audio": "3738",
     "render_anim": "1",
     "lendable": "true",
     "attack_audios": "3731,0,0,0",
-    "equip_audio": "3738",
     "name": "Dark bow"
   },
   {
@@ -106231,9 +106232,9 @@
     "high_alchemy": "10200",
     "weight": "2",
     "weapon_interface": "1",
+    "equip_audio": "2230",
     "render_anim": "28",
     "attack_audios": "2555,0,0,0",
-    "equip_audio": "2230",
     "name": "Steam battlestaff"
   },
   {
@@ -122887,15 +122888,15 @@
     "two_handed": "true",
     "weapon_interface": "16",
     "absorb": "0,0,0",
+    "equip_audio": "3738",
     "render_anim": "303",
     "lendable": "true",
     "destroy_message": "Drop",
     "grand_exchange_price": "86850",
+    "attack_audios": "3731,0,0,0",
     "name": "Dark bow",
     "archery_ticket_price": "0",
     "id": "13405",
-    "attack_audios": "3731,0,0,0",
-    "equip_audio": "3738",
     "bonuses": "0,0,0,0,95,0,0,0,0,0,0,0,0,0,0"
   },
   {
@@ -128239,13 +128240,13 @@
     "two_handed": "true",
     "weapon_interface": "9",
     "absorb": "0,0,0",
+    "equip_audio": "1003",
     "lendable": "true",
     "destroy_message": "Drop",
     "grand_exchange_price": "6535",
     "name": "Rune claws",
     "archery_ticket_price": "0",
     "id": "13764",
-    "equip_audio": "1003",
     "bonuses": "26,38,-4,0,0,10,19,5,0,0,0,39,0,0,0"
   },
   {
@@ -130641,7 +130642,7 @@
     "shop_price": "300000",
     "durability": null,
     "high_alchemy": "180000",
-    "destroy": "false",
+    "destroy": "true",
     "weight": "4.2",
     "weapon_interface": "14",
     "render_anim": "28",
@@ -130654,7 +130655,7 @@
     "durability": null,
     "low_alchemy": "120000",
     "high_alchemy": "180000",
-    "destroy": "false",
+    "destroy": "true",
     "attack_speed": "4",
     "two_handed": "true",
     "destroy_message": "Drop",
@@ -137782,9 +137783,9 @@
     "high_alchemy": "40500",
     "destroy": "true",
     "weapon_interface": "9",
+    "equip_audio": "1003",
     "render_anim": "2583",
     "lendable": "true",
-    "equip_audio": "1003",
     "name": "Dragon claws"
   },
   {
@@ -137815,13 +137816,13 @@
     "two_handed": "true",
     "weapon_interface": "9",
     "absorb": "0,0,0",
+    "equip_audio": "1003",
     "lendable": "true",
     "destroy_message": "Drop",
     "grand_exchange_price": "1472441",
     "name": "Dragon claws",
     "archery_ticket_price": "0",
     "id": "14486",
-    "equip_audio": "1003",
     "bonuses": "41,57,-4,0,0,13,26,7,0,0,0,56,0,0,0"
   },
   {
@@ -139667,5 +139668,1055 @@
     "examine": "Item container for C. Ele Minor Drop Table. You should not be able to obtain this item.",
     "name": "C. Ele Minor Drop Table",
     "id": "799"
+  },
+  {
+    "shop_price": "160",
+    "ge_buy_limit": "500",
+    "examine": "Provides excellent protection.",
+    "durability": null,
+    "low_alchemy": "64",
+    "high_alchemy": "96",
+    "weight": "9.5",
+    "equipment_slot": "4",
+    "remove_sleeves": "true",
+    "grand_exchange_price": "36",
+    "name": "Bronze platebody (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14658",
+    "bonuses": "0,0,0,-30,-10,15,14,9,-6,14,5,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "500",
+    "grand_exchange_price": "36",
+    "durability": null,
+    "name": "Bronze platebody (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14659"
+  },
+  {
+    "shop_price": "80",
+    "ge_buy_limit": "100",
+    "examine": "These look pretty heavy.",
+    "durability": null,
+    "low_alchemy": "32",
+    "high_alchemy": "48",
+    "weight": "9",
+    "equipment_slot": "7",
+    "grand_exchange_price": "34",
+    "name": "Bronze platelegs (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14660",
+    "bonuses": "0,0,0,-21,-7,8,7,6,-4,7,0,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "34",
+    "durability": null,
+    "name": "Bronze platelegs (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14661"
+  },
+  {
+    "shop_price": "80",
+    "ge_buy_limit": "100",
+    "examine": "Designer leg protection.",
+    "durability": null,
+    "low_alchemy": "32",
+    "high_alchemy": "48",
+    "weight": "8.1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "113",
+    "name": "Bronze plateskirt (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14662",
+    "bonuses": "0,0,0,-21,-7,8,7,6,-4,7,0,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "113",
+    "durability": null,
+    "name": "Bronze plateskirt (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14663"
+  },
+  {
+    "remove_head": "true",
+    "shop_price": "44",
+    "ge_buy_limit": "100",
+    "examine": "A full face helmet.",
+    "durability": null,
+    "low_alchemy": "17",
+    "high_alchemy": "26",
+    "weight": "2.7",
+    "remove_beard": "true",
+    "equipment_slot": "0",
+    "grand_exchange_price": "67",
+    "name": "Bronze full helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14664",
+    "bonuses": "0,0,0,-6,-2,4,5,3,-1,4,0,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "67",
+    "durability": null,
+    "name": "Bronze full helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14665"
+  },
+  {
+    "shop_price": "86",
+    "ge_buy_limit": "100",
+    "examine": "A large metal shield.",
+    "durability": null,
+    "low_alchemy": "27",
+    "high_alchemy": "40",
+    "weight": "5.4",
+    "equipment_slot": "5",
+    "grand_exchange_price": "18",
+    "name": "Bronze kiteshield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14666",
+    "bonuses": "0,0,0,-8,-2,5,7,6,-1,6,1,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "18",
+    "durability": null,
+    "name": "Bronze kiteshield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14667"
+  },
+  {
+    "remove_head": "true",
+    "shop_price": "24",
+    "ge_buy_limit": "100",
+    "examine": "A medium sized helmet.",
+    "durability": null,
+    "low_alchemy": "9",
+    "high_alchemy": "14",
+    "weight": "1.8",
+    "equipment_slot": "0",
+    "grand_exchange_price": "39",
+    "name": "Bronze med helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14668",
+    "bonuses": "0,0,0,-3,-1,3,4,2,-1,3,0,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "39",
+    "durability": null,
+    "name": "Bronze med helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14669"
+  },
+  {
+    "shop_price": "48",
+    "ge_buy_limit": "100",
+    "examine": "A medium square shield.",
+    "durability": null,
+    "low_alchemy": "19",
+    "high_alchemy": "28",
+    "weight": "3",
+    "equipment_slot": "5",
+    "grand_exchange_price": "12",
+    "name": "Bronze sq shield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14670",
+    "bonuses": "0,0,0,-6,-2,5,6,4,0,5,0,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "12",
+    "durability": null,
+    "name": "Bronze sq shield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14671"
+  },
+  {
+    "shop_price": "160",
+    "ge_buy_limit": "500",
+    "examine": "Provides excellent protection.",
+    "durability": null,
+    "low_alchemy": "64",
+    "high_alchemy": "96",
+    "weight": "9.5",
+    "equipment_slot": "4",
+    "remove_sleeves": "true",
+    "grand_exchange_price": "36",
+    "name": "Iron platebody (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14672",
+    "bonuses": "0,0,0,-30,-10,15,14,9,-6,14,5,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "500",
+    "grand_exchange_price": "36",
+    "durability": null,
+    "name": "Iron platebody (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14673"
+  },
+  {
+    "shop_price": "80",
+    "ge_buy_limit": "100",
+    "examine": "These look pretty heavy.",
+    "durability": null,
+    "low_alchemy": "32",
+    "high_alchemy": "48",
+    "weight": "9",
+    "equipment_slot": "7",
+    "grand_exchange_price": "34",
+    "name": "Iron platelegs (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14674",
+    "bonuses": "0,0,0,-21,-7,8,7,6,-4,7,0,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "34",
+    "durability": null,
+    "name": "Iron platelegs (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14675"
+  },
+  {
+    "shop_price": "80",
+    "ge_buy_limit": "100",
+    "examine": "Designer leg protection.",
+    "durability": null,
+    "low_alchemy": "32",
+    "high_alchemy": "48",
+    "weight": "8.1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "113",
+    "name": "Iron plateskirt (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14676",
+    "bonuses": "0,0,0,-21,-7,8,7,6,-4,7,0,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "113",
+    "durability": null,
+    "name": "Iron plateskirt (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14677"
+  },
+  {
+    "remove_head": "true",
+    "shop_price": "44",
+    "ge_buy_limit": "100",
+    "examine": "A full face helmet.",
+    "durability": null,
+    "low_alchemy": "17",
+    "high_alchemy": "26",
+    "weight": "2.7",
+    "remove_beard": "true",
+    "equipment_slot": "0",
+    "grand_exchange_price": "67",
+    "name": "Iron full helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14678",
+    "bonuses": "0,0,0,-6,-2,4,5,3,-1,4,0,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "67",
+    "durability": null,
+    "name": "Iron full helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14679"
+  },
+  {
+    "shop_price": "86",
+    "ge_buy_limit": "100",
+    "examine": "A large metal shield.",
+    "durability": null,
+    "low_alchemy": "27",
+    "high_alchemy": "40",
+    "weight": "5.4",
+    "equipment_slot": "5",
+    "grand_exchange_price": "18",
+    "name": "Iron kiteshield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14680",
+    "bonuses": "0,0,0,-8,-2,5,7,6,-1,6,1,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "18",
+    "durability": null,
+    "name": "Iron kiteshield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14681"
+  },
+  {
+    "remove_head": "true",
+    "shop_price": "24",
+    "ge_buy_limit": "100",
+    "examine": "A medium sized helmet.",
+    "durability": null,
+    "low_alchemy": "9",
+    "high_alchemy": "14",
+    "weight": "1.8",
+    "equipment_slot": "0",
+    "grand_exchange_price": "39",
+    "name": "Iron med helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14682",
+    "bonuses": "0,0,0,-3,-1,3,4,2,-1,3,0,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "39",
+    "durability": null,
+    "name": "Iron med helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14683"
+  },
+  {
+    "shop_price": "48",
+    "ge_buy_limit": "100",
+    "examine": "A medium square shield.",
+    "durability": null,
+    "low_alchemy": "19",
+    "high_alchemy": "28",
+    "weight": "3",
+    "equipment_slot": "5",
+    "grand_exchange_price": "12",
+    "name": "Iron sq shield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14684",
+    "bonuses": "0,0,0,-6,-2,5,6,4,0,5,0,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "12",
+    "durability": null,
+    "name": "Iron sq shield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14685"
+  },
+  {
+    "shop_price": "160",
+    "ge_buy_limit": "500",
+    "examine": "Provides excellent protection.",
+    "durability": null,
+    "low_alchemy": "64",
+    "high_alchemy": "96",
+    "weight": "9.5",
+    "equipment_slot": "4",
+    "remove_sleeves": "true",
+    "grand_exchange_price": "36",
+    "name": "Mithril platebody (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14700",
+    "bonuses": "0,0,0,-30,-10,46,44,38,-6,44,20,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "500",
+    "grand_exchange_price": "36",
+    "durability": null,
+    "name": "Mithril platebody (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14701"
+  },
+  {
+    "shop_price": "80",
+    "ge_buy_limit": "100",
+    "examine": "These look pretty heavy.",
+    "durability": null,
+    "low_alchemy": "32",
+    "high_alchemy": "48",
+    "weight": "9",
+    "equipment_slot": "7",
+    "grand_exchange_price": "34",
+    "name": "Mithril platelegs (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14702",
+    "bonuses": "0,0,0,-21,-7,24,22,20,-4,22,5,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "34",
+    "durability": null,
+    "name": "Mithril platelegs (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14703"
+  },
+  {
+    "shop_price": "80",
+    "ge_buy_limit": "100",
+    "examine": "Designer leg protection.",
+    "durability": null,
+    "low_alchemy": "32",
+    "high_alchemy": "48",
+    "weight": "8.1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "113",
+    "name": "Mithril plateskirt (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14704",
+    "bonuses": "0,0,0,-21,-7,24,22,20,-4,22,5,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "113",
+    "durability": null,
+    "name": "Mithril plateskirt (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14705"
+  },
+  {
+    "remove_head": "true",
+    "shop_price": "44",
+    "ge_buy_limit": "100",
+    "examine": "A full face helmet.",
+    "durability": null,
+    "low_alchemy": "17",
+    "high_alchemy": "26",
+    "weight": "2.7",
+    "remove_beard": "true",
+    "equipment_slot": "0",
+    "grand_exchange_price": "67",
+    "name": "Mithril full helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14706",
+    "bonuses": "0,0,0,-6,-2,13,14,11,-1,13,5,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "67",
+    "durability": null,
+    "name": "Mithril full helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14707"
+  },
+  {
+    "shop_price": "86",
+    "ge_buy_limit": "100",
+    "examine": "A large metal shield.",
+    "durability": null,
+    "low_alchemy": "27",
+    "high_alchemy": "40",
+    "weight": "5.4",
+    "equipment_slot": "5",
+    "grand_exchange_price": "18",
+    "name": "Mithril kiteshield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14708",
+    "bonuses": "0,0,0,-8,-2,18,22,20,-1,20,20,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "18",
+    "durability": null,
+    "name": "Mithril kiteshield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14709"
+  },
+  {
+    "remove_head": "true",
+    "shop_price": "24",
+    "ge_buy_limit": "100",
+    "examine": "A medium sized helmet.",
+    "durability": null,
+    "low_alchemy": "9",
+    "high_alchemy": "14",
+    "weight": "1.8",
+    "equipment_slot": "0",
+    "grand_exchange_price": "39",
+    "name": "Mithril med helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14710",
+    "bonuses": "0,0,0,-3,-1,10,11,9,-1,10,5,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "39",
+    "durability": null,
+    "name": "Mithril med helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14711"
+  },
+  {
+    "shop_price": "48",
+    "ge_buy_limit": "100",
+    "examine": "A medium square shield.",
+    "durability": null,
+    "low_alchemy": "19",
+    "high_alchemy": "28",
+    "weight": "3",
+    "equipment_slot": "5",
+    "grand_exchange_price": "12",
+    "name": "Mithril sq shield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14712",
+    "bonuses": "0,0,0,-6,-2,17,19,15,0,17,18,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "12",
+    "durability": null,
+    "name": "Mithril sq shield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14713"
+  },
+  {
+    "shop_price": "160",
+    "ge_buy_limit": "500",
+    "examine": "Provides excellent protection.",
+    "durability": null,
+    "low_alchemy": "64",
+    "high_alchemy": "96",
+    "weight": "9.5",
+    "equipment_slot": "4",
+    "remove_sleeves": "true",
+    "grand_exchange_price": "36",
+    "name": "Steel platebody (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14686",
+    "bonuses": "0,0,0,-30,-10,32,31,24,-6,31,5,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "500",
+    "grand_exchange_price": "36",
+    "durability": null,
+    "name": "Steel platebody (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14687"
+  },
+  {
+    "shop_price": "80",
+    "ge_buy_limit": "100",
+    "examine": "These look pretty heavy.",
+    "durability": null,
+    "low_alchemy": "32",
+    "high_alchemy": "48",
+    "weight": "9",
+    "equipment_slot": "7",
+    "grand_exchange_price": "34",
+    "name": "Steel platelegs (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14688",
+    "bonuses": "0,0,0,-21,-7,17,16,15,-4,16,2,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "34",
+    "durability": null,
+    "name": "Steel platelegs (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14689"
+  },
+  {
+    "shop_price": "80",
+    "ge_buy_limit": "100",
+    "examine": "Designer leg protection.",
+    "durability": null,
+    "low_alchemy": "32",
+    "high_alchemy": "48",
+    "weight": "8.1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "113",
+    "name": "Steel plateskirt (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14690",
+    "bonuses": "0,0,0,-21,-7,17,16,15,-4,16,2,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "113",
+    "durability": null,
+    "name": "Steel plateskirt (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14691"
+  },
+  {
+    "remove_head": "true",
+    "shop_price": "44",
+    "ge_buy_limit": "100",
+    "examine": "A full face helmet.",
+    "durability": null,
+    "low_alchemy": "17",
+    "high_alchemy": "26",
+    "weight": "2.7",
+    "remove_beard": "true",
+    "equipment_slot": "0",
+    "grand_exchange_price": "67",
+    "name": "Steel full helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14692",
+    "bonuses": "0,0,0,-6,-2,9,10,7,-1,9,3,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "67",
+    "durability": null,
+    "name": "Steel full helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14693"
+  },
+  {
+    "shop_price": "86",
+    "ge_buy_limit": "100",
+    "examine": "A large metal shield.",
+    "durability": null,
+    "low_alchemy": "27",
+    "high_alchemy": "40",
+    "weight": "5.4",
+    "equipment_slot": "5",
+    "grand_exchange_price": "18",
+    "name": "Steel kiteshield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14694",
+    "bonuses": "0,0,0,-8,-2,13,15,14,-1,14,5,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "18",
+    "durability": null,
+    "name": "Steel kiteshield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14695"
+  },
+  {
+    "remove_head": "true",
+    "shop_price": "24",
+    "ge_buy_limit": "100",
+    "examine": "A medium sized helmet.",
+    "durability": null,
+    "low_alchemy": "9",
+    "high_alchemy": "14",
+    "weight": "1.8",
+    "equipment_slot": "0",
+    "grand_exchange_price": "39",
+    "name": "Steel med helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14696",
+    "bonuses": "0,0,0,-3,-1,7,8,6,-1,7,3,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "39",
+    "durability": null,
+    "name": "Steel med helm (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14697"
+  },
+  {
+    "shop_price": "48",
+    "ge_buy_limit": "100",
+    "examine": "A medium square shield.",
+    "durability": null,
+    "low_alchemy": "19",
+    "high_alchemy": "28",
+    "weight": "3",
+    "equipment_slot": "5",
+    "grand_exchange_price": "12",
+    "name": "Steel sq shield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14698",
+    "bonuses": "0,0,0,-6,-2,12,13,11,0,12,4,0,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "12",
+    "durability": null,
+    "name": "Steel sq shield (g)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14699"
+  },
+  {
+    "shop_price": "5",
+    "ge_buy_limit": "500",
+    "examine": "The platebody of a forgotten warrior, corrupted by the dark altar.",
+    "durability": null,
+    "low_alchemy": "224",
+    "high_alchemy": "336",
+    "weight": "9.95",
+    "equipment_slot": "4",
+    "remove_sleeves": "true",
+    "grand_exchange_price": "434",
+    "name": "Corrupted platebody",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14714",
+    "bonuses": "0,0,0,-30,-10,21,20,12,-6,20,5,0,0,0,0"
+  },
+  {
+    "shop_price": "280",
+    "ge_buy_limit": "100",
+    "examine": "The platelegs of a forgotten warrior, corrupted by the dark altar.",
+    "durability": null,
+    "low_alchemy": "112",
+    "high_alchemy": "168",
+    "weight": "9",
+    "absorb": "1,0,1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "55",
+    "name": "Corrupted platelegs",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14715",
+    "bonuses": "0,0,0,-21,-7,11,10,10,-4,10,0,0,0,0,0"
+  },
+  {
+    "shop_price": "280",
+    "ge_buy_limit": "100",
+    "examine": "The plateskirt of a forgotten warrior, corrupted by the dark altar.",
+    "durability": null,
+    "low_alchemy": "112",
+    "high_alchemy": "168",
+    "weight": "8.1",
+    "equipment_slot": "7",
+    "grand_exchange_price": "86",
+    "name": "Corrupted plateskirt",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14716",
+    "bonuses": "0,0,0,-21,-7,11,10,10,-4,10,0,0,0,0,0"
+  },
+  {
+    "remove_head": "true",
+    "shop_price": "61",
+    "ge_buy_limit": "100",
+    "examine": "The helmet of a forgotton warrior, corrupted by the dark altar.",
+    "durability": null,
+    "low_alchemy": "61",
+    "high_alchemy": "92",
+    "weight": "2.7",
+    "remove_beard": "true",
+    "equipment_slot": "0",
+    "grand_exchange_price": "56",
+    "name": "Corrupted full helm",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14717",
+    "bonuses": "0,0,0,-6,-2,6,7,5,-1,6,0,0,0,0,0"
+  },
+  {
+    "shop_price": "233",
+    "ge_buy_limit": "100",
+    "examine": "The kiteshield of a forgotton warrior, corrupted by the dark altar.",
+    "durability": null,
+    "low_alchemy": "95",
+    "high_alchemy": "142",
+    "weight": "5.4",
+    "equipment_slot": "5",
+    "grand_exchange_price": "57",
+    "name": "Corrupted kiteshield",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14718",
+    "bonuses": "0,0,0,-8,-2,8,10,9,-1,9,2,0,0,0,0"
+  },
+  {
+    "examine": "They seem to be not quite of this world...",
+    "durability": null,
+    "name": "Corrupted boots",
+    "low_alchemy": "120",
+    "high_alchemy": "180",
+    "archery_ticket_price": "0",
+    "id": "14719",
+    "bonuses": "0,0,0,2,0,0,0,0,2,0,0,0,0,0,0",
+    "equipment_slot": "10"
+  },
+  {
+    "remove_head": "true",
+    "examine": "A ghostly hood, fit for a ghostly head.",
+    "durability": null,
+    "name": "Corrupted hood",
+    "low_alchemy": "120",
+    "high_alchemy": "180",
+    "archery_ticket_price": "0",
+    "id": "14720",
+    "bonuses": "0,0,0,3,0,0,0,0,3,0,0,0,0,0,0",
+    "equipment_slot": "0"
+  },
+  {
+    "examine": "They seem to fade in and out of existence...",
+    "durability": null,
+    "name": "Corrupted gloves",
+    "low_alchemy": "120",
+    "high_alchemy": "180",
+    "archery_ticket_price": "0",
+    "id": "14721",
+    "bonuses": "0,0,0,2,0,0,0,0,2,0,0,0,0,0,0",
+    "equipment_slot": "9"
+  },
+  {
+    "examine": "Made of a strange, ghostly material...",
+    "durability": null,
+    "name": "Corrupted cloak",
+    "low_alchemy": "100",
+    "high_alchemy": "150",
+    "archery_ticket_price": "0",
+    "id": "14722",
+    "bonuses": "0,0,0,5,0,0,0,0,5,0,0,0,0,0,0",
+    "equipment_slot": "1"
+  },
+  {
+    "requirements": "{0,60}-{14,61}",
+    "shop_price": "1320000",
+    "ge_buy_limit": "40",
+    "examine": "If rocks could feel fear, they'd fear this.",
+    "durability": null,
+    "has_special": "true",
+    "rare_item": "true",
+    "low_alchemy": "55000",
+    "high_alchemy": "75000",
+    "weight": "2.4",
+    "attack_speed": "5",
+    "weapon_interface": "4",
+    "defence_anim": "403",
+    "equipment_slot": "3",
+    "attack_anims": "401,401,400,401",
+    "lendable": "true",
+    "grand_exchange_price": "19500",
+    "attack_audios": "2508,2508,2508,2508",
+    "name": "Dragon pickaxe",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14723",
+    "bonuses": "38,-2,32,0,0,0,1,0,0,0,0,42,0,0,0"
+  },
+  {
+    "ge_buy_limit": "100",
+    "grand_exchange_price": "19500",
+    "durability": null,
+    "name": "Dragon pickaxe",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14724"
+  },
+  {
+    "requirements": "{0,60}-{1,60}",
+    "examine": "A defensive weapon.",
+    "durability": null,
+    "name": "Dragon defender",
+    "weight": "0.4",
+    "archery_ticket_price": "0",
+    "id": "14725",
+    "bonuses": "25,24,23,-3,-2,25,24,23,-3,-2,8,6,0,0,0",
+    "defence_anim": "4177",
+    "equipment_slot": "5"
+  },
+  {
+    "ge_buy_limit": "8",
+    "turn90cw_anim": "821",
+    "examine": "A magical elven sword.",
+    "walk_anim": "1146",
+    "has_special": "false",
+    "low_alchemy": "40000",
+    "turn90ccw_anim": "822",
+    "attack_speed": "4",
+    "turn180_anim": "820",
+    "defence_anim": "397",
+    "equipment_slot": "3",
+    "attack_anims": "390,390,381,390",
+    "grand_exchange_price": "155280944",
+    "stand_anim": "809",
+    "tradeable": "true",
+    "run_anim": "1210",
+    "archery_ticket_price": "0",
+    "id": "14726",
+    "stand_turn_anim": "823",
+    "bonuses": "0,0,0,0,0,0,0,0,0,0,0,0,0,0,0",
+    "requirements": "{0,75}",
+    "shop_price": "100000",
+    "durability": null,
+    "high_alchemy": "60000",
+    "weight": "1.8",
+    "weapon_interface": "6",
+    "render_anim": "28",
+    "lendable": "false",
+    "attack_audios": "2500,2500,2517,2500",
+    "name": "Blade of saeldor (inactive)"
+  },
+  {
+    "ge_buy_limit": "10",
+    "grand_exchange_price": "60200",
+    "durability": null,
+    "name": "Blade of saeldor (inactive)",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14727"
+  },
+  {
+    "turn90cw_anim": "821",
+    "examine": "A magical elven sword.",
+    "walk_anim": "1146",
+    "has_special": "true",
+    "low_alchemy": "40000",
+    "turn90ccw_anim": "822",
+    "attack_speed": "4",
+    "turn180_anim": "820",
+    "defence_anim": "397",
+    "equipment_slot": "3",
+    "attack_anims": "390,390,381,390",
+    "stand_anim": "809",
+    "tradeable": "false",
+    "run_anim": "1210",
+    "archery_ticket_price": "0",
+    "id": "14728",
+    "stand_turn_anim": "823",
+    "bonuses": "55,94,0,0,0,0,0,0,0,0,0,89,0,0,0",
+    "requirements": "{0,75}",
+    "shop_price": "100000",
+    "durability": null,
+    "high_alchemy": "60000",
+    "weight": "1.8",
+    "weapon_interface": "6",
+    "render_anim": "28",
+    "lendable": "false",
+    "attack_audios": "2500,2500,2517,2500",
+    "name": "Blade of saeldor"
+  },
+  {
+    "shop_price": "50000",
+    "examine": "An ancient ring said to bring you closer to the Gods.",
+    "durability": null,
+    "low_alchemy": "20000",
+    "high_alchemy": "30000",
+    "destroy": "false",
+    "absorb": "0,0,0",
+    "equipment_slot": "12",
+    "destroy_message": "",
+    "name": "Ring of the gods",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14729",
+    "bonuses": "0,0,0,0,0,1,1,1,1,1,1,0,4,0,0"
+  },
+  {
+    "durability": null,
+    "name": "Ring of the gods",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14730"
+  },
+  {
+    "shop_price": "50000",
+    "examine": "A razor sharp ring.",
+    "durability": null,
+    "rare_item": "true",
+    "low_alchemy": "20000",
+    "high_alchemy": "30000",
+    "destroy": "false",
+    "absorb": "0,0,0",
+    "equipment_slot": "12",
+    "destroy_message": "",
+    "name": "Treasonous ring",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14731",
+    "bonuses": "4,0,0,0,0,4,0,0,0,0,0,0,0,0,0"
+  },
+  {
+    "durability": null,
+    "name": "Treasonous ring",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14732"
+  },
+  {
+    "shop_price": "50000",
+    "examine": "An incredibly heavy ring.",
+    "durability": null,
+    "low_alchemy": "20000",
+    "high_alchemy": "30000",
+    "destroy": "false",
+    "absorb": "0,0,0",
+    "equipment_slot": "12",
+    "destroy_message": "",
+    "name": "Tyrannical ring",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14733",
+    "bonuses": "0,0,4,0,0,0,0,4,0,0,0,0,0,0,0"
+  },
+  {
+    "durability": null,
+    "name": "Tyrannical ring",
+    "tradeable": "true",
+    "archery_ticket_price": "0",
+    "id": "14734"
+  },
+  {
+    "remove_head": "true",
+    "shop_price": "61",
+    "ge_buy_limit": "100",
+    "examine": "A gift from Neitiznot's Burgher enhanced with the jaw of a Basilisk.",
+    "durability": null,
+    "low_alchemy": "61",
+    "high_alchemy": "92",
+    "weight": "2.7",
+    "remove_beard": "true",
+    "equipment_slot": "0",
+    "grand_exchange_price": "56",
+    "name": "Neitiznot faceguard",
+    "tradeable": "false",
+    "archery_ticket_price": "0",
+    "id": "14735",
+    "bonuses": "0,0,0,0,0,36,34,38,3,34,0,6,3,0,0"
   }
 ]

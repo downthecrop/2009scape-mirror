@@ -110,8 +110,8 @@ class FairyRingInterface : InterfaceListener(){
         val code = "${RING_1[ring1index]}${RING_2[ring2index]}${RING_3[ring3index]}"
         val ring: FairyRing? = FairyRing.valueOf(code.toUpperCase())
         var tile = ring?.tile
-        if(ring == FairyRing.CIP){
-            sendDialogue(player, "The ring seems to reject you.")
+        if(ring == FairyRing.CIP && !player.getQuestRepository().isComplete("The Fremennik Trials")){
+            sendDialogue(player, "You need to have completed The Fremennik Trials to access this fairy ring.")
         }
         if (ring == null || tile == null) {
             val center = Location(2412, 4434, 0)
@@ -157,7 +157,7 @@ class FairyRingInterface : InterfaceListener(){
 enum class FairyRing(val tile: Location?, val tip: String = "", val childId: Int = -1) {
     AIQ(Location.create(2996, 3114, 0), "Asgarnia: Mudskipper Point", 15),
     AIR(Location.create(2700, 3247, 0), "Islands: South of Witchaven", 16),
-    AJQ(Location.create(2735, 5221, 0), "Dungeons: Dark cave south of Dorgesh-Kaann", 19),
+    AJQ(Location.create(2735, 5221, 0), "Dungeons: Dark cave south of Dorgesh-Kaan", 19), //Requires completion of "Death to the Dorgeshuun"
     ALR(Location.create(3059, 4875, 0), "Other realms: Abyssal Area", 28),
     AJR(Location.create(2780, 3613, 0), "Kandarin: Slayer cave south-east of Rellekka", 20),
     AJS(Location.create(2500, 3896, 0), "Islands: Penguins near Miscellania", 21),
@@ -168,14 +168,14 @@ enum class FairyRing(val tile: Location?, val tip: String = "", val childId: Int
     BIP(Location.create(3410, 3324, 0), "Islands: River Salve", 30),
     BIQ(Location.create(3251, 3095, 0), "Kharidian Desert: Near Kalphite hive", 31),
     BIS(Location.create(2635, 3266, 0), "Kandarin: Ardougne Zoo unicorns", 33),
-    BJR(null, "Other Realms: Realm of the Fisher King", 36),
+    BJR(null, "Other Realms: Realm of the Fisher King", 36), //Requires completion of "Holy Grail"
     BKP(Location.create(2385, 3035, 0), "Feldip Hills: South of Castle Wars", 38),
     BKQ(Location.create(3041, 4532, 0), "Other realms: Enchanted Valley", 39),
     BKR(Location.create(3469, 3431, 0), "Morytania: Mort Myre, south of Canifis", 40),
     BLP(Location.create(2437, 5126, 0), "Dungeons: TzHaar area", 42),
-    BLQ(null, "Yu'biusk", 43),//Location.create(2229, 4244, 1)
+    BLQ(null, "Yu'biusk", 43),//Location.create(2229, 4244, 1) Requires completion of "Land of the Goblins"
     BLR(Location.create(2740, 3351, 0), "Kandarin: Legends' Guild", 44),
-    CIP(null, "Islands: Miscellania", 46), //Location.create(2513, 3884, 0)
+    CIP(Location.create(2513, 3884, 0), "Islands: Miscellania", 46), //Requires completion of "The Fremennik Trials"
     CIQ(Location.create(2528, 3127, 0), "Kandarin: North-west of Yanille", 47),
     CJR(Location.create(2705, 3576, 0), "Kandarin: Sinclair Mansion", 52),
     CKP(Location.create(2075, 4848, 0), "Other realms: Cosmic Entity's plane", 54),

@@ -17,7 +17,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 
 /**
- * Handles the dragon spear special attack.
+ * Handles the dragon spear and zamorakian spear special attack, Shove.
  * @author Emperor
  */
 @Initializable

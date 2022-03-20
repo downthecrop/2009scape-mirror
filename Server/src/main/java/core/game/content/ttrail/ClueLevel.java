@@ -26,6 +26,31 @@ import java.util.List;
 public enum ClueLevel {
 
 	EASY(new Item(2714), 1 << 16 | 5,
+			// bronze (g)
+			new ChanceItem(14664, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14658, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14660, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14662, 1, 1, DropFrequency.UNCOMMON),			
+			new ChanceItem(14666, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14668, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14670, 1, 1, DropFrequency.UNCOMMON),			
+			// iron (g)
+			new ChanceItem(14678, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14672, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14674, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14676, 1, 1, DropFrequency.UNCOMMON),			
+			new ChanceItem(14680, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14682, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14684, 1, 1, DropFrequency.UNCOMMON),
+			// steel (g)
+			new ChanceItem(14692, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14686, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14688, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14690, 1, 1, DropFrequency.UNCOMMON),			
+			new ChanceItem(14694, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14696, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14698, 1, 1, DropFrequency.UNCOMMON),											
+			// berets
 			new ChanceItem(Items.BLUE_BERET_2633, 1, 1, DropFrequency.UNCOMMON),
 			new ChanceItem(Items.BLACK_BERET_2635, 1, 1, DropFrequency.UNCOMMON),
 			new ChanceItem(Items.WHITE_BERET_2637, 1, 1, DropFrequency.UNCOMMON),
@@ -170,6 +195,14 @@ public enum ClueLevel {
 			new ChanceItem(Items.STUDDED_BODY_1133, 1, 1, DropFrequency.COMMON)),
 
 	MEDIUM(new Item(2717), 1 << 16 | 6,
+			// mithril (g)
+			new ChanceItem(14706, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14700, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14702, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14704, 1, 1, DropFrequency.UNCOMMON),			
+			new ChanceItem(14708, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14710, 1, 1, DropFrequency.UNCOMMON),
+			new ChanceItem(14712, 1, 1, DropFrequency.UNCOMMON),	
 			// Trimmed
 			// addy
 			// shit

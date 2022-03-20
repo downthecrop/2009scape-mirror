@@ -76,9 +76,6 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 				 * (option.equals("Trade") ? "buy clothes here" :
 				 * "change their shoes here") + "."); return true;
 				 */
-			//case 4148:
-			//	player.getDialogueInterpreter().sendDialogues(1278, null, "Hey, outerlander. You can't go through there. Talent", "only, backstage.");
-			//	return true;
 			case 100:
 				player.getDialogueInterpreter().sendDialogue("You try to open the trapdoor but it won't budge! It looks like the", "trapdoor can only be opened from the other side.");
 				return true;

@@ -194,7 +194,9 @@ public final class MercenaryCaptainDialogue extends DialoguePlugin {
 						player.getInventory().add(TouristTrap.METAL_KEY, player);
 						player.getDialogueInterpreter().sendItemMessage(TouristTrap.METAL_KEY, "The mercenary captain drops a metal key on the floor.", "You quickly grab the key and add it to your inventory.");
 					}
-					quest.setStage(player, 20);
+					if(quest.getStage(player) < 20) {
+						quest.setStage(player, 20);
+					}
 					break;
 				}
 			}

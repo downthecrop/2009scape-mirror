@@ -110,13 +110,13 @@ public final class DMCHandler {
 		}
 		player.getPacketDispatch().sendSceneryAnimation(cannon, Animation.create(direction.getAnimationId()));
 		Location l = cannon.getLocation().transform(1, 1, 0);
-        player.getAudioManager().send(new Audio(2877), true, l);
+		player.getAudioManager().send(new Audio(2877), true);
 		direction = DMCRevolution.values()[(direction.ordinal() + 1) % DMCRevolution.values().length];
 		for (NPC npc : RegionManager.getLocalNpcs(l, 10)) {
 			if (direction.isInSight(npc.getLocation().getX() - l.getX(), npc.getLocation().getY() - l.getY()) && npc.isAttackable(player, CombatStyle.RANGE, false) && CombatSwingHandler.isProjectileClipped(npc, l, false)) {
 				int speed = (int) (25 + (l.getDistance(npc.getLocation()) * 10));
 				Projectile.create(l, npc.getLocation(), 53, 40, 36, 20, speed, 0, 128).send();
-                player.getAudioManager().send(new Audio(1667), true, l);
+				player.getAudioManager().send(new Audio(1667), true);
 				cannonballs--;
 				int hit = 0;
 				if (player.getSwingHandler(false).isAccurateImpact(player, npc, CombatStyle.RANGE, 1.2, 1.0)) {
@@ -236,7 +236,7 @@ public final class DMCHandler {
 				case 0:
 					object = SceneryBuilder.add(new Scenery(7, spawn));
 					player.getPacketDispatch().sendMessage("You place the cannon base on the ground.");
-					break;
+					return count++ == 666;
 				case 1:
 					player.getPacketDispatch().sendMessage("You add the stand.");
 					break;
@@ -249,11 +249,11 @@ public final class DMCHandler {
 					handler.configure(SceneryBuilder.add(object = object.transform(6)));
 					return true;
 				}
-                player.getAudioManager().send(new Audio(2876), true);
-                if(count != 0) {
-                    SceneryBuilder.remove(object);
-                    SceneryBuilder.add(object = object.transform(object.getId() + 1));
-                }
+				player.getAudioManager().send(new Audio(2876), true);
+				if(count != 0) {
+					SceneryBuilder.remove(object);
+					SceneryBuilder.add(object = object.transform(object.getId() + 1));
+				}
 				return ++count == 4;
 			}
 		});

@@ -66,6 +66,7 @@ class LoginReadEvent
          * @param buffer The buffer to read from.
          */
         private fun decodeWorld(opcode: Int, session: IoSession, buffer: ByteBuffer) {
+            SystemLogger.logInfo("decodeWorld")
             var buffer = buffer
             val d = buffer.get() // Memory?
             val e = buffer.get() // no advertisement = 1
@@ -105,28 +106,26 @@ class LoginReadEvent
             session.isaacPair = ISAACPair(inCipher, outCipher)
             session.clientInfo = ClientInfo(displayMode, windowMode, screenWidth, screenHeight)
             val b = buffer
-            SystemLogger.logInfo("spawning thread to handle login")
             TaskExecutor.executeSQL {
-                SystemLogger.logInfo("login thread start")
+                SystemLogger.logInfo("spawning thread to handle login")
                 Thread.currentThread().name = "Login Password Response"
-                SystemLogger.logInfo("login thread named")
                 try {
+                    SystemLogger.logInfo("about to grab the username")
                     val username = StringUtils.longToString(b.long)
-                    SystemLogger.logInfo("got username")
+                    SystemLogger.logInfo(username)
                     val password = ByteBufferUtils.getString(b)
-                    SystemLogger.logInfo("got password")
+                    SystemLogger.logInfo("im not logging the fucking password")
                     val response = PlayerSQLManager.getCredentialResponse(username, password)
-                    SystemLogger.logInfo("got sql response")
+                    SystemLogger.logInfo(response.toString())
                     if (response != Response.SUCCESSFUL) {
-                        SystemLogger.logInfo("not success :(")
+                        SystemLogger.logInfo("why isnt it fucking successful")
                         session.write(response, true)
                         return@executeSQL
                     }
-                    SystemLogger.logInfo("great success, attempting login")
+                    SystemLogger.logInfo("YOU SHOULD BE LOGGING IN NOW")
                     login(PlayerDetails(username, password), session, b, opcode)
-                    SystemLogger.logInfo("done")
+                    SystemLogger.logInfo("YOU SHOULD NOW BE LOGGED IN")
                 } catch (e: Exception) {
-                    SystemLogger.logInfo("big whoops")
                     e.printStackTrace()
                     session.write(Response.COULD_NOT_LOGIN)
                 }
@@ -136,7 +135,8 @@ class LoginReadEvent
 
         /**
          * Handles the login procedure after we check an acc is registered & certified.
-         * @param details the player's details.
+         * @param username the username.
+         * @param password the password.
          * @param session the session.
          * @param buffer the byte buffer.
          * @param opcode the opcode.
@@ -163,6 +163,7 @@ class LoginReadEvent
          */
         @JvmStatic
         fun getISAACSeed(buffer: ByteBuffer): IntArray {
+            SystemLogger.logInfo("getISAACSeed")
             val seed = IntArray(4)
             for (i in 0..3) {
                 seed[i] = buffer.int

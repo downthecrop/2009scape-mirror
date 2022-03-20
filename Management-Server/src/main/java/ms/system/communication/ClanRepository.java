@@ -79,7 +79,7 @@ public final class ClanRepository {
 	 * @param player The player.
 	 */
 	public void enter(PlayerSession player) {
-		if (players.size() >= MAX_MEMBERS && !owner.getUsername().equals("2009scape")) {
+		if (players.size() >= MAX_MEMBERS && !owner.getUsername().equals("Fellerscape")) {
 			WorldPacketRepository.sendPlayerMessage(player, "The channel you tried to join is full.:clan:");
 			return;
 		}

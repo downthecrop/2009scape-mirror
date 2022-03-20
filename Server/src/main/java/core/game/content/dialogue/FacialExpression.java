@@ -50,6 +50,7 @@ public enum FacialExpression {
 
     //Chatheads from 2009?
     NOD_YES(9741),
+    DISAGREE(9742),
     WORRIED(9743),
     HALF_WORRIED(9745), //Not on the wiki, first half of worried
     AMAZED(9746),

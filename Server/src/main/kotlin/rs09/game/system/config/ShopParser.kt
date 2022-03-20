@@ -1,13 +1,16 @@
 package rs09.game.system.config
 
+import api.submitWorldPulse
 import core.game.content.global.shop.Shop
 import core.game.node.entity.player.Player
 import core.game.node.item.Item
+import core.game.system.task.Pulse
 import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import rs09.ServerConstants
 import rs09.game.system.SystemLogger
+import rs09.game.world.repository.Repository
 import java.io.FileReader
 
 class ShopParser{
@@ -50,6 +53,15 @@ class ShopParser{
             }
             count++
         }
+
+        submitWorldPulse(object : Pulse(100)
+        {
+            override fun pulse(): Boolean {
+                Repository.npcs.asSequence().filter { it.shop != null }.forEach { it.shop.restock() }
+                return false
+            }
+        })
+
         SystemLogger.logInfo("Parsed $count shops.")
     }
 

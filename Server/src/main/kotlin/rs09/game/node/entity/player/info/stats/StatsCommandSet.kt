@@ -27,7 +27,7 @@ val MITHRIL_DRAGON_IDS = intArrayOf(NPCs.MITHRIL_DRAGON_5363, NPCs.MITHRIL_DRAGO
 val SKELETAL_WYVERN_IDS = intArrayOf(NPCs.SKELETAL_WYVERN_3068, NPCs.SKELETAL_WYVERN_3069, NPCs.SKELETAL_WYVERN_3070, NPCs.SKELETAL_WYVERN_3071)
 
 val SPACER = "<str>             </str>";
-val NUM_PAGES = 3
+val NUM_PAGES = 4
 
 fun sendStats(player: Player, other: Player, page: Int){
     prepareInterface(player, other, page)
@@ -41,7 +41,7 @@ fun sendStats(player: Player, other: Player, page: Int){
                     68 -> sendLine(player,"Medium Clues: ${other.treasureTrailManager.completedClues[1]}",i)
                     69 -> sendLine(player,"Hard Clues: ${other.treasureTrailManager.completedClues[2]}",i)
                     70 -> sendLine(player,SPACER,i)
-                    71 -> sendLine(player,"Slayer Tasks: ${other.slayer.totalTasks}",i)
+                    71 -> sendLine(player,"Slayer Tasks: ${other.slayer.flags.completedTasks}",i)
                     72 -> sendLine(player,"Quest Points: ${other.questRepository.points}",i)
                     73 -> sendLine(player,"Ironman Mode: ${other.ironmanManager.mode.name.toLowerCase()}",i)
                     74 -> sendLine(player,"Deaths: ${other.getAttribute("$STATS_BASE:$STATS_DEATHS",0)}",i)
@@ -138,6 +138,40 @@ fun sendStats(player: Player, other: Player, page: Int){
                     else -> sendLine(player,"",i)
                 }
             }
+            3 -> {
+                when(i) {
+                    97 -> sendLine(player, "Venenatis KC: ${globalData.bossCounters.get(BossKillCounter.VENENATIS.ordinal)}",i)
+                    68 -> sendLine(player,SPACER,i)
+                    69 -> sendLine(player,SPACER,i)
+                    70 -> sendLine(player, "Dragon pickaxe: ${GlobalKillCounter.getRareDrops(other, 14723)}", i)
+                    71 -> sendLine(player, "Treasonous ring: ${GlobalKillCounter.getRareDrops(other, 14731)}", i)
+                    72 -> sendLine(player,SPACER,i)
+                    73 -> sendLine(player,SPACER,i)
+                    74 -> sendLine(player,SPACER,i)
+                    75 -> sendLine(player,SPACER,i)
+                    76 -> sendLine(player,SPACER,i)
+                    77 -> sendLine(player,SPACER,i)
+                    78 -> sendLine(player,SPACER,i)
+                    79 -> sendLine(player,SPACER,i)
+                    80 -> sendLine(player,SPACER,i)
+
+                    82 -> sendLine(player,SPACER,i)
+                    83 -> sendLine(player,SPACER,i)
+                    84 -> sendLine(player,SPACER,i)
+                    85 -> sendLine(player,SPACER,i)
+                    86 -> sendLine(player,SPACER,i)
+                    87 -> sendLine(player,SPACER,i)
+                    88 -> sendLine(player,SPACER,i)
+                    89 -> sendLine(player,SPACER,i)
+                    90 -> sendLine(player,SPACER,i)
+                    91 -> sendLine(player,SPACER,i)
+                    92 -> sendLine(player,SPACER,i)
+                    93 -> sendLine(player,SPACER,i)
+                    94 -> sendLine(player,SPACER,i)
+                    95 -> sendLine(player,SPACER,i)
+                    else -> sendLine(player,"",i)
+                }
+            }            
         }
     }
     player.interfaceManager.open(Component(26))

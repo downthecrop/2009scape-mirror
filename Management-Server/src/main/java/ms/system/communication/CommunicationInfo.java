@@ -45,7 +45,7 @@ public final class CommunicationInfo {
 	/**
 	 * The current clan this player is in.
 	 */
-	private String currentClan = "2009scape";
+	private String currentClan = "Fellerscape";
 
 	/**
 	 * The rank required for joining.

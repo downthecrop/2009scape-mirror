@@ -93,13 +93,14 @@ public enum Tasks {
     WOLVES(20, new int[] { 95, 96, 97, 141, 142, 143, 839, 1198, 1330, 1558, 1559, 1951, 1952, 1953, 1954, 1955, 1956, 4413, 4414, 6046, 6047, 6048, 6049, 6050, 6051, 6052, 6829, 6830, 7005 }, new String[] { "Wolves are more agressive then dog's." }, 1,  false),
     ZOMBIES(10, new int[] { 73, 74, 75, 76, 2058, 2714, 2863, 2866, 2869, 2878, 3622, 4392, 4393, 4394, 5293, 5294, 5295, 5296, 5297, 5298, 5299, 5300, 5301, 5302, 5303, 5304, 5305, 5306, 5307, 5308, 5309, 5310, 5311, 5312, 5313, 5314, 5315, 5316, 5317, 5318, 5319, 5320, 5321, 5322, 5323, 5324, 5325, 5326, 5327, 5328, 5329, 5330, 5331, 5375, 5376, 5377, 5378, 5379, 5380, 5393, 5394, 5395, 5396, 5397, 5398, 5399, 5400, 5401, 5402, 5403, 5404, 5405, 5406, 5407, 5408, 5409, 5410, 6099, 6100, 6131, }, new String[] { "Zombies are creatures with no brain, they do hit farley", "high though." }, 1,  true),
     JAD(90, new int[] { }, new String[] { "TzTok-Jad is the king of the Fight Caves." }, 1, false, 1 | 1 << 16),
-    CHAOS_ELEMENTAL(90, new int[] { 3200 }, new String[] { "The Chaos Elemental is located in the deep Wilderness." }, 1, false, 5 | 25 << 16),
+    CHAOS_ELEMENTAL(75, new int[] { 3200 }, new String[] { "The Chaos Elemental is located in the deep Wilderness." }, 1, false, 5 | 25 << 16),
     GIANT_MOLE(75, new int[] { 3340 }, new String[] { "Fighting the Giant Mole will require a light source." }, 1, false, 5 | 25 << 16),
     KING_BLACK_DRAGON(75, new int[] { 50 }, new String[] { "The King Black Dragon is located in the deep wilderness." }, 1, false, 5 | 25 << 16),
     COMMANDER_ZILYANA(90, new int[] { 6247 }, new String[] { "Commander Zilyana is one of the four Godwars bosses." }, 1, false, 5 | 25 << 16),
     GENERAL_GRARDOOR(90, new int[] { 6260 }, new String[] { "General Grardoor is one of the four Godwars bosses." }, 1,  false, 5 | 25 << 16),
     KRIL_TSUTSAROTH(90, new int[] { 6203 }, new String[] { "Kril Tsutsaroth is one of the four Godwars bosses." }, 1, false, 5 | 25 << 16),
     KREE_ARRA(90, new int[] { 6222 }, new String[] { "Kree'arra is one of the four Godwars bosses." }, 1,  false, 5 | 25 << 16),
+    VENENATIS(75, new int[] { 8591 }, new String[] { "Venenatis is located in the deep Wilderness." }, 1, false, 5 | 25 << 16),
     SKELETAL_WYVERN(70, new int[] { 3068, 3069, 3070, 3071 }, new String[] { "A skeletal wyvern requires an elemental, mirror", "or dragonfire shield." }, 72,  false, 24 | 39 << 16);
 
     static final HashMap<Integer, Tasks> taskMap = new HashMap<>();

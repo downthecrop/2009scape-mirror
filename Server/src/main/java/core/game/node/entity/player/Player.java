@@ -402,6 +402,7 @@ public class Player extends Entity {
 			getProperties().setSpawnLocation(ServerConstants.HOME_LOCATION);
 			getDetails().getSession().setObject(this);
 			getDetails().getSession().setLastPing(System.currentTimeMillis() + 10_000L);
+			this.varpManager.get(678).setVarbit(0,3).send(this);
 		}
 		super.init();
 		LoginConfiguration.configureLobby(this);
@@ -633,6 +634,10 @@ public class Player extends Entity {
 			setAttribute("dead", true);
 		}
 		if (this.isArtificial() && killer instanceof NPC) {
+			/* Re-enable for bots to be "killed" by npcs
+			 *  this is causing NPE's and should be left disabled until bots are fixed.
+			setAttribute("dead", true);
+			 */
 			return;
 		}
 		getPacketDispatch().sendMessage("Oh dear, you are dead!");

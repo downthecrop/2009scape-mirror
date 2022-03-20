@@ -2,6 +2,7 @@ package rs09.game.interaction.item.withobject
 
 import api.*
 import core.game.node.entity.player.link.diary.DiaryType
+import core.game.system.task.Pulse
 import core.game.world.update.flag.context.Animation
 import org.rs09.consts.Items
 import rs09.game.interaction.InteractionListener
@@ -35,14 +36,17 @@ class WaterSourceListener : InteractionListener() {
                     player.achievementDiaryManager.getDiary(DiaryType.FALADOR).updateTask(player, 0, 7, true)
             }
 
-            runTask(player, 1){
-                if(removeItem(player, used))
-                {
-                    animate(player, animation)
-                    sendMessage(player, formatMsgText(used.name, vessel.fillMsg))
-                    addItemOrDrop(player, vessel.output)
+            player.pulseManager.run(object : Pulse(1){
+                override fun pulse(): Boolean {
+                    if(removeItem(player, used.id))
+                    {
+                        animate(player, animation)
+                        sendMessage(player, formatMsgText(used.name, vessel.fillMsg))
+                        addItemOrDrop(player, vessel.output)
+                    }
+                    return !vessel.autofill || amountInInventory(player, used.id) == 0
                 }
-            }
+            })
 
             return@onUseWith true
         }
@@ -69,7 +73,7 @@ class WaterSourceListener : InteractionListener() {
         return sb.toString()
     }
 
-    internal enum class WaterVessel(val inputs: IntArray, val output: Int, val wellable: Boolean = false, val fillMsg: String = "You fill the @.")
+    internal enum class WaterVessel(val inputs: IntArray, val output: Int, val wellable: Boolean = false, val autofill: Boolean = true, val fillMsg: String = "You fill the @.")
     {
         BUCKET(
                 inputs = intArrayOf(Items.BUCKET_1925),
@@ -78,7 +82,7 @@ class WaterSourceListener : InteractionListener() {
         ),
         VIAL(
                 inputs = intArrayOf(Items.VIAL_229),
-                output = Items.VIAL_OF_WATER_227
+                output = Items.VIAL_OF_WATER_227,
         ),
         JUG(
                 inputs = intArrayOf(Items.JUG_1935),
@@ -88,14 +92,8 @@ class WaterSourceListener : InteractionListener() {
                 inputs = intArrayOf(Items.BOWL_1923),
                 output = Items.BOWL_OF_WATER_1921
         ),
-        CLAY(
-                inputs = intArrayOf(Items.CLAY_434),
-                output = Items.SOFT_CLAY_1761,
-                wellable = false,
-                fillMsg = "You mix the clay and water. You now have some soft, workable clay."
-        ),
         WATERING_CAN(
-                inputs = intArrayOf(Items.WATERING_CAN1_5333, Items.WATERING_CAN2_5334, Items.WATERING_CAN3_5335, Items.WATERING_CAN4_5336, Items.WATERING_CAN5_5337, Items.WATERING_CAN6_5338, Items.WATERING_CAN7_5339),
+                inputs = intArrayOf(Items.WATERING_CAN_5331,Items.WATERING_CAN1_5333, Items.WATERING_CAN2_5334, Items.WATERING_CAN3_5335, Items.WATERING_CAN4_5336, Items.WATERING_CAN5_5337, Items.WATERING_CAN6_5338, Items.WATERING_CAN7_5339),
                 output = Items.WATERING_CAN8_5340
         ),
         WATER_SKIN(

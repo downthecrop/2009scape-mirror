@@ -1639,7 +1639,7 @@
       {
         "minAmount": "1",
         "weight": "25.0",
-        "id": "2683",
+        "id": "1",
         "maxAmount": "1"
       }
     ]
@@ -2249,7 +2249,7 @@
       {
         "minAmount": "1",
         "weight": "12.0",
-        "id": "2727",
+        "id": "12070",
         "maxAmount": "1"
       },
       {
@@ -2308,7 +2308,7 @@
       }
     ],
     "ids": "50,2642",
-    "description": "",
+    "description": "King Black Dragon (Boss)",
     "main": [
       {
         "minAmount": "1",
@@ -2444,7 +2444,7 @@
       },
       {
         "minAmount": "1",
-        "weight": "0.154",
+        "weight": "0.1641",
         "id": "11286",
         "maxAmount": "1"
       },
@@ -2456,8 +2456,8 @@
       },
       {
         "minAmount": "1",
-        "weight": "200.0",
-        "id": "0",
+        "weight": "0.547",
+        "id": "14723",
         "maxAmount": "1"
       }
     ]
@@ -14243,34 +14243,6 @@
         "weight": "100.0",
         "id": "526",
         "maxAmount": "1"
-      }
-    ],
-    "charm": [],
-    "ids": "281",
-    "description": "",
-    "main": []
-  },
-  {
-    "default": [
-      {
-        "minAmount": "1",
-        "weight": "100.0",
-        "id": "526",
-        "maxAmount": "1"
-      }
-    ],
-    "charm": [],
-    "ids": "283",
-    "description": "",
-    "main": []
-  },
-  {
-    "default": [
-      {
-        "minAmount": "1",
-        "weight": "100.0",
-        "id": "526",
-        "maxAmount": "1"
       },
       {
         "minAmount": "1",
@@ -17987,7 +17959,7 @@
       {
         "minAmount": "1",
         "weight": "25.0",
-        "id": "2837",
+        "id": "5733",
         "maxAmount": "1"
       },
       {
@@ -39165,6 +39137,12 @@
         "weight": "8.0",
         "id": "5733",
         "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "4.6",
+        "id": "14723",
+        "maxAmount": "1"
       }
     ]
   },
@@ -44656,7 +44634,7 @@
       {
         "minAmount": "1",
         "weight": "5.0",
-        "id": "2683",
+        "id": "1",
         "maxAmount": "1"
       },
       {
@@ -45096,7 +45074,7 @@
       {
         "minAmount": "1",
         "weight": "25.0",
-        "id": "2727",
+        "id": "12070",
         "maxAmount": "1"
       },
       {
@@ -47389,7 +47367,7 @@
       {
         "minAmount": "1",
         "weight": "25.0",
-        "id": "2727",
+        "id": "12070",
         "maxAmount": "1"
       },
       {
@@ -51171,7 +51149,7 @@
       {
         "minAmount": "1",
         "weight": "5.0",
-        "id": "2727",
+        "id": "12070",
         "maxAmount": "1"
       },
       {
@@ -51595,7 +51573,7 @@
       {
         "minAmount": "1",
         "weight": "5.0",
-        "id": "2727",
+        "id": "12070",
         "maxAmount": "1"
       },
       {
@@ -52205,7 +52183,7 @@
       {
         "minAmount": "1",
         "weight": "50.0",
-        "id": "2727",
+        "id": "12070",
         "maxAmount": "1"
       }
     ]
@@ -59648,7 +59626,7 @@
       {
         "minAmount": "1",
         "weight": "5.0",
-        "id": "2727",
+        "id": "12070",
         "maxAmount": "1"
       },
       {
@@ -60263,7 +60241,7 @@
       {
         "minAmount": "1",
         "weight": "25.0",
-        "id": "2727",
+        "id": "12070",
         "maxAmount": "1"
       },
       {
@@ -64112,6 +64090,152 @@
         "minAmount": "1",
         "weight": "20.0",
         "id": "2347",
+        "maxAmount": "1"
+      }
+    ]
+  },
+  {
+    "default": [],
+    "charm": [],
+    "ids": "8591",
+    "description": "Venenatis (Wilderness Boss)",
+    "main": [
+      {
+        "minAmount": "1",
+        "weight": "2.03",
+        "id": "14731",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "36.0",
+        "id": "1093",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "36.0",
+        "id": "1319",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "4.05",
+        "id": "14723",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "4.05",
+        "id": "7158",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "150",
+        "weight": "100.0",
+        "id": "562",
+        "maxAmount": "150"
+      },
+      {
+        "minAmount": "100",
+        "weight": "100.0",
+        "id": "560",
+        "maxAmount": "100"
+      },
+      {
+        "minAmount": "75",
+        "weight": "100.0",
+        "id": "565",
+        "maxAmount": "75"
+      },
+      {
+        "minAmount": "100",
+        "weight": "17.0",
+        "id": "445",
+        "maxAmount": "100"
+      },
+      {
+        "minAmount": "25",
+        "weight": "17.0",
+        "id": "224",
+        "maxAmount": "25"
+      },
+      {
+        "minAmount": "7",
+        "weight": "9.4",
+        "id": "9194",
+        "maxAmount": "25"
+      },
+      {
+        "minAmount": "100",
+        "weight": "9.4",
+        "id": "3052",
+        "maxAmount": "100"
+      },
+      {
+        "minAmount": "15000",
+        "weight": "220.0",
+        "id": "995",
+        "maxAmount": "19999"
+      },
+      {
+        "minAmount": "2",
+        "weight": "100.0",
+        "id": "7208",
+        "maxAmount": "2"
+      },
+      {
+        "minAmount": "8",
+        "weight": "100.0",
+        "id": "2297",
+        "maxAmount": "8"
+      },
+      {
+        "minAmount": "10",
+        "weight": "38.0",
+        "id": "5953",
+        "maxAmount": "10"
+      },
+      {
+        "minAmount": "1",
+        "weight": "17.0",
+        "id": "31",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "2",
+        "weight": "8.0",
+        "id": "5297",
+        "maxAmount": "2"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "5315",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "8.0",
+        "id": "12070",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "2.59",
+        "id": "10976",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "0.259",
+        "id": "10977",
+        "maxAmount": "1"
+      },
+      {
+        "minAmount": "1",
+        "weight": "100.0",
+        "id": "3024",
         "maxAmount": "1"
       }
     ]

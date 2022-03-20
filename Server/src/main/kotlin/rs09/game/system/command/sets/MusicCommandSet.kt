@@ -6,6 +6,7 @@ import core.net.packet.context.MusicContext
 import core.net.packet.out.MusicPacket
 import core.plugin.Initializable
 import rs09.game.system.command.Command
+import rs09.game.world.zone.fellercellar.FellerCellar
 
 @Initializable
 class MusicCommandSet : CommandSet(Command.Privilege.STANDARD){
@@ -47,6 +48,10 @@ class MusicCommandSet : CommandSet(Command.Privilege.STANDARD){
             for (me in MusicEntry.getSongs().values) {
                 player.musicPlayer.unlock(me.id)
             }
+        }
+
+        define("forceshuffle") { player, _ ->
+            FellerCellar.songTime = 0
         }
     }
 }

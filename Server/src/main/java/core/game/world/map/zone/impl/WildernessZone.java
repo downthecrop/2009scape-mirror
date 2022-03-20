@@ -254,7 +254,7 @@ public final class WildernessZone extends MapZone {
 		} else if (e instanceof NPC) {
 			NPC n = (NPC) e;
 			if (n.getDefinition().hasAttackOption() && n.isAggressive()) {
-				//n.setAggressive(true);
+				n.setAggressive(true);
 				n.setAggressiveHandler(new AggressiveHandler(n, AggressiveBehavior.WILDERNESS));
 			}
 		}

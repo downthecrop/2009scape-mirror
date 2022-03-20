@@ -24,7 +24,7 @@ class ApprenticeWorkmanDialogue(player: Player? = null) : DialoguePlugin(player)
         when(stage){
             0 -> {
                 npc(FacialExpression.FRIENDLY, "Sorry, I haven't got time to chat.",
-                    "We've only just finished a collossal order of furniture",
+                    "We've only just finished a colossal order of furniture",
                     "for the Varrock area, and already there's more work",
                     "coming in.").also { stage++ }
             }

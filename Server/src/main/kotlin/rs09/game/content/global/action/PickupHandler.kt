@@ -74,9 +74,14 @@ object PickupHandler {
                 player.achievementDiaryManager.updateTask(player, DiaryType.KARAMJA, 2, 7, palms >= 5)
             }
             GroundItemManager.destroy(item)
+            /* Re-enable for bots to drop items, however
+             * this is causing NPE's and should be left disabled until bots are fixed.
+
             if (item.dropper?.isArtificial == true) {
                 getItems(item.dropper)?.remove(item)
             }
+            */
+
             player.audioManager.send(Audio(2582, 10, 1))
         }
         return true

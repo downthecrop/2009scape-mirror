@@ -470,14 +470,14 @@ public class NPC extends Entity {
 				}
 			}
 		}
-		if (shop != null) {
-			if (shop.getLastRestock() < GameWorld.getTicks()) {
-				if (shop.isRestock()) {
-					shop.restock();
-					shop.setLastRestock(GameWorld.getTicks() + 100);
-				}
-			}
-		}
+	//	if (shop != null) {
+	//		if (shop.getLastRestock() < GameWorld.getTicks()) {
+	//			if (shop.isRestock()) {
+	//				shop.restock();
+	//				shop.setLastRestock(GameWorld.getTicks() + 100);
+	//			}
+	//		}
+	//	}
 		if (forceTalk != null && getAttribute("lastForceTalk", 0) < GameWorld.getTicks()) {
 			sendChat(forceTalk);
 			setAttribute("lastForceTalk", GameWorld.getTicks() + RandomFunction.random(15, 30));

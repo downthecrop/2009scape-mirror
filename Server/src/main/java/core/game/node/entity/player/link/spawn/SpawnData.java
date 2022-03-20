@@ -419,10 +419,6 @@ public class SpawnData {
 		if (GameWorld.isEconomyWorld()) {
 			return;
 		}
-		if (killer.isArtificial() || killed.isArtificial() || killer.getDetails().getInfo().getIp().equals(killed.getDetails().getInfo().getIp()) || killed.getDetails().getInfo().getMac().equals(killer.getDetails().getInfo().getMac())) {
-			killer.sendMessage("You can't kill someone from your own computer address.");
-			return;
-		}
 		SpawnData killedInfo = killed.getSavedData().getSpawnData();
 		int increment = getStreakPoints(killer);
 		if (killedInfo.getKillStreak() > 4) {

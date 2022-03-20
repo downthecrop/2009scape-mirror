@@ -16,6 +16,7 @@ import org.json.simple.parser.JSONParser
 import rs09.ServerConstants
 import rs09.game.node.entity.skill.farming.CompostBins
 import rs09.game.node.entity.skill.farming.FarmingPatch
+import rs09.game.world.GameWorld
 import rs09.game.system.SystemLogger
 import java.io.FileReader
 import java.util.*
@@ -387,14 +388,6 @@ class PlayerSaveParser(val player: Player) {
         player.skills.parse(skillData)
         player.skills.experienceGained = saveFile!!["totalEXP"].toString().toDouble()
         player.skills.experienceMutiplier = saveFile!!["exp_multiplier"].toString().toDouble()
-        if (GameWorld.settings?.default_xp_rate != 5.0) {
-            player.skills.experienceMutiplier = GameWorld.settings?.default_xp_rate!!
-        }
-        val divisor: Double
-        if(player.skills.experienceMutiplier >= 10 && !player.attributes.containsKey("permadeath")){ //exclude permadeath HCIMs from XP squish
-            divisor = player.skills.experienceMutiplier / 5.0
-            player.skills.correct(divisor)
-        }
         if (saveFile!!.containsKey("milestone")) {
             val milestone: JSONObject = saveFile!!["milestone"] as JSONObject
             player.skills.combatMilestone = (milestone.get("combatMilestone")).toString().toInt()

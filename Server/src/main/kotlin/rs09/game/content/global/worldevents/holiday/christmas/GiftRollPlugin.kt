@@ -18,6 +18,7 @@ import rs09.tools.stringtools.colorize
 import java.time.Month
 import java.util.*
 
+//@Initializable - uncomment this to re enable cope boxes
 class GiftRollPlugin : XPGainPlugin() {
     override fun run(player: Player, skill: Int, amount: Double) {
         val numDaily = getDailyGifts(player)
@@ -26,7 +27,7 @@ class GiftRollPlugin : XPGainPlugin() {
         if(System.currentTimeMillis() < cooldown) return
         player.setAttribute("/save:christmas-cooldown", System.currentTimeMillis() + 5000L)
 
-        if(System.currentTimeMillis() > cooldown && numDaily < 10 && RandomFunction.roll(15).also { player.debug("Rolling gift: $it") } && amount > 20) {
+        if(System.currentTimeMillis() > cooldown && numDaily < 28 && RandomFunction.roll(15).also { player.debug("Rolling gift: $it") } && amount > 20) {
             incrementDailyGifts(player)
 
             addItemOrDrop(player, Items.MYSTERY_BOX_6199)
