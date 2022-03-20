@@ -105,6 +105,7 @@ class TutorialMagicTutorDialogue(player: Player? = null) : DialoguePlugin(player
                     val mode = IronmanMode.values()[buttonId - 1]
                     player.dialogueInterpreter.sendDialogue("You set your ironman mode to: ${mode.name}.")
                     player.ironmanManager.mode = mode
+                    if(player.skills.experienceMutiplier == 10.0 && mode != IronmanMode.HARDCORE) player.skills.experienceMutiplier = 5.0
                     stage = 0
                 }
 
@@ -145,6 +146,10 @@ class TutorialMagicTutorDialogue(player: Player? = null) : DialoguePlugin(player
                     if(player.ironmanManager.mode == IronmanMode.HARDCORE)
                     {
                         setAttribute(player, "/save:permadeath", true)
+                    }
+                    else if(player.skills.experienceMutiplier == 10.0)
+                    {
+                        player.skills.experienceMutiplier = 5.0
                     }
 
                     //This overwrites the stuck dialogue after teleporting to Lumbridge for some reason
