@@ -645,7 +645,7 @@ object TutorialStage {
             38 -> {
                 hideTabs(player, login)
                 removeHintIcon(player)
-                registerHintIcon(player, Location.create(3071, 9496), 75)
+                registerHintIcon(player, Location.create(3079, 9496), 75)
                 Component.setUnclosable(
                     player,
                     player.dialogueInterpreter.sendPlaneMessageWithBlueTitle(

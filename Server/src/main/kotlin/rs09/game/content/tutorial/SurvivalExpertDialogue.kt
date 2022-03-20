@@ -59,6 +59,7 @@ class SurvivalExpertDialogue(player: Player? = null) : DialoguePlugin(player) {
                 if(!inInventory(player, Items.TINDERBOX_590))
                 {
                     player.dialogueInterpreter.sendItemMessage(Items.TINDERBOX_590, "The Survival Expert gives you a spare tinderbox.")
+                    addItem(player, Items.TINDERBOX_590)
                 }
                 return false
             }
