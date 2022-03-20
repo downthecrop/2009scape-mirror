@@ -119,8 +119,8 @@ class MajorUpdateWorker {
             }
 
             val end = System.currentTimeMillis()
-            ServerMonitor.eventQueue.add(GuiEvent.UpdateTickTime(end - start))
-            ServerMonitor.eventQueue.add(GuiEvent.UpdatePulseCount(GameWorld.Pulser.TASKS.size))
+/*            ServerMonitor.eventQueue.add(GuiEvent.UpdateTickTime(end - start))
+            ServerMonitor.eventQueue.add(GuiEvent.UpdatePulseCount(GameWorld.Pulser.TASKS.size))*/
             Thread.sleep(max(600 - (end - start), 0))
         }
     }
