@@ -19,6 +19,7 @@ object SlayerKillHook : EventHook<NPCKillEvent>
         if (slayer.hasTask()) {
             rewardXP(player, Skills.SLAYER, npc.skills.maximumLifepoints.toDouble())
             slayer.decrementAmount(1)
+            if(slayer.hasTask()) return
             flags.taskStreak = flags.taskStreak + 1
             flags.completedTasks = flags.completedTasks + 1
             if ((flags.completedTasks > 4 || flags.canEarnPoints()) && flags.getMaster() != Master.TURAEL && flags.getPoints() < 64000) {
