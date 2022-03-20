@@ -74,9 +74,9 @@ object PickupHandler {
                 player.achievementDiaryManager.updateTask(player, DiaryType.KARAMJA, 2, 7, palms >= 5)
             }
             GroundItemManager.destroy(item)
-            if (item.dropper?.isArtificial == true) {
+/*            if (item.dropper?.isArtificial == true) {
                 getItems(item.dropper)?.remove(item)
-            }
+            }*/
             player.audioManager.send(Audio(2582, 10, 1))
         }
         return true

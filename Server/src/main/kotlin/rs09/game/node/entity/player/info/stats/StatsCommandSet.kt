@@ -41,7 +41,7 @@ fun sendStats(player: Player, other: Player, page: Int){
                     68 -> sendLine(player,"Medium Clues: ${other.treasureTrailManager.completedClues[1]}",i)
                     69 -> sendLine(player,"Hard Clues: ${other.treasureTrailManager.completedClues[2]}",i)
                     70 -> sendLine(player,SPACER,i)
-                    71 -> sendLine(player,"Slayer Tasks: ${other.slayer.totalTasks}",i)
+                    71 -> sendLine(player,"Slayer Tasks: ${other.slayer.flags.completedTasks}",i)
                     72 -> sendLine(player,"Quest Points: ${other.questRepository.points}",i)
                     73 -> sendLine(player,"Ironman Mode: ${other.ironmanManager.mode.name.toLowerCase()}",i)
                     74 -> sendLine(player,"Deaths: ${other.getAttribute("$STATS_BASE:$STATS_DEATHS",0)}",i)
