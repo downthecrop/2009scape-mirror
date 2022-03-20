@@ -64,15 +64,15 @@ public final class ShieldArravPlugin extends OptionHandler {
 		switch (id) {
 		case 769:
 			player.getInterfaceManager().open(new Component(526));
-			player.getPacketDispatch().sendString("You can use this certificate in order to claim your reward.", 526, 2);
+			player.getPacketDispatch().sendString("The bearer of this certificate has brought both halves of the legendary Shield of Arrav to me, Halg Halen, Curator of the Varrock Museum. I have examined the shield and am satisfied as to its authenticity. I recommend to His Majesty, King Roald III, that the bearer is rewarded as per Proclamation 262 of the year 143 of the 5th Age, by King Roald II.", 526, 2);
 			break;
 		case 11173:
 			player.getInterfaceManager().open(new Component(525));
-			player.getPacketDispatch().sendString("Attach this certificate to another.", 525, 2);
+			player.getPacketDispatch().sendString("The bearer of this certificate has brought both halves of the legendary Shield of Arrav to me, Halg Halen, Curator of the Varrock Museum. I have examined the shield and am satisfied as to its authenticity. I recommend to His Majesty, King Roald III, that the bearer is rewarded as per Proclamation 262 of the year 143 of the 5th Age, by King Roald II.", 525, 2);
 			break;
 		case 11174:
 			player.getInterfaceManager().open(new Component(529));
-			player.getPacketDispatch().sendString("Attach this certificate to another.", 529, 2);
+			player.getPacketDispatch().sendString("The bearer of this certificate has brought both halves of the legendary Shield of Arrav to me, Halg Halen, Curator of the Varrock Museum. I have examined the shield and am satisfied as to its authenticity. I recommend to His Majesty, King Roald III, that the bearer is rewarded as per Proclamation 262 of the year 143 of the 5th Age, by King Roald II.", 529, 2);
 			break;
 		case 2400:
 			SceneryBuilder.replace(((Scenery) node), ((Scenery) node).transform(2401));
