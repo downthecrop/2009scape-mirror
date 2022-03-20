@@ -17,6 +17,7 @@ import rs09.ServerConstants
 import rs09.game.node.entity.skill.farming.CompostBins
 import rs09.game.node.entity.skill.farming.FarmingPatch
 import rs09.game.system.SystemLogger
+import rs09.game.world.GameWorld
 import java.io.FileReader
 import java.util.*
 
