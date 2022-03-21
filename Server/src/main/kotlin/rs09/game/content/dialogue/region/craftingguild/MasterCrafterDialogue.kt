@@ -8,6 +8,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
 import core.plugin.Initializable
+import org.rs09.consts.Items
 import org.rs09.consts.NPCs
 import rs09.tools.END_DIALOGUE
 
@@ -17,6 +18,9 @@ import rs09.tools.END_DIALOGUE
 
 @Initializable
 class MasterCrafterDialogue(player: Player? = null) : DialoguePlugin(player) {
+
+    var CAPE = Items.CRAFTING_CAPE_9780
+    var COIN = Items.COINS_995
 
     override fun newInstance(player: Player) : DialoguePlugin {
         return MasterCrafterDialogue(player)
@@ -44,9 +48,9 @@ class MasterCrafterDialogue(player: Player? = null) : DialoguePlugin(player) {
                 1 -> player(FacialExpression.FRIENDLY, "Okay, here you go.").also{ stage++ }
                 2 -> player(FacialExpression.HALF_THINKING, "No, thanks.").also{ stage = END_DIALOGUE }
             }
-            13 -> if(inInventory(player, 617, 99000)) {
-                removeItem(player, Item(617, 99000), Container.INVENTORY)
-                addItem(player, 9780, 1)
+            13 -> if(inInventory(player, COIN, 99000)) {
+                removeItem(player, Item(COIN, 99000), Container.INVENTORY)
+                addItem(player, CAPE, 1)
                 npcl(FacialExpression.HAPPY, "There you go! Enjoy.").also{ stage = END_DIALOGUE }
             } else {
                 npcl(FacialExpression.NEUTRAL, "You don't have enough coins for a cape.").also{ stage = END_DIALOGUE }
