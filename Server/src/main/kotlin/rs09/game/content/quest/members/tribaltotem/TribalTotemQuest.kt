@@ -12,7 +12,7 @@ import org.rs09.consts.Items
 
 @Initializable
 class TribalTotem : Quest("Tribal Totem",126,125,1,200,0,1,5){
-
+//
     class SkillRequirement(val skill: Int?, val level: Int?)
 
     val requirements = arrayListOf<TribalTotem.SkillRequirement>()
