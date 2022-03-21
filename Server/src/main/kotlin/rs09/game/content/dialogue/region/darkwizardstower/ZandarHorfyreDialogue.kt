@@ -10,10 +10,13 @@ import core.game.world.map.Location
 import core.plugin.Initializable
 import rs09.tools.END_DIALOGUE
 
+/**
+ * @author bushtail
+ */
 @Initializable
 class ZandarHorfyreDialogue(player: Player? = null) : DialoguePlugin(player) {
 
-    override fun newInstance(player: Player): DialoguePlugin {
+    override fun newInstance(player: Player) : DialoguePlugin {
         return ZandarHorfyreDialogue(player)
     }
 
