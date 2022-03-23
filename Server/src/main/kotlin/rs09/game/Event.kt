@@ -10,4 +10,5 @@ object Event {
     val Interaction = InteractionEvent::class.java
     val ButtonClicked = ButtonClickedEvent::class.java
     val UsedWith = UsedWithEvent::class.java
+    val SelfDeath = SelfDeath::class.java
 }
