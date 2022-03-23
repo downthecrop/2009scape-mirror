@@ -271,8 +271,8 @@ abstract class Cutscene(val player: Player) {
 
     /**
      * Moves the camera to the specified regionX and regionY
-     * @param regionX the region-local X coordinate to move the camera to
-     * @param regionY the region-local Y coordinate to move the camera to
+     * @param regionX the region-local X coordinate to move the camera to (0-63)
+     * @param regionY the region-local Y coordinate to move the camera to (0-63)
      * @param height (optional) the height of the camera, defaults to 300.
      * @param speed (optional) the speed of the camera transition, defaults to 100.
      */
@@ -283,8 +283,9 @@ abstract class Cutscene(val player: Player) {
     }
 
     /**
-     * @param regionX the region-local X coordinate to move the camera to
-     * @param regionY the region-local Y coordinate to move the camera to
+     * Rotates the camera to face the given region-local X and Y coordinates
+     * @param regionX the region-local X coordinate to rotate the camera to (0-63)
+     * @param regionY the region-local Y coordinate to rotate the camera to (0-63)
      * @param height (optional) the height of the camera, defaults to 300.
      * @param speed (optional) the speed of the camera transition, defaults to 100.
      */
