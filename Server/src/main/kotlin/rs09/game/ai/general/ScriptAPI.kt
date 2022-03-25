@@ -29,6 +29,7 @@ import core.tools.RandomFunction
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
 import org.rs09.consts.Items
+import rs09.ServerConstants.Companion.SERVER_GE_NAME
 import rs09.game.ai.AIRepository
 import rs09.game.ge.GrandExchange
 import rs09.game.ge.GrandExchangeOffer
@@ -453,7 +454,7 @@ class ScriptAPI(private val bot: Player) {
                 val canSell = GrandExchange.addBotOffer(actualId, itemAmt)
                 if (canSell && saleIsBigNews(actualId, itemAmt)) {
                     SystemLogger.logAI("Offered $itemAmt of $actualId on the GE.")
-                    Repository.sendNews("Fellerscape just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
+                    Repository.sendNews(SERVER_GE_NAME + " just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
                 }
                 bot.bank.remove(Item(id, itemAmt))
                 bot.bank.refresh()
@@ -483,7 +484,7 @@ class ScriptAPI(private val bot: Player) {
                     }
                     val canSell = GrandExchange.addBotOffer(actualId, itemAmt)
                     if (canSell && saleIsBigNews(actualId, itemAmt)) {
-                        Repository.sendNews("FellerScape just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
+                        Repository.sendNews(SERVER_GE_NAME + " just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
                     }
                     bot.bank.remove(item)
                     bot.bank.refresh()
@@ -519,7 +520,7 @@ class ScriptAPI(private val bot: Player) {
                             1517 -> continue
                             1519 -> continue
                             1521 -> continue
-                            else -> Repository.sendNews("Fellerscape just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
+                            else -> Repository.sendNews(SERVER_GE_NAME + " just offered " + itemAmt + " " + ItemDefinition.forId(actualId).name.toLowerCase() + " on the GE.")
                         }
                     }
                     bot.bank.remove(item).also { SystemLogger.logAI("$item has been listed on the GE.") }
