@@ -50,7 +50,7 @@ class TribalTotem : Quest("Tribal Totem",126,125,1,200,0,1,5){
                 line(player,"to reclaim the totem, and take it back to !!Kangai Mau??, who rewarded",line++)
                 line(player,"me for all of my help.",line++)
                 line += 1
-                line(player,"---QUEST COMPLETE---",line++)
+                line(player,"<col=FF0000>QUEST COMPLETE!</col>",line++ +1)
             }
         }
     }
