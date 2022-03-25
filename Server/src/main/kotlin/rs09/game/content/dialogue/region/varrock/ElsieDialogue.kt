@@ -33,7 +33,6 @@ class ElsieDialogue(player: Player? = null) : DialoguePlugin(player) {
                     2 -> player("Can you tell me a story?").also { stage = 31 }
                     3 -> player("Can you tell me how to get rich?").also { stage = 41 }
                 }
-            20 -> player("What are you making?").also { stage++ }
             21 -> npc("I'm knitting a new stole for Father Lawrence", "downstairs. He could do with something to keep his", "neck warm, standing in that draughty old church", "all day.").also { stage++ }
             22 -> interpreter.sendOptions("What would you like to say?", "Can you tell me a story?", "Can you tell me how to get rich?").also { stage++ }
             23 ->
@@ -41,10 +40,8 @@ class ElsieDialogue(player: Player? = null) : DialoguePlugin(player) {
                     1 -> player("Can you tell me a story?").also { stage = 31 }
                     2 -> player("Can you tell me how to get rich?").also { stage = 41 }
                 }
-            30 -> player("Can you tell me a story?").also { stage++ }
             31 -> npc("Maybe I could tell you a story if you'd fetch me", "a nice cup of tea.").also { stage++ }
             32 -> player("I'll think about it.").also { stage = 999 }
-            40 -> player("Can you tell me how to get rich?").also { stage++ }
             41 -> npc("Well, dearie, I'm probably not the best person to", "ask about money, but I think the best thing would", "be for you to get a good trade. If you've got a trade", "you can earn your way, that's what my old father told me.").also { stage++ }
             42 -> npc("Saradomin rest his soul. I hear people try to get", "rich by fighting in the Wilderness north of here or", "the Duel Arena in the south, but that's no way for honest", "folks to earn a living! So get yourself a good trade, and").also { stage++ }
             43 -> npc("keep working at it. There's always folks wanting", "to buy ore and food around here.").also { stage++ }
@@ -62,7 +59,6 @@ class ElsieDialogue(player: Player? = null) : DialoguePlugin(player) {
                     1 -> player("Yes, you can have it.").also { stage = 103 }
                     2 -> player("No, keep your hands off my tea.").also { stage = 120 }
                 }
-            102 -> player("Yes, you can have it.").also { stage++ }
             103 -> npc("Ahh, there's nothing like a nice cuppa tea. I know what,", "I'll tell you a story to thank you for the lovely tea...").also {
                 player.inventory.remove(Item(Items.CUP_OF_TEA_712))
                 player.achievementDiaryManager.finishTask(player, DiaryType.VARROCK, 0, 14)
