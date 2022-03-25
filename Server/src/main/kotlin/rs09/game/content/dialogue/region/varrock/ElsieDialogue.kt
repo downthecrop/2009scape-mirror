@@ -42,7 +42,7 @@ class ElsieDialogue(player: Player? = null) : DialoguePlugin(player) {
                 }
             30 -> player("Can you tell me a story?").also { stage++ }
             31 -> npc("Maybe I could tell you a story if you'd fetch me", "a nice cup of tea.").also { stage++ }
-            32 -> player("I'll think about it.").also { stage == 999 }
+            32 -> player("I'll think about it.").also { stage = 999 }
             40 -> player("Can you tell me how to get rich??").also { stage++ }
             41 -> npc("Well, dearie, I'm probably not the best person to ask about money, but I think the best thing would be for you to get a good trade. If you've got a trade you can earn your way, that's what my old father told me,").also { stage++ }
             42 -> npc("Saradomin rest his soul. I hear people try to get rich by fighting in the Wilderness north of here or the Duel Arena in the south, but that's no way for honest folks to earn a living! So get yourself a good trade, and keep").also { stage++ }
