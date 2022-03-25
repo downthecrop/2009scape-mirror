@@ -69,7 +69,7 @@ public final class WizardTowerPlugin extends OptionHandler {
 		SceneryDefinition.forId(11993).getHandlers().put("option:open", this);
 		PluginManager.definePlugin(new WizardtowerWizardNPC());
 		PluginManager.definePlugin(new WizardTowerDialogue());
-		PluginManager.definePlugin(new WizardMisgogDialogue());
+		PluginManager.definePlugin(new WizardMizgogDialogue());
 		PluginManager.definePlugin(new WizardGrayzagDialogue());
 		PluginManager.definePlugin(new WizardDialogue());
 		PluginManager.definePlugin(new SedridorDialogue());
@@ -259,12 +259,12 @@ public final class WizardTowerPlugin extends OptionHandler {
     }
 
     /**
-     * Handles the WizardMisgogDialogue dialogue.
+     * Handles the WizardMizgogDialogue dialogue.
      *
      * @author 'Vexia
      * @version 1.0
      */
-    public static final class WizardMisgogDialogue extends DialoguePlugin {
+    public static final class WizardMizgogDialogue extends DialoguePlugin {
 
         /**
          * Represents the black bead item.
@@ -292,26 +292,26 @@ public final class WizardTowerPlugin extends OptionHandler {
         private static final Animation ANIMATION = new Animation(4285);
 
         /**
-         * Constructs a new {@code WizardMisgogDialogue} {@code Object}.
+         * Constructs a new {@code WizardMizgogDialogue} {@code Object}.
          */
-        public WizardMisgogDialogue() {
+        public WizardMizgogDialogue() {
             /**
              * empty.
              */
         }
 
         /**
-         * Constructs a new {@code WizardMisgogDialogue} {@code Object}.
+         * Constructs a new {@code WizardMizgogDialogue} {@code Object}.
          *
          * @param player the player.
          */
-        public WizardMisgogDialogue(Player player) {
+        public WizardMizgogDialogue(Player player) {
             super(player);
         }
 
         @Override
         public DialoguePlugin newInstance(Player player) {
-            return new WizardMisgogDialogue(player);
+            return new WizardMizgogDialogue(player);
         }
 
         @Override
