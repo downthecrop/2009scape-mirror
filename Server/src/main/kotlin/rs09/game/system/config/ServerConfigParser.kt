@@ -102,6 +102,7 @@ object ServerConfigParser {
         ServerConstants.GRAND_EXCHANGE_DATA_PATH = data.getPath("paths.eco_data")
         ServerConstants.CELEDT_DATA_PATH = data.getPath("paths.cele_drop_table_path")
         ServerConstants.SERVER_GE_NAME = data.getString("world.name_ge") ?: ServerConstants.SERVER_NAME
+        ServerConstants.RULES_AND_INFO_ENABLED = data.getBoolean("world.show_rules", true)
     }
 
 

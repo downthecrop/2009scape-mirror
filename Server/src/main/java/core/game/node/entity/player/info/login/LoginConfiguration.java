@@ -12,6 +12,8 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.InterfaceContext;
 import core.net.packet.out.Interface;
 import core.plugin.Plugin;
+import rs09.ServerConstants;
+import rs09.game.interaction.inter.RulesAndInfo;
 import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 import rs09.game.world.repository.Repository;
@@ -144,6 +146,8 @@ public final class LoginConfiguration {
             player.getEmoteManager().unlock(Emotes.SAFETY_FIRST);
         }
         player.varpManager.sendAllVarps();
+        if(ServerConstants.RULES_AND_INFO_ENABLED)
+            RulesAndInfo.openFor(player);
 		/*if (GameWorld.getSettings().isPvp()) {
 			player.getPacketDispatch().sendString("", 226, 1);
 		}*/
