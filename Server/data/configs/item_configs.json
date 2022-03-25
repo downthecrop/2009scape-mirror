@@ -132804,7 +132804,7 @@
     "absorb": "0,0,0",
     "equipment_slot": "3",
     "destroy_message": "Drop",
-    "name": "Volatile clay axe",
+    "name": "Volatile clay hatchet",
     "archery_ticket_price": "0",
     "id": "14100",
     "bonuses": "-2,26,24,0,0,0,1,0,0,0,0,29,0,0,0"
@@ -132913,7 +132913,7 @@
   },
   {
     "shop_price": "21333",
-    "examine": "Your sacred clay tool has transformed into a axe.",
+    "examine": "Your sacred clay tool has transformed into a hatchet.",
     "durability": null,
     "destroy": "true",
     "attack_speed": "4",
@@ -132921,7 +132921,7 @@
     "absorb": "0,0,0",
     "equipment_slot": "3",
     "destroy_message": "Drop",
-    "name": "Sacred clay axe",
+    "name": "Sacred clay hatchet",
     "archery_ticket_price": "0",
     "id": "14108",
     "bonuses": "-2,4,2,0,0,0,1,0,0,0,0,5,0,0,0"
