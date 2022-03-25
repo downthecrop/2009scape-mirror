@@ -15,7 +15,7 @@ import core.game.node.item.Item;
  * @author afaroutdude
  */
 @Initializable
-public class ReadbeardFrankDialogue extends DialoguePlugin {
+public class RedbeardFrankDialogue extends DialoguePlugin {
     private boolean replacementReward = false;
     private AchievementDiary diary;
     private int level = 0;
@@ -36,20 +36,20 @@ public class ReadbeardFrankDialogue extends DialoguePlugin {
     private Quest quest;
 
     /**
-     * Constructs a new {@code ReadbeardFrankDialogue} {@code Object}.
+     * Constructs a new {@code RedbeardFrankDialogue} {@code Object}.
      */
-    public ReadbeardFrankDialogue() {
+    public RedbeardFrankDialogue() {
         /**
          * empty.
          */
     }
 
     /**
-     * Constructs a new {@code ReadbeardFrankDialogue} {@code Object}.
+     * Constructs a new {@code RedbeardFrankDialogue} {@code Object}.
      *
      * @param player the player.
      */
-    public ReadbeardFrankDialogue(Player player) {
+    public RedbeardFrankDialogue(Player player) {
         super(player);
     }
 
@@ -182,7 +182,6 @@ public class ReadbeardFrankDialogue extends DialoguePlugin {
                     interpreter.sendItemMessage(KEY.getId(), "Frank happily takes the rum... ... and hands you a key");
                     stage = 35;
                 }
-                end();
                 break;
             case 35:
                 npc("This be Hector's key. I believe it opens his chest in his", "old room in the Blue Moon Inn in Varrock.");
@@ -502,7 +501,7 @@ public class ReadbeardFrankDialogue extends DialoguePlugin {
 
     @Override
     public DialoguePlugin newInstance(Player player) {
-        return new ReadbeardFrankDialogue(player);
+        return new RedbeardFrankDialogue(player);
     }
 
     @Override
