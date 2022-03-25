@@ -113,7 +113,7 @@ public class SigurdDialogue extends DialoguePlugin {
 
 			break;
 		case 24:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Then take your hatchet to it and shape it how you", "like!");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "Then take your axe to it and shape it how you", "like!");
 			stage = 26;
 			break;
 		case 26:

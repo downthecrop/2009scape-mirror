@@ -88,7 +88,7 @@ public class WoodcuttingSkillPulse extends Pulse {
             return false;
         }
         if (SkillingTool.getHatchet(player) == null) {
-            player.getPacketDispatch().sendMessage("You do not have a hatchet to use.");
+            player.getPacketDispatch().sendMessage("You do not have an axe to use.");
             return false;
         }
         if (player.getInventory().freeSlots() < 1) {
