@@ -53,8 +53,8 @@ fun getNewTTL(): Int{
 }
 
 fun getNewLoc(): Location {
-    val possibleLoc = locations.toTypedArray().toMutableList()
-    possibleLoc.removeAll(usedLocations)
+    val possibleLoc = ArrayList<Location>()
+    for(loc in locations) if(usedLocations.contains(loc)) continue else possibleLoc.add(loc)
     val loc = possibleLoc.random()
     usedLocations.add(loc)
     return loc
@@ -76,6 +76,7 @@ class BarbFishingSpot(var loc: Location? = null, var ttl: Int) : NPC(1176){
     override fun handleTickActions() {
         if(location != loc) properties.teleportLocation = loc.also { ttl = getNewTTL() }
         if(ttl-- <= 0){
+            usedLocations.remove(location)
             loc = getNewLoc()
         }
     }
