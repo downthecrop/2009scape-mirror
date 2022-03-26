@@ -16,7 +16,7 @@ import rs09.game.Event
 class DiaryEventHook : LoginListener
 {
     override fun login(player: Player) {
-        player.hook(Event.ResourceGathered, DiaryGatherHooks)
+        player.hook(Event.ResourceProduced, DiaryGatherHooks)
         player.hook(Event.Teleport, DiaryTeleportHooks)
         player.hook(Event.NPCKilled, DiaryCombatHooks)
         player.hook(Event.FireLit, DiaryFireHooks)
@@ -72,9 +72,9 @@ class DiaryEventHook : LoginListener
         }
     }
 
-    private object DiaryGatherHooks : EventHook<ResourceGatheredEvent>
+    private object DiaryGatherHooks : EventHook<ResourceProducedEvent>
     {
-        override fun process(entity: Entity, event: ResourceGatheredEvent) {
+        override fun process(entity: Entity, event: ResourceProducedEvent) {
             if(entity !is Player) return
             val regionId = entity.viewport.region.id
             when(event.itemId)
@@ -129,16 +129,31 @@ class DiaryEventHook : LoginListener
                 Items.SILVER_ORE_442 -> if(regionId == 13107) finishTask(entity, DiaryType.LUMBRIDGE, 2, 10)
 
                 Items.COAL_453 -> if(regionId == 12593) finishTask(entity, DiaryType.LUMBRIDGE, 2, 11)
+
+                Items.BASS_365 -> if(regionId == 11317 && getAttribute(entity, "diary:seers:bass-caught", false)) finishTask(entity, DiaryType.SEERS_VILLAGE, 1, 11)
+
+                Items.SHARK_385 -> if(regionId == 11317 && getAttribute(entity, "diary:seers:shark-cooked", false) && isEquipped(entity, Items.COOKING_GAUNTLETS_775)) entity.incrementAttribute("/save:diary:seers:shark-cooked")
+
+                Items.LOBSTER_379 -> if(event.source.id == Scenery.COOKING_RANGE_114) finishTask(entity, DiaryType.LUMBRIDGE, 2, 4)
+            }
+
+            when(event.original)
+            {
+                Items.RAW_RAT_MEAT_2134 -> if((regionId == 12593 || regionId == 12849) && event.itemId == Items.COOKED_MEAT_2142) finishTask(entity, DiaryType.LUMBRIDGE, 1, 10)
             }
 
             if(getAttribute(entity, "diary:seers:shark-caught", 0) >= 5)
                 finishTask(entity, DiaryType.SEERS_VILLAGE, 2, 7)
+            if(getAttribute(entity, "diary:seers:shark-cooked", 0) >= 5)
+                finishTask(entity, DiaryType.SEERS_VILLAGE, 2, 8)
 
             if((regionId == 12593 || regionId == 12849) && event.source.name.startsWith("dead", true))
                 finishTask(entity, DiaryType.LUMBRIDGE, 1, 8)
 
-            if(event.source.id == 333 && entity.zoneMonitor.isInZone("karamja"))
+            if(event.source.id == NPCs.FISHING_SPOT_333 && entity.zoneMonitor.isInZone("karamja"))
                 finishTask(entity, DiaryType.KARAMJA, 0, 6)
+            if(event.source.id == Scenery.COOKING_RANGE_114 && regionId == 12850)
+                finishTask(entity, DiaryType.LUMBRIDGE, 0, 7)
         }
     }
 

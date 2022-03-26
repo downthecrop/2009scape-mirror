@@ -1,7 +1,7 @@
 package rs09.game.node.entity.skill.cooking
 
 import api.*
-import api.events.ResourceGatheredEvent
+import api.events.ResourceProducedEvent
 import core.game.node.item.Item
 import org.rs09.consts.Items
 import rs09.game.content.dialogue.DialogueFile
@@ -32,7 +32,7 @@ class DoughMakingListener : InteractionListener() {
                     end()
                     if(removeItem(player!!, used) && removeItem(player!!, with)){
                         addItem(player!!, products[buttonID - 1])
-                        player!!.dispatch(ResourceGatheredEvent(products[buttonID - 1], 1, player!!))
+                        player!!.dispatch(ResourceProducedEvent(products[buttonID - 1], 1, player!!))
                         sendMessage(player!!, "You mix the flower and the water to make some ${getItemName(products[buttonID - 1]).toLowerCase()}.")
                     }
                 }
