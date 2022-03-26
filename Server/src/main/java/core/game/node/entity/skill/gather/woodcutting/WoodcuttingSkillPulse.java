@@ -99,7 +99,7 @@ public class WoodcuttingSkillPulse extends Pulse {
     }
 
     public void animate() {
-        player.animate(SkillingTool.getHatchet(player).getAnimation());
+        if(!player.getAnimator().isAnimating()) player.animate(SkillingTool.getHatchet(player).getAnimation());
     }
 
     public boolean reward() {
@@ -169,20 +169,16 @@ public class WoodcuttingSkillPulse extends Pulse {
 
         }
         //transform to depleted version
+        //OSRS and RS3 Wikis both agree: All trees present in 2009 are a 1/8 fell chance, aside from normal trees/dead trees which are 100%
+        //OSRS: https://oldschool.runescape.wiki/w/Woodcutting scroll down to the mechanics section
+        //RS3 : https://runescape.wiki/w/Woodcutting scroll down to the mechanics section, and expand the tree felling chances table
         if (resource.getRespawnRate() != 0) {
-            int charge = 1000 / resource.getRewardAmount();
-            node.setCharge(node.getCharge() - RandomFunction.random(charge, charge << 2));
-            if (node.getCharge() < 1) {
-                node.setCharge(1000);
+            if (RandomFunction.roll(8) || resource.identifier == 1 || resource.identifier == 2) {
                 if (resource.isFarming()) {
                     FarmingPatch fPatch = FarmingPatch.forObject(node.asScenery());
                     if(fPatch != null) {
                         Patch patch = fPatch.getPatchFor(player);
                         patch.setCurrentState(patch.getCurrentState() + 1);
-                    }
-                    if(resource.getId() == 8513 && player.getLocation().getRegionId() == 11828){
-                        //Chop down a yew tree you grew in falador park
-                        player.getAchievementDiaryManager().finishTask(player,DiaryType.FALADOR,2,3);
                     }
                     return true;
                 }
