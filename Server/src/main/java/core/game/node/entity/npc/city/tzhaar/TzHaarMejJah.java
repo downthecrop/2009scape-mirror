@@ -7,6 +7,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
 import core.game.node.entity.player.Player;
+import rs09.game.world.GameWorld;
 
 /**
  * Handles the TzHaarMejJal dialogue.
@@ -44,10 +45,14 @@ public class TzHaarMejJah extends DialoguePlugin {
 	public boolean handle(int interfaceId, int buttonId) {
 		switch (stage) {
 		case 0:
-			if (player.getAttribute("fc_practice_jad", false)) {
-				interpreter.sendOptions("Select an Option", player.getInventory().containItems(6570) ? "I have a fire cape here." : "What is this place?", "What did you call me?", "About my challenge...", "No I'm fine thanks.");
+			if (GameWorld.getSettings().getJad_practice_enabled()) {
+				if (player.getAttribute("fc_practice_jad", false)) {
+					interpreter.sendOptions("Select an Option", player.getInventory().containItems(6570) ? "I have a fire cape here." : "What is this place?", "What did you call me?", "About my challenge...", "No I'm fine thanks.");
+				} else {
+					interpreter.sendOptions("Select an Option", player.getInventory().containItems(6570) ? "I have a fire cape here." : "What is this place?", "What did you call me?", "I want to challenge Jad directly.", "No I'm fine thanks.");
+				}
 			} else {
-				interpreter.sendOptions("Select an Option", player.getInventory().containItems(6570) ? "I have a fire cape here." : "What is this place?", "What did you call me?", "I want to challenge Jad directly.", "No I'm fine thanks.");
+				interpreter.sendOptions("Select an Option", player.getInventory().containItems(6570) ? "I have a fire cape here." : "What is this place?", "What did you call me?", "No I'm fine thanks.");
 			}
 			stage = 1;
 			break;
@@ -66,12 +71,17 @@ public class TzHaarMejJah extends DialoguePlugin {
 				stage = 20;
 				break;
 			case 3:
-				if (player.getAttribute("fc_practice_jad", false)) {
-					interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "About my challenge...");
-					stage = 64;
+				if (GameWorld.getSettings().getJad_practice_enabled()) {
+					if (player.getAttribute("fc_practice_jad", false)) {
+						interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "About my challenge...");
+						stage = 64;
+					} else {
+						interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "The challenge is too long.", "I want to challenge Jad directly.");
+						stage = 50;
+					}
 				} else {
-					interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "The challenge is too long.", "I want to challenge Jad directly.");
-					stage = 50;
+					interpreter.sendDialogues(player, FacialExpression.HALF_GUILTY, "No I'm fine thanks.");
+					stage = 30;
 				}
 				break;
 			case 4:
@@ -148,7 +158,7 @@ public class TzHaarMejJah extends DialoguePlugin {
 			stage = 21;
 			break;
 		case 21:
-			interpreter.sendOptions("Select an Option", "What's a 'JalYt-Key'?", "I guess so...", "No I'm not!");
+			interpreter.sendOptions("Select an Option", "What's a 'JalYt-Ket'?", "I guess so...", "No I'm not!");
 			stage = 22;
 			break;
 		case 22:
