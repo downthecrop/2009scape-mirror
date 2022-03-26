@@ -1,17 +1,14 @@
 package core.game.node.entity.skill.cooking;
 
-import api.events.ResourceGatheredEvent;
-import core.game.container.impl.EquipmentContainer;
+import api.events.ResourceProducedEvent;
 import core.game.node.entity.impl.Animator;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.audio.Audio;
-import core.game.node.entity.player.link.diary.DiaryType;
 import core.game.node.entity.skill.Skills;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.system.task.Pulse;
-import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import org.rs09.consts.Items;
@@ -27,9 +24,11 @@ public class StandardCookingPulse extends Pulse {
     //Cooking sound
     public static final Audio SOUND = new Audio(2577, 1, 1);
 
-    private int initial, product, amount, level;
-    private Scenery object;
-    private Player player;
+    private final int initial;
+    private final int product;
+    private int amount;
+    private final Scenery object;
+    private final Player player;
     private double experience;
     private boolean burned = false;
     public CookableItems properties;
@@ -65,7 +64,6 @@ public class StandardCookingPulse extends Pulse {
     }
 
     public boolean checkRequirements() {
-        this.level = 1;
         this.experience = 0;
         if (properties != null) {
             // Handle Cook's Assistant range
@@ -80,7 +78,6 @@ public class StandardCookingPulse extends Pulse {
                 return false;
             }
 
-            this.level = properties.level;
             this.experience = properties.experience;
             this.burned = isBurned(player, object, initial);
         }
@@ -88,10 +85,7 @@ public class StandardCookingPulse extends Pulse {
             return false;
         }
 
-        if(!object.isActive()){
-            return false;
-        }
-        return true;
+        return object.isActive();
     }
 
     public boolean reward() {
@@ -139,13 +133,8 @@ public class StandardCookingPulse extends Pulse {
     public boolean cook(final Player player, final Scenery object, final boolean burned, final int initial, final int product) {
         Item initialItem = new Item(initial);
         Item productItem = new Item(product);
-        player.lock(getDelay());
         animate();
 
-        //lumbridge diary
-        if (object.getId() == 114 && player.getViewport().getRegion().getId() == 12850 && !player.getAchievementDiaryManager().getDiary(DiaryType.LUMBRIDGE).isComplete(0, 7)) {
-            player.getAchievementDiaryManager().updateTask(player, DiaryType.LUMBRIDGE, 0, 7, true);
-        }
         //handle special cooking results (spits, cake, etc) that don't justify separate plugin
         switch (initial) {
             case Items.RAW_BEAST_MEAT_9986:
@@ -171,40 +160,10 @@ public class StandardCookingPulse extends Pulse {
         if (player.getInventory().remove(initialItem)) {
             if (!burned) {
                 player.getInventory().add(productItem);
-                player.dispatch(new ResourceGatheredEvent(productItem.getId(), 1, object));
+                player.dispatch(new ResourceProducedEvent(productItem.getId(), 1, object, initialItem.getId()));
                 player.getSkills().addExperience(Skills.COOKING, experience, true);
-
-                int playerRegion = player.getViewport().getRegion().getId();
-
-                // Achievement Diary Handling
-                if (productItem.getId() == Items.BASS_365
-                        && playerRegion == 11317
-                        && player.getAttribute("diary:seers:bass-caught", false)) {
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.SEERS_VILLAGE, 1, 11);
-                }
-
-                if (productItem.getId() == Items.SHARK_385
-                        && playerRegion == 11317
-                        && player.getEquipment().get(EquipmentContainer.SLOT_HANDS) != null && player.getEquipment().get(EquipmentContainer.SLOT_HANDS).getId() == Items.COOKING_GAUNTLETS_775
-                        && !player.getAchievementDiaryManager().hasCompletedTask(DiaryType.SEERS_VILLAGE, 2, 8)) {
-                    player.setAttribute("/save:diary:seers:cooked-shark", 1 + player.getAttribute("diary:seers:cooked-shark", 0));
-                    if (player.getAttribute("diary:seers:cooked-shark", 0) >= 5) {
-                        player.getAchievementDiaryManager().finishTask(player, DiaryType.SEERS_VILLAGE, 2, 8);
-                    }
-                }
-
-                // Cook some rat meat on a campfire in Lumbridge Swamp
-                if (initialItem.getId() == Items.RAW_RAT_MEAT_2134 && object.getName().toLowerCase().contains("fire") && (playerRegion == 12593 || playerRegion == 12849)) {
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 1, 10);
-                }
-
-                // Cook a lobster on the range in Lumbridge Castle kitchen
-                if (productItem.getId() == Items.LOBSTER_379 && object.getId() == 114 && player.getLocation().withinDistance(Location.create(3211, 3215, 0))) {
-                    player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 2, 4);
-                }
-
             } else {
-                player.dispatch(new ResourceGatheredEvent(CookableItems.getBurnt(initial).getId(), 1, object));
+                player.dispatch(new ResourceProducedEvent(CookableItems.getBurnt(initial).getId(), 1, object, initialItem.getId()));
                 player.getInventory().add(CookableItems.getBurnt(initial));
             }
             player.getPacketDispatch().sendMessage(getMessage(initialItem, productItem, burned));
@@ -231,11 +190,7 @@ public class StandardCookingPulse extends Pulse {
         }
     }
 
-    public boolean updateTutorial(Player player) {
-        return cook(player, object, burned, initial, product);
-    }
-
     private Animation getAnimation(final Scenery object) {
-        return !object.getName().toLowerCase().equals("fire") ? RANGE_ANIMATION : FIRE_ANIMATION;
+        return !object.getName().equalsIgnoreCase("fire") ? RANGE_ANIMATION : FIRE_ANIMATION;
     }
 }

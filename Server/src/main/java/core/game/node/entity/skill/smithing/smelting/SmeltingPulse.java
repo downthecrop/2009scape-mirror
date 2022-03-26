@@ -2,7 +2,7 @@ package core.game.node.entity.skill.smithing.smelting;
 
 import static api.ContentAPIKt.*;
 import api.EquipmentSlot;
-import api.events.ResourceGatheredEvent;
+import api.events.ResourceProducedEvent;
 import core.game.container.impl.EquipmentContainer;
 import org.rs09.consts.Items;
 import core.game.world.map.Location;
@@ -143,7 +143,7 @@ public class SmeltingPulse extends SkillPulse<Item> {
                 }
             }
             player.getInventory().add(new Item(bar.getProduct().getId(), amt));
-            player.dispatch(new ResourceGatheredEvent(bar.getProduct().getId(), 1, player));
+            player.dispatch(new ResourceProducedEvent(bar.getProduct().getId(), 1, player));
             double xp = bar.getExperience() * amt;
             // Goldsmith gauntlets
             if (((player.getEquipment().get(EquipmentContainer.SLOT_HANDS) != null
