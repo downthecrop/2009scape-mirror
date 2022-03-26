@@ -4,7 +4,7 @@ import core.game.node.Node
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.link.TeleportManager.TeleportType
 
-data class ResourceGatheredEvent(val itemId: Int, val amount: Int, val source: Node) : Event
+data class ResourceProducedEvent(val itemId: Int, val amount: Int, val source: Node, val original: Int = -1) : Event
 data class NPCKillEvent(val npc: NPC) : Event
 data class TeleportEvent(val type: TeleportType, val source: Int = -1) : Event
 data class LitFireEvent(val logId: Int) : Event

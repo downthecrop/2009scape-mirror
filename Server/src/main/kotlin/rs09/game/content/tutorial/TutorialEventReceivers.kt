@@ -10,7 +10,6 @@ import core.game.node.entity.skill.gather.mining.MiningNode
 import core.game.node.entity.skill.gather.woodcutting.WoodcuttingNode
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
-import rs09.game.system.SystemLogger
 
 /**
  * Event receivers for tutorial island
@@ -191,9 +190,9 @@ object TutorialInteractionReceiver : EventHook<InteractionEvent>
     }
 }
 
-object TutorialResourceReceiver : EventHook<ResourceGatheredEvent>
+object TutorialResourceReceiver : EventHook<ResourceProducedEvent>
 {
-    override fun process(entity: Entity, event: ResourceGatheredEvent) {
+    override fun process(entity: Entity, event: ResourceProducedEvent) {
         if(entity !is Player) return
 
         when(getAttribute(entity, "tutorial:stage", 0))
