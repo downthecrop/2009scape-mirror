@@ -151,7 +151,7 @@ public class WoodcuttingSkillPulse extends Pulse {
             }
             //give the reward
             player.getInventory().add(new Item(reward, rewardAmount));
-            player.dispatch(new ResourceProducedEvent(reward, rewardAmount, node));
+            player.dispatch(new ResourceProducedEvent(reward, rewardAmount, node, -1));
             int cutLogs = player.getAttribute(STATS_BASE + ":" + STATS_LOGS,0);
             player.setAttribute("/save:" + STATS_BASE + ":" + STATS_LOGS,++cutLogs);
 

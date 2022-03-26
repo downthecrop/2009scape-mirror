@@ -143,7 +143,7 @@ public class SmeltingPulse extends SkillPulse<Item> {
                 }
             }
             player.getInventory().add(new Item(bar.getProduct().getId(), amt));
-            player.dispatch(new ResourceProducedEvent(bar.getProduct().getId(), 1, player));
+            player.dispatch(new ResourceProducedEvent(bar.getProduct().getId(), 1, player, -1));
             double xp = bar.getExperience() * amt;
             // Goldsmith gauntlets
             if (((player.getEquipment().get(EquipmentContainer.SLOT_HANDS) != null
