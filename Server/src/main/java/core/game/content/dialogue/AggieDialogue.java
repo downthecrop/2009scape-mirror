@@ -24,7 +24,19 @@ public final class AggieDialogue extends DialoguePlugin {
 	/**
 	 * Represents the ingredients needed to make paste.
 	 */
+<<<<<<< HEAD
+	private static final Item ASHES = new Item(592);
+	private static final Item POT_OF_FLOUR = new Item(1933);
+	private static final Item REDBERRIES_SINGLE= new Item(1951);  // specifying single because 3 redberries are needed for the red dye
+	private static final Item[] PASTE_SOLID_INGREDIENTS = new Item[] { ASHES, REDBERRIES_SINGLE, POT_OF_FLOUR };
+
+	private static final Item BUCKET = new Item(1925);
+	private static final Item BUCKET_OF_WATER = new Item(1929);
+	private static final Item JUG = new Item(1935);
+	private static final Item JUG_OF_WATER = new Item(1937);  // Jug of Water is meant to be substitutable with the Bucket of Water
+=======
 	private static final Item[] PASTE_INGREDIENTS = new Item[] { new Item(592), new Item(1951), new Item(1929), new Item(1933) };
+>>>>>>> parent of d0ef34a8... enabled Aggie to accept a Jug of Water for making paste for the Prince Ali Rescue quest
 
 	/**
 	 * Represents the cauldron location
@@ -200,7 +212,21 @@ public final class AggieDialogue extends DialoguePlugin {
 			stage = 732;
 			break;
 		case 732:
+<<<<<<< HEAD
+			// remove the solid ingredients and one of the water ingredients
+			if (player.getInventory().remove(PASTE_SOLID_INGREDIENTS)) {
+				// remove a water ingredient, prioritize the bucket
+				if (player.hasItem(BUCKET_OF_WATER)) {
+					int slot = player.getInventory().getSlot(BUCKET_OF_WATER);
+					player.getInventory().replace(BUCKET, slot);
+				}
+				else if (player.hasItem(JUG_OF_WATER)) {
+					int slot = player.getInventory().getSlot(JUG_OF_WATER);
+					player.getInventory().replace(JUG, slot);
+				}
+=======
 			if (player.getInventory().remove(PASTE_INGREDIENTS)) {
+>>>>>>> parent of d0ef34a8... enabled Aggie to accept a Jug of Water for making paste for the Prince Ali Rescue quest
 				interpreter.sendDialogue("You hand the ash, flour, water and redberries to Aggie.", "Aggie tips the ingredients into a cauldron", "and mutters some words.");
 				stage = 733;
 			}
