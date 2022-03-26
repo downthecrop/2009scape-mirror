@@ -190,11 +190,7 @@ public class StandardCookingPulse extends Pulse {
         }
     }
 
-    public boolean updateTutorial(Player player) {
-        return cook(player, object, burned, initial, product);
-    }
-
     private Animation getAnimation(final Scenery object) {
-        return !object.getName().toLowerCase().equals("fire") ? RANGE_ANIMATION : FIRE_ANIMATION;
+        return !object.getName().equalsIgnoreCase("fire") ? RANGE_ANIMATION : FIRE_ANIMATION;
     }
 }
