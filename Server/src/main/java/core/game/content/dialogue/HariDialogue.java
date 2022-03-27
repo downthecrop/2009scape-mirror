@@ -102,7 +102,7 @@ public final class HariDialogue extends DialoguePlugin {
 			}
 			break;
 		case 18:
-			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "When you have done that you can shape the log further", "with your hatchet to make a canoe.");
+			interpreter.sendDialogues(npc, FacialExpression.HALF_GUILTY, "When you have done that you can shape the log further", "with your axe to make a canoe.");
 			stage = 19;
 			break;
 		case 19:
