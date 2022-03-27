@@ -16,7 +16,7 @@ object SlayerKillHook : EventHook<NPCKillEvent>
         val slayer = player.slayer
         val flags = slayer.flags
 
-        if (slayer.hasTask()) {
+        if (slayer.hasTask() && event.npc.id in slayer.task!!.npcs) {
             rewardXP(player, Skills.SLAYER, npc.skills.maximumLifepoints.toDouble())
             slayer.decrementAmount(1)
             if(slayer.hasTask()) return
