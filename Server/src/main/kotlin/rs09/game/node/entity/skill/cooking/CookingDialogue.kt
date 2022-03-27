@@ -96,20 +96,11 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
     }
 
     fun display(vararg args : Int) {
-        if(args.size == 1) {
-            player!!.interfaceManager.openChatbox(307)
-            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 3, 60, 90))
-            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 2, 208, 20))
-            player!!.packetDispatch.sendItemZoomOnInterface(args[0], 160, 307, 2)
-            player!!.packetDispatch.sendString(ItemDefinition.forId(product).name, 307, 3)
-            stage = 1
-        } else {
-            player!!.interfaceManager.openChatbox(307)
-            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 3, 60, 90))
-            PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 2, 208, 20))
-            player!!.packetDispatch.sendItemZoomOnInterface(product, 160, 307, 2)
-            player!!.packetDispatch.sendString(ItemDefinition.forId(product).name, 307, 3)
-            stage = 1
-        }
+        player!!.interfaceManager.openChatbox(307)
+        PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 3, 60, 90))
+        PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 2, 208, 20))
+        player!!.packetDispatch.sendItemZoomOnInterface(if(args.size == 1) args[0] else product, 160, 307, 2)
+        player!!.packetDispatch.sendString(ItemDefinition.forId(product).name, 307, 3)
+        stage = 1
     }
 }
