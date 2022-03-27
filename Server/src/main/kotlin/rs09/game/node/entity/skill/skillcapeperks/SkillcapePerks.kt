@@ -71,6 +71,7 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
             api.sendDialogue(player, "Your cape is lined with empty pockets shaped like various utilities needed for slayer.")
         }
     }),
+    HASTY_COOKING("cape_perks:hasty-cooking"),
     NONE("cape_perks:none")
     ;
 
@@ -100,7 +101,7 @@ enum class SkillcapePerks(val attribute: String, val effect: ((Player) -> Unit)?
                 Skillcape.MINING -> PRECISION_MINER
                 Skillcape.SMITHING -> BAREFISTED_SMITHING
                 Skillcape.FISHING -> GREAT_AIM
-                Skillcape.COOKING -> NONE
+                Skillcape.COOKING -> HASTY_COOKING
                 Skillcape.FIREMAKING -> CONSTANT_GLOW
                 Skillcape.WOODCUTTING -> NONE
                 Skillcape.FARMING -> SEED_ATTRACTION
