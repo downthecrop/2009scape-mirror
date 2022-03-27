@@ -139,6 +139,9 @@ class DiaryEventHook : LoginListener
 
             if(event.source.id == 333 && entity.zoneMonitor.isInZone("karamja"))
                 finishTask(entity, DiaryType.KARAMJA, 0, 6)
+
+            if(event.source.id == Scenery.YEW_TREE_8513 && regionId == 11828)
+                finishTask(entity, DiaryType.FALADOR, 2, 3)
         }
     }
 
