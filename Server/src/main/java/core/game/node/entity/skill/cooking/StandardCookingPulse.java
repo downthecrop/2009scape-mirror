@@ -15,6 +15,7 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.tools.RandomFunction;
 import org.rs09.consts.Items;
+import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks;
 
 public class StandardCookingPulse extends Pulse {
     //range animation
@@ -95,7 +96,11 @@ public class StandardCookingPulse extends Pulse {
 
     public boolean reward() {
         if (getDelay() == 1) {
-            setDelay(object.getName().toLowerCase().equals("range") ? 5 : 4);
+            int delay = object.getName().toLowerCase().equals("range") ? 5 : 4;
+            if(SkillcapePerks.isActive(SkillcapePerks.HASTY_COOKING, player)) {
+                delay -= 1;
+            }
+            setDelay(delay);
             return false;
         }
 
@@ -110,16 +115,20 @@ public class StandardCookingPulse extends Pulse {
     public boolean isBurned(final Player player, final Scenery object, int food) {
         boolean hasGauntlets = player.getEquipment().containsItem(new Item(Items.COOKING_GAUNTLETS_775));
         double burn_stop = (double) CookableItems.getBurnLevel(food);
+        int effectiveCookingLevel = player.getSkills().getLevel(Skills.COOKING);
+        if(SkillcapePerks.isActive(SkillcapePerks.HASTY_COOKING, player)) {
+            effectiveCookingLevel -= 5;
+        }
         int gauntlets_boost = 0;
         CookableItems item = CookableItems.forId(food);
         if (hasGauntlets && (food == Items.RAW_SWORDFISH_371 || food == Items.RAW_LOBSTER_377 || food == Items.RAW_MONKFISH_7944 || food == Items.RAW_SHARK_383)) {
             burn_stop -= 6;
             gauntlets_boost += 6;
         }
-        if (player.getSkills().getLevel(Skills.COOKING) > burn_stop) {
+        if (effectiveCookingLevel >= burn_stop) {
             return false;
         }
-        int cook_level = player.getSkills().getLevel(Skills.COOKING) + gauntlets_boost;
+        int cook_level = effectiveCookingLevel + gauntlets_boost;
         double host_ratio = RandomFunction.randomDouble(100.0);
         double low = item.low + (object.getName().contains("fire") ? 0 : (0.1 * item.low));
         double high = item.high + (object.getName().contains("fire") ? 0 : (0.1 * item.high));
@@ -185,7 +194,6 @@ public class StandardCookingPulse extends Pulse {
                 }
 
                 // Cook some rat meat on a campfire in Lumbridge Swamp
-                System.out.println(object.getName());
                 if (initialItem.getId() == Items.RAW_RAT_MEAT_2134 && object.getName().toLowerCase().contains("fire") && (playerRegion == 12593 || playerRegion == 12849)) {
                     player.getAchievementDiaryManager().finishTask(player, DiaryType.LUMBRIDGE, 1, 10);
                 }
