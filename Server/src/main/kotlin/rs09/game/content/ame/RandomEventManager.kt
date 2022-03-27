@@ -13,6 +13,7 @@ private const val MIN_DELAY_TICKS = AVG_DELAY_TICKS / 2
 private const val MAX_DELAY_TICKS = MIN_DELAY_TICKS + AVG_DELAY_TICKS // window of 60 min centered on 60 min (30 to 90 min)
 class RandomEventManager(val player: Player) {
     var event: RandomEventNPC? = null
+    var enabled: Boolean = false
     var nextSpawn = 0
     val skills = arrayOf("WoodcuttingSkillPulse","FishingPulse","MiningSkillPulse","BoneBuryingOptionPlugin")
 
@@ -22,6 +23,10 @@ class RandomEventManager(val player: Player) {
     }
 
     fun fireEvent() {
+        if(!enabled){
+            rollNextSpawn()
+            return
+        }
         if (player.zoneMonitor.isRestricted(ZoneRestriction.RANDOM_EVENTS)) {
             nextSpawn = GameWorld.ticks + 3000
             return
@@ -60,6 +65,7 @@ class RandomEventManager(val player: Player) {
         if (player.isArtificial) return
         rollNextSpawn()
         SystemLogger.logRE("Initialized REManager for ${player.username}")
+        enabled = true
     }
 
     private fun rollNextSpawn() {

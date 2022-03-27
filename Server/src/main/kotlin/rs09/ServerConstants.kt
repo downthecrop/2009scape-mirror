@@ -113,6 +113,9 @@ class ServerConstants {
 		@JvmField
 		var MS_SECRET_KEY = ""
 
+		@JvmField
+		var LOG_CUTSCENE = true
+
 		//location names for the ::to command.
 		val TELEPORT_DESTINATIONS = arrayOf(
 			arrayOf(Location.create(2974, 4383, 2), "corp", "corporal", "corporeal"),
