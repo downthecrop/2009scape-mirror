@@ -264,7 +264,7 @@ object TutorialStage {
                         "Cooking your shrimp",
                         "Now you have caught some shrimp, let's cook it. First light a fire: chop",
                         "down a tree and then use the tinderbox on the logs. If you've lost",
-                        "your hatchet or tinderbox Brynna will give you another.",
+                        "your axe or tinderbox Brynna will give you another.",
                         "Once you have a fire, \"use\" your shrimp on the fire."
                     )
                 )
