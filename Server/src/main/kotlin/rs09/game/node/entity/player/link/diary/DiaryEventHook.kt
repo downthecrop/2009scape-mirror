@@ -144,14 +144,14 @@ class DiaryEventHook : LoginListener
 
             if(getAttribute(entity, "diary:seers:shark-caught", 0) >= 5)
                 finishTask(entity, DiaryType.SEERS_VILLAGE, 2, 7)
-            if(getAttribute(entity, "diary:seers:shark-cooked", 0) >= 5)
-                finishTask(entity, DiaryType.SEERS_VILLAGE, 2, 8)
 
             if((regionId == 12593 || regionId == 12849) && event.source.name.startsWith("dead", true))
                 finishTask(entity, DiaryType.LUMBRIDGE, 1, 8)
 
-            if(event.source.id == NPCs.FISHING_SPOT_333 && entity.zoneMonitor.isInZone("karamja"))
+            if(event.source.id == 333 && entity.zoneMonitor.isInZone("karamja"))
                 finishTask(entity, DiaryType.KARAMJA, 0, 6)
+            if(event.source.id == Scenery.YEW_TREE_8513 && regionId == 11828)
+                finishTask(entity, DiaryType.FALADOR, 2, 3)
             if(event.source.id == Scenery.COOKING_RANGE_114 && regionId == 12850)
                 finishTask(entity, DiaryType.LUMBRIDGE, 0, 7)
         }
