@@ -5122,7 +5122,7 @@
     "id": "507"
   },
   {
-    "examine": "A piece of ancient goblin hatchet.",
+    "examine": "A piece of ancient goblin axe.",
     "durability": null,
     "name": "Picture",
     "high_alchemy": "1",
@@ -5137,7 +5137,7 @@
     "id": "509"
   },
   {
-    "examine": "A piece of ancient goblin hatchet.",
+    "examine": "A piece of ancient goblin axe.",
     "durability": null,
     "name": "Picture",
     "high_alchemy": "1",
@@ -5152,7 +5152,7 @@
     "id": "511"
   },
   {
-    "examine": "A piece of ancient goblin hatchet.",
+    "examine": "A piece of ancient goblin axe.",
     "durability": null,
     "name": "Picture",
     "high_alchemy": "1",
@@ -5167,7 +5167,7 @@
     "id": "513"
   },
   {
-    "examine": "A piece of ancient goblin hatchet.",
+    "examine": "A piece of ancient goblin axe.",
     "durability": null,
     "name": "Picture",
     "high_alchemy": "1",
@@ -5182,7 +5182,7 @@
     "id": "515"
   },
   {
-    "examine": "A piece of ancient goblin hatchet.",
+    "examine": "A piece of ancient goblin axe.",
     "durability": null,
     "name": "Picture",
     "high_alchemy": "1",
@@ -5197,7 +5197,7 @@
     "id": "517"
   },
   {
-    "examine": "A piece of ancient goblin hatchet.",
+    "examine": "A piece of ancient goblin axe.",
     "durability": null,
     "name": "Picture",
     "high_alchemy": "1",
@@ -5212,7 +5212,7 @@
     "id": "519"
   },
   {
-    "examine": "A piece of ancient goblin hatchet.",
+    "examine": "A piece of ancient goblin axe.",
     "durability": null,
     "name": "Picture",
     "high_alchemy": "1",
@@ -15148,7 +15148,7 @@
   {
     "shop_price": "56",
     "ge_buy_limit": "100",
-    "examine": "A woodcutter's hatchet.",
+    "examine": "A woodcutter's axe.",
     "durability": null,
     "low_alchemy": "22",
     "high_alchemy": "33",
@@ -15177,7 +15177,7 @@
   {
     "shop_price": "20",
     "ge_buy_limit": "100",
-    "examine": "A woodcutter's hatchet.",
+    "examine": "A woodcutter's axe.",
     "durability": null,
     "low_alchemy": "6",
     "high_alchemy": "9",
@@ -15208,7 +15208,7 @@
     "requirements": "{0,5}",
     "shop_price": "200",
     "ge_buy_limit": "100",
-    "examine": "A woodcutter's hatchet.",
+    "examine": "A woodcutter's axe.",
     "durability": null,
     "low_alchemy": "80",
     "high_alchemy": "120",
@@ -15239,7 +15239,7 @@
     "requirements": "{0,20}",
     "shop_price": "660",
     "ge_buy_limit": "100",
-    "examine": "A powerful hatchet.",
+    "examine": "A powerful axe.",
     "durability": null,
     "low_alchemy": "208",
     "high_alchemy": "312",
@@ -15270,7 +15270,7 @@
     "requirements": "{0,30}-{8,31}",
     "shop_price": "1625",
     "ge_buy_limit": "100",
-    "examine": "A powerful hatchet.",
+    "examine": "A powerful axe.",
     "durability": null,
     "low_alchemy": "512",
     "high_alchemy": "768",
@@ -15300,7 +15300,7 @@
   {
     "requirements": "{0,40}-{8,41}",
     "ge_buy_limit": "100",
-    "examine": "A powerful hatchet.",
+    "examine": "A powerful axe.",
     "durability": null,
     "low_alchemy": "5120",
     "high_alchemy": "7680",
@@ -15328,7 +15328,7 @@
   {
     "requirements": "{0,10}",
     "ge_buy_limit": "100",
-    "examine": "A sinister looking hatchet.",
+    "examine": "A sinister looking axe.",
     "durability": null,
     "low_alchemy": "153",
     "high_alchemy": "230",
@@ -43479,7 +43479,7 @@
     "id": "4414"
   },
   {
-    "examine": "A jungle forester's blunt hatchet.",
+    "examine": "A jungle forester's blunt axe.",
     "durability": null,
     "name": "Blunt axe",
     "low_alchemy": "22",
@@ -65476,7 +65476,7 @@
   {
     "requirements": "{0,60}-{8,61}",
     "ge_buy_limit": "10",
-    "examine": "A very powerful hatchet.",
+    "examine": "A very powerful axe.",
     "has_special": "true",
     "rare_item": "true",
     "durability": null,
@@ -123906,7 +123906,7 @@
     "bonuses": "40,25,-4,1,0,0,0,0,1,0,0,40,0,0,0"
   },
   {
-    "examine": "A powerful hatchet.",
+    "examine": "A powerful axe.",
     "durability": null,
     "low_alchemy": "5120",
     "high_alchemy": "7680",
@@ -123923,7 +123923,7 @@
     "bonuses": "-2,26,24,0,0,0,1,0,0,0,0,29,0,0,0"
   },
   {
-    "examine": "A very powerful hatchet.",
+    "examine": "A very powerful axe.",
     "has_special": "true",
     "durability": null,
     "low_alchemy": "22000",

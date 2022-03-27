@@ -66,7 +66,7 @@ public final class BarfyBill extends DialoguePlugin {
 			}
 			break;
 		case 24:
-			npc("Then take your hatchet to it and shape it how you like!");
+			npc("Then take your axe to it and shape it how you like!");
 			stage = 26;
 			break;
 		case 26:
