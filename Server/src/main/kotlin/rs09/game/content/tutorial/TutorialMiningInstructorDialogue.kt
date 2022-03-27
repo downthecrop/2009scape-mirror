@@ -67,7 +67,7 @@ class TutorialMiningInstructorDialogue(player: Player? = null) : DialoguePlugin(
                 }
             }
 
-            34 -> when(stage) {
+            34,35 -> when(stage) {
                 0 -> npcl(FacialExpression.FRIENDLY, "Absolutely right, ${player.username}. These two ore types can be smelted together to make bronze.").also { stage++ }
                 1 -> npcl(FacialExpression.FRIENDLY, "So now you know what ore is in the rocks over there, why don't you have a go at mining some tin and copper? Here, you'll need this to start with.").also { stage++ }
                 2 -> {
@@ -82,7 +82,7 @@ class TutorialMiningInstructorDialogue(player: Player? = null) : DialoguePlugin(
                 }
             }
 
-            40 -> when(stage){
+            40,41 -> when(stage){
                 0 -> npcl(FacialExpression.FRIENDLY, "Okay, I'll show you how to make a dagger out of it. You'll be needing this..").also { stage++ }
                 1 -> {
                     addItem(player, Items.HAMMER_2347)
