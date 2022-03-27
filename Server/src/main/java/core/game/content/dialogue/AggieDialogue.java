@@ -24,7 +24,14 @@ public final class AggieDialogue extends DialoguePlugin {
 	/**
 	 * Represents the ingredients needed to make paste.
 	 */
-	private static final Item[] PASTE_INGREDIENTS = new Item[] { new Item(592), new Item(1951), new Item(1929), new Item(1933) };
+
+	private static final Item ASHES = new Item(592);
+	private static final Item POT_OF_FLOUR = new Item(1933);
+	private static final Item REDBERRIES_SINGLE= new Item(1951);  // specifying single because 3 redberries are needed for the red dye
+	private static final Item[] PASTE_SOLID_INGREDIENTS = new Item[] { ASHES, REDBERRIES_SINGLE, POT_OF_FLOUR };
+
+	private static final Item BUCKET_OF_WATER = new Item(1929);
+	private static final Item JUG_OF_WATER = new Item(1937);  // Jug of Water is meant to be substitutable with the Bucket of Water
 
 	/**
 	 * Represents the cauldron location
@@ -200,7 +207,8 @@ public final class AggieDialogue extends DialoguePlugin {
 			stage = 732;
 			break;
 		case 732:
-			if (player.getInventory().remove(PASTE_INGREDIENTS)) {
+			// remove the solid ingredients and one of the water ingredients
+			if (player.getInventory().remove(PASTE_SOLID_INGREDIENTS) && (player.getInventory().remove(BUCKET_OF_WATER) || player.getInventory().remove(JUG_OF_WATER))) {
 				interpreter.sendDialogue("You hand the ash, flour, water and redberries to Aggie.", "Aggie tips the ingredients into a cauldron", "and mutters some words.");
 				stage = 733;
 			}
@@ -389,10 +397,15 @@ public final class AggieDialogue extends DialoguePlugin {
 	 * @return {@code True} if so.
 	 */
 	private final boolean hasIngredients(final Player player) {
-		for (Item i : PASTE_INGREDIENTS) {
+		// check if the player has all the solid ingredients
+		for (Item i : PASTE_SOLID_INGREDIENTS) {
 			if (!player.getInventory().containsItem(i)) {
 				return false;
 			}
+		}
+		// check if the player has a bucket or jug of water
+		if (!(player.getInventory().containsItem(BUCKET_OF_WATER) || player.getInventory().containsItem(JUG_OF_WATER))) {
+			return false;
 		}
 		return true;
 	}
