@@ -1,5 +1,6 @@
 package api
 
+import Cutscene
 import core.cache.def.impl.ItemDefinition
 import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
@@ -1438,4 +1439,12 @@ fun dumpContainer(player: Player, container: core.game.container.Container) {
 
 fun hasHouse(player: Player): Boolean {
     return player.houseManager.hasHouse()
+}
+
+fun Player.getCutscene(): Cutscene? {
+    return getAttribute<Cutscene?>(this, Cutscene.ATTRIBUTE_CUTSCENE, null)
+}
+
+fun Player.getCutsceneStage(): Int {
+    return getAttribute(this, Cutscene.ATTRIBUTE_CUTSCENE_STAGE, 0)
 }

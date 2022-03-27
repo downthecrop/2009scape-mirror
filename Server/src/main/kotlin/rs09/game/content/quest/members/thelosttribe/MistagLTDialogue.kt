@@ -1,7 +1,6 @@
 package rs09.game.content.quest.members.thelosttribe
 
 import core.game.component.Component
-import core.game.content.activity.ActivityManager
 import core.game.content.dialogue.FacialExpression
 import rs09.game.content.dialogue.DialogueFile
 import rs09.tools.END_DIALOGUE
@@ -45,7 +44,8 @@ class MistagLTDialogue(val isGreeting: Boolean, val questStage: Int) : DialogueF
                     3 -> npc("I will summon Ur-tag, our headman, at once.").also { stage++ }
                     4 -> {
                         end()
-                        ActivityManager.start(player,"Lost Tribe Cutscene",false)
+                        LostTribeCutscene(player!!).start()
+                        //ActivityManager.start(player,"Lost Tribe Cutscene",false)
                     }
                 }
             }
