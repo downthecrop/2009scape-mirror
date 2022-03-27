@@ -31,8 +31,8 @@ object CulinomancerShop {
         val tier = (points / 18)
         if(tier != getAttribute(player, "culino-tier", 0)) //If player tier has changed
         {
-            foodShops.remove(tier) //Clear the previous shops, so they can regenerate with the new tier
-            gearShops.remove(tier)
+            foodShops.remove(uid) //Clear the previous shops, so they can regenerate with the new tier
+            gearShops.remove(uid)
         }
         return if(food) {
             val shop = foodShops[uid] ?: Shop("Culinomancer's Chest Tier $tier", generateFoodStock(points),false)
