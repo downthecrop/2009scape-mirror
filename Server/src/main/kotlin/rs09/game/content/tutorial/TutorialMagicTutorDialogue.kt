@@ -102,11 +102,18 @@ class TutorialMagicTutorDialogue(player: Player? = null) : DialoguePlugin(player
                 }
 
                 10 -> {
-                    val mode = IronmanMode.values()[buttonId - 1]
-                    player.dialogueInterpreter.sendDialogue("You set your ironman mode to: ${mode.name}.")
-                    player.ironmanManager.mode = mode
-                    if(player.skills.experienceMutiplier == 10.0 && mode != IronmanMode.HARDCORE) player.skills.experienceMutiplier = 5.0
                     stage = 0
+                    if(buttonId < 5)
+                    {
+                        val mode = IronmanMode.values()[buttonId - 1]
+                        player.dialogueInterpreter.sendDialogue("You set your ironman mode to: ${mode.name}.")
+                        player.ironmanManager.mode = mode
+                        if (player.skills.experienceMutiplier == 10.0 && mode != IronmanMode.HARDCORE) player.skills.experienceMutiplier = 5.0
+                    }
+                    else
+                    {
+                        handle(interfaceId, 0)
+                    }
                 }
 
                 20 -> {
