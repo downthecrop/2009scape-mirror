@@ -1,6 +1,6 @@
 package core.game.interaction.item.withobject;
 
-import api.events.ResourceGatheredEvent;
+import api.events.ResourceProducedEvent;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.smithing.smelting.Bar;
@@ -9,6 +9,7 @@ import core.game.interaction.UseWithHandler;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.system.task.Pulse;
+import org.rs09.consts.Items;
 import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
@@ -40,7 +41,7 @@ public class TutorialFurnaceHandler extends UseWithHandler {
 					player.getInventory().remove(new Item(436, 1));
 					player.getInventory().add(Bar.BRONZE.getProduct());
 					player.getSkills().addExperience(Skills.SMITHING, Bar.BRONZE.getExperience());
-					player.dispatch(new ResourceGatheredEvent(Bar.BRONZE.getProduct().getId(), 1, player));
+					player.dispatch(new ResourceProducedEvent(Bar.BRONZE.getProduct().getId(), 1, player, Items.COPPER_ORE_436));
 					return true;
 				}
 
