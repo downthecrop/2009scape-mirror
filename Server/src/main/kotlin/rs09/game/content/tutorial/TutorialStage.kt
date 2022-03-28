@@ -11,7 +11,6 @@ import core.game.system.task.Pulse
 import core.game.world.map.Location
 import org.rs09.consts.Components
 import rs09.game.Event
-import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld.Pulser
 import rs09.game.world.GameWorld.settings
 import rs09.game.world.repository.Repository
@@ -31,7 +30,7 @@ object TutorialStage {
         {
             player.hook(Event.ButtonClicked, TutorialButtonReceiver)
             player.hook(Event.Interaction, TutorialInteractionReceiver)
-            player.hook(Event.ResourceGathered, TutorialResourceReceiver)
+            player.hook(Event.ResourceProduced, TutorialResourceReceiver)
             player.hook(Event.UsedWith, TutorialUseWithReceiver)
             player.hook(Event.FireLit, TutorialFireReceiver)
             player.hook(Event.NPCKilled, TutorialKillReceiver)

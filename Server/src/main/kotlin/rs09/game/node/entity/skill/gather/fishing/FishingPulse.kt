@@ -1,6 +1,6 @@
 package rs09.game.node.entity.skill.gather.fishing
 
-import api.events.ResourceGatheredEvent
+import api.events.ResourceProducedEvent
 import core.game.content.global.SkillingPets
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -113,7 +113,7 @@ class FishingPulse(player: Player?, npc: NPC, private val option: FishingOption?
                 if (player.skillTasks.hasTask()) {
                     updateSkillTask()
                 }
-                player.dispatch(ResourceGatheredEvent(fish!!.item.id, fish!!.item.amount, node!!))
+                player.dispatch(ResourceProducedEvent(fish!!.item.id, fish!!.item.amount, node!!))
                 SkillingPets.checkPetDrop(player, SkillingPets.HERON)
                 val item = fish!!.item
                 if (isActive(SkillcapePerks.GREAT_AIM, player) && RandomFunction.random(100) <= 5) {

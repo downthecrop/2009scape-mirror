@@ -1,7 +1,7 @@
 package rs09.game.node.entity.skill.gather.mining
 
 import api.*
-import api.events.ResourceGatheredEvent
+import api.events.ResourceProducedEvent
 import core.cache.def.impl.ItemDefinition
 import core.game.container.impl.EquipmentContainer
 import core.game.content.dialogue.FacialExpression
@@ -118,7 +118,7 @@ class MiningSkillPulse(private val player: Player, private val node: Node) : Pul
             reward = calculateReward(reward) // calculate rewards
             rewardAmount = calculateRewardAmount(reward) // calculate amount
 
-            player.dispatch(ResourceGatheredEvent(reward, rewardAmount, node))
+            player.dispatch(ResourceProducedEvent(reward, rewardAmount, node))
             SkillingPets.checkPetDrop(player, SkillingPets.GOLEM) // roll for pet
 
             //add experience
