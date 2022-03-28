@@ -1,8 +1,8 @@
 package rs09.game.content.activity.gnomecooking
 
 const val GC_BASE_ATTRIBUTE = "gnome_cooking"
-const val GC_TUT_PROG = "tutorial:stage"
-const val GC_TUT_FIN = "tutorial:complete"
+const val GC_TUT_PROG = "gnome-cooking:tutorial:stage"
+const val GC_TUT_FIN = "gnome-cooking:tutorial:complete"
 const val GC_JOB_ORDINAL = "job:job_ordinal"
 const val GC_JOB_COMPLETE = "job:job_complete"
 const val GC_HARD_JOB = "job:hard_job"

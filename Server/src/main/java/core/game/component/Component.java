@@ -84,11 +84,7 @@ public class Component {
 	 * @return {@code True} if the component can be closed.
 	 */
 	public boolean close(Player player) {
-		InterfaceListeners.runClose(player,this);
-		if (closeEvent != null && !closeEvent.close(player, this)) {
-			return false;
-		}
-		return true;
+		return (closeEvent == null || closeEvent.close(player, this)) && InterfaceListeners.runClose(player, this);
 	}
 
 	/**

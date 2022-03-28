@@ -55,7 +55,7 @@ object InterfaceListeners {
 
     @JvmStatic
     fun runClose(player: Player,component: Component): Boolean{
-        val method = getCloseListener(component.id) ?: return false
+        val method = getCloseListener(component.id) ?: return true
         return method.invoke(player,component)
     }
 

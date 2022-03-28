@@ -526,6 +526,26 @@ class MiscCommandSet : CommandSet(Command.Privilege.ADMIN){
 
             }
         }
+
+        define("confirmrules", Command.Privilege.STANDARD) { player, args ->
+            if(getAttribute(player,"rules:confirmed", false))
+                reject(player, "You have already confirmed the rules.")
+            if(args.size < 2)
+                reject(player, "Usage: ::confirmrules PIN")
+            val pin = args[1].toIntOrNull() ?: (-1).also{ reject(player, "Please enter a valid number.") }
+            if(pin == getAttribute(player, "rules:pin", -1))
+            {
+                player.setAttribute("/save:rules:confirmed", true)
+                player.interfaceManager.close()
+                sendDialogue(player, "Thank you!")
+                player.unlock()
+                player.removeAttribute("rules:pin")
+            }
+            else
+            {
+                sendDialogue(player, "Wrong pin. Try again.")
+            }
+        }
     }
 
     fun showGeBotsearch(player: Player, searchTerm: String)
