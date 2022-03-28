@@ -17,6 +17,7 @@ import rs09.game.interaction.InteractionListener
 import rs09.game.interaction.InterfaceListener
 import rs09.game.node.entity.skill.magic.SpellListener
 import rs09.game.system.SystemLogger
+import rs09.game.system.command.Command
 import rs09.game.world.GameWorld
 import java.util.*
 import java.util.function.Consumer
