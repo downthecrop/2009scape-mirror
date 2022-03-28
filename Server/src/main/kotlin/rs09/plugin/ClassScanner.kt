@@ -65,7 +65,7 @@ object ClassScanner {
     }
 
     fun load() {
-        val result = ClassGraph().enableClassInfo().enableAnnotationInfo().scan()
+        var result = ClassGraph().enableClassInfo().enableAnnotationInfo().scan()
         result.getClassesWithAnnotation("core.plugin.Initializable").forEach(Consumer { p: ClassInfo ->
             try {
                 definePlugin(p.loadClass().newInstance() as Plugin<Object>)
@@ -82,7 +82,7 @@ object ClassScanner {
             PlayerScripts.identifierMap[identifier] =
                 PlayerScripts.PlayerScript(identifier, description, name, res.loadClass())
         }
-        result.getClassesImplementing("api.StartupListener").filter { !it.isAbstract }.forEach {
+        result.getClassesImplementing("api.StartupListener").forEach {
             try {
                 val clazz = it.loadClass().newInstance() as StartupListener
                 GameWorld.startupListeners.add(clazz)
