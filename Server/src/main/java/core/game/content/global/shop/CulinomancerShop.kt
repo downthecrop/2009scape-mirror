@@ -11,7 +11,7 @@ import rs09.game.world.GameWorld
 import java.lang.Integer.min
 import kotlin.collections.HashMap
 
-object CulinomancerShop {
+object CulinomancerShop : LoginListener {
     // Our shop mappings - shops are individualized due to the differing items based on player's QP.
     // Maps player UID -> shop
     private val foodShops = HashMap<Int, Shop>()
@@ -123,10 +123,7 @@ object CulinomancerShop {
         Item(Items.EMPTY_CUP_1980, 1),
         Item(Items.BUCKET_1925, 1)
     )
-}
 
-class CulinoLoginHook : LoginListener
-{
     //Enable the chest if the player has 18 quest points or more
     override fun login(player: Player) {
         if(player.questRepository.points >= 18){
@@ -136,8 +133,8 @@ class CulinoLoginHook : LoginListener
             //Restock pulse for this player (yes, this means the chest will only restock if the player has logged in. Shop system needs work in order to do otherwise.)
             val restockPulse = object : Pulse(100){ //Run once a minute
                 override fun pulse(): Boolean {
-                    CulinomancerShop.getShop(player, false).restock()
-                    CulinomancerShop.getShop(player, true).restock()
+                    getShop(player, false).restock()
+                    getShop(player, true).restock()
                     return false
                 }
             }
