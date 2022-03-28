@@ -11,7 +11,7 @@ import rs09.game.world.GameWorld;
 import core.game.world.map.Location;
 import core.game.world.map.zone.ZoneBorders;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * The main type for the tourist trap quest.
@@ -116,7 +116,7 @@ public final class TouristTrap extends Quest {
 	
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugins(new TouristTrapPlugin(), new AnaDialogue(), new CaptainSiadDialogue(), new DesertGuardDialogue(), new IrenaDialogue(), new MaleSlaveDialogue(), new MercenaryCaptainDialogue(), new MercenaryDialogue(), new MinecartDriverDialogue(), new MineSlaveNPC(), new MiningCampZone(), new RowdySlaveNPC(), new AlShabimDialogue(), new BedabinNomadDialogue());
+		ClassScanner.definePlugins(new TouristTrapPlugin(), new AnaDialogue(), new CaptainSiadDialogue(), new DesertGuardDialogue(), new IrenaDialogue(), new MaleSlaveDialogue(), new MercenaryCaptainDialogue(), new MercenaryDialogue(), new MinecartDriverDialogue(), new MineSlaveNPC(), new MiningCampZone(), new RowdySlaveNPC(), new AlShabimDialogue(), new BedabinNomadDialogue());
 		return this;
 	}
 

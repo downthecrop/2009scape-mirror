@@ -1,5 +1,6 @@
 package core.game.ge;
 
+import api.StartupListener;
 import rs09.ServerConstants;
 import core.cache.def.impl.ItemDefinition;
 import rs09.game.system.SystemLogger;
@@ -23,7 +24,7 @@ import java.util.Map;
  * Represents the grand exchange database.
  * @author Ceikry
  */
-public final class GrandExchangeDatabase {
+public final class GrandExchangeDatabase implements StartupListener {
 
 	/**
 	 * The grand exchange database mapping.
@@ -51,10 +52,8 @@ public final class GrandExchangeDatabase {
 	 */
 	private static boolean initialized;
 
-	/**
-	 * Initializes the database
-	 */
-	public static void init() {
+	@Override
+	public void startup() {
 		try {
 			File db = new File(ServerConstants.GRAND_EXCHANGE_DATA_PATH + "gedb.xml");
 			if(!db.exists()){

@@ -5,7 +5,7 @@ import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the prince ali rescue quest.
@@ -49,7 +49,7 @@ public class PrinceAliRescue extends Quest {
 
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugins(new LadyKeliDialogue(), new LadyKeliNPC(), new PrinceAliRescuePlugin(), new WigDyePlugin());
+		ClassScanner.definePlugins(new LadyKeliDialogue(), new LadyKeliNPC(), new PrinceAliRescuePlugin(), new WigDyePlugin());
 		return this;
 	}
 

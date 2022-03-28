@@ -38,7 +38,7 @@ import core.tools.StringUtils;
 import kotlin.Unit;
 import rs09.game.content.global.travel.EssenceTeleport;
 import rs09.game.world.GameWorld;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the plugins used related to the wizard tower.
@@ -67,13 +67,13 @@ public final class WizardTowerPlugin extends OptionHandler {
 		SceneryDefinition.forId(32015).getHandlers().put("option:climb-up", this);
 		NPCDefinition.forId(300).getHandlers().put("option:teleport", this);
 		SceneryDefinition.forId(11993).getHandlers().put("option:open", this);
-		PluginManager.definePlugin(new WizardtowerWizardNPC());
-		PluginManager.definePlugin(new WizardTowerDialogue());
-		PluginManager.definePlugin(new WizardMizgogDialogue());
-		PluginManager.definePlugin(new WizardGrayzagDialogue());
-		PluginManager.definePlugin(new WizardDialogue());
-		PluginManager.definePlugin(new SedridorDialogue());
-		PluginManager.definePlugin(new AuburyDialoguePlugin());
+		ClassScanner.definePlugin(new WizardtowerWizardNPC());
+		ClassScanner.definePlugin(new WizardTowerDialogue());
+		ClassScanner.definePlugin(new WizardMizgogDialogue());
+		ClassScanner.definePlugin(new WizardGrayzagDialogue());
+		ClassScanner.definePlugin(new WizardDialogue());
+		ClassScanner.definePlugin(new SedridorDialogue());
+		ClassScanner.definePlugin(new AuburyDialoguePlugin());
 		return this;
 	}
 

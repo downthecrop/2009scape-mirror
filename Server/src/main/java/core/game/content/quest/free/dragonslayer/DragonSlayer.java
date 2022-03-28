@@ -15,7 +15,7 @@ import core.plugin.Initializable;
 import rs09.game.content.dialogue.region.lumbridge.DukeHoracioDialogue;
 import rs09.game.content.quest.free.dragonslayer.NedDialogue;
 import rs09.game.world.GameWorld;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the dragon slayer quest.
@@ -119,7 +119,7 @@ public final class DragonSlayer extends Quest {
 	
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugins(new CrandorMapPlugin(), new DragonSlayerPlugin(), new DSMagicDoorPlugin(), new DragonSlayerCutscene(), new MazeDemonNPC(), new MazeGhostNPC(), new MazeSkeletonNPC(), new MazeZombieNPC(), new MeldarMadNPC(), new WormbrainNPC(), new ZombieRatNPC(), new DSChestDialogue(), new GuildmasterDialogue(), new ElvargNPC(), new WormbrainDialogue(), new OziachDialogue(), new NedDialogue(), new DukeHoracioDialogue());
+		ClassScanner.definePlugins(new CrandorMapPlugin(), new DragonSlayerPlugin(), new DSMagicDoorPlugin(), new DragonSlayerCutscene(), new MazeDemonNPC(), new MazeGhostNPC(), new MazeSkeletonNPC(), new MazeZombieNPC(), new MeldarMadNPC(), new WormbrainNPC(), new ZombieRatNPC(), new DSChestDialogue(), new GuildmasterDialogue(), new ElvargNPC(), new WormbrainDialogue(), new OziachDialogue(), new NedDialogue(), new DukeHoracioDialogue());
 		return this;
 	}
 	

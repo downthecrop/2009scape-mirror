@@ -32,7 +32,7 @@ import core.plugin.Initializable;
 import core.tools.RandomFunction;
 import rs09.game.content.activity.barrows.RewardChest;
 import rs09.game.world.GameWorld;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 import static api.ContentAPIKt.getWorldTicks;
 
@@ -371,8 +371,8 @@ public final class BarrowsActivityPlugin extends ActivityPlugin {
 
 	@Override
 	public void configure() {
-		PluginManager.definePlugin(new TunnelEntranceDialogue());
-		PluginManager.definePlugin(BarrowsPuzzle.SHAPES);
+		ClassScanner.definePlugin(new TunnelEntranceDialogue());
+		ClassScanner.definePlugin(BarrowsPuzzle.SHAPES);
 		registerRegion(14231);
 		BarrowsCrypt.init();
 		PULSE.stop();

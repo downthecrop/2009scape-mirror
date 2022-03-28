@@ -16,7 +16,7 @@ import core.net.packet.PacketRepository;
 import core.net.packet.context.ContainerContext;
 import core.net.packet.out.ContainerPacket;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -33,12 +33,12 @@ public class ImpBoxPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new ImpInterfaceHandler(null));
+		ClassScanner.definePlugin(new ImpInterfaceHandler(null));
 		for (int id : IDS) {
 			ItemDefinition.forId(id).getHandlers().put("option:bank", this);
 			ItemDefinition.forId(id).getHandlers().put("option:talk-to", this);
 		}
-		PluginManager.definePlugin(new ImpBoxDialogue());
+		ClassScanner.definePlugin(new ImpBoxDialogue());
 		return this;
 	}
 

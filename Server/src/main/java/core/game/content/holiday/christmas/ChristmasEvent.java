@@ -40,7 +40,7 @@ import rs09.game.world.repository.Repository;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -101,7 +101,7 @@ public class ChristmasEvent extends HolidayEvent {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		if (isActive()) {
-			PluginManager.definePlugins(new ChristmasEventOptionPlugin(), new SnowmanItemHandler(), new SnowImpDialogue(), new SnowmanHatComponentPlugin(), new QueenOfSnowDialogue(), new SnowballItemPlugin(), new SnowmanNPC(), new PeltOptionHandler());
+			ClassScanner.definePlugins(new ChristmasEventOptionPlugin(), new SnowmanItemHandler(), new SnowImpDialogue(), new SnowmanHatComponentPlugin(), new QueenOfSnowDialogue(), new SnowballItemPlugin(), new SnowmanNPC(), new PeltOptionHandler());
 		}
 		return super.newInstance(arg);
 	}
@@ -417,7 +417,7 @@ public class ChristmasEvent extends HolidayEvent {
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
 			addHandler(28295, OBJECT_TYPE, this);
-			PluginManager.definePlugin(new SnowmanDialogue());
+			ClassScanner.definePlugin(new SnowmanDialogue());
 			return this;
 		}
 

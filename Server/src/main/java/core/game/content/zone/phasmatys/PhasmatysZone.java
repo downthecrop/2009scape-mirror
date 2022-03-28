@@ -22,7 +22,7 @@ import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the phasmatyz zone area.
@@ -48,13 +48,13 @@ public final class PhasmatysZone extends MapZone implements Plugin<Object> {
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         ZoneBuilder.configure(this);
-        PluginManager.definePlugin(new GravingasNPC());
-        PluginManager.definePlugin(new NecrovarusDialogue());
-        PluginManager.definePlugin(new GhostSailorDialogue());
-        PluginManager.definePlugin(new EctoplasmFillPlugin());
-        PluginManager.definePlugin(new GhostDiscipleDialogue());
-        PluginManager.definePlugin(new GhostVillagerDialogue());
-        PluginManager.definePlugin(new GhostInkeeperDialogue());
+        ClassScanner.definePlugin(new GravingasNPC());
+        ClassScanner.definePlugin(new NecrovarusDialogue());
+        ClassScanner.definePlugin(new GhostSailorDialogue());
+        ClassScanner.definePlugin(new EctoplasmFillPlugin());
+        ClassScanner.definePlugin(new GhostDiscipleDialogue());
+        ClassScanner.definePlugin(new GhostVillagerDialogue());
+        ClassScanner.definePlugin(new GhostInkeeperDialogue());
         return this;
     }
 

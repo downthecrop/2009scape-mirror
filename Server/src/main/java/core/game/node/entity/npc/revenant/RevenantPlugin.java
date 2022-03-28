@@ -7,7 +7,7 @@ import core.game.node.entity.npc.NPC;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -34,7 +34,7 @@ public class RevenantPlugin implements Plugin<Object> {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new RevenantNPC());
+		ClassScanner.definePlugin(new RevenantNPC());
 		//CorruptEquipment.init();
 		//PVPEquipment.init();
 		spawn();

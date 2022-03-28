@@ -12,7 +12,7 @@ import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 
 /**
@@ -59,7 +59,7 @@ public final class SinclairFlourBarrelPlugin extends OptionHandler {
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
         SceneryDefinition.forId(26122).getHandlers().put("option:take from", this);
-        PluginManager.definePlugin(new FlourHandler());
+        ClassScanner.definePlugin(new FlourHandler());
         return this;
     }
 

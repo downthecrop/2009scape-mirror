@@ -424,6 +424,7 @@ public class Player extends Entity {
 		if (force) {
 			Repository.getDisconnectionQueue().remove(getName());
 		}
+		GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
 		setPlaying(false);
 		getWalkingQueue().reset();
 		LogoutTask task = getExtension(LogoutTask.class);

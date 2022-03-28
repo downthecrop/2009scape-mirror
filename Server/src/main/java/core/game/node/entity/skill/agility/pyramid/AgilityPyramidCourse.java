@@ -17,7 +17,7 @@ import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the agility pryamid course.
@@ -93,8 +93,8 @@ public final class AgilityPyramidCourse extends AgilityCourse {
 		SceneryDefinition.forId(10858).getHandlers().put("option:climb-down", this);
 		SceneryDefinition.forId(10865).getHandlers().put("option:climb-over", this);
 		RollingBlock.BlockSets.values();
-		PluginManager.definePlugin(new MovingBlockNPC());
-		PluginManager.definePlugin(new AgilityPyramidZone());
+		ClassScanner.definePlugin(new MovingBlockNPC());
+		ClassScanner.definePlugin(new AgilityPyramidZone());
 	}
 
 	@Override

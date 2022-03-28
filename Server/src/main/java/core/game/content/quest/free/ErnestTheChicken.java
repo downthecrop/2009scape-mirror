@@ -7,7 +7,7 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the ernest the chicken quest.
@@ -45,7 +45,7 @@ public final class ErnestTheChicken extends Quest {
 
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugins(new ErnestNPC(), new ErnestChickenNPC());
+		ClassScanner.definePlugins(new ErnestNPC(), new ErnestChickenNPC());
 		return this;
 	}
 

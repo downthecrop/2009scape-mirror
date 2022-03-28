@@ -10,7 +10,7 @@ import core.game.world.map.Location
 import core.game.world.map.RegionManager
 import core.plugin.Initializable
 import core.plugin.Plugin
-import rs09.plugin.PluginManager
+import rs09.plugin.ClassScanner
 
 /**
  * Handles the Al-Kharid Warrior
@@ -28,7 +28,7 @@ class AlKharidWarriorNPC : AbstractNPC {
     }
 
     override fun newInstance(arg: Any?): Plugin<Any?> {
-        PluginManager.definePlugin(WarriorOptionPlugin())
+        ClassScanner.definePlugin(WarriorOptionPlugin())
         return super.newInstance(arg)
     }
 

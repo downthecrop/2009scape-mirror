@@ -6,7 +6,7 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * The what lies below quest.
@@ -100,7 +100,7 @@ public class WhatLiesBelow extends Quest {
 
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugin(new WLBelowPlugin());
+		ClassScanner.definePlugin(new WLBelowPlugin());
 		return this;
 	}
 	

@@ -13,7 +13,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import core.tools.StringUtils;
 import rs09.game.node.entity.state.newsys.states.IncubatorState;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the incubator.
@@ -24,7 +24,7 @@ public class IncubatorPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new IncubatorEggHandler());
+		ClassScanner.definePlugin(new IncubatorEggHandler());
 		SceneryDefinition.forId(28359).getHandlers().put("option:take-egg", this);
 		SceneryDefinition.forId(28359).getHandlers().put("option:inspect", this);
 		return this;

@@ -27,7 +27,7 @@ import core.game.system.task.Pulse;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Master plugin file for the Waterfall quest.
@@ -101,7 +101,7 @@ public final class WaterfallPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new WaterfallUseWithHandler());
+		ClassScanner.definePlugin(new WaterfallUseWithHandler());
 		NPCDefinition.forId(305).getHandlers().put("option:talk-to", this);
 		SceneryDefinition.forId(1987).getHandlers().put("option:board", this);
 		SceneryDefinition.forId(2020).getHandlers().put("option:climb", this);

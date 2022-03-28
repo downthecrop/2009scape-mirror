@@ -8,7 +8,7 @@ import core.game.node.entity.player.Player;
 import core.game.world.map.Location;
 import core.game.world.map.zone.ZoneBorders;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the fist of guthix activity.
@@ -50,9 +50,9 @@ public class FOGActivityPlugin extends ActivityPlugin {
 
 	@Override
 	public void configure() {
-		PluginManager.definePlugin(new FOGLobbyZone());
-		PluginManager.definePlugin(new FOGWaitingZone());
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new FOGLobbyZone());
+		ClassScanner.definePlugin(new FOGWaitingZone());
+		ClassScanner.definePlugin(new OptionHandler() {
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {
 				SceneryDefinition.forId(30204).getHandlers().put("option:enter", this);

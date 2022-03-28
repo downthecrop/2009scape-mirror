@@ -14,7 +14,7 @@ import rs09.game.world.GameWorld;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.plugin.Initializable;
 import core.tools.RandomFunction;
 
@@ -59,7 +59,7 @@ public class MacawNPC extends Forager {
 
 	@Override
 	public Plugin<Object> newInstance(Object object) throws Throwable {
-		PluginManager.definePlugin(new MacawDialogue());
+		ClassScanner.definePlugin(new MacawDialogue());
 		return super.newInstance(object);
 	}
 

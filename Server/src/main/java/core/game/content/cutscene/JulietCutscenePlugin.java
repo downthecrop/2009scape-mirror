@@ -14,7 +14,7 @@ import core.net.packet.context.CameraContext;
 import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the romeo and juliet cutscene plugin.
@@ -35,7 +35,7 @@ public final class JulietCutscenePlugin extends CutscenePlugin {
 	 */
 	public JulietCutscenePlugin() {
 		this(null);
-		PluginManager.definePlugin(new JulietDialogue());
+		ClassScanner.definePlugin(new JulietDialogue());
 	}
 
 	/**

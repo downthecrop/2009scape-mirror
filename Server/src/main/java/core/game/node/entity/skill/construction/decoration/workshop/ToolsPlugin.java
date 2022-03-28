@@ -12,7 +12,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -80,7 +80,7 @@ public class ToolsPlugin extends OptionHandler {
 		for (ToolStore t : ToolStore.values()) {
 			SceneryDefinition.forId(t.objectId).getHandlers().put("option:search", this);
 		}
-		PluginManager.definePlugin(new ToolDialogue());
+		ClassScanner.definePlugin(new ToolDialogue());
 		return this;
 	}
 

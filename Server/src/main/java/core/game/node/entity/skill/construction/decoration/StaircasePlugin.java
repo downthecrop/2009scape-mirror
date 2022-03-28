@@ -19,7 +19,7 @@ import core.plugin.Initializable;
 import core.plugin.Plugin;
 import rs09.game.node.entity.skill.construction.Hotspot;
 import rs09.game.world.GameWorld;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles construction staircases.
@@ -31,8 +31,8 @@ public final class StaircasePlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new BuildDialogue());
-		PluginManager.definePlugin(new ClimbPohLadder());
+		ClassScanner.definePlugin(new BuildDialogue());
+		ClassScanner.definePlugin(new ClimbPohLadder());
 		for (int i = 13497; i < 13507; i++) {
 			SceneryDefinition.forId(i).getHandlers().put("option:climb", this);
 			SceneryDefinition.forId(i).getHandlers().put("option:climb-up", this);

@@ -21,7 +21,7 @@ import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,11 +69,11 @@ public final class HunterPlugin extends OptionHandler {
 			SceneryDefinition.forId(trap.getFailed()).getHandlers().put("option:investigate", this);
 			SceneryDefinition.forId(trap.getNet()).getHandlers().put("option:investigate", this);
 		}
-		PluginManager.definePlugin(new HunterNPC());
-		PluginManager.definePlugin(new HunterNetPlugin());
-		PluginManager.definePlugin(new HunterItemPlugin());
-		PluginManager.definePlugin(new FalconryActivityPlugin());
-		PluginManager.definePlugin(new HuntingItemUseWithHandler());
+		ClassScanner.definePlugin(new HunterNPC());
+		ClassScanner.definePlugin(new HunterNetPlugin());
+		ClassScanner.definePlugin(new HunterItemPlugin());
+		ClassScanner.definePlugin(new FalconryActivityPlugin());
+		ClassScanner.definePlugin(new HuntingItemUseWithHandler());
 		return this;
 	}
 

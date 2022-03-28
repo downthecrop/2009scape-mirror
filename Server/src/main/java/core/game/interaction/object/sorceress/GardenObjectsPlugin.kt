@@ -1,17 +1,12 @@
 package core.game.interaction.`object`.sorceress
 
-import rs09.plugin.PluginManager.definePlugin
-import rs09.game.world.GameWorld.Pulser
 import core.plugin.Initializable
-import core.game.interaction.OptionHandler
 import core.plugin.Plugin
-import core.cache.def.impl.SceneryDefinition
 import core.game.component.Component
 import core.game.content.dialogue.DialoguePlugin
 import core.game.content.dialogue.FacialExpression
 import core.game.interaction.NodeUsageEvent
 import core.game.interaction.UseWithHandler
-import core.game.node.Node
 import core.game.node.scenery.Scenery
 import core.game.node.entity.npc.NPC
 import core.game.node.entity.player.Player
@@ -30,7 +25,7 @@ import core.net.packet.out.MinimapState
 import core.tools.RandomFunction
 import rs09.game.interaction.InteractionListener
 import rs09.game.world.GameWorld
-import rs09.plugin.PluginManager
+import rs09.plugin.ClassScanner
 
 
 class GardenObjectsPlugin : InteractionListener() {
@@ -44,7 +39,7 @@ class GardenObjectsPlugin : InteractionListener() {
     override fun defineListeners() {
         SqirkJuicePlugin().newInstance(null)
         SqirkMakingDialogue().init()
-        PluginManager.definePlugin(SorceressGardenObject())
+        ClassScanner.definePlugin(SorceressGardenObject())
 
         on(SQIRK_TREES, SCENERY, "pick-fruit"){player, node ->
             val def = SeasonDefinitions.forTreeId(node.id)

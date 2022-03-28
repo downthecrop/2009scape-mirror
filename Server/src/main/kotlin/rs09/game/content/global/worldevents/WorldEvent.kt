@@ -2,7 +2,7 @@ package rs09.game.content.global.worldevents
 
 import rs09.game.system.SystemLogger
 import core.plugin.Plugin
-import rs09.plugin.PluginManager
+import rs09.plugin.ClassScanner
 import java.util.*
 
 /**
@@ -57,7 +57,7 @@ open class WorldEvent(var name: String) {
 class PluginSet(vararg val plugins: Plugin<*>){
     val set = ArrayList(plugins.asList())
     fun initialize() {
-        PluginManager.definePlugins(*set.toTypedArray())
+        ClassScanner.definePlugins(*set.toTypedArray())
     }
     fun add(plugin: Plugin<*>){
         set.add(plugin)

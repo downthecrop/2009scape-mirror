@@ -5,7 +5,7 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.Item;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * The main type for the waterfall quest.
@@ -84,7 +84,7 @@ public class WaterFall extends Quest {
 
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugins(new AlmeraDialogue(), new BookOnBaxtorianPlugin(), new GolrieDialogue(), new HadleyDialogue(), new HudonDialogue(), new WaterfallPlugin(), new WaterfallTreeDialogue());
+		ClassScanner.definePlugins(new AlmeraDialogue(), new BookOnBaxtorianPlugin(), new GolrieDialogue(), new HadleyDialogue(), new HudonDialogue(), new WaterfallPlugin(), new WaterfallTreeDialogue());
 		return this;
 	}
 

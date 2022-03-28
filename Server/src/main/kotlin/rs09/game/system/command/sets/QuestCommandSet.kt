@@ -5,9 +5,10 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.QuestRepository
 import rs09.game.system.command.Command
 import core.plugin.Initializable
+import rs09.game.system.command.Privilege
 
 @Initializable
-class QuestCommandSet : CommandSet(Command.Privilege.ADMIN){
+class QuestCommandSet : CommandSet(Privilege.ADMIN){
     override fun defineCommands() {
         /**
          * Completes all quests
@@ -41,7 +42,7 @@ class QuestCommandSet : CommandSet(Command.Privilege.ADMIN){
         /**
          * Displays the currently implemented quests
          */
-        define("quests", Command.Privilege.STANDARD){ player, _ ->
+        define("quests", Privilege.STANDARD){ player, _ ->
             sendQuests(player)
         }
     }

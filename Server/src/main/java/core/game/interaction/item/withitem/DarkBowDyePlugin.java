@@ -6,7 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * The plugin used to dye a dark bow into a more <fashionable> one.
@@ -30,7 +30,7 @@ public final class DarkBowDyePlugin extends UseWithHandler {
 		addHandler(14797, ITEM_TYPE, this);
 		addHandler(14799, ITEM_TYPE, this);
 		addHandler(14801, ITEM_TYPE, this);
-		PluginManager.definePlugin(new DarkBowCleanPlugin());
+		ClassScanner.definePlugin(new DarkBowCleanPlugin());
 		return this;
 	}
 

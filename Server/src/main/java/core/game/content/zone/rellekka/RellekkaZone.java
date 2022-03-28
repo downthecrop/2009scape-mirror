@@ -12,7 +12,6 @@ import core.game.component.Component;
 import core.game.node.Node;
 import core.game.node.entity.Entity;
 import core.game.node.entity.impl.ForceMovement;
-import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
@@ -22,7 +21,7 @@ import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import rs09.game.world.GameWorld;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the rellekka zone.
@@ -41,9 +40,9 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		ZoneBuilder.configure(this);
-		PluginManager.definePlugin(new JarvaldDialogue());
-		PluginManager.definePlugins(new RellekaOptionHandler(), new MariaGunnarsDialogue());
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new JarvaldDialogue());
+		ClassScanner.definePlugins(new RellekaOptionHandler(), new MariaGunnarsDialogue());
+		ClassScanner.definePlugin(new OptionHandler() {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {

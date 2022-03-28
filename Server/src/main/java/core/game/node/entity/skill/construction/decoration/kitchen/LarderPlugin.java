@@ -9,7 +9,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.game.node.item.Item;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the interactions for the three Larders.
@@ -20,7 +20,7 @@ public final class LarderPlugin extends OptionHandler {
 
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
-		PluginManager.definePlugin(new LarderDialogue());
+		ClassScanner.definePlugin(new LarderDialogue());
 		SceneryDefinition.forId(13565).getHandlers().put("option:search", this);
 		SceneryDefinition.forId(13566).getHandlers().put("option:search", this);
 		SceneryDefinition.forId(13567).getHandlers().put("option:search", this);

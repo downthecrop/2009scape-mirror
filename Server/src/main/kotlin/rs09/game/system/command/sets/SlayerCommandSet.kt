@@ -3,9 +3,10 @@ package rs09.game.system.command.sets
 import core.game.node.entity.npc.NPC
 import core.plugin.Initializable
 import rs09.game.system.command.Command
+import rs09.game.system.command.Privilege
 
 @Initializable
-class SlayerCommandSet : CommandSet(Command.Privilege.ADMIN){
+class SlayerCommandSet : CommandSet(Privilege.ADMIN){
     override fun defineCommands() {
         /**
          * Finishes a player's slayer task (the correct way)

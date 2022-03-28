@@ -13,7 +13,7 @@ import core.game.node.item.Item;
 import core.game.world.map.Location;
 import core.game.world.map.RegionManager;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles shilo village interactions.
@@ -34,7 +34,7 @@ public final class ShiloVillagePlugin extends OptionHandler {
 		// travel.
 		SceneryDefinition.forId(2265).getHandlers().put("option:pay-fare", this);// cart
 		// travel.
-		PluginManager.definePlugin(new VillageCartDialogue());
+		ClassScanner.definePlugin(new VillageCartDialogue());
 		return this;
 	}
 

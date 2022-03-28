@@ -27,7 +27,7 @@ import core.game.world.map.Location;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.plugin.Initializable;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Handles the party room.
@@ -72,8 +72,8 @@ public final class PartyRoomPlugin extends OptionHandler {
 		SceneryDefinition.forId(OPEN_CHEST).getHandlers().put("option:deposit", this);
 		SceneryDefinition.forId(OPEN_CHEST).getHandlers().put("option:shut", this);
 		SceneryDefinition.forId(LEVER).getHandlers().put("option:pull", this);
-		PluginManager.definePlugin(new DepositInterfaceHandler());
-		PluginManager.definePlugin(new BalloonManager());
+		ClassScanner.definePlugin(new DepositInterfaceHandler());
+		ClassScanner.definePlugin(new BalloonManager());
 		return this;
 	}
 

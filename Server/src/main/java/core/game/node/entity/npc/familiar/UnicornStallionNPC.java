@@ -13,7 +13,7 @@ import core.game.node.entity.state.EntityState;
 import core.game.world.update.flag.context.Animation;
 import core.game.world.update.flag.context.Graphics;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the Unicorn Stallion familiar.
@@ -54,7 +54,7 @@ public class UnicornStallionNPC extends Familiar {
 
 	@Override
 	protected void configureFamiliar() {
-		PluginManager.definePlugin(new OptionHandler() {
+		ClassScanner.definePlugin(new OptionHandler() {
 
 			@Override
 			public Plugin<Object> newInstance(Object arg) throws Throwable {

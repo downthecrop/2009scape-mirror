@@ -9,7 +9,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the plugin to handle the crossing.
@@ -22,7 +22,7 @@ public final class WildernessDitchPlugin extends OptionHandler {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		SceneryDefinition.forId(23271).getHandlers().put("option:cross", this);
-		PluginManager.definePlugin(new WildernessInterfacePlugin());
+		ClassScanner.definePlugin(new WildernessInterfacePlugin());
 		return this;
 	}
 

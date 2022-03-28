@@ -16,7 +16,7 @@ import core.game.node.scenery.Scenery;
 import core.game.world.map.Location;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -169,8 +169,8 @@ public class WitchsHousePlugin extends OptionHandler {
 
     @Override
     public Plugin<Object> newInstance(Object arg) throws Throwable {
-        PluginManager.definePlugin(new WitchsHouseUseWithHandler());
-        PluginManager.definePlugin(new MouseNPC());
+        ClassScanner.definePlugin(new WitchsHouseUseWithHandler());
+        ClassScanner.definePlugin(new MouseNPC());
         SceneryDefinition.forId(2867).getHandlers().put("option:look-under", this);
         SceneryDefinition.forId(2861).getHandlers().put("option:open", this);
         SceneryDefinition.forId(2865).getHandlers().put("option:open", this);

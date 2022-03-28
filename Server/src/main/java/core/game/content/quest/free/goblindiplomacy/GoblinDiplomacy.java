@@ -6,7 +6,7 @@ import core.game.node.entity.player.Player;
 import core.game.node.entity.player.link.quest.Quest;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 
 /**
  * Represents the demon slayer quest.
@@ -50,7 +50,7 @@ public class GoblinDiplomacy extends Quest {
 	
 	@Override
 	public Quest newInstance(Object object) {
-		PluginManager.definePlugins(new GDiplomacyCutscene(), new GoblinDiplomacyPlugin(), new GrubfootDialogue());
+		ClassScanner.definePlugins(new GDiplomacyCutscene(), new GoblinDiplomacyPlugin(), new GrubfootDialogue());
 		return this;
 	}
 

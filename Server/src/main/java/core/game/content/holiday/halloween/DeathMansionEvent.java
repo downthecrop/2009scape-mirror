@@ -52,7 +52,7 @@ import core.net.packet.context.CameraContext;
 import core.net.packet.context.CameraContext.CameraType;
 import core.net.packet.out.CameraViewPacket;
 import core.plugin.Plugin;
-import rs09.plugin.PluginManager;
+import rs09.plugin.ClassScanner;
 import core.tools.RandomFunction;
 
 /**
@@ -147,7 +147,7 @@ public class DeathMansionEvent extends HolidayEvent {
 	@Override
 	public Plugin<Object> newInstance(Object arg) throws Throwable {
 		if (isActive()) {
-			PluginManager.definePlugins(new DarkPortalHandler(), new DeathPortalZone(), new GrimReaperDialogue(), new MuncherDialogue(), new MuncherNPC(), new GrimItemHandler());
+			ClassScanner.definePlugins(new DarkPortalHandler(), new DeathPortalZone(), new GrimReaperDialogue(), new MuncherDialogue(), new MuncherNPC(), new GrimItemHandler());
 		}
 		return super.newInstance(arg);
 	}
@@ -1477,7 +1477,7 @@ public class DeathMansionEvent extends HolidayEvent {
 
 		@Override
 		public Plugin<Object> newInstance(Object arg) throws Throwable {
-			PluginManager.definePlugin(new DarkPortalDialogue());
+			ClassScanner.definePlugin(new DarkPortalDialogue());
 			SceneryDefinition.forId(DEATH_PORTAL).getHandlers().put("option:enter", this);
 			return this;
 		}
