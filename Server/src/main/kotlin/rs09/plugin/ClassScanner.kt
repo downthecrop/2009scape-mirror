@@ -83,7 +83,7 @@ object ClassScanner {
             PlayerScripts.identifierMap[identifier] =
                 PlayerScripts.PlayerScript(identifier, description, name, res.loadClass())
         }
-        result.getClassesImplementing("api.StartupListener").forEach {
+        result.getClassesImplementing("api.StartupListener").filter { !it.isAbstract }.forEach {
             try {
                 val clazz = it.loadClass().newInstance() as StartupListener
                 GameWorld.startupListeners.add(clazz)
@@ -93,30 +93,17 @@ object ClassScanner {
                 e.printStackTrace()
             }
         }
-        result.getClassesImplementing("api.LoginListener").forEach {
+        result.getClassesImplementing("api.LoginListener").filter { !it.isAbstract }.forEach {
             val clazz = it.loadClass().newInstance() as LoginListener
             GameWorld.loginListeners.add(clazz)
         }
-        result.getClassesImplementing("api.LogoutListener").forEach {
+        result.getClassesImplementing("api.LogoutListener").filter { !it.isAbstract }.forEach {
             val clazz = it.loadClass().newInstance() as LogoutListener
             GameWorld.logoutListeners.add(clazz)
         }
-        result.getClassesImplementing("api.TickListener").forEach {
+        result.getClassesImplementing("api.TickListener").filter { !it.isAbstract }.forEach {
             val clazz = it.loadClass().newInstance() as TickListener
             GameWorld.tickListeners.add(clazz)
-        }
-        result.getSubclasses("rs09.game.interaction.InteractionListener").forEach {
-            val clazz = it.loadClass().newInstance() as InteractionListener
-            clazz.defineListeners()
-            clazz.defineDestinationOverrides()
-        }
-        result.getSubclasses("rs09.game.interaction.InterfaceListener").forEach {
-            val clazz = it.loadClass().newInstance() as InterfaceListener
-            clazz.defineListeners()
-        }
-        result.getSubclasses("rs09.game.node.entity.skill.magic.SpellListener").forEach {
-            val clazz = it.loadClass().newInstance() as SpellListener
-            clazz.defineListeners()
         }
     }
 

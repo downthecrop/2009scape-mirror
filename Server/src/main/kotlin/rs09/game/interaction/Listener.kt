@@ -1,5 +1,10 @@
 package rs09.game.interaction
 
-interface Listener {
+import api.StartupListener
+
+interface Listener : StartupListener {
     fun defineListeners()
+    override fun startup() {
+        defineListeners()
+    }
 }
