@@ -116,6 +116,9 @@ class ServerConstants {
 		@JvmField
 		var LOG_CUTSCENE = true
 
+		@JvmField
+		var RULES_AND_INFO_ENABLED = true
+
 		//location names for the ::to command.
 		val TELEPORT_DESTINATIONS = arrayOf(
 			arrayOf(Location.create(2974, 4383, 2), "corp", "corporal", "corporeal"),

@@ -16,6 +16,7 @@ import core.net.amsc.WorldCommunicator
 import core.plugin.Initializable
 import org.rs09.consts.Items
 import org.rs09.consts.NPCs
+import rs09.game.interaction.inter.RulesAndInfo
 import rs09.game.world.GameWorld
 import rs09.tools.END_DIALOGUE
 
@@ -147,7 +148,6 @@ class TutorialMagicTutorDialogue(player: Player? = null) : DialoguePlugin(player
                         "at any time, look for a signpost or use the Lumbridge Home Port Spell."
                     )
                     stage = 12
-                    player.unlock()
                     if(WorldCommunicator.isEnabled())
                         MSPacketRepository.sendInfoUpdate(player)
                     TutorialStage.removeHintIcon(player)
@@ -158,12 +158,12 @@ class TutorialMagicTutorDialogue(player: Player? = null) : DialoguePlugin(player
                     player.unhook(TutorialUseWithReceiver)
                     player.unhook(TutorialInteractionReceiver)
                     player.unhook(TutorialButtonReceiver)
+                    RulesAndInfo.openFor(player)
                 }
 
                 12 -> {
                     player.setAttribute("close_c_", true)
                     end()
-                    sendMessage(player, "Welcome to ${GameWorld.settings!!.name}.")
                 }
             }
         }
