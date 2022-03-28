@@ -1,5 +1,6 @@
 package core.game.interaction.object.dmc;
 
+import api.LogoutListener;
 import core.game.node.entity.combat.CombatStyle;
 import core.game.node.entity.combat.ImpactHandler.HitsplatType;
 import core.game.node.entity.impl.Projectile;
@@ -19,6 +20,7 @@ import core.game.world.map.zone.ZoneRestriction;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
 import core.tools.RandomFunction;
+import org.jetbrains.annotations.NotNull;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.world.GameWorld;
 
@@ -26,7 +28,7 @@ import rs09.game.world.GameWorld;
  * Handles a player's Dwarf Multi-cannon.
  * @author Emperor
  */
-public final class DMCHandler {
+public final class DMCHandler implements LogoutListener {
 
 	/**
 	 * The player.
@@ -265,19 +267,12 @@ public final class DMCHandler {
 	 */
 	public void configure(Scenery cannon) {
 		this.cannon = cannon;
-		player.removeExtension(LogoutTask.class);
-		player.getLogoutPlugins().add(logoutPlugin = new Plugin<Player>() {
-			@Override
-			public Plugin<Player> newInstance(Player arg) throws Throwable {
-				clear(false);
-				return this;
-			}
+	}
 
-			@Override
-			public Object fireEvent(String identifier, Object... args) {
-				return null;
-			}
-		});
+	@Override
+	public void logout(@NotNull Player player) {
+		if(player.getAttribute("dmc") != null)
+			clear(false);
 	}
 
 	/**
@@ -290,7 +285,6 @@ public final class DMCHandler {
 		}
 		SceneryBuilder.remove(cannon);
 		player.removeAttribute("dmc");
-		player.getLogoutPlugins().remove(logoutPlugin);
 		if (!pickup) {
 			player.getSavedData().getActivityData().setLostCannon(true);
 			return;

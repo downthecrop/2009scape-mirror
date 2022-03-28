@@ -49,7 +49,6 @@ class FishingTrawlerInteractionHandler : InteractionListener() {
             (ActivityManager.getActivity("fishing trawler") as FishingTrawlerActivity).removePlayer(player)
             val session: FishingTrawlerSession? = player.getAttribute("ft-session",null)
             session?.players?.remove(player)
-            player.logoutPlugins.clear()
             return@on true
         }
 
@@ -89,7 +88,6 @@ class FishingTrawlerInteractionHandler : InteractionListener() {
         on(BARREL_IDS,SCENERY,"climb-on"){ player, _ ->
             player.properties.teleportLocation = Location.create(2672, 3222, 0)
             player.dialogueInterpreter.sendDialogue("You climb onto the floating barrel and begin to kick your way to the","shore.","You make it to the shore tired and weary.")
-            player.logoutPlugins.clear()
             player.appearance.setDefaultAnimations()
             player.appearance.sync()
             return@on true
