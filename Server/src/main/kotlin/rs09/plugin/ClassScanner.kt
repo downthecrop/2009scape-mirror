@@ -65,7 +65,7 @@ object ClassScanner {
     }
 
     fun load() {
-        var result = ClassGraph().enableClassInfo().enableAnnotationInfo().scan()
+        val result = ClassGraph().enableClassInfo().enableAnnotationInfo().scan()
         result.getClassesWithAnnotation("core.plugin.Initializable").forEach(Consumer { p: ClassInfo ->
             try {
                 definePlugin(p.loadClass().newInstance() as Plugin<Object>)
