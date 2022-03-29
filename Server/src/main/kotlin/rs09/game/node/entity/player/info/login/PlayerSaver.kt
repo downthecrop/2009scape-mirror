@@ -56,7 +56,6 @@ class PlayerSaver (val player: Player){
         saveIronManData(saveFile)
         saveEmoteData(saveFile)
         saveStatManager(saveFile)
-        saveBrawlingGloves(saveFile)
         saveAttributes(saveFile)
         savePouches(saveFile)
         contentHooks.forEach { it.savePlayer(player, saveFile) }
@@ -123,19 +122,6 @@ class PlayerSaver (val player: Player){
                 attrs.add(attr)
             }
             root.put("attributes",attrs)
-        }
-    }
-
-    fun saveBrawlingGloves(root: JSONObject){
-        if(player.brawlingGlovesManager.GloveCharges.isNotEmpty()){
-            val brawlingGloves = JSONArray()
-            player.brawlingGlovesManager.GloveCharges.map {
-                val brawlingGlove = JSONObject()
-                brawlingGlove.put("gloveId",BrawlingGloves.forId(it.key).indicator.toString())
-                brawlingGlove.put("charges",it.value.toString())
-                brawlingGloves.add(brawlingGlove)
-            }
-            root.put("brawlingGloves",brawlingGloves)
         }
     }
 
