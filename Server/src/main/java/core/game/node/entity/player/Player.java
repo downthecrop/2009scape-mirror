@@ -8,7 +8,6 @@ import core.game.container.impl.EquipmentContainer;
 import core.game.container.impl.InventoryListener;
 import core.game.content.activity.pyramidplunder.PlunderObjectManager;
 import core.game.content.dialogue.DialogueInterpreter;
-import core.game.content.quest.miniquest.barcrawl.BarcrawlManager;
 import core.game.content.ttrail.TreasureTrailManager;
 import core.game.interaction.Interaction;
 import core.game.interaction.item.brawling_gloves.BrawlingGlovesManager;
@@ -287,11 +286,6 @@ public class Player extends Entity {
 	 * The house manager.
 	 */
 	private final HouseManager houseManager = new HouseManager();
-
-	/**
-	 * The barcrawl miniquest manager.
-	 */
-	private final BarcrawlManager barcrawlManager = new BarcrawlManager(this);
 
 	/**
 	 * The treasure trail manager.
@@ -1226,14 +1220,6 @@ public class Player extends Entity {
 	 */
 	public HouseManager getHouseManager() {
 		return houseManager;
-	}
-
-	/**
-	 * Gets the barcrawlManager.
-	 * @return The barcrawlManager.
-	 */
-	public BarcrawlManager getBarcrawlManager() {
-		return barcrawlManager;
 	}
 
 	/**

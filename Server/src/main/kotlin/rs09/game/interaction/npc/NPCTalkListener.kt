@@ -1,5 +1,6 @@
 package rs09.game.interaction.npc
 
+import core.game.content.quest.miniquest.barcrawl.BarcrawlManager
 import core.game.content.quest.miniquest.barcrawl.BarcrawlType
 import core.game.node.entity.npc.NPC
 import rs09.game.content.activity.gnomecooking.*
@@ -20,8 +21,8 @@ class NPCTalkListener : InteractionListener() {
 
         on(barCrawlNPCs, NPC, "talk-to", "talk"){player, node ->
             val type = BarcrawlType.forId(node.id)
-
-            if (player.barcrawlManager.isFinished || !player.barcrawlManager.isStarted || player.barcrawlManager.isCompleted(type!!.ordinal)) {
+            val instance = BarcrawlManager.getInstance(player)
+            if (instance.isFinished || !instance.isStarted || instance.isCompleted(type!!.ordinal)) {
                 player.dialogueInterpreter.open(node.id, node)
             } else {
                 player.dialogueInterpreter.open("barcrawl dialogue", node.id, type)
