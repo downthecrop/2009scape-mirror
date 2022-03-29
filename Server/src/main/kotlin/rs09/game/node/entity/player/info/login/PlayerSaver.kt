@@ -32,51 +32,38 @@ class PlayerSaver (val player: Player){
     companion object {
         val contentHooks = ArrayList<PersistPlayer>()
     }
-    private fun populate(): JSONObject = runBlocking{
+    private fun populate(): JSONObject {
         val saveFile = JSONObject()
-        val a = launch {
-            saveCoreData(saveFile)
-            saveSkills(saveFile)
-            saveSettings(saveFile)
-            saveQuests(saveFile)
-            saveAppearance(saveFile)
-            saveSpellbook(saveFile)
-            saveVarps(saveFile)
-        }
-        val b = launch {
-            saveGraveType(saveFile)
-            saveGrandExchangeData(saveFile)
-            saveSavedData(saveFile)
-            saveAutocast(saveFile)
-            saveFarming(saveFile)
-            saveConfigs(saveFile)
-            savePlayerMonitor(saveFile)
-        }
-        val c = launch {
-            saveMusicPlayer(saveFile)
-            saveFamiliarManager(saveFile)
-            saveBarCrawl(saveFile)
-            saveStateManager(saveFile)
-            saveAntiMacroHandler(saveFile)
-            saveTreasureTrails(saveFile)
-            saveBankPinData(saveFile)
-        }
-        val d = launch {
-            saveHouseData(saveFile)
-            saveAchievementData(saveFile)
-            saveIronManData(saveFile)
-            saveEmoteData(saveFile)
-            saveStatManager(saveFile)
-            saveBrawlingGloves(saveFile)
-            saveAttributes(saveFile)
-        }
-        a.join()
-        b.join()
-        c.join()
-        d.join()
+        saveCoreData(saveFile)
+        saveSkills(saveFile)
+        saveSettings(saveFile)
+        saveQuests(saveFile)
+        saveAppearance(saveFile)
+        saveSpellbook(saveFile)
+        saveVarps(saveFile)
+        saveGraveType(saveFile)
+        saveSavedData(saveFile)
+        saveAutocast(saveFile)
+        saveFarming(saveFile)
+        saveConfigs(saveFile)
+        savePlayerMonitor(saveFile)
+        saveMusicPlayer(saveFile)
+        saveFamiliarManager(saveFile)
+        saveBarCrawl(saveFile)
+        saveStateManager(saveFile)
+        saveAntiMacroHandler(saveFile)
+        saveTreasureTrails(saveFile)
+        saveBankPinData(saveFile)
+        saveHouseData(saveFile)
+        saveAchievementData(saveFile)
+        saveIronManData(saveFile)
+        saveEmoteData(saveFile)
+        saveStatManager(saveFile)
+        saveBrawlingGloves(saveFile)
+        saveAttributes(saveFile)
         savePouches(saveFile)
         contentHooks.forEach { it.savePlayer(player, saveFile) }
-        saveFile
+        return saveFile
     }
     fun save() = runBlocking {
         val manager = ScriptEngineManager()
@@ -633,36 +620,6 @@ class PlayerSaver (val player: Player){
         activityData.put("hardcoreDeath",player.savedData.activityData.hardcoreDeath)
         activityData.put("topGrabbed",player.savedData.activityData.isTopGrabbed)
         root.put("activityData",activityData)
-    }
-
-
-    fun saveGrandExchangeData(root: JSONObject){
-        val grandExchange = JSONObject()
-        if(player.exchangeRecords.hasActiveOffer()){
-            val offers = JSONArray()
-            player.exchangeRecords.offerRecords.map {
-                if(it != null){
-                    val offer = JSONObject()
-                    offer["index"] = it.slot.toString()
-                    offer["uid"] = it.uid.toString()
-                    offers.add(offer)
-                }
-            }
-            grandExchange["offers"] = offers
-        }
-        val history = JSONArray()
-        player.exchangeRecords.history.map {
-            if(it != null){
-                val historyEntry = JSONObject()
-                historyEntry["isSell"] = it.sell
-                historyEntry["itemId"] = it.itemID.toString()
-                historyEntry["totalCoinExchange"] = it.totalCoinExchange.toString()
-                historyEntry["completedAmount"] = it.completedAmount.toString()
-                history.add(historyEntry)
-            }
-        }
-        grandExchange["history"] = history
-        root["grand_exchange"] = grandExchange
     }
 
     fun saveGraveType(root: JSONObject){

@@ -8,6 +8,7 @@ import org.rs09.consts.Items;
 import org.rs09.consts.NPCs;
 import rs09.game.content.global.GlobalKillCounter;
 import rs09.game.interaction.InterfaceListener
+import rs09.game.node.entity.skill.slayer.SlayerManager
 import rs09.game.system.command.Command
 import rs09.game.system.command.Privilege
 import rs09.game.system.command.sets.CommandSet
@@ -42,7 +43,7 @@ fun sendStats(player: Player, other: Player, page: Int){
                     68 -> sendLine(player,"Medium Clues: ${other.treasureTrailManager.completedClues[1]}",i)
                     69 -> sendLine(player,"Hard Clues: ${other.treasureTrailManager.completedClues[2]}",i)
                     70 -> sendLine(player,SPACER,i)
-                    71 -> sendLine(player,"Slayer Tasks: ${other.slayer.flags.completedTasks}",i)
+                    71 -> sendLine(player,"Slayer Tasks: ${SlayerManager.getInstance(other).flags.completedTasks}",i)
                     72 -> sendLine(player,"Quest Points: ${other.questRepository.points}",i)
                     73 -> sendLine(player,"Ironman Mode: ${other.ironmanManager.mode.name.toLowerCase()}",i)
                     74 -> sendLine(player,"Deaths: ${other.getAttribute("$STATS_BASE:$STATS_DEATHS",0)}",i)

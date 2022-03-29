@@ -38,7 +38,6 @@ import core.game.node.entity.player.link.request.RequestManager;
 import core.game.node.entity.player.link.skillertasks.SkillerTasks;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.construction.HouseManager;
-import rs09.game.node.entity.skill.slayer.SlayerManager;
 import core.game.node.entity.skill.summoning.familiar.FamiliarManager;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
@@ -72,7 +71,6 @@ import org.rs09.consts.Items;
 import rs09.GlobalStats;
 import rs09.ServerConstants;
 import rs09.game.VarpManager;
-import rs09.game.content.ame.RandomEventManager;
 import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
@@ -219,11 +217,6 @@ public class Player extends Entity {
 	private final HintIconManager hintIconManager = new HintIconManager();
 
 	/**
-	 * The slayer manager.
-	 */
-	private final SlayerManager slayer = new SlayerManager(this);
-
-	/**
 	 * The quest repository.
 	 */
 	private QuestRepository questRepository = new QuestRepository(this);
@@ -242,11 +235,6 @@ public class Player extends Entity {
 	 * The grave stone manager.
 	 */
 	private final GraveManager graveManager = new GraveManager(this);
-
-	/**
-	 * The new grand exchange interface manager.
-	 */
-	public final GrandExchangeRecords exchangeRecords = new GrandExchangeRecords(this);
 
 	/**
 	 * The familiar manager.
@@ -400,16 +388,12 @@ public class Player extends Entity {
 	 * @param force If we should force removal, a player engaged in combat will otherwise remain active until out of combat.
 	 */
 	public void clear(boolean force) {
-		/*if (!force && allowRemoval()) {
-			Repository.getDisconnectionQueue().add(this, true);
-			return;
-		}*/
 		if (force) {
 			Repository.getDisconnectionQueue().remove(getName());
 		}
-		GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
 		setPlaying(false);
 		getWalkingQueue().reset();
+		GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
 		if(!logoutListeners.isEmpty()){
 			logoutListeners.forEach((key,method) -> method.invoke(this));
 		}
@@ -1129,14 +1113,6 @@ public class Player extends Entity {
 	}
 
 	/**
-	 * Gets the slayer.
-	 * @return The slayer.
-	 */
-	public SlayerManager getSlayer() {
-		return slayer;
-	}
-
-	/**
 	 * Checks if the player is artifical (AIPlayer).
 	 * @return {@code True} if so.
 	 */
@@ -1376,8 +1352,6 @@ public class Player extends Entity {
 	}
 
 	public BrawlingGlovesManager getBrawlingGlovesManager() { return brawlingGlovesManager;}
-
-	public GrandExchangeRecords getExchangeRecords() { return exchangeRecords; }
 
 	public boolean hasActiveState(String key){
 		State state = states.get(key);

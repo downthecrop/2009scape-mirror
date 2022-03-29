@@ -214,7 +214,7 @@ class GrandExchange : StartupListener {
                 offer.playerUID = player.details.uid
 
             offer.offerState = OfferState.REGISTERED
-            //player.exchangeRecords.update(offer)
+            //GrandExchangeRecords.getInstance(player).update(offer)
 
             if (offer.sell) {
                 Repository.sendNews(player.username + " just offered " + offer.amount + " " + getItemName(offer.itemID) + " on the GE.")
@@ -257,10 +257,10 @@ class GrandExchange : StartupListener {
 
             seller.update()
             val sellerPlayer = Repository.uid_map[seller.playerUID]
-            sellerPlayer?.exchangeRecords?.visualizeRecords()
+            GrandExchangeRecords.getInstance(sellerPlayer).visualizeRecords()
             buyer.update()
             val buyerPlayer = Repository.uid_map[buyer.playerUID]
-            buyerPlayer?.exchangeRecords?.visualizeRecords()
+            GrandExchangeRecords.getInstance(buyerPlayer).visualizeRecords()
         }
 
         fun getValidOffers(): List<GrandExchangeOffer>

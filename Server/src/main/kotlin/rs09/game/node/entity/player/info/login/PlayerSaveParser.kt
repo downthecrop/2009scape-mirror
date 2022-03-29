@@ -15,6 +15,7 @@ import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import rs09.ServerConstants
+import rs09.game.ge.GrandExchangeRecords
 import rs09.game.node.entity.skill.farming.CompostBins
 import rs09.game.node.entity.skill.farming.FarmingPatch
 import rs09.game.system.SystemLogger
@@ -49,43 +50,35 @@ class PlayerSaveParser(val player: Player) {
 
     fun parse() = GlobalScope.launch {
         if (read) {
-            launch {
-                parseCore()
-                parseAttributes()
-                parseSkills()
-                parseSettings()
-                parseQuests()
-                parseAppearance()
-                parseGrave()
-                parseVarps()
-                parseStates()
-            }
-            launch {
-                parseSpellbook()
-                parseGrandExchange()
-                parseSavedData()
-                parseAutocastSpell()
-                parseFarming()
-                parseConfigs()
-                parseMonitor()
-            }
-            launch {
-                parseMusic()
-                parseFamiliars()
-                parseBarCrawl()
-                parseAntiMacro()
-                parseTT()
-                parseBankPin()
-            }
-            launch {
-                parseHouse()
-                parseIronman()
-                parseEmoteManager()
-                parseStatistics()
-                parseBrawlingGloves()
-                parseAchievements()
-                parsePouches()
-            }
+            parseCore()
+            parseAttributes()
+            parseSkills()
+            parseSettings()
+            parseQuests()
+            parseAppearance()
+            parseGrave()
+            parseVarps()
+            parseStates()
+            parseSpellbook()
+            parseGrandExchange()
+            parseSavedData()
+            parseAutocastSpell()
+            parseFarming()
+            parseConfigs()
+            parseMonitor()
+            parseMusic()
+            parseFamiliars()
+            parseBarCrawl()
+            parseAntiMacro()
+            parseTT()
+            parseBankPin()
+            parseHouse()
+            parseIronman()
+            parseEmoteManager()
+            parseStatistics()
+            parseBrawlingGloves()
+            parseAchievements()
+            parsePouches()
             parsePouches()
             contentHooks.forEach{it.parsePlayer(player, saveFile!!)}
         }
@@ -308,7 +301,7 @@ class PlayerSaveParser(val player: Player) {
     fun parseGrandExchange() {
         val geData: Any? = saveFile!!["grand_exchange"]
         if (geData != null) {
-            player.exchangeRecords.parse(geData as JSONObject)
+            GrandExchangeRecords.getInstance(player).parse(geData as JSONObject)
         }
 
     }
