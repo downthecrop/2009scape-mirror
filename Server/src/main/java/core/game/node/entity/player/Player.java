@@ -287,11 +287,6 @@ public class Player extends Entity {
 	private final HouseManager houseManager = new HouseManager();
 
 	/**
-	 * The treasure trail manager.
-	 */
-	private final TreasureTrailManager treasureTrailManager = new TreasureTrailManager(this);
-
-	/**
 	 * The audio manager.
 	 */
 	private final AudioManager audioManager = new AudioManager(this);
@@ -1213,14 +1208,6 @@ public class Player extends Entity {
 	 */
 	public HouseManager getHouseManager() {
 		return houseManager;
-	}
-
-	/**
-	 * Gets the btreasureTrailManager.
-	 * @return the treasureTrailManager
-	 */
-	public TreasureTrailManager getTreasureTrailManager() {
-		return treasureTrailManager;
 	}
 
 	/**
