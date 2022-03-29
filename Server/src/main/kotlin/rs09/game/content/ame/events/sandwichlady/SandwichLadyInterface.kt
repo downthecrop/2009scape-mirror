@@ -31,7 +31,7 @@ class SandwichLadyInterface  : InterfaceListener(){
 
             player.setAttribute("sandwich-lady:choice",item.id)
             player.interfaceManager.close()
-            player.dialogueInterpreter.open(SandwichLadyDialogue(true),player.antiMacroHandler.event)
+            player.dialogueInterpreter.open(SandwichLadyDialogue(true),RandomEventManager.getInstance(player)!!.event)
             return@on true
         }
     }

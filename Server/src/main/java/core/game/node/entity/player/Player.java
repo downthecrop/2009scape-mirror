@@ -304,11 +304,6 @@ public class Player extends Entity {
 	private final BarcrawlManager barcrawlManager = new BarcrawlManager(this);
 
 	/**
-	 * The anti macro handler.
-	 */
-	private final RandomEventManager antiMacroHandler = new RandomEventManager(this);
-
-	/**
 	 * The hunter manager.
 	 */
 	private final HunterManager hunterManager = new HunterManager(this);
@@ -1267,14 +1262,6 @@ public class Player extends Entity {
 	 */
 	public BarcrawlManager getBarcrawlManager() {
 		return barcrawlManager;
-	}
-
-	/**
-	 * Gets the antiMacroHandler.
-	 * @return The antiMacroHandler.
-	 */
-	public RandomEventManager getAntiMacroHandler() {
-		return antiMacroHandler;
 	}
 
 	/**
