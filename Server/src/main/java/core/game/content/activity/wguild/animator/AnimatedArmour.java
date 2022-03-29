@@ -119,6 +119,7 @@ public final class AnimatedArmour extends NPC {
 				int amount = set.getTokenAmount();
 				GroundItemManager.create(new Item(8851, amount), location, player);
 			}
+			player.logoutListeners.remove("animation-room");
 			player.removeAttribute("animated_set");
 		}
 	}

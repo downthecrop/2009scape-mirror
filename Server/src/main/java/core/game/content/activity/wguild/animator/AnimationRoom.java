@@ -111,7 +111,7 @@ public final class AnimationRoom extends MapZone implements Plugin<Object> {
 	 */
 	private void animateArmour(final Player player, final Scenery object, final ArmourSet set) {
 		if (!player.getInventory().containItems(set.getPieces())) {
-			player.getDialogueInterpreter().sendDialogue("You need a plate body, playe legs and full helm of the same type to", "activate the armour animator.");
+			player.getDialogueInterpreter().sendDialogue("You need a plate body, plate legs and full helm of the same type to", "activate the armour animator.");
 			return;
 		}
 		if (player.getAttribute("animated_set") != null) {
@@ -148,7 +148,6 @@ public final class AnimationRoom extends MapZone implements Plugin<Object> {
 					ForceMovement.run(player, player.getLocation().transform(0, 1, 0)).setDirection(Direction.SOUTH);
 					return false;
 				}
-				player.logoutListeners.remove("animation-room");
 				player.getInterfaceManager().closeChatbox();
 				NPC npc = new AnimatedArmour(player, object.getLocation(), set);
 				player.setAttribute("animated_set", npc);
