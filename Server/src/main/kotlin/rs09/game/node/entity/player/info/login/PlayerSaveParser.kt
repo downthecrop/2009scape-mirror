@@ -71,7 +71,6 @@ class PlayerSaveParser(val player: Player) {
             parseMonitor()
             parseMusic()
             parseFamiliars()
-            parseTT()
             parseBankPin()
             parseHouse()
             parseIronman()
@@ -176,11 +175,6 @@ class PlayerSaveParser(val player: Player) {
     fun parseBankPin() {
         val bpData = saveFile!!["bankPinManager"] as JSONObject
         player.bankPinManager.parse(bpData)
-    }
-
-    fun parseTT() {
-        val ttData = saveFile!!["treasureTrails"] as JSONObject
-        player.treasureTrailManager.parse(ttData)
     }
 
     fun parseStates() {

@@ -49,7 +49,6 @@ class PlayerSaver (val player: Player){
         saveMusicPlayer(saveFile)
         saveFamiliarManager(saveFile)
         saveStateManager(saveFile)
-        saveTreasureTrails(saveFile)
         saveBankPinData(saveFile)
         saveHouseData(saveFile)
         saveAchievementData(saveFile)
@@ -249,23 +248,6 @@ class PlayerSaver (val player: Player){
             bankPinManager.put("tryDelay",player.bankPinManager.tryDelay.toString())
         }
         root.put("bankPinManager",bankPinManager)
-    }
-
-    fun saveTreasureTrails(root: JSONObject){
-        val treasureTrailManager = JSONObject()
-        if(player.treasureTrailManager.hasTrail()){
-            val trail = JSONObject()
-            trail.put("clueId",player.treasureTrailManager.clueId.toString())
-            trail.put("length",player.treasureTrailManager.trailLength.toString())
-            trail.put("stage",player.treasureTrailManager.trailStage.toString())
-            treasureTrailManager.put("trail",trail)
-        }
-        val completedClues = JSONArray()
-        player.treasureTrailManager.completedClues.map {
-            completedClues.add(it.toString())
-        }
-        treasureTrailManager.put("completedClues",completedClues)
-        root.put("treasureTrails",treasureTrailManager)
     }
 
     fun saveStateManager(root: JSONObject){
