@@ -1,8 +1,6 @@
 package core.game.content.zone.rellekka;
 
 import core.cache.def.impl.SceneryDefinition;
-import core.game.system.task.LocationLogoutTask;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
 import core.plugin.Initializable;
 import core.game.node.entity.skill.agility.AgilityHandler;
@@ -20,6 +18,7 @@ import core.game.world.map.zone.ZoneBorders;
 import core.game.world.map.zone.ZoneBuilder;
 import core.game.world.update.flag.context.Animation;
 import core.plugin.Plugin;
+import kotlin.Unit;
 import rs09.game.world.GameWorld;
 import rs09.plugin.ClassScanner;
 
@@ -114,7 +113,10 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 	public static void sail(final Player player, final String name, final Location destination) {
 		player.lock();
 		player.getInterfaceManager().open(new Component(224));
-		player.addExtension(LogoutTask.class, new LocationLogoutTask(5, destination));
+		player.logoutListeners.put("rellekka-sail", player1 -> {
+			player1.setLocation(destination);
+			return Unit.INSTANCE;
+		});
 		GameWorld.getPulser().submit(new Pulse(1, player) {
 			int count;
 
@@ -126,6 +128,7 @@ public final class RellekkaZone extends MapZone implements Plugin<Object> {
 					player.getInterfaceManager().close();
 					player.getProperties().setTeleportLocation(destination);
 					player.getDialogueInterpreter().sendDialogue("The ship arrives at " + name + ".");
+					player.logoutListeners.remove("rellekka-sail");
 					return true;
 				}
 				return false;

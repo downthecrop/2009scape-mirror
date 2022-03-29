@@ -11,7 +11,6 @@ import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 import core.game.node.scenery.Scenery;
 import core.game.node.scenery.SceneryBuilder;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -221,19 +220,6 @@ public final class DMCHandler implements LogoutListener {
 					}
 					return true;
 				}
-				player.addExtension(LogoutTask.class, new LogoutTask() {
-					int amount = count + 1;
-
-					@Override
-					public void run(Player player) {
-						for (int i = 0; i < amount; i++) {
-							player.getInventory().add(new Item(6 + (i * 2)));
-						}
-						if (object != null) {
-							SceneryBuilder.remove(object);
-						}
-					}
-				});
 				switch (count) {
 				case 0:
 					object = SceneryBuilder.add(new Scenery(7, spawn));

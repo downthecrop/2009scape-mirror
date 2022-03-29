@@ -4,10 +4,9 @@ import core.game.node.entity.skill.agility.AgilityHandler;
 import core.game.node.entity.Entity;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
-import core.game.system.task.LocationLogoutTask;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.MovementHook;
 import core.game.system.task.Pulse;
+import kotlin.Unit;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -30,7 +29,13 @@ public final class RollingBlock implements MovementHook {
 		final boolean fail = backwards || AgilityHandler.hasFailed(player, 2, 0.3);
 		player.lock(5);
 		AgilityPyramidCourse.addConfig(player, stone, 1, false);
-		e.addExtension(LogoutTask.class, new LocationLogoutTask(5, player.getLocation()));
+		if(e.isPlayer())
+		{
+			((Player) e).logoutListeners.put("rolling-block", p -> {
+				p.setLocation(e.getLocation().transform(0,0,0));
+				return Unit.INSTANCE;
+			});
+		}
 		if (fail) {
 			GameWorld.getPulser().submit(new Pulse(1, player) {
 				int counter;
@@ -49,6 +54,7 @@ public final class RollingBlock implements MovementHook {
 						break;
 					case 3:
 						AgilityPyramidCourse.addConfig(player, stone, 0, true);
+						player.logoutListeners.remove("rolling-block");
 						return true;
 					}
 					return false;

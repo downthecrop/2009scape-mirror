@@ -7,9 +7,8 @@ import core.game.node.Node;
 import core.game.node.entity.impl.ForceMovement;
 import core.game.node.entity.player.Player;
 import core.game.node.scenery.Scenery;
-import core.game.system.task.LocationLogoutTask;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
+import kotlin.Unit;
 import rs09.game.world.GameWorld;
 import core.game.world.map.Direction;
 import core.game.world.map.Location;
@@ -74,7 +73,10 @@ public class MonkeyBarShortcut extends AgilityShortcut {
 		final Location start = player.getLocation();
 		final Direction dir = direct;
 		ForceMovement.run(player, start.transform(dir), start.transform(dir.getStepX() << 1, dir.getStepY() << 1, 0), Animation.create(742), Animation.create(744));
-		player.addExtension(LogoutTask.class, new LocationLogoutTask(5, start));
+		player.logoutListeners.put("monkey-bar", p -> {
+			p.setLocation(start);
+			return Unit.INSTANCE;
+		});
 		GameWorld.getPulser().submit(new Pulse(2, player) {
 			int count;
 			boolean failed;
@@ -89,15 +91,16 @@ public class MonkeyBarShortcut extends AgilityShortcut {
 					}
 					setDelay(4);
 					AgilityHandler.walk(player, -1, player.getLocation().transform(dir), player.getLocation().transform(dir.getStepX() * 4, dir.getStepY() * 4, 0), Animation.create(662), 0.0, null);
-					player.addExtension(LogoutTask.class, new LocationLogoutTask(7, start));
 				} else if (count == 2) {
 					if (failed) {
 						player.getAppearance().setAnimations();
 						player.getAppearance().sync();
 						AgilityHandler.fail(player, 2, new Location(2599, 9564, 0), Animation.create(768), RandomFunction.random(1, 3), null);
+						player.logoutListeners.remove("monkey-bar");
 						return true;
 					}
 					AgilityHandler.forceWalk(player, -1, player.getLocation(), player.getLocation().transform(dir), Animation.create(743), 10, getExperience(), null);
+					player.logoutListeners.remove("monkey-bar");
 					return true;
 				}
 				return false;

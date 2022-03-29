@@ -13,8 +13,6 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.quest.Quest
 import core.game.node.entity.skill.Skills
 import core.game.node.item.Item
-import core.game.system.task.LocationLogoutTask
-import core.game.system.task.LogoutTask
 import core.game.system.task.Pulse
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
@@ -45,7 +43,7 @@ class GardenObjectsPlugin : InteractionListener() {
             val def = SeasonDefinitions.forTreeId(node.id)
             if (def != null) {
                 player.lock()
-                player.addExtension(LogoutTask::class.java, LocationLogoutTask(99, def.respawn))
+                player.logoutListeners["garden"] = {p -> p.location = def.respawn}
                 player.animate(PICK_FRUIT)
                 player.skills.addExperience(Skills.THIEVING, def.exp, true)
                 player.skills.addExperience(Skills.FARMING, def.farmExp, true)
@@ -58,7 +56,7 @@ class GardenObjectsPlugin : InteractionListener() {
                             PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 2))
                         } else if (counter == 3) player.properties.teleportLocation = def.respawn else if (counter == 4) {
                             player.unlock()
-                            player.removeExtension(LogoutTask::class.java)
+                            player.logoutListeners.remove("garden")
                             player.packetDispatch.sendMessage("An elemental force emanating from the garden teleports you away.")
                             PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 0))
                             player.interfaceManager.close()
@@ -132,7 +130,7 @@ class GardenObjectsPlugin : InteractionListener() {
      */
     private fun handleElementalGarden(player: Player, `object`: Scenery, herbDef: HerbDefinition) {
         player.lock()
-        player.addExtension(LogoutTask::class.java, LocationLogoutTask(99, herbDef.respawn))
+        player.logoutListeners["garden"] = {p -> p.location = herbDef.respawn}
         player.animate(ANIMATION)
         player.skills.addExperience(Skills.FARMING, herbDef.exp, true)
         GameWorld.Pulser.submit(object : Pulse(2, player) {
@@ -151,7 +149,7 @@ class GardenObjectsPlugin : InteractionListener() {
                     PacketRepository.send(MinimapState::class.java, MinimapStateContext(player, 0))
                     player.interfaceManager.close()
                     player.interfaceManager.closeOverlay()
-                    player.removeExtension(LogoutTask::class.java)
+                    player.logoutListeners.remove("garden")
                     player.unlock()
                     return true
                 }

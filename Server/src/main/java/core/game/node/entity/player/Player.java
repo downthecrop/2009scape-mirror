@@ -46,7 +46,6 @@ import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
 import core.game.system.communication.CommunicationInfo;
 import core.game.system.monitor.PlayerMonitor;
-import core.game.system.task.LogoutTask;
 import core.game.system.task.Pulse;
 import core.game.world.map.*;
 import core.game.world.map.build.DynamicRegion;
@@ -66,7 +65,6 @@ import core.net.packet.context.SkillContext;
 import core.net.packet.out.BuildDynamicScene;
 import core.net.packet.out.SkillLevel;
 import core.net.packet.out.UpdateSceneGraph;
-import core.plugin.Plugin;
 import core.tools.RandomFunction;
 import core.tools.StringUtils;
 import kotlin.Unit;
@@ -423,10 +421,6 @@ public class Player extends Entity {
 		GameWorld.getLogoutListeners().forEach((it) -> it.logout(this));
 		setPlaying(false);
 		getWalkingQueue().reset();
-		LogoutTask task = getExtension(LogoutTask.class);
-		if (task != null) {
-			task.fire(this);
-		}
 		if(!logoutListeners.isEmpty()){
 			logoutListeners.forEach((key,method) -> method.invoke(this));
 		}
