@@ -3,6 +3,7 @@ package core.game.node.entity.skill.hunter;
 import core.game.content.global.SkillingPets;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.Item;
 
 /**
@@ -63,7 +64,7 @@ public class TrapNode {
 		if (wrapper.isCaught() || wrapper.isBusy() || wrapper.isFailed()) {
 			return false;
 		}
-		return player.getHunterManager().getStaticLevel() >= level && !npc.isInvisible();
+		return player.skills.getStaticLevel(Skills.HUNTER) >= level && !npc.isInvisible();
 	}
 
 	/**

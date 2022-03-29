@@ -3,6 +3,7 @@ package core.game.node.entity.skill.hunter;
 import core.game.node.entity.skill.SkillPulse;
 import core.game.node.Node;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
@@ -37,6 +38,8 @@ public final class TrapCreatePulse extends SkillPulse<Node> {
 	 */
 	private int ticks;
 
+	private final HunterManager instance;
+
 	/**
 	 * Constructs a new {@code TrapCreatePulse} {@code Object}.
 	 * @param player the player.
@@ -47,15 +50,16 @@ public final class TrapCreatePulse extends SkillPulse<Node> {
 		super(player, node);
 		this.trap = trap;
 		this.startLocation = node instanceof GroundItem ? node.getLocation() : player.getLocation();
+		this.instance = HunterManager.getInstance(player);
 	}
 
 	@Override
 	public boolean checkRequirements() {
-		if (player.getHunterManager().getStaticLevel() < trap.getSettings().getLevel()) {
+		if (player.skills.getStaticLevel(Skills.HUNTER) < trap.getSettings().getLevel()) {
 			player.sendMessage("You need a Hunter level of at least " + trap.getSettings().getLevel() + " in order to setup a " + node.getName().toLowerCase() + ".");
 			return false;
 		}
-		if (player.getHunterManager().exceedsTrapLimit(trap)) {
+		if (instance.exceedsTrapLimit(trap)) {
 			player.sendMessage(trap.getSettings().getLimitMessage(player));
 			return false;
 		}
@@ -94,7 +98,7 @@ public final class TrapCreatePulse extends SkillPulse<Node> {
 			SceneryBuilder.remove(node.asScenery());
 		}
 		object = SceneryBuilder.add(object);
-		player.getHunterManager().register(trap, node, object);
+		instance.register(trap, node, object);
 		return true;
 	}
 

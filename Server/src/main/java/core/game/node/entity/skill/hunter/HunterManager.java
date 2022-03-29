@@ -49,7 +49,7 @@ public final class HunterManager implements LoginListener, LogoutListener, Event
 
 	@Override
 	public void logout(@NotNull Player player) {
-		HunterManager instance = player.getAttribute("hunter-manager");
+		HunterManager instance = getInstance(player);
 		Iterator<TrapWrapper> iterator = instance.traps.iterator();
 		TrapWrapper wrapper = null;
 		while (iterator.hasNext()) {
@@ -190,4 +190,8 @@ public final class HunterManager implements LoginListener, LogoutListener, Event
 		return traps;
 	}
 
+	public static HunterManager getInstance(Player player)
+	{
+		return player.getAttribute("hunter-manager");
+	}
 }
