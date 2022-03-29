@@ -432,7 +432,6 @@ public class Player extends Entity {
 		super.clear();
 		getZoneMonitor().clear();
 		CommunicationInfo.notifyPlayers(this, false, false);
-		hunterManager.logout();
 		HouseManager.leave(this);
 		UpdateSequence.getRenderablePlayers().remove(this);
 		Repository.getDisconnectionQueue().add(this);
@@ -480,7 +479,6 @@ public class Player extends Entity {
 	@Override
 	public void tick() {
 		super.tick();
-		antiMacroHandler.tick();
 		hunterManager.pulse();
 		musicPlayer.tick();
 		if(getAttribute("fire:immune",0) > 0){
