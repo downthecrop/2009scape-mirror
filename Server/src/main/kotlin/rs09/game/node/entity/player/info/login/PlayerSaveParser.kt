@@ -68,8 +68,6 @@ class PlayerSaveParser(val player: Player) {
             parseMonitor()
             parseMusic()
             parseFamiliars()
-            parseBarCrawl()
-            parseAntiMacro()
             parseTT()
             parseBankPin()
             parseHouse()
@@ -192,9 +190,6 @@ class PlayerSaveParser(val player: Player) {
         player.treasureTrailManager.parse(ttData)
     }
 
-    fun parseAntiMacro() {
-    }
-
     fun parseStates() {
         player.states.clear()
         SystemLogger.logErr("Parsing states")
@@ -210,11 +205,6 @@ class PlayerSaveParser(val player: Player) {
                 player.states.put(stateId,stateClass)
             }
         }
-    }
-
-    fun parseBarCrawl() {
-        val barCrawlData = saveFile!!["barCrawl"] as JSONObject
-        player.barcrawlManager.parse(barCrawlData)
     }
 
     fun parseFamiliars() {

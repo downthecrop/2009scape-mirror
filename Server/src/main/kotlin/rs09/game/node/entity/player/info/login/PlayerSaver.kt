@@ -44,14 +44,11 @@ class PlayerSaver (val player: Player){
         saveGraveType(saveFile)
         saveSavedData(saveFile)
         saveAutocast(saveFile)
-        saveFarming(saveFile)
         saveConfigs(saveFile)
         savePlayerMonitor(saveFile)
         saveMusicPlayer(saveFile)
         saveFamiliarManager(saveFile)
-        saveBarCrawl(saveFile)
         saveStateManager(saveFile)
-        saveAntiMacroHandler(saveFile)
         saveTreasureTrails(saveFile)
         saveBankPinData(saveFile)
         saveHouseData(saveFile)
@@ -285,16 +282,6 @@ class PlayerSaver (val player: Player){
         root.put("treasureTrails",treasureTrailManager)
     }
 
-    fun saveAntiMacroHandler(root: JSONObject){
-        /*if(RandomEventManager.getInstance(player)!!.isSaveRequired){
-            val antiMacroEvent = JSONObject()
-            if(RandomEventManager.getInstance(player)!!.hasEvent()){
-                antiMacroEvent.put("eventName",RandomEventManager.getInstance(player)!!.event.name)
-                root.put("antiMacroEvent",antiMacroEvent)
-            }
-        }*/
-    }
-
     fun saveStateManager(root: JSONObject){
         val states = JSONArray()
         player.states.forEach{key,clazz ->
@@ -306,17 +293,6 @@ class PlayerSaver (val player: Player){
             }
         }
         root.put("states",states)
-    }
-
-    fun saveBarCrawl(root: JSONObject){
-        val barCrawl = JSONObject()
-        barCrawl.put("started",player.barcrawlManager.isStarted)
-        val barsVisited = JSONArray()
-        player.barcrawlManager.bars.map {
-            barsVisited.add(it)
-        }
-        barCrawl.put("bars",barsVisited)
-        root.put("barCrawl",barCrawl)
     }
 
     fun saveFamiliarManager(root: JSONObject){
@@ -384,56 +360,6 @@ class PlayerSaver (val player: Player){
             idx++
         }
         root.put("configs",configs)
-    }
-
-    fun saveFarming(root: JSONObject){
-        /*val farming = JSONObject()
-        if(player.farmingManager.equipment.container.itemCount() != 0) {
-            val equipment = saveContainer(player.farmingManager.equipment.container)
-            farming.put("equipment",equipment)
-        }
-        if(player.farmingManager.compostManager.bins.size != 0){
-            val bins = JSONArray()
-            player.farmingManager.compostManager.bins.map { compostBin ->
-                val bin = JSONObject()
-                bin.put("wrapperId",compostBin.wrapperId.toString())
-                if(compostBin.timeStamp != 0L){
-                    bin.put("timeStamp",compostBin.timeStamp.toString())
-                }
-                if(compostBin.compostLevel > 0) {
-                    bin.put("compostLevel",compostBin.compostLevel.toString())
-                }
-                if(compostBin.container.itemCount() > 0) {
-                    val compostContainer = saveContainer(compostBin.container)
-                    bin.put("compostContainer", compostContainer)
-                }
-                bins.add(bin)
-            }
-            farming.put("bins",bins)
-            player.farmingManager.seedlingManager.save(farming)
-        }
-
-        if(player.farmingManager.patches.size != 0){
-            val wrappers = JSONArray()
-            player.farmingManager.patches.map {
-                val wrapper = JSONObject()
-                wrapper.put("wrapperId",it.wrapperId.toString())
-                if(player.farmingManager.amuletBoundWrapper == player.farmingManager.getPatchWrapper(it.wrapperId))
-                    farming.put("farmingAmuletWrapperID",it.wrapperId)
-                val cycle = JSONObject()
-                cycle.put("compostThreshold",it.cycle.compostThreshold.toString())
-                cycle.put("growthTime",it.cycle.growthTime.toString())
-                cycle.put("harvestAmount",it.cycle.harvestAmount.toString())
-                cycle.put("protection",it.cycle.isProtected)
-                wrapper.put("cycle",cycle)
-                if(it.node != null){
-                    wrapper.put("nodeId",it.patch.getNodePosition(it.node).toString())
-                }
-                wrappers.add(wrapper)
-            }
-            farming.put("wrappers",wrappers)
-        }
-        root.put("farming",farming)*/
     }
 
     fun saveAutocast(root: JSONObject){
