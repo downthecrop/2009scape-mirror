@@ -8,7 +8,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.player.link.emote.Emotes
 import core.game.node.item.Item
 import rs09.ServerStore
-import rs09.ServerStore.getInt
+import rs09.ServerStore.Companion.getInt
 import rs09.tools.END_DIALOGUE
 
 /**

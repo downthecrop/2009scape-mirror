@@ -1,7 +1,7 @@
 package rs09
 
 import org.json.simple.JSONObject
-import rs09.ServerStore.getInt
+import rs09.ServerStore.Companion.getInt
 
 object GlobalStats {
 

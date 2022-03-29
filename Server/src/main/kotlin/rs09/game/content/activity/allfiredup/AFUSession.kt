@@ -13,7 +13,7 @@ import rs09.tools.stringtools.colorize
  * Handles keeping track of lit beacons and their burn time remaining
  * @author Ceikry
  */
-class AFUSession(val player: Player) : LogoutListener {
+class AFUSession(val player: Player? = null) : LogoutListener {
     private val beaconTimers = Array(14){i -> BeaconTimer(0,AFUBeacon.values()[i])}
     private val logInventories = Array(14){Item(0,0)}
     private val beaconWatched = Array(14){false}
@@ -23,7 +23,7 @@ class AFUSession(val player: Player) : LogoutListener {
         isActive = true
         GameWorld.Pulser.submit(object: Pulse(){
             override fun pulse(): Boolean {
-                player.setAttribute("afu-pulse",this)
+                player!!.setAttribute("afu-pulse",this)
                 beaconTimers.forEach {timer ->
                     timer.ticks--
                     if(timer.ticks == 300) timer.beacon.diminish(player).also {
@@ -41,7 +41,7 @@ class AFUSession(val player: Player) : LogoutListener {
                 return !isActive
             }
         })
-        player.setAttribute("afu-session",this)
+        player!!.setAttribute("afu-session",this)
     }
 
     fun getLitBeacons(): Int{

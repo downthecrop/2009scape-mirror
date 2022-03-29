@@ -59,6 +59,10 @@ public final class DMCHandler implements LogoutListener {
 	 */
 	private Pulse decayPulse;
 
+	public DMCHandler() {
+		this.player = null;
+	}
+
 	/**
 	 * Constructs a new {@code DMCHandler} {@code Object}
 	 * @param player The player owning the cannon.
@@ -253,7 +257,10 @@ public final class DMCHandler implements LogoutListener {
 	@Override
 	public void logout(@NotNull Player player) {
 		if(player.getAttribute("dmc") != null)
-			clear(false);
+		{
+			DMCHandler handler = player.getAttribute("dmc");
+			handler.clear(false);
+		}
 	}
 
 	/**

@@ -37,12 +37,15 @@ private const val HOLE_NORTH_Y = 26
 private const val HOLE_SOUTH_Y = 23
 private const val LEAKING_ID = 2167
 private const val PATCHED_ID = 2168
-class FishingTrawlerSession(var region: DynamicRegion, val activity: FishingTrawlerActivity) : LogoutListener {
+
+class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : LogoutListener {
+    constructor(region: DynamicRegion, activity: FishingTrawlerActivity) : this(activity) {this.region = region; this.base = region.baseLocation}
     var players: ArrayList<Player> = ArrayList()
     var netRipped = false
     var fishAmount = 0
     var timeLeft = secondsToTicks(600)
-    var base = region.baseLocation
+    lateinit var region: DynamicRegion
+    lateinit var base: Location
     var isActive = false
     var boatSank = false
     var hole_locations = ArrayList<Location>()

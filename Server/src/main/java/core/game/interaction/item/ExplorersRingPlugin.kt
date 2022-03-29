@@ -17,8 +17,8 @@ import core.game.world.update.flag.context.Graphics
 import org.json.simple.JSONObject
 import org.rs09.consts.Items
 import rs09.ServerStore
-import rs09.ServerStore.getBoolean
-import rs09.ServerStore.getInt
+import rs09.ServerStore.Companion.getBoolean
+import rs09.ServerStore.Companion.getInt
 import rs09.game.interaction.InteractionListener
 
 /**
