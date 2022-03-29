@@ -295,10 +295,10 @@ class PlayerSaver (val player: Player){
     }
 
     fun saveAntiMacroHandler(root: JSONObject){
-        /*if(player.antiMacroHandler.isSaveRequired){
+        /*if(RandomEventManager.getInstance(player)!!.isSaveRequired){
             val antiMacroEvent = JSONObject()
-            if(player.antiMacroHandler.hasEvent()){
-                antiMacroEvent.put("eventName",player.antiMacroHandler.event.name)
+            if(RandomEventManager.getInstance(player)!!.hasEvent()){
+                antiMacroEvent.put("eventName",RandomEventManager.getInstance(player)!!.event.name)
                 root.put("antiMacroEvent",antiMacroEvent)
             }
         }*/

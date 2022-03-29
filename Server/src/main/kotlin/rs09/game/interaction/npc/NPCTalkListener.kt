@@ -3,6 +3,7 @@ package rs09.game.interaction.npc
 import core.game.content.quest.miniquest.barcrawl.BarcrawlType
 import core.game.node.entity.npc.NPC
 import rs09.game.content.activity.gnomecooking.*
+import rs09.game.content.ame.RandomEventManager
 import rs09.game.content.ame.RandomEvents
 import rs09.game.interaction.InteractionListener
 import rs09.game.system.SystemLogger
@@ -31,10 +32,10 @@ class NPCTalkListener : InteractionListener() {
         on(NPC,"talk-to","talk","talk to"){player,node ->
             val npc = node.asNpc()
             if(RandomEvents.randomIDs.contains(node.id)){
-                if(player.antiMacroHandler.event == null || player.antiMacroHandler.event!!.id != node.id){
+                if(RandomEventManager.getInstance(player)!!.event == null || RandomEventManager.getInstance(player)!!.event!!.id != node.id){
                     player.sendMessage("They aren't interested in talking to you.")
                 } else {
-                    player.antiMacroHandler.event!!.talkTo(node.asNpc())
+                    RandomEventManager.getInstance(player)!!.event!!.talkTo(node.asNpc())
                 }
                 return@on true
             }

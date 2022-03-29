@@ -223,7 +223,6 @@ public final class LoginConfiguration {
         player.getExchangeRecords().init();
         player.getPacketDispatch().sendString("Friends List - World " + GameWorld.getSettings().getWorldId(), 550, 3);
         player.getConfigManager().init();
-        player.getAntiMacroHandler().init();
         player.getQuestRepository().syncronizeTab(player);
         player.getGraveManager().update();
         player.getInterfaceManager().close();
