@@ -45,11 +45,6 @@ public final class DMCHandler implements LogoutListener {
 	private int cannonballs;
 
 	/**
-	 * The logout plugin.
-	 */
-	private Plugin<Player> logoutPlugin;
-
-	/**
 	 * The firing pulse.
 	 */
 	private Pulse firingPulse;
