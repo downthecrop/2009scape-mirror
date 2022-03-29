@@ -1,5 +1,6 @@
 package rs09.game.node.entity.player.info.login
 
+import api.PersistPlayer
 import core.game.interaction.item.brawling_gloves.BrawlingGloves
 import core.game.node.entity.combat.CombatSpell
 import core.game.node.entity.player.Player
@@ -27,6 +28,9 @@ import java.util.*
  * @param player: The player we are parsing.
  */
 class PlayerSaveParser(val player: Player) {
+    companion object {
+        val contentHooks = ArrayList<PersistPlayer>()
+    }
     var parser = JSONParser()
     var reader: FileReader? = FileReader(ServerConstants.PLAYER_SAVE_PATH + player.name + ".json")
     var saveFile: JSONObject? = null
@@ -50,7 +54,6 @@ class PlayerSaveParser(val player: Player) {
                 parseAttributes()
                 parseSkills()
                 parseSettings()
-                parseSlayer()
                 parseQuests()
                 parseAppearance()
                 parseGrave()
@@ -84,6 +87,7 @@ class PlayerSaveParser(val player: Player) {
                 parsePouches()
             }
             parsePouches()
+            contentHooks.forEach{it.parsePlayer(player, saveFile!!)}
         }
     }
 
@@ -330,12 +334,6 @@ class PlayerSaveParser(val player: Player) {
         saveFile ?: return
         val questData = saveFile!!["quests"] as JSONObject
         player.questRepository.parse(questData)
-    }
-
-    fun parseSlayer() {
-        saveFile ?: return
-        val slayerData = saveFile!!["slayer"] as JSONObject
-        player.slayer.parse(slayerData)
     }
 
     fun parseCore() {

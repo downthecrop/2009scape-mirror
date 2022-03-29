@@ -1,5 +1,6 @@
 package rs09.game.node.entity.player.info.login
 
+import api.PersistPlayer
 import core.game.container.Container
 import core.game.interaction.item.brawling_gloves.BrawlingGloves
 import core.game.node.entity.player.Player
@@ -28,13 +29,15 @@ import javax.script.ScriptEngineManager
  * @author Ceikry
  */
 class PlayerSaver (val player: Player){
+    companion object {
+        val contentHooks = ArrayList<PersistPlayer>()
+    }
     private fun populate(): JSONObject = runBlocking{
         val saveFile = JSONObject()
         val a = launch {
             saveCoreData(saveFile)
             saveSkills(saveFile)
             saveSettings(saveFile)
-            saveSlayer(saveFile)
             saveQuests(saveFile)
             saveAppearance(saveFile)
             saveSpellbook(saveFile)
@@ -72,6 +75,7 @@ class PlayerSaver (val player: Player){
         c.join()
         d.join()
         savePouches(saveFile)
+        contentHooks.forEach { it.savePlayer(player, saveFile) }
         saveFile
     }
     fun save() = runBlocking {
@@ -695,24 +699,6 @@ class PlayerSaver (val player: Player){
         }
         quests.put("questStages",questStages)
         root.put("quests",quests)
-    }
-
-    fun saveSlayer(root: JSONObject){
-        val slayer = JSONObject()
-        val slayerManager = player.slayer
-        if(slayerManager.removed.isNotEmpty()) {
-            val removedTasks = JSONArray()
-            slayerManager.removed.map {
-                removedTasks.add(it.ordinal.toString())
-            }
-            slayer.put("removedTasks",removedTasks)
-        }
-        slayer.put("taskStreak",slayerManager.flags.taskStreak.toString())
-        slayer.put("totalTasks",slayerManager.flags.completedTasks.toString())
-        slayer.put("equipmentFlags",slayerManager.flags.equipmentFlags)
-        slayer.put("taskFlags", slayerManager.flags.taskFlags)
-        slayer.put("rewardFlags", slayerManager.flags.rewardFlags)
-        root.put("slayer",slayer)
     }
 
     fun saveSettings(root: JSONObject){
