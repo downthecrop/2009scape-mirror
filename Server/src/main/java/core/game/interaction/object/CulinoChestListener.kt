@@ -24,7 +24,7 @@ class CulinoChestListener : InteractionListener() {
 
     override fun defineListeners() {
         on(CULINO_CHEST, SCENERY, "buy-items","buy-food"){player, _ ->
-            openShop(player, food = getUsedOption(player) == "buy-food")
+            openShop(player, food = getUsedOption(player).toLowerCase() == "buy-food")
             return@on true
         }
 
