@@ -19,19 +19,10 @@ public final class PlayerParser {
 	 * @param player The player.
 	 */
 	public static PlayerSaveParser parse(Player player) {
-		File JSON = new File(ServerConstants.PLAYER_SAVE_PATH + player.getName() + ".json");
 		PlayerSaveParser parser = new PlayerSaveParser(player);
 
 		try {
-			if (JSON.exists()) { //parse the new JSON type.
-				parser.parse();
-			} else { //Create new save
-				if(!(new File(ServerConstants.PLAYER_SAVE_PATH + "template/template.json")).exists()){
-					return parser;
-				}
-				makeFromTemplate(player);
-				parser.parse();
-			}
+			parser.parse();
 			return parser;
 		} catch (Exception e){
 			e.printStackTrace();

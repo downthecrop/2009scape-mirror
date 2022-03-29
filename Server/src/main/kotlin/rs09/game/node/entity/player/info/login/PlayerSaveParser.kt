@@ -1,6 +1,5 @@
 package rs09.game.node.entity.player.info.login
 
-import api.LoginListener
 import api.PersistPlayer
 import core.game.interaction.item.brawling_gloves.BrawlingGloves
 import core.game.node.entity.combat.CombatSpell
@@ -16,11 +15,11 @@ import org.json.simple.JSONArray
 import org.json.simple.JSONObject
 import org.json.simple.parser.JSONParser
 import rs09.ServerConstants
-import rs09.game.ge.GrandExchangeRecords
 import rs09.game.node.entity.skill.farming.CompostBins
 import rs09.game.node.entity.skill.farming.FarmingPatch
 import rs09.game.system.SystemLogger
 import rs09.game.world.GameWorld
+import java.io.File
 import java.io.FileReader
 import java.util.*
 
@@ -34,7 +33,7 @@ class PlayerSaveParser(val player: Player) {
         val contentHooks = ArrayList<PersistPlayer>()
     }
     var parser = JSONParser()
-    var reader: FileReader? = FileReader(ServerConstants.PLAYER_SAVE_PATH + player.name + ".json")
+    var reader: FileReader? = null
     var saveFile: JSONObject? = null
     var read = true
 
@@ -42,8 +41,12 @@ class PlayerSaveParser(val player: Player) {
     val bin_varps = CompostBins.values().map { it.varpIndex }.toIntArray()
 
     init {
-        reader
-                ?: SystemLogger.logWarn("Couldn't find save file for ${player.name}, or save is corrupted.").also { read = false }
+        val JSON = File(ServerConstants.PLAYER_SAVE_PATH + player.name + ".json")
+        if(JSON.exists())
+        {
+            reader = FileReader(JSON)
+        }
+        reader ?: SystemLogger.logWarn("Couldn't find save file for ${player.name}, or save is corrupted.").also { read = false }
         if (read) {
             saveFile = parser.parse(reader) as JSONObject
         }
@@ -83,7 +86,8 @@ class PlayerSaveParser(val player: Player) {
 
     fun runContentHooks()
     {
-        contentHooks.forEach{it.parsePlayer(player, saveFile!!)}
+        if(read)
+            contentHooks.forEach{it.parsePlayer(player, saveFile!!)}
     }
 
     fun parseVarps(){
