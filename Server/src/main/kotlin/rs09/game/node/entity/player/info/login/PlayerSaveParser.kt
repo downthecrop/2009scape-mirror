@@ -1,5 +1,6 @@
 package rs09.game.node.entity.player.info.login
 
+import api.LoginListener
 import api.PersistPlayer
 import core.game.interaction.item.brawling_gloves.BrawlingGloves
 import core.game.node.entity.combat.CombatSpell
@@ -60,7 +61,6 @@ class PlayerSaveParser(val player: Player) {
             parseVarps()
             parseStates()
             parseSpellbook()
-            parseGrandExchange()
             parseSavedData()
             parseAutocastSpell()
             parseFarming()
@@ -80,8 +80,12 @@ class PlayerSaveParser(val player: Player) {
             parseAchievements()
             parsePouches()
             parsePouches()
-            contentHooks.forEach{it.parsePlayer(player, saveFile!!)}
         }
+    }
+
+    fun runContentHooks()
+    {
+        contentHooks.forEach{it.parsePlayer(player, saveFile!!)}
     }
 
     fun parseVarps(){
@@ -296,14 +300,6 @@ class PlayerSaveParser(val player: Player) {
         player.savedData.activityData.parse(activityData)
         player.savedData.questData.parse(questData)
         player.savedData.globalData.parse(globalData)
-    }
-
-    fun parseGrandExchange() {
-        val geData: Any? = saveFile!!["grand_exchange"]
-        if (geData != null) {
-            GrandExchangeRecords.getInstance(player).parse(geData as JSONObject)
-        }
-
     }
 
     fun parseSpellbook() {
