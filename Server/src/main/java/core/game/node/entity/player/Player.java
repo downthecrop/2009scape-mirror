@@ -38,7 +38,6 @@ import core.game.node.entity.player.link.request.RequestManager;
 import core.game.node.entity.player.link.skillertasks.SkillerTasks;
 import core.game.node.entity.skill.Skills;
 import core.game.node.entity.skill.construction.HouseManager;
-import core.game.node.entity.skill.hunter.HunterManager;
 import rs09.game.node.entity.skill.slayer.SlayerManager;
 import core.game.node.entity.skill.summoning.familiar.FamiliarManager;
 import core.game.node.item.GroundItem;
@@ -304,11 +303,6 @@ public class Player extends Entity {
 	private final BarcrawlManager barcrawlManager = new BarcrawlManager(this);
 
 	/**
-	 * The hunter manager.
-	 */
-	private final HunterManager hunterManager = new HunterManager(this);
-
-	/**
 	 * The treasure trail manager.
 	 */
 	private final TreasureTrailManager treasureTrailManager = new TreasureTrailManager(this);
@@ -474,7 +468,6 @@ public class Player extends Entity {
 	@Override
 	public void tick() {
 		super.tick();
-		hunterManager.pulse();
 		musicPlayer.tick();
 		if(getAttribute("fire:immune",0) > 0){
 			int time = getAttribute("fire:immune",0) - GameWorld.getTicks();
@@ -1262,14 +1255,6 @@ public class Player extends Entity {
 	 */
 	public BarcrawlManager getBarcrawlManager() {
 		return barcrawlManager;
-	}
-
-	/**
-	 * Gets the hunterManager.
-	 * @return The hunterManager.
-	 */
-	public HunterManager getHunterManager() {
-		return hunterManager;
 	}
 
 	/**

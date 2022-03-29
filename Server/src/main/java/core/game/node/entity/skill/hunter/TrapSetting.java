@@ -5,6 +5,7 @@ import core.cache.def.impl.SceneryDefinition;
 import core.game.node.Node;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.game.node.entity.skill.Skills;
 import core.game.node.item.GroundItem;
 import core.game.node.item.GroundItemManager;
 import core.game.node.item.Item;
@@ -232,11 +233,12 @@ public class TrapSetting {
 	 * @param object the object.
 	 */
 	public void investigate(Player player, Scenery object) {
-		if (!player.getHunterManager().isOwner(object)) {
+		HunterManager instance = HunterManager.getInstance(player);
+		if (!instance.isOwner(object)) {
 			player.sendMessage("This isn't your trap.");
 			return;
 		}
-		TrapWrapper wrapper = player.getHunterManager().getWrapper(object);
+		TrapWrapper wrapper = instance.getWrapper(object);
 		player.sendMessage("This trap " + (wrapper.isSmoked() ? "has" : "hasn't") + " been smoked.");
 	}
 
@@ -322,7 +324,7 @@ public class TrapSetting {
 	 * @return {@code True} if so.
 	 */
 	public boolean isSuccess(Player player, final TrapNode node) {
-		double level = player.getHunterManager().getStaticLevel();
+		double level = player.skills.getStaticLevel(Skills.HUNTER);
 		double req = node.getLevel();
 		double successChance = Math.ceil((level * 50 - req * 17) / req / 3 * 4);
 		int roll = RandomFunction.random(99);
@@ -474,7 +476,8 @@ public class TrapSetting {
 	 * @return the message.
 	 */
 	public String getLimitMessage(Player player) {
-		return "You don't have a high enough Hunter level to set up more than " + player.getHunterManager().getMaximumTraps() + " trap" + (player.getHunterManager().getMaximumTraps() == 1 ? "." : "s.");
+		HunterManager instance = HunterManager.getInstance(player);
+		return "You don't have a high enough Hunter level to set up more than " + instance.getMaximumTraps() + " trap" + (instance.getMaximumTraps() == 1 ? "." : "s.");
 	}
 
 	/**
