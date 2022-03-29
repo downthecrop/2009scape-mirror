@@ -29,47 +29,47 @@ object SlayerEquipmentFlags {
 
         if((getItemFromEquipment(player, EquipmentSlot.AMULET)?.id ?: 0) == Items.WITCHWOOD_ICON_8923) flags = flags or (1 shl 7)
         if((getItemFromEquipment(player, EquipmentSlot.SHIELD)?.id ?: 0) == Items.MIRROR_SHIELD_4156) flags = flags or (1 shl 8)
-        player.slayer.flags.equipmentFlags = flags
+        SlayerManager.getInstance(player).flags.equipmentFlags = flags
     }
 
     @JvmStatic
     fun hasNosePeg(player: Player): Boolean{
-        return player.slayer.flags.equipmentFlags and 1 == 1
+        return SlayerManager.getInstance(player).flags.equipmentFlags and 1 == 1
     }
 
     @JvmStatic
     fun hasEarmuffs(player: Player): Boolean {
-        return (player.slayer.flags.equipmentFlags shr 1) and 1 == 1
+        return (SlayerManager.getInstance(player).flags.equipmentFlags shr 1) and 1 == 1
     }
 
     @JvmStatic
     fun hasFaceMask(player: Player): Boolean {
-        return (player.slayer.flags.equipmentFlags shr 2) and 1 == 1
+        return (SlayerManager.getInstance(player).flags.equipmentFlags shr 2) and 1 == 1
     }
 
     @JvmStatic
     fun hasBlackMask(player: Player): Boolean {
-        return (player.slayer.flags.equipmentFlags shr 3) and 1 == 1
+        return (SlayerManager.getInstance(player).flags.equipmentFlags shr 3) and 1 == 1
     }
 
     @JvmStatic
     fun hasSpinyHelmet(player: Player): Boolean {
-        return (player.slayer.flags.equipmentFlags shr 4) and 1 == 1
+        return (SlayerManager.getInstance(player).flags.equipmentFlags shr 4) and 1 == 1
     }
 
     @JvmStatic
     fun hasWitchwoodIcon(player: Player): Boolean {
-        return (player.slayer.flags.equipmentFlags shr 7) and 1 == 1
+        return (SlayerManager.getInstance(player).flags.equipmentFlags shr 7) and 1 == 1
     }
 
     @JvmStatic
     fun hasMirrorShield(player: Player): Boolean {
-        return (player.slayer.flags.equipmentFlags shr 8) and 1 == 1
+        return (SlayerManager.getInstance(player).flags.equipmentFlags shr 8) and 1 == 1
     }
 
     @JvmStatic
     fun getDamAccBonus(player: Player): Double {
-        val isCape = player.slayer.flags.equipmentFlags == 0x3F
+        val isCape = SlayerManager.getInstance(player).flags.equipmentFlags == 0x3F
         val hasMask = hasBlackMask(player)
 
         return if(isCape) 1.075

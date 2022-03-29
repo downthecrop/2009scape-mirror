@@ -6,6 +6,7 @@ import core.game.node.Node;
 import core.game.node.entity.player.Player;
 import core.plugin.Initializable;
 import core.plugin.Plugin;
+import rs09.game.node.entity.skill.slayer.SlayerManager;
 
 /**
  * Represents the plugin used to handle the enchanted gem related to slayer.
@@ -26,7 +27,7 @@ public final class ActivateEnchantedGem extends OptionHandler {
 
 	@Override
 	public boolean handle(Player player, Node node, String option) {
-		if (!player.getSlayer().hasStarted()) {
+		if (!SlayerManager.getInstance(player).hasStarted()) {
 			player.getPacketDispatch().sendMessage("You try to activate the gem...");
 			return true;
 		}
