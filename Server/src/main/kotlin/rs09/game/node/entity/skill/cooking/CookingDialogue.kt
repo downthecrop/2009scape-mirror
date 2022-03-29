@@ -61,18 +61,8 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
                 end()
                 val amount = getAmount(buttonID)
                 when (amount) {
-                    -1 -> {
-                        val handler: SkillDialogueHandler =
-                            object : SkillDialogueHandler(player!!, SkillDialogue.ONE_OPTION, Item(product)) {
-                                override fun create(amount: Int, index: Int) {
-                                    cook(player, `object`, initial, product, amount)
-                                }
-                                override fun getAll(index: Int) : Int {
-                                    return getAmount(amountInInventory(player, initial))
-                                }
-                            }
-                        handler.open()
-                    }
+                    -1 -> sendInputDialogue(player!!, true, "Enter the amount:") { value -> cook(player!!, `object`, initial, product, value as Int) }
+
                     else -> {
                         end()
                         cook(player!!, `object`, initial, product, amount)
@@ -83,28 +73,12 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
             100 -> {
                 when (buttonID) {
                     1 -> {
-                        val handler: SkillDialogueHandler =
-                            object : SkillDialogueHandler(player!!, SkillDialogue.ONE_OPTION, Item(Items.SINEW_9436)) {
-                                override fun create(amount: Int, index: Int) {
-                                    cook(player, `object`, initial, Items.SINEW_9436, amount)
-                                }
-                                override fun getAll(index: Int) : Int {
-                                    return getAmount(amountInInventory(player, initial))
-                                }
-                            }
-                        handler.open()
+                        product = Items.SINEW_9436
+                        display(Items.COOKED_MEAT_2142)
                     }
                     2 -> {
-                        val handler: SkillDialogueHandler =
-                            object : SkillDialogueHandler(player!!, SkillDialogue.ONE_OPTION, Item(CookableItems.forId(itemid).cooked)) {
-                                override fun create(amount: Int, index: Int) {
-                                    cook(player, `object`, initial, CookableItems.forId(itemid).cooked, amount)
-                                }
-                                override fun getAll(index: Int) : Int {
-                                    return getAmount(amountInInventory(player, itemid))
-                                }
-                            }
-                        handler.open()
+                        product = CookableItems.forId(initial).cooked
+                        display()
                     }
                 }
             }
@@ -121,13 +95,12 @@ class CookingDialogue(vararg val args: Any) : DialogueFile(){
         return -1
     }
 
-    fun display() {
+    fun display(vararg args : Int) {
         player!!.interfaceManager.openChatbox(307)
         PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 3, 60, 90))
         PacketRepository.send(RepositionChild::class.java, ChildPositionContext(player, 307, 2, 208, 20))
-        player!!.packetDispatch.sendItemZoomOnInterface(product, 160, 307, 2)
+        player!!.packetDispatch.sendItemZoomOnInterface(if(args.size == 1) args[0] else product, 160, 307, 2)
         player!!.packetDispatch.sendString(ItemDefinition.forId(product).name, 307, 3)
         stage = 1
     }
-
 }
