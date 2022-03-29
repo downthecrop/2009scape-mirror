@@ -271,9 +271,8 @@ class FishingTrawlerSession(val activity: FishingTrawlerActivity? = null) : Logo
     }
 
     override fun logout(player: Player) {
-        val session: FishingTrawlerSession = player.getAttribute("ft-session",null) ?: return
-        if(session.isActive)
-            player.location = Location.create(2667, 3161, 0)
+        val session = player.getAttribute<FishingTrawlerSession?>("ft-session",null) ?: return
+        player.location = Location.create(2667, 3161, 0)
         session.players.remove(player)
     }
 }
