@@ -289,6 +289,7 @@ public final class WaterfallPlugin extends OptionHandler {
 				public boolean pulse() {
 					player.getPacketDispatch().sendMessage("You are washed downstream but feel lucky to be alive.");
 					player.teleport(new Location(2527, 3413));
+					player.logoutListeners.remove("waterfall");
 					return true;
 				}
 			});
