@@ -1,9 +1,6 @@
 package rs09.plugin
 
-import api.LoginListener
-import api.LogoutListener
-import api.StartupListener
-import api.TickListener
+import api.*
 import core.game.content.activity.ActivityManager
 import core.game.content.activity.ActivityPlugin
 import core.game.content.dialogue.DialoguePlugin
@@ -92,6 +89,10 @@ object ClassScanner {
                 SystemLogger.logErr("Error loading startup listener: ${it.simpleName}, ${e.localizedMessage}")
                 e.printStackTrace()
             }
+        }
+        result.getClassesImplementing("api.ShutdownListener").filter { !it.isAbstract }.forEach {
+            val clazz = it.loadClass().newInstance() as ShutdownListener
+            GameWorld.shutdownListeners.add(clazz)
         }
         result.getClassesImplementing("api.LoginListener").filter { !it.isAbstract }.forEach {
             val clazz = it.loadClass().newInstance() as LoginListener

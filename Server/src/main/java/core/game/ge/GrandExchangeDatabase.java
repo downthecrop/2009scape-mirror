@@ -1,5 +1,6 @@
 package core.game.ge;
 
+import api.ShutdownListener;
 import api.StartupListener;
 import rs09.ServerConstants;
 import core.cache.def.impl.ItemDefinition;
@@ -8,6 +9,7 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
+import sun.nio.ch.sctp.Shutdown;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
@@ -20,11 +22,14 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import static rs09.game.system.SystemLogger.logShutdown;
+import static rs09.game.system.SystemLogger.logStartup;
+
 /**
  * Represents the grand exchange database.
  * @author Ceikry
  */
-public final class GrandExchangeDatabase implements StartupListener {
+public final class GrandExchangeDatabase implements StartupListener, ShutdownListener {
 
 	/**
 	 * The grand exchange database mapping.
@@ -54,6 +59,7 @@ public final class GrandExchangeDatabase implements StartupListener {
 
 	@Override
 	public void startup() {
+		logStartup("Parsing Grand Exchange Price Index DB");
 		try {
 			File db = new File(ServerConstants.GRAND_EXCHANGE_DATA_PATH + "gedb.xml");
 			if(!db.exists()){
@@ -122,6 +128,12 @@ public final class GrandExchangeDatabase implements StartupListener {
 		if (nextUpdate < System.currentTimeMillis()) {
 			updateValues();
 		}
+	}
+
+	@Override
+	public void shutdown() {
+		logShutdown("Saving Grand Exchange Price Index DB");
+		save();
 	}
 
 	/**

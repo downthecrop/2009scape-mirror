@@ -2,6 +2,6 @@ package api
 
 import rs09.game.system.SystemLogger
 
-interface StartupListener {
-    fun startup()
+interface ShutdownListener {
+    fun shutdown()
 }

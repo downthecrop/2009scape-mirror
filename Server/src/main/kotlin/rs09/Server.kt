@@ -68,8 +68,6 @@ object Server {
         startTime = System.currentTimeMillis()
         val t = TimeStamp()
         SystemLogger.logInfo("Initializing Server Store...")
-        GlobalKillCounter.init()
-        ServerStore.init()
         SystemLogger.logInfo("Initialized ${ServerStore.counter} store files.")
         GameWorld.prompt(true)
         SQLManager.init()
@@ -85,8 +83,6 @@ object Server {
         WorldCommunicator.connect()
         SystemLogger.logInfo(GameWorld.settings?.name + " flags " + GameWorld.settings?.toString())
         SystemLogger.logInfo(GameWorld.settings?.name + " started in " + t.duration(false, "") + " milliseconds.")
-
-        GEAutoStock.autostock()
         val scanner = Scanner(System.`in`)
 
         running = true

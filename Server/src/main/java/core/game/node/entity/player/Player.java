@@ -345,10 +345,6 @@ public class Player extends Entity {
 	 * Brawling Gloves manager
 	 */
 	private final BrawlingGlovesManager brawlingGlovesManager = new BrawlingGlovesManager(this);
-	/**
-	 * The logout plugins.
-	 */
-	private List<Plugin<Player>> logoutPlugins;
 
 	/**
 	 * The boolean for the player playing.
@@ -430,15 +426,6 @@ public class Player extends Entity {
 		LogoutTask task = getExtension(LogoutTask.class);
 		if (task != null) {
 			task.fire(this);
-		}
-		if (logoutPlugins != null && !logoutPlugins.isEmpty()) {
-			logoutPlugins.stream().filter(Objects::nonNull).forEach(plugin -> {
-				try {
-					plugin.newInstance(this);
-				} catch (Throwable throwable) {
-					throwable.printStackTrace();
-				}
-			});
 		}
 		if(!logoutListeners.isEmpty()){
 			logoutListeners.forEach((key,method) -> method.invoke(this));
@@ -1328,25 +1315,6 @@ public class Player extends Entity {
 	 */
 	public AudioManager getAudioManager() {
 		return audioManager;
-	}
-
-	/**
-	 * Gets the logoutPlugins.
-	 * @return the logoutPlugins
-	 */
-	public List<Plugin<Player>> getLogoutPlugins() {
-		if (logoutPlugins == null) {
-			logoutPlugins = new ArrayList<>(20);
-		}
-		return logoutPlugins;
-	}
-
-	/**
-	 * Sets the balogoutPlugins.
-	 * @param logoutPlugins the logoutPlugins to set.
-	 */
-	public void setLogoutPlugins(List<Plugin<Player>> logoutPlugins) {
-		this.logoutPlugins = logoutPlugins;
 	}
 
 	/**

@@ -1,9 +1,6 @@
 package rs09.game.world
 
-import api.LoginListener
-import api.LogoutListener
-import api.StartupListener
-import api.TickListener
+import api.*
 import core.cache.Cache
 import core.cache.def.impl.SceneryDefinition
 import core.game.node.entity.player.Player
@@ -65,6 +62,12 @@ object GameWorld {
      */
     @JvmStatic
     val startupListeners = ArrayList<StartupListener>()
+
+    /**
+     * Shutdown Listeners
+     */
+    @JvmStatic
+    val shutdownListeners = ArrayList<ShutdownListener>()
 
     @JvmStatic
     val STARTUP_PLUGINS: List<StartupPlugin> = ArrayList()
