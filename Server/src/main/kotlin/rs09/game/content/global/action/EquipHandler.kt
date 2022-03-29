@@ -1,6 +1,7 @@
 package rs09.game.content.global.action
 
 import core.game.container.impl.EquipmentContainer
+import core.game.interaction.item.brawling_gloves.BrawlingGlovesManager
 import core.game.node.Node
 import core.game.node.entity.combat.equipment.WeaponInterface
 import core.game.node.entity.player.Player
@@ -62,7 +63,7 @@ class EquipHandler : InteractionListener() {
             //check if a brawling glove is being equipped and register it
             if (item.id in 13845..13857) {
                 player.debug("Registering gloves... ID: " + item.id)
-                player.brawlingGlovesManager.registerGlove(item.id)
+                BrawlingGlovesManager.getInstance(player).registerGlove(item.id)
             }
             if (item.id == Items.BLACK_CHAINBODY_1107 && player.getAttribute("diary:falador:black-chain-bought", false)
                 && ZoneBorders(2969, 3310, 2975, 3314, 0).insideBorder(player)

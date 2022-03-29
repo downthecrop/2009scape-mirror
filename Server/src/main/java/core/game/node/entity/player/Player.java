@@ -10,7 +10,6 @@ import core.game.content.activity.pyramidplunder.PlunderObjectManager;
 import core.game.content.dialogue.DialogueInterpreter;
 import core.game.content.ttrail.TreasureTrailManager;
 import core.game.interaction.Interaction;
-import core.game.interaction.item.brawling_gloves.BrawlingGlovesManager;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
 import core.game.node.entity.combat.CombatStyle;
@@ -311,12 +310,6 @@ public class Player extends Entity {
 	 * The Ironman manager.
 	 */
 	private final IronmanManager ironmanManager = new IronmanManager(this);
-
-
-	/**
-	 * Brawling Gloves manager
-	 */
-	private final BrawlingGlovesManager brawlingGlovesManager = new BrawlingGlovesManager(this);
 
 	/**
 	 * The boolean for the player playing.
@@ -1339,8 +1332,6 @@ public class Player extends Entity {
 	public void setArcheryTotal(int archeryTotal) {
 		this.archeryTotal = archeryTotal;
 	}
-
-	public BrawlingGlovesManager getBrawlingGlovesManager() { return brawlingGlovesManager;}
 
 	public boolean hasActiveState(String key){
 		State state = states.get(key);

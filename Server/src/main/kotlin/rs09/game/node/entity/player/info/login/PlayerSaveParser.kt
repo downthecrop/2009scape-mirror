@@ -77,7 +77,6 @@ class PlayerSaveParser(val player: Player) {
             parseIronman()
             parseEmoteManager()
             parseStatistics()
-            parseBrawlingGloves()
             parseAchievements()
             parsePouches()
             parsePouches()
@@ -127,16 +126,6 @@ class PlayerSaveParser(val player: Player) {
             }
         } else {
             player.gameAttributes.parse(player.name + ".xml")
-        }
-    }
-
-    fun parseBrawlingGloves() {
-        if (saveFile!!.containsKey("brawlingGloves")) {
-            val bgData: JSONArray = saveFile!!["brawlingGloves"] as JSONArray
-            for (bg in bgData) {
-                val glove = bg as JSONObject
-                player.brawlingGlovesManager.registerGlove(BrawlingGloves.forIndicator(glove.get("gloveId").toString().toInt()).id, glove.get("charges").toString().toInt())
-            }
         }
     }
 
