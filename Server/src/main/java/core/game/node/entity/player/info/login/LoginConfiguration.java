@@ -81,11 +81,6 @@ public final class LoginConfiguration {
         } else {
             configureGameWorld(player);
         }
-
-        if(!player.isArtificial())
-        {
-            GameWorld.getLoginListeners().forEach((listener) -> listener.login(player));
-        }
     }
 
     /**

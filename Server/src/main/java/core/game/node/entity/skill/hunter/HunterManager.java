@@ -40,6 +40,10 @@ public final class HunterManager implements LoginListener, LogoutListener, Event
 		this.player = player;
 	}
 
+	public HunterManager() {
+		this.player = null;
+	}
+
 	@Override
 	public void login(@NotNull Player player) {
 		HunterManager instance = new HunterManager(player);

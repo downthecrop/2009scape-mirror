@@ -83,6 +83,7 @@ class GrandExchangeRecords(private val player: Player? = null) : PersistPlayer, 
                 historyEntry["totalCoinExchange"] = it.totalCoinExchange.toString()
                 historyEntry["completedAmount"] = it.completedAmount.toString()
                 history.add(historyEntry)
+                SystemLogger.logInfo("Adding history entry for ${it.itemID}")
             }
         }
         save["ge-history"] = history
