@@ -11,6 +11,7 @@ import core.game.world.update.flag.context.ChatMessage
 import core.game.world.update.flag.player.ChatFlag
 import core.net.amsc.MSPacketRepository
 import core.net.amsc.WorldCommunicator
+import rs09.game.node.entity.skill.slayer.SlayerManager
 import rs09.game.world.GameWorld.Pulser
 import rs09.net.packet.`in`.QCPacketType
 import java.nio.ByteBuffer
@@ -114,8 +115,8 @@ object QCRepository {
 
         //My current slayer assignment is
         else if(qcString.contains("My current Slayer assignment is")){
-            val amount = player?.slayer?.amount
-            val taskName = NPCDefinition.forId(player?.slayer?.task?.ids?.get(0) ?: 0).name.toLowerCase()
+            val amount = SlayerManager.getInstance(player!!).amount
+            val taskName = NPCDefinition.forId(SlayerManager.getInstance(player!!).task?.ids?.get(0) ?: 0).name.toLowerCase()
             if(amount ?: 0 > 0){
                 qcString = qcString.replace("complete", "$amount $taskName")
             }

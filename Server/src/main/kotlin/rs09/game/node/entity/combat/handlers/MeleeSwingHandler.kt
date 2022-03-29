@@ -19,6 +19,7 @@ import core.game.world.map.path.Pathfinder
 import core.tools.RandomFunction
 import rs09.game.node.entity.combat.CombatSwingHandler
 import rs09.game.node.entity.skill.skillcapeperks.SkillcapePerks
+import rs09.game.node.entity.skill.slayer.SlayerManager
 import kotlin.math.ceil
 import kotlin.math.floor
 
@@ -146,7 +147,7 @@ open class MeleeSwingHandler
         val amuletName = (if(entity is Player) getItemFromEquipment(entity, EquipmentSlot.AMULET)?.name ?: "null" else "null").toLowerCase()
         val victimName = entity.properties.combatPulse.getVictim()?.name ?: "none"
 
-        if(entity is Player && entity.slayer.task?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true)
+        if(entity is Player && SlayerManager.getInstance(entity).task?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true)
             effectiveAttackLevel *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer Helm/ Black Mask/ Slayer cape
 
         else if (entity is Player //Salve amulet
@@ -179,7 +180,7 @@ open class MeleeSwingHandler
 
         cumulativeStr *= getSetMultiplier(entity, Skills.STRENGTH)
 
-        if(entity is Player && entity.slayer.task?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true)
+        if(entity is Player && SlayerManager.getInstance(entity).task?.ids?.contains((entity.properties.combatPulse?.getVictim()?.id ?: 0)) == true)
             cumulativeStr *= SlayerEquipmentFlags.getDamAccBonus(entity) //Slayer helm/black mask/skillcape
 
         /*val hit = (16 + cumulativeStr + bonus / 8 + cumulativeStr * bonus * 0.016865) * modifier
