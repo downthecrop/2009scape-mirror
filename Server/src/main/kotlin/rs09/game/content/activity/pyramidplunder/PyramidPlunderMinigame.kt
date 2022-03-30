@@ -55,9 +55,6 @@ class PyramidPlunderMinigame : InteractionListener(), TickListener, LogoutListen
         val ENTRANCES = intArrayOf(16484, 16487, 16490, 16493) //All Scenery.AN_ANONYMOUS_LOOKING_DOOR_16484/etc
         val SARCOPHAGUS = Scenery.SARCOPHAGUS_16495
 
-        val GUARDIAN_ROOM = Location.create(1968, 4420, 2)
-        val EMPTY_ROOM = Location.create(1934, 4450, 2)
-
         on(Scenery.SPEARTRAP_16517, SCENERY, "pass"){player, node ->
             val anim = Animation(CHECK_ANIM)
             val duration = animationDuration(anim)
@@ -338,6 +335,9 @@ class PyramidPlunderMinigame : InteractionListener(), TickListener, LogoutListen
     }
 
     companion object {
+        @JvmStatic val GUARDIAN_ROOM = Location.create(1968, 4420, 2)
+        @JvmStatic val EMPTY_ROOM = Location.create(1934, 4450, 2)
+
         @JvmStatic fun join(player: Player)
         {
             if(PlunderUtils.hasPlayer(player))
