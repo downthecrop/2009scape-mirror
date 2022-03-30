@@ -29,10 +29,11 @@ object PacketWriteQueue {
 
     @JvmStatic
     fun flush(){
-        while(!PacketsToWrite.isEmpty()){
+        while(PacketsToWrite.peek() != null){
             val p = PacketsToWrite.poll() ?: continue
             write(p.out,p.context)
         }
+        PacketsToWrite.clear()
     }
 
     @Suppress("UNCHECKED_CAST")
