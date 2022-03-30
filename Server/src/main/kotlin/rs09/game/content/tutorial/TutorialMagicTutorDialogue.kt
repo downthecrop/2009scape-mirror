@@ -98,20 +98,33 @@ class TutorialMagicTutorDialogue(player: Player? = null) : DialoguePlugin(player
                 0 -> options("Set Ironman Mode (current: ${player.ironmanManager.mode.name})", "Change XP Rate (current: ${player.skills.experienceMutiplier}x)", "I'm ready now.").also { stage++ }
                 1 -> when(buttonId){
                     1 -> options("None","Standard","Hardcore (Permadeath!)","Ultimate","Nevermind.").also { stage = 10 }
-                    2 -> options("1.0x","2.5x","5.0x","10x","20x").also { stage = 20 }
+                    2 -> options("1.0x","2.5x","5.0x","10x").also { stage = 20 }
                     3 -> npcl(FacialExpression.FRIENDLY, "Well, you're all finished here now. I'll give you a reasonable number of starting items when you leave.").also { stage = 30 }
                 }
 
                 10 -> {
-                    val mode = IronmanMode.values()[buttonId - 1]
-                    player.dialogueInterpreter.sendDialogue("You set your ironman mode to: ${mode.name}.")
-                    player.ironmanManager.mode = mode
                     stage = 0
+                    if(buttonId < 5)
+                    {
+                        val mode = IronmanMode.values()[buttonId - 1]
+                        player.dialogueInterpreter.sendDialogue("You set your ironman mode to: ${mode.name}.")
+                        player.ironmanManager.mode = mode
+                        if (player.skills.experienceMutiplier == 10.0 && mode != IronmanMode.HARDCORE) player.skills.experienceMutiplier = 5.0
+                    }
+                    else
+                    {
+                        handle(interfaceId, 0)
+                    }
                 }
 
                 20 -> {
-                    val rates = arrayOf(1.0,2.5,5.0,10.0,20.0)
+                    val rates = arrayOf(1.0,2.5,5.0,10.0)
                     val rate = rates[buttonId - 1]
+                    if(rate == 10.0 && player.ironmanManager.mode != IronmanMode.HARDCORE) {
+                        player.dialogueInterpreter.sendDialogue("10.0x is only available to Hardcore Ironmen!")
+                        stage = 0
+                        return true
+                    }
                     player.dialogueInterpreter.sendDialogue("You set your XP rate to: ${rate}x.")
                     player.skills.experienceMutiplier = rate
                     stage = 0
@@ -137,6 +150,15 @@ class TutorialMagicTutorDialogue(player: Player? = null) : DialoguePlugin(player
                     player.interfaceManager.setViewedTab(3)
                     player.inventory.add(*STARTER_PACK)
                     player.bank.add(*STARTER_BANK)
+
+                    if(player.ironmanManager.mode == IronmanMode.HARDCORE)
+                    {
+                        setAttribute(player, "/save:permadeath", true)
+                    }
+                    else if(player.skills.experienceMutiplier == 10.0)
+                    {
+                        player.skills.experienceMutiplier = 5.0
+                    }
 
                     //This overwrites the stuck dialogue after teleporting to Lumbridge for some reason
                     //Dialogue from 2007 or thereabouts
