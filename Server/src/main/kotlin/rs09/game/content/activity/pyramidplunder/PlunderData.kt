@@ -22,8 +22,7 @@ object PlunderData {
     val mummy = NPC(4476, Location.create(1968, 4428, 2)).also { it.isNeverWalks = true; it.init() }
 
     val artifacts = arrayOf(
-        arrayOf(Items.IVORY_COMB_9026),
-        arrayOf(Items.POTTERY_SCARAB_9032, Items.POTTERY_STATUETTE_9036),
+        arrayOf(Items.IVORY_COMB_9026, Items.POTTERY_SCARAB_9032, Items.POTTERY_STATUETTE_9036),
         arrayOf(Items.STONE_SCARAB_9030, Items.STONE_STATUETTE_9038, Items.STONE_SEAL_9042),
         arrayOf(Items.GOLDEN_SCARAB_9028, Items.GOLDEN_STATUETTE_9034, Items.GOLD_SEAL_9040)
     )
