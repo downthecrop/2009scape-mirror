@@ -299,6 +299,11 @@ class PyramidPlunderMinigame : InteractionListener(), TickListener, LogoutListen
         }
 
         on(ENTRANCES, SCENERY, "search") { player, door ->
+            if(!getAttribute(player, "tarik-spoken-to", false))
+            {
+                sendDialogue(player, "I should probably try to find out more about this place before I try to break in.")
+                return@on true
+            }
             val anim = Animation(CHECK_ANIM)
             val duration = animationDuration(anim)
 
