@@ -417,19 +417,35 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
 
         define("setvarbit", Privilege.ADMIN){
             player,args ->
+            if(args.size != 3){
+                reject(player,"Usage: ::setvarbit varbit value")
+            }
+            val index = args[1].toIntOrNull()
+            val value = args[3].toIntOrNull()
+
+            if(index == null || value == null){
+                reject(player,"Usage ::setvarbit index offset value")
+            }
+
+            player.varpManager.setVarbit(index!!, value!!)
+        }
+
+        define("setvarp", Privilege.ADMIN){
+                player,args ->
             if(args.size < 4){
-                reject(player,"Usage: ::setvarbit index offset value")
+                reject(player,"Usage: ::setvarp index offset value")
             }
             val index = args[1].toIntOrNull()
             val offset = args[2].toIntOrNull()
             val value = args[3].toIntOrNull()
 
             if(index == null || offset == null || value == null){
-                reject(player,"Usage ::setvarbit index offset value")
+                reject(player,"Usage ::setvarp index offset value")
             }
 
             player.varpManager.get(index!!).setVarbit(offset!!, value!!).send(player)
         }
+
         define("setvarc", Privilege.ADMIN) { player, args ->
             if(args.size < 3){
                 reject(player,"Usage: ::setvarc index value")
