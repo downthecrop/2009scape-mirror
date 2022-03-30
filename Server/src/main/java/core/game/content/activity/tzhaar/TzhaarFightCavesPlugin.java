@@ -95,7 +95,8 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 		player.removeAttribute("fc_offset");
 		player.getProperties().setTeleportLocation(getBase().transform(offsetX, offsetY, 0));
 		Pulse pulse;
-		if (!login) {
+		boolean practice = player.getAttribute("fc_practice_jad", false);
+		if (!login && !practice) {
 			final int wave = 0;
 			player.setAttribute("fc_wave", wave);
 			player.getWalkingQueue().reset();
@@ -117,6 +118,9 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 				}
 			};
 		} else {
+			if (practice) {
+				player.setAttribute("fc_wave", 62);
+			}
 			if (player.getAttribute("fc_wave", 0) == 62) {
 				player.getDialogueInterpreter().sendDialogues(2617, null, "Look out, here comes TzTok-Jad!");
 			}
@@ -142,28 +146,50 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 		activeNPCs.clear();
 		player.getProperties().setTeleportLocation(getSpawnLocation());
 		player.getSkills().restore();
+		boolean practice = player.getAttribute("fc_practice_jad", false);
 		if (wave == 63) {
-			if (!player.getInventory().add(new Item(6570))) {
-				GroundItemManager.create(new Item(6570), getSpawnLocation(), player);
+			if (!practice) {
+				if (!player.getInventory().add(new Item(6570))) {
+					GroundItemManager.create(new Item(6570), getSpawnLocation(), player);
+				}
+			} else {
+				// give player the appearance fee back
+				int amount = 8000;
+				if (!player.getInventory().add(new Item(6529, amount))) {
+					GroundItemManager.create(new Item(6529, amount), getSpawnLocation(), player);
+				}
 			}
 			player.getPacketDispatch().sendMessage("You were victorious!");
-			BossKillCounter.addtoKillcount(player, 2745);
-			if (player.getSlayer().getTask() == Tasks.JAD) {
-				player.getSkills().addExperience(Skills.SLAYER, 25000);
-				player.getSlayer().clear();
-				player.sendMessage("You receive 25,000 slayer experience for defeating TzTok-Jad.");
+
+			if (!practice) {
+				BossKillCounter.addtoKillcount(player, 2745);
+				if (player.getSlayer().getTask() == Tasks.JAD) {
+					player.getSkills().addExperience(Skills.SLAYER, 25000);
+					player.getSlayer().clear();
+					player.sendMessage("You receive 25,000 slayer experience for defeating TzTok-Jad.");
+				}
+				player.getDialogueInterpreter().sendDialogues(2617, null, "You even defeated TzTok-Jad, I am most impressed!", "Please accept this gift as a reward.");
+				Repository.sendNews(player.getUsername() + " has been victorious in defeating TzTok-Jad for a firecape!");
+			} else {
+				player.getDialogueInterpreter().sendDialogues(2617, null, "You defeated TzTok-Jad. I am most impressed!", "Here is you TokKul back.", "Maybe next time you do all training, and get real reward...");
 			}
-			player.getDialogueInterpreter().sendDialogues(2617, null, "You even defeated TzTok-Jad, I am most impressed!", "Please accept this gift as a reward.");
-			Repository.sendNews(player.getUsername() + " has been victorious in defeating TzTok-Jad for a firecape!");
 		} else if (wave <= 1) {
 			player.getDialogueInterpreter().sendDialogues(2617, null, "Well I suppose you tried... better luck next time.");
 		} else {
-			player.getDialogueInterpreter().sendDialogues(2617, null, "Well done in the cave, here, take TokKul as reward.");
+			if (!practice) {
+				player.getDialogueInterpreter().sendDialogues(2617, null, "Well done in the cave, here, take TokKul as reward.");
+			} else {
+				player.getDialogueInterpreter().sendDialogues(2617, null, "You both impatient and also failure.", "Better luck next time.");
+			}
 		}
-		int amount = wave << 7;
-		if (amount > 0 && !player.getInventory().add(new Item(6529, amount))) {
-			GroundItemManager.create(new Item(6529, amount), getSpawnLocation(), player);
+
+		if (!practice) {
+			int amount = wave << 7;
+			if (amount > 0 && !player.getInventory().add(new Item(6529, amount))) {
+				GroundItemManager.create(new Item(6529, amount), getSpawnLocation(), player);
+			}
 		}
+
 	}
 
 	@Override
@@ -181,6 +207,7 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 		} else {
 			player.removeAttribute("fc_offset");
 			player.removeAttribute("fc_wave");
+			player.removeAttribute("fc_practice_jad");
 			player.removeAttribute("fc_safe_logout");
 			Pulse pulse = player.getAttribute("fc:pulse");
 			if (pulse != null) {
@@ -272,6 +299,7 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 			leave((Player) e, e.getAttribute("fc_wave", 0));
 			player.removeAttribute("fc_wave");
 			player.removeAttribute("fc_offset");
+			player.removeAttribute("fc_practice_jad");
 			return true;
 		}
 		return false;

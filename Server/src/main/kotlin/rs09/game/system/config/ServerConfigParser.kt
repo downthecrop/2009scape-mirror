@@ -68,6 +68,7 @@ object ServerConfigParser {
             enabled_botting = data.getBoolean("world.enable_botting"),
             max_adv_bots = data.getLong("world.max_adv_bots").toInt(),
             wild_pvp_enabled = data.getBoolean("world.wild_pvp_enabled"),
+            jad_practice_enabled = data.getBoolean("world.jad_practice_enabled"),
             message_model = data.getString("world.motw_identifier").toInt(),
             message_string = data.getString("world.motw_text").replace("@name",ServerConstants.SERVER_NAME)
         )
