@@ -4,6 +4,7 @@ import api.*
 import core.game.component.Component
 import core.game.node.Node
 import core.game.node.entity.player.Player
+import core.game.node.entity.skill.Skills
 import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.tools.RandomFunction
@@ -266,8 +267,8 @@ object PlunderUtils {
         //tier 3 -> chest
         val room = getRoom(player)!!.room
         val divisor = room * (tier * 35)
-        val goldRate = divisor / 1000
-        val stoneRate = divisor / 500
+        val goldRate = divisor / 650
+        val stoneRate = divisor / 250
 
         val roll = RandomFunction.RANDOM.nextDouble()
         if(goldRate > roll)
@@ -290,5 +291,12 @@ object PlunderUtils {
     fun checkEntrance(door: Node): Boolean
     {
         return door.asScenery().definition.varbitID == PlunderData.currentEntrance
+    }
+
+    fun rollUrnSuccess(player: Player, charmed: Boolean = false): Boolean
+    {
+        val level = getDynLevel(player, Skills.THIEVING)
+        val room = getRoom(player)!!.room
+        return RandomFunction.random(level) > (room * if(charmed) 2 else 4)
     }
 }

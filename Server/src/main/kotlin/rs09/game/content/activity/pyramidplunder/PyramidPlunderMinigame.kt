@@ -7,6 +7,7 @@ import core.game.node.entity.player.Player
 import core.game.node.entity.skill.Skills
 import core.game.node.entity.state.EntityState
 import core.game.system.task.Pulse
+import core.game.world.map.Direction
 import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
@@ -30,7 +31,7 @@ class PyramidPlunderMinigame : InteractionListener(), TickListener, LogoutListen
     override fun logout(player: Player) {
         if(PlunderUtils.hasPlayer(player))
         {
-            player.location = PlunderData.rooms[0].entrance
+            player.location = Location.create(3288, 2802, 0)
             PlunderUtils.unregisterPlayer(player)
         }
     }
@@ -63,6 +64,19 @@ class PyramidPlunderMinigame : InteractionListener(), TickListener, LogoutListen
             if(player.skills.getStaticLevel(Skills.THIEVING) < PlunderUtils.getRoomLevel(player))
             {
                 sendDialogue(player, "You need a Thieving level of ${PlunderUtils.getRoomLevel(player)} to do that.")
+                return@on true
+            }
+
+            val spearDir = PlunderUtils.getRoom(player)!!.spearDirection
+
+            val pastSpears = (spearDir == Direction.NORTH && player.location.y > node.location.y)
+                          || (spearDir == Direction.SOUTH && player.location.y < node.location.y)
+                          || (spearDir == Direction.EAST && player.location.x > node.location.x)
+                          || (spearDir == Direction.WEST && player.location.x < node.location.x)
+
+            if(pastSpears)
+            {
+                sendDialogue(player, "I have no reason to do that.")
                 return@on true
             }
 
@@ -99,7 +113,7 @@ class PyramidPlunderMinigame : InteractionListener(), TickListener, LogoutListen
             player.lock()
             runTask(player, 1) {
                 player.unlock()
-                if(RandomFunction.roll(3))
+                if(!PlunderUtils.rollUrnSuccess(player))
                 {
                     animate(player, URN_BIT)
                     sendMessage(player, "You've been bitten by something moving around in the urn.")
@@ -154,7 +168,7 @@ class PyramidPlunderMinigame : InteractionListener(), TickListener, LogoutListen
             player.lock()
             runTask(player, 1) {
                 player.unlock()
-                if(RandomFunction.roll(15))
+                if(!PlunderUtils.rollUrnSuccess(player, true))
                 {
                     animate(player, URN_BIT)
                     sendMessage(player, "You've been bitten by something moving around in the urn.")
