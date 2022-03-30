@@ -6,9 +6,7 @@ import core.game.container.ContainerType;
 import core.game.container.impl.BankContainer;
 import core.game.container.impl.EquipmentContainer;
 import core.game.container.impl.InventoryListener;
-import core.game.content.activity.pyramidplunder.PlunderObjectManager;
 import core.game.content.dialogue.DialogueInterpreter;
-import core.game.content.ttrail.TreasureTrailManager;
 import core.game.interaction.Interaction;
 import core.game.node.entity.Entity;
 import core.game.node.entity.combat.BattleState;
@@ -22,7 +20,6 @@ import core.game.node.entity.player.info.RenderInfo;
 import core.game.node.entity.player.info.Rights;
 import core.game.node.entity.player.info.UIDInfo;
 import core.game.node.entity.player.info.login.LoginConfiguration;
-import core.game.node.entity.player.info.login.PlayerParser;
 import core.game.node.entity.player.link.*;
 import core.game.node.entity.player.link.appearance.Appearance;
 import core.game.node.entity.player.link.audio.AudioManager;
@@ -66,15 +63,12 @@ import core.tools.RandomFunction;
 import core.tools.StringUtils;
 import kotlin.Unit;
 import kotlin.jvm.functions.Function1;
-import org.json.simple.JSONObject;
 import org.rs09.consts.Items;
 import rs09.GlobalStats;
 import rs09.ServerConstants;
 import rs09.game.VarpManager;
-import rs09.game.ge.GrandExchangeRecords;
 import rs09.game.node.entity.combat.CombatSwingHandler;
 import rs09.game.node.entity.combat.equipment.EquipmentDegrader;
-import rs09.game.node.entity.player.info.login.PlayerSaveParser;
 import rs09.game.node.entity.player.info.login.PlayerSaver;
 import rs09.game.node.entity.skill.runecrafting.PouchManager;
 import rs09.game.node.entity.state.newsys.State;
@@ -241,11 +235,6 @@ public class Player extends Entity {
 	 * The familiar manager.
 	 */
 	private final FamiliarManager familiarManager = new FamiliarManager(this);
-
-	/**
-	 * Pyramid Plunder Object Manager
-	 */
-	private final PlunderObjectManager plunderObjectManager = new PlunderObjectManager();
 
 	/**
 	 * The config manager.
@@ -1250,8 +1239,6 @@ public class Player extends Entity {
 	public IronmanManager getIronmanManager() {
 		return ironmanManager;
 	}
-
-	public PlunderObjectManager getPlunderObjectManager() {return plunderObjectManager;}
 
 	/**
 	 * Gets the emoteManager.

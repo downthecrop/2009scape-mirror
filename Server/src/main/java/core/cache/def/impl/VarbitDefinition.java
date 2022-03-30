@@ -2,7 +2,6 @@ package core.cache.def.impl;
 
 import core.cache.Cache;
 import core.game.node.entity.player.Player;
-import rs09.game.system.SystemLogger;
 import rs09.game.world.GameWorld;
 
 import java.nio.ByteBuffer;
@@ -70,18 +69,18 @@ public final class VarbitDefinition {
 	 * @return The definition.
 	 */
 	public static VarbitDefinition forObjectID(int id) {
-		return forId(id,10);
+		return forId(id);
 	}
 
 	public static VarbitDefinition forNPCID(int id){
-		return forId(id,10);
+		return forId(id);
 	}
 
 	public static VarbitDefinition forItemID(int id){
-		return forId(id,30);
+		return forId(id);
 	}
 
-	public static VarbitDefinition forId(int id, int shiftAmount){
+	public static VarbitDefinition forId(int id){
 		/*VarbitDefinition def = MAPPING.get(id);
 		if (def != null) {
 			return def;

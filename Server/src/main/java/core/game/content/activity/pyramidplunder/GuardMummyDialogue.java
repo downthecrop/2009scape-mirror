@@ -4,11 +4,14 @@ import core.game.content.activity.ActivityManager;
 import core.game.content.dialogue.DialoguePlugin;
 import core.game.node.entity.npc.NPC;
 import core.game.node.entity.player.Player;
+import core.plugin.Initializable;
+import rs09.game.content.activity.pyramidplunder.PyramidPlunderMinigame;
 
 /**
  * Handles Guardian mummy dialogue.
  * @author Originally Emperor, completely redone by Ceikry.
  */
+@Initializable
 public final class GuardMummyDialogue extends DialoguePlugin {
 
 	/**
@@ -37,7 +40,7 @@ public final class GuardMummyDialogue extends DialoguePlugin {
 		if(args.length > 1){
 			switch((int) args[1]){
 				case 0:
-					npc("You! How did you get into this place?");
+					npc("Hey, You! How did you get into this place?");
 					stage = 50;
 					break;
 				case 1:
@@ -47,6 +50,7 @@ public final class GuardMummyDialogue extends DialoguePlugin {
 			}
 		} else {
 			npc("Errr");
+			stage = 10;
 		}
 		/*type = args.length == 1 ? 0 : (Integer) args[1];
 		if (type == 1) {
@@ -101,7 +105,7 @@ public final class GuardMummyDialogue extends DialoguePlugin {
 				break;
 			case 60:
 				end();
-				ActivityManager.start(player, "Pyramid plunder", false);
+				PyramidPlunderMinigame.join(player);
 				break;
 
 		}
