@@ -80,6 +80,7 @@ class GameSettings
         var enabled_botting : Boolean,
         var max_adv_bots: Int,
         var wild_pvp_enabled: Boolean,
+        var jad_practice_enabled: Boolean,
 
         /**"Lobby" interface
          * The message of the week models to display
@@ -132,6 +133,7 @@ class GameSettings
             val enable_botting = if(data.containsKey("botting_enabled")) data["botting_enabled"] as Boolean else false
             val max_adv_bots = if(data.containsKey("max_adv_bots")) data["max_adv_bots"].toString().toInt() else 100
             val wild_pvp_enabled = if(data.containsKey("wild_pvp_enabled")) data["wild_pvp_enabled"] as Boolean else true
+            val jad_practice_enabled = if(data.containsKey("jad_practice_enabled")) data["jad_practice_enabled"] as Boolean else true
             val allow_token_purchase = data["allow_token_purchase"] as Boolean
             val message_of_the_week_identifier = data["message_of_the_week_identifier"].toString().toInt()
             val message_of_the_week_text = data["message_of_the_week_text"].toString()
@@ -159,6 +161,7 @@ class GameSettings
                     enable_botting,
                     max_adv_bots,
                     wild_pvp_enabled,
+                    jad_practice_enabled,
                     message_of_the_week_identifier,
                     message_of_the_week_text
             )
