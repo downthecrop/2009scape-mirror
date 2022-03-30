@@ -137,19 +137,19 @@ object TutorialInteractionReceiver : EventHook<InteractionEvent>
             }
 
             //Prospect rock - Tin
-            31 -> if(MiningNode.forId(event.target.id).identifier == 2.toByte() && event.option == "prospect"){
+            31 -> if(MiningNode.forId(event.target.id)?.identifier?.equals(2.toByte()) == true && event.option == "prospect"){
                 setAttribute(entity, "tutorial:stage", 32)
                 TutorialStage.load(entity, 32)
             }
 
             //Prospect rock- Copper
-            33 -> if(MiningNode.forId(event.target.id).identifier == 1.toByte() && event.option == "prospect"){
+            33 -> if(MiningNode.forId(event.target.id)?.identifier?.equals(1.toByte()) == true && event.option == "prospect"){
                 setAttribute(entity, "tutorial:stage", 34)
                 TutorialStage.load(entity, 34)
             }
 
             //Mine rock - Tin
-            35 -> if(MiningNode.forId(event.target.id).identifier == 2.toByte() && event.option == "mine"){
+            35 -> if(MiningNode.forId(event.target.id)?.identifier?.equals(2.toByte()) == true && event.option == "mine"){
                 setAttribute(entity, "tutorial:stage", 36)
                 TutorialStage.load(entity, 36)
             }

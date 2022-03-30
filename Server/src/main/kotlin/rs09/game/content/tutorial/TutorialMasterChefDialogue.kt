@@ -42,12 +42,14 @@ class TutorialMasterChefDialogue(player: Player? = null) : DialoguePlugin(player
                     {
                         sendItemDialogue(player, Items.BUCKET_OF_WATER_1929, "The Master Chef gives you another bucket of water.")
                         addItem(player, Items.BUCKET_OF_WATER_1929)
+                        TutorialStage.load(player, 19)
                         return false
                     }
                     if(!inInventory(player, Items.POT_OF_FLOUR_1933))
                     {
                         sendItemDialogue(player, Items.POT_OF_FLOUR_1933, "The Master Chef gives you another pot of flour.")
                         addItem(player, Items.POT_OF_FLOUR_1933)
+                        TutorialStage.load(player, 19)
                         return false
                     }
                 }
