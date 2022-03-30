@@ -268,16 +268,13 @@ object PlunderUtils {
         val divisor = room * (tier * 35)
         val goldRate = divisor / 1000
         val stoneRate = divisor / 500
-        val potteryRate = divisor / 200
 
         val roll = RandomFunction.RANDOM.nextDouble()
         if(goldRate > roll)
-            return PlunderData.artifacts[3].random()
-        if(stoneRate > roll)
             return PlunderData.artifacts[2].random()
-        if(potteryRate > roll)
+        if(stoneRate > roll)
             return PlunderData.artifacts[1].random()
-        return PlunderData.artifacts[0][0]
+        return PlunderData.artifacts[0].random()
     }
 
     fun checkEntranceSwitch()

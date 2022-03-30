@@ -28,7 +28,7 @@ class PharoahSceptre : InteractionListener() {
         on(SCEPTRES, ITEM, "teleport", "operate"){player, node ->
             val sceptre = node.asItem()
 
-            if(sceptre.id == SCEPTRES.first())
+            if(sceptre.id == SCEPTRES.last())
             {
                 sendMessage(player, "You have used up all the charges on this sceptre.")
                 return@on true

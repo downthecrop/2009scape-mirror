@@ -11,6 +11,7 @@ import core.game.world.map.Location
 import core.game.world.update.flag.context.Animation
 import core.tools.RandomFunction
 import org.rs09.consts.Items
+import org.rs09.consts.NPCs
 import org.rs09.consts.Scenery
 import rs09.game.content.dialogue.DialogueFile
 import rs09.game.interaction.InteractionListener
@@ -330,6 +331,17 @@ class PyramidPlunderMinigame : InteractionListener(), TickListener, LogoutListen
 
         on(Scenery.TOMB_DOOR_16459, SCENERY, "leave tomb") { player, _ ->
             teleport(player, getAttribute(player, "pyramid-entrance", Location.create(3288, 2802, 0)))
+            return@on true
+        }
+
+        on(NPCs.GUARDIAN_MUMMY_4476, NPC, "start-minigame") { player, _ ->
+            if(!getAttribute(player, "pp:mummy-spoken-to", false))
+            {
+                openDialogue(player, NPCs.GUARDIAN_MUMMY_4476)
+                return@on true
+            }
+
+            join(player)
             return@on true
         }
     }
