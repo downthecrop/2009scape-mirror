@@ -76,14 +76,14 @@ class PharoahSceptre : InteractionListener() {
                         4 -> return
                     }
                     //This sucks but I'm too lazy to fix it.
-                    if (player!!.equipment.containsItem(Item(9050))) {
-                        player!!.equipment.replace(Item(9048), EquipmentSlot.WEAPON.ordinal)
-                        player!!.packetDispatch.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has 2 charges remaining.")
-                    } else if (player!!.equipment.containsItem(Item(9048))) {
+                    if (player!!.equipment.containsItem(Item(9044))) {
                         player!!.equipment.replace(Item(9046), EquipmentSlot.WEAPON.ordinal)
-                        player!!.packetDispatch.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has 1 charge remaining.")
+                        player!!.packetDispatch.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has 2 charges remaining.")
                     } else if (player!!.equipment.containsItem(Item(9046))) {
-                        player!!.equipment.replace(Item(9044), EquipmentSlot.WEAPON.ordinal)
+                        player!!.equipment.replace(Item(9048), EquipmentSlot.WEAPON.ordinal)
+                        player!!.packetDispatch.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has 1 charge remaining.")
+                    } else if (player!!.equipment.containsItem(Item(9048))) {
+                        player!!.equipment.replace(Item(9050), EquipmentSlot.WEAPON.ordinal)
                         player!!.sendMessage("<col=7f03ff>Your Pharoah's Sceptre has used its last charge.")
                     } else if (player!!.inventory.containsItem(Item(9050))) {
                         player!!.inventory.remove(Item(9050))
