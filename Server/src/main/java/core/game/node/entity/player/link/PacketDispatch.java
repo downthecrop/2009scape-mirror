@@ -414,4 +414,9 @@ public final class PacketDispatch {
 	public void sendScriptConfigs(int id, int value, String type, Object... params) {
 		PacketRepository.send(CSConfigPacket.class, new CSConfigContext(player, id, value, type, params));
 	}
+
+	public void resetInterface(int id)
+	{
+		PacketRepository.send(ResetInterface.class, new InterfaceContext(player, 0, 0, id, false));
+	}
 }

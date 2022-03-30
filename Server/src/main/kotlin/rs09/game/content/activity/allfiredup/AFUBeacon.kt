@@ -60,7 +60,7 @@ enum class AFUBeacon(val title: String, val fmLevel: Int, val varpId: Int, val o
     }
 
     fun getState(player: Player): BeaconState{
-        return BeaconState.values()[player.varpManager.get(varpId).getVarbit(offset)?.value ?: 0]
+        return BeaconState.values()[player.varpManager.get(varpId).getVarbit(offset) ?: 0]
     }
 }
 

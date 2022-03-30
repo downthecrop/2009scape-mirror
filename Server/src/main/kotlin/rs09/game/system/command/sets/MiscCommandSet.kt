@@ -27,7 +27,6 @@ import rs09.game.content.ame.RandomEvents
 import rs09.game.ge.GrandExchange
 import rs09.game.node.entity.state.newsys.states.FarmingState
 import rs09.game.system.SystemLogger
-import rs09.game.system.command.Command
 import rs09.game.system.command.CommandMapping
 import rs09.game.system.command.Privilege
 import rs09.game.world.repository.Repository
@@ -342,10 +341,10 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
                 reject(player, "Syntax: ::define_varbit varbitId")
             }
             val varbitID = args[1].toInt()
-            notify(player, "${varbitID}: ${VarbitDefinition.forId(varbitID, 0)}")
+            notify(player, "${varbitID}: ${VarbitDefinition.forId(varbitID)}")
         }
         define("togglexp", Privilege.STANDARD){ player, args ->
-            val enabled = player.varpManager.get(2501).getVarbit(0)?.value == 1
+            val enabled = player.varpManager.get(2501).getVarbit(0) == 1
             player.varpManager.get(2501).setVarbit(0,if(enabled) 0 else 1).send(player)
             notify(player, "XP drops are now " + colorize("%R" + if(!enabled) "ON." else "OFF."))
             player.varpManager.flagSave(2501)
@@ -406,7 +405,7 @@ class MiscCommandSet : CommandSet(Privilege.ADMIN){
         }
 
         define("toggleslayer", Privilege.STANDARD){ player, _ ->
-            val disabled = player.varpManager.get(2502).getVarbit(0)?.value == 1
+            val disabled = player.varpManager.get(2502).getVarbit(0) == 1
             player.varpManager.get(2502).setVarbit(0,if(disabled) 0 else 1).send(player)
             if(!disabled){
                 player.varpManager.flagSave(2502)
