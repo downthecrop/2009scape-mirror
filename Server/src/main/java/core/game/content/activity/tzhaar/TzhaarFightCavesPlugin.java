@@ -119,6 +119,9 @@ public final class TzhaarFightCavesPlugin extends ActivityPlugin {
 				}
 			};
 		} else {
+			if (practice) {
+				player.setAttribute("fc_wave", 62);
+			}
 			if (player.getAttribute("fc_wave", 0) == 62) {
 				player.getDialogueInterpreter().sendDialogues(2617, null, "Look out, here comes TzTok-Jad!");
 			}
